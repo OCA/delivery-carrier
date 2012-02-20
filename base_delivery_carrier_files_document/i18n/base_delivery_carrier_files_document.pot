@@ -1,0 +1,27 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* base_delivery_carrier_files_document
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.1rc1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-02-16 09:09+0000\n"
+"PO-Revision-Date: 2012-02-16 09:09+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: base_delivery_carrier_files_document
+#: model:ir.model,name:base_delivery_carrier_files_document.model_delivery_carrier_file
+msgid "delivery.carrier.file"
+msgstr ""
+
+#. module: base_delivery_carrier_files_document
+#: field:delivery.carrier.file,document_directory_id:0
+msgid "Document Directory"
+msgstr ""
+
