@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+
+        <!-- Carrier File -->
+
+         <record id="delivery_carrier_file" model="delivery.carrier.file">
+             <field name="name">Generic</field>
+             <field name="type">generic</field>
+             <field name="auto_export" eval="True"/>
+             <field name="group_pickings" eval="False"/>
+             <field name="write_mode">disk</field>
+             <field name="export_path">/tmp</field>
+         </record>
+
+        <record id="delivery_carrier_file_manual" model="delivery.carrier.file">
+            <field name="name">Generic Manual</field>
+            <field name="type">generic</field>
+            <field name="auto_export" eval="False"/>
+            <field name="group_pickings" eval="True"/>
+            <field name="write_mode">disk</field>
+            <field name="export_path">/tmp</field>
+        </record>
+
+        <!-- Assign the carrier files on the delivery method -->
+
+        <record id="delivery.delivery_carrier" model="delivery.carrier">
+            <field name="carrier_file_id" ref="delivery_carrier_file"/>
+        </record>
+
+        <record id="delivery.free_delivery_carrier" model="delivery.carrier">
+            <field name="carrier_file_id" ref="delivery_carrier_file_manual"/>
+        </record>
+
+    </data>
+</openerp>

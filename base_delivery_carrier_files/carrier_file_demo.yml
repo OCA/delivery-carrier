@@ -1,0 +1,26 @@
+-
+ !record {model: stock.picking, id: outgoing_shipment_carrier_file}:
+    type: out
+    location_dest_id: stock.location_delivery_counter
+    carrier_id: delivery.delivery_carrier
+-
+ !record {model: stock.move, id: outgoing_shipment_icecream_carrier_file}:
+    picking_id: outgoing_shipment_carrier_file
+    product_id: stock.product_icecream
+    product_uom: product.product_uom_kgm
+    product_qty: 130.0
+    location_id: stock.location_refrigerator
+    location_dest_id: stock.location_delivery_counter
+-
+ !record {model: stock.picking, id: outgoing_shipment_carrier_file_manual}:
+    type: out
+    location_dest_id: stock.location_delivery_counter
+    carrier_id: delivery.free_delivery_carrier
+-
+ !record {model: stock.move, id: outgoing_shipment_icecream_carrier_file_manual}:
+    picking_id: outgoing_shipment_carrier_file_manual
+    product_id: stock.product_icecream
+    product_uom: product.product_uom_kgm
+    product_qty: 130.0
+    location_id: stock.location_refrigerator
+    location_dest_id: stock.location_delivery_counter

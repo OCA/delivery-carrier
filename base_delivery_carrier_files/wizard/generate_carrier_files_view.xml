@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_delivery_carrier_file_generate" model="ir.ui.view">
+            <field name="name">delivery.carrier.file.generate</field>
+            <field name="model">delivery.carrier.file.generate</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Carrier Files">
+                    <label string="Generate the carrier files for the selected delivery orders."/>
+                    <field name="picking_ids" nolabel="1" colspan="4">
+                        <tree string="Delivery Orders">
+                            <field name="name"/>
+                            <field name="carrier_id"/>
+                            <field name="partner_id"/>
+                            <field name="origin"/>
+                        </tree>
+                    </field>
+                    <separator colspan="4"/>
+                    <group col="3" colspan="4">
+                        <button special="cancel" colspan="1" string="Cancel" icon='gtk-cancel'/>
+                        <button name="action_generate" string="Generate Files" type="object" icon="gtk-execute"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_delivery_carrier_file_generate" model="ir.actions.act_window">
+            <field name="name">Generate Carrier Files</field>
+            <field name="res_model">delivery.carrier.file.generate</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_delivery_carrier_file_generate"/>
+            <field name="groups_id" eval="[(6, 0, [ref('stock.group_stock_manager')])]"/>
+            <field name="target">new</field>
+        </record>
+
+        <record model="ir.values" id="delivery_carrier_file_generate_ir_values">
+            <field name="object" eval="1" />
+            <field name="name">Generate Carrier Files</field>
+            <field name="key2">client_action_multi</field>
+            <field name="value" eval="'ir.actions.act_window,' + str(ref('action_delivery_carrier_file_generate'))" />
+            <field name="key">action</field>
+            <field name="model">stock.picking</field>
+        </record>
+
+    </data>
+</openerp>
