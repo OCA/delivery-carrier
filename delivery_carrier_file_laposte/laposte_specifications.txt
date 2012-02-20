@@ -1,0 +1,20 @@
+[GENERAL]
+DELIMITE=O
+SEPARATEUR=59
+DELIMITEUR=34
+FINDELIGNE=10
+Unité poids=KG
+[CHAMPS]
+ReferenceExpedition=1
+Prenom=2
+NomDestinataire=3
+RaisonSociale=4
+Adresse1=5
+Adresse2=6
+Adresse3=7
+Adresse4=8
+CodePostal=9
+Commune=10
+CodePays=11
+Telephone=12
+Poids=21
