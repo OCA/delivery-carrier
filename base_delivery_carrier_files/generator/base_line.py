@@ -124,6 +124,8 @@ class BaseLine(object):
                 value = getattr(self, field_name)
                 if value in (False, None):
                     value = ''
+                elif not isinstance(value, (str, unicode)):
+                    value = unicode(value)
                 if width:
                     value = value[0:width]
             else:
