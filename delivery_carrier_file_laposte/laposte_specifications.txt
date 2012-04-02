@@ -3,7 +3,7 @@ DELIMITE=O
 SEPARATEUR=59
 DELIMITEUR=34
 FINDELIGNE=10
-Unité poids=KG
+Unitï¿½ poids=KG
 [CHAMPS]
 ReferenceExpedition=1
 Prenom=2
@@ -17,4 +17,5 @@ CodePostal=9
 Commune=10
 CodePays=11
 Telephone=12
+Mail=13
 Poids=21
