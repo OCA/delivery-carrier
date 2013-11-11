@@ -39,6 +39,6 @@ File Specifications: laposte_specifications.txt in the module's root directory.
     'demo_xml': [],
     'test': [],
     'images': [],
-    'installable': True,
+    'installable': False,
     'auto_install': False,
 }

@@ -40,6 +40,6 @@ Chapter : "Guide d’importation d’un carnet d’adresses"
     'demo_xml': [],
     'test': [],
     'images': [],
-    'installable': True,
+    'installable': False,
     'auto_install': False,
 }

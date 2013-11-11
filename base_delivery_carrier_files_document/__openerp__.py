@@ -38,6 +38,6 @@ Auto-install when the module Document and Base Delivery Carrier Files are instal
     'test': ['test/carrier_file.yml',
              'test/carrier_file_manual.yml',],
     'images': [],
-    'installable': True,
+    'installable': False,
     'auto_install': True,
 }
