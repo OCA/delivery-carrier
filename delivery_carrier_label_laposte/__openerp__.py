@@ -90,4 +90,8 @@ Now you can create a carrier method for PostLogistics WebService:
  'installable': True,
  'auto_install': False,
  'license': 'AGPL-3',
- 'application': True}
+ 'application': True,
+ 'external_dependencies': {
+    'python': ['suds']
+    }
+ }
