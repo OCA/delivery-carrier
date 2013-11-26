@@ -33,12 +33,12 @@ PostLogistics Labels WebService
 Description
 -----------
 
-Use PostLogistics BarCodes WebService to generate labels for your Delivery Orders.
+This module uses `PostLogistics BarCodes WebService`_ to generate labels for your Delivery Orders.
 
-It adds a `Create label` button on Delivery Order
-A generated label will be an attachement of your Delivery Order
+It adds a `Create label` button on Delivery Order.
+A generated label will be an attachement of your Delivery Order.
 
-To see it, please install documents
+To see it, please install documents module.
 
 You can create multiple delivery method to match your diffent package types.
 
@@ -68,6 +68,7 @@ Now you can create a carrier method for PostLogistics WebService:
 * Then add other `Optional as default` and `Optional` carrier option from listed
 * Additional Service and Delivery instructions
 
+.. _PostLogistics BarCodes WebService: http://www.poste.ch/post-startseite/post-geschaeftskunden/post-logistik/post-e-log/post-e-log-webservices.htm
 .. _Swiss Post E-logistics: http://www.poste.ch/en/post-startseite/post-geschaeftskunden/post-logistik/post-e-log.htm
 
 ----
