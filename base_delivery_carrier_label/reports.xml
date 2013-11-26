@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+    <report
+      auto="False"
+      id="delivery.shipping_label"
+      model="stock.picking"
+      name="delivery.shipping.label"
+      file="base_delivery_carrier_label/report/template/shipping_label.mako"
+      string="Shipping Label"
+      attachment_use="1"
+      multi="False"
+      report_type="webkit"/>
+  </data>
+</openerp>
