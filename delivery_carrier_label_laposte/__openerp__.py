@@ -22,7 +22,6 @@
  'version': '1.0',
  'author': 'Camptocamp',
  'maintainer': 'Camptocamp',
- 'contributors': ['Yannick Vaucher <yannick.vaucher@camptocamp.com'],
  'category': 'version',
  'complexity': 'normal',
  'depends': ['base_delivery_carrier_label'],
@@ -80,6 +79,11 @@ Technical references
 `"Barcode" web service documentation`_
 
 .. _"Barcode" web service documentation: http://www.poste.ch/post-barcode-cug.htm
+
+Contributors
+------------
+
+* Yannick Vaucher <yannick.vaucher@camptocamp.com
 
 ----
 
