@@ -61,10 +61,10 @@ class PostlogisticsWebService(object):
         try:
             res['value'] = request(**kwargs)
             res['success'] = True
-        except WebFault, e:
+        except WebFault as e:
             res['success'] = False
             res['errors'] = [e[0]]
-        except Exception, e:
+        except Exception as e:
             # if authentification error
             if isinstance(e[0], tuple) and e[0][0] == 401:
                 raise orm.except_orm(
