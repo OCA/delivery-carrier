@@ -72,7 +72,7 @@ class PostlogisticsWebService(object):
                     _('Authorization Required\n\n'
                     'Please verify postlogistics username and password in:\n'
                     'Configuration -> Postlogistics'))
-            raise e
+            raise
         return res
 
     def _get_language(self, lang):
