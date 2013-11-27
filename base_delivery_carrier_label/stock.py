@@ -48,8 +48,7 @@ class stock_picking_out(orm.Model):
             states={'done': [('readonly', True)]}),
         'carrier_tracking_ref': fields.char(
             'Carrier Tracking Ref',
-            size=32,
-            states={'done': [('readonly', True)]}),
+            size=32),
         'carrier_type': fields.related(
             'carrier_id', 'type',
             string='Carrier type',
