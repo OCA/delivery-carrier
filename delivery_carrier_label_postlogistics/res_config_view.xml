@@ -67,6 +67,23 @@
               </div>
             </div>
           </group>
+          <separator string="Default configs"/>
+          <group>
+            <div>
+              <div>
+                <label for="default_label_layout"/>
+                <field name="default_label_layout" class="oe_inline"/>
+              </div>
+              <div>
+                <label for="default_output_format"/>
+                <field name="default_output_format" class="oe_inline"/>
+              </div>
+              <div>
+                <label for="default_resolution"/>
+                <field name="default_resolution" class="oe_inline"/>
+              </div>
+            </div>
+          </group>
           <group>
             <div>
               <div>

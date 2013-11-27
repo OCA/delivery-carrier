@@ -99,20 +99,19 @@ class DeliveryCarrier(orm.Model):
     _inherit = 'delivery.carrier'
 
     def _get_carrier_type_selection(self, cr, uid, context=None):
-        """ To inherit to add carrier type """
+        """ Add postlogistics carrier type """
         res = super(DeliveryCarrier, self)._get_carrier_type_selection(cr, uid, context=context)
         res.append(('postlogistics', 'Postlogistics'))
         return res
 
     def _get_basic_service_id(self, cr, uid, ids, field_names, arg, context=None):
-        """
-        Search in all option for the postlogistic basic service if set
-        """
+        """ Search in all options for the PostLogistics basic service if set """
         res = dict.fromkeys(ids, False)
         ir_model_data_obj = self.pool.get('ir.model.data')
 
+        xmlid = 'delivery_carrier_label_postlogistics', 'postlogistics'
         postlogistics_partner = ir_model_data_obj.get_object(
-            cr, uid, 'delivery_carrier_label_laposte', 'postlogistics', context=context)
+            cr, uid, *xmlid, context=context)
 
         for carrier in self.browse(cr, uid, ids, context=context):
             if not carrier.partner_id.id == postlogistics_partner.id:
@@ -138,8 +137,9 @@ class DeliveryCarrier(orm.Model):
         option_template_obj = self.pool.get('delivery.carrier.template.option')
         ir_model_data_obj = self.pool.get('ir.model.data')
 
+        xmlid = 'delivery_carrier_label_postlogistics', 'postlogistics'
         postlogistics_partner = ir_model_data_obj.get_object(
-            cr, uid, 'delivery_carrier_label_laposte', 'postlogistics', context=context)
+            cr, uid, *xmlid, context=context)
 
         for carrier in self.browse(cr, uid, ids, context=context):
             allowed_ids = []

@@ -18,9 +18,13 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+import logging
+
 from openerp.osv import orm, fields
 
 from postlogistics.web_service import PostlogisticsWebService
+
+_logger = logging.getLogger(__name__)
 
 
 class PostlogisticsConfigSettings(orm.TransientModel):
@@ -65,19 +69,22 @@ class PostlogisticsConfigSettings(orm.TransientModel):
             'company_id', 'postlogistics_office',
             string='Domicile Post office', type='char',
             help="Post office which will receive the shipped goods"),
-        #'default_postlogistics_logo_layout': fields.related(
-            #'company_id', 'default_postlogistics_logo_layout',
-            #string='Domicile Post office', type='char',
-            #help="Post office which will receive the shipped goods"),
-        #'default_postlogistics_output_format': fields.related(
-            #'company_id', 'default_postlogistics_logo_layout',
-            #string='Domicile Post office', type='char',
-            #help="Post office which will receive the shipped goods"),
-        #'default_postlogistics_output_format': fields.related(
-            #'company_id', 'default_postlogistics_logo_layout',
-            #string='Domicile Post office', type='char',
-            #help="Post office which will receive the shipped goods"),
-        }
+        'default_label_layout': fields.related(
+            'company_id', 'postlogistics_default_label_layout',
+            string='Default label layout', type='many2one',
+            relation='delivery.carrier.template.option',
+            domain=[('postlogistics_type', '=', 'label_layout')]),
+        'default_output_format': fields.related(
+            'company_id', 'postlogistics_default_output_format',
+            string='Default output format', type='many2one',
+            relation='delivery.carrier.template.option',
+            domain=[('postlogistics_type', '=', 'output_format')]),
+        'default_resolution': fields.related(
+            'company_id', 'postlogistics_default_resolution',
+            string='Default resolution', type='many2one',
+            relation='delivery.carrier.template.option',
+            domain=[('postlogistics_type', '=', 'resolution')]),
+    }
 
     def _default_company(self, cr, uid, context=None):
         user = self.pool.get('res.users').browse(cr, uid, uid, context=context)
@@ -88,9 +95,10 @@ class PostlogisticsConfigSettings(orm.TransientModel):
         }
 
     def create(self, cr, uid, values, context=None):
-        id = super(PostlogisticsConfigSettings, self).create(cr, uid, values, context)
-        # Hack: to avoid some nasty bug, related fields are not written upon record creation.
-        # Hence we write on those fields here.
+        id = super(PostlogisticsConfigSettings, self
+                   ).create(cr, uid, values, context=context)
+        # Hack: to avoid some nasty bug, related fields are not written
+        # upon record creation.  Hence we write on those fields here.
         vals = {}
         for fname, field in self._columns.iteritems():
             if isinstance(field, fields.related) and fname in values:
@@ -102,17 +110,26 @@ class PostlogisticsConfigSettings(orm.TransientModel):
         # update related fields
         values = {}
         values['currency_id'] = False
-        if company_id:
-            company = self.pool.get('res.company').browse(cr, uid, company_id, context=context)
-            values = {
-                'username': company.postlogistics_username,
-                'password': company.postlogistics_password,
-                'license_less_1kg': company.postlogistics_license_less_1kg,
-                'license_more_1kg': company.postlogistics_license_more_1kg,
-                'license_vinolog': company.postlogistics_license_vinolog,
-                'logo': company.postlogistics_logo,
-                'office': company.postlogistics_office,
-            }
+        if not company_id:
+            return {'value': values}
+        company = self.pool.get('res.company'
+                                ).browse(cr, uid, company_id, context=context)
+
+        label_layout = company.postlogistics_default_label_layout.id or False
+        output_format = company.postlogistics_default_output_format.id or False
+        resolution = company.postlogistics_default_resolution.id or False
+        values = {
+            'username': company.postlogistics_username,
+            'password': company.postlogistics_password,
+            'license_less_1kg': company.postlogistics_license_less_1kg,
+            'license_more_1kg': company.postlogistics_license_more_1kg,
+            'license_vinolog': company.postlogistics_license_vinolog,
+            'logo': company.postlogistics_logo,
+            'office': company.postlogistics_office,
+            'default_label_layout': label_layout,
+            'default_output_format': output_format,
+            'default_resolution': resolution,
+        }
         return {'value': values}
 
     def _get_delivery_instructions(self, cr, uid, ids, web_service,
@@ -151,8 +168,9 @@ class PostlogisticsConfigSettings(orm.TransientModel):
         ir_model_data_obj = self.pool.get('ir.model.data')
         carrier_option_obj = self.pool.get('delivery.carrier.template.option')
 
+        xmlid = 'delivery_carrier_label_postlogistics', 'postlogistics'
         postlogistics_partner = ir_model_data_obj.get_object(
-            cr, uid, 'delivery_carrier_label_laposte', 'postlogistics', context=context)
+            cr, uid, *xmlid, context=context)
 
         for service_code, data in additional_services.iteritems():
 
@@ -168,6 +186,8 @@ class PostlogisticsConfigSettings(orm.TransientModel):
                             postlogistics_type='delivery',
                             partner_id=postlogistics_partner.id)
                 carrier_option_obj.create(cr, uid, data, context=context)
+        lang = context.get('lang', 'en')
+        _logger.info("Updated delivery instrutions. [%s]" %(lang))
 
     def _get_additional_services(self, cr, uid, ids, web_service,
                                  company, service_code, context=None):
@@ -205,7 +225,7 @@ class PostlogisticsConfigSettings(orm.TransientModel):
         carrier_option_obj = self.pool.get('delivery.carrier.template.option')
 
         postlogistics_partner = ir_model_data_obj.get_object(
-            cr, uid, 'delivery_carrier_label_laposte', 'postlogistics', context=context)
+            cr, uid, 'delivery_carrier_label_postlogistics', 'postlogistics', context=context)
 
         for service_code, data in additional_services.iteritems():
 
@@ -221,6 +241,8 @@ class PostlogisticsConfigSettings(orm.TransientModel):
                             postlogistics_type='additional',
                             partner_id=postlogistics_partner.id)
                 carrier_option_obj.create(cr, uid, data, context=context)
+        lang = context.get('lang', 'en')
+        _logger.info("Updated additional services [%s]" % (lang))
 
     def _update_basic_services(self, cr, uid, ids, web_service, company, group_id, context=None):
         """
@@ -236,8 +258,9 @@ class PostlogisticsConfigSettings(orm.TransientModel):
         service_group_obj = self.pool.get('postlogistics.service.group')
         carrier_option_obj = self.pool.get('delivery.carrier.template.option')
 
+        xmlid = 'delivery_carrier_label_postlogistics', 'postlogistics'
         postlogistics_partner = ir_model_data_obj.get_object(
-            cr, uid, 'delivery_carrier_label_laposte', 'postlogistics', context=context)
+            cr, uid, *xmlid, context=context)
         lang = context.get('lang', 'en')
 
         group = service_group_obj.browse(cr, uid, group_id, context=context)
@@ -290,6 +313,7 @@ class PostlogisticsConfigSettings(orm.TransientModel):
                 delivery_instructions[key] = value
                 delivery_instructions[key]['postlogistics_basic_service_ids'] = [(6, 0, [option_id])]
 
+        _logger.info("Updated '%s' basic service [%s]." % (group.name, lang))
         return {'additional_services': additional_services,
                 'delivery_instructions': delivery_instructions}
 

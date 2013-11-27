@@ -36,7 +36,7 @@
           <field name="allowed_option_ids" invisible="1"/>
         </field>
         <field name="tmpl_option_id" position="attributes">
-          <attribute name="domain">['|', ('partner_id', '!=', %(delivery_carrier_label_laposte.postlogistics)d), ('id', 'in', allowed_option_ids[0][2])]</attribute>
+          <attribute name="domain">['|', ('partner_id', '!=', %(delivery_carrier_label_postlogistics.postlogistics)d), ('id', 'in', allowed_option_ids[0][2])]</attribute>
         </field>
       </field>
     </record>
@@ -48,7 +48,7 @@
       <field name="inherit_id" ref="base_delivery_carrier_label.view_delivery_carrier_form" />
       <field name="arch" type="xml">
         <field name="type" position="after">
-          <field name="postlogistics_service_group_id" attrs="{'invisible': [('type', '!=', 'postlogistics')], 'required': [('type', '!=', 'postlogistics')]}"/>
+          <field name="postlogistics_service_group_id" attrs="{'invisible': [('type', '!=', 'postlogistics')], 'required': [('type', '=', 'postlogistics')]}"/>
           <field name="allowed_option_ids" invisible="1"/>
         </field>
         <field name="available_option_ids" position="attributes">

@@ -78,12 +78,16 @@ Technical references
 
 .. _"Barcode" web service documentation: http://www.poste.ch/post-barcode-cug.htm
 
+Contributors
+------------
+
+* Yannick Vaucher <yannick.vaucher@camptocamp.com>
+
 ----
 
 *TODO*:
 
 * *Add onchange to improve carrier method creation*
-* *Default options*
 * *Identify attachement as label*
 * *Better License management*
 """,

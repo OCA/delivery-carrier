@@ -61,10 +61,10 @@ class PostlogisticsWebService(object):
         try:
             res['value'] = request(**kwargs)
             res['success'] = True
-        except WebFault, e:
+        except WebFault as e:
             res['success'] = False
             res['errors'] = [e[0]]
-        except Exception, e:
+        except Exception as e:
             # if authentification error
             if isinstance(e[0], tuple) and e[0][0] == 401:
                 raise orm.except_orm(
@@ -72,7 +72,7 @@ class PostlogisticsWebService(object):
                     _('Authorization Required\n\n'
                     'Please verify postlogistics username and password in:\n'
                     'Configuration -> Postlogistics'))
-            raise e
+            raise
         return res
 
     def _get_language(self, lang):
@@ -214,13 +214,25 @@ class PostlogisticsWebService(object):
         return option and option[0]
 
     def _get_label_layout(self, picking):
-        return self._get_single_option(picking, 'label_layout')
+        label_layout = self._get_single_option(picking, 'label_layout')
+        if not label_layout:
+            company = picking.company_id
+            label_layout = company.postlogistics_default_output_format.code
+        return label_layout
 
     def _get_output_format(self, picking):
-        return self._get_single_option(picking, 'output_format')
+        output_format = self._get_single_option(picking, 'output_format')
+        if not output_format:
+            company = picking.company_id
+            output_format = company.postlogistics_default_output_format.code
+        return output_format
 
     def _get_image_resolution(self, picking):
-        return self._get_single_option(picking, 'resolution')
+        resolution = self._get_single_option(picking, 'resolution')
+        if not resolution:
+            company = picking.company_id
+            resolution = company.postlogistics_default_resolution.code
+        return resolution
 
     def _get_license(self, picking):
         """
@@ -317,15 +329,16 @@ class PostlogisticsWebService(object):
         :param picking: picking browse record
         :param lang: OpenERP language code
         :return: {
-            value: [
-                {item_id: pack id
-                 binary: file returned by API
-                 tracking_number: id number for tracking
-                 }
-                ]
-            errors: list of error message
-            warrnings: list of warning message
-            }
+            value: [{item_id: pack id
+                     binary: file returned by API
+                     tracking_number: id number for tracking
+                     file_type: str of file type
+                     }
+                    ]
+            errors: list of error message if any
+            warnings: list of warning message if any
+        }
+
         """
         # get options
         lang = self._get_language(user_lang)
@@ -338,6 +351,8 @@ class PostlogisticsWebService(object):
         data = self._prepare_data(item_list)
 
         envelope = self._prepare_envelope(picking, post_customer, data)
+
+        output_format = self._get_output_format(picking).lower()
 
         res = {'value': []}
         request = self.client.service.GenerateLabel
@@ -357,7 +372,8 @@ class PostlogisticsWebService(object):
                     'item_id': item.ItemID,
                     'binary': item.Label,
                     'tracking_number': item.IdentCode,
-                    })
+                    'file_type': output_format,
+                })
 
             if hasattr(item, 'Warnings') and item.Warnings:
                 for warning in item.Warnings:
