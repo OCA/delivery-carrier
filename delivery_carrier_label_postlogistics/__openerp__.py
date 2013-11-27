@@ -83,7 +83,7 @@ Technical references
 Contributors
 ------------
 
-* Yannick Vaucher <yannick.vaucher@camptocamp.com
+* Yannick Vaucher <yannick.vaucher@camptocamp.com>
 
 ----
 
