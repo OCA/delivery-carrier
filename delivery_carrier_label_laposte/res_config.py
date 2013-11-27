@@ -19,6 +19,7 @@
 #
 ##############################################################################
 from openerp.osv import orm, fields
+from openerp.tools.translate import _
 
 from postlogistics.web_service import PostlogisticsWebService
 
@@ -60,7 +61,7 @@ class PostlogisticsConfigSettings(orm.TransientModel):
                  "– The logo will be printed rotated counter-clockwise by 90°\n"
                  "We recommend using a black and white logo for printing in the\n"
                  "ZPL2 format."
-            ),
+        ),
         'office': fields.related(
             'company_id', 'postlogistics_office',
             string='Domicile Post office', type='char',
@@ -77,7 +78,7 @@ class PostlogisticsConfigSettings(orm.TransientModel):
             #'company_id', 'default_postlogistics_logo_layout',
             #string='Domicile Post office', type='char',
             #help="Post office which will receive the shipped goods"),
-        }
+    }
 
     def _default_company(self, cr, uid, context=None):
         user = self.pool.get('res.users').browse(cr, uid, uid, context=context)
@@ -85,12 +86,12 @@ class PostlogisticsConfigSettings(orm.TransientModel):
 
     _defaults = {
         'company_id': _default_company,
-        }
+    }
 
     def create(self, cr, uid, values, context=None):
         id = super(PostlogisticsConfigSettings, self).create(cr, uid, values, context)
-        # Hack: to avoid some nasty bug, related fields are not written upon record creation.
-        # Hence we write on those fields here.
+        # Hack: to avoid some nasty bug, related fields are not written
+        # upon record creation.  Hence we write on those fields here.
         vals = {}
         for fname, field in self._columns.iteritems():
             if isinstance(field, fields.related) and fname in values:
@@ -102,17 +103,18 @@ class PostlogisticsConfigSettings(orm.TransientModel):
         # update related fields
         values = {}
         values['currency_id'] = False
-        if company_id:
-            company = self.pool.get('res.company').browse(cr, uid, company_id, context=context)
-            values = {
-                'username': company.postlogistics_username,
-                'password': company.postlogistics_password,
-                'license_less_1kg': company.postlogistics_license_less_1kg,
-                'license_more_1kg': company.postlogistics_license_more_1kg,
-                'license_vinolog': company.postlogistics_license_vinolog,
-                'logo': company.postlogistics_logo,
-                'office': company.postlogistics_office,
-            }
+        if not company_id:
+            return {'value': values}
+        company = self.pool.get('res.company').browse(cr, uid, company_id, context=context)
+        values = {
+            'username': company.postlogistics_username,
+            'password': company.postlogistics_password,
+            'license_less_1kg': company.postlogistics_license_less_1kg,
+            'license_more_1kg': company.postlogistics_license_more_1kg,
+            'license_vinolog': company.postlogistics_license_vinolog,
+            'logo': company.postlogistics_logo,
+            'office': company.postlogistics_office,
+        }
         return {'value': values}
 
     def _get_delivery_instructions(self, cr, uid, ids, web_service,
@@ -125,9 +127,9 @@ class PostlogisticsConfigSettings(orm.TransientModel):
         res = web_service.read_delivery_instructions(company, service_code_list, lang)
         if 'errors' in res:
             errors = '\n'.join(res['errors'])
-            error_message = ('Could not retrieve Postlogistics delivery instructions:\n%s'
-                             % (errors,))
-            raise orm.except_orm('Error', error_message)
+            error_message = (_('Could not retrieve Postlogistics delivery'
+                               'instructions:\n%s') % errors)
+            raise orm.except_orm(_('Error'), error_message)
 
         if not res['value']:
             return {}
@@ -151,15 +153,18 @@ class PostlogisticsConfigSettings(orm.TransientModel):
         ir_model_data_obj = self.pool.get('ir.model.data')
         carrier_option_obj = self.pool.get('delivery.carrier.template.option')
 
+        xmlid = 'delivery_carrier_label_laposte', 'postlogistics'
         postlogistics_partner = ir_model_data_obj.get_object(
-            cr, uid, 'delivery_carrier_label_laposte', 'postlogistics', context=context)
+            cr, uid, *xmlid, context=context)
 
         for service_code, data in additional_services.iteritems():
 
-            option_ids = carrier_option_obj.search(cr, uid, [
-                ('code', '=', service_code),
-                ('postlogistics_type', '=', 'delivery')
-                ], context=context)
+            option_ids = carrier_option_obj.search(
+                cr, uid,
+                [('code', '=', service_code),
+                 ('postlogistics_type', '=', 'delivery')
+                 ],
+                context=context)
 
             if option_ids:
                 carrier_option_obj.write(cr, uid, option_ids, data, context=context)
@@ -179,8 +184,9 @@ class PostlogisticsConfigSettings(orm.TransientModel):
         res = web_service.read_additional_services(company, service_code_list, lang)
         if 'errors' in res:
             errors = '\n'.join(res['errors'])
-            error_message = 'Could not retrieve Postlogistics base services:\n%s' % (errors,)
-            raise orm.except_orm('Error', error_message)
+            error_message = (_('Could not retrieve Postlogistics base '
+                               'services:\n%s') % errors)
+            raise orm.except_orm(_('Error'), error_message)
 
         if not res['value']:
             return {}
@@ -223,12 +229,14 @@ class PostlogisticsConfigSettings(orm.TransientModel):
                 carrier_option_obj.create(cr, uid, data, context=context)
 
     def _update_basic_services(self, cr, uid, ids, web_service, company, group_id, context=None):
-        """
-        Update of basic services
+        """ Update of basic services
+
         A basic service can be part only of one service group
+
         :return: {additional_services: {<service_code>: service_data}
                   delivery_instructions: {<service_code>: service_data}
                   }
+
         """
         if context is None:
             context = {}
@@ -236,8 +244,9 @@ class PostlogisticsConfigSettings(orm.TransientModel):
         service_group_obj = self.pool.get('postlogistics.service.group')
         carrier_option_obj = self.pool.get('delivery.carrier.template.option')
 
+        xmlid = 'delivery_carrier_label_laposte', 'postlogistics'
         postlogistics_partner = ir_model_data_obj.get_object(
-            cr, uid, 'delivery_carrier_label_laposte', 'postlogistics', context=context)
+            cr, uid, *xmlid, context=context)
         lang = context.get('lang', 'en')
 
         group = service_group_obj.browse(cr, uid, group_id, context=context)
@@ -245,8 +254,9 @@ class PostlogisticsConfigSettings(orm.TransientModel):
         res = web_service.read_basic_services(company, group.group_extid, lang)
         if 'errors' in res:
             errors = '\n'.join(res['errors'])
-            error_message = 'Could not retrieve Postlogistics base services:\n%s' % (errors,)
-            raise orm.except_orm('Error', error_message)
+            error_message = (_('Could not retrieve Postlogistics base '
+                               'services:\n%s') % errors)
+            raise orm.except_orm(_('Error'), error_message)
 
         additional_services = {}
         delivery_instructions = {}
@@ -294,8 +304,9 @@ class PostlogisticsConfigSettings(orm.TransientModel):
                 'delivery_instructions': delivery_instructions}
 
     def _update_service_groups(self, cr, uid, ids, web_service, company, context=None):
-        """
-        Also updates additional services and delivery instructions as they are shared between groups
+        """ Also updates additional services and delivery instructions
+        as they are shared between groups
+
         """
         if context is None:
             context = {}
@@ -306,8 +317,9 @@ class PostlogisticsConfigSettings(orm.TransientModel):
         res = web_service.read_service_groups(company, lang)
         if 'errors' in res:
             errors = '\n'.join(res['errors'])
-            error_message = 'Could not retrieve Postlogistics group services:\n%s' % (errors,)
-            raise orm.except_orm('Error', error_message)
+            error_message = (_('Could not retrieve Postlogistics group '
+                               'services:\n%s') % errors)
+            raise orm.except_orm(_('Error'), error_message)
 
         additional_services = {}
         delivery_instructions = {}
@@ -352,11 +364,11 @@ class PostlogisticsConfigSettings(orm.TransientModel):
                                            delivery_instructions, context=context)
 
     def update_postlogistics_options(self, cr, uid, ids, context=None):
-        """
-        This action will update all postlogistics option by importing services
-        from PostLogistics WebService API
+        """ This action will update all postlogistics option by
+        importing services from PostLogistics WebService API
 
         The object we create are 'delivey.carrier.template.option'
+
         """
         if context is None:
             context = {}

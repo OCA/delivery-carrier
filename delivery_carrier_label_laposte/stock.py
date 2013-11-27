@@ -38,13 +38,13 @@ class stock_picking_out(orm.Model):
         # XXX What with multiple pack for one picking ?
         tracking_number = res['value'][0]['tracking_number']
         # write tracking number on picking XXX multi ?
-        self.write(cr, uid, picking.id, {'carrier_tracking_ref': tracking_number}, context=context)
+        self.write(cr, uid, picking.id,
+                   {'carrier_tracking_ref': tracking_number},
+                   context=context)
         return res['value'][0]['binary'].decode('base64')
 
     def generate_single_label(self, cr, uid, ids, context=None):
-        """
-        Add label generation for Postlogistics
-        """
+        """ Add label generation for Postlogistics """
         if isinstance(ids, (long, int)):
             ids = [ids]
         assert len(ids) == 1
