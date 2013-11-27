@@ -3,3 +3,5 @@ access_delivery_carrier_option_salesman,delivery.carrier.option.salesman,model_d
 access_delivery_carrier_option_manager,delivery.carrier.option.manager,model_delivery_carrier_option,base.group_sale_manager,1,1,1,1
 access_delivery_carrier_template_option_salesman,delivery.carrier.relation.option.salesman,model_delivery_carrier_template_option,base.group_sale_salesman,1,0,0,0
 access_delivery_carrier_template_option_manager,delivery.carrier.relation.option.manager,model_delivery_carrier_template_option,base.group_sale_manager,1,1,1,1
+access_shipping_label_user,shipping.label user,model_shipping_label,stock.group_stock_user,1,1,1,0
+access_shipping_label_manager,shipping.label manager,model_shipping_label,stock.group_stock_manager,1,1,1,1
