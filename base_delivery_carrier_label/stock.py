@@ -26,14 +26,13 @@ from openerp.tools.translate import _
 
 
 class stock_picking(orm.Model):
-    """
-    Devfine m2m field due to inheritance to have it in stock.picking.out model
-    """
+    """ Define m2m field due to inheritance to have it in stock.picking.out """
     _inherit = 'stock.picking'
 
     _columns = {
-        'option_ids': fields.many2many('delivery.carrier.option', string='Options'),
-        }
+        'option_ids': fields.many2many('delivery.carrier.option',
+                                       string='Options'),
+    }
 
 
 class stock_picking_out(orm.Model):
@@ -64,19 +63,16 @@ class stock_picking_out(orm.Model):
             readonly=True,
             type='char',
             help="Delivery Method Code (from carrier)"),
-        'option_ids': fields.many2many('delivery.carrier.option', string='Options'),
+        'option_ids': fields.many2many('delivery.carrier.option',
+                                       string='Options'),
         }
 
     def generate_default_label(self, cr, uid, ids, context=None):
-        """
-        Abstract method
-        """
+        """ Abstract method """
         return NotImplementedError
 
     def generate_single_label(self, cr, uid, ids, context=None):
-        """
-        Abstract method
-        """
+        """ Generate a the single label by default """
         return self.generate_default_label(cr, uid, ids, context=None)
 
     def action_generate_carrier_label(self, cr, uid, ids, context=None):
@@ -108,10 +104,11 @@ class stock_picking_out(orm.Model):
         res = {}
         if carrier_id:
             carrier = carrier_obj.browse(cr, uid, carrier_id, context=context)
-            #This can look useless as the field carrier_code and carrier_type
-            #are related field. But it's needed to fill this field for using
-            #this fields in the view. Indeed the module that depend of delivery
-            #base can hide some field depending of the type or the code
+            # This can look useless as the field carrier_code and
+            # carrier_type are related field. But it's needed to fill
+            # this field for using this fields in the view. Indeed the
+            # module that depend of delivery base can hide some field
+            # depending of the type or the code
 
             default_option_ids = []
             available_option_ids = []
@@ -120,41 +117,38 @@ class stock_picking_out(orm.Model):
                 if available_option.state in ['default_option', 'mandatory']:
                     default_option_ids.append(available_option.id)
             res = {
-                'value': {
-                    'carrier_type': carrier.type,
-                    'carrier_code': carrier.code,
-                    'option_ids': default_option_ids,
-                    },
-                'domain': {
-                    'option_ids': [('id', 'in', available_option_ids)],
-                    },
-                }
+                'value': {'carrier_type': carrier.type,
+                          'carrier_code': carrier.code,
+                          'option_ids': default_option_ids,
+                          },
+                'domain': {'option_ids': [('id', 'in', available_option_ids)],
+                           },
+            }
         return res
 
     def option_ids_change(self, cr, uid, ids, option_ids, carrier_id, context=None):
         carrier_obj = self.pool.get('delivery.carrier')
         res = {}
-        if carrier_id:
-            carrier = carrier_obj.browse(cr, uid, carrier_id, context=context)
-            for available_option in carrier.available_option_ids:
-                if (available_option.state == 'mandatory'
-                        and not available_option.id in option_ids[0][2]):
-                    res['warning'] = {
-                        'title': _('User Error !'),
-                        'message':  _("You can not remove a mandatory option."
-                                      "\nOption are reset to default")
-                    }
-                    default_value = self.carrier_id_change(cr, uid, ids,
-                                                           carrier_id,
-                                                           context=context)
-                    res.update(default_value)
+        if not carrier_id:
+            return res
+        carrier = carrier_obj.browse(cr, uid, carrier_id, context=context)
+        for available_option in carrier.available_option_ids:
+            if (available_option.state == 'mandatory'
+                    and not available_option.id in option_ids[0][2]):
+                res['warning'] = {
+                    'title': _('User Error !'),
+                    'message':  _("You can not remove a mandatory option."
+                                  "\nOptions are reset to default.")
+                }
+                default_value = self.carrier_id_change(cr, uid, ids,
+                                                       carrier_id,
+                                                       context=context)
+                res.update(default_value)
         return res
 
 
 class ShippingLabel(orm.Model):
-    """
-    Child class of ir attachment to identify which are labels
-    """
+    """ Child class of ir attachment to identify which are labels """
     _inherits = {'ir.attachment': 'attachment_id'}
     _name = "shipping.label"
     _description = "Shipping Label"
