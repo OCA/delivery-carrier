@@ -80,15 +80,13 @@ class stock_picking_out(orm.Model):
 
         pickings = self.browse(cr, uid, ids, context=context)
 
-        pdf_list = []
         for pick in pickings:
-            pdf = pick.generate_single_label()
-            pdf_list.append(pdf)
+            label = pick.generate_single_label()
             data = {
                 'name': pick.name,
                 'res_id': pick.id,
                 'res_model': 'stock.picking.out',
-                'datas': pdf.encode('base64'),
+                'datas': label.encode('base64'),
                 }
             context_attachment = context.copy()
             # remove default_type setted for stock_picking
