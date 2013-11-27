@@ -30,16 +30,18 @@
 Base module for carrier labels
 ==============================
 
-This module adds a button on delivery order to generate a label as an attachement.
+This module adds a button on delivery orders to generate a label as an
+attachement.
 
 .. tip::
    It doesn't implement a label. To add a default label, you can install
-   module `delivery_carrier_label_default_webkit`
+   the module `delivery_carrier_label_default_webkit`
 
-It can be used print specific labels per carrier.
+It can be used to print specific labels per carrier.
 
 .. note::
    Inspired by Akretion module delivery_base and delivery_shipping_label
+
  """,
  'website': 'http://www.camptocamp.com/',
  'data': [
