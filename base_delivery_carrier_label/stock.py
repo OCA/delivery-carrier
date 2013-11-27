@@ -46,10 +46,6 @@ class stock_picking_out(orm.Model):
         'carrier_id': fields.many2one(
             'delivery.carrier', 'Carrier',
             states={'done': [('readonly', True)]}),
-        'carrier_tracking_ref': fields.char(
-            'Carrier Tracking Ref',
-            size=32,
-            states={'done': [('readonly', True)]}),
         'carrier_type': fields.related(
             'carrier_id', 'type',
             string='Carrier type',
@@ -65,14 +61,22 @@ class stock_picking_out(orm.Model):
             help="Delivery Method Code (from carrier)"),
         'option_ids': fields.many2many('delivery.carrier.option',
                                        string='Options'),
-        }
+    }
 
     def generate_default_label(self, cr, uid, ids, context=None):
-        """ Abstract method """
+        """ Abstract method
+
+        :return: (file_binary, file_type)
+
+        """
         return NotImplementedError
 
     def generate_single_label(self, cr, uid, ids, context=None):
-        """ Generate a the single label by default """
+        """Generate a the single label by default
+
+        :return: (file_binary, file_type)
+
+        """
         return self.generate_default_label(cr, uid, ids, context=None)
 
     def action_generate_carrier_label(self, cr, uid, ids, context=None):
@@ -80,16 +84,15 @@ class stock_picking_out(orm.Model):
 
         pickings = self.browse(cr, uid, ids, context=context)
 
-        pdf_list = []
         for pick in pickings:
-            pdf = pick.generate_single_label()
-            pdf_list.append(pdf)
+            label, file_type = pick.generate_single_label()
             data = {
                 'name': pick.name,
                 'res_id': pick.id,
                 'res_model': 'stock.picking.out',
-                'datas': pdf.encode('base64'),
-                }
+                'datas': label.encode('base64'),
+                'file_type': file_type,
+            }
             context_attachment = context.copy()
             # remove default_type setted for stock_picking
             # as it would try to define default value of attachement
@@ -150,5 +153,16 @@ class stock_picking_out(orm.Model):
 class ShippingLabel(orm.Model):
     """ Child class of ir attachment to identify which are labels """
     _inherits = {'ir.attachment': 'attachment_id'}
-    _name = "shipping.label"
+    _name = 'shipping.label'
     _description = "Shipping Label"
+
+    def _get_file_type_selection(self, cr, uid, context=None):
+        return [('pdf', 'PDF')]
+
+    _columns = {
+        'file_type': fields.selection(_get_file_type_selection, 'File type')
+    }
+
+    _defaults = {
+        'file_type': 'pdf'
+    }

@@ -22,7 +22,6 @@
  'version': '1.0',
  'author': 'Camptocamp',
  'maintainer': 'Camptocamp',
- 'contributors': ['Yannick Vaucher <yannick.vaucher@camptocamp.com'],
  'category': 'version',
  'complexity': 'normal',
  'depends': ['stock', 'delivery'],
@@ -41,6 +40,13 @@ It can be used to print specific labels per carrier.
 
 .. note::
    Inspired by Akretion module delivery_base and delivery_shipping_label
+
+Contributors
+------------
+
+* David BEAL <david.beal@akretion.com>
+* Sébastien BEAU <sebastien.beau@akretion.com>
+* Yannick Vaucher <yannick.vaucher@camptocamp.com>
 
  """,
  'website': 'http://www.camptocamp.com/',
