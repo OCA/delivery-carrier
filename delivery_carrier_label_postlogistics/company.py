@@ -26,7 +26,7 @@ class ResCompany(orm.Model):
     _inherit = 'res.company'
 
     def _get_wsdl_url(self, cr, uid, ids, field_name, arg, context=None):
-        wsdl_file, wsdl_path = file_open('delivery_carrier_label_laposte/data/barcode_v2_1.wsdl', pathinfo=True)
+        wsdl_file, wsdl_path = file_open('delivery_carrier_label_postlogistics/data/barcode_v2_1.wsdl', pathinfo=True)
         wsdl_url = 'file://' + wsdl_path
         res = dict.fromkeys(ids, wsdl_url)
         return res
