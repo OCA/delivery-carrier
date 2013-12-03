@@ -26,11 +26,15 @@ from postlogistics.web_service import PostlogisticsWebService
 class stock_picking_out(orm.Model):
     _inherit = 'stock.picking.out'
 
-    def _generate_poste_ch_label(self, cr, uid, picking, context=None):
+    def _generate_postlogistics_label(self, cr, uid, picking,
+                                      webservice_class=None, context=None):
         user_obj = self.pool.get('res.users')
         user = user_obj.browse(cr, uid, uid, context=context)
         company = user.company_id
-        web_service = PostlogisticsWebService(company)
+        if webservice_class is None:
+            webservice_class = PostlogisticsWebService
+
+        web_service = webservice_class(company)
         res = web_service.generate_label(picking, user.lang)
 
         if 'errors' in res:
@@ -50,5 +54,5 @@ class stock_picking_out(orm.Model):
         assert len(ids) == 1
         picking = self.browse(cr, uid, ids[0], context=context)
         if picking.carrier_id.type == 'postlogistics':
-            return self._generate_poste_ch_label(cr, uid, picking, context=context)
+            return self._generate_postlogistics_label(cr, uid, picking, context=context)
         return super(stock_picking_out, self).generate_single_label(cr, uid, ids, context=None)
