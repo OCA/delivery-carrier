@@ -29,7 +29,8 @@
 PostLogistics labels - logo per Shop
 ===================================
 
-Add an option to define a logo per shop if no shop logo is defined
+Add an option to define a logo per shop.
+If no shop logo is defined uses company logo.
 
 Contributors
 ------------
