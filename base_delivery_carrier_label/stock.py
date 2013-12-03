@@ -46,9 +46,6 @@ class stock_picking_out(orm.Model):
         'carrier_id': fields.many2one(
             'delivery.carrier', 'Carrier',
             states={'done': [('readonly', True)]}),
-        'carrier_tracking_ref': fields.char(
-            'Carrier Tracking Ref',
-            size=32),
         'carrier_type': fields.related(
             'carrier_id', 'type',
             string='Carrier type',
