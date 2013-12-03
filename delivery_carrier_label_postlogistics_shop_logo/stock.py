@@ -26,19 +26,10 @@ from postlogistics.web_service import PostlogisticsWebServiceShop
 class stock_picking_out(orm.Model):
     _inherit = 'stock.picking.out'
 
-    def _generate_poste_ch_label(self, cr, uid, picking, context=None):
+    def _generate_postlogistics_label(self, cr, uid, picking,
+                                      webservice_class=None, context=None):
         """ Generate post label using shop label """
-        user_obj = self.pool.get('res.users')
-        user = user_obj.browse(cr, uid, uid, context=context)
-        company = user.company_id
-        web_service = PostlogisticsWebServiceShop(company)
-        res = web_service.generate_label(picking, user.lang)
-
-        if 'errors' in res:
-            raise orm.except_orm('Error', '\n'.join(res['errors']))
-        tracking_number = res['value'][0]['tracking_number']
-        # write tracking number on picking XXX
-        self.write(cr, uid, picking.id,
-                   {'carrier_tracking_ref': tracking_number},
-                   context=context)
-        return res['value'][0]['binary'].decode('base64')
+        return super(stock_picking_out, self)._generate_postlogistics_label(
+            cr, uid, picking,
+            webservice_class=PostlogisticsWebServiceShop,
+            context=context)
