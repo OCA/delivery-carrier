@@ -44,4 +44,11 @@ class ResCompany(orm.Model):
         'postlogistics_license_vinolog': fields.char('License VinoLog'),
         'postlogistics_logo': fields.binary('Company logo for PostLogistics'),
         'postlogistics_office': fields.char('Post office'),
+
+        'postlogistics_default_label_layout': fields.many2one(
+            'delivery.carrier.template.option', 'Default label layout'),
+        'postlogistics_default_output_format': fields.many2one(
+            'delivery.carrier.template.option', 'Default output format'),
+        'postlogistics_default_resolution': fields.many2one(
+            'delivery.carrier.template.option', 'Default resolution'),
         }

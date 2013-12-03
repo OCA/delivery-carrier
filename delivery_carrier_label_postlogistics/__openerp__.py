@@ -90,7 +90,6 @@ Contributors
 *TODO*:
 
 * *Add onchange to improve carrier method creation*
-* *Default options*
 * *Identify attachement as label*
 * *Better License management*
 """,
