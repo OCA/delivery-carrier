@@ -339,7 +339,7 @@ class PostlogisticsWebService(object):
 
         envelope = self._prepare_envelope(picking, post_customer, data)
 
-        output_format = self._get_output_format(picking)
+        output_format = self._get_output_format(picking).lower()
 
         res = {'value': []}
         request = self.client.service.GenerateLabel
