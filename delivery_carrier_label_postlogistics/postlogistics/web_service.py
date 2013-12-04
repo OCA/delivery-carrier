@@ -209,21 +209,21 @@ class PostlogisticsWebService(object):
         label_layout = self._get_single_option(picking, 'label_layout')
         if not label_layout:
             company = picking.company_id
-            label_layout = company.postlogistics_default_output_format
+            label_layout = company.postlogistics_default_output_format.code
         return label_layout
 
     def _get_output_format(self, picking):
         output_format = self._get_single_option(picking, 'output_format')
         if not output_format:
             company = picking.company_id
-            output_format = company.postlogistics_default_output_format
+            output_format = company.postlogistics_default_output_format.code
         return output_format
 
     def _get_image_resolution(self, picking):
         resolution = self._get_single_option(picking, 'resolution')
         if not resolution:
             company = picking.company_id
-            resolution = company.postlogistics_default_resolution
+            resolution = company.postlogistics_default_resolution.code
         return resolution
 
     def _get_license(self, picking):
