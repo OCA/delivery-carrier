@@ -107,7 +107,7 @@ class DeliveryCarrier(orm.Model):
     _inherit = 'delivery.carrier'
 
     def _get_carrier_type_selection(self, cr, uid, context=None):
-        """ To inherit to add carrier type """
+        """ Add postlogistics carrier type """
         res = super(DeliveryCarrier, self)._get_carrier_type_selection(cr, uid, context=context)
         res.append(('postlogistics', 'Postlogistics'))
         return res

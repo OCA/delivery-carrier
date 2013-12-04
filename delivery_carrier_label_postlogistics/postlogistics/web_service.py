@@ -319,6 +319,7 @@ class PostlogisticsWebService(object):
             value: [{item_id: pack id
                      binary: file returned by API
                      tracking_number: id number for tracking
+                     file_type: str of file type
                      }
                     ]
             errors: list of error message if any
@@ -338,6 +339,8 @@ class PostlogisticsWebService(object):
 
         envelope = self._prepare_envelope(picking, post_customer, data)
 
+        output_format = self._get_output_format(picking)
+
         res = {'value': []}
         request = self.client.service.GenerateLabel
         response = self._send_request(request, Language=lang, Envelope=envelope)
@@ -356,6 +359,7 @@ class PostlogisticsWebService(object):
                     'item_id': item.ItemID,
                     'binary': item.Label,
                     'tracking_number': item.IdentCode,
+                    'file_type': output_format,
                 })
 
             if hasattr(item, 'Warnings') and item.Warnings:
