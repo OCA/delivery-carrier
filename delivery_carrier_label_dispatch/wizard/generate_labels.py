@@ -76,7 +76,8 @@ class DeliveryCarrierLabelGenerate(orm.TransientModel):
     def action_generate_labels(self, cr, uid, ids, context=None):
         """
         Call the creation of the delivery carrier label
-        and merge them in a single PDF
+        of the missing labels and get the existing ones
+        Then merge all of them in a single PDF
         """
         context = context or {}
         this = self.browse(cr, uid, ids, context=context)[0]
