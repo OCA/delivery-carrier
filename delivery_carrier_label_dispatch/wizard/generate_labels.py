@@ -85,19 +85,24 @@ class DeliveryCarrierLabelGenerate(orm.TransientModel):
 
         picking_out_obj = self.pool.get('stock.picking.out')
 
-        # flatten all ids
-        picking_ids = [picking.id for dispatch in this.dispatch_ids
-                       for picking in dispatch.related_picking_ids
-                       if not picking.get_pdf_label()[picking.id]]
+        # flatten all picking in one list to keep the order in case
+        # there are multiple dispatch or if pickings
+        # have been ordered to ease packaging
+        pickings = [(pick, pick.get_pdf_label()[pick.id])
+                    for dispatch in this.dispatch_ids
+                    for pick in dispatch.related_picking_ids]
+        # get picking ids for which we want to generate pdf label
+        picking_ids = [pick.id for pick, pdf in pickings
+                       if not pdf]
         # generate missing picking labels
         picking_out_obj.action_generate_carrier_label(cr, uid,
                                                       picking_ids,
                                                       #file_type='pdf',
                                                       context=context)
 
-        data_list = [picking.get_pdf_label()[picking.id]
-                     for dispatch in this.dispatch_ids
-                     for picking in dispatch.related_picking_ids]
+        # Get all pdf files adding the newly generated ones
+        data_list = [pdf or pick.get_pdf_label()[pick.id]
+                     for pick, pdf in pickings]
         pdf_list = [data.decode('base64') for data in data_list if data]
         pdf_file = assemble_pdf(pdf_list)
         this.write({'label_pdf_file': pdf_file.encode('base64')})
