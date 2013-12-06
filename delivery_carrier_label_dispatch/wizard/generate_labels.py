@@ -79,7 +79,6 @@ class DeliveryCarrierLabelGenerate(orm.TransientModel):
         of the missing labels and get the existing ones
         Then merge all of them in a single PDF
         """
-        context = context or {}
         this = self.browse(cr, uid, ids, context=context)[0]
         if not this.dispatch_ids:
             raise orm.except_orm(_('Error'), _('No picking dispatch selected'))
