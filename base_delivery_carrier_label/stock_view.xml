@@ -27,51 +27,5 @@
       </field>
     </record>
 
-    <!-- TREE -->
-    <!--<record id="view_picking_out_tree" model="ir.ui.view">-->
-      <!--<field name="name">stock.picking.tree</field>-->
-      <!--<field name="model">stock.picking.out</field>-->
-      <!--<field name="inherit_id" ref="stock.view_picking_out_tree" />-->
-      <!--<field name="arch" type="xml">-->
-        <!--<field name="partner_id" position="after">-->
-          <!--[><field name="carrier_type" string="carrier"/><]-->
-          <!--<field name="carrier_code" string="code"/>-->
-        <!--</field>-->
-      <!--</field>-->
-    <!--</record>-->
-
-    <!--<record id="view_picking_internal_tree" model="ir.ui.view">-->
-      <!--<field name="name">stock.picking.tree</field>-->
-      <!--<field name="model">stock.picking</field>-->
-      <!--<field name="inherit_id" ref="stock.vpicktree" />-->
-      <!--<field name="arch" type="xml">-->
-        <!--<field name="partner_id" position="after">-->
-          <!--<field name="carrier_type"/>-->
-        <!--</field>-->
-      <!--</field>-->
-    <!--</record>-->
-
-    <!--<record id="view_picking_out_search" model="ir.ui.view">-->
-      <!--<field name="name">stock.picking.out.search</field>-->
-      <!--<field name="model">stock.picking</field>-->
-      <!--<field name="inherit_id" ref="stock.view_picking_out_search"/>-->
-      <!--<field name="arch" type="xml">-->
-        <!--<field name="name" position="before">-->
-          <!--<field name="carrier_type"/>-->
-        <!--</field>-->
-      <!--</field>-->
-    <!--</record>-->
-
-    <!--<record id="view_picking_internal_search" model="ir.ui.view">-->
-      <!--<field name="name">stock.picking.internal.search</field>-->
-      <!--<field name="model">stock.picking</field>-->
-      <!--<field name="inherit_id" ref="stock.view_picking_internal_search"/>-->
-      <!--<field name="arch" type="xml">-->
-        <!--<field name="name" position="before">-->
-          <!--[><field name="carrier_type"/><]-->
-        <!--</field>-->
-      <!--</field>-->
-    <!--</record>-->
-
   </data>
 </openerp>
