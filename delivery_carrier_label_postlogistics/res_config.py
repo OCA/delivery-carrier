@@ -395,31 +395,30 @@ class PostlogisticsConfigSettings(orm.TransientModel):
         if context is None:
             context = {}
         user_obj = self.pool.get('res.users')
+        for config in self.browse(cr, uid, ids, context=context):
+            company = config.company_id
+            web_service = PostlogisticsWebService(company)
 
-        company = user_obj.browse(cr, uid, uid, context=context).company_id
-
-        web_service = PostlogisticsWebService(company)
-
-        # make sure we create source text in en_US
-        ctx = context.copy()
-        ctx['lang'] = 'en_US'
-        self._update_service_groups(cr, uid, ids, web_service, company, context=ctx)
-
-        language_obj = self.pool.get('res.lang')
-        language_ids = language_obj.search(cr, uid, [], context=context)
-
-        languages = language_obj.browse(cr, uid, language_ids, context=context)
-
-        # handle translations
-        # we call the same methode with a different language context
-        for lang_br in languages:
-            lang = lang_br.code
+            # make sure we create source text in en_US
             ctx = context.copy()
-            ctx['lang'] = lang_br.code
-            postlogistics_lang = web_service._get_language(lang)
-            # add translations only for languages that exists on postlogistics
-            # english source will be kept for other languages
-            if postlogistics_lang == 'en':
-                continue
+            ctx['lang'] = 'en_US'
             self._update_service_groups(cr, uid, ids, web_service, company, context=ctx)
+
+            language_obj = self.pool.get('res.lang')
+            language_ids = language_obj.search(cr, uid, [], context=context)
+
+            languages = language_obj.browse(cr, uid, language_ids, context=context)
+
+            # handle translations
+            # we call the same methode with a different language context
+            for lang_br in languages:
+                lang = lang_br.code
+                ctx = context.copy()
+                ctx['lang'] = lang_br.code
+                postlogistics_lang = web_service._get_language(lang)
+                # add translations only for languages that exists on postlogistics
+                # english source will be kept for other languages
+                if postlogistics_lang == 'en':
+                    continue
+                self._update_service_groups(cr, uid, ids, web_service, company, context=ctx)
         return True
