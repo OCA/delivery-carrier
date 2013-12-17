@@ -23,11 +23,12 @@ from openerp.osv import orm, fields
 from postlogistics.web_service import PostlogisticsWebService
 
 
-class stock_picking_out(orm.Model):
-    _inherit = 'stock.picking.out'
+class stock_picking(orm.Model):
+    _inherit = 'stock.picking'
 
     def _generate_postlogistics_label(self, cr, uid, picking,
                                       webservice_class=None, context=None):
+        """ Generate labels and write tracking numbers received """
         user_obj = self.pool.get('res.users')
         user = user_obj.browse(cr, uid, uid, context=context)
         company = user.company_id
@@ -39,19 +40,41 @@ class stock_picking_out(orm.Model):
 
         if 'errors' in res:
             raise orm.except_orm('Error', '\n'.join(res['errors']))
-        # XXX What with multiple pack for one picking ?
-        tracking_number = res['value'][0]['tracking_number']
-        # write tracking number on picking XXX multi ?
-        self.write(cr, uid, picking.id,
-                   {'carrier_tracking_ref': tracking_number},
-                   context=context)
-        return (res['value'][0]['binary'].decode('base64'),
-                res['value'][0]['file_type'])
 
-    def generate_single_label(self, cr, uid, ids, context=None):
-        """
-        Add label generation for Postlogistics
-        """
+        trackings = set([line.tracking_id for line in picking.move_lines])
+
+        labels = []
+        # if there are no pack defined, write tracking_number on picking
+        # otherwise, write it on serial field of each pack
+        for track in trackings:
+            if not track:
+                # ignore lines without tracking when there is tracking
+                # in a picking
+                if len(trackings) > 1:
+                    continue
+                label = res['value'][0]
+                tracking_number = label['tracking_number']
+                self.write(cr, uid, picking.id,
+                           {'carrier_tracking_ref': tracking_number},
+                           context=context)
+            else:
+                label = None
+                for search_label in res['value']:
+                    if track.name in search_label['item_id'].split('+')[-1]:
+                        label = search_label
+                        tracking_number = label['tracking_number']
+                        track.write({'serial': tracking_number})
+                        break
+            labels.append({'tracking_id': track and track.id or False,
+                           'file': label['binary'].decode('base64'),
+                           'file_type': label['file_type'],
+                           'name': tracking_number,
+                           })
+
+        return labels
+
+    def generate_shipping_labels(self, cr, uid, ids, context=None):
+        """ Add label generation for Postlogistics """
         if isinstance(ids, (long, int)):
             ids = [ids]
         assert len(ids) == 1
@@ -59,8 +82,8 @@ class stock_picking_out(orm.Model):
         if picking.carrier_id.type == 'postlogistics':
             return self._generate_postlogistics_label(cr, uid, picking,
                                                       context=context)
-        return super(stock_picking_out, self
-                     ).generate_single_label(cr, uid, ids, context=context)
+        return super(stock_picking, self
+                     ).generate_pack_labels(cr, uid, ids, context=context)
 
 
 class ShippingLabel(orm.Model):
