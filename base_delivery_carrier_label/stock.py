@@ -71,13 +71,17 @@ class stock_picking_out(orm.Model):
         """
         return NotImplementedError
 
-    def generate_single_label(self, cr, uid, ids, context=None):
-        """Generate a the single label by default
+    def generate_pack_labels(self, cr, uid, ids, context=None):
+        """Generate a label by default
 
-        :return: (file_binary, file_type)
+        This method can be inherited to create specific labels
+        a list of label must be return as we can have multiple
+        stock.tracking for a single picking
+
+        :return: list of {tracking_id, file, file_type}
 
         """
-        return self.generate_default_label(cr, uid, ids, context=None)
+        return [self.generate_default_label(cr, uid, ids, context=None)]
 
     def action_generate_carrier_label(self, cr, uid, ids, context=None):
         shipping_label_obj = self.pool.get('shipping.label')
@@ -85,20 +89,22 @@ class stock_picking_out(orm.Model):
         pickings = self.browse(cr, uid, ids, context=context)
 
         for pick in pickings:
-            label, file_type = pick.generate_single_label()
-            data = {
-                'name': pick.name,
-                'res_id': pick.id,
-                'res_model': 'stock.picking.out',
-                'datas': label.encode('base64'),
-                'file_type': file_type,
-            }
-            context_attachment = context.copy()
-            # remove default_type setted for stock_picking
-            # as it would try to define default value of attachement
-            if 'default_type' in context_attachment:
-                del context_attachment['default_type']
-            shipping_label_obj.create(cr, uid, data, context=context_attachment)
+            pack_labels = pick.generate_pack_labels()
+            for label in pack_labels:
+                data = {
+                    'name': label['name'],
+                    'res_id': pick.id,
+                    'res_model': 'stock.picking.out',
+                    'datas': label['file'].encode('base64'),
+                    'file_type': label['file_type'],
+                    'tracking_id': label['tracking_id'],
+                }
+                context_attachment = context.copy()
+                # remove default_type setted for stock_picking
+                # as it would try to define default value of attachement
+                if 'default_type' in context_attachment:
+                    del context_attachment['default_type']
+                shipping_label_obj.create(cr, uid, data, context=context_attachment)
         return True
 
     def carrier_id_change(self, cr, uid, ids, carrier_id, context=None):
@@ -160,7 +166,8 @@ class ShippingLabel(orm.Model):
         return [('pdf', 'PDF')]
 
     _columns = {
-        'file_type': fields.selection(_get_file_type_selection, 'File type')
+        'file_type': fields.selection(_get_file_type_selection, 'File type'),
+        'tracking_id': fields.many2one('stock.tracking', 'Pack'),
     }
 
     _defaults = {
