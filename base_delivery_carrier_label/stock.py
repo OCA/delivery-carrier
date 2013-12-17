@@ -26,17 +26,7 @@ from openerp.tools.translate import _
 
 
 class stock_picking(orm.Model):
-    """ Define m2m field due to inheritance to have it in stock.picking.out """
     _inherit = 'stock.picking'
-
-    _columns = {
-        'option_ids': fields.many2many('delivery.carrier.option',
-                                       string='Options'),
-    }
-
-
-class stock_picking_out(orm.Model):
-    _inherit = 'stock.picking.out'
 
     def _get_carrier_type_selection(self, cr, uid, context=None):
         carrier_obj = self.pool.get('delivery.carrier')
@@ -101,7 +91,7 @@ class stock_picking_out(orm.Model):
                 data = {
                     'name': label['name'],
                     'res_id': pick.id,
-                    'res_model': 'stock.picking.out',
+                    'res_model': self._name,
                     'datas': label['file'].encode('base64'),
                     'file_type': label['file_type'],
                 }
