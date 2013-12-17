@@ -18,6 +18,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+from pdf_utils import assemble_pdf
 from openerp.osv import orm
 
 
@@ -25,16 +26,37 @@ class stock_picking(orm.Model):
     _inherit = 'stock.picking'
 
     def get_pdf_label(self, cr, uid, ids, context=None):
+        """ Return a single pdf of labels for a stock picking
+
+        If more than one label is found for a picking we merge one label per
+        tracking in a single pdf
+
+        :return: a list of pdf file data
+        """
         res = dict.fromkeys(ids, False)
         label_obj = self.pool.get('shipping.label')
         for picking_id in ids:
             label_ids = label_obj.search(cr, uid,
                                          [('file_type', '=', 'pdf'),
                                           ('res_id', '=', picking_id)],
-                                         limit=1, order='create_date',
+                                         order='create_date',
                                          context=context)
             if label_ids:
-                label = label_obj.browse(cr, uid, label_ids[0],
-                                         context=context)
-                res[picking_id] = label.datas
+                all_picking_labels = label_obj.browse(cr, uid,
+                                                      label_ids,
+                                                      context=context)
+
+                tracking_ids = [l.tracking_id for l in all_picking_labels]
+
+                # filter for newest created label for each trackings
+                label_datas = []
+                tracking_ids = set(tracking_ids)
+                while tracking_ids:
+                    tracking_id = tracking_ids.pop()
+                    for label in all_picking_labels:
+                        if label.tracking_id.id == tracking_id.id:
+                            label_datas.append(label.datas.decode('base64'))
+
+                label_pdf = assemble_pdf(label_datas)
+                res[picking_id] = label_pdf.encode('base64')
         return res

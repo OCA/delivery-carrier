@@ -18,36 +18,10 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from StringIO import StringIO
-from PyPDF2 import PdfFileReader, PdfFileWriter
+from ..pdf_utils import assemble_pdf
 
 from openerp.osv import orm, fields
 from tools.translate import _
-
-
-def assemble_pdf(pdf_list):
-    """
-    Assemble a list of pdf
-    """
-    # Even though we are using PyPDF2 we can't use PdfFileMerger
-    # as this issue still exists in mostly used wkhtmltohpdf reports version
-    # http://code.google.com/p/wkhtmltopdf/issues/detail?id=635
-    #merger = PdfFileMerger()
-    #merger.append(fileobj=StringIO(invoice_pdf))
-    #merger.append(fileobj=StringIO(bvr_pdf))
-
-    #with tempfile.TemporaryFile() as merged_pdf:
-        #merger.write(merged_pdf)
-        #return merged_pdf.read(), 'pdf'
-
-    output = PdfFileWriter()
-    for pdf in pdf_list:
-        reader = PdfFileReader(StringIO(pdf))
-        for page in range(reader.getNumPages()):
-            output.addPage(reader.getPage(page))
-    s = StringIO()
-    output.write(s)
-    return s.getvalue()
 
 
 class DeliveryCarrierLabelGenerate(orm.TransientModel):
