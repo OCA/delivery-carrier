@@ -78,7 +78,12 @@ class stock_picking_out(orm.Model):
         a list of label must be return as we can have multiple
         stock.tracking for a single picking
 
-        :return: list of {tracking_id, file, file_type}
+        :return: list of dict containing
+           file: file as string
+           file_type: string of file type like 'PDF'
+           (optional)
+           tracking_id: tracking_id if picking has packs and label generator
+                        use packs
 
         """
         return [self.generate_default_label(cr, uid, ids, context=None)]
@@ -97,8 +102,9 @@ class stock_picking_out(orm.Model):
                     'res_model': 'stock.picking.out',
                     'datas': label['file'].encode('base64'),
                     'file_type': label['file_type'],
-                    'tracking_id': label['tracking_id'],
                 }
+                if label.get('tracking_id'):
+                    data['tracking_id'] = label['tracking_id']
                 context_attachment = context.copy()
                 # remove default_type setted for stock_picking
                 # as it would try to define default value of attachement
