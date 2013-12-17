@@ -73,7 +73,7 @@ class stock_picking_out(orm.Model):
 
         return labels
 
-    def generate_pack_labels(self, cr, uid, ids, context=None):
+    def generate_shipping_labels(self, cr, uid, ids, context=None):
         """ Add label generation for Postlogistics """
         if isinstance(ids, (long, int)):
             ids = [ids]
