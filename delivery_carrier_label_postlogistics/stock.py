@@ -23,8 +23,8 @@ from openerp.osv import orm, fields
 from postlogistics.web_service import PostlogisticsWebService
 
 
-class stock_picking_out(orm.Model):
-    _inherit = 'stock.picking.out'
+class stock_picking(orm.Model):
+    _inherit = 'stock.picking'
 
     def _generate_postlogistics_label(self, cr, uid, picking,
                                       webservice_class=None, context=None):
@@ -82,7 +82,7 @@ class stock_picking_out(orm.Model):
         if picking.carrier_id.type == 'postlogistics':
             return self._generate_postlogistics_label(cr, uid, picking,
                                                       context=context)
-        return super(stock_picking_out, self
+        return super(stock_picking, self
                      ).generate_pack_labels(cr, uid, ids, context=context)
 
 
