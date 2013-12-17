@@ -164,10 +164,6 @@ class PostlogisticsWebService(object):
             if partner.mobile:
                 recipient['Mobile'] = partner.mobile
 
-        # XXX
-        #if partner.POBox
-            #customer['POBox'] = partner.email
-
         return recipient
 
     def _prepare_customer(self, picking):
@@ -209,7 +205,7 @@ class PostlogisticsWebService(object):
         label_layout = self._get_single_option(picking, 'label_layout')
         if not label_layout:
             company = picking.company_id
-            label_layout = company.postlogistics_default_output_format.code
+            label_layout = company.postlogistics_default_label_layout.code
         return label_layout
 
     def _get_output_format(self, picking):
@@ -247,21 +243,25 @@ class PostlogisticsWebService(object):
 
     def _get_itemid(self, picking, pack_no):
         """ Allowed characters are alphanumeric plus `+`, `-` and `_`
-        Last `+` separates picking name and package number
+        Last `+` separates picking name and package number (if any)
 
         :return string: itemid
 
         """
         name = _compile_itemid.sub('', picking.name)
-        return name + '+' + str(pack_no)
+        codes = [name, pack_no]
+        return "+".join(c for c in codes if c)
 
     def _prepare_item_list(self, picking, recipient, attributes):
         """ Return a list of item made from the pickings """
         item_list = []
-        for pack_no in range(picking.number_of_packages or 1):
-            item_id = self._get_itemid(picking, pack_no)
+        # A label will be generated per pack and if there is no pack only one
+        # label will be generated
+        packs = set([line.tracking_id.name for line in picking.move_lines])
+        for pack_no in packs:
+            itemid = self._get_itemid(picking, pack_no)
             item = {
-                'ItemID': item_id,
+                'ItemID': itemid,
                 'Recipient': recipient,
                 'Attributes': attributes,
             }
@@ -292,7 +292,7 @@ class PostlogisticsWebService(object):
             'LabelLayout': label_layout,
             'PrintAddresses': 'RecipientAndCustomer',
             'ImageFileType': output_format,
-            'ImageResolution': image_resolution,  #XXX
+            'ImageResolution': image_resolution,
             'PrintPreview': False,
             }
         license = self._get_license(picking)
