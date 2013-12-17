@@ -37,12 +37,10 @@
         <field name="state" position="before">
           <button name="action_generate_carrier_label" states="assigned,confirmed,draft" string="Create Return Label" type="object"/>
         </field>
-        <field name="carrier_id" position="attributes">
-          <attribute name="on_change">carrier_id_change(carrier_id, context)</attribute>
-        </field>
         <notebook position='inside'>
           <page name="carrier" string="Carrier Info">
             <separator string="Delivery"/>
+            <field name="carrier_id" on_change="carrier_id_change(carrier_id, context)"/>
             <field name="carrier_type"/>
             <field name="carrier_code"/>
             <separator string="Options"/>

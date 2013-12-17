@@ -88,10 +88,16 @@ class stock_picking(orm.Model):
         for pick in pickings:
             shipping_labels = pick.generate_shipping_labels()
             for label in shipping_labels:
+                # map types with models
+                types = {'in': 'stock.picking.in',
+                         'out': 'stock.picking.out',
+                         'internal': 'stock.picking',
+                         }
+                res_model = types[pick.type]
                 data = {
                     'name': label['name'],
                     'res_id': pick.id,
-                    'res_model': self._name,
+                    'res_model': res_model,
                     'datas': label['file'].encode('base64'),
                     'file_type': label['file_type'],
                 }
@@ -152,6 +158,101 @@ class stock_picking(orm.Model):
                                                        context=context)
                 res.update(default_value)
         return res
+
+
+class stock_picking_in(orm.Model):
+    """ Add what isn't inherited from stock.picking """
+    _inherit = 'stock.picking.in'
+
+    def _get_carrier_type_selection(self, cr, uid, context=None):
+        carrier_obj = self.pool.get('delivery.carrier')
+        return carrier_obj._get_carrier_type_selection(cr, uid, context=context)
+
+    _columns = {
+        'carrier_id': fields.many2one(
+            'delivery.carrier', 'Carrier',
+            states={'done': [('readonly', True)]}),
+        'carrier_type': fields.related(
+            'carrier_id', 'type',
+            string='Carrier type',
+            readonly=True,
+            type='selection',
+            selection=_get_carrier_type_selection,
+            help="Carrier type ('group')"),
+        'carrier_code': fields.related(
+            'carrier_id', 'code',
+            string='Delivery Method Code',
+            readonly=True,
+            type='char',
+            help="Delivery Method Code (from carrier)"),
+        'option_ids': fields.many2many('delivery.carrier.option',
+                                       string='Options'),
+    }
+
+    def action_generate_carrier_label(self, cr, uid, ids, context=None):
+        picking_obj = self.pool.get('stock.picking')
+        return picking_obj.action_generate_carrier_label(cr, uid, ids,
+                                                         context=context)
+
+    def carrier_id_change(self, cr, uid, ids, carrier_id, context=None):
+        """ Call stock.picking carrier_id_change """
+        picking_obj = self.pool.get('stock.picking')
+        return picking_obj.carrier_id_change(cr, uid, ids,
+                                             carrier_id, context=context)
+
+    def option_ids_change(self, cr, uid, ids,
+                          option_ids, carrier_id, context=None):
+        """ Call stock.picking option_ids_change """
+        picking_obj = self.pool.get('stock.picking')
+        return picking_obj.option_ids_change(cr, uid, ids,
+                                             option_ids, carrier_id,
+                                             context=context)
+
+
+class stock_picking_out(orm.Model):
+    """ Add what isn't inherited from stock.picking """
+    _inherit = 'stock.picking.out'
+
+    def _get_carrier_type_selection(self, cr, uid, context=None):
+        carrier_obj = self.pool.get('delivery.carrier')
+        return carrier_obj._get_carrier_type_selection(cr, uid, context=context)
+
+    _columns = {
+        'carrier_id': fields.many2one(
+            'delivery.carrier', 'Carrier',
+            states={'done': [('readonly', True)]}),
+        'carrier_type': fields.related(
+            'carrier_id', 'type',
+            string='Carrier type',
+            readonly=True,
+            type='selection',
+            selection=_get_carrier_type_selection,
+            help="Carrier type ('group')"),
+        'carrier_code': fields.related(
+            'carrier_id', 'code',
+            string='Delivery Method Code',
+            readonly=True,
+            type='char',
+            help="Delivery Method Code (from carrier)"),
+        'option_ids': fields.many2many('delivery.carrier.option',
+                                       string='Options'),
+    }
+
+    def action_generate_carrier_label(self, cr, uid, ids, context=None):
+        picking_obj = self.pool.get('stock.picking')
+        return picking_obj.action_generate_carrier_label(cr, uid, ids,
+                                                         context=context)
+
+    def carrier_id_change(self, cr, uid, ids, carrier_id, context=None):
+        """ Inherit this method in your module """
+        picking_obj = self.pool.get('stock.picking')
+        return picking_obj.carrier_id_change(cr, uid, ids, carrier_id, context=context)
+
+    def option_ids_change(self, cr, uid, ids, option_ids, carrier_id, context=None):
+        picking_obj = self.pool.get('stock.picking')
+        return picking_obj.option_ids_change(cr, uid, ids,
+                                             option_ids, carrier_id,
+                                             context=context)
 
 
 class ShippingLabel(orm.Model):
