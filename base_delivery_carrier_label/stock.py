@@ -71,19 +71,21 @@ class stock_picking_out(orm.Model):
         """
         return NotImplementedError
 
-    def generate_pack_labels(self, cr, uid, ids, context=None):
-        """Generate a label by default
+    def generate_shipping_labels(self, cr, uid, ids, context=None):
+        """Generate a shipping label by default
 
-        This method can be inherited to create specific labels
+        This method can be inherited to create specific shipping labels
         a list of label must be return as we can have multiple
-        stock.tracking for a single picking
+        stock.tracking for a single picking representing packs
 
         :return: list of dict containing
+           name: name to give to the attachement
            file: file as string
            file_type: string of file type like 'PDF'
            (optional)
-           tracking_id: tracking_id if picking has packs and label generator
-                        use packs
+           tracking_id: tracking_id if picking lines have tracking_id and
+                        if label generator creates shipping label per
+                        pack
 
         """
         return [self.generate_default_label(cr, uid, ids, context=None)]
@@ -94,8 +96,8 @@ class stock_picking_out(orm.Model):
         pickings = self.browse(cr, uid, ids, context=context)
 
         for pick in pickings:
-            pack_labels = pick.generate_pack_labels()
-            for label in pack_labels:
+            shipping_labels = pick.generate_shipping_labels()
+            for label in shipping_labels:
                 data = {
                     'name': label['name'],
                     'res_id': pick.id,
