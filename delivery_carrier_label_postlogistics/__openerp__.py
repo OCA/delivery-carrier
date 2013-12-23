@@ -98,6 +98,7 @@ Contributors
           'delivery_data.xml',
           'delivery_view.xml',
           'res_config_view.xml',
+          'security/ir.model.access.csv',
           ],
  'tests': [],
  'installable': True,
