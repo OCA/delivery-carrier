@@ -83,7 +83,7 @@ class stock_picking(orm.Model):
             return self._generate_postlogistics_label(cr, uid, picking,
                                                       context=context)
         return super(stock_picking, self
-                     ).generate_pack_labels(cr, uid, ids, context=context)
+                     ).generate_shipping_labels(cr, uid, ids, context=context)
 
 
 class ShippingLabel(orm.Model):
