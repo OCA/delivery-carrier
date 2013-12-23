@@ -92,12 +92,12 @@ Contributors
 * *Better License management*
 """,
  'website': 'http://www.camptocamp.com/',
- 'data': [
-     'res_partner_data.xml',
-     'delivery_data.xml',
-     'delivery_view.xml',
-     'res_config_view.xml',
-     ],
+ 'data': ['res_partner_data.xml',
+          'delivery_data.xml',
+          'delivery_view.xml',
+          'res_config_view.xml',
+          'security/ir.model.access.csv',
+          ],
  'tests': [],
  'installable': True,
  'auto_install': False,
