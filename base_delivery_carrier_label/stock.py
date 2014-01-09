@@ -59,7 +59,9 @@ class stock_picking(orm.Model):
         :return: (file_binary, file_type)
 
         """
-        return NotImplementedError
+        raise orm.except_orm(
+                'Error',
+                'No label is configured for selected delivery method.')
 
     def generate_shipping_labels(self, cr, uid, ids, context=None):
         """Generate a shipping label by default
@@ -158,6 +160,25 @@ class stock_picking(orm.Model):
                                                        context=context)
                 res.update(default_value)
         return res
+
+    def create(self, cr, uid, values, context=None):
+        """ Trigger carrier_id_change on create
+
+        To ensure options are setted on the basis of carrier_id copied from
+        Sale order or defined by default.
+
+        """
+        carrier_id = values.get('carrier_id')
+        if carrier_id:
+            picking_obj = self.pool.get('stock.picking')
+            res = picking_obj.carrier_id_change(cr, uid, [], carrier_id,
+                                                context=context)
+            option_ids = res.get('value', {}).get('option_ids')
+            if option_ids:
+                values.update(option_ids=[(6, 0, option_ids)])
+        picking_id = super(stock_picking, self
+                    ).create(cr, uid, values, context=context)
+        return picking_id
 
 
 class stock_picking_in(orm.Model):
