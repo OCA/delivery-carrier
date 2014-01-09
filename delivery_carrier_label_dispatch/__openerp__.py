@@ -40,6 +40,7 @@ Contributors
 """,
  'website': 'http://www.camptocamp.com/',
  'data': [
+     'picking_dispatch_view.xml',
      'wizard/generate_labels_view.xml',
      ],
  'tests': [],
