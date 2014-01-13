@@ -42,6 +42,11 @@ class PostlogisticsConfigSettings(orm.TransientModel):
         'password': fields.related(
             'company_id', 'postlogistics_password',
             string='Password', type='char'),
+        'license_ids': fields.related(
+            'company_id', 'postlogistics_license_ids',
+            string='Frankling Licenses',
+            type='one2many',
+            relation='postlogistics.license'),
         'license_less_1kg': fields.related(
             'company_id', 'postlogistics_license_less_1kg',
             string='License less than 1kg', type='char'),
@@ -115,15 +120,14 @@ class PostlogisticsConfigSettings(orm.TransientModel):
         company = self.pool.get('res.company'
                                 ).browse(cr, uid, company_id, context=context)
 
+        license_ids = [l.id for l in company.postlogistics_license_ids]
         label_layout = company.postlogistics_default_label_layout.id or False
         output_format = company.postlogistics_default_output_format.id or False
         resolution = company.postlogistics_default_resolution.id or False
         values = {
             'username': company.postlogistics_username,
             'password': company.postlogistics_password,
-            'license_less_1kg': company.postlogistics_license_less_1kg,
-            'license_more_1kg': company.postlogistics_license_more_1kg,
-            'license_vinolog': company.postlogistics_license_vinolog,
+            'license_ids': license_ids,
             'logo': company.postlogistics_logo,
             'office': company.postlogistics_office,
             'default_label_layout': label_layout,
@@ -411,4 +415,66 @@ class PostlogisticsConfigSettings(orm.TransientModel):
                 if postlogistics_lang == 'en':
                     continue
                 self._update_service_groups(cr, uid, ids, web_service, company, context=ctx)
+        return True
+
+    def _get_allowed_service_group_codes(self, web_service, company,
+                                         license, context=None):
+        """ Get a list of allowed service group codes"""
+        if context is None:
+            context = {}
+
+        lang = context.get('lang', 'en')
+        res = web_service.read_allowed_services_by_franking_license(
+            license.number, company, lang)
+        if 'errors' in res:
+            errors = '\n'.join(res['errors'])
+            error_message = (_('Could not retrieve allowed Postlogistics '
+                               'service groups for the %s licence:\n%s')
+                               % (license.name, errors))
+            raise orm.except_orm(_('Error'), error_message)
+
+        if not res['value']:
+            return []
+
+        if hasattr(res['value'], 'Errors') and res['value'].Errors:
+            for error in res['value'].Errors.Error:
+                message = '[%s] %s' % (error.Code, error.Message)
+            raise orm.except_orm('Error', message)
+
+        service_group_codes = []
+        for group in res['value'].ServiceGroups:
+            service_group_codes.append(group.ServiceGroup.ServiceGroupID)
+
+        return service_group_codes
+
+    def assign_licenses_to_service_groups(self, cr, uid, ids, context=None):
+        """ Check all licenses to assign it to PostLogistics service groups """
+
+        if context is None:
+            context = {}
+
+        user_obj = self.pool.get('res.users')
+        service_group_obj = self.pool.get('postlogistics.service.group')
+        for config in self.browse(cr, uid, ids, context=context):
+            company = config.company_id
+            web_service = PostlogisticsWebService(company)
+
+            relations = {}
+            for license in company.postlogistics_license_ids:
+                service_groups = self._get_allowed_service_group_codes(
+                    web_service, company, license, context=context)
+                group_ids = service_group_obj.search(
+                        cr, uid, [('group_extid', 'in', service_groups)],
+                        context=context)
+                for group_id in group_ids:
+                    if group_id in relations:
+                        relations[group_id].append(license.id)
+                    else:
+                        relations[group_id] = [license.id]
+            for group_id, license_ids in relations.iteritems():
+                vals = {'postlogistics_license_ids': [(6, 0, license_ids)]}
+                service_group_obj.write(cr, uid, group_id, vals,
+                                        context=context)
+
+
         return True

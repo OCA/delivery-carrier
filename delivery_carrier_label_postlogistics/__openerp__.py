@@ -71,6 +71,13 @@ Now you can create a carrier method for PostLogistics WebService:
 .. _PostLogistics BarCodes WebService: http://www.poste.ch/post-startseite/post-geschaeftskunden/post-logistik/post-e-log/post-e-log-webservices.htm
 .. _Swiss Post E-logistics: http://www.poste.ch/en/post-startseite/post-geschaeftskunden/post-logistik/post-e-log.htm
 
+
+Recommended modules
+-------------------
+
+* PostLogistics labels - logo per Shop
+  If you have multiple shops configure one logo per shop
+
 Technical references
 --------------------
 
@@ -78,18 +85,11 @@ Technical references
 
 .. _"Barcode" web service documentation: http://www.poste.ch/post-barcode-cug.htm
 
+
 Contributors
 ------------
 
 * Yannick Vaucher <yannick.vaucher@camptocamp.com>
-
-----
-
-*TODO*:
-
-* *Add onchange to improve carrier method creation*
-* *Identify attachement as label*
-* *Better License management*
 """,
  'website': 'http://www.camptocamp.com/',
  'data': ['res_partner_data.xml',
