@@ -112,9 +112,11 @@ class DeliveryCarrier(orm.Model):
         res.append(('postlogistics', 'Postlogistics'))
         return res
 
-    def _get_basic_service_id(self, cr, uid, ids, field_names, arg, context=None):
-        """ Search in all options for the PostLogistics basic service if set """
-        res = dict.fromkeys(ids, False)
+    def _get_basic_service_ids(self, cr, uid, ids, field_names, arg, context=None):
+        """ Search in all options for the PostLogistics basic services if set """
+        res = {}
+        for carrier_id in ids:
+            res[carrier_id] = []
         ir_model_data_obj = self.pool.get('ir.model.data')
 
         xmlid = 'delivery_carrier_label_postlogistics', 'postlogistics'
@@ -130,7 +132,7 @@ class DeliveryCarrier(orm.Model):
                           if opt.postlogistics_type == 'basic']
             if not option_ids:
                 continue
-            res[carrier.id] = option_ids[0]
+            res[carrier.id] = option_ids
         return res
 
     def _get_allowed_option_ids(self, cr, uid, ids, field_names, arg, context=None):
@@ -158,19 +160,18 @@ class DeliveryCarrier(orm.Model):
                 continue
             service_group_id = carrier.postlogistics_service_group_id.id
             if service_group_id:
-                # if there are no basic option set. Show basic options
-                basic_service_id = carrier.postlogistics_basic_service_id.id
-                if not basic_service_id:
-                    service_ids = option_template_obj.search(
-                        cr, uid,
-                        [('postlogistics_service_group_id' ,'=', service_group_id)],
-                        context=context)
-                else:
-                    service_ids = option_template_obj.search(
-                        cr, uid,
-                        [('postlogistics_basic_service_ids' ,'in', basic_service_id)],
-                        context=context)
+                basic_service_ids = [s.id for s in carrier.postlogistics_basic_service_ids]
+                service_ids = option_template_obj.search(
+                    cr, uid,
+                    [('postlogistics_service_group_id' ,'=', service_group_id)],
+                    context=context)
                 allowed_ids.extend(service_ids)
+                if basic_service_ids:
+                    related_service_ids = option_template_obj.search(
+                        cr, uid,
+                        [('postlogistics_basic_service_ids' ,'in', basic_service_ids)],
+                        context=context)
+                    allowed_ids.extend(related_service_ids)
 
             # Allows to set multiple optional single option in order to
             # let the user select them
@@ -198,8 +199,8 @@ class DeliveryCarrier(orm.Model):
             string='PostLogistics Service Group',
             help="Service group defines the available options for "
                  "this delivery method."),
-        'postlogistics_basic_service_id': fields.function(
-            _get_basic_service_id, type='many2one',
+        'postlogistics_basic_service_ids': fields.function(
+            _get_basic_service_ids, type='one2many',
             relation='delivery.carrier.template.option',
             string='PostLogistics Service Group',
             help="Basic Service defines the available "
