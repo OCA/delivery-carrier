@@ -41,16 +41,13 @@
           <group>
             <div>
               <div>
-                <label for="license_less_1kg"/>
-                <field name="license_less_1kg" class="oe_inline"/>
-              </div>
-              <div>
-                <label for="license_more_1kg"/>
-                <field name="license_more_1kg" class="oe_inline"/>
-              </div>
-              <div>
-                <label for="license_vinolog"/>
-                <field name="license_vinolog" class="oe_inline"/>
+                <field name="license_ids" class="oe_inline">
+                  <tree editable="bottom">
+                    <field name="name"/>
+                    <field name="number"/>
+                    <field name="sequence" invisible="True"/>
+                  </tree>
+                </field>
               </div>
             </div>
           </group>
@@ -88,6 +85,7 @@
             <div>
               <div>
                 <button string="Update PostLogistics Services" type="object" name="update_postlogistics_options" class="oe_highlight"/>
+                <button string="Assign PostLogistics Licenses to service groups" type="object" name="assign_licenses_to_service_groups" class="oe_highlight"/>
               </div>
             </div>
           </group>
