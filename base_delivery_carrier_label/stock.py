@@ -60,8 +60,8 @@ class stock_picking(orm.Model):
 
         """
         raise orm.except_orm(
-                'Not Implemented',
-                'Ensure you installed a module implemening default labels')
+                'Error',
+                'No label is configured for selected delivery method.')
 
     def generate_shipping_labels(self, cr, uid, ids, context=None):
         """Generate a shipping label by default
