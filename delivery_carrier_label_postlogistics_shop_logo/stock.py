@@ -23,13 +23,13 @@ from openerp.osv import orm
 from postlogistics.web_service import PostlogisticsWebServiceShop
 
 
-class stock_picking_out(orm.Model):
-    _inherit = 'stock.picking.out'
+class stock_picking(orm.Model):
+    _inherit = 'stock.picking'
 
     def _generate_postlogistics_label(self, cr, uid, picking,
                                       webservice_class=None, context=None):
         """ Generate post label using shop label """
-        return super(stock_picking_out, self)._generate_postlogistics_label(
+        return super(stock_picking, self)._generate_postlogistics_label(
             cr, uid, picking,
             webservice_class=PostlogisticsWebServiceShop,
             context=context)
