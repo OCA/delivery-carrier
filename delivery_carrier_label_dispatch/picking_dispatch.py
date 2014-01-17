@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Author: Sébastien BEAU <sebastien.beau@akretion.com>
-#    Copyright (C) 2012-TODAY Akretion <http://www.akretion.com>.
+#    Author: Yannick Vaucher
+#    Copyright 2013 Camptocamp SA
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
