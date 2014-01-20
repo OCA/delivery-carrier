@@ -49,6 +49,7 @@
       <field name="arch" type="xml">
         <field name="type" position="after">
           <field name="postlogistics_service_group_id" attrs="{'invisible': [('type', '!=', 'postlogistics')], 'required': [('type', '=', 'postlogistics')]}"/>
+          <field name="postlogistics_license_id" attrs="{'invisible': [('type', '!=', 'postlogistics')]}"/>
           <field name="allowed_option_ids" invisible="1"/>
         </field>
         <field name="available_option_ids" position="attributes">
