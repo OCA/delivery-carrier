@@ -229,7 +229,7 @@ class PostlogisticsWebService(object):
         depending on service group. This needs to have associated 
         licenses to groups.
 
-        :return: license code
+        :return: license number
         """
         license = picking.carrier_id.postlogistics_license_id
         if not license:
@@ -242,7 +242,7 @@ class PostlogisticsWebService(object):
                 return None
             license = [l for l in company_licenses
                        if l.id in group_license_ids][0]
-        return license.code
+        return license.number
 
     def _prepare_attributes(self, picking):
         services = [option.code.split(',') for option in picking.option_ids
