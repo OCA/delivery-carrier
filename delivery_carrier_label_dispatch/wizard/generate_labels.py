@@ -40,7 +40,6 @@ class DeliveryCarrierLabelGenerate(orm.TransientModel):
     _columns = {
         'dispatch_ids': fields.many2many('picking.dispatch',
                                          string='Picking Dispatch'),
-        'label_pdf_file': fields.binary('Labels file'),
     }
 
     _defaults = {
@@ -52,39 +51,42 @@ class DeliveryCarrierLabelGenerate(orm.TransientModel):
         Call the creation of the delivery carrier label
         of the missing labels and get the existing ones
         Then merge all of them in a single PDF
+
         """
         this = self.browse(cr, uid, ids, context=context)[0]
         if not this.dispatch_ids:
             raise orm.except_orm(_('Error'), _('No picking dispatch selected'))
 
         picking_out_obj = self.pool.get('stock.picking.out')
+        attachment_obj = self.pool.get('ir.attachment')
 
-        # flatten all picking in one list to keep the order in case
-        # there are multiple dispatch or if pickings
-        # have been ordered to ease packaging
-        pickings = [(pick, pick.get_pdf_label()[pick.id])
-                    for dispatch in this.dispatch_ids
-                    for pick in dispatch.related_picking_ids]
-        # get picking ids for which we want to generate pdf label
-        picking_ids = [pick.id for pick, pdf in pickings
-                       if not pdf]
-        # generate missing picking labels
-        picking_out_obj.action_generate_carrier_label(cr, uid,
-                                                      picking_ids,
-                                                      context=context)
+        for dispatch in this.dispatch_ids:
+            # flatten all picking in one list to keep the order in case
+            # if pickings have been ordered to ease packaging
+            pickings = [(pick, pick.get_pdf_label()[pick.id])
+                        for pick in dispatch.related_picking_ids]
+            # get picking ids for which we want to generate pdf label
+            picking_ids = [pick.id for pick, pdf in pickings
+                           if not pdf]
+            # generate missing picking labels
+            picking_out_obj.action_generate_carrier_label(cr, uid,
+                                                          picking_ids,
+                                                          #file_type='pdf',
+                                                          context=context)
+            # Get all pdf files adding the newly generated ones
+            data_list = [pdf or pick.get_pdf_label()[pick.id]
+                         for pick, pdf in pickings]
+            pdf_list = [data.decode('base64') for data in data_list if data]
 
-        # Get all pdf files adding the newly generated ones
-        data_list = [pdf or pick.get_pdf_label()[pick.id]
-                     for pick, pdf in pickings]
-        pdf_list = [data.decode('base64') for data in data_list if data]
-        pdf_file = assemble_pdf(pdf_list)
-        this.write({'label_pdf_file': pdf_file.encode('base64')})
+            pdf_file = assemble_pdf(pdf_list)
+            data = {
+                'name': dispatch.name,
+                'res_id': dispatch.id,
+                'res_model': 'picking.dispatch',
+                'datas': pdf_file.encode('base64'),
+            }
+            attachment_obj.create(cr, uid, data, context=context)
+
         return {
-            'type': 'ir.actions.act_window',
-            'res_model': 'delivery.carrier.label.generate',
-            'view_mode': 'form',
-            'view_type': 'form',
-            'res_id': this.id,
-            'views': [(False, 'form')],
-            'target': 'new',
+            'type': 'ir.actions.act_window_close',
         }

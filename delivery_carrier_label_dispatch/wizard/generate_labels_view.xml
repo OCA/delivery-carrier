@@ -7,13 +7,9 @@
       <field name="model">delivery.carrier.label.generate</field>
       <field name="arch" type="xml">
         <form string="Generate Carriers Labels" version="7.0">
-
           <group>
+            <label string="This wizard creates an attachement on each selected dispatch containing picking labels"/>
             <field name="dispatch_ids"/>
-          </group>
-          <separator string="Labels"/>
-          <group>
-            <field name="label_pdf_file" filename="picking_labels.pdf"/>
           </group>
           <footer>
             <button name="action_generate_labels" string="Generate Labels" type="object" icon="gtk-execute" class="oe_highlight"/>
