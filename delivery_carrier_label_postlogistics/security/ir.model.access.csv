@@ -1,3 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_postlogistics_service_group_salesman,postlogistics.service.group.salesman,model_postlogistics_service_group,base.group_sale_salesman,1,0,0,0
 access_postlogistics_service_group_manager,postlogistics.service.group.manager,model_postlogistics_service_group,base.group_sale_manager,1,1,1,1
+access_postlogistics_license_salesman,postlogistics.license.salesman,model_postlogistics_license,base.group_sale_salesman,1,0,0,0
+access_postlogistics_license_manager,postlogistics.license.manager,model_postlogistics_license,base.group_sale_manager,1,1,1,1
