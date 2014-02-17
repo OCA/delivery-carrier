@@ -6,11 +6,11 @@
       id="delivery.shipping_label_webkit"
       model="stock.picking"
       name="delivery.shipping.label.webkit"
-      file="delivery_carrier_label_webkit/report/template/shipping_label.mako"
+      file="delivery_carrier_label_default_webkit/report/template/shipping_label.mako"
       string="Shipping Label"
       attachment_use="1"
       multi="True"
-      webkit_header="base_headers_webkit.base_reports_portrait_header"
+      webkit_header="False"
       report_type="webkit"/>
   </data>
 </openerp>

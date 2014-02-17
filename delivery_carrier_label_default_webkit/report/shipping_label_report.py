@@ -33,6 +33,6 @@ class ShippingLabelReport(report_sxw.rml_parse):
         })
 
 report_sxw.report_sxw('report.delivery.shipping_label',
-                    'stock.picking',
-                    'delivery_carrier_label_webkit/report/template/shipping_label.mako',
-                    parser=ShippingLabelReport)
+                      'stock.picking',
+                      'delivery_carrier_label_default_webkit/report/template/shipping_label.mako',
+                      parser=ShippingLabelReport)
