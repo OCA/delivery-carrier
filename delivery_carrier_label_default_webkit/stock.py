@@ -40,4 +40,10 @@ class stock_picking(orm.Model):
 
         data = {'ids': ids}
         report_parser = Service._services['report.%s' % report.report_name]
-        return report_parser.create_single_pdf(cr, uid, ids, data, report, context=context)[0]
+        pdf_report = report_parser.create_single_pdf(cr, uid, ids,
+                                                     data, report,
+                                                     context=context)[0]
+        return {'name': '%s.pdf' % report.report_name,
+                'file': pdf_report,
+                'file_type': 'pdf',
+                }
