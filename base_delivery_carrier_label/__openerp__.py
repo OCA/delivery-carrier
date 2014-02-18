@@ -52,6 +52,7 @@ Contributors
  'website': 'http://www.camptocamp.com/',
  'data': ['delivery_view.xml',
           'stock_view.xml',
+          'res_config_view.xml',
           'security/ir.model.access.csv',
           ],
  'tests': [],

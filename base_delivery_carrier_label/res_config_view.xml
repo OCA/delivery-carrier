@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+
+    <menuitem id="menu_carriers_config" name="Carriers"
+              parent="base.menu_config" sequence="20"/>
+
+  </data>
+</openerp>
