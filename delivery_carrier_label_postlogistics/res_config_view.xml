@@ -101,8 +101,9 @@
       <field name="target">inline</field>
     </record>
 
-    <menuitem id="menu_postlogistics_config" name="Postlogistics" parent="base.menu_config"
-        sequence="20" action="action_postlogistics_config"/>
+    <menuitem id="menu_postlogistics_config" name="Postlogistics"
+              parent="base_delivery_carrier_label.menu_carriers_config"
+              sequence="20" action="action_postlogistics_config"/>
 
   </data>
 </openerp>
