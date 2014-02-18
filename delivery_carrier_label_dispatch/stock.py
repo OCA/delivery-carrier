@@ -35,13 +35,15 @@ class stock_picking(orm.Model):
         """
         res = dict.fromkeys(ids, False)
         label_obj = self.pool.get('shipping.label')
-        for picking_id in ids:
+        for picking in self.browse(cr, uid, ids, context=context):
             label_ids = label_obj.search(cr, uid,
                                          [('file_type', '=', 'pdf'),
-                                          ('res_id', '=', picking_id)],
-                                         order='create_date',
+                                          ('res_id', '=', picking.id)],
+                                         order='create_date DESC',
                                          context=context)
             if label_ids:
+                pack_tracking_ids = set([line.tracking_id.id
+                                         for line in picking.move_lines])
                 all_picking_labels = label_obj.browse(cr, uid,
                                                       label_ids,
                                                       context=context)
@@ -49,14 +51,20 @@ class stock_picking(orm.Model):
                 tracking_ids = [l.tracking_id for l in all_picking_labels]
 
                 # filter for newest created label for each trackings
+                # and tracking existing in pack linked to a move line
+                # of current picking
                 label_datas = []
-                tracking_ids = set(tracking_ids)
+                tracking_register = []
                 while tracking_ids:
                     tracking_id = tracking_ids.pop()
                     for label in all_picking_labels:
-                        if label.tracking_id.id == tracking_id.id:
+                        if (label.tracking_id.id == tracking_id.id
+                                and (not tracking_id
+                                     or tracking_id.id in pack_tracking_ids)
+                                and tracking_id.id not in tracking_register):
                             label_datas.append(label.datas.decode('base64'))
+                            tracking_register.append(tracking_id.id)
 
                 label_pdf = assemble_pdf(label_datas)
-                res[picking_id] = label_pdf.encode('base64')
+                res[picking.id] = label_pdf.encode('base64')
         return res

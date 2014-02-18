@@ -40,10 +40,12 @@ class DeliveryCarrierLabelGenerate(orm.TransientModel):
     _columns = {
         'dispatch_ids': fields.many2many('picking.dispatch',
                                          string='Picking Dispatch'),
+        'generate_new_labels': fields.boolean('Generate new labels'),
     }
 
     _defaults = {
         'dispatch_ids': _get_dispatch_ids,
+        'generate_new_labels': False,
     }
 
     def action_generate_labels(self, cr, uid, ids, context=None):
@@ -63,11 +65,15 @@ class DeliveryCarrierLabelGenerate(orm.TransientModel):
         for dispatch in this.dispatch_ids:
             # flatten all picking in one list to keep the order in case
             # if pickings have been ordered to ease packaging
-            pickings = [(pick, pick.get_pdf_label()[pick.id])
-                        for pick in dispatch.related_picking_ids]
+            if this.generate_new_labels:
+                pickings = [(pick, False)
+                            for pick in dispatch.related_picking_ids]
+            else:
+                pickings = [(pick, pick.get_pdf_label()[pick.id])
+                            for pick in dispatch.related_picking_ids]
             # get picking ids for which we want to generate pdf label
             picking_ids = [pick.id for pick, pdf in pickings
-                           if not pdf]
+                           if not pdf or this.generate_new_labels]
             # generate missing picking labels
             picking_out_obj.action_generate_carrier_label(cr, uid,
                                                           picking_ids,

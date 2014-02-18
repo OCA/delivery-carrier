@@ -9,7 +9,10 @@
         <form string="Generate Carriers Labels" version="7.0">
           <group>
             <label string="This wizard creates an attachement on each selected dispatch containing picking labels"/>
+          </group>
+          <group>
             <field name="dispatch_ids"/>
+            <field name="generate_new_labels"/>
           </group>
           <footer>
             <button name="action_generate_labels" string="Generate Labels" type="object" icon="gtk-execute" class="oe_highlight"/>
