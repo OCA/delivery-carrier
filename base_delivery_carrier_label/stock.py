@@ -53,8 +53,13 @@ class stock_picking(orm.Model):
                                        string='Options'),
     }
 
-    def generate_default_label(self, cr, uid, ids, context=None):
+    def generate_default_label(self, cr, uid, ids, tracking_ids=None,
+                               context=None):
         """ Abstract method
+
+        :param tracking_ids: optional list of ``stock.tracking`` ids
+                             only packs in this list will have their label
+                             printed (all are generated when None)
 
         :return: (file_binary, file_type)
 
@@ -63,12 +68,17 @@ class stock_picking(orm.Model):
                 'Error',
                 'No label is configured for selected delivery method.')
 
-    def generate_shipping_labels(self, cr, uid, ids, context=None):
+    def generate_shipping_labels(self, cr, uid, ids, tracking_ids=None,
+                                 context=None):
         """Generate a shipping label by default
 
         This method can be inherited to create specific shipping labels
         a list of label must be return as we can have multiple
         stock.tracking for a single picking representing packs
+
+        :param tracking_ids: optional list of ``stock.tracking`` ids
+                             only packs in this list will have their label
+                             printed (all are generated when None)
 
         :return: list of dict containing
            name: name to give to the attachement
@@ -80,15 +90,18 @@ class stock_picking(orm.Model):
                         pack
 
         """
-        return [self.generate_default_label(cr, uid, ids, context=None)]
+        return [self.generate_default_label(cr, uid, ids,
+                                            tracking_ids=tracking_ids,
+                                            context=None)]
 
-    def action_generate_carrier_label(self, cr, uid, ids, context=None):
+    def action_generate_carrier_label(self, cr, uid, ids, tracking_ids=None,
+                                      context=None):
         shipping_label_obj = self.pool.get('shipping.label')
 
         pickings = self.browse(cr, uid, ids, context=context)
 
         for pick in pickings:
-            shipping_labels = pick.generate_shipping_labels()
+            shipping_labels = pick.generate_shipping_labels(tracking_ids=tracking_ids)
             for label in shipping_labels:
                 # map types with models
                 types = {'in': 'stock.picking.in',
@@ -210,10 +223,11 @@ class stock_picking_in(orm.Model):
                                        string='Options'),
     }
 
-    def action_generate_carrier_label(self, cr, uid, ids, context=None):
+    def action_generate_carrier_label(self, cr, uid, ids, tracking_ids=None,
+                                      context=None):
         picking_obj = self.pool.get('stock.picking')
-        return picking_obj.action_generate_carrier_label(cr, uid, ids,
-                                                         context=context)
+        return picking_obj.action_generate_carrier_label(
+            cr, uid, ids, tracking_ids=tracking_ids, context=context)
 
     def carrier_id_change(self, cr, uid, ids, carrier_id, context=None):
         """ Call stock.picking carrier_id_change """
@@ -259,10 +273,11 @@ class stock_picking_out(orm.Model):
                                        string='Options'),
     }
 
-    def action_generate_carrier_label(self, cr, uid, ids, context=None):
+    def action_generate_carrier_label(self, cr, uid, ids, tracking_ids=None,
+                                      context=None):
         picking_obj = self.pool.get('stock.picking')
-        return picking_obj.action_generate_carrier_label(cr, uid, ids,
-                                                         context=context)
+        return picking_obj.action_generate_carrier_label(
+            cr, uid, ids, tracking_ids=tracking_ids, context=context)
 
     def carrier_id_change(self, cr, uid, ids, carrier_id, context=None):
         """ Inherit this method in your module """
