@@ -27,11 +27,14 @@ class stock_picking(orm.Model):
     _inherit = 'stock.picking'
 
     def _generate_postlogistics_label(self, cr, uid, picking,
-                                      webservice_class=None, context=None):
+                                      webservice_class=None,
+                                      tracking_ids=None,
+                                      context=None):
         """ Generate post label using shop label """
         if webservice_class is None:
             webservice_class = PostlogisticsWebServiceShop
         return super(stock_picking, self)._generate_postlogistics_label(
             cr, uid, picking,
             webservice_class=webservice_class,
+            tracking_ids=tracking_ids,
             context=context)
