@@ -53,8 +53,13 @@ class stock_picking(orm.Model):
                                        string='Options'),
     }
 
-    def generate_default_label(self, cr, uid, ids, context=None):
+    def generate_default_label(self, cr, uid, ids, tracking_ids=None,
+                               context=None):
         """ Abstract method
+
+        :param tracking_ids: optional list of ``stock.tracking`` ids
+                             only packs in this list will have their label
+                             printed (all are generated when None)
 
         :return: (file_binary, file_type)
 
@@ -63,12 +68,17 @@ class stock_picking(orm.Model):
                 'Error',
                 'No label is configured for selected delivery method.')
 
-    def generate_shipping_labels(self, cr, uid, ids, context=None):
+    def generate_shipping_labels(self, cr, uid, ids, tracking_ids=None,
+                                 context=None):
         """Generate a shipping label by default
 
         This method can be inherited to create specific shipping labels
         a list of label must be return as we can have multiple
         stock.tracking for a single picking representing packs
+
+        :param tracking_ids: optional list of ``stock.tracking`` ids
+                             only packs in this list will have their label
+                             printed (all are generated when None)
 
         :return: list of dict containing
            name: name to give to the attachement
@@ -80,15 +90,23 @@ class stock_picking(orm.Model):
                         pack
 
         """
-        return [self.generate_default_label(cr, uid, ids, context=None)]
+        return [self.generate_default_label(cr, uid, ids,
+                                            tracking_ids=tracking_ids,
+                                            context=None)]
 
-    def action_generate_carrier_label(self, cr, uid, ids, context=None):
+    def generate_labels(self, cr, uid, ids, tracking_ids=None, context=None):
+        """ Generate the labels.
+
+        A list of tracking ids can be given, in that case it will generate
+        the labels only of these trackings.
+
+        """
         shipping_label_obj = self.pool.get('shipping.label')
 
         pickings = self.browse(cr, uid, ids, context=context)
 
         for pick in pickings:
-            shipping_labels = pick.generate_shipping_labels()
+            shipping_labels = pick.generate_shipping_labels(tracking_ids=tracking_ids)
             for label in shipping_labels:
                 # map types with models
                 types = {'in': 'stock.picking.in',
@@ -112,6 +130,14 @@ class stock_picking(orm.Model):
                     del context_attachment['default_type']
                 shipping_label_obj.create(cr, uid, data, context=context_attachment)
         return True
+
+    def action_generate_carrier_label(self, cr, uid, ids, context=None):
+        """ Method for the 'Generate Label' button.
+
+        It will generate the labels for all the trackings of the picking.
+
+        """
+        return self.generate_labels(cr, uid, ids, context=context)
 
     def carrier_id_change(self, cr, uid, ids, carrier_id, context=None):
         """ Inherit this method in your module """
@@ -161,6 +187,30 @@ class stock_picking(orm.Model):
                 res.update(default_value)
         return res
 
+    def _values_with_carrier_options(self, cr, uid, values, context=None):
+        values = values.copy()
+        carrier_id = values.get('carrier_id')
+        option_ids = values.get('option_ids')
+        if carrier_id and not option_ids:
+            res = self.carrier_id_change(cr, uid, [], carrier_id,
+                                         context=context)
+            option_ids = res.get('value', {}).get('option_ids')
+            if option_ids:
+                values.update(option_ids=[(6, 0, option_ids)])
+        return values
+
+    def write(self, cr, uid, ids, values, context=None):
+        """ Set the default options when the delivery method is changed.
+
+        So we are sure that the options are always in line with the
+        current delivery method.
+
+        """
+        values = self._values_with_carrier_options(cr, uid, values,
+                                                   context=context)
+        return super(stock_picking, self).\
+            write(cr, uid, ids, values, context=context)
+
     def create(self, cr, uid, values, context=None):
         """ Trigger carrier_id_change on create
 
@@ -168,14 +218,8 @@ class stock_picking(orm.Model):
         Sale order or defined by default.
 
         """
-        carrier_id = values.get('carrier_id')
-        if carrier_id:
-            picking_obj = self.pool.get('stock.picking')
-            res = picking_obj.carrier_id_change(cr, uid, [], carrier_id,
-                                                context=context)
-            option_ids = res.get('value', {}).get('option_ids')
-            if option_ids:
-                values.update(option_ids=[(6, 0, option_ids)])
+        values = self._values_with_carrier_options(cr, uid, values,
+                                                   context=context)
         picking_id = super(stock_picking, self
                     ).create(cr, uid, values, context=context)
         return picking_id
@@ -210,10 +254,16 @@ class stock_picking_in(orm.Model):
                                        string='Options'),
     }
 
+    def generate_labels(self, cr, uid, ids, tracking_ids=None, context=None):
+        picking_obj = self.pool.get('stock.picking')
+        return picking_obj.generate_labels(cr, uid, ids,
+                                           tracking_ids=tracking_ids,
+                                           context=context)
+
     def action_generate_carrier_label(self, cr, uid, ids, context=None):
         picking_obj = self.pool.get('stock.picking')
-        return picking_obj.action_generate_carrier_label(cr, uid, ids,
-                                                         context=context)
+        return picking_obj.action_generate_carrier_label(
+            cr, uid, ids, context=context)
 
     def carrier_id_change(self, cr, uid, ids, carrier_id, context=None):
         """ Call stock.picking carrier_id_change """
@@ -228,6 +278,33 @@ class stock_picking_in(orm.Model):
         return picking_obj.option_ids_change(cr, uid, ids,
                                              option_ids, carrier_id,
                                              context=context)
+
+    def write(self, cr, uid, ids, values, context=None):
+        """ Set the default options when the delivery method is changed.
+
+        So we are sure that the options are always in line with the
+        current delivery method.
+
+        """
+        picking_obj = self.pool['stock.picking']
+        values = picking_obj._values_with_carrier_options(cr, uid, values,
+                                                          context=context)
+        return super(stock_picking_in, self).\
+            write(cr, uid, ids, values, context=context)
+
+    def create(self, cr, uid, values, context=None):
+        """ Trigger carrier_id_change on create
+
+        To ensure options are setted on the basis of carrier_id copied from
+        Sale order or defined by default.
+
+        """
+        picking_obj = self.pool['stock.picking']
+        values = picking_obj._values_with_carrier_options(cr, uid, values,
+                                                          context=context)
+        picking_id = super(stock_picking_in, self
+                    ).create(cr, uid, values, context=context)
+        return picking_id
 
 
 class stock_picking_out(orm.Model):
@@ -259,10 +336,16 @@ class stock_picking_out(orm.Model):
                                        string='Options'),
     }
 
+    def generate_labels(self, cr, uid, ids, tracking_ids=None, context=None):
+        picking_obj = self.pool.get('stock.picking')
+        return picking_obj.generate_labels(cr, uid, ids,
+                                           tracking_ids=tracking_ids,
+                                           context=context)
+
     def action_generate_carrier_label(self, cr, uid, ids, context=None):
         picking_obj = self.pool.get('stock.picking')
-        return picking_obj.action_generate_carrier_label(cr, uid, ids,
-                                                         context=context)
+        return picking_obj.action_generate_carrier_label(
+            cr, uid, ids, context=context)
 
     def carrier_id_change(self, cr, uid, ids, carrier_id, context=None):
         """ Inherit this method in your module """
@@ -274,6 +357,33 @@ class stock_picking_out(orm.Model):
         return picking_obj.option_ids_change(cr, uid, ids,
                                              option_ids, carrier_id,
                                              context=context)
+
+    def write(self, cr, uid, ids, values, context=None):
+        """ Set the default options when the delivery method is changed.
+
+        So we are sure that the options are always in line with the
+        current delivery method.
+
+        """
+        picking_obj = self.pool['stock.picking']
+        values = picking_obj._values_with_carrier_options(cr, uid, values,
+                                                          context=context)
+        return super(stock_picking_out, self).\
+            write(cr, uid, ids, values, context=context)
+
+    def create(self, cr, uid, values, context=None):
+        """ Trigger carrier_id_change on create
+
+        To ensure options are setted on the basis of carrier_id copied from
+        Sale order or defined by default.
+
+        """
+        picking_obj = self.pool['stock.picking']
+        values = picking_obj._values_with_carrier_options(cr, uid, values,
+                                                          context=context)
+        picking_id = super(stock_picking_out, self
+                    ).create(cr, uid, values, context=context)
+        return picking_id
 
 
 class ShippingLabel(orm.Model):
