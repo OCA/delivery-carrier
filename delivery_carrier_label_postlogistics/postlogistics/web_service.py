@@ -252,14 +252,11 @@ class PostlogisticsWebService(object):
         codes = [name, pack_no]
         return "+".join(c for c in codes if c)
 
-    def _prepare_item_list(self, picking, recipient, attributes):
+    def _prepare_item_list(self, picking, recipient, attributes, trackings):
         """ Return a list of item made from the pickings """
         item_list = []
-        # A label will be generated per pack and if there is no pack only one
-        # label will be generated
-        packs = set([line.tracking_id.name for line in picking.move_lines])
-        for pack_no in packs:
-            itemid = self._get_itemid(picking, pack_no)
+        for pack in trackings:
+            itemid = self._get_itemid(picking, pack.name)
             item = {
                 'ItemID': itemid,
                 'Recipient': recipient,
@@ -310,11 +307,12 @@ class PostlogisticsWebService(object):
             }
         return envelope
 
-    def generate_label(self, picking, user_lang='en_US'):
+    def generate_label(self, picking, trackings, user_lang='en_US'):
         """ Generate a label for a picking
 
         :param picking: picking browse record
-        :param lang: OpenERP language code
+        :param user_lang: OpenERP language code
+        :param trackings: list of ids of trackings to filter on
         :return: {
             value: [{item_id: pack id
                      binary: file returned by API
@@ -334,7 +332,8 @@ class PostlogisticsWebService(object):
         attributes = self._prepare_attributes(picking)
 
         recipient = self._prepare_recipient(picking)
-        item_list = self._prepare_item_list(picking, recipient, attributes)
+        item_list = self._prepare_item_list(picking, recipient, attributes,
+                                            trackings)
         data = self._prepare_data(item_list)
 
         envelope = self._prepare_envelope(picking, post_customer, data)
