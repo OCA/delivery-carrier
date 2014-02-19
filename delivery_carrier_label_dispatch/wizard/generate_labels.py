@@ -51,8 +51,8 @@ class DeliveryCarrierLabelGenerate(orm.TransientModel):
         'generate_new_labels': False,
     }
 
-    def _get_packs(self, cr, uid, dispatch, context=None):
-        moves = sorted(dispatch.move_ids, key=attrgetter('tracking_id'))
+    def _get_packs(self, cr, uid, wizard, dispatch, context=None):
+        moves = sorted(dispatch.move_ids, key=attrgetter('tracking_id.name'))
         for pack, moves in groupby(moves, key=attrgetter('tracking_id')):
             pack_label = self._find_pack_label(cr, uid, pack, context=context)
             yield pack, list(moves), pack_label
