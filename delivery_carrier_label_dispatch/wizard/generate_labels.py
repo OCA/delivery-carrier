@@ -18,10 +18,13 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from ..pdf_utils import assemble_pdf
+from operator import attrgetter
+from itertools import groupby
 
 from openerp.osv import orm, fields
-from tools.translate import _
+from openerp.tools.translate import _
+
+from ..pdf_utils import assemble_pdf
 
 
 class DeliveryCarrierLabelGenerate(orm.TransientModel):
@@ -48,6 +51,39 @@ class DeliveryCarrierLabelGenerate(orm.TransientModel):
         'generate_new_labels': False,
     }
 
+    def _get_packs(self, cr, uid, dispatch, context=None):
+        moves = sorted(dispatch.move_ids, key=attrgetter('tracking_id'))
+        for pack, moves in groupby(moves, key=attrgetter('tracking_id')):
+            pack_label = self._find_pack_label(cr, uid, pack, context=context)
+            yield pack, list(moves), pack_label
+
+    def _find_pack_label(self, cr, uid, pack, context=None):
+        label_obj = self.pool['shipping.label']
+        domain = [('file_type', '=', 'pdf'),
+                  ('tracking_id', '=', pack.id),
+                  ]
+        label_id = label_obj.search(cr, uid, domain, order='create_date DESC',
+                                    limit=1, context=context)
+        if not label_id:
+            return None
+        return label_obj.browse(cr, uid, label_id[0], context=context)
+
+    def _get_all_pdf(self, cr, uid, dispatch, context=None):
+        for pack, moves, label in self._get_packs(cr, uid, dispatch,
+                                                  context=context):
+            if label is None:
+                picking_out_obj = self.pool['stock.picking.out']
+                picking_id = moves[0].picking_id.id
+                # generate the label of the pack
+                picking_out_obj.action_generate_carrier_label(
+                    cr, uid, [picking_id],
+                    tracking_ids=[pack.id],
+                    context=context)
+                label = self._find_pack_label(cr, uid, pack, context=context)
+                if not label:
+                    continue  # no label could be generated
+            yield label
+
     def action_generate_labels(self, cr, uid, ids, context=None):
         """
         Call the creation of the delivery carrier label
@@ -59,37 +95,17 @@ class DeliveryCarrierLabelGenerate(orm.TransientModel):
         if not this.dispatch_ids:
             raise orm.except_orm(_('Error'), _('No picking dispatch selected'))
 
-        picking_out_obj = self.pool.get('stock.picking.out')
         attachment_obj = self.pool.get('ir.attachment')
 
         for dispatch in this.dispatch_ids:
-            # flatten all picking in one list to keep the order in case
-            # if pickings have been ordered to ease packaging
-            if this.generate_new_labels:
-                pickings = [(pick, False)
-                            for pick in dispatch.related_picking_ids]
-            else:
-                pickings = [(pick, pick.get_pdf_label()[pick.id])
-                            for pick in dispatch.related_picking_ids]
-            # get picking ids for which we want to generate pdf label
-            picking_ids = [pick.id for pick, pdf in pickings
-                           if not pdf or this.generate_new_labels]
-            # generate missing picking labels
-            picking_out_obj.action_generate_carrier_label(cr, uid,
-                                                          picking_ids,
-                                                          #file_type='pdf',
-                                                          context=context)
-            # Get all pdf files adding the newly generated ones
-            data_list = [pdf or pick.get_pdf_label()[pick.id]
-                         for pick, pdf in pickings]
-            pdf_list = [data.decode('base64') for data in data_list if data]
-
-            pdf_file = assemble_pdf(pdf_list)
+            labels = self._get_all_pdf(cr, uid, dispatch, context=context)
+            labels = (label.datas for label in labels)
+            labels = (label.decode('base64') for label in labels if labels)
             data = {
                 'name': dispatch.name,
                 'res_id': dispatch.id,
                 'res_model': 'picking.dispatch',
-                'datas': pdf_file.encode('base64'),
+                'datas': assemble_pdf(labels).encode('base64'),
             }
             attachment_obj.create(cr, uid, data, context=context)
 
