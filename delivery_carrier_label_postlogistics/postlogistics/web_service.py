@@ -256,7 +256,8 @@ class PostlogisticsWebService(object):
         """ Return a list of item made from the pickings """
         item_list = []
         for pack in trackings:
-            itemid = self._get_itemid(picking, pack.name)
+            name = pack.name if pack else picking.name
+            itemid = self._get_itemid(picking, name)
             item = {
                 'ItemID': itemid,
                 'Recipient': recipient,
