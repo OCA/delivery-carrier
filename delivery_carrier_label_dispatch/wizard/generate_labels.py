@@ -43,7 +43,11 @@ class DeliveryCarrierLabelGenerate(orm.TransientModel):
     _columns = {
         'dispatch_ids': fields.many2many('picking.dispatch',
                                          string='Picking Dispatch'),
-        'generate_new_labels': fields.boolean('Generate new labels'),
+        'generate_new_labels': fields.boolean(
+            'Generate new labels',
+            help="If this option is used, new labels will be     "
+                 "generated for the packs even if they already have one.\n"
+                 "The default is to use the existing label."),
     }
 
     _defaults = {
@@ -54,7 +58,8 @@ class DeliveryCarrierLabelGenerate(orm.TransientModel):
     def _get_packs(self, cr, uid, wizard, dispatch, context=None):
         moves = sorted(dispatch.move_ids, key=attrgetter('tracking_id.name'))
         for pack, moves in groupby(moves, key=attrgetter('tracking_id')):
-            pack_label = self._find_pack_label(cr, uid, pack, context=context)
+            pack_label = self._find_pack_label(cr, uid, wizard, pack,
+                                               context=context)
             yield pack, list(moves), pack_label
 
     def _find_pack_label(self, cr, uid, pack, context=None):
@@ -68,14 +73,14 @@ class DeliveryCarrierLabelGenerate(orm.TransientModel):
             return None
         return label_obj.browse(cr, uid, label_id[0], context=context)
 
-    def _get_all_pdf(self, cr, uid, dispatch, context=None):
-        for pack, moves, label in self._get_packs(cr, uid, dispatch,
+    def _get_all_pdf(self, cr, uid, wizard, dispatch, context=None):
+        for pack, moves, label in self._get_packs(cr, uid, wizard, dispatch,
                                                   context=context):
-            if label is None:
+            if not label or wizard.generate_new_labels:
                 picking_out_obj = self.pool['stock.picking.out']
                 picking_id = moves[0].picking_id.id
                 # generate the label of the pack
-                picking_out_obj.action_generate_carrier_label(
+                picking_out_obj.generate_labels(
                     cr, uid, [picking_id],
                     tracking_ids=[pack.id],
                     context=context)
@@ -98,7 +103,8 @@ class DeliveryCarrierLabelGenerate(orm.TransientModel):
         attachment_obj = self.pool.get('ir.attachment')
 
         for dispatch in this.dispatch_ids:
-            labels = self._get_all_pdf(cr, uid, dispatch, context=context)
+            labels = self._get_all_pdf(cr, uid, this, dispatch,
+                                       context=context)
             labels = (label.datas for label in labels)
             labels = (label.decode('base64') for label in labels if labels)
             data = {
