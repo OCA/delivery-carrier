@@ -94,8 +94,13 @@ class stock_picking(orm.Model):
                                             tracking_ids=tracking_ids,
                                             context=None)]
 
-    def action_generate_carrier_label(self, cr, uid, ids, tracking_ids=None,
-                                      context=None):
+    def generate_labels(self, cr, uid, ids, tracking_ids=None, context=None):
+        """ Generate the labels.
+
+        A list of tracking ids can be given, in that case it will generate
+        the labels only of these trackings.
+
+        """
         shipping_label_obj = self.pool.get('shipping.label')
 
         pickings = self.browse(cr, uid, ids, context=context)
@@ -125,6 +130,14 @@ class stock_picking(orm.Model):
                     del context_attachment['default_type']
                 shipping_label_obj.create(cr, uid, data, context=context_attachment)
         return True
+
+    def action_generate_carrier_label(self, cr, uid, ids, context=None):
+        """ Method for the 'Generate Label' button.
+
+        It will generate the labels for all the trackings of the picking.
+
+        """
+        return self.generate_labels(cr, uid, ids, context=context)
 
     def carrier_id_change(self, cr, uid, ids, carrier_id, context=None):
         """ Inherit this method in your module """
@@ -223,11 +236,16 @@ class stock_picking_in(orm.Model):
                                        string='Options'),
     }
 
-    def action_generate_carrier_label(self, cr, uid, ids, tracking_ids=None,
-                                      context=None):
+    def generate_labels(self, cr, uid, ids, tracking_ids=None, context=None):
+        picking_obj = self.pool.get('stock.picking')
+        return picking_obj.generate_labels(cr, uid, ids,
+                                           tracking_ids=tracking_ids,
+                                           context=context)
+
+    def action_generate_carrier_label(self, cr, uid, ids, context=None):
         picking_obj = self.pool.get('stock.picking')
         return picking_obj.action_generate_carrier_label(
-            cr, uid, ids, tracking_ids=tracking_ids, context=context)
+            cr, uid, ids, context=context)
 
     def carrier_id_change(self, cr, uid, ids, carrier_id, context=None):
         """ Call stock.picking carrier_id_change """
@@ -273,11 +291,16 @@ class stock_picking_out(orm.Model):
                                        string='Options'),
     }
 
-    def action_generate_carrier_label(self, cr, uid, ids, tracking_ids=None,
-                                      context=None):
+    def generate_labels(self, cr, uid, ids, tracking_ids=None, context=None):
+        picking_obj = self.pool.get('stock.picking')
+        return picking_obj.generate_labels(cr, uid, ids,
+                                           tracking_ids=tracking_ids,
+                                           context=context)
+
+    def action_generate_carrier_label(self, cr, uid, ids, context=None):
         picking_obj = self.pool.get('stock.picking')
         return picking_obj.action_generate_carrier_label(
-            cr, uid, ids, tracking_ids=tracking_ids, context=context)
+            cr, uid, ids, context=context)
 
     def carrier_id_change(self, cr, uid, ids, carrier_id, context=None):
         """ Inherit this method in your module """
