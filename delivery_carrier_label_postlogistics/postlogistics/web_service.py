@@ -158,6 +158,9 @@ class PostlogisticsWebService(object):
             'EMail': partner.email or None,
             }
 
+        if partner.street2:
+            recipient['AddressSuffix'] = partner.street2
+
         if partner.parent_id:
             recipient['Name2'] = partner.parent_id.name
             recipient['PersonallyAddressed'] = False
@@ -269,6 +272,8 @@ class PostlogisticsWebService(object):
         :return string: itemid
         """
         name = _compile_itemid.sub('', picking.name)
+        if pack_no:
+            pack_no = _compile_itemid.sub('', pack_no)
         codes = [name, pack_no]
         return "+".join(c for c in codes if c)
 
@@ -378,15 +383,16 @@ class PostlogisticsWebService(object):
                     message = '[%s] %s' % (error.Code, error.Message)
                     error_messages.append(message)
             else:
+                file_type = output_format if output_format != 'spdf' else 'pdf'
                 res['value'].append({
                     'item_id': item.ItemID,
                     'binary': item.Label,
                     'tracking_number': item.IdentCode,
-                    'file_type': output_format,
+                    'file_type': file_type,
                 })
 
             if hasattr(item, 'Warnings') and item.Warnings:
-                for warning in item.Warnings:
+                for warning in item.Warnings.Warning:
                     message = '[%s] %s' % (warning.Code, warning.Message)
                     warning_messages.append(message)
 
