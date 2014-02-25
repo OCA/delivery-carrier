@@ -374,13 +374,14 @@ msgid ""
 "ZPL2 format."
 msgstr ""
 "Logo optionnel à imprimer sur vos étiquettes.\n"
-"Veuillez tenir compte des indications suivantes lors de la création de votre image ou logo:\n"
-"– Largeur de l’image: 47 mm\n"
-"– Hauteur de l’image: 25 mmv– Taille du fichier: max. 30 ko\n"
-"– Format de fichier: GIF ou PNG\n"
-"– Table des couleurs: couleurs indicées, 200 au max.\n"
-"– Le logo sera imprimé tourné de 90° dans le sens contraire des aiguilles d’une montre \n"
-"Il est conseillé d’utiliser un logo noir et blanc pour l’impression en format ZPL2."
+"Veuillez tenir compte des indications suivantes lors de la création de votre image ou logo:\n"
+"– Largeur de l’image: 47 mm\n"
+"– Hauteur de l’image: 25 mm\n"
+"– Taille du fichier: max. 30 ko\n"
+"– Format de fichier: GIF ou PNG\n"
+"– Table des couleurs: couleurs indicées, 200 au max.\n"
+"– Le logo sera imprimé tourné de 90° dans le sens contraire des aiguilles d’une montre \n"
+"Il est conseillé d’utiliser un logo noir et blanc pour l’impression en format ZPL2."
 
 #. module: delivery_carrier_label_postlogistics
 #: code:addons/delivery_carrier_label_postlogistics/res_config.py:206
