@@ -249,6 +249,8 @@ class PostlogisticsWebService(object):
 
         """
         name = _compile_itemid.sub('', picking.name)
+        if pack_no:
+            pack_no = _compile_itemid.sub('', pack_no)
         codes = [name, pack_no]
         return "+".join(c for c in codes if c)
 
