@@ -217,9 +217,6 @@ class DeliveryCarrier(orm.Model):
 
 
     _columns = {
-        'type': fields.selection(
-            _get_carrier_type_selection, 'Type',
-            help="Carrier type (combines several delivery methods)"),
         'postlogistics_license_id': fields.many2one(
             'postlogistics.license',
             string='PostLogistics Frankling License'),
