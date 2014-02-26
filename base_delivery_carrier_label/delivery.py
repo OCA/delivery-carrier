@@ -70,9 +70,13 @@ class DeliveryCarrier(orm.Model):
         """ To inherit to add carrier type """
         return []
 
+    def __get_carrier_type_selection(self, cr, uid, context=None):
+        """ Wrapper to preserve inheritance for selection field """
+        return self._get_carrier_type_selection(cr, uid, context=context)
+
     _columns = {
         'type': fields.selection(
-            _get_carrier_type_selection, 'Type',
+            __get_carrier_type_selection, 'Type',
             help="Carrier type (combines several delivery methods)"),
         'code': fields.char(
             'Code', size=10,
