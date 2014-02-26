@@ -173,6 +173,18 @@ class stock_picking(orm.Model):
                 values.update(option_ids=[(6, 0, option_ids)])
         return values
 
+    def write(self, cr, uid, ids, values, context=None):
+        """ Set the default options when the delivery method is changed.
+
+        So we are sure that the options are always in line with the
+        current delivery method.
+
+        """
+        values = self._values_with_carrier_options(cr, uid, values,
+                                                   context=context)
+        return super(stock_picking, self).\
+            write(cr, uid, ids, values, context=context)
+
     def create(self, cr, uid, values, context=None):
         """ Trigger carrier_id_change on create
 
@@ -235,6 +247,19 @@ class stock_picking_in(orm.Model):
                                              option_ids, carrier_id,
                                              context=context)
 
+    def write(self, cr, uid, ids, values, context=None):
+        """ Set the default options when the delivery method is changed.
+
+        So we are sure that the options are always in line with the
+        current delivery method.
+
+        """
+        picking_obj = self.pool['stock.picking']
+        values = picking_obj._values_with_carrier_options(cr, uid, values,
+                                                          context=context)
+        return super(stock_picking_in, self).\
+            write(cr, uid, ids, values, context=context)
+
     def create(self, cr, uid, values, context=None):
         """ Trigger carrier_id_change on create
 
@@ -294,6 +319,19 @@ class stock_picking_out(orm.Model):
         return picking_obj.option_ids_change(cr, uid, ids,
                                              option_ids, carrier_id,
                                              context=context)
+
+    def write(self, cr, uid, ids, values, context=None):
+        """ Set the default options when the delivery method is changed.
+
+        So we are sure that the options are always in line with the
+        current delivery method.
+
+        """
+        picking_obj = self.pool['stock.picking']
+        values = picking_obj._values_with_carrier_options(cr, uid, values,
+                                                          context=context)
+        return super(stock_picking_out, self).\
+            write(cr, uid, ids, values, context=context)
 
     def create(self, cr, uid, values, context=None):
         """ Trigger carrier_id_change on create
