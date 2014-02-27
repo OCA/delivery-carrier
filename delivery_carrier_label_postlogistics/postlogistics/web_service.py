@@ -152,11 +152,8 @@ class PostlogisticsWebService(object):
         }
 
         if partner.street2:
-           recipient['LabelAddress'] = {
-               'LabelLine': [partner.name,
-                             partner.street,
-                             partner.street2]
-               }
+            recipient['AddressSuffix'] = partner.street2
+
         if partner.parent_id:
             recipient['Name2'] = partner.parent_id.name
             recipient['PersonallyAddressed'] = False
