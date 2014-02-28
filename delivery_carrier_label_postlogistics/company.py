@@ -38,10 +38,10 @@ class ResCompany(orm.Model):
             type='char'),
         'postlogistics_username': fields.char('Username'),
         'postlogistics_password': fields.char('Password'),
-        # XXX improve license management
-        'postlogistics_license_less_1kg': fields.char('License less than 1kg'),
-        'postlogistics_license_more_1kg': fields.char('License more than 1kg'),
-        'postlogistics_license_vinolog': fields.char('License VinoLog'),
+        'postlogistics_license_ids': fields.one2many(
+            'postlogistics.license',
+            'company_id',
+            'PostLogistics Frankling License'),
         'postlogistics_logo': fields.binary('Company logo for PostLogistics'),
         'postlogistics_office': fields.char('Post office'),
 

@@ -20,6 +20,22 @@
 ##############################################################################
 from openerp.osv import orm, fields
 
+class PostlogisticsLicense(orm.Model):
+    _name = 'postlogistics.license'
+    _description = 'PostLogistics Franking License'
+
+    _order = 'sequence'
+
+    _columns = {
+        'name': fields.char('Description', translate=True, required=True),
+        'number': fields.char('Number', required=True),
+        'company_id': fields.many2one('res.company', 'Company', required=True),
+        'sequence': fields.integer(
+            'Sequence',
+            help="Gives the sequence on company to define priority on license"
+                 " when multiple license are available for the same group of "
+                 "service."),
+    }
 
 class PostlogisticsServiceGroup(orm.Model):
     _name = 'postlogistics.service.group'
@@ -28,6 +44,12 @@ class PostlogisticsServiceGroup(orm.Model):
     _columns = {
         'name': fields.char('Description', translate=True, required=True),
         'group_extid': fields.integer('Group ID', required=True),
+        'postlogistics_license_ids': fields.many2many(
+            'postlogistics.license',
+            'postlogistics_license_service_groups_rel',
+            'license_id',
+            'group_id',
+            'PostLogistics Frankling License'),
     }
 
     _sql_constraints = [
@@ -207,6 +229,9 @@ class DeliveryCarrier(orm.Model):
         'type': fields.selection(
             _get_carrier_type_selection, 'Type',
             help="Carrier type (combines several delivery methods)"),
+        'postlogistics_license_id': fields.many2one(
+            'postlogistics.license',
+            string='PostLogistics Frankling License'),
         'postlogistics_service_group_id': fields.many2one(
             'postlogistics.service.group',
             string='PostLogistics Service Group',

@@ -98,7 +98,7 @@ class PostlogisticsWebService(object):
             lang = company.partner_id.lang
         lang = self._get_language(lang)
         request = self.client.service.ReadAllowedServicesByFrankingLicense
-        return self._send_request(request, License=license, Language=lang)
+        return self._send_request(request, FrankingLicense=license, Language=lang)
 
     def read_service_groups(self, company, lang):
         """ Get group of services """
@@ -225,13 +225,26 @@ class PostlogisticsWebService(object):
         return resolution
 
     def _get_license(self, picking):
-        """ Get the right license depending on weight """
-        company = picking.company_id
-        #XXX get weight or set it as an option on picking
-        weight = 0
-        if weight > 1.0:
-            return company.postlogistics_license_more_1kg
-        return company.postlogistics_license_less_1kg
+        """ Get the license
+
+        Take it from carrier and if not defined get the first license
+        depending on service group. This needs to have associated 
+        licenses to groups.
+
+        :return: license number
+        """
+        license = picking.carrier_id.postlogistics_license_id
+        if not license:
+            company_licenses = picking.company_id.postlogistics_license_ids
+            group = picking.carrier_id.postlogistics_service_group_id
+            if not company_licenses or not group:
+                return None
+            group_license_ids = [l.id for l in group.postlogistics_license_ids]
+            if not group_license_ids:
+                return None
+            license = [l for l in company_licenses
+                       if l.id in group_license_ids][0]
+        return license.number
 
     def _prepare_attributes(self, picking):
         services = [option.code.split(',') for option in picking.option_ids
