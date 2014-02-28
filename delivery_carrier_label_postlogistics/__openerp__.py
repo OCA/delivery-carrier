@@ -106,6 +106,6 @@ Contributors
  'license': 'AGPL-3',
  'application': True,
  'external_dependencies': {
-    'python': ['suds'],
+     'python': ['suds'],
  }
  }

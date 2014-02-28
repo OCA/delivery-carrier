@@ -70,8 +70,8 @@ class PostlogisticsWebService(object):
                 raise orm.except_orm(
                     _('Error 401'),
                     _('Authorization Required\n\n'
-                    'Please verify postlogistics username and password in:\n'
-                    'Configuration -> Postlogistics'))
+                      'Please verify postlogistics username and password in:\n'
+                      'Configuration -> Postlogistics'))
             raise
         return res
 
@@ -91,7 +91,8 @@ class PostlogisticsWebService(object):
             return lang_code
         return 'en'
 
-    def read_allowed_services_by_franking_license(self, license, company, lang=None):
+    def read_allowed_services_by_franking_license(self, license, company,
+                                                  lang=None):
         """ Get a list of allowed service for a postlogistics licence """
         if not lang:
             lang = company.partner_id.lang
@@ -113,7 +114,8 @@ class PostlogisticsWebService(object):
             lang = company.partner_id.lang
         lang = self._get_language(lang)
         request = self.client.service.ReadBasicServices
-        return self._send_request(request, Language=lang, ServiceGroupID=service_group_id)
+        return self._send_request(request, Language=lang,
+                                  ServiceGroupID=service_group_id)
 
     def read_additional_services(self, company, service_code, lang):
         """ Get additional services compatible with a basic services """
@@ -343,7 +345,8 @@ class PostlogisticsWebService(object):
 
         res = {'value': []}
         request = self.client.service.GenerateLabel
-        response = self._send_request(request, Language=lang, Envelope=envelope)
+        response = self._send_request(request, Language=lang,
+                                      Envelope=envelope)
 
         if not response['success']:
             return response

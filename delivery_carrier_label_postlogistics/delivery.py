@@ -108,12 +108,14 @@ class DeliveryCarrier(orm.Model):
 
     def _get_carrier_type_selection(self, cr, uid, context=None):
         """ Add postlogistics carrier type """
-        res = super(DeliveryCarrier, self)._get_carrier_type_selection(cr, uid, context=context)
+        res = super(DeliveryCarrier, self
+                    )._get_carrier_type_selection(cr, uid, context=context)
         res.append(('postlogistics', 'Postlogistics'))
         return res
 
-    def _get_basic_service_ids(self, cr, uid, ids, field_names, arg, context=None):
-        """ Search in all options for the PostLogistics basic services if set """
+    def _get_basic_service_ids(self, cr, uid, ids, field_names, arg,
+                               context=None):
+        """ Search in all options for PostLogistics basic services if set """
         res = {}
         for carrier_id in ids:
             res[carrier_id] = []
@@ -135,7 +137,8 @@ class DeliveryCarrier(orm.Model):
             res[carrier.id] = option_ids
         return res
 
-    def _get_allowed_option_ids(self, cr, uid, ids, field_names, arg, context=None):
+    def _get_allowed_option_ids(self, cr, uid, ids, field_names, arg,
+                                context=None):
         """ Return a list of possible options
 
         A domain would be too complicated.
@@ -160,31 +163,41 @@ class DeliveryCarrier(orm.Model):
                 continue
             service_group_id = carrier.postlogistics_service_group_id.id
             if service_group_id:
-                basic_service_ids = [s.id for s in carrier.postlogistics_basic_service_ids]
+                basic_service_ids = [
+                    s.id for s in carrier.postlogistics_basic_service_ids]
                 service_ids = option_template_obj.search(
                     cr, uid,
-                    [('postlogistics_service_group_id' ,'=', service_group_id)],
+                    [('postlogistics_service_group_id',
+                      '=',
+                      service_group_id)],
                     context=context)
                 allowed_ids.extend(service_ids)
                 if basic_service_ids:
                     related_service_ids = option_template_obj.search(
                         cr, uid,
-                        [('postlogistics_basic_service_ids' ,'in', basic_service_ids)],
+                        [('postlogistics_basic_service_ids',
+                          'in',
+                          basic_service_ids)],
                         context=context)
                     allowed_ids.extend(related_service_ids)
 
             # Allows to set multiple optional single option in order to
             # let the user select them
-            single_option_types = ['label_layout', 'output_format', 'resolution']
-            selected_single_options = [opt.tmpl_option_id.postlogistics_type
-                                       for opt in carrier.available_option_ids
-                                       if opt.postlogistics_type in single_option_types
-                                       and opt.state in ['mandatory']]
+            single_option_types = [
+                'label_layout',
+                'output_format',
+                'resolution']
+            selected_single_options = [
+                opt.tmpl_option_id.postlogistics_type
+                for opt in carrier.available_option_ids
+                if opt.postlogistics_type in single_option_types
+                and opt.state in ['mandatory']]
             if selected_single_options != single_option_types:
                 service_ids = option_template_obj.search(
                     cr, uid,
                     [('postlogistics_type', 'in', single_option_types),
-                     ('postlogistics_type', 'not in', selected_single_options)],
+                     ('postlogistics_type',
+                      'not in', selected_single_options)],
                     context=context)
                 allowed_ids.extend(service_ids)
             res[carrier.id] = allowed_ids
