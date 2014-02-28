@@ -105,3 +105,40 @@ class PickingDispatch(Model):
                                                        context=context)
                 res.update(default_value)
         return res
+
+    def _values_with_carrier_options(self, cr, uid, values, context=None):
+        values = values.copy()
+        carrier_id = values.get('carrier_id')
+        option_ids = values.get('option_ids')
+        if carrier_id and not option_ids:
+            res = self.carrier_id_change(cr, uid, [], carrier_id,
+                                         context=context)
+            option_ids = res.get('value', {}).get('option_ids')
+            if option_ids:
+                values.update(option_ids=[(6, 0, option_ids)])
+        return values
+
+    def write(self, cr, uid, ids, values, context=None):
+        """ Set the default options when the delivery method is changed.
+
+        So we are sure that the options are always in line with the
+        current delivery method.
+
+        """
+        values = self._values_with_carrier_options(cr, uid, values,
+                                                   context=context)
+        return super(PickingDispatch, self).\
+            write(cr, uid, ids, values, context=context)
+
+    def create(self, cr, uid, values, context=None):
+        """ Set the default options when the delivery method is set on creation
+
+        So we are sure that the options are always in line with the
+        current delivery method.
+
+        """
+        values = self._values_with_carrier_options(cr, uid, values,
+                                                   context=context)
+        dispatch_id = super(PickingDispatch, self).\
+            create(cr, uid, values, context=context)
+        return dispatch_id
