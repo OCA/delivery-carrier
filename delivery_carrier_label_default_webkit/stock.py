@@ -25,7 +25,8 @@ from openerp.netsvc import Service
 class stock_picking(orm.Model):
     _inherit = 'stock.picking'
 
-    def generate_default_label(self, cr, uid, ids, context=None):
+    def generate_default_label(self, cr, uid, ids, tracking_ids=None,
+                               context=None):
         """
         Generate a label from a webkit report
         """
