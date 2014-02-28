@@ -19,7 +19,7 @@
 #
 ##############################################################################
 {'name': 'Base module for carrier labels',
- 'version': '1.0',
+ 'version': '1.0.1',
  'author': 'Camptocamp,Akretion',
  'maintainer': 'Camptocamp',
  'category': 'version',
@@ -52,6 +52,7 @@ Contributors
  'website': 'http://www.camptocamp.com/',
  'data': ['delivery_view.xml',
           'stock_view.xml',
+          'res_config_view.xml',
           'security/ir.model.access.csv',
           ],
  'tests': [],
