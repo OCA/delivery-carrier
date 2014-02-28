@@ -1,30 +1,107 @@
 # Translation of OpenERP Server.
 # This file contains the translation of the following modules:
-#	* delivery_carrier_label_dispatch
+# 	* delivery_carrier_label_dispatch
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-06 13:11+0000\n"
-"PO-Revision-Date: 2013-12-06 14:46+0100\n"
+"POT-Creation-Date: 2014-01-09 13:29+0000\n"
+"PO-Revision-Date: 2014-01-09 14:51+0100\n"
 "Last-Translator: Yannick Vaucher <yannick.vaucher@camptocamp.com>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: \n"
 
 #. module: delivery_carrier_label_dispatch
-#: code:addons/delivery_carrier_label_dispatch/wizard/generate_labels.py:84
+#: view:picking.dispatch:0
+msgid "Carrier Info"
+msgstr "Info transporteur"
+
+#. module: delivery_carrier_label_dispatch
+#: model:ir.actions.act_window,name:delivery_carrier_label_dispatch.action_delivery_carrier_label_generate
+msgid "Generate Carrier Labels"
+msgstr "Générer les étiquette d’expédition"
+
+#. module: delivery_carrier_label_dispatch
+#: model:ir.model,name:delivery_carrier_label_dispatch.model_stock_picking
+msgid "Picking List"
+msgstr "Liste de livraisons"
+
+#. module: delivery_carrier_label_dispatch
+#: code:addons/delivery_carrier_label_dispatch/picking_dispatch.py:100
+#, python-format
+msgid ""
+"You can not remove a mandatory option.\n"
+"Options are reset to default."
+msgstr ""
+"Vous ne pouvez pas supprimer une option obligatoire.\n"
+"Les options serons réinitialisées."
+
+#. module: delivery_carrier_label_dispatch
+#: model:ir.model,name:delivery_carrier_label_dispatch.model_picking_dispatch
+msgid "Dispatch Picking Order"
+msgstr "Bon de préparation"
+
+#. module: delivery_carrier_label_dispatch
+#: view:picking.dispatch:0
+msgid "Delivery"
+msgstr "Livraison"
+
+#. module: delivery_carrier_label_dispatch
+#: code:addons/delivery_carrier_label_dispatch/wizard/generate_labels.py:58
 #, python-format
 msgid "No picking dispatch selected"
 msgstr "Pas de bon de préparation sélectioné"
 
 #. module: delivery_carrier_label_dispatch
-#: view:delivery.carrier.label.generate:0
-msgid "Generate Carriers Labels"
-msgstr "Générer les étiquettes d'expédition"
+#: field:delivery.carrier.label.generate,label_pdf_file:0
+#: model:ir.model.fields,field_description:delivery_carrier_label_dispatch.field_delivery_carrier_label_generate_label_pdf_file
+msgid "Labels file"
+msgstr "Fichier d'étiquettes"
+
+#. module: delivery_carrier_label_dispatch
+#: field:delivery.carrier.label.generate,dispatch_ids:0
+#: model:ir.model.fields,field_description:delivery_carrier_label_dispatch.field_delivery_carrier_label_generate_dispatch_ids
+msgid "Picking Dispatch"
+msgstr "Bon de préparation"
+
+#. module: delivery_carrier_label_dispatch
+#: model:ir.model,name:delivery_carrier_label_dispatch.model_delivery_carrier_label_generate
+msgid "delivery.carrier.label.generate"
+msgstr ""
+
+#. module: delivery_carrier_label_dispatch
+#: view:picking.dispatch:0
+msgid "Set Options"
+msgstr "Appliquer les options"
+
+#. module: delivery_carrier_label_dispatch
+#: model:ir.model.fields,field_description:delivery_carrier_label_dispatch.field_picking_dispatch_carrier_id
+#: field:picking.dispatch,carrier_id:0
+msgid "Carrier"
+msgstr "Transporteur"
+
+#. module: delivery_carrier_label_dispatch
+#: code:addons/delivery_carrier_label_dispatch/wizard/generate_labels.py:58
+#, python-format
+msgid "Error"
+msgstr "Erreur"
+
+#. module: delivery_carrier_label_dispatch
+#: view:picking.dispatch:0
+msgid "Warning, setting options will erase existing ones in pickings"
+msgstr "Attention, définir les options supprimera les options existantes dans les livraisons du bon de préparation"
+
+#. module: delivery_carrier_label_dispatch
+#: model:ir.model.fields,field_description:delivery_carrier_label_dispatch.field_picking_dispatch_option_ids
+#: view:picking.dispatch:0
+#: field:picking.dispatch,option_ids:0
+msgid "Options"
+msgstr "Options"
 
 #. module: delivery_carrier_label_dispatch
 #: view:delivery.carrier.label.generate:0
@@ -37,25 +114,9 @@ msgid "Labels"
 msgstr "Etiquettes"
 
 #. module: delivery_carrier_label_dispatch
-#: model:ir.model,name:delivery_carrier_label_dispatch.model_stock_picking
-msgid "Picking List"
-msgstr "Liste de livraisons"
-
-#. module: delivery_carrier_label_dispatch
-#: model:ir.model,name:delivery_carrier_label_dispatch.model_delivery_carrier_label_generate
-msgid "delivery.carrier.label.generate"
-msgstr ""
-
-#. module: delivery_carrier_label_dispatch
-#: model:ir.actions.act_window,name:delivery_carrier_label_dispatch.action_delivery_carrier_label_generate
-msgid "Generate Carrier Labels"
-msgstr "Générer les étiquette d’expédition"
-
-#. module: delivery_carrier_label_dispatch
-#: code:addons/delivery_carrier_label_dispatch/wizard/generate_labels.py:84
-#, python-format
-msgid "Error"
-msgstr "Erreur"
+#: view:delivery.carrier.label.generate:0
+msgid "Generate Carriers Labels"
+msgstr "Générer les étiquettes d'expédition"
 
 #. module: delivery_carrier_label_dispatch
 #: view:delivery.carrier.label.generate:0
@@ -63,10 +124,10 @@ msgid "Close"
 msgstr "Fermer"
 
 #. module: delivery_carrier_label_dispatch
-#: field:delivery.carrier.label.generate,label_pdf_file:0
-#: model:ir.model.fields,field_description:delivery_carrier_label_dispatch.field_delivery_carrier_label_generate_label_pdf_file
-msgid "Labels file"
-msgstr "Fichier d'étiquettes"
+#: code:addons/delivery_carrier_label_dispatch/picking_dispatch.py:99
+#, python-format
+msgid "User Error !"
+msgstr "Erreur utilisateur !"
 
 #. module: delivery_carrier_label_dispatch
 #: model:ir.model,name:delivery_carrier_label_dispatch.model_stock_picking_out
@@ -77,10 +138,4 @@ msgstr "Bons de livraison"
 #: view:delivery.carrier.label.generate:0
 msgid "or"
 msgstr "ou"
-
-#. module: delivery_carrier_label_dispatch
-#: field:delivery.carrier.label.generate,dispatch_ids:0
-#: model:ir.model.fields,field_description:delivery_carrier_label_dispatch.field_delivery_carrier_label_generate_dispatch_ids
-msgid "Picking Dispatch"
-msgstr "Bon de préparation"
 

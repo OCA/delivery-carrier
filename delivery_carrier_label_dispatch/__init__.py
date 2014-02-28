@@ -19,4 +19,5 @@
 #
 ##############################################################################
 from . import stock
+from . import picking_dispatch
 from . import wizard

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+    <record model="ir.ui.view" id="picking_dispatch_form">
+      <field name="name">picking.dispatch.form</field>
+      <field name="type">form</field>
+      <field name="model">picking.dispatch</field>
+      <field name="inherit_id" ref="picking_dispatch.picking_dispatch_form"/>
+      <field name="arch" type="xml">
+        <notebook position="inside">
+          <page name="carrier" string="Carrier Info">
+            <separator string="Delivery"/>
+            <group>
+              <field name="carrier_id" on_change="carrier_id_change(carrier_id, context)"/>
+            </group>
+            <separator string="Options"/>
+            <field name="option_ids" nolabel="1"
+                on_change="option_ids_change(option_ids, carrier_id, context)"/>
+            <label string="Warning, setting options will erase existing ones in pickings"/>
+            <button name="action_set_options" string="Set Options"
+                class="oe_highlight" type="object"/>
+          </page>
+        </notebook>
+     </field>
+    </record>
+
+  </data>
+</openerp>
