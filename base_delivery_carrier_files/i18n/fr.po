@@ -7,13 +7,14 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 6.1rc1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-02-16 09:08+0000\n"
-"PO-Revision-Date: 2012-02-16 10:29+0100\n"
-"Last-Translator: Guewen Baconnier <guewen.baconnier@camptocamp.com>\n"
+"PO-Revision-Date: 2014-02-28 10:33+0000\n"
+"Last-Translator: Guewen Baconnier @ Camptocamp <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: \n"
+"X-Launchpad-Export-Date: 2014-03-01 05:50+0000\n"
+"X-Generator: Launchpad (build 16948)\n"
 
 #. module: base_delivery_carrier_files
 #: code:addons/base_delivery_carrier_files/wizard/generate_carrier_files.py:60
@@ -24,7 +25,8 @@ msgstr "Pas de bon de livraison sélectionné"
 #. module: base_delivery_carrier_files
 #: view:delivery.carrier.file.generate:0
 msgid "Generate the carrier files for the selected delivery orders."
-msgstr "Génère les fichiers de livraison pour les bons de livraison sélectionnés."
+msgstr ""
+"Génère les fichiers de livraison pour les bons de livraison sélectionnés."
 
 #. module: base_delivery_carrier_files
 #: help:stock.picking,carrier_file_generated:0
@@ -53,8 +55,13 @@ msgstr "Fichiers de livraison"
 
 #. module: base_delivery_carrier_files
 #: help:delivery.carrier.file,auto_export:0
-msgid "The file will be automatically generated when a delivery order is processed. If activated, each delivery order will be exported in a separate file."
-msgstr "Le fichier sera automatiquement généré quand le bon de livraison sera expédié. Si activé, les bons de livraison seront toujours exportés dans des fichiers séparés."
+msgid ""
+"The file will be automatically generated when a delivery order is processed. "
+"If activated, each delivery order will be exported in a separate file."
+msgstr ""
+"Le fichier sera automatiquement généré quand le bon de livraison sera "
+"expédié. Si activé, les bons de livraison seront toujours exportés dans des "
+"fichiers séparés."
 
 #. module: base_delivery_carrier_files
 #: model:ir.actions.act_window,name:base_delivery_carrier_files.action_delivery_carrier_file_generate
@@ -64,7 +71,7 @@ msgstr "Générer les fichiers de livraison"
 #. module: base_delivery_carrier_files
 #: model:ir.actions.act_window,help:base_delivery_carrier_files.action_delivery_carrier_file_form
 msgid "Generates automatically files asked by carriers for outgoing pickings"
-msgstr "Génère automatiquement les fichiers de livraison pour les "
+msgstr "Génère automatiquement les fichiers de livraison pour les"
 
 #. module: base_delivery_carrier_files
 #: field:delivery.carrier.file,type:0
@@ -73,8 +80,12 @@ msgstr "Type"
 
 #. module: base_delivery_carrier_files
 #: help:delivery.carrier.file,group_pickings:0
-msgid "All the pickings will be grouped in the same file. Has no effect when the files are automatically exported at the delivery order process."
-msgstr "Tous les bons de livraison seront groupé dans un même fichier. Aucun effet si les fichiers sont créés lors de la livraison."
+msgid ""
+"All the pickings will be grouped in the same file. Has no effect when the "
+"files are automatically exported at the delivery order process."
+msgstr ""
+"Tous les bons de livraison seront groupé dans un même fichier. Aucun effet "
+"si les fichiers sont créés lors de la livraison."
 
 #. module: base_delivery_carrier_files
 #: code:addons/base_delivery_carrier_files/carrier_file.py:73
@@ -166,4 +177,3 @@ msgstr "Fichier de livraison"
 #: field:delivery.carrier.file.generate,picking_ids:0
 msgid "Delivery Orders"
 msgstr "Bons de livraison"
-
