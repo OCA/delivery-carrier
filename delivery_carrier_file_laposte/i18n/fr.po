@@ -7,16 +7,16 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 6.1rc1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-02-16 09:10+0000\n"
-"PO-Revision-Date: 2012-02-16 09:10+0000\n"
-"Last-Translator: <>\n"
+"PO-Revision-Date: 2014-02-28 10:33+0000\n"
+"Last-Translator: David BEAL <david.beal@akretion.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2014-03-01 05:50+0000\n"
+"X-Generator: Launchpad (build 16948)\n"
 
 #. module: delivery_carrier_file_laposte
 #: model:ir.model,name:delivery_carrier_file_laposte.model_delivery_carrier_file
 msgid "delivery.carrier.file"
 msgstr "delivery.carrier.file"
-
