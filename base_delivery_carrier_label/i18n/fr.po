@@ -7,13 +7,14 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-12-06 13:11+0000\n"
-"PO-Revision-Date: 2013-12-06 14:33+0100\n"
-"Last-Translator: Yannick Vaucher <yannick.vaucher@camptocamp.com>\n"
+"PO-Revision-Date: 2014-02-28 10:33+0000\n"
+"Last-Translator: Yannick Vaucher @ Camptocamp <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: \n"
+"X-Launchpad-Export-Date: 2014-03-01 05:50+0000\n"
+"X-Generator: Launchpad (build 16948)\n"
 
 #. module: base_delivery_carrier_label
 #: view:stock.picking.out:0
@@ -187,15 +188,19 @@ msgstr "Option de méthode de livraison"
 #. module: base_delivery_carrier_label
 #: help:delivery.carrier.option,state:0
 msgid ""
-"Ensure you add and define correctly all your options or those won't be available for the packager\n"
+"Ensure you add and define correctly all your options or those won't be "
+"available for the packager\n"
 "- Mandatory: This option will be copied on carrier and cannot be removed\n"
 "- Optional by Default: This option will be copied but can be removed\n"
 "- Optional: This option can be added later by the user on the Delivery Order."
 msgstr ""
-"Assurez vous que vous avez défini correctement vos options ou celle ci ne sont pas disponible pour l'emballeur\n"
-"- Obligatoire: Cette option sera copiée sur la méthode de transport et ne peut pas être retirée\n"
+"Assurez vous que vous avez défini correctement vos options ou celle ci ne "
+"sont pas disponible pour l'emballeur\n"
+"- Obligatoire: Cette option sera copiée sur la méthode de transport et ne "
+"peut pas être retirée\n"
 "- Optionnel par défaut: Cet option sera copiée mais peut être retirée\n"
-"- Optionnel: Cet option sera disponible pour être ajouté par l'utilisateur sur le Bon de livraison."
+"- Optionnel: Cet option sera disponible pour être ajouté par l'utilisateur "
+"sur le Bon de livraison."
 
 #. module: base_delivery_carrier_label
 #: field:delivery.carrier.template.option,partner_id:0
@@ -217,4 +222,3 @@ msgstr ""
 #: selection:delivery.carrier.option,state:0
 msgid "Optional by Default"
 msgstr "Optionnel par défaut"
-
