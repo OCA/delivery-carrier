@@ -27,9 +27,19 @@ class DeliveryCarrierTemplateOption(orm.Model):
     _description = 'Delivery carrier template option'
 
     _columns = {
-        'partner_id': fields.many2one('res.partner', 'Partner Carrier'),
-        'name': fields.char('Name', size=64),
-        'code': fields.char('Code', size=64),
+        'partner_id': fields.many2one(
+            'res.partner',
+            'Partner Carrier'),
+        'name': fields.char(
+            'Name',
+            size=64),
+        'code': fields.char(
+            'Code',
+            size=64),
+        'description': fields.char(
+            'Description',
+            help="Allow to define a more complete description "
+                 "than in the name field."),
     }
 
 

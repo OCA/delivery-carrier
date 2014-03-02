@@ -11,6 +11,8 @@
           <field name="partner_id" />
           <field name="code"/>
           <field name="name"/>
+          <newline/>
+          <field name="description" colspan="4"/>
         </form>
       </field>
     </record>
@@ -35,6 +37,7 @@
         <form string="delivery_carrier_option">
           <field name="state"/>
           <field name="tmpl_option_id"/>
+          <field name="description" colspan="4" readonly="True"/>
         </form>
       </field>
     </record>
