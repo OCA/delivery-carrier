@@ -9,7 +9,7 @@
     <!-- call this action from your own carrier module -->
     <record id="action_delivery_method_from_carrier_module_install"
             model="ir.actions.client">
-        <field name="name">Open Settings Menu</field>
+        <field name="name">Open Delivery Methods Menu</field>
         <field name="tag">reload</field>
         <field name="params"
                eval="{'menu_id': ref('delivery.action_delivery_carrier_form')}"/>
