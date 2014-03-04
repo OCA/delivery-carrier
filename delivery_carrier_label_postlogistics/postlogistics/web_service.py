@@ -371,11 +371,12 @@ class PostlogisticsWebService(object):
                     message = '[%s] %s' % (error.Code, error.Message)
                     error_messages.append(message)
             else:
+                file_type = output_format if output_format != 'spdf' else 'pdf'
                 res['value'].append({
                     'item_id': item.ItemID,
                     'binary': item.Label,
                     'tracking_number': item.IdentCode,
-                    'file_type': output_format,
+                    'file_type': file_type,
                 })
 
             if hasattr(item, 'Warnings') and item.Warnings:

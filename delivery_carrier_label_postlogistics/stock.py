@@ -103,7 +103,7 @@ class ShippingLabel(orm.Model):
                      ('jpg', 'JPG'),
                      ('png', 'PNG'),
                      ('pdf', 'PDF'),
-                     ('spdf', 'sPDF'),
+                     ('spdf', 'sPDF'), # sPDF is a pdf without integrated font
                      ('zpl2', 'ZPL2')]
         add_types = [t for t in new_types if not t in file_types]
         file_types.extend(add_types)
