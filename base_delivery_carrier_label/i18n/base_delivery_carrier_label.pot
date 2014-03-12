@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-06 13:11+0000\n"
-"PO-Revision-Date: 2013-12-06 13:11+0000\n"
+"POT-Creation-Date: 2014-03-12 17:01+0000\n"
+"PO-Revision-Date: 2014-03-12 17:01+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,13 +16,19 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: base_delivery_carrier_label
+#: view:stock.picking.in:0
 #: view:stock.picking.out:0
 msgid "Carrier Info"
 msgstr ""
 
 #. module: base_delivery_carrier_label
-#: model:ir.model,name:base_delivery_carrier_label.model_shipping_label
-msgid "Shipping Label"
+#: model:ir.ui.menu,name:base_delivery_carrier_label.menu_carriers_config
+msgid "Carriers"
+msgstr ""
+
+#. module: base_delivery_carrier_label
+#: view:stock.picking.in:0
+msgid "Create Return Label"
 msgstr ""
 
 #. module: base_delivery_carrier_label
@@ -36,20 +42,19 @@ msgid "Picking List"
 msgstr ""
 
 #. module: base_delivery_carrier_label
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_picking_carrier_type
+#: field:stock.picking,carrier_type:0
+#: field:stock.picking.in,carrier_type:0
 #: field:stock.picking.out,carrier_type:0
 msgid "Carrier type"
 msgstr ""
 
 #. module: base_delivery_carrier_label
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_attachment_id
 #: field:shipping.label,attachment_id:0
 msgid "Automatically created field to link to parent ir.attachment"
 msgstr ""
 
 #. module: base_delivery_carrier_label
 #: field:delivery.carrier,type:0
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_type
 msgid "Type"
 msgstr ""
 
@@ -59,39 +64,60 @@ msgid "Carrier type (combines several delivery methods)"
 msgstr ""
 
 #. module: base_delivery_carrier_label
-#: code:addons/base_delivery_carrier_label/stock.py:143
+#: code:addons/base_delivery_carrier_label/stock.py:155
 #, python-format
 msgid "You can not remove a mandatory option.\n"
 "Options are reset to default."
 msgstr ""
 
 #. module: base_delivery_carrier_label
+#: model:ir.model,name:base_delivery_carrier_label.model_shipping_label
+msgid "Shipping Label"
+msgstr ""
+
+#. module: base_delivery_carrier_label
 #: view:delivery.carrier:0
 #: field:delivery.carrier,description:0
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_description
+#: field:delivery.carrier.template.option,description:0
 msgid "Description"
 msgstr ""
 
 #. module: base_delivery_carrier_label
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_file_type
+#: model:ir.model,name:base_delivery_carrier_label.model_stock_picking_in
+msgid "Incoming Shipments"
+msgstr ""
+
+#. module: base_delivery_carrier_label
 #: field:shipping.label,file_type:0
 msgid "File type"
 msgstr ""
 
 #. module: base_delivery_carrier_label
+#: view:stock.picking.in:0
 #: view:stock.picking.out:0
 msgid "Delivery"
 msgstr ""
 
 #. module: base_delivery_carrier_label
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_picking_carrier_code
+#: field:stock.picking,carrier_code:0
+#: field:stock.picking.in,carrier_code:0
 #: field:stock.picking.out,carrier_code:0
 msgid "Delivery Method Code"
 msgstr ""
 
 #. module: base_delivery_carrier_label
+#: help:delivery.carrier.template.option,description:0
+msgid "Allow to define a more complete description than in the name field."
+msgstr ""
+
+#. module: base_delivery_carrier_label
 #: help:delivery.carrier,code:0
 msgid "Delivery Method Code (according to carrier)"
+msgstr ""
+
+#. module: base_delivery_carrier_label
+#: field:shipping.label,tracking_id:0
+msgid "Pack"
 msgstr ""
 
 #. module: base_delivery_carrier_label
@@ -101,39 +127,31 @@ msgstr ""
 
 #. module: base_delivery_carrier_label
 #: field:delivery.carrier.template.option,name:0
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_template_option_name
 msgid "Name"
 msgstr ""
 
 #. module: base_delivery_carrier_label
-#: code:addons/base_delivery_carrier_label/stock.py:142
+#: code:addons/base_delivery_carrier_label/stock.py:154
 #, python-format
 msgid "User Error !"
 msgstr ""
 
 #. module: base_delivery_carrier_label
-#: view:stock.picking.out:0
-msgid "Create Label"
-msgstr ""
-
-#. module: base_delivery_carrier_label
 #: field:delivery.carrier.option,carrier_id:0
 #: model:ir.model,name:base_delivery_carrier_label.model_delivery_carrier
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option_carrier_id
 msgid "Carrier"
 msgstr ""
 
 #. module: base_delivery_carrier_label
 #: field:delivery.carrier.option,state:0
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option_state
 msgid "Option Configuration"
 msgstr ""
 
 #. module: base_delivery_carrier_label
 #: view:delivery.carrier:0
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_picking_option_ids
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_picking_option_ids_4475
 #: field:stock.picking,option_ids:0
+#: view:stock.picking.in:0
+#: field:stock.picking.in,option_ids:0
 #: view:stock.picking.out:0
 #: field:stock.picking.out,option_ids:0
 msgid "Options"
@@ -142,12 +160,12 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: field:delivery.carrier,available_option_ids:0
 #: field:delivery.carrier.option,tmpl_option_id:0
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_available_option_ids
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option_tmpl_option_id
 msgid "Option"
 msgstr ""
 
 #. module: base_delivery_carrier_label
+#: help:stock.picking,carrier_code:0
+#: help:stock.picking.in,carrier_code:0
 #: help:stock.picking.out,carrier_code:0
 msgid "Delivery Method Code (from carrier)"
 msgstr ""
@@ -155,8 +173,6 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: field:delivery.carrier,code:0
 #: field:delivery.carrier.template.option,code:0
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_code
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_template_option_code
 msgid "Code"
 msgstr ""
 
@@ -166,6 +182,13 @@ msgid "Mandatory"
 msgstr ""
 
 #. module: base_delivery_carrier_label
+#: view:stock.picking.out:0
+msgid "Create Shipping Label"
+msgstr ""
+
+#. module: base_delivery_carrier_label
+#: help:stock.picking,carrier_type:0
+#: help:stock.picking.in,carrier_type:0
 #: help:stock.picking.out,carrier_type:0
 msgid "Carrier type ('group')"
 msgstr ""
@@ -191,7 +214,6 @@ msgstr ""
 
 #. module: base_delivery_carrier_label
 #: field:delivery.carrier.template.option,partner_id:0
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_template_option_partner_id
 msgid "Partner Carrier"
 msgstr ""
 
