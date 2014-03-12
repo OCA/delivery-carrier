@@ -401,10 +401,17 @@ class ShippingLabel(orm.Model):
     _description = "Shipping Label"
 
     def _get_file_type_selection(self, cr, uid, context=None):
+        """ To inherit to add file type """
         return [('pdf', 'PDF')]
 
+    def __get_file_type_selection(self, cr, uid, context=None):
+        file_types = self._get_file_type_selection(cr, uid, context=context)
+        file_types = list(set(file_types))
+        file_types.sort(key=lambda t: t[0])
+        return file_types
+
     _columns = {
-        'file_type': fields.selection(_get_file_type_selection, 'File type'),
+        'file_type': fields.selection(__get_file_type_selection, 'File type'),
         'tracking_id': fields.many2one('stock.tracking', 'Pack'),
     }
 
