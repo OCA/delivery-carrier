@@ -90,9 +90,17 @@ class stock_picking(orm.Model):
                         pack
 
         """
-        return [self.generate_default_label(cr, uid, ids,
-                                            tracking_ids=tracking_ids,
-                                            context=None)]
+        default_label = self.generate_default_label(cr, uid, ids,
+                                                    tracking_ids=tracking_ids,
+                                                    context=None)
+        if not tracking_ids:
+            return [default_label]
+        labels = []
+        for tracking_id in tracking_ids:
+            pack_label = default_label.copy()
+            pack_label['tracking_id'] = tracking_id
+            labels.append(pack_label)
+        return labels
 
     def generate_labels(self, cr, uid, ids, tracking_ids=None, context=None):
         """ Generate the labels.
