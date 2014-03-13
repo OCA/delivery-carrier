@@ -1,26 +1,55 @@
 -
+ !record {model: stock.location, id: location_refrigerator}:
+    name: Refrigerator
+    usage: internal
+-
+ !record {model: stock.location, id: location_delivery_counter}:
+    name: Delivery Counter
+    usage: internal
+-
+ !record {model: stock.location, id: location_opening}:
+    name: opening
+    usage: inventory
+-
+ !record {model: product.product, id: product_icecream}:
+    default_code: 001
+    name: Ice Cream
+    type: product
+    categ_id: product.product_category_1
+    list_price: 100.0
+    standard_price: 70.0
+    uom_id: product.product_uom_kgm
+    uom_po_id: product.product_uom_kgm
+    procure_method: make_to_stock
+    property_stock_inventory: location_opening
+    valuation: real_time
+    cost_method: average
+    property_stock_account_input: account.o_expense
+    property_stock_account_output: account.o_income
+    description: Ice cream can be mass-produced and thus is widely available in developed parts of the world. Ice cream can be purchased in large cartons (vats and squrounds) from supermarkets and grocery stores, in smaller quantities from ice cream shops, convenience stores, and milk bars, and in individual servings from small carts or vans at public events.
+-
  !record {model: stock.picking, id: outgoing_shipment_carrier_file}:
     type: out
-    location_dest_id: stock.location_delivery_counter
+    location_dest_id: location_delivery_counter
     carrier_id: delivery.delivery_carrier
 -
  !record {model: stock.move, id: outgoing_shipment_icecream_carrier_file}:
     picking_id: outgoing_shipment_carrier_file
-    product_id: stock.product_icecream
+    product_id: product_icecream
     product_uom: product.product_uom_kgm
     product_qty: 130.0
-    location_id: stock.location_refrigerator
-    location_dest_id: stock.location_delivery_counter
+    location_id: location_refrigerator
+    location_dest_id: location_delivery_counter
 -
  !record {model: stock.picking, id: outgoing_shipment_carrier_file_manual}:
     type: out
-    location_dest_id: stock.location_delivery_counter
+    location_dest_id: location_delivery_counter
     carrier_id: delivery.free_delivery_carrier
 -
  !record {model: stock.move, id: outgoing_shipment_icecream_carrier_file_manual}:
     picking_id: outgoing_shipment_carrier_file_manual
-    product_id: stock.product_icecream
+    product_id: product_icecream
     product_uom: product.product_uom_kgm
     product_qty: 130.0
-    location_id: stock.location_refrigerator
-    location_dest_id: stock.location_delivery_counter
+    location_id: location_refrigerator
+    location_dest_id: location_delivery_counter

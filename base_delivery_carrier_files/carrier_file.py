@@ -22,12 +22,12 @@
 import os
 import logging
 
-from osv import osv, fields
+from openerp.osv import orm, fields
 from generator import new_file_generator
 from tools.translate import _
 
 
-class carrier_file(osv.osv):
+class carrier_file(orm.Model):
     _name = 'delivery.carrier.file'
 
     def get_type_selection(self, cr, uid, context=None):
@@ -130,14 +130,10 @@ class carrier_file(osv.osv):
         carrier_file = self.browse(cr, uid, carrier_file_id, context=context)
         return self._generate_files(cr, uid, carrier_file, picking_ids, context=context)
 
-carrier_file()
 
-
-class delivery_carrier(osv.osv):
+class delivery_carrier(orm.Model):
     _inherit = 'delivery.carrier'
 
     _columns = {
         'carrier_file_id': fields.many2one('delivery.carrier.file', 'Carrier File')
     }
-
-delivery_carrier()
