@@ -19,8 +19,8 @@
 #
 ##############################################################################
 
-import generator
-import carrier_file
-import stock
-import csv_writer
-import wizard
+from . import generator
+from . import carrier_file
+from . import stock
+from . import csv_writer
+from . import wizard
