@@ -19,10 +19,10 @@
 #
 ##############################################################################
 
-from osv import osv, fields
+from openerp.osv import orm, fields
 
 
-class stock_picking(osv.osv):
+class stock_picking(orm.Model):
     _inherit = 'stock.picking'
 
     _columns = {
@@ -77,4 +77,3 @@ class stock_picking(osv.osv):
         default.update({'carrier_file_generated': False})
         return super(stock_picking, self).copy(cr, uid, id, default, context=context)
 
-stock_picking()
