@@ -61,20 +61,20 @@ class LaPosteFileGenerator(CarrierFileGenerator):
         """
         line = GenericLine()
         line.reference = picking.name
-        address = picking.address_id
-        if address:
-            line.name = address.partner_id and address.partner_id.name
-            line.contact = address.name
-            line.street1 = address.street
-            line.street2 = address.street2
-            line.zip = address.zip
-            line.city = address.city
-            line.state = (picking.address_id.state_id and
-                         picking.address_id.state_id.name)
-            line.country = address.country_id and address.country_id.code
-            line.phone = address.phone or address.mobile
-            line.mail = address.email
-            line.fax = address.fax
+        partner = picking.partner_id
+        if partner:
+            line.name = partner.name
+            line.contact = partner.name
+            line.street1 = partner.street
+            line.street2 = partner.street2
+            line.zip = partner.zip
+            line.city = partner.city
+            line.state = (partner.state_id and
+                          partner.state_id.name)
+            line.country = partner.country_id and partner.country_id.code
+            line.phone = partner.phone or partner.mobile
+            line.mail = partner.email
+            line.fax = partner.fax
         line.delivery_name = picking.carrier_id and picking.carrier_id.name
         line.weight = "%.2f" % (picking.weight,)
         return [line.get_fields()]
