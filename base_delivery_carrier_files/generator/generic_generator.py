@@ -35,7 +35,7 @@ class GenericLine(BaseLine):
               'zip',
               'city',
               'state',
-              'country',
+              'country_code',
               'phone',
               'fax',
               'mail',
@@ -71,7 +71,7 @@ class LaPosteFileGenerator(CarrierFileGenerator):
             line.city = partner.city
             line.state = (partner.state_id and
                           partner.state_id.name)
-            line.country = partner.country_id and partner.country_id.code
+            line.country_code = partner.country_id and partner.country_id.code
             line.phone = partner.phone or partner.mobile
             line.mail = partner.email
             line.fax = partner.fax
