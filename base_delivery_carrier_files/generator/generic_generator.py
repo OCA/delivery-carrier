@@ -35,10 +35,10 @@ class GenericLine(BaseLine):
               'zip',
               'city',
               'state',
-              'country_code',
+              'country',
               'phone',
               'fax',
-              'mail'
+              'mail',
               'delivery_name',
               'weight')
 
