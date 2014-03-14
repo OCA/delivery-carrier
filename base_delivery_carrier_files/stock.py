@@ -30,6 +30,15 @@ class stock_picking(orm.Model):
                               help="The file for the delivery carrier has been generated."),
     }
 
+
+class stock_picking_out(orm.Model):
+    _inherit = 'stock.picking.out'
+
+    _columns = {
+        'carrier_file_generated': fields.boolean('Carrier File Generated', readonly=True,
+                              help="The file for the delivery carrier has been generated."),
+    }
+
     def generate_carrier_files(self, cr, uid, ids, auto=True, context=None):
         """
         Generates all the files for a list of pickings according to
@@ -67,7 +76,7 @@ class stock_picking(orm.Model):
         return True
 
     def action_done(self, cr, uid, ids, context=None):
-        result = super(stock_picking, self).action_done(cr, uid, ids, context=context)
+        result = super(stock_picking_out, self).action_done(cr, uid, ids, context=context)
         self.generate_carrier_files(cr, uid, ids, auto=True, context=context)
         return result
 
@@ -75,5 +84,5 @@ class stock_picking(orm.Model):
         if default is None:
             default = {}
         default.update({'carrier_file_generated': False})
-        return super(stock_picking, self).copy(cr, uid, id, default, context=context)
+        return super(stock_picking_out, self).copy(cr, uid, id, default, context=context)
 

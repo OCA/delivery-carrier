@@ -19,4 +19,4 @@
 #
 ##############################################################################
 
-import generate_carrier_files
+from . import generate_carrier_files

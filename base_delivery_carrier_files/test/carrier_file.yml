@@ -15,18 +15,18 @@
 -
   I confirm outgoing shipment of 130 kgm Ice-cream.
 -
-  !workflow {model: stock.picking, action: button_confirm, ref: outgoing_shipment_carrier_file}
+  !workflow {model: stock.picking.out, action: button_confirm, ref: outgoing_shipment_carrier_file}
 -
   I check outgoing shipment after stock availablity in refrigerator.
 -
-  !python {model: stock.picking}: |
+  !python {model: stock.picking.out}: |
     self.force_assign(cr, uid, [ref("outgoing_shipment_carrier_file")])
     picking = self.browse(cr, uid, ref("outgoing_shipment_carrier_file"))
 -
   I deliver outgoing shipment.
 -
   !python {model: stock.partial.picking}: |
-    context.update({'active_model': 'stock.picking', 'active_id': ref('outgoing_shipment_carrier_file'), 'active_ids': [ref('outgoing_shipment_carrier_file')]})
+    context.update({'active_model': 'stock.picking.out', 'active_id': ref('outgoing_shipment_carrier_file'), 'active_ids': [ref('outgoing_shipment_carrier_file')]})
 -
   !record {model: stock.partial.picking, id: partial_outgoing}:
     picking_id: outgoing_shipment_carrier_file
@@ -36,5 +36,5 @@
 -
   I check shipment details after shipment, the carrier file must have been generated
 -
-  !assert {model: stock.picking, id: outgoing_shipment_carrier_file, string: Carrier file should be generated}:
+  !assert {model: stock.picking.out, id: outgoing_shipment_carrier_file, string: Carrier file should be generated}:
     - carrier_file_generated == True
