@@ -5,7 +5,6 @@
         <record id="view_delivery_carrier_file_generate" model="ir.ui.view">
             <field name="name">delivery.carrier.file.generate</field>
             <field name="model">delivery.carrier.file.generate</field>
-            <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="Carrier Files">
                     <label string="Generate the carrier files for the selected delivery orders."/>
@@ -42,7 +41,7 @@
             <field name="key2">client_action_multi</field>
             <field name="value" eval="'ir.actions.act_window,' + str(ref('action_delivery_carrier_file_generate'))" />
             <field name="key">action</field>
-            <field name="model">stock.picking</field>
+            <field name="model">stock.picking.out</field>
         </record>
 
     </data>
