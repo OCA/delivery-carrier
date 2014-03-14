@@ -3,12 +3,14 @@
     <data>
         <record id="view_picking_out_form_carrier_file" model="ir.ui.view">
             <field name="name">stock.picking.out.form</field>
-            <field name="model">stock.picking</field>
+            <field name="model">stock.picking.out</field>
             <field name="inherit_id" ref="stock.view_picking_out_form"/>
             <field name="arch" type="xml">
                 <data>
-                    <page string="Additional info" position="inside">
-                        <field name="carrier_file_generated"/>
+                    <page string="Additional Info" position="inside">
+                        <group>
+                            <field name="carrier_file_generated"/>
+                        </group>
                     </page>
                 </data>
             </field>
@@ -16,7 +18,7 @@
 
         <record id="view_picking_out_search_carrier_file" model="ir.ui.view">
             <field name="name">stock.picking.out.search</field>
-            <field name="model">stock.picking</field>
+            <field name="model">stock.picking.out</field>
             <field name="inherit_id" ref="stock.view_picking_out_search"/>
             <field name="arch" type="xml">
                 <data>
