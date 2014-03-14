@@ -19,24 +19,24 @@
 #
 ##############################################################################
 
-from osv import osv, fields
+from openerp.osv import orm, fields
 from tools.translate import _
 
 
-class DeliveryCarrierFileGenerate(osv.osv_memory):
+class DeliveryCarrierFileGenerate(orm.TransientModel):
 
     _name = 'delivery.carrier.file.generate'
 
     def _get_picking_ids(self, cr, uid, context=None):
         if context is None: context = {}
         res = False
-        if (context.get('active_model', False) == 'stock.picking' and
+        if (context.get('active_model', False) == 'stock.picking.out' and
             context.get('active_ids', False)):
             res = context['active_ids']
         return res
 
     _columns = {
-        'picking_ids': fields.many2many('stock.picking',
+        'picking_ids': fields.many2many('stock.picking.out',
                                         string='Delivery Orders'),
     }
 
@@ -53,7 +53,7 @@ class DeliveryCarrierFileGenerate(osv.osv_memory):
         if not form.picking_ids:
             raise osv.except_osv(_('Error'), _('No delivery orders selected'))
 
-        picking_obj = self.pool.get('stock.picking')
+        picking_obj = self.pool.get('stock.picking.out')
         picking_ids = [picking.id for picking in form.picking_ids]
         picking_obj.generate_carrier_files(cr, uid,
                                            picking_ids,
@@ -62,4 +62,3 @@ class DeliveryCarrierFileGenerate(osv.osv_memory):
 
         return {'type': 'ir.actions.act_window_close'}
 
-DeliveryCarrierFileGenerate()
