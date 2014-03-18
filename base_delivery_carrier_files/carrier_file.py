@@ -84,7 +84,7 @@ class carrier_file(orm.Model):
         :param list picking_ids: list of ids of pickings for which we have to generate a file
         :return: True if successful
         """
-        picking_obj = self.pool.get('stock.picking.out')
+        picking_obj = self.pool.get('stock.picking')
         log = logging.getLogger('delivery.carrier.file')
         file_generator = new_file_generator(carrier_file.type)
         pickings = [picking for picking in
