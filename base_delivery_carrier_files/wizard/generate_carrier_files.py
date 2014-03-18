@@ -53,7 +53,7 @@ class DeliveryCarrierFileGenerate(orm.TransientModel):
         if not form.picking_ids:
             raise osv.except_osv(_('Error'), _('No delivery orders selected'))
 
-        picking_obj = self.pool.get('stock.picking.out')
+        picking_obj = self.pool.get('stock.picking')
         picking_ids = [picking.id for picking in form.picking_ids]
         picking_obj.generate_carrier_files(cr, uid,
                                            picking_ids,
