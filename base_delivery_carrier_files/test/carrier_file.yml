@@ -15,11 +15,11 @@
 -
   I confirm outgoing shipment of 130 kgm Ice-cream.
 -
-  !workflow {model: stock.picking.out, action: button_confirm, ref: outgoing_shipment_carrier_file}
+  !workflow {model: stock.picking, action: button_confirm, ref: outgoing_shipment_carrier_file}
 -
   I check outgoing shipment after stock availablity in refrigerator.
 -
-  !python {model: stock.picking.out}: |
+  !python {model: stock.picking}: |
     self.force_assign(cr, uid, [ref("outgoing_shipment_carrier_file")])
     picking = self.browse(cr, uid, ref("outgoing_shipment_carrier_file"))
 -
