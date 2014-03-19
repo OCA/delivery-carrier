@@ -21,7 +21,7 @@
 
 {
     'name': 'Base Delivery Carrier Files',
-    'version': '1.0',
+    'version': '1.0.1',
     'category': 'Generic Modules/Warehouse',
     'description': """
 Base module for creation of carrier files  (La Poste, TNT Express Shipper, ...). exported as text (csv, ...).
