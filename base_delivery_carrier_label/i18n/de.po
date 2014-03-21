@@ -1,15 +1,16 @@
-# Translation of OpenERP Server.
-# This file contains the translation of the following modules:
-# 	* base_delivery_carrier_label
+# German translation for carriers-deliveries
+# Copyright (c) 2014 Rosetta Contributors and Canonical Ltd 2014
+# This file is distributed under the same license as the carriers-deliveries package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenERP Server 7.0\n"
-"Report-Msgid-Bugs-To: \n"
+"Project-Id-Version: carriers-deliveries\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-03-12 17:01+0000\n"
-"PO-Revision-Date: 2014-03-31 09:21+0000\n"
-"Last-Translator: David BEAL (ak) <david.beal@akretion.com>\n"
-"Language-Team: \n"
+"PO-Revision-Date: 2014-06-07 08:36+0000\n"
+"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
+"Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,49 +21,50 @@ msgstr ""
 #: view:stock.picking.in:0
 #: view:stock.picking.out:0
 msgid "Carrier Info"
-msgstr "Info transporteur"
+msgstr "Information zum Spediteur"
 
 #. module: base_delivery_carrier_label
 #: model:ir.ui.menu,name:base_delivery_carrier_label.menu_carriers_config
 msgid "Carriers"
-msgstr "Transporteurs"
+msgstr "Spediteure"
 
 #. module: base_delivery_carrier_label
 #: view:stock.picking.in:0
 msgid "Create Return Label"
-msgstr "Créer une étiquette de retour"
+msgstr "Retoure-Etikett erzeugen"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_delivery_carrier_option
 msgid "Delivery carrier option"
-msgstr "Option de transport"
+msgstr "Spediteureinstellungen"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_stock_picking
 msgid "Picking List"
-msgstr "Liste de livraison"
+msgstr "Pickliste"
 
 #. module: base_delivery_carrier_label
 #: field:stock.picking,carrier_type:0
 #: field:stock.picking.in,carrier_type:0
 #: field:stock.picking.out,carrier_type:0
 msgid "Carrier type"
-msgstr "Type de transporteur"
+msgstr "Spediteurtyp"
 
 #. module: base_delivery_carrier_label
 #: field:shipping.label,attachment_id:0
 msgid "Automatically created field to link to parent ir.attachment"
-msgstr "Champ créé automatiquement pour le lier à parent ir.attachment"
+msgstr ""
+"Automatisch angelegtes Feld zum Verknüpfen zum übergeordneten ir.attachment"
 
 #. module: base_delivery_carrier_label
 #: field:delivery.carrier,type:0
 msgid "Type"
-msgstr "Type"
+msgstr "Typ"
 
 #. module: base_delivery_carrier_label
 #: help:delivery.carrier,type:0
 msgid "Carrier type (combines several delivery methods)"
-msgstr "Type de transport"
+msgstr "Spediteurtyp (führt verschiedene Liefermethoden zusammen)"
 
 #. module: base_delivery_carrier_label
 #: code:addons/base_delivery_carrier_label/stock.py:155
@@ -71,86 +73,85 @@ msgid ""
 "You can not remove a mandatory option.\n"
 "Options are reset to default."
 msgstr ""
-"Vous ne pouvez pas supprimer une option obligatoire.\n"
-"Les options seront réinitialisées."
+"Sie können eine Pflichtoption nicht entfernen.\n"
+"Auswahl wird auf Vorgaben zurückgesetzt."
 
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_shipping_label
 msgid "Shipping Label"
-msgstr "Etiquette logistique"
+msgstr "Paketaufkleber"
 
 #. module: base_delivery_carrier_label
 #: view:delivery.carrier:0
 #: field:delivery.carrier,description:0
 #: field:delivery.carrier.template.option,description:0
 msgid "Description"
-msgstr "Description"
+msgstr "Beschreibung"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_stock_picking_in
 msgid "Incoming Shipments"
-msgstr "Livraisons entrantes"
+msgstr "Eingehende Lieferungen"
 
 #. module: base_delivery_carrier_label
 #: field:shipping.label,file_type:0
 msgid "File type"
-msgstr "Type de fichier"
+msgstr "Dateityp"
 
 #. module: base_delivery_carrier_label
 #: view:stock.picking.in:0
 #: view:stock.picking.out:0
 msgid "Delivery"
-msgstr "Livraison"
+msgstr "Lieferung"
 
 #. module: base_delivery_carrier_label
 #: field:stock.picking,carrier_code:0
 #: field:stock.picking.in,carrier_code:0
 #: field:stock.picking.out,carrier_code:0
 msgid "Delivery Method Code"
-msgstr "Code de méthode de livraison"
+msgstr "Schlüssel der Liefermethode"
 
 #. module: base_delivery_carrier_label
 #: help:delivery.carrier.template.option,description:0
 msgid "Allow to define a more complete description than in the name field."
-msgstr ""
-"Permet de définir une description plus complète que dans le champ nom"
+msgstr "Erlaubt eine vollständigere Beschreibung, als das Titelfeld"
 
 #. module: base_delivery_carrier_label
 #: help:delivery.carrier,code:0
 msgid "Delivery Method Code (according to carrier)"
-msgstr "Code de méthode de livraison (en fonction du transporteur)"
+msgstr "Schlüssel der Liefermethode (gem. Spediteur)"
 
 #. module: base_delivery_carrier_label
 #: field:shipping.label,tracking_id:0
 msgid "Pack"
-msgstr "Pack"
+msgstr "Paket"
 
 #. module: base_delivery_carrier_label
 #: selection:delivery.carrier.option,state:0
 msgid "Optional"
-msgstr "Optionnel"
+msgstr "Option"
 
 #. module: base_delivery_carrier_label
 #: field:delivery.carrier.template.option,name:0
 msgid "Name"
-msgstr "Nom"
+msgstr "Bezeichnung"
 
 #. module: base_delivery_carrier_label
 #: code:addons/base_delivery_carrier_label/stock.py:154
 #, python-format
 msgid "User Error !"
-msgstr "Erreur utilisateur !"
+msgstr "Anwenderfehler!"
 
 #. module: base_delivery_carrier_label
 #: field:delivery.carrier.option,carrier_id:0
 #: model:ir.model,name:base_delivery_carrier_label.model_delivery_carrier
 msgid "Carrier"
-msgstr "Transporteur"
+msgstr "Spediteur"
 
 #. module: base_delivery_carrier_label
 #: field:delivery.carrier.option,state:0
 msgid "Option Configuration"
-msgstr "Option de configuration"
+msgstr "Einstellungen"
 
 #. module: base_delivery_carrier_label
 #: view:delivery.carrier:0
@@ -160,43 +161,43 @@ msgstr "Option de configuration"
 #: view:stock.picking.out:0
 #: field:stock.picking.out,option_ids:0
 msgid "Options"
-msgstr "Options"
+msgstr "Optionen"
 
 #. module: base_delivery_carrier_label
 #: field:delivery.carrier,available_option_ids:0
 #: field:delivery.carrier.option,tmpl_option_id:0
 msgid "Option"
-msgstr "Option"
+msgstr "Vorlageoption"
 
 #. module: base_delivery_carrier_label
 #: help:stock.picking,carrier_code:0
 #: help:stock.picking.in,carrier_code:0
 #: help:stock.picking.out,carrier_code:0
 msgid "Delivery Method Code (from carrier)"
-msgstr "Code de méthode de livraison (du transporteur)"
+msgstr "Schlüssel der Liefermethoden (gem. Spediteur)"
 
 #. module: base_delivery_carrier_label
 #: field:delivery.carrier,code:0
 #: field:delivery.carrier.template.option,code:0
 msgid "Code"
-msgstr "Code"
+msgstr "Schlüssel"
 
 #. module: base_delivery_carrier_label
 #: selection:delivery.carrier.option,state:0
 msgid "Mandatory"
-msgstr "Obligatoire"
+msgstr "Verbindlich"
 
 #. module: base_delivery_carrier_label
 #: view:stock.picking.out:0
 msgid "Create Shipping Label"
-msgstr "Créer une étiquette logistique"
+msgstr "Paketaufkleber erzeugen"
 
 #. module: base_delivery_carrier_label
 #: help:stock.picking,carrier_type:0
 #: help:stock.picking.in,carrier_type:0
 #: help:stock.picking.out,carrier_type:0
 msgid "Carrier type ('group')"
-msgstr "Type de transport ('groupe')"
+msgstr "Spediteurtyp (Gruppe)"
 
 #. module: base_delivery_carrier_label
 #: view:delivery.carrier.option:0
@@ -207,7 +208,7 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_delivery_carrier_template_option
 msgid "Delivery carrier template option"
-msgstr "Option de méthode de livraison"
+msgstr "Spediteurvorlagen-Option"
 
 #. module: base_delivery_carrier_label
 #: help:delivery.carrier.option,state:0
@@ -218,23 +219,23 @@ msgid ""
 "- Optional by Default: This option will be copied but can be removed\n"
 "- Optional: This option can be added later by the user on the Delivery Order."
 msgstr ""
-"Assurez vous que vous avez défini correctement vos options ou celle ci ne "
-"sont pas disponible pour l'emballeur\n"
-"- Obligatoire: Cette option sera copiée sur la méthode de transport et ne "
-"peut pas être retirée\n"
-"- Optionnel par défaut: Cet option sera copiée mais peut être retirée\n"
-"- Optionnel: Cet option sera disponible pour être ajouté par l'utilisateur "
-"sur le Bon de livraison."
+"Stellen Sie sicher, dass Sie alle Einstellungen korrekt vornehmen oder diese "
+"werden dem Verpacker nicht zur Verfügung stehen\n"
+"- Verbindlich: Diese Option wird in den Spediteur kopiert und ist nicht "
+"löschbar\n"
+"- Vorgegebene Option: Diese Option wird kopiert ist jedoch entfernbar\n"
+"- Inaktive Option: Diese Option kann durch den Anwender später im "
+"Lieferauftrag ergänzt werden."
 
 #. module: base_delivery_carrier_label
 #: field:delivery.carrier.template.option,partner_id:0
 msgid "Partner Carrier"
-msgstr "Partenaire transporteur"
+msgstr "Geschäftspartnerzuordnung"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_stock_picking_out
 msgid "Delivery Orders"
-msgstr "Bons de livraison"
+msgstr "Lieferaufträge"
 
 #. module: base_delivery_carrier_label
 #: view:stock.picking.out:0
@@ -244,4 +245,4 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: selection:delivery.carrier.option,state:0
 msgid "Optional by Default"
-msgstr "Optionnel par défaut"
+msgstr "Vorgegebene Option"
