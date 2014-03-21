@@ -151,6 +151,9 @@ class PostlogisticsWebService(object):
             'EMail': partner.email or None,
         }
 
+        if partner.street2:
+            recipient['AddressSuffix'] = partner.street2
+
         if partner.parent_id:
             recipient['Name2'] = partner.parent_id.name
             recipient['PersonallyAddressed'] = False
