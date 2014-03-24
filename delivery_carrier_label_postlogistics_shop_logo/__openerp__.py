@@ -29,8 +29,13 @@
 PostLogistics labels - logo per Shop
 ====================================
 
-Add an option to define a logo per shop.
-If no shop logo is defined uses company logo.
+Allow to set a custom logo per shop on PostLogistics labels.
+
+Adds an image field on shop form to set it.
+This permits to replace the Logo printed on PostLogistics sender labels.
+
+If no shop logo is defined it still uses PostLogistics label logo
+define on company.
 
 Contributors
 ------------
