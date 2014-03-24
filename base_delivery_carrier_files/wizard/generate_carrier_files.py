@@ -28,10 +28,11 @@ class DeliveryCarrierFileGenerate(orm.TransientModel):
     _name = 'delivery.carrier.file.generate'
 
     def _get_picking_ids(self, cr, uid, context=None):
-        if context is None: context = {}
+        if context is None:
+            context = {}
         res = False
         if (context.get('active_model', False) == 'stock.picking.out' and
-            context.get('active_ids', False)):
+                context.get('active_ids', False)):
             res = context['active_ids']
         return res
 
@@ -51,7 +52,7 @@ class DeliveryCarrierFileGenerate(orm.TransientModel):
         context = context or {}
         form = self.browse(cr, uid, ids, context=context)[0]
         if not form.picking_ids:
-            raise osv.except_osv(_('Error'), _('No delivery orders selected'))
+            raise orm.except_orm(_('Error'), _('No delivery orders selected'))
 
         picking_obj = self.pool.get('stock.picking')
         picking_ids = [picking.id for picking in form.picking_ids]
@@ -61,4 +62,3 @@ class DeliveryCarrierFileGenerate(orm.TransientModel):
                                            context=context)
 
         return {'type': 'ir.actions.act_window_close'}
-
