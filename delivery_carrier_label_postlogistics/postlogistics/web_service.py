@@ -383,7 +383,7 @@ class PostlogisticsWebService(object):
                 })
 
             if hasattr(item, 'Warnings') and item.Warnings:
-                for warning in item.Warnings:
+                for warning in item.Warnings.Warning:
                     message = '[%s] %s' % (warning.Code, warning.Message)
                     warning_messages.append(message)
 
