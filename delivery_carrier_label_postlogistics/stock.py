@@ -18,7 +18,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp.osv import orm, fields
+from openerp.osv import orm
 
 from postlogistics.web_service import PostlogisticsWebService
 
@@ -91,7 +91,10 @@ class ShippingLabel(orm.Model):
     _inherit = 'shipping.label'
 
     def _get_file_type_selection(self, cr, uid, context=None):
-        """ Return a sorted list of extensions of label file format
+        """ Return a concatenated list of extensions of label file format
+        plus file format from super
+
+        This will be filtered and sorted in __get_file_type_selection
 
         :return: list of tuple (code, name)
 
@@ -105,11 +108,5 @@ class ShippingLabel(orm.Model):
                      ('pdf', 'PDF'),
                      ('spdf', 'sPDF'), # sPDF is a pdf without integrated font
                      ('zpl2', 'ZPL2')]
-        add_types = [t for t in new_types if not t in file_types]
-        file_types.extend(add_types)
-        file_types.sort(key=lambda t: t[0])
+        file_types.extend(new_types)
         return file_types
-
-    _columns = {
-        'file_type': fields.selection(_get_file_type_selection, 'File type')
-    }
