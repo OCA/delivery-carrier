@@ -19,7 +19,7 @@
 #
 ##############################################################################
 {'name': 'Base module for carrier labels',
- 'version': '1.0.3',
+ 'version': '1.0.4',
  'author': 'Camptocamp,Akretion',
  'maintainer': 'Camptocamp',
  'category': 'version',
