@@ -26,8 +26,11 @@ class stock_picking(orm.Model):
     _inherit = 'stock.picking'
 
     _columns = {
-        'carrier_file_generated': fields.boolean('Carrier File Generated', readonly=True,
-                              help="The file for the delivery carrier has been generated."),
+        'carrier_file_generated': fields.boolean('Carrier File Generated',
+                                                 readonly=True,
+                                                 help="The file for "
+                                                 "the delivery carrier "
+                                                 "has been generated."),
     }
 
     def generate_carrier_files(self, cr, uid, ids, auto=True, context=None):
@@ -53,21 +56,25 @@ class stock_picking(orm.Model):
                 continue
             if picking.carrier_file_generated:
                 continue
-            if not picking.carrier_id or not picking.carrier_id.carrier_file_id:
+            carrier = picking.carrier_id
+            if not carrier or not carrier.carrier_file_id:
                 continue
-            if auto and not picking.carrier_id.carrier_file_id.auto_export:
+            if auto and not carrier.carrier_file_id.auto_export:
                 continue
             p_carrier_file_id = picking.carrier_id.carrier_file_id.id
-            carrier_file_ids.setdefault(p_carrier_file_id, []).append(picking.id)
+            carrier_file_ids.setdefault(p_carrier_file_id, []).\
+                append(picking.id)
 
-        for carrier_file_id, carrier_picking_ids in carrier_file_ids.iteritems():
+        for carrier_file_id, carrier_picking_ids\
+                in carrier_file_ids.iteritems():
             carrier_file_obj.generate_files(cr, uid, carrier_file_id,
                                             carrier_picking_ids,
                                             context=context)
         return True
 
     def action_done(self, cr, uid, ids, context=None):
-        result = super(stock_picking, self).action_done(cr, uid, ids, context=context)
+        result = super(stock_picking, self).action_done(cr, uid, ids,
+                                                        context=context)
         self.generate_carrier_files(cr, uid, ids, auto=True, context=context)
         return result
 
@@ -75,5 +82,17 @@ class stock_picking(orm.Model):
         if default is None:
             default = {}
         default.update({'carrier_file_generated': False})
-        return super(stock_picking, self).copy(cr, uid, id, default, context=context)
+        return super(stock_picking, self).copy(cr, uid, id, default,
+                                               context=context)
 
+
+class stock_picking_out(orm.Model):
+    _inherit = 'stock.picking.out'
+
+    _columns = {
+        'carrier_file_generated': fields.boolean('Carrier File Generated',
+                                                 readonly=True,
+                                                 help="The file for "
+                                                 "the delivery carrier "
+                                                 "has been generated."),
+    }
