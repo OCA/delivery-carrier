@@ -38,3 +38,9 @@
 -
   !assert {model: stock.picking.out, id: outgoing_shipment_carrier_file, string: Carrier file should be generated}:
     - carrier_file_generated == True
+-
+  I check outgoing shipment copy, the carrier_file_generated field must be unchecked
+-
+  !python {model: stock.picking.out}: |
+    new_id = self.copy(cr, uid, ref('outgoing_shipment_carrier_file'))
+    assert self.read(cr, uid, new_id, ['carrier_file_generated'])['carrier_file_generated'] == False, "After duplication, the file generated checkbox is unchecked"
