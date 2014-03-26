@@ -78,13 +78,6 @@ class stock_picking(orm.Model):
         self.generate_carrier_files(cr, uid, ids, auto=True, context=context)
         return result
 
-    def copy(self, cr, uid, id, default=None, context=None):
-        if default is None:
-            default = {}
-        default.update({'carrier_file_generated': False})
-        return super(stock_picking, self).copy(cr, uid, id, default,
-                                               context=context)
-
 
 class stock_picking_out(orm.Model):
     _inherit = 'stock.picking.out'
@@ -96,3 +89,10 @@ class stock_picking_out(orm.Model):
                                                  "the delivery carrier "
                                                  "has been generated."),
     }
+
+    def copy(self, cr, uid, id, default=None, context=None):
+        if default is None:
+            default = {}
+        default.update({'carrier_file_generated': False})
+        return super(stock_picking_out, self).copy(cr, uid, id, default,
+                                                   context=context)
