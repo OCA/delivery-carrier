@@ -25,19 +25,19 @@
     'category': 'Generic Modules/Warehouse',
     'description': """
 Allow to store the carrier files in a Document directory.
-Auto-install when the module Document and Base Delivery Carrier Files are installed.
+Auto-install when the module Document and
+Base Delivery Carrier Files are installed.
     """,
     'author': 'Camptocamp',
     'license': 'AGPL-3',
     'website': 'http://www.camptocamp.com',
     'depends': ['base_delivery_carrier_files',
                 'document'],
-    'init_xml': [],
-    'update_xml': ['carrier_file_view.xml',],
-    'demo_xml': ['carrier_file_demo.xml'],
+    'data': ['carrier_file_view.xml'],
+    'demo': ['carrier_file_demo.xml'],
     'test': ['test/carrier_file.yml',
-             'test/carrier_file_manual.yml',],
+             'test/carrier_file_manual.yml'],
     'images': [],
-    'installable': False,
+    'installable': True,
     'auto_install': True,
 }
