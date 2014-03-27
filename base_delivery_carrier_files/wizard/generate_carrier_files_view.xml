@@ -14,6 +14,7 @@
                             <field name="carrier_id"/>
                             <field name="partner_id"/>
                             <field name="origin"/>
+                            <field name="state" invisible="1"/>
                         </tree>
                     </field>
                     <separator colspan="4"/>
