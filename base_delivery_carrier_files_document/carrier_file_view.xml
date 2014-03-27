@@ -5,7 +5,6 @@
             <field name="name">delivery.carrier.file.form</field>
             <field name="model">delivery.carrier.file</field>
             <field name="inherit_id" ref="base_delivery_carrier_files.view_delivery_carrier_file_form"/>
-            <field name="type">form</field>
             <field name="arch" type="xml">
                 <data>
                     <field name="export_path" position="after">
