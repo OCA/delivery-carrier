@@ -62,7 +62,19 @@ class DeliveryCarrierLabelGenerate(orm.TransientModel):
                                                context=context)
             yield pack, list(moves), pack_label
 
-    def _find_pack_label(self, cr, uid, pack, context=None):
+    def _find_picking_label(self, cr, uid, wizard, picking, context=None):
+        label_obj = self.pool['shipping.label']
+        domain = [('file_type', '=', 'pdf'),
+                  ('res_id', '=', picking.id),
+                  ('tracking_id', '=', False),
+                  ]
+        label_id = label_obj.search(cr, uid, domain, order='create_date DESC',
+                                    limit=1, context=context)
+        if not label_id:
+            return None
+        return label_obj.browse(cr, uid, label_id[0], context=context)
+
+    def _find_pack_label(self, cr, uid, wizard, pack, context=None):
         label_obj = self.pool['shipping.label']
         domain = [('file_type', '=', 'pdf'),
                   ('tracking_id', '=', pack.id),
@@ -78,13 +90,25 @@ class DeliveryCarrierLabelGenerate(orm.TransientModel):
                                                   context=context):
             if not label or wizard.generate_new_labels:
                 picking_out_obj = self.pool['stock.picking.out']
-                picking_id = moves[0].picking_id.id
+                picking = moves[0].picking_id
                 # generate the label of the pack
                 picking_out_obj.generate_labels(
-                    cr, uid, [picking_id],
+                    cr, uid, [picking.id],
                     tracking_ids=[pack.id],
                     context=context)
+<<<<<<< HEAD
                 label = self._find_pack_label(cr, uid, pack, context=context)
+||||||| merged common ancestors
+                label = self._find_pack_label(cr, uid, wizard, pack,
+                                              context=context)
+=======
+                if pack:
+                    label = self._find_pack_label(cr, uid, wizard, pack,
+                                                  context=context)
+                else:
+                    label = self._find_picking_label(cr, uid, wizard, picking,
+                                                     context=context)
+>>>>>>> fix generation of picking shipping labels from picking dispatch when there are no pack defined in the pickings
                 if not label:
                     continue  # no label could be generated
             yield label
