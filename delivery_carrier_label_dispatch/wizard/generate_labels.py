@@ -132,7 +132,7 @@ class DeliveryCarrierLabelGenerate(orm.TransientModel):
             labels = (label.datas for label in labels)
             labels = (label.decode('base64') for label in labels if labels)
             data = {
-                'name': dispatch.name,
+                'name': dispatch.name + '.pdf',
                 'res_id': dispatch.id,
                 'res_model': 'picking.dispatch',
                 'datas': assemble_pdf(labels).encode('base64'),
