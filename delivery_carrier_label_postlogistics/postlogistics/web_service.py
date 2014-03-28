@@ -340,7 +340,7 @@ class PostlogisticsWebService(object):
 
         :param picking: picking browse record
         :param user_lang: OpenERP language code
-        :param trackings: list of ids of trackings to filter on
+        :param trackings: list of browse records of trackings to filter on
         :return: {
             value: [{item_id: pack id
                      binary: file returned by API
