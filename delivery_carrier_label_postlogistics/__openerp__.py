@@ -19,7 +19,7 @@
 #
 ##############################################################################
 {'name': 'PostLogistics Labels WebService',
- 'version': '1.0.2',
+ 'version': '1.1',
  'author': 'Camptocamp',
  'maintainer': 'Camptocamp',
  'category': 'version',
