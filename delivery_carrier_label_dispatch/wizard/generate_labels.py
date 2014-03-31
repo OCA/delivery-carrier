@@ -92,23 +92,27 @@ class DeliveryCarrierLabelGenerate(orm.TransientModel):
                 picking_out_obj = self.pool['stock.picking.out']
                 picking = moves[0].picking_id
                 # generate the label of the pack
-                picking_out_obj.generate_labels(
-                    cr, uid, [picking.id],
-                    tracking_ids=[pack.id],
-                    context=context)
-<<<<<<< HEAD
-                label = self._find_pack_label(cr, uid, pack, context=context)
-||||||| merged common ancestors
-                label = self._find_pack_label(cr, uid, wizard, pack,
-                                              context=context)
-=======
+                if pack:
+                    tracking_ids = [pack.id]
+                else:
+                    tracking_ids = None
+                try:
+                    picking_out_obj.generate_labels(
+                        cr, uid, [picking.id],
+                        tracking_ids=tracking_ids,
+                        context=context)
+                except orm.except_orm as e:
+                    picking_name = _('Picking: %s') % picking.name
+                    pack_num = _('Pack: %s') % pack.name if pack else ''
+                    raise orm.except_orm(
+                        e.name,
+                        _('%s %s - %s') % (picking_name, pack_num, e.value))
                 if pack:
                     label = self._find_pack_label(cr, uid, wizard, pack,
                                                   context=context)
                 else:
                     label = self._find_picking_label(cr, uid, wizard, picking,
                                                      context=context)
->>>>>>> fix generation of picking shipping labels from picking dispatch when there are no pack defined in the pickings
                 if not label:
                     continue  # no label could be generated
             yield label
