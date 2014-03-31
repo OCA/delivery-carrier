@@ -97,6 +97,8 @@ class carrier_file(orm.Model):
                                  we have to generate a file
         :return: True if successful
         """
+        if context is None:
+            context = {}
         picking_obj = self.pool.get('stock.picking')
         log = logging.getLogger('delivery.carrier.file')
         file_generator = new_file_generator(carrier_file.type)
@@ -104,6 +106,8 @@ class carrier_file(orm.Model):
                     picking_obj.browse(cr, uid, picking_ids, context=context)]
         # must return a list of generated pickings ids to update
         files = file_generator.generate_files(pickings, carrier_file)
+        if carrier_file.auto_export:
+            context['picking_id'] = pickings and pickings[0].id
         for file in files:
             filename, file_content, picking_ids = file
             # we pass the errors because the files can still be
