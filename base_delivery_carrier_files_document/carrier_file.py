@@ -48,13 +48,15 @@ class carrier_file(orm.Model):
                 'datas_fname': filename,
                 'datas': base64.encodestring(file_content),
                 'parent_id': carrier_file.document_directory_id.id,
-                'type': 'binary'}
+                'type': 'binary',
+                'res_model': 'stock.picking.out',
+                'res_id': carrier_file.auto_export and context['picking_id'] or False}
 
     def _write_file(self, cr, uid, carrier_file, filename, file_content,
                     context=None):
         if carrier_file.write_mode == 'document':
             vals = self._prepare_attachment(carrier_file, filename,
-                                            file_content)
+                                            file_content, context=context)
             self.pool['ir.attachment'].create(cr, uid, vals, context=context)
             return True
         else:
