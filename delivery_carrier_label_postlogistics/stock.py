@@ -20,7 +20,7 @@
 ##############################################################################
 from operator import attrgetter
 
-from openerp.osv import orm
+from openerp.osv import orm, fields
 
 from postlogistics.web_service import PostlogisticsWebService
 
@@ -88,7 +88,7 @@ class stock_picking(orm.Model):
             labels.append({'tracking_id': track.id if track else False,
                            'file': label['binary'].decode('base64'),
                            'file_type': label['file_type'],
-                           'name': tracking_number + '.' + label['file_type'],
+                           'name': tracking_number,
                            })
 
         return labels
@@ -115,10 +115,7 @@ class ShippingLabel(orm.Model):
     _inherit = 'shipping.label'
 
     def _get_file_type_selection(self, cr, uid, context=None):
-        """ Return a concatenated list of extensions of label file format
-        plus file format from super
-
-        This will be filtered and sorted in __get_file_type_selection
+        """ Return a sorted list of extensions of label file format
 
         :return: list of tuple (code, name)
 
@@ -132,5 +129,11 @@ class ShippingLabel(orm.Model):
                      ('pdf', 'PDF'),
                      ('spdf', 'sPDF'), # sPDF is a pdf without integrated font
                      ('zpl2', 'ZPL2')]
-        file_types.extend(new_types)
+        add_types = [t for t in new_types if not t in file_types]
+        file_types.extend(add_types)
+        file_types.sort(key=lambda t: t[0])
         return file_types
+
+    _columns = {
+        'file_type': fields.selection(_get_file_type_selection, 'File type')
+    }
