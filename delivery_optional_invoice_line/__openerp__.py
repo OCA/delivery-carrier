@@ -24,9 +24,9 @@
     'version': '0.1',
     'category': 'Sales Management',
     'description': """
-This module allows to choose wether or not to addthe shipping line
-to the invoice. To do so, the user shall go to the deliver carrier form and
-select the option 'Do not create line on invoice'.
+This module allows to choose wether or not to add the shipping line
+to the invoices from picking. To do so, the user shall go to the
+deliver carrier form and select the option 'Do not create line on invoice'.
     """,
     'author': 'Agile Business Group',
     'website': 'http://www.agilebg.com',
