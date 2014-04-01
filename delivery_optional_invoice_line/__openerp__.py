@@ -28,12 +28,15 @@
     'author': 'Agile Business Group',
     'website': 'http://www.agilebg.com',
     'license': 'AGPL-3',
-    "depends": [
+    'depends': [
         'delivery',
     ],
-    "data": [
+    'data': [
         'delivery_view.xml',
     ],
-    "active": False,
-    "installable": True
+    'test': [
+        'test/delivery_optional_invoice_line.yml',
+    ],
+    'active': False,
+    'installable': True
 }
