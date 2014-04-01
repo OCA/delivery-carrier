@@ -27,7 +27,7 @@ class delivery_carrier(orm.Model):
 
     _columns = {
         'do_not_create_invoice_line': fields.boolean(
-            'Do not create invoice line'),
+            'Do not create line on invoice'),
     }
 
 
