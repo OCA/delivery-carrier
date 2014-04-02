@@ -2,12 +2,12 @@
 -
   In order to test process of the Delivery Optional Invoice Line,
 - 
-  I set the do_not_create_invoice_line field as True on the free_delivery_carrier
+  I set the do_not_create_invoice_line field as True on the free_delivery_carrier.
 -  
   !record {model: delivery.carrier, id: delivery.free_delivery_carrier}:
     do_not_create_invoice_line: True
 -
-  I create sale order having picking as order_policy and free_delivery_carrier as carrier_id
+  I create sale order having picking as order_policy and free_delivery_carrier as carrier_id.
 -
   !record {model: sale.order, id: sale_order_test}:
     partner_id: base.res_partner_2
@@ -17,7 +17,7 @@
       - product_id: product.product_product_7
         product_uom_qty: 8
 -
-  I confirm sale order
+  I confirm sale order.
 -
   !workflow {model: sale.order, action: order_confirm, ref: sale_order_test}
 -
@@ -46,7 +46,5 @@
   !python {model: sale.order}: |
     order = self.browse(cr, uid, ref("sale_order_test"))
     assert order.invoice_ids, "Invoice is not created."
-    ac = order.partner_invoice_id.property_account_receivable.id
-    journal_ids = self.pool.get('account.journal').search(cr, uid, [('type', '=', 'sale'), ('company_id', '=', order.company_id.id)])
     for invoice in order.invoice_ids:
     	assert len(invoice.invoice_line) == len(order.order_line), "Lines of Invoice and Sale Order are not correspond"
