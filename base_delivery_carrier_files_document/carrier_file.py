@@ -24,11 +24,11 @@ import base64
 from openerp.osv import orm, fields
 
 
-class carrier_file_model(orm.Model):
+class CarrierFile(orm.Model):
     _inherit = 'delivery.carrier.file'
 
     def get_write_mode_selection(self, cr, uid, context=None):
-        res = super(carrier_file_model, self).\
+        res = super(CarrierFile, self).\
             get_write_mode_selection(cr, uid, context=context)
         if 'document' not in res:
             res.append(('document', 'Document'))
@@ -58,6 +58,6 @@ class carrier_file_model(orm.Model):
             self.pool['ir.attachment'].create(cr, uid, vals, context=context)
             return True
         else:
-            return (super(carrier_file_model, self)
+            return (super(CarrierFile, self)
                     ._write_file(cr, uid, carrier_file, filename, file_content,
                                  context=None))
