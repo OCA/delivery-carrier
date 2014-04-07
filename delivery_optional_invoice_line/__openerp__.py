@@ -40,6 +40,5 @@ and select the option 'Do not create line on invoice'.
     'test': [
         'test/delivery_optional_invoice_line.yml',
     ],
-    'active': False,
     'installable': True
 }
