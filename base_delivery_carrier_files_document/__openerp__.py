@@ -21,7 +21,7 @@
 
 {
     'name': 'Base module for picking carrier files creation for document',
-    'version': '1.0',
+    'version': '1.0.1',
     'category': 'Generic Modules/Warehouse',
     'description': """
 Allow to store the carrier files in a Document directory.
