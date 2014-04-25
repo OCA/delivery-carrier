@@ -24,11 +24,11 @@ import base64
 from osv import osv, fields
 
 
-class carrier_file(osv.osv):
+class carrier_file_model(osv.osv):
     _inherit = 'delivery.carrier.file'
 
     def get_write_mode_selection(self, cr, uid, context=None):
-        res = super(carrier_file, self).get_write_mode_selection(cr, uid, context=context)
+        res = super(carrier_file_model, self).get_write_mode_selection(cr, uid, context=context)
         if 'document' not in res:
             res.append(('document', 'Document'))
         return res
@@ -52,7 +52,7 @@ class carrier_file(osv.osv):
             self.pool.get('ir.attachment').create(cr, uid, vals, context=context)
             return True
         else:
-            return (super(carrier_file, self)
+            return (super(carrier_file_model, self)
                     ._write_file(cr, uid, carrier_file, filename, file_content, context=None))
 
-carrier_file()
+carrier_file_model()
