@@ -105,11 +105,15 @@ class DeliveryCarrierLabelGenerate(orm.TransientModel):
         # create a cursor to be thread safe
         thread_cr = pooler.get_db(cr.dbname).cursor()
         try:
+            picking_out_obj.generate_labels(
+                thread_cr, uid, [picking.id],
+                tracking_ids=tracking_ids,
+                context=context)
+            thread_cr.commit()
+        except:
+            thread_cr.rollback()
             try:
-                picking_out_obj.generate_labels(
-                    thread_cr, uid, [picking.id],
-                    tracking_ids=tracking_ids,
-                    context=context)
+                raise
             except orm.except_orm as e:
                 # add information on picking and pack in the exception
                 picking_name = _('Picking: %s') % picking.name
@@ -117,10 +121,6 @@ class DeliveryCarrierLabelGenerate(orm.TransientModel):
                 raise orm.except_orm(
                     e.name,
                     _('%s %s - %s') % (picking_name, pack_num, e.value))
-            thread_cr.commit()
-        except Exception:
-            thread_cr.rollback()
-            raise
         finally:
             thread_cr.close()
 
