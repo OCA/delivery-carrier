@@ -28,7 +28,7 @@
     'depends': ['base_delivery_carrier_label', 'picking_dispatch'],
     'description': """
 [Link module] Carrier labels - Picking dispatch
-==============================
+===============================================
 
 This module adds a wizard on picking dispatch to generate the labels
 of the packs. The labels are merged in one PDF file.
