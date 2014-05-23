@@ -43,21 +43,29 @@ class CarrierFile(orm.Model):
     }
 
     def _prepare_attachment(self, carrier_file, filename, file_content,
-                            context=None):
+                            context):
+        if carrier_file.auto_export:
+            assert context is not None and 'picking_id' in context, \
+              'When carrier_file is in mode auto_export, picking_id must be in context'
+            res_id = context['picking_id']
+        else:
+            res_id = False
         return {'name': "%s_%s" % (carrier_file.name, filename),
                 'datas_fname': filename,
                 'datas': base64.encodestring(file_content),
                 'parent_id': carrier_file.document_directory_id.id,
-                'type': 'binary'}
+                'type': 'binary',
+                'res_model': 'stock.picking.out',
+                'res_id': res_id}
 
     def _write_file(self, cr, uid, carrier_file, filename, file_content,
                     context=None):
         if carrier_file.write_mode == 'document':
             vals = self._prepare_attachment(carrier_file, filename,
-                                            file_content)
+                                            file_content, context=context)
             self.pool['ir.attachment'].create(cr, uid, vals, context=context)
             return True
         else:
             return (super(CarrierFile, self)
                     ._write_file(cr, uid, carrier_file, filename, file_content,
-                                 context=None))
+                                 context=context))
