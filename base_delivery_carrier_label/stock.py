@@ -356,7 +356,7 @@ class stock_picking_out(orm.Model):
             cr, uid, ids, context=context)
 
     def _customize_sender_address(self, cr, uid, picking, context=None):
-        "You may inherit if you want to customize address"
+        """You may inherit if you want to customize address"""
         return None
 
     def carrier_id_change(self, cr, uid, ids, carrier_id, context=None):
