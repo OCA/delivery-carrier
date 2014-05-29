@@ -7,13 +7,15 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 6.1rc1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-02-16 09:08+0000\n"
-"PO-Revision-Date: 2014-04-28 10:59+0100\n"
-"Last-Translator: Alberto Garcia <alberto.garcia@factorlibre.com>\n"
+"PO-Revision-Date: 2014-05-28 10:54+0000\n"
+"Last-Translator: Alberto Garcia (Factor Libre) "
+"<alberto.garcia@factorlibre.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: \n"
+"X-Launchpad-Export-Date: 2014-05-29 05:44+0000\n"
+"X-Generator: Launchpad (build 17017)\n"
 
 #. module: base_delivery_carrier_files
 #: code:addons/base_delivery_carrier_files/wizard/generate_carrier_files.py:60
@@ -24,7 +26,8 @@ msgstr "No se han seleccionado albaranes "
 #. module: base_delivery_carrier_files
 #: view:delivery.carrier.file.generate:0
 msgid "Generate the carrier files for the selected delivery orders."
-msgstr "Generar el fichero de transportista para los albaranes seleccionados."
+msgstr ""
+"Generar el fichero de transportista para los albaranes seleccionados."
 
 #. module: base_delivery_carrier_files
 #: help:stock.picking,carrier_file_generated:0
@@ -35,6 +38,11 @@ msgstr "El fichero para el transportista ha sido generado."
 #: view:stock.picking:0
 msgid "Carrier File To Generate"
 msgstr "Fichero tansportista a generar"
+
+#. module: base_delivery_carrier_files
+#: model:ir.model,name:base_delivery_carrier_files.model_delivery_carrier_file
+msgid "delivery.carrier.file"
+msgstr "delivery.carrier.file"
 
 #. module: base_delivery_carrier_files
 #: model:ir.model,name:base_delivery_carrier_files.model_stock_picking
@@ -48,8 +56,12 @@ msgstr "Ficheros Transportista"
 
 #. module: base_delivery_carrier_files
 #: help:delivery.carrier.file,auto_export:0
-msgid "The file will be automatically generated when a delivery order is processed. If activated, each delivery order will be exported in a separate file."
-msgstr "El archivo será generado automáticamente cuando un albarán sea procesado. Si esta activado, cada albarán generara un fichero separado."
+msgid ""
+"The file will be automatically generated when a delivery order is processed. "
+"If activated, each delivery order will be exported in a separate file."
+msgstr ""
+"El archivo será generado automáticamente cuando un albarán sea procesado. Si "
+"está activado, cada albarán generará un fichero separado."
 
 #. module: base_delivery_carrier_files
 #: model:ir.actions.act_window,name:base_delivery_carrier_files.action_delivery_carrier_file_generate
@@ -59,7 +71,9 @@ msgstr "Generar ficheros transportista"
 #. module: base_delivery_carrier_files
 #: model:ir.actions.act_window,help:base_delivery_carrier_files.action_delivery_carrier_file_form
 msgid "Generates automatically files asked by carriers for outgoing pickings"
-msgstr "Genera ficheros automáticos solicitados por transportistas para albaranes de salida"
+msgstr ""
+"Genera ficheros automáticos solicitados por transportistas para albaranes de "
+"salida"
 
 #. module: base_delivery_carrier_files
 #: field:delivery.carrier.file,type:0
@@ -67,9 +81,13 @@ msgid "Type"
 msgstr "Tipo"
 
 #. module: base_delivery_carrier_files
-#: help:delivery.carrier.file,group_pickings:0
-msgid "All the pickings will be grouped in the same file. Has no effect when the files are automatically exported at the delivery order process."
-msgstr "Todos los albaranes sera agrupados en el mismo fichero. No tiene efecto cuando los ficheros son generados automáticamente en el procesamiento de un albarán."
+#: help:delivery.carrier.file,group_pickings:0msgid ""
+"All the pickings will be grouped in the same file. Has no effect when the "
+"files are automatically exported at the delivery order process."
+msgstr ""
+"Todos los albaranes serán agrupados en el mismo fichero. No tiene efecto "
+"cuando los ficheros son generados automáticamente en el procesamiento de un "
+"albarán."
 
 #. module: base_delivery_carrier_files
 #: code:addons/base_delivery_carrier_files/carrier_file.py:73
@@ -119,6 +137,11 @@ msgid "Additional info"
 msgstr "Información Adicional"
 
 #. module: base_delivery_carrier_files
+#: model:ir.model,name:base_delivery_carrier_files.model_delivery_carrier_file_generate
+msgid "delivery.carrier.file.generate"
+msgstr "delivery.carrier.file.generate"
+
+#. module: base_delivery_carrier_files
 #: view:delivery.carrier.file:0
 msgid "Write options"
 msgstr "Opciones Escritura"
@@ -155,5 +178,4 @@ msgstr "Fichero Transportista"
 #: view:delivery.carrier.file.generate:0
 #: field:delivery.carrier.file.generate,picking_ids:0
 msgid "Delivery Orders"
-msgstr "Albaranes"
-
+msgstr "Albaranes de salida"
