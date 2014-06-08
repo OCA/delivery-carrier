@@ -1,0 +1,28 @@
+# German translation for carriers-deliveries
+# Copyright (c) 2014 Rosetta Contributors and Canonical Ltd 2014
+# This file is distributed under the same license as the carriers-deliveries package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: carriers-deliveries\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2012-02-16 09:09+0000\n"
+"PO-Revision-Date: 2014-06-07 08:08+0000\n"
+"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
+"Language-Team: German <de@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2014-06-08 05:52+0000\n"
+"X-Generator: Launchpad (build 17031)\n"
+
+#. module: base_delivery_carrier_files_document
+#: model:ir.model,name:base_delivery_carrier_files_document.model_delivery_carrier_file
+msgid "delivery.carrier.file"
+msgstr ""
+
+#. module: base_delivery_carrier_files_document
+#: field:delivery.carrier.file,document_directory_id:0
+msgid "Document Directory"
+msgstr "Dokumentenverzeichnis"
