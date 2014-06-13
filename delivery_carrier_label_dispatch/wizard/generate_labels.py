@@ -110,7 +110,7 @@ class DeliveryCarrierLabelGenerate(orm.TransientModel):
                 tracking_ids=tracking_ids,
                 context=context)
             thread_cr.commit()
-        except:
+        except Exception:
             thread_cr.rollback()
             try:
                 raise
