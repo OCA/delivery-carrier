@@ -362,8 +362,8 @@ class stock_picking_out(orm.Model):
             which is suitable for each delivery carrier label module.
             But your client might want to customize sender address
             if he has several brands and/or shops in his company.
-            In this case he don't want his customer
-            can see the address of his company in his transport label
+            In this case he doesn't want his customer to see
+            the address of his company in his transport label
             but instead, the address of the partner linked to his shop/brand
 
             To reach this modularity, call this method to get sender address
