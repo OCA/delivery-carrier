@@ -356,7 +356,21 @@ class stock_picking_out(orm.Model):
             cr, uid, ids, context=context)
 
     def _customize_sender_address(self, cr, uid, picking, context=None):
-        """You may inherit if you want to customize address"""
+        """ On each carrier label module you need to define
+            which is the sender of the parcel.
+            The most common case is 'picking.company_id.partner_id'
+            which is suitable for each delivery carrier label module.
+            But your client might want to customize sender address
+            if he has several brands and/or shops in his company.
+            In this case he don't want his customer
+            can see the address of his company in his transport label
+            but instead, the address of the partner linked to his shop/brand
+
+            To reach this modularity call this method to get sender address
+            in your delivery_carrier_label_yourcarrier module, then everybody
+            can manage specific needs by inherit this method in module like :
+            delivery_carrier_label_yourcarrier_yourproject.
+        """
         return picking.company_id.partner_id
 
     def carrier_id_change(self, cr, uid, ids, carrier_id, context=None):
