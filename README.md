@@ -7,4 +7,4 @@ You'll find:
 
  - Generic module to generate file for carrier
  - Specific implementation for specific carrier (like la poste, tnt,..)
- - ...
+ - Generation of shipping labels for specific carrier (PostLogistics, ...)
