@@ -96,3 +96,41 @@ class DeliveryCarrier(orm.Model):
             'delivery.carrier.option',
             'carrier_id', 'Option'),
     }
+
+
+class CarrierAccount(orm.Model):
+    _name = 'carrier.account'
+    _description = 'Base account datas'
+
+    def _get_carrier_type(self, cr, uid, context=None):
+        """ To inherit to add carrier type like Chronopost, Postlogistics..."""
+        return []
+
+    def __get_carrier_type(self, cr, uid, context=None):
+        """ Wrapper to preserve inheritance for selection field """
+        return self._get_carrier_type(cr, uid, context=context)
+
+    def _get_file_format(self, cr, uid, context=None):
+        """ To inherit to add label file types"""
+        return [('PDF', 'PDF'),
+                ('SPD', 'SPD'),
+                ('PPR', 'PPR'),
+                ('THE', 'THE'),
+                ('ZPL', 'ZPL'),
+                ('XML', 'XML')]
+
+    def __get_file_format(self, cr, uid, context=None):
+        """ Wrapper to preserve inheritance for selection field """
+        return self._get_file_format(cr, uid, context=context)
+
+    _columns = {
+        'name': fields.char('Name', size=64, required=True),
+        'account': fields.char('Account Number', size=32, required=True),
+        'password': fields.char('Account Password', size=32, required=True),
+        'file_format': fields.selection(__get_file_format, 'File Format',
+            help="Default format of the carrier's label you want to print"),
+        'type': fields.selection(__get_carrier_type, 'Type', required=True,
+            help="In case of several carriers, help to know which account belong to which carrier"),
+    }
+
+
