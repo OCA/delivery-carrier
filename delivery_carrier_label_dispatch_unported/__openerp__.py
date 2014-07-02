@@ -44,7 +44,7 @@ Contributors
      'wizard/generate_labels_view.xml',
      ],
  'tests': [],
- 'installable': True,
+ 'installable': False,
  'auto_install': True,
  'license': 'AGPL-3',
  'application': False,
