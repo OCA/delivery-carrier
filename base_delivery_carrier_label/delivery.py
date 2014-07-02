@@ -124,13 +124,16 @@ class CarrierAccount(orm.Model):
         return self._get_file_format(cr, uid, context=context)
 
     _columns = {
-        'name': fields.char('Name', size=64, required=True),
-        'account': fields.char('Account Number', size=32, required=True),
-        'password': fields.char('Account Password', size=32, required=True),
-        'file_format': fields.selection(__get_file_format, 'File Format',
+        'name': fields.char('Name', required=True),
+        'account': fields.char('Account Number', required=True),
+        'password': fields.char('Account Password', required=True),
+        'file_format': fields.selection(
+            __get_file_format, 'File Format',
             help="Default format of the carrier's label you want to print"),
-        'type': fields.selection(__get_carrier_type, 'Type', required=True,
-            help="In case of several carriers, help to know which account belong to which carrier"),
+        'type': fields.selection(
+            __get_carrier_type, 'Type', required=True,
+            help="In case of several carriers, help to know which "
+                 "account belong to which carrier"),
     }
 
 
