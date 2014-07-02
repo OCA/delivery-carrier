@@ -38,6 +38,6 @@ Base Delivery Carrier Files are installed.
     'test': ['test/carrier_file.yml',
              'test/carrier_file_manual.yml'],
     'images': [],
-    'installable': True,
+    'installable': False,
     'auto_install': True,
 }
