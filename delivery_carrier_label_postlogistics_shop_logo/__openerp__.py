@@ -46,7 +46,7 @@ Contributors
  'website': 'http://www.camptocamp.com/',
  'data': ['sale_view.xml'],
  'test': [],
- 'installable': True,
+ 'installable': False,
  'auto_install': False,
  'application': True,
  }
