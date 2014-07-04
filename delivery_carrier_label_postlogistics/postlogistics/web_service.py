@@ -231,7 +231,7 @@ class PostlogisticsWebService(object):
         """ Get the license
 
         Take it from carrier and if not defined get the first license
-        depending on service group. This needs to have associated 
+        depending on service group. This needs to have associated
         licenses to groups.
 
         :return: license number

@@ -29,13 +29,13 @@ def assemble_pdf(pdf_list):
     # Even though we are using PyPDF2 we can't use PdfFileMerger
     # as this issue still exists in mostly used wkhtmltohpdf reports version
     # http://code.google.com/p/wkhtmltopdf/issues/detail?id=635
-    #merger = PdfFileMerger()
-    #merger.append(fileobj=StringIO(invoice_pdf))
-    #merger.append(fileobj=StringIO(bvr_pdf))
+    # merger = PdfFileMerger()
+    # merger.append(fileobj=StringIO(invoice_pdf))
+    # merger.append(fileobj=StringIO(bvr_pdf))
 
-    #with tempfile.TemporaryFile() as merged_pdf:
-        #merger.write(merged_pdf)
-        #return merged_pdf.read(), 'pdf'
+    # with tempfile.TemporaryFile() as merged_pdf:
+    #     merger.write(merged_pdf)
+    #     return merged_pdf.read(), 'pdf'
 
     output = PdfFileWriter()
     for pdf in pdf_list:

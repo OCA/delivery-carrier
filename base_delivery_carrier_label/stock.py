@@ -65,8 +65,8 @@ class stock_picking(orm.Model):
 
         """
         raise orm.except_orm(
-                'Error',
-                'No label is configured for selected delivery method.')
+            'Error',
+            'No label is configured for selected delivery method.')
 
     def generate_shipping_labels(self, cr, uid, ids, tracking_ids=None,
                                  context=None):
@@ -229,7 +229,7 @@ class stock_picking(orm.Model):
         values = self._values_with_carrier_options(cr, uid, values,
                                                    context=context)
         picking_id = super(stock_picking, self
-                    ).create(cr, uid, values, context=context)
+                           ).create(cr, uid, values, context=context)
         return picking_id
 
 
@@ -311,7 +311,7 @@ class stock_picking_in(orm.Model):
         values = picking_obj._values_with_carrier_options(cr, uid, values,
                                                           context=context)
         picking_id = super(stock_picking_in, self
-                    ).create(cr, uid, values, context=context)
+                           ).create(cr, uid, values, context=context)
         return picking_id
 
 
@@ -408,7 +408,7 @@ class stock_picking_out(orm.Model):
         values = picking_obj._values_with_carrier_options(cr, uid, values,
                                                           context=context)
         picking_id = super(stock_picking_out, self
-                    ).create(cr, uid, values, context=context)
+                           ).create(cr, uid, values, context=context)
         return picking_id
 
 

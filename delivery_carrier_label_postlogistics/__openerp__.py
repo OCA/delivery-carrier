@@ -70,8 +70,10 @@ Now you can create a carrier method for PostLogistics WebService:
   from listed
 * Additional Service and Delivery instructions
 
-.. _PostLogistics BarCodes WebService: http://www.poste.ch/post-startseite/post-geschaeftskunden/post-logistik/post-e-log/post-e-log-webservices.htm
-.. _Swiss Post E-logistics: http://www.poste.ch/en/post-startseite/post-geschaeftskunden/post-logistik/post-e-log.htm
+.. _PostLogistics BarCodes WebService: http://www.poste.ch/post-startseite/\
+post-geschaeftskunden/post-logistik/post-e-log/post-e-log-webservices.htm
+.. _Swiss Post E-logistics: http://www.poste.ch/en/post-startseite/\
+post-geschaeftskunden/post-logistik/post-e-log.htm
 
 
 Recommended modules

@@ -76,26 +76,26 @@ class test_generate_labels(common.TransactionCase):
              })
 
         label = ''
-        dummy_pdf_path = get_module_resource('delivery_carrier_label_dispatch', 'tests' ,'dummy.pdf')
+        dummy_pdf_path = get_module_resource('delivery_carrier_label_dispatch', 'tests', 'dummy.pdf')
         with file(dummy_pdf_path) as dummy_pdf:
             label = dummy_pdf.read()
 
         self.ShippingLabel.create(
             cr, uid,
             {'name': 'picking_out_1',
-            'res_id': picking_out_1_id,
-            'res_model': 'stock.picking.out',
-            'datas': label.encode('base64'),
-            'file_type': 'pdf',
+             'res_id': picking_out_1_id,
+             'res_model': 'stock.picking.out',
+             'datas': label.encode('base64'),
+             'file_type': 'pdf',
              })
 
         self.ShippingLabel.create(
             cr, uid,
             {'name': 'picking_out_2',
-            'res_id': picking_out_2_id,
-            'res_model': 'stock.picking.out',
-            'datas': label.encode('base64'),
-            'file_type': 'pdf',
+             'res_id': picking_out_2_id,
+             'res_model': 'stock.picking.out',
+             'datas': label.encode('base64'),
+             'file_type': 'pdf',
              })
 
     def test_00_action_generate_labels(self):
@@ -114,7 +114,7 @@ class test_generate_labels(common.TransactionCase):
                      'active_model': 'picking.dispatch'})
         wizard = self.DeliveryCarrierLabelGenerate.browse(
             cr, uid, [wizard_id], context=None)
-        act_win = self.DeliveryCarrierLabelGenerate.action_generate_labels(
+        self.DeliveryCarrierLabelGenerate.action_generate_labels(
             cr, uid, [wizard_id], context={'active_ids': active_ids})
         wizard = self.DeliveryCarrierLabelGenerate.browse(
             cr, uid, wizard_id, context=None)
