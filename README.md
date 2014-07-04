@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/OCA/carrier-delivery.svg?branch=master)](https://travis-ci.org/OCA/carrier-delivery)
-[![Coverage Status](https://img.shields.io/coveralls/OCA/carrier-delivery.svg)](https://coveralls.io/r/OCA/carrier-delivery?branch=master)
+[![Coverage Status](https://coveralls.io/repos/OCA/carrier-delivery/badge.png?branch=master)](https://coveralls.io/r/OCA/carrier-delivery?branch=master)
 
 Carriers And Deliveries Management
 ==================================
