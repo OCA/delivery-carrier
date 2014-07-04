@@ -22,7 +22,7 @@ class UnicodeWriter(object):
         self.encoder = codecs.getincrementalencoder(encoding)()
 
     def writerow(self, row):
-        #we ensure that we do not try to encode none or bool
+        # we ensure that we do not try to encode none or bool
         row = [x or u'' for x in row]
         self.writer.writerow([s.encode("utf-8") for s in row])
         # Fetch UTF-8 output from the queue ...

@@ -43,7 +43,7 @@ class PickingDispatch(Model):
     def action_set_options(self, cr, uid, ids, context=None):
         """ Apply options to picking of the dispatch
 
-        This will replace all carrier options in picking 
+        This will replace all carrier options in picking
 
         """
         picking_obj = self.pool.get('stock.picking')
@@ -94,7 +94,7 @@ class PickingDispatch(Model):
         carrier = carrier_obj.browse(cr, uid, carrier_id, context=context)
         for available_option in carrier.available_option_ids:
             if (available_option.state == 'mandatory'
-                    and not available_option.id in option_ids[0][2]):
+                    and available_option.id not in option_ids[0][2]):
                 res['warning'] = {
                     'title': _('User Error !'),
                     'message':  _("You can not remove a mandatory option."
