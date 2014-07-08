@@ -33,7 +33,8 @@ class stock_picking(orm.Model):
                                                  "has been generated."),
     }
 
-    def generate_carrier_files(self, cr, uid, ids, auto=True, context=None):
+    def generate_carrier_files(self, cr, uid, ids, auto=True,
+                               recreate=False , context=None):
         """
         Generates all the files for a list of pickings according to
         their configuration carrier file.
@@ -54,7 +55,7 @@ class stock_picking(orm.Model):
         for picking in self.browse(cr, uid, ids, context):
             if picking.type != 'out':
                 continue
-            if picking.carrier_file_generated:
+            if not recreate and picking.carrier_file_generated:
                 continue
             carrier = picking.carrier_id
             if not carrier or not carrier.carrier_file_id:

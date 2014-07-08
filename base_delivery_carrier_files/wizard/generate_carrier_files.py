@@ -39,6 +39,11 @@ class DeliveryCarrierFileGenerate(orm.TransientModel):
     _columns = {
         'picking_ids': fields.many2many('stock.picking.out',
                                         string='Delivery Orders'),
+        'recreate': fields.boolean(
+            'Recreate files',
+            help="If this option is used, new files will be generated "
+                 "for selected picking even if they already had one.\n"
+                 "By default, pickings hwith exsting file are skipped."),
     }
 
     _defaults = {
@@ -54,11 +59,12 @@ class DeliveryCarrierFileGenerate(orm.TransientModel):
         if not form.picking_ids:
             raise orm.except_orm(_('Error'), _('No delivery orders selected'))
 
-        picking_obj = self.pool.get('stock.picking')
+        picking_obj = self.pool['stock.picking']
         picking_ids = [picking.id for picking in form.picking_ids]
         picking_obj.generate_carrier_files(cr, uid,
                                            picking_ids,
                                            auto=False,
+                                           recreate=form.recreate,
                                            context=context)
 
         return {'type': 'ir.actions.act_window_close'}

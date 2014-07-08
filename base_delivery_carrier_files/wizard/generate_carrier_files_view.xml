@@ -17,6 +17,7 @@
                             <field name="state" invisible="1"/>
                         </tree>
                     </field>
+                    <field name="recreate"/>
                     <separator colspan="4"/>
                     <group col="3" colspan="4">
                         <button special="cancel" colspan="1" string="Cancel" icon='gtk-cancel'/>
