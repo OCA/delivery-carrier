@@ -6,7 +6,7 @@
             <field name="name">delivery.carrier.file.generate</field>
             <field name="model">delivery.carrier.file.generate</field>
             <field name="arch" type="xml">
-                <form string="Carrier Files">
+                <form string="Carrier Files" version="7.0">
                     <label string="Generate the carrier files for the selected delivery orders."/>
                     <field name="picking_ids" nolabel="1" colspan="4">
                         <tree string="Delivery Orders">
@@ -17,12 +17,14 @@
                             <field name="state" invisible="1"/>
                         </tree>
                     </field>
-                    <field name="recreate"/>
-                    <separator colspan="4"/>
-                    <group col="3" colspan="4">
-                        <button special="cancel" colspan="1" string="Cancel" icon='gtk-cancel'/>
-                        <button name="action_generate" string="Generate Files" type="object" icon="gtk-execute"/>
+                    <group>
+                      <field name="recreate"/>
                     </group>
+                    <footer>
+                      <button name="action_generate" string="Generate Files" type="object" icon="gtk-execute" class="oe_highlight"/>
+                      or
+                      <button string="Close" class="oe_link" special="cancel" />
+                    </footer>
                 </form>
             </field>
         </record>
