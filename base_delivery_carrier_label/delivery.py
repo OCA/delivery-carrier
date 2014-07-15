@@ -32,12 +32,15 @@ class DeliveryCarrierTemplateOption(orm.Model):
             'Partner Carrier'),
         'name': fields.char(
             'Name',
+            readonly=True,
             size=64),
         'code': fields.char(
             'Code',
+            readonly=True,
             size=64),
         'description': fields.char(
             'Description',
+            readonly=True,
             help="Allow to define a more complete description "
                  "than in the name field."),
     }
@@ -55,21 +58,26 @@ class DeliveryCarrierOption(orm.Model):
     _inherits = {'delivery.carrier.template.option': 'tmpl_option_id'}
 
     _columns = {
-        'state': fields.selection(
-            (('mandatory', 'Mandatory'),
-             ('default_option', 'Optional by Default'),
-             ('option', 'Optional'),
-             ),
-            string='Option Configuration',
-            help="Ensure you add and define correctly all your options or those won't "
-                 "be available for the packager\n"
-                 "- Mandatory: This option will be copied on carrier and cannot be removed\n"
-                 "- Optional by Default: This option will be copied but can be removed\n"
-                 "- Optional: This option can be added later by the user on the Delivery Order."),
+        'mandatory': fields.boolean(
+            'Mandatory',
+            help="If checked, this option is necessarily applied to the picking"),
+        'by_default': fields.boolean(
+            'Applied by Default',
+            help="By check, user can choose to apply this option "
+            "to each pickings\n using this delivery method"),
         'tmpl_option_id': fields.many2one(
             'delivery.carrier.template.option',
             string='Option', required=True, ondelete="cascade"),
         'carrier_id': fields.many2one('delivery.carrier', 'Carrier'),
+        'readonly_flag': fields.boolean(
+            'Readonly Flag',
+            help="When True, help to prevent the user to modify some fields "
+                 "option (if attribute is defined in the view)"),
+    }
+
+    _defaults = {
+        'readonly_flag': False,
+        'by_default': False,
     }
 
 
