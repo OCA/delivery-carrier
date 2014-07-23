@@ -65,8 +65,9 @@ class stock_picking(orm.Model):
 
         """
         raise orm.except_orm(
-                'Error',
-                'No label is configured for selected delivery method.')
+            'Error',
+            'No label is configured for selected delivery method.'
+        )
 
     def generate_shipping_labels(self, cr, uid, ids, tracking_ids=None,
                                  context=None):
@@ -183,7 +184,7 @@ class stock_picking(orm.Model):
         carrier = carrier_obj.browse(cr, uid, carrier_id, context=context)
         for available_option in carrier.available_option_ids:
             if (available_option.state == 'mandatory'
-                    and not available_option.id in option_ids[0][2]):
+                    and available_option.id not in option_ids[0][2]):
                 res['warning'] = {
                     'title': _('User Error !'),
                     'message':  _("You can not remove a mandatory option."
@@ -228,8 +229,7 @@ class stock_picking(orm.Model):
         """
         values = self._values_with_carrier_options(cr, uid, values,
                                                    context=context)
-        picking_id = super(stock_picking, self
-                    ).create(cr, uid, values, context=context)
+        picking_id = super(stock_picking, self).create(cr, uid, values, context=context)
         return picking_id
 
 
@@ -310,8 +310,7 @@ class stock_picking_in(orm.Model):
         picking_obj = self.pool['stock.picking']
         values = picking_obj._values_with_carrier_options(cr, uid, values,
                                                           context=context)
-        picking_id = super(stock_picking_in, self
-                    ).create(cr, uid, values, context=context)
+        picking_id = super(stock_picking_in, self).create(cr, uid, values, context=context)
         return picking_id
 
 
@@ -407,8 +406,7 @@ class stock_picking_out(orm.Model):
         picking_obj = self.pool['stock.picking']
         values = picking_obj._values_with_carrier_options(cr, uid, values,
                                                           context=context)
-        picking_id = super(stock_picking_out, self
-                    ).create(cr, uid, values, context=context)
+        picking_id = super(stock_picking_out, self).create(cr, uid, values, context=context)
         return picking_id
 
 

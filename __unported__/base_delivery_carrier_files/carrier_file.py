@@ -122,7 +122,7 @@ class carrier_file(orm.Model):
                     picking_obj.write(cr, uid, picking_ids,
                                       {'carrier_file_generated': True},
                                       context=context)
-            except Exception, e:
+            except Exception as e:
                 log.exception("Could not create the picking file "
                               "for pickings %s: %s",
                               picking_ids, e)
