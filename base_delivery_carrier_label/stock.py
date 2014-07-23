@@ -378,9 +378,9 @@ class stock_picking_out(orm.Model):
                                              ('parent_id', '=', partner.id),
                                              ('type', '=', 'delivery')])
         if delivery_address:
-            partner = delivery.browse(cr, uid, 
-                                      [delivery_address[0]], 
-                                      context=context)
+            partner = partner_obj.browse(cr, uid,
+                                         [delivery_address[0]],
+                                         context=context)[0]
         return partner
 
     def carrier_id_change(self, cr, uid, ids, carrier_id, context=None):

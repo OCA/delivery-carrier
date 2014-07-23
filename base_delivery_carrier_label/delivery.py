@@ -132,5 +132,3 @@ class CarrierAccount(orm.Model):
             help="In case of several carriers, help to know which "
                  "account belong to which carrier"),
     }
-
-
