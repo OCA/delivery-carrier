@@ -359,6 +359,7 @@ class stock_picking_out(orm.Model):
         """ On each carrier label module you need to define
             which is the sender of the parcel.
             The most common case is 'picking.company_id.partner_id'
+            and then choose the contact which has the type 'delivery'
             which is suitable for each delivery carrier label module.
             But your client might want to customize sender address
             if he has several brands and/or shops in his company.
@@ -371,7 +372,16 @@ class stock_picking_out(orm.Model):
             can manage specific needs by inherit this method in module like :
             delivery_carrier_label_yourcarrier_yourproject.
         """
-        return picking.company_id.partner_id
+        partner_obj = self.pool['res.partner']
+        partner = picking.company_id.partner_id
+        delivery_address = partner_obj.search(cr, uid, [
+                                             ('parent_id', '=', partner.id),
+                                             ('type', '=', 'delivery')])
+        if delivery_address:
+            partner = delivery.browse(cr, uid, 
+                                      [delivery_address[0]], 
+                                      context=context)
+        return partner
 
     def carrier_id_change(self, cr, uid, ids, carrier_id, context=None):
         """ Inherit this method in your module """
