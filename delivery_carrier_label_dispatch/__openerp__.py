@@ -18,14 +18,15 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-{'name': 'Carrier labels - Picking dispatch (link)',
- 'version': '1.0',
- 'author': 'Camptocamp',
- 'maintainer': 'Camptocamp',
- 'category': 'version',
- 'complexity': 'normal',
- 'depends': ['base_delivery_carrier_label', 'picking_dispatch'],
- 'description': """
+{
+    'name': 'Carrier labels - Picking dispatch (link)',
+    'version': '1.0',
+    'author': 'Camptocamp',
+    'maintainer': 'Camptocamp',
+    'category': 'version',
+    'complexity': 'normal',
+    'depends': ['base_delivery_carrier_label', 'picking_dispatch'],
+    'description': """
 [Link module] Carrier labels - Picking dispatch
 ==============================
 
@@ -38,17 +39,17 @@ Contributors
 * Yannick Vaucher <yannick.vaucher@camptocamp.com>
 
 """,
- 'website': 'http://www.camptocamp.com/',
- 'data': [
-     'picking_dispatch_view.xml',
-     'wizard/generate_labels_view.xml',
-     ],
- 'tests': [],
- 'installable': True,
- 'auto_install': True,
- 'license': 'AGPL-3',
- 'application': False,
- 'external_dependencies': {
-    'python': ['PyPDF2'],
- }
- }
+    'website': 'http://www.camptocamp.com/',
+    'data': [
+        'picking_dispatch_view.xml',
+        'wizard/generate_labels_view.xml',
+    ],
+    'tests': [],
+    'installable': True,
+    'auto_install': True,
+    'license': 'AGPL-3',
+    'application': False,
+    'external_dependencies': {
+        'python': ['PyPDF2'],
+    }
+}
