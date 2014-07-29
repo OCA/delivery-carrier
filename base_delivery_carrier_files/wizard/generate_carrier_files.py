@@ -43,7 +43,8 @@ class DeliveryCarrierFileGenerate(orm.TransientModel):
             'Recreate files',
             help="If this option is used, new files will be generated "
                  "for selected picking even if they already had one.\n"
-                 "By default, pickings hwith exsting file are skipped."),
+                 "By default, delivery orders with existing file will be "
+                 "skipped."),
     }
 
     _defaults = {
