@@ -33,7 +33,8 @@ class test_generate_labels(common.TransactionCase):
         self.Picking = self.registry('stock.picking')
         self.ShippingLabel = self.registry('shipping.label')
         self.PickingDispatch = self.registry('picking.dispatch')
-        self.DeliveryCarrierLabelGenerate = self.registry('delivery.carrier.label.generate')
+        self.DeliveryCarrierLabelGenerate = self.registry(
+            'delivery.carrier.label.generate')
 
         picking_out_1_id = self.Picking.create(
             cr, uid,
@@ -76,7 +77,8 @@ class test_generate_labels(common.TransactionCase):
              })
 
         label = ''
-        dummy_pdf_path = get_module_resource('delivery_carrier_label_dispatch', 'tests', 'dummy.pdf')
+        dummy_pdf_path = get_module_resource('delivery_carrier_label_dispatch',
+                                             'tests', 'dummy.pdf')
         with file(dummy_pdf_path) as dummy_pdf:
             label = dummy_pdf.read()
 

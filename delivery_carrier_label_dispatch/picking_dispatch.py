@@ -86,7 +86,8 @@ class PickingDispatch(Model):
             }
         return res
 
-    def option_ids_change(self, cr, uid, ids, option_ids, carrier_id, context=None):
+    def option_ids_change(self, cr, uid, ids, option_ids, carrier_id,
+                          context=None):
         carrier_obj = self.pool.get('delivery.carrier')
         res = {}
         if not carrier_id:
