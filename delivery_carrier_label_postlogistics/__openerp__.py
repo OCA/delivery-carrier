@@ -87,7 +87,8 @@ Technical references
 
 `"Barcode" web service documentation`_
 
-.. _"Barcode" web service documentation: http://www.poste.ch/post-barcode-cug.htm
+.. _"Barcode" web service documentation: http://www.poste.ch/post-barcode-cug\
+.htm
 
 
 Contributors

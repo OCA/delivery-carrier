@@ -98,7 +98,8 @@ class PostlogisticsWebService(object):
             lang = company.partner_id.lang
         lang = self._get_language(lang)
         request = self.client.service.ReadAllowedServicesByFrankingLicense
-        return self._send_request(request, FrankingLicense=license, Language=lang)
+        return self._send_request(request, FrankingLicense=license,
+                                  Language=lang)
 
     def read_service_groups(self, company, lang):
         """ Get group of services """
