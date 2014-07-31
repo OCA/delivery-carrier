@@ -26,7 +26,8 @@ class carrier_file(osv.osv):
     _inherit = 'delivery.carrier.file'
 
     def get_type_selection(self, cr, uid, context=None):
-        result = super(carrier_file, self).get_type_selection(cr, uid, context=context)
+        result = super(carrier_file, self
+                       ).get_type_selection(cr, uid, context=context)
         if 'la_poste' not in result:
             result.append(('la_poste', 'La Poste'))
         return result
