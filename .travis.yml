@@ -14,7 +14,6 @@ install:
   - git clone https://github.com/OCA/maintainer-quality-tools.git ${HOME}/maintainer-quality-tools
   - export PATH=${HOME}/maintainer-quality-tools/travis:${PATH}
   - travis_install_nightly
-  - pip install coveralls flake8
   - pip install PyPDF2==1.18
   - pip install suds-jurko==0.6
   - git clone https://github.com/OCA/stock-logistics-workflow -b 7.0 ${HOME}/stock-logistics-workflow
