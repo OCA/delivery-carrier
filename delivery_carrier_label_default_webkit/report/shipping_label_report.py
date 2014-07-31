@@ -25,14 +25,16 @@ from openerp.report import report_sxw
 
 class ShippingLabelReport(report_sxw.rml_parse):
     def __init__(self, cr, uid, name, context):
-        super(ShippingLabelReport, self).__init__(cr, uid, name, context=context)
+        super(ShippingLabelReport, self
+              ).__init__(cr, uid, name, context=context)
         self.localcontext.update({
             'time': time,
             'cr': cr,
             'uid': uid,
         })
 
-report_sxw.report_sxw('report.delivery.shipping_label',
-                      'stock.picking',
-                      'delivery_carrier_label_default_webkit/report/template/shipping_label.mako',
-                      parser=ShippingLabelReport)
+report_sxw.report_sxw(
+    'report.delivery.shipping_label',
+    'stock.picking',
+    'delivery_carrier_label_default_webkit/report/template/shipping_label.mako',
+    parser=ShippingLabelReport)
