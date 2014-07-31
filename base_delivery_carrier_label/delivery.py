@@ -61,11 +61,14 @@ class DeliveryCarrierOption(orm.Model):
              ('option', 'Optional'),
              ),
             string='Option Configuration',
-            help="Ensure you add and define correctly all your options or those won't "
-                 "be available for the packager\n"
-                 "- Mandatory: This option will be copied on carrier and cannot be removed\n"
-                 "- Optional by Default: This option will be copied but can be removed\n"
-                 "- Optional: This option can be added later by the user on the Delivery Order."),
+            help="Ensure you add and define correctly all your options or those"
+                 "won't be available for the packager\n"
+                 "- Mandatory: This option will be copied on carrier and cannot"
+                 " be removed\n"
+                 "- Optional by Default: This option will be copied but can be "
+                 "removed\n"
+                 "- Optional: This option can be added later by the user on the"
+                 " Delivery Order."),
         'tmpl_option_id': fields.many2one(
             'delivery.carrier.template.option',
             string='Option', required=True, ondelete="cascade"),

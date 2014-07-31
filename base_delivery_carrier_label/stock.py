@@ -114,7 +114,8 @@ class stock_picking(orm.Model):
         pickings = self.browse(cr, uid, ids, context=context)
 
         for pick in pickings:
-            shipping_labels = pick.generate_shipping_labels(tracking_ids=tracking_ids)
+            shipping_labels = pick.generate_shipping_labels(
+                tracking_ids=tracking_ids)
             for label in shipping_labels:
                 # map types with models
                 types = {'in': 'stock.picking.in',
@@ -136,7 +137,8 @@ class stock_picking(orm.Model):
                 # as it would try to define default value of attachement
                 if 'default_type' in context_attachment:
                     del context_attachment['default_type']
-                shipping_label_obj.create(cr, uid, data, context=context_attachment)
+                shipping_label_obj.create(cr, uid, data,
+                                          context=context_attachment)
         return True
 
     def action_generate_carrier_label(self, cr, uid, ids, context=None):
@@ -175,7 +177,8 @@ class stock_picking(orm.Model):
             }
         return res
 
-    def option_ids_change(self, cr, uid, ids, option_ids, carrier_id, context=None):
+    def option_ids_change(self, cr, uid, ids, option_ids, carrier_id,
+                          context=None):
         carrier_obj = self.pool.get('delivery.carrier')
         res = {}
         if not carrier_id:
@@ -367,8 +370,9 @@ class stock_picking_out(orm.Model):
             but instead, the address of the partner linked to his shop/brand
 
             To reach this modularity, call this method to get sender address
-            in your delivery_carrier_label_yourcarrier module, then every developer
-            can manage specific needs by inherit this method in module like :
+            in your delivery_carrier_label_yourcarrier module, then every
+            developer can manage specific needs by inherit this method in
+            module like :
             delivery_carrier_label_yourcarrier_yourproject.
         """
         return picking.company_id.partner_id
@@ -376,9 +380,11 @@ class stock_picking_out(orm.Model):
     def carrier_id_change(self, cr, uid, ids, carrier_id, context=None):
         """ Inherit this method in your module """
         picking_obj = self.pool.get('stock.picking')
-        return picking_obj.carrier_id_change(cr, uid, ids, carrier_id, context=context)
+        return picking_obj.carrier_id_change(cr, uid, ids, carrier_id,
+                                             context=context)
 
-    def option_ids_change(self, cr, uid, ids, option_ids, carrier_id, context=None):
+    def option_ids_change(self, cr, uid, ids, option_ids, carrier_id,
+                          context=None):
         picking_obj = self.pool.get('stock.picking')
         return picking_obj.option_ids_change(cr, uid, ids,
                                              option_ids, carrier_id,
