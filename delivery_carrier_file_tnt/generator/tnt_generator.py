@@ -21,7 +21,9 @@
 
 import csv
 
-from openerp.addons.base_delivery_carrier_files.generator import CarrierFileGenerator
+from openerp.addons.base_delivery_carrier_files.generator import (
+    CarrierFileGenerator
+    )
 from openerp.addons.base_delivery_carrier_files.generator import BaseLine
 from openerp.addons.base_delivery_carrier_files.csv_writer import UnicodeWriter
 
@@ -57,19 +59,23 @@ class TNTFileGenerator(CarrierFileGenerator):
         """
         Returns the rows to create in the file for a picking
 
-        :param browse_record picking: the picking for which we generate a row in the file
-        :param browse_record configuration: configuration of the file to generate
+        :param browse_record picking: the picking for which we generate a row
+               in the file
+        :param browse_record configuration: configuration of the file to
+               generate
         :return: list of rows
         """
         line = TNTLine()
         line.reference = picking.name
         if picking.address_id:
-            line.name = picking.address_id.partner_id and picking.address_id.partner_id.name
+            line.name = (picking.address_id.partner_id
+                         and picking.address_id.partner_id.name)
             line.contact = picking.address_id.name
             line.street1 = picking.address_id.street
             line.street2 = picking.address_id.street2
             line.zip = picking.address_id.zip
-            line.state = picking.address_id.state_id and picking.address_id.state_id.name
+            line.state = (picking.address_id.state_id
+                          and picking.address_id.state_id.name)
             line.city = picking.address_id.city
             line.country = picking.address_id.country_id.code
             line.country_name = picking.address_id.country_id.name
@@ -89,7 +95,8 @@ class TNTFileGenerator(CarrierFileGenerator):
 
         :param StringIO file_handle: file to write in
         :param rows: rows to write in the file
-        :param browse_record configuration: configuration of the file to generate
+        :param browse_record configuration: configuration of the file to
+               generate
         :return: the file_handle as StringIO with the rows written in it
         """
         writer = UnicodeWriter(file_handle, delimiter=';', quotechar='"',
