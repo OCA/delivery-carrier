@@ -28,9 +28,9 @@ class stock_picking(orm.Model):
     _columns = {
         'carrier_file_generated': fields.boolean('Carrier File Generated',
                                                  readonly=True,
-                                                 help="The file for "
-                                                 "the delivery carrier "
-                                                 "has been generated."),
+                                                 help="The file for the "
+                                                      "delivery carrier "
+                                                      "has been generated."),
     }
 
     def generate_carrier_files(self, cr, uid, ids, auto=True,
