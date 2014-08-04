@@ -34,7 +34,7 @@ class stock_picking(orm.Model):
     }
 
     def generate_carrier_files(self, cr, uid, ids, auto=True,
-                               recreate=False , context=None):
+                               recreate=False, context=None):
         """
         Generates all the files for a list of pickings according to
         their configuration carrier file.
