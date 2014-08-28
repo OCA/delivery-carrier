@@ -27,6 +27,11 @@ from generator import new_file_generator
 from tools.translate import _
 
 
+def write_file(file_path, file_content):
+        with open(file_path, 'w') as file_handle:
+            file_handle.write(file_content)
+
+
 class carrier_file(orm.Model):
     _name = 'delivery.carrier.file'
 
@@ -81,8 +86,8 @@ class carrier_file(orm.Model):
                                    'for carrier file %s') %
                                  (carrier_file.name,))
         full_path = os.path.join(carrier_file.export_path, filename)
-        with open(full_path, 'w') as file_handle:
-            file_handle.write(file_content)
+        # ensure file is written only after transaction
+        cr.add_transaction_action(write_file, full_path, file_content)
         return True
 
     def _generate_files(self, cr, uid, carrier_file, picking_ids,
