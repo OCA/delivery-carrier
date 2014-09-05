@@ -60,11 +60,12 @@ class DeliveryCarrierOption(orm.Model):
     _columns = {
         'mandatory': fields.boolean(
             'Mandatory',
-            help="If checked, this option is necessarily applied to the picking"),
+            help="If checked, this option is necessarily applied "
+                 "to the delivery order"),
         'by_default': fields.boolean(
             'Applied by Default',
             help="By check, user can choose to apply this option "
-            "to each pickings\n using this delivery method"),
+            "to each Delivery Order\n using this delivery method"),
         'tmpl_option_id': fields.many2one(
             'delivery.carrier.template.option',
             string='Option', required=True, ondelete="cascade"),

@@ -166,8 +166,8 @@ class stock_picking(orm.Model):
             available_option_ids = []
             for available_option in carrier.available_option_ids:
                 available_option_ids.append(available_option.id)
-                if available_option.mandatory \
-                        or available_option.by_default:
+                if (available_option.mandatory or
+                        available_option.by_default):
                     default_option_ids.append(available_option.id)
             res = {
                 'value': {'carrier_type': carrier.type,
