@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="0">
+
+
+<!-- DELIVERY CARRIER TEMPLATE OPTION -->
+<record id="delivery_carrier_template_to_dropoff_site"
+        model="delivery.carrier.template.option">
+    <field name="name">Send to Drop-off Site</field>
+    <field name="code">STDS</field>
+    <field name="description">Send to a drop-off site (delivery area through which the recipient will pick the parcel)</field>
+</record>
+
+
+    </data>
+</openerp>
