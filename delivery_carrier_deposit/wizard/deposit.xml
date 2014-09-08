@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+<!-- FORM-->
+<record id="view_wiz_create_deposit" model="ir.ui.view">
+    <field name="name">wizard create.deposit slip form view</field>
+    <field name="model">delivery.deposit.wizard</field>
+    <field name="type">form</field>
+    <field name="arch" type="xml">
+        <form string="Create deposit slip">
+             <label string="Would you like generate 'Deposit slip' for these delivery carriers ?"  colspan="4" />
+             <field name="carrier_type" nolabel="1" colspan="4"/>
+             <button icon="gtk-cancel" special="cancel" string="Cancel"/>
+             <button icon="gtk-ok" name="create_deposit_slip" string="Create Deposit" type="object"/>
+       </form>
+    </field>
+</record>
+
+
+<!-- ACTION -->
+<record id="action_wiz_create_deposit" model="ir.actions.act_window">
+    <field name="name">Create Deposit Slip</field>
+    <field name="res_model">delivery.deposit.wizard</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">form,tree</field>
+   <field name="target">new</field>
+</record>
+
+<!-- MENU -->
+<menuitem id="menu_wiz_delivery_deposit"
+          name="Create"
+          action="action_wiz_create_deposit"
+          parent="menu_delivery_deposit_slip"
+          sequence="10" />
+
+
+</data>
+</openerp>
