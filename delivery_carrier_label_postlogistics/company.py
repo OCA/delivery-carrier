@@ -27,7 +27,7 @@ class ResCompany(orm.Model):
 
     def _get_wsdl_url(self, cr, uid, ids, field_name, arg, context=None):
         wsdl_file, wsdl_path = file_open(
-            'delivery_carrier_label_postlogistics/data/barcode_v2_2.wsdl',
+            'delivery_carrier_label_postlogistics/data/barcode_v2_2_wsbc.wsdl',
             pathinfo=True)
         wsdl_url = 'file://' + wsdl_path
         res = dict.fromkeys(ids, wsdl_url)
