@@ -48,6 +48,7 @@ Contributors
     'data': [
         'picking_dispatch_view.xml',
         'wizard/generate_labels_view.xml',
+        'wizard/apply_carrier_view.xml',
     ],
     'tests': [],
     'installable': False,
