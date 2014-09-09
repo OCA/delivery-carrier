@@ -10,7 +10,10 @@
 
 from openerp.osv import orm
 import base64
-from cStringIO import StringIO
+try:
+    from cStringIO import StringIO
+except:
+    from StringIO import StringIO
 import unicodecsv
 
 
