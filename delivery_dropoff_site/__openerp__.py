@@ -59,7 +59,6 @@ Contributors
         'data/delivery_data.xml',
         'stock_view.xml',
         'partner_view.xml',
-        #'security/ir.model.access.csv',
     ],
     'license': 'AGPL-3',
     'external_dependencies': {
