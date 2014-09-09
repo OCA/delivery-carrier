@@ -63,7 +63,7 @@ msgid ""
 msgstr ""
 "... sont des sites spécifiques où les transporteurs livrent leur "
 "marchandises.\n"
-"Les destinatires viennent récupérer leurs colis dans ces sites."
+"Les destinataires viennent récupérer leurs colis dans ces sites."
 
 #. module: delivery_dropoff_site
 #: model:ir.model,name:delivery_dropoff_site.model_partner_dropoff_site

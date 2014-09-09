@@ -8,8 +8,6 @@
 #
 ##############################################################################
 
-
-import stock  # noqa
-import file_exchange    # noqa
-import partner          # noqa
-
+from . import stock
+from . import file_exchange
+from . import partner

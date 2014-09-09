@@ -40,9 +40,10 @@ Delivery Drop-off Site
 Manage features related to drop-off sites
 -----------------------------------------
 
-Main international carriers provide transportation services to specific areas managed by them or by subcontractors.
+Main international carriers provide transportation services to specific areas
+managed by them or by subcontractors.
 
-Then, recipients comes pick up their packages in these sites
+Then, recipients come pick up their packages in these sites.
 
 
 Contributors
@@ -61,6 +62,9 @@ Contributors
         #'security/ir.model.access.csv',
     ],
     'license': 'AGPL-3',
+    'external_dependencies': {
+        'python': ['unicodecsv'],
+    },
     'tests': [],
     'installable': True,
     'auto_install': False,
