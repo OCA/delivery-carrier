@@ -6,6 +6,7 @@
       <field name="model">picking.dispatch.apply.carrier</field>
       <field name="arch" type="xml">
         <form string="Apply a carrier and its options" version="7.0">
+          <label string="Warning, setting options will erase existing ones in pickings"/>
           <group>
             <field name="carrier_id"/>
           </group>
