@@ -30,7 +30,8 @@ class stock_picking(orm.Model):
 
     def _get_carrier_type_selection(self, cr, uid, context=None):
         carrier_obj = self.pool.get('delivery.carrier')
-        return carrier_obj._get_carrier_type_selection(cr, uid, context=context)
+        return carrier_obj._get_carrier_type_selection(cr, uid,
+                                                       context=context)
 
     _columns = {
         'carrier_id': fields.many2one(
@@ -242,7 +243,8 @@ class stock_picking_in(orm.Model):
 
     def _get_carrier_type_selection(self, cr, uid, context=None):
         carrier_obj = self.pool.get('delivery.carrier')
-        return carrier_obj._get_carrier_type_selection(cr, uid, context=context)
+        return carrier_obj._get_carrier_type_selection(cr, uid,
+                                                       context=context)
 
     _columns = {
         'carrier_id': fields.many2one(
@@ -324,7 +326,8 @@ class stock_picking_out(orm.Model):
 
     def _get_carrier_type_selection(self, cr, uid, context=None):
         carrier_obj = self.pool.get('delivery.carrier')
-        return carrier_obj._get_carrier_type_selection(cr, uid, context=context)
+        return carrier_obj._get_carrier_type_selection(cr, uid,
+                                                       context=context)
 
     _columns = {
         'carrier_id': fields.many2one(
