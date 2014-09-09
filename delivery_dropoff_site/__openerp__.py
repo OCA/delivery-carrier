@@ -25,7 +25,7 @@
     'name': 'Delivery Drop-off Site',
     'version': '0.3',
     'author': 'Akretion',
-    'summary': "Send goods to sites in which customers comes pick up package",
+    'summary': "Send goods to sites in which customers come pick up package",
     'maintener': 'Akretion',
     'category': 'Warehouse',
     'depends': [

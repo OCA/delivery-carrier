@@ -104,7 +104,7 @@ class AbstractDropoffSite(orm.AbstractModel):
             'Sub type',
             size=30,
             select=True,
-            help="Name/code to define the area : " \
+            help="Name/code to define the area : "
                  "shop, postal center, etc."),
         'latitude': fields.float(
             'lattitude'),
