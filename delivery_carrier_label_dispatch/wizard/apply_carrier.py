@@ -34,21 +34,21 @@ class picking_dispatch_apply_carrier(orm.TransientModel):
             required=True),
     }
 
-    def _check_domain(self, cr, uid, ids, picking_ids, context=None):
+    def _check_domain(self, cr, uid, ids, dispatch_ids, context=None):
         """ A domain excluding the dispatches on which we don't allow
         to change the carrier.
 
         Can be overrided to change the domain.
         """
         return [('state', '!=', 'done'),
-                ('id', 'in', picking_ids)]
+                ('id', 'in', dispatch_ids)]
 
     def apply(self, cr, uid, ids, context=None):
         if context is None:
             context = {}
 
-        picking_ids = context.get('active_ids')
-        if not picking_ids:
+        dispatch_ids = context.get('active_ids')
+        if not dispatch_ids:
             raise orm.except_orm(
                 _('Error'),
                 _('No selected picking dispatch'))
@@ -57,7 +57,7 @@ class picking_dispatch_apply_carrier(orm.TransientModel):
         this = self.browse(cr, uid, ids[0], context=context)
 
         dispatch_obj = self.pool['picking.dispatch']
-        domain = self._check_domain(cr, uid, ids, picking_ids, context=context)
+        domain = self._check_domain(cr, uid, ids, dispatch_ids, context=context)
         dispatch_ids = dispatch_obj.search(cr, uid, domain, context=context)
         dispatch_obj.write(cr, uid, dispatch_ids,
                            {'carrier_id': this.carrier_id.id},
