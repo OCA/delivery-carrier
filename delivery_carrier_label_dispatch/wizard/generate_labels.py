@@ -188,7 +188,7 @@ class DeliveryCarrierLabelGenerate(orm.TransientModel):
             while not q_except.empty():
                 e = q_except.get()
                 if isinstance(e, orm.except_orm):
-                    if not e.name in error_count:
+                    if e.name not in error_count:
                         error_count[e.name] = 1
                     else:
                         error_count[e.name] += 1
