@@ -19,5 +19,5 @@
 #
 ##############################################################################
 
-import stock
-import wizard
+from . import stock
+from . import wizard

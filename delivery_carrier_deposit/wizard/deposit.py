@@ -41,6 +41,13 @@ class DeliveryDepositWizard(orm.TransientModel):
             help="Carrier type (combines several delivery methods)"),
     }
 
+    def _prepare_deposit_slip(self, cr, uid, wizard, context=None):
+        user = self.pool['res.users'].browse(cr, uid, uid, context=context)
+        return {
+            'carrier_type': wizard.carrier_type,
+            'company_id': user.company_id.id
+            }
+
     def create_deposit_slip(self, cr, uid, ids, context=None):
         wizard = self.browse(cr, uid, ids[0], context=context)
         picking_obj = self.pool['stock.picking']
@@ -52,12 +59,8 @@ class DeliveryDepositWizard(orm.TransientModel):
                 ('state', '=', 'done'),
             ], context=context)
         if picking_ids:
-            user = self.pool['res.users'].browse(cr, uid, uid, context=context)
-            deposit_id = deposit_obj.create(
-                cr, uid, {
-                    'carrier_type': wizard.carrier_type,
-                    'company_id': user.company_id.id
-                }, context=context)
+            vals = self._prepare_deposit_slip(cr, uid, wizard, context=context)
+            deposit_id = deposit_obj.create(cr, uid, vals, context=context)
             picking_obj.write(
                 cr, uid, picking_ids, {
                     'deposit_slip_id': deposit_id,

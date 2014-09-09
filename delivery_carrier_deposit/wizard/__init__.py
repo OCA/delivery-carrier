@@ -1,7 +1,6 @@
 # -*- encoding: utf-8 -*-
 ###############################################################################
 #                                                                             #
-#   delivery_deposit for OpenERP
 #   Copyright (C) 2012 Akretion David BEAL <david.beal@akretion.com>
 #                                                                             #
 #   This program is free software: you can redistribute it and/or modify      #
@@ -19,4 +18,4 @@
 #                                                                             #
 ###############################################################################
 
-import deposit  #noqa
+from . import deposit

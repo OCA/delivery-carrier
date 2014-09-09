@@ -103,6 +103,14 @@ class StockPicking(orm.Model):
     }
 
 
+class StockPickingOut(orm.Model):
+    _inherit = "stock.picking.out"
+
+    _columns = {
+        'deposit_slip_id': fields.many2one('deposit.slip', 'Deposit slip'),
+    }
+
+
 class DeliveryCarrier(orm.Model):
     _inherit = "delivery.carrier"
 
