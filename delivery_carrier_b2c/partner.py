@@ -30,15 +30,13 @@ class res_partner(orm.Model):
             'Advanced address',
             help="Display additional information for home delivery (b2c)"),
         'door_code': fields.char(
-            'Door Code',
-            size=5,),
+            'Door Code'),
         'door_code2': fields.char(
-            'Door Code 2',
-            size=5),
+            'Door Code 2',),
         'intercom': fields.char(
             'Intercom',
-            size=32,
-            help="Informations for Intercom as name or number on the intercom"),
+            help="Informations for Intercom such as name "
+                 "or number on the intercom"),
     }
 
     _defaults = {

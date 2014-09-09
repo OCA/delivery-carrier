@@ -35,7 +35,7 @@ Delivery Carrier Business To Customer
 
 Description
 -----------
-* Add specific fields to partner for deliveries purpose
+* Add specific fields to partner for delivery purpose
 
 
 Contributors
