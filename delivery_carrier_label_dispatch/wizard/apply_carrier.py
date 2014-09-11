@@ -57,7 +57,8 @@ class picking_dispatch_apply_carrier(orm.TransientModel):
         this = self.browse(cr, uid, ids[0], context=context)
 
         dispatch_obj = self.pool['picking.dispatch']
-        domain = self._check_domain(cr, uid, ids, dispatch_ids, context=context)
+        domain = self._check_domain(cr, uid, ids, dispatch_ids,
+                                    context=context)
         dispatch_ids = dispatch_obj.search(cr, uid, domain, context=context)
         dispatch_obj.write(cr, uid, dispatch_ids,
                            {'carrier_id': this.carrier_id.id},
