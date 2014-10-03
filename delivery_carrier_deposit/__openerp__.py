@@ -32,7 +32,9 @@
     'description': """
 Description
 -----------
-Allows to gather all delivery orders by 'delivery method' and date delivery in 'Deposit slip' model.
+Allows to gather all delivery orders by 'delivery method'
+and date delivery in 'Deposit slip' model.
+
 Provides a report which summarizes all deliveries for each carrier.
 
 How to use
