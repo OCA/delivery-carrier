@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="0">
+
+        <!-- PRODUCT  -->
+        <record id="product_product_gls" model="product.product">
+            <field name="default_code">SHIP_GLS</field>
+            <field name="standard_price">0.0</field>
+            <field name="cost_method">standard</field>
+            <field name="type">service</field>
+            <field name="procure_method">make_to_stock</field>
+            <field name="supply_method">buy</field>
+            <field name="name">Coûts de livraison - GLS</field>
+            <field name="categ_id">1</field>
+        </record>
+
+        <!-- PARTNER -->
+        <record id="partner_gls" model="res.partner">
+            <field name="name">GLS</field>
+            <field name="customer" eval="False" />
+            <field name="supplier" eval="True" />
+            <field name="is_company" eval="True" />
+        </record>
+
+        <!-- DELIVERY CARRIER TEMPLATE -->
+        <!--<record id="template_gls" model="delivery.carrier.template.option">-->
+            <!--<field name="name">GLS Label</field>-->
+            <!--<field name="code">fr</field>-->
+            <!--<field name="mode">filesystem</field>-->
+            <!--<field name="module">delivery_carrier_gls</field>-->
+            <!--<field name="path">report/label.mako</field>-->
+            <!--<field name="rescue_path">report/label_uniship.mako</field>-->
+        <!--</record>-->
+
+        <!-- DELIVERY CARRIER -->
+        <record id="delivery_carrier_gls" model="delivery.carrier">
+            <field name="name">GLS</field>
+            <field name="type">gls</field>
+            <field name="code">gls</field>
+            <!--<field name="tmpl_label_id" ref="template_gls"/>-->
+            <field name="partner_id" ref="partner_gls" />
+            <field name="product_id" ref="product_product_gls" />
+        </record>
+
+    </data>
+</openerp>
