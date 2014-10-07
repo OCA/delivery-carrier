@@ -17,6 +17,7 @@ from .exception_helper import (InvalidSequence)
 import httplib
 from unidecode import unidecode
 import logging
+import os
 
 REPORT_CODING = 'cp1252'
 ERROR_BEHAVIOR = 'backslashreplace'
@@ -96,7 +97,7 @@ SENDER_MODEL = {
     "shipper_zip":       {'max_size': 10, 'required': True},
     "shipper_city":      {'max_size': 35, 'required': True},
     "shipper_country":   {'in': GLS_COUNTRIES_PREFIX, 'required': True},
-    "webservice_url":    {'max_size': 100, 'required': True},
+    #"webservice_url":    {'max_size': 100, 'required': True},
 }
 
 # Here is all fields called in mako template
@@ -174,18 +175,10 @@ def gls_decode(data):
     return gls_data_to_dict(data)
 
 
-#class Label(object):
-#
-#    def __init__(self, content, code, rescue_path):
-#        self.code = code
-#        self.content = content
-#        self.rescue_path = rescue_path
-
-
 class Gls(AbstractLabel):
 
     def __init__(self, sender, code, test_plateform=False):
-        self.check_model(sender, SENDER_MODEL)
+        self.check_model(sender, SENDER_MODEL, 'company')
         #self.product_code, self.uniship_product = self.get_product(
         #                                            account['shipper_country'])
         if test_plateform:
@@ -246,18 +239,21 @@ class Gls(AbstractLabel):
                 "given dictionnary 'address' for the country '%s' : " +
                 " this data is required" % address['country_code'])
 
-    def use_uniship(self, label, parcel, all_dict, address):
-        with open(label.rescue_path, 'r') as template:
-            label.content = template.read()
-            if address['country_code'] == 'FR':
-                self.filename = 'gls_rescue'
-            else:
-                self.filename = 'gls_foreign'
-            self.filename += parcel
+    def select_label(self, parcel, all_dict, address, failed_webservice=False):
+        if address['country_code'] == 'FR' and not failed_webservice:
+            self.filename = 'gls_rescue'
+            zpl_file = 'label.mako'
+        else:
+            self.filename = 'gls_foreign'
+            zpl_file = 'label_uniship.mako'
+        self.filename += parcel
+        template_path = os.path.join(os.path.dirname(__file__), zpl_file)
+        with open(template_path, 'r') as template:
+            content = template.read()
             all_dict.update(self.get_barcode_uniship(all_dict, address))
-        return True
+        return content
 
-    def get_result_analysis(self, result):
+    def get_result_analysis(self, result, all_dict):
         component = result.split(':')
         code, message = component[0], component[1]
         if code == 'E000':
@@ -266,9 +262,17 @@ class Gls(AbstractLabel):
             logger.info("""Web service access problem :
 code: %s ; message: %s ; result: %s""" % (code, message, result))
             if message == 'T330':
-                raise Exception("Postal code is wrong (relative to the destination country)")
+                zip_code = ''
+                if all_dict['T330']:
+                    zip_code = all_dict['T330']
+                raise Exception(
+                    "Postal code '%s' is wrong (relative to the "
+                    "destination country)" % zip_code)
             elif message == 'T100':
-                raise Exception("Country code is wrong")
+                cnty_code = ''
+                if all_dict['T100']:
+                    cnty_code = all_dict['T100']
+                raise Exception("Country code '%s' is wrong" % cnty_code)
             else:
                 if code == 'E999':
                     logger.info("Unibox server (web service) is not responding")
@@ -280,16 +284,16 @@ accessibility, sent datas and so on""")
         >>> Rescue label will be printed instead of the standard label""")
             return False
 
-    def get_label(self, label, delivery, address, parcel):
-        self.check_model(delivery, DELIVERY_MODEL)
-        self.check_model(parcel, PARCEL_MODEL)
-        self.check_model(address, ADDRESS_MODEL)
+    def get_label(self, delivery, address, parcel):
+        self.check_model(delivery, DELIVERY_MODEL, 'delivery')
+        self.check_model(parcel, PARCEL_MODEL, 'package')
+        self.check_model(address, ADDRESS_MODEL, 'partner')
         self.product_code, self.uniship_product = self.get_product(
-                                                    address['country_code'])
+            address['country_code'])
         delivery['gls_origin_reference'] = self.set_origin_reference(
-                                                            delivery, address)
+            delivery, address)
         # transfom human keys in GLS keys (with 'T' prefix)
-        T_account = self.map_semantic_keys(ACCOUNT_MAPPING, self.account)
+        T_account = self.map_semantic_keys(ACCOUNT_MAPPING, self.sender)
         T_delivery = self.map_semantic_keys(DELIVERY_MAPPING, delivery)
         T_parcel = self.map_semantic_keys(PARCEL_MAPPING, parcel)
         T_address = self.map_semantic_keys(ADDRESS_MAPPING, address)
@@ -301,28 +305,33 @@ accessibility, sent datas and so on""")
         all_dict.update(T_address)
         all_dict.update(self.add_specific_keys(address))
         if address['country_code'] != 'FR':
-            self.use_uniship(
-                label, parcel['parcel_number_label'], all_dict, address)
+            label_content = self.select_label(
+                parcel['parcel_number_label'], all_dict, address)
         else:
+            failed_webservice = False
             # webservice
             response = self.get_webservice_response(all_dict)
-            # TODO refactor webservice response failed and webservice downed
+            # refactor webservice response failed and webservice downed
             if isinstance(response, dict):
-                if self.get_result_analysis(response['RESULT']):
+                if self.get_result_analysis(response['RESULT'], all_dict):
                     all_dict.update(response)
                 else:
-                    self.use_uniship(
-                        label, parcel['parcel_number_label'], all_dict, address)
+                    failed_webservice = True
+                    label_content = self.select_label(
+                        parcel['parcel_number_label'],
+                        all_dict, address,
+                    )
             else:
-                self.use_uniship(
-                    label, parcel['parcel_number_label'], all_dict, address)
+                failed_webservice = True
+            label_content = self.select_label(
+                parcel['parcel_number_label'], all_dict, address,
+                failed_webservice=failed_webservice)
         # some keys are not defined by GLS but are in mako template
         # this add empty values to these keys
-        keys_without_value = self.validate_mako(label.content, all_dict.keys())
+        keys_without_value = self.validate_mako(label_content, all_dict.keys())
         all_dict.update(dict(zip(keys_without_value, keys_without_value)))
-        #all_dict.update(dict.fromkeys(keys_without_value, REPLACEMENT_STRING))
         try:
-            tpl = Template(label.content).render(**all_dict)
+            tpl = Template(label_content).render(**all_dict)
             content2print = tpl.encode(
                 encoding=REPORT_CODING, errors=ERROR_BEHAVIOR)
             return {

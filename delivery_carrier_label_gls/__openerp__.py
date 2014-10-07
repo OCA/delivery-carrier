@@ -30,6 +30,7 @@
     'depends': [
         'base_delivery_carrier_label',
         'configuration_helper',
+        'partner_helper',
     ],
     'description': """
 Delivery Carrier Label GLS (french carrier)
@@ -50,6 +51,9 @@ Contributors
         'config_view.xml',
         #'security/ir.model.access.csv',
     ],
+    'external_dependencies': {
+        'python': ['pycountry'],
+    },
     'license': 'AGPL-3',
     'tests': [],
     'installable': True,

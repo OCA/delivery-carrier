@@ -12,23 +12,34 @@ from openerp.osv import orm  # fields
 from openerp.tools.translate import _
 from .report.label import Gls, InvalidDataForMako
 from .report.label_helper import (
-    #InvalidSequence,
+    InvalidValueNotInList,
     InvalidMissingField,
     InvalidType,)
 from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
 from datetime import datetime
-import os
+import pycountry
 
 
-EXCEPTION_MESSAGE_TITLE = "GLS Library Error"
+EXCEPT_TITLE = "GLS Library Exception"
 
 
-def get_rescue_template():
-    zpl_file = 'label_uniship.mako'
-    return os.path.join(
-        os.path.dirname(__file__),
-        'report',
-        zpl_file)
+def raise_exception(orm, message):
+    raise orm.except_orm(EXCEPT_TITLE, map_except_message(message))
+
+
+def map_except_message(message):
+    """ Allows to map vocabulary from external library
+        to Odoo vocabulary in Exception message
+    """
+    model_mapping = {
+        'shipper_country': 'partner_id.country_id.code',
+        #'shipper_zip': 'zip',
+    }
+    for key, val in model_mapping.items():
+        message = message.replace(key, val)
+    #if "field 'country_code' with value 'None' must belong" in message:
+    #    message = _("partner ")
+    return message
 
 
 class StockPicking(orm.Model):
@@ -47,25 +58,28 @@ class StockPicking(orm.Model):
         return super(StockPicking, self).action_done(
             cr, uid, ids, context=context)
 
-    def _prepare_address_info(self, cr, uid, picking, context=None):
+    def _prepare_address_gls(self, cr, uid, picking, context=None):
         address = {}
         res = self.pool['res.partner']._get_split_address(
             cr, uid, picking.partner_id, 3, 35, context=context)
         address['street'], address['street2'], address['street3'] = res
+        country_code = (picking.partner_id and
+                        picking.partner_id.country_id.code or 'FR')
+        iso_3166 = pycountry.countries.get(alpha2=country_code).numeric
         address.update({
-            "consignee_name": picking.partner_id.name or picking.partner_id.name,
+            "consignee_name": picking.partner_id.name,
             "zip": picking.partner_id.zip,
             "city": picking.partner_id.city,
             "consignee_phone": picking.partner_id.phone,
             "consignee_mobile": picking.partner_id.mobile,
             "consignee_email": picking.partner_id.email,
-            "country_code": picking.partner_id.country_id.code,
+            "country_code": picking.partner_id.country_id.code or 'FR',
             # useful uniship label only
-            "country_norme3166": picking.partner_id.country_id.gls_code,
+            "country_norme3166": int(iso_3166),
         })
         return address
 
-    def _prepare_sender_info(self, cr, uid, pick, context=None):
+    def _prepare_sender_gls(self, cr, uid, pick, context=None):
         partner = self.pool['stock.picking.out']._get_label_sender_address(
             cr, uid, pick, context=context)
         sender = {'customer_id': pick.company_id.gls_customer_code,
@@ -75,7 +89,7 @@ class StockPicking(orm.Model):
             sender['country'] = partner.country_id.name
         sender.update({
             'shipper_street': partner.street,
-            'shipper_street2': partner.street1,
+            'shipper_street2': partner.street2,
             'shipper_name': partner.name,
             'shipper_country': partner.country_id.code,
             'shipper_zip': partner.zip,
@@ -83,26 +97,28 @@ class StockPicking(orm.Model):
             })
         return sender
 
-    def _prepare_delivery_info(self, cr, uid, picking, context=None):
+    def _prepare_delivery_gls(self, cr, uid, picking, context=None):
         shipping_date = picking.min_date
         if picking.date_done:
             shipping_date = picking.date_done
+        shipping_date = datetime.strptime(
+            shipping_date, DEFAULT_SERVER_DATETIME_FORMAT)
         delivery = {}
         delivery.update({
             "contact": picking.company_id.name,
             'consignee_ref': picking.name,
             'additional_ref_1': '',
             'additional_ref_2': picking.name,
-            'shipping_date': datetime.strptime(shipping_date,
-                                DEFAULT_SERVER_DATETIME_FORMAT).strftime('%Y%m%d'),
+            'shipping_date': shipping_date.strftime('%Y%m%d'),
             #'commentary': picking.note,
             'parcel_total_number': picking.number_of_packages,
-            'custom_sequence': picking.carrier_sequence,
+            'custom_sequence': self._get_sequence(
+                cr, uid, 'gls', context=context),
             })
         return delivery
 
-    def _prepare_pack_info(self, cr, uid, tracking, pack_number, weight,
-                                                                context=None):
+    def _prepare_pack_gls(
+            self, cr, uid, tracking, pack_number, weight, context=None):
         pack = {}
         pack.update({
             'parcel_number_label': pack_number,
@@ -143,51 +159,56 @@ class StockPicking(orm.Model):
         if picking.carrier_type == 'gls':
             #self.get_carrier_sequence(
             #    cr, uid, ids, 'stock.picking_gls', context=context)
-            sender = self._prepare_sender_info(cr, uid, picking, context=context)
+            sender = self._prepare_sender_gls(
+                cr, uid, picking, context=context)
             #gls has a rescue label without webservice required
             #if webservice is down
-            #(rescue label is also used for international carrier)
-            self.label = get_rescue_template()
+            #rescue label is also used for international carrier
             test = False
             if picking.company_id.gls_test:
                 test = True
             try:
-                Gls_label = Gls(sender, picking.carrier_code, test_plateform=test)
+                Gls_label = Gls(
+                    sender, picking.carrier_code, test_plateform=test)
             except InvalidMissingField as e:
-                raise orm.except_orm(EXCEPTION_MESSAGE_TITLE, e.message)
+                raise_exception(orm, e.message)
             except Exception as e:
-                raise orm.except_orm(EXCEPTION_MESSAGE_TITLE, e.message)
+                raise_exception(orm, e.message)
             pack_number = 0
-            tracking_ids = self._get_tracking_ids(cr, uid, picking, context=context)
-            if picking.tracking_ids:
+            tracking_ids = self._get_tracking_ids(
+                cr, uid, picking, context=context)
+            if tracking_ids[0]:
                 for tracking in picking.tracking_ids:
                     pack_number += 1
-                    pack = self._prepare_pack_info(
+                    pack = self._prepare_pack_gls(
                         cr, uid, tracking, pack_number, None, context=context)
                     self._generate_gls_label(
                         cr, uid, Gls_label, picking, pack, context=None)
             else:
-                pack = self._prepare_pack_info(
+                if picking.weight == 0.0:
+                    raise_exception(orm, _("Total weight must be > 0"))
+                pack = self._prepare_pack_gls(
                     cr, uid, None, 1, picking.weight, context=context)
                 return self._generate_gls_label(
                     cr, uid, Gls_label, picking, pack, context=None)
         return super(StockPicking, self).generate_shipping_labels(
             cr, uid, ids, tracking_ids=tracking_ids, context=context)
 
-    def _generate_gls_label(self, cr, uid, label_obj, picking, pack, context=None):
-        address = self._prepare_address_infos(cr, uid, picking, context=context)
-        delivery = self._prepare_delivery_infos(
+    def _generate_gls_label(
+            self, cr, uid, label_obj, picking, pack, context=None):
+        address = self._prepare_address_gls(cr, uid, picking, context=context)
+        delivery = self._prepare_delivery_gls(
             cr, uid, picking, context=context)
+        result = label_obj.get_label(delivery, address, pack)
         try:
-            result = label_obj.get_label(self.label, delivery, address, pack)
-        except InvalidMissingField, e:
-            raise orm.except_orm(EXCEPTION_MESSAGE_TITLE, e.message)
-        except InvalidDataForMako, e:
-            raise orm.except_orm(EXCEPTION_MESSAGE_TITLE, e.message)
-        except InvalidType, e:
-            raise orm.except_orm(EXCEPTION_MESSAGE_TITLE, e.message)
-        #except Exception, e:
-            #raise orm.except_orm(EXCEPTION_MESSAGE_TITLE, e.message)
+            ''
+        except (InvalidMissingField,
+                InvalidDataForMako,
+                InvalidValueNotInList,
+                InvalidType) as e:
+            raise_exception(orm, e.message)
+        except Exception, e:
+            raise orm.except_orm(EXCEPT_TITLE, e.message)
         #TODO change label_code
         label_value = self.get_carrier_label_data(cr, uid, result['content'],
                     file_name=result['filename'], label_code='label_100x150',
@@ -203,6 +224,15 @@ class StockPicking(orm.Model):
         #    },
         #    context=context)
         return True
+
+    def _get_sequence(self, cr, uid, label, context=None):
+        sequence = self.pool['ir.sequence'].next_by_code(
+            cr, uid, 'stock.picking_' + label, context=context)
+        if not sequence:
+            raise orm.except_orm(
+                _("Picking sequence"),
+                _("There is no sequence defined for the label '%s'") % label)
+        return sequence
 
 
 class StockPickingOut(orm.Model):

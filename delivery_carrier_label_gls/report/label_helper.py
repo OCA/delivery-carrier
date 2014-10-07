@@ -86,8 +86,9 @@ class AbstractLabel(object):
                                 "%s :  %s given" % (field, val, size))
                     elif key == 'in' and data not in val:
                         raise InvalidValueNotInList(
-                            "'%s' value must belong to this list %s"
-                            % (data, val))
+                            "field '%s' with value '%s' must belong "
+                            "to this list %s"
+                            % (field, data, val))
                     elif key == 'date':
                         self.check_type(field, [str, datetime], data)
                         if isinstance(data, datetime):
@@ -131,8 +132,6 @@ class AbstractLabel(object):
 
     def must_be_checked(self, datas, field):
         res = True
-        #if field == 'street2':
-        #    import pdb;pdb.set_trace()
         if field in datas:
             if type(datas[field]) in [str, unicode, bool]:
                 if datas[field] is False:
