@@ -150,6 +150,36 @@ class StockPicking(orm.Model):
                 for line in picking.move_lines
             ))
 
+    def _generate_gls_label(
+            self, cr, uid, service, picking, pack, context=None):
+        address = self._prepare_address_gls(cr, uid, picking, context=context)
+        delivery = self._prepare_delivery_gls(
+            cr, uid, picking, context=context)
+        import pdb;pdb.set_trace()
+        label = {
+            'file_type': 'zpl2',
+            #'name': picking.name + '.zpl',
+            'name': pack['parcel_number_label'] + '.zpl',
+            #'tracking_id': track.id if track else False,
+        }
+        result = service.get_label(delivery, address, pack)
+        try:
+            ''
+        except (InvalidMissingField,
+                InvalidDataForMako,
+                InvalidValueNotInList,
+                InvalidType) as e:
+            raise_exception(orm, e.message)
+        except Exception, e:
+            raise orm.except_orm(EXCEPT_TITLE, e.message)
+        label['file'] = result['content']
+                       #'file': label['binary'].decode('base64'),
+        #label['filename'] = result['filename']
+        carrier = {'carrier_tracking_ref': result['carrier_tracking_ref']}
+        self.write(cr, uid, [picking.id], carrier)
+        picking = self.browse(cr, uid, picking.id, context=context)
+        return label
+
     def generate_shipping_labels(
             self, cr, uid, ids, tracking_ids=None, context=None):
         if isinstance(ids, (long, int)):
@@ -168,7 +198,7 @@ class StockPicking(orm.Model):
             if picking.company_id.gls_test:
                 test = True
             try:
-                Gls_label = Gls(
+                service = Gls(
                     sender, picking.carrier_code, test_plateform=test)
             except InvalidMissingField as e:
                 raise_exception(orm, e.message)
@@ -177,53 +207,25 @@ class StockPicking(orm.Model):
             pack_number = 0
             tracking_ids = self._get_tracking_ids(
                 cr, uid, picking, context=context)
+            labels = []
             if tracking_ids[0]:
                 for tracking in picking.tracking_ids:
                     pack_number += 1
                     pack = self._prepare_pack_gls(
                         cr, uid, tracking, pack_number, None, context=context)
-                    self._generate_gls_label(
-                        cr, uid, Gls_label, picking, pack, context=None)
+                    labels.append(self._generate_gls_label(
+                        cr, uid, service, picking, pack, context=None))
             else:
                 if picking.weight == 0.0:
                     raise_exception(orm, _("Total weight must be > 0"))
                 pack = self._prepare_pack_gls(
                     cr, uid, None, 1, picking.weight, context=context)
-                return self._generate_gls_label(
-                    cr, uid, Gls_label, picking, pack, context=None)
+                labels.append(self._generate_gls_label(
+                    cr, uid, service, picking, pack, context=None))
+            if labels:
+                return labels
         return super(StockPicking, self).generate_shipping_labels(
             cr, uid, ids, tracking_ids=tracking_ids, context=context)
-
-    def _generate_gls_label(
-            self, cr, uid, label_obj, picking, pack, context=None):
-        address = self._prepare_address_gls(cr, uid, picking, context=context)
-        delivery = self._prepare_delivery_gls(
-            cr, uid, picking, context=context)
-        result = label_obj.get_label(delivery, address, pack)
-        try:
-            ''
-        except (InvalidMissingField,
-                InvalidDataForMako,
-                InvalidValueNotInList,
-                InvalidType) as e:
-            raise_exception(orm, e.message)
-        except Exception, e:
-            raise orm.except_orm(EXCEPT_TITLE, e.message)
-        #TODO change label_code
-        label_value = self.get_carrier_label_data(cr, uid, result['content'],
-                    file_name=result['filename'], label_code='label_100x150',
-                                                output='epl', context=context)
-        picking.write({
-            'shipping_label_ids': [(0, 0, label_value)],
-            'carrier_tracking_ref': result['carrier_tracking_ref'],
-            },
-            context=context)
-        #picking.write({
-        #    #'carrier_tracking_ref': result['carrier_tracking_ref'],
-        #    'shipping_label_ids': [(0, 0, label_value)],
-        #    },
-        #    context=context)
-        return True
 
     def _get_sequence(self, cr, uid, label, context=None):
         sequence = self.pool['ir.sequence'].next_by_code(
@@ -259,7 +261,7 @@ class StockPickingIn(orm.Model):
             "Return label",
             "Return Label is not implemented for "
             "GLS Carrier \n"
-            "For service proposal, contact http://www.akretion.com")
+            "Ask us for service proposal, http://www.akretion.com/contact")
 
 
 class ShippingLabel(orm.Model):
@@ -269,5 +271,6 @@ class ShippingLabel(orm.Model):
         selection = super(ShippingLabel, self)._get_file_type_selection(
             cr, uid, context=None)
         selection.append(('zpl2', 'ZPL2'))
+        selection = list(set(selection))
         return selection
 

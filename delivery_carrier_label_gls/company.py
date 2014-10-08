@@ -19,15 +19,15 @@ class ResCompany(orm.Model):
         'gls_customer_code': fields.char(
             'Customer Code',
             size=10,
-            help='Code for GLS carrier company'),
+            help='Code for GLS carrier company (T8915)'),
         'gls_contact_id': fields.char(
             'Contact Id',
             size=10,
-            help='Contact id for GLS carrier company'),
+            help='Contact id for GLS carrier company (T8914)'),
         'gls_warehouse_code': fields.char(
             'Warehouse Code',
             size=6,
-            help='GLS warehouse near customer location'),
+            help='GLS warehouse near customer location (T8700)'),
         'gls_test': fields.boolean(
             'Url Test',
             help="Check if requested webservice is test plateform")
