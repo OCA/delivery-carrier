@@ -51,6 +51,11 @@ Contributors
         'config_view.xml',
         #'security/ir.model.access.csv',
     ],
+    'demo': [
+        'demo/res.partner.csv',
+        'demo/company.xml',
+        'demo/product.xml',
+    ],
     'external_dependencies': {
         'python': ['pycountry'],
     },

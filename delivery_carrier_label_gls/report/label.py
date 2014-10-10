@@ -406,6 +406,7 @@ accessibility, sent datas and so on""")
             keys2match.append(match)
         unmatch = list(set(keys2match) - set(available_keys))
         if len(unmatch) > 0:
-            print "\nGLS carrier : these keys are defined in mako template ",
-            "but without valid replacement values", unmatch, '\n'
+            print """
+GLS carrier : these keys \n%s\nare defined
+in mako template but without valid replacement values\n""" % unmatch
         return unmatch

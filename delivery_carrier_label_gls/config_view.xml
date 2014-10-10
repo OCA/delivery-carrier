@@ -30,13 +30,19 @@
       </group>
       <separator string="Account"/>
       <group name="account" col="4">
+        <field name="chargeur" class="oe_inline"/>
+        <span/><span/>
         <field name="customer_code" class="oe_inline"/>
         <span/><span/>
-        <field name="test"/>
+        <field name="business_contact_id" class="oe_inline"/>
         <span/><span/>
-        <field name="contact_id" class="oe_inline"/>
+        <field name="euro_contact_id" class="oe_inline"/>
+        <span/><span/>
+        <field name="global_contact_id" class="oe_inline"/>
         <span/><span/>
         <field name="warehouse_code" class="oe_inline"/>
+        <span/><span/>
+        <field name="test"/>
 
       </group>
 
