@@ -102,6 +102,8 @@ class AbstractLabel(object):
                             try:
                                 datas[field] = \
                                     datetime.strptime(data, val).strftime(val)
+                                # transform in unicode to be used by template
+                                datas[field] = unicode(datas[field])
                             except:
                                 raise InvalidType(
                                     "The date '%s' must be in the format '%s'"
@@ -121,13 +123,13 @@ class AbstractLabel(object):
                         # in python template (mako, jinja2, etc)
                         if field not in datas:
                             #case 1/
-                            datas[field] = ''
+                            datas[field] = u''
                         elif type(datas[field]) == bool:
                             #case 2/
-                            datas[field] = ''
+                            datas[field] = u''
             # case 3/
-            if type(datas[field]) in [int, float]:
-                datas[field] = str(datas[field])
+            if type(datas[field]) in [int, float, str]:
+                datas[field] = unicode(datas[field])
         return datas
 
     def must_be_checked(self, datas, field):

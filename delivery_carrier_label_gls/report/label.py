@@ -285,11 +285,11 @@ accessibility, sent datas and so on""")
             return False
 
     def get_label(self, delivery, address, parcel):
-        self.check_model(delivery, DELIVERY_MODEL, 'delivery')
         self.check_model(parcel, PARCEL_MODEL, 'package')
         self.check_model(address, ADDRESS_MODEL, 'partner')
         self.product_code, self.uniship_product = self.get_product(
             address['country_code'])
+        self.check_model(delivery, DELIVERY_MODEL, 'delivery')
         delivery['gls_origin_reference'] = self.set_origin_reference(
             delivery, address)
         # transfom human keys in GLS keys (with 'T' prefix)
@@ -336,7 +336,7 @@ accessibility, sent datas and so on""")
                 encoding=REPORT_CODING, errors=ERROR_BEHAVIOR)
             return {
                 "content": content2print,
-                "carrier_tracking_ref": delivery['gls_origin_reference'],
+                "tracking_number": delivery['gls_origin_reference'],
                 'filename': self.filename
                 }
         except:
@@ -370,9 +370,14 @@ accessibility, sent datas and so on""")
     def map_semantic_keys(self, T_keys, datas):
         mapping = {}
         for T, semantic_key in T_keys.items():
+            if isinstance(datas[semantic_key], (int, long)):
+                datas[semantic_key] = unicode(datas[semantic_key])
             #':' and '|' are forbidden because are used by webservice
             val = datas[semantic_key].replace(':', ' ').replace('|', ' ')
-            mapping[T] = unidecode(val).upper()
+            try:
+                mapping[T] = unidecode(val).upper()
+            except Exception:
+                print semantic_key, datas['semantic_key']
         return mapping
 
     def get_product(self, address_country):

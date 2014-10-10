@@ -18,9 +18,11 @@ from .report.label_helper import (
 from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
 from datetime import datetime
 import pycountry
+from operator import attrgetter
 
 
 EXCEPT_TITLE = "GLS Library Exception"
+LABEL_TYPE = 'zpl2'
 
 
 def raise_exception(orm, message):
@@ -49,6 +51,7 @@ class StockPicking(orm.Model):
         """
         :return: see original method
         """
+        #TODO recreate context
         if context is None:
             context = {}
         for picking in self.browse(cr, uid, ids, context=context):
@@ -57,6 +60,15 @@ class StockPicking(orm.Model):
                     cr, uid, [picking.id], context=context)
         return super(StockPicking, self).action_done(
             cr, uid, ids, context=context)
+
+    def generate_shipping_labels(self, cr, uid, ids, tracking_ids=None,
+                                 context=None):
+        return self.pool['stock.picking.out'].generate_shipping_labels(
+            cr, uid, ids, tracking_ids=tracking_ids, context=context)
+
+
+class StockPickingOut(orm.Model):
+    _inherit = 'stock.picking.out'
 
     def _prepare_address_gls(self, cr, uid, picking, context=None):
         address = {}
@@ -107,10 +119,10 @@ class StockPicking(orm.Model):
         delivery.update({
             "contact": picking.company_id.name,
             'consignee_ref': picking.name,
-            'additional_ref_1': '',
+            'additional_ref_1': u'',
             'additional_ref_2': picking.name,
             'shipping_date': shipping_date.strftime('%Y%m%d'),
-            #'commentary': picking.note,
+            'commentary': picking.note,
             'parcel_total_number': picking.number_of_packages,
             'custom_sequence': self._get_sequence(
                 cr, uid, 'gls', context=context),
@@ -129,42 +141,83 @@ class StockPicking(orm.Model):
                 'weight': "{0:05.2f}".format(weight),
                 })
         else:
+            tracking_weight = [move.weight for move in tracking.move_ids][0]
             pack.update({
-                'weight': "{0:05.2f}".format(tracking.weight),
+                'weight': "{0:05.2f}".format(tracking_weight),
                 })
         return pack
 
-    #def create_shipping_label(self, cr, uid, ids, context=None):
-    #    for picking in self.browse(cr, uid, ids, context=context):
-    #        if picking.carrier_type == 'gls':
-    #            picking.create_shipping_label_for_gls(picking, context=context)
-    #    return super(StockPicking, self).create_shipping_label(cr, uid, ids,
-    #                                                           context=context)
-
-    def _get_tracking_ids(self, cr, uid, picking, context=None):
-            # get all the trackings of the picking
-            # no tracking_id will return a False, meaning that
-            # a label is needed for the picking
-            return sorted(set(
-                line.tracking_id.id or False
-                for line in picking.move_lines
-            ))
+    def _get_tracking_ids_from_moves(self, cr, uid, picking, context=None):
+        """ get all the trackings of the picking
+            no tracking_id will return a False, meaning that
+            we want a label for the picking
+        """
+        return sorted(set(
+            line.tracking_id for line in picking.move_lines
+        ), key=attrgetter('name'))
 
     def _generate_gls_label(
-            self, cr, uid, service, picking, pack, context=None):
+            self, cr, uid, picking, service, tracking_ids=None, context=None):
+        """ Generate labels and write tracking numbers received """
         address = self._prepare_address_gls(cr, uid, picking, context=context)
+        if tracking_ids is None:
+            trackings = self._get_tracking_ids_from_moves(
+                cr, uid, picking, context=context)
+        else:
+            # restrict on the provided trackings
+            trackings = self.pool['stock.tracking'].browse(
+                cr, uid, tracking_ids, context=context)
+        labels = []
+        picking.write({'number_of_packages': len(trackings)})
+        picking = self.browse(cr, uid, picking.id, context=context)
         delivery = self._prepare_delivery_gls(
             cr, uid, picking, context=context)
-        import pdb;pdb.set_trace()
-        label = {
-            'file_type': 'zpl2',
-            #'name': picking.name + '.zpl',
-            'name': pack['parcel_number_label'] + '.zpl',
-            #'tracking_id': track.id if track else False,
-        }
-        result = service.get_label(delivery, address, pack)
+        pack_number = 0
+        # if there are no pack defined, write tracking_number on picking
+        # otherwise, write it on serial field of each pack
+        for parcel in trackings:
+            pack_number += 1
+            addr = address.copy()
+            deliv = delivery.copy()
+            if not parcel:
+                # ignore lines without tracking when there is tracking
+                # in a picking
+                # Example: if I have 1 move with a tracking and 1
+                # without, I will have [False, a_tracking] in
+                # `trackings`. In that case, we are using packs, not the
+                # picking for the tracking numbers.
+                if len(trackings) > 1:
+                    continue
+                pack = self._prepare_pack_gls(
+                    cr, uid, parcel, pack_number, picking.weight, context=context)
+                label = self.get_zpl(service, deliv, addr, pack)
+                self.write(cr, uid, picking.id,
+                           {'carrier_tracking_ref': label['tracking_number']},
+                           context=context)
+            else:
+                pack = self._prepare_pack_gls(
+                    cr, uid, parcel, pack_number, None, context=context)
+                label = self.get_zpl(service, deliv, addr, pack)
+
+                #for search_label in res['value']:
+                #    if track.name in search_label['item_id'].split('+')[-1]:
+                #        label = search_label
+                #        tracking_number = label['tracking_number']
+                #        track.write({'serial': label['tracking_number']})
+                #        break
+
+                parcel.write({'serial': label['tracking_number']})
+            labels.append({
+                'tracking_id': parcel.id if parcel else False,
+                'file': label['content'],
+                'file_type': LABEL_TYPE,
+                'name': label['tracking_number'] + str(pack_number) + '.' + LABEL_TYPE,
+            })
+        return labels
+
+    def get_zpl(self, service, delivery, address, pack):
         try:
-            ''
+            result = service.get_label(delivery, address, pack)
         except (InvalidMissingField,
                 InvalidDataForMako,
                 InvalidValueNotInList,
@@ -172,23 +225,16 @@ class StockPicking(orm.Model):
             raise_exception(orm, e.message)
         except Exception, e:
             raise orm.except_orm(EXCEPT_TITLE, e.message)
-        label['file'] = result['content']
-                       #'file': label['binary'].decode('base64'),
-        #label['filename'] = result['filename']
-        carrier = {'carrier_tracking_ref': result['carrier_tracking_ref']}
-        self.write(cr, uid, [picking.id], carrier)
-        picking = self.browse(cr, uid, picking.id, context=context)
-        return label
+        return result
 
     def generate_shipping_labels(
             self, cr, uid, ids, tracking_ids=None, context=None):
+        """ Add label generation for GLS """
         if isinstance(ids, (long, int)):
             ids = [ids]
         assert len(ids) == 1
         picking = self.browse(cr, uid, ids[0], context=context)
-        if picking.carrier_type == 'gls':
-            #self.get_carrier_sequence(
-            #    cr, uid, ids, 'stock.picking_gls', context=context)
+        if picking.carrier_id.type == 'gls':
             sender = self._prepare_sender_gls(
                 cr, uid, picking, context=context)
             #gls has a rescue label without webservice required
@@ -204,28 +250,13 @@ class StockPicking(orm.Model):
                 raise_exception(orm, e.message)
             except Exception as e:
                 raise_exception(orm, e.message)
-            pack_number = 0
-            tracking_ids = self._get_tracking_ids(
-                cr, uid, picking, context=context)
-            labels = []
-            if tracking_ids[0]:
-                for tracking in picking.tracking_ids:
-                    pack_number += 1
-                    pack = self._prepare_pack_gls(
-                        cr, uid, tracking, pack_number, None, context=context)
-                    labels.append(self._generate_gls_label(
-                        cr, uid, service, picking, pack, context=None))
-            else:
-                if picking.weight == 0.0:
-                    raise_exception(orm, _("Total weight must be > 0"))
-                pack = self._prepare_pack_gls(
-                    cr, uid, None, 1, picking.weight, context=context)
-                labels.append(self._generate_gls_label(
-                    cr, uid, service, picking, pack, context=None))
-            if labels:
-                return labels
-        return super(StockPicking, self).generate_shipping_labels(
-            cr, uid, ids, tracking_ids=tracking_ids, context=context)
+            return self._generate_gls_label(
+                cr, uid, picking, service,
+                tracking_ids=tracking_ids,
+                context=context)
+        return super(StockPicking, self).\
+            generate_shipping_labels(
+                cr, uid, ids, tracking_ids=tracking_ids, context=context)
 
     def _get_sequence(self, cr, uid, label, context=None):
         sequence = self.pool['ir.sequence'].next_by_code(
@@ -235,10 +266,6 @@ class StockPicking(orm.Model):
                 _("Picking sequence"),
                 _("There is no sequence defined for the label '%s'") % label)
         return sequence
-
-
-class StockPickingOut(orm.Model):
-    _inherit = 'stock.picking.out'
 
     def copy(self, cr, uid, id, default=None, context=None):
         if default is None:
