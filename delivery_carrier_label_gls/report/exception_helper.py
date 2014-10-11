@@ -21,6 +21,10 @@
 ###############################################################################
 
 
+class InvalidAccountNumber(Exception):
+    ""
+
+
 class InvalidSequence(Exception):
     ""
 

@@ -10,10 +10,10 @@ TODO :
 
 from mako.template import Template
 from mako.exceptions import RichTraceback
-from datetime import datetime
-import time
+#from datetime import datetime
+#import time
 from .label_helper import AbstractLabel
-from .exception_helper import (InvalidSequence)
+from .exception_helper import (InvalidAccountNumber)
 import httplib
 from unidecode import unidecode
 import logging
@@ -235,18 +235,19 @@ class Gls(AbstractLabel):
             return {'T8917': code}
         else:
             #TODO : n'est pas ramené à l'erp
-            raise Exception("There is no key 'country_norme3166' in the " +
+            raise Exception(
+                "There is no key 'country_norme3166' in the " +
                 "given dictionnary 'address' for the country '%s' : " +
-                " this data is required" % address['country_code'])
+                "this data is required" % address['country_code'])
 
     def select_label(self, parcel, all_dict, address, failed_webservice=False):
+        self.filename = '_' + parcel
         if address['country_code'] == 'FR' and not failed_webservice:
-            self.filename = 'gls_rescue'
             zpl_file = 'label.mako'
         else:
-            self.filename = 'gls_foreign'
+            if failed_webservice:
+                self.filename = '_rescue'
             zpl_file = 'label_uniship.mako'
-        self.filename += parcel
         template_path = os.path.join(os.path.dirname(__file__), zpl_file)
         with open(template_path, 'r') as template:
             content = template.read()
@@ -307,6 +308,11 @@ accessibility, sent datas and so on""")
         if address['country_code'] != 'FR':
             label_content = self.select_label(
                 parcel['parcel_number_label'], all_dict, address)
+            if 'contact_id_inter' not in self.sender:
+                raise InvalidAccountNumber(
+                    u"There is no account number defined for international "
+                    "transportation, please set it in your company settings "
+                    "to send parcel outside France")
         else:
             failed_webservice = False
             # webservice

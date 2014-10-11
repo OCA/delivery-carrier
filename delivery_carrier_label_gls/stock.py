@@ -11,6 +11,7 @@
 from openerp.osv import orm  # fields
 from openerp.tools.translate import _
 from .report.label import Gls, InvalidDataForMako
+from .report.exception_helper import (InvalidAccountNumber)
 from .report.label_helper import (
     InvalidValueNotInList,
     InvalidMissingField,
@@ -71,6 +72,16 @@ class StockPicking(orm.Model):
 class StockPickingOut(orm.Model):
     _inherit = 'stock.picking.out'
 
+    def _prepare_global_gls(self, cr, uid, picking=None, context=None):
+        res = {}
+        param_m = self.pool['ir.config_parameter']
+        gls_keys = ['gls_warehouse']
+        ids = param_m.search(cr, uid, [('key', 'in', gls_keys)],
+                             context=context)
+        for elm in param_m.browse(cr, uid, ids, context=context):
+            res[elm.key] = elm.value
+        return res
+
     def _prepare_address_gls(self, cr, uid, picking, context=None):
         address = {}
         res = self.pool['res.partner']._get_split_address(
@@ -95,9 +106,13 @@ class StockPickingOut(orm.Model):
     def _prepare_sender_gls(self, cr, uid, pick, context=None):
         partner = self.pool['stock.picking.out']._get_label_sender_address(
             cr, uid, pick, context=context)
-        sender = {'customer_id': pick.company_id.gls_customer_code,
-                  'contact_id': pick.company_id.gls_business_contact_id,
-                  'outbound_depot': pick.company_id.gls_warehouse_code}
+        global_infos = self._prepare_global_gls(cr, uid, context=context)
+        sender = {'contact_id': pick.company_id.gls_fr_contact_id,
+                  'customer_id': pick.company_id.gls_fr_contact_id,
+                  'contact_id_inter': pick.company_id.gls_inter_contact_id,
+                  'outbound_depot': global_infos['gls_warehouse']}
+        if pick.company_id.gls_customer_code:
+            sender['customer_id'] = pick.company_id.gls_customer_code
         if partner.country_id:
             sender['country'] = partner.country_id.name
         sender.update({
@@ -179,17 +194,18 @@ class StockPickingOut(orm.Model):
             trackings = self.pool['stock.tracking'].browse(
                 cr, uid, tracking_ids, context=context)
         labels = []
-        picking.write({'number_of_packages': len(trackings)})
-        picking = self.browse(cr, uid, picking.id, context=context)
-        delivery = self._prepare_delivery_gls(
-            cr, uid, picking, context=context)
         without_track = 0
         for track in trackings:
             if not track:
                 without_track += 1
-        # write tracking_number on serial field
+        picking.write({
+            'number_of_packages': len(trackings) - without_track + 1})
+        picking = self.browse(cr, uid, picking.id, context=context)
+        delivery = self._prepare_delivery_gls(
+            cr, uid, picking, context=context)
+        # Write tracking_number on serial field
         # for move lines with tracking
-        # and on picking for others
+        # and on picking for other moves
         for parcel in trackings:
             addr = address.copy()
             deliv = delivery.copy()
@@ -203,6 +219,7 @@ class StockPickingOut(orm.Model):
                 without_track -= 1
                 if without_track > 0:
                     continue
+                # only executed for the last move line with no tracking
                 weight = self._get_weight_from_moves_without_tracking(
                     cr, uid, picking, context=context)
                 pack = self._prepare_pack_gls(
@@ -220,7 +237,8 @@ class StockPickingOut(orm.Model):
                 'tracking_id': parcel.id if parcel else False,
                 'file': label['content'],
                 'file_type': LABEL_TYPE,
-                'name': label['tracking_number'] + str(PACK_NUMBER) + '.' + LABEL_TYPE,
+                #'name': label['tracking_number'] + str(PACK_NUMBER) + label['filename']+'.zpl',
+                'name': label['tracking_number'] + label['filename']+'.zpl',
             })
         return labels
 
@@ -230,6 +248,7 @@ class StockPickingOut(orm.Model):
         except (InvalidMissingField,
                 InvalidDataForMako,
                 InvalidValueNotInList,
+                InvalidAccountNumber,
                 InvalidType) as e:
             raise_exception(orm, e.message)
         except Exception, e:

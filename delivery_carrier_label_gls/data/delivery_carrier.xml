@@ -21,26 +21,27 @@
             <field name="supplier" eval="True" />
             <field name="is_company" eval="True" />
         </record>
-
-        <!-- DELIVERY CARRIER TEMPLATE -->
-        <!--<record id="template_gls" model="delivery.carrier.template.option">-->
-            <!--<field name="name">GLS Label</field>-->
-            <!--<field name="code">fr</field>-->
-            <!--<field name="mode">filesystem</field>-->
-            <!--<field name="module">delivery_carrier_gls</field>-->
-            <!--<field name="path">report/label.mako</field>-->
-            <!--<field name="rescue_path">report/label_uniship.mako</field>-->
-        <!--</record>-->
-
         <!-- DELIVERY CARRIER -->
         <record id="delivery_carrier_gls" model="delivery.carrier">
             <field name="name">GLS</field>
             <field name="type">gls</field>
             <field name="code">gls</field>
-            <!--<field name="tmpl_label_id" ref="template_gls"/>-->
             <field name="partner_id" ref="partner_gls" />
             <field name="product_id" ref="product_product_gls" />
         </record>
 
+    </data>
+
+    <data noupdate="1">
+
+        <!-- CONFIG PARAMETER -->
+        <record id="delivery_carrier_gls_chargeur" model="ir.config_parameter">
+            <field name="key">gls_chargeur</field>
+            <field name="value">?</field>
+        </record>
+        <record id="delivery_carrier_gls_chargeur" model="ir.config_parameter">
+            <field name="key">gls_warehouse</field>
+            <field name="value">FR0031</field>
+        </record>
     </data>
 </openerp>
