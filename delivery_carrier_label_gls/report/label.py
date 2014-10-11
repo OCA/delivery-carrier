@@ -246,7 +246,7 @@ class Gls(AbstractLabel):
             zpl_file = 'label.mako'
         else:
             if failed_webservice:
-                self.filename = '_rescue'
+                self.filename += '_rescue'
             zpl_file = 'label_uniship.mako'
         template_path = os.path.join(os.path.dirname(__file__), zpl_file)
         with open(template_path, 'r') as template:
