@@ -308,7 +308,8 @@ accessibility, sent datas and so on""")
         if address['country_code'] != 'FR':
             label_content = self.select_label(
                 parcel['parcel_number_label'], all_dict, address)
-            if 'contact_id_inter' not in self.sender:
+            if ('contact_id_inter' not in self.sender or
+                    self.sender['contact_id_inter'] == False):
                 raise InvalidAccountNumber(
                     u"There is no account number defined for international "
                     "transportation, please set it in your company settings "
@@ -335,7 +336,8 @@ accessibility, sent datas and so on""")
         # some keys are not defined by GLS but are in mako template
         # this add empty values to these keys
         keys_without_value = self.validate_mako(label_content, all_dict.keys())
-        all_dict.update(dict(zip(keys_without_value, keys_without_value)))
+        empty_mapped = zip(keys_without_value, [''] * len(keys_without_value))
+        all_dict.update(dict(empty_mapped))
         try:
             tpl = Template(label_content).render(**all_dict)
             content2print = tpl.encode(

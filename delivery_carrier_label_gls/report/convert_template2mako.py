@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 """
@@ -14,8 +13,14 @@ def generate_mako(source, destination):
         content = '## -*- coding: utf-8 -*-\n' + content
         content = content.replace('<', '${')
         content = content.replace('>', '}')
+        # standard label
+        content = content.replace('^FO520,222^AB,12,15^', '^FO500,222^AB,12,15^')
+        content = content.replace('^FO55,620^B2', '\n/* Barcode */\n^FO55,620^B2')
+        # uniship label
+        content = content.replace('^FO480,530^A0,30,20', '^FO480,560^A0,30,20')
+        content = content.replace('^FO90,500^BX', '^FO90,470^BX')
 
-        destination +=  '.mako'
+        destination += '.mako'
         with open(destination, 'w') as write_file:
             write_file.write(content)
 
