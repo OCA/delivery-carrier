@@ -309,7 +309,7 @@ accessibility, sent datas and so on""")
             label_content = self.select_label(
                 parcel['parcel_number_label'], all_dict, address)
             if ('contact_id_inter' not in self.sender or
-                    self.sender['contact_id_inter'] == False):
+                    not self.sender['contact_id_inter']):
                 raise InvalidAccountNumber(
                     u"There is no account number defined for international "
                     "transportation, please set it in your company settings "
