@@ -24,10 +24,11 @@ class GlsConfigSettings(orm.TransientModel):
     _companyObject = ResCompany
 
     _columns = {
-        'gls_chargeur': fields.char(
-            string='Chargeur',
+        'gls_customer_code': fields.char(
+            string='Customer Code',
             readonly=True,
-            help="Information common to whole companies "
+            help="Code for GLS carrier company (T8915)\n"
+                 "Information common to whole companies "
                  "to configure in System Parameter"),
         'gls_warehouse': fields.char(
             string='Warehouse',
@@ -40,7 +41,7 @@ class GlsConfigSettings(orm.TransientModel):
     def default_get(self, cr, uid, fields, context=None):
         res = {}
         param_m = self.pool['ir.config_parameter']
-        for field in ['gls_chargeur', 'gls_warehouse']:
+        for field in ['gls_customer_code', 'gls_warehouse']:
             if field in fields:
                 ids = param_m.search(
                     cr, uid, [('key', '=', 'carrier_%s' % field)],

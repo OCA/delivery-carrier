@@ -34,7 +34,7 @@
         <span/><span/>
         <field name="inter_contact_id" class="oe_inline"/>
         <span/><span/>
-        <field name="customer_code" class="oe_inline"/>
+        <field name="gls_customer_code" class="oe_inline"/>
         <span/><span/>
         <!--<field name="gls_chargeur" class="oe_inline"/>-->
         <!--<span/><span/>-->
