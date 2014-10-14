@@ -1,23 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""
-TODO :
-* test exception
-* manage encodings
-* convertir addresse en majuscule
-"""
-
 from mako.template import Template
 from mako.exceptions import RichTraceback
-#from datetime import datetime
-#import time
 from .label_helper import AbstractLabel
 from .exception_helper import (InvalidAccountNumber)
 import httplib
 from unidecode import unidecode
 import logging
 import os
+import pycountry
 
 REPORT_CODING = 'cp1252'
 ERROR_BEHAVIOR = 'backslashreplace'
@@ -32,9 +24,6 @@ URL_PROD = "http://www.gls-france.com/cgi-bin/glsboxGI.cgi"
 URL_TEST = "http://www.gls-france.com/cgi-bin/glsboxGITest.cgi"
 
 
-COUNTRIES_PREFIX = ['AD', 'AE', 'AF', 'AG', 'AI', 'AL', 'AM', 'AN', 'AO', 'AQ', 'AR', 'AS', 'AT', 'AU', 'AW', 'AX', 'AZ', 'BA', 'BB', 'BD', 'BE', 'BF', 'BG', 'BH', 'BI', 'BJ', 'BL', 'BM', 'BN', 'BO', 'BQ', 'BR', 'BS', 'BT', 'BV', 'BW', 'BY', 'BZ', 'CA', 'CC', 'CD', 'CF', 'CG', 'CH', 'CI', 'CK', 'CL', 'CM', 'CN', 'CO', 'CR', 'CU', 'CV', 'CW', 'CX', 'CY', 'CZ', 'DE', 'DJ', 'DK', 'DM', 'DO', 'DZ', 'EC', 'EE', 'EG', 'EH', 'ER', 'ES', 'ET', 'FI', 'FJ', 'FK', 'FM', 'FO', 'FR', 'GA', 'GB', 'GD', 'GE', 'GF', 'GG', 'GH', 'GI', 'GL', 'GM', 'GN', 'GP', 'GQ', 'GR', 'GS', 'GT', 'GU', 'GW', 'GY', 'HK', 'HM', 'HN', 'HR', 'HT', 'HU', 'ID', 'IE', 'IL', 'IM', 'IN', 'IO', 'IQ', 'IR', 'IS', 'IT', 'JE', 'JM', 'JO', 'JP', 'KE', 'KG', 'KH', 'KI', 'KM', 'KN', 'KP', 'KR', 'KW', 'KY', 'KZ', 'LA', 'LB', 'LC', 'LI', 'LK', 'LR', 'LS', 'LT', 'LU', 'LV', 'LY', 'MA', 'MC', 'MD', 'ME', 'MF', 'MG', 'MH', 'MK', 'ML', 'MM', 'MN', 'MO', 'MP', 'MQ', 'MR', 'MS', 'MT', 'MU', 'MV', 'MW', 'MX', 'MY', 'MZ', 'NA', 'NC', 'NE', 'NF', 'NG', 'NI', 'NL', 'NO', 'NP', 'NR', 'NT', 'NU', 'NZ', 'OM', 'PA', 'PE', 'PF', 'PG', 'PH', 'PK', 'PL', 'PM', 'PN', 'PR', 'PS', 'PT', 'PW', 'PY', 'QA', 'RE', 'RO', 'RS', 'RU', 'RW', 'SA', 'SB', 'SC', 'SD', 'SE', 'SG', 'SH', 'SI', 'SJ', 'SK', 'SL', 'SM', 'SN', 'SO', 'SR', 'SS', 'ST', 'SV', 'SX', 'SY', 'SZ', 'TC', 'TD', 'TF', 'TG', 'TH', 'TJ', 'TK', 'TM', 'TN', 'TO', 'TP', 'TR', 'TT', 'TV', 'TW', 'TZ', 'UA', 'UG', 'UM', 'US', 'UY', 'UZ', 'VA', 'VC', 'VE', 'VG', 'VI', 'VN', 'VU', 'WF', 'WS', 'YE', 'YT', 'YU', 'ZA', 'ZM', 'ZR', 'ZW', 'ZW']
-
-
 class InvalidDataForMako(Exception):
     ""
 
@@ -43,7 +32,9 @@ def GLS_countries_prefix():
     """For GLS carrier 'Serbie Montenegro' is 'CS' and for wikipedia it's 'ME'
     We have to do a quick replacement
     """
-    GLS_prefix = COUNTRIES_PREFIX
+    GLS_prefix = []
+    for elm in pycountry.countries:
+        GLS_prefix.append(str(elm.alpha2))
     GLS_prefix[GLS_prefix.index('ME')] = 'CS'
     return GLS_prefix
 
@@ -70,10 +61,12 @@ ADDRESS_MODEL = {
 }
 
 PARCEL_MODEL = {
-    "parcel_number_label":   {'max_number': 999, 'type': int, 'required': True},
-    "parcel_number_barcode": {'max_number': 999, 'type': int, 'required': True},
+    "parcel_number_label": {'max_number': 999, 'type': int, 'required': True},
+    "parcel_number_barcode": {'max_number': 999, 'type': int,
+                              'required': True},
     #TODO validate a weight of XX.XX (5 chars)  {0:05.2f}
-    "weight":                {'max_size': 5, 'required': True},
+    "custom_sequence": {'max_size': 10, 'min_size': 10, 'required': True},
+    "weight": {'max_size': 5, 'required': True},
 }
 DELIVERY_MODEL = {
     #'address': ADDRESS_MODEL,
@@ -85,7 +78,6 @@ DELIVERY_MODEL = {
     "commentary":       {'max_size': 35},
     "parcel_total_number": {'max_number': 999, 'type': int, 'required': True},
     #TODO : valider 10 caract numériques
-    "custom_sequence": {'max_size': 10, 'min_size': 10, 'required': True},
 }
 SENDER_MODEL = {
     "customer_id":       {'max_size': 10, 'required': True},
@@ -292,7 +284,7 @@ accessibility, sent datas and so on""")
             address['country_code'])
         self.check_model(delivery, DELIVERY_MODEL, 'delivery')
         delivery['gls_origin_reference'] = self.set_origin_reference(
-            delivery, address)
+            parcel, address)
         # transfom human keys in GLS keys (with 'T' prefix)
         T_account = self.map_semantic_keys(ACCOUNT_MAPPING, self.sender)
         T_delivery = self.map_semantic_keys(DELIVERY_MAPPING, delivery)
@@ -336,8 +328,9 @@ accessibility, sent datas and so on""")
         # some keys are not defined by GLS but are in mako template
         # this add empty values to these keys
         keys_without_value = self.validate_mako(label_content, all_dict.keys())
-        empty_mapped = zip(keys_without_value, [''] * len(keys_without_value))
-        all_dict.update(dict(empty_mapped))
+        if keys_without_value:
+            empty_mapped = zip(keys_without_value, [''] * len(keys_without_value))
+            all_dict.update(dict(empty_mapped))
         try:
             tpl = Template(label_content).render(**all_dict)
             content2print = tpl.encode(
@@ -399,10 +392,10 @@ accessibility, sent datas and so on""")
             uniship_product_code = 'FF'
         return (product_code, uniship_product_code)
 
-    def set_origin_reference(self, delivery, address):
+    def set_origin_reference(self, parcel, address):
         return (
             self.product_code
-            + delivery['custom_sequence']
+            + parcel['custom_sequence']
             + '0000'
             + address['country_code']
         )
@@ -413,8 +406,13 @@ accessibility, sent datas and so on""")
         for match in re.findall('\$\{(.+?)\}+', template):
             keys2match.append(match)
         unmatch = list(set(keys2match) - set(available_keys))
-        if len(unmatch) > 0:
+        not_in_mako_but_known_case = ['T8900', 'T8901', 'T8717', 'T8911']
+        unknown_unmatch = list(unmatch)
+        for elm in not_in_mako_but_known_case:
+            if elm in unknown_unmatch:
+                unknown_unmatch.remove(elm)
+        if len(unknown_unmatch) > 0:
             print """
 GLS carrier : these keys \n%s\nare defined
-in mako template but without valid replacement values\n""" % unmatch
+in mako template but without valid replacement values\n""" % unknown_unmatch
         return unmatch
