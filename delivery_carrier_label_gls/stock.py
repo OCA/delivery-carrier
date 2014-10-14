@@ -186,7 +186,6 @@ class StockPickingOut(orm.Model):
     def _generate_gls_label(
             self, cr, uid, picking, service, tracking_ids=None, context=None):
         """ Generate labels and write tracking numbers received """
-        print '         je suis _generate_gls_label'
         global PACK_NUMBER
         PACK_NUMBER = 0
         pick2update = {}
