@@ -43,7 +43,8 @@ class GlsConfigSettings(orm.TransientModel):
         for field in ['gls_chargeur', 'gls_warehouse']:
             if field in fields:
                 ids = param_m.search(
-                    cr, uid, [('key', '=', field)], context=context)
+                    cr, uid, [('key', '=', 'carrier_%s' % field)],
+                    context=context)
                 if not ids:
                     raise orm.except_orm(
                         "Missing parameter",

@@ -28,10 +28,6 @@ class ResCompany(orm.Model):
             'International',
             size=10,
             help='Contact id for GLS International transportation (T8914)'),
-        'gls_warehouse_code': fields.char(
-            'Warehouse Code',
-            size=6,
-            help='GLS warehouse near customer location (T8700)'),
         'gls_test': fields.boolean(
             'Url Test',
             help="Check if requested webservice is test plateform")

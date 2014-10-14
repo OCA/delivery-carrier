@@ -36,8 +36,8 @@
         <span/><span/>
         <field name="customer_code" class="oe_inline"/>
         <span/><span/>
-        <field name="gls_chargeur" class="oe_inline"/>
-        <span/><span/>
+        <!--<field name="gls_chargeur" class="oe_inline"/>-->
+        <!--<span/><span/>-->
         <field name="gls_warehouse" class="oe_inline"/>
         <span/><span/>
         <field name="test"/>

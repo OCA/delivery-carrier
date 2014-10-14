@@ -35,12 +35,12 @@
     <data noupdate="1">
 
         <!-- CONFIG PARAMETER -->
-        <record id="delivery_carrier_gls_chargeur" model="ir.config_parameter">
-            <field name="key">gls_chargeur</field>
-            <field name="value">?</field>
-        </record>
-        <record id="delivery_carrier_gls_chargeur" model="ir.config_parameter">
-            <field name="key">gls_warehouse</field>
+        <!--<record id="delivery_carrier_gls_chargeur" model="ir.config_parameter">-->
+        <!--    <field name="key">carrier_gls_chargeur</field>-->
+        <!--    <field name="value">?</field>-->
+        <!--</record>-->
+        <record id="delivery_carrier_gls_warehouse" model="ir.config_parameter">
+            <field name="key">carrier_gls_warehouse</field>
             <field name="value">FR0031</field>
         </record>
     </data>

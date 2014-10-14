@@ -77,7 +77,7 @@ class StockPickingOut(orm.Model):
     def _prepare_global_gls(self, cr, uid, picking=None, context=None):
         res = {}
         param_m = self.pool['ir.config_parameter']
-        gls_keys = ['gls_warehouse']
+        gls_keys = ['carrier_gls_warehouse']
         ids = param_m.search(cr, uid, [('key', 'in', gls_keys)],
                              context=context)
         for elm in param_m.browse(cr, uid, ids, context=context):
@@ -112,7 +112,7 @@ class StockPickingOut(orm.Model):
         sender = {'contact_id': pick.company_id.gls_fr_contact_id,
                   'customer_id': pick.company_id.gls_fr_contact_id,
                   'contact_id_inter': pick.company_id.gls_inter_contact_id,
-                  'outbound_depot': global_infos['gls_warehouse']}
+                  'outbound_depot': global_infos['carrier_gls_warehouse']}
         if pick.company_id.gls_customer_code:
             sender['customer_id'] = pick.company_id.gls_customer_code
         if partner.country_id:
