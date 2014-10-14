@@ -70,7 +70,8 @@ class StockPicking(orm.Model):
 class StockPickingOut(orm.Model):
     _inherit = 'stock.picking.out'
 
-    def _customize_carrier_tracking(self, cr, uid, picking, context=None):
+    def _customize_gls_picking(self, cr, uid, picking, context=None):
+        "Use this method to override gls picking"
         return True
 
     def _prepare_global_gls(self, cr, uid, picking=None, context=None):
@@ -236,7 +237,7 @@ class StockPickingOut(orm.Model):
             })
         self.write(cr, uid, picking.id, pick2update, context=context)
         picking = self.browse(cr, uid, picking.id, context=context)
-        self._customize_carrier_tracking(cr, uid, picking, context=context)
+        self._customize_gls_picking(cr, uid, picking, context=context)
         return labels
 
     def get_zpl(self, service, delivery, address, pack):
