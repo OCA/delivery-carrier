@@ -8,8 +8,11 @@
     <field name="model">delivery.deposit.wizard</field>
     <field name="type">form</field>
     <field name="arch" type="xml">
-        <form string="Create deposit slip">
-             <label string="Would you like generate 'Deposit slip' for these delivery carriers ?"  colspan="4" />
+        <form string="Create deposit slip" version="7.0">
+             <p class="oe_grey oe_inline">
+Ensure than 'Deposit Slip' field is checked in delivery methods which you want to find in this selection below.
+             </p>
+             <label string="Would you like generate 'Deposit slip' for these delivery methods ?"  colspan="4" />
              <field name="carrier_type" nolabel="1" colspan="4"/>
              <button icon="gtk-cancel" special="cancel" string="Cancel"/>
              <button icon="gtk-ok" name="create_deposit_slip" string="Create Deposit" type="object"/>
