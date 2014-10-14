@@ -23,7 +23,7 @@
         </record>
         <!-- DELIVERY CARRIER -->
         <record id="delivery_carrier_gls" model="delivery.carrier">
-            <field name="name">GLS</field>
+            <field name="name">GLS group</field>
             <field name="type">gls</field>
             <field name="code">gls</field>
             <field name="partner_id" ref="partner_gls" />
@@ -35,10 +35,6 @@
     <data noupdate="1">
 
         <!-- CONFIG PARAMETER -->
-        <!--<record id="delivery_carrier_gls_chargeur" model="ir.config_parameter">-->
-        <!--    <field name="key">carrier_gls_chargeur</field>-->
-        <!--    <field name="value">?</field>-->
-        <!--</record>-->
         <record id="delivery_carrier_gls_customer_code" model="ir.config_parameter">
             <field name="key">carrier_gls_customer_code</field>
             <field name="value">?</field>
