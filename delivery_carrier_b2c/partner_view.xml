@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+
+<!--
+  delivery_carrier_tnt for OpenERP
+  Copyright (C) 2013 Akretion Chafique DELLI <chafique.dellil@akretion.com>
+  The licence is in the file __openerp__.py
+-->
+
+        <!-- INHERITED VIEW FOR THE OBJECT : res.partner -->
+
+        <record id="view_partner_form" model="ir.ui.view">
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form" />
+            <field name="arch" type="xml">
+                <field name="comment" position="before">
+                    <group>
+                        <field name="use_b2c_info"/>
+                        <group colspan="4" attrs="{'invisible': [('use_b2c_info','=', False)]}">
+                                <group name="address" col="4">
+                                    <field name="door_code"/>
+                                    <field name="door_code2"/>
+                                    <field name="intercom"/>
+                                </group>
+                        </group>
+                    </group>
+                </field>
+            </field>
+        </record>
+
+  </data>
+</openerp>
