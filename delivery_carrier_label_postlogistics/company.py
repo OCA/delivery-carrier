@@ -53,4 +53,4 @@ class ResCompany(orm.Model):
             'delivery.carrier.template.option', 'Default output format'),
         'postlogistics_default_resolution': fields.many2one(
             'delivery.carrier.template.option', 'Default resolution'),
-        }
+    }

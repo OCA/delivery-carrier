@@ -23,7 +23,7 @@ import csv
 
 from openerp.addons.base_delivery_carrier_files.generator import (
     CarrierFileGenerator
-    )
+)
 from openerp.addons.base_delivery_carrier_files.generator import BaseLine
 from openerp.addons.base_delivery_carrier_files.csv_writer import UnicodeWriter
 
