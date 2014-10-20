@@ -190,8 +190,8 @@ class stock_picking(orm.Model):
                     and available_option.id not in option_ids[0][2]):
                 res['warning'] = {
                     'title': _('User Error !'),
-                    'message':  _("You can not remove a mandatory option."
-                                  "\nOptions are reset to default.")
+                    'message': _("You can not remove a mandatory option."
+                                 "\nOptions are reset to default.")
                 }
                 default_value = self.carrier_id_change(cr, uid, ids,
                                                        carrier_id,

@@ -313,20 +313,20 @@ class PostlogisticsWebService(object):
             'ImageFileType': output_format,
             'ImageResolution': image_resolution,
             'PrintPreview': False,
-            }
+        }
         license = self._get_license(picking)
         file_infos = {
             'FrankingLicense': license,
             'PpFranking': False,
             'CustomerSystem': 'OpenERP',
             'Customer': post_customer,
-            }
+        }
 
         envelope = {
             'LabelDefinition': label_definitions,
             'FileInfos': file_infos,
             'Data': data,
-            }
+        }
         return envelope
 
     def generate_label(self, picking, trackings, user_lang='en_US'):

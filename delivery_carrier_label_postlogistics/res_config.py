@@ -243,9 +243,10 @@ class PostlogisticsConfigSettings(orm.TransientModel):
 
         for service_code, data in additional_services.iteritems():
 
-            option_ids = carrier_option_obj.search(cr, uid, [
-                ('code', '=', service_code),
-                ('postlogistics_type', '=', 'additional')
+            option_ids = carrier_option_obj.search(
+                cr, uid, [
+                    ('code', '=', service_code),
+                    ('postlogistics_type', '=', 'additional')
                 ], context=context)
 
             if option_ids:
@@ -295,10 +296,11 @@ class PostlogisticsConfigSettings(orm.TransientModel):
         # Create or update basic service
         for service in res['value'].BasicService:
             service_code = ','.join(service.PRZL)
-            option_ids = carrier_option_obj.search(cr, uid, [
-                ('code', '=', service_code),
-                ('postlogistics_service_group_id', '=', group_id),
-                ('postlogistics_type', '=', 'basic')
+            option_ids = carrier_option_obj.search(
+                cr, uid, [
+                    ('code', '=', service_code),
+                    ('postlogistics_service_group_id', '=', group_id),
+                    ('postlogistics_type', '=', 'basic')
                 ], context=context)
             data = {'name': service.Description}
             if option_ids:
