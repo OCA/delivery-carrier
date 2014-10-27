@@ -21,7 +21,9 @@
 
 import csv
 
-from openerp.addons.base_delivery_carrier_files.generator import CarrierFileGenerator
+from openerp.addons.base_delivery_carrier_files.generator import (
+    CarrierFileGenerator
+)
 from openerp.addons.base_delivery_carrier_files.generator import BaseLine
 from openerp.addons.base_delivery_carrier_files.csv_writer import UnicodeWriter
 
@@ -57,24 +59,30 @@ class LaPosteFileGenerator(CarrierFileGenerator):
         return carrier_name == 'la_poste'
 
     def _get_filename_single(self, picking, configuration, extension='csv'):
-        return super(LaPosteFileGenerator, self)._get_filename_single(picking, configuration, extension='txt')
+        return super(LaPosteFileGenerator, self
+                     )._get_filename_single(picking, configuration,
+                                            extension='txt')
 
     def _get_filename_grouped(self, configuration, extension='csv'):
-        return super(LaPosteFileGenerator, self)._get_filename_grouped(configuration, extension='txt')
+        return super(LaPosteFileGenerator, self
+                     )._get_filename_grouped(configuration, extension='txt')
 
     def _get_rows(self, picking, configuration):
         """
         Returns the rows to create in the file for a picking
 
-        :param browse_record picking: the picking for which we generate a row in the file
-        :param browse_record configuration: configuration of the file to generate
+        :param browse_record picking: the picking for which we generate a row
+               in the file
+        :param browse_record configuration: configuration of the file to
+               generate
         :return: list of rows
         """
         line = LaPosteLine()
         line.reference = picking.name
         address = picking.address_id
         if address:
-            line.lastname = address.name or (address.partner_id and address.partner_id.name)
+            line.lastname = address.name or (address.partner_id
+                                             and address.partner_id.name)
             # if a company, put company name
             if picking.address_id.partner_id.title:
                 line.company_name = address.partner_id.name
@@ -94,7 +102,8 @@ class LaPosteFileGenerator(CarrierFileGenerator):
 
         :param StringIO file_handle: file to write in
         :param rows: rows to write in the file
-        :param browse_record configuration: configuration of the file to generate
+        :param browse_record configuration: configuration of the file to
+               generate
         :return: the file_handle as StringIO with the rows written in it
         """
         writer = UnicodeWriter(file_handle, delimiter=';', quotechar='"',

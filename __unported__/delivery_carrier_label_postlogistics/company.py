@@ -26,7 +26,9 @@ class ResCompany(orm.Model):
     _inherit = 'res.company'
 
     def _get_wsdl_url(self, cr, uid, ids, field_name, arg, context=None):
-        wsdl_file, wsdl_path = file_open('delivery_carrier_label_postlogistics/data/barcode_v2_2.wsdl', pathinfo=True)
+        wsdl_file, wsdl_path = file_open(
+            'delivery_carrier_label_postlogistics/data/barcode_v2_2_wsbc.wsdl',
+            pathinfo=True)
         wsdl_url = 'file://' + wsdl_path
         res = dict.fromkeys(ids, wsdl_url)
         return res
@@ -51,4 +53,4 @@ class ResCompany(orm.Model):
             'delivery.carrier.template.option', 'Default output format'),
         'postlogistics_default_resolution': fields.many2one(
             'delivery.carrier.template.option', 'Default resolution'),
-        }
+    }

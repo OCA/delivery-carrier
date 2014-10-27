@@ -243,9 +243,10 @@ class PostlogisticsConfigSettings(orm.TransientModel):
 
         for service_code, data in additional_services.iteritems():
 
-            option_ids = carrier_option_obj.search(cr, uid, [
-                ('code', '=', service_code),
-                ('postlogistics_type', '=', 'additional')
+            option_ids = carrier_option_obj.search(
+                cr, uid, [
+                    ('code', '=', service_code),
+                    ('postlogistics_type', '=', 'additional')
                 ], context=context)
 
             if option_ids:
@@ -295,10 +296,11 @@ class PostlogisticsConfigSettings(orm.TransientModel):
         # Create or update basic service
         for service in res['value'].BasicService:
             service_code = ','.join(service.PRZL)
-            option_ids = carrier_option_obj.search(cr, uid, [
-                ('code', '=', service_code),
-                ('postlogistics_service_group_id', '=', group_id),
-                ('postlogistics_type', '=', 'basic')
+            option_ids = carrier_option_obj.search(
+                cr, uid, [
+                    ('code', '=', service_code),
+                    ('postlogistics_service_group_id', '=', group_id),
+                    ('postlogistics_type', '=', 'basic')
                 ], context=context)
             data = {'name': service.Description}
             if option_ids:
@@ -474,7 +476,7 @@ class PostlogisticsConfigSettings(orm.TransientModel):
             errors = '\n'.join(res['errors'])
             error_message = (_('Could not retrieve allowed Postlogistics '
                                'service groups for the %s licence:\n%s')
-                               % (license.name, errors))
+                             % (license.name, errors))
             raise orm.except_orm(_('Error'), error_message)
 
         if not res['value']:
@@ -497,7 +499,6 @@ class PostlogisticsConfigSettings(orm.TransientModel):
         if context is None:
             context = {}
 
-        user_obj = self.pool.get('res.users')
         service_group_obj = self.pool.get('postlogistics.service.group')
         for config in self.browse(cr, uid, ids, context=context):
             company = config.company_id
@@ -508,8 +509,8 @@ class PostlogisticsConfigSettings(orm.TransientModel):
                 service_groups = self._get_allowed_service_group_codes(
                     web_service, company, license, context=context)
                 group_ids = service_group_obj.search(
-                        cr, uid, [('group_extid', 'in', service_groups)],
-                        context=context)
+                    cr, uid, [('group_extid', 'in', service_groups)],
+                    context=context)
                 for group_id in group_ids:
                     if group_id in relations:
                         relations[group_id].append(license.id)
@@ -519,6 +520,4 @@ class PostlogisticsConfigSettings(orm.TransientModel):
                 vals = {'postlogistics_license_ids': [(6, 0, license_ids)]}
                 service_group_obj.write(cr, uid, group_id, vals,
                                         context=context)
-
-
         return True

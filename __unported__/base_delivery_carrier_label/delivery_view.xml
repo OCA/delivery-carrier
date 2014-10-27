@@ -35,10 +35,15 @@
       <field name="model">delivery.carrier.option</field>
       <field name="arch" type="xml">
         <form string="delivery_carrier_option">
-          <field name="state"/>
-          <field name="tmpl_option_id"/>
-          <newline/>
-          <field name="description" colspan="4" readonly="True"/>
+          <group col="4">
+            <field name="mandatory" attrs="{'readonly': [('readonly_flag','=',True)]}"/>
+            <field name="by_default" attrs="{'invisible': [('mandatory', '=', True)]}"/>
+            <field name="readonly_flag" attrs="{'invisible': True}"/>
+            <field name="tmpl_option_id" colspan="4"
+                   attrs="{'readonly': [('readonly_flag','=',True)]}"/>
+            <newline/>
+            <field name="description" colspan="4" readonly="True"/>
+          </group>
         </form>
       </field>
     </record>
@@ -49,9 +54,9 @@
       <field name="type">tree</field>
       <field name="arch" type="xml">
         <tree string="delivery_carrier_option">
-          <field name="state" />
+          <field name="mandatory" />
           <field name="tmpl_option_id" />
-          <field name="code" readonly="1"/>
+          <field name="code"/>
         </tree>
       </field>
     </record>

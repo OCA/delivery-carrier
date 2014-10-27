@@ -20,6 +20,7 @@
 ##############################################################################
 from openerp.osv import orm, fields
 
+
 class PostlogisticsLicense(orm.Model):
     _name = 'postlogistics.license'
     _description = 'PostLogistics Franking License'
@@ -36,6 +37,7 @@ class PostlogisticsLicense(orm.Model):
                  " when multiple license are available for the same group of "
                  "service."),
     }
+
 
 class PostlogisticsServiceGroup(orm.Model):
     _name = 'postlogistics.service.group'

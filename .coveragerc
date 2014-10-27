@@ -1,9 +1,6 @@
-# Config file .coveragerc
-# adapt the include for your project
-
 [report]
 include =
-    */carrier-delivery/*
+    */OCA/carrier-delivery/*
 
 omit =
     */tests/*

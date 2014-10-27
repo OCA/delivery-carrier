@@ -27,7 +27,7 @@
  'depends': [
      'base_delivery_carrier_label',
      'report_webkit',
-     ],
+ ],
  'description': """
 This print a basic label using webkit library
 

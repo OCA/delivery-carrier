@@ -98,7 +98,8 @@ class PostlogisticsWebService(object):
             lang = company.partner_id.lang
         lang = self._get_language(lang)
         request = self.client.service.ReadAllowedServicesByFrankingLicense
-        return self._send_request(request, FrankingLicense=license, Language=lang)
+        return self._send_request(request, FrankingLicense=license,
+                                  Language=lang)
 
     def read_service_groups(self, company, lang):
         """ Get group of services """
@@ -231,7 +232,7 @@ class PostlogisticsWebService(object):
         """ Get the license
 
         Take it from carrier and if not defined get the first license
-        depending on service group. This needs to have associated 
+        depending on service group. This needs to have associated
         licenses to groups.
 
         :return: license number
@@ -312,20 +313,20 @@ class PostlogisticsWebService(object):
             'ImageFileType': output_format,
             'ImageResolution': image_resolution,
             'PrintPreview': False,
-            }
+        }
         license = self._get_license(picking)
         file_infos = {
             'FrankingLicense': license,
             'PpFranking': False,
             'CustomerSystem': 'OpenERP',
             'Customer': post_customer,
-            }
+        }
 
         envelope = {
             'LabelDefinition': label_definitions,
             'FileInfos': file_infos,
             'Data': data,
-            }
+        }
         return envelope
 
     def generate_label(self, picking, trackings, user_lang='en_US'):

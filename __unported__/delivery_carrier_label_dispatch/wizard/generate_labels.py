@@ -71,7 +71,6 @@ class DeliveryCarrierLabelGenerate(orm.TransientModel):
         # generate missing picking labels
         picking_out_obj.action_generate_carrier_label(cr, uid,
                                                       picking_ids,
-                                                      #file_type='pdf',
                                                       context=context)
 
         # Get all pdf files adding the newly generated ones

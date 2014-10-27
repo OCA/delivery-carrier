@@ -38,12 +38,12 @@ class PickingDispatch(Model):
         'option_ids': fields.many2many(
             'delivery.carrier.option',
             string='Options'),
-        }
+    }
 
     def action_set_options(self, cr, uid, ids, context=None):
         """ Apply options to picking of the dispatch
 
-        This will replace all carrier options in picking 
+        This will replace all carrier options in picking
 
         """
         picking_obj = self.pool.get('stock.picking')
@@ -54,7 +54,7 @@ class PickingDispatch(Model):
             options_datas = {
                 'carrier_id': dispatch.carrier_id.id,
                 'option_ids': [(6, 0, option_ids)],
-                }
+            }
             picking_obj.write(cr, uid, picking_ids,
                               options_datas, context=context)
 
@@ -86,7 +86,8 @@ class PickingDispatch(Model):
             }
         return res
 
-    def option_ids_change(self, cr, uid, ids, option_ids, carrier_id, context=None):
+    def option_ids_change(self, cr, uid, ids, option_ids, carrier_id,
+                          context=None):
         carrier_obj = self.pool.get('delivery.carrier')
         res = {}
         if not carrier_id:
@@ -94,11 +95,11 @@ class PickingDispatch(Model):
         carrier = carrier_obj.browse(cr, uid, carrier_id, context=context)
         for available_option in carrier.available_option_ids:
             if (available_option.state == 'mandatory'
-                    and not available_option.id in option_ids[0][2]):
+                    and available_option.id not in option_ids[0][2]):
                 res['warning'] = {
                     'title': _('User Error !'),
-                    'message':  _("You can not remove a mandatory option."
-                                  "\nOptions are reset to default.")
+                    'message': _("You can not remove a mandatory option."
+                                 "\nOptions are reset to default.")
                 }
                 default_value = self.carrier_id_change(cr, uid, ids,
                                                        carrier_id,
