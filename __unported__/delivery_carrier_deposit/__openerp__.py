@@ -58,7 +58,7 @@ Contributors
         'security/ir.model.access.csv',
     ],
     'demo': [],
-    'installable': True,
+    'installable': False,
     'active': False,
     'auto_install': False,
     'license': 'AGPL-3',
