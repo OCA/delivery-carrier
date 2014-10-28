@@ -278,6 +278,7 @@ accessibility, sent datas and so on""")
             return False
 
     def get_label(self, delivery, address, parcel):
+        tracking_number = False
         self.check_model(parcel, PARCEL_MODEL, 'package')
         self.check_model(address, ADDRESS_MODEL, 'partner')
         self.product_code, self.uniship_product = self.get_product(
@@ -314,6 +315,7 @@ accessibility, sent datas and so on""")
             if isinstance(response, dict):
                 if self.get_result_analysis(response['RESULT'], all_dict):
                     all_dict.update(response)
+                    tracking_number = all_dict['T8913']
                 else:
                     failed_webservice = True
                     label_content = self.select_label(
@@ -337,7 +339,7 @@ accessibility, sent datas and so on""")
                 encoding=REPORT_CODING, errors=ERROR_BEHAVIOR)
             return {
                 "content": content2print,
-                "tracking_number": delivery['gls_origin_reference'],
+                "tracking_number": tracking_number,
                 'filename': self.filename
                 }
         except:

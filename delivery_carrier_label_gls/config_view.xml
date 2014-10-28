@@ -17,7 +17,7 @@
         <!--<h1 style="display: inline-block">GLS</h1>-->
       </header>
 
-      <group groups="base.group_multi_company">
+      <group>
         <div>
           <div>
             <label for="company_id" string="Select Company"/>

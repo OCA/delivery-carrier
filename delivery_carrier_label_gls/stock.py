@@ -162,10 +162,11 @@ class StockPickingOut(orm.Model):
                 'weight': "{0:05.2f}".format(weight),
                 })
         else:
-            tracking_weight = [move.weight for move in tracking.move_ids][0]
-            pack.update({
-                'weight': "{0:05.2f}".format(tracking_weight),
-                })
+            if tracking.move_ids:
+                tracking_weight = [move.weight for move in tracking.move_ids][0]
+                pack.update({
+                    'weight': "{0:05.2f}".format(tracking_weight),
+                    })
         return pack
 
     def _get_tracking_ids_from_moves(self, cr, uid, picking, context=None):
@@ -220,7 +221,7 @@ class StockPickingOut(orm.Model):
                 weight = self._get_weight_from_moves_without_tracking(
                     cr, uid, picking, context=context)
                 pack = self._prepare_pack_gls(
-                    cr, uid, packing, weight, context=context)
+                    cr, uid, packing, weight=weight, context=context)
                 label = self.get_zpl(service, deliv, addr, pack)
                 pick2update['carrier_tracking_ref'] = label['tracking_number']
             else:

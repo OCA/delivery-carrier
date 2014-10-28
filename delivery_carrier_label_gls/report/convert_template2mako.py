@@ -14,6 +14,8 @@ def generate_mako(source, destination):
         content = content.replace('<', '${')
         content = content.replace('>', '}')
         # standard label
+        content = content.replace('^FO675,203^AB,8,10^FDPRODUIT^FS', '')
+        content = content.replace('^FO500,222^AB,12,15^FD${T8912}^FS', '')
         content = content.replace('^FO520,222^AB,12,15^', '^FO500,222^AB,12,15^')
         content = content.replace('^FO55,620^B2', '\n/* Barcode */\n^FO55,620^B2')
         # uniship label
