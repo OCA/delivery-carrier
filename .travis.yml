@@ -21,7 +21,6 @@ install:
   - git clone https://github.com/OCA/webkit-tools ${HOME}/webkit-tools -b ${VERSION}
 
 script:
-  - travis_run_flake8
   - travis_run_tests
 
 after_success:
