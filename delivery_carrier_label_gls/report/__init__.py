@@ -8,7 +8,7 @@
 #
 ##############################################################################
 
-import exception_helper
-import label_helper
-import label
+from . import exception_helper
+from . import label_helper
+from . import label
 
