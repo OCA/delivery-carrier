@@ -12,9 +12,6 @@ from openerp.osv import orm, fields
 from . company import ResCompany
 
 
-CHARGEUR = 'gls_chargeur'
-
-
 class GlsConfigSettings(orm.TransientModel):
     _name = 'gls.config.settings'
 

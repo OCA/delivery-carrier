@@ -8,8 +8,8 @@
 #
 ##############################################################################
 
-import company
-import config
-import delivery
-import report
-import stock
+from . import company
+from . import config
+from . import delivery
+from . import report
+from . import stock

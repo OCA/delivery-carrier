@@ -14,7 +14,6 @@
         <a href="https://gls-group.eu" target="_blank">
             <img src="delivery_carrier_label_gls/static/src/img/icon.png"/>
         </a>
-        <!--<h1 style="display: inline-block">GLS</h1>-->
       </header>
 
       <group>
@@ -36,8 +35,6 @@
         <span/><span/>
         <field name="gls_customer_code" class="oe_inline"/>
         <span/><span/>
-        <!--<field name="gls_chargeur" class="oe_inline"/>-->
-        <!--<span/><span/>-->
         <field name="gls_warehouse" class="oe_inline"/>
         <span/><span/>
         <field name="test"/>

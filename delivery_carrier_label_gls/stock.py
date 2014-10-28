@@ -50,7 +50,6 @@ class StockPicking(orm.Model):
         """
         :return: see original method
         """
-        #TODO recreate context
         if context is None:
             context = {}
         for picking in self.browse(cr, uid, ids, context=context):
