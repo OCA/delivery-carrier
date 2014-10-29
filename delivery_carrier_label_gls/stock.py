@@ -227,12 +227,16 @@ class StockPickingOut(orm.Model):
                     cr, uid, packing, context=context)
                 label = self.get_zpl(service, deliv, addr, pack)
                 packing.write({'serial': label['tracking_number']})
-            labels.append({
+            label_info = {
                 'tracking_id': packing.id if packing else False,
                 'file': label['content'],
                 'file_type': LABEL_TYPE,
-                'name': label['tracking_number'] + label['filename']+'.zpl',
-            })
+                'name': label['filename']+'.zpl',
+            }
+            if label['tracking_number']:
+                label_info['name'] = '%s%s.zpl' % (label['tracking_number'],
+                                                   label['filename'])
+            labels.append(label_info)
         self.write(cr, uid, picking.id, pick2update, context=context)
         picking = self.browse(cr, uid, picking.id, context=context)
         self._customize_gls_picking(cr, uid, picking, context=context)

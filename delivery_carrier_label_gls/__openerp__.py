@@ -36,6 +36,17 @@
 Delivery Carrier Label GLS (french carrier)
 =============================================
 
+
+GLS Group - Transportation services
+-------------------------------------
+
+
+Implémentation du service Unibox:
+- envoi des informations du bon de livraison et des colis au serveur GLS unibox
+- retour par webservice des informations de routage
+- génération des étiquettes GLS Unibox
+
+
 GLS carrier https://gls-group.eu/
 
 
