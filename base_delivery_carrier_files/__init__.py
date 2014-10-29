@@ -20,6 +20,7 @@
 ##############################################################################
 
 from . import generator
+from . import sql_db
 from . import carrier_file
 from . import stock
 from . import csv_writer
