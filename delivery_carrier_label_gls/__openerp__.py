@@ -57,7 +57,10 @@ Contributors
         'demo/product.xml',
     ],
     'external_dependencies': {
-        'python': ['pycountry'],
+        'python': [
+            'pycountry',
+            'unidecode',
+        ],
     },
     'license': 'AGPL-3',
     'tests': [],

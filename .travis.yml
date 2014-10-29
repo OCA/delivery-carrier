@@ -15,13 +15,15 @@ install:
   - export PATH=${HOME}/maintainer-quality-tools/travis:${PATH}
   - travis_install_nightly
   - pip install PyPDF2==1.18
+  - pip install unidecode
+  - pip install pycountry
   - pip install suds-jurko==0.6
   - git clone https://github.com/OCA/stock-logistics-workflow ${HOME}/stock-logistics-workflow -b ${VERSION}
   - git clone https://github.com/OCA/partner-contact ${HOME}/partner-contact -b ${VERSION}
+  - git clone https://github.com/OCA/server-tools ${HOME}/server-tools -b ${VERSION}
   - git clone https://github.com/OCA/webkit-tools ${HOME}/webkit-tools -b ${VERSION}
 
 script:
-  - travis_run_flake8
   - travis_run_tests
 
 after_success:
