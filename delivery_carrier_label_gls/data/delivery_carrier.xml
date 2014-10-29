@@ -41,7 +41,8 @@
         </record>
         <record id="delivery_carrier_gls_warehouse" model="ir.config_parameter">
             <field name="key">carrier_gls_warehouse</field>
-            <field name="value">FR0031</field>
+            <field name="value">FR00??</field>
         </record>
+
     </data>
 </openerp>
