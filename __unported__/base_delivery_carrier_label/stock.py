@@ -30,7 +30,8 @@ class stock_picking(orm.Model):
 
     def _get_carrier_type_selection(self, cr, uid, context=None):
         carrier_obj = self.pool.get('delivery.carrier')
-        return carrier_obj._get_carrier_type_selection(cr, uid, context=context)
+        return carrier_obj._get_carrier_type_selection(cr, uid,
+                                                       context=context)
 
     _columns = {
         'carrier_id': fields.many2one(
@@ -66,8 +67,7 @@ class stock_picking(orm.Model):
         """
         raise orm.except_orm(
             'Error',
-            'No label is configured for selected delivery method.'
-        )
+            'No label is configured for selected delivery method.')
 
     def generate_shipping_labels(self, cr, uid, ids, tracking_ids=None,
                                  context=None):
@@ -115,7 +115,8 @@ class stock_picking(orm.Model):
         pickings = self.browse(cr, uid, ids, context=context)
 
         for pick in pickings:
-            shipping_labels = pick.generate_shipping_labels(tracking_ids=tracking_ids)
+            shipping_labels = pick.generate_shipping_labels(
+                tracking_ids=tracking_ids)
             for label in shipping_labels:
                 # map types with models
                 types = {'in': 'stock.picking.in',
@@ -137,7 +138,8 @@ class stock_picking(orm.Model):
                 # as it would try to define default value of attachement
                 if 'default_type' in context_attachment:
                     del context_attachment['default_type']
-                shipping_label_obj.create(cr, uid, data, context=context_attachment)
+                shipping_label_obj.create(cr, uid, data,
+                                          context=context_attachment)
         return True
 
     def action_generate_carrier_label(self, cr, uid, ids, context=None):
@@ -164,7 +166,8 @@ class stock_picking(orm.Model):
             available_option_ids = []
             for available_option in carrier.available_option_ids:
                 available_option_ids.append(available_option.id)
-                if available_option.state in ['default_option', 'mandatory']:
+                if (available_option.mandatory or
+                        available_option.by_default):
                     default_option_ids.append(available_option.id)
             res = {
                 'value': {'carrier_type': carrier.type,
@@ -176,19 +179,20 @@ class stock_picking(orm.Model):
             }
         return res
 
-    def option_ids_change(self, cr, uid, ids, option_ids, carrier_id, context=None):
+    def option_ids_change(self, cr, uid, ids, option_ids, carrier_id,
+                          context=None):
         carrier_obj = self.pool.get('delivery.carrier')
         res = {}
         if not carrier_id:
             return res
         carrier = carrier_obj.browse(cr, uid, carrier_id, context=context)
         for available_option in carrier.available_option_ids:
-            if (available_option.state == 'mandatory'
+            if (available_option.mandatory
                     and available_option.id not in option_ids[0][2]):
                 res['warning'] = {
                     'title': _('User Error !'),
-                    'message':  _("You can not remove a mandatory option."
-                                  "\nOptions are reset to default.")
+                    'message': _("You can not remove a mandatory option."
+                                 "\nOptions are reset to default.")
                 }
                 default_value = self.carrier_id_change(cr, uid, ids,
                                                        carrier_id,
@@ -229,7 +233,8 @@ class stock_picking(orm.Model):
         """
         values = self._values_with_carrier_options(cr, uid, values,
                                                    context=context)
-        picking_id = super(stock_picking, self).create(cr, uid, values, context=context)
+        picking_id = super(stock_picking, self
+                           ).create(cr, uid, values, context=context)
         return picking_id
 
 
@@ -239,7 +244,8 @@ class stock_picking_in(orm.Model):
 
     def _get_carrier_type_selection(self, cr, uid, context=None):
         carrier_obj = self.pool.get('delivery.carrier')
-        return carrier_obj._get_carrier_type_selection(cr, uid, context=context)
+        return carrier_obj._get_carrier_type_selection(cr, uid,
+                                                       context=context)
 
     _columns = {
         'carrier_id': fields.many2one(
@@ -310,7 +316,8 @@ class stock_picking_in(orm.Model):
         picking_obj = self.pool['stock.picking']
         values = picking_obj._values_with_carrier_options(cr, uid, values,
                                                           context=context)
-        picking_id = super(stock_picking_in, self).create(cr, uid, values, context=context)
+        picking_id = super(stock_picking_in, self
+                           ).create(cr, uid, values, context=context)
         return picking_id
 
 
@@ -320,7 +327,8 @@ class stock_picking_out(orm.Model):
 
     def _get_carrier_type_selection(self, cr, uid, context=None):
         carrier_obj = self.pool.get('delivery.carrier')
-        return carrier_obj._get_carrier_type_selection(cr, uid, context=context)
+        return carrier_obj._get_carrier_type_selection(cr, uid,
+                                                       context=context)
 
     _columns = {
         'carrier_id': fields.many2one(
@@ -358,6 +366,7 @@ class stock_picking_out(orm.Model):
         """ On each carrier label module you need to define
             which is the sender of the parcel.
             The most common case is 'picking.company_id.partner_id'
+            and then choose the contact which has the type 'delivery'
             which is suitable for each delivery carrier label module.
             But your client might want to customize sender address
             if he has several brands and/or shops in his company.
@@ -366,18 +375,30 @@ class stock_picking_out(orm.Model):
             but instead, the address of the partner linked to his shop/brand
 
             To reach this modularity, call this method to get sender address
-            in your delivery_carrier_label_yourcarrier module, then every developer
-            can manage specific needs by inherit this method in module like :
+            in your delivery_carrier_label_yourcarrier module, then every
+            developer can manage specific needs by inherit this method in
+            module like :
             delivery_carrier_label_yourcarrier_yourproject.
         """
-        return picking.company_id.partner_id
+        partner_obj = self.pool['res.partner']
+        partner = picking.company_id.partner_id
+        delivery_address = partner_obj.search(cr, uid, [
+                                             ('parent_id', '=', partner.id),
+                                             ('type', '=', 'delivery')])
+        if delivery_address:
+            partner = partner_obj.browse(cr, uid,
+                                         [delivery_address[0]],
+                                         context=context)[0]
+        return partner
 
     def carrier_id_change(self, cr, uid, ids, carrier_id, context=None):
         """ Inherit this method in your module """
         picking_obj = self.pool.get('stock.picking')
-        return picking_obj.carrier_id_change(cr, uid, ids, carrier_id, context=context)
+        return picking_obj.carrier_id_change(cr, uid, ids, carrier_id,
+                                             context=context)
 
-    def option_ids_change(self, cr, uid, ids, option_ids, carrier_id, context=None):
+    def option_ids_change(self, cr, uid, ids, option_ids, carrier_id,
+                          context=None):
         picking_obj = self.pool.get('stock.picking')
         return picking_obj.option_ids_change(cr, uid, ids,
                                              option_ids, carrier_id,
@@ -406,7 +427,8 @@ class stock_picking_out(orm.Model):
         picking_obj = self.pool['stock.picking']
         values = picking_obj._values_with_carrier_options(cr, uid, values,
                                                           context=context)
-        picking_id = super(stock_picking_out, self).create(cr, uid, values, context=context)
+        picking_id = super(stock_picking_out, self
+                           ).create(cr, uid, values, context=context)
         return picking_id
 
 

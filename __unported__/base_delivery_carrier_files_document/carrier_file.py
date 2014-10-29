@@ -46,7 +46,8 @@ class CarrierFile(orm.Model):
                             context):
         if carrier_file.auto_export:
             assert context is not None and 'picking_id' in context, \
-              'When carrier_file is in mode auto_export, picking_id must be in context'
+                ('When carrier_file is in mode auto_export, picking_id must '
+                 'be in context')
             res_id = context['picking_id']
         else:
             res_id = False

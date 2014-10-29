@@ -26,4 +26,4 @@ class SaleShop(orm.Model):
 
     _columns = {
         'postlogistics_logo': fields.binary('Shop logo for PostLogistics'),
-        }
+    }

@@ -19,7 +19,7 @@
 #
 ##############################################################################
 {'name': 'Base module for carrier labels',
- 'version': '1.1',
+ 'version': '1.2',
  'author': 'Camptocamp,Akretion',
  'maintainer': 'Camptocamp',
  'category': 'version',
@@ -60,4 +60,4 @@ Contributors
  'auto_install': False,
  'license': 'AGPL-3',
  'application': True,
-}
+ }
