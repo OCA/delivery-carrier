@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 from mako.template import Template
@@ -40,9 +39,10 @@ def GLS_countries_prefix():
 
 GLS_COUNTRIES_PREFIX = GLS_countries_prefix()
 
-EUROPEAN_COUNTRIES = ['AT','BE','BG','CY','CZ','DE','DK','ES','EE','FI','GR',
-                      'GB','HU','IE','IT','LV','LT','LU', 'MT', 'NL', 'PL',
-                      'PT','RO', 'SK', 'SI', 'SE']
+EUROPEAN_COUNTRIES = [
+    'AT', 'BE', 'BG', 'CY', 'CZ', 'DE', 'DK', 'ES', 'EE', 'FI', 'GR',
+    'GB', 'HU', 'IE', 'IT', 'LV', 'LT', 'LU', 'MT', 'NL', 'PL', 'PT',
+    'RO', 'SK', 'SI', 'SE']
 
 # Here is all keys used in GLS templates
 ADDRESS_MODEL = {
@@ -64,12 +64,12 @@ PARCEL_MODEL = {
     "parcel_number_label": {'max_number': 999, 'type': int, 'required': True},
     "parcel_number_barcode": {'max_number': 999, 'type': int,
                               'required': True},
-    #TODO validate a weight of XX.XX (5 chars)  {0:05.2f}
+    # TODO validate a weight of XX.XX (5 chars)  {0:05.2f}
     "custom_sequence": {'max_size': 10, 'min_size': 10, 'required': True},
     "weight": {'max_size': 5, 'required': True},
 }
 DELIVERY_MODEL = {
-    #'address': ADDRESS_MODEL,
+    # 'address': ADDRESS_MODEL,
     "consignee_ref":    {'max_size': 20},
     "contact":   {'max_size': 35},
     "additional_ref_1": {'max_size': 20},
@@ -77,7 +77,7 @@ DELIVERY_MODEL = {
     "shipping_date":    {'date': '%Y%m%d', 'required': True},
     "commentary":       {'max_size': 35},
     "parcel_total_number": {'max_number': 999, 'type': int, 'required': True},
-    #TODO : valider 10 caract numériques
+    # TODO : valider 10 caract numériques
 }
 SENDER_MODEL = {
     "customer_id":       {'max_size': 10, 'required': True},
@@ -89,7 +89,6 @@ SENDER_MODEL = {
     "shipper_zip":       {'max_size': 10, 'required': True},
     "shipper_city":      {'max_size': 35, 'required': True},
     "shipper_country":   {'in': GLS_COUNTRIES_PREFIX, 'required': True},
-    #"webservice_url":    {'max_size': 100, 'required': True},
 }
 
 # Here is all fields called in mako template
@@ -111,18 +110,18 @@ PARCEL_MAPPING = {
     'T8904': "parcel_number_label",
 }
 DELIVERY_MAPPING = {
-    #'address': ADDRESS_MODEL,
+    # 'address': ADDRESS_MODEL,
     'T859': "consignee_ref",
     'T854': "additional_ref_1",
     'T8907': "additional_ref_1",
     'T8908': "additional_ref_2",
     'T540': "shipping_date",
-    #'T8906': "commentary", # define in doc
+    # 'T8906': "commentary", # define in doc
     'T8906': "contact",
     'T8318': "commentary",
     'T8975': "gls_origin_reference",
     'T8912': "gls_origin_reference",
-    'T8905': "parcel_total_number", #TODO : valider 10 caract numériques
+    'T8905': "parcel_total_number",  # TODO : valider 10 caract numériques
     'T8702': "parcel_total_number",
 }
 ACCOUNT_MAPPING = {
@@ -171,8 +170,6 @@ class Gls(AbstractLabel):
 
     def __init__(self, sender, code, test_plateform=False):
         self.check_model(sender, SENDER_MODEL, 'company')
-        #self.product_code, self.uniship_product = self.get_product(
-        #                                            account['shipper_country'])
         if test_plateform:
             url = URL_TEST
         else:
@@ -205,28 +202,28 @@ class Gls(AbstractLabel):
                 all_dict['T8914'],
                 self.uniship_product,
                 address['country_norme3166'],
-                all_dict['T330'],    #postal code
-                all_dict['T8905'],   #total parcel number
-                all_dict['T8702'],   #total parcel number datamatrix
-                all_dict['T8973'],   #sequence
-                '',                  #ref expe
-                all_dict['T860'],    #consignee name
-                all_dict['T861'],    #supplément raison sociale1
-                all_dict['T862'],    #supplément raison sociale2
-                all_dict['T863'],    #street
-                '',                  #N° de rue
-                all_dict['T864'],    #city
-                all_dict['T871'],    #tel
-                '',                  #ref customer
+                all_dict['T330'],    # postal code
+                all_dict['T8905'],   # total parcel number
+                all_dict['T8702'],   # total parcel number datamatrix
+                all_dict['T8973'],   # sequence
+                '',                  # ref expe
+                all_dict['T860'],    # consignee name
+                all_dict['T861'],    # supplément raison sociale1
+                all_dict['T862'],    # supplément raison sociale2
+                all_dict['T863'],    # street
+                '',                  # N° de rue
+                all_dict['T864'],    # city
+                all_dict['T871'],    # tel
+                '',                  # ref customer
                 all_dict['T8975'],
-                all_dict['T530'],    #weight
+                all_dict['T530'],    # weight
             ]
             code = '|'.join(items)+'|'
-            #code needs to be fixed size
+            # code needs to be fixed size
             code += (304 - len(code)) * ' '
             return {'T8917': code}
         else:
-            #TODO : n'est pas ramené à l'erp
+            # TODO : n'est pas ramené à l'erp
             raise Exception(
                 "There is no key 'country_norme3166' in the " +
                 "given dictionnary 'address' for the country '%s' : " +
@@ -268,11 +265,12 @@ code: %s ; message: %s ; result: %s""" % (code, message, result))
                 raise Exception("Country code '%s' is wrong" % cnty_code)
             else:
                 if code == 'E999':
-                    logger.info("Unibox server (web service) is not responding")
+                    logger.info(
+                        "Unibox server (web service) is not responding")
                 else:
                     logger.info("""
-        >>> An unknown problem is happened : check network connection, webservice
-accessibility, sent datas and so on""")
+        >>> An unknown problem is happened : check network connection,
+        webservice accessibility, sent datas and so on""")
                 logger.info("""
         >>> Rescue label will be printed instead of the standard label""")
             return False
@@ -331,7 +329,8 @@ accessibility, sent datas and so on""")
         # this add empty values to these keys
         keys_without_value = self.validate_mako(label_content, all_dict.keys())
         if keys_without_value:
-            empty_mapped = zip(keys_without_value, [''] * len(keys_without_value))
+            empty_mapped = (zip(keys_without_value,
+                                [''] * len(keys_without_value)))
             all_dict.update(dict(empty_mapped))
         try:
             tpl = Template(label_content).render(**all_dict)
@@ -356,11 +355,12 @@ accessibility, sent datas and so on""")
         connection = httplib.HTTPConnection(self.webservice_location, GLS_PORT)
         connection.request(
             "POST",
-            self.webservice_method, request.encode(WEB_SERVICE_CODING, 'ignore'))
+            self.webservice_method, request.encode(
+                WEB_SERVICE_CODING, 'ignore'))
         response = connection.getresponse()
         if response.status != 200:
-            #see http://docs.python.org/release/2.7/library/httplib.html,
-            #search 100
+            # see http://docs.python.org/release/2.7/library/httplib.html,
+            # search 100
             if response.status in ['503', '504']:
                 return response.status
             raise Exception(
@@ -375,7 +375,7 @@ accessibility, sent datas and so on""")
         for T, semantic_key in T_keys.items():
             if isinstance(datas[semantic_key], (int, long)):
                 datas[semantic_key] = unicode(datas[semantic_key])
-            #':' and '|' are forbidden because are used by webservice
+            # ':' and '|' are forbidden because are used by webservice
             val = datas[semantic_key].replace(':', ' ').replace('|', ' ')
             try:
                 mapping[T] = unidecode(val).upper()

@@ -49,7 +49,7 @@ Contributors
         'data/delivery_carrier.xml',
         'data/sequence.xml',
         'config_view.xml',
-        #'security/ir.model.access.csv',
+        # 'security/ir.model.access.csv',
     ],
     'demo': [
         'demo/res.partner.csv',

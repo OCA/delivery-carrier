@@ -162,7 +162,8 @@ class StockPickingOut(orm.Model):
                 })
         else:
             if tracking.move_ids:
-                tracking_weight = [move.weight for move in tracking.move_ids][0]
+                tracking_weight = [move.weight
+                                   for move in tracking.move_ids][0]
                 pack.update({
                     'weight': "{0:05.2f}".format(tracking_weight),
                     })
@@ -262,9 +263,9 @@ class StockPickingOut(orm.Model):
         if picking.carrier_id.type == 'gls':
             sender = self._prepare_sender_gls(
                 cr, uid, picking, context=context)
-            #gls has a rescue label without webservice required
-            #if webservice is down
-            #rescue label is also used for international carrier
+            # gls has a rescue label without webservice required
+            # if webservice is down
+            # rescue label is also used for international carrier
             test = False
             if picking.company_id.gls_test:
                 test = True
@@ -326,4 +327,3 @@ class ShippingLabel(orm.Model):
         selection.append(('zpl2', 'ZPL2'))
         selection = list(set(selection))
         return selection
-

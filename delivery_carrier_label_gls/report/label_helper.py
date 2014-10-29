@@ -42,16 +42,16 @@ class AbstractLabel(object):
         in source code below):
             Case 1/ key in model with not in datas :
                     => no check but with a default value '' (only for display)
-            Case 2/ key in datas but with a False value (string with no value :
+            Case 2/ key in datas but with a False value (string with no value:
                 empty or Null value according to database) :
                     => no check but with a default value ''
-            Case 3/ data == 0.0 or 0 which is considered like False but is not :
+            Case 3/ data == 0.0 or 0 which is considered like False but is not:
                     => check but convert in string
         """
         if model_name:
             model_name = '(model: ' + model_name + ')'
         for field, definition in model.items():
-            #check type before all other checks if requested in model
+            # check type before all other checks if requested in model
             if 'type' in definition and field in datas:
                 self.check_type(field, [definition['type']], datas[field])
             to_check = self.must_be_checked(datas, field)
@@ -108,7 +108,7 @@ class AbstractLabel(object):
                                     "The date '%s' must be in the format '%s'"
                                     % (data, val))
                     elif key == 'numeric':
-                        #TODO : to end
+                        # TODO : to end
                         self.check_type(field, [int, float], data)
                         datas[field] = val % data
                     data = ''
@@ -121,10 +121,10 @@ class AbstractLabel(object):
                         # must have an empty value to be called
                         # in python template (mako, jinja2, etc)
                         if field not in datas:
-                            #case 1/
+                            # case 1/
                             datas[field] = u''
                         elif type(datas[field]) == bool:
-                            #case 2/
+                            # case 2/
                             datas[field] = u''
             # case 3/
             if type(datas[field]) in [int, float, str]:

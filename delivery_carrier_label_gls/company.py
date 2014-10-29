@@ -32,4 +32,3 @@ class ResCompany(orm.Model):
             'Url Test',
             help="Check if requested webservice is test plateform")
     }
-
