@@ -16,10 +16,6 @@ class ResCompany(orm.Model):
     _inherit = "res.company"
 
     _columns = {
-        'gls_customer_code': fields.char(
-            'Customer Code',
-            size=10,
-            help='Code for GLS carrier company (T8915)'),
         'gls_fr_contact_id': fields.char(
             'France',
             size=10,

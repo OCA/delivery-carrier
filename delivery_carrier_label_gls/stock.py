@@ -112,8 +112,6 @@ class StockPickingOut(orm.Model):
                   'customer_id': global_infos['carrier_gls_customer_code'],
                   'contact_id_inter': pick.company_id.gls_inter_contact_id,
                   'outbound_depot': global_infos['carrier_gls_warehouse']}
-        if pick.company_id.gls_customer_code:
-            sender['customer_id'] = pick.company_id.gls_customer_code
         if partner.country_id:
             sender['country'] = partner.country_id.name
         sender.update({
