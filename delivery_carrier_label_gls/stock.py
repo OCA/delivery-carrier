@@ -102,6 +102,9 @@ class StockPickingOut(orm.Model):
             # useful uniship label only
             "country_norme3166": int(iso_3166),
         })
+        if picking.partner_id.parent_id:
+            name = picking.partner_id.name_get()[0][1][:35]
+            address['consignee_name'] = name
         return address
 
     def _prepare_sender_gls(self, cr, uid, pick, context=None):

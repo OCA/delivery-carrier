@@ -71,7 +71,7 @@ PARCEL_MODEL = {
 DELIVERY_MODEL = {
     # 'address': ADDRESS_MODEL,
     "consignee_ref":    {'max_size': 20},
-    "contact":   {'max_size': 35},
+    "contact":          {'max_size': 35},
     "additional_ref_1": {'max_size': 20},
     "additional_ref_2": {'max_size': 20},
     "shipping_date":    {'date': '%Y%m%d', 'required': True},
