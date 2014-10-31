@@ -74,6 +74,13 @@ class StockPicking(orm.Model):
             res[elm.key] = elm.value
         return res
 
+    def _prepare_address_name_gls(self, cr, uid, partner, context=None):
+        consignee = partner.name
+        contact = partner.name
+        if partner.parent_id:
+            consignee = partner.parent_id.name
+        return {'consignee_name': consignee, 'contact': contact}
+
     def _prepare_address_gls(self, cr, uid, picking, context=None):
         address = {}
         res = self.pool['res.partner']._get_split_address(
@@ -83,7 +90,6 @@ class StockPicking(orm.Model):
                         picking.partner_id.country_id.code or 'FR')
         iso_3166 = pycountry.countries.get(alpha2=country_code).numeric
         address.update({
-            "consignee_name": picking.partner_id.name,
             "zip": picking.partner_id.zip,
             "city": picking.partner_id.city,
             "consignee_phone": picking.partner_id.phone,
@@ -93,10 +99,29 @@ class StockPicking(orm.Model):
             # useful uniship label only
             "country_norme3166": int(iso_3166),
         })
-        if picking.partner_id.parent_id:
-            name = picking.partner_id.name_get()[0][1][:35]
-            address['consignee_name'] = name
+        destination = self._prepare_address_name_gls(
+            cr, uid, picking.partner_id, context=context)
+        address['consignee_name'] = destination['consignee_name'][:35]
+        address['contact'] = destination['contact'][:35]
         return address
+
+    def _prepare_delivery_gls(
+            self, cr, uid, picking, number_of_packages, context=None):
+        shipping_date = picking.min_date
+        if picking.date_done:
+            shipping_date = picking.date_done
+        shipping_date = datetime.strptime(
+            shipping_date, DEFAULT_SERVER_DATETIME_FORMAT)
+        delivery = {}
+        delivery.update({
+            'consignee_ref': picking.name,
+            'additional_ref_1': u'',
+            'additional_ref_2': picking.name,
+            'shipping_date': shipping_date.strftime('%Y%m%d'),
+            'commentary': picking.note,
+            'parcel_total_number': number_of_packages,
+            })
+        return delivery
 
     def _prepare_sender_gls(self, cr, uid, pick, context=None):
         partner = self.pool['stock.picking.out']._get_label_sender_address(
@@ -117,25 +142,6 @@ class StockPicking(orm.Model):
             'shipper_city': partner.city,
             })
         return sender
-
-    def _prepare_delivery_gls(
-            self, cr, uid, picking, number_of_packages, context=None):
-        shipping_date = picking.min_date
-        if picking.date_done:
-            shipping_date = picking.date_done
-        shipping_date = datetime.strptime(
-            shipping_date, DEFAULT_SERVER_DATETIME_FORMAT)
-        delivery = {}
-        delivery.update({
-            "contact": picking.company_id.name,
-            'consignee_ref': picking.name,
-            'additional_ref_1': u'',
-            'additional_ref_2': picking.name,
-            'shipping_date': shipping_date.strftime('%Y%m%d'),
-            'commentary': picking.note,
-            'parcel_total_number': number_of_packages,
-            })
-        return delivery
 
     def _prepare_pack_gls(
             self, cr, uid, tracking, weight=None, context=None):

@@ -47,6 +47,7 @@ EUROPEAN_COUNTRIES = [
 # Here is all keys used in GLS templates
 ADDRESS_MODEL = {
     "consignee_name":   {'max_size': 35, 'required': True},
+    "contact":          {'max_size': 35},
     "street":           {'max_size': 35, 'required': True},
     "street2":          {'max_size': 35},
     "street3":          {'max_size': 35},
@@ -71,7 +72,6 @@ PARCEL_MODEL = {
 DELIVERY_MODEL = {
     # 'address': ADDRESS_MODEL,
     "consignee_ref":    {'max_size': 20},
-    "contact":          {'max_size': 35},
     "additional_ref_1": {'max_size': 20},
     "additional_ref_2": {'max_size': 20},
     "shipping_date":    {'date': '%Y%m%d', 'required': True},
@@ -94,6 +94,7 @@ SENDER_MODEL = {
 # Here is all fields called in mako template
 ADDRESS_MAPPING = {
     'T860': "consignee_name",
+    'T8906': "contact",
     'T863': "street",
     'T861': "street2",
     'T862': "street3",
@@ -116,8 +117,6 @@ DELIVERY_MAPPING = {
     'T8907': "additional_ref_1",
     'T8908': "additional_ref_2",
     'T540': "shipping_date",
-    # 'T8906': "commentary", # define in doc
-    'T8906': "contact",
     'T8318': "commentary",
     'T8975': "gls_origin_reference",
     'T8912': "gls_origin_reference",
