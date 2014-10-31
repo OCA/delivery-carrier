@@ -60,15 +60,6 @@ class StockPicking(orm.Model):
         return super(StockPicking, self).action_done(
             cr, uid, ids, context=context)
 
-    def generate_shipping_labels(self, cr, uid, ids, tracking_ids=None,
-                                 context=None):
-        return self.pool['stock.picking.out'].generate_shipping_labels(
-            cr, uid, ids, tracking_ids=tracking_ids, context=context)
-
-
-class StockPickingOut(orm.Model):
-    _inherit = 'stock.picking.out'
-
     def _customize_gls_picking(self, cr, uid, picking, context=None):
         "Use this method to override gls picking"
         return True
@@ -298,6 +289,10 @@ class StockPickingOut(orm.Model):
                 _("There is no sequence defined for the label '%s'")
                 % label_name)
         return sequence
+
+
+class StockPickingOut(orm.Model):
+    _inherit = 'stock.picking.out'
 
     def copy(self, cr, uid, id, default=None, context=None):
         if default is None:
