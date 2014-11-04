@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2014 Akretion
+  The licence is in the file __openerp__.py
+-->
+
+<openerp>
+<data>
+
+<template id="report_generic_deposit_slip">
+
+<t t-call="report.html_container">
+<t t-call="report.internal_layout">
+
+<div class="page">
+
+<t t-foreach="docs" t-as="o">
+
+<h1>Deposit Slip</h1>
+
+    <div>DEPOSIT SLIP  <span t-field="o.carrier_type"/></div>
+    <div>N° CLIENT: </div>
+    <div>ACCOUNT NAME:  <span t-field="user.company_id.name"/></div>
+    <div>DOCUMENT N°:  <span t-field="o.name"/> - <span t-field="o.create_date"/></div>
+
+    <table class="table table-condensed">
+    <thead>
+        <tr>
+            <th>Sender Ref</th>
+            <th>Name and address<br />destinataire</th>
+            <th>Parcel numbers</th>
+            <th class="small">ZIP</th>
+            <th class="small">Country</th>
+            <th class="small">Weight<br />(KG)</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr t-foreach="o.picking_ids" t-as="p">
+            <td><span t-field="p.name"/></td>
+            <td><span t-field="p.partner_id.name"/></td>
+            <td><span t-field="p.carrier_tracking_ref"/></td>
+            <td><span t-field="p.partner_id.zip"/></td>
+            <td><span t-field="p.partner_id.country_id.code"/></td>
+            <td><span t-field="p.weight"/></td>
+        </tr>
+
+    </tbody>
+    </table>
+    <div>TOTAL WEIGHT: <span t-esc="sum([x.weight for x in o.picking_ids])"/></div>
+</t>
+</div>
+
+</t>
+</t>
+
+</template>
+
+</data>
+</openerp>

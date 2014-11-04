@@ -7,15 +7,21 @@
 <openerp>
 <data>
 
-    <report id="stock_picking_deposit"
-            name="stock.picking.deposit"
-            auto="False"
-            model="deposit.slip"
-            file="delivery_carrier_deposit/report/deposit_slip.mako"
-            string="Default Deposit Slip"
-            report_type="webkit"
-            webkit_header="base_headers_webkit.base_minimum_reports_portrait_header"
-            header="False"/>
+<report id="report_deposit_slip"
+    model="deposit.slip"
+    string="Generic Deposit Slip pdf"
+    report_type="qweb-pdf"
+    name="delivery_carrier_deposit.report_generic_deposit_slip"
+    file="delivery_carrier_deposit.report.deposit_slip"
+    />
+
+<report id="report_deposit_slip_html"
+    model="deposit.slip"
+    string="Generic Deposit Slip html"
+    report_type="qweb-html"
+    name="delivery_carrier_deposit.report_generic_deposit_slip"
+    file="delivery_carrier_deposit.report.deposit_slip"
+    />
 
 </data>
 </openerp>
