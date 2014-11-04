@@ -99,7 +99,7 @@ class StockPicking(orm.Model):
     _inherit = "stock.picking"
 
     _columns = {
-        'deposit_slip_id': fields.many2one('deposit.slip', 'Deposit slip'),
+        'deposit_slip_id': fields.many2one('deposit.slip', 'Deposit Slip'),
     }
 
 
