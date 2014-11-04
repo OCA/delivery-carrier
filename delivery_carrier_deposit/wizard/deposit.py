@@ -26,7 +26,7 @@ from openerp.tools.translate import _
 
 class DeliveryDepositWizard(orm.TransientModel):
     _name = "delivery.deposit.wizard"
-    _description = "Wizard to create deposit slip"
+    _description = "Wizard to create Deposit Slip"
     _rec_name = 'carrier_type'
 
     def _get_carrier_type_selection(self, cr, uid, context=None):

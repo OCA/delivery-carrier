@@ -27,8 +27,7 @@
     'maintainer': 'Akretion',
     'depends': [
         'base_delivery_carrier_label',
-        'base_headers_webkit',
-        ],
+    ],
     'description': """
 Description
 -----------
@@ -54,12 +53,11 @@ Contributors
         'stock_view.xml',
         'wizard/deposit.xml',
         'ir_sequence_data.xml',
-        'report/report.xml',
+        #'report/report.xml',
         'security/ir.model.access.csv',
     ],
     'demo': [],
-    'installable': False,
-    'active': False,
+    'installable': True,
     'auto_install': False,
     'license': 'AGPL-3',
     'application': False,

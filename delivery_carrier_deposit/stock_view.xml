@@ -57,7 +57,7 @@
     <field name="model">deposit.slip</field>
     <field name="priority" eval="8"/>
     <field name="arch" type="xml">
-        <form string="Deposit" version="7.0">
+        <form string="Deposit">
             <header>
                 <button name="validate_deposit" string="Confirm" type="object"
                         attrs="{'invisible' : ['|', ('state','!=','draft'), ('carrier_type', '=', False)]}"
@@ -86,11 +86,11 @@
 <!-- STOCK PICKING -->
 <!-- From STOCK module -->
 <!-- FORM -->
-<record id="view_picking_out_form" model="ir.ui.view">
-    <field name="model">stock.picking.out</field>
-    <field name="inherit_id" ref="stock.view_picking_out_form" />
+<record id="view_picking_withcarrier_out_form" model="ir.ui.view">
+    <field name="model">stock.picking</field>
+    <field name="inherit_id" ref="delivery.view_picking_withcarrier_out_form" />
     <field name="arch" type="xml">
-        <field name="company_id" position="after">
+        <field name="weight_net" position="after">
             <field name="deposit_slip_id"
                    attrs="{'readonly': True,'invisible': [('deposit_slip_id','=','')]}"/>
         </field>

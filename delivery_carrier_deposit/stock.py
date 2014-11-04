@@ -67,7 +67,7 @@ class DepositSlip(orm.Model):
     }
 
     _sql_constraints = [
-        ('name_uniq', 'unique(name)', "'Deposit slip' name must be unique!"),
+        ('name_uniq', 'unique(name)', "'Deposit Slip' name must be unique!"),
     ]
 
     _order = 'id desc'
@@ -97,14 +97,6 @@ class DepositSlip(orm.Model):
 
 class StockPicking(orm.Model):
     _inherit = "stock.picking"
-
-    _columns = {
-        'deposit_slip_id': fields.many2one('deposit.slip', 'Deposit slip'),
-    }
-
-
-class StockPickingOut(orm.Model):
-    _inherit = "stock.picking.out"
 
     _columns = {
         'deposit_slip_id': fields.many2one('deposit.slip', 'Deposit slip'),
