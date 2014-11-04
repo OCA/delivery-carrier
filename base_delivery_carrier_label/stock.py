@@ -54,11 +54,11 @@ class stock_picking(orm.Model):
                                        string='Options'),
     }
 
-    def generate_default_label(self, cr, uid, ids, tracking_ids=None,
+    def generate_default_label(self, cr, uid, ids, package_ids=None,
                                context=None):
         """ Abstract method
 
-        :param tracking_ids: optional list of ``stock.tracking`` ids
+        :param package_ids: optional list of ``stock.quant.package`` ids
                              only packs in this list will have their label
                              printed (all are generated when None)
 
@@ -69,15 +69,15 @@ class stock_picking(orm.Model):
             'Error',
             'No label is configured for selected delivery method.')
 
-    def generate_shipping_labels(self, cr, uid, ids, tracking_ids=None,
+    def generate_shipping_labels(self, cr, uid, ids, package_ids=None,
                                  context=None):
         """Generate a shipping label by default
 
         This method can be inherited to create specific shipping labels
         a list of label must be return as we can have multiple
-        stock.tracking for a single picking representing packs
+        stock.quant.package for a single picking representing packs
 
-        :param tracking_ids: optional list of ``stock.tracking`` ids
+        :param package_ids: optional list of ``stock.quant.package`` ids
                              only packs in this list will have their label
                              printed (all are generated when None)
 
@@ -92,18 +92,18 @@ class stock_picking(orm.Model):
 
         """
         default_label = self.generate_default_label(cr, uid, ids,
-                                                    tracking_ids=tracking_ids,
+                                                    package_ids=package_ids,
                                                     context=None)
-        if not tracking_ids:
+        if not package_ids:
             return [default_label]
         labels = []
-        for tracking_id in tracking_ids:
+        for tracking_id in package_ids:
             pack_label = default_label.copy()
             pack_label['tracking_id'] = tracking_id
             labels.append(pack_label)
         return labels
 
-    def generate_labels(self, cr, uid, ids, tracking_ids=None, context=None):
+    def generate_labels(self, cr, uid, ids, package_ids=None, context=None):
         """ Generate the labels.
 
         A list of tracking ids can be given, in that case it will generate
@@ -116,7 +116,7 @@ class stock_picking(orm.Model):
 
         for pick in pickings:
             shipping_labels = pick.generate_shipping_labels(
-                tracking_ids=tracking_ids)
+                package_ids=package_ids)
             for label in shipping_labels:
                 # map types with models
                 types = {'in': 'stock.picking.in',
@@ -285,7 +285,7 @@ class ShippingLabel(orm.Model):
 
     _columns = {
         'file_type': fields.selection(__get_file_type_selection, 'File type'),
-        'tracking_id': fields.many2one('stock.tracking', 'Pack'),
+        'package_id': fields.many2one('stock.quant.package', 'Pack'),
     }
 
     _defaults = {
