@@ -115,19 +115,16 @@ class stock_picking(orm.Model):
         pickings = self.browse(cr, uid, ids, context=context)
 
         for pick in pickings:
-            shipping_labels = pick.generate_shipping_labels(
-                package_ids=package_ids)
+            if package_ids:
+                shipping_labels = pick.generate_shipping_labels(
+                    package_ids=package_ids)
+            else:
+                shipping_labels = pick.generate_shipping_labels()
             for label in shipping_labels:
-                # map types with models
-                types = {'in': 'stock.picking.in',
-                         'out': 'stock.picking.out',
-                         'internal': 'stock.picking',
-                         }
-                res_model = types[pick.type]
                 data = {
                     'name': label['name'],
                     'res_id': pick.id,
-                    'res_model': res_model,
+                    'res_model': 'stock.picking',
                     'datas': label['file'].encode('base64'),
                     'file_type': label['file_type'],
                 }
