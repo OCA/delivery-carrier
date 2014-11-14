@@ -21,6 +21,7 @@
 
 
 class BaseLine(object):
+
     """
     This class can be used to generate a row of data
     easily and get the full row in a list

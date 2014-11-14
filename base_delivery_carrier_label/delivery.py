@@ -22,6 +22,7 @@ from openerp.osv import orm, fields
 
 
 class DeliveryCarrierTemplateOption(orm.Model):
+
     """ Available options for a carrier (partner) """
     _name = 'delivery.carrier.template.option'
     _description = 'Delivery carrier template option'
@@ -47,6 +48,7 @@ class DeliveryCarrierTemplateOption(orm.Model):
 
 
 class DeliveryCarrierOption(orm.Model):
+
     """ Option selected for a carrier method
 
     Those options define the list of available pre-added and available

@@ -23,7 +23,7 @@ import os
 import logging
 
 from openerp.osv import orm, fields
-from generator import new_file_generator
+from .generator import new_file_generator
 from tools.translate import _
 
 
