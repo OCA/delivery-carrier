@@ -19,5 +19,5 @@
 #
 ##############################################################################
 
-import generator
-import carrier_file
+from . import generator
+from . import carrier_file

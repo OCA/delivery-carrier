@@ -19,7 +19,7 @@
 #
 ##############################################################################
 
-from base_line import BaseLine
-from file_generator import new_file_generator
-from file_generator import CarrierFileGenerator
-import generic_generator
+from .base_line import BaseLine
+from .file_generator import new_file_generator
+from .file_generator import CarrierFileGenerator
+from . import generic_generator

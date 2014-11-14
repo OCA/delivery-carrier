@@ -239,6 +239,7 @@ class stock_picking(orm.Model):
 
 
 class stock_picking_in(orm.Model):
+
     """ Add what isn't inherited from stock.picking """
     _inherit = 'stock.picking.in'
 
@@ -322,6 +323,7 @@ class stock_picking_in(orm.Model):
 
 
 class stock_picking_out(orm.Model):
+
     """ Add what isn't inherited from stock.picking """
     _inherit = 'stock.picking.out'
 
@@ -433,6 +435,7 @@ class stock_picking_out(orm.Model):
 
 
 class ShippingLabel(orm.Model):
+
     """ Child class of ir attachment to identify which are labels """
     _inherits = {'ir.attachment': 'attachment_id'}
     _name = 'shipping.label'

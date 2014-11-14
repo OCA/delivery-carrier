@@ -31,6 +31,7 @@ _compile_itemid = re.compile('[^0-9A-Za-z+\-_]')
 
 
 class PostlogisticsWebService(object):
+
     """ Connector with PostLogistics for labels using post.ch Web Services
 
     Handbook available here: http://www.poste.ch/post-barcode-cug.htm

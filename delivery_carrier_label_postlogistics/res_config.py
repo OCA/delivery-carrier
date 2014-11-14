@@ -23,7 +23,7 @@ import logging
 from openerp.osv import orm, fields
 from openerp.tools.translate import _
 
-from postlogistics.web_service import PostlogisticsWebService
+from .postlogistics.web_service import PostlogisticsWebService
 
 _logger = logging.getLogger(__name__)
 

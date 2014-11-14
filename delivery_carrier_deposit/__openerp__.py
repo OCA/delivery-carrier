@@ -28,7 +28,7 @@
     'depends': [
         'base_delivery_carrier_label',
         'base_headers_webkit',
-        ],
+    ],
     'description': """
 Description
 -----------
