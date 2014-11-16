@@ -2,32 +2,32 @@
 GLS Group - Transportation services
 =====================================
 
-Implémentation du service Unibox:
-- envoi des informations du bon de livraison et des colis au serveur GLS unibox
-- retour par webservice des informations de routage
-- génération des étiquettes GLS Unibox
+Implémentation du service Unibox service implementation:
+- send delivery order informations and parcel infothe GLS unibox server
+- webservice routing info in back
+- label GLS Unibox generate
 
 
 TODO:
-- traduction
-- livraisons Shop Delivery Service (livraisons en point relais)
-- livraison Express Parcel Guaranteed (livraisons en entreprise)
-- migrer le module en version 8
+- translation
+- Shop Delivery Service
+- delivery Express Parcel Guaranteed (for companies only)
+- migrate the module in 8 version
 
-Les Pull Request sont bienvenues pour recueillir des améliorations sur ce module
+Pull Request are welcomed to gather improvement on this module
 
-### Paramétrage des comptes GLS par société
-![Paramétrage des comptes GLS dans l'ERP Odoo](/delivery_carrier_label_gls/static/description/gls1.png)
-
-
-### Bon de livraison Odoo avec transporteur GLS
-![Bon de livraison de l'ERP Odoo avec transporteur GLS](/delivery_carrier_label_gls/static/description/gls2.png)
+### Account GLS settings by company
+![Account GLS settings by company Odoo ERP](/delivery_carrier_label_gls/static/description/gls1.png)
 
 
-### Etiquette de transport GLS à destination de la France générée avec l'ERP Odoo
-![Etiquette de transport France, transporteur GLS](/delivery_carrier_label_gls/static/description/gls3.png)
+### Odoo Delivery Order avec GLS carrier
+![Odoo Delivery Order avec GLS carrier with Odoo ERP](/delivery_carrier_label_gls/static/description/gls2.png)
 
 
-### Etiquette de transport GLS à destination de l'étranger générée avec l'ERP Odoo
-![Etiquette de transport International, transporteur GLS](/delivery_carrier_label_gls/static/description/gls4.png )
+### GLS transport label towards France generated with Odoo ERP
+![GLS transport label towards France generated with Odoo ERP](/delivery_carrier_label_gls/static/description/gls3.png)
+
+
+### GLS transport label towards foreign countries
+![GLS transport label towards foreign countries](/delivery_carrier_label_gls/static/description/gls4.png )
 
