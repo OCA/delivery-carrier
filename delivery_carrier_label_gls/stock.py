@@ -107,9 +107,7 @@ class StockPicking(orm.Model):
 
     def _prepare_delivery_gls(
             self, cr, uid, picking, number_of_packages, context=None):
-        shipping_date = picking.min_date
-        if picking.date_done:
-            shipping_date = picking.date_done
+        shipping_date = picking.min_date or picking.date
         shipping_date = datetime.strptime(
             shipping_date, DEFAULT_SERVER_DATETIME_FORMAT)
         delivery = {}
