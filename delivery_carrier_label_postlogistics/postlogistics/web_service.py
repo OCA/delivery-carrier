@@ -27,7 +27,7 @@ from StringIO import StringIO
 from openerp.osv import orm
 from openerp.tools.translate import _
 
-_compile_itemid = re.compile('[^0-9A-Za-z+\-_]')
+_compile_itemid = re.compile(r'[^0-9A-Za-z+\-_]')
 
 
 class PostlogisticsWebService(object):
@@ -92,14 +92,14 @@ class PostlogisticsWebService(object):
             return lang_code
         return 'en'
 
-    def read_allowed_services_by_franking_license(self, license, company,
+    def read_allowed_services_by_franking_license(self, cp_license, company,
                                                   lang=None):
         """ Get a list of allowed service for a postlogistics licence """
         if not lang:
             lang = company.partner_id.lang
         lang = self._get_language(lang)
         request = self.client.service.ReadAllowedServicesByFrankingLicense
-        return self._send_request(request, FrankingLicense=license,
+        return self._send_request(request, FrankingLicense=cp_license,
                                   Language=lang)
 
     def read_service_groups(self, company, lang):
@@ -238,8 +238,8 @@ class PostlogisticsWebService(object):
 
         :return: license number
         """
-        license = picking.carrier_id.postlogistics_license_id
-        if not license:
+        franking_license = picking.carrier_id.postlogistics_license_id
+        if not franking_license:
             company_licenses = picking.company_id.postlogistics_license_ids
             group = picking.carrier_id.postlogistics_service_group_id
             if not company_licenses or not group:
@@ -247,9 +247,9 @@ class PostlogisticsWebService(object):
             group_license_ids = [l.id for l in group.postlogistics_license_ids]
             if not group_license_ids:
                 return None
-            license = [l for l in company_licenses
+            franking_license = [l for l in company_licenses
                        if l.id in group_license_ids][0]
-        return license.number
+        return franking_license.number
 
     def _prepare_attributes(self, picking):
         services = [option.code.split(',') for option in picking.option_ids

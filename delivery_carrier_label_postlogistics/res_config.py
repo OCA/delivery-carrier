@@ -103,7 +103,7 @@ class PostlogisticsConfigSettings(orm.TransientModel):
     }
 
     def create(self, cr, uid, values, context=None):
-        id = super(PostlogisticsConfigSettings, self
+        rec_id = super(PostlogisticsConfigSettings, self
                    ).create(cr, uid, values, context=context)
         # Hack: to avoid some nasty bug, related fields are not written
         # upon record creation.  Hence we write on those fields here.
@@ -111,8 +111,8 @@ class PostlogisticsConfigSettings(orm.TransientModel):
         for fname, field in self._columns.iteritems():
             if isinstance(field, fields.related) and fname in values:
                 vals[fname] = values[fname]
-        self.write(cr, uid, [id], vals, context)
-        return id
+        self.write(cr, uid, [rec_id], vals, context)
+        return rec_id
 
     def onchange_company_id(self, cr, uid, ids, company_id, context=None):
         # update related fields
@@ -464,19 +464,19 @@ class PostlogisticsConfigSettings(orm.TransientModel):
         return True
 
     def _get_allowed_service_group_codes(self, web_service, company,
-                                         license, context=None):
+                                         cp_license, context=None):
         """ Get a list of allowed service group codes"""
         if context is None:
             context = {}
 
         lang = context.get('lang', 'en')
         res = web_service.read_allowed_services_by_franking_license(
-            license.number, company, lang)
+            cp_license.number, company, lang)
         if 'errors' in res:
             errors = '\n'.join(res['errors'])
             error_message = (_('Could not retrieve allowed Postlogistics '
                                'service groups for the %s licence:\n%s')
-                             % (license.name, errors))
+                             % (cp_license.name, errors))
             raise orm.except_orm(_('Error'), error_message)
 
         if not res['value']:
@@ -505,17 +505,17 @@ class PostlogisticsConfigSettings(orm.TransientModel):
             web_service = PostlogisticsWebService(company)
 
             relations = {}
-            for license in company.postlogistics_license_ids:
+            for cp_license in company.postlogistics_license_ids:
                 service_groups = self._get_allowed_service_group_codes(
-                    web_service, company, license, context=context)
+                    web_service, company, cp_license, context=context)
                 group_ids = service_group_obj.search(
                     cr, uid, [('group_extid', 'in', service_groups)],
                     context=context)
                 for group_id in group_ids:
                     if group_id in relations:
-                        relations[group_id].append(license.id)
+                        relations[group_id].append(cp_license.id)
                     else:
-                        relations[group_id] = [license.id]
+                        relations[group_id] = [cp_license.id]
             for group_id, license_ids in relations.iteritems():
                 vals = {'postlogistics_license_ids': [(6, 0, license_ids)]}
                 service_group_obj.write(cr, uid, group_id, vals,
