@@ -27,7 +27,7 @@ from .generator import new_file_generator
 from tools.translate import _
 
 
-class carrier_file(orm.Model):
+class CarrierFile(orm.Model):
     _name = 'delivery.carrier.file'
 
     def get_type_selection(self, cr, uid, context=None):
@@ -108,8 +108,8 @@ class carrier_file(orm.Model):
         files = file_generator.generate_files(pickings, carrier_file)
         if carrier_file.auto_export:
             context['picking_id'] = pickings and pickings[0].id
-        for file in files:
-            filename, file_content, picking_ids = file
+        for f in files:
+            filename, file_content, picking_ids = f
             # we pass the errors because the files can still be
             # generated manually
             # at first I would like to open a new cursor and
