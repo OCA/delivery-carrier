@@ -339,7 +339,7 @@ code: %s ; message: %s ; result: %s""" % (code, message, result))
                 "content": content2print,
                 "tracking_number": tracking_number,
                 'filename': self.filename
-                }
+            }
         except:
             traceback = RichTraceback()
             for (filename, lineno, function, line) in traceback.traceback:

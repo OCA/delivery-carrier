@@ -118,7 +118,7 @@ class StockPicking(orm.Model):
             'shipping_date': shipping_date.strftime('%Y%m%d'),
             'commentary': picking.note,
             'parcel_total_number': number_of_packages,
-            })
+        })
         return delivery
 
     def _prepare_sender_gls(self, cr, uid, pick, context=None):
@@ -138,7 +138,7 @@ class StockPicking(orm.Model):
             'shipper_country': partner.country_id.code,
             'shipper_zip': partner.zip,
             'shipper_city': partner.city,
-            })
+        })
         return sender
 
     def _prepare_pack_gls(
@@ -151,18 +151,18 @@ class StockPicking(orm.Model):
             'parcel_number_barcode': PACK_NUMBER,
             'custom_sequence': self._get_sequence(
                 cr, uid, 'gls', context=context),
-            })
+        })
         if weight:
             pack.update({
                 'weight': "{0:05.2f}".format(weight),
-                })
+            })
         else:
             if tracking.move_ids:
                 tracking_weight = [move.weight
                                    for move in tracking.move_ids][0]
                 pack.update({
                     'weight': "{0:05.2f}".format(tracking_weight),
-                    })
+                })
         return pack
 
     def _get_tracking_ids_from_moves(self, cr, uid, picking, context=None):
@@ -235,7 +235,8 @@ class StockPicking(orm.Model):
                 label_info['name'] = '%s%s.zpl' % (label['tracking_number'],
                                                    label['filename'])
             labels.append(label_info)
-        self.write(cr, uid, picking.id, pick2update, context=context)
+        self.pool['stock.picking.out'].write(cr, uid, picking.id, pick2update,
+                                             context=context)
         picking = self.browse(cr, uid, picking.id, context=context)
         self._customize_gls_picking(cr, uid, picking, context=context)
         return labels
