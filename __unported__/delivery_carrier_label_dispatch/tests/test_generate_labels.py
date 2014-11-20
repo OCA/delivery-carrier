@@ -23,6 +23,7 @@ from openerp.addons import get_module_resource
 
 
 class test_generate_labels(common.TransactionCase):
+
     """ Test the wizard for delivery carrier label generation """
 
     def setUp(self):

@@ -20,7 +20,7 @@
 ##############################################################################
 from openerp.osv import orm
 
-from postlogistics.web_service import PostlogisticsWebServiceShop
+from .postlogistics.web_service import PostlogisticsWebServiceShop
 
 
 class stock_picking(orm.Model):

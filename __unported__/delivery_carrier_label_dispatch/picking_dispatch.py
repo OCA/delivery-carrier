@@ -24,6 +24,7 @@ from openerp.tools.translate import _
 
 
 class PickingDispatch(Model):
+
     """ Add carrier and carrier options on dispatch
 
     to be able to massively set those options on related picking.

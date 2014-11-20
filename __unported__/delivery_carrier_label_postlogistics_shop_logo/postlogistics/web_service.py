@@ -27,6 +27,7 @@ from openerp.addons.delivery_carrier_label_postlogistics.postlogistics import (
 
 
 class PostlogisticsWebServiceShop(web_service.PostlogisticsWebService):
+
     """ Use picking information to get shop logo """
 
     def _get_shop_label_logo(self, picking):
