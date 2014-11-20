@@ -91,9 +91,9 @@ class stock_picking_out(orm.Model):
                                                  "has been generated."),
     }
 
-    def copy(self, cr, uid, id, default=None, context=None):
+    def copy(self, cr, uid, rec_id, default=None, context=None):
         if default is None:
             default = {}
         default.update({'carrier_file_generated': False})
-        return super(stock_picking_out, self).copy(cr, uid, id, default,
+        return super(stock_picking_out, self).copy(cr, uid, rec_id, default,
                                                    context=context)

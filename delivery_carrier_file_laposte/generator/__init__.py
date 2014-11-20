@@ -19,4 +19,4 @@
 #
 ##############################################################################
 
-import laposte_generator
+from . import laposte_generator

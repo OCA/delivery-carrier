@@ -1,1 +1,1 @@
-from unicode_writer import UnicodeWriter
+from .unicode_writer import UnicodeWriter
