@@ -71,6 +71,7 @@ POSTLOGISTIC_TYPES = [
 
 
 class DeliveryCarrierTemplateOption(orm.Model):
+
     """ Set name translatable and add service group """
     _inherit = 'delivery.carrier.template.option'
 
@@ -111,6 +112,7 @@ class DeliveryCarrierTemplateOption(orm.Model):
 
 
 class DeliveryCarrierOption(orm.Model):
+
     """ Set name translatable and add service group """
     _inherit = 'delivery.carrier.option'
 
@@ -127,6 +129,7 @@ class DeliveryCarrierOption(orm.Model):
 
 
 class DeliveryCarrier(orm.Model):
+
     """ Add service group """
     _inherit = 'delivery.carrier'
 

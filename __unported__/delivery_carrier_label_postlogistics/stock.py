@@ -22,7 +22,7 @@ from operator import attrgetter
 
 from openerp.osv import orm
 
-from postlogistics.web_service import PostlogisticsWebService
+from .postlogistics.web_service import PostlogisticsWebService
 
 
 class stock_picking(orm.Model):
@@ -111,6 +111,7 @@ class stock_picking(orm.Model):
 
 
 class ShippingLabel(orm.Model):
+
     """ Child class of ir attachment to identify which are labels """
     _inherit = 'shipping.label'
 

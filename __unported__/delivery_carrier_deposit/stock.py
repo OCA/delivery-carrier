@@ -72,7 +72,7 @@ class DepositSlip(orm.Model):
 
     _order = 'id desc'
 
-    def copy(self, cr, uid, id, default=None, context=None):
+    def copy(self, cr, uid, rec_id, default=None, context=None):
         if not default:
             default = {}
         default.update({
@@ -81,7 +81,7 @@ class DepositSlip(orm.Model):
             'deposit_slip_id': False,
         })
         return super(DepositSlip, self).copy(
-            cr, uid, id, default, context=context)
+            cr, uid, rec_id, default, context=context)
 
     def create_edi_file(self, cr, uid, ids, context=None):
         """
