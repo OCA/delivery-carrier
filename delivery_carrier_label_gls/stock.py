@@ -77,7 +77,7 @@ class StockPicking(orm.Model):
     def _prepare_address_name_gls(self, cr, uid, partner, context=None):
         consignee = partner.name
         contact = partner.name
-        if partner.parent_id:
+        if partner.parent_id and partner.use_parent_address:
             consignee = partner.parent_id.name
         return {'consignee_name': consignee, 'contact': contact}
 
@@ -235,6 +235,8 @@ class StockPicking(orm.Model):
                 label_info['name'] = '%s%s.zpl' % (label['tracking_number'],
                                                    label['filename'])
             labels.append(label_info)
+        # must be on this stock.picking.out to event on connector
+        # like in modules prestahop or magento
         self.pool['stock.picking.out'].write(cr, uid, picking.id, pick2update,
                                              context=context)
         picking = self.browse(cr, uid, picking.id, context=context)
