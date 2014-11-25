@@ -274,6 +274,7 @@ class StockPicking(orm.Model):
 
 
 class ShippingLabel(orm.Model):
+
     """ Child class of ir attachment to identify which are labels """
     _inherits = {'ir.attachment': 'attachment_id'}
     _name = 'shipping.label'

@@ -46,7 +46,7 @@ class DeliveryDepositWizard(orm.TransientModel):
         return {
             'carrier_type': wizard.carrier_type,
             'company_id': user.company_id.id
-            }
+        }
 
     def create_deposit_slip(self, cr, uid, ids, context=None):
         wizard = self.browse(cr, uid, ids[0], context=context)
