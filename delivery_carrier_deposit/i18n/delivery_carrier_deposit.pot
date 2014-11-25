@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-25 15:52+0000\n"
-"PO-Revision-Date: 2014-11-25 15:52+0000\n"
+"POT-Creation-Date: 2014-11-25 17:02+0000\n"
+"PO-Revision-Date: 2014-11-25 17:02+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -22,12 +22,12 @@ msgstr ""
 
 #. module: delivery_carrier_deposit
 #: view:website:delivery_carrier_deposit.report_generic_deposit_slip
-msgid "(KG)"
+msgid "(kg)"
 msgstr ""
 
 #. module: delivery_carrier_deposit
 #: view:website:delivery_carrier_deposit.report_generic_deposit_slip
-msgid "ACCOUNT NAME:"
+msgid "Account Name:"
 msgstr ""
 
 #. module: delivery_carrier_deposit
@@ -109,12 +109,7 @@ msgstr ""
 
 #. module: delivery_carrier_deposit
 #: view:website:delivery_carrier_deposit.report_generic_deposit_slip
-msgid "DEPOSIT SLIP"
-msgstr ""
-
-#. module: delivery_carrier_deposit
-#: view:website:delivery_carrier_deposit.report_generic_deposit_slip
-msgid "DOCUMENT N°:"
+msgid "Customer No.:"
 msgstr ""
 
 #. module: delivery_carrier_deposit
@@ -132,6 +127,11 @@ msgstr ""
 #: field:stock.picking,deposit_slip_id:0
 #: view:website:delivery_carrier_deposit.report_generic_deposit_slip
 msgid "Deposit Slip"
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: view:website:delivery_carrier_deposit.report_generic_deposit_slip
+msgid "Document No.:"
 msgstr ""
 
 #. module: delivery_carrier_deposit
@@ -184,11 +184,6 @@ msgstr ""
 
 #. module: delivery_carrier_deposit
 #: view:website:delivery_carrier_deposit.report_generic_deposit_slip
-msgid "N° CLIENT:"
-msgstr ""
-
-#. module: delivery_carrier_deposit
-#: view:website:delivery_carrier_deposit.report_generic_deposit_slip
 msgid "Parcel numbers"
 msgstr ""
 
@@ -224,15 +219,15 @@ msgid "Status"
 msgstr ""
 
 #. module: delivery_carrier_deposit
-#: view:website:delivery_carrier_deposit.report_generic_deposit_slip
-msgid "TOTAL WEIGHT:"
-msgstr ""
-
-#. module: delivery_carrier_deposit
 #: code:addons/delivery_carrier_deposit/wizard/deposit.py:83
 #, python-format
 msgid "There is no picking for '%s' carrier \n"
 "to gather in a deposit slip"
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: view:website:delivery_carrier_deposit.report_generic_deposit_slip
+msgid "Total Weight:"
 msgstr ""
 
 #. module: delivery_carrier_deposit
