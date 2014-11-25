@@ -25,7 +25,16 @@ from openerp.osv import orm, fields
 from openerp.tools.translate import _
 
 
-class stock_picking(orm.Model):
+class StockQuantPackage(orm.Model):
+    _inherit = 'stock.quant.package'
+
+    _columns = {
+        'parcel_tracking': fields.char('Parcel Tracking'),
+        'weight': fields.char('Weight'),
+    }
+
+
+class StockPicking(orm.Model):
     _inherit = 'stock.picking'
 
     def _get_carrier_type_selection(self, cr, uid, context=None):
@@ -218,7 +227,7 @@ class stock_picking(orm.Model):
         """
         values = self._values_with_carrier_options(cr, uid, values,
                                                    context=context)
-        return super(stock_picking, self).\
+        return super(StockPicking, self).\
             write(cr, uid, ids, values, context=context)
 
     def create(self, cr, uid, values, context=None):
@@ -230,7 +239,7 @@ class stock_picking(orm.Model):
         """
         values = self._values_with_carrier_options(cr, uid, values,
                                                    context=context)
-        picking_id = super(stock_picking, self
+        picking_id = super(StockPicking, self
                            ).create(cr, uid, values, context=context)
         return picking_id
 

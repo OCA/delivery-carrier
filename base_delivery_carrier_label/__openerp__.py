@@ -18,6 +18,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+
 {'name': 'Base module for carrier labels',
  'version': '1.2',
  'author': 'Camptocamp,Akretion',
