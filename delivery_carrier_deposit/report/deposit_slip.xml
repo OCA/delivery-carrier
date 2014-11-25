@@ -19,10 +19,10 @@
 
 <h1>Deposit Slip</h1>
 
-    <div>DEPOSIT SLIP  <span t-field="o.carrier_type"/></div>
-    <div>N° CLIENT: </div>
-    <div>ACCOUNT NAME:  <span t-field="user.company_id.name"/></div>
-    <div>DOCUMENT N°:  <span t-field="o.name"/> - <span t-field="o.create_date"/></div>
+    <div>Deposit Slip  <span t-field="o.carrier_type"/></div>
+    <div>Customer No.: </div>
+    <div>Account Name:  <span t-field="user.company_id.name"/></div>
+    <div>Document No.:  <span t-field="o.name"/> - <span t-field="o.create_date"/></div>
 
     <table class="table table-condensed">
     <thead>
@@ -32,7 +32,7 @@
             <th>Parcel numbers</th>
             <th class="small">ZIP</th>
             <th class="small">Country</th>
-            <th class="small">Weight<br />(KG)</th>
+            <th class="small">Weight<br />(kg)</th>
         </tr>
     </thead>
     <tbody>
@@ -48,7 +48,7 @@
 
     </tbody>
     </table>
-    <div>TOTAL WEIGHT: <span t-esc="sum([x.weight for x in o.picking_ids])"/></div>
+    <div>Total Weight: <span t-esc="sum([x.weight for x in o.picking_ids])"/></div>
 </div>
 </t>
 
