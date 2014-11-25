@@ -9,16 +9,8 @@
 
 <report id="report_deposit_slip"
     model="deposit.slip"
-    string="Generic Deposit Slip pdf"
+    string="Generic Deposit Slip"
     report_type="qweb-pdf"
-    name="delivery_carrier_deposit.report_generic_deposit_slip"
-    file="delivery_carrier_deposit.report.deposit_slip"
-    />
-
-<report id="report_deposit_slip_html"
-    model="deposit.slip"
-    string="Generic Deposit Slip html"
-    report_type="qweb-html"
     name="delivery_carrier_deposit.report_generic_deposit_slip"
     file="delivery_carrier_deposit.report.deposit_slip"
     />

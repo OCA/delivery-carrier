@@ -12,9 +12,10 @@
 <t t-call="report.html_container">
 <t t-call="report.internal_layout">
 
-<div class="page">
 
 <t t-foreach="docs" t-as="o">
+
+<div class="page">
 
 <h1>Deposit Slip</h1>
 
@@ -27,7 +28,7 @@
     <thead>
         <tr>
             <th>Sender Ref</th>
-            <th>Name and address<br />destinataire</th>
+            <th>Name and address<br />recipient</th>
             <th>Parcel numbers</th>
             <th class="small">ZIP</th>
             <th class="small">Country</th>
@@ -48,13 +49,22 @@
     </tbody>
     </table>
     <div>TOTAL WEIGHT: <span t-esc="sum([x.weight for x in o.picking_ids])"/></div>
-</t>
 </div>
+</t>
 
 </t>
 </t>
 
 </template>
+
+<template id="report_eneric_deposit_slip_trans">
+  <t t-call="report.html_container">
+    <t t-foreach="doc_ids" t-as="doc_id">
+      <t t-raw="translate_doc(doc_id, doc_model, 'partner_id.lang', 'delivery_carrier_deposit.report_generic_deposit_slip')"/>
+    </t>
+  </t>
+</template>
+
 
 </data>
 </openerp>
