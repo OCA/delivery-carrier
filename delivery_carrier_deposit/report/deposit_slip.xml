@@ -57,7 +57,7 @@
 
 </template>
 
-<template id="report_eneric_deposit_slip_trans">
+<template id="report_generic_deposit_slip_trans">
   <t t-call="report.html_container">
     <t t-foreach="doc_ids" t-as="doc_id">
       <t t-raw="translate_doc(doc_id, doc_model, 'partner_id.lang', 'delivery_carrier_deposit.report_generic_deposit_slip')"/>
