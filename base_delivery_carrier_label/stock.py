@@ -218,6 +218,21 @@ class StockPicking(orm.Model):
                 values.update(option_ids=[(6, 0, option_ids)])
         return values
 
+    def _get_packages_from_picking(self, cr, uid, picking, context=None):
+        """ get all the packages from the picking
+        """
+        stk_pack_ope_m = self.pool['stock.pack.operation']
+        packages = []
+        pack_ope_ids = stk_pack_ope_m.search(cr, uid, [
+            ('result_package_id', '!=', False),
+            ('picking_id', '=', picking.id)
+        ], context=context)
+        for pack_ope in stk_pack_ope_m.browse(
+                cr, uid, pack_ope_ids, context=context):
+            if pack_ope.operation_id.result_package_id:
+                packages.append(pack_ope.operation_id.result_package_id)
+        return list(set(packages))
+
     def write(self, cr, uid, ids, values, context=None):
         """ Set the default options when the delivery method is changed.
 
