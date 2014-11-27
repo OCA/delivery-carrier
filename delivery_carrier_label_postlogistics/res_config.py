@@ -20,137 +20,76 @@
 ##############################################################################
 import logging
 
-from openerp.osv import orm, fields
+from openerp import models, fields, api, exceptions, _
 
-from postlogistics.web_service import PostlogisticsWebService
+from .postlogistics.web_service import PostlogisticsWebService
 
 _logger = logging.getLogger(__name__)
 
 
-class PostlogisticsConfigSettings(orm.TransientModel):
+class PostlogisticsConfigSettings(models.TransientModel):
     _name = 'postlogistics.config.settings'
     _inherit = 'res.config.settings'
 
-    _columns = {
-        'company_id': fields.many2one('res.company', 'Company', required=True),
-        'wsdl_url': fields.related(
-            'company_id', 'postlogistics_wsdl_url',
-            string='WSDL URL', type='char'),
-        'username': fields.related(
-            'company_id', 'postlogistics_username',
-            string='Username', type='char'),
-        'password': fields.related(
-            'company_id', 'postlogistics_password',
-            string='Password', type='char'),
-        'license_ids': fields.related(
-            'company_id', 'postlogistics_license_ids',
-            string='Frankling Licenses',
-            type='one2many',
-            relation='postlogistics.license'),
-        'license_less_1kg': fields.related(
-            'company_id', 'postlogistics_license_less_1kg',
-            string='License less than 1kg', type='char'),
-        'license_more_1kg': fields.related(
-            'company_id', 'postlogistics_license_more_1kg',
-            string='License more than 1kg', type='char'),
-        'license_vinolog': fields.related(
-            'company_id', 'postlogistics_license_vinolog',
-            string='License VinoLog', type='char'),
-        'logo': fields.related(
-            'company_id', 'postlogistics_logo',
-            string='Company Logo on Post labels', type='binary',
-            help="Optional company logo to show on label.\n"
-                 "If using an image / logo, please note the following:\n"
-                 "– Image width: 47 mm\n"
-                 "– Image height: 25 mm\n"
-                 "– File size: max. 30 kb\n"
-                 "– File format: GIF or PNG\n"
-                 "– Colour table: indexed colours, max. 200 colours\n"
-                 "– The logo will be printed rotated counter-clockwise by 90°"
-                 "\n"
-                 "We recommend using a black and white logo for printing in "
-                 " the ZPL2 format."
-        ),
-        'office': fields.related(
-            'company_id', 'postlogistics_office',
-            string='Domicile Post office', type='char',
-            help="Post office which will receive the shipped goods"),
-        'default_label_layout': fields.related(
-            'company_id', 'postlogistics_default_label_layout',
-            string='Default label layout', type='many2one',
-            relation='delivery.carrier.template.option',
-            domain=[('postlogistics_type', '=', 'label_layout')]),
-        'default_output_format': fields.related(
-            'company_id', 'postlogistics_default_output_format',
-            string='Default output format', type='many2one',
-            relation='delivery.carrier.template.option',
-            domain=[('postlogistics_type', '=', 'output_format')]),
-        'default_resolution': fields.related(
-            'company_id', 'postlogistics_default_resolution',
-            string='Default resolution', type='many2one',
-            relation='delivery.carrier.template.option',
-            domain=[('postlogistics_type', '=', 'resolution')]),
-    }
+    def _default_company(self):
+        return self.env.user.company_id
 
-    def _default_company(self, cr, uid, context=None):
-        user = self.pool.get('res.users').browse(cr, uid, uid, context=context)
-        return user.company_id.id
+    company_id = fields.Many2one(comodel_name='res.company',
+                                 string='Company',
+                                 required=True,
+                                 default=_default_company)
+    wsdl_url = fields.Char(related='company_id.postlogistics_wsdl_url')
+    username = fields.Char(related='company_id.postlogistics_username')
+    password = fields.Char(related='company_id.postlogistics_password')
+    license_ids = fields.One2many(
+        related='company_id.postlogistics_license_ids',
+    )
+    logo = fields.Binary(related='company_id.postlogistics_logo')
+    office = fields.Char(related='company_id.postlogistics_office')
 
-    _defaults = {
-        'company_id': _default_company,
-        }
+    default_label_layout = fields.Many2one(
+        related='company_id.postlogistics_default_label_layout',
+    )
+    default_output_format = fields.Many2one(
+        related='company_id.postlogistics_default_output_format',
+    )
+    default_resolution = fields.Many2one(
+        related='company_id.postlogistics_default_resolution',
+    )
 
-    def create(self, cr, uid, values, context=None):
-        id = super(PostlogisticsConfigSettings, self
-                   ).create(cr, uid, values, context=context)
-        # Hack: to avoid some nasty bug, related fields are not written
-        # upon record creation.  Hence we write on those fields here.
-        vals = {}
-        for fname, field in self._columns.iteritems():
-            if isinstance(field, fields.related) and fname in values:
-                vals[fname] = values[fname]
-        self.write(cr, uid, [id], vals, context)
-        return id
-
-    def onchange_company_id(self, cr, uid, ids, company_id, context=None):
+    @api.onchange('company_id')
+    def onchange_company_id(self):
         # update related fields
-        values = {}
-        values['currency_id'] = False
-        if not company_id:
-            return {'value': values}
-        company = self.pool.get('res.company'
-                                ).browse(cr, uid, company_id, context=context)
+        if not self.company_id:
+            return
+        company = self.company_id
 
-        license_ids = [l.id for l in company.postlogistics_license_ids]
-        label_layout = company.postlogistics_default_label_layout.id or False
-        output_format = company.postlogistics_default_output_format.id or False
-        resolution = company.postlogistics_default_resolution.id or False
-        values = {
-            'username': company.postlogistics_username,
-            'password': company.postlogistics_password,
-            'license_ids': license_ids,
-            'logo': company.postlogistics_logo,
-            'office': company.postlogistics_office,
-            'default_label_layout': label_layout,
-            'default_output_format': output_format,
-            'default_resolution': resolution,
-        }
-        return {'value': values}
+        licenses = company.postlogistics_license_ids
+        label_layout = company.postlogistics_default_label_layout
+        output_format = company.postlogistics_default_output_format
+        resolution = company.postlogistics_default_resolution
 
-    def _get_delivery_instructions(self, cr, uid, ids, web_service,
-                                   company, service_code, context=None):
-        if context is None:
-            context = {}
+        self.username = company.postlogistics_username
+        self.password = company.postlogistics_password
+        self.license_ids = licenses
+        self.logo = company.postlogistics_logo
+        self.office = company.postlogistics_office
+        self.default_label_layout = label_layout
+        self.default_output_format = output_format
+        self.default_resolution = resolution
 
-        lang = context.get('lang', 'en')
+    @api.model
+    def _get_delivery_instructions(self, web_service, company, service_code):
+        lang = self.env.context.get('lang', 'en')
         service_code_list = service_code.split(',')
-        res = web_service.read_delivery_instructions(
-            company, service_code_list, lang)
+        res = web_service.read_delivery_instructions(company,
+                                                     service_code_list,
+                                                     lang)
         if 'errors' in res:
             errors = '\n'.join(res['errors'])
-            error_message = ('Could not retrieve Postlogistics delivery instructions:\n%s'
-                             % (errors,))
-            raise orm.except_orm('Error', error_message)
+            error_message = (_('Could not retrieve Postlogistics delivery '
+                               'instructions:\n%s') % errors)
+            raise exceptions.Warning(error_message)
 
         if not res['value']:
             return {}
@@ -158,7 +97,7 @@ class PostlogisticsConfigSettings(orm.TransientModel):
         if hasattr(res['value'], 'Errors') and res['value'].Errors:
             for error in res['value'].Errors.Error:
                 message = '[%s] %s' % (error.Code, error.Message)
-            raise orm.except_orm('Error', message)
+            raise exceptions.Warning(message)
 
         delivery_instructions = {}
         for service in res['value'].DeliveryInstructions:
@@ -167,48 +106,42 @@ class PostlogisticsConfigSettings(orm.TransientModel):
 
         return delivery_instructions
 
-    def _update_delivery_instructions(self, cr, uid, ids, web_service,
-                                      additional_services, context=None):
-        if context is None:
-            context = {}
-        ir_model_data_obj = self.pool.get('ir.model.data')
-        carrier_option_obj = self.pool.get('delivery.carrier.template.option')
+    @api.model
+    def _update_delivery_instructions(self, web_service, additional_services):
+        carrier_option_obj = self.env['delivery.carrier.template.option']
 
-        xmlid = 'delivery_carrier_label_postlogistics', 'postlogistics'
-        postlogistics_partner = ir_model_data_obj.get_object(
-            cr, uid, *xmlid, context=context)
+        xmlid = 'delivery_carrier_label_postlogistics.postlogistics'
+        postlogistics_partner = self.env.ref(xmlid)
 
         for service_code, data in additional_services.iteritems():
+            options = carrier_option_obj.search(
+                [('code', '=', service_code),
+                 ('postlogistics_type', '=', 'delivery')
+                 ]
+            )
 
-            option_ids = carrier_option_obj.search(cr, uid, [
-                ('code', '=', service_code),
-                ('postlogistics_type', '=', 'delivery')
-                ], context=context)
-
-            if option_ids:
-                carrier_option_obj.write(cr, uid, option_ids, data,
-                                         context=context)
+            if options:
+                options.write(data)
             else:
                 data.update(code=service_code,
                             postlogistics_type='delivery',
                             partner_id=postlogistics_partner.id)
-                carrier_option_obj.create(cr, uid, data, context=context)
-        lang = context.get('lang', 'en')
-        _logger.info("Updated delivery instrutions. [%s]" % (lang))
+                carrier_option_obj.create(data)
+        lang = self.env.context.get('lang', 'en')
+        _logger.info("Updated delivery instructions. [%s]", lang)
 
-    def _get_additional_services(self, cr, uid, ids, web_service,
-                                 company, service_code, context=None):
-        if context is None:
-            context = {}
-
-        lang = context.get('lang', 'en')
+    @api.model
+    def _get_additional_services(self, web_service, company, service_code):
+        lang = self.env.context.get('lang', 'en')
         service_code_list = service_code.split(',')
-        res = web_service.read_additional_services(company, service_code_list,
+        res = web_service.read_additional_services(company,
+                                                   service_code_list,
                                                    lang)
         if 'errors' in res:
             errors = '\n'.join(res['errors'])
-            error_message = 'Could not retrieve Postlogistics base services:\n%s' % (errors,)
-            raise orm.except_orm('Error', error_message)
+            error_message = (_('Could not retrieve Postlogistics base '
+                               'services:\n%s') % errors)
+            raise exceptions.Warning(error_message)
 
         if not res['value']:
             return {}
@@ -216,7 +149,7 @@ class PostlogisticsConfigSettings(orm.TransientModel):
         if hasattr(res['value'], 'Errors') and res['value'].Errors:
             for error in res['value'].Errors.Error:
                 message = '[%s] %s' % (error.Code, error.Message)
-            raise orm.except_orm('Error', message)
+            raise exceptions.Warning(message)
 
         additional_services = {}
         for service in res['value'].AdditionalService:
@@ -225,138 +158,122 @@ class PostlogisticsConfigSettings(orm.TransientModel):
 
         return additional_services
 
-    def _update_additional_services(self, cr, uid, ids, web_service,
-                                    additional_services, context=None):
-        if context is None:
-            context = {}
-        ir_model_data_obj = self.pool.get('ir.model.data')
-        carrier_option_obj = self.pool.get('delivery.carrier.template.option')
+    @api.model
+    def _update_additional_services(self, web_service, additional_services):
+        carrier_option_obj = self.env['delivery.carrier.template.option']
 
-        postlogistics_partner = ir_model_data_obj.get_object(
-            cr, uid, 'delivery_carrier_label_postlogistics', 'postlogistics',
-            context=context)
+        xmlid = 'delivery_carrier_label_postlogistics.postlogistics'
+        postlogistics_partner = self.env.ref(xmlid)
 
         for service_code, data in additional_services.iteritems():
+            options = carrier_option_obj.search(
+                [('code', '=', service_code),
+                 ('postlogistics_type', '=', 'additional')
+                 ])
 
-            option_ids = carrier_option_obj.search(cr, uid, [
-                ('code', '=', service_code),
-                ('postlogistics_type', '=', 'additional')
-                ], context=context)
-
-            if option_ids:
-                carrier_option_obj.write(cr, uid, option_ids, data,
-                                         context=context)
+            if options:
+                options.write(data)
             else:
                 data.update(code=service_code,
                             postlogistics_type='additional',
                             partner_id=postlogistics_partner.id)
-                carrier_option_obj.create(cr, uid, data, context=context)
-        lang = context.get('lang', 'en')
-        _logger.info("Updated additional services [%s]" % (lang))
+                carrier_option_obj.create(data)
+        lang = self.env.context.get('lang', 'en')
+        _logger.info("Updated additional services [%s]", lang)
 
-    def _update_basic_services(self, cr, uid, ids, web_service, company,
-                               group_id, context=None):
+    @api.model
+    def _update_basic_services(self, web_service, company, group):
         """ Update of basic services
 
         A basic service can be part only of one service group
+
         :return: {additional_services: {<service_code>: service_data}
                   delivery_instructions: {<service_code>: service_data}
                   }
+
         """
-        if context is None:
-            context = {}
-        ir_model_data_obj = self.pool.get('ir.model.data')
-        service_group_obj = self.pool.get('postlogistics.service.group')
-        carrier_option_obj = self.pool.get('delivery.carrier.template.option')
+        carrier_option_obj = self.env['delivery.carrier.template.option']
 
-        xmlid = 'delivery_carrier_label_postlogistics', 'postlogistics'
-        postlogistics_partner = ir_model_data_obj.get_object(
-            cr, uid, *xmlid, context=context)
-        lang = context.get('lang', 'en')
-
-        group = service_group_obj.browse(cr, uid, group_id, context=context)
+        xmlid = 'delivery_carrier_label_postlogistics.postlogistics'
+        postlogistics_partner = self.env.ref(xmlid)
+        lang = self.env.context.get('lang', 'en')
 
         res = web_service.read_basic_services(company, group.group_extid, lang)
         if 'errors' in res:
             errors = '\n'.join(res['errors'])
-            error_message = 'Could not retrieve Postlogistics base services:\n%s' % (errors,)
-            raise orm.except_orm('Error', error_message)
+            error_message = (_('Could not retrieve Postlogistics base '
+                               'services:\n%s') % errors)
+            raise exceptions.Warning(error_message)
 
         additional_services = {}
         delivery_instructions = {}
         # Create or update basic service
         for service in res['value'].BasicService:
             service_code = ','.join(service.PRZL)
-            option_ids = carrier_option_obj.search(cr, uid, [
-                ('code', '=', service_code),
-                ('postlogistics_service_group_id', '=', group_id),
-                ('postlogistics_type', '=', 'basic')
-                ], context=context)
+            options = carrier_option_obj.search(
+                [('code', '=', service_code),
+                 ('postlogistics_service_group_id', '=', group.id),
+                 ('postlogistics_type', '=', 'basic')
+                 ]
+            )
             data = {'name': service.Description}
-            if option_ids:
-                carrier_option_obj.write(cr, uid, option_ids, data,
-                                         context=context)
-                option_id = option_ids[0]
+            if options:
+                options.write(data)
+                option = options[0]
             else:
                 data.update(code=service_code,
-                            postlogistics_service_group_id=group_id,
+                            postlogistics_service_group_id=group.id,
                             partner_id=postlogistics_partner.id,
                             postlogistics_type='basic')
-                option_id = carrier_option_obj.create(cr, uid, data,
-                                                      context=context)
+                option = carrier_option_obj.create(data)
 
             # Get related services
-            allowed_services = self._get_additional_services(
-                cr, uid, ids, web_service, company, service_code,
-                context=context)
+            allowed_services = self._get_additional_services(web_service,
+                                                             company,
+                                                             service_code)
             for key, value in additional_services.iteritems():
                 if key in allowed_services:
-                    (additional_services[key]
-                                        ['postlogistics_basic_service_ids']
-                                        [0]
-                                        [2]).append(option_id)
+                    field = 'postlogistics_basic_service_ids'
+                    additional_services[key][field][0][2].append(option.id)
                     del allowed_services[key]
             for key, value in allowed_services.iteritems():
-                value['postlogistics_basic_service_ids'] = [
-                    (6, 0, [option_id])]
+                field = 'postlogistics_basic_service_ids'
+                value[field] = [(6, 0, [option.id])]
                 additional_services[key] = value
 
-            allowed_services = self._get_delivery_instructions(
-                cr, uid, ids, web_service, company, service_code,
-                context=context)
+            allowed_services = self._get_delivery_instructions(web_service,
+                                                               company,
+                                                               service_code)
             for key, value in delivery_instructions.iteritems():
                 if key in allowed_services:
-                    (delivery_instructions[key]
-                                          ['postlogistics_basic_service_ids']
-                                          [0]
-                                          [2]).append(option_id)
+                    field = 'postlogistics_basic_service_ids'
+                    delivery_instructions[key][field][0][2].append(option.id)
                     del allowed_services[key]
             for key, value in allowed_services.iteritems():
-                value['postlogistics_basic_service_ids'] = [
-                    (6, 0, [option_id])]
+                field = 'postlogistics_basic_service_ids'
+                value[field] = [(6, 0, [option.id])]
                 delivery_instructions[key] = value
 
-        _logger.info("Updated '%s' basic service [%s]." % (group.name, lang))
+        _logger.info("Updated '%s' basic service [%s].", group.name, lang)
         return {'additional_services': additional_services,
                 'delivery_instructions': delivery_instructions}
 
-    def _update_service_groups(self, cr, uid, ids, web_service, company,
-                               context=None):
+    @api.model
+    def _update_service_groups(self, web_service, company):
         """ Also updates additional services and delivery instructions
         as they are shared between groups
 
         """
-        if context is None:
-            context = {}
-        service_group_obj = self.pool.get('postlogistics.service.group')
+        service_group_obj = self.env['postlogistics.service.group']
 
-        lang = context.get('lang', 'en')
+        lang = self.env.context.get('lang', 'en')
 
         res = web_service.read_service_groups(company, lang)
         if 'errors' in res:
             errors = '\n'.join(res['errors'])
-            error_message = 'Could not retrieve Postlogistics group services:\n%s' % (errors,)
-            raise orm.except_orm('Error', error_message)
+            error_message = (_('Could not retrieve Postlogistics group '
+                               'services:\n%s') % errors)
+            raise exceptions.Warning(error_message)
 
         additional_services = {}
         delivery_instructions = {}
@@ -364,109 +281,91 @@ class PostlogisticsConfigSettings(orm.TransientModel):
         # Create or update groups
         for group in res['value'].ServiceGroup:
             group_extid = group.ServiceGroupID
-            group_ids = service_group_obj.search(
-                cr, uid, [('group_extid', '=', group_extid)], context=context)
+            groups = service_group_obj.search(
+                [('group_extid', '=', group_extid)],
+            )
             data = {'name': group.Description}
-            if group_ids:
-                service_group_obj.write(cr, uid, group_ids, data,
-                                        context=context)
-                group_id = group_ids[0]
+            if groups:
+                groups.write(data)
+                group = groups[0]
             else:
                 data['group_extid'] = group_extid
-                group_id = service_group_obj.create(cr, uid, data,
-                                                    context=context)
+                group = service_group_obj.create(data)
 
             # Get related services for all basic services of this group
-            res = self._update_basic_services(cr, uid, ids, web_service,
-                                              company, group_id,
-                                              context=context)
+            res = self._update_basic_services(web_service, company, group)
 
             allowed_services = res.get('additional_services', {})
             for key, value in additional_services.iteritems():
                 if key in allowed_services:
-                    a = allowed_services[key]
-                    option_ids = a['postlogistics_basic_service_ids'][0][2]
-                    (additional_services[key]
-                                        ['postlogistics_basic_service_ids']
-                                        [0]
-                                        [2]).extend(option_ids)
+                    field = 'postlogistics_basic_service_ids'
+                    option_ids = allowed_services[key][field][0][2]
+                    additional_services[key][field][0][2].extend(option_ids)
                     del allowed_services[key]
             additional_services.update(allowed_services)
 
             allowed_services = res.get('delivery_instructions', {})
             for key, value in delivery_instructions.iteritems():
                 if key in allowed_services:
-                    a = allowed_services[key]
-                    option_ids = a['postlogistics_basic_service_ids'][0][2]
-                    (delivery_instructions[key]
-                                          ['postlogistics_basic_service_ids']
-                                          [0]
-                                          [2]).extend(option_ids)
+                    field = 'postlogistics_basic_service_ids'
+                    option_ids = allowed_services[key][field][0][2]
+                    delivery_instructions[key][field][0][2].extend(option_ids)
                     del allowed_services[key]
             delivery_instructions.update(allowed_services)
 
         # Update related services
-        self._update_additional_services(cr, uid, ids, web_service,
-                                         additional_services, context=context)
-        self._update_delivery_instructions(cr, uid, ids, web_service,
-                                           delivery_instructions,
-                                           context=context)
+        self._update_additional_services(web_service, additional_services)
+        self._update_delivery_instructions(web_service,
+                                           delivery_instructions,)
 
-    def update_postlogistics_options(self, cr, uid, ids, context=None):
-        """
-        This action will update all postlogistics option by importing services
-        from PostLogistics WebService API
+    @api.multi
+    def update_postlogistics_options(self):
+        """ This action will update all postlogistics option by
+        importing services from PostLogistics WebService API
 
         The object we create are 'delivey.carrier.template.option'
+
         """
-        if context is None:
-            context = {}
-        for config in self.browse(cr, uid, ids, context=context):
+        for config in self:
             company = config.company_id
             web_service = PostlogisticsWebService(company)
 
             # make sure we create source text in en_US
-            ctx = context.copy()
+            ctx = self.env.context.copy()
             ctx['lang'] = 'en_US'
-            self._update_service_groups(cr, uid, ids, web_service, company,
-                                        context=ctx)
+            self._update_service_groups(web_service, company)
 
-            language_obj = self.pool.get('res.lang')
-            language_ids = language_obj.search(cr, uid, [], context=context)
-
-            languages = language_obj.browse(cr, uid, language_ids,
-                                            context=context)
+            language_obj = self.env['res.lang']
+            languages = language_obj.search([])
 
             # handle translations
-            # we call the same methode with a different language context
-            for lang_br in languages:
-                lang = lang_br.code
-                ctx = context.copy()
-                ctx['lang'] = lang_br.code
-                postlogistics_lang = web_service._get_language(lang)
+            # we call the same method with a different language context
+            for lang in languages:
+                lang_code = lang.code
+                postlogistics_lang = web_service._get_language(lang_code)
                 # add translations only for languages that exists on
-                # postlogistics english source will be kept for other languages
+                # postlogistics, english source will be kept for other
+                # languages
                 if postlogistics_lang == 'en':
                     continue
-                self._update_service_groups(cr, uid, ids, web_service, company,
-                                            context=ctx)
+                self.with_context(lang=lang_code)._update_service_groups(
+                    web_service, company
+                )
         return True
 
+    @api.model
     def _get_allowed_service_group_codes(self, web_service, company,
-                                         license, context=None):
+                                         cp_license):
         """ Get a list of allowed service group codes"""
-        if context is None:
-            context = {}
-
-        lang = context.get('lang', 'en')
+        lang = self.env.context.get('lang', 'en')
         res = web_service.read_allowed_services_by_franking_license(
-            license.number, company, lang)
+            cp_license.number, company, lang)
         if 'errors' in res:
             errors = '\n'.join(res['errors'])
             error_message = (_('Could not retrieve allowed Postlogistics '
                                'service groups for the %s licence:\n%s')
-                               % (license.name, errors))
-            raise orm.except_orm(_('Error'), error_message)
+                             % (cp_license.name, errors))
+            raise exceptions.Warning(error_message)
 
         if not res['value']:
             return []
@@ -474,7 +373,7 @@ class PostlogisticsConfigSettings(orm.TransientModel):
         if hasattr(res['value'], 'Errors') and res['value'].Errors:
             for error in res['value'].Errors.Error:
                 message = '[%s] %s' % (error.Code, error.Message)
-            raise orm.except_orm('Error', message)
+            raise exceptions.Warning(message)
 
         service_group_codes = []
         for group in res['value'].ServiceGroups:
@@ -482,34 +381,27 @@ class PostlogisticsConfigSettings(orm.TransientModel):
 
         return service_group_codes
 
-    def assign_licenses_to_service_groups(self, cr, uid, ids, context=None):
+    @api.multi
+    def assign_licenses_to_service_groups(self):
         """ Check all licenses to assign it to PostLogistics service groups """
-
-        if context is None:
-            context = {}
-
-        user_obj = self.pool.get('res.users')
-        service_group_obj = self.pool.get('postlogistics.service.group')
-        for config in self.browse(cr, uid, ids, context=context):
+        service_group_obj = self.env['postlogistics.service.group']
+        license_obj = self.env['postlogistics.license']
+        for config in self:
             company = config.company_id
             web_service = PostlogisticsWebService(company)
 
             relations = {}
-            for license in company.postlogistics_license_ids:
+            for cp_license in company.postlogistics_license_ids:
                 service_groups = self._get_allowed_service_group_codes(
-                    web_service, company, license, context=context)
-                group_ids = service_group_obj.search(
-                        cr, uid, [('group_extid', 'in', service_groups)],
-                        context=context)
-                for group_id in group_ids:
-                    if group_id in relations:
-                        relations[group_id].append(license.id)
-                    else:
-                        relations[group_id] = [license.id]
-            for group_id, license_ids in relations.iteritems():
-                vals = {'postlogistics_license_ids': [(6, 0, license_ids)]}
-                service_group_obj.write(cr, uid, group_id, vals,
-                                        context=context)
-
-
+                    web_service, company, cp_license
+                )
+                groups = service_group_obj.search(
+                    [('group_extid', 'in', service_groups)],
+                )
+                for group in groups:
+                    relations.setdefault(group, license_obj.browse())
+                    relations[group] |= cp_license
+            for group, licenses in relations.iteritems():
+                vals = {'postlogistics_license_ids': [(6, 0, licenses.ids)]}
+                group.write(vals)
         return True
