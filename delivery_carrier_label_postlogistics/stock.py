@@ -20,101 +20,120 @@
 ##############################################################################
 from operator import attrgetter
 
-from openerp.osv import orm
+from openerp import models, api, exceptions, _
 
-from postlogistics.web_service import PostlogisticsWebService
+from .postlogistics.web_service import PostlogisticsWebService
 
 
-class stock_picking(orm.Model):
+class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
-    def _generate_postlogistics_label(self, cr, uid, picking,
-                                      webservice_class=None,
-                                      tracking_ids=None, context=None):
+    @api.multi
+    def postlogistics_cod_amount(self):
+        """ Return the Postlogistic Cash on Delivery amount of a picking
+
+        If the picking delivers the whole sales order, we use the total
+        amount of the sales order.
+
+        Otherwise, we don't know the value of each picking so we raise
+        an error.  The user has to create packages with the cash on
+        delivery price on each package.
+        """
+        self.ensure_one()
+        order = self.sale_id
+        if not order:
+            return 0.0
+        if len(order) > 1:
+            raise exceptions.Warning(
+                _('The cash on delivery amount must be manually specified '
+                  'on the packages when a package contains products '
+                  'from different sales orders.')
+            )
+        order_moves = order.mapped('order_line.procurement_ids.move_ids')
+        picking_moves = self.move_lines
+        # check if the package delivers the whole sales order
+        if order_moves != picking_moves:
+            raise exceptions.Warning(
+                _('The cash on delivery amount must be manually specified '
+                  'on the packages when a sales order is delivered '
+                  'in several delivery orders.')
+            )
+        return order.amount_total
+
+    @api.multi
+    def _generate_postlogistics_label(self, webservice_class=None,
+                                      package_ids=None):
         """ Generate labels and write tracking numbers received """
-        user_obj = self.pool.get('res.users')
-        user = user_obj.browse(cr, uid, uid, context=context)
+        self.ensure_one()
+        user = self.env.user
         company = user.company_id
         if webservice_class is None:
             webservice_class = PostlogisticsWebService
 
-        if tracking_ids is None:
-            # get all the trackings of the picking
-            # no tracking_id wil return a False, meaning that
-            # we want a label for the picking
-            trackings = sorted(set(
-                line.tracking_id for line in picking.move_lines
-            ), key=attrgetter('name'))
+        if package_ids is None:
+            packages = self._get_packages_from_picking()
+            packages = sorted(packages, key=attrgetter('name'))
         else:
-            # restrict on the provided trackings
-            tracking_obj = self.pool['stock.tracking']
-            trackings = tracking_obj.browse(cr, uid, tracking_ids,
-                                            context=context)
+            # restrict on the provided packages
+            package_obj = self.env['stock.quant.package']
+            packages = package_obj.browse(package_ids)
 
         web_service = webservice_class(company)
-        res = web_service.generate_label(picking,
-                                         trackings,
+        res = web_service.generate_label(self,
+                                         packages,
                                          user_lang=user.lang)
 
         if 'errors' in res:
-            raise orm.except_orm('Error', '\n'.join(res['errors']))
+            raise exceptions.Warning('\n'.join(res['errors']))
+
+        def info_from_label(label):
+            tracking_number = label['tracking_number']
+            return {'file': label['binary'].decode('base64'),
+                    'file_type': label['file_type'],
+                    'name': tracking_number + '.' + label['file_type'],
+                    }
 
         labels = []
         # if there are no pack defined, write tracking_number on picking
-        # otherwise, write it on serial field of each pack
-        for track in trackings:
-            if not track:
-                # ignore lines without tracking when there is tracking
-                # in a picking
-                # Example: if I have 1 move with a tracking and 1
-                # without, I will have [False, a_tracking] in
-                # `trackings`. In that case, we are using packs, not the
-                # picking for the tracking numbers.
-                if len(trackings) > 1:
-                    continue
-                label = res['value'][0]
-                tracking_number = label['tracking_number']
-                self.write(cr, uid, picking.id,
-                           {'carrier_tracking_ref': tracking_number},
-                           context=context)
-            else:
-                label = None
-                for search_label in res['value']:
-                    if track.name in search_label['item_id'].split('+')[-1]:
-                        label = search_label
-                        tracking_number = label['tracking_number']
-                        track.write({'serial': tracking_number})
-                        break
-            labels.append({'tracking_id': track.id if track else False,
-                           'file': label['binary'].decode('base64'),
-                           'file_type': label['file_type'],
-                           'name': tracking_number + '.' + label['file_type'],
-                           })
+        # otherwise, write it on parcel_tracking field of each pack
+        if not packages:
+            label = res['value'][0]
+            tracking_number = label['tracking_number']
+            self.carrier_tracking_ref = tracking_number
+            info = info_from_label(label)
+            info['package_id'] = False
+            labels.append(info)
+
+        for package in packages:
+            label = None
+            for search_label in res['value']:
+                if package.name in search_label['item_id'].split('+')[-1]:
+                    label = search_label
+                    tracking_number = label['tracking_number']
+                    package.parcel_tracking = tracking_number
+                    break
+            info = info_from_label(label)
+            info['package_id'] = package.id
+            labels.append(info)
 
         return labels
 
-    def generate_shipping_labels(self, cr, uid, ids, tracking_ids=None,
-                                 context=None):
+    @api.multi
+    def generate_shipping_labels(self, package_ids=None):
         """ Add label generation for Postlogistics """
-        if isinstance(ids, (long, int)):
-            ids = [ids]
-        assert len(ids) == 1
-        picking = self.browse(cr, uid, ids[0], context=context)
-        if picking.carrier_id.type == 'postlogistics':
-            return self._generate_postlogistics_label(
-                cr, uid, picking,
-                tracking_ids=tracking_ids,
-                context=context)
-        return super(stock_picking, self).\
-            generate_shipping_labels(cr, uid, ids, tracking_ids=tracking_ids,
-                                     context=context)
+        self.ensure_one()
+        if self.carrier_id.type == 'postlogistics':
+            return self._generate_postlogistics_label(package_ids=package_ids)
+        _super = super(StockPicking, self)
+        return _super.generate_shipping_labels(package_ids=package_ids)
 
 
-class ShippingLabel(orm.Model):
+class ShippingLabel(models.Model):
     """ Child class of ir attachment to identify which are labels """
     _inherit = 'shipping.label'
 
-    def _get_file_type_selection(self, cr, uid, context=None):
+    @api.model
+    def _get_file_type_selection(self):
         """ Return a concatenated list of extensions of label file format
         plus file format from super
 
@@ -123,14 +142,13 @@ class ShippingLabel(orm.Model):
         :return: list of tuple (code, name)
 
         """
-        file_types = super(ShippingLabel, self
-                           )._get_file_type_selection(cr, uid, context=context)
+        file_types = super(ShippingLabel, self)._get_file_type_selection()
         new_types = [('eps', 'EPS'),
                      ('gif', 'GIF'),
                      ('jpg', 'JPG'),
                      ('png', 'PNG'),
                      ('pdf', 'PDF'),
-                     ('spdf', 'sPDF'), # sPDF is a pdf without integrated font
+                     ('spdf', 'sPDF'),  # sPDF is a pdf without integrated font
                      ('zpl2', 'ZPL2')]
         file_types.extend(new_types)
         return file_types
