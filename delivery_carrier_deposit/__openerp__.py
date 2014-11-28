@@ -56,6 +56,7 @@ Contributors
         'ir_sequence_data.xml',
         'report/report.xml',
         'security/ir.model.access.csv',
+        'security/model_security.xml',
     ],
     'demo': [],
     'installable': True,
