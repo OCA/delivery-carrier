@@ -18,41 +18,43 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp.osv import orm, fields
+from openerp import models, fields, api
 
 
-class PostlogisticsLicense(orm.Model):
+class PostlogisticsLicense(models.Model):
     _name = 'postlogistics.license'
     _description = 'PostLogistics Franking License'
 
     _order = 'sequence'
 
-    _columns = {
-        'name': fields.char('Description', translate=True, required=True),
-        'number': fields.char('Number', required=True),
-        'company_id': fields.many2one('res.company', 'Company', required=True),
-        'sequence': fields.integer(
-            'Sequence',
-            help="Gives the sequence on company to define priority on license"
-                 " when multiple license are available for the same group of "
-                 "service."),
-    }
+    name = fields.Char(string='Description',
+                       translate=True,
+                       required=True)
+    number = fields.Char(string='Number',
+                         required=True)
+    company_id = fields.Many2one(comodel_name='res.company',
+                                 string='Company',
+                                 required=True)
+    sequence = fields.Integer(
+        string='Sequence',
+        help="Gives the sequence on company to define priority on license "
+             "when multiple license are available for the same group of "
+             "service."
+    )
 
 
-class PostlogisticsServiceGroup(orm.Model):
+class PostlogisticsServiceGroup(models.Model):
     _name = 'postlogistics.service.group'
     _description = 'PostLogistics Service Group'
 
-    _columns = {
-        'name': fields.char('Description', translate=True, required=True),
-        'group_extid': fields.integer('Group ID', required=True),
-        'postlogistics_license_ids': fields.many2many(
-            'postlogistics.license',
-            'postlogistics_license_service_groups_rel',
-            'license_id',
-            'group_id',
-            'PostLogistics Frankling License'),
-    }
+    name = fields.Char(string='Description', translate=True, required=True)
+    group_extid = fields.Integer(string='Group ID', required=True)
+    postlogistics_license_ids = fields.Many2many(
+        comodel_name='postlogistics.license',
+        relation='postlogistics_license_service_groups_rel',
+        column1='license_id',
+        column2='group_id',
+        string='PostLogistics Frankling License')
 
     _sql_constraints = [
         ('group_extid_uniq', 'unique(group_extid)',
@@ -70,102 +72,100 @@ POSTLOGISTIC_TYPES = [
 ]
 
 
-class DeliveryCarrierTemplateOption(orm.Model):
-
+class DeliveryCarrierTemplateOption(models.Model):
     """ Set name translatable and add service group """
     _inherit = 'delivery.carrier.template.option'
 
-    _columns = {
-        'name': fields.char('Name', size=64, translate=True),
-        'postlogistics_service_group_id': fields.many2one(
-            'postlogistics.service.group',
-            string='PostLogistics Service Group'),
-        'postlogistics_type': fields.selection(
-            POSTLOGISTIC_TYPES,
-            string="PostLogistics option type"),
-        # relation tables to manage compatiblity between basic services
-        # and other services
-        'postlogistics_basic_service_ids': fields.many2many(
-            'delivery.carrier.template.option',
-            'postlogistics_compatibility_service_rel',
-            'service_id', 'basic_service_id',
-            string="Basic Services",
-            domain=[('postlogistics_type', '=', 'basic')],
-            help="List of basic service for which this service is compatible"),
-        'postlogistics_additonial_service_ids': fields.many2many(
-            'delivery.carrier.template.option',
-            'postlogistics_compatibility_service_rel',
-            'basic_service_id', 'service_id',
-            string="Compatible Additional Services",
-            domain=[('postlogistics_type', '=', 'additional')]),
-        'postlogistics_delivery_instruction_ids': fields.many2many(
-            'delivery.carrier.template.option',
-            'postlogistics_compatibility_service_rel',
-            'basic_service_id', 'service_id',
-            string="Compatible Delivery Instructions",
-            domain=[('postlogistics_type', '=', 'delivery')]),
-    }
+    name = fields.Char(translate=True)
+    postlogistics_service_group_id = fields.Many2one(
+        comodel_name='postlogistics.service.group',
+        string='PostLogistics Service Group',
+    )
+    postlogistics_type = fields.Selection(
+        selection=POSTLOGISTIC_TYPES,
+        string="PostLogistics option type",
+    )
+    # relation tables to manage compatiblity between basic services
+    # and other services
+    postlogistics_basic_service_ids = fields.Many2many(
+        comodel_name='delivery.carrier.template.option',
+        relation='postlogistics_compatibility_service_rel',
+        column1='service_id',
+        column2='basic_service_id',
+        string="Basic Services",
+        domain=[('postlogistics_type', '=', 'basic')],
+        help="List of basic service for which this service is compatible",
+    )
+    postlogistics_additonial_service_ids = fields.Many2many(
+        comodel_name='delivery.carrier.template.option',
+        relation='postlogistics_compatibility_service_rel',
+        column1='basic_service_id',
+        column2='service_id',
+        string="Compatible Additional Services",
+        domain=[('postlogistics_type', '=', 'additional')],
+    )
+    postlogistics_delivery_instruction_ids = fields.Many2many(
+        comodel_name='delivery.carrier.template.option',
+        relation='postlogistics_compatibility_service_rel',
+        column1='basic_service_id',
+        column2='service_id',
+        string="Compatible Delivery Instructions",
+        domain=[('postlogistics_type', '=', 'delivery')],
+    )
 
-    _defaults = {
-        'postlogistics_type': False,
-    }
 
-
-class DeliveryCarrierOption(orm.Model):
-
+class DeliveryCarrierOption(models.Model):
     """ Set name translatable and add service group """
     _inherit = 'delivery.carrier.option'
 
-    _columns = {
-        'name': fields.char('Name', size=64, translate=True),
-        # to repeat carrier allowed option ids to filter domain set by
-        # default from view
-        'allowed_option_ids': fields.related(
-            'carrier_id', 'allowed_option_ids', type='many2many',
-            relation='delivery.carrier.template.option',
-            string='Allowed and compatible options',
-            readonly=True),
-    }
+    name = fields.Char(translate=True),
+    # to repeat carrier allowed option ids to filter domain set by
+    # default from view
+    allowed_option_ids = fields.Many2many(
+        related='carrier_id.allowed_option_ids',
+        readonly=True
+    )
 
 
-class DeliveryCarrier(orm.Model):
-
+class DeliveryCarrier(models.Model):
     """ Add service group """
     _inherit = 'delivery.carrier'
 
-    def _get_carrier_type_selection(self, cr, uid, context=None):
+    @api.model
+    def _get_carrier_type_selection(self):
         """ Add postlogistics carrier type """
-        res = super(DeliveryCarrier, self
-                    )._get_carrier_type_selection(cr, uid, context=context)
+        res = super(DeliveryCarrier, self)._get_carrier_type_selection()
         res.append(('postlogistics', 'Postlogistics'))
         return res
 
-    def _get_basic_service_ids(self, cr, uid, ids, field_names, arg,
-                               context=None):
+    @api.depends('partner_id',
+                 'available_option_ids',
+                 'available_option_ids.tmpl_option_id',
+                 'available_option_ids.postlogistics_type',
+                 )
+    def _get_basic_service_ids(self):
         """ Search in all options for PostLogistics basic services if set """
-        res = {}
-        for carrier_id in ids:
-            res[carrier_id] = []
-        ir_model_data_obj = self.pool.get('ir.model.data')
-
-        xmlid = 'delivery_carrier_label_postlogistics', 'postlogistics'
-        postlogistics_partner = ir_model_data_obj.get_object(
-            cr, uid, *xmlid, context=context)
-
-        for carrier in self.browse(cr, uid, ids, context=context):
-            if not carrier.partner_id.id == postlogistics_partner.id:
+        xmlid = 'delivery_carrier_label_postlogistics.postlogistics'
+        postlogistics_partner = self.env.ref(xmlid)
+        for carrier in self:
+            if carrier.partner_id != postlogistics_partner:
                 continue
 
-            option_ids = [opt.tmpl_option_id.id for opt
-                          in carrier.available_option_ids
-                          if opt.postlogistics_type == 'basic']
-            if not option_ids:
+            options = [opt.tmpl_option_id for opt
+                       in carrier.available_option_ids
+                       if opt.postlogistics_type == 'basic']
+            if not options:
                 continue
-            res[carrier.id] = option_ids
-        return res
+            self.postlogistics_basic_service_ids = options
 
-    def _get_allowed_option_ids(self, cr, uid, ids, field_names, arg,
-                                context=None):
+    @api.depends('partner_id',
+                 'postlogistics_service_group_id',
+                 'postlogistics_basic_service_ids',
+                 'postlogistics_basic_service_ids',
+                 'available_option_ids',
+                 'available_option_ids.postlogistics_type',
+                 )
+    def _get_allowed_option_ids(self):
         """ Return a list of possible options
 
         A domain would be too complicated.
@@ -173,82 +173,72 @@ class DeliveryCarrier(orm.Model):
         We do this to ensure the user first select a basic service. And
         then he adds additional services.
 
-        :return: {carrier_id: [ids]}
-
         """
-        res = dict.fromkeys(ids, [])
-        option_template_obj = self.pool.get('delivery.carrier.template.option')
-        ir_model_data_obj = self.pool.get('ir.model.data')
+        option_template_obj = self.env['delivery.carrier.template.option']
 
-        xmlid = 'delivery_carrier_label_postlogistics', 'postlogistics'
-        postlogistics_partner = ir_model_data_obj.get_object(
-            cr, uid, *xmlid, context=context)
+        xmlid = 'delivery_carrier_label_postlogistics.postlogistics'
+        postlogistics_partner = self.env.ref(xmlid)
 
-        for carrier in self.browse(cr, uid, ids, context=context):
-            allowed_ids = []
-            if not carrier.partner_id.id == postlogistics_partner.id:
+        for carrier in self:
+            allowed = option_template_obj.browse()
+            if carrier.partner_id != postlogistics_partner:
                 continue
-            service_group_id = carrier.postlogistics_service_group_id.id
-            if service_group_id:
-                basic_service_ids = [
-                    s.id for s in carrier.postlogistics_basic_service_ids]
-                service_ids = option_template_obj.search(
-                    cr, uid,
-                    [('postlogistics_service_group_id',
-                      '=',
-                      service_group_id)],
-                    context=context)
-                allowed_ids.extend(service_ids)
-                if basic_service_ids:
-                    related_service_ids = option_template_obj.search(
-                        cr, uid,
-                        [('postlogistics_basic_service_ids',
-                          'in',
-                          basic_service_ids)],
-                        context=context)
-                    allowed_ids.extend(related_service_ids)
+
+            service_group = carrier.postlogistics_service_group_id
+            if service_group:
+                basic_services = carrier.postlogistics_basic_service_ids
+                services = option_template_obj.search(
+                    [('postlogistics_service_group_id', '=', service_group.id)]
+                )
+                allowed |= services
+                if basic_services:
+                    related_services = option_template_obj.search(
+                        [('postlogistics_basic_service_ids', 'in',
+                          basic_services.ids)]
+                    )
+                    allowed |= related_services
 
             # Allows to set multiple optional single option in order to
             # let the user select them
             single_option_types = [
                 'label_layout',
                 'output_format',
-                'resolution']
+                'resolution',
+            ]
             selected_single_options = [
                 opt.tmpl_option_id.postlogistics_type
                 for opt in carrier.available_option_ids
                 if opt.postlogistics_type in single_option_types
                 and opt.state in ['mandatory']]
             if selected_single_options != single_option_types:
-                service_ids = option_template_obj.search(
-                    cr, uid,
+                services = option_template_obj.search(
                     [('postlogistics_type', 'in', single_option_types),
-                     ('postlogistics_type',
-                      'not in', selected_single_options)],
-                    context=context)
-                allowed_ids.extend(service_ids)
-            res[carrier.id] = allowed_ids
-        return res
+                     ('postlogistics_type', 'not in',
+                      selected_single_options)],
+                )
+                allowed |= services
+            self.allowed_option_ids = services
 
-    _columns = {
-        'postlogistics_license_id': fields.many2one(
-            'postlogistics.license',
-            string='PostLogistics Frankling License'),
-        'postlogistics_service_group_id': fields.many2one(
-            'postlogistics.service.group',
-            string='PostLogistics Service Group',
-            help="Service group defines the available options for "
-                 "this delivery method."),
-        'postlogistics_basic_service_ids': fields.function(
-            _get_basic_service_ids, type='one2many',
-            relation='delivery.carrier.template.option',
-            string='PostLogistics Service Group',
-            help="Basic Service defines the available "
-                 "additional options for this delivery method",
-            readonly=True),
-        'allowed_option_ids': fields.function(
-            _get_allowed_option_ids, type="many2many",
-            relation='delivery.carrier.template.option',
-            string='Allowed options',
-            help="Compute allowed options according to selected options."),
-    }
+    postlogistics_license_id = fields.Many2one(
+        comodel_name='postlogistics.license',
+        string='PostLogistics Frankling License',
+    )
+    postlogistics_service_group_id = fields.Many2one(
+        comodel_name='postlogistics.service.group',
+        string='PostLogistics Service Group',
+        help="Service group defines the available options for "
+             "this delivery method.",
+    )
+    postlogistics_basic_service_ids = fields.One2many(
+        comodel_name='delivery.carrier.template.option',
+        compute='_get_basic_service_ids',
+        string='PostLogistics Service Group',
+        help="Basic Service defines the available "
+             "additional options for this delivery method",
+    )
+    allowed_option_ids = fields.Many2many(
+        comodel_name='delivery.carrier.template.option',
+        compute='_get_allowed_option_ids',
+        string='Allowed options',
+        help="Compute allowed options according to selected options.",
+    )

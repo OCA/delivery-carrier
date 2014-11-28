@@ -31,7 +31,7 @@ class ResCompany(models.Model):
     postlogistics_password = fields.Char('Password')
     postlogistics_license_ids = fields.One2many(
         comodel_name='postlogistics.license',
-        relation='company_id',
+        inverse_name='company_id',
         string='PostLogistics Frankling License',
     )
     postlogistics_logo = fields.Binary(string='Company logo for PostLogistics')
