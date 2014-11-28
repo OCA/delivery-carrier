@@ -22,6 +22,7 @@
 ##############################################################################
 
 from openerp.osv import fields, orm
+from openerp.tools.translate import _
 
 
 class DepositSlip(orm.Model):
@@ -59,11 +60,20 @@ class DepositSlip(orm.Model):
             'Company'),
     }
 
+    def _get_default_company(self, cr, uid, context=None):
+        company_id = self.pool.get('res.users')._get_company(cr, uid, context=context)
+        if not company_id:
+            raise orm.except_orm(
+                _('Error!'),
+                _('There is no default company for the current user!'))
+        return company_id
+
     _defaults = {
         'name': lambda obj, cr, uid, context:
             obj.pool['ir.sequence'].next_by_code(
                 cr, uid, 'delivery.deposit', context=context),
-        'state': 'draft'
+        'state': 'draft',
+        'company_id': _get_default_company,
     }
 
     _sql_constraints = [
