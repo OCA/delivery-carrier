@@ -18,39 +18,42 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp.osv import orm, fields
+from openerp import models, fields
 from openerp.tools import file_open
 
 
-class ResCompany(orm.Model):
+class ResCompany(models.Model):
     _inherit = 'res.company'
 
-    def _get_wsdl_url(self, cr, uid, ids, field_name, arg, context=None):
+    postlogistics_wsdl_url = fields.Char(compute='_get_wsdl_url',
+                                         string='WSDL URL')
+    postlogistics_username = fields.Char('Username')
+    postlogistics_password = fields.Char('Password')
+    postlogistics_license_ids = fields.One2many(
+        comodel_name='postlogistics.license',
+        relation='company_id',
+        string='PostLogistics Frankling License',
+    )
+    postlogistics_logo = fields.Binary(string='Company logo for PostLogistics')
+    postlogistics_office = fields.Char(string='Post office')
+
+    postlogistics_default_label_layout = fields.Many2one(
+        comodel_name='delivery.carrier.template.option',
+        string='Default label layout',
+    )
+    postlogistics_default_output_format = fields.Many2one(
+        comodel_name='delivery.carrier.template.option',
+        string='Default output format',
+    )
+    postlogistics_default_resolution = fields.Many2one(
+        comodel_name='delivery.carrier.template.option',
+        string='Default resolution',
+    )
+
+    def _get_wsdl_url(self):
         wsdl_file, wsdl_path = file_open(
             'delivery_carrier_label_postlogistics/data/barcode_v2_2_wsbc.wsdl',
             pathinfo=True)
         wsdl_url = 'file://' + wsdl_path
-        res = dict.fromkeys(ids, wsdl_url)
-        return res
-
-    _columns = {
-        'postlogistics_wsdl_url': fields.function(
-            _get_wsdl_url,
-            string='WSDL URL',
-            type='char'),
-        'postlogistics_username': fields.char('Username'),
-        'postlogistics_password': fields.char('Password'),
-        'postlogistics_license_ids': fields.one2many(
-            'postlogistics.license',
-            'company_id',
-            'PostLogistics Frankling License'),
-        'postlogistics_logo': fields.binary('Company logo for PostLogistics'),
-        'postlogistics_office': fields.char('Post office'),
-
-        'postlogistics_default_label_layout': fields.many2one(
-            'delivery.carrier.template.option', 'Default label layout'),
-        'postlogistics_default_output_format': fields.many2one(
-            'delivery.carrier.template.option', 'Default output format'),
-        'postlogistics_default_resolution': fields.many2one(
-            'delivery.carrier.template.option', 'Default resolution'),
-    }
+        for company in self:
+            self.postlogistics_wsdl_url = wsdl_url
