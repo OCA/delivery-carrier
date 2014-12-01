@@ -61,12 +61,7 @@ class DepositSlip(orm.Model):
     }
 
     def _get_default_company(self, cr, uid, context=None):
-        company_id = self.pool['res.users']._get_company(cr, uid, context=context)
-        if not company_id:
-            raise orm.except_orm(
-                _('Error!'),
-                _('There is no default company for the current user!'))
-        return company_id
+        return self.pool['res.users']._get_company(cr, uid, context=context)
 
     _defaults = {
         'name': lambda obj, cr, uid, context:
