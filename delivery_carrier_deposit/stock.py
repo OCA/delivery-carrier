@@ -22,7 +22,6 @@
 ##############################################################################
 
 from openerp.osv import fields, orm
-from openerp.tools.translate import _
 
 
 class DepositSlip(orm.Model):
@@ -64,9 +63,9 @@ class DepositSlip(orm.Model):
         return self.pool['res.users']._get_company(cr, uid, context=context)
 
     _defaults = {
-        'name': lambda obj, cr, uid, context:
+        'name': lambda obj, cr, uid, context: (
             obj.pool['ir.sequence'].next_by_code(
-                cr, uid, 'delivery.deposit', context=context),
+                cr, uid, 'delivery.deposit', context=context)),
         'state': 'draft',
         'company_id': _get_default_company,
     }
