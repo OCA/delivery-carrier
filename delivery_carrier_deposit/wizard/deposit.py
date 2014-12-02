@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#   Copyright (C) 2012 Akretion David BEAL <david.beal@akretion.com>
-#   Copyright (C) 2012 Akretion Seb BEAU <sebastien.beau@akretion.com>
-#   Copyright (C) 2013 Akretion Chafique DELLI <chafique.delli@akretion.com>
+#   Copyright (C) 2012-2014 Akretion France (www.akretion.com)
+#   @author: David BEAL <david.beal@akretion.com>
+#   @author: Sebastien BEAU <sebastien.beau@akretion.com>
+#   @author: Chafique DELLI <chafique.delli@akretion.com>
+#   @author: Alexis de Lattre <alexis.delattre@akretion.com>
 #
 #   This program is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU Affero General Public License as
@@ -20,66 +22,60 @@
 #
 ##############################################################################
 
-from openerp.osv import fields, orm
-from openerp.tools.translate import _
+from openerp import fields, models, api, _
+from openerp.exceptions import Warning
 
 
-class DeliveryDepositWizard(orm.TransientModel):
+class DeliveryDepositWizard(models.TransientModel):
     _name = "delivery.deposit.wizard"
     _description = "Wizard to create Deposit Slip"
     _rec_name = 'carrier_type'
 
-    def _get_carrier_type_selection(self, cr, uid, context=None):
-        return self.pool['delivery.carrier']._get_carrier_type_selection(
-            cr, uid, context=context)
+    @api.model
+    def _get_carrier_type_selection(self):
+        return self.env['delivery.carrier']._get_carrier_type_selection()
 
-    _columns = {
-        'carrier_type': fields.selection(
-            _get_carrier_type_selection,
-            'Type',
-            required=True,
-            help="Carrier type (combines several delivery methods)"),
-    }
+    carrier_type = fields.Selection(
+        '_get_carrier_type_selection', string='Delivery Method Type',
+        required=True, help="Carrier type (combines several delivery "
+        "methods). Make sure that the option 'Deposit Slip' is checked on "
+        "the delivery methods that have this carrier type.")
 
-    def _prepare_deposit_slip(self, cr, uid, wizard, context=None):
-        user = self.pool['res.users'].browse(cr, uid, uid, context=context)
+    @api.model
+    def _prepare_deposit_slip(self):
         return {
-            'carrier_type': wizard.carrier_type,
-            'company_id': user.company_id.id
-        }
+            'carrier_type': self.carrier_type,
+            'company_id': self.env.user.company_id.id,
+            }
 
-    def create_deposit_slip(self, cr, uid, ids, context=None):
-        wizard = self.browse(cr, uid, ids[0], context=context)
-        picking_obj = self.pool['stock.picking']
-        deposit_obj = self.pool['deposit.slip']
-        picking_ids = picking_obj.search(
-            cr, uid, [
-                ('carrier_type', '=', wizard.carrier_type),
-                ('deposit_slip_id', '=', False),
-                ('state', '=', 'done'),
-            ], context=context)
-        if picking_ids:
-            vals = self._prepare_deposit_slip(cr, uid, wizard, context=context)
-            deposit_id = deposit_obj.create(cr, uid, vals, context=context)
-            picking_obj.write(
-                cr, uid, picking_ids, {
-                    'deposit_slip_id': deposit_id,
-                }, context=context)
+    @api.multi
+    def create_deposit_slip(self):
+        # I can't set api.one because I return an action
+        assert len(self) == 1, 'only 1 recordset allowed'
+        self = self[0]
+        pickings = self.env['stock.picking'].search([
+            ('carrier_type', '=', self.carrier_type),
+            ('deposit_slip_id', '=', False),
+            ('state', '=', 'done'),
+            ])
+        if pickings:
+            vals = self._prepare_deposit_slip()
+            deposit = self.env['deposit.slip'].create(vals)
+            pickings.write({'deposit_slip_id': deposit.id})
             action = {
                 'name': 'Deposit Slip',
+                'type': 'ir.actions.act_window',
+                'res_model': 'deposit.slip',
                 'view_type': 'form',
                 'view_mode': 'form,tree',
-                'res_id': deposit_id,
-                'view_id': False,
-                'res_model': 'deposit.slip',
-                'type': 'ir.actions.act_window',
+                'res_id': deposit.id,
                 'nodestroy': False,
                 'target': 'current',
             }
             return action
         else:
-            raise orm.except_orm(
-                _("Picking"),
-                _("There is no picking for '%s' carrier \n"
-                  "to gather in a deposit slip")
-                % wizard.carrier_type)
+            raise Warning(
+                _("There are no delivery orders in transferred "
+                    "state with a delivery method type '%s' "
+                    "not already linked to a deposit slip.")
+                % self.carrier_type)

@@ -1,10 +1,12 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#   Copyright (C) 2012 Akretion David BEAL <david.beal@akretion.com>
-#   Copyright (C) 2012 Akretion Sebastien BEAU <sebastien.beau@akretion.com>
-#   Copyright (C) 2012 Akretion Benoit GUILLOT <benoit.guillot@akretion.com>
-#   Copyright (C) 2013 Akretion Chafique DELLI <chafique.delli@akretion.com>
+#   Copyright (C) 2012-2014 Akretion France (www.akretion.com)
+#   @author: David BEAL <david.beal@akretion.com>
+#   @author: Sebastien BEAU <sebastien.beau@akretion.com>
+#   @author: Benoit GUILLOT <benoit.guillot@akretion.com>
+#   @author: Chafique DELLI <chafique.delli@akretion.com>
+#   @author: Alexis de Lattre <alexis.delattre@akretion.com>
 #
 #   This program is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU Affero General Public License as
@@ -21,94 +23,107 @@
 #
 ##############################################################################
 
-from openerp.osv import fields, orm
+from openerp import models, fields, api
+import openerp.addons.decimal_precision as dp
 
 
-class DepositSlip(orm.Model):
+class DepositSlip(models.Model):
     _name = 'deposit.slip'
-
-    def _get_carrier_type_selection(self, cr, uid, context=None):
-        return self.pool['delivery.carrier']._get_carrier_type_selection(
-            cr, uid, context=context)
-
-    _columns = {
-        'name': fields.char(
-            'Name',
-            readonly=True,
-            states={'draft': [('readonly', False)]},),
-        'carrier_type': fields.selection(
-            _get_carrier_type_selection,
-            'Type',
-            readonly=True,
-            help="Carrier type (combines several delivery methods)"),
-        'picking_ids': fields.one2many(
-            'stock.picking',
-            'deposit_slip_id',
-            'Pickings',
-            readonly=True,
-            states={'draft': [('readonly', False)]}),
-        'create_date': fields.datetime(
-            'Created',
-            readonly=True),
-        'state': fields.selection([
-            ('draft', 'Draft'),
-            ('done', 'Done'),
-        ], 'Status', readonly=True),
-        'company_id': fields.many2one(
-            'res.company',
-            'Company'),
-    }
-
-    _defaults = {
-        'name': lambda obj, cr, uid, context:
-            obj.pool['ir.sequence'].next_by_code(
-                cr, uid, 'delivery.deposit', context=context),
-        'state': 'draft'
-    }
-
-    _sql_constraints = [
-        ('name_uniq', 'unique(name)', "'Deposit Slip' name must be unique!"),
-    ]
-
+    _description = 'Deposit Slip'
     _order = 'id desc'
+    _inherit = ['mail.thread']
+    _track = {
+        'state': {
+            'delivery_carrier_deposit.deposit_slip_done':
+            lambda self, cr, uid, obj, ctx=None: obj.state == 'done',
+            }
+        }
 
-    def copy(self, cr, uid, rec_id, default=None, context=None):
-        if not default:
-            default = {}
-        default.update({
-            'name': self.pool['ir.sequence'].next_by_code(
-                cr, uid, 'delivery.deposit', context=context),
-            'deposit_slip_id': False,
-        })
-        return super(DepositSlip, self).copy(
-            cr, uid, rec_id, default, context=context)
+    @api.one
+    @api.depends('picking_ids')
+    def _compute_deposit_slip(self):
+        weight = 0.0
+        number_of_packages = 0
+        for picking in self.picking_ids:
+            number_of_packages += picking.number_of_packages
+            weight += picking.weight
+        self.weight = weight
+        self.number_of_packages = number_of_packages
 
-    def create_edi_file(self, cr, uid, ids, context=None):
+    @api.model
+    def _get_carrier_type_selection(self):
+        return self.env['delivery.carrier']._get_carrier_type_selection()
+
+    name = fields.Char(
+        string='Name', readonly=True, states={'draft': [('readonly', False)]},
+        default='/', copy='/')
+    carrier_type = fields.Selection(
+        '_get_carrier_type_selection', string='Type', readonly=True,
+        track_visibility='onchange',
+        help="Carrier type (combines several delivery methods)")
+    picking_ids = fields.One2many(
+        'stock.picking', 'deposit_slip_id', string='Pickings',
+        readonly=True, states={'draft': [('readonly', False)]})
+    state = fields.Selection([
+        ('draft', 'Draft'),
+        ('done', 'Done'),
+        ], string='Status', readonly=True, default='draft',
+        track_visibility='onchange')
+    company_id = fields.Many2one(
+        'res.company', string='Company',
+        default=lambda self: self.env['res.company']._company_default_get(
+            'deposit.slip'))
+    weight = fields.Float(
+        string='Total Weight', compute='_compute_deposit_slip',
+        digits=dp.get_precision('Stock Weight'), readonly=True)
+    number_of_packages = fields.Integer(
+        string='Number of Packages', compute='_compute_deposit_slip',
+        readonly=True)
+
+    _sql_constraints = [(
+        'name_company_uniq',
+        'unique(name, company_id)',
+        "'Deposit Slip' name must be unique per company!")]
+
+    @api.model
+    def create(self, vals=None):
+        if vals is None:
+            vals = {}
+        if vals.get('name', '/') == '/':
+            vals['name'] = self.env['ir.sequence'].next_by_code(
+                'delivery.deposit')
+        return super(DepositSlip, self).create(vals)
+
+    @api.one
+    def copy(self, default=None):
+        default = dict(default or {})
+        default['name'] = self.env['ir.sequence'].next_by_code(
+            'delivery.deposit')
+        return super(DepositSlip, self).copy(default)
+
+    @api.multi
+    def create_edi_file(self):
         """
         Override this method for the proper carrier
         """
         return True
 
-    def validate_deposit(self, cr, uid, ids, context=None):
-        self.create_edi_file(cr, uid, ids, context=context)
-        self.write(cr, uid, ids, {'state': 'done'})
+    @api.multi
+    def validate_deposit(self):
+        self.create_edi_file()
+        self.write({'state': 'done'})
         return True
 
 
-class StockPicking(orm.Model):
+class StockPicking(models.Model):
     _inherit = "stock.picking"
 
-    _columns = {
-        'deposit_slip_id': fields.many2one('deposit.slip', 'Deposit Slip'),
-    }
+    deposit_slip_id = fields.Many2one('deposit.slip', 'Deposit Slip')
 
 
-class DeliveryCarrier(orm.Model):
+class DeliveryCarrier(models.Model):
     _inherit = "delivery.carrier"
 
-    _columns = {
-        'deposit_slip': fields.boolean(
-            'Deposit Slip',
-            help="Allow to create a 'Deposit slip' "
-                 "report on picking out (deliveries)"),
-    }
+    deposit_slip = fields.Boolean(
+        string='Deposit Slip',
+        help="Allow to create a 'Deposit Slip' report on delivery orders")
