@@ -6,16 +6,16 @@
 <record id="view_wiz_create_deposit" model="ir.ui.view">
     <field name="name">wizard create.deposit slip form view</field>
     <field name="model">delivery.deposit.wizard</field>
-    <field name="type">form</field>
     <field name="arch" type="xml">
-        <form string="Create deposit slip" version="7.0">
-             <p class="oe_grey oe_inline">
-Ensure than 'Deposit Slip' field is checked in delivery methods which you want to find in this selection below.
-             </p>
-             <label string="Would you like generate 'Deposit slip' for these delivery methods ?"  colspan="4" />
-             <field name="carrier_type" nolabel="1" colspan="4"/>
-             <button icon="gtk-cancel" special="cancel" string="Cancel"/>
-             <button icon="gtk-ok" name="create_deposit_slip" string="Create Deposit" type="object"/>
+        <form string="Create Deposit Slip">
+            <group name="main">
+                <field name="carrier_type" colspan="2"/>
+            </group>
+            <footer>
+                <button name="create_deposit_slip" string="Create"
+                    type="object" class="oe_highlight"/>
+                <button special="cancel" string="Cancel" class="oe_link"/>
+            </footer>
        </form>
     </field>
 </record>
@@ -26,13 +26,13 @@ Ensure than 'Deposit Slip' field is checked in delivery methods which you want t
     <field name="name">Create Deposit Slip</field>
     <field name="res_model">delivery.deposit.wizard</field>
     <field name="view_type">form</field>
-    <field name="view_mode">form,tree</field>
+    <field name="view_mode">form</field>
    <field name="target">new</field>
 </record>
 
 <!-- MENU -->
 <menuitem id="menu_wiz_delivery_deposit"
-          name="Create"
+          name="Create Deposit Slip"
           action="action_wiz_create_deposit"
           parent="menu_delivery_deposit_slip"
           sequence="10" />
