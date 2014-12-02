@@ -307,6 +307,8 @@ class ShippingLabel(orm.Model):
     _columns = {
         'file_type': fields.selection(__get_file_type_selection, 'File type'),
         'package_id': fields.many2one('stock.quant.package', 'Pack'),
+        'attachment_id': fields.many2one(
+            'ir.attachment', 'Attachement', required=True, ondelete='cascade')
     }
 
     _defaults = {
