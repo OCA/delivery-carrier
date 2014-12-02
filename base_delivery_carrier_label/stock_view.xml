@@ -35,6 +35,36 @@
     </field>
 </record>
 
+<record id="view_quant_package_form" model="ir.ui.view">
+    <field name="model">stock.quant.package</field>
+    <field name="inherit_id" ref="stock.view_quant_package_form"/>
+    <field name="arch" type="xml">
+        <field name="ul_id" position="before">
+            <field name="parcel_tracking"/>
+        </field>
+    </field>
+</record>
 
-  </data>
+<record id="view_quant_package_tree" model="ir.ui.view">
+    <field name="model">stock.quant.package</field>
+    <field name="inherit_id" ref="stock.view_quant_package_tree"/>
+    <field name="arch" type="xml">
+        <field name="complete_name" position="after">
+            <field name="parcel_tracking"/>
+        </field>
+    </field>
+</record>
+
+<record id="quant_package_search_view" model="ir.ui.view">
+    <field name="model">stock.quant.package</field>
+    <field name="inherit_id" ref="stock.quant_package_search_view"/>
+    <field name="arch" type="xml">
+        <field name="name" position="after">
+            <field name="parcel_tracking"/>
+        </field>
+    </field>
+</record>
+
+
+</data>
 </openerp>
