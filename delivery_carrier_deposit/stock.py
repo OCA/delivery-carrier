@@ -59,7 +59,6 @@ class DepositSlip(models.Model):
         default='/', copy='/')
     carrier_type = fields.Selection(
         '_get_carrier_type_selection', string='Type', readonly=True,
-        track_visibility='onchange',
         help="Carrier type (combines several delivery methods)")
     picking_ids = fields.One2many(
         'stock.picking', 'deposit_slip_id', string='Pickings',
@@ -67,8 +66,7 @@ class DepositSlip(models.Model):
     state = fields.Selection([
         ('draft', 'Draft'),
         ('done', 'Done'),
-        ], string='Status', readonly=True, default='draft',
-        track_visibility='onchange')
+        ], string='Status', readonly=True, default='draft')
     company_id = fields.Many2one(
         'res.company', string='Company',
         default=lambda self: self.env['res.company']._company_default_get(
