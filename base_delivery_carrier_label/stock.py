@@ -23,14 +23,19 @@
 ##############################################################################
 from openerp.osv import orm, fields
 from openerp.tools.translate import _
+import openerp.addons.decimal_precision as dp
 
 
 class StockQuantPackage(orm.Model):
     _inherit = 'stock.quant.package'
+    _order = 'id desc'
 
     _columns = {
         'parcel_tracking': fields.char('Parcel Tracking'),
-        'weight': fields.float('Weight'),
+        'weight': fields.float(
+            'Weight', digits=dp.get_precision('Stock Weight'),
+            help="Total weight of the package in kg, including the "
+            "weight of the logistic unit."),
     }
 
 
@@ -229,9 +234,11 @@ class StockPicking(orm.Model):
         ], context=context)
         for pack_ope in stk_pack_ope_m.browse(
                 cr, uid, pack_ope_ids, context=context):
-            if pack_ope.operation_id.result_package_id:
-                packages.append(pack_ope.operation_id.result_package_id)
-        return list(set(packages))
+            if (
+                    pack_ope.result_package_id
+                    and pack_ope.result_package_id not in packages):
+                packages.append(pack_ope.result_package_id)
+        return packages
 
     def write(self, cr, uid, ids, values, context=None):
         """ Set the default options when the delivery method is changed.
