@@ -30,7 +30,7 @@ class StockQuantPackage(orm.Model):
 
     _columns = {
         'parcel_tracking': fields.char('Parcel Tracking'),
-        'weight': fields.char('Weight'),
+        'weight': fields.float('Weight'),
     }
 
 
