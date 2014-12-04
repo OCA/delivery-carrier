@@ -75,7 +75,7 @@ class PickingDispatch(Model):
             available_option_ids = []
             for available_option in carrier.available_option_ids:
                 available_option_ids.append(available_option.id)
-                if available_option.state in ['default_option', 'mandatory']:
+                if available_option.mandatory or available_option.by_default:
                     default_option_ids.append(available_option.id)
             res = {
                 'value': {'carrier_type': carrier.type,
@@ -95,7 +95,7 @@ class PickingDispatch(Model):
             return res
         carrier = carrier_obj.browse(cr, uid, carrier_id, context=context)
         for available_option in carrier.available_option_ids:
-            if (available_option.state == 'mandatory'
+            if (available_option.mandatory
                     and available_option.id not in option_ids[0][2]):
                 res['warning'] = {
                     'title': _('User Error !'),
