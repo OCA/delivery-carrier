@@ -209,7 +209,7 @@ class DeliveryCarrier(models.Model):
                 opt.tmpl_option_id.postlogistics_type
                 for opt in carrier.available_option_ids
                 if opt.postlogistics_type in single_option_types
-                and opt.state in ['mandatory']]
+                and opt.mandatory]
             if selected_single_options != single_option_types:
                 services = option_template_obj.search(
                     [('postlogistics_type', 'in', single_option_types),
