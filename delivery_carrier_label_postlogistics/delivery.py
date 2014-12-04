@@ -215,7 +215,7 @@ class DeliveryCarrier(orm.Model):
                 opt.tmpl_option_id.postlogistics_type
                 for opt in carrier.available_option_ids
                 if opt.postlogistics_type in single_option_types
-                and opt.state in ['mandatory']]
+                and opt.mandatory]
             if selected_single_options != single_option_types:
                 service_ids = option_template_obj.search(
                     cr, uid,
