@@ -34,20 +34,39 @@ class ResCompany(models.Model):
         inverse_name='company_id',
         string='PostLogistics Frankling License',
     )
-    postlogistics_logo = fields.Binary(string='Company logo for PostLogistics')
-    postlogistics_office = fields.Char(string='Post office')
+    postlogistics_logo = fields.Binary(
+        string='Company Logo on Post labels',
+        help="Optional company logo to show on label.\n"
+             "If using an image / logo, please note the following:\n"
+             "– Image width: 47 mm\n"
+             "– Image height: 25 mm\n"
+             "– File size: max. 30 kb\n"
+             "– File format: GIF or PNG\n"
+             "– Colour table: indexed colours, max. 200 colours\n"
+             "– The logo will be printed rotated counter-clockwise by 90°"
+             "\n"
+             "We recommend using a black and white logo for printing in "
+             " the ZPL2 format.",
+        )
+    postlogistics_office = fields.Char(
+        string='Domicile Post office',
+        help="Post office which will receive the shipped goods"
+    )
 
     postlogistics_default_label_layout = fields.Many2one(
         comodel_name='delivery.carrier.template.option',
         string='Default label layout',
+        domain=[('postlogistics_type', '=', 'label_layout')],
     )
     postlogistics_default_output_format = fields.Many2one(
         comodel_name='delivery.carrier.template.option',
         string='Default output format',
+        domain=[('postlogistics_type', '=', 'output_format')],
     )
     postlogistics_default_resolution = fields.Many2one(
         comodel_name='delivery.carrier.template.option',
         string='Default resolution',
+        domain=[('postlogistics_type', '=', 'resolution')],
     )
 
     def _get_wsdl_url(self):
