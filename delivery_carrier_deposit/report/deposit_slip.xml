@@ -33,6 +33,7 @@
             <th class="small">ZIP</th>
             <th class="small">Country</th>
             <th class="small">Weight<br />(kg)</th>
+            <th class="small">Nr of<br/>packages</th>
         </tr>
     </thead>
     <tbody>
@@ -44,6 +45,7 @@
             <td><span t-field="p.partner_id.zip"/></td>
             <td><span t-field="p.partner_id.country_id.code"/></td>
             <td><span t-field="p.weight"/></td>
+            <td><span t-field="p.number_of_packages"/></td>
         </tr>
 
     </tbody>
