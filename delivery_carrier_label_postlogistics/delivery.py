@@ -151,9 +151,10 @@ class DeliveryCarrier(models.Model):
             if carrier.partner_id != postlogistics_partner:
                 continue
 
-            options = [opt.tmpl_option_id for opt
-                       in carrier.available_option_ids
-                       if opt.postlogistics_type == 'basic']
+            options = carrier.available_option_ids.filtered(
+                lambda option: option.postlogistics_type == 'basic'
+            ).mapped('tmpl_option_id')
+
             if not options:
                 continue
             self.postlogistics_basic_service_ids = options
