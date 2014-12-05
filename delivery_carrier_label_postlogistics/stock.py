@@ -39,11 +39,7 @@ class StockPicking(models.Model):
             webservice_class = PostlogisticsWebService
 
         if package_ids is None:
-            # get all the packages of the picking
-            # XXX: the 'self' argument will be to remove when
-            # base_delivery_carrier_label will be migrated to the new
-            # API
-            packages = self._get_packages_from_picking(self)
+            packages = self._get_packages_from_picking()
             packages = sorted(packages, key=attrgetter('name'))
         else:
             # restrict on the provided packages
