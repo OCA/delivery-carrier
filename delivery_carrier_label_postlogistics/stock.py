@@ -46,7 +46,7 @@ class StockPicking(models.Model):
             packages = self._get_packages_from_picking(self)
             packages = sorted(packages, key=attrgetter('name'))
         else:
-            # restrict on the provided trackings
+            # restrict on the provided packages
             package_obj = self.env['stock.quant.package']
             packages = package_obj.browse(package_ids)
 
