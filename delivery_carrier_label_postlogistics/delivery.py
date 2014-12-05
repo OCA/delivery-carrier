@@ -118,7 +118,7 @@ class DeliveryCarrierOption(models.Model):
     """ Set name translatable and add service group """
     _inherit = 'delivery.carrier.option'
 
-    name = fields.Char(translate=True),
+    name = fields.Char(translate=True)
     # to repeat carrier allowed option ids to filter domain set by
     # default from view
     allowed_option_ids = fields.Many2many(
