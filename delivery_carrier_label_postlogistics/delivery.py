@@ -218,7 +218,7 @@ class DeliveryCarrier(models.Model):
                       selected_single_options)],
                 )
                 allowed |= services
-            self.allowed_option_ids = services
+            self.allowed_option_ids = allowed
 
     postlogistics_license_id = fields.Many2one(
         comodel_name='postlogistics.license',
