@@ -5,7 +5,7 @@
 #             Sébastien BEAU <sebastien.beau@akretion.com>
 #    Copyright (C) 2012-TODAY Akretion <http://www.akretion.com>.
 #    Author: Yannick Vaucher <yannick.vaucher@camptocamp.com>
-#    Copyright 2013 Camptocamp SA
+#    Copyright 2013-2014 Camptocamp SA
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -21,70 +21,63 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp.osv import orm, fields
-from openerp.tools.translate import _
+from openerp import models, fields, api, exceptions, _
 import openerp.addons.decimal_precision as dp
 
 
-class StockQuantPackage(orm.Model):
+class StockQuantPackage(models.Model):
     _inherit = 'stock.quant.package'
     _order = 'id desc'
 
-    _columns = {
-        'parcel_tracking': fields.char('Parcel Tracking'),
-        'weight': fields.float(
-            'Weight', digits=dp.get_precision('Stock Weight'),
-            help="Total weight of the package in kg, including the "
-            "weight of the logistic unit."),
-    }
+    parcel_tracking = fields.Char(string='Parcel Tracking')
+    weight = fields.Float(
+        digits=dp.get_precision('Stock Weight'),
+        help="Total weight of the package in kg, including the "
+             "weight of the logistic unit."
+    )
 
 
-class StockPicking(orm.Model):
+class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
-    def _get_carrier_type_selection(self, cr, uid, context=None):
-        carrier_obj = self.pool.get('delivery.carrier')
-        return carrier_obj._get_carrier_type_selection(cr, uid,
-                                                       context=context)
+    @api.model
+    def _get_carrier_type_selection(self):
+        carrier_obj = self.env['delivery.carrier']
+        return carrier_obj._get_carrier_type_selection()
 
-    _columns = {
-        'carrier_id': fields.many2one(
-            'delivery.carrier', 'Carrier',
-            states={'done': [('readonly', True)]}),
-        'carrier_type': fields.related(
-            'carrier_id', 'type',
-            string='Carrier type',
-            readonly=True,
-            type='selection',
-            selection=_get_carrier_type_selection,
-            help="Carrier type ('group')"),
-        'carrier_code': fields.related(
-            'carrier_id', 'code',
-            string='Delivery Method Code',
-            readonly=True,
-            type='char',
-            help="Delivery Method Code (from carrier)"),
-        'option_ids': fields.many2many('delivery.carrier.option',
-                                       string='Options'),
-    }
+    carrier_id = fields.Many2one(
+        comodel_name='delivery.carrier',
+        string='Carrier',
+        states={'done': [('readonly', True)]},
+    )
+    carrier_type = fields.Selection(
+        related='carrier_id.type',
+        string='Carrier Type',
+        readonly=True,
+    )
+    carrier_code = fields.Char(
+        related='carrier_id.code',
+        readonly=True,
+    )
+    option_ids = fields.Many2many(comodel_name='delivery.carrier.option',
+                                  string='Options')
 
-    def generate_default_label(self, cr, uid, ids, package_ids=None,
-                               context=None):
+    @api.multi
+    def generate_default_label(self, package_ids=None):
         """ Abstract method
 
         :param package_ids: optional list of ``stock.quant.package`` ids
-                             only packs in this list will have their label
-                             printed (all are generated when None)
+                            only packs in this list will have their label
+                            printed (all are generated when None)
 
         :return: (file_binary, file_type)
 
         """
-        raise orm.except_orm(
-            'Error',
-            'No label is configured for selected delivery method.')
+        raise exceptions.Warning(_('No label is configured for the '
+                                   'selected delivery method.'))
 
-    def generate_shipping_labels(self, cr, uid, ids, package_ids=None,
-                                 context=None):
+    @api.multi
+    def generate_shipping_labels(self, package_ids=None):
         """Generate a shipping label by default
 
         This method can be inherited to create specific shipping labels
@@ -105,33 +98,31 @@ class StockPicking(orm.Model):
                         pack
 
         """
-        default_label = self.generate_default_label(cr, uid, ids,
-                                                    package_ids=package_ids,
-                                                    context=None)
+        default_label = self.generate_default_label(package_ids=package_ids)
         if not package_ids:
             return [default_label]
         labels = []
-        for tracking_id in package_ids:
+        for package_id in package_ids:
             pack_label = default_label.copy()
-            pack_label['tracking_id'] = tracking_id
+            pack_label['tracking_id'] = package_id
             labels.append(pack_label)
         return labels
 
-    def generate_labels(self, cr, uid, ids, package_ids=None, context=None):
+    @api.multi
+    def generate_labels(self, package_ids=None):
         """ Generate the labels.
 
         A list of tracking ids can be given, in that case it will generate
-        the labels only of these trackings.
+        the labels only of these packages.
 
         """
-        shipping_label_obj = self.pool.get('shipping.label')
+        label_obj = self.env['shipping.label']
 
-        pickings = self.browse(cr, uid, ids, context=context)
-
-        for pick in pickings:
+        for pick in self:
             if package_ids:
                 shipping_labels = pick.generate_shipping_labels(
-                    package_ids=package_ids)
+                    package_ids=package_ids
+                )
             else:
                 shipping_labels = pick.generate_shipping_labels()
             for label in shipping_labels:
@@ -144,128 +135,112 @@ class StockPicking(orm.Model):
                 }
                 if label.get('tracking_id'):
                     data['tracking_id'] = label['tracking_id']
-                context_attachment = context.copy()
+                context_attachment = self.env.context.copy()
                 # remove default_type setted for stock_picking
                 # as it would try to define default value of attachement
                 if 'default_type' in context_attachment:
                     del context_attachment['default_type']
-                shipping_label_obj.create(cr, uid, data,
-                                          context=context_attachment)
+                label_obj.with_context(context_attachment).create(data)
         return True
 
-    def action_generate_carrier_label(self, cr, uid, ids, context=None):
+    @api.multi
+    def action_generate_carrier_label(self):
         """ Method for the 'Generate Label' button.
 
-        It will generate the labels for all the trackings of the picking.
+        It will generate the labels for all the packages of the picking.
 
         """
-        return self.generate_labels(cr, uid, ids, context=context)
+        return self.generate_labels()
 
-    def carrier_id_change(self, cr, uid, ids, carrier_id, context=None):
+    @api.onchange('carrier_id')
+    def carrier_id_change(self):
         """ Inherit this method in your module """
-        carrier_obj = self.pool.get('delivery.carrier')
-        res = {}
-        if carrier_id:
-            carrier = carrier_obj.browse(cr, uid, carrier_id, context=context)
-            # This can look useless as the field carrier_code and
-            # carrier_type are related field. But it's needed to fill
-            # this field for using this fields in the view. Indeed the
-            # module that depend of delivery base can hide some field
-            # depending of the type or the code
-
-            default_option_ids = []
-            available_option_ids = []
-            for available_option in carrier.available_option_ids:
-                available_option_ids.append(available_option.id)
-                if (available_option.mandatory or
-                        available_option.by_default):
-                    default_option_ids.append(available_option.id)
-            res = {
-                'value': {'carrier_type': carrier.type,
-                          'carrier_code': carrier.code,
-                          'option_ids': default_option_ids,
-                          },
-                'domain': {'option_ids': [('id', 'in', available_option_ids)],
-                           },
+        if not self.carrier_id:
+            return
+        # This can look useless as the field carrier_code and
+        # carrier_type are related field. But it's needed to fill
+        # this field for using this fields in the view. Indeed the
+        # module that depend of delivery base can hide some field
+        # depending of the type or the code
+        carrier = self.carrier_id
+        self.carrier_type = carrier.type
+        self.carrier_code = carrier.code
+        self.option_ids = carrier.default_options()
+        result = {
+            'domain': {
+                'option_ids': [('id', 'in', carrier.available_option_ids.ids)],
             }
-        return res
+        }
+        return result
 
-    def option_ids_change(self, cr, uid, ids, option_ids, carrier_id,
-                          context=None):
-        carrier_obj = self.pool.get('delivery.carrier')
-        res = {}
-        if not carrier_id:
-            return res
-        carrier = carrier_obj.browse(cr, uid, carrier_id, context=context)
+    @api.onchange('option_ids')
+    def option_ids_change(self):
+        if not self.carrier_id:
+            return
+        carrier = self.carrier_id
         for available_option in carrier.available_option_ids:
             if (available_option.mandatory
-                    and available_option.id not in option_ids[0][2]):
-                res['warning'] = {
-                    'title': _('User Error !'),
-                    'message': _("You can not remove a mandatory option."
-                                 "\nOptions are reset to default.")
-                }
-                default_value = self.carrier_id_change(cr, uid, ids,
-                                                       carrier_id,
-                                                       context=context)
-                res.update(default_value)
-        return res
+                    and available_option not in self.option_ids):
+                # XXX the client does not allow to modify the field that
+                # triggered the onchange:
+                # https://github.com/odoo/odoo/issues/2693#issuecomment-56825399
+                # Ideally we should add the missing option
+                raise exceptions.Warning(
+                    _("You should not remove a mandatory option."
+                      "Please cancel the edit or "
+                      "add back the option: %s.") % available_option.name
+                )
 
-    def _values_with_carrier_options(self, cr, uid, values, context=None):
+    @api.model
+    def _values_with_carrier_options(self, values):
         values = values.copy()
         carrier_id = values.get('carrier_id')
         option_ids = values.get('option_ids')
         if carrier_id and not option_ids:
-            res = self.carrier_id_change(cr, uid, [], carrier_id,
-                                         context=context)
-            option_ids = res.get('value', {}).get('option_ids')
-            if option_ids:
-                values.update(option_ids=[(6, 0, option_ids)])
+            carrier_obj = self.env['delivery.carrier']
+            carrier = carrier_obj.browse(carrier_id)
+            default_options = carrier.default_options()
+            if default_options:
+                values.update(option_ids=[(6, 0, default_options.ids)])
         return values
 
-    def _get_packages_from_picking(self, cr, uid, picking, context=None):
-        """ get all the packages from the picking
-        """
-        stk_pack_ope_m = self.pool['stock.pack.operation']
-        packages = []
-        pack_ope_ids = stk_pack_ope_m.search(cr, uid, [
-            ('result_package_id', '!=', False),
-            ('picking_id', '=', picking.id)
-        ], context=context)
-        for pack_ope in stk_pack_ope_m.browse(
-                cr, uid, pack_ope_ids, context=context):
-            if (
-                    pack_ope.result_package_id
-                    and pack_ope.result_package_id not in packages):
-                packages.append(pack_ope.result_package_id)
-        return packages
+    @api.multi
+    @api.returns('stock.quant.package')
+    def _get_packages_from_picking(self):
+        """ Get all the packages from the picking """
+        self.ensure_one()
+        operation_obj = self.env['stock.pack.operation']
+        operations = operation_obj.search(
+            [('result_package_id', '!=', False),
+             ('picking_id', '=', self.id)]
+        )
+        return operations.mapped('result_package_id')
 
-    def write(self, cr, uid, ids, values, context=None):
+    @api.multi
+    def write(self, vals):
         """ Set the default options when the delivery method is changed.
 
         So we are sure that the options are always in line with the
         current delivery method.
 
         """
-        values = self._values_with_carrier_options(cr, uid, values,
-                                                   context=context)
-        return super(StockPicking, self).\
-            write(cr, uid, ids, values, context=context)
+        vals = self._values_with_carrier_options(vals)
+        return super(StockPicking, self).write(vals)
 
-    def create(self, cr, uid, values, context=None):
+    @api.model
+    @api.returns('self', lambda value: value.id)
+    def create(self, vals):
         """ Trigger carrier_id_change on create
 
         To ensure options are setted on the basis of carrier_id copied from
         Sale order or defined by default.
 
         """
-        values = self._values_with_carrier_options(cr, uid, values,
-                                                   context=context)
-        picking_id = super(StockPicking, self
-                           ).create(cr, uid, values, context=context)
-        return picking_id
+        vals = self._values_with_carrier_options(vals)
+        return super(StockPicking, self).create(vals)
 
-    def _get_label_sender_address(self, cr, uid, picking, context=None):
+    @api.multi
+    def _get_label_sender_address(self):
         """ On each carrier label module you need to define
             which is the sender of the parcel.
             The most common case is 'picking.company_id.partner_id'
@@ -283,41 +258,41 @@ class StockPicking(orm.Model):
             module like :
             delivery_carrier_label_yourcarrier_yourproject.
         """
-        partner_obj = self.pool['res.partner']
-        partner = picking.company_id.partner_id
-        delivery_address = partner_obj.search(cr, uid, [
-                                             ('parent_id', '=', partner.id),
-                                             ('type', '=', 'delivery')])
-        if delivery_address:
-            partner = partner_obj.browse(cr, uid,
-                                         [delivery_address[0]],
-                                         context=context)[0]
-        return partner
+        self.ensure_one()
+        partner = self.company_id.partner_id
+        address_id = partner.address_get(adr_pref=['delivery'])['delivery']
+        return self.env['res.partner'].browse(address_id)
 
 
-class ShippingLabel(orm.Model):
+class ShippingLabel(models.Model):
     """ Child class of ir attachment to identify which are labels """
-    _inherits = {'ir.attachment': 'attachment_id'}
+
     _name = 'shipping.label'
+    _inherits = {'ir.attachment': 'attachment_id'}
     _description = "Shipping Label"
 
-    def _get_file_type_selection(self, cr, uid, context=None):
+    @api.model
+    def _get_file_type_selection(self):
         """ To inherit to add file type """
         return [('pdf', 'PDF')]
 
-    def __get_file_type_selection(self, cr, uid, context=None):
-        file_types = self._get_file_type_selection(cr, uid, context=context)
+    @api.model
+    def __get_file_type_selection(self):
+        file_types = self._get_file_type_selection()
         file_types = list(set(file_types))
         file_types.sort(key=lambda t: t[0])
         return file_types
 
-    _columns = {
-        'file_type': fields.selection(__get_file_type_selection, 'File type'),
-        'package_id': fields.many2one('stock.quant.package', 'Pack'),
-        'attachment_id': fields.many2one(
-            'ir.attachment', 'Attachement', required=True, ondelete='cascade')
-    }
-
-    _defaults = {
-        'file_type': 'pdf'
-    }
+    file_type = fields.Selection(
+        selection=__get_file_type_selection,
+        string='File type',
+        default='pdf',
+    )
+    package_id = fields.Many2one(comodel_name='stock.quant.package',
+                                 string='Pack')
+    attachment_id = fields.Many2one(
+        comodel_name='ir.attachment',
+        string='Attachement',
+        required=True,
+        ondelete='cascade',
+    )
