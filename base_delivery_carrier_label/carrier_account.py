@@ -3,6 +3,7 @@
 #
 #    Author: Florian da Costa <florian.dacosta@akretion.com>
 #    Copyright (C) 2014-TODAY Akretion <http://www.akretion.com>.
+#    Copyright 2014 Camptocamp SA
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
