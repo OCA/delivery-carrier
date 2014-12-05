@@ -12,14 +12,10 @@
           <button name="action_generate_carrier_label" states="done"
             string="Create Shipping Label" type="object"/>
         </field>
-        <field name="carrier_id" position="attributes">
-          <attribute name="on_change">carrier_id_change(carrier_id, context)</attribute>
-        </field>
         <xpath expr="//page[@string='Additional Info']//field[@name='carrier_tracking_ref']" position="after">
           <field name="carrier_type"/>
           <field name="carrier_code"/>
-          <field name="option_ids" nolabel="1" colspan="2"
-              on_change="option_ids_change(option_ids, carrier_id, context)"/>
+          <field name="option_ids" nolabel="1" colspan="2" />
         </xpath>
       </field>
     </record>
