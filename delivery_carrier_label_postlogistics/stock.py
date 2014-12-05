@@ -63,7 +63,7 @@ class StockPicking(models.Model):
 
         labels = []
         # if there are no pack defined, write tracking_number on picking
-        # otherwise, write it on serial field of each pack
+        # otherwise, write it on parcel_tracking field of each pack
         if not packages:
             label = res['value'][0]
             tracking_number = label['tracking_number']
@@ -78,7 +78,7 @@ class StockPicking(models.Model):
                 if package.name in search_label['item_id'].split('+')[-1]:
                     label = search_label
                     tracking_number = label['tracking_number']
-                    package.serial = tracking_number
+                    package.parcel_tracking = tracking_number
                     break
             info = info_from_label(label)
             info['tracking_id'] = package.id
