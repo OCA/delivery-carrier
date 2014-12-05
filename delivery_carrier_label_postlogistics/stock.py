@@ -69,7 +69,7 @@ class StockPicking(models.Model):
             tracking_number = label['tracking_number']
             self.carrier_tracking_ref = tracking_number
             info = info_from_label(label)
-            info['tracking_id'] = False
+            info['package_id'] = False
             labels.append(info)
 
         for package in packages:
@@ -81,7 +81,7 @@ class StockPicking(models.Model):
                     package.parcel_tracking = tracking_number
                     break
             info = info_from_label(label)
-            info['tracking_id'] = package.id
+            info['package_id'] = package.id
             labels.append(info)
 
         return labels
