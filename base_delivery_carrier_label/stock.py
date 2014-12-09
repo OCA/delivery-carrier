@@ -197,8 +197,8 @@ class StockPicking(models.Model):
         carrier_id = values.get('carrier_id')
         option_ids = values.get('option_ids')
         if carrier_id and not option_ids:
-            option_obj = self.env['delivery.carrier.option']
-            carrier = option_obj.browse(carrier_id)
+            carrier_obj = self.env['delivery.carrier']
+            carrier = carrier_obj.browse(carrier_id)
             default_options = carrier.default_options()
             if default_options:
                 values.update(option_ids=[(6, 0, default_options.ids)])
