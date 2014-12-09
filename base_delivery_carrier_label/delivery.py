@@ -99,8 +99,8 @@ class DeliveryCarrier(models.Model):
     @api.multi
     def default_options(self):
         """ Returns default and available options for a carrier """
-        default_options = self.env['delivery.carrier.option'].browse()
+        options = self.env['delivery.carrier.option'].browse()
         for available_option in self.available_option_ids:
             if (available_option.mandatory or available_option.by_default):
-                default_options |= available_option
-        return default_options
+                options |= available_option
+        return options
