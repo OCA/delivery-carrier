@@ -81,13 +81,8 @@ class DeliveryCarrier(models.Model):
         """ To inherit to add carrier type """
         return []
 
-    @api.model
-    def __get_carrier_type_selection(self):
-        """ Wrapper to preserve inheritance for selection field """
-        return self._get_carrier_type_selection()
-
     type = fields.Selection(
-        selection=__get_carrier_type_selection,
+        selection='_get_carrier_type_selection',
         string='Type',
         help="Carrier type (combines several delivery methods)",
     )
