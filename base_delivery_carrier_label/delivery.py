@@ -65,7 +65,7 @@ class DeliveryCarrierOption(models.Model):
         ondelete="cascade",
     )
     carrier_id = fields.Many2one(comodel_name='delivery.carrier',
-                                 sttring='Carrier')
+                                 string='Carrier')
     readonly_flag = fields.Boolean(
         string='Readonly Flag',
         help="When True, help to prevent the user to modify some fields "
