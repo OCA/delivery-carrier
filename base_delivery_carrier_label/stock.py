@@ -27,7 +27,6 @@ import openerp.addons.decimal_precision as dp
 
 class StockQuantPackage(models.Model):
     _inherit = 'stock.quant.package'
-    _order = 'id desc'
 
     parcel_tracking = fields.Char(string='Parcel Tracking')
     weight = fields.Float(
