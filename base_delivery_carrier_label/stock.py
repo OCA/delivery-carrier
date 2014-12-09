@@ -260,7 +260,7 @@ class StockPicking(models.Model):
         """
         self.ensure_one()
         partner = self.company_id.partner_id
-        return partner.address_get(adr_pref='delivery')
+        return partner.address_get(adr_pref=['delivery'])['delivery']
 
 
 class ShippingLabel(models.Model):
