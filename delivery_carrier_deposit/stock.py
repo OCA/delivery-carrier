@@ -55,10 +55,11 @@ class DepositSlip(models.Model):
         return self.env['delivery.carrier']._get_carrier_type_selection()
 
     name = fields.Char(
-        string='Name', readonly=True, states={'draft': [('readonly', False)]},
-        default='/', copy='/')
+        readonly=True, states={'draft': [('readonly', False)]},
+        default='/', copy=False)
     carrier_type = fields.Selection(
-        '_get_carrier_type_selection', string='Type', readonly=True,
+        '_get_carrier_type_selection', string='Type',
+        readonly=True, required=True, copy=False,
         help="Carrier type (combines several delivery methods)")
     picking_ids = fields.One2many(
         'stock.picking', 'deposit_slip_id', string='Pickings',
@@ -91,13 +92,6 @@ class DepositSlip(models.Model):
             vals['name'] = self.env['ir.sequence'].next_by_code(
                 'delivery.deposit')
         return super(DepositSlip, self).create(vals)
-
-    @api.one
-    def copy(self, default=None):
-        default = dict(default or {})
-        default['name'] = self.env['ir.sequence'].next_by_code(
-            'delivery.deposit')
-        return super(DepositSlip, self).copy(default)
 
     @api.multi
     def create_edi_file(self):
