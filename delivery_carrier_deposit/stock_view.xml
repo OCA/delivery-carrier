@@ -69,10 +69,10 @@
                        statusbar_colors='{"draft": "blue", "done": "blue"}'/>
             </header>
             <sheet>
-                <group name="main">
+                <group name="main" col="4">
                     <field name="name"/>
-                    <field name="carrier_type"/>
                     <field name="weight"/>
+                    <field name="carrier_type"/>
                     <field name="number_of_packages"/>
                 </group>
                 <group name="pickings">
