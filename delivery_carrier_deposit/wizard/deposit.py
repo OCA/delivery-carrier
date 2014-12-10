@@ -51,8 +51,7 @@ class DeliveryDepositWizard(models.TransientModel):
     @api.multi
     def create_deposit_slip(self):
         # I can't set api.one because I return an action
-        assert len(self) == 1, 'only 1 recordset allowed'
-        self = self[0]
+        self.ensure_one()
         pickings = self.env['stock.picking'].search([
             ('carrier_type', '=', self.carrier_type),
             ('deposit_slip_id', '=', False),
