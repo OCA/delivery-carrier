@@ -59,11 +59,15 @@ class DepositSlip(orm.Model):
             'Company'),
     }
 
+    def _get_default_company(self, cr, uid, context=None):
+        return self.pool['res.users']._get_company(cr, uid, context=context)
+
     _defaults = {
-        'name': lambda obj, cr, uid, context:
+        'name': lambda obj, cr, uid, context: (
             obj.pool['ir.sequence'].next_by_code(
-                cr, uid, 'delivery.deposit', context=context),
-        'state': 'draft'
+                cr, uid, 'delivery.deposit', context=context)),
+        'state': 'draft',
+        'company_id': _get_default_company,
     }
 
     _sql_constraints = [
