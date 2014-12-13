@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-25 17:02+0000\n"
-"PO-Revision-Date: 2014-11-25 17:02+0000\n"
+"POT-Creation-Date: 2014-12-10 11:06+0000\n"
+"PO-Revision-Date: 2014-12-10 11:06+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,7 @@ msgstr ""
 
 #. module: delivery_carrier_deposit
 #: sql_constraint:deposit.slip:0
-msgid "'Deposit Slip' name must be unique!"
+msgid "'Deposit Slip' name must be unique per company!"
 msgstr ""
 
 #. module: delivery_carrier_deposit
@@ -32,7 +32,7 @@ msgstr ""
 
 #. module: delivery_carrier_deposit
 #: help:delivery.carrier,deposit_slip:0
-msgid "Allow to create a 'Deposit slip' report on picking out (deliveries)"
+msgid "Allow to create a 'Deposit Slip' report on delivery orders"
 msgstr ""
 
 #. module: delivery_carrier_deposit
@@ -51,9 +51,13 @@ msgid "Carrier"
 msgstr ""
 
 #. module: delivery_carrier_deposit
-#: help:delivery.deposit.wizard,carrier_type:0
 #: help:deposit.slip,carrier_type:0
 msgid "Carrier type (combines several delivery methods)"
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: help:delivery.deposit.wizard,carrier_type:0
+msgid "Carrier type (combines several delivery methods). Make sure that the option 'Deposit Slip' is checked on the delivery methods that have this carrier type."
 msgstr ""
 
 #. module: delivery_carrier_deposit
@@ -72,28 +76,15 @@ msgid "Country"
 msgstr ""
 
 #. module: delivery_carrier_deposit
-#: model:ir.ui.menu,name:delivery_carrier_deposit.menu_wiz_delivery_deposit
+#: view:delivery.deposit.wizard:delivery_carrier_deposit.view_wiz_create_deposit
 msgid "Create"
 msgstr ""
 
 #. module: delivery_carrier_deposit
 #: view:delivery.deposit.wizard:delivery_carrier_deposit.view_wiz_create_deposit
-msgid "Create Deposit"
-msgstr ""
-
-#. module: delivery_carrier_deposit
 #: model:ir.actions.act_window,name:delivery_carrier_deposit.action_wiz_create_deposit
+#: model:ir.ui.menu,name:delivery_carrier_deposit.menu_wiz_delivery_deposit
 msgid "Create Deposit Slip"
-msgstr ""
-
-#. module: delivery_carrier_deposit
-#: view:delivery.deposit.wizard:delivery_carrier_deposit.view_wiz_create_deposit
-msgid "Create deposit slip"
-msgstr ""
-
-#. module: delivery_carrier_deposit
-#: field:deposit.slip,create_date:0
-msgid "Created"
 msgstr ""
 
 #. module: delivery_carrier_deposit
@@ -104,12 +95,34 @@ msgstr ""
 
 #. module: delivery_carrier_deposit
 #: field:delivery.deposit.wizard,create_date:0
+#: field:deposit.slip,create_date:0
 msgid "Created on"
 msgstr ""
 
 #. module: delivery_carrier_deposit
 #: view:website:delivery_carrier_deposit.report_generic_deposit_slip
 msgid "Customer No.:"
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: help:deposit.slip,message_last_post:0
+msgid "Date of the last message posted on the record."
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: view:website:delivery_carrier_deposit.report_generic_deposit_slip
+msgid "Date:"
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: field:delivery.deposit.wizard,carrier_type:0
+#: view:deposit.slip:delivery_carrier_deposit.view_deposit_slip_search
+msgid "Delivery Method Type"
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: view:website:delivery_carrier_deposit.report_generic_deposit_slip
+msgid "Delivery Method Type:"
 msgstr ""
 
 #. module: delivery_carrier_deposit
@@ -122,16 +135,21 @@ msgstr ""
 #. module: delivery_carrier_deposit
 #: field:delivery.carrier,deposit_slip:0
 #: model:ir.actions.act_window,name:delivery_carrier_deposit.act_delivery_deposit
-#: model:ir.ui.menu,name:delivery_carrier_deposit.menu_delivery_deposit_slip
+#: model:ir.model,name:delivery_carrier_deposit.model_deposit_slip
 #: model:ir.ui.menu,name:delivery_carrier_deposit.menu_delivery_deposit_slip_model
 #: field:stock.picking,deposit_slip_id:0
-#: view:website:delivery_carrier_deposit.report_generic_deposit_slip
 msgid "Deposit Slip"
 msgstr ""
 
 #. module: delivery_carrier_deposit
+#: model:mail.message.subtype,description:delivery_carrier_deposit.deposit_slip_done
+#: model:mail.message.subtype,name:delivery_carrier_deposit.deposit_slip_done
+msgid "Deposit Slip Validated"
+msgstr ""
+
+#. module: delivery_carrier_deposit
 #: view:website:delivery_carrier_deposit.report_generic_deposit_slip
-msgid "Document No.:"
+msgid "Deposit Slip n°"
 msgstr ""
 
 #. module: delivery_carrier_deposit
@@ -145,8 +163,8 @@ msgid "Draft"
 msgstr ""
 
 #. module: delivery_carrier_deposit
-#: view:delivery.deposit.wizard:delivery_carrier_deposit.view_wiz_create_deposit
-msgid "Ensure than 'Deposit Slip' field is checked in delivery methods which you want to find in this selection below."
+#: field:deposit.slip,message_follower_ids:0
+msgid "Followers"
 msgstr ""
 
 #. module: delivery_carrier_deposit
@@ -155,9 +173,34 @@ msgid "Generic Deposit Slip"
 msgstr ""
 
 #. module: delivery_carrier_deposit
+#: view:deposit.slip:delivery_carrier_deposit.view_deposit_slip_search
+msgid "Group By"
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: help:deposit.slip,message_summary:0
+msgid "Holds the Chatter summary (number of messages, ...). This summary is directly in html format in order to be inserted in kanban views."
+msgstr ""
+
+#. module: delivery_carrier_deposit
 #: field:delivery.deposit.wizard,id:0
 #: field:deposit.slip,id:0
 msgid "ID"
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: help:deposit.slip,message_unread:0
+msgid "If checked new messages require your attention."
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: field:deposit.slip,message_is_follower:0
+msgid "Is a Follower"
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: field:deposit.slip,message_last_post:0
+msgid "Last Message Date"
 msgstr ""
 
 #. module: delivery_carrier_deposit
@@ -173,6 +216,16 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: delivery_carrier_deposit
+#: field:deposit.slip,message_ids:0
+msgid "Messages"
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: help:deposit.slip,message_ids:0
+msgid "Messages and communication history"
+msgstr ""
+
+#. module: delivery_carrier_deposit
 #: field:deposit.slip,name:0
 msgid "Name"
 msgstr ""
@@ -184,13 +237,12 @@ msgstr ""
 
 #. module: delivery_carrier_deposit
 #: view:website:delivery_carrier_deposit.report_generic_deposit_slip
-msgid "Parcel numbers"
+msgid "Nr of"
 msgstr ""
 
 #. module: delivery_carrier_deposit
-#: code:addons/delivery_carrier_deposit/wizard/deposit.py:82
-#, python-format
-msgid "Picking"
+#: view:website:delivery_carrier_deposit.report_generic_deposit_slip
+msgid "Parcel numbers"
 msgstr ""
 
 #. module: delivery_carrier_deposit
@@ -219,10 +271,19 @@ msgid "Status"
 msgstr ""
 
 #. module: delivery_carrier_deposit
-#: code:addons/delivery_carrier_deposit/wizard/deposit.py:83
+#: field:deposit.slip,message_summary:0
+msgid "Summary"
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: code:addons/delivery_carrier_deposit/wizard/deposit.py:77
 #, python-format
-msgid "There is no picking for '%s' carrier \n"
-"to gather in a deposit slip"
+msgid "There are no delivery orders in transferred state with a delivery method type '%s' not already linked to a deposit slip."
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: view:website:delivery_carrier_deposit.report_generic_deposit_slip
+msgid "Total Number of Packages:"
 msgstr ""
 
 #. module: delivery_carrier_deposit
@@ -231,9 +292,18 @@ msgid "Total Weight:"
 msgstr ""
 
 #. module: delivery_carrier_deposit
-#: field:delivery.deposit.wizard,carrier_type:0
+#: model:ir.ui.menu,name:delivery_carrier_deposit.menu_delivery_deposit_slip
+msgid "Transport"
+msgstr ""
+
+#. module: delivery_carrier_deposit
 #: field:deposit.slip,carrier_type:0
 msgid "Type"
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: field:deposit.slip,message_unread:0
+msgid "Unread Messages"
 msgstr ""
 
 #. module: delivery_carrier_deposit
@@ -247,13 +317,13 @@ msgid "Wizard to create Deposit Slip"
 msgstr ""
 
 #. module: delivery_carrier_deposit
-#: view:delivery.deposit.wizard:delivery_carrier_deposit.view_wiz_create_deposit
-msgid "Would you like generate 'Deposit slip' for these delivery methods ?"
+#: view:website:delivery_carrier_deposit.report_generic_deposit_slip
+msgid "ZIP"
 msgstr ""
 
 #. module: delivery_carrier_deposit
 #: view:website:delivery_carrier_deposit.report_generic_deposit_slip
-msgid "ZIP"
+msgid "packages"
 msgstr ""
 
 #. module: delivery_carrier_deposit
