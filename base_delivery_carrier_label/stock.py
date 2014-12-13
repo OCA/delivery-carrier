@@ -132,8 +132,8 @@ class StockPicking(models.Model):
                     'datas': label['file'].encode('base64'),
                     'file_type': label['file_type'],
                 }
-                if label.get('tracking_id'):
-                    data['tracking_id'] = label['tracking_id']
+                if label.get('package_id'):
+                    data['package_id'] = label['package_id']
                 context_attachment = self.env.context.copy()
                 # remove default_type setted for stock_picking
                 # as it would try to define default value of attachement
