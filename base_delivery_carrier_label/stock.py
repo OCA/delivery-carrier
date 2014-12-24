@@ -110,6 +110,8 @@ class stock_picking(orm.Model):
         the labels only of these trackings.
 
         """
+        if context is None:
+            context = {}
         shipping_label_obj = self.pool.get('shipping.label')
 
         pickings = self.browse(cr, uid, ids, context=context)
