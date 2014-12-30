@@ -128,7 +128,6 @@ ACCOUNT_MAPPING = {
     'T805': "customer_id",
     'T8914': "contact_id",
     'T8700': "outbound_depot",
-    'T810': "shipper_name",
     'T811': "shipper_street",
     'T820': "shipper_street2",
     'T810': "shipper_name",
@@ -145,11 +144,11 @@ MAPPING.update(ADDRESS_MAPPING)
 
 
 def dict_to_gls_data(params):
-    res = "\\\\\GLS\\\\\|"
+    res = r'\\\\\GLS\\\\\|'
     for key, val in params.items():
         if val != '':
             res += "%s:%s|" % (key, val)
-    res += "/////GLS/////"
+    res += r'/////GLS/////'
     return res
 
 
@@ -343,8 +342,8 @@ code: %s ; message: %s ; result: %s""" % (code, message, result))
         except:
             traceback = RichTraceback()
             for (filename, lineno, function, line) in traceback.traceback:
-                print "File %s, line %s, in %s" % (filename, lineno, function)
-                print line, "\n"
+                logger.info("File %s, line %s, in %s"
+                            % (filename, lineno, function))
             raise InvalidDataForMako(
                 "%s: %s"
                 % (str(traceback.error.__class__.__name__), traceback.error))
@@ -379,7 +378,7 @@ code: %s ; message: %s ; result: %s""" % (code, message, result))
             try:
                 mapping[T] = unidecode(val).upper()
             except Exception:
-                print semantic_key, datas['semantic_key']
+                logger.info("%s %s" % (semantic_key, datas['semantic_key']))
         return mapping
 
     def get_product(self, address_country):
@@ -404,7 +403,7 @@ code: %s ; message: %s ; result: %s""" % (code, message, result))
     def validate_mako(self, template, available_keys):
         import re
         keys2match = []
-        for match in re.findall('\$\{(.+?)\}+', template):
+        for match in re.findall(r'\$\{(.+?)\}+', template):
             keys2match.append(match)
         unmatch = list(set(keys2match) - set(available_keys))
         not_in_mako_but_known_case = ['T8900', 'T8901', 'T8717', 'T8911']
@@ -413,7 +412,7 @@ code: %s ; message: %s ; result: %s""" % (code, message, result))
             if elm in unknown_unmatch:
                 unknown_unmatch.remove(elm)
         if len(unknown_unmatch) > 0:
-            print """
-GLS carrier : these keys \n%s\nare defined
-in mako template but without valid replacement values\n""" % unknown_unmatch
+            logger.info("GLS carrier : these keys \n%s\nare defined "
+                        "in mako template but without valid replacement "
+                        "values\n" % unknown_unmatch)
         return unmatch
