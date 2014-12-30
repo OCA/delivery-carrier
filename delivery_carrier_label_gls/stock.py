@@ -93,7 +93,8 @@ class StockPicking(orm.Model):
             "zip": picking.partner_id.zip,
             "city": picking.partner_id.city,
             "consignee_phone": picking.partner_id.phone,
-            "consignee_mobile": picking.partner_id.mobile,
+            "consignee_mobile": (picking.partner_id.mobile or
+                                 picking.partner_id.phone),
             "consignee_email": picking.partner_id.email,
             "country_code": picking.partner_id.country_id.code or 'FR',
             # useful uniship label only
