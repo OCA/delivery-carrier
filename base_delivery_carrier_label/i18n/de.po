@@ -8,18 +8,18 @@ msgstr ""
 "Project-Id-Version: carriers-deliveries\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-03-12 17:01+0000\n"
-"PO-Revision-Date: 2014-06-07 08:36+0000\n"
+"PO-Revision-Date: 2015-01-05 13:46+0100\n"
 "Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2014-06-27 07:09+0000\n"
-"X-Generator: Launchpad (build 17077)\n"
+"X-Generator: Poedit 1.5.4\n"
+"Language: de\n"
 
 #. module: base_delivery_carrier_label
-#: view:stock.picking.in:0
-#: view:stock.picking.out:0
+#: view:stock.picking.in:0 view:stock.picking.out:0
 msgid "Carrier Info"
 msgstr "Information zum Spediteur"
 
@@ -41,14 +41,13 @@ msgstr "Spediteureinstellungen"
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_stock_picking
 msgid "Picking List"
-msgstr "Pickliste"
+msgstr "Kommissionierliste"
 
 #. module: base_delivery_carrier_label
-#: field:stock.picking,carrier_type:0
-#: field:stock.picking.in,carrier_type:0
+#: field:stock.picking,carrier_type:0 field:stock.picking.in,carrier_type:0
 #: field:stock.picking.out,carrier_type:0
 msgid "Carrier type"
-msgstr "Spediteurtyp"
+msgstr "Spediteurart"
 
 #. module: base_delivery_carrier_label
 #: field:shipping.label,attachment_id:0
@@ -59,12 +58,12 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: field:delivery.carrier,type:0
 msgid "Type"
-msgstr "Typ"
+msgstr "Art"
 
 #. module: base_delivery_carrier_label
 #: help:delivery.carrier,type:0
 msgid "Carrier type (combines several delivery methods)"
-msgstr "Spediteurtyp (führt verschiedene Liefermethoden zusammen)"
+msgstr "Spediteurart (führt verschiedene Liefermethoden zusammen)"
 
 #. module: base_delivery_carrier_label
 #: code:addons/base_delivery_carrier_label/stock.py:155
@@ -82,8 +81,7 @@ msgid "Shipping Label"
 msgstr "Paketaufkleber"
 
 #. module: base_delivery_carrier_label
-#: view:delivery.carrier:0
-#: field:delivery.carrier,description:0
+#: view:delivery.carrier:0 field:delivery.carrier,description:0
 #: field:delivery.carrier.template.option,description:0
 msgid "Description"
 msgstr "Beschreibung"
@@ -99,14 +97,12 @@ msgid "File type"
 msgstr "Dateityp"
 
 #. module: base_delivery_carrier_label
-#: view:stock.picking.in:0
-#: view:stock.picking.out:0
+#: view:stock.picking.in:0 view:stock.picking.out:0
 msgid "Delivery"
 msgstr "Lieferung"
 
 #. module: base_delivery_carrier_label
-#: field:stock.picking,carrier_code:0
-#: field:stock.picking.in,carrier_code:0
+#: field:stock.picking,carrier_code:0 field:stock.picking.in,carrier_code:0
 #: field:stock.picking.out,carrier_code:0
 msgid "Delivery Method Code"
 msgstr "Schlüssel der Liefermethode"
@@ -129,7 +125,7 @@ msgstr "Paket"
 #. module: base_delivery_carrier_label
 #: selection:delivery.carrier.option,state:0
 msgid "Optional"
-msgstr "Option"
+msgstr "Optional"
 
 #. module: base_delivery_carrier_label
 #: field:delivery.carrier.template.option,name:0
@@ -154,12 +150,9 @@ msgid "Option Configuration"
 msgstr "Einstellungen"
 
 #. module: base_delivery_carrier_label
-#: view:delivery.carrier:0
-#: field:stock.picking,option_ids:0
-#: view:stock.picking.in:0
-#: field:stock.picking.in,option_ids:0
-#: view:stock.picking.out:0
-#: field:stock.picking.out,option_ids:0
+#: view:delivery.carrier:0 field:stock.picking,option_ids:0
+#: view:stock.picking.in:0 field:stock.picking.in,option_ids:0
+#: view:stock.picking.out:0 field:stock.picking.out,option_ids:0
 msgid "Options"
 msgstr "Optionen"
 
@@ -170,15 +163,13 @@ msgid "Option"
 msgstr "Vorlageoption"
 
 #. module: base_delivery_carrier_label
-#: help:stock.picking,carrier_code:0
-#: help:stock.picking.in,carrier_code:0
+#: help:stock.picking,carrier_code:0 help:stock.picking.in,carrier_code:0
 #: help:stock.picking.out,carrier_code:0
 msgid "Delivery Method Code (from carrier)"
-msgstr "Schlüssel der Liefermethoden (gem. Spediteur)"
+msgstr "Schlüssel der Liefermethoden (des Spediteurs)"
 
 #. module: base_delivery_carrier_label
-#: field:delivery.carrier,code:0
-#: field:delivery.carrier.template.option,code:0
+#: field:delivery.carrier,code:0 field:delivery.carrier.template.option,code:0
 msgid "Code"
 msgstr "Schlüssel"
 
@@ -193,17 +184,15 @@ msgid "Create Shipping Label"
 msgstr "Paketaufkleber erzeugen"
 
 #. module: base_delivery_carrier_label
-#: help:stock.picking,carrier_type:0
-#: help:stock.picking.in,carrier_type:0
+#: help:stock.picking,carrier_type:0 help:stock.picking.in,carrier_type:0
 #: help:stock.picking.out,carrier_type:0
 msgid "Carrier type ('group')"
-msgstr "Spediteurtyp (Gruppe)"
+msgstr "Spediteurart (Gruppe)"
 
 #. module: base_delivery_carrier_label
-#: view:delivery.carrier.option:0
-#: view:delivery.carrier.template.option:0
+#: view:delivery.carrier.option:0 view:delivery.carrier.template.option:0
 msgid "delivery_carrier_option"
-msgstr ""
+msgstr "delivery_carrier_option"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_delivery_carrier_template_option
@@ -223,8 +212,8 @@ msgstr ""
 "werden dem Verpacker nicht zur Verfügung stehen\n"
 "- Verbindlich: Diese Option wird in den Spediteur kopiert und ist nicht "
 "löschbar\n"
-"- Vorgegebene Option: Diese Option wird kopiert ist jedoch entfernbar\n"
-"- Inaktive Option: Diese Option kann durch den Anwender später im "
+"- Wahlvorschlag: Diese Option wird kopiert ist jedoch entfernbar\n"
+"- Inaktive Zuwahl: Diese Option kann durch den Anwender später im "
 "Lieferauftrag ergänzt werden."
 
 #. module: base_delivery_carrier_label
@@ -240,9 +229,9 @@ msgstr "Lieferaufträge"
 #. module: base_delivery_carrier_label
 #: view:stock.picking.out:0
 msgid "carrier_id_change(carrier_id, context)"
-msgstr ""
+msgstr "carrier_id_change(carrier_id, context)"
 
 #. module: base_delivery_carrier_label
 #: selection:delivery.carrier.option,state:0
 msgid "Optional by Default"
-msgstr "Vorgegebene Option"
+msgstr "Wahlvorschlag"
