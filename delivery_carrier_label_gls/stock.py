@@ -113,9 +113,9 @@ class StockPicking(orm.Model):
             shipping_date, DEFAULT_SERVER_DATETIME_FORMAT)
         delivery = {}
         delivery.update({
-            'consignee_ref': picking.name,
+            'consignee_ref': picking.name[:20],
             'additional_ref_1': u'',
-            'additional_ref_2': picking.name,
+            'additional_ref_2': picking.name[:20],
             'shipping_date': shipping_date.strftime('%Y%m%d'),
             'commentary': picking.note,
             'parcel_total_number': number_of_packages,
