@@ -35,6 +35,16 @@ class StockQuantPackage(models.Model):
              "weight of the logistic unit."
     )
 
+    @api.multi
+    def _complete_name(self, name, args):
+        res = super(StockQuantPackage, self)._complete_name(name, args)
+        for pack in self:
+            if pack.parcel_tracking:
+                res[pack.id] += ' [%s]' % pack.parcel_tracking
+            if pack.weight:
+                res[pack.id] += ' %s kg' % pack.weight
+        return res
+
 
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
