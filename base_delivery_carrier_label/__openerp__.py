@@ -23,33 +23,9 @@
  'version': '1.2',
  'author': 'Camptocamp,Akretion',
  'maintainer': 'Camptocamp',
- 'category': 'version',
+ 'category': 'Delivery',
  'complexity': 'normal',
- 'depends': ['stock', 'delivery'],
- 'description': """
-Base module for carrier labels
-==============================
-
-This module adds a button on delivery orders to generate a label as an
-attachement.
-
-.. tip::
-   It doesn't implement a label. To add a default label, you can install
-   the module `delivery_carrier_label_default_webkit`
-
-It can be used to print specific labels per carrier.
-
-.. note::
-   Inspired by Akretion module delivery_base and delivery_shipping_label
-
-Contributors
-------------
-
-* David BEAL <david.beal@akretion.com>
-* Sébastien BEAU <sebastien.beau@akretion.com>
-* Yannick Vaucher <yannick.vaucher@camptocamp.com>
-
- """,
+ 'depends': ['delivery'],
  'website': 'http://www.camptocamp.com/',
  'data': ['delivery_view.xml',
           'stock_view.xml',
