@@ -228,7 +228,7 @@ class GLSLabel(AbstractLabel):
             code += (304 - len(code)) * ' '
             return {'T8917': code}
         else:
-            # TODO : n'est pas ramené à l'erp
+            # TODO : is not raised correctly to ERP
             raise Exception(
                 "There is no key 'country_norme3166' in the " +
                 "given dictionnary 'address' for the country '%s' : " +

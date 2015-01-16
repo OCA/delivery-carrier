@@ -142,7 +142,7 @@ class AbstractLabel(object):
         return res
 
     def evaluate_size_according_to_type(self, data):
-        "Used to simplify the code in check_model()"
+        """Used to simplify the code in check_model()"""
         res = ''
         if type(data) in [str, unicode]:
             res = len(data)
