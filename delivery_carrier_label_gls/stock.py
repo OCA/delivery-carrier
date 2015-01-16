@@ -1,16 +1,27 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#  license AGPL version 3 or later
-#  see license in __openerp__.py or http://www.gnu.org/licenses/agpl-3.0.txt
-#  Copyright (C) 2014 Akretion (http://www.akretion.com).
-#  @author David BEAL <david.beal@akretion.com>
+#    Copyright (C) All Rights Reserved 2014 Akretion
+#    @author David BEAL <david.beal@akretion.com>
 #
-##############################################################################
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+###############################################################################
 
 from openerp.osv import orm  # fields
 from openerp.tools.translate import _
-from .report.label import Gls, InvalidDataForMako
+from .report.label import GLSLabel, InvalidDataForMako
 from .report.exception_helper import (InvalidAccountNumber)
 from .report.label_helper import (
     InvalidValueNotInList,
@@ -50,8 +61,6 @@ class StockPicking(orm.Model):
         """
         :return: see original method
         """
-        if context is None:
-            context = {}
         for picking in self.browse(cr, uid, ids, context=context):
             if picking.carrier_type == 'gls':
                 self.generate_labels(
@@ -181,7 +190,7 @@ class StockPicking(orm.Model):
                    if not line.tracking_id]
         return sum(weights)
 
-    def _generate_gls_label(
+    def _generate_gls_labels(
             self, cr, uid, picking, service, tracking_ids=None, context=None):
         """ Generate labels and write tracking numbers received """
         global PACK_NUMBER
@@ -280,7 +289,7 @@ class StockPicking(orm.Model):
                 raise_exception(orm, e.message)
             except Exception as e:
                 raise_exception(orm, e.message)
-            return self._generate_gls_label(
+            return self._generate_gls_labels(
                 cr, uid, picking, service,
                 tracking_ids=tracking_ids,
                 context=context)

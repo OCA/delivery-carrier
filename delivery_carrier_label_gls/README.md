@@ -1,8 +1,8 @@
 
 GLS Group - Transportation services
-=====================================
+===================================
 
-Implémentation du service Unibox service implementation:
+Unibox service implementation:
 - send delivery order informations and parcel infothe GLS unibox server
 - webservice routing info in back
 - label GLS Unibox generate
