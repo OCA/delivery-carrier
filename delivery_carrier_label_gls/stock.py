@@ -274,7 +274,7 @@ class StockPicking(orm.Model):
             if picking.company_id.gls_test:
                 test = True
             try:
-                service = Gls(
+                service = GLSLabel(
                     sender, picking.carrier_code, test_plateform=test)
             except InvalidMissingField as e:
                 raise_exception(orm, e.message)

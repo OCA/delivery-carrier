@@ -1,4 +1,12 @@
 # -*- coding: utf-8 -*-
+##############################################################################
+#
+#  license AGPL version 3 or later
+#  see license in __openerp__.py or http://www.gnu.org/licenses/agpl-3.0.txt
+#  Copyright (C) 2014 Akretion (http://www.akretion.com).
+#  @author David BEAL <david.beal@akretion.com>
+#
+##############################################################################
 
 from mako.template import Template
 from mako.exceptions import RichTraceback
@@ -77,7 +85,6 @@ DELIVERY_MODEL = {
     "shipping_date":    {'date': '%Y%m%d', 'required': True},
     "commentary":       {'max_size': 35},
     "parcel_total_number": {'max_number': 999, 'type': int, 'required': True},
-    # TODO : valider 10 caract numériques
 }
 SENDER_MODEL = {
     "customer_id":       {'max_size': 10, 'required': True},
@@ -120,7 +127,7 @@ DELIVERY_MAPPING = {
     'T8318': "commentary",
     'T8975': "gls_origin_reference",
     'T8912': "gls_origin_reference",
-    'T8905': "parcel_total_number",  # TODO : valider 10 caract numériques
+    'T8905': "parcel_total_number",
     'T8702': "parcel_total_number",
 }
 ACCOUNT_MAPPING = {
@@ -164,7 +171,7 @@ def gls_decode(data):
     return gls_data_to_dict(data)
 
 
-class Gls(AbstractLabel):
+class GLSLabel(AbstractLabel):
 
     def __init__(self, sender, code, test_plateform=False):
         self.check_model(sender, SENDER_MODEL, 'company')
