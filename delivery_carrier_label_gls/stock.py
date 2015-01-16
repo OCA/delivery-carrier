@@ -35,7 +35,6 @@ from operator import attrgetter
 
 EXCEPT_TITLE = "GLS Library Exception"
 LABEL_TYPE = 'zpl2'
-PACK_NUMBER = 0
 
 
 def raise_exception(orm, message):
@@ -152,13 +151,11 @@ class StockPicking(orm.Model):
         return sender
 
     def _prepare_pack_gls(
-            self, cr, uid, tracking, weight=None, context=None):
-        global PACK_NUMBER
+            self, cr, uid, tracking, pack_number, weight=None, context=None):
         pack = {}
-        PACK_NUMBER += 1
         pack.update({
-            'parcel_number_label': PACK_NUMBER,
-            'parcel_number_barcode': PACK_NUMBER,
+            'parcel_number_label': pack_number,
+            'parcel_number_barcode': pack_number,
             'custom_sequence': self._get_sequence(
                 cr, uid, 'gls', context=context),
         })
@@ -193,8 +190,7 @@ class StockPicking(orm.Model):
     def _generate_gls_labels(
             self, cr, uid, picking, service, tracking_ids=None, context=None):
         """ Generate labels and write tracking numbers received """
-        global PACK_NUMBER
-        PACK_NUMBER = 0
+        pack_nbr = 0
         pick2update = {}
         address = self._prepare_address_gls(cr, uid, picking, context=context)
         if tracking_ids is None:
@@ -217,6 +213,7 @@ class StockPicking(orm.Model):
         # for move lines with tracking
         # and on picking for other moves
         for packing in trackings:
+            pack_nbr += 1
             addr = address.copy()
             deliv = delivery.copy()
             if not packing:
@@ -227,12 +224,12 @@ class StockPicking(orm.Model):
                 weight = self._get_weight_from_moves_without_tracking(
                     cr, uid, picking, context=context)
                 pack = self._prepare_pack_gls(
-                    cr, uid, packing, weight=weight, context=context)
+                    cr, uid, packing, pack_nbr, weight=weight, context=context)
                 label = self.get_zpl(service, deliv, addr, pack)
                 pick2update['carrier_tracking_ref'] = label['tracking_number']
             else:
                 pack = self._prepare_pack_gls(
-                    cr, uid, packing, context=context)
+                    cr, uid, packing, pack_nbr, context=context)
                 label = self.get_zpl(service, deliv, addr, pack)
                 packing.write({'serial': label['tracking_number']})
             label_info = {
