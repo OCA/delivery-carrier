@@ -19,7 +19,7 @@
 #
 ###############################################################################
 
-from openerp.osv import orm  # fields
+from openerp.osv import orm
 from openerp.tools.translate import _
 from .report.label import GLSLabel, InvalidDataForMako
 from .report.exception_helper import (InvalidAccountNumber)
