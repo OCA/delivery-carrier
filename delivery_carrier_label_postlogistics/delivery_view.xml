@@ -36,7 +36,15 @@
           <field name="allowed_option_ids" invisible="1"/>
         </field>
         <field name="tmpl_option_id" position="attributes">
-          <attribute name="domain">['|', ('partner_id', '!=', %(delivery_carrier_label_postlogistics.postlogistics)d), ('id', 'in', allowed_option_ids[0][2])]</attribute>
+          <attribute name="domain">['|',
+                                    '|',
+                                    ('partner_id', '=', False),
+                                    ('partner_id', '!=', %(delivery_carrier_label_postlogistics.postlogistics)d),
+                                    '&amp;',
+                                    ('partner_id', '=', %(delivery_carrier_label_postlogistics.postlogistics)d),
+                                    ('id', 'in', allowed_option_ids[0][2]),
+                                    ]
+          </attribute>
         </field>
       </field>
     </record>
