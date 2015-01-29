@@ -22,33 +22,13 @@
 {
     'name': 'Delivery Deposit',
     'version': '0.2',
-    'category': 'Warehouse',
+    'category': 'Delivery',
     'author': 'Akretion',
     'maintainer': 'Akretion',
+    'summary': 'Create deposit slips',
     'depends': [
         'base_delivery_carrier_label',
     ],
-    'description': """
-Description
------------
-Allows to gather all delivery orders by *delivery method*
-and date delivery in *Deposit slip* model.
-
-Provides a report which summarizes all deliveries for each carrier.
-
-How to use
-----------
-- generate report deliveries with the menu *Warehouse* > *Create Deposit Slip*
-- print it
-
-Contributors
-------------
-* David BEAL <david.beal@akretion.com>
-* Sébastien BEAU <sebastien.beau@akretion.com>
-* Benoit GUILLOT <benoit.guillot@akretion.com>
-* Chafique DELLI <chafique.delli@akretion.com>
-* Alexis de Lattre <alexis.delattre@akretion.com> (port to new API)
-""",
     'website': 'http://www.akretion.com/',
     'data': [
         'stock_view.xml',
