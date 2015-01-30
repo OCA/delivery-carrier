@@ -15,7 +15,8 @@
         <xpath expr="//page[@string='Additional Info']//field[@name='carrier_tracking_ref']" position="after">
           <field name="carrier_type"/>
           <field name="carrier_code"/>
-          <field name="option_ids" nolabel="1" colspan="2" />
+          <field name="option_ids" nolabel="1" colspan="2"
+            domain="[('carrier_id', '=', carrier_id)]"/>
         </xpath>
       </field>
     </record>

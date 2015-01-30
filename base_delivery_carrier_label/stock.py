@@ -219,11 +219,18 @@ class StockPicking(models.Model):
         """ Get all the packages from the picking """
         self.ensure_one()
         operation_obj = self.env['stock.pack.operation']
+        packages = self.env['stock.quant.package'].browse()
         operations = operation_obj.search(
-            [('result_package_id', '!=', False),
+            ['|',
+             ('package_id', '!=', False),
+             ('result_package_id', '!=', False),
              ('picking_id', '=', self.id)]
         )
-        return operations.mapped('result_package_id')
+        for operation in operations:
+            # Take the destination package. If empty, the package is
+            # moved so take the source one.
+            packages += operation.result_package_id or operation.package_id
+        return packages
 
     @api.multi
     def write(self, vals):
