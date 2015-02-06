@@ -44,6 +44,7 @@ Contributors
 
 """,
  'website': 'http://www.camptocamp.com/',
+ 'license': 'AGPL-3',
  'data': ['sale_view.xml'],
  'test': [],
  'installable': False,
