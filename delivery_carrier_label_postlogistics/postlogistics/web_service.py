@@ -96,7 +96,7 @@ class PostlogisticsWebService(object):
                                                   lang=None):
         """ Get a list of allowed service for a postlogistics licence """
         if not lang:
-            lang = company.partner_id.lang
+            lang = company.partner_id.lang or 'en'
         lang = self._get_language(lang)
         request = self.client.service.ReadAllowedServicesByFrankingLicense
         return self._send_request(request, FrankingLicense=cp_license,
