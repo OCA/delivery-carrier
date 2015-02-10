@@ -119,12 +119,6 @@ class DeliveryCarrierOption(models.Model):
     _inherit = 'delivery.carrier.option'
 
     name = fields.Char(translate=True)
-    # to repeat carrier allowed option ids to filter domain set by
-    # default from view
-    allowed_option_ids = fields.Many2many(
-        related='carrier_id.allowed_option_ids',
-        readonly=True
-    )
 
 
 class DeliveryCarrier(models.Model):
