@@ -18,6 +18,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+from lxml import etree
 from openerp import models, fields, api
 
 
@@ -119,6 +120,33 @@ class DeliveryCarrierOption(models.Model):
     _inherit = 'delivery.carrier.option'
 
     name = fields.Char(translate=True)
+
+    def fields_view_get(self, cr, uid, view_id=None, view_type='form',
+                        context=None, toolbar=False, submenu=False):
+        _super = super(DeliveryCarrierOption, self)
+        result = _super.fields_view_get(cr, uid, view_id=view_id,
+                                        view_type=view_type, context=context,
+                                        toolbar=toolbar, submenu=submenu)
+        xmlid = 'delivery_carrier_label_postlogistics.postlogistics'
+        ref = self.pool['ir.model.data'].xmlid_to_object
+        postlogistics_partner = ref(cr, uid, xmlid, context=context)
+        if context.get('default_carrier_id'):
+            carrier_obj = self.pool['delivery.carrier']
+            carrier = carrier_obj.browse(cr, uid,
+                                         context['default_carrier_id'],
+                                         context=context)
+            if carrier.partner_id == postlogistics_partner:
+                arch = result['arch']
+                doc = etree.fromstring(arch)
+                for node in doc.xpath("//field[@name='tmpl_option_id']"):
+                    node.set(
+                        'domain',
+                        "[('partner_id', '=', %s), "
+                        " ('id', 'in', parent.allowed_option_ids[0][2])]" %
+                        postlogistics_partner.id
+                    )
+                result['arch'] = etree.tostring(doc)
+        return result
 
 
 class DeliveryCarrier(models.Model):
