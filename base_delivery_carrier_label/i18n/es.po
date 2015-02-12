@@ -51,7 +51,7 @@ msgstr "Tipo de transportista"
 #. module: base_delivery_carrier_label
 #: field:shipping.label,attachment_id:0
 msgid "Automatically created field to link to parent ir.attachment"
-msgstr "Se ha creado el campo para enlazar al ir.attachment padre"
+msgstr "Campo creado automáticamente para enlazar el adjunto padre"
 
 #. module: base_delivery_carrier_label
 #: field:delivery.carrier,type:0
@@ -68,7 +68,7 @@ msgstr "Tipo de transportista (combina diversos métodos de envío)"
 #, python-format
 msgid "You can not remove a mandatory option.\n"
 "Options are reset to default."
-msgstr "No se puede elimina una opción necesaria.\n"
+msgstr "No se puede eliminar una opción necesaria.\n"
 "Las opciones se han inicializado a las predeterminadas."
 
 #. module: base_delivery_carrier_label
@@ -86,7 +86,7 @@ msgstr "Descripción"
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_stock_picking_in
 msgid "Incoming Shipments"
-msgstr "Envíos entrantes"
+msgstr "Recepciones"
 
 #. module: base_delivery_carrier_label
 #: field:shipping.label,file_type:0
@@ -146,7 +146,7 @@ msgstr "Transportista"
 #. module: base_delivery_carrier_label
 #: field:delivery.carrier.option,state:0
 msgid "Option Configuration"
-msgstr "Configuración de opciones"
+msgstr "Opción de configuración"
 
 #. module: base_delivery_carrier_label
 #: view:delivery.carrier:0
@@ -192,7 +192,7 @@ msgstr "Crear etiqueta de envío"
 #: help:stock.picking.in,carrier_type:0
 #: help:stock.picking.out,carrier_type:0
 msgid "Carrier type ('group')"
-msgstr "Tipo de transportista ('group')"
+msgstr "Tipo de transportista ('grupo')"
 
 #. module: base_delivery_carrier_label
 #: view:delivery.carrier.option:0
