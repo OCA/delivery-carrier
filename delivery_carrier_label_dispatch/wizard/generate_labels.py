@@ -133,7 +133,10 @@ class DeliveryCarrierLabelGenerate(orm.TransientModel):
         error_queue queue
         """
         while not data_queue.empty():
-            args, kwargs = data_queue.get()
+            try:
+                args, kwargs = data_queue.get()
+            except Queue.Empty:
+                return
             try:
                 self._do_generate_labels(*args, **kwargs)
             except Exception as e:
