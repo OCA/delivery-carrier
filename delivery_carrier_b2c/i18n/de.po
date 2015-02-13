@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-10-03 16:42+0000\n"
-"PO-Revision-Date: 2015-01-05 13:50+0100\n"
+"PO-Revision-Date: 2015-02-03 18:08+0100\n"
 "Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -29,12 +29,12 @@ msgstr "Zeige zusätzliche Information für Streckenlieferung (b2c)"
 #. module: delivery_carrier_b2c
 #: field:res.partner,door_code:0
 msgid "Door Code"
-msgstr "Türkennung"
+msgstr "Torkennung"
 
 #. module: delivery_carrier_b2c
 #: field:res.partner,door_code2:0
 msgid "Door Code 2"
-msgstr "Türkennung 2"
+msgstr "Torkennung 2"
 
 #. module: delivery_carrier_b2c
 #: help:res.partner,intercom:0
