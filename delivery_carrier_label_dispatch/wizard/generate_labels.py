@@ -120,7 +120,7 @@ class DeliveryCarrierLabelGenerate(orm.TransientModel):
                 pack_num = _('Pack: %s') % pack.name if pack else ''
                 raise orm.except_orm(
                     e.name,
-                    _('%s %s - %s') % (picking_name, pack_num, e.value))
+                    ('%s %s - %s') % (picking_name, pack_num, e.value))
         finally:
             thread_cr.close()
 
