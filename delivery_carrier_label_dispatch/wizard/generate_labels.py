@@ -124,22 +124,22 @@ class DeliveryCarrierLabelGenerate(orm.TransientModel):
         finally:
             thread_cr.close()
 
-    def worker(self, q, q_except):
+    def worker(self, data_queue, error_queue):
         """ A worker to generate labels
 
-        Takes data from queue q
+        Takes data from queue data_queue
 
         And if the worker encounters errors, he will add them in
-        q_except queue
+        error_queue queue
         """
-        while not q.empty():
-            args, kwargs = q.get()
+        while not data_queue.empty():
+            args, kwargs = data_queue.get()
             try:
                 self._do_generate_labels(*args, **kwargs)
             except Exception as e:
-                q_except.put(e)
+                error_queue.put(e)
             finally:
-                q.task_done()
+                data_queue.task_done()
 
     def _get_num_workers(self, cr, uid, context=None):
         """ Get number of worker parameter for labels generation
@@ -154,8 +154,8 @@ class DeliveryCarrierLabelGenerate(orm.TransientModel):
         return int(num_workers)
 
     def _get_all_pdf(self, cr, uid, wizard, dispatch, context=None):
-        q = Queue.Queue()
-        q_except = Queue.Queue()
+        data_queue = Queue.Queue()
+        error_queue = Queue.Queue()
 
         # create the tasks to generate labels
         for pack, moves, label in self._get_packs(cr, uid, wizard, dispatch,
@@ -165,28 +165,29 @@ class DeliveryCarrierLabelGenerate(orm.TransientModel):
                 args = (cr, uid, wizard, pack, picking, label)
                 kwargs = {'context': context}
                 task = (args, kwargs)
-                q.put(task)
+                data_queue.put(task)
 
         # create few workers to parallelize label generation
         num_workers = self._get_num_workers(cr, uid, context=context)
         _logger.info('Starting %s workers to generate labels', num_workers)
         for i in range(num_workers):
-            t = threading.Thread(target=self.worker, args=(q, q_except))
+            t = threading.Thread(target=self.worker,
+                                 args=(data_queue, error_queue))
             t.daemon = True
             t.start()
 
         # wait for all tasks to be done
-        q.join()
+        data_queue.join()
 
         # We will not create a partial PDF if some labels weren't
         # generated thus we raise catched exceptions by the workers
         # We will try to regroup all orm exception in one
-        if not q_except.empty():
+        if not error_queue.empty():
 
             error_count = {}
             messages = []
-            while not q_except.empty():
-                e = q_except.get()
+            while not error_queue.empty():
+                e = error_queue.get()
                 if isinstance(e, orm.except_orm):
                     if e.name not in error_count:
                         error_count[e.name] = 1
