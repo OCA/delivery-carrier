@@ -214,20 +214,22 @@ class DeliveryCarrierLabelGenerate(orm.TransientModel):
 
         # create a new cursor to be up to date with what was created by workers
         join_cr = pooler.get_db(cr.dbname).cursor()
-        for pack, moves, label in self._get_packs(join_cr, uid,
-                                                  wizard, dispatch,
-                                                  context=context):
-            picking = moves[0].picking_id
-            if pack:
-                label = self._find_pack_label(join_cr, uid, wizard, pack,
-                                              context=context)
-            else:
-                label = self._find_picking_label(join_cr, uid, wizard, picking,
-                                                 context=context)
-            if not label:
-                continue  # no label could be generated
-            yield label
-        join_cr.close()
+        try:
+            for pack, moves, label in self._get_packs(join_cr, uid,
+                                                      wizard, dispatch,
+                                                      context=context):
+                picking = moves[0].picking_id
+                if pack:
+                    label = self._find_pack_label(
+                        join_cr, uid, wizard, pack, context=context)
+                else:
+                    label = self._find_picking_label(
+                        join_cr, uid, wizard, picking, context=context)
+                if not label:
+                    continue  # no label could be generated
+                yield label
+        finally:
+            join_cr.close()
 
     def action_generate_labels(self, cr, uid, ids, context=None):
         """
