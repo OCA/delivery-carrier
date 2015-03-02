@@ -188,8 +188,8 @@ class StockPicking(models.Model):
             return
         carrier = self.carrier_id
         for available_option in carrier.available_option_ids:
-            if (available_option.mandatory
-                    and available_option not in self.option_ids):
+            if (available_option.mandatory and
+                    available_option not in self.option_ids):
                 # XXX the client does not allow to modify the field that
                 # triggered the onchange:
                 # https://github.com/odoo/odoo/issues/2693#issuecomment-56825399
