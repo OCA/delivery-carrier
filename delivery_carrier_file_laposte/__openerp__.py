@@ -30,7 +30,7 @@ Definition of the delivery carrier file for "La Poste".
 
 File Specifications: laposte_specifications.txt in the module's root directory.
     """,
-    'author': 'Camptocamp',
+    'author': "Camptocamp,Odoo Community Association (OCA)",
     'license': 'AGPL-3',
     'website': 'http://www.camptocamp.com',
     'depends': ['base_delivery_carrier_files'],

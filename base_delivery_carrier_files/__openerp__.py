@@ -39,7 +39,7 @@ Sub-modules already exist to generate file according to specs of :
  - Make your own ! Look at the code of the modules above, it's trivial to create a sub-module for a carrier.
 
 """,
-    'author': 'Camptocamp',
+    'author': "Camptocamp,Odoo Community Association (OCA)",
     'license': 'AGPL-3',
     'website': 'http://www.camptocamp.com',
     'depends': ['base',

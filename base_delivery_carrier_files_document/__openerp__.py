@@ -27,7 +27,7 @@
 Allow to store the carrier files in a Document directory.
 Auto-install when the module Document and Base Delivery Carrier Files are installed.
     """,
-    'author': 'Camptocamp',
+    'author': "Camptocamp,Odoo Community Association (OCA)",
     'license': 'AGPL-3',
     'website': 'http://www.camptocamp.com',
     'depends': ['base_delivery_carrier_files',
