@@ -20,7 +20,7 @@
 ##############################################################################
 {'name': 'PostLogistics labels - logo per Shop',
  'version': '1.0',
- 'author': 'Camptocamp',
+ 'author': "Camptocamp,Odoo Community Association (OCA)",
  'maintainer': 'Camptocamp',
  'category': 'version',
  'complexity': 'normal',

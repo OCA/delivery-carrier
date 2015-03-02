@@ -23,7 +23,7 @@
     'name': 'Delivery Deposit',
     'version': '0.2',
     'category': 'Warehouse',
-    'author': 'Akretion',
+    'author': "Akretion,Odoo Community Association (OCA)",
     'maintainer': 'Akretion',
     'depends': [
         'base_delivery_carrier_label',

@@ -20,7 +20,7 @@
 ##############################################################################
 {'name': 'PostLogistics Labels WebService',
  'version': '1.1',
- 'author': 'Camptocamp',
+ 'author': "Camptocamp,Odoo Community Association (OCA)",
  'maintainer': 'Camptocamp',
  'category': 'version',
  'complexity': 'normal',
