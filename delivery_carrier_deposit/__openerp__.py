@@ -23,7 +23,7 @@
     'name': 'Delivery Deposit',
     'version': '0.2',
     'category': 'Delivery',
-    'author': 'Akretion',
+    'author': "Akretion,Odoo Community Association (OCA)",
     'maintainer': 'Akretion',
     'summary': 'Create deposit slips',
     'depends': [
