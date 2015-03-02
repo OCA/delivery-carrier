@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2014 Akretion
+  The licence is in the file __openerp__.py
+-->
+
+<openerp>
+<data>
+
+<report id="report_deposit_slip"
+    model="deposit.slip"
+    string="Generic Deposit Slip"
+    report_type="qweb-pdf"
+    name="delivery_carrier_deposit.report_generic_deposit_slip"
+    file="delivery_carrier_deposit.report.deposit_slip"
+    />
+
+</data>
+</openerp>

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Author: David BEAL
+#    Author: Chafique DELLI <chafique.delli@akretion.com>
 #    Copyright 2014 Akretion
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -20,46 +20,39 @@
 ##############################################################################
 
 {
-    'name': 'Delivery Deposit',
+    'name': 'Delivery Carrier Business To Customer',
     'version': '0.2',
-    'category': 'Warehouse',
     'author': 'Akretion',
     'maintainer': 'Akretion',
+    'category': '',
     'depends': [
         'base_delivery_carrier_label',
-        'base_headers_webkit',
+        'partner_helper',
     ],
     'description': """
+Delivery Carrier Business To Customer
+=====================================
+
 Description
 -----------
-Allows to gather all delivery orders by 'delivery method'
-and date delivery in 'Deposit slip' model.
+* Add specific fields to partner for delivery purpose
 
-Provides a report which summarizes all deliveries for each carrier.
-
-How to use
-----------
-- generate report deliveries with the menu 'warehouse / create deposit slip'
-- print it
 
 Contributors
 ------------
-* David BEAL <david.beal@akretion.com>
-* Sébastien BEAU <sebastien.beau@akretion.com>
-* Benoit GUILLOT <benoit.guillot@akretion.com>
 * Chafique DELLI <chafique.delli@akretion.com>
-""",
+* David BEAL <david.beal@akretion.com>
+
+----
+
+
+    """,
     'website': 'http://www.akretion.com/',
     'data': [
-        'stock_view.xml',
-        'wizard/deposit.xml',
-        'ir_sequence_data.xml',
-        'report/report.xml',
-        'security/ir.model.access.csv',
+        'partner_view.xml',
     ],
-    'demo': [],
-    'installable': False,
-    'active': False,
+    'tests': [],
+    'installable': True,
     'auto_install': False,
     'license': 'AGPL-3',
     'application': False,

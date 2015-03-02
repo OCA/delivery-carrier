@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Author: Chafique DELLI <chafique.delli@akretion.com>
+#    Author: David BEAL
 #    Copyright 2014 Akretion
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -20,40 +20,25 @@
 ##############################################################################
 
 {
-    'name': 'Delivery Carrier Business To Customer',
+    'name': 'Delivery Deposit',
     'version': '0.2',
+    'category': 'Delivery',
     'author': 'Akretion',
     'maintainer': 'Akretion',
-    'category': '',
+    'summary': 'Create deposit slips',
     'depends': [
         'base_delivery_carrier_label',
-        'partner_helper',
     ],
-    'description': """
-Delivery Carrier Business To Customer
-=====================================
-
-Description
------------
-* Add specific fields to partner for delivery purpose
-
-
-Contributors
-------------
-* Chafique DELLI <chafique.delli@akretion.com>
-* David BEAL <david.beal@akretion.com>
-
-----
-
-
-    """,
     'website': 'http://www.akretion.com/',
     'data': [
-        'partner_view.xml',
-    ],
-    'tests': [],
-    'installable': False,
-    'auto_install': False,
+        'stock_view.xml',
+        'wizard/deposit.xml',
+        'ir_sequence_data.xml',
+        'report/report.xml',
+        'report/deposit_slip.xml',
+        'security/ir.model.access.csv',
+        ],
+    'demo': [],
+    'installable': True,
     'license': 'AGPL-3',
-    'application': False,
 }

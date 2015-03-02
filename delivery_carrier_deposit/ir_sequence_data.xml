@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data noupdate="1">
-        <!-- Sequence TYPES  -->
 
+        <!-- Sequence TYPES  -->
         <record id="seq_type_delivery_deposit" model="ir.sequence.type">
             <field name="name">Delivery deposit</field>
             <field name="code">delivery.deposit</field>

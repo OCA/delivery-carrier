@@ -1,22 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
 <openerp>
-    <data>
+<data>
 
 <!-- DEPOSIT SLIP -->
 <!-- ACTION / MENU -->
 <record id="act_delivery_deposit" model="ir.actions.act_window">
     <field name="name">Deposit Slip</field>
     <field name="res_model">deposit.slip</field>
-    <field name="view_type">form</field>
     <field name="view_mode">tree,form</field>
 </record>
 
 <menuitem id="menu_delivery_deposit_slip"
-          name="Deposit Slip"
-          parent="stock.menu_stock_warehouse_mgmt"
-          sequence="10" />
+          name="Transport"
+          parent="stock.menu_stock_root"
+          sequence="2" />
 
 <menuitem id="menu_delivery_deposit_slip_model"
-          name="Deposit Slip"
           action="act_delivery_deposit"
           parent="menu_delivery_deposit_slip"
           sequence="20" />
@@ -26,12 +25,13 @@
 <record id="view_deposit_slip_search" model="ir.ui.view">
     <field name="name">delivery_deposit.slip.search</field>
     <field name="model">deposit.slip</field>
-    <field name="priority" eval="8"/>
     <field name="arch" type="xml">
     <search string="Deposit">
-        <field name="name" select="True"/>
-        <field name="carrier_type" select="True"/>
+        <field name="name"/>
         <field name="create_date"/>
+        <group string="Group By" name="groupby">
+            <filter name="carrier_type_groupby" string="Delivery Method Type" context="{'group_by': 'carrier_type'}"/>
+        </group>
     </search>
     </field>
 </record>
@@ -40,9 +40,8 @@
 <!-- TREE -->
 <record id="view_deposit_slip_tree" model="ir.ui.view">
     <field name="model">deposit.slip</field>
-    <field name="priority" eval="8"/>
     <field name="arch" type="xml">
-    <tree string="Deposit">
+    <tree string="Deposit" colors="blue:state=='draft'">
         <field name="name"/>
         <field name="carrier_type"/>
         <field name="create_date"/>
@@ -55,42 +54,56 @@
  <!--FORM-->
 <record id="view_deposit_slip_form" model="ir.ui.view">
     <field name="model">deposit.slip</field>
-    <field name="priority" eval="8"/>
     <field name="arch" type="xml">
-        <form string="Deposit" version="7.0">
+        <form string="Deposit">
             <header>
                 <button name="validate_deposit" string="Confirm" type="object"
                         attrs="{'invisible' : ['|', ('state','!=','draft'), ('carrier_type', '=', False)]}"
-                        icon="gtk-ok" class="oe_highlight"/>
+                        class="oe_highlight"/>
                 <button name="create_edi_file" string="Re-generate EDI file"
-                        type="object" icon="gtk-ok"
+                        type="object"
                         confirm="Are you sure that you re-generate the EDI file ?"
-                        attrs="{'invisible' : True}"/>
+                        attrs="{'invisible': True}"/>
                 <field name="state" widget="statusbar"
-                       statusbar_visible="draft,done" nolabel="1" colspan="2"
-                       statusbar_colors='{"draft": "blue","done": "blue"}'/>
+                       statusbar_visible="draft,done"
+                       statusbar_colors='{"draft": "blue", "done": "blue"}'/>
             </header>
-            <group colspan="4" col="4">
-                <field name="name"/>
-                <field name="carrier_type"/>
-                <field name="create_date"/>
-            </group>
-            <group>
-                <field name="picking_ids" nolabel="1" widget="many2many"/>
-            </group>
+            <sheet>
+                <group name="main" col="4">
+                    <field name="name"/>
+                    <field name="weight"/>
+                    <field name="carrier_type"/>
+                    <field name="number_of_packages"/>
+                </group>
+                <group name="pickings">
+                    <field name="picking_ids" nolabel="1" widget="many2many"/>
+                </group>
+            </sheet>
+            <div class="oe_chatter">
+                <field name="message_follower_ids" widget="mail_followers"/>
+                <field name="message_ids" widget="mail_thread"/>
+            </div>
         </form>
     </field>
 </record>
 
+<!-- Notification in chatter -->
+<record id="deposit_slip_done" model="mail.message.subtype">
+    <field name="name">Deposit Slip Validated</field>
+    <field name="res_model">deposit.slip</field>
+    <field name="default" eval="False"/>
+    <field name="description">Deposit Slip Validated</field>
+</record>
+
+
 
 <!-- STOCK PICKING -->
-<!-- From STOCK module -->
 <!-- FORM -->
-<record id="view_picking_out_form" model="ir.ui.view">
-    <field name="model">stock.picking.out</field>
-    <field name="inherit_id" ref="stock.view_picking_out_form" />
+<record id="view_picking_withcarrier_out_form" model="ir.ui.view">
+    <field name="model">stock.picking</field>
+    <field name="inherit_id" ref="delivery.view_picking_withcarrier_out_form" />
     <field name="arch" type="xml">
-        <field name="company_id" position="after">
+        <field name="weight_net" position="after">
             <field name="deposit_slip_id"
                    attrs="{'readonly': True,'invisible': [('deposit_slip_id','=','')]}"/>
         </field>
@@ -98,7 +111,7 @@
 </record>
 
 
-<!-- From DELIVERY CARRIER module-->
+<!-- DELIVERY CARRIER -->
 <!-- FORM -->
 <record id="view_delivery_carrier_form" model="ir.ui.view">
     <field name="model">delivery.carrier</field>
@@ -111,5 +124,5 @@
     </field>
 </record>
 
-    </data>
+</data>
 </openerp>
