@@ -23,7 +23,7 @@
 {
     'name': 'Delivery Carrier Label GLS',
     'version': '0.1',
-    'author': 'Akretion',
+    'author': "Akretion,Odoo Community Association (OCA)",
     'maintener': 'Akretion',
     'category': 'Warehouse',
     'summary': "GLS carrier label printing",
