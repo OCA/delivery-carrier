@@ -32,7 +32,7 @@ File specifications on :
 http://www.tnt.com/express/fr_fr/site/home/support/downloads.html
 Chapter : "Guide d’importation d’un carnet d’adresses"
     """,
-    'author': 'Camptocamp',
+    'author': "Camptocamp,Odoo Community Association (OCA)",
     'license': 'AGPL-3',
     'website': 'http://www.camptocamp.com',
     'depends': ['base_delivery_carrier_files'],

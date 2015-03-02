@@ -22,7 +22,7 @@
 {
     'name': 'Delivery Carrier Business To Customer',
     'version': '0.2',
-    'author': 'Akretion',
+    'author': "Akretion,Odoo Community Association (OCA)",
     'maintainer': 'Akretion',
     'category': '',
     'depends': [

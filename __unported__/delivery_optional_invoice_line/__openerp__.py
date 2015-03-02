@@ -28,7 +28,7 @@ This module allows to remove the default shipping line from the invoices
 created from picking. To do so, the user shall go to the deliver carrier form
 and select the option 'Do not create line on invoice'.
     """,
-    'author': 'Agile Business Group',
+    'author': "Agile Business Group,Odoo Community Association (OCA)",
     'website': 'http://www.agilebg.com',
     'license': 'AGPL-3',
     'depends': [
