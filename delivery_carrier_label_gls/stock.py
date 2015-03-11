@@ -192,6 +192,7 @@ class StockPicking(orm.Model):
         """ Generate labels and write tracking numbers received """
         pack_nbr = 0
         pick2update = {}
+        traceability = []
         address = self._prepare_address_gls(cr, uid, picking, context=context)
         if tracking_ids is None:
             trackings = self._get_tracking_ids_from_moves(
@@ -227,6 +228,7 @@ class StockPicking(orm.Model):
                     cr, uid, packing, pack_nbr, weight=weight, context=context)
                 label = self.get_zpl(service, deliv, addr, pack)
                 pick2update['carrier_tracking_ref'] = label['tracking_number']
+                print service, deliv, addr, pack
             else:
                 pack = self._prepare_pack_gls(
                     cr, uid, packing, pack_nbr, context=context)
@@ -236,12 +238,17 @@ class StockPicking(orm.Model):
                 'tracking_id': packing.id if packing else False,
                 'file': label['content'],
                 'file_type': LABEL_TYPE,
-                'name': label['filename']+'.zpl',
+                'name': label['filename'] + '.zpl',
             }
             if label['tracking_number']:
                 label_info['name'] = '%s%s.zpl' % (label['tracking_number'],
                                                    label['filename'])
             labels.append(label_info)
+            traceability.append(self._record_ws_exchange(
+                cr, uid, label, pack, context=context))
+        if picking.company_id.gls_traceability and traceability:
+            self._save_traceability(
+                cr, uid, picking, traceability, label, context=context)
         # must be on this stock.picking.out to event on connector
         # like in modules prestahop or magento
         self.pool['stock.picking.out'].write(cr, uid, picking.id, pick2update,
@@ -249,6 +256,41 @@ class StockPicking(orm.Model):
         picking = self.browse(cr, uid, picking.id, context=context)
         self._customize_gls_picking(cr, uid, picking, context=context)
         return labels
+
+    def _save_traceability(self, cr, uid, picking, traceability, label,
+                           context=None):
+        content = '\n\n=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=\n\n\n'
+        content = content.join(traceability)
+        content = (u'Company: %s\n'
+                   u'Compte France: %s \n'
+                   u'Compte Etranger: %s \n\n\n') % (
+                       picking.company_id.name or '',
+                       picking.company_id.gls_fr_contact_id or '',
+                       picking.company_id.gls_inter_contact_id or '') + content
+        tracking = label['tracking_number'].replace('/', '_')
+        data = {
+            'name': u'GLS_traceability_%s.txt' % tracking,
+            'res_id': picking.id,
+            'res_model': '%s.out' % self._inherit,
+            'datas': content.encode('base64'),
+            'file_type': 'text/plain',
+        }
+        self.pool['ir.attachment'].create(cr, uid, data, context=context)
+        return True
+
+    def _record_ws_exchange(self, cr, uid, label, pack, context=None):
+        trac_infos = ''
+        if 'raw_response' in label and 'request' in label:
+            trac_infos = (u'Séquence Colis GLS:\n'
+                          u'====================\n%s \n\n'
+                          u'Web Service Request:\n'
+                          u'====================\n%s \n\n'
+                          u'Web Service Response:\n'
+                          u'=====================\n%s \n\n') % (
+                              pack['custom_sequence'],
+                              label['request'],
+                              label['raw_response'])
+        return trac_infos
 
     def get_zpl(self, service, delivery, address, pack):
         try:

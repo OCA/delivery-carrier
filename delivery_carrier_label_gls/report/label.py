@@ -324,7 +324,9 @@ code: %s ; message: %s ; result: %s""" % (code, message, result))
         else:
             failed_webservice = False
             # webservice
-            response = self.get_webservice_response(all_dict)
+            request = dict_to_gls_data(all_dict)
+            raw_response = self.get_webservice_response(request)
+            response = gls_decode(raw_response)
             # refactor webservice response failed and webservice downed
             if isinstance(response, dict):
                 if self.get_result_analysis(response['RESULT'], all_dict):
@@ -355,7 +357,9 @@ code: %s ; message: %s ; result: %s""" % (code, message, result))
             return {
                 "content": content2print,
                 "tracking_number": tracking_number,
-                'filename': self.filename
+                'filename': self.filename,
+                'request': request,
+                'raw_response': raw_response,
             }
         except:
             traceback = RichTraceback()
@@ -366,8 +370,7 @@ code: %s ; message: %s ; result: %s""" % (code, message, result))
                 "%s: %s"
                 % (str(traceback.error.__class__.__name__), traceback.error))
 
-    def get_webservice_response(self, params):
-        request = dict_to_gls_data(params)
+    def get_webservice_response(self, request):
         connection = httplib.HTTPConnection(self.webservice_location, GLS_PORT)
         connection.request(
             "POST",
@@ -384,7 +387,7 @@ code: %s ; message: %s ; result: %s""" % (code, message, result))
                 % (response.status, response.reason))
         datas = response.read()
         connection.close()
-        return gls_decode(datas)
+        return datas
 
     def map_semantic_keys(self, T_keys, datas):
         mapping = {}

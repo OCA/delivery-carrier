@@ -37,8 +37,9 @@
         <span/><span/>
         <field name="gls_warehouse" class="oe_inline"/>
         <span/><span/>
+        <field name="traceability"/>
+        <span/><span/>
         <field name="test"/>
-
       </group>
 
     </form>

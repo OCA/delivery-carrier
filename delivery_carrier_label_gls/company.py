@@ -35,6 +35,10 @@ class ResCompany(orm.Model):
             'International',
             size=10,
             help='Contact id for GLS International transportation (T8914)'),
+        'gls_traceability': fields.boolean(
+            'Traceability',
+            help="Record traceability informations in Delivery Order "
+                 "attachment: web service request and response"),
         'gls_test': fields.boolean(
             'Url Test',
             help="Check if requested webservice is test plateform")
