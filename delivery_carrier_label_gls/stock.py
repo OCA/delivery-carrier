@@ -31,6 +31,7 @@ from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
 from datetime import datetime
 import pycountry
 from operator import attrgetter
+import base64
 
 
 EXCEPT_TITLE = "GLS Library Exception"
@@ -228,7 +229,6 @@ class StockPicking(orm.Model):
                     cr, uid, packing, pack_nbr, weight=weight, context=context)
                 label = self.get_zpl(service, deliv, addr, pack)
                 pick2update['carrier_tracking_ref'] = label['tracking_number']
-                print service, deliv, addr, pack
             else:
                 pack = self._prepare_pack_gls(
                     cr, uid, packing, pack_nbr, context=context)
@@ -244,8 +244,7 @@ class StockPicking(orm.Model):
                 label_info['name'] = '%s%s.zpl' % (label['tracking_number'],
                                                    label['filename'])
             labels.append(label_info)
-            traceability.append(self._record_ws_exchange(
-                cr, uid, label, pack, context=context))
+            traceability.append(self._record_ws_exchange(label, pack))
         if picking.company_id.gls_traceability and traceability:
             self._save_traceability(
                 cr, uid, picking, traceability, label, context=context)
@@ -259,7 +258,8 @@ class StockPicking(orm.Model):
 
     def _save_traceability(self, cr, uid, picking, traceability, label,
                            context=None):
-        content = '\n\n=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=\n\n\n'
+        separator = '=*' * 40
+        content = u'\n\n%s\n\n\n' % separator
         content = content.join(traceability)
         content = (u'Company: %s\n'
                    u'Compte France: %s \n'
@@ -272,13 +272,13 @@ class StockPicking(orm.Model):
             'name': u'GLS_traceability_%s.txt' % tracking,
             'res_id': picking.id,
             'res_model': '%s.out' % self._inherit,
-            'datas': content.encode('base64'),
+            'datas': base64.b64encode(content.encode('utf8')),
             'file_type': 'text/plain',
         }
-        self.pool['ir.attachment'].create(cr, uid, data, context=context)
-        return True
+        return self.pool['ir.attachment'].create(
+            cr, uid, data, context=context)
 
-    def _record_ws_exchange(self, cr, uid, label, pack, context=None):
+    def _record_ws_exchange(self, label, pack):
         trac_infos = ''
         if 'raw_response' in label and 'request' in label:
             trac_infos = (u'Séquence Colis GLS:\n'
@@ -290,6 +290,7 @@ class StockPicking(orm.Model):
                               pack['custom_sequence'],
                               label['request'],
                               label['raw_response'])
+
         return trac_infos
 
     def get_zpl(self, service, delivery, address, pack):
