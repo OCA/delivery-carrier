@@ -137,17 +137,14 @@ DELIVERY_MAPPING = {
     'T540': "shipping_date",
     'T8318': "commentary",
     'T8975': "gls_origin_reference",
-    'T8912': "gls_origin_reference",
     'T8905': "parcel_total_number",
     'T8702': "parcel_total_number",
 }
 ACCOUNT_MAPPING = {
     'T8915': "customer_id",
-    'T805': "customer_id",
     'T8914': "contact_id",
     'T8700': "outbound_depot",
-    'T811': "shipper_street",
-    'T820': "shipper_street2",
+    'T820': "shipper_street",
     'T810': "shipper_name",
     'T822': "shipper_zip",
     'T823': "shipper_city",

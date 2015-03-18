@@ -261,12 +261,11 @@ class StockPicking(orm.Model):
         separator = '=*' * 40
         content = u'\n\n%s\n\n\n' % separator
         content = content.join(traceability)
-        content = (u'Company: %s\n'
-                   u'Compte France: %s \n'
-                   u'Compte Etranger: %s \n\n\n') % (
-                       picking.company_id.name or '',
-                       picking.company_id.gls_fr_contact_id or '',
-                       picking.company_id.gls_inter_contact_id or '') + content
+        content = (
+            u'Company: %s\nCompte France: %s \nCompte Etranger: %s \n\n\n') % (
+            picking.company_id.name or '',
+            picking.company_id.gls_fr_contact_id or '',
+            picking.company_id.gls_inter_contact_id or '') + content
         tracking = label['tracking_number'].replace('/', '_')
         data = {
             'name': u'GLS_traceability_%s.txt' % tracking,
@@ -281,16 +280,13 @@ class StockPicking(orm.Model):
     def _record_ws_exchange(self, label, pack):
         trac_infos = ''
         if 'raw_response' in label and 'request' in label:
-            trac_infos = (u'Séquence Colis GLS:\n'
-                          u'====================\n%s \n\n'
-                          u'Web Service Request:\n'
-                          u'====================\n%s \n\n'
-                          u'Web Service Response:\n'
-                          u'=====================\n%s \n\n') % (
-                              pack['custom_sequence'],
-                              label['request'],
-                              label['raw_response'])
-
+            trac_infos = (
+                u'Séquence Colis GLS:\n====================\n%s \n\n'
+                u'Web Service Request:\n====================\n%s \n\n'
+                u'Web Service Response:\n=====================\n%s \n\n') % (
+                pack['custom_sequence'],
+                label['request'],
+                label['raw_response'])
         return trac_infos
 
     def get_zpl(self, service, delivery, address, pack):
