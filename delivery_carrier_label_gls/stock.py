@@ -238,6 +238,7 @@ class StockPicking(orm.Model):
                 'tracking_id': packing.id if packing else False,
                 'file': label['content'],
                 'file_type': LABEL_TYPE,
+                'type': 'binary',
                 'name': label['filename'] + '.zpl',
             }
             if label['tracking_number']:
@@ -272,6 +273,7 @@ class StockPicking(orm.Model):
             'res_id': picking.id,
             'res_model': '%s.out' % self._inherit,
             'datas': base64.b64encode(content.encode('utf8')),
+            'type': 'binary',
             'file_type': 'text/plain',
         }
         return self.pool['ir.attachment'].create(
