@@ -244,7 +244,9 @@ class StockPicking(orm.Model):
             if label['tracking_number']:
                 label_info['name'] = '%s%s.zpl' % (label['tracking_number'],
                                                    label['filename'])
-            labels.append(label_info)
+            if picking.company_id.country_id == 'FR':
+                # TODO implements traceability to other countries than FR
+                labels.append(label_info)
             traceability.append(self._record_ws_exchange(label, pack))
         if picking.company_id.gls_traceability and traceability:
             self._save_traceability(

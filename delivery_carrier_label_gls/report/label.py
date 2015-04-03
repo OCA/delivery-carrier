@@ -310,6 +310,8 @@ code: %s ; message: %s ; result: %s""" % (code, message, result))
         all_dict.update(T_address)
         all_dict.update(self.add_specific_keys(address))
         if address['country_code'] != 'FR':
+            request = False
+            raw_response = False
             label_content = self.select_label(
                 parcel['parcel_number_label'], all_dict, address)
             if ('contact_id_inter' not in self.sender or
