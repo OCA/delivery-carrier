@@ -95,7 +95,7 @@ msgstr "Fehler"
 
 #. module: delivery_carrier_label_dispatch
 #: view:picking.dispatch:0
-msgid "Warning, setting options will erase existing ones in pickings"
+msgid "Warning, setting options will erase the existing ones in delivery orders"
 msgstr ""
 "Warnung: Diese Einstellungen zur Kommissionierung überschreiben vorherige"
 

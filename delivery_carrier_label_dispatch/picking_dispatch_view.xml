@@ -16,7 +16,7 @@
             <separator string="Options"/>
             <field name="option_ids" nolabel="1"
                 on_change="option_ids_change(option_ids, carrier_id, context)"/>
-            <label string="Warning, setting options will erase existing ones in pickings"/>
+            <label string="Warning, setting options will erase the existing ones in delivery orders"/>
             <button name="action_set_options" string="Set Options"
                 class="oe_highlight" type="object"/>
           </page>
