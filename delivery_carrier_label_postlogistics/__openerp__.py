@@ -22,6 +22,7 @@
  'version': '1.1',
  'author': "Camptocamp,Odoo Community Association (OCA)",
  'maintainer': 'Camptocamp',
+ 'license': 'AGPL-3',
  'category': 'version',
  'complexity': 'normal',
  'depends': ['base_delivery_carrier_label'],
