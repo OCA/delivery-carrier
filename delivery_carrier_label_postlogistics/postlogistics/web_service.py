@@ -96,7 +96,7 @@ class PostlogisticsWebService(object):
                                                   lang=None):
         """ Get a list of allowed service for a postlogistics licence """
         if not lang:
-            lang = company.partner_id.lang
+            lang = company.partner_id.lang or 'en'
         lang = self._get_language(lang)
         request = self.client.service.ReadAllowedServicesByFrankingLicense
         return self._send_request(request, FrankingLicense=cp_license,
@@ -274,19 +274,24 @@ class PostlogisticsWebService(object):
         codes = [name, pack_no]
         return "+".join(c for c in codes if c)
 
-    def _prepare_item_list(self, picking, recipient, attributes, trackings):
+    def _prepare_item_list(self, picking, recipient, attributes, packages):
         """ Return a list of item made from the pickings """
         item_list = []
-        for pack in trackings:
-            name = pack.name if pack else picking.name
-            itemid = self._get_itemid(picking, name)
+
+        def add_item(picking_or_pack):
+            itemid = self._get_itemid(picking, picking_or_pack.name)
             item = {
                 'ItemID': itemid,
                 'Recipient': recipient,
                 'Attributes': attributes,
             }
-
             item_list.append(item)
+
+        if not packages:
+            add_item(picking)
+
+        for pack in packages:
+            add_item(pack)
 
         return item_list
 
@@ -319,7 +324,7 @@ class PostlogisticsWebService(object):
         file_infos = {
             'FrankingLicense': license,
             'PpFranking': False,
-            'CustomerSystem': 'OpenERP',
+            'CustomerSystem': 'Odoo',
             'Customer': post_customer,
         }
 
@@ -330,12 +335,12 @@ class PostlogisticsWebService(object):
         }
         return envelope
 
-    def generate_label(self, picking, trackings, user_lang='en_US'):
+    def generate_label(self, picking, packages, user_lang='en_US'):
         """ Generate a label for a picking
 
         :param picking: picking browse record
         :param user_lang: OpenERP language code
-        :param trackings: list of browse records of trackings to filter on
+        :param packages: list of browse records of packages to filter on
         :return: {
             value: [{item_id: pack id
                      binary: file returned by API
@@ -356,7 +361,7 @@ class PostlogisticsWebService(object):
 
         recipient = self._prepare_recipient(picking)
         item_list = self._prepare_item_list(picking, recipient, attributes,
-                                            trackings)
+                                            packages)
         data = self._prepare_data(item_list)
 
         envelope = self._prepare_envelope(picking, post_customer, data)
