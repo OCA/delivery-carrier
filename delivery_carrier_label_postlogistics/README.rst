@@ -1,8 +1,8 @@
+.. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
+    :alt: License: AGPL-3
+
 PostLogistics Labels WebService
 ===============================
-
-Description
------------
 
 This module uses `PostLogistics BarCodes WebService`_ to generate labels
 for your Delivery Orders.
@@ -63,7 +63,24 @@ Technical references
 .htm
 
 
+Credits
+=======
+
 Contributors
 ------------
 
 * Yannick Vaucher <yannick.vaucher@camptocamp.com>
+* Guewen Baconnier <guewen.baconnier@camptocamp.com>
+
+Maintainer
+----------
+
+.. image:: http://odoo-community.org/logo.png
+   :alt: Odoo Community Association
+   :target: http://odoo-community.org
+
+This module is maintained by the OCA.
+
+OCA, or the Odoo Community Association, is a nonprofit organization whose
+mission is to support the collaborative development of Odoo features and
+promote its widespread use.
