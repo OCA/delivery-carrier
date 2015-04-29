@@ -57,19 +57,6 @@ class PostlogisticsConfigSettings(models.TransientModel):
         related='company_id.postlogistics_default_resolution',
     )
 
-    # @api.model
-    # @api.returns('self', lambda value: value.id)
-    # def create(self, vals):
-    #     record = super(PostlogisticsConfigSettings, self).create(vals)
-    #     # Hack: to avoid some nasty bug, related fields are not written
-    #     # upon record creation.  Hence we write on those fields here.
-    #     vals = {}
-    #     for fname, field in self._columns.iteritems():
-    #         if isinstance(field, fields.related) and fname in values:
-    #             vals[fname] = values[fname]
-    #     self.write(cr, uid, [rec_id], vals, context)
-    #     return rec_id
-
     @api.onchange('company_id')
     def onchange_company_id(self):
         # update related fields
