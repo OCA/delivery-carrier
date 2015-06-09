@@ -229,7 +229,7 @@ class StockPicking(models.Model):
         for operation in operations:
             # Take the destination package. If empty, the package is
             # moved so take the source one.
-            packages += operation.result_package_id or operation.package_id
+            packages |= operation.result_package_id or operation.package_id
         return packages
 
     @api.multi
