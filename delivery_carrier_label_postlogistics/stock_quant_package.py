@@ -28,7 +28,7 @@ class StockQuantPackage(models.Model):
 
     postlogistics_manual_cod_amount = fields.Float(
         string='Postlogistics Cash On Delivery Amount',
-        help='If the Cash on Delivery amount for this package is different '
+        help='If the cash on delivery amount for this package is different '
              'than the total of the sales order, write the amount there.'
     )
 
@@ -83,7 +83,7 @@ class StockQuantPackage(models.Model):
         if order_moves != package_moves:
             raise exceptions.Warning(
                 _('The cash on delivery amount must be manually specified '
-                  'on the packages when a sales orders is delivered '
+                  'on the packages when a sales order is delivered '
                   'in several packages.')
             )
 

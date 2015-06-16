@@ -67,7 +67,7 @@ class PostlogisticsWebService(object):
             res['success'] = False
             res['errors'] = [e[0]]
         except Exception as e:
-            # if authentification error
+            # if authentication error
             if isinstance(e[0], tuple) and e[0][0] == 401:
                 raise orm.except_orm(
                     _('Error 401'),

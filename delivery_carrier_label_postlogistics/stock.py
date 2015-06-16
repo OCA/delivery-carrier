@@ -55,7 +55,7 @@ class StockPicking(models.Model):
         if order_moves != picking_moves:
             raise exceptions.Warning(
                 _('The cash on delivery amount must be manually specified '
-                  'on the packages when a sales orders is delivered '
+                  'on the packages when a sales order is delivered '
                   'in several delivery orders.')
             )
         return order.amount_total
