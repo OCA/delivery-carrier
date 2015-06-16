@@ -34,7 +34,8 @@ class PostlogisticsWebService(object):
 
     """ Connector with PostLogistics for labels using post.ch Web Services
 
-    Handbook available here: http://www.poste.ch/post-barcode-cug.htm
+    Handbook available here:
+    https://www.post.ch/en/business/a-z-of-subjects/dropping-off-mail-items/business-sending-letters/barcode-web-service-documentation
 
     Allows to generate labels
 
@@ -274,24 +275,46 @@ class PostlogisticsWebService(object):
         codes = [name, pack_no]
         return "+".join(c for c in codes if c)
 
+    def _cash_on_delivery(self, picking, package=None):
+        if package:
+            amount = package.postlogistics_cod_amount()
+        else:
+            amount = picking.postlogistics_cod_amount()
+        amount = '{:.2f}'.format(amount)
+        return [{'Type': 'NN_BETRAG', 'Value': amount}]
+
+    def _get_item_additional_data(self, picking, package=None):
+        result = []
+        if set(picking.option_ids.mapped('code')) & {'BLN', 'N'}:
+            cod_attributes = self._cash_on_delivery(picking, package=package)
+            result += cod_attributes
+        return result
+
     def _prepare_item_list(self, picking, recipient, attributes, packages):
         """ Return a list of item made from the pickings """
         item_list = []
 
-        def add_item(picking_or_pack):
-            itemid = self._get_itemid(picking, picking_or_pack.name)
+        def add_item(package=None):
+            assert picking or package
+            itemid = self._get_itemid(picking,
+                                      package.name if package else picking.name
+                                      )
             item = {
                 'ItemID': itemid,
                 'Recipient': recipient,
                 'Attributes': attributes,
             }
+            additional_data = self._get_item_additional_data(picking,
+                                                             package=package)
+            if additional_data:
+                item['AdditionalINFOS'] = {'AdditionalData': additional_data}
             item_list.append(item)
 
         if not packages:
-            add_item(picking)
+            add_item()
 
         for pack in packages:
-            add_item(pack)
+            add_item(package=pack)
 
         return item_list
 

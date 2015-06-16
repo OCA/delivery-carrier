@@ -20,13 +20,45 @@
 ##############################################################################
 from operator import attrgetter
 
-from openerp import models, api, exceptions
+from openerp import models, api, exceptions, _
 
 from .postlogistics.web_service import PostlogisticsWebService
 
 
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
+
+    @api.multi
+    def postlogistics_cod_amount(self):
+        """ Return the Postlogistic Cash on Delivery amount of a picking
+
+        If the picking delivers the whole sales order, we use the total
+        amount of the sales order.
+
+        Otherwise, we don't know the value of each picking so we raise
+        an error.  The user has to create packages with the cash on
+        delivery price on each package.
+        """
+        self.ensure_one()
+        order = self.sale_id
+        if not order:
+            return 0.0
+        if len(order) > 1:
+            raise exceptions.Warning(
+                _('The cash on delivery amount must be manually specified '
+                  'on the packages when a package contains products '
+                  'from different sales orders.')
+            )
+        order_moves = order.mapped('order_line.procurement_ids.move_ids')
+        picking_moves = self.move_lines
+        # check if the package delivers the whole sales order
+        if order_moves != picking_moves:
+            raise exceptions.Warning(
+                _('The cash on delivery amount must be manually specified '
+                  'on the packages when a sales orders is delivered '
+                  'in several delivery orders.')
+            )
+        return order.amount_total
 
     @api.multi
     def _generate_postlogistics_label(self, webservice_class=None,
