@@ -8,14 +8,15 @@ msgstr ""
 "Project-Id-Version: carriers-deliveries\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-02-16 09:08+0000\n"
-"PO-Revision-Date: 2014-06-07 08:07+0000\n"
+"PO-Revision-Date: 2015-02-03 18:06+0100\n"
 "Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
-"Language-Team: German <de@li.org>\n"
+"Language-Team: GoLive <rudolf.schnapka@golive.de>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2014-06-27 07:09+0000\n"
-"X-Generator: Launchpad (build 17077)\n"
+"X-Generator: Poedit 1.5.4\n"
+"Language: de\n"
 
 #. module: base_delivery_carrier_files
 #: code:addons/base_delivery_carrier_files/wizard/generate_carrier_files.py:60
@@ -46,7 +47,7 @@ msgstr "delivery.carrier.file"
 #. module: base_delivery_carrier_files
 #: model:ir.model,name:base_delivery_carrier_files.model_stock_picking
 msgid "Picking List"
-msgstr "Pickliste"
+msgstr "Kommissionierliste"
 
 #. module: base_delivery_carrier_files
 #: view:delivery.carrier.file.generate:0
@@ -70,12 +71,13 @@ msgstr "Spediteurdateien erzeugen"
 #. module: base_delivery_carrier_files
 #: model:ir.actions.act_window,help:base_delivery_carrier_files.action_delivery_carrier_file_form
 msgid "Generates automatically files asked by carriers for outgoing pickings"
-msgstr "Erzeugt automatisch die vom Spediteur verlangten Dateien"
+msgstr ""
+"Erzeugt automatisch die vom Spediteur verlangten Dateien für Kommissionen"
 
 #. module: base_delivery_carrier_files
 #: field:delivery.carrier.file,type:0
 msgid "Type"
-msgstr "Typ"
+msgstr "Art"
 
 #. module: base_delivery_carrier_files
 #: help:delivery.carrier.file,group_pickings:0
@@ -83,9 +85,8 @@ msgid ""
 "All the pickings will be grouped in the same file. Has no effect when the "
 "files are automatically exported at the delivery order process."
 msgstr ""
-"Alle Kommissionierungen werden in der gleichen Datei gesammelt. Hat keine "
-"Wirkung, wenn die Dateien bei Lieferauftragbearbeitung automatisch erstellt "
-"werden."
+"Alle Kommissionen werden in der gleichen Datei gesammelt. Hat keine Wirkung, "
+"wenn die Dateien bei Lieferauftragbearbeitung automatisch erstellt werden."
 
 #. module: base_delivery_carrier_files
 #: code:addons/base_delivery_carrier_files/carrier_file.py:73
@@ -102,7 +103,7 @@ msgstr "Bei Lieferauftragbearbeitung erzeugen"
 #. module: base_delivery_carrier_files
 #: field:delivery.carrier.file,group_pickings:0
 msgid "Group all pickings in one file"
-msgstr "Alle Kommissionierungen in einer Datei sammeln"
+msgstr "Alle Kommissionen in einer Datei sammeln"
 
 #. module: base_delivery_carrier_files
 #: field:delivery.carrier.file,name:0
@@ -137,7 +138,7 @@ msgstr "Zusatzinfo"
 #. module: base_delivery_carrier_files
 #: model:ir.model,name:base_delivery_carrier_files.model_delivery_carrier_file_generate
 msgid "delivery.carrier.file.generate"
-msgstr ""
+msgstr "delivery.carrier.file.generate"
 
 #. module: base_delivery_carrier_files
 #: view:delivery.carrier.file:0
@@ -165,8 +166,7 @@ msgid "Cancel"
 msgstr "Abbrechen"
 
 #. module: base_delivery_carrier_files
-#: field:delivery.carrier,carrier_file_id:0
-#: view:delivery.carrier.file:0
+#: field:delivery.carrier,carrier_file_id:0 view:delivery.carrier.file:0
 #: model:ir.actions.act_window,name:base_delivery_carrier_files.action_delivery_carrier_file_form
 #: model:ir.ui.menu,name:base_delivery_carrier_files.menu_action_delivery_carrier_file_form
 msgid "Carrier File"

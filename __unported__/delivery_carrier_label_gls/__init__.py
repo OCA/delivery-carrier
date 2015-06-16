@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Author: Yannick Vaucher
-#    Copyright 2013 Camptocamp SA
+#    Copyright (C) All Rights Reserved 2014 Akretion
+#    @author David BEAL <david.beal@akretion.com>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -17,6 +17,10 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-##############################################################################
-from . import generate_labels
-from . import apply_carrier
+###############################################################################
+
+from . import company
+from . import config
+from . import delivery
+from . import report
+from . import stock

@@ -8,19 +8,20 @@ msgstr ""
 "Project-Id-Version: carriers-deliveries\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-12-06 13:12+0000\n"
-"PO-Revision-Date: 2014-06-07 09:26+0000\n"
+"PO-Revision-Date: 2015-01-05 14:16+0100\n"
 "Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2014-06-27 07:09+0000\n"
-"X-Generator: Launchpad (build 17077)\n"
+"X-Generator: Poedit 1.5.4\n"
+"Language: de\n"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:delivery.carrier.template.option,name:delivery_carrier_label_postlogistics.postlogistics_output_format_option_spdf
 msgid "sPDF"
-msgstr ""
+msgstr "sPDF"
 
 #. module: delivery_carrier_label_postlogistics
 #: field:delivery.carrier.template.option,postlogistics_additonial_service_ids:0
@@ -65,13 +66,12 @@ msgstr "Anleitung zur Zusatzleistung"
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model,name:delivery_carrier_label_postlogistics.model_postlogistics_config_settings
 msgid "postlogistics.config.settings"
-msgstr ""
+msgstr "postlogistics.config.settings"
 
 #. module: delivery_carrier_label_postlogistics
 #: view:delivery.carrier.option:0
-msgid ""
-"['|', ('partner_id', '!=', 5), ('id', 'in', allowed_option_ids[0][2])]"
-msgstr ""
+msgid "['|', ('partner_id', '!=', 5), ('id', 'in', allowed_option_ids[0][2])]"
+msgstr "['|', ('partner_id', '!=', 5), ('id', 'in', allowed_option_ids[0][2])]"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:delivery.carrier.template.option,name:delivery_carrier_label_postlogistics.postlogistics_output_format_option_eps
@@ -144,12 +144,12 @@ msgstr "Etikettgestaltung"
 #. module: delivery_carrier_label_postlogistics
 #: model:delivery.carrier.template.option,name:delivery_carrier_label_postlogistics.postlogistics_layout_option_fe
 msgid "Format FE"
-msgstr ""
+msgstr "Format FE"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:delivery.carrier.template.option,name:delivery_carrier_label_postlogistics.postlogistics_layout_option_a5
 msgid "Format A5"
-msgstr ""
+msgstr "Format A5"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.actions.act_window,name:delivery_carrier_label_postlogistics.action_postlogistics_config
@@ -166,12 +166,12 @@ msgstr "Erlaubte Optionen"
 #. module: delivery_carrier_label_postlogistics
 #: model:delivery.carrier.template.option,name:delivery_carrier_label_postlogistics.postlogistics_layout_option_a7
 msgid "Format A7"
-msgstr ""
+msgstr "Format A7"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:delivery.carrier.template.option,name:delivery_carrier_label_postlogistics.postlogistics_layout_option_a6
 msgid "Format A6"
-msgstr ""
+msgstr "Format A6"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_config_settings_company_id
@@ -200,7 +200,7 @@ msgstr "Gruppenkennung"
 #: field:postlogistics.config.settings,wsdl_url:0
 #: field:res.company,postlogistics_wsdl_url:0
 msgid "WSDL URL"
-msgstr ""
+msgstr "WSDL URL"
 
 #. module: delivery_carrier_label_postlogistics
 #: code:addons/delivery_carrier_label_postlogistics/res_config.py:147
@@ -245,7 +245,7 @@ msgstr ""
 #. module: delivery_carrier_label_postlogistics
 #: model:delivery.carrier.template.option,name:delivery_carrier_label_postlogistics.postlogistics_output_format_option_zpl2
 msgid "ZPL2"
-msgstr ""
+msgstr "ZPL2"
 
 #. module: delivery_carrier_label_postlogistics
 #: selection:delivery.carrier.template.option,postlogistics_type:0
@@ -284,6 +284,8 @@ msgid ""
 "{'default_carrier_id': active_id, 'default_allowed_option_ids': "
 "allowed_option_ids}"
 msgstr ""
+"{'default_carrier_id': active_id, 'default_allowed_option_ids': "
+"allowed_option_ids}"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_config_settings_username

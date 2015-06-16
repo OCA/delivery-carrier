@@ -1,0 +1,194 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+# 	* delivery_carrier_deposit
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-09-09 14:19+0000\n"
+"PO-Revision-Date: 2015-01-05 14:08+0100\n"
+"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+"Language: de\n"
+
+#. module: delivery_carrier_deposit
+#: sql_constraint:deposit.slip:0
+msgid "'Deposit slip' name must be unique!"
+msgstr "Name des Depots muss eindeutig sein!"
+
+#. module: delivery_carrier_deposit
+#: help:delivery.carrier,deposit_slip:0
+msgid "Allow to create a 'Deposit slip' report on picking out (deliveries)"
+msgstr ""
+"Ermöglicht das Erstellen eines 'Depot-Scheins' zu Kommissionen "
+"(Auslieferungen)"
+
+#. module: delivery_carrier_deposit
+#: view:deposit.slip:0
+msgid "Are you sure that you re-generate the EDI file ?"
+msgstr "Sind Sie sicher, dass Sie die EDI-Datei neu erzeugen möchten?"
+
+#. module: delivery_carrier_deposit
+#: view:delivery.deposit.wizard:0
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#. module: delivery_carrier_deposit
+#: code:_description:0
+#: model:ir.model,name:delivery_carrier_deposit.model_delivery_carrier
+#, python-format
+msgid "Carrier"
+msgstr "Spediteur"
+
+#. module: delivery_carrier_deposit
+#: help:delivery.deposit.wizard,carrier_type:0
+#: help:deposit.slip,carrier_type:0
+msgid "Carrier type (combines several delivery methods)"
+msgstr "Spediteurart (vereint mehrere Lieferwege)"
+
+#. module: delivery_carrier_deposit
+#: field:deposit.slip,company_id:0
+msgid "Company"
+msgstr "Unternehmen"
+
+#. module: delivery_carrier_deposit
+#: view:deposit.slip:0
+msgid "Confirm"
+msgstr "Bestätigen"
+
+#. module: delivery_carrier_deposit
+#: model:ir.ui.menu,name:delivery_carrier_deposit.menu_wiz_delivery_deposit
+msgid "Create"
+msgstr "Anlegen"
+
+#. module: delivery_carrier_deposit
+#: view:delivery.deposit.wizard:0
+msgid "Create Deposit"
+msgstr "Depot anlegen"
+
+#. module: delivery_carrier_deposit
+#: model:ir.actions.act_window,name:delivery_carrier_deposit.action_wiz_create_deposit
+msgid "Create Deposit Slip"
+msgstr "Depotschein anlegen"
+
+#. module: delivery_carrier_deposit
+#: view:delivery.deposit.wizard:0
+msgid "Create deposit slip"
+msgstr "Depotschein anlegen"
+
+#. module: delivery_carrier_deposit
+#: field:deposit.slip,create_date:0
+msgid "Created"
+msgstr "Angelegt"
+
+#. module: delivery_carrier_deposit
+#: model:ir.actions.report.xml,name:delivery_carrier_deposit.stock_picking_deposit
+msgid "Default Deposit Slip"
+msgstr "Vorgabe Depotschein"
+
+#. module: delivery_carrier_deposit
+#: code:_description:0
+#: model:ir.model,name:delivery_carrier_deposit.model_stock_picking_out
+#, python-format
+msgid "Delivery Orders"
+msgstr "Lieferaufträge"
+
+#. module: delivery_carrier_deposit
+#: view:deposit.slip:0
+msgid "Deposit"
+msgstr "Depot"
+
+#. module: delivery_carrier_deposit
+#: field:delivery.carrier,deposit_slip:0
+#: model:ir.actions.act_window,name:delivery_carrier_deposit.act_delivery_deposit
+#: model:ir.ui.menu,name:delivery_carrier_deposit.menu_delivery_deposit_slip
+#: model:ir.ui.menu,name:delivery_carrier_deposit.menu_delivery_deposit_slip_model
+msgid "Deposit Slip"
+msgstr "Depotschein"
+
+#. module: delivery_carrier_deposit
+#: field:stock.picking,deposit_slip_id:0
+#: field:stock.picking.out,deposit_slip_id:0
+msgid "Deposit slip"
+msgstr "Depotschein"
+
+#. module: delivery_carrier_deposit
+#: selection:deposit.slip,state:0
+msgid "Done"
+msgstr "Erledigt"
+
+#. module: delivery_carrier_deposit
+#: selection:deposit.slip,state:0
+msgid "Draft"
+msgstr "Entwurf"
+
+#. module: delivery_carrier_deposit
+#: field:deposit.slip,name:0
+msgid "Name"
+msgstr "Name"
+
+#. module: delivery_carrier_deposit
+#: code:addons/delivery_carrier_deposit/wizard/deposit.py:82
+#, python-format
+msgid "Picking"
+msgstr "Kommission"
+
+#. module: delivery_carrier_deposit
+#: code:_description:0
+#: model:ir.model,name:delivery_carrier_deposit.model_stock_picking
+#, python-format
+msgid "Picking List"
+msgstr "Kommissionierschein"
+
+#. module: delivery_carrier_deposit
+#: field:deposit.slip,picking_ids:0
+msgid "Pickings"
+msgstr "Kommissionen"
+
+#. module: delivery_carrier_deposit
+#: view:deposit.slip:0
+msgid "Re-generate EDI file"
+msgstr "EDI-Datei erneuern"
+
+#. module: delivery_carrier_deposit
+#: field:deposit.slip,state:0
+msgid "Status"
+msgstr "Status"
+
+#. module: delivery_carrier_deposit
+#: code:addons/delivery_carrier_deposit/wizard/deposit.py:83
+#, python-format
+msgid ""
+"There is no picking for '%s' carrier \n"
+"to gather in a deposit slip"
+msgstr "Es gibt für Spediteur '%s' keine zu deponierende Kommission"
+
+#. module: delivery_carrier_deposit
+#: field:delivery.deposit.wizard,carrier_type:0
+#: field:deposit.slip,carrier_type:0
+msgid "Type"
+msgstr "Art"
+
+#. module: delivery_carrier_deposit
+#: code:_description:0
+#: model:ir.model,name:delivery_carrier_deposit.model_delivery_deposit_wizard
+#, python-format
+msgid "Wizard to create deposit slip"
+msgstr "Assistent zur Anlage eines Depotscheins"
+
+#. module: delivery_carrier_deposit
+#: view:delivery.deposit.wizard:0
+msgid "Would you like generate 'Deposit slip' for these delivery carriers ?"
+msgstr "Möchten Sie einen Depotschein(e) für diese Spediteure erstellen?"
+
+#. module: delivery_carrier_deposit
+#: code:_description:0
+#: model:ir.model,name:delivery_carrier_deposit.model_deposit_slip
+#, python-format
+msgid "deposit.slip"
+msgstr "deposit.slip"
