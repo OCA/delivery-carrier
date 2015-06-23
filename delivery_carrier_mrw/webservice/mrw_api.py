@@ -21,8 +21,17 @@
 import os
 import logging
 from suds.client import Client
+from suds.plugin import MessagePlugin
 
 _logger = logging.getLogger(__name__)
+
+
+class LogPlugin(MessagePlugin):
+    def sending(self, context):
+        _logger.info(context.envelope.decode('utf-8', errors='ignore'))
+
+    def received(self, context):
+        _logger.info(context.reply.decode('utf-8', errors='ignore'))
 
 
 class MrwBase(object):
@@ -35,8 +44,8 @@ class MrwBase(object):
             self.wsdl_path = os.path.join(wsdl_path, 'wsdl_test', wsdl_name)
         else:
             self.wsdl_path = os.path.join(wsdl_path, wsdl_name)
-
-        self.client = Client('file:///%s' % self.wsdl_path.lstrip('/'))
+        self.client = Client('file:///%s' % self.wsdl_path.lstrip('/'),
+                             cache=None, plugins=[LogPlugin()])
 
 
 class MrwEnvio(MrwBase):
@@ -48,8 +57,9 @@ class MrwEnvio(MrwBase):
         auth_info = self.client.factory.create('AuthInfo')
         auth_info.CodigoFranquicia = self.mrw_config.franchise_code
         auth_info.CodigoAbonado = self.mrw_config.subscriber_code
-        auth_info.CodigoDepartamento = self.mrw_config.department_code
-        auth_info.Username = self.mrw_config.username
+        if self.mrw_config.department_code:
+            auth_info.CodigoDepartamento = self.mrw_config.department_code
+        auth_info.UserName = self.mrw_config.username
         auth_info.Password = self.mrw_config.password
 
         self.client.set_options(soapheaders=auth_info)
