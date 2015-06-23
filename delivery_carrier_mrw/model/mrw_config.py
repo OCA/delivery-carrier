@@ -26,8 +26,8 @@ class MrwConfig(models.Model):
 
     name = fields.Char('Name', required=True)
     is_test = fields.Boolean('Is a test?')
-    franchise_code = fields.Char('Franchise Code')
-    subscriber_code = fields.Char('Subscriber Code')
+    franchise_code = fields.Char('Franchise Code', required=True)
+    subscriber_code = fields.Char('Subscriber Code', required=True)
     department_code = fields.Char('Department Code')
-    username = fields.Char('Username')
-    password = fields.Char('Password')
+    username = fields.Char('Username', required=True)
+    password = fields.Char('Password', required=True)
