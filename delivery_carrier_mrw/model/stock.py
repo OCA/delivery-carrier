@@ -114,13 +114,31 @@ class StockPicking(models.Model):
         if response.Estado != '1' and not response.NumeroEnvio:
             raise exceptions.Warning(response.Mensaje)
 
-        panel_url = self._get_mrw_label_from_url(response.NumeroEnvio)
+        label_factory = client.factory.create('EtiquetaEnvioRequest')
+        label_factory.NumeroEnvio = response.NumeroEnvio
+        label_factory.ReportTopMargin = "1100"
+        label_factory.ReportLeftMargin = "650"
 
-        return {
-            'type': 'ir.actions.act_url',
-            'url': panel_url,
-            'target': 'new',
+        label_response = client.service.EtiquetaEnvio(label_factory)
+
+        if label_response.Estado != '1':
+            raise exceptions.Warning(response.Mensaje)
+
+        label = {
+            'file': label_response.EtiquetaFile.decode('base64'),
+            'file_type': 'pdf',
+            'name': response.NumeroEnvio + '.pdf',
         }
+
+        # panel_url = self._get_mrw_label_from_url(response.NumeroEnvio)
+
+        # return {
+        #     'type': 'ir.actions.act_url',
+        #     'url': panel_url,
+        #     'target': 'new',
+        # }
+
+        return [label]
 
     @api.multi
     def _get_mrw_label_from_url(self, shipping_number):
@@ -146,10 +164,10 @@ class StockPicking(models.Model):
         return panel_url
 
     @api.multi
-    def generate_labels(self, package_ids=None):
+    def generate_shipping_labels(self, package_ids=None):
         """ Add label generation for MRW """
         self.ensure_one()
         if self.carrier_id.type == 'mrw':
             return self._generate_mrw_label(package_ids=package_ids)
-        return super(StockPicking, self).generate_labels(
+        return super(StockPicking, self).generate_shipping_labels(
             package_ids=package_ids)
