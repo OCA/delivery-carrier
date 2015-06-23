@@ -23,7 +23,7 @@
               </div>
             </div>
           </group>
-          <separator string="Web Service Authentification"/>
+          <separator string="Web Service Authentication"/>
           <group>
             <div>
               <div>

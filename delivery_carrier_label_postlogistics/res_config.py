@@ -87,7 +87,7 @@ class PostlogisticsConfigSettings(models.TransientModel):
                                                      lang)
         if 'errors' in res:
             errors = '\n'.join(res['errors'])
-            error_message = (_('Could not retrieve Postlogistics delivery'
+            error_message = (_('Could not retrieve Postlogistics delivery '
                                'instructions:\n%s') % errors)
             raise exceptions.Warning(error_message)
 
