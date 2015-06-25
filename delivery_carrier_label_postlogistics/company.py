@@ -32,7 +32,7 @@ class ResCompany(models.Model):
     postlogistics_license_ids = fields.One2many(
         comodel_name='postlogistics.license',
         inverse_name='company_id',
-        string='PostLogistics Frankling License',
+        string='PostLogistics Franking License',
     )
     postlogistics_logo = fields.Binary(
         string='Company Logo on Post labels',

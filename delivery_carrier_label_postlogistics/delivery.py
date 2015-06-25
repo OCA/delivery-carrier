@@ -39,7 +39,7 @@ class PostlogisticsLicense(models.Model):
     sequence = fields.Integer(
         string='Sequence',
         help="Gives the sequence on company to define priority on license "
-             "when multiple license are available for the same group of "
+             "when multiple licenses are available for the same group of "
              "service."
     )
 
@@ -55,7 +55,7 @@ class PostlogisticsServiceGroup(models.Model):
         relation='postlogistics_license_service_groups_rel',
         column1='license_id',
         column2='group_id',
-        string='PostLogistics Frankling License')
+        string='PostLogistics Franking License')
 
     _sql_constraints = [
         ('group_extid_uniq', 'unique(group_extid)',
@@ -244,7 +244,7 @@ class DeliveryCarrier(models.Model):
 
     postlogistics_license_id = fields.Many2one(
         comodel_name='postlogistics.license',
-        string='PostLogistics Frankling License',
+        string='PostLogistics Franking License',
     )
     postlogistics_service_group_id = fields.Many2one(
         comodel_name='postlogistics.service.group',
