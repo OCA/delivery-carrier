@@ -45,14 +45,14 @@
         </record>
 
         <record id="mrw_config_action" model="ir.actions.act_window">
-            <field name="name">MRW Config</field>
+            <field name="name">MRW</field>
             <field name="res_model">mrw.config</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="view_id" ref="mrw_config_tree_view"/>
         </record>
 
-        <menuitem id="mrw_config_menu" parent="delivery.menu_delivery"
+        <menuitem id="mrw_config_menu" parent="base_delivery_carrier_label.menu_carriers_config"
             action="mrw_config_action" sequence="20"/>
 
     </data>
