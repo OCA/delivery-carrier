@@ -21,7 +21,7 @@
             <field name="model">mrw.config</field>
             <field name="arch" type="xml">
                 <form string="MRW Config" version="7.0">
-                    <sheet string="Mrw Config">
+                    <sheet string="MRW Config">
                         <div class="oe_title">
                             <h1>
                                 <field name="name" class="oe_inline"/>
