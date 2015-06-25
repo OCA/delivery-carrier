@@ -29,16 +29,38 @@ from ..webservice.mrw_api import MrwEnvio
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
+    @api.model
+    def _get_mrw_service_type(self):
+        return [
+            ('0000', 'Urgente 10'),
+            ('0005', 'Urgente Hoy'),
+            ('0100', 'Urgente 12'),
+            ('0110', 'Urgente 14'),
+            ('0120', 'Urgente 22'),
+            ('0200', 'Urgente 19'),
+            ('0205', 'Urgente 19 Expedicion'),
+            ('0210', 'Urgente 19 Mas 40 kilos'),
+            ('0220', 'Urgente 19 Portugal'),
+            ('0230', 'Bag 19'),
+            ('0235', 'Bag 14'),
+            ('0300', 'Economico'),
+            ('0310', 'Economico Mas 40 Kilos'),
+            ('0350', 'Economico Interinsular'),
+            ('0400', 'Express Documentos'),
+            ('0450', 'Express 2 Kilos'),
+            ('0480', 'Caja Express 3 Kilos'),
+            ('0490', 'Documentos 14'),
+            ('0800', 'Ecommerce')
+        ]
+
+    mrw_service_type = fields.Selection(
+        '_get_mrw_service_type', string='Mrw Service')
+    mrw_frequence = fields.Selection(
+        (('1', 'Frecuencia 1'), ('2', 'Frecuencia 2')), string='Mrw Frequence')
+
     @api.multi
-    def _generate_mrw_label(self, package_ids=None):
+    def _mrw_transm_envio_request(self, mrw_api):
         self.ensure_one()
-        if not self.carrier_id.mrw_config_id:
-            raise exceptions.Warning(_('No MRW Config defined in carrier'))
-        if not self.picking_type_id.warehouse_id.partner_id:
-            raise exceptions.Warning(
-                _('Please define an address in the %s warehouse') % (
-                    self.warehouse_id.name))
-        mrw_api = MrwEnvio(self.carrier_id.mrw_config_id)
         client = mrw_api.client
         transm_envio = client.factory.create('TransmEnvioRequest')
 
@@ -65,13 +87,6 @@ class StockPicking(models.Model):
         transm_envio.DatosRecogida.Nombre = warehouse_address.name
         transm_envio.DatosRecogida.Telefono = warehouse_address.phone or ''
 
-        # TODO: Ver si establecer informacion horarios
-        # horario_rango = client.factory.create('HorarioRangoRequest')
-        # horario_rango.Desde = '09:30'
-        # horario_rango.Hasta = '19:00'
-        # transm_envio.DatosRecogida.Horario.Rangos.HorarioRangoRequest.append(
-        #     horario_rango)
-
         shipping_address = transm_envio.DatosEntrega.Direccion
         shipping_address.Via = self.partner_id.street
         shipping_address.Resto = self.partner_id.street2 or ''
@@ -90,9 +105,11 @@ class StockPicking(models.Model):
             fields.Datetime.from_string(self.date_done), '%d/%m/%Y')
         service_data.Referencia = self.name
         service_data.EnFranquicia = 'N'
-        service_data.CodigoServicio = '0200'
+        service_data.CodigoServicio = self.mrw_service_type
         service_data.NumeroBultos = self.number_of_packages or 1
         service_data.Peso = self.weight or 1
+        if self.mrw_frequence:
+            service_data.Frecuencia = self.mrw_frequence
 
         # TODO: Servicio Rembolso
         # Reembolso: indicador opcional de reembolso. Valores posibles:
@@ -110,14 +127,38 @@ class StockPicking(models.Model):
             service_data.Notificaciones.NotificacionRequest.append(
                 notification_request)
 
+        return transm_envio
+
+    @api.multi
+    def _mrw_etiqueta_envio_request(self, mrw_api, shipping_number):
+        self.ensure_one()
+        client = mrw_api.client
+        label_factory = client.factory.create('EtiquetaEnvioRequest')
+        label_factory.NumeroEnvio = shipping_number
+        label_factory.ReportTopMargin = "1100"
+        label_factory.ReportLeftMargin = "650"
+        return label_factory
+
+    @api.multi
+    def _generate_mrw_label(self, package_ids=None):
+        self.ensure_one()
+        if not self.carrier_id.mrw_config_id:
+            raise exceptions.Warning(_('No MRW Config defined in carrier'))
+        if not self.picking_type_id.warehouse_id.partner_id:
+            raise exceptions.Warning(
+                _('Please define an address in the %s warehouse') % (
+                    self.warehouse_id.name))
+        mrw_api = MrwEnvio(self.carrier_id.mrw_config_id)
+        client = mrw_api.client
+        transm_envio = self._mrw_transm_envio_request(mrw_api)
+
         response = client.service.TransmEnvio(transm_envio)
+
         if response.Estado != '1' and not response.NumeroEnvio:
             raise exceptions.Warning(response.Mensaje)
 
-        label_factory = client.factory.create('EtiquetaEnvioRequest')
-        label_factory.NumeroEnvio = response.NumeroEnvio
-        label_factory.ReportTopMargin = "1100"
-        label_factory.ReportLeftMargin = "650"
+        label_factory = self._mrw_etiqueta_envio_request(mrw_api,
+                                                         response.NumeroEnvio)
 
         label_response = client.service.EtiquetaEnvio(label_factory)
 
@@ -129,14 +170,6 @@ class StockPicking(models.Model):
             'file_type': 'pdf',
             'name': response.NumeroEnvio + '.pdf',
         }
-
-        # panel_url = self._get_mrw_label_from_url(response.NumeroEnvio)
-
-        # return {
-        #     'type': 'ir.actions.act_url',
-        #     'url': panel_url,
-        #     'target': 'new',
-        # }
 
         return [label]
 

@@ -31,7 +31,8 @@
     'data': [
         'security/ir.model.access.csv',
         'view/mrw_config_view.xml',
-        'view/delivery_view.xml'
+        'view/delivery_view.xml',
+        'view/stock_view.xml'
     ],
     'demo': [],
     'installable': True,
