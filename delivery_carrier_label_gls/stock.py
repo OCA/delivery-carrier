@@ -19,6 +19,7 @@
 #
 ###############################################################################
 
+import logging
 from openerp.osv import orm
 from openerp.tools.translate import _
 from .report.label import GLSLabel, InvalidDataForMako
@@ -29,8 +30,14 @@ from .report.label_helper import (
     InvalidType,)
 from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
 from datetime import datetime
-import pycountry
 from operator import attrgetter
+
+
+logger = logging.getLogger(__name__)
+try:
+    import pycountry
+except ImportError:
+    logger.warn('Please install python lib pycountry')
 
 
 EXCEPT_TITLE = "GLS Library Exception"

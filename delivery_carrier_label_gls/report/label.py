@@ -19,15 +19,14 @@
 #
 ###############################################################################
 
+import logging
 from mako.template import Template
 from mako.exceptions import RichTraceback
 from .label_helper import AbstractLabel
 from .exception_helper import (InvalidAccountNumber)
 import httplib
 from unidecode import unidecode
-import logging
 import os
-import pycountry
 
 REPORT_CODING = 'cp1252'
 ERROR_BEHAVIOR = 'backslashreplace'
@@ -36,8 +35,6 @@ GLS_PORT = 80
 WEB_SERVICE_CODING = 'ISO-8859-1'
 LABEL_FILE_NAME = 'gls'
 
-logger = logging.getLogger(__name__)
-
 URL_PROD = "http://www.gls-france.com/cgi-bin/glsboxGI.cgi"
 URL_TEST = "http://www.gls-france.com/cgi-bin/glsboxGITest.cgi"
 
@@ -45,18 +42,25 @@ URL_TEST = "http://www.gls-france.com/cgi-bin/glsboxGITest.cgi"
 class InvalidDataForMako(Exception):
     ""
 
+logger = logging.getLogger(__name__)
+try:
+    import pycountry
 
-def GLS_countries_prefix():
-    """For GLS carrier 'Serbie Montenegro' is 'CS' and for wikipedia it's 'ME'
-    We have to do a quick replacement
-    """
-    GLS_prefix = []
-    for elm in pycountry.countries:
-        GLS_prefix.append(str(elm.alpha2))
-    GLS_prefix[GLS_prefix.index('ME')] = 'CS'
-    return GLS_prefix
+    def GLS_countries_prefix():
+        """For GLS carrier 'Serbie Montenegro' is 'CS'
+        and for wikipedia it's 'ME'
+        We have to do a quick replacement
+        """
+        GLS_prefix = []
+        for elm in pycountry.countries:
+            GLS_prefix.append(str(elm.alpha2))
+        GLS_prefix[GLS_prefix.index('ME')] = 'CS'
+        return GLS_prefix
 
-GLS_COUNTRIES_PREFIX = GLS_countries_prefix()
+    GLS_COUNTRIES_PREFIX = GLS_countries_prefix()
+except ImportError:
+    logger.warn('Please install python lib pycountry')
+    GLS_COUNTRIES_PREFIX = []
 
 EUROPEAN_COUNTRIES = [
     'AT', 'BE', 'BG', 'CY', 'CZ', 'DE', 'DK', 'ES', 'EE', 'FI', 'GR',
