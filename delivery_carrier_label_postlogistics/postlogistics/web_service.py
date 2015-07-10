@@ -358,7 +358,7 @@ class PostlogisticsWebService(object):
         }
         return envelope
 
-    def generate_label(self, picking, packages, user_lang='en_US'):
+    def generate_label(self, picking, packages, user_lang=None):
         """ Generate a label for a picking
 
         :param picking: picking browse record
@@ -377,6 +377,8 @@ class PostlogisticsWebService(object):
 
         """
         # get options
+        if not user_lang:
+            user_lang = 'en_US'
         lang = self._get_language(user_lang)
         post_customer = self._prepare_customer(picking)
 
