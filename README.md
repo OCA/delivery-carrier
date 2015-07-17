@@ -14,4 +14,4 @@ You'll find:
 
 Translation Status
 ------------------
-[![Transifex Status](https://www.transifex.com/projects/p/OCA-delivery-carrier-8-0/chart/image_png)](https://www.transifex.com/projects/p/OCA-delivery-carrier-8-0)
+[![Transifex Status](https://www.transifex.com/projects/p/OCA-carrier-delivery-8-0/chart/image_png)](https://www.transifex.com/projects/p/OCA-carrier-delivery-8-0)
