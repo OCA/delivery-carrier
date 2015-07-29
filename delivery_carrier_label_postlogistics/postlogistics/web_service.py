@@ -19,8 +19,7 @@
 #
 ##############################################################################
 import re
-from suds.client import Client, WebFault
-from suds.transport.http import HttpAuthenticated
+import logging
 from PIL import Image
 from StringIO import StringIO
 
@@ -28,6 +27,16 @@ from openerp.osv import orm
 from openerp.tools.translate import _
 
 _compile_itemid = re.compile(r'[^0-9A-Za-z+\-_]')
+_logger = logging.getLogger(__name__)
+
+try:
+    from suds.client import Client, WebFault
+    from suds.transport.http import HttpAuthenticated
+except ImportError:
+    _logger.warning(
+        'suds library not found. '
+        'If you plan to use it, please install the suds library '
+        'from https://pypi.python.org/pypi/suds')
 
 
 class PostlogisticsWebService(object):
