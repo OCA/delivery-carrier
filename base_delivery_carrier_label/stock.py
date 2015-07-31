@@ -455,7 +455,7 @@ class ShippingLabel(orm.Model):
 
     _columns = {
         'file_type': fields.selection(__get_file_type_selection, 'File type'),
-        'tracking_id': fields.many2one('stock.tracking', 'Pack'),
+        'tracking_id': fields.many2one('stock.tracking', 'Pack', select=True),
     }
 
     _defaults = {
