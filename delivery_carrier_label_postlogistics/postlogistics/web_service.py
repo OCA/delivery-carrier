@@ -20,7 +20,6 @@
 ##############################################################################
 import re
 import logging
-from suds.transport.http import HttpAuthenticated
 from PIL import Image
 from StringIO import StringIO
 
@@ -32,6 +31,7 @@ _logger = logging.getLogger(__name__)
 
 try:
     from suds.client import Client, WebFault
+    from suds.transport.http import HttpAuthenticated
 except ImportError:
     _logger.warning(
         'suds library not found. '
