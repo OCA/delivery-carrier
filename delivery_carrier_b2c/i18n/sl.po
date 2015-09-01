@@ -3,49 +3,50 @@
 # * delivery_carrier_b2c
 # 
 # Translators:
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: carrier-delivery (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-08-11 09:37+0000\n"
-"PO-Revision-Date: 2015-06-16 16:32+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: German (http://www.transifex.com/oca/OCA-carrier-delivery-8-0/language/de/)\n"
+"PO-Revision-Date: 2015-06-19 05:36+0000\n"
+"Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-carrier-delivery-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: de\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: sl\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
 
 #. module: delivery_carrier_b2c
 #: field:res.partner,use_b2c_info:0
 msgid "Advanced address"
-msgstr "Erweiterte Anschrift"
+msgstr "Napredni naslov"
 
 #. module: delivery_carrier_b2c
 #: help:res.partner,use_b2c_info:0
 msgid "Display additional information for home delivery (b2c)"
-msgstr "Zeige zusätzliche Information für Streckenlieferung (b2c)"
+msgstr "Prikaz dodatnih informacij za dostavo na dom (b2c)"
 
 #. module: delivery_carrier_b2c
 #: field:res.partner,door_code:0
 msgid "Door Code"
-msgstr "Torkennung"
+msgstr "Koda vrat"
 
 #. module: delivery_carrier_b2c
 #: field:res.partner,door_code2:0
 msgid "Door Code 2"
-msgstr "Torkennung 2"
+msgstr "Koda vrat 2"
 
 #. module: delivery_carrier_b2c
 #: help:res.partner,intercom:0
 msgid "Informations for Intercom such as name or number on the intercom"
-msgstr "Auskunft für Gegensprechanlage, wie Name oder Kennung in der Anlage"
+msgstr "Intercom podatki, kot so naziv ali številka na intercom"
 
 #. module: delivery_carrier_b2c
 #: field:res.partner,intercom:0
 msgid "Intercom"
-msgstr "Gegensprechanlage"
+msgstr "Intercom"
 
 #. module: delivery_carrier_b2c
 #: model:ir.model,name:delivery_carrier_b2c.model_res_partner

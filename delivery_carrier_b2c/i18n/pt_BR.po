@@ -3,51 +3,52 @@
 # * delivery_carrier_b2c
 # 
 # Translators:
+# danimaribeiro <danimaribeiro@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: carrier-delivery (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-08-11 09:37+0000\n"
-"PO-Revision-Date: 2015-06-16 16:32+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: German (http://www.transifex.com/oca/OCA-carrier-delivery-8-0/language/de/)\n"
+"PO-Revision-Date: 2015-06-19 03:51+0000\n"
+"Last-Translator: danimaribeiro <danimaribeiro@gmail.com>\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/OCA-carrier-delivery-8-0/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: de\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: pt_BR\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: delivery_carrier_b2c
 #: field:res.partner,use_b2c_info:0
 msgid "Advanced address"
-msgstr "Erweiterte Anschrift"
+msgstr "Endereço avançado"
 
 #. module: delivery_carrier_b2c
 #: help:res.partner,use_b2c_info:0
 msgid "Display additional information for home delivery (b2c)"
-msgstr "Zeige zusätzliche Information für Streckenlieferung (b2c)"
+msgstr "Mostrar informação adicional para entrega a domicilio (b2c)"
 
 #. module: delivery_carrier_b2c
 #: field:res.partner,door_code:0
 msgid "Door Code"
-msgstr "Torkennung"
+msgstr "Código acesso"
 
 #. module: delivery_carrier_b2c
 #: field:res.partner,door_code2:0
 msgid "Door Code 2"
-msgstr "Torkennung 2"
+msgstr "Código acesso 2"
 
 #. module: delivery_carrier_b2c
 #: help:res.partner,intercom:0
 msgid "Informations for Intercom such as name or number on the intercom"
-msgstr "Auskunft für Gegensprechanlage, wie Name oder Kennung in der Anlage"
+msgstr "Informações para Intercom como nome ou número no intercom"
 
 #. module: delivery_carrier_b2c
 #: field:res.partner,intercom:0
 msgid "Intercom"
-msgstr "Gegensprechanlage"
+msgstr "Intercom"
 
 #. module: delivery_carrier_b2c
 #: model:ir.model,name:delivery_carrier_b2c.model_res_partner
 msgid "Partner"
-msgstr "Partner"
+msgstr "Parceiro"
