@@ -1,22 +1,22 @@
-# French translation for carriers-deliveries
-# Copyright (c) 2014 Rosetta Contributors and Canonical Ltd 2014
-# This file is distributed under the same license as the carriers-deliveries package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
-#
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * delivery_carrier_label_postlogistics
+# 
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: carriers-deliveries\n"
+"Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-16 08:10+0000\n"
-"PO-Revision-Date: 2014-03-08 07:06+0000\n"
-"Last-Translator: Guewen Baconnier <guewen.baconnier@camptocamp.com>\n"
-"Language-Team: French <fr@li.org>\n"
-"Language: fr\n"
+"POT-Creation-Date: 2016-09-16 20:38+0000\n"
+"PO-Revision-Date: 2016-09-16 20:38+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
+"Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-06-27 07:09+0000\n"
-"X-Generator: Launchpad (build 17077)\n"
+"Content-Transfer-Encoding: \n"
+"Language: fr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:delivery.carrier.template.option,name:delivery_carrier_label_postlogistics.postlogistics_output_resolution_option_200ppp
@@ -44,24 +44,30 @@ msgid "Additional Service"
 msgstr "Service additionnel"
 
 #. module: delivery_carrier_label_postlogistics
-#: view:postlogistics.config.settings:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_delivery_carrier_allowed_option_ids
+msgid "Allowed options"
+msgstr ""
+
+#. module: delivery_carrier_label_postlogistics
+#: model:ir.ui.view,arch_db:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
 msgid "Apply"
 msgstr "Appliquer"
 
 #. module: delivery_carrier_label_postlogistics
-#: view:postlogistics.config.settings:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
+#: model:ir.ui.view,arch_db:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
 msgid "Assign PostLogistics Licenses to service groups"
 msgstr "Assigner les licences PostLogistics à un groupe de service"
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:74
+#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:64
 #, python-format
 msgid ""
 "Authorization Required\n"
 "\n"
 "Please verify postlogistics username and password in:\n"
 "Configuration -> Postlogistics"
-msgstr "Autorisation requise\n"
+msgstr ""
+"Autorisation requise\n"
 "\n"
 "Veuillez vérifier l'utilisateur et le mot de passe PostLogistics dans:\n"
 "Configuration -> Postlogistics"
@@ -72,12 +78,20 @@ msgid "Basic Service"
 msgstr "Service Basique"
 
 #. module: delivery_carrier_label_postlogistics
-#: field:delivery.carrier.template.option,postlogistics_basic_service_ids:0
+#: model:ir.model.fields,help:delivery_carrier_label_postlogistics.field_delivery_carrier_postlogistics_basic_service_ids
+msgid ""
+"Basic Service defines the available additional options for this delivery "
+"method"
+msgstr ""
+
+#. module: delivery_carrier_label_postlogistics
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_delivery_carrier_option_postlogistics_basic_service_ids
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_delivery_carrier_template_option_postlogistics_basic_service_ids
 msgid "Basic Services"
 msgstr "Services basiques"
 
 #. module: delivery_carrier_label_postlogistics
-#: view:postlogistics.config.settings:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
+#: model:ir.ui.view,arch_db:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
 msgid "Cancel"
 msgstr "Annuler"
 
@@ -92,100 +106,120 @@ msgid "Companies"
 msgstr "Sociétés"
 
 #. module: delivery_carrier_label_postlogistics
-#: field:postlogistics.config.settings,company_id:0
-#: field:postlogistics.license,company_id:0
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_config_settings_company_id
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_license_company_id
 msgid "Company"
 msgstr "Société"
 
 #. module: delivery_carrier_label_postlogistics
-#: field:res.company,postlogistics_logo:0
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_config_settings_logo
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_company_postlogistics_logo
 msgid "Company Logo on Post labels"
 msgstr "Logo de la société sur les étiquettes"
 
 #. module: delivery_carrier_label_postlogistics
-#: field:delivery.carrier.template.option,postlogistics_additonial_service_ids:0
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_delivery_carrier_option_postlogistics_additonial_service_ids
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_delivery_carrier_template_option_postlogistics_additonial_service_ids
 msgid "Compatible Additional Services"
 msgstr "Services additionnels compatibles"
 
 #. module: delivery_carrier_label_postlogistics
-#: field:delivery.carrier.template.option,postlogistics_delivery_instruction_ids:0
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_delivery_carrier_option_postlogistics_delivery_instruction_ids
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_delivery_carrier_template_option_postlogistics_delivery_instruction_ids
 msgid "Compatible Delivery Instructions"
 msgstr "Instructions de livraison compatibles"
 
 #. module: delivery_carrier_label_postlogistics
+#: model:ir.model.fields,help:delivery_carrier_label_postlogistics.field_delivery_carrier_allowed_option_ids
+msgid "Compute allowed options according to selected options."
+msgstr ""
+
+#. module: delivery_carrier_label_postlogistics
 #: model:ir.actions.act_window,name:delivery_carrier_label_postlogistics.action_postlogistics_config
-#: view:postlogistics.config.settings:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
+#: model:ir.ui.view,arch_db:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
 msgid "Configure Postlogistics"
 msgstr "Configurer Postlogistics"
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/res_config.py:142
-#: code:addons/delivery_carrier_label_postlogistics/res_config.py:204
+#: model:ir.ui.view,arch_db:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
+msgid "Configure licenses"
+msgstr ""
+
+#. module: delivery_carrier_label_postlogistics
+#: code:addons/delivery_carrier_label_postlogistics/models/res_config.py:120
+#: code:addons/delivery_carrier_label_postlogistics/models/res_config.py:182
 #, python-format
 msgid ""
 "Could not retrieve Postlogistics base services:\n"
 "%s"
-msgstr "Impossible de récupérer les services de base Postlogistics:\n"
+msgstr ""
+"Impossible de récupérer les services de base Postlogistics:\n"
 "%s"
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/res_config.py:90
+#: code:addons/delivery_carrier_label_postlogistics/models/res_config.py:68
 #, python-format
 msgid ""
 "Could not retrieve Postlogistics delivery instructions:\n"
 "%s"
-msgstr "Impossible de récupérer les instructions de livraison Postlogistics:\n"
+msgstr ""
+"Impossible de récupérer les instructions de livraison Postlogistics:\n"
 "%s"
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/res_config.py:274
+#: code:addons/delivery_carrier_label_postlogistics/models/res_config.py:252
 #, python-format
 msgid ""
 "Could not retrieve Postlogistics group services:\n"
 "%s"
-msgstr "Impossible de récupérer les groupes de services Postlogistics:\n"
+msgstr ""
+"Impossible de récupérer les groupes de services Postlogistics:\n"
 "%s"
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/res_config.py:365
+#: code:addons/delivery_carrier_label_postlogistics/models/res_config.py:343
 #, python-format
 msgid ""
 "Could not retrieve allowed Postlogistics service groups for the %s licence:\n"
 "%s"
-msgstr "Impossible de récupérer les groupes de services Postlogistics autorisés pour la licence %s:\n"
+msgstr ""
+"Impossible de récupérer les groupes de services Postlogistics autorisés pour la licence %s:\n"
 "%s"
 
 #. module: delivery_carrier_label_postlogistics
-#: field:postlogistics.config.settings,create_uid:0
-#: field:postlogistics.license,create_uid:0
-#: field:postlogistics.service.group,create_uid:0
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_config_settings_create_uid
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_license_create_uid
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_service_group_create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Créé par"
 
 #. module: delivery_carrier_label_postlogistics
-#: field:postlogistics.config.settings,create_date:0
-#: field:postlogistics.license,create_date:0
-#: field:postlogistics.service.group,create_date:0
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_config_settings_create_date
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_license_create_date
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_service_group_create_date
 msgid "Created on"
-msgstr ""
+msgstr "Créé le"
 
 #. module: delivery_carrier_label_postlogistics
-#: view:postlogistics.config.settings:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
+#: model:ir.ui.view,arch_db:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
 msgid "Default configs"
 msgstr "Configuration par défaut"
 
 #. module: delivery_carrier_label_postlogistics
-#: field:res.company,postlogistics_default_label_layout:0
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_config_settings_default_label_layout
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_company_postlogistics_default_label_layout
 msgid "Default label layout"
 msgstr "Disposition par défaut des étiquettes"
 
 #. module: delivery_carrier_label_postlogistics
-#: field:res.company,postlogistics_default_output_format:0
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_config_settings_default_output_format
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_company_postlogistics_default_output_format
 msgid "Default output format"
 msgstr "Format de sortie par défaut"
 
 #. module: delivery_carrier_label_postlogistics
-#: field:res.company,postlogistics_default_resolution:0
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_config_settings_default_resolution
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_company_postlogistics_default_resolution
 msgid "Default resolution"
 msgstr "Résolution par défaut"
 
@@ -202,15 +236,24 @@ msgstr "Option de livraison"
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model,name:delivery_carrier_label_postlogistics.model_delivery_carrier_template_option
 msgid "Delivery carrier template option"
-msgstr ""
+msgstr "Option de méthode de livraison"
 
 #. module: delivery_carrier_label_postlogistics
-#: field:postlogistics.license,name:0 field:postlogistics.service.group,name:0
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_license_name
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_service_group_name
 msgid "Description"
 msgstr "Description"
 
 #. module: delivery_carrier_label_postlogistics
-#: field:res.company,postlogistics_office:0
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_config_settings_display_name
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_license_display_name
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_service_group_display_name
+msgid "Display Name"
+msgstr "Nom à afficher"
+
+#. module: delivery_carrier_label_postlogistics
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_config_settings_office
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_company_postlogistics_office
 msgid "Domicile Post office"
 msgstr "Office de poste du domicile"
 
@@ -220,7 +263,7 @@ msgid "EPS"
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:73
+#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:82
 #, python-format
 msgid "Error 401"
 msgstr "Erreur 401"
@@ -251,30 +294,32 @@ msgid "GIF"
 msgstr "GIF"
 
 #. module: delivery_carrier_label_postlogistics
-#: help:postlogistics.license,sequence:0
+#: model:ir.model.fields,help:delivery_carrier_label_postlogistics.field_postlogistics_license_sequence
 msgid ""
 "Gives the sequence on company to define priority on license when multiple "
 "licenses are available for the same group of service."
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
-#: field:postlogistics.service.group,group_extid:0
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_service_group_group_extid
 msgid "Group ID"
 msgstr "Id. de groupe"
 
 #. module: delivery_carrier_label_postlogistics
-#: field:postlogistics.config.settings,id:0 field:postlogistics.license,id:0
-#: field:postlogistics.service.group,id:0
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_config_settings_id
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_license_id
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_service_group_id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: delivery_carrier_label_postlogistics
-#: help:stock.quant.package,postlogistics_manual_cod_amount:0
+#: model:ir.model.fields,help:delivery_carrier_label_postlogistics.field_stock_quant_package_postlogistics_manual_cod_amount
 msgid ""
 "If the cash on delivery amount for this package is different than the total "
 "of the sales order, write the amount there."
-msgstr "Si le montant contre-remboursement pour ce colis est différent du total "
-"de la commande, inscrivez le montant ici."
+msgstr ""
+"Si le montant contre-remboursement pour ce colis est différent du total de "
+"la commande, inscrivez le montant ici."
 
 #. module: delivery_carrier_label_postlogistics
 #: model:delivery.carrier.template.option,name:delivery_carrier_label_postlogistics.postlogistics_output_format_option_jpg
@@ -287,36 +332,45 @@ msgid "Label Layout"
 msgstr "Disposition de l'étiquette"
 
 #. module: delivery_carrier_label_postlogistics
-#: field:postlogistics.config.settings,write_uid:0
-#: field:postlogistics.license,write_uid:0
-#: field:postlogistics.service.group,write_uid:0
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_config_settings___last_update
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_license___last_update
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_service_group___last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: delivery_carrier_label_postlogistics
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_config_settings_write_uid
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_license_write_uid
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_service_group_write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Dernière modification par"
 
 #. module: delivery_carrier_label_postlogistics
-#: field:postlogistics.config.settings,write_date:0
-#: field:postlogistics.license,write_date:0
-#: field:postlogistics.service.group,write_date:0
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_config_settings_write_date
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_license_write_date
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_service_group_write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Dernière mise à jour le"
 
 #. module: delivery_carrier_label_postlogistics
-#: view:postlogistics.config.settings:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
+#: model:ir.ui.view,arch_db:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
 msgid "Licenses"
 msgstr "Licences"
 
 #. module: delivery_carrier_label_postlogistics
-#: help:delivery.carrier.template.option,postlogistics_basic_service_ids:0
+#: model:ir.model.fields,help:delivery_carrier_label_postlogistics.field_delivery_carrier_option_postlogistics_basic_service_ids
+#: model:ir.model.fields,help:delivery_carrier_label_postlogistics.field_delivery_carrier_template_option_postlogistics_basic_service_ids
 msgid "List of basic service for which this service is compatible"
 msgstr "Liste des services basiques avec lesquels ce service est compatible"
 
 #. module: delivery_carrier_label_postlogistics
-#: field:postlogistics.license,number:0
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_license_number
 msgid "Number"
 msgstr "Numéro"
 
 #. module: delivery_carrier_label_postlogistics
-#: help:res.company,postlogistics_logo:0
+#: model:ir.model.fields,help:delivery_carrier_label_postlogistics.field_postlogistics_config_settings_logo
+#: model:ir.model.fields,help:delivery_carrier_label_postlogistics.field_res_company_postlogistics_logo
 msgid ""
 "Optional company logo to show on label.\n"
 "If using an image / logo, please note the following:\n"
@@ -329,17 +383,14 @@ msgid ""
 "We recommend using a black and white logo for printing in  the ZPL2 format."
 msgstr ""
 "Logo optionnel à imprimer sur vos étiquettes.\n"
-"Veuillez tenir compte des indications suivantes lors de la création de votre "
-"image ou logo:\n"
+"Veuillez tenir compte des indications suivantes lors de la création de votre image ou logo:\n"
 "– Largeur de l’image: 47 mm\n"
 "– Hauteur de l’image: 25 mm\n"
 "– Taille du fichier: max. 30 ko\n"
 "– Format de fichier: GIF ou PNG\n"
 "– Table des couleurs: couleurs indicées, 200 au max.\n"
-"– Le logo sera imprimé tourné de 90° dans le sens contraire des aiguilles "
-"d’une montre \n"
-"Il est conseillé d’utiliser un logo noir et blanc pour l’impression en "
-"format ZPL2."
+"– Le logo sera imprimé tourné de 90° dans le sens contraire des aiguilles d’une montre \n"
+"Il est conseillé d’utiliser un logo noir et blanc pour l’impression en format ZPL2."
 
 #. module: delivery_carrier_label_postlogistics
 #: selection:delivery.carrier.template.option,postlogistics_type:0
@@ -362,12 +413,8 @@ msgid "PNG"
 msgstr "PNG"
 
 #. module: delivery_carrier_label_postlogistics
-#: model:ir.model,name:delivery_carrier_label_postlogistics.model_stock_pack_operation
-msgid "Packing Operation"
-msgstr ""
-
-#. module: delivery_carrier_label_postlogistics
-#: field:res.company,postlogistics_password:0
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_config_settings_password
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_company_postlogistics_password
 msgid "Password"
 msgstr "Mot de passe"
 
@@ -377,32 +424,31 @@ msgid "Physical Packages"
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
-#: model:ir.model,name:delivery_carrier_label_postlogistics.model_stock_picking
-msgid "Picking List"
-msgstr ""
-
-#. module: delivery_carrier_label_postlogistics
-#: help:res.company,postlogistics_office:0
+#: model:ir.model.fields,help:delivery_carrier_label_postlogistics.field_postlogistics_config_settings_office
+#: model:ir.model.fields,help:delivery_carrier_label_postlogistics.field_res_company_postlogistics_office
 msgid "Post office which will receive the shipped goods"
 msgstr "Office de poste recevant les livraisons"
 
 #. module: delivery_carrier_label_postlogistics
-#: field:delivery.carrier,postlogistics_license_id:0
-#: field:postlogistics.service.group,postlogistics_license_ids:0
-#: field:res.company,postlogistics_license_ids:0
 #: model:ir.model,name:delivery_carrier_label_postlogistics.model_postlogistics_license
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_delivery_carrier_postlogistics_license_id
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_service_group_postlogistics_license_ids
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_company_postlogistics_license_ids
 msgid "PostLogistics Franking License"
 msgstr "Licence d'affranchissement PostLogistics"
 
 #. module: delivery_carrier_label_postlogistics
-#: field:delivery.carrier,postlogistics_service_group_id:0
-#: field:delivery.carrier.template.option,postlogistics_service_group_id:0
 #: model:ir.model,name:delivery_carrier_label_postlogistics.model_postlogistics_service_group
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_delivery_carrier_option_postlogistics_service_group_id
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_delivery_carrier_postlogistics_basic_service_ids
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_delivery_carrier_postlogistics_service_group_id
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_delivery_carrier_template_option_postlogistics_service_group_id
 msgid "PostLogistics Service Group"
 msgstr "Groupe de service PostLogistics"
 
 #. module: delivery_carrier_label_postlogistics
-#: field:delivery.carrier.template.option,postlogistics_type:0
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_delivery_carrier_option_postlogistics_type
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_delivery_carrier_template_option_postlogistics_type
 msgid "PostLogistics option type"
 msgstr "Type d'option PostLogistics"
 
@@ -412,29 +458,37 @@ msgid "Postlogistics"
 msgstr "Postlogistics"
 
 #. module: delivery_carrier_label_postlogistics
-#: field:stock.quant.package,postlogistics_manual_cod_amount:0
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_stock_quant_package_postlogistics_manual_cod_amount
 msgid "Postlogistics Cash On Delivery Amount"
 msgstr "Contre-remboursement Postlogistics"
 
 #. module: delivery_carrier_label_postlogistics
-#: view:postlogistics.config.settings:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
+#: model:ir.actions.act_window,name:delivery_carrier_label_postlogistics.action_postlogistics_licenses
+#: model:ir.ui.menu,name:delivery_carrier_label_postlogistics.menu_postlogistics_licenses
+msgid "Postlogistics Licenses"
+msgstr ""
+
+#. module: delivery_carrier_label_postlogistics
+#: model:ir.ui.view,arch_db:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
 msgid "Select Company"
 msgstr "Sélectionner la société"
 
 #. module: delivery_carrier_label_postlogistics
-#: view:postlogistics.config.settings:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
+#: model:ir.ui.view,arch_db:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
 msgid "Sender Informations"
 msgstr "Information de l'expéditeur"
 
 #. module: delivery_carrier_label_postlogistics
-#: field:postlogistics.license,sequence:0
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_license_sequence
 msgid "Sequence"
 msgstr "Séquence"
 
 #. module: delivery_carrier_label_postlogistics
-#: help:delivery.carrier,postlogistics_service_group_id:0
+#: model:ir.model.fields,help:delivery_carrier_label_postlogistics.field_delivery_carrier_postlogistics_service_group_id
 msgid "Service group defines the available options for this delivery method."
-msgstr "Groupe de service pour définir les options disponibles pour cette méthode de livraison."
+msgstr ""
+"Groupe de service pour définir les options disponibles pour cette méthode de"
+" livraison."
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model,name:delivery_carrier_label_postlogistics.model_shipping_label
@@ -442,49 +496,61 @@ msgid "Shipping Label"
 msgstr "Étiquette de livraison"
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/stock.py:48
-#: code:addons/delivery_carrier_label_postlogistics/stock_quant_package.py:75
+#: code:addons/delivery_carrier_label_postlogistics/models/stock.py:31
+#: code:addons/delivery_carrier_label_postlogistics/models/stock_quant_package.py:56
 #, python-format
 msgid ""
 "The cash on delivery amount must be manually specified on the packages when "
 "a package contains products from different sales orders."
 msgstr ""
-"Le montant contre-remboursement doit être précisé manuellement sur les colis "
-"quand un colis contient des produits de différentes commandes."
+"Le montant contre-remboursement doit être précisé manuellement sur les colis"
+" quand un colis contient des produits de différentes commandes."
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/stock_quant_package.py:65
-#: code:addons/delivery_carrier_label_postlogistics/stock.py:57
+#: code:addons/delivery_carrier_label_postlogistics/models/stock.py:40
+#: code:addons/delivery_carrier_label_postlogistics/models/stock_quant_package.py:46
 #, python-format
 msgid ""
 "The cash on delivery amount must be manually specified on the packages when "
 "a sales order is delivered in several delivery orders."
 msgstr ""
-"Le montant contre-remboursement doit être précisé manuellement sur les colis "
-"quand une commande est livrée en plusieurs bons de livraisons."
+"Le montant contre-remboursement doit être précisé manuellement sur les colis"
+" quand une commande est livrée en plusieurs bons de livraisons."
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/stock_quant_package.py:85
+#: code:addons/delivery_carrier_label_postlogistics/models/stock_quant_package.py:66
 #, python-format
 msgid ""
 "The cash on delivery amount must be manually specified on the packages when "
 "a sales order is delivered in several packages."
 msgstr ""
-"Le montant contre-remboursement doit être précisé manuellement sur les colis "
-"quand une commande est livrée en plusieurs colis."
+"Le montant contre-remboursement doit être précisé manuellement sur les colis"
+" quand une commande est livrée en plusieurs colis."
 
 #. module: delivery_carrier_label_postlogistics
-#: view:postlogistics.config.settings:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
+#: model:ir.model,name:delivery_carrier_label_postlogistics.model_stock_picking
+msgid "Transfer"
+msgstr ""
+
+#. module: delivery_carrier_label_postlogistics
+#: model:ir.ui.view,arch_db:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
 msgid "Update PostLogistics Services"
 msgstr "Mettre à jour les services PostLogistics"
 
 #. module: delivery_carrier_label_postlogistics
-#: field:res.company,postlogistics_username:0
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_config_settings_username
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_company_postlogistics_username
 msgid "Username"
 msgstr "Nom d'utilisateur"
 
 #. module: delivery_carrier_label_postlogistics
-#: view:postlogistics.config.settings:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_config_settings_wsdl_url
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_company_postlogistics_wsdl_url
+msgid "WSDL URL"
+msgstr ""
+
+#. module: delivery_carrier_label_postlogistics
+#: model:ir.ui.view,arch_db:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
 msgid "Web Service Authentication"
 msgstr "Authentification Web Service"
 
@@ -494,18 +560,16 @@ msgid "ZPL2"
 msgstr "ZPL2"
 
 #. module: delivery_carrier_label_postlogistics
-#: view:postlogistics.config.settings:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
+#: model:ir.ui.view,arch_db:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
 msgid "or"
 msgstr "ou"
+
+#. module: delivery_carrier_label_postlogistics
+#: model:ir.model,name:delivery_carrier_label_postlogistics.model_postlogistics_config_settings
+msgid "postlogistics.config.settings"
+msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
 #: model:delivery.carrier.template.option,name:delivery_carrier_label_postlogistics.postlogistics_output_format_option_spdf
 msgid "sPDF"
 msgstr "sPDF"
-
-#. module: delivery_carrier_label_postlogistics
-#: view:delivery.carrier:delivery_carrier_label_postlogistics.view_delivery_carrier_form
-msgid ""
-"{'default_carrier_id': active_id, 'default_allowed_option_ids': "
-"allowed_option_ids}"
-msgstr ""
