@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: carrier-delivery (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-11 09:37+0000\n"
+"POT-Creation-Date: 2015-09-01 17:23+0000\n"
 "PO-Revision-Date: 2015-06-16 16:32+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: French (http://www.transifex.com/oca/OCA-carrier-delivery-8-0/language/fr/)\n"
@@ -314,7 +314,7 @@ msgstr ""
 #. module: delivery_carrier_deposit
 #: view:website:delivery_carrier_deposit.report_generic_deposit_slip
 msgid "Weight"
-msgstr ""
+msgstr "Poids"
 
 #. module: delivery_carrier_deposit
 #: model:ir.model,name:delivery_carrier_deposit.model_delivery_deposit_wizard
