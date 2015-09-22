@@ -36,7 +36,6 @@
  'tests': [],
  'installable': True,
  'auto_install': False,
- 'license': 'AGPL-3',
  'application': True,
  'external_dependencies': {
      'python': ['suds'],
