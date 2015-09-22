@@ -75,7 +75,7 @@ Contributors
     },
     'license': 'AGPL-3',
     'tests': [],
-    'installable': True,
+    'installable': False,
     'auto_install': False,
     'application': False,
 }
