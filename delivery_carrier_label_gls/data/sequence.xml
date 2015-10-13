@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+        <!-- Sequence TYPES  -->
+
+        <record id="seq_type_delivery_carrier_colissimo_gls" model="ir.sequence.type">
+            <field name="name">Delivery GLS</field>
+            <field name="code">stock.picking_gls</field>
+        </record>
+
+        <!--  SEQUENCES -->
+        <record id="seq_delivery_carrier_colissimo_gls" model="ir.sequence">
+            <field name="name">GLS</field>
+            <field name="code">stock.picking_gls</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+            <field name="padding">10</field>
+            <field name="implementation">no_gap</field>
+        </record>
+
+    </data>
+</openerp>
