@@ -26,15 +26,15 @@ Unported addons
 ---------------
 addon | version | summary
 --- | --- | ---
-[base_delivery_carrier_files](__unported__/base_delivery_carrier_files/) | 1.2.3 (unported) | Base Delivery Carrier Files
-[base_delivery_carrier_files_document](__unported__/base_delivery_carrier_files_document/) | 1.0.1 (unported) | Base module for picking carrier files creation for document
-[delivery_carrier_file_laposte](__unported__/delivery_carrier_file_laposte/) | 1.0 (unported) | Delivery Carrier File: La Poste
-[delivery_carrier_file_tnt](__unported__/delivery_carrier_file_tnt/) | 1.0 (unported) | Delivery Carrier File: TNT
-[delivery_carrier_label_default_webkit](__unported__/delivery_carrier_label_default_webkit/) | 1.0 (unported) | Module for carrier labels
-[delivery_carrier_label_dispatch](__unported__/delivery_carrier_label_dispatch/) | 1.0 (unported) | Carrier labels - Picking dispatch (link)
-[delivery_carrier_label_gls](__unported__/delivery_carrier_label_gls/) | 0.1 (unported) | GLS carrier label printing
-[delivery_carrier_label_postlogistics_shop_logo](__unported__/delivery_carrier_label_postlogistics_shop_logo/) | 1.0 (unported) | PostLogistics labels - logo per Shop
-[delivery_optional_invoice_line](__unported__/delivery_optional_invoice_line/) | 0.1 (unported) | Delivery Optional Invoice Line
+[base_delivery_carrier_files](base_delivery_carrier_files/) | 1.2.3 (unported) | Base Delivery Carrier Files
+[base_delivery_carrier_files_document](base_delivery_carrier_files_document/) | 1.0.1 (unported) | Base module for picking carrier files creation for document
+[delivery_carrier_file_laposte](delivery_carrier_file_laposte/) | 1.0 (unported) | Delivery Carrier File: La Poste
+[delivery_carrier_file_tnt](delivery_carrier_file_tnt/) | 1.0 (unported) | Delivery Carrier File: TNT
+[delivery_carrier_label_default_webkit](delivery_carrier_label_default_webkit/) | 1.0 (unported) | Module for carrier labels
+[delivery_carrier_label_dispatch](delivery_carrier_label_dispatch/) | 1.0 (unported) | Carrier labels - Picking dispatch (link)
+[delivery_carrier_label_gls](delivery_carrier_label_gls/) | 0.1 (unported) | GLS carrier label printing
+[delivery_carrier_label_postlogistics_shop_logo](delivery_carrier_label_postlogistics_shop_logo/) | 1.0 (unported) | PostLogistics labels - logo per Shop
+[delivery_optional_invoice_line](delivery_optional_invoice_line/) | 0.1 (unported) | Delivery Optional Invoice Line
 
 [//]: # (end addons)
 
