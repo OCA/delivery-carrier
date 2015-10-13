@@ -1,0 +1,179 @@
+# German translation for carriers-deliveries
+# Copyright (c) 2014 Rosetta Contributors and Canonical Ltd 2014
+# This file is distributed under the same license as the carriers-deliveries package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: carriers-deliveries\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2012-02-16 09:08+0000\n"
+"PO-Revision-Date: 2015-02-03 18:06+0100\n"
+"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
+"Language-Team: GoLive <rudolf.schnapka@golive.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2014-06-27 07:09+0000\n"
+"X-Generator: Poedit 1.5.4\n"
+"Language: de\n"
+
+#. module: base_delivery_carrier_files
+#: code:addons/base_delivery_carrier_files/wizard/generate_carrier_files.py:60
+#, python-format
+msgid "No delivery orders selected"
+msgstr "Kein Lieferauftrag ausgewählt"
+
+#. module: base_delivery_carrier_files
+#: view:delivery.carrier.file.generate:0
+msgid "Generate the carrier files for the selected delivery orders."
+msgstr "Erzeugen der Spediteurdateien für die gewählten Lieferaufträge"
+
+#. module: base_delivery_carrier_files
+#: help:stock.picking,carrier_file_generated:0
+msgid "The file for the delivery carrier has been generated."
+msgstr "Die Datei für den Spediteur wurde erzeugt."
+
+#. module: base_delivery_carrier_files
+#: view:stock.picking:0
+msgid "Carrier File To Generate"
+msgstr "Zu erzeugende Spediteurdatei"
+
+#. module: base_delivery_carrier_files
+#: model:ir.model,name:base_delivery_carrier_files.model_delivery_carrier_file
+msgid "delivery.carrier.file"
+msgstr "delivery.carrier.file"
+
+#. module: base_delivery_carrier_files
+#: model:ir.model,name:base_delivery_carrier_files.model_stock_picking
+msgid "Picking List"
+msgstr "Kommissionierliste"
+
+#. module: base_delivery_carrier_files
+#: view:delivery.carrier.file.generate:0
+msgid "Carrier Files"
+msgstr "Spediteurdateien"
+
+#. module: base_delivery_carrier_files
+#: help:delivery.carrier.file,auto_export:0
+msgid ""
+"The file will be automatically generated when a delivery order is processed. "
+"If activated, each delivery order will be exported in a separate file."
+msgstr ""
+"Die Datei wird automatisch erzeugt, wenn ein Lieferauftrag bearbeitet wird. "
+"Wenn aktiviert, wird jeder Lieferauftrag in eine eigene Datei exportiert."
+
+#. module: base_delivery_carrier_files
+#: model:ir.actions.act_window,name:base_delivery_carrier_files.action_delivery_carrier_file_generate
+msgid "Generate Carrier Files"
+msgstr "Spediteurdateien erzeugen"
+
+#. module: base_delivery_carrier_files
+#: model:ir.actions.act_window,help:base_delivery_carrier_files.action_delivery_carrier_file_form
+msgid "Generates automatically files asked by carriers for outgoing pickings"
+msgstr ""
+"Erzeugt automatisch die vom Spediteur verlangten Dateien für Kommissionen"
+
+#. module: base_delivery_carrier_files
+#: field:delivery.carrier.file,type:0
+msgid "Type"
+msgstr "Art"
+
+#. module: base_delivery_carrier_files
+#: help:delivery.carrier.file,group_pickings:0
+msgid ""
+"All the pickings will be grouped in the same file. Has no effect when the "
+"files are automatically exported at the delivery order process."
+msgstr ""
+"Alle Kommissionen werden in der gleichen Datei gesammelt. Hat keine Wirkung, "
+"wenn die Dateien bei Lieferauftragbearbeitung automatisch erstellt werden."
+
+#. module: base_delivery_carrier_files
+#: code:addons/base_delivery_carrier_files/carrier_file.py:73
+#: code:addons/base_delivery_carrier_files/wizard/generate_carrier_files.py:60
+#, python-format
+msgid "Error"
+msgstr "Fehler"
+
+#. module: base_delivery_carrier_files
+#: field:delivery.carrier.file,auto_export:0
+msgid "Export at delivery order process"
+msgstr "Bei Lieferauftragbearbeitung erzeugen"
+
+#. module: base_delivery_carrier_files
+#: field:delivery.carrier.file,group_pickings:0
+msgid "Group all pickings in one file"
+msgstr "Alle Kommissionen in einer Datei sammeln"
+
+#. module: base_delivery_carrier_files
+#: field:delivery.carrier.file,name:0
+msgid "Name"
+msgstr "Bezeichnung"
+
+#. module: base_delivery_carrier_files
+#: field:delivery.carrier.file,export_path:0
+msgid "Export Path"
+msgstr "Exportdateipfad"
+
+#. module: base_delivery_carrier_files
+#: view:stock.picking:0
+msgid "Delivery orders to invoice"
+msgstr "Abzurechnende Lieferaufträge"
+
+#. module: base_delivery_carrier_files
+#: model:ir.model,name:base_delivery_carrier_files.model_delivery_carrier
+msgid "Carrier"
+msgstr "Spediteur"
+
+#. module: base_delivery_carrier_files
+#: sql_constraint:stock.picking:0
+msgid "Reference must be unique per Company!"
+msgstr "Referenz muss je Unternehmen eindeutig sein"
+
+#. module: base_delivery_carrier_files
+#: view:stock.picking:0
+msgid "Additional info"
+msgstr "Zusatzinfo"
+
+#. module: base_delivery_carrier_files
+#: model:ir.model,name:base_delivery_carrier_files.model_delivery_carrier_file_generate
+msgid "delivery.carrier.file.generate"
+msgstr "delivery.carrier.file.generate"
+
+#. module: base_delivery_carrier_files
+#: view:delivery.carrier.file:0
+msgid "Write options"
+msgstr "Schreiboptionen"
+
+#. module: base_delivery_carrier_files
+#: view:delivery.carrier.file.generate:0
+msgid "Generate Files"
+msgstr "Dateien erzeugen"
+
+#. module: base_delivery_carrier_files
+#: field:stock.picking,carrier_file_generated:0
+msgid "Carrier File Generated"
+msgstr "Spediteurdatei erzeugt"
+
+#. module: base_delivery_carrier_files
+#: field:delivery.carrier.file,write_mode:0
+msgid "Write on"
+msgstr "Schreiben an"
+
+#. module: base_delivery_carrier_files
+#: view:delivery.carrier.file.generate:0
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#. module: base_delivery_carrier_files
+#: field:delivery.carrier,carrier_file_id:0 view:delivery.carrier.file:0
+#: model:ir.actions.act_window,name:base_delivery_carrier_files.action_delivery_carrier_file_form
+#: model:ir.ui.menu,name:base_delivery_carrier_files.menu_action_delivery_carrier_file_form
+msgid "Carrier File"
+msgstr "Spediteurdatei"
+
+#. module: base_delivery_carrier_files
+#: view:delivery.carrier.file.generate:0
+#: field:delivery.carrier.file.generate,picking_ids:0
+msgid "Delivery Orders"
+msgstr "Lieferaufträge"

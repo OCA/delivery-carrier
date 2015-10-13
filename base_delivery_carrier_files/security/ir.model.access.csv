@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_delivery_carrier_file,delivery.carrier.file,model_delivery_carrier_file,base.group_sale_salesman,1,0,0,0
+access_delivery_carrier_file_manager,delivery.carrier.file manager,model_delivery_carrier_file,base.group_sale_manager,1,1,1,1
+access_delivery_carrier_file_partner_manager,delivery.carrier.file partner_manager,model_delivery_carrier_file,base.group_partner_manager,1,0,0,0
