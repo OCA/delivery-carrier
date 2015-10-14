@@ -40,6 +40,6 @@
         'security/model_security.xml',
     ],
     'demo': [],
-    'installable': True,
+    'installable': False,
     'license': 'AGPL-3',
 }
