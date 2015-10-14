@@ -34,7 +34,7 @@
           'security/ir.model.access.csv',
           ],
  'tests': [],
- 'installable': True,
+ 'installable': False,
  'auto_install': False,
  'application': True,
  'external_dependencies': {
