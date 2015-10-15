@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
-  <data noupdate="1">
-    <record id="postlogistics" model="res.partner">
-        <field name="image">/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsK
+<odoo noupdate="1">
+  <record id="postlogistics" model="res.partner">
+      <field name="image">/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsK
 CwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQU
 FBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBT/wAARCABkAMMDASIA
 AhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQA
@@ -125,10 +124,9 @@ K9LD0vqVDlktOaWvvP8AryP0LFVYU6X1ejy9OaXva/16C0UUV8yeaFFFFBAUUUUAFFFFBYUUUUEB
 RRRQWFFFFBAUUUUFhRRRQQFFFFIsKKKKZAUUUUAFFFFABRRRQWJto20UVQBto20UVIBto20UVQBt
 o20UVIBto20UUAG2jbRRQAbaNtFFABto20UVQBto20UUAG2jbRRQAbaNtFFABto20UVIBtoooqgP
 /9k=</field>
-      <field name="name">PostLogistics</field>
-      <field name="customer" eval="False"/>
-      <field name="supplier" eval="False"/>
-      <field name="email">webservice@post.ch</field>
-    </record>
-  </data>
-</openerp>
+    <field name="name">PostLogistics</field>
+    <field name="customer" eval="False"/>
+    <field name="supplier" eval="False"/>
+    <field name="email">webservice@post.ch</field>
+  </record>
+</odoo>
