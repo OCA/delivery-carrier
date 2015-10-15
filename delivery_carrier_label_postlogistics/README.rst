@@ -1,6 +1,8 @@
 .. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
-    :alt: License: AGPL-3
+   :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
+   :alt: License: AGPL-3
 
+===============================
 PostLogistics Labels WebService
 ===============================
 
@@ -14,6 +16,12 @@ To see it, please install documents module.
 
 You can create multiple delivery method to match your diffent package types.
 
+Installation
+------------
+
+As a requirement you need to install `suds-jurko` library. It will fail with the
+latest and outdated version of `suds`.
+https://pypi.python.org/pypi/suds-jurko/0.6
 
 Configuration
 -------------
@@ -21,7 +29,7 @@ Configuration
 .. important::
    A "Swiss Post Business customer" account is required to use this module.
 
-   See `Swiss Post E-logistics`_
+   See `Log in`_
 
 
 To configure:
@@ -40,27 +48,27 @@ Now you can create a carrier method for PostLogistics WebService:
   compatible services)
 * Then add other `Optional as default` and `Optional` carrier option
   from listed
-* Additional Service and Delivery instructions
+* Add additional Service and Delivery instructions
 
-.. _PostLogistics BarCodes WebService: http://www.poste.ch/post-startseite/\
-post-geschaeftskunden/post-logistik/post-e-log/post-e-log-webservices.htm
-.. _Swiss Post E-logistics: http://www.poste.ch/en/post-startseite/\
-post-geschaeftskunden/post-logistik/post-e-log.htm
+.. _PostLogistics BarCodes WebService: https://www.post.ch/en/business/a-z-of-subjects/dropping-off-mail-items/business-sending-letters/sending-consignments-web-service-barcode
+.. _Log in: https://account.post.ch/selfadmin/?login&lang=en
 
-
-Recommended modules
--------------------
-
-* PostLogistics labels - logo per Shop
-  If you have multiple shops configure one logo per shop
 
 Technical references
 --------------------
 
 `"Barcode" web service documentation`_
 
-.. _"Barcode" web service documentation: http://www.poste.ch/post-barcode-cug\
-.htm
+.. _"Barcode" web service documentation: https://www.post.ch/en/business/a-z-of-subjects/dropping-off-mail-items/business-sending-letters/barcode-support
+
+
+Bug Tracker
+===========
+
+Bugs are tracked on `GitHub Issues
+<https://github.com/OCA/carrier-delivery/issues>`_. In case of trouble, please
+check there if your issue has already been reported. If you spotted it first,
+help us smashing it by providing a detailed and welcomed feedback.
 
 
 Credits

@@ -1,24 +1,6 @@
 # -*- coding: utf-8 -*-
-#
-#
-#    Authors: Guewen Baconnier
-#    Copyright 2015 Camptocamp SA
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-#
-
+# © 2015 Guewen Baconnier (Camptocamp SA)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 import mock
 from openerp.tests import common
 from openerp.addons.delivery_carrier_label_postlogistics\
@@ -63,15 +45,17 @@ class TestPostlogistics(common.TransactionCase):
             'product_id': Product.create({'name': 'Shipping'}).id,
             'partner_id': self.env.ref(partner_xmlid).id,
         })
+        stock_location = self.env.ref('stock.stock_location_stock')
+        customer_location = self.env.ref('stock.stock_location_customers')
         Picking = self.env['stock.picking']
         self.picking = Picking.create({
             'carrier_id': self.carrier.id,
             'picking_type_id': self.env.ref('stock.picking_type_out').id,
+            'location_id': stock_location.id,
+            'location_dest_id': customer_location.id,
         })
         product = Product.create({'name': 'Product A'})
 
-        stock_location = self.env.ref('stock.stock_location_stock')
-        customer_location = self.env.ref('stock.stock_location_customers')
         self.env['stock.move'].create({
             'name': 'a move',
             'product_id': product.id,

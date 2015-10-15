@@ -1,28 +1,11 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    Author: Yannick Vaucher
-#    Copyright 2013 Camptocamp SA
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# © 2013-2015 Yannick Vaucher (Camptocamp SA)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 import logging
 
 from openerp import models, fields, api, exceptions, _
 
-from .postlogistics.web_service import PostlogisticsWebService
+from ..postlogistics.web_service import PostlogisticsWebService
 
 _logger = logging.getLogger(__name__)
 
@@ -41,9 +24,6 @@ class PostlogisticsConfigSettings(models.TransientModel):
     wsdl_url = fields.Char(related='company_id.postlogistics_wsdl_url')
     username = fields.Char(related='company_id.postlogistics_username')
     password = fields.Char(related='company_id.postlogistics_password')
-    license_ids = fields.One2many(
-        related='company_id.postlogistics_license_ids',
-    )
     logo = fields.Binary(related='company_id.postlogistics_logo')
     office = fields.Char(related='company_id.postlogistics_office')
 
@@ -64,14 +44,12 @@ class PostlogisticsConfigSettings(models.TransientModel):
             return
         company = self.company_id
 
-        licenses = company.postlogistics_license_ids
         label_layout = company.postlogistics_default_label_layout
         output_format = company.postlogistics_default_output_format
         resolution = company.postlogistics_default_resolution
 
         self.username = company.postlogistics_username
         self.password = company.postlogistics_password
-        self.license_ids = licenses
         self.logo = company.postlogistics_logo
         self.office = company.postlogistics_office
         self.default_label_layout = label_layout
