@@ -22,7 +22,7 @@ from operator import attrgetter
 
 from openerp import models, api, exceptions, _
 
-from .postlogistics.web_service import PostlogisticsWebService
+from ..postlogistics.web_service import PostlogisticsWebService
 
 
 class StockPicking(models.Model):

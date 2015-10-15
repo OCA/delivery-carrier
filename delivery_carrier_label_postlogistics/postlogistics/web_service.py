@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Author: Yannick Vaucher
-#    Copyright 2013 Camptocamp SA
+#    Copyright 2013-2015 Camptocamp SA
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -23,8 +23,7 @@ import logging
 from PIL import Image
 from StringIO import StringIO
 
-from openerp.osv import orm
-from openerp.tools.translate import _
+from openerp import exceptions, _
 
 _compile_itemid = re.compile(r'[^0-9A-Za-z+\-_]')
 _logger = logging.getLogger(__name__)
@@ -78,8 +77,7 @@ class PostlogisticsWebService(object):
         except Exception as e:
             # if authentication error
             if isinstance(e[0], tuple) and e[0][0] == 401:
-                raise orm.except_orm(
-                    _('Error 401'),
+                raise exceptions.Warning(
                     _('Authorization Required\n\n'
                       'Please verify postlogistics username and password in:\n'
                       'Configuration -> Postlogistics'))

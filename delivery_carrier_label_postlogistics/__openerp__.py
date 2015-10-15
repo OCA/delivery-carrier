@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Author: Yannick Vaucher
-#    Copyright 2013 Camptocamp SA
+#    Copyright 2013-2015 Camptocamp SA
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,7 +19,7 @@
 #
 ##############################################################################
 {'name': 'PostLogistics Labels WebService',
- 'version': '8.0.1.1.0',
+ 'version': '9.0.1.1.0',
  'author': "Camptocamp,Odoo Community Association (OCA)",
  'maintainer': 'Camptocamp',
  'license': 'AGPL-3',
@@ -27,14 +27,14 @@
  'complexity': 'normal',
  'depends': ['base_delivery_carrier_label'],
  'website': 'http://www.camptocamp.com/',
- 'data': ['res_partner_data.xml',
-          'delivery_data.xml',
-          'delivery_view.xml',
-          'res_config_view.xml',
+ 'data': ['data/res_partner.xml',
+          'data/delivery.xml',
+          'views/delivery.xml',
+          'views/res_config.xml',
           'security/ir.model.access.csv',
           ],
  'tests': [],
- 'installable': False,
+ 'installable': True,
  'auto_install': False,
  'application': True,
  'external_dependencies': {

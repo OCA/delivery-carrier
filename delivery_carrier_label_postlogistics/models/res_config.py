@@ -22,7 +22,7 @@ import logging
 
 from openerp import models, fields, api, exceptions, _
 
-from .postlogistics.web_service import PostlogisticsWebService
+from ..postlogistics.web_service import PostlogisticsWebService
 
 _logger = logging.getLogger(__name__)
 

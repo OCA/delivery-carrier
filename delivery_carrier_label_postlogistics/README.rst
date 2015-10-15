@@ -1,6 +1,8 @@
 .. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
-    :alt: License: AGPL-3
+   :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
+   :alt: License: AGPL-3
 
+===============================
 PostLogistics Labels WebService
 ===============================
 
@@ -40,7 +42,7 @@ Now you can create a carrier method for PostLogistics WebService:
   compatible services)
 * Then add other `Optional as default` and `Optional` carrier option
   from listed
-* Additional Service and Delivery instructions
+* Add additional Service and Delivery instructions
 
 .. _PostLogistics BarCodes WebService: http://www.poste.ch/post-startseite/\
 post-geschaeftskunden/post-logistik/post-e-log/post-e-log-webservices.htm
@@ -62,6 +64,16 @@ Technical references
 .. _"Barcode" web service documentation: http://www.poste.ch/post-barcode-cug\
 .htm
 
+Bug Tracker
+===========
+
+Bugs are tracked on `GitHub Issues <https://github.com/OCA/
+carrier-delivery/issues>`_.
+In case of trouble, please check there if your issue has already been reported.
+If you spotted it first, help us smashing it by providing a detailed and welcomed feedback `here <https://github.com/OCA/
+carrier-delivery/issues/new?body=module:%20
+delivery_carrier_label_postlogistics%0Aversion:%20
+9.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Credits
 =======
