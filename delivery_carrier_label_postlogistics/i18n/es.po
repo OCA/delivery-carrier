@@ -1,19 +1,21 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* delivery_carrier_label_postlogistics
-#
+# * delivery_carrier_label_postlogistics
+# 
+# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 8.0\n"
+"Project-Id-Version: carrier-delivery (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-16 08:10+0000\n"
-"PO-Revision-Date: 2015-06-16 08:10+0000\n"
-"Last-Translator: <>\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2015-08-11 09:37+0000\n"
+"PO-Revision-Date: 2015-06-23 09:17+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"Language-Team: Spanish (http://www.transifex.com/oca/OCA-carrier-delivery-8-0/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:delivery.carrier.template.option,name:delivery_carrier_label_postlogistics.postlogistics_output_resolution_option_200ppp
@@ -51,9 +53,10 @@ msgid "Assign PostLogistics Licenses to service groups"
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:74
+#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:83
 #, python-format
-msgid "Authorization Required\n"
+msgid ""
+"Authorization Required\n"
 "\n"
 "Please verify postlogistics username and password in:\n"
 "Configuration -> Postlogistics"
@@ -77,7 +80,7 @@ msgstr ""
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model,name:delivery_carrier_label_postlogistics.model_delivery_carrier
 msgid "Carrier"
-msgstr ""
+msgstr "Transportista"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model,name:delivery_carrier_label_postlogistics.model_res_company
@@ -115,28 +118,32 @@ msgstr ""
 #: code:addons/delivery_carrier_label_postlogistics/res_config.py:142
 #: code:addons/delivery_carrier_label_postlogistics/res_config.py:204
 #, python-format
-msgid "Could not retrieve Postlogistics base services:\n"
+msgid ""
+"Could not retrieve Postlogistics base services:\n"
 "%s"
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
 #: code:addons/delivery_carrier_label_postlogistics/res_config.py:90
 #, python-format
-msgid "Could not retrieve Postlogistics delivery instructions:\n"
+msgid ""
+"Could not retrieve Postlogistics delivery instructions:\n"
 "%s"
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
 #: code:addons/delivery_carrier_label_postlogistics/res_config.py:274
 #, python-format
-msgid "Could not retrieve Postlogistics group services:\n"
+msgid ""
+"Could not retrieve Postlogistics group services:\n"
 "%s"
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
 #: code:addons/delivery_carrier_label_postlogistics/res_config.py:365
 #, python-format
-msgid "Could not retrieve allowed Postlogistics service groups for the %s licence:\n"
+msgid ""
+"Could not retrieve allowed Postlogistics service groups for the %s licence:\n"
 "%s"
 msgstr ""
 
@@ -182,18 +189,17 @@ msgstr ""
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model,name:delivery_carrier_label_postlogistics.model_delivery_carrier_option
 msgid "Delivery carrier option"
-msgstr ""
+msgstr "Opción del transportista"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model,name:delivery_carrier_label_postlogistics.model_delivery_carrier_template_option
 msgid "Delivery carrier template option"
-msgstr ""
+msgstr "Opción de plantilla del transportista"
 
 #. module: delivery_carrier_label_postlogistics
-#: field:postlogistics.license,name:0
-#: field:postlogistics.service.group,name:0
+#: field:postlogistics.license,name:0 field:postlogistics.service.group,name:0
 msgid "Description"
-msgstr ""
+msgstr "Descripción"
 
 #. module: delivery_carrier_label_postlogistics
 #: field:res.company,postlogistics_office:0
@@ -232,7 +238,9 @@ msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
 #: help:postlogistics.license,sequence:0
-msgid "Gives the sequence on company to define priority on license when multiple licenses are available for the same group of service."
+msgid ""
+"Gives the sequence on company to define priority on license when multiple "
+"licenses are available for the same group of service."
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
@@ -241,15 +249,16 @@ msgid "Group ID"
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
-#: field:postlogistics.config.settings,id:0
-#: field:postlogistics.license,id:0
+#: field:postlogistics.config.settings,id:0 field:postlogistics.license,id:0
 #: field:postlogistics.service.group,id:0
 msgid "ID"
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
 #: help:stock.quant.package,postlogistics_manual_cod_amount:0
-msgid "If the Cash on Delivery amount for this package is different than the total of the sales order, write the amount there."
+msgid ""
+"If the cash on delivery amount for this package is different than the total "
+"of the sales order, write the amount there."
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
@@ -293,7 +302,8 @@ msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
 #: help:res.company,postlogistics_logo:0
-msgid "Optional company logo to show on label.\n"
+msgid ""
+"Optional company logo to show on label.\n"
 "If using an image / logo, please note the following:\n"
 "– Image width: 47 mm\n"
 "– Image height: 25 mm\n"
@@ -325,11 +335,6 @@ msgid "PNG"
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
-#: model:ir.model,name:delivery_carrier_label_postlogistics.model_stock_pack_operation
-msgid "Packing Operation"
-msgstr ""
-
-#. module: delivery_carrier_label_postlogistics
 #: field:res.company,postlogistics_password:0
 msgid "Password"
 msgstr ""
@@ -342,7 +347,7 @@ msgstr ""
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model,name:delivery_carrier_label_postlogistics.model_stock_picking
 msgid "Picking List"
-msgstr ""
+msgstr "Albarán"
 
 #. module: delivery_carrier_label_postlogistics
 #: help:res.company,postlogistics_office:0
@@ -351,9 +356,9 @@ msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
 #: field:delivery.carrier,postlogistics_license_id:0
+#: model:ir.model,name:delivery_carrier_label_postlogistics.model_postlogistics_license
 #: field:postlogistics.service.group,postlogistics_license_ids:0
 #: field:res.company,postlogistics_license_ids:0
-#: model:ir.model,name:delivery_carrier_label_postlogistics.model_postlogistics_license
 msgid "PostLogistics Franking License"
 msgstr ""
 
@@ -402,26 +407,32 @@ msgstr ""
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model,name:delivery_carrier_label_postlogistics.model_shipping_label
 msgid "Shipping Label"
-msgstr ""
+msgstr "Etiqueta de envío"
 
 #. module: delivery_carrier_label_postlogistics
 #: code:addons/delivery_carrier_label_postlogistics/stock.py:48
 #: code:addons/delivery_carrier_label_postlogistics/stock_quant_package.py:75
 #, python-format
-msgid "The cash on delivery amount must be manually specified on the packages when a package contains products from different sales orders."
+msgid ""
+"The cash on delivery amount must be manually specified on the packages when "
+"a package contains products from different sales orders."
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/stock_quant_package.py:65
 #: code:addons/delivery_carrier_label_postlogistics/stock.py:57
+#: code:addons/delivery_carrier_label_postlogistics/stock_quant_package.py:65
 #, python-format
-msgid "The cash on delivery amount must be manually specified on the packages when a sales order is delivered in several delivery orders."
+msgid ""
+"The cash on delivery amount must be manually specified on the packages when "
+"a sales order is delivered in several delivery orders."
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
 #: code:addons/delivery_carrier_label_postlogistics/stock_quant_package.py:85
 #, python-format
-msgid "The cash on delivery amount must be manually specified on the packages when a sales order is delivered in several packages."
+msgid ""
+"The cash on delivery amount must be manually specified on the packages when "
+"a sales order is delivered in several packages."
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
@@ -456,6 +467,7 @@ msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
 #: view:delivery.carrier:delivery_carrier_label_postlogistics.view_delivery_carrier_form
-msgid "{'default_carrier_id': active_id, 'default_allowed_option_ids': allowed_option_ids}"
+msgid ""
+"{'default_carrier_id': active_id, 'default_allowed_option_ids': "
+"allowed_option_ids}"
 msgstr ""
-
