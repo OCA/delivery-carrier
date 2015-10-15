@@ -73,7 +73,7 @@ class TestGetWeight(TransactionCase):
         customer = self.env['res.partner'].search([], limit=1)
         order = self._create_order(customer)
         self._create_order_line(order, products)
-        order.action_button_confirm()
+        order.action_confirm()
         picking = order.picking_ids
         picking.do_transfer()
         return picking
