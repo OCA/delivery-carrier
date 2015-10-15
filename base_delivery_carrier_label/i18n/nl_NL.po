@@ -3,25 +3,25 @@
 # * base_delivery_carrier_label
 # 
 # Translators:
-# OCA Transbot <transbot@odoo-community.org>, 2017
+# Peter Hageman <hageman.p@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-15 18:21+0000\n"
-"PO-Revision-Date: 2017-12-15 18:21+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
-"Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
+"POT-Creation-Date: 2017-07-01 02:24+0000\n"
+"PO-Revision-Date: 2017-07-01 02:24+0000\n"
+"Last-Translator: Peter Hageman <hageman.p@gmail.com>, 2017\n"
+"Language-Team: Dutch (Netherlands) (https://www.transifex.com/oca/teams/23907/nl_NL/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: es\n"
+"Language: nl_NL\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account_account
 msgid "Account Number"
-msgstr ""
+msgstr "Rekeningnummer"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account_password
@@ -33,7 +33,6 @@ msgstr ""
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_delivery_carrier_template_option_description
 msgid "Allow to define a more complete description than in the name field."
 msgstr ""
-"Permite definir un descripción más completa que en el campo del nombre"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option_by_default
@@ -70,14 +69,14 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: model:ir.ui.view,arch_db:base_delivery_carrier_label.manifest_wizard_form
 msgid "Cancel"
-msgstr ""
+msgstr "Annuleren"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_delivery_carrier
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option_carrier_id
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_manifest_wizard_carrier_id
 msgid "Carrier"
-msgstr "Transportista"
+msgstr "Vervoerder"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_manifest_wizard_carrier_type
@@ -90,12 +89,12 @@ msgstr ""
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_manifest_wizard_carrier_type
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_stock_picking_carrier_type
 msgid "Carrier type (combines several delivery methods)"
-msgstr "Tipo de transportista (combina diversos métodos de envío)"
+msgstr ""
 
 #. module: base_delivery_carrier_label
 #: model:ir.ui.menu,name:base_delivery_carrier_label.menu_carriers_config
 msgid "Carriers"
-msgstr "Transportistas"
+msgstr ""
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_checksum
@@ -107,17 +106,17 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_template_option_code
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_picking_carrier_code
 msgid "Code"
-msgstr "Código"
+msgstr ""
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_company_id
 msgid "Company"
-msgstr ""
+msgstr "Bedrijf"
 
 #. module: base_delivery_carrier_label
 #: model:ir.ui.view,arch_db:base_delivery_carrier_label.view_picking_withcarrier_out_form
 msgid "Create Shipping Label"
-msgstr "Crear etiqueta de envío"
+msgstr ""
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account_create_uid
@@ -126,7 +125,7 @@ msgstr "Crear etiqueta de envío"
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_manifest_wizard_create_uid
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_create_uid
 msgid "Created by"
-msgstr "Creado por"
+msgstr "Aangemaakt door"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account_create_date
@@ -135,12 +134,12 @@ msgstr "Creado por"
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_manifest_wizard_create_date
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_create_date
 msgid "Created on"
-msgstr "Creado el"
+msgstr "Aangemaakt op"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_db_datas
 msgid "Database Data"
-msgstr ""
+msgstr "Database-gegevens"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_carrier_account_file_format
@@ -150,7 +149,7 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_stock_picking_carrier_code
 msgid "Delivery Method Code (according to carrier)"
-msgstr "Código del método de envío (de acuerdo con el transportista)"
+msgstr ""
 
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_manifest_wizard
@@ -160,12 +159,12 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_delivery_carrier_option
 msgid "Delivery carrier option"
-msgstr "Opción del transportista"
+msgstr ""
 
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_delivery_carrier_template_option
 msgid "Delivery carrier template option"
-msgstr "Opción de plantilla del transportista"
+msgstr ""
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option_description
@@ -173,7 +172,7 @@ msgstr "Opción de plantilla del transportista"
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_description
 #: model:ir.ui.view,arch_db:base_delivery_carrier_label.view_delivery_carrier_form
 msgid "Description"
-msgstr "Descripción"
+msgstr "Omschrijving"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account_display_name
@@ -182,48 +181,48 @@ msgstr "Descripción"
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_manifest_wizard_display_name
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_display_name
 msgid "Display Name"
-msgstr "Nombre mostrado"
+msgstr "Weergavenaam"
 
 #. module: base_delivery_carrier_label
 #: selection:manifest.wizard,state:0
 msgid "END"
-msgstr ""
+msgstr "EINDE"
 
 #. module: base_delivery_carrier_label
 #: selection:manifest.wizard,state:0
 msgid "File"
-msgstr ""
+msgstr "Bestand"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_datas
 msgid "File Content"
-msgstr ""
+msgstr "bestandsinhoud"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account_file_format
 msgid "File Format"
-msgstr ""
+msgstr "Bestandsformaat"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_manifest_wizard_filename
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_datas_fname
 msgid "File Name"
-msgstr ""
+msgstr "Bestandsnaam"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_file_size
 msgid "File Size"
-msgstr ""
+msgstr "Bestandsgrootte"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_file_type
 msgid "File type"
-msgstr "Tipo de fichero"
+msgstr "Bestandstype"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_manifest_wizard_from_date
 msgid "From Date"
-msgstr ""
+msgstr "Begindatum"
 
 #. module: base_delivery_carrier_label
 #: model:ir.ui.view,arch_db:base_delivery_carrier_label.manifest_wizard_form
@@ -254,7 +253,7 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_index_content
 msgid "Indexed Content"
-msgstr ""
+msgstr "Geïndexeerde inhoud "
 
 #. module: base_delivery_carrier_label
 #: selection:manifest.wizard,state:0
@@ -264,7 +263,7 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_public
 msgid "Is public document"
-msgstr ""
+msgstr "I"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account___last_update
@@ -273,7 +272,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_manifest_wizard___last_update
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label___last_update
 msgid "Last Modified on"
-msgstr "Última modificación el"
+msgstr "Laatst aangepast op"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account_write_uid
@@ -282,7 +281,7 @@ msgstr "Última modificación el"
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_manifest_wizard_write_uid
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_write_uid
 msgid "Last Updated by"
-msgstr "Última actualización por"
+msgstr "Laatst bijgewerkt door"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account_write_date
@@ -291,17 +290,12 @@ msgstr "Última actualización por"
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_manifest_wizard_write_date
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_write_date
 msgid "Last Updated on"
-msgstr "Última actualización en"
-
-#. module: base_delivery_carrier_label
-#: model:ir.model.fields,help:base_delivery_carrier_label.field_stock_quant_package_parcel_tracking_uri
-msgid "Link to the carrier's tracking page for this package."
-msgstr ""
+msgstr "Laatst bijgewerkt op"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option_mandatory
 msgid "Mandatory"
-msgstr "Necesario"
+msgstr "Verplicht"
 
 #. module: base_delivery_carrier_label
 #: model:ir.actions.act_window,name:base_delivery_carrier_label.manifest_wizard_action
@@ -327,7 +321,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option_name
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_template_option_name
 msgid "Name"
-msgstr "Nombre"
+msgstr "Naam"
 
 #. module: base_delivery_carrier_label
 #: code:addons/base_delivery_carrier_label/models/stock_picking.py:45
@@ -344,18 +338,18 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_available_option_ids
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option_tmpl_option_id
 msgid "Option"
-msgstr "Opción"
+msgstr "Optie"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_picking_option_ids
 #: model:ir.ui.view,arch_db:base_delivery_carrier_label.view_delivery_carrier_form
 msgid "Options"
-msgstr "Opciones"
+msgstr "Opties"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_package_id
 msgid "Pack"
-msgstr "Paquete"
+msgstr ""
 
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_stock_pack_operation
@@ -368,15 +362,10 @@ msgid "Parcel Tracking"
 msgstr ""
 
 #. module: base_delivery_carrier_label
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_quant_package_parcel_tracking_uri
-msgid "Parcel tracking uri"
-msgstr ""
-
-#. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option_partner_id
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_template_option_partner_id
 msgid "Partner Carrier"
-msgstr "Transportista"
+msgstr ""
 
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_stock_quant_package
@@ -411,12 +400,12 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_manifest_wizard_notes
 msgid "Result"
-msgstr ""
+msgstr "Resultaat"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_shipping_label
 msgid "Shipping Label"
-msgstr "Etiqueta de envío"
+msgstr ""
 
 #. module: base_delivery_carrier_label
 #: code:addons/base_delivery_carrier_label/models/stock_picking.py:258
@@ -454,7 +443,7 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_quant_package_total_weight
 msgid "Total weight"
-msgstr ""
+msgstr "Totale massa"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_stock_quant_package_total_weight
@@ -473,17 +462,17 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_carrier_type
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_type
 msgid "Type"
-msgstr "Tipo"
+msgstr "Type"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_url
 msgid "Url"
-msgstr ""
+msgstr "Url"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_pack_operation_weight
 msgid "Weight"
-msgstr ""
+msgstr "Massa"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_stock_pack_operation_weight
@@ -518,4 +507,4 @@ msgstr ""
 #: model:ir.ui.view,arch_db:base_delivery_carrier_label.delivery_carrier_template_option_view_form
 #: model:ir.ui.view,arch_db:base_delivery_carrier_label.delivery_carrier_template_option_view_tree
 msgid "delivery_carrier_option"
-msgstr "delivery_carrier_option"
+msgstr ""
