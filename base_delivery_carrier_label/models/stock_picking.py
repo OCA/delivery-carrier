@@ -1,150 +1,9 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    Authors: David BEAL <david.beal@akretion.com>
-#             Sébastien BEAU <sebastien.beau@akretion.com>
-#    Copyright (C) 2012-TODAY Akretion <http://www.akretion.com>.
-#    Author: Yannick Vaucher <yannick.vaucher@camptocamp.com>
-#    Copyright 2013-2014 Camptocamp SA
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
-from openerp import models, fields, api, _
-from openerp.exceptions import Warning as UserError
-import openerp.addons.decimal_precision as dp
-import logging
-
-_logger = logging.getLogger(__name__)
-
-
-class StockPackOperation(models.Model):
-    _inherit = 'stock.pack.operation'
-
-    weight = fields.Float(
-        digits=dp.get_precision('Stock Weight'),
-        help="Weight of the pack_operation"
-    )
-
-    @api.multi
-    def get_weight(self):
-        """Calc and save weight of pack.operations.
-
-        Warning: Type conversion not implemented
-                it will return False if at least one uom or uos not in kg
-        return:
-            the sum of the weight of [self]
-        """
-        total_weight = 0
-        kg = self.env.ref('product.product_uom_kgm').id
-        units = self.env.ref('product.product_uom_unit').id
-        allowed = (False, kg, units)
-        cant_calc_total = False
-
-        for operation in self:
-            product = operation.product_id
-
-            # if not defined we assume it's in kg
-            if not (
-                product.uom_id.id in allowed or
-                product.uos_id.id in allowed
-            ):
-                _logger.warning(
-                    'Type conversion not implemented for product %s' %
-                    product.id)
-                cant_calc_total = True
-
-            operation.weight = (product.weight * operation.product_qty)
-
-            total_weight += operation.weight
-
-        if cant_calc_total:
-            return False
-        return total_weight
-
-
-class StockQuantPackage(models.Model):
-    _inherit = 'stock.quant.package'
-
-    parcel_tracking = fields.Char(string='Parcel Tracking')
-    weight = fields.Float(
-        digits=dp.get_precision('Stock Weight'),
-        help="Total weight of the package in kg, including the "
-             "weight of the logistic unit."
-    )
-
-    @api.multi
-    def _complete_name(self, name, args):
-        res = super(StockQuantPackage, self)._complete_name(name, args)
-        for pack in self:
-            if pack.parcel_tracking:
-                res[pack.id] += ' [%s]' % pack.parcel_tracking
-            if pack.weight:
-                res[pack.id] += ' %s kg' % pack.weight
-        return res
-
-    @api.multi
-    def get_weight(self):
-        """Compute the weight of a pack.
-
-        Get all the children packages and sum the weight of all
-        the product and the weight of the Logistic Units of the packages.
-
-        So if I put in PACK65:
-         * 1 product A of 2kg
-         * 2 products B of 4kg
-        The box of PACK65 weights 0.5kg
-        And I put in PACK66:
-         * 1 product A of 2kg
-        The box of PACK66 weights 0.5kg
-
-        Then I put PACK65 and PACK66 in the PACK67 having a box that
-        weights 0.5kg, the weight of PACK67 should be: 13.5kg
-
-        """
-        total_weight = 0
-
-        for package in self:
-            # weight of the wrapper
-            packaging_weight = 0
-            if package.ul_id:
-                packaging_weight = package.ul_id.weight
-
-            # package.pack_operations would be too easy
-            operations = self.env['stock.pack.operation'].search(
-                [('result_package_id', '=', package.id),
-                 ('product_id', '!=', False),
-                 ])
-
-            # we make use get_weight with  @api.muli instead of
-            # sum([op.get_weight for op in operations])
-
-            # sum of the pack_operation
-            payload_weight = operations.get_weight()
-
-            # sum of the packages contained in this package (children)
-            child_packages_weight = package.children_ids.get_weight()
-
-            # sum and save in package
-            package.weight = (
-                payload_weight +
-                child_packages_weight +
-                packaging_weight)
-
-            total_weight += package.weight
-
-        return total_weight
+# Copyright 2012-2015 Akretion <http://www.akretion.com>.
+# Copyright 2013-2016 Camptocamp SA
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+from openerp import _, api, fields, models
+from openerp.exceptions import UserError
 
 
 class StockPicking(models.Model):
@@ -238,6 +97,7 @@ class StockPicking(models.Model):
             for label in shipping_labels:
                 data = {
                     'name': label['name'],
+                    'datas_fname': label.get('filename', label['name']),
                     'res_id': pick.id,
                     'res_model': 'stock.picking',
                     'datas': label['file'].encode('base64'),
@@ -381,18 +241,6 @@ class StockPicking(models.Model):
         return self.env['res.partner'].browse(address_id)
 
     @api.multi
-    def set_pack_weight(self):
-        # I cannot loop on the "quant_ids" of packages, because, at this step,
-        # this field doesn't have a value yet
-        self.ensure_one()
-        for packop in self.pack_operation_ids:
-            package = packop.result_package_id or packop.package_id
-            if package:
-                weight = package.get_weight()
-                package.write({'weight': weight})
-        return
-
-    @api.multi
     def _check_existing_shipping_label(self):
         """ Check that labels don't already exist for this picking """
         self.ensure_one()
@@ -405,37 +253,3 @@ class StockPicking(models.Model):
                   'Please delete the existing labels in the '
                   'attachments of this picking and try again')
                 % self.name)
-
-
-class ShippingLabel(models.Model):
-    """ Child class of ir attachment to identify which are labels """
-
-    _name = 'shipping.label'
-    _inherits = {'ir.attachment': 'attachment_id'}
-    _description = "Shipping Label"
-
-    @api.model
-    def _get_file_type_selection(self):
-        """ To inherit to add file type """
-        return [('pdf', 'PDF')]
-
-    @api.model
-    def __get_file_type_selection(self):
-        file_types = self._get_file_type_selection()
-        file_types = list(set(file_types))
-        file_types.sort(key=lambda t: t[0])
-        return file_types
-
-    file_type = fields.Selection(
-        selection=__get_file_type_selection,
-        string='File type',
-        default='pdf',
-    )
-    package_id = fields.Many2one(comodel_name='stock.quant.package',
-                                 string='Pack')
-    attachment_id = fields.Many2one(
-        comodel_name='ir.attachment',
-        string='Attachement',
-        required=True,
-        ondelete='cascade',
-    )
