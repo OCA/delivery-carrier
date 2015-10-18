@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: carrier-delivery (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-11 09:37+0000\n"
-"PO-Revision-Date: 2015-06-23 09:17+0000\n"
+"POT-Creation-Date: 2015-10-14 09:32+0000\n"
+"PO-Revision-Date: 2015-10-13 21:06+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-carrier-delivery-8-0/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -152,14 +152,14 @@ msgstr ""
 #: field:postlogistics.license,create_uid:0
 #: field:postlogistics.service.group,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Creado por"
 
 #. module: delivery_carrier_label_postlogistics
 #: field:postlogistics.config.settings,create_date:0
 #: field:postlogistics.license,create_date:0
 #: field:postlogistics.service.group,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Creado en"
 
 #. module: delivery_carrier_label_postlogistics
 #: view:postlogistics.config.settings:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
@@ -258,7 +258,7 @@ msgstr ""
 #: field:postlogistics.config.settings,id:0 field:postlogistics.license,id:0
 #: field:postlogistics.service.group,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: delivery_carrier_label_postlogistics
 #: help:stock.quant.package,postlogistics_manual_cod_amount:0
@@ -282,14 +282,14 @@ msgstr ""
 #: field:postlogistics.license,write_uid:0
 #: field:postlogistics.service.group,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Última Actualización por"
 
 #. module: delivery_carrier_label_postlogistics
 #: field:postlogistics.config.settings,write_date:0
 #: field:postlogistics.license,write_date:0
 #: field:postlogistics.service.group,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Última Actualización en"
 
 #. module: delivery_carrier_label_postlogistics
 #: view:postlogistics.config.settings:delivery_carrier_label_postlogistics.view_postlogistics_config_settings

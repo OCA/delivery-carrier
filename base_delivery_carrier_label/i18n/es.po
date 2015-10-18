@@ -3,13 +3,14 @@
 # * base_delivery_carrier_label
 # 
 # Translators:
+# Carles Antolí <carlesantoli@hotmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: carrier-delivery (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-11 09:37+0000\n"
-"PO-Revision-Date: 2015-06-16 16:33+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"POT-Creation-Date: 2015-10-14 09:32+0000\n"
+"PO-Revision-Date: 2015-10-13 21:08+0000\n"
+"Last-Translator: Carles Antolí <carlesantoli@hotmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-carrier-delivery-8-0/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,12 +21,12 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: field:carrier.account,account:0
 msgid "Account Number"
-msgstr ""
+msgstr "Número de Cuenta"
 
 #. module: base_delivery_carrier_label
 #: field:carrier.account,password:0
 msgid "Account Password"
-msgstr ""
+msgstr "Contraseña Cuenta"
 
 #. module: base_delivery_carrier_label
 #: help:delivery.carrier.template.option,description:0
@@ -35,7 +36,7 @@ msgstr "Permite definir un descripción más completa que en el campo del nombre
 #. module: base_delivery_carrier_label
 #: field:delivery.carrier.option,by_default:0
 msgid "Applied by Default"
-msgstr ""
+msgstr "Aplicado por defecto"
 
 #. module: base_delivery_carrier_label
 #: field:shipping.label,attachment_id:0
@@ -86,7 +87,7 @@ msgstr "Crear etiqueta de envío"
 #: field:delivery.carrier.template.option,create_uid:0
 #: field:shipping.label,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Creado por"
 
 #. module: base_delivery_carrier_label
 #: field:carrier.account,create_date:0
@@ -94,7 +95,7 @@ msgstr ""
 #: field:delivery.carrier.template.option,create_date:0
 #: field:shipping.label,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Creado en"
 
 #. module: base_delivery_carrier_label
 #: help:carrier.account,file_format:0
@@ -126,7 +127,7 @@ msgstr "Descripción"
 #. module: base_delivery_carrier_label
 #: field:carrier.account,file_format:0
 msgid "File Format"
-msgstr ""
+msgstr "Formato Archivo"
 
 #. module: base_delivery_carrier_label
 #: field:shipping.label,file_type:0
@@ -137,7 +138,7 @@ msgstr "Tipo de fichero"
 #: field:carrier.account,id:0 field:delivery.carrier.option,id:0
 #: field:delivery.carrier.template.option,id:0 field:shipping.label,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: base_delivery_carrier_label
 #: help:delivery.carrier.option,mandatory:0
@@ -156,7 +157,7 @@ msgstr ""
 #: field:delivery.carrier.template.option,write_uid:0
 #: field:shipping.label,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Última Actualización por"
 
 #. module: base_delivery_carrier_label
 #: field:carrier.account,write_date:0
@@ -164,7 +165,7 @@ msgstr ""
 #: field:delivery.carrier.template.option,write_date:0
 #: field:shipping.label,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Última Actualización en"
 
 #. module: base_delivery_carrier_label
 #: field:delivery.carrier.option,mandatory:0
@@ -250,7 +251,7 @@ msgstr "Tipo"
 #. module: base_delivery_carrier_label
 #: field:stock.quant.package,weight:0
 msgid "Weight"
-msgstr ""
+msgstr "Peso"
 
 #. module: base_delivery_carrier_label
 #: help:delivery.carrier.option,readonly_flag:0

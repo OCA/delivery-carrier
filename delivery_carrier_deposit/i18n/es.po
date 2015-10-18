@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: carrier-delivery (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-11 09:37+0000\n"
+"POT-Creation-Date: 2015-10-14 09:32+0000\n"
 "PO-Revision-Date: 2015-06-16 16:32+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-carrier-delivery-8-0/language/es/)\n"
@@ -95,13 +95,13 @@ msgstr ""
 #. module: delivery_carrier_deposit
 #: field:delivery.deposit.wizard,create_uid:0 field:deposit.slip,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Creado por"
 
 #. module: delivery_carrier_deposit
 #: field:delivery.deposit.wizard,create_date:0
 #: field:deposit.slip,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Creado en"
 
 #. module: delivery_carrier_deposit
 #: view:website:delivery_carrier_deposit.report_generic_deposit_slip
@@ -191,7 +191,7 @@ msgstr ""
 #. module: delivery_carrier_deposit
 #: field:delivery.deposit.wizard,id:0 field:deposit.slip,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: delivery_carrier_deposit
 #: help:deposit.slip,message_unread:0
@@ -211,12 +211,12 @@ msgstr ""
 #. module: delivery_carrier_deposit
 #: field:delivery.deposit.wizard,write_uid:0 field:deposit.slip,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Última Actualización por"
 
 #. module: delivery_carrier_deposit
 #: field:delivery.deposit.wizard,write_date:0 field:deposit.slip,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Última Actualización en"
 
 #. module: delivery_carrier_deposit
 #: field:deposit.slip,message_ids:0
@@ -314,7 +314,7 @@ msgstr ""
 #. module: delivery_carrier_deposit
 #: view:website:delivery_carrier_deposit.report_generic_deposit_slip
 msgid "Weight"
-msgstr ""
+msgstr "Peso"
 
 #. module: delivery_carrier_deposit
 #: model:ir.model,name:delivery_carrier_deposit.model_delivery_deposit_wizard
