@@ -24,7 +24,7 @@ from openerp import models, fields, api
 class DeliveryCarrier(models.Model):
     _inherit = 'delivery.carrier'
 
-    seur_service_code = fields.Selection([
+    SEUR_SERVICES = [
         ('001', 'SEUR - 24'),
         ('003', 'SEUR - 10'),
         ('005', 'MISMO DIA'),
@@ -36,8 +36,8 @@ class DeliveryCarrier(models.Model):
         ('019', 'NETEXPRESS'),
         ('077', 'CLASSIC'),
         ('083', 'SEUR 8:30')
-    ], 'Seur Service Code')
-    seur_product_code = fields.Selection([
+    ]
+    SEUR_PRODUCTS = [
         ('002', 'ESTANDAR'),
         ('004', 'MULTIPACK'),
         ('006', 'MULTI BOX'),
@@ -47,7 +47,10 @@ class DeliveryCarrier(models.Model):
         ('070', 'INTERNACIONAL T'),
         ('072', 'INTERNACIONAL A'),
         ('076', 'CLASSIC')
-    ], 'Seur Product Code')
+    ]
+
+    seur_service_code = fields.Selection(SEUR_SERVICES, 'Seur Service Code')
+    seur_product_code = fields.Selection(SEUR_PRODUCTS, 'Seur Product Code')
 
     @api.model
     def _get_carrier_type_selection(self):

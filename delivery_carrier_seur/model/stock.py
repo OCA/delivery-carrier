@@ -30,12 +30,27 @@ class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
     seur_service_code = fields.Selection(
-        related='carrier_id.seur_service_code')
+        selection='_get_seur_services', string='Seur Service Code', default=False)
     seur_product_code = fields.Selection(
-        related='carrier_id.seur_product_code')
+        selection='_get_seur_products', string='Seur Product Code', default=False)
+
+
+    def _get_seur_services(self):
+        return self.env['delivery.carrier'].SEUR_SERVICES
+
+    def _get_seur_products(self):
+        return self.env['delivery.carrier'].SEUR_PRODUCTS
+
+    @api.onchange('carrier_id')
+    def carrier_id_onchange(self):
+        if not self.carrier_id:
+            return
+        carrier = self.carrier_id
+        self.seur_service_code = carrier.seur_service_code
+        self.seur_product_code = carrier.seur_product_code
 
     @api.multi
-    def _generate_seur_label(self,  package_ids=None):
+    def _generate_seur_label(self, package_ids=None):
         self.ensure_one()
         if not self.carrier_id.seur_config_id:
             raise exceptions.Warning(_('No SEUR Config defined in carrier'))
