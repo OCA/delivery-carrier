@@ -26,14 +26,26 @@ from unidecode import unidecode
 from urllib2 import HTTPError
 
 
+class ShippingLabel(models.Model):
+    _inherit = 'shipping.label'
+
+    @api.model
+    def _get_file_type_selection(self):
+        """ To inherit to add file type """
+        res = super(ShippingLabel, self)._get_file_type_selection()
+        res.append(('txt', 'TXT'))
+        return res
+
+
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
     seur_service_code = fields.Selection(
-        selection='_get_seur_services', string='Seur Service Code', default=False)
+        selection='_get_seur_services', string='Seur Service Code',
+        default=False)
     seur_product_code = fields.Selection(
-        selection='_get_seur_products', string='Seur Product Code', default=False)
-
+        selection='_get_seur_products', string='Seur Product Code',
+        default=False)
 
     def _get_seur_services(self):
         return self.env['delivery.carrier'].SEUR_SERVICES
@@ -64,18 +76,23 @@ class StockPicking(models.Model):
         seur_context = {
             'printer': 'ZEBRA',
             'printer_model': 'LP2844-Z',
-            'ecb_code': '2C'
+            'ecb_code': '2C',
         }
+
+        if config.file_type == 'pdf':
+            seur_context['pdf'] = True
+
         seur_picking = Picking(
             config.username,
             config.password,
             config.company_id.vat,
             config.franchise_code,
-            'odoo',
-            config.franchise_code,
-            'odoo',
+            'Odoo',  # seurid
+            config.integration_code,
+            config.accounting_code,
             seur_context
         )
+
         try:
             connect = seur_picking.test_connection()
             if connect != 'Connection successfully':
@@ -85,39 +102,50 @@ class StockPicking(models.Model):
             raise exceptions.Warning(
                 _('Error conecting with SEUR try later:\n%s' % e))
 
-        data = self._get_label_data
-        reference, label, error = seur_picking.create(data)
-        return [label]
+        data = self._get_label_data()
+        tracking_ref, label, error = seur_picking.create(data)
+
+        if error:
+            raise exceptions.Warning(
+                _('Error sending label to SEUR\n%s' % error))
+
+        self.write({'carrier_tracking_ref': tracking_ref})
+
+        return [{
+            'name': self.name + '_' + tracking_ref + '.' + config.file_type,
+            'file': label,
+            'file_type': config.file_type
+        }]
 
     def _get_label_data(self):
-        partner = self.partner_id.parent_id if self.partner_id.is_company \
-            else self.partner_id
+        partner = self.partner_id.parent_id or self.partner_id
         data = {
-            'servicio': self.seur_service_code,
-            'product': self.seur_product_code,
+            'servicio': unidecode(self.seur_service_code),
+            'product': unidecode(self.seur_product_code),
             'total_bultos': self.number_of_packages or '1',
             'total_kilos': self.weight or '1',
             'peso_bulto': self.weight_net or '1',
-            'observaciones': unidecode(self.note or ''),
-            'referencia_expedicion': self.name,
+            'observaciones': self.note or '',
+            'referencia_expedicion': unidecode(self.name),
             'ref_bulto': '',
-            'clave_portes': 'F',
-            'clave_reembolso': 'F',
+            'clave_portes': '',  # F
+            'clave_reembolso': '',  # F
             'valor_reembolso': self.sale_id.amount_total or '',
             'cliente_nombre': unidecode(partner.name),
             'cliente_direccion': unidecode(partner.street +
                                            (partner.street2 or '')),
             'cliente_tipovia': 'CL',
             'cliente_tnumvia': 'N',
-            'cliente_numvia': '',
+            'cliente_numvia': ' ',
             'cliente_escalera': '',
             'cliente_piso': '',
             'cliente_puerta': '',
             'cliente_poblacion': unidecode(partner.city),
-            'cliente_cpostal': partner.zip,
-            'cliente_pais': unidecode(partner.country_id.name),
-            'cliente_email': partner.email or '',
-            'cliente_telefono': partner.phone or partner.mobile or '',
+            'cliente_cpostal': unidecode(partner.zip),
+            'cliente_pais': unidecode(partner.country_id.code),
+            'cliente_email': unidecode(partner.email or ''),
+            'cliente_telefono': unidecode(
+                partner.phone or partner.mobile or ''),
             'cliente_atencion': unidecode(self.partner_id.name),
         }
         return data

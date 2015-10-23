@@ -18,7 +18,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp import models, fields
+from openerp import models, fields, api
 
 
 class SeurConfig(models.Model):
@@ -32,7 +32,18 @@ class SeurConfig(models.Model):
                                  default=_default_company)
     ws_url = fields.Char('Webservice URL', required=True,
                          default="https://cit.seur.com/CIT-war/services")
+    integration_code = fields.Char('Integration Code', required=True)
+    accounting_code = fields.Char('Accounting Code', required=True)
     franchise_code = fields.Char('Franchise Code', required=True)
     username = fields.Char('Username', required=True)
     password = fields.Char('Password', required=True)
+    file_type = fields.Selection('_get_file_type',
+                                 string="File type",
+                                 required=True)
 
+    @api.model
+    def _get_file_type(self):
+        return [
+            ('pdf', 'PDF'),
+            ('txt', 'TXT')
+        ]
