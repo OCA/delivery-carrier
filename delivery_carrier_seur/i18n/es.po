@@ -238,11 +238,6 @@ msgid "VAT"
 msgstr "CIF"
 
 #. module: delivery_carrier_seur
-#: field:seur.config,ws_url:0
-msgid "Webservice URL"
-msgstr "Webservice URL"
-
-#. module: delivery_carrier_seur
 #: view:stock.picking:delivery_carrier_seur.view_picking_withcarrier_out_form
 msgid "{'invisible': [('carrier_type', '=', 'seur')]}"
 msgstr "{'invisible': [('carrier_type', '=', 'seur')]}"

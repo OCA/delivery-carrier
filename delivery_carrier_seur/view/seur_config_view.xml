@@ -28,7 +28,6 @@
                         </div>
                         <group>
                             <group>
-                                <field name="ws_url"/>
                                 <field name="integration_code"/>
                                 <field name="accounting_code"/>
                                 <field name="franchise_code"/>

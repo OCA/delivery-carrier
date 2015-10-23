@@ -26,8 +26,6 @@ class SeurConfig(models.Model):
 
     name = fields.Char('Name', required=True)
     vat = fields.Char('VAT', required=True)
-    ws_url = fields.Char('Webservice URL', required=True,
-                         default="https://cit.seur.com/CIT-war/services")
     integration_code = fields.Char('Integration Code', required=True)
     accounting_code = fields.Char('Accounting Code', required=True)
     franchise_code = fields.Char('Franchise Code', required=True)
