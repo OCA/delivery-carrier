@@ -8,7 +8,6 @@
             <field name="arch" type="xml">
                 <tree string="SEUR Config" version="7.0">
                     <field name="name"/>
-                    <field name="ws_url"/>
                     <field name="username"/>
                     <field name="file_type"/>
                 </tree>
