@@ -24,12 +24,8 @@ from openerp import models, fields, api
 class SeurConfig(models.Model):
     _name = 'seur.config'
 
-    def _default_company(self):
-        return self.env.user.company_id
-
     name = fields.Char('Name', required=True)
-    company_id = fields.Many2one('res.company', 'Company',
-                                 default=_default_company)
+    vat = fields.Char('VAT', required=True)
     ws_url = fields.Char('Webservice URL', required=True,
                          default="https://cit.seur.com/CIT-war/services")
     integration_code = fields.Char('Integration Code', required=True)

@@ -233,6 +233,11 @@ msgid "Username"
 msgstr "Usuario"
 
 #. module: delivery_carrier_seur
+#: field:seur.config,vat:0
+msgid "VAT"
+msgstr "CIF"
+
+#. module: delivery_carrier_seur
 #: field:seur.config,ws_url:0
 msgid "Webservice URL"
 msgstr "Webservice URL"

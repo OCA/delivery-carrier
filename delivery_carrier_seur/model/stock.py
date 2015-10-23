@@ -85,7 +85,7 @@ class StockPicking(models.Model):
         seur_picking = Picking(
             config.username,
             config.password,
-            config.company_id.vat,
+            config.vat,
             config.franchise_code,
             'Odoo',  # seurid
             config.integration_code,
