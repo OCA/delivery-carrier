@@ -15,6 +15,7 @@ Contributors
 * Sébastien BEAU <sebastien.beau@akretion.com>
 * Yannick Vaucher <yannick.vaucher@camptocamp.com>
 * Alexis de Lattre <alexis.delattre@akretion.com>
+* Ismael Calvo <ismael.calvo@factorlibre.com>
 
 Maintainer
 ----------

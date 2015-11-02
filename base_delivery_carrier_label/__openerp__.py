@@ -31,6 +31,7 @@
           'stock_view.xml',
           'res_config_view.xml',
           'security/ir.model.access.csv',
+          'wizard/manifest_wizard_view.xml',
           ],
  'tests': [],
  'installable': True,
