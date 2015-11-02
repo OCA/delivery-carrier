@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_seur_config_salesman,seur.config.salesman,model_seur_config,base.group_sale_salesman,1,0,0,0
+access_seur_config_manager,seur.config.manager,model_seur_config,base.group_sale_manager,1,1,1,1
