@@ -36,6 +36,7 @@ Contributors
 * Yannick Vaucher <yannick.vaucher@camptocamp.com>
 * Alexis de Lattre <alexis.delattre@akretion.com>
 * Angel Moya <angel.moya@pesol.es>
+* Ismael Calvo <ismael.calvo@factorlibre.com>
 
 Maintainer
 ----------

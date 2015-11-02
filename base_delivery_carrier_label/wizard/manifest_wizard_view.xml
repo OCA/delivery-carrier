@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="manifest_wizard_form" model="ir.ui.view">
+            <field name="name">manifest.wizard.form</field>
+            <field name="model">manifest.wizard</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Manifest" version="7.0">
+                    <field name="state" invisible="1"/>
+                    <group attrs="{'invisible': [('state', '!=', 'init')]}">
+                        <field name="carrier_id"/>
+                        <field name="carrier_type"/>
+                        <field name="from_date"/>
+                        <field name="to_date"/>
+                    </group>
+                    <group attrs="{'invisible': [('state', '!=', 'file')]}">
+                        <field name="file_out" filename="filename"/>
+                        <field name="filename" invisible="1"/>
+                    </group>
+                    <group attrs="{'invisible': [('state', '=', 'init')]}">
+                        <field name="notes"/>
+                    </group>
+                    <footer attrs="{'invisible': [('state', '!=', 'init')]}">
+                        <button name="get_manifest_file" type="object"
+                            string="Get Manifest File" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="manifest_wizard_action" model="ir.actions.act_window">
+            <field name="name">Manifest</field>
+            <field name="res_model">manifest.wizard</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="manifest_wizard_form"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="manifest_wizard_menu"
+            action="manifest_wizard_action" string="Manifest"
+            parent="stock.menu_stock_warehouse_mgmt"/>
+
+    </data>
+</openerp>
