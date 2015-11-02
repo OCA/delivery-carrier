@@ -18,7 +18,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp import models, fields, api, exceptions, _
+from openerp import models, api, exceptions, _
 from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
 from seur.picking import Picking
 from urllib2 import HTTPError
