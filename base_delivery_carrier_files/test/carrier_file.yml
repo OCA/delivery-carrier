@@ -3,10 +3,9 @@
 -
   I set the system tempfile on the carrier file configuration to be sure the path will be writable
 -
-  !python {model: delivery.carrier.file}: |
+  !python {model: delivery.carrier.file, id: delivery_carrier_file}: |
     import tempfile
-    delivery_carrier_file = self.browse(cr, uid, ref("delivery_carrier_file"))
-    self.write(cr, uid, delivery_carrier_file.id, {'export_path': tempfile.gettempdir(), 'write_mode': 'disk'})
+    self.write({'export_path': tempfile.gettempdir(), 'write_mode': 'disk'})
 -
   I set the carrier file configuration on the carrier Free delivery charges
 -
@@ -15,32 +14,34 @@
 -
   I confirm outgoing shipment of 130 kgm Ice-cream.
 -
-  !workflow {model: stock.picking, action: button_confirm, ref: outgoing_shipment_carrier_file}
+  !python {model: stock.picking, id: outgoing_shipment_carrier_file}: |
+    self.action_confirm()
 -
   I check outgoing shipment after stock availablity in refrigerator.
 -
-  !python {model: stock.picking}: |
-    self.force_assign(cr, uid, [ref("outgoing_shipment_carrier_file")])
-    picking = self.browse(cr, uid, ref("outgoing_shipment_carrier_file"))
+  !python {model: stock.picking, id: outgoing_shipment_carrier_file}: |
+    self.force_assign()
 -
   I deliver outgoing shipment.
 -
-  !python {model: stock.partial.picking}: |
-    context.update({'active_model': 'stock.picking.out', 'active_id': ref('outgoing_shipment_carrier_file'), 'active_ids': [ref('outgoing_shipment_carrier_file')]})
+  !python {model: stock.transfer_details}: |
+    context.update({'active_model': 'stock.picking', 'active_id': ref('outgoing_shipment_carrier_file'), 'active_ids': [ref('outgoing_shipment_carrier_file')]})
 -
-  !record {model: stock.partial.picking, id: partial_outgoing}:
+  !record {model: stock.transfer_details, id: partial_outgoing}:
     picking_id: outgoing_shipment_carrier_file
 -
-  !python {model: stock.partial.picking }: |
-    self.do_partial(cr, uid, [ref('partial_outgoing')], context=context)
+  I transfer the shipment.
+-
+  !python {model: stock.transfer_details}: |
+    self.do_detailed_transfer(cr, uid, [ref('partial_outgoing')], context=context)
 -
   I check shipment details after shipment, the carrier file must have been generated
 -
-  !assert {model: stock.picking.out, id: outgoing_shipment_carrier_file, string: Carrier file should be generated}:
+  !assert {model: stock.picking, id: outgoing_shipment_carrier_file, string: Carrier file should be generated}:
     - carrier_file_generated == True
 -
   I check outgoing shipment copy, the carrier_file_generated field must be unchecked
 -
-  !python {model: stock.picking.out}: |
-    new_id = self.copy(cr, uid, ref('outgoing_shipment_carrier_file'))
-    assert self.read(cr, uid, new_id, ['carrier_file_generated'])['carrier_file_generated'] == False, "After duplication, the file generated checkbox is unchecked"
+  !python {model: stock.picking, id: outgoing_shipment_carrier_file}: |
+    new_id = self.copy()
+    assert new_id.carrier_file_generated == False, "After duplication, the file generated checkbox is unchecked"
