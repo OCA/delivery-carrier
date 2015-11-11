@@ -3,10 +3,9 @@
 -
   I set the system tempfile on the carrier file configuration to be sure the path will be writable
 -
-  !python {model: delivery.carrier.file}: |
+  !python {model: delivery.carrier.file, id: delivery_carrier_file_manual}: |
     import tempfile
-    delivery_carrier_file = self.browse(cr, uid, ref("delivery_carrier_file_manual"))
-    self.write(cr, uid, delivery_carrier_file.id, {'export_path': tempfile.gettempdir(), 'write_mode': 'disk'})
+    self.write({'export_path': tempfile.gettempdir(), 'write_mode': 'disk'})
 -
   I set the carrier file configuration on the carrier Free delivery charges
 -
@@ -15,37 +14,44 @@
 -
   I confirm outgoing shipment of 130 kgm Ice-cream.
 -
-  !workflow {model: stock.picking, action: button_confirm, ref: outgoing_shipment_carrier_file_manual}
+  !python {model: stock.picking, id: outgoing_shipment_carrier_file_manual}: |
+    self.action_confirm()
 -
   I check outgoing shipment after stock availablity in refrigerator.
 -
-  !python {model: stock.picking}: |
-    self.force_assign(cr, uid, [ref("outgoing_shipment_carrier_file_manual")])
-    picking = self.browse(cr, uid, ref("outgoing_shipment_carrier_file_manual"))
+  !python {model: stock.picking, id: outgoing_shipment_carrier_file_manual}: |
+    self.force_assign()
+    # picking = self.browse(cr, uid, ref("outgoing_shipment_carrier_file_manual"))
 -
   I deliver outgoing shipment.
 -
-  !python {model: stock.partial.picking}: |
-    context.update({'active_model': 'stock.picking.out', 'active_id': ref('outgoing_shipment_carrier_file_manual'), 'active_ids': [ref('outgoing_shipment_carrier_file_manual')]})
+  !python {model: stock.transfer_details}: |
+    context.update({'active_model': 'stock.picking', 'active_id': ref('outgoing_shipment_carrier_file_manual'), 'active_ids': [ref('outgoing_shipment_carrier_file_manual')]})
 -
-  !record {model: stock.partial.picking, id: partial_outgoing}:
+  !record {model: stock.transfer_details, id: partial_outgoing}:
     picking_id: outgoing_shipment_carrier_file_manual
 -
-  !python {model: stock.partial.picking }: |
-    self.do_partial(cr, uid, [ref('partial_outgoing')], context=context)
+  I transfer the shipment.
+-
+  !python {model: stock.transfer_details}: |
+    self.do_detailed_transfer(cr, uid, [ref('partial_outgoing')], context=context)
 -
   I check shipment details after shipping, the carrier file must not have been generated
 -
-  !assert {model: stock.picking.out, id: outgoing_shipment_carrier_file_manual, string: Carrier file should be generated}:
+  !assert {model: stock.picking, id: outgoing_shipment_carrier_file_manual, string: Carrier file should be generated}:
     - carrier_file_generated is False
 -
   I generate the carrier files of my shipment from the wizard
 -
+  !context
+    active_ids: [ref('outgoing_shipment_carrier_file_manual')]
+    active_model: 'stock.picking'
+-
   !python {model: delivery.carrier.file.generate}: |
-    wizard_id = self.create(cr, uid, {}, {'active_ids': [ref('outgoing_shipment_carrier_file_manual')], 'active_model': 'stock.picking.out'})
+    wizard_id = self.create(cr, uid, {}, {'active_ids': [ref('outgoing_shipment_carrier_file_manual')], 'active_model': 'stock.picking'})
     self.action_generate(cr, uid, [wizard_id], {'active_ids': [ref('outgoing_shipment_carrier_file_manual')]})
 -
   I check shipment details after manual generation, the carrier file must have been generated
 -
-  !assert {model: stock.picking.out, id: outgoing_shipment_carrier_file_manual, string: Carrier file should be generated}:
+  !assert {model: stock.picking, id: outgoing_shipment_carrier_file_manual, string: Carrier file should be generated}:
     - carrier_file_generated == True
