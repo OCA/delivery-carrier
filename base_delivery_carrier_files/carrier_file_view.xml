@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
+
         <record id="view_delivery_carrier_file_tree" model="ir.ui.view">
             <field name="name">delivery.carrier.file.tree</field>
             <field name="model">delivery.carrier.file</field>
@@ -13,6 +14,7 @@
                 </tree>
             </field>
         </record>
+
         <record id="view_delivery_carrier_file_form" model="ir.ui.view">
             <field name="name">delivery.carrier.file.form</field>
             <field name="model">delivery.carrier.file</field>
@@ -45,7 +47,6 @@
 
         <menuitem action="action_delivery_carrier_file_form" id="menu_action_delivery_carrier_file_form" parent="delivery.menu_delivery"/>
 
-
         <record id="view_delivery_carrier_form_inherit" model="ir.ui.view">
             <field name="name">delivery.carrier.form.file</field>
             <field name="model">delivery.carrier</field>
@@ -58,5 +59,6 @@
                 </data>
             </field>
         </record>
+
     </data>
 </openerp>
