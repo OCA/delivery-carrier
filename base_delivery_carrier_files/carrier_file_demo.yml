@@ -20,7 +20,6 @@
     standard_price: 70.0
     uom_id: product.product_uom_kgm
     uom_po_id: product.product_uom_kgm
-    procure_method: make_to_stock
     property_stock_inventory: location_opening
     valuation: real_time
     cost_method: average
@@ -28,8 +27,13 @@
     property_stock_account_output: account.o_income
     description: Ice cream can be mass-produced and thus is widely available in developed parts of the world. Ice cream can be purchased in large cartons (vats and squrounds) from supermarkets and grocery stores, in smaller quantities from ice cream shops, convenience stores, and milk bars, and in individual servings from small carts or vans at public events.
 -
- !record {model: stock.picking.out, id: outgoing_shipment_carrier_file}:
-    type: out
+ !record {model: stock.picking.type, id: outgoing_shipment_type_carrier_file}:
+    name: Outgoing Ice Cream 
+    code: outgoing
+    sequence_id: stock.sequence_mrp_op
+-
+ !record {model: stock.picking, id: outgoing_shipment_carrier_file}:
+    picking_type_id: outgoing_shipment_type_carrier_file
     location_dest_id: location_delivery_counter
     carrier_id: delivery.delivery_carrier
 -
@@ -37,12 +41,17 @@
     picking_id: outgoing_shipment_carrier_file
     product_id: product_icecream
     product_uom: product.product_uom_kgm
-    product_qty: 130.0
+    product_uom_qty: 130.0
     location_id: location_refrigerator
     location_dest_id: location_delivery_counter
 -
- !record {model: stock.picking.out, id: outgoing_shipment_carrier_file_manual}:
-    type: out
+ !record {model: stock.picking.type, id: outgoing_shipment_type_carrier_file_manual}:
+    name: Outgoing Ice Cream 
+    code: outgoing
+    sequence_id: stock.sequence_mrp_op
+-
+ !record {model: stock.picking, id: outgoing_shipment_carrier_file_manual}:
+    picking_type_id: outgoing_shipment_type_carrier_file_manual
     location_dest_id: location_delivery_counter
     carrier_id: delivery.free_delivery_carrier
 -
@@ -50,6 +59,6 @@
     picking_id: outgoing_shipment_carrier_file_manual
     product_id: product_icecream
     product_uom: product.product_uom_kgm
-    product_qty: 130.0
+    product_uom_qty: 130.0
     location_id: location_refrigerator
     location_dest_id: location_delivery_counter
