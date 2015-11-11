@@ -3,12 +3,13 @@
     <data>
 
         <record id="view_delivery_carrier_file_generate" model="ir.ui.view">
-            <field name="name">delivery.carrier.file.generate</field>
+            <field name="name">delivery.carrier.file.generate.form</field>
             <field name="model">delivery.carrier.file.generate</field>
             <field name="arch" type="xml">
-                <form string="Carrier Files" version="7.0">
+                <form string="Carrier Files">
                     <label string="Generate the carrier files for the selected delivery orders."/>
-                    <field name="picking_ids" nolabel="1" colspan="4">
+                    <field name="pickings" nolabel="1" colspan="4"
+                      domain="[('picking_type_id.code', '=', 'outgoing')]">
                         <tree string="Delivery Orders">
                             <field name="name"/>
                             <field name="carrier_id"/>
@@ -40,12 +41,11 @@
         </record>
 
         <record model="ir.values" id="delivery_carrier_file_generate_ir_values">
-            <field name="object" eval="1" />
             <field name="name">Generate Carrier Files</field>
             <field name="key2">client_action_multi</field>
             <field name="value" eval="'ir.actions.act_window,' + str(ref('action_delivery_carrier_file_generate'))" />
             <field name="key">action</field>
-            <field name="model">stock.picking.out</field>
+            <field name="model">stock.picking</field>
         </record>
 
     </data>
