@@ -14,6 +14,12 @@ To see it, please install documents module.
 
 You can create multiple delivery method to match your diffent package types.
 
+Installation
+------------
+
+As a requirement, you need to install `suds-jurko` library. It will fail with the
+latest and outdated version of `suds`.
+Version 0.6 is recommended.
 
 Configuration
 -------------
