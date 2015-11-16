@@ -4,7 +4,8 @@
 Delivery Carrier Business To Customer
 =====================================
 
-This module adds specific fields to partner for delivery purpose
+This module adds specific fields to partner for delivery purpose some carrier services offers to deliver package to any place in a country (ie French So Colissimo).
+In this case addition fields are required with a more complete view on partner
 
 Bug Tracker
 ===========

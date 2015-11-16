@@ -38,4 +38,3 @@
     'license': 'AGPL-3',
     'application': False,
 }
-
