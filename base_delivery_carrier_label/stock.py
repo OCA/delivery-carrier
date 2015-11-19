@@ -318,6 +318,18 @@ class StockPicking(models.Model):
         address_id = partner.address_get(adr_pref=['delivery'])['delivery']
         return self.env['res.partner'].browse(address_id)
 
+    @api.multi
+    def set_pack_weight(self):
+        # I cannot loop on the "quant_ids" of packages, because, at this step,
+        # this field doesn't have a value yet
+        self.ensure_one()
+        for packop in self.pack_operation_ids:
+            package = packop.result_package_id or packop.package_id
+            if package:
+                weight = package.get_weight()
+                package.write({'weight': weight})
+        return
+
 
 class ShippingLabel(models.Model):
     """ Child class of ir attachment to identify which are labels """
