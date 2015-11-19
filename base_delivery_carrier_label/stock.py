@@ -45,6 +45,45 @@ class StockQuantPackage(models.Model):
                 res[pack.id] += ' %s kg' % pack.weight
         return res
 
+    @api.multi
+    def get_weight(self):
+        """ Compute the weight of a pack
+
+        Get all the children packages and sum the weight of all
+        the product and the weight of the Logistic Units of the packages.
+
+        So if I put in PACK65:
+         * 1 product A of 2kg
+         * 2 products B of 4kg
+        The box of PACK65 weights 0.5kg
+        And I put in PACK66:
+         * 1 product A of 2kg
+        The box of PACK66 weights 0.5kg
+
+        Then I put PACK65 and PACK66 in the PACK67 having a box that
+        weights 0.5kg, the weight of PACK67 should be: 13.5kg
+
+        """
+        self.ensure_one()
+        pack_op_obj = self.env['stock.pack.operation']
+        weight = 0
+        packages = self.search([('id', 'child_of', self.id)])
+        for package in packages:
+            operations = pack_op_obj.search(
+                ['|',
+                 '&',
+                 ('package_id', '=', package.id),
+                 ('result_package_id', '=', False),
+                 ('result_package_id', '=', package.id),
+                 ('product_id', '!=', False),
+                 ])
+            for operation in operations:
+                weight += operation.product_id.weight * operation.product_qty
+
+            if package.ul_id:
+                weight += package.ul_id.weight
+        return weight
+
 
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
