@@ -22,6 +22,7 @@
 #
 ##############################################################################
 from openerp import models, fields, api, exceptions, _
+from openerp.exceptions import Warning as UserError
 import openerp.addons.decimal_precision as dp
 
 
@@ -329,6 +330,21 @@ class StockPicking(models.Model):
                 weight = package.get_weight()
                 package.write({'weight': weight})
         return
+
+    @api.multi
+    def _check_existing_shipping_label(self):
+        """ Check that labels don't already exist for this picking """
+        self.ensure_one()
+        labels = self.pool['shipping.label'].search([
+            ('res_id', '=', self.id),
+            ('res_model', '=', 'stock.picking')])
+        if labels:
+            raise UserError(
+                _('Error:'),
+                _('Some labels already exist for the picking %s.\n'
+                  'Please delete the existing labels in the '
+                  'attachements of this picking and try again')
+                % self.name)
 
 
 class ShippingLabel(models.Model):
