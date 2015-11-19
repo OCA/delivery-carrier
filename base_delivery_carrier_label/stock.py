@@ -21,7 +21,8 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp import models, fields, api, exceptions, _
+from openerp import models, fields, api, _
+from openerp.exceptions import Warning as UserError
 import openerp.addons.decimal_precision as dp
 
 
@@ -121,8 +122,8 @@ class StockPicking(models.Model):
         :return: (file_binary, file_type)
 
         """
-        raise exceptions.Warning(_('No label is configured for the '
-                                   'selected delivery method.'))
+        raise UserError(_('No label is configured for the '
+                          'selected delivery method.'))
 
     @api.multi
     def generate_shipping_labels(self, package_ids=None):
@@ -233,7 +234,7 @@ class StockPicking(models.Model):
                 # triggered the onchange:
                 # https://github.com/odoo/odoo/issues/2693#issuecomment-56825399
                 # Ideally we should add the missing option
-                raise exceptions.Warning(
+                raise UserError(
                     _("You should not remove a mandatory option."
                       "Please cancel the edit or "
                       "add back the option: %s.") % available_option.name
@@ -329,6 +330,20 @@ class StockPicking(models.Model):
                 weight = package.get_weight()
                 package.write({'weight': weight})
         return
+
+    @api.multi
+    def _check_existing_shipping_label(self):
+        """ Check that labels don't already exist for this picking """
+        self.ensure_one()
+        labels = self.env['shipping.label'].search([
+            ('res_id', '=', self.id),
+            ('res_model', '=', 'stock.picking')])
+        if labels:
+            raise UserError(
+                _('Some labels already exist for the picking %s.\n'
+                  'Please delete the existing labels in the '
+                  'attachments of this picking and try again')
+                % self.name)
 
 
 class ShippingLabel(models.Model):
