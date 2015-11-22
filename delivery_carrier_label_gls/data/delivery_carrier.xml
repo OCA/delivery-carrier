@@ -8,8 +8,6 @@
             <field name="standard_price">0.0</field>
             <field name="cost_method">standard</field>
             <field name="type">service</field>
-            <field name="procure_method">make_to_stock</field>
-            <field name="supply_method">buy</field>
             <field name="name">Coûts de livraison - GLS</field>
             <field name="categ_id">1</field>
         </record>

@@ -1,64 +1,69 @@
-# -*- coding: utf-8 -*-
-##############################################################################
-#
-#    Copyright (C) All Rights Reserved 2014 Akretion
-#    @author David BEAL <david.beal@akretion.com>
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-###############################################################################
+# coding: utf-8
+# © 2015 David BEAL @ Akretion
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from openerp.osv import orm, fields
-from . company import ResCompany
+from openerp import models, api, fields
+from openerp.exceptions import Warning as UserError
 
 
-class GlsConfigSettings(orm.TransientModel):
+class GlsConfigSettings(models.TransientModel):
     _name = 'gls.config.settings'
-
+    _inherit = 'res.config.settings'
     _description = 'GLS carrier configuration'
-    _inherit = ['res.config.settings', 'abstract.config.settings']
-    _prefix = 'gls_'
-    _companyObject = ResCompany
 
-    _columns = {
-        'gls_customer_code': fields.char(
-            string='Customer Code',
-            readonly=True,
-            help="Code for GLS carrier company (T8915)\n"
-                 "Information common to whole companies "
-                 "to configure in System Parameter"),
-        'gls_warehouse': fields.char(
-            string='Warehouse',
-            readonly=True,
-            help="GLS warehouse near customer location (T8700)\n"
-                 "Information common to whole companies "
-                 "to configure in System Parameter"),
-    }
+    def _default_company(self):
+        return self.env.user.company_id
 
-    def default_get(self, cr, uid, fields, context=None):
+    company_id = fields.Many2one(
+        comodel_name='res.company', string='Company',
+        required=True, default=_default_company)
+    customer_code = fields.Char(
+        string='Customer Code',
+        readonly=True, oldname='gls_customer_code',
+        help="Code for GLS carrier company (T8915)\n"
+             "Information common to whole companies "
+             "to configure in System Parameter")
+    warehouse = fields.Char(
+        string='Warehouse',
+        readonly=True, oldname='gls_warehouse',
+        help="GLS warehouse near customer location (T8700)\n"
+             "Information common to whole companies "
+             "to configure in System Parameter")
+    fr_contact_id = fields.Char(
+        related="company_id.gls_fr_contact_id")
+    inter_contact_id = fields.Char(
+        related="company_id.gls_inter_contact_id")
+    traceability = fields.Boolean(
+        related="company_id.gls_traceability")
+    generate_label = fields.Boolean(
+        related="company_id.gls_generate_label")
+    test = fields.Boolean(
+        related="company_id.gls_test")
+
+    @api.onchange('company_id')
+    def onchange_company_id(self):
+        # update related fields
+        if not self.company_id:
+            return
+        company = self.company_id
+        self.fr_contact_id = company.gls_fr_contact_id
+        self.inter_contact_id = company.gls_inter_contact_id
+        self.traceability = company.gls_traceability
+        self.generate_label = company.gls_generate_label
+        self.test = company.gls_test
+
+    @api.model
+    def default_get(self, fields):
         res = {}
-        param_m = self.pool['ir.config_parameter']
-        for field in ['gls_customer_code', 'gls_warehouse']:
+        param_m = self.env['ir.config_parameter']
+        for field in ['customer_code', 'warehouse']:
             if field in fields:
-                ids = param_m.search(
-                    cr, uid, [('key', '=', 'carrier_%s' % field)],
-                    context=context)
-                if not ids:
-                    raise orm.except_orm(
+                configs = param_m.search(
+                    [('key', '=', 'carrier_gls_%s' % field)])
+                if not configs:
+                    raise UserError(
                         "Missing parameter",
                         "'%s' key is missing in 'System Parameter':\n"
                         "Add it and set the corresponding value" % field)
-                param = param_m.browse(cr, uid, ids, context=context)[0]
-                res[field] = param.value
+                res[field] = configs[0].value
         return res

@@ -1,41 +1,29 @@
-# -*- coding: utf-8 -*-
-##############################################################################
-#
-#    Copyright (C) All Rights Reserved 2014 Akretion
-#    @author David BEAL <david.beal@akretion.com>
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-###############################################################################
+# coding: utf-8
+# © 2015 David BEAL @ Akretion
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from openerp.osv import orm, fields
+from openerp import models, fields
 
 
-class ResCompany(orm.Model):
+class ResCompany(models.Model):
 
     _inherit = "res.company"
 
-    _columns = {
-        'gls_fr_contact_id': fields.char(
-            'France',
-            size=10,
-            help='Contact id for GLS France tranportation (T8914)'),
-        'gls_inter_contact_id': fields.char(
-            'International',
-            size=10,
-            help='Contact id for GLS International transportation (T8914)'),
-        'gls_test': fields.boolean(
-            'Url Test',
-            help="Check if requested webservice is test plateform")
-    }
+    gls_fr_contact_id = fields.Char(
+        string='France',
+        size=10,
+        help='Contact id for GLS France tranportation (T8914)')
+    gls_inter_contact_id = fields.Char(
+        string='International',
+        size=10,
+        help='Contact id for GLS International transportation (T8914)')
+    gls_traceability = fields.Boolean(
+        string='Traceability',
+        help="Record traceability informations in Delivery Order "
+             "attachment: web service request and response")
+    gls_generate_label = fields.Boolean(
+        string='Generate Label Automatically',
+        help="Generate label when delivery is done")
+    gls_test = fields.Boolean(
+        string='Url Test',
+        help="Check if requested webservice is test plateform")

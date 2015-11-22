@@ -1,4 +1,4 @@
-## -*- coding: utf-8 -*-
+## coding: utf-8
 ^XA
 ^FWN
 ^FO50,80^GB825,0,15^FS

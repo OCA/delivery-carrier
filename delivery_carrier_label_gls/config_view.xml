@@ -20,9 +20,7 @@
         <div>
           <div>
             <label for="company_id" string="Select Company"/>
-            <field name="company_id"
-                widget="selection"
-                on_change="onchange_company_id(company_id, context)"
+            <field name="company_id" widget="selection"
                 class="oe_inline"/>
           </div>
         </div>
@@ -30,15 +28,18 @@
       <separator string="Account"/>
       <group name="account" col="4">
         <field name="fr_contact_id" class="oe_inline"/>
-        <span/><span/>
+        <newline/>
         <field name="inter_contact_id" class="oe_inline"/>
-        <span/><span/>
-        <field name="gls_customer_code" class="oe_inline"/>
-        <span/><span/>
-        <field name="gls_warehouse" class="oe_inline"/>
-        <span/><span/>
+        <newline/>
+        <field name="customer_code" class="oe_inline"/>
+        <newline/>
+        <field name="warehouse" class="oe_inline"/>
+        <newline/>
+        <field name="generate_label"/>
+        <newline/>
+        <field name="traceability"/>
+        <newline/>
         <field name="test"/>
-
       </group>
 
     </form>
@@ -46,6 +47,7 @@
 </record>
 
 <record id="action_gls_config" model="ir.actions.act_window">
+  <field name="name">GLS config</field>
   <field name="type">ir.actions.act_window</field>
   <field name="res_model">gls.config.settings</field>
   <field name="view_mode">form</field>
