@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+<data>
+
+<record id="carrier_account_form" model="ir.ui.view">
+    <field name="name">carrier.account.form</field>
+    <field name="model">carrier.account</field>
+    <field name="arch" type="xml">
+        <form string="Carrier Account">
+            <group name="main">
+                <field name="name"/>
+                <field name="type"/>
+                <field name="account"/>
+                <field name="password" password="1"/>
+                <field name="file_format"/>
+            </group>
+        </form>
+    </field>
+</record>
+
+<record id="carrier_account_tree" model="ir.ui.view">
+    <field name="name">carrier.account.tree</field>
+    <field name="model">carrier.account</field>
+    <field name="arch" type="xml">
+        <tree string="Carrier Account">
+            <field name="name"/>
+            <field name="type"/>
+            <field name="account"/>
+            <field name="file_format"/>
+        </tree>
+    </field>
+</record>
+
+<record id="carrier_account_action" model="ir.actions.act_window">
+    <field name="name">Carrier Accounts</field>
+    <field name="res_model">carrier.account</field>
+    <field name="view_mode">tree,form</field>
+</record>
+
+<menuitem id="carrier_account_menu" action="carrier_account_action"
+    parent="delivery.menu_delivery"/>
+
+</data>
+</openerp>
