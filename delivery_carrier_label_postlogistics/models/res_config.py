@@ -41,9 +41,6 @@ class PostlogisticsConfigSettings(models.TransientModel):
     wsdl_url = fields.Char(related='company_id.postlogistics_wsdl_url')
     username = fields.Char(related='company_id.postlogistics_username')
     password = fields.Char(related='company_id.postlogistics_password')
-    license_ids = fields.One2many(
-        related='company_id.postlogistics_license_ids',
-    )
     logo = fields.Binary(related='company_id.postlogistics_logo')
     office = fields.Char(related='company_id.postlogistics_office')
 
@@ -64,14 +61,12 @@ class PostlogisticsConfigSettings(models.TransientModel):
             return
         company = self.company_id
 
-        licenses = company.postlogistics_license_ids
         label_layout = company.postlogistics_default_label_layout
         output_format = company.postlogistics_default_output_format
         resolution = company.postlogistics_default_resolution
 
         self.username = company.postlogistics_username
         self.password = company.postlogistics_password
-        self.license_ids = licenses
         self.logo = company.postlogistics_logo
         self.office = company.postlogistics_office
         self.default_label_layout = label_layout

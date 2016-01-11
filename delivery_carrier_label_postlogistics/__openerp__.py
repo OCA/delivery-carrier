@@ -30,6 +30,7 @@
  'data': ['data/res_partner.xml',
           'data/delivery.xml',
           'views/delivery.xml',
+          'views/postlogistics_license.xml',
           'views/res_config.xml',
           'security/ir.model.access.csv',
           ],

@@ -38,16 +38,10 @@
           </group>
           <separator string="Licenses"/>
           <group>
-            <div>
-              <div>
-                <field name="license_ids" class="oe_inline">
-                  <tree editable="bottom">
-                    <field name="name"/>
-                    <field name="number"/>
-                    <field name="sequence" invisible="True"/>
-                  </tree>
-                </field>
-              </div>
+            <div name="configure_licenses_button">
+              <label string="Licenses"/>
+              <button name='%(delivery_carrier_label_postlogistics.action_postlogistics_licenses)d' type="action"
+                string="Configure licenses" class="oe_link"/>
             </div>
           </group>
           <separator string="Sender Informations"/>
