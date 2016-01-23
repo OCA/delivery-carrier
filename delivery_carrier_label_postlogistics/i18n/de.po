@@ -4,13 +4,14 @@
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2014
+# Rudolf Schnapka <rs@techno-flex.de>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: carrier-delivery (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-16 09:42+0000\n"
-"PO-Revision-Date: 2015-11-25 09:16+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"POT-Creation-Date: 2015-11-30 00:28+0000\n"
+"PO-Revision-Date: 2016-01-19 10:50+0000\n"
+"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-carrier-delivery-8-0/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -51,7 +52,7 @@ msgstr "Übernehmen"
 #. module: delivery_carrier_label_postlogistics
 #: view:postlogistics.config.settings:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
 msgid "Assign PostLogistics Licenses to service groups"
-msgstr ""
+msgstr "PostLogistics-Lizenzen den Dienstgruppen zuordnen"
 
 #. module: delivery_carrier_label_postlogistics
 #: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:83
@@ -130,7 +131,7 @@ msgstr "Konnte Postlogistics-Basisleistungen nicht ermitteln:\n%s"
 msgid ""
 "Could not retrieve Postlogistics delivery instructions:\n"
 "%s"
-msgstr ""
+msgstr "Konnte PostLogistics Lieferanweisungen nicht erhalten:\n%s"
 
 #. module: delivery_carrier_label_postlogistics
 #: code:addons/delivery_carrier_label_postlogistics/res_config.py:274
@@ -146,7 +147,7 @@ msgstr "Konnte keine Dienste der Postlogistics Gruppe ermitteln:\n%s"
 msgid ""
 "Could not retrieve allowed Postlogistics service groups for the %s licence:\n"
 "%s"
-msgstr ""
+msgstr "Konnte erlaubte PostLogistics Dienstgruppen für diese %s Lizenz\nnicht einholen:\n%s"
 
 #. module: delivery_carrier_label_postlogistics
 #: field:postlogistics.config.settings,create_uid:0
@@ -248,7 +249,7 @@ msgstr "GIF"
 msgid ""
 "Gives the sequence on company to define priority on license when multiple "
 "licenses are available for the same group of service."
-msgstr ""
+msgstr "Liefert die Reihenfolge zum Unternehmen, mit der, bei zutreffen mehrerer Lizenzen, die Priorität der Lizenznutzung festgelegt wird."
 
 #. module: delivery_carrier_label_postlogistics
 #: field:postlogistics.service.group,group_extid:0
@@ -266,7 +267,7 @@ msgstr "ID"
 msgid ""
 "If the cash on delivery amount for this package is different than the total "
 "of the sales order, write the amount there."
-msgstr ""
+msgstr "Wenn der Betrag für die Bezahlung bei Anlieferung für dieses Paket von der Auftragssumme abweicht, vermerken Sie den Betrag hier."
 
 #. module: delivery_carrier_label_postlogistics
 #: model:delivery.carrier.template.option,name:delivery_carrier_label_postlogistics.postlogistics_output_format_option_jpg
@@ -305,7 +306,7 @@ msgstr "Liste der Basisdienste, denen diese Leistung zugewählt werden kann"
 #. module: delivery_carrier_label_postlogistics
 #: field:postlogistics.license,number:0
 msgid "Number"
-msgstr ""
+msgstr "Nummer"
 
 #. module: delivery_carrier_label_postlogistics
 #: help:res.company,postlogistics_logo:0
@@ -319,7 +320,7 @@ msgid ""
 "– Colour table: indexed colours, max. 200 colours\n"
 "– The logo will be printed rotated counter-clockwise by 90°\n"
 "We recommend using a black and white logo for printing in  the ZPL2 format."
-msgstr ""
+msgstr "Optionales Unternehmens-Logo für das Etikett.\nWenn ein Bild / Logo verwendet wird, dann beachten Sie bitte Folgendes:\n- Bildbreite: 47mm\n- Bildhöhe: 25mm\n- Dateigröße: Max. 30kB\n- Dateiformat: GIF od. PNG\n- Farbtabelle: Indizierte Farben, max. 200 Farben\n- Das Logo wird um 90° gegen den Uhrzeigersinn gedreht gedruckt\nWir empfehlen ein S/W-Logo für den Druck im ZPL2-Format."
 
 #. module: delivery_carrier_label_postlogistics
 #: selection:delivery.carrier.template.option,postlogistics_type:0
@@ -367,7 +368,7 @@ msgstr "Empfangendes Postamt der Lieferung"
 #: field:postlogistics.service.group,postlogistics_license_ids:0
 #: field:res.company,postlogistics_license_ids:0
 msgid "PostLogistics Franking License"
-msgstr ""
+msgstr "PostLogistics Frankierungslizenz"
 
 #. module: delivery_carrier_label_postlogistics
 #: field:delivery.carrier,postlogistics_service_group_id:0
@@ -389,7 +390,7 @@ msgstr "Postlogistics"
 #. module: delivery_carrier_label_postlogistics
 #: field:stock.quant.package,postlogistics_manual_cod_amount:0
 msgid "Postlogistics Cash On Delivery Amount"
-msgstr ""
+msgstr "Postlogistics Betrag für Zahlung bei Lieferung"
 
 #. module: delivery_carrier_label_postlogistics
 #: view:postlogistics.config.settings:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
@@ -404,7 +405,7 @@ msgstr "Absenderinformation"
 #. module: delivery_carrier_label_postlogistics
 #: field:postlogistics.license,sequence:0
 msgid "Sequence"
-msgstr ""
+msgstr "Reihenfolge"
 
 #. module: delivery_carrier_label_postlogistics
 #: help:delivery.carrier,postlogistics_service_group_id:0
@@ -423,7 +424,7 @@ msgstr "Paketaufkleber"
 msgid ""
 "The cash on delivery amount must be manually specified on the packages when "
 "a package contains products from different sales orders."
-msgstr ""
+msgstr "Der Betrag für Zahlung bei Lieferung muss manuell auf den Paketen Vermerkt werden, wenn die Packung Produkte aus verschiedenen Verkaufsaufträgen enthält."
 
 #. module: delivery_carrier_label_postlogistics
 #: code:addons/delivery_carrier_label_postlogistics/stock.py:57
@@ -432,7 +433,7 @@ msgstr ""
 msgid ""
 "The cash on delivery amount must be manually specified on the packages when "
 "a sales order is delivered in several delivery orders."
-msgstr ""
+msgstr "Der Betrag für Zahlung bei Lieferung muss manuell auf den Paketen Vermerkt werden, wenn der Verkaufsauftrag auf mehrere Lieferungen aufgeteilt wird."
 
 #. module: delivery_carrier_label_postlogistics
 #: code:addons/delivery_carrier_label_postlogistics/stock_quant_package.py:85
@@ -440,7 +441,7 @@ msgstr ""
 msgid ""
 "The cash on delivery amount must be manually specified on the packages when "
 "a sales order is delivered in several packages."
-msgstr ""
+msgstr "Der Betrag für Zahlung bei Lieferung muss manuell auf den Paketen Vermerkt werden, wenn der Verkaufsauftrag in mehreren Paketen ausgeliefert wird."
 
 #. module: delivery_carrier_label_postlogistics
 #: view:postlogistics.config.settings:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
@@ -455,7 +456,7 @@ msgstr "Benutzername"
 #. module: delivery_carrier_label_postlogistics
 #: view:postlogistics.config.settings:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
 msgid "Web Service Authentication"
-msgstr ""
+msgstr "Web-Dienstauthentifizierung"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:delivery.carrier.template.option,name:delivery_carrier_label_postlogistics.postlogistics_output_format_option_zpl2
