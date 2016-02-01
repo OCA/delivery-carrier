@@ -16,6 +16,12 @@ To see it, please install documents module.
 
 You can create multiple delivery method to match your diffent package types.
 
+Installation
+------------
+
+As a requirement you need to install `suds-jurko` library. It will fail with the
+latest and outdated version of `suds`.
+https://pypi.python.org/pypi/suds-jurko/0.6
 
 Configuration
 -------------
@@ -23,7 +29,7 @@ Configuration
 .. important::
    A "Swiss Post Business customer" account is required to use this module.
 
-   See `Swiss Post E-logistics`_
+   See `Log in`_
 
 
 To configure:
@@ -44,10 +50,8 @@ Now you can create a carrier method for PostLogistics WebService:
   from listed
 * Add additional Service and Delivery instructions
 
-.. _PostLogistics BarCodes WebService: http://www.poste.ch/post-startseite/\
-post-geschaeftskunden/post-logistik/post-e-log/post-e-log-webservices.htm
-.. _Swiss Post E-logistics: http://www.poste.ch/en/post-startseite/\
-post-geschaeftskunden/post-logistik/post-e-log.htm
+.. _PostLogistics BarCodes WebService: https://www.post.ch/en/business/a-z-of-subjects/dropping-off-mail-items/business-sending-letters/sending-consignments-web-service-barcode
+.. _Log in: https://account.post.ch/selfadmin/?login&lang=en
 
 
 Recommended modules
@@ -61,8 +65,8 @@ Technical references
 
 `"Barcode" web service documentation`_
 
-.. _"Barcode" web service documentation: http://www.poste.ch/post-barcode-cug\
-.htm
+.. _"Barcode" web service documentation: https://www.post.ch/en/business/a-z-of-subjects/dropping-off-mail-items/business-sending-letters/barcode-support
+
 
 Bug Tracker
 ===========
