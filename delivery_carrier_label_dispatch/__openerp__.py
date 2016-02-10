@@ -28,7 +28,7 @@
     'depends': ['base_delivery_carrier_label', 'picking_dispatch'],
     'description': """
 [Link module] Carrier labels - Picking dispatch
-==============================
+===============================================
 
 This module adds a wizard on picking dispatch to generate the labels
 of the packs. The labels are merged in one PDF file.
@@ -37,6 +37,19 @@ If you want multiple labels for one picking, all the moves should have been
 put in a pack before the labels can be printed.
 
 If you don't define your pack it will be considered a picking is a single pack.
+
+
+Tips
+----
+For picking dispatch with huge number of labels to generate your can add a
+number of worker with ir.config_parameter `shipping_label.num_workers` to
+parallelize the generation on multiple workers.
+This can be really useful for exemple using PostLogistics web service to
+gain speed.
+
+Be careful not to set too many worker as each one will need to instanciate
+a cursor on database and this could generate PoolErrors.
+A good choice would be to set it as `db_maxconn` / number_of_worker / 2
 
 Contributors
 ------------
