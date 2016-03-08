@@ -276,9 +276,18 @@ class PostlogisticsWebService(object):
 
     def _prepare_item_list(self, picking, recipient, attributes, trackings):
         """ Return a list of item made from the pickings """
+
+        # Check for an empty list (no packs) => use the picking
+        if not trackings:
+            return [{'ItemID': self._get_itemid(picking, picking.name),
+                     'Recipient': recipient,
+                     'Attributes': attributes,
+                     }]
+
+        # Otherwise, create an item per pack
         item_list = []
         for pack in trackings:
-            name = pack.name if pack else picking.name
+            name = pack.name
             itemid = self._get_itemid(picking, name)
             item = {
                 'ItemID': itemid,
