@@ -40,11 +40,12 @@ class stock_picking(orm.Model):
 
         if tracking_ids is None:
             # get all the trackings of the picking
-            # no tracking_id wil return a False, meaning that
-            # we want a label for the picking
-            trackings = sorted(set(
-                line.tracking_id for line in picking.move_lines
-            ), key=attrgetter('name'))
+            # if there is no tracking, an empty list will be returned
+            trackings = set()
+            for move_line in picking.move_lines:
+                if move_line.tracking_id:
+                    trackings.add(move_line.tracking_id)
+            trackings = sorted(trackings, key=attrgetter('name'))
         else:
             # restrict on the provided trackings
             tracking_obj = self.pool['stock.tracking']
@@ -62,29 +63,26 @@ class stock_picking(orm.Model):
         labels = []
         # if there are no pack defined, write tracking_number on picking
         # otherwise, write it on serial field of each pack
+        if not trackings:
+            label = res['value'][0]
+            tracking_number = label['tracking_number']
+            self.write(cr, uid, picking.id,
+                       {'carrier_tracking_ref': tracking_number},
+                       context=context)
+            return [{'tracking_id': False,
+                     'file': label['binary'].decode('base64'),
+                     'file_type': label['file_type'],
+                     'name': tracking_number + '.' + label['file_type'],
+                     }]
+
         for track in trackings:
-            if not track:
-                # ignore lines without tracking when there is tracking
-                # in a picking
-                # Example: if I have 1 move with a tracking and 1
-                # without, I will have [False, a_tracking] in
-                # `trackings`. In that case, we are using packs, not the
-                # picking for the tracking numbers.
-                if len(trackings) > 1:
-                    continue
-                label = res['value'][0]
-                tracking_number = label['tracking_number']
-                self.write(cr, uid, picking.id,
-                           {'carrier_tracking_ref': tracking_number},
-                           context=context)
-            else:
-                label = None
-                for search_label in res['value']:
-                    if track.name in search_label['item_id'].split('+')[-1]:
-                        label = search_label
-                        tracking_number = label['tracking_number']
-                        track.write({'serial': tracking_number})
-                        break
+            label = None
+            for search_label in res['value']:
+                if track.name in search_label['item_id'].split('+')[-1]:
+                    label = search_label
+                    tracking_number = label['tracking_number']
+                    track.write({'serial': tracking_number})
+                    break
             labels.append({'tracking_id': track.id if track else False,
                            'file': label['binary'].decode('base64'),
                            'file_type': label['file_type'],
