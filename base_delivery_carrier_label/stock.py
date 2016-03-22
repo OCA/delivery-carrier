@@ -24,6 +24,54 @@
 from openerp import models, fields, api, _
 from openerp.exceptions import Warning as UserError
 import openerp.addons.decimal_precision as dp
+import logging
+
+_logger = logging.getLogger(__name__)
+
+
+class StockPackOperation(models.Model):
+    _inherit = 'stock.pack.operation'
+
+    weight = fields.Float(
+        digits=dp.get_precision('Stock Weight'),
+        help="Weight of the pack_operation"
+    )
+
+    @api.multi
+    def get_weight(self):
+        """Calc and save weight of pack.operations.
+
+        Warning: Type conversion not implemented
+                it will return False if at least one uom or uos not in kg
+        return:
+            the sum of the weight of [self]
+        """
+        total_weight = 0
+        kg = self.env.ref('product.product_uom_kgm').id
+        units = self.env.ref('product.product_uom_unit').id
+        allowed = (False, kg, units)
+        cant_calc_total = False
+
+        for operation in self:
+            product = operation.product_id
+
+            # if not defined we assume it's in kg
+            if not (
+                product.uom_id.id in allowed or
+                product.uos_id.id in allowed
+            ):
+                _logger.warning(
+                    'Type conversion not implemented for product %s' %
+                    product.id)
+                cant_calc_total = True
+
+            operation.weight = (product.weight * operation.product_qty)
+
+            total_weight += operation.weight
+
+        if cant_calc_total:
+            return False
+        return total_weight
 
 
 class StockQuantPackage(models.Model):
@@ -48,7 +96,7 @@ class StockQuantPackage(models.Model):
 
     @api.multi
     def get_weight(self):
-        """ Compute the weight of a pack
+        """Compute the weight of a pack.
 
         Get all the children packages and sum the weight of all
         the product and the weight of the Logistic Units of the packages.
@@ -65,25 +113,38 @@ class StockQuantPackage(models.Model):
         weights 0.5kg, the weight of PACK67 should be: 13.5kg
 
         """
-        self.ensure_one()
-        pack_op_obj = self.env['stock.pack.operation']
-        weight = 0
-        packages = self.search([('id', 'child_of', self.id)])
-        for package in packages:
-            operations = pack_op_obj.search(
-                ['|',
-                 '&',
-                 ('package_id', '=', package.id),
-                 ('result_package_id', '=', False),
-                 ('result_package_id', '=', package.id),
+        total_weight = 0
+
+        for package in self:
+            # weight of the wrapper
+            packaging_weight = 0
+            if package.ul_id:
+                packaging_weight = package.ul_id.weight
+
+            # package.pack_operations would be too easy
+            operations = self.env['stock.pack.operation'].search(
+                [('result_package_id', '=', package.id),
                  ('product_id', '!=', False),
                  ])
-            for operation in operations:
-                weight += operation.product_id.weight * operation.product_qty
 
-            if package.ul_id:
-                weight += package.ul_id.weight
-        return weight
+            # we make use get_weight with  @api.muli instead of
+            # sum([op.get_weight for op in operations])
+
+            # sum of the pack_operation
+            payload_weight = operations.get_weight()
+
+            # sum of the packages contained in this package (children)
+            child_packages_weight = package.children_ids.get_weight()
+
+            # sum and save in package
+            package.weight = (
+                payload_weight +
+                child_packages_weight +
+                packaging_weight)
+
+            total_weight += package.weight
+
+        return total_weight
 
 
 class StockPicking(models.Model):
@@ -161,7 +222,7 @@ class StockPicking(models.Model):
     def generate_labels(self, package_ids=None):
         """ Generate the labels.
 
-        A list of tracking ids can be given, in that case it will generate
+        A list of package ids can be given, in that case it will generate
         the labels only of these packages.
 
         """
