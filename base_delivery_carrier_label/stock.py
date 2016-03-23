@@ -29,7 +29,7 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
-class StockQuantOperation(models.Model):
+class StockPackOperation(models.Model):
     _inherit = 'stock.pack.operation'
 
     weight = fields.Float(
