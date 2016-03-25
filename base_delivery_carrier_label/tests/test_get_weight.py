@@ -49,35 +49,42 @@ class TestGetWeight(TransactionCase):
     def _create_product(self, vals):
         return self.env['product.product'].create(vals)
 
-    def _get_products(self, limit):
+    def _get_products(self, weights):
+        """A recordset of products without any specific uom.
+
+        It means : no uom or kg or unit
+        Params:
+            weights: recordset will be size of weights and each
+                product will get a size according of weights[i]
+        """
         kg_id = self.env.ref('product.product_uom_kgm').id
         unit_id = self.env.ref('product.product_uom_unit').id
 
-        return self.env['product.product'].search(
+        products = self.env['product.product'].search(
             [['uom_id', 'in', (False, kg_id, unit_id)]],
-            limit=limit)
+            limit=len(weights))
+        for idx, product in enumerate(products):
+            # by default there is no weight on products
+            product.weight = weights[idx]
+        return products
+
+    def _generate_picking(self, products):
+        """Create a picking from products."""
+        customer = self.env['res.partner'].search([], limit=1)
+        order = self._create_order(customer)
+        self._create_order_line(order, products)
+        order.action_button_confirm()
+        picking = order.picking_ids
+        picking.do_transfer()
+        return picking
 
     def test_get_weight(self):
         """Test quant.package.get_weight and pack.operation.get_weight."""
         # prepare some data
         weights = [2, 30, 1, 24, 39]
-        customer = self.env['res.partner'].search([], limit=1)
-        products = self._get_products(len(weights))
-
-        for idx, product in enumerate(products):
-            # by default there is no weight on products
-            product.weight = weights[idx]
-
-        order = self._create_order(customer)
-        self._create_order_line(order, products)
-
-        order.action_button_confirm()
-
-        picking = order.picking_ids
-        picking.do_transfer()
-
+        products = self._get_products(weights)
+        picking = self._generate_picking(products)
         package = self.env['stock.quant.package'].create({})
-
         operations = []
         for product in products:
             operations.append(self._create_operation(picking, {
@@ -86,7 +93,6 @@ class TestGetWeight(TransactionCase):
                 'product_uom_id': product.uom_id.id,
                 'result_package_id': package.id,
             }))
-
         # end of prepare data
 
         # test operation.get_weight()
@@ -104,23 +110,9 @@ class TestGetWeight(TransactionCase):
         """Ensure qty are taken in account."""
         # prepare some data
         weights = [2, 30, 1, 24, 39]
-        customer = self.env['res.partner'].search([], limit=1)
-        products = self._get_products(len(weights))
-
-        for idx, product in enumerate(products):
-            # by default there is no weight on products
-            product.weight = weights[idx]
-
-        order = self._create_order(customer)
-        self._create_order_line(order, products)
-
-        order.action_button_confirm()
-
-        picking = order.picking_ids
-        picking.do_transfer()
-
+        products = self._get_products(weights)
+        picking = self._generate_picking(products)
         package = self.env['stock.quant.package'].create({})
-
         operations = []
         for idx, product in enumerate(products):
             operations.append(self._create_operation(picking, {
@@ -129,7 +121,6 @@ class TestGetWeight(TransactionCase):
                 'product_uom_id': product.uom_id.id,
                 'result_package_id': package.id
             }))
-
         # end of prepare data
 
         # test operation.get_weight()
@@ -147,30 +138,14 @@ class TestGetWeight(TransactionCase):
         """Check with logistic unit."""
         # prepare some data
         weights = [2.39, 3.1, 20, 24, 39]
-        customer = self.env['res.partner'].search([], limit=1)
-        products = self._get_products(len(weights))
-
-        for idx, product in enumerate(products):
-            # by default there is no weight on products
-            product.weight = weights[idx]
-
-        order = self._create_order(customer)
-
-        self._create_order_line(order, products)
-
-        order.action_button_confirm()
-
-        picking = order.picking_ids
-        picking.do_transfer()
-
+        products = self._get_products(weights)
+        picking = self._generate_picking(products)
         uls = self._create_ul()
-
         packages = [
             self.env['stock.quant.package'].create(
                 {'ul_id': ul.id}
             ) for ul in uls
         ]
-
         operations = []
         for idx, product in enumerate(products):
             pack = packages[idx % len(packages)]
@@ -180,7 +155,6 @@ class TestGetWeight(TransactionCase):
                 'product_uom_id': product.uom_id.id,
                 'result_package_id': pack.id,
             }))
-
         # end of prepare data
 
         products_weight = sum([product.weight for product in products])
@@ -205,15 +179,11 @@ class TestGetWeight(TransactionCase):
         """Check with differents uom."""
         # prepare some data
         weights = [0.3, 14.01, 0.59]
-        customer = self.env['res.partner'].search([], limit=1)
-        products = []
-
+        package = self.env['stock.quant.package'].create({})
         tonne_id = self.env.ref('product.product_uom_ton')
         kg_id = self.env.ref('product.product_uom_kgm')
         gr_id = self.env.ref('product.product_uom_gram')
-
         products = []
-
         products.append(self._create_product(
             {
                 'name': 'Expected Odoo dev documentation',
@@ -240,24 +210,12 @@ class TestGetWeight(TransactionCase):
                 'weight': weights[2],
             })
         )
-
         products_weight = (
             weights[0] * 1000 +  # tonne
             weights[1] * 1 +  # kg
             weights[2] * 0.01  # g
         )
-
-        order = self._create_order(customer)
-
-        self._create_order_line(order, products)
-
-        order.action_button_confirm()
-
-        picking = order.picking_ids
-        picking.do_transfer()
-
-        package = self.env['stock.quant.package'].create({})
-
+        picking = self._generate_picking(products)
         operations = []
         for product in products:
             operations.append(self._create_operation(picking, {
@@ -266,7 +224,6 @@ class TestGetWeight(TransactionCase):
                 'product_uom_id': product.uom_id.id,
                 'result_package_id': package.id,
             }))
-
         # end of prepare data
 
         # because uom conversion is not implemented
