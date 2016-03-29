@@ -21,8 +21,57 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp import models, fields, api, exceptions, _
+from openerp import models, fields, api, _
+from openerp.exceptions import Warning as UserError
 import openerp.addons.decimal_precision as dp
+import logging
+
+_logger = logging.getLogger(__name__)
+
+
+class StockPackOperation(models.Model):
+    _inherit = 'stock.pack.operation'
+
+    weight = fields.Float(
+        digits=dp.get_precision('Stock Weight'),
+        help="Weight of the pack_operation"
+    )
+
+    @api.multi
+    def get_weight(self):
+        """Calc and save weight of pack.operations.
+
+        Warning: Type conversion not implemented
+                it will return False if at least one uom or uos not in kg
+        return:
+            the sum of the weight of [self]
+        """
+        total_weight = 0
+        kg = self.env.ref('product.product_uom_kgm').id
+        units = self.env.ref('product.product_uom_unit').id
+        allowed = (False, kg, units)
+        cant_calc_total = False
+
+        for operation in self:
+            product = operation.product_id
+
+            # if not defined we assume it's in kg
+            if not (
+                product.uom_id.id in allowed or
+                product.uos_id.id in allowed
+            ):
+                _logger.warning(
+                    'Type conversion not implemented for product %s' %
+                    product.id)
+                cant_calc_total = True
+
+            operation.weight = (product.weight * operation.product_qty)
+
+            total_weight += operation.weight
+
+        if cant_calc_total:
+            return False
+        return total_weight
 
 
 class StockQuantPackage(models.Model):
@@ -44,6 +93,58 @@ class StockQuantPackage(models.Model):
             if pack.weight:
                 res[pack.id] += ' %s kg' % pack.weight
         return res
+
+    @api.multi
+    def get_weight(self):
+        """Compute the weight of a pack.
+
+        Get all the children packages and sum the weight of all
+        the product and the weight of the Logistic Units of the packages.
+
+        So if I put in PACK65:
+         * 1 product A of 2kg
+         * 2 products B of 4kg
+        The box of PACK65 weights 0.5kg
+        And I put in PACK66:
+         * 1 product A of 2kg
+        The box of PACK66 weights 0.5kg
+
+        Then I put PACK65 and PACK66 in the PACK67 having a box that
+        weights 0.5kg, the weight of PACK67 should be: 13.5kg
+
+        """
+        total_weight = 0
+
+        for package in self:
+            # weight of the wrapper
+            packaging_weight = 0
+            if package.ul_id:
+                packaging_weight = package.ul_id.weight
+
+            # package.pack_operations would be too easy
+            operations = self.env['stock.pack.operation'].search(
+                [('result_package_id', '=', package.id),
+                 ('product_id', '!=', False),
+                 ])
+
+            # we make use get_weight with  @api.muli instead of
+            # sum([op.get_weight for op in operations])
+
+            # sum of the pack_operation
+            payload_weight = operations.get_weight()
+
+            # sum of the packages contained in this package (children)
+            child_packages_weight = package.children_ids.get_weight()
+
+            # sum and save in package
+            package.weight = (
+                payload_weight +
+                child_packages_weight +
+                packaging_weight)
+
+            total_weight += package.weight
+
+        return total_weight
 
 
 class StockPicking(models.Model):
@@ -82,8 +183,8 @@ class StockPicking(models.Model):
         :return: (file_binary, file_type)
 
         """
-        raise exceptions.Warning(_('No label is configured for the '
-                                   'selected delivery method.'))
+        raise UserError(_('No label is configured for the '
+                          'selected delivery method.'))
 
     @api.multi
     def generate_shipping_labels(self, package_ids=None):
@@ -194,7 +295,7 @@ class StockPicking(models.Model):
                 # triggered the onchange:
                 # https://github.com/odoo/odoo/issues/2693#issuecomment-56825399
                 # Ideally we should add the missing option
-                raise exceptions.Warning(
+                raise UserError(
                     _("You should not remove a mandatory option."
                       "Please cancel the edit or "
                       "add back the option: %s.") % available_option.name
@@ -278,6 +379,32 @@ class StockPicking(models.Model):
         partner = self.company_id.partner_id
         address_id = partner.address_get(adr_pref=['delivery'])['delivery']
         return self.env['res.partner'].browse(address_id)
+
+    @api.multi
+    def set_pack_weight(self):
+        # I cannot loop on the "quant_ids" of packages, because, at this step,
+        # this field doesn't have a value yet
+        self.ensure_one()
+        for packop in self.pack_operation_ids:
+            package = packop.result_package_id or packop.package_id
+            if package:
+                weight = package.get_weight()
+                package.write({'weight': weight})
+        return
+
+    @api.multi
+    def _check_existing_shipping_label(self):
+        """ Check that labels don't already exist for this picking """
+        self.ensure_one()
+        labels = self.env['shipping.label'].search([
+            ('res_id', '=', self.id),
+            ('res_model', '=', 'stock.picking')])
+        if labels:
+            raise UserError(
+                _('Some labels already exist for the picking %s.\n'
+                  'Please delete the existing labels in the '
+                  'attachments of this picking and try again')
+                % self.name)
 
 
 class ShippingLabel(models.Model):
