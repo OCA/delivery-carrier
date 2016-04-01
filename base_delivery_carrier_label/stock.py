@@ -222,7 +222,7 @@ class StockPicking(models.Model):
     def generate_labels(self, package_ids=None):
         """ Generate the labels.
 
-        A list of tracking ids can be given, in that case it will generate
+        A list of package ids can be given, in that case it will generate
         the labels only of these packages.
 
         """
