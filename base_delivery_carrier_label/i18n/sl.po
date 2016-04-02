@@ -3,13 +3,15 @@
 # * base_delivery_carrier_label
 # 
 # Translators:
-# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
+# Hotellook, 2014
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
+# Vital Khilko <dojlid@mova.org>, 2003,2014,2016
 msgid ""
 msgstr ""
 "Project-Id-Version: carrier-delivery (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-11 09:37+0000\n"
-"PO-Revision-Date: 2015-06-22 09:21+0000\n"
+"POT-Creation-Date: 2016-03-29 11:09+0000\n"
+"PO-Revision-Date: 2016-03-30 05:23+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-carrier-delivery-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -179,7 +181,7 @@ msgid "Name"
 msgstr "Naziv"
 
 #. module: base_delivery_carrier_label
-#: code:addons/base_delivery_carrier_label/stock.py:85
+#: code:addons/base_delivery_carrier_label/stock.py:186
 #, python-format
 msgid "No label is configured for the selected delivery method."
 msgstr "Za izbrano dostavno metodo ni nastavljene etikete."
@@ -205,6 +207,11 @@ msgstr "Opcije"
 #: field:shipping.label,package_id:0
 msgid "Pack"
 msgstr "Paket"
+
+#. module: base_delivery_carrier_label
+#: model:ir.model,name:base_delivery_carrier_label.model_stock_pack_operation
+msgid "Packing Operation"
+msgstr "Pakirna operacija"
 
 #. module: base_delivery_carrier_label
 #: field:stock.quant.package,parcel_tracking:0
@@ -237,6 +244,14 @@ msgid "Shipping Label"
 msgstr "Etiketa za odpošiljanje"
 
 #. module: base_delivery_carrier_label
+#: code:addons/base_delivery_carrier_label/stock.py:404
+#, python-format
+msgid ""
+"Some labels already exist for the picking %s.\n"
+"Please delete the existing labels in the attachments of this picking and try again"
+msgstr "Za zbirnik %s že obstaja nekaj etiket.\nV priponkah izbrišite obstoječe etikete za ta zbirnik in ponovno poskusite."
+
+#. module: base_delivery_carrier_label
 #: help:stock.quant.package,weight:0
 msgid ""
 "Total weight of the package in kg, including the weight of the logistic "
@@ -249,9 +264,14 @@ msgid "Type"
 msgstr "Tip"
 
 #. module: base_delivery_carrier_label
-#: field:stock.quant.package,weight:0
+#: field:stock.pack.operation,weight:0 field:stock.quant.package,weight:0
 msgid "Weight"
 msgstr "Masa"
+
+#. module: base_delivery_carrier_label
+#: help:stock.pack.operation,weight:0
+msgid "Weight of the pack_operation"
+msgstr "Masa pakirne operacije"
 
 #. module: base_delivery_carrier_label
 #: help:delivery.carrier.option,readonly_flag:0
@@ -261,7 +281,7 @@ msgid ""
 msgstr "Kadar je pravilno, uporabniku pomaga spreminjati določene opcije polj (če je atribut določen v pogledu)"
 
 #. module: base_delivery_carrier_label
-#: code:addons/base_delivery_carrier_label/stock.py:198
+#: code:addons/base_delivery_carrier_label/stock.py:299
 #, python-format
 msgid ""
 "You should not remove a mandatory option.Please cancel the edit or add back "
