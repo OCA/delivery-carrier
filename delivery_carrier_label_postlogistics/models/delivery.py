@@ -35,7 +35,8 @@ class PostlogisticsLicense(models.Model):
                          required=True)
     company_id = fields.Many2one(comodel_name='res.company',
                                  string='Company',
-                                 required=True)
+                                 required=True,
+                                 default=lambda self: self.env.user.company_id)
     sequence = fields.Integer(
         string='Sequence',
         help="Gives the sequence on company to define priority on license "
