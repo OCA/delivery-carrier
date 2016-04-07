@@ -1,102 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
-  <data>
+<odoo>
 
-    <record id="view_postlogistics_config_settings" model="ir.ui.view">
-      <field name="name">postlogistics settings</field>
-      <field name="model">postlogistics.config.settings</field>
-      <field name="arch" type="xml">
-        <form string="Configure Postlogistics" version="7.0" class="oe_form_configuration">
-          <header>
-            <button string="Apply" type="object" name="execute" class="oe_highlight"/>
-            or
-            <button string="Cancel" type="object" name="cancel" class="oe_link"/>
-          </header>
+  <record id="view_postlogistics_config_settings" model="ir.ui.view">
+    <field name="name">postlogistics settings</field>
+    <field name="model">postlogistics.config.settings</field>
+    <field name="arch" type="xml">
+      <form string="Configure Postlogistics" class="oe_form_configuration">
+        <header>
+          <button string="Apply" type="object" name="execute" class="oe_highlight"/>
+          or
+          <button string="Cancel" type="object" name="cancel" class="oe_link"/>
+        </header>
 
-          <group groups="base.group_multi_company">
+        <group groups="base.group_multi_company">
+          <div>
             <div>
-              <div>
-                <label for="company_id" string="Select Company"/>
-                <field name="company_id"
-                    widget="selection"
-                    class="oe_inline"/>
-              </div>
+              <label for="company_id" string="Select Company"/>
+              <field name="company_id"
+                  widget="selection"
+                  class="oe_inline"/>
             </div>
-          </group>
-          <separator string="Web Service Authentication"/>
-          <group>
+          </div>
+        </group>
+        <separator string="Web Service Authentication"/>
+        <group>
+          <div>
             <div>
-              <div>
-                <label for="username"/>
-                <field name="username" class="oe_inline"/>
-              </div>
-              <div>
-                <label for="password"/>
-                <field name="password" class="oe_inline"/>
-              </div>
+              <label for="username"/>
+              <field name="username" class="oe_inline"/>
             </div>
-          </group>
-          <separator string="Licenses"/>
-          <group>
-            <div name="configure_licenses_button">
-              <label string="Licenses"/>
-              <button name='%(delivery_carrier_label_postlogistics.action_postlogistics_licenses)d' type="action"
-                string="Configure licenses" class="oe_link"/>
-            </div>
-          </group>
-          <separator string="Sender Informations"/>
-          <group>
             <div>
-              <div>
-                <label for="logo"/>
-                <field name="logo" widget="image"/>
-              </div>
-              <div>
-                <label for="office"/>
-                <field name="office" class="oe_inline"/>
-              </div>
+              <label for="password"/>
+              <field name="password" class="oe_inline"/>
             </div>
-          </group>
-          <separator string="Default configs"/>
-          <group>
+          </div>
+        </group>
+        <separator string="Licenses"/>
+        <group>
+          <div name="configure_licenses_button">
+            <label string="Licenses"/>
+            <button name='%(delivery_carrier_label_postlogistics.action_postlogistics_licenses)d' type="action"
+              string="Configure licenses" class="oe_link"/>
+          </div>
+        </group>
+        <separator string="Sender Informations"/>
+        <group>
+          <div>
             <div>
-              <div>
-                <label for="default_label_layout"/>
-                <field name="default_label_layout" class="oe_inline"/>
-              </div>
-              <div>
-                <label for="default_output_format"/>
-                <field name="default_output_format" class="oe_inline"/>
-              </div>
-              <div>
-                <label for="default_resolution"/>
-                <field name="default_resolution" class="oe_inline"/>
-              </div>
+              <label for="logo"/>
+              <field name="logo" widget="image"/>
             </div>
-          </group>
-          <group>
             <div>
-              <div>
-                <button string="Update PostLogistics Services" type="object" name="update_postlogistics_options" class="oe_highlight"/>
-                <button string="Assign PostLogistics Licenses to service groups" type="object" name="assign_licenses_to_service_groups" class="oe_highlight"/>
-              </div>
+              <label for="office"/>
+              <field name="office" class="oe_inline"/>
             </div>
-          </group>
-        </form>
-      </field>
-    </record>
+          </div>
+        </group>
+        <separator string="Default configs"/>
+        <group>
+          <div>
+            <div>
+              <label for="default_label_layout"/>
+              <field name="default_label_layout" class="oe_inline"/>
+            </div>
+            <div>
+              <label for="default_output_format"/>
+              <field name="default_output_format" class="oe_inline"/>
+            </div>
+            <div>
+              <label for="default_resolution"/>
+              <field name="default_resolution" class="oe_inline"/>
+            </div>
+          </div>
+        </group>
+        <group>
+          <div>
+            <div>
+              <button string="Update PostLogistics Services" type="object" name="update_postlogistics_options" class="oe_highlight"/>
+              <button string="Assign PostLogistics Licenses to service groups" type="object" name="assign_licenses_to_service_groups" class="oe_highlight"/>
+            </div>
+          </div>
+        </group>
+      </form>
+    </field>
+  </record>
 
-    <record id="action_postlogistics_config" model="ir.actions.act_window">
-      <field name="name">Configure Postlogistics</field>
-      <field name="type">ir.actions.act_window</field>
-      <field name="res_model">postlogistics.config.settings</field>
-      <field name="view_mode">form</field>
-      <field name="target">inline</field>
-    </record>
+  <record id="action_postlogistics_config" model="ir.actions.act_window">
+    <field name="name">Configure Postlogistics</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">postlogistics.config.settings</field>
+    <field name="view_mode">form</field>
+    <field name="target">inline</field>
+  </record>
 
-    <menuitem id="menu_postlogistics_config" name="Postlogistics"
-              parent="base_delivery_carrier_label.menu_carriers_config"
-              sequence="20" action="action_postlogistics_config"/>
+  <menuitem id="menu_postlogistics_config" name="Postlogistics"
+            parent="base_delivery_carrier_label.menu_carriers_config"
+            sequence="20" action="action_postlogistics_config"/>
 
-  </data>
-</openerp>
+</odoo>
