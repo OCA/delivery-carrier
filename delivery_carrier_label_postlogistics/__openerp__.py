@@ -6,7 +6,7 @@
  'author': "Camptocamp,Odoo Community Association (OCA)",
  'maintainer': 'Camptocamp',
  'license': 'AGPL-3',
- 'category': 'version',
+ 'category': 'Delivery',
  'complexity': 'normal',
  'depends': ['base_delivery_carrier_label'],
  'website': 'http://www.camptocamp.com/',
