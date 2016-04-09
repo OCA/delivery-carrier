@@ -1,126 +1,33 @@
-# Translation of OpenERP Server.
+# Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* base_delivery_carrier_files
-#
+# * base_delivery_carrier_files
+# 
+# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenERP Server 6.1rc1\n"
+"Project-Id-Version: carrier-delivery (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-16 09:08+0000\n"
-"PO-Revision-Date: 2014-05-28 10:54+0000\n"
-"Last-Translator: Alberto Garcia (Factor Libre) "
-"<alberto.garcia@factorlibre.com>\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2016-04-09 00:47+0000\n"
+"PO-Revision-Date: 2016-04-08 13:38+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"Language-Team: Spanish (http://www.transifex.com/oca/OCA-carrier-delivery-8-0/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-06-27 07:09+0000\n"
-"X-Generator: Launchpad (build 17077)\n"
+"Content-Transfer-Encoding: \n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: base_delivery_carrier_files
-#: code:addons/base_delivery_carrier_files/wizard/generate_carrier_files.py:60
-#, python-format
-msgid "No delivery orders selected"
-msgstr "No se han seleccionado albaranes"
-
-#. module: base_delivery_carrier_files
-#: view:delivery.carrier.file.generate:0
-msgid "Generate the carrier files for the selected delivery orders."
+#: view:stock.picking:base_delivery_carrier_files.view_picking_out_form_carrier_file
+msgid "Additional Info"
 msgstr ""
-"Generar el fichero de transportista para los albaranes seleccionados."
-
-#. module: base_delivery_carrier_files
-#: help:stock.picking,carrier_file_generated:0
-msgid "The file for the delivery carrier has been generated."
-msgstr "El fichero para el transportista ha sido generado."
-
-#. module: base_delivery_carrier_files
-#: view:stock.picking:0
-msgid "Carrier File To Generate"
-msgstr "Fichero de transportista a generar"
-
-#. module: base_delivery_carrier_files
-#: model:ir.model,name:base_delivery_carrier_files.model_delivery_carrier_file
-msgid "delivery.carrier.file"
-msgstr "delivery.carrier.file"
-
-#. module: base_delivery_carrier_files
-#: model:ir.model,name:base_delivery_carrier_files.model_stock_picking
-msgid "Picking List"
-msgstr "Albarán"
-
-#. module: base_delivery_carrier_files
-#: view:delivery.carrier.file.generate:0
-msgid "Carrier Files"
-msgstr "Ficheros del transportista"
-
-#. module: base_delivery_carrier_files
-#: help:delivery.carrier.file,auto_export:0
-msgid ""
-"The file will be automatically generated when a delivery order is processed. "
-"If activated, each delivery order will be exported in a separate file."
-msgstr ""
-"El archivo será generado automáticamente cuando un albarán sea procesado. Si "
-"está activado, cada albarán generará un fichero separado."
-
-#. module: base_delivery_carrier_files
-#: model:ir.actions.act_window,name:base_delivery_carrier_files.action_delivery_carrier_file_generate
-msgid "Generate Carrier Files"
-msgstr "Generar los ficheros del transportista"
-
-#. module: base_delivery_carrier_files
-#: model:ir.actions.act_window,help:base_delivery_carrier_files.action_delivery_carrier_file_form
-msgid "Generates automatically files asked by carriers for outgoing pickings"
-msgstr ""
-"Genera ficheros automáticos solicitados por transportistas para albaranes de "
-"salida"
-
-#. module: base_delivery_carrier_files
-#: field:delivery.carrier.file,type:0
-msgid "Type"
-msgstr "Tipo"
 
 #. module: base_delivery_carrier_files
 #: help:delivery.carrier.file,group_pickings:0
 msgid ""
 "All the pickings will be grouped in the same file. Has no effect when the "
 "files are automatically exported at the delivery order process."
-msgstr ""
-"Todos los albaranes serán agrupados en el mismo fichero. No tiene efecto "
-"cuando los ficheros son generados automáticamente en el procesamiento de un "
-"albarán."
-
-#. module: base_delivery_carrier_files
-#: code:addons/base_delivery_carrier_files/carrier_file.py:73
-#: code:addons/base_delivery_carrier_files/wizard/generate_carrier_files.py:60
-#, python-format
-msgid "Error"
-msgstr "Error"
-
-#. module: base_delivery_carrier_files
-#: field:delivery.carrier.file,auto_export:0
-msgid "Export at delivery order process"
-msgstr "Exportar al procesar el albarán"
-
-#. module: base_delivery_carrier_files
-#: field:delivery.carrier.file,group_pickings:0
-msgid "Group all pickings in one file"
-msgstr "Agrupar todos los albaranes en un fichero"
-
-#. module: base_delivery_carrier_files
-#: field:delivery.carrier.file,name:0
-msgid "Name"
-msgstr "Nombre"
-
-#. module: base_delivery_carrier_files
-#: field:delivery.carrier.file,export_path:0
-msgid "Export Path"
-msgstr "Ruta de exportación"
-
-#. module: base_delivery_carrier_files
-#: view:stock.picking:0
-msgid "Delivery orders to invoice"
-msgstr "Albaranes a facturar"
+msgstr "Todos los albaranes serán agrupados en el mismo fichero. No tiene efecto cuando los ficheros son generados automáticamente en el procesamiento de un albarán."
 
 #. module: base_delivery_carrier_files
 #: model:ir.model,name:base_delivery_carrier_files.model_delivery_carrier
@@ -128,29 +35,13 @@ msgid "Carrier"
 msgstr "Transportista"
 
 #. module: base_delivery_carrier_files
-#: sql_constraint:stock.picking:0
-msgid "Reference must be unique per Company!"
-msgstr "La referencia debe ser única por compañia"
-
-#. module: base_delivery_carrier_files
-#: view:stock.picking:0
-msgid "Additional info"
-msgstr "Información adicional"
-
-#. module: base_delivery_carrier_files
-#: model:ir.model,name:base_delivery_carrier_files.model_delivery_carrier_file_generate
-msgid "delivery.carrier.file.generate"
-msgstr "delivery.carrier.file.generate"
-
-#. module: base_delivery_carrier_files
-#: view:delivery.carrier.file:0
-msgid "Write options"
-msgstr "Opciones de escritura"
-
-#. module: base_delivery_carrier_files
-#: view:delivery.carrier.file.generate:0
-msgid "Generate Files"
-msgstr "Generar Ficheros"
+#: field:delivery.carrier,carrier_file_id:0
+#: view:delivery.carrier.file:base_delivery_carrier_files.view_delivery_carrier_file_form
+#: view:delivery.carrier.file:base_delivery_carrier_files.view_delivery_carrier_file_tree
+#: model:ir.actions.act_window,name:base_delivery_carrier_files.action_delivery_carrier_file_form
+#: model:ir.ui.menu,name:base_delivery_carrier_files.menu_action_delivery_carrier_file_form
+msgid "Carrier File"
+msgstr "Fichero del transportista"
 
 #. module: base_delivery_carrier_files
 #: field:stock.picking,carrier_file_generated:0
@@ -158,25 +49,193 @@ msgid "Carrier File Generated"
 msgstr "Fichero del transportista generado"
 
 #. module: base_delivery_carrier_files
+#: view:stock.picking:base_delivery_carrier_files.view_picking_out_search_carrier_file
+msgid "Carrier File To Generate"
+msgstr "Fichero de transportista a generar"
+
+#. module: base_delivery_carrier_files
+#: view:delivery.carrier.file.generate:base_delivery_carrier_files.view_delivery_carrier_file_generate
+msgid "Carrier Files"
+msgstr "Ficheros del transportista"
+
+#. module: base_delivery_carrier_files
+#: view:delivery.carrier.file.generate:base_delivery_carrier_files.view_delivery_carrier_file_generate
+msgid "Close"
+msgstr ""
+
+#. module: base_delivery_carrier_files
+#: field:delivery.carrier.file,create_uid:0
+#: field:delivery.carrier.file.generate,create_uid:0
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: base_delivery_carrier_files
+#: field:delivery.carrier.file,create_date:0
+#: field:delivery.carrier.file.generate,create_date:0
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: base_delivery_carrier_files
+#: model:stock.location,name:base_delivery_carrier_files.location_delivery_counter
+msgid "Delivery Counter"
+msgstr ""
+
+#. module: base_delivery_carrier_files
+#: view:delivery.carrier.file.generate:base_delivery_carrier_files.view_delivery_carrier_file_generate
+#: field:delivery.carrier.file.generate,pickings:0
+msgid "Delivery Orders"
+msgstr "Albaranes de salida"
+
+#. module: base_delivery_carrier_files
+#: view:stock.picking:base_delivery_carrier_files.view_picking_out_search_carrier_file
+msgid "Delivery orders to invoice"
+msgstr "Albaranes a facturar"
+
+#. module: base_delivery_carrier_files
+#: field:delivery.carrier.file,export_path:0
+msgid "Export Path"
+msgstr "Ruta de exportación"
+
+#. module: base_delivery_carrier_files
+#: field:delivery.carrier.file,auto_export:0
+msgid "Export at delivery order process"
+msgstr "Exportar al procesar el albarán"
+
+#. module: base_delivery_carrier_files
+#: code:addons/base_delivery_carrier_files/carrier_file.py:62
+#, python-format
+msgid "Export path is not defined for carrier file %s"
+msgstr ""
+
+#. module: base_delivery_carrier_files
+#: model:ir.actions.act_window,name:base_delivery_carrier_files.action_delivery_carrier_file_generate
+msgid "Generate Carrier Files"
+msgstr "Generar los ficheros del transportista"
+
+#. module: base_delivery_carrier_files
+#: view:delivery.carrier.file.generate:base_delivery_carrier_files.view_delivery_carrier_file_generate
+msgid "Generate Files"
+msgstr "Generar Ficheros"
+
+#. module: base_delivery_carrier_files
+#: view:delivery.carrier.file.generate:base_delivery_carrier_files.view_delivery_carrier_file_generate
+msgid "Generate the carrier files for the selected delivery orders."
+msgstr "Generar el fichero de transportista para los albaranes seleccionados."
+
+#. module: base_delivery_carrier_files
+#: field:delivery.carrier.file,group_pickings:0
+msgid "Group all pickings in one file"
+msgstr "Agrupar todos los albaranes en un fichero"
+
+#. module: base_delivery_carrier_files
+#: field:delivery.carrier.file,id:0 field:delivery.carrier.file.generate,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: base_delivery_carrier_files
+#: model:product.template,name:base_delivery_carrier_files.product_icecream_product_template
+msgid "Ice Cream"
+msgstr ""
+
+#. module: base_delivery_carrier_files
+#: model:product.template,description:base_delivery_carrier_files.product_icecream_product_template
+msgid ""
+"Ice cream can be mass-produced and thus is widely available in developed "
+"parts of the world. Ice cream can be purchased in large cartons (vats and "
+"squrounds) from supermarkets and grocery stores, in smaller quantities from "
+"ice cream shops, convenience stores, and milk bars, and in individual "
+"servings from small carts or vans at public events."
+msgstr ""
+
+#. module: base_delivery_carrier_files
+#: help:delivery.carrier.file.generate,recreate:0
+msgid ""
+"If this option is used, new files will be generated for selected picking even if they already had one.\n"
+"By default, delivery orders with existing file will be skipped."
+msgstr ""
+
+#. module: base_delivery_carrier_files
+#: field:delivery.carrier.file,write_uid:0
+#: field:delivery.carrier.file.generate,write_uid:0
+msgid "Last Updated by"
+msgstr "Última Actualización por"
+
+#. module: base_delivery_carrier_files
+#: field:delivery.carrier.file,write_date:0
+#: field:delivery.carrier.file.generate,write_date:0
+msgid "Last Updated on"
+msgstr "Última Actualización en"
+
+#. module: base_delivery_carrier_files
+#: field:delivery.carrier.file,name:0
+msgid "Name"
+msgstr "Nombre"
+
+#. module: base_delivery_carrier_files
+#: code:addons/base_delivery_carrier_files/wizard/generate_carrier_files.py:44
+#, python-format
+msgid "No delivery orders selected"
+msgstr "No se han seleccionado albaranes"
+
+#. module: base_delivery_carrier_files
+#: model:stock.picking.type,name:base_delivery_carrier_files.outgoing_shipment_type_carrier_file
+#: model:stock.picking.type,name:base_delivery_carrier_files.outgoing_shipment_type_carrier_file_manual
+msgid "Outgoing Ice Cream"
+msgstr ""
+
+#. module: base_delivery_carrier_files
+#: model:ir.model,name:base_delivery_carrier_files.model_stock_picking
+msgid "Picking List"
+msgstr "Albarán"
+
+#. module: base_delivery_carrier_files
+#: field:delivery.carrier.file.generate,recreate:0
+msgid "Recreate files"
+msgstr ""
+
+#. module: base_delivery_carrier_files
+#: model:stock.location,name:base_delivery_carrier_files.location_refrigerator
+msgid "Refrigerator"
+msgstr ""
+
+#. module: base_delivery_carrier_files
+#: model:ir.model,name:base_delivery_carrier_files.model_stock_move
+msgid "Stock Move"
+msgstr ""
+
+#. module: base_delivery_carrier_files
+#: help:stock.picking,carrier_file_generated:0
+msgid "The file for the delivery carrier has been generated."
+msgstr "El fichero para el transportista ha sido generado."
+
+#. module: base_delivery_carrier_files
+#: help:delivery.carrier.file,auto_export:0
+msgid ""
+"The file will be automatically generated when a delivery order is processed."
+" If activated, each delivery order will be exported in a separate file."
+msgstr "El archivo será generado automáticamente cuando un albarán sea procesado. Si está activado, cada albarán generará un fichero separado."
+
+#. module: base_delivery_carrier_files
+#: field:delivery.carrier.file,type:0
+msgid "Type"
+msgstr "Tipo"
+
+#. module: base_delivery_carrier_files
 #: field:delivery.carrier.file,write_mode:0
 msgid "Write on"
 msgstr "Escrito en"
 
 #. module: base_delivery_carrier_files
-#: view:delivery.carrier.file.generate:0
-msgid "Cancel"
-msgstr "Cancelar"
+#: view:delivery.carrier.file:base_delivery_carrier_files.view_delivery_carrier_file_form
+msgid "Write options"
+msgstr "Opciones de escritura"
 
 #. module: base_delivery_carrier_files
-#: field:delivery.carrier,carrier_file_id:0
-#: view:delivery.carrier.file:0
-#: model:ir.actions.act_window,name:base_delivery_carrier_files.action_delivery_carrier_file_form
-#: model:ir.ui.menu,name:base_delivery_carrier_files.menu_action_delivery_carrier_file_form
-msgid "Carrier File"
-msgstr "Fichero del transportista"
+#: model:stock.location,name:base_delivery_carrier_files.location_opening
+msgid "opening"
+msgstr ""
 
 #. module: base_delivery_carrier_files
-#: view:delivery.carrier.file.generate:0
-#: field:delivery.carrier.file.generate,picking_ids:0
-msgid "Delivery Orders"
-msgstr "Albaranes de salida"
+#: view:delivery.carrier.file.generate:base_delivery_carrier_files.view_delivery_carrier_file_generate
+msgid "or"
+msgstr ""
