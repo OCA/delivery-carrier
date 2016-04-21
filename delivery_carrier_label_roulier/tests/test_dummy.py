@@ -3,7 +3,6 @@
 from openerp.tests.common import TransactionCase
 from openerp.exceptions import Warning as UserError
 
-
 class TestDummy(TransactionCase):
     """Test dumy functions."""
 
