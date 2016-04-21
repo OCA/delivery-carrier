@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from openerp.tests.common import TransactionCase
+from openerp.exceptions import Warning as UserError
 
-#TODO
-#definir ce qu'on fait si on a pas mis de package.
-#Rendre ça obligatoire ?
 
 class TestDummy(TransactionCase):
     """Test dumy functions."""
@@ -121,15 +119,20 @@ class TestDummy(TransactionCase):
             dummy_picking._get_account(),
             other_picking._get_account())
 
-    def test_generate_shipping_labels_one_package_implicit(self):
-        """It should create 1 label if there is no packages."""
+    def test_generate_shipping_labels_no_package(self):
+        """It should faily because it there is no package."""
         products = self._get_products([1, 2, 3])
         picking = self._generate_picking(products)
 
-        labels = picking.generate_shipping_labels()
-        # dummy create one label per picking
-        print "labels: ", labels
+        try:
+            labels = picking.generate_shipping_labels()
+        except UserError:
+            self.assertTrue(True)
+            return
+        # when automatic package creation will be there
+        # test will be:
         self.assertEqual(len(labels), 1)
+        return True
 
     def test_generate_shipping_labels_one_package_explicit(self):
         """It should create 1 label if there is 1 packages."""

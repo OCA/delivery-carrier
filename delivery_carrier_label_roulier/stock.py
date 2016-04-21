@@ -9,7 +9,8 @@
 ##############################################################################
 from openerp import models, fields, api
 from openerp.tools.translate import _
-from openerp.exceptions import Warning
+from openerp.exceptions import Warning as UserError
+
 
 from roulier import roulier
 from datetime import datetime, timedelta
@@ -156,6 +157,10 @@ class StockPicking(models.Model):
         else:
             packages = self._get_packages_from_picking()
 
+        if not packages:
+            raise UserError(_('No package found for this picking'))
+            # It's not our responsibility to create the packages
+
         labels = [
             self._call_roulier_api(package)
             for package in packages
@@ -204,7 +209,7 @@ class StockPicking(models.Model):
 
         # minimum error handling
         if ret.get('status', '') == 'error':
-            raise Warning(_(ret.get('message', 'WebService error')))
+            raise UserError(_(ret.get('message', 'WebService error')))
 
         # give result to someonelese
         return self._after_call(package_id, ret)
