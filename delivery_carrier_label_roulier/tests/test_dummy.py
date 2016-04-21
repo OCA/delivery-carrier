@@ -3,6 +3,7 @@
 from openerp.tests.common import TransactionCase
 from openerp.exceptions import Warning as UserError
 
+
 class TestDummy(TransactionCase):
     """Test dumy functions."""
 
@@ -54,8 +55,6 @@ class TestDummy(TransactionCase):
 
     def _generate_picking(self, products, is_dummy=True):
         """Create a picking from products."""
-        dummy_product = self.env.ref(
-            'delivery_carrier_label_roulier.product_product_dummy').id
         dummy_carrier = self.env.ref(
             'delivery_carrier_label_roulier.delivery_carrier_dummy').id
         carrier = False

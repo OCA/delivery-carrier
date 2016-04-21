@@ -177,7 +177,7 @@ class StockPicking(models.Model):
         # code commun à tous
         account = self._get_account()
         shipping_date = self._get_shipping_date(package_id)
-        option = self._get_options(package_id)
+        # option = self._get_options(package_id)
         weight = package_id.get_weight()
 
         sender = self._get_sender()
@@ -233,10 +233,9 @@ class StockPicking(models.Model):
                 if partner._fields[elm].type != fields.Boolean.type:
                     if partner[elm]:
                         address[elm] = partner[elm]
-                    else:
-                        # it's a None
-                        False
-                else:  # it's a boolean
+                    # else:
+                    # it's a None: nothing to do
+                else:  # it's a boolean: keep the value
                     address[elm] = partner[elm]
 
         # get_split_adress from partner_helper module
