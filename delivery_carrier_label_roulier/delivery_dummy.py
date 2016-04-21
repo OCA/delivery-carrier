@@ -9,6 +9,7 @@
 
 from openerp import models, api
 
+
 class DeliveryCarrier(models.Model):
     _inherit = 'delivery.carrier'
 
