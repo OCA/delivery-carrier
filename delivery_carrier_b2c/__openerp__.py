@@ -18,7 +18,6 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-
 {
     'name': 'Delivery Carrier Business To Customer',
     'version': '8.0.0.2.0',
@@ -29,24 +28,6 @@
         'base_delivery_carrier_label',
         'partner_helper',
     ],
-    'description': """
-Delivery Carrier Business To Customer
-=====================================
-
-Description
------------
-* Add specific fields to partner for delivery purpose
-
-
-Contributors
-------------
-* Chafique DELLI <chafique.delli@akretion.com>
-* David BEAL <david.beal@akretion.com>
-
-----
-
-
-    """,
     'website': 'http://www.akretion.com/',
     'data': [
         'partner_view.xml',

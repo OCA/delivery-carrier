@@ -4,12 +4,16 @@
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2014
+# Hotellook, 2014
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
+# Oihane Crucelaegui <oihanecruce@gmail.com>, 2015
+# Rudolf Schnapka <rs@techno-flex.de>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: carrier-delivery (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-11 09:37+0000\n"
-"PO-Revision-Date: 2015-06-16 16:33+0000\n"
+"POT-Creation-Date: 2016-03-29 11:09+0000\n"
+"PO-Revision-Date: 2016-03-29 11:09+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-carrier-delivery-8-0/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -21,12 +25,12 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: field:carrier.account,account:0
 msgid "Account Number"
-msgstr ""
+msgstr "Kontonummer"
 
 #. module: base_delivery_carrier_label
 #: field:carrier.account,password:0
 msgid "Account Password"
-msgstr ""
+msgstr "Kontopasswort"
 
 #. module: base_delivery_carrier_label
 #: help:delivery.carrier.template.option,description:0
@@ -36,24 +40,24 @@ msgstr "Erlaubt eine vollständigere Beschreibung, als das Titelfeld"
 #. module: base_delivery_carrier_label
 #: field:delivery.carrier.option,by_default:0
 msgid "Applied by Default"
-msgstr ""
+msgstr "Per Vorgabe angewendet"
 
 #. module: base_delivery_carrier_label
 #: field:shipping.label,attachment_id:0
 msgid "Attachement"
-msgstr ""
+msgstr "Anhang"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_carrier_account
 msgid "Base account datas"
-msgstr ""
+msgstr "Konto-Basisdaten"
 
 #. module: base_delivery_carrier_label
 #: help:delivery.carrier.option,by_default:0
 msgid ""
 "By check, user can choose to apply this option to each Delivery Order\n"
 " using this delivery method"
-msgstr ""
+msgstr "Durch anwählen kann der Anwender wählen, dass, bei Verwendung dieser Liefermethode, diese Option auf jeden Lieferschein angewendet wird"
 
 #. module: base_delivery_carrier_label
 #: field:delivery.carrier.option,carrier_id:0
@@ -87,7 +91,7 @@ msgstr "Paketaufkleber erzeugen"
 #: field:delivery.carrier.template.option,create_uid:0
 #: field:shipping.label,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Angelegt durch"
 
 #. module: base_delivery_carrier_label
 #: field:carrier.account,create_date:0
@@ -95,12 +99,12 @@ msgstr ""
 #: field:delivery.carrier.template.option,create_date:0
 #: field:shipping.label,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Angelegt am"
 
 #. module: base_delivery_carrier_label
 #: help:carrier.account,file_format:0
 msgid "Default format of the carrier's label you want to print"
-msgstr ""
+msgstr "Vorgabeformat des Spediteur-Paketaufkleber, den Sie drucken möchten"
 
 #. module: base_delivery_carrier_label
 #: help:delivery.carrier,code:0
@@ -127,7 +131,7 @@ msgstr "Beschreibung"
 #. module: base_delivery_carrier_label
 #: field:carrier.account,file_format:0
 msgid "File Format"
-msgstr ""
+msgstr "Dateiformat"
 
 #. module: base_delivery_carrier_label
 #: field:shipping.label,file_type:0
@@ -138,26 +142,26 @@ msgstr "Dateityp"
 #: field:carrier.account,id:0 field:delivery.carrier.option,id:0
 #: field:delivery.carrier.template.option,id:0 field:shipping.label,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: base_delivery_carrier_label
 #: help:delivery.carrier.option,mandatory:0
 msgid "If checked, this option is necessarily applied to the delivery order"
-msgstr ""
+msgstr "Wenn gewählt, wird die Anwendung dieser Option erzwungen"
 
 #. module: base_delivery_carrier_label
 #: help:carrier.account,type:0
 msgid ""
 "In case of several carriers, help to know which account belong to which "
 "carrier"
-msgstr ""
+msgstr "Im Falle mehrerer Spediteure hilft dies zu ersehen, welches Konto zu welchem Spediteur gehört"
 
 #. module: base_delivery_carrier_label
 #: field:carrier.account,write_uid:0 field:delivery.carrier.option,write_uid:0
 #: field:delivery.carrier.template.option,write_uid:0
 #: field:shipping.label,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Zuletzt aktualisiert durch"
 
 #. module: base_delivery_carrier_label
 #: field:carrier.account,write_date:0
@@ -165,7 +169,7 @@ msgstr ""
 #: field:delivery.carrier.template.option,write_date:0
 #: field:shipping.label,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Zuletzt aktualisiert am"
 
 #. module: base_delivery_carrier_label
 #: field:delivery.carrier.option,mandatory:0
@@ -179,15 +183,15 @@ msgid "Name"
 msgstr "Bezeichnung"
 
 #. module: base_delivery_carrier_label
-#: code:addons/base_delivery_carrier_label/stock.py:85
+#: code:addons/base_delivery_carrier_label/stock.py:186
 #, python-format
 msgid "No label is configured for the selected delivery method."
-msgstr ""
+msgstr "Kein Etikett für gewählte Liefermethode konfiguriert."
 
 #. module: base_delivery_carrier_label
 #: model:ir.actions.client,name:base_delivery_carrier_label.action_delivery_method_from_carrier_module_install
 msgid "Open Delivery Methods Menu"
-msgstr ""
+msgstr "Öffne Liefermethoden-Menü"
 
 #. module: base_delivery_carrier_label
 #: field:delivery.carrier,available_option_ids:0
@@ -207,9 +211,14 @@ msgid "Pack"
 msgstr "Paket"
 
 #. module: base_delivery_carrier_label
+#: model:ir.model,name:base_delivery_carrier_label.model_stock_pack_operation
+msgid "Packing Operation"
+msgstr ""
+
+#. module: base_delivery_carrier_label
 #: field:stock.quant.package,parcel_tracking:0
 msgid "Parcel Tracking"
-msgstr ""
+msgstr "Packet-Nachverfolgung"
 
 #. module: base_delivery_carrier_label
 #: field:delivery.carrier.template.option,partner_id:0
@@ -219,7 +228,7 @@ msgstr "Geschäftspartnerzuordnung"
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_stock_quant_package
 msgid "Physical Packages"
-msgstr ""
+msgstr "Physische Pakete"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_stock_picking
@@ -229,7 +238,7 @@ msgstr "Kommissionierliste"
 #. module: base_delivery_carrier_label
 #: field:delivery.carrier.option,readonly_flag:0
 msgid "Readonly Flag"
-msgstr ""
+msgstr "Nur-Lesen-Kennzeichen"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_shipping_label
@@ -237,11 +246,19 @@ msgid "Shipping Label"
 msgstr "Paketaufkleber"
 
 #. module: base_delivery_carrier_label
+#: code:addons/base_delivery_carrier_label/stock.py:404
+#, python-format
+msgid ""
+"Some labels already exist for the picking %s.\n"
+"Please delete the existing labels in the attachments of this picking and try again"
+msgstr ""
+
+#. module: base_delivery_carrier_label
 #: help:stock.quant.package,weight:0
 msgid ""
 "Total weight of the package in kg, including the weight of the logistic "
 "unit."
-msgstr ""
+msgstr "Gesamtgewicht des Pakets in kg, einschliesslich dem Gewicht der logistischen Einheit."
 
 #. module: base_delivery_carrier_label
 #: field:carrier.account,type:0 field:delivery.carrier,type:0
@@ -249,8 +266,13 @@ msgid "Type"
 msgstr "Art"
 
 #. module: base_delivery_carrier_label
-#: field:stock.quant.package,weight:0
+#: field:stock.pack.operation,weight:0 field:stock.quant.package,weight:0
 msgid "Weight"
+msgstr "Gewicht"
+
+#. module: base_delivery_carrier_label
+#: help:stock.pack.operation,weight:0
+msgid "Weight of the pack_operation"
 msgstr ""
 
 #. module: base_delivery_carrier_label
@@ -258,15 +280,15 @@ msgstr ""
 msgid ""
 "When True, help to prevent the user to modify some fields option (if "
 "attribute is defined in the view)"
-msgstr ""
+msgstr "Wenn angewähl, hilft dies die Änderung einiger Felder zu verhindern (wenn das Attribut in der Sicht verwendet wird)"
 
 #. module: base_delivery_carrier_label
-#: code:addons/base_delivery_carrier_label/stock.py:198
+#: code:addons/base_delivery_carrier_label/stock.py:299
 #, python-format
 msgid ""
 "You should not remove a mandatory option.Please cancel the edit or add back "
 "the option: %s."
-msgstr ""
+msgstr "Sie dürfen eine Pflicht-Option nicht abschalten. Brechen Sie die Bearbeitung ab oder schalten Sie die Option %s wieder ein."
 
 #. module: base_delivery_carrier_label
 #: view:delivery.carrier.option:base_delivery_carrier_label.delivery_carrier_option_view_form

@@ -19,53 +19,40 @@
 #
 ##############################################################################
 
-from openerp.osv import orm, fields
-from tools.translate import _
+from openerp import models, fields, exceptions, api
+from openerp.tools.translate import _
 
 
-class DeliveryCarrierFileGenerate(orm.TransientModel):
+class DeliveryCarrierFileGenerate(models.TransientModel):
 
     _name = 'delivery.carrier.file.generate'
 
-    def _get_picking_ids(self, cr, uid, context=None):
-        if context is None:
-            context = {}
-        res = False
-        if (context.get('active_model', False) == 'stock.picking.out' and
-                context.get('active_ids', False)):
-            res = context['active_ids']
-        return res
+    @api.model
+    def _get_pickings(self):
+        context = self.env.context
+        if (context.get('active_model') == 'stock.picking' and
+                context.get('active_ids')):
+            return self.env["stock.picking"].browse(
+                context["active_ids"])
 
-    _columns = {
-        'picking_ids': fields.many2many('stock.picking.out',
-                                        string='Delivery Orders'),
-        'recreate': fields.boolean(
-            'Recreate files',
-            help="If this option is used, new files will be generated "
-                 "for selected picking even if they already had one.\n"
-                 "By default, delivery orders with existing file will be "
-                 "skipped."),
-    }
-
-    _defaults = {
-        'picking_ids': _get_picking_ids,
-    }
-
-    def action_generate(self, cr, uid, ids, context=None):
+    @api.multi
+    def action_generate(self):
         """
         Call the creation of the delivery carrier files
         """
-        context = context or {}
-        form = self.browse(cr, uid, ids, context=context)[0]
-        if not form.picking_ids:
-            raise orm.except_orm(_('Error'), _('No delivery orders selected'))
-
-        picking_obj = self.pool['stock.picking']
-        picking_ids = [picking.id for picking in form.picking_ids]
-        picking_obj.generate_carrier_files(cr, uid,
-                                           picking_ids,
-                                           auto=False,
-                                           recreate=form.recreate,
-                                           context=context)
-
+        if not self.pickings:
+            raise exceptions.Warning(_('No delivery orders selected'))
+        self.pickings.generate_carrier_files(
+            auto=False, recreate=self.recreate)
         return {'type': 'ir.actions.act_window_close'}
+
+    pickings = fields.Many2many('stock.picking',
+                                string='Delivery Orders',
+                                default=_get_pickings,
+                                oldname='picking_ids')
+    recreate = fields.Boolean(
+        'Recreate files',
+        help=("If this option is used, new files will be generated "
+              "for selected picking even if they already had one.\n"
+              "By default, delivery orders with existing file will be "
+              "skipped."))

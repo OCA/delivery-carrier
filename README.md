@@ -17,6 +17,7 @@ Available addons
 ----------------
 addon | version | summary
 --- | --- | ---
+[base_delivery_carrier_files](base_delivery_carrier_files/) | 1.2.3 | Base Delivery Carrier Files
 [base_delivery_carrier_label](base_delivery_carrier_label/) | 8.0.1.2.0 | Base module for carrier labels
 [delivery_carrier_b2c](delivery_carrier_b2c/) | 8.0.0.2.0 | Delivery Carrier Business To Customer
 [delivery_carrier_deposit](delivery_carrier_deposit/) | 8.0.0.2.0 | Create deposit slips
@@ -26,7 +27,6 @@ Unported addons
 ---------------
 addon | version | summary
 --- | --- | ---
-[base_delivery_carrier_files](base_delivery_carrier_files/) | 1.2.3 (unported) | Base Delivery Carrier Files
 [base_delivery_carrier_files_document](base_delivery_carrier_files_document/) | 1.0.1 (unported) | Base module for picking carrier files creation for document
 [delivery_carrier_file_laposte](delivery_carrier_file_laposte/) | 1.0 (unported) | Delivery Carrier File: La Poste
 [delivery_carrier_file_tnt](delivery_carrier_file_tnt/) | 1.0 (unported) | Delivery Carrier File: TNT
