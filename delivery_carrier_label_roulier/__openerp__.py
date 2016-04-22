@@ -28,7 +28,7 @@
     ],
     'external_dependencies': {
         'python': [
-            'git+https://github.com/akretion/roulier.git'
+            'roulier'  # 'git+https://github.com/akretion/roulier.git'
         ],
     },
     'tests': [],
