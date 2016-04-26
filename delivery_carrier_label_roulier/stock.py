@@ -256,6 +256,7 @@ class StockPicking(models.Model):
         # parent_id is None if it's a company
         if 'parent_id' in address:
             address['company'] = address['parent_id'].name
+            del address['parent_id']
 
         # Codet ISO 3166-1-alpha-2 (2 letters code)
         address['country'] = partner.country_id.code
