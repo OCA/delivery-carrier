@@ -115,6 +115,14 @@ class StockPicking(models.Model):
     def _get_options(self, package_id):
         pass
 
+    @implemented_by_carrier
+    def _get_customs(self, package_id):
+        pass
+
+    @implemented_by_carrier
+    def _should_include_customs(self, package_id):
+        pass
+
     # end of API
 
     # Core functions
@@ -188,6 +196,9 @@ class StockPicking(models.Model):
 
         payload['from_address'] = self._roulier_convert_address(sender)
         payload['to_address'] = self._roulier_convert_address(receiver)
+
+        if self._should_include_customs(package_id):
+            payload['customs'] = self._get_customs(package_id)
 
         payload['service'] = {
             'productCode': self.carrier_code,
@@ -298,3 +309,11 @@ class StockPicking(models.Model):
 
     def _roulier_get_options(self, package_id):
         return {}
+
+    def _roulier_get_customs(self, package_id):
+        return {}
+
+    def _roulier_should_include_customs(self, package_id):
+        sender = self._get_sender()
+        receiver = self._get_receiver()
+        return sender.country_id.code == receiver.country_id.code
