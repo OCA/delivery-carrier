@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+
+<record id="view_poste_config_settings" model="ir.ui.view">
+  <field name="model">laposte.config.settings</field>
+  <field name="arch" type="xml">
+    <form string="Configure Colissimo / So Colissimo" version="7.0"
+          class="oe_form_configuration">
+      <header>
+        <button string="Apply" type="object" name="execute" class="oe_highlight"/>
+        or
+        <button string="Cancel" type="object" name="cancel" class="oe_link"/>
+        <a href="https://www.coliposte.net" target="_blank">
+            <img src="delivery_carrier_label_roulier_laposte/static/src/img/laposte_small.png"/>
+        </a>
+        <h1 style="display: inline-block">Coliposte</h1>
+      </header>
+
+      <group groups="base.group_multi_company">
+        <div>
+          <div>
+            <label for="company_id" string="Select Company"/>
+            <field name="company_id"
+                widget="selection"
+                class="oe_inline"/>
+          </div>
+        </div>
+      </group>
+
+      <separator string="Compte"/>
+      <group name="account" col="4">
+        <field name="laposte_login" placeholder="800000" class="oe_inline"/>
+        <field name="laposte_password" password="True" class="oe_inline"/>
+        <field name="laposte_support_city" placeholder="... PFC" class="oe_inline"/>
+        <field name="laposte_support_city_code" placeholder="700000" class="oe_inline"/>
+            <!--<button name="button_send_image_to_printer" type="object"-->
+        <!--        string="Envoyer les images a l'imprimante"-->
+        <!--        class="oe_link" colspan="2"-->
+        <!--        confirm="S'il vous plait, confirmez que vous voulez envoyer les images a l'imprimante d'etiquette. Cela doit etre fait lors l'installation de l'imprimante ou en cas probleme. Il remplacera toutes vos images d'imprimante avec les memes noms de fichiers. (PAS ENCORE IMPLEMENTE)"-->
+        <!--        help="Cela doit etre fait pour l'installation de l'imprimante ou en cas probleme. (Informations de l'administrateur: vous devez implementer votre propre methode en fonction de la solution d'impression choisie)"/>-->
+      </group>
+    </form>
+  </field>
+</record>
+
+<record id="action_laposte_config" model="ir.actions.act_window">
+  <field name="type">ir.actions.act_window</field>
+  <field name="res_model">laposte.config.settings</field>
+  <field name="view_mode">form</field>
+  <field name="name">Laposte configuration</field>
+  <field name="target">inline</field>
+</record>
+
+<menuitem id="menu_laposte_config" name="Laposte"
+          parent="base_delivery_carrier_label.menu_carriers_config"
+          action="action_laposte_config"/>
+
+ <!--After installation of the module, open the adhoc menu -->
+<record id="action_laposte_first" model="ir.actions.client">
+    <field name="name">Open Carrier Menu</field>
+    <field name="tag">reload</field>
+    <field name="params" eval="{'menu_id': ref('menu_laposte_config')}"/>
+</record>
+
+<record id="base.open_menu" model="ir.actions.todo">
+  <field name="action_id" ref="action_laposte_first"/>
+  <field name="state">open</field>
+</record>
+
+<!-- After installation of the module, open the adhoc menu -->
+<record id="base.open_menu" model="ir.actions.todo">
+  <field name="action_id" ref="base_delivery_carrier_label.action_delivery_method_from_carrier_module_install"/>
+  <field name="state">open</field>
+</record>
+
+
+  </data>
+</openerp>

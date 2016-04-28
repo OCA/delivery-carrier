@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<!--    <data noupdate="1">-->
+    <data>
+        <record id="delivery_carrier_template_NM"
+                model="delivery.carrier.template.option">
+            <field name="name">Non Mécanisable</field>
+            <field name="code">NM</field>
+        </record>
+
+        <!-- PRODUCT  -->
+        <record id="product_product_la_poste" model="product.product">
+            <field name="default_code">SHIP_LP</field>
+            <field name="standard_price">0.0</field>
+            <field name="cost_method">standard</field>
+            <field name="type">service</field>
+            <field name="procure_method">make_to_stock</field>
+            <field name="supply_method">buy</field>
+            <field name="name">Coûts de livraison - La Poste</field>
+            <field name="categ_id">1</field>
+        </record>
+
+        <!-- PARTNER -->
+        <record id="partner_la_poste" model="res.partner">
+            <field name="name">La Poste</field>
+            <field name="customer" eval="False"/>
+            <field name="supplier" eval="True"/>
+            <field name="street">rue du colis</field>
+            <field name="zip">99999</field>
+            <field name="city">XXXXXX PFC</field>
+        </record>
+
+        <!-- DELIVERY CARRIER TEMPLATE OPTION -->
+        <record id="delivery_carrier_template_AR"
+                model="delivery.carrier.template.option">
+            <field name="name">Accusé de Réception</field>
+            <field name="code">AR</field>
+        </record>
+
+        <record id="delivery_carrier_template_FTD"
+                model="delivery.carrier.template.option">
+            <field name="name">Franc de taxes et de droits</field>
+            <field name="code">FTD</field>
+        </record>
+
+        <!-- DELIVERY CARRIER -->
+        <record id="delivery_carrier_DOM" model="delivery.carrier">
+            <field name="name">Colissimo Domicile - sans signature</field>
+            <field name="type">laposte</field>
+            <field name="code">DOM</field>
+            <field name="use_detailed_pricelist" eval="1"/>
+            <field name="deposit_slip" eval="True"/>
+            <field name="partner_id" ref="delivery_carrier_label_roulier_laposte.partner_la_poste"/>
+            <field name="product_id" ref="delivery_carrier_label_roulier_laposte.product_product_la_poste"/>
+        </record>
+
+        <record id="DOM_laposte_delivery_carrier_template_NM" model="delivery.carrier.option">
+            <field name="readonly_flag" eval="True"/>
+            <field name="mandatory" eval="False"/>
+            <field name="by_default" eval="False"/>
+            <field name="carrier_id" ref="delivery_carrier_DOM"/>
+            <field name="tmpl_option_id" ref="delivery_carrier_label_roulier_laposte.delivery_carrier_template_NM"/>
+        </record>
+
+        <record id="delivery_carrier_DOS" model="delivery.carrier">
+            <field name="name">Colissimo Domicile - avec signature</field>
+            <field name="type">laposte</field>
+            <field name="code">DOS</field>
+            <field name="use_detailed_pricelist" eval="1"/>
+            <field name="deposit_slip" eval="True"/>
+            <field name="partner_id" ref="delivery_carrier_label_roulier_laposte.partner_la_poste"/>
+            <field name="product_id" ref="delivery_carrier_label_roulier_laposte.product_product_la_poste"/>
+        </record>
+
+        <record id="DOS_laposte_delivery_carrier_template_NM" model="delivery.carrier.option">
+            <field name="readonly_flag" eval="True"/>
+            <field name="mandatory" eval="False"/>
+            <field name="by_default" eval="False"/>
+            <field name="carrier_id" ref="delivery_carrier_DOS"/>
+            <field name="tmpl_option_id" ref="delivery_carrier_label_roulier_laposte.delivery_carrier_template_NM"/>
+        </record>
+
+
+        <record id="delivery_carrier_BPR" model="delivery.carrier">
+            <field name="name">Colissimo Point Retrait Laposte</field>
+            <field name="type">laposte</field>
+            <field name="code">BPR</field>
+            <field name="use_detailed_pricelist" eval="1"/>
+            <field name="deposit_slip" eval="True"/>
+            <field name="partner_id" ref="delivery_carrier_label_roulier_laposte.partner_la_poste"/>
+            <field name="product_id" ref="delivery_carrier_label_roulier_laposte.product_product_la_poste"/>
+        </record>
+
+        <record id="BPR_laposte_delivery_carrier_template_NM" model="delivery.carrier.option">
+            <field name="readonly_flag" eval="True"/>
+            <field name="mandatory" eval="False"/>
+            <field name="by_default" eval="False"/>
+            <field name="carrier_id" ref="delivery_carrier_BPR"/>
+            <field name="tmpl_option_id" ref="delivery_carrier_label_roulier_laposte.delivery_carrier_template_NM"/>
+        </record>
+
+
+        <record id="delivery_carrier_A2P" model="delivery.carrier">
+            <field name="name">Colissimo Point Retrait Pickup</field>
+            <field name="type">laposte</field>
+            <field name="code">A2P</field>
+            <field name="use_detailed_pricelist" eval="1"/>
+            <field name="deposit_slip" eval="True"/>
+            <field name="partner_id" ref="delivery_carrier_label_roulier_laposte.partner_la_poste"/>
+            <field name="product_id" ref="delivery_carrier_label_roulier_laposte.product_product_la_poste"/>
+        </record>
+
+        <record id="A2P_laposte_delivery_carrier_template_NM" model="delivery.carrier.option">
+            <field name="readonly_flag" eval="True"/>
+            <field name="mandatory" eval="False"/>
+            <field name="by_default" eval="False"/>
+            <field name="carrier_id" ref="delivery_carrier_A2P"/>
+            <field name="tmpl_option_id" ref="delivery_carrier_label_roulier_laposte.delivery_carrier_template_NM"/>
+        </record>
+
+
+        <record id="delivery_carrier_CORE" model="delivery.carrier">
+            <field name="name">Colissimo Retour France</field>
+            <field name="type">laposte</field>
+            <field name="code">CORE</field>
+            <field name="use_detailed_pricelist" eval="1"/>
+            <field name="deposit_slip" eval="True"/>
+            <field name="partner_id" ref="delivery_carrier_label_roulier_laposte.partner_la_poste"/>
+            <field name="product_id" ref="delivery_carrier_label_roulier_laposte.product_product_la_poste"/>
+        </record>
+
+        <record id="CORE_laposte_delivery_carrier_template_NM" model="delivery.carrier.option">
+            <field name="readonly_flag" eval="True"/>
+            <field name="mandatory" eval="False"/>
+            <field name="by_default" eval="False"/>
+            <field name="carrier_id" ref="delivery_carrier_CORE"/>
+            <field name="tmpl_option_id" ref="delivery_carrier_label_roulier_laposte.delivery_carrier_template_NM"/>
+        </record>
+
+
+        <record id="delivery_carrier_CORI" model="delivery.carrier">
+            <field name="name">Colissimo Retour International</field>
+            <field name="type">laposte</field>
+            <field name="code">CORI</field>
+            <field name="use_detailed_pricelist" eval="1"/>
+            <field name="deposit_slip" eval="True"/>
+            <field name="partner_id" ref="delivery_carrier_label_roulier_laposte.partner_la_poste"/>
+            <field name="product_id" ref="delivery_carrier_label_roulier_laposte.product_product_la_poste"/>
+        </record>
+
+        <record id="CORI_laposte_delivery_carrier_template_NM" model="delivery.carrier.option">
+            <field name="readonly_flag" eval="True"/>
+            <field name="mandatory" eval="False"/>
+            <field name="by_default" eval="False"/>
+            <field name="carrier_id" ref="delivery_carrier_CORI"/>
+            <field name="tmpl_option_id" ref="delivery_carrier_label_roulier_laposte.delivery_carrier_template_NM"/>
+        </record>
+
+        <record id="delivery_carrier_COM" model="delivery.carrier">
+            <field name="name">Colissimo Domicile Outre-Mer - sans signature</field>
+            <field name="type">laposte</field>
+            <field name="code">COM</field>
+            <field name="use_detailed_pricelist" eval="1"/>
+            <field name="deposit_slip" eval="True"/>
+            <field name="partner_id" ref="delivery_carrier_label_roulier_laposte.partner_la_poste"/>
+            <field name="product_id" ref="delivery_carrier_label_roulier_laposte.product_product_la_poste"/>
+        </record>
+
+        <record id="COM_laposte_delivery_carrier_template_NM" model="delivery.carrier.option">
+            <field name="readonly_flag" eval="True"/>
+            <field name="mandatory" eval="False"/>
+            <field name="by_default" eval="False"/>
+            <field name="carrier_id" ref="delivery_carrier_COM"/>
+            <field name="tmpl_option_id" ref="delivery_carrier_label_roulier_laposte.delivery_carrier_template_NM"/>
+        </record>
+
+        <record id="delivery_carrier_CDS" model="delivery.carrier">
+            <field name="name">Colissimo Domicile Outre-Mer - avec signature</field>
+            <field name="type">laposte</field>
+            <field name="code">CDS</field>
+            <field name="use_detailed_pricelist" eval="1"/>
+            <field name="deposit_slip" eval="True"/>
+            <field name="partner_id" ref="delivery_carrier_label_roulier_laposte.partner_la_poste"/>
+            <field name="product_id" ref="delivery_carrier_label_roulier_laposte.product_product_la_poste"/>
+        </record>
+
+        <record id="CDS_laposte_delivery_carrier_template_NM" model="delivery.carrier.option">
+            <field name="readonly_flag" eval="True"/>
+            <field name="mandatory" eval="False"/>
+            <field name="by_default" eval="False"/>
+            <field name="carrier_id" ref="delivery_carrier_CDS"/>
+            <field name="tmpl_option_id" ref="delivery_carrier_label_roulier_laposte.delivery_carrier_template_NM"/>
+        </record>
+
+
+        <record id="delivery_carrier_COLI" model="delivery.carrier">
+            <field name="name">Colissimo Expert International</field>
+            <field name="type">laposte</field>
+            <field name="code">COLI</field>
+            <field name="use_detailed_pricelist" eval="1"/>
+            <field name="deposit_slip" eval="True"/>
+            <field name="partner_id" ref="delivery_carrier_label_roulier_laposte.partner_la_poste"/>
+            <field name="product_id" ref="delivery_carrier_label_roulier_laposte.product_product_la_poste"/>
+        </record>
+
+        <record id="COLI_laposte_delivery_carrier_template_NM" model="delivery.carrier.option">
+            <field name="readonly_flag" eval="True"/>
+            <field name="mandatory" eval="False"/>
+            <field name="by_default" eval="False"/>
+            <field name="carrier_id" ref="delivery_carrier_COLI"/>
+            <field name="tmpl_option_id" ref="delivery_carrier_label_roulier_laposte.delivery_carrier_template_NM"/>
+        </record>
+
+        <record id="delivery_carrier_CMT" model="delivery.carrier">
+            <field name="name">Colissimo Point Relais Belgique</field>
+            <field name="type">laposte</field>
+            <field name="code">CMT</field>
+            <field name="use_detailed_pricelist" eval="1"/>
+            <field name="deposit_slip" eval="True"/>
+            <field name="partner_id" ref="delivery_carrier_label_roulier_laposte.partner_la_poste"/>
+            <field name="product_id" ref="delivery_carrier_label_roulier_laposte.product_product_la_poste"/>
+        </record>
+
+        <record id="CMT_laposte_delivery_carrier_template_NM" model="delivery.carrier.option">
+            <field name="readonly_flag" eval="True"/>
+            <field name="mandatory" eval="False"/>
+            <field name="by_default" eval="False"/>
+            <field name="carrier_id" ref="delivery_carrier_CMT"/>
+            <field name="tmpl_option_id" ref="delivery_carrier_label_roulier_laposte.delivery_carrier_template_NM"/>
+        </record>
+
+    </data>
+</openerp>
