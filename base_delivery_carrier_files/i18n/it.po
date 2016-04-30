@@ -3,13 +3,14 @@
 # * base_delivery_carrier_files
 # 
 # Translators:
+# Paolo Valier, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: carrier-delivery (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-09 00:47+0000\n"
-"PO-Revision-Date: 2016-04-08 13:38+0000\n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2016-04-16 07:28+0000\n"
+"PO-Revision-Date: 2016-04-28 06:51+0000\n"
+"Last-Translator: Paolo Valier\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-carrier-delivery-8-0/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,7 +21,7 @@ msgstr ""
 #. module: base_delivery_carrier_files
 #: view:stock.picking:base_delivery_carrier_files.view_picking_out_form_carrier_file
 msgid "Additional Info"
-msgstr ""
+msgstr "Informazioni addizionali"
 
 #. module: base_delivery_carrier_files
 #: help:delivery.carrier.file,group_pickings:0
@@ -61,7 +62,7 @@ msgstr ""
 #. module: base_delivery_carrier_files
 #: view:delivery.carrier.file.generate:base_delivery_carrier_files.view_delivery_carrier_file_generate
 msgid "Close"
-msgstr ""
+msgstr "Chiudi"
 
 #. module: base_delivery_carrier_files
 #: field:delivery.carrier.file,create_uid:0
@@ -84,12 +85,12 @@ msgstr ""
 #: view:delivery.carrier.file.generate:base_delivery_carrier_files.view_delivery_carrier_file_generate
 #: field:delivery.carrier.file.generate,pickings:0
 msgid "Delivery Orders"
-msgstr ""
+msgstr "Ordini di Spedizione"
 
 #. module: base_delivery_carrier_files
 #: view:stock.picking:base_delivery_carrier_files.view_picking_out_search_carrier_file
 msgid "Delivery orders to invoice"
-msgstr ""
+msgstr "Ordini di Spedizione da fatturare"
 
 #. module: base_delivery_carrier_files
 #: field:delivery.carrier.file,export_path:0
@@ -135,7 +136,7 @@ msgstr "ID"
 #. module: base_delivery_carrier_files
 #: model:product.template,name:base_delivery_carrier_files.product_icecream_product_template
 msgid "Ice Cream"
-msgstr ""
+msgstr "Gelato"
 
 #. module: base_delivery_carrier_files
 #: model:product.template,description:base_delivery_carrier_files.product_icecream_product_template

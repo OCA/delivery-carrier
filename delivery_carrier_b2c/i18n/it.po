@@ -4,12 +4,13 @@
 # 
 # Translators:
 # Paolo Valier, 2016
+# Paolo Valier, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: carrier-delivery (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-02 07:47+0000\n"
-"PO-Revision-Date: 2016-03-19 09:50+0000\n"
+"POT-Creation-Date: 2016-04-16 07:28+0000\n"
+"PO-Revision-Date: 2016-04-28 06:48+0000\n"
 "Last-Translator: Paolo Valier\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-carrier-delivery-8-0/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -21,7 +22,7 @@ msgstr ""
 #. module: delivery_carrier_b2c
 #: field:res.partner,use_b2c_info:0
 msgid "Advanced address"
-msgstr ""
+msgstr "Indirizzo avanzato"
 
 #. module: delivery_carrier_b2c
 #: help:res.partner,use_b2c_info:0

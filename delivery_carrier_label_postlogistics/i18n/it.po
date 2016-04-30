@@ -4,12 +4,13 @@
 # 
 # Translators:
 # Paolo Valier, 2016
+# Paolo Valier, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: carrier-delivery (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-02 07:47+0000\n"
-"PO-Revision-Date: 2016-03-19 10:02+0000\n"
+"POT-Creation-Date: 2016-04-16 07:28+0000\n"
+"PO-Revision-Date: 2016-04-28 06:49+0000\n"
 "Last-Translator: Paolo Valier\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-carrier-delivery-8-0/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -21,17 +22,17 @@ msgstr ""
 #. module: delivery_carrier_label_postlogistics
 #: model:delivery.carrier.template.option,name:delivery_carrier_label_postlogistics.postlogistics_output_resolution_option_200ppp
 msgid "200 ppp"
-msgstr ""
+msgstr "200 ppp"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:delivery.carrier.template.option,name:delivery_carrier_label_postlogistics.postlogistics_output_resolution_option_300ppp
 msgid "300 ppp"
-msgstr ""
+msgstr "300 ppp"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:delivery.carrier.template.option,name:delivery_carrier_label_postlogistics.postlogistics_output_resolution_option_600ppp
 msgid "600 ppp"
-msgstr ""
+msgstr "600 ppp"
 
 #. module: delivery_carrier_label_postlogistics
 #: sql_constraint:postlogistics.service.group:0

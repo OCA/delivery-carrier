@@ -3,13 +3,16 @@
 # * delivery_carrier_deposit
 # 
 # Translators:
+# Hotellook, 2014
 # Paolo Valier, 2016
+# Paolo Valier, 2016
+# Yannick Vaucher <yannick.vaucher@camptocamp.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: carrier-delivery (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-02 07:47+0000\n"
-"PO-Revision-Date: 2016-03-19 10:00+0000\n"
+"POT-Creation-Date: 2016-04-16 07:28+0000\n"
+"PO-Revision-Date: 2016-04-28 06:52+0000\n"
 "Last-Translator: Paolo Valier\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-carrier-delivery-8-0/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -107,7 +110,7 @@ msgstr "Creato il"
 #. module: delivery_carrier_deposit
 #: view:website:delivery_carrier_deposit.report_generic_deposit_slip
 msgid "Customer No.:"
-msgstr ""
+msgstr "N. Cliente:"
 
 #. module: delivery_carrier_deposit
 #: help:deposit.slip,message_last_post:0
@@ -170,7 +173,7 @@ msgstr "Bozza"
 #. module: delivery_carrier_deposit
 #: field:deposit.slip,message_follower_ids:0
 msgid "Followers"
-msgstr ""
+msgstr "Followers"
 
 #. module: delivery_carrier_deposit
 #: model:ir.actions.report.xml,name:delivery_carrier_deposit.report_deposit_slip
@@ -202,7 +205,7 @@ msgstr ""
 #. module: delivery_carrier_deposit
 #: field:deposit.slip,message_is_follower:0
 msgid "Is a Follower"
-msgstr "E' un Follower"
+msgstr "È un Follower"
 
 #. module: delivery_carrier_deposit
 #: field:deposit.slip,message_last_post:0
