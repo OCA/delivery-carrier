@@ -33,7 +33,7 @@ try:
     from suds.client import Client, WebFault
     from suds.transport.http import HttpAuthenticated
 except ImportError:
-    _logger.warning(
+    _logger.debug(
         'suds library not found. '
         'If you plan to use it, please install the suds library '
         'from https://pypi.python.org/pypi/suds')
