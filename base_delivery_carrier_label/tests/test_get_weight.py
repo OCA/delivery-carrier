@@ -134,47 +134,6 @@ class TestGetWeight(TransactionCase):
             package.get_weight(),
             sum([operation.get_weight() for operation in operations]))
 
-    def test_get_weight_with_lu(self):
-        """Check with logistic unit."""
-        # prepare some data
-        weights = [2.39, 3.1, 20, 24, 39]
-        products = self._get_products(weights)
-        picking = self._generate_picking(products)
-        uls = self._create_ul()
-        packages = [
-            self.env['stock.quant.package'].create(
-                {'ul_id': ul.id}
-            ) for ul in uls
-        ]
-        operations = []
-        for idx, product in enumerate(products):
-            pack = packages[idx % len(packages)]
-            operations.append(self._create_operation(picking, {
-                'product_qty': 1,
-                'product_id': product.id,
-                'product_uom_id': product.uom_id.id,
-                'result_package_id': pack.id,
-            }))
-        # end of prepare data
-
-        products_weight = sum([product.weight for product in products])
-        packages_weight = sum(
-            [package.ul_id.weight for package in packages])
-
-        self.assertEqual(
-            sum([package.get_weight() for package in packages]),
-            packages_weight + products_weight)
-
-        # with @api.multi
-        packages_multi = self.env['stock.quant.package'].search(
-            [['id', 'in', [package.id for package in packages]]]
-        )
-
-        self.assertEqual(
-            packages_multi.get_weight(),
-            packages_weight + products_weight
-        )
-
     def test_get_weight_with_uom(self):
         """Check with differents uom."""
         # prepare some data
