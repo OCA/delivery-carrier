@@ -3,13 +3,13 @@
 # * delivery_carrier_label_postlogistics
 # 
 # Translators:
-# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: carrier-delivery (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-11 09:37+0000\n"
-"PO-Revision-Date: 2015-06-27 09:15+0000\n"
+"POT-Creation-Date: 2016-05-03 12:24+0000\n"
+"PO-Revision-Date: 2016-05-01 04:57+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-carrier-delivery-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -44,6 +44,11 @@ msgid "Additional Service"
 msgstr "Dodatna storitev"
 
 #. module: delivery_carrier_label_postlogistics
+#: field:delivery.carrier,allowed_option_ids:0
+msgid "Allowed options"
+msgstr "Dovoljene opcije"
+
+#. module: delivery_carrier_label_postlogistics
 #: view:postlogistics.config.settings:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
 msgid "Apply"
 msgstr "Uveljavi"
@@ -69,6 +74,14 @@ msgid "Basic Service"
 msgstr "Osnovna storitev"
 
 #. module: delivery_carrier_label_postlogistics
+#: help:delivery.carrier,postlogistics_basic_service_ids:0
+msgid ""
+"Basic Service defines the available additional options for this delivery "
+"method"
+msgstr "Osnovna storitev določi dodatne opcije za to metodo dostave"
+
+#. module: delivery_carrier_label_postlogistics
+#: field:delivery.carrier.option,postlogistics_basic_service_ids:0
 #: field:delivery.carrier.template.option,postlogistics_basic_service_ids:0
 msgid "Basic Services"
 msgstr "Osnovne storitve"
@@ -95,19 +108,27 @@ msgid "Company"
 msgstr "Družba"
 
 #. module: delivery_carrier_label_postlogistics
+#: field:postlogistics.config.settings,logo:0
 #: field:res.company,postlogistics_logo:0
 msgid "Company Logo on Post labels"
 msgstr "Logotip družbe na poštnih nalepkah"
 
 #. module: delivery_carrier_label_postlogistics
+#: field:delivery.carrier.option,postlogistics_additonial_service_ids:0
 #: field:delivery.carrier.template.option,postlogistics_additonial_service_ids:0
 msgid "Compatible Additional Services"
 msgstr "Združljive dodatne storitve"
 
 #. module: delivery_carrier_label_postlogistics
+#: field:delivery.carrier.option,postlogistics_delivery_instruction_ids:0
 #: field:delivery.carrier.template.option,postlogistics_delivery_instruction_ids:0
 msgid "Compatible Delivery Instructions"
 msgstr "Navodila združljive dostave"
+
+#. module: delivery_carrier_label_postlogistics
+#: help:delivery.carrier,allowed_option_ids:0
+msgid "Compute allowed options according to selected options."
+msgstr "Obdelaj dovoljene opcije glede na izbrane opcije."
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.actions.act_window,name:delivery_carrier_label_postlogistics.action_postlogistics_config
@@ -168,16 +189,19 @@ msgid "Default configs"
 msgstr "Privzete nastavitve"
 
 #. module: delivery_carrier_label_postlogistics
+#: field:postlogistics.config.settings,default_label_layout:0
 #: field:res.company,postlogistics_default_label_layout:0
 msgid "Default label layout"
 msgstr "Privzeta postavitev etiket"
 
 #. module: delivery_carrier_label_postlogistics
+#: field:postlogistics.config.settings,default_output_format:0
 #: field:res.company,postlogistics_default_output_format:0
 msgid "Default output format"
 msgstr "Privzeti izhodni format"
 
 #. module: delivery_carrier_label_postlogistics
+#: field:postlogistics.config.settings,default_resolution:0
 #: field:res.company,postlogistics_default_resolution:0
 msgid "Default resolution"
 msgstr "Privzeta ločljivost"
@@ -203,6 +227,14 @@ msgid "Description"
 msgstr "Opis"
 
 #. module: delivery_carrier_label_postlogistics
+#: field:postlogistics.config.settings,display_name:0
+#: field:postlogistics.license,display_name:0
+#: field:postlogistics.service.group,display_name:0
+msgid "Display Name"
+msgstr "Prikazni naziv"
+
+#. module: delivery_carrier_label_postlogistics
+#: field:postlogistics.config.settings,office:0
 #: field:res.company,postlogistics_office:0
 msgid "Domicile Post office"
 msgstr "Domači poštni urad"
@@ -279,6 +311,13 @@ msgid "Label Layout"
 msgstr "Postavitev etiket"
 
 #. module: delivery_carrier_label_postlogistics
+#: field:postlogistics.config.settings,__last_update:0
+#: field:postlogistics.license,__last_update:0
+#: field:postlogistics.service.group,__last_update:0
+msgid "Last Modified on"
+msgstr "Zadnjič spremenjeno"
+
+#. module: delivery_carrier_label_postlogistics
 #: field:postlogistics.config.settings,write_uid:0
 #: field:postlogistics.license,write_uid:0
 #: field:postlogistics.service.group,write_uid:0
@@ -298,6 +337,7 @@ msgid "Licenses"
 msgstr "Licence"
 
 #. module: delivery_carrier_label_postlogistics
+#: help:delivery.carrier.option,postlogistics_basic_service_ids:0
 #: help:delivery.carrier.template.option,postlogistics_basic_service_ids:0
 msgid "List of basic service for which this service is compatible"
 msgstr "Seznam osnovnih storitev, ki so združljive s to storitvijo"
@@ -308,6 +348,7 @@ msgid "Number"
 msgstr "Številka"
 
 #. module: delivery_carrier_label_postlogistics
+#: help:postlogistics.config.settings,logo:0
 #: help:res.company,postlogistics_logo:0
 msgid ""
 "Optional company logo to show on label.\n"
@@ -342,6 +383,7 @@ msgid "PNG"
 msgstr "PNG"
 
 #. module: delivery_carrier_label_postlogistics
+#: field:postlogistics.config.settings,password:0
 #: field:res.company,postlogistics_password:0
 msgid "Password"
 msgstr "Geslo"
@@ -357,6 +399,7 @@ msgid "Picking List"
 msgstr "Zbirnik"
 
 #. module: delivery_carrier_label_postlogistics
+#: help:postlogistics.config.settings,office:0
 #: help:res.company,postlogistics_office:0
 msgid "Post office which will receive the shipped goods"
 msgstr "Poštni urad, ki bo prejel odposlane dobrine"
@@ -364,19 +407,23 @@ msgstr "Poštni urad, ki bo prejel odposlane dobrine"
 #. module: delivery_carrier_label_postlogistics
 #: field:delivery.carrier,postlogistics_license_id:0
 #: model:ir.model,name:delivery_carrier_label_postlogistics.model_postlogistics_license
+#: field:postlogistics.config.settings,license_ids:0
 #: field:postlogistics.service.group,postlogistics_license_ids:0
 #: field:res.company,postlogistics_license_ids:0
 msgid "PostLogistics Franking License"
 msgstr "Licenca PostLogistics Franking"
 
 #. module: delivery_carrier_label_postlogistics
+#: field:delivery.carrier,postlogistics_basic_service_ids:0
 #: field:delivery.carrier,postlogistics_service_group_id:0
+#: field:delivery.carrier.option,postlogistics_service_group_id:0
 #: field:delivery.carrier.template.option,postlogistics_service_group_id:0
 #: model:ir.model,name:delivery_carrier_label_postlogistics.model_postlogistics_service_group
 msgid "PostLogistics Service Group"
 msgstr "PostLogistics storitvena skupina"
 
 #. module: delivery_carrier_label_postlogistics
+#: field:delivery.carrier.option,postlogistics_type:0
 #: field:delivery.carrier.template.option,postlogistics_type:0
 msgid "PostLogistics option type"
 msgstr "PostLogistics tip opcije"
@@ -448,9 +495,16 @@ msgid "Update PostLogistics Services"
 msgstr "Posodobi PostLogistics storitve"
 
 #. module: delivery_carrier_label_postlogistics
+#: field:postlogistics.config.settings,username:0
 #: field:res.company,postlogistics_username:0
 msgid "Username"
 msgstr "Uporabniško ime"
+
+#. module: delivery_carrier_label_postlogistics
+#: field:postlogistics.config.settings,wsdl_url:0
+#: field:res.company,postlogistics_wsdl_url:0
+msgid "WSDL URL"
+msgstr "WSDL URL"
 
 #. module: delivery_carrier_label_postlogistics
 #: view:postlogistics.config.settings:delivery_carrier_label_postlogistics.view_postlogistics_config_settings

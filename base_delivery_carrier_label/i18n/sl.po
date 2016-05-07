@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: carrier-delivery (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-29 11:09+0000\n"
-"PO-Revision-Date: 2016-03-30 05:23+0000\n"
+"POT-Creation-Date: 2016-05-03 12:24+0000\n"
+"PO-Revision-Date: 2016-05-01 04:59+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-carrier-delivery-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -31,6 +31,7 @@ msgid "Account Password"
 msgstr "Geslo računa"
 
 #. module: base_delivery_carrier_label
+#: help:delivery.carrier.option,description:0
 #: help:delivery.carrier.template.option,description:0
 msgid "Allow to define a more complete description than in the name field."
 msgstr "Dovoli določanje popolnejšega opisa, kot je v polju naziv."
@@ -46,9 +47,19 @@ msgid "Attachement"
 msgstr "Priponka"
 
 #. module: base_delivery_carrier_label
+#: field:shipping.label,name:0
+msgid "Attachment Name"
+msgstr "Naziv priponke"
+
+#. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_carrier_account
 msgid "Base account datas"
 msgstr "Osnovni podatki o računu"
+
+#. module: base_delivery_carrier_label
+#: help:shipping.label,type:0
+msgid "Binary File or URL"
+msgstr "Binarna datoteka ali URL"
 
 #. module: base_delivery_carrier_label
 #: help:delivery.carrier.option,by_default:0
@@ -64,7 +75,12 @@ msgid "Carrier"
 msgstr "Prevoznik"
 
 #. module: base_delivery_carrier_label
-#: help:delivery.carrier,type:0
+#: field:stock.picking,carrier_type:0
+msgid "Carrier Type"
+msgstr "Tip prevoznika"
+
+#. module: base_delivery_carrier_label
+#: help:delivery.carrier,type:0 help:stock.picking,carrier_type:0
 msgid "Carrier type (combines several delivery methods)"
 msgstr "Tip prevoznika (kombinacija več dostavnih metod)"
 
@@ -74,9 +90,16 @@ msgid "Carriers"
 msgstr "Prevozniki"
 
 #. module: base_delivery_carrier_label
-#: field:delivery.carrier,code:0 field:delivery.carrier.template.option,code:0
+#: field:delivery.carrier,code:0 field:delivery.carrier.option,code:0
+#: field:delivery.carrier.template.option,code:0
+#: field:stock.picking,carrier_code:0
 msgid "Code"
 msgstr "Koda"
+
+#. module: base_delivery_carrier_label
+#: field:shipping.label,company_id:0
+msgid "Company"
+msgstr "Družba"
 
 #. module: base_delivery_carrier_label
 #: view:stock.picking:base_delivery_carrier_label.view_picking_withcarrier_out_form
@@ -100,12 +123,17 @@ msgid "Created on"
 msgstr "Ustvarjeno"
 
 #. module: base_delivery_carrier_label
+#: field:shipping.label,db_datas:0
+msgid "Database Data"
+msgstr "Podatki podatkovne zbirke"
+
+#. module: base_delivery_carrier_label
 #: help:carrier.account,file_format:0
 msgid "Default format of the carrier's label you want to print"
 msgstr "Privzeti format prevoznikove etikete, ki jo želite natisniti"
 
 #. module: base_delivery_carrier_label
-#: help:delivery.carrier,code:0
+#: help:delivery.carrier,code:0 help:stock.picking,carrier_code:0
 msgid "Delivery Method Code (according to carrier)"
 msgstr "Koda dostavne metode (glede na prevoznika)"
 
@@ -122,14 +150,44 @@ msgstr "Predloga opcije dostavnega prevoznika"
 #. module: base_delivery_carrier_label
 #: view:delivery.carrier:base_delivery_carrier_label.view_delivery_carrier_form
 #: field:delivery.carrier,description:0
+#: field:delivery.carrier.option,description:0
 #: field:delivery.carrier.template.option,description:0
+#: field:shipping.label,description:0
 msgid "Description"
 msgstr "Opis"
+
+#. module: base_delivery_carrier_label
+#: field:carrier.account,display_name:0
+#: field:delivery.carrier.option,display_name:0
+#: field:delivery.carrier.template.option,display_name:0
+#: field:shipping.label,display_name:0
+msgid "Display Name"
+msgstr "Prikazni naziv"
+
+#. module: base_delivery_carrier_label
+#: field:shipping.label,datas:0
+msgid "File Content"
+msgstr "Vsebina datoteke"
 
 #. module: base_delivery_carrier_label
 #: field:carrier.account,file_format:0
 msgid "File Format"
 msgstr "Format datoteke"
+
+#. module: base_delivery_carrier_label
+#: field:shipping.label,datas_fname:0
+msgid "File Name"
+msgstr "Naziv datoteke"
+
+#. module: base_delivery_carrier_label
+#: field:shipping.label,file_size:0
+msgid "File Size"
+msgstr "Velikost datoteke"
+
+#. module: base_delivery_carrier_label
+#: field:shipping.label,file_type_icon:0
+msgid "File Type Icon"
+msgstr "Ikona tipa datoteke"
 
 #. module: base_delivery_carrier_label
 #: field:shipping.label,file_type:0
@@ -153,6 +211,14 @@ msgid ""
 "In case of several carriers, help to know which account belong to which "
 "carrier"
 msgstr "V primeru več prevoznikov pomaga ugotoviti, kateri konto pripada kateremu prevozniku"
+
+#. module: base_delivery_carrier_label
+#: field:carrier.account,__last_update:0
+#: field:delivery.carrier.option,__last_update:0
+#: field:delivery.carrier.template.option,__last_update:0
+#: field:shipping.label,__last_update:0
+msgid "Last Modified on"
+msgstr "Zadnjič spremenjeno"
 
 #. module: base_delivery_carrier_label
 #: field:carrier.account,write_uid:0 field:delivery.carrier.option,write_uid:0
@@ -219,6 +285,7 @@ msgid "Parcel Tracking"
 msgstr "Sledenje pošiljk"
 
 #. module: base_delivery_carrier_label
+#: field:delivery.carrier.option,partner_id:0
 #: field:delivery.carrier.template.option,partner_id:0
 msgid "Partner Carrier"
 msgstr "Partner prevoznik"
@@ -239,6 +306,21 @@ msgid "Readonly Flag"
 msgstr "Označeno 'le za branje'"
 
 #. module: base_delivery_carrier_label
+#: field:shipping.label,res_id:0
+msgid "Resource ID"
+msgstr "ID vira"
+
+#. module: base_delivery_carrier_label
+#: field:shipping.label,res_model:0
+msgid "Resource Model"
+msgstr "Model vira"
+
+#. module: base_delivery_carrier_label
+#: field:shipping.label,res_name:0
+msgid "Resource Name"
+msgstr "Naziv vira"
+
+#. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_shipping_label
 msgid "Shipping Label"
 msgstr "Etiketa za odpošiljanje"
@@ -252,6 +334,21 @@ msgid ""
 msgstr "Za zbirnik %s že obstaja nekaj etiket.\nV priponkah izbrišite obstoječe etikete za ta zbirnik in ponovno poskusite."
 
 #. module: base_delivery_carrier_label
+#: field:shipping.label,store_fname:0
+msgid "Stored Filename"
+msgstr "Shranjeni naziv datoteke"
+
+#. module: base_delivery_carrier_label
+#: help:shipping.label,res_model:0
+msgid "The database object this attachment will be attached to"
+msgstr "Objekt podatkovne baze kateremu bo ta priponka pripeta"
+
+#. module: base_delivery_carrier_label
+#: help:shipping.label,res_id:0
+msgid "The record id this is attached to"
+msgstr "ID zapisa kateremu je to pripeto"
+
+#. module: base_delivery_carrier_label
 #: help:stock.quant.package,weight:0
 msgid ""
 "Total weight of the package in kg, including the weight of the logistic "
@@ -260,8 +357,14 @@ msgstr "Skupna masa pakiranja v kg, vključno masa logistične enote."
 
 #. module: base_delivery_carrier_label
 #: field:carrier.account,type:0 field:delivery.carrier,type:0
+#: field:shipping.label,type:0
 msgid "Type"
 msgstr "Tip"
+
+#. module: base_delivery_carrier_label
+#: field:shipping.label,url:0
+msgid "Url"
+msgstr "Url"
 
 #. module: base_delivery_carrier_label
 #: field:stock.pack.operation,weight:0 field:stock.quant.package,weight:0

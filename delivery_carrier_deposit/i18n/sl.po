@@ -3,13 +3,13 @@
 # * delivery_carrier_deposit
 # 
 # Translators:
-# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: carrier-delivery (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-11 09:37+0000\n"
-"PO-Revision-Date: 2015-06-27 09:28+0000\n"
+"POT-Creation-Date: 2016-05-03 12:24+0000\n"
+"PO-Revision-Date: 2016-05-01 04:56+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-carrier-delivery-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -158,6 +158,12 @@ msgid "Deposit Slip n°"
 msgstr "Potrdilo o pologu št."
 
 #. module: delivery_carrier_deposit
+#: field:delivery.deposit.wizard,display_name:0
+#: field:deposit.slip,display_name:0
+msgid "Display Name"
+msgstr "Prikazni naziv"
+
+#. module: delivery_carrier_deposit
 #: selection:deposit.slip,state:0
 msgid "Done"
 msgstr "Opravljeno"
@@ -210,6 +216,12 @@ msgid "Last Message Date"
 msgstr "Datum zadnjega sporočila"
 
 #. module: delivery_carrier_deposit
+#: field:delivery.deposit.wizard,__last_update:0
+#: field:deposit.slip,__last_update:0
+msgid "Last Modified on"
+msgstr "Zadnjič spremenjeno"
+
+#. module: delivery_carrier_deposit
 #: field:delivery.deposit.wizard,write_uid:0 field:deposit.slip,write_uid:0
 msgid "Last Updated by"
 msgstr "Zadnji posodobil"
@@ -243,6 +255,11 @@ msgstr "Naziv in naslov"
 #: view:website:delivery_carrier_deposit.report_generic_deposit_slip
 msgid "Nr of"
 msgstr "Št."
+
+#. module: delivery_carrier_deposit
+#: field:deposit.slip,number_of_packages:0
+msgid "Number of Packages"
+msgstr "Število pakiranj"
 
 #. module: delivery_carrier_deposit
 #: view:website:delivery_carrier_deposit.report_generic_deposit_slip
@@ -291,6 +308,11 @@ msgstr "Ni dostavnih nalogov v premeščenem stanju z dostavno metodo tipa '%s',
 #: view:website:delivery_carrier_deposit.report_generic_deposit_slip
 msgid "Total Number of Packages:"
 msgstr "Skupaj število pakiranj:"
+
+#. module: delivery_carrier_deposit
+#: field:deposit.slip,weight:0
+msgid "Total Weight"
+msgstr "Skupna masa"
 
 #. module: delivery_carrier_deposit
 #: view:website:delivery_carrier_deposit.report_generic_deposit_slip

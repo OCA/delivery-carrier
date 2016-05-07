@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: carrier-delivery (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-11 09:37+0000\n"
-"PO-Revision-Date: 2015-06-23 09:17+0000\n"
+"POT-Creation-Date: 2016-05-03 12:24+0000\n"
+"PO-Revision-Date: 2016-04-30 07:57+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: English (http://www.transifex.com/oca/OCA-carrier-delivery-8-0/language/en/)\n"
 "MIME-Version: 1.0\n"
@@ -43,6 +43,11 @@ msgid "Additional Service"
 msgstr "Additional Service"
 
 #. module: delivery_carrier_label_postlogistics
+#: field:delivery.carrier,allowed_option_ids:0
+msgid "Allowed options"
+msgstr "Allowed options"
+
+#. module: delivery_carrier_label_postlogistics
 #: view:postlogistics.config.settings:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
 msgid "Apply"
 msgstr "Apply"
@@ -68,6 +73,14 @@ msgid "Basic Service"
 msgstr "Basic Service"
 
 #. module: delivery_carrier_label_postlogistics
+#: help:delivery.carrier,postlogistics_basic_service_ids:0
+msgid ""
+"Basic Service defines the available additional options for this delivery "
+"method"
+msgstr "Basic Service defines the available additional options for this delivery method"
+
+#. module: delivery_carrier_label_postlogistics
+#: field:delivery.carrier.option,postlogistics_basic_service_ids:0
 #: field:delivery.carrier.template.option,postlogistics_basic_service_ids:0
 msgid "Basic Services"
 msgstr "Basic Services"
@@ -94,19 +107,27 @@ msgid "Company"
 msgstr "Company"
 
 #. module: delivery_carrier_label_postlogistics
+#: field:postlogistics.config.settings,logo:0
 #: field:res.company,postlogistics_logo:0
 msgid "Company Logo on Post labels"
 msgstr "Company Logo on Post labels"
 
 #. module: delivery_carrier_label_postlogistics
+#: field:delivery.carrier.option,postlogistics_additonial_service_ids:0
 #: field:delivery.carrier.template.option,postlogistics_additonial_service_ids:0
 msgid "Compatible Additional Services"
 msgstr "Compatible Additional Services"
 
 #. module: delivery_carrier_label_postlogistics
+#: field:delivery.carrier.option,postlogistics_delivery_instruction_ids:0
 #: field:delivery.carrier.template.option,postlogistics_delivery_instruction_ids:0
 msgid "Compatible Delivery Instructions"
 msgstr "Compatible Delivery Instructions"
+
+#. module: delivery_carrier_label_postlogistics
+#: help:delivery.carrier,allowed_option_ids:0
+msgid "Compute allowed options according to selected options."
+msgstr "Compute allowed options according to selected options."
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.actions.act_window,name:delivery_carrier_label_postlogistics.action_postlogistics_config
@@ -167,16 +188,19 @@ msgid "Default configs"
 msgstr "Default configs"
 
 #. module: delivery_carrier_label_postlogistics
+#: field:postlogistics.config.settings,default_label_layout:0
 #: field:res.company,postlogistics_default_label_layout:0
 msgid "Default label layout"
 msgstr "Default label layout"
 
 #. module: delivery_carrier_label_postlogistics
+#: field:postlogistics.config.settings,default_output_format:0
 #: field:res.company,postlogistics_default_output_format:0
 msgid "Default output format"
 msgstr "Default output format"
 
 #. module: delivery_carrier_label_postlogistics
+#: field:postlogistics.config.settings,default_resolution:0
 #: field:res.company,postlogistics_default_resolution:0
 msgid "Default resolution"
 msgstr "Default resolution"
@@ -202,6 +226,14 @@ msgid "Description"
 msgstr "Description"
 
 #. module: delivery_carrier_label_postlogistics
+#: field:postlogistics.config.settings,display_name:0
+#: field:postlogistics.license,display_name:0
+#: field:postlogistics.service.group,display_name:0
+msgid "Display Name"
+msgstr "Display Name"
+
+#. module: delivery_carrier_label_postlogistics
+#: field:postlogistics.config.settings,office:0
 #: field:res.company,postlogistics_office:0
 msgid "Domicile Post office"
 msgstr "Domicile Post office"
@@ -278,6 +310,13 @@ msgid "Label Layout"
 msgstr "Label Layout"
 
 #. module: delivery_carrier_label_postlogistics
+#: field:postlogistics.config.settings,__last_update:0
+#: field:postlogistics.license,__last_update:0
+#: field:postlogistics.service.group,__last_update:0
+msgid "Last Modified on"
+msgstr "Last Modified on"
+
+#. module: delivery_carrier_label_postlogistics
 #: field:postlogistics.config.settings,write_uid:0
 #: field:postlogistics.license,write_uid:0
 #: field:postlogistics.service.group,write_uid:0
@@ -297,6 +336,7 @@ msgid "Licenses"
 msgstr "Licenses"
 
 #. module: delivery_carrier_label_postlogistics
+#: help:delivery.carrier.option,postlogistics_basic_service_ids:0
 #: help:delivery.carrier.template.option,postlogistics_basic_service_ids:0
 msgid "List of basic service for which this service is compatible"
 msgstr "List of basic service for which this service is compatible"
@@ -307,6 +347,7 @@ msgid "Number"
 msgstr "Number"
 
 #. module: delivery_carrier_label_postlogistics
+#: help:postlogistics.config.settings,logo:0
 #: help:res.company,postlogistics_logo:0
 msgid ""
 "Optional company logo to show on label.\n"
@@ -341,6 +382,7 @@ msgid "PNG"
 msgstr "PNG"
 
 #. module: delivery_carrier_label_postlogistics
+#: field:postlogistics.config.settings,password:0
 #: field:res.company,postlogistics_password:0
 msgid "Password"
 msgstr "Password"
@@ -356,6 +398,7 @@ msgid "Picking List"
 msgstr "Picking List"
 
 #. module: delivery_carrier_label_postlogistics
+#: help:postlogistics.config.settings,office:0
 #: help:res.company,postlogistics_office:0
 msgid "Post office which will receive the shipped goods"
 msgstr "Post office which will receive the shipped goods"
@@ -363,19 +406,23 @@ msgstr "Post office which will receive the shipped goods"
 #. module: delivery_carrier_label_postlogistics
 #: field:delivery.carrier,postlogistics_license_id:0
 #: model:ir.model,name:delivery_carrier_label_postlogistics.model_postlogistics_license
+#: field:postlogistics.config.settings,license_ids:0
 #: field:postlogistics.service.group,postlogistics_license_ids:0
 #: field:res.company,postlogistics_license_ids:0
 msgid "PostLogistics Franking License"
 msgstr "PostLogistics Franking License"
 
 #. module: delivery_carrier_label_postlogistics
+#: field:delivery.carrier,postlogistics_basic_service_ids:0
 #: field:delivery.carrier,postlogistics_service_group_id:0
+#: field:delivery.carrier.option,postlogistics_service_group_id:0
 #: field:delivery.carrier.template.option,postlogistics_service_group_id:0
 #: model:ir.model,name:delivery_carrier_label_postlogistics.model_postlogistics_service_group
 msgid "PostLogistics Service Group"
 msgstr "PostLogistics Service Group"
 
 #. module: delivery_carrier_label_postlogistics
+#: field:delivery.carrier.option,postlogistics_type:0
 #: field:delivery.carrier.template.option,postlogistics_type:0
 msgid "PostLogistics option type"
 msgstr "PostLogistics option type"
@@ -447,9 +494,16 @@ msgid "Update PostLogistics Services"
 msgstr "Update PostLogistics Services"
 
 #. module: delivery_carrier_label_postlogistics
+#: field:postlogistics.config.settings,username:0
 #: field:res.company,postlogistics_username:0
 msgid "Username"
 msgstr "Username"
+
+#. module: delivery_carrier_label_postlogistics
+#: field:postlogistics.config.settings,wsdl_url:0
+#: field:res.company,postlogistics_wsdl_url:0
+msgid "WSDL URL"
+msgstr "WSDL URL"
 
 #. module: delivery_carrier_label_postlogistics
 #: view:postlogistics.config.settings:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
