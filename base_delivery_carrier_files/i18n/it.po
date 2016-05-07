@@ -4,12 +4,13 @@
 # 
 # Translators:
 # Paolo Valier, 2016
+# Paolo Valier, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: carrier-delivery (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-16 07:28+0000\n"
-"PO-Revision-Date: 2016-04-28 06:51+0000\n"
+"POT-Creation-Date: 2016-05-03 12:24+0000\n"
+"PO-Revision-Date: 2016-05-01 08:59+0000\n"
 "Last-Translator: Paolo Valier\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-carrier-delivery-8-0/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -93,6 +94,12 @@ msgid "Delivery orders to invoice"
 msgstr "Ordini di Spedizione da fatturare"
 
 #. module: base_delivery_carrier_files
+#: field:delivery.carrier.file,display_name:0
+#: field:delivery.carrier.file.generate,display_name:0
+msgid "Display Name"
+msgstr "Nome da visualizzare"
+
+#. module: base_delivery_carrier_files
 #: field:delivery.carrier.file,export_path:0
 msgid "Export Path"
 msgstr ""
@@ -156,6 +163,12 @@ msgid ""
 msgstr ""
 
 #. module: base_delivery_carrier_files
+#: field:delivery.carrier.file,__last_update:0
+#: field:delivery.carrier.file.generate,__last_update:0
+msgid "Last Modified on"
+msgstr "Ultima modifica il"
+
+#. module: base_delivery_carrier_files
 #: field:delivery.carrier.file,write_uid:0
 #: field:delivery.carrier.file.generate,write_uid:0
 msgid "Last Updated by"
@@ -187,7 +200,7 @@ msgstr ""
 #. module: base_delivery_carrier_files
 #: model:ir.model,name:base_delivery_carrier_files.model_stock_picking
 msgid "Picking List"
-msgstr ""
+msgstr "Lista Picking"
 
 #. module: base_delivery_carrier_files
 #: field:delivery.carrier.file.generate,recreate:0
