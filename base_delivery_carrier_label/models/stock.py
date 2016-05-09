@@ -220,6 +220,7 @@ class StockPicking(models.Model):
             for label in shipping_labels:
                 data = {
                     'name': label['name'],
+                    'datas_fname': label.get('filename', label['name']),
                     'res_id': pick.id,
                     'res_model': 'stock.picking',
                     'datas': label['file'].encode('base64'),
