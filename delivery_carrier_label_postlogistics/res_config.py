@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Author: Yannick Vaucher
-#    Copyright 2013 Camptocamp SA
+#    Copyright 2013-2016 Camptocamp SA
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -36,7 +36,13 @@ class PostlogisticsConfigSettings(orm.TransientModel):
         'company_id': fields.many2one('res.company', 'Company', required=True),
         'wsdl_url': fields.related(
             'company_id', 'postlogistics_wsdl_url',
-            string='WSDL URL', type='char'),
+            string='WSDL URL', type='char',
+            readonly=True),
+        'test_mode': fields.related(
+            'company_id', 'postlogistics_test_mode',
+            string="Test mode", type='boolean',
+            help="Will generate Specimen labels using test end point of "
+                 "webservice."),
         'username': fields.related(
             'company_id', 'postlogistics_username',
             string='Username', type='char'),
@@ -130,6 +136,8 @@ class PostlogisticsConfigSettings(orm.TransientModel):
         values = {
             'username': company.postlogistics_username,
             'password': company.postlogistics_password,
+            'test_mode': company.postlogistics_test_mode,
+            'wsdl_url': company.postlogistics_wsdl_url,
             'license_ids': license_ids,
             'logo': company.postlogistics_logo,
             'office': company.postlogistics_office,

@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Author: Yannick Vaucher
-#    Copyright 2013 Camptocamp SA
+#    Copyright 2013-2016 Camptocamp SA
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -26,11 +26,23 @@ class ResCompany(orm.Model):
     _inherit = 'res.company'
 
     def _get_wsdl_url(self, cr, uid, ids, field_name, arg, context=None):
+        companies = self.browse(cr, uid, ids, context=context)
+        path = 'delivery_carrier_label_postlogistics/data/'
+        filename = 'barcode_v2_2_wsbc.wsdl'
         wsdl_file, wsdl_path = file_open(
-            'delivery_carrier_label_postlogistics/data/barcode_v2_2_wsbc.wsdl',
+            path + 'production/' + filename,
             pathinfo=True)
         wsdl_url = 'file://' + wsdl_path
-        res = dict.fromkeys(ids, wsdl_url)
+        wsdl_file, wsdl_path_int = file_open(
+            path + 'integration/' + filename,
+            pathinfo=True)
+        wsdl_int_url = 'file://' + wsdl_path_int
+        res = {}
+        for cp in companies:
+            if cp.postlogistics_test_mode:
+                res[cp.id] = wsdl_int_url
+            else:
+                res[cp.id] = wsdl_url
         return res
 
     _columns = {
@@ -38,6 +50,7 @@ class ResCompany(orm.Model):
             _get_wsdl_url,
             string='WSDL URL',
             type='char'),
+        'postlogistics_test_mode': fields.boolean(),
         'postlogistics_username': fields.char('Username'),
         'postlogistics_password': fields.char('Password'),
         'postlogistics_license_ids': fields.one2many(
