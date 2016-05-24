@@ -33,6 +33,14 @@
               <label for="password"/>
               <field name="password" class="oe_inline"/>
             </div>
+            <div>
+              <label for="test_mode"/>
+              <field name="test_mode" class="oe_inline"/>
+            </div>
+            <div>
+              <label for="wsdl_url"/>
+              <field name="wsdl_url" class="oe_inline"/>
+            </div>
           </div>
         </group>
         <separator string="Licenses"/>

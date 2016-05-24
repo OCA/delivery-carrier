@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-# © 2013-2015 Yannick Vaucher (Camptocamp SA)
+# © 2013-2016 Yannick Vaucher (Camptocamp SA)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 import logging
 
-from openerp import api, exceptions, models, _
+from openerp import api, exceptions, fields, models, _
 
 from ..postlogistics.web_service import PostlogisticsWebService
 from . company import ResCompany
@@ -19,6 +19,16 @@ class PostlogisticsConfigSettings(models.TransientModel):
     _prefix = 'postlogistics_'
 
     _companyObject = ResCompany
+
+    wsdl_url = fields.Char(
+        related='company_id.postlogistics_wsdl_url',
+        readonly=True,
+    )
+    test_mode = fields.Boolean(
+        related='company_id.postlogistics_test_mode',
+        help="Will generate Specimen labels using test end point of "
+             "webservice."
+    )
 
     @api.model
     def _get_delivery_instructions(self, web_service, company, service_code):
