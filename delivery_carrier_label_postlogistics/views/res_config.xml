@@ -81,6 +81,15 @@
             </div>
           </div>
         </group>
+        <separator string="Tracking numbers"/>
+        <group>
+          <div>
+            <div>
+              <label for="tracking_format"/>
+              <field name="tracking_format" class="oe_inline"/>
+            </div>
+          </div>
+        </group>
         <group>
           <div>
             <div>

@@ -30,6 +30,22 @@ class PostlogisticsConfigSettings(models.TransientModel):
              "webservice."
     )
 
+    tracking_format = fields.Selection(
+        related='company_id.postlogistics_tracking_format',
+        selection=[
+            ('postlogistics', "Use default postlogistics tracking numbers"
+             ),
+            ('picking_num', 'Use picking number with pack counter')],
+        string="Tracking number format", type='selection',
+        help="Allows you to define how the ItemNumber (the last 8 digits) "
+             "of the tracking number will be generated:\n"
+             "- Default postlogistics numbers: The webservice generates it"
+             " for you.\n"
+             "- Picking number with pack counter: Generate it using the "
+             "digits of picking name and add the pack number. 2 digits for"
+             "pack number and 6 digits for picking number. (eg. 07000042 "
+             "for picking 42 and 7th pack")
+
     @api.model
     def _get_delivery_instructions(self, web_service, company, service_code):
         lang = self.env.context.get('lang', 'en')
