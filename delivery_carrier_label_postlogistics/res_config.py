@@ -98,6 +98,21 @@ class PostlogisticsConfigSettings(orm.TransientModel):
             string='Default resolution', type='many2one',
             relation='delivery.carrier.template.option',
             domain=[('postlogistics_type', '=', 'resolution')]),
+        'tracking_format': fields.related(
+            'company_id', 'postlogistics_tracking_format',
+            selection=[
+                ('postlogistics', "Use default postlogistics tracking numbers"
+                 ),
+                ('picking_num', 'Use picking number with pack counter')],
+            string="Tracking number format", type='selection',
+            help="Allows you to define how the ItemNumber (the last 8 digits) "
+                 "of the tracking number will be generated:\n"
+                 "- Default postlogistics numbers: The webservice generates it"
+                 " for you.\n"
+                 "- Picking number with pack counter: Generate it using the "
+                 "digits of picking name and add the pack number. 2 digits for"
+                 "pack number and 6 digits for picking number. (eg. 07000042 "
+                 "for picking 42 and 7th pack"),
     }
 
     def _default_company(self, cr, uid, context=None):
@@ -144,6 +159,7 @@ class PostlogisticsConfigSettings(orm.TransientModel):
             'default_label_layout': label_layout,
             'default_output_format': output_format,
             'default_resolution': resolution,
+            'tracking_format': company.postlogistics_tracking_format,
         }
         return {'value': values}
 

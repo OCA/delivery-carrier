@@ -66,4 +66,12 @@ class ResCompany(orm.Model):
             'delivery.carrier.template.option', 'Default output format'),
         'postlogistics_default_resolution': fields.many2one(
             'delivery.carrier.template.option', 'Default resolution'),
+        'postlogistics_tracking_format': fields.selection(
+            [('postlogistics', "Use default postlogistics tracking numbers"),
+             ('picking_num', 'Use picking number with pack counter')],
+            string="Tracking number format"),
+    }
+
+    _defaults = {
+        'postlogistics_tracking_format': 'postlogistics'
     }

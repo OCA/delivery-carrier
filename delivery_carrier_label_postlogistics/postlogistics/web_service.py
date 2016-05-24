@@ -311,16 +311,27 @@ class PostlogisticsWebService(object):
     def _prepare_item_list(self, picking, recipient, attributes, trackings):
         """ Return a list of item made from the pickings """
 
+        company = picking.company_id
+
+        picking_num = _compile_itemnum.sub('', picking.name)
+
         # Check for an empty list (no packs) => use the picking
         if not trackings:
-            return [{'ItemID': self._get_itemid(picking, picking.name),
-                     'Recipient': recipient,
-                     'Attributes': attributes,
-                     }]
+            item_list = [
+                {'ItemID': self._get_itemid(picking, picking.name),
+                 'Recipient': recipient,
+                 'Attributes': attributes,
+                 }]
+            if company.postlogistics_tracking_format == 'picking_num':
+                # start with 9 to garentee uniqueness and use 7 digits
+                # of picking number
+                item_number = '9%s' % picking_num[-7:].zfill(7)
+                item_list[0]['ItemNumber'] = item_number
+            return item_list
 
         # Otherwise, create an item per pack
         item_list = []
-        for pack in trackings:
+        for counter, pack in enumerate(trackings):
             name = pack.name
             itemid = self._get_itemid(picking, name)
             item = {
@@ -328,6 +339,11 @@ class PostlogisticsWebService(object):
                 'Recipient': recipient,
                 'Attributes': attributes,
             }
+
+            if company.postlogistics_tracking_format == 'picking_num':
+                pack_num = counter + 1
+                item_number = '%02d%s' % (pack_num, picking_num[-6:].zfill(6))
+                item['ItemNumber'] = item_number
 
             item_list.append(item)
 
