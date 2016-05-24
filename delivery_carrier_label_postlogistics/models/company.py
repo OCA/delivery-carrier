@@ -53,6 +53,12 @@ class ResCompany(models.Model):
         string='Default resolution',
         domain=[('postlogistics_type', '=', 'resolution')],
     )
+    postlogistics_tracking_format = fields.Selection(
+        [('postlogistics', "Use default postlogistics tracking numbers"),
+         ('picking_num', 'Use picking number with pack counter')],
+        string="Tracking number format",
+        default='postlogistics',
+    )
 
     @api.depends('postlogistics_test_mode')
     def _get_wsdl_url(self):
