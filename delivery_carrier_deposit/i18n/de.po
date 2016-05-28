@@ -3,13 +3,14 @@
 # * delivery_carrier_deposit
 # 
 # Translators:
-# Rudolf Schnapka <rs@techno-flex.de>, 2015
+# Hotellook, 2014
+# Rudolf Schnapka <rs@techno-flex.de>, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: carrier-delivery (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-16 09:42+0000\n"
-"PO-Revision-Date: 2015-11-25 09:17+0000\n"
+"POT-Creation-Date: 2016-05-07 07:59+0000\n"
+"PO-Revision-Date: 2016-05-23 09:55+0000\n"
 "Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-carrier-delivery-8-0/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -158,6 +159,12 @@ msgid "Deposit Slip n°"
 msgstr "Einlieferbelegnr."
 
 #. module: delivery_carrier_deposit
+#: field:delivery.deposit.wizard,display_name:0
+#: field:deposit.slip,display_name:0
+msgid "Display Name"
+msgstr "Anzeigebezeichnung"
+
+#. module: delivery_carrier_deposit
 #: selection:deposit.slip,state:0
 msgid "Done"
 msgstr "Erledigt"
@@ -210,6 +217,12 @@ msgid "Last Message Date"
 msgstr "Letztes Meldungsdatum"
 
 #. module: delivery_carrier_deposit
+#: field:delivery.deposit.wizard,__last_update:0
+#: field:deposit.slip,__last_update:0
+msgid "Last Modified on"
+msgstr "Zuletzt geändert am"
+
+#. module: delivery_carrier_deposit
 #: field:delivery.deposit.wizard,write_uid:0 field:deposit.slip,write_uid:0
 msgid "Last Updated by"
 msgstr "Zuletzt aktualisiert durch"
@@ -243,6 +256,11 @@ msgstr "Name und Anschrift"
 #: view:website:delivery_carrier_deposit.report_generic_deposit_slip
 msgid "Nr of"
 msgstr "Nr. aus"
+
+#. module: delivery_carrier_deposit
+#: field:deposit.slip,number_of_packages:0
+msgid "Number of Packages"
+msgstr "Anzahl Pakete"
 
 #. module: delivery_carrier_deposit
 #: view:website:delivery_carrier_deposit.report_generic_deposit_slip
@@ -291,6 +309,11 @@ msgstr "Es gibt keine Lieferungen im Status 'Übertragen' zum Lieferwegart '%s' 
 #: view:website:delivery_carrier_deposit.report_generic_deposit_slip
 msgid "Total Number of Packages:"
 msgstr "Gesamtanzahl Pakete:"
+
+#. module: delivery_carrier_deposit
+#: field:deposit.slip,weight:0
+msgid "Total Weight"
+msgstr "Gesamtgewicht"
 
 #. module: delivery_carrier_deposit
 #: view:website:delivery_carrier_deposit.report_generic_deposit_slip
