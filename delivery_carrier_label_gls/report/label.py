@@ -416,10 +416,10 @@ code: %s ; message: %s ; result: %s""" % (code, message, result))
 
     def set_origin_reference(self, parcel, address):
         return (
-            self.product_code
-            + parcel['custom_sequence']
-            + '0000'
-            + address['country_code']
+            self.product_code +
+            parcel['custom_sequence'] +
+            '0000' +
+            address['country_code']
         )
 
     def validate_mako(self, template, available_keys):

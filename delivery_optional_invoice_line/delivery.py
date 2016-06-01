@@ -40,8 +40,8 @@ class stock_picking(orm.Model):
         res = super(stock_picking, self)._prepare_shipping_invoice_line(
             cr, uid, picking, invoice, context=context)
         if (
-            picking.carrier_id
-            and picking.carrier_id.do_not_create_invoice_line
+            picking.carrier_id and
+            picking.carrier_id.do_not_create_invoice_line
         ):
             res = None
         return res

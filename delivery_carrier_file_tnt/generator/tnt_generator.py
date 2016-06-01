@@ -68,14 +68,14 @@ class TNTFileGenerator(CarrierFileGenerator):
         line = TNTLine()
         line.reference = picking.name
         if picking.address_id:
-            line.name = (picking.address_id.partner_id
-                         and picking.address_id.partner_id.name)
+            line.name = (picking.address_id.partner_id and
+                         picking.address_id.partner_id.name)
             line.contact = picking.address_id.name
             line.street1 = picking.address_id.street
             line.street2 = picking.address_id.street2
             line.zip = picking.address_id.zip
-            line.state = (picking.address_id.state_id
-                          and picking.address_id.state_id.name)
+            line.state = (picking.address_id.state_id and
+                          picking.address_id.state_id.name)
             line.city = picking.address_id.city
             line.country = picking.address_id.country_id.code
             line.country_name = picking.address_id.country_id.name
