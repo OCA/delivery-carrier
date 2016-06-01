@@ -322,12 +322,22 @@ class PostlogisticsWebService(object):
         codes = [name, pack_no]
         return "+".join(c for c in codes if c)
 
+    def _get_item_number(self, picking, pack_num):
+        """ Generate the tracking reference for the last 8 digits
+        of tracking number of the label.
+
+        2 first digits for a pack counter
+        6 last digits for the picking name
+
+        e.g. 03000042 for 3rd pack of picking OUT/19000042
+        """
+        picking_num = _compile_itemnum.sub('', picking.name)
+        return '%02d%s' % (pack_num, picking_num[-6:].zfill(6))
+
     def _prepare_item_list(self, picking, recipient, trackings):
         """ Return a list of item made from the pickings """
 
         company = picking.company_id
-
-        picking_num = _compile_itemnum.sub('', picking.name)
 
         # Check for an empty list (no packs) => use the picking
         if not trackings:
@@ -340,6 +350,7 @@ class PostlogisticsWebService(object):
             if company.postlogistics_tracking_format == 'picking_num':
                 # start with 9 to garentee uniqueness and use 7 digits
                 # of picking number
+                picking_num = _compile_itemnum.sub('', picking.name)
                 item_number = '9%s' % picking_num[-7:].zfill(7)
                 item_list[0]['ItemNumber'] = item_number
             return item_list
@@ -360,7 +371,7 @@ class PostlogisticsWebService(object):
             }
 
             if company.postlogistics_tracking_format == 'picking_num':
-                item_number = '%02d%s' % (pack_num, picking_num[-6:].zfill(6))
+                item_number = self._get_item_number(picking, pack_num)
                 item['ItemNumber'] = item_number
 
             item_list.append(item)
