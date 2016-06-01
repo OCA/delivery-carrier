@@ -100,6 +100,7 @@ Contributors
  'data': ['res_partner_data.xml',
           'delivery_data.xml',
           'delivery_view.xml',
+          'stock_view.xml',
           'res_config_view.xml',
           'security/ir.model.access.csv',
           ],

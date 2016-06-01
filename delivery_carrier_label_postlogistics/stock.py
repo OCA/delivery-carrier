@@ -20,13 +20,31 @@
 ##############################################################################
 from operator import attrgetter
 
-from openerp.osv import orm
+from openerp.osv import orm, fields
 
 from .postlogistics.web_service import PostlogisticsWebService
 
 
 class stock_picking(orm.Model):
     _inherit = 'stock.picking'
+
+    _columns = {
+        'cash_on_delivery': fields.float(
+            "Cash on Delivery", help="Amount for Cash on delivery service (N)"
+        ),
+        'delivery_fixed_date': fields.date(
+            "Fixed delivery date", help="Specific delivery date (ZAW3217)"
+        ),
+        'delivery_place': fields.char(
+            "Delivery Place", help="For Deposit item service (ZAW3219)"
+        ),
+        'delivery_phone': fields.char(
+            "Phone", help="For notify delivery by telephone (ZAW3213)"
+        ),
+        'delivery_mobile': fields.char(
+            "Mobile", help="For notify delivery by telephone (ZAW3213)"
+        ),
+    }
 
     def _generate_postlogistics_label(self, cr, uid, picking,
                                       webservice_class=None,
@@ -106,6 +124,50 @@ class stock_picking(orm.Model):
         return super(stock_picking, self).\
             generate_shipping_labels(cr, uid, ids, tracking_ids=tracking_ids,
                                      context=context)
+
+
+class stock_picking_out(orm.Model):
+    _inherit = 'stock.picking.out'
+
+    _columns = {
+        'cash_on_delivery': fields.float(
+            "Cash on Delivery", help="Amount for Cash on delivery service (N)"
+        ),
+        'delivery_fixed_date': fields.date(
+            "Fixed delivery date", help="Specific delivery date (ZAW3217)"
+        ),
+        'delivery_place': fields.char(
+            "Delivery Place", help="For Deposit item service (ZAW3219)"
+        ),
+        'delivery_phone': fields.char(
+            "Phone", help="For notify delivery by telephone (ZAW3213)"
+        ),
+        'delivery_mobile': fields.char(
+            "Mobile", help="For notify delivery by telephone (ZAW3213)"
+        ),
+    }
+
+
+class stock_picking_in(orm.Model):
+    _inherit = 'stock.picking.in'
+
+    _columns = {
+        'cash_on_delivery': fields.float(
+            "Cash on Delivery", help="Amount for Cash on delivery service (N)"
+        ),
+        'delivery_fixed_date': fields.date(
+            "Fixed delivery date", help="Specific delivery date (ZAW3217)"
+        ),
+        'delivery_place': fields.char(
+            "Delivery Place", help="For Deposit item service (ZAW3219)"
+        ),
+        'delivery_phone': fields.char(
+            "Phone", help="For notify delivery by telephone (ZAW3213)"
+        ),
+        'delivery_mobile': fields.char(
+            "Mobile", help="For notify delivery by telephone (ZAW3213)"
+        ),
+    }
 
 
 class ShippingLabel(orm.Model):
