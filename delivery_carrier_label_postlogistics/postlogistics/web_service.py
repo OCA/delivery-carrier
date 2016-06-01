@@ -326,10 +326,21 @@ class PostlogisticsWebService(object):
             result += cod_attributes
         return result
 
+    def _get_item_number(self, picking, pack_num):
+        """ Generate the tracking reference for the last 8 digits
+        of tracking number of the label.
+
+        2 first digits for a pack counter
+        6 last digits for the picking name
+
+        e.g. 03000042 for 3rd pack of picking OUT/19000042
+        """
+        picking_num = _compile_itemnum.sub('', picking.name)
+        return '%02d%s' % (pack_num, picking_num[-6:].zfill(6))
+
     def _prepare_item_list(self, picking, recipient, packages):
         """ Return a list of item made from the pickings """
         company = picking.company_id
-        picking_num = _compile_itemnum.sub('', picking.name)
         item_list = []
         pack_counter = 1
 
@@ -347,10 +358,10 @@ class PostlogisticsWebService(object):
                 if not package:
                     # start with 9 to garentee uniqueness and use 7 digits
                     # of picking number
+                    picking_num = _compile_itemnum.sub('', picking.name)
                     item_number = '9%s' % picking_num[-7:].zfill(7)
                 else:
-                    item_number = '%02d%s' % (pack_counter,
-                                              picking_num[-6:].zfill(6))
+                    item_number = self._get_item_number(picking, pack_counter)
                 item['ItemNumber'] = item_number
 
             additional_data = self._get_item_additional_data(picking,
