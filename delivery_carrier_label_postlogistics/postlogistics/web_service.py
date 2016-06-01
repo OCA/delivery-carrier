@@ -294,7 +294,7 @@ class PostlogisticsWebService(object):
                 'ParcelTotal': pack_total or picking.number_of_packages,
                 'ParcelNo': pack_num,
             })
-        if 'ZAW3219' in option_codes:
+        if 'ZAW3219' in option_codes and picking.delivery_place:
             attributes['DeliveryPlace'] = picking.delivery_place
         return attributes
 
