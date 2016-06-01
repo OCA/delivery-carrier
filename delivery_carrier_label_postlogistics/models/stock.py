@@ -3,13 +3,26 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from operator import attrgetter
 
-from openerp import models, api, exceptions, _
+from openerp import _, api, exceptions, fields, models
 
 from ..postlogistics.web_service import PostlogisticsWebService
 
 
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
+
+    delivery_fixed_date = fields.Date(
+        "Fixed delivery date", help="Specific delivery date (ZAW3217)"
+    )
+    delivery_place = fields.Char(
+        "Delivery Place", help="For Deposit item service (ZAW3219)"
+    )
+    delivery_phone = fields.Char(
+        "Phone", help="For notify delivery by telephone (ZAW3213)"
+    )
+    delivery_mobile = fields.Char(
+        "Mobile", help="For notify delivery by telephone (ZAW3213)"
+    )
 
     @api.multi
     def postlogistics_cod_amount(self):

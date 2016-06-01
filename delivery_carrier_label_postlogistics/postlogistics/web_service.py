@@ -190,11 +190,13 @@ class PostlogisticsWebService(object):
         is_phone_required = [option for option in picking.option_ids
                              if option.code == 'ZAW3213']
         if is_phone_required:
-            if partner.phone:
-                recipient['Phone'] = partner.phone
+            phone = picking.delivery_phone or partner.phone
+            if phone:
+                recipient['Phone'] = phone
 
-            if partner.mobile:
-                recipient['Mobile'] = partner.mobile
+            mobile = picking.delivery_mobile or partner.mobile
+            if mobile:
+                recipient['Mobile'] = mobile
 
         return recipient
 
@@ -276,7 +278,7 @@ class PostlogisticsWebService(object):
                                 if l.id in group_license_ids][0]
         return franking_license.number
 
-    def _prepare_attributes(self, picking):
+    def _prepare_attributes(self, picking, pack_num=None, pack_total=None):
         services = [option.code.split(',') for option in picking.option_ids
                     if option.tmpl_option_id.postlogistics_type
                     in ('basic', 'additional', 'delivery')]
@@ -284,6 +286,16 @@ class PostlogisticsWebService(object):
         attributes = {
             'PRZL': services,
         }
+        option_codes = [option.code for option in picking.option_ids]
+        if 'ZAW3217' in option_codes and picking.delivery_fixed_date:
+            attributes['DeliveryDate'] = picking.delivery_fixed_date
+        if 'ZAW3218' in option_codes and pack_num:
+            attributes.update({
+                'ParcelTotal': pack_total or picking.number_of_packages,
+                'ParcelNo': pack_num,
+            })
+        if 'ZAW3219' in option_codes:
+            attributes['DeliveryPlace'] = picking.delivery_place
         return attributes
 
     def _get_itemid(self, picking, pack_no):
@@ -314,12 +326,12 @@ class PostlogisticsWebService(object):
             result += cod_attributes
         return result
 
-    def _prepare_item_list(self, picking, recipient, attributes, packages):
+    def _prepare_item_list(self, picking, recipient, packages):
         """ Return a list of item made from the pickings """
         company = picking.company_id
         picking_num = _compile_itemnum.sub('', picking.name)
         item_list = []
-        pack_counter = 0
+        pack_counter = 1
 
         def add_item(package=None):
             assert picking or package
@@ -337,7 +349,6 @@ class PostlogisticsWebService(object):
                     # of picking number
                     item_number = '9%s' % picking_num[-7:].zfill(7)
                 else:
-                    pack_counter += 1
                     item_number = '%02d%s' % (pack_counter,
                                               picking_num[-6:].zfill(6))
                 item['ItemNumber'] = item_number
@@ -350,10 +361,15 @@ class PostlogisticsWebService(object):
             item_list.append(item)
 
         if not packages:
+            attributes = self._prepare_attributes(picking)
             add_item()
 
+        pack_total = len(packages)
         for pack in packages:
+            attributes = self._prepare_attributes(
+                picking, pack_counter, pack_total)
             add_item(package=pack)
+            pack_counter += 1
 
         return item_list
 
@@ -421,11 +437,8 @@ class PostlogisticsWebService(object):
         lang = self._get_language(user_lang)
         post_customer = self._prepare_customer(picking)
 
-        attributes = self._prepare_attributes(picking)
-
         recipient = self._prepare_recipient(picking)
-        item_list = self._prepare_item_list(picking, recipient, attributes,
-                                            packages)
+        item_list = self._prepare_item_list(picking, recipient, packages)
         data = self._prepare_data(item_list)
 
         envelope = self._prepare_envelope(picking, post_customer, data)
