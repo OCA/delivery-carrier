@@ -16,6 +16,7 @@
           'views/delivery.xml',
           'views/postlogistics_license.xml',
           'views/res_config.xml',
+          'views/stock.xml',
           'security/ir.model.access.csv',
           ],
  'installable': True,
