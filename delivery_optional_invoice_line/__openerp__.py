@@ -21,7 +21,7 @@
 ##############################################################################
 {
     'name': "Delivery Optional Invoice Line",
-    'version': '0.1',
+    'version': '7.0.0.1.0',
     'category': 'Sales Management',
     'description': """
 This module allows to remove the default shipping line from the invoices

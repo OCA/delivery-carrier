@@ -19,7 +19,7 @@
 #
 ##############################################################################
 {'name': 'Base module for carrier labels',
- 'version': '1.2',
+ 'version': '7.0.1.2.0',
  'author': "Camptocamp,Akretion,Odoo Community Association (OCA)",
  'maintainer': 'Camptocamp',
  'category': 'version',
