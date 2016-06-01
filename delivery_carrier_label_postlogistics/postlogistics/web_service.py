@@ -296,16 +296,16 @@ class PostlogisticsWebService(object):
             'PRZL': services,
         }
         option_codes = [option.code for option in picking.option_ids]
-        if 'N' in option_codes:
+        if 'N' in option_codes and picking.cash_on_delivery:
             attributes['Amount'] = picking.cash_on_delivery
-        if 'ZAW3217' in option_codes:
+        if 'ZAW3217' in option_codes and picking.delivery_fixed_date:
             attributes['DeliveryDate'] = picking.delivery_fixed_date
         if 'ZAW3218' in option_codes and pack_num:
             attributes.update({
                 'ParcelTotal': pack_total or picking.number_of_packages,
                 'ParcelNo': pack_num,
             })
-        if 'ZAW3219' in option_codes:
+        if 'ZAW3219' in option_codes and picking.delivery_place:
             attributes['DeliveryPlace'] = picking.delivery_place
         return attributes
 
