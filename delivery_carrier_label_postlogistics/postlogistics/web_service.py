@@ -381,9 +381,28 @@ class PostlogisticsWebService(object):
 
     def _prepare_envelope(self, picking, post_customer, data):
         """ Define envelope for label request """
+        error_missing = _(
+            "You need to configure %s. You can set a default"
+            "value in Settings/Configuration/Carriers/Postlogistics."
+            " You can also set it on delivery method or on the picking."
+        )
         label_layout = self._get_label_layout(picking)
+        if not label_layout:
+            raise orm.except_orm(
+                _('Layout not set'),
+                error_missing % _("label layout"))
+
         output_format = self._get_output_format(picking)
+        if not output_format:
+            raise orm.except_orm(
+                _('Output format not set'),
+                error_missing % _("output format"))
+
         image_resolution = self._get_image_resolution(picking)
+        if not image_resolution:
+            raise orm.except_orm(
+                _('Resolution not set'),
+                error_missing % _("output format"))
 
         label_definitions = {
             'LabelLayout': label_layout,
