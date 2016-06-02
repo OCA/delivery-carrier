@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Author: Yannick Vaucher
-#    Copyright 2013 Camptocamp SA
+#    Copyright 2013-2016 Camptocamp SA
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -41,6 +41,20 @@ A generated label will be an attachement of your Delivery Order.
 To see it, please install documents module.
 
 You can create multiple delivery method to match your diffent package types.
+
+
+Installation
+------------
+
+To use this module you need to install suds-jurko library
+(A library to manage SOAP calls)
+
+Furthermore, if you want to use the integration server of Postlogistics
+you will have to patch this library with the following patch:
+
+https://fedorahosted.org/suds/attachment/ticket/239/suds_recursion.patch
+
+A copy of this patch is available in `patches` folder of this module.
 
 
 Configuration
