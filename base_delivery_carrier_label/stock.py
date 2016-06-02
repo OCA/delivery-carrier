@@ -189,8 +189,8 @@ class stock_picking(orm.Model):
             return res
         carrier = carrier_obj.browse(cr, uid, carrier_id, context=context)
         for available_option in carrier.available_option_ids:
-            if (available_option.mandatory
-                    and available_option.id not in option_ids[0][2]):
+            if (available_option.mandatory and
+                    available_option.id not in option_ids[0][2]):
                 res['warning'] = {
                     'title': _('User Error !'),
                     'message': _("You can not remove a mandatory option."

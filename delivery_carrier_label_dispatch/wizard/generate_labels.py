@@ -42,8 +42,8 @@ class DeliveryCarrierLabelGenerate(orm.TransientModel):
         if context is None:
             context = {}
         res = False
-        if (context.get('active_model') == 'picking.dispatch'
-                and context.get('active_ids')):
+        if (context.get('active_model') == 'picking.dispatch' and
+                context.get('active_ids')):
             res = context['active_ids']
         return res
 

@@ -81,8 +81,8 @@ class LaPosteFileGenerator(CarrierFileGenerator):
         line.reference = picking.name
         address = picking.address_id
         if address:
-            line.lastname = address.name or (address.partner_id
-                                             and address.partner_id.name)
+            line.lastname = address.name or (address.partner_id and
+                                             address.partner_id.name)
             # if a company, put company name
             if picking.address_id.partner_id.title:
                 line.company_name = address.partner_id.name
