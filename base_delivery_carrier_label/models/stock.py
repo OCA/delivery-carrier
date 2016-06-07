@@ -33,15 +33,11 @@ class StockPackOperation(models.Model):
         units = self.env.ref('product.product_uom_unit').id
         allowed = (False, kg, units)
         cant_calc_total = False
-
         for operation in self:
             product = operation.product_id
 
             # if not defined we assume it's in kg
-            if not (
-                product.uom_id.id in allowed or
-                product.uos_id.id in allowed
-            ):
+            if product.uom_id.id not in allowed:
                 _logger.warning(
                     'Type conversion not implemented for product %s' %
                     product.id)
@@ -60,11 +56,46 @@ class StockQuantPackage(models.Model):
     _inherit = 'stock.quant.package'
 
     parcel_tracking = fields.Char(string='Parcel Tracking')
-    weight = fields.Float(
+    total_weight = fields.Float(
         digits=dp.get_precision('Stock Weight'),
         help="Total weight of the package in kg, including the "
              "weight of the logistic unit."
     )
+
+    @api.depends('total_weight')
+    def _compute_weight(self):
+        """ Use total_weight if defined
+        otherwise fallback on the computed weight
+        """
+        to_do = self.browse()
+        for pack in self:
+            if pack.total_weight:
+                pack.weight = pack.total_weight
+            elif not pack.quant_ids:
+                # package.pack_operations would be too easy
+                operations = self.env['stock.pack.operation'].search(
+                    [('result_package_id', '=', pack.id),
+                     ('product_id', '!=', False),
+                     ])
+
+                # we make use get_weight with  @api.muli instead of
+                # sum([op.get_weight for op in operations])
+
+                # sum of the pack_operation
+                payload_weight = operations.get_weight()
+                # sum of the packages contained in this package (children)
+                children_weight = sum(sub.weight for sub in pack.children_ids)
+
+                # sum and save in package
+                pack.weight = (
+                    payload_weight +
+                    children_weight
+                    )
+
+            else:
+                to_do |= pack
+        if to_do:
+            super(StockQuantPackage, to_do)._compute_weight()
 
     @api.multi
     def _complete_name(self, name, args):
@@ -75,58 +106,6 @@ class StockQuantPackage(models.Model):
             if pack.weight:
                 res[pack.id] += ' %s kg' % pack.weight
         return res
-
-    @api.multi
-    def get_weight(self):
-        """Compute the weight of a pack.
-
-        Get all the children packages and sum the weight of all
-        the product and the weight of the Logistic Units of the packages.
-
-        So if I put in PACK65:
-         * 1 product A of 2kg
-         * 2 products B of 4kg
-        The box of PACK65 weights 0.5kg
-        And I put in PACK66:
-         * 1 product A of 2kg
-        The box of PACK66 weights 0.5kg
-
-        Then I put PACK65 and PACK66 in the PACK67 having a box that
-        weights 0.5kg, the weight of PACK67 should be: 13.5kg
-
-        """
-        total_weight = 0
-
-        for package in self:
-            # weight of the wrapper
-            packaging_weight = 0
-            if package.ul_id:
-                packaging_weight = package.ul_id.weight
-
-            # package.pack_operations would be too easy
-            operations = self.env['stock.pack.operation'].search(
-                [('result_package_id', '=', package.id),
-                 ('product_id', '!=', False),
-                 ])
-
-            # we make use get_weight with  @api.muli instead of
-            # sum([op.get_weight for op in operations])
-
-            # sum of the pack_operation
-            payload_weight = operations.get_weight()
-
-            # sum of the packages contained in this package (children)
-            child_packages_weight = package.children_ids.get_weight()
-
-            # sum and save in package
-            package.weight = (
-                payload_weight +
-                child_packages_weight +
-                packaging_weight)
-
-            total_weight += package.weight
-
-        return total_weight
 
 
 class StockPicking(models.Model):
@@ -362,18 +341,6 @@ class StockPicking(models.Model):
         partner = self.company_id.partner_id
         address_id = partner.address_get(adr_pref=['delivery'])['delivery']
         return self.env['res.partner'].browse(address_id)
-
-    @api.multi
-    def set_pack_weight(self):
-        # I cannot loop on the "quant_ids" of packages, because, at this step,
-        # this field doesn't have a value yet
-        self.ensure_one()
-        for packop in self.pack_operation_ids:
-            package = packop.result_package_id or packop.package_id
-            if package:
-                weight = package.get_weight()
-                package.write({'weight': weight})
-        return
 
     @api.multi
     def _check_existing_shipping_label(self):

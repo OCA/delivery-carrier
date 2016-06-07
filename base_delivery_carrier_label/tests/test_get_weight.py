@@ -13,13 +13,11 @@ class TestGetWeight(TransactionCase):
         })
 
     def _create_order_line(self, order, products):
-        ol = []
         for product in products:
-            ol.append(self.env['sale.order.line'].create({
+            self.env['sale.order.line'].create({
                 'product_id': product.id,
                 'order_id': order.id,
-            }))
-        return ol
+            })
 
     def _create_ul(self):
         vals = [{
@@ -79,20 +77,21 @@ class TestGetWeight(TransactionCase):
         return picking
 
     def test_get_weight(self):
-        """Test quant.package.get_weight and pack.operation.get_weight."""
+        """Test quant.package.weight computed field and
+        pack.operation.get_weight."""
         # prepare some data
         weights = [2, 30, 1, 24, 39]
         products = self._get_products(weights)
         picking = self._generate_picking(products)
         package = self.env['stock.quant.package'].create({})
-        operations = []
+        operations = self.env['stock.pack.operation']
         for product in products:
-            operations.append(self._create_operation(picking, {
+            operations |= self._create_operation(picking, {
                 'product_qty': 1,
                 'product_id': product.id,
                 'product_uom_id': product.uom_id.id,
                 'result_package_id': package.id,
-            }))
+            })
         # end of prepare data
 
         # test operation.get_weight()
@@ -101,10 +100,40 @@ class TestGetWeight(TransactionCase):
                 operation.get_weight(),
                 operation.product_id.weight * operation.product_qty)
 
-        # test package.get_weight()
+        # test package.weight
         self.assertEqual(
-            package.get_weight(),
+            package.weight,
             sum([product.weight for product in products]))
+
+    def test_total_weight(self):
+        """Test quant.package.weight computed field when a total
+        weight is defined """
+        # prepare some data
+        weights = [2, 30, 1, 24, 39]
+        products = self._get_products(weights)
+        picking = self._generate_picking(products)
+        package = self.env['stock.quant.package'].create({})
+        operations = self.env['stock.pack.operation']
+        for product in products:
+            operations |= self._create_operation(picking, {
+                'product_qty': 1,
+                'product_id': product.id,
+                'product_uom_id': product.uom_id.id,
+                'result_package_id': package.id,
+            })
+        package.total_weight = 1542.0
+        # end of prepare data
+
+        # test operation.get_weight()
+        for operation in operations:
+            self.assertEqual(
+                operation.get_weight(),
+                operation.product_id.weight * operation.product_qty)
+
+        # test package.weight
+        self.assertEqual(
+            package.weight,
+            package.total_weight)
 
     def test_get_weight_with_qty(self):
         """Ensure qty are taken in account."""
@@ -113,14 +142,14 @@ class TestGetWeight(TransactionCase):
         products = self._get_products(weights)
         picking = self._generate_picking(products)
         package = self.env['stock.quant.package'].create({})
-        operations = []
+        operations = self.env['stock.pack.operation']
         for idx, product in enumerate(products):
-            operations.append(self._create_operation(picking, {
+            operations |= self._create_operation(picking, {
                 'product_qty': idx,  # nice one
                 'product_id': product.id,
                 'product_uom_id': product.uom_id.id,
                 'result_package_id': package.id
-            }))
+            })
         # end of prepare data
 
         # test operation.get_weight()
@@ -129,9 +158,9 @@ class TestGetWeight(TransactionCase):
                 operation.get_weight(),
                 operation.product_id.weight * operation.product_qty)
 
-        # test package.get_weight()
+        # test package._weight
         self.assertEqual(
-            package.get_weight(),
+            package.weight,
             sum([operation.get_weight() for operation in operations]))
 
     def test_get_weight_with_uom(self):
@@ -147,7 +176,6 @@ class TestGetWeight(TransactionCase):
             {
                 'name': 'Expected Odoo dev documentation',
                 'uom_id': tonne_id.id,
-                'uos_id': tonne_id.id,
                 'uom_po_id': tonne_id.id,
                 'weight': weights[0]
             })
@@ -156,7 +184,6 @@ class TestGetWeight(TransactionCase):
             {
                 'name': 'OCA documentation',
                 'uom_id': kg_id.id,
-                'uos_id': kg_id.id,
                 'uom_po_id': kg_id.id,
                 'weight': weights[1],
             }))
@@ -164,7 +191,6 @@ class TestGetWeight(TransactionCase):
             {
                 'name': 'Actual Odoo dev documentation',
                 'uom_id': gr_id.id,
-                'uos_id': gr_id.id,
                 'uom_po_id': gr_id.id,
                 'weight': weights[2],
             })
@@ -175,18 +201,18 @@ class TestGetWeight(TransactionCase):
             weights[2] * 0.01  # g
         )
         picking = self._generate_picking(products)
-        operations = []
+        operations = self.env['stock.pack.operation']
         for product in products:
-            operations.append(self._create_operation(picking, {
+            operations |= self._create_operation(picking, {
                 'product_qty': 1,
                 'product_id': product.id,
                 'product_uom_id': product.uom_id.id,
                 'result_package_id': package.id,
-            }))
+            })
         # end of prepare data
 
         # because uom conversion is not implemented
-        self.assertEqual(package.get_weight(), False)
+        self.assertEqual(package.weight, False)
 
         # if one day, uom conversion is implemented:
         # self.assertEqual(package.get_weight(), products_weight)
