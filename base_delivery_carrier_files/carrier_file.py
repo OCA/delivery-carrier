@@ -121,15 +121,16 @@ class CarrierFile(models.Model):
         return self._generate_files(picking_ids)
 
     name = fields.Char('Name', size=64, required=True)
-    type = fields.Selection(get_type_selection, 'Type', required=True)
+    type = fields.Selection(selection='get_type_selection',
+                            string='Type', required=True)
     group_pickings = fields.Boolean('Group all pickings in one file',
                                     help='All the pickings will be '
                                     'grouped in the same file. '
                                     'Has no effect when the files '
                                     'are automatically exported at '
                                     'the delivery order process.')
-    write_mode = fields.Selection(get_write_mode_selection, 'Write on',
-                                  required=True)
+    write_mode = fields.Selection(selection='get_write_mode_selection',
+                                  string='Write on', required=True)
     export_path = fields.Char('Export Path', size=256)
     auto_export = fields.Boolean('Export at delivery order process',
                                  help='The file will be automatically '
