@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+    © 2016-TODAY LasLabs Inc.
+    @license AGPL-3 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+
+<odoo>
+
+    <record id="stock_delivery_pack_template_view_form" model="ir.ui.view">
+        <field name="name">stock.delivery.pack.template.view.form</field>
+        <field name="model">stock.delivery.pack.template</field>
+        <field name="arch" type="xml">
+            <form string="Delivery Package Template">
+                <sheet>
+                    <group>
+                        <field name="name" />
+                        <field name="active" />
+                    </group>
+                    <group string="Physical">
+                        <group>
+                            <field name="length" />
+                            <field name="width" />
+                            <field name="height" />
+                            <field name="weight" />
+                        </group>
+                        <group>
+                            <field name="length_uom_id" />
+                            <field name="width_uom_id" />
+                            <field name="height_uom_id" />
+                            <field name="weight_uom_id" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="stock_delivery_pack_template_view_tree" model="ir.ui.view">
+        <field name="name">stock.delivery.pack.template.view.tree</field>
+        <field name="model">stock.delivery.pack.template</field>
+        <field name="arch" type="xml">
+            <tree string="Delivery Package Templates">
+                <field name="name"/>
+                <field name="length" />
+                <field name="length_uom_id" />
+                <field name="width" />
+                <field name="width_uom_id" />
+                <field name="height" />
+                <field name="height_uom_id" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="stock_delivery_pack_template_view_search" model="ir.ui.view">
+        <field name="name">stock.delivery.pack.template.view.search</field>
+        <field name="model">stock.delivery.pack.template</field>
+        <field name="arch" type="xml">
+            <search string="Delivery Packages">
+                
+                <field name="name"/>
+                <field name="length" />
+                <field name="length_uom_id" />
+                <field name="width" />
+                <field name="width_uom_id" />
+                <field name="height" />
+                <field name="height_uom_id" />
+
+                <filter string="Length"
+                        domain=""
+                        context="{'group_by': 'length'}" />
+                <filter string="Length UOM"
+                        domain=""
+                        context="{'group_by': 'length_uom_id'}" />
+                <filter string="Width"
+                        domain=""
+                        context="{'group_by': 'width'}" />
+                <filter string="Width UOM"
+                        domain=""
+                        context="{'group_by': 'width_uom_id'}" />
+                <filter string="Height"
+                        domain=""
+                        context="{'group_by': 'height'}" />
+                <filter string="Height UOM"
+                        domain=""
+                        context="{'group_by': 'height_uom_id'}" />
+                
+            </search>
+        </field>
+    </record>
+
+    <record id="stock_delivery_pack_template_action" model="ir.actions.act_window">
+        <field name="name">Delivery Packages</field>
+        <field name="res_model">stock.delivery.pack.template</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="stock_delivery_pack_template_view_tree" />
+    </record>
+
+</odoo>

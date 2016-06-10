@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+    @copyright (C) 2016-TODAY LasLabs, Inc. [https://laslabs.com]
+    @author Dave Lasley <dave@laslabs.com>
+    @license AGPL-3
+-->
+
+<odoo>
+
+    <record id="stock_delivery_new_view_form" model="ir.ui.view">
+        <field name="name">stock.delivery.new.view.form</field>
+        <field name="model">stock.delivery.new</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="Delivery Information">
+                        <field name="delivery_pack_id"
+                               domain="[('quant_pack_id', '=', quant_pack_id)]"
+                               context="{'default_quant_pack_id': quant_pack_id,
+                                         'default_pack_operation_ids': pack_operation_ids,
+                                         'default_name': quant_pack_id,
+                                         }"
+                               />
+                        <field name="quant_pack_id" readonly="True" />
+                        <field name="pack_operation_ids" readonly="True">
+                            <tree>
+                                <field name="product_id" />
+                                <field name="qty_done" />
+                            </tree>
+                        </field>
+                    </group>
+                </sheet>
+                <footer>
+                    <button special="cancel"
+                            string="No Delivery"
+                            />
+                    or
+                    <button name="action_create_delivery"
+                            type="object"
+                            string="Delivery"
+                            class="oe_highlight"
+                            />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="stock_delivery_new_action" model="ir.actions.act_window">
+        <field name="name">New Delivery</field>
+        <field name="res_model">stock.delivery.new</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="stock_delivery_new_view_form"/>
+    </record>
+
+</odoo>

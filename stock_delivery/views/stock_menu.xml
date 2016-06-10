@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+    © 2016-TODAY LasLabs Inc.
+    @license AGPL-3 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+
+<odoo>
+
+    <menuitem id="stock_delivery_pack_template_menu"
+              parent="delivery.menu_delivery"
+              name="Delivery Packages"
+              groups="stock.group_stock_manager,base.group_configuration"
+              action="stock_delivery_pack_template_action"
+              />
+    
+    <menuitem id="stock_delivery_label_menu"
+              name="Delivery Labels"
+              parent="stock.menu_stock_inventory_control"
+              groups="stock.group_stock_user"
+              action="stock_delivery_label_action"
+              />
+    
+</odoo>

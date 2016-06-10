@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+    @copyright (C) 2016-TODAY LasLabs, Inc. [https://laslabs.com]
+    @author Dave Lasley <dave@laslabs.com>
+    @license AGPL-3
+-->
+
+<openerp>
+    <data noupdate="1">
+
+        <record forcecreate="True" id="decimal_dimension" model="decimal.precision">
+            <field name="name">Pack Dimension</field>
+            <field name="digits">2</field>
+        </record>
+
+    </data>
+</openerp>
