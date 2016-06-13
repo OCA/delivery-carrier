@@ -9,7 +9,7 @@
 #          Sébastien BEAU
 ##############################################################################
 
-from openerp import models, fields
+from openerp import models, fields, api
 
 
 class StockQuantPackage(models.Model):
@@ -21,3 +21,15 @@ class StockQuantPackage(models.Model):
         help="True if size of package is not standard (according to carrier)",
         default=False,
     )
+
+    @api.multi
+    def get_operations(self):
+        """Get operations of the package.
+
+        Usefull for having products and quantities
+        """
+        self.ensure_one()
+        return self.env['stock.pack.operation'].search([
+            ('result_package_id', '=', self.id),
+            ('product_id', '!=', False),
+        ])
