@@ -236,7 +236,7 @@ class StockPicking(models.Model):
         address = {}
         extract_fields = [
             'name', 'zip', 'city', 'phone', 'mobile',
-            'email', 'phone', 'parent_id']
+            'email', 'phone', 'parent_id', 'first_name']
         for elm in extract_fields:
             if elm in partner:
                 # because a value can't be None in odoo's ORM
