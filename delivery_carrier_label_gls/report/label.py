@@ -81,9 +81,9 @@ DELIVERY_MODEL = {
     "parcel_total_number": {'max_number': 999, 'type': int, 'required': True},
 }
 SENDER_MODEL = {
-    "customer_id":       {'max_size': 10, 'required': True},
+    "customer_id":       {'max_size': 10, 'min_size': 10, 'required': True},
     "contact_id":        {'max_size': 10},
-    "outbound_depot":    {'max_size': 6, 'required': True},
+    "outbound_depot":    {'max_size': 6, 'min_size': 6, 'required': True},
     "shipper_name":      {'max_size': 35, 'required': True},
     "shipper_street":    {'max_size': 35, 'required': True},
     "shipper_street2":   {'max_size': 35},
@@ -396,12 +396,10 @@ code: %s ; message: %s ; result: %s""" % (code, message, result))
         return (product_code, uniship_product_code)
 
     def set_origin_reference(self, parcel, address):
-        return (
-            self.product_code
-            + parcel['custom_sequence']
-            + '0000'
-            + address['country_code']
-        )
+        return '%s%s0000%s' % (
+            self.product_code,
+            parcel['custom_sequence'],
+            address['country_code'])
 
     def validate_mako(self, template, available_keys):
         import re

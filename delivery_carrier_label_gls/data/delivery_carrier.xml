@@ -3,13 +3,16 @@
     <data noupdate="0">
 
         <!-- PRODUCT  -->
+        <record id="prod_categ_carrier" model="product.category">
+            <field name="name">Carrier</field>
+        </record>
         <record id="product_product_gls" model="product.product">
             <field name="default_code">SHIP_GLS</field>
             <field name="standard_price">0.0</field>
             <field name="cost_method">standard</field>
             <field name="type">service</field>
             <field name="name">Coûts de livraison - GLS</field>
-            <field name="categ_id">1</field>
+            <field name="categ_id" ref="prod_categ_carrier"/>
         </record>
 
         <!-- PARTNER -->
@@ -35,11 +38,11 @@
         <!-- CONFIG PARAMETER -->
         <record id="delivery_carrier_gls_customer_code" model="ir.config_parameter">
             <field name="key">carrier_gls_customer_code</field>
-            <field name="value">?</field>
+            <field name="value">...</field>
         </record>
         <record id="delivery_carrier_gls_warehouse" model="ir.config_parameter">
             <field name="key">carrier_gls_warehouse</field>
-            <field name="value">FR00??</field>
+            <field name="value">FR00</field>
         </record>
 
     </data>
