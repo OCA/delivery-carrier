@@ -20,9 +20,9 @@
         'config_view.xml',
     ],
     'demo': [
-        # 'demo/res.partner.csv',
-        # 'demo/company.xml',
-        # 'demo/product.xml',
+        'demo/res.partner.csv',
+        'demo/company.xml',
+        'demo/product.xml',
     ],
     'external_dependencies': {
         'python': [

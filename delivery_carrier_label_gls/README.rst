@@ -28,6 +28,7 @@ To configure this module, you need to:
 * Go to the menu Settings > Configuration > Carriers > GLS
 * Complete account parameters
 * Complete company country in Settings > Companies
+* Install 'Document' module
 
 .. image:: /delivery_carrier_label_gls/static/description/gls1.png
    :alt: Account GLS settings by company Odoo ERP
