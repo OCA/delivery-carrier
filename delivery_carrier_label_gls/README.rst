@@ -25,6 +25,7 @@ Configuration
 
 To configure this module, you need to:
 
+* Go to the menu Settings > Configuration > Warehouse, and check 'Use packages: pallets, boxes'
 * Go to the menu Settings > Configuration > Carriers > GLS
 * Complete account parameters
 * Complete company country in Settings > Companies

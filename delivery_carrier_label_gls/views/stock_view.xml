@@ -13,11 +13,7 @@
         <button type="object" name="open_tracking_url"
             class="oe_button fa_truck"
             attrs="{'invisible': [('result_package_id', '=', False)]}"
-            icon="terp-accessories-archiver+"
-            />
-                <!--class="glyphicon glyphicon-qrcode"-->
-                <!--icon="fa_truck"-->
-                <!--icon="terp-accessories-archiver+"-->
+            icon="terp-accessories-archiver+"/>
     </xpath>
   </field>
 </record>

@@ -9,9 +9,9 @@ import logging
 from openerp import models, api, fields, _
 from openerp.exceptions import Warning as UserError
 from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
-from .report.label import GLSLabel, InvalidDataForMako
-from .report.exception_helper import (InvalidAccountNumber)
-from .report.label_helper import (
+from ..report.label import GLSLabel, InvalidDataForMako
+from ..report.exception_helper import (InvalidAccountNumber)
+from ..report.label_helper import (
     InvalidValueNotInList,
     InvalidMissingField,
     InvalidType,)
