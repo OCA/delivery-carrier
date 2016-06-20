@@ -17,7 +17,8 @@
     'data': [
         'data/delivery_carrier.xml',
         'data/sequence.xml',
-        'config_view.xml',
+        'views/config_view.xml',
+        'views/stock_view.xml',
     ],
     'demo': [
         'demo/res.partner.csv',
