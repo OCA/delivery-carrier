@@ -42,7 +42,6 @@ class StockQuantPackage(models.Model):
             res = ("https://gls-group.eu/FR/fr/suivi-colis?"
                    "match=%s" % self.parcel_tracking)
         return res
-        # raise UserError(_("No carrier tracking url for this package"))
 
     @api.multi
     def open_tracking_url(self):
@@ -58,19 +57,6 @@ class StockQuantPackage(models.Model):
             'target': 'new',
         }
 
-#
-# class StockQuantPackage2(models.Model):
-#     _inherit = 'stock.quant.package'
-#
-#     @api.multi
-#     def _get_carrier_tracking_url(self):
-#         self.ensure_one()
-#         res = super(StockQuantPackage2, self)._get_carrier_tracking_url()
-#         if self.carrier_id.type == 'gls':
-#             res = ("https://gls-group.eu/FR/fr/suivi-colis?"
-#                    "match=%s" % self.parcel.tracking)
-#         return res
-
 
 class StockTransferDetails(models.TransientModel):
     _inherit = 'stock.transfer_details'
@@ -85,8 +71,7 @@ class StockTransferDetails(models.TransientModel):
                 if carrier_type and carrier_type == 'gls':
                     if not (item.package_id or item.result_package_id):
                         raise UserError(
-                            u"Pour le transporteur '%s' \ntous les produits "
-                            u"à livrer \ndoivent être "
-                            "mis dans un colis."
+                            u"For carrier '%s' \nall products to deliver"
+                            u"must be put in a parcel."
                             % transfert.picking_id.carrier_id.name)
         return super(StockTransferDetails, self).do_detailed_transfer()

@@ -2,7 +2,7 @@
 # © 2015 David BEAL @ Akretion
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from openerp import models, api, fields
+from openerp import models, api, _, fields
 from openerp.exceptions import Warning as UserError
 
 
@@ -21,14 +21,14 @@ class GlsConfigSettings(models.TransientModel):
         string='Customer Code',
         readonly=True, oldname='gls_customer_code',
         help="Code for GLS carrier company (T8915)\n"
-             "Information common to whole companies "
-             "to configure in System Parameter")
+             "Information common to all the companies "
+             "to be configured in System Parameter")
     warehouse = fields.Char(
         string='Warehouse',
         readonly=True, oldname='gls_warehouse',
         help="GLS warehouse near customer location (T8700)\n"
              "Information common to whole companies "
-             "to configure in System Parameter")
+             "to be configured in System Parameter")
     fr_contact_id = fields.Char(
         related="company_id.gls_fr_contact_id")
     inter_contact_id = fields.Char(
@@ -54,7 +54,7 @@ class GlsConfigSettings(models.TransientModel):
 
     @api.model
     def default_get(self, fields):
-        res = {}
+        res = super(GlsConfigSettings, self).default_get(fields)
         param_m = self.env['ir.config_parameter']
         for field in ['customer_code', 'warehouse']:
             if field in fields:
@@ -62,8 +62,7 @@ class GlsConfigSettings(models.TransientModel):
                     [('key', '=', 'carrier_gls_%s' % field)])
                 if not configs:
                     raise UserError(
-                        "Missing parameter",
-                        "'%s' key is missing in 'System Parameter':\n"
-                        "Add it and set the corresponding value" % field)
+                        _("'%s' key is missing in 'System Parameter':\n"
+                          "Add it and set the corresponding value.") % field)
                 res[field] = configs[0].value
         return res
