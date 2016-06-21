@@ -22,7 +22,7 @@ class ResCompany(models.Model):
         help="Record traceability informations in Delivery Order "
              "attachment: web service request and response")
     gls_generate_label = fields.Boolean(
-        string='Generate Label Automatically',
+        string='Automatically Generate Label',
         help="Generate label when delivery is done")
     gls_test = fields.Boolean(
         string='Url Test',

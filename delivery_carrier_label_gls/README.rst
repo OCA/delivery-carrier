@@ -11,9 +11,10 @@ GLS Group - Transportation services
 +++++++++++++++++++++++++++++++++++
 
 Unibox service implementation:
-- send delivery order informations and parcel infothe GLS unibox server
-- webservice routing info in back
-- label GLS Unibox generate
+
+- send delivery order informations and parcel info to the GLS unibox server
+- webservice routing info in background
+- label GLS Unibox generation
 
 
 GLS carrier https://gls-group.eu/
@@ -25,11 +26,10 @@ Configuration
 
 To configure this module, you need to:
 
-* Go to the menu Settings > Configuration > Warehouse, and check 'Use packages: pallets, boxes'
-* Go to the menu Settings > Configuration > Carriers > GLS
-* Complete account parameters
-* Complete company country in Settings > Companies
-* Install 'Document' module
+# Go to the menu Settings > Configuration > Warehouse, and check 'Use packages: pallets, boxes'
+# Go to the menu Settings > Configuration > Carriers > GLS
+# Complete account parameters
+# Complete company country in Settings > Companies
 
 .. image:: /delivery_carrier_label_gls/static/description/gls1.png
    :alt: Account GLS settings by company Odoo ERP
@@ -44,8 +44,9 @@ To use this module, you need to create a Delivery Order with Carrier field 'GLS 
 Odoo Delivery Order with GLS carrier
 ++++++++++++++++++++++++++++++++++++
 
-.. image:: /delivery_carrier_label_gls/static/description/gls2.png
+.. image:: delivery_carrier_label_gls/static/description/gls2.png
    :alt: Odoo Delivery Order avec GLS carrier with Odoo ERP
+   :width: 900 px
 
 |
 
