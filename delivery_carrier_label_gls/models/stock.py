@@ -71,7 +71,7 @@ class StockTransferDetails(models.TransientModel):
                 if carrier_type and carrier_type == 'gls':
                     if not (item.package_id or item.result_package_id):
                         raise UserError(
-                            u"For carrier '%s' \nall products to deliver"
+                            u"All products to deliver for carrier '%s' \n"
                             u"must be put in a parcel."
                             % transfert.picking_id.carrier_id.name)
         return super(StockTransferDetails, self).do_detailed_transfer()

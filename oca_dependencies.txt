@@ -3,4 +3,5 @@
 partner-contact
 server-tools
 stock-logistics-workflow
+stock-logistics-tracking
 webkit-tools
