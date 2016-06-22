@@ -12,6 +12,7 @@
     'depends': [
         'base_delivery_carrier_label',
         'partner_helper',
+        'stock_packaging_usability',
         'document',
     ],
     'website': 'http://www.akretion.com/',
@@ -22,9 +23,11 @@
         'views/stock_view.xml',
     ],
     'demo': [
-        'demo/res.partner.csv',
+        'demo/config.yml',
         'demo/company.xml',
         'demo/product.xml',
+        'demo/stock.picking.csv',
+        'demo/stock.move.csv',
     ],
     'external_dependencies': {
         'python': [
