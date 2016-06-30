@@ -17,6 +17,7 @@ try:
     from suds.client import Client, WebFault
     from suds.transport.http import HttpAuthenticated
     from suds.transport.https import HttpAuthenticated as HttpsAuth
+    from suds.cache import NoCache
 except ImportError:
     _logger.warning(
         'suds library not found. '
@@ -68,6 +69,7 @@ class PostlogisticsWebService(object):
             self.client = Client(
                 company.postlogistics_wsdl_url,
                 transport=t,
+                cache=NoCache(),
                 doctor=doctor)
         else:
             t = HttpAuthenticated(
