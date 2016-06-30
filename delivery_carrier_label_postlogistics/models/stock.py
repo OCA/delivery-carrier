@@ -100,6 +100,7 @@ class StockPicking(models.Model):
             info['package_id'] = False
             labels.append(info)
 
+        tracking_refs = []
         for package in packages:
             label = None
             for search_label in res['value']:
@@ -107,10 +108,13 @@ class StockPicking(models.Model):
                     label = search_label
                     tracking_number = label['tracking_number']
                     package.parcel_tracking = tracking_number
+                    tracking_refs.append(tracking_number)
                     break
             info = info_from_label(label)
             info['package_id'] = package.id
             labels.append(info)
+
+        self.carrier_tracking_ref = "; ".join(tracking_refs)
 
         return labels
 
