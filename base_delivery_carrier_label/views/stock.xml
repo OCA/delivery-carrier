@@ -11,10 +11,12 @@
         <button name="action_generate_carrier_label" states="done"
           string="Create Shipping Label" type="object"/>
       </field>
-      <xpath expr="//page//field[@name='carrier_tracking_ref']" position="after">
+      <xpath expr="//page//field[@name='carrier_id']" position="after">
         <field name="carrier_type"/>
         <field name="carrier_code"/>
-        <field name="option_ids" nolabel="1" colspan="2"
+      </xpath>
+      <xpath expr="//page//group[@name='carrier_data']/.." position="after">
+        <field name="option_ids"
           domain="[('carrier_id', '=', carrier_id)]"/>
       </xpath>
     </field>
