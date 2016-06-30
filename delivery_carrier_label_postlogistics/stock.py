@@ -44,6 +44,8 @@ class stock_picking(orm.Model):
         'delivery_mobile': fields.char(
             "Mobile", help="For notify delivery by telephone (ZAW3213)"
         ),
+        # remove size constraint of 32 characters
+        'carrier_tracking_ref': fields.char('Carrier Tracking Ref', size=None),
     }
 
     def _generate_postlogistics_label(self, cr, uid, picking,
@@ -93,6 +95,7 @@ class stock_picking(orm.Model):
                      'name': tracking_number + '.' + label['file_type'],
                      }]
 
+        tracking_refs = []
         for track in trackings:
             label = None
             for search_label in res['value']:
@@ -100,12 +103,18 @@ class stock_picking(orm.Model):
                     label = search_label
                     tracking_number = label['tracking_number']
                     track.write({'serial': tracking_number})
+                    tracking_refs.append(tracking_number)
                     break
             labels.append({'tracking_id': track.id if track else False,
                            'file': label['binary'].decode('base64'),
                            'file_type': label['file_type'],
                            'name': tracking_number + '.' + label['file_type'],
                            })
+
+        tracking_refs = "; ".join(tracking_refs)
+        self.write(cr, uid, picking.id,
+                   {'carrier_tracking_ref': tracking_refs},
+                   context=context)
 
         return labels
 
@@ -145,6 +154,8 @@ class stock_picking_out(orm.Model):
         'delivery_mobile': fields.char(
             "Mobile", help="For notify delivery by telephone (ZAW3213)"
         ),
+        # remove size constraint of 32 characters
+        'carrier_tracking_ref': fields.char('Carrier Tracking Ref', size=None),
     }
 
 
@@ -167,6 +178,8 @@ class stock_picking_in(orm.Model):
         'delivery_mobile': fields.char(
             "Mobile", help="For notify delivery by telephone (ZAW3213)"
         ),
+        # remove size constraint of 32 characters
+        'carrier_tracking_ref': fields.char('Carrier Tracking Ref', size=None),
     }
 
 
