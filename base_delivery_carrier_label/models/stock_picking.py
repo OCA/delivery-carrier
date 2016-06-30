@@ -1,49 +1,9 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    Authors: David BEAL <david.beal@akretion.com>
-#             Sébastien BEAU <sebastien.beau@akretion.com>
-#    Copyright (C) 2012-TODAY Akretion <http://www.akretion.com>.
-#    Author: Yannick Vaucher <yannick.vaucher@camptocamp.com>
-#    Copyright 2013-2014 Camptocamp SA
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
-from openerp import models, fields, api, exceptions, _
-import openerp.addons.decimal_precision as dp
-
-
-class StockQuantPackage(models.Model):
-    _inherit = 'stock.quant.package'
-
-    parcel_tracking = fields.Char(string='Parcel Tracking')
-    weight = fields.Float(
-        digits=dp.get_precision('Stock Weight'),
-        help="Total weight of the package in kg, including the "
-             "weight of the logistic unit."
-    )
-
-    @api.multi
-    def _complete_name(self, name, args):
-        res = super(StockQuantPackage, self)._complete_name(name, args)
-        for pack in self:
-            if pack.parcel_tracking:
-                res[pack.id] += ' [%s]' % pack.parcel_tracking
-            if pack.weight:
-                res[pack.id] += ' %s kg' % pack.weight
-        return res
+# Copyright 2012-2015 Akretion <http://www.akretion.com>.
+# Copyright 2013-2016 Camptocamp SA
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+from openerp import _, api, fields, models
+from openerp.exceptions import UserError
 
 
 class StockPicking(models.Model):
@@ -82,8 +42,8 @@ class StockPicking(models.Model):
         :return: (file_binary, file_type)
 
         """
-        raise exceptions.Warning(_('No label is configured for the '
-                                   'selected delivery method.'))
+        raise UserError(_('No label is configured for the '
+                          'selected delivery method.'))
 
     @api.multi
     def generate_shipping_labels(self, package_ids=None):
@@ -121,7 +81,7 @@ class StockPicking(models.Model):
     def generate_labels(self, package_ids=None):
         """ Generate the labels.
 
-        A list of tracking ids can be given, in that case it will generate
+        A list of package ids can be given, in that case it will generate
         the labels only of these packages.
 
         """
@@ -137,6 +97,7 @@ class StockPicking(models.Model):
             for label in shipping_labels:
                 data = {
                     'name': label['name'],
+                    'datas_fname': label.get('filename', label['name']),
                     'res_id': pick.id,
                     'res_model': 'stock.picking',
                     'datas': label['file'].encode('base64'),
@@ -194,7 +155,7 @@ class StockPicking(models.Model):
                 # triggered the onchange:
                 # https://github.com/odoo/odoo/issues/2693#issuecomment-56825399
                 # Ideally we should add the missing option
-                raise exceptions.Warning(
+                raise UserError(
                     _("You should not remove a mandatory option."
                       "Please cancel the edit or "
                       "add back the option: %s.") % available_option.name
@@ -279,36 +240,16 @@ class StockPicking(models.Model):
         address_id = partner.address_get(adr_pref=['delivery'])['delivery']
         return self.env['res.partner'].browse(address_id)
 
-
-class ShippingLabel(models.Model):
-    """ Child class of ir attachment to identify which are labels """
-
-    _name = 'shipping.label'
-    _inherits = {'ir.attachment': 'attachment_id'}
-    _description = "Shipping Label"
-
-    @api.model
-    def _get_file_type_selection(self):
-        """ To inherit to add file type """
-        return [('pdf', 'PDF')]
-
-    @api.model
-    def __get_file_type_selection(self):
-        file_types = self._get_file_type_selection()
-        file_types = list(set(file_types))
-        file_types.sort(key=lambda t: t[0])
-        return file_types
-
-    file_type = fields.Selection(
-        selection=__get_file_type_selection,
-        string='File type',
-        default='pdf',
-    )
-    package_id = fields.Many2one(comodel_name='stock.quant.package',
-                                 string='Pack')
-    attachment_id = fields.Many2one(
-        comodel_name='ir.attachment',
-        string='Attachement',
-        required=True,
-        ondelete='cascade',
-    )
+    @api.multi
+    def _check_existing_shipping_label(self):
+        """ Check that labels don't already exist for this picking """
+        self.ensure_one()
+        labels = self.env['shipping.label'].search([
+            ('res_id', '=', self.id),
+            ('res_model', '=', 'stock.picking')])
+        if labels:
+            raise UserError(
+                _('Some labels already exist for the picking %s.\n'
+                  'Please delete the existing labels in the '
+                  'attachments of this picking and try again')
+                % self.name)
