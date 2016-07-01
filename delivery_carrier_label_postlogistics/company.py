@@ -70,6 +70,7 @@ class ResCompany(orm.Model):
             [('postlogistics', "Use default postlogistics tracking numbers"),
              ('picking_num', 'Use picking number with pack counter')],
             string="Tracking number format"),
+        'postlogistics_proclima_logo': fields.boolean('Print ProClima logo'),
     }
 
     _defaults = {

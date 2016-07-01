@@ -309,6 +309,8 @@ class PostlogisticsWebService(object):
             })
         if 'ZAW3219' in option_codes and picking.delivery_place:
             attributes['DeliveryPlace'] = picking.delivery_place
+        if picking.company_id.postlogistics_proclima_logo:
+            attributes['ProClima'] = True
         return attributes
 
     def _get_itemid(self, picking, pack_no):

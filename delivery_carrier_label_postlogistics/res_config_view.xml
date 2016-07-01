@@ -98,6 +98,15 @@
               </div>
             </div>
           </group>
+          <separator string="Other"/>
+          <group>
+            <div>
+              <div>
+                <label for="proclima_logo"/>
+                <field name="proclima_logo" class="oe_inline"/>
+              </div>
+            </div>
+          </group>
           <group>
             <div>
               <div>

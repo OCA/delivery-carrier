@@ -113,6 +113,14 @@ class PostlogisticsConfigSettings(orm.TransientModel):
                  "digits of picking name and add the pack number. 2 digits for"
                  "pack number and 6 digits for picking number. (eg. 07000042 "
                  "for picking 42 and 7th pack"),
+        'proclima_logo': fields.related(
+            'company_id', 'postlogistics_proclima_logo',
+            string='Print ProClima logo', type='boolean',
+            help="The “pro clima” logo indicates an item for which the "
+                 "surcharge for carbon-neutral shipping has been paid and a "
+                 "contract to that effect has been signed. For Letters with "
+                 "barcode (BMB) domestic, the ProClima logo is printed "
+                 "automatically (at no additional charge)"),
     }
 
     def _default_company(self, cr, uid, context=None):
@@ -160,6 +168,7 @@ class PostlogisticsConfigSettings(orm.TransientModel):
             'default_output_format': output_format,
             'default_resolution': resolution,
             'tracking_format': company.postlogistics_tracking_format,
+            'proclima_logo': company.postlogistics_proclima_logo,
         }
         return {'value': values}
 
