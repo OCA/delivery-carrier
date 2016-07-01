@@ -59,6 +59,7 @@ class ResCompany(models.Model):
         string="Tracking number format",
         default='postlogistics',
     )
+    postlogistics_proclima_logo = fields.Boolean('Print ProClima logo')
 
     @api.depends('postlogistics_test_mode')
     def _get_wsdl_url(self):

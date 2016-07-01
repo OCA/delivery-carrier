@@ -45,6 +45,14 @@ class PostlogisticsConfigSettings(models.TransientModel):
              "digits of picking name and add the pack number. 2 digits for"
              "pack number and 6 digits for picking number. (eg. 07000042 "
              "for picking 42 and 7th pack")
+    proclima_logo = fields.Boolean(
+        related='company_id.postlogistics_proclima_logo',
+        help="The “pro clima” logo indicates an item for which the "
+             "surcharge for carbon-neutral shipping has been paid and a "
+             "contract to that effect has been signed. For Letters with "
+             "barcode (BMB) domestic, the ProClima logo is printed "
+             "automatically (at no additional charge)"
+    )
 
     @api.model
     def _get_delivery_instructions(self, web_service, company, service_code):
