@@ -51,7 +51,6 @@
     <record id="delivery_carrier_option_view_tree" model="ir.ui.view">
       <field name="name">delivery_base.delivery_carrier_option.view_tree</field>
       <field name="model">delivery.carrier.option</field>
-      <field name="type">tree</field>
       <field name="arch" type="xml">
         <tree string="delivery_carrier_option">
           <field name="mandatory" />
