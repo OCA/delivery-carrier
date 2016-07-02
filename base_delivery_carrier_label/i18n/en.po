@@ -2,62 +2,59 @@
 # This file contains the translation of the following modules:
 # * base_delivery_carrier_label
 # 
-# Translators:
-# OCA Transbot <transbot@odoo-community.org>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-07-01 02:45+0000\n"
 "PO-Revision-Date: 2016-07-01 02:45+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
-"Language-Team: Slovenian (https://www.transifex.com/oca/teams/23907/sl/)\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: sl\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+"Plural-Forms: \n"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account_account
 msgid "Account Number"
-msgstr "Številka konta"
+msgstr "Account Number"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account_password
 msgid "Account Password"
-msgstr "Geslo računa"
+msgstr "Account Password"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_delivery_carrier_option_description
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_delivery_carrier_template_option_description
 msgid "Allow to define a more complete description than in the name field."
-msgstr "Dovoli določanje popolnejšega opisa, kot je v polju naziv."
+msgstr "Allow to define a more complete description than in the name field."
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option_by_default
 msgid "Applied by Default"
-msgstr "Privzeto uveljavljeno"
+msgstr "Applied by Default"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_attachment_id
 msgid "Attachement"
-msgstr "Priponka"
+msgstr "Attachement"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_name
 msgid "Attachment Name"
-msgstr ""
+msgstr "Attachment Name"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_local_url
 msgid "Attachment URL"
-msgstr ""
+msgstr "Attachment URL"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_carrier_account
 msgid "Base account datas"
-msgstr "Osnovni podatki o računu"
+msgstr "Base account datas"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_delivery_carrier_option_by_default
@@ -65,51 +62,51 @@ msgid ""
 "By check, user can choose to apply this option to each Delivery Order\n"
 " using this delivery method"
 msgstr ""
-"Če je označeno, lahko uporabnik izbere uveljavitev te opcije za vsak dostavni nalog\n"
-" preko te dostavne metode"
+"By check, user can choose to apply this option to each Delivery Order\n"
+" using this delivery method"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_delivery_carrier
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option_carrier_id
 msgid "Carrier"
-msgstr "Prevoznik"
+msgstr "Carrier"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_picking_carrier_type
 msgid "Carrier Type"
-msgstr ""
+msgstr "Carrier Type"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_stock_picking_carrier_type
 msgid "Carrier type (combines several delivery methods)"
-msgstr "Tip prevoznika (kombinacija več dostavnih metod)"
+msgstr "Carrier type (combines several delivery methods)"
 
 #. module: base_delivery_carrier_label
 #: model:ir.ui.menu,name:base_delivery_carrier_label.menu_carriers_config
 msgid "Carriers"
-msgstr "Prevozniki"
+msgstr "Carriers"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_checksum
 msgid "Checksum/SHA1"
-msgstr ""
+msgstr "Checksum/SHA1"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option_code
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_template_option_code
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_picking_carrier_code
 msgid "Code"
-msgstr "Koda"
+msgstr "Code"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_company_id
 msgid "Company"
-msgstr ""
+msgstr "Company"
 
 #. module: base_delivery_carrier_label
 #: model:ir.ui.view,arch_db:base_delivery_carrier_label.view_picking_withcarrier_out_form
 msgid "Create Shipping Label"
-msgstr "Ustvari etiketo za odpošiljanje"
+msgstr "Create Shipping Label"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account_create_uid
@@ -117,7 +114,7 @@ msgstr "Ustvari etiketo za odpošiljanje"
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_template_option_create_uid
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_create_uid
 msgid "Created by"
-msgstr "Ustvaril"
+msgstr "Created by"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account_create_date
@@ -125,32 +122,32 @@ msgstr "Ustvaril"
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_template_option_create_date
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_create_date
 msgid "Created on"
-msgstr "Ustvarjeno"
+msgstr "Created on"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_db_datas
 msgid "Database Data"
-msgstr ""
+msgstr "Database Data"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_carrier_account_file_format
 msgid "Default format of the carrier's label you want to print"
-msgstr "Privzeti format prevoznikove etikete, ki jo želite natisniti"
+msgstr "Default format of the carrier's label you want to print"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_stock_picking_carrier_code
 msgid "Delivery Method Code (according to carrier)"
-msgstr "Koda dostavne metode (glede na prevoznika)"
+msgstr "Delivery Method Code (according to carrier)"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_delivery_carrier_option
 msgid "Delivery carrier option"
-msgstr "Opcija dostavnega prevoznika"
+msgstr "Delivery carrier option"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_delivery_carrier_template_option
 msgid "Delivery carrier template option"
-msgstr "Predloga opcije dostavnega prevoznika"
+msgstr "Delivery carrier template option"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option_description
@@ -158,7 +155,7 @@ msgstr "Predloga opcije dostavnega prevoznika"
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_description
 #: model:ir.ui.view,arch_db:base_delivery_carrier_label.view_delivery_carrier_form
 msgid "Description"
-msgstr "Opis"
+msgstr "Description"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account_display_name
@@ -166,32 +163,32 @@ msgstr "Opis"
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_template_option_display_name
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Display Name"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_datas
 msgid "File Content"
-msgstr ""
+msgstr "File Content"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account_file_format
 msgid "File Format"
-msgstr "Format datoteke"
+msgstr "File Format"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_datas_fname
 msgid "File Name"
-msgstr ""
+msgstr "File Name"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_file_size
 msgid "File Size"
-msgstr ""
+msgstr "File Size"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_file_type
 msgid "File type"
-msgstr "Tip datoteke"
+msgstr "File type"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account_id
@@ -204,7 +201,7 @@ msgstr "ID"
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_delivery_carrier_option_mandatory
 msgid "If checked, this option is necessarily applied to the delivery order"
-msgstr "Če je označeno, se ta opcija obvezno uveljavlja na dostavni nalog"
+msgstr "If checked, this option is necessarily applied to the delivery order"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_carrier_account_type
@@ -212,18 +209,18 @@ msgid ""
 "In case of several carriers, help to know which account belong to which "
 "carrier"
 msgstr ""
-"V primeru več prevoznikov pomaga ugotoviti, kateri konto pripada kateremu "
-"prevozniku"
+"In case of several carriers, help to know which account belong to which "
+"carrier"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_index_content
 msgid "Indexed Content"
-msgstr ""
+msgstr "Indexed Content"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_public
 msgid "Is public document"
-msgstr ""
+msgstr "Is public document"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account___last_update
@@ -231,7 +228,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_template_option___last_update
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label___last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Last Modified on"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account_write_uid
@@ -239,7 +236,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_template_option_write_uid
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_write_uid
 msgid "Last Updated by"
-msgstr "Zadnji posodobil"
+msgstr "Last Updated by"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account_write_date
@@ -247,103 +244,103 @@ msgstr "Zadnji posodobil"
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_template_option_write_date
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_write_date
 msgid "Last Updated on"
-msgstr "Zadnjič posodobljeno"
+msgstr "Last Updated on"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option_mandatory
 msgid "Mandatory"
-msgstr "Obvezno"
+msgstr "Mandatory"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_mimetype
 msgid "Mime Type"
-msgstr ""
+msgstr "Mime Type"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account_name
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option_name
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_template_option_name
 msgid "Name"
-msgstr "Naziv"
+msgstr "Name"
 
 #. module: base_delivery_carrier_label
 #: code:addons/base_delivery_carrier_label/models/stock_picking.py:45
 #, python-format
 msgid "No label is configured for the selected delivery method."
-msgstr "Za izbrano dostavno metodo ni nastavljene etikete."
+msgstr "No label is configured for the selected delivery method."
 
 #. module: base_delivery_carrier_label
 #: model:ir.actions.client,name:base_delivery_carrier_label.action_delivery_method_from_carrier_module_install
 msgid "Open Delivery Methods Menu"
-msgstr "Odpri meni dostavnih metod"
+msgstr "Open Delivery Methods Menu"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_available_option_ids
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option_tmpl_option_id
 msgid "Option"
-msgstr "Opcija"
+msgstr "Option"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_picking_option_ids
 #: model:ir.ui.view,arch_db:base_delivery_carrier_label.view_delivery_carrier_form
 msgid "Options"
-msgstr "Opcije"
+msgstr "Options"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_package_id
 msgid "Pack"
-msgstr "Paket"
+msgstr "Pack"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_stock_pack_operation
 msgid "Packing Operation"
-msgstr ""
+msgstr "Packing Operation"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_quant_package_parcel_tracking
 msgid "Parcel Tracking"
-msgstr "Sledenje pošiljk"
+msgstr "Parcel Tracking"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option_partner_id
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_template_option_partner_id
 msgid "Partner Carrier"
-msgstr "Partner prevoznik"
+msgstr "Partner Carrier"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_stock_quant_package
 msgid "Physical Packages"
-msgstr "Fizična pakiranja"
+msgstr "Physical Packages"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option_readonly_flag
 msgid "Readonly Flag"
-msgstr "Označeno 'le za branje'"
+msgstr "Readonly Flag"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_res_field
 msgid "Resource Field"
-msgstr ""
+msgstr "Resource Field"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_res_id
 msgid "Resource ID"
-msgstr ""
+msgstr "Resource ID"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_res_model
 msgid "Resource Model"
-msgstr ""
+msgstr "Resource Model"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_res_name
 msgid "Resource Name"
-msgstr ""
+msgstr "Resource Name"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_shipping_label
 msgid "Shipping Label"
-msgstr "Etiketa za odpošiljanje"
+msgstr "Shipping Label"
 
 #. module: base_delivery_carrier_label
 #: code:addons/base_delivery_carrier_label/models/stock_picking.py:252
@@ -352,59 +349,63 @@ msgid ""
 "Some labels already exist for the picking %s.\n"
 "Please delete the existing labels in the attachments of this picking and try again"
 msgstr ""
+"Some labels already exist for the picking %s.\n"
+"Please delete the existing labels in the attachments of this picking and try again"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_store_fname
 msgid "Stored Filename"
-msgstr ""
+msgstr "Stored Filename"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_shipping_label_res_model
 msgid "The database object this attachment will be attached to"
-msgstr ""
+msgstr "The database object this attachment will be attached to"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_shipping_label_res_id
 msgid "The record id this is attached to"
-msgstr ""
+msgstr "The record id this is attached to"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_quant_package_total_weight
 msgid "Total weight"
-msgstr ""
+msgstr "Total weight"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_stock_quant_package_total_weight
 msgid ""
 "Total weight of the package in kg, including the weight of the logistic "
 "unit."
-msgstr "Skupna masa pakiranja v kg, vključno masa logistične enote."
+msgstr ""
+"Total weight of the package in kg, including the weight of the logistic "
+"unit."
 
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_stock_picking
 msgid "Transfer"
-msgstr ""
+msgstr "Transfer"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account_type
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_type
 msgid "Type"
-msgstr "Tip"
+msgstr "Type"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_url
 msgid "Url"
-msgstr ""
+msgstr "Url"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_pack_operation_weight
 msgid "Weight"
-msgstr "Masa"
+msgstr "Weight"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_stock_pack_operation_weight
 msgid "Weight of the pack_operation"
-msgstr ""
+msgstr "Weight of the pack_operation"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_delivery_carrier_option_readonly_flag
@@ -412,8 +413,8 @@ msgid ""
 "When True, help to prevent the user to modify some fields option (if "
 "attribute is defined in the view)"
 msgstr ""
-"Kadar je pravilno, uporabniku pomaga spreminjati določene opcije polj (če je"
-" atribut določen v pogledu)"
+"When True, help to prevent the user to modify some fields option (if "
+"attribute is defined in the view)"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_shipping_label_type
@@ -421,6 +422,8 @@ msgid ""
 "You can either upload a file from your computer or copy/paste an internet "
 "link to your file"
 msgstr ""
+"You can either upload a file from your computer or copy/paste an internet "
+"link to your file"
 
 #. module: base_delivery_carrier_label
 #: code:addons/base_delivery_carrier_label/models/stock_picking.py:159
@@ -429,8 +432,8 @@ msgid ""
 "You should not remove a mandatory option.Please cancel the edit or add back "
 "the option: %s."
 msgstr ""
-"Ne smete odstraniti obvezne opcije. Prekličite urejanje ali znova dodajte "
-"opcijo: %s."
+"You should not remove a mandatory option.Please cancel the edit or add back "
+"the option: %s."
 
 #. module: base_delivery_carrier_label
 #: model:ir.ui.view,arch_db:base_delivery_carrier_label.delivery_carrier_option_view_form
