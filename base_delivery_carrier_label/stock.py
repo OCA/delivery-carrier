@@ -64,8 +64,8 @@ class StockPackOperation(models.Model):
                     'Type conversion not implemented for product %s' %
                     product.id)
                 cant_calc_total = True
-
-            operation.weight = (product.weight * operation.product_qty)
+            weight = product.weight or product.weight_net
+            operation.weight = (weight * operation.product_qty)
 
             total_weight += operation.weight
 
