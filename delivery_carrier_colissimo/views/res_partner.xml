@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_partner_form_external_names" model="ir.ui.view">
+            <field name="name">Add external names</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page name="external_names" string="External names">
+                        <group name="names">
+                            <field name="external_firstname"/>
+                            <field name="external_middlename"/>
+                            <field name="external_lastname"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</openerp>
