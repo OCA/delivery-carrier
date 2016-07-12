@@ -126,6 +126,56 @@ class StockPicking(models.Model):
     # end of API
 
     # Core functions
+
+    @api.multi
+    def set_label_as_attachment(self, labels_tuple):
+        shipping_label = self.env['shipping.label']
+        package_obj = self.env['stock.quant.package']
+
+        for package_id, label_dict in labels_tuple:
+            data = {
+                'res_id': self.id,
+                'res_model': 'stock.picking',
+                'package_id': package_id,
+                'type': 'binary',
+            }
+
+            label_name = "%s_%s.pdf" % ('label', label_dict['parcelNumber'])
+            cn23_name = "%s_%s.pdf" % ('cn23', label_dict['parcelNumber'])
+
+            label_data = data.copy()
+            label_data['name'] = label_name
+            label_data['datas'] = label_dict['label'].encode('base64')
+            shipping_label.create(label_data)
+
+            if label_dict.get('cn23'):
+                cn23_data = data.copy()
+                cn23_data['name'] = cn23_name
+                cn23_data['datas'] = label_dict['cn23'].encode('base64')
+                shipping_label.create(cn23_data)
+
+            data = {
+                'res_id': package_id,
+                'res_model': 'stock.quant.package',
+                'package_id': package_id,
+                'type': 'binary',
+            }
+            label_data = data.copy()
+            label_data['name'] = label_name
+            label_data['datas'] = label_dict['label'].encode('base64')
+            shipping_label.create(label_data)
+
+            if label_dict.get('cn23'):
+                cn23_data = data.copy()
+                cn23_data['name'] = cn23_name
+                cn23_data['datas'] = label_dict['cn23'].encode('base64')
+                shipping_label.create(cn23_data)
+
+            package_obj.browse(package_id).write(
+                {'parcel_tracking': label_dict['parcelNumber']}
+            )
+        return True
+
     @api.multi
     def _roulier_generate_labels(self, package_ids=None):
         # call generate_shipping_labels for each package
@@ -134,30 +184,30 @@ class StockPicking(models.Model):
         self.ensure_one()
 
         labels = self.generate_shipping_labels(package_ids)
-        for label in labels:
-            data = {
-                'name': label['name'],
-                'res_id': self.id,
-                'res_model': 'stock.picking',
-            }
-            if label.get('package_id'):
-                data['package_id'] = label['package_id']
+        self.set_label_as_attachment(labels)
+        # for label in labels:
+        #     data = {
+        #         'name': label['name'],
+        #         'res_id': self.id,
+        #         'res_model': 'stock.picking',
+        #     }
+        #     if label.get('package_id'):
+        #         data['package_id'] = label['package_id']
 
-            if label.get('url'):
-                data['url'] = label['url']
-                data['type'] = 'url'
-            elif label.get('data'):
-                data['datas'] = label['data'].encode('base64')
-                data['type'] = 'binary'
+        #     if label.get('url'):
+        #         data['url'] = label['url']
+        #         data['type'] = 'url'
+        #     elif label.get('data'):
+        #         data['datas'] = label['data'].encode('base64')
+        #         data['type'] = 'binary'
 
-            self.env['shipping.label'].create(data)
+        #     self.env['shipping.label'].create(data)
         return True
 
     @api.multi
     def _roulier_generate_shipping_labels(self, package_ids=None):
         """Create as many labels as package_ids or in self."""
         self.ensure_one()
-
         packages = []
         if package_ids:
             packages = package_ids
@@ -167,7 +217,7 @@ class StockPicking(models.Model):
             raise UserError(_('No package found for this picking'))
             # It's not our responsibility to create the packages
         labels = [
-            self._call_roulier_api(package)
+            (package.id, self._call_roulier_api(package))
             for package in packages
         ]
         return labels
@@ -208,19 +258,29 @@ class StockPicking(models.Model):
             'weight': weight,
         }
 
-        # sorte d'interceptor ici pour que chacun
-        # puisse ajouter ses merdes à payload
         payload = self._before_call(package_id, payload)
 
-        # vrai appel a l'api
         ret = roulier_instance.get_label(payload)
 
         # minimum error handling
         if ret.get('status', '') == 'error':
+            # try better management of this error
+            # ret.get('message') is a dictionnary like
+            # {'message': u"Le poids du colis n'a pas \xe9t\xe9 transmis",
+            #  'type': 'ERROR', 'id': 30300}
             raise UserError(_(ret.get('message', 'WebService error')))
 
         # give result to someonelese
         return self._after_call(package_id, ret)
+
+    def get_extracted_fields(self):
+        return [
+            'name', 'zip', 'city', 'phone', 'mobile',
+            'email', 'phone', 'parent_id', 'first_name'
+        ]
+
+    def get_mapping_dict(self, extract_fields):
+        return {k: k for k in extract_fields}
 
     # helpers
     @api.multi
@@ -234,16 +294,15 @@ class StockPicking(models.Model):
         """
         self.ensure_one()
         address = {}
-        extract_fields = [
-            'name', 'zip', 'city', 'phone', 'mobile',
-            'email', 'phone', 'parent_id', 'first_name']
+        extract_fields = self.get_extracted_fields()
+        mapping_dict = self.get_mapping_dict(extract_fields)
         for elm in extract_fields:
             if elm in partner:
                 # because a value can't be None in odoo's ORM
                 # you don't want to mix (bool) False and None
                 if partner._fields[elm].type != fields.Boolean.type:
                     if partner[elm]:
-                        address[elm] = partner[elm]
+                        address[mapping_dict[elm]] = partner[elm]
                     # else:
                     # it's a None: nothing to do
                 else:  # it's a boolean: keep the value

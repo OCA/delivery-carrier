@@ -9,7 +9,6 @@
 #          Sébastien BEAU
 ##############################################################################
 
-from openerp.tools.config import config
 from openerp import models, fields, api
 from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
 import openerp.addons.decimal_precision as dp
@@ -82,11 +81,7 @@ class StockPicking(models.Model):
 
     def _laposte_after_call(self, package_id, response):
         # CN23 is included in the pdf url
-        return {
-            'name': response['parcelNumber'],
-            'url': response['url'],
-            'type': 'url',
-        }
+        return response
 
     def _laposte_get_shipping_date(self, package_id):
         """Estimate shipping date."""
@@ -161,7 +156,9 @@ class StockPicking(models.Model):
             hs = product.product_tmpl_id.get_hs_code_recursively()
 
             article['quantity'] = '%.f' % operation.product_qty
-            article['weight'] = (operation.get_weight() / operation.product_qty)
+            article['weight'] = (
+                operation.get_weight() / operation.product_qty
+            )
             article['originCountry'] = product.origin_country_id.code
             article['description'] = hs.description
             article['hs'] = hs.hs_code

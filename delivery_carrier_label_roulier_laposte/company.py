@@ -43,4 +43,3 @@ class ResCompany(models.Model):
         help=u"Pour ColiPoste International. \nSi coché, un commentaire "
              u"sera créé dans le bon de livraison\nsi la réponse du "
              u"web service contient un message additionnel.")
-
