@@ -41,7 +41,7 @@
 <record id="view_deposit_slip_tree" model="ir.ui.view">
     <field name="model">deposit.slip</field>
     <field name="arch" type="xml">
-    <tree string="Deposit" colors="blue:state=='draft'">
+    <tree string="Deposit" colors="blue:state=='draft'" create="0">
         <field name="name"/>
         <field name="carrier_type"/>
         <field name="create_date"/>
@@ -55,7 +55,7 @@
 <record id="view_deposit_slip_form" model="ir.ui.view">
     <field name="model">deposit.slip</field>
     <field name="arch" type="xml">
-        <form string="Deposit">
+        <form string="Deposit" create="0">
             <header>
                 <button name="validate_deposit" string="Confirm" type="object"
                         attrs="{'invisible' : ['|', ('state','!=','draft'), ('carrier_type', '=', False)]}"
