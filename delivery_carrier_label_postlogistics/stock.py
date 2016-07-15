@@ -28,6 +28,29 @@ from .postlogistics.web_service import PostlogisticsWebService
 class stock_picking(orm.Model):
     _inherit = 'stock.picking'
 
+    def _tracking_url(self, cr, uid, ids, name, args, context=None):
+        """ Create an url from tracking refs to link with postlogistic website
+        @return: Dictionary of values
+        """
+        base_url = ("http://www.post.ch/swisspost-tracking?p_language=%(lang)s"
+                    "&formattedParcelCodes=%(refs)s")
+        res = {}
+        for pick in self.browse(cr, uid, ids, context=context):
+            refs = pick.carrier_tracking_ref
+            if not refs:
+                res[pick.id] = False
+                continue
+            # references are separated by ';' + space
+            # we need to remove the space to use them in url
+            refs = "".join(refs.split())
+            lang = pick.partner_id.lang
+            if lang:
+                lang = lang[:2]
+            if not lang or lang not in ('en', 'de', 'fr', 'it'):
+                lang = 'en'
+            res[pick.id] = base_url % {'lang': lang, 'refs': refs}
+        return res
+
     _columns = {
         'cash_on_delivery': fields.float(
             "Cash on Delivery", help="Amount for Cash on delivery service (N)"
@@ -46,6 +69,9 @@ class stock_picking(orm.Model):
         ),
         # remove size constraint of 32 characters
         'carrier_tracking_ref': fields.char('Carrier Tracking Ref', size=None),
+        'carrier_tracking_url': fields.function(
+            _tracking_url, type='char', string='Tracking URL',
+        ),
     }
 
     def _generate_postlogistics_label(self, cr, uid, picking,
@@ -138,6 +164,9 @@ class stock_picking(orm.Model):
 class stock_picking_out(orm.Model):
     _inherit = 'stock.picking.out'
 
+    def _tracking_url(self, *args, **kwargs):
+        return self.pool['stock.picking']._tracking_url(*args, **kwargs)
+
     _columns = {
         'cash_on_delivery': fields.float(
             "Cash on Delivery", help="Amount for Cash on delivery service (N)"
@@ -156,12 +185,18 @@ class stock_picking_out(orm.Model):
         ),
         # remove size constraint of 32 characters
         'carrier_tracking_ref': fields.char('Carrier Tracking Ref', size=None),
+        'carrier_tracking_url': fields.function(
+            _tracking_url, type='char', string='Tracking URL',
+        ),
     }
 
 
 class stock_picking_in(orm.Model):
     _inherit = 'stock.picking.in'
 
+    def _tracking_url(self, *args, **kwargs):
+        return self.pool['stock.picking']._tracking_url(*args, **kwargs)
+
     _columns = {
         'cash_on_delivery': fields.float(
             "Cash on Delivery", help="Amount for Cash on delivery service (N)"
@@ -180,6 +215,9 @@ class stock_picking_in(orm.Model):
         ),
         # remove size constraint of 32 characters
         'carrier_tracking_ref': fields.char('Carrier Tracking Ref', size=None),
+        'carrier_tracking_url': fields.function(
+            _tracking_url, type='char', string='Tracking URL',
+        ),
     }
 
 
