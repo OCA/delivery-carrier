@@ -45,15 +45,17 @@ class TestPostlogistics(common.TransactionCase):
             'product_id': Product.create({'name': 'Shipping'}).id,
             'partner_id': self.env.ref(partner_xmlid).id,
         })
+        stock_location = self.env.ref('stock.stock_location_stock')
+        customer_location = self.env.ref('stock.stock_location_customers')
         Picking = self.env['stock.picking']
         self.picking = Picking.create({
             'carrier_id': self.carrier.id,
             'picking_type_id': self.env.ref('stock.picking_type_out').id,
+            'location_id': stock_location.id,
+            'location_dest_id': customer_location.id,
         })
         product = Product.create({'name': 'Product A'})
 
-        stock_location = self.env.ref('stock.stock_location_stock')
-        customer_location = self.env.ref('stock.stock_location_customers')
         self.env['stock.move'].create({
             'name': 'a move',
             'product_id': product.id,
