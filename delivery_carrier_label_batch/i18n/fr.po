@@ -1,0 +1,140 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* delivery_carrier_label_dispatch
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-09-09 12:11+0000\n"
+"PO-Revision-Date: 2014-09-09 12:11+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: delivery_carrier_label_dispatch
+#: view:picking.dispatch.apply.carrier:0
+msgid "Apply"
+msgstr "Appliquer"
+
+#. module: delivery_carrier_label_dispatch
+#: model:ir.actions.act_window,name:delivery_carrier_label_dispatch.action_picking_dispatch_apply_carrier
+#: view:picking.dispatch.apply.carrier:0
+msgid "Apply a carrier and its options"
+msgstr "Appliquer un transporteur et ses options"
+
+#. module: delivery_carrier_label_dispatch
+#: view:picking.dispatch.apply.carrier:0
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: delivery_carrier_label_dispatch
+#: model:ir.model.fields,field_description:delivery_carrier_label_dispatch.field_picking_dispatch_apply_carrier_carrier_id
+#: model:ir.model.fields,field_description:delivery_carrier_label_dispatch.field_picking_dispatch_carrier_id
+#: field:picking.dispatch,carrier_id:0
+#: field:picking.dispatch.apply.carrier,carrier_id:0
+msgid "Carrier"
+msgstr "Transporteur"
+
+#. module: delivery_carrier_label_dispatch
+#: view:picking.dispatch:0
+msgid "Carrier Info"
+msgstr "Info transporteur"
+
+#. module: delivery_carrier_label_dispatch
+#: view:delivery.carrier.label.generate:0
+msgid "Close"
+msgstr "Fermer"
+
+#. module: delivery_carrier_label_dispatch
+#: view:picking.dispatch:0
+msgid "Delivery"
+msgstr "Livraison"
+
+#. module: delivery_carrier_label_dispatch
+#: code:_description:0
+#: model:ir.model,name:delivery_carrier_label_dispatch.model_picking_dispatch
+#, python-format
+msgid "Dispatch Picking Order"
+msgstr "Bon de préparation"
+
+#. module: delivery_carrier_label_dispatch
+#: model:ir.actions.act_window,name:delivery_carrier_label_dispatch.action_delivery_carrier_label_generate
+msgid "Generate Carrier Labels"
+msgstr "Générer les étiquette d’expédition"
+
+#. module: delivery_carrier_label_dispatch
+#: view:delivery.carrier.label.generate:0
+msgid "Generate Carriers Labels"
+msgstr "Générer les étiquettes d'expédition"
+
+#. module: delivery_carrier_label_dispatch
+#: view:delivery.carrier.label.generate:0
+msgid "Generate Labels"
+msgstr "Générer les étiquettes"
+
+#. module: delivery_carrier_label_dispatch
+#: view:delivery.carrier.label.generate:0
+msgid "Labels"
+msgstr "Etiquettes"
+
+#. module: delivery_carrier_label_dispatch
+#: field:delivery.carrier.label.generate,label_pdf_file:0
+#: model:ir.model.fields,field_description:delivery_carrier_label_dispatch.field_delivery_carrier_label_generate_label_pdf_file
+msgid "Labels file"
+msgstr "Fichier d'étiquettes"
+
+#. module: delivery_carrier_label_dispatch
+#: model:ir.model.fields,field_description:delivery_carrier_label_dispatch.field_picking_dispatch_option_ids
+#: view:picking.dispatch:0
+#: field:picking.dispatch,option_ids:0
+msgid "Options"
+msgstr "Options"
+
+#. module: delivery_carrier_label_dispatch
+#: field:delivery.carrier.label.generate,dispatch_ids:0
+#: model:ir.model.fields,field_description:delivery_carrier_label_dispatch.field_delivery_carrier_label_generate_dispatch_ids
+msgid "Picking Dispatch"
+msgstr "Bon de préparation"
+
+#. module: delivery_carrier_label_dispatch
+#: code:_description:0
+#: model:ir.model,name:delivery_carrier_label_dispatch.model_picking_dispatch_apply_carrier
+#, python-format
+msgid "Picking Dispatch Apply Carrier"
+msgstr "Applique un transporteur sur des bons de préparation"
+
+#. module: delivery_carrier_label_dispatch
+#: code:_description:0
+#: model:ir.model,name:delivery_carrier_label_dispatch.model_stock_picking
+#, python-format
+msgid "Picking List"
+msgstr "Bon de livraison"
+
+#. module: delivery_carrier_label_dispatch
+#: view:picking.dispatch:0
+msgid "Set Options"
+msgstr "Appliquer les options"
+
+#. module: delivery_carrier_label_dispatch
+#: view:picking.dispatch:0
+#: view:picking.dispatch.apply.carrier:0
+msgid "Warning, setting options will erase the existing ones in delivery orders"
+msgstr "Attention, définir les options supprimera les options existantes dans les livraisons du bon de préparation"
+
+#. module: delivery_carrier_label_dispatch
+#: code:_description:0
+#: model:ir.model,name:delivery_carrier_label_dispatch.model_delivery_carrier_label_generate
+#, python-format
+msgid "delivery.carrier.label.generate"
+msgstr "delivery.carrier.label.generate"
+
+#. module: delivery_carrier_label_dispatch
+#: view:delivery.carrier.label.generate:0
+#: view:picking.dispatch.apply.carrier:0
+msgid "or"
+msgstr "ou"
+
