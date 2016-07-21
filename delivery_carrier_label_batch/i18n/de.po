@@ -1,0 +1,142 @@
+# German translation for carriers-deliveries
+# Copyright (c) 2014 Rosetta Contributors and Canonical Ltd 2014
+# This file is distributed under the same license as the carriers-deliveries package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: carriers-deliveries\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2014-01-09 13:29+0000\n"
+"PO-Revision-Date: 2015-01-05 14:14+0100\n"
+"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
+"Language-Team: German <de@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2014-06-27 07:09+0000\n"
+"X-Generator: Poedit 1.5.4\n"
+"Language: de\n"
+
+#. module: delivery_carrier_label_dispatch
+#: view:picking.dispatch:0
+msgid "Carrier Info"
+msgstr "Information zum Spediteur"
+
+#. module: delivery_carrier_label_dispatch
+#: model:ir.actions.act_window,name:delivery_carrier_label_dispatch.action_delivery_carrier_label_generate
+msgid "Generate Carrier Labels"
+msgstr "Paketaufkleber erzeugen"
+
+#. module: delivery_carrier_label_dispatch
+#: model:ir.model,name:delivery_carrier_label_dispatch.model_stock_picking
+msgid "Picking List"
+msgstr "Kommissionierschein"
+
+#. module: delivery_carrier_label_dispatch
+#: code:addons/delivery_carrier_label_dispatch/picking_dispatch.py:100
+#, python-format
+msgid ""
+"You can not remove a mandatory option.\n"
+"Options are reset to default."
+msgstr ""
+"Sie können eine Pflichtoption nicht entfernen.\n"
+"Auswahl wird auf Vorgaben zurückgesetzt."
+
+#. module: delivery_carrier_label_dispatch
+#: model:ir.model,name:delivery_carrier_label_dispatch.model_picking_dispatch
+msgid "Dispatch Picking Order"
+msgstr "Kommissionierung auslösen"
+
+#. module: delivery_carrier_label_dispatch
+#: view:picking.dispatch:0
+msgid "Delivery"
+msgstr "Lieferung"
+
+#. module: delivery_carrier_label_dispatch
+#: code:addons/delivery_carrier_label_dispatch/wizard/generate_labels.py:58
+#, python-format
+msgid "No picking dispatch selected"
+msgstr "Keine Kommissionierung ausgewählt"
+
+#. module: delivery_carrier_label_dispatch
+#: field:delivery.carrier.label.generate,label_pdf_file:0
+#: model:ir.model.fields,field_description:delivery_carrier_label_dispatch.field_delivery_carrier_label_generate_label_pdf_file
+msgid "Labels file"
+msgstr "Etikettdatei"
+
+#. module: delivery_carrier_label_dispatch
+#: field:delivery.carrier.label.generate,dispatch_ids:0
+#: model:ir.model.fields,field_description:delivery_carrier_label_dispatch.field_delivery_carrier_label_generate_dispatch_ids
+msgid "Picking Dispatch"
+msgstr "Kommissionierauftrag"
+
+#. module: delivery_carrier_label_dispatch
+#: model:ir.model,name:delivery_carrier_label_dispatch.model_delivery_carrier_label_generate
+msgid "delivery.carrier.label.generate"
+msgstr "delivery.carrier.label.generate"
+
+#. module: delivery_carrier_label_dispatch
+#: view:picking.dispatch:0
+msgid "Set Options"
+msgstr "Optionen setzen"
+
+#. module: delivery_carrier_label_dispatch
+#: model:ir.model.fields,field_description:delivery_carrier_label_dispatch.field_picking_dispatch_carrier_id
+#: field:picking.dispatch,carrier_id:0
+msgid "Carrier"
+msgstr "Spediteur"
+
+#. module: delivery_carrier_label_dispatch
+#: code:addons/delivery_carrier_label_dispatch/wizard/generate_labels.py:58
+#, python-format
+msgid "Error"
+msgstr "Fehler"
+
+#. module: delivery_carrier_label_dispatch
+#: view:picking.dispatch:0
+msgid "Warning, setting options will erase the existing ones in delivery orders"
+msgstr ""
+"Warnung: Diese Einstellungen zur Kommissionierung überschreiben vorherige"
+
+#. module: delivery_carrier_label_dispatch
+#: model:ir.model.fields,field_description:delivery_carrier_label_dispatch.field_picking_dispatch_option_ids
+#: view:picking.dispatch:0 field:picking.dispatch,option_ids:0
+msgid "Options"
+msgstr "Einstellungen"
+
+#. module: delivery_carrier_label_dispatch
+#: view:delivery.carrier.label.generate:0
+msgid "Generate Labels"
+msgstr "Etiketten erzeugen"
+
+#. module: delivery_carrier_label_dispatch
+#: view:delivery.carrier.label.generate:0
+msgid "Labels"
+msgstr "Etiketten"
+
+#. module: delivery_carrier_label_dispatch
+#: view:delivery.carrier.label.generate:0
+msgid "Generate Carriers Labels"
+msgstr "Etiketten des Spediteurs erzeugen"
+
+#. module: delivery_carrier_label_dispatch
+#: view:delivery.carrier.label.generate:0
+msgid "Close"
+msgstr "Schließen"
+
+#. module: delivery_carrier_label_dispatch
+#: code:addons/delivery_carrier_label_dispatch/picking_dispatch.py:99
+#, python-format
+msgid "User Error !"
+msgstr "Anwenderfehler!"
+
+#. module: delivery_carrier_label_dispatch
+#: model:ir.model,name:delivery_carrier_label_dispatch.model_stock_picking_out
+msgid "Delivery Orders"
+msgstr "Lieferaufträge"
+
+#. module: delivery_carrier_label_dispatch
+#: view:delivery.carrier.label.generate:0
+msgid "or"
+msgstr "oder"
