@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+<record id="view_delivery_carrier_label_generate" model="ir.ui.view">
+  <field name="name">Generate Carriers Labels</field>
+  <field name="model">delivery.carrier.label.generate</field>
+  <field name="arch" type="xml">
+    <form string="Generate Carriers Labels">
+      <group>
+        <label string="This wizard creates an attachement on each selected batch containing picking labels"/>
+      </group>
+      <group>
+        <field name="batch_ids"/>
+        <field name="generate_new_labels"/>
+      </group>
+      <footer>
+        <button name="action_generate_labels" string="Generate Labels" type="object" icon="gtk-execute" class="oe_highlight"/>
+        <button string="Close" class="oe_link" special="cancel" />
+      </footer>
+
+    </form>
+  </field>
+</record>
+
+<record id="action_delivery_carrier_label_generate" model="ir.actions.act_window">
+  <field name="name">Generate Carrier Labels</field>
+  <field name="res_model">delivery.carrier.label.generate</field>
+  <field name="view_type">form</field>
+  <field name="view_mode">form</field>
+  <field name="view_id" ref="view_delivery_carrier_label_generate"/>
+  <field name="groups_id" eval="[(6, 0, [ref('stock.group_stock_manager')])]"/>
+  <field name="target">new</field>
+</record>
+
+<record model="ir.values" id="delivery_carrier_file_generate_ir_values">
+  <field name="name">Generate Carrier Labels</field>
+  <field name="key2">client_action_multi</field>
+  <field name="value" eval="'ir.actions.act_window,' + str(ref('action_delivery_carrier_label_generate'))" />
+  <field name="key">action</field>
+  <field name="model">stock.batch.picking</field>
+</record>
+
+</odoo>
