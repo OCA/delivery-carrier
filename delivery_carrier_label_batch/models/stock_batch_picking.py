@@ -70,10 +70,11 @@ class StockBatchPicking(models.Model):
                 res['warning'] = {
                     'title': _('User Error !'),
                     'message': _("You can not remove a mandatory option."
-                                 "\nOptions are reset to default.")
+                                 "\nPlease reset options to default.")
                 }
-                # trigger carrier_id change to reset default values
-                self.carrier_id = self.carrier_id
+                # Due to https://github.com/odoo/odoo/issues/2693 we cannot
+                # reset options
+                # self.option_ids = self._get_options_to_add()
         return res
 
     @api.multi
