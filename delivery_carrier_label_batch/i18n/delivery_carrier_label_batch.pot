@@ -1,143 +1,136 @@
-# Translation of OpenERP Server.
+# Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* delivery_carrier_label_dispatch
+#	* delivery_carrier_label_batch
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenERP Server 7.0\n"
+"Project-Id-Version: Odoo Server 9.0e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-22 10:44+0200\n"
-"PO-Revision-Date: 2016-07-22 11:03+0200\n"
+"POT-Creation-Date: 2016-07-22 08:42+0000\n"
+"PO-Revision-Date: 2016-07-22 08:42+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
-"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
-"X-Generator: Poedit 1.8.4\n"
 
 #. module: delivery_carrier_label_batch
 #: code:addons/delivery_carrier_label_batch/wizard/generate_labels.py:77
 #, python-format
 msgid "%s %s - %s"
-msgstr "%s %s - %s"
+msgstr ""
 
 #. module: delivery_carrier_label_batch
 #: model:ir.ui.view,arch_db:delivery_carrier_label_batch.view_picking_batch_apply_carrier
 msgid "Apply"
-msgstr "Appliquer"
+msgstr ""
 
 #. module: delivery_carrier_label_batch
 #: model:ir.actions.act_window,name:delivery_carrier_label_batch.action_picking_batch_apply_carrier
 #: model:ir.ui.view,arch_db:delivery_carrier_label_batch.view_picking_batch_apply_carrier
 msgid "Apply a carrier and its options"
-msgstr "Appliquer un transporteur et ses options"
+msgstr ""
 
 #. module: delivery_carrier_label_batch
 #: model:ir.ui.view,arch_db:delivery_carrier_label_batch.view_picking_batch_apply_carrier
 msgid "Cancel"
-msgstr "Annuler"
+msgstr ""
 
 #. module: delivery_carrier_label_batch
 #: model:ir.model.fields,field_description:delivery_carrier_label_batch.field_picking_batch_apply_carrier_carrier_id
 #: model:ir.model.fields,field_description:delivery_carrier_label_batch.field_stock_batch_picking_carrier_id
 msgid "Carrier"
-msgstr "Transporteur"
+msgstr ""
 
 #. module: delivery_carrier_label_batch
 #: model:ir.ui.view,arch_db:delivery_carrier_label_batch.stock_batch_picking_form
 msgid "Carrier Info"
-msgstr "Info transporteur"
+msgstr ""
 
 #. module: delivery_carrier_label_batch
 #: model:ir.ui.view,arch_db:delivery_carrier_label_batch.view_delivery_carrier_label_generate
 msgid "Close"
-msgstr "Fermer"
+msgstr ""
 
 #. module: delivery_carrier_label_batch
 #: model:ir.model.fields,field_description:delivery_carrier_label_batch.field_delivery_carrier_label_generate_create_uid
 #: model:ir.model.fields,field_description:delivery_carrier_label_batch.field_picking_batch_apply_carrier_create_uid
 msgid "Created by"
-msgstr "Créé par"
+msgstr ""
 
 #. module: delivery_carrier_label_batch
 #: model:ir.model.fields,field_description:delivery_carrier_label_batch.field_delivery_carrier_label_generate_create_date
 #: model:ir.model.fields,field_description:delivery_carrier_label_batch.field_picking_batch_apply_carrier_create_date
 msgid "Created on"
-msgstr "Créé le"
+msgstr ""
 
 #. module: delivery_carrier_label_batch
 #: model:ir.ui.view,arch_db:delivery_carrier_label_batch.stock_batch_picking_form
 msgid "Delivery"
-msgstr "Livraison"
+msgstr ""
 
 #. module: delivery_carrier_label_batch
 #: model:ir.model.fields,field_description:delivery_carrier_label_batch.field_delivery_carrier_label_generate_display_name
 #: model:ir.model.fields,field_description:delivery_carrier_label_batch.field_picking_batch_apply_carrier_display_name
 msgid "Display Name"
-msgstr "Nom affiché"
+msgstr ""
 
 #. module: delivery_carrier_label_batch
 #: model:ir.actions.act_window,name:delivery_carrier_label_batch.action_delivery_carrier_label_generate
 msgid "Generate Carrier Labels"
-msgstr "Générer les étiquette d’expédition"
+msgstr ""
 
 #. module: delivery_carrier_label_batch
 #: model:ir.ui.view,arch_db:delivery_carrier_label_batch.view_delivery_carrier_label_generate
 msgid "Generate Carriers Labels"
-msgstr "Générer les étiquettes d'expédition"
+msgstr ""
 
 #. module: delivery_carrier_label_batch
 #: model:ir.ui.view,arch_db:delivery_carrier_label_batch.view_delivery_carrier_label_generate
 msgid "Generate Labels"
-msgstr "Générer les étiquettes"
+msgstr ""
 
 #. module: delivery_carrier_label_batch
 #: model:ir.model.fields,field_description:delivery_carrier_label_batch.field_delivery_carrier_label_generate_generate_new_labels
 msgid "Generate new labels"
-msgstr "Générer de nouvelles étiquettes"
+msgstr ""
 
 #. module: delivery_carrier_label_batch
 #: model:ir.model.fields,field_description:delivery_carrier_label_batch.field_delivery_carrier_label_generate_id
 #: model:ir.model.fields,field_description:delivery_carrier_label_batch.field_picking_batch_apply_carrier_id
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: delivery_carrier_label_batch
 #: model:ir.model.fields,help:delivery_carrier_label_batch.field_delivery_carrier_label_generate_generate_new_labels
-msgid ""
-"If this option is used, new labels will be generated for the packs even if they already have "
-"one.\n"
+msgid "If this option is used, new labels will be generated for the packs even if they already have one.\n"
 "The default is to use the existing label."
 msgstr ""
-"Si cette option est utilisée, des nouvelles étiquettes seront générée pour les colis même "
-"s'il y a déjà des étiquettes liées au colis.\n"
-"Par défaut l'étiquette déjà existante sera utilisée."
 
 #. module: delivery_carrier_label_batch
 #: model:ir.model.fields,field_description:delivery_carrier_label_batch.field_delivery_carrier_label_generate___last_update
 #: model:ir.model.fields,field_description:delivery_carrier_label_batch.field_picking_batch_apply_carrier___last_update
 msgid "Last Modified on"
-msgstr "Dernière modification le"
+msgstr ""
 
 #. module: delivery_carrier_label_batch
 #: model:ir.model.fields,field_description:delivery_carrier_label_batch.field_delivery_carrier_label_generate_write_uid
 #: model:ir.model.fields,field_description:delivery_carrier_label_batch.field_picking_batch_apply_carrier_write_uid
 msgid "Last Updated by"
-msgstr "Mise à jour par"
+msgstr ""
 
 #. module: delivery_carrier_label_batch
 #: model:ir.model.fields,field_description:delivery_carrier_label_batch.field_delivery_carrier_label_generate_write_date
 #: model:ir.model.fields,field_description:delivery_carrier_label_batch.field_picking_batch_apply_carrier_write_date
 msgid "Last Updated on"
-msgstr "Mise à jour le"
+msgstr ""
 
 #. module: delivery_carrier_label_batch
 #: code:addons/delivery_carrier_label_batch/wizard/generate_labels.py:96
 #, python-format
 msgid "No picking batch selected"
-msgstr "Pas de lot de préparation sélectionné."
+msgstr ""
 
 #. module: delivery_carrier_label_batch
 #: code:addons/delivery_carrier_label_batch/wizard/apply_carrier.py:32
@@ -149,23 +142,23 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_carrier_label_batch.field_stock_batch_picking_option_ids
 #: model:ir.ui.view,arch_db:delivery_carrier_label_batch.stock_batch_picking_form
 msgid "Options"
-msgstr "Options"
+msgstr ""
 
 #. module: delivery_carrier_label_batch
 #: code:addons/delivery_carrier_label_batch/wizard/generate_labels.py:75
 #, python-format
 msgid "Pack: %s"
-msgstr "Colis: %s"
+msgstr ""
 
 #. module: delivery_carrier_label_batch
 #: model:ir.model.fields,field_description:delivery_carrier_label_batch.field_delivery_carrier_label_generate_batch_ids
 msgid "Picking Batch"
-msgstr "Lot de préparation"
+msgstr ""
 
 #. module: delivery_carrier_label_batch
 #: model:ir.model,name:delivery_carrier_label_batch.model_picking_batch_apply_carrier
 msgid "Picking Batch Apply Carrier"
-msgstr "Applique un transporteur sur des lots de préparation"
+msgstr ""
 
 #. module: delivery_carrier_label_batch
 #: code:addons/delivery_carrier_label_batch/wizard/generate_labels.py:74
@@ -176,12 +169,12 @@ msgstr ""
 #. module: delivery_carrier_label_batch
 #: model:ir.ui.view,arch_db:delivery_carrier_label_batch.stock_batch_picking_form
 msgid "Set Options"
-msgstr "Appliquer les options"
+msgstr ""
 
 #. module: delivery_carrier_label_batch
 #: model:ir.ui.view,arch_db:delivery_carrier_label_batch.view_delivery_carrier_label_generate
 msgid "This wizard creates an attachement on each selected batch containing picking labels"
-msgstr "Cet assistant crée un attachement pour chaque lot séléctionné contenant des étiquettes"
+msgstr ""
 
 #. module: delivery_carrier_label_batch
 #: code:addons/delivery_carrier_label_batch/models/stock_batch_picking.py:71
@@ -194,38 +187,21 @@ msgstr ""
 #: model:ir.ui.view,arch_db:delivery_carrier_label_batch.view_picking_batch_apply_carrier
 msgid "Warning, setting options will erase the existing ones in delivery orders"
 msgstr ""
-"Attention, définir les options supprimera les options existantes dans les livraisons du bon "
-"de préparation"
 
 #. module: delivery_carrier_label_batch
 #: code:addons/delivery_carrier_label_batch/models/stock_batch_picking.py:72
 #, python-format
-msgid ""
-"You can not remove a mandatory option.\n"
+msgid "You can not remove a mandatory option.\n"
 "Options are reset to default."
 msgstr ""
 
 #. module: delivery_carrier_label_batch
 #: model:ir.model,name:delivery_carrier_label_batch.model_delivery_carrier_label_generate
 msgid "delivery.carrier.label.generate"
-msgstr "delivery.carrier.label.generate"
+msgstr ""
 
 #. module: delivery_carrier_label_batch
 #: model:ir.model,name:delivery_carrier_label_batch.model_stock_batch_picking
 msgid "stock.batch.picking"
-msgstr "stock.batch.picking"
+msgstr ""
 
-#~ msgid "Dispatch Picking Order"
-#~ msgstr "Bon de préparation"
-
-#~ msgid "Labels"
-#~ msgstr "Etiquettes"
-
-#~ msgid "Labels file"
-#~ msgstr "Fichier d'étiquettes"
-
-#~ msgid "Picking Dispatch"
-#~ msgstr "Bon de préparation"
-
-#~ msgid "Picking List"
-#~ msgstr "Bon de livraison"
