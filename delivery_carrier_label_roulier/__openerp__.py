@@ -9,8 +9,8 @@
 ##############################################################################
 {
     'name': 'Delivery Carrier Roulier',
-    'version': '0.3',
-    'author': 'Akretion',
+    'version': '8.0.0.0.3',
+    'author': 'Akretion, Camptocamp, Odoo Community Association (OCA)',
     'summary': 'Integration of multiple carriers (base)',
     'maintainer': 'Akretion',
     'category': 'Warehouse',

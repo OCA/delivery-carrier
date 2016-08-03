@@ -2,8 +2,8 @@
 
 {
     'name': 'LaPoste',
-    'version': '0.3',
-    'author': 'Akretion',
+    'version': '8.0.0.0.3',
+    'author': 'Akretion, Camptocamp, Odoo Community Association (OCA)',
     'summary': 'Ship with Coliposte, Colissimo, So-colissimo and so on',
     'maintainer': 'Akretion',
     'category': 'Warehouse',
