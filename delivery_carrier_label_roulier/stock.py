@@ -140,7 +140,9 @@ class StockPicking(models.Model):
                 'type': 'binary',
             }
 
-            label_name = "%s_%s.pdf" % ('label', label_dict['parcelNumber'])
+            label_name = "%s_%s.%s" % ('label',
+                                       label_dict['parcelNumber'],
+                                       self.carrier_id.label_format[:3])
             cn23_name = "%s_%s.pdf" % ('cn23', label_dict['parcelNumber'])
 
             label_data = data.copy()
@@ -249,10 +251,10 @@ class StockPicking(models.Model):
 
         if self._should_include_customs(package_id):
             payload['customs'] = self._get_customs(package_id)
-
         payload['service'] = {
             'productCode': self.carrier_code,
             'shippingDate': shipping_date,
+            'labelFormat': self.carrier_id.label_format,
         }
         payload['parcel'] = {
             'weight': weight,

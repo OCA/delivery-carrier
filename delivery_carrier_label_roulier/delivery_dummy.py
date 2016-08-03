@@ -7,7 +7,8 @@
 #
 ##############################################################################
 
-from openerp import models, api
+from openerp import models, api, fields
+from roulier.carriers.laposte.laposte_encoder import LAPOSTE_LABEL_FORMAT
 
 
 class DeliveryCarrier(models.Model):
@@ -19,3 +20,14 @@ class DeliveryCarrier(models.Model):
         res = super(DeliveryCarrier, self)._get_carrier_type_selection()
         res.append(('dummy', 'DUMMY'),)
         return res
+
+    @api.model
+    def _get_label_format_selection(self):
+        """Output label formats available"""
+        return [(x, x) for x in LAPOSTE_LABEL_FORMAT]
+
+    label_format = fields.Selection(
+        selection='_get_label_format_selection',
+        default='PDF_10x15_300dpi',
+        string='Type',
+        help="Label output format",)
