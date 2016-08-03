@@ -276,7 +276,7 @@ class StockPicking(models.Model):
     def get_extracted_fields(self):
         return [
             'name', 'zip', 'city', 'phone', 'mobile',
-            'email', 'phone', 'parent_id', 'first_name'
+            'email', 'phone', 'parent_id', 'firstname'
         ]
 
     def get_mapping_dict(self, extract_fields):
@@ -307,6 +307,8 @@ class StockPicking(models.Model):
                     # it's a None: nothing to do
                 else:  # it's a boolean: keep the value
                     address[elm] = partner[elm]
+            else:
+                address[elm] = ""
 
         # get_split_adress from partner_helper module
         res = partner._get_split_address(partner, 3, 38)
