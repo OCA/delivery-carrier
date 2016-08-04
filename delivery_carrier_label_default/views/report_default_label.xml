@@ -1,0 +1,16 @@
+<odoo>
+<template id="report_default_label">
+  <t t-call="report.html_container">
+    <t t-foreach="docs" t-as="o">
+      <div class="page">
+        <div class="address">
+          <div class="recipient">
+            <address t-field="o.partner_id"
+              t-field-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}' />
+          </div>
+        </div>
+      </div>
+     </t>
+  </t>
+</template>
+</odoo>
