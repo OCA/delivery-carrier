@@ -213,12 +213,6 @@ msgid "EPS"
 msgstr "EPS"
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:82
-#, python-format
-msgid "Error 401"
-msgstr "Fehler 401"
-
-#. module: delivery_carrier_label_postlogistics
 #: model:delivery.carrier.template.option,name:delivery_carrier_label_postlogistics.postlogistics_layout_option_a5
 msgid "Format A5"
 msgstr "Format A5"
