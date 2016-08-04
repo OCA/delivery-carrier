@@ -9,15 +9,6 @@
  'depends': [
      'base_delivery_carrier_label',
  ],
- 'description': """
-This print a basic label using webkit library
-
-Contributors
-------------
-
-* Yannick Vaucher <yannick.vaucher@camptocamp.com>
-
- """,
  'website': 'http://www.camptocamp.com/',
  'data': [
      'views/report_default_label.xml',
