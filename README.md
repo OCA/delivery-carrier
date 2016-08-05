@@ -18,6 +18,7 @@ Available addons
 addon | version | summary
 --- | --- | ---
 [base_delivery_carrier_label](base_delivery_carrier_label/) | 9.0.1.0.0 | Base module for carrier labels
+[delivery_carrier_label_postlogistics](delivery_carrier_label_postlogistics/) | 9.0.1.1.0 | PostLogistics Labels WebService
 
 Unported addons
 ---------------
@@ -32,7 +33,6 @@ addon | version | summary
 [delivery_carrier_label_default_webkit](delivery_carrier_label_default_webkit/) | 1.0 (unported) | Module for carrier labels
 [delivery_carrier_label_dispatch](delivery_carrier_label_dispatch/) | 1.0 (unported) | Carrier labels - Picking dispatch (link)
 [delivery_carrier_label_gls](delivery_carrier_label_gls/) | 0.1 (unported) | GLS carrier label printing
-[delivery_carrier_label_postlogistics](delivery_carrier_label_postlogistics/) | 8.0.1.1.0 (unported) | PostLogistics Labels WebService
 [delivery_carrier_label_postlogistics_shop_logo](delivery_carrier_label_postlogistics_shop_logo/) | 1.0 (unported) | PostLogistics labels - logo per Shop
 [delivery_optional_invoice_line](delivery_optional_invoice_line/) | 0.1 (unported) | Delivery Optional Invoice Line
 
