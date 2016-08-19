@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Author: Yannick Vaucher
-#    Copyright 2013 Camptocamp SA
+#    Copyright 2013-2016 Camptocamp SA
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -36,7 +36,13 @@ class PostlogisticsConfigSettings(orm.TransientModel):
         'company_id': fields.many2one('res.company', 'Company', required=True),
         'wsdl_url': fields.related(
             'company_id', 'postlogistics_wsdl_url',
-            string='WSDL URL', type='char'),
+            string='WSDL URL', type='char',
+            readonly=True),
+        'test_mode': fields.related(
+            'company_id', 'postlogistics_test_mode',
+            string="Test mode", type='boolean',
+            help="Will generate Specimen labels using test end point of "
+                 "webservice."),
         'username': fields.related(
             'company_id', 'postlogistics_username',
             string='Username', type='char'),
@@ -92,6 +98,29 @@ class PostlogisticsConfigSettings(orm.TransientModel):
             string='Default resolution', type='many2one',
             relation='delivery.carrier.template.option',
             domain=[('postlogistics_type', '=', 'resolution')]),
+        'tracking_format': fields.related(
+            'company_id', 'postlogistics_tracking_format',
+            selection=[
+                ('postlogistics', "Use default postlogistics tracking numbers"
+                 ),
+                ('picking_num', 'Use picking number with pack counter')],
+            string="Tracking number format", type='selection',
+            help="Allows you to define how the ItemNumber (the last 8 digits) "
+                 "of the tracking number will be generated:\n"
+                 "- Default postlogistics numbers: The webservice generates it"
+                 " for you.\n"
+                 "- Picking number with pack counter: Generate it using the "
+                 "digits of picking name and add the pack number. 2 digits for"
+                 "pack number and 6 digits for picking number. (eg. 07000042 "
+                 "for picking 42 and 7th pack"),
+        'proclima_logo': fields.related(
+            'company_id', 'postlogistics_proclima_logo',
+            string='Print ProClima logo', type='boolean',
+            help="The “pro clima” logo indicates an item for which the "
+                 "surcharge for carbon-neutral shipping has been paid and a "
+                 "contract to that effect has been signed. For Letters with "
+                 "barcode (BMB) domestic, the ProClima logo is printed "
+                 "automatically (at no additional charge)"),
     }
 
     def _default_company(self, cr, uid, context=None):
@@ -130,12 +159,16 @@ class PostlogisticsConfigSettings(orm.TransientModel):
         values = {
             'username': company.postlogistics_username,
             'password': company.postlogistics_password,
+            'test_mode': company.postlogistics_test_mode,
+            'wsdl_url': company.postlogistics_wsdl_url,
             'license_ids': license_ids,
             'logo': company.postlogistics_logo,
             'office': company.postlogistics_office,
             'default_label_layout': label_layout,
             'default_output_format': output_format,
             'default_resolution': resolution,
+            'tracking_format': company.postlogistics_tracking_format,
+            'proclima_logo': company.postlogistics_proclima_logo,
         }
         return {'value': values}
 

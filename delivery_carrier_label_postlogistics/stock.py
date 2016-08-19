@@ -20,13 +20,59 @@
 ##############################################################################
 from operator import attrgetter
 
-from openerp.osv import orm
+from openerp.osv import orm, fields
 
 from .postlogistics.web_service import PostlogisticsWebService
 
 
 class stock_picking(orm.Model):
     _inherit = 'stock.picking'
+
+    def _tracking_url(self, cr, uid, ids, name, args, context=None):
+        """ Create an url from tracking refs to link with postlogistic website
+        @return: Dictionary of values
+        """
+        base_url = ("http://www.post.ch/swisspost-tracking?p_language=%(lang)s"
+                    "&formattedParcelCodes=%(refs)s")
+        res = {}
+        for pick in self.browse(cr, uid, ids, context=context):
+            refs = pick.carrier_tracking_ref
+            if not refs:
+                res[pick.id] = False
+                continue
+            # references are separated by ';' + space
+            # we need to remove the space to use them in url
+            refs = "".join(refs.split())
+            lang = pick.partner_id.lang
+            if lang:
+                lang = lang[:2]
+            if not lang or lang not in ('en', 'de', 'fr', 'it'):
+                lang = 'en'
+            res[pick.id] = base_url % {'lang': lang, 'refs': refs}
+        return res
+
+    _columns = {
+        'cash_on_delivery': fields.float(
+            "Cash on Delivery", help="Amount for Cash on delivery service (N)"
+        ),
+        'delivery_fixed_date': fields.date(
+            "Fixed delivery date", help="Specific delivery date (ZAW3217)"
+        ),
+        'delivery_place': fields.char(
+            "Delivery Place", help="For Deposit item service (ZAW3219)"
+        ),
+        'delivery_phone': fields.char(
+            "Phone", help="For notify delivery by telephone (ZAW3213)"
+        ),
+        'delivery_mobile': fields.char(
+            "Mobile", help="For notify delivery by telephone (ZAW3213)"
+        ),
+        # remove size constraint of 32 characters
+        'carrier_tracking_ref': fields.char('Carrier Tracking Ref', size=None),
+        'carrier_tracking_url': fields.function(
+            _tracking_url, type='char', string='Tracking URL',
+        ),
+    }
 
     def _generate_postlogistics_label(self, cr, uid, picking,
                                       webservice_class=None,
@@ -75,6 +121,7 @@ class stock_picking(orm.Model):
                      'name': tracking_number + '.' + label['file_type'],
                      }]
 
+        tracking_refs = []
         for track in trackings:
             label = None
             for search_label in res['value']:
@@ -82,12 +129,18 @@ class stock_picking(orm.Model):
                     label = search_label
                     tracking_number = label['tracking_number']
                     track.write({'serial': tracking_number})
+                    tracking_refs.append(tracking_number)
                     break
             labels.append({'tracking_id': track.id if track else False,
                            'file': label['binary'].decode('base64'),
                            'file_type': label['file_type'],
                            'name': tracking_number + '.' + label['file_type'],
                            })
+
+        tracking_refs = "; ".join(tracking_refs)
+        self.write(cr, uid, picking.id,
+                   {'carrier_tracking_ref': tracking_refs},
+                   context=context)
 
         return labels
 
@@ -106,6 +159,66 @@ class stock_picking(orm.Model):
         return super(stock_picking, self).\
             generate_shipping_labels(cr, uid, ids, tracking_ids=tracking_ids,
                                      context=context)
+
+
+class stock_picking_out(orm.Model):
+    _inherit = 'stock.picking.out'
+
+    def _tracking_url(self, *args, **kwargs):
+        return self.pool['stock.picking']._tracking_url(*args, **kwargs)
+
+    _columns = {
+        'cash_on_delivery': fields.float(
+            "Cash on Delivery", help="Amount for Cash on delivery service (N)"
+        ),
+        'delivery_fixed_date': fields.date(
+            "Fixed delivery date", help="Specific delivery date (ZAW3217)"
+        ),
+        'delivery_place': fields.char(
+            "Delivery Place", help="For Deposit item service (ZAW3219)"
+        ),
+        'delivery_phone': fields.char(
+            "Phone", help="For notify delivery by telephone (ZAW3213)"
+        ),
+        'delivery_mobile': fields.char(
+            "Mobile", help="For notify delivery by telephone (ZAW3213)"
+        ),
+        # remove size constraint of 32 characters
+        'carrier_tracking_ref': fields.char('Carrier Tracking Ref', size=None),
+        'carrier_tracking_url': fields.function(
+            _tracking_url, type='char', string='Tracking URL',
+        ),
+    }
+
+
+class stock_picking_in(orm.Model):
+    _inherit = 'stock.picking.in'
+
+    def _tracking_url(self, *args, **kwargs):
+        return self.pool['stock.picking']._tracking_url(*args, **kwargs)
+
+    _columns = {
+        'cash_on_delivery': fields.float(
+            "Cash on Delivery", help="Amount for Cash on delivery service (N)"
+        ),
+        'delivery_fixed_date': fields.date(
+            "Fixed delivery date", help="Specific delivery date (ZAW3217)"
+        ),
+        'delivery_place': fields.char(
+            "Delivery Place", help="For Deposit item service (ZAW3219)"
+        ),
+        'delivery_phone': fields.char(
+            "Phone", help="For notify delivery by telephone (ZAW3213)"
+        ),
+        'delivery_mobile': fields.char(
+            "Mobile", help="For notify delivery by telephone (ZAW3213)"
+        ),
+        # remove size constraint of 32 characters
+        'carrier_tracking_ref': fields.char('Carrier Tracking Ref', size=None),
+        'carrier_tracking_url': fields.function(
+            _tracking_url, type='char', string='Tracking URL',
+        ),
+    }
 
 
 class ShippingLabel(orm.Model):

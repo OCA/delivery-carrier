@@ -35,6 +35,14 @@
                 <label for="password"/>
                 <field name="password" class="oe_inline"/>
               </div>
+              <div>
+                <label for="test_mode"/>
+                <field name="test_mode" class="oe_inline"/>
+              </div>
+              <div>
+                <label for="wsdl_url"/>
+                <field name="wsdl_url" class="oe_inline" invisible="True"/>
+              </div>
             </div>
           </group>
           <separator string="Licenses"/>
@@ -78,6 +86,24 @@
               <div>
                 <label for="default_resolution"/>
                 <field name="default_resolution" class="oe_inline"/>
+              </div>
+            </div>
+          </group>
+          <separator string="Tracking numbers"/>
+          <group>
+            <div>
+              <div>
+                <label for="tracking_format"/>
+                <field name="tracking_format" class="oe_inline"/>
+              </div>
+            </div>
+          </group>
+          <separator string="Other"/>
+          <group>
+            <div>
+              <div>
+                <label for="proclima_logo"/>
+                <field name="proclima_logo" class="oe_inline"/>
               </div>
             </div>
           </group>
