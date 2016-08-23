@@ -30,7 +30,7 @@ class StockBatchPicking(models.Model):
         for rec in self:
             options_datas = {
                 'carrier_id': rec.carrier_id.id,
-                'option_ids': [(6, 0, rec.option_ids)],
+                'option_ids': [(6, 0, rec.option_ids.ids)],
             }
             rec.picking_ids.write(options_datas)
 
