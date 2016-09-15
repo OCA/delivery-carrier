@@ -58,4 +58,4 @@ class ResCompany(models.Model):
             pathinfo=True)
         wsdl_url = 'file://' + wsdl_path
         for company in self:
-            self.postlogistics_wsdl_url = wsdl_url
+            company.postlogistics_wsdl_url = wsdl_url
