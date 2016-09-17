@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: carrier-delivery (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-09 00:47+0000\n"
-"PO-Revision-Date: 2016-04-08 13:38+0000\n"
+"POT-Creation-Date: 2016-08-15 18:37+0000\n"
+"PO-Revision-Date: 2016-09-16 21:45+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-carrier-delivery-8-0/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -92,6 +92,12 @@ msgid "Delivery orders to invoice"
 msgstr "Albaranes a facturar"
 
 #. module: base_delivery_carrier_files
+#: field:delivery.carrier.file,display_name:0
+#: field:delivery.carrier.file.generate,display_name:0
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: base_delivery_carrier_files
 #: field:delivery.carrier.file,export_path:0
 msgid "Export Path"
 msgstr "Ruta de exportación"
@@ -153,6 +159,12 @@ msgid ""
 "If this option is used, new files will be generated for selected picking even if they already had one.\n"
 "By default, delivery orders with existing file will be skipped."
 msgstr ""
+
+#. module: base_delivery_carrier_files
+#: field:delivery.carrier.file,__last_update:0
+#: field:delivery.carrier.file.generate,__last_update:0
+msgid "Last Modified on"
+msgstr "Última modificación el"
 
 #. module: base_delivery_carrier_files
 #: field:delivery.carrier.file,write_uid:0
