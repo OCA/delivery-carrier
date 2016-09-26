@@ -42,9 +42,9 @@
     <field name="model">delivery.carrier</field>
     <field name="inherit_id" ref="base_delivery_carrier_label.view_delivery_carrier_form" />
     <field name="arch" type="xml">
-      <field name="type" position="after">
-        <field name="postlogistics_service_group_id" attrs="{'invisible': [('type', '!=', 'postlogistics')], 'required': [('type', '=', 'postlogistics')]}"/>
-        <field name="postlogistics_license_id" attrs="{'invisible': [('type', '!=', 'postlogistics')]}"/>
+      <field name="carrier_type" position="after">
+        <field name="postlogistics_service_group_id" attrs="{'invisible': [('carrier_type', '!=', 'postlogistics')], 'required': [('carrier_type', '=', 'postlogistics')]}"/>
+        <field name="postlogistics_license_id" attrs="{'invisible': [('carrier_type', '!=', 'postlogistics')]}"/>
         <field name="allowed_option_ids" invisible="1"/>
       </field>
       <field name="available_option_ids" position="attributes">
