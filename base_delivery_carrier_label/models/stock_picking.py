@@ -20,7 +20,7 @@ class StockPicking(models.Model):
         states={'done': [('readonly', True)]},
     )
     carrier_type = fields.Selection(
-        related='carrier_id.type',
+        related='carrier_id.carrier_type',
         string='Carrier Type',
         readonly=True,
     )
@@ -133,7 +133,7 @@ class StockPicking(models.Model):
         # module that depend of delivery base can hide some field
         # depending of the type or the code
         carrier = self.carrier_id
-        self.carrier_type = carrier.type
+        self.carrier_type = carrier.carrier_type
         self.carrier_code = carrier.code
         self.option_ids = carrier.default_options()
         result = {
