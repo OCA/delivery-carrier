@@ -105,7 +105,7 @@ class StockPicking(models.Model):
     def generate_shipping_labels(self, package_ids=None):
         """ Add label generation for Postlogistics """
         self.ensure_one()
-        if self.carrier_id.type == 'postlogistics':
+        if self.carrier_id.carrier_type == 'postlogistics':
             return self._generate_postlogistics_label(package_ids=package_ids)
         _super = super(StockPicking, self)
         return _super.generate_shipping_labels(package_ids=package_ids)
