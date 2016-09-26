@@ -7,3 +7,6 @@ access_shipping_label_user,shipping.label user,model_shipping_label,stock.group_
 access_shipping_label_manager,shipping.label manager,model_shipping_label,stock.group_stock_manager,1,1,1,1
 access_carrier_account_salesman,carrier.account.salesman,model_carrier_account,base.group_sale_salesman,1,0,0,0
 access_carrier_account_sale_manager,carrier.account.sale.manager,model_carrier_account,base.group_sale_manager,1,1,1,1
+access_delivery_carrier_option_stock_user,delivery.carrier.option stock_user,model_delivery_carrier_option,stock.group_stock_user,1,1,1,1
+access_delivery_carrier_template_option_stock_user,delivery.carrier.template.option stock_user,model_delivery_carrier_template_option,stock.group_stock_user,1,0,0,0
+access_delivery_carrier_template_option_stock_manager,delivery.carrier.template.option stock_manager,model_delivery_carrier_template_option,stock.group_stock_manager,1,1,1,1
