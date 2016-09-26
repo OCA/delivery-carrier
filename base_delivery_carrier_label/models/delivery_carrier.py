@@ -13,10 +13,11 @@ class DeliveryCarrier(models.Model):
         """ To inherit to add carrier type """
         return []
 
-    type = fields.Selection(
+    carrier_type = fields.Selection(
         selection='_get_carrier_type_selection',
         string='Type',
         help="Carrier type (combines several delivery methods)",
+        oldname='type',
     )
     code = fields.Char(
         help="Delivery Method Code (according to carrier)",
