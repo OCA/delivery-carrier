@@ -47,14 +47,14 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
         label_obj = self.pool['shipping.label']
         domain = [('file_type', '=', 'pdf'),
                   ('res_id', '=', picking.id),
-                  ('tracking_id', '=', False)]
+                  ('package_id', '=', False)]
         return label_obj.search(domain, order='create_date DESC', limit=1)
 
     @api.model
     def _find_pack_label(self, pack):
         label_obj = self.env['shipping.label']
         domain = [('file_type', '=', 'pdf'),
-                  ('tracking_id', '=', pack.id)]
+                  ('package_id', '=', pack.id)]
         return label_obj.search(domain, order='create_date DESC', limit=1)
 
     @api.multi
@@ -65,11 +65,11 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
                 picking = operations[0].picking_id
                 # generate the label of the pack
                 if pack:
-                    tracking_ids = [pack.id]
+                    package_ids = [pack.id]
                 else:
-                    tracking_ids = None
+                    package_ids = None
                 try:
-                    picking.generate_labels(tracking_ids=tracking_ids)
+                    picking.generate_labels(package_ids=package_ids)
                 except exceptions.UserError as e:
                     picking_name = _('Picking: %s') % picking.name
                     pack_num = _('Pack: %s') % pack.name if pack else ''
