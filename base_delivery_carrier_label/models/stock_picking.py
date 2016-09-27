@@ -62,9 +62,9 @@ class StockPicking(models.Model):
            file: file as string
            file_type: string of file type like 'PDF'
            (optional)
-           tracking_id: tracking_id if picking lines have tracking_id and
-                        if label generator creates shipping label per
-                        pack
+           package_id: package_id if picking lines have package_id and
+                       if label generator creates shipping label per
+                       pack
 
         """
         default_label = self.generate_default_label(package_ids=package_ids)
@@ -73,7 +73,7 @@ class StockPicking(models.Model):
         labels = []
         for package_id in package_ids:
             pack_label = default_label.copy()
-            pack_label['tracking_id'] = package_id
+            pack_label['package_id'] = package_id
             labels.append(pack_label)
         return labels
 
