@@ -16,7 +16,7 @@
      'security/ir.model.access.csv',
  ],
  'tests': [],
- 'installable': True,
+ 'installable': False,
  'auto_install': False,
  'license': 'AGPL-3',
  }
