@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: carrier-delivery (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-15 18:37+0000\n"
-"PO-Revision-Date: 2016-09-09 11:33+0000\n"
+"POT-Creation-Date: 2016-09-17 06:51+0000\n"
+"PO-Revision-Date: 2016-10-04 09:42+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Turkish (http://www.transifex.com/oca/OCA-carrier-delivery-8-0/language/tr/)\n"
 "MIME-Version: 1.0\n"
@@ -151,7 +151,7 @@ msgstr ""
 #: field:delivery.carrier.template.option,description:0
 #: field:shipping.label,description:0
 msgid "Description"
-msgstr ""
+msgstr "Açıklama"
 
 #. module: base_delivery_carrier_label
 #: field:carrier.account,display_name:0
@@ -174,7 +174,7 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: field:shipping.label,datas_fname:0
 msgid "File Name"
-msgstr ""
+msgstr "Dosya adı"
 
 #. module: base_delivery_carrier_label
 #: field:shipping.label,file_size:0
@@ -305,7 +305,7 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: field:shipping.label,res_id:0
 msgid "Resource ID"
-msgstr ""
+msgstr "Kaynak ID"
 
 #. module: base_delivery_carrier_label
 #: field:shipping.label,res_model:0
@@ -315,7 +315,7 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: field:shipping.label,res_name:0
 msgid "Resource Name"
-msgstr ""
+msgstr "Kaynak Adı"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_shipping_label

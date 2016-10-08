@@ -10,12 +10,12 @@ msgstr ""
 "POT-Creation-Date: 2016-09-17 06:51+0000\n"
 "PO-Revision-Date: 2015-06-16 16:32+0000\n"
 "Last-Translator: <>\n"
-"Language-Team: Turkish (http://www.transifex.com/oca/OCA-carrier-delivery-8-0/language/tr/)\n"
+"Language-Team: Croatian (Croatia) (http://www.transifex.com/oca/OCA-carrier-delivery-8-0/language/hr_HR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: tr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: hr_HR\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
 #. module: delivery_carrier_deposit
 #: sql_constraint:deposit.slip:0
@@ -45,7 +45,7 @@ msgstr ""
 #. module: delivery_carrier_deposit
 #: view:delivery.deposit.wizard:delivery_carrier_deposit.view_wiz_create_deposit
 msgid "Cancel"
-msgstr "Vazgeç"
+msgstr ""
 
 #. module: delivery_carrier_deposit
 #: model:ir.model,name:delivery_carrier_deposit.model_delivery_carrier
@@ -95,13 +95,13 @@ msgstr ""
 #. module: delivery_carrier_deposit
 #: field:delivery.deposit.wizard,create_uid:0 field:deposit.slip,create_uid:0
 msgid "Created by"
-msgstr "Oluşturan"
+msgstr "Kreirao"
 
 #. module: delivery_carrier_deposit
 #: field:delivery.deposit.wizard,create_date:0
 #: field:deposit.slip,create_date:0
 msgid "Created on"
-msgstr "Oluşturuldu"
+msgstr "Kreirano"
 
 #. module: delivery_carrier_deposit
 #: view:website:delivery_carrier_deposit.report_generic_deposit_slip
@@ -160,7 +160,7 @@ msgstr ""
 #: field:delivery.deposit.wizard,display_name:0
 #: field:deposit.slip,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Naziv"
 
 #. module: delivery_carrier_deposit
 #: selection:deposit.slip,state:0
@@ -185,7 +185,7 @@ msgstr ""
 #. module: delivery_carrier_deposit
 #: view:deposit.slip:delivery_carrier_deposit.view_deposit_slip_search
 msgid "Group By"
-msgstr "Grupla"
+msgstr ""
 
 #. module: delivery_carrier_deposit
 #: help:deposit.slip,message_summary:0
@@ -218,17 +218,17 @@ msgstr ""
 #: field:delivery.deposit.wizard,__last_update:0
 #: field:deposit.slip,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Zadnje modificirano"
 
 #. module: delivery_carrier_deposit
 #: field:delivery.deposit.wizard,write_uid:0 field:deposit.slip,write_uid:0
 msgid "Last Updated by"
-msgstr "Son güncelleyen"
+msgstr "Zadnji ažurirao"
 
 #. module: delivery_carrier_deposit
 #: field:delivery.deposit.wizard,write_date:0 field:deposit.slip,write_date:0
 msgid "Last Updated on"
-msgstr "Son güncelleme"
+msgstr "Zadnje ažurirano"
 
 #. module: delivery_carrier_deposit
 #: field:deposit.slip,message_ids:0

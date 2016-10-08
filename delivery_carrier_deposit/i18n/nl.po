@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: carrier-delivery (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-15 18:37+0000\n"
+"POT-Creation-Date: 2016-09-17 06:51+0000\n"
 "PO-Revision-Date: 2015-06-16 16:32+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Dutch (http://www.transifex.com/oca/OCA-carrier-delivery-8-0/language/nl/)\n"
@@ -160,7 +160,7 @@ msgstr ""
 #: field:delivery.deposit.wizard,display_name:0
 #: field:deposit.slip,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Te tonen naam"
 
 #. module: delivery_carrier_deposit
 #: selection:deposit.slip,state:0
@@ -185,7 +185,7 @@ msgstr ""
 #. module: delivery_carrier_deposit
 #: view:deposit.slip:delivery_carrier_deposit.view_deposit_slip_search
 msgid "Group By"
-msgstr ""
+msgstr "Groepeer op"
 
 #. module: delivery_carrier_deposit
 #: help:deposit.slip,message_summary:0
@@ -218,7 +218,7 @@ msgstr ""
 #: field:delivery.deposit.wizard,__last_update:0
 #: field:deposit.slip,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Laatst bijgewerkt op"
 
 #. module: delivery_carrier_deposit
 #: field:delivery.deposit.wizard,write_uid:0 field:deposit.slip,write_uid:0
@@ -243,7 +243,7 @@ msgstr ""
 #. module: delivery_carrier_deposit
 #: field:deposit.slip,name:0
 msgid "Name"
-msgstr ""
+msgstr "Naam"
 
 #. module: delivery_carrier_deposit
 #: view:website:delivery_carrier_deposit.report_generic_deposit_slip
@@ -326,7 +326,7 @@ msgstr ""
 #. module: delivery_carrier_deposit
 #: field:deposit.slip,carrier_type:0
 msgid "Type"
-msgstr ""
+msgstr "Type"
 
 #. module: delivery_carrier_deposit
 #: field:deposit.slip,message_unread:0

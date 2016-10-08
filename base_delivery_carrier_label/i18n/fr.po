@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: carrier-delivery (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-15 18:37+0000\n"
-"PO-Revision-Date: 2016-09-16 21:46+0000\n"
+"POT-Creation-Date: 2016-09-17 06:51+0000\n"
+"PO-Revision-Date: 2016-10-04 09:43+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: French (http://www.transifex.com/oca/OCA-carrier-delivery-8-0/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -48,7 +48,7 @@ msgstr "Attachement"
 #. module: base_delivery_carrier_label
 #: field:shipping.label,name:0
 msgid "Attachment Name"
-msgstr ""
+msgstr "Nom de la pièce jointe"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_carrier_account
@@ -124,7 +124,7 @@ msgstr "Créé le"
 #. module: base_delivery_carrier_label
 #: field:shipping.label,db_datas:0
 msgid "Database Data"
-msgstr ""
+msgstr "Données de la base de données"
 
 #. module: base_delivery_carrier_label
 #: help:carrier.account,file_format:0
@@ -166,7 +166,7 @@ msgstr "Nom à afficher"
 #. module: base_delivery_carrier_label
 #: field:shipping.label,datas:0
 msgid "File Content"
-msgstr ""
+msgstr "Contenu du fichier"
 
 #. module: base_delivery_carrier_label
 #: field:carrier.account,file_format:0
@@ -176,12 +176,12 @@ msgstr "Format de fichier"
 #. module: base_delivery_carrier_label
 #: field:shipping.label,datas_fname:0
 msgid "File Name"
-msgstr ""
+msgstr "Nom de Fichier"
 
 #. module: base_delivery_carrier_label
 #: field:shipping.label,file_size:0
 msgid "File Size"
-msgstr ""
+msgstr "Taille du fichier"
 
 #. module: base_delivery_carrier_label
 #: field:shipping.label,file_type_icon:0
@@ -307,17 +307,17 @@ msgstr "Flag de lecture seule"
 #. module: base_delivery_carrier_label
 #: field:shipping.label,res_id:0
 msgid "Resource ID"
-msgstr ""
+msgstr "ID de l'enregistrement"
 
 #. module: base_delivery_carrier_label
 #: field:shipping.label,res_model:0
 msgid "Resource Model"
-msgstr ""
+msgstr "Modèle de la ressource"
 
 #. module: base_delivery_carrier_label
 #: field:shipping.label,res_name:0
 msgid "Resource Name"
-msgstr ""
+msgstr "Nom de l'enregistrement"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_shipping_label
@@ -335,17 +335,17 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: field:shipping.label,store_fname:0
 msgid "Stored Filename"
-msgstr ""
+msgstr "Nom de fichier stocké"
 
 #. module: base_delivery_carrier_label
 #: help:shipping.label,res_model:0
 msgid "The database object this attachment will be attached to"
-msgstr ""
+msgstr "L'objet de la base de données auquel cette pièce jointe sera attachée"
 
 #. module: base_delivery_carrier_label
 #: help:shipping.label,res_id:0
 msgid "The record id this is attached to"
-msgstr ""
+msgstr "L'identifiant de l'enregistrement qui y est attaché"
 
 #. module: base_delivery_carrier_label
 #: help:stock.quant.package,weight:0
@@ -363,7 +363,7 @@ msgstr "Type"
 #. module: base_delivery_carrier_label
 #: field:shipping.label,url:0
 msgid "Url"
-msgstr ""
+msgstr "Url"
 
 #. module: base_delivery_carrier_label
 #: field:stock.pack.operation,weight:0 field:stock.quant.package,weight:0

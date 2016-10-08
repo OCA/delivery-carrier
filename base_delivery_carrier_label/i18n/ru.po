@@ -3,9 +3,6 @@
 # * base_delivery_carrier_label
 # 
 # Translators:
-# danimaribeiro <danimaribeiro@gmail.com>, 2015
-# danimaribeiro <danimaribeiro@gmail.com>, 2015
-# Hotellook, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: carrier-delivery (8.0)\n"
@@ -13,38 +10,38 @@ msgstr ""
 "POT-Creation-Date: 2016-09-17 06:51+0000\n"
 "PO-Revision-Date: 2016-10-04 09:42+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/OCA-carrier-delivery-8-0/language/pt_BR/)\n"
+"Language-Team: Russian (http://www.transifex.com/oca/OCA-carrier-delivery-8-0/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: pt_BR\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: ru\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 
 #. module: base_delivery_carrier_label
 #: field:carrier.account,account:0
 msgid "Account Number"
-msgstr "Número da conta"
+msgstr ""
 
 #. module: base_delivery_carrier_label
 #: field:carrier.account,password:0
 msgid "Account Password"
-msgstr "Senha da conta"
+msgstr ""
 
 #. module: base_delivery_carrier_label
 #: help:delivery.carrier.option,description:0
 #: help:delivery.carrier.template.option,description:0
 msgid "Allow to define a more complete description than in the name field."
-msgstr "Permite definir uma descrição mais completa que o campo nome."
+msgstr ""
 
 #. module: base_delivery_carrier_label
 #: field:delivery.carrier.option,by_default:0
 msgid "Applied by Default"
-msgstr "Aplicado por padrão"
+msgstr ""
 
 #. module: base_delivery_carrier_label
 #: field:shipping.label,attachment_id:0
 msgid "Attachement"
-msgstr "Anexo"
+msgstr ""
 
 #. module: base_delivery_carrier_label
 #: field:shipping.label,name:0
@@ -66,13 +63,13 @@ msgstr ""
 msgid ""
 "By check, user can choose to apply this option to each Delivery Order\n"
 " using this delivery method"
-msgstr "Checando o usuário pode escolher para aplicar esta opção para cada ordem de entrega,\nusando este método de entrega"
+msgstr ""
 
 #. module: base_delivery_carrier_label
 #: field:delivery.carrier.option,carrier_id:0
 #: model:ir.model,name:base_delivery_carrier_label.model_delivery_carrier
 msgid "Carrier"
-msgstr "Transportador"
+msgstr ""
 
 #. module: base_delivery_carrier_label
 #: field:stock.picking,carrier_type:0
@@ -82,29 +79,29 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: help:delivery.carrier,type:0 help:stock.picking,carrier_type:0
 msgid "Carrier type (combines several delivery methods)"
-msgstr "Tipo de transportadora (combina vários metodos de entrega)"
+msgstr ""
 
 #. module: base_delivery_carrier_label
 #: model:ir.ui.menu,name:base_delivery_carrier_label.menu_carriers_config
 msgid "Carriers"
-msgstr "Transportadoras"
+msgstr ""
 
 #. module: base_delivery_carrier_label
 #: field:delivery.carrier,code:0 field:delivery.carrier.option,code:0
 #: field:delivery.carrier.template.option,code:0
 #: field:stock.picking,carrier_code:0
 msgid "Code"
-msgstr "Código"
+msgstr ""
 
 #. module: base_delivery_carrier_label
 #: field:shipping.label,company_id:0
 msgid "Company"
-msgstr "Empresa"
+msgstr ""
 
 #. module: base_delivery_carrier_label
 #: view:stock.picking:base_delivery_carrier_label.view_picking_withcarrier_out_form
 msgid "Create Shipping Label"
-msgstr "Criar etiqueta de envio"
+msgstr ""
 
 #. module: base_delivery_carrier_label
 #: field:carrier.account,create_uid:0
@@ -112,7 +109,7 @@ msgstr "Criar etiqueta de envio"
 #: field:delivery.carrier.template.option,create_uid:0
 #: field:shipping.label,create_uid:0
 msgid "Created by"
-msgstr "Criado por"
+msgstr ""
 
 #. module: base_delivery_carrier_label
 #: field:carrier.account,create_date:0
@@ -120,7 +117,7 @@ msgstr "Criado por"
 #: field:delivery.carrier.template.option,create_date:0
 #: field:shipping.label,create_date:0
 msgid "Created on"
-msgstr "Criado em"
+msgstr ""
 
 #. module: base_delivery_carrier_label
 #: field:shipping.label,db_datas:0
@@ -130,7 +127,7 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: help:carrier.account,file_format:0
 msgid "Default format of the carrier's label you want to print"
-msgstr "Formato padrão da etiqueta de transporte que você quer imprimir"
+msgstr ""
 
 #. module: base_delivery_carrier_label
 #: help:delivery.carrier,code:0 help:stock.picking,carrier_code:0
@@ -140,12 +137,12 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_delivery_carrier_option
 msgid "Delivery carrier option"
-msgstr "Opção de entrega"
+msgstr ""
 
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_delivery_carrier_template_option
 msgid "Delivery carrier template option"
-msgstr "Template de opção de entrega"
+msgstr ""
 
 #. module: base_delivery_carrier_label
 #: view:delivery.carrier:base_delivery_carrier_label.view_delivery_carrier_form
@@ -154,7 +151,7 @@ msgstr "Template de opção de entrega"
 #: field:delivery.carrier.template.option,description:0
 #: field:shipping.label,description:0
 msgid "Description"
-msgstr "Descrição"
+msgstr "Описание"
 
 #. module: base_delivery_carrier_label
 #: field:carrier.account,display_name:0
@@ -162,7 +159,7 @@ msgstr "Descrição"
 #: field:delivery.carrier.template.option,display_name:0
 #: field:shipping.label,display_name:0
 msgid "Display Name"
-msgstr "Nome para Mostrar"
+msgstr ""
 
 #. module: base_delivery_carrier_label
 #: field:shipping.label,datas:0
@@ -198,7 +195,7 @@ msgstr ""
 #: field:carrier.account,id:0 field:delivery.carrier.option,id:0
 #: field:delivery.carrier.template.option,id:0 field:shipping.label,id:0
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: base_delivery_carrier_label
 #: help:delivery.carrier.option,mandatory:0
@@ -218,14 +215,14 @@ msgstr ""
 #: field:delivery.carrier.template.option,__last_update:0
 #: field:shipping.label,__last_update:0
 msgid "Last Modified on"
-msgstr "Última atualização em"
+msgstr ""
 
 #. module: base_delivery_carrier_label
 #: field:carrier.account,write_uid:0 field:delivery.carrier.option,write_uid:0
 #: field:delivery.carrier.template.option,write_uid:0
 #: field:shipping.label,write_uid:0
 msgid "Last Updated by"
-msgstr "Última atualização por"
+msgstr ""
 
 #. module: base_delivery_carrier_label
 #: field:carrier.account,write_date:0
@@ -233,7 +230,7 @@ msgstr "Última atualização por"
 #: field:delivery.carrier.template.option,write_date:0
 #: field:shipping.label,write_date:0
 msgid "Last Updated on"
-msgstr "Última atualização em"
+msgstr ""
 
 #. module: base_delivery_carrier_label
 #: field:delivery.carrier.option,mandatory:0
@@ -298,7 +295,7 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_stock_picking
 msgid "Picking List"
-msgstr "Lista de separaçaõ"
+msgstr ""
 
 #. module: base_delivery_carrier_label
 #: field:delivery.carrier.option,readonly_flag:0
@@ -308,7 +305,7 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: field:shipping.label,res_id:0
 msgid "Resource ID"
-msgstr "Identificação do Recurso"
+msgstr ""
 
 #. module: base_delivery_carrier_label
 #: field:shipping.label,res_model:0
@@ -318,12 +315,12 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: field:shipping.label,res_name:0
 msgid "Resource Name"
-msgstr "Nome do Recurso"
+msgstr ""
 
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_shipping_label
 msgid "Shipping Label"
-msgstr "Etiqueta de envio"
+msgstr ""
 
 #. module: base_delivery_carrier_label
 #: code:addons/base_delivery_carrier_label/stock.py:404
@@ -359,7 +356,7 @@ msgstr ""
 #: field:carrier.account,type:0 field:delivery.carrier,type:0
 #: field:shipping.label,type:0
 msgid "Type"
-msgstr "Tipo"
+msgstr ""
 
 #. module: base_delivery_carrier_label
 #: field:shipping.label,url:0

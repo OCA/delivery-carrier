@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: carrier-delivery (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-15 18:37+0000\n"
-"PO-Revision-Date: 2016-09-16 21:45+0000\n"
+"POT-Creation-Date: 2016-09-17 06:51+0000\n"
+"PO-Revision-Date: 2016-10-04 09:43+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-carrier-delivery-8-0/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -309,7 +309,7 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: field:shipping.label,res_id:0
 msgid "Resource ID"
-msgstr ""
+msgstr "ID del recurso"
 
 #. module: base_delivery_carrier_label
 #: field:shipping.label,res_model:0
@@ -319,7 +319,7 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: field:shipping.label,res_name:0
 msgid "Resource Name"
-msgstr ""
+msgstr "Nombre del recurso"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_shipping_label

@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: carrier-delivery (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-03 12:24+0000\n"
-"PO-Revision-Date: 2016-05-01 08:59+0000\n"
+"POT-Creation-Date: 2016-09-17 06:51+0000\n"
+"PO-Revision-Date: 2016-10-04 09:42+0000\n"
 "Last-Translator: Paolo Valier\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-carrier-delivery-8-0/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -178,7 +178,7 @@ msgstr "Formato del file"
 #. module: base_delivery_carrier_label
 #: field:shipping.label,datas_fname:0
 msgid "File Name"
-msgstr ""
+msgstr "Nome del campo"
 
 #. module: base_delivery_carrier_label
 #: field:shipping.label,file_size:0
@@ -309,7 +309,7 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: field:shipping.label,res_id:0
 msgid "Resource ID"
-msgstr ""
+msgstr "ID Risorsa"
 
 #. module: base_delivery_carrier_label
 #: field:shipping.label,res_model:0
@@ -319,7 +319,7 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: field:shipping.label,res_name:0
 msgid "Resource Name"
-msgstr ""
+msgstr "Nome della Risorsa"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_shipping_label
