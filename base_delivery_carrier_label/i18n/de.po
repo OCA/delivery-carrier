@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-01 02:45+0000\n"
-"PO-Revision-Date: 2016-07-01 02:45+0000\n"
+"POT-Creation-Date: 2016-09-27 15:17+0000\n"
+"PO-Revision-Date: 2016-09-27 15:17+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
 "Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
 "MIME-Version: 1.0\n"
@@ -78,6 +78,7 @@ msgid "Carrier Type"
 msgstr ""
 
 #. module: base_delivery_carrier_label
+#: model:ir.model.fields,help:base_delivery_carrier_label.field_delivery_carrier_carrier_type
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_stock_picking_carrier_type
 msgid "Carrier type (combines several delivery methods)"
 msgstr "Spediteurart (führt verschiedene Liefermethoden zusammen)"
@@ -115,7 +116,7 @@ msgstr "Paketaufkleber erzeugen"
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_template_option_create_uid
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Erstellt von"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account_create_date
@@ -123,7 +124,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_template_option_create_date
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_create_date
 msgid "Created on"
-msgstr ""
+msgstr "Erstellt am:"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_db_datas
@@ -197,7 +198,7 @@ msgstr "Dateityp"
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_template_option_id
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_delivery_carrier_option_mandatory
@@ -235,7 +236,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_template_option_write_uid
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Zuletzt aktualisiert von"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account_write_date
@@ -243,7 +244,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_template_option_write_date
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Zuletzt aktualisiert am"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option_mandatory
@@ -324,7 +325,7 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_res_id
 msgid "Resource ID"
-msgstr ""
+msgstr "Ressourcen-ID"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_res_model
@@ -334,7 +335,7 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_res_name
 msgid "Resource Name"
-msgstr ""
+msgstr "Ressourcenname"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_shipping_label
@@ -383,6 +384,7 @@ msgstr ""
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account_type
+#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_carrier_type
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_type
 msgid "Type"
 msgstr "Art"

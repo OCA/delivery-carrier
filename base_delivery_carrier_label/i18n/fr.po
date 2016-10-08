@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-16 20:38+0000\n"
-"PO-Revision-Date: 2016-09-16 20:38+0000\n"
+"POT-Creation-Date: 2016-09-27 15:17+0000\n"
+"PO-Revision-Date: 2016-09-27 15:17+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
 "Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -47,12 +47,12 @@ msgstr "Attachement"
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_name
 msgid "Attachment Name"
-msgstr ""
+msgstr "Nom de la pièce jointe"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_local_url
 msgid "Attachment URL"
-msgstr ""
+msgstr "Lien de la pièce jointe"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_carrier_account
@@ -78,6 +78,7 @@ msgid "Carrier Type"
 msgstr ""
 
 #. module: base_delivery_carrier_label
+#: model:ir.model.fields,help:base_delivery_carrier_label.field_delivery_carrier_carrier_type
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_stock_picking_carrier_type
 msgid "Carrier type (combines several delivery methods)"
 msgstr "Type de transport"
@@ -90,7 +91,7 @@ msgstr "Transporteurs"
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_checksum
 msgid "Checksum/SHA1"
-msgstr ""
+msgstr "Somme de Contrôle/SHA1"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option_code
@@ -102,7 +103,7 @@ msgstr "Code"
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_company_id
 msgid "Company"
-msgstr ""
+msgstr "Société"
 
 #. module: base_delivery_carrier_label
 #: model:ir.ui.view,arch_db:base_delivery_carrier_label.view_picking_withcarrier_out_form
@@ -128,7 +129,7 @@ msgstr "Créé le"
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_db_datas
 msgid "Database Data"
-msgstr ""
+msgstr "Données de la base de données"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_carrier_account_file_format
@@ -169,7 +170,7 @@ msgstr "Nom à afficher"
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_datas
 msgid "File Content"
-msgstr ""
+msgstr "Contenu du fichier"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account_file_format
@@ -179,12 +180,12 @@ msgstr "Format de fichier"
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_datas_fname
 msgid "File Name"
-msgstr ""
+msgstr "Nom de Fichier"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_file_size
 msgid "File Size"
-msgstr ""
+msgstr "Taille du fichier"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_file_type
@@ -217,12 +218,12 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_index_content
 msgid "Indexed Content"
-msgstr ""
+msgstr "Contenu Indexé"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_public
 msgid "Is public document"
-msgstr ""
+msgstr "Est un document public"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account___last_update
@@ -256,7 +257,7 @@ msgstr "Obligatoire"
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_mimetype
 msgid "Mime Type"
-msgstr ""
+msgstr "Type Mime"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account_name
@@ -322,22 +323,22 @@ msgstr "Flag de lecture seule"
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_res_field
 msgid "Resource Field"
-msgstr ""
+msgstr "Champ ressource"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_res_id
 msgid "Resource ID"
-msgstr ""
+msgstr "ID de l'enregistrement"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_res_model
 msgid "Resource Model"
-msgstr ""
+msgstr "Modèle de la ressource"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_res_name
 msgid "Resource Name"
-msgstr ""
+msgstr "Nom de l'enregistrement"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_shipping_label
@@ -355,17 +356,17 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_store_fname
 msgid "Stored Filename"
-msgstr ""
+msgstr "Nom de fichier stocké"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_shipping_label_res_model
 msgid "The database object this attachment will be attached to"
-msgstr ""
+msgstr "L'objet de la base de données auquel cette pièce jointe sera attachée"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_shipping_label_res_id
 msgid "The record id this is attached to"
-msgstr ""
+msgstr "L'identifiant de l'enregistrement qui y est attaché"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_quant_package_total_weight
@@ -386,6 +387,7 @@ msgstr ""
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account_type
+#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_carrier_type
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_type
 msgid "Type"
 msgstr "Type"
@@ -393,7 +395,7 @@ msgstr "Type"
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_url
 msgid "Url"
-msgstr ""
+msgstr "Url"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_pack_operation_weight
@@ -418,6 +420,8 @@ msgid ""
 "You can either upload a file from your computer or copy/paste an internet "
 "link to your file"
 msgstr ""
+"Vous pouvez, soit télécharger un fichier à partir de votre ordinateur soit "
+"copier / coller un lien Internet vers votre fichier"
 
 #. module: base_delivery_carrier_label
 #: code:addons/base_delivery_carrier_label/models/stock_picking.py:159

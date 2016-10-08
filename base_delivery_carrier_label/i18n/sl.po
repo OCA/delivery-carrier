@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-16 20:38+0000\n"
-"PO-Revision-Date: 2016-09-16 20:38+0000\n"
+"POT-Creation-Date: 2016-09-27 15:17+0000\n"
+"PO-Revision-Date: 2016-09-27 15:17+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
 "Language-Team: Slovenian (https://www.transifex.com/oca/teams/23907/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -47,7 +47,7 @@ msgstr "Priponka"
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_name
 msgid "Attachment Name"
-msgstr ""
+msgstr "Naziv priponke"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_local_url
@@ -80,6 +80,7 @@ msgid "Carrier Type"
 msgstr ""
 
 #. module: base_delivery_carrier_label
+#: model:ir.model.fields,help:base_delivery_carrier_label.field_delivery_carrier_carrier_type
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_stock_picking_carrier_type
 msgid "Carrier type (combines several delivery methods)"
 msgstr "Tip prevoznika (kombinacija več dostavnih metod)"
@@ -104,7 +105,7 @@ msgstr "Koda"
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_company_id
 msgid "Company"
-msgstr ""
+msgstr "Družba"
 
 #. module: base_delivery_carrier_label
 #: model:ir.ui.view,arch_db:base_delivery_carrier_label.view_picking_withcarrier_out_form
@@ -130,7 +131,7 @@ msgstr "Ustvarjeno"
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_db_datas
 msgid "Database Data"
-msgstr ""
+msgstr "Podatki o podatkovni bazi"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_carrier_account_file_format
@@ -171,7 +172,7 @@ msgstr "Prikazni naziv"
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_datas
 msgid "File Content"
-msgstr ""
+msgstr "Vsebina datoteke"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account_file_format
@@ -181,12 +182,12 @@ msgstr "Format datoteke"
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_datas_fname
 msgid "File Name"
-msgstr ""
+msgstr "Naziv datoteke"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_file_size
 msgid "File Size"
-msgstr ""
+msgstr "Velikost datoteke"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_file_type
@@ -328,17 +329,17 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_res_id
 msgid "Resource ID"
-msgstr ""
+msgstr "ID vira"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_res_model
 msgid "Resource Model"
-msgstr ""
+msgstr "Model vira"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_res_name
 msgid "Resource Name"
-msgstr ""
+msgstr "Naziv vira"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_shipping_label
@@ -356,17 +357,17 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_store_fname
 msgid "Stored Filename"
-msgstr ""
+msgstr "Shranjeni naziv datoteke"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_shipping_label_res_model
 msgid "The database object this attachment will be attached to"
-msgstr ""
+msgstr "Objekt podatkovne baze, kamor se bo priponka pripela"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_shipping_label_res_id
 msgid "The record id this is attached to"
-msgstr ""
+msgstr "ID zapisa, kamor je to pripeto"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_quant_package_total_weight
@@ -387,6 +388,7 @@ msgstr ""
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account_type
+#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_carrier_type
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_type
 msgid "Type"
 msgstr "Tip"
@@ -394,7 +396,7 @@ msgstr "Tip"
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_url
 msgid "Url"
-msgstr ""
+msgstr "URL"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_pack_operation_weight

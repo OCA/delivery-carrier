@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-05 02:45+0000\n"
-"PO-Revision-Date: 2016-08-05 02:45+0000\n"
+"POT-Creation-Date: 2016-09-27 15:17+0000\n"
+"PO-Revision-Date: 2016-09-27 15:17+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/teams/23907/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -237,7 +237,7 @@ msgstr "Descrição"
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_license_display_name
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_service_group_display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome para Mostrar"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_config_settings_office
@@ -316,7 +316,7 @@ msgstr "Layout etiqueta"
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_license___last_update
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_service_group___last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última atualização em"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_config_settings_write_uid
