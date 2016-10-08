@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: carrier-delivery (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-09-17 06:51+0000\n"
-"PO-Revision-Date: 2016-10-04 09:42+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/OCA-carrier-delivery-8-0/language/pt_BR/)\n"
+"PO-Revision-Date: 2016-04-08 13:38+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: Dutch (http://www.transifex.com/oca/OCA-carrier-delivery-8-0/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: pt_BR\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: nl\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: base_delivery_carrier_files
 #: view:stock.picking:base_delivery_carrier_files.view_picking_out_form_carrier_file
@@ -32,7 +32,7 @@ msgstr ""
 #. module: base_delivery_carrier_files
 #: model:ir.model,name:base_delivery_carrier_files.model_delivery_carrier
 msgid "Carrier"
-msgstr "Transportador"
+msgstr ""
 
 #. module: base_delivery_carrier_files
 #: field:delivery.carrier,carrier_file_id:0
@@ -67,13 +67,13 @@ msgstr ""
 #: field:delivery.carrier.file,create_uid:0
 #: field:delivery.carrier.file.generate,create_uid:0
 msgid "Created by"
-msgstr "Criado por"
+msgstr ""
 
 #. module: base_delivery_carrier_files
 #: field:delivery.carrier.file,create_date:0
 #: field:delivery.carrier.file.generate,create_date:0
 msgid "Created on"
-msgstr "Criado em"
+msgstr ""
 
 #. module: base_delivery_carrier_files
 #: model:stock.location,name:base_delivery_carrier_files.location_delivery_counter
@@ -95,7 +95,7 @@ msgstr ""
 #: field:delivery.carrier.file,display_name:0
 #: field:delivery.carrier.file.generate,display_name:0
 msgid "Display Name"
-msgstr "Nome para Mostrar"
+msgstr "Te tonen naam"
 
 #. module: base_delivery_carrier_files
 #: field:delivery.carrier.file,export_path:0
@@ -136,7 +136,7 @@ msgstr ""
 #. module: base_delivery_carrier_files
 #: field:delivery.carrier.file,id:0 field:delivery.carrier.file.generate,id:0
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: base_delivery_carrier_files
 #: model:product.template,name:base_delivery_carrier_files.product_icecream_product_template
@@ -164,24 +164,24 @@ msgstr ""
 #: field:delivery.carrier.file,__last_update:0
 #: field:delivery.carrier.file.generate,__last_update:0
 msgid "Last Modified on"
-msgstr "Última atualização em"
+msgstr "Laatst bijgewerkt op"
 
 #. module: base_delivery_carrier_files
 #: field:delivery.carrier.file,write_uid:0
 #: field:delivery.carrier.file.generate,write_uid:0
 msgid "Last Updated by"
-msgstr "Última atualização por"
+msgstr ""
 
 #. module: base_delivery_carrier_files
 #: field:delivery.carrier.file,write_date:0
 #: field:delivery.carrier.file.generate,write_date:0
 msgid "Last Updated on"
-msgstr "Última atualização em"
+msgstr ""
 
 #. module: base_delivery_carrier_files
 #: field:delivery.carrier.file,name:0
 msgid "Name"
-msgstr ""
+msgstr "Naam"
 
 #. module: base_delivery_carrier_files
 #: code:addons/base_delivery_carrier_files/wizard/generate_carrier_files.py:44
@@ -198,7 +198,7 @@ msgstr ""
 #. module: base_delivery_carrier_files
 #: model:ir.model,name:base_delivery_carrier_files.model_stock_picking
 msgid "Picking List"
-msgstr "Lista de separação"
+msgstr ""
 
 #. module: base_delivery_carrier_files
 #: field:delivery.carrier.file.generate,recreate:0
@@ -230,7 +230,7 @@ msgstr ""
 #. module: base_delivery_carrier_files
 #: field:delivery.carrier.file,type:0
 msgid "Type"
-msgstr "Tipo"
+msgstr "Type"
 
 #. module: base_delivery_carrier_files
 #: field:delivery.carrier.file,write_mode:0
@@ -250,4 +250,4 @@ msgstr ""
 #. module: base_delivery_carrier_files
 #: view:delivery.carrier.file.generate:base_delivery_carrier_files.view_delivery_carrier_file_generate
 msgid "or"
-msgstr "ou"
+msgstr ""
