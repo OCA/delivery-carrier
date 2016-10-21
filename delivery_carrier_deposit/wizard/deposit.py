@@ -40,23 +40,33 @@ class DeliveryDepositWizard(models.TransientModel):
         required=True, help="Carrier type (combines several delivery "
         "methods). Make sure that the option 'Deposit Slip' is checked on "
         "the delivery methods that have this carrier type.")
+    picking_type_id = fields.Many2one(
+        comodel_name='stock.picking.type',
+        string='Picking Type',
+        required=True)
 
     @api.model
     def _prepare_deposit_slip(self):
         return {
             'carrier_type': self.carrier_type,
             'company_id': self.env.user.company_id.id,
+            'picking_type_id': self.picking_type_id.id,
             }
+
+    @api.model
+    def _get_deposit_pickings(self):
+        return self.env['stock.picking'].search([
+            ('carrier_type', '=', self.carrier_type),
+            ('deposit_slip_id', '=', False),
+            ('state', '=', 'done'),
+            ('picking_type_id', '=', self.picking_type_id),
+        ])
 
     @api.multi
     def create_deposit_slip(self):
         # I can't set api.one because I return an action
         self.ensure_one()
-        pickings = self.env['stock.picking'].search([
-            ('carrier_type', '=', self.carrier_type),
-            ('deposit_slip_id', '=', False),
-            ('state', '=', 'done'),
-            ])
+        pickings = self._get_deposit_pickings()
         if pickings:
             vals = self._prepare_deposit_slip()
             deposit = self.env['deposit.slip'].create(vals)
