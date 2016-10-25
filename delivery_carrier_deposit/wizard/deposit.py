@@ -35,6 +35,13 @@ class DeliveryDepositWizard(models.TransientModel):
     def _get_carrier_type_selection(self):
         return self.env['delivery.carrier']._get_carrier_type_selection()
 
+    @api.model
+    def _get_default_picking_type(self):
+        warehouse = self.env['stock.warehouse'].search(
+            [('company_id', '=', self.env.user.company_id.id)])
+        return (warehouse and warehouse[0].out_type_id
+                and warehouse[0].out_type_id.id or None)
+
     carrier_type = fields.Selection(
         '_get_carrier_type_selection', string='Delivery Method Type',
         required=True, help="Carrier type (combines several delivery "
@@ -43,7 +50,8 @@ class DeliveryDepositWizard(models.TransientModel):
     picking_type_id = fields.Many2one(
         comodel_name='stock.picking.type',
         string='Picking Type',
-        required=True)
+        required=True,
+        default=_get_default_picking_type)
 
     @api.model
     def _prepare_deposit_slip(self):
