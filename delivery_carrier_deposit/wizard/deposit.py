@@ -39,8 +39,7 @@ class DeliveryDepositWizard(models.TransientModel):
     def _get_default_picking_type(self):
         warehouse = self.env['stock.warehouse'].search(
             [('company_id', '=', self.env.user.company_id.id)])
-        return (warehouse and warehouse[0].out_type_id
-                and warehouse[0].out_type_id.id or None)
+        return warehouse and warehouse[0].out_type_id or None
 
     carrier_type = fields.Selection(
         '_get_carrier_type_selection', string='Delivery Method Type',
