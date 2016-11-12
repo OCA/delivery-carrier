@@ -24,6 +24,7 @@ class TestGls(TransactionCase):
         stk_trsf.do_detailed_transfer()
         pick.action_generate_carrier_label()
         domain = [('res_id', '=', pick.id),
+                  ('file_type', '=', 'zpl2'),
                   ('res_model', '=', 'stock.picking')]
         label = self.env['shipping.label'].search(domain)
         self.assertEqual(len(label), 1,
