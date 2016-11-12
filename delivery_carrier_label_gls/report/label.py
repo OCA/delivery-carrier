@@ -7,10 +7,16 @@ from mako.exceptions import RichTraceback
 from .label_helper import AbstractLabel
 from .exception_helper import (InvalidAccountNumber)
 import httplib
-from unidecode import unidecode
 import logging
 import os
-import pycountry
+
+_logger = logging.getLogger(__name__)
+
+try:
+    import pycountry
+    from unidecode import unidecode
+except (ImportError, IOError) as err:
+    _logger.debug(err)
 
 REPORT_CODING = 'cp1252'
 ERROR_BEHAVIOR = 'backslashreplace'
@@ -35,9 +41,10 @@ def GLS_countries_prefix():
     """
     GLS_prefix = []
     for elm in pycountry.countries:
-        GLS_prefix.append(str(elm.alpha2))
+        GLS_prefix.append(str(elm.alpha_2))
     GLS_prefix[GLS_prefix.index('ME')] = 'CS'
     return GLS_prefix
+
 
 GLS_COUNTRIES_PREFIX = GLS_countries_prefix()
 
@@ -214,7 +221,7 @@ class GLSLabel(AbstractLabel):
                 all_dict['T8975'],
                 all_dict['T530'],    # weight
             ]
-            code = '|'.join(items)+'|'
+            code = '|'.join(items) + '|'
             # code needs to be fixed size
             code += (304 - len(code)) * ' '
             return {'T8917': code}

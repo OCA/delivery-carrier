@@ -39,11 +39,11 @@
         <!-- CONFIG PARAMETER -->
         <record id="delivery_carrier_gls_customer_code" model="ir.config_parameter">
             <field name="key">carrier_gls_customer_code</field>
-            <field name="value">...</field>
+            <field name="value">2500099999</field>
         </record>
         <record id="delivery_carrier_gls_warehouse" model="ir.config_parameter">
             <field name="key">carrier_gls_warehouse</field>
-            <field name="value">FR00</field>
+            <field name="value">FR0099</field>
         </record>
 
     </data>

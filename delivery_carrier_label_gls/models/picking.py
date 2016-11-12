@@ -3,9 +3,9 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from datetime import datetime
-import pycountry
 import base64
 import logging
+
 from openerp import models, api, fields, _
 from openerp.exceptions import Warning as UserError
 from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
@@ -16,7 +16,12 @@ from ..report.label_helper import (
     InvalidMissingField,
     InvalidType,)
 
-logger = logging.getLogger(__name__)
+_logger = logging.getLogger(__name__)
+
+try:
+    import pycountry
+except (ImportError, IOError) as err:
+    _logger.debug(err)
 
 
 def raise_exception(message):
@@ -100,7 +105,7 @@ class StockPicking(models.Model):
         address['street'], address['street2'], address['street3'] = res
         country_code = (self.partner_id and
                         self.partner_id.country_id.code or 'FR')
-        iso_3166 = pycountry.countries.get(alpha2=country_code).numeric
+        iso_3166 = pycountry.countries.get(alpha_2=country_code).numeric
         address.update({
             "zip": self.partner_id.zip,
             "city": self.partner_id.city,
@@ -186,7 +191,7 @@ class StockPicking(models.Model):
             pack_vals = {'parcel_tracking': label['tracking_number'],
                          'carrier_id': self.carrier_id.id}
             package.write(pack_vals)
-            logger.info("package wrote")
+            _logger.info("package wrote")
             label_info = {
                 'package_id': package.id,
                 'file': label['content'],
@@ -241,7 +246,7 @@ class StockPicking(models.Model):
 
     def get_zpl(self, service, delivery, address, pack):
         try:
-            logger.info(
+            _logger.info(
                 "GLS label generating for delivery '%s', pack '%s'",
                 delivery['consignee_ref'], pack['parcel_number_label'])
             result = service.get_label(delivery, address, pack)
@@ -268,7 +273,7 @@ class StockPicking(models.Model):
             if self.company_id.gls_test:
                 test = True
             try:
-                logger.info(
+                _logger.info(
                     "Connecting to GLS web service")
                 service = GLSLabel(
                     sender, self.carrier_code, test_plateform=test)
