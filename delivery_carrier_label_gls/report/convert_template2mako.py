@@ -30,6 +30,7 @@ def generate_mako(source, destination):
         with open(destination, 'w') as write_file:
             write_file.write(content)
 
+
 if __name__ == '__main__':
     generate_mako('ZEBRA_FR', 'label')
     generate_mako('ZEBRA_UNISHIP', 'label_uniship')
