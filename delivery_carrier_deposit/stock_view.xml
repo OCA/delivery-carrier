@@ -44,6 +44,7 @@
     <tree string="Deposit" colors="blue:state=='draft'" create="0">
         <field name="name"/>
         <field name="carrier_type"/>
+        <field name="picking_type_id"/>
         <field name="create_date"/>
         <field name="state"/>
     </tree>
@@ -73,10 +74,12 @@
                     <field name="name"/>
                     <field name="weight"/>
                     <field name="carrier_type"/>
+                    <field name="picking_type_id"/>
                     <field name="number_of_packages"/>
                 </group>
                 <group name="pickings">
-                    <field name="picking_ids" nolabel="1" widget="many2many">
+                    <field name="picking_ids" nolabel="1" widget="many2many"
+                           domain="[('picking_type_id', '=', picking_type_id)]">
                         <tree>
                             <field name="name"/>
                             <field name="partner_id"/>

@@ -10,6 +10,7 @@
         <form string="Create Deposit Slip">
             <group name="main">
                 <field name="carrier_type" colspan="2"/>
+                <field name="picking_type_id" colspan="2"/>
             </group>
             <footer>
                 <button name="create_deposit_slip" string="Create"
