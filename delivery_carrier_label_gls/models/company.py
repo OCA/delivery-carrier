@@ -26,4 +26,4 @@ class ResCompany(models.Model):
         help="Generate label when delivery is done")
     gls_test = fields.Boolean(
         string='Url Test',
-        help="Check if requested webservice is test plateform")
+        help="Use testing webservice")
