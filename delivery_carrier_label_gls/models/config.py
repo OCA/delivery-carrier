@@ -21,13 +21,13 @@ class GlsConfigSettings(models.TransientModel):
         string='Customer Code',
         readonly=True, oldname='gls_customer_code',
         help="Code for GLS carrier company (T8915)\n"
-             "Information common to all the companies "
+             "Settings for all companies "
              "to be configured in System Parameter")
     warehouse = fields.Char(
         string='Warehouse',
         readonly=True, oldname='gls_warehouse',
         help="GLS warehouse near customer location (T8700)\n"
-             "Information common to whole companies "
+             "Settings for all companies "
              "to be configured in System Parameter")
     fr_contact_id = fields.Char(
         related="company_id.gls_fr_contact_id")

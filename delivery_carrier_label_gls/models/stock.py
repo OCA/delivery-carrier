@@ -9,6 +9,9 @@ from openerp.exceptions import Warning as UserError
 logger = logging.getLogger(__name__)
 
 
+URL_TRACKING = "https://gls-group.eu/FR/fr/suivi-colis?match=%s"
+
+
 class ShippingLabel(models.Model):
     _inherit = 'shipping.label'
 
@@ -39,8 +42,7 @@ class StockQuantPackage(models.Model):
     @api.multi
     def _get_carrier_tracking_url(self):
         if self.carrier_id.type == 'gls':
-            res = ("https://gls-group.eu/FR/fr/suivi-colis?"
-                   "match=%s" % self.parcel_tracking)
+            res = URL_TRACKING % self.parcel_tracking
         return res
 
     @api.multi
