@@ -78,6 +78,10 @@ class DepositSlip(models.Model):
     number_of_packages = fields.Integer(
         string='Number of Packages', compute='_compute_deposit_slip',
         readonly=True)
+    picking_type_id = fields.Many2one(
+        comodel_name='stock.picking.type',
+        string='Picking Type',
+        required=True)
 
     _sql_constraints = [(
         'name_company_uniq',
