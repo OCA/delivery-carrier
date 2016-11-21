@@ -1,0 +1,2 @@
+id,partner_id:id,carrier_id:id,picking_type_id:id,name
+stock_picking_gls1,base.res_partner_11,delivery_carrier_label_gls.delivery_carrier_gls,stock.picking_type_out,GLS01

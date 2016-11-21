@@ -1,0 +1,3 @@
+id,picking_id:id,product_uom_qty,product_id:id,name,product_uom:id,location_id:id,location_dest_id:id
+stock_move_gls1,stock_picking_gls1,2,product_carrier_small,_,product.product_uom_unit,stock.stock_location_stock,stock.stock_location_customers
+stock_move_gls2,stock_picking_gls1,1,product_carrier_big,_,product.product_uom_unit,stock.stock_location_stock,stock.stock_location_customers

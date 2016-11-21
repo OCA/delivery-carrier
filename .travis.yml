@@ -33,7 +33,7 @@ install:
   - travis_install_nightly
   - pip install PyPDF2==1.18
   - pip install unidecode
-  - pip install pycountry
+  - pip install pycountry>=16.11.08
   - pip install suds-jurko==0.6
 
 script:

@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
-    <data noupdate="1">
+<data noupdate="1">
 
-        <!-- Resource: res.company -->
-        <record id="base.main_company" model="res.company">
-            <field name="name">Akretion</field>
-            <field name="street">35B rue Montgolfier</field>
-            <field name="zip">69100</field>
-            <field name="city">Villeurbanne</field>
-            <field name="phone">04 99 99 99 99</field>
-            <field name="country_id" ref="base.fr"/>
-       </record>
+    <!-- Resource: res.company -->
+    <record id="base.main_company" model="res.company">
+        <field name="name">Akretion</field>
+        <field name="street">35B rue Montgolfier</field>
+        <field name="zip">69100</field>
+        <field name="city">Villeurbanne</field>
+        <field name="phone">04 99 99 99 99</field>
+        <field name="country_id" ref="base.fr"/>
+        <field name="gls_fr_contact_id">2599999999</field>
+        <field name="gls_inter_contact_id">2599999998</field>
+        <field name="gls_traceability" eval="1"/>
+        <field name="gls_test" eval="1"/>
+    </record>
 
-    </data>
+</data>
 </openerp>

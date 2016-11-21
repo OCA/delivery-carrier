@@ -1,33 +1,22 @@
-# -*- coding: utf-8 -*-
-##############################################################################
-#
-#    Copyright (C) All Rights Reserved 2014 Akretion
-#    @author David BEAL <david.beal@akretion.com>
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-###############################################################################
+# coding: utf-8
+# © 2015 David BEAL @ Akretion
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from mako.template import Template
 from mako.exceptions import RichTraceback
 from .label_helper import AbstractLabel
 from .exception_helper import (InvalidAccountNumber)
 import httplib
-from unidecode import unidecode
 import logging
 import os
-import pycountry
+
+_logger = logging.getLogger(__name__)
+
+try:
+    import pycountry
+    from unidecode import unidecode
+except (ImportError, IOError) as err:
+    _logger.debug(err)
 
 REPORT_CODING = 'cp1252'
 ERROR_BEHAVIOR = 'backslashreplace'
@@ -52,9 +41,10 @@ def GLS_countries_prefix():
     """
     GLS_prefix = []
     for elm in pycountry.countries:
-        GLS_prefix.append(str(elm.alpha2))
+        GLS_prefix.append(str(elm.alpha_2))
     GLS_prefix[GLS_prefix.index('ME')] = 'CS'
     return GLS_prefix
+
 
 GLS_COUNTRIES_PREFIX = GLS_countries_prefix()
 
@@ -98,9 +88,9 @@ DELIVERY_MODEL = {
     "parcel_total_number": {'max_number': 999, 'type': int, 'required': True},
 }
 SENDER_MODEL = {
-    "customer_id":       {'max_size': 10, 'required': True},
+    "customer_id":       {'max_size': 10, 'min_size': 10, 'required': True},
     "contact_id":        {'max_size': 10},
-    "outbound_depot":    {'max_size': 6, 'required': True},
+    "outbound_depot":    {'max_size': 6, 'min_size': 6, 'required': True},
     "shipper_name":      {'max_size': 35, 'required': True},
     "shipper_street":    {'max_size': 35, 'required': True},
     "shipper_street2":   {'max_size': 35},
@@ -137,17 +127,14 @@ DELIVERY_MAPPING = {
     'T540': "shipping_date",
     'T8318': "commentary",
     'T8975': "gls_origin_reference",
-    'T8912': "gls_origin_reference",
     'T8905': "parcel_total_number",
     'T8702': "parcel_total_number",
 }
 ACCOUNT_MAPPING = {
     'T8915': "customer_id",
-    'T805': "customer_id",
     'T8914': "contact_id",
     'T8700': "outbound_depot",
-    'T811': "shipper_street",
-    'T820': "shipper_street2",
+    'T820': "shipper_street",
     'T810': "shipper_name",
     'T822': "shipper_zip",
     'T823': "shipper_city",
@@ -234,7 +221,7 @@ class GLSLabel(AbstractLabel):
                 all_dict['T8975'],
                 all_dict['T530'],    # weight
             ]
-            code = '|'.join(items)+'|'
+            code = '|'.join(items) + '|'
             # code needs to be fixed size
             code += (304 - len(code)) * ' '
             return {'T8917': code}
@@ -313,6 +300,8 @@ code: %s ; message: %s ; result: %s""" % (code, message, result))
         all_dict.update(T_address)
         all_dict.update(self.add_specific_keys(address))
         if address['country_code'] != 'FR':
+            request = False
+            raw_response = False
             label_content = self.select_label(
                 parcel['parcel_number_label'], all_dict, address)
             if ('contact_id_inter' not in self.sender or
@@ -324,7 +313,9 @@ code: %s ; message: %s ; result: %s""" % (code, message, result))
         else:
             failed_webservice = False
             # webservice
-            response = self.get_webservice_response(all_dict)
+            request = dict_to_gls_data(all_dict)
+            raw_response = self.get_webservice_response(request)
+            response = gls_decode(raw_response)
             # refactor webservice response failed and webservice downed
             if isinstance(response, dict):
                 if self.get_result_analysis(response['RESULT'], all_dict):
@@ -355,7 +346,9 @@ code: %s ; message: %s ; result: %s""" % (code, message, result))
             return {
                 "content": content2print,
                 "tracking_number": tracking_number,
-                'filename': self.filename
+                'filename': self.filename,
+                'request': request,
+                'raw_response': raw_response,
             }
         except:
             traceback = RichTraceback()
@@ -366,8 +359,7 @@ code: %s ; message: %s ; result: %s""" % (code, message, result))
                 "%s: %s"
                 % (str(traceback.error.__class__.__name__), traceback.error))
 
-    def get_webservice_response(self, params):
-        request = dict_to_gls_data(params)
+    def get_webservice_response(self, request):
         connection = httplib.HTTPConnection(self.webservice_location, GLS_PORT)
         connection.request(
             "POST",
@@ -384,7 +376,7 @@ code: %s ; message: %s ; result: %s""" % (code, message, result))
                 % (response.status, response.reason))
         datas = response.read()
         connection.close()
-        return gls_decode(datas)
+        return datas
 
     def map_semantic_keys(self, T_keys, datas):
         mapping = {}
@@ -411,12 +403,10 @@ code: %s ; message: %s ; result: %s""" % (code, message, result))
         return (product_code, uniship_product_code)
 
     def set_origin_reference(self, parcel, address):
-        return (
-            self.product_code
-            + parcel['custom_sequence']
-            + '0000'
-            + address['country_code']
-        )
+        return '%s%s0000%s' % (
+            self.product_code,
+            parcel['custom_sequence'],
+            address['country_code'])
 
     def validate_mako(self, template, available_keys):
         import re
