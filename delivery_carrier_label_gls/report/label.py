@@ -46,8 +46,6 @@ def GLS_countries_prefix():
     return GLS_prefix
 
 
-GLS_COUNTRIES_PREFIX = GLS_countries_prefix()
-
 EUROPEAN_COUNTRIES = [
     'AT', 'BE', 'BG', 'CY', 'CZ', 'DE', 'DK', 'ES', 'EE', 'FI', 'GR',
     'GB', 'HU', 'IE', 'IT', 'LV', 'LT', 'LU', 'MT', 'NL', 'PL', 'PT',
@@ -62,7 +60,6 @@ ADDRESS_MODEL = {
     "street3":          {'max_size': 35},
     "zip":              {'max_size': 10, 'required': True},
     "city":             {'max_size': 35, 'required': True},
-    "country_code":     {'in': GLS_COUNTRIES_PREFIX, 'required': True},
     "consignee_phone":  {'max_size': 20},
     "consignee_mobile": {'max_size': 20},
     "consignee_email":  {'max_size': 100},
@@ -96,7 +93,6 @@ SENDER_MODEL = {
     "shipper_street2":   {'max_size': 35},
     "shipper_zip":       {'max_size': 10, 'required': True},
     "shipper_city":      {'max_size': 35, 'required': True},
-    "shipper_country":   {'in': GLS_COUNTRIES_PREFIX, 'required': True},
 }
 
 # Here is all fields called in mako template
@@ -173,6 +169,10 @@ class GLSLabel(AbstractLabel):
 
     def __init__(self, sender, code, test_plateform=False):
         self.check_model(sender, SENDER_MODEL, 'company')
+        ADDRESS_MODEL["country_code"] = {
+            'in': GLS_countries_prefix(), 'required': True}
+        SENDER_MODEL["shipper_country"] = {
+            'in': GLS_countries_prefix(), 'required': True}
         if test_plateform:
             url = URL_TEST
         else:
