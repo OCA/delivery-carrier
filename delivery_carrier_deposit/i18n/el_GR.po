@@ -5,12 +5,12 @@
 # Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: carrier-delivery (8.0)\n"
+"Project-Id-Version: delivery-carrier (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-15 18:37+0000\n"
-"PO-Revision-Date: 2015-06-16 16:32+0000\n"
-"Last-Translator: <>\n"
-"Language-Team: Greek (Greece) (http://www.transifex.com/oca/OCA-carrier-delivery-8-0/language/el_GR/)\n"
+"POT-Creation-Date: 2016-11-22 09:11+0000\n"
+"PO-Revision-Date: 2016-11-22 16:30+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"Language-Team: Greek (Greece) (http://www.transifex.com/oca/OCA-delivery-carrier-8-0/language/el_GR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -45,7 +45,7 @@ msgstr ""
 #. module: delivery_carrier_deposit
 #: view:delivery.deposit.wizard:delivery_carrier_deposit.view_wiz_create_deposit
 msgid "Cancel"
-msgstr ""
+msgstr "Άκυρο"
 
 #. module: delivery_carrier_deposit
 #: model:ir.model,name:delivery_carrier_deposit.model_delivery_carrier
@@ -78,7 +78,7 @@ msgstr ""
 #. module: delivery_carrier_deposit
 #: view:website:delivery_carrier_deposit.report_generic_deposit_slip
 msgid "Country"
-msgstr ""
+msgstr "Χώρα"
 
 #. module: delivery_carrier_deposit
 #: view:delivery.deposit.wizard:delivery_carrier_deposit.view_wiz_create_deposit
@@ -116,7 +116,7 @@ msgstr ""
 #. module: delivery_carrier_deposit
 #: view:website:delivery_carrier_deposit.report_generic_deposit_slip
 msgid "Date:"
-msgstr ""
+msgstr "Ημερομηνία:"
 
 #. module: delivery_carrier_deposit
 #: field:delivery.deposit.wizard,carrier_type:0
@@ -271,6 +271,12 @@ msgid "Picking List"
 msgstr ""
 
 #. module: delivery_carrier_deposit
+#: field:delivery.deposit.wizard,picking_type_id:0
+#: field:deposit.slip,picking_type_id:0
+msgid "Picking Type"
+msgstr ""
+
+#. module: delivery_carrier_deposit
 #: field:deposit.slip,picking_ids:0
 msgid "Pickings"
 msgstr ""
@@ -288,7 +294,7 @@ msgstr ""
 #. module: delivery_carrier_deposit
 #: field:deposit.slip,state:0
 msgid "Status"
-msgstr ""
+msgstr "Κατάσταση"
 
 #. module: delivery_carrier_deposit
 #: field:deposit.slip,message_summary:0
@@ -296,7 +302,7 @@ msgid "Summary"
 msgstr ""
 
 #. module: delivery_carrier_deposit
-#: code:addons/delivery_carrier_deposit/wizard/deposit.py:77
+#: code:addons/delivery_carrier_deposit/wizard/deposit.py:94
 #, python-format
 msgid ""
 "There are no delivery orders in transferred state with a delivery method "

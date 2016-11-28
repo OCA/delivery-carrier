@@ -6,12 +6,12 @@
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
 msgid ""
 msgstr ""
-"Project-Id-Version: carrier-delivery (8.0)\n"
+"Project-Id-Version: delivery-carrier (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-03 12:24+0000\n"
-"PO-Revision-Date: 2016-05-01 04:56+0000\n"
+"POT-Creation-Date: 2016-11-22 09:11+0000\n"
+"PO-Revision-Date: 2016-11-23 08:26+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
-"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-carrier-delivery-8-0/language/sl/)\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-delivery-carrier-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -272,6 +272,12 @@ msgid "Picking List"
 msgstr "Zbirnik"
 
 #. module: delivery_carrier_deposit
+#: field:delivery.deposit.wizard,picking_type_id:0
+#: field:deposit.slip,picking_type_id:0
+msgid "Picking Type"
+msgstr "Tip zbirnika"
+
+#. module: delivery_carrier_deposit
 #: field:deposit.slip,picking_ids:0
 msgid "Pickings"
 msgstr "Zbirniki"
@@ -297,7 +303,7 @@ msgid "Summary"
 msgstr "Povzetek"
 
 #. module: delivery_carrier_deposit
-#: code:addons/delivery_carrier_deposit/wizard/deposit.py:77
+#: code:addons/delivery_carrier_deposit/wizard/deposit.py:94
 #, python-format
 msgid ""
 "There are no delivery orders in transferred state with a delivery method "

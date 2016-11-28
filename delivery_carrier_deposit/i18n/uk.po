@@ -1,0 +1,365 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * delivery_carrier_deposit
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: delivery-carrier (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-11-22 09:11+0000\n"
+"PO-Revision-Date: 2016-11-16 09:12+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"Language-Team: Ukrainian (http://www.transifex.com/oca/OCA-delivery-carrier-8-0/language/uk/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: uk\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#. module: delivery_carrier_deposit
+#: sql_constraint:deposit.slip:0
+msgid "'Deposit Slip' name must be unique per company!"
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: view:website:delivery_carrier_deposit.report_generic_deposit_slip
+msgid "(kg)"
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: view:website:delivery_carrier_deposit.report_generic_deposit_slip
+msgid "Account Name:"
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: help:delivery.carrier,deposit_slip:0
+msgid "Allow to create a 'Deposit Slip' report on delivery orders"
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: view:deposit.slip:delivery_carrier_deposit.view_deposit_slip_form
+msgid "Are you sure that you re-generate the EDI file ?"
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: view:delivery.deposit.wizard:delivery_carrier_deposit.view_wiz_create_deposit
+msgid "Cancel"
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: model:ir.model,name:delivery_carrier_deposit.model_delivery_carrier
+msgid "Carrier"
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: help:deposit.slip,carrier_type:0
+msgid "Carrier type (combines several delivery methods)"
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: help:delivery.deposit.wizard,carrier_type:0
+msgid ""
+"Carrier type (combines several delivery methods). Make sure that the option "
+"'Deposit Slip' is checked on the delivery methods that have this carrier "
+"type."
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: field:deposit.slip,company_id:0
+msgid "Company"
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: view:deposit.slip:delivery_carrier_deposit.view_deposit_slip_form
+msgid "Confirm"
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: view:website:delivery_carrier_deposit.report_generic_deposit_slip
+msgid "Country"
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: view:delivery.deposit.wizard:delivery_carrier_deposit.view_wiz_create_deposit
+msgid "Create"
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: view:delivery.deposit.wizard:delivery_carrier_deposit.view_wiz_create_deposit
+#: model:ir.actions.act_window,name:delivery_carrier_deposit.action_wiz_create_deposit
+#: model:ir.ui.menu,name:delivery_carrier_deposit.menu_wiz_delivery_deposit
+msgid "Create Deposit Slip"
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: field:delivery.deposit.wizard,create_uid:0 field:deposit.slip,create_uid:0
+msgid "Created by"
+msgstr "Створив"
+
+#. module: delivery_carrier_deposit
+#: field:delivery.deposit.wizard,create_date:0
+#: field:deposit.slip,create_date:0
+msgid "Created on"
+msgstr "Дата створення"
+
+#. module: delivery_carrier_deposit
+#: view:website:delivery_carrier_deposit.report_generic_deposit_slip
+msgid "Customer No.:"
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: help:deposit.slip,message_last_post:0
+msgid "Date of the last message posted on the record."
+msgstr "Дата останнього повідомлення по запису."
+
+#. module: delivery_carrier_deposit
+#: view:website:delivery_carrier_deposit.report_generic_deposit_slip
+msgid "Date:"
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: field:delivery.deposit.wizard,carrier_type:0
+#: view:deposit.slip:delivery_carrier_deposit.view_deposit_slip_search
+msgid "Delivery Method Type"
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: view:website:delivery_carrier_deposit.report_generic_deposit_slip
+msgid "Delivery Method Type:"
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: view:deposit.slip:delivery_carrier_deposit.view_deposit_slip_form
+#: view:deposit.slip:delivery_carrier_deposit.view_deposit_slip_search
+#: view:deposit.slip:delivery_carrier_deposit.view_deposit_slip_tree
+msgid "Deposit"
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: field:delivery.carrier,deposit_slip:0
+#: model:ir.actions.act_window,name:delivery_carrier_deposit.act_delivery_deposit
+#: model:ir.model,name:delivery_carrier_deposit.model_deposit_slip
+#: model:ir.ui.menu,name:delivery_carrier_deposit.menu_delivery_deposit_slip_model
+#: field:stock.picking,deposit_slip_id:0
+msgid "Deposit Slip"
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: model:mail.message.subtype,description:delivery_carrier_deposit.deposit_slip_done
+#: model:mail.message.subtype,name:delivery_carrier_deposit.deposit_slip_done
+msgid "Deposit Slip Validated"
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: view:website:delivery_carrier_deposit.report_generic_deposit_slip
+msgid "Deposit Slip n°"
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: field:delivery.deposit.wizard,display_name:0
+#: field:deposit.slip,display_name:0
+msgid "Display Name"
+msgstr "Назва для відображення"
+
+#. module: delivery_carrier_deposit
+#: selection:deposit.slip,state:0
+msgid "Done"
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: selection:deposit.slip,state:0
+msgid "Draft"
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: field:deposit.slip,message_follower_ids:0
+msgid "Followers"
+msgstr "Підписники"
+
+#. module: delivery_carrier_deposit
+#: model:ir.actions.report.xml,name:delivery_carrier_deposit.report_deposit_slip
+msgid "Generic Deposit Slip"
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: view:deposit.slip:delivery_carrier_deposit.view_deposit_slip_search
+msgid "Group By"
+msgstr "Групувати за"
+
+#. module: delivery_carrier_deposit
+#: help:deposit.slip,message_summary:0
+msgid ""
+"Holds the Chatter summary (number of messages, ...). This summary is "
+"directly in html format in order to be inserted in kanban views."
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: field:delivery.deposit.wizard,id:0 field:deposit.slip,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: delivery_carrier_deposit
+#: help:deposit.slip,message_unread:0
+msgid "If checked new messages require your attention."
+msgstr "Якщо позначено, то повідомленя потребує вашої уваги"
+
+#. module: delivery_carrier_deposit
+#: field:deposit.slip,message_is_follower:0
+msgid "Is a Follower"
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: field:deposit.slip,message_last_post:0
+msgid "Last Message Date"
+msgstr "Дата останнього повідомлення"
+
+#. module: delivery_carrier_deposit
+#: field:delivery.deposit.wizard,__last_update:0
+#: field:deposit.slip,__last_update:0
+msgid "Last Modified on"
+msgstr "Остання модифікація"
+
+#. module: delivery_carrier_deposit
+#: field:delivery.deposit.wizard,write_uid:0 field:deposit.slip,write_uid:0
+msgid "Last Updated by"
+msgstr "Востаннє оновив"
+
+#. module: delivery_carrier_deposit
+#: field:delivery.deposit.wizard,write_date:0 field:deposit.slip,write_date:0
+msgid "Last Updated on"
+msgstr "Останнє оновлення"
+
+#. module: delivery_carrier_deposit
+#: field:deposit.slip,message_ids:0
+msgid "Messages"
+msgstr "Повідомлення"
+
+#. module: delivery_carrier_deposit
+#: help:deposit.slip,message_ids:0
+msgid "Messages and communication history"
+msgstr "Повідомлення та історія бесіди"
+
+#. module: delivery_carrier_deposit
+#: field:deposit.slip,name:0
+msgid "Name"
+msgstr "Name"
+
+#. module: delivery_carrier_deposit
+#: view:website:delivery_carrier_deposit.report_generic_deposit_slip
+msgid "Name and address"
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: view:website:delivery_carrier_deposit.report_generic_deposit_slip
+msgid "Nr of"
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: field:deposit.slip,number_of_packages:0
+msgid "Number of Packages"
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: view:website:delivery_carrier_deposit.report_generic_deposit_slip
+msgid "Parcel numbers"
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: model:ir.model,name:delivery_carrier_deposit.model_stock_picking
+msgid "Picking List"
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: field:delivery.deposit.wizard,picking_type_id:0
+#: field:deposit.slip,picking_type_id:0
+msgid "Picking Type"
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: field:deposit.slip,picking_ids:0
+msgid "Pickings"
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: view:deposit.slip:delivery_carrier_deposit.view_deposit_slip_form
+msgid "Re-generate EDI file"
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: view:website:delivery_carrier_deposit.report_generic_deposit_slip
+msgid "Sender Ref"
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: field:deposit.slip,state:0
+msgid "Status"
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: field:deposit.slip,message_summary:0
+msgid "Summary"
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: code:addons/delivery_carrier_deposit/wizard/deposit.py:94
+#, python-format
+msgid ""
+"There are no delivery orders in transferred state with a delivery method "
+"type '%s' not already linked to a deposit slip."
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: view:website:delivery_carrier_deposit.report_generic_deposit_slip
+msgid "Total Number of Packages:"
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: field:deposit.slip,weight:0
+msgid "Total Weight"
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: view:website:delivery_carrier_deposit.report_generic_deposit_slip
+msgid "Total Weight:"
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: model:ir.ui.menu,name:delivery_carrier_deposit.menu_delivery_deposit_slip
+msgid "Transport"
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: field:deposit.slip,carrier_type:0
+msgid "Type"
+msgstr "Тип"
+
+#. module: delivery_carrier_deposit
+#: field:deposit.slip,message_unread:0
+msgid "Unread Messages"
+msgstr "Непрочитані повідомлення"
+
+#. module: delivery_carrier_deposit
+#: view:website:delivery_carrier_deposit.report_generic_deposit_slip
+msgid "Weight"
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: model:ir.model,name:delivery_carrier_deposit.model_delivery_deposit_wizard
+msgid "Wizard to create Deposit Slip"
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: view:website:delivery_carrier_deposit.report_generic_deposit_slip
+msgid "ZIP"
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: view:website:delivery_carrier_deposit.report_generic_deposit_slip
+msgid "packages"
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: view:website:delivery_carrier_deposit.report_generic_deposit_slip
+msgid "recipient"
+msgstr ""

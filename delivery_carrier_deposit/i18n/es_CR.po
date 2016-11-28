@@ -5,12 +5,12 @@
 # Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: carrier-delivery (8.0)\n"
+"Project-Id-Version: delivery-carrier (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-15 18:37+0000\n"
-"PO-Revision-Date: 2015-06-16 16:32+0000\n"
-"Last-Translator: <>\n"
-"Language-Team: Spanish (Costa Rica) (http://www.transifex.com/oca/OCA-carrier-delivery-8-0/language/es_CR/)\n"
+"POT-Creation-Date: 2016-11-22 09:11+0000\n"
+"PO-Revision-Date: 2016-11-25 14:56+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"Language-Team: Spanish (Costa Rica) (http://www.transifex.com/oca/OCA-delivery-carrier-8-0/language/es_CR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -101,7 +101,7 @@ msgstr ""
 #: field:delivery.deposit.wizard,create_date:0
 #: field:deposit.slip,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Creado en"
 
 #. module: delivery_carrier_deposit
 #: view:website:delivery_carrier_deposit.report_generic_deposit_slip
@@ -185,7 +185,7 @@ msgstr ""
 #. module: delivery_carrier_deposit
 #: view:deposit.slip:delivery_carrier_deposit.view_deposit_slip_search
 msgid "Group By"
-msgstr ""
+msgstr "Agrupar por"
 
 #. module: delivery_carrier_deposit
 #: help:deposit.slip,message_summary:0
@@ -197,7 +197,7 @@ msgstr ""
 #. module: delivery_carrier_deposit
 #: field:delivery.deposit.wizard,id:0 field:deposit.slip,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: delivery_carrier_deposit
 #: help:deposit.slip,message_unread:0
@@ -233,7 +233,7 @@ msgstr ""
 #. module: delivery_carrier_deposit
 #: field:deposit.slip,message_ids:0
 msgid "Messages"
-msgstr ""
+msgstr "Mensajes"
 
 #. module: delivery_carrier_deposit
 #: help:deposit.slip,message_ids:0
@@ -243,7 +243,7 @@ msgstr ""
 #. module: delivery_carrier_deposit
 #: field:deposit.slip,name:0
 msgid "Name"
-msgstr ""
+msgstr "Nombre"
 
 #. module: delivery_carrier_deposit
 #: view:website:delivery_carrier_deposit.report_generic_deposit_slip
@@ -268,6 +268,12 @@ msgstr ""
 #. module: delivery_carrier_deposit
 #: model:ir.model,name:delivery_carrier_deposit.model_stock_picking
 msgid "Picking List"
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: field:delivery.deposit.wizard,picking_type_id:0
+#: field:deposit.slip,picking_type_id:0
+msgid "Picking Type"
 msgstr ""
 
 #. module: delivery_carrier_deposit
@@ -296,7 +302,7 @@ msgid "Summary"
 msgstr ""
 
 #. module: delivery_carrier_deposit
-#: code:addons/delivery_carrier_deposit/wizard/deposit.py:77
+#: code:addons/delivery_carrier_deposit/wizard/deposit.py:94
 #, python-format
 msgid ""
 "There are no delivery orders in transferred state with a delivery method "
@@ -326,7 +332,7 @@ msgstr ""
 #. module: delivery_carrier_deposit
 #: field:deposit.slip,carrier_type:0
 msgid "Type"
-msgstr ""
+msgstr "Tipo"
 
 #. module: delivery_carrier_deposit
 #: field:deposit.slip,message_unread:0
