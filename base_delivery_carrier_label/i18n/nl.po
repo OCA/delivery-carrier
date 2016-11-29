@@ -116,7 +116,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_template_option_create_uid
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Aangemaakt door"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account_create_date
@@ -124,7 +124,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_template_option_create_date
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_create_date
 msgid "Created on"
-msgstr ""
+msgstr "Aangemaakt op"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_db_datas
@@ -198,7 +198,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_template_option_id
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_delivery_carrier_option_mandatory
@@ -236,7 +236,7 @@ msgstr "Laatst bijgewerkt op"
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_template_option_write_uid
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Laatst bijgewerkt door"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account_write_date
@@ -244,7 +244,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_template_option_write_date
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Laatst bijgewerkt op"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option_mandatory

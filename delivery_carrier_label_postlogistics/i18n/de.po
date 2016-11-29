@@ -4,13 +4,14 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2016
+# Tom Palan <thomas@palan.at>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-09-27 15:17+0000\n"
 "PO-Revision-Date: 2016-09-27 15:17+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
+"Last-Translator: Tom Palan <thomas@palan.at>, 2016\n"
 "Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -245,7 +246,7 @@ msgstr "Beschreibung"
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_license_display_name
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_service_group_display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Anzeigename"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_config_settings_office
@@ -324,7 +325,7 @@ msgstr "Etikettgestaltung"
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_license___last_update
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_service_group___last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Zuletzt geändert am"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_config_settings_write_uid
@@ -354,7 +355,7 @@ msgstr "Liste der Basisdienste, denen diese Leistung zugewählt werden kann"
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_license_number
 msgid "Number"
-msgstr ""
+msgstr "Nummer"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,help:delivery_carrier_label_postlogistics.field_postlogistics_config_settings_logo

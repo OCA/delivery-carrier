@@ -157,7 +157,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_description
 #: model:ir.ui.view,arch_db:base_delivery_carrier_label.view_delivery_carrier_form
 msgid "Description"
-msgstr ""
+msgstr "说明"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account_display_name
@@ -165,7 +165,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_template_option_display_name
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_display_name
 msgid "Display Name"
-msgstr ""
+msgstr "显示名称"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_datas
@@ -228,7 +228,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_template_option___last_update
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label___last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "最后修改时间"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account_write_uid
@@ -261,7 +261,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option_name
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_template_option_name
 msgid "Name"
-msgstr ""
+msgstr "名称"
 
 #. module: base_delivery_carrier_label
 #: code:addons/base_delivery_carrier_label/models/stock_picking.py:45
@@ -387,7 +387,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_carrier_type
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_type
 msgid "Type"
-msgstr ""
+msgstr "类型"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_url

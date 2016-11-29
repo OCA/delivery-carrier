@@ -105,7 +105,7 @@ msgstr "Código"
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_company_id
 msgid "Company"
-msgstr ""
+msgstr "Empresa"
 
 #. module: base_delivery_carrier_label
 #: model:ir.ui.view,arch_db:base_delivery_carrier_label.view_picking_withcarrier_out_form
@@ -263,7 +263,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option_name
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_template_option_name
 msgid "Name"
-msgstr ""
+msgstr "Nome"
 
 #. module: base_delivery_carrier_label
 #: code:addons/base_delivery_carrier_label/models/stock_picking.py:45

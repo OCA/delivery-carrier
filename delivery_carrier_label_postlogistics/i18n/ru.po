@@ -525,7 +525,7 @@ msgstr ""
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.ui.view,arch_db:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
 msgid "or"
-msgstr ""
+msgstr "или"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model,name:delivery_carrier_label_postlogistics.model_postlogistics_config_settings

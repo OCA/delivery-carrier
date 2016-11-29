@@ -89,7 +89,7 @@ msgstr ""
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.ui.view,arch_db:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
 msgid "Cancel"
-msgstr ""
+msgstr "取消"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model,name:delivery_carrier_label_postlogistics.model_delivery_carrier
@@ -230,14 +230,14 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_license_name
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_service_group_name
 msgid "Description"
-msgstr ""
+msgstr "说明"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_config_settings_display_name
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_license_display_name
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_service_group_display_name
 msgid "Display Name"
-msgstr ""
+msgstr "显示名称"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_config_settings_office
@@ -316,7 +316,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_license___last_update
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_service_group___last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "最后修改时间"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_config_settings_write_uid
@@ -452,7 +452,7 @@ msgstr ""
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_license_sequence
 msgid "Sequence"
-msgstr ""
+msgstr "序号"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,help:delivery_carrier_label_postlogistics.field_delivery_carrier_postlogistics_service_group_id
@@ -525,7 +525,7 @@ msgstr ""
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.ui.view,arch_db:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
 msgid "or"
-msgstr ""
+msgstr "或"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model,name:delivery_carrier_label_postlogistics.model_postlogistics_config_settings

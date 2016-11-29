@@ -5,13 +5,14 @@
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2016
 # Andrea Cometa <a.cometa@apuliasoftware.it>, 2016
+# Paolo Valier <paolo.valier@hotmail.it>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-09-27 15:17+0000\n"
 "PO-Revision-Date: 2016-09-27 15:17+0000\n"
-"Last-Translator: Andrea Cometa <a.cometa@apuliasoftware.it>, 2016\n"
+"Last-Translator: Paolo Valier <paolo.valier@hotmail.it>, 2016\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -95,7 +96,7 @@ msgstr "Annulla"
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model,name:delivery_carrier_label_postlogistics.model_delivery_carrier
 msgid "Carrier"
-msgstr ""
+msgstr "Corriere"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model,name:delivery_carrier_label_postlogistics.model_res_company
@@ -526,7 +527,7 @@ msgstr ""
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.ui.view,arch_db:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
 msgid "or"
-msgstr ""
+msgstr "o"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model,name:delivery_carrier_label_postlogistics.model_postlogistics_config_settings

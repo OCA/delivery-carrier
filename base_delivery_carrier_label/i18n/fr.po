@@ -383,7 +383,7 @@ msgstr "Poids total du paquet en kg, inclus le poids de l'unité logistique."
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_stock_picking
 msgid "Transfer"
-msgstr ""
+msgstr "Transférer"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account_type
