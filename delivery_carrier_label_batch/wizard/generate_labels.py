@@ -44,7 +44,7 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
 
     @api.model
     def _find_picking_label(self, picking):
-        label_obj = self.pool['shipping.label']
+        label_obj = self.env['shipping.label']
         domain = [('file_type', '=', 'pdf'),
                   ('res_id', '=', picking.id),
                   ('package_id', '=', False)]
@@ -99,11 +99,13 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
             labels = self._get_all_pdf(batch)
             labels = (label.datas for label in labels)
             labels = (label.decode('base64') for label in labels if labels)
+            filename = batch.name + '.pdf'
             data = {
-                'name': batch.name + '.pdf',
+                'name': filename,
                 'res_id': batch.id,
                 'res_model': 'stock.batch.picking',
                 'datas': assemble_pdf(labels).encode('base64'),
+                'datas_fname': filename,
             }
             self.env['ir.attachment'].create(data)
 
