@@ -58,7 +58,7 @@ class DeliveryDepositWizard(models.TransientModel):
             'carrier_type': self.carrier_type,
             'company_id': self.env.user.company_id.id,
             'picking_type_id': self.picking_type_id.id,
-            }
+        }
 
     @api.model
     def _get_deposit_pickings(self):
@@ -66,7 +66,7 @@ class DeliveryDepositWizard(models.TransientModel):
             ('carrier_type', '=', self.carrier_type),
             ('deposit_slip_id', '=', False),
             ('state', '=', 'done'),
-            ('picking_type_id', '=', self.picking_type_id),
+            ('picking_type_id', '=', self.picking_type_id.id),
         ])
 
     @api.multi
