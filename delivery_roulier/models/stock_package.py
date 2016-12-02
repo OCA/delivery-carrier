@@ -92,6 +92,10 @@ class StockQuantPackage(models.Model):
     def _error_handling(self, payload, response):
         pass
 
+    @implemented_by_carrier
+    def _prepare_label(self, label, picking):
+        pass
+
     # end of API
 
     # Core functions
@@ -104,21 +108,8 @@ class StockQuantPackage(models.Model):
             if isinstance(labels, dict):
                 labels = [labels]
             for label in labels:
-                data = {
-                    'name': label['name'],
-                    'res_id': picking.id,
-                    'res_model': 'stock.picking',
-                    'package_id': package.id,
-                }
-                if label.get('url'):
-                    data['url'] = label['url']
-                    data['type'] = 'url'
-                elif label.get('data'):
-                    data['datas'] = label['data'].encode('base64')
-                    data['type'] = 'binary'
-
+                data = package._prepare_label(picking, label)
                 ret.append(self.env['shipping.label'].create(data))
-
         return ret
 
     def _call_roulier_api(self, picking):
@@ -129,7 +120,6 @@ class StockQuantPackage(models.Model):
         self.ensure_one()
 
         self.carrier_type = picking.carrier_type  # on memory value !
-
         roulier_instance = roulier.get(picking.carrier_type)
         payload = roulier_instance.api()
 
@@ -163,6 +153,19 @@ class StockQuantPackage(models.Model):
         return self._after_call(picking, ret)
 
     # default implementations
+
+    @api.model
+    def _roulier_prepare_label(self, picking, label):
+        data = {
+            'name': label['name'],
+            'res_id': picking.id,
+            'res_model': 'stock.picking',
+            'package_id': self.id,
+        }
+        if label.get('data'):
+            data['datas'] = label['data'].encode('base64')
+            data['type'] = 'binary'
+        return data
 
     def _roulier_get_parcel(self, picking):
         weight = self.weight
