@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+    <!-- PRODUCT  -->
+    <record id="product_product_dummy" model="product.product">
+        <field name="default_code">SHIP_DUMMY</field>
+        <field name="type">service</field>
+        <field name="name">Test only - DUMMY</field>
+        <field name="categ_id">1</field>
+    </record>
+
+    <!-- PARTNER -->
+    <record id="partner_dummy" model="res.partner">
+        <field name="name">DUMMY</field>
+        <field name="customer" eval="False"/>
+        <field name="supplier" eval="True"/>
+        <field name="street">parcel street</field>
+        <field name="zip">99999</field>
+        <field name="city">XXXXXX PFC</field>
+    </record>
+
+    <!-- DELIVERY CARRIER -->
+    <record id="delivery_carrier_dummy" model="delivery.carrier">
+        <field name="name">DUMMY</field>
+        <field name="type">dummy</field>
+        <field name="code">DUMMY</field>
+        <field name="use_detailed_pricelist" eval="1"/>
+        <field name="partner_id" ref="delivery_roulier.partner_dummy"/>
+        <field name="product_id" ref="delivery_roulier.product_product_dummy"/>
+    </record>
+
+    <!-- DELIVERY CARRIER TEMPLATE OPTION -->
+    <record id="carrier_opt_tmpl_ACK" model="delivery.carrier.template.option">
+        <field name="name">Acknowledgment</field>
+        <field name="code">ACK</field>
+    </record>
+
+    <record id="carrier_opt_tmpl_FCR" model="delivery.carrier.template.option">
+        <field name="name">Free of charges and rights</field>
+        <field name="code">FCR</field>
+    </record>
+
+    <record id="carrier_opt_tmpl_COD" model="delivery.carrier.template.option">
+        <field name="name">Shipping Cash On Delivery</field>
+        <field name="code">COD</field>
+    </record>
+
+    <record id="carrier_opt_tmpl_INS" model="delivery.carrier.template.option">
+        <field name="name">Insurance</field>
+        <field name="code">INS</field>
+    </record>
+
+</data>
+</openerp>
