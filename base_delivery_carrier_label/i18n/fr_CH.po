@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: delivery-carrier (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-22 09:11+0000\n"
-"PO-Revision-Date: 2016-11-25 14:57+0000\n"
+"POT-Creation-Date: 2016-11-29 11:21+0000\n"
+"PO-Revision-Date: 2016-12-01 10:26+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: French (Switzerland) (http://www.transifex.com/oca/OCA-delivery-carrier-8-0/language/fr_CH/)\n"
 "MIME-Version: 1.0\n"
@@ -164,7 +164,7 @@ msgstr "Répertoire"
 #: field:delivery.carrier.template.option,display_name:0
 #: field:shipping.label,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Nom affiché"
 
 #. module: base_delivery_carrier_label
 #: field:shipping.label,datas:0
@@ -225,7 +225,7 @@ msgstr ""
 #: field:delivery.carrier.template.option,__last_update:0
 #: field:shipping.label,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Dernière modification le"
 
 #. module: base_delivery_carrier_label
 #: field:carrier.account,write_uid:0 field:delivery.carrier.option,write_uid:0
@@ -299,7 +299,7 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: field:shipping.label,partner_id:0
 msgid "Partner"
-msgstr ""
+msgstr "Partenaire"
 
 #. module: base_delivery_carrier_label
 #: field:delivery.carrier.option,partner_id:0
