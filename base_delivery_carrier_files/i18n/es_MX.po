@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: delivery-carrier (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-22 09:11+0000\n"
+"POT-Creation-Date: 2016-12-03 01:21+0000\n"
 "PO-Revision-Date: 2016-04-08 13:38+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Spanish (Mexico) (http://www.transifex.com/oca/OCA-delivery-carrier-8-0/language/es_MX/)\n"
@@ -213,7 +213,7 @@ msgstr ""
 #. module: base_delivery_carrier_files
 #: model:ir.model,name:base_delivery_carrier_files.model_stock_move
 msgid "Stock Move"
-msgstr ""
+msgstr "Movimiento bursátil"
 
 #. module: base_delivery_carrier_files
 #: help:stock.picking,carrier_file_generated:0
