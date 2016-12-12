@@ -4,15 +4,11 @@
 
     <!-- PRODUCT  -->
     <record id="product_product_dummy" model="product.product">
-        <field name="default_code">SHIP_DUMMY</field>
-        <field name="type">service</field>
-        <field name="name">Test only - DUMMY</field>
-        <field name="categ_id">1</field>
     </record>
 
     <!-- PARTNER -->
     <record id="partner_dummy" model="res.partner">
-        <field name="name">DUMMY</field>
+        <field name="name">DUMMY Carrier</field>
         <field name="customer" eval="False"/>
         <field name="supplier" eval="True"/>
         <field name="street">parcel street</field>
@@ -24,10 +20,11 @@
     <record id="delivery_carrier_dummy" model="delivery.carrier">
         <field name="name">DUMMY</field>
         <field name="type">dummy</field>
-        <field name="code">DUMMY</field>
-        <field name="use_detailed_pricelist" eval="1"/>
+        <field name="default_code">SHIP_DUMMY</field>
+        <field name="name">Test only - DUMMY</field>
+        <field name="categ_id">1</field>
+
         <field name="partner_id" ref="delivery_roulier.partner_dummy"/>
-        <field name="product_id" ref="delivery_roulier.product_product_dummy"/>
     </record>
 
     <!-- DELIVERY CARRIER TEMPLATE OPTION -->
