@@ -7,6 +7,25 @@
         <field name="country_id" ref="base.us"/>
    </record>
 
+  <record id="partner_dummy" model="res.partner">
+        <field name="name">DUMMY Carrier</field>
+        <field name="customer" eval="False"/>
+        <field name="supplier" eval="True"/>
+        <field name="street">parcel street</field>
+        <field name="zip">99999</field>
+        <field name="city">XXXXXX PFC</field>
+    </record>
+
+    <!-- DELIVERY CARRIER -->
+    <record id="delivery_carrier_dummy" model="delivery.carrier">
+        <field name="name">DUMMY</field>
+        <field name="type">dummy</field>
+        <field name="default_code">SHIP_DUMMY</field>
+        <field name="categ_id">1</field>
+
+        <field name="partner_id" ref="delivery_roulier.partner_dummy"/>
+    </record>
+    
    <!-- <record id="product.product_category_all" model="product.category">
         <field name="hs_code_id" ref="product_harmonized_system.84717050"/>
    </record>
