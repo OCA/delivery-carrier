@@ -13,12 +13,13 @@
         'partner_helper',
         'base_phone',
         'document',
+        'keychain',
         # 'intrastat_product', #not ported yet, customs will not work
         'delivery_carrier_b2c',
     ],
     'website': 'http://www.akretion.com/',
     'data': [
-        #'data/delivery.xml',
+        'data/delivery.xml',
     ],
     'demo': [
         #'demo/product.xml',
