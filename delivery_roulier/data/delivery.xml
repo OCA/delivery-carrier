@@ -3,29 +3,8 @@
 <data>
 
     <!-- PRODUCT  -->
-    <record id="product_product_dummy" model="product.product">
-    </record>
-
     <!-- PARTNER -->
-    <record id="partner_dummy" model="res.partner">
-        <field name="name">DUMMY Carrier</field>
-        <field name="customer" eval="False"/>
-        <field name="supplier" eval="True"/>
-        <field name="street">parcel street</field>
-        <field name="zip">99999</field>
-        <field name="city">XXXXXX PFC</field>
-    </record>
-
-    <!-- DELIVERY CARRIER -->
-    <record id="delivery_carrier_dummy" model="delivery.carrier">
-        <field name="name">DUMMY</field>
-        <field name="type">dummy</field>
-        <field name="default_code">SHIP_DUMMY</field>
-        <field name="name">Test only - DUMMY</field>
-        <field name="categ_id">1</field>
-
-        <field name="partner_id" ref="delivery_roulier.partner_dummy"/>
-    </record>
+  
 
     <!-- DELIVERY CARRIER TEMPLATE OPTION -->
     <record id="carrier_opt_tmpl_ACK" model="delivery.carrier.template.option">

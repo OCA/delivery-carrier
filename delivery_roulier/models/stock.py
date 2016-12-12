@@ -104,6 +104,10 @@ class StockPicking(models.Model):
         pass
 
     @implemented_by_carrier
+    def _get_account(self, package):
+        pass
+
+    @implemented_by_carrier
     def _get_auth(self, package):
         pass
 
@@ -157,11 +161,24 @@ class StockPicking(models.Model):
         Returns:
             a dict with login and password keys
         """
+        account = self._get_account(package)
         auth = {
-            'login': '',
-            'password': '',
+            'login': account.login,
+            'password': account.get_password(),
         }
         return auth
+
+    @api.multi
+    def _roulier_get_account(self, package):
+        """Returns an 'account'.
+
+        By default, the first account encoutered for this type.
+        Depending on your case, you may store it on the picking or
+        compute it from your business rules."""
+
+        accounts = self.env['keychain.account'].retrieve(
+            [['namespace', '=', 'roulier_%s' % self.carrier_type]])
+        return accounts[0]
 
     def _roulier_get_service(self, package):
         shipping_date = self._get_shipping_date(package)
