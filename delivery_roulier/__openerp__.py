@@ -14,6 +14,7 @@
         'base_phone',
         'document',
         'keychain',
+        'base_suspend_security',
         # 'intrastat_product', #not ported yet, customs will not work
         'delivery_carrier_b2c',
     ],
