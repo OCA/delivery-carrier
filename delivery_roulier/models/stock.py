@@ -175,8 +175,12 @@ class StockPicking(models.Model):
         By default, the first account encoutered for this type.
         Depending on your case, you may store it on the picking or
         compute it from your business rules."""
-
-        accounts = self.env['keychain.account'].retrieve(
+        keychain = self.env['keychain.account']
+        if self.env.user.has_group('stock.group_stock_user'):
+            retrieve = keychain.suspend_security().retrieve
+        else:
+            retrieve = keychain.retrieve
+        accounts = retrieve(
             [['namespace', '=', 'roulier_%s' % self.carrier_type]])
         return accounts[0]
 
