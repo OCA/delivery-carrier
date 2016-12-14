@@ -15,7 +15,7 @@
         'document',
         'keychain',
         'base_suspend_security',
-        # 'intrastat_product', #not ported yet, customs will not work
+        # 'intrastat_product', # not ported yet, customs will not work
         'delivery_carrier_b2c',
     ],
     'website': 'http://www.akretion.com/',
@@ -23,7 +23,7 @@
         'data/delivery.xml',
     ],
     'demo': [
-        #'demo/product.xml',
+        # 'demo/product.xml',
     ],
     'external_dependencies': {
         'python': [
