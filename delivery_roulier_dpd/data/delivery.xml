@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data noupdate="1">
+
+
+    <!-- PARTNER -->
+    <record id="partner_dpd" model="res.partner">
+        <field name="name">Dpd</field>
+        <field name="is_company" eval="True"/>
+        <field name="customer" eval="False"/>
+        <field name="supplier" eval="True"/>
+        <field name="street">ZI Artois Flandres </field>
+        <field name="zip">62138</field>
+        <field name="city">DOUVRIN</field>
+    </record>
+
+
+
+        <!-- DELIVERY CARRIER -->
+    <record id="delivery_carrier_dpd_classic" model="delivery.carrier">
+        <field name="name">DPD Classic max 30kg</field>
+        <field name="default_code">DPD</field>
+        <field name="code">DPD_Classic</field>
+        <field name="carrier_type">dpd</field>
+        <field name="use_detailed_pricelist" eval="1"/>
+        <field name="deposit_slip" eval="True"/>
+        <field name="partner_id" ref="delivery_roulier_dpd.partner_dpd"/>
+    </record>
+
+     <record id="delivery_carrier_dpd_Relais" model="delivery.carrier">
+        <field name="name">DPD Relais max 20kg</field>
+        <field name="default_code">DPD_Relais</field>
+        <field name="code">DPD_Relais</field>
+        <field name="carrier_type">dpd</field>
+        <field name="use_detailed_pricelist" eval="1"/>
+        <field name="deposit_slip" eval="True"/>
+        <field name="partner_id" ref="delivery_roulier_dpd.partner_dpd"/>
+    </record>
+
+
+     <record id="delivery_carrier_dpd_Predict" model="delivery.carrier">
+        <field name="name">DPD Predict max 20kg</field>
+        <field name="default_code">DPD_Predict</field>
+        <field name="code">DPD_Predict</field>
+        <field name="carrier_type">dpd</field>
+        <field name="use_detailed_pricelist" eval="1"/>
+        <field name="deposit_slip" eval="True"/>
+        <field name="partner_id" ref="delivery_roulier_dpd.partner_dpd"/>
+    </record>
+
+</data>
+</openerp>
