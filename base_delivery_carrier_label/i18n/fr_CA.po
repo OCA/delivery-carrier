@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-27 15:17+0000\n"
-"PO-Revision-Date: 2016-09-27 15:17+0000\n"
+"POT-Creation-Date: 2016-12-24 01:22+0000\n"
+"PO-Revision-Date: 2016-12-24 01:22+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
 "Language-Team: French (Canada) (https://www.transifex.com/oca/teams/23907/fr_CA/)\n"
 "MIME-Version: 1.0\n"
@@ -116,7 +116,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_template_option_create_uid
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Créé par"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account_create_date
@@ -124,7 +124,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_template_option_create_date
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_create_date
 msgid "Created on"
-msgstr ""
+msgstr "Créé le"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_db_datas
@@ -165,7 +165,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_template_option_display_name
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Afficher le nom"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_datas
@@ -198,7 +198,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_template_option_id
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_id
 msgid "ID"
-msgstr ""
+msgstr "Identifiant"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_delivery_carrier_option_mandatory
@@ -236,7 +236,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_template_option_write_uid
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Dernière mise à jour par"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account_write_date
@@ -244,7 +244,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_template_option_write_date
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Dernière mise à jour le"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option_mandatory
