@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: delivery-carrier (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-22 09:11+0000\n"
-"PO-Revision-Date: 2016-11-25 14:57+0000\n"
+"POT-Creation-Date: 2016-12-24 01:19+0000\n"
+"PO-Revision-Date: 2016-12-30 21:31+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Turkish (http://www.transifex.com/oca/OCA-delivery-carrier-8-0/language/tr/)\n"
 "MIME-Version: 1.0\n"
@@ -68,7 +68,7 @@ msgstr ""
 #. module: delivery_carrier_deposit
 #: field:deposit.slip,company_id:0
 msgid "Company"
-msgstr ""
+msgstr "Şirket"
 
 #. module: delivery_carrier_deposit
 #: view:deposit.slip:delivery_carrier_deposit.view_deposit_slip_form
@@ -78,7 +78,7 @@ msgstr ""
 #. module: delivery_carrier_deposit
 #: view:website:delivery_carrier_deposit.report_generic_deposit_slip
 msgid "Country"
-msgstr ""
+msgstr "Ülke"
 
 #. module: delivery_carrier_deposit
 #: view:delivery.deposit.wizard:delivery_carrier_deposit.view_wiz_create_deposit
@@ -160,7 +160,7 @@ msgstr ""
 #: field:delivery.deposit.wizard,display_name:0
 #: field:deposit.slip,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Görünen İsim"
 
 #. module: delivery_carrier_deposit
 #: selection:deposit.slip,state:0
@@ -192,7 +192,7 @@ msgstr "Grupla"
 msgid ""
 "Holds the Chatter summary (number of messages, ...). This summary is "
 "directly in html format in order to be inserted in kanban views."
-msgstr ""
+msgstr "Sohbet özetini tutar (kaç mesa vs) Bu özet kanban görünümleri gibi yerlerde kullanılmak için doğrudan HTML formatındadır. "
 
 #. module: delivery_carrier_deposit
 #: field:delivery.deposit.wizard,id:0 field:deposit.slip,id:0
@@ -218,7 +218,7 @@ msgstr "Son mesaj tarihi"
 #: field:delivery.deposit.wizard,__last_update:0
 #: field:deposit.slip,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Son değişiklik"
 
 #. module: delivery_carrier_deposit
 #: field:delivery.deposit.wizard,write_uid:0 field:deposit.slip,write_uid:0
@@ -238,7 +238,7 @@ msgstr "Mesajlar"
 #. module: delivery_carrier_deposit
 #: help:deposit.slip,message_ids:0
 msgid "Messages and communication history"
-msgstr ""
+msgstr "Mesaj ve iletişim geçmişi"
 
 #. module: delivery_carrier_deposit
 #: field:deposit.slip,name:0
@@ -332,7 +332,7 @@ msgstr ""
 #. module: delivery_carrier_deposit
 #: field:deposit.slip,carrier_type:0
 msgid "Type"
-msgstr ""
+msgstr "Tipi"
 
 #. module: delivery_carrier_deposit
 #: field:deposit.slip,message_unread:0
@@ -342,7 +342,7 @@ msgstr "Okunmamış mesajlar"
 #. module: delivery_carrier_deposit
 #: view:website:delivery_carrier_deposit.report_generic_deposit_slip
 msgid "Weight"
-msgstr ""
+msgstr "Ağırlık"
 
 #. module: delivery_carrier_deposit
 #: model:ir.model,name:delivery_carrier_deposit.model_delivery_deposit_wizard

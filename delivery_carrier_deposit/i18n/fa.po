@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: delivery-carrier (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-22 09:11+0000\n"
-"PO-Revision-Date: 2016-11-16 09:12+0000\n"
+"POT-Creation-Date: 2016-12-24 01:19+0000\n"
+"PO-Revision-Date: 2016-12-27 08:25+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Persian (http://www.transifex.com/oca/OCA-delivery-carrier-8-0/language/fa/)\n"
 "MIME-Version: 1.0\n"
@@ -45,7 +45,7 @@ msgstr ""
 #. module: delivery_carrier_deposit
 #: view:delivery.deposit.wizard:delivery_carrier_deposit.view_wiz_create_deposit
 msgid "Cancel"
-msgstr ""
+msgstr "لغو"
 
 #. module: delivery_carrier_deposit
 #: model:ir.model,name:delivery_carrier_deposit.model_delivery_carrier

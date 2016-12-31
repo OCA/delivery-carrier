@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: delivery-carrier (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-22 09:11+0000\n"
-"PO-Revision-Date: 2016-11-25 14:57+0000\n"
+"POT-Creation-Date: 2016-12-24 01:19+0000\n"
+"PO-Revision-Date: 2016-12-30 22:02+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Turkish (http://www.transifex.com/oca/OCA-delivery-carrier-8-0/language/tr/)\n"
 "MIME-Version: 1.0\n"
@@ -46,7 +46,7 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: field:shipping.label,name:0
 msgid "Attachment Name"
-msgstr ""
+msgstr "Ek Adı"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_carrier_account
@@ -56,7 +56,7 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: help:shipping.label,type:0
 msgid "Binary File or URL"
-msgstr ""
+msgstr "Binary Dosya ya da URL"
 
 #. module: base_delivery_carrier_label
 #: help:delivery.carrier.option,by_default:0
@@ -91,12 +91,12 @@ msgstr ""
 #: field:delivery.carrier.template.option,code:0
 #: field:stock.picking,carrier_code:0
 msgid "Code"
-msgstr ""
+msgstr "Kod"
 
 #. module: base_delivery_carrier_label
 #: field:shipping.label,company_id:0
 msgid "Company"
-msgstr ""
+msgstr "Şirket"
 
 #. module: base_delivery_carrier_label
 #: view:stock.picking:base_delivery_carrier_label.view_picking_withcarrier_out_form
@@ -122,7 +122,7 @@ msgstr "Oluşturuldu"
 #. module: base_delivery_carrier_label
 #: field:shipping.label,db_datas:0
 msgid "Database Data"
-msgstr ""
+msgstr "Veritabanı Verisi"
 
 #. module: base_delivery_carrier_label
 #: help:carrier.account,file_format:0
@@ -164,12 +164,12 @@ msgstr ""
 #: field:delivery.carrier.template.option,display_name:0
 #: field:shipping.label,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Görünen İsim"
 
 #. module: base_delivery_carrier_label
 #: field:shipping.label,datas:0
 msgid "File Content"
-msgstr ""
+msgstr "Dosya İçeriği"
 
 #. module: base_delivery_carrier_label
 #: field:carrier.account,file_format:0
@@ -184,7 +184,7 @@ msgstr "Dosya adı"
 #. module: base_delivery_carrier_label
 #: field:shipping.label,file_size:0
 msgid "File Size"
-msgstr ""
+msgstr "Dosya Boyu"
 
 #. module: base_delivery_carrier_label
 #: field:shipping.label,file_type_icon:0
@@ -194,7 +194,7 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: field:shipping.label,file_type:0
 msgid "File type"
-msgstr ""
+msgstr "Dosya tipi"
 
 #. module: base_delivery_carrier_label
 #: field:carrier.account,id:0 field:delivery.carrier.option,id:0
@@ -225,7 +225,7 @@ msgstr ""
 #: field:delivery.carrier.template.option,__last_update:0
 #: field:shipping.label,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Son değişiklik"
 
 #. module: base_delivery_carrier_label
 #: field:carrier.account,write_uid:0 field:delivery.carrier.option,write_uid:0
@@ -268,18 +268,18 @@ msgstr ""
 #: field:delivery.carrier,available_option_ids:0
 #: field:delivery.carrier.option,tmpl_option_id:0
 msgid "Option"
-msgstr ""
+msgstr "Opsiyon"
 
 #. module: base_delivery_carrier_label
 #: view:delivery.carrier:base_delivery_carrier_label.view_delivery_carrier_form
 #: field:stock.picking,option_ids:0
 msgid "Options"
-msgstr ""
+msgstr "Seçenekler"
 
 #. module: base_delivery_carrier_label
 #: field:shipping.label,user_id:0
 msgid "Owner"
-msgstr ""
+msgstr "Sahibi"
 
 #. module: base_delivery_carrier_label
 #: field:shipping.label,package_id:0
@@ -330,7 +330,7 @@ msgstr "Kaynak ID"
 #. module: base_delivery_carrier_label
 #: field:shipping.label,res_model:0
 msgid "Resource Model"
-msgstr ""
+msgstr "Kaynak Model"
 
 #. module: base_delivery_carrier_label
 #: field:shipping.label,res_name:0
@@ -353,17 +353,17 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: field:shipping.label,store_fname:0
 msgid "Stored Filename"
-msgstr ""
+msgstr "Kaydedilen Dosya adı"
 
 #. module: base_delivery_carrier_label
 #: help:shipping.label,res_model:0
 msgid "The database object this attachment will be attached to"
-msgstr ""
+msgstr "Bu ekin ekleneceği veritabanı nesnesi"
 
 #. module: base_delivery_carrier_label
 #: help:shipping.label,res_id:0
 msgid "The record id this is attached to"
-msgstr ""
+msgstr "Bu dosyanın eklendiği kayıt id'si"
 
 #. module: base_delivery_carrier_label
 #: help:stock.quant.package,weight:0
@@ -376,17 +376,17 @@ msgstr ""
 #: field:carrier.account,type:0 field:delivery.carrier,type:0
 #: field:shipping.label,type:0
 msgid "Type"
-msgstr ""
+msgstr "Tipi"
 
 #. module: base_delivery_carrier_label
 #: field:shipping.label,url:0
 msgid "Url"
-msgstr ""
+msgstr "Url"
 
 #. module: base_delivery_carrier_label
 #: field:stock.pack.operation,weight:0 field:stock.quant.package,weight:0
 msgid "Weight"
-msgstr ""
+msgstr "Ağırlık"
 
 #. module: base_delivery_carrier_label
 #: help:stock.pack.operation,weight:0

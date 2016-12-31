@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: delivery-carrier (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-22 09:11+0000\n"
-"PO-Revision-Date: 2016-11-22 12:24+0000\n"
+"POT-Creation-Date: 2016-12-24 01:19+0000\n"
+"PO-Revision-Date: 2016-12-27 08:25+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: French (Canada) (http://www.transifex.com/oca/OCA-delivery-carrier-8-0/language/fr_CA/)\n"
 "MIME-Version: 1.0\n"
@@ -45,7 +45,7 @@ msgstr ""
 #. module: delivery_carrier_deposit
 #: view:delivery.deposit.wizard:delivery_carrier_deposit.view_wiz_create_deposit
 msgid "Cancel"
-msgstr ""
+msgstr "Annuler"
 
 #. module: delivery_carrier_deposit
 #: model:ir.model,name:delivery_carrier_deposit.model_delivery_carrier
@@ -95,13 +95,13 @@ msgstr ""
 #. module: delivery_carrier_deposit
 #: field:delivery.deposit.wizard,create_uid:0 field:deposit.slip,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Créé par"
 
 #. module: delivery_carrier_deposit
 #: field:delivery.deposit.wizard,create_date:0
 #: field:deposit.slip,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Créé le"
 
 #. module: delivery_carrier_deposit
 #: view:website:delivery_carrier_deposit.report_generic_deposit_slip
@@ -160,7 +160,7 @@ msgstr ""
 #: field:delivery.deposit.wizard,display_name:0
 #: field:deposit.slip,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Afficher le nom"
 
 #. module: delivery_carrier_deposit
 #: selection:deposit.slip,state:0
@@ -197,7 +197,7 @@ msgstr ""
 #. module: delivery_carrier_deposit
 #: field:delivery.deposit.wizard,id:0 field:deposit.slip,id:0
 msgid "ID"
-msgstr ""
+msgstr "Identifiant"
 
 #. module: delivery_carrier_deposit
 #: help:deposit.slip,message_unread:0
@@ -223,12 +223,12 @@ msgstr ""
 #. module: delivery_carrier_deposit
 #: field:delivery.deposit.wizard,write_uid:0 field:deposit.slip,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Dernière mise à jour par"
 
 #. module: delivery_carrier_deposit
 #: field:delivery.deposit.wizard,write_date:0 field:deposit.slip,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Dernière mise à jour le"
 
 #. module: delivery_carrier_deposit
 #: field:deposit.slip,message_ids:0
