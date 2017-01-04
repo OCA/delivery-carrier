@@ -68,4 +68,4 @@ class StockQuantPackage(models.Model):
 
     @api.multi
     def _dpd_dropoff_site(self, picking):
-        return 'P22895'
+        return 'P22895'  # TODO implement this

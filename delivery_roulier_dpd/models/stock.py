@@ -32,12 +32,3 @@ class StockPicking(models.Model):
             # don't send in the past
             shipping_date = tomorrow
         return shipping_date.strftime('%Y/%m/%d')
-
-    @api.multi
-    def _dpd_get_auth(self, package):
-        self.ensure_one()
-        account = self._get_account(package)
-        return {
-            'login': account.login,
-            'password': account.get_password()
-        }
