@@ -2,9 +2,9 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-================
-Delivery Deposit
-================
+=====================
+Delivery Deposit Slip
+=====================
 
 This module allows to gather delivery orders by *delivery method*
 and delivery date in a *Deposit Slip*.
