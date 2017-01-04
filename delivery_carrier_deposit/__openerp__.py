@@ -20,7 +20,7 @@
 ##############################################################################
 
 {
-    'name': 'Delivery Deposit Slip',
+    'name': 'Delivery Deposit',
     'version': '9.0.0.1.0',
     'category': 'Delivery',
     'author': "Akretion,Odoo Community Association (OCA)",
