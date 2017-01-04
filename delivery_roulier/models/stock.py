@@ -168,13 +168,15 @@ class StockPicking(models.Model):
         }
         return auth
 
-    @api.multi
     def _roulier_get_account(self, package):
-        """Returns an 'account'.
+        """Return an 'account'.
 
         By default, the first account encoutered for this type.
         Depending on your case, you may store it on the picking or
-        compute it from your business rules."""
+        compute it from your business rules.
+
+        Accounts are resolved at runtime (can be != for dev/prod)
+        """
         keychain = self.env['keychain.account']
         if self.env.user.has_group('stock.group_stock_user'):
             retrieve = keychain.suspend_security().retrieve
