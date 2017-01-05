@@ -220,7 +220,9 @@ class StockPicking(models.Model):
 
     @api.model
     def _roulier_map_options(self):
-        """ Customize this mapping with your own carrier as this example:
+        """Customize this mapping with your own carrier.
+
+        Like
             return {
                 'FCR': 'fcr',
                 'COD': 'cod',
@@ -267,8 +269,14 @@ class StockPicking(models.Model):
                     address[elm] = partner[elm]
         if not address.get('company', False) and partner.parent_id.is_company:
             address['company'] = partner.parent_id.name
-        # Roulier needs street1 not street
+        # Roulier needs street1 (mandatory) not street
         address['street1'] = partner.street
         # Codet ISO 3166-1-alpha-2 (2 letters code)
         address['country'] = partner.country_id.code
+
+        phone = address.get('mobile', address.get('phone'))
+        if phone:
+            # TODO Fix this in base_phone
+            address['phone'] = phone.replace(u'\u00A0', ' ')
+
         return address
