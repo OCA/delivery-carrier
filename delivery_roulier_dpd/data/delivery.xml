@@ -22,6 +22,7 @@
         <field name="default_code">DPD</field>
         <field name="code">DPD_Classic</field>
         <field name="carrier_type">dpd</field>
+        <field name="product_type">service</field>
         <field name="use_detailed_pricelist" eval="1"/>
         <field name="deposit_slip" eval="True"/>
         <field name="partner_id" ref="delivery_roulier_dpd.partner_dpd"/>
@@ -32,6 +33,7 @@
         <field name="default_code">DPD_Relais</field>
         <field name="code">DPD_Relais</field>
         <field name="carrier_type">dpd</field>
+        <field name="product_type">service</field>
         <field name="use_detailed_pricelist" eval="1"/>
         <field name="deposit_slip" eval="True"/>
         <field name="partner_id" ref="delivery_roulier_dpd.partner_dpd"/>
@@ -43,6 +45,7 @@
         <field name="default_code">DPD_Predict</field>
         <field name="code">DPD_Predict</field>
         <field name="carrier_type">dpd</field>
+        <field name="product_type">service</field>
         <field name="use_detailed_pricelist" eval="1"/>
         <field name="deposit_slip" eval="True"/>
         <field name="partner_id" ref="delivery_roulier_dpd.partner_dpd"/>
