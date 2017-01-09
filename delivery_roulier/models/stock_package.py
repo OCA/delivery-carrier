@@ -193,11 +193,13 @@ class StockQuantPackage(models.Model):
             dict.'articles' : list with qty, weight, hs_code
             int category: gift 1, sample 2, commercial 3, ...
         """
-        try:
-            self.env['product.template'].get_hs_code_recursively
-        except AttributeError:
-            raise UserError(_("Missing module 'intrastat' for customs"))
+        def ensure_hs_codes_available():
+            try:
+                self.env['product.template'].get_hs_code_recursively
+            except AttributeError:
+                raise UserError(_("Missing module 'intrastat' for customs"))
 
+        ensure_hs_codes_available()
         articles = []
         for operation in self.get_operations():
             article = {}
