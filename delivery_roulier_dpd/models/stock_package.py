@@ -69,3 +69,7 @@ class StockQuantPackage(models.Model):
     @api.multi
     def _dpd_dropoff_site(self, picking):
         return 'P22895'  # TODO implement this
+
+    def _dpd_should_include_customs(self, picking):
+        """DPD does not return customs documents"""
+        return False
