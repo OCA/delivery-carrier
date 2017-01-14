@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: delivery-carrier (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-22 09:11+0000\n"
-"PO-Revision-Date: 2016-11-25 14:55+0000\n"
+"POT-Creation-Date: 2016-12-31 02:46+0000\n"
+"PO-Revision-Date: 2017-01-13 09:20+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-delivery-carrier-8-0/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -50,7 +50,7 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: field:shipping.label,name:0
 msgid "Attachment Name"
-msgstr ""
+msgstr "Nombre del adjunto"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_carrier_account
@@ -126,7 +126,7 @@ msgstr "Creado en"
 #. module: base_delivery_carrier_label
 #: field:shipping.label,db_datas:0
 msgid "Database Data"
-msgstr ""
+msgstr "Fecha de la base de datos"
 
 #. module: base_delivery_carrier_label
 #: help:carrier.account,file_format:0
@@ -183,12 +183,12 @@ msgstr "Formato Archivo"
 #. module: base_delivery_carrier_label
 #: field:shipping.label,datas_fname:0
 msgid "File Name"
-msgstr ""
+msgstr "Nombre del archivo"
 
 #. module: base_delivery_carrier_label
 #: field:shipping.label,file_size:0
 msgid "File Size"
-msgstr ""
+msgstr "Tamaño del archivo"
 
 #. module: base_delivery_carrier_label
 #: field:shipping.label,file_type_icon:0
@@ -385,7 +385,7 @@ msgstr "Tipo"
 #. module: base_delivery_carrier_label
 #: field:shipping.label,url:0
 msgid "Url"
-msgstr ""
+msgstr "Url"
 
 #. module: base_delivery_carrier_label
 #: field:stock.pack.operation,weight:0 field:stock.quant.package,weight:0

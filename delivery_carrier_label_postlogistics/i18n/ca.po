@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: delivery-carrier (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-22 09:11+0000\n"
-"PO-Revision-Date: 2016-11-25 14:57+0000\n"
+"POT-Creation-Date: 2016-12-31 02:46+0000\n"
+"PO-Revision-Date: 2017-01-13 09:22+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Catalan (http://www.transifex.com/oca/OCA-delivery-carrier-8-0/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -230,7 +230,7 @@ msgstr ""
 #: field:postlogistics.license,display_name:0
 #: field:postlogistics.service.group,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Veure el nom"
 
 #. module: delivery_carrier_label_postlogistics
 #: field:postlogistics.config.settings,office:0
@@ -314,7 +314,7 @@ msgstr ""
 #: field:postlogistics.license,__last_update:0
 #: field:postlogistics.service.group,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Darrera modificació el"
 
 #. module: delivery_carrier_label_postlogistics
 #: field:postlogistics.config.settings,write_uid:0
@@ -450,7 +450,7 @@ msgstr ""
 #. module: delivery_carrier_label_postlogistics
 #: field:postlogistics.license,sequence:0
 msgid "Sequence"
-msgstr ""
+msgstr "Seqüència"
 
 #. module: delivery_carrier_label_postlogistics
 #: help:delivery.carrier,postlogistics_service_group_id:0
