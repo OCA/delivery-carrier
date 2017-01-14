@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: delivery-carrier (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-22 09:11+0000\n"
+"POT-Creation-Date: 2016-12-31 02:46+0000\n"
 "PO-Revision-Date: 2016-04-08 13:38+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Catalan (http://www.transifex.com/oca/OCA-delivery-carrier-8-0/language/ca/)\n"
@@ -95,7 +95,7 @@ msgstr ""
 #: field:delivery.carrier.file,display_name:0
 #: field:delivery.carrier.file.generate,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Veure el nom"
 
 #. module: base_delivery_carrier_files
 #: field:delivery.carrier.file,export_path:0
@@ -164,7 +164,7 @@ msgstr ""
 #: field:delivery.carrier.file,__last_update:0
 #: field:delivery.carrier.file.generate,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Darrera modificació el"
 
 #. module: base_delivery_carrier_files
 #: field:delivery.carrier.file,write_uid:0
@@ -230,7 +230,7 @@ msgstr ""
 #. module: base_delivery_carrier_files
 #: field:delivery.carrier.file,type:0
 msgid "Type"
-msgstr ""
+msgstr "Tipus"
 
 #. module: base_delivery_carrier_files
 #: field:delivery.carrier.file,write_mode:0
