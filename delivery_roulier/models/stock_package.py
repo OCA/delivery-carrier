@@ -4,6 +4,7 @@
 
 from functools import wraps
 import logging
+import base64
 
 from openerp import models, api
 from openerp.tools.translate import _
@@ -163,7 +164,7 @@ class StockQuantPackage(models.Model):
             'package_id': self.id,
         }
         if label.get('data'):
-            data['datas'] = label['data'].encode('base64')
+            data['datas'] = base64.b64encode(label['data'])
             data['type'] = 'binary'
         return data
 
