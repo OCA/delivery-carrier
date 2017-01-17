@@ -29,6 +29,9 @@ class StockQuantPackage(models.Model):
             request['service']['dropOffLocation'] = \
                 self._dpd_dropoff_site(picking)
             request['service']['notifications'] = 'No'
+        if picking.carrier_code == "DPD_Classic":
+            request['service']['notifications'] = 'AutomaticEmail'
+
         return request
 
     def _dpd_after_call(self, picking, response):
