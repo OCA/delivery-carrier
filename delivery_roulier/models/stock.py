@@ -152,6 +152,7 @@ class StockPicking(models.Model):
         if not packages:
             # It's not our responsibility to create the packages
             raise UserError(_('No package found for this picking'))
+        self.number_of_packages = len(packages)
         return packages._generate_labels(self)
 
     # default implementations
