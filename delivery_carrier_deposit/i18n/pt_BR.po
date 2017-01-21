@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: delivery-carrier (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-31 02:46+0000\n"
-"PO-Revision-Date: 2017-01-11 15:39+0000\n"
+"POT-Creation-Date: 2017-01-14 02:35+0000\n"
+"PO-Revision-Date: 2017-01-19 20:17+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/OCA-delivery-carrier-8-0/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -111,7 +111,7 @@ msgstr ""
 #. module: delivery_carrier_deposit
 #: help:deposit.slip,message_last_post:0
 msgid "Date of the last message posted on the record."
-msgstr ""
+msgstr "Data da última mensagem postada no registro"
 
 #. module: delivery_carrier_deposit
 #: view:website:delivery_carrier_deposit.report_generic_deposit_slip
@@ -175,7 +175,7 @@ msgstr "Rascunho"
 #. module: delivery_carrier_deposit
 #: field:deposit.slip,message_follower_ids:0
 msgid "Followers"
-msgstr ""
+msgstr "Seguidores"
 
 #. module: delivery_carrier_deposit
 #: model:ir.actions.report.xml,name:delivery_carrier_deposit.report_deposit_slip
@@ -202,7 +202,7 @@ msgstr "ID"
 #. module: delivery_carrier_deposit
 #: help:deposit.slip,message_unread:0
 msgid "If checked new messages require your attention."
-msgstr ""
+msgstr "Se marcado novas mensagens requerem sua atenção."
 
 #. module: delivery_carrier_deposit
 #: field:deposit.slip,message_is_follower:0
@@ -212,7 +212,7 @@ msgstr ""
 #. module: delivery_carrier_deposit
 #: field:deposit.slip,message_last_post:0
 msgid "Last Message Date"
-msgstr ""
+msgstr "Última data de mensagem"
 
 #. module: delivery_carrier_deposit
 #: field:delivery.deposit.wizard,__last_update:0
@@ -233,7 +233,7 @@ msgstr "Última atualização em"
 #. module: delivery_carrier_deposit
 #: field:deposit.slip,message_ids:0
 msgid "Messages"
-msgstr ""
+msgstr "Mensagens"
 
 #. module: delivery_carrier_deposit
 #: help:deposit.slip,message_ids:0
@@ -337,7 +337,7 @@ msgstr "Tipo"
 #. module: delivery_carrier_deposit
 #: field:deposit.slip,message_unread:0
 msgid "Unread Messages"
-msgstr ""
+msgstr "Mensagens não lidas"
 
 #. module: delivery_carrier_deposit
 #: view:website:delivery_carrier_deposit.report_generic_deposit_slip

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: delivery-carrier (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-31 02:46+0000\n"
+"POT-Creation-Date: 2017-01-14 02:35+0000\n"
 "PO-Revision-Date: 2016-04-08 13:38+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Catalan (http://www.transifex.com/oca/OCA-delivery-carrier-8-0/language/ca/)\n"
@@ -181,7 +181,7 @@ msgstr "Darrera Actualització el"
 #. module: base_delivery_carrier_files
 #: field:delivery.carrier.file,name:0
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 #. module: base_delivery_carrier_files
 #: code:addons/base_delivery_carrier_files/wizard/generate_carrier_files.py:44
@@ -213,7 +213,7 @@ msgstr ""
 #. module: base_delivery_carrier_files
 #: model:ir.model,name:base_delivery_carrier_files.model_stock_move
 msgid "Stock Move"
-msgstr ""
+msgstr "Moure l'estoc"
 
 #. module: base_delivery_carrier_files
 #: help:stock.picking,carrier_file_generated:0
