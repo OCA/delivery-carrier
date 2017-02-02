@@ -11,11 +11,11 @@
     'category': 'Warehouse',
     'depends': [
         'partner_helper',
-        'base_phone',
+        'base_phone',  # from oca/telephony
         'document',
-        'keychain',
+        'keychain',  # from oca/server-tools
         'base_suspend_security',
-        # 'intrastat_product', # not ported yet, customs will not work
+        'product_harmonized_system',  # from oca/intrastat
         'delivery_carrier_b2c',
     ],
     'website': 'http://www.akretion.com/',
@@ -27,7 +27,7 @@
     ],
     'external_dependencies': {
         'python': [
-            'roulier',  # 'git+https://github.com/akretion/roulier.git'
+            'roulier',  # '>0.2'
         ],
     },
     'tests': [],
