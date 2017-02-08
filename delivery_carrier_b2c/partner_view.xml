@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
-  <data>
+<odoo>
 
 <!--
   delivery_carrier_tnt for OpenERP
@@ -10,24 +9,28 @@
 
         <!-- INHERITED VIEW FOR THE OBJECT : res.partner -->
 
-        <record id="view_partner_form" model="ir.ui.view">
+   <record id="view_partner_form" model="ir.ui.view">
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form" />
             <field name="arch" type="xml">
-                <field name="comment" position="before">
+
+                <page name="sales_purchases" position="after">
+                    <page string="Additional Address" name="additional_address" >
                     <group>
                         <field name="use_b2c_info"/>
+                    </group>
                         <group colspan="4" attrs="{'invisible': [('use_b2c_info','=', False)]}">
-                                <group name="address" col="4">
+                                <group>
                                     <field name="door_code"/>
                                     <field name="door_code2"/>
+                                </group>
+                                <group>
                                     <field name="intercom"/>
                                 </group>
                         </group>
-                    </group>
-                </field>
+                    </page>
+                </page>
             </field>
-        </record>
+   </record>
 
-  </data>
-</openerp>
+</odoo>
