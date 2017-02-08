@@ -6,14 +6,13 @@
 from odoo import models, fields
 
 
-class res_partner(models.Model):
+class ResPartner(models.Model):
     _inherit = "res.partner"
 
-    use_b2c_info= fields.Boolean(
-            'Advanced address',
-            help="Display additional information for home delivery (b2c)")
-    door_code= fields.Char('Door Code')
-    door_code2= fields.Char('Door Code 2')
-    intercom= fields.Char('Intercom',
-                        help="Informations for Intercom such as name "
-                        "or number on the intercom")
+    use_b2c_info = fields.Boolean('Advanced address',
+                                  help="Display additional information for "
+                                       "home delivery (b2c)")
+    door_code = fields.Char('Door Code')
+    door_code2 = fields.Char('Door Code 2')
+    intercom = fields.Char('Intercom', help="Informations for Intercom such as"
+                           " name or number on the intercom")

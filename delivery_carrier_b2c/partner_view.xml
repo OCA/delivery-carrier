@@ -1,21 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-<!--
-  delivery_carrier_tnt for OpenERP
-  Copyright (C) 2013 Akretion Chafique DELLI <chafique.dellil@akretion.com>
-  The licence is in the file __openerp__.py
--->
-
-        <!-- INHERITED VIEW FOR THE OBJECT : res.partner -->
-
    <record id="view_partner_form" model="ir.ui.view">
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form" />
             <field name="arch" type="xml">
-
-                <page name="sales_purchases" position="after">
-                    <page string="Additional Address" name="additional_address" >
+                <xpath expr="//page[@name='internal_notes']//field[@name='comment']" position="before">
                     <group>
                         <field name="use_b2c_info"/>
                     </group>
@@ -28,8 +18,7 @@
                                     <field name="intercom"/>
                                 </group>
                         </group>
-                    </page>
-                </page>
+                    </xpath>
             </field>
    </record>
 
