@@ -6,7 +6,7 @@
 Delivery Carrier B2C
 =====================
 
-* Add specific fields to partner for delivery purpose
+* This module adds specific fields to partner for delivery purposes. Some carrier services offer to deliver packages to any place in a country (e.g. 'So Colissimo' in France). In this case addition fields are required with a more complete view on partner
 
 .. figure:: path/to/local/image.png
    :alt: alternative description
