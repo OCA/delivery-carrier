@@ -5,7 +5,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import logging
-from openerp import models, api
+from openerp import models
 from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
 
 from datetime import datetime, timedelta
