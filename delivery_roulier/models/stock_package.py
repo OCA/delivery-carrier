@@ -8,12 +8,15 @@ import base64
 
 from openerp import models, api
 from openerp.tools.translate import _
-from openerp.exceptions import Warning as UserError
+from openerp.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
 try:
     from roulier import roulier
-    from roulier.exception import InvalidApiInput
+    from roulier.exception import (
+        InvalidApiInput,
+        CarrierError
+    )
 except ImportError:
     _logger.debug('Cannot `import roulier`.')
 
@@ -90,7 +93,11 @@ class StockQuantPackage(models.Model):
         pass
 
     @implemented_by_carrier
-    def _error_handling(self, payload, response):
+    def _carrier_error_handling(self, payload, response):
+        pass
+
+    @implemented_by_carrier
+    def _invalid_api_input_handling(self, payload, response):
         pass
 
     @implemented_by_carrier
@@ -143,13 +150,10 @@ class StockQuantPackage(models.Model):
             # api call
             ret = roulier_instance.get_label(payload)
         except InvalidApiInput as e:
-            raise UserError(self._error_handling(payload, e.message))
-        except Exception as e:
-            raise UserError(e.message)
+            raise UserError(self._invalid_api_input_handling(payload, e))
+        except CarrierError as e:
+            raise UserError(self._carrier_error_handling(payload, e))
 
-        # minimum error handling
-        if ret.get('status', '') == 'error':
-            raise UserError(self._error_handling(payload, ret))
         # give result to someone else
         return self._after_call(picking, ret)
 
@@ -229,6 +233,9 @@ class StockQuantPackage(models.Model):
         return sender.country_id.code != receiver.country_id.code
 
     @api.model
-    def _roulier_error_handling(self, payload, response):
+    def _roulier_carrier_error_handling(self, payload, exception):
         return _(u'Sent data:\n%s\n\nException raised:\n%s\n' % (
-            payload, response))
+            payload, exception.message))
+
+    def _roulier_invalid_api_input_handling(self, payload, exception):
+        return _(u'Bad input: %s\n', exception.message)
