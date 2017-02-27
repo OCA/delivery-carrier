@@ -104,6 +104,14 @@ class StockQuantPackage(models.Model):
     def _prepare_label(self, label, picking):
         pass
 
+    @implemented_by_carrier
+    def _handle_attachments(self, label, response):
+        pass
+
+    @implemented_by_carrier
+    def _handle_tracking(self, label, response):
+        pass
+
     # end of API
 
     # Core functions
@@ -112,12 +120,9 @@ class StockQuantPackage(models.Model):
     def _generate_labels(self, picking):
         ret = []
         for package in self:
-            labels = package._call_roulier_api(picking)
-            if isinstance(labels, dict):
-                labels = [labels]
-            for label in labels:
-                data = package._prepare_label(picking, label)
-                ret.append(self.env['shipping.label'].create(data))
+            response = package._call_roulier_api(picking)
+            package._handle_attachments(picking, response)
+            package._handle_tracking(picking, response)
         return ret
 
     def _call_roulier_api(self, picking):
@@ -159,18 +164,46 @@ class StockQuantPackage(models.Model):
 
     # default implementations
 
+    def _roulier_handle_attachments(self, picking, response):
+        main_label = self._roulier_prepare_label(picking, response)
+        self.env['shipping.label'].create(main_label)
+
+        attachments = self._roulier_prepare_attachments(picking, response)
+        return [
+            self.env['ir.attachment'].create(attachment)
+            for attachment in attachments
+        ]
+
+    def _roulier_handle_tracking(self, picking, response):
+        tracking = response.get('tracking')
+        if tracking:
+            barcode = tracking.get('barcode')
+            if barcode:
+                self.parcel_tracking = barcode
+
     @api.model
-    def _roulier_prepare_label(self, picking, label):
-        data = {
-            'name': label['name'],
+    def _roulier_prepare_label(self, picking, response):
+        label = response.get('label')
+        return {
             'res_id': picking.id,
             'res_model': 'stock.picking',
             'package_id': self.id,
+            'name': label['name'],
+            'datas': base64.b64encode(label['data']),
+            'type': 'binary',
+            'datas_fname': "%s.%s" % (label['name'], label['type']),
         }
-        if label.get('data'):
-            data['datas'] = base64.b64encode(label['data'])
-            data['type'] = 'binary'
-        return data
+
+    def _roulier_prepare_attachments(self, picking, response):
+        attachments = response.get('annexes')
+        return [{
+            'res_id': picking.id,
+            'res_model': 'stock.picking',
+            'name': attachment['name'],
+            'datas': base64.b64encode(attachment['data']),
+            'type': 'binary',
+            'datas_fname': "%s.%s" % (attachment['name'], attachment['type']),
+        } for attachment in attachments]
 
     def _roulier_get_parcel(self, picking):
         weight = self.weight
@@ -226,6 +259,12 @@ class StockQuantPackage(models.Model):
             "articles": articles,
             "category": category,
         }
+
+    def _roulier_before_call(self, picking, payload):
+        return payload
+
+    def _roulier_after_call(self, picking, response):
+        return response
 
     def _roulier_should_include_customs(self, picking):
         sender = picking._get_sender(self)
