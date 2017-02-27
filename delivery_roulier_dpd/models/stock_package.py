@@ -40,36 +40,6 @@ class StockQuantPackage(models.Model):
         self.parcel_tracking = response['barcode']
         return custom_response
 
-    @api.model
-    def _dpd_error_handling(self, payload, response):
-        payload['auth']['password'] = '****'
-
-        def _getmessage(payload, response):
-            message = u'Données transmises:\n' \
-                      u'%s\n\nExceptions levées %s' \
-                      u'\n' % (payload, response)
-            return message
-
-        if 'Input error ' in response:
-            # InvalidInputException
-            # on met des clés plus explicites vis à vis des objets odoo
-            suffix = (
-                u"\nSignification des clés dans le contexte Odoo:\n"
-                u"- 'to_address' : adresse du destinataire (votre client)\n"
-                u"- 'from_address' : adresse de l'expéditeur (vous)")
-            message = u'Données transmises:\n%s\n\nExceptions levées %s' \
-                      u'\n%s' % (payload, response, suffix)
-            return message
-        elif 'message' in response:
-            message = _getmessage(payload, response)
-            return message
-        elif response['status'] == 'error':
-            message = _getmessage(payload, response)
-            return message
-        else:
-            message = "Error Unknown"
-            return message
-
     @api.multi
     def _dpd_dropoff_site(self, picking):
         return ''  # like P22895 TODO implement this
@@ -77,3 +47,10 @@ class StockQuantPackage(models.Model):
     def _dpd_should_include_customs(self, picking):
         """DPD does not return customs documents"""
         return False
+
+    def _dpd_carrier_error_handling(self, payload, exception):
+
+        if self._uid > 1:
+            # rm pwd from dict and xml
+            payload['auth']['password'] = '****'
+        return self._roulier_carrier_error_handling(payload, exception)
