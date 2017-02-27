@@ -31,15 +31,6 @@ class StockQuantPackage(models.Model):
             request['service']['notifications'] = 'No'
         return request
 
-    def _dpd_after_call(self, picking, response):
-        # import pdb; pdb.set_trace()
-        custom_response = {
-            'name': response['barcode'],
-            'data': response.get('label'),
-        }
-        self.parcel_tracking = response['barcode']
-        return custom_response
-
     @api.multi
     def _dpd_dropoff_site(self, picking):
         return ''  # like P22895 TODO implement this
