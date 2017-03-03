@@ -153,6 +153,7 @@ class StockPicking(models.Model):
             # It's not our responsibility to create the packages
             raise UserError(_('No package found for this picking'))
         self.number_of_packages = len(packages)
+        self.carrier_tracking_ref = True  # display button in view
         return packages._generate_labels(self)
 
     # default implementations
@@ -282,3 +283,29 @@ class StockPicking(models.Model):
         address['phone'] = address.get('mobile', address.get('phone'))
 
         return address
+
+    @api.multi
+    def open_website_url(self):
+        """Open tracking page.
+
+        More than 1 tracking number: display a list of packages
+        Else open directly the tracking page
+        """
+        self.ensure_one()
+        if not self._is_roulier():
+            return super(StockPicking, self).open_website_url()
+
+        packages = self._get_packages_from_picking()
+        if len(packages) == 0:
+            raise UserError('No packages found for this picking')
+        elif len(packages) == 1:
+            return packages.open_website_url()  # shortpath
+
+        # display a list of pickings
+        action = self.env.ref('stock.action_package_view').read()[0]
+        action['res_id'] = packages.ids
+        action['domain'] = "[('id', 'in', [%s])]" % (
+            ",".join(map(str, packages.ids))
+        )
+        action['context'] = "{'picking_id': %s }" % str(self.id)
+        return action
