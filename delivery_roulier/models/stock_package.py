@@ -6,7 +6,7 @@ from functools import wraps
 import logging
 import base64
 
-from openerp import models, api
+from openerp import models, api, fields
 from openerp.tools.translate import _
 from openerp.exceptions import UserError
 
@@ -51,6 +51,8 @@ def implemented_by_carrier(func):
 
 class StockQuantPackage(models.Model):
     _inherit = 'stock.quant.package'
+
+    carrier_id = fields.Many2one("delivery.carrier", string="Carrier")
 
     # helper : move it to base ?
     @api.multi
@@ -112,6 +114,9 @@ class StockQuantPackage(models.Model):
     def _handle_tracking(self, label, response):
         pass
 
+    @implemented_by_carrier
+    def _get_tracking_link(self):
+        pass
     # end of API
 
     # Core functions
@@ -132,6 +137,7 @@ class StockQuantPackage(models.Model):
         # and _a-carrier_after_call
         self.ensure_one()
 
+        self.carrier_id = picking.carrier_id
         self.carrier_type = picking.carrier_type  # on memory value !
         roulier_instance = roulier.get(picking.carrier_type)
         payload = roulier_instance.api()
@@ -177,9 +183,9 @@ class StockQuantPackage(models.Model):
     def _roulier_handle_tracking(self, picking, response):
         tracking = response.get('tracking')
         if tracking:
-            barcode = tracking.get('barcode')
-            if barcode:
-                self.parcel_tracking = barcode
+            number = tracking.get('number')
+            if number:
+                self.parcel_tracking = number
 
     @api.model
     def _roulier_prepare_label(self, picking, response):
@@ -278,3 +284,24 @@ class StockQuantPackage(models.Model):
 
     def _roulier_invalid_api_input_handling(self, payload, exception):
         return _(u'Bad input: %s\n', exception.message)
+
+    def _roulier_open_tracking_url(self):
+        _logger.warning("not implemented")
+        pass
+
+    def _roulier_get_tracking_link(self):
+        _logger.warning("not implemented")
+        pass
+
+    @api.multi
+    def open_website_url(self):
+        self.ensure_one()
+        self.carrier_type = self.carrier_id.carrier_type
+        url = self._get_tracking_link()
+        client_action = {
+            'type': 'ir.actions.act_url',
+            'name': "Shipment Tracking Page",
+            'target': 'new',
+            'url': url,
+        }
+        return client_action
