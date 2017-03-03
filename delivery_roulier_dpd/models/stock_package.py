@@ -45,3 +45,8 @@ class StockQuantPackage(models.Model):
             # rm pwd from dict and xml
             payload['auth']['password'] = '****'
         return self._roulier_carrier_error_handling(payload, exception)
+
+    def _dpd_get_tracking_link(self):
+        return (
+            "http://www.dpd.fr/home/shipping/searchdest.php?"
+            "exa=%s" % self.parcel_tracking)
