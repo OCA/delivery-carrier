@@ -60,7 +60,7 @@ class PostlogisticsWebService(object):
         except Exception as e:
             # if authentication error
             if isinstance(e[0], tuple) and e[0][0] == 401:
-                raise exceptions.Warning(
+                raise exceptions.UserError(
                     _('Authorization Required\n\n'
                       'Please verify postlogistics username and password in:\n'
                       'Configuration -> Postlogistics'))
