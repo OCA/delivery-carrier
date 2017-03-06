@@ -1,60 +1,58 @@
 # -*- coding: utf-8 -*-
-# © 2013-2015 Yannick Vaucher (Camptocamp SA)
+# © 2013-2016 Yannick Vaucher (Camptocamp SA)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 import logging
 
-from openerp import models, fields, api, exceptions, _
+from openerp import api, exceptions, fields, models, _
 
 from ..postlogistics.web_service import PostlogisticsWebService
+from . company import ResCompany
 
 _logger = logging.getLogger(__name__)
 
 
 class PostlogisticsConfigSettings(models.TransientModel):
     _name = 'postlogistics.config.settings'
-    _inherit = 'res.config.settings'
+    _inherit = ['res.config.settings', 'abstract.config.settings']
 
-    def _default_company(self):
-        return self.env.user.company_id
+    # AbstractConfigSettings attribute
+    _prefix = 'postlogistics_'
 
-    company_id = fields.Many2one(comodel_name='res.company',
-                                 string='Company',
-                                 required=True,
-                                 default=_default_company)
-    wsdl_url = fields.Char(related='company_id.postlogistics_wsdl_url')
-    username = fields.Char(related='company_id.postlogistics_username')
-    password = fields.Char(related='company_id.postlogistics_password')
-    logo = fields.Binary(related='company_id.postlogistics_logo')
-    office = fields.Char(related='company_id.postlogistics_office')
+    _companyObject = ResCompany
 
-    default_label_layout = fields.Many2one(
-        related='company_id.postlogistics_default_label_layout',
+    wsdl_url = fields.Char(
+        related='company_id.postlogistics_wsdl_url',
+        readonly=True,
     )
-    default_output_format = fields.Many2one(
-        related='company_id.postlogistics_default_output_format',
-    )
-    default_resolution = fields.Many2one(
-        related='company_id.postlogistics_default_resolution',
+    test_mode = fields.Boolean(
+        related='company_id.postlogistics_test_mode',
+        help="Will generate Specimen labels using test end point of "
+             "webservice."
     )
 
-    @api.onchange('company_id')
-    def onchange_company_id(self):
-        # update related fields
-        if not self.company_id:
-            return
-        company = self.company_id
-
-        label_layout = company.postlogistics_default_label_layout
-        output_format = company.postlogistics_default_output_format
-        resolution = company.postlogistics_default_resolution
-
-        self.username = company.postlogistics_username
-        self.password = company.postlogistics_password
-        self.logo = company.postlogistics_logo
-        self.office = company.postlogistics_office
-        self.default_label_layout = label_layout
-        self.default_output_format = output_format
-        self.default_resolution = resolution
+    tracking_format = fields.Selection(
+        related='company_id.postlogistics_tracking_format',
+        selection=[
+            ('postlogistics', "Use default postlogistics tracking numbers"
+             ),
+            ('picking_num', 'Use picking number with pack counter')],
+        string="Tracking number format", type='selection',
+        help="Allows you to define how the ItemNumber (the last 8 digits) "
+             "of the tracking number will be generated:\n"
+             "- Default postlogistics numbers: The webservice generates it"
+             " for you.\n"
+             "- Picking number with pack counter: Generate it using the "
+             "digits of picking name and add the pack number. 2 digits for"
+             "pack number and 6 digits for picking number. (eg. 07000042 "
+             "for picking 42 and 7th pack")
+    proclima_logo = fields.Boolean(
+        related='company_id.postlogistics_proclima_logo',
+        help="The “pro clima” logo indicates an item for which the "
+             "surcharge for carbon-neutral shipping has been paid and a "
+             "contract to that effect has been signed. For Letters with "
+             "barcode (BMB) domestic, the ProClima logo is printed "
+             "automatically (at no additional charge)"
+    )
 
     @api.model
     def _get_delivery_instructions(self, web_service, company, service_code):
