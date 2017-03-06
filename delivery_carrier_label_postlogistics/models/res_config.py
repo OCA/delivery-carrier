@@ -3,58 +3,22 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 import logging
 
-from openerp import models, fields, api, exceptions, _
+from openerp import api, exceptions, models, _
 
 from ..postlogistics.web_service import PostlogisticsWebService
+from . company import ResCompany
 
 _logger = logging.getLogger(__name__)
 
 
 class PostlogisticsConfigSettings(models.TransientModel):
     _name = 'postlogistics.config.settings'
-    _inherit = 'res.config.settings'
+    _inherit = ['res.config.settings', 'abstract.config.settings']
 
-    def _default_company(self):
-        return self.env.user.company_id
+    # AbstractConfigSettings attribute
+    _prefix = 'postlogistics_'
 
-    company_id = fields.Many2one(comodel_name='res.company',
-                                 string='Company',
-                                 required=True,
-                                 default=_default_company)
-    wsdl_url = fields.Char(related='company_id.postlogistics_wsdl_url')
-    username = fields.Char(related='company_id.postlogistics_username')
-    password = fields.Char(related='company_id.postlogistics_password')
-    logo = fields.Binary(related='company_id.postlogistics_logo')
-    office = fields.Char(related='company_id.postlogistics_office')
-
-    default_label_layout = fields.Many2one(
-        related='company_id.postlogistics_default_label_layout',
-    )
-    default_output_format = fields.Many2one(
-        related='company_id.postlogistics_default_output_format',
-    )
-    default_resolution = fields.Many2one(
-        related='company_id.postlogistics_default_resolution',
-    )
-
-    @api.onchange('company_id')
-    def onchange_company_id(self):
-        # update related fields
-        if not self.company_id:
-            return
-        company = self.company_id
-
-        label_layout = company.postlogistics_default_label_layout
-        output_format = company.postlogistics_default_output_format
-        resolution = company.postlogistics_default_resolution
-
-        self.username = company.postlogistics_username
-        self.password = company.postlogistics_password
-        self.logo = company.postlogistics_logo
-        self.office = company.postlogistics_office
-        self.default_label_layout = label_layout
-        self.default_output_format = output_format
-        self.default_resolution = resolution
+    _companyObject = ResCompany
 
     @api.model
     def _get_delivery_instructions(self, web_service, company, service_code):
