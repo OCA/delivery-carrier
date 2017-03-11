@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-27 15:17+0000\n"
-"PO-Revision-Date: 2016-09-27 15:17+0000\n"
+"POT-Creation-Date: 2017-03-06 10:22+0000\n"
+"PO-Revision-Date: 2017-03-06 10:22+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
 "Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -37,6 +37,11 @@ msgstr "600 ppp"
 #: sql_constraint:postlogistics.service.group:0
 msgid "A service group ID must be unique."
 msgstr "Un Id. de groupe de service doit être unique."
+
+#. module: delivery_carrier_label_postlogistics
+#: model:ir.model,name:delivery_carrier_label_postlogistics.model_postlogistics_config_settings
+msgid "Abstract configuration settings"
+msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
 #: selection:delivery.carrier.template.option,postlogistics_type:0
@@ -146,8 +151,8 @@ msgid "Configure licenses"
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/models/res_config.py:120
-#: code:addons/delivery_carrier_label_postlogistics/models/res_config.py:182
+#: code:addons/delivery_carrier_label_postlogistics/models/res_config.py:84
+#: code:addons/delivery_carrier_label_postlogistics/models/res_config.py:146
 #, python-format
 msgid ""
 "Could not retrieve Postlogistics base services:\n"
@@ -157,7 +162,7 @@ msgstr ""
 "%s"
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/models/res_config.py:68
+#: code:addons/delivery_carrier_label_postlogistics/models/res_config.py:32
 #, python-format
 msgid ""
 "Could not retrieve Postlogistics delivery instructions:\n"
@@ -167,7 +172,7 @@ msgstr ""
 "%s"
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/models/res_config.py:252
+#: code:addons/delivery_carrier_label_postlogistics/models/res_config.py:216
 #, python-format
 msgid ""
 "Could not retrieve Postlogistics group services:\n"
@@ -177,7 +182,7 @@ msgstr ""
 "%s"
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/models/res_config.py:343
+#: code:addons/delivery_carrier_label_postlogistics/models/res_config.py:307
 #, python-format
 msgid ""
 "Could not retrieve allowed Postlogistics service groups for the %s licence:\n"
@@ -426,6 +431,7 @@ msgstr "Office de poste recevant les livraisons"
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model,name:delivery_carrier_label_postlogistics.model_postlogistics_license
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_delivery_carrier_postlogistics_license_id
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_config_settings_license_ids
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_service_group_postlogistics_license_ids
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_company_postlogistics_license_ids
 msgid "PostLogistics Franking License"
@@ -557,11 +563,6 @@ msgstr "ZPL2"
 #: model:ir.ui.view,arch_db:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
 msgid "or"
 msgstr "ou"
-
-#. module: delivery_carrier_label_postlogistics
-#: model:ir.model,name:delivery_carrier_label_postlogistics.model_postlogistics_config_settings
-msgid "postlogistics.config.settings"
-msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
 #: model:delivery.carrier.template.option,name:delivery_carrier_label_postlogistics.postlogistics_output_format_option_spdf
