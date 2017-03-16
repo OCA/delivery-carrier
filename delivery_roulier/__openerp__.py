@@ -24,7 +24,6 @@
         'views/stock_quant_package.xml',
     ],
     'demo': [
-        # 'demo/product.xml',
     ],
     'external_dependencies': {
         'python': [
