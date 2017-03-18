@@ -4,14 +4,14 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2016
-# Carles Antoli <carlesantoli@hotmail.com>, 2017
+# Marc Tormo i Bochaca <mtbochaca@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-14 02:37+0000\n"
-"PO-Revision-Date: 2017-01-14 02:37+0000\n"
-"Last-Translator: Carles Antoli <carlesantoli@hotmail.com>, 2017\n"
+"POT-Creation-Date: 2017-03-11 02:30+0000\n"
+"PO-Revision-Date: 2017-03-11 02:30+0000\n"
+"Last-Translator: Marc Tormo i Bochaca <mtbochaca@gmail.com>, 2017\n"
 "Language-Team: Catalan (https://www.transifex.com/oca/teams/23907/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -37,6 +37,11 @@ msgstr ""
 #. module: delivery_carrier_label_postlogistics
 #: sql_constraint:postlogistics.service.group:0
 msgid "A service group ID must be unique."
+msgstr ""
+
+#. module: delivery_carrier_label_postlogistics
+#: model:ir.model,name:delivery_carrier_label_postlogistics.model_postlogistics_config_settings
+msgid "Abstract configuration settings"
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
@@ -143,8 +148,8 @@ msgid "Configure licenses"
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/models/res_config.py:120
-#: code:addons/delivery_carrier_label_postlogistics/models/res_config.py:182
+#: code:addons/delivery_carrier_label_postlogistics/models/res_config.py:84
+#: code:addons/delivery_carrier_label_postlogistics/models/res_config.py:146
 #, python-format
 msgid ""
 "Could not retrieve Postlogistics base services:\n"
@@ -152,7 +157,7 @@ msgid ""
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/models/res_config.py:68
+#: code:addons/delivery_carrier_label_postlogistics/models/res_config.py:32
 #, python-format
 msgid ""
 "Could not retrieve Postlogistics delivery instructions:\n"
@@ -160,7 +165,7 @@ msgid ""
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/models/res_config.py:252
+#: code:addons/delivery_carrier_label_postlogistics/models/res_config.py:216
 #, python-format
 msgid ""
 "Could not retrieve Postlogistics group services:\n"
@@ -168,7 +173,7 @@ msgid ""
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/models/res_config.py:343
+#: code:addons/delivery_carrier_label_postlogistics/models/res_config.py:307
 #, python-format
 msgid ""
 "Could not retrieve allowed Postlogistics service groups for the %s licence:\n"
@@ -231,7 +236,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_license_name
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_service_group_name
 msgid "Description"
-msgstr ""
+msgstr "Descripció"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_config_settings_display_name
@@ -404,6 +409,7 @@ msgstr ""
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model,name:delivery_carrier_label_postlogistics.model_postlogistics_license
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_delivery_carrier_postlogistics_license_id
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_config_settings_license_ids
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_service_group_postlogistics_license_ids
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_company_postlogistics_license_ids
 msgid "PostLogistics Franking License"
@@ -527,11 +533,6 @@ msgstr ""
 #: model:ir.ui.view,arch_db:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
 msgid "or"
 msgstr "o"
-
-#. module: delivery_carrier_label_postlogistics
-#: model:ir.model,name:delivery_carrier_label_postlogistics.model_postlogistics_config_settings
-msgid "postlogistics.config.settings"
-msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
 #: model:delivery.carrier.template.option,name:delivery_carrier_label_postlogistics.postlogistics_output_format_option_spdf
