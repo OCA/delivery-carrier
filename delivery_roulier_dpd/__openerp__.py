@@ -20,6 +20,11 @@
         'data/delivery.xml',
         'data/keychain.xml'
     ],
+    'external_dependencies': {
+        'python': [
+            'cerberus',
+        ],
+    },
     'demo': [],
     'installable': True,
     'license': 'AGPL-3',
