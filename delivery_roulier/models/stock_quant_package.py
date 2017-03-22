@@ -126,8 +126,9 @@ class StockQuantPackage(models.Model):
         ret = []
         for package in self:
             response = package._call_roulier_api(picking)
-            package._handle_attachments(picking, response)
             package._handle_tracking(picking, response)
+            attach = package._handle_attachments(picking, response)
+            ret.append(attach.get('label'))
         return ret
 
     def _call_roulier_api(self, picking):
@@ -172,13 +173,16 @@ class StockQuantPackage(models.Model):
 
     def _roulier_handle_attachments(self, picking, response):
         main_label = self._roulier_prepare_label(picking, response)
-        self.env['shipping.label'].create(main_label)
+        label = self.env['shipping.label'].create(main_label)
 
         attachments = self._roulier_prepare_attachments(picking, response)
-        return [
-            self.env['ir.attachment'].create(attachment)
-            for attachment in attachments
-        ]
+        return {
+            'label': label,
+            'attachments': [
+                self.env['ir.attachment'].create(attachment)
+                for attachment in attachments
+            ]
+        }
 
     def _roulier_handle_tracking(self, picking, response):
         tracking = response.get('tracking')
