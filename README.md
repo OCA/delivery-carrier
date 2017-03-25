@@ -13,6 +13,7 @@ You'll find:
  - Generation of shipping labels for specific carrier (PostLogistics, ...)
 
 [//]: # (addons)
+
 Available addons
 ----------------
 addon | version | summary
