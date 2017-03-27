@@ -2,12 +2,12 @@
 # Copyright 2017 LasLabs Inc.
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 
-from openerp import api, models, fields
+from odoo import api, models, fields
 
 
 class StockPickingRatePurchase(models.TransientModel):
-
     """ Purchase a set of stock rates """
+
     _name = "stock.picking.rate.purchase"
     _description = 'Stock Picking Dispatch Rate Purchase'
 
