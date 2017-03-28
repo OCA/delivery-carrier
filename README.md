@@ -20,6 +20,8 @@ addon | version | summary
 --- | --- | ---
 [base_delivery_carrier_label](base_delivery_carrier_label/) | 9.0.1.0.0 | Base module for carrier labels
 [delivery_carrier_label_postlogistics](delivery_carrier_label_postlogistics/) | 9.0.1.1.0 | PostLogistics Labels WebService
+[stock_picking_delivery_rate](stock_picking_delivery_rate/) | 9.0.1.0.0 | Adds a concept of rate quotes for stock pickings
+
 
 Unported addons
 ---------------
