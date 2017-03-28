@@ -20,6 +20,7 @@ addon | version | summary
 --- | --- | ---
 [delivery_carrier_b2c](delivery_carrier_b2c/) | 10.0.0.1.0 | Delivery Carrier Business To Customer
 
+
 Unported addons
 ---------------
 addon | version | summary
