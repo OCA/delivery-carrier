@@ -25,6 +25,7 @@ addon | version | summary
 [delivery_carrier_label_gls](delivery_carrier_label_gls/) | 8.0.0.1.0 | GLS carrier label printing
 [delivery_carrier_label_postlogistics](delivery_carrier_label_postlogistics/) | 8.0.1.1.0 | PostLogistics Labels WebService
 
+
 Unported addons
 ---------------
 addon | version | summary
