@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # Copyright 2017 LasLabs Inc.
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+# License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 
 {
     'name': 'Sale Delivery Rates',
@@ -9,11 +9,11 @@
     'category': 'Delivery, Stock, Sales',
     'website': 'https://laslabs.com/',
     'author': 'LasLabs, Odoo Community Association (OCA)',
-    'license': 'AGPL-3',
+    'license': 'LGPL-3',
     'application': False,
     'installable': True,
     'depends': [
-        'stock_picking_rate',
+        'stock_picking_delivery_rate',
     ],
     'data': [
         'security/ir.model.access.csv',
