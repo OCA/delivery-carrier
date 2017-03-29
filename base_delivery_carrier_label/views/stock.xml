@@ -47,7 +47,7 @@
     <field name="model">stock.quant.package</field>
     <field name="inherit_id" ref="stock.view_quant_package_tree"/>
     <field name="arch" type="xml">
-      <field name="complete_name" position="after">
+      <field name="display_name" position="after">
         <field name="parcel_tracking"/>
         <field name="weight"/>
       </field>
