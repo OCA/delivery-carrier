@@ -1,10 +1,10 @@
-# Translation of OpenERP Server.
+# Translation of odoo Server.
 # This file contains the translation of the following modules:
 #	* delivery_carrier_label_gls
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenERP Server 7.0\n"
+"Project-Id-Version: odoo Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-10-29 15:45+0000\n"
 "PO-Revision-Date: 2014-10-29 15:45+0000\n"

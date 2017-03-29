@@ -19,15 +19,15 @@
 #
 ###############################################################################
 
-from openerp.osv import orm
-from openerp.tools.translate import _
+from odoo.osv import orm
+from odoo.tools.translate import _
 from .report.label import GLSLabel, InvalidDataForMako
 from .report.exception_helper import (InvalidAccountNumber)
 from .report.label_helper import (
     InvalidValueNotInList,
     InvalidMissingField,
     InvalidType,)
-from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
+from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT
 from datetime import datetime
 import pycountry
 from operator import attrgetter

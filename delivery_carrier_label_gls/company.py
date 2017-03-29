@@ -19,7 +19,7 @@
 #
 ###############################################################################
 
-from openerp.osv import orm, fields
+from odoo.osv import orm, fields
 
 
 class ResCompany(orm.Model):

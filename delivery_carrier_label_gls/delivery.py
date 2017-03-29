@@ -19,7 +19,7 @@
 #
 ###############################################################################
 
-from openerp.osv import orm
+from odoo.osv import orm
 
 
 class DeliveryCarrier(orm.Model):
