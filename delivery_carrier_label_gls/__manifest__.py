@@ -23,44 +23,22 @@
 {
     'name': 'Delivery Carrier Label GLS',
     'version': '0.1',
-    'author': "Akretion,Odoo Community Association (OCA)",
+    'author': "Akretion,"
+              "PESOL,"
+              "Odoo Community Association (OCA)",
     'maintener': 'Akretion',
     'category': 'Warehouse',
     'summary': "GLS carrier label printing",
     'depends': [
         'base_delivery_carrier_label',
-        'configuration_helper',
-        'partner_helper',
+        # 'configuration_helper',
+        # 'partner_helper',
     ],
-    'description': """
-Delivery Carrier Label GLS (french carrier)
-=============================================
-
-
-GLS Group - Transportation services
--------------------------------------
-
-
-Implémentation du service Unibox:
-- envoi des informations du bon de livraison et des colis au serveur GLS unibox
-- retour par webservice des informations de routage
-- génération des étiquettes GLS Unibox
-
-
-GLS carrier https://gls-group.eu/
-
-
-Contributors
-------------
-* David BEAL <david.beal@akretion.com>
-
-""",
     'website': 'http://www.akretion.com/',
     'data': [
         'data/delivery_carrier.xml',
         'data/sequence.xml',
-        'config_view.xml',
-        # 'security/ir.model.access.csv',
+        'views/config_view.xml',
     ],
     'demo': [
         'demo/res.partner.csv',
