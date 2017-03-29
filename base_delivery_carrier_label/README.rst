@@ -15,7 +15,7 @@ Usage
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/99/9.0
+   :target: https://runbot.odoo-community.org/runbot/99/10.0
 
 Bug Tracker
 ===========
@@ -35,6 +35,7 @@ Contributors
 * Sébastien BEAU <sebastien.beau@akretion.com>
 * Yannick Vaucher <yannick.vaucher@camptocamp.com>
 * Alexis de Lattre <alexis.delattre@akretion.com>
+* Angel Moya <angel.moya@pesol.es>
 
 Maintainer
 ----------
