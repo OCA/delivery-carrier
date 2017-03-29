@@ -2,8 +2,8 @@
 # Copyright 2016 Hpar
 # Copyright 2016 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from openerp import api, fields, models
-import openerp.addons.decimal_precision as dp
+from odoo import api, fields, models
+import odoo.addons.decimal_precision as dp
 import logging
 
 _logger = logging.getLogger(__name__)
