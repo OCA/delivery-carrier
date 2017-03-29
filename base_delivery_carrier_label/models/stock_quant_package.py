@@ -2,8 +2,8 @@
 # Copyright 2014-2015 Akretion <http://www.akretion.com>
 # Copyright 2014-2016 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from openerp import api, fields, models
-import openerp.addons.decimal_precision as dp
+from odoo import api, fields, models
+import odoo.addons.decimal_precision as dp
 
 
 class StockQuantPackage(models.Model):
