@@ -201,7 +201,8 @@ class StockQuantPackage(models.Model):
             'name': "%s %s" % (self.name, label['name']),
             'datas': base64.b64encode(label['data']),
             'type': 'binary',
-            'datas_fname': "%s.%s" % (label['name'], label['type']),
+            'datas_fname': "%s-%s.%s" % (
+                self.name, label['name'], label['type']),
         }
 
     def _roulier_prepare_attachments(self, picking, response):
@@ -212,7 +213,8 @@ class StockQuantPackage(models.Model):
             'name': "%s %s" % (self.name, attachment['name']),
             'datas': base64.b64encode(attachment['data']),
             'type': 'binary',
-            'datas_fname': "%s.%s" % (attachment['name'], attachment['type']),
+            'datas_fname': "%s-%s.%s" % (
+                self.name, attachment['name'], attachment['type']),
         } for attachment in attachments]
 
     def _roulier_get_parcel(self, picking):
