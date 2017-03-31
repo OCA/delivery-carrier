@@ -198,7 +198,7 @@ class StockQuantPackage(models.Model):
             'res_id': picking.id,
             'res_model': 'stock.picking',
             'package_id': self.id,
-            'name': label['name'],
+            'name': "%s %s" % (self.name, label['name']),
             'datas': base64.b64encode(label['data']),
             'type': 'binary',
             'datas_fname': "%s.%s" % (label['name'], label['type']),
@@ -209,7 +209,7 @@ class StockQuantPackage(models.Model):
         return [{
             'res_id': picking.id,
             'res_model': 'stock.picking',
-            'name': attachment['name'],
+            'name': "%s %s" % (self.name, attachment['name']),
             'datas': base64.b64encode(attachment['data']),
             'type': 'binary',
             'datas_fname': "%s.%s" % (attachment['name'], attachment['type']),
