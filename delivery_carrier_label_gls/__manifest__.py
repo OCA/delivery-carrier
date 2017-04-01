@@ -31,8 +31,8 @@
     'summary': "GLS carrier label printing",
     'depends': [
         'base_delivery_carrier_label',
-        # 'configuration_helper',
-        # 'partner_helper',
+        'configuration_helper',
+        'partner_helper',
     ],
     'website': 'http://www.akretion.com/',
     'data': [

@@ -52,9 +52,10 @@ def GLS_countries_prefix():
     """
     GLS_prefix = []
     for elm in pycountry.countries:
-        GLS_prefix.append(str(elm.alpha2))
+        GLS_prefix.append(str(elm.alpha_2))
     GLS_prefix[GLS_prefix.index('ME')] = 'CS'
     return GLS_prefix
+
 
 GLS_COUNTRIES_PREFIX = GLS_countries_prefix()
 
@@ -234,7 +235,7 @@ class GLSLabel(AbstractLabel):
                 all_dict['T8975'],
                 all_dict['T530'],    # weight
             ]
-            code = '|'.join(items)+'|'
+            code = '|'.join(items) + '|'
             # code needs to be fixed size
             code += (304 - len(code)) * ' '
             return {'T8917': code}

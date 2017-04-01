@@ -4,9 +4,9 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from openerp import models, api, fields, _
-from .report.label import GLSLabel, InvalidDataForMako
-from .report.exception_helper import (InvalidAccountNumber)
-from .report.label_helper import (
+from ..report.label import GLSLabel, InvalidDataForMako
+from ..report.exception_helper import (InvalidAccountNumber)
+from ..report.label_helper import (
     InvalidValueNotInList,
     InvalidMissingField,
     InvalidType,)
@@ -264,8 +264,8 @@ class StockPicking(models.Model):
             'stock.picking_' + label_name)
         if not sequence:
             title = _("Picking sequence"),
-            message = _("There is no sequence defined for the label '%s'")
-            % label_name
+            message = _(
+                "There is no sequence defined for the label '%s'") % label_name
             raise Warning("%s\n%s" % (title, message))
         return sequence
 
