@@ -20,12 +20,12 @@ except (ImportError, IOError) as err:
     _logger.debug(err)
 
 
-EXCEPT_TITLE = "GLS Library Exception"
+EXCEPT_TITLE = _("GLS Library Exception")
 LABEL_TYPE = 'zpl2'
 
 
 def raise_exception(message):
-    raise Warning("%s\n%s" % (EXCEPT_TITLE, map_except_message(message)))
+    raise Warning(_("%s\n%s") % (EXCEPT_TITLE, map_except_message(message)))
 
 
 def map_except_message(message):
@@ -235,7 +235,7 @@ class StockPicking(models.Model):
                 InvalidType) as e:
             raise_exception(e.message)
         except Exception, e:
-            raise Warning("%s\n%s" % (EXCEPT_TITLE, e.message))
+            raise Warning(_("%s\n%s") % (EXCEPT_TITLE, e.message))
         return result
 
     @api.multi
@@ -270,7 +270,7 @@ class StockPicking(models.Model):
             title = _("Picking sequence"),
             message = _(
                 "There is no sequence defined for the label '%s'") % label_name
-            raise Warning("%s\n%s" % (title, message))
+            raise Warning(_("%s\n%s") % (title, message))
         return sequence
 
     @api.multi
@@ -280,7 +280,7 @@ class StockPicking(models.Model):
         default.update({
             'carrier_tracking_ref': None,
         })
-        return super(StockPickingOut, self).copy(default)
+        return super(StockPicking, self).copy(default)
 
     @api.multi
     def get_shipping_cost(self):
