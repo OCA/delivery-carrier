@@ -10,10 +10,14 @@ from ..report.label_helper import (
     InvalidValueNotInList,
     InvalidMissingField,
     InvalidType,)
-from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT
-from datetime import datetime
-import pycountry
 from operator import attrgetter
+import logging
+
+_logger = logging.getLogger(__name__)
+try:
+    import pycountry
+except (ImportError, IOError) as err:
+    _logger.debug(err)
 
 
 EXCEPT_TITLE = "GLS Library Exception"
@@ -261,7 +265,7 @@ class StockPicking(models.Model):
     @api.model
     def _get_sequence(self, label_name):
         sequence = self.env['ir.sequence'].next_by_code(
-            'stock.picking_' + label_name)
+            'stock.picking_%s' % (label_name))
         if not sequence:
             title = _("Picking sequence"),
             message = _(

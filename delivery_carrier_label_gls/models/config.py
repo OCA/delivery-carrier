@@ -4,7 +4,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from openerp import models, api, fields, _
-from openerp.exceptions import Warning
+from openerp.exceptions import UserError
 
 from . company import ResCompany
 
@@ -39,9 +39,9 @@ class GlsConfigSettings(models.TransientModel):
                 param = param_m.search(
                     [('key', '=', 'carrier_%s' % field)])
                 if not param:
-                    raise Warning(
+                    raise UserError(
                         _("Missing parameter",
                           "'%s' key is missing in 'System Parameter':\n"
                           "Add it and set the corresponding value") % field)
                 res[field] = param.value
-        return res
+        return super(GlsConfigSettings, self).default_get(fields)

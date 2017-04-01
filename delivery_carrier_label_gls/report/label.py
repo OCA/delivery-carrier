@@ -24,10 +24,8 @@ from mako.exceptions import RichTraceback
 from .label_helper import AbstractLabel
 from .exception_helper import (InvalidAccountNumber)
 import httplib
-from unidecode import unidecode
 import logging
 import os
-import pycountry
 
 REPORT_CODING = 'cp1252'
 ERROR_BEHAVIOR = 'backslashreplace'
@@ -36,7 +34,12 @@ GLS_PORT = 80
 WEB_SERVICE_CODING = 'ISO-8859-1'
 LABEL_FILE_NAME = 'gls'
 
-logger = logging.getLogger(__name__)
+_logger = logging.getLogger(__name__)
+try:
+    import pycountry
+    from unidecode import unidecode
+except (ImportError, IOError) as err:
+    _logger.debug(err)
 
 URL_PROD = "http://www.gls-france.com/cgi-bin/glsboxGI.cgi"
 URL_TEST = "http://www.gls-france.com/cgi-bin/glsboxGITest.cgi"
@@ -266,7 +269,7 @@ class GLSLabel(AbstractLabel):
         if code == 'E000':
             return True
         else:
-            logger.info("""Web service access problem :
+            _logger.info("""Web service access problem :
 code: %s ; message: %s ; result: %s""" % (code, message, result))
             if message == 'T330':
                 zip_code = ''
@@ -282,13 +285,13 @@ code: %s ; message: %s ; result: %s""" % (code, message, result))
                 raise Exception("Country code '%s' is wrong" % cnty_code)
             else:
                 if code == 'E999':
-                    logger.info(
+                    _logger.info(
                         "Unibox server (web service) is not responding")
                 else:
-                    logger.info("""
+                    _logger.info("""
         >>> An unknown problem is happened : check network connection,
         webservice accessibility, sent datas and so on""")
-                logger.info("""
+                _logger.info("""
         >>> Rescue label will be printed instead of the standard label""")
             return False
 
@@ -361,8 +364,8 @@ code: %s ; message: %s ; result: %s""" % (code, message, result))
         except:
             traceback = RichTraceback()
             for (filename, lineno, function, line) in traceback.traceback:
-                logger.info("File %s, line %s, in %s"
-                            % (filename, lineno, function))
+                _logger.info(
+                    "File %s, line %s, in %s" % (filename, lineno, function))
             raise InvalidDataForMako(
                 "%s: %s"
                 % (str(traceback.error.__class__.__name__), traceback.error))
@@ -397,7 +400,7 @@ code: %s ; message: %s ; result: %s""" % (code, message, result))
             try:
                 mapping[T] = unidecode(val).upper()
             except Exception:
-                logger.info("%s %s" % (semantic_key, datas['semantic_key']))
+                _logger.info("%s %s" % (semantic_key, datas['semantic_key']))
         return mapping
 
     def get_product(self, address_country):
@@ -431,7 +434,8 @@ code: %s ; message: %s ; result: %s""" % (code, message, result))
             if elm in unknown_unmatch:
                 unknown_unmatch.remove(elm)
         if len(unknown_unmatch) > 0:
-            logger.info("GLS carrier : these keys \n%s\nare defined "
-                        "in mako template but without valid replacement "
-                        "values\n" % unknown_unmatch)
+            _logger.info(
+                "GLS carrier : these keys \n%s\nare defined "
+                "in mako template but without valid replacement "
+                "values\n" % unknown_unmatch)
         return unmatch
