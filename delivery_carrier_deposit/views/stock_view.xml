@@ -103,7 +103,7 @@
     <field name="model">stock.picking</field>
     <field name="inherit_id" ref="delivery.view_picking_withcarrier_out_form" />
     <field name="arch" type="xml">
-        <field name="weight_net" position="after">
+        <field name="number_of_packages" position="after">
             <field name="deposit_slip_id"
                    attrs="{'readonly': True,'invisible': [('deposit_slip_id','=','')]}"/>
         </field>
