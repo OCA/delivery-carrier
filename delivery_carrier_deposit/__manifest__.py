@@ -21,7 +21,7 @@
 
 {
     'name': 'Delivery Deposit',
-    'version': '8.0.0.2.0',
+    'version': '9.0.0.1.0',
     'category': 'Delivery',
     'author': "Akretion,Odoo Community Association (OCA)",
     'maintainer': 'Akretion',
@@ -29,17 +29,17 @@
     'depends': [
         'base_delivery_carrier_label',
     ],
-    'website': 'http://www.akretion.com/',
+    'website': 'https://www.akretion.com/',
     'data': [
-        'stock_view.xml',
-        'wizard/deposit.xml',
-        'ir_sequence_data.xml',
+        'views/stock_view.xml',
+        'wizards/deposit.xml',
+        'data/ir_sequence_data.xml',
         'report/report.xml',
         'report/deposit_slip.xml',
         'security/ir.model.access.csv',
         'security/model_security.xml',
     ],
     'demo': [],
-    'installable': False,
+    'installable': True,
     'license': 'AGPL-3',
 }
