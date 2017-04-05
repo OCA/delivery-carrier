@@ -6,7 +6,7 @@
     'name': 'Delivery Carrier Roulier',
     'version': '9.0.0.0.0',
     'author': 'Akretion',
-    'summary': 'Integration of multiple carriers (base)',
+    'summary': 'Integration of multiple carriers',
     'maintainer': 'Akretion, Odoo Community Association (OCA)',
     'category': 'Warehouse',
     'depends': [
