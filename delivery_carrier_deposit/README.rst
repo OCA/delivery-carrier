@@ -1,3 +1,8 @@
+.. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
+   :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
+   :alt: License: AGPL-3
+
+================
 Delivery Deposit
 ================
 
@@ -22,7 +27,8 @@ Contributors
 * Sébastien BEAU <sebastien.beau@akretion.com>
 * Benoit GUILLOT <benoit.guillot@akretion.com>
 * Chafique DELLI <chafique.delli@akretion.com>
-* Alexis de Lattre <alexis.delattre@akretion.com> (port to new API)
+* Alexis de Lattre <alexis.delattre@akretion.com>
+* Raphael Reverdy <raphael.reverdy@akretion.com>
 
 Maintainer
 ----------
