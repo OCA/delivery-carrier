@@ -15,6 +15,7 @@
         'keychain',  # from oca/server-tools
         'base_suspend_security',
         'product_harmonized_system',  # from oca/intrastat
+        'base_delivery_carrier_label',
     ],
     'website': 'http://www.akretion.com/',
     'data': [
