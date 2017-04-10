@@ -126,6 +126,7 @@ class StockQuantPackage(models.Model):
     @api.multi
     def open_website_url(self):
         """Open website for parcel tracking.
+
         Each carrier should implement _get_tracking_link
         There is low chance you need to override this method.
         returns:
@@ -213,7 +214,6 @@ class StockQuantPackage(models.Model):
         """Build a tracking url.
 
         You have to implement it for your carrier.
-
         It's like :
             'https://the-carrier.com/?track=%s' % self.parcel_tracking
         returns:
@@ -234,11 +234,12 @@ class StockQuantPackage(models.Model):
 
     def _roulier_carrier_error_handling(self, payload, exception):
         """Build exception message for carrier error.
-        It's happen when the carrier WS returns something unexpected.
 
+        It's happen when the carrier WS returns something unexpected.
         You may improve this for your carrier.
         returns:
-            string"""
+            string
+        """
         return _(u'Sent data:\n%s\n\nException raised:\n%s\n' % (
             payload, exception.message))
 
@@ -301,7 +302,7 @@ class StockQuantPackage(models.Model):
 
     def _roulier_prepare_label(self, picking, response):
         """Prepare a dict for building a shipping.label.
-        
+
         The shipping label is what you stick on your packages.
         returns:
             dict
@@ -319,7 +320,7 @@ class StockQuantPackage(models.Model):
         }
 
     def _roulier_prepare_attachments(self, picking, response):
-         """Prepare a list of dicts for building ir.attachemens.
+        """Prepare a list of dicts for building ir.attachemens.
 
         Attachements are annexes like customs declarations, summary
         etc.
@@ -338,7 +339,6 @@ class StockQuantPackage(models.Model):
                 self.name, attachment['name'], attachment['type']),
         } for attachment in attachments]
 
-
     def _roulier_handle_tracking(self, picking, response):
         """Extract tracking number from response call to parcel_tracking."""
         tracking = response.get('tracking')
@@ -346,4 +346,3 @@ class StockQuantPackage(models.Model):
             number = tracking.get('number')
             if number:
                 self.parcel_tracking = number
- 
