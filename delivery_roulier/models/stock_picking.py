@@ -256,7 +256,7 @@ class StockPicking(models.Model):
 
         packages = self._get_packages_from_picking()
         if len(packages) == 0:
-            raise UserError('No packages found for this picking')
+            raise UserError(_('No packages found for this picking'))
         elif len(packages) == 1:
             return packages.open_website_url()  # shortpath
 
