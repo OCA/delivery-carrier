@@ -1,5 +1,6 @@
 # coding: utf-8
-#  @author Raphael Reverdy @ Akretion <raphael.reverdy@akretion.com>
+#  @author Raphael Reverdy <raphael.reverdy@akretion.com>
+#          David BEAL <david.beal@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from datetime import datetime, timedelta
@@ -16,10 +17,6 @@ try:
 except ImportError:
     _logger.debug('Cannot `import roulier`.')
 
-# if you want to integrate a new carrier with Roulier Library
-# start from roulier_template.py and read the doc of
-# implemented_by_carrier decorator
-
 
 def implemented_by_carrier(func):
     """Decorator: call _carrier_prefixed method instead.
@@ -32,7 +29,6 @@ def implemented_by_carrier(func):
 
     At runtime, picking._do_something() will try to call
     the carrier spectific method or fallback to generic _do_something
-
     """
     @wraps(func)
     def wrapper(cls, *args, **kwargs):
@@ -48,12 +44,6 @@ def implemented_by_carrier(func):
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
-    # base_delivery_carrier_label API implementataion
-
-    # @api.multi
-    # def generate_default_label(self, package_ids=None):
-    # useless method
-
     customs_category = fields.Selection(
         selection=[
             ('gift', _("Gift")),
@@ -65,23 +55,13 @@ class StockPicking(models.Model):
         ],
         default='commercial',
         help="Type of sending for the customs")
-    display_insurance = fields.Boolean(
-        compute='_compute_check_options',
-        string="Define a condition to display/hide your custom Insurance"
-               "field with a decated view")
 
-    @api.multi
-    @api.depends('option_ids')
-    def _compute_check_options(self):
-        insurance_opt = self.env.ref(
-            'delivery_roulier.carrier_opt_tmpl_INS', False)
-        for rec in self:
-            if insurance_opt in [x.tmpl_option_id for x in rec.option_ids]:
-                rec.display_insurance = True
-            else:
-                rec.display_insurance = False
-                _logger.info("   >>> in _compute_check_options() %s" %
-                             rec.display_insurance)
+    # base_delivery_carrier_label API implementataion
+
+    # def generate_default_label(self, package_ids=None):
+    # useless method
+
+    # API:
 
     @implemented_by_carrier
     def _get_sender(self, package):
@@ -93,14 +73,6 @@ class StockPicking(models.Model):
 
     @implemented_by_carrier
     def _get_shipping_date(self, package):
-        pass
-
-    @implemented_by_carrier
-    def _map_options(self):
-        pass
-
-    @implemented_by_carrier
-    def _get_options(self, package):
         pass
 
     @implemented_by_carrier
@@ -119,6 +91,9 @@ class StockPicking(models.Model):
     def _convert_address(self, partner):
         pass
 
+    # End of API.
+
+    # Implementations for base_delivery_carrier_label
     @api.multi
     def _is_roulier(self):
         self.ensure_one()
@@ -126,7 +101,7 @@ class StockPicking(models.Model):
 
     @api.multi
     def generate_labels(self, package_ids=None):
-        """See base_delivery_carrier_label/stock.py."""
+        """See base_delivery_carrier_label/models/stock_picking.py."""
         # entry point
         self.ensure_one()
         if self._is_roulier():
@@ -138,7 +113,6 @@ class StockPicking(models.Model):
     def generate_shipping_labels(self, package_ids=None):
         """See base_delivery_carrier_label/stock.py."""
         self.ensure_one()
-
         if self._is_roulier():
             raise UserError(_("Don't call me directly"))
         _super = super(StockPicking, self)
@@ -156,7 +130,7 @@ class StockPicking(models.Model):
         self.carrier_tracking_ref = True  # display button in view
         return packages._generate_labels(self)
 
-    # default implementations
+    # Default implementations of _roulier_*()
     def _roulier_get_auth(self, package):
         """Login/password of the carrier account.
 
@@ -188,15 +162,6 @@ class StockPicking(models.Model):
             [['namespace', '=', 'roulier_%s' % self.carrier_type]])
         return accounts[0]
 
-    def _roulier_get_service(self, package):
-        shipping_date = self._get_shipping_date(package)
-
-        service = {
-            'product': self.carrier_code,
-            'shippingDate': shipping_date,
-        }
-        return service
-
     def _roulier_get_sender(self, package):
         """Sender of the picking (for the label).
 
@@ -206,7 +171,7 @@ class StockPicking(models.Model):
         return self.company_id.partner_id
 
     def _roulier_get_receiver(self, package):
-        """The guy who the shippment is for.
+        """The guy whom the shippment is for.
 
         At home or at a distribution point, it's always
         the same receiver address.
@@ -217,35 +182,12 @@ class StockPicking(models.Model):
         return self.partner_id
 
     def _roulier_get_shipping_date(self, package):
+        """Choose a shipping date.
+
+        By default, it's tomorrow."""
         tomorrow = datetime.now() + timedelta(1)
         return tomorrow.strftime('%Y-%m-%d')
 
-    @api.model
-    def _roulier_map_options(self):
-        """Customize this mapping with your own carrier.
-
-        Like
-            return {
-                'FCR': 'fcr',
-                'COD': 'cod',
-                'INS': 'ins',
-            }
-        """
-        return {}
-
-    def _roulier_get_options(self, package):
-        mapping_options = self._map_options()
-        options = {}
-        if self.option_ids:
-            for opt in self.option_ids:
-                opt_key = str(opt.tmpl_option_id['code'])
-                if opt_key in mapping_options:
-                    options[mapping_options[opt_key]] = True
-                else:
-                    options[opt_key] = True
-        return options
-
-    @api.model
     def _roulier_convert_address(self, partner):
         """Convert a partner to an address for roulier.
 
@@ -283,6 +225,23 @@ class StockPicking(models.Model):
         address['phone'] = address.get('mobile', address.get('phone'))
 
         return address
+
+    def _roulier_get_service(self, package):
+        """Return a basic dict.
+
+        The carrier implementation may add stuff
+        like agency or options.
+
+        return:
+            dict
+        """
+        shipping_date = self._get_shipping_date(package)
+
+        service = {
+            'product': self.carrier_code,
+            'shippingDate': shipping_date,
+        }
+        return service
 
     @api.multi
     def open_website_url(self):
