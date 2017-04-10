@@ -289,7 +289,7 @@ class StockQuantPackage(models.Model):
             payload, exception.message))
 
     def _roulier_invalid_api_input_handling(self, payload, exception):
-        return _(u'Bad input: %s\n', exception.message)
+        return _(u'Bad input: %s\n' % exception.message)
 
     def _roulier_open_tracking_url(self):
         _logger.warning("not implemented")
