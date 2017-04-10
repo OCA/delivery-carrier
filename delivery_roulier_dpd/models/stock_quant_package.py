@@ -1,8 +1,6 @@
 # coding: utf-8
 #  @author Raphael Reverdy <raphael.reverdy@akretion.com>
-#          David BEAL <david.beal@akretion.com>
 #          EBII MonsieurB <monsieurb@saaslys.com>
-#          Sébastien BEAU
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from openerp import api, models
@@ -40,7 +38,6 @@ class StockQuantPackage(models.Model):
         return False
 
     def _dpd_carrier_error_handling(self, payload, exception):
-
         if self._uid > 1:
             # rm pwd from dict and xml
             payload['auth']['password'] = '****'

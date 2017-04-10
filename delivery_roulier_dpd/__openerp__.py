@@ -1,7 +1,6 @@
 # coding: utf-8
 # © 2016 Raphael REVERDY <raphael.reverdy@akretion.com>
-#        David BEAL <david.beal@akretion.com>
-#        Sébastien BEAU <sebastien.beau@akretion.com>
+#        EBII MonsieurB <monsieurb@saaslys.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 {
@@ -13,8 +12,7 @@
     'category': 'Warehouse',
     'depends': [
         'delivery_roulier',
-        'base_phone', ],
-
+    ],
     'website': 'http://www.akretion.com/',
     'data': [
         'data/delivery.xml',
