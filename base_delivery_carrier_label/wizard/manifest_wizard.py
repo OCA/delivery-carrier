@@ -37,7 +37,8 @@ class ManifestWizard(models.TransientModel):
         required=True
     )
     carrier_type = fields.Selection(
-        related='carrier_id.type',
+        selection='_get_carrier_type_selection',
+        related='carrier_id.carrier_type',
         string='Carrier Type',
         readonly=True,
     )
