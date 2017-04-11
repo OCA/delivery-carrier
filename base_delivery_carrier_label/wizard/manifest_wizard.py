@@ -21,7 +21,7 @@
 from openerp import models, fields, api, exceptions, _
 
 
-class ManifestWizard(models.Model):
+class ManifestWizard(models.TransientModel):
     _name = 'manifest.wizard'
     _description = 'Delivery carrier manifest wizard'
 
