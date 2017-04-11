@@ -4,7 +4,6 @@
 {'name': 'Delivery Carrier Labels Direct Print',
  'version': '10.0.1.0.0',
  'author': "PESOL,Odoo Community Association (OCA)",
- 'maintainer': 'PESOL',
  'website': 'http://www.pesol.es',
  'category': 'Delivery',
  'depends': [
