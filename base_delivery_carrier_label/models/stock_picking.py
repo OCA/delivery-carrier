@@ -78,6 +78,18 @@ class StockPicking(models.Model):
         return labels
 
     @api.multi
+    def get_shipping_label_values(self, label):
+        self.ensure_one()
+        return {
+            'name': label['name'],
+            'datas_fname': label.get('filename', label['name']),
+            'res_id': self.id,
+            'res_model': 'stock.picking',
+            'datas': label['file'].encode('base64'),
+            'file_type': label['file_type'],
+        }
+
+    @api.multi
     def generate_labels(self, package_ids=None):
         """ Generate the labels.
 
@@ -95,14 +107,7 @@ class StockPicking(models.Model):
             else:
                 shipping_labels = pick.generate_shipping_labels()
             for label in shipping_labels:
-                data = {
-                    'name': label['name'],
-                    'datas_fname': label.get('filename', label['name']),
-                    'res_id': pick.id,
-                    'res_model': 'stock.picking',
-                    'datas': label['file'].encode('base64'),
-                    'file_type': label['file_type'],
-                }
+                data = pick.get_shipping_label_values(label)
                 if label.get('package_id'):
                     data['package_id'] = label['package_id']
                 context_attachment = self.env.context.copy()
