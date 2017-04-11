@@ -1,27 +1,10 @@
-# -*- encoding: utf-8 -*-
-##############################################################################
-#
-#    OpenERP, Open Source Management Solution
-#    Copyright (C) 2015 FactorLibre (http://www.factorlibre.com)
-#                  Ismael Calvo <ismael.calvo@factorlibre.com>
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# -*- coding: utf-8 -*-
+# © 2015 FactorLibre - Ismael Calvo <ismael.calvo@factorlibre.com>
+# © 2017 PESOL - Angel Moya <angel.moya@pesol.es>
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 import logging
 from unidecode import unidecode
-from urllib2 import HTTPError
+# from urllib2 import HTTPError
 
 from openerp import models, fields, api, exceptions
 from openerp.tools.translate import _
@@ -105,43 +88,36 @@ class StockPicking(models.Model):
         if config.file_type == 'pdf':
             seur_context['pdf'] = True
 
-        seur_picking = Picking(
-            config.username,
-            config.password,
-            config.vat,
-            config.franchise_code,
-            'Odoo',  # seurid
-            config.integration_code,
-            config.accounting_code,
-            seur_context
-        )
-
-        try:
-            connect = seur_picking.test_connection()
-            if connect != 'Connection successfully':
-                raise exceptions.Warning(
-                    _('Error connecting with SEUR:\n%s') % connect)
-        except HTTPError, e:
-            raise exceptions.Warning(
-                _('Error connecting with SEUR try later:\n%s') % e)
-
         data = self._get_label_data()
-        tracking_ref, label, error = seur_picking.create(data)
+        tracking_ref = False
+        label = False
+        with Picking(config.username,
+                              config.password,
+                              config.vat,
+                              config.franchise_code,
+                              'Odoo',  # seurid
+                              config.integration_code,
+                              config.accounting_code,
+                              100.0,
+                              seur_context) as picking_api:
+            tracking_ref, label, error = picking_api.create(data)
 
-        if error:
-            raise exceptions.Warning(
-                _('Error sending label to SEUR\n%s') % error)
+            if error:
+                raise exceptions.Warning(
+                    _('Error sending label to SEUR\n%s') % error)
 
-        self.carrier_tracking_ref = tracking_ref
+            self.carrier_tracking_ref = tracking_ref
 
-        if config.file_type == 'pdf':
-            label = label.decode('base64')
-
-        return [{
-            'name': self.name + '_' + tracking_ref + '.' + config.file_type,
-            'file': label,
-            'file_type': config.file_type
-        }]
+            if config.file_type == 'pdf':
+                label = label.decode('base64')
+        if tracking_ref and label:
+            return {
+                    'name': self.name + '_' + tracking_ref + '.' + config.file_type,
+                    'file': label,
+                    'file_type': config.file_type
+                    }
+        else:
+            return False
 
     def _get_label_data(self):
         partner = self.partner_id.parent_id or self.partner_id
@@ -158,14 +134,14 @@ class StockPicking(models.Model):
             warehouse.partner_id.country_id.code and \
             self.partner_id.country_id.code != warehouse.partner_id.\
                 country_id.code:
-                international = True
+            international = True
 
         data = {
             'servicio': unidecode(self.seur_service_code),
             'product': unidecode(self.seur_product_code),
             'total_bultos': self.number_of_packages or '1',
             'total_kilos': self.weight or '1',
-            'peso_bulto': self.weight_net or '1',
+            'peso_bulto': self.shipping_weight or '1',
             'observaciones': self.note and unidecode(self.note) or '',
             'referencia_expedicion': unidecode(self.name),
             'ref_bulto': '',
@@ -173,15 +149,15 @@ class StockPicking(models.Model):
             'clave_reembolso': '',
             'valor_reembolso': '',
             'cliente_nombre': unidecode(partner.name),
-            'cliente_direccion': unidecode(partner.street +
-                                           (' ' + partner.street2 or '')),
+            'cliente_direccion': unidecode(
+                ' '.join([partner.street or '', partner.street2 or ''])),
             'cliente_tipovia': 'CL',
             'cliente_tnumvia': 'N',
             'cliente_numvia': ' ',
             'cliente_escalera': '',
             'cliente_piso': '',
             'cliente_puerta': '',
-            'cliente_poblacion': unidecode(partner.city),
+            'cliente_poblacion': unidecode(partner.city or ''),
             'cliente_cpostal': (partner.zip and
                                 unidecode(partner.zip.replace(" ", "")) or
                                 self.warn(_('ZIP'), _('partner'))),
@@ -199,10 +175,10 @@ class StockPicking(models.Model):
             _('Please, enter a %s for %s') % (field, for_str))
 
     @api.multi
-    def generate_shipping_labels(self, package_ids=None):
+    def generate_default_label(self, package_ids=None):
         """ Add label generation for SEUR """
         self.ensure_one()
-        if self.carrier_id.type == 'seur':
+        if self.carrier_id.carrier_type == 'seur':
             return self._generate_seur_label(package_ids=package_ids)
-        return super(StockPicking, self).generate_shipping_labels(
+        return super(StockPicking, self).generate_default_label(
             package_ids=package_ids)
