@@ -141,17 +141,14 @@ DELIVERY_MAPPING = {
     'T540': "shipping_date",
     'T8318': "commentary",
     'T8975': "gls_origin_reference",
-    'T8912': "gls_origin_reference",
     'T8905': "parcel_total_number",
     'T8702': "parcel_total_number",
 }
 ACCOUNT_MAPPING = {
     'T8915': "customer_id",
-    'T805': "customer_id",
     'T8914': "contact_id",
     'T8700': "outbound_depot",
-    'T811': "shipper_street",
-    'T820': "shipper_street2",
+    'T820': "shipper_street",
     'T810': "shipper_name",
     'T822': "shipper_zip",
     'T823': "shipper_city",
@@ -317,6 +314,8 @@ code: %s ; message: %s ; result: %s""" % (code, message, result))
         all_dict.update(T_address)
         all_dict.update(self.add_specific_keys(address))
         if address['country_code'] != 'FR':
+            request = False
+            raw_response = False
             label_content = self.select_label(
                 parcel['parcel_number_label'], all_dict, address)
             if ('contact_id_inter' not in self.sender or
@@ -328,7 +327,9 @@ code: %s ; message: %s ; result: %s""" % (code, message, result))
         else:
             failed_webservice = False
             # webservice
-            response = self.get_webservice_response(all_dict)
+            request = dict_to_gls_data(all_dict)
+            raw_response = self.get_webservice_response(request)
+            response = gls_decode(raw_response)
             # refactor webservice response failed and webservice downed
             if isinstance(response, dict):
                 if self.get_result_analysis(response['RESULT'], all_dict):
@@ -359,7 +360,9 @@ code: %s ; message: %s ; result: %s""" % (code, message, result))
             return {
                 "content": content2print,
                 "tracking_number": tracking_number,
-                'filename': self.filename
+                'filename': self.filename,
+                'request': request,
+                'raw_response': raw_response,
             }
         except:
             traceback = RichTraceback()
@@ -370,8 +373,7 @@ code: %s ; message: %s ; result: %s""" % (code, message, result))
                 "%s: %s"
                 % (str(traceback.error.__class__.__name__), traceback.error))
 
-    def get_webservice_response(self, params):
-        request = dict_to_gls_data(params)
+    def get_webservice_response(self, request):
         connection = httplib.HTTPConnection(self.webservice_location, GLS_PORT)
         connection.request(
             "POST",
@@ -388,7 +390,7 @@ code: %s ; message: %s ; result: %s""" % (code, message, result))
                 % (response.status, response.reason))
         datas = response.read()
         connection.close()
-        return gls_decode(datas)
+        return datas
 
     def map_semantic_keys(self, T_keys, datas):
         mapping = {}
