@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<openerp>
+    <data>
+
+<!-- FORM -->
+
+<record id="view_picking_out_form" model="ir.ui.view">
+    <field name="model">stock.picking.out</field>
+    <field name="inherit_id"
+           ref="base_delivery_carrier_label.view_picking_out_form"/>
+    <field name="priority">100</field>
+    <field name="arch" type="xml">
+        <field name="partner_id" position="after">
+            <span class="oe_grey oe_inline" colspan="2" attrs="{'invisible': [('has_final_recipient', '=', False)]}">
+With this Carrier, 'customer' field should be considered <br/>as Dropoff Site and 'final recipient' field as Customer</span>
+            <field name="final_partner_id"
+                   attrs="{'invisible': [('has_final_recipient', '=', False)], 'required': [('has_final_recipient', '=', True)]}"/>
+            <field name="has_final_recipient" invisible="0"/>
+        </field>
+    </field>
+</record>
+
+    </data>
+</openerp>

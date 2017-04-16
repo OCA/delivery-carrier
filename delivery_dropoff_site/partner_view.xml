@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+<record id="view_partner_dropoff_site_form" model="ir.ui.view">
+    <field name="model">partner.dropoff.site</field>
+    <field name="arch" type="xml">
+        <form string="Drop-off Sites" version="7.0">
+            <sheet>
+                <h1>
+                    <label for="name" string="Site"/>
+                    <field name="name" class="oe_inline"/>
+                </h1>
+                <group name="address" col="4">
+                    <field name="street"/>
+                    <field name="street2"/>
+                    <field name="zip"/>
+                    <field name="city"/>
+                </group>
+                <separator string="Specific infos"/>
+                <group name="main" col="4">
+                    <group name="left">
+                        <field name="code"/>
+                        <field name="weight"/>
+                    </group>
+                    <group name="right">
+                        <field name="dropoff_type"/>
+                        <field name="subtype"/>
+                    </group>
+                </group>
+                <br/>
+                <div>
+    Drop-off Sites are specific areas where carriers ship merchandises.
+    <newline/>
+    Recipients comes pick up their packages in these sites
+                </div>
+            </sheet>
+        </form>
+    </field>
+</record>
+
+<record id="view_partner_dropoff_site_tree" model="ir.ui.view">
+    <field name="model">partner.dropoff.site</field>
+    <field name="arch" type="xml">
+        <tree string="Label">
+            <field name="name"/>
+            <field name="zip"/>
+            <field name="city"/>
+            <field name="code"/>
+            <field name="weight"/>
+            <field name="subtype"/>
+            <field name="dropoff_type"/>
+        </tree>
+    </field>
+</record>
+
+<record id="view_partner_dropoff_site_search" model="ir.ui.view">
+    <field name="model">partner.dropoff.site</field>
+    <field name="priority" eval="8"/>
+    <field name="arch" type="xml">
+        <search string="Dropoff site">
+            <field name="name" select="True"/>
+            <field name="zip" select="True"/>
+            <field name="city" select="True"/>
+            <field name="subtype" select="True"/>
+            <field name="dropoff_type" select="True"/>
+            <field name="code" select="True"/>
+        </search>
+    </field>
+</record>
+
+<record id="action_dropoff" model="ir.actions.act_window">
+    <field name="name">Dropoff Sites</field>
+    <field name="res_model">partner.dropoff.site</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">tree,form</field>
+</record>
+
+<menuitem action="action_dropoff"
+          id="act_menu_dropoff"
+          parent="delivery.menu_delivery"
+          sequence="30" />
+
+    </data>
+</openerp>
