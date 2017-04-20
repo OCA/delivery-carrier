@@ -410,19 +410,19 @@ class PostlogisticsWebService(object):
         label_layout = self._get_label_layout(picking)
         if not label_layout:
             raise exceptions.UserError(
-                _('Layout not set'),
+                _('Layout not set') + '\n' +
                 error_missing % _("label layout"))
 
         output_format = self._get_output_format(picking)
         if not output_format:
             raise exceptions.UserError(
-                _('Output format not set'),
+                _('Output format not set') + '\n' +
                 error_missing % _("output format"))
 
         image_resolution = self._get_image_resolution(picking)
         if not image_resolution:
             raise exceptions.UserError(
-                _('Resolution not set'),
+                _('Resolution not set') + '\n' +
                 error_missing % _("resolution"))
 
         label_definitions = {
