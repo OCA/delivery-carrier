@@ -99,6 +99,7 @@ class StockPicking(models.Model):
             info = info_from_label(label)
             info['package_id'] = False
             labels.append(info)
+            return labels
 
         tracking_refs = []
         for package in packages:
