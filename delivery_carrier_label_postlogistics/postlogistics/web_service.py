@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# © 2013-2016 Yannick Vaucher (Camptocamp SA)
+# Copyright 2013-2017 Yannick Vaucher (Camptocamp SA)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import re
 import logging
@@ -8,7 +8,7 @@ from PIL import Image
 from StringIO import StringIO
 import ssl
 
-from openerp import exceptions, _
+from odoo import _, exceptions
 
 _logger = logging.getLogger(__name__)
 
@@ -52,6 +52,7 @@ class PostlogisticsWebService(object):
 
     def __init__(self, company):
         self.init_connection(company)
+        self.default_lang = company.partner_id.lang or 'en'
 
     def init_connection(self, company):
         if company.postlogistics_test_mode:
@@ -104,7 +105,7 @@ class PostlogisticsWebService(object):
         return res
 
     def _get_language(self, lang):
-        """ Return a language to iso format from openerp format.
+        """ Return a language to iso format from odoo format.
 
         `iso_code` field in res.lang is not mandatory thus not always set.
         Use partner language if available, otherwise use english
@@ -113,51 +114,42 @@ class PostlogisticsWebService(object):
         :return: language code to use.
 
         """
+        if not lang:
+            lang = self.default_lang
         available_languages = self.client.factory.create('ns0:Language')
         lang_code = lang.split('_')[0]
         if lang_code in available_languages:
             return lang_code
         return 'en'
 
-    def read_allowed_services_by_franking_license(self, cp_license, company,
-                                                  lang=None):
+    def read_allowed_services_by_franking_license(self, cp_license, lang=None):
         """ Get a list of allowed service for a postlogistics licence """
-        if not lang:
-            lang = company.partner_id.lang or 'en'
         lang = self._get_language(lang)
         request = self.client.service.ReadAllowedServicesByFrankingLicense
         return self._send_request(request, FrankingLicense=cp_license,
                                   Language=lang)
 
-    def read_service_groups(self, company, lang):
+    def read_service_groups(self, lang):
         """ Get group of services """
-        if not lang:
-            lang = company.partner_id.lang
         lang = self._get_language(lang)
         request = self.client.service.ReadServiceGroups
         return self._send_request(request, Language=lang)
 
-    def read_basic_services(self, company, service_group_id, lang):
+    def read_basic_services(self, service_group_id, lang):
         """ Get basic services for a given service group """
-        if not lang:
-            lang = company.partner_id.lang
         lang = self._get_language(lang)
         request = self.client.service.ReadBasicServices
         return self._send_request(request, Language=lang,
                                   ServiceGroupID=service_group_id)
 
-    def read_additional_services(self, company, service_code, lang):
+    def read_additional_services(self, service_code, lang):
         """ Get additional services compatible with a basic services """
-        if not lang:
-            lang = company.partner_id.lang
         lang = self._get_language(lang)
         request = self.client.service.ReadAdditionalServices
         return self._send_request(request, Language=lang, PRZL=service_code)
 
-    def read_delivery_instructions(self, company, service_code, lang):
+    def read_delivery_instructions(self, service_code, lang):
         """ Get delivery instruction 'ZAW' compatible with a base service """
-        if not lang:
-            lang = company.partner_id.lang
         lang = self._get_language(lang)
         request = self.client.service.ReadDeliveryInstructions
         return self._send_request(request, Language=lang, PRZL=service_code)

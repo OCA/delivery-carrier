@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
-# © 2015 Guewen Baconnier (Camptocamp SA)
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+# Copyright 2015-2017 Camptocamp
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import mock
-from openerp.tests import common
-from openerp.addons.delivery_carrier_label_postlogistics\
+
+from odoo.tests import common
+from odoo.addons.delivery_carrier_label_postlogistics\
     .postlogistics.web_service import PostlogisticsWebService
 
 
@@ -24,11 +25,11 @@ class FakeWS(PostlogisticsWebService):
         return result
 
 
-client_path = ('openerp.addons.delivery_carrier_label_postlogistics'
+client_path = ('odoo.addons.delivery_carrier_label_postlogistics'
                '.postlogistics.web_service.Client')
-auth_path = ('openerp.addons.delivery_carrier_label_postlogistics'
+auth_path = ('odoo.addons.delivery_carrier_label_postlogistics'
              '.postlogistics.web_service.HttpAuthenticated')
-output_path = ('openerp.addons.delivery_carrier_label_postlogistics'
+output_path = ('odoo.addons.delivery_carrier_label_postlogistics'
                '.postlogistics.web_service.PostlogisticsWebService'
                '._get_output_format')
 
