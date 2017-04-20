@@ -45,6 +45,15 @@ class TestPostlogistics(common.TransactionCase):
             'product_id': Product.create({'name': 'Shipping'}).id,
             'partner_id': self.env.ref(partner_xmlid).id,
         })
+        Option = self.env['delivery.carrier.template.option']
+        label_layout = Option.create({'code': 'A6'})
+        output_format = Option.create({'code': 'pdf'})
+        image_resolution = Option.create({'code': '600pp'})
+        self.env.user.company_id.write({
+            'postlogistics_default_label_layout': label_layout.id,
+            'postlogistics_default_output_format': output_format.id,
+            'postlogistics_default_resolution': image_resolution.id,
+        })
         stock_location = self.env.ref('stock.stock_location_stock')
         customer_location = self.env.ref('stock.stock_location_customers')
         Picking = self.env['stock.picking']

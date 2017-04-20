@@ -1,24 +1,42 @@
 # -*- coding: utf-8 -*-
-# © 2013-2015 Yannick Vaucher (Camptocamp SA)
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+# © 2013-2016 Yannick Vaucher (Camptocamp SA)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import re
 import logging
+from urllib2 import HTTPSHandler
 from PIL import Image
 from StringIO import StringIO
+import ssl
 
 from openerp import exceptions, _
 
-_compile_itemid = re.compile(r'[^0-9A-Za-z+\-_]')
 _logger = logging.getLogger(__name__)
 
 try:
+    from suds.xsd.doctor import Import, ImportDoctor
     from suds.client import Client, WebFault
     from suds.transport.http import HttpAuthenticated
+    from suds.transport.https import HttpAuthenticated as HttpsAuth
+    from suds.cache import NoCache
 except ImportError:
     _logger.warning(
         'suds library not found. '
         'If you plan to use it, please install the suds library '
         'from https://pypi.python.org/pypi/suds')
+
+_compile_itemid = re.compile(r'[^0-9A-Za-z+\-_]')
+_compile_itemnum = re.compile(r'[^0-9]')
+
+
+class IntegrationTransport(HttpsAuth):
+    """ Transport for integration to works with self signed SSL certificates
+    """
+
+    def u2handlers(self):
+        handlers = HttpsAuth.u2handlers(self)
+        ssl_context = ssl._create_unverified_context()
+        handlers.append(HTTPSHandler(context=ssl_context))
+        return handlers
 
 
 class PostlogisticsWebService(object):
@@ -36,12 +54,30 @@ class PostlogisticsWebService(object):
         self.init_connection(company)
 
     def init_connection(self, company):
-        t = HttpAuthenticated(
-            username=company.postlogistics_username,
-            password=company.postlogistics_password)
-        self.client = Client(
-            company.postlogistics_wsdl_url,
-            transport=t)
+        if company.postlogistics_test_mode:
+            # We must change location for namespace as suds will take the wrong
+            # one and find nothing
+            # In order to have the test_mode working, it is necessary to patch
+            # suds with https://fedorahosted.org/suds/attachment/ticket/239/suds_recursion.patch # noqa
+            ns = "https://int.wsbc.post.ch/wsbc/barcode/v2_2/types"
+            location = "https://int.wsbc.post.ch/wsbc/barcode/v2_2?xsd=1"
+            imp = Import(ns, location)
+            doctor = ImportDoctor(imp)
+            t = IntegrationTransport(
+                username=company.postlogistics_username,
+                password=company.postlogistics_password)
+            self.client = Client(
+                company.postlogistics_wsdl_url,
+                transport=t,
+                cache=NoCache(),
+                doctor=doctor)
+        else:
+            t = HttpAuthenticated(
+                username=company.postlogistics_username,
+                password=company.postlogistics_password)
+            self.client = Client(
+                company.postlogistics_wsdl_url,
+                transport=t)
 
     def _send_request(self, request, **kwargs):
         """ Wrapper for API requests
@@ -156,11 +192,13 @@ class PostlogisticsWebService(object):
         is_phone_required = [option for option in picking.option_ids
                              if option.code == 'ZAW3213']
         if is_phone_required:
-            if partner.phone:
-                recipient['Phone'] = partner.phone
+            phone = picking.delivery_phone or partner.phone
+            if phone:
+                recipient['Phone'] = phone
 
-            if partner.mobile:
-                recipient['Mobile'] = partner.mobile
+            mobile = picking.delivery_mobile or partner.mobile
+            if mobile:
+                recipient['Mobile'] = mobile
 
         return recipient
 
@@ -242,7 +280,7 @@ class PostlogisticsWebService(object):
                                 if l.id in group_license_ids][0]
         return franking_license.number
 
-    def _prepare_attributes(self, picking):
+    def _prepare_attributes(self, picking, pack_num=None, pack_total=None):
         services = [option.code.split(',') for option in picking.option_ids
                     if option.tmpl_option_id.postlogistics_type
                     in ('basic', 'additional', 'delivery')]
@@ -250,6 +288,18 @@ class PostlogisticsWebService(object):
         attributes = {
             'PRZL': services,
         }
+        option_codes = [option.code for option in picking.option_ids]
+        if 'ZAW3217' in option_codes and picking.delivery_fixed_date:
+            attributes['DeliveryDate'] = picking.delivery_fixed_date
+        if 'ZAW3218' in option_codes and pack_num:
+            attributes.update({
+                'ParcelTotal': pack_total or picking.number_of_packages,
+                'ParcelNo': pack_num,
+            })
+        if 'ZAW3219' in option_codes and picking.delivery_place:
+            attributes['DeliveryPlace'] = picking.delivery_place
+        if picking.company_id.postlogistics_proclima_logo:
+            attributes['ProClima'] = True
         return attributes
 
     def _get_itemid(self, picking, pack_no):
@@ -280,9 +330,23 @@ class PostlogisticsWebService(object):
             result += cod_attributes
         return result
 
-    def _prepare_item_list(self, picking, recipient, attributes, packages):
+    def _get_item_number(self, picking, pack_num):
+        """ Generate the tracking reference for the last 8 digits
+        of tracking number of the label.
+
+        2 first digits for a pack counter
+        6 last digits for the picking name
+
+        e.g. 03000042 for 3rd pack of picking OUT/19000042
+        """
+        picking_num = _compile_itemnum.sub('', picking.name)
+        return '%02d%s' % (pack_num, picking_num[-6:].zfill(6))
+
+    def _prepare_item_list(self, picking, recipient, packages):
         """ Return a list of item made from the pickings """
+        company = picking.company_id
         item_list = []
+        pack_counter = 1
 
         def add_item(package=None):
             assert picking or package
@@ -294,17 +358,33 @@ class PostlogisticsWebService(object):
                 'Recipient': recipient,
                 'Attributes': attributes,
             }
+            if company.postlogistics_tracking_format == 'picking_num':
+                if not package:
+                    # start with 9 to garentee uniqueness and use 7 digits
+                    # of picking number
+                    picking_num = _compile_itemnum.sub('', picking.name)
+                    item_number = '9%s' % picking_num[-7:].zfill(7)
+                else:
+                    item_number = self._get_item_number(picking, pack_counter)
+                item['ItemNumber'] = item_number
+
             additional_data = self._get_item_additional_data(picking,
                                                              package=package)
             if additional_data:
                 item['AdditionalINFOS'] = {'AdditionalData': additional_data}
+
             item_list.append(item)
 
         if not packages:
+            attributes = self._prepare_attributes(picking)
             add_item()
 
+        pack_total = len(packages)
         for pack in packages:
+            attributes = self._prepare_attributes(
+                picking, pack_counter, pack_total)
             add_item(package=pack)
+            pack_counter += 1
 
         return item_list
 
@@ -322,9 +402,28 @@ class PostlogisticsWebService(object):
 
     def _prepare_envelope(self, picking, post_customer, data):
         """ Define envelope for label request """
+        error_missing = _(
+            "You need to configure %s. You can set a default"
+            "value in Settings/Configuration/Carriers/Postlogistics."
+            " You can also set it on delivery method or on the picking."
+        )
         label_layout = self._get_label_layout(picking)
+        if not label_layout:
+            raise exceptions.UserError(
+                _('Layout not set') + '\n' +
+                error_missing % _("label layout"))
+
         output_format = self._get_output_format(picking)
+        if not output_format:
+            raise exceptions.UserError(
+                _('Output format not set') + '\n' +
+                error_missing % _("output format"))
+
         image_resolution = self._get_image_resolution(picking)
+        if not image_resolution:
+            raise exceptions.UserError(
+                _('Resolution not set') + '\n' +
+                error_missing % _("resolution"))
 
         label_definitions = {
             'LabelLayout': label_layout,
@@ -372,11 +471,8 @@ class PostlogisticsWebService(object):
         lang = self._get_language(user_lang)
         post_customer = self._prepare_customer(picking)
 
-        attributes = self._prepare_attributes(picking)
-
         recipient = self._prepare_recipient(picking)
-        item_list = self._prepare_item_list(picking, recipient, attributes,
-                                            packages)
+        item_list = self._prepare_item_list(picking, recipient, packages)
         data = self._prepare_data(item_list)
 
         envelope = self._prepare_envelope(picking, post_customer, data)
