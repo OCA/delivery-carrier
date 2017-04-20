@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
-# © 2013-2016 Yannick Vaucher (Camptocamp SA)
+# Copyright 2013-2017 Yannick Vaucher (Camptocamp SA)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from openerp import api, fields, models
-from openerp.tools import file_open
+from odoo import api, fields, models
+from odoo.tools import file_open
 
 
 class ResCompany(models.Model):
     _inherit = 'res.company'
 
-    postlogistics_wsdl_url = fields.Char(compute='_get_wsdl_url',
+    postlogistics_wsdl_url = fields.Char(compute='_compute_wsdl_url',
                                          string='WSDL URL',
                                          store=True)
     postlogistics_test_mode = fields.Boolean()
@@ -62,7 +62,7 @@ class ResCompany(models.Model):
     postlogistics_proclima_logo = fields.Boolean('Print ProClima logo')
 
     @api.depends('postlogistics_test_mode')
-    def _get_wsdl_url(self):
+    def _compute_wsdl_url(self):
         path = 'delivery_carrier_label_postlogistics/data/'
         filename = 'barcode_v2_2_wsbc.wsdl'
         wsdl_file, wsdl_path = file_open(
