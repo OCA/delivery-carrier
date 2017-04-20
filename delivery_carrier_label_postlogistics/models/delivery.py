@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-# © 2013-2016 Yannick Vaucher (Camptocamp SA)
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+# Copyright 2013-2017 Yannick Vaucher (Camptocamp SA)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from lxml import etree
-from openerp import models, fields, api
+from odoo import api, fields, models
 
 
 class PostlogisticsLicense(models.Model):
@@ -105,29 +105,24 @@ class DeliveryCarrierOption(models.Model):
 
     name = fields.Char(translate=True)
 
-    def fields_view_get(self, cr, uid, view_id=None, view_type='form',
-                        context=None, toolbar=False, submenu=False):
+    def fields_view_get(self, view_id=None, view_type='form',
+                        toolbar=False, submenu=False):
         _super = super(DeliveryCarrierOption, self)
-        result = _super.fields_view_get(cr, uid, view_id=view_id,
-                                        view_type=view_type, context=context,
+        result = _super.fields_view_get(view_id=view_id,
+                                        view_type=view_type,
                                         toolbar=toolbar, submenu=submenu)
-        xmlid = 'delivery_carrier_label_postlogistics.postlogistics'
-        ref = self.pool['ir.model.data'].xmlid_to_object
-        postlogistics_partner = ref(cr, uid, xmlid, context=context)
-        if context.get('default_carrier_id'):
-            carrier_obj = self.pool['delivery.carrier']
-            carrier = carrier_obj.browse(cr, uid,
-                                         context['default_carrier_id'],
-                                         context=context)
-            if carrier.partner_id == postlogistics_partner:
+        default_carrier_id = self.env.context.get('default_carrier_id')
+        if default_carrier_id:
+            carrier = self.env['delivery.carrier'].browse(default_carrier_id)
+            if carrier.is_postlogistics():
                 arch = result['arch']
                 doc = etree.fromstring(arch)
                 for node in doc.xpath("//field[@name='tmpl_option_id']"):
                     node.set(
                         'domain',
-                        "[('partner_id', '=', %s), "
+                        "[('product_id', '=', %s), "
                         " ('id', 'in', parent.allowed_option_ids[0][2])]" %
-                        postlogistics_partner.id
+                        carrier.product_id.id
                     )
                 result['arch'] = etree.tostring(doc)
         return result
@@ -137,6 +132,14 @@ class DeliveryCarrier(models.Model):
     """ Add service group """
     _inherit = 'delivery.carrier'
 
+    @api.multi
+    def is_postlogistics(self):
+        self.ensure_one()
+        xmlid = ('delivery_carrier_label_postlogistics'
+                 '.product_postlogistics_service')
+        postlogistics_delivery = self.env.ref(xmlid)
+        return self.product_id == postlogistics_delivery
+
     @api.model
     def _get_carrier_type_selection(self):
         """ Add postlogistics carrier type """
@@ -144,17 +147,15 @@ class DeliveryCarrier(models.Model):
         res.append(('postlogistics', 'Postlogistics'))
         return res
 
-    @api.depends('partner_id',
+    @api.depends('product_id',
                  'available_option_ids',
                  'available_option_ids.tmpl_option_id',
                  'available_option_ids.postlogistics_type',
                  )
-    def _get_basic_service_ids(self):
+    def _compute_basic_service_ids(self):
         """ Search in all options for PostLogistics basic services if set """
-        xmlid = 'delivery_carrier_label_postlogistics.postlogistics'
-        postlogistics_partner = self.env.ref(xmlid)
         for carrier in self:
-            if carrier.partner_id != postlogistics_partner:
+            if not carrier.is_postlogistics():
                 continue
 
             options = carrier.available_option_ids.filtered(
@@ -165,14 +166,14 @@ class DeliveryCarrier(models.Model):
                 continue
             self.postlogistics_basic_service_ids = options
 
-    @api.depends('partner_id',
+    @api.depends('product_id',
                  'postlogistics_service_group_id',
                  'postlogistics_basic_service_ids',
                  'postlogistics_basic_service_ids',
                  'available_option_ids',
                  'available_option_ids.postlogistics_type',
                  )
-    def _get_allowed_option_ids(self):
+    def _compute_allowed_option_ids(self):
         """ Return a list of possible options
 
         A domain would be too complicated.
@@ -183,12 +184,9 @@ class DeliveryCarrier(models.Model):
         """
         option_template_obj = self.env['delivery.carrier.template.option']
 
-        xmlid = 'delivery_carrier_label_postlogistics.postlogistics'
-        postlogistics_partner = self.env.ref(xmlid)
-
         for carrier in self:
             allowed = option_template_obj.browse()
-            if carrier.partner_id != postlogistics_partner:
+            if not carrier.is_postlogistics():
                 continue
 
             service_group = carrier.postlogistics_service_group_id
@@ -238,14 +236,14 @@ class DeliveryCarrier(models.Model):
     )
     postlogistics_basic_service_ids = fields.One2many(
         comodel_name='delivery.carrier.template.option',
-        compute='_get_basic_service_ids',
+        compute='_compute_basic_service_ids',
         string='PostLogistics Service Group',
         help="Basic Service defines the available "
              "additional options for this delivery method",
     )
     allowed_option_ids = fields.Many2many(
         comodel_name='delivery.carrier.template.option',
-        compute='_get_allowed_option_ids',
+        compute='_compute_allowed_option_ids',
         string='Allowed options',
         help="Compute allowed options according to selected options.",
     )

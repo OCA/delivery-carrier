@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+  <record id="product_postlogistics_service" model="product.product">
+    <field name="image" type="base64" file="delivery_carrier_label_postlogistics/static/img/postlogistics-logo.jpg"/>
+    <field name="name">PostLogistics Delivery</field>
+    <field name="type">service</field>
+    <field name="sale_ok" eval="False"/>
+  </record>
+</odoo>
