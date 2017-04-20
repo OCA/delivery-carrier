@@ -1,0 +1,11 @@
+<odoo>
+  <record id="partner_postlogistics" model="res.partner">
+      <field name="image"></field>
+    <field name="name">PostLogistics</field>
+    <field name="image" type="base64" file="delivery_carrier_label_postlogistics/static/img/postlogistics-logo.jpg"/>
+    <field name="customer" eval="False"/>
+    <field name="supplier" eval="False"/>
+    <field name="email">webservice@post.ch</field>
+  </record>
+</odoo>
+
