@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-# © 2013 Yannick Vaucher (Camptocamp SA)
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+# Copyright 2013-2017 Yannick Vaucher (Camptocamp SA)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from operator import attrgetter
 
-from openerp import _, api, exceptions, fields, models
+from odoo import _, api, exceptions, fields, models
 
 from ..postlogistics.web_service import PostlogisticsWebService
 
