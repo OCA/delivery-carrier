@@ -13,7 +13,6 @@
                             <field name="name"/>
                             <field name="carrier_id"/>
                             <field name="partner_id"/>
-                            <field name="origin"/>
                             <field name="state" invisible="1"/>
                         </tree>
                     </field>
@@ -45,7 +44,7 @@
             <field name="key2">client_action_multi</field>
             <field name="value" eval="'ir.actions.act_window,' + str(ref('action_delivery_carrier_file_generate'))" />
             <field name="key">action</field>
-            <field name="model">stock.picking.out</field>
+            <field name="model">stock.picking</field>
         </record>
 
     </data>

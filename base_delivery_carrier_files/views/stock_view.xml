@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-        <record id="view_picking_out_form_carrier_file" model="ir.ui.view">
-            <field name="name">stock.picking.out.form</field>
-            <field name="model">stock.picking.out</field>
-            <field name="inherit_id" ref="stock.view_picking_out_form"/>
+        <record id="view_picking_carrier_file_form" model="ir.ui.view">
+            <field name="name">stock.picking.form</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
             <field name="arch" type="xml">
                 <data>
-                    <page string="Additional Info" position="inside">
+                    <page name="extra" position="inside">
                         <group>
                             <field name="carrier_file_generated"/>
                         </group>
@@ -16,13 +16,13 @@
             </field>
         </record>
 
-        <record id="view_picking_out_search_carrier_file" model="ir.ui.view">
-            <field name="name">stock.picking.out.search</field>
-            <field name="model">stock.picking.out</field>
-            <field name="inherit_id" ref="stock.view_picking_out_search"/>
+        <record id="view_picking_internal_carrier_file_search" model="ir.ui.view">
+            <field name="name">stock.picking.search</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_internal_search"/>
             <field name="arch" type="xml">
                 <data>
-                    <filter name="to_invoice" position="after">
+                    <filter name="backorder" position="after">
                         <separator orientation="vertical"/>
                         <filter icon="terp-emblem-documents" name="carrier_file" string="Carrier File To Generate" domain="[('carrier_file_generated', '=', False), ('carrier_id', '!=', False), ('carrier_id.carrier_file_id', '!=', False), ('state', '=', 'done')]" help="Delivery orders to invoice"/>
                     </filter>
