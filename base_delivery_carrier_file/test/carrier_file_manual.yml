@@ -26,7 +26,7 @@
   I deliver outgoing shipment.
 -
   !python {model: stock.partial.picking}: |
-    context.update({'active_model': 'stock.picking.out', 'active_id': ref('outgoing_shipment_carrier_file_manual'), 'active_ids': [ref('outgoing_shipment_carrier_file_manual')]})
+    context.update({'active_model': 'stock.picking', 'active_id': ref('outgoing_shipment_carrier_file_manual'), 'active_ids': [ref('outgoing_shipment_carrier_file_manual')]})
 -
   !record {model: stock.partial.picking, id: partial_outgoing}:
     picking_id: outgoing_shipment_carrier_file_manual
@@ -36,16 +36,16 @@
 -
   I check shipment details after shipping, the carrier file must not have been generated
 -
-  !assert {model: stock.picking.out, id: outgoing_shipment_carrier_file_manual, string: Carrier file should be generated}:
+  !assert {model: stock.picking, id: outgoing_shipment_carrier_file_manual, string: Carrier file should be generated}:
     - carrier_file_generated is False
 -
   I generate the carrier files of my shipment from the wizard
 -
   !python {model: delivery.carrier.file.generate}: |
-    wizard_id = self.create(cr, uid, {}, {'active_ids': [ref('outgoing_shipment_carrier_file_manual')], 'active_model': 'stock.picking.out'})
+    wizard_id = self.create(cr, uid, {}, {'active_ids': [ref('outgoing_shipment_carrier_file_manual')], 'active_model': 'stock.picking'})
     self.action_generate(cr, uid, [wizard_id], {'active_ids': [ref('outgoing_shipment_carrier_file_manual')]})
 -
   I check shipment details after manual generation, the carrier file must have been generated
 -
-  !assert {model: stock.picking.out, id: outgoing_shipment_carrier_file_manual, string: Carrier file should be generated}:
+  !assert {model: stock.picking, id: outgoing_shipment_carrier_file_manual, string: Carrier file should be generated}:
     - carrier_file_generated == True

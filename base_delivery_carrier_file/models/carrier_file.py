@@ -141,7 +141,7 @@ class CarrierFile(models.Model):
         return self._generate_files(pickings)
 
 
-class delivery_carrier(models.Model):
+class DeliveryCarrier(models.Model):
     _inherit = 'delivery.carrier'
 
     carrier_file_id = fields.Many2one(
