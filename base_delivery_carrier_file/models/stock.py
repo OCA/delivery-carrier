@@ -47,24 +47,23 @@ class StockPicking(models.Model):
         :return: True if successful
         """
         carrier_files = {}
-        for picking in self:
-            if not recreate and picking.carrier_file_generated:
-                continue
-            carrier = picking.carrier_id
-            if not carrier or not carrier.carrier_file_id:
-                continue
-            if auto and not carrier.carrier_file_id.auto_export:
-                continue
-            p_carrier_file = picking.carrier_id.carrier_file_id
-            carrier_files.setdefault(p_carrier_file, []).\
-                append(picking)
+        pickings = self.filtered(
+            lambda p:
+                (not p.carrier_file_generated or p.recreate)
+                and p.carrier_id and p.carrier_id.carrier_file_id
+                and (p.carrier_id.carrier_file_id.auto_export or not auto)
+        )
 
-        for carrier_file, carrier_pickings in carrier_files.iteritems():
-            carrier_file.generate_files(carrier_pickings)
+        carrier_files = pickings.mapped('carrier_id.carrier_file_id')
+
+        for carrier_file in carrier_files:
+            pickings_by_carrier_file = pickings.filtered(
+                lambda p: p.carrier_id.carrier_file_id == carrier_file)
+            carrier_file.generate_files(pickings_by_carrier_file)
         return True
 
     @api.multi
-    def action_done(self):
-        result = super(StockPicking, self).action_done()
+    def do_new_transfer(self):
+        result = super(StockPicking, self).do_new_transfer()
         self.generate_carrier_files(auto=True)
         return result

@@ -1,6 +1,6 @@
 # Translation of OpenERP Server.
 # This file contains the translation of the following modules:
-#	* base_delivery_carrier_files
+#	* base_delivery_carrier_file
 #
 msgid ""
 msgstr ""
@@ -16,44 +16,44 @@ msgstr ""
 "X-Launchpad-Export-Date: 2014-06-27 07:09+0000\n"
 "X-Generator: Launchpad (build 17077)\n"
 
-#. module: base_delivery_carrier_files
-#: code:addons/base_delivery_carrier_files/wizard/generate_carrier_files.py:60
+#. module: base_delivery_carrier_file
+#: code:addons/base_delivery_carrier_file/wizard/generate_carrier_files.py:60
 #, python-format
 msgid "No delivery orders selected"
 msgstr "Pas de bon de livraison sélectionné"
 
-#. module: base_delivery_carrier_files
+#. module: base_delivery_carrier_file
 #: view:delivery.carrier.file.generate:0
 msgid "Generate the carrier files for the selected delivery orders."
 msgstr ""
 "Génère les fichiers de livraison pour les bons de livraison sélectionnés."
 
-#. module: base_delivery_carrier_files
+#. module: base_delivery_carrier_file
 #: help:stock.picking,carrier_file_generated:0
 msgid "The file for the delivery carrier has been generated."
 msgstr "Le fichier de livraison a déjà été livré."
 
-#. module: base_delivery_carrier_files
+#. module: base_delivery_carrier_file
 #: view:stock.picking:0
 msgid "Carrier File To Generate"
 msgstr "Fichier de livraison à générer"
 
-#. module: base_delivery_carrier_files
-#: model:ir.model,name:base_delivery_carrier_files.model_delivery_carrier_file
+#. module: base_delivery_carrier_file
+#: model:ir.model,name:base_delivery_carrier_file.model_delivery_carrier_file
 msgid "delivery.carrier.file"
 msgstr "delivery.carrier.file"
 
-#. module: base_delivery_carrier_files
-#: model:ir.model,name:base_delivery_carrier_files.model_stock_picking
+#. module: base_delivery_carrier_file
+#: model:ir.model,name:base_delivery_carrier_file.model_stock_picking
 msgid "Picking List"
 msgstr "Liste de colisage"
 
-#. module: base_delivery_carrier_files
+#. module: base_delivery_carrier_file
 #: view:delivery.carrier.file.generate:0
 msgid "Carrier Files"
 msgstr "Fichiers de livraison"
 
-#. module: base_delivery_carrier_files
+#. module: base_delivery_carrier_file
 #: help:delivery.carrier.file,auto_export:0
 msgid ""
 "The file will be automatically generated when a delivery order is processed. "
@@ -63,22 +63,22 @@ msgstr ""
 "expédié. Si activé, les bons de livraison seront toujours exportés dans des "
 "fichiers séparés."
 
-#. module: base_delivery_carrier_files
-#: model:ir.actions.act_window,name:base_delivery_carrier_files.action_delivery_carrier_file_generate
+#. module: base_delivery_carrier_file
+#: model:ir.actions.act_window,name:base_delivery_carrier_file.action_delivery_carrier_file_generate
 msgid "Generate Carrier Files"
 msgstr "Générer les fichiers de livraison"
 
-#. module: base_delivery_carrier_files
-#: model:ir.actions.act_window,help:base_delivery_carrier_files.action_delivery_carrier_file_form
+#. module: base_delivery_carrier_file
+#: model:ir.actions.act_window,help:base_delivery_carrier_file.action_delivery_carrier_file_form
 msgid "Generates automatically files asked by carriers for outgoing pickings"
 msgstr "Génère automatiquement les fichiers de livraison pour les"
 
-#. module: base_delivery_carrier_files
+#. module: base_delivery_carrier_file
 #: field:delivery.carrier.file,type:0
 msgid "Type"
 msgstr "Type"
 
-#. module: base_delivery_carrier_files
+#. module: base_delivery_carrier_file
 #: help:delivery.carrier.file,group_pickings:0
 msgid ""
 "All the pickings will be grouped in the same file. Has no effect when the "
@@ -87,92 +87,92 @@ msgstr ""
 "Tous les bons de livraison seront groupé dans un même fichier. Aucun effet "
 "si les fichiers sont créés lors de la livraison."
 
-#. module: base_delivery_carrier_files
-#: code:addons/base_delivery_carrier_files/carrier_file.py:73
-#: code:addons/base_delivery_carrier_files/wizard/generate_carrier_files.py:60
+#. module: base_delivery_carrier_file
+#: code:addons/base_delivery_carrier_file/carrier_file.py:73
+#: code:addons/base_delivery_carrier_file/wizard/generate_carrier_files.py:60
 #, python-format
 msgid "Error"
 msgstr "Erreur"
 
-#. module: base_delivery_carrier_files
+#. module: base_delivery_carrier_file
 #: field:delivery.carrier.file,auto_export:0
 msgid "Export at delivery order process"
 msgstr "Exporter à l'expédition du bon de livraison."
 
-#. module: base_delivery_carrier_files
+#. module: base_delivery_carrier_file
 #: field:delivery.carrier.file,group_pickings:0
 msgid "Group all pickings in one file"
 msgstr "Grouper tous les bons de livraison dans un fichier"
 
-#. module: base_delivery_carrier_files
+#. module: base_delivery_carrier_file
 #: field:delivery.carrier.file,name:0
 msgid "Name"
 msgstr "Nom"
 
-#. module: base_delivery_carrier_files
+#. module: base_delivery_carrier_file
 #: field:delivery.carrier.file,export_path:0
 msgid "Export Path"
 msgstr "Chemin d'export"
 
-#. module: base_delivery_carrier_files
+#. module: base_delivery_carrier_file
 #: view:stock.picking:0
 msgid "Delivery orders to invoice"
 msgstr "Bons de livraison à facturer"
 
-#. module: base_delivery_carrier_files
-#: model:ir.model,name:base_delivery_carrier_files.model_delivery_carrier
+#. module: base_delivery_carrier_file
+#: model:ir.model,name:base_delivery_carrier_file.model_delivery_carrier
 msgid "Carrier"
 msgstr "Transporteur"
 
-#. module: base_delivery_carrier_files
+#. module: base_delivery_carrier_file
 #: sql_constraint:stock.picking:0
 msgid "Reference must be unique per Company!"
 msgstr "La référence doit être unique par compagnie"
 
-#. module: base_delivery_carrier_files
+#. module: base_delivery_carrier_file
 #: view:stock.picking:0
 msgid "Additional info"
 msgstr "Informations supplémentaires"
 
-#. module: base_delivery_carrier_files
-#: model:ir.model,name:base_delivery_carrier_files.model_delivery_carrier_file_generate
+#. module: base_delivery_carrier_file
+#: model:ir.model,name:base_delivery_carrier_file.model_delivery_carrier_file_generate
 msgid "delivery.carrier.file.generate"
 msgstr "delivery.carrier.file.generate"
 
-#. module: base_delivery_carrier_files
+#. module: base_delivery_carrier_file
 #: view:delivery.carrier.file:0
 msgid "Write options"
 msgstr "Options d'écriture"
 
-#. module: base_delivery_carrier_files
+#. module: base_delivery_carrier_file
 #: view:delivery.carrier.file.generate:0
 msgid "Generate Files"
 msgstr "Générer les fichiers"
 
-#. module: base_delivery_carrier_files
+#. module: base_delivery_carrier_file
 #: field:stock.picking,carrier_file_generated:0
 msgid "Carrier File Generated"
 msgstr "Fichier de livraison générés"
 
-#. module: base_delivery_carrier_files
+#. module: base_delivery_carrier_file
 #: field:delivery.carrier.file,write_mode:0
 msgid "Write on"
 msgstr "Écrire sur"
 
-#. module: base_delivery_carrier_files
+#. module: base_delivery_carrier_file
 #: view:delivery.carrier.file.generate:0
 msgid "Cancel"
 msgstr "Annuler"
 
-#. module: base_delivery_carrier_files
+#. module: base_delivery_carrier_file
 #: field:delivery.carrier,carrier_file_id:0
 #: view:delivery.carrier.file:0
-#: model:ir.actions.act_window,name:base_delivery_carrier_files.action_delivery_carrier_file_form
-#: model:ir.ui.menu,name:base_delivery_carrier_files.menu_action_delivery_carrier_file_form
+#: model:ir.actions.act_window,name:base_delivery_carrier_file.action_delivery_carrier_file_form
+#: model:ir.ui.menu,name:base_delivery_carrier_file.menu_action_delivery_carrier_file_form
 msgid "Carrier File"
 msgstr "Fichier de livraison"
 
-#. module: base_delivery_carrier_files
+#. module: base_delivery_carrier_file
 #: view:delivery.carrier.file.generate:0
 #: field:delivery.carrier.file.generate,picking_ids:0
 msgid "Delivery Orders"

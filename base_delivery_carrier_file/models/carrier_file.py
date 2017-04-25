@@ -24,7 +24,7 @@ import logging
 
 from .generator import new_file_generator
 from openerp import models, api, fields, _
-from openerp.exceptions import Warning
+from openerp.exceptions import UserError
 
 
 class CarrierFile(models.Model):
@@ -82,7 +82,7 @@ class CarrierFile(models.Model):
         """
         self.ensure_one()
         if not self.export_path:
-            raise Warning(
+            raise UserError(
                 _('Error,\nExport path is not defined for carrier file %s') %
                 (self.name,))
         full_path = os.path.join(self.export_path, filename)
