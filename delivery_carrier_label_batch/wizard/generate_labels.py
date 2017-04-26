@@ -98,7 +98,7 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
         for batch in self.batch_ids:
             labels = self._get_all_pdf(batch)
             labels = (label.datas for label in labels)
-            labels = (label.decode('base64') for label in labels if labels)
+            labels = (label.decode('base64') for label in labels if label)
             filename = batch.name + '.pdf'
             data = {
                 'name': filename,
