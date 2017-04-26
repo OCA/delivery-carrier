@@ -140,7 +140,8 @@ class StockPicking(models.Model):
         carrier = self.carrier_id
         self.carrier_type = carrier.carrier_type
         self.carrier_code = carrier.code
-        self.option_ids = carrier.default_options()
+        default_options = carrier.default_options()
+        self.option_ids = [(6, 0, default_options.ids)]
         result = {
             'domain': {
                 'option_ids': [('id', 'in', carrier.available_option_ids.ids)],
