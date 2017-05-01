@@ -99,13 +99,12 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
                     package_ids=package_ids
                 )
             except Exception as e:
-                if isinstance(e, exceptions.UserError):
-                    # add information on picking and pack in the exception
-                    picking_name = _('Picking: %s') % picking.name
-                    pack_num = _('Pack: %s') % pack.name if pack else ''
-                    raise exceptions.UserError(
-                        ('%s %s - %s') % (picking_name, pack_num, e.message)
-                    )
+                # add information on picking and pack in the exception
+                picking_name = _('Picking: %s') % picking.name
+                pack_num = _('Pack: %s') % pack.name if pack else ''
+                raise exceptions.UserError(
+                    ('%s %s - %s') % (picking_name, pack_num, e)
+                )
 
     def _worker(self, data_queue, error_queue):
         """ A worker to generate labels
