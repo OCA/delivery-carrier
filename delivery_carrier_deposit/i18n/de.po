@@ -3,14 +3,17 @@
 # * delivery_carrier_deposit
 # 
 # Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+# Akim Juillerat <akim.juillerat@camptocamp.com>, 2017
+# Rudolf Schnapka <rs@techno-flex.de>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: carrier-delivery (8.0)\n"
+"Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-11 09:37+0000\n"
-"PO-Revision-Date: 2015-06-16 16:32+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: German (http://www.transifex.com/oca/OCA-carrier-delivery-8-0/language/de/)\n"
+"POT-Creation-Date: 2017-04-29 00:40+0000\n"
+"PO-Revision-Date: 2017-04-29 00:40+0000\n"
+"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>, 2017\n"
+"Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -20,30 +23,30 @@ msgstr ""
 #. module: delivery_carrier_deposit
 #: sql_constraint:deposit.slip:0
 msgid "'Deposit Slip' name must be unique per company!"
-msgstr ""
+msgstr "'Abgabebeleg'-Bezeichnung muss je Unternehmen eindeutig sein."
 
 #. module: delivery_carrier_deposit
-#: view:website:delivery_carrier_deposit.report_generic_deposit_slip
-msgid "(kg)"
-msgstr ""
-
-#. module: delivery_carrier_deposit
-#: view:website:delivery_carrier_deposit.report_generic_deposit_slip
+#: model:ir.ui.view,arch_db:delivery_carrier_deposit.report_generic_deposit_slip
 msgid "Account Name:"
-msgstr ""
+msgstr "Kontobezeichnung:"
 
 #. module: delivery_carrier_deposit
-#: help:delivery.carrier,deposit_slip:0
+#: model:ir.model.fields,field_description:delivery_carrier_deposit.field_deposit_slip_message_needaction
+msgid "Action Needed"
+msgstr "Aktion erforderlich"
+
+#. module: delivery_carrier_deposit
+#: model:ir.model.fields,help:delivery_carrier_deposit.field_delivery_carrier_deposit_slip
 msgid "Allow to create a 'Deposit Slip' report on delivery orders"
-msgstr ""
+msgstr "Erlaubt die Anlage eines 'Abgabebeleg'-Berichts zu Lieferungen"
 
 #. module: delivery_carrier_deposit
-#: view:deposit.slip:delivery_carrier_deposit.view_deposit_slip_form
+#: model:ir.ui.view,arch_db:delivery_carrier_deposit.view_deposit_slip_form
 msgid "Are you sure that you re-generate the EDI file ?"
 msgstr "Sind Sie sicher, dass Sie die EDI-Datei neu erzeugen möchten?"
 
 #. module: delivery_carrier_deposit
-#: view:delivery.deposit.wizard:delivery_carrier_deposit.view_wiz_create_deposit
+#: model:ir.ui.view,arch_db:delivery_carrier_deposit.view_wiz_create_deposit
 msgid "Cancel"
 msgstr "Abbrechen"
 
@@ -53,95 +56,99 @@ msgid "Carrier"
 msgstr "Spediteur"
 
 #. module: delivery_carrier_deposit
-#: help:deposit.slip,carrier_type:0
+#: model:ir.model.fields,help:delivery_carrier_deposit.field_deposit_slip_carrier_type
 msgid "Carrier type (combines several delivery methods)"
 msgstr "Spediteurart (vereint mehrere Lieferwege)"
 
 #. module: delivery_carrier_deposit
-#: help:delivery.deposit.wizard,carrier_type:0
+#: model:ir.model.fields,help:delivery_carrier_deposit.field_delivery_deposit_wizard_carrier_type
 msgid ""
 "Carrier type (combines several delivery methods). Make sure that the option "
 "'Deposit Slip' is checked on the delivery methods that have this carrier "
 "type."
 msgstr ""
+"Spediteurart (vereint mehrere Lieferwege). Stellen Sie sicher, dass die "
+"Option 'Abgabebeleg' bei Lieferwegen über diese Spediteurarten eingeschaltet"
+" ist."
 
 #. module: delivery_carrier_deposit
-#: field:deposit.slip,company_id:0
+#: model:ir.model.fields,field_description:delivery_carrier_deposit.field_deposit_slip_company_id
 msgid "Company"
 msgstr "Unternehmen"
 
 #. module: delivery_carrier_deposit
-#: view:deposit.slip:delivery_carrier_deposit.view_deposit_slip_form
+#: model:ir.ui.view,arch_db:delivery_carrier_deposit.view_deposit_slip_form
 msgid "Confirm"
 msgstr "Bestätigen"
 
 #. module: delivery_carrier_deposit
-#: view:website:delivery_carrier_deposit.report_generic_deposit_slip
+#: model:ir.ui.view,arch_db:delivery_carrier_deposit.report_generic_deposit_slip
 msgid "Country"
-msgstr ""
+msgstr "Land"
 
 #. module: delivery_carrier_deposit
-#: view:delivery.deposit.wizard:delivery_carrier_deposit.view_wiz_create_deposit
+#: model:ir.ui.view,arch_db:delivery_carrier_deposit.view_wiz_create_deposit
 msgid "Create"
 msgstr "Anlegen"
 
 #. module: delivery_carrier_deposit
-#: view:delivery.deposit.wizard:delivery_carrier_deposit.view_wiz_create_deposit
 #: model:ir.actions.act_window,name:delivery_carrier_deposit.action_wiz_create_deposit
 #: model:ir.ui.menu,name:delivery_carrier_deposit.menu_wiz_delivery_deposit
+#: model:ir.ui.view,arch_db:delivery_carrier_deposit.view_wiz_create_deposit
 msgid "Create Deposit Slip"
 msgstr "Depotschein anlegen"
 
 #. module: delivery_carrier_deposit
-#: field:delivery.deposit.wizard,create_uid:0 field:deposit.slip,create_uid:0
+#: model:ir.model.fields,field_description:delivery_carrier_deposit.field_delivery_deposit_wizard_create_uid
+#: model:ir.model.fields,field_description:delivery_carrier_deposit.field_deposit_slip_create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Angelegt durch"
 
 #. module: delivery_carrier_deposit
-#: field:delivery.deposit.wizard,create_date:0
-#: field:deposit.slip,create_date:0
+#: model:ir.model.fields,field_description:delivery_carrier_deposit.field_delivery_deposit_wizard_create_date
+#: model:ir.model.fields,field_description:delivery_carrier_deposit.field_deposit_slip_create_date
 msgid "Created on"
-msgstr ""
+msgstr "Angelegt am"
 
 #. module: delivery_carrier_deposit
-#: view:website:delivery_carrier_deposit.report_generic_deposit_slip
+#: model:ir.ui.view,arch_db:delivery_carrier_deposit.report_generic_deposit_slip
 msgid "Customer No.:"
-msgstr ""
+msgstr "Kundennummer:"
 
 #. module: delivery_carrier_deposit
-#: help:deposit.slip,message_last_post:0
+#: model:ir.model.fields,help:delivery_carrier_deposit.field_deposit_slip_message_last_post
 msgid "Date of the last message posted on the record."
-msgstr ""
+msgstr "Datum der letzten Meldung zu diesem Datensatz."
 
 #. module: delivery_carrier_deposit
-#: view:website:delivery_carrier_deposit.report_generic_deposit_slip
+#: model:ir.ui.view,arch_db:delivery_carrier_deposit.report_generic_deposit_slip
 msgid "Date:"
-msgstr ""
+msgstr "Datum:"
 
 #. module: delivery_carrier_deposit
-#: field:delivery.deposit.wizard,carrier_type:0
-#: view:deposit.slip:delivery_carrier_deposit.view_deposit_slip_search
+#: model:ir.model.fields,field_description:delivery_carrier_deposit.field_delivery_deposit_wizard_carrier_type
+#: model:ir.ui.view,arch_db:delivery_carrier_deposit.view_deposit_slip_search
 msgid "Delivery Method Type"
-msgstr ""
+msgstr "Lieferwegart"
 
 #. module: delivery_carrier_deposit
-#: view:website:delivery_carrier_deposit.report_generic_deposit_slip
+#: model:ir.ui.view,arch_db:delivery_carrier_deposit.report_generic_deposit_slip
 msgid "Delivery Method Type:"
-msgstr ""
+msgstr "Lieferwegart:"
 
 #. module: delivery_carrier_deposit
-#: view:deposit.slip:delivery_carrier_deposit.view_deposit_slip_form
-#: view:deposit.slip:delivery_carrier_deposit.view_deposit_slip_search
-#: view:deposit.slip:delivery_carrier_deposit.view_deposit_slip_tree
+#: model:ir.ui.view,arch_db:delivery_carrier_deposit.view_deposit_slip_form
+#: model:ir.ui.view,arch_db:delivery_carrier_deposit.view_deposit_slip_search
+#: model:ir.ui.view,arch_db:delivery_carrier_deposit.view_deposit_slip_tree
 msgid "Deposit"
 msgstr "Depot"
 
 #. module: delivery_carrier_deposit
-#: field:delivery.carrier,deposit_slip:0
 #: model:ir.actions.act_window,name:delivery_carrier_deposit.act_delivery_deposit
 #: model:ir.model,name:delivery_carrier_deposit.model_deposit_slip
+#: model:ir.model.fields,field_description:delivery_carrier_deposit.field_delivery_carrier_deposit_slip
+#: model:ir.model.fields,field_description:delivery_carrier_deposit.field_stock_picking_deposit_slip_id
 #: model:ir.ui.menu,name:delivery_carrier_deposit.menu_delivery_deposit_slip_model
-#: field:stock.picking,deposit_slip_id:0
 msgid "Deposit Slip"
 msgstr "Depotschein"
 
@@ -149,12 +156,18 @@ msgstr "Depotschein"
 #: model:mail.message.subtype,description:delivery_carrier_deposit.deposit_slip_done
 #: model:mail.message.subtype,name:delivery_carrier_deposit.deposit_slip_done
 msgid "Deposit Slip Validated"
-msgstr ""
+msgstr "Einlieferbeleg geprüft"
 
 #. module: delivery_carrier_deposit
-#: view:website:delivery_carrier_deposit.report_generic_deposit_slip
+#: model:ir.ui.view,arch_db:delivery_carrier_deposit.report_generic_deposit_slip
 msgid "Deposit Slip n°"
-msgstr ""
+msgstr "Einlieferbelegnr."
+
+#. module: delivery_carrier_deposit
+#: model:ir.model.fields,field_description:delivery_carrier_deposit.field_delivery_deposit_wizard_display_name
+#: model:ir.model.fields,field_description:delivery_carrier_deposit.field_deposit_slip_display_name
+msgid "Display Name"
+msgstr "Anzeigename"
 
 #. module: delivery_carrier_deposit
 #: selection:deposit.slip,state:0
@@ -167,171 +180,205 @@ msgid "Draft"
 msgstr "Entwurf"
 
 #. module: delivery_carrier_deposit
-#: field:deposit.slip,message_follower_ids:0
+#: model:ir.model.fields,field_description:delivery_carrier_deposit.field_deposit_slip_message_follower_ids
 msgid "Followers"
-msgstr ""
+msgstr "Follower"
+
+#. module: delivery_carrier_deposit
+#: model:ir.model.fields,field_description:delivery_carrier_deposit.field_deposit_slip_message_channel_ids
+msgid "Followers (Channels)"
+msgstr "Follower (Kanäle)"
+
+#. module: delivery_carrier_deposit
+#: model:ir.model.fields,field_description:delivery_carrier_deposit.field_deposit_slip_message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Follower (Partner)"
 
 #. module: delivery_carrier_deposit
 #: model:ir.actions.report.xml,name:delivery_carrier_deposit.report_deposit_slip
 msgid "Generic Deposit Slip"
-msgstr ""
+msgstr "Allgemeiner Einlieferschein"
 
 #. module: delivery_carrier_deposit
-#: view:deposit.slip:delivery_carrier_deposit.view_deposit_slip_search
+#: model:ir.ui.view,arch_db:delivery_carrier_deposit.view_deposit_slip_search
 msgid "Group By"
-msgstr ""
+msgstr "Gruppiert nach"
 
 #. module: delivery_carrier_deposit
-#: help:deposit.slip,message_summary:0
-msgid ""
-"Holds the Chatter summary (number of messages, ...). This summary is "
-"directly in html format in order to be inserted in kanban views."
-msgstr ""
-
-#. module: delivery_carrier_deposit
-#: field:delivery.deposit.wizard,id:0 field:deposit.slip,id:0
+#: model:ir.model.fields,field_description:delivery_carrier_deposit.field_delivery_deposit_wizard_id
+#: model:ir.model.fields,field_description:delivery_carrier_deposit.field_deposit_slip_id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: delivery_carrier_deposit
-#: help:deposit.slip,message_unread:0
+#: model:ir.model.fields,help:delivery_carrier_deposit.field_deposit_slip_message_unread
 msgid "If checked new messages require your attention."
-msgstr ""
+msgstr "Wenn angehakt, erfordern neue Mitteilungen Ihre Aufmerksamkeit."
 
 #. module: delivery_carrier_deposit
-#: field:deposit.slip,message_is_follower:0
-msgid "Is a Follower"
-msgstr ""
+#: model:ir.model.fields,help:delivery_carrier_deposit.field_deposit_slip_message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "Wenn angewählt, erfordern neue Meldungen Ihre Aufmerksamkeit"
 
 #. module: delivery_carrier_deposit
-#: field:deposit.slip,message_last_post:0
+#: model:ir.model.fields,field_description:delivery_carrier_deposit.field_deposit_slip_message_is_follower
+msgid "Is Follower"
+msgstr "Ist Follower"
+
+#. module: delivery_carrier_deposit
+#: model:ir.model.fields,field_description:delivery_carrier_deposit.field_deposit_slip_message_last_post
 msgid "Last Message Date"
-msgstr ""
+msgstr "Datum letzte Nachricht"
 
 #. module: delivery_carrier_deposit
-#: field:delivery.deposit.wizard,write_uid:0 field:deposit.slip,write_uid:0
+#: model:ir.model.fields,field_description:delivery_carrier_deposit.field_delivery_deposit_wizard___last_update
+#: model:ir.model.fields,field_description:delivery_carrier_deposit.field_deposit_slip___last_update
+msgid "Last Modified on"
+msgstr "Zuletzt geändert am"
+
+#. module: delivery_carrier_deposit
+#: model:ir.model.fields,field_description:delivery_carrier_deposit.field_delivery_deposit_wizard_write_uid
+#: model:ir.model.fields,field_description:delivery_carrier_deposit.field_deposit_slip_write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Zuletzt akualisiert durch"
 
 #. module: delivery_carrier_deposit
-#: field:delivery.deposit.wizard,write_date:0 field:deposit.slip,write_date:0
+#: model:ir.model.fields,field_description:delivery_carrier_deposit.field_delivery_deposit_wizard_write_date
+#: model:ir.model.fields,field_description:delivery_carrier_deposit.field_deposit_slip_write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Zuletzt akualisiert am"
 
 #. module: delivery_carrier_deposit
-#: field:deposit.slip,message_ids:0
+#: model:ir.model.fields,field_description:delivery_carrier_deposit.field_deposit_slip_message_ids
 msgid "Messages"
-msgstr ""
+msgstr "Meldungen"
 
 #. module: delivery_carrier_deposit
-#: help:deposit.slip,message_ids:0
-msgid "Messages and communication history"
-msgstr ""
-
-#. module: delivery_carrier_deposit
-#: field:deposit.slip,name:0
+#: model:ir.model.fields,field_description:delivery_carrier_deposit.field_deposit_slip_name
 msgid "Name"
 msgstr "Name"
 
 #. module: delivery_carrier_deposit
-#: view:website:delivery_carrier_deposit.report_generic_deposit_slip
-msgid "Name and address"
+#: model:ir.ui.view,arch_db:delivery_carrier_deposit.report_generic_deposit_slip
+msgid "Name and address<br/>recipient"
 msgstr ""
 
 #. module: delivery_carrier_deposit
-#: view:website:delivery_carrier_deposit.report_generic_deposit_slip
-msgid "Nr of"
+#: model:ir.ui.view,arch_db:delivery_carrier_deposit.report_generic_deposit_slip
+msgid "Nr of<br/>packages"
 msgstr ""
 
 #. module: delivery_carrier_deposit
-#: view:website:delivery_carrier_deposit.report_generic_deposit_slip
+#: model:ir.model.fields,field_description:delivery_carrier_deposit.field_deposit_slip_message_needaction_counter
+msgid "Number of Actions"
+msgstr "Anzahl Aktionen"
+
+#. module: delivery_carrier_deposit
+#: model:ir.model.fields,field_description:delivery_carrier_deposit.field_deposit_slip_number_of_packages
+msgid "Number of Packages"
+msgstr "Anzahl Pakete"
+
+#. module: delivery_carrier_deposit
+#: model:ir.model.fields,help:delivery_carrier_deposit.field_deposit_slip_message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr "Anzahl Meldungen, die eine Aktion erfordern"
+
+#. module: delivery_carrier_deposit
+#: model:ir.model.fields,help:delivery_carrier_deposit.field_deposit_slip_message_unread_counter
+msgid "Number of unread messages"
+msgstr "Anzahl ungelesener Meldungen"
+
+#. module: delivery_carrier_deposit
+#: model:ir.ui.view,arch_db:delivery_carrier_deposit.report_generic_deposit_slip
 msgid "Parcel numbers"
-msgstr ""
+msgstr "Paketnummern"
 
 #. module: delivery_carrier_deposit
-#: model:ir.model,name:delivery_carrier_deposit.model_stock_picking
-msgid "Picking List"
-msgstr "Kommissionierschein"
-
-#. module: delivery_carrier_deposit
-#: field:deposit.slip,picking_ids:0
+#: model:ir.model.fields,field_description:delivery_carrier_deposit.field_deposit_slip_picking_ids
 msgid "Pickings"
 msgstr "Kommissionen"
 
 #. module: delivery_carrier_deposit
-#: view:deposit.slip:delivery_carrier_deposit.view_deposit_slip_form
+#: model:ir.ui.view,arch_db:delivery_carrier_deposit.view_deposit_slip_form
 msgid "Re-generate EDI file"
 msgstr "EDI-Datei erneuern"
 
 #. module: delivery_carrier_deposit
-#: view:website:delivery_carrier_deposit.report_generic_deposit_slip
+#: model:ir.ui.view,arch_db:delivery_carrier_deposit.report_generic_deposit_slip
 msgid "Sender Ref"
-msgstr ""
+msgstr "Versenderref."
 
 #. module: delivery_carrier_deposit
-#: field:deposit.slip,state:0
+#: model:ir.model.fields,field_description:delivery_carrier_deposit.field_deposit_slip_state
 msgid "Status"
 msgstr "Status"
 
 #. module: delivery_carrier_deposit
-#: field:deposit.slip,message_summary:0
-msgid "Summary"
-msgstr ""
-
-#. module: delivery_carrier_deposit
-#: code:addons/delivery_carrier_deposit/wizard/deposit.py:77
+#: code:addons/delivery_carrier_deposit/wizards/deposit.py:77
 #, python-format
 msgid ""
 "There are no delivery orders in transferred state with a delivery method "
 "type '%s' not already linked to a deposit slip."
 msgstr ""
+"Es gibt keine Lieferungen im Status 'Übertragen' zum Lieferwegart '%s' die "
+"nicht bereits einem Abgabebeleg zugeordnet sind."
 
 #. module: delivery_carrier_deposit
-#: view:website:delivery_carrier_deposit.report_generic_deposit_slip
+#: model:ir.ui.view,arch_db:delivery_carrier_deposit.report_generic_deposit_slip
 msgid "Total Number of Packages:"
-msgstr ""
+msgstr "Gesamtanzahl Pakete:"
 
 #. module: delivery_carrier_deposit
-#: view:website:delivery_carrier_deposit.report_generic_deposit_slip
+#: model:ir.model.fields,field_description:delivery_carrier_deposit.field_deposit_slip_weight
+msgid "Total Weight"
+msgstr "Gesamtbruttogewicht"
+
+#. module: delivery_carrier_deposit
+#: model:ir.ui.view,arch_db:delivery_carrier_deposit.report_generic_deposit_slip
 msgid "Total Weight:"
-msgstr ""
+msgstr "Gesamtgewicht:"
+
+#. module: delivery_carrier_deposit
+#: model:ir.model,name:delivery_carrier_deposit.model_stock_picking
+msgid "Transfer"
+msgstr "Umbuchung"
 
 #. module: delivery_carrier_deposit
 #: model:ir.ui.menu,name:delivery_carrier_deposit.menu_delivery_deposit_slip
 msgid "Transport"
-msgstr ""
+msgstr "Transport"
 
 #. module: delivery_carrier_deposit
-#: field:deposit.slip,carrier_type:0
+#: model:ir.model.fields,field_description:delivery_carrier_deposit.field_deposit_slip_carrier_type
 msgid "Type"
 msgstr "Art"
 
 #. module: delivery_carrier_deposit
-#: field:deposit.slip,message_unread:0
+#: model:ir.model.fields,field_description:delivery_carrier_deposit.field_deposit_slip_message_unread
 msgid "Unread Messages"
-msgstr ""
+msgstr "Ungelesene Nachrichten"
 
 #. module: delivery_carrier_deposit
-#: view:website:delivery_carrier_deposit.report_generic_deposit_slip
-msgid "Weight"
+#: model:ir.model.fields,field_description:delivery_carrier_deposit.field_deposit_slip_message_unread_counter
+msgid "Unread Messages Counter"
+msgstr "Zähler für ungelesene Meldungen"
+
+#. module: delivery_carrier_deposit
+#: model:ir.ui.view,arch_db:delivery_carrier_deposit.report_generic_deposit_slip
+msgid "Weight<br/>(kg)"
 msgstr ""
 
 #. module: delivery_carrier_deposit
 #: model:ir.model,name:delivery_carrier_deposit.model_delivery_deposit_wizard
 msgid "Wizard to create Deposit Slip"
-msgstr ""
+msgstr "Assistent zur Anlage eines Abgabebelegs"
 
 #. module: delivery_carrier_deposit
-#: view:website:delivery_carrier_deposit.report_generic_deposit_slip
+#: model:ir.ui.view,arch_db:delivery_carrier_deposit.report_generic_deposit_slip
 msgid "ZIP"
-msgstr ""
+msgstr "PLZ"
 
 #. module: delivery_carrier_deposit
-#: view:website:delivery_carrier_deposit.report_generic_deposit_slip
-msgid "packages"
-msgstr ""
-
-#. module: delivery_carrier_deposit
-#: view:website:delivery_carrier_deposit.report_generic_deposit_slip
-msgid "recipient"
+#: model:ir.ui.view,arch_db:delivery_carrier_deposit.report_generic_deposit_slip
+msgid "kg"
 msgstr ""
