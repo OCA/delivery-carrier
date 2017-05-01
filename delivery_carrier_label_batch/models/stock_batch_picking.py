@@ -51,7 +51,8 @@ class StockBatchPicking(models.Model):
             # depending of the type or the code
 
             available_options = self.carrier_id.available_option_ids
-            self.option_ids = self._get_options_to_add()
+            default_options = self._get_options_to_add()
+            self.option_ids = [(6, 0, default_options.ids)]
             self.carrier_type = self.carrier_id.type
             self.carrier_code = self.carrier_id.code
             return {'domain': {
