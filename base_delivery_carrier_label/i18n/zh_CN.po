@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: delivery-carrier (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-25 01:56+0000\n"
-"PO-Revision-Date: 2017-03-03 07:08+0000\n"
+"POT-Creation-Date: 2017-03-28 02:37+0000\n"
+"PO-Revision-Date: 2017-04-19 01:17+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/oca/OCA-delivery-carrier-8-0/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
@@ -156,7 +156,7 @@ msgstr "说明"
 #. module: base_delivery_carrier_label
 #: field:shipping.label,parent_id:0
 msgid "Directory"
-msgstr ""
+msgstr "目录"
 
 #. module: base_delivery_carrier_label
 #: field:carrier.account,display_name:0

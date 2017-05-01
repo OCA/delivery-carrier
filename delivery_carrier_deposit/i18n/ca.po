@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: delivery-carrier (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-14 02:35+0000\n"
-"PO-Revision-Date: 2017-01-17 19:17+0000\n"
+"POT-Creation-Date: 2017-03-28 02:37+0000\n"
+"PO-Revision-Date: 2017-04-25 10:39+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Catalan (http://www.transifex.com/oca/OCA-delivery-carrier-8-0/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -170,12 +170,12 @@ msgstr ""
 #. module: delivery_carrier_deposit
 #: selection:deposit.slip,state:0
 msgid "Draft"
-msgstr ""
+msgstr "Esborrany"
 
 #. module: delivery_carrier_deposit
 #: field:deposit.slip,message_follower_ids:0
 msgid "Followers"
-msgstr ""
+msgstr "Seguidors"
 
 #. module: delivery_carrier_deposit
 #: model:ir.actions.report.xml,name:delivery_carrier_deposit.report_deposit_slip
@@ -233,7 +233,7 @@ msgstr "Darrera Actualització el"
 #. module: delivery_carrier_deposit
 #: field:deposit.slip,message_ids:0
 msgid "Messages"
-msgstr ""
+msgstr "Missatges"
 
 #. module: delivery_carrier_deposit
 #: help:deposit.slip,message_ids:0
@@ -294,7 +294,7 @@ msgstr ""
 #. module: delivery_carrier_deposit
 #: field:deposit.slip,state:0
 msgid "Status"
-msgstr ""
+msgstr "Estat"
 
 #. module: delivery_carrier_deposit
 #: field:deposit.slip,message_summary:0

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: delivery-carrier (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-11 02:27+0000\n"
-"PO-Revision-Date: 2017-03-14 18:27+0000\n"
+"POT-Creation-Date: 2017-03-28 02:37+0000\n"
+"PO-Revision-Date: 2017-04-25 10:39+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Catalan (http://www.transifex.com/oca/OCA-delivery-carrier-8-0/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -46,7 +46,7 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: field:shipping.label,name:0
 msgid "Attachment Name"
-msgstr ""
+msgstr "Nom de l'Adjunt "
 
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_carrier_account
@@ -122,7 +122,7 @@ msgstr "Creat el"
 #. module: base_delivery_carrier_label
 #: field:shipping.label,db_datas:0
 msgid "Database Data"
-msgstr ""
+msgstr "Dades de la Base de Dades "
 
 #. module: base_delivery_carrier_label
 #: help:carrier.account,file_format:0
@@ -169,7 +169,7 @@ msgstr "Veure el nom"
 #. module: base_delivery_carrier_label
 #: field:shipping.label,datas:0
 msgid "File Content"
-msgstr ""
+msgstr "Contingut del fitxer "
 
 #. module: base_delivery_carrier_label
 #: field:carrier.account,file_format:0
@@ -179,12 +179,12 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: field:shipping.label,datas_fname:0
 msgid "File Name"
-msgstr ""
+msgstr "Nom del Fitxer "
 
 #. module: base_delivery_carrier_label
 #: field:shipping.label,file_size:0
 msgid "File Size"
-msgstr ""
+msgstr "Mida del Fitxer "
 
 #. module: base_delivery_carrier_label
 #: field:shipping.label,file_type_icon:0
@@ -194,7 +194,7 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: field:shipping.label,file_type:0
 msgid "File type"
-msgstr ""
+msgstr "Tipus de fitxer "
 
 #. module: base_delivery_carrier_label
 #: field:carrier.account,id:0 field:delivery.carrier.option,id:0
@@ -217,7 +217,7 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: field:shipping.label,index_content:0
 msgid "Indexed Content"
-msgstr ""
+msgstr "Contingut Indexat "
 
 #. module: base_delivery_carrier_label
 #: field:carrier.account,__last_update:0
@@ -279,7 +279,7 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: field:shipping.label,user_id:0
 msgid "Owner"
-msgstr ""
+msgstr "Propietari "
 
 #. module: base_delivery_carrier_label
 #: field:shipping.label,package_id:0
@@ -325,17 +325,17 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: field:shipping.label,res_id:0
 msgid "Resource ID"
-msgstr ""
+msgstr "ID del recurs "
 
 #. module: base_delivery_carrier_label
 #: field:shipping.label,res_model:0
 msgid "Resource Model"
-msgstr ""
+msgstr "Model del recurs "
 
 #. module: base_delivery_carrier_label
 #: field:shipping.label,res_name:0
 msgid "Resource Name"
-msgstr ""
+msgstr "Nom del recurs "
 
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_shipping_label
@@ -353,17 +353,17 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: field:shipping.label,store_fname:0
 msgid "Stored Filename"
-msgstr ""
+msgstr "Nom del fitxer desat "
 
 #. module: base_delivery_carrier_label
 #: help:shipping.label,res_model:0
 msgid "The database object this attachment will be attached to"
-msgstr ""
+msgstr "Els objectes de la base de dades en aquesta adjunció també seran adjuntats "
 
 #. module: base_delivery_carrier_label
 #: help:shipping.label,res_id:0
 msgid "The record id this is attached to"
-msgstr ""
+msgstr "L'ID del registre també està adjuntat "
 
 #. module: base_delivery_carrier_label
 #: help:stock.quant.package,weight:0
@@ -381,7 +381,7 @@ msgstr "Tipus"
 #. module: base_delivery_carrier_label
 #: field:shipping.label,url:0
 msgid "Url"
-msgstr ""
+msgstr "Url"
 
 #. module: base_delivery_carrier_label
 #: field:stock.pack.operation,weight:0 field:stock.quant.package,weight:0

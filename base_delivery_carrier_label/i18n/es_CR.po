@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: delivery-carrier (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-24 01:19+0000\n"
-"PO-Revision-Date: 2016-12-27 08:24+0000\n"
+"POT-Creation-Date: 2017-03-28 02:37+0000\n"
+"PO-Revision-Date: 2017-03-31 05:23+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Spanish (Costa Rica) (http://www.transifex.com/oca/OCA-delivery-carrier-8-0/language/es_CR/)\n"
 "MIME-Version: 1.0\n"
@@ -96,7 +96,7 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: field:shipping.label,company_id:0
 msgid "Company"
-msgstr ""
+msgstr "Compañía"
 
 #. module: base_delivery_carrier_label
 #: view:stock.picking:base_delivery_carrier_label.view_picking_withcarrier_out_form

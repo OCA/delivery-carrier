@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: delivery-carrier (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-14 02:35+0000\n"
-"PO-Revision-Date: 2017-01-19 20:16+0000\n"
+"POT-Creation-Date: 2017-03-28 02:37+0000\n"
+"PO-Revision-Date: 2017-04-25 10:43+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Swedish (http://www.transifex.com/oca/OCA-delivery-carrier-8-0/language/sv/)\n"
 "MIME-Version: 1.0\n"
@@ -170,7 +170,7 @@ msgstr ""
 #. module: delivery_carrier_deposit
 #: selection:deposit.slip,state:0
 msgid "Draft"
-msgstr ""
+msgstr "Preliminär"
 
 #. module: delivery_carrier_deposit
 #: field:deposit.slip,message_follower_ids:0

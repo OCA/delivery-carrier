@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: delivery-carrier (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-25 01:56+0000\n"
-"PO-Revision-Date: 2017-03-03 07:09+0000\n"
+"POT-Creation-Date: 2017-03-28 02:37+0000\n"
+"PO-Revision-Date: 2017-04-19 01:22+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/oca/OCA-delivery-carrier-8-0/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
@@ -170,7 +170,7 @@ msgstr "已完成"
 #. module: delivery_carrier_deposit
 #: selection:deposit.slip,state:0
 msgid "Draft"
-msgstr ""
+msgstr "草稿"
 
 #. module: delivery_carrier_deposit
 #: field:deposit.slip,message_follower_ids:0
@@ -192,7 +192,7 @@ msgstr "分组"
 msgid ""
 "Holds the Chatter summary (number of messages, ...). This summary is "
 "directly in html format in order to be inserted in kanban views."
-msgstr ""
+msgstr "HTML格式的简介，包括了各种项目的总结信息（比如消息数，作业数……）"
 
 #. module: delivery_carrier_deposit
 #: field:delivery.deposit.wizard,id:0 field:deposit.slip,id:0
@@ -207,7 +207,7 @@ msgstr "查看是否有需要留意的新信息。"
 #. module: delivery_carrier_deposit
 #: field:deposit.slip,message_is_follower:0
 msgid "Is a Follower"
-msgstr ""
+msgstr "关注者"
 
 #. module: delivery_carrier_deposit
 #: field:deposit.slip,message_last_post:0
