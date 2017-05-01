@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-# © 2015 FactorLibre (http://www.factorlibre.com)
+# Copyright 2015 FactorLibre (http://www.factorlibre.com)
 #        Ismael Calvo <ismael.calvo@factorlibre.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from openerp import models, fields, api, exceptions, _
+from odoo import models, fields, api, exceptions, _
 
 
 class ManifestWizard(models.TransientModel):
@@ -35,7 +35,7 @@ class ManifestWizard(models.TransientModel):
         ('init', 'Init'),
         ('file', 'File'),
         ('end', 'END')
-    ], string='State', readonly=True, default='init')
+    ], readonly=True, default='init')
 
     @api.one
     def get_manifest_file(self):

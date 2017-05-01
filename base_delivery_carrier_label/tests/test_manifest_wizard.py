@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
-# © 2017 Angel Moya (PESOL)
+# Copyright 2017 Angel Moya (PESOL)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp.tests.common import TransactionCase
-from openerp import fields, exceptions
+from odoo.tests.common import TransactionCase
+from odoo import fields, exceptions
 
 
 class ManifestWizardCase(TransactionCase):
-    def setUp(self, *args, **kwargs):
-        super(ManifestWizardCase, self).setUp(*args, **kwargs)
+    def setUp(self):
+        super(ManifestWizardCase, self).setUp()
         self.free_delivery = self.env.ref('delivery.free_delivery_carrier')
 
     def test_wizard(self):
