@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-11 02:30+0000\n"
-"PO-Revision-Date: 2017-03-11 02:30+0000\n"
+"POT-Creation-Date: 2017-04-29 00:40+0000\n"
+"PO-Revision-Date: 2017-04-29 00:40+0000\n"
 "Last-Translator: Marc Tormo i Bochaca <mtbochaca@gmail.com>, 2017\n"
 "Language-Team: Catalan (https://www.transifex.com/oca/teams/23907/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -48,12 +48,12 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_name
 msgid "Attachment Name"
-msgstr ""
+msgstr "Nom de l'Adjunt "
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_local_url
 msgid "Attachment URL"
-msgstr ""
+msgstr "URL de l'adjunt "
 
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_carrier_account
@@ -92,7 +92,7 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_checksum
 msgid "Checksum/SHA1"
-msgstr ""
+msgstr "Suma de comprovació / SHA1"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option_code
@@ -130,7 +130,7 @@ msgstr "Creat el"
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_db_datas
 msgid "Database Data"
-msgstr ""
+msgstr "Dades de la Base de Dades "
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_carrier_account_file_format
@@ -171,7 +171,7 @@ msgstr "Veure el nom"
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_datas
 msgid "File Content"
-msgstr ""
+msgstr "Contingut del fitxer "
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account_file_format
@@ -181,17 +181,17 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_datas_fname
 msgid "File Name"
-msgstr ""
+msgstr "Nom del Fitxer "
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_file_size
 msgid "File Size"
-msgstr ""
+msgstr "Mida del Fitxer "
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_file_type
 msgid "File type"
-msgstr ""
+msgstr "Tipus de fitxer "
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account_id
@@ -216,12 +216,12 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_index_content
 msgid "Indexed Content"
-msgstr ""
+msgstr "Contingut Indexat "
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_public
 msgid "Is public document"
-msgstr ""
+msgstr "És un document públic "
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account___last_update
@@ -255,7 +255,7 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_mimetype
 msgid "Mime Type"
-msgstr ""
+msgstr "Tipus Mime "
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account_name
@@ -321,22 +321,22 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_res_field
 msgid "Resource Field"
-msgstr ""
+msgstr "Camp del recurs "
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_res_id
 msgid "Resource ID"
-msgstr ""
+msgstr "ID del recurs "
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_res_model
 msgid "Resource Model"
-msgstr ""
+msgstr "Model del recurs "
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_res_name
 msgid "Resource Name"
-msgstr ""
+msgstr "Nom del recurs "
 
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_shipping_label
@@ -344,7 +344,7 @@ msgid "Shipping Label"
 msgstr ""
 
 #. module: base_delivery_carrier_label
-#: code:addons/base_delivery_carrier_label/models/stock_picking.py:252
+#: code:addons/base_delivery_carrier_label/models/stock_picking.py:253
 #, python-format
 msgid ""
 "Some labels already exist for the picking %s.\n"
@@ -354,17 +354,18 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_store_fname
 msgid "Stored Filename"
-msgstr ""
+msgstr "Nom del fitxer desat "
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_shipping_label_res_model
 msgid "The database object this attachment will be attached to"
 msgstr ""
+"Els objectes de la base de dades en aquesta adjunció també seran adjuntats "
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_shipping_label_res_id
 msgid "The record id this is attached to"
-msgstr ""
+msgstr "L'ID del registre també està adjuntat "
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_quant_package_total_weight
@@ -393,7 +394,7 @@ msgstr "Tipus"
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_url
 msgid "Url"
-msgstr ""
+msgstr "Url"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_pack_operation_weight
@@ -418,9 +419,11 @@ msgid ""
 "You can either upload a file from your computer or copy/paste an internet "
 "link to your file"
 msgstr ""
+"Podeu carregar un fitxer des del vostre ordinador o copiar/enganxar un "
+"enllaç de internet al vostre fitxer "
 
 #. module: base_delivery_carrier_label
-#: code:addons/base_delivery_carrier_label/models/stock_picking.py:159
+#: code:addons/base_delivery_carrier_label/models/stock_picking.py:160
 #, python-format
 msgid ""
 "You should not remove a mandatory option.Please cancel the edit or add back "

@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-06 10:22+0000\n"
-"PO-Revision-Date: 2017-03-06 10:22+0000\n"
+"POT-Creation-Date: 2017-04-29 00:40+0000\n"
+"PO-Revision-Date: 2017-04-29 00:40+0000\n"
 "Last-Translator: Rudolf Schnapka <rs@techno-flex.de>, 2017\n"
 "Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
 "MIME-Version: 1.0\n"
@@ -53,7 +53,7 @@ msgstr "Anhangsbezeichnung"
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_local_url
 msgid "Attachment URL"
-msgstr ""
+msgstr "Anhangs-URL"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_carrier_account
@@ -344,7 +344,7 @@ msgid "Shipping Label"
 msgstr "Paketaufkleber"
 
 #. module: base_delivery_carrier_label
-#: code:addons/base_delivery_carrier_label/models/stock_picking.py:252
+#: code:addons/base_delivery_carrier_label/models/stock_picking.py:253
 #, python-format
 msgid ""
 "Some labels already exist for the picking %s.\n"
@@ -369,7 +369,7 @@ msgstr "Die Datensatz-ID der dieses angehängt wird"
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_quant_package_total_weight
 msgid "Total weight"
-msgstr ""
+msgstr "Gesamtbruttogewicht"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_stock_quant_package_total_weight
@@ -398,7 +398,7 @@ msgstr "Url"
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_pack_operation_weight
 msgid "Weight"
-msgstr ""
+msgstr "Gewicht"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_stock_pack_operation_weight
@@ -420,7 +420,7 @@ msgid ""
 msgstr ""
 
 #. module: base_delivery_carrier_label
-#: code:addons/base_delivery_carrier_label/models/stock_picking.py:159
+#: code:addons/base_delivery_carrier_label/models/stock_picking.py:160
 #, python-format
 msgid ""
 "You should not remove a mandatory option.Please cancel the edit or add back "
