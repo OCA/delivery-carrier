@@ -176,7 +176,7 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
                         error_count[e.name] = 1
                     else:
                         error_count[e.name] += 1
-                    messages.append(e.value)
+                    messages.append(e.message or '')
                 else:
                     # raise other exceptions like PoolError if
                     # too many cursor where created by workers
