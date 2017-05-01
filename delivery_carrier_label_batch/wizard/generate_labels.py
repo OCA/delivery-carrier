@@ -198,12 +198,12 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
             for pack, operations, label in self_env._get_packs(batch):
                 picking = operations[0].picking_id
                 if pack:
-                    label = self._find_pack_label(pack)
+                    label = self_env._find_pack_label(pack)
                 else:
-                    label = self._find_picking_label(picking)
+                    label = self_env._find_picking_label(picking)
                 if not label:
                     continue
-                yield label
+                yield label.attachment_id.datas
 
     @api.multi
     def action_generate_labels(self):
@@ -219,7 +219,6 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
 
         for batch in self.batch_ids:
             labels = self._get_all_pdf(batch)
-            labels = (label.datas for label in labels)
             labels = (label.decode('base64') for label in labels if label)
             filename = batch.name + '.pdf'
             data = {
