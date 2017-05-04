@@ -2,8 +2,8 @@
 # Copyright 2012-2015 Akretion <http://www.akretion.com>.
 # Copyright 2013-2016 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from openerp import _, api, fields, models
-from openerp.exceptions import UserError
+from odoo import _, api, fields, models
+from odoo.exceptions import UserError
 
 
 class StockPicking(models.Model):
@@ -78,6 +78,18 @@ class StockPicking(models.Model):
         return labels
 
     @api.multi
+    def get_shipping_label_values(self, label):
+        self.ensure_one()
+        return {
+            'name': label['name'],
+            'datas_fname': label.get('filename', label['name']),
+            'res_id': self.id,
+            'res_model': 'stock.picking',
+            'datas': label['file'].encode('base64'),
+            'file_type': label['file_type'],
+        }
+
+    @api.multi
     def generate_labels(self, package_ids=None):
         """ Generate the labels.
 
@@ -95,14 +107,7 @@ class StockPicking(models.Model):
             else:
                 shipping_labels = pick.generate_shipping_labels()
             for label in shipping_labels:
-                data = {
-                    'name': label['name'],
-                    'datas_fname': label.get('filename', label['name']),
-                    'res_id': pick.id,
-                    'res_model': 'stock.picking',
-                    'datas': label['file'].encode('base64'),
-                    'file_type': label['file_type'],
-                }
+                data = pick.get_shipping_label_values(label)
                 if label.get('package_id'):
                     data['package_id'] = label['package_id']
                 context_attachment = self.env.context.copy()
@@ -135,7 +140,8 @@ class StockPicking(models.Model):
         carrier = self.carrier_id
         self.carrier_type = carrier.carrier_type
         self.carrier_code = carrier.code
-        self.option_ids = carrier.default_options()
+        default_options = carrier.default_options()
+        self.option_ids = [(6, 0, default_options.ids)]
         result = {
             'domain': {
                 'option_ids': [('id', 'in', carrier.available_option_ids.ids)],

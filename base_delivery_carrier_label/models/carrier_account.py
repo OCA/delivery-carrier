@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-# © 2014-TODAY Florian da Costa Akretion <http://www.akretion.com>.
-# © 2014 Camptocamp SA
+# Copyright 2014-TODAY Florian da Costa Akretion <http://www.akretion.com>.
+# Copyright 2014 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from openerp import models, fields, api
+from odoo import models, fields, api
 
 
 class CarrierAccount(models.Model):
