@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-07 03:37+0000\n"
-"PO-Revision-Date: 2017-03-07 03:37+0000\n"
+"POT-Creation-Date: 2017-05-05 02:38+0000\n"
+"PO-Revision-Date: 2017-05-05 02:38+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/teams/23907/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -20,31 +20,37 @@ msgstr ""
 
 #. module: delivery_carrier_b2c
 #: model:ir.model.fields,field_description:delivery_carrier_b2c.field_res_partner_use_b2c_info
+#: model:ir.model.fields,field_description:delivery_carrier_b2c.field_res_users_use_b2c_info
 msgid "Advanced address"
 msgstr "Endereço avançado"
 
 #. module: delivery_carrier_b2c
 #: model:ir.model.fields,help:delivery_carrier_b2c.field_res_partner_use_b2c_info
+#: model:ir.model.fields,help:delivery_carrier_b2c.field_res_users_use_b2c_info
 msgid "Display additional information for home delivery (b2c)"
 msgstr "Mostrar informação adicional para entrega a domicilio (b2c)"
 
 #. module: delivery_carrier_b2c
 #: model:ir.model.fields,field_description:delivery_carrier_b2c.field_res_partner_door_code
+#: model:ir.model.fields,field_description:delivery_carrier_b2c.field_res_users_door_code
 msgid "Door Code"
 msgstr "Código acesso"
 
 #. module: delivery_carrier_b2c
 #: model:ir.model.fields,field_description:delivery_carrier_b2c.field_res_partner_door_code2
+#: model:ir.model.fields,field_description:delivery_carrier_b2c.field_res_users_door_code2
 msgid "Door Code 2"
 msgstr "Código acesso 2"
 
 #. module: delivery_carrier_b2c
 #: model:ir.model.fields,help:delivery_carrier_b2c.field_res_partner_intercom
+#: model:ir.model.fields,help:delivery_carrier_b2c.field_res_users_intercom
 msgid "Informations for Intercom such as name or number on the intercom"
 msgstr "Informações para Intercom como nome ou número no intercom"
 
 #. module: delivery_carrier_b2c
 #: model:ir.model.fields,field_description:delivery_carrier_b2c.field_res_partner_intercom
+#: model:ir.model.fields,field_description:delivery_carrier_b2c.field_res_users_intercom
 msgid "Intercom"
 msgstr "Intercom"
 
