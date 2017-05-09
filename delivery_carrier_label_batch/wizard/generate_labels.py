@@ -42,11 +42,14 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
 
     @api.model
     def _get_packs(self, batch):
-        batch.mapped('pack_operation_ids.result_package_id')
-        operations = sorted(batch.pack_operation_product_ids,
-                            key=attrgetter('result_package_id.name'))
+        operations = batch.pack_operation_ids
+        operations = sorted(
+            operations,
+            key=lambda r: r.result_package_id.name or r.package_id.name
+        )
         for pack, grp_operations in groupby(
-                operations, key=attrgetter('result_package_id')):
+                operations,
+                key=lambda r: r.result_package_id or r.package_id):
             pack_label = self._find_pack_label(pack)
             yield pack, list(grp_operations), pack_label
 
