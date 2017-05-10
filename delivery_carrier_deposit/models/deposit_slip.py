@@ -1,30 +1,13 @@
 # -*- encoding: utf-8 -*-
-##############################################################################
-#
-#   Copyright (C) 2012-2014 Akretion France (www.akretion.com)
 #   @author: David BEAL <david.beal@akretion.com>
 #   @author: Sebastien BEAU <sebastien.beau@akretion.com>
 #   @author: Benoit GUILLOT <benoit.guillot@akretion.com>
 #   @author: Chafique DELLI <chafique.delli@akretion.com>
 #   @author: Alexis de Lattre <alexis.delattre@akretion.com>
-#
-#   This program is free software: you can redistribute it and/or modify
-#   it under the terms of the GNU Affero General Public License as
-#   published by the Free Software Foundation, either version 3 of the
-#   License, or (at your option) any later version.
-#
-#   This program is distributed in the hope that it will be useful,
-#   but WITHOUT ANY WARRANTY; without even the implied warranty of
-#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#   GNU Affero General Public License for more details.
-#
-#   You should have received a copy of the GNU Affero General Public License
-#   along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
-from openerp import models, fields, api
-import openerp.addons.decimal_precision as dp
+from odoo import models, fields, api
+import odoo.addons.decimal_precision as dp
 
 
 class DepositSlip(models.Model):
@@ -58,18 +41,19 @@ class DepositSlip(models.Model):
         readonly=True, states={'draft': [('readonly', False)]},
         default='/', copy=False)
     carrier_type = fields.Selection(
-        '_get_carrier_type_selection', string='Type',
+        selection='_get_carrier_type_selection', string='Type',
         readonly=True, required=True, copy=False,
         help="Carrier type (combines several delivery methods)")
     picking_ids = fields.One2many(
-        'stock.picking', 'deposit_slip_id', string='Pickings',
-        readonly=True, states={'draft': [('readonly', False)]})
-    state = fields.Selection([
+        comodel_name='stock.picking', inverse_name='deposit_slip_id',
+        string='Pickings', readonly=True, states={
+            'draft': [('readonly', False)]})
+    state = fields.Selection(selection=[
         ('draft', 'Draft'),
         ('done', 'Done'),
         ], string='Status', readonly=True, default='draft')
     company_id = fields.Many2one(
-        'res.company', string='Company',
+        comodel_name='res.company', string='Company',
         default=lambda self: self.env['res.company']._company_default_get(
             'deposit.slip'))
     weight = fields.Float(

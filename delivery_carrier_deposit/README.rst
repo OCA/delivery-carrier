@@ -29,6 +29,7 @@ Contributors
 * Chafique DELLI <chafique.delli@akretion.com>
 * Alexis de Lattre <alexis.delattre@akretion.com>
 * Raphael Reverdy <raphael.reverdy@akretion.com>
+* MonsieurB <monsieurb@saaslys.com>
 
 Maintainer
 ----------
