@@ -7,7 +7,6 @@ import logging
 
 from contextlib import closing, contextmanager
 from itertools import groupby
-from operator import attrgetter
 
 import openerp
 from openerp import _, api, exceptions, fields, models
@@ -86,28 +85,29 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
                 else:
                     cr.commit()
 
-    def _do_generate_labels(self, pack, picking, label):
+    def _do_generate_labels(self, group):
         """ Generate a label in a thread safe context
         Here we declare a specific cursor so do not launch
         too many threads
         """
         self.ensure_one()
-        # generate the label of the pack
-        package_ids = [pack.id] if pack else None
 
         # create a cursor to be thread safe
         with self._do_in_new_env() as new_env:
-            try:
-                picking.with_env(new_env).generate_labels(
-                    package_ids=package_ids
-                )
-            except Exception as e:
-                # add information on picking and pack in the exception
-                picking_name = _('Picking: %s') % picking.name
-                pack_num = _('Pack: %s') % pack.name if pack else ''
-                raise exceptions.UserError(
-                    ('%s %s - %s') % (picking_name, pack_num, e)
-                )
+            for pack, picking, label in group:
+                # generate the label of the pack
+                package_ids = [pack.id] if pack else None
+                try:
+                    picking.with_env(new_env).generate_labels(
+                        package_ids=package_ids
+                    )
+                except Exception as e:
+                    # add information on picking and pack in the exception
+                    picking_name = _('Picking: %s') % picking.name
+                    pack_num = _('Pack: %s') % pack.name if pack else ''
+                    raise exceptions.UserError(
+                        ('%s %s - %s') % (picking_name, pack_num, e)
+                    )
 
     def _worker(self, data_queue, error_queue):
         """ A worker to generate labels
@@ -118,11 +118,11 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
         self.ensure_one()
         while not data_queue.empty():
             try:
-                args = data_queue.get()
+                group = data_queue.get()
             except Queue.Empty:
                 return
             try:
-                self._do_generate_labels(*args)
+                self._do_generate_labels(group)
             except Exception as e:
                 error_queue.put(e)
             finally:
@@ -146,11 +146,21 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
         data_queue = Queue.Queue()
         error_queue = Queue.Queue()
 
+        # If we have more than one pack in a picking, we must ensure
+        # they are not executed concurrently or we will have concurrent
+        # transaction errors. So we process them in the same thread.
+        # We put them in the same 'group' and this group will be passed
+        # as a whole to a thread worker.
+        groups = {}
         for pack, operations, label in self._get_packs(batch):
             if not label or self.generate_new_labels:
                 picking = operations[0].picking_id
-                args = (pack, picking, label)
-                data_queue.put(args)
+                groups.setdefault(picking.id, []).append(
+                    (pack, picking, label)
+                )
+
+        for group in groups.itervalues():
+            data_queue.put(group)
 
         # create few workers to parallelize label generation
         num_workers = self._get_num_workers()
