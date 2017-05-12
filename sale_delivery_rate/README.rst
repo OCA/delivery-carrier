@@ -7,21 +7,10 @@ Sale Delivery Rates
 ===================
 
 This module extends the notion of delivery rate quotes introduced in 
-``stock_picking_rate`` to sale orders. The new quote type is compatible with the 
-``Set price`` button used on sale orders to calculate a delivery price. Also, 
-when a sale order with such rate quotes is confirmed and results in the 
-creation of a stock picking, the picking will be updated with equivalent stock 
-picking delivery quotes.
-
-Installation
-============
-
-To install this module, simply follow the standard install process.
-
-Configuration
-=============
-
-No configuration is needed or possible.
+``stock_picking_rate`` to sale orders. The quotes are compatible with the 
+``Set price`` button on sale orders, which is used to calculate a delivery 
+price. Also, when a sale order with delivery rate quotes is confirmed and 
+generates a stock picking, the picking will be updated with equivalent quotes.
 
 Usage
 =====

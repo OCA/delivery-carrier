@@ -9,6 +9,11 @@ class DeliveryCarrierRate(models.Model):
     _name = 'delivery.carrier.rate'
     _description = 'Delivery Carrier Rate'
     _inherit = 'stock.picking.rate'
+    _sql_constraints = [(
+        'sale_order_service_uniq',
+        'unique (sale_order_id, service_id)',
+        'A sale order can only have one delivery rate per carrier',
+    )]
 
     picking_id = fields.Many2one(required=False)
     sale_order_id = fields.Many2one(

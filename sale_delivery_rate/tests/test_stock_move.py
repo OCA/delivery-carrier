@@ -95,8 +95,10 @@ class TestStockMove(TransactionCase):
     def test_action_confirm_pickings_valid_correct_copy(self):
         """Should replicate correct sale order rates if picking has info"""
         test_order = self.test_procurement.sale_line_id.order_id
-        new_delivery_rate = test_order.carrier_rate_ids.copy()
-        new_delivery_rate.service_id = test_order.carrier_id.copy()
+        new_carrier = test_order.carrier_id.copy()
+        new_delivery_rate = test_order.carrier_rate_ids.copy({
+            'service_id': new_carrier.id,
+        })
         new_delivery_rate.rate = 20
         self.test_move_set.action_confirm()
 
