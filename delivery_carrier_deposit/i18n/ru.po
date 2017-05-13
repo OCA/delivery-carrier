@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: delivery-carrier (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-28 02:37+0000\n"
-"PO-Revision-Date: 2017-04-25 10:41+0000\n"
+"POT-Creation-Date: 2017-05-01 17:08+0000\n"
+"PO-Revision-Date: 2017-05-11 14:11+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Russian (http://www.transifex.com/oca/OCA-delivery-carrier-8-0/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -73,12 +73,12 @@ msgstr "Компания"
 #. module: delivery_carrier_deposit
 #: view:deposit.slip:delivery_carrier_deposit.view_deposit_slip_form
 msgid "Confirm"
-msgstr ""
+msgstr "Изменить"
 
 #. module: delivery_carrier_deposit
 #: view:website:delivery_carrier_deposit.report_generic_deposit_slip
 msgid "Country"
-msgstr ""
+msgstr "Страна"
 
 #. module: delivery_carrier_deposit
 #: view:delivery.deposit.wizard:delivery_carrier_deposit.view_wiz_create_deposit
@@ -116,7 +116,7 @@ msgstr ""
 #. module: delivery_carrier_deposit
 #: view:website:delivery_carrier_deposit.report_generic_deposit_slip
 msgid "Date:"
-msgstr ""
+msgstr "Дата:"
 
 #. module: delivery_carrier_deposit
 #: field:delivery.deposit.wizard,carrier_type:0
@@ -165,7 +165,7 @@ msgstr ""
 #. module: delivery_carrier_deposit
 #: selection:deposit.slip,state:0
 msgid "Done"
-msgstr ""
+msgstr "Завершен"
 
 #. module: delivery_carrier_deposit
 #: selection:deposit.slip,state:0
