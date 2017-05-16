@@ -167,7 +167,7 @@ class StockQuantPackage(models.Model):
             payload['customs'] = self._get_customs(picking)
 
         payload['service'] = picking._get_service(self)
-        payload['parcel'] = self._get_parcel(picking)
+        payload['parcels'] = [self._get_parcel(picking)]
 
         # hook to override request / payload
         payload = self._before_call(picking, payload)
