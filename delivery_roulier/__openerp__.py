@@ -24,7 +24,7 @@
     ],
     'external_dependencies': {
         'python': [
-            'roulier',  # '>0.1.4'
+            'roulier',  # '>0.2.0'
         ],
     },
     'installable': True,
