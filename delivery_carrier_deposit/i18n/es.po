@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: delivery-carrier (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-01 17:08+0000\n"
-"PO-Revision-Date: 2017-05-11 14:12+0000\n"
+"POT-Creation-Date: 2017-05-13 01:44+0000\n"
+"PO-Revision-Date: 2017-05-16 12:00+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-delivery-carrier-8-0/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -166,7 +166,7 @@ msgstr "Nombre mostrado"
 #. module: delivery_carrier_deposit
 #: selection:deposit.slip,state:0
 msgid "Done"
-msgstr ""
+msgstr "Hecho"
 
 #. module: delivery_carrier_deposit
 #: selection:deposit.slip,state:0
