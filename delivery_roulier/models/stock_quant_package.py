@@ -38,7 +38,15 @@ def implemented_by_carrier(func):
     @wraps(func)
     def wrapper(cls, *args, **kwargs):
         fun_name = func.__name__
-        fun = '_%s%s' % (cls.carrier_type, fun_name)
+
+        def get_carrier_type(cls, *args, **kwargs):
+            if hasattr(cls, 'carrier_type'):
+                return cls.carrier_type
+            picking = [obj for obj in args if obj._name == 'stock.picking'][0]
+            return picking.carrier_type
+
+        carrier_type = get_carrier_type(cls, *args, **kwargs)
+        fun = '_%s%s' % (carrier_type, fun_name)
         if not hasattr(cls, fun):
             fun = '_roulier%s' % (fun_name)
             # return func(cls, *args, **kwargs)
@@ -145,7 +153,6 @@ class StockQuantPackage(models.Model):
             action
         """
         self.ensure_one()
-        self.carrier_type = self.carrier_id.carrier_type
         url = self._get_tracking_link()
         client_action = {
             'type': 'ir.actions.act_url',
@@ -161,10 +168,6 @@ class StockQuantPackage(models.Model):
         # There is low chance you need to override it.
         # Don't forget to implement _a-carrier_before_call
         # and _a-carrier_after_call
-        self.ensure_one()
-
-        self.carrier_id = picking.carrier_id
-        self.carrier_type = picking.carrier_type  # on memory value !
         roulier_instance = roulier.get(picking.carrier_type)
         payload = roulier_instance.api()
 
@@ -179,7 +182,7 @@ class StockQuantPackage(models.Model):
             payload['customs'] = self._get_customs(picking)
 
         payload['service'] = picking._get_service(self)
-        payload['parcels'] = [self._get_parcel(picking)]
+        payload['parcels'] = self._get_parcels(picking)
 
         # hook to override request / payload
         payload = self._before_call(picking, payload)
@@ -195,7 +198,9 @@ class StockQuantPackage(models.Model):
         return self._after_call(picking, ret)
 
     # default implementations
+    @api.multi
     def _roulier_get_parcel(self, picking):
+        self.ensure_one()
         weight = self.weight
         parcel = {
             'weight': weight,
@@ -268,6 +273,7 @@ class StockQuantPackage(models.Model):
         """
         return _(u'Bad input: %s\n' % exception.message)
 
+    @api.multi
     def _roulier_get_customs(self, picking):
         """Format customs infos for each product in the package.
 
@@ -278,6 +284,8 @@ class StockQuantPackage(models.Model):
             dict.'articles' : list with qty, weight, hs_code
             int category: gift 1, sample 2, commercial 3, ...
         """
+        self.ensure_one()
+
         articles = []
         for operation in self.get_operations():
             article = {}
@@ -306,17 +314,19 @@ class StockQuantPackage(models.Model):
         labels = []
         parcels = iter(response.get('parcels', []))
         for rec in self:
-            response = parcels.next()
-            main_label = rec._roulier_prepare_label(picking, response)
+            parcel_rep = parcels.next()
+            main_label = rec._roulier_prepare_label(picking, parcel_rep)
             labels.append(
                 self.env['shipping.label'].create(main_label)
             )
+        import pdb
+        pdb.set_trace()
 
         attachments = [
             self.env['ir.attachment'].create(attachment)
             for attachment in
-            self._roulier_prepare_attachments(picking, response)
-        ]
+            self[0]._roulier_prepare_attachments(picking, response)
+        ]  # do it once for all
         return {
             'labels': labels,
             'attachments': attachments,
@@ -366,7 +376,7 @@ class StockQuantPackage(models.Model):
         } for attachment in attachments]
 
     @api.multi
-    def _handle_tracking(self, picking, response):
+    def _roulier_handle_tracking(self, picking, response):
         number = False
         tracking = response.get('tracking')
         if tracking:
