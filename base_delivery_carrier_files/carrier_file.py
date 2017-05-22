@@ -44,7 +44,9 @@ class CarrierFile(orm.Model):
 
     _columns = {
         'name': fields.char('Name', size=64, required=True),
-        'type': fields.selection(get_type_selection, 'Type', required=True),
+        'type': fields.selection(
+            selection=lambda s, cr, uid, context=None: s.get_type_selection(
+                cr, uid, context=context)),
         'group_pickings': fields.boolean('Group all pickings in one file',
                                          help='All the pickings will be '
                                               'grouped in the same file. '
