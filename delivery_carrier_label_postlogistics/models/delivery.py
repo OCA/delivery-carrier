@@ -105,6 +105,7 @@ class DeliveryCarrierOption(models.Model):
 
     name = fields.Char(translate=True)
 
+    @api.model
     def fields_view_get(self, view_id=None, view_type='form',
                         toolbar=False, submenu=False):
         _super = super(DeliveryCarrierOption, self)
