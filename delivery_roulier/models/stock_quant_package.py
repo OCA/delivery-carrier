@@ -321,9 +321,6 @@ class StockQuantPackage(models.Model):
             labels.append(
                 self.env['shipping.label'].create(main_label)
             )
-        import pdb
-        pdb.set_trace()
-
         attachments = [
             self.env['ir.attachment'].create(attachment)
             for attachment in
