@@ -39,7 +39,8 @@ class TestPostlogistics(common.TransactionCase):
     def setUp(self):
         super(TestPostlogistics, self).setUp()
         Product = self.env['product.product']
-        partner_xmlid = 'delivery_carrier_label_postlogistics.postlogistics'
+        partner_xmlid = ('delivery_carrier_label_postlogistics'
+                         '.partner_postlogistics')
         self.carrier = self.env['delivery.carrier'].create({
             'name': 'Postlogistics',
             'carrier_type': 'postlogistics',
