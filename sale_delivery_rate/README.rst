@@ -6,10 +6,10 @@
 Sale Delivery Rates
 ===================
 
-This module extends the notion of delivery rate quotes introduced in 
-``stock_picking_rate`` to sale orders. The quotes are compatible with the 
-``Set price`` button on sale orders, which is used to calculate a delivery 
-price. Also, when a sale order with delivery rate quotes is confirmed and 
+This module extends the notion of delivery rate quotes introduced in
+``stock_picking_rate`` to sale orders. The quotes are compatible with the
+``Set price`` button on sale orders, which is used to calculate a delivery
+price. Also, when a sale order with delivery rate quotes is confirmed and
 generates a stock picking, the picking will be updated with equivalent quotes.
 
 Usage
@@ -24,15 +24,15 @@ Install and enjoy.
 Known Issues / Roadmap
 ======================
 
-* This module expects each sale order to result in a single picking when 
+* This module expects each sale order to result in a single picking when
   confirmed and may produce incorrect results if multiple pickings are created
 
 Bug Tracker
 ===========
 
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/delivery-carrier/issues>`_.
-In case of trouble, please check there if your issue has already been 
-reported. If you spotted it first, help us smash it by providing detailed and 
+In case of trouble, please check there if your issue has already been
+reported. If you spotted it first, help us smash it by providing detailed and
 welcomed feedback.
 
 Credits

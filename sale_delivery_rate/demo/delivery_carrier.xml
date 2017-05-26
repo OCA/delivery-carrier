@@ -6,12 +6,10 @@
     <record id="demo_carrier_1" model="delivery.carrier">
         <field name="delivery_type">base_on_rate</field>
         <field name="name">Demo Carrier 1</field>
-        <field name="partner_id" ref="delivery.res_partner_delivery"/>
     </record>
 
     <record id="demo_carrier_2" model="delivery.carrier">
         <field name="delivery_type">base_on_rate</field>
         <field name="name">Demo Carrier 2</field>
-        <field name="partner_id" ref="delivery.res_partner_delivery"/>
     </record>
 </odoo>

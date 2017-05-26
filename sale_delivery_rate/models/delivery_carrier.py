@@ -2,10 +2,11 @@
 # Copyright 2017 LasLabs Inc.
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 
-from openerp import api, fields, models
+from odoo import api, fields, models
 
 
 class DeliveryCarrier(models.Model):
+
     _inherit = 'delivery.carrier'
 
     delivery_type = fields.Selection(

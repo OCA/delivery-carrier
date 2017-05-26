@@ -2,10 +2,11 @@
 # Copyright 2017 LasLabs Inc.
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 
-from openerp import api, models
+from odoo import api, models
 
 
 class StockMove(models.Model):
+
     _inherit = 'stock.move'
 
     @api.multi

@@ -3,7 +3,7 @@
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 
 import mock
-from openerp.tests.common import TransactionCase
+from odoo.tests.common import TransactionCase
 
 MODEL_PATH = 'openerp.addons.sale_delivery_rate.models.delivery_carrier_rate'
 MOCK_PATH = MODEL_PATH + '.DeliveryCarrierRate.generate_equiv_picking_rates'
