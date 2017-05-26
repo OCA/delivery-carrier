@@ -20,6 +20,7 @@ addon | version | summary
 --- | --- | ---
 [base_delivery_carrier_label](base_delivery_carrier_label/) | 10.0.1.0.0 | Base module for carrier labels
 [delivery_carrier_b2c](delivery_carrier_b2c/) | 10.0.0.1.0 | Delivery Carrier Business To Customer
+[stock_picking_delivery_rate](stock_picking_delivery_rate/) | 10.0.1.0.0 | Adds a concept of rate quotes for stock pickings
 
 
 Unported addons
