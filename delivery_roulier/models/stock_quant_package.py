@@ -42,10 +42,14 @@ def implemented_by_carrier(func):
         def get_carrier_type(cls, *args, **kwargs):
             if hasattr(cls, 'carrier_type'):
                 return cls.carrier_type
-            picking = [
+            # TODO: est-ce bien utile si on carrier_id ?
+            pickings = [
                 obj for obj in args
-                if getattr(obj, '_name', '') == 'stock.picking'][0]
-            return picking.carrier_type
+                if getattr(obj, '_name', '') == 'stock.picking']
+            if len(pickings) > 0:
+                return pickings[0].carrier_type
+            if cls[0].carrier_id:
+                return cls[0].carrier_id.type
 
         carrier_type = get_carrier_type(cls, *args, **kwargs)
         fun = '_%s%s' % (carrier_type, fun_name)
