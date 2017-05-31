@@ -3,5 +3,7 @@
 # © 2017 Angel Moya <angel.moya@pesol.es>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from . import models
-from . import report
+from . import company
+from . import config
+from . import delivery
+from . import stock
