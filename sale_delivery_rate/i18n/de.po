@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-14 00:42+0000\n"
-"PO-Revision-Date: 2017-05-14 00:42+0000\n"
+"POT-Creation-Date: 2017-05-20 01:36+0000\n"
+"PO-Revision-Date: 2017-05-20 01:36+0000\n"
 "Last-Translator: Rudolf Schnapka <rs@techno-flex.de>, 2017\n"
 "Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
 "MIME-Version: 1.0\n"
@@ -22,7 +22,7 @@ msgstr ""
 #. module: sale_delivery_rate
 #: sql_constraint:delivery.carrier.rate:0
 msgid "A sale order can only have one delivery rate per carrier"
-msgstr ""
+msgstr "Ein Verkaufsauftrag darf nur einen Tarif pro Spediteur haben."
 
 #. module: sale_delivery_rate
 #: model:ir.model,name:sale_delivery_rate.model_delivery_carrier
@@ -32,12 +32,12 @@ msgstr "Spediteur"
 #. module: sale_delivery_rate
 #: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_partner_id
 msgid "Carrier Partner"
-msgstr ""
+msgstr "Partner-Spediteur"
 
 #. module: sale_delivery_rate
 #: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_service_id
 msgid "Carrier Service"
-msgstr ""
+msgstr "Spediteurleistung"
 
 #. module: sale_delivery_rate
 #: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_create_uid
@@ -52,51 +52,51 @@ msgstr "Erstellt am:"
 #. module: sale_delivery_rate
 #: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_date_generated
 msgid "Date Generated"
-msgstr ""
+msgstr "Anlagedatum"
 
 #. module: sale_delivery_rate
 #: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_date_purchased
 msgid "Date Purchased"
-msgstr ""
+msgstr "Erwerbsdatum"
 
 #. module: sale_delivery_rate
 #: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_is_guaranteed
 msgid "Date is Guaranteed?"
-msgstr ""
+msgstr "Ist Datum sichergestellt?"
 
 #. module: sale_delivery_rate
 #: model:ir.model,name:sale_delivery_rate.model_delivery_carrier_rate
 msgid "Delivery Carrier Rate"
-msgstr ""
+msgstr "Speditions-Liefertarif"
 
 #. module: sale_delivery_rate
 #: model:ir.model.fields,field_description:sale_delivery_rate.field_sale_order_carrier_rate_ids
 msgid "Delivery Carrier Rates"
-msgstr ""
+msgstr "Speditions-Liefertarif"
 
 #. module: sale_delivery_rate
 #: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_delivery_days
 msgid "Delivery days"
-msgstr ""
+msgstr "Zustelltage"
 
 #. module: sale_delivery_rate
 #: model:delivery.carrier,name:sale_delivery_rate.demo_carrier_1
 #: model:product.product,name:sale_delivery_rate.demo_carrier_1_product_product
 msgid "Demo Carrier 1"
-msgstr ""
+msgstr "Demo-Spedition 1"
 
 #. module: sale_delivery_rate
 #: model:delivery.carrier,name:sale_delivery_rate.demo_carrier_2
 #: model:product.product,name:sale_delivery_rate.demo_carrier_2_product_product
 msgid "Demo Carrier 2"
-msgstr ""
+msgstr "Demo-Spediteur 2"
 
 #. module: sale_delivery_rate
 #: model:product.product,name:sale_delivery_rate.demo_stockable_product
 #: model:product.template,name:sale_delivery_rate.demo_stockable_product_product_template
 #: model:product.template,name:sale_delivery_rate.demo_stockable_template
 msgid "Demo Stockable Product"
-msgstr ""
+msgstr "Demo-Lagerprodukt"
 
 #. module: sale_delivery_rate
 #: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_display_name
@@ -106,7 +106,7 @@ msgstr "Anzeigename"
 #. module: sale_delivery_rate
 #: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_date_delivery
 msgid "Est. Delivery Date"
-msgstr ""
+msgstr "Soll-Lieferdatum"
 
 #. module: sale_delivery_rate
 #: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_id
@@ -116,7 +116,7 @@ msgstr "ID"
 #. module: sale_delivery_rate
 #: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_is_purchased
 msgid "Is purchased"
-msgstr ""
+msgstr "Ist zugekauft"
 
 #. module: sale_delivery_rate
 #: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate___last_update
@@ -136,17 +136,17 @@ msgstr "Zuletzt aktualisiert am"
 #. module: sale_delivery_rate
 #: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_list_rate_currency_id
 msgid "List Rate Currency"
-msgstr ""
+msgstr "Zeige Tarif-Währung"
 
 #. module: sale_delivery_rate
 #: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_list_rate
 msgid "List rate"
-msgstr ""
+msgstr "Zeige Tarif"
 
 #. module: sale_delivery_rate
 #: selection:delivery.carrier.rate,state:0
 msgid "Purchased"
-msgstr ""
+msgstr "Zugekauft"
 
 #. module: sale_delivery_rate
 #: selection:delivery.carrier.rate,state:0
@@ -161,17 +161,17 @@ msgstr "Satz"
 #. module: sale_delivery_rate
 #: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_rate_currency_id
 msgid "Rate Currency"
-msgstr ""
+msgstr "Tarifwährung"
 
 #. module: sale_delivery_rate
 #: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_retail_rate
 msgid "Retail Rate"
-msgstr ""
+msgstr "Wiederverkaufstarif"
 
 #. module: sale_delivery_rate
 #: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_retail_rate_currency_id
 msgid "Retail Rate Currency"
-msgstr ""
+msgstr "Wiederverkaufswährung"
 
 #. module: sale_delivery_rate
 #: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_sale_order_id
@@ -201,9 +201,9 @@ msgstr "Lagerentnahme"
 #. module: sale_delivery_rate
 #: model:ir.model.fields,help:sale_delivery_rate.field_delivery_carrier_rate_partner_id
 msgid "The partner that is doing the delivery service."
-msgstr ""
+msgstr "Der Partner, der die Zustellung ausführt."
 
 #. module: sale_delivery_rate
 #: selection:delivery.carrier.rate,state:0
 msgid "Voided"
-msgstr ""
+msgstr "Ungültig gemacht"

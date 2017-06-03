@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-29 00:40+0000\n"
-"PO-Revision-Date: 2017-04-29 00:40+0000\n"
+"POT-Creation-Date: 2017-05-20 01:36+0000\n"
+"PO-Revision-Date: 2017-05-20 01:36+0000\n"
 "Last-Translator: Rudolf Schnapka <rs@techno-flex.de>, 2017\n"
 "Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
 "MIME-Version: 1.0\n"
@@ -52,7 +52,7 @@ msgstr "Zusatzleistungen"
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_delivery_carrier_allowed_option_ids
 msgid "Allowed options"
-msgstr ""
+msgstr "Zulässige Optionen"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,help:delivery_carrier_label_postlogistics.field_postlogistics_config_settings_tracking_format
@@ -61,6 +61,9 @@ msgid ""
 "- Default postlogistics numbers: The webservice generates it for you.\n"
 "- Picking number with pack counter: Generate it using the digits of picking name and add the pack number. 2 digits forpack number and 6 digits for picking number. (eg. 07000042 for picking 42 and 7th pack"
 msgstr ""
+"Ermöglicht Ihnen festzulegen, wie die Positionsnummer (letzte 8 Stellen) der Trackingnummer erstellt werden:\n"
+"- Vorgabe Postlogistics-Nummern: Der Webdienst erstellt diese für Sie.\n"
+"- Kommissionsnummer mit Paketnummer: Erstellt unter Verwendung der Kommissionsnummer zusammen mit der Paketnummer. 2 Ziffern für Paket und 6 Ziffern für Kommission. (z.B. 07000042 für das 7. Paket der Kommissionierung 42)"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.ui.view,arch_db:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
@@ -70,7 +73,7 @@ msgstr "Übernehmen"
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.ui.view,arch_db:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
 msgid "Assign PostLogistics Licenses to service groups"
-msgstr ""
+msgstr "PostLogistics-Lizenzen zu Dienstgruppen zuweisen"
 
 #. module: delivery_carrier_label_postlogistics
 #: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:100
@@ -97,6 +100,8 @@ msgid ""
 "Basic Service defines the available additional options for this delivery "
 "method"
 msgstr ""
+"Basisdienst definiert die zusätzlich verfügbaren Optionen für diese "
+"Versandart"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_delivery_carrier_option_postlogistics_basic_service_ids
@@ -146,7 +151,7 @@ msgstr "Anleitung zur Zusatzleistung"
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,help:delivery_carrier_label_postlogistics.field_delivery_carrier_allowed_option_ids
 msgid "Compute allowed options according to selected options."
-msgstr ""
+msgstr "Ermittele zulässige Optionen abhängig von den Ausgewählten."
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.actions.act_window,name:delivery_carrier_label_postlogistics.action_postlogistics_config
@@ -157,7 +162,7 @@ msgstr "Postlogistics einstellen"
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.ui.view,arch_db:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
 msgid "Configure licenses"
-msgstr ""
+msgstr "Lizenzen einstellen"
 
 #. module: delivery_carrier_label_postlogistics
 #: code:addons/delivery_carrier_label_postlogistics/models/res_config.py:118
@@ -177,6 +182,8 @@ msgid ""
 "Could not retrieve Postlogistics delivery instructions:\n"
 "%s"
 msgstr ""
+"Konnte PostLogistics Lieferanweisungen nicht erhalten:\n"
+"%s"
 
 #. module: delivery_carrier_label_postlogistics
 #: code:addons/delivery_carrier_label_postlogistics/models/res_config.py:250
@@ -195,6 +202,8 @@ msgid ""
 "Could not retrieve allowed Postlogistics service groups for the %s licence:\n"
 "%s"
 msgstr ""
+"Konnte zulässige PostLogistics Dienstegruppen für Lizenz %s nicht erhalten:\n"
+"%s"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_config_settings_create_uid
@@ -241,7 +250,7 @@ msgstr "Lieferanweisungen"
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_stock_picking_delivery_place
 msgid "Delivery Place"
-msgstr ""
+msgstr "Lieferort"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model,name:delivery_carrier_label_postlogistics.model_delivery_carrier_option
@@ -256,7 +265,7 @@ msgstr "Spediteurvorlagen-Einstellung"
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.ui.view,arch_db:delivery_carrier_label_postlogistics.view_picking_withcarrier_out_form
 msgid "Delivery instructions"
-msgstr ""
+msgstr "Lieferanweisungen"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_license_name
@@ -285,18 +294,18 @@ msgstr "EPS"
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_stock_picking_delivery_fixed_date
 msgid "Fixed delivery date"
-msgstr ""
+msgstr "Fixes Lieferdatum"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,help:delivery_carrier_label_postlogistics.field_stock_picking_delivery_place
 msgid "For Deposit item service (ZAW3219)"
-msgstr ""
+msgstr "For Deposit item service (ZAW3219)"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,help:delivery_carrier_label_postlogistics.field_stock_picking_delivery_mobile
 #: model:ir.model.fields,help:delivery_carrier_label_postlogistics.field_stock_picking_delivery_phone
 msgid "For notify delivery by telephone (ZAW3213)"
-msgstr ""
+msgstr "Zur Meldung der Zustellung per Telefon (ZAW3213)"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:delivery.carrier.template.option,name:delivery_carrier_label_postlogistics.postlogistics_layout_option_a5
@@ -329,6 +338,8 @@ msgid ""
 "Gives the sequence on company to define priority on license when multiple "
 "licenses are available for the same group of service."
 msgstr ""
+"Liefert die Reihenfolge zum Unternehmen, mit der, bei zutreffen mehrerer "
+"Lizenzen, die Priorität der Lizenznutzung festgelegt wird."
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_service_group_group_extid
@@ -348,6 +359,8 @@ msgid ""
 "If the cash on delivery amount for this package is different than the total "
 "of the sales order, write the amount there."
 msgstr ""
+"Wenn der Betrag für die Bezahlung bei Anlieferung für dieses Paket von der "
+"Auftragssumme abweicht, vermerken Sie den Betrag hier."
 
 #. module: delivery_carrier_label_postlogistics
 #: model:delivery.carrier.template.option,name:delivery_carrier_label_postlogistics.postlogistics_output_format_option_jpg
@@ -384,7 +397,7 @@ msgstr "Zuletzt aktualisiert am"
 #: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:413
 #, python-format
 msgid "Layout not set"
-msgstr ""
+msgstr "Label nicht festgelegt"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.ui.view,arch_db:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
@@ -421,6 +434,15 @@ msgid ""
 "– The logo will be printed rotated counter-clockwise by 90°\n"
 "We recommend using a black and white logo for printing in  the ZPL2 format."
 msgstr ""
+"Optionales Unternehmens-Logo für das Etikett.\n"
+"Bei Verwendung eines Bildes / Logos, bitte folgendes beachten:\n"
+"– Bildbreite: 47 mm\n"
+"– Bildhöhe: 25 mm\n"
+"– Dateigröße: max. 30 kB\n"
+"– Dateiformat: GIF oder PNG\n"
+"– Farbtabelle: indizierte Farben, max. 200 Farben\n"
+"– Das Logo wird gegen den Uhrzeigesinn um 90° gedreht gedruckt.\n"
+"Wir empfehlen Schwarz/Weiss-Druck unter Verwendung des ZPL2 formats."
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.ui.view,arch_db:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
@@ -441,7 +463,7 @@ msgstr "Ausgabeauflösung"
 #: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:419
 #, python-format
 msgid "Output format not set"
-msgstr ""
+msgstr "Ausgabeformat nicht gepflegt"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:delivery.carrier.template.option,name:delivery_carrier_label_postlogistics.postlogistics_output_format_option_pdf
@@ -467,7 +489,7 @@ msgstr "Telefon"
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model,name:delivery_carrier_label_postlogistics.model_stock_quant_package
 msgid "Physical Packages"
-msgstr ""
+msgstr "Physische Pakete"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,help:delivery_carrier_label_postlogistics.field_postlogistics_config_settings_office
@@ -482,7 +504,7 @@ msgstr "Empfangendes Postamt der Lieferung"
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_service_group_postlogistics_license_ids
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_company_postlogistics_license_ids
 msgid "PostLogistics Franking License"
-msgstr ""
+msgstr "PostLogistics Frankierungs Lizenz"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model,name:delivery_carrier_label_postlogistics.model_postlogistics_service_group
@@ -507,31 +529,31 @@ msgstr "Postlogistics"
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_stock_quant_package_postlogistics_manual_cod_amount
 msgid "Postlogistics Cash On Delivery Amount"
-msgstr ""
+msgstr "Postlogistics Betrag für Zahlung bei Lieferung"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.actions.act_window,name:delivery_carrier_label_postlogistics.action_postlogistics_licenses
 #: model:ir.ui.menu,name:delivery_carrier_label_postlogistics.menu_postlogistics_licenses
 msgid "Postlogistics Licenses"
-msgstr ""
+msgstr "PostLogistics-Lizenzen"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_config_settings_test_mode
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_company_postlogistics_test_mode
 msgid "Postlogistics test mode"
-msgstr ""
+msgstr "PostLogistics-Testmodus"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_config_settings_proclima_logo
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_company_postlogistics_proclima_logo
 msgid "Print ProClima logo"
-msgstr ""
+msgstr "Drucke ProClima-Logo"
 
 #. module: delivery_carrier_label_postlogistics
 #: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:425
 #, python-format
 msgid "Resolution not set"
-msgstr ""
+msgstr "Auflösung ist nicht gepflegt"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.ui.view,arch_db:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
@@ -563,7 +585,7 @@ msgstr "Paketaufkleber"
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,help:delivery_carrier_label_postlogistics.field_stock_picking_delivery_fixed_date
 msgid "Specific delivery date (ZAW3217)"
-msgstr ""
+msgstr "Bestimmtes Lieferdatum (ZAW3217)"
 
 #. module: delivery_carrier_label_postlogistics
 #: code:addons/delivery_carrier_label_postlogistics/models/stock.py:44
@@ -573,6 +595,9 @@ msgid ""
 "The cash on delivery amount must be manually specified on the packages when "
 "a package contains products from different sales orders."
 msgstr ""
+"Der Betrag für Zahlung bei Lieferung muss manuell auf den Paketen Vermerkt "
+"werden, wenn die Packung Produkte aus verschiedenen Verkaufsaufträgen "
+"enthält."
 
 #. module: delivery_carrier_label_postlogistics
 #: code:addons/delivery_carrier_label_postlogistics/models/stock.py:53
@@ -582,6 +607,8 @@ msgid ""
 "The cash on delivery amount must be manually specified on the packages when "
 "a sales order is delivered in several delivery orders."
 msgstr ""
+"Der Betrag für Zahlung bei Lieferung muss manuell auf den Paketen Vermerkt "
+"werden, wenn der Verkaufsauftrag auf mehrere Lieferungen aufgeteilt wird."
 
 #. module: delivery_carrier_label_postlogistics
 #: code:addons/delivery_carrier_label_postlogistics/models/stock_quant_package.py:66
@@ -590,6 +617,8 @@ msgid ""
 "The cash on delivery amount must be manually specified on the packages when "
 "a sales order is delivered in several packages."
 msgstr ""
+"Der Betrag für Zahlung bei Lieferung muss manuell auf den Paketen Vermerkt "
+"werden, wenn der Verkaufsauftrag in mehreren Paketen ausgeliefert wird."
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,help:delivery_carrier_label_postlogistics.field_postlogistics_config_settings_proclima_logo
@@ -599,17 +628,21 @@ msgid ""
 "signed. For Letters with barcode (BMB) domestic, the ProClima logo is "
 "printed automatically (at no additional charge)"
 msgstr ""
+"Das “pro clima” -Logo kennzeichnet einen Posten, für den der Zuschlag für "
+"CO2-neutralen Versand geleistet wurde und ein Vertrag hierüber abgeschlossen"
+" wurde. Bei Inlands-Briefen mit Barcode (BMB), wird das ProClima-Logo "
+"automatisch (ohne Aufpreis) aufgedruckt"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_config_settings_tracking_format
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_company_postlogistics_tracking_format
 msgid "Tracking number format"
-msgstr ""
+msgstr "Trackingnummern-Format"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.ui.view,arch_db:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
 msgid "Tracking numbers"
-msgstr ""
+msgstr "Trackingnummern"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model,name:delivery_carrier_label_postlogistics.model_stock_picking
@@ -624,12 +657,12 @@ msgstr "Postlogistics Leistungen aktualisieren"
 #. module: delivery_carrier_label_postlogistics
 #: selection:res.company,postlogistics_tracking_format:0
 msgid "Use default postlogistics tracking numbers"
-msgstr ""
+msgstr "Verwende Standard-PostLogistics Trackingnummern"
 
 #. module: delivery_carrier_label_postlogistics
 #: selection:res.company,postlogistics_tracking_format:0
 msgid "Use picking number with pack counter"
-msgstr ""
+msgstr "Berwende Kommissioniernummern mit Paketzähler"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_config_settings_username
@@ -641,17 +674,17 @@ msgstr "Benutzername"
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_config_settings_wsdl_url
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_company_postlogistics_wsdl_url
 msgid "WSDL URL"
-msgstr ""
+msgstr "WSDL URL"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.ui.view,arch_db:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
 msgid "Web Service Authentication"
-msgstr ""
+msgstr "Web-Dienstauthentifizierung"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,help:delivery_carrier_label_postlogistics.field_postlogistics_config_settings_test_mode
 msgid "Will generate Specimen labels using test end point of webservice."
-msgstr ""
+msgstr "Erzeugt Probe-Etiketten unter Verwendung des Webdienst-Testzugangs."
 
 #. module: delivery_carrier_label_postlogistics
 #: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:405
@@ -661,6 +694,9 @@ msgid ""
 "Settings/Configuration/Carriers/Postlogistics. You can also set it on "
 "delivery method or on the picking."
 msgstr ""
+"Sie müssen %s einstellen. Sie können den Vorgabewert in "
+"Einstellungen/Konfiguration/Frachtführer/PostLogistics festlegen. Sie können"
+" diesen auch im Lieferweg oder der Kommissionierung vorgeben."
 
 #. module: delivery_carrier_label_postlogistics
 #: model:delivery.carrier.template.option,name:delivery_carrier_label_postlogistics.postlogistics_output_format_option_zpl2
@@ -671,7 +707,7 @@ msgstr "ZPL2"
 #: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:414
 #, python-format
 msgid "label layout"
-msgstr ""
+msgstr "Etikettgetaltung"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.ui.view,arch_db:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
@@ -682,13 +718,13 @@ msgstr "oder"
 #: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:420
 #, python-format
 msgid "output format"
-msgstr ""
+msgstr "Ausgabeformat"
 
 #. module: delivery_carrier_label_postlogistics
 #: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:426
 #, python-format
 msgid "resolution"
-msgstr ""
+msgstr "Auflösung"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:delivery.carrier.template.option,name:delivery_carrier_label_postlogistics.postlogistics_output_format_option_spdf

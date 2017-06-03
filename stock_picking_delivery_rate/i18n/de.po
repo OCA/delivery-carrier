@@ -5,15 +5,13 @@
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2017
 # Rudolf Schnapka <rs@techno-flex.de>, 2017
-# Renzo Meister <info@jamotion.ch>, 2017
-# Akim Juillerat <akim.juillerat@camptocamp.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-29 00:40+0000\n"
-"PO-Revision-Date: 2017-04-29 00:40+0000\n"
-"Last-Translator: Akim Juillerat <akim.juillerat@camptocamp.com>, 2017\n"
+"POT-Creation-Date: 2017-05-20 01:36+0000\n"
+"PO-Revision-Date: 2017-05-20 01:36+0000\n"
+"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>, 2017\n"
 "Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,19 +27,19 @@ msgstr "Abbrechen"
 #. module: stock_picking_delivery_rate
 #: selection:stock.picking.rate.purchase,group_by:0
 msgid "Carrier Commercial Partner"
-msgstr ""
+msgstr "Spediteur Geschäftspartner"
 
 #. module: stock_picking_delivery_rate
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_partner_id
 #: selection:stock.picking.rate.purchase,group_by:0
 msgid "Carrier Partner"
-msgstr ""
+msgstr "Partner-Spediteur"
 
 #. module: stock_picking_delivery_rate
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_service_id
 #: selection:stock.picking.rate.purchase,group_by:0
 msgid "Carrier Service"
-msgstr ""
+msgstr "Spediteurleistung"
 
 #. module: stock_picking_delivery_rate
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_create_uid
@@ -64,28 +62,28 @@ msgstr "Währung"
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_date_generated
 #: model:ir.ui.view,arch_db:stock_picking_delivery_rate.stock_picking_rate_view_search
 msgid "Date Generated"
-msgstr ""
+msgstr "Anlagedatum"
 
 #. module: stock_picking_delivery_rate
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_date_purchased
 #: model:ir.ui.view,arch_db:stock_picking_delivery_rate.stock_picking_rate_view_search
 msgid "Date Purchased"
-msgstr ""
+msgstr "Erwerbsdatum"
 
 #. module: stock_picking_delivery_rate
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_is_guaranteed
 msgid "Date is Guaranteed?"
-msgstr ""
+msgstr "Ist Datum sichergestellt?"
 
 #. module: stock_picking_delivery_rate
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_delivery_days
 msgid "Delivery days"
-msgstr ""
+msgstr "Zustelltage"
 
 #. module: stock_picking_delivery_rate
 #: model:ir.ui.view,arch_db:stock_picking_delivery_rate.stock_picking_rate_view_form
 msgid "Dispatch Rate"
-msgstr ""
+msgstr "Versandtarif"
 
 #. module: stock_picking_delivery_rate
 #: model:ir.actions.act_window,name:stock_picking_delivery_rate.stock_picking_rate_action
@@ -93,7 +91,7 @@ msgstr ""
 #: model:ir.ui.view,arch_db:stock_picking_delivery_rate.stock_picking_rate_view_search
 #: model:ir.ui.view,arch_db:stock_picking_delivery_rate.stock_picking_rate_view_tree
 msgid "Dispatch Rates"
-msgstr ""
+msgstr "Versandtarife"
 
 #. module: stock_picking_delivery_rate
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_display_name
@@ -104,7 +102,7 @@ msgstr "Anzeigename"
 #. module: stock_picking_delivery_rate
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_date_delivery
 msgid "Est. Delivery Date"
-msgstr ""
+msgstr "Soll-Lieferdatum"
 
 #. module: stock_picking_delivery_rate
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_purchase_group_by
@@ -120,7 +118,7 @@ msgstr "ID"
 #. module: stock_picking_delivery_rate
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_is_purchased
 msgid "Is purchased"
-msgstr ""
+msgstr "Ist zugekauft"
 
 #. module: stock_picking_delivery_rate
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate___last_update
@@ -143,17 +141,17 @@ msgstr "Zuletzt akualisiert am"
 #. module: stock_picking_delivery_rate
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_list_rate_currency_id
 msgid "List Rate Currency"
-msgstr ""
+msgstr "Zeige Tarif-Währung"
 
 #. module: stock_picking_delivery_rate
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_list_rate
 msgid "List rate"
-msgstr ""
+msgstr "Zeige Tarif"
 
 #. module: stock_picking_delivery_rate
 #: selection:stock.picking.rate.purchase,group_by:0
 msgid "No Grouping"
-msgstr ""
+msgstr "Keine Gruppierung"
 
 #. module: stock_picking_delivery_rate
 #: model:ir.ui.view,arch_db:stock_picking_delivery_rate.stock_picking_rate_view_search
@@ -169,23 +167,23 @@ msgstr "Einkauf"
 #. module: stock_picking_delivery_rate
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_purchase_date_po
 msgid "Purchase Order Date"
-msgstr ""
+msgstr "Bestelldatum"
 
 #. module: stock_picking_delivery_rate
 #: model:ir.actions.act_window,name:stock_picking_delivery_rate.stock_picking_rate_purchase_action
 msgid "Purchase Rate"
-msgstr ""
+msgstr "Kostensatz"
 
 #. module: stock_picking_delivery_rate
 #: model:ir.ui.view,arch_db:stock_picking_delivery_rate.stock_picking_rate_purchase_view_form
 msgid "Purchase Rates"
-msgstr ""
+msgstr "Kostensätze"
 
 #. module: stock_picking_delivery_rate
 #: model:ir.ui.view,arch_db:stock_picking_delivery_rate.stock_picking_rate_view_search
 #: selection:stock.picking.rate,state:0
 msgid "Purchased"
-msgstr ""
+msgstr "Erworben"
 
 #. module: stock_picking_delivery_rate
 #: selection:stock.picking.rate,state:0
@@ -201,7 +199,7 @@ msgstr "Satz"
 #. module: stock_picking_delivery_rate
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_rate_currency_id
 msgid "Rate Currency"
-msgstr ""
+msgstr "Tarifwährung"
 
 #. module: stock_picking_delivery_rate
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_purchase_rate_ids
@@ -211,12 +209,12 @@ msgstr "Sätze"
 #. module: stock_picking_delivery_rate
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_retail_rate
 msgid "Retail Rate"
-msgstr ""
+msgstr "Wiederverkaufstarif"
 
 #. module: stock_picking_delivery_rate
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_retail_rate_currency_id
 msgid "Retail Rate Currency"
-msgstr ""
+msgstr "Wiederverkaufswährung"
 
 #. module: stock_picking_delivery_rate
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_state
@@ -231,17 +229,17 @@ msgstr "Lagerentnahme"
 #. module: stock_picking_delivery_rate
 #: model:ir.model,name:stock_picking_delivery_rate.model_stock_picking_rate
 msgid "Stock Picking Dispatch Rate"
-msgstr ""
+msgstr "Kommissionierungs-Zustelltarif"
 
 #. module: stock_picking_delivery_rate
 #: model:ir.model,name:stock_picking_delivery_rate.model_stock_picking_rate_purchase
 msgid "Stock Picking Dispatch Rate Purchase"
-msgstr ""
+msgstr "Kommissionierungs-Zustellerwerbstarif"
 
 #. module: stock_picking_delivery_rate
 #: model:ir.model.fields,help:stock_picking_delivery_rate.field_stock_picking_rate_partner_id
 msgid "The partner that is doing the delivery service."
-msgstr ""
+msgstr "Der Partner, der die Zustellung ausführt."
 
 #. module: stock_picking_delivery_rate
 #: model:ir.model,name:stock_picking_delivery_rate.model_stock_picking
@@ -251,7 +249,7 @@ msgstr "Umbuchung"
 #. module: stock_picking_delivery_rate
 #: selection:stock.picking.rate,state:0
 msgid "Voided"
-msgstr ""
+msgstr "Ungültig gemacht"
 
 #. module: stock_picking_delivery_rate
 #: model:ir.model.fields,help:stock_picking_delivery_rate.field_stock_picking_rate_purchase_group_by
@@ -259,6 +257,8 @@ msgid ""
 "When creating purchase orders, this will be used to determine the rates that"
 " go on each order."
 msgstr ""
+"Beim Anlegen von Bestellungen wird dies zur Ermittlung der Tarife zu jedem "
+"Auftrag herangezogen."
 
 #. module: stock_picking_delivery_rate
 #: model:ir.ui.view,arch_db:stock_picking_delivery_rate.stock_picking_rate_purchase_view_form
