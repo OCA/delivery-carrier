@@ -7,13 +7,14 @@
 # Hotellook, 2014
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
 # oihane <oihanecruce@gmail.com>, 2015
+# oihane <oihanecruce@gmail.com>, 2015
 # Rudolf Schnapka <rs@techno-flex.de>, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: delivery-carrier (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-22 09:11+0000\n"
-"PO-Revision-Date: 2016-11-25 14:55+0000\n"
+"POT-Creation-Date: 2017-05-20 01:32+0000\n"
+"PO-Revision-Date: 2017-05-30 10:13+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-delivery-carrier-8-0/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -222,7 +223,7 @@ msgstr "Im Falle mehrerer Spediteure hilft dies zu ersehen, welches Konto zu wel
 #. module: base_delivery_carrier_label
 #: field:shipping.label,index_content:0
 msgid "Indexed Content"
-msgstr ""
+msgstr "Indizierter Inhalt"
 
 #. module: base_delivery_carrier_label
 #: field:carrier.account,__last_update:0

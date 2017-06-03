@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: delivery-carrier (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-24 01:19+0000\n"
-"PO-Revision-Date: 2016-12-27 08:23+0000\n"
+"POT-Creation-Date: 2017-05-20 01:32+0000\n"
+"PO-Revision-Date: 2017-05-30 00:26+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Spanish (Argentina) (http://www.transifex.com/oca/OCA-delivery-carrier-8-0/language/es_AR/)\n"
 "MIME-Version: 1.0\n"
@@ -395,7 +395,7 @@ msgstr ""
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model,name:delivery_carrier_label_postlogistics.model_stock_picking
 msgid "Picking List"
-msgstr ""
+msgstr "Remitos"
 
 #. module: delivery_carrier_label_postlogistics
 #: help:postlogistics.config.settings,office:0
