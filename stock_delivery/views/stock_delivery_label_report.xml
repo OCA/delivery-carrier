@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+    © 2016-TODAY LasLabs Inc.
+    @license AGPL-3 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+
+<odoo>
+
+    <template id="delivery_labels">
+        <t t-call="report.html_container">
+            <div class="page">
+                <t t-foreach="docs" t-as="o">
+                    <span t-field="o.group_id"
+                          style="-webkit-transform: rotate(90deg);
+                                 -moz-transform: rotate(90deg);
+                                 -o-transform: rotate(90deg);
+                                 -ms-transform: rotate(90deg);
+                                 transform: rotate(90deg);"
+                                 />
+                    <img t-att-src="'data:image/png;base64,%s' % o.img_label"/>
+                </t>
+            </div>
+        </t>
+    </template>
+
+    <record id="delivery_label_format" model="report.paperformat">
+        <field name="name">Carrier Delivery Label</field>
+        <field name="default" eval="True"/>
+        <field name="format">custom</field>
+        <field name="page_height">450</field>
+        <field name="page_width">300</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">3</field>
+        <field name="margin_bottom">3</field>
+        <field name="margin_left">3</field>
+        <field name="margin_right">3</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">3</field>
+        <field name="dpi">150</field>
+    </record>
+
+    <report id="delivery_label_report"
+            model="stock.delivery.label"
+            string="Carrier Delivery Label"
+            report_type="qweb-pdf"
+            name="stock_delivery.delivery_labels"
+            paperformat="stock_delivery.delivery_label_format"
+            />
+
+</odoo>

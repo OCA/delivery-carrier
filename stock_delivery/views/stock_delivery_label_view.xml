@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+    © 2016-TODAY LasLabs Inc.
+    @license AGPL-3 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+
+<odoo>
+
+    <record id="stock_delivery_label_view_form" model="ir.ui.view">
+        <field name="name">stock.delivery.label.view.form</field>
+        <field name="model">stock.delivery.label</field>
+        <field name="arch" type="xml">
+            <form string="Delivery Label">
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="valid,cancel"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="picking_id" />
+                        <field name="date_generated" />
+                        <field name="partner_id" />
+                        <field name="service_id" />
+                        <field name="rate" widget="monetary" options="{'currency_field': 'currency_id'}" />
+                    </group>
+                    <field name="img_label" widget="image" />
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="stock_delivery_label_view_tree" model="ir.ui.view">
+        <field name="name">stock.delivery.label.view.tree</field>
+        <field name="model">stock.delivery.label</field>
+        <field name="arch" type="xml">
+            <tree string="Delivery Labels">
+                <field name="picking_id"/>
+                <field name="partner_id" />
+                <field name="service_id" />
+                <field name="date_generated" />
+                <field name="rate" widget="monetary" options="{'currency_field': 'currency_id'}" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="stock_delivery_label_view_search" model="ir.ui.view">
+        <field name="name">stock.delivery.label.view.search</field>
+        <field name="model">stock.delivery.label</field>
+        <field name="arch" type="xml">
+            <search string="Delivery Labels">
+                
+                <field name="picking_id"/>
+                <field name="date_generated" />
+                <field name="rate" />
+                <field name="currency_id" />
+
+                <filter string="Picking"
+                        domain=""
+                        context="{'group_by': 'picking_id'}" />
+                <filter string="Date"
+                        domain=""
+                        context="{'group_by': 'date_generated'}" />
+                <filter string="Rate"
+                        domain=""
+                        context="{'group_by': 'rate'}" />
+                <filter string="Currency"
+                        domain=""
+                        context="{'group_by': 'currency_id'}" />
+                
+            </search>
+        </field>
+    </record>
+
+    <record id="stock_delivery_label_action" model="ir.actions.act_window">
+        <field name="name">Delivery Labels</field>
+        <field name="res_model">stock.delivery.label</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="stock_delivery_label_view_tree" />
+    </record>
+
+</odoo>
