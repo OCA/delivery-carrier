@@ -1,0 +1,208 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * sale_delivery_rate
+# 
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0c\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-14 00:42+0000\n"
+"PO-Revision-Date: 2017-05-14 00:42+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"Language-Team: Lithuanian (https://www.transifex.com/oca/teams/23907/lt/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: lt\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#. module: sale_delivery_rate
+#: sql_constraint:delivery.carrier.rate:0
+msgid "A sale order can only have one delivery rate per carrier"
+msgstr ""
+
+#. module: sale_delivery_rate
+#: model:ir.model,name:sale_delivery_rate.model_delivery_carrier
+msgid "Carrier"
+msgstr ""
+
+#. module: sale_delivery_rate
+#: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_partner_id
+msgid "Carrier Partner"
+msgstr ""
+
+#. module: sale_delivery_rate
+#: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_service_id
+msgid "Carrier Service"
+msgstr ""
+
+#. module: sale_delivery_rate
+#: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_create_uid
+msgid "Created by"
+msgstr "Sukūrė"
+
+#. module: sale_delivery_rate
+#: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_create_date
+msgid "Created on"
+msgstr "Sukurta"
+
+#. module: sale_delivery_rate
+#: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_date_generated
+msgid "Date Generated"
+msgstr ""
+
+#. module: sale_delivery_rate
+#: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_date_purchased
+msgid "Date Purchased"
+msgstr ""
+
+#. module: sale_delivery_rate
+#: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_is_guaranteed
+msgid "Date is Guaranteed?"
+msgstr ""
+
+#. module: sale_delivery_rate
+#: model:ir.model,name:sale_delivery_rate.model_delivery_carrier_rate
+msgid "Delivery Carrier Rate"
+msgstr ""
+
+#. module: sale_delivery_rate
+#: model:ir.model.fields,field_description:sale_delivery_rate.field_sale_order_carrier_rate_ids
+msgid "Delivery Carrier Rates"
+msgstr ""
+
+#. module: sale_delivery_rate
+#: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_delivery_days
+msgid "Delivery days"
+msgstr ""
+
+#. module: sale_delivery_rate
+#: model:delivery.carrier,name:sale_delivery_rate.demo_carrier_1
+#: model:product.product,name:sale_delivery_rate.demo_carrier_1_product_product
+msgid "Demo Carrier 1"
+msgstr ""
+
+#. module: sale_delivery_rate
+#: model:delivery.carrier,name:sale_delivery_rate.demo_carrier_2
+#: model:product.product,name:sale_delivery_rate.demo_carrier_2_product_product
+msgid "Demo Carrier 2"
+msgstr ""
+
+#. module: sale_delivery_rate
+#: model:product.product,name:sale_delivery_rate.demo_stockable_product
+#: model:product.template,name:sale_delivery_rate.demo_stockable_product_product_template
+#: model:product.template,name:sale_delivery_rate.demo_stockable_template
+msgid "Demo Stockable Product"
+msgstr ""
+
+#. module: sale_delivery_rate
+#: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_display_name
+msgid "Display Name"
+msgstr "Vaizduojamas pavadinimas"
+
+#. module: sale_delivery_rate
+#: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_date_delivery
+msgid "Est. Delivery Date"
+msgstr ""
+
+#. module: sale_delivery_rate
+#: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_id
+msgid "ID"
+msgstr "ID"
+
+#. module: sale_delivery_rate
+#: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_is_purchased
+msgid "Is purchased"
+msgstr ""
+
+#. module: sale_delivery_rate
+#: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate___last_update
+msgid "Last Modified on"
+msgstr "Paskutinį kartą keista"
+
+#. module: sale_delivery_rate
+#: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_write_uid
+msgid "Last Updated by"
+msgstr "Paskutinį kartą atnaujino"
+
+#. module: sale_delivery_rate
+#: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_write_date
+msgid "Last Updated on"
+msgstr "Paskutinį kartą atnaujinta"
+
+#. module: sale_delivery_rate
+#: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_list_rate_currency_id
+msgid "List Rate Currency"
+msgstr ""
+
+#. module: sale_delivery_rate
+#: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_list_rate
+msgid "List rate"
+msgstr ""
+
+#. module: sale_delivery_rate
+#: selection:delivery.carrier.rate,state:0
+msgid "Purchased"
+msgstr ""
+
+#. module: sale_delivery_rate
+#: selection:delivery.carrier.rate,state:0
+msgid "Quoted"
+msgstr ""
+
+#. module: sale_delivery_rate
+#: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_rate
+msgid "Rate"
+msgstr ""
+
+#. module: sale_delivery_rate
+#: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_rate_currency_id
+msgid "Rate Currency"
+msgstr ""
+
+#. module: sale_delivery_rate
+#: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_retail_rate
+msgid "Retail Rate"
+msgstr ""
+
+#. module: sale_delivery_rate
+#: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_retail_rate_currency_id
+msgid "Retail Rate Currency"
+msgstr ""
+
+#. module: sale_delivery_rate
+#: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_sale_order_id
+msgid "Sale Order"
+msgstr ""
+
+#. module: sale_delivery_rate
+#: model:ir.model,name:sale_delivery_rate.model_sale_order
+msgid "Sales Order"
+msgstr ""
+
+#. module: sale_delivery_rate
+#: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_state
+msgid "State"
+msgstr ""
+
+#. module: sale_delivery_rate
+#: model:ir.model,name:sale_delivery_rate.model_stock_move
+msgid "Stock Move"
+msgstr ""
+
+#. module: sale_delivery_rate
+#: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_picking_id
+msgid "Stock Picking"
+msgstr ""
+
+#. module: sale_delivery_rate
+#: model:ir.model.fields,help:sale_delivery_rate.field_delivery_carrier_rate_partner_id
+msgid "The partner that is doing the delivery service."
+msgstr ""
+
+#. module: sale_delivery_rate
+#: selection:delivery.carrier.rate,state:0
+msgid "Voided"
+msgstr ""
