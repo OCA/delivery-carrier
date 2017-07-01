@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-26 02:40+0000\n"
-"PO-Revision-Date: 2017-05-26 02:40+0000\n"
+"POT-Creation-Date: 2017-06-25 00:44+0000\n"
+"PO-Revision-Date: 2017-06-25 00:44+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
 "Language-Team: Croatian (Croatia) (https://www.transifex.com/oca/teams/23907/hr_HR/)\n"
 "MIME-Version: 1.0\n"
@@ -34,12 +34,14 @@ msgid "Carrier Commercial Partner"
 msgstr ""
 
 #. module: stock_picking_delivery_rate
+#: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_delivery_carrier_rate_partner_id
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_partner_id
 #: selection:stock.picking.rate.purchase,group_by:0
 msgid "Carrier Partner"
 msgstr ""
 
 #. module: stock_picking_delivery_rate
+#: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_delivery_carrier_rate_service_id
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_service_id
 #: selection:stock.picking.rate.purchase,group_by:0
 msgid "Carrier Service"
@@ -73,21 +75,25 @@ msgid "Date Purchased"
 msgstr ""
 
 #. module: stock_picking_delivery_rate
+#: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_delivery_carrier_rate_date_generated
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_date_generated
 msgid "Date generated"
 msgstr ""
 
 #. module: stock_picking_delivery_rate
+#: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_delivery_carrier_rate_is_guaranteed
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_is_guaranteed
 msgid "Date is Guaranteed?"
 msgstr ""
 
 #. module: stock_picking_delivery_rate
+#: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_delivery_carrier_rate_date_purchased
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_date_purchased
 msgid "Date purchased"
 msgstr ""
 
 #. module: stock_picking_delivery_rate
+#: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_delivery_carrier_rate_delivery_days
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_delivery_days
 msgid "Delivery days"
 msgstr ""
@@ -109,9 +115,10 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_display_name
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_purchase_display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Naziv"
 
 #. module: stock_picking_delivery_rate
+#: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_delivery_carrier_rate_date_delivery
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_date_delivery
 msgid "Est. Delivery Date"
 msgstr ""
@@ -128,6 +135,7 @@ msgid "ID"
 msgstr "ID"
 
 #. module: stock_picking_delivery_rate
+#: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_delivery_carrier_rate_is_purchased
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_is_purchased
 msgid "Is purchased"
 msgstr ""
@@ -136,26 +144,28 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate___last_update
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_purchase___last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Zadnje modificirano"
 
 #. module: stock_picking_delivery_rate
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_purchase_write_uid
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Zadnji ažurirao"
 
 #. module: stock_picking_delivery_rate
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_purchase_write_date
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Zadnje ažurirano"
 
 #. module: stock_picking_delivery_rate
+#: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_delivery_carrier_rate_list_rate_currency_id
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_list_rate_currency_id
 msgid "List Rate Currency"
 msgstr ""
 
 #. module: stock_picking_delivery_rate
+#: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_delivery_carrier_rate_list_rate
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_list_rate
 msgid "List rate"
 msgstr ""
@@ -192,23 +202,27 @@ msgid "Purchase Rates"
 msgstr ""
 
 #. module: stock_picking_delivery_rate
+#: selection:delivery.carrier.rate,state:0
 #: model:ir.ui.view,arch_db:stock_picking_delivery_rate.stock_picking_rate_view_search
 #: selection:stock.picking.rate,state:0
 msgid "Purchased"
 msgstr ""
 
 #. module: stock_picking_delivery_rate
+#: selection:delivery.carrier.rate,state:0
 #: selection:stock.picking.rate,state:0
 msgid "Quoted"
 msgstr ""
 
 #. module: stock_picking_delivery_rate
+#: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_delivery_carrier_rate_rate
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_rate
 #: model:ir.ui.view,arch_db:stock_picking_delivery_rate.stock_picking_rate_view_search
 msgid "Rate"
 msgstr ""
 
 #. module: stock_picking_delivery_rate
+#: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_delivery_carrier_rate_rate_currency_id
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_rate_currency_id
 msgid "Rate Currency"
 msgstr ""
@@ -219,16 +233,19 @@ msgid "Rates"
 msgstr ""
 
 #. module: stock_picking_delivery_rate
+#: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_delivery_carrier_rate_retail_rate_currency_id
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_retail_rate_currency_id
 msgid "Retail Rate Currency"
 msgstr ""
 
 #. module: stock_picking_delivery_rate
+#: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_delivery_carrier_rate_retail_rate
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_retail_rate
 msgid "Retail rate"
 msgstr ""
 
 #. module: stock_picking_delivery_rate
+#: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_delivery_carrier_rate_state
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_state
 msgid "State"
 msgstr ""
@@ -250,6 +267,7 @@ msgstr ""
 
 #. module: stock_picking_delivery_rate
 #: model:ir.model.fields,help:stock_picking_delivery_rate.field_delivery_carrier_partner_id
+#: model:ir.model.fields,help:stock_picking_delivery_rate.field_delivery_carrier_rate_partner_id
 #: model:ir.model.fields,help:stock_picking_delivery_rate.field_stock_picking_rate_partner_id
 msgid "The partner that is doing the delivery service."
 msgstr ""
@@ -265,6 +283,7 @@ msgid "Transporter Company"
 msgstr ""
 
 #. module: stock_picking_delivery_rate
+#: selection:delivery.carrier.rate,state:0
 #: selection:stock.picking.rate,state:0
 msgid "Voided"
 msgstr ""
