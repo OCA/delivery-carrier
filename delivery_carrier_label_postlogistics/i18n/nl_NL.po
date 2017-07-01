@@ -3,14 +3,15 @@
 # * delivery_carrier_label_postlogistics
 # 
 # Translators:
-# Mario Gielissen <mario@openworx.nl>, 2017
+# OCA Transbot <transbot@odoo-community.org>, 2017
+# Peter Hageman <hageman.p@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-29 00:40+0000\n"
-"PO-Revision-Date: 2017-04-29 00:40+0000\n"
-"Last-Translator: Mario Gielissen <mario@openworx.nl>, 2017\n"
+"POT-Creation-Date: 2017-06-10 03:59+0000\n"
+"PO-Revision-Date: 2017-06-10 03:59+0000\n"
+"Last-Translator: Peter Hageman <hageman.p@gmail.com>, 2017\n"
 "Language-Team: Dutch (Netherlands) (https://www.transifex.com/oca/teams/23907/nl_NL/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -260,7 +261,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_license_display_name
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_service_group_display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Weergavenaam"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_config_settings_office
@@ -331,7 +332,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_license_id
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_service_group_id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,help:delivery_carrier_label_postlogistics.field_stock_quant_package_postlogistics_manual_cod_amount
@@ -355,7 +356,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_license___last_update
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_service_group___last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Laatst gewijzigd op"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_config_settings_write_uid
