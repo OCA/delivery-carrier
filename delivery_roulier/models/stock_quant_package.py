@@ -264,6 +264,11 @@ class StockQuantPackage(models.Model):
         returns:
             string
         """
+        try:
+            _logger.debug(exception.response.text)
+            _logger.debug(exception.response.request.body)
+        except AttributeError:
+            _logger.debug('No request available')
         return _(u'Sent data:\n%s\n\nException raised:\n%s\n' % (
             payload, exception.message))
 
