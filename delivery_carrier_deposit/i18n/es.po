@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: delivery-carrier (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-13 01:44+0000\n"
-"PO-Revision-Date: 2017-05-16 12:00+0000\n"
+"POT-Creation-Date: 2017-07-01 02:31+0000\n"
+"PO-Revision-Date: 2017-07-24 17:06+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-delivery-carrier-8-0/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -280,7 +280,7 @@ msgstr "Tipo de albarán"
 #. module: delivery_carrier_deposit
 #: field:deposit.slip,picking_ids:0
 msgid "Pickings"
-msgstr ""
+msgstr "Albaranes"
 
 #. module: delivery_carrier_deposit
 #: view:deposit.slip:delivery_carrier_deposit.view_deposit_slip_form
