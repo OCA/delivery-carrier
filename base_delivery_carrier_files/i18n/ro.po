@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: delivery-carrier (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-24 01:19+0000\n"
+"POT-Creation-Date: 2017-07-29 01:42+0000\n"
 "PO-Revision-Date: 2016-04-08 13:38+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Romanian (http://www.transifex.com/oca/OCA-delivery-carrier-8-0/language/ro/)\n"
@@ -181,7 +181,7 @@ msgstr "Ultima actualizare la"
 #. module: base_delivery_carrier_files
 #: field:delivery.carrier.file,name:0
 msgid "Name"
-msgstr ""
+msgstr "Nume"
 
 #. module: base_delivery_carrier_files
 #: code:addons/base_delivery_carrier_files/wizard/generate_carrier_files.py:44

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: delivery-carrier (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-28 02:37+0000\n"
-"PO-Revision-Date: 2017-04-25 10:39+0000\n"
+"POT-Creation-Date: 2017-07-29 01:42+0000\n"
+"PO-Revision-Date: 2017-08-11 11:55+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Galician (http://www.transifex.com/oca/OCA-delivery-carrier-8-0/language/gl/)\n"
 "MIME-Version: 1.0\n"
@@ -251,7 +251,7 @@ msgstr ""
 #: field:carrier.account,name:0 field:delivery.carrier.option,name:0
 #: field:delivery.carrier.template.option,name:0
 msgid "Name"
-msgstr ""
+msgstr "Nome"
 
 #. module: base_delivery_carrier_label
 #: code:addons/base_delivery_carrier_label/stock.py:186
