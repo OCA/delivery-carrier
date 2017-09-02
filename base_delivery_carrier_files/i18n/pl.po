@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: delivery-carrier (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-22 09:11+0000\n"
+"POT-Creation-Date: 2017-08-19 01:54+0000\n"
 "PO-Revision-Date: 2016-04-08 13:38+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Polish (http://www.transifex.com/oca/OCA-delivery-carrier-8-0/language/pl/)\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Language: pl\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 
 #. module: base_delivery_carrier_files
 #: view:stock.picking:base_delivery_carrier_files.view_picking_out_form_carrier_file
@@ -61,7 +61,7 @@ msgstr ""
 #. module: base_delivery_carrier_files
 #: view:delivery.carrier.file.generate:base_delivery_carrier_files.view_delivery_carrier_file_generate
 msgid "Close"
-msgstr ""
+msgstr "Zamknięte"
 
 #. module: base_delivery_carrier_files
 #: field:delivery.carrier.file,create_uid:0
