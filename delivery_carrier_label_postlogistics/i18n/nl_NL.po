@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: delivery-carrier (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-24 01:49+0000\n"
-"PO-Revision-Date: 2017-06-30 08:53+0000\n"
+"POT-Creation-Date: 2017-08-19 01:54+0000\n"
+"PO-Revision-Date: 2017-08-29 08:01+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Dutch (Netherlands) (http://www.transifex.com/oca/OCA-delivery-carrier-8-0/language/nl_NL/)\n"
 "MIME-Version: 1.0\n"
@@ -88,7 +88,7 @@ msgstr ""
 #. module: delivery_carrier_label_postlogistics
 #: view:postlogistics.config.settings:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
 msgid "Cancel"
-msgstr ""
+msgstr "Verwijderen"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model,name:delivery_carrier_label_postlogistics.model_delivery_carrier
@@ -173,14 +173,14 @@ msgstr ""
 #: field:postlogistics.license,create_uid:0
 #: field:postlogistics.service.group,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Aangemaakt door"
 
 #. module: delivery_carrier_label_postlogistics
 #: field:postlogistics.config.settings,create_date:0
 #: field:postlogistics.license,create_date:0
 #: field:postlogistics.service.group,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Aangemaakt op"
 
 #. module: delivery_carrier_label_postlogistics
 #: view:postlogistics.config.settings:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
@@ -223,7 +223,7 @@ msgstr ""
 #. module: delivery_carrier_label_postlogistics
 #: field:postlogistics.license,name:0 field:postlogistics.service.group,name:0
 msgid "Description"
-msgstr ""
+msgstr "Omschrijving"
 
 #. module: delivery_carrier_label_postlogistics
 #: field:postlogistics.config.settings,display_name:0
@@ -321,14 +321,14 @@ msgstr "Laatst gewijzigd op"
 #: field:postlogistics.license,write_uid:0
 #: field:postlogistics.service.group,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Laatst bijgewerkt door"
 
 #. module: delivery_carrier_label_postlogistics
 #: field:postlogistics.config.settings,write_date:0
 #: field:postlogistics.license,write_date:0
 #: field:postlogistics.service.group,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Laatst bijgewerkt op"
 
 #. module: delivery_carrier_label_postlogistics
 #: view:postlogistics.config.settings:delivery_carrier_label_postlogistics.view_postlogistics_config_settings

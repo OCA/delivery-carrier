@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: delivery-carrier (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-24 01:48+0000\n"
-"PO-Revision-Date: 2017-06-30 08:53+0000\n"
+"POT-Creation-Date: 2017-08-19 01:54+0000\n"
+"PO-Revision-Date: 2017-08-29 08:01+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Dutch (Netherlands) (http://www.transifex.com/oca/OCA-delivery-carrier-8-0/language/nl_NL/)\n"
 "MIME-Version: 1.0\n"
@@ -109,7 +109,7 @@ msgstr ""
 #: field:delivery.carrier.template.option,create_uid:0
 #: field:shipping.label,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Aangemaakt door"
 
 #. module: base_delivery_carrier_label
 #: field:carrier.account,create_date:0
@@ -117,7 +117,7 @@ msgstr ""
 #: field:delivery.carrier.template.option,create_date:0
 #: field:shipping.label,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Aangemaakt op"
 
 #. module: base_delivery_carrier_label
 #: field:shipping.label,db_datas:0
@@ -151,7 +151,7 @@ msgstr ""
 #: field:delivery.carrier.template.option,description:0
 #: field:shipping.label,description:0
 msgid "Description"
-msgstr ""
+msgstr "Omschrijving"
 
 #. module: base_delivery_carrier_label
 #: field:shipping.label,parent_id:0
@@ -232,7 +232,7 @@ msgstr "Laatst gewijzigd op"
 #: field:delivery.carrier.template.option,write_uid:0
 #: field:shipping.label,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Laatst bijgewerkt door"
 
 #. module: base_delivery_carrier_label
 #: field:carrier.account,write_date:0
@@ -240,7 +240,7 @@ msgstr ""
 #: field:delivery.carrier.template.option,write_date:0
 #: field:shipping.label,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Laatst bijgewerkt op"
 
 #. module: base_delivery_carrier_label
 #: field:delivery.carrier.option,mandatory:0

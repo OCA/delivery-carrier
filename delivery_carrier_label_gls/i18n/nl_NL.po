@@ -3,13 +3,14 @@
 # * delivery_carrier_label_gls
 # 
 # Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
 # Peter Hageman <hageman.p@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-24 01:49+0000\n"
-"PO-Revision-Date: 2017-06-24 01:49+0000\n"
+"POT-Creation-Date: 2017-08-19 01:54+0000\n"
+"PO-Revision-Date: 2017-08-19 01:54+0000\n"
 "Last-Translator: Peter Hageman <hageman.p@gmail.com>, 2017\n"
 "Language-Team: Dutch (Netherlands) (https://www.transifex.com/oca/teams/23907/nl_NL/)\n"
 "MIME-Version: 1.0\n"
@@ -45,7 +46,7 @@ msgstr ""
 #. module: delivery_carrier_label_gls
 #: view:gls.config.settings:delivery_carrier_label_gls.view_gls_config_settings
 msgid "Cancel"
-msgstr ""
+msgstr "Verwijderen"
 
 #. module: delivery_carrier_label_gls
 #: code:addons/delivery_carrier_label_gls/models/stock.py:53
@@ -114,12 +115,12 @@ msgstr ""
 #. module: delivery_carrier_label_gls
 #: field:gls.config.settings,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Aangemaakt door"
 
 #. module: delivery_carrier_label_gls
 #: field:gls.config.settings,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Aangemaakt op"
 
 #. module: delivery_carrier_label_gls
 #: field:gls.config.settings,customer_code:0
@@ -184,12 +185,12 @@ msgstr "Laatst gewijzigd op"
 #. module: delivery_carrier_label_gls
 #: field:gls.config.settings,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Laatst bijgewerkt door"
 
 #. module: delivery_carrier_label_gls
 #: field:gls.config.settings,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Laatst bijgewerkt op"
 
 #. module: delivery_carrier_label_gls
 #: model:ir.actions.client,name:delivery_carrier_label_gls.action_gls_first

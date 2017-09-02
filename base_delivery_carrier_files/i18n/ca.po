@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: delivery-carrier (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-14 02:35+0000\n"
+"POT-Creation-Date: 2017-08-19 01:54+0000\n"
 "PO-Revision-Date: 2016-04-08 13:38+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Catalan (http://www.transifex.com/oca/OCA-delivery-carrier-8-0/language/ca/)\n"
@@ -61,7 +61,7 @@ msgstr ""
 #. module: base_delivery_carrier_files
 #: view:delivery.carrier.file.generate:base_delivery_carrier_files.view_delivery_carrier_file_generate
 msgid "Close"
-msgstr ""
+msgstr "Tanca"
 
 #. module: base_delivery_carrier_files
 #: field:delivery.carrier.file,create_uid:0
