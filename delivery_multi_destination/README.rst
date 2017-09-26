@@ -1,35 +1,17 @@
 .. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
-   :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
+   :target: https://www.gnu.org/licenses/agpl
    :alt: License: AGPL-3
 
 ==================================================
 Multiple destinations for the same delivery method
 ==================================================
 
-Module `delivery` in version 8 allows to set different price rules depending
-on the destination. This is what is called a delivery grid.
+This module allows to set different price rules depending on the destination.
 
-In version 9, for simplifying delivery methods, Odoo has plained the structure,
-lowering destinations at delivery method level, and removing delivery grid
-model.
-
-This is not usable when you have different prices according the destination
-of your delivery.
-
-This module restores the same concept, reusing the same model for nesting
-several "children" delivery methods, one per possible destination. It has been
-designed to reuse all possible extensions to the base delivery, without the
-need to create a glue module for having multiple destinations.
-
-This module also handles if you're migrating from version 8 and you had
-`delivery` module installed, to keep the delivery grids.
-
-Installation
-============
-
-If you installed the module on a version 8 migrated database, some operations
-will be done for recovering delivery grids. If so, you need to have
-**openupgradelib** library installed.
+This module restores the concept of delivery grid, reusing the same model for
+nesting several "children" delivery methods, one per possible destination.
+It has been designed to reuse all possible extensions to the base delivery,
+without the need to create a glue module for having multiple destinations.
 
 Configuration
 =============
@@ -51,7 +33,7 @@ Usage
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/99/9.0
+   :target: https://runbot.odoo-community.org/runbot/99/10.0
 
 Bug Tracker
 ===========
@@ -73,6 +55,7 @@ Contributors
 ------------
 
 * Pedro M. Baeza <pedro.baeza@tecnativa.com>
+* Luis M. Ontalba <luis.martinez@tecnativa.com>
 
 Maintainer
 ----------
