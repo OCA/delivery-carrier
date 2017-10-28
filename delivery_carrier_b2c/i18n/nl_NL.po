@@ -1,0 +1,60 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * delivery_carrier_b2c
+# 
+# Translators:
+# Peter Hageman <hageman.p@gmail.com>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-07-01 02:24+0000\n"
+"PO-Revision-Date: 2017-07-01 02:24+0000\n"
+"Last-Translator: Peter Hageman <hageman.p@gmail.com>, 2017\n"
+"Language-Team: Dutch (Netherlands) (https://www.transifex.com/oca/teams/23907/nl_NL/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: nl_NL\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: delivery_carrier_b2c
+#: model:ir.model.fields,field_description:delivery_carrier_b2c.field_res_partner_use_b2c_info
+#: model:ir.model.fields,field_description:delivery_carrier_b2c.field_res_users_use_b2c_info
+msgid "Advanced address"
+msgstr ""
+
+#. module: delivery_carrier_b2c
+#: model:ir.model.fields,help:delivery_carrier_b2c.field_res_partner_use_b2c_info
+#: model:ir.model.fields,help:delivery_carrier_b2c.field_res_users_use_b2c_info
+msgid "Display additional information for home delivery (b2c)"
+msgstr "Toon additionele informatie voor levering aan huis (b2c)"
+
+#. module: delivery_carrier_b2c
+#: model:ir.model.fields,field_description:delivery_carrier_b2c.field_res_partner_door_code
+#: model:ir.model.fields,field_description:delivery_carrier_b2c.field_res_users_door_code
+msgid "Door Code"
+msgstr "Deurcode"
+
+#. module: delivery_carrier_b2c
+#: model:ir.model.fields,field_description:delivery_carrier_b2c.field_res_partner_door_code2
+#: model:ir.model.fields,field_description:delivery_carrier_b2c.field_res_users_door_code2
+msgid "Door Code 2"
+msgstr "Deurcode 2"
+
+#. module: delivery_carrier_b2c
+#: model:ir.model.fields,help:delivery_carrier_b2c.field_res_partner_intercom
+#: model:ir.model.fields,help:delivery_carrier_b2c.field_res_users_intercom
+msgid "Informations for Intercom such as name or number on the intercom"
+msgstr "Informatie voor Intercom zoals naam of nummer op de Intercom"
+
+#. module: delivery_carrier_b2c
+#: model:ir.model.fields,field_description:delivery_carrier_b2c.field_res_partner_intercom
+#: model:ir.model.fields,field_description:delivery_carrier_b2c.field_res_users_intercom
+msgid "Intercom"
+msgstr "Intercom"
+
+#. module: delivery_carrier_b2c
+#: model:ir.model,name:delivery_carrier_b2c.model_res_partner
+msgid "Partner"
+msgstr "Partner"
