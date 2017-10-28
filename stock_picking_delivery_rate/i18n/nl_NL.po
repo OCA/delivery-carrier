@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-19 01:59+0000\n"
-"PO-Revision-Date: 2017-08-19 01:59+0000\n"
+"POT-Creation-Date: 2017-09-02 04:41+0000\n"
+"PO-Revision-Date: 2017-09-02 04:41+0000\n"
 "Last-Translator: Peter Hageman <hageman.p@gmail.com>, 2017\n"
 "Language-Team: Dutch (Netherlands) (https://www.transifex.com/oca/teams/23907/nl_NL/)\n"
 "MIME-Version: 1.0\n"
@@ -219,7 +219,7 @@ msgstr ""
 #. module: stock_picking_delivery_rate
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_state
 msgid "State"
-msgstr ""
+msgstr "Provincie"
 
 #. module: stock_picking_delivery_rate
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_picking_id
