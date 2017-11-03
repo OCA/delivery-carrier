@@ -38,6 +38,7 @@
     <field name="arch" type="xml">
       <field name="packaging_id" position="before">
         <field name="parcel_tracking"/>
+        <field name="parcel_tracking_uri"/>
         <field name="weight"/>
       </field>
     </field>
