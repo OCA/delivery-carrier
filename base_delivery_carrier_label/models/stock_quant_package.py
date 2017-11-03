@@ -10,6 +10,9 @@ class StockQuantPackage(models.Model):
     _inherit = 'stock.quant.package'
 
     parcel_tracking = fields.Char(string='Parcel Tracking')
+    parcel_tracking_uri = fields.Char(
+        help="Link to the carrier's tracking page for this package.",
+    )
     total_weight = fields.Float(
         digits=dp.get_precision('Stock Weight'),
         help="Total weight of the package in kg, including the "
