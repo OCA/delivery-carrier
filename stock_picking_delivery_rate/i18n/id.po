@@ -4,13 +4,14 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2017
+# Wahyu Setiawan <wahyusetiaaa@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-29 00:40+0000\n"
-"PO-Revision-Date: 2017-04-29 00:40+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"POT-Creation-Date: 2017-10-28 03:47+0000\n"
+"PO-Revision-Date: 2017-10-28 03:47+0000\n"
+"Last-Translator: Wahyu Setiawan <wahyusetiaaa@gmail.com>, 2017\n"
 "Language-Team: Indonesian (https://www.transifex.com/oca/teams/23907/id/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -218,7 +219,7 @@ msgstr ""
 #. module: stock_picking_delivery_rate
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_state
 msgid "State"
-msgstr ""
+msgstr "Bagian"
 
 #. module: stock_picking_delivery_rate
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_picking_id
