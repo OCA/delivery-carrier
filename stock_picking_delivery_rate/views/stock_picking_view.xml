@@ -23,10 +23,17 @@
                                    widget="monetary"
                                    options="{'currency_field': 'rate_currency_id'}"
                                    />
+                            <button name="action_cancel"
+                                    type="object"
+                                    icon="kanban-stop"
+                                    string="Cancel"
+                                    attrs="{'invisible': [('state', '!=', 'purchase')]}"
+                                    />
                             <button name="action_purchase"
                                     type="object"
                                     icon="kanban-apply"
                                     string="Purchase"
+                                    attrs="{'invisible': [('state', '=', 'purchase')]}"
                                     />
                         </tree>
                     </field>

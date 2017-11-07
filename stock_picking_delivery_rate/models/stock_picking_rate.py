@@ -26,6 +26,7 @@ class StockPickingRate(models.Model):
         default=lambda s: fields.Datetime.now(),
     )
     date_purchased = fields.Datetime()
+    date_cancelled = fields.Datetime()
     rate_currency_id = fields.Many2one(
         string='Rate Currency',
         comodel_name='res.currency',
@@ -92,16 +93,32 @@ class StockPickingRate(models.Model):
         return res
 
     @api.multi
+    def action_cancel(self):
+        wizard_id = self.env['stock.picking.rate.cancel'].create({
+            'rate_ids': [(6, 0, self.ids)],
+        })
+        return wizard_id.action_show_wizard()
+
+    @api.multi
     def action_purchase(self):
         wizard_id = self.env['stock.picking.rate.purchase'].create({
-            'rate_ids': [(6, 0, [r.id for r in self])],
+            'rate_ids': [(6, 0, self.ids)],
         })
         return wizard_id.action_show_wizard()
 
     @api.multi
     def buy(self):
-        self.state = 'purchase'
-        self.date_purchased = fields.Datetime.now()
+        self.write({
+            'state': 'purchase',
+            'date_purchased': fields.Datetime.now(),
+        })
+
+    @api.multi
+    def cancel(self):
+        self.write({
+            'state': 'cancel',
+            'date_cancelled': fields.Datetime.now(),
+        })
 
     @api.multi
     def _expire_other_rates(self):

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Copyright 2017 LasLabs Inc.
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html). -->
+
+<odoo>
+
+    <record id="res_request_link_dispatch_rate" model="res.request.link">
+        <field name="name">Dispatch Rate</field>
+        <field name="object">stock.picking.rate</field>
+    </record>
+
+</odoo>
