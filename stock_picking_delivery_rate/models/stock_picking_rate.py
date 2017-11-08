@@ -16,6 +16,11 @@ class StockPickingRate(models.Model):
         comodel_name='stock.picking',
         required=True,
     )
+    package_id = fields.Many2one(
+        string='Package',
+        comodel_name='stock.quant.package',
+        domain="[('picking_id', '=', picking_id)]",
+    )
     service_id = fields.Many2one(
         string='Carrier Service',
         comodel_name='delivery.carrier',
@@ -73,6 +78,9 @@ class StockPickingRate(models.Model):
     is_purchased = fields.Boolean(
         compute='_compute_is_purchased',
     )
+    active = fields.Boolean(
+        default=True,
+    )
 
     @api.multi
     @api.depends('date_purchased')
@@ -122,11 +130,10 @@ class StockPickingRate(models.Model):
 
     @api.multi
     def _expire_other_rates(self):
-        """ Expires rates in picking that are not record """
-        for rec_id in self:
-            rate_ids = rec_id.picking_id.dispatch_rate_ids.filtered(
-                lambda r: r != rec_id
-            )
-            rate_ids.write({
-                'state': 'cancel',
-            })
+        """Expires rates in picking that are not the current recordset."""
+        dispatch_rates = self.mapped('picking_id.dispatch_rate_ids')
+        expire_rates = dispatch_rates.filtered(lambda r: r not in self)
+        expire_rates.write({
+            'state': 'cancel',
+            'active': False,
+        })

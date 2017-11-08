@@ -15,7 +15,6 @@ class StockPickingRateWizardAbstract(models.TransientModel):
         string='Rates',
         readonly=True,
         comodel_name='stock.picking.rate',
-        relation='stock_picking_rate_purchase_rel',
         default=lambda s: s._default_rate_ids(),
     )
 
@@ -30,7 +29,11 @@ class StockPickingRateWizardAbstract(models.TransientModel):
     def action_show_wizard(self):
         """Utility method to show the wizard."""
         self.ensure_one()
-        return self.get_formview_action()
+        action = self.get_formview_action()
+        action.update({
+            'target': 'new',
+        })
+        return action
 
     @api.multi
     def action_show_purchases(self, purchase_orders):

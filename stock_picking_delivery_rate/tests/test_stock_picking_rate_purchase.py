@@ -103,27 +103,18 @@ class TestStockPickingRate(TestHelper):
         res_action_show_wizard = rec_id.action_show_wizard()
         model_obj = self.env['ir.model.data']
         _prefix = 'stock_picking_delivery_rate.stock_picking_rate_purchase'
-        form_id = model_obj.xmlid_to_object(
-            '%s_view_form' % _prefix,
-        )
         action_id = model_obj.xmlid_to_object(
             '%s_action' % _prefix,
         )
         exp_keys = {
-            'name': action_id.name,
-            'help': action_id.help,
             'type': action_id.type,
             'view_mode': 'form',
-            'view_id': form_id.id,
+            'views': [(False, 'form')],
             'target': 'new',
             'context': rec_id._context.copy(),
             'res_model': action_id.res_model,
             'res_id': rec_id.id,
         }
-        self.assertEquals(
-            res_action_show_wizard['views'][0][0],
-            form_id.id,
-        )
         for key in exp_keys:
             res = res_action_show_wizard[key]
             exp = exp_keys[key]
