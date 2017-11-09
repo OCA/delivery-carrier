@@ -41,7 +41,7 @@ class ShippingLabel(models.Model):
     )
     attachment_id = fields.Many2one(
         comodel_name='ir.attachment',
-        string='Attachement',
+        string='Attachment',
         required=True,
         ondelete='cascade',
     )

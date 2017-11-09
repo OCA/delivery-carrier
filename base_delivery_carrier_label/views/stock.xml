@@ -8,10 +8,12 @@
         <field name="inherit_id" ref="delivery.view_picking_withcarrier_out_form"/>
         <field name="arch" type="xml">
             <field name="state" position="before">
+                <field name="shipping_label_ids" invisible="1" />
                 <button name="action_generate_carrier_label"
                         string="Create Shipping Label"
-                        states="done"
-                        attrs="{'invisible': [('shipping_label_ids', '!=', False)]}"
+                        attrs="{'invisible': [('shipping_label_ids', '!=', []),
+                                              ('state', '=', 'done'),
+                                              ]}"
                         type="object" />
             </field>
             <xpath expr="//page//field[@name='carrier_id']" position="after">
@@ -25,7 +27,7 @@
             <xpath expr="//notebook" position="inside">
                 <page name="page_shipping_labels"
                       string="Shipping Labels"
-                      attrs="{'invisible': [('shipping_label_ids', '=', False)]}">
+                      attrs="{'invisible': [('shipping_label_ids', '=', [])]}">
                     <field name="shipping_label_ids">
                         <field name="name" />
                     </field>
