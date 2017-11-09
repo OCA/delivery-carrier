@@ -33,6 +33,12 @@ class ShippingLabel(models.Model):
         string='Pack',
         comodel_name='stock.quant.package',
     )
+    parcel_tracking_uri = fields.Char(
+        related='package_id.parcel_tracking_uri',
+    )
+    parcel_tracking = fields.Char(
+        related='package_id.parcel_tracking',
+    )
     picking_id = fields.Many2one(
         string='Picking',
         comodel_name='stock.picking',

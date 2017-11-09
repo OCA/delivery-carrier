@@ -29,7 +29,20 @@
                       string="Shipping Labels"
                       attrs="{'invisible': [('shipping_label_ids', '=', [])]}">
                     <field name="shipping_label_ids">
-                        <field name="name" />
+                        <tree>
+                            <field name="package_id" />
+                            <field name="parcel_tracking" />
+                        </tree>
+                        <form>
+                            <group name="group_shipping_label_meta">
+                                <field name="package_id" />
+                                <field name="parcel_tracking" />
+                                <field name="parcel_tracking_uri" />
+                            </group>
+                            <group name="group_shipping_label_image">
+                                <field name="datas" widget="image" />
+                            </group>
+                        </form>
                     </field>
                 </page>
             </xpath>
