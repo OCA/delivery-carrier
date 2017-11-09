@@ -28,8 +28,16 @@ class StockPicking(models.Model):
         related='carrier_id.code',
         readonly=True,
     )
-    option_ids = fields.Many2many(comodel_name='delivery.carrier.option',
-                                  string='Options')
+    option_ids = fields.Many2many(
+        comodel_name='delivery.carrier.option',
+        string='Options',
+    )
+    shipping_label_ids = fields.One2many(
+        comodel_name='shipping.label',
+        string='Shipping Labels',
+        inverse_name='picking_id',
+        readonly=True,
+    )
 
     @api.multi
     def generate_default_label(self, package_ids=None):

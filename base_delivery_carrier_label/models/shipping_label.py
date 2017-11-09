@@ -29,11 +29,24 @@ class ShippingLabel(models.Model):
         string='File type',
         default='pdf',
     )
-    package_id = fields.Many2one(comodel_name='stock.quant.package',
-                                 string='Pack')
+    package_id = fields.Many2one(
+        string='Pack',
+        comodel_name='stock.quant.package',
+    )
+    picking_id = fields.Many2one(
+        string='Picking',
+        comodel_name='stock.picking',
+        compute='_compute_picking_id',
+        store=True,
+    )
     attachment_id = fields.Many2one(
         comodel_name='ir.attachment',
         string='Attachement',
         required=True,
         ondelete='cascade',
     )
+
+    @api.multi
+    def _compute_picking_id(self):
+        for record in self:
+            record.picking_id = record.package_id.picking_id
