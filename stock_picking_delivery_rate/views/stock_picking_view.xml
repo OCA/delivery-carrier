@@ -19,6 +19,7 @@
                         <tree>
                             <field name="partner_id" />
                             <field name="service_id" />
+                            <field name="state" invisible="1" />
                             <field name="rate"
                                    widget="monetary"
                                    options="{'currency_field': 'rate_currency_id'}"
