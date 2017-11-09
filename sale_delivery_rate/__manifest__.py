@@ -5,7 +5,7 @@
 {
     'name': 'Sale Delivery Rates',
     'summary': 'Extends notion of delivery carrier rate quotes to sale orders',
-    'version': '10.0.1.0.0',
+    'version': '10.0.1.1.0',
     'category': 'Delivery, Stock, Sales',
     'website': 'https://laslabs.com/',
     'author': 'LasLabs, Odoo Community Association (OCA)',
