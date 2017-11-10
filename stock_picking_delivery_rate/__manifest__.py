@@ -5,7 +5,7 @@
 {
     "name": "Stock Picking Delivery Rate",
     "summary": "Adds a concept of rate quotes for stock pickings",
-    "version": "10.0.1.0.0",
+    "version": "10.0.1.1.0",
     "category": "Inventory, Logistics, Warehousing",
     "website": "https://laslabs.com/",
     "author": "LasLabs, Odoo Community Association (OCA)",
