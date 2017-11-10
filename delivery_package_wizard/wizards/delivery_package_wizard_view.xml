@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 LasLabs Inc.
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl). -->
+
+<odoo>
+
+    <record id="delivery_package_wizard_view_form" model="ir.ui.view">
+        <field name="name">delivery.package.wizard.view.form</field>
+        <field name="model">delivery.package.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <div>
+                    <h2>
+                        Some packaging types were not defined on the quants queued
+                        for shipment. Please select them here.
+                    </h2>
+                </div>
+                <sheet>
+                    <group string="group_main">
+                        <field name="package_ids">
+                            <tree>
+                                <field name="name" />
+                                <field name="shipping_weight" />
+                                <field name="packaging_id" />
+                            </tree>
+                        </field>
+                    </group>
+                </sheet>
+                <footer>
+                    <button special="cancel"
+                            string="Cancel"
+                            />
+                    or
+                    <button name="action_ship"
+                            type="object"
+                            string="Ship"
+                            class="oe_highlight"
+                            />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="delivery_package_wizard_action" model="ir.actions.act_window">
+        <field name="name">Update Packaging</field>
+        <field name="res_model">delivery.package.wizard</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="delivery_package_wizard_view_form"/>
+    </record>
+
+</odoo>
