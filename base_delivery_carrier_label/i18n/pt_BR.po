@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: delivery-carrier (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-22 09:11+0000\n"
-"PO-Revision-Date: 2016-11-25 14:55+0000\n"
+"POT-Creation-Date: 2017-10-28 03:37+0000\n"
+"PO-Revision-Date: 2017-11-09 00:55+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/OCA-delivery-carrier-8-0/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -49,7 +49,7 @@ msgstr "Anexo"
 #. module: base_delivery_carrier_label
 #: field:shipping.label,name:0
 msgid "Attachment Name"
-msgstr ""
+msgstr "Nome anexo"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_carrier_account
@@ -125,7 +125,7 @@ msgstr "Criado em"
 #. module: base_delivery_carrier_label
 #: field:shipping.label,db_datas:0
 msgid "Database Data"
-msgstr ""
+msgstr "Dados da Base de Dados"
 
 #. module: base_delivery_carrier_label
 #: help:carrier.account,file_format:0
@@ -172,7 +172,7 @@ msgstr "Nome para Mostrar"
 #. module: base_delivery_carrier_label
 #: field:shipping.label,datas:0
 msgid "File Content"
-msgstr ""
+msgstr "Conteúdo do arquivo"
 
 #. module: base_delivery_carrier_label
 #: field:carrier.account,file_format:0
@@ -182,12 +182,12 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: field:shipping.label,datas_fname:0
 msgid "File Name"
-msgstr ""
+msgstr "Nome do arquivo"
 
 #. module: base_delivery_carrier_label
 #: field:shipping.label,file_size:0
 msgid "File Size"
-msgstr ""
+msgstr "Tamanho do arquivo"
 
 #. module: base_delivery_carrier_label
 #: field:shipping.label,file_type_icon:0
@@ -197,7 +197,7 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: field:shipping.label,file_type:0
 msgid "File type"
-msgstr ""
+msgstr "Tipo do arquivo"
 
 #. module: base_delivery_carrier_label
 #: field:carrier.account,id:0 field:delivery.carrier.option,id:0
@@ -220,7 +220,7 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: field:shipping.label,index_content:0
 msgid "Indexed Content"
-msgstr ""
+msgstr "Conteúdo Indexado"
 
 #. module: base_delivery_carrier_label
 #: field:carrier.account,__last_update:0
@@ -356,7 +356,7 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: field:shipping.label,store_fname:0
 msgid "Stored Filename"
-msgstr ""
+msgstr "Nome de arquivo armazenado"
 
 #. module: base_delivery_carrier_label
 #: help:shipping.label,res_model:0
@@ -366,7 +366,7 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: help:shipping.label,res_id:0
 msgid "The record id this is attached to"
-msgstr ""
+msgstr "O id deste registro está anexado a"
 
 #. module: base_delivery_carrier_label
 #: help:stock.quant.package,weight:0
@@ -384,7 +384,7 @@ msgstr "Tipo"
 #. module: base_delivery_carrier_label
 #: field:shipping.label,url:0
 msgid "Url"
-msgstr ""
+msgstr "Url"
 
 #. module: base_delivery_carrier_label
 #: field:stock.pack.operation,weight:0 field:stock.quant.package,weight:0
