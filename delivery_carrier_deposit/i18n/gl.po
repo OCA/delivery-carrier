@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: delivery-carrier (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-29 01:42+0000\n"
-"PO-Revision-Date: 2017-08-11 11:55+0000\n"
+"POT-Creation-Date: 2017-10-28 03:37+0000\n"
+"PO-Revision-Date: 2017-11-23 23:27+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Galician (http://www.transifex.com/oca/OCA-delivery-carrier-8-0/language/gl/)\n"
 "MIME-Version: 1.0\n"
@@ -332,12 +332,12 @@ msgstr ""
 #. module: delivery_carrier_deposit
 #: field:deposit.slip,carrier_type:0
 msgid "Type"
-msgstr ""
+msgstr "Tipo"
 
 #. module: delivery_carrier_deposit
 #: field:deposit.slip,message_unread:0
 msgid "Unread Messages"
-msgstr ""
+msgstr "Mensaxes sen ler"
 
 #. module: delivery_carrier_deposit
 #: view:website:delivery_carrier_deposit.report_generic_deposit_slip
