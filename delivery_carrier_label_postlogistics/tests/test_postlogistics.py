@@ -4,8 +4,7 @@
 import mock
 
 from odoo.tests import common
-from odoo.addons.delivery_carrier_label_postlogistics\
-    .postlogistics.web_service import PostlogisticsWebService
+from ..postlogistics.web_service import PostlogisticsWebService
 
 
 class FakeWS(PostlogisticsWebService):
@@ -43,7 +42,7 @@ class TestPostlogistics(common.TransactionCase):
                          '.partner_postlogistics')
         self.carrier = self.env['delivery.carrier'].create({
             'name': 'Postlogistics',
-            'carrier_type': 'postlogistics',
+            'delivery_type': 'postlogistics',
             'product_id': Product.create({'name': 'Shipping'}).id,
             'partner_id': self.env.ref(partner_xmlid).id,
         })
