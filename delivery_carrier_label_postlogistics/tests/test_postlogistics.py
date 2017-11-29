@@ -43,7 +43,7 @@ class TestPostlogistics(common.TransactionCase):
                          '.partner_postlogistics')
         self.carrier = self.env['delivery.carrier'].create({
             'name': 'Postlogistics',
-            'carrier_type': 'postlogistics',
+            'delivery_type': 'postlogistics',
             'product_id': Product.create({'name': 'Shipping'}).id,
             'partner_id': self.env.ref(partner_xmlid).id,
         })
