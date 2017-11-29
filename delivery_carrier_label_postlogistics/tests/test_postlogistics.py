@@ -4,8 +4,7 @@
 import mock
 
 from odoo.tests import common
-from odoo.addons.delivery_carrier_label_postlogistics\
-    .postlogistics.web_service import PostlogisticsWebService
+from ..postlogistics.web_service import PostlogisticsWebService
 
 
 class FakeWS(PostlogisticsWebService):
