@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo import api, fields, models
 from odoo.tools import file_open
+from odoo.modules.module import get_resource_path
 
 
 class ResCompany(models.Model):
@@ -63,14 +64,15 @@ class ResCompany(models.Model):
 
     @api.depends('postlogistics_test_mode')
     def _compute_wsdl_url(self):
-        path = 'delivery_carrier_label_postlogistics/data/'
+        path = get_resource_path('delivery_carrier_label_postlogistics',
+                                 'data')
         filename = 'barcode_v2_2_wsbc.wsdl'
         wsdl_file, wsdl_path = file_open(
-            path + 'production/' + filename,
+            path + '/production/' + filename,
             pathinfo=True)
         wsdl_url = 'file://' + wsdl_path
         wsdl_file, wsdl_path_int = file_open(
-            path + 'integration/' + filename,
+            path + '/integration/' + filename,
             pathinfo=True)
         wsdl_int_url = 'file://' + wsdl_path_int
         for cp in self:

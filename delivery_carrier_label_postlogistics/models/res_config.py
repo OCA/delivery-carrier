@@ -85,8 +85,8 @@ class PostlogisticsConfigSettings(models.TransientModel):
         CarrierOption = self.env['delivery.carrier.template.option']
 
         xmlid = ('delivery_carrier_label_postlogistics'
-                 '.product_postlogistics_service')
-        postlogistics_delivery = self.env.ref(xmlid)
+                 '.partner_postlogistics')
+        postlogistics_partner = self.env.ref(xmlid)
 
         for service_code, data in additional_services.iteritems():
             options = CarrierOption.search(
@@ -100,7 +100,7 @@ class PostlogisticsConfigSettings(models.TransientModel):
             else:
                 data.update(code=service_code,
                             postlogistics_type='delivery',
-                            product_id=postlogistics_delivery.id)
+                            partner_id=postlogistics_partner.id)
                 CarrierOption.create(data)
         lang = self.env.context.get('lang', 'en')
         _logger.info("Updated delivery instructions. [%s]", lang)
@@ -136,8 +136,8 @@ class PostlogisticsConfigSettings(models.TransientModel):
         CarrierOption = self.env['delivery.carrier.template.option']
 
         xmlid = ('delivery_carrier_label_postlogistics'
-                 '.product_postlogistics_service')
-        postlogistics_delivery = self.env.ref(xmlid)
+                 '.partner_postlogistics')
+        postlogistics_partner = self.env.ref(xmlid)
 
         for service_code, data in additional_services.iteritems():
             options = CarrierOption.search(
@@ -150,7 +150,7 @@ class PostlogisticsConfigSettings(models.TransientModel):
             else:
                 data.update(code=service_code,
                             postlogistics_type='additional',
-                            product_id=postlogistics_delivery.id)
+                            partner_id=postlogistics_partner.id)
                 CarrierOption.create(data)
         lang = self.env.context.get('lang', 'en')
         _logger.info("Updated additional services [%s]", lang)
@@ -169,8 +169,8 @@ class PostlogisticsConfigSettings(models.TransientModel):
         CarrierOption = self.env['delivery.carrier.template.option']
 
         xmlid = ('delivery_carrier_label_postlogistics'
-                 '.product_postlogistics_service')
-        postlogistics_delivery = self.env.ref(xmlid)
+                 '.partner_postlogistics')
+        postlogistics_partner = self.env.ref(xmlid)
         lang = self.env.context.get('lang', 'en')
 
         res = web_service.read_basic_services(group.group_extid, lang)
@@ -198,7 +198,7 @@ class PostlogisticsConfigSettings(models.TransientModel):
             else:
                 data.update(code=service_code,
                             postlogistics_service_group_id=group.id,
-                            product_id=postlogistics_delivery.id,
+                            partner_id=postlogistics_partner.id,
                             postlogistics_type='basic')
                 option = CarrierOption.create(data)
 

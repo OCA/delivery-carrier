@@ -7,9 +7,9 @@
   <field name="inherit_id" ref="base_delivery_carrier_label.view_picking_withcarrier_out_form"/>
   <field name="arch" type="xml">
     <field name="option_ids" position="after">
-      <separator string="Delivery instructions" attrs="{'invisible': [('carrier_type', '!=', 'postlogistics')]}"/>
+      <separator string="Delivery instructions" attrs="{'invisible': [('delivery_type', '!=', 'postlogistics')]}"/>
       <group>
-        <group name="delivery_instructions" attrs="{'invisible': [('carrier_type', '!=', 'postlogistics')]}">
+        <group name="delivery_instructions" attrs="{'invisible': [('delivery_type', '!=', 'postlogistics')]}">
           <field name="delivery_fixed_date"/>
           <field name="delivery_place"/>
           <field name="delivery_phone"/>
