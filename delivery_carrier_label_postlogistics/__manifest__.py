@@ -5,12 +5,14 @@
  'version': '10.0.1.0.0',
  'author': "Camptocamp,Odoo Community Association (OCA)",
  'maintainer': 'Camptocamp',
+ 'summary': 'Print postlogistics shipping labels',
  'license': 'AGPL-3',
  'category': 'Delivery',
  'complexity': 'normal',
  'depends': ['base_delivery_carrier_label',
-             'configuration_helper'],
- 'website': 'http://www.camptocamp.com/',
+             'configuration_helper',
+             'web_domain_field'],
+ 'website': 'https://github.com/OCA/delivery-carrier',
  'data': ['data/partner.xml',
           'data/product.xml',
           'data/delivery.xml',
@@ -25,5 +27,6 @@
  'application': True,
  'external_dependencies': {
      'python': ['suds'],
- }
+ },
+ 'post_load': 'patch_suds',
  }

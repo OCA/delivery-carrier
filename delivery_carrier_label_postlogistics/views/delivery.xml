@@ -31,7 +31,11 @@
     <field name="inherit_id" ref="base_delivery_carrier_label.delivery_carrier_option_view_form" />
     <field name="arch" type="xml">
       <field name="tmpl_option_id" position="before">
+        <field name="tmpl_option_id_domain" invisible="1" />
         <field name="carrier_id" invisible="1"/>
+      </field>
+      <field name="tmpl_option_id" position="attributes">
+        <attribute name="domain">tmpl_option_id_domain</attribute>
       </field>
     </field>
   </record>
@@ -42,13 +46,16 @@
     <field name="model">delivery.carrier</field>
     <field name="inherit_id" ref="base_delivery_carrier_label.view_delivery_carrier_form" />
     <field name="arch" type="xml">
-      <field name="carrier_type" position="after">
-        <field name="postlogistics_service_group_id" attrs="{'invisible': [('carrier_type', '!=', 'postlogistics')], 'required': [('carrier_type', '=', 'postlogistics')]}"/>
-        <field name="postlogistics_license_id" attrs="{'invisible': [('carrier_type', '!=', 'postlogistics')]}"/>
-        <field name="allowed_option_ids" invisible="1"/>
+      <field name="carrier_type" position="attributes">
+        <attribute name="invisible">1</attribute>
+      </field>
+      <field name="delivery_type" position="after">
+        <field name="postlogistics_service_group_id" attrs="{'invisible': [('delivery_type', '!=', 'postlogistics')], 'required': [('delivery_type', '=', 'postlogistics')]}"/>
+        <field name="postlogistics_license_id" attrs="{'invisible': [('delivery_type', '!=', 'postlogistics')]}"/>
+        <field name="allowed_options_domain" invisible="1" />
       </field>
       <field name="available_option_ids" position="attributes">
-        <attribute name="context">{'default_carrier_id': active_id, 'default_allowed_option_ids': allowed_option_ids}</attribute>
+        <attribute name="context">{'default_carrier_id': active_id, 'default_tmpl_option_id_domain': allowed_options_domain}</attribute>
       </field>
     </field>
   </record>
