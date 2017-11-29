@@ -1,8 +1,13 @@
 # -*- coding: utf-8 -*-
 # Copyright 2013-2017 Yannick Vaucher (Camptocamp SA)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+import logging
 import json
 from odoo import api, fields, models
+from odoo.exceptions import UserError
+
+
+_logger = logging.getLogger(__name__)
 
 
 class PostlogisticsLicense(models.Model):
@@ -230,3 +235,28 @@ class DeliveryCarrier(models.Model):
         compute="_compute_allowed_options_domain",
         store=False,
     )
+
+    @api.multi
+    def postlogistics_get_shipping_price_from_so(self, order):
+        self.ensure_one()
+        try:
+            computed_price = self.get_price_available(order)
+            self.available = True
+        except UserError as e:
+            # No suitable delivery method found, probably configuration error
+            _logger.info("Carrier %s: %s", self.name, e.name)
+            computed_price = 0.0
+
+        return [computed_price * (1.0 + (float(self.margin) / 100.0))]
+
+    @api.multi
+    def postlogistics_send_shipping(self, pickings):
+        return [{'exact_price': False, 'tracking_number': False}]
+
+    @api.multi
+    def postlogistics_get_tracking_link(self, pickings):
+        return False
+
+    @api.multi
+    def postlogistics_cancel_shipment(self, pickings):
+        return False
