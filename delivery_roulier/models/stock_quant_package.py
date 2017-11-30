@@ -174,6 +174,7 @@ class StockQuantPackage(models.Model):
         # There is low chance you need to override it.
         # Don't forget to implement _a-carrier_before_call
         # and _a-carrier_after_call
+        self.write({'carrier_id': picking.carrier_id.id})
         roulier_instance = roulier.get(picking.carrier_type)
         payload = roulier_instance.api()
 
