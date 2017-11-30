@@ -49,7 +49,7 @@ def implemented_by_carrier(func):
             if len(pickings) > 0:
                 return pickings[0].carrier_type
             if cls[0].carrier_id:
-                return cls[0].carrier_id.type
+                return cls[0].carrier_id.carrier_type
 
         carrier_type = get_carrier_type(cls, *args, **kwargs)
         fun = '_%s%s' % (carrier_type, fun_name)
