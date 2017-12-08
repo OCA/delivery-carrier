@@ -12,7 +12,7 @@
     'depends': [
         'base_delivery_carrier_label',
     ],
-    'website': 'https://www.akretion.com/',
+    'website': 'https://github.com/OCA/delivery-carrier',
     'data': [
         'views/stock_view.xml',
         'wizards/deposit.xml',
