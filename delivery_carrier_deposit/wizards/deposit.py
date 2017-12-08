@@ -7,7 +7,7 @@
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
 from odoo import fields, models, api, _
-from odoo.exceptions import Warning
+from odoo.exceptions import UserError
 
 
 class DeliveryDepositWizard(models.TransientModel):
@@ -57,7 +57,7 @@ class DeliveryDepositWizard(models.TransientModel):
             }
             return action
         else:
-            raise Warning(
+            raise UserError(
                 _("There are no delivery orders in transferred "
                     "state with a delivery method type '%s' "
                     "not already linked to a deposit slip.")
