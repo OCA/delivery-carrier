@@ -6,8 +6,8 @@
 
 {
     'name': 'Delivery Roulier Option',
-    'version': '9.0.1.0.0',
-    'author': 'Akretion, Odoo Community Association (OCA)',
+    'version': '10.0.1.0.0',
+    'author': 'Akretion',
     'summary': 'Add options to roulier modules',
     'maintainer': 'Akretion, Odoo Community Association (OCA)',
     'category': 'Warehouse',
@@ -18,7 +18,6 @@
     'data': [
         'data/delivery.xml',
     ],
-    'demo': [],
     'installable': True,
     'license': 'AGPL-3',
 }

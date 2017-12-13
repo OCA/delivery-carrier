@@ -4,37 +4,11 @@
 #          EBII MonsieurB <monsieurb@saaslys.com>
 #          Sébastien BEAU
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-
-from functools import wraps
-
-from openerp import models
 import logging
+from odoo import models
+from odoo.addons.delivery_roulier import implemented_by_carrier
 
 _logger = logging.getLogger(__name__)
-
-
-def implemented_by_carrier(func):
-    """Decorator: call _carrier_prefixed method instead.
-
-    Usage:
-        @implemented_by_carrier
-        def _do_something()
-        def _laposte_do_something()
-        def _gls_do_something()
-
-    At runtime, picking._do_something() will try to call
-    the carrier spectific method or fallback to generic _do_something
-
-    """
-    @wraps(func)
-    def wrapper(cls, *args, **kwargs):
-        fun_name = func.__name__
-        fun = '_%s%s' % (cls.carrier_type, fun_name)
-        if not hasattr(cls, fun):
-            fun = '_roulier%s' % (fun_name)
-            # return func(cls, *args, **kwargs)
-        return getattr(cls, fun)(*args, **kwargs)
-    return wrapper
 
 
 class StockQuantPackage(models.Model):
