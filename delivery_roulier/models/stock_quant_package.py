@@ -3,13 +3,14 @@
 #          David BEAL <david.beal@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from functools import wraps
 import logging
 import base64
 
-from openerp import models, api, fields
-from openerp.tools.translate import _
-from openerp.exceptions import UserError
+from odoo import models, api, fields
+from odoo.tools.translate import _
+from odoo.exceptions import UserError
+
+from ..decorator import implemented_by_carrier
 
 _logger = logging.getLogger(__name__)
 try:
@@ -20,44 +21,6 @@ try:
     )
 except ImportError:
     _logger.debug('Cannot `import roulier`.')
-
-
-def implemented_by_carrier(func):
-    """Decorator: call _carrier_prefixed method instead.
-
-    Usage:
-        @implemented_by_carrier
-        def _do_something()
-        def _laposte_do_something()
-        def _gls_do_something()
-
-    At runtime, picking._do_something() will try to call
-    the carrier spectific method or fallback to generic _do_something
-
-    """
-    @wraps(func)
-    def wrapper(cls, *args, **kwargs):
-        fun_name = func.__name__
-
-        def get_carrier_type(cls, *args, **kwargs):
-            if hasattr(cls, 'carrier_type'):
-                return cls.carrier_type
-            # TODO: est-ce bien utile si on carrier_id ?
-            pickings = [
-                obj for obj in args
-                if getattr(obj, '_name', '') == 'stock.picking']
-            if len(pickings) > 0:
-                return pickings[0].carrier_type
-            if cls[0].carrier_id:
-                return cls[0].carrier_id.carrier_type
-
-        carrier_type = get_carrier_type(cls, *args, **kwargs)
-        fun = '_%s%s' % (carrier_type, fun_name)
-        if not hasattr(cls, fun):
-            fun = '_roulier%s' % (fun_name)
-            # return func(cls, *args, **kwargs)
-        return getattr(cls, fun)(*args, **kwargs)
-    return wrapper
 
 
 class StockQuantPackage(models.Model):
