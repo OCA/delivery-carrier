@@ -11,7 +11,7 @@
         <field name="arch" type="xml">
             <field name="delivery_type" position="before">
                 <field name="destination_type"
-                       invisible="context.get('show_children_carriers', False)"
+                       invisible="context.get('show_children_fields', False)"
                 />
             </field>
             <xpath expr="//field[@name='fixed_price']/ancestor::page"
@@ -27,7 +27,7 @@
                       attrs="{'invisible': [('destination_type', '!=', 'multi')]}"
                 >
                     <field name="child_ids"
-                           context="{'show_children_carriers': True}"
+                           context="{'show_children_fields': True}"
                     />
                 </page>
             </notebook>
@@ -41,23 +41,23 @@
             <field name="delivery_type" position="after">
                 <field name="destination_type"/>
                 <field name="country_ids"
-                       invisible="not context.get('show_children_carriers', False)"
+                       invisible="not context.get('show_children_fields', False)"
                 />
                 <field name="state_ids"
-                       invisible="not context.get('show_children_carriers', False)"
+                       invisible="not context.get('show_children_fields', False)"
                 />
                 <field name="zip_from"
-                       invisible="not context.get('show_children_carriers', False)"
+                       invisible="not context.get('show_children_fields', False)"
                 />
                 <field name="zip_to"
-                       invisible="not context.get('show_children_carriers', False)"
+                       invisible="not context.get('show_children_fields', False)"
                 />
             </field>
         </field>
     </record>
 
     <record id="delivery.action_delivery_carrier_form" model="ir.actions.act_window">
-        <field name="domain">[('parent_id', '=', False)]</field>
+        <field name="context">{'show_children_carriers': True}</field>
     </record>
 
 </odoo>
