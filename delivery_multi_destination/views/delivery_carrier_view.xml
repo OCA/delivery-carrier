@@ -57,6 +57,7 @@
     </record>
 
     <record id="delivery.action_delivery_carrier_form" model="ir.actions.act_window">
+        <field name="domain">[('parent_id', '=', False)]</field>
         <field name="context">{'show_children_carriers': True}</field>
     </record>
 
