@@ -98,3 +98,19 @@ class TestDeliveryMultiDestination(common.SavepointCase):
         order.partner_shipping_id = self.partner_3.id
         order.delivery_set()
         self.assertAlmostEqual(order.delivery_price, 150, 2)
+
+    def test_search(self):
+        carriers = self.env['delivery.carrier'].search([])
+        children_carrier = self.carrier_multi.with_context(
+            show_children_carriers=True,
+        ).child_ids[0]
+        self.assertNotIn(children_carrier, carriers)
+
+    def test_name_search(self):
+        carrier_names = self.env['delivery.carrier'].name_search()
+        children_carrier = self.carrier_multi.with_context(
+            show_children_carriers=True,
+        ).child_ids[0]
+        self.assertTrue(
+            all(x[0] != children_carrier.id for x in carrier_names)
+        )
