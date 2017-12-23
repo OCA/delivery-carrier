@@ -24,10 +24,32 @@ class DeliveryCarrier(models.Model):
         default="one", required=True,
     )
 
+    def search(self, args, offset=0, limit=None, order=None, count=False):
+        """Don't show by default children carriers."""
+        if not self.env.context.get('show_children_carriers'):
+            if args is None:
+                args = []
+            args += [('parent_id', '=', False)]
+        return super(DeliveryCarrier, self).search(
+            args, offset=offset, limit=limit, order=order, count=count,
+        )
+
+    @api.model
+    def name_search(self, name='', args=None, operator='ilike', limit=100):
+        """Don't show by default children carriers."""
+        if not self.env.context.get('show_children_carriers'):
+            if args is None:
+                args = []
+            args += [('parent_id', '=', False)]
+        return super(DeliveryCarrier, self)._name_search(
+            name=name, args=args, operator=operator, limit=limit,
+        )
+
     @api.multi
     def verify_carrier(self, contact):
         if self.destination_type == 'one':
             return super(DeliveryCarrier, self).verify_carrier(contact)
-        for subcarrier in self.child_ids:
+        carrier = self.with_context(show_children_carriers=True)
+        for subcarrier in carrier.child_ids:
             if super(DeliveryCarrier, subcarrier).verify_carrier(contact):
                 return subcarrier
