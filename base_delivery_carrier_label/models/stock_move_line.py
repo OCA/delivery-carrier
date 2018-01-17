@@ -9,8 +9,8 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
-class StockPackOperation(models.Model):
-    _inherit = 'stock.pack.operation'
+class StockMoveLine(models.Model):
+    _inherit = 'stock.move.line'
 
     weight = fields.Float(
         digits=dp.get_precision('Stock Weight'),

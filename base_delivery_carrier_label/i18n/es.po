@@ -70,7 +70,7 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: model:ir.ui.view,arch_db:base_delivery_carrier_label.manifest_wizard_form
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_delivery_carrier
@@ -83,7 +83,7 @@ msgstr "Transportista"
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_manifest_wizard_carrier_type
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_picking_carrier_type
 msgid "Carrier Type"
-msgstr ""
+msgstr "Tipo de transportista"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_delivery_carrier_carrier_type
