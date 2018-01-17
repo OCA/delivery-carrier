@@ -30,7 +30,7 @@ class StockQuantPackage(models.Model):
                 pack.weight = pack.total_weight
             elif not pack.quant_ids:
                 # package.pack_operations would be too easy
-                operations = self.env['stock.pack.operation'].search(
+                operations = self.env['stock.move.line'].search(
                     [('result_package_id', '=', pack.id),
                      ('product_id', '!=', False),
                      ])
@@ -40,14 +40,9 @@ class StockQuantPackage(models.Model):
 
                 # sum of the pack_operation
                 payload_weight = operations.get_weight()
-                # sum of the packages contained in this package (children)
-                children_weight = sum(sub.weight for sub in pack.children_ids)
 
                 # sum and save in package
-                pack.weight = (
-                    payload_weight +
-                    children_weight
-                    )
+                pack.weight = payload_weight
 
             else:
                 to_do |= pack
