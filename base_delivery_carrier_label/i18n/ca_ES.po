@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: delivery-carrier (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-28 02:37+0000\n"
-"PO-Revision-Date: 2017-04-25 10:41+0000\n"
+"POT-Creation-Date: 2017-12-30 03:30+0000\n"
+"PO-Revision-Date: 2018-02-02 14:11+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Catalan (Spain) (http://www.transifex.com/oca/OCA-delivery-carrier-8-0/language/ca_ES/)\n"
 "MIME-Version: 1.0\n"
@@ -91,7 +91,7 @@ msgstr ""
 #: field:delivery.carrier.template.option,code:0
 #: field:stock.picking,carrier_code:0
 msgid "Code"
-msgstr ""
+msgstr "Codi"
 
 #. module: base_delivery_carrier_label
 #: field:shipping.label,company_id:0
@@ -109,7 +109,7 @@ msgstr ""
 #: field:delivery.carrier.template.option,create_uid:0
 #: field:shipping.label,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Creat per"
 
 #. module: base_delivery_carrier_label
 #: field:carrier.account,create_date:0
@@ -117,7 +117,7 @@ msgstr ""
 #: field:delivery.carrier.template.option,create_date:0
 #: field:shipping.label,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Creat a"
 
 #. module: base_delivery_carrier_label
 #: field:shipping.label,db_datas:0
@@ -151,7 +151,7 @@ msgstr ""
 #: field:delivery.carrier.template.option,description:0
 #: field:shipping.label,description:0
 msgid "Description"
-msgstr ""
+msgstr "Descripció"
 
 #. module: base_delivery_carrier_label
 #: field:shipping.label,parent_id:0
@@ -164,7 +164,7 @@ msgstr ""
 #: field:delivery.carrier.template.option,display_name:0
 #: field:shipping.label,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Nom visible"
 
 #. module: base_delivery_carrier_label
 #: field:shipping.label,datas:0
@@ -225,14 +225,14 @@ msgstr ""
 #: field:delivery.carrier.template.option,__last_update:0
 #: field:shipping.label,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Darrera modificació en"
 
 #. module: base_delivery_carrier_label
 #: field:carrier.account,write_uid:0 field:delivery.carrier.option,write_uid:0
 #: field:delivery.carrier.template.option,write_uid:0
 #: field:shipping.label,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Darrera actualització per"
 
 #. module: base_delivery_carrier_label
 #: field:carrier.account,write_date:0
@@ -240,7 +240,7 @@ msgstr ""
 #: field:delivery.carrier.template.option,write_date:0
 #: field:shipping.label,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Darrera actualització el"
 
 #. module: base_delivery_carrier_label
 #: field:delivery.carrier.option,mandatory:0
@@ -251,7 +251,7 @@ msgstr ""
 #: field:carrier.account,name:0 field:delivery.carrier.option,name:0
 #: field:delivery.carrier.template.option,name:0
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 #. module: base_delivery_carrier_label
 #: code:addons/base_delivery_carrier_label/stock.py:186
@@ -376,7 +376,7 @@ msgstr ""
 #: field:carrier.account,type:0 field:delivery.carrier,type:0
 #: field:shipping.label,type:0
 msgid "Type"
-msgstr ""
+msgstr "Tipus"
 
 #. module: base_delivery_carrier_label
 #: field:shipping.label,url:0

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: delivery-carrier (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-28 02:37+0000\n"
-"PO-Revision-Date: 2017-04-25 10:41+0000\n"
+"POT-Creation-Date: 2017-12-30 03:30+0000\n"
+"PO-Revision-Date: 2018-02-02 14:11+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Catalan (Spain) (http://www.transifex.com/oca/OCA-delivery-carrier-8-0/language/ca_ES/)\n"
 "MIME-Version: 1.0\n"
@@ -173,14 +173,14 @@ msgstr ""
 #: field:postlogistics.license,create_uid:0
 #: field:postlogistics.service.group,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Creat per"
 
 #. module: delivery_carrier_label_postlogistics
 #: field:postlogistics.config.settings,create_date:0
 #: field:postlogistics.license,create_date:0
 #: field:postlogistics.service.group,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Creat a"
 
 #. module: delivery_carrier_label_postlogistics
 #: view:postlogistics.config.settings:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
@@ -223,14 +223,14 @@ msgstr ""
 #. module: delivery_carrier_label_postlogistics
 #: field:postlogistics.license,name:0 field:postlogistics.service.group,name:0
 msgid "Description"
-msgstr ""
+msgstr "Descripció"
 
 #. module: delivery_carrier_label_postlogistics
 #: field:postlogistics.config.settings,display_name:0
 #: field:postlogistics.license,display_name:0
 #: field:postlogistics.service.group,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Nom visible"
 
 #. module: delivery_carrier_label_postlogistics
 #: field:postlogistics.config.settings,office:0
@@ -314,21 +314,21 @@ msgstr ""
 #: field:postlogistics.license,__last_update:0
 #: field:postlogistics.service.group,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Darrera modificació en"
 
 #. module: delivery_carrier_label_postlogistics
 #: field:postlogistics.config.settings,write_uid:0
 #: field:postlogistics.license,write_uid:0
 #: field:postlogistics.service.group,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Darrera actualització per"
 
 #. module: delivery_carrier_label_postlogistics
 #: field:postlogistics.config.settings,write_date:0
 #: field:postlogistics.license,write_date:0
 #: field:postlogistics.service.group,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Darrera actualització el"
 
 #. module: delivery_carrier_label_postlogistics
 #: view:postlogistics.config.settings:delivery_carrier_label_postlogistics.view_postlogistics_config_settings

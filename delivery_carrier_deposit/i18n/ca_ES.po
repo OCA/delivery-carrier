@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: delivery-carrier (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-28 02:37+0000\n"
-"PO-Revision-Date: 2017-04-25 10:41+0000\n"
+"POT-Creation-Date: 2017-12-30 03:30+0000\n"
+"PO-Revision-Date: 2018-02-02 14:11+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Catalan (Spain) (http://www.transifex.com/oca/OCA-delivery-carrier-8-0/language/ca_ES/)\n"
 "MIME-Version: 1.0\n"
@@ -95,13 +95,13 @@ msgstr ""
 #. module: delivery_carrier_deposit
 #: field:delivery.deposit.wizard,create_uid:0 field:deposit.slip,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Creat per"
 
 #. module: delivery_carrier_deposit
 #: field:delivery.deposit.wizard,create_date:0
 #: field:deposit.slip,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Creat a"
 
 #. module: delivery_carrier_deposit
 #: view:website:delivery_carrier_deposit.report_generic_deposit_slip
@@ -160,7 +160,7 @@ msgstr ""
 #: field:delivery.deposit.wizard,display_name:0
 #: field:deposit.slip,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Nom visible"
 
 #. module: delivery_carrier_deposit
 #: selection:deposit.slip,state:0
@@ -218,17 +218,17 @@ msgstr ""
 #: field:delivery.deposit.wizard,__last_update:0
 #: field:deposit.slip,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Darrera modificació en"
 
 #. module: delivery_carrier_deposit
 #: field:delivery.deposit.wizard,write_uid:0 field:deposit.slip,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Darrera actualització per"
 
 #. module: delivery_carrier_deposit
 #: field:delivery.deposit.wizard,write_date:0 field:deposit.slip,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Darrera actualització el"
 
 #. module: delivery_carrier_deposit
 #: field:deposit.slip,message_ids:0
@@ -243,7 +243,7 @@ msgstr ""
 #. module: delivery_carrier_deposit
 #: field:deposit.slip,name:0
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 #. module: delivery_carrier_deposit
 #: view:website:delivery_carrier_deposit.report_generic_deposit_slip
@@ -332,7 +332,7 @@ msgstr ""
 #. module: delivery_carrier_deposit
 #: field:deposit.slip,carrier_type:0
 msgid "Type"
-msgstr ""
+msgstr "Tipus"
 
 #. module: delivery_carrier_deposit
 #: field:deposit.slip,message_unread:0
