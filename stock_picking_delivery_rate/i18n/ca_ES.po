@@ -4,13 +4,14 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2017
+# Carlos Hormigo, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-29 00:40+0000\n"
-"PO-Revision-Date: 2017-04-29 00:40+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"POT-Creation-Date: 2018-02-03 01:46+0000\n"
+"PO-Revision-Date: 2018-02-03 01:46+0000\n"
+"Last-Translator: Carlos Hormigo, 2018\n"
 "Language-Team: Catalan (Spain) (https://www.transifex.com/oca/teams/23907/ca_ES/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -44,13 +45,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_create_uid
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_purchase_create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Creat per"
 
 #. module: stock_picking_delivery_rate
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_create_date
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_purchase_create_date
 msgid "Created on"
-msgstr ""
+msgstr "Creat a"
 
 #. module: stock_picking_delivery_rate
 #: model:ir.ui.view,arch_db:stock_picking_delivery_rate.stock_picking_rate_view_search
@@ -96,7 +97,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_display_name
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_purchase_display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nom visible"
 
 #. module: stock_picking_delivery_rate
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_date_delivery
@@ -123,19 +124,19 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate___last_update
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_purchase___last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Darrera modificació en"
 
 #. module: stock_picking_delivery_rate
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_purchase_write_uid
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Darrera actualització per"
 
 #. module: stock_picking_delivery_rate
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_purchase_write_date
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Darrera actualització el"
 
 #. module: stock_picking_delivery_rate
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_list_rate_currency_id
