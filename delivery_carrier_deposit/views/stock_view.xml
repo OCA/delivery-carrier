@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
-<data>
-
+<odoo>
 <!-- DEPOSIT SLIP -->
 <!-- ACTION / MENU -->
 <record id="act_delivery_deposit" model="ir.actions.act_window">
@@ -76,7 +74,18 @@
                     <field name="number_of_packages"/>
                 </group>
                 <group name="pickings">
-                    <field name="picking_ids" nolabel="1" widget="many2many"/>
+                    <field name="picking_ids" nolabel="1" widget="many2many" options="{'not_delete': True}"/>
+                        <tree>
+                            <field name="name"/>
+                            <field name="partner_id"/>
+                            <field name="number_of_packages"/>
+                            <field name="weight"/>
+                            <field name="origin"/>
+                            <field name="backorder_id"/>
+                            <field name="date_done"/>
+                            <field name="state" invisible="1"/>
+                        </tree>
+                    </field>
                 </group>
             </sheet>
             <div class="oe_chatter">
@@ -103,7 +112,7 @@
     <field name="model">stock.picking</field>
     <field name="inherit_id" ref="delivery.view_picking_withcarrier_out_form" />
     <field name="arch" type="xml">
-        <field name="weight_net" position="after">
+        <field name="number_of_packages" position="after">
             <field name="deposit_slip_id"
                    attrs="{'readonly': True,'invisible': [('deposit_slip_id','=','')]}"/>
         </field>
@@ -124,5 +133,4 @@
     </field>
 </record>
 
-</data>
-</openerp>
+</odoo>
