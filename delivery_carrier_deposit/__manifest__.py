@@ -4,7 +4,7 @@
 
 {
     'name': 'Delivery Deposit',
-    'version': '10.0.0.1.0',
+    'version': '10.0.0.1.1',
     'category': 'Delivery',
     'author': "Akretion,Odoo Community Association (OCA)",
     'maintainer': 'Akretion',
