@@ -74,7 +74,7 @@
                     <field name="number_of_packages"/>
                 </group>
                 <group name="pickings">
-                    <field name="picking_ids" nolabel="1" widget="many2many" options="{'not_delete': True}"/>
+                    <field name="picking_ids" nolabel="1" widget="many2many" options="{'not_delete': True}">
                         <tree>
                             <field name="name"/>
                             <field name="partner_id"/>
