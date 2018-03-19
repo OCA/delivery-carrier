@@ -38,10 +38,22 @@ def implemented_by_carrier(func):
     @wraps(func)
     def wrapper(cls, *args, **kwargs):
         fun_name = func.__name__
-        fun = '_%s%s' % (cls.carrier_type, fun_name)
+
+        def get_carrier_type(cls, *args, **kwargs):
+            if hasattr(cls, 'carrier_type'):
+                return cls.carrier_type
+            pickings = [
+                obj for obj in args
+                if getattr(obj, '_name', '') == 'stock.picking']
+            if len(pickings) > 0:
+                return pickings[0].carrier_type
+            if cls[0].carrier_id:
+                return cls[0].carrier_id.carrier_type
+
+        carrier_type = get_carrier_type(cls, *args, **kwargs)
+        fun = '_%s%s' % (carrier_type, fun_name)
         if not hasattr(cls, fun):
             fun = '_roulier%s' % (fun_name)
-            # return func(cls, *args, **kwargs)
         return getattr(cls, fun)(*args, **kwargs)
     return wrapper
 
@@ -51,12 +63,11 @@ class StockQuantPackage(models.Model):
 
     carrier_id = fields.Many2one("delivery.carrier", string="Carrier")
 
-    # helper : move it to base ?
     @api.multi
     def get_operations(self):
         """Get operations of the package.
 
-        Usefull for having products and quantities
+        Useful for having products and quantities
         """
         self.ensure_one()
         return self.env['stock.pack.operation'].search([
@@ -110,18 +121,30 @@ class StockQuantPackage(models.Model):
     @implemented_by_carrier
     def _get_tracking_link(self):
         pass
+
+    @implemented_by_carrier
+    def _generate_labels(self, picking):
+        pass
+
+    @implemented_by_carrier
+    def _get_parcels(self, picking):
+        pass
     # end of API
 
     # Core functions
     @api.multi
-    def _generate_labels(self, picking):
-        ret = []
+    def _roulier_generate_labels(self, picking):
+        # by default, only one pack per call
         for package in self:
             response = package._call_roulier_api(picking)
             package._handle_tracking(picking, response)
-            attach = package._handle_attachments(picking, response)
-            ret.append(attach.get('label'))
-        return ret
+            package._handle_attachments(picking, response)
+
+    @api.multi
+    def _roulier_get_parcels(self, picking):
+        # by default, only one pack per call
+        self.ensure_one()
+        return [self._get_parcel(picking)]
 
     @api.multi
     def open_website_url(self):
@@ -133,7 +156,6 @@ class StockQuantPackage(models.Model):
             action
         """
         self.ensure_one()
-        self.carrier_type = self.carrier_id.carrier_type
         url = self._get_tracking_link()
         client_action = {
             'type': 'ir.actions.act_url',
@@ -149,10 +171,7 @@ class StockQuantPackage(models.Model):
         # There is low chance you need to override it.
         # Don't forget to implement _a-carrier_before_call
         # and _a-carrier_after_call
-        self.ensure_one()
-
-        self.carrier_id = picking.carrier_id
-        self.carrier_type = picking.carrier_type  # on memory value !
+        self.write({'carrier_id': picking.carrier_id.id})
         roulier_instance = roulier.get(picking.carrier_type)
         payload = roulier_instance.api()
 
@@ -167,7 +186,7 @@ class StockQuantPackage(models.Model):
             payload['customs'] = self._get_customs(picking)
 
         payload['service'] = picking._get_service(self)
-        payload['parcel'] = self._get_parcel(picking)
+        payload['parcels'] = self._get_parcels(picking)
 
         # hook to override request / payload
         payload = self._before_call(picking, payload)
@@ -183,10 +202,13 @@ class StockQuantPackage(models.Model):
         return self._after_call(picking, ret)
 
     # default implementations
+    @api.multi
     def _roulier_get_parcel(self, picking):
+        self.ensure_one()
         weight = self.weight
         parcel = {
             'weight': weight,
+            'reference': self.name
         }
         return parcel
 
@@ -240,6 +262,11 @@ class StockQuantPackage(models.Model):
         returns:
             string
         """
+        try:
+            _logger.debug(exception.response.text)
+            _logger.debug(exception.response.request.body)
+        except AttributeError:
+            _logger.debug('No request available')
         return _(u'Sent data:\n%s\n\nException raised:\n%s\n' % (
             payload, exception.message))
 
@@ -255,6 +282,7 @@ class StockQuantPackage(models.Model):
         """
         return _(u'Bad input: %s\n' % exception.message)
 
+    @api.multi
     def _roulier_get_customs(self, picking):
         """Format customs infos for each product in the package.
 
@@ -265,6 +293,8 @@ class StockQuantPackage(models.Model):
             dict.'articles' : list with qty, weight, hs_code
             int category: gift 1, sample 2, commercial 3, ...
         """
+        self.ensure_one()
+
         articles = []
         for operation in self.get_operations():
             article = {}
@@ -288,18 +318,27 @@ class StockQuantPackage(models.Model):
         }
 
     # There is low chance you need to override the following methods.
+    @api.multi
     def _roulier_handle_attachments(self, picking, response):
-        main_label = self._roulier_prepare_label(picking, response)
-        label = self.env['shipping.label'].create(main_label)
-        attachments = self._roulier_prepare_attachments(picking, response)
+        labels = []
+        parcels = iter(response.get('parcels', []))
+        for rec in self:
+            parcel_rep = parcels.next()
+            main_label = rec._roulier_prepare_label(picking, parcel_rep)
+            labels.append(
+                self.env['shipping.label'].create(main_label)
+            )
+        attachments = [
+            self.env['ir.attachment'].create(attachment)
+            for attachment in
+            self[0]._roulier_prepare_attachments(picking, response)
+        ]  # do it once for all
         return {
-            'label': label,
-            'attachments': [
-                self.env['ir.attachment'].create(attachment)
-                for attachment in attachments
-            ]
+            'labels': labels,
+            'attachments': attachments,
         }
 
+    @api.multi
     def _roulier_prepare_label(self, picking, response):
         """Prepare a dict for building a shipping.label.
 
@@ -307,6 +346,7 @@ class StockQuantPackage(models.Model):
         returns:
             dict
         """
+        self.ensure_one()
         label = response.get('label')
         return {
             'res_id': picking.id,
@@ -319,6 +359,7 @@ class StockQuantPackage(models.Model):
                 self.name, label['name'], label['type']),
         }
 
+    @api.multi
     def _roulier_prepare_attachments(self, picking, response):
         """Prepare a list of dicts for building ir.attachemens.
 
@@ -328,6 +369,7 @@ class StockQuantPackage(models.Model):
         returns:
             list
         """
+        self.ensure_one()
         attachments = response.get('annexes')
         return [{
             'res_id': picking.id,
@@ -339,10 +381,11 @@ class StockQuantPackage(models.Model):
                 self.name, attachment['name'], attachment['type']),
         } for attachment in attachments]
 
+    @api.multi
     def _roulier_handle_tracking(self, picking, response):
-        """Extract tracking number from response call to parcel_tracking."""
+        number = False
         tracking = response.get('tracking')
         if tracking:
             number = tracking.get('number')
-            if number:
-                self.parcel_tracking = number
+        for rec in self:
+            rec.parcel_tracking = number
