@@ -9,14 +9,14 @@
         <field name="is_company" eval="True"/>
         <field name="customer" eval="False"/>
         <field name="supplier" eval="True"/>
-        <field name="street">ZI Artois Flandres </field>
+        <field name="street">ZI Artois Flandres</field>
         <field name="zip">62138</field>
         <field name="city">DOUVRIN</field>
     </record>
 
 
 
-        <!-- DELIVERY CARRIER -->
+    <!-- DELIVERY CARRIER -->
     <record id="delivery_carrier_dpd_classic" model="delivery.carrier">
         <field name="name">DPD Classic max 30kg</field>
         <field name="default_code">DPD</field>
