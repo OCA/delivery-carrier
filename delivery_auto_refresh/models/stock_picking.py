@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import models
+from odoo.tools import safe_eval
 
 
 class StockPicking(models.Model):
@@ -11,6 +12,10 @@ class StockPicking(models.Model):
     def _add_delivery_cost_to_so(self):
         """Update delivery price in SO from picking data."""
         res = super(StockPicking, self)._add_delivery_cost_to_so()
+        get_param = self.env['ir.config_parameter'].sudo().get_param
+        param = 'delivery_auto_refresh.refresh_after_picking'
+        if not safe_eval(get_param(param, '0')):
+            return res
         self.ensure_one()
         sale_order = self.sale_id
         if not sale_order or not self.carrier_id:  # pragma: no cover
