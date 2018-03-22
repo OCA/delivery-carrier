@@ -54,7 +54,8 @@ class TestDeliveryAutoRefresh(common.HttpCase):
             'name': 'Test partner',
             'property_delivery_carrier_id': self.carrier.id,
         })
-        self.param_name = 'delivery_auto_refresh.auto_add_delivery_line'
+        self.param_name1 = 'delivery_auto_refresh.auto_add_delivery_line'
+        self.param_name2 = 'delivery_auto_refresh.refresh_after_picking'
         order = self.env['sale.order'].new({
             'partner_id': self.partner.id,
             'order_line': [
@@ -70,7 +71,7 @@ class TestDeliveryAutoRefresh(common.HttpCase):
 
     def test_auto_refresh_so(self):
         self.assertFalse(self.order.order_line.filtered('is_delivery'))
-        self.env['ir.config_parameter'].sudo().set_param(self.param_name, 1)
+        self.env['ir.config_parameter'].sudo().set_param(self.param_name1, 1)
         order2 = self.order.copy({})
         self.assertTrue(order2.order_line.filtered('is_delivery'))
         self.order.write({
@@ -93,6 +94,7 @@ class TestDeliveryAutoRefresh(common.HttpCase):
         self.assertEqual(line_delivery.price_unit, 95)
 
     def test_auto_refresh_picking(self):
+        self.env['ir.config_parameter'].sudo().set_param(self.param_name2, 1)
         self.order.order_line.product_uom_qty = 3
         self.order.action_confirm()
         picking = self.order.picking_ids
@@ -101,3 +103,14 @@ class TestDeliveryAutoRefresh(common.HttpCase):
         picking.do_transfer()
         line_delivery = self.order.order_line.filtered('is_delivery')
         self.assertEqual(line_delivery.price_unit, 50)
+
+    def test_no_auto_refresh_picking(self):
+        self.env['ir.config_parameter'].sudo().set_param(self.param_name2, "0")
+        self.order.order_line.product_uom_qty = 3
+        self.order.action_confirm()
+        picking = self.order.picking_ids
+        picking.force_assign()
+        picking.pack_operation_ids[0].qty_done = 2
+        picking.do_transfer()
+        line_delivery = self.order.order_line.filtered('is_delivery')
+        self.assertEqual(line_delivery.price_unit, 60)
