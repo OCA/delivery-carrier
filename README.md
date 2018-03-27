@@ -22,6 +22,8 @@ addon | version | summary
 [delivery_carrier_deposit](delivery_carrier_deposit/) | 9.0.0.1.1 | Create deposit slips
 [delivery_carrier_label_postlogistics](delivery_carrier_label_postlogistics/) | 9.0.1.1.0 | PostLogistics Labels WebService
 [delivery_multi_destination](delivery_multi_destination/) | 9.0.1.0.0 | Multiple destinations for the same delivery method
+[delivery_roulier](delivery_roulier/) | 9.0.2.0.0 | Integration of multiple carriers
+[delivery_roulier_dpd](delivery_roulier_dpd/) | 9.0.2.0.0 | Generate Labels for DPD
 [sale_delivery_rate](sale_delivery_rate/) | 9.0.1.0.0 | Extends notion of delivery carrier rate quotes to sale orders
 [stock_picking_delivery_rate](stock_picking_delivery_rate/) | 9.0.1.0.0 | Adds a concept of rate quotes for stock pickings
 
