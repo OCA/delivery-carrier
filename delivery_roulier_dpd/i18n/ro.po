@@ -1,0 +1,57 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * delivery_roulier_dpd
+# 
+# Translators:
+# Dorin Hongu <dhongu@gmail.com>, 2018
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0c\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-03-27 03:01+0000\n"
+"PO-Revision-Date: 2018-03-27 03:01+0000\n"
+"Last-Translator: Dorin Hongu <dhongu@gmail.com>, 2018\n"
+"Language-Team: Romanian (https://www.transifex.com/oca/teams/23907/ro/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: ro\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));\n"
+
+#. module: delivery_roulier_dpd
+#: model:ir.model,name:delivery_roulier_dpd.model_delivery_carrier
+msgid "Carrier"
+msgstr ""
+
+#. module: delivery_roulier_dpd
+#: model:delivery.carrier,name:delivery_roulier_dpd.delivery_carrier_dpd_classic
+#: model:product.product,name:delivery_roulier_dpd.delivery_carrier_dpd_classic_product_product
+msgid "DPD Classic max 30kg"
+msgstr ""
+
+#. module: delivery_roulier_dpd
+#: model:delivery.carrier,name:delivery_roulier_dpd.delivery_carrier_dpd_Predict
+#: model:product.product,name:delivery_roulier_dpd.delivery_carrier_dpd_Predict_product_product
+msgid "DPD Predict max 20kg"
+msgstr ""
+
+#. module: delivery_roulier_dpd
+#: model:delivery.carrier,name:delivery_roulier_dpd.delivery_carrier_dpd_Relais
+#: model:product.product,name:delivery_roulier_dpd.delivery_carrier_dpd_Relais_product_product
+msgid "DPD Relais max 20kg"
+msgstr ""
+
+#. module: delivery_roulier_dpd
+#: model:ir.model,name:delivery_roulier_dpd.model_stock_quant_package
+msgid "Physical Packages"
+msgstr "Pachete fizice"
+
+#. module: delivery_roulier_dpd
+#: model:ir.model,name:delivery_roulier_dpd.model_stock_picking
+msgid "Transfer"
+msgstr ""
+
+#. module: delivery_roulier_dpd
+#: model:ir.model,name:delivery_roulier_dpd.model_keychain_account
+msgid "keychain.account"
+msgstr ""

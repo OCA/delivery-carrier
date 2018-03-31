@@ -1,0 +1,126 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * delivery_roulier
+# 
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2018
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0c\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-03-27 03:01+0000\n"
+"PO-Revision-Date: 2018-03-27 03:01+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2018\n"
+"Language-Team: Spanish (Venezuela) (https://www.transifex.com/oca/teams/23907/es_VE/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: es_VE\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: delivery_roulier
+#: code:addons/delivery_roulier/models/stock_quant_package.py:283
+#, python-format
+msgid "Bad input: %s\n"
+msgstr ""
+
+#. module: delivery_roulier
+#: model:ir.model.fields,field_description:delivery_roulier.field_stock_quant_package_carrier_id
+msgid "Carrier"
+msgstr ""
+
+#. module: delivery_roulier
+#: code:addons/delivery_roulier/models/stock_picking.py:51
+#: selection:stock.picking,customs_category:0
+#, python-format
+msgid "Commercial Goods"
+msgstr ""
+
+#. module: delivery_roulier
+#: model:ir.model.fields,field_description:delivery_roulier.field_stock_picking_customs_category
+msgid "Customs category"
+msgstr ""
+
+#. module: delivery_roulier
+#: code:addons/delivery_roulier/models/stock_picking.py:52
+#: selection:stock.picking,customs_category:0
+#, python-format
+msgid "Documents"
+msgstr "Documentos"
+
+#. module: delivery_roulier
+#: code:addons/delivery_roulier/models/stock_picking.py:117
+#, python-format
+msgid "Don't call me directly"
+msgstr ""
+
+#. module: delivery_roulier
+#: code:addons/delivery_roulier/models/stock_picking.py:49
+#: selection:stock.picking,customs_category:0
+#, python-format
+msgid "Gift"
+msgstr ""
+
+#. module: delivery_roulier
+#: code:addons/delivery_roulier/models/stock_picking.py:54
+#: selection:stock.picking,customs_category:0
+#, python-format
+msgid "Goods return"
+msgstr ""
+
+#. module: delivery_roulier
+#: code:addons/delivery_roulier/models/stock_picking.py:128
+#, python-format
+msgid "No package found for this picking"
+msgstr ""
+
+#. module: delivery_roulier
+#: code:addons/delivery_roulier/models/stock_picking.py:259
+#, python-format
+msgid "No packages found for this picking"
+msgstr ""
+
+#. module: delivery_roulier
+#: code:addons/delivery_roulier/models/stock_picking.py:53
+#: selection:stock.picking,customs_category:0
+#, python-format
+msgid "Other"
+msgstr ""
+
+#. module: delivery_roulier
+#: model:ir.model,name:delivery_roulier.model_stock_quant_package
+msgid "Physical Packages"
+msgstr ""
+
+#. module: delivery_roulier
+#: code:addons/delivery_roulier/models/stock_picking.py:50
+#: selection:stock.picking,customs_category:0
+#, python-format
+msgid "Samples"
+msgstr ""
+
+#. module: delivery_roulier
+#: code:addons/delivery_roulier/models/stock_quant_package.py:270
+#, python-format
+msgid ""
+"Sent data:\n"
+"%s\n"
+"\n"
+"Exception raised:\n"
+"%s\n"
+msgstr ""
+
+#. module: delivery_roulier
+#: model:ir.ui.view,arch_db:delivery_roulier.view_quant_package_form
+msgid "Tracking"
+msgstr ""
+
+#. module: delivery_roulier
+#: model:ir.model,name:delivery_roulier.model_stock_picking
+msgid "Transfer"
+msgstr ""
+
+#. module: delivery_roulier
+#: model:ir.model.fields,help:delivery_roulier.field_stock_picking_customs_category
+msgid "Type of sending for the customs"
+msgstr ""
