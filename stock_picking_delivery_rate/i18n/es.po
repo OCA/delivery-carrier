@@ -4,13 +4,14 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2017
+# enjolras <yo@miguelrevilla.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-28 01:44+0000\n"
-"PO-Revision-Date: 2018-02-28 01:44+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"POT-Creation-Date: 2018-03-29 12:19+0000\n"
+"PO-Revision-Date: 2018-03-29 12:19+0000\n"
+"Last-Translator: enjolras <yo@miguelrevilla.com>, 2017\n"
 "Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,7 +22,7 @@ msgstr ""
 #. module: stock_picking_delivery_rate
 #: model:ir.ui.view,arch_db:stock_picking_delivery_rate.stock_picking_rate_purchase_view_form
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #. module: stock_picking_delivery_rate
 #: model:ir.model,name:stock_picking_delivery_rate.model_delivery_carrier
@@ -62,41 +63,41 @@ msgstr "Creado el"
 #. module: stock_picking_delivery_rate
 #: model:ir.ui.view,arch_db:stock_picking_delivery_rate.stock_picking_rate_view_search
 msgid "Currency"
-msgstr ""
+msgstr "Moneda"
 
 #. module: stock_picking_delivery_rate
 #: model:ir.ui.view,arch_db:stock_picking_delivery_rate.stock_picking_rate_view_search
 msgid "Date Generated"
-msgstr ""
+msgstr "Fecha generado"
 
 #. module: stock_picking_delivery_rate
 #: model:ir.ui.view,arch_db:stock_picking_delivery_rate.stock_picking_rate_view_search
 msgid "Date Purchased"
-msgstr ""
+msgstr "Fecha comprado"
 
 #. module: stock_picking_delivery_rate
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_delivery_carrier_rate_date_generated
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_date_generated
 msgid "Date generated"
-msgstr ""
+msgstr "Fecha generado"
 
 #. module: stock_picking_delivery_rate
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_delivery_carrier_rate_is_guaranteed
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_is_guaranteed
 msgid "Date is Guaranteed?"
-msgstr ""
+msgstr "¿Fecha garantizada?"
 
 #. module: stock_picking_delivery_rate
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_delivery_carrier_rate_date_purchased
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_date_purchased
 msgid "Date purchased"
-msgstr ""
+msgstr "Fecha comprado"
 
 #. module: stock_picking_delivery_rate
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_delivery_carrier_rate_delivery_days
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_delivery_days
 msgid "Delivery days"
-msgstr ""
+msgstr "Días de entrega"
 
 #. module: stock_picking_delivery_rate
 #: model:ir.ui.view,arch_db:stock_picking_delivery_rate.stock_picking_rate_view_form
@@ -126,7 +127,7 @@ msgstr ""
 #. module: stock_picking_delivery_rate
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_purchase_group_by
 msgid "Group by"
-msgstr ""
+msgstr "Agrupar por"
 
 #. module: stock_picking_delivery_rate
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_id
@@ -138,7 +139,7 @@ msgstr "ID"
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_delivery_carrier_rate_is_purchased
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_is_purchased
 msgid "Is purchased"
-msgstr ""
+msgstr "Se ha comprado"
 
 #. module: stock_picking_delivery_rate
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate___last_update
@@ -156,7 +157,7 @@ msgstr "Última actualización por"
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_purchase_write_date
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_write_date
 msgid "Last Updated on"
-msgstr "Última actualización en"
+msgstr "Última actualización el"
 
 #. module: stock_picking_delivery_rate
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_delivery_carrier_rate_list_rate_currency_id
@@ -173,23 +174,23 @@ msgstr ""
 #. module: stock_picking_delivery_rate
 #: selection:stock.picking.rate.purchase,group_by:0
 msgid "No Grouping"
-msgstr ""
+msgstr "Sin agrupar"
 
 #. module: stock_picking_delivery_rate
 #: model:ir.ui.view,arch_db:stock_picking_delivery_rate.stock_picking_rate_view_search
 msgid "Picking"
-msgstr ""
+msgstr "Albarán"
 
 #. module: stock_picking_delivery_rate
 #: model:ir.ui.view,arch_db:stock_picking_delivery_rate.stock_picking_rate_purchase_view_form
 #: model:ir.ui.view,arch_db:stock_picking_delivery_rate.stock_picking_view_form
 msgid "Purchase"
-msgstr ""
+msgstr "Compra"
 
 #. module: stock_picking_delivery_rate
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_purchase_date_po
 msgid "Purchase Order Date"
-msgstr ""
+msgstr "Fecha de pedido de compra"
 
 #. module: stock_picking_delivery_rate
 #: model:ir.actions.act_window,name:stock_picking_delivery_rate.stock_picking_rate_purchase_action
@@ -206,13 +207,13 @@ msgstr ""
 #: model:ir.ui.view,arch_db:stock_picking_delivery_rate.stock_picking_rate_view_search
 #: selection:stock.picking.rate,state:0
 msgid "Purchased"
-msgstr ""
+msgstr "Comprado"
 
 #. module: stock_picking_delivery_rate
 #: selection:delivery.carrier.rate,state:0
 #: selection:stock.picking.rate,state:0
 msgid "Quoted"
-msgstr ""
+msgstr "Presupuestado"
 
 #. module: stock_picking_delivery_rate
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_delivery_carrier_rate_rate
@@ -248,7 +249,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_delivery_carrier_rate_state
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_state
 msgid "State"
-msgstr ""
+msgstr "Estado"
 
 #. module: stock_picking_delivery_rate
 #: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_stock_picking_rate_picking_id
@@ -286,7 +287,7 @@ msgstr ""
 #: selection:delivery.carrier.rate,state:0
 #: selection:stock.picking.rate,state:0
 msgid "Voided"
-msgstr ""
+msgstr "Anulado"
 
 #. module: stock_picking_delivery_rate
 #: model:ir.model.fields,help:stock_picking_delivery_rate.field_stock_picking_rate_purchase_group_by
@@ -298,4 +299,4 @@ msgstr ""
 #. module: stock_picking_delivery_rate
 #: model:ir.ui.view,arch_db:stock_picking_delivery_rate.stock_picking_rate_purchase_view_form
 msgid "or"
-msgstr ""
+msgstr "o"
