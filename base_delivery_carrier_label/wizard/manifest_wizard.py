@@ -1,8 +1,8 @@
-# -*- coding: utf-8 -*-
 # Copyright 2015 FactorLibre (http://www.factorlibre.com)
 #        Ismael Calvo <ismael.calvo@factorlibre.com>
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from odoo import models, fields, api, exceptions, _
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
+
+from odoo import _, api, fields, models
 
 
 class ManifestWizard(models.TransientModel):
@@ -10,7 +10,7 @@ class ManifestWizard(models.TransientModel):
     _description = 'Delivery carrier manifest wizard'
 
     @api.model
-    def _get_carrier_type_selection(self):
+    def _selection_carrier_type(self):
         carrier_obj = self.env['delivery.carrier']
         return carrier_obj._get_carrier_type_selection()
 
@@ -21,7 +21,7 @@ class ManifestWizard(models.TransientModel):
         required=True
     )
     carrier_type = fields.Selection(
-        selection='_get_carrier_type_selection',
+        selection='_selection_carrier_type',
         related='carrier_id.carrier_type',
         string='Carrier Type',
         readonly=True,
@@ -39,5 +39,5 @@ class ManifestWizard(models.TransientModel):
 
     @api.one
     def get_manifest_file(self):
-        raise exceptions.Warning(_("Manifest not implemented for '%s' "
-                                   "carrier type.") % self.carrier_type)
+        raise NotImplementedError(_("Manifest not implemented for '%s' "
+                                    "carrier type.") % self.carrier_type)
