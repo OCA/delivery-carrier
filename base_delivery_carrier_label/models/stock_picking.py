@@ -1,7 +1,7 @@
-# -*- coding: utf-8 -*-
 # Copyright 2012-2015 Akretion <http://www.akretion.com>.
 # Copyright 2013-2016 Camptocamp SA
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+
 import base64
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
@@ -9,11 +9,6 @@ from odoo.exceptions import UserError
 
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
-
-    @api.model
-    def _get_carrier_type_selection(self):
-        carrier_obj = self.env['delivery.carrier']
-        return carrier_obj._get_carrier_type_selection()
 
     carrier_id = fields.Many2one(
         comodel_name='delivery.carrier',
@@ -43,8 +38,8 @@ class StockPicking(models.Model):
         :return: (file_binary, file_type)
 
         """
-        raise UserError(_('No label is configured for the '
-                          'selected delivery method.'))
+        raise NotImplementedError(_('No label is configured for the '
+                                    'selected delivery method.'))
 
     @api.multi
     def generate_shipping_labels(self, package_ids=None):
@@ -129,7 +124,7 @@ class StockPicking(models.Model):
         return self.generate_labels()
 
     @api.onchange('carrier_id')
-    def carrier_id_change(self):
+    def onchange_carrier_id(self):
         """ Inherit this method in your module """
         if not self.carrier_id:
             return
@@ -139,8 +134,10 @@ class StockPicking(models.Model):
         # module that depend of delivery base can hide some field
         # depending of the type or the code
         carrier = self.carrier_id
-        self.carrier_type = carrier.carrier_type
-        self.carrier_code = carrier.code
+        self.update({
+            'carrier_type': carrier.carrier_type,
+            'carrier_code': carrier.code,
+        })
         default_options = carrier.default_options()
         self.option_ids = [(6, 0, default_options.ids)]
         result = {
@@ -151,7 +148,7 @@ class StockPicking(models.Model):
         return result
 
     @api.onchange('option_ids')
-    def option_ids_change(self):
+    def onchange_option_ids(self):
         if not self.carrier_id:
             return
         carrier = self.carrier_id
@@ -212,9 +209,8 @@ class StockPicking(models.Model):
         return super(StockPicking, self).write(vals)
 
     @api.model
-    @api.returns('self', lambda value: value.id)
     def create(self, vals):
-        """ Trigger carrier_id_change on create
+        """ Trigger onchange_carrier_id on create
 
         To ensure options are setted on the basis of carrier_id copied from
         Sale order or defined by default.
