@@ -1,7 +1,7 @@
-# -*- coding: utf-8 -*-
 # Copyright 2014-2015 Akretion <http://www.akretion.com>
 # Copyright 2014-2016 Camptocamp SA
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+
 from odoo import api, fields, models
 import odoo.addons.decimal_precision as dp
 
@@ -30,10 +30,10 @@ class StockQuantPackage(models.Model):
                 pack.weight = pack.total_weight
             elif not pack.quant_ids:
                 # package.pack_operations would be too easy
-                operations = self.env['stock.move.line'].search(
-                    [('result_package_id', '=', pack.id),
-                     ('product_id', '!=', False),
-                     ])
+                operations = self.env['stock.move.line'].search([
+                    ('result_package_id', '=', pack.id),
+                    ('product_id', '!=', False),
+                ])
 
                 # we make use get_weight with  @api.muli instead of
                 # sum([op.get_weight for op in operations])
@@ -51,7 +51,7 @@ class StockQuantPackage(models.Model):
 
     @api.multi
     def _complete_name(self, name, args):
-        res = super(StockQuantPackage, self)._complete_name(name, args)
+        res = super()._complete_name(name, args)
         for pack in self:
             if pack.parcel_tracking:
                 res[pack.id] += ' [%s]' % pack.parcel_tracking
