@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from . import delivery_carrier
 from . import delivery_carrier_template_option
 from . import delivery_carrier_option
