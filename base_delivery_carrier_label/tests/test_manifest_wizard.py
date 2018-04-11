@@ -1,9 +1,8 @@
-# -*- coding: utf-8 -*-
 # Copyright 2017 Angel Moya (PESOL)
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo.tests.common import TransactionCase
-from odoo import fields, exceptions
+from odoo import fields
 
 
 class ManifestWizardCase(TransactionCase):
@@ -19,5 +18,5 @@ class ManifestWizardCase(TransactionCase):
             'from_date': fields.Date.today()
         })
         self.assertFalse(wizard.carrier_type)
-        with self.assertRaises(exceptions.Warning):
+        with self.assertRaises(NotImplementedError):
             wizard.get_manifest_file()
