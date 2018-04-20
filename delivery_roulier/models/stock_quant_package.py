@@ -279,7 +279,7 @@ class StockQuantPackage(models.Model):
             article['originCountry'] = product.origin_country_id.code
             article['description'] = hs.description
             article['hs'] = hs.hs_code
-            article['value'] = product.list_price  # unit price is expected
+            article['value'] = operation._roulier_get_unit_price_for_customs()
 
         category = picking.customs_category
         return {
