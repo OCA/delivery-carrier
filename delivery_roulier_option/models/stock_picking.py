@@ -15,7 +15,7 @@ class StockPicking(models.Model):
     display_insurance = fields.Boolean(
         compute='_compute_check_options',
         string="Define a condition to display/hide your custom Insurance"
-               "field with a decated view")
+               "field with a dedicated view")
 
     @implemented_by_carrier
     def _map_options(self):
@@ -35,8 +35,8 @@ class StockPicking(models.Model):
                 rec.display_insurance = True
             else:
                 rec.display_insurance = False
-                _logger.info("   >>> in _compute_check_options() %s" %
-                             rec.display_insurance)
+                _logger.info("Picking %s display_insurance=%s",
+                             rec.name, rec.display_insurance)
 
     @api.model
     def _roulier_map_options(self):
