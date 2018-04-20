@@ -6,8 +6,7 @@
 import logging
 import base64
 
-from odoo import models, api, fields
-from odoo.tools.translate import _
+from odoo import models, api, fields, _
 from odoo.exceptions import UserError
 
 from ..decorator import implemented_by_carrier
@@ -268,6 +267,11 @@ class StockQuantPackage(models.Model):
             product = operation.product_id
             # stands for harmonized_system
             hs = product.product_tmpl_id.get_hs_code_recursively()
+            if not hs:
+                raise UserError(_(
+                    "No H.S. Code on product '%s' nor on it's "
+                    "product category '%s'.")
+                    % (product.display_name, product.categ_id.display_name))
 
             article['quantity'] = '%.f' % operation.product_qty
             article['weight'] = (
