@@ -2,13 +2,11 @@
 # Copyright 2013-2016 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 import Queue
-import threading
 import logging
-
+import openerp
+import threading
 from contextlib import closing, contextmanager
 from itertools import groupby
-
-import openerp
 from openerp import _, api, exceptions, fields, models
 
 from ..pdf_utils import assemble_pdf
@@ -71,19 +69,9 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
     @api.model
     def _do_in_new_env(self):
         with openerp.api.Environment.manage():
-            registry = openerp.modules.registry.RegistryManager.get(
-                self.env.cr.dbname
-            )
-            with closing(registry.cursor()) as cr:
-                try:
-                    new_env = openerp.api.Environment(cr, self.env.uid,
-                                                      self.env.context)
-                    yield new_env
-                except:
-                    cr.rollback()
-                    raise
-                else:
-                    cr.commit()
+            with openerp.registry(self.env.cr.dbname).cursor() as new_cr:
+                yield openerp.api.Environment(new_cr, self.env.uid,
+                                              self.env.context)
 
     def _do_generate_labels(self, group):
         """ Generate a label in a thread safe context
@@ -229,7 +217,17 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
         if not self.batch_ids:
             raise exceptions.UserError(_('No picking batch selected'))
 
-        for batch in self.batch_ids:
+        to_generate = self.batch_ids
+        if not self.generate_new_labels:
+            already_generated_ids = self.env['ir.attachment'].search(
+                [('res_model', '=', 'stock.batch.picking'),
+                 ('res_id', 'in', self.batch_ids.ids)]
+            ).mapped('res_id')
+            to_generate = to_generate.filtered(
+                lambda rec: rec.id not in already_generated_ids
+            )
+
+        for batch in to_generate:
             labels = self._get_all_pdf(batch)
             labels = (label.decode('base64') for label in labels if label)
             filename = batch.name + '.pdf'
