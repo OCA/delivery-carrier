@@ -1,0 +1,1256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns="https://wsbc.post.ch/wsbc/barcode/v2_3/types"
+  targetNamespace="https://wsbc.post.ch/wsbc/barcode/v2_3/types"
+  elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+  <!-- 5.4 Use Case Validiere Kombination (Seite 12) -->
+  <xs:element name="ValidateCombination">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Language" type="Language" />
+        <xs:element name="Envelope">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="LabelDefinition" type="LabelDefinition" />
+              <xs:element name="Data">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Provider">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="Sending">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="Item"
+                                  type="ValidateCombinationItem"
+                                  maxOccurs="unbounded" />
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="ValidateCombinationItem">
+    <xs:sequence>
+      <xs:element name="ItemID" type="ItemIDType" minOccurs="0" />
+      <xs:element name="Attributes" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="PRZL" type="PRZLType"
+              minOccurs="1" maxOccurs="unbounded" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Country" type="CountryType"
+        minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="ValidateCombinationResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Envelope">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="LabelDefinition" type="LabelDefinition" />
+              <xs:element name="Data">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Provider">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="Sending">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="Item"
+                                  type="ResponseItem" maxOccurs="unbounded" />
+                                <xs:element name="Country"
+                                  type="CountryType" minOccurs="0" />
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- 5.5 Use Case Generiere Adressträger (Seite 34) -->
+  <xs:element name="GenerateLabel">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Language" type="Language" />
+        <xs:element name="Envelope">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="LabelDefinition" type="GenerateLabelDefinition" />
+              <xs:element name="FileInfos" type="GenerateLabelFileInfos" />
+              <xs:element name="Data" type="LabelData" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="GenerateLabelDefinition">
+    <xs:complexContent>
+      <xs:extension base="LabelDefinition">
+        <xs:sequence>
+          <xs:element name="PrintAddresses" type="PrintAddressesType" />
+          <xs:element name="ImageFileType" type="ImageFileType" />
+          <xs:element name="ImageResolution" type="xs:int" />
+          <xs:element name="PrintPreview" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:simpleType name="PrintAddressesType">
+    <xs:annotation>
+      <xs:documentation>Enumeration to indicated wheter addresses are
+        printet or not.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None">
+        <xs:annotation>
+          <xs:documentation>No Addresses are printed.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="OnlyRecipient">
+        <xs:annotation>
+          <xs:documentation>Only recipient's address is printed.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="OnlyCustomer">
+        <xs:annotation>
+          <xs:documentation>Only customer's address is printed.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RecipientAndCustomer">
+        <xs:annotation>
+          <xs:documentation>Recipient and customer addresses are
+            printed.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="GenerateLabelFileInfos">
+    <xs:sequence>
+      <xs:element name="FrankingLicense" type="FrankingLicenseType" />
+      <xs:element name="PpFranking" type="xs:boolean"
+        default="false" />
+      <xs:element name="Customer" type="GenerateLabelCustomer" />
+      <xs:element name="CustomerSystem" type="CustomerSystemType"
+        minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="GenerateLabelCustomer">
+    <xs:sequence>
+      <xs:element name="Name1" type="CustomerAddressLineType" />
+      <xs:element name="Name2" minOccurs="0"
+        type="CustomerAddressLineType" />
+      <xs:element name="Street" type="CustomerAddressLineType" />
+      <xs:element name="POBox" type="CustomerAddressLineType"
+        minOccurs="0" />
+      <xs:element name="ZIP">
+        <xs:simpleType>
+          <xs:restriction base="xs:integer">
+            <xs:totalDigits value="6" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="City" type="CustomerAddressLineType" />
+      <xs:element name="Country" type="CountryType"
+        minOccurs="0" />
+      <xs:element name="Logo" type="xs:base64Binary"
+        minOccurs="0" />
+      <xs:element name="LogoFormat" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="CommonPatternStringType">
+            <xs:maxLength value="3" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="LogoRotation" minOccurs="0">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Default value is 270.</xs:documentation>
+          </xs:annotation>
+          <xs:restriction base="xs:int">
+            <xs:enumeration value="0" />
+            <xs:enumeration value="90" />
+            <xs:enumeration value="180" />
+            <xs:enumeration value="270" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="LogoAspectRatio" minOccurs="0" type="LogoAspectRatio" />
+      <xs:element name="LogoHorizontalAlign" minOccurs="0" type="LogoHorizontalAlign" />
+      <xs:element name="LogoVerticalAlign" minOccurs="0" type="LogoVerticalAlign" />
+      <xs:element name="DomicilePostOffice" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="CommonPatternStringType">
+            <xs:maxLength value="35" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="GenerateLabelResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Envelope">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="LabelDefinition"
+                type="GenerateLabelResponseDefinition" />
+              <xs:element name="Data">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Provider">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="Sending">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="SendingID"
+                                  type="SendingIDType" minOccurs="0" />
+                                <xs:element name="Item"
+                                  type="LabelResponseItem" maxOccurs="unbounded" />
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="GenerateLabelResponseDefinition">
+    <xs:complexContent>
+      <xs:extension base="GenerateLabelDefinition">
+        <xs:sequence>
+          <xs:element name="ColorPrintRequired" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="LabelResponseItem">
+    <xs:complexContent>
+      <xs:extension base="ResponseItem">
+        <xs:sequence>
+          <xs:element name="IdentCode" type="IdentCodeType"
+            minOccurs="0" />
+          <xs:element name="Label" type="xs:base64Binary"
+            minOccurs="0" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- WSBC 2.1 FaFo 14.1 Labellayout BC -->
+  <xs:element name="GenerateSingleBarcodes">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Language" type="Language" />
+        <xs:element name="Envelope">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="BarcodeDefinition" type="SingleBarcodesDefinition" />
+              <xs:element name="FileInfos" type="SingleBarcodesFileInfos" />
+              <xs:element name="Data" type="LabelData" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="SingleBarcodesDefinition">
+    <xs:sequence>
+      <xs:element name="ImageFileType" type="ImageFileType" />
+      <xs:element name="ImageResolution" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="SingleBarcodesFileInfos">
+    <xs:sequence>
+      <xs:element name="FrankingLicense" type="FrankingLicenseType" />
+      <xs:element name="PpFranking" type="xs:boolean"
+        default="false" />
+      <xs:element name="Customer" type="SingleBarcodesCustomer" />
+      <xs:element name="CustomerSystem" type="CustomerSystemType"
+        minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="SingleBarcodesCustomer">
+    <xs:sequence>
+      <xs:element name="Name1" type="CustomerAddressLineType" />
+      <xs:element name="Name2" minOccurs="0"
+        type="CustomerAddressLineType" />
+      <xs:element name="Street" type="CustomerAddressLineType" />
+      <xs:element name="POBox" type="CustomerAddressLineType"
+        minOccurs="0" />
+      <xs:element name="ZIP">
+        <xs:simpleType>
+          <xs:restriction base="xs:integer">
+            <xs:totalDigits value="6" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="City" type="CustomerAddressLineType" />
+      <xs:element name="Country" type="CountryType"
+        minOccurs="0" />
+      <xs:element name="DomicilePostOffice" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="CommonPatternStringType">
+            <xs:maxLength value="35" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="GenerateSingleBarcodesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Envelope">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="BarcodeDefinition"
+                type="SingleBarcodesResponseDefinition" />
+              <xs:element name="Data">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Provider">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="Sending">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="SendingID"
+                                  type="SendingIDType" minOccurs="0" />
+                                <xs:element name="Item"
+                                  type="SingleBarcodesResponseItem"
+                                  maxOccurs="unbounded" />
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="SingleBarcodesResponseDefinition">
+    <xs:complexContent>
+      <xs:extension base="SingleBarcodesDefinition">
+        <xs:sequence>
+          <xs:element name="ColorPrintRequired" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="SingleBarcodesResponseItem">
+    <xs:complexContent>
+      <xs:extension base="ResponseItem">
+        <xs:sequence>
+          <xs:element name="IdentCode" type="IdentCodeType"
+            minOccurs="0" />
+          <xs:element name="Barcodes" minOccurs="0">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Barcode" type="xs:base64Binary"
+                  maxOccurs="unbounded" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- Common datatypes for generate label and generate single barcodes -->
+  <xs:simpleType name="CustomerAddressLineType">
+    <xs:restriction base="CommonPatternStringType">
+      <xs:maxLength value="25" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="LabelData">
+    <xs:sequence>
+      <xs:element name="Provider">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Sending">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="SendingID" type="SendingIDType"
+                    minOccurs="0" />
+                  <xs:element name="Item" type="Item"
+                    maxOccurs="unbounded" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="SendingIDType">
+    <xs:restriction base="IDPatternStringType">
+      <xs:maxLength value="50" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="Item">
+    <xs:sequence>
+      <xs:element name="ItemID" type="ItemIDType" minOccurs="0" />
+      <xs:element name="ItemNumber" type="ItemNumberType"
+        minOccurs="0" />
+      <xs:element name="IdentCode" type="IdentCodeType"
+        minOccurs="0" />
+      <xs:element name="Recipient" type="Recipient" />
+      <xs:element name="AdditionalINFOS" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>ehem. REC_Data bei V2.1 und 2.0
+          </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="AdditionalData" type="AdditionalData"
+              maxOccurs="50" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Attributes" type="ServiceCodeAttributes"
+        minOccurs="0" />
+      <xs:element name="Notification" type="Notification"
+        minOccurs="0" maxOccurs="15">
+        <xs:annotation>
+          <xs:documentation>Zusatzinformationen für Dienstleistung
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="ItemNumberType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[0-9]{1,8}" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="Recipient">
+    <xs:sequence>
+      <xs:element name="PostIdent" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="CommonPatternStringType">
+            <xs:maxLength value="15" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="Title" type="RecipientAddressType"
+        minOccurs="0" />
+      <xs:element name="PersonallyAddressed" type="xs:boolean"
+        minOccurs="0" />
+      <xs:element name="Name1" type="RecipientAddressType" />
+      <xs:element name="FirstName" type="RecipientAddressType"
+        minOccurs="0" />
+      <xs:element name="Name2" type="RecipientAddressType"
+        minOccurs="0" />
+      <xs:element name="Name3" type="RecipientAddressType"
+        minOccurs="0" />
+      <xs:element name="AddressSuffix" type="RecipientAddressType"
+        minOccurs="0" />
+      <xs:element name="Street" type="RecipientAddressType"
+        minOccurs="0" />
+      <xs:element name="HouseNo" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="CommonPatternStringType">
+            <xs:maxLength value="10" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="POBox" type="RecipientAddressType"
+        minOccurs="0" />
+      <xs:element name="FloorNo" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="CommonPatternStringType">
+            <xs:maxLength value="5" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="MailboxNo" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:integer">
+            <xs:totalDigits value="10" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="ZIP" minOccurs="1">
+        <xs:simpleType>
+          <xs:restriction base="CommonPatternStringType">
+            <xs:maxLength value="10" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="City" type="RecipientAddressType" />
+      <xs:element name="Country" type="CountryType"
+        minOccurs="0" />
+      <xs:element name="Phone" type="PhoneNumberType"
+        minOccurs="0" />
+      <xs:element name="Mobile" type="PhoneNumberType"
+        minOccurs="0" />
+      <xs:element name="EMail" type="EMailAddressType"
+        minOccurs="0" />
+      <xs:element name="LabelAddress" type="LabelAddress"
+        minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="LabelAddress">
+    <xs:annotation>
+      <xs:documentation>optional, used to declare a specific address on
+        the label. if omitted, the address data of
+        the recipient is taken. Useful if the address data of the recipient
+        exceeds the length of the label. 
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="LabelLine" type="RecipientAddressType" 
+        minOccurs="2" maxOccurs="5" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="RecipientAddressType">
+    <xs:restriction base="CommonPatternStringType">
+      <xs:maxLength value="35" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="AdditionalData">
+    <xs:sequence>
+      <xs:element name="Type">
+        <xs:simpleType>
+          <xs:restriction base="CommonPatternStringType">
+            <xs:maxLength value="35" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="Value">
+        <xs:simpleType>
+          <xs:restriction base="CommonPatternStringType">
+            <xs:maxLength value="50" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ServiceCodeAttributes">
+    <xs:sequence>
+      <xs:element name="PRZL" type="PRZLType" minOccurs="1"
+        maxOccurs="unbounded" />
+      <xs:element name="FreeText" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="CommonPatternStringType">
+            <xs:maxLength value="34" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="DeliveryDate" type="xs:date"
+        minOccurs="0" />
+      <xs:element name="ParcelNo" type="ParcelAmountType"
+        minOccurs="0" />
+      <xs:element name="ParcelTotal" type="ParcelAmountType"
+        minOccurs="0" />
+      <xs:element name="DeliveryPlace" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="CommonPatternStringType">
+            <xs:maxLength value="35" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="ProClima" type="xs:boolean"
+        minOccurs="0" />
+      <xs:element name="Dimensions" type="Dimensions"
+        minOccurs="0" />
+      <xs:element name="UNNumbers" type="UNNumbers"
+        minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="ParcelAmountType">
+    <xs:restriction base="xs:int">
+      <xs:minInclusive value="0" />
+      <xs:maxInclusive value="99" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="Dimensions">
+    <xs:annotation>
+      <xs:documentation>Represents the Dimensions attribute of the
+        DataTransfer.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Weight">
+        <xs:annotation>
+          <xs:documentation>Weight in gramms.</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:integer">
+            <xs:totalDigits value="5" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="UNNumbers">
+    <xs:annotation>
+      <xs:documentation>Represents the UN Numbers for the additional
+        service LQ (limited quantities).
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="UNNumber" minOccurs="0" maxOccurs="unbounded">
+        <xs:simpleType>
+          <xs:restriction base="xs:integer">
+            <xs:totalDigits value="4" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Notification">
+    <xs:all>
+      <xs:element name="Communication" type="Communication" />
+      <xs:element name="Service">
+        <xs:annotation>
+          <xs:documentation>Avisierungs-Code, welcher die Avisierung
+            bezeichnet.</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:integer">
+            <xs:totalDigits value="20" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="FreeText1" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Individueller Text 1 für Avisierung.
+          </xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="CommonPatternStringType">
+            <xs:maxLength value="160" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="FreeText2" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Individueller Text 2 für Avisierung.
+          </xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="CommonPatternStringType">
+            <xs:maxLength value="512" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="Language" type="Language" />
+    </xs:all>
+    <xs:attribute name="Type" type="NotificationType" use="required">
+      <xs:annotation>
+        <xs:documentation>Angabe des Medium</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <xs:simpleType name="NotificationType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="EMAIL" />
+      <xs:enumeration value="SMS" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="Communication">
+    <xs:choice>
+      <xs:element name="Email" type="EMailAddressType" />
+      <xs:element name="Mobile" type="PhoneNumberType" />
+    </xs:choice>
+  </xs:complexType>
+
+  <!-- 5.6 Use Case Lese Dienstleistungsgruppen -->
+  <xs:element name="ReadServiceGroups">
+    <xs:complexType>
+      <xs:choice>
+        <xs:element name="Language" type="Language" />
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="ReadServiceGroupsResponse">
+    <xs:complexType>
+      <xs:choice>
+        <xs:element name="ServiceGroup" type="ServiceGroup"
+          minOccurs="0" maxOccurs="unbounded" />
+        <xs:element name="Errors" type="ErrorsType"
+          minOccurs="0" />
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- FAfo-10.1 FTA Page 65 Lese BL einer FRLZ -->
+  <xs:element name="ReadAllowedServicesByFrankingLicense">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="FrankingLicense" type="FrankingLicenseType"
+          minOccurs="1" />
+        <xs:element name="Language" type="Language" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- FAfo-10.1 FTA Page 65 Lese BL einer FRLZ -->
+  <xs:element name="ReadAllowedServicesByFrankingLicenseResponse">
+    <xs:complexType>
+      <xs:choice>
+        <!-- DLGs -->
+        <xs:element name="ServiceGroups" type="ReadAllowedServicesServiceGroups"
+          minOccurs="0" maxOccurs="unbounded" />
+        <xs:element name="Errors" type="ErrorsType"
+          minOccurs="0" />
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="ReadAllowedServicesServiceGroups">
+    <xs:sequence>
+      <xs:element name="ServiceGroup" type="ServiceGroup" />
+      <xs:element name="BasicService" type="BasicService"
+        maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- 5.7 Use Case Lese Basisleistungen -->
+  <xs:element name="ReadBasicServices">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Language" type="Language" />
+        <xs:element name="ServiceGroupID" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="ReadBasicServicesResponse">
+    <xs:complexType>
+      <xs:choice>
+        <xs:element name="BasicService" type="BasicService"
+          minOccurs="0" maxOccurs="unbounded" />
+        <xs:element name="Errors" type="ErrorsType"
+          minOccurs="0" />
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- 5.8 Use Case Lese Zusatzleistungen -->
+  <xs:element name="ReadAdditionalServices">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Language" type="Language" />
+        <xs:element name="PRZL" type="PRZLType" maxOccurs="unbounded" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="ReadAdditionalServicesResponse">
+    <xs:complexType>
+      <xs:choice>
+        <xs:element name="AdditionalService" type="ServiceCode"
+          minOccurs="0" maxOccurs="unbounded" />
+        <xs:element name="Errors" type="ErrorsType"
+          minOccurs="0" />
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- 5.9 Use Case Lese Zustellanweisungen -->
+  <xs:element name="ReadDeliveryInstructions">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Language" type="Language" />
+        <xs:element name="PRZL" type="PRZLType" maxOccurs="unbounded" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="ReadDeliveryInstructionsResponse">
+    <xs:complexType>
+      <xs:choice>
+        <xs:element name="DeliveryInstructions" type="ServiceCode"
+          minOccurs="0" maxOccurs="unbounded" />
+        <xs:element name="Errors" type="ErrorsType"
+          minOccurs="0" />
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- 5.10 Use Case Lese Darstellungsarten -->
+  <xs:element name="ReadLabelLayouts">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Language" type="Language" />
+        <xs:element name="PRZL" type="PRZLType" maxOccurs="unbounded" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="ReadLabelLayoutsResponse">
+    <xs:complexType>
+      <xs:choice>
+        <xs:element name="LabelLayout" type="LabelLayoutResponse"
+          minOccurs="0" maxOccurs="unbounded" />
+        <xs:element name="Errors" type="ErrorsType"
+          minOccurs="0" />
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="LabelLayoutResponse">
+    <xs:sequence>
+      <xs:element name="LabelLayout" type="LabelLayoutType" />
+      <xs:element name="MaxServices" type="xs:int" />
+      <xs:element name="MaxDeliveryInstructions" type="xs:int" />
+      <xs:element name="FreeTextAllowed" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="GenerateBarcode">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Language" type="Language" />
+        <xs:element name="BarcodeDefinition" type="BarcodeDefinition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="GenerateBarcodeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Data" type="BarcodeResponseData"
+          minOccurs="0" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="BarcodeResponseData">
+    <xs:sequence>
+      <xs:element name="Barcode" type="xs:base64Binary"
+        minOccurs="0" />
+      <xs:element name="DeliveryNoteRef" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Lieferscheinnummer Barcodeliste BMZ (128-er
+            Klartext-Barcode)</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:maxLength value="50" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="BarcodeDefinition" type="BarcodeDefinition" />
+      <xs:element name="ColorPrintRequired" type="xs:boolean" />
+      <xs:element name="Errors" type="ErrorsType" minOccurs="0" />
+      <xs:element name="Warnings" type="WarningsType"
+        minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="BarcodeDefinition">
+    <xs:annotation>
+      <xs:documentation>Represents a BarcodeDefinition for the
+        GenerateBarcode Service.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="BarcodeType" type="BarcodeType" />
+      <xs:element name="ImageFileType" type="ImageFileType" />
+      <xs:element name="ImageResolution" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="BarcodeType">
+    <xs:annotation>
+      <xs:documentation>Enumeration of the different barcode types.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="LSO_1">
+        <xs:annotation>
+          <xs:documentation>LSO-1 barcode for delivery notes online.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="LSO_2">
+        <xs:annotation>
+          <xs:documentation>LSO-2 barcode for delivery notes online.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="LSO_3">
+        <xs:annotation>
+          <xs:documentation>LSO-3 barcode for delivery notes online.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- **************************** Gloabal used datastructures **************************** -->
+  <xs:complexType name="ServiceCode">
+    <xs:annotation>
+      <xs:documentation>Represents a service code.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="PRZL" type="PRZLType" />
+      <xs:element name="Description" type="DescriptionType" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="BasicService">
+    <xs:annotation>
+      <xs:documentation>Represents a Basic Service.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="PRZL" type="PRZLType" minOccurs="0"
+        maxOccurs="unbounded" />
+      <xs:element name="Description" type="DescriptionType" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ServiceGroup">
+    <xs:annotation>
+      <xs:documentation>Represents a Service Group.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="ServiceGroupID" type="xs:int" />
+      <xs:element name="Description" type="DescriptionType" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="DescriptionType">
+    <xs:annotation>
+      <xs:documentation>A common type for descriptions.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string"> <!-- only used as response type -->
+      <xs:maxLength value="255" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="LabelDefinition">
+    <xs:sequence>
+      <xs:element name="LabelLayout" type="LabelLayoutType" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ResponseItem">
+    <xs:sequence>
+      <xs:element name="ItemID" type="ItemIDType" minOccurs="0" />
+      <xs:element name="Errors" type="ErrorsType" minOccurs="0" />
+      <xs:element name="Warnings" type="WarningsType"
+        minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="LogoAspectRatio">
+    <xs:annotation>
+      <xs:documentation>Default value is EXPAND.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="EXPAND" />
+      <xs:enumeration value="KEEP" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="LogoHorizontalAlign">
+    <xs:annotation>
+      <xs:documentation>Default value is WITH_CONTENT.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="WITH_CONTENT" />
+      <xs:enumeration value="LEFT" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="LogoVerticalAlign">
+    <xs:annotation>
+      <xs:documentation>Default value is TOP.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="TOP" />
+      <xs:enumeration value="MIDDLE" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="ErrorsType">
+    <xs:annotation>
+      <xs:documentation>Structure containing a list of occurred business
+        errors.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Error" type="MessageType" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="WarningsType">
+    <xs:annotation>
+      <xs:documentation>Structure containing a list of occurred business
+        warnings.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Warning" type="MessageType"
+        maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="MessageType">
+    <xs:annotation>
+      <xs:documentation>Represents a business error or warning. Does not
+        include technical errors, those are
+        handled by SOAP faults.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Code" type="MessageCodeType" />
+      <xs:element name="Message" type="MessageTextType" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="MessageCodeType">
+    <xs:annotation>
+      <xs:documentation>Five digit error/warning code. Error codes
+        starts with a "E" and warning codes
+        with a "W".
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[W,E]{1}[0-9]{4}" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="MessageTextType">
+    <xs:annotation>
+      <xs:documentation>Descriptive text in user's language for the
+        occurred business warning/error.
+      </xs:documentation>
+    </xs:annotation>
+    <!-- only used as response type -->
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="500" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="Language">
+    <xs:annotation>
+      <xs:documentation>Represents the end-users language. The service
+        returns all localized texts including
+        error-messages in the selected language.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="de">
+        <xs:annotation>
+          <xs:documentation>German</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="fr">
+        <xs:annotation>
+          <xs:documentation>French</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="it">
+        <xs:annotation>
+          <xs:documentation>Italien</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="en">
+        <xs:annotation>
+          <xs:documentation>English</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="ItemIDType">
+    <xs:annotation>
+      <xs:documentation>Unique identifier for a specific item defined by
+        the consumer.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="IDPatternStringType">
+      <xs:maxLength value="200" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="PRZLType">
+    <xs:annotation>
+      <xs:documentation>Identifies a PRZL.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[a-zA-Z,0-9]{1,10}" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="PhoneNumberType">
+    <xs:annotation>
+      <xs:documentation>Defines a valid phone number.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="CommonPatternStringType">
+      <xs:maxLength value="20" />
+      <xs:minLength value="7" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="CountryType">
+    <xs:annotation>
+      <xs:documentation>The ISO country code.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[a-zA-Z]{2}" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="AmountType">
+    <xs:annotation>
+      <xs:documentation>The amount for COD.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:float">
+      <xs:minInclusive value="0.00" />
+      <xs:maxInclusive value="99999.99" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="EMailAddressType">
+    <xs:annotation>
+      <xs:documentation>The email address.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="CommonPatternStringType">
+      <xs:maxLength value="160" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="LabelLayoutType">
+    <xs:annotation>
+      <xs:documentation>Defines valid layouts.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[a-zA-Z,0-9]{2}" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="ImageFileType">
+    <xs:annotation>
+      <xs:documentation>Defines valid formats of images.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[a-zA-Z,0-9]{1,5}" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="FrankingLicenseType">
+    <xs:annotation>
+      <xs:documentation>Defines a franking license.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[a-zA-Z,0-9]{4}" />
+      <xs:pattern value="[a-zA-Z,0-9]{5}" />
+      <xs:pattern value="[0-9]{6}" />
+      <xs:pattern value="[0-9]{8}" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="CustomerSystemType">
+    <xs:restriction base="CommonPatternStringType">
+      <xs:pattern value="[a-zA-Z,0-9,\s]{1,255}" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="IdentCodeType">
+    <xs:annotation>
+      <xs:documentation>IdentCode is only a valid input for
+        Post-internal applications. For Post-external
+        applications the IdentCode must not be set.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="CommonPatternStringType">
+      <xs:pattern value="[0-9]{18}" />
+      <xs:pattern value="[0-9]{23}" />
+      <xs:pattern value="[a-zA-Z,0-9]{13}" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="IDPatternStringType">
+    <xs:annotation>
+      <xs:documentation>Excludes unsupported characters.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="([^&gt;&lt;?&quot;|:\\/*])*" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="CommonPatternStringType">
+    <xs:annotation>
+      <xs:documentation>Excludes unsupported characters.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="([^\*|\\|\{|\}|\[|\]|=|&gt;|&lt;])*" />
+    </xs:restriction>
+  </xs:simpleType>
+
+
+</xs:schema>
