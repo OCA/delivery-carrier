@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2013-2017 Yannick Vaucher (Camptocamp SA)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import logging
@@ -12,23 +11,12 @@ _logger = logging.getLogger(__name__)
 
 
 class PostlogisticsConfigSettings(models.TransientModel):
-    _name = 'postlogistics.config.settings'
+    _name = 'res.config.settings'
     _inherit = ['res.config.settings', 'abstract.config.settings']
 
     # AbstractConfigSettings attribute
     _prefix = 'postlogistics_'
-
     _companyObject = ResCompany
-
-    wsdl_url = fields.Char(
-        related='company_id.postlogistics_wsdl_url',
-        readonly=True,
-    )
-    test_mode = fields.Boolean(
-        related='company_id.postlogistics_test_mode',
-        help="Will generate Specimen labels using test end point of "
-             "webservice."
-    )
 
     tracking_format = fields.Selection(
         related='company_id.postlogistics_tracking_format',
@@ -88,7 +76,7 @@ class PostlogisticsConfigSettings(models.TransientModel):
                  '.partner_postlogistics')
         postlogistics_partner = self.env.ref(xmlid)
 
-        for service_code, data in additional_services.iteritems():
+        for service_code, data in additional_services.items():
             options = CarrierOption.search(
                 [('code', '=', service_code),
                  ('postlogistics_type', '=', 'delivery')
@@ -139,7 +127,7 @@ class PostlogisticsConfigSettings(models.TransientModel):
                  '.partner_postlogistics')
         postlogistics_partner = self.env.ref(xmlid)
 
-        for service_code, data in additional_services.iteritems():
+        for service_code, data in additional_services.items():
             options = CarrierOption.search(
                 [('code', '=', service_code),
                  ('postlogistics_type', '=', 'additional')
@@ -205,24 +193,24 @@ class PostlogisticsConfigSettings(models.TransientModel):
             # Get related services
             allowed_services = self._get_additional_services(web_service,
                                                              service_code)
-            for key, value in additional_services.iteritems():
+            for key, value in additional_services.items():
                 if key in allowed_services:
                     field = 'postlogistics_basic_service_ids'
                     additional_services[key][field][0][2].append(option.id)
                     del allowed_services[key]
-            for key, value in allowed_services.iteritems():
+            for key, value in allowed_services.items():
                 field = 'postlogistics_basic_service_ids'
                 value[field] = [(6, 0, [option.id])]
                 additional_services[key] = value
 
             allowed_services = self._get_delivery_instructions(web_service,
                                                                service_code)
-            for key, value in delivery_instructions.iteritems():
+            for key, value in delivery_instructions.items():
                 if key in allowed_services:
                     field = 'postlogistics_basic_service_ids'
                     delivery_instructions[key][field][0][2].append(option.id)
                     del allowed_services[key]
-            for key, value in allowed_services.iteritems():
+            for key, value in allowed_services.items():
                 field = 'postlogistics_basic_service_ids'
                 value[field] = [(6, 0, [option.id])]
                 delivery_instructions[key] = value
@@ -269,7 +257,7 @@ class PostlogisticsConfigSettings(models.TransientModel):
             res = self._update_basic_services(web_service, group)
 
             allowed_services = res.get('additional_services', {})
-            for key, value in additional_services.iteritems():
+            for key, value in additional_services.items():
                 if key in allowed_services:
                     field = 'postlogistics_basic_service_ids'
                     option_ids = allowed_services[key][field][0][2]
@@ -278,7 +266,7 @@ class PostlogisticsConfigSettings(models.TransientModel):
             additional_services.update(allowed_services)
 
             allowed_services = res.get('delivery_instructions', {})
-            for key, value in delivery_instructions.iteritems():
+            for key, value in delivery_instructions.items():
                 if key in allowed_services:
                     field = 'postlogistics_basic_service_ids'
                     option_ids = allowed_services[key][field][0][2]
@@ -372,6 +360,6 @@ class PostlogisticsConfigSettings(models.TransientModel):
                 for group in groups:
                     relations.setdefault(group, license_obj.browse())
                     relations[group] |= cp_license
-            for group, licenses in relations.iteritems():
+            for group, licenses in relations.items():
                 group.postlogistics_license_ids = licenses
         return True

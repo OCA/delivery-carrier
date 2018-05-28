@@ -1,11 +1,10 @@
-# -*- coding: utf-8 -*-
 # Copyright 2013-2017 Yannick Vaucher (Camptocamp SA)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import re
 import logging
-from urllib2 import HTTPSHandler
+from urllib.request import HTTPSHandler
 from PIL import Image
-from StringIO import StringIO
+from io import StringIO
 import ssl
 
 from odoo import _, exceptions
@@ -55,30 +54,12 @@ class PostlogisticsWebService(object):
         self.default_lang = company.partner_id.lang or 'en'
 
     def init_connection(self, company):
-        if company.postlogistics_test_mode:
-            # We must change location for namespace as suds will take the wrong
-            # one and find nothing
-            # In order to have the test_mode working, it is necessary to patch
-            # suds with https://fedorahosted.org/suds/attachment/ticket/239/suds_recursion.patch # noqa
-            ns = "https://int.wsbc.post.ch/wsbc/barcode/v2_2/types"
-            location = "https://int.wsbc.post.ch/wsbc/barcode/v2_2?xsd=1"
-            imp = Import(ns, location)
-            doctor = ImportDoctor(imp)
-            t = IntegrationTransport(
-                username=company.postlogistics_username,
-                password=company.postlogistics_password)
-            self.client = Client(
-                company.postlogistics_wsdl_url,
-                transport=t,
-                cache=NoCache(),
-                doctor=doctor)
-        else:
-            t = HttpAuthenticated(
-                username=company.postlogistics_username,
-                password=company.postlogistics_password)
-            self.client = Client(
-                company.postlogistics_wsdl_url,
-                transport=t)
+        t = HttpAuthenticated(
+            username=company.postlogistics_username,
+            password=company.postlogistics_password)
+        self.client = Client(
+            company.postlogistics_wsdl_url,
+            transport=t)
 
     def _send_request(self, request, **kwargs):
         """ Wrapper for API requests
@@ -93,10 +74,11 @@ class PostlogisticsWebService(object):
             res['success'] = True
         except WebFault as e:
             res['success'] = False
-            res['errors'] = [e[0]]
+            res['errors'] = [str(e)]
         except Exception as e:
             # if authentication error
-            if isinstance(e[0], tuple) and e[0][0] == 401:
+            if isinstance(e.args[0], tuple) and e.args[0][0] == 401:
+                # TODO Add franking license to check ?
                 raise exceptions.UserError(
                     _('Authorization Required\n\n'
                       'Please verify postlogistics username and password in:\n'
