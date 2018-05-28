@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
 # Copyright 2013-2017 Yannick Vaucher (Camptocamp SA)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from operator import attrgetter
-
+import base64
 from odoo import _, api, exceptions, fields, models
 
 from ..postlogistics.web_service import PostlogisticsWebService
@@ -84,7 +83,7 @@ class StockPicking(models.Model):
 
         def info_from_label(label):
             tracking_number = label['tracking_number']
-            return {'file': label['binary'].decode('base64'),
+            return {'file': base64.b64decode(label['binary']),
                     'file_type': label['file_type'],
                     'name': tracking_number + '.' + label['file_type'],
                     }
@@ -134,7 +133,7 @@ class ShippingLabel(models.Model):
     _inherit = 'shipping.label'
 
     @api.model
-    def _get_file_type_selection(self):
+    def _selection_file_type(self):
         """ Return a concatenated list of extensions of label file format
         plus file format from super
 
@@ -143,7 +142,7 @@ class ShippingLabel(models.Model):
         :return: list of tuple (code, name)
 
         """
-        file_types = super(ShippingLabel, self)._get_file_type_selection()
+        file_types = super(ShippingLabel, self)._selection_file_type()
         new_types = [('eps', 'EPS'),
                      ('gif', 'GIF'),
                      ('jpg', 'JPG'),

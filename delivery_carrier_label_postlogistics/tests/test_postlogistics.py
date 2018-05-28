@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2015-2017 Camptocamp
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import mock
@@ -38,18 +37,20 @@ class TestPostlogistics(common.TransactionCase):
     def setUp(self):
         super(TestPostlogistics, self).setUp()
         Product = self.env['product.product']
-        partner_xmlid = ('delivery_carrier_label_postlogistics'
-                         '.partner_postlogistics')
+        partner_id = self.env.ref(
+            'delivery_carrier_label_postlogistics.partner_postlogistics').id
         self.carrier = self.env['delivery.carrier'].create({
             'name': 'Postlogistics',
             'delivery_type': 'postlogistics',
             'product_id': Product.create({'name': 'Shipping'}).id,
-            'partner_id': self.env.ref(partner_xmlid).id,
         })
         Option = self.env['delivery.carrier.template.option']
-        label_layout = Option.create({'code': 'A6'})
-        output_format = Option.create({'code': 'pdf'})
-        image_resolution = Option.create({'code': '600pp'})
+        label_layout = Option.create(
+            {'code': 'A6', 'partner_id': partner_id})
+        output_format = Option.create(
+            {'code': 'pdf', 'partner_id': partner_id})
+        image_resolution = Option.create(
+            {'code': '600pp', 'partner_id': partner_id})
         self.env.user.company_id.write({
             'postlogistics_default_label_layout': label_layout.id,
             'postlogistics_default_output_format': output_format.id,
@@ -83,7 +84,7 @@ class TestPostlogistics(common.TransactionCase):
             res = self.picking._generate_postlogistics_label(
                 webservice_class=FakeWS
             )
-            expected = [{'file': '',
+            expected = [{'file': b'',
                          'file_type': 'pdf',
                          'name': 'XYZ.pdf',
                          'package_id': False}]
