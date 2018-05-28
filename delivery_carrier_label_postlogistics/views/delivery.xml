@@ -31,11 +31,11 @@
     <field name="inherit_id" ref="base_delivery_carrier_label.delivery_carrier_option_view_form" />
     <field name="arch" type="xml">
       <field name="tmpl_option_id" position="before">
-        <field name="tmpl_option_id_domain" invisible="1" />
+        <field name="allowed_tmpl_options_ids" invisible="1" />
         <field name="carrier_id" invisible="1"/>
       </field>
       <field name="tmpl_option_id" position="attributes">
-        <attribute name="domain">tmpl_option_id_domain</attribute>
+        <attribute name="domain">[('id', 'in', allowed_tmpl_options_ids)]</attribute>
       </field>
     </field>
   </record>
@@ -46,29 +46,26 @@
     <field name="model">delivery.carrier</field>
     <field name="inherit_id" ref="base_delivery_carrier_label.view_delivery_carrier_form" />
     <field name="arch" type="xml">
-      <field name="carrier_type" position="attributes">
-        <attribute name="invisible">1</attribute>
-      </field>
       <field name="delivery_type" position="after">
         <field name="postlogistics_service_group_id" attrs="{'invisible': [('delivery_type', '!=', 'postlogistics')], 'required': [('delivery_type', '=', 'postlogistics')]}"/>
         <field name="postlogistics_license_id" attrs="{'invisible': [('delivery_type', '!=', 'postlogistics')]}"/>
-        <field name="allowed_options_domain" invisible="1" />
+        <field name="allowed_tmpl_options_ids" invisible="1" />
       </field>
       <field name="available_option_ids" position="attributes">
-        <attribute name="context">{'default_carrier_id': active_id, 'default_tmpl_option_id_domain': allowed_options_domain}</attribute>
+        <attribute name="context">{'default_carrier_id': active_id, 'default_allowed_tmpl_options_ids': allowed_tmpl_options_ids}</attribute>
       </field>
     </field>
   </record>
 
-  <record model="ir.ui.view" id="view_quant_package_form">
-    <field name="name">stock.quant.package.form</field>
-    <field name="model">stock.quant.package</field>
-    <field name="inherit_id" ref="stock.view_quant_package_form"/>
-    <field name="arch" type="xml">
-      <field name="parent_id" position="after">
-        <field name="postlogistics_manual_cod_amount"/>
-      </field>
-    </field>
-  </record>
+  <!--<record model="ir.ui.view" id="view_quant_package_form">-->
+    <!--<field name="name">stock.quant.package.form</field>-->
+    <!--<field name="model">stock.quant.package</field>-->
+    <!--<field name="inherit_id" ref="stock.view_quant_package_form"/>-->
+    <!--<field name="arch" type="xml">-->
+      <!--<field name="parent_id" position="after">-->
+        <!--<field name="postlogistics_manual_cod_amount"/>-->
+      <!--</field>-->
+    <!--</field>-->
+  <!--</record>-->
 
 </odoo>

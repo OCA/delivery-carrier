@@ -1,10 +1,7 @@
-# -*- coding: utf-8 -*-
 # Copyright 2013-2017 Yannick Vaucher (Camptocamp SA)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import logging
-import json
-from odoo import api, fields, models
-from odoo.exceptions import UserError
+from odoo import api, fields, models, _
 
 
 _logger = logging.getLogger(__name__)
@@ -110,18 +107,21 @@ class DeliveryCarrierOption(models.Model):
 
     name = fields.Char(translate=True)
 
-    tmpl_option_id_domain = fields.Char(
-        compute='_compute_tmpl_option_id_domain'
+    allowed_tmpl_options_ids = fields.Many2many(
+        'delivery.carrier.template.option',
+        compute='_compute_allowed_tmpl_options_ids',
+        store=False,
     )
 
-    @api.depends('carrier_id.allowed_options_domain')
-    def _compute_tmpl_option_id_domain(self):
-        """ Gets the domain from related delivery.carrier
-            (be it from cache or context) """
+    @api.depends('carrier_id.allowed_tmpl_options_ids')
+    def _compute_allowed_tmpl_options_ids(self):
+        """ Gets the available template options from related delivery.carrier
+            (be it from cache or context)."""
         for option in self:
-            domain = self.env.context.get('default_tmpl_option_id_domain')
-            option.tmpl_option_id_domain = (
-                option.carrier_id.allowed_options_domain or domain or '[]')
+            defaults = self.env.context.get('default_allowed_tmpl_options_ids')
+            option.allowed_tmpl_options_ids = (
+                option.carrier_id.allowed_tmpl_options_ids or defaults or False
+            )
 
 
 class DeliveryCarrier(models.Model):
@@ -130,6 +130,11 @@ class DeliveryCarrier(models.Model):
 
     delivery_type = fields.Selection(selection_add=[('postlogistics',
                                                      'Post logistics')])
+    allowed_tmpl_options_ids = fields.Many2many(
+        'delivery.carrier.template.option',
+        compute='_compute_allowed_options_ids',
+        store=False,
+    )
 
     @api.depends('delivery_type',
                  'available_option_ids',
@@ -157,12 +162,11 @@ class DeliveryCarrier(models.Model):
                  'available_option_ids',
                  'available_option_ids.postlogistics_type',
                  )
-    def _compute_allowed_options_domain(self):
-        """ Return a domain of possible options
+    def _compute_allowed_options_ids(self):
+        """ Compute allowed delivery.carrier.option.
 
         We do this to ensure the user first select a basic service. And
         then he adds additional services.
-
         """
         option_template_obj = self.env['delivery.carrier.template.option']
 
@@ -211,7 +215,8 @@ class DeliveryCarrier(models.Model):
                 domain.append(('partner_id', '=', partner.id)),
                 domain.append(('id', 'in', allowed.ids))
 
-            carrier.allowed_options_domain = json.dumps(domain)
+            carrier.allowed_tmpl_options_ids = option_template_obj.search(
+                domain)
 
     postlogistics_license_id = fields.Many2one(
         comodel_name='postlogistics.license',
@@ -231,32 +236,37 @@ class DeliveryCarrier(models.Model):
              "additional options for this delivery method",
     )
 
-    allowed_options_domain = fields.Char(
-        compute="_compute_allowed_options_domain",
-        store=False,
-    )
-
     @api.multi
-    def postlogistics_get_shipping_price_from_so(self, order):
+    def postlogistics_rate_shipment(self, order):
         self.ensure_one()
-        try:
-            computed_price = self.get_price_available(order)
-            self.available = True
-        except UserError as e:
-            # No suitable delivery method found, probably configuration error
-            _logger.info("Carrier %s: %s", self.name, e.name)
-            computed_price = 0.0
-
-        return [computed_price * (1.0 + (float(self.margin) / 100.0))]
+        delivery_product_price = self.product_id and self.product_id.lst_price
+        if delivery_product_price:
+            return {
+                'success': True,
+                'price': delivery_product_price,
+                'error_message': False,
+                'warning_message': False
+            }
+        else:
+            return {
+                'success': False,
+                'price': 0.0,
+                'error_message': False,
+                'warning_message': _(
+                    'No sales price is defined on delivery product % ' %
+                    self.product_id)
+            }
 
     @api.multi
     def postlogistics_send_shipping(self, pickings):
         return [{'exact_price': False, 'tracking_number': False}]
 
     @api.multi
-    def postlogistics_get_tracking_link(self, pickings):
-        return False
+    def postlogistics_get_tracking_link(self, picking):
+        return "https://service.post.ch/EasyTrack/" \
+               "submitParcelData.do?formattedParcelCodes=%s" % \
+               picking.carrier_tracking_ref
 
     @api.multi
     def postlogistics_cancel_shipment(self, pickings):
-        return False
+        raise NotImplementedError()

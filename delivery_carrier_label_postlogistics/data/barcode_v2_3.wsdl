@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="Barcode"
+  targetNamespace="https://wsbc.post.ch/wsbc/barcode/v2_3"
+  xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="https://wsbc.post.ch/wsbc/barcode/v2_3"
+  xmlns:barcode="https://wsbc.post.ch/wsbc/barcode/v2_3/types"
+  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <types>
+    <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:import
+        namespace="https://wsbc.post.ch/wsbc/barcode/v2_3/types"
+        schemaLocation="barcode_v2_3.xsd" />
+    </xsd:schema>
+  </types>
+
+  <message name="ValidateCombination">
+    <part name="body" element="barcode:ValidateCombination" />
+  </message>
+  <message name="ValidateCombinationResponse">
+    <part name="body" element="barcode:ValidateCombinationResponse" />
+  </message>
+
+  <message name="GenerateLabel">
+    <part name="body" element="barcode:GenerateLabel" />
+  </message>
+  <message name="GenerateLabelResponse">
+    <part name="body" element="barcode:GenerateLabelResponse" />
+  </message>
+
+  <message name="GenerateSingleBarcodes">
+    <part name="body" element="barcode:GenerateSingleBarcodes" />
+  </message>
+  <message name="GenerateSingleBarcodesResponse">
+    <part name="body" element="barcode:GenerateSingleBarcodesResponse" />
+  </message>
+
+  <message name="ReadServiceGroups">
+    <part name="body" element="barcode:ReadServiceGroups" />
+  </message>
+  <message name="ReadServiceGroupsResponse">
+    <part name="body" element="barcode:ReadServiceGroupsResponse" />
+  </message>
+
+  <message name="ReadBasicServices">
+    <part name="body" element="barcode:ReadBasicServices" />
+  </message>
+  <message name="ReadBasicServicesResponse">
+    <part name="body" element="barcode:ReadBasicServicesResponse" />
+  </message>
+
+  <message name="ReadAllowedServicesByFrankingLicense">
+    <part name="body" element="barcode:ReadAllowedServicesByFrankingLicense" />
+  </message>
+  <message name="ReadAllowedServicesByFrankingLicenseResponse">
+    <part name="body"
+      element="barcode:ReadAllowedServicesByFrankingLicenseResponse" />
+  </message>
+
+  <message name="ReadAdditionalServices">
+    <part name="body" element="barcode:ReadAdditionalServices" />
+  </message>
+  <message name="ReadAdditionalServicesResponse">
+    <part name="body" element="barcode:ReadAdditionalServicesResponse" />
+  </message>
+
+  <message name="ReadDeliveryInstructions">
+    <part name="body" element="barcode:ReadDeliveryInstructions" />
+  </message>
+  <message name="ReadDeliveryInstructionsResponse">
+    <part name="body" element="barcode:ReadDeliveryInstructionsResponse" />
+  </message>
+
+  <message name="ReadLabelLayouts">
+    <part name="body" element="barcode:ReadLabelLayouts" />
+  </message>
+  <message name="ReadLabelLayoutsResponse">
+    <part name="body" element="barcode:ReadLabelLayoutsResponse" />
+  </message>
+
+  <message name="GenerateBarcode">
+    <part name="body" element="barcode:GenerateBarcode" />
+  </message>
+  <message name="GenerateBarcodeResponse">
+    <part name="body" element="barcode:GenerateBarcodeResponse" />
+  </message>
+
+  <portType name="BarcodePortType">
+
+    <operation name="ValidateCombination">
+      <input message="tns:ValidateCombination" />
+      <output message="tns:ValidateCombinationResponse" />
+    </operation>
+
+    <operation name="GenerateLabel">
+      <input message="tns:GenerateLabel" />
+      <output message="tns:GenerateLabelResponse" />
+    </operation>
+
+    <operation name="GenerateSingleBarcodes">
+      <input message="tns:GenerateSingleBarcodes" />
+      <output message="tns:GenerateSingleBarcodesResponse" />
+    </operation>
+
+    <operation name="ReadServiceGroups">
+      <input message="tns:ReadServiceGroups" />
+      <output message="tns:ReadServiceGroupsResponse" />
+    </operation>
+
+    <operation name="ReadBasicServices">
+      <input message="tns:ReadBasicServices" />
+      <output message="tns:ReadBasicServicesResponse" />
+    </operation>
+
+    <operation name="ReadAllowedServicesByFrankingLicense">
+      <input message="tns:ReadAllowedServicesByFrankingLicense" />
+      <output message="tns:ReadAllowedServicesByFrankingLicenseResponse" />
+    </operation>
+
+    <operation name="ReadAdditionalServices">
+      <input message="tns:ReadAdditionalServices" />
+      <output message="tns:ReadAdditionalServicesResponse" />
+    </operation>
+
+    <operation name="ReadDeliveryInstructions">
+      <input message="tns:ReadDeliveryInstructions" />
+      <output message="tns:ReadDeliveryInstructionsResponse" />
+    </operation>
+
+    <operation name="ReadLabelLayouts">
+      <input message="tns:ReadLabelLayouts" />
+      <output message="tns:ReadLabelLayoutsResponse" />
+    </operation>
+
+    <operation name="GenerateBarcode">
+      <input message="tns:GenerateBarcode" />
+      <output message="tns:GenerateBarcodeResponse" />
+    </operation>
+
+  </portType>
+  <binding name="BarcodeSoapBinding" type="tns:BarcodePortType">
+    <soap:binding style="document"
+      transport="http://schemas.xmlsoap.org/soap/http" />
+
+    <operation name="ValidateCombination">
+      <soap:operation soapAction="ValidateCombination" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+
+    <operation name="GenerateLabel">
+      <soap:operation soapAction="GenerateLabel" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+
+    <operation name="GenerateSingleBarcodes">
+      <soap:operation soapAction="GenerateSingleBarcodes" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+
+    <operation name="ReadServiceGroups">
+      <soap:operation soapAction="ReadServiceGroups" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+
+    <operation name="ReadBasicServices">
+      <soap:operation soapAction="ReadBasicServices" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+
+    <operation name="ReadAllowedServicesByFrankingLicense">
+      <soap:operation soapAction="ReadAllowedServicesByFrankingLicense" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+
+    <operation name="ReadAdditionalServices">
+      <soap:operation soapAction="ReadAdditionalServices" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+
+    <operation name="ReadDeliveryInstructions">
+      <soap:operation soapAction="ReadDeliveryInstructions" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+
+    <operation name="ReadLabelLayouts">
+      <soap:operation soapAction="ReadLabelLayouts" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+
+    <operation name="GenerateBarcode">
+      <soap:operation soapAction="GenerateBarcode" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+
+  </binding>
+  <service name="BarcodeService">
+    <port name="BarcodePort" binding="tns:BarcodeSoapBinding">
+      <soap:address location="https://wsbc.post.ch/wsbc/barcode/v2_3" />
+    </port>
+  </service>
+</definitions>
