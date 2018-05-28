@@ -1,18 +1,14 @@
-# -*- coding: utf-8 -*-
 # Copyright 2013-2017 Yannick Vaucher (Camptocamp SA)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from odoo import api, fields, models
-from odoo.tools import file_open
-from odoo.modules.module import get_resource_path
+from odoo import fields, models
+from odoo.modules.module import get_module_resource
 
 
 class ResCompany(models.Model):
     _inherit = 'res.company'
 
     postlogistics_wsdl_url = fields.Char(compute='_compute_wsdl_url',
-                                         string='WSDL URL',
-                                         store=True)
-    postlogistics_test_mode = fields.Boolean()
+                                         string='WSDL URL',)
     postlogistics_username = fields.Char('Username')
     postlogistics_password = fields.Char('Password')
     postlogistics_license_ids = fields.One2many(
@@ -62,21 +58,9 @@ class ResCompany(models.Model):
     )
     postlogistics_proclima_logo = fields.Boolean('Print ProClima logo')
 
-    @api.depends('postlogistics_test_mode')
     def _compute_wsdl_url(self):
-        path = get_resource_path('delivery_carrier_label_postlogistics',
-                                 'data')
-        filename = 'barcode_v2_2_wsbc.wsdl'
-        wsdl_file, wsdl_path = file_open(
-            path + '/production/' + filename,
-            pathinfo=True)
+        wsdl_path = get_module_resource(
+            'delivery_carrier_label_postlogistics', 'data/barcode_v2_3.wsdl')
         wsdl_url = 'file://' + wsdl_path
-        wsdl_file, wsdl_path_int = file_open(
-            path + '/integration/' + filename,
-            pathinfo=True)
-        wsdl_int_url = 'file://' + wsdl_path_int
         for cp in self:
-            if cp.postlogistics_test_mode:
-                cp.postlogistics_wsdl_url = wsdl_int_url
-            else:
-                cp.postlogistics_wsdl_url = wsdl_url
+            cp.postlogistics_wsdl_url = wsdl_url
