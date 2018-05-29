@@ -17,6 +17,5 @@ class ManifestWizardCase(TransactionCase):
             'carrier_id': self.free_delivery.id,
             'from_date': fields.Date.today()
         })
-        self.assertFalse(wizard.carrier_type)
         with self.assertRaises(NotImplementedError):
             wizard.get_manifest_file()
