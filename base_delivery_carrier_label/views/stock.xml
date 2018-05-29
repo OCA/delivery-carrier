@@ -12,7 +12,6 @@
           string="Create Shipping Label" type="object"/>
       </field>
       <xpath expr="//page//field[@name='carrier_id']" position="after">
-        <field name="carrier_type"/>
         <field name="carrier_code"/>
       </xpath>
       <xpath expr="//page//group[@name='carrier_data']/.." position="after">
