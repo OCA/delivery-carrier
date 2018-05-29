@@ -15,9 +15,9 @@ class StockPicking(models.Model):
         string='Carrier',
         states={'done': [('readonly', True)]},
     )
-    carrier_type = fields.Selection(
-        related='carrier_id.carrier_type',
-        string='Carrier Type',
+    delivery_type = fields.Selection(
+        related='carrier_id.delivery_type',
+        string='Delivery Type',
         readonly=True,
     )
     carrier_code = fields.Char(
@@ -135,7 +135,7 @@ class StockPicking(models.Model):
         # depending of the type or the code
         carrier = self.carrier_id
         self.update({
-            'carrier_type': carrier.carrier_type,
+            'delivery_type': carrier.delivery_type,
             'carrier_code': carrier.code,
         })
         default_options = carrier.default_options()

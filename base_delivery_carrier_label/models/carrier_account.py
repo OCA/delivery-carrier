@@ -10,11 +10,6 @@ class CarrierAccount(models.Model):
     _description = 'Base account datas'
 
     @api.model
-    def _selection_carrier_type(self):
-        """ To inherit to add carrier type like Chronopost, Postlogistics..."""
-        return []
-
-    @api.model
     def _selection_file_format(self):
         """ To inherit to add label file types"""
         return [('PDF', 'PDF'),
@@ -28,11 +23,4 @@ class CarrierAccount(models.Model):
         selection='_selection_file_format',
         string='File Format',
         help="Default format of the carrier's label you want to print"
-    )
-    carrier_type = fields.Selection(
-        selection='_selection_carrier_type',
-        oldname='type',
-        required=True,
-        help="In case of several carriers, help to know which "
-             "account belong to which carrier",
     )
