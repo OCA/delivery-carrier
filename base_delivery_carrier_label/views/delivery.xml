@@ -70,7 +70,6 @@
 
       <xpath expr="//h1" position="after">
         <group>
-          <field name="carrier_type"/>
           <field name="code"/>
         </group>
       </xpath>
@@ -93,7 +92,6 @@
     <field name="inherit_id" ref="delivery.view_delivery_carrier_tree"/>
     <field name="arch" type="xml">
       <field name="name" position="after">
-        <field name="carrier_type"/>
         <field name="code"/>
       </field>
     </field>

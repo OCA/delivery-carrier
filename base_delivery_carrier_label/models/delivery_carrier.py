@@ -8,17 +8,6 @@ from odoo import api, fields, models
 class DeliveryCarrier(models.Model):
     _inherit = 'delivery.carrier'
 
-    @api.model
-    def _selection_carrier_type(self):
-        """ To inherit to add carrier type """
-        return []
-
-    carrier_type = fields.Selection(
-        selection='_selection_carrier_type',
-        string='Type',
-        help="Carrier type (combines several delivery methods)",
-        oldname='type',
-    )
     code = fields.Char(
         help="Delivery Method Code (according to carrier)",
     )
