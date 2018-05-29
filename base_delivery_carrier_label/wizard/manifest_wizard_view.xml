@@ -9,7 +9,6 @@
                 <field name="state" invisible="1"/>
                 <group attrs="{'invisible': [('state', '!=', 'init')]}">
                     <field name="carrier_id"/>
-                    <field name="carrier_type"/>
                     <field name="from_date"/>
                     <field name="to_date"/>
                 </group>
