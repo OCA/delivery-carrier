@@ -27,5 +27,6 @@
  'application': True,
  'external_dependencies': {
      'python': ['suds'],
- }
+ },
+ 'post_load': 'patch_suds',
  }

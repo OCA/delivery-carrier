@@ -1,12 +1,11 @@
 # Copyright 2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-
 from logging import getLogger
 
 from odoo.exceptions import UserError
 from odoo import _
 
-_logger = logging.getLogger(__name__)
+_logger = getLogger(__name__)
 
 try:
     from suds.xsd.schema import Schema
