@@ -1,0 +1,117 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* delivery_dropoff_site
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-06-13 11:03+0000\n"
+"PO-Revision-Date: 2018-06-13 11:03+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site_calendar_id
+#: model:ir.ui.view,arch_db:delivery_dropoff_site.view_partner_dropoff_site_form
+msgid "Calendar"
+msgstr "Calendrier"
+
+#. module: delivery_dropoff_site
+#: model:ir.model,name:delivery_dropoff_site.model_delivery_carrier
+msgid "Carrier"
+msgstr "Transporteur"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site_dropoff_site_carrier_id
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_res_partner_dropoff_site_carrier_id
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_res_users_dropoff_site_carrier_id
+msgid "Carrier of the Drop-off Site"
+msgstr "Méthode de livraison du site de dépôt"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site_code
+msgid "Code"
+msgstr "Code"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site_carrier_id
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site_property_delivery_carrier_id
+#: model:ir.ui.view,arch_db:delivery_dropoff_site.view_partner_dropoff_site_search
+msgid "Delivery Method"
+msgstr "Méthode de livraison"
+
+#. module: delivery_dropoff_site
+#: model:delivery.carrier,name:delivery_dropoff_site.delivery_carrier
+#: model:product.product,name:delivery_dropoff_site.delivery_carrier_product_product
+#: model:product.template,name:delivery_dropoff_site.delivery_carrier_product_template
+msgid "Delivery With Drop-off Sites"
+msgstr "Livraison avec sites de dépôt"
+
+#. module: delivery_dropoff_site
+#: model:ir.ui.view,arch_db:delivery_dropoff_site.view_partner_dropoff_site_form
+msgid "Disable Calendar"
+msgstr "Désactiver le calendrier"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site_dropoff_site_id
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_res_partner_dropoff_site_id
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_res_users_dropoff_site_id
+#: model:ir.module.category,name:delivery_dropoff_site.module_category_dropoff_site
+msgid "Drop-off Site"
+msgstr "Site de dépôt"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_sale_order_dropoff_site_required
+msgid "Drop-off Site Required"
+msgstr "Site de dépôt obligatoire"
+
+#. module: delivery_dropoff_site
+#: model:ir.actions.act_window,name:delivery_dropoff_site.action_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_delivery_carrier_dropoff_site_ids
+#: model:ir.ui.menu,name:delivery_dropoff_site.menu_dropoff_site_sale
+#: model:ir.ui.menu,name:delivery_dropoff_site.menu_dropoff_site_stock
+#: model:ir.ui.view,arch_db:delivery_dropoff_site.view_delivery_carrier_form
+msgid "Drop-off Sites"
+msgstr "Sites de dépôt"
+
+#. module: delivery_dropoff_site
+#: sql_constraint:res.partner:0
+msgid "Dropoff Site with the same id already exists : must be unique"
+msgstr "Un site de dépôt avec le même identifiant existe déjà : Il doit être unique"
+
+#. module: delivery_dropoff_site
+#: model:ir.ui.view,arch_db:delivery_dropoff_site.view_partner_dropoff_site_form
+msgid "Enable Calendar"
+msgstr "Activer le calendrier"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_procurement_group_final_shipping_partner_id
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_sale_order_final_shipping_partner_id
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_stock_picking_final_shipping_partner_id
+#: model:ir.ui.view,arch_db:delivery_dropoff_site.view_stock_picking_search
+msgid "Final Recipient"
+msgstr "Destinataire final"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site_is_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_res_partner_is_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_res_users_is_dropoff_site
+msgid "Is Drop-off Site"
+msgstr "Est un site de dépôt"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,help:delivery_dropoff_site.field_procurement_group_final_shipping_partner_id
+#: model:ir.model.fields,help:delivery_dropoff_site.field_sale_order_final_shipping_partner_id
+#: model:ir.model.fields,help:delivery_dropoff_site.field_stock_picking_final_shipping_partner_id
+msgid "It is the partner that will pick up the parcel in the dropoff site."
+msgstr "C'est le partenaire qui récupérera le colis dans le site de dépôt"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_delivery_carrier_with_dropoff_site
+msgid "With Drop-off Sites"
+msgstr "Avec des sites de dépôt"
