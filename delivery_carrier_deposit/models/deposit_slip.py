@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# coding: utf-8
 #   @author: David BEAL <david.beal@akretion.com>
 #   @author: Sebastien BEAU <sebastien.beau@akretion.com>
 #   @author: Benoit GUILLOT <benoit.guillot@akretion.com>
