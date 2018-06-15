@@ -2,9 +2,9 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-=====================
+====================
 Delivery Carrier B2C
-=====================
+====================
 
 * This module adds specific fields to partner for delivery purposes. Some carrier services offer to deliver packages to any place in a country (e.g. 'So Colissimo' in France). In this case addition fields are required with a more complete view on partner
 
@@ -30,7 +30,6 @@ Contributors
 * Chafique DELLI <chafique.delli@akretion.com>
 * David BEAL <david.beal@akretion.com>
 * Monsieur B <monsieurb@saaslys.com>
-----
 
 
 Maintainer
