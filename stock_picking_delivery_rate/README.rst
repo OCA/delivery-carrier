@@ -39,9 +39,9 @@ Bug Tracker
 ===========
 
 Bugs are tracked on `GitHub Issues
-`<https://github.com/OCA/delivery-carrier/issues>`_. In case of trouble, please
+<https://github.com/OCA/carrier-delivery/issues>`_. In case of trouble, please
 check there if your issue has already been reported. If you spotted it first,
-help us smash it by providing detailed and welcomed feedback.
+help us smashing it by providing a detailed and welcomed feedback.
 
 Credits
 =======
