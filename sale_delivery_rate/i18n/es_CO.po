@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * sale_delivery_rate
-# 
+#
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2017
 msgid ""
@@ -11,11 +11,12 @@ msgstr ""
 "POT-Creation-Date: 2017-05-14 00:42+0000\n"
 "PO-Revision-Date: 2017-05-14 00:42+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
-"Language-Team: Spanish (Colombia) (https://www.transifex.com/oca/teams/23907/es_CO/)\n"
+"Language-Team: Spanish (Colombia) (https://www.transifex.com/oca/teams/23907/"
+"es_CO/)\n"
+"Language: es_CO\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: es_CO\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: sale_delivery_rate
@@ -29,16 +30,6 @@ msgid "Carrier"
 msgstr ""
 
 #. module: sale_delivery_rate
-#: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_partner_id
-msgid "Carrier Partner"
-msgstr ""
-
-#. module: sale_delivery_rate
-#: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_service_id
-msgid "Carrier Service"
-msgstr ""
-
-#. module: sale_delivery_rate
 #: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_create_uid
 msgid "Created by"
 msgstr "Creado por"
@@ -47,21 +38,6 @@ msgstr "Creado por"
 #: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_create_date
 msgid "Created on"
 msgstr "Creado"
-
-#. module: sale_delivery_rate
-#: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_date_generated
-msgid "Date Generated"
-msgstr ""
-
-#. module: sale_delivery_rate
-#: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_date_purchased
-msgid "Date Purchased"
-msgstr ""
-
-#. module: sale_delivery_rate
-#: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_is_guaranteed
-msgid "Date is Guaranteed?"
-msgstr ""
 
 #. module: sale_delivery_rate
 #: model:ir.model,name:sale_delivery_rate.model_delivery_carrier_rate
@@ -74,19 +50,16 @@ msgid "Delivery Carrier Rates"
 msgstr ""
 
 #. module: sale_delivery_rate
-#: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_delivery_days
-msgid "Delivery days"
-msgstr ""
-
-#. module: sale_delivery_rate
 #: model:delivery.carrier,name:sale_delivery_rate.demo_carrier_1
 #: model:product.product,name:sale_delivery_rate.demo_carrier_1_product_product
+#: model:product.template,name:sale_delivery_rate.demo_carrier_1_product_template
 msgid "Demo Carrier 1"
 msgstr ""
 
 #. module: sale_delivery_rate
 #: model:delivery.carrier,name:sale_delivery_rate.demo_carrier_2
 #: model:product.product,name:sale_delivery_rate.demo_carrier_2_product_product
+#: model:product.template,name:sale_delivery_rate.demo_carrier_2_product_template
 msgid "Demo Carrier 2"
 msgstr ""
 
@@ -103,19 +76,9 @@ msgid "Display Name"
 msgstr "Nombre Público"
 
 #. module: sale_delivery_rate
-#: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_date_delivery
-msgid "Est. Delivery Date"
-msgstr ""
-
-#. module: sale_delivery_rate
 #: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_id
 msgid "ID"
 msgstr "ID"
-
-#. module: sale_delivery_rate
-#: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_is_purchased
-msgid "Is purchased"
-msgstr ""
 
 #. module: sale_delivery_rate
 #: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate___last_update
@@ -133,46 +96,6 @@ msgid "Last Updated on"
 msgstr "Actualizado"
 
 #. module: sale_delivery_rate
-#: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_list_rate_currency_id
-msgid "List Rate Currency"
-msgstr ""
-
-#. module: sale_delivery_rate
-#: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_list_rate
-msgid "List rate"
-msgstr ""
-
-#. module: sale_delivery_rate
-#: selection:delivery.carrier.rate,state:0
-msgid "Purchased"
-msgstr ""
-
-#. module: sale_delivery_rate
-#: selection:delivery.carrier.rate,state:0
-msgid "Quoted"
-msgstr ""
-
-#. module: sale_delivery_rate
-#: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_rate
-msgid "Rate"
-msgstr ""
-
-#. module: sale_delivery_rate
-#: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_rate_currency_id
-msgid "Rate Currency"
-msgstr ""
-
-#. module: sale_delivery_rate
-#: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_retail_rate
-msgid "Retail Rate"
-msgstr ""
-
-#. module: sale_delivery_rate
-#: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_retail_rate_currency_id
-msgid "Retail Rate Currency"
-msgstr ""
-
-#. module: sale_delivery_rate
 #: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_sale_order_id
 msgid "Sale Order"
 msgstr ""
@@ -183,11 +106,6 @@ msgid "Sales Order"
 msgstr ""
 
 #. module: sale_delivery_rate
-#: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_state
-msgid "State"
-msgstr ""
-
-#. module: sale_delivery_rate
 #: model:ir.model,name:sale_delivery_rate.model_stock_move
 msgid "Stock Move"
 msgstr ""
@@ -195,14 +113,4 @@ msgstr ""
 #. module: sale_delivery_rate
 #: model:ir.model.fields,field_description:sale_delivery_rate.field_delivery_carrier_rate_picking_id
 msgid "Stock Picking"
-msgstr ""
-
-#. module: sale_delivery_rate
-#: model:ir.model.fields,help:sale_delivery_rate.field_delivery_carrier_rate_partner_id
-msgid "The partner that is doing the delivery service."
-msgstr ""
-
-#. module: sale_delivery_rate
-#: selection:delivery.carrier.rate,state:0
-msgid "Voided"
 msgstr ""
