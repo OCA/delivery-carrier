@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * base_delivery_carrier_label
-# 
+#
 # Translators:
 # Hotellook, 2014
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
@@ -13,12 +13,14 @@ msgstr ""
 "POT-Creation-Date: 2016-11-22 09:11+0000\n"
 "PO-Revision-Date: 2016-11-28 06:20+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
-"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-delivery-carrier-8-0/language/sl/)\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-delivery-"
+"carrier-8-0/language/sl/)\n"
+"Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: sl\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
+"%100==4 ? 2 : 3);\n"
 
 #. module: base_delivery_carrier_label
 #: field:carrier.account,account:0
@@ -66,7 +68,10 @@ msgstr "Binarna datoteka ali URL"
 msgid ""
 "By check, user can choose to apply this option to each Delivery Order\n"
 " using this delivery method"
-msgstr "Če je označeno, lahko uporabnik izbere uveljavitev te opcije za vsak dostavni nalog\n preko te dostavne metode"
+msgstr ""
+"Če je označeno, lahko uporabnik izbere uveljavitev te opcije za vsak "
+"dostavni nalog\n"
+" preko te dostavne metode"
 
 #. module: base_delivery_carrier_label
 #: field:delivery.carrier.option,carrier_id:0
@@ -215,7 +220,9 @@ msgstr "Če je označeno, se ta opcija obvezno uveljavlja na dostavni nalog"
 msgid ""
 "In case of several carriers, help to know which account belong to which "
 "carrier"
-msgstr "V primeru več prevoznikov pomaga ugotoviti, kateri konto pripada kateremu prevozniku"
+msgstr ""
+"V primeru več prevoznikov pomaga ugotoviti, kateri konto pripada kateremu "
+"prevozniku"
 
 #. module: base_delivery_carrier_label
 #: field:shipping.label,index_content:0
@@ -350,8 +357,11 @@ msgstr "Etiketa za odpošiljanje"
 #, python-format
 msgid ""
 "Some labels already exist for the picking %s.\n"
-"Please delete the existing labels in the attachments of this picking and try again"
-msgstr "Za zbirnik %s že obstaja nekaj etiket.\nV priponkah izbrišite obstoječe etikete za ta zbirnik in ponovno poskusite."
+"Please delete the existing labels in the attachments of this picking and try "
+"again"
+msgstr ""
+"Za zbirnik %s že obstaja nekaj etiket.\n"
+"V priponkah izbrišite obstoječe etikete za ta zbirnik in ponovno poskusite."
 
 #. module: base_delivery_carrier_label
 #: field:shipping.label,store_fname:0
@@ -371,8 +381,7 @@ msgstr "ID zapisa kateremu je to pripeto"
 #. module: base_delivery_carrier_label
 #: help:stock.quant.package,weight:0
 msgid ""
-"Total weight of the package in kg, including the weight of the logistic "
-"unit."
+"Total weight of the package in kg, including the weight of the logistic unit."
 msgstr "Skupna masa pakiranja v kg, vključno masa logistične enote."
 
 #. module: base_delivery_carrier_label
@@ -401,7 +410,9 @@ msgstr "Masa pakirne operacije"
 msgid ""
 "When True, help to prevent the user to modify some fields option (if "
 "attribute is defined in the view)"
-msgstr "Kadar je pravilno, uporabniku pomaga spreminjati določene opcije polj (če je atribut določen v pogledu)"
+msgstr ""
+"Kadar je pravilno, uporabniku pomaga spreminjati določene opcije polj (če je "
+"atribut določen v pogledu)"
 
 #. module: base_delivery_carrier_label
 #: code:addons/base_delivery_carrier_label/stock.py:299
@@ -409,7 +420,9 @@ msgstr "Kadar je pravilno, uporabniku pomaga spreminjati določene opcije polj (
 msgid ""
 "You should not remove a mandatory option.Please cancel the edit or add back "
 "the option: %s."
-msgstr "Ne smete odstraniti obvezne opcije. Prekličite urejanje ali znova dodajte opcijo: %s."
+msgstr ""
+"Ne smete odstraniti obvezne opcije. Prekličite urejanje ali znova dodajte "
+"opcijo: %s."
 
 #. module: base_delivery_carrier_label
 #: view:delivery.carrier.option:base_delivery_carrier_label.delivery_carrier_option_view_form

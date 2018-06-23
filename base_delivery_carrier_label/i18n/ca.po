@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * base_delivery_carrier_label
-# 
+#
 # Translators:
 msgid ""
 msgstr ""
@@ -10,11 +10,12 @@ msgstr ""
 "POT-Creation-Date: 2017-03-28 02:37+0000\n"
 "PO-Revision-Date: 2017-04-25 10:39+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Catalan (http://www.transifex.com/oca/OCA-delivery-carrier-8-0/language/ca/)\n"
+"Language-Team: Catalan (http://www.transifex.com/oca/OCA-delivery-"
+"carrier-8-0/language/ca/)\n"
+"Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: ca\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: base_delivery_carrier_label
@@ -347,7 +348,8 @@ msgstr ""
 #, python-format
 msgid ""
 "Some labels already exist for the picking %s.\n"
-"Please delete the existing labels in the attachments of this picking and try again"
+"Please delete the existing labels in the attachments of this picking and try "
+"again"
 msgstr ""
 
 #. module: base_delivery_carrier_label
@@ -358,7 +360,8 @@ msgstr "Nom del fitxer desat "
 #. module: base_delivery_carrier_label
 #: help:shipping.label,res_model:0
 msgid "The database object this attachment will be attached to"
-msgstr "Els objectes de la base de dades en aquesta adjunció també seran adjuntats "
+msgstr ""
+"Els objectes de la base de dades en aquesta adjunció també seran adjuntats "
 
 #. module: base_delivery_carrier_label
 #: help:shipping.label,res_id:0
@@ -368,8 +371,7 @@ msgstr "L'ID del registre també està adjuntat "
 #. module: base_delivery_carrier_label
 #: help:stock.quant.package,weight:0
 msgid ""
-"Total weight of the package in kg, including the weight of the logistic "
-"unit."
+"Total weight of the package in kg, including the weight of the logistic unit."
 msgstr ""
 
 #. module: base_delivery_carrier_label

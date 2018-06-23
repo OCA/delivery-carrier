@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * base_delivery_carrier_label
-# 
+#
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2014
 # Hotellook, 2014
@@ -16,11 +16,12 @@ msgstr ""
 "POT-Creation-Date: 2017-05-20 01:32+0000\n"
 "PO-Revision-Date: 2017-05-30 10:13+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: German (http://www.transifex.com/oca/OCA-delivery-carrier-8-0/language/de/)\n"
+"Language-Team: German (http://www.transifex.com/oca/OCA-delivery-carrier-8-0/"
+"language/de/)\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: base_delivery_carrier_label
@@ -69,7 +70,9 @@ msgstr "Binärdatei oder URL"
 msgid ""
 "By check, user can choose to apply this option to each Delivery Order\n"
 " using this delivery method"
-msgstr "Durch anwählen kann der Anwender wählen, dass, bei Verwendung dieser Liefermethode, diese Option auf jeden Lieferschein angewendet wird"
+msgstr ""
+"Durch anwählen kann der Anwender wählen, dass, bei Verwendung dieser "
+"Liefermethode, diese Option auf jeden Lieferschein angewendet wird"
 
 #. module: base_delivery_carrier_label
 #: field:delivery.carrier.option,carrier_id:0
@@ -218,7 +221,9 @@ msgstr "Wenn gewählt, wird die Anwendung dieser Option erzwungen"
 msgid ""
 "In case of several carriers, help to know which account belong to which "
 "carrier"
-msgstr "Im Falle mehrerer Spediteure hilft dies zu ersehen, welches Konto zu welchem Spediteur gehört"
+msgstr ""
+"Im Falle mehrerer Spediteure hilft dies zu ersehen, welches Konto zu welchem "
+"Spediteur gehört"
 
 #. module: base_delivery_carrier_label
 #: field:shipping.label,index_content:0
@@ -353,8 +358,12 @@ msgstr "Paketaufkleber"
 #, python-format
 msgid ""
 "Some labels already exist for the picking %s.\n"
-"Please delete the existing labels in the attachments of this picking and try again"
-msgstr "Es exisitieren bereits Etiketten für die Entnahme %s.\nBitte löschen Sie bestehende Etiketten im Anhang dieser Entnahme und versuchen es erneut"
+"Please delete the existing labels in the attachments of this picking and try "
+"again"
+msgstr ""
+"Es exisitieren bereits Etiketten für die Entnahme %s.\n"
+"Bitte löschen Sie bestehende Etiketten im Anhang dieser Entnahme und "
+"versuchen es erneut"
 
 #. module: base_delivery_carrier_label
 #: field:shipping.label,store_fname:0
@@ -374,9 +383,10 @@ msgstr "Die Datensatz-ID, an die dieser angehängt wird"
 #. module: base_delivery_carrier_label
 #: help:stock.quant.package,weight:0
 msgid ""
-"Total weight of the package in kg, including the weight of the logistic "
-"unit."
-msgstr "Gesamtgewicht des Pakets in kg, einschliesslich dem Gewicht der logistischen Einheit."
+"Total weight of the package in kg, including the weight of the logistic unit."
+msgstr ""
+"Gesamtgewicht des Pakets in kg, einschliesslich dem Gewicht der logistischen "
+"Einheit."
 
 #. module: base_delivery_carrier_label
 #: field:carrier.account,type:0 field:delivery.carrier,type:0
@@ -404,7 +414,9 @@ msgstr "Gewicht des Packvorgangs"
 msgid ""
 "When True, help to prevent the user to modify some fields option (if "
 "attribute is defined in the view)"
-msgstr "Wenn angewähl, hilft dies die Änderung einiger Felder zu verhindern (wenn das Attribut in der Sicht verwendet wird)"
+msgstr ""
+"Wenn angewähl, hilft dies die Änderung einiger Felder zu verhindern (wenn "
+"das Attribut in der Sicht verwendet wird)"
 
 #. module: base_delivery_carrier_label
 #: code:addons/base_delivery_carrier_label/stock.py:299
@@ -412,7 +424,9 @@ msgstr "Wenn angewähl, hilft dies die Änderung einiger Felder zu verhindern (w
 msgid ""
 "You should not remove a mandatory option.Please cancel the edit or add back "
 "the option: %s."
-msgstr "Sie dürfen eine Pflicht-Option nicht abschalten. Brechen Sie die Bearbeitung ab oder schalten Sie die Option %s wieder ein."
+msgstr ""
+"Sie dürfen eine Pflicht-Option nicht abschalten. Brechen Sie die Bearbeitung "
+"ab oder schalten Sie die Option %s wieder ein."
 
 #. module: base_delivery_carrier_label
 #: view:delivery.carrier.option:base_delivery_carrier_label.delivery_carrier_option_view_form
