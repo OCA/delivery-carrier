@@ -22,6 +22,7 @@ addon | version | summary
 [delivery_auto_refresh](delivery_auto_refresh/) | 10.0.1.0.0 | Auto-refresh delivery price in sales orders
 [delivery_carrier_b2c](delivery_carrier_b2c/) | 10.0.0.1.0 | Delivery Carrier Business To Customer
 [delivery_carrier_deposit](delivery_carrier_deposit/) | 10.0.0.1.1 | Create deposit slips
+[delivery_dropoff_site](delivery_dropoff_site/) | 10.0.1.0.0 | Send goods to sites in which customers come pick up package
 [delivery_multi_destination](delivery_multi_destination/) | 10.0.1.1.0 | Multiple destinations for the same delivery method
 [sale_delivery_rate](sale_delivery_rate/) | 10.0.1.0.0 | Extends notion of delivery carrier rate quotes to sale orders
 [stock_picking_delivery_rate](stock_picking_delivery_rate/) | 10.0.1.0.0 | Adds a concept of rate quotes for stock pickings
