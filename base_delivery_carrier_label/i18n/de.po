@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * base_delivery_carrier_label
-# 
+#
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2016
 # Rudolf Schnapka <rs@techno-flex.de>, 2017
@@ -13,10 +13,10 @@ msgstr ""
 "PO-Revision-Date: 2017-05-20 01:36+0000\n"
 "Last-Translator: Rudolf Schnapka <rs@techno-flex.de>, 2017\n"
 "Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: base_delivery_carrier_label
@@ -351,10 +351,12 @@ msgstr "Paketaufkleber"
 #, python-format
 msgid ""
 "Some labels already exist for the picking %s.\n"
-"Please delete the existing labels in the attachments of this picking and try again"
+"Please delete the existing labels in the attachments of this picking and try "
+"again"
 msgstr ""
 "Es exisitieren bereits Etiketten für die Kommissionierung %s.\n"
-"Bitte löschen Sie bestehende Etiketten im Anhang dieser Kommissionierung und versuchen es erneut"
+"Bitte löschen Sie bestehende Etiketten im Anhang dieser Kommissionierung und "
+"versuchen es erneut"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_store_fname
@@ -379,11 +381,10 @@ msgstr "Gesamtbruttogewicht"
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_stock_quant_package_total_weight
 msgid ""
-"Total weight of the package in kg, including the weight of the logistic "
-"unit."
+"Total weight of the package in kg, including the weight of the logistic unit."
 msgstr ""
-"Gesamtgewicht des Pakets in kg, einschliesslich dem Gewicht der logistischen"
-" Einheit."
+"Gesamtgewicht des Pakets in kg, einschliesslich dem Gewicht der logistischen "
+"Einheit."
 
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_stock_picking
@@ -437,8 +438,8 @@ msgid ""
 "You should not remove a mandatory option.Please cancel the edit or add back "
 "the option: %s."
 msgstr ""
-"Sie dürfen eine Pflicht-Option nicht abschalten. Brechen Sie die Bearbeitung"
-" ab oder schalten Sie die Option %s wieder ein."
+"Sie dürfen eine Pflicht-Option nicht abschalten. Brechen Sie die Bearbeitung "
+"ab oder schalten Sie die Option %s wieder ein."
 
 #. module: base_delivery_carrier_label
 #: model:ir.ui.view,arch_db:base_delivery_carrier_label.delivery_carrier_option_view_form
