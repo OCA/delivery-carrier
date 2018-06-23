@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * base_delivery_carrier_files
-# 
+#
 # Translators:
 msgid ""
 msgstr ""
@@ -10,11 +10,12 @@ msgstr ""
 "POT-Creation-Date: 2016-12-03 01:21+0000\n"
 "PO-Revision-Date: 2016-12-23 08:32+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Spanish (http://www.transifex.com/oca/OCA-delivery-carrier-8-0/language/es/)\n"
+"Language-Team: Spanish (http://www.transifex.com/oca/OCA-delivery-"
+"carrier-8-0/language/es/)\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: es\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: base_delivery_carrier_files
@@ -27,7 +28,10 @@ msgstr ""
 msgid ""
 "All the pickings will be grouped in the same file. Has no effect when the "
 "files are automatically exported at the delivery order process."
-msgstr "Todos los albaranes serán agrupados en el mismo fichero. No tiene efecto cuando los ficheros son generados automáticamente en el procesamiento de un albarán."
+msgstr ""
+"Todos los albaranes serán agrupados en el mismo fichero. No tiene efecto "
+"cuando los ficheros son generados automáticamente en el procesamiento de un "
+"albarán."
 
 #. module: base_delivery_carrier_files
 #: model:ir.model,name:base_delivery_carrier_files.model_delivery_carrier
@@ -156,7 +160,8 @@ msgstr ""
 #. module: base_delivery_carrier_files
 #: help:delivery.carrier.file.generate,recreate:0
 msgid ""
-"If this option is used, new files will be generated for selected picking even if they already had one.\n"
+"If this option is used, new files will be generated for selected picking "
+"even if they already had one.\n"
 "By default, delivery orders with existing file will be skipped."
 msgstr ""
 
@@ -223,9 +228,11 @@ msgstr "El fichero para el transportista ha sido generado."
 #. module: base_delivery_carrier_files
 #: help:delivery.carrier.file,auto_export:0
 msgid ""
-"The file will be automatically generated when a delivery order is processed."
-" If activated, each delivery order will be exported in a separate file."
-msgstr "El archivo será generado automáticamente cuando un albarán sea procesado. Si está activado, cada albarán generará un fichero separado."
+"The file will be automatically generated when a delivery order is processed. "
+"If activated, each delivery order will be exported in a separate file."
+msgstr ""
+"El archivo será generado automáticamente cuando un albarán sea procesado. Si "
+"está activado, cada albarán generará un fichero separado."
 
 #. module: base_delivery_carrier_files
 #: field:delivery.carrier.file,type:0
