@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * delivery_carrier_label_postlogistics
-# 
+#
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2016
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2017
@@ -13,11 +13,12 @@ msgstr ""
 "PO-Revision-Date: 2017-04-29 00:40+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>, 2017\n"
 "Language-Team: Slovenian (https://www.transifex.com/oca/teams/23907/sl/)\n"
+"Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: sl\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
+"%100==4 ? 2 : 3);\n"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:delivery.carrier.template.option,name:delivery_carrier_label_postlogistics.postlogistics_output_resolution_option_200ppp
@@ -57,9 +58,12 @@ msgstr ""
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,help:delivery_carrier_label_postlogistics.field_postlogistics_config_settings_tracking_format
 msgid ""
-"Allows you to define how the ItemNumber (the last 8 digits) of the tracking number will be generated:\n"
+"Allows you to define how the ItemNumber (the last 8 digits) of the tracking "
+"number will be generated:\n"
 "- Default postlogistics numbers: The webservice generates it for you.\n"
-"- Picking number with pack counter: Generate it using the digits of picking name and add the pack number. 2 digits forpack number and 6 digits for picking number. (eg. 07000042 for picking 42 and 7th pack"
+"- Picking number with pack counter: Generate it using the digits of picking "
+"name and add the pack number. 2 digits forpack number and 6 digits for "
+"picking number. (eg. 07000042 for picking 42 and 7th pack"
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
@@ -197,7 +201,8 @@ msgid ""
 "Could not retrieve allowed Postlogistics service groups for the %s licence:\n"
 "%s"
 msgstr ""
-"Ni bilo mogoče naložiti dovoljenih Postlogistics storitvenih skupin za licenco %s:\n"
+"Ni bilo mogoče naložiti dovoljenih Postlogistics storitvenih skupin za "
+"licenco %s:\n"
 "%s"
 
 #. module: delivery_carrier_label_postlogistics
@@ -599,8 +604,8 @@ msgid ""
 "The cash on delivery amount must be manually specified on the packages when "
 "a sales order is delivered in several delivery orders."
 msgstr ""
-"Kadar je prodajni nalog dostavljen v več dostavnih nalogih, mora biti znesek"
-" plačila ob dostavi ročno določen pri pakiranjih."
+"Kadar je prodajni nalog dostavljen v več dostavnih nalogih, mora biti znesek "
+"plačila ob dostavi ročno določen pri pakiranjih."
 
 #. module: delivery_carrier_label_postlogistics
 #: code:addons/delivery_carrier_label_postlogistics/models/stock_quant_package.py:66
@@ -678,9 +683,9 @@ msgstr ""
 #: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:405
 #, python-format
 msgid ""
-"You need to configure %s. You can set a defaultvalue in "
-"Settings/Configuration/Carriers/Postlogistics. You can also set it on "
-"delivery method or on the picking."
+"You need to configure %s. You can set a defaultvalue in Settings/"
+"Configuration/Carriers/Postlogistics. You can also set it on delivery method "
+"or on the picking."
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics

@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * delivery_carrier_label_postlogistics
-# 
+#
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2016
 # leemannd <denis.leemann@camptocamp.com>, 2017
@@ -13,10 +13,10 @@ msgstr ""
 "PO-Revision-Date: 2017-04-29 00:40+0000\n"
 "Last-Translator: leemannd <denis.leemann@camptocamp.com>, 2017\n"
 "Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: delivery_carrier_label_postlogistics
@@ -57,9 +57,12 @@ msgstr ""
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,help:delivery_carrier_label_postlogistics.field_postlogistics_config_settings_tracking_format
 msgid ""
-"Allows you to define how the ItemNumber (the last 8 digits) of the tracking number will be generated:\n"
+"Allows you to define how the ItemNumber (the last 8 digits) of the tracking "
+"number will be generated:\n"
 "- Default postlogistics numbers: The webservice generates it for you.\n"
-"- Picking number with pack counter: Generate it using the digits of picking name and add the pack number. 2 digits forpack number and 6 digits for picking number. (eg. 07000042 for picking 42 and 7th pack"
+"- Picking number with pack counter: Generate it using the digits of picking "
+"name and add the pack number. 2 digits forpack number and 6 digits for "
+"picking number. (eg. 07000042 for picking 42 and 7th pack"
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
@@ -197,7 +200,8 @@ msgid ""
 "Could not retrieve allowed Postlogistics service groups for the %s licence:\n"
 "%s"
 msgstr ""
-"Impossible de récupérer les groupes de services Postlogistics autorisés pour la licence %s:\n"
+"Impossible de récupérer les groupes de services Postlogistics autorisés pour "
+"la licence %s:\n"
 "%s"
 
 #. module: delivery_carrier_label_postlogistics
@@ -428,14 +432,17 @@ msgid ""
 "We recommend using a black and white logo for printing in  the ZPL2 format."
 msgstr ""
 "Logo optionnel à imprimer sur vos étiquettes.\n"
-"Veuillez tenir compte des indications suivantes lors de la création de votre image ou logo:\n"
+"Veuillez tenir compte des indications suivantes lors de la création de votre "
+"image ou logo:\n"
 "– Largeur de l’image: 47 mm\n"
 "– Hauteur de l’image: 25 mm\n"
 "– Taille du fichier: max. 30 ko\n"
 "– Format de fichier: GIF ou PNG\n"
 "– Table des couleurs: couleurs indicées, 200 au max.\n"
-"– Le logo sera imprimé tourné de 90° dans le sens contraire des aiguilles d’une montre \n"
-"Il est conseillé d’utiliser un logo noir et blanc pour l’impression en format ZPL2."
+"– Le logo sera imprimé tourné de 90° dans le sens contraire des aiguilles "
+"d’une montre \n"
+"Il est conseillé d’utiliser un logo noir et blanc pour l’impression en "
+"format ZPL2."
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.ui.view,arch_db:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
@@ -567,8 +574,8 @@ msgstr "Séquence"
 #: model:ir.model.fields,help:delivery_carrier_label_postlogistics.field_delivery_carrier_postlogistics_service_group_id
 msgid "Service group defines the available options for this delivery method."
 msgstr ""
-"Groupe de service pour définir les options disponibles pour cette méthode de"
-" livraison."
+"Groupe de service pour définir les options disponibles pour cette méthode de "
+"livraison."
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model,name:delivery_carrier_label_postlogistics.model_shipping_label
@@ -588,8 +595,8 @@ msgid ""
 "The cash on delivery amount must be manually specified on the packages when "
 "a package contains products from different sales orders."
 msgstr ""
-"Le montant contre-remboursement doit être précisé manuellement sur les colis"
-" quand un colis contient des produits de différentes commandes."
+"Le montant contre-remboursement doit être précisé manuellement sur les colis "
+"quand un colis contient des produits de différentes commandes."
 
 #. module: delivery_carrier_label_postlogistics
 #: code:addons/delivery_carrier_label_postlogistics/models/stock.py:53
@@ -599,8 +606,8 @@ msgid ""
 "The cash on delivery amount must be manually specified on the packages when "
 "a sales order is delivered in several delivery orders."
 msgstr ""
-"Le montant contre-remboursement doit être précisé manuellement sur les colis"
-" quand une commande est livrée en plusieurs bons de livraisons."
+"Le montant contre-remboursement doit être précisé manuellement sur les colis "
+"quand une commande est livrée en plusieurs bons de livraisons."
 
 #. module: delivery_carrier_label_postlogistics
 #: code:addons/delivery_carrier_label_postlogistics/models/stock_quant_package.py:66
@@ -609,8 +616,8 @@ msgid ""
 "The cash on delivery amount must be manually specified on the packages when "
 "a sales order is delivered in several packages."
 msgstr ""
-"Le montant contre-remboursement doit être précisé manuellement sur les colis"
-" quand une commande est livrée en plusieurs colis."
+"Le montant contre-remboursement doit être précisé manuellement sur les colis "
+"quand une commande est livrée en plusieurs colis."
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,help:delivery_carrier_label_postlogistics.field_postlogistics_config_settings_proclima_logo
@@ -678,9 +685,9 @@ msgstr ""
 #: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:405
 #, python-format
 msgid ""
-"You need to configure %s. You can set a defaultvalue in "
-"Settings/Configuration/Carriers/Postlogistics. You can also set it on "
-"delivery method or on the picking."
+"You need to configure %s. You can set a defaultvalue in Settings/"
+"Configuration/Carriers/Postlogistics. You can also set it on delivery method "
+"or on the picking."
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
