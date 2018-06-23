@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * delivery_carrier_deposit
-# 
+#
 # Translators:
 msgid ""
 msgstr ""
@@ -10,11 +10,12 @@ msgstr ""
 "POT-Creation-Date: 2017-03-28 02:37+0000\n"
 "PO-Revision-Date: 2017-04-25 10:39+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Dutch (Belgium) (http://www.transifex.com/oca/OCA-delivery-carrier-8-0/language/nl_BE/)\n"
+"Language-Team: Dutch (Belgium) (http://www.transifex.com/oca/OCA-delivery-"
+"carrier-8-0/language/nl_BE/)\n"
+"Language: nl_BE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: nl_BE\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: delivery_carrier_deposit
@@ -202,7 +203,8 @@ msgstr "ID"
 #. module: delivery_carrier_deposit
 #: help:deposit.slip,message_unread:0
 msgid "If checked new messages require your attention."
-msgstr "Als dit is ingeschakeld, zijn er nieuwe berichten die uw aandacht vragen."
+msgstr ""
+"Als dit is ingeschakeld, zijn er nieuwe berichten die uw aandacht vragen."
 
 #. module: delivery_carrier_deposit
 #: field:deposit.slip,message_is_follower:0

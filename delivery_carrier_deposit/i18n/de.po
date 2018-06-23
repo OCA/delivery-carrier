@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * delivery_carrier_deposit
-# 
+#
 # Translators:
 # Hotellook, 2014
 # Rudolf Schnapka <rs@techno-flex.de>, 2015-2016
@@ -12,11 +12,12 @@ msgstr ""
 "POT-Creation-Date: 2016-11-22 09:11+0000\n"
 "PO-Revision-Date: 2016-11-25 14:55+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: German (http://www.transifex.com/oca/OCA-delivery-carrier-8-0/language/de/)\n"
+"Language-Team: German (http://www.transifex.com/oca/OCA-delivery-carrier-8-0/"
+"language/de/)\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: delivery_carrier_deposit
@@ -65,7 +66,10 @@ msgid ""
 "Carrier type (combines several delivery methods). Make sure that the option "
 "'Deposit Slip' is checked on the delivery methods that have this carrier "
 "type."
-msgstr "Spediteurart (vereint mehrere Lieferwege). Stellen Sie sicher, dass die Option 'Abgabebeleg' bei Lieferwegen über diese Spediteurarten eingeschaltet ist."
+msgstr ""
+"Spediteurart (vereint mehrere Lieferwege). Stellen Sie sicher, dass die "
+"Option 'Abgabebeleg' bei Lieferwegen über diese Spediteurarten eingeschaltet "
+"ist."
 
 #. module: delivery_carrier_deposit
 #: field:deposit.slip,company_id:0
@@ -194,7 +198,9 @@ msgstr "Gruppieren"
 msgid ""
 "Holds the Chatter summary (number of messages, ...). This summary is "
 "directly in html format in order to be inserted in kanban views."
-msgstr "Beinhaltet die Meldungsübersicht (Anzahl Meldungen, ...). Diese Übersicht liegt im HTML vor, um sie in Kanban-Sichten einfügen zu können."
+msgstr ""
+"Beinhaltet die Meldungsübersicht (Anzahl Meldungen, ...). Diese Übersicht "
+"liegt im HTML vor, um sie in Kanban-Sichten einfügen zu können."
 
 #. module: delivery_carrier_deposit
 #: field:delivery.deposit.wizard,id:0 field:deposit.slip,id:0
@@ -309,7 +315,9 @@ msgstr "Übersicht"
 msgid ""
 "There are no delivery orders in transferred state with a delivery method "
 "type '%s' not already linked to a deposit slip."
-msgstr "Es gibt keine Lieferungen im Status 'Übertragen' zum Lieferwegart '%s' die nicht bereits einem Abgabebeleg zugeordnet sind."
+msgstr ""
+"Es gibt keine Lieferungen im Status 'Übertragen' zum Lieferwegart '%s' die "
+"nicht bereits einem Abgabebeleg zugeordnet sind."
 
 #. module: delivery_carrier_deposit
 #: view:website:delivery_carrier_deposit.report_generic_deposit_slip

@@ -1,22 +1,17 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * delivery_carrier_deposit
+#	* delivery_carrier_deposit
 #
-# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: delivery-carrier (8.0)\n"
+"Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-22 09:11+0000\n"
-"PO-Revision-Date: 2016-11-25 14:57+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Bulgarian (http://www.transifex.com/oca/OCA-delivery-"
-"carrier-8-0/language/bg/)\n"
-"Language: bg\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: \n"
 
 #. module: delivery_carrier_deposit
 #: sql_constraint:deposit.slip:0
@@ -46,7 +41,7 @@ msgstr ""
 #. module: delivery_carrier_deposit
 #: view:delivery.deposit.wizard:delivery_carrier_deposit.view_wiz_create_deposit
 msgid "Cancel"
-msgstr "Откажи"
+msgstr ""
 
 #. module: delivery_carrier_deposit
 #: model:ir.model,name:delivery_carrier_deposit.model_delivery_carrier
@@ -60,16 +55,13 @@ msgstr ""
 
 #. module: delivery_carrier_deposit
 #: help:delivery.deposit.wizard,carrier_type:0
-msgid ""
-"Carrier type (combines several delivery methods). Make sure that the option "
-"'Deposit Slip' is checked on the delivery methods that have this carrier "
-"type."
+msgid "Carrier type (combines several delivery methods). Make sure that the option 'Deposit Slip' is checked on the delivery methods that have this carrier type."
 msgstr ""
 
 #. module: delivery_carrier_deposit
 #: field:deposit.slip,company_id:0
 msgid "Company"
-msgstr "Фирма"
+msgstr ""
 
 #. module: delivery_carrier_deposit
 #: view:deposit.slip:delivery_carrier_deposit.view_deposit_slip_form
@@ -84,7 +76,7 @@ msgstr ""
 #. module: delivery_carrier_deposit
 #: view:delivery.deposit.wizard:delivery_carrier_deposit.view_wiz_create_deposit
 msgid "Create"
-msgstr "Създай"
+msgstr ""
 
 #. module: delivery_carrier_deposit
 #: view:delivery.deposit.wizard:delivery_carrier_deposit.view_wiz_create_deposit
@@ -94,15 +86,16 @@ msgid "Create Deposit Slip"
 msgstr ""
 
 #. module: delivery_carrier_deposit
-#: field:delivery.deposit.wizard,create_uid:0 field:deposit.slip,create_uid:0
+#: field:delivery.deposit.wizard,create_uid:0
+#: field:deposit.slip,create_uid:0
 msgid "Created by"
-msgstr "Създадено от"
+msgstr ""
 
 #. module: delivery_carrier_deposit
 #: field:delivery.deposit.wizard,create_date:0
 #: field:deposit.slip,create_date:0
 msgid "Created on"
-msgstr "Създадено на"
+msgstr ""
 
 #. module: delivery_carrier_deposit
 #: view:website:delivery_carrier_deposit.report_generic_deposit_slip
@@ -112,7 +105,7 @@ msgstr ""
 #. module: delivery_carrier_deposit
 #: help:deposit.slip,message_last_post:0
 msgid "Date of the last message posted on the record."
-msgstr "Дата на последното съобщение, публикувано на записа."
+msgstr ""
 
 #. module: delivery_carrier_deposit
 #: view:website:delivery_carrier_deposit.report_generic_deposit_slip
@@ -161,12 +154,12 @@ msgstr ""
 #: field:delivery.deposit.wizard,display_name:0
 #: field:deposit.slip,display_name:0
 msgid "Display Name"
-msgstr "Име за Показване"
+msgstr ""
 
 #. module: delivery_carrier_deposit
 #: selection:deposit.slip,state:0
 msgid "Done"
-msgstr "Готово"
+msgstr ""
 
 #. module: delivery_carrier_deposit
 #: selection:deposit.slip,state:0
@@ -176,7 +169,7 @@ msgstr ""
 #. module: delivery_carrier_deposit
 #: field:deposit.slip,message_follower_ids:0
 msgid "Followers"
-msgstr "Последователи"
+msgstr ""
 
 #. module: delivery_carrier_deposit
 #: model:ir.actions.report.xml,name:delivery_carrier_deposit.report_deposit_slip
@@ -186,24 +179,23 @@ msgstr ""
 #. module: delivery_carrier_deposit
 #: view:deposit.slip:delivery_carrier_deposit.view_deposit_slip_search
 msgid "Group By"
-msgstr "Групирай По"
-
-#. module: delivery_carrier_deposit
-#: help:deposit.slip,message_summary:0
-msgid ""
-"Holds the Chatter summary (number of messages, ...). This summary is "
-"directly in html format in order to be inserted in kanban views."
 msgstr ""
 
 #. module: delivery_carrier_deposit
-#: field:delivery.deposit.wizard,id:0 field:deposit.slip,id:0
+#: help:deposit.slip,message_summary:0
+msgid "Holds the Chatter summary (number of messages, ...). This summary is directly in html format in order to be inserted in kanban views."
+msgstr ""
+
+#. module: delivery_carrier_deposit
+#: field:delivery.deposit.wizard,id:0
+#: field:deposit.slip,id:0
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: delivery_carrier_deposit
 #: help:deposit.slip,message_unread:0
 msgid "If checked new messages require your attention."
-msgstr "Ако е отбелязано, новите съобщения ще изискват внимание."
+msgstr ""
 
 #. module: delivery_carrier_deposit
 #: field:deposit.slip,message_is_follower:0
@@ -213,38 +205,40 @@ msgstr ""
 #. module: delivery_carrier_deposit
 #: field:deposit.slip,message_last_post:0
 msgid "Last Message Date"
-msgstr "Дата на последното съобщение"
+msgstr ""
 
 #. module: delivery_carrier_deposit
 #: field:delivery.deposit.wizard,__last_update:0
 #: field:deposit.slip,__last_update:0
 msgid "Last Modified on"
-msgstr "Последно обновено на"
+msgstr ""
 
 #. module: delivery_carrier_deposit
-#: field:delivery.deposit.wizard,write_uid:0 field:deposit.slip,write_uid:0
+#: field:delivery.deposit.wizard,write_uid:0
+#: field:deposit.slip,write_uid:0
 msgid "Last Updated by"
-msgstr "Последно обновено от"
+msgstr ""
 
 #. module: delivery_carrier_deposit
-#: field:delivery.deposit.wizard,write_date:0 field:deposit.slip,write_date:0
+#: field:delivery.deposit.wizard,write_date:0
+#: field:deposit.slip,write_date:0
 msgid "Last Updated on"
-msgstr "Последно обновено на"
+msgstr ""
 
 #. module: delivery_carrier_deposit
 #: field:deposit.slip,message_ids:0
 msgid "Messages"
-msgstr "Съобщения"
+msgstr ""
 
 #. module: delivery_carrier_deposit
 #: help:deposit.slip,message_ids:0
 msgid "Messages and communication history"
-msgstr "История на събщенията и комуникациите"
+msgstr ""
 
 #. module: delivery_carrier_deposit
 #: field:deposit.slip,name:0
 msgid "Name"
-msgstr "Име"
+msgstr ""
 
 #. module: delivery_carrier_deposit
 #: view:website:delivery_carrier_deposit.report_generic_deposit_slip
@@ -305,9 +299,7 @@ msgstr ""
 #. module: delivery_carrier_deposit
 #: code:addons/delivery_carrier_deposit/wizard/deposit.py:94
 #, python-format
-msgid ""
-"There are no delivery orders in transferred state with a delivery method "
-"type '%s' not already linked to a deposit slip."
+msgid "There are no delivery orders in transferred state with a delivery method type '%s' not already linked to a deposit slip."
 msgstr ""
 
 #. module: delivery_carrier_deposit
@@ -333,12 +325,12 @@ msgstr ""
 #. module: delivery_carrier_deposit
 #: field:deposit.slip,carrier_type:0
 msgid "Type"
-msgstr "Вид"
+msgstr ""
 
 #. module: delivery_carrier_deposit
 #: field:deposit.slip,message_unread:0
 msgid "Unread Messages"
-msgstr "Непрочетени съобщения"
+msgstr ""
 
 #. module: delivery_carrier_deposit
 #: view:website:delivery_carrier_deposit.report_generic_deposit_slip
@@ -364,3 +356,4 @@ msgstr ""
 #: view:website:delivery_carrier_deposit.report_generic_deposit_slip
 msgid "recipient"
 msgstr ""
+

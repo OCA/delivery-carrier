@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * delivery_carrier_deposit
-# 
+#
 # Translators:
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
 msgid ""
@@ -11,12 +11,14 @@ msgstr ""
 "POT-Creation-Date: 2016-11-22 09:11+0000\n"
 "PO-Revision-Date: 2016-11-23 08:26+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
-"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-delivery-carrier-8-0/language/sl/)\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-delivery-"
+"carrier-8-0/language/sl/)\n"
+"Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: sl\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
+"%100==4 ? 2 : 3);\n"
 
 #. module: delivery_carrier_deposit
 #: sql_constraint:deposit.slip:0
@@ -64,7 +66,9 @@ msgid ""
 "Carrier type (combines several delivery methods). Make sure that the option "
 "'Deposit Slip' is checked on the delivery methods that have this carrier "
 "type."
-msgstr "Tip prevoznika (kombinacija več dostavnih metod). Zagotovite, da bo opcije 'Potrdilo o pologu' pri dostavnih metodah s tem tipom prevoznika označena."
+msgstr ""
+"Tip prevoznika (kombinacija več dostavnih metod). Zagotovite, da bo opcije "
+"'Potrdilo o pologu' pri dostavnih metodah s tem tipom prevoznika označena."
 
 #. module: delivery_carrier_deposit
 #: field:deposit.slip,company_id:0
@@ -193,7 +197,9 @@ msgstr "Združi po"
 msgid ""
 "Holds the Chatter summary (number of messages, ...). This summary is "
 "directly in html format in order to be inserted in kanban views."
-msgstr "Vsebuje povzetek sporočanja (število sporočil, ...). Ta povzetek je neposredno v html formatu, da se ga lahko vstavlja v kanban prikaze."
+msgstr ""
+"Vsebuje povzetek sporočanja (število sporočil, ...). Ta povzetek je "
+"neposredno v html formatu, da se ga lahko vstavlja v kanban prikaze."
 
 #. module: delivery_carrier_deposit
 #: field:delivery.deposit.wizard,id:0 field:deposit.slip,id:0
@@ -308,7 +314,9 @@ msgstr "Povzetek"
 msgid ""
 "There are no delivery orders in transferred state with a delivery method "
 "type '%s' not already linked to a deposit slip."
-msgstr "Ni dostavnih nalogov v premeščenem stanju z dostavno metodo tipa '%s', ki ne bi bili že povezani s potrdilom o pologu."
+msgstr ""
+"Ni dostavnih nalogov v premeščenem stanju z dostavno metodo tipa '%s', ki ne "
+"bi bili že povezani s potrdilom o pologu."
 
 #. module: delivery_carrier_deposit
 #: view:website:delivery_carrier_deposit.report_generic_deposit_slip
