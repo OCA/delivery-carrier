@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * delivery_carrier_label_postlogistics
-# 
+#
 # Translators:
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
 msgid ""
@@ -11,12 +11,14 @@ msgstr ""
 "POT-Creation-Date: 2016-05-03 12:24+0000\n"
 "PO-Revision-Date: 2016-05-01 04:57+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
-"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-carrier-delivery-8-0/language/sl/)\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-carrier-"
+"delivery-8-0/language/sl/)\n"
+"Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: sl\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
+"%100==4 ? 2 : 3);\n"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:delivery.carrier.template.option,name:delivery_carrier_label_postlogistics.postlogistics_output_resolution_option_200ppp
@@ -66,7 +68,11 @@ msgid ""
 "\n"
 "Please verify postlogistics username and password in:\n"
 "Configuration -> Postlogistics"
-msgstr "Potrebno je pooblastilo\n\nPreverite svoje postlogistics uporabniško ime in geslo v:\nNastavitve -> Postlogistics"
+msgstr ""
+"Potrebno je pooblastilo\n"
+"\n"
+"Preverite svoje postlogistics uporabniško ime in geslo v:\n"
+"Nastavitve -> Postlogistics"
 
 #. module: delivery_carrier_label_postlogistics
 #: selection:delivery.carrier.template.option,postlogistics_type:0
@@ -143,7 +149,9 @@ msgstr "Nastavitve Postlogistics"
 msgid ""
 "Could not retrieve Postlogistics base services:\n"
 "%s"
-msgstr "Ni bilo mogoče naložiti Postlogistics osnovnih storitev:\n%s"
+msgstr ""
+"Ni bilo mogoče naložiti Postlogistics osnovnih storitev:\n"
+"%s"
 
 #. module: delivery_carrier_label_postlogistics
 #: code:addons/delivery_carrier_label_postlogistics/res_config.py:90
@@ -151,7 +159,9 @@ msgstr "Ni bilo mogoče naložiti Postlogistics osnovnih storitev:\n%s"
 msgid ""
 "Could not retrieve Postlogistics delivery instructions:\n"
 "%s"
-msgstr "Postlogistics navodil za dostavo ni bilo možno pridobiti:\n%s"
+msgstr ""
+"Postlogistics navodil za dostavo ni bilo možno pridobiti:\n"
+"%s"
 
 #. module: delivery_carrier_label_postlogistics
 #: code:addons/delivery_carrier_label_postlogistics/res_config.py:274
@@ -159,7 +169,9 @@ msgstr "Postlogistics navodil za dostavo ni bilo možno pridobiti:\n%s"
 msgid ""
 "Could not retrieve Postlogistics group services:\n"
 "%s"
-msgstr "Ni bilo mogoče naložiti Postlogistics skupinskih storitev:\n%s"
+msgstr ""
+"Ni bilo mogoče naložiti Postlogistics skupinskih storitev:\n"
+"%s"
 
 #. module: delivery_carrier_label_postlogistics
 #: code:addons/delivery_carrier_label_postlogistics/res_config.py:365
@@ -167,7 +179,10 @@ msgstr "Ni bilo mogoče naložiti Postlogistics skupinskih storitev:\n%s"
 msgid ""
 "Could not retrieve allowed Postlogistics service groups for the %s licence:\n"
 "%s"
-msgstr "Ni bilo mogoče naložiti dovoljenih Postlogistics storitvenih skupin za licenco %s:\n%s"
+msgstr ""
+"Ni bilo mogoče naložiti dovoljenih Postlogistics storitvenih skupin za "
+"licenco %s:\n"
+"%s"
 
 #. module: delivery_carrier_label_postlogistics
 #: field:postlogistics.config.settings,create_uid:0
@@ -280,7 +295,9 @@ msgstr "GIF"
 msgid ""
 "Gives the sequence on company to define priority on license when multiple "
 "licenses are available for the same group of service."
-msgstr "Podaja zaporedje pri družbi za določitev prioritete licenc, kadar je na voljo več licenc v isti storitveni skupini."
+msgstr ""
+"Podaja zaporedje pri družbi za določitev prioritete licenc, kadar je na "
+"voljo več licenc v isti storitveni skupini."
 
 #. module: delivery_carrier_label_postlogistics
 #: field:postlogistics.service.group,group_extid:0
@@ -298,7 +315,9 @@ msgstr "ID"
 msgid ""
 "If the cash on delivery amount for this package is different than the total "
 "of the sales order, write the amount there."
-msgstr "Tukaj zapišite znesek, če je znesek plačila ob dostavi drugačen od skupnega zneska prodajnega naloga."
+msgstr ""
+"Tukaj zapišite znesek, če je znesek plačila ob dostavi drugačen od skupnega "
+"zneska prodajnega naloga."
 
 #. module: delivery_carrier_label_postlogistics
 #: model:delivery.carrier.template.option,name:delivery_carrier_label_postlogistics.postlogistics_output_format_option_jpg
@@ -360,7 +379,16 @@ msgid ""
 "– Colour table: indexed colours, max. 200 colours\n"
 "– The logo will be printed rotated counter-clockwise by 90°\n"
 "We recommend using a black and white logo for printing in  the ZPL2 format."
-msgstr "Opcijski logotip družbe prikazan na etiketi.\nČe uporabljate sliko / logotip, upoštevajte, da je:\n– širina slike: 47 mm\n– višina slike: 25 mm\n– velikost datoteke: maks. 30 kb\n– format datoteke: GIF ali PNG\n– barvna tabela: indeksirane barve, maks. 200 barv\n– Logotip bo natisnjen obrnjen za 90° v smeri nasprotni urinemu kazalcu\nPriporočamo uporabo črno-belega logotipa za tiskanje v ZPL2 formatu."
+msgstr ""
+"Opcijski logotip družbe prikazan na etiketi.\n"
+"Če uporabljate sliko / logotip, upoštevajte, da je:\n"
+"– širina slike: 47 mm\n"
+"– višina slike: 25 mm\n"
+"– velikost datoteke: maks. 30 kb\n"
+"– format datoteke: GIF ali PNG\n"
+"– barvna tabela: indeksirane barve, maks. 200 barv\n"
+"– Logotip bo natisnjen obrnjen za 90° v smeri nasprotni urinemu kazalcu\n"
+"Priporočamo uporabo črno-belega logotipa za tiskanje v ZPL2 formatu."
 
 #. module: delivery_carrier_label_postlogistics
 #: selection:delivery.carrier.template.option,postlogistics_type:0
@@ -470,7 +498,9 @@ msgstr "Etiketa za odpošiljanje"
 msgid ""
 "The cash on delivery amount must be manually specified on the packages when "
 "a package contains products from different sales orders."
-msgstr "Kadar pakiranje vsebuje proizvode iz različnih prodajnih nalogov. mora biti znesek plačila ob dostavi ročno določen pri pakiranjih."
+msgstr ""
+"Kadar pakiranje vsebuje proizvode iz različnih prodajnih nalogov. mora biti "
+"znesek plačila ob dostavi ročno določen pri pakiranjih."
 
 #. module: delivery_carrier_label_postlogistics
 #: code:addons/delivery_carrier_label_postlogistics/stock.py:57
@@ -479,7 +509,9 @@ msgstr "Kadar pakiranje vsebuje proizvode iz različnih prodajnih nalogov. mora 
 msgid ""
 "The cash on delivery amount must be manually specified on the packages when "
 "a sales order is delivered in several delivery orders."
-msgstr "Kadar je prodajni nalog dostavljen v več dostavnih nalogih, mora biti znesek plačila ob dostavi ročno določen pri pakiranjih."
+msgstr ""
+"Kadar je prodajni nalog dostavljen v več dostavnih nalogih, mora biti znesek "
+"plačila ob dostavi ročno določen pri pakiranjih."
 
 #. module: delivery_carrier_label_postlogistics
 #: code:addons/delivery_carrier_label_postlogistics/stock_quant_package.py:85
@@ -487,7 +519,9 @@ msgstr "Kadar je prodajni nalog dostavljen v več dostavnih nalogih, mora biti z
 msgid ""
 "The cash on delivery amount must be manually specified on the packages when "
 "a sales order is delivered in several packages."
-msgstr "Kadar je prodajni nalog dostavljen v več pakiranjih, mora biti znesek plačila ob dostavi ročno določen pri pakiranjih."
+msgstr ""
+"Kadar je prodajni nalog dostavljen v več pakiranjih, mora biti znesek "
+"plačila ob dostavi ročno določen pri pakiranjih."
 
 #. module: delivery_carrier_label_postlogistics
 #: view:postlogistics.config.settings:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
@@ -531,4 +565,6 @@ msgstr "sPDF"
 msgid ""
 "{'default_carrier_id': active_id, 'default_allowed_option_ids': "
 "allowed_option_ids}"
-msgstr "{'default_carrier_id': active_id, 'default_allowed_option_ids': allowed_option_ids}"
+msgstr ""
+"{'default_carrier_id': active_id, 'default_allowed_option_ids': "
+"allowed_option_ids}"
