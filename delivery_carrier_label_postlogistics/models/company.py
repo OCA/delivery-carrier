@@ -1,15 +1,18 @@
 # -*- coding: utf-8 -*-
-# © 2013-2015 Yannick Vaucher (Camptocamp SA)
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from openerp import models, fields
-from openerp.tools import file_open
+# Copyright 2013-2017 Yannick Vaucher (Camptocamp SA)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+from odoo import api, fields, models
+from odoo.tools import file_open
+from odoo.modules.module import get_resource_path
 
 
 class ResCompany(models.Model):
     _inherit = 'res.company'
 
-    postlogistics_wsdl_url = fields.Char(compute='_get_wsdl_url',
-                                         string='WSDL URL')
+    postlogistics_wsdl_url = fields.Char(compute='_compute_wsdl_url',
+                                         string='WSDL URL',
+                                         store=True)
+    postlogistics_test_mode = fields.Boolean()
     postlogistics_username = fields.Char('Username')
     postlogistics_password = fields.Char('Password')
     postlogistics_license_ids = fields.One2many(
@@ -51,11 +54,29 @@ class ResCompany(models.Model):
         string='Default resolution',
         domain=[('postlogistics_type', '=', 'resolution')],
     )
+    postlogistics_tracking_format = fields.Selection(
+        [('postlogistics', "Use default postlogistics tracking numbers"),
+         ('picking_num', 'Use picking number with pack counter')],
+        string="Tracking number format",
+        default='postlogistics',
+    )
+    postlogistics_proclima_logo = fields.Boolean('Print ProClima logo')
 
-    def _get_wsdl_url(self):
+    @api.depends('postlogistics_test_mode')
+    def _compute_wsdl_url(self):
+        path = get_resource_path('delivery_carrier_label_postlogistics',
+                                 'data')
+        filename = 'barcode_v2_2_wsbc.wsdl'
         wsdl_file, wsdl_path = file_open(
-            'delivery_carrier_label_postlogistics/data/barcode_v2_2_wsbc.wsdl',
+            path + '/production/' + filename,
             pathinfo=True)
         wsdl_url = 'file://' + wsdl_path
-        for company in self:
-            company.postlogistics_wsdl_url = wsdl_url
+        wsdl_file, wsdl_path_int = file_open(
+            path + '/integration/' + filename,
+            pathinfo=True)
+        wsdl_int_url = 'file://' + wsdl_path_int
+        for cp in self:
+            if cp.postlogistics_test_mode:
+                cp.postlogistics_wsdl_url = wsdl_int_url
+            else:
+                cp.postlogistics_wsdl_url = wsdl_url

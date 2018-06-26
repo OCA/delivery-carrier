@@ -1,68 +1,64 @@
 # -*- coding: utf-8 -*-
-# © 2013-2015 Yannick Vaucher (Camptocamp SA)
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+# Copyright 2013-2017 Yannick Vaucher (Camptocamp SA)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import logging
 
-from openerp import models, fields, api, exceptions, _
+from odoo import _, api, exceptions, fields, models
 
 from ..postlogistics.web_service import PostlogisticsWebService
+from . company import ResCompany
 
 _logger = logging.getLogger(__name__)
 
 
 class PostlogisticsConfigSettings(models.TransientModel):
     _name = 'postlogistics.config.settings'
-    _inherit = 'res.config.settings'
+    _inherit = ['res.config.settings', 'abstract.config.settings']
 
-    def _default_company(self):
-        return self.env.user.company_id
+    # AbstractConfigSettings attribute
+    _prefix = 'postlogistics_'
 
-    company_id = fields.Many2one(comodel_name='res.company',
-                                 string='Company',
-                                 required=True,
-                                 default=_default_company)
-    wsdl_url = fields.Char(related='company_id.postlogistics_wsdl_url')
-    username = fields.Char(related='company_id.postlogistics_username')
-    password = fields.Char(related='company_id.postlogistics_password')
-    logo = fields.Binary(related='company_id.postlogistics_logo')
-    office = fields.Char(related='company_id.postlogistics_office')
+    _companyObject = ResCompany
 
-    default_label_layout = fields.Many2one(
-        related='company_id.postlogistics_default_label_layout',
+    wsdl_url = fields.Char(
+        related='company_id.postlogistics_wsdl_url',
+        readonly=True,
     )
-    default_output_format = fields.Many2one(
-        related='company_id.postlogistics_default_output_format',
-    )
-    default_resolution = fields.Many2one(
-        related='company_id.postlogistics_default_resolution',
+    test_mode = fields.Boolean(
+        related='company_id.postlogistics_test_mode',
+        help="Will generate Specimen labels using test end point of "
+             "webservice."
     )
 
-    @api.onchange('company_id')
-    def onchange_company_id(self):
-        # update related fields
-        if not self.company_id:
-            return
-        company = self.company_id
-
-        label_layout = company.postlogistics_default_label_layout
-        output_format = company.postlogistics_default_output_format
-        resolution = company.postlogistics_default_resolution
-
-        self.username = company.postlogistics_username
-        self.password = company.postlogistics_password
-        self.logo = company.postlogistics_logo
-        self.office = company.postlogistics_office
-        self.default_label_layout = label_layout
-        self.default_output_format = output_format
-        self.default_resolution = resolution
+    tracking_format = fields.Selection(
+        related='company_id.postlogistics_tracking_format',
+        selection=[
+            ('postlogistics', "Use default postlogistics tracking numbers"
+             ),
+            ('picking_num', 'Use picking number with pack counter')],
+        string="Tracking number format", type='selection',
+        help="Allows you to define how the ItemNumber (the last 8 digits) "
+             "of the tracking number will be generated:\n"
+             "- Default postlogistics numbers: The webservice generates it"
+             " for you.\n"
+             "- Picking number with pack counter: Generate it using the "
+             "digits of picking name and add the pack number. 2 digits for"
+             "pack number and 6 digits for picking number. (eg. 07000042 "
+             "for picking 42 and 7th pack")
+    proclima_logo = fields.Boolean(
+        related='company_id.postlogistics_proclima_logo',
+        help="The “pro clima” logo indicates an item for which the "
+             "surcharge for carbon-neutral shipping has been paid and a "
+             "contract to that effect has been signed. For Letters with "
+             "barcode (BMB) domestic, the ProClima logo is printed "
+             "automatically (at no additional charge)"
+    )
 
     @api.model
-    def _get_delivery_instructions(self, web_service, company, service_code):
+    def _get_delivery_instructions(self, web_service, service_code):
         lang = self.env.context.get('lang', 'en')
         service_code_list = service_code.split(',')
-        res = web_service.read_delivery_instructions(company,
-                                                     service_code_list,
-                                                     lang)
+        res = web_service.read_delivery_instructions(service_code_list, lang)
         if 'errors' in res:
             errors = '\n'.join(res['errors'])
             error_message = (_('Could not retrieve Postlogistics delivery '
@@ -86,13 +82,14 @@ class PostlogisticsConfigSettings(models.TransientModel):
 
     @api.model
     def _update_delivery_instructions(self, web_service, additional_services):
-        carrier_option_obj = self.env['delivery.carrier.template.option']
+        CarrierOption = self.env['delivery.carrier.template.option']
 
-        xmlid = 'delivery_carrier_label_postlogistics.postlogistics'
+        xmlid = ('delivery_carrier_label_postlogistics'
+                 '.partner_postlogistics')
         postlogistics_partner = self.env.ref(xmlid)
 
         for service_code, data in additional_services.iteritems():
-            options = carrier_option_obj.search(
+            options = CarrierOption.search(
                 [('code', '=', service_code),
                  ('postlogistics_type', '=', 'delivery')
                  ]
@@ -104,17 +101,15 @@ class PostlogisticsConfigSettings(models.TransientModel):
                 data.update(code=service_code,
                             postlogistics_type='delivery',
                             partner_id=postlogistics_partner.id)
-                carrier_option_obj.create(data)
+                CarrierOption.create(data)
         lang = self.env.context.get('lang', 'en')
         _logger.info("Updated delivery instructions. [%s]", lang)
 
     @api.model
-    def _get_additional_services(self, web_service, company, service_code):
+    def _get_additional_services(self, web_service, service_code):
         lang = self.env.context.get('lang', 'en')
         service_code_list = service_code.split(',')
-        res = web_service.read_additional_services(company,
-                                                   service_code_list,
-                                                   lang)
+        res = web_service.read_additional_services(service_code_list, lang)
         if 'errors' in res:
             errors = '\n'.join(res['errors'])
             error_message = (_('Could not retrieve Postlogistics base '
@@ -138,13 +133,14 @@ class PostlogisticsConfigSettings(models.TransientModel):
 
     @api.model
     def _update_additional_services(self, web_service, additional_services):
-        carrier_option_obj = self.env['delivery.carrier.template.option']
+        CarrierOption = self.env['delivery.carrier.template.option']
 
-        xmlid = 'delivery_carrier_label_postlogistics.postlogistics'
+        xmlid = ('delivery_carrier_label_postlogistics'
+                 '.partner_postlogistics')
         postlogistics_partner = self.env.ref(xmlid)
 
         for service_code, data in additional_services.iteritems():
-            options = carrier_option_obj.search(
+            options = CarrierOption.search(
                 [('code', '=', service_code),
                  ('postlogistics_type', '=', 'additional')
                  ])
@@ -155,12 +151,12 @@ class PostlogisticsConfigSettings(models.TransientModel):
                 data.update(code=service_code,
                             postlogistics_type='additional',
                             partner_id=postlogistics_partner.id)
-                carrier_option_obj.create(data)
+                CarrierOption.create(data)
         lang = self.env.context.get('lang', 'en')
         _logger.info("Updated additional services [%s]", lang)
 
     @api.model
-    def _update_basic_services(self, web_service, company, group):
+    def _update_basic_services(self, web_service, group):
         """ Update of basic services
 
         A basic service can be part only of one service group
@@ -170,13 +166,14 @@ class PostlogisticsConfigSettings(models.TransientModel):
                   }
 
         """
-        carrier_option_obj = self.env['delivery.carrier.template.option']
+        CarrierOption = self.env['delivery.carrier.template.option']
 
-        xmlid = 'delivery_carrier_label_postlogistics.postlogistics'
+        xmlid = ('delivery_carrier_label_postlogistics'
+                 '.partner_postlogistics')
         postlogistics_partner = self.env.ref(xmlid)
         lang = self.env.context.get('lang', 'en')
 
-        res = web_service.read_basic_services(company, group.group_extid, lang)
+        res = web_service.read_basic_services(group.group_extid, lang)
         if 'errors' in res:
             errors = '\n'.join(res['errors'])
             error_message = (_('Could not retrieve Postlogistics base '
@@ -188,7 +185,7 @@ class PostlogisticsConfigSettings(models.TransientModel):
         # Create or update basic service
         for service in res['value'].BasicService:
             service_code = ','.join(service.PRZL)
-            options = carrier_option_obj.search(
+            options = CarrierOption.search(
                 [('code', '=', service_code),
                  ('postlogistics_service_group_id', '=', group.id),
                  ('postlogistics_type', '=', 'basic')
@@ -203,11 +200,10 @@ class PostlogisticsConfigSettings(models.TransientModel):
                             postlogistics_service_group_id=group.id,
                             partner_id=postlogistics_partner.id,
                             postlogistics_type='basic')
-                option = carrier_option_obj.create(data)
+                option = CarrierOption.create(data)
 
             # Get related services
             allowed_services = self._get_additional_services(web_service,
-                                                             company,
                                                              service_code)
             for key, value in additional_services.iteritems():
                 if key in allowed_services:
@@ -220,7 +216,6 @@ class PostlogisticsConfigSettings(models.TransientModel):
                 additional_services[key] = value
 
             allowed_services = self._get_delivery_instructions(web_service,
-                                                               company,
                                                                service_code)
             for key, value in delivery_instructions.iteritems():
                 if key in allowed_services:
@@ -237,7 +232,7 @@ class PostlogisticsConfigSettings(models.TransientModel):
                 'delivery_instructions': delivery_instructions}
 
     @api.model
-    def _update_service_groups(self, web_service, company):
+    def _update_service_groups(self, web_service):
         """ Also updates additional services and delivery instructions
         as they are shared between groups
 
@@ -246,7 +241,7 @@ class PostlogisticsConfigSettings(models.TransientModel):
 
         lang = self.env.context.get('lang', 'en')
 
-        res = web_service.read_service_groups(company, lang)
+        res = web_service.read_service_groups(lang)
         if 'errors' in res:
             errors = '\n'.join(res['errors'])
             error_message = (_('Could not retrieve Postlogistics group '
@@ -271,7 +266,7 @@ class PostlogisticsConfigSettings(models.TransientModel):
                 group = service_group_obj.create(data)
 
             # Get related services for all basic services of this group
-            res = self._update_basic_services(web_service, company, group)
+            res = self._update_basic_services(web_service, group)
 
             allowed_services = res.get('additional_services', {})
             for key, value in additional_services.iteritems():
@@ -311,7 +306,7 @@ class PostlogisticsConfigSettings(models.TransientModel):
             # make sure we create source text in en_US
             ctx = self.env.context.copy()
             ctx['lang'] = 'en_US'
-            self._update_service_groups(web_service, company)
+            self._update_service_groups(web_service)
 
             language_obj = self.env['res.lang']
             languages = language_obj.search([])
@@ -326,18 +321,16 @@ class PostlogisticsConfigSettings(models.TransientModel):
                 # languages
                 if postlogistics_lang == 'en':
                     continue
-                self.with_context(lang=lang_code)._update_service_groups(
-                    web_service, company
-                )
+                self.with_context(lang=lang_code
+                                  )._update_service_groups(web_service)
         return True
 
     @api.model
-    def _get_allowed_service_group_codes(self, web_service, company,
-                                         cp_license):
+    def _get_allowed_service_group_codes(self, web_service, cp_license):
         """ Get a list of allowed service group codes"""
         lang = self.env.context.get('lang', 'en')
         res = web_service.read_allowed_services_by_franking_license(
-            cp_license.number, company, lang)
+            cp_license.number, lang)
         if 'errors' in res:
             errors = '\n'.join(res['errors'])
             error_message = (_('Could not retrieve allowed Postlogistics '
@@ -371,7 +364,7 @@ class PostlogisticsConfigSettings(models.TransientModel):
             relations = {}
             for cp_license in company.postlogistics_license_ids:
                 service_groups = self._get_allowed_service_group_codes(
-                    web_service, company, cp_license
+                    web_service, cp_license
                 )
                 groups = service_group_obj.search(
                     [('group_extid', 'in', service_groups)],
@@ -380,6 +373,5 @@ class PostlogisticsConfigSettings(models.TransientModel):
                     relations.setdefault(group, license_obj.browse())
                     relations[group] |= cp_license
             for group, licenses in relations.iteritems():
-                vals = {'postlogistics_license_ids': [(6, 0, licenses.ids)]}
-                group.write(vals)
+                group.postlogistics_license_ids = licenses
         return True

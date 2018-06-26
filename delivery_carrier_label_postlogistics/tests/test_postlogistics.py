@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-# © 2015 Guewen Baconnier (Camptocamp SA)
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+# Copyright 2015-2017 Camptocamp
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import mock
-from openerp.tests import common
-from openerp.addons.delivery_carrier_label_postlogistics\
-    .postlogistics.web_service import PostlogisticsWebService
+
+from odoo.tests import common
+from ..postlogistics.web_service import PostlogisticsWebService
 
 
 class FakeWS(PostlogisticsWebService):
@@ -24,11 +24,11 @@ class FakeWS(PostlogisticsWebService):
         return result
 
 
-client_path = ('openerp.addons.delivery_carrier_label_postlogistics'
+client_path = ('odoo.addons.delivery_carrier_label_postlogistics'
                '.postlogistics.web_service.Client')
-auth_path = ('openerp.addons.delivery_carrier_label_postlogistics'
+auth_path = ('odoo.addons.delivery_carrier_label_postlogistics'
              '.postlogistics.web_service.HttpAuthenticated')
-output_path = ('openerp.addons.delivery_carrier_label_postlogistics'
+output_path = ('odoo.addons.delivery_carrier_label_postlogistics'
                '.postlogistics.web_service.PostlogisticsWebService'
                '._get_output_format')
 
@@ -38,12 +38,22 @@ class TestPostlogistics(common.TransactionCase):
     def setUp(self):
         super(TestPostlogistics, self).setUp()
         Product = self.env['product.product']
-        partner_xmlid = 'delivery_carrier_label_postlogistics.postlogistics'
+        partner_xmlid = ('delivery_carrier_label_postlogistics'
+                         '.partner_postlogistics')
         self.carrier = self.env['delivery.carrier'].create({
             'name': 'Postlogistics',
-            'carrier_type': 'postlogistics',
+            'delivery_type': 'postlogistics',
             'product_id': Product.create({'name': 'Shipping'}).id,
             'partner_id': self.env.ref(partner_xmlid).id,
+        })
+        Option = self.env['delivery.carrier.template.option']
+        label_layout = Option.create({'code': 'A6'})
+        output_format = Option.create({'code': 'pdf'})
+        image_resolution = Option.create({'code': '600pp'})
+        self.env.user.company_id.write({
+            'postlogistics_default_label_layout': label_layout.id,
+            'postlogistics_default_output_format': output_format.id,
+            'postlogistics_default_resolution': image_resolution.id,
         })
         stock_location = self.env.ref('stock.stock_location_stock')
         customer_location = self.env.ref('stock.stock_location_customers')

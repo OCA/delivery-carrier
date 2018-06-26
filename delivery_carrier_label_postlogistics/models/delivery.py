@@ -1,8 +1,13 @@
 # -*- coding: utf-8 -*-
-# © 2013-2016 Yannick Vaucher (Camptocamp SA)
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from lxml import etree
-from openerp import models, fields, api
+# Copyright 2013-2017 Yannick Vaucher (Camptocamp SA)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+import logging
+import json
+from odoo import api, fields, models
+from odoo.exceptions import UserError
+
+
+_logger = logging.getLogger(__name__)
 
 
 class PostlogisticsLicense(models.Model):
@@ -105,56 +110,36 @@ class DeliveryCarrierOption(models.Model):
 
     name = fields.Char(translate=True)
 
-    def fields_view_get(self, cr, uid, view_id=None, view_type='form',
-                        context=None, toolbar=False, submenu=False):
-        _super = super(DeliveryCarrierOption, self)
-        result = _super.fields_view_get(cr, uid, view_id=view_id,
-                                        view_type=view_type, context=context,
-                                        toolbar=toolbar, submenu=submenu)
-        xmlid = 'delivery_carrier_label_postlogistics.postlogistics'
-        ref = self.pool['ir.model.data'].xmlid_to_object
-        postlogistics_partner = ref(cr, uid, xmlid, context=context)
-        if context.get('default_carrier_id'):
-            carrier_obj = self.pool['delivery.carrier']
-            carrier = carrier_obj.browse(cr, uid,
-                                         context['default_carrier_id'],
-                                         context=context)
-            if carrier.partner_id == postlogistics_partner:
-                arch = result['arch']
-                doc = etree.fromstring(arch)
-                for node in doc.xpath("//field[@name='tmpl_option_id']"):
-                    node.set(
-                        'domain',
-                        "[('partner_id', '=', %s), "
-                        " ('id', 'in', parent.allowed_option_ids[0][2])]" %
-                        postlogistics_partner.id
-                    )
-                result['arch'] = etree.tostring(doc)
-        return result
+    tmpl_option_id_domain = fields.Char(
+        compute='_compute_tmpl_option_id_domain'
+    )
+
+    @api.depends('carrier_id.allowed_options_domain')
+    def _compute_tmpl_option_id_domain(self):
+        """ Gets the domain from related delivery.carrier
+            (be it from cache or context) """
+        for option in self:
+            domain = self.env.context.get('default_tmpl_option_id_domain')
+            option.tmpl_option_id_domain = (
+                option.carrier_id.allowed_options_domain or domain or '[]')
 
 
 class DeliveryCarrier(models.Model):
     """ Add service group """
     _inherit = 'delivery.carrier'
 
-    @api.model
-    def _get_carrier_type_selection(self):
-        """ Add postlogistics carrier type """
-        res = super(DeliveryCarrier, self)._get_carrier_type_selection()
-        res.append(('postlogistics', 'Postlogistics'))
-        return res
+    delivery_type = fields.Selection(selection_add=[('postlogistics',
+                                                     'Post logistics')])
 
-    @api.depends('partner_id',
+    @api.depends('delivery_type',
                  'available_option_ids',
                  'available_option_ids.tmpl_option_id',
                  'available_option_ids.postlogistics_type',
                  )
-    def _get_basic_service_ids(self):
+    def _compute_basic_service_ids(self):
         """ Search in all options for PostLogistics basic services if set """
-        xmlid = 'delivery_carrier_label_postlogistics.postlogistics'
-        postlogistics_partner = self.env.ref(xmlid)
         for carrier in self:
-            if carrier.partner_id != postlogistics_partner:
+            if carrier.delivery_type != 'postlogistics':
                 continue
 
             options = carrier.available_option_ids.filtered(
@@ -165,17 +150,15 @@ class DeliveryCarrier(models.Model):
                 continue
             self.postlogistics_basic_service_ids = options
 
-    @api.depends('partner_id',
+    @api.depends('delivery_type',
                  'postlogistics_service_group_id',
                  'postlogistics_basic_service_ids',
                  'postlogistics_basic_service_ids',
                  'available_option_ids',
                  'available_option_ids.postlogistics_type',
                  )
-    def _get_allowed_option_ids(self):
-        """ Return a list of possible options
-
-        A domain would be too complicated.
+    def _compute_allowed_options_domain(self):
+        """ Return a domain of possible options
 
         We do this to ensure the user first select a basic service. And
         then he adds additional services.
@@ -183,48 +166,52 @@ class DeliveryCarrier(models.Model):
         """
         option_template_obj = self.env['delivery.carrier.template.option']
 
-        xmlid = 'delivery_carrier_label_postlogistics.postlogistics'
-        postlogistics_partner = self.env.ref(xmlid)
-
         for carrier in self:
             allowed = option_template_obj.browse()
-            if carrier.partner_id != postlogistics_partner:
-                continue
-
-            service_group = carrier.postlogistics_service_group_id
-            if service_group:
-                basic_services = carrier.postlogistics_basic_service_ids
-                services = option_template_obj.search(
-                    [('postlogistics_service_group_id', '=', service_group.id)]
-                )
-                allowed |= services
-                if basic_services:
-                    related_services = option_template_obj.search(
-                        [('postlogistics_basic_service_ids', 'in',
-                          basic_services.ids)]
+            domain = []
+            if carrier.delivery_type != 'postlogistics':
+                domain.append(('partner_id', '=', False))
+            else:
+                service_group = carrier.postlogistics_service_group_id
+                if service_group:
+                    basic_services = carrier.postlogistics_basic_service_ids
+                    services = option_template_obj.search(
+                        [('postlogistics_service_group_id', '=',
+                          service_group.id)]
                     )
-                    allowed |= related_services
+                    allowed |= services
+                    if basic_services:
+                        related_services = option_template_obj.search(
+                            [('postlogistics_basic_service_ids', 'in',
+                              basic_services.ids)]
+                        )
+                        allowed |= related_services
 
-            # Allows to set multiple optional single option in order to
-            # let the user select them
-            single_option_types = [
-                'label_layout',
-                'output_format',
-                'resolution',
-            ]
-            selected_single_options = [
-                opt.tmpl_option_id.postlogistics_type
-                for opt in carrier.available_option_ids
-                if opt.postlogistics_type in single_option_types and
-                opt.mandatory]
-            if selected_single_options != single_option_types:
-                services = option_template_obj.search(
-                    [('postlogistics_type', 'in', single_option_types),
-                     ('postlogistics_type', 'not in',
-                      selected_single_options)],
-                )
-                allowed |= services
-            carrier.allowed_option_ids = allowed
+                # Allows to set multiple optional single option in order to
+                # let the user select them
+                single_option_types = [
+                    'label_layout',
+                    'output_format',
+                    'resolution',
+                ]
+                selected_single_options = [
+                    opt.tmpl_option_id.postlogistics_type
+                    for opt in carrier.available_option_ids
+                    if opt.postlogistics_type in single_option_types and
+                    opt.mandatory]
+                if selected_single_options != single_option_types:
+                    services = option_template_obj.search(
+                        [('postlogistics_type', 'in', single_option_types),
+                         ('postlogistics_type', 'not in',
+                          selected_single_options)],
+                    )
+                    allowed |= services
+                partner = self.env.ref('delivery_carrier_label_postlogistics'
+                                       '.partner_postlogistics')
+                domain.append(('partner_id', '=', partner.id)),
+                domain.append(('id', 'in', allowed.ids))
+
+            carrier.allowed_options_domain = json.dumps(domain)
 
     postlogistics_license_id = fields.Many2one(
         comodel_name='postlogistics.license',
@@ -238,14 +225,38 @@ class DeliveryCarrier(models.Model):
     )
     postlogistics_basic_service_ids = fields.One2many(
         comodel_name='delivery.carrier.template.option',
-        compute='_get_basic_service_ids',
+        compute='_compute_basic_service_ids',
         string='PostLogistics Service Group',
         help="Basic Service defines the available "
              "additional options for this delivery method",
     )
-    allowed_option_ids = fields.Many2many(
-        comodel_name='delivery.carrier.template.option',
-        compute='_get_allowed_option_ids',
-        string='Allowed options',
-        help="Compute allowed options according to selected options.",
+
+    allowed_options_domain = fields.Char(
+        compute="_compute_allowed_options_domain",
+        store=False,
     )
+
+    @api.multi
+    def postlogistics_get_shipping_price_from_so(self, order):
+        self.ensure_one()
+        try:
+            computed_price = self.get_price_available(order)
+            self.available = True
+        except UserError as e:
+            # No suitable delivery method found, probably configuration error
+            _logger.info("Carrier %s: %s", self.name, e.name)
+            computed_price = 0.0
+
+        return [computed_price * (1.0 + (float(self.margin) / 100.0))]
+
+    @api.multi
+    def postlogistics_send_shipping(self, pickings):
+        return [{'exact_price': False, 'tracking_number': False}]
+
+    @api.multi
+    def postlogistics_get_tracking_link(self, pickings):
+        return False
+
+    @api.multi
+    def postlogistics_cancel_shipment(self, pickings):
+        return False
