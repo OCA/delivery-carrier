@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * base_delivery_carrier_label
-# 
+#
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2018
 msgid ""
@@ -11,11 +11,12 @@ msgstr ""
 "POT-Creation-Date: 2018-05-30 02:55+0000\n"
 "PO-Revision-Date: 2018-05-30 02:55+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2018\n"
-"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/teams/23907/pt_BR/)\n"
+"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/"
+"teams/23907/pt_BR/)\n"
+"Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: pt_BR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: base_delivery_carrier_label
@@ -70,7 +71,8 @@ msgid ""
 "By check, user can choose to apply this option to each Delivery Order\n"
 " using this delivery method"
 msgstr ""
-"Checando o usuário pode escolher para aplicar esta opção para cada ordem de entrega,\n"
+"Checando o usuário pode escolher para aplicar esta opção para cada ordem de "
+"entrega,\n"
 "usando este método de entrega"
 
 #. module: base_delivery_carrier_label
@@ -84,20 +86,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_manifest_wizard_carrier_id
 msgid "Carrier"
 msgstr "Transportador"
-
-#. module: base_delivery_carrier_label
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account_carrier_type
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_manifest_wizard_carrier_type
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_picking_carrier_type
-msgid "Carrier Type"
-msgstr ""
-
-#. module: base_delivery_carrier_label
-#: model:ir.model.fields,help:base_delivery_carrier_label.field_delivery_carrier_carrier_type
-#: model:ir.model.fields,help:base_delivery_carrier_label.field_manifest_wizard_carrier_type
-#: model:ir.model.fields,help:base_delivery_carrier_label.field_stock_picking_carrier_type
-msgid "Carrier type (combines several delivery methods)"
-msgstr "Tipo de transportadora (combina vários metodos de entrega)"
 
 #. module: base_delivery_carrier_label
 #: model:ir.ui.menu,name:base_delivery_carrier_label.menu_carriers_config
@@ -255,13 +243,6 @@ msgid "If checked, this option is necessarily applied to the delivery order"
 msgstr ""
 
 #. module: base_delivery_carrier_label
-#: model:ir.model.fields,help:base_delivery_carrier_label.field_carrier_account_carrier_type
-msgid ""
-"In case of several carriers, help to know which account belong to which "
-"carrier"
-msgstr ""
-
-#. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_index_content
 msgid "Indexed Content"
 msgstr ""
@@ -322,9 +303,9 @@ msgid "Manifest"
 msgstr ""
 
 #. module: base_delivery_carrier_label
-#: code:addons/base_delivery_carrier_label/wizard/manifest_wizard.py:42
+#: code:addons/base_delivery_carrier_label/wizard/manifest_wizard.py:31
 #, python-format
-msgid "Manifest not implemented for '%s' carrier type."
+msgid "Manifest not implemented for '%s' carrier."
 msgstr ""
 
 #. module: base_delivery_carrier_label
@@ -433,7 +414,8 @@ msgstr "Etiqueta de envio"
 #, python-format
 msgid ""
 "Some labels already exist for the picking %s.\n"
-"Please delete the existing labels in the attachments of this picking and try again"
+"Please delete the existing labels in the attachments of this picking and try "
+"again"
 msgstr ""
 
 #. module: base_delivery_carrier_label
@@ -469,8 +451,7 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_stock_quant_package_total_weight
 msgid ""
-"Total weight of the package in kg, including the weight of the logistic "
-"unit."
+"Total weight of the package in kg, including the weight of the logistic unit."
 msgstr ""
 
 #. module: base_delivery_carrier_label
@@ -479,7 +460,6 @@ msgid "Transfer"
 msgstr ""
 
 #. module: base_delivery_carrier_label
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_carrier_type
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_type
 msgid "Type"
 msgstr ""
@@ -528,3 +508,6 @@ msgstr ""
 #: model:ir.ui.view,arch_db:base_delivery_carrier_label.delivery_carrier_template_option_view_tree
 msgid "delivery_carrier_option"
 msgstr ""
+
+#~ msgid "Carrier type (combines several delivery methods)"
+#~ msgstr "Tipo de transportadora (combina vários metodos de entrega)"
