@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="zipcode_selector_wizard_form_view" model="ir.ui.view">
+            <field name="name">zipcode.selector.wizard.form</field>
+            <field name="model">zipcode.selector.wizard</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Select the city">
+                    <group>
+                        <field name="partner_id" readonly="True"/>
+                        <field name="partner_city"/>
+                        <field name="city_name"/>
+                    </group>
+                    <footer>
+                        <button name="confirm" string="confirm" type="object" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window name="Zipcode selector"
+            res_model="zipcode.selector.wizard"
+            view_id="zipcode_selector_wizard_form_view"
+            view_mode="form"
+            target="new"
+            id="action_zipcode_selector_wizard"/>
+</odoo>

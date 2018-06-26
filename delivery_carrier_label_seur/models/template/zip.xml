@@ -1,0 +1,14 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ecat="http://eCatalogoWS">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ecat:infoPoblacionesCortoStr>
+         <ecat:in0></ecat:in0>
+         <ecat:in1></ecat:in1>
+         <ecat:in2>${zip}</ecat:in2>
+         <ecat:in3></ecat:in3>
+         <ecat:in4></ecat:in4>
+         <ecat:in5>${username}</ecat:in5>
+         <ecat:in6>${password}</ecat:in6>
+      </ecat:infoPoblacionesCortoStr>
+   </soapenv:Body>
+</soapenv:Envelope>

@@ -34,8 +34,8 @@ class DeliveryCarrier(models.Model):
 
     ]
 
-    seur_service_code = fields.Selection(SEUR_SERVICES, 'Seur Service Code')
-    seur_product_code = fields.Selection(SEUR_PRODUCTS, 'Seur Product Code')
+    seur_service_code = fields.Selection(SEUR_SERVICES)
+    seur_product_code = fields.Selection(SEUR_PRODUCTS)
 
     @api.model
     def _get_carrier_type_selection(self):

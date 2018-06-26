@@ -2,9 +2,8 @@
 # © 2015 FactorLibre - Ismael Calvo <ismael.calvo@factorlibre.com>
 # © 2017 PESOL - Angel Moya <angel.moya@pesol.es>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from openerp import models, api, fields, _
-from seur.picking import Picking
-from openerp.exceptions import Warning
+from odoo import models, api, fields, _
+from odoo.exceptions import UserError
 
 
 class ManifestWizard(models.TransientModel):
@@ -15,27 +14,12 @@ class ManifestWizard(models.TransientModel):
         self.ensure_one()
         if self.carrier_type == 'seur':
             config = self.carrier_id.seur_config_id
-            context = {
-                'pdf': True
-            }
             data = {
                 'date': fields.Date.from_string(self.from_date)
             }
-            manifiesto = False
-            with Picking(
-                config.username,
-                config.password,
-                config.vat,
-                config.franchise_code,
-                'Odoo',  # seurid
-                config.integration_code,
-                config.accounting_code,
-                100,
-                context
-            ) as seur_picking:
-                manifiesto = seur_picking.manifiesto(data)
+            manifiesto = config.manifiesto(data)
             if not manifiesto:
-                raise Warning(
+                raise UserError(
                     _("Manifest no generated"))
 
             self.write({

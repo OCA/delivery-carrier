@@ -1,0 +1,63 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:imp="http://localhost:7026/ImprimirECBWebService" xmlns:py="http://genshi.edgewall.org/">
+    <soapenv:Header/>
+    <py:def function="Bulto()">
+                <root>
+                    <exp>
+                    <bulto py:for="i in range(0, total_bultos)">
+                        <ci>${ci}</ci>
+                        <nif>${vat}</nif>
+                        <ccc>${ccc}</ccc>
+                        <servicio>${servicio}</servicio>
+                        <producto>${product}</producto>
+                        <total_bultos>${total_bultos}</total_bultos>
+                        <total_kilos>${total_kilos}</total_kilos>
+                        <pesoBulto>${peso_bulto}</pesoBulto>
+                        <observaciones>${observaciones}</observaciones>
+                        <referencia_expedicion>${referencia_expedicion}</referencia_expedicion>
+                        <ref_bulto>${ref_bulto}</ref_bulto>
+                        <clavePortes>${clave_portes}</clavePortes>
+                        <claveReembolso>${clave_reembolso}</claveReembolso>
+                        <valorReembolso>${valor_reembolso}</valorReembolso>
+                        <nombre_consignatario>${cliente_nombre}</nombre_consignatario>
+                        <direccion_consignatario>${cliente_direccion}</direccion_consignatario>
+                        <tipoVia_consignatario>${cliente_tipovia}</tipoVia_consignatario>
+                        <tNumVia_consignatario>${cliente_tnumvia}</tNumVia_consignatario>
+                        <numVia_consignatario>${cliente_numvia}</numVia_consignatario>
+                        <escalera_consignatario>${cliente_escalera}</escalera_consignatario>
+                        <piso_consignatario>${cliente_piso}</piso_consignatario>
+                        <puerta_consignatario>${cliente_puerta}</puerta_consignatario>
+                        <poblacion_consignatario>${cliente_poblacion}</poblacion_consignatario>
+                        <codPostal_consignatario>${cliente_cpostal}</codPostal_consignatario>
+                        <pais_consignatario>${cliente_pais}</pais_consignatario>
+                        <email_consignatario>${cliente_email}</email_consignatario>
+                        <telefono_consignatario>${cliente_telefono}</telefono_consignatario>
+                        <atencion_de>${cliente_atencion}</atencion_de>
+                        <test_preaviso>${aviso_preaviso}</test_preaviso>
+                        <test_reparto>${aviso_reparto}</test_reparto>
+                        <test_email>${aviso_email}</test_email>
+                        <test_sms>${aviso_sms}</test_sms>
+                        <id_mercancia>${id_mercancia}</id_mercancia>
+                    </bulto>
+                    </exp>
+                </root>
+    </py:def>
+    <soapenv:Body>
+        <imp:impresionIntegracionConECBWS>
+            <imp:in0>${username}</imp:in0>
+            <imp:in1>${password}</imp:in1>
+            <imp:in2>${printer}</imp:in2>
+            <imp:in3>${printer_model}</imp:in3>
+            <imp:in4>${ecb_code}</imp:in4>
+            <imp:in5>
+                <![CDATA[<?xml version="1.0" encoding="ISO-8859-1"?>
+                    ${Bulto()}
+                ]]>
+            </imp:in5>
+            <imp:in6>fichero.xml</imp:in6>
+            <imp:in7>${vat}</imp:in7>
+            <imp:in8>${franchise}</imp:in8>
+            <imp:in9>-1</imp:in9>
+            <imp:in10>${seurid}</imp:in10>
+        </imp:impresionIntegracionConECBWS>
+    </soapenv:Body>
+</soapenv:Envelope>

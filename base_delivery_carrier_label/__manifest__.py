@@ -2,7 +2,7 @@
 # Copyright 2013-2015 Yannick Vaucher (Camptocamp SA)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 {'name': 'Base module for carrier labels',
- 'version': '10.0.1.2.0',
+ 'version': '10.0.1.3.0',
  'author': "Camptocamp,Akretion,Odoo Community Association (OCA)",
  'maintainer': 'Camptocamp',
  'category': 'Delivery',
@@ -10,6 +10,7 @@
  'depends': ['delivery'],
  'website': 'http://www.camptocamp.com/',
  'data': [
+     'data/delivery_carrier_cron.xml',
      'views/delivery.xml',
      'views/stock.xml',
      'views/res_config.xml',

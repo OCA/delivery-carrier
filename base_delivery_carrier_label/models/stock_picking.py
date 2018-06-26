@@ -2,6 +2,7 @@
 # Copyright 2012-2015 Akretion <http://www.akretion.com>.
 # Copyright 2013-2016 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+from base64 import b64encode
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
@@ -31,6 +32,12 @@ class StockPicking(models.Model):
     option_ids = fields.Many2many(comodel_name='delivery.carrier.option',
                                   string='Options')
     recreate_picking_label = fields.Boolean()
+    tracking_status_history = fields.Text(readonly=True)
+    tracking_status = fields.Char(readonly=True)
+
+    @api.model
+    def _check_tracking_status_cron(self, days=6):
+        return
 
     @api.multi
     def generate_default_label(self, package_ids=None):
@@ -86,7 +93,7 @@ class StockPicking(models.Model):
             'datas_fname': label.get('filename', label['name']),
             'res_id': self.id,
             'res_model': 'stock.picking',
-            'datas': label['file'].encode('base64'),
+            'datas': b64encode(label['file']),
             'file_type': label['file_type'],
         }
 

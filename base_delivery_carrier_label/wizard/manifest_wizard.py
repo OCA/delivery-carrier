@@ -37,7 +37,7 @@ class ManifestWizard(models.TransientModel):
         ('end', 'END')
     ], readonly=True, default='init')
 
-    @api.one
     def get_manifest_file(self):
+        self.ensure_one()
         raise exceptions.Warning(_("Manifest not implemented for '%s' "
                                    "carrier type.") % self.carrier_type)

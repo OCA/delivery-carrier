@@ -7,23 +7,26 @@
     "summary": "Allows to generate shipping label for SEUR shipments.",
     "version": "10.0.1.0.0",
     "category": "Delivery",
-    "website": "http://factorlibre.com",
+    "website": "https://github.com/OCA/delivery-carrier",
     "author": "FactorLibre, PESOL, Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
     "external_dependencies": {
-        "python": ['seur'],
+        "python": ['unidecode', 'genshi'],
     },
     "depends": [
         "delivery",
         "base_delivery_carrier_label",
+        "base_report_to_printer",
+        'queue_job'
     ],
     "data": [
         "security/ir.model.access.csv",
-        "view/seur_config_view.xml",
-        "view/delivery_view.xml",
-        "view/stock_view.xml"
+        "views/seur_config_view.xml",
+        "views/delivery_view.xml",
+        "views/stock_view.xml",
+        "wizard/zipcode_selector_wizard_view.xml"
     ],
     "demo": [],
     "qweb": []
