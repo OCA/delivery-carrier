@@ -12,6 +12,7 @@ setuptools.setup(
         'odoo10-addon-delivery_auto_refresh',
         'odoo10-addon-delivery_carrier_b2c',
         'odoo10-addon-delivery_carrier_deposit',
+        'odoo10-addon-delivery_carrier_label_postlogistics',
         'odoo10-addon-delivery_dropoff_site',
         'odoo10-addon-delivery_multi_destination',
         'odoo10-addon-sale_delivery_rate',
