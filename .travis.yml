@@ -38,6 +38,7 @@ install:
   - pip install unidecode
   - pip install pycountry
   - pip install suds-jurko==0.6
+  - pip install seur
 
 script:
   - travis_run_tests
