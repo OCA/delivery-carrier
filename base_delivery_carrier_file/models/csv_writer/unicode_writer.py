@@ -1,4 +1,4 @@
-# CSV writer from python doc
+# -*- coding: utf-8 -*-
 import csv
 import codecs
 
