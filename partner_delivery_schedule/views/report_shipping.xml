@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2018 Tecnativa - Sergio Teruel
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <template id="report_shipping2" inherit_id="delivery.report_shipping2">
+        <xpath expr="//span[@t-field='o.carrier_id']" position="after">
+            <t t-foreach="o.partner_id.delivery_schedule_ids" t-as="horary">
+                <br/>
+                <span class="badge dropdown o_tag_color_0" t-field="horary.display_name"/>
+            </t>
+        </xpath>
+    </template>
+
+</odoo>
