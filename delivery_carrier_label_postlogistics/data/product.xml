@@ -5,5 +5,7 @@
     <field name="name">PostLogistics Delivery</field>
     <field name="type">service</field>
     <field name="sale_ok" eval="False"/>
+    <field name="invoice_policy">order</field>
+    <field name="expense_policy">no</field>
   </record>
 </odoo>
