@@ -12,11 +12,9 @@ from odoo import _, exceptions
 _logger = logging.getLogger(__name__)
 
 try:
-    from suds.xsd.doctor import Import, ImportDoctor
     from suds.client import Client, WebFault
     from suds.transport.http import HttpAuthenticated
     from suds.transport.https import HttpAuthenticated as HttpsAuth
-    from suds.cache import NoCache
 except ImportError:
     _logger.warning(
         'suds library not found. '
