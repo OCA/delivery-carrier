@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2018 Simone Rubino - Agile Business Group
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+    <record id="view_delivery_price_rule_form" model="ir.ui.view">
+        <field name="name">Add category to delivery.price.rule</field>
+        <field name="model">delivery.price.rule</field>
+        <field name="inherit_id" ref="delivery.view_delivery_price_rule_form"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="product_category_id"/>
+            </field>
+            <xpath expr="//label[@for='variable']" position="attributes">
+                <attribute name="attrs">{'invisible': [('product_category_id', '!=', False)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='variable']/ancestor::div[1]" position="attributes">
+                <attribute name="attrs">{'invisible': [('product_category_id', '!=', False)]}</attribute>
+            </xpath>
+            <xpath expr="//label[@for='list_base_price']" position="attributes">
+                <attribute name="attrs">{'invisible': [('product_category_id', '!=', False)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='list_base_price']/ancestor::div[1]" position="attributes">
+                <attribute name="attrs">{'invisible': [('product_category_id', '!=', False)]}</attribute>
+            </xpath>
+            <field name="standard_price" position="before">
+                <field name="product_category_price" attrs="{'invisible': [('product_category_id', '=', False)]}"/>
+            </field>
+        </field>
+    </record>
+</odoo>
