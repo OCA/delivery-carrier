@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_picking_withcarrier_out_form" model="ir.ui.view">
+          <field name="model">stock.picking</field>
+          <field name="inherit_id" ref="base_delivery_carrier_label.view_picking_withcarrier_out_form"/>
+          <field name="arch" type="xml">
+            <field name="carrier_code" position="after">
+              <field name="mrw_service_type" attrs="{'invisible': [('carrier_type', '!=', 'mrw')], 'required': [('carrier_type', '=', 'mrw')]}"/>
+              <field name="mrw_frequence" attrs="{'invisible': ['|',('carrier_type', '!=', 'mrw'),('mrw_service_type','!=','0005')], 'required': [('mrw_service_type', '=', '0005')]}"/>
+            </field>
+          </field>
+        </record>
+
+    </data>
+</odoo>
