@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2018 Tecnativa - Sergio Teruel
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="view_picking_form" model="ir.ui.view">
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='extra']" position="inside">
+                <group name="delivery_zone">
+                    <field name="delivery_zone_id"
+                           attrs="{'readonly': [('state', '=', 'done')]}"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_picking_internal_search" model="ir.ui.view">
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_internal_search"/>
+        <field name="arch" type="xml">
+            <field name="group_id" position="after">
+                <separator/>
+                <field name="delivery_zone_id"/>
+            </field>
+            <xpath expr="//filter[@name='picking_type']/.." position="inside">
+                <filter name="delivery_zone_group" string="Delivery Zone" context="{'group_by': 'delivery_zone_id'}"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
