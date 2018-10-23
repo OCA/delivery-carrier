@@ -9,6 +9,7 @@ setuptools.setup(
     version=version,
     install_requires=[
         'odoo11-addon-base_delivery_carrier_label',
+        'odoo11-addon-partner_delivery_zone',
     ],
     classifiers=[
         'Programming Language :: Python',
