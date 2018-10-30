@@ -266,7 +266,7 @@ class StockQuantPackage(models.Model):
             articles.append(article)
             product = operation.product_id
             # stands for harmonized_system
-            hs = product.product_tmpl_id.get_hs_code_recursively()
+            hs = product.get_hs_code_recursively()
             if not hs:
                 raise UserError(_(
                     "No H.S. Code on product '%s' nor on it's "
