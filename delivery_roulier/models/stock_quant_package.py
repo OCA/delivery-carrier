@@ -170,7 +170,7 @@ class StockQuantPackage(models.Model):
     @api.multi
     def _roulier_get_parcel(self, picking):
         self.ensure_one()
-        weight = self.weight
+        weight = self.shipping_weight or self.weight
         parcel = {
             'weight': weight,
             'reference': self.name
