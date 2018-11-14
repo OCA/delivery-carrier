@@ -1,6 +1,6 @@
 <odoo>
 <template id="report_default_label">
-  <t t-call="report.html_container">
+  <t t-call="web.basic_layout">
     <t t-foreach="docs" t-as="o">
       <div class="page">
         <div class="address">
