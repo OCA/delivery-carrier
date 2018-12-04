@@ -3,11 +3,11 @@
 {
     'name': 'Partner Delivery Zone',
     'summary': 'Set on partners a zone for delivery goods',
-    'version': '11.0.1.0.0',
+    'version': '12.0.1.0.0',
     'development_status': 'Beta',
     'category': 'Delivery',
     'website': 'https://github.com/OCA/delivery-carrier',
-    'author': 'Tecnativa, Odoo Community Association (OCA)',
+    'author': 'Tecnativa, Pesol, Odoo Community Association (OCA)',
     'license': 'AGPL-3',
     'application': False,
     'installable': True,
