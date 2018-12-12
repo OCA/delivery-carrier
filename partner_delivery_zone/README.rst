@@ -23,7 +23,7 @@ Partner Delivery Zone
     :target: https://runbot.odoo-community.org/runbot/99/12.0
     :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3| |badge4| |badge5|
+|badge1| |badge2| |badge3| |badge4| |badge5| 
 
 This module allows to set delivery zones on partner. This information is
 written in sale orders and stock pickings.
@@ -73,6 +73,7 @@ Authors
 ~~~~~~~
 
 * Tecnativa
+* Pesol
 
 Contributors
 ~~~~~~~~~~~~
@@ -97,6 +98,6 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-This module is part of the `OCA/delivery-carrier <https://github.com/OCA/delivery-carrier/tree/11.0/partner_delivery_zone>`_ project on GitHub.
+This module is part of the `OCA/delivery-carrier <https://github.com/OCA/delivery-carrier/tree/12.0/partner_delivery_zone>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
