@@ -209,8 +209,7 @@ msgid "Purchased"
 msgstr ""
 
 #. module: stock_picking_delivery_rate
-#: selection:delivery.carrier.rate,state:0
-#: selection:stock.picking.rate,state:0
+#: selection:delivery.carrier.rate,state:0 selection:stock.picking.rate,state:0
 msgid "Quoted"
 msgstr ""
 
@@ -266,7 +265,6 @@ msgid "Stock Picking Dispatch Rate Purchase"
 msgstr ""
 
 #. module: stock_picking_delivery_rate
-#: model:ir.model.fields,help:stock_picking_delivery_rate.field_delivery_carrier_partner_id
 #: model:ir.model.fields,help:stock_picking_delivery_rate.field_delivery_carrier_rate_partner_id
 #: model:ir.model.fields,help:stock_picking_delivery_rate.field_stock_picking_rate_partner_id
 msgid "The partner that is doing the delivery service."
@@ -278,13 +276,7 @@ msgid "Transfer"
 msgstr "Trasferisci"
 
 #. module: stock_picking_delivery_rate
-#: model:ir.model.fields,field_description:stock_picking_delivery_rate.field_delivery_carrier_partner_id
-msgid "Transporter Company"
-msgstr ""
-
-#. module: stock_picking_delivery_rate
-#: selection:delivery.carrier.rate,state:0
-#: selection:stock.picking.rate,state:0
+#: selection:delivery.carrier.rate,state:0 selection:stock.picking.rate,state:0
 msgid "Voided"
 msgstr ""
 
