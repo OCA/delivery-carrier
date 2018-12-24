@@ -1,33 +1,18 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    Author: Guewen Baconnier
-#    Copyright 2012 Camptocamp SA
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# Copyright 2012 Camptocamp SA
+# Author: Guewen Baconnier
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import os
 import logging
 
 from openerp import models, fields, api, exceptions
 from openerp.tools.translate import _
-from .generator import new_file_generator
+
+from ..generator import new_file_generator
 
 
-class CarrierFile(models.Model):
+class DeliveryCarrierFile(models.Model):
     _name = 'delivery.carrier.file'
 
     @api.model
@@ -66,7 +51,7 @@ class CarrierFile(models.Model):
                 file_handle.write(file_content)
         return True
 
-    @api.one
+    @api.multi
     def _generate_files(self, picking_ids):
         """
         Generate one or more files according to carrier_file configuration
@@ -78,34 +63,35 @@ class CarrierFile(models.Model):
                                  we have to generate a file
         :return: True if successful
         """
-        log = logging.getLogger('delivery.carrier.file')
-        file_generator = new_file_generator(self.type)
+        for this in self:
+            log = logging.getLogger('delivery.carrier.file')
+            file_generator = new_file_generator(this.type)
 
-        picking_obj = self.env["stock.picking"]
-        pickings = picking_obj.browse(picking_ids)
+            picking_obj = self.env["stock.picking"]
+            pickings = picking_obj.browse(picking_ids)
 
-        # must return a list of generated pickings ids to update
-        files = file_generator.generate_files(pickings, self)
+            # must return a list of generated pickings ids to update
+            files = file_generator.generate_files(pickings, this)
 
-        for f in files:
-            filename, file_content, picking_ids = f
-            # we pass the errors because the files can still be
-            # generated manually
-            # at first I would like to open a new cursor and
-            # commit the write after each file created
-            # but I encountered lock because the picking
-            # was already modified in the current transaction
-            try:
-                if self._write_file(filename, file_content):
-                    picking_obj.browse(picking_ids).write({
-                        'carrier_file_generated': True})
-            except Exception as e:
-                log.exception("Could not create the picking file "
-                              "for pickings %s: %s",
-                              picking_ids, e)
+            for f in files:
+                filename, file_content, picking_ids = f
+                # we pass the errors because the files can still be
+                # generated manually
+                # at first I would like to open a new cursor and
+                # commit the write after each file created
+                # but I encountered lock because the picking
+                # was already modified in the current transaction
+                try:
+                    if this._write_file(filename, file_content):
+                        picking_obj.browse(picking_ids).write({
+                            'carrier_file_generated': True})
+                except Exception as e:
+                    log.exception("Could not create the picking file "
+                                  "for pickings %s: %s",
+                                  picking_ids, e)
         return True
 
-    @api.one
+    @api.multi
     def generate_files(self, picking_ids):
         """
         Generate one or more files according to carrier_file
@@ -118,7 +104,8 @@ class CarrierFile(models.Model):
                                  which we have to generate a file
         :return: True if successful
         """
-        return self._generate_files(picking_ids)
+        for this in self:
+            return this._generate_files(picking_ids)
 
     name = fields.Char('Name', size=64, required=True)
     type = fields.Selection(selection='get_type_selection',
@@ -138,9 +125,3 @@ class CarrierFile(models.Model):
                                  'is processed. If activated, each '
                                  'delivery order will be exported '
                                  'in a separate file.')
-
-
-class delivery_carrier(models.Model):
-    _inherit = 'delivery.carrier'
-
-    carrier_file_id = fields.Many2one('delivery.carrier.file', 'Carrier File')

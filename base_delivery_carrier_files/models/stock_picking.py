@@ -1,28 +1,12 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    Author: Guewen Baconnier
-#    Copyright 2012 Camptocamp SA
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# Copyright 2012 Camptocamp SA
+# Author: Guewen Baconnier
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from openerp import models, fields, api
 
 
-class stock_picking(models.Model):
+class StockPicking(models.Model):
     _inherit = "stock.picking"
 
     @api.multi
@@ -68,27 +52,10 @@ class stock_picking(models.Model):
 
     @api.multi
     def action_done(self):
-        result = super(stock_picking, self).action_done()
+        result = super(StockPicking, self).action_done()
         self.generate_carrier_files(auto=True)
         return result
 
     carrier_file_generated = fields.Boolean(
         'Carrier File Generated', readonly=True, copy=False,
         help="The file for the delivery carrier has been generated.")
-
-
-class stock_move(models.Model):
-    _inherit = 'stock.move'
-
-    @api.multi
-    def write(self, values):
-        write_result = super(stock_move, self).write(values)
-        if values.get('state') and values['state'] == 'done':
-            picking_ids = map(lambda p: p.id, self.mapped('picking_id'))
-            done_pickings = self.env['stock.picking'].search([
-                ('id', 'in', picking_ids),
-                ('state', '=', 'done')
-            ])
-            if done_pickings:
-                done_pickings.generate_carrier_files()
-        return write_result
