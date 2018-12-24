@@ -21,8 +21,7 @@
 
 import mock
 from openerp.tests import common
-from openerp.addons.delivery_carrier_label_postlogistics\
-    .postlogistics.web_service import PostlogisticsWebService
+from ..postlogistics.web_service import PostlogisticsWebService
 
 
 class FakeWS(PostlogisticsWebService):

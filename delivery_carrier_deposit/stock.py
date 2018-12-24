@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #   Copyright (C) 2012-2014 Akretion France (www.akretion.com)
@@ -39,6 +39,7 @@ class DepositSlip(models.Model):
             }
         }
 
+    # pylint: disable=api-one-deprecated
     @api.one
     @api.depends('picking_ids')
     def _compute_deposit_slip(self):
