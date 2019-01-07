@@ -10,6 +10,7 @@ setuptools.setup(
     install_requires=[
         'odoo11-addon-base_delivery_carrier_label',
         'odoo11-addon-delivery_carrier_label_default',
+        'odoo11-addon-delivery_carrier_partner',
         'odoo11-addon-partner_delivery_schedule',
         'odoo11-addon-partner_delivery_zone',
     ],
