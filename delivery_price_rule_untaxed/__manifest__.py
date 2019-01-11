@@ -1,10 +1,10 @@
-# -*- coding: utf-8 -*-
 # Copyright 2018 Simone Rubino - Agile Business Group
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+
 {
     "name": "Delivery price rule untaxed",
     "summary": "Add untaxed amount to variables for price delivery price rule",
-    "version": "10.0.1.0.0",
+    "version": "11.0.1.0.0",
     "development_status": "Beta",
     "category": "Stock",
     "website": "https://github.com/OCA/delivery-carrier/tree/"
