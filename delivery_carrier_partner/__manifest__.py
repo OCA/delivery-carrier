@@ -3,7 +3,7 @@
 {
     "name": "Delivery carrier partner",
     "summary": "Add a partner in the delivery carrier",
-    "version": "11.0.1.0.0",
+    "version": "11.0.1.0.1",
     "development_status": "Beta",
     "category": "Delivery",
     "website": "https://github.com/OCA/delivery-carrier/tree/"
