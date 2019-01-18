@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-11-14 10:57+0000\n"
-"PO-Revision-Date: 2018-11-14 12:00+0100\n"
-"Last-Translator: \n"
+"PO-Revision-Date: 2019-02-04 14:50+0000\n"
+"Last-Translator: Marta Vázquez Rodríguez <vazrodmar@gmail.com>\n"
 "Language-Team: \n"
-"Language: es_ES\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.0.6\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.4\n"
 
 #. module: partner_delivery_schedule
 #: model:ir.ui.view,arch_db:partner_delivery_schedule.report_delivery_document
@@ -37,7 +37,7 @@ msgstr "Click para establecer un horario de entrega a un partner."
 #. module: partner_delivery_schedule
 #: model:ir.model.fields,field_description:partner_delivery_schedule.field_delivery_schedule_color
 msgid "Color Index"
-msgstr ""
+msgstr "Color inicial"
 
 #. module: partner_delivery_schedule
 #: model:ir.model,name:partner_delivery_schedule.model_res_partner
@@ -169,7 +169,7 @@ msgstr "Miércoles"
 #. module: partner_delivery_schedule
 #: model:ir.model,name:partner_delivery_schedule.model_delivery_schedule
 msgid "delivery.schedule"
-msgstr ""
+msgstr "'delivery.schedule'"
 
 #~ msgid "Partner"
 #~ msgstr "Empresa"
