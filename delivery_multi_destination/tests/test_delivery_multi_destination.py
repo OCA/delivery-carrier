@@ -1,8 +1,8 @@
-# -*- coding: utf-8 -*-
 # Copyright 2017 Luis M. Ontalba <luis.martinez@tecnativa.com>
+# Copyright 2019 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp.tests import common
+from odoo.tests import common
 
 
 class TestDeliveryMultiDestination(common.SavepointCase):
@@ -36,14 +36,28 @@ class TestDeliveryMultiDestination(common.SavepointCase):
             'state_id': cls.state.id,
             'zip': '33333'
         })
+        cls.product = cls.env['product.product'].create({
+            'name': 'Test carrier multi',
+            'type': 'service',
+        })
+        cls.product_child_1 = cls.env['product.product'].create({
+            'name': 'Test child 1',
+            'type': 'service',
+        })
+        cls.product_child_2 = cls.env['product.product'].create({
+            'name': 'Test child 2',
+            'type': 'service',
+        })
         cls.carrier_multi = cls.env['delivery.carrier'].create({
             'name': 'Test carrier multi',
+            'product_id': cls.product.id,
             'destination_type': 'multi',
             'delivery_type': 'fixed',
             'fixed_price': 100,
             'child_ids': [
                 (0, 0, {
                     'name': 'Test child 1',
+                    'product_id': cls.product_child_1.id,
                     'sequence': 1,
                     'country_ids': [(6, 0, cls.country_2.ids)],
                     'state_ids': [(6, 0, cls.state.ids)],
@@ -54,6 +68,7 @@ class TestDeliveryMultiDestination(common.SavepointCase):
                 }),
                 (0, 0, {
                     'name': 'Test child 2',
+                    'product_id': cls.product_child_2.id,
                     'sequence': 2,
                     'country_ids': [(6, 0, cls.country_2.ids)],
                     'state_ids': [(6, 0, cls.state.ids)],
@@ -88,15 +103,14 @@ class TestDeliveryMultiDestination(common.SavepointCase):
     def test_delivery_multi_destination(self):
         order = self.sale_order
         order.carrier_id = self.carrier_single.id
+        order.get_delivery_price()
         self.assertAlmostEqual(order.delivery_price, 100, 2)
         order.carrier_id = self.carrier_multi.id
-        order.invalidate_cache()
         order.partner_shipping_id = self.partner_2.id
-        order.delivery_set()
+        order.get_delivery_price()
         self.assertAlmostEqual(order.delivery_price, 50, 2)
-        order.invalidate_cache()
         order.partner_shipping_id = self.partner_3.id
-        order.delivery_set()
+        order.get_delivery_price()
         self.assertAlmostEqual(order.delivery_price, 150, 2)
 
     def test_search(self):
@@ -113,4 +127,12 @@ class TestDeliveryMultiDestination(common.SavepointCase):
         ).child_ids[0]
         self.assertTrue(
             all(x[0] != children_carrier.id for x in carrier_names)
+        )
+
+    def test_available_carriers(self):
+        self.assertEqual(
+            self.carrier_multi.available_carriers(self.partner_2),
+            self.carrier_multi.with_context(
+                show_children_carriers=True,
+            ).child_ids[0],
         )
