@@ -21,8 +21,6 @@ msgstr ""
 
 #. module: delivery_multi_destination
 #: model:delivery.carrier,name:delivery_multi_destination.delivery_carrier_multi_child_1
-#: model:product.product,name:delivery_multi_destination.delivery_carrier_multi_child_1_product_product
-#: model:product.template,name:delivery_multi_destination.delivery_carrier_multi_child_1_product_template
 msgid "Belgium"
 msgstr ""
 
@@ -32,13 +30,13 @@ msgid "Carrier"
 msgstr "Prevoznik"
 
 #. module: delivery_multi_destination
-#: model:ir.model.fields,field_description:delivery_multi_destination.field_delivery_carrier_child_ids
-msgid "Destination grid"
+#: model:ir.model.fields,field_description:delivery_multi_destination.field_delivery_carrier_destination_type
+msgid "Destination Type"
 msgstr ""
 
 #. module: delivery_multi_destination
-#: model:ir.model.fields,field_description:delivery_multi_destination.field_delivery_carrier_destination_type
-msgid "Destination type"
+#: model:ir.model.fields,field_description:delivery_multi_destination.field_delivery_carrier_child_ids
+msgid "Destination grid"
 msgstr ""
 
 #. module: delivery_multi_destination
@@ -48,16 +46,32 @@ msgstr ""
 
 #. module: delivery_multi_destination
 #: model:delivery.carrier,name:delivery_multi_destination.delivery_carrier_multi_child_2
-#: model:product.product,name:delivery_multi_destination.delivery_carrier_multi_child_2_product_product
-#: model:product.template,name:delivery_multi_destination.delivery_carrier_multi_child_2_product_template
 msgid "France"
 msgstr ""
 
 #. module: delivery_multi_destination
 #: model:delivery.carrier,name:delivery_multi_destination.delivery_carrier_multi
-#: model:product.product,name:delivery_multi_destination.delivery_carrier_multi_product_product
-#: model:product.template,name:delivery_multi_destination.delivery_carrier_multi_product_template
+#: model:product.product,name:delivery_multi_destination.product_product_delivery_carrier_multi
+#: model:product.template,name:delivery_multi_destination.product_product_delivery_carrier_multi_product_template
 msgid "International Carrier Inc."
+msgstr ""
+
+#. module: delivery_multi_destination
+#: model:product.product,name:delivery_multi_destination.product_product_delivery_carrier_multi_child_1
+#: model:product.template,name:delivery_multi_destination.product_product_delivery_carrier_multi_child_1_product_template
+msgid "International Carrier Inc., Belgium"
+msgstr ""
+
+#. module: delivery_multi_destination
+#: model:product.product,name:delivery_multi_destination.product_product_delivery_carrier_multi_child_2
+#: model:product.template,name:delivery_multi_destination.product_product_delivery_carrier_multi_child_2_product_template
+msgid "International Carrier Inc., France"
+msgstr ""
+
+#. module: delivery_multi_destination
+#: model:product.product,name:delivery_multi_destination.product_product_delivery_carrier_multi_child_3
+#: model:product.template,name:delivery_multi_destination.product_product_delivery_carrier_multi_child_3_product_template
+msgid "International Carrier Inc., United Kingdom"
 msgstr ""
 
 #. module: delivery_multi_destination
@@ -77,7 +91,5 @@ msgstr ""
 
 #. module: delivery_multi_destination
 #: model:delivery.carrier,name:delivery_multi_destination.delivery_carrier_multi_child_3
-#: model:product.product,name:delivery_multi_destination.delivery_carrier_multi_child_3_product_product
-#: model:product.template,name:delivery_multi_destination.delivery_carrier_multi_child_3_product_template
 msgid "United Kingdom"
 msgstr ""
