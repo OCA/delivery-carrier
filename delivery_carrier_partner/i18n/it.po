@@ -29,5 +29,5 @@ msgstr "Il partner che effettua il servizio di consegna."
 #. module: delivery_carrier_partner
 #: model:ir.model.fields,field_description:delivery_carrier_partner.field_delivery_carrier_partner_id
 #, fuzzy
-msgid "Transporter Company"
+msgid "Transporter"
 msgstr "Trasportatore"
