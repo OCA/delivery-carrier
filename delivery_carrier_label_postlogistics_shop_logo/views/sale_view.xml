@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
-  <data>
+<odoo>
     <!-- INHERIT of sale.shop form view -->
     <record id="view_shop_form" model="ir.ui.view">
       <field name="name">sale.shop</field>
@@ -14,5 +13,4 @@
         </group>
       </field>
     </record>
-  </data>
-</openerp>
+</odoo>
