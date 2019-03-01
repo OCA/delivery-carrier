@@ -25,7 +25,7 @@ Delivery Free Fee Removal
 
 |badge1| |badge2| |badge3| |badge4| |badge5| 
 
-This module allows to avoid create a shipping line in sale order if its price
+This module allows to avoid create a delivery line in sale order if its price
 is zero.
 
 **Table of contents**
