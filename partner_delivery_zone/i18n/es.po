@@ -51,6 +51,7 @@ msgstr "Creado el"
 #. module: partner_delivery_zone
 #: model:ir.actions.act_window,name:partner_delivery_zone.partner_delivery_zone_action
 #: model:ir.model.fields,field_description:partner_delivery_zone.field_res_partner__delivery_zone_id
+#: model:ir.model.fields,field_description:partner_delivery_zone.field_res_users__delivery_zone_id
 #: model:ir.model.fields,field_description:partner_delivery_zone.field_sale_order__delivery_zone_id
 #: model:ir.model.fields,field_description:partner_delivery_zone.field_stock_picking__delivery_zone_id
 #: model:ir.ui.menu,name:partner_delivery_zone.partner_delivery_zone_menu
