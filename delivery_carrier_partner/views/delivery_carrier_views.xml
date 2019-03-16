@@ -8,7 +8,7 @@
         <field name="model">delivery.carrier</field>
         <field name="inherit_id" ref="delivery.view_delivery_carrier_form"/>
         <field name="arch" type="xml">
-            <field name="delivery_type" position="after">
+            <field name="integration_level" position="before">
                 <field name="partner_id"/>
             </field>
         </field>
