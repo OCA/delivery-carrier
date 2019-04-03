@@ -78,7 +78,15 @@ class PostlogisticsWebService(object):
         :return a dict containing data for ns0:Recipient
 
         """
-        partner = picking.partner_id
+        if picking.picking_type_id.code == "outgoing":
+            partner = picking.partner_id
+        elif picking.picking_type_id.code == "incoming":
+            location_dest = picking.location_dest_id
+            partner = (
+                location_dest.partner_id
+                or location_dest.company_id.partner_id
+                or picking.env.user.company_id.partner_id
+            )
         partner_mobile = self._sanitize_string(
             picking.delivery_mobile or partner.mobile
         )
@@ -144,7 +152,10 @@ class PostlogisticsWebService(object):
 
         """
         company = picking.company_id
-        partner = company.partner_id
+        if picking.picking_type_id.code == "outgoing":
+            partner = company.partner_id
+        elif picking.picking_type_id.code == "incoming":
+            partner = picking.partner_id
 
         customer = {
             "name1": self._sanitize_string(partner.name),
@@ -155,6 +166,10 @@ class PostlogisticsWebService(object):
             "domicilePostOffice": picking.carrier_id.postlogistics_office or None,
         }
         logo = picking.carrier_id.postlogistics_logo
+
+        if partner.parent_id and partner.parent_id.name != partner.name:
+            customer["name2"] = customer.get("name1")
+            customer["name1"] = partner.parent_id.name
         if logo:
             logo_image = Image.open(BytesIO(base64.b64decode(logo)))
             logo_format = logo_image.format
