@@ -2,6 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 {'name': 'PostLogistics Labels WebService',
  'version': '11.0.1.0.0',
+
  'author': "Camptocamp,Odoo Community Association (OCA)",
  'maintainer': 'Camptocamp',
  'summary': 'Print postlogistics shipping labels',
