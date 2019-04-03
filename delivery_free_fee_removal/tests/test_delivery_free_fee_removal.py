@@ -38,6 +38,7 @@ class TestDeliveryFreeFeeRemoval(SavepointCase):
             'order_line': [(0, 0, {
                 'product_id': product.id,
                 'product_uom_qty': 1,
+                'product_uom': product.uom_id.id,
                 'price_unit': 3.0,
             })]
         })
