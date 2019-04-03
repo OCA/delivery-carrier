@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2018 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
@@ -21,23 +20,23 @@ class StockPicking(models.Model):
         if not sale_order or not self.carrier_id:  # pragma: no cover
             return res
         total = weight = volume = quantity = 0
-        for packop in self.pack_operation_ids.filtered('qty_done'):
-            if not packop.product_id:
+        for move_line in self.move_line_ids.filtered('qty_done'):
+            if not move_line.product_id:
                 continue
-            move = packop.linked_move_operation_ids[:1].move_id
+            move = move_line.move_id
             qty = move.product_uom._compute_quantity(
-                packop.qty_done, packop.product_id.uom_id,
+                move_line.qty_done, move_line.product_id.uom_id,
             )
-            weight += (packop.product_id.weight or 0.0) * qty
-            volume += (packop.product_id.volume or 0.0) * qty
+            weight += (move_line.product_id.weight or 0.0) * qty
+            volume += (move_line.product_id.volume or 0.0) * qty
             quantity += qty
-            total += move.procurement_id.sale_line_id.price_unit * qty
+            total += move.sale_line_id.price_unit * qty
         total = sale_order.currency_id.with_context(
             date=sale_order.date_order
         ).compute(total, sale_order.company_id.currency_id)
         so_line = sale_order.order_line.filtered(lambda x: x.is_delivery)[:1]
         if so_line:
-            so_line.price_unit = self.carrier_id.get_price_from_picking(
+            so_line.price_unit = self.carrier_id._get_price_from_picking(
                 total, weight, volume, quantity,
             )
         return res
