@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2018 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
@@ -19,15 +18,16 @@ class SaleOrder(models.Model):
         if (force or safe_eval(get_param(param, '0'))) and self.carrier_id:
             if (self.state in {'draft', 'sent'} or
                     self.invoice_shipping_on_delivery):
-                self.with_context(force_delivery_set=True).delivery_set()
+                self.with_context(force_delivery_set=True).set_delivery_line()
 
     def write(self, vals):
         """Refresh delivery price after saving."""
+        vals.update({'delivery_rating_success': True})
         res = super(SaleOrder, self).write(vals)
         for order in self:
             force = order.order_line.filtered('is_delivery')
             # Make sure that if you have removed the carrier, the line is gone
             if order.state in {'draft', 'sent'}:
-                order._delivery_unset()
+                order._remove_delivery_line()
             order._auto_refresh_delivery(force=force)
         return res

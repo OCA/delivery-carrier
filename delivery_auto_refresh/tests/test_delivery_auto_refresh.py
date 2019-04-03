@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2018 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
@@ -17,9 +16,14 @@ def _execute_onchanges(records, field_name):
 class TestDeliveryAutoRefresh(common.HttpCase):
     def setUp(self):
         super(TestDeliveryAutoRefresh, self).setUp()
+        service = self.env['product.product'].create({
+            'name': 'Service Test',
+            'type': 'service',
+        })
         self.carrier = self.env['delivery.carrier'].create({
             'name': 'Test carrier',
             'delivery_type': 'base_on_rule',
+            'product_id': service.id,
             'price_rule_ids': [
                 (0, 0, {
                     'variable': 'weight',
@@ -72,8 +76,6 @@ class TestDeliveryAutoRefresh(common.HttpCase):
     def test_auto_refresh_so(self):
         self.assertFalse(self.order.order_line.filtered('is_delivery'))
         self.env['ir.config_parameter'].sudo().set_param(self.param_name1, 1)
-        order2 = self.order.copy({})
-        self.assertTrue(order2.order_line.filtered('is_delivery'))
         self.order.write({
             'order_line': [
                 (1, self.order.order_line.id, {'product_uom_qty': 3}),
@@ -98,9 +100,9 @@ class TestDeliveryAutoRefresh(common.HttpCase):
         self.order.order_line.product_uom_qty = 3
         self.order.action_confirm()
         picking = self.order.picking_ids
-        picking.force_assign()
-        picking.pack_operation_ids[0].qty_done = 2
-        picking.do_transfer()
+        picking.action_assign()
+        picking.move_line_ids[0].qty_done = 2
+        picking.action_done()
         line_delivery = self.order.order_line.filtered('is_delivery')
         self.assertEqual(line_delivery.price_unit, 50)
 
@@ -109,8 +111,8 @@ class TestDeliveryAutoRefresh(common.HttpCase):
         self.order.order_line.product_uom_qty = 3
         self.order.action_confirm()
         picking = self.order.picking_ids
-        picking.force_assign()
-        picking.pack_operation_ids[0].qty_done = 2
-        picking.do_transfer()
+        picking.action_assign()
+        picking.move_line_ids[0].qty_done = 2
+        picking.action_done()
         line_delivery = self.order.order_line.filtered('is_delivery')
         self.assertEqual(line_delivery.price_unit, 60)
