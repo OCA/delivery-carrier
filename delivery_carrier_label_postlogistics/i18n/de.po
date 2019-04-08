@@ -385,7 +385,7 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:405
+#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:406
 #, python-format
 msgid "Layout not set"
 msgstr ""
@@ -442,7 +442,7 @@ msgid "Output Resolution"
 msgstr "Ausgabeauflösung"
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:411
+#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:412
 #, fuzzy, python-format
 msgid "Output format not set"
 msgstr "Ausgabeformat"
@@ -540,7 +540,7 @@ msgid "Print ProClima logo"
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:417
+#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:418
 #, python-format
 msgid "Resolution not set"
 msgstr ""
@@ -671,7 +671,7 @@ msgid "Will generate Specimen labels using test end point of webservice."
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:397
+#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:398
 #, python-format
 msgid ""
 "You need to configure %s. You can set a defaultvalue in Settings/"
@@ -685,7 +685,7 @@ msgid "ZPL2"
 msgstr "ZPL2"
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:406
+#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:407
 #, fuzzy, python-format
 msgid "label layout"
 msgstr "Etikettgestaltung"
@@ -696,7 +696,7 @@ msgid "or"
 msgstr "oder"
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:412
+#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:413
 #, fuzzy, python-format
 msgid "output format"
 msgstr "Ausgabeformat"
@@ -707,7 +707,7 @@ msgid "postlogistics.config.settings"
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:418
+#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:419
 #, fuzzy, python-format
 msgid "resolution"
 msgstr "Standardauflösung"
