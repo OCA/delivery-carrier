@@ -6,9 +6,8 @@
 import os
 import logging
 
-from openerp import models, fields, api, exceptions
-from openerp.tools.translate import _
-
+from odoo import api, exceptions, fields, models
+from odoo.tools.translate import _
 from ..generator import new_file_generator
 
 
@@ -51,7 +50,7 @@ class DeliveryCarrierFile(models.Model):
                 file_handle.write(file_content)
         return True
 
-    @api.multi
+    @api.model
     def _generate_files(self, picking_ids):
         """
         Generate one or more files according to carrier_file configuration
@@ -91,7 +90,7 @@ class DeliveryCarrierFile(models.Model):
                                   picking_ids, e)
         return True
 
-    @api.multi
+    @api.model
     def generate_files(self, picking_ids):
         """
         Generate one or more files according to carrier_file
@@ -110,8 +109,7 @@ class DeliveryCarrierFile(models.Model):
     name = fields.Char('Name', size=64, required=True)
     type = fields.Selection(selection='get_type_selection',
                             string='Type', required=True)
-    group_pickings = fields.Boolean('Group all pickings in one file',
-                                    help='All the pickings will be '
+    group_pickings = fields.Boolean(help='All the pickings will be '
                                     'grouped in the same file. '
                                     'Has no effect when the files '
                                     'are automatically exported at '
@@ -119,8 +117,7 @@ class DeliveryCarrierFile(models.Model):
     write_mode = fields.Selection(selection='get_write_mode_selection',
                                   string='Write on', required=True)
     export_path = fields.Char('Export Path', size=256)
-    auto_export = fields.Boolean('Export at delivery order process',
-                                 help='The file will be automatically '
+    auto_export = fields.Boolean(help='The file will be automatically '
                                  'generated when a delivery order '
                                  'is processed. If activated, each '
                                  'delivery order will be exported '
