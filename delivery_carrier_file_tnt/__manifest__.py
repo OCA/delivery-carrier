@@ -21,16 +21,12 @@
 
 {
     'name': 'Delivery Carrier File: TNT',
-    'version': '1.0',
+    'version': '10.0.1.0.0',
     'category': 'Generic Modules/Warehouse',
-    'description': """
+    'summary': """
 Sub-module for Base Delivery Carrier Files.
 
 Definition of the delivery carrier file for "TNT Express Shipper".
-
-File specifications on :
-http://www.tnt.com/express/fr_fr/site/home/support/downloads.html
-Chapter : "Guide d’importation d’un carnet d’adresses"
     """,
     'author': "Camptocamp,Odoo Community Association (OCA)",
     'license': 'AGPL-3',
@@ -41,6 +37,6 @@ Chapter : "Guide d’importation d’un carnet d’adresses"
     'demo_xml': [],
     'test': [],
     'images': [],
-    'installable': False,
+    'installable': True,
     'auto_install': False,
 }

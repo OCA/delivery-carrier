@@ -19,22 +19,21 @@
 #
 ##############################################################################
 
-from osv import osv, fields
+from odoo import api, fields, models
 
 
-class carrier_file(osv.osv):
+class CarrierFile(models.Model):
     _inherit = 'delivery.carrier.file'
 
-    def get_type_selection(self, cr, uid, context=None):
-        result = super(carrier_file, self
-                       ).get_type_selection(cr, uid, context=context)
+    @api.model
+    def get_type_selection(self):
+        result = super(CarrierFile, self
+                       ).get_type_selection()
         if 'tnt_express_shipper' not in result:
             result.append(('tnt_express_shipper', 'TNT Express Shipper'))
         return result
 
-    _columns = {
-        'type': fields.selection(get_type_selection, 'Type', required=True),
-        'tnt_account': fields.char('TNT Account', size=9),
-    }
+    type = fields.Selection(get_type_selection, 'Type', required=True)
+    tnt_account = fields.Char('TNT Account', size=9)
 
-carrier_file()
+CarrierFile()

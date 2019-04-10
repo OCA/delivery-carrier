@@ -21,11 +21,11 @@
 
 import csv
 
-from openerp.addons.base_delivery_carrier_files.generator import (
+from odoo.addons.base_delivery_carrier_files.generator import (
     CarrierFileGenerator
 )
-from openerp.addons.base_delivery_carrier_files.generator import BaseLine
-from openerp.addons.base_delivery_carrier_files.csv_writer import UnicodeWriter
+from odoo.addons.base_delivery_carrier_files.generator import BaseLine
+from odoo.addons.base_delivery_carrier_files.csv_writer import UnicodeWriter
 
 
 class TNTLine(BaseLine):

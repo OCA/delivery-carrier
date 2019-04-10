@@ -1,39 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
-    <data>
-        <record id="view_picking_out_form_carrier_file" model="ir.ui.view">
-            <field name="name">stock.picking.form</field>
-            <field name="model">stock.picking</field>
-            <field name="inherit_id" ref="stock.view_picking_form"/>
-            <field name="arch" type="xml">
-                <data>
-                    <page string="Additional Info" position="inside">
-                        <group>
-                            <field name="carrier_file_generated"/>
-                        </group>
-                    </page>
-                </data>
-            </field>
-        </record>
+<odoo>
+    <record id="view_picking_out_form_carrier_file" model="ir.ui.view">
+        <field name="name">stock.picking.form</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <data>
+                <page name="extra" position="inside">
+                    <group>
+                        <field name="carrier_file_generated"/>
+                    </group>
+                </page>
+            </data>
+        </field>
+    </record>
 
-        <record id="view_picking_out_search_carrier_file" model="ir.ui.view">
-            <field name="name">stock.picking.search</field>
-            <field name="model">stock.picking</field>
-            <field name="inherit_id" ref="sale_stock.view_picking_internal_search_inherit"/>
-            <field name="arch" type="xml">
-                <data>
-                    <filter name="to_invoice" position="after">
-                        <separator orientation="vertical"/>
-                        <filter icon="terp-emblem-documents" name="carrier_file" string="Carrier File To Generate"
-                          domain="[('carrier_file_generated', '=', False),
-                          ('carrier_id', '!=', False),
-                          ('carrier_id.carrier_file_id', '!=', False),
-                          ('picking_type_id.code', '=', 'outgoing'),
-                          ('state', '=', 'done')]"
-                          help="Delivery orders to invoice"/>
-                    </filter>
-                </data>
-            </field>
-        </record>
-    </data>
-</openerp>
+    <record id="view_picking_out_search_carrier_file" model="ir.ui.view">
+        <field name="name">stock.picking.search</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_internal_search"/>
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//field[@name='partner_id']" position="before">
+                    <separator orientation="vertical"/>
+                    <filter icon="terp-emblem-documents" name="carrier_file" string="Carrier File To Generate"
+                      domain="[('carrier_file_generated', '=', False),
+                      ('carrier_id', '!=', False),
+                      ('carrier_id.carrier_file_id', '!=', False),
+                      ('picking_type_id.code', '=', 'outgoing'),
+                      ('state', '=', 'done')]"
+                      help="Delivery orders to invoice"/>
+                </xpath>
+            </data>
+        </field>
+    </record>
+</odoo>
