@@ -6,6 +6,10 @@
     'name': 'Base Delivery Carrier Files',
     'version': '10.0.1.0.1',
     'category': 'Generic Modules/Warehouse',
+    'summary': """
+Base module for creation of carrier files (La Poste, TNT Express Shipper, ...).
+Files are exported as text (csv, ...).
+""",
     'author': "Camptocamp,Odoo Community Association (OCA)",
     'license': 'AGPL-3',
     'website': 'http://www.camptocamp.com',
