@@ -1,64 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
-    <data>
+<odoo>
+    <record id="view_delivery_carrier_file_tree" model="ir.ui.view">
+        <field name="name">delivery.carrier.file.tree</field>
+        <field name="model">delivery.carrier.file</field>
+        <field name="arch" type="xml">
+            <tree string="Carrier File">
+                <field name="name"/>
+                <field name="type"/>
+                <field name="auto_export"/>
+                <field name="group_pickings"/>
+            </tree>
+        </field>
+    </record>
 
-        <record id="view_delivery_carrier_file_tree" model="ir.ui.view">
-            <field name="name">delivery.carrier.file.tree</field>
-            <field name="model">delivery.carrier.file</field>
-            <field name="arch" type="xml">
-                <tree string="Carrier File">
-                    <field name="name"/>
-                    <field name="type"/>
-                    <field name="auto_export"/>
-                    <field name="group_pickings"/>
-                </tree>
-            </field>
-        </record>
-
-        <record id="view_delivery_carrier_file_form" model="ir.ui.view">
-            <field name="name">delivery.carrier.file.form</field>
-            <field name="model">delivery.carrier.file</field>
-            <field name="arch" type="xml">
-                <form string="Carrier File">
-                    <group colspan="4" col="4" name="general">
+    <record id="view_delivery_carrier_file_form" model="ir.ui.view">
+        <field name="name">delivery.carrier.file.form</field>
+        <field name="model">delivery.carrier.file</field>
+        <field name="arch" type="xml">
+            <form string="Carrier File">
+                <group name="general">
+                    <group>
                         <field name="name" select="1"/>
                         <field name="type" select="1"/>
                         <field name="auto_export"/>
                         <field name="group_pickings"/>
-                        <separator string="Write options" colspan="4"/>
-                        <group colspan="4" col="4">
-                            <field name="write_mode"/>
-                            <group colspan="2" col="2">
-                                <field name="export_path" attrs="{'required': [('write_mode', '=', 'disk')], 'invisible': [('write_mode', '!=', 'disk')]}"/>
-                            </group>
-                        </group>
                     </group>
-                </form>
-            </field>
-        </record>
+                    <group string="Write options">
+                        <field name="write_mode"/>
+                        <field name="export_path" attrs="{'required': [('write_mode', '=', 'disk')], 'invisible': [('write_mode', '!=', 'disk')]}"/>
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
 
-        <record id="action_delivery_carrier_file_form" model="ir.actions.act_window">
-            <field name="name">Carrier File</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">delivery.carrier.file</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
-        </record>
+    <record id="action_delivery_carrier_file_form" model="ir.actions.act_window">
+        <field name="name">Carrier File</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">delivery.carrier.file</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
 
-        <menuitem action="action_delivery_carrier_file_form" id="menu_action_delivery_carrier_file_form" parent="delivery.menu_delivery"/>
+    <menuitem action="action_delivery_carrier_file_form" id="menu_action_delivery_carrier_file_form" parent="delivery.menu_delivery"/>
 
-        <record id="view_delivery_carrier_form_inherit" model="ir.ui.view">
-            <field name="name">delivery.carrier.form.file</field>
-            <field name="model">delivery.carrier</field>
-            <field name="inherit_id" ref="delivery.view_delivery_carrier_form" />
-            <field name="arch" type="xml">
-                 <data>
-                    <field name="product_id" position="after">
-                        <field name="carrier_file_id"/>
-                    </field>
-                </data>
-            </field>
-        </record>
+    <record id="view_delivery_carrier_form_inherit" model="ir.ui.view">
+        <field name="name">delivery.carrier.form.file</field>
+        <field name="model">delivery.carrier</field>
+        <field name="inherit_id" ref="delivery.view_delivery_carrier_form" />
+        <field name="arch" type="xml">
+             <data>
+                 <xpath expr="//h1" position="after">
+                      <group>
+                          <field name="carrier_file_id"/>
+                      </group>
+                  </xpath>
+            </data>
+        </field>
+    </record>
 
-    </data>
-</openerp>
+</odoo>
