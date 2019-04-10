@@ -5,7 +5,7 @@
 
 import base64
 
-from openerp import api, models, fields
+from openerp import api, models
 
 
 class DeliveryCarrierFile(models.Model):
@@ -18,14 +18,11 @@ class DeliveryCarrierFile(models.Model):
             res.append(('document', 'Document'))
         return res
 
-    document_directory_id = fields.Many2one('document.directory')
-
     @api.model
     def _prepare_attachment(self, carrier_file, filename, file_content):
         return {'name': "%s_%s" % (carrier_file.name, filename),
                 'datas_fname': filename,
                 'datas': base64.encodestring(file_content),
-                'parent_id': carrier_file.document_directory_id.id,
                 'type': 'binary'}
 
     @api.multi

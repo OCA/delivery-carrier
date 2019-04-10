@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
-    <data noupdate="1">
+<odoo>
 
-        <!-- Carrier File -->
+    <!-- Carrier File -->
+    <record id="base_delivery_carrier_files.delivery_carrier_file" model="delivery.carrier.file">
+        <field name="write_mode">document</field>
+        <field name="type">generic</field>
+    </record>
 
-         <record id="base_delivery_carrier_files.delivery_carrier_file" model="delivery.carrier.file">
-             <field name="write_mode">document</field>
-             <field name="document_directory_id" ref="document.dir_root"/>
-         </record>
+    <record id="base_delivery_carrier_files.delivery_carrier_file_manual" model="delivery.carrier.file">
+        <field name="write_mode">document</field>
+        <field name="type">generic</field>
+    </record>
 
-        <record id="base_delivery_carrier_files.delivery_carrier_file_manual" model="delivery.carrier.file">
-            <field name="write_mode">document</field>
-            <field name="document_directory_id" ref="document.dir_root"/>
-        </record>
-
-    </data>
-</openerp>
+</odoo>

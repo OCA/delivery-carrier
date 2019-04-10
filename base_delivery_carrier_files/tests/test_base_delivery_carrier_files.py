@@ -5,7 +5,7 @@
 
 import tempfile
 
-from openerp.tests.common import TransactionCase
+from odoo.tests.common import TransactionCase
 
 
 class CarrierFilesTest(TransactionCase):
@@ -21,11 +21,6 @@ class CarrierFilesTest(TransactionCase):
             'write_mode': 'disk'
         })
 
-        # I set the carrier file configuration on the carrier
-        # 'Free delivery charges'
-        carrier = self.env.ref('delivery.delivery_carrier')
-        carrier.carrier_file_id = carrier_file.id
-
         # I confirm outgoing shipment of 130 kgm Ice-cream.
         picking = self.env.ref(
             'base_delivery_carrier_files.outgoing_shipment_carrier_file')
@@ -35,14 +30,7 @@ class CarrierFilesTest(TransactionCase):
         picking.force_assign()
 
         # I deliver outgoing shipment.
-        wizard = self.env['stock.transfer_details'].with_context({
-            'active_model': 'stock.picking',
-            'active_id': picking.id,
-            'active_ids': picking.ids
-        }).create({
-            'picking_id': picking.id
-        })
-        wizard.do_detailed_transfer()
+        picking.do_transfer()
 
         # I check shipment details after shipment
         # The carrier file must have been generated.
@@ -58,16 +46,11 @@ class CarrierFilesTest(TransactionCase):
         # I configure the carrier file configuration
         # to write to the root document directory.
         carrier_file = self.env.ref(
-            'base_delivery_carrier_files.delivery_carrier_file')
+            'base_delivery_carrier_files.delivery_carrier_file_manual')
         carrier_file.write({
             'export_path': tempfile.gettempdir(),
             'write_mode': 'disk'
         })
-
-        # I set the carrier file configuration on the carrier
-        # 'Free delivery charges'
-        carrier = self.env.ref('delivery.delivery_carrier')
-        carrier.carrier_file_id = carrier_file.id
 
         # I confirm outgoing shipment of 130 kgm Ice-cream.
         picking = self.env.ref(
@@ -79,14 +62,7 @@ class CarrierFilesTest(TransactionCase):
         picking.force_assign()
 
         # I deliver outgoing shipment.
-        wizard = self.env['stock.transfer_details'].with_context({
-            'active_model': 'stock.picking',
-            'active_id': picking.id,
-            'active_ids': picking.ids
-        }).create({
-            'picking_id': picking.id
-        })
-        wizard.do_detailed_transfer()
+        picking.do_transfer()
 
         # I check shipment details after shipment
         # The carrier file must NOT have been generated.

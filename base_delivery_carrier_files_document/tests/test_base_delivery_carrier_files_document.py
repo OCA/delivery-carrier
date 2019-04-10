@@ -10,14 +10,11 @@ class CarrierFilesDocumentTest(TransactionCase):
 
     def test_carrier_file_generation(self):
         """ Test carrier file generation """
-        # I set the system tempfile on the carrier file configuration
-        # to be sure the path will be writable
         carrier_file = self.env.ref(
             'base_delivery_carrier_files.delivery_carrier_file')
-        carrier_file.write({
-            'document_directory_id': self.env.ref('document.dir_root').id,
-            'write_mode': 'document'
-        })
+
+        # Save as attachment
+        carrier_file.write({'write_mode': 'document'})
 
         # I set the carrier file configuration on the carrier
         # 'Free delivery charges'
@@ -33,70 +30,13 @@ class CarrierFilesDocumentTest(TransactionCase):
         picking.force_assign()
 
         # I deliver outgoing shipment.
-        wizard = self.env['stock.transfer_details'].with_context({
-            'active_model': 'stock.picking',
-            'active_id': picking.id,
-            'active_ids': picking.ids
-        }).create({
-            'picking_id': picking.id
-        })
-        wizard.do_detailed_transfer()
+        domain = [('datas_fname', '=ilike', '%.csv')]
+        count_before = self.env['ir.attachment'].search_count(domain)
+        picking.do_transfer()
+        count_after = self.env['ir.attachment'].search_count(domain)
 
         # I check shipment details after shipment
         # The carrier file must have been generated.
         self.assertTrue(picking.carrier_file_generated)
-
-        # I check outgoing shipment copy
-        # The carrier_file_generated field must be unchecked.
-        new_picking = picking.copy()
-        self.assertFalse(new_picking.carrier_file_generated)
-
-    def test_manual_carrier_file_generation(self):
-        """ Test manual carrier file generation """
-        # I set the system tempfile on the carrier file configuration
-        # to be sure the path will be writable
-        carrier_file = self.env.ref(
-            'base_delivery_carrier_files.delivery_carrier_file_manual')
-        carrier_file.write({
-            'document_directory_id': self.env.ref('document.dir_root').id,
-            'write_mode': 'document'
-        })
-
-        # I set the carrier file configuration on the carrier
-        # 'Free delivery charges'
-        carrier = self.env.ref('delivery.delivery_carrier')
-        carrier.carrier_file_id = carrier_file.id
-
-        # I confirm outgoing shipment of 130 kgm Ice-cream.
-        picking = self.env.ref(
-            'base_delivery_carrier_files'
-            '.outgoing_shipment_carrier_file_manual')
-        picking.action_confirm()
-
-        # I check outgoing shipment after stock availablity in refrigerator.
-        picking.force_assign()
-
-        # I deliver outgoing shipment.
-        wizard = self.env['stock.transfer_details'].with_context({
-            'active_model': 'stock.picking',
-            'active_id': picking.id,
-            'active_ids': picking.ids
-        }).create({
-            'picking_id': picking.id
-        })
-        wizard.do_detailed_transfer()
-
-        # I check shipment details after shipment
-        # The carrier file must NOT have been generated.
-        self.assertFalse(picking.carrier_file_generated)
-
-        # I generate the carrier files of my shipment from the wizard
-        wizard = self.env['delivery.carrier.file.generate'].with_context({
-            'active_ids': picking.ids,
-            'active_model': 'stock.picking'
-        }).create({})
-        wizard.action_generate()
-
-        # I check shipment details after manual generation
-        # The carrier file must have been generated.
-        self.assertTrue(picking.carrier_file_generated)
+        # The carrier file attachment must be there
+        self.assertEquals(count_after - count_before, 1)
