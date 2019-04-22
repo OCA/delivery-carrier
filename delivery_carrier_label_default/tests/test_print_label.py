@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 # Copyright 2016 Camptocamp SA
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
-from openerp.tests import common
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+from odoo.tests.common import HttpCase
 
 
-class TestPrintLabel(common.TransactionCase):
+class TestPrintLabel(HttpCase):
 
     def test_print_default_label(self):
         self.picking.generate_labels()
@@ -12,7 +12,7 @@ class TestPrintLabel(common.TransactionCase):
             [('res_id', '=', self.picking.id)])
         self.assertEquals(len(label), 1)
         self.assertTrue(label.datas)
-        self.assertEquals(label.name, "Shipping Label.pdf")
+        self.assertIn("Shipping Label", label.name)
         self.assertEquals(label.file_type, 'pdf')
 
     def test_print_default_label_multi_packs(self):
@@ -32,7 +32,7 @@ class TestPrintLabel(common.TransactionCase):
             [('res_id', '=', self.picking.id)])
         self.assertEquals(len(label), 1)
         self.assertTrue(label[0].datas)
-        self.assertEquals(label[0].name, "Shipping Label.pdf")
+        self.assertIn("Shipping Label", label[0].name)
         self.assertEquals(label[0].file_type, 'pdf')
 
     def test_print_default_label_selected_packs(self):
@@ -54,7 +54,7 @@ class TestPrintLabel(common.TransactionCase):
             [('res_id', '=', self.picking.id)])
         self.assertEquals(len(labels), 2)
         self.assertTrue(labels[0].datas)
-        self.assertEquals(labels[0].name, "Shipping Label.pdf")
+        self.assertIn("Shipping Label", labels[0].name)
         self.assertEquals(labels[0].file_type, 'pdf')
 
     def setUp(self):
