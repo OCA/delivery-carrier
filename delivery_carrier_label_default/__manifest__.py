@@ -11,8 +11,8 @@
  ],
  'website': 'http://sunflowerweb.nl',
  'data': [
-     'report/report_default_label.xml',
-     'report/report_paper_format.xml',
+     'reports/report_default_label.xml',
+     'reports/report_paper_format.xml',
  ],
  'installable': True,
  'license': 'AGPL-3', }
