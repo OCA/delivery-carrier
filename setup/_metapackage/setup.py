@@ -16,6 +16,7 @@ setuptools.setup(
         'odoo10-addon-delivery_carrier_partner',
         'odoo10-addon-delivery_dropoff_site',
         'odoo10-addon-delivery_multi_destination',
+        'odoo10-addon-delivery_price_by_category',
         'odoo10-addon-delivery_price_rule_untaxed',
         'odoo10-addon-sale_delivery_rate',
         'odoo10-addon-stock_picking_delivery_rate',
