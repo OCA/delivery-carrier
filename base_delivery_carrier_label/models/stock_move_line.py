@@ -27,8 +27,8 @@ class StockMoveLine(models.Model):
             the sum of the weight of [self]
         """
         total_weight = 0
-        kg = self.env.ref('product.product_uom_kgm').id
-        units = self.env.ref('product.product_uom_unit').id
+        kg = self.env.ref('uom.product_uom_kgm').id
+        units = self.env.ref('uom.product_uom_unit').id
         allowed = (False, kg, units)
         cant_calc_total = False
         for operation in self:
