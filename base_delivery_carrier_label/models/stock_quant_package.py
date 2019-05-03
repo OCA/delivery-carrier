@@ -35,7 +35,7 @@ class StockQuantPackage(models.Model):
                     ('product_id', '!=', False),
                 ])
 
-                # we make use get_weight with  @api.muli instead of
+                # we make use get_weight with  @api.multi instead of
                 # sum([op.get_weight for op in operations])
 
                 # sum of the pack_operation

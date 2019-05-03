@@ -55,8 +55,8 @@ class TestGetWeight(TransactionCase):
             weights: recordset will be size of weights and each
                 product will get a size according of weights[i]
         """
-        kg_id = self.env.ref('product.product_uom_kgm').id
-        unit_id = self.env.ref('product.product_uom_unit').id
+        kg_id = self.env.ref('uom.product_uom_kgm').id
+        unit_id = self.env.ref('uom.product_uom_unit').id
 
         products = self.env['product.product'].search(
             [['uom_id', 'in', (False, kg_id, unit_id)]],
@@ -73,7 +73,7 @@ class TestGetWeight(TransactionCase):
         self._create_order_line(order, products)
         order.action_confirm()
         picking = order.picking_ids
-        picking.do_transfer()
+        picking.action_done()
         return picking
 
     def test_get_weight(self):
@@ -168,9 +168,9 @@ class TestGetWeight(TransactionCase):
         # prepare some data
         weights = [0.3, 14.01, 0.59]
         package = self.env['stock.quant.package'].create({})
-        tonne_id = self.env.ref('product.product_uom_ton')
-        kg_id = self.env.ref('product.product_uom_kgm')
-        gr_id = self.env.ref('product.product_uom_gram')
+        tonne_id = self.env.ref('uom.product_uom_ton')
+        kg_id = self.env.ref('uom.product_uom_kgm')
+        gr_id = self.env.ref('uom.product_uom_gram')
         products = []
         products.append(self._create_product(
             {
