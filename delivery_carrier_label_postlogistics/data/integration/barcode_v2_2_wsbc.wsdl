@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is JAX-WS RI 2.1.7-b01-. --><definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="https://www.mypostbusiness.ch/wsbc/barcode/v2_2" xmlns:barcode="https://www.mypostbusiness.ch/wsbc/barcode/v2_2/types" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="Barcode" targetNamespace="https://www.mypostbusiness.ch/wsbc/barcode/v2_2">
   <types>
     <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-      <xsd:import namespace="https://www.mypostbusiness.ch/wsbc/barcode/v2_2/types" schemaLocation="https://int.wsbc.post.ch:443/wsbc/barcode/v2_2?xsd=1" />
+      <xsd:import namespace="https://www.mypostbusiness.ch/wsbc/barcode/v2_2/types" schemaLocation="barcode_v2_2_wsbc.xsd" />
     </xsd:schema>
   </types>
 
