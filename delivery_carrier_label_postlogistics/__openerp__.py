@@ -2,7 +2,7 @@
 # © 2013-2016 Yannick Vaucher (Camptocamp SA)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 {'name': 'PostLogistics Labels WebService',
- 'version': '9.0.1.1.0',
+ 'version': '9.0.1.1.1',
  'author': "Camptocamp,Odoo Community Association (OCA)",
  'maintainer': 'Camptocamp',
  'license': 'AGPL-3',
