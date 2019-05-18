@@ -1,6 +1,6 @@
 # Copyright 2016-2019 Tecnativa - Pedro M. Baeza
 # Copyright 2017 Luis M. Ontalba <luis.martinez@tecnativa.com>
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models
 
