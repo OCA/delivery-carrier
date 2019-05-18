@@ -26,22 +26,22 @@ msgstr "Belgie"
 
 #. module: delivery_multi_destination
 #: model:ir.model,name:delivery_multi_destination.model_delivery_carrier
-msgid "Carrier"
-msgstr "Dopravce"
+msgid "Delivery Methods"
+msgstr ""
 
 #. module: delivery_multi_destination
-#: model:ir.model.fields,field_description:delivery_multi_destination.field_delivery_carrier_destination_type
+#: model:ir.model.fields,field_description:delivery_multi_destination.field_delivery_carrier__destination_type
 #, fuzzy
 msgid "Destination Type"
 msgstr "Typ cíle"
 
 #. module: delivery_multi_destination
-#: model:ir.model.fields,field_description:delivery_multi_destination.field_delivery_carrier_child_ids
+#: model:ir.model.fields,field_description:delivery_multi_destination.field_delivery_carrier__child_ids
 msgid "Destination grid"
 msgstr "Destinační mřížka"
 
 #. module: delivery_multi_destination
-#: model:ir.ui.view,arch_db:delivery_multi_destination.view_delivery_carrier_form
+#: model_terms:ir.ui.view,arch_db:delivery_multi_destination.view_delivery_carrier_form
 msgid "Destinations"
 msgstr "Destinace"
 
@@ -89,11 +89,38 @@ msgid "One destination"
 msgstr "Jeden cíl"
 
 #. module: delivery_multi_destination
-#: model:ir.model.fields,field_description:delivery_multi_destination.field_delivery_carrier_parent_id
+#: model:ir.model.fields,field_description:delivery_multi_destination.field_delivery_carrier__parent_id
 msgid "Parent carrier"
 msgstr "Nadřazený dopravce"
+
+#. module: delivery_multi_destination
+#: model:product.product,uom_name:delivery_multi_destination.product_product_delivery_carrier_multi
+#: model:product.product,uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_1
+#: model:product.product,uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_2
+#: model:product.product,uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_3
+#: model:product.template,uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_1_product_template
+#: model:product.template,uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_2_product_template
+#: model:product.template,uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_3_product_template
+#: model:product.template,uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_product_template
+msgid "Unit(s)"
+msgstr ""
 
 #. module: delivery_multi_destination
 #: model:delivery.carrier,name:delivery_multi_destination.delivery_carrier_multi_child_3
 msgid "United Kingdom"
 msgstr "Spojené království"
+
+#. module: delivery_multi_destination
+#: model:product.product,weight_uom_name:delivery_multi_destination.product_product_delivery_carrier_multi
+#: model:product.product,weight_uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_1
+#: model:product.product,weight_uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_2
+#: model:product.product,weight_uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_3
+#: model:product.template,weight_uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_1_product_template
+#: model:product.template,weight_uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_2_product_template
+#: model:product.template,weight_uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_3_product_template
+#: model:product.template,weight_uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_product_template
+msgid "kg"
+msgstr ""
+
+#~ msgid "Carrier"
+#~ msgstr "Dopravce"
