@@ -36,4 +36,5 @@ class CarrierFile(models.Model):
     type = fields.Selection(get_type_selection, 'Type', required=True)
     tnt_account = fields.Char('TNT Account', size=9)
 
+
 CarrierFile()
