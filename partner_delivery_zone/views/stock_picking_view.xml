@@ -38,7 +38,7 @@
             <xpath expr="//field[@name='date']" position="after">
                 <field name="delivery_zone_id" />
             </xpath>
-            <xpath expr="//div[@class='oe_kanban_bottom_left']" position="replace">
+            <xpath expr="//div[hasclass('oe_kanban_bottom_left')]" position="replace">
               <div class="oe_kanban_bottom_left">
                 <div>
                   <t t-esc="record.partner_id.value"/>
