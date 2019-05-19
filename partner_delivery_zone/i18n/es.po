@@ -90,6 +90,13 @@ msgid "Last Updated on"
 msgstr "Última actualización el"
 
 #. module: partner_delivery_zone
+#: model:ir.model,name:partner_delivery_zone.model_partner_delivery_zone
+#, fuzzy
+#| msgid "partner.delivery.zone"
+msgid "Partner delivery zone"
+msgstr "'partner.delivery.zone'"
+
+#. module: partner_delivery_zone
 #: model:ir.model,name:partner_delivery_zone.model_sale_order
 msgid "Sale Order"
 msgstr "Pedido de Venta"
@@ -108,11 +115,6 @@ msgstr "Transferir"
 #: model:ir.model.fields,field_description:partner_delivery_zone.field_partner_delivery_zone__name
 msgid "Zone"
 msgstr "Zona"
-
-#. module: partner_delivery_zone
-#: model:ir.model,name:partner_delivery_zone.model_partner_delivery_zone
-msgid "partner.delivery.zone"
-msgstr "'partner.delivery.zone'"
 
 #~ msgid "Quotation"
 #~ msgstr "Presupuesto"
