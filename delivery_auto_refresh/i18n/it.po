@@ -20,7 +20,9 @@ msgstr ""
 
 #. module: delivery_auto_refresh
 #: model:ir.model,name:delivery_auto_refresh.model_sale_order
-msgid "Sales Order"
+#, fuzzy
+#| msgid "Sales Order"
+msgid "Sale Order"
 msgstr "Ordini vendita"
 
 #. module: delivery_auto_refresh
