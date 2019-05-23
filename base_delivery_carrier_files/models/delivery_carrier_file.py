@@ -6,7 +6,7 @@
 import os
 import logging
 
-from odoo import api, exceptions, fields, models 
+from odoo import api, exceptions, fields, models
 from odoo.tools.translate import _
 from ..generator import new_file_generator
 
