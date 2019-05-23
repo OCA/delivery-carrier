@@ -5,8 +5,10 @@
                 <div class="page">
                     <div class="address">
                         <div class="recipient">
-                            <address t-field="o.partner_id"
-                                t-field-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}' />
+                            <t t-if="o.partner_id">
+                                <address t-field="o.partner_id"
+     t-field-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}' />
+                            </t>
                         </div>
                     </div>
                 </div>
