@@ -30,6 +30,7 @@ class StockPicking(models.Model):
     )
     option_ids = fields.Many2many(comodel_name='delivery.carrier.option',
                                   string='Options')
+    recreate_picking_label = fields.Boolean()
 
     @api.multi
     def generate_default_label(self, package_ids=None):
@@ -125,6 +126,7 @@ class StockPicking(models.Model):
         It will generate the labels for all the packages of the picking.
 
         """
+        self.write({'recreate_picking_label': False})
         return self.generate_labels()
 
     @api.onchange('carrier_id')

@@ -8,12 +8,14 @@
     <field name="inherit_id" ref="delivery.view_picking_withcarrier_out_form"/>
     <field name="arch" type="xml">
       <field name="state" position="before">
-        <button name="action_generate_carrier_label" states="done"
+        <button name="action_generate_carrier_label"
+          attrs="{'invisible': ['|', ('state', '!=', 'done'), ('carrier_tracking_ref', '!=', False), ('recreate_picking_label', '=', False)]}"
           string="Create Shipping Label" type="object"/>
       </field>
       <xpath expr="//page//field[@name='carrier_id']" position="after">
         <field name="carrier_type"/>
         <field name="carrier_code"/>
+        <field name="recreate_picking_label" attrs="{'invisible': [('carrier_tracking_ref', '=', False)]}"/>
       </xpath>
       <xpath expr="//page//group[@name='carrier_data']/.." position="after">
         <field name="option_ids"
