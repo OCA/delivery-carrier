@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from openerp import api, fields, models
 from openerp.tools import file_open
+from openerp.modules.module import get_resource_path
 
 
 class ResCompany(models.Model):
@@ -63,18 +64,20 @@ class ResCompany(models.Model):
 
     @api.depends('postlogistics_test_mode')
     def _get_wsdl_url(self):
-        path = 'delivery_carrier_label_postlogistics/data/'
-        filename = 'barcode_v2_2_wsbc.wsdl'
-        wsdl_file, wsdl_path = file_open(
-            path + 'production/' + filename,
-            pathinfo=True)
-        wsdl_url = 'file://' + wsdl_path
-        wsdl_file, wsdl_path_int = file_open(
-            path + 'integration/' + filename,
-            pathinfo=True)
-        wsdl_int_url = 'file://' + wsdl_path_int
+        # production WebService
+        wsdl_prod_file_path = get_resource_path(
+            'delivery_carrier_label_postlogistics',
+            'data', 'production', 'barcode_v2_4.wsdl')
+        __, wsdl_prod_path = file_open(wsdl_prod_file_path, pathinfo=True)
+        wsdl_prod_url = 'file://' + wsdl_prod_path
+        # integration WebService
+        wsdl_int_file_path = get_resource_path(
+            'delivery_carrier_label_postlogistics',
+            'data', 'integration', 'barcode_v2_4.wsdl')
+        __, wsdl_int_path = file_open(wsdl_int_file_path, pathinfo=True)
+        wsdl_int_url = 'file://' + wsdl_int_path
         for cp in self:
             if cp.postlogistics_test_mode:
                 cp.postlogistics_wsdl_url = wsdl_int_url
             else:
-                cp.postlogistics_wsdl_url = wsdl_url
+                cp.postlogistics_wsdl_url = wsdl_prod_url
