@@ -8,7 +8,9 @@ from odoo import api, fields, models
 class DeliveryCarrier(models.Model):
     _inherit = 'delivery.carrier'
 
-    delivery_type = fields.Selection(oldname='carrier_type')
+    carrier_type = fields.Selection(
+        string='Type',
+    )
     code = fields.Char(
         help="Delivery Method Code (according to carrier)",
     )
