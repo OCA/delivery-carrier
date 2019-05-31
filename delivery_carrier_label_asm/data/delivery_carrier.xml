@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data noupdate="0">
+
+    <!-- PRODUCT -->
+    <record id="product_product_asm" model="product.product">
+      <field name="default_code">SHIP_ASM</field>
+      <field name="standard_price">0.0</field>
+      <field name="cost_method">standard</field>
+      <field name="type">service</field>
+      <field name="procure_method">make_to_stock</field>
+      <field name="supply_method">buy</field>
+      <field name="name">Coûts de livraison - ASM</field>
+      <field name="categ_id">1</field>
+    </record>
+
+    <!-- PARTNER -->
+    <record id="partner_asm" model="res.partner">
+      <field name="name">ASM</field>
+      <field name="customer" eval="False"/>
+      <field name="supplier" eval="True"/>
+      <field name="is_company" eval="True"/>
+    </record>
+    <!-- DELIVERY CARRIER -->
+    <record id="delivery_carrier_asm" model="delivery.carrier">
+      <field name="name">ASM group</field>
+      <field name="type">asm</field>
+      <field name="code">asm</field>
+      <field name="partner_id" ref="partner_asm"/>
+      <field name="product_id" ref="product_product_asm"/>
+    </record>
+
+  </data>
+
+  <data noupdate="1">
+
+    <!-- CONFIG PARAMETER -->
+    <record id="delivery_carrier_asm_customer_code" model="ir.config_parameter">
+      <field name="key">carrier_asm_customer_code</field>
+      <field name="value">username</field>
+    </record>
+    <record id="delivery_carrier_asm_warehouse" model="ir.config_parameter">
+      <field name="key">carrier_asm_warehouse</field>
+      <field name="value">FR00??</field>
+    </record>
+
+  </data>
+</odoo>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">
+<soap12:Body>
+<GrabaServicios xmlns="http://www.asmred.com/">
+<docIn>
+    <Servicios uidcliente="6BAB7A53-3B6D-4D5A-9450-702D2FAC0B11">
+      <Envio codbarras="">
+        <Fecha>21/07/2015</Fecha>
+        <Portes>P</Portes>
+        <Servicio>1</Servicio>
+        <Horario>2</Horario>
+        <Bultos>1</Bultos>
+        <Peso>1</Peso>
+        <Volumen></Volumen>
+        <Declarado></Declarado>
+        <DNINomb>0</DNINomb>
+        <FechaPrevistaEntrega></FechaPrevistaEntrega>
+        <Retorno>0</Retorno>
+        <Pod>N</Pod>
+        <PODObligatorio>N</PODObligatorio>
+        <Remite>
+          <Plaza></Plaza>
+          <Nombre>Zikzakmedia SL</Nombre>
+          <Direccion>Sant Jaume, 9</Direccion>
+          <Poblacion>Vilafranca</Poblacion>
+          <Provincia></Provincia>
+          <Pais>34</Pais>
+          <CP>08720</CP>
+          <Telefono></Telefono>
+          <Movil></Movil>
+          <Email></Email>
+          <Departamento/>
+          <NIF/>
+          <Observaciones></Observaciones>
+        </Remite>
+        <Destinatario>
+          <Codigo></Codigo>
+          <Plaza></Plaza>
+          <Nombre>Raimon Esteve Cusine</Nombre>
+          <Direccion>Durruti 1937, 4art 2ona</Direccion>
+          <Poblacion>Barcelona</Poblacion>
+          <Provincia></Provincia>
+          <Pais>ES</Pais>
+          <CP>08001</CP>
+          <Telefono></Telefono>
+          <Movil></Movil>
+          <Email></Email>
+          <Observaciones>Testing ASM API - Create picking</Observaciones>
+          <ATT></ATT>
+          <Departamento></Departamento>
+          <NIF/>
+        </Destinatario>
+        <Referencias>
+          <Referencia tipo="C">${referencia_c}</Referencia>
+          <Referencia tipo="0"/>
+        </Referencias>
+        <Importes>
+          <Debidos/>
+          <Reembolso>25.69</Reembolso>
+        </Importes>
+        <Seguro tipo="0">
+          <Descripcion></Descripcion>
+          <Importe></Importe>
+        </Seguro>
+        <DevuelveAdicionales>
+          <PlazaDestino/>
+          <Etiqueta tipo="PDF"/>
+          <EtiquetaDevolucion tipo="PDF"/>
+        </DevuelveAdicionales>
+        <DevolverDatosASMDestino/>
+        <Cliente>
+          <Codigo></Codigo>
+          <Plaza></Plaza>
+          <Agente></Agente>
+        </Cliente>
+      </Envio>
+    </Servicios>
+</docIn>
+</GrabaServicios>
+</soap12:Body>
+</soap12:Envelope>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">
+<soap12:Body>
+<GrabaServicios xmlns="http://www.asmred.com/">
+<docIn>
+    <Servicios uidcliente="${username}" xmlns="http://www.asmred.com/">
+      <Envio codbarras=""> 
+        <Fecha>${today.strftime('%d/%m/%Y')}</Fecha> 
+        <Portes>${portes}</Portes>
+        <Servicio>${servicio}</Servicio>
+        <Horario>${horario}</Horario>
+        <Bultos>${bultos}</Bultos>
+        <Peso>${peso}</Peso>
+        <Volumen>${volumen}</Volumen>
+        <Declarado>${declarado}</Declarado>
+        <DNINomb>${dninob}</DNINomb>
+        <FechaPrevistaEntrega>${fechaentrega}</FechaPrevistaEntrega>
+        <Retorno>${retorno}</Retorno>
+        <Pod>${pod}</Pod>
+        <PODObligatorio>${podobligatorio}</PODObligatorio>
+        <Remite>
+          <Plaza>${remite_plaza}</Plaza>
+          <Nombre>${remite_nombre}</Nombre>
+          <Direccion>${remite_direccion}</Direccion>
+          <Poblacion>${remite_poblacion}</Poblacion>
+          <Provincia>${remite_provincia}</Provincia>
+          <Pais>${remite_pais}</Pais>
+          <CP>${remite_cp}</CP>
+          <Telefono>${remite_telefono}</Telefono>
+          <Movil>${remite_movil}</Movil>
+          <Email>${remite_email}</Email>
+          <Departamento>${remite_departamento}</Departamento>
+          <NIF>${remite_nif}</NIF>
+          <Observaciones>${remite_observaciones}</Observaciones>
+        </Remite>
+        <Destinatario>
+          <Codigo>${destinatario_codigo}</Codigo>
+          <Plaza>${destinatario_plaza}</Plaza>
+          <Nombre>${destinatario_nombre}</Nombre>
+          <Direccion>${destinatario_direccion}</Direccion>
+          <Poblacion>${destinatario_poblacion}</Poblacion>
+          <Provincia>${destinatario_provincia}</Provincia>
+          <Pais>${destinatario_pais}</Pais>
+          <CP>${destinatario_cp}</CP>
+          <Telefono>${destinatario_telefono}</Telefono>
+          <Movil>${destinatario_movil}</Movil>
+          <Email>${destinatario_email}</Email>
+          <Observaciones>${destinatario_observaciones}</Observaciones>
+          <ATT>${destinatario_att}</ATT>
+          <Departamento>${destinatario_departamento}</Departamento>
+          <NIF>${destinatario_nif}</NIF>
+        </Destinatario>
+        <Referencias>
+          <Referencia tipo="C">${referencia_c}</Referencia>
+          <Referencia tipo="0">${referencia_0}</Referencia>
+        </Referencias>
+        <Importes>
+          <Debidos>${importes_debido}</Debidos>
+          <Reembolso>${importes_reembolso}</Reembolso>
+        </Importes>
+        <Seguro tipo="${seguro}">
+          <Descripcion>${seguro_descripcion}</Descripcion>
+          <Importe>${seguro_importe}</Importe>
+        </Seguro>
+        <DevuelveAdicionales>
+          <PlazaDestino />
+          <Etiqueta tipo="${etiqueta}"></Etiqueta>
+          <EtiquetaDevolucion tipo="${etiqueta_devolucion}"></EtiquetaDevolucion>
+        </DevuelveAdicionales>
+        <DevolverDatosASMDestino></DevolverDatosASMDestino>
+        <Cliente>
+          <Codigo>${cliente_codigo}</Codigo>
+          <Plaza>${cliente_plaza}</Plaza>
+          <Agente>${cliente_agente}</Agente>
+        </Cliente>
+      </Envio>
+    </Servicios>
+</docIn>
+</GrabaServicios>
+</soap12:Body>
+</soap12:Envelope>

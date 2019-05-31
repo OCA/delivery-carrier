@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="view_picking_form_inherit" model="ir.ui.view">
+    <field name="name">view.picking.form.inherit</field>
+    <field name="model">stock.picking</field>
+    <field name="inherit_id" ref="stock.view_picking_form"/>
+    <field name="arch" type="xml">
+      <xpath expr="//button[@name='action_toggle_is_locked']" position="after">
+        <button string="ASM tag" name="generate_labels" type="object" context="{}"/>
+      </xpath>
+      <xpath expr="//field[@name='carrier_code']" position="after">
+          <field name="asm_label" attrs="{'invisible': ['|', ('carrier_code', 'not in', ['ASM', 'asm']), ('carrier_id', '=', False)]}"/>
+      </xpath>
+    </field>
+  </record>
+</odoo>

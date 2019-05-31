@@ -1,0 +1,108 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* delivery_carrier_label_asm
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-05-31 07:58+0000\n"
+"PO-Revision-Date: 2019-05-31 07:58+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: delivery_carrier_label_asm
+#: code:addons/delivery_carrier_label_asm/models/stock.py:33
+#, python-format
+msgid "%s\n"
+"%s"
+msgstr ""
+
+#. module: delivery_carrier_label_asm
+#: model:ir.model.fields,field_description:delivery_carrier_label_asm.field_stock_picking__asm_label
+msgid "ASM Label"
+msgstr "Etiqueta ASM"
+
+#. module: delivery_carrier_label_asm
+#: code:addons/delivery_carrier_label_asm/models/stock.py:26
+#, python-format
+msgid "ASM Library Exception"
+msgstr ""
+
+#. module: delivery_carrier_label_asm
+#: model:delivery.carrier,name:delivery_carrier_label_asm.delivery_carrier_asm
+msgid "ASM group"
+msgstr "ASM"
+
+#. module: delivery_carrier_label_asm
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_label_asm.view_picking_form_inherit
+msgid "ASM tag"
+msgstr "ASM"
+
+#. module: delivery_carrier_label_asm
+#: model:product.product,name:delivery_carrier_label_asm.product_product_asm
+#: model:product.template,name:delivery_carrier_label_asm.product_product_asm_product_template
+msgid "Coûts de livraison - ASM"
+msgstr ""
+
+#. module: delivery_carrier_label_asm
+#: selection:stock.picking,asm_label:0
+msgid "DPL"
+msgstr ""
+
+#. module: delivery_carrier_label_asm
+#: model:ir.model,name:delivery_carrier_label_asm.model_delivery_carrier
+msgid "Delivery Methods"
+msgstr "Método de envío"
+
+#. module: delivery_carrier_label_asm
+#: selection:stock.picking,asm_label:0
+msgid "EPL"
+msgstr ""
+
+#. module: delivery_carrier_label_asm
+#: selection:stock.picking,asm_label:0
+msgid "JPG"
+msgstr ""
+
+#. module: delivery_carrier_label_asm
+#: code:addons/delivery_carrier_label_asm/models/config.py:43
+#, python-format
+msgid "Missing parameter"
+msgstr ""
+
+#. module: delivery_carrier_label_asm
+#: selection:stock.picking,asm_label:0
+msgid "PDF"
+msgstr ""
+
+#. module: delivery_carrier_label_asm
+#: selection:stock.picking,asm_label:0
+msgid "PNG"
+msgstr ""
+
+#. module: delivery_carrier_label_asm
+#: model:ir.model,name:delivery_carrier_label_asm.model_shipping_label
+msgid "Shipping Label"
+msgstr "Etiqueta de envío"
+
+#. module: delivery_carrier_label_asm
+#: model:ir.model,name:delivery_carrier_label_asm.model_stock_picking
+msgid "Transfer"
+msgstr "Transferir"
+
+#. module: delivery_carrier_label_asm
+#: model:product.product,uom_name:delivery_carrier_label_asm.product_product_asm
+#: model:product.template,uom_name:delivery_carrier_label_asm.product_product_asm_product_template
+msgid "Unit(s)"
+msgstr "Unidad(es)"
+
+#. module: delivery_carrier_label_asm
+#: model:product.product,weight_uom_name:delivery_carrier_label_asm.product_product_asm
+#: model:product.template,weight_uom_name:delivery_carrier_label_asm.product_product_asm_product_template
+msgid "kg"
+msgstr ""
