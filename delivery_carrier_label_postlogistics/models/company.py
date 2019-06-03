@@ -5,6 +5,11 @@ from openerp import api, fields, models
 from openerp.tools import file_open
 from openerp.modules.module import get_resource_path
 
+POSTLOGISTICS_VERSIONS = [
+    ("barcode_v2_4", "v2.4"),
+    ("barcode_v2_2_wsbc", "v2.2 (deprecated)"),
+]
+
 
 class ResCompany(models.Model):
     _inherit = 'res.company'
@@ -12,6 +17,11 @@ class ResCompany(models.Model):
     postlogistics_wsdl_url = fields.Char(compute='_get_wsdl_url',
                                          string='WSDL URL',
                                          store=True)
+    postlogistics_version = fields.Selection(
+        selection=POSTLOGISTICS_VERSIONS,
+        string="Version",
+        default=POSTLOGISTICS_VERSIONS[0][0],
+    )
     postlogistics_test_mode = fields.Boolean()
     postlogistics_username = fields.Char('Username')
     postlogistics_password = fields.Char('Password')
@@ -62,21 +72,21 @@ class ResCompany(models.Model):
     )
     postlogistics_proclima_logo = fields.Boolean('Print ProClima logo')
 
-    @api.depends('postlogistics_test_mode')
+    @api.depends('postlogistics_test_mode', 'postlogistics_version')
     def _get_wsdl_url(self):
-        # production WebService
-        wsdl_prod_file_path = get_resource_path(
-            'delivery_carrier_label_postlogistics',
-            'data', 'production', 'barcode_v2_4.wsdl')
-        __, wsdl_prod_path = file_open(wsdl_prod_file_path, pathinfo=True)
-        wsdl_prod_url = 'file://' + wsdl_prod_path
-        # integration WebService
-        wsdl_int_file_path = get_resource_path(
-            'delivery_carrier_label_postlogistics',
-            'data', 'integration', 'barcode_v2_4.wsdl')
-        __, wsdl_int_path = file_open(wsdl_int_file_path, pathinfo=True)
-        wsdl_int_url = 'file://' + wsdl_int_path
         for cp in self:
+            # production WebService
+            wsdl_prod_file_path = get_resource_path(
+                'delivery_carrier_label_postlogistics',
+                'data', 'production', cp.postlogistics_version + '.wsdl')
+            __, wsdl_prod_path = file_open(wsdl_prod_file_path, pathinfo=True)
+            wsdl_prod_url = 'file://' + wsdl_prod_path
+            # integration WebService
+            wsdl_int_file_path = get_resource_path(
+                'delivery_carrier_label_postlogistics',
+                'data', 'integration', cp.postlogistics_version + '.wsdl')
+            __, wsdl_int_path = file_open(wsdl_int_file_path, pathinfo=True)
+            wsdl_int_url = 'file://' + wsdl_int_path
             if cp.postlogistics_test_mode:
                 cp.postlogistics_wsdl_url = wsdl_int_url
             else:
