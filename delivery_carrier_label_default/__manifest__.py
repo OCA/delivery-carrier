@@ -4,7 +4,7 @@
     "name": "Default label for carrier labels",
     "summary": "This module defines a basic label to print "
                "when no specific carrier is selected.",
-    "version": "11.0.1.0.0",
+    "version": "11.0.1.0.1",
     "development_status": "Production/Stable",
     "category": "Delivery",
     "website": "https://github.com/OCA/delivery-carrier",
