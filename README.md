@@ -18,7 +18,7 @@ Available addons
 ----------------
 addon | version | summary
 --- | --- | ---
-[base_delivery_carrier_label](base_delivery_carrier_label/) | 10.0.1.1.0 | Base module for carrier labels
+[base_delivery_carrier_label](base_delivery_carrier_label/) | 10.0.1.2.0 | Base module for carrier labels
 [delivery_auto_refresh](delivery_auto_refresh/) | 10.0.1.0.0 | Auto-refresh delivery price in sales orders
 [delivery_carrier_b2c](delivery_carrier_b2c/) | 10.0.0.1.0 | Delivery Carrier Business To Customer
 [delivery_carrier_deposit](delivery_carrier_deposit/) | 10.0.0.1.1 | Create deposit slips
