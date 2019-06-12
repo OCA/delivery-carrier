@@ -5,6 +5,7 @@
         <record id="untaxed_delivery_carrier" model="delivery.carrier">
             <field name="name">Carrier price on untaxed</field>
             <field name="delivery_type">base_on_rule</field>
+            <field name="product_id" ref="delivery.product_product_delivery_normal"/>
         </record>
 
         <!-- Price rule -->
