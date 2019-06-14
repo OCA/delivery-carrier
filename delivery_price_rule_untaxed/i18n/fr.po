@@ -6,6 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-06-14 08:30+0000\n"
+"PO-Revision-Date: 2019-06-14 08:30+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,67 +18,67 @@ msgstr ""
 #. module: delivery_price_rule_untaxed
 #: model:delivery.carrier,name:delivery_price_rule_untaxed.untaxed_delivery_carrier
 msgid "Carrier price on untaxed"
-msgstr ""
+msgstr "Frais de livraison basés sur le prix HT"
 
 #. module: delivery_price_rule_untaxed
 #: model:ir.model,name:delivery_price_rule_untaxed.model_delivery_carrier
 msgid "Delivery Methods"
-msgstr ""
+msgstr "Méthodes de livraison"
 
 #. module: delivery_price_rule_untaxed
 #: model:ir.model,name:delivery_price_rule_untaxed.model_delivery_price_rule
 msgid "Delivery Price Rules"
-msgstr ""
+msgstr "Règles de prix de livraison"
 
 #. module: delivery_price_rule_untaxed
 #: selection:delivery.price.rule,variable:0
 #: selection:delivery.price.rule,variable_factor:0
 msgid "Price"
-msgstr ""
+msgstr "Prix TTC"
 
 #. module: delivery_price_rule_untaxed
 #: selection:delivery.price.rule,variable:0
 #: selection:delivery.price.rule,variable_factor:0
 msgid "Quantity"
-msgstr ""
+msgstr "Quantité"
 
 #. module: delivery_price_rule_untaxed
-#: code:addons/delivery_price_rule_untaxed/models/delivery_carrier.py:51
+#: code:addons/delivery_price_rule_untaxed/models/delivery_carrier.py:52
 #, python-format
 msgid "Selected product in the delivery method doesn't fulfill any of the delivery carrier(s) criteria."
-msgstr ""
+msgstr "Le produit sélectionné dans la méthode de livraison ne remplit aucun des critères du ou des transporteurs."
 
 #. module: delivery_price_rule_untaxed
 #: selection:delivery.price.rule,variable:0
 #: selection:delivery.price.rule,variable_factor:0
 msgid "Untaxed price"
-msgstr ""
+msgstr "Prix HT"
 
 #. module: delivery_price_rule_untaxed
 #: model:ir.model.fields,field_description:delivery_price_rule_untaxed.field_delivery_price_rule__variable
 msgid "Variable"
-msgstr ""
+msgstr "Variable"
 
 #. module: delivery_price_rule_untaxed
 #: model:ir.model.fields,field_description:delivery_price_rule_untaxed.field_delivery_price_rule__variable_factor
 msgid "Variable Factor"
-msgstr ""
+msgstr "Facteur variable"
 
 #. module: delivery_price_rule_untaxed
 #: selection:delivery.price.rule,variable:0
 #: selection:delivery.price.rule,variable_factor:0
 msgid "Volume"
-msgstr ""
+msgstr "Volume"
 
 #. module: delivery_price_rule_untaxed
 #: selection:delivery.price.rule,variable:0
 #: selection:delivery.price.rule,variable_factor:0
 msgid "Weight"
-msgstr ""
+msgstr "Poids"
 
 #. module: delivery_price_rule_untaxed
 #: selection:delivery.price.rule,variable:0
 #: selection:delivery.price.rule,variable_factor:0
 msgid "Weight * Volume"
-msgstr ""
+msgstr "Poids * volume"
 
