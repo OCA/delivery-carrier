@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2018 Simone Rubino - Agile Business Group
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
@@ -16,7 +15,7 @@ class TestDeliveryCost(common.TransactionCase):
         self.partner_18 = self.env.ref('base.res_partner_18')
         self.pricelist = self.env.ref('product.list0')
         self.product_4 = self.env.ref('product.product_product_4')
-        self.product_uom_unit = self.env.ref('product.product_uom_unit')
+        self.product_uom_unit = self.env.ref('uom.product_uom_unit')
         self.untaxed_delivery = self.env.ref(
             'delivery_price_rule_untaxed.untaxed_delivery_carrier')
 
@@ -38,12 +37,13 @@ class TestDeliveryCost(common.TransactionCase):
 
         # Raise exception because total untaxed (750) is above threshold (300)
         with self.assertRaises(UserError):
-            self.sale_untaxed_delivery_charges.delivery_set()
+            self.sale_untaxed_delivery_charges.set_delivery_line()
 
         self.sale_untaxed_delivery_charges.order_line.price_unit = 300
 
         # Add untaxed delivery cost in sale order
-        self.sale_untaxed_delivery_charges.delivery_set()
+        self.sale_untaxed_delivery_charges.get_delivery_price()
+        self.sale_untaxed_delivery_charges.set_delivery_line()
 
         # Check sale order after adding delivery cost
         line = self.SaleOrderLine.search([
