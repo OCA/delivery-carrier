@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2018 Simone Rubino - Agile Business Group
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 {
@@ -8,7 +7,7 @@
     "development_status": "Beta",
     "category": "Stock",
     "website": "https://github.com/OCA/delivery-carrier/tree/"
-               "10.0/delivery_price_rule_untaxed",
+               "12.0/delivery_price_rule_untaxed",
     "author": "Agile Business Group, Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "application": False,
