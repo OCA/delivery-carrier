@@ -11,14 +11,14 @@ class DeliveryCarrier(models.Model):
     _inherit = 'delivery.carrier'
 
     @api.multi
-    def get_price_available(self, order):
+    def _get_price_available(self, order):
         self.ensure_one()
         self = self.with_context(
             {'order_amount_untaxed': order.amount_untaxed})
-        res = super(DeliveryCarrier, self).get_price_available(order)
+        res = super(DeliveryCarrier, self)._get_price_available(order)
         return res
 
-    def get_price_from_picking(self, total, weight, volume, quantity):
+    def _get_price_from_picking(self, total, weight, volume, quantity):
         price = 0.0
         untaxed_criteria_found = False
         price_dict = {
@@ -53,5 +53,5 @@ class DeliveryCarrier(models.Model):
                     "Selected product in the delivery method doesn't "
                     "fulfill any of the delivery carrier(s) criteria."))
             return super(DeliveryCarrier, self) \
-                .get_price_from_picking(total, weight, volume, quantity)
+                ._get_price_from_picking(total, weight, volume, quantity)
         return price
