@@ -1,0 +1,84 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* delivery_price_rule_untaxed
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-06-14 08:30+0000\n"
+"PO-Revision-Date: 2019-06-14 08:30+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: delivery_price_rule_untaxed
+#: model:delivery.carrier,name:delivery_price_rule_untaxed.untaxed_delivery_carrier
+msgid "Carrier price on untaxed"
+msgstr "Frais de livraison basés sur le prix HT"
+
+#. module: delivery_price_rule_untaxed
+#: model:ir.model,name:delivery_price_rule_untaxed.model_delivery_carrier
+msgid "Delivery Methods"
+msgstr "Méthodes de livraison"
+
+#. module: delivery_price_rule_untaxed
+#: model:ir.model,name:delivery_price_rule_untaxed.model_delivery_price_rule
+msgid "Delivery Price Rules"
+msgstr "Règles de prix de livraison"
+
+#. module: delivery_price_rule_untaxed
+#: selection:delivery.price.rule,variable:0
+#: selection:delivery.price.rule,variable_factor:0
+msgid "Price"
+msgstr "Prix TTC"
+
+#. module: delivery_price_rule_untaxed
+#: selection:delivery.price.rule,variable:0
+#: selection:delivery.price.rule,variable_factor:0
+msgid "Quantity"
+msgstr "Quantité"
+
+#. module: delivery_price_rule_untaxed
+#: code:addons/delivery_price_rule_untaxed/models/delivery_carrier.py:52
+#, python-format
+msgid "Selected product in the delivery method doesn't fulfill any of the delivery carrier(s) criteria."
+msgstr "Le produit sélectionné dans la méthode de livraison ne remplit aucun des critères du ou des transporteurs."
+
+#. module: delivery_price_rule_untaxed
+#: selection:delivery.price.rule,variable:0
+#: selection:delivery.price.rule,variable_factor:0
+msgid "Untaxed price"
+msgstr "Prix HT"
+
+#. module: delivery_price_rule_untaxed
+#: model:ir.model.fields,field_description:delivery_price_rule_untaxed.field_delivery_price_rule__variable
+msgid "Variable"
+msgstr "Variable"
+
+#. module: delivery_price_rule_untaxed
+#: model:ir.model.fields,field_description:delivery_price_rule_untaxed.field_delivery_price_rule__variable_factor
+msgid "Variable Factor"
+msgstr "Facteur variable"
+
+#. module: delivery_price_rule_untaxed
+#: selection:delivery.price.rule,variable:0
+#: selection:delivery.price.rule,variable_factor:0
+msgid "Volume"
+msgstr "Volume"
+
+#. module: delivery_price_rule_untaxed
+#: selection:delivery.price.rule,variable:0
+#: selection:delivery.price.rule,variable_factor:0
+msgid "Weight"
+msgstr "Poids"
+
+#. module: delivery_price_rule_untaxed
+#: selection:delivery.price.rule,variable:0
+#: selection:delivery.price.rule,variable_factor:0
+msgid "Weight * Volume"
+msgstr "Poids * volume"
+
