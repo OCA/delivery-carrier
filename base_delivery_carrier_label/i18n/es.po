@@ -330,7 +330,7 @@ msgid "Name"
 msgstr "Nombre"
 
 #. module: base_delivery_carrier_label
-#: code:addons/base_delivery_carrier_label/models/stock_picking.py:45
+#: code:addons/base_delivery_carrier_label/models/stock_picking.py:46
 #, python-format
 msgid "No label is configured for the selected delivery method."
 msgstr ""
@@ -389,6 +389,13 @@ msgid "Readonly Flag"
 msgstr ""
 
 #. module: base_delivery_carrier_label
+#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_picking_recreate_picking_label
+#, fuzzy
+#| msgid "Create Shipping Label"
+msgid "Recreate picking label"
+msgstr "Crear etiqueta de envío"
+
+#. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_res_field
 msgid "Resource Field"
 msgstr "Campo de recurso"
@@ -419,7 +426,7 @@ msgid "Shipping Label"
 msgstr "Etiqueta de envío"
 
 #. module: base_delivery_carrier_label
-#: code:addons/base_delivery_carrier_label/models/stock_picking.py:258
+#: code:addons/base_delivery_carrier_label/models/stock_picking.py:260
 #, python-format
 msgid ""
 "Some labels already exist for the picking %s.\n"
@@ -505,7 +512,7 @@ msgid ""
 msgstr ""
 
 #. module: base_delivery_carrier_label
-#: code:addons/base_delivery_carrier_label/models/stock_picking.py:165
+#: code:addons/base_delivery_carrier_label/models/stock_picking.py:167
 #, python-format
 msgid ""
 "You should not remove a mandatory option.Please cancel the edit or add back "
