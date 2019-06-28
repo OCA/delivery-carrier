@@ -24,7 +24,7 @@ addon | version | summary
 [delivery_carrier_deposit](delivery_carrier_deposit/) | 10.0.0.1.1 | Create deposit slips
 [delivery_carrier_label_postlogistics](delivery_carrier_label_postlogistics/) | 10.0.1.0.2 | Print postlogistics shipping labels
 [delivery_carrier_partner](delivery_carrier_partner/) | 10.0.1.0.0 | Add a partner in the delivery carrier
-[delivery_dropoff_site](delivery_dropoff_site/) | 10.0.1.0.0 | Send goods to sites in which customers come pick up package
+[delivery_dropoff_site](delivery_dropoff_site/) | 10.0.1.0.1 | Send goods to sites in which customers come pick up package
 [delivery_multi_destination](delivery_multi_destination/) | 10.0.1.1.0 | Multiple destinations for the same delivery method
 [delivery_price_by_category](delivery_price_by_category/) | 10.0.1.0.0 | Change delivery price based on product's category
 [delivery_price_rule_untaxed](delivery_price_rule_untaxed/) | 10.0.1.0.0 | Add untaxed amount to variables for price delivery price rule
