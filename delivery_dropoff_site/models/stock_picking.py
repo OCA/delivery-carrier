@@ -13,7 +13,3 @@ class StockPicking(models.Model):
         comodel_name='res.partner', string='Final Recipient',
         help="It is the partner that will pick up the parcel "
         "in the dropoff site.")
-
-    @api.model
-    def create(self, vals):
-        return super(StockPicking, self).create(vals)
