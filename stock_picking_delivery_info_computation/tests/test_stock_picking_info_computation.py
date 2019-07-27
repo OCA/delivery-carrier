@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # Copyright 2019 Tecnativa - Victor M.M. Torres
+# Copyright 2019 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo.addons.sale.tests.test_sale_common import TestSale
@@ -8,7 +9,6 @@ from odoo.addons.sale.tests.test_sale_common import TestSale
 class TestStockPickingInfoComputation(TestSale):
     def setUp(self):
         super(TestStockPickingInfoComputation, self).setUp()
-        self.product_uom_unit = self.env.ref('product.product_uom_unit')
         self.product_category_5 = self.env.ref('product.product_category_5')
         self.product_pricelist_0 = self.env.ref('product.list0')
         self.product_a = self.env['product.product'].create({
@@ -23,7 +23,6 @@ class TestStockPickingInfoComputation(TestSale):
             'weight': 0.25,
             'volume': 0.03,
         })
-
         self.sale_test = self.env['sale.order'].create({
             'partner_id': self.partner.id,
             'partner_invoice_id': self.partner.id,
@@ -31,17 +30,17 @@ class TestStockPickingInfoComputation(TestSale):
             'pricelist_id': self.product_pricelist_0.id,
             'order_line': [
                 (0, 0, {
-                    'name': 'Bose Mini Bluetooth Speaker',
+                    'name': self.product_a.name,
                     'product_id': self.product_a.id,
                     'product_uom_qty': 2,
-                    'product_uom': self.product_uom_unit.id,
+                    'product_uom': self.product_a.uom_id.id,
                     'price_unit': 300.00,
                 }),
                 (0, 0, {
-                    'name': 'iPad Mini',
+                    'name': self.product_b.name,
                     'product_id': self.product_b.id,
                     'product_uom_qty': 5,
-                    'product_uom': self.product_uom_unit.id,
+                    'product_uom': self.product_b.uom_id.id,
                     'price_unit': 390.00,
                 })
             ],
@@ -52,43 +51,38 @@ class TestStockPickingInfoComputation(TestSale):
         # Test weight and volume function
         # over an stock.picking with initial demand
         self.sale_test.action_confirm()
-        self.sale_test.picking_ids.ensure_one()
         self.sale_test.picking_ids.do_unreserve()
         self.assertFalse(self.sale_test.picking_ids.pack_operation_product_ids)
-        for picking in self.sale_test.picking_ids:
-            self.assertEqual(picking.volume, 0.0)
-            self.assertEqual(picking.weight, 1.85)
-            picking.action_calculate_volume()
-            self.assertEqual(picking.volume, 0.19)
+        picking = self.sale_test.picking_ids
+        self.assertAlmostEqual(picking.volume, 0.19)
+        self.assertAlmostEqual(picking.weight, 1.85)
 
     def test_weight_volume_todo(self):
         # Test weight and volume funtcion
         # over an stock.picking with pack operation to do
         # self.sale_test.action_confirm()
         self.sale_test.action_confirm()
-        self.sale_test.picking_ids.ensure_one()
-        for picking in self.sale_test.picking_ids:
-            self.assertEqual(picking.volume, 0.0)
-            self.assertEqual(picking.weight, 1.85)
-            picking.action_calculate_volume()
-            self.assertEqual(picking.volume, 0.19)
+        picking = self.sale_test.picking_ids
+        self.assertAlmostEqual(picking.volume, 0.19)
+        self.assertAlmostEqual(picking.weight, 1.85)
 
     def test_weight_volume_with_reserved_qty(self):
         # Test weight and volume funtcion over an stock.picking
         # with just one pack operation done qty
         self.sale_test.action_confirm()
-        self.sale_test.picking_ids.ensure_one()
-        for picking in self.sale_test.picking_ids:
-            self.assertEqual(picking.volume, 0.0)
-            self.assertEqual(picking.weight, 1.85)
-            picking.action_calculate_volume()
-            self.assertEqual(picking.volume, 0.19)
-        operations = self.sale_test.picking_ids.pack_operation_product_ids
-        operations[0].write({'qty_done': 1})
-        self.sale_test.picking_ids.write({
-            'pack_operation_product_ids': [(6, 0, operations.ids)]
-        })
-        for picking in self.sale_test.picking_ids:
-            self.assertEqual(picking.weight, 0.3)
-            picking.action_calculate_volume()
-            self.assertEqual(picking.volume, 0.02)
+        picking = self.sale_test.picking_ids
+        packop = picking.pack_operation_product_ids.filtered(
+            lambda x: x.product_id == self.product_a
+        )
+        packop.write({'qty_done': 1})
+        self.assertAlmostEqual(picking.weight, 0.3)
+        picking.action_calculate_volume()
+        self.assertAlmostEqual(picking.volume, 0.02)
+        # Needed for creating backorder
+        packop.product_qty = 1
+        packop2 = picking.pack_operation_product_ids - packop
+        packop2.product_qty = 0
+        # Confirm and create backorder
+        picking.do_transfer()
+        backorder = self.sale_test.picking_ids - picking
+        self.assertAlmostEqual(backorder.volume, 0.17)
