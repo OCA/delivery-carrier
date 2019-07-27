@@ -6,12 +6,17 @@
         <field name="inherit_id" ref="delivery.view_picking_withcarrier_out_form"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='number_of_packages']" position="after">
-                <field name="volume"/>
-                <button name="action_calculate_volume"
-                        type="object"
-                        class="oe_stat_button"
-                        icon='fa-truck'
-                        string="Re-calculate Volume"/>
+                <label for="volume"/>
+                <field name="volume" attrs="{'readonly': [('state', '=', 'done')]}" class="oe_inline" nolabel="1"/>
+                <button
+                    name="action_calculate_volume"
+                    type="object"
+                    icon='fa-truck'
+                    string="Re-calculate Volume"
+                    attrs="{'invisible': [('state', '=', 'done')]}"
+                    class="oe_inline"
+                    colspan="4"
+                />
             </xpath>
         </field>
     </record>

@@ -26,20 +26,23 @@ Stock Picking Delivery Info Computation
 |badge1| |badge2| |badge3| |badge4| |badge5| 
 
 This module extends the functionality of delivery to support
-calculate weight with preference on the package operations and
-also allow you to calculate volume manually with same logic.
+calculating the picking weight giving priority to the package operations and
+also allowing you to calculate volume manually with same logic.
 
-On a Picking which only has Inital demand, calculation will be based
-on the move lines product quantity.
+On a picking which only has inital demand, calculation will be as standard,
+based on the picking lines product quantity.
 
-As soon has *Operations* only will take in count instead of the
-previous consideration.
+As soon as you have any reserved quantity, it will only take them into account.
+In this case, the computation of the weight and volume is based in *to do*
+quantities, unles you introduce anything in *done* quantity, switching to this
+column in that case.
 
-Then all the operation lines and quantity *To Do* quantity will
-be the base of calculation if none has totally or partially quantities *Done*.
+The volume is auto-computed when the picking is generated from a sales order,
+or a backorder is created from original picking, but remains editable while
+the picking is not validated for any possible manual edition.
 
-If any operation has *Done* quantity only this lines will be
-on the calculation.
+You also have a button available while the picking is not validated for
+recomputing volume with current data.
 
 **Table of contents**
 
@@ -93,13 +96,6 @@ Contributors
 
   * Pedro M. Baeza
   * Victor M.M. Torres
-
-Other credits
-~~~~~~~~~~~~~
-
-The development of this module has been done by:
-
-* Tecnativa
 
 Maintainers
 ~~~~~~~~~~~
