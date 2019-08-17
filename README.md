@@ -29,6 +29,7 @@ addon | version | summary
 [delivery_price_by_category](delivery_price_by_category/) | 10.0.1.0.0 | Change delivery price based on product's category
 [delivery_price_rule_untaxed](delivery_price_rule_untaxed/) | 10.0.1.0.0 | Add untaxed amount to variables for price delivery price rule
 [sale_delivery_rate](sale_delivery_rate/) | 10.0.1.1.0 | Extends notion of delivery carrier rate quotes to sale orders
+[stock_picking_delivery_info_computation](stock_picking_delivery_info_computation/) | 10.0.1.0.0 | Improve weight and volume calculation
 [stock_picking_delivery_rate](stock_picking_delivery_rate/) | 10.0.1.0.0 | Adds a concept of rate quotes for stock pickings
 
 
