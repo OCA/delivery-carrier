@@ -50,10 +50,10 @@ class DeliveryCarrier(models.Model):
         """
         candidates = self.env['delivery.carrier']
         for carrier in self:
-            if self.destination_type == 'one':
+            if carrier.destination_type == 'one':
                 candidates |= carrier
             else:
-                carrier = self.with_context(show_children_carriers=True)
+                carrier = carrier.with_context(show_children_carriers=True)
                 candidates |= carrier.child_ids
         return super(DeliveryCarrier, candidates).available_carriers(partner)
 
