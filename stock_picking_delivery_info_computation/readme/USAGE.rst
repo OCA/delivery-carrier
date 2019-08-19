@@ -1,6 +1,7 @@
 To use this module, you need to:
 
-#. Go to *Inventory > All Transfers* and pick one.
+#. Go to *Inventory > Operations > Transfers* and
+   pick one not in state *Done* or *Cancelled*.
 #. Click on tab *Additional Info* and click on button
    *Re-calculate Volume*
 

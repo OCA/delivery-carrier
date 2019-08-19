@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2019 Tecnativa - Victor M.M. Torres
 # Copyright 2019 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
@@ -9,16 +8,17 @@ class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
     @api.depends(
-        'pack_operation_product_ids',
-        'pack_operation_product_ids.product_id',
-        'pack_operation_product_ids.product_qty',
-        'pack_operation_product_ids.qty_done')
+        'move_ids_without_package',
+        'move_ids_without_package.product_id',
+        'move_ids_without_package.product_uom_qty',
+        'move_ids_without_package.quantity_done')
     def _cal_weight(self):
-        with_pack_ops = self.filtered('pack_operation_product_ids')
+        with_pack_ops = self.filtered('move_ids_without_package')
         for rec in self:
-            has_done = any(rec.mapped('pack_operation_product_ids.qty_done'))
-            field = 'qty_done' if has_done else 'product_qty'
-            rec.weight = sum(rec.pack_operation_product_ids.mapped(
+            has_done = any(
+                rec.mapped('move_ids_without_package.quantity_done'))
+            field = 'quantity_done' if has_done else 'product_uom_qty'
+            rec.weight = sum(rec.move_ids_without_package.mapped(
                 lambda x: x[field] * x.product_id.weight
             ))
         super(StockPicking, self - with_pack_ops)._cal_weight()
@@ -26,12 +26,12 @@ class StockPicking(models.Model):
     @api.multi
     def action_calculate_volume(self):
         for rec in self:
-            if rec.pack_operation_product_ids:
+            if rec.move_ids_without_package:
                 has_done = any(
-                    rec.mapped('pack_operation_product_ids.qty_done')
+                    rec.mapped('move_ids_without_package.quantity_done')
                 )
-                field = 'qty_done' if has_done else 'product_qty'
-                rec.volume = sum(rec.pack_operation_product_ids.mapped(
+                field = 'quantity_done' if has_done else 'product_uom_qty'
+                rec.volume = sum(rec.move_ids_without_package.mapped(
                     lambda x: x[field] * x.product_id.volume
                 ))
             else:
