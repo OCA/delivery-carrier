@@ -5,7 +5,7 @@
         <field name="model">stock.picking</field>
         <field name="inherit_id" ref="delivery.view_picking_withcarrier_out_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='number_of_packages']" position="after">
+            <xpath expr="//field[@name='shipping_weight']" position="after">
                 <label for="volume"/>
                 <field name="volume" attrs="{'readonly': [('state', '=', 'done')]}" class="oe_inline" nolabel="1"/>
                 <button
