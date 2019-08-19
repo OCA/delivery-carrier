@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2019 Tecnativa - Victor M.M. Torres
 # Copyright 2019 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
@@ -48,16 +47,6 @@ class TestStockPickingInfoComputation(TestSale):
         })
 
     def test_weight_volume_initial(self):
-        # Test weight and volume function
-        # over an stock.picking with initial demand
-        self.sale_test.action_confirm()
-        self.sale_test.picking_ids.do_unreserve()
-        self.assertFalse(self.sale_test.picking_ids.pack_operation_product_ids)
-        picking = self.sale_test.picking_ids
-        self.assertAlmostEqual(picking.volume, 0.19)
-        self.assertAlmostEqual(picking.weight, 1.85)
-
-    def test_weight_volume_todo(self):
         # Test weight and volume funtcion
         # over an stock.picking with pack operation to do
         # self.sale_test.action_confirm()
@@ -71,18 +60,15 @@ class TestStockPickingInfoComputation(TestSale):
         # with just one pack operation done qty
         self.sale_test.action_confirm()
         picking = self.sale_test.picking_ids
-        packop = picking.pack_operation_product_ids.filtered(
+        packop = picking.move_ids_without_package.filtered(
             lambda x: x.product_id == self.product_a
         )
-        packop.write({'qty_done': 1})
+        # Needed for creating backorder
+        packop.write({'quantity_done': 1})
         self.assertAlmostEqual(picking.weight, 0.3)
         picking.action_calculate_volume()
         self.assertAlmostEqual(picking.volume, 0.02)
-        # Needed for creating backorder
-        packop.product_qty = 1
-        packop2 = picking.pack_operation_product_ids - packop
-        packop2.product_qty = 0
         # Confirm and create backorder
-        picking.do_transfer()
+        picking.action_done()
         backorder = self.sale_test.picking_ids - picking
         self.assertAlmostEqual(backorder.volume, 0.17)
