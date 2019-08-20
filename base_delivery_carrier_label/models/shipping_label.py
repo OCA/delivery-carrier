@@ -15,7 +15,10 @@ class ShippingLabel(models.Model):
     @api.model
     def _selection_file_type(self):
         """ To inherit to add file type """
-        return [('pdf', 'PDF')]
+        return [
+            ('pdf', 'PDF'),
+            ('zpl2', 'ZPL2'),
+        ]
 
     file_type = fields.Selection(
         selection='_selection_file_type',
