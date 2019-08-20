@@ -3,8 +3,11 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 import base64
+import logging
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
+
+_logger = logging.getLogger(__name__)
 
 
 class StockPicking(models.Model):
@@ -27,13 +30,8 @@ class StockPicking(models.Model):
     option_ids = fields.Many2many(comodel_name='delivery.carrier.option',
                                   string='Options')
 
-    @api.multi
-    def generate_default_label(self, package_ids=None):
+    def generate_default_label(self):
         """ Abstract method
-
-        :param package_ids: optional list of ``stock.quant.package`` ids
-                            only packs in this list will have their label
-                            printed (all are generated when None)
 
         :return: (file_binary, file_type)
 
@@ -41,39 +39,30 @@ class StockPicking(models.Model):
         raise NotImplementedError(_('No label is configured for the '
                                     'selected delivery method.'))
 
-    @api.multi
-    def generate_shipping_labels(self, package_ids=None):
+    def generate_shipping_labels(self):
         """Generate a shipping label by default
 
         This method can be inherited to create specific shipping labels
         a list of label must be return as we can have multiple
         stock.quant.package for a single picking representing packs
 
-        :param package_ids: optional list of ``stock.quant.package`` ids
-                             only packs in this list will have their label
-                             printed (all are generated when None)
-
         :return: list of dict containing
            name: name to give to the attachement
            file: file as string
            file_type: string of file type like 'PDF'
            (optional)
-           tracking_id: tracking_id if picking lines have tracking_id and
-                        if label generator creates shipping label per
-                        pack
+           tracking_number: tracking id defined by your carrier
 
         """
-        default_label = self.generate_default_label(package_ids=package_ids)
-        if not package_ids:
-            return [default_label]
+        self.ensure_one()
+        default_label = self.generate_default_label()
         labels = []
-        for package_id in package_ids:
+        for package in self._get_packages_from_picking():
             pack_label = default_label.copy()
-            pack_label['tracking_id'] = package_id
+            pack_label['tracking_number'] = package.id
             labels.append(pack_label)
         return labels
 
-    @api.multi
     def get_shipping_label_values(self, label):
         self.ensure_one()
         return {
@@ -85,23 +74,36 @@ class StockPicking(models.Model):
             'file_type': label['file_type'],
         }
 
-    @api.multi
-    def generate_labels(self, package_ids=None):
-        """ Generate the labels.
+    def generate_labels(self):
+        """ Legacy method. Remove me after 12.0
+        """
+        _logger.warning(
+            "Your delivery module depending on your carrier must call "
+            "action_generate_carrier_label() method "
+            "instead of generate_labels()")
+        return self.action_generate_carrier_label()
 
-        A list of package ids can be given, in that case it will generate
-        the labels only of these packages.
+    def _set_a_default_package(self):
+        """ Pickings using this module must have a package
+            If not this method put it one silently
+        """
+        for picking in self:
+            move_lines = picking.move_line_ids.filtered(
+                lambda s: not (s.package_id or s.result_package_id))
+            if move_lines:
+                package = self.env['stock.quant.package'].create({})
+                move_lines.write({'result_package_id': package.id})
+
+    def action_generate_carrier_label(self):
+        """ Method for the 'Generate Label' button.
+
+        It will generate the labels for all the packages of the picking.
+        Packages are mandatory in this case
 
         """
-        label_obj = self.env['shipping.label']
-
         for pick in self:
-            if package_ids:
-                shipping_labels = pick.generate_shipping_labels(
-                    package_ids=package_ids
-                )
-            else:
-                shipping_labels = pick.generate_shipping_labels()
+            pick._set_a_default_package()
+            shipping_labels = pick.generate_shipping_labels()
             for label in shipping_labels:
                 data = pick.get_shipping_label_values(label)
                 if label.get('package_id'):
@@ -111,17 +113,12 @@ class StockPicking(models.Model):
                 # as it would try to define default value of attachement
                 if 'default_type' in context_attachment:
                     del context_attachment['default_type']
-                label_obj.with_context(context_attachment).create(data)
+                self.env['shipping.label'].with_context(
+                    context_attachment).create(data)
+            if len(shipping_labels) == 1:
+                pick.write(
+                    {'carrier_tracking_ref': label.get('tracking_number')})
         return True
-
-    @api.multi
-    def action_generate_carrier_label(self):
-        """ Method for the 'Generate Label' button.
-
-        It will generate the labels for all the packages of the picking.
-
-        """
-        return self.generate_labels()
 
     @api.onchange('carrier_id')
     def onchange_carrier_id(self):
@@ -219,7 +216,6 @@ class StockPicking(models.Model):
         vals = self._values_with_carrier_options(vals)
         return super(StockPicking, self).create(vals)
 
-    @api.multi
     def _get_label_sender_address(self):
         """ On each carrier label module you need to define
             which is the sender of the parcel.
@@ -243,7 +239,6 @@ class StockPicking(models.Model):
         address_id = partner.address_get(adr_pref=['delivery'])['delivery']
         return self.env['res.partner'].browse(address_id)
 
-    @api.multi
     def _check_existing_shipping_label(self):
         """ Check that labels don't already exist for this picking """
         self.ensure_one()
