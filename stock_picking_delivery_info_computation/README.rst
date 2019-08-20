@@ -38,11 +38,10 @@ quantities, unles you introduce anything in *done* quantity, switching to this
 column in that case.
 
 The volume is auto-computed when the picking is generated from a sales order,
-or a backorder is created from original picking, but remains editable while
-the picking is not validated for any possible manual edition.
+or a backorder is created from original picking, but remains editable for any
+possible manual edition.
 
-You also have a button available while the picking is not validated for
-recomputing volume with current data.
+You also have a button available for recomputing volume with current data.
 
 **Table of contents**
 
