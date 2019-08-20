@@ -6,14 +6,14 @@
         <field name="inherit_id" ref="delivery.view_picking_withcarrier_out_form"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='shipping_weight']" position="after">
+                <field name="number_of_packages" attrs="{'readonly': [('state', '=', 'done')]}"/>
                 <label for="volume"/>
-                <field name="volume" attrs="{'readonly': [('state', '=', 'done')]}" class="oe_inline" nolabel="1"/>
+                <field name="volume" class="oe_inline" nolabel="1"/>
                 <button
                     name="action_calculate_volume"
                     type="object"
                     icon='fa-truck'
                     string="Re-calculate Volume"
-                    attrs="{'invisible': [('state', '=', 'done')]}"
                     class="oe_inline"
                     colspan="4"
                 />

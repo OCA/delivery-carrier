@@ -1,11 +1,16 @@
 # Copyright 2019 Tecnativa - Victor M.M. Torres
 # Copyright 2019 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-from odoo import api, models
+from odoo import api, fields, models
 
 
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
+
+    number_of_packages = fields.Integer(
+        string='Number of Packages',
+        copy=False
+    )
 
     @api.depends(
         'move_ids_without_package',
