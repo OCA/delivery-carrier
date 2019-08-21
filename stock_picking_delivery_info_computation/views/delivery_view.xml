@@ -7,13 +7,12 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='number_of_packages']" position="after">
                 <label for="volume"/>
-                <field name="volume" attrs="{'readonly': [('state', '=', 'done')]}" class="oe_inline" nolabel="1"/>
+                <field name="volume" class="oe_inline" nolabel="1"/>
                 <button
                     name="action_calculate_volume"
                     type="object"
                     icon='fa-truck'
                     string="Re-calculate Volume"
-                    attrs="{'invisible': [('state', '=', 'done')]}"
                     class="oe_inline"
                     colspan="4"
                 />
