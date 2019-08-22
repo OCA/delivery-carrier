@@ -12,6 +12,7 @@ setuptools.setup(
         'odoo12-addon-delivery_auto_refresh',
         'odoo12-addon-delivery_multi_destination',
         'odoo12-addon-partner_delivery_zone',
+        'odoo12-addon-stock_picking_delivery_info_computation',
     ],
     classifiers=[
         'Programming Language :: Python',
