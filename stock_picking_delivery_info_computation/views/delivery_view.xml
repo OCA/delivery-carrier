@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_picking_withcarrier_out_form" model="ir.ui.view">
+        <field name="name">delivery.stock.picking_info.form.view</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="delivery.view_picking_withcarrier_out_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='shipping_weight']" position="after">
+                <field name="number_of_packages" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                <label for="volume"/>
+                <field name="volume" class="oe_inline" nolabel="1"/>
+                <button
+                    name="action_calculate_volume"
+                    type="object"
+                    icon='fa-truck'
+                    string="Re-calculate Volume"
+                    class="oe_inline"
+                    colspan="4"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>

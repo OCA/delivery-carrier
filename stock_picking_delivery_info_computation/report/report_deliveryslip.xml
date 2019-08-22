@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_delivery_document_info" inherit_id="delivery.report_delivery_document2">
+            <xpath expr="//th[@t-if='o.shipping_weight']" position="after">
+                <th t-if="o.volume"><strong>Volume</strong></th>
+            </xpath>
+            <xpath expr="//td[@t-if='o.shipping_weight']" position="after">
+                <td t-if="o.volume">
+                    <span t-field="o.volume"/>
+                </td>
+            </xpath>
+    </template>
+</odoo>
