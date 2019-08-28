@@ -1,4 +1,3 @@
-# coding: utf-8
 #  @author Raphael Reverdy <raphael.reverdy@akretion.com>
 #          David BEAL <david.beal@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
@@ -137,7 +136,7 @@ class StockQuantPackage(models.Model):
         # Don't forget to implement _a-carrier_before_call
         # and _a-carrier_after_call
         self.write({'carrier_id': picking.carrier_id.id})
-        roulier_instance = roulier.get(picking.carrier_type)
+        roulier_instance = roulier.get(picking.delivery_type)
         payload = roulier_instance.api()
 
         sender = picking._get_sender(self)

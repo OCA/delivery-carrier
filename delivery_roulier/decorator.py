@@ -1,4 +1,3 @@
-# coding: utf-8
 # @author Raphael Reverdy <raphael.reverdy@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
@@ -22,19 +21,19 @@ def implemented_by_carrier(func):
     def wrapper(cls, *args, **kwargs):
         fun_name = func.__name__
 
-        def get_carrier_type(cls, *args, **kwargs):
-            if hasattr(cls, 'carrier_type'):
-                return cls.carrier_type
+        def get_delivery_type(cls, *args, **kwargs):
+            if hasattr(cls, 'delivery_type'):
+                return cls.delivery_type
             pickings = [
                 obj for obj in args
                 if getattr(obj, '_name', '') == 'stock.picking']
             if len(pickings) > 0:
-                return pickings[0].carrier_type
+                return pickings[0].delivery_type
             if cls[0].carrier_id:
-                return cls[0].carrier_id.carrier_type
+                return cls[0].carrier_id.delivery_type
 
-        carrier_type = get_carrier_type(cls, *args, **kwargs)
-        fun = '_%s%s' % (carrier_type, fun_name)
+        delivery_type = get_delivery_type(cls, *args, **kwargs)
+        fun = '_%s%s' % (delivery_type, fun_name)
         if not hasattr(cls, fun):
             fun = '_roulier%s' % (fun_name)
         return getattr(cls, fun)(*args, **kwargs)
