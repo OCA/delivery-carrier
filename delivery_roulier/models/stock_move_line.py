@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2018 Akretion France (http://www.akretion.com/)
 # @author: Alexis de Lattre <alexis.delattre@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
@@ -7,8 +6,8 @@ from odoo import models
 from odoo.tools import float_is_zero
 
 
-class StockPackOperation(models.Model):
-    _inherit = 'stock.pack.operation'
+class StockMoveLine(models.Model):
+    _inherit = 'stock.move.line'
 
     def get_unit_price_for_customs(self):
         """This method is designed to be inherited for specific scenarios"""
@@ -30,9 +29,5 @@ class StockPackOperation(models.Model):
         return price_unit
 
     def get_sale_order_line(self):
-        soline = self.linked_move_operation_ids and\
-            self.linked_move_operation_ids[0].move_id and\
-            self.linked_move_operation_ids[0].move_id.procurement_id and\
-            self.linked_move_operation_ids[0].move_id.procurement_id.\
-            sale_line_id or False
-        return soline
+        self.ensure_one()
+        return self.move_id and self.move_id.sale_line_id or False
