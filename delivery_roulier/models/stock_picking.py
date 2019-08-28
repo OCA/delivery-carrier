@@ -1,4 +1,3 @@
-# coding: utf-8
 #  @author Raphael Reverdy <raphael.reverdy@akretion.com>
 #          David BEAL <david.beal@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
@@ -6,7 +5,7 @@
 from datetime import datetime, timedelta
 import logging
 
-from odoo import models, fields, api
+from odoo import models, fields
 from odoo.tools.translate import _
 from odoo.exceptions import UserError
 
@@ -72,38 +71,30 @@ class StockPicking(models.Model):
     # End of API.
 
     # Implementations for base_delivery_carrier_label
-    @api.multi
     def _is_roulier(self):
         self.ensure_one()
-        return self.carrier_type in roulier.get_carriers()
+        return self.delivery_type in roulier.get_carriers()
 
-    @api.multi
-    def generate_labels(self, package_ids=None):
+    def generate_labels(self):
         """See base_delivery_carrier_label/models/stock_picking.py."""
         # entry point
         self.ensure_one()
         if self._is_roulier():
             return self._roulier_generate_labels()
-        _super = super(StockPicking, self)
-        return _super.generate_labels(package_ids=package_ids)
+        return super().generate_labels()
 
-    @api.multi
-    def generate_shipping_labels(self, package_ids=None):
+    def generate_shipping_labels(self):
         """See base_delivery_carrier_label/stock.py."""
         self.ensure_one()
         if self._is_roulier():
             raise UserError(_("Don't call me directly"))
-        _super = super(StockPicking, self)
-        return _super.generate_shipping_labels(package_ids=package_ids)
+        return super().generate_shipping_labels()
 
-    @api.multi
     def _roulier_generate_labels(self):
         """Create as many labels as package_ids or in self."""
         self.ensure_one()
         packages = self._get_packages_from_picking()
-        if not packages:
-            # It's not our responsibility to create the packages
-            raise UserError(_('No package found for this picking'))
+        # base_delivery_carrier_label module ensure packages is available
         self.number_of_packages = len(packages)
         self.carrier_tracking_ref = True  # display button in view
         return packages._generate_labels(self)
@@ -131,16 +122,11 @@ class StockPicking(models.Model):
 
         Accounts are resolved at runtime (can be != for dev/prod)
         """
-        keychain = self.env['keychain.account']
-        if self.env.user.has_group('stock.group_stock_user'):
-            retrieve = keychain.suspend_security().retrieve
-        else:
-            retrieve = keychain.retrieve
-        accounts = retrieve(
-            [['namespace', '=', 'roulier_%s' % self.carrier_type]])
-        return accounts[0]
+        self.ensure_one()
+        domain = [("name", "=", self.carrier_id.delivery_type)]
+        return self.env["carrier.account"].search(domain, limit=1)
 
-    def _roulier_get_sender(self, package):
+    def _roulier_get_sender(self, package=None):
         """Sender of the picking (for the label).
 
         Return:
@@ -148,7 +134,7 @@ class StockPicking(models.Model):
         """
         return self.company_id.partner_id
 
-    def _roulier_get_receiver(self, package):
+    def _roulier_get_receiver(self, package=None):
         """The guy whom the shippment is for.
 
         At home or at a distribution point, it's always
@@ -221,7 +207,6 @@ class StockPicking(models.Model):
         }
         return service
 
-    @api.multi
     def open_website_url(self):
         """Open tracking page.
 
@@ -230,7 +215,7 @@ class StockPicking(models.Model):
         """
         self.ensure_one()
         if not self._is_roulier():
-            return super(StockPicking, self).open_website_url()
+            return super().open_website_url()
 
         packages = self._get_packages_from_picking()
         if len(packages) == 0:
