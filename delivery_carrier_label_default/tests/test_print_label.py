@@ -1,9 +1,9 @@
-# Copyright 2013-2018 Camptocamp SA
+# Copyright 2013-2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 import mock
 import base64
 
-from openerp.tests import common
+from odoo.tests import common
 
 from .common import HTMLRenderMixin
 
@@ -27,13 +27,13 @@ def patch_label_file_type(function):
 class TestPrintLabel(common.SavepointCase, HTMLRenderMixin):
     """Test label printing.
 
-    When running tests Odoo 11 renders PDF reports as HTML,
+    When running tests Odoo renders PDF reports as HTML,
     so we are going to test the shipping labels as HTML document only.
     A good side effect: we are able to test the rendered content.
     """
     @classmethod
     def setUpClass(cls):
-        super(TestPrintLabel, cls).setUpClass()
+        super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         Product = cls.env['product.product']
         stock_location = cls.env.ref('stock.stock_location_stock')
@@ -75,7 +75,10 @@ class TestPrintLabel(common.SavepointCase, HTMLRenderMixin):
 
     @patch_label_file_type
     def test_print_default_label(self):
-        self.picking.generate_labels()
+        # assign picking to generate 'stock.move.line'
+        self.picking.action_confirm()
+        self.picking.action_assign()
+        self.picking.action_generate_carrier_label()
         label = self.env['shipping.label'].search(
             [('res_id', '=', self.picking.id)])
         self.assertEquals(len(label), 1)
@@ -97,10 +100,10 @@ class TestPrintLabel(common.SavepointCase, HTMLRenderMixin):
                 ope.qty_done = 9
                 break
         self.picking.put_in_pack()
-        self.picking.generate_labels()
+        self.picking.action_generate_carrier_label()
         label = self.env['shipping.label'].search(
             [('res_id', '=', self.picking.id)])
-        self.assertEquals(len(label), 1)
+        self.assertEquals(len(label), 2)
         self.assertTrue(label[0].datas)
         self.assertEquals(label[0].name, "Shipping Label.html")
         self.assertEquals(label[0].file_type, 'html')
@@ -119,9 +122,7 @@ class TestPrintLabel(common.SavepointCase, HTMLRenderMixin):
                 ope.qty_done = 9
                 break
         self.picking.put_in_pack()
-        packs = self.picking.mapped(
-            'move_line_ids.result_package_id')
-        self.picking.generate_labels(package_ids=packs.ids)
+        self.picking.action_generate_carrier_label()
         labels = self.env['shipping.label'].search(
             [('res_id', '=', self.picking.id)])
         self.assertEquals(len(labels), 2)
