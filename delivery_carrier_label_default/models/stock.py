@@ -1,4 +1,4 @@
-# Copyright 2013-2018 Camptocamp SA
+# Copyright 2013-2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 from odoo import api, models
 
@@ -7,7 +7,7 @@ class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
     @api.multi
-    def generate_default_label(self, package_ids=None):
+    def generate_default_label(self):
         """Generate a label from a qweb report."""
         self.ensure_one()
         report = self.env.ref('delivery_carrier_label_default.default_label')
