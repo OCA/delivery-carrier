@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+  <record id="carrier_account_view_tree" model="ir.ui.view">
+    <field name="model">carrier.account</field>
+    <field name="arch" type="xml">
+      <tree>
+          <field name="name"/>
+          <field name="account"/>
+          <field name="company_id"/>
+          <field name="file_format"/>
+      </tree>
+    </field>
+  </record>
+
+  <record id="carrier_account_view_form" model="ir.ui.view">
+    <field name="model">carrier.account</field>
+    <field name="arch" type="xml">
+      <form class="oe_form_nomargin o_note_form_view">
+        <sheet>
+          <div class="oe_title">
+              <h1><field name="name"/></h1>
+              <!-- To be able to link a carrier account with a delivery method 
+                   we need of this convention -->
+              <div>Name must match with one of the value of Provider field (delivery_type) of your delivery methods</div>
+          </div>
+          <group>
+            <field name="account"/>
+            <field name="password" password="True"/>
+            <field name="file_format"/>
+            <field name="company_id"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <record id="action_carrier_account" model="ir.actions.act_window">
+    <field name="name">Carrier Account</field>
+    <field name="res_model">carrier.account</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+  <menuitem id="carrier_account_menu"
+             parent="delivery.menu_delivery"
+             action="action_carrier_account"/>
+
+</odoo>
