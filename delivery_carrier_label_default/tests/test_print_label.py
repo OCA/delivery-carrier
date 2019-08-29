@@ -88,28 +88,6 @@ class TestPrintLabel(common.SavepointCase, HTMLRenderMixin):
         self.check_label_content(label.datas)
 
     @patch_label_file_type
-    def test_print_default_label_multi_packs(self):
-        # create packs
-        self.picking.action_confirm()
-        self.picking.action_assign()
-        self.picking.move_line_ids[0].qty_done = 3
-        self.picking.move_line_ids[1].qty_done = 3
-        self.picking.put_in_pack()
-        for ope in self.picking.move_line_ids:
-            if ope.qty_done == 0:
-                ope.qty_done = 9
-                break
-        self.picking.put_in_pack()
-        self.picking.action_generate_carrier_label()
-        label = self.env['shipping.label'].search(
-            [('res_id', '=', self.picking.id)])
-        self.assertEquals(len(label), 2)
-        self.assertTrue(label[0].datas)
-        self.assertEquals(label[0].name, "Shipping Label.html")
-        self.assertEquals(label[0].file_type, 'html')
-        self.check_label_content(label[0].datas)
-
-    @patch_label_file_type
     def test_print_default_label_selected_packs(self):
         # create packs
         self.picking.action_confirm()
