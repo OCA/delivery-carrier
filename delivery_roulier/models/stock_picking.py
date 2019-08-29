@@ -41,11 +41,11 @@ class StockPicking(models.Model):
     # API:
 
     @implemented_by_carrier
-    def _get_sender(self, package):
+    def _get_sender(self, package=None):
         pass
 
     @implemented_by_carrier
-    def _get_receiver(self, package):
+    def _get_receiver(self, package=None):
         pass
 
     @implemented_by_carrier
@@ -53,15 +53,15 @@ class StockPicking(models.Model):
         pass
 
     @implemented_by_carrier
-    def _get_account(self, package):
+    def _get_account(self, package=None):
         pass
 
     @implemented_by_carrier
-    def _get_auth(self, package):
+    def _get_auth(self, package=None):
         pass
 
     @implemented_by_carrier
-    def _get_service(self, package):
+    def _get_service(self, package=None):
         pass
 
     @implemented_by_carrier
@@ -110,10 +110,11 @@ class StockPicking(models.Model):
         auth = {
             'login': account.login,
             'password': account._get_password(),
+            'isTest': not self.carrier_id.prod_environment,
         }
         return auth
 
-    def _roulier_get_account(self, package):
+    def _roulier_get_account(self, package=None):
         """Return an 'account'.
 
         By default, the first account encoutered for this type.
@@ -123,8 +124,18 @@ class StockPicking(models.Model):
         Accounts are resolved at runtime (can be != for dev/prod)
         """
         self.ensure_one()
-        domain = [("name", "=", self.carrier_id.delivery_type)]
-        return self.env["carrier.account"].search(domain, limit=1)
+        domain = [
+            ("name", "=", self.carrier_id.delivery_type),
+            "|",
+            ("company_id", "=", self.company_id.id),
+            ("company_id", "=", False)
+        ]
+        account = self.env["carrier.account"].search(domain, limit=1)
+        if not account:
+            raise UserError(
+                _("No account available with name '%s' "
+                  "for this carrier" % self.carrier_id.delivery_type))
+        return account
 
     def _roulier_get_sender(self, package=None):
         """Sender of the picking (for the label).
