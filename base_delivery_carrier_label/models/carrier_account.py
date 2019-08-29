@@ -19,6 +19,7 @@ class CarrierAccount(models.Model):
     name = fields.Char(required=True)
     account = fields.Char(string='Account Number', required=True)
     password = fields.Char(string='Account Password', required=True)
+    company_id = fields.Many2one(comodel_name="res.company", string="Company")
     file_format = fields.Selection(
         selection='_selection_file_format',
         string='File Format',
