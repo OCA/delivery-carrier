@@ -1,4 +1,4 @@
-# Copyright 2017-2018 Simone Orsi
+# Copyright 2017-2019 Simone Orsi
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 """Mixin copied and adapted from
 https://github.com/OCA/website-cms/blob/11.0/cms_form/tests/common.py
