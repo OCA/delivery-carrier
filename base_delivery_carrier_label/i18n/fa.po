@@ -25,11 +25,6 @@ msgid "Access Token"
 msgstr "توکن دسترسی"
 
 #. module: base_delivery_carrier_label
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label_access_token
-msgid "Access Token"
-msgstr ""
-
-#. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account_account
 msgid "Account Number"
 msgstr "شماره حساب"
