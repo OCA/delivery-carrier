@@ -20,6 +20,11 @@ msgid "<strong>Zone</strong>"
 msgstr ""
 
 #. module: partner_delivery_zone
+#: model:ir.model.fields,field_description:partner_delivery_zone.field_partner_delivery_zone_active
+msgid "Active"
+msgstr ""
+
+#. module: partner_delivery_zone
 #: model:ir.actions.act_window,help:partner_delivery_zone.partner_delivery_zone_action
 msgid "Click to set a new delivery zone for partners."
 msgstr ""
