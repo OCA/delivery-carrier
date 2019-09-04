@@ -1,4 +1,3 @@
-# coding: utf-8
 # © 2016 Raphael REVERDY <raphael.reverdy@akretion.com>
 #        David BEAL <david.beal@akretion.com>
 #        Sébastien BEAU <sebastien.beau@akretion.com>
@@ -6,15 +5,16 @@
 
 {
     'name': 'Delivery Roulier Option',
-    'version': '10.0.1.0.0',
+    'version': '12.0.1.0.0',
     'author': 'Akretion',
     'summary': 'Add options to roulier modules',
     'maintainer': 'Akretion, Odoo Community Association (OCA)',
     'category': 'Warehouse',
     'depends': [
         'delivery_roulier',
+        'product_harmonized_system',  # from oca/intrastat
     ],
-    'website': 'http://www.akretion.com/',
+    'website': 'https://github.com/OCA/delivery-carrier',
     'data': [
         'data/delivery.xml',
     ],

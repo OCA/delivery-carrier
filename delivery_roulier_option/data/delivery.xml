@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<odoo>
-<data noupdate="1">
+<odoo noupdate="1">
+
     <!-- DELIVERY CARRIER TEMPLATE OPTION -->
     <record id="carrier_opt_tmpl_ACK" model="delivery.carrier.template.option">
         <field name="name">Acknowledgment</field>
@@ -21,5 +21,5 @@
         <field name="name">Insurance</field>
         <field name="code">INS</field>
     </record>
-</data>
+
 </odoo>
