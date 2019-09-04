@@ -11,3 +11,4 @@ class PartnerDeliveryZone(models.Model):
         string='Zone',
         required=True,
     )
+    active = fields.Boolean(default=True)
