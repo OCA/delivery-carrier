@@ -90,6 +90,12 @@ msgid "Carrier"
 msgstr ""
 
 #. module: base_delivery_carrier_label
+#: model:ir.actions.act_window,name:base_delivery_carrier_label.action_carrier_account
+#: model:ir.ui.menu,name:base_delivery_carrier_label.carrier_account_menu
+msgid "Carrier Account"
+msgstr ""
+
+#. module: base_delivery_carrier_label
 #: model:ir.ui.menu,name:base_delivery_carrier_label.menu_carriers_config
 msgid "Carriers"
 msgstr ""
@@ -108,6 +114,7 @@ msgid "Code"
 msgstr "کد"
 
 #. module: base_delivery_carrier_label
+#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account__company_id
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__company_id
 msgid "Company"
 msgstr "شرکت"
@@ -345,7 +352,14 @@ msgid "Name"
 msgstr "نام"
 
 #. module: base_delivery_carrier_label
-#: code:addons/base_delivery_carrier_label/models/stock_picking.py:39
+#: model_terms:ir.ui.view,arch_db:base_delivery_carrier_label.carrier_account_view_form
+msgid ""
+"Name must match with one of the value of Provider field (delivery_type) of "
+"your delivery methods"
+msgstr ""
+
+#. module: base_delivery_carrier_label
+#: code:addons/base_delivery_carrier_label/models/stock_picking.py:38
 #, python-format
 msgid "No label is configured for the selected delivery method."
 msgstr ""
@@ -449,7 +463,7 @@ msgid "Shipping Label 🚚"
 msgstr ""
 
 #. module: base_delivery_carrier_label
-#: code:addons/base_delivery_carrier_label/models/stock_picking.py:250
+#: code:addons/base_delivery_carrier_label/models/stock_picking.py:253
 #, python-format
 msgid ""
 "Some labels already exist for the picking %s.\n"
@@ -543,7 +557,7 @@ msgid ""
 msgstr ""
 
 #. module: base_delivery_carrier_label
-#: code:addons/base_delivery_carrier_label/models/stock_picking.py:160
+#: code:addons/base_delivery_carrier_label/models/stock_picking.py:163
 #, python-format
 msgid ""
 "You should not remove a mandatory option.Please cancel the edit or add back "
