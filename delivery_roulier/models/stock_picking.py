@@ -21,22 +21,6 @@ except ImportError:
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
-    customs_category = fields.Selection(
-        selection=[
-            ('gift', _("Gift")),
-            ('sample', _("Samples")),
-            ('commercial', _("Commercial Goods")),
-            ('document', _("Documents")),
-            ('other', _("Other")),
-            ('return', _("Goods return")),
-        ],
-        default='commercial',
-        help="Type of sending for the customs")
-
-    # base_delivery_carrier_label API implementataion
-
-    # def generate_default_label(self, package_ids=None):
-    # useless method
 
     # API:
 
@@ -57,15 +41,27 @@ class StockPicking(models.Model):
         pass
 
     @implemented_by_carrier
-    def _get_auth(self, package=None):
+    def _get_auth(self, account, package=None):
         pass
 
     @implemented_by_carrier
-    def _get_service(self, package=None):
+    def _get_service(self, account, package=None):
         pass
 
     @implemented_by_carrier
     def _convert_address(self, partner):
+        pass
+
+    @implemented_by_carrier
+    def _get_label_format(self, account):
+        pass
+
+    @implemented_by_carrier
+    def _get_from_address(self):
+        pass
+
+    @implemented_by_carrier
+    def _get_to_address(self):
         pass
 
     # End of API.
@@ -75,19 +71,10 @@ class StockPicking(models.Model):
         self.ensure_one()
         return self.delivery_type in roulier.get_carriers()
 
-    def generate_labels(self):
-        """See base_delivery_carrier_label/models/stock_picking.py."""
-        # entry point
+    def generate_shipping_labels(self):
         self.ensure_one()
         if self._is_roulier():
             return self._roulier_generate_labels()
-        return super().generate_labels()
-
-    def generate_shipping_labels(self):
-        """See base_delivery_carrier_label/stock.py."""
-        self.ensure_one()
-        if self._is_roulier():
-            raise UserError(_("Don't call me directly"))
         return super().generate_shipping_labels()
 
     def _roulier_generate_labels(self):
@@ -100,16 +87,15 @@ class StockPicking(models.Model):
         return packages._generate_labels(self)
 
     # Default implementations of _roulier_*()
-    def _roulier_get_auth(self, package):
+    def _roulier_get_auth(self, account, package=None):
         """Login/password of the carrier account.
 
         Returns:
             a dict with login and password keys
         """
-        account = self._get_account(package)
         auth = {
-            'login': account.login,
-            'password': account._get_password(),
+            'login': account.account,
+            'password': account.password,
             'isTest': not self.carrier_id.prod_environment,
         }
         return auth
@@ -145,6 +131,14 @@ class StockPicking(models.Model):
         """
         return self.company_id.partner_id
 
+    def _roulier_get_label_format(self, account):
+        """format of the label asked for carrier
+
+        Return:
+            label format (string)
+        """
+        return getattr(account, '%s_file_format' % self.delivery_type)
+
     def _roulier_get_receiver(self, package=None):
         """The guy whom the shippment is for.
 
@@ -156,7 +150,7 @@ class StockPicking(models.Model):
         """
         return self.partner_id
 
-    def _roulier_get_shipping_date(self, package):
+    def _roulier_get_shipping_date(self, package=None):
         """Choose a shipping date.
 
         By default, it's tomorrow."""
@@ -201,7 +195,15 @@ class StockPicking(models.Model):
 
         return address
 
-    def _roulier_get_service(self, package):
+    def _roulier_get_from_address(self, package=None):
+        sender = self._get_sender(package=package)
+        return self._convert_address(sender)
+
+    def _roulier_get_to_address(self, package=None):
+        receiver = self._get_receiver(package=package)
+        return self._convert_address(receiver)
+
+    def _roulier_get_service(self, account, package=None):
         """Return a basic dict.
 
         The carrier implementation may add stuff
@@ -215,6 +217,7 @@ class StockPicking(models.Model):
         service = {
             'product': self.carrier_code,
             'shippingDate': shipping_date,
+            'labelFormat': self._get_label_format(account)
         }
         return service
 

@@ -12,12 +12,12 @@
         'partner_helper',
         'base_phone',  # from oca/telephony
         'base_suspend_security',
-        'product_harmonized_system',  # from oca/intrastat
         'base_delivery_carrier_label',
     ],
     'website': 'https://github.com/delivery-carrier',
     'data': [
         'views/stock_quant_package.xml',
+        'views/carrier_account.xml',
     ],
     'external_dependencies': {
         'python': [
