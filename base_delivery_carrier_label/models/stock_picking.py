@@ -2,7 +2,6 @@
 # Copyright 2013-2016 Camptocamp SA
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-import base64
 import logging
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
@@ -48,7 +47,7 @@ class StockPicking(models.Model):
 
         :return: list of dict containing
            name: name to give to the attachement
-           file: file as string
+           file: file as base64
            file_type: string of file type like 'PDF'
            (optional)
            tracking_number: tracking id defined by your carrier
@@ -70,7 +69,7 @@ class StockPicking(models.Model):
             'datas_fname': label.get('filename', label['name']),
             'res_id': self.id,
             'res_model': 'stock.picking',
-            'datas': base64.b64encode(label['file']),
+            'datas': label['file'],
             'file_type': label['file_type'],
         }
 
@@ -101,6 +100,7 @@ class StockPicking(models.Model):
         Packages are mandatory in this case
 
         """
+        package_obj = self.env['stock.quant.package']
         for pick in self:
             pick._set_a_default_package()
             shipping_labels = pick.generate_shipping_labels()
@@ -108,6 +108,9 @@ class StockPicking(models.Model):
                 data = pick.get_shipping_label_values(label)
                 if label.get('package_id'):
                     data['package_id'] = label['package_id']
+                    if label.get('tracking_number'):
+                        package_obj.browse(label['package_id']).write(
+                            {'parcel_tracking': label.get('tracking_number')})
                 context_attachment = self.env.context.copy()
                 # remove default_type setted for stock_picking
                 # as it would try to define default value of attachement
