@@ -2,7 +2,7 @@
 # Copyright 2014 Akretion <http://www.akretion.com>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models
+from odoo import fields, models
 
 
 class ShippingLabel(models.Model):
@@ -12,16 +12,7 @@ class ShippingLabel(models.Model):
     _inherits = {'ir.attachment': 'attachment_id'}
     _description = "Shipping Label"
 
-    @api.model
-    def _selection_file_type(self):
-        """ To inherit to add file type """
-        return [
-            ('pdf', 'PDF'),
-            ('zpl2', 'ZPL2'),
-        ]
-
-    file_type = fields.Selection(
-        selection='_selection_file_type',
+    file_type = fields.Char(
         string='File type',
         default='pdf',
     )
