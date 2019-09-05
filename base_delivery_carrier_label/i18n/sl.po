@@ -93,6 +93,14 @@ msgid "Carrier"
 msgstr "Prevoznik"
 
 #. module: base_delivery_carrier_label
+#: model:ir.actions.act_window,name:base_delivery_carrier_label.action_carrier_account
+#: model:ir.ui.menu,name:base_delivery_carrier_label.carrier_account_menu
+#, fuzzy
+#| msgid "Carrier"
+msgid "Carrier Account"
+msgstr "Prevoznik"
+
+#. module: base_delivery_carrier_label
 #: model:ir.ui.menu,name:base_delivery_carrier_label.menu_carriers_config
 msgid "Carriers"
 msgstr "Prevozniki"
@@ -111,6 +119,7 @@ msgid "Code"
 msgstr "Koda"
 
 #. module: base_delivery_carrier_label
+#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account__company_id
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__company_id
 msgid "Company"
 msgstr ""
@@ -348,6 +357,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__name
 msgid "Name"
 msgstr "Naziv"
+
+#. module: base_delivery_carrier_label
+#: model_terms:ir.ui.view,arch_db:base_delivery_carrier_label.carrier_account_view_form
+msgid ""
+"Name must match with one of the value of Provider field (delivery_type) of "
+"your delivery methods"
+msgstr ""
 
 #. module: base_delivery_carrier_label
 #: code:addons/base_delivery_carrier_label/models/stock_picking.py:38
