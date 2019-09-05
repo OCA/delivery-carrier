@@ -344,7 +344,7 @@ msgid "Name"
 msgstr ""
 
 #. module: base_delivery_carrier_label
-#: code:addons/base_delivery_carrier_label/models/stock_picking.py:39
+#: code:addons/base_delivery_carrier_label/models/stock_picking.py:38
 #, python-format
 msgid "No label is configured for the selected delivery method."
 msgstr ""
@@ -448,7 +448,7 @@ msgid "Shipping Label 🚚"
 msgstr ""
 
 #. module: base_delivery_carrier_label
-#: code:addons/base_delivery_carrier_label/models/stock_picking.py:250
+#: code:addons/base_delivery_carrier_label/models/stock_picking.py:253
 #, python-format
 msgid ""
 "Some labels already exist for the picking %s.\n"
@@ -542,7 +542,7 @@ msgid ""
 msgstr ""
 
 #. module: base_delivery_carrier_label
-#: code:addons/base_delivery_carrier_label/models/stock_picking.py:160
+#: code:addons/base_delivery_carrier_label/models/stock_picking.py:163
 #, python-format
 msgid ""
 "You should not remove a mandatory option.Please cancel the edit or add back "
