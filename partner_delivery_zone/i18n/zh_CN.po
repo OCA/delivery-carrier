@@ -6,44 +6,46 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2019-09-07 11:23+0000\n"
+"Last-Translator: 黎伟杰 <674416404@qq.com>\n"
 "Language-Team: none\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 3.8\n"
 
 #. module: partner_delivery_zone
 #: model_terms:ir.ui.view,arch_db:partner_delivery_zone.report_delivery_document
 #: model_terms:ir.ui.view,arch_db:partner_delivery_zone.report_picking
 msgid "<strong>Zone</strong>"
-msgstr ""
+msgstr "<strong>区域</strong>"
 
 #. module: partner_delivery_zone
 #: model_terms:ir.actions.act_window,help:partner_delivery_zone.partner_delivery_zone_action
 msgid "Click to set a new delivery zone for partners."
-msgstr ""
+msgstr "单击此处可为合作伙伴设置新的交货区域。"
 
 #. module: partner_delivery_zone
 #: model:ir.model.fields,field_description:partner_delivery_zone.field_partner_delivery_zone__code
 msgid "Code"
-msgstr ""
+msgstr "代码"
 
 #. module: partner_delivery_zone
 #: model:ir.model,name:partner_delivery_zone.model_res_partner
 msgid "Contact"
-msgstr ""
+msgstr "联系人"
 
 #. module: partner_delivery_zone
 #: model:ir.model.fields,field_description:partner_delivery_zone.field_partner_delivery_zone__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "创建者"
 
 #. module: partner_delivery_zone
 #: model:ir.model.fields,field_description:partner_delivery_zone.field_partner_delivery_zone__create_date
 msgid "Created on"
-msgstr ""
+msgstr "创建时间"
 
 #. module: partner_delivery_zone
 #: model:ir.actions.act_window,name:partner_delivery_zone.partner_delivery_zone_action
@@ -59,54 +61,54 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:partner_delivery_zone.view_res_partner_filter
 #: model_terms:ir.ui.view,arch_db:partner_delivery_zone.view_sales_order_filter
 msgid "Delivery Zone"
-msgstr ""
+msgstr "交货区域"
 
 #. module: partner_delivery_zone
 #: model:ir.model.fields,field_description:partner_delivery_zone.field_partner_delivery_zone__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "显示名称"
 
 #. module: partner_delivery_zone
 #: model:ir.model.fields,field_description:partner_delivery_zone.field_partner_delivery_zone__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: partner_delivery_zone
 #: model:ir.model.fields,field_description:partner_delivery_zone.field_partner_delivery_zone____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "最后修改时间"
 
 #. module: partner_delivery_zone
 #: model:ir.model.fields,field_description:partner_delivery_zone.field_partner_delivery_zone__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "最后更新者"
 
 #. module: partner_delivery_zone
 #: model:ir.model.fields,field_description:partner_delivery_zone.field_partner_delivery_zone__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "最后更新时间"
 
 #. module: partner_delivery_zone
 #: model:ir.model,name:partner_delivery_zone.model_partner_delivery_zone
 msgid "Partner delivery zone"
-msgstr ""
+msgstr "业务伙伴交货区域"
 
 #. module: partner_delivery_zone
 #: model:ir.model,name:partner_delivery_zone.model_sale_order
 msgid "Sale Order"
-msgstr ""
+msgstr "销售订单"
 
 #. module: partner_delivery_zone
 #: model:ir.model,name:partner_delivery_zone.model_stock_move
 msgid "Stock Move"
-msgstr ""
+msgstr "库存移动"
 
 #. module: partner_delivery_zone
 #: model:ir.model,name:partner_delivery_zone.model_stock_picking
 msgid "Transfer"
-msgstr ""
+msgstr "调拨"
 
 #. module: partner_delivery_zone
 #: model:ir.model.fields,field_description:partner_delivery_zone.field_partner_delivery_zone__name
 msgid "Zone"
-msgstr ""
+msgstr "区域"
