@@ -16,9 +16,8 @@ def patch_label_file_type(function):
     to allow the 'html' type when running tests.
     """
     def wrapper(*args, **kwargs):
-        with mock.patch(LABEL_MODEL + '._selection_file_type') as (
-                _selection_file_type):
-            _selection_file_type.return_value = [('html', 'HTML')]
+        with mock.patch(LABEL_MODEL + '.file_type') as (file_type):
+            file_type.return_value = 'html'
             result = function(*args, **kwargs)
         return result
     return wrapper
