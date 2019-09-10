@@ -14,7 +14,7 @@
         </group>
         <separator string="Options"/>
         <field name="option_ids" nolabel="1"/>
-        <label string="Warning, setting options will erase the existing ones in delivery orders"/>
+        <label for="" string="Warning, setting options will erase the existing ones in delivery orders"/>
         <button name="action_set_options" string="Set Options"
           class="oe_highlight" type="object"/>
       </page>

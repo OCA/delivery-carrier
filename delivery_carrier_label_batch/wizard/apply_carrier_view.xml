@@ -6,7 +6,7 @@
   <field name="model">picking.batch.apply.carrier</field>
   <field name="arch" type="xml">
     <form string="Apply a carrier and its options">
-      <label string="Warning, setting options will erase the existing ones in delivery orders"/>
+      <label for="" string="Warning, setting options will erase the existing ones in delivery orders"/>
       <group>
         <field name="carrier_id"/>
       </group>
@@ -24,16 +24,8 @@
   <field name="view_type">form</field>
   <field name="view_mode">form</field>
   <field name="view_id" ref="view_picking_batch_apply_carrier"/>
+  <field name="binding_model_id" ref="stock_batch_picking.model_stock_batch_picking"/>
   <field name="target">new</field>
-</record>
-
-<record id="action_picking_batch_apply_carrier_values" model="ir.values">
-  <field name="model_id" ref="stock_batch_picking.model_stock_batch_picking" />
-  <field name="name">Apply a carrier and its options</field>
-  <field name="key2">client_action_multi</field>
-  <field name="value" eval="'ir.actions.act_window,' + str(ref('action_picking_batch_apply_carrier'))"/>
-  <field name="key">action</field>
-  <field name="model">stock.batch.picking</field>
 </record>
 
 </odoo>

@@ -1,8 +1,9 @@
-# -*- coding: utf-8 -*-
-# Copyright 2013-2016 Camptocamp SA
+# Copyright 2013-2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
-import openerp.tests.common as common
-from openerp.modules import get_module_resource
+import base64
+
+import odoo.tests.common as common
+from odoo.modules import get_module_resource
 
 
 class TestGenerateLabels(common.TransactionCase):
@@ -41,8 +42,8 @@ class TestGenerateLabels(common.TransactionCase):
         Move.create(
             {'name': '/',
              'picking_id': picking_out_1.id,
-             'product_id': self.ref('product.product_product_33'),
-             'product_uom': self.ref('product.product_uom_unit'),
+             'product_id': self.ref('product.product_delivery_01'),
+             'product_uom': self.ref('uom.product_uom_unit'),
              'product_uom_qty': 2,
              'location_id': self.ref('stock.stock_location_14'),
              'location_dest_id': self.ref('stock.stock_location_7'),
@@ -51,8 +52,8 @@ class TestGenerateLabels(common.TransactionCase):
         Move.create(
             {'name': '/',
              'picking_id': picking_out_2.id,
-             'product_id': self.ref('product.product_product_33'),
-             'product_uom': self.ref('product.product_uom_unit'),
+             'product_id': self.ref('product.product_delivery_01'),
+             'product_uom': self.ref('uom.product_uom_unit'),
              'product_uom_qty': 1,
              'location_id': self.ref('stock.stock_location_14'),
              'location_dest_id': self.ref('stock.stock_location_7'),
@@ -61,14 +62,14 @@ class TestGenerateLabels(common.TransactionCase):
         label = ''
         dummy_pdf_path = get_module_resource('delivery_carrier_label_batch',
                                              'tests', 'dummy.pdf')
-        with file(dummy_pdf_path) as dummy_pdf:
+        with open(dummy_pdf_path, 'rb') as dummy_pdf:
             label = dummy_pdf.read()
 
         ShippingLabel.create(
             {'name': 'picking_out_1',
              'res_id': picking_out_1.id,
              'res_model': 'stock.picking',
-             'datas': label.encode('base64'),
+             'datas': base64.b64encode(label),
              'file_type': 'pdf',
              })
 
@@ -76,7 +77,7 @@ class TestGenerateLabels(common.TransactionCase):
             {'name': 'picking_out_2',
              'res_id': picking_out_2.id,
              'res_model': 'stock.picking',
-             'datas': label.encode('base64'),
+             'datas': base64.b64encode(label),
              'file_type': 'pdf',
              })
 
@@ -97,7 +98,7 @@ class TestGenerateLabels(common.TransactionCase):
              ('res_id', '=', self.batch.id)]
         )
 
-        self.assertEquals(len(attachment), 1)
+        self.assertEqual(len(attachment), 1)
         self.assertTrue(attachment.datas)
         self.assertTrue(attachment.name, 'demo_prep001.pdf')
         self.assertTrue(attachment.mimetype, 'application/pdf')
