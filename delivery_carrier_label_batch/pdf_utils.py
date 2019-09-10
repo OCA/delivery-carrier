@@ -1,7 +1,6 @@
-# -*- coding: utf-8 -*-
-# Copyright 2013-2016 Camptocamp SA
+# Copyright 2013-2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
-from StringIO import StringIO
+from io import BytesIO, StringIO
 from PyPDF2 import PdfFileReader, PdfFileWriter
 
 
@@ -28,6 +27,6 @@ def assemble_pdf(pdf_list):
 
         for page in range(reader.getNumPages()):
             output.addPage(reader.getPage(page))
-    s = StringIO()
+    s = BytesIO()
     output.write(s)
     return s.getvalue()
