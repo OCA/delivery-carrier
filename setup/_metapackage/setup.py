@@ -10,6 +10,7 @@ setuptools.setup(
     install_requires=[
         'odoo12-addon-base_delivery_carrier_label',
         'odoo12-addon-delivery_auto_refresh',
+        'odoo12-addon-delivery_carrier_label_default',
         'odoo12-addon-delivery_multi_destination',
         'odoo12-addon-partner_delivery_zone',
         'odoo12-addon-stock_picking_delivery_info_computation',
