@@ -7,7 +7,7 @@
   <field name="arch" type="xml">
     <form string="Generate Carriers Labels">
       <group>
-        <label string="This wizard creates an attachement on each selected batch containing picking labels"/>
+        <label for="" string="This wizard creates an attachement on each selected batch containing picking labels"/>
       </group>
       <group>
         <field name="batch_ids"/>
@@ -29,15 +29,8 @@
   <field name="view_mode">form</field>
   <field name="view_id" ref="view_delivery_carrier_label_generate"/>
   <field name="groups_id" eval="[(6, 0, [ref('stock.group_stock_manager')])]"/>
+  <field name="binding_model_id" ref="stock_batch_picking.model_stock_batch_picking"/>
   <field name="target">new</field>
-</record>
-
-<record model="ir.values" id="delivery_carrier_file_generate_ir_values">
-  <field name="name">Generate Carrier Labels</field>
-  <field name="key2">client_action_multi</field>
-  <field name="value" eval="'ir.actions.act_window,' + str(ref('action_delivery_carrier_label_generate'))" />
-  <field name="key">action</field>
-  <field name="model">stock.batch.picking</field>
 </record>
 
 </odoo>
