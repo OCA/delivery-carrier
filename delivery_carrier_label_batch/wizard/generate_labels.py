@@ -1,13 +1,13 @@
-# -*- coding: utf-8 -*-
-# Copyright 2013-2016 Camptocamp SA
+# Copyright 2013-2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
-import Queue
+import base64
+import queue
 import logging
-import openerp
+import odoo
 import threading
-from contextlib import closing, contextmanager
+from contextlib import contextmanager
 from itertools import groupby
-from openerp import _, api, exceptions, fields, models
+from odoo import _, api, exceptions, fields, models
 
 from ..pdf_utils import assemble_pdf
 
@@ -39,7 +39,7 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
 
     @api.model
     def _get_packs(self, batch):
-        operations = batch.pack_operation_ids
+        operations = batch.move_line_ids  # pack_operation_ids
         operations = sorted(
             operations,
             key=lambda r: r.result_package_id.name or r.package_id.name
@@ -68,10 +68,10 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
     @contextmanager
     @api.model
     def _do_in_new_env(self):
-        with openerp.api.Environment.manage():
-            with openerp.registry(self.env.cr.dbname).cursor() as new_cr:
-                yield openerp.api.Environment(new_cr, self.env.uid,
-                                              self.env.context)
+        with odoo.api.Environment.manage():
+            with odoo.registry(self.env.cr.dbname).cursor() as new_cr:
+                yield odoo.api.Environment(new_cr, self.env.uid,
+                                           self.env.context)
 
     def _do_generate_labels(self, group):
         """ Generate a label in a thread safe context
@@ -107,7 +107,7 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
         while not data_queue.empty():
             try:
                 group = data_queue.get()
-            except Queue.Empty:
+            except queue.Empty:
                 return
             try:
                 self._do_generate_labels(group)
@@ -131,8 +131,8 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
     def _get_all_pdf(self, batch):
         self.ensure_one()
 
-        data_queue = Queue.Queue()
-        error_queue = Queue.Queue()
+        data_queue = queue.Queue()
+        error_queue = queue.Queue()
 
         # If we have more than one pack in a picking, we must ensure
         # they are not executed concurrently or we will have concurrent
@@ -147,7 +147,7 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
                     (pack, picking, label)
                 )
 
-        for group in groups.itervalues():
+        for group in groups.values():
             data_queue.put(group)
 
         # create few workers to parallelize label generation
@@ -176,13 +176,13 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
                         error_count[e.name] = 1
                     else:
                         error_count[e.name] += 1
-                    messages.append(unicode(e) or '')
+                    messages.append(str(e) or '')
                 else:
                     # raise other exceptions like PoolError if
                     # too many cursor where created by workers
                     raise e
             titles = []
-            for key, v in error_count.iteritems():
+            for key, v in error_count.items():
                 titles.append('%sx %s' % (v, key))
 
             message = _('Some labels couldn\'t be generated. Please correct '
@@ -235,7 +235,7 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
                 'name': filename,
                 'res_id': batch.id,
                 'res_model': 'stock.batch.picking',
-                'datas': assemble_pdf(labels).encode('base64'),
+                'datas': base64.b64encode(assemble_pdf(labels)),
                 'datas_fname': filename,
             }
             self.env['ir.attachment'].create(data)
