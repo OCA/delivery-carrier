@@ -137,7 +137,7 @@ class StockPicking(models.Model):
         Return:
             label format (string)
         """
-        return getattr(account, '%s_file_format' % self.delivery_type)
+        return getattr(account, '%s_file_format' % self.delivery_type, None)
 
     def _roulier_get_receiver(self, package=None):
         """The guy whom the shippment is for.
@@ -189,7 +189,8 @@ class StockPicking(models.Model):
 
         for tel in ['mobile', 'phone']:
             if address.get(tel):
-                address[tel] = address[tel].replace(u'\u00A0', '')
+                address[tel] = address[tel].replace(u'\u00A0', '').\
+                    replace(' ', '')
 
         address['phone'] = address.get('mobile', address.get('phone'))
 
