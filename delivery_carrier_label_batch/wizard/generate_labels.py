@@ -51,19 +51,31 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
             yield pack, list(grp_operations), pack_label
 
     @api.model
-    def _find_picking_label(self, picking):
+    def _find_picking_label(self, picking, f_type):
         label_obj = self.env['shipping.label']
-        domain = [('file_type', '=', 'pdf'),
-                  ('res_id', '=', picking.id),
-                  ('package_id', '=', False)]
-        return label_obj.search(domain, order='create_date DESC', limit=1)
+        res = {}
+        domain = [('file_type', '=', f_type),
+                ('res_id', '=', picking.id),
+                ('package_id', '=', False)]
+        res[f_type] = label_obj.search(
+            domain, order='create_date DESC', limit=1
+        )
+        return res
 
     @api.model
-    def _find_pack_label(self, pack):
+    def _find_pack_label(self, pack, f_type):
         label_obj = self.env['shipping.label']
-        domain = [('file_type', '=', 'pdf'),
-                  ('package_id', '=', pack.id)]
-        return label_obj.search(domain, order='create_date DESC', limit=1)
+        res = {}
+        domain = [('file_type', '=', f_type),
+                ('package_id', '=', pack.id)]
+        res[f_type] = label_obj.search(
+            domain, order='create_date DESC', limit=1
+        )
+        return res
+
+    def get_file_types(self):
+        # genrate list of file types of shipping labels
+        pass
 
     @contextmanager
     @api.model
@@ -126,7 +138,7 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
         return int(num_workers)
 
     @api.multi
-    def _get_all_pdf(self, batch):
+    def _get_all_files(self, batch, file_type):
         self.ensure_one()
 
         data_queue = queue.Queue()
@@ -196,9 +208,9 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
             for pack, operations, label in self_env._get_packs(batch):
                 picking = operations[0].picking_id
                 if pack:
-                    label = self_env._find_pack_label(pack)
+                    label = self_env._find_pack_label(pack, file_type)
                 else:
-                    label = self_env._find_picking_label(picking)
+                    label = self_env._find_picking_label(picking, file_type)
                 if not label:
                     continue
                 yield label.attachment_id.datas
@@ -226,17 +238,18 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
             )
 
         for batch in to_generate:
-            labels = self._get_all_pdf(batch)
-            labels = (codecs.decode(label, 'base64') for label in labels if label)
-            filename = batch.name + '.pdf'
-            data = {
-                'name': filename,
-                'res_id': batch.id,
-                'res_model': 'stock.picking.batch',
-                'datas': base64.b64encode(assemble_pdf(labels)),
-                'datas_fname': filename,
-            }
-            self.env['ir.attachment'].create(data)
+            for f_type in self.get_file_types():
+                labels = self._get_all_files(batch, f_type)
+                labels = (codecs.decode(label, 'base64') for label in labels if label)
+                filename = batch.name + '.' + f_type
+                data = {
+                    'name': filename,
+                    'res_id': batch.id,
+                    'res_model': 'stock.picking.batch',
+                    'datas': assemble_pdf(labels).encode('base64'),
+                    'datas_fname': filename,
+                }
+                self.env['ir.attachment'].create(data)
 
         return {
             'type': 'ir.actions.act_window_close',
