@@ -224,8 +224,11 @@ class StockQuantPackage(models.Model):
             _logger.debug(exception.response.request.body)
         except AttributeError:
             _logger.debug('No request available')
-        return _('Sent data:\n%s\n\nException raised:\n%s\n' % (
-            payload, str(exception)))
+        carrier = dict(self.env['delivery.carrier']._fields[
+            'delivery_type'].selection).get(self.carrier_id.delivery_type)
+        return _(
+            "Roulier library Exception for '%s' carrier:\n"
+            "\n%s\n\nSent data:\n%s" % (carrier, str(exception), payload))
 
     def _roulier_invalid_api_input_handling(self, payload, exception):
         """Build exception message for bad input.
