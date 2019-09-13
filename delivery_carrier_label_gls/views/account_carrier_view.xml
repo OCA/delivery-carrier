@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<record id="carrier_account_view_form" model="ir.ui.view">
+  <field name="model">carrier.account</field>
+  <field name="inherit_id" ref="base_delivery_carrier_label.carrier_account_view_form"/>
+  <field name="arch" type="xml">
+    <xpath expr="//field[@name='company_id']"
+           position="after">
+        <button type="object" name="complete_gls_settings"
+            string="Complete GLS shared settings"
+            class="oe_button fa_truck"
+            attrs="{'invisible': [('name', '!=', 'gls_fr')]}"/>
+    </xpath>
+  </field>
+</record>
+
+</odoo>

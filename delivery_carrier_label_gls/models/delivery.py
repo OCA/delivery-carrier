@@ -1,16 +1,14 @@
-# coding: utf-8
 # © 2015 David BEAL @ Akretion
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from openerp import models, api
+from odoo import models, fields
+from .quant_package import URL_TRACKING
 
 
 class DeliveryCarrier(models.Model):
     _inherit = 'delivery.carrier'
 
-    @api.model
-    def _get_carrier_type_selection(self):
-        """ Add carrier type """
-        res = super(DeliveryCarrier, self)._get_carrier_type_selection()
-        res.append(('gls', 'Gls'),)
-        return res
+    delivery_type = fields.Selection(selection_add=[('gls_fr', 'GLS France')])
+
+    def gls_get_tracking_link(self, picking):
+        return URL_TRACKING % picking.carrier_tracking_ref

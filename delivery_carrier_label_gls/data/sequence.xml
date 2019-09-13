@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
-    <data noupdate="1">
-
-        
-        <!-- Sequence TYPES  -->
-<record id="seq_type_delivery_carrier_colissimo_gls" model="ir.sequence.type">
-    <field name="name">Delivery GLS</field>
-    <field name="code">stock.picking_gls</field>
-</record>
+<odoo noupdate="1">
 
 <!--  SEQUENCES -->
 <record id="seq_delivery_carrier_colissimo_gls" model="ir.sequence">
@@ -19,6 +11,4 @@
     <field name="implementation">no_gap</field>
 </record>
 
-
-    </data>
-</openerp>
+</odoo>

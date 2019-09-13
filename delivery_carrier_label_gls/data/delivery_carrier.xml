@@ -1,50 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
-    <data noupdate="0">
+<odoo noupdate="1">
 
-        <!-- PRODUCT  -->
-        <record id="prod_categ_carrier" model="product.category">
-            <field name="name">Carrier</field>
-        </record>
-        <record id="product_product_gls" model="product.product">
-            <field name="default_code">SHIP_GLS</field>
-            <field name="standard_price">0.0</field>
-            <field name="cost_method">standard</field>
-            <field name="type">service</field>
-            <field name="name">Coûts de livraison - GLS</field>
-            <field name="categ_id" ref="prod_categ_carrier"/>
-        </record>
+    <!-- PRODUCT  -->
+    <record id="prod_categ_carrier" model="product.category">
+        <field name="name">Carrier</field>
+    </record>
+    <record id="product_product_gls" model="product.product">
+        <field name="default_code">SHIP_GLS</field>
+        <field name="standard_price">0.0</field>
+        <field name="cost_method">standard</field>
+        <field name="type">service</field>
+        <field name="name">Coûts de livraison - GLS</field>
+        <field name="categ_id" ref="prod_categ_carrier"/>
+    </record>
 
-        <!-- PARTNER -->
-        <record id="partner_gls" model="res.partner">
-            <field name="name">GLS</field>
-            <field name="customer" eval="False" />
-            <field name="supplier" eval="True" />
-            <field name="is_company" eval="True" />
-        </record>
+    <!-- DELIVERY CARRIER -->
+    <record id="delivery_carrier_gls" model="delivery.carrier">
+        <field name="name">GLS group</field>
+        <field name="delivery_type">gls_fr</field>
+        <field name="code">gls</field>
+        <field name="prod_environment" eval="False" />
+        <field name="debug_logging" eval="True" />
+        <field name="integration_level">rate_and_ship</field>
+        <field name="product_id" ref="product_product_gls" />
+    </record>
 
-        <!-- DELIVERY CARRIER -->
-        <record id="delivery_carrier_gls" model="delivery.carrier">
-            <field name="name">GLS group</field>
-            <field name="type">gls</field>
-            <field name="code">gls</field>
-            <field name="partner_id" ref="partner_gls" />
-            <field name="product_id" ref="product_product_gls" />
-        </record>
+    <!-- CARRIER ACCOUNT -->
+    <record id="carrier_account_gls" model="carrier.account">
+        <field name="name">gls_fr</field>
+        <field name="account">your account number here</field>
+        <field name="password">password</field>
+    </record>
 
-    </data>
+    <!-- CONFIG PARAMETER -->
+    <record id="delivery_carrier_gls_customer_id" model="ir.config_parameter">
+        <field name="key">carrier_gls_customer_id</field>
+        <field name="value">2500099999</field>
+    </record>
+    <record id="delivery_carrier_gls_agency_id" model="ir.config_parameter">
+        <field name="key">carrier_gls_agency_id</field>
+        <field name="value">FR0099</field>
+    </record>
 
-    <data noupdate="1">
-
-        <!-- CONFIG PARAMETER -->
-        <record id="delivery_carrier_gls_customer_code" model="ir.config_parameter">
-            <field name="key">carrier_gls_customer_code</field>
-            <field name="value">2500099999</field>
-        </record>
-        <record id="delivery_carrier_gls_warehouse" model="ir.config_parameter">
-            <field name="key">carrier_gls_warehouse</field>
-            <field name="value">FR0099</field>
-        </record>
-
-    </data>
-</openerp>
+</odoo>
