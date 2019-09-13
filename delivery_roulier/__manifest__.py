@@ -19,6 +19,9 @@
         'views/stock_quant_package.xml',
         'views/carrier_account.xml',
     ],
+    'demo': [
+        'demo/product.xml',
+    ],
     'external_dependencies': {
         'python': [
             'roulier',  # '>0.2.0'
