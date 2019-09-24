@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record id="view_booking_profile_tree" model="ir.ui.view">
+            <field name="name">booking.profile.tree</field>
+            <field name="model">booking.profile</field>
+            <field name="arch" type="xml">
+                <tree string="Booking Profile">
+                    <field name="name" string="Name"/>
+                    <field name="code"/>
+                    <field name="description"/>
+                    <field name="carrier_id"/>
+                    <field name="service_level_time_id"/>
+                    <field name="service_level_other_id"/>
+                    <field name="incoterms_id"/>
+                    <field name="costcenter_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_delivery_booking_profile_form" model="ir.ui.view">
+            <field name="name">booking.profile.form</field>
+            <field name="model">booking.profile</field>
+            <field name="arch" type="xml">
+                <form string="Booking Profile">
+                    <group col="4">
+                        <field name="name" string="Name"/>
+                        <field name="code"/>
+                        <field name="description"/>
+                        <field name="carrier_id"/>
+                        <field name="service_level_time_id"/>
+                        <field name="service_level_other_id"/>
+                        <field name="incoterms_id"/>
+                        <field name="costcenter_id"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record
+            id="action_delivery_booking_profile_form"
+            model="ir.actions.act_window">
+            <field name="name">Booking Profile</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">booking.profile</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    You cannot create Service Levels here.
+                </p>
+                <p>
+                    After you configure your connection to Transsmart,
+                    the booking.profiles will be automatically be fetched
+                    and kept synchronized.
+                </p>
+            </field>
+        </record>
+
+        <menuitem
+            action="action_delivery_booking_profile_form"
+            id="menu_action_delivery_booking_profile_form"
+            parent="menu_transsmart_configuration"/>
+
+    </data>
+</openerp>

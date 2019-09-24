@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record id="view_picking_transsmart_out_form" model="ir.ui.view">
+            <field name="name">transsmart.stock.picking.form.view</field>
+            <field name="model">stock.picking</field>
+            <field
+                name="inherit_id"
+                ref="delivery.view_picking_withcarrier_out_form"/>
+            <field name="arch" type="xml">
+                <xpath
+                    expr="//field[@name='carrier_id']"
+                    position="attributes">
+                    <attribute name="invisible">1</attribute>
+                    <attribute name="string">Delivery Method</attribute>
+                </xpath>
+                <xpath
+                    expr="//field[@name='carrier_id']"
+                    position="after">
+                    <field name="send_to_transsmart" invisible="1"/>
+                    <field name="booking_profile_id"/>
+                    <field name="cost_center_id" readonly="1"/>
+                    <field name="service_level_time_id" readonly="1"/>
+                    <field name="service_level_other_id" readonly="1"/>
+                    <field name="delivery_cost_currency_id" invisible="1" />
+                    <field
+                        name="delivery_cost"
+                        groups="stock.group_stock_manager"
+                        widget="monetary"
+                        options="{'currency_field': 'delivery_cost_currency_id'}"/>
+                        <field name="incoterm_id" readonly="1"/>
+                        <field name="service"/>
+                        <field name="package_type_id" string="Package Type"/>
+                </xpath>
+                <xpath expr="//header//field[@name='state']" position="before">
+                    <button
+                        type="object"
+                        name="transsmart_get_rates"
+                        string="Get Rates"
+                        groups="stock.group_stock_manager"
+                        attrs="{'invisible': 
+                            [('picking_type_code', '!=', 'outgoing')]}">
+                    </button>
+                </xpath>
+                <xpath
+                    expr="//field[@name='carrier_tracking_ref']"
+                    position="attributes">
+                    <attribute name="widget">url</attribute>
+                    <attribute name="readonly">1</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_picking_transsmart_out_tree" model="ir.ui.view">
+            <field name="name">transsmart.stock.picking.tree</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.vpicktree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='backorder_id']" position="after">
+                     <field name="carrier_id"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record
+            id="view_picking_internal_search_transsmart"
+            model="ir.ui.view">
+            <field name="name">search.transssmart</field>
+            <field name="model">stock.picking</field>
+            <field
+                name="inherit_id"
+                ref="stock.view_picking_internal_search"/>
+            <field name="arch" type="xml">
+                <xpath
+                    expr="//filter[@string='Procurement Group']"
+                    position="after">
+                    <filter
+                        name="carrier_id"
+                        string="Carrier"
+                        context="{'group_by':'carrier_id'}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="stock.action_picking_tree" model="ir.actions.act_window">
+            <field name="context">{'readonly_by_pass': True}</field>
+        </record>
+
+    </data>
+</openerp>

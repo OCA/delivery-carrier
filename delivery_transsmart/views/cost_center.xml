@@ -1,0 +1,56 @@
+<openerp>
+    <data>
+
+        <record id="view_transsmart_cost_center_form" model="ir.ui.view">
+            <field name="name">cost.center.form</field>
+            <field name="model">cost.center</field>
+            <field name="arch" type="xml">
+                <form string="Cost center">
+                    <group col="4">
+                        <field name="name" string="Name"/>
+                        <field name="code"/>
+                        <field name="description"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_transsmart_cost_center_tree" model="ir.ui.view">
+            <field name="name">cost.center.tree</field>
+            <field name="model">cost.center</field>
+            <field name="arch" type="xml">
+                <tree string="Cost center">
+                    <field name="name" string="Name"/>
+                    <field name="code"/>
+                    <field name="description"/>
+                </tree>
+            </field>
+        </record>
+
+        <record
+            id="action_transsmart_cost_center_form"
+            model="ir.actions.act_window">
+            <field name="name">Cost Centers</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">cost.center</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    You cannot create Cost Centers here
+                </p>
+                <p>
+                    After you configure your connection to Transsmart,
+                    the cost centers will be automatically be fetched
+                    and kept synchronized.
+                </p>
+            </field>
+        </record>
+
+        <menuitem
+            action="action_transsmart_cost_center_form"
+            id="menu_action_transsmart_cost_center_form"
+            parent="menu_transsmart_configuration"/>
+
+    </data>
+</openerp>

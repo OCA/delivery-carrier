@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record id="view_delivery_service_level_tree" model="ir.ui.view">
+            <field name="name">service.level.tree</field>
+            <field name="model">service.level.other</field>
+            <field name="arch" type="xml">
+                <tree string="Service Level">
+                    <field name="name" string="Name"/>
+                    <field name="code"/>
+                    <field name="description"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_delivery_service_level_form" model="ir.ui.view">
+            <field name="name">service.level.form</field>
+            <field name="model">service.level.other</field>
+            <field name="arch" type="xml">
+                <form string="Service Level">
+                    <group col="4">
+                        <field name="name" string="Name"/>
+                        <field name="code"/>
+                        <field name="description"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record
+            id="action_delivery_service_level_form"
+            model="ir.actions.act_window">
+            <field name="name">Service Levels</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">service.level.other</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    You cannot create Service Levels here.
+                </p>
+                <p>
+                    After you configure your connection to Transsmart,
+                    the service levels will be automatically be fetched
+                    and kept synchronized.
+                </p>
+            </field>
+        </record>
+
+        <menuitem
+            action="action_delivery_service_level_form"
+            id="menu_action_delivery_service_level_form"
+            parent="menu_transsmart_configuration"/>
+
+    </data>
+</openerp>

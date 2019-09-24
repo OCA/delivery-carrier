@@ -1,0 +1,58 @@
+<openerp>
+    <data>
+
+        <record id="form_res_partner_carrier_package" model="ir.ui.view">
+            <field name="name">Carrier package field</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='date']" position="after">
+                    <field name="carrier"/>
+                    <field
+                        name="code"
+                        attrs="
+                            {
+                                'invisible': [('carrier', '=', False)],
+                                'required': [('carrier', '!=', False)],
+                            }"/>
+                    <field
+                        name="package_type_id"
+                        domain="[('package', '=', True)]"
+                        string="Package Type"
+                        attrs="
+                            {
+                                'invisible': [('carrier', '=', False)],
+                                'required': [('carrier', '!=', False)],
+                            }"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record
+            id="action_show_carriers"
+            model="ir.actions.act_window">
+            <field name="name">Carriers</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('carrier', '=', True)]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    You cannot create Carriers here.
+                </p>
+                <p>
+                    After you configure your connection to Transsmart,
+                    the carriers will be automatically be fetched
+                    and kept synchronized.
+                </p>
+            </field>
+        </record>
+
+        <menuitem
+            action="action_show_carriers"
+            id="menu_action_show_carriers"
+            parent="menu_transsmart_configuration"/>
+
+    </data>
+</openerp>

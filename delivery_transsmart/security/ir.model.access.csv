@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_delivery_transsmart_001,service_level_user,model_service_level_other,stock.group_stock_user,1,0,0,0
+access_delivery_transsmart_002,service_level_time_user,model_service_level_time,stock.group_stock_user,1,0,0,0
+access_delivery_transsmart_003,cost_center_user,model_cost_center,stock.group_stock_user,1,0,0,0
+access_delivery_transsmart_004,booking_profile_user,model_booking_profile,stock.group_stock_user,1,0,0,0
+access_delivery_transsmart_005,booking_profile_user,model_booking_profile,stock.group_stock_user,1,0,0,0

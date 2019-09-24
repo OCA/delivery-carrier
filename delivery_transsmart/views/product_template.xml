@@ -1,0 +1,55 @@
+<openerp>
+    <data>
+
+        <record id="product_template_form_view" model="ir.ui.view">
+            <field name="name">Package products</field>
+            <field name="model">product.template</field>
+            <field
+                name="inherit_id"
+                ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='weight']" position="after">
+                    <group name="transsmart">
+                        <field name="package"/>
+                        <field
+                            name="nr"
+                            attrs="{'invisible': [('package', '=', False)]}"/>
+                        <field
+                            name="code"
+                            attrs="{'invisible': [('package', '=', False)]}"/>
+                        <field
+                            name="description"
+                            attrs="{'invisible': [('package', '=', False)]}"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+        <record
+            id="action_show_packages"
+            model="ir.actions.act_window">
+            <field name="name">Packages</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.template</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('package', '=', True)]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    You cannot create Packages here.
+                </p>
+                <p>
+                    After you configure your connection to Transsmart,
+                    the packages will be automatically be fetched
+                    and kept synchronized.
+                </p>
+            </field>
+        </record>
+
+        <menuitem
+            action="action_show_packages"
+            id="menu_action_show_packages"
+            parent="menu_transsmart_configuration"/>
+
+    </data>
+</openerp>

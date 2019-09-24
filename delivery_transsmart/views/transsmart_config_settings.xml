@@ -1,0 +1,68 @@
+<openerp>
+    <data>
+
+        <record id="transsmart_config_settings" model="ir.ui.view">
+            <field name="name">transsmart config settings</field>
+            <field name="model">transsmart.config.settings</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>                                                          
+                        <button
+                            string="Apply"
+                            type="object"
+                            name="execute"
+                            class="oe_highlight"/>
+                        or
+                        <button
+                            string="Cancel"
+                            type="object"
+                            name="cancel" class="oe_link"/>
+                    </header>
+                    <separator string="Transsmart"/>
+                    <group name="transsmart" cols="2">
+                        <div>
+                            <div class="col-sm-4">
+                                <label for="demo"/>
+                                <field name="demo"/>
+                                <div></div>
+                                <label for="username"/>
+                                <field name="username" required="1"/>
+                                <label for="password"/>
+                                <field
+                                    name="password"
+                                    required="1"
+                                    password="1"/>
+                                <label for="account_code"/>
+                                <field name="account_code" required="1"/>
+                            </div>
+                        </div>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <menuitem
+            id="menu_transsmart_configuration"
+            parent="stock.menu_stock_configuration"
+            name="Transsmart"
+            sequence="15"/>
+
+        <record
+            id="action_delivery_transsmart_config_settings"
+            model="ir.actions.act_window">
+            <field name="name">Configure Transsmart</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">transsmart.config.settings</field>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+        </record>
+
+        <menuitem
+            id="menu_stock_config_settings"
+            name="Configuration"
+            parent="menu_transsmart_configuration"
+            sequence="15"
+            action="action_delivery_transsmart_config_settings"/>
+
+    </data>
+</openerp>
