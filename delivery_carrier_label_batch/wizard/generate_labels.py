@@ -5,11 +5,12 @@ import Queue
 import logging
 import openerp
 import threading
-from contextlib import closing, contextmanager
+from contextlib import contextmanager
 from itertools import groupby
 from openerp import _, api, exceptions, fields, models
 
 from ..pdf_utils import assemble_pdf
+from ..zpl_utils import assemble_zpl2
 
 _logger = logging.getLogger(__name__)
 
@@ -51,31 +52,42 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
             yield pack, list(grp_operations), pack_label
 
     @api.model
-    def _find_picking_label(self, picking, f_type):
+    def _find_picking_label(self, picking, f_type=None):
         label_obj = self.env['shipping.label']
-        res = {}
-        domain = [('file_type', '=', f_type),
-                ('res_id', '=', picking.id),
-                ('package_id', '=', False)]
-        res[f_type] = label_obj.search(
+        domain_file_type = ('file_type', '=', f_type)
+        if not f_type:
+            domain_file_type = ('file_type', 'in', self.get_file_types())
+        domain = [
+            domain_file_type,
+            ('res_id', '=', picking.id),
+            ('package_id', '=', False),
+        ]
+        return label_obj.search(
             domain, order='create_date DESC', limit=1
         )
-        return res
 
     @api.model
-    def _find_pack_label(self, pack, f_type):
+    def _find_pack_label(self, pack, f_type=None):
         label_obj = self.env['shipping.label']
-        res = {}
-        domain = [('file_type', '=', f_type),
-                ('package_id', '=', pack.id)]
-        res[f_type] = label_obj.search(
+        domain_file_type = ('file_type', '=', f_type)
+        if not f_type:
+            domain_file_type = ('file_type', 'in', self.get_file_types())
+        domain = [domain_file_type, ('package_id', '=', pack.id)]
+        return label_obj.search(
             domain, order='create_date DESC', limit=1
         )
-        return res
 
     def get_file_types(self):
-        # genrate list of file types of shipping labels
-        pass
+        """Return the list of file types of related shipping labels."""
+        picking_ids = self.mapped('batch_ids.picking_ids').ids
+        labels = self.env['shipping.label'].search(
+            [
+                ('res_model', '=', 'stock.picking'),
+                ('res_id', 'in', picking_ids),
+            ],
+        )
+        file_types = list(set(labels.mapped('file_type')))
+        return file_types
 
     @contextmanager
     @api.model
@@ -105,6 +117,7 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
                     # add information on picking and pack in the exception
                     picking_name = _('Picking: %s') % picking.name
                     pack_num = _('Pack: %s') % pack.name if pack else ''
+                    # pylint: disable=translation-required
                     raise exceptions.UserError(
                         ('%s %s - %s') % (picking_name, pack_num, e)
                     )
@@ -242,13 +255,14 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
         for batch in to_generate:
             for f_type in self.get_file_types():
                 labels = self._get_all_files(batch, f_type)
-                labels = (label.decode('base64') for label in labels if label)
+                labels = [label.decode('base64') for label in labels if label]
                 filename = batch.name + '.' + f_type
+                filedata = self._concat_files(f_type, labels).encode('base64')
                 data = {
                     'name': filename,
                     'res_id': batch.id,
                     'res_model': 'stock.batch.picking',
-                    'datas': assemble_pdf(labels).encode('base64'),
+                    'datas': filedata,
                     'datas_fname': filename,
                 }
                 self.env['ir.attachment'].create(data)
@@ -256,3 +270,13 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
         return {
             'type': 'ir.actions.act_window_close',
         }
+
+    @api.model
+    def _concat_files(self, file_type, files):
+        if file_type == 'pdf':
+            return assemble_pdf(files)
+        if file_type == 'zpl2':
+            return assemble_zpl2(files)
+        raise NotImplementedError(
+            _("Merging files of type '{}' is not supported.".format(
+                file_type)))
