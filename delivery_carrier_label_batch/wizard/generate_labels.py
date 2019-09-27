@@ -8,8 +8,10 @@ import threading
 import codecs
 from contextlib import contextmanager
 from itertools import groupby
-from odoo import _, api, exceptions, fields, models
+from odoo import _, api, exceptions, fields, models, tools
+
 from ..pdf_utils import assemble_pdf
+from ..zpl_utils import assemble_zpl2
 
 _logger = logging.getLogger(__name__)
 
@@ -51,35 +53,31 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
             yield pack, list(grp_operations), pack_label
 
     @api.model
-    def _find_picking_label(self, picking, f_type):
+    def _find_picking_label(self, picking):
         label_obj = self.env['shipping.label']
-        res = {}
-        domain = [('file_type', '=', f_type),
-                ('res_id', '=', picking.id),
-                ('package_id', '=', False)]
-        res[f_type] = label_obj.search(
+        domain = [
+            ('res_id', '=', picking.id),
+            ('package_id', '=', False),
+        ]
+        return label_obj.search(
             domain, order='create_date DESC', limit=1
         )
-        return res
 
     @api.model
-    def _find_pack_label(self, pack, f_type):
+    def _find_pack_label(self, pack):
         label_obj = self.env['shipping.label']
-        res = {}
-        domain = [('file_type', '=', f_type),
-                ('package_id', '=', pack.id)]
-        res[f_type] = label_obj.search(
+        domain = [('package_id', '=', pack.id)]
+        return label_obj.search(
             domain, order='create_date DESC', limit=1
         )
-        return res
-
-    def get_file_types(self):
-        # genrate list of file types of shipping labels
-        pass
 
     @contextmanager
     @api.model
     def _do_in_new_env(self):
+        if tools.config["test_enable"]:
+            yield self.env
+            raise StopIteration
+
         with odoo.api.Environment.manage():
             with odoo.registry(self.env.cr.dbname).cursor() as new_cr:
                 yield odoo.api.Environment(new_cr, self.env.uid,
@@ -103,6 +101,7 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
                     # add information on picking and pack in the exception
                     picking_name = _('Picking: %s') % picking.name
                     pack_num = _('Pack: %s') % pack.name if pack else ''
+                    # pylint: disable=translation-required
                     raise exceptions.UserError(
                         ('%s %s - %s') % (picking_name, pack_num, e)
                     )
@@ -138,7 +137,7 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
         return int(num_workers)
 
     @api.multi
-    def _get_all_files(self, batch, file_type):
+    def _get_all_files(self, batch):
         self.ensure_one()
 
         data_queue = queue.Queue()
@@ -205,15 +204,17 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
         with self._do_in_new_env() as new_env:
             # labels = new_env['shipping.label']
             self_env = self.with_env(new_env)
+            labels = []
             for pack, operations, label in self_env._get_packs(batch):
                 picking = operations[0].picking_id
                 if pack:
-                    label = self_env._find_pack_label(pack, file_type)
+                    label = self_env._find_pack_label(pack)
                 else:
-                    label = self_env._find_picking_label(picking, file_type)
+                    label = self_env._find_picking_label(picking)
                 if not label:
                     continue
-                yield label.attachment_id.datas
+                labels.append((label.file_type, label.attachment_id.datas))
+            return labels
 
     @api.multi
     def action_generate_labels(self):
@@ -238,10 +239,18 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
             )
 
         for batch in to_generate:
-            for f_type in self.get_file_types():
-                labels = self._get_all_files(batch, f_type)
-                labels = (codecs.decode(label, 'base64') for label in labels if label)
+            labels = self._get_all_files(batch)
+            labels_by_f_type = self._group_labels_by_file_type(labels)
+            for f_type, labels in labels_by_f_type.iteritems():
+                labels_bin = [
+                    codecs.decode(label, "base64") for label in labels if label
+                ]
                 filename = batch.name + '.' + f_type
+                filedata = self._concat_files(f_type, labels_bin)
+                if not filedata:
+                    # Merging of `f_type` not supported, so we cannot
+                    # create the attachment
+                    continue
                 data = {
                     'name': filename,
                     'res_id': batch.id,
@@ -254,3 +263,20 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
         return {
             'type': 'ir.actions.act_window_close',
         }
+
+    @api.model
+    def _group_labels_by_file_type(self, labels):
+        res = {}
+        for f_type, label in labels:
+            res.setdefault(f_type, [])
+            res[f_type].append(label)
+        return res
+
+    @api.model
+    def _concat_files(self, file_type, files):
+        if file_type == 'pdf':
+            return assemble_pdf(files)
+        if file_type == 'zpl2':
+            return assemble_zpl2(files)
+        # Merging files of `file_type` not supported, we return nothing
+        return

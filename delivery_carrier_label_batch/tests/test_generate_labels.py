@@ -39,6 +39,7 @@ class TestGenerateLabels(common.TransactionCase):
              'location_dest_id': self.ref('stock.stock_location_7'),
              'picking_type_id': self.ref('stock.picking_type_out')})
 
+        self.env.ref('product.product_product_33').type = "consu"
         Move.create(
             {'name': '/',
              'picking_id': picking_out_1.id,
@@ -58,6 +59,7 @@ class TestGenerateLabels(common.TransactionCase):
              'location_id': self.ref('stock.stock_location_14'),
              'location_dest_id': self.ref('stock.stock_location_7'),
              })
+        (picking_out_1 | picking_out_2).action_assign()
 
         label = ''
         dummy_pdf_path = get_module_resource('delivery_carrier_label_batch',
