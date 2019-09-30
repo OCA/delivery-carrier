@@ -7,23 +7,31 @@ Delivery Carrier Default Tracking Url
    !! changes will be overwritten.                   !!
    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-.. |badge1| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
+.. |badge1| image:: https://img.shields.io/badge/maturity-Alpha-red.png
+    :target: https://odoo-community.org/page/development-status
+    :alt: Alpha
+.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
-.. |badge2| image:: https://img.shields.io/badge/github-OCA%2Fdelivery--carrier-lightgray.png?logo=github
+.. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fdelivery--carrier-lightgray.png?logo=github
     :target: https://github.com/OCA/delivery-carrier/tree/10.0/delivery_carrier_default_tracking_url
     :alt: OCA/delivery-carrier
-.. |badge3| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
+.. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
     :target: https://translation.odoo-community.org/projects/delivery-carrier-10-0/delivery-carrier-10-0-delivery_carrier_default_tracking_url
     :alt: Translate me on Weblate
-.. |badge4| image:: https://img.shields.io/badge/runbot-Try%20me-875A7B.png
+.. |badge5| image:: https://img.shields.io/badge/runbot-Try%20me-875A7B.png
     :target: https://runbot.odoo-community.org/runbot/99/10.0
     :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3| |badge4| 
+|badge1| |badge2| |badge3| |badge4| |badge5| 
 
 This module allows to define the URL for the default tracking page of the
 carrier.
+
+.. IMPORTANT::
+   This is an alpha version, the data model and design can change at any time without warning.
+   Only for development or testing purpose, do not use in production.
+   `More details on development status <https://odoo-community.org/page/development-status>`_
 
 **Table of contents**
 
