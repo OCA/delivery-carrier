@@ -141,3 +141,11 @@ class TestPartnerDeliveryZone(SavepointCase):
         picking = self.order.picking_ids[0]
         picking.partner_id = self.child_partner_delivery
         self.assertFalse(picking.delivery_zone_id)
+
+    def test_change_delivery_zone(self):
+        self.order.action_confirm()
+        self.assertEqual(self.order.picking_ids.delivery_zone_id, self.delivery_zone_a)
+        self.order.picking_ids.delivery_zone_id = self.delivery_zone_b
+        self.assertEqual(self.order.delivery_zone_id, self.delivery_zone_b)
+        self.order.delivery_zone_id = self.delivery_zone_a
+        self.assertEqual(self.order.picking_ids.delivery_zone_id, self.delivery_zone_a)
