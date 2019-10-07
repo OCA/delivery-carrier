@@ -38,6 +38,10 @@
                                 <field name="username"/>
                                 <field name="password" password="True"/>
                             </group>
+                            <group>
+                                <field name="username_web"/>
+                                <field name="password_web" password="True"/>
+                            </group>
                         </group>
                     </sheet>
                 </form>

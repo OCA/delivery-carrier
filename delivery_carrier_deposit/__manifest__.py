@@ -14,7 +14,7 @@
     ],
     'website': 'https://github.com/OCA/delivery-carrier',
     'data': [
-        'views/stock_view.xml',
+        'views/mass_delivery_view.xml',
         'wizards/deposit.xml',
         'data/ir_sequence_data.xml',
         'report/report.xml',

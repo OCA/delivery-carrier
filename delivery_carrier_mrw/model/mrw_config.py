@@ -32,3 +32,5 @@ class MrwConfig(models.Model):
     department_code = fields.Char('Department Code')
     username = fields.Char('Username', required=True)
     password = fields.Char('Password', required=True)
+    username_web = fields.Char('Username web', required=False)
+    password_web = fields.Char('Password_web', required=False)

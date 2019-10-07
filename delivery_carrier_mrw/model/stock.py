@@ -29,6 +29,11 @@ from ..webservice.mrw_api import MrwEnvio
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
+    mrw_service_type = fields.Selection('_get_mrw_service_type', string='Mrw Service')
+
+    mrw_frequence = fields.Selection(
+        (('1', 'Frecuencia 1'), ('2', 'Frecuencia 2')), string='Mrw Frequence')
+
     @api.model
     def _get_mrw_service_type(self):
         return [
@@ -52,11 +57,6 @@ class StockPicking(models.Model):
             ('0490', 'Documentos 14'),
             ('0800', 'Ecommerce')
         ]
-
-    mrw_service_type = fields.Selection(
-        '_get_mrw_service_type', string='Mrw Service')
-    mrw_frequence = fields.Selection(
-        (('1', 'Frecuencia 1'), ('2', 'Frecuencia 2')), string='Mrw Frequence')
 
     @api.multi
     def _mrw_transm_envio_request(self, mrw_api):
@@ -199,8 +199,10 @@ class StockPicking(models.Model):
     @api.multi
     def generate_shipping_labels(self, package_ids=None):
         """ Add label generation for MRW """
+        import wdb
+        wdb.set_trace()
         self.ensure_one()
-        if self.carrier_id.type == 'mrw':
+        if self.carrier_id.carrier_type == 'mrw':
             return self._generate_mrw_label(package_ids=package_ids)
         return super(StockPicking, self).generate_shipping_labels(
             package_ids=package_ids)

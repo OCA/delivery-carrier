@@ -7,9 +7,9 @@
           <field name="model">delivery.carrier</field>
           <field name="inherit_id" ref="base_delivery_carrier_label.view_delivery_carrier_form" />
           <field name="arch" type="xml">
-            <field name="delivery_type" position="after">
-              <field name="mrw_config_id" attrs="{'invisible': [('delivery_type', '!=', 'mrw')], 'required': [('delivery_type', '=', 'mrw')]}"/>
-            </field>
+            <xpath expr="//field[@name='carrier_type']" position="after">
+              <field name="mrw_config_id" attrs="{'invisible': [('carrier_type', '!=', 'mrw')], 'required': [('carrier_type', '=', 'mrw')]}"/>
+            </xpath>
           </field>
         </record>
 

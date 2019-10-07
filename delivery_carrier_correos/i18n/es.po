@@ -1,0 +1,104 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* delivery_carrier_correos
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-06-25 10:59+0000\n"
+"PO-Revision-Date: 2015-06-25 10:59+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: delivery_carrier_correos
+#: model:ir.model,name:delivery_carrier_correos.model_delivery_carrier
+msgid "Carrier"
+msgstr "Transportista"
+
+#. module: delivery_carrier_correos
+#: field:correos.config,create_uid:0
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: delivery_carrier_correos
+#: field:correos.config,create_date:0
+msgid "Created on"
+msgstr "Creado el"
+
+
+#. module: delivery_carrier_correos
+#: field:correos.config,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: delivery_carrier_correos
+#: field:correos.config,is_test:0
+msgid "Is a test?"
+msgstr "¿Modo test?"
+
+#. module: delivery_carrier_correos
+#: field:correos.config,write_uid:0
+msgid "Last Updated by"
+msgstr "Última actualización de"
+
+#. module: delivery_carrier_correos
+#: field:correos.config,write_date:0
+msgid "Last Updated on"
+msgstr "Última actualización el"
+
+#. module: delivery_carrier_correos
+#: model:ir.actions.act_window,name:delivery_carrier_correos.correos_config_action
+#: model:ir.ui.menu,name:delivery_carrier_correos.correos_config_menu
+msgid "Correos"
+msgstr "Correos"
+
+#. module: delivery_carrier_correos
+#: field:delivery.carrier,correos_config_id:0
+#: view:correos.config:delivery_carrier_correos.correos_config_form_view
+#: view:correos.config:delivery_carrier_correos.correos_config_tree_view
+#: view:correos.config:delivery_carrier_correos.correos_config_form_view
+msgid "Correos Config"
+msgstr "Configuración Correos"
+
+#. module: delivery_carrier_correos
+#: field:stock.picking,correos_service_type:0
+msgid "Correos Service"
+msgstr "Tipo de servicio Correos"
+
+#. module: delivery_carrier_correos
+#: field:correos.config,name:0
+msgid "Name"
+msgstr "Nombre"
+
+#. module: delivery_carrier_correos
+#: code:addons/delivery_carrier_correos/model/stock.py:146
+#, python-format
+msgid "No Correos Config defined in carrier"
+msgstr "No se ha definido la configuración de Correos en el transportista"
+
+#. module: delivery_carrier_correos
+#: field:correos.config,password:0
+msgid "Password"
+msgstr "Contraseña"
+
+#. module: delivery_carrier_correos
+#: model:ir.model,name:delivery_carrier_correos.model_stock_picking
+msgid "Picking List"
+msgstr "Albarán"
+
+#. module: delivery_carrier_correos
+#: code:addons/delivery_carrier_correos/model/stock.py:149
+#, python-format
+msgid "Please define an address in the %s warehouse"
+msgstr "Por favor defina una dirección en el almacén %s"
+
+#. module: delivery_carrier_correos
+#: field:correos.config,username:0
+msgid "Username"
+msgstr "Nombre de usuario"
+

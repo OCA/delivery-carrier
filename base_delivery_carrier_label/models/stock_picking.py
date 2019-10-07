@@ -17,7 +17,7 @@ class StockPicking(models.Model):
     carrier_id = fields.Many2one(
         comodel_name='delivery.carrier',
         string='Carrier',
-        states={'done': [('readonly', True)]},
+        states={'done':[('readonly', True)]},
     )
     carrier_type = fields.Selection(
         related='carrier_id.carrier_type',
@@ -67,6 +67,8 @@ class StockPicking(models.Model):
                         pack
 
         """
+        import wdb
+        wdb.set_trace()
         default_label = self.generate_default_label(package_ids=package_ids)
         if not package_ids:
             return [default_label]
@@ -79,14 +81,16 @@ class StockPicking(models.Model):
 
     @api.multi
     def get_shipping_label_values(self, label):
+        import wdb
+        wdb.set_trace()
         self.ensure_one()
         return {
-            'name': label['name'],
-            'datas_fname': label.get('filename', label['name']),
-            'res_id': self.id,
-            'res_model': 'stock.picking',
-            'datas': label['file'].encode('base64'),
-            'file_type': label['file_type'],
+            'name':label['name'],
+            'datas_fname':label.get('filename', label['name']),
+            'res_id':self.id,
+            'res_model':'stock.picking',
+            'datas':label['file'].encode('base64'),
+            'file_type':label['file_type'],
         }
 
     @api.multi
@@ -97,6 +101,8 @@ class StockPicking(models.Model):
         the labels only of these packages.
 
         """
+        import wdb
+        wdb.set_trace()
         label_obj = self.env['shipping.label']
 
         for pick in self:
@@ -125,6 +131,8 @@ class StockPicking(models.Model):
         It will generate the labels for all the packages of the picking.
 
         """
+        import wdb
+        wdb.set_trace()
         return self.generate_labels()
 
     @api.onchange('carrier_id')
@@ -143,8 +151,8 @@ class StockPicking(models.Model):
         default_options = carrier.default_options()
         self.option_ids = [(6, 0, default_options.ids)]
         result = {
-            'domain': {
-                'option_ids': [('id', 'in', carrier.available_option_ids.ids)],
+            'domain':{
+                'option_ids':[('id', 'in', carrier.available_option_ids.ids)],
             }
         }
         return result
@@ -211,7 +219,7 @@ class StockPicking(models.Model):
         return super(StockPicking, self).write(vals)
 
     @api.model
-    @api.returns('self', lambda value: value.id)
+    @api.returns('self', lambda value:value.id)
     def create(self, vals):
         """ Trigger carrier_id_change on create
 

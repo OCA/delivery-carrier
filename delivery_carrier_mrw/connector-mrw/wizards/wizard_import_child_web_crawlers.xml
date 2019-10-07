@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="wizard_import_child_crawlers_form" model="ir.ui.view">
+        <field name="name" >Wizard Import Child Crawlers</field>
+        <field name="model" >supplier.import.child.crawlers.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+
+                    </group>
+                    <footer>
+                        <button special="cancel" string="Cancel"/>
+                        <button name="unlink_web_crawlers"
+                                type="object"
+                                string="Delete"
+                                class="oe_highlight"/>
+                        <button name="check_import_web_crawlers"
+                                type="object"
+                                string="Check"
+                                class="oe_highlight"/>
+                        <button name="import_web_crawlers"
+                                type="object"
+                                string="Import"
+                                class="oe_highlight"/>
+                    </footer>
+               </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_view_wizard_import_child_crawlers" model="ir.actions.act_window">
+       <field name="name">Wizard Import Child Crawlers</field>
+       <field name="type">ir.actions.act_window</field>
+       <field name="res_model">supplier.import.child.crawlers.wizard</field>
+       <field name="view_type">form</field>
+       <field name="view_mode">form</field>
+       <field name="target">new</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="correos_config_tree_view" model="ir.ui.view">
+            <field name="name">correos.config.tree</field>
+            <field name="model">correos.config</field>
+            <field name="arch" type="xml">
+                <tree string="correos Config" version="7.0">
+                    <field name="name"/>
+                    <field name="is_test"/>
+                    <field name="username"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="correos_config_form_view" model="ir.ui.view">
+            <field name="name">correos.config.form</field>
+            <field name="model">correos.config</field>
+            <field name="arch" type="xml">
+                <form string="correos Config" version="7.0">
+                    <sheet string="correos Config">
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" class="oe_inline"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="is_test" class="oe_inline"/>
+                                <field name="username"/>
+                                <field name="password" password="True"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="correos_config_action" model="ir.actions.act_window">
+            <field name="name">correos</field>
+            <field name="res_model">correos.config</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="correos_config_tree_view"/>
+        </record>
+
+        <menuitem id="correos_config_menu" parent="base_delivery_carrier_label.menu_carriers_config"
+            action="correos_config_action" sequence="20"/>
+
+    </data>
+</odoo>

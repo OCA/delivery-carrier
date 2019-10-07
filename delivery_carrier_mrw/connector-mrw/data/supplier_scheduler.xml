@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data noupdate="1">
+	
+		<!-- Automatic import products from suppliers -->
+		<record id="scheduler_import_products_from_suppliers_action" model="ir.cron">
+            <field name="name">Importer product's supplier</field>
+            <field name="active" eval="True" />
+            <field name="user_id" ref="base.user_root" />
+            <field name="interval_number">6</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <field name="doal">1</field>
+            <field name="model" eval="'supplier.backend'" />
+            <field name="function" eval="'_scheduler_import_product_product'" />
+            <field name="args" eval="" />
+        </record>
+        
+	</data>	
+</odoo>

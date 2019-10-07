@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- PRODUCTS -->
+    <record id="view_supplier_product_tree" model="ir.ui.view">
+        <field name="name">Supplier product</field>
+        <field name="model">supplier.product.product</field>
+        <field name="arch" type="xml">
+            <tree string="Supplier Product">
+                <field name="sku"/>
+                <field name="supplier_name"/>
+                <field name="brand"/>
+                <field name="supplier_qty"/>
+                <field name="height"/>
+                <field name="length"/>
+                <field name="weight"/>
+                <field name="width"/>
+                <field name="discount"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_supplier_product_form" model="ir.ui.view">
+        <field name="name">supplier.product.product.form</field>
+        <field name="model">supplier.product.product</field>
+        <field name="arch" type="xml">
+            <form>
+                <group><field name="odoo_id"/></group>
+                <group><field name="sku"/></group>
+                <group><field name="supplier_name"/></group>
+                <group><field name="brand"/></group>
+                <group><field name="supplier_qty"/></group>
+                <group><field name="height"/></group>
+                <group><field name="length"/></group>
+                <group><field name="weight"/></group>
+                <group><field name="width"/></group>
+                <group><field name="url_product"/></group>
+                <group><field name="discount"/></group>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_supplier_product" model="ir.actions.act_window">
+        <field name="name">Supplier Products</field>
+        <field name="res_model">supplier.product.product</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_supplier_product_tree"/>
+    </record>
+
+</odoo>
