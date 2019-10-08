@@ -1,2 +1,3 @@
 roulier
 phonenumbers
+pycountry>=16.11.08
