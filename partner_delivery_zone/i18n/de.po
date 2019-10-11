@@ -6,44 +6,47 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2019-10-11 10:36+0000\n"
+"Last-Translator: Maria Sparenberg <maria.sparenberg@gmx.net>\n"
 "Language-Team: none\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.8\n"
 
 #. module: partner_delivery_zone
 #: model_terms:ir.ui.view,arch_db:partner_delivery_zone.report_delivery_document
 #: model_terms:ir.ui.view,arch_db:partner_delivery_zone.report_picking
 msgid "<strong>Zone</strong>"
-msgstr ""
+msgstr "<strong>Zone</strong>"
 
 #. module: partner_delivery_zone
 #: model_terms:ir.actions.act_window,help:partner_delivery_zone.partner_delivery_zone_action
 msgid "Click to set a new delivery zone for partners."
 msgstr ""
+"Bitte hier klicken, um eine neue Auslieferungszone für Partner zu erstellen."
 
 #. module: partner_delivery_zone
 #: model:ir.model.fields,field_description:partner_delivery_zone.field_partner_delivery_zone__code
 msgid "Code"
-msgstr ""
+msgstr "Schlüssel"
 
 #. module: partner_delivery_zone
 #: model:ir.model,name:partner_delivery_zone.model_res_partner
 msgid "Contact"
-msgstr ""
+msgstr "Kontakt"
 
 #. module: partner_delivery_zone
 #: model:ir.model.fields,field_description:partner_delivery_zone.field_partner_delivery_zone__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Erstellt von"
 
 #. module: partner_delivery_zone
 #: model:ir.model.fields,field_description:partner_delivery_zone.field_partner_delivery_zone__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Erstellt am"
 
 #. module: partner_delivery_zone
 #: model:ir.actions.act_window,name:partner_delivery_zone.partner_delivery_zone_action
@@ -59,47 +62,47 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:partner_delivery_zone.view_res_partner_filter
 #: model_terms:ir.ui.view,arch_db:partner_delivery_zone.view_sales_order_filter
 msgid "Delivery Zone"
-msgstr ""
+msgstr "Auslieferungszone"
 
 #. module: partner_delivery_zone
 #: model:ir.model.fields,field_description:partner_delivery_zone.field_partner_delivery_zone__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Anzeigename"
 
 #. module: partner_delivery_zone
 #: model:ir.model.fields,field_description:partner_delivery_zone.field_partner_delivery_zone__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: partner_delivery_zone
 #: model:ir.model.fields,field_description:partner_delivery_zone.field_partner_delivery_zone____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Zuletzt geändert am"
 
 #. module: partner_delivery_zone
 #: model:ir.model.fields,field_description:partner_delivery_zone.field_partner_delivery_zone__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Zuletzt aktualisiert von"
 
 #. module: partner_delivery_zone
 #: model:ir.model.fields,field_description:partner_delivery_zone.field_partner_delivery_zone__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Zuletzt aktualisiert am"
 
 #. module: partner_delivery_zone
 #: model:ir.model,name:partner_delivery_zone.model_partner_delivery_zone
 msgid "Partner delivery zone"
-msgstr ""
+msgstr "Auslieferungszone des Partners"
 
 #. module: partner_delivery_zone
 #: model:ir.model,name:partner_delivery_zone.model_sale_order
 msgid "Sale Order"
-msgstr ""
+msgstr "Verkaufsauftrag"
 
 #. module: partner_delivery_zone
 #: model:ir.model,name:partner_delivery_zone.model_stock_move
 msgid "Stock Move"
-msgstr ""
+msgstr "Lagerbewegung"
 
 #. module: partner_delivery_zone
 #: model:ir.model,name:partner_delivery_zone.model_stock_picking
@@ -109,4 +112,4 @@ msgstr ""
 #. module: partner_delivery_zone
 #: model:ir.model.fields,field_description:partner_delivery_zone.field_partner_delivery_zone__name
 msgid "Zone"
-msgstr ""
+msgstr "Zone"
