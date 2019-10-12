@@ -1,42 +1,45 @@
 language: python
+cache:
+  directories:
+  - $HOME/.cache/pip
+  - $HOME/.cache/pre-commit
 
 python:
-  - "3.5"
-
-sudo: false
-cache: pip
+  - "3.6"
 
 addons:
   postgresql: "9.6"
   apt:
-    source:
-      - pov-wkhtmltopdf
     packages:
       - expect-dev  # provides unbuffer utility
-      - python-lxml # because pip installation is slow
-      - wkhtmltopdf
+
+stages:
+  - linting
+  - test
+
+jobs:
+  include:
+    - stage: linting
+      name: "pre-commit"
+      before_install:
+      install: pip install pre-commit
+      script: pre-commit run --all --show-diff-on-failure
+      after_success:
+    - stage: test
+      env:
+        - TESTS="1" ODOO_REPO="odoo/odoo" MAKEPOT="1"
+    - stage: test
+      env:
+        - TESTS="1" ODOO_REPO="OCA/OCB"
 
 env:
   global:
-  - VERSION="13.0" TESTS="0" LINT_CHECK="0" TRANSIFEX="0"
-  - TRANSIFEX_USER='transbot@odoo-community.org'
-  - secure: "WspsOy3m3Arreqs+f8QAnKOCPbXfpO7TeUJEfJSMehMh8I+bR1KFZM0CUfKxNOT9mrbt94J9VzF3knC2p4P/lUWr24USJ27FgOScnTz/PQTjZfjdXDefGdhCCx3QgIzI/mj751BYp2FMBYXEvjaBSycerWJ+AP+OKVEdf44Lgp0="
-
-  matrix:
-  - LINT_CHECK="1"
-  - TRANSIFEX="1"
-  - TESTS="1" ODOO_REPO="OCA/OCB"
-  - TESTS="1" ODOO_REPO="odoo/odoo"
-
+  - VERSION="13.0" TESTS="0" LINT_CHECK="0" MAKEPOT="0"
 
 install:
   - git clone --depth=1 https://github.com/OCA/maintainer-quality-tools.git ${HOME}/maintainer-quality-tools
   - export PATH=${HOME}/maintainer-quality-tools/travis:${PATH}
   - travis_install_nightly
-  - pip install PyPDF2==1.18
-  - pip install unidecode
-  - pip install pycountry
-  - pip install suds-jurko==0.6
 
 script:
   - travis_run_tests
