@@ -19,6 +19,9 @@ class StockPicking(models.Model):
         sale_order = self.sale_id
         if not sale_order or not self.carrier_id:  # pragma: no cover
             return res
+        so_line = sale_order.order_line.filtered(lambda x: x.is_delivery)[:1]
+        if not so_line:  # pragma: no cover
+            return res
         total = weight = volume = quantity = 0
         for move_line in self.move_line_ids.filtered('qty_done'):
             if not move_line.product_id:
@@ -31,12 +34,10 @@ class StockPicking(models.Model):
             volume += (move_line.product_id.volume or 0.0) * qty
             quantity += qty
             total += move.sale_line_id.price_unit * qty
-        total = sale_order.currency_id.with_context(
-            date=sale_order.date_order
-        ).compute(total, sale_order.company_id.currency_id)
-        so_line = sale_order.order_line.filtered(lambda x: x.is_delivery)[:1]
-        if so_line:
-            so_line.price_unit = self.carrier_id._get_price_from_picking(
-                total, weight, volume, quantity,
-            )
+        total = sale_order.currency_id._convert(
+            total, sale_order.company_id.currency_id, sale_order.company_id,
+            sale_order.date_order)
+        so_line.price_unit = self.carrier_id._get_price_from_picking(
+            total, weight, volume, quantity,
+        )
         return res
