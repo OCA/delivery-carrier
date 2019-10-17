@@ -11,8 +11,6 @@ def _execute_onchanges(records, field_name):
             onchange(record)
 
 
-@common.at_install(False)
-@common.post_install(True)
 class TestDeliveryAutoRefresh(common.HttpCase):
     def setUp(self):
         super(TestDeliveryAutoRefresh, self).setUp()
