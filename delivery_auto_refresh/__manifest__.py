@@ -4,7 +4,7 @@
 {
     "name": "Auto-refresh delivery",
     "summary": "Auto-refresh delivery price in sales orders",
-    "version": "12.0.1.0.0",
+    "version": "12.0.1.0.1",
     "category": "Delivery",
     "website": "https://github.com/OCA/delivery-carrier",
     "author": "Tecnativa, "
