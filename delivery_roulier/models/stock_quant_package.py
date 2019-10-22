@@ -111,7 +111,8 @@ class StockQuantPackage(models.Model):
             'name': (parcel.get('reference') or tracking_number or 
                      label.get('name')),
             'file': label.get('data'),
-            'filename': label.get('name'),
+            'filename': '%s.%s' % (label.get('name'),
+                                   label.get('type', '').lower()),
             'file_type': label.get('type')
         }
 
