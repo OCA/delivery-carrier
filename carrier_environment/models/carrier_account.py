@@ -12,7 +12,6 @@ class CarrierAccount(models.Model):
     def _server_env_fields(self):
         carrier_fields = super()._server_env_fields
         carrier_fields.update({
-            "name": {},
             "account": {},
             "password": {},
             "file_format": {},
