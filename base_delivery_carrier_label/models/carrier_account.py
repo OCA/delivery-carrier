@@ -17,6 +17,10 @@ class CarrierAccount(models.Model):
                 ('XML', 'XML')]
 
     name = fields.Char(required=True)
+    delivery_type = fields.Selection(
+        selection=lambda self: self.env["delivery.carrier"]
+        ._fields["delivery_type"].selection,
+        help="This field may be used to link an account to a carrier")
     account = fields.Char(string='Account Number', required=True)
     password = fields.Char(string='Account Password', required=True)
     company_id = fields.Many2one(comodel_name="res.company", string="Company")
