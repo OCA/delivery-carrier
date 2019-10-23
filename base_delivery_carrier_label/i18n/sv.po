@@ -163,6 +163,7 @@ msgid "Delivery Methods"
 msgstr ""
 
 #. module: base_delivery_carrier_label
+#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account__delivery_type
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_picking__delivery_type
 msgid "Delivery Type"
 msgstr ""
@@ -349,13 +350,6 @@ msgid "Name"
 msgstr ""
 
 #. module: base_delivery_carrier_label
-#: model_terms:ir.ui.view,arch_db:base_delivery_carrier_label.carrier_account_view_form
-msgid ""
-"Name must match with one of the value of Provider field (delivery_type) of "
-"your delivery methods"
-msgstr ""
-
-#. module: base_delivery_carrier_label
 #: code:addons/base_delivery_carrier_label/models/stock_picking.py:38
 #, python-format
 msgid "No label is configured for the selected delivery method."
@@ -486,6 +480,11 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_shipping_label__res_id
 msgid "The record id this is attached to."
+msgstr ""
+
+#. module: base_delivery_carrier_label
+#: model:ir.model.fields,help:base_delivery_carrier_label.field_carrier_account__delivery_type
+msgid "This field may be used to link an account to a carrier"
 msgstr ""
 
 #. module: base_delivery_carrier_label

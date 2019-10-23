@@ -20,11 +20,10 @@
         <sheet>
           <div class="oe_title">
               <h1><field name="name"/></h1>
-              <!-- To be able to link a carrier account with a delivery method 
-                   we need of this convention -->
-              <div>Name must match with one of the value of Provider field (delivery_type) of your delivery methods</div>
           </div>
           <group>
+              <!-- To be able to link a carrier account with a delivery method -->
+            <field name="delivery_type"/>
             <field name="account"/>
             <field name="password" password="True"/>
             <field name="file_format"/>
