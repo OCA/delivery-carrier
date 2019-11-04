@@ -10,6 +10,7 @@ setuptools.setup(
     install_requires=[
         'odoo9-addon-base_delivery_carrier_label',
         'odoo9-addon-delivery_carrier_deposit',
+        'odoo9-addon-delivery_carrier_label_batch',
         'odoo9-addon-delivery_carrier_label_postlogistics',
         'odoo9-addon-delivery_multi_destination',
         'odoo9-addon-delivery_roulier',
