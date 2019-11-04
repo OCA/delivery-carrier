@@ -20,6 +20,7 @@ addon | version | summary
 --- | --- | ---
 [base_delivery_carrier_label](base_delivery_carrier_label/) | 9.0.1.0.1 | Base module for carrier labels
 [delivery_carrier_deposit](delivery_carrier_deposit/) | 9.0.0.1.1 | Create deposit slips
+[delivery_carrier_label_batch](delivery_carrier_label_batch/) | 9.0.1.0.0 | Carrier labels - Stock Batch Picking (link)
 [delivery_carrier_label_postlogistics](delivery_carrier_label_postlogistics/) | 9.0.1.1.1 | PostLogistics Labels WebService
 [delivery_multi_destination](delivery_multi_destination/) | 9.0.1.0.0 | Multiple destinations for the same delivery method
 [delivery_roulier](delivery_roulier/) | 9.0.2.0.0 | Integration of multiple carriers
@@ -38,7 +39,6 @@ addon | version | summary
 [delivery_carrier_file_laposte](delivery_carrier_file_laposte/) | 1.0 (unported) | Delivery Carrier File: La Poste
 [delivery_carrier_file_tnt](delivery_carrier_file_tnt/) | 1.0 (unported) | Delivery Carrier File: TNT
 [delivery_carrier_label_default_webkit](delivery_carrier_label_default_webkit/) | 1.0 (unported) | Module for carrier labels
-[delivery_carrier_label_dispatch](delivery_carrier_label_dispatch/) | 1.0 (unported) | Carrier labels - Picking dispatch (link)
 [delivery_carrier_label_gls](delivery_carrier_label_gls/) | 0.1 (unported) | GLS carrier label printing
 [delivery_carrier_label_postlogistics_shop_logo](delivery_carrier_label_postlogistics_shop_logo/) | 1.0 (unported) | PostLogistics labels - logo per Shop
 [delivery_optional_invoice_line](delivery_optional_invoice_line/) | 0.1 (unported) | Delivery Optional Invoice Line
