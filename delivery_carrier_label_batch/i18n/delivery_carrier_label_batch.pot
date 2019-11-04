@@ -4,22 +4,14 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 9.0e\n"
+"Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-22 08:42+0000\n"
-"PO-Revision-Date: 2016-07-22 08:42+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
-
-#. module: delivery_carrier_label_batch
-#: code:addons/delivery_carrier_label_batch/wizard/generate_labels.py:77
-#, python-format
-msgid "%s %s - %s"
-msgstr ""
 
 #. module: delivery_carrier_label_batch
 #: model:ir.ui.view,arch_db:delivery_carrier_label_batch.view_picking_batch_apply_carrier
@@ -127,7 +119,7 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: delivery_carrier_label_batch
-#: code:addons/delivery_carrier_label_batch/wizard/generate_labels.py:96
+#: code:addons/delivery_carrier_label_batch/wizard/generate_labels.py:229
 #, python-format
 msgid "No picking batch selected"
 msgstr ""
@@ -145,7 +137,7 @@ msgid "Options"
 msgstr ""
 
 #. module: delivery_carrier_label_batch
-#: code:addons/delivery_carrier_label_batch/wizard/generate_labels.py:75
+#: code:addons/delivery_carrier_label_batch/wizard/generate_labels.py:103
 #, python-format
 msgid "Pack: %s"
 msgstr ""
@@ -161,7 +153,7 @@ msgid "Picking Batch Apply Carrier"
 msgstr ""
 
 #. module: delivery_carrier_label_batch
-#: code:addons/delivery_carrier_label_batch/wizard/generate_labels.py:74
+#: code:addons/delivery_carrier_label_batch/wizard/generate_labels.py:102
 #, python-format
 msgid "Picking: %s"
 msgstr ""
@@ -172,12 +164,20 @@ msgid "Set Options"
 msgstr ""
 
 #. module: delivery_carrier_label_batch
+#: code:addons/delivery_carrier_label_batch/wizard/generate_labels.py:197
+#, python-format
+msgid "Some labels couldn't be generated. Please correct following errors and generate labels again to create the ones which failed.\n"
+"\n"
+""
+msgstr ""
+
+#. module: delivery_carrier_label_batch
 #: model:ir.ui.view,arch_db:delivery_carrier_label_batch.view_delivery_carrier_label_generate
 msgid "This wizard creates an attachement on each selected batch containing picking labels"
 msgstr ""
 
 #. module: delivery_carrier_label_batch
-#: code:addons/delivery_carrier_label_batch/models/stock_batch_picking.py:71
+#: code:addons/delivery_carrier_label_batch/models/stock_batch_picking.py:72
 #, python-format
 msgid "User Error !"
 msgstr ""
@@ -189,10 +189,10 @@ msgid "Warning, setting options will erase the existing ones in delivery orders"
 msgstr ""
 
 #. module: delivery_carrier_label_batch
-#: code:addons/delivery_carrier_label_batch/models/stock_batch_picking.py:72
+#: code:addons/delivery_carrier_label_batch/models/stock_batch_picking.py:73
 #, python-format
 msgid "You can not remove a mandatory option.\n"
-"Options are reset to default."
+"Please reset options to default."
 msgstr ""
 
 #. module: delivery_carrier_label_batch
