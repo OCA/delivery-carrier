@@ -396,6 +396,13 @@ msgid "Url"
 msgstr ""
 
 #. module: base_delivery_carrier_label
+#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_description_warehouse
+#, fuzzy
+#| msgid "Description"
+msgid "Warehouse Description"
+msgstr "說明"
+
+#. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_pack_operation_weight
 msgid "Weight"
 msgstr ""
