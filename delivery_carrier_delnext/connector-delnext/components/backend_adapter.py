@@ -239,7 +239,8 @@ class WebCrawlerAPI(object):
         url_login = importer.get_url_login_parent()
         session.params = params
         session.headers = {'User-Agent':self._get_agent_browser(importer)}
-        session.post(url=url_login, data=params)
+        if params:
+            session.post(url=url_login, data=params)
         if session:
             self._session = session
         return session

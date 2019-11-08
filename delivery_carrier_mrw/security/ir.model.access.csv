@@ -1,3 +1,3 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_mrw_config_salesman,mrw.config.salesman,model_mrw_config,base.group_sale_salesman,1,0,0,0
-access_mrw_config_manager,mrw.config.manager,model_mrw_config,base.group_sale_manager,1,1,1,1
+access_mrw_config,mrw.config.stock_user,model_mrw_config,stock.group_stock_user,1,0,0,0
+access_mrw_config,mrw.config.stock_manager,model_mrw_config,stock.group_stock_manager,1,1,1,1

@@ -30,7 +30,7 @@
     ],
     'website':'http://factorlibre.com',
     'data':[
-        # 'security/ir.model.access.csv',
+        'security/ir.model.access.csv',
         'view/mrw_config_view.xml',
         'view/delivery_view.xml',
         'view/stock_view.xml'

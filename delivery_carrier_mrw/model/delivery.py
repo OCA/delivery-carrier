@@ -26,6 +26,10 @@ class DeliveryCarrier(models.Model):
     _inherit = 'delivery.carrier'
 
     @api.model
+    def get_tracking_link(self, picking):
+        return str(self.mrw_config_id.url_shipment_path) % picking.carrier_tracking_ref
+
+    @api.model
     def _get_carrier_type_selection(self):
         """ Add MRW carrier type """
         res = super(DeliveryCarrier, self)._get_carrier_type_selection()

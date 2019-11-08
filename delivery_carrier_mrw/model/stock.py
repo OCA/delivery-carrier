@@ -19,20 +19,19 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+import logging
+import math
 import urllib
 from datetime import datetime
 from odoo import models, fields, api, exceptions
 from odoo.tools.translate import _
 from ..webservice.mrw_api import MrwEnvio
 
+_logger = logging.getLogger(__name__)
+
 
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
-
-    mrw_service_type = fields.Selection('_get_mrw_service_type', string='Mrw Service')
-
-    mrw_frequence = fields.Selection(
-        (('1', 'Frecuencia 1'), ('2', 'Frecuencia 2')), string='Mrw Frequence')
 
     @api.model
     def _get_mrw_service_type(self):
@@ -55,8 +54,14 @@ class StockPicking(models.Model):
             ('0450', 'Express 2 Kilos'),
             ('0480', 'Caja Express 3 Kilos'),
             ('0490', 'Documentos 14'),
-            ('0800', 'Ecommerce')
+            ('0800', 'Ecommerce'),
+            ('0810', 'Ecommerce Canje')
         ]
+
+    mrw_service_type = fields.Selection('_get_mrw_service_type', string='Mrw Service')
+
+    mrw_frequence = fields.Selection(
+        (('1', 'Frecuencia 1'), ('2', 'Frecuencia 2')), string='Mrw Frequence')
 
     @api.multi
     def _mrw_transm_envio_request(self, mrw_api):
@@ -88,8 +93,16 @@ class StockPicking(models.Model):
         transm_envio.DatosRecogida.Telefono = warehouse_address.phone or ''
 
         shipping_address = transm_envio.DatosEntrega.Direccion
-        shipping_address.Via = self.partner_id.street
-        shipping_address.Resto = self.partner_id.street2 or ''
+        shipping_address.Via = '%s %s' % (self.partner_id.street, self.partner_id.street2 or '')
+
+        ship_values = self._get_ship_reference_content_dimensions()
+        reference_content = ship_values[0]
+        package_content = ship_values[1]
+        weigth_content = int(math.ceil(ship_values[2])) or 1
+
+        # Si el paquete va para Baleares tenemos que poner el contenido del paquete
+        if self.partner_id.zip[0:2] == '07':
+            transm_envio.DatosEntrega.Observaciones = package_content
         shipping_address.CodigoPostal = self.partner_id.zip
         shipping_address.Poblacion = self.partner_id.city
         shipping_address.Provincia = self.partner_id.state_id.name or ''
@@ -102,14 +115,23 @@ class StockPicking(models.Model):
         # Datos Servicio
         service_data = transm_envio.DatosServicio
         service_data.Fecha = datetime.strftime(
-            fields.Datetime.from_string(self.date_done), '%d/%m/%Y')
-        service_data.Referencia = self.name
+            fields.Datetime.from_string(self.min_date or self.date_done), '%d/%m/%Y')
+        service_data.Referencia = reference_content
         service_data.EnFranquicia = 'N'
         service_data.CodigoServicio = self.mrw_service_type
         service_data.NumeroBultos = self.number_of_packages or 1
-        service_data.Peso = self.weight or 1
+        service_data.Peso = weigth_content or 1
         if self.mrw_frequence:
             service_data.Frecuencia = self.mrw_frequence
+
+        # Información del bulto, tiene que ir en centimetros
+        bulto_request = client.factory.create('BultoRequest')
+        bulto_request.Referencia = reference_content
+        bulto_request.Alto = int(math.ceil(ship_values[3])) if ship_values[3] and ship_values[3] >= 3 else 3
+        bulto_request.Largo = int(math.ceil(ship_values[4])) if ship_values[4] and ship_values[4] >= 3 else 3
+        bulto_request.Ancho = int(math.ceil(ship_values[5])) if ship_values[5] and ship_values[5] >= 3 else 3
+        bulto_request.Peso = weigth_content
+        service_data.Bultos.BultoRequest.append(bulto_request)
 
         # TODO: Servicio Rembolso
         # Reembolso: indicador opcional de reembolso. Valores posibles:
@@ -127,6 +149,7 @@ class StockPicking(models.Model):
             service_data.Notificaciones.NotificacionRequest.append(
                 notification_request)
 
+        _logger.info(transm_envio)
         return transm_envio
 
     @api.multi
@@ -148,14 +171,20 @@ class StockPicking(models.Model):
             raise exceptions.Warning(
                 _('Please define an address in the %s warehouse') % (
                     self.warehouse_id.name))
+
         mrw_api = MrwEnvio(self.carrier_id.mrw_config_id)
         client = mrw_api.client
+        # Generate shipment
         transm_envio = self._mrw_transm_envio_request(mrw_api)
 
         response = client.service.TransmEnvio(transm_envio)
 
         if response.Estado != '1' and not response.NumeroEnvio:
-            raise exceptions.Warning(response.Mensaje)
+            try:
+                mensaje = response.Mensaje
+            except Exception as e:
+                mensaje = response.Mensaje.encode('utf8', 'ignore')
+            raise exceptions.Warning(mensaje)
 
         label_factory = self._mrw_etiqueta_envio_request(mrw_api,
                                                          response.NumeroEnvio)
@@ -169,7 +198,10 @@ class StockPicking(models.Model):
             'file':label_response.EtiquetaFile.decode('base64'),
             'file_type':'pdf',
             'name':response.NumeroEnvio + '.pdf',
+            'tracking_number':response.NumeroEnvio,
         }
+
+        self.carrier_tracking_ref = response.NumeroEnvio
 
         return [label]
 
@@ -199,8 +231,6 @@ class StockPicking(models.Model):
     @api.multi
     def generate_shipping_labels(self, package_ids=None):
         """ Add label generation for MRW """
-        import wdb
-        wdb.set_trace()
         self.ensure_one()
         if self.carrier_id.carrier_type == 'mrw':
             return self._generate_mrw_label(package_ids=package_ids)

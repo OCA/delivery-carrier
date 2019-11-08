@@ -32,5 +32,6 @@ class MrwConfig(models.Model):
     department_code = fields.Char('Department Code')
     username = fields.Char('Username', required=True)
     password = fields.Char('Password', required=True)
+    url_shipment_path = fields.Char('Url shipment path', default='http://www.mrw.es/seguimiento_envios/MRW_resultados_consultas.asp?modo=nacional&envio=%s')
     username_web = fields.Char('Username web', required=False)
     password_web = fields.Char('Password_web', required=False)

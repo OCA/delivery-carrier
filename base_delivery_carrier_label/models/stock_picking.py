@@ -67,8 +67,6 @@ class StockPicking(models.Model):
                         pack
 
         """
-        import wdb
-        wdb.set_trace()
         default_label = self.generate_default_label(package_ids=package_ids)
         if not package_ids:
             return [default_label]
@@ -81,8 +79,6 @@ class StockPicking(models.Model):
 
     @api.multi
     def get_shipping_label_values(self, label):
-        import wdb
-        wdb.set_trace()
         self.ensure_one()
         return {
             'name':label['name'],
@@ -101,8 +97,6 @@ class StockPicking(models.Model):
         the labels only of these packages.
 
         """
-        import wdb
-        wdb.set_trace()
         label_obj = self.env['shipping.label']
 
         for pick in self:
@@ -131,8 +125,6 @@ class StockPicking(models.Model):
         It will generate the labels for all the packages of the picking.
 
         """
-        import wdb
-        wdb.set_trace()
         return self.generate_labels()
 
     @api.onchange('carrier_id')
@@ -267,3 +259,36 @@ class StockPicking(models.Model):
                   'Please delete the existing labels in the '
                   'attachments of this picking and try again')
                 % self.name)
+
+    @api.model
+    def _get_ship_reference(self):
+        reference_content = ''
+        for move in self.move_lines:
+            if move.product_id.type == 'product':
+                reference_content = '%s|%s' % ((('%sx(%s)' % (int(move.product_uom_qty), move.product_id.default_code))
+                                                if move.product_uom_qty > 1 else move.product_id.default_code),
+                                               reference_content)
+        return reference_content
+
+    @api.model
+    def _get_ship_reference_content_dimensions(self):
+        package_content = ''
+        reference_content = ''
+        weigth_content = 0
+        width_pack = 0
+        height_pack = 0
+        length_pack = 0
+        for move in self.move_lines:
+            package_content = ('%s %s' % (package_content, move.product_id.name)).strip()
+            if move.product_id.type == 'product':
+                reference_content = '%s|%s' % ((('%sx(%s)' % (int(move.product_uom_qty), move.product_id.default_code))
+                                                if move.product_uom_qty > 1 else move.product_id.default_code),
+                                               reference_content)
+            weigth_content = weigth_content + (move.product_id.weight * move.product_uom_qty)
+            length_pack = length_pack + (move.product_id.length * move.product_qty)
+            if width_pack < move.product_id.width:
+                width_pack = move.product_id.width
+            if height_pack < move.product_id.height:
+                height_pack = move.product_id.height
+
+        return [reference_content, package_content, weigth_content, width_pack, height_pack, length_pack]

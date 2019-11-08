@@ -79,12 +79,10 @@ class ProductProduct(models.Model):
     @api.depends('qty_available', 'virtual_available', 'stock_quant_ids', 'stock_move_ids', 'outgoing_qty',
                  'product_uom_qty', 'product_uom', 'route_id')
     def _compute_check_stock(self):
-        import wdb
-        wdb.set_trace()
         compute_stock = None
         if self and self.supplier_bind_ids and len(self.supplier_bind_ids) == 1 and \
-            (self.supplier_bind_ids.compute_stock or self.supplier_bind_ids.backend_id.compute_stock) and \
-            self.product_tmpl_id.seller_ids:
+                (self.supplier_bind_ids.compute_stock or self.supplier_bind_ids.backend_id.compute_stock) and \
+                self.product_tmpl_id.seller_ids:
             for supplier in self.product_tmpl_id.seller_ids:
                 backend = self.env['supplier.backend'].search([('supplier_id', '=', supplier.name)])
                 if backend and backend.compute_stock:
