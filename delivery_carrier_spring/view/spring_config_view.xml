@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="spring_config_tree_view" model="ir.ui.view">
+            <field name="name">spring.config.tree</field>
+            <field name="model">spring.config</field>
+            <field name="arch" type="xml">
+                <tree string="Spring Config">
+                    <field name="name"/>
+                    <field name="is_test"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="spring_config_form_view" model="ir.ui.view">
+            <field name="name">spring.config.form</field>
+            <field name="model">spring.config</field>
+            <field name="arch" type="xml">
+                <form string="Spring Config">
+                    <sheet string="Spring Config">
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" class="oe_inline"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="is_test" class="oe_inline"/>
+                                <field name="api_key"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="spring_config_action" model="ir.actions.act_window">
+            <field name="name">Spring</field>
+            <field name="res_model">spring.config</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="spring_config_tree_view"/>
+        </record>
+
+        <menuitem id="spring_config_menu" parent="base_delivery_carrier_label.menu_carriers_config"
+            action="spring_config_action" sequence="20"/>
+
+    </data>
+</odoo>

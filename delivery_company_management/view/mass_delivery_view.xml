@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_mass_shipment_management_tree" model="ir.ui.view">
+        <field name="name">Mass Shipment Management</field>
+        <field name="model">mass.shipment.management</field>
+        <field name="arch" type="xml">
+            <tree string="Shipments">
+                <field name="shipment_date" string="Delivery date"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_mass_shipment_management_form" model="ir.ui.view">
+        <field name="name">mass.shipment.management.form</field>
+        <field name="model">mass.shipment.management</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar"/>
+                    <button string="Import pending orders"
+                                type="object"
+                                name="get_pending_orders"
+                                class="oe_highlight"
+                                states="import"/>
+                    <button string="Import pending orders"
+                                type="object"
+                                name="get_pending_orders"
+                                states="generate,confirm"/>
+                    <button string="Generate orders"
+                                type="object"
+                                name="generate_orders"
+                                class="oe_highlight"
+                                states="generate"/>
+                    <button string="Generate orders"
+                                type="object"
+                                name="generate_orders"
+                                states="import,confirm"/>
+                    <button string="Confirm marketplace orders"
+                                type="object"
+                                name="confirm_orders_on_marketplaces"
+                                class="oe_highlight"
+                                states="confirm"/>
+                </header>
+                <group><field name="shipment_date" string="Delivery date" /></group>
+                <group attrs="{'invisible':[('error_message','=',False)]}"><field name="error_message" string="Error message" /></group>
+                <group>
+                    <field name="stock_picking_ids" nolabel="1" widget="one2many_list">
+                        <tree string="Shipments" editable="bottom">
+                            <field name="customer_name" readonly="1"/>
+                            <field name="limit_ship_date" readonly="1"/>
+                            <field name="ship_reference" readonly="1"/>
+                            <field name="stock_picking_id"/>
+                            <field name="picking_state" readonly="1"/>
+                            <field name="sale_order_id" readonly="1"/>
+                            <field name="delivery_carrier_id"/>
+                            <field name="country_customer_name" readonly="1"/>
+                            <field name="type_ship"/>
+                            <field name="is_done"/>
+                        </tree>
+                    </field>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_mass_shipment_management" model="ir.actions.act_window">
+        <field name="name">Mass Shipment Management</field>
+        <field name="res_model">mass.shipment.management</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_mass_shipment_management_tree"/>
+    </record>
+
+
+</odoo>

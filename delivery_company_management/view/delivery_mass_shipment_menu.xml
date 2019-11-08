@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Mass shipment menu -->
+    <menuitem id="menu_mass_shipment_root"
+        parent="stock.menu_stock_root"
+        name="Mass shipments"
+        sequence="10"
+        groups="stock.group_stock_user"/>
+
+    <!-- Backends submenu -->
+    <menuitem id="menu_mass_shipment_management"
+        name="Mass Shipment Management"
+        parent="menu_mass_shipment_root"
+        action="action_mass_shipment_management"
+        groups="stock.group_stock_manager"/>
+
+</odoo>
