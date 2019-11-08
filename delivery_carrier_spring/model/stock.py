@@ -83,7 +83,7 @@ class StockPicking(models.Model):
         shipment_data = {
             'LabelOption':'FinalMile',
             'LabelFormat':'PDF',
-            'ShipperReference':'%s-%s' % (self.name, datetime.now()),  # TODO remove datetime, it is for test only
+            'ShipperReference':'%s' % (self.name),  # datetime.now()),  # TODO remove datetime, it is for test only
             'DisplayId':'',
             'InvoiceNumber':'',
             'Service':self.carrier_id.code,
@@ -147,15 +147,20 @@ class StockPicking(models.Model):
 
         spring_api = SpringRequest(self.carrier_id.spring_config_id)
 
-        # Generate shipment data
-        shipment_data_request = self._spring_shipment_request()
-        response = spring_api.api_request(shipment_data_request)
+        if package_ids:
+            import wdb
+            wdb.set_trace()
+            label_response = self._get_spring_label(spring_api, package_ids)
+            response = label_response
+        else:
+            # Generate shipment data
+            shipment_data_request = self._spring_shipment_request()
+            response = spring_api.api_request(shipment_data_request)
+
         if response['ErrorLevel'] != 0:
             raise exceptions.Warning(response['Error'])
 
         ship_response = response['Shipment']
-
-        # label_response = self._get_spring_label(spring_api, ship_response['TrackingNumber'])
 
         label = {
             'file':base64.b64decode(ship_response['LabelImage']),
@@ -174,10 +179,10 @@ class StockPicking(models.Model):
         return [label]
 
     @api.multi
-    def _get_spring_label(self, spring_api, shipping_number):
+    def _get_spring_label(self, spring_api, shipper_reference):
         self.ensure_one()
         shipment = {'LabelFormat':'PDF',
-                    'TrackingNumber':shipping_number}
+                    'ShipperReference':shipper_reference}
         data = {'Command':'GetShipmentLabel', 'Shipment':shipment}
         response = spring_api.api_request(data)
         return response if response and response.get('ErrorLevel') == 0 else None

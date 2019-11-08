@@ -370,7 +370,12 @@ class MassShipmentManagement(models.Model):
                 order.stock_picking_id.carrier_id = order.delivery_carrier_id
                 if order.type_ship in ('0', '3'):
                     order.stock_picking_id.spring_service_type = order.delivery_carrier_id.code
-                order.stock_picking_id.action_generate_carrier_label()
+                try:
+                    order.stock_picking_id.action_generate_carrier_label()
+                except UserError as e:
+                    if e.name == 'This Shipper Reference already exists':
+                        # Get the last label
+                        order.stock_picking_id.generate_labels(package_ids=order.stock_picking_id.name)
 
             # When we have a tracking number we validate the picking
             if order.stock_picking_id.carrier_tracking_ref:
@@ -422,7 +427,9 @@ class MassShipmentManagement(models.Model):
                 path_list = []
                 for pick in self.stock_picking_ids:
                     if pick.is_done and pick.stock_picking_id.carrier_id and 'spring' in pick.stock_picking_id.carrier_id.carrier_type:
-                        attachments = self.env['ir.attachment'].search([('res_id', '=', pick.stock_picking_id.id), ('res_model', '=', 'stock.picking')])
+                        attachments = self.env['ir.attachment'].search([('res_id', '=', pick.stock_picking_id.id), ('res_model', '=', 'stock.picking')],
+                                                                       order='id DESC',
+                                                                       limit=1)
                         for attachment in attachments:
                             if attachment.store_fname:
                                 shutil.copy2('%s/%s' % (filestore_path, attachment.store_fname), path_temp_dir)
@@ -603,18 +610,8 @@ class MassShipmentManagement(models.Model):
 
     def generate_orders(self):
         self.error_message = None
-        prods_without_stock = []
         for order in self.stock_picking_ids:
             if not order.is_done:
-                jump_order = False
-
-                for product in order.stock_picking_id.pack_operation_product_ids:
-                    if product.product_id.qty_available < product.ordered_qty:
-                        prods_without_stock.append(order.sale_order_id)
-                        jump_order = True
-
-                if jump_order:
-                    continue
                 self.generate_order_carrier(order)
 
         self._generate_mrw_labels()
