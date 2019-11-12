@@ -29,7 +29,7 @@
   <field name="view_mode">form</field>
   <field name="view_id" ref="view_delivery_carrier_label_generate"/>
   <field name="groups_id" eval="[(6, 0, [ref('stock.group_stock_manager')])]"/>
-  <field name="binding_model_id" ref="stock_batch_picking.model_stock_batch_picking"/>
+  <field name="binding_model_id" ref="stock_picking_batch_extended.model_stock_picking_batch"/>
   <field name="target">new</field>
 </record>
 
