@@ -7,7 +7,7 @@
     'maintainer': 'Camptocamp',
     'category': 'Carrier',
     'complexity': 'normal',
-    'depends': ['base_delivery_carrier_label', 'stock_batch_picking'],
+    'depends': ['base_delivery_carrier_label', 'stock_picking_batch_extended'],
     'website': 'http://github.com/OCA/delivery-carrier',
     'data': [
         'views/stock_batch_picking.xml',

@@ -2,9 +2,9 @@
 <odoo>
 
 <record model="ir.ui.view" id="stock_batch_picking_form">
-  <field name="name">stock.batch.picking.form</field>
-  <field name="model">stock.batch.picking</field>
-  <field name="inherit_id" ref="stock_batch_picking.stock_batch_picking_form"/>
+  <field name="name">stock.picking.batch.form</field>
+  <field name="model">stock.picking.batch</field>
+  <field name="inherit_id" ref="stock_picking_batch_extended.stock_batch_picking_form"/>
   <field name="arch" type="xml">
     <notebook position="inside">
       <page name="carrier" string="Carrier Info">
