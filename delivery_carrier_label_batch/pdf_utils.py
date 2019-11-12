@@ -21,9 +21,10 @@ def assemble_pdf(pdf_list):
 
     output = PdfFileWriter()
     for pdf in pdf_list:
+
         if not pdf:
             continue
-        reader = PdfFileReader(StringIO(pdf))
+        reader = PdfFileReader(BytesIO(pdf))
 
         for page in range(reader.getNumPages()):
             output.addPage(reader.getPage(page))
