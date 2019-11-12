@@ -5,10 +5,10 @@ import queue
 import logging
 import odoo
 import threading
+import codecs
 from contextlib import contextmanager
 from itertools import groupby
 from odoo import _, api, exceptions, fields, models
-
 from ..pdf_utils import assemble_pdf
 
 _logger = logging.getLogger(__name__)
@@ -21,13 +21,13 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
     @api.multi
     def _get_batch_ids(self):
         res = False
-        if (self.env.context.get('active_model') == 'stock.batch.picking' and
+        if (self.env.context.get('active_model') == 'stock.picking.batch' and
                 self.env.context.get('active_ids')):
             res = self.env.context['active_ids']
         return res
 
     batch_ids = fields.Many2many(
-        'stock.batch.picking',
+        'stock.picking.batch',
         string='Picking Batch',
         default=_get_batch_ids)
     generate_new_labels = fields.Boolean(
@@ -86,9 +86,7 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
                 # generate the label of the pack
                 package_ids = [pack.id] if pack else None
                 try:
-                    picking.with_env(new_env).generate_labels(
-                        package_ids=package_ids
-                    )
+                    picking.with_env(new_env).action_generate_carrier_label()
                 except Exception as e:
                     # add information on picking and pack in the exception
                     picking_name = _('Picking: %s') % picking.name
@@ -220,7 +218,7 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
         to_generate = self.batch_ids
         if not self.generate_new_labels:
             already_generated_ids = self.env['ir.attachment'].search(
-                [('res_model', '=', 'stock.batch.picking'),
+                [('res_model', '=', 'stock.picking.batch'),
                  ('res_id', 'in', self.batch_ids.ids)]
             ).mapped('res_id')
             to_generate = to_generate.filtered(
@@ -229,12 +227,12 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
 
         for batch in to_generate:
             labels = self._get_all_pdf(batch)
-            labels = (label.decode('base64') for label in labels if label)
+            labels = (codecs.decode(label, 'base64') for label in labels if label)
             filename = batch.name + '.pdf'
             data = {
                 'name': filename,
                 'res_id': batch.id,
-                'res_model': 'stock.batch.picking',
+                'res_model': 'stock.picking.batch',
                 'datas': base64.b64encode(assemble_pdf(labels)),
                 'datas_fname': filename,
             }
