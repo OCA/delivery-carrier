@@ -30,7 +30,7 @@ class PickingBatchApplyCarrier(models.TransientModel):
             raise exceptions.UserError(
                 _('No selected picking batch'))
 
-        batch_obj = self.env['stock.batch.picking']
+        batch_obj = self.env['stock.picking.batch']
         domain = self._check_domain(batch_ids)
         batchs = batch_obj.search(domain)
         batchs.write({'carrier_id': self.carrier_id.id})
