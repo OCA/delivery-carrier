@@ -24,7 +24,7 @@
   <field name="view_type">form</field>
   <field name="view_mode">form</field>
   <field name="view_id" ref="view_picking_batch_apply_carrier"/>
-  <field name="binding_model_id" ref="stock_batch_picking.model_stock_batch_picking"/>
+  <field name="binding_model_id" ref="stock_picking_batch_extended.model_stock_picking_batch"/>
   <field name="target">new</field>
 </record>
 

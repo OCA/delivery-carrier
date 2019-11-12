@@ -10,7 +10,7 @@ class StockBatchPicking(models.Model):
     to be able to massively set those options on related picking.
 
     """
-    _inherit = "stock.batch.picking"
+    _inherit = "stock.picking.batch"
 
     carrier_id = fields.Many2one(
         'delivery.carrier', 'Carrier',
@@ -52,7 +52,7 @@ class StockBatchPicking(models.Model):
             available_options = self.carrier_id.available_option_ids
             default_options = self._get_options_to_add()
             self.option_ids = [(6, 0, default_options.ids)]
-            self.carrier_type = self.carrier_id.type
+            self.carrier_type = self.carrier_id.delivery_type
             self.carrier_code = self.carrier_id.code
             return {'domain': {
                 'option_ids': [('id', 'in', available_options.ids)],
