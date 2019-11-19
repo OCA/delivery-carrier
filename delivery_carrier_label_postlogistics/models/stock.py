@@ -1,7 +1,8 @@
-# Copyright 2013-2017 Yannick Vaucher (Camptocamp SA)
+# Copyright 2013-2019 Yannick Vaucher (Camptocamp SA)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from operator import attrgetter
 import base64
+from operator import attrgetter
+
 from odoo import _, api, exceptions, fields, models
 
 from ..postlogistics.web_service import PostlogisticsWebService
@@ -124,8 +125,7 @@ class StockPicking(models.Model):
         self.ensure_one()
         if self.carrier_id.delivery_type == 'postlogistics':
             return self._generate_postlogistics_label(package_ids=package_ids)
-        _super = super(StockPicking, self)
-        return _super.generate_shipping_labels(package_ids=package_ids)
+        return super().generate_shipping_labels(package_ids=package_ids)
 
 
 class ShippingLabel(models.Model):
@@ -142,7 +142,7 @@ class ShippingLabel(models.Model):
         :return: list of tuple (code, name)
 
         """
-        file_types = super(ShippingLabel, self)._selection_file_type()
+        file_types = super()._selection_file_type()
         new_types = [('eps', 'EPS'),
                      ('gif', 'GIF'),
                      ('jpg', 'JPG'),

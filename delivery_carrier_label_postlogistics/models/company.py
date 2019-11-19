@@ -1,4 +1,4 @@
-# Copyright 2013-2017 Yannick Vaucher (Camptocamp SA)
+# Copyright 2013-2019 Yannick Vaucher (Camptocamp SA)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo import fields, models
 from odoo.modules.module import get_module_resource
@@ -35,17 +35,17 @@ class ResCompany(models.Model):
         help="Post office which will receive the shipped goods"
     )
 
-    postlogistics_default_label_layout = fields.Many2one(
+    postlogistics_label_layout = fields.Many2one(
         comodel_name='delivery.carrier.template.option',
         string='Default label layout',
         domain=[('postlogistics_type', '=', 'label_layout')],
     )
-    postlogistics_default_output_format = fields.Many2one(
+    postlogistics_output_format = fields.Many2one(
         comodel_name='delivery.carrier.template.option',
         string='Default output format',
         domain=[('postlogistics_type', '=', 'output_format')],
     )
-    postlogistics_default_resolution = fields.Many2one(
+    postlogistics_resolution = fields.Many2one(
         comodel_name='delivery.carrier.template.option',
         string='Default resolution',
         domain=[('postlogistics_type', '=', 'resolution')],
