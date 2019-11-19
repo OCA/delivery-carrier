@@ -1,4 +1,4 @@
-# Copyright 2015-2017 Guewen Baconnier (Camptocamp SA)
+# Copyright 2015-2019 Guewen Baconnier (Camptocamp SA)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo import _, api, exceptions, fields, models
 

@@ -1,4 +1,4 @@
-# Copyright 2013-2017 Yannick Vaucher (Camptocamp SA)
+# Copyright 2013-2019 Yannick Vaucher (Camptocamp SA)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import logging
 

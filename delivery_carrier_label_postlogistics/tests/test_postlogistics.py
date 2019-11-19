@@ -1,4 +1,4 @@
-# Copyright 2015-2017 Camptocamp
+# Copyright 2015-2019 Camptocamp
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import mock
 
@@ -10,8 +10,7 @@ class FakeWS(PostlogisticsWebService):
     def generate_label(self, picking, packages, user_lang=None):
         # call super to pass in the methods so we can check their
         # behavior.
-        super(FakeWS, self).generate_label(picking, packages,
-                                           user_lang=user_lang)
+        super().generate_label(picking, packages, user_lang=user_lang)
         # but returns a fake label
         result = {
             'value': [{'item_id': picking.id,
@@ -35,7 +34,7 @@ output_path = ('odoo.addons.delivery_carrier_label_postlogistics'
 class TestPostlogistics(common.TransactionCase):
 
     def setUp(self):
-        super(TestPostlogistics, self).setUp()
+        super().setUp()
         Product = self.env['product.product']
         partner_id = self.env.ref(
             'delivery_carrier_label_postlogistics.partner_postlogistics').id
@@ -52,9 +51,9 @@ class TestPostlogistics(common.TransactionCase):
         image_resolution = Option.create(
             {'code': '600pp', 'partner_id': partner_id})
         self.env.user.company_id.write({
-            'postlogistics_default_label_layout': label_layout.id,
-            'postlogistics_default_output_format': output_format.id,
-            'postlogistics_default_resolution': image_resolution.id,
+            'postlogistics_label_layout': label_layout.id,
+            'postlogistics_output_format': output_format.id,
+            'postlogistics_resolution': image_resolution.id,
         })
         stock_location = self.env.ref('stock.stock_location_stock')
         customer_location = self.env.ref('stock.stock_location_customers')

@@ -1,4 +1,4 @@
-# Copyright 2018 Camptocamp SA
+# Copyright 2018-2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 from odoo.tests import common
 from odoo.exceptions import UserError
@@ -15,7 +15,7 @@ class TestDelivery(common.SavepointCase):
 
     @classmethod
     def setUpClass(cls):
-        super(TestDelivery, cls).setUpClass()
+        super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         cls.service_group = cls.env['postlogistics.service.group'].create({
             'name': "TEST SERVICE GROUP",
