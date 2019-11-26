@@ -19,12 +19,6 @@ msgstr ""
 "X-Generator: Poedit 1.8.4\n"
 
 #. module: delivery_carrier_label_batch
-#: code:addons/delivery_carrier_label_batch/wizard/generate_labels.py:77
-#, python-format
-msgid "%s %s - %s"
-msgstr "%s %s - %s"
-
-#. module: delivery_carrier_label_batch
 #: model:ir.ui.view,arch_db:delivery_carrier_label_batch.view_picking_batch_apply_carrier
 msgid "Apply"
 msgstr ""
@@ -108,8 +102,8 @@ msgstr "ID"
 #. module: delivery_carrier_label_batch
 #: model:ir.model.fields,help:delivery_carrier_label_batch.field_delivery_carrier_label_generate_generate_new_labels
 msgid ""
-"If this option is used, new labels will be generated for the packs even if they "
-"already have one.\n"
+"If this option is used, new labels will be generated for the packs even if "
+"they already have one.\n"
 "The default is to use the existing label."
 msgstr ""
 
@@ -132,7 +126,7 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: delivery_carrier_label_batch
-#: code:addons/delivery_carrier_label_batch/wizard/generate_labels.py:96
+#: code:addons/delivery_carrier_label_batch/wizard/generate_labels.py:229
 #, python-format
 msgid "No picking batch selected"
 msgstr ""
@@ -150,7 +144,7 @@ msgid "Options"
 msgstr "Einstellungen"
 
 #. module: delivery_carrier_label_batch
-#: code:addons/delivery_carrier_label_batch/wizard/generate_labels.py:75
+#: code:addons/delivery_carrier_label_batch/wizard/generate_labels.py:103
 #, python-format
 msgid "Pack: %s"
 msgstr ""
@@ -166,7 +160,7 @@ msgid "Picking Batch Apply Carrier"
 msgstr ""
 
 #. module: delivery_carrier_label_batch
-#: code:addons/delivery_carrier_label_batch/wizard/generate_labels.py:74
+#: code:addons/delivery_carrier_label_batch/wizard/generate_labels.py:102
 #, python-format
 msgid "Picking: %s"
 msgstr ""
@@ -177,13 +171,23 @@ msgid "Set Options"
 msgstr "Optionen setzen"
 
 #. module: delivery_carrier_label_batch
-#: model:ir.ui.view,arch_db:delivery_carrier_label_batch.view_delivery_carrier_label_generate
+#: code:addons/delivery_carrier_label_batch/wizard/generate_labels.py:197
+#, python-format
 msgid ""
-"This wizard creates an attachement on each selected batch containing picking labels"
+"Some labels couldn't be generated. Please correct following errors and "
+"generate labels again to create the ones which failed.\n"
+"\n"
 msgstr ""
 
 #. module: delivery_carrier_label_batch
-#: code:addons/delivery_carrier_label_batch/models/stock_batch_picking.py:71
+#: model:ir.ui.view,arch_db:delivery_carrier_label_batch.view_delivery_carrier_label_generate
+msgid ""
+"This wizard creates an attachement on each selected batch containing picking "
+"labels"
+msgstr ""
+
+#. module: delivery_carrier_label_batch
+#: code:addons/delivery_carrier_label_batch/models/stock_batch_picking.py:72
 #, python-format
 msgid "User Error !"
 msgstr "Anwenderfehler!"
@@ -191,15 +195,20 @@ msgstr "Anwenderfehler!"
 #. module: delivery_carrier_label_batch
 #: model:ir.ui.view,arch_db:delivery_carrier_label_batch.stock_batch_picking_form
 #: model:ir.ui.view,arch_db:delivery_carrier_label_batch.view_picking_batch_apply_carrier
-msgid "Warning, setting options will erase the existing ones in delivery orders"
-msgstr "Warnung: Diese Einstellungen zur Kommissionierung überschreiben vorherige"
+msgid ""
+"Warning, setting options will erase the existing ones in delivery orders"
+msgstr ""
+"Warnung: Diese Einstellungen zur Kommissionierung überschreiben vorherige"
 
 #. module: delivery_carrier_label_batch
-#: code:addons/delivery_carrier_label_batch/models/stock_batch_picking.py:72
-#, python-format
+#: code:addons/delivery_carrier_label_batch/models/stock_batch_picking.py:73
+#, fuzzy, python-format
+#| msgid ""
+#| "You can not remove a mandatory option.\n"
+#| "Options are reset to default."
 msgid ""
 "You can not remove a mandatory option.\n"
-"Options are reset to default."
+"Please reset options to default."
 msgstr ""
 "Sie können eine Pflichtoption nicht entfernen.\n"
 "Auswahl wird auf Vorgaben zurückgesetzt."
@@ -213,6 +222,9 @@ msgstr "delivery.carrier.label.generate"
 #: model:ir.model,name:delivery_carrier_label_batch.model_stock_batch_picking
 msgid "stock.batch.picking"
 msgstr "stock.batch.picking"
+
+#~ msgid "%s %s - %s"
+#~ msgstr "%s %s - %s"
 
 #~ msgid "Picking List"
 #~ msgstr "Kommissionierschein"
