@@ -6,6 +6,7 @@ from odoo.exceptions import ValidationError
 
 class DeliverySchedule(models.Model):
     _name = 'delivery.schedule'
+    _description = 'Delivery Schedule'
 
     name = fields.Char(required=True)
     color = fields.Integer(string='Color Index')
