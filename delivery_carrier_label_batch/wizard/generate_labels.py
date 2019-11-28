@@ -1,6 +1,5 @@
 # Copyright 2013-2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
-import base64
 import queue
 import logging
 import odoo
@@ -93,8 +92,6 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
         # create a cursor to be thread safe
         with self._do_in_new_env() as new_env:
             for pack, picking, label in group:
-                # generate the label of the pack
-                package_ids = [pack.id] if pack else None
                 try:
                     picking.with_env(new_env).action_generate_carrier_label()
                 except Exception as e:
@@ -241,7 +238,7 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
         for batch in to_generate:
             labels = self._get_all_files(batch)
             labels_by_f_type = self._group_labels_by_file_type(labels)
-            for f_type, labels in labels_by_f_type.iteritems():
+            for f_type, labels in labels_by_f_type.items():
                 labels_bin = [
                     codecs.decode(label, "base64") for label in labels if label
                 ]
@@ -255,7 +252,7 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
                     'name': filename,
                     'res_id': batch.id,
                     'res_model': 'stock.picking.batch',
-                    'datas': assemble_pdf(labels).encode('base64'),
+                    'datas': codecs.encode(filedata, 'base64'),
                     'datas_fname': filename,
                 }
                 self.env['ir.attachment'].create(data)
