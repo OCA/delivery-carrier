@@ -23,16 +23,15 @@
 <record id="action_wiz_create_deposit" model="ir.actions.act_window">
     <field name="name">Create Deposit Slip</field>
     <field name="res_model">delivery.deposit.wizard</field>
-    <field name="view_type">form</field>
     <field name="view_mode">form</field>
    <field name="target">new</field>
 </record>
 
 <!-- MENU -->
 <menuitem id="menu_wiz_delivery_deposit"
-          name="Create Deposit Slip"
           action="action_wiz_create_deposit"
           parent="menu_delivery_deposit_slip"
+          groups="stock.group_stock_user"
           sequence="10" />
 
 </odoo>
