@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2019 PlanetaTIC <info@planetatic.com>
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl). -->
+
+<odoo>
+
+    <record id="view_partner_property_form" model="ir.ui.view">
+        <field name="model">res.partner</field>
+        <field name="name">res.partner.form.partner_delivery_product</field>
+        <field name="inherit_id" ref="delivery.view_partner_property_form"/>
+        <field name="arch" type="xml">
+            <field name="property_delivery_carrier_id" position="after">
+                <field name="delivery_product_id" context="{'default_type': 'service', 'default_sale_ok': False, 'default_purchase_ok': False}"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>
