@@ -18,6 +18,7 @@ _logger = logging.getLogger(__name__)
 class DeliveryCarrierLabelGenerate(models.TransientModel):
 
     _name = 'delivery.carrier.label.generate'
+    _description = "Generate labels from batch pickings"
 
     @api.multi
     def _get_batch_ids(self):
