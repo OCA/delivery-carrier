@@ -1,3 +1,4 @@
-* `Tecnativa <https://www.tecnativa.com>`_:
+* `Tecnativa <https://www.tecnativa.com>`__:
 
-  * Vicent Cubells <vicent.cubells@tecnativa.com>
+  * Vicent Cubells
+  * Pedro M. Baeza
