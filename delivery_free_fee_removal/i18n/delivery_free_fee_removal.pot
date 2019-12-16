@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 11.0\n"
+"Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
@@ -15,6 +15,6 @@ msgstr ""
 
 #. module: delivery_free_fee_removal
 #: model:ir.model,name:delivery_free_fee_removal.model_sale_order
-msgid "Quotation"
+msgid "Sale Order"
 msgstr ""
 
