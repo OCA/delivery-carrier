@@ -11,7 +11,7 @@
 
     <record id="default_refresh_after_picking" model="ir.config_parameter">
         <field name="key">delivery_auto_refresh.refresh_after_picking</field>
-        <field name="value">1</field>
+        <field name="value">0</field>
     </record>
 
 </odoo>
