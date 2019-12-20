@@ -16,6 +16,7 @@ setuptools.setup(
         'odoo11-addon-delivery_price_rule_untaxed',
         'odoo11-addon-partner_delivery_schedule',
         'odoo11-addon-partner_delivery_zone',
+        'odoo11-addon-stock_picking_report_delivery_cost',
     ],
     classifiers=[
         'Programming Language :: Python',
