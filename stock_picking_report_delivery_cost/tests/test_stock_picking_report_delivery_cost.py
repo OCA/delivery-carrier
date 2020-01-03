@@ -53,7 +53,7 @@ class TestStockPickingReportDeliveryCost(common.SavepointCase):
         self.order.action_confirm()
         picking = self.order.picking_ids
         self.assertAlmostEqual(picking.carrier_price_for_report, 0)
-        move = picking.move_lines
+        move = picking.move_ids_without_package
         move.qty_done = move.product_qty
         picking.action_done()
         self.assertAlmostEqual(picking.carrier_price_for_report, 5)
