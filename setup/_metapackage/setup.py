@@ -16,6 +16,7 @@ setuptools.setup(
         'odoo12-addon-partner_delivery_schedule',
         'odoo12-addon-partner_delivery_zone',
         'odoo12-addon-stock_picking_delivery_info_computation',
+        'odoo12-addon-stock_picking_report_delivery_cost',
     ],
     classifiers=[
         'Programming Language :: Python',
