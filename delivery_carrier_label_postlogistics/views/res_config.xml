@@ -9,146 +9,121 @@
     <field name="arch" type="xml">
       <xpath expr="//div[hasclass('settings')]" position="inside">
         <div class="app_settings_block" data-string="Postlogistics" string="Postlogistics" data-key="postlogistics">
-        <h2>Web Service Authentication</h2>
-        <div class="row mt16 o_settings_container" id="postlogistics_ws_authentication">
-          <div class="col-xs-12 col-md-6 o_setting_box" id="credentials">
-            <div class="o_setting_right_pane">
-              <span>Credentials</span>
-              <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." groups="base.group_multi_company"/>
-              <div class="text-muted">
-                For "Swiss Post Business customer" account
-              </div>
-              <div class="content-group">
-                <div class="row mt16">
-                  <label class="col-md-3 o_light_label" for="username"/>
-                  <field name="username" />
-                </div>
-                <div class="row">
-                  <label class="col-md-3 o_light_label" for="password" />
-                  <field name="password" password="1" />
-                </div>
+          <h2>Post digital commerce API Authentication</h2>
+          <div class="row mt16 o_settings_container" id="postlogistics_ws_authentication">
+            <div class="col-xs-12 col-md-6 o_setting_box" id="credentials">
+              <div class="o_setting_right_pane">
+                <button name='%(delivery_carrier_label_postlogistics.action_postlogistics_auth)d' type="action"
+                        string="Oauth Authenticate" class="oe_link"/>
               </div>
             </div>
           </div>
-        </div>
-        <h2>Licenses</h2>
-        <div class="row mt16 o_settings_container" id="postlogistics_licenses">
-          <div class="col-xs-12 col-md-6 o_setting_box" id="configure_licenses_button">
-            <div class="o_setting_right_pane">
-              <button name='%(delivery_carrier_label_postlogistics.action_postlogistics_licenses)d' type="action"
-                      string="Configure licenses" class="oe_link"/>
+          <h2>Licenses</h2>
+          <div class="row mt16 o_settings_container" id="postlogistics_licenses">
+            <div class="col-xs-12 col-md-6 o_setting_box" id="configure_licenses_button">
+              <div class="o_setting_right_pane">
+                <button name='%(delivery_carrier_label_postlogistics.action_postlogistics_licenses)d' type="action"
+                        string="Configure licenses" class="oe_link"/>
+              </div>
             </div>
           </div>
-        </div>
-        <h2>Sender Informations</h2>
-        <div class="row mt16 o_settings_container" id="postlogistics_sender_infos">
-          <div class="col-xs-12 col-md-6 o_setting_box" id="sender_logo">
-            <div class="o_setting_right_pane">
-              <span>Logo</span>
-              <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." groups="base.group_multi_company"/>
-              <div class="text-muted">
-                Company Logo on Post labels
-              </div>
-              <div class="content-group">
-                <div class="mt16">
-                  <field name="logo" widget="image" class="o_light_label"/>
+          <h2>Sender Informations</h2>
+          <div class="row mt16 o_settings_container" id="postlogistics_sender_infos">
+            <div class="col-xs-12 col-md-6 o_setting_box" id="sender_logo">
+              <div class="o_setting_right_pane">
+                <span>Logo</span>
+                <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." groups="base.group_multi_company"/>
+                <div class="text-muted">
+                  Company Logo on Post labels
+                </div>
+                <div class="content-group">
+                  <div class="mt16">
+                    <field name="logo" widget="image" class="o_light_label"/>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col-xs-12 col-md-6 o_setting_box" id="sender_post_office">
-            <div class="o_setting_right_pane">
-              <span>Post office</span>
-              <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." groups="base.group_multi_company"/>
-              <div class="text-muted">
-                Post office which will receive the shipped goods
-              </div>
-              <div class="content-group">
-                <div class="mt16">
-                  <field name="office" class="o_light_label"/>
+            <div class="col-xs-12 col-md-6 o_setting_box" id="sender_post_office">
+              <div class="o_setting_right_pane">
+                <span>Post office</span>
+                <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." groups="base.group_multi_company"/>
+                <div class="text-muted">
+                  Post office which will receive the shipped goods
+                </div>
+                <div class="content-group">
+                  <div class="mt16">
+                    <field name="office" class="o_light_label"/>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <h2>Default configs</h2>
-        <div class="row mt16 o_settings_container" id="postlogistics_default_configs">
-          <div class="col-xs-12 col-md-6 o_setting_box" id="label_layout">
-            <div class="o_setting_right_pane">
-              <label for="label_layout"/>
-              <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." groups="base.group_multi_company"/>
-              <div class="text-muted">
+          <h2>Default configs</h2>
+          <div class="row mt16 o_settings_container" id="postlogistics_default_configs">
+            <div class="col-xs-12 col-md-6 o_setting_box" id="label_layout">
+              <div class="o_setting_right_pane">
+                <label for="label_layout"/>
+                <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." groups="base.group_multi_company"/>
+                <div class="text-muted">
 
+                </div>
+                <div class="content-group">
+                  <div class="mt16">
+                    <field name="label_layout" class="o_light_label"/>
+                  </div>
+                </div>
               </div>
-              <div class="content-group">
-                <div class="mt16">
-                  <field name="label_layout" class="o_light_label"/>
+            </div>
+            <div class="col-xs-12 col-md-6 o_setting_box" id="output_format">
+              <div class="o_setting_right_pane">
+                <label for="output_format"/>
+                <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." groups="base.group_multi_company"/>
+                <div class="content-group">
+                  <div class="mt16">
+                    <field name="output_format" class="o_light_label"/>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-md-6 o_setting_box" id="resolution">
+              <div class="o_setting_right_pane">
+                <label for="resolution"/>
+                <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." groups="base.group_multi_company"/>
+                <div class="content-group">
+                  <div class="mt16">
+                    <field name="resolution" class="o_light_label"/>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-xs-12 col-md-6 o_setting_box" id="output_format">
-            <div class="o_setting_right_pane">
-              <label for="output_format"/>
-              <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." groups="base.group_multi_company"/>
-              <div class="content-group">
-                <div class="mt16">
-                  <field name="output_format" class="o_light_label"/>
+          <h2>Tracking numbers</h2>
+          <div class="row mt16 o_settings_container" id="postlogistics_tracking_numbers">
+            <div class="col-xs-12 col-md-6 o_setting_box" id="tracking_format">
+              <div class="o_setting_right_pane">
+                <label for="tracking_format"/>
+                <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." groups="base.group_multi_company"/>
+                <div class="content-group">
+                  <div class="mt16">
+                    <field name="tracking_format" class="o_light_label"/>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-xs-12 col-md-6 o_setting_box" id="resolution">
-            <div class="o_setting_right_pane">
-              <label for="resolution"/>
-              <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." groups="base.group_multi_company"/>
-              <div class="content-group">
-                <div class="mt16">
-                  <field name="resolution" class="o_light_label"/>
-                </div>
+          <h2>Other</h2>
+          <div class="row mt16 o_settings_container" id="postlogistics_other">
+            <div class="col-xs-12 col-md-6 o_setting_box" id="proclima_logo">
+              <div class="o_setting_left_pane">
+                <field name="proclima_logo"/>
+              </div>
+              <div class="o_setting_right_pane">
+                <label for="proclima_logo"/>
+                <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." groups="base.group_multi_company"/>
               </div>
             </div>
           </div>
         </div>
-        <h2>Tracking numbers</h2>
-        <div class="row mt16 o_settings_container" id="postlogistics_tracking_numbers">
-          <div class="col-xs-12 col-md-6 o_setting_box" id="tracking_format">
-            <div class="o_setting_right_pane">
-              <label for="tracking_format"/>
-              <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." groups="base.group_multi_company"/>
-              <div class="content-group">
-                <div class="mt16">
-                  <field name="tracking_format" class="o_light_label"/>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <h2>Other</h2>
-        <div class="row mt16 o_settings_container" id="postlogistics_other">
-          <div class="col-xs-12 col-md-6 o_setting_box" id="proclima_logo">
-            <div class="o_setting_left_pane">
-              <field name="proclima_logo"/>
-            </div>
-            <div class="o_setting_right_pane">
-              <label for="proclima_logo"/>
-              <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." groups="base.group_multi_company"/>
-            </div>
-          </div>
-        </div>
-        <h2>Actions</h2>
-        <div class="row mt16 o_settings_container" id="postlogistics_actions">
-          <div class="col-xs-12 col-md-6 o_setting_box" id="actions">
-            <div class="o_setting_left_pane">
-              <button string="Update PostLogistics Services"
-                type="object" name="update_postlogistics_options" class="oe_highlight"/>
-              <p/>
-              <button string="Assign PostLogistics Licenses to service groups"
-                type="object" name="assign_licenses_to_service_groups" class="oe_highlight"/>
-            </div>
-          </div>
-        </div>
-      </div>
       </xpath>
     </field>
   </record>

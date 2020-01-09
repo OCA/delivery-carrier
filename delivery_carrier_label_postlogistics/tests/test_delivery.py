@@ -17,17 +17,12 @@ class TestDelivery(common.SavepointCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
-        cls.service_group = cls.env['postlogistics.service.group'].create({
-            'name': "TEST SERVICE GROUP",
-            'group_extid': 45879089,    # Random
-        })
         cls.carrier = cls.env['delivery.carrier'].create({
             'name': "TEST CARRIER",
             'delivery_type': 'postlogistics',
             'product_id': cls.env.ref(
                 'delivery_carrier_label_postlogistics.'
                 'product_postlogistics_service').id,
-            'postlogistics_service_group_id': cls.service_group.id,
         })
         cls.carrier_option = cls.create_carrier_option()
 

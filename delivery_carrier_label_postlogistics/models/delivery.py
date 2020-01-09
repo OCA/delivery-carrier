@@ -31,25 +31,6 @@ class PostlogisticsLicense(models.Model):
     )
 
 
-class PostlogisticsServiceGroup(models.Model):
-    _name = 'postlogistics.service.group'
-    _description = 'PostLogistics Service Group'
-
-    name = fields.Char(string='Description', translate=True, required=True)
-    group_extid = fields.Integer(string='Group ID', required=True)
-    postlogistics_license_ids = fields.Many2many(
-        comodel_name='postlogistics.license',
-        relation='postlogistics_license_service_groups_rel',
-        column1='license_id',
-        column2='group_id',
-        string='PostLogistics Franking License')
-
-    _sql_constraints = [
-        ('group_extid_uniq', 'unique(group_extid)',
-         "A service group ID must be unique.")
-    ]
-
-
 POSTLOGISTIC_TYPES = [
     ('label_layout', 'Label Layout'),
     ('output_format', 'Output Format'),
@@ -65,10 +46,6 @@ class DeliveryCarrierTemplateOption(models.Model):
     _inherit = 'delivery.carrier.template.option'
 
     name = fields.Char(translate=True)
-    postlogistics_service_group_id = fields.Many2one(
-        comodel_name='postlogistics.service.group',
-        string='PostLogistics Service Group',
-    )
     postlogistics_type = fields.Selection(
         selection=POSTLOGISTIC_TYPES,
         string="PostLogistics option type",
@@ -157,8 +134,6 @@ class DeliveryCarrier(models.Model):
             self.postlogistics_basic_service_ids = options
 
     @api.depends('delivery_type',
-                 'postlogistics_service_group_id',
-                 'postlogistics_basic_service_ids',
                  'postlogistics_basic_service_ids',
                  'available_option_ids',
                  'available_option_ids.postlogistics_type',
@@ -177,20 +152,13 @@ class DeliveryCarrier(models.Model):
             if carrier.delivery_type != 'postlogistics':
                 domain.append(('partner_id', '=', False))
             else:
-                service_group = carrier.postlogistics_service_group_id
-                if service_group:
-                    basic_services = carrier.postlogistics_basic_service_ids
-                    services = option_template_obj.search(
-                        [('postlogistics_service_group_id', '=',
-                          service_group.id)]
+                basic_services = carrier.postlogistics_basic_service_ids
+                if basic_services:
+                    related_services = option_template_obj.search(
+                        [('postlogistics_basic_service_ids', 'in',
+                          basic_services.ids)]
                     )
-                    allowed |= services
-                    if basic_services:
-                        related_services = option_template_obj.search(
-                            [('postlogistics_basic_service_ids', 'in',
-                              basic_services.ids)]
-                        )
-                        allowed |= related_services
+                    allowed |= related_services
 
                 # Allows to set multiple optional single option in order to
                 # let the user select them
@@ -222,12 +190,6 @@ class DeliveryCarrier(models.Model):
     postlogistics_license_id = fields.Many2one(
         comodel_name='postlogistics.license',
         string='PostLogistics Franking License',
-    )
-    postlogistics_service_group_id = fields.Many2one(
-        comodel_name='postlogistics.service.group',
-        string='PostLogistics Service Group',
-        help="Service group defines the available options for "
-             "this delivery method.",
     )
     postlogistics_basic_service_ids = fields.One2many(
         comodel_name='delivery.carrier.template.option',
