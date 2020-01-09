@@ -16,6 +16,7 @@
  'data': ['data/partner.xml',
           'data/product.xml',
           'data/delivery.xml',
+          'wizards/postlogistics_oauth.xml',
           'views/delivery.xml',
           'views/postlogistics_license.xml',
           'views/res_config.xml',
@@ -25,8 +26,4 @@
  'installable': True,
  'auto_install': False,
  'application': True,
- 'external_dependencies': {
-     'python': ['suds'],
- },
- 'post_load': 'patch_suds',
  }
