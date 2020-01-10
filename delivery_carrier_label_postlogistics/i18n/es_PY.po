@@ -76,7 +76,7 @@ msgid "Assign PostLogistics Licenses to service groups"
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:100
+#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:80
 #, python-format
 msgid ""
 "Authorization Required\n"
@@ -159,8 +159,8 @@ msgid "Configure licenses"
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/models/res_config.py:118
-#: code:addons/delivery_carrier_label_postlogistics/models/res_config.py:180
+#: code:addons/delivery_carrier_label_postlogistics/models/res_config.py:123
+#: code:addons/delivery_carrier_label_postlogistics/models/res_config.py:185
 #, python-format
 msgid ""
 "Could not retrieve Postlogistics base services:\n"
@@ -168,7 +168,7 @@ msgid ""
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/models/res_config.py:66
+#: code:addons/delivery_carrier_label_postlogistics/models/res_config.py:71
 #, python-format
 msgid ""
 "Could not retrieve Postlogistics delivery instructions:\n"
@@ -176,7 +176,7 @@ msgid ""
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/models/res_config.py:250
+#: code:addons/delivery_carrier_label_postlogistics/models/res_config.py:255
 #, python-format
 msgid ""
 "Could not retrieve Postlogistics group services:\n"
@@ -184,7 +184,7 @@ msgid ""
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/models/res_config.py:341
+#: code:addons/delivery_carrier_label_postlogistics/models/res_config.py:346
 #, python-format
 msgid ""
 "Could not retrieve allowed Postlogistics service groups for the %s licence:\n"
@@ -376,7 +376,7 @@ msgid "Last Updated on"
 msgstr "Ultima actualización en"
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:413
+#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:393
 #, python-format
 msgid "Layout not set"
 msgstr ""
@@ -433,7 +433,7 @@ msgid "Output Resolution"
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:419
+#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:399
 #, python-format
 msgid "Output format not set"
 msgstr ""
@@ -523,7 +523,7 @@ msgid "Print ProClima logo"
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:425
+#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:405
 #, python-format
 msgid "Resolution not set"
 msgstr ""
@@ -631,6 +631,12 @@ msgid "Username"
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_config_settings_version
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_company_postlogistics_version
+msgid "Version"
+msgstr ""
+
+#. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_postlogistics_config_settings_wsdl_url
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_company_postlogistics_wsdl_url
 msgid "WSDL URL"
@@ -647,7 +653,7 @@ msgid "Will generate Specimen labels using test end point of webservice."
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:405
+#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:385
 #, python-format
 msgid ""
 "You need to configure %s. You can set a defaultvalue in Settings/"
@@ -661,7 +667,7 @@ msgid "ZPL2"
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:414
+#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:394
 #, python-format
 msgid "label layout"
 msgstr ""
@@ -672,13 +678,13 @@ msgid "or"
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:420
+#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:400
 #, python-format
 msgid "output format"
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:426
+#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:406
 #, python-format
 msgid "resolution"
 msgstr ""
@@ -686,4 +692,14 @@ msgstr ""
 #. module: delivery_carrier_label_postlogistics
 #: model:delivery.carrier.template.option,name:delivery_carrier_label_postlogistics.postlogistics_output_format_option_spdf
 msgid "sPDF"
+msgstr ""
+
+#. module: delivery_carrier_label_postlogistics
+#: selection:res.company,postlogistics_version:0
+msgid "v2.2 (deprecated)"
+msgstr ""
+
+#. module: delivery_carrier_label_postlogistics
+#: selection:res.company,postlogistics_version:0
+msgid "v2.4"
 msgstr ""
