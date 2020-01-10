@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="delivery_carrier" model="delivery.carrier">
+        <field name="name">Delivery With Drop-off Sites</field>
+        <field name="delivery_type">fixed</field>
+        <field name="with_dropoff_site" eval="True"/>
+        <field name="fixed_price">30.0</field>
+        <field name="country_ids" eval="[(4, ref('base.fr')), (4, ref('base.be'))]"/>
+        <field name="partner_id" ref="delivery.res_partner_delivery"/>
+    </record>
+
+</odoo>
