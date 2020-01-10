@@ -6,7 +6,7 @@ import logging
 from openerp import api, exceptions, fields, models, _
 
 from ..postlogistics.web_service import PostlogisticsWebService
-from . company import ResCompany
+from . company import ResCompany, POSTLOGISTICS_VERSIONS
 
 _logger = logging.getLogger(__name__)
 
@@ -23,6 +23,11 @@ class PostlogisticsConfigSettings(models.TransientModel):
     wsdl_url = fields.Char(
         related='company_id.postlogistics_wsdl_url',
         readonly=True,
+    )
+    version = fields.Selection(
+        selection=POSTLOGISTICS_VERSIONS,
+        string="Version",
+        default=POSTLOGISTICS_VERSIONS[0][0],
     )
     test_mode = fields.Boolean(
         related='company_id.postlogistics_test_mode',
