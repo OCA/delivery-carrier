@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0\n"
+"Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
@@ -59,11 +59,6 @@ msgid "Address Type"
 msgstr ""
 
 #. module: delivery_dropoff_site
-#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site_use_b2c_info
-msgid "Advanced address"
-msgstr ""
-
-#. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site_bank_account_count
 msgid "Bank"
 msgstr ""
@@ -79,8 +74,8 @@ msgid "Barcode"
 msgstr ""
 
 #. module: delivery_dropoff_site
-#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site_message_bounce
-msgid "Bounce"
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site_birthdate
+msgid "Birthdate"
 msgstr ""
 
 #. module: delivery_dropoff_site
@@ -97,7 +92,6 @@ msgstr ""
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site_dropoff_site_carrier_id
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_res_partner_dropoff_site_carrier_id
-#: model:ir.model.fields,field_description:delivery_dropoff_site.field_res_users_dropoff_site_carrier_id
 msgid "Carrier of the Drop-off Site"
 msgstr ""
 
@@ -159,16 +153,6 @@ msgid "Company"
 msgstr ""
 
 #. module: delivery_dropoff_site
-#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site_company_name
-msgid "Company Name"
-msgstr ""
-
-#. module: delivery_dropoff_site
-#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site_commercial_company_name
-msgid "Company Name Entity"
-msgstr ""
-
-#. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site_company_type
 msgid "Company Type"
 msgstr ""
@@ -190,13 +174,8 @@ msgid "Contracts"
 msgstr ""
 
 #. module: delivery_dropoff_site
-#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site_payment_token_count
-msgid "Count Payment Token"
-msgstr ""
-
-#. module: delivery_dropoff_site
-#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site_message_bounce
-msgid "Counter of the number of bounced emails for this contact"
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site_payment_method_count
+msgid "Count Payment Method"
 msgstr ""
 
 #. module: delivery_dropoff_site
@@ -233,7 +212,7 @@ msgstr ""
 
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site_property_payment_term_id
-msgid "Customer Payment Terms"
+msgid "Customer Payment Term"
 msgstr ""
 
 #. module: delivery_dropoff_site
@@ -247,11 +226,6 @@ msgid "Date of the last message posted on the record."
 msgstr ""
 
 #. module: delivery_dropoff_site
-#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site_trust
-msgid "Degree of trust you have in this debtor"
-msgstr ""
-
-#. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site_carrier_id
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site_property_delivery_carrier_id
 #: model:ir.ui.view,arch_db:delivery_dropoff_site.view_partner_dropoff_site_search
@@ -261,7 +235,6 @@ msgstr ""
 #. module: delivery_dropoff_site
 #: model:delivery.carrier,name:delivery_dropoff_site.delivery_carrier
 #: model:product.product,name:delivery_dropoff_site.delivery_carrier_product_product
-#: model:product.template,name:delivery_dropoff_site.delivery_carrier_product_template
 msgid "Delivery With Drop-off Sites"
 msgstr ""
 
@@ -276,24 +249,8 @@ msgid "Display Name"
 msgstr ""
 
 #. module: delivery_dropoff_site
-#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site_use_b2c_info
-msgid "Display additional information for home delivery (b2c)"
-msgstr ""
-
-#. module: delivery_dropoff_site
-#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site_door_code
-msgid "Door Code"
-msgstr ""
-
-#. module: delivery_dropoff_site
-#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site_door_code2
-msgid "Door Code 2"
-msgstr ""
-
-#. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site_dropoff_site_id
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_res_partner_dropoff_site_id
-#: model:ir.model.fields,field_description:delivery_dropoff_site.field_res_users_dropoff_site_id
 msgid "Drop-off Site"
 msgstr ""
 
@@ -319,13 +276,7 @@ msgstr ""
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site_dropoff_site_ids
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_res_partner_dropoff_site_ids
-#: model:ir.model.fields,field_description:delivery_dropoff_site.field_res_users_dropoff_site_ids
 msgid "Dropoff site ids"
-msgstr ""
-
-#. module: delivery_dropoff_site
-#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site_partner_share
-msgid "Either customer (no user), either shared user. Indicated the current partner is a customer without access or with a limited access created for sharing data."
 msgstr ""
 
 #. module: delivery_dropoff_site
@@ -382,18 +333,13 @@ msgid "Followers (Partners)"
 msgstr ""
 
 #. module: delivery_dropoff_site
-#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site_email_formatted
-msgid "Format email address \"Name <email@domain>\""
-msgstr ""
-
-#. module: delivery_dropoff_site
-#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site_email_formatted
-msgid "Formatted Email"
-msgstr ""
-
-#. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site_partner_latitude
 msgid "Geo Latitude"
+msgstr ""
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site_date_localization
+msgid "Geo Localization Date"
 msgstr ""
 
 #. module: delivery_dropoff_site
@@ -404,11 +350,6 @@ msgstr ""
 #. module: delivery_dropoff_site
 #: model:ir.ui.view,arch_db:delivery_dropoff_site.view_partner_dropoff_site_form
 msgid "Geolocate"
-msgstr ""
-
-#. module: delivery_dropoff_site
-#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site_date_localization
-msgid "Geolocation Date"
 msgstr ""
 
 #. module: delivery_dropoff_site
@@ -442,11 +383,6 @@ msgid "If opt-out is checked, this contact has refused to receive emails for mas
 msgstr ""
 
 #. module: delivery_dropoff_site
-#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site_team_id
-msgid "If set, sale team used notably for sales and assignations related to this partner"
-msgstr ""
-
-#. module: delivery_dropoff_site
 #: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site_lang
 msgid "If the selected language is loaded in the system, all documents related to this contact will be printed in this language. If not, it will be English."
 msgstr ""
@@ -454,16 +390,6 @@ msgstr ""
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site_image
 msgid "Image"
-msgstr ""
-
-#. module: delivery_dropoff_site
-#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site_intercom
-msgid "Informations for Intercom such as name or number on the intercom"
-msgstr ""
-
-#. module: delivery_dropoff_site
-#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site_intercom
-msgid "Intercom"
 msgstr ""
 
 #. module: delivery_dropoff_site
@@ -482,11 +408,6 @@ msgid "Internal note..."
 msgstr ""
 
 #. module: delivery_dropoff_site
-#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site_invoice_warn
-msgid "Invoice"
-msgstr ""
-
-#. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site_invoice_ids
 msgid "Invoices"
 msgstr ""
@@ -494,7 +415,6 @@ msgstr ""
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site_is_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_res_partner_is_dropoff_site
-#: model:ir.model.fields,field_description:delivery_dropoff_site.field_res_users_is_dropoff_site
 msgid "Is Drop-off Site"
 msgstr ""
 
@@ -582,26 +502,6 @@ msgid "Medium-sized image of this contact. It is automatically resized as a 128x
 msgstr ""
 
 #. module: delivery_dropoff_site
-#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site_invoice_warn_msg
-msgid "Message for Invoice"
-msgstr ""
-
-#. module: delivery_dropoff_site
-#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site_purchase_warn_msg
-msgid "Message for Purchase Order"
-msgstr ""
-
-#. module: delivery_dropoff_site
-#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site_sale_warn_msg
-msgid "Message for Sales Order"
-msgstr ""
-
-#. module: delivery_dropoff_site
-#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site_picking_warn_msg
-msgid "Message for Stock Picking"
-msgstr ""
-
-#. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site_message_ids
 msgid "Messages"
 msgstr ""
@@ -659,8 +559,8 @@ msgid "Payable Limit"
 msgstr ""
 
 #. module: delivery_dropoff_site
-#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site_payment_token_ids
-msgid "Payment Tokens"
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site_payment_method_ids
+msgid "Payment Methods"
 msgstr ""
 
 #. module: delivery_dropoff_site
@@ -681,11 +581,6 @@ msgid "Procurement Requisition"
 msgstr ""
 
 #. module: delivery_dropoff_site
-#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site_purchase_warn
-msgid "Purchase Order"
-msgstr ""
-
-#. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site_parent_id
 msgid "Related Company"
 msgstr ""
@@ -698,7 +593,6 @@ msgstr ""
 #. module: delivery_dropoff_site
 #: model:ir.model,name:delivery_dropoff_site.model_sale_order
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site_sale_order_ids
-#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site_sale_warn
 msgid "Sales Order"
 msgstr ""
 
@@ -713,21 +607,18 @@ msgid "Salesperson"
 msgstr ""
 
 #. module: delivery_dropoff_site
-#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site_invoice_warn
-#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site_picking_warn
-#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site_purchase_warn
-#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site_sale_warn
-msgid "Selecting the \"Warning\" option will notify user with the message, Selecting \"Blocking Message\" will throw an exception with the message and block the flow. The Message has to be written in the next field."
+#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site_use_parent_address
+msgid "Select this if you want to set company's address information  for this contact"
 msgstr ""
 
 #. module: delivery_dropoff_site
-#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site_self
-msgid "Self"
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site_signup_expiration
+msgid "Signup Expiration"
 msgstr ""
 
 #. module: delivery_dropoff_site
-#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site_partner_share
-msgid "Share Partner"
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site_signup_token
+msgid "Signup Token"
 msgstr ""
 
 #. module: delivery_dropoff_site
@@ -743,16 +634,6 @@ msgstr ""
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site_signup_url
 msgid "Signup URL"
-msgstr ""
-
-#. module: delivery_dropoff_site
-#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site_signup_expiration
-msgid "Signup expiration"
-msgstr ""
-
-#. module: delivery_dropoff_site
-#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site_signup_token
-msgid "Signup token"
 msgstr ""
 
 #. module: delivery_dropoff_site
@@ -774,11 +655,6 @@ msgstr ""
 #. module: delivery_dropoff_site
 #: model:ir.model,name:delivery_dropoff_site.model_stock_move
 msgid "Stock Move"
-msgstr ""
-
-#. module: delivery_dropoff_site
-#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site_picking_warn
-msgid "Stock Picking"
 msgstr ""
 
 #. module: delivery_dropoff_site
@@ -819,6 +695,11 @@ msgstr ""
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site_vat
 msgid "Tax Identification Number. Fill it if the company is subjected to taxes. Used by the some of the legal statements."
+msgstr ""
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site_company_type
+msgid "Technical field, used only to display a boolean using a radio button. As for Odoo v9 RadioButton cannot be used on boolean fields, this one serves as interface. Due to the old API limitations with interface function field, we implement it by hand instead of a true function field. When migrating to the new API the code should be simplified. Changing thecompany_type of a company contact into a company will not displaythis contact as a company contact but as a standalone company."
 msgstr ""
 
 #. module: delivery_dropoff_site
@@ -947,6 +828,11 @@ msgid "Unread Messages Counter"
 msgstr ""
 
 #. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site_use_parent_address
+msgid "Use Company Address"
+msgstr ""
+
+#. module: delivery_dropoff_site
 #: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site_type
 msgid "Used to select automatically the right address according to the context in sales and purchases documents."
 msgstr ""
@@ -968,7 +854,7 @@ msgstr ""
 
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site_property_supplier_payment_term_id
-msgid "Vendor Payment Terms"
+msgid "Vendor Payment Term"
 msgstr ""
 
 #. module: delivery_dropoff_site
