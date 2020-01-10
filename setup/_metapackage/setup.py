@@ -12,6 +12,7 @@ setuptools.setup(
         'odoo9-addon-delivery_carrier_deposit',
         'odoo9-addon-delivery_carrier_label_batch',
         'odoo9-addon-delivery_carrier_label_postlogistics',
+        'odoo9-addon-delivery_dropoff_site',
         'odoo9-addon-delivery_multi_destination',
         'odoo9-addon-delivery_roulier',
         'odoo9-addon-delivery_roulier_dpd',
