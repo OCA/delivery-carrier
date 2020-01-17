@@ -52,7 +52,6 @@
                         <group>
                             <field name="phone" widget="phone"/>
                             <field name="mobile" widget="phone"/>
-                            <field name="fax"/>
                             <field name="email" widget="email"/>
                             <field name="website" widget="url" placeholder="e.g. www.odoo.com"/>
                             <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
@@ -118,7 +117,7 @@
     <menuitem
         id="menu_dropoff_site_sale"
         action="action_dropoff_site"
-        parent="delivery.sale_menu_delivery"/>
+        parent="sale.menu_sales_config" sequence="5"/>
 
     <menuitem
         id="menu_dropoff_site_stock"
