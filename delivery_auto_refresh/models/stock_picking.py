@@ -37,7 +37,10 @@ class StockPicking(models.Model):
         total = sale_order.currency_id._convert(
             total, sale_order.company_id.currency_id, sale_order.company_id,
             sale_order.date_order)
-        so_line.price_unit = self.carrier_id._get_price_from_picking(
-            total, weight, volume, quantity,
-        )
+        if self.carrier_id.carrier_type == "fixed":
+            so_line.price_unit = self.carrier_id.fixed_price
+        else:
+            so_line.price_unit = self.carrier_id._get_price_from_picking(
+                total, weight, volume, quantity,
+            )
         return res
