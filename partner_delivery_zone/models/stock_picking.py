@@ -7,10 +7,16 @@ class StockPicking(models.Model):
     _inherit = "stock.picking"
 
     delivery_zone_id = fields.Many2one(
-        comodel_name="partner.delivery.zone", string="Delivery Zone", index=True
+        comodel_name="partner.delivery.zone",
+        string="Delivery Zone",
+        index=True,
+        store=True,
+        readonly=False,
+        compute="_compute_delivery_zone_id",
     )
 
-    @api.onchange("partner_id")
-    def onchange_partner_id_zone(self):
-        if self.partner_id.delivery_zone_id:
-            self.delivery_zone_id = self.partner_id.delivery_zone_id
+    @api.depends("partner_id")
+    def _compute_delivery_zone_id(self):
+        for picking in self:
+            if picking.partner_id.delivery_zone_id:
+                picking.delivery_zone_id = picking.partner_id.delivery_zone_id
