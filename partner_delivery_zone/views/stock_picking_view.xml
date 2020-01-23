@@ -20,13 +20,13 @@
         <field name="model">stock.picking</field>
         <field name="inherit_id" ref="stock.view_picking_internal_search"/>
         <field name="arch" type="xml">
-            <field name="group_id" position="after">
-                <separator/>
+            <field name="picking_type_id" position="after">
                 <field name="delivery_zone_id"/>
+                <separator/>
             </field>
-            <xpath expr="//filter[@name='picking_type']/.." position="inside">
+            <filter name="activities_exception" position="after">
                 <filter name="delivery_zone_group" string="Delivery Zone" context="{'group_by': 'delivery_zone_id'}"/>
-            </xpath>
+            </filter>
         </field>
     </record>
 
@@ -34,6 +34,7 @@
         <field name="name">stock.picking.delivery.kanban</field>
         <field name="model">stock.picking</field>
         <field name="inherit_id" ref="stock.stock_picking_kanban"/>
+        <field name="priority">999</field>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='date']" position="after">
                 <field name="delivery_zone_id" />
