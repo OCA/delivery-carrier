@@ -61,13 +61,10 @@ class DeliverySchedule(models.Model):
             ("sunday", _("Sunday")),
         ]
 
-    @api.multi
     def name_get(self):
         result = []
         for schedule in self:
-            hour_from = "{:02.0f}:{:02.0f}".format(
-                *divmod(schedule.hour_from * 60, 60)
-            )
+            hour_from = "{:02.0f}:{:02.0f}".format(*divmod(schedule.hour_from * 60, 60))
             hour_to = "{:02.0f}:{:02.0f}".format(*divmod(schedule.hour_to * 60, 60))
             days_accepted = [d[1][:2] for d in self._days_of_week() if schedule[d[0]]]
             days = (
