@@ -4,11 +4,8 @@ from odoo import fields, models
 
 
 class PartnerDeliveryZone(models.Model):
-    _name = 'partner.delivery.zone'
-    _description = 'Partner delivery zone'
+    _name = "partner.delivery.zone"
+    _description = "Partner delivery zone"
 
     code = fields.Char()
-    name = fields.Char(
-        string='Zone',
-        required=True,
-    )
+    name = fields.Char(string="Zone", required=True)
