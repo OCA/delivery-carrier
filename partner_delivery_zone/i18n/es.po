@@ -98,7 +98,9 @@ msgstr "'partner.delivery.zone'"
 
 #. module: partner_delivery_zone
 #: model:ir.model,name:partner_delivery_zone.model_sale_order
-msgid "Sale Order"
+#, fuzzy
+#| msgid "Sale Order"
+msgid "Sales Order"
 msgstr "Pedido de Venta"
 
 #. module: partner_delivery_zone
