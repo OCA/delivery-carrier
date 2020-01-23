@@ -41,7 +41,6 @@ class TestPartnerDeliveryZone(SavepointCase):
             }
         )
         so.onchange_partner_id()
-        so.onchange_partner_shipping_id_delivery_zone()
         cls.order = cls.env["sale.order"].create(so._convert_to_write(so._cache))
         cls.View = cls.env["ir.ui.view"]
 
@@ -50,7 +49,6 @@ class TestPartnerDeliveryZone(SavepointCase):
             {"name": "other partner", "delivery_zone_id": self.delivery_zone_b.id}
         )
         self.order.partner_shipping_id = other_partner
-        self.order.onchange_partner_shipping_id_delivery_zone()
         self.assertEqual(self.order.delivery_zone_id, other_partner.delivery_zone_id)
 
     def test_sale_order_confirm(self):
@@ -65,7 +63,6 @@ class TestPartnerDeliveryZone(SavepointCase):
         )
         self.order.action_confirm()
         self.order.picking_ids.partner_id = partner2
-        self.order.picking_ids.onchange_partner_id_zone()
         self.assertEqual(self.order.picking_ids.delivery_zone_id, self.delivery_zone_b)
 
     def _get_ctx_from_view(self, res):
