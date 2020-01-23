@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* partner_delivery_zone
+# 	* partner_delivery_zone
 #
 msgid ""
 msgstr ""
@@ -95,7 +95,9 @@ msgstr "业务伙伴交货区域"
 
 #. module: partner_delivery_zone
 #: model:ir.model,name:partner_delivery_zone.model_sale_order
-msgid "Sale Order"
+#, fuzzy
+#| msgid "Sale Order"
+msgid "Sales Order"
 msgstr "销售订单"
 
 #. module: partner_delivery_zone

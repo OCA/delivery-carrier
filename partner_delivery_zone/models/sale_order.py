@@ -10,10 +10,14 @@ class SaleOrder(models.Model):
         comodel_name="partner.delivery.zone",
         string="Delivery Zone",
         ondelete="restrict",
+        compute="_compute_delivery_zone_id",
+        store=True,
+        readonly=False,
         index=True,
     )
 
-    @api.onchange("partner_shipping_id")
-    def onchange_partner_shipping_id_delivery_zone(self):
-        if self.partner_shipping_id.delivery_zone_id:
-            self.delivery_zone_id = self.partner_shipping_id.delivery_zone_id
+    @api.depends("partner_shipping_id")
+    def _compute_delivery_zone_id(self):
+        for so in self:
+            if so.partner_shipping_id.delivery_zone_id:
+                so.delivery_zone_id = so.partner_shipping_id.delivery_zone_id
