@@ -24,7 +24,7 @@ msgid "<strong>Zone</strong>"
 msgstr "<strong>Zona</strong>"
 
 #. module: partner_delivery_zone
-#: model:ir.model.fields,field_description:partner_delivery_zone.field_partner_delivery_zone_active
+#: model:ir.model.fields,field_description:partner_delivery_zone.field_partner_delivery_zone__active
 msgid "Active"
 msgstr "Activo"
 
@@ -34,7 +34,7 @@ msgid "Click to set a new delivery zone for partners."
 msgstr "Pincha aquí para crear nuevas zonas de entrega."
 
 #. module: partner_delivery_zone
-#: model:ir.model.fields,field_description:partner_delivery_zone.field_partner_delivery_zone_code
+#: model:ir.model.fields,field_description:partner_delivery_zone.field_partner_delivery_zone__code
 msgid "Code"
 msgstr "Código"
 
@@ -75,7 +75,7 @@ msgid "Display Name"
 msgstr "Nombre a mostrar"
 
 #. module: partner_delivery_zone
-#: model:ir.model.fields,field_description:partner_delivery_zone.field_partner_delivery_zone_id
+#: model:ir.model.fields,field_description:partner_delivery_zone.field_partner_delivery_zone__id
 msgid "ID"
 msgstr "ID (identificación)"
 
@@ -115,7 +115,7 @@ msgid "Transfer"
 msgstr "Transferir"
 
 #. module: partner_delivery_zone
-#: model:ir.model.fields,field_description:partner_delivery_zone.field_partner_delivery_zone_name
+#: model:ir.model.fields,field_description:partner_delivery_zone.field_partner_delivery_zone__name
 msgid "Zone"
 msgstr "Zona"
 

@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* partner_delivery_zone
+# 	* partner_delivery_zone
 #
 msgid ""
 msgstr ""
@@ -21,6 +21,11 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:partner_delivery_zone.report_picking
 msgid "<strong>Zone</strong>"
 msgstr "<strong>区域</strong>"
+
+#. module: partner_delivery_zone
+#: model:ir.model.fields,field_description:partner_delivery_zone.field_partner_delivery_zone__active
+msgid "Active"
+msgstr ""
 
 #. module: partner_delivery_zone
 #: model_terms:ir.actions.act_window,help:partner_delivery_zone.partner_delivery_zone_action
