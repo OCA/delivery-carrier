@@ -3,7 +3,22 @@
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
 
+    <template id="report_badge_style" name="report badge style">
+        <!--
+        Usually badge class reduce font size. With this change we done
+        more visible.
+         -->
+        <style type="text/css">
+            .badge {
+                 font-size: 90%;
+            }
+        </style>
+    </template>
+
     <template id="report_picking" inherit_id="stock.report_picking">
+        <xpath expr="//div[hasclass('page')]" position="inside">
+            <t t-call="partner_delivery_schedule.report_badge_style"/>
+        </xpath>
         <xpath expr="//th[@name='td_sched_date_h']" position="after">
             <th t-if="o.picking_type_id.code == 'outgoing' and o.partner_id"><strong>Delivery Schedule</strong></th>
         </xpath>
@@ -19,6 +34,9 @@
     </template>
 
     <template id="report_delivery_document" inherit_id="stock.report_delivery_document">
+        <xpath expr="//div[hasclass('page')]" position="inside">
+            <t t-call="partner_delivery_schedule.report_badge_style"/>
+        </xpath>
         <xpath expr="//th[@name='td_sched_date_h']" position="after">
             <th t-if="o.partner_id"><strong>Delivery Schedule</strong></th>
         </xpath>
