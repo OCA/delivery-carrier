@@ -107,10 +107,12 @@ class BaseLine(object):
             field_name, width = self._field_definition(field)
             if field_name:
                 value = getattr(self, field_name)
-                if value in (False, None):
+                if isinstance(value, (int, float)):
+                    value = str(value)
+                elif value in (False, None):
                     value = ''
-                elif not isinstance(value, (str, unicode)):
-                    value = unicode(value)
+                elif not isinstance(value, str):
+                    value = str(value, 'utf-8')
                 if width:
                     value = value[0:width]
             else:

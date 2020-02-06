@@ -3,13 +3,14 @@
 # Author: Guewen Baconnier
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import models, fields, exceptions, api
-from odoo.tools.translate import _
+from odoo import _, api, fields, models
+from odoo.exceptions import UserError
 
 
 class DeliveryCarrierFileGenerate(models.TransientModel):
 
     _name = 'delivery.carrier.file.generate'
+    _description = 'Wizard to generate delivery carrier files'
 
     @api.model
     def _get_pickings(self):
@@ -25,7 +26,7 @@ class DeliveryCarrierFileGenerate(models.TransientModel):
         Call the creation of the delivery carrier files
         """
         if not self.pickings:
-            raise exceptions.Warning(_('No delivery orders selected'))
+            raise UserError(_('No delivery orders selected'))
         self.pickings.generate_carrier_files(
             auto=False, recreate=self.recreate)
         return {'type': 'ir.actions.act_window_close'}

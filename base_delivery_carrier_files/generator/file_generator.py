@@ -5,10 +5,7 @@
 
 import string
 import datetime
-try:
-    import cStringIO as StringIO
-except ImportError:
-    import StringIO
+from io import StringIO
 
 
 class CarrierFileGenerator(object):
@@ -122,7 +119,7 @@ class CarrierFileGenerator(object):
                                             the file to generate
         :return: content of the file
         """
-        file_handle = StringIO.StringIO()
+        file_handle = StringIO()
         try:
             file_handle = self._write_rows(file_handle,
                                            rows, configuration)
