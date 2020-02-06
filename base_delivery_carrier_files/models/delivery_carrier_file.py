@@ -6,13 +6,14 @@
 import os
 import logging
 
-from odoo import api, exceptions, fields, models
-from odoo.tools.translate import _
+from odoo import _, api, fields, models
+from odoo.exceptions import UserError
 from ..generator import new_file_generator
 
 
 class DeliveryCarrierFile(models.Model):
     _name = 'delivery.carrier.file'
+    _description = 'Delivery Carrier File'
 
     @api.model
     def get_type_selection(self):
@@ -42,7 +43,7 @@ class DeliveryCarrierFile(models.Model):
         """
         for carrier_file in self:
             if not carrier_file.export_path:
-                raise exceptions.Warning(
+                raise UserError(
                     _('Export path is not defined '
                       'for carrier file %s') % (carrier_file.name,))
             full_path = os.path.join(carrier_file.export_path, filename)
