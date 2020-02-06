@@ -21,7 +21,6 @@ class GenericLine(BaseLine):
               'state',
               'country_code',
               'phone',
-              'fax',
               'mail',
               'delivery_name',
               'weight')
@@ -53,13 +52,13 @@ class LaPosteFileGenerator(CarrierFileGenerator):
             line.street2 = partner.street2
             line.zip = partner.zip
             line.city = partner.city
-            line.state = (partner.state_id and
-                          partner.state_id.name)
-            line.country_code = partner.country_id and partner.country_id.code
+            line.state = (partner.state_id and partner.state_id.name) or False
+            line.country_code =\
+                (partner.country_id and partner.country_id.code) or False
             line.phone = partner.phone or partner.mobile
             line.mail = partner.email
-            line.fax = partner.fax
-        line.delivery_name = picking.carrier_id and picking.carrier_id.name
+        line.delivery_name =\
+            (picking.carrier_id and picking.carrier_id.name) or False
         line.weight = "%.2f" % (picking.weight,)
         return [line.get_fields()]
 
