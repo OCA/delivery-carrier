@@ -1,5 +1,5 @@
 # Copyright 2017 Luis M. Ontalba <luis.martinez@tecnativa.com>
-# Copyright 2019 Tecnativa - Pedro M. Baeza
+# Copyright 2019-2020 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo.tests import common
@@ -132,7 +132,5 @@ class TestDeliveryMultiDestination(common.SavepointCase):
     def test_available_carriers(self):
         self.assertEqual(
             self.carrier_multi.available_carriers(self.partner_2),
-            self.carrier_multi.with_context(
-                show_children_carriers=True,
-            ).child_ids[0],
+            self.carrier_multi,
         )
