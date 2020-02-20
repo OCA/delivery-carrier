@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright 2016-2017 Pedro M. Baeza <pedro.baeza@tecnativa.com>
+<!-- Copyright 2016-2020 Tecnativa - Pedro M. Baeza
      Copyright 2017 Luis M. Ontalba <luis.martinez@tecnativa.com>
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 
@@ -9,10 +9,27 @@
         <field name="model">delivery.carrier</field>
         <field name="inherit_id" ref="delivery.view_delivery_carrier_form"/>
         <field name="arch" type="xml">
-            <field name="delivery_type" position="before">
-                <field name="destination_type"
-                       invisible="context.get('show_children_fields', False)"
-                />
+            <xpath expr="//field[@name='delivery_type']/../../.." position="before">
+                <group name="group_destination_type">
+                    <field name="destination_type"
+                        invisible="context.get('show_children_fields', False)"
+                    />
+                </group>
+            </xpath>
+            <xpath expr="//field[@name='delivery_type']/../.." position="attributes">
+                <attribute name="attrs">{'invisible': [('destination_type', '=', 'multi')]}</attribute>
+            </xpath>
+            <label for="margin" position="attributes">
+                <attribute name="attrs">{'invisible': [('destination_type', '=', 'multi')]}</attribute>
+            </label>
+            <xpath expr="//field[@name='margin']/.." position="attributes">
+                <attribute name="attrs">{'invisible': [('destination_type', '=', 'multi')]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='free_over']/.." position="attributes">
+                <attribute name="attrs">{'invisible': [('destination_type', '=', 'multi')]}</attribute>
+            </xpath>
+            <field name="amount" position="attributes">
+                <attribute name="attrs">{'required':[('free_over','!=', False)], 'invisible':['|', ('free_over','=', False), ('destination_type', '=', 'multi')]}</attribute>
             </field>
             <xpath expr="//field[@name='fixed_price']/ancestor::page"
                    position="attributes">
