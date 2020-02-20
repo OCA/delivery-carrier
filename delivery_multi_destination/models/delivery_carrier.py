@@ -1,4 +1,4 @@
-# Copyright 2016-2019 Tecnativa - Pedro M. Baeza
+# Copyright 2016-2020 Tecnativa - Pedro M. Baeza
 # Copyright 2017 Luis M. Ontalba <luis.martinez@tecnativa.com>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
@@ -45,17 +45,17 @@ class DeliveryCarrier(models.Model):
         )
 
     def available_carriers(self, partner):
-        """Add childrens on the possible list to select carriers. This is
-        used on `website_sale_delivery` module.
-        """
-        candidates = self.env['delivery.carrier']
+        """If the carrier is multi, we test the availability on children."""
+        available = self.env['delivery.carrier']
         for carrier in self:
             if carrier.destination_type == 'one':
-                candidates |= carrier
+                candidates = carrier
             else:
                 carrier = carrier.with_context(show_children_carriers=True)
-                candidates |= carrier.child_ids
-        return super(DeliveryCarrier, candidates).available_carriers(partner)
+                candidates = carrier.child_ids
+            if super(DeliveryCarrier, candidates).available_carriers(partner):
+                available |= carrier
+        return available
 
     def rate_shipment(self, order):
         """We have to override this method for getting the proper price
