@@ -11,8 +11,8 @@ msgstr ""
 "POT-Creation-Date: 2017-12-15 18:21+0000\n"
 "PO-Revision-Date: 2019-09-09 14:24+0000\n"
 "Last-Translator: Rodrigo Macedo <rmsolucoeseminformatic4@gmail.com>\n"
-"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/teams/"
-"23907/pt_BR/)\n"
+"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/"
+"teams/23907/pt_BR/)\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -89,6 +89,12 @@ msgstr "Um destino"
 #: model:ir.model.fields,field_description:delivery_multi_destination.field_delivery_carrier__parent_id
 msgid "Parent carrier"
 msgstr "Transportadora Matriz"
+
+#. module: delivery_multi_destination
+#: code:addons/delivery_multi_destination/models/delivery_carrier.py:103
+#, python-format
+msgid "There is no matching delivery rule."
+msgstr ""
 
 #. module: delivery_multi_destination
 #: model:product.product,uom_name:delivery_multi_destination.product_product_delivery_carrier_multi

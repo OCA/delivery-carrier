@@ -86,10 +86,20 @@ class TestDeliveryMultiDestination(common.SavepointCase):
         })
         cls.product = cls.env['product.product'].create({
             'name': 'Test product',
+            'type': 'product',
+        })
+        cls.pricelist = cls.env['product.pricelist'].create({
+            'name': 'Test pricelist',
+            'item_ids': [(0, 0, {
+                'applied_on': '3_global',
+                'compute_price': 'formula',
+                'base': 'list_price',
+            })]
         })
         cls.sale_order = cls.env['sale.order'].create({
             'partner_id': cls.partner_1.id,
             'picking_policy': 'direct',
+            'pricelist_id': cls.pricelist.id,
             'order_line': [
                 (0, 0, {
                     'name': 'Test',
@@ -134,3 +144,14 @@ class TestDeliveryMultiDestination(common.SavepointCase):
             self.carrier_multi.available_carriers(self.partner_2),
             self.carrier_multi,
         )
+
+    def test_picking_validation(self):
+        """Test a complete sales flow with picking."""
+        self.sale_order.carrier_id = self.carrier_multi.id
+        self.sale_order.partner_shipping_id = self.partner_2.id
+        self.sale_order.action_confirm()
+        picking = self.sale_order.picking_ids
+        self.assertEqual(picking.carrier_id, self.carrier_multi)
+        picking.move_lines.quantity_done = 1
+        picking.action_done()
+        self.assertAlmostEqual(picking.carrier_price, 50)
