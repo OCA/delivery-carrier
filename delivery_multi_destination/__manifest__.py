@@ -4,7 +4,7 @@
 
 {
     "name": "Multiple destinations for the same delivery method",
-    "version": "12.0.1.0.1",
+    "version": "12.0.1.1.0",
     "category": "Delivery",
     "website": "https://github.com/OCA/delivery-carrier",
     "author": "Tecnativa, "
