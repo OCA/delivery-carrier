@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* delivery_multi_destination
+# 	* delivery_multi_destination
 #
 msgid ""
 msgstr ""
@@ -85,6 +85,12 @@ msgstr "一个目的地"
 #: model:ir.model.fields,field_description:delivery_multi_destination.field_delivery_carrier__parent_id
 msgid "Parent carrier"
 msgstr "父承运商"
+
+#. module: delivery_multi_destination
+#: code:addons/delivery_multi_destination/models/delivery_carrier.py:103
+#, python-format
+msgid "There is no matching delivery rule."
+msgstr ""
 
 #. module: delivery_multi_destination
 #: model:product.product,uom_name:delivery_multi_destination.product_product_delivery_carrier_multi
