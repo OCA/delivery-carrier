@@ -94,6 +94,12 @@ msgid "Parent carrier"
 msgstr "Nadřazený dopravce"
 
 #. module: delivery_multi_destination
+#: code:addons/delivery_multi_destination/models/delivery_carrier.py:103
+#, python-format
+msgid "There is no matching delivery rule."
+msgstr ""
+
+#. module: delivery_multi_destination
 #: model:product.product,uom_name:delivery_multi_destination.product_product_delivery_carrier_multi
 #: model:product.product,uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_1
 #: model:product.product,uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_2
