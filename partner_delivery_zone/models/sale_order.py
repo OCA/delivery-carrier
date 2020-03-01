@@ -19,5 +19,9 @@ class SaleOrder(models.Model):
     @api.depends("partner_shipping_id")
     def _compute_delivery_zone_id(self):
         for so in self:
-            if so.partner_shipping_id.delivery_zone_id:
-                so.delivery_zone_id = so.partner_shipping_id.delivery_zone_id
+            partner = (
+                so.partner_shipping_id
+                if so.partner_shipping_id.type == "delivery"
+                else so.partner_shipping_id.commercial_partner_id
+            )
+            so.delivery_zone_id = partner.delivery_zone_id
