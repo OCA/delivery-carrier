@@ -92,14 +92,12 @@ msgstr "Última actualización el"
 #. module: partner_delivery_zone
 #: model:ir.model,name:partner_delivery_zone.model_partner_delivery_zone
 #, fuzzy
-#| msgid "partner.delivery.zone"
 msgid "Partner delivery zone"
 msgstr "'partner.delivery.zone'"
 
 #. module: partner_delivery_zone
 #: model:ir.model,name:partner_delivery_zone.model_sale_order
 #, fuzzy
-#| msgid "Sale Order"
 msgid "Sales Order"
 msgstr "Pedido de Venta"
 
