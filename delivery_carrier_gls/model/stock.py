@@ -26,7 +26,7 @@ from datetime import datetime
 from odoo import models, fields, api, exceptions
 from odoo.modules.registry import RegistryManager
 from odoo.tools.translate import _
-from ..webservice.mrw_api import MrwEnvio
+from ..webservice.gls_api import GlsEnvio
 
 _logger = logging.getLogger(__name__)
 
@@ -35,7 +35,7 @@ class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
     @api.model
-    def _get_mrw_service_type(self):
+    def _get_gls_service_type(self):
         return [
             ('0000', 'Urgente 10'),
             ('0005', 'Urgente Hoy'),
@@ -59,15 +59,15 @@ class StockPicking(models.Model):
             ('0810', 'Ecommerce Canje')
         ]
 
-    mrw_service_type = fields.Selection('_get_mrw_service_type', string='Mrw Service')
+    gls_service_type = fields.Selection('_get_gls_service_type', string='Gls Service')
 
-    mrw_frequence = fields.Selection(
-        (('1', 'Frecuencia 1'), ('2', 'Frecuencia 2')), string='Mrw Frequence')
+    gls_frequence = fields.Selection(
+        (('1', 'Frecuencia 1'), ('2', 'Frecuencia 2')), string='Gls Frequence')
 
     @api.multi
-    def _mrw_transm_envio_request(self, mrw_api):
+    def _gls_transm_envio_request(self, gls_api):
         self.ensure_one()
-        client = mrw_api.client
+        client = gls_api.client
         transm_envio = client.factory.create('TransmEnvioRequest')
 
         warehouse_address = self.picking_type_id.warehouse_id.partner_id
@@ -119,11 +119,11 @@ class StockPicking(models.Model):
             fields.Datetime.from_string(self.min_date or self.date_done), '%d/%m/%Y')
         service_data.Referencia = reference_content
         service_data.EnFranquicia = 'N'
-        service_data.CodigoServicio = self.mrw_service_type
+        service_data.CodigoServicio = self.gls_service_type
         service_data.NumeroBultos = self.number_of_packages or 1
         service_data.Peso = weigth_content or 1
-        if self.mrw_frequence:
-            service_data.Frecuencia = self.mrw_frequence
+        if self.gls_frequence:
+            service_data.Frecuencia = self.gls_frequence
 
         # Información del bulto, tiene que ir en centimetros
         bulto_request = client.factory.create('BultoRequest')
@@ -154,9 +154,9 @@ class StockPicking(models.Model):
         return transm_envio
 
     @api.multi
-    def _mrw_etiqueta_envio_request(self, mrw_api, shipping_number):
+    def _gls_etiqueta_envio_request(self, gls_api, shipping_number):
         self.ensure_one()
-        client = mrw_api.client
+        client = gls_api.client
         label_factory = client.factory.create('EtiquetaEnvioRequest')
         label_factory.NumeroEnvio = shipping_number
         label_factory.ReportTopMargin = "1100"
@@ -164,19 +164,19 @@ class StockPicking(models.Model):
         return label_factory
 
     @api.multi
-    def _generate_mrw_label(self, package_ids=None):
+    def _generate_gls_label(self, package_ids=None):
         self.ensure_one()
-        if not self.carrier_id.mrw_config_id:
-            raise exceptions.Warning(_('No MRW Config defined in carrier'))
+        if not self.carrier_id.gls_config_id:
+            raise exceptions.Warning(_('No GLS Config defined in carrier'))
         if not self.picking_type_id.warehouse_id.partner_id:
             raise exceptions.Warning(
                 _('Please define an address in the %s warehouse') % (
                     self.warehouse_id.name))
 
-        mrw_api = MrwEnvio(self.carrier_id.mrw_config_id)
-        client = mrw_api.client
+        gls_api = GlsEnvio(self.carrier_id.gls_config_id)
+        client = gls_api.client
         # Generate shipment
-        transm_envio = self._mrw_transm_envio_request(mrw_api)
+        transm_envio = self._gls_transm_envio_request(gls_api)
 
         response = client.service.TransmEnvio(transm_envio)
 
@@ -187,7 +187,7 @@ class StockPicking(models.Model):
                 mensaje = response.Mensaje.encode('utf8', 'ignore')
             raise exceptions.Warning(mensaje)
 
-        label_factory = self._mrw_etiqueta_envio_request(mrw_api,
+        label_factory = self._gls_etiqueta_envio_request(gls_api,
                                                          response.NumeroEnvio)
 
         label_response = client.service.EtiquetaEnvio(label_factory)
@@ -207,20 +207,20 @@ class StockPicking(models.Model):
         return [label]
 
     @api.multi
-    def _get_mrw_label_from_url(self, shipping_number):
+    def _get_gls_label_from_url(self, shipping_number):
         self.ensure_one()
-        mrw_config = self.carrier_id.mrw_config_id
+        gls_config = self.carrier_id.gls_config_id
 
-        url = "http://sagec.mrw.es"
-        if mrw_config.is_test:
-            url = "http://sagec-test.mrw.es"
+        url = "http://sagec.gls.es"
+        if gls_config.is_test:
+            url = "http://sagec-test.gls.es"
 
         params = {
-            'Franq':mrw_config.franchise_code,
-            'Ab':mrw_config.subscriber_code,
-            'Dep':mrw_config.department_code or '',
-            'Usr':mrw_config.username,
-            'Pwd':mrw_config.password,
+            'Franq':gls_config.franchise_code,
+            'Ab':gls_config.subscriber_code,
+            'Dep':gls_config.department_code or '',
+            'Usr':gls_config.username,
+            'Pwd':gls_config.password,
             'NumEnv':shipping_number
         }
         url_params = urllib.urlencode(params)
@@ -231,9 +231,9 @@ class StockPicking(models.Model):
 
     @api.multi
     def generate_shipping_labels(self, package_ids=None):
-        """ Add label generation for MRW """
+        """ Add label generation for GLS """
         self.ensure_one()
-        if self.carrier_id.carrier_type == 'mrw':
-            return self._generate_mrw_label(package_ids=package_ids)
+        if self.carrier_id.carrier_type == 'gls':
+            return self._generate_gls_label(package_ids=package_ids)
         return super(StockPicking, self).generate_shipping_labels(
             package_ids=package_ids)

@@ -57,6 +57,7 @@
                             <field name="country_customer_name" readonly="1"/>
                             <field name="type_ship"/>
                             <field name="is_done"/>
+                            <field name="margin"/>
                         </tree>
                     </field>
                 </group>

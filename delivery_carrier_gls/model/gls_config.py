@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Odoo, Open Source Management Solution
-#    Copyright (C) 2019 Halltic eSolutions (http://halltic.com)
-#                  Tristán Mozos <tristan.mozos@halltic.com>
+#    OpenERP, Open Source Management Solution
+#    Copyright (C) 2015 FactorLibre (http://www.factorlibre.com)
+#                  Hugo Santos <hugo.santos@factorlibre.com>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,27 +19,19 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-{
-    'name':'Delivery company management',
-    'version':'0.1',
-    'author':"Halltic eSolutions",
-    'category':'Stock',
-    'depends':[
-        'delivery',
-        'base_delivery_carrier_label',
-        'delivery_carrier_mrw',
-        'delivery_carrier_correos',
-        'delivery_carrier_spring',
-        'connector_amazon',
-    ],
-    'website':'https://halltic.com',
-    'data':[
-        'security/ir.model.access.csv',
-        'view/mass_delivery_view.xml',
-        'view/delivery_mass_shipment_menu.xml'
-    ],
-    'demo':[],
-    'installable':True,
-    'auto_install':False,
-    'license':'AGPL-3',
-}
+from odoo import models, fields
+
+
+class GlsConfig(models.Model):
+    _name = 'gls.config'
+
+    name = fields.Char('Name', required=True)
+    is_test = fields.Boolean('Is a test?')
+    franchise_code = fields.Char('Franchise Code', required=True)
+    subscriber_code = fields.Char('Subscriber Code', required=True)
+    department_code = fields.Char('Department Code')
+    username = fields.Char('Username', required=True)
+    password = fields.Char('Password', required=True)
+    url_shipment_path = fields.Char('Url shipment path', default='')
+    username_web = fields.Char('Username web', required=False)
+    password_web = fields.Char('Password_web', required=False)
