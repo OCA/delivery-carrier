@@ -34,9 +34,9 @@ class StockPicking(models.Model):
             volume += (move_line.product_id.volume or 0.0) * qty
             quantity += qty
             total += move.sale_line_id.price_unit * qty
-        total = sale_order.currency_id._convert(
-            total, sale_order.company_id.currency_id, sale_order.company_id,
-            sale_order.date_order)
+        total = sale_order.currency_id.with_context(
+            date=sale_order.date_order
+        ).compute(total, sale_order.company_id.currency_id)
         so_line.price_unit = self.carrier_id._get_price_from_picking(
             total, weight, volume, quantity,
         )
