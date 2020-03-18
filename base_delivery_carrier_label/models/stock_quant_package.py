@@ -3,23 +3,24 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models
+
 import odoo.addons.decimal_precision as dp
 
 
 class StockQuantPackage(models.Model):
-    _inherit = 'stock.quant.package'
+    _inherit = "stock.quant.package"
 
-    parcel_tracking = fields.Char(string='Parcel Tracking')
+    parcel_tracking = fields.Char(string="Parcel Tracking")
     parcel_tracking_uri = fields.Char(
-        help="Link to the carrier's tracking page for this package.",
+        help="Link to the carrier's tracking page for this package."
     )
     total_weight = fields.Float(
-        digits=dp.get_precision('Stock Weight'),
+        digits=dp.get_precision("Stock Weight"),
         help="Total weight of the package in kg, including the "
-             "weight of the logistic unit."
+        "weight of the logistic unit.",
     )
 
-    @api.depends('total_weight')
+    @api.depends("total_weight")
     def _compute_weight(self):
         """ Use total_weight if defined
         otherwise fallback on the computed weight
@@ -30,10 +31,9 @@ class StockQuantPackage(models.Model):
                 pack.weight = pack.total_weight
             elif not pack.quant_ids:
                 # package.pack_operations would be too easy
-                operations = self.env['stock.move.line'].search([
-                    ('result_package_id', '=', pack.id),
-                    ('product_id', '!=', False),
-                ])
+                operations = self.env["stock.move.line"].search(
+                    [("result_package_id", "=", pack.id), ("product_id", "!=", False)]
+                )
 
                 # we make use get_weight with  @api.multi instead of
                 # sum([op.get_weight for op in operations])
@@ -54,7 +54,7 @@ class StockQuantPackage(models.Model):
         res = super()._complete_name(name, args)
         for pack in self:
             if pack.parcel_tracking:
-                res[pack.id] += ' [%s]' % pack.parcel_tracking
+                res[pack.id] += " [%s]" % pack.parcel_tracking
             if pack.weight:
-                res[pack.id] += ' %s kg' % pack.weight
+                res[pack.id] += " %s kg" % pack.weight
         return res

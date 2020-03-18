@@ -8,19 +8,15 @@ from odoo import fields, models
 class ShippingLabel(models.Model):
     """ Child class of ir attachment to identify which are labels """
 
-    _name = 'shipping.label'
-    _inherits = {'ir.attachment': 'attachment_id'}
+    _name = "shipping.label"
+    _inherits = {"ir.attachment": "attachment_id"}
     _description = "Shipping Label"
 
-    file_type = fields.Char(
-        string='File type',
-        default='pdf',
-    )
-    package_id = fields.Many2one(comodel_name='stock.quant.package',
-                                 string='Pack')
+    file_type = fields.Char(string="File type", default="pdf")
+    package_id = fields.Many2one(comodel_name="stock.quant.package", string="Pack")
     attachment_id = fields.Many2one(
-        comodel_name='ir.attachment',
-        string='Attachement',
+        comodel_name="ir.attachment",
+        string="Attachement",
         required=True,
-        ondelete='cascade',
+        ondelete="cascade",
     )

@@ -1,7 +1,7 @@
 ** How does it works ? **
 
 
-In picking UI a button "Shipping label" trigger label generation 
+In picking UI a button "Shipping label" trigger label generation
 calling `action_generate_carrier_label()` in models/stock.picking.py
 
 

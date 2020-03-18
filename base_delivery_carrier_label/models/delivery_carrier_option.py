@@ -12,29 +12,28 @@ class DeliveryCarrierOption(models.Model):
     to be added on delivery orders
 
     """
-    _name = 'delivery.carrier.option'
-    _description = 'Delivery carrier option'
-    _inherits = {'delivery.carrier.template.option': 'tmpl_option_id'}
+
+    _name = "delivery.carrier.option"
+    _description = "Delivery carrier option"
+    _inherits = {"delivery.carrier.template.option": "tmpl_option_id"}
 
     mandatory = fields.Boolean(
-        help="If checked, this option is necessarily applied "
-             "to the delivery order"
+        help="If checked, this option is necessarily applied " "to the delivery order"
     )
     by_default = fields.Boolean(
-        string='Applied by Default',
+        string="Applied by Default",
         help="By check, user can choose to apply this option "
-             "to each Delivery Order\n using this delivery method"
+        "to each Delivery Order\n using this delivery method",
     )
     tmpl_option_id = fields.Many2one(
-        comodel_name='delivery.carrier.template.option',
-        string='Option',
+        comodel_name="delivery.carrier.template.option",
+        string="Option",
         required=True,
         ondelete="cascade",
     )
-    carrier_id = fields.Many2one(comodel_name='delivery.carrier',
-                                 string='Carrier')
+    carrier_id = fields.Many2one(comodel_name="delivery.carrier", string="Carrier")
     readonly_flag = fields.Boolean(
-        string='Readonly Flag',
+        string="Readonly Flag",
         help="When True, help to prevent the user to modify some fields "
-             "option (if attribute is defined in the view)"
+        "option (if attribute is defined in the view)",
     )
