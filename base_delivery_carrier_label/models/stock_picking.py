@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 import logging
+
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
@@ -10,24 +11,20 @@ _logger = logging.getLogger(__name__)
 
 
 class StockPicking(models.Model):
-    _inherit = 'stock.picking'
+    _inherit = "stock.picking"
 
     carrier_id = fields.Many2one(
-        comodel_name='delivery.carrier',
-        string='Carrier',
-        states={'done': [('readonly', True)]},
+        comodel_name="delivery.carrier",
+        string="Carrier",
+        states={"done": [("readonly", True)]},
     )
     delivery_type = fields.Selection(
-        related='carrier_id.delivery_type',
-        string='Delivery Type',
-        readonly=True,
+        related="carrier_id.delivery_type", string="Delivery Type", readonly=True
     )
-    carrier_code = fields.Char(
-        related='carrier_id.code',
-        readonly=True,
+    carrier_code = fields.Char(related="carrier_id.code", readonly=True)
+    option_ids = fields.Many2many(
+        comodel_name="delivery.carrier.option", string="Options"
     )
-    option_ids = fields.Many2many(comodel_name='delivery.carrier.option',
-                                  string='Options')
 
     def generate_default_label(self):
         """ Abstract method
@@ -35,8 +32,9 @@ class StockPicking(models.Model):
         :return: (file_binary, file_type)
 
         """
-        raise NotImplementedError(_('No label is configured for the '
-                                    'selected delivery method.'))
+        raise NotImplementedError(
+            _("No label is configured for the " "selected delivery method.")
+        )
 
     def generate_shipping_labels(self):
         """Generate a shipping label by default
@@ -58,19 +56,19 @@ class StockPicking(models.Model):
         labels = []
         for package in self._get_packages_from_picking():
             pack_label = default_label.copy()
-            pack_label['tracking_number'] = package.id
+            pack_label["tracking_number"] = package.id
             labels.append(pack_label)
         return labels
 
     def get_shipping_label_values(self, label):
         self.ensure_one()
         return {
-            'name': label['name'],
-            'datas_fname': label.get('filename', label['name']),
-            'res_id': self.id,
-            'res_model': 'stock.picking',
-            'datas': label['file'],
-            'file_type': label['file_type'],
+            "name": label["name"],
+            "datas_fname": label.get("filename", label["name"]),
+            "res_id": self.id,
+            "res_model": "stock.picking",
+            "datas": label["file"],
+            "file_type": label["file_type"],
         }
 
     def generate_labels(self):
@@ -79,7 +77,8 @@ class StockPicking(models.Model):
         _logger.warning(
             "Your delivery module depending on your carrier must call "
             "action_generate_carrier_label() method "
-            "instead of generate_labels()")
+            "instead of generate_labels()"
+        )
         return self.action_generate_carrier_label()
 
     def _set_a_default_package(self):
@@ -88,10 +87,11 @@ class StockPicking(models.Model):
         """
         for picking in self:
             move_lines = picking.move_line_ids.filtered(
-                lambda s: not (s.package_id or s.result_package_id))
+                lambda s: not (s.package_id or s.result_package_id)
+            )
             if move_lines:
-                package = self.env['stock.quant.package'].create({})
-                move_lines.write({'result_package_id': package.id})
+                package = self.env["stock.quant.package"].create({})
+                move_lines.write({"result_package_id": package.id})
 
     def action_generate_carrier_label(self):
         """ Method for the 'Generate Label' button.
@@ -100,30 +100,29 @@ class StockPicking(models.Model):
         Packages are mandatory in this case
 
         """
-        package_obj = self.env['stock.quant.package']
+        package_obj = self.env["stock.quant.package"]
         for pick in self:
             pick._set_a_default_package()
             shipping_labels = pick.generate_shipping_labels()
             for label in shipping_labels:
                 data = pick.get_shipping_label_values(label)
-                if label.get('package_id'):
-                    data['package_id'] = label['package_id']
-                    if label.get('tracking_number'):
-                        package_obj.browse(label['package_id']).write(
-                            {'parcel_tracking': label.get('tracking_number')})
+                if label.get("package_id"):
+                    data["package_id"] = label["package_id"]
+                    if label.get("tracking_number"):
+                        package_obj.browse(label["package_id"]).write(
+                            {"parcel_tracking": label.get("tracking_number")}
+                        )
                 context_attachment = self.env.context.copy()
                 # remove default_type setted for stock_picking
                 # as it would try to define default value of attachement
-                if 'default_type' in context_attachment:
-                    del context_attachment['default_type']
-                self.env['shipping.label'].with_context(
-                    context_attachment).create(data)
+                if "default_type" in context_attachment:
+                    del context_attachment["default_type"]
+                self.env["shipping.label"].with_context(context_attachment).create(data)
             if len(shipping_labels) == 1:
-                pick.write(
-                    {'carrier_tracking_ref': label.get('tracking_number')})
+                pick.write({"carrier_tracking_ref": label.get("tracking_number")})
         return True
 
-    @api.onchange('carrier_id')
+    @api.onchange("carrier_id")
     def onchange_carrier_id(self):
         """ Inherit this method in your module """
         if not self.carrier_id:
@@ -134,44 +133,43 @@ class StockPicking(models.Model):
         # module that depend of delivery base can hide some field
         # depending of the type or the code
         carrier = self.carrier_id
-        self.update({
-            'delivery_type': carrier.delivery_type,
-            'carrier_code': carrier.code,
-        })
+        self.update(
+            {"delivery_type": carrier.delivery_type, "carrier_code": carrier.code}
+        )
         default_options = carrier.default_options()
         self.option_ids = [(6, 0, default_options.ids)]
         result = {
-            'domain': {
-                'option_ids': [('id', 'in', carrier.available_option_ids.ids)],
-            }
+            "domain": {"option_ids": [("id", "in", carrier.available_option_ids.ids)]}
         }
         return result
 
-    @api.onchange('option_ids')
+    @api.onchange("option_ids")
     def onchange_option_ids(self):
         if not self.carrier_id:
             return
         carrier = self.carrier_id
         for available_option in carrier.available_option_ids:
-            if (available_option.mandatory and
-                    available_option not in self.option_ids):
+            if available_option.mandatory and available_option not in self.option_ids:
                 # XXX the client does not allow to modify the field that
                 # triggered the onchange:
                 # https://github.com/odoo/odoo/issues/2693#issuecomment-56825399
                 # Ideally we should add the missing option
                 raise UserError(
-                    _("You should not remove a mandatory option."
-                      "Please cancel the edit or "
-                      "add back the option: %s.") % available_option.name
+                    _(
+                        "You should not remove a mandatory option."
+                        "Please cancel the edit or "
+                        "add back the option: %s."
+                    )
+                    % available_option.name
                 )
 
     @api.model
     def _values_with_carrier_options(self, values):
         values = values.copy()
-        carrier_id = values.get('carrier_id')
-        option_ids = values.get('option_ids')
+        carrier_id = values.get("carrier_id")
+        option_ids = values.get("option_ids")
         if carrier_id and not option_ids:
-            carrier_obj = self.env['delivery.carrier']
+            carrier_obj = self.env["delivery.carrier"]
             carrier = carrier_obj.browse(carrier_id)
             default_options = carrier.default_options()
             if default_options:
@@ -179,17 +177,19 @@ class StockPicking(models.Model):
         return values
 
     @api.multi
-    @api.returns('stock.quant.package')
+    @api.returns("stock.quant.package")
     def _get_packages_from_picking(self):
         """ Get all the packages from the picking """
         self.ensure_one()
-        operation_obj = self.env['stock.move.line']
-        packages = self.env['stock.quant.package'].browse()
+        operation_obj = self.env["stock.move.line"]
+        packages = self.env["stock.quant.package"].browse()
         operations = operation_obj.search(
-            ['|',
-             ('package_id', '!=', False),
-             ('result_package_id', '!=', False),
-             ('picking_id', '=', self.id)]
+            [
+                "|",
+                ("package_id", "!=", False),
+                ("result_package_id", "!=", False),
+                ("picking_id", "=", self.id),
+            ]
         )
         for operation in operations:
             # Take the destination package. If empty, the package is
@@ -239,18 +239,21 @@ class StockPicking(models.Model):
         """
         self.ensure_one()
         partner = self.company_id.partner_id
-        address_id = partner.address_get(adr_pref=['delivery'])['delivery']
-        return self.env['res.partner'].browse(address_id)
+        address_id = partner.address_get(adr_pref=["delivery"])["delivery"]
+        return self.env["res.partner"].browse(address_id)
 
     def _check_existing_shipping_label(self):
         """ Check that labels don't already exist for this picking """
         self.ensure_one()
-        labels = self.env['shipping.label'].search([
-            ('res_id', '=', self.id),
-            ('res_model', '=', 'stock.picking')])
+        labels = self.env["shipping.label"].search(
+            [("res_id", "=", self.id), ("res_model", "=", "stock.picking")]
+        )
         if labels:
             raise UserError(
-                _('Some labels already exist for the picking %s.\n'
-                  'Please delete the existing labels in the '
-                  'attachments of this picking and try again')
-                % self.name)
+                _(
+                    "Some labels already exist for the picking %s.\n"
+                    "Please delete the existing labels in the "
+                    "attachments of this picking and try again"
+                )
+                % self.name
+            )
