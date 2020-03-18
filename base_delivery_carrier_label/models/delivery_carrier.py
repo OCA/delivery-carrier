@@ -6,24 +6,22 @@ from odoo import api, fields, models
 
 
 class DeliveryCarrier(models.Model):
-    _inherit = 'delivery.carrier'
+    _inherit = "delivery.carrier"
 
-    delivery_type = fields.Selection(oldname='carrier_type')
-    code = fields.Char(
-        help="Delivery Method Code (according to carrier)",
-    )
+    delivery_type = fields.Selection(oldname="carrier_type")
+    code = fields.Char(help="Delivery Method Code (according to carrier)")
     description = fields.Text()
     available_option_ids = fields.One2many(
-        comodel_name='delivery.carrier.option',
-        inverse_name='carrier_id',
-        string='Option',
+        comodel_name="delivery.carrier.option",
+        inverse_name="carrier_id",
+        string="Option",
     )
 
     @api.multi
     def default_options(self):
         """ Returns default and available options for a carrier """
-        options = self.env['delivery.carrier.option'].browse()
+        options = self.env["delivery.carrier.option"].browse()
         for available_option in self.available_option_ids:
-            if (available_option.mandatory or available_option.by_default):
+            if available_option.mandatory or available_option.by_default:
                 options |= available_option
         return options
