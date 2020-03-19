@@ -1,5 +1,5 @@
 # Copyright 2017 Luis M. Ontalba <luis.martinez@tecnativa.com>
-# Copyright 2019 Tecnativa - Pedro M. Baeza
+# Copyright 2019-2020 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo.tests import common
@@ -86,10 +86,20 @@ class TestDeliveryMultiDestination(common.SavepointCase):
         })
         cls.product = cls.env['product.product'].create({
             'name': 'Test product',
+            'type': 'product',
+        })
+        cls.pricelist = cls.env['product.pricelist'].create({
+            'name': 'Test pricelist',
+            'item_ids': [(0, 0, {
+                'applied_on': '3_global',
+                'compute_price': 'formula',
+                'base': 'list_price',
+            })]
         })
         cls.sale_order = cls.env['sale.order'].create({
             'partner_id': cls.partner_1.id,
             'picking_policy': 'direct',
+            'pricelist_id': cls.pricelist.id,
             'order_line': [
                 (0, 0, {
                     'name': 'Test',
@@ -132,7 +142,16 @@ class TestDeliveryMultiDestination(common.SavepointCase):
     def test_available_carriers(self):
         self.assertEqual(
             self.carrier_multi.available_carriers(self.partner_2),
-            self.carrier_multi.with_context(
-                show_children_carriers=True,
-            ).child_ids[0],
+            self.carrier_multi,
         )
+
+    def test_picking_validation(self):
+        """Test a complete sales flow with picking."""
+        self.sale_order.carrier_id = self.carrier_multi.id
+        self.sale_order.partner_shipping_id = self.partner_2.id
+        self.sale_order.action_confirm()
+        picking = self.sale_order.picking_ids
+        self.assertEqual(picking.carrier_id, self.carrier_multi)
+        picking.move_lines.quantity_done = 1
+        picking.action_done()
+        self.assertAlmostEqual(picking.carrier_price, 50)
