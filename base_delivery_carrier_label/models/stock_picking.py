@@ -176,7 +176,6 @@ class StockPicking(models.Model):
                 values.update(option_ids=[(6, 0, default_options.ids)])
         return values
 
-    @api.multi
     @api.returns("stock.quant.package")
     def _get_packages_from_picking(self):
         """ Get all the packages from the picking """
@@ -197,7 +196,6 @@ class StockPicking(models.Model):
             packages |= operation.result_package_id or operation.package_id
         return packages
 
-    @api.multi
     def write(self, vals):
         """ Set the default options when the delivery method is changed.
 

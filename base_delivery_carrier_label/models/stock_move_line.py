@@ -4,9 +4,7 @@
 
 import logging
 
-from odoo import api, fields, models
-
-import odoo.addons.decimal_precision as dp
+from odoo import fields, models
 
 _logger = logging.getLogger(__name__)
 
@@ -14,11 +12,8 @@ _logger = logging.getLogger(__name__)
 class StockMoveLine(models.Model):
     _inherit = "stock.move.line"
 
-    weight = fields.Float(
-        digits=dp.get_precision("Stock Weight"), help="Weight of the pack_operation"
-    )
+    weight = fields.Float(digits="Stock Weight", help="Weight of the pack_operation")
 
-    @api.multi
     def get_weight(self):
         """Calc and save weight of pack.operations.
 
