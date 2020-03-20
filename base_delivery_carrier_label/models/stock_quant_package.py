@@ -4,8 +4,6 @@
 
 from odoo import api, fields, models
 
-import odoo.addons.decimal_precision as dp
-
 
 class StockQuantPackage(models.Model):
     _inherit = "stock.quant.package"
@@ -15,7 +13,7 @@ class StockQuantPackage(models.Model):
         help="Link to the carrier's tracking page for this package."
     )
     total_weight = fields.Float(
-        digits=dp.get_precision("Stock Weight"),
+        digits="Stock Weight",
         help="Total weight of the package in kg, including the "
         "weight of the logistic unit.",
     )
@@ -49,7 +47,6 @@ class StockQuantPackage(models.Model):
         if to_do:
             super(StockQuantPackage, to_do)._compute_weight()
 
-    @api.multi
     def _complete_name(self, name, args):
         res = super()._complete_name(name, args)
         for pack in self:
