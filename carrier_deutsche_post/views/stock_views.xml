@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+
+<odoo>
+
+    <record id="view_picking_form_de_post" model="ir.ui.view">
+      <field name="model">stock.picking</field>
+      <field name="inherit_id" ref="stock.view_picking_form"/>
+      <field name="arch" type="xml">
+        <button name="do_unreserve" position="after">
+          <button name="get_deutsche_post_label" string="Buy Deutsche Post Label" type="object"  attrs="{'invisible': ['|','|','|',('carrier_type','!=','deutsche_post'),('picking_type_code', '!=', 'outgoing'),('state','not in',['assigned','done']),('label_de_attach_id','!=',False)]}"/>
+        </button>
+        <xpath expr="//page[@name='extra']/group/group/field[@name='picking_type_code']" position="after">
+          <field name="carrier_type" invsible="1"/>
+          <field name="label_de_attach_id" readonly="1" force_save="1" attrs="{'invisible':[('label_de_attach_id','=',False)]}"/>
+        </xpath>
+      </field>
+    </record>
+
+    <record id="base_delivery_carrier_label.view_picking_withcarrier_out_form" model="ir.ui.view">
+      <field name="model">stock.picking</field>
+      <field name="inherit_id" ref="delivery.view_picking_withcarrier_out_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//page[@name='extra']//field[@name='carrier_tracking_ref']" position="after">
+          <field name="carrier_code"/>
+          <field name="option_ids" nolabel="1" colspan="2" domain="[('carrier_id', '=', carrier_id)]"/>
+        </xpath>
+      </field>
+    </record>
+
+</odoo>

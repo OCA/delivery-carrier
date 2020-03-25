@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="assets_backend" name="carrier_deutsche_post assets" inherit_id="web.assets_backend">
+      <xpath expr="." position="inside">
+        <script type="text/javascript" src="/carrier_deutsche_post/static/src/js/carrier_deutsche_post.js"></script>
+      </xpath>
+    </template>
+</odoo>
