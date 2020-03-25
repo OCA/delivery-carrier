@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates id="template" xml:space="preserve">
+  <t t-extend="PickingEditorWidget">
+    <t t-jquery="button.js_pick_print" t-operation="after">
+      <button type="button" class='btn btn-default js_de_label_buy'> Buy Deutsche Post Label </button>
+      <button type="button" class='btn btn-default js_de_label_download'> Deutsche Post Label </button>
+    </t>
+  </t>
+</templates>
