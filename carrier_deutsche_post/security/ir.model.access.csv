@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_carrier_account_stock_user,carrier.account.stock.user,model_carrier_account,stock.group_stock_user,1,0,0,0
+access_carrier_account_stock_manager,carrier.account.stock.manager,model_carrier_account,stock.group_stock_manager,1,1,1,1
+access_de_post_logs,access_de_post_logs,model_de_post_logs,stock.group_stock_user,1,1,1,1
+
+access_carrier_form,access_carrier_form,model_carrier_form,stock.group_stock_user,1,0,0,0
+access_carrier_form_fields,access_carrier_form_fields,model_carrier_form_field,stock.group_stock_user,1,0,0,0
+
+access_carrier_form_mngr,access_carrier_form_mngr,model_carrier_form,stock.group_stock_manager,1,1,1,1
+access_carrier_form_fields_mngr,access_carrier_form_fields_mngr,model_carrier_form_field,stock.group_stock_manager,1,1,1,1

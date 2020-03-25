@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <record id="view_carrier_account_form" model="ir.ui.view">
+      <field name="name">carrier.account.form</field>
+      <field name="model">carrier.account</field>
+      <field name="arch" type="xml">
+        <form>
+          <header>
+            <button name="test_connection" string="Test (Generate Preview) Label" type="object" class="oe_highlight"/>
+            <button name="view_logs" string="View Logs" type="object"/>
+            <button name="view_forms" string="View Forms" type="object"/>
+          </header>
+          <sheet>
+            <group>
+              <group>
+                <field name="name" required="1"/>
+                <field name="partner_id" required="1" /> <!-- password="1" -->
+                <field name="partner_key" required="1"/> <!--  password="1" -->
+              </group>
+              <group>
+                <field name="account" required="1"/>
+                <field name="password" required="1" password="1"/>
+              </group>
+              <group>
+                <field name="file_format"/>
+                <field name="type"/>
+              </group>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_carrier_account_tree">
+      <field name="name">carrier.account.tree</field>
+      <field name="model">carrier.account</field>
+      <field name="arch" type="xml">
+        <tree string="Intrastat transaction types">
+          <field name="name"/>
+        </tree>
+      </field>
+    </record>
+
+    <record id="action_carrier_account" model="ir.actions.act_window">
+      <field name="name">Carrier Accounts</field>
+      <field name="res_model">carrier.account</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_view_carrier_account_tree_view" model="ir.actions.act_window.view">
+        <field eval="1" name="sequence"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="carrier_deutsche_post.view_carrier_account_tree"/>
+        <field name="act_window_id" ref="carrier_deutsche_post.action_carrier_account"/>
+    </record>
+    <record id="action_view_carrier_account_form_view" model="ir.actions.act_window.view">
+        <field eval="2" name="sequence"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="carrier_deutsche_post.view_carrier_account_form"/>
+        <field name="act_window_id" ref="carrier_deutsche_post.action_carrier_account"/>
+    </record>
+
+
+    <!--Download File-->
+
+    <record id="view_download_file_form" model="ir.ui.view">
+      <field name="name">download.file.form</field>
+      <field name="model">download.file</field>
+      <field name="arch" type="xml">
+        <form>
+          <group attrs="{'invisible': [('file','!=',False)]}">
+            <field name="prod_code"/>
+            <field name="picking_id" options="{'no_create': 1, 'no_open': 1}"/>
+          </group>
+          <group>
+            <field name="file" filename="file_name"/>
+            <field name="file_name" invisible="1"/>
+          </group>
+          <footer>
+            <button name="test_connection" string="Test (Generate Preview) Label" type="object" class="oe_highlight" attrs="{'invisible': [('file','!=',False)]}"/>
+          </footer>
+        </form>
+      </field>
+    </record>
+
+    <!--Logs-->
+
+    <record id="view_deutsche_post_logs_form" model="ir.ui.view">
+      <field name="name">de.post.logs.form</field>
+      <field name="model">de.post.logs</field>
+      <field name="arch" type="xml">
+        <form>
+          <group>
+            <field name="create_date"/>
+            <field name="create_uid"/>
+          </group>
+          <group string="Request">
+            <field name="request" colspan="4" nolabel="1"/>
+          </group>
+          <group string="Response">
+            <field name="response" colspan="4" nolabel="1"/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record id="view_deutsche_post_logs_tree" model="ir.ui.view">
+      <field name="name">de.post.logs.tree</field>
+      <field name="model">de.post.logs</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="create_date"/>
+          <field name="create_uid"/>
+          <field name="account_id"/>
+          <field name="tracking_num"/>
+          <field name="prod_code"/>
+          <field name="format_code"/>
+        </tree>
+      </field>
+    </record>
+
+    <record id="view_deutsche_post_logs_search" model="ir.ui.view">
+      <field name="name">de.post.logs.search</field>
+      <field name="model">de.post.logs</field>
+      <field name="arch" type="xml">
+        <search string="Search Period">
+          <field name="name"/>
+          <filter string="Created" name="fltr_created" domain="[]" context="{'group_by': 'create_date:day'}"/>
+          <filter string="Created: Month" name="fltr_created_month" domain="[]" context="{'group_by': 'create_date:month'}"/>
+          <filter string="Account" name="account_id" domain="[]" context="{'group_by': 'account_id'}"/>
+          <filter string="Picking" name="name" domain="[]" context="{'group_by': 'name'}"/>
+          <filter string="Product Code" name="grp_prod_code" domain="[]" context="{'group_by': 'prod_code'}"/>
+          <filter string="Format Code" name="grp_format_code" domain="[]" context="{'group_by': 'format_code'}"/>
+        </search>
+      </field>
+    </record>
+
+    <!-- Carrier Forms -->
+
+    <record id="view_carrier_form_form" model="ir.ui.view">
+      <field name="name">carrier.form.form</field>
+      <field name="model">carrier.form</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group>
+              <field name="prod_code"/>
+              <field name="pdf_file_id"/>
+            </group>
+            <notebook>
+              <page string="Fields">
+                <button name="find_fields" type="object" string="Find Fields" class="oe_link"/>
+                <field name="field_ids" colspan="4" nolabel="1">
+                  <tree>
+                    <field name="name"/>
+                    <field name="code"/>
+                  </tree>
+                  <form>
+                    <group>
+                      <field name="name"/>
+                      <field name="code"/>
+                    </group>
+                  </form>
+                </field>
+              </page>
+            </notebook>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="view_carrier_form_tree" model="ir.ui.view">
+      <field name="name">carrier.form.tree</field>
+      <field name="model">carrier.form</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="prod_code"/>
+          <field name="pdf_file_id"/>
+        </tree>
+      </field>
+    </record>
+
+</odoo>

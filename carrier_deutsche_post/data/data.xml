@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<odoo noupdate="1">
+
+    <record id="carrier_letter" model="carrier.account">
+      <field name="name">Letter</field>
+      <field name="partner_id">ANYOD</field>
+      <field name="partner_key">DUMMY</field>
+      <field name="account">pcf_00047@zq4nnzgbnbvt3.webpage.t-com.de</field>
+      <field name="password">DUMMY</field>
+      <field name="type">deutsche_post</field>
+    </record>
+
+    <record id="carrier_mail_germany" model="carrier.account">
+      <field name="name">Registered mail Germany</field>
+      <field name="partner_id">ANYOD</field>
+      <field name="partner_key">DUMMY</field>
+      <field name="account">pcf_00047@zq4nnzgbnbvt3.webpage.t-com.de</field>
+      <field name="password">DUMMY</field>
+      <field name="type">deutsche_post</field>
+    </record>
+
+    <record id="carrier_mail_international" model="carrier.account">
+      <field name="name">Registered mail International</field>
+      <field name="partner_id">ANYOD</field>
+      <field name="partner_key">DUMMY</field>
+      <field name="account">pcf_00047@zq4nnzgbnbvt3.webpage.t-com.de</field>
+      <field name="password">DUMMY</field>
+      <field name="type">deutsche_post</field>
+    </record>	
+
+</odoo>
