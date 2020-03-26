@@ -32,5 +32,17 @@ class SaleOrder(models.Model):
         """Create or refresh delivery line after saving."""
         res = super(SaleOrder, self).write(vals)
         for order in self:
-            order._auto_refresh_delivery()
+            delivery_line = order.order_line.filtered('is_delivery')
+            order.with_context(
+                delivery_discount=delivery_line.discount,
+            )._auto_refresh_delivery(force=bool(delivery_line))
         return res
+
+    def _create_delivery_line(self, carrier, price_unit):
+        """Allow users to keep discounts to delivery lines. Unit price will
+           be recomputed anyway"""
+        sol = super()._create_delivery_line(carrier, price_unit)
+        discount = self.env.context.get('delivery_discount')
+        if discount and sol:
+            sol.discount = discount
+        return sol
