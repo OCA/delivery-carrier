@@ -88,7 +88,8 @@ Authors
 Contributors
 ~~~~~~~~~~~~
 
-* Tecnativa <https://www.tecnativa.com>:
+* `Tecnativa <https://www.tecnativa.com>`_:
+
   * Pedro M. Baeza
   * Vicent Cubells
   * David Vidal
