@@ -35,7 +35,7 @@ class SaleOrder(models.Model):
             delivery_line = order.order_line.filtered('is_delivery')
             order.with_context(
                 delivery_discount=delivery_line.discount,
-            )._auto_refresh_delivery(force=bool(delivery_line))
+            )._auto_refresh_delivery()
         return res
 
     def _create_delivery_line(self, carrier, price_unit):
