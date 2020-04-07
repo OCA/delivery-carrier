@@ -100,7 +100,9 @@ class TestDeliveryAutoRefresh(common.HttpCase):
         self.order = order.create(order._convert_to_write(order._cache))
         _execute_onchanges(order_fixed, 'partner_id')
         _execute_onchanges(order_fixed.order_line, 'product_id')
-        self.order_fixed = order_fixed.create(order_fixed._convert_to_write(order_fixed._cache))
+        self.order_fixed = order_fixed.create(
+            order_fixed._convert_to_write(order_fixed._cache)
+        )
 
     def test_auto_refresh_so(self):
         self.assertFalse(self.order.order_line.filtered('is_delivery'))
