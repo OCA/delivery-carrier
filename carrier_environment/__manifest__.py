@@ -3,7 +3,7 @@
 
 {
     'name': 'Carrier configuration with server_environment',
-    'version': '12.0.1.0.0',
+    'version': '12.0.1.0.1',
     'category': 'Tools',
     'summary': 'Configure carriers with server_environment_files',
     'author': "Akretion, Camptocamp, Odoo Community Association (OCA)",
