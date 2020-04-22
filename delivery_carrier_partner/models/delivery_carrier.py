@@ -5,9 +5,10 @@ from odoo import fields, models
 
 
 class Carrier(models.Model):
-    _inherit = 'delivery.carrier'
+    _inherit = "delivery.carrier"
 
     partner_id = fields.Many2one(
-        comodel_name='res.partner',
-        help='The partner that is doing the delivery service.',
-        string='Transporter')
+        comodel_name="res.partner",
+        help="The partner that is doing the delivery service.",
+        string="Transporter",
+    )
