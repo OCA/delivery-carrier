@@ -27,4 +27,3 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_carrier_partner.field_delivery_carrier__partner_id
 msgid "Transporter"
 msgstr ""
-
