@@ -10,6 +10,7 @@
     'depends': ['base_delivery_carrier_label', 'stock_picking_batch_extended'],
     'website': 'http://github.com/OCA/delivery-carrier',
     'data': [
+        'data/ir.config_parameter.xml',
         'views/stock_batch_picking.xml',
         'wizard/generate_labels_view.xml',
         'wizard/apply_carrier_view.xml',
