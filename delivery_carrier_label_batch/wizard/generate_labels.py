@@ -10,7 +10,7 @@ from itertools import groupby
 from odoo import _, api, exceptions, fields, models, tools
 
 from ..pdf_utils import assemble_pdf
-from ..zpl_utils import assemble_zpl2
+from ..zpl_utils import assemble_zpl2, assemble_zpl2_single_images
 
 _logger = logging.getLogger(__name__)
 
@@ -275,6 +275,12 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
         if file_type == 'pdf':
             return assemble_pdf(files)
         if file_type == 'zpl2':
-            return assemble_zpl2(files)
+            zpl2_single_images = self.env['ir.config_parameter'].get_param(
+                'zpl2.assembler.single.images'
+            )
+            if zpl2_single_images:
+                return assemble_zpl2_single_images(files)
+            else:
+                return assemble_zpl2(files)
         # Merging files of `file_type` not supported, we return nothing
         return
