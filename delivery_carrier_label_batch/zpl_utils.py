@@ -36,7 +36,7 @@ def assemble_zpl2_single_images(files):
         for zpl_img in file_zpl_images:
             img_header, img_content = zpl_img.split(".GRF")
             img_number = img_header.lstrip("~DGR:")
-            if img_content not in to_add_images.keys():
+            if img_content not in to_add_images:
                 if img_number not in to_add_images.values():
                     # Case 1. Keep image as it is
                     to_add_images[img_content] = img_number
@@ -48,11 +48,11 @@ def assemble_zpl2_single_images(files):
                     img_prefix = max_img_number[:3]
                     digit = max_img_number[3:]
                     # Define new img number
-                    new_digit = str(int(digit + 1))
+                    new_digit = str(int(digit) + 1)
                     new_img_number = img_prefix + new_digit
                     # change img number reference in label
                     to_add_images[img_content] = new_img_number
-                    file_label = zpl_labels.get(file_nr)
+                    file_label = zpl_labels[file_nr]
                     file_label.replace(img_number, new_img_number)
                     zpl_labels[file_nr] = file_label
             elif img_number != to_add_images.get(img_content):
