@@ -8,6 +8,7 @@ import codecs
 from contextlib import contextmanager
 from itertools import groupby
 from odoo import _, api, exceptions, fields, models, tools
+from odoo.tools.safe_eval import safe_eval
 
 from ..pdf_utils import assemble_pdf
 from ..zpl_utils import assemble_zpl2, assemble_zpl2_single_images
@@ -275,8 +276,10 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
         if file_type == 'pdf':
             return assemble_pdf(files)
         if file_type == 'zpl2':
-            zpl2_single_images = self.env['ir.config_parameter'].get_param(
-                'zpl2.assembler.single.images'
+            zpl2_single_images = safe_eval(
+                self.env['ir.config_parameter'].get_param(
+                    'zpl2.assembler.single.images'
+                )
             )
             if zpl2_single_images:
                 return assemble_zpl2_single_images(files)

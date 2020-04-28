@@ -59,7 +59,7 @@ def assemble_zpl2_single_images(files):
                 # Case 4
                 # Handle different image numbers for same image
                 file_label = zpl_labels.get(file_nr)
-                file_label.replace(img_number, to_add_images.get(img_content))
+                file_label.replace(img_number, to_add_images[img_content])
                 zpl_labels[file_nr] = file_label
     # Construct final result
     res = header
