@@ -1,12 +1,11 @@
 # Copyright 2018 Tecnativa - Sergio Teruel
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from odoo.tests import SavepointCase
+from odoo.tests.common import Form
 from lxml import etree
 
 
 class TestPartnerDeliveryZone(SavepointCase):
-    at_install = False
-    post_install = True
 
     @classmethod
     def setUpClass(cls):
@@ -27,20 +26,12 @@ class TestPartnerDeliveryZone(SavepointCase):
         cls.product = cls.env['product.product'].create({
             'name': 'test',
         })
-        so = cls.env['sale.order'].new({
-            'partner_id': cls.partner.id,
-            'order_line': [(0, 0, {
-                'name': cls.product.name,
-                'product_id': cls.product.id,
-                'product_uom_qty': 10.0,
-                'product_uom': cls.product.uom_id.id,
-                'price_unit': 1000.00,
-            })],
-        })
-        so.onchange_partner_id()
-        so.onchange_partner_shipping_id_delivery_zone()
-        cls.order = cls.env['sale.order'].create(
-            so._convert_to_write(so._cache))
+        order_form = Form(cls.env['sale.order'])
+        order_form.partner_id = cls.partner
+        with order_form.order_line.new() as line_form:
+            line_form.product_id = cls.product
+            line_form.price_unit = 1000
+        cls.order = order_form.save()
         cls.View = cls.env['ir.ui.view']
 
     def test_partner_child_propagate(self):
