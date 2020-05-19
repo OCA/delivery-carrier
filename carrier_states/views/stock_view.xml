@@ -5,18 +5,18 @@
     <record id="view_picking_withcarrier_out_form" model="ir.ui.view">
         <field name="model">stock.picking</field>
         <field name="inherit_id" ref="base_delivery_carrier_label.view_picking_withcarrier_out_form"/>
-            <field name="arch" type="xml">
-                <xpath expr="//page//group[@name='carrier_data']/.." position="after">
-                    <group name="tracking_status_group" colspan="4" col="3"
-                            attrs="{'invisible': [('delivery_status', '=', False)]}">
+        <field name="arch" type="xml">
+            <xpath expr="//page//group[@name='carrier_data']/.." position="after">
+                <group name="tracking_status_group" colspan="4" col="3"
+                        attrs="{'invisible': [('delivery_status', '=', False)]}">
                     <field name="date_shipped"/>
                     <field name="date_delivered"/>
                     <field name="delivery_status"/>
                     <field name="tracking_state" class="oe_inline"/>
                     <button name="carrier_tracking_status" string="Carrier tracking status" type="object" class="oe_inline"/>
                     <field name="tracking_status_history" colspan="3"/>
-                    </group>
-                </xpath>
-            </field>
-        </record>
+                </group>
+            </xpath>
+        </field>
+    </record>
 </odoo>

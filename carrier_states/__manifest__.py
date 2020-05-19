@@ -11,7 +11,7 @@
     'license': 'AGPL-3',
     'website': 'https://github.com/OCA/delivery-carrier',
     'data': [
-        'views/stock_view.xml'
+        'views/stock_view.xml',
     ],
     'installable': True,
     'application': False
