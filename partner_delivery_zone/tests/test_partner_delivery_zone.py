@@ -108,3 +108,55 @@ class TestPartnerDeliveryZone(SavepointCase):
                 picking.delivery_zone_id,
                 self.order.partner_shipping_id.delivery_zone_id
             )
+
+    def test_order_assign_commercial_partner_delivery_zone(self):
+        # For contact type partners the delivery zone get from commercial
+        # partner
+        self.child_partner_contact = self.env['res.partner'].create({
+            'name': 'Partner contact',
+            'type': 'contact',
+            'parent_id': self.partner.id,
+        })
+        self.child_partner_delivery = self.env['res.partner'].create({
+            'name': 'Partner delivery',
+            'type': 'delivery',
+            'parent_id': self.partner.id,
+        })
+
+        self.order.partner_shipping_id = self.child_partner_contact
+        self.order.onchange_partner_shipping_id_delivery_zone()
+        self.assertEqual(self.order.delivery_zone_id,
+                         self.partner.delivery_zone_id)
+
+        self.order.partner_shipping_id = self.child_partner_delivery
+        self.order.onchange_partner_shipping_id_delivery_zone()
+        self.assertFalse(self.order.delivery_zone_id)
+
+    def test_picking_assign_commercial_partner_contact_zone(self):
+        # For contact type partners the delivery zone get from commercial
+        # partner
+        self.child_partner_contact = self.env['res.partner'].create({
+            'name': 'Partner contact',
+            'type': 'contact',
+            'parent_id': self.partner.id,
+        })
+        self.order.action_confirm()
+        picking = self.order.picking_ids[0]
+        picking.partner_id = self.child_partner_contact
+        picking.onchange_partner_id_zone()
+        self.assertEqual(picking.delivery_zone_id,
+                         self.partner.delivery_zone_id)
+
+    def test_picking_assign_commercial_partner_delivery_zone(self):
+        # For contact type partners the delivery zone get from commercial
+        # partner
+        self.child_partner_delivery = self.env['res.partner'].create({
+            'name': 'Partner delivery',
+            'type': 'delivery',
+            'parent_id': self.partner.id,
+        })
+        self.order.action_confirm()
+        picking = self.order.picking_ids[0]
+        picking.partner_id = self.child_partner_delivery
+        picking.onchange_partner_id_zone()
+        self.assertFalse(picking.delivery_zone_id)

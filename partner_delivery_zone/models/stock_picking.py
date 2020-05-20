@@ -14,5 +14,7 @@ class StockPicking(models.Model):
 
     @api.onchange('partner_id')
     def onchange_partner_id_zone(self):
-        if self.partner_id.delivery_zone_id:
-            self.delivery_zone_id = self.partner_id.delivery_zone_id
+        partner = (self.partner_id if
+                   self.partner_id.type == 'delivery' else
+                   self.partner_id.commercial_partner_id)
+        self.delivery_zone_id = partner.delivery_zone_id
