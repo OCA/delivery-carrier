@@ -24,7 +24,9 @@
         </xpath>
         <xpath expr="//td[@name='td_sched_date']" position="after">
             <td t-if="o.partner_id">
-                <t t-foreach="o.partner_id.delivery_schedule_ids" t-as="horary">
+                <t t-set="partner"
+                   t-value="o.partner_id if o.partner_id.type == 'delivery' else o.partner_id.commercial_partner_id"/>
+                <t t-foreach="partner.delivery_schedule_ids" t-as="horary">
                     <div>
                         <span class="badge badge-pill badge-dark" t-field="horary.display_name"/>
                     </div>
@@ -42,7 +44,9 @@
         </xpath>
         <xpath expr="//td[@name='td_sched_date']" position="after">
             <td t-if="o.partner_id">
-                <t t-foreach="o.partner_id.delivery_schedule_ids" t-as="horary">
+                <t t-set="partner"
+                   t-value="o.partner_id if o.partner_id.type == 'delivery' else o.partner_id.commercial_partner_id"/>
+                <t t-foreach="partner.delivery_schedule_ids" t-as="horary">
                     <div>
                         <span class="badge badge-pill badge-dark" t-field="horary.display_name"/>
                     </div>
