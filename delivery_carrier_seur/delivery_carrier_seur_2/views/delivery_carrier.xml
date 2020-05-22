@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_delivery_carrier_form" model="ir.ui.view">
+        <field name="model">delivery.carrier</field>
+        <field name="inherit_id" ref="delivery.view_delivery_carrier_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='integration_level']" position="after">
+                <field name="seur_price_method" attrs="{'invisible': ['|', ('delivery_type', '!=', 'seur')]}"/>
+            </xpath>
+            <xpath expr="(//page)[1]" position="before">
+                <page string="Pricing" attrs="{'invisible': [('delivery_type', '!=', 'seur')]}">
+                    <group attrs="{'invisible':[('seur_price_method', '!=', 'fixed')]}">
+                        <group>
+                            <field name="fixed_price"/>
+                        </group>
+                    </group>
+                    <group name="general" attrs="{'invisible':[('seur_price_method', '!=', 'base_on_rule')]}">
+                        <field name="price_rule_ids" nolabel="1"/>
+                    </group>
+                </page>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page string="Integration" attrs="{'invisible': ['|', ('delivery_type', '!=', 'seur'), ('integration_level', '!=', 'rate_and_ship')]}">
+                    <group name="">
+                        <group string="Identification">
+                            <field name="seur_vat" attrs="{'required': [('delivery_type', '=', 'seur'), ('integration_level', '=', 'rate_and_ship')]}"/>
+                            <field name="seur_franchise_code"  attrs="{'required': [('delivery_type', '=', 'seur'), ('integration_level', '=', 'rate_and_ship')]}"/>
+                            <field name="seur_accounting_code"  attrs="{'required': [('delivery_type', '=', 'seur'), ('integration_level', '=', 'rate_and_ship')]}"/>
+                            <field name="seur_integration_code"  attrs="{'required': [('delivery_type', '=', 'seur'), ('integration_level', '=', 'rate_and_ship')]}"/>
+                        </group>
+                        <group string="CIT Credentials">
+                            <field name="seur_cit_username"  attrs="{'required': [('delivery_type', '=', 'seur'), ('integration_level', '=', 'rate_and_ship')]}"/>
+                            <field name="seur_cit_password"  attrs="{'required': [('delivery_type', '=', 'seur'), ('integration_level', '=', 'rate_and_ship')]}"/>
+                        </group>
+                        <group string="Service">
+                            <field name="seur_service_code"  attrs="{'required': [('delivery_type', '=', 'seur'), ('integration_level', '=', 'rate_and_ship')]}"/>
+                            <field name="seur_product_code"  attrs="{'required': [('delivery_type', '=', 'seur'), ('integration_level', '=', 'rate_and_ship')]}"/>
+                            <field name="seur_send_sms"  attrs="{'required': [('delivery_type', '=', 'seur'), ('integration_level', '=', 'rate_and_ship')]}"/>
+                        </group>
+                        <group string="WS Credentials">
+                            <field name="seur_ws_username"  attrs="{'required': [('delivery_type', '=', 'seur'), ('integration_level', '=', 'rate_and_ship')]}"/>
+                            <field name="seur_ws_password"  attrs="{'required': [('delivery_type', '=', 'seur'), ('integration_level', '=', 'rate_and_ship')]}"/>
+                        </group>
+                        <group string="Label">
+                            <field name="seur_printer"  attrs="{'required': [('delivery_type', '=', 'seur'), ('integration_level', '=', 'rate_and_ship')]}"/>
+                            <field name="seur_label_format"  attrs="{'required': [('delivery_type', '=', 'seur'), ('integration_level', '=', 'rate_and_ship')]}"/>
+                            <field name="seur_label_size"  attrs="{'required': [('delivery_type', '=', 'seur'), ('integration_level', '=', 'rate_and_ship')]}"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
