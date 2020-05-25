@@ -15,5 +15,7 @@ class SaleOrder(models.Model):
 
     @api.onchange('partner_shipping_id')
     def onchange_partner_shipping_id_delivery_zone(self):
-        if self.partner_shipping_id.delivery_zone_id:
-            self.delivery_zone_id = self.partner_shipping_id.delivery_zone_id
+        partner = (self.partner_shipping_id if
+                   self.partner_shipping_id.type == 'delivery' else
+                   self.partner_shipping_id.commercial_partner_id)
+        self.delivery_zone_id = partner.delivery_zone_id
