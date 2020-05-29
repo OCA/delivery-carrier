@@ -90,36 +90,33 @@ class StockQuantPackage(models.Model):
 
     # Core functions
     def _roulier_generate_labels(self, picking):
-        result = []
-        # by default, only one pack per call
-        # for now roulier manage one pack at a time by default
-        for package in self:
-            response = package._call_roulier_api(picking)
-            package._handle_attachments(picking, response)
-            result.append(self._parse_response(picking, response))
-        return result
+        # send all packs to roulier. It will decide if it makes one call per pack or
+        # one call for all pack depending on the carrier.
+        response = self._call_roulier_api(picking)
+        self._handle_attachments(picking, response)
+        return self._parse_response(picking, response)
 
     def _roulier_parse_response(self, picking, response):
+        parcels_data = []
         parcels = response.get('parcels')
-        parcel = parcels and parcels[0]
-        tracking_number = parcel.get('tracking', {}).get('number')
-        # expected format by base_delivery_carrier_label module
-        label = parcel.get('label')
-        return {
-            'tracking_number': tracking_number,
-            'package_id': len(self) == 1 and self.id or False,
-            'name': (parcel.get('reference') or tracking_number or 
-                     label.get('name')),
-            'file': label.get('data'),
-            'filename': '%s.%s' % (label.get('name'),
-                                   label.get('type', '').lower()),
-            'file_type': label.get('type')
-        }
+        for parcel in parcels:
+            tracking_number = parcel.get('tracking', {}).get('number')
+            # expected format by base_delivery_carrier_label module
+            label = parcel.get('label')
+            parcels_data.append({
+                'tracking_number': tracking_number,
+                'package_id': len(self) == 1 and self.id or False,
+                'name': (parcel.get('reference') or tracking_number or 
+                        label.get('name')),
+                'file': label.get('data'),
+                'filename': '%s.%s' % (label.get('name'),
+                                       label.get('type', '').lower()),
+                'file_type': label.get('type')
+            })
+        return parcels_data
 
     def _roulier_get_parcels(self, picking):
-        # by default, only one pack per call
-        self.ensure_one()
-        return [self._get_parcel(picking)]
+        return [pack._get_parcel(picking) for pack in self]
 
     def open_website_url(self):
         """Open website for parcel tracking.
@@ -146,8 +143,8 @@ class StockQuantPackage(models.Model):
         # and _a-carrier_after_call
         account = picking._get_account(self)
         self.write({'carrier_id': picking.carrier_id.id})
-        roulier_instance = roulier.get(picking.delivery_type)
-        payload = roulier_instance.api()
+
+        payload = {}
 
         payload['auth'] = picking._get_auth(account, package=self)
 
@@ -161,7 +158,7 @@ class StockQuantPackage(models.Model):
         payload = self._before_call(picking, payload)
         try:
             # api call
-            ret = roulier_instance.get_label(payload)
+            ret = roulier.get(picking.delivery_type, 'get_label', payload)
         except InvalidApiInput as e:
             raise UserError(self._invalid_api_input_handling(payload, e))
         except CarrierError as e:
@@ -241,7 +238,7 @@ class StockQuantPackage(models.Model):
         returns:
             string
         """
-        return _('Bad input: %s\n' % exception.message)
+        return _('Bad input: %s\n' % str(exception))
 
     # There is low chance you need to override the following methods.
     def _roulier_handle_attachments(self, picking, response):
