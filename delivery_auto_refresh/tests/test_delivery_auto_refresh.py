@@ -58,7 +58,9 @@ class TestDeliveryAutoRefresh(common.HttpCase):
         })
         self.param_name1 = 'delivery_auto_refresh.auto_add_delivery_line'
         self.param_name2 = 'delivery_auto_refresh.refresh_after_picking'
-        order = self.env['sale.order'].new({
+        order_obj = self.env['sale.order']
+        order_vals = order_obj.default_get(order_obj._fields.keys())
+        order_vals.update({
             'partner_id': self.partner.id,
             'order_line': [
                 (0, 0, {
@@ -67,6 +69,7 @@ class TestDeliveryAutoRefresh(common.HttpCase):
                 })
             ]
         })
+        order = order_obj.new(order_vals)
         _execute_onchanges(order, 'partner_id')
         _execute_onchanges(order.order_line, 'product_id')
         self.order = order.create(order._convert_to_write(order._cache))
