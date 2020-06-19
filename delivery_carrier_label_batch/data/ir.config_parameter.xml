@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <data>
+    <data noupdate="1">
         <record id="zpl2_assembler_single_images" model="ir.config_parameter">
             <field name="key">zpl2.assembler.single.images</field>
             <field name="value">False</field>
         </record>
+        <record id="zpl2_batch_merge" model="ir.config_parameter">
+            <field name="key">zpl2.batch.merge</field>
+            <field name="value">False</field>
+        </record>
+
     </data>
 </odoo>
