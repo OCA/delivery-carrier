@@ -208,11 +208,15 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
                 picking = operations[0].picking_id
                 if pack:
                     label = self_env._find_pack_label(pack)
+                    label_name = pack.name
                 else:
                     label = self_env._find_picking_label(picking)
+                    label_name = picking.name
                 if not label:
                     continue
-                labels.append((label.file_type, label.attachment_id.datas))
+                labels.append((label.file_type,
+                               label.attachment_id.datas,
+                               label_name))
             return labels
 
     @api.multi
@@ -224,6 +228,11 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
 
         """
         self.ensure_one()
+        zpl2_batch_merge = safe_eval(
+            self.env['ir.config_parameter'].get_param(
+                'zpl2.batch.merge'
+            )
+        )
         if not self.batch_ids:
             raise exceptions.UserError(_('No picking batch selected'))
 
@@ -241,23 +250,39 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
             labels = self._get_all_files(batch)
             labels_by_f_type = self._group_labels_by_file_type(labels)
             for f_type, labels in labels_by_f_type.items():
-                labels_bin = [
-                    codecs.decode(label, "base64") for label in labels if label
-                ]
-                filename = batch.name + '.' + f_type
-                filedata = self._concat_files(f_type, labels_bin)
-                if not filedata:
-                    # Merging of `f_type` not supported, so we cannot
-                    # create the attachment
-                    continue
-                data = {
-                    'name': filename,
-                    'res_id': batch.id,
-                    'res_model': 'stock.picking.batch',
-                    'datas': codecs.encode(filedata, 'base64'),
-                    'datas_fname': filename,
-                }
-                self.env['ir.attachment'].create(data)
+                if f_type == 'zpl2' and not zpl2_batch_merge :
+                    # We do not want to merge zpl2
+                    # because too big file can failed on zebra printers
+                    for label in labels:
+                        filename = "%s.%s" % (label['name'], f_type)
+                        data = {
+                            'name': filename,
+                            'res_id': batch.id,
+                            'res_model': 'stock.picking.batch',
+                            'datas': label['data'],
+                            'datas_fname': filename,
+                        }
+                        self.env['ir.attachment'].create(data)
+                else:
+                    labels_bin = [
+                        codecs.decode(label['data'], "base64")
+                        for label in labels if label
+                    ]
+                    filename = batch.name + '.' + f_type
+
+                    filedata = self._concat_files(f_type, labels_bin)
+                    if not filedata:
+                        # Merging of `f_type` not supported, so we cannot
+                        # create the attachment
+                        continue
+                    data = {
+                        'name': filename,
+                        'res_id': batch.id,
+                        'res_model': 'stock.picking.batch',
+                        'datas': codecs.encode(filedata, "base64"),
+                        'datas_fname': filename,
+                    }
+                    self.env['ir.attachment'].create(data)
 
         return {
             'type': 'ir.actions.act_window_close',
@@ -266,9 +291,9 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
     @api.model
     def _group_labels_by_file_type(self, labels):
         res = {}
-        for f_type, label in labels:
+        for f_type, label, label_name in labels:
             res.setdefault(f_type, [])
-            res[f_type].append(label)
+            res[f_type].append({'data': label, 'name': label_name})
         return res
 
     @api.model
