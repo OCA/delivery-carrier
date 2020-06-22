@@ -208,10 +208,11 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
                 picking = operations[0].picking_id
                 if pack:
                     label = self_env._find_pack_label(pack)
-                    label_name = pack.name
+                    label_name = pack.parcel_tracking or pack.name
+
                 else:
                     label = self_env._find_picking_label(picking)
-                    label_name = picking.name
+                    label_name = picking.carrier_tracking_ref or picking.name
                 if not label:
                     continue
                 labels.append((label.file_type,
