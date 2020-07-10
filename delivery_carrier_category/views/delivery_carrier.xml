@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2020 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="delivery_carrier_form_view">
+        <field name="name">delivery.carrier.form (in delivery_carrier_category)</field>
+        <field name="model">delivery.carrier</field>
+        <field name="inherit_id" ref="delivery.view_delivery_carrier_form"/>
+        <field name="arch" type="xml">
+            <field name="delivery_type" position="after">
+                <field name="category_id"/>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="delivery_carrier_search_view">
+        <field name="name">delivery.carrier.search (in delivery_carrier_category)</field>
+        <field name="model">delivery.carrier</field>
+        <field name="inherit_id" ref="delivery.view_delivery_carrier_search"/>
+        <field name="arch" type="xml">
+            <field name="delivery_type" position="after">
+                <field name="category_id"/>
+            </field>
+            <filter name="provider" position="after">
+                <filter string="Category" name="category" context="{'group_by':'category_id'}"/>
+            </filter>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="delivery_carrier_tree_view">
+        <field name="name">delivery.carrier.tree (in delivery_carrier_category)</field>
+        <field name="model">delivery.carrier</field>
+        <field name="inherit_id" ref="delivery.view_delivery_carrier_tree"/>
+        <field name="arch" type="xml">
+            <field name="delivery_type" position="after">
+                <field name="category_id"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>
