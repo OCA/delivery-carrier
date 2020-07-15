@@ -14,6 +14,13 @@ put in a pack before the labels can be printed.
 
 If you don't define your pack it will be considered a picking is a single pack.
 
+Configure
+=========
+
+If using ZPL2 file format, multiple *.zpl can be merged either "as is" or with
+"single image definition" to spare file size.
+Single image definition can be used by defining `ir.config_parameter` with name
+`zpl2.assembler.single.images` to `True`.
 
 Usage
 =====
