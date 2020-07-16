@@ -1,3 +1,5 @@
-Only available in carriers that have been developed using this module, please consult yours carriers addons.
-
-The carrier form will have a new field * Price method * to use fixed or rule based method.
+#. Go to *Sales > Configuration > Sales Orders > Delivery Methods*.
+#. Open or create a new one.
+#. On the "Price Method" field, select "Fixed Price" or "Based on Rules".
+#. You will see standard fields for selecting the price as if the delivery
+   method isn't an integration carrier.
