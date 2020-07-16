@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="stock_picking_delivery_carrier_note_form" model="ir.ui.view">
+        <field name="name">stock.picking.delivery.carrier.note.form</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="priority" eval="20"/>
+        <field name="arch" type="xml">
+            <field name="package_level_ids" position="after">
+                <separator string="Carrier note" />
+                <field name="carrier_note" />
+            </field>
+        </field>
+    </record>
+
+</odoo>
