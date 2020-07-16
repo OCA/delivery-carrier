@@ -1,4 +1,5 @@
-Tis module adds additional functions that will be necessary for the operator
-developments.
+This module allows to force a local price rate computation for any delivery
+method, including those that have been created to query a webservice for
+fetching the rate.
 
-It provides a system to rate the shipping price based on a fixed price or based on rules.
+It uses the existing fixed price or price based on rules computations.
