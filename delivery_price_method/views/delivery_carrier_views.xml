@@ -9,7 +9,7 @@ License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
         <field name="inherit_id" ref="delivery.view_delivery_carrier_form"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='integration_level']" position="after">
-                <field name="price_method" attrs="{'invisible': [('delivery_type', 'in', ['fixed', 'base_on_rule'])]}"/>
+                <field name="price_method" attrs="{'invisible': [('delivery_type', 'in', ['fixed', 'base_on_rule'])], 'required': [('delivery_type', 'not in', ['fixed', 'base_on_rule'])]}"/>
             </xpath>
             <xpath expr="(//page)[1]" position="before">
                 <page string="Pricing" attrs="{'invisible': [('delivery_type', 'in', ['fixed', 'base_on_rule'])]}">
