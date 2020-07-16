@@ -10,6 +10,5 @@
             <field name="key">zpl2.batch.merge</field>
             <field name="value">False</field>
         </record>
-
     </data>
 </odoo>
