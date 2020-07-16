@@ -259,13 +259,13 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
                             'name': filename,
                             'res_id': batch.id,
                             'res_model': 'stock.picking.batch',
-                            'datas': label,
+                            'datas': label['data'],
                             'datas_fname': filename,
                         }
                         self.env['ir.attachment'].create(data)
                 else:
                     labels_bin = [
-                        codecs.decode(label, "base64") for label in labels if label
+                        codecs.decode(label['data'], "base64") for label in labels if label
                     ]
                     filename = batch.name + '.' + f_type
 
