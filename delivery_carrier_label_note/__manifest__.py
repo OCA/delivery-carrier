@@ -3,7 +3,7 @@
     "name": "Delivery carrier label note",
     "version": "12.0.1.0.0",
     "author": "Odoo Nodriza Tech (ONT), Odoo Community Association (OCA)",
-    "website": "https://nodrizatech.com/",
+    "website": "https://github.com/OCA/delivery-carrier",
     "category": "Delivery",
     "license": "AGPL-3",
     "depends": [
