@@ -14,6 +14,7 @@ setuptools.setup(
         'odoo12-addon-delivery_carrier_partner',
         'odoo12-addon-delivery_free_fee_removal',
         'odoo12-addon-delivery_multi_destination',
+        'odoo12-addon-delivery_price_method',
         'odoo12-addon-delivery_state',
         'odoo12-addon-partner_delivery_schedule',
         'odoo12-addon-partner_delivery_zone',
