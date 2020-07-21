@@ -166,15 +166,15 @@ class PostlogisticsWebService(object):
         partner_name = partner.name or partner.parent_id.name
         recipient = {
             'Name1': partner_name,
-            'Street': partner.street,
+            'Street': partner.street2 or partner.street,
             'ZIP': partner.zip,
             'City': partner.city,
             'Country': partner.country_id.code,
             'EMail': partner.email or None,
         }
 
-        if partner.street2:
-            recipient['AddressSuffix'] = partner.street2
+        if partner.street2 and partner.street:
+            recipient['AddressSuffix'] = partner.street
 
         if partner.parent_id and partner.parent_id.name != partner_name:
             recipient['Name2'] = partner.parent_id.name
