@@ -11,6 +11,7 @@ setuptools.setup(
         'odoo11-addon-base_delivery_carrier_label',
         'odoo11-addon-delivery_auto_refresh',
         'odoo11-addon-delivery_carrier_label_default',
+        'odoo11-addon-delivery_carrier_label_postlogistics',
         'odoo11-addon-delivery_carrier_partner',
         'odoo11-addon-delivery_free_fee_removal',
         'odoo11-addon-delivery_multi_destination',
