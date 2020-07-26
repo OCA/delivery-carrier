@@ -1,0 +1,7 @@
+# list the OCA project dependencies, one per line
+# add a github url if you need a forked version
+server-tools
+partner-contact
+stock-logistics-workflow
+webkit-tools
+web
