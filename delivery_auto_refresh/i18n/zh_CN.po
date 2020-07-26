@@ -22,10 +22,13 @@ msgstr ""
 
 #. module: delivery_auto_refresh
 #: model:ir.model,name:delivery_auto_refresh.model_sale_order
-msgid "Sale Order"
-msgstr "销售订单"
+msgid "Quotation"
+msgstr ""
 
 #. module: delivery_auto_refresh
 #: model:ir.model,name:delivery_auto_refresh.model_stock_picking
 msgid "Transfer"
 msgstr "调拨"
+
+#~ msgid "Sale Order"
+#~ msgstr "销售订单"

@@ -20,12 +20,15 @@ msgstr ""
 
 #. module: delivery_auto_refresh
 #: model:ir.model,name:delivery_auto_refresh.model_sale_order
-#, fuzzy
-#| msgid "Sales Order"
-msgid "Sale Order"
-msgstr "Ordini vendita"
+msgid "Quotation"
+msgstr ""
 
 #. module: delivery_auto_refresh
 #: model:ir.model,name:delivery_auto_refresh.model_stock_picking
 msgid "Transfer"
 msgstr "Trasferisci"
+
+#, fuzzy
+#~| msgid "Sales Order"
+#~ msgid "Sale Order"
+#~ msgstr "Ordini vendita"

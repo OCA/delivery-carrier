@@ -20,7 +20,7 @@ msgstr ""
 
 #. module: delivery_auto_refresh
 #: model:ir.model,name:delivery_auto_refresh.model_sale_order
-msgid "Sale Order"
+msgid "Quotation"
 msgstr ""
 
 #. module: delivery_auto_refresh
