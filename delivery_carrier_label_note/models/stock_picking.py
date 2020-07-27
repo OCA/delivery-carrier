@@ -12,3 +12,4 @@ class StockPicking(models.Model):
         store=False,
         readonly=True
     )
+
