@@ -1,7 +1,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 {
-    "name": "Delivery carrier label note",
+    "name": "Delivery carrier sale label note",
     "version": "12.0.1.0.0",
     "author": "Odoo Nodriza Tech (ONT), Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/delivery-carrier",
