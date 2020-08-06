@@ -1,12 +1,12 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* delivery_carrier_partner
+# 	* delivery_carrier_partner
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 12.0\n"
+"Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: <>\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -15,7 +15,7 @@ msgstr ""
 
 #. module: delivery_carrier_partner
 #: model:ir.model,name:delivery_carrier_partner.model_delivery_carrier
-msgid "Delivery Methods"
+msgid "Shipping Methods"
 msgstr ""
 
 #. module: delivery_carrier_partner
