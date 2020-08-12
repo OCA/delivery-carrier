@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="ir_cron_delivery_state" model="ir.cron">
+        <field name="name">Update deliveries states</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False"/>
+        <field name="model_id" ref="model_stock_picking"/>
+        <field name="code">model._update_delivery_state()</field>
+        <field name="state">code</field>
+    </record>
+</odoo>

@@ -21,15 +21,29 @@ class TestDeliveryState(TransactionCase):
             'product_id': product_shipping_cost.id,
             'fixed_price': 99.99,
         })
+        self.product = self.env["product.product"].create({
+            "name": "Test product",
+            "type": "product",
+        })
+        self.partner = self.env["res.partner"].create({
+            "name": "Mr. Odoo",
+        })
+        self.pricelist = self.env['product.pricelist'].create({
+            'name': 'Test pricelist',
+            'item_ids': [(0, 0, {
+                'applied_on': '3_global',
+                'compute_price': 'formula',
+                'base': 'list_price',
+            })]
+        })
 
     def test_delivery_state(self):
-        product = self.env.ref('product.product_delivery_01')
-        partner = self.env.ref('base.res_partner_12')
         sale = self.env['sale.order'].create({
-            'partner_id': partner.id,
+            'partner_id': self.partner.id,
             'carrier_id': self.carrier.id,
+            'pricelist_id': self.pricelist.id,
             'order_line': [(0, 0, {
-                'product_id': product.id,
+                'product_id': self.product.id,
                 'product_uom_qty': 1})]
         })
         sale.get_delivery_price()
