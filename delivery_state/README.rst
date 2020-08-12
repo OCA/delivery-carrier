@@ -35,11 +35,46 @@ ones carrier gives us.
 .. contents::
    :local:
 
+Configuration
+=============
+
+A scheduled action for automating the tracking update for these pickings can be
+configured going to *Settings > Technical > Scheduled Actions* and then choosing
+*Update deliveries states*. It will update the pending delivery states for the
+pickings with service providers with tracking methods configured, and in pending
+state (not delivered or cancelled).
+
 Usage
 =====
 
-* Go to Inventory / Operations and open an out picking
-* In "Additional Info" tab you can see delivery state
+Depending on the delivery service provider, the state tracking could be more or
+less complete, since it could have or not the necessary API calls implemented.
+
+With regular methods (fixed, based on rules):
+
+  #. Go to Inventory / Operations and open an outgoing pending picking.
+  #. In the *Additional Info* tab, assign it a delivery carrier which is fixed or
+     based on rules.
+  #. Validate the picking and you'll see in the same tab the delivery state
+     info with the shipping date and the shipping state.
+
+When service provider methods are implemented, we can follow the same steps as
+described before, but we'll get additionally:
+
+  #. In the *Additional Info* tab, we'll see button *Update tracking state* to
+     manually query the provider API for tracking updates for this expedition.
+  #. Depending on the stated returned by the provider, we could get these
+     states (field *Carrier State*):
+
+        * Shipping recorded in carrier
+        * In transit
+        * Canceled shipment (finished)
+        * Incidence
+        * Warehouse delivered
+        * Customer delivered (finished)
+  #. In the field *Tracking state* we'll get the tracking state name given by
+     the provider (which is mapped to the ones in this module)
+  #. In the field *Tracking history* we'll get the former states log.
 
 Bug Tracker
 ===========
@@ -59,6 +94,7 @@ Authors
 
 * Trey (www.trey.es)
 * FactorLibre
+* Tecnativa
 
 Contributors
 ~~~~~~~~~~~~
@@ -70,6 +106,10 @@ Contributors
 * `FactorLibre <https://www.factorlibre.com>`_:
 
   * Zahra Velasco <zahra.velasco@factorlibre.com>
+* `Tecnativa <https://www.tecnativa.com>`_:
+
+  * Pedro M. Baeza
+  * David Vidal
 
 Maintainers
 ~~~~~~~~~~~
