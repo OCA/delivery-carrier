@@ -1,5 +1,6 @@
 # Copyright 2020 Trey, Kilobytes de Soluciones
 # Copyright 2020 FactorLibre
+# Copyright 2020 Tecnativa - David Vidal
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 {
     'name': 'Delivery State',
@@ -7,6 +8,7 @@
                'and also adds a global fields',
     'author': 'Trey (www.trey.es), '
               'FactorLibre, '
+              'Tecnativa, '
               'Odoo Community Association (OCA)',
     'website': 'https://github.com/OCA/delivery-carrier',
     'license': 'AGPL-3',
@@ -16,6 +18,7 @@
         'delivery',
     ],
     'data': [
+        'data/ir_cron_data.xml',
         'views/stock_picking_views.xml',
     ],
 }
