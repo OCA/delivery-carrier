@@ -375,25 +375,69 @@ ones carrier gives us.</p>
 <p><strong>Table of contents</strong></p>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><a class="reference internal" href="#usage" id="id1">Usage</a></li>
-<li><a class="reference internal" href="#bug-tracker" id="id2">Bug Tracker</a></li>
-<li><a class="reference internal" href="#credits" id="id3">Credits</a><ul>
-<li><a class="reference internal" href="#authors" id="id4">Authors</a></li>
-<li><a class="reference internal" href="#contributors" id="id5">Contributors</a></li>
-<li><a class="reference internal" href="#maintainers" id="id6">Maintainers</a></li>
+<li><a class="reference internal" href="#configuration" id="id1">Configuration</a></li>
+<li><a class="reference internal" href="#usage" id="id2">Usage</a></li>
+<li><a class="reference internal" href="#bug-tracker" id="id3">Bug Tracker</a></li>
+<li><a class="reference internal" href="#credits" id="id4">Credits</a><ul>
+<li><a class="reference internal" href="#authors" id="id5">Authors</a></li>
+<li><a class="reference internal" href="#contributors" id="id6">Contributors</a></li>
+<li><a class="reference internal" href="#maintainers" id="id7">Maintainers</a></li>
 </ul>
 </li>
 </ul>
 </div>
+<div class="section" id="configuration">
+<h1><a class="toc-backref" href="#id1">Configuration</a></h1>
+<p>A scheduled action for automating the tracking update for these pickings can be
+configured going to <em>Settings &gt; Technical &gt; Scheduled Actions</em> and then choosing
+<em>Update deliveries states</em>. It will update the pending delivery states for the
+pickings with service providers with tracking methods configured, and in pending
+state (not delivered or cancelled).</p>
+</div>
 <div class="section" id="usage">
-<h1><a class="toc-backref" href="#id1">Usage</a></h1>
+<h1><a class="toc-backref" href="#id2">Usage</a></h1>
+<p>Depending on the delivery service provider, the state tracking could be more or
+less complete, since it could have or not the necessary API calls implemented.</p>
+<p>With regular methods (fixed, based on rules):</p>
+<blockquote>
+<ol class="arabic simple">
+<li>Go to Inventory / Operations and open an outgoing pending picking.</li>
+<li>In the <em>Additional Info</em> tab, assign it a delivery carrier which is fixed or
+based on rules.</li>
+<li>Validate the picking and you’ll see in the same tab the delivery state
+info with the shipping date and the shipping state.</li>
+</ol>
+</blockquote>
+<p>When service provider methods are implemented, we can follow the same steps as
+described before, but we’ll get additionally:</p>
+<blockquote>
+<ol class="arabic">
+<li><p class="first">In the <em>Additional Info</em> tab, we’ll see button <em>Update tracking state</em> to
+manually query the provider API for tracking updates for this expedition.</p>
+</li>
+<li><p class="first">Depending on the stated returned by the provider, we could get these
+states (field <em>Carrier State</em>):</p>
+<blockquote>
 <ul class="simple">
-<li>Go to Inventory / Operations and open an out picking</li>
-<li>In “Additional Info” tab you can see delivery state</li>
+<li>Shipping recorded in carrier</li>
+<li>In transit</li>
+<li>Canceled shipment (finished)</li>
+<li>Incidence</li>
+<li>Warehouse delivered</li>
+<li>Customer delivered (finished)</li>
 </ul>
+</blockquote>
+</li>
+<li><p class="first">In the field <em>Tracking state</em> we’ll get the tracking state name given by
+the provider (which is mapped to the ones in this module)</p>
+</li>
+<li><p class="first">In the field <em>Tracking history</em> we’ll get the former states log.</p>
+</li>
+</ol>
+</blockquote>
 </div>
 <div class="section" id="bug-tracker">
-<h1><a class="toc-backref" href="#id2">Bug Tracker</a></h1>
+<h1><a class="toc-backref" href="#id3">Bug Tracker</a></h1>
 <p>Bugs are tracked on <a class="reference external" href="https://github.com/OCA/delivery-carrier/issues">GitHub Issues</a>.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us smashing it by providing a detailed and welcomed
@@ -401,16 +445,17 @@ If you spotted it first, help us smashing it by providing a detailed and welcome
 <p>Do not contact contributors directly about support or help with technical issues.</p>
 </div>
 <div class="section" id="credits">
-<h1><a class="toc-backref" href="#id3">Credits</a></h1>
+<h1><a class="toc-backref" href="#id4">Credits</a></h1>
 <div class="section" id="authors">
-<h2><a class="toc-backref" href="#id4">Authors</a></h2>
+<h2><a class="toc-backref" href="#id5">Authors</a></h2>
 <ul class="simple">
 <li>Trey (www.trey.es)</li>
 <li>FactorLibre</li>
+<li>Tecnativa</li>
 </ul>
 </div>
 <div class="section" id="contributors">
-<h2><a class="toc-backref" href="#id5">Contributors</a></h2>
+<h2><a class="toc-backref" href="#id6">Contributors</a></h2>
 <ul class="simple">
 <li><a class="reference external" href="https://www.trey.es">Trey</a>:<ul>
 <li>Roberto Lizana &lt;<a class="reference external" href="mailto:roberto&#64;trey.es">roberto&#64;trey.es</a>&gt;</li>
@@ -420,10 +465,15 @@ If you spotted it first, help us smashing it by providing a detailed and welcome
 <li>Zahra Velasco &lt;<a class="reference external" href="mailto:zahra.velasco&#64;factorlibre.com">zahra.velasco&#64;factorlibre.com</a>&gt;</li>
 </ul>
 </li>
+<li><a class="reference external" href="https://www.tecnativa.com">Tecnativa</a>:<ul>
+<li>Pedro M. Baeza</li>
+<li>David Vidal</li>
+</ul>
+</li>
 </ul>
 </div>
 <div class="section" id="maintainers">
-<h2><a class="toc-backref" href="#id6">Maintainers</a></h2>
+<h2><a class="toc-backref" href="#id7">Maintainers</a></h2>
 <p>This module is maintained by the OCA.</p>
 <a class="reference external image-reference" href="https://odoo-community.org"><img alt="Odoo Community Association" src="https://odoo-community.org/logo.png" /></a>
 <p>OCA, or the Odoo Community Association, is a nonprofit organization whose
