@@ -81,7 +81,6 @@ msgstr "Transferir"
 #: model:ir.cron,cron_name:delivery_state.ir_cron_delivery_state
 #: model:ir.cron,name:delivery_state.ir_cron_delivery_state
 #, fuzzy
-#| msgid "Update tracking state"
 msgid "Update deliveries states"
 msgstr "Actualizar seguimiento"
 
