@@ -15,20 +15,12 @@ class TestDeliveryFreeFeeRemoval(SavepointCase):
         product_delivery = cls.env["product.product"].create(
             {"name": "Delivery Product", "type": "service"}
         )
-        cls.delivery_free = cls.env["delivery.carrier"].create(
+        cls.delivery = cls.env["delivery.carrier"].create(
             {
-                "name": "Delivery Free",
+                "name": "Delivery",
                 "delivery_type": "fixed",
-                "fixed_price": 0,
+                "fixed_price": 10,
                 "free_over": True,
-                "product_id": product_delivery.id,
-            }
-        )
-        cls.delivery_with_charges = cls.env["delivery.carrier"].create(
-            {
-                "name": "Delivery With Charges",
-                "delivery_type": "fixed",
-                "fixed_price": 100.0,
                 "product_id": product_delivery.id,
             }
         )
@@ -52,14 +44,11 @@ class TestDeliveryFreeFeeRemoval(SavepointCase):
         )
 
     def test_delivery_free_fee_removal(self):
-        self.sale.carrier_id = self.delivery_with_charges
-        self.sale.delivery_rating_success = True
-        self.sale.set_delivery_line()
+        self.sale.set_delivery_line(self.delivery, 100)
         self.assertEqual(
             len(self.sale.mapped("order_line").filtered(lambda x: x.is_delivery)), 1
         )
-        self.sale.carrier_id = self.delivery_free
-        self.sale.set_delivery_line()
+        self.sale.set_delivery_line(self.delivery, 0)
         self.assertEqual(
             len(self.sale.mapped("order_line").filtered(lambda x: x.is_delivery)), 0
         )
