@@ -12,6 +12,7 @@ class DropoffSite(models.Model):
     _name = "dropoff.site"
     _inherits = {"res.partner": "partner_id"}
     _order = "code, name"
+    _description = "Dropoff site"
 
     code = fields.Char(string="Code")
 
@@ -21,7 +22,7 @@ class DropoffSite(models.Model):
 
     carrier_id = fields.Many2one(
         comodel_name="delivery.carrier",
-        string="Delivery Method",
+        string="Delivery Carrier",
         required=True,
         domain="[('with_dropoff_site', '=', True)]",
     )
@@ -37,14 +38,15 @@ class DropoffSite(models.Model):
     )
 
     # Inherit part
-    @api.model
-    def create(self, vals):
-        vals.update({"customer": False, "supplier": False})
-        return super(DropoffSite, self).create(vals)
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            vals.update({"customer_rank": 0, "supplier_rank": 0})
+        return super().create(vals_list)
 
     def unlink(self):
         self.mapped("calendar_id").unlink()
-        return super(DropoffSite, self).unlink()
+        return super().unlink()
 
     # Action Part
     def action_enable_calendar(self):

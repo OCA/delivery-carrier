@@ -2,7 +2,7 @@
 <odoo>
     <record id="product_product_delivery_drop_off" model="product.product">
         <field name="name">Drop off method</field>
-        <field name="default_code">Delivery_009</field>
+        <field name="default_code">Delivery_010</field>
         <field name="type">service</field>
         <field name="categ_id" ref="delivery.product_category_deliveries" />
         <field name="sale_ok" eval="False" />

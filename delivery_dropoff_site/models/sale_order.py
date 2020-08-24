@@ -61,6 +61,6 @@ class SaleOrder(models.Model):
             self.final_shipping_partner_id = self.partner_id
 
     def _prepare_procurement_group(self):
-        res = super(SaleOrder, self)._prepare_procurement_group()
+        res = super()._prepare_procurement_group()
         res.update({"final_shipping_partner_id": self.final_shipping_partner_id.id})
         return res
