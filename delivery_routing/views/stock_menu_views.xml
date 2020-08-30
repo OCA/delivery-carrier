@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_stock_inventory_routing" name="Routing"
+      sequence="8"
+      parent="stock.menu_stock_root"
+      groups="stock.group_stock_manager"/>
+</odoo>

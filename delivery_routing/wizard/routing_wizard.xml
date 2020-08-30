@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <!-- wizard action on res.partner -->
+  <act_window id="routing_partner_wizard_action"
+      name="Routing"
+      binding_model="res.partner"
+      res_model="routing.wizard"
+      view_mode="form" target="new"
+      groups="stock.group_stock_manager"/>
+
+  <!-- wizard view -->
+  <record id="routing_wizard_view" model="ir.ui.view">
+    <field name="name">Routing</field>
+    <field name="model">routing.wizard</field>
+    <field name="arch" type="xml">
+      <form string="Routing with partner">
+        <group name="server">
+          <field name="host_osrm"/>
+        </group>
+        <group name="partner_ids">
+          <div>
+            Parameter you will find a heuristique to improve your routing bettwen all this partner.
+          </div>
+          <field name="partner_ids" nolabel="1" colspan="4">
+            <tree string="Contacts" editable="bottom">
+              <field name="name" force_save="1" readonly="True"/>
+              <field name="street" readonly="True"/>
+              <field name="street2" readonly="True"/>
+              <field name="city" readonly="True"/>
+              <field name="state_id" readonly="True"/>
+              <field name="zip" readonly="True"/>
+              <field name="country_id" readonly="True"/>
+            </tree>
+          </field>
+      </group>
+      <group name="setting">
+        <field name="start_and_end_partner_id"/>
+        <field name="num_vehicles"/>
+        <field name="time_max_solver"/>
+        <field name="resolution_criterion"/>
+        <field name="heuristic_type"/>
+        <field name="heuristic_first_solution" attrs="{'invisible': [('heuristic_type', '!=', 'FirstSolutionStrategy')]}"/>
+        <field name="heuristic_metaheuristic"  attrs="{'invisible': [('heuristic_type', '!=', 'LocalSearchMetaheuristic')]}"/>
+      </group>
+        <footer>
+          <button string="Apply" name="action_apply" type="object" class="btn-primary"/>
+          <button string="Cancel" class="btn-secondary" special="cancel" />
+        </footer>
+      </form>
+    </field>
+  </record>
+</odoo>

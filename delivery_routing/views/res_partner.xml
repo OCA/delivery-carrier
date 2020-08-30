@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="stock_routing_vrp_action" model="ir.actions.act_window">
+    <field name="name">Contact</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">res.partner</field>
+    <field name="view_mode">tree</field>
+    <field name="search_view_id" ref="base.view_res_partner_filter"/>
+  </record>
+
+  <menuitem id="routing_menu" name="Routing"
+    action="stock_routing_vrp_action"
+    parent="menu_stock_inventory_routing"
+    sequence="1"/>
+
+</odoo>
