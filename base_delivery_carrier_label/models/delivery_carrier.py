@@ -9,8 +9,6 @@ class DeliveryCarrier(models.Model):
     _inherit = "delivery.carrier"
 
     delivery_type = fields.Selection()
-    code = fields.Char(help="Delivery Method Code (according to carrier)")
-    description = fields.Text()
     available_option_ids = fields.One2many(
         comodel_name="delivery.carrier.option",
         inverse_name="carrier_id",
