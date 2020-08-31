@@ -109,7 +109,6 @@ msgid "Checksum/SHA1"
 msgstr "校验码/SHA1"
 
 #. module: base_delivery_carrier_label
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier__code
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option__code
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_template_option__code
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_picking__carrier_code
@@ -156,7 +155,6 @@ msgid "Default format of the carrier's label you want to print"
 msgstr "要打印的承运商标签的默认格式"
 
 #. module: base_delivery_carrier_label
-#: model:ir.model.fields,help:base_delivery_carrier_label.field_delivery_carrier__code
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_stock_picking__carrier_code
 msgid "Delivery Method Code (according to carrier)"
 msgstr "交货方式代码（根据承运商）"
@@ -188,11 +186,9 @@ msgid "Delivery carrier template option"
 msgstr "送货承运商模板选项"
 
 #. module: base_delivery_carrier_label
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier__description
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option__description
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_template_option__description
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__description
-#: model_terms:ir.ui.view,arch_db:base_delivery_carrier_label.view_delivery_carrier_form
 msgid "Description"
 msgstr "说明"
 

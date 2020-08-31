@@ -107,7 +107,6 @@ msgid "Checksum/SHA1"
 msgstr ""
 
 #. module: base_delivery_carrier_label
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier__code
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option__code
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_template_option__code
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_picking__carrier_code
@@ -156,7 +155,6 @@ msgid "Default format of the carrier's label you want to print"
 msgstr "Format par défaut des étiquettes que vous voulez imprimer"
 
 #. module: base_delivery_carrier_label
-#: model:ir.model.fields,help:base_delivery_carrier_label.field_delivery_carrier__code
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_stock_picking__carrier_code
 msgid "Delivery Method Code (according to carrier)"
 msgstr "Code de méthode de livraison (en fonction du transporteur)"
@@ -190,11 +188,9 @@ msgid "Delivery carrier template option"
 msgstr "Option de méthode de livraison"
 
 #. module: base_delivery_carrier_label
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier__description
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option__description
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_template_option__description
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__description
-#: model_terms:ir.ui.view,arch_db:base_delivery_carrier_label.view_delivery_carrier_form
 msgid "Description"
 msgstr "Description"
 
