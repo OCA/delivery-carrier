@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_carrier_service_level_form" model="ir.ui.view">
+        <field name="name">carrier.service.level.form</field>
+        <field name="model">carrier.service.level</field>
+        <field name="arch" type="xml">
+            <form string="Carrier Service Level">
+                <sheet>
+                    <group>
+                        <field name="active" />
+                    </group>
+                    <group>
+                        <field name="carrier_id" />
+                        <field name="code" />
+                        <field name="name" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_carrier_service_level_tree" model="ir.ui.view">
+        <field name="name">carrier.service.level.tree</field>
+        <field name="model">carrier.service.level</field>
+        <field name="arch" type="xml">
+            <tree string="Carrier Service Level">
+                <field name="carrier_id" />
+                <field name="code" />
+                <field name="name" />
+            </tree>
+        </field>
+    </record>
+    <record id="view_carrier_service_level_search" model="ir.ui.view">
+        <field name="name">carrier.service.level.search</field>
+        <field name="model">carrier.service.level</field>
+        <field name="arch" type="xml">
+            <search string="Carrier Service Level">
+                <field name="carrier_id" />
+                <field name="code" />
+                <field name="name" />
+                <group expand="1" string="Group By">
+                    <filter
+                        string="Carrier"
+                        name="carrier_id"
+                        context="{'group_by':'carrier_id'} "
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="carrier_service_level_action" model="ir.actions.act_window">
+        <field name="name">Carrier Service Level</field>
+        <field name="res_model">carrier.service.level</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_id" ref="view_carrier_service_level_tree" />
+        <field name="context">{}</field>
+    </record>
+    <menuitem
+        id="menu_carrier_service_level"
+        name="Carrier Service Level"
+        parent="delivery.menu_delivery"
+        action="carrier_service_level_action"
+        groups="stock.group_stock_manager"
+        sequence="10"
+    />
+</odoo>
