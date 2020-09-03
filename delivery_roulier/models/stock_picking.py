@@ -112,7 +112,7 @@ class StockPicking(models.Model):
         """
         self.ensure_one()
         domain = [
-            ("name", "=", self.carrier_id.delivery_type),
+            ("delivery_type", "=", self.carrier_id.delivery_type),
             "|",
             ("company_id", "=", self.company_id.id),
             ("company_id", "=", False)
@@ -241,9 +241,6 @@ class StockPicking(models.Model):
 
         # display a list of pickings
         action = self.env.ref('stock.action_package_view').read()[0]
-        action['res_id'] = packages.ids
-        action['domain'] = "[('id', 'in', [%s])]" % (
-            ",".join(map(str, packages.ids))
-        )
-        action['context'] = "{'picking_id': %s }" % str(self.id)
+        action['domain'] = [('id', 'in', packages.ids)]
+        action['context'] = {'picking_id': self.id}
         return action
