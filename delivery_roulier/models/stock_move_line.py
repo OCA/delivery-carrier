@@ -30,4 +30,4 @@ class StockMoveLine(models.Model):
 
     def get_sale_order_line(self):
         self.ensure_one()
-        return self.move_id and self.move_id.sale_line_id or False
+        return self.move_id.sale_line_id
