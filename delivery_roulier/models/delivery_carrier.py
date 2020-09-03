@@ -19,6 +19,7 @@ class DeliveryCarrier(models.Model):
         res = super().send_shipping(pickings)
         if not res:
             return [{'exact_price': False, 'tracking_number': False}]
+        return res
 
     def _is_roulier(self):
         self.ensure_one()
@@ -26,7 +27,7 @@ class DeliveryCarrier(models.Model):
 
     def cancel_shipment(self, pickings):
         if self._is_roulier:
-            return NotImplementedError()
+            raise NotImplementedError()
         else:
             return super().cancel_shipment(pickings)
 
