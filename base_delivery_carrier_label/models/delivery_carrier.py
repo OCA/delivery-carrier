@@ -17,6 +17,7 @@ class DeliveryCarrier(models.Model):
         comodel_name='delivery.carrier.option',
         inverse_name='carrier_id',
         string='Option',
+        context={'active_test': False},
     )
 
     @api.multi
