@@ -17,6 +17,7 @@ class DeliveryCarrierOption(models.Model):
     _description = "Delivery carrier option"
     _inherits = {"delivery.carrier.template.option": "tmpl_option_id"}
 
+    active = fields.Boolean(default=True)
     mandatory = fields.Boolean(
         help="If checked, this option is necessarily applied " "to the delivery order"
     )
