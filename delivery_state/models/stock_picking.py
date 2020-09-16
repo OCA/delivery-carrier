@@ -11,7 +11,7 @@ class StockPicking(models.Model):
     date_shipped = fields.Date(string="Shipment Date", readonly=True,)
     date_delivered = fields.Datetime(string="Delivery Date", readonly=True,)
     tracking_state = fields.Char(
-        string="Tracking state", readonly=True, index=True, track_visibility="always",
+        string="Tracking state", readonly=True, index=True, tracking=True,
     )
     tracking_state_history = fields.Text(
         string="Tracking state history", readonly=True,
@@ -26,7 +26,7 @@ class StockPicking(models.Model):
             ("warehouse_delivered", "Warehouse delivered"),
         ],
         string="Carrier State",
-        track_visibility="onchange",
+        tracking=True,
         readonly=True,
     )
 
