@@ -2,7 +2,9 @@
 # Copyright 2020 FactorLibre
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from odoo import fields
+from odoo.tests import Form
 from odoo.tests.common import TransactionCase
+from odoo.tools import float_compare
 
 
 class TestDeliveryState(TransactionCase):
@@ -49,17 +51,23 @@ class TestDeliveryState(TransactionCase):
         sale = self.env["sale.order"].create(
             {
                 "partner_id": self.partner.id,
-                "carrier_id": self.carrier.id,
                 "pricelist_id": self.pricelist.id,
                 "order_line": [
                     (0, 0, {"product_id": self.product.id, "product_uom_qty": 1})
                 ],
             }
         )
-        sale.get_delivery_price()
-        self.assertEquals(sale.delivery_price, 99.99)
-        sale.set_delivery_line()
-        self.assertEquals(len(sale.order_line), 2)
+        delivery_wizard = Form(
+            self.env["choose.delivery.carrier"].with_context(
+                {"default_order_id": sale.id, "default_carrier_id": self.carrier}
+            )
+        )
+        choose_delivery_carrier = delivery_wizard.save()
+        choose_delivery_carrier.button_confirm()
+        delivery_lines = sale.order_line.filtered(lambda r: r.is_delivery)
+        delivery_price = sum(delivery_lines.mapped("price_unit"))
+        self.assertEqual(float_compare(delivery_price, 99.99, precision_digits=2), 0)
+        self.assertEquals(len(delivery_lines), 1)
         sale.action_confirm()
         picking = sale.picking_ids[0]
         self.assertEquals(len(picking.move_lines), 1)
