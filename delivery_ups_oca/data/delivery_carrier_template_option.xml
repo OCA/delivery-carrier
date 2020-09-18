@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2020 Hunki Enterprises BV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="shipping_service_code_01" model="delivery.carrier.template.option">
+        <field name="name">Next Day Air</field>
+        <field name="code">01</field>
+    </record>
+    <record id="shipping_service_code_02" model="delivery.carrier.template.option">
+        <field name="name">2nd Day Air</field>
+        <field name="code">02</field>
+    </record>
+    <record id="shipping_service_code_03" model="delivery.carrier.template.option">
+        <field name="name">Ground</field>
+        <field name="code">03</field>
+    </record>
+    <record id="shipping_service_code_07" model="delivery.carrier.template.option">
+        <field name="name">Express</field>
+        <field name="code">07</field>
+    </record>
+    <record id="shipping_service_code_08" model="delivery.carrier.template.option">
+        <field name="name">Expedited</field>
+        <field name="code">08</field>
+    </record>
+    <record id="shipping_service_code_11" model="delivery.carrier.template.option">
+        <field name="name">UPS Standard</field>
+        <field name="code">11</field>
+    </record>
+    <record id="shipping_service_code_12" model="delivery.carrier.template.option">
+        <field name="name">3 Day Select</field>
+        <field name="code">12</field>
+    </record>
+    <record id="shipping_service_code_13" model="delivery.carrier.template.option">
+        <field name="name">Next Day Air Saver</field>
+        <field name="code">13</field>
+    </record>
+    <record id="shipping_service_code_14" model="delivery.carrier.template.option">
+        <field name="name">UPS Next Day Air® Early</field>
+        <field name="code">14</field>
+    </record>
+    <record id="shipping_service_code_17" model="delivery.carrier.template.option">
+        <field name="name">UPS Worldwide Economy DDU</field>
+        <field name="code">17</field>
+    </record>
+    <record id="shipping_service_code_54" model="delivery.carrier.template.option">
+        <field name="name">Express Plus</field>
+        <field name="code">54</field>
+    </record>
+    <record id="shipping_service_code_59" model="delivery.carrier.template.option">
+        <field name="name">2nd Day Air A.M.</field>
+        <field name="code">59</field>
+    </record>
+    <record id="shipping_service_code_65" model="delivery.carrier.template.option">
+        <field name="name">UPS Saver</field>
+        <field name="code">65</field>
+    </record>
+    <record id="shipping_service_code_M2" model="delivery.carrier.template.option">
+        <field name="name">First Class Mail</field>
+        <field name="code">M2</field>
+    </record>
+    <record id="shipping_service_code_M3" model="delivery.carrier.template.option">
+        <field name="name">Priority Mail</field>
+        <field name="code">M3</field>
+    </record>
+    <record id="shipping_service_code_M4" model="delivery.carrier.template.option">
+        <field name="name">Expedited Mail Innovations</field>
+        <field name="code">M4</field>
+    </record>
+    <record id="shipping_service_code_M5" model="delivery.carrier.template.option">
+        <field name="name">Priority Mail Innovations</field>
+        <field name="code">M5</field>
+    </record>
+    <record id="shipping_service_code_M6" model="delivery.carrier.template.option">
+        <field name="name">Economy Mail Innovations</field>
+        <field name="code">M6</field>
+    </record>
+    <record id="shipping_service_code_M7" model="delivery.carrier.template.option">
+        <field name="name">Mail Innovations (MI) Returns</field>
+        <field name="code">M7</field>
+    </record>
+    <record id="shipping_service_code_70" model="delivery.carrier.template.option">
+        <field name="name">UPS Access PointTM Economy</field>
+        <field name="code">70</field>
+    </record>
+    <record id="shipping_service_code_71" model="delivery.carrier.template.option">
+        <field name="name">UPS Worldwide Express Freight Midday</field>
+        <field name="code">71</field>
+    </record>
+    <record id="shipping_service_code_72" model="delivery.carrier.template.option">
+        <field name="name">UPS Worldwide Economy</field>
+        <field name="code">72</field>
+    </record>
+    <record id="shipping_service_code_74" model="delivery.carrier.template.option">
+        <field name="name">UPS Express®12:00</field>
+        <field name="code">74</field>
+    </record>
+    <record id="shipping_service_code_82" model="delivery.carrier.template.option">
+        <field name="name">UPS Today Standard</field>
+        <field name="code">82</field>
+    </record>
+    <record id="shipping_service_code_83" model="delivery.carrier.template.option">
+        <field name="name">UPS Today Dedicated Courier</field>
+        <field name="code">83</field>
+    </record>
+    <record id="shipping_service_code_84" model="delivery.carrier.template.option">
+        <field name="name">UPS Today Intercity</field>
+        <field name="code">84</field>
+    </record>
+    <record id="shipping_service_code_85" model="delivery.carrier.template.option">
+        <field name="name">UPS Today Express</field>
+        <field name="code">85</field>
+    </record>
+    <record id="shipping_service_code_86" model="delivery.carrier.template.option">
+        <field name="name">UPS Today Express Saver</field>
+        <field name="code">86</field>
+    </record>
+    <record id="shipping_service_code_96" model="delivery.carrier.template.option">
+        <field name="name">UPS Worldwide Express Freight</field>
+        <field name="code">96</field>
+    </record>
+</odoo>
