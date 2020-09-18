@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2020 Hunki Enterprises BV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="param_shipping_production" model="ir.config_parameter">
+        <field name="key">delivery_carrier_label_ups.shipping_production</field>
+        <field name="value">https://onlinetools.ups.com/ship/v1807/shipments</field>
+    </record>
+    <record id="param_shipping_test" model="ir.config_parameter">
+        <field name="key">delivery_carrier_label_ups.shipping_test</field>
+        <field name="value">https://wwwcie.ups.com/ship/v1807/shipments</field>
+    </record>
+    <record id="param_label_production" model="ir.config_parameter">
+        <field name="key">delivery_carrier_label_ups.label_production</field>
+        <field
+            name="value"
+        >https://onlinetools.ups.com/ship/v1807/shipments/labels</field>
+    </record>
+    <record id="param_label_test" model="ir.config_parameter">
+        <field name="key">delivery_carrier_label_ups.label_test</field>
+        <field name="value">https://wwwcie.ups.com/ship/v1807/shipments/labels</field>
+    </record>
+    <record id="param_cancel_production" model="ir.config_parameter">
+        <field name="key">delivery_carrier_label_ups.cancel_production</field>
+        <field
+            name="value"
+        >https://onlinetools.ups.com/ship/v1/shipments/cancel/%s</field>
+    </record>
+    <record id="param_cancel_test" model="ir.config_parameter">
+        <field name="key">delivery_carrier_label_ups.cancel_test</field>
+        <field name="value">https://wwwcie.ups.com/ship/v1/shipments/cancel/%s</field>
+    </record>
+</odoo>
