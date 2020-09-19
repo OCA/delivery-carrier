@@ -10,9 +10,7 @@
     "license": "AGPL-3",
     "installable": True,
     "application": False,
-    "depends": [
-        "delivery",
-    ],
+    "depends": ["delivery"],
     "data": [
         "views/stock_picking_views.xml",
         "wizard/stock_immediate_transfer_views.xml",

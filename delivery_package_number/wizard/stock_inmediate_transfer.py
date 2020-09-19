@@ -4,7 +4,7 @@ from odoo import fields, models
 
 
 class StockImmediateTransfer(models.TransientModel):
-    _inherit = 'stock.immediate.transfer'
+    _inherit = "stock.immediate.transfer"
 
     number_of_packages = fields.Integer(
         help="Set the number of packages for this picking(s)",
@@ -12,6 +12,5 @@ class StockImmediateTransfer(models.TransientModel):
 
     def process(self):
         if self.number_of_packages:
-            self.pick_ids.write(
-                {"number_of_packages": self.number_of_packages})
+            self.pick_ids.write({"number_of_packages": self.number_of_packages})
         return super().process()
