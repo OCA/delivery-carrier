@@ -7,13 +7,11 @@ class StockPicking(models.Model):
     _inherit = "stock.picking"
 
     number_of_packages = fields.Integer(
-        string="Number of Packages",
-        default=1,
-        copy=False,
+        string="Number of Packages", default=1, copy=False,
     )
 
 
-class StockPicking(models.Model):
+class StockMoveLine(models.Model):
     _inherit = "stock.move.line"
 
     @api.onchange("result_package_id")
