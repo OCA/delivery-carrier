@@ -4,7 +4,7 @@
         <field name="model">stock.picking</field>
         <field name="inherit_id" ref="delivery.view_picking_withcarrier_out_form" />
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='shipping_weight']" position="after">
+            <xpath expr="//group[@name='carrier_data']" position="inside">
                 <field name="package_ids" invisible="1" />
                 <field
                     name="number_of_packages"
