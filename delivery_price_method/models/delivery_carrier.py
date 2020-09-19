@@ -5,16 +5,16 @@ from odoo import fields, models
 
 
 class DeliveryCarrier(models.Model):
-    _inherit = 'delivery.carrier'
+    _inherit = "delivery.carrier"
 
     price_method = fields.Selection(
         selection=[
-            ('carrier', 'Carrier obtained price'),
-            ('fixed', 'Fixed price'),
-            ('base_on_rule', 'Based on Rules'),
+            ("carrier", "Carrier obtained price"),
+            ("fixed", "Fixed price"),
+            ("base_on_rule", "Based on Rules"),
         ],
-        string='Price method',
-        default='carrier',
+        string="Price method",
+        default="carrier",
     )
 
     def rate_shipment(self, order):
@@ -33,8 +33,7 @@ class DeliveryCarrier(models.Model):
     def send_shipping(self, pickings):
         res = super().send_shipping(pickings)
         if self.price_method in ("fixed", "base_on_rule"):
-            rates = getattr(
-                self, '%s_send_shipping' % self.price_method)(pickings)
+            rates = getattr(self, "%s_send_shipping" % self.price_method)(pickings)
             for index, rate in enumerate(rates):
                 del rate["tracking_number"]  # remove offending key
                 res[index].update(rate)
