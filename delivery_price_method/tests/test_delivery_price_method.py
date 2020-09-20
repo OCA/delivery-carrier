@@ -1,7 +1,9 @@
 # Copyright 2020 Trey, Kilobytes de Soluciones
 # Copyright 2020 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+from odoo.tests import Form
 from odoo.tests.common import SavepointCase
+from odoo.tools import float_compare
 
 
 class TestDeliveryPriceMethod(SavepointCase):
@@ -44,12 +46,23 @@ class TestDeliveryPriceMethod(SavepointCase):
             }
         )
 
+    def _add_delivery(self):
+        sale = self.sale
+        delivery_wizard = Form(
+            self.env["choose.delivery.carrier"].with_context(
+                {"default_order_id": sale.id, "default_carrier_id": self.carrier}
+            )
+        )
+        choose_delivery_carrier = delivery_wizard.save()
+        choose_delivery_carrier.button_confirm()
+
     def test_delivery_price_fixed(self):
         sale = self.sale
-        sale.get_delivery_price()
-        self.assertEquals(sale.delivery_price, 99.99)
-        sale.set_delivery_line()
-        self.assertEquals(len(sale.order_line), 2)
+        self._add_delivery()
+        delivery_lines = sale.order_line.filtered(lambda r: r.is_delivery)
+        delivery_price = sum(delivery_lines.mapped("price_unit"))
+        self.assertEqual(float_compare(delivery_price, 99.99, precision_digits=2), 0)
+        self.assertEquals(len(delivery_lines), 1)
         sale.action_confirm()
         picking = sale.picking_ids[0]
         self.assertEquals(len(picking.move_lines), 1)
@@ -63,11 +76,16 @@ class TestDeliveryPriceMethod(SavepointCase):
     def test_delivery_price_method(self):
         self.carrier.write({"price_method": "fixed", "fixed_price": 99.99})
         sale = self.sale
-        sale.get_delivery_price()
-        self.assertEquals(sale.delivery_price, 99.99)
+        self._add_delivery()
+        delivery_lines = sale.order_line.filtered(lambda r: r.is_delivery)
+        delivery_price = sum(delivery_lines.mapped("price_unit"))
+        self.assertEqual(float_compare(delivery_price, 99.99, precision_digits=2), 0)
+        self.assertEquals(len(delivery_lines), 1)
         self.carrier.write({"price_method": "fixed", "fixed_price": 5})
-        sale.get_delivery_price()
-        self.assertEquals(sale.delivery_price, 5)
+        self._add_delivery()
+        delivery_lines = sale.order_line.filtered(lambda r: r.is_delivery)
+        delivery_price = sum(delivery_lines.mapped("price_unit"))
+        self.assertEquals(delivery_price, 5)
         self.carrier.write(
             {
                 "price_method": "base_on_rule",
@@ -85,5 +103,7 @@ class TestDeliveryPriceMethod(SavepointCase):
                 ],
             }
         )
-        sale.get_delivery_price()
-        self.assertEquals(sale.delivery_price, 11.11)
+        self._add_delivery()
+        delivery_lines = sale.order_line.filtered(lambda r: r.is_delivery)
+        delivery_price = sum(delivery_lines.mapped("price_unit"))
+        self.assertEquals(delivery_price, 11.11)
