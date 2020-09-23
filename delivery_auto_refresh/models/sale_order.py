@@ -33,6 +33,8 @@ class SaleOrder(models.Model):
         res = super(SaleOrder, self).write(vals)
         for order in self:
             delivery_line = order.order_line.filtered('is_delivery')
+            if len(delivery_line) > 1:
+                continue
             order.with_context(
                 delivery_discount=delivery_line.discount,
             )._auto_refresh_delivery()
