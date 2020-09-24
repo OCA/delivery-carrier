@@ -8,6 +8,7 @@ from odoo import models, fields, api
 class CarrierAccount(models.Model):
     _name = 'carrier.account'
     _description = 'Base account datas'
+    _order= 'sequence'
 
     @api.model
     def _selection_file_format(self):
@@ -17,6 +18,7 @@ class CarrierAccount(models.Model):
                 ('XML', 'XML')]
 
     name = fields.Char(required=True)
+    sequence = fields.Integer()
     delivery_type = fields.Selection(
         selection=lambda self: self.env["delivery.carrier"]
         ._fields["delivery_type"].selection,
