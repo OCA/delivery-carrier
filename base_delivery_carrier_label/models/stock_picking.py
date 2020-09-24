@@ -227,6 +227,19 @@ class StockPicking(models.Model):
         vals = self._values_with_carrier_options(vals)
         return super(StockPicking, self).create(vals)
 
+    def _get_carrier_account(self):
+        """ Return a carrier suitable for the current picking """
+        return self.env["carrier.account"].search(
+            [
+                ("delivery_type", "in", self.mapped("delivery_type")),
+                "|",
+                ("company_id", "=", False),
+                ("company_id", "in", self.mapped("company_id.id")),
+            ],
+            limit=1,
+            order="company_id asc, sequence asc",
+        )
+
     def _get_label_sender_address(self):
         """ On each carrier label module you need to define
             which is the sender of the parcel.
