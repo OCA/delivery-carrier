@@ -8,7 +8,7 @@ from odoo import models, fields, api
 class CarrierAccount(models.Model):
     _name = 'carrier.account'
     _description = 'Base account datas'
-    _order= 'sequence'
+    _order = 'sequence'
 
     @api.model
     def _selection_file_format(self):
