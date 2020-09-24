@@ -4,6 +4,7 @@
         <field name="model">carrier.account</field>
         <field name="arch" type="xml">
             <tree>
+                <field name="sequence" widget="handle" />
                 <field name="name" />
                 <field name="account" />
                 <field name="company_id" />
