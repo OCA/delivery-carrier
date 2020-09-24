@@ -25,6 +25,12 @@ class StockPicking(models.Model):
     option_ids = fields.Many2many(
         comodel_name="delivery.carrier.option", string="Options"
     )
+    show_label_button = fields.Boolean(compute="_compute_show_label_button")
+
+    def _compute_show_label_button(self):
+        """Determine if we should show the button to generate labels"""
+        for this in self:
+            this.show_label_button = this.state == "done" and this.carrier_code
 
     def generate_default_label(self):
         """ Abstract method
