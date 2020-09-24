@@ -29,5 +29,5 @@ class DeliveryCarrier(models.Model):
         result = super().send_shipping(pickings)
         for result_dict, picking in zip(result, pickings):
             for label in result_dict.get("labels", []):
-                picking.attach_label(label)
+                picking.attach_shipping_label(label)
         return result
