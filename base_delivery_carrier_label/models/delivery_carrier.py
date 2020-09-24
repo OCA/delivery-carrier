@@ -22,3 +22,12 @@ class DeliveryCarrier(models.Model):
             if available_option.mandatory or available_option.by_default:
                 options |= available_option
         return options
+
+    def send_shipping(self, pickings):
+        """Handle labels and  if we have them. Expected format is {'labels': [{}, ...]}
+        The dicts are input for stock.picking#attach_label"""
+        result = super().send_shipping(pickings)
+        for result_dict, picking in zip(result, pickings):
+            for label in result_dict.get("labels", []):
+                picking.attach_label(label)
+        return result
