@@ -21,6 +21,7 @@ addon | version | summary
 [base_delivery_carrier_label](base_delivery_carrier_label/) | 10.0.1.2.0 | Base module for carrier labels
 [delivery_auto_refresh](delivery_auto_refresh/) | 10.0.1.0.0 | Auto-refresh delivery price in sales orders
 [delivery_carrier_b2c](delivery_carrier_b2c/) | 10.0.0.1.0 | Delivery Carrier Business To Customer
+[delivery_carrier_category](delivery_carrier_category/) | 10.0.1.0.0 | Adds a category to delivery carriers in order to help users classifying them
 [delivery_carrier_default_tracking_url](delivery_carrier_default_tracking_url/) | 10.0.1.0.0 | Adds the default tracking url on delivery carrier
 [delivery_carrier_deposit](delivery_carrier_deposit/) | 10.0.0.1.2 | Create deposit slips
 [delivery_carrier_label_postlogistics](delivery_carrier_label_postlogistics/) | 10.0.1.0.2 | Print postlogistics shipping labels
