@@ -54,17 +54,6 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
             yield pack, list(grp_operations), pack_label
 
     @api.model
-    def _find_picking_label(self, picking):
-        label_obj = self.env['shipping.label']
-        domain = [
-            ('res_id', '=', picking.id),
-            ('package_id', '=', False),
-        ]
-        return label_obj.search(
-            domain, order='create_date DESC', limit=1
-        )
-
-    @api.model
     def _find_pack_label(self, pack):
         label_obj = self.env['shipping.label']
         domain = [('package_id', '=', pack.id)]
@@ -205,19 +194,11 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
             self_env = self.with_env(new_env)
             labels = []
             for pack, operations, label in self_env._get_packs(batch):
-                picking = operations[0].picking_id
-                if pack:
-                    label = self_env._find_pack_label(pack)
-                    label_name = pack.parcel_tracking or pack.name
-
-                else:
-                    label = self_env._find_picking_label(picking)
-                    label_name = picking.carrier_tracking_ref or picking.name
+                label = self_env._find_pack_label(pack)
                 if not label:
                     continue
-                labels.append((label.file_type,
-                               label.attachment_id.datas,
-                               label_name))
+                label_name = pack.parcel_tracking or pack.name
+                labels.append((label.file_type, label.attachment_id.datas, label_name))
             return labels
 
     @api.multi
