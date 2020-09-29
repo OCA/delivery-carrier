@@ -4,82 +4,90 @@ import base64
 
 import odoo.tests.common as common
 from odoo.modules import get_module_resource
+from odoo import exceptions
 
 
-class TestGenerateLabels(common.TransactionCase):
+class TestGenerateLabels(common.SavepointCase):
 
     """ Test the wizard for delivery carrier label generation """
 
-    def setUp(self):
-        super(TestGenerateLabels, self).setUp()
+    @classmethod
+    def setUpClass(cls):
+        super(TestGenerateLabels, cls).setUpClass()
 
-        Move = self.env['stock.move']
-        Picking = self.env['stock.picking']
-        ShippingLabel = self.env['shipping.label']
-        BatchPicking = self.env['stock.picking.batch']
-        self.DeliveryCarrierLabelGenerate = self.env[
+        Move = cls.env['stock.move']
+        Picking = cls.env['stock.picking']
+        ShippingLabel = cls.env['shipping.label']
+        BatchPicking = cls.env['stock.picking.batch']
+        cls.DeliveryCarrierLabelGenerate = cls.env[
             'delivery.carrier.label.generate']
-        self.stock_location = self.env.ref('stock.stock_location_stock')
-        self.customer_location = self.env.ref('stock.stock_location_customers')
+        cls.stock_location = cls.env.ref('stock.stock_location_stock')
+        cls.customer_location = cls.env.ref('stock.stock_location_customers')
 
-        self.productA = self.env['product.product'].create({
+        cls.productA = cls.env['product.product'].create({
             'name': 'Product A',
             'type': 'product'
         })
-        self.productB = self.env['product.product'].create({
+        cls.productB = cls.env['product.product'].create({
             'name': 'Product B',
             'type': 'product'
         })
-        self.env['stock.quant']._update_available_quantity(
-            self.productA,
-            self.stock_location,
+        cls.env['stock.quant']._update_available_quantity(
+            cls.productA,
+            cls.stock_location,
             20.0
         )
-        self.env['stock.quant']._update_available_quantity(
-            self.productB,
-            self.stock_location,
+        cls.env['stock.quant']._update_available_quantity(
+            cls.productB,
+            cls.stock_location,
             20.0
         )
 
         picking_out_1 = Picking.create(
-            {'partner_id': self.ref('base.res_partner_12'),
-             'location_id': self.stock_location.id,
-             'location_dest_id': self.customer_location.id,
-             'picking_type_id': self.ref('stock.picking_type_out')})
+            {'partner_id': cls.env.ref('base.res_partner_12').id,
+             'location_id': cls.stock_location.id,
+             'location_dest_id': cls.customer_location.id,
+             'picking_type_id': cls.env.ref('stock.picking_type_out').id})
 
         picking_out_2 = Picking.create(
-            {'partner_id': self.ref('base.res_partner_12'),
-             'location_id': self.stock_location.id,
-             'location_dest_id': self.customer_location.id,
-             'picking_type_id': self.ref('stock.picking_type_out')})
+            {'partner_id': cls.env.ref('base.res_partner_12').id,
+             'location_id': cls.stock_location.id,
+             'location_dest_id': cls.customer_location.id,
+             'picking_type_id': cls.env.ref('stock.picking_type_out').id})
 
-        Move.create(
+        move1 = Move.create(
             {'name': '/',
              'picking_id': picking_out_1.id,
-             'product_id': self.productA.id,
-             'product_uom': self.ref('uom.product_uom_unit'),
+             'product_id': cls.productA.id,
+             'product_uom': cls.env.ref('uom.product_uom_unit').id,
              'product_uom_qty': 2,
-             'location_id': self.stock_location.id,
-             'location_dest_id': self.customer_location.id,
+             'location_id': cls.stock_location.id,
+             'location_dest_id': cls.customer_location.id,
              })
 
-        Move.create(
+        move2 = Move.create(
             {'name': '/',
              'picking_id': picking_out_2.id,
-             'product_id': self.productB.id,
-             'product_uom': self.ref('uom.product_uom_unit'),
+             'product_id': cls.productB.id,
+             'product_uom': cls.env.ref('uom.product_uom_unit').id,
              'product_uom_qty': 1,
-             'location_id': self.stock_location.id,
-             'location_dest_id': self.customer_location.id,
+             'location_id': cls.stock_location.id,
+             'location_dest_id': cls.customer_location.id,
              })
 
-        self.batch = BatchPicking.create(
+        cls.batch = BatchPicking.create(
             {'name': 'demo_prep001',
              'picking_ids': [(4, picking_out_1.id), (4, picking_out_2.id)],
              'use_oca_batch_validation': True
              })
 
-        self.batch.confirm_picking()
+        cls.batch.confirm_picking()
+
+        move1.move_line_ids[0].qty_done = 2
+        move2.move_line_ids[0].qty_done = 2
+
+        picking_out_1.put_in_pack()
+        picking_out_2.put_in_pack()
 
         label = ''
         dummy_pdf_path = get_module_resource('delivery_carrier_label_batch',
@@ -90,6 +98,7 @@ class TestGenerateLabels(common.TransactionCase):
         ShippingLabel.create(
             {'name': 'picking_out_1',
              'res_id': picking_out_1.id,
+             'package_id': move1.move_line_ids[0].result_package_id.id,
              'res_model': 'stock.picking',
              'datas': base64.b64encode(label),
              'file_type': 'pdf',
@@ -98,12 +107,13 @@ class TestGenerateLabels(common.TransactionCase):
         ShippingLabel.create(
             {'name': 'picking_out_2',
              'res_id': picking_out_2.id,
+             'package_id': move2.move_line_ids[0].result_package_id.id,
              'res_model': 'stock.picking',
              'datas': base64.b64encode(label),
              'file_type': 'pdf',
              })
 
-    def test_00_action_generate_labels(self):
+    def test_action_generate_labels(self):
         """ Check merging of pdf labels
 
         We don't test pdf generation as without dependancies the
@@ -124,3 +134,16 @@ class TestGenerateLabels(common.TransactionCase):
         self.assertTrue(attachment.datas)
         self.assertTrue(attachment.name, 'demo_prep001.pdf')
         self.assertTrue(attachment.mimetype, 'application/pdf')
+
+    def test_action_generate_labels_no_pack(self):
+        """ Check merging of pdf labels
+
+        It shouldn't be possible to print labels when packages are missing
+        """
+        domain = [("picking_id", "in", self.batch.picking_ids.ids)]
+        self.env['stock.package_level'].search(domain).unlink()
+        wizard = self.DeliveryCarrierLabelGenerate.with_context(
+            active_ids=self.batch.ids,
+            active_model='stock.picking.batch').create({})
+        with self.assertRaises(exceptions.UserError):
+            wizard.action_generate_labels()
