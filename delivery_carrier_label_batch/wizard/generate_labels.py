@@ -221,6 +221,22 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
             return labels
 
     @api.multi
+    def _check_pickings(self):
+        """Check pickings have at least one pack"""
+        missing_packages = self.env["stock.picking"]
+        for batch in self.batch_ids:
+            for picking in batch.picking_ids:
+                if not picking.has_packages:
+                    missing_packages |= picking
+        if missing_packages:
+            package_list = "\n".join(missing_packages.mapped("name"))
+            msg = _(
+                "Impossible to generate the labels."
+                " Those pickings don't have packages:\n{}".format(package_list)
+            )
+            raise exceptions.UserError(msg)
+
+    @api.multi
     def action_generate_labels(self):
         """
         Call the creation of the delivery carrier label
@@ -236,6 +252,8 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
         )
         if not self.batch_ids:
             raise exceptions.UserError(_('No picking batch selected'))
+
+        self._check_pickings()
 
         to_generate = self.batch_ids
         if not self.generate_new_labels:
