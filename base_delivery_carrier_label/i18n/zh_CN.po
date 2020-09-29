@@ -36,6 +36,7 @@ msgid "Account Password"
 msgstr "账户密码"
 
 #. module: base_delivery_carrier_label
+#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option__active
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__active
 msgid "Active"
 msgstr "有效"
