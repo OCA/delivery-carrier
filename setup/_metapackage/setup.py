@@ -11,6 +11,7 @@ setuptools.setup(
         'odoo10-addon-base_delivery_carrier_label',
         'odoo10-addon-delivery_auto_refresh',
         'odoo10-addon-delivery_carrier_b2c',
+        'odoo10-addon-delivery_carrier_category',
         'odoo10-addon-delivery_carrier_default_tracking_url',
         'odoo10-addon-delivery_carrier_deposit',
         'odoo10-addon-delivery_carrier_label_postlogistics',
