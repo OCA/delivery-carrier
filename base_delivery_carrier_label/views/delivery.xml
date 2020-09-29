@@ -35,6 +35,7 @@
     <field name="arch" type="xml">
       <form string="delivery_carrier_option">
         <group col="4">
+          <field name="active" />
           <field name="mandatory" attrs="{'readonly': [('readonly_flag','=',True)]}"/>
           <field name="by_default" attrs="{'invisible': [('mandatory', '=', True)]}"/>
           <field name="readonly_flag" attrs="{'invisible': True}"/>
@@ -52,7 +53,8 @@
     <field name="model">delivery.carrier.option</field>
     <field name="type">tree</field>
     <field name="arch" type="xml">
-      <tree string="delivery_carrier_option">
+      <tree string="delivery_carrier_option" decoration-muted="not active">
+        <field name="active" />
         <field name="mandatory" />
         <field name="tmpl_option_id" />
         <field name="code"/>
