@@ -9,7 +9,7 @@
                 class="col-auto"
             >
                 <strong>Zone</strong>
-                <span t-field="o.delivery_zone_id" />
+                <p t-field="o.delivery_zone_id" />
             </div>
         </xpath>
     </template>
