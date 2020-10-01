@@ -351,7 +351,7 @@ msgid "Name"
 msgstr "名称"
 
 #. module: base_delivery_carrier_label
-#: code:addons/base_delivery_carrier_label/models/stock_picking.py:38
+#: code:addons/base_delivery_carrier_label/models/stock_picking.py:44
 #, python-format
 msgid "No label is configured for the selected delivery method."
 msgstr "没有为所选的交货方法配置标签。"
@@ -445,6 +445,11 @@ msgid "Result"
 msgstr "结果"
 
 #. module: base_delivery_carrier_label
+#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account__sequence
+msgid "Sequence"
+msgstr ""
+
+#. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_shipping_label
 msgid "Shipping Label"
 msgstr "交货标签"
@@ -455,7 +460,12 @@ msgid "Shipping Label 🚚"
 msgstr "交货标签🚚"
 
 #. module: base_delivery_carrier_label
-#: code:addons/base_delivery_carrier_label/models/stock_picking.py:253
+#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_picking__show_label_button
+msgid "Show Label Button"
+msgstr ""
+
+#. module: base_delivery_carrier_label
+#: code:addons/base_delivery_carrier_label/models/stock_picking.py:276
 #, python-format
 msgid ""
 "Some labels already exist for the picking %s.\n"
@@ -556,7 +566,7 @@ msgid ""
 msgstr "您可以从计算机上传文件，也可以将互联网链接复制/粘贴到您的文件中。"
 
 #. module: base_delivery_carrier_label
-#: code:addons/base_delivery_carrier_label/models/stock_picking.py:163
+#: code:addons/base_delivery_carrier_label/models/stock_picking.py:173
 #, python-format
 msgid ""
 "You should not remove a mandatory option.Please cancel the edit or add back "
