@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2020 Hunki Enterprises BV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="carrier_postnl_0_0_0" model="delivery.carrier.template.option">
+        <field name="name">AVG Extra@Home Drempelservice 1 mans NL</field>
+        <field name="code">AVG_EXTRA_HOME_0_0_0_DELIVERY</field>
+    </record>
+    <record id="carrier_postnl_0_1_0" model="delivery.carrier.template.option">
+        <field name="name">AVG Extra@Home Drempelservice 2 mans NL</field>
+        <field name="code">AVG_EXTRA_HOME_0_1_0_DELIVERY</field>
+    </record>
+    <record id="carrier_postnl_1_0_0" model="delivery.carrier.template.option">
+        <field name="name">AVG Extra@Home Topservice 1 mans NL</field>
+        <field name="code">AVG_EXTRA_HOME_1_0_0_DELIVERY</field>
+    </record>
+    <record id="carrier_postnl_1_1_0" model="delivery.carrier.template.option">
+        <field name="name">AVG Extra@Home Topservice 2 mans NL</field>
+        <field name="code">AVG_EXTRA_HOME_1_1_0_DELIVERY</field>
+    </record>
+    <record id="carrier_postnl_0_0_1" model="delivery.carrier.template.option">
+        <field name="name">AVG Extra@Home Drempelservice 1 mans BE/LU</field>
+        <field name="code">AVG_EXTRA_HOME_0_0_1_DELIVERY</field>
+    </record>
+    <record id="carrier_postnl_0_1_1" model="delivery.carrier.template.option">
+        <field name="name">AVG Extra@Home Drempelservice 2 mans BE/LU</field>
+        <field name="code">AVG_EXTRA_HOME_0_1_1_DELIVERY</field>
+    </record>
+    <record id="carrier_postnl_1_0_1" model="delivery.carrier.template.option">
+        <field name="name">AVG Extra@Home Topservice 1 mans BE/LU</field>
+        <field name="code">AVG_EXTRA_HOME_1_0_1_DELIVERY</field>
+    </record>
+    <record id="carrier_postnl_1_1_1" model="delivery.carrier.template.option">
+        <field name="name">AVG Extra@Home Topservice 2 mans BE/LU</field>
+        <field name="code">AVG_EXTRA_HOME_1_1_1_DELIVERY</field>
+    </record>
+    <record id="carrier_dhl_EUROPLUS" model="delivery.carrier.template.option">
+        <field name="name">Europlus</field>
+        <field name="code">EUROPLUS</field>
+    </record>
+    <record
+        id="carrier_dhl_EUROPLUS_INTERNATIONAL"
+        model="delivery.carrier.template.option"
+    >
+        <field name="name">Europlus International</field>
+        <field name="code">EUROPLUS_INTERNATIONAL</field>
+    </record>
+    <record id="carrier_dhl_DHL_FOR_YOU" model="delivery.carrier.template.option">
+        <field name="name">DHL For You</field>
+        <field name="code">DHL_FOR_YOU</field>
+    </record>
+    <record
+        id="carrier_dhl_DHL_PARCEL_CONNECT"
+        model="delivery.carrier.template.option"
+    >
+        <field name="name">DHL Parcel Connect</field>
+        <field name="code">DHL_PARCEL_CONNECT</field>
+    </record>
+    <record
+        id="carrier_dhl_EUROPLUS_EXPRESSER"
+        model="delivery.carrier.template.option"
+    >
+        <field name="name">Europlus Expresser</field>
+        <field name="code">EUROPLUS_EXPRESSER</field>
+    </record>
+    <record id="carrier_ups_UPS_EXPRESS" model="delivery.carrier.template.option">
+        <field name="name">Express</field>
+        <field name="code">UPS_EXPRESS</field>
+    </record>
+    <record id="carrier_ups_UPS_STANDARD" model="delivery.carrier.template.option">
+        <field name="name">Standard</field>
+        <field name="code">UPS_STANDARD</field>
+    </record>
+    <record id="carrier_ups_UPS_EXPRESS_PLUS" model="delivery.carrier.template.option">
+        <field name="name">Express Plus</field>
+        <field name="code">UPS_EXPRESS_PLUS</field>
+    </record>
+    <record
+        id="carrier_ups_UPS_STANDARD_PICKUP"
+        model="delivery.carrier.template.option"
+    >
+        <field name="name">Standard Return</field>
+        <field name="code">UPS_STANDARD_PICKUP</field>
+    </record>
+</odoo>

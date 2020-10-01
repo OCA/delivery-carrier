@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2020 Hunki Enterprises BV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_carrier_account_form" model="ir.ui.view">
+        <field name="model">carrier.account</field>
+        <field
+            name="inherit_id"
+            ref="base_delivery_carrier_label.carrier_account_view_form"
+        />
+        <field name="arch" type="xml">
+            <field name="password" position="after">
+                <field
+                    name="paazl_bearer_token"
+                    attrs="{'invisible': [('delivery_type', '!=', 'paazl')]}"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>
