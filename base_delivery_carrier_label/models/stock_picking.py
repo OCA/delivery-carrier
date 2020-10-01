@@ -28,6 +28,12 @@ class StockPicking(models.Model):
     )
     option_ids = fields.Many2many(comodel_name='delivery.carrier.option',
                                   string='Options')
+    show_label_button = fields.Boolean(compute='_compute_show_label_button')
+
+    def _compute_show_label_button(self):
+        """Determine if we should show the button to generate labels"""
+        for this in self:
+            this.show_label_button = this.state == 'done' and this.carrier_code
 
     def generate_default_label(self):
         """ Abstract method
@@ -82,6 +88,23 @@ class StockPicking(models.Model):
             "instead of generate_labels()")
         return self.action_generate_carrier_label()
 
+    def attach_shipping_label(self, label):
+        """Attach a label returned by generate_shipping_labels to a picking"""
+        self.ensure_one()
+        data = self.get_shipping_label_values(label)
+        if label.get("package_id"):
+            data["package_id"] = label["package_id"]
+            if label.get("tracking_number"):
+                self.env["stock.quant.package"].browse(label["package_id"]).write(
+                    {"parcel_tracking": label.get("tracking_number")}
+                )
+        context_attachment = self.env.context.copy()
+        # remove default_type setted for stock_picking
+        # as it would try to define default value of attachement
+        if "default_type" in context_attachment:
+            del context_attachment["default_type"]
+        return self.env["shipping.label"].with_context(context_attachment).create(data)
+
     def _set_a_default_package(self):
         """ Pickings using this module must have a package
             If not this method put it one silently
@@ -100,24 +123,11 @@ class StockPicking(models.Model):
         Packages are mandatory in this case
 
         """
-        package_obj = self.env['stock.quant.package']
         for pick in self:
             pick._set_a_default_package()
             shipping_labels = pick.generate_shipping_labels()
             for label in shipping_labels:
-                data = pick.get_shipping_label_values(label)
-                if label.get('package_id'):
-                    data['package_id'] = label['package_id']
-                    if label.get('tracking_number'):
-                        package_obj.browse(label['package_id']).write(
-                            {'parcel_tracking': label.get('tracking_number')})
-                context_attachment = self.env.context.copy()
-                # remove default_type setted for stock_picking
-                # as it would try to define default value of attachement
-                if 'default_type' in context_attachment:
-                    del context_attachment['default_type']
-                self.env['shipping.label'].with_context(
-                    context_attachment).create(data)
+                pick.attach_shipping_label(label)
             if len(shipping_labels) == 1:
                 pick.write(
                     {'carrier_tracking_ref': label.get('tracking_number')})
@@ -218,6 +228,19 @@ class StockPicking(models.Model):
         """
         vals = self._values_with_carrier_options(vals)
         return super(StockPicking, self).create(vals)
+
+    def _get_carrier_account(self):
+        """ Return a carrier suitable for the current picking """
+        return self.env["carrier.account"].search(
+            [
+                ("delivery_type", "in", self.mapped('delivery_type')),
+                "|",
+                ("company_id", "=", False),
+                ("company_id", "in", self.mapped('company_id.id')),
+            ],
+            limit=1,
+            order='company_id asc, sequence asc',
+        )
 
     def _get_label_sender_address(self):
         """ On each carrier label module you need to define
