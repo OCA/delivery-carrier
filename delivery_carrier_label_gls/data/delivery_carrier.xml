@@ -27,7 +27,8 @@
 
     <!-- CARRIER ACCOUNT -->
     <record id="carrier_account_gls" model="carrier.account">
-        <field name="name">gls_fr</field>
+        <field name="name">gls</field>
+        <field name="delivery_type">gls_fr</field>
         <field name="account">your account number here</field>
         <field name="password">password</field>
     </record>
