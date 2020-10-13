@@ -14,7 +14,7 @@
         <field name="generate_new_labels"/>
       </group>
       <footer>
-        <button name="action_generate_labels" string="Generate Labels" type="object" icon="gtk-execute" class="oe_highlight"/>
+        <button name="action_generate_labels" string="Generate Labels" type="object" class="oe_highlight"/>
         <button string="Close" class="oe_link" special="cancel" />
       </footer>
 
