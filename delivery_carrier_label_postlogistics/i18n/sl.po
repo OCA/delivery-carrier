@@ -95,8 +95,8 @@ msgid "Authentication url"
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:349
-#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:384
+#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:357
+#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:392
 #, python-format
 msgid ""
 "Authorization Required\n"
@@ -160,7 +160,6 @@ msgstr "Družba"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_company__postlogistics_logo
-#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_config_settings__logo
 #: model_terms:ir.ui.view,arch_db:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
 msgid "Company Logo on Post labels"
 msgstr "Logotip družbe na poštnih nalepkah"
@@ -211,19 +210,16 @@ msgstr "Privzete nastavitve"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_company__postlogistics_label_layout
-#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_config_settings__label_layout
 msgid "Default label layout"
 msgstr "Privzeta postavitev etiket"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_company__postlogistics_output_format
-#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_config_settings__output_format
 msgid "Default output format"
 msgstr "Privzeti izhodni format"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_company__postlogistics_resolution
-#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_config_settings__resolution
 msgid "Default resolution"
 msgstr "Privzeta ločljivost"
 
@@ -270,7 +266,6 @@ msgstr "Prikazni naziv"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_company__postlogistics_office
-#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_config_settings__office
 msgid "Domicile Post office"
 msgstr "Domači poštni urad"
 
@@ -280,7 +275,7 @@ msgid "EPS"
 msgstr "EPS"
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:448
+#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:456
 #, python-format
 msgid "Error when communicating with swisspost API: %s"
 msgstr ""
@@ -394,7 +389,7 @@ msgid "Last Updated on"
 msgstr "Zadnjič posodobljeno"
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:302
+#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:310
 #, python-format
 msgid "Layout not set"
 msgstr ""
@@ -411,7 +406,7 @@ msgid "List of basic service for which this service is compatible"
 msgstr "Seznam osnovnih storitev, ki so združljive s to storitvijo"
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:186
+#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:194
 #, python-format
 msgid "Missing required delivery option on picking."
 msgstr ""
@@ -455,7 +450,6 @@ msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,help:delivery_carrier_label_postlogistics.field_res_company__postlogistics_logo
-#: model:ir.model.fields,help:delivery_carrier_label_postlogistics.field_res_config_settings__logo
 msgid ""
 "Optional company logo to show on label.\n"
 "If using an image / logo, please note the following:\n"
@@ -493,7 +487,7 @@ msgid "Output Resolution"
 msgstr "Izhodna ločljivost"
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:308
+#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:316
 #, python-format
 msgid "Output format not set"
 msgstr ""
@@ -520,7 +514,6 @@ msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_company__postlogistics_password
-#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_config_settings__password
 msgid "Password"
 msgstr "Geslo"
 
@@ -541,7 +534,6 @@ msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,help:delivery_carrier_label_postlogistics.field_res_company__postlogistics_office
-#: model:ir.model.fields,help:delivery_carrier_label_postlogistics.field_res_config_settings__office
 #: model_terms:ir.ui.view,arch_db:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
 msgid "Post office which will receive the shipped goods"
 msgstr "Poštni urad, ki bo prejel odposlane dobrine"
@@ -556,7 +548,6 @@ msgstr ""
 #: model:ir.model,name:delivery_carrier_label_postlogistics.model_postlogistics_license
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_delivery_carrier__postlogistics_license_id
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_company__postlogistics_license_ids
-#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_config_settings__license_ids
 msgid "PostLogistics Franking License"
 msgstr "Licenca PostLogistics Franking"
 
@@ -611,7 +602,7 @@ msgid "Reset access token"
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:314
+#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:322
 #, python-format
 msgid "Resolution not set"
 msgstr ""
@@ -647,7 +638,7 @@ msgid "State"
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:460
+#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:468
 #, python-format
 msgid ""
 "Swisspost API returns errors:\n"
@@ -735,18 +726,16 @@ msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_company__postlogistics_username
-#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_config_settings__username
 msgid "Username"
 msgstr "Uporabniško ime"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_company__postlogistics_wsdl_url
-#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_config_settings__wsdl_url
 msgid "WSDL URL"
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:294
+#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:302
 #, python-format
 msgid ""
 "You need to configure %s. You can set a defaultvalue in Settings/"
@@ -766,19 +755,19 @@ msgid "kg"
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:303
+#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:311
 #, python-format
 msgid "label layout"
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:309
+#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:317
 #, python-format
 msgid "output format"
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:315
+#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:323
 #, python-format
 msgid "resolution"
 msgstr ""
