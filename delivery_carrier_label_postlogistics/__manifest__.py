@@ -12,6 +12,11 @@
  'depends': ['base_delivery_carrier_label',
              'configuration_helper',
              ],
+ 'external_dependencies': {
+     'python': [
+         'unidecode',
+     ],
+ },
  'website': 'https://github.com/OCA/delivery-carrier',
  'data': ['data/partner.xml',
           'data/product.xml',
