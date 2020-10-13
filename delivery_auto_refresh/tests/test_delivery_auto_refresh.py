@@ -62,6 +62,7 @@ class TestDeliveryAutoRefresh(common.HttpCase):
         order_vals = order_obj.default_get(order_obj._fields.keys())
         order_vals.update({
             'partner_id': self.partner.id,
+            'partner_shipping_id': self.partner.id,
             'order_line': [
                 (0, 0, {
                     'product_id': self.product.id,
@@ -70,7 +71,7 @@ class TestDeliveryAutoRefresh(common.HttpCase):
             ]
         })
         order = order_obj.new(order_vals)
-        _execute_onchanges(order, 'partner_id')
+        _execute_onchanges(order, 'partner_shipping_id')
         _execute_onchanges(order.order_line, 'product_id')
         self.order = order.create(order._convert_to_write(order._cache))
 
