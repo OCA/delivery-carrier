@@ -400,6 +400,11 @@ msgid "Partner Carrier"
 msgstr "合作伙伴承运商"
 
 #. module: base_delivery_carrier_label
+#: selection:delivery.carrier,delivery_type:0
+msgid "Post logistics"
+msgstr ""
+
+#. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_stock_move_line
 msgid "Product Moves (Stock Move Line)"
 msgstr "产品移动(移库明细)"
