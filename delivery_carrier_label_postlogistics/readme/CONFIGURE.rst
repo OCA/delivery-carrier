@@ -24,8 +24,7 @@ Now you can create a carrier method for PostLogistics WebService:
 
 .. _Log in: https://account.post.ch/selfadmin/?login&lang=en
 
-Technical references
---------------------
+**Technical references**
 
 `"Barcode" web service documentation`_
 
