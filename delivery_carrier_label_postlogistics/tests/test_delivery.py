@@ -71,7 +71,7 @@ class TestDelivery(common.SavepointCase):
             carrier_option.allowed_tmpl_options_ids,
             tmpl_options)
 
-    def test_carrier_option_allowed_tmpl_options_ids_1_with_context(self):
+    def test_carrier_option_allowed_tmpl_options_ids_2_with_context(self):
         """Check allowed_tmpl_option_ids computed field + with_context
         when the carrier option has a carrier associated.
         """
