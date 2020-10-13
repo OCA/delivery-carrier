@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_delivery_carrier_form" model="ir.ui.view">
+        <field name="name">delivery.carrier.form.category</field>
+        <field name="model">delivery.carrier</field>
+        <field name="inherit_id" ref="delivery.view_delivery_carrier_form" />
+        <field name="arch" type="xml">
+            <field name="integration_level" position="after">
+                <field name="delivery_category_id" />
+            </field>
+        </field>
+    </record>
+    <record id="delivery_carrier_category_view_tree" model="ir.ui.view">
+        <field name="name">delivery.carrier.category.tree</field>
+        <field name="model">delivery.carrier.category</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+            </tree>
+        </field>
+    </record>
+    <record id="delivery_carrier_category_view_form" model="ir.ui.view">
+        <field name="name">delivery.carrier.category.form</field>
+        <field name="model">delivery.carrier.category</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group name="main">
+                        <field name="name" />
+                        <field name="description" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="delivery_carrier_category_action" model="ir.actions.act_window">
+        <field name="name">Shipping Categories</field>
+        <field name="res_model">delivery.carrier.category</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem
+        id="delivery_carrier_category_stock_menu"
+        parent="delivery.menu_delivery"
+        action="delivery_carrier_category_action"
+        sequence="2"
+    />
+    <menuitem
+        id="delivery_carrier_category_sale_menu"
+        parent="sale.menu_sales_config"
+        action="delivery_carrier_category_action"
+        sequence="5"
+    />
+</odoo>
