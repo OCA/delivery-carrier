@@ -13,6 +13,7 @@ setuptools.setup(
         'odoo12-addon-delivery_carrier_info',
         'odoo12-addon-delivery_carrier_label_batch',
         'odoo12-addon-delivery_carrier_label_default',
+        'odoo12-addon-delivery_carrier_label_postlogistics',
         'odoo12-addon-delivery_carrier_partner',
         'odoo12-addon-delivery_free_fee_removal',
         'odoo12-addon-delivery_multi_destination',
