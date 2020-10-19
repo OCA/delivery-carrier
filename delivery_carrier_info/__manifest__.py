@@ -6,7 +6,7 @@
 {
     "name": "Delivery Carrier Info",
     "summary": "Add code and description on carrier",
-    "version": "12.0.1.0.0",
+    "version": "14.0.1.0.0",
     "category": "Delivery",
     "website": "www.akretion.com",
     "author": "Akretion,Odoo Community Association (OCA)",
@@ -20,11 +20,7 @@
     "depends": [
         "delivery",
     ],
-    "data": [
-        "views/delivery_view.xml"
-    ],
-    "demo": [
-    ],
-    "qweb": [
-    ]
+    "data": ["views/delivery_view.xml"],
+    "demo": [],
+    "qweb": [],
 }
