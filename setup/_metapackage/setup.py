@@ -8,6 +8,7 @@ setuptools.setup(
     description="Meta package for oca-delivery-carrier Odoo addons",
     version=version,
     install_requires=[
+        'odoo13-addon-base_delivery_carrier_label',
         'odoo13-addon-delivery_carrier_partner',
         'odoo13-addon-delivery_free_fee_removal',
         'odoo13-addon-partner_delivery_schedule',
