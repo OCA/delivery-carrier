@@ -43,12 +43,18 @@ class TestDeliveryFreeFeeRemoval(SavepointCase):
             }
         )
 
-    def test_delivery_free_fee_removal(self):
+    def test_delivery_free_fee_removal_with_fee(self):
         self.sale.set_delivery_line(self.delivery, 100)
-        self.assertEqual(
-            len(self.sale.mapped("order_line").filtered(lambda x: x.is_delivery)), 1
+        delivery_line = self.sale.mapped("order_line").filtered(lambda x: x.is_delivery)
+        self.sale.action_confirm()
+        self.assertRecordValues(
+            delivery_line, [{"is_free_delivery": False, "qty_to_invoice": 1}]
         )
+
+    def test_delivery_free_fee_removal_free_fee(self):
         self.sale.set_delivery_line(self.delivery, 0)
-        self.assertEqual(
-            len(self.sale.mapped("order_line").filtered(lambda x: x.is_delivery)), 0
+        delivery_line = self.sale.mapped("order_line").filtered(lambda x: x.is_delivery)
+        self.sale.action_confirm()
+        self.assertRecordValues(
+            delivery_line, [{"is_free_delivery": True, "qty_to_invoice": 0}]
         )
