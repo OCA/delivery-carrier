@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_order_form_with_carrier" model="ir.ui.view">
+        <field name="name">delivery.sale.order.form.view.with_carrier</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="delivery.view_order_form_with_carrier" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='order_line']/tree" position="inside">
+                <field name="is_free_delivery" invisible="1" />
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree" position="attributes">
+                <attribute name="decoration-muted">is_free_delivery</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>
