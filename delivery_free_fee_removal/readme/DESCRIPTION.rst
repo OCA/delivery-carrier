@@ -1,2 +1,2 @@
-This module allows to avoid create a delivery line in sale order if its price
-is zero.
+This module hides free delivery lines from Sales reports. These lines
+are not invoiceable, therefore not added in invoices.

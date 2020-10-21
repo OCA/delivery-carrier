@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template
+        id="report_saleorder_document"
+        inherit_id="sale.report_saleorder_document"
+    >
+        <xpath
+            expr="//tbody[hasclass('sale_tbody')]/t[@t-as='line']/tr"
+            position="attributes"
+        >
+            <attribute name="t-if">not line.is_free_delivery</attribute>
+        </xpath>
+    </template>
+</odoo>
