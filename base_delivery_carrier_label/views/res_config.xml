@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <menuitem
+        id="menu_carriers_config"
+        name="Carriers"
+        parent="stock.menu_stock_config_settings"
+        sequence="20"
+    />
+    <!-- After installation of the modules, open the delivery method menu -->
+    <!-- call this action from your own carrier module -->
+    <record
+        id="action_delivery_method_from_carrier_module_install"
+        model="ir.actions.client"
+    >
+        <field name="name">Open Delivery Methods Menu</field>
+        <field name="tag">reload</field>
+        <field
+            name="params"
+            eval="{'menu_id': ref('delivery.action_delivery_carrier_form')}"
+        />
+    </record>
+</odoo>
