@@ -14,6 +14,11 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: delivery_free_fee_removal
-#: model:ir.model,name:delivery_free_fee_removal.model_sale_order
-msgid "Sales Order"
+#: model:ir.model.fields,field_description:delivery_free_fee_removal.field_sale_order_line__is_free_delivery
+msgid "Is Free Delivery"
+msgstr ""
+
+#. module: delivery_free_fee_removal
+#: model:ir.model,name:delivery_free_fee_removal.model_sale_order_line
+msgid "Sales Order Line"
 msgstr ""
