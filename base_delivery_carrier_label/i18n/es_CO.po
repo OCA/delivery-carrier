@@ -35,11 +35,6 @@ msgid "Account Password"
 msgstr ""
 
 #. module: base_delivery_carrier_label
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__active
-msgid "Active"
-msgstr ""
-
-#. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_delivery_carrier_option__description
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_delivery_carrier_template_option__description
 msgid "Allow to define a more complete description than in the name field."
@@ -63,11 +58,6 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_carrier_account
 msgid "Base account datas"
-msgstr ""
-
-#. module: base_delivery_carrier_label
-#: selection:delivery.carrier,delivery_type:0
-msgid "Based on Rules"
 msgstr ""
 
 #. module: base_delivery_carrier_label
@@ -159,11 +149,6 @@ msgid "Delivery Method Code (according to carrier)"
 msgstr ""
 
 #. module: base_delivery_carrier_label
-#: model:ir.model,name:base_delivery_carrier_label.model_delivery_carrier
-msgid "Delivery Methods"
-msgstr ""
-
-#. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account__delivery_type
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_picking__delivery_type
 msgid "Delivery Type"
@@ -203,12 +188,12 @@ msgid "Display Name"
 msgstr "Nombre Público"
 
 #. module: base_delivery_carrier_label
-#: selection:manifest.wizard,state:0
+#: model:ir.model.fields.selection,name:base_delivery_carrier_label.selection__manifest_wizard__state__end
 msgid "END"
 msgstr ""
 
 #. module: base_delivery_carrier_label
-#: selection:manifest.wizard,state:0
+#: model:ir.model.fields.selection,name:base_delivery_carrier_label.selection__manifest_wizard__state__file
 msgid "File"
 msgstr ""
 
@@ -238,16 +223,6 @@ msgid "File type"
 msgstr ""
 
 #. module: base_delivery_carrier_label
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__datas_fname
-msgid "Filename"
-msgstr ""
-
-#. module: base_delivery_carrier_label
-#: selection:delivery.carrier,delivery_type:0
-msgid "Fixed Price"
-msgstr ""
-
-#. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_manifest_wizard__from_date
 msgid "From Date"
 msgstr ""
@@ -272,12 +247,27 @@ msgid "If checked, this option is necessarily applied to the delivery order"
 msgstr ""
 
 #. module: base_delivery_carrier_label
+#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__image_height
+msgid "Image Height"
+msgstr ""
+
+#. module: base_delivery_carrier_label
+#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__image_src
+msgid "Image Src"
+msgstr ""
+
+#. module: base_delivery_carrier_label
+#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__image_width
+msgid "Image Width"
+msgstr ""
+
+#. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__index_content
 msgid "Indexed Content"
 msgstr ""
 
 #. module: base_delivery_carrier_label
-#: selection:manifest.wizard,state:0
+#: model:ir.model.fields.selection,name:base_delivery_carrier_label.selection__manifest_wizard__state__init
 msgid "Init"
 msgstr ""
 
@@ -332,7 +322,7 @@ msgid "Manifest"
 msgstr ""
 
 #. module: base_delivery_carrier_label
-#: code:addons/base_delivery_carrier_label/wizard/manifest_wizard.py:31
+#: code:addons/base_delivery_carrier_label/wizard/manifest_wizard.py:0
 #, python-format
 msgid "Manifest not implemented for '%s' carrier."
 msgstr ""
@@ -351,7 +341,7 @@ msgid "Name"
 msgstr ""
 
 #. module: base_delivery_carrier_label
-#: code:addons/base_delivery_carrier_label/models/stock_picking.py:38
+#: code:addons/base_delivery_carrier_label/models/stock_picking.py:0
 #, python-format
 msgid "No label is configured for the selected delivery method."
 msgstr ""
@@ -415,11 +405,6 @@ msgid "Readonly Flag"
 msgstr ""
 
 #. module: base_delivery_carrier_label
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__res_model_name
-msgid "Res Model Name"
-msgstr ""
-
-#. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__res_field
 msgid "Resource Field"
 msgstr ""
@@ -455,7 +440,12 @@ msgid "Shipping Label 🚚"
 msgstr ""
 
 #. module: base_delivery_carrier_label
-#: code:addons/base_delivery_carrier_label/models/stock_picking.py:253
+#: model:ir.model,name:base_delivery_carrier_label.model_delivery_carrier
+msgid "Shipping Methods"
+msgstr ""
+
+#. module: base_delivery_carrier_label
+#: code:addons/base_delivery_carrier_label/models/stock_picking.py:0
 #, python-format
 msgid ""
 "Some labels already exist for the picking %s.\n"
@@ -486,11 +476,6 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_carrier_account__delivery_type
 msgid "This field may be used to link an account to a carrier"
-msgstr ""
-
-#. module: base_delivery_carrier_label
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__thumbnail
-msgid "Thumbnail"
 msgstr ""
 
 #. module: base_delivery_carrier_label
@@ -554,7 +539,7 @@ msgid ""
 msgstr ""
 
 #. module: base_delivery_carrier_label
-#: code:addons/base_delivery_carrier_label/models/stock_picking.py:163
+#: code:addons/base_delivery_carrier_label/models/stock_picking.py:0
 #, python-format
 msgid ""
 "You should not remove a mandatory option.Please cancel the edit or add back "
