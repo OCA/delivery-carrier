@@ -36,11 +36,6 @@ msgid "Account Password"
 msgstr "账户密码"
 
 #. module: base_delivery_carrier_label
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__active
-msgid "Active"
-msgstr "有效"
-
-#. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_delivery_carrier_option__description
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_delivery_carrier_template_option__description
 msgid "Allow to define a more complete description than in the name field."
@@ -65,11 +60,6 @@ msgstr "附件网址"
 #: model:ir.model,name:base_delivery_carrier_label.model_carrier_account
 msgid "Base account datas"
 msgstr "基本帐户数据"
-
-#. module: base_delivery_carrier_label
-#: selection:delivery.carrier,delivery_type:0
-msgid "Based on Rules"
-msgstr "根据规则"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_delivery_carrier_option__by_default
@@ -162,11 +152,6 @@ msgid "Delivery Method Code (according to carrier)"
 msgstr "交货方式代码（根据承运商）"
 
 #. module: base_delivery_carrier_label
-#: model:ir.model,name:base_delivery_carrier_label.model_delivery_carrier
-msgid "Delivery Methods"
-msgstr "交货方式"
-
-#. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account__delivery_type
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_picking__delivery_type
 msgid "Delivery Type"
@@ -206,12 +191,12 @@ msgid "Display Name"
 msgstr "显示名称"
 
 #. module: base_delivery_carrier_label
-#: selection:manifest.wizard,state:0
+#: model:ir.model.fields.selection,name:base_delivery_carrier_label.selection__manifest_wizard__state__end
 msgid "END"
 msgstr "结束"
 
 #. module: base_delivery_carrier_label
-#: selection:manifest.wizard,state:0
+#: model:ir.model.fields.selection,name:base_delivery_carrier_label.selection__manifest_wizard__state__file
 msgid "File"
 msgstr "文件"
 
@@ -241,16 +226,6 @@ msgid "File type"
 msgstr "文件类型"
 
 #. module: base_delivery_carrier_label
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__datas_fname
-msgid "Filename"
-msgstr "文件名"
-
-#. module: base_delivery_carrier_label
-#: selection:delivery.carrier,delivery_type:0
-msgid "Fixed Price"
-msgstr "固定价格"
-
-#. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_manifest_wizard__from_date
 msgid "From Date"
 msgstr "起始日期"
@@ -275,12 +250,27 @@ msgid "If checked, this option is necessarily applied to the delivery order"
 msgstr "如果选中，则此选项必须应用于交货订单"
 
 #. module: base_delivery_carrier_label
+#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__image_height
+msgid "Image Height"
+msgstr ""
+
+#. module: base_delivery_carrier_label
+#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__image_src
+msgid "Image Src"
+msgstr ""
+
+#. module: base_delivery_carrier_label
+#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__image_width
+msgid "Image Width"
+msgstr ""
+
+#. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__index_content
 msgid "Indexed Content"
 msgstr "索引内容"
 
 #. module: base_delivery_carrier_label
-#: selection:manifest.wizard,state:0
+#: model:ir.model.fields.selection,name:base_delivery_carrier_label.selection__manifest_wizard__state__init
 msgid "Init"
 msgstr "初始化"
 
@@ -335,7 +325,7 @@ msgid "Manifest"
 msgstr "清单"
 
 #. module: base_delivery_carrier_label
-#: code:addons/base_delivery_carrier_label/wizard/manifest_wizard.py:31
+#: code:addons/base_delivery_carrier_label/wizard/manifest_wizard.py:0
 #, python-format
 msgid "Manifest not implemented for '%s' carrier."
 msgstr "清单未针对'%s'承运商实施。"
@@ -354,7 +344,7 @@ msgid "Name"
 msgstr "名称"
 
 #. module: base_delivery_carrier_label
-#: code:addons/base_delivery_carrier_label/models/stock_picking.py:38
+#: code:addons/base_delivery_carrier_label/models/stock_picking.py:0
 #, python-format
 msgid "No label is configured for the selected delivery method."
 msgstr "没有为所选的交货方法配置标签。"
@@ -418,11 +408,6 @@ msgid "Readonly Flag"
 msgstr "只读标志"
 
 #. module: base_delivery_carrier_label
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__res_model_name
-msgid "Res Model Name"
-msgstr "资源模型名称"
-
-#. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__res_field
 msgid "Resource Field"
 msgstr "资源字段"
@@ -458,7 +443,12 @@ msgid "Shipping Label 🚚"
 msgstr "交货标签🚚"
 
 #. module: base_delivery_carrier_label
-#: code:addons/base_delivery_carrier_label/models/stock_picking.py:253
+#: model:ir.model,name:base_delivery_carrier_label.model_delivery_carrier
+msgid "Shipping Methods"
+msgstr ""
+
+#. module: base_delivery_carrier_label
+#: code:addons/base_delivery_carrier_label/models/stock_picking.py:0
 #, python-format
 msgid ""
 "Some labels already exist for the picking %s.\n"
@@ -492,11 +482,6 @@ msgstr "附加的记录ID。"
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_carrier_account__delivery_type
 msgid "This field may be used to link an account to a carrier"
 msgstr ""
-
-#. module: base_delivery_carrier_label
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__thumbnail
-msgid "Thumbnail"
-msgstr "缩略图"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_manifest_wizard__to_date
@@ -559,7 +544,7 @@ msgid ""
 msgstr "您可以从计算机上传文件，也可以将互联网链接复制/粘贴到您的文件中。"
 
 #. module: base_delivery_carrier_label
-#: code:addons/base_delivery_carrier_label/models/stock_picking.py:163
+#: code:addons/base_delivery_carrier_label/models/stock_picking.py:0
 #, python-format
 msgid ""
 "You should not remove a mandatory option.Please cancel the edit or add back "
@@ -573,6 +558,27 @@ msgstr "您不应删除强制选项。请取消编辑或添加选项：%s。"
 #: model_terms:ir.ui.view,arch_db:base_delivery_carrier_label.delivery_carrier_template_option_view_tree
 msgid "delivery_carrier_option"
 msgstr "delivery_carrier_option"
+
+#~ msgid "Active"
+#~ msgstr "有效"
+
+#~ msgid "Based on Rules"
+#~ msgstr "根据规则"
+
+#~ msgid "Delivery Methods"
+#~ msgstr "交货方式"
+
+#~ msgid "Filename"
+#~ msgstr "文件名"
+
+#~ msgid "Fixed Price"
+#~ msgstr "固定价格"
+
+#~ msgid "Res Model Name"
+#~ msgstr "资源模型名称"
+
+#~ msgid "Thumbnail"
+#~ msgstr "缩略图"
 
 #~ msgid ""
 #~ "Name must match with one of the value of Provider field (delivery_type) "
