@@ -25,8 +25,8 @@ Delivery Free Fee Removal
 
 |badge1| |badge2| |badge3| |badge4| |badge5| 
 
-This module allows to avoid create a delivery line in sale order if its price
-is zero.
+This module hides free delivery lines from Sales reports. These lines
+are not invoiceable, therefore not added in invoices.
 
 **Table of contents**
 
@@ -50,6 +50,7 @@ Authors
 ~~~~~~~
 
 * Tecnativa
+* Camptocamp
 
 Contributors
 ~~~~~~~~~~~~
