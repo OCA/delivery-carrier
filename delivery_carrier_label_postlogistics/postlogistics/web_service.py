@@ -415,7 +415,7 @@ class PostlogisticsWebService(object):
                 'accept': 'application/json',
                 'content-type': 'application/json',
             },
-            data=json.dumps(data),
+            data=json.dumps(data, ensure_ascii=False),
             timeout=60,
         )
 
