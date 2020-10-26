@@ -16,7 +16,7 @@ class StockQuantPackage(models.Model):
 
     carrier_id = fields.Many2one('delivery.carrier')
 
-    def _gls_get_tracking_link(self):
+    def _gls_fr_get_tracking_link(self):
         self.ensure_one()
         return URL_TRACKING % self.parcel_tracking
 

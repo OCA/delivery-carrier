@@ -10,7 +10,7 @@
         <button type="object" name="complete_gls_settings"
             string="Complete GLS shared settings"
             class="oe_button fa_truck"
-            attrs="{'invisible': [('name', '!=', 'gls_fr')]}"/>
+            attrs="{'invisible': [('delivery_type', '!=', 'gls_fr')]}"/>
     </xpath>
   </field>
 </record>

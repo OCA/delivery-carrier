@@ -39,8 +39,6 @@ class StockPicking(models.Model):
 
     def _gls_fr_get_to_address(self, package=None):
         address = self._roulier_get_to_address(package=package)
-        address["country_code"] = address["country"]
-        del address["country"]
         # TODO improve depending refactoring _roulier_convert_address()
         # specially keys: street2, company, phone, mobile
         addr = {}
@@ -73,7 +71,6 @@ class StockPicking(models.Model):
             "consignee_ref": self.name[:20],
             "reference_1": "",
             "reference_2": self.name[:20],
-            "packages": packages,
             "parcel_total_number": len(packages),
         }
 
@@ -83,47 +80,37 @@ class StockPicking(models.Model):
 #        if self.carrier_id.debug_logging and traceability:
 #            self._save_traceability(traceability, label)
 
-    def _save_traceability(self, traceability, label):
-        self.ensure_one()
-        separator = "=*" * 40
-        content = "\n\n%s\n\n\n" % separator
-        content = content.join(traceability)
-        content = (
-            "Company: %s\nCompte France: %s \nCompte Etranger: %s \n\n\n") % (
-            self.company_id.name or "",
-            self.company_id.gls_login or "",
-            self.company_id.gls_inter_login or "") + content
-        data = {
-            "name": "GLS_traceability.txt",
-            "datas_fname": "GLS_traceability.txt",
-            "res_id": self.id,
-            "res_model": self._name,
-            "datas": base64.b64encode(content.encode()),
-            "type": "binary",
-        }
-        return self.env["ir.attachment"].create(data)
-
-    def _record_webservice_exchange(self, label, pack):
-        trac_infos = ""
-        trac_infos = (
-            "Sequence Colis GLS:\n====================\n%s \n\n"
-            "Web Service Request:\n====================\n%s \n\n"
-            "Web Service Response:\n=====================\n%s \n\n") % (
-            "eeee",
-            # pack["custom_sequence"],
-            label.get("request_string"),
-            label.get("response_string"))
-        return trac_infos
-
-    def get_zpl(self, service, delivery, address, pack):
-        try:
-            _logger.info(
-                "GLS label generating for delivery '%s', pack '%s'",
-                delivery["consignee_ref"], pack["parcel_number_label"])
-            result = service.get_label(delivery, address, pack)
-        except Exception as e:
-            raise UserError(e.message)
-        return result
+#    def _save_traceability(self, traceability, label):
+#        self.ensure_one()
+#        separator = "=*" * 40
+#        content = "\n\n%s\n\n\n" % separator
+#        content = content.join(traceability)
+#        content = (
+#            "Company: %s\nCompte France: %s \nCompte Etranger: %s \n\n\n") % (
+#            self.company_id.name or "",
+#            self.company_id.gls_login or "",
+#            self.company_id.gls_inter_login or "") + content
+#        data = {
+#            "name": "GLS_traceability.txt",
+#            "datas_fname": "GLS_traceability.txt",
+#            "res_id": self.id,
+#            "res_model": self._name,
+#            "datas": base64.b64encode(content.encode()),
+#            "type": "binary",
+#        }
+#        return self.env["ir.attachment"].create(data)
+#
+#    def _record_webservice_exchange(self, label, pack):
+#        trac_infos = ""
+#        trac_infos = (
+#            "Sequence Colis GLS:\n====================\n%s \n\n"
+#            "Web Service Request:\n====================\n%s \n\n"
+#            "Web Service Response:\n=====================\n%s \n\n") % (
+#            "eeee",
+#            # pack["custom_sequence"],
+#            label.get("request_string"),
+#            label.get("response_string"))
+#        return trac_infos
 
     def get_shipping_cost(self):
         return 0
