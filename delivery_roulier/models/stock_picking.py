@@ -69,8 +69,7 @@ class StockPicking(models.Model):
     # Implementations for base_delivery_carrier_label
     def _is_roulier(self):
         self.ensure_one()
-        available_carrier_actions = roulier.get_carriers_action_available() or {}
-        return 'get_label' in available_carrier_actions.get(self.delivery_type, [])
+        return self.carrier_id.is_roulier()
 
     def generate_shipping_labels(self):
         self.ensure_one()
