@@ -16,14 +16,14 @@ class DeliveryCarrier(models.Model):
     # module using roulier don't use native method to get labels
     # pass False value to avoid failure.
     def send_shipping(self, pickings):
-        res = super().send_shipping(pickings)
-        if not res:
+        if self._is_roulier:
             return [{'exact_price': False, 'tracking_number': False}]
-        return res
+        return super().send_shipping(pickings)
 
     def _is_roulier(self):
         self.ensure_one()
-        return self.delivery_type in roulier.get_carriers()
+        available_carrier_actions = roulier.get_carriers_action_available() or {}
+        return 'get_label' in available_carrier_actions.get(self.delivery_type, [])
 
     def cancel_shipment(self, pickings):
         if self._is_roulier:
