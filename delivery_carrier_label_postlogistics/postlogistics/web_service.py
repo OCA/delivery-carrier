@@ -4,7 +4,6 @@
 import base64
 import re
 import logging
-import json
 import requests
 from PIL import Image
 from io import StringIO
@@ -354,7 +353,7 @@ class PostlogisticsWebService(object):
             },
             timeout=60,
         )
-        response_token_dict = json.loads(response_token.content.decode("utf-8"))
+        response_token_dict = response_token.json()
         access_token = response_token_dict['access_token']
 
         if not (access_token):
@@ -413,9 +412,9 @@ class PostlogisticsWebService(object):
             headers={
                 'Authorization': 'Bearer %s' % access_token,
                 'accept': 'application/json',
-                'content-type': 'application/json',
+                'content-type': 'application/json; charset=utf-8',
             },
-            data=json.dumps(data, ensure_ascii=False).encode("utf-8"),
+            json=data,
             timeout=60,
         )
 
@@ -427,7 +426,7 @@ class PostlogisticsWebService(object):
             ]
             return res
 
-        response_dict = json.loads(response.content.decode("utf-8"))
+        response_dict = response.json()
 
         if response_dict['item'].get('errors'):
             res['success'] = False
