@@ -1,7 +1,7 @@
 # Copyright 2019 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo.tests import common
+from odoo.tests import Form, common
 
 
 class TestStockPickingReportDeliveryCost(common.SavepointCase):
@@ -50,8 +50,16 @@ class TestStockPickingReportDeliveryCost(common.SavepointCase):
         )
 
     def test_carrier_price_for_report_before(self):
-        self.order.get_delivery_price()
-        self.order.set_delivery_line()
+        delivery_wizard = Form(
+            self.env["choose.delivery.carrier"].with_context(
+                {
+                    "default_order_id": self.order.id,
+                    "default_carrier_id": self.carrier.id,
+                }
+            )
+        )
+        choose_delivery_carrier = delivery_wizard.save()
+        choose_delivery_carrier.button_confirm()
         self.order.action_confirm()
         picking = self.order.picking_ids
         self.assertAlmostEqual(picking.carrier_price_for_report, 5)
