@@ -1,0 +1,180 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* delivery_carrier_label_paazl
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: delivery_carrier_label_paazl
+#: model:delivery.carrier.template.option,name:delivery_carrier_label_paazl.carrier_postnl_0_0_1
+msgid "AVG Extra@Home Drempelservice 1 mans BE/LU"
+msgstr ""
+
+#. module: delivery_carrier_label_paazl
+#: model:delivery.carrier.template.option,name:delivery_carrier_label_paazl.carrier_postnl_0_0_0
+msgid "AVG Extra@Home Drempelservice 1 mans NL"
+msgstr ""
+
+#. module: delivery_carrier_label_paazl
+#: model:delivery.carrier.template.option,name:delivery_carrier_label_paazl.carrier_postnl_0_1_1
+msgid "AVG Extra@Home Drempelservice 2 mans BE/LU"
+msgstr ""
+
+#. module: delivery_carrier_label_paazl
+#: model:delivery.carrier.template.option,name:delivery_carrier_label_paazl.carrier_postnl_0_1_0
+msgid "AVG Extra@Home Drempelservice 2 mans NL"
+msgstr ""
+
+#. module: delivery_carrier_label_paazl
+#: model:delivery.carrier.template.option,name:delivery_carrier_label_paazl.carrier_postnl_1_0_1
+msgid "AVG Extra@Home Topservice 1 mans BE/LU"
+msgstr ""
+
+#. module: delivery_carrier_label_paazl
+#: model:delivery.carrier.template.option,name:delivery_carrier_label_paazl.carrier_postnl_1_0_0
+msgid "AVG Extra@Home Topservice 1 mans NL"
+msgstr ""
+
+#. module: delivery_carrier_label_paazl
+#: model:delivery.carrier.template.option,name:delivery_carrier_label_paazl.carrier_postnl_1_1_1
+msgid "AVG Extra@Home Topservice 2 mans BE/LU"
+msgstr ""
+
+#. module: delivery_carrier_label_paazl
+#: model:delivery.carrier.template.option,name:delivery_carrier_label_paazl.carrier_postnl_1_1_0
+msgid "AVG Extra@Home Topservice 2 mans NL"
+msgstr ""
+
+#. module: delivery_carrier_label_paazl
+#: model:ir.model,name:delivery_carrier_label_paazl.model_carrier_account
+msgid "Base account datas"
+msgstr ""
+
+#. module: delivery_carrier_label_paazl
+#: selection:delivery.carrier,delivery_type:0
+msgid "Based on Rules"
+msgstr ""
+
+#. module: delivery_carrier_label_paazl
+#: model:ir.model.fields,field_description:delivery_carrier_label_paazl.field_carrier_account__paazl_bearer_token
+msgid "Bearer token"
+msgstr ""
+
+#. module: delivery_carrier_label_paazl
+#: model:delivery.carrier.template.option,name:delivery_carrier_label_paazl.carrier_dhl_DHL_FOR_YOU
+msgid "DHL For You"
+msgstr ""
+
+#. module: delivery_carrier_label_paazl
+#: model:delivery.carrier.template.option,name:delivery_carrier_label_paazl.carrier_dhl_DHL_PARCEL_CONNECT
+msgid "DHL Parcel Connect"
+msgstr ""
+
+#. module: delivery_carrier_label_paazl
+#: model:ir.model,name:delivery_carrier_label_paazl.model_delivery_carrier
+msgid "Delivery Methods"
+msgstr ""
+
+#. module: delivery_carrier_label_paazl
+#: model:delivery.carrier.template.option,name:delivery_carrier_label_paazl.carrier_dhl_EUROPLUS
+msgid "Europlus"
+msgstr ""
+
+#. module: delivery_carrier_label_paazl
+#: model:delivery.carrier.template.option,name:delivery_carrier_label_paazl.carrier_dhl_EUROPLUS_EXPRESSER
+msgid "Europlus Expresser"
+msgstr ""
+
+#. module: delivery_carrier_label_paazl
+#: model:delivery.carrier.template.option,name:delivery_carrier_label_paazl.carrier_dhl_EUROPLUS_INTERNATIONAL
+msgid "Europlus International"
+msgstr ""
+
+#. module: delivery_carrier_label_paazl
+#: model:delivery.carrier.template.option,name:delivery_carrier_label_paazl.carrier_ups_UPS_EXPRESS
+msgid "Express"
+msgstr ""
+
+#. module: delivery_carrier_label_paazl
+#: model:delivery.carrier.template.option,name:delivery_carrier_label_paazl.carrier_ups_UPS_EXPRESS_PLUS
+msgid "Express Plus"
+msgstr ""
+
+#. module: delivery_carrier_label_paazl
+#: model:ir.model.fields,help:delivery_carrier_label_paazl.field_carrier_account__paazl_bearer_token
+msgid "Fill in the security token generated for the Paazl's push API"
+msgstr ""
+
+#. module: delivery_carrier_label_paazl
+#: selection:delivery.carrier,delivery_type:0
+msgid "Fixed Price"
+msgstr ""
+
+#. module: delivery_carrier_label_paazl
+#: code:addons/delivery_carrier_label_paazl/models/stock_picking.py:234
+#, python-format
+msgid "No paazl account found for this company"
+msgstr ""
+
+#. module: delivery_carrier_label_paazl
+#: selection:delivery.carrier,delivery_type:0
+#: model:delivery.carrier,name:delivery_carrier_label_paazl.carrier_paazl
+msgid "Paazl"
+msgstr ""
+
+#. module: delivery_carrier_label_paazl
+#: model:ir.model.fields,field_description:delivery_carrier_label_paazl.field_stock_picking__paazl_carrier_tracking_url
+msgid "Paazl Carrier Tracking Url"
+msgstr ""
+
+#. module: delivery_carrier_label_paazl
+#: code:addons/delivery_carrier_label_paazl/models/stock_picking.py:36
+#, python-format
+msgid "Picking %s must set exactly one shipping option"
+msgstr ""
+
+#. module: delivery_carrier_label_paazl
+#: selection:delivery.carrier,delivery_type:0
+msgid "Post logistics"
+msgstr ""
+
+#. module: delivery_carrier_label_paazl
+#: model:ir.model.fields,field_description:delivery_carrier_label_paazl.field_delivery_carrier__delivery_type
+msgid "Provider"
+msgstr ""
+
+#. module: delivery_carrier_label_paazl
+#: code:addons/delivery_carrier_label_paazl/models/stock_picking.py:98
+#, python-format
+msgid "Sending %s to paazl: %s %s"
+msgstr ""
+
+#. module: delivery_carrier_label_paazl
+#: model:delivery.carrier.template.option,name:delivery_carrier_label_paazl.carrier_ups_UPS_STANDARD
+msgid "Standard"
+msgstr ""
+
+#. module: delivery_carrier_label_paazl
+#: model:delivery.carrier.template.option,name:delivery_carrier_label_paazl.carrier_ups_UPS_STANDARD_PICKUP
+msgid "Standard Return"
+msgstr ""
+
+#. module: delivery_carrier_label_paazl
+#: model:ir.model,name:delivery_carrier_label_paazl.model_stock_picking
+msgid "Transfer"
+msgstr ""
+
+#. module: delivery_carrier_label_paazl
+#: code:addons/delivery_carrier_label_paazl/controllers/main.py:52
+#, python-format
+msgid "Update from paazl: %s"
+msgstr ""
+
