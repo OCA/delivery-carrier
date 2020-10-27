@@ -713,6 +713,11 @@ msgid "Transfer"
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
+#: selection:delivery.carrier,delivery_type:0
+msgid "UPS"
+msgstr ""
+
+#. module: delivery_carrier_label_postlogistics
 #: model:product.product,uom_name:delivery_carrier_label_postlogistics.product_postlogistics_service
 #: model:product.template,uom_name:delivery_carrier_label_postlogistics.product_postlogistics_service_product_template
 msgid "Unit(s)"
