@@ -17,12 +17,11 @@ class StockPicking(models.Model):
         compute="_compute_carrier_price_for_report",
     )
 
-    @api.depends('sale_id', 'carrier_price')
+    @api.depends("sale_id", "carrier_price")
     def _compute_carrier_price_for_report(self):
         for picking in self:
-            so_lines = picking.sale_id.order_line.filtered('is_delivery')
+            so_lines = picking.sale_id.order_line.filtered("is_delivery")
             if so_lines:
-                picking.carrier_price_for_report = sum(
-                    so_lines.mapped('price_unit'))
+                picking.carrier_price_for_report = sum(so_lines.mapped("price_unit"))
             else:
                 picking.carrier_price_for_report = picking.carrier_price
