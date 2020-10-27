@@ -173,6 +173,11 @@ msgid "Transfer"
 msgstr ""
 
 #. module: delivery_carrier_label_paazl
+#: selection:delivery.carrier,delivery_type:0
+msgid "UPS"
+msgstr ""
+
+#. module: delivery_carrier_label_paazl
 #: code:addons/delivery_carrier_label_paazl/controllers/main.py:52
 #, python-format
 msgid "Update from paazl: %s"
