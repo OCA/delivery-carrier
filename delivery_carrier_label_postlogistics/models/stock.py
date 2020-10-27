@@ -87,42 +87,36 @@ class StockPicking(models.Model):
             return {'file': base64.b64decode(label['binary']),
                     'file_type': label['file_type'],
                     'name': tracking_number + '.' + label['file_type'],
+                    'tracking_number': tracking_number,
                     }
 
         labels = []
-        # if there are no pack defined, write tracking_number on picking
-        # otherwise, write it on parcel_tracking field of each pack
-        if not packages:
-            for rec in res:
-                label = rec['value']
-                tracking_number = label['tracking_number']
-                self.carrier_tracking_ref = tracking_number
-                info = info_from_label(label)
-                info['package_id'] = False
-                labels.append(info)
-            return labels
 
-        tracking_refs = []
         for package in packages:
             label = [item for item in res if package.name in item['value']['item_id']]
             value = label[0]['value']
             package.parcel_tracking = value['tracking_number']
-            tracking_refs.append(value['tracking_number'])
             info = info_from_label(value)
             info['package_id'] = package.id
             labels.append(info)
-
-        self.carrier_tracking_ref = "; ".join(tracking_refs)
-
         return labels
 
+    def _set_carrier_tracking_ref(self, shipping_labels):
+        if self.carrier_id.delivery_type == 'postlogistics':
+            tracking_refs = [
+                label["tracking_number"] for label in shipping_labels
+            ]
+            self.carrier_tracking_ref = "; ".join(tracking_refs)
+        else:
+            return super()._set_carrier_tracking_ref(shipping_labels)
+
     @api.multi
-    def generate_shipping_labels(self, package_ids=None):
+    def generate_shipping_labels(self):
         """ Add label generation for Postlogistics """
         self.ensure_one()
         if self.carrier_id.delivery_type == 'postlogistics':
-            return self._generate_postlogistics_label(package_ids=package_ids)
-        return super().generate_shipping_labels(package_ids=package_ids)
+            return self._generate_postlogistics_label()
+        return super().generate_shipping_labels()
 
 
 class ShippingLabel(models.Model):
