@@ -3,15 +3,15 @@
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
     <template id="report_picking" inherit_id="stock.report_picking">
-        <xpath expr="//th[@name='td_sched_date_h']" position="after">
-            <th t-if="o.carrier_price_for_report">
-                <strong>Delivery cost</strong>
-            </th>
-        </xpath>
-        <xpath expr="//td[@name='td_sched_date']" position="after">
-            <td t-if="o.carrier_price_for_report">
-                <span t-field="o.carrier_price_for_report" />
-            </td>
+        <xpath expr="//div[@name='div_sched_date']" position="after">
+            <div
+                t-if="o.carrier_price_for_report"
+                class="col-auto"
+                name="div_carrier_price_for_report"
+            >
+                <strong>Delivery cost:</strong>
+                <p t-field="o.carrier_price_for_report" />
+            </div>
         </xpath>
     </template>
 </odoo>
