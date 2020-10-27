@@ -375,6 +375,11 @@ msgid "Options"
 msgstr "Opties"
 
 #. module: base_delivery_carrier_label
+#: selection:delivery.carrier,delivery_type:0
+msgid "Paazl"
+msgstr ""
+
+#. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__package_id
 msgid "Pack"
 msgstr ""
