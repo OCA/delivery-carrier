@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2020 Hunki Enterprises BV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="param_wsdl_production" model="ir.config_parameter">
+        <field name="key">delivery_carrier_label_paazl.wsdl_production</field>
+        <field
+            name="value"
+        >https://ost.paazl.com/parcelshipperservice/orderRequest.wsdl</field>
+    </record>
+    <record id="param_wsdl_test" model="ir.config_parameter">
+        <field name="key">delivery_carrier_label_paazl.wsdl_test</field>
+        <field
+            name="value"
+        >https://staging.paazl.com/parcelshipperservice/orderRequest.wsdl</field>
+    </record>
+</odoo>
