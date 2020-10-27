@@ -496,6 +496,11 @@ msgid "PNG"
 msgstr "PNG"
 
 #. module: delivery_carrier_label_postlogistics
+#: selection:delivery.carrier,delivery_type:0
+msgid "Paazl"
+msgstr ""
+
+#. module: delivery_carrier_label_postlogistics
 #: model:ir.model,name:delivery_carrier_label_postlogistics.model_stock_quant_package
 msgid "Packages"
 msgstr ""
