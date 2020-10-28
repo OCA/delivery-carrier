@@ -330,7 +330,7 @@ class PostlogisticsWebService(object):
         }
 
     def get_access_token(self, env):
-        icp = env['ir.config_parameter']
+        icp = env['ir.config_parameter'].sudo()
         client_id = icp.get_param('postlogistics.oauth.client_id')
         client_secret = icp.get_param('postlogistics.oauth.client_secret')
         authentication_url = icp.get_param(
