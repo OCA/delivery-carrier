@@ -13,6 +13,7 @@ setuptools.setup(
         'odoo13-addon-delivery_free_fee_removal',
         'odoo13-addon-partner_delivery_schedule',
         'odoo13-addon-partner_delivery_zone',
+        'odoo13-addon-stock_picking_report_delivery_cost',
     ],
     classifiers=[
         'Programming Language :: Python',
