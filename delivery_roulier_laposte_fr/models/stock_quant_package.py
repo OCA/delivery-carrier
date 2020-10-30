@@ -6,11 +6,6 @@ import logging
 from odoo import _, api, models
 
 _logger = logging.getLogger(__name__)
-try:
-    from roulier.carriers.laposte.laposte_transport import LaposteTransport
-    LAPOSTE_WS = LaposteTransport.LAPOSTE_WS
-except ImportError as err:
-    _logger.debug(err)
 
 
 CUSTOMS_MAP = {
@@ -143,8 +138,8 @@ class StockQuantPackage(models.Model):
 
         ret_mess = _("Incident\n-----------\n%s\n"
                      "Données transmises:\n"
-                     "-----------------------------\n%s\n\nWS: %s") % (
-            '\n'.join(parts), request.decode('utf-8'), LAPOSTE_WS)
+                     "-----------------------------\n%s") % (
+            '\n'.join(parts), request.decode('utf-8'))
         return ret_mess
 
     def _laposte_fr_get_tracking_link(self):
