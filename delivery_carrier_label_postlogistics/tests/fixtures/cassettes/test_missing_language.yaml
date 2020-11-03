@@ -1,6 +1,6 @@
 interactions:
 - request:
-    body: scope=WEDEC_BARCODE_READ&client_secret=c70e3696ae5146e7fe317434e50a90cd&grant_type=client_credentials&client_id=865783331e39e91e633c3916fe892d92
+    body: scope=WEDEC_BARCODE_READ&grant_type=client_credentials
     headers:
       Accept:
       - '*/*'
