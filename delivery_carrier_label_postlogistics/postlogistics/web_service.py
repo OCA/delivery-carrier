@@ -6,8 +6,10 @@ import re
 import logging
 import json
 import requests
+import threading
 from PIL import Image
 from io import StringIO
+from datetime import datetime, timedelta
 
 from odoo import _, exceptions
 
@@ -28,6 +30,10 @@ class PostlogisticsWebService(object):
     Allows to generate labels
 
     """
+
+    access_token = False
+    access_token_expiry = False
+    _lock = threading.Lock()
 
     def __init__(self, company):
         self.default_lang = company.partner_id.lang or 'en'
@@ -329,7 +335,8 @@ class PostlogisticsWebService(object):
             "item": item,
         }
 
-    def get_access_token(self, env):
+    @classmethod
+    def _request_access_token(cls, env):
         icp = env['ir.config_parameter'].sudo()
         client_id = icp.get_param('postlogistics.oauth.client_id')
         client_secret = icp.get_param('postlogistics.oauth.client_secret')
@@ -343,7 +350,7 @@ class PostlogisticsWebService(object):
                   'Please verify postlogistics client id and secret in:\n'
                   'Configuration -> Postlogistics'))
 
-        response_token = requests.post(
+        response = requests.post(
             url=authentication_url,
             headers={'content-type': 'application/x-www-form-urlencoded'},
             data={
@@ -354,16 +361,32 @@ class PostlogisticsWebService(object):
             },
             timeout=60,
         )
-        response_token_dict = json.loads(response_token.content.decode("utf-8"))
-        access_token = response_token_dict['access_token']
+        return response.json()
 
-        if not (access_token):
-            raise exceptions.UserError(
-                _('Authorization Required\n\n'
-                  'Please verify postlogistics client id and secret in:\n'
-                  'Configuration -> Postlogistics'))
+    @classmethod
+    def get_access_token(cls, env):
+        """Threadsafe access to token"""
 
-        return access_token
+        with cls._lock:
+            now = datetime.now()
+
+            if cls.access_token:
+                # keep a safe margin on the expiration
+                expiry = cls.access_token_expiry - timedelta(seconds=5)
+                if now < expiry:
+                    return cls.access_token
+
+            response = cls._request_access_token(env)
+            cls.access_token = response['access_token']
+
+            if not (cls.access_token):
+                raise exceptions.UserError(
+                    _('Authorization Required\n\n'
+                      'Please verify postlogistics client id and secret in:\n'
+                      'Configuration -> Postlogistics'))
+
+            cls.access_token_expiry = now + timedelta(seconds=response["expires_in"])
+            return cls.access_token
 
     def generate_label(self, picking, packages, user_lang=None):
         """ Generate a label for a picking
