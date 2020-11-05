@@ -11,8 +11,7 @@ class ManifestWizardCase(TransactionCase):
         self.free_delivery = self.env.ref("delivery.free_delivery_carrier")
 
     def test_wizard(self):
-        """Create manifest wizard.
-        """
+        """Create manifest wizard."""
         wizard = self.env["manifest.wizard"].create(
             {"carrier_id": self.free_delivery.id, "from_date": fields.Date.today()}
         )
