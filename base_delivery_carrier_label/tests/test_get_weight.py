@@ -62,7 +62,7 @@ class TestGetWeight(TransactionCase):
         self._create_order_line(order, products)
         order.action_confirm()
         picking = order.picking_ids
-        picking.action_done()
+        picking.button_validate()
         return picking
 
     def test_get_weight(self):
