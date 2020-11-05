@@ -34,7 +34,6 @@
     <record id="manifest_wizard_action" model="ir.actions.act_window">
         <field name="name">Manifest</field>
         <field name="res_model">manifest.wizard</field>
-        <field name="type">ir.actions.act_window</field>
         <field name="view_mode">form</field>
         <field name="view_id" ref="manifest_wizard_form" />
         <field name="target">new</field>
@@ -42,7 +41,7 @@
     <menuitem
         id="manifest_wizard_menu"
         action="manifest_wizard_action"
-        string="Manifest"
+        name="Manifest"
         parent="stock.menu_stock_warehouse_mgmt"
     />
 </odoo>
