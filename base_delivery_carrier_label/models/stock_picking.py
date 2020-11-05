@@ -70,22 +70,11 @@ class StockPicking(models.Model):
         self.ensure_one()
         return {
             "name": label["name"],
-            "datas_fname": label.get("filename", label["name"]),
             "res_id": self.id,
             "res_model": "stock.picking",
             "datas": label["file"],
             "file_type": label["file_type"],
         }
-
-    def generate_labels(self):
-        """ Legacy method. Remove me after 12.0
-        """
-        _logger.warning(
-            "Your delivery module depending on your carrier must call "
-            "action_generate_carrier_label() method "
-            "instead of generate_labels()"
-        )
-        return self.action_generate_carrier_label()
 
     def attach_shipping_label(self, label):
         """Attach a label returned by generate_shipping_labels to a picking"""
@@ -186,7 +175,6 @@ class StockPicking(models.Model):
                 values.update(option_ids=[(6, 0, default_options.ids)])
         return values
 
-    @api.returns("stock.quant.package")
     def _get_packages_from_picking(self):
         """ Get all the packages from the picking """
         self.ensure_one()
@@ -214,7 +202,7 @@ class StockPicking(models.Model):
 
         """
         vals = self._values_with_carrier_options(vals)
-        return super(StockPicking, self).write(vals)
+        return super().write(vals)
 
     @api.model
     def create(self, vals):
@@ -225,7 +213,7 @@ class StockPicking(models.Model):
 
         """
         vals = self._values_with_carrier_options(vals)
-        return super(StockPicking, self).create(vals)
+        return super().create(vals)
 
     def _get_carrier_account(self):
         """ Return a carrier suitable for the current picking """
