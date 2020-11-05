@@ -2,9 +2,9 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 import base64
 
-from odoo.tests.common import Form, TransactionCase
-
 import mock
+
+from odoo.tests.common import Form, TransactionCase
 
 
 class TestSend(TransactionCase):
