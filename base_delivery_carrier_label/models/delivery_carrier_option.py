@@ -6,7 +6,7 @@ from odoo import fields, models
 
 
 class DeliveryCarrierOption(models.Model):
-    """ Option selected for a carrier method
+    """Option selected for a carrier method
 
     Those options define the list of available pre-added and available
     to be added on delivery orders
