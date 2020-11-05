@@ -98,7 +98,7 @@ class TestGetWeight(TransactionCase):
 
     def test_total_weight(self):
         """Test quant.package.weight computed field when a total
-        weight is defined """
+        weight is defined"""
         # prepare some data
         weights = [2, 30, 1, 24, 39]
         products = self._get_products(weights)

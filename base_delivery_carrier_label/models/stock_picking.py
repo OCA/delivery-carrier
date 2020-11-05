@@ -33,7 +33,7 @@ class StockPicking(models.Model):
             this.show_label_button = this.state == "done" and this.carrier_code
 
     def generate_default_label(self):
-        """ Abstract method
+        """Abstract method
 
         :return: (file_binary, file_type)
 
@@ -94,8 +94,8 @@ class StockPicking(models.Model):
         return self.env["shipping.label"].with_context(context_attachment).create(data)
 
     def _set_a_default_package(self):
-        """ Pickings using this module must have a package
-            If not this method put it one silently
+        """Pickings using this module must have a package
+        If not this method put it one silently
         """
         for picking in self:
             move_lines = picking.move_line_ids.filtered(
@@ -106,7 +106,7 @@ class StockPicking(models.Model):
                 move_lines.write({"result_package_id": package.id})
 
     def action_generate_carrier_label(self):
-        """ Method for the 'Generate Label' button.
+        """Method for the 'Generate Label' button.
 
         It will generate the labels for all the packages of the picking.
         Packages are mandatory in this case
@@ -195,7 +195,7 @@ class StockPicking(models.Model):
         return packages
 
     def write(self, vals):
-        """ Set the default options when the delivery method is changed.
+        """Set the default options when the delivery method is changed.
 
         So we are sure that the options are always in line with the
         current delivery method.
@@ -206,7 +206,7 @@ class StockPicking(models.Model):
 
     @api.model
     def create(self, vals):
-        """ Trigger onchange_carrier_id on create
+        """Trigger onchange_carrier_id on create
 
         To ensure options are setted on the basis of carrier_id copied from
         Sale order or defined by default.
@@ -229,22 +229,22 @@ class StockPicking(models.Model):
         )
 
     def _get_label_sender_address(self):
-        """ On each carrier label module you need to define
-            which is the sender of the parcel.
-            The most common case is 'picking.company_id.partner_id'
-            and then choose the contact which has the type 'delivery'
-            which is suitable for each delivery carrier label module.
-            But your client might want to customize sender address
-            if he has several brands and/or shops in his company.
-            In this case he doesn't want his customer to see
-            the address of his company in his transport label
-            but instead, the address of the partner linked to his shop/brand
+        """On each carrier label module you need to define
+        which is the sender of the parcel.
+        The most common case is 'picking.company_id.partner_id'
+        and then choose the contact which has the type 'delivery'
+        which is suitable for each delivery carrier label module.
+        But your client might want to customize sender address
+        if he has several brands and/or shops in his company.
+        In this case he doesn't want his customer to see
+        the address of his company in his transport label
+        but instead, the address of the partner linked to his shop/brand
 
-            To reach this modularity, call this method to get sender address
-            in your delivery_carrier_label_yourcarrier module, then every
-            developer can manage specific needs by inherit this method in
-            module like :
-            delivery_carrier_label_yourcarrier_yourproject.
+        To reach this modularity, call this method to get sender address
+        in your delivery_carrier_label_yourcarrier module, then every
+        developer can manage specific needs by inherit this method in
+        module like :
+        delivery_carrier_label_yourcarrier_yourproject.
         """
         self.ensure_one()
         partner = self.company_id.partner_id
