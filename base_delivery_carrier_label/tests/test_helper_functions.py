@@ -27,7 +27,7 @@ class TestHelperFunctions(TransactionCase):
             ),
         )
         second_account_with_company = account_with_company.copy(
-            default=dict(name="2. Account with company", sequence=-1,),
+            default=dict(name="2. Account with company", sequence=-1),
         )
         account = (
             self.env["stock.picking"]
@@ -54,8 +54,7 @@ class TestHelperFunctions(TransactionCase):
             default_type="some_type",
         ).attach_shipping_label(
             dict(
-                name="Hello",
-                filename="hello_world.pdf",
+                name="hello_world.pdf",
                 file=base64.b64encode(bytes("hello world", "utf8")),
                 file_type="pdf",
                 package_id=self.env["stock.quant.package"]
@@ -64,5 +63,5 @@ class TestHelperFunctions(TransactionCase):
                 tracking_number="hello",
             )
         )
-        self.assertEqual(label.name, "Hello")
+        self.assertEqual(label.name, "hello_world.pdf")
         self.assertFalse(picking.show_label_button)

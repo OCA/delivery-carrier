@@ -4,6 +4,8 @@ import base64
 
 from odoo.tests.common import Form, TransactionCase
 
+import mock
+
 
 class TestSend(TransactionCase):
     """Test sending a picking"""
@@ -18,20 +20,23 @@ class TestSend(TransactionCase):
         )
         picking_form.carrier_id = carrier
         picking = picking_form.save()
-        carrier.fixed_send_shipping = lambda *args: [
-            dict(
-                labels=[
-                    dict(
-                        name="Hello",
-                        filename="hello_world.pdf",
-                        file=base64.b64encode(bytes("hello world", "utf8")),
-                        file_type="pdf",
-                    ),
-                ]
+
+        with mock.patch.object(type(carrier), "fixed_send_shipping") as mocked:
+            mocked.return_value = [
+                dict(
+                    labels=[
+                        dict(
+                            name="hello_world.pdf",
+                            file=base64.b64encode(bytes("hello world", "utf8")),
+                            file_type="pdf",
+                        ),
+                    ]
+                )
+            ]
+            labels_before = self.env["shipping.label"].search([])
+            carrier.send_shipping(picking)
+            label = self.env["shipping.label"].search([]) - labels_before
+            self.assertTrue(label, "No label created")
+            self.assertEqual(
+                label.mimetype, "application/pdf", "Wrong attachment created"
             )
-        ]
-        labels_before = self.env["shipping.label"].search([])
-        carrier.send_shipping(picking)
-        label = self.env["shipping.label"].search([]) - labels_before
-        self.assertTrue(label, "No label created")
-        self.assertEqual(label.mimetype, "application/pdf", "Wrong attachment created")
