@@ -20,7 +20,7 @@ class StockQuantPackage(models.Model):
 
     @api.depends("total_weight")
     def _compute_weight(self):
-        """ Use total_weight if defined
+        """Use total_weight if defined
         otherwise fallback on the computed weight
         """
         to_do = self.browse()
