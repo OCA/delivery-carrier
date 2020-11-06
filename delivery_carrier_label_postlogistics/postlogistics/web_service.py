@@ -24,7 +24,9 @@ class PostlogisticsWebService(object):
 
     Handbook available here:
     https://developer.post.ch/en/digital-commerce-api
-    https://wedec.post.ch/doc/swagger/index.html?url=https://wedec.post.ch/doc/api/barcode/v1/swagger.yaml#/Barcode/generateAddressLabel
+    https://wedec.post.ch/doc/swagger/index.html?
+        url=https://wedec.post.ch/doc/api/barcode/v1/swagger.yaml
+        #/Barcode/generateAddressLabel
 
     Allows to generate labels
 
@@ -334,7 +336,7 @@ class PostlogisticsWebService(object):
         }
 
     def get_access_token(self, env):
-        icp = env["ir.config_parameter"].sudo()
+        icp = env["ir.config_parameter"]
         client_id = icp.get_param("postlogistics.oauth.client_id")
         client_secret = icp.get_param("postlogistics.oauth.client_secret")
         authentication_url = icp.get_param("postlogistics.oauth.authentication_url")

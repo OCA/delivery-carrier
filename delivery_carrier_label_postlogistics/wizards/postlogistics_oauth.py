@@ -26,9 +26,9 @@ class PostlogisticsAuth(models.TransientModel):
 
     # client_id and client_secret are only defined as required in the form view
     # to allow to reset them (into reset_access_token function)
-    client_id = fields.Char(string="Client ID",)
+    client_id = fields.Char(string="Client ID")
 
-    client_secret = fields.Char(string="Client Secret",)
+    client_secret = fields.Char(string="Client Secret")
 
     state = fields.Selection(
         [("todo", "OAuth Config"), ("done", "Complete")], default="todo", required=True
@@ -56,7 +56,6 @@ class PostlogisticsAuth(models.TransientModel):
 
         return res
 
-    @api.multi
     def generate_access_token(self):
         self.ensure_one()
 
@@ -108,7 +107,6 @@ class PostlogisticsAuth(models.TransientModel):
         act["res_id"] = self.id
         return act
 
-    @api.multi
     def reset_access_token(self):
         # Reset the credentials information
         icp = self.env["ir.config_parameter"]

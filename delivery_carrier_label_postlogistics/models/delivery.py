@@ -124,16 +124,15 @@ class DeliveryCarrier(models.Model):
     def _compute_basic_service_ids(self):
         """ Search in all options for PostLogistics basic services if set """
         for carrier in self:
-            if carrier.delivery_type != "postlogistics":
-                continue
+            if carrier.delivery_type == "postlogistics":
+                options = carrier.available_option_ids.filtered(
+                    lambda option: option.postlogistics_type == "basic"
+                ).mapped("tmpl_option_id")
 
-            options = carrier.available_option_ids.filtered(
-                lambda option: option.postlogistics_type == "basic"
-            ).mapped("tmpl_option_id")
-
-            if not options:
-                continue
-            self.postlogistics_basic_service_ids = options
+                carrier.postlogistics_basic_service_ids = options or None
+            else:
+                # Prevent CacheMiss exception
+                carrier.postlogistics_basic_service_ids = None
 
     @api.depends(
         "delivery_type",
@@ -201,7 +200,6 @@ class DeliveryCarrier(models.Model):
         "additional options for this delivery method",
     )
 
-    @api.multi
     def postlogistics_rate_shipment(self, order):
         self.ensure_one()
         delivery_product_price = self.product_id and self.product_id.lst_price
@@ -222,17 +220,14 @@ class DeliveryCarrier(models.Model):
                 ),
             }
 
-    @api.multi
     def postlogistics_send_shipping(self, pickings):
         return [{"exact_price": False, "tracking_number": False}]
 
-    @api.multi
     def postlogistics_get_tracking_link(self, picking):
         return (
             "https://service.post.ch/EasyTrack/"
             "submitParcelData.do?formattedParcelCodes=%s" % picking.carrier_tracking_ref
         )
 
-    @api.multi
     def postlogistics_cancel_shipment(self, pickings):
         raise NotImplementedError()

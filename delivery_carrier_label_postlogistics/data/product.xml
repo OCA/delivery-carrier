@@ -4,7 +4,7 @@
 <odoo noupdate="1">
     <record id="product_postlogistics_service" model="product.product">
         <field
-            name="image"
+            name="image_1920"
             type="base64"
             file="delivery_carrier_label_postlogistics/static/img/postlogistics-logo.jpg"
         />

@@ -34,6 +34,7 @@ class PostlogisticsConfigSettings(models.TransientModel):
         "pack number and 6 digits for picking number. (eg. 07000042 "
         "for picking 42 and 7th pack",
     )
+
     proclima_logo = fields.Boolean(
         related="company_id.postlogistics_proclima_logo",
         help="The “pro clima” logo indicates an item for which the "

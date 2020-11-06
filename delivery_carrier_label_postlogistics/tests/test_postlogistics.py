@@ -34,9 +34,7 @@ class TestPostlogistics(common.SavepointCase):
         ICP.set_param("postlogistics.oauth.client_secret", CLIENT_SECRET)
         ICP.set_param("postlogistics.oauth.authentication_url", AUTH_URL)
         ICP.set_param("postlogistics.oauth.generate_label_url", GENERATE_LABEL_URL)
-        cls.env["postlogistics.license"].create(
-            {"name": "TEST", "number": LICENSE,}
-        )
+        cls.env["postlogistics.license"].create({"name": "TEST", "number": LICENSE})
         Product = cls.env["product.product"]
         partner_id = cls.env.ref(
             "delivery_carrier_label_postlogistics.partner_postlogistics"

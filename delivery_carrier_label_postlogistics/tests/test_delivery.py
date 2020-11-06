@@ -117,6 +117,7 @@ class TestDelivery(common.SavepointCase):
         services = self.env["delivery.carrier.template.option"].search(
             [("postlogistics_type", "in", single_option_types)]
         )
+
         self.assertEqual(self.carrier.allowed_tmpl_options_ids, services)
 
     def test_picking_options_applied(self):
@@ -160,7 +161,7 @@ class TestDelivery(common.SavepointCase):
                     (
                         0,
                         0,
-                        {"product_id": self.env.ref("product.product_product_3").id,},
+                        {"product_id": self.env.ref("product.product_product_3").id},
                     )
                 ],
             }

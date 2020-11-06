@@ -24,7 +24,6 @@ class StockPicking(models.Model):
         "Mobile", help="For notify delivery by telephone (ZAW3213)"
     )
 
-    @api.multi
     def postlogistics_cod_amount(self):
         """ Return the Postlogistic Cash on Delivery amount of a picking
 
@@ -60,7 +59,6 @@ class StockPicking(models.Model):
             )
         return order.amount_total
 
-    @api.multi
     def _generate_postlogistics_label(self, webservice_class=None, package_ids=None):
         """ Generate labels and write tracking numbers received """
         self.ensure_one()
@@ -121,7 +119,6 @@ class StockPicking(models.Model):
 
         return labels
 
-    @api.multi
     def generate_shipping_labels(self, package_ids=None):
         """ Add label generation for Postlogistics """
         self.ensure_one()

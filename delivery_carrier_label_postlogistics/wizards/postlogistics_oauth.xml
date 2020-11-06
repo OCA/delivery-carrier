@@ -46,7 +46,6 @@
         <field name="name">Postlogistics Auth</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">postlogistics.auth</field>
-        <field name="view_type">form</field>
         <field name="view_mode">form</field>
         <field name="view_id" ref="view_postlogistics_auth_form" />
         <field name="target">new</field>

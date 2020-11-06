@@ -12,7 +12,6 @@ class StockQuantPackage(models.Model):
         "than the total of the sales order, write the amount there.",
     )
 
-    @api.multi
     @api.returns("stock.picking")
     def _get_origin_pickings(self):
         self.ensure_one()
@@ -20,7 +19,6 @@ class StockQuantPackage(models.Model):
         operations = operation_model.search([("result_package_id", "=", self.id)])
         return operations.mapped("picking_id")
 
-    @api.multi
     def postlogistics_cod_amount(self):
         """ Return the Postlogistic Cash on Delivery amount of a package
 
