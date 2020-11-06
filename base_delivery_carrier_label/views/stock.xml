@@ -10,10 +10,11 @@
                 <button
                     name="action_generate_carrier_label"
                     help="Create Shipping Label 🚚"
-                    attrs="{'invisible': ['|', ('carrier_code', '=', False), ('state', '!=', 'done')]}"
+                    attrs="{'invisible': [('show_label_button', '!=', True)]}"
                     string="Shipping Label 🚚"
                     type="object"
                 />
+                <field name="show_label_button" invisible="1" />
             </field>
             <xpath expr="//page//field[@name='carrier_id']" position="after">
                 <field name="carrier_code" />

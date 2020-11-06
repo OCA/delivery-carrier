@@ -9,12 +9,11 @@ class DeliveryCarrier(models.Model):
     _inherit = "delivery.carrier"
 
     delivery_type = fields.Selection()
-    code = fields.Char(help="Delivery Method Code (according to carrier)")
-    description = fields.Text()
     available_option_ids = fields.One2many(
         comodel_name="delivery.carrier.option",
         inverse_name="carrier_id",
         string="Option",
+        context={"active_test": False},
     )
 
     def default_options(self):
@@ -24,3 +23,12 @@ class DeliveryCarrier(models.Model):
             if available_option.mandatory or available_option.by_default:
                 options |= available_option
         return options
+
+    def send_shipping(self, pickings):
+        """Handle labels and  if we have them. Expected format is {'labels': [{}, ...]}
+        The dicts are input for stock.picking#attach_label"""
+        result = super().send_shipping(pickings)
+        for result_dict, picking in zip(result, pickings):
+            for label in result_dict.get("labels", []):
+                picking.attach_shipping_label(label)
+        return result
