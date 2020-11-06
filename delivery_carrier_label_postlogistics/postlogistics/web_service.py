@@ -2,19 +2,20 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import base64
-import re
-import logging
 import json
-import requests
-from PIL import Image
+import logging
+import re
 from io import StringIO
 
 from odoo import _, exceptions
 
+import requests
+from PIL import Image
+
 _logger = logging.getLogger(__name__)
 
-_compile_itemid = re.compile(r'[^0-9A-Za-z+\-_]')
-_compile_itemnum = re.compile(r'[^0-9]')
+_compile_itemid = re.compile(r"[^0-9A-Za-z+\-_]")
+_compile_itemnum = re.compile(r"[^0-9]")
 
 
 class PostlogisticsWebService(object):
@@ -30,7 +31,7 @@ class PostlogisticsWebService(object):
     """
 
     def __init__(self, company):
-        self.default_lang = company.partner_id.lang or 'en'
+        self.default_lang = company.partner_id.lang or "en"
 
     def _get_language(self, lang):
         """ Return a language to iso format from odoo format.
@@ -44,11 +45,11 @@ class PostlogisticsWebService(object):
         """
         if not lang:
             lang = self.default_lang
-        available_languages = ['de', 'en', 'fr', 'it']  # Given by API doc
-        lang_code = lang.split('_')[0]
+        available_languages = ["de", "en", "fr", "it"]  # Given by API doc
+        lang_code = lang.split("_")[0]
         if lang_code in available_languages:
             return lang_code
-        return 'en'
+        return "en"
 
     def _prepare_recipient(self, picking):
         """ Create a ns0:Recipient as a dict from a partner
@@ -61,35 +62,36 @@ class PostlogisticsWebService(object):
 
         partner_name = partner.name or partner.parent_id.name
         recipient = {
-            'name1': partner_name,
-            'street': partner.street,
-            'zip': partner.zip,
-            'city': partner.city,
-            'email': partner.email or None,
+            "name1": partner_name,
+            "street": partner.street,
+            "zip": partner.zip,
+            "city": partner.city,
+            "email": partner.email or None,
         }
 
         if partner.country_id.code:
-            recipient['country'] = partner.country_id.code.upper()
+            recipient["country"] = partner.country_id.code.upper()
 
         if partner.street2:
-            recipient['addressSuffix'] = partner.street2
+            recipient["addressSuffix"] = partner.street2
 
         if partner.parent_id and partner.parent_id.name != partner_name:
-            recipient['name2'] = partner.parent_id.name
-            recipient['personallyAddressed'] = False
+            recipient["name2"] = partner.parent_id.name
+            recipient["personallyAddressed"] = False
 
         # Phone and / or mobile should only be displayed if instruction to
         # Notify delivery by telephone is set
-        is_phone_required = [option for option in picking.option_ids
-                             if option.code == 'ZAW3213']
+        is_phone_required = [
+            option for option in picking.option_ids if option.code == "ZAW3213"
+        ]
         if is_phone_required:
             phone = picking.delivery_phone or partner.phone
             if phone:
-                recipient['phone'] = phone
+                recipient["phone"] = phone
 
             mobile = picking.delivery_mobile or partner.mobile
             if mobile:
-                recipient['mobile'] = mobile
+                recipient["mobile"] = mobile
 
         return recipient
 
@@ -106,43 +108,44 @@ class PostlogisticsWebService(object):
         partner = company.partner_id
 
         customer = {
-            'name1': partner.name,
-            'street': partner.street,
-            'zip': partner.zip,
-            'city': partner.city,
-            'country': partner.country_id.code,
-            'domicilePostOffice': company.postlogistics_office,
+            "name1": partner.name,
+            "street": partner.street,
+            "zip": partner.zip,
+            "city": partner.city,
+            "country": partner.country_id.code,
+            "domicilePostOffice": company.postlogistics_office,
         }
         logo = company.postlogistics_logo
         if logo:
             logo_image = Image.open(StringIO(logo.decode()))
             logo_format = logo_image.format
-            customer['logo'] = logo.decode()
-            customer['logoFormat'] = logo_format
+            customer["logo"] = logo.decode()
+            customer["logoFormat"] = logo_format
         return customer
 
     def _get_single_option(self, picking, option):
-        option = [opt.code for opt in picking.option_ids
-                  if opt.postlogistics_type == option]
+        option = [
+            opt.code for opt in picking.option_ids if opt.postlogistics_type == option
+        ]
         assert len(option) <= 1
         return option and option[0]
 
     def _get_label_layout(self, picking):
-        label_layout = self._get_single_option(picking, 'label_layout')
+        label_layout = self._get_single_option(picking, "label_layout")
         if not label_layout:
             company = picking.company_id
             label_layout = company.postlogistics_label_layout.code
         return label_layout
 
     def _get_output_format(self, picking):
-        output_format = self._get_single_option(picking, 'output_format')
+        output_format = self._get_single_option(picking, "output_format")
         if not output_format:
             company = picking.company_id
             output_format = company.postlogistics_output_format.code
         return output_format
 
     def _get_image_resolution(self, picking):
-        resolution = self._get_single_option(picking, 'resolution')
+        resolution = self._get_single_option(picking, "resolution")
         if not resolution:
             company = picking.company_id
             resolution = company.postlogistics_resolution.code
@@ -168,34 +171,36 @@ class PostlogisticsWebService(object):
         services = [
             code
             for codes in (
-                option.code.split(',')
+                option.code.split(",")
                 for option in picking.option_ids
                 if option.tmpl_option_id.postlogistics_type
-                in ('basic', 'additional', 'delivery')
+                in ("basic", "additional", "delivery")
             )
             for code in codes
         ]
         if not services:
             raise exceptions.UserError(
-                _('Missing required delivery option on picking.')
+                _("Missing required delivery option on picking.")
             )
 
         attributes = {
-            'przl': services,
-            'weight': picking.shipping_weight,
+            "przl": services,
+            "weight": picking.shipping_weight,
         }
         option_codes = [option.code for option in picking.option_ids]
-        if 'ZAW3217' in option_codes and picking.delivery_fixed_date:
-            attributes['deliveryDate'] = picking.delivery_fixed_date
-        if 'ZAW3218' in option_codes and pack_num:
-            attributes.update({
-                'parcelTotal': pack_total or picking.number_of_packages,
-                'parcelNo': pack_num,
-            })
-        if 'ZAW3219' in option_codes and picking.delivery_place:
-            attributes['deliveryPlace'] = picking.delivery_place
+        if "ZAW3217" in option_codes and picking.delivery_fixed_date:
+            attributes["deliveryDate"] = picking.delivery_fixed_date
+        if "ZAW3218" in option_codes and pack_num:
+            attributes.update(
+                {
+                    "parcelTotal": pack_total or picking.number_of_packages,
+                    "parcelNo": pack_num,
+                }
+            )
+        if "ZAW3219" in option_codes and picking.delivery_place:
+            attributes["deliveryPlace"] = picking.delivery_place
         if picking.company_id.postlogistics_proclima_logo:
-            attributes['proClima'] = True
+            attributes["proClima"] = True
         return attributes
 
     def _get_itemid(self, picking, pack_no):
@@ -205,9 +210,9 @@ class PostlogisticsWebService(object):
         :return string: itemid
 
         """
-        name = _compile_itemid.sub('', picking.name)
+        name = _compile_itemid.sub("", picking.name)
         if pack_no:
-            pack_no = _compile_itemid.sub('', pack_no)
+            pack_no = _compile_itemid.sub("", pack_no)
         codes = [name, pack_no]
         return "+".join(c for c in codes if c)
 
@@ -216,12 +221,12 @@ class PostlogisticsWebService(object):
             amount = package.postlogistics_cod_amount()
         else:
             amount = picking.postlogistics_cod_amount()
-        amount = '{:.2f}'.format(amount)
-        return [{'Type': 'NN_BETRAG', 'Value': amount}]
+        amount = "{:.2f}".format(amount)
+        return [{"Type": "NN_BETRAG", "Value": amount}]
 
     def _get_item_additional_data(self, picking, package=None):
         result = []
-        if set(picking.option_ids.mapped('code')) & {'BLN', 'N'}:
+        if set(picking.option_ids.mapped("code")) & {"BLN", "N"}:
             cod_attributes = self._cash_on_delivery(picking, package=package)
             result += cod_attributes
         return result
@@ -235,8 +240,8 @@ class PostlogisticsWebService(object):
 
         e.g. 03000042 for 3rd pack of picking OUT/19000042
         """
-        picking_num = _compile_itemnum.sub('', picking.name)
-        return '%02d%s' % (pack_num, picking_num[-6:].zfill(6))
+        picking_num = _compile_itemnum.sub("", picking.name)
+        return "%02d%s" % (pack_num, picking_num[-6:].zfill(6))
 
     def _prepare_item_list(self, picking, recipient, packages):
         """ Return a list of item made from the pickings """
@@ -246,28 +251,27 @@ class PostlogisticsWebService(object):
 
         def add_item(package=None):
             assert picking or package
-            itemid = self._get_itemid(picking,
-                                      package.name if package else picking.name
-                                      )
+            itemid = self._get_itemid(
+                picking, package.name if package else picking.name
+            )
             item = {
-                'itemID': itemid,
-                'recipient': recipient,
-                'attributes': attributes,
+                "itemID": itemid,
+                "recipient": recipient,
+                "attributes": attributes,
             }
-            if company.postlogistics_tracking_format == 'picking_num':
+            if company.postlogistics_tracking_format == "picking_num":
                 if not package:
                     # start with 9 to garentee uniqueness and use 7 digits
                     # of picking number
-                    picking_num = _compile_itemnum.sub('', picking.name)
-                    item_number = '9%s' % picking_num[-7:].zfill(7)
+                    picking_num = _compile_itemnum.sub("", picking.name)
+                    item_number = "9%s" % picking_num[-7:].zfill(7)
                 else:
                     item_number = self._get_item_number(picking, pack_counter)
-                item['itemNumber'] = item_number
+                item["itemNumber"] = item_number
 
-            additional_data = self._get_item_additional_data(picking,
-                                                             package=package)
+            additional_data = self._get_item_additional_data(picking, package=package)
             if additional_data:
-                item['additionalData'] = additional_data
+                item["additionalData"] = additional_data
 
             item_list.append(item)
 
@@ -277,8 +281,7 @@ class PostlogisticsWebService(object):
 
         pack_total = len(packages)
         for pack in packages:
-            attributes = self._prepare_attributes(
-                picking, pack_counter, pack_total)
+            attributes = self._prepare_attributes(picking, pack_counter, pack_total)
             add_item(package=pack)
             pack_counter += 1
 
@@ -293,31 +296,32 @@ class PostlogisticsWebService(object):
         label_layout = self._get_label_layout(picking)
         if not label_layout:
             raise exceptions.UserError(
-                _('Layout not set') + '\n' +
-                error_missing % _("label layout"))
+                _("Layout not set") + "\n" + error_missing % _("label layout")
+            )
 
         output_format = self._get_output_format(picking)
         if not output_format:
             raise exceptions.UserError(
-                _('Output format not set') + '\n' +
-                error_missing % _("output format"))
+                _("Output format not set") + "\n" + error_missing % _("output format")
+            )
 
         image_resolution = self._get_image_resolution(picking)
         if not image_resolution:
             raise exceptions.UserError(
-                _('Resolution not set') + '\n' +
-                error_missing % _("resolution"))
+                _("Resolution not set") + "\n" + error_missing % _("resolution")
+            )
 
         return {
-            'labelLayout': label_layout,
-            'printAddresses': 'RECIPIENT_AND_CUSTOMER',
-            'imageFileType': output_format,
-            'imageResolution': image_resolution,
-            'printPreview': False,
+            "labelLayout": label_layout,
+            "printAddresses": "RECIPIENT_AND_CUSTOMER",
+            "imageFileType": output_format,
+            "imageResolution": image_resolution,
+            "printPreview": False,
         }
 
-    def _prepare_data(self, lang, frankingLicense, post_customer,
-                      labelDefinition, item):
+    def _prepare_data(
+        self, lang, frankingLicense, post_customer, labelDefinition, item
+    ):
         return {
             "language": lang.upper(),
             "frankingLicense": frankingLicense,
@@ -330,38 +334,42 @@ class PostlogisticsWebService(object):
         }
 
     def get_access_token(self, env):
-        icp = env['ir.config_parameter'].sudo()
-        client_id = icp.get_param('postlogistics.oauth.client_id')
-        client_secret = icp.get_param('postlogistics.oauth.client_secret')
-        authentication_url = icp.get_param(
-            'postlogistics.oauth.authentication_url'
-        )
+        icp = env["ir.config_parameter"].sudo()
+        client_id = icp.get_param("postlogistics.oauth.client_id")
+        client_secret = icp.get_param("postlogistics.oauth.client_secret")
+        authentication_url = icp.get_param("postlogistics.oauth.authentication_url")
 
         if not (client_id and client_secret):
             raise exceptions.UserError(
-                _('Authorization Required\n\n'
-                  'Please verify postlogistics client id and secret in:\n'
-                  'Configuration -> Postlogistics'))
+                _(
+                    "Authorization Required\n\n"
+                    "Please verify postlogistics client id and secret in:\n"
+                    "Configuration -> Postlogistics"
+                )
+            )
 
         response_token = requests.post(
             url=authentication_url,
-            headers={'content-type': 'application/x-www-form-urlencoded'},
+            headers={"content-type": "application/x-www-form-urlencoded"},
             data={
-                'grant_type': 'client_credentials',
-                'client_id': client_id,
-                'client_secret': client_secret,
-                'scope': 'WEDEC_BARCODE_READ',
+                "grant_type": "client_credentials",
+                "client_id": client_id,
+                "client_secret": client_secret,
+                "scope": "WEDEC_BARCODE_READ",
             },
             timeout=60,
         )
         response_token_dict = json.loads(response_token.content.decode("utf-8"))
-        access_token = response_token_dict['access_token']
+        access_token = response_token_dict["access_token"]
 
         if not (access_token):
             raise exceptions.UserError(
-                _('Authorization Required\n\n'
-                  'Please verify postlogistics client id and secret in:\n'
-                  'Configuration -> Postlogistics'))
+                _(
+                    "Authorization Required\n\n"
+                    "Please verify postlogistics client id and secret in:\n"
+                    "Configuration -> Postlogistics"
+                )
+            )
 
         return access_token
 
@@ -388,7 +396,7 @@ class PostlogisticsWebService(object):
 
         # get options
         if not user_lang:
-            user_lang = 'en_US'
+            user_lang = "en_US"
         lang = self._get_language(user_lang)
         post_customer = self._prepare_customer(picking)
         recipient = self._prepare_recipient(picking)
@@ -402,54 +410,55 @@ class PostlogisticsWebService(object):
             lang, frankingLicense, post_customer, labelDefinition, item
         )
 
-        res = {'value': []}
+        res = {"value": []}
 
-        icp = picking.env['ir.config_parameter']
-        generate_label_url = icp.get_param(
-            'postlogistics.oauth.generate_label_url'
-        )
+        icp = picking.env["ir.config_parameter"]
+        generate_label_url = icp.get_param("postlogistics.oauth.generate_label_url")
         response = requests.post(
             url=generate_label_url,
             headers={
-                'Authorization': 'Bearer %s' % access_token,
-                'accept': 'application/json',
-                'content-type': 'application/json',
+                "Authorization": "Bearer %s" % access_token,
+                "accept": "application/json",
+                "content-type": "application/json",
             },
             data=json.dumps(data),
             timeout=60,
         )
 
         if response.status_code != 200:
-            res['success'] = False
-            res['errors'] = [
-                _('Error when communicating with swisspost API: %s') %
-                response.content.decode("utf-8")
+            res["success"] = False
+            res["errors"] = [
+                _("Error when communicating with swisspost API: %s")
+                % response.content.decode("utf-8")
             ]
             return res
 
         response_dict = json.loads(response.content.decode("utf-8"))
 
-        if response_dict['item'].get('errors'):
-            res['success'] = False
-            res['errors'] = []
-            for error in response_dict['item']['errors']:
-                res['errors'].append(
+        if response_dict["item"].get("errors"):
+            res["success"] = False
+            res["errors"] = []
+            for error in response_dict["item"]["errors"]:
+                res["errors"].append(
                     _(
-                        'Swisspost API returns errors:\n'
-                        'Error code: %s\n'
-                        'Error message: %s'
-                    ) % (error['code'], error['message'])
+                        "Swisspost API returns errors:\n"
+                        "Error code: %s\n"
+                        "Error message: %s"
+                    )
+                    % (error["code"], error["message"])
                 )
             return res
 
         output_format = self._get_output_format(picking).lower()
-        file_type = output_format if output_format != 'spdf' else 'pdf'
-        binary = base64.b64encode(bytes(response_dict['item']['label'][0], 'utf-8'))
-        res['success'] = True
-        res['value'].append({
-            'item_id': item_list[0]['itemID'],
-            'binary': binary,
-            'tracking_number': response_dict['item']['identCode'],
-            'file_type': file_type,
-        })
+        file_type = output_format if output_format != "spdf" else "pdf"
+        binary = base64.b64encode(bytes(response_dict["item"]["label"][0], "utf-8"))
+        res["success"] = True
+        res["value"].append(
+            {
+                "item_id": item_list[0]["itemID"],
+                "binary": binary,
+                "tracking_number": response_dict["item"]["identCode"],
+                "file_type": file_type,
+            }
+        )
         return res

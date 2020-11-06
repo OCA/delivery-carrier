@@ -4,23 +4,21 @@ from odoo import _, api, exceptions, fields, models
 
 
 class StockQuantPackage(models.Model):
-    _inherit = 'stock.quant.package'
+    _inherit = "stock.quant.package"
 
     postlogistics_manual_cod_amount = fields.Float(
-        string='Postlogistics Cash On Delivery Amount',
-        help='If the cash on delivery amount for this package is different '
-             'than the total of the sales order, write the amount there.'
+        string="Postlogistics Cash On Delivery Amount",
+        help="If the cash on delivery amount for this package is different "
+        "than the total of the sales order, write the amount there.",
     )
 
     @api.multi
-    @api.returns('stock.picking')
+    @api.returns("stock.picking")
     def _get_origin_pickings(self):
         self.ensure_one()
-        operation_model = self.env['stock.pack.operation']
-        operations = operation_model.search(
-            [('result_package_id', '=', self.id)]
-        )
-        return operations.mapped('picking_id')
+        operation_model = self.env["stock.pack.operation"]
+        operations = operation_model.search([("result_package_id", "=", self.id)])
+        return operations.mapped("picking_id")
 
     @api.multi
     def postlogistics_cod_amount(self):
@@ -42,9 +40,11 @@ class StockQuantPackage(models.Model):
         pickings = self._get_origin_pickings()
         if len(pickings) > 1:
             raise exceptions.Warning(
-                _('The cash on delivery amount must be manually specified '
-                  'on the packages when a sales order is delivered '
-                  'in several delivery orders.')
+                _(
+                    "The cash on delivery amount must be manually specified "
+                    "on the packages when a sales order is delivered "
+                    "in several delivery orders."
+                )
             )
 
         order = pickings.sale_id
@@ -52,19 +52,23 @@ class StockQuantPackage(models.Model):
             return 0.0
         if len(order) > 1:
             raise exceptions.Warning(
-                _('The cash on delivery amount must be manually specified '
-                  'on the packages when a package contains products '
-                  'from different sales orders.')
+                _(
+                    "The cash on delivery amount must be manually specified "
+                    "on the packages when a package contains products "
+                    "from different sales orders."
+                )
             )
 
-        order_moves = order.mapped('order_line.procurement_ids.move_ids')
-        package_moves = self.mapped('quant_ids.history_ids')
+        order_moves = order.mapped("order_line.procurement_ids.move_ids")
+        package_moves = self.mapped("quant_ids.history_ids")
         # check if the package delivers the whole sales order
         if order_moves != package_moves:
             raise exceptions.Warning(
-                _('The cash on delivery amount must be manually specified '
-                  'on the packages when a sales order is delivered '
-                  'in several packages.')
+                _(
+                    "The cash on delivery amount must be manually specified "
+                    "on the packages when a sales order is delivered "
+                    "in several packages."
+                )
             )
 
         return order.amount_total
