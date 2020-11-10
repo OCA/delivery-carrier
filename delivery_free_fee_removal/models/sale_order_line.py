@@ -15,10 +15,3 @@ class SaleOrderLine(models.Model):
             line.is_free_delivery = line.is_delivery and line.currency_id.is_zero(
                 line.price_total
             )
-
-    @api.depends("is_free_delivery")
-    def _get_to_invoice_qty(self):
-        free_delivery_lines = self.filtered("is_free_delivery")
-        free_delivery_lines.qty_to_invoice = 0
-        other_lines = self - free_delivery_lines
-        super(SaleOrderLine, other_lines)._get_to_invoice_qty()

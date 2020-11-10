@@ -63,6 +63,7 @@ Contributors
 * `Camptocamp <https://www.camptocamp.com>`__:
 
   * Guewen Baconnier
+  * Thierry Ducrest
 
 Maintainers
 ~~~~~~~~~~~
