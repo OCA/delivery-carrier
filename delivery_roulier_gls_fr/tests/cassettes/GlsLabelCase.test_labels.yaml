@@ -1,0 +1,35 @@
+interactions:
+- request:
+    body: \\\\\GLS\\\\\|T861:None|T8905:1|T863:27 Rue Henri Rolland|T864:VILLEURBANNE|T810:Akretion|T8975:gls_origin_reference|T8908:reference2|T540:20201111|T822:69100|T8915:2500099999|T8907:reference1|T8973:parcel_number_barcode|T820:35B
+      rue Montgolfier|T8914:0101010101|T330:69100|T8702:1|T862:None|T8904:parcel_number_label|T8700:FR0094|T860:Carrier
+      label test customer|T859:WH/OUT/00106|T821:FR|T530:weight|T100:FR|T854:reference1|T823:Villeurbanne|T8906:Carrier
+      label test customer|T8318:instructions|/////GLS/////
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['510']
+      User-Agent: [python-requests/2.20.0]
+      content-type: [text/plain;charset=ISO-8859-1]
+    method: POST
+    uri: http://www.gls-france.com/cgi-bin/glsboxGITest.cgi
+  response:
+    body: {string: '\\\\\GLS\\\\\T861:None|T8905:1|T863:27 Rue Henri Rolland|T864:VILLEURBANNE|T810:Akretion|T8975:gls_origin_reference|T8908:reference2|T822:69100|T8915:2500099999|T8907:reference1|T8973:parcel_number_barcode|T820:35B
+        rue Montgolfier|T8914:0101010101|T330:69100|T8702:1|T862:None|T8904:parcel_number_label|T8700:FR0094|T860:Carrier
+        label test customer|T859:WH/OUT/00106|T821:FR|T854:reference1|T823:Villeurbanne|T8906:Carrier
+        label test customer|T8318:instructions|T080:V214_17_0002|T520:10112020|T510:dp|T500:FR0094|T103:FR0094|T560:FR01|T8797:IBOXCUS|T540:11.11.2020|T541:21:16|T100:FR|CTRA2:FR|T1945:Les
+        informations sur la protection des donnees personnelles de GLS sont disponibles
+        sur|T1946:gls-group.eu/dataprotection|T210:|ARTNO:Standard|T530:0.00|T206:BP|ALTZIP:69100|FLOCCODE:FR0071|TOURNO:7143|T320:7143|TOURTYPE:21102|SORT1:1|T310:1|T331:69100|T890:9250|ROUTENO:7071804|ROUTE1:LYN|T110:LYN|FLOCNO:4025|T101:0071|T105:FR|T300:25007113|T805:|NDI:|T400:925399467274|T8970:A|T8971:A|T8980:AA|T8974:|T8950:Tour|T8951:ZipCode|T8952:Your
+        GLS Track ID|T8953:Product|T8954:Service Code|T8955:Delivery address|T8956:Contact|T8958:Contact|T8957:Customer
+        ID|T8959:Phone|T8960:Note|T8961:Parcel|T8962:Weight|T8965:Contact ID|T8976:gls_origin_reference|T8913:ZWKMH61Z|T8972:ZWKMH61Z|T8902:AFR0094FR007125000999990101010101ZWKMH61ZAA          1LYN714369100  00000001pargls_origin_reference  gls_origin_reference  |T8903:A\7CCarrier
+        label test customer\7C27 Rue Henri Rolland\7CVILLEURBANNE\7C\7Creference1\7C\7C                                    |T102:FR0071|PRINTINFO:|PRINT1:|RESULT:E000:925399467274|T565:211632|PRINT0:frGLSintermecpf4i.int01|/////GLS/////'}
+    headers:
+      Connection: [Keep-Alive]
+      Content-Type: [text/html]
+      Date: ['Wed, 11 Nov 2020 20:17:06 GMT']
+      Keep-Alive: ['timeout=5, max=100']
+      Server: [Apache]
+      Vary: [Accept-Encoding]
+      content-length: ['1654']
+    status: {code: 200, message: OK}
+version: 1
