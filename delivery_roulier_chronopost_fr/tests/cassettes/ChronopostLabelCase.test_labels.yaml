@@ -1,0 +1,59 @@
+interactions:
+- request:
+    body: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<SOAP-ENV:Envelope xmlns:ns0=\"\
+      http://schemas.xmlsoap.org/soap/envelope/\" xmlns:ns1=\"http://cxf.shipping.soap.chronopost.fr/\"\
+      \ xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:SOAP-ENV=\"\
+      http://schemas.xmlsoap.org/soap/envelope/\">\n<SOAP-ENV:Header/>\n    <ns0:Body>\n\
+      \        <ns1:shipping>\n <headerValue>\n    <accountNumber>00000000</accountNumber>\n\
+      \    <idEmit>CHRFR</idEmit>\n    <subAccount></subAccount>\n </headerValue>\n\
+      \ <shipperValue>\n    <shipperAdress1>35B rue Montgolfier</shipperAdress1>\n\
+      \    <shipperAdress2></shipperAdress2>\n    <shipperCity>Villeurbanne</shipperCity>\n\
+      \    <shipperCivility>E</shipperCivility>\n    <shipperContactName></shipperContactName>\n\
+      \    <shipperCountry>FR</shipperCountry>\n    <shipperEmail>info@yourcompany.example.com</shipperEmail>\n\
+      \    <shipperMobilePhone></shipperMobilePhone>\n    <shipperName>Akretion</shipperName>\n\
+      \    <shipperName2>Akretion</shipperName2>\n    <shipperPhone>0499999999</shipperPhone>\n\
+      \    <shipperPreAlert>0</shipperPreAlert>\n    <shipperZipCode>69100</shipperZipCode>\n\
+      \ </shipperValue>\n <customerValue>\n    <customerAdress1>35B rue Montgolfier</customerAdress1>\n\
+      \    <customerAdress2></customerAdress2>\n    <customerCity>Villeurbanne</customerCity>\n\
+      \    <customerCivility>E</customerCivility>\n    <customerContactName></customerContactName>\n\
+      \    <customerCountry>FR</customerCountry>\n    <customerEmail>info@yourcompany.example.com</customerEmail>\n\
+      \    <customerMobilePhone></customerMobilePhone>\n    <customerName>Akretion</customerName>\n\
+      \    <customerName2>Akretion</customerName2>\n    <customerPhone>0499999999</customerPhone>\n\
+      \    <customerPreAlert>0</customerPreAlert>\n    <customerZipCode>69100</customerZipCode>\n\
+      \    <printAsSender></printAsSender>\n </customerValue>\n <recipientValue>\n\
+      \    <recipientAdress1>27 Rue Henri Rolland</recipientAdress1>\n    <recipientAdress2></recipientAdress2>\n\
+      \    <recipientCity>VILLEURBANNE</recipientCity>\n    <recipientCivility></recipientCivility>\n\
+      \    <recipientContactName></recipientContactName>\n    <recipientCountry>FR</recipientCountry>\n\
+      \    <recipientEmail></recipientEmail>\n    <recipientMobilePhone></recipientMobilePhone>\n\
+      \    <recipientName>Carrier label test customer</recipientName>\n    <recipientName2>Carrier\
+      \ label test customer</recipientName2>\n    <recipientPhone></recipientPhone>\n\
+      \    <recipientPreAlert>0</recipientPreAlert>\n    <recipientZipCode>69100</recipientZipCode>\n\
+      \ </recipientValue>\n <refValue>\n    <customerSkybillNumber>PACK0000091</customerSkybillNumber>\n\
+      \    <recipientRef>SO122</recipientRef>\n    <shipperRef>WH/OUT/00112</shipperRef>\n\
+      \ </refValue>\n <skybillValue>\n    <evtCode>DC</evtCode>\n    <insuredCurrency></insuredCurrency>\n\
+      \    <insuredValue></insuredValue>\n    <codCurrency></codCurrency>\n    <codValue></codValue>\n\
+      \    <customsCurrency></customsCurrency>\n    <customsValue></customsValue>\n\
+      \    <objectType>MAR</objectType>\n    <productCode>01</productCode>\n    <service>0</service>\n\
+      \    <shipDate>2020-11-12</shipDate>\n    <shipHour>21</shipHour>\n    <weight>1.2</weight>\n\
+      \    <weightUnit>KGM</weightUnit>\n </skybillValue>\n <skybillParamsValue>\n\
+      \    <mode>Z2D</mode>\n </skybillParamsValue>\n <password>password</password>\n\
+      </ns1:shipping>\n   </ns0:Body>\n</SOAP-ENV:Envelope>"
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['3232']
+      User-Agent: [python-requests/2.20.0]
+      content-type: [text/xml]
+    method: POST
+    uri: https://ws.chronopost.fr/shipping-cxf/ShippingServiceWS
+  response:
+    body: {string: '<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"><soap:Body><ns1:shippingResponse
+        xmlns:ns1="http://cxf.shipping.soap.chronopost.fr/"><return><errorCode>0</errorCode><errorMessage></errorMessage><skybill>XlhBCl5GTzEwICw0OCBeR0I3ODAsNjU1LDMgXkZTCl5GTzEzICw4OSBeR0I1NzEsMywzIF5GUwpeRk8xMyAsMjI4XkdCNTcxLDMsMyBeRlMKXkZPMTMgLDM5NV5HQjU3MSwzLDMgXkZTCl5GTzQyNCwyMzBeR0IzLDE2OSwzIF5GUwpeRk81ODQsNDheR0IzLDM4MiwzIF5GUwpeRk83MzAsNDheR0IzLDM4MiwzIF5GUwpeRk81ODUsNDMwXkdCMjAyLDMsMyBeRlMKXkZPNTAsNTNeQTBOLDE3LDE3XkZET24gZGVsaXZlcnksIGRhbWFnZSBvciB0aGVsdCBtdXN0IGJlIHRoZSBzdWJqZWN0IG9mIHByZWNpc2UgYW5kIGNvbXBsZXRlIF5GUwpeRk81MCw3Ml5BME4sMTcsMTdeRkRyZXNlcnZhdGlvbnMsIGRhdGVkIGFuZCBzaWduZWQgYnkgdGhlIGNvbnNpZ25lZSwgb24gdGhlIGRlbGl2ZXJ5IG5vdGUuIF5GUwpeRk83NTMsNzBeQTBSLDI4LDQ4XkZEQ0hST05PUE9TVF5GUwpeRk83MzUsNzBeQTBSLDE4LDE4XkZEd3d3LmNocm9ub3Bvc3QuZnJeRlMKXkZPNzEwLDcwXkEwUiwxOSwxOV5GRFNlbmRlcl5GUwpeRk82MTUsNzBeQTBSLDE5LDE5XkZEUGhvbmVeRlMKXkZPNTk1LDcwXkEwUiwxOSwxOV5GRFJlZl5GUwpeRk81NjAsMTAyXkEwUiwxOSwxOV5GRERlbGl2ZXJ5IGFkZHJlc3MgXkZTCl5GTzY5NSw3MF5BMFIsMTksMTleRkRBa3JldGlvbl5GUwpeRk82NzUsNzBeQTBSLDE5LDE5XkZEQWtyZXRpb25eRlMKXkZPNjU1LDcwXkEwUiwxOSwxOV5GRDM1QiBydWUgTW9udGdvbGZpZXJeRlMKXkZPNjM1LDcwXkEwUiwxOSwxOV5GRDY5MTAwIFZpbGxldXJiYW5uZSBeRlMKXkZPNjE1LDE2MF5BMFIsMTksMTleRkQwNDk5OTk5OTk5XkZTCl5GTzU5NSwxMDBeQTBSLDE5LDE5XkZEV0gvT1VULzAwMTEyXkZTCl5GTzE3ICwyMzheQVFOLDE1LDE1XkZEQ29udGFjdCA6XkZTCl5GTzE3ICwyNTheQVFOLDE1LDE1XkZEUGhvbmUgOl5GUwpeRk8xNyAsMjc4XkFRTiwxNSwxNV5GRFJlZiA6XkZTCl5GTzE3ICwyOTdeQVFOLDE1LDE1XkZEQ29uc2lnbmVtZW50XkZTCl5GTzQ1NSwzMjJeQVFOLDE1LDE1XkZEV2VpZ2h0IF5GUwpeRk81MzAsMzUwXkFSTiwxOSwxOV5GREtHICBeRlMKXkZPMTcgLDUwMF5BME4sMTksMTleRkREYXRlIDogXkZTCl5GTzE3LCAxMDBeQVFOLDEwLDEwLF5GRENhcnJpZXIgbGFiZWwgdGVzdCBjdXN0b21lcl5GUwpeRk8xNywxMjBeQVFOLDEwLDEwLF5GRENhcnJpZXIgbGFiZWwgdGVzdCBjdXN0b21lcl5GUwpeRk8xNywxNDBeQVFOLDEwLDEwLF5GRDI3IFJ1ZSBIZW5yaSBSb2xsYW5kXkZTCl5GTzE3LDE2MF5BUU4sMTAsMTAsXkZEXkZTCl5GTzE3LDE4MF5BUU4sMTAsMTBeRkQ2OTEwMCAgICBWSUxMRVVSQkFOTkVeRlMKXkZPMTcsMjAwXkFRTiwxMCwxMF5GREZSIC0gRlJBTkNFICAgIF5GUwpeRk8xMDAsMjM4XkFRTiwxMCwxMF5GRENhcnJpZXIgbGFiZWwgdGVzdCBjdXN0b21lcl5GUwpeRk8xMDAsMjU4XkFRTiwxMCwxMF5GRF5GUwpeRk8wNjUsMjc4XkFRTiwxMCwxMF5GRFNPMTIyXkZTCl5GTzE1MCwyOTdeQVFOLDIwLDIwXkZEWFAwMjk1ODU3NTRGUl5GUwpeRk8wNTAsMzU5XkFSTiwyMCwyMF5GRFdIL09VVC8wMDExMl5GUwpeRk8wMzUsNDQ4XkFVTiwxNSwxNV5GRF5GUwpeRk80NDUsMjYwXkFVTiwyMCwyMF5GRDEvMV5GUwpeRk80NTAsMzUwXkFSTiwyMCwyMF5GRDEuMl5GUwpeRk83NSw1MDBeQTBOLDE5LDE5XkZEMTIvMTEvMjAyMF5GUwpeRk8xNyw1MTdeQTBOLDE5LDE5XkZEXkZTCl5GTzMwLDYzNV5BVU4sMTUsMTVeRkReRlMKXkZPNDUwLDU2Ml5BUk4sMjAsMjBeRkReRlMKCl5GTzUwLDQ2NV5BUk4sMjAsMjBeRkRYUDAyOTU4NTc1NEZSXkZTCl5GTzEwLDY0NV5BVE4sMjAsMjBeRkI0ODUsMSwwLFJeRkQxM0heRlMKCl5CWTIsMgpeRk80MCwzMjBeQkNOLCA0MCxOLE4sTixBXkZEUEFDSzAwMDAwOTFeRlMKXkZPMTQsNzA2XkFVTiwyMCwyMF5GRFhQMDJeRlMKXkZPMTIyLDcwN15BQk4sMzAsMTVeRkQgOTU4NSA3NTQyIDQ4S15GUwpeRk8yNzAsNzA4XkFVTiwyMCwyMF5GQjUzMCwxLDAsUl5GREFNMi1OT15GUwpeRk8xNiAsNzU1XkEwTiwyMCwyMF5GRFRyYWNrXkZTCl5GTzcyMCw3NTVeQTBOLDIwLDIwXkZEU2VydmljZV5GUwpeRk8yMyw3ODNeQVVOLDIwLDIwXkZEXkZTCl5GTzE1LDc3NV5HQjQwLDYwLDMgXkZTCl5GTzE1MCw3ODBeQVZOLDYwLDQ1XkZERlItQ0hSLTA0MzctSkFHMV5GUwpeRk8yNDAsODgwXkFETiw0MCwyMF5GRDIyNi1GUi02OTEwMF5GUwpeRk8yMCw4NzBeQVZOLDQwLDIwXkZETF5GUwpeRk81ODAsODcwXkFWTiw0MCwyMF5GRDZYVjAwXkZTCl5GTzIwMCw5MjBeQTBOLDE5LDE5XkZEMTEvMTEvMjAyMF5GUwpeRk8yODAsOTIwXkEwTiwxOSwxOV5GRF5GUwpeRk8zMzAsOTIwXkEwTiwxOSwxOV5GRENIUldTIDA4MTdeRlMKXkZPMzAsOTUwXkdCNzM0LDcsN15GUwpeQlkzLDIKXkZPNDAsMTAyMF5BRE4sNzAsNzBeRkREVVBMSUNBVEFeRlMKXkZPMTkwLDExNjBeQVJOLDIwLDIwXkZEMDA2OSAxMDBYIFAwMjkgNTg1NyA1NDI0IDgyMjYgMjUwMl5GUwoKCgpeWFoK</skybill><skybillNumber>XP029585754FR</skybillNumber></return></ns1:shippingResponse></soap:Body></soap:Envelope>'}
+    headers:
+      Content-Type: [text/xml;charset=UTF-8]
+      Date: ['Wed, 11 Nov 2020 21:33:26 GMT']
+      Vary: ['User-Agent,Accept-Encoding']
+      content-length: ['3663']
+    status: {code: 200, message: OK}
+version: 1
