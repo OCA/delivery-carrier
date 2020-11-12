@@ -95,7 +95,9 @@ msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
 #: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:342
+#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:349
 #: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:362
+#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:384
 #, python-format
 msgid ""
 "Authorization Required\n"
@@ -275,6 +277,7 @@ msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
 #: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:425
+#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:448
 #, python-format
 msgid "Error when communicating with swisspost API: %s"
 msgstr ""
@@ -385,6 +388,7 @@ msgstr "Darrera Actualització el"
 
 #. module: delivery_carrier_label_postlogistics
 #: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:296
+#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:302
 #, python-format
 msgid "Layout not set"
 msgstr ""
@@ -402,6 +406,7 @@ msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
 #: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:180
+#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:186
 #, python-format
 msgid "Missing required delivery option on picking."
 msgstr ""
@@ -474,6 +479,7 @@ msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
 #: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:302
+#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:308
 #, python-format
 msgid "Output format not set"
 msgstr ""
@@ -589,6 +595,7 @@ msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
 #: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:308
+#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:314
 #, python-format
 msgid "Resolution not set"
 msgstr ""
@@ -625,6 +632,7 @@ msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
 #: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:437
+#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:460
 #, python-format
 msgid ""
 "Swisspost API returns errors:\n"
@@ -716,6 +724,7 @@ msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
 #: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:288
+#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:294
 #, python-format
 msgid ""
 "You need to configure %s. You can set a defaultvalue in Settings/"
@@ -736,18 +745,21 @@ msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
 #: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:297
+#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:303
 #, python-format
 msgid "label layout"
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
 #: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:303
+#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:309
 #, python-format
 msgid "output format"
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
 #: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:309
+#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:315
 #, python-format
 msgid "resolution"
 msgstr ""
