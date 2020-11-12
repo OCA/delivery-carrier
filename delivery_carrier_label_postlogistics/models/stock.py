@@ -24,6 +24,24 @@ class StockPicking(models.Model):
         "Mobile", help="For notify delivery by telephone (ZAW3213)"
     )
 
+    def _compute_show_label_button(self):
+        """Determine if we should show the button to generate labels
+
+        Allows to print the label early, as for return pickings when
+        the label must be printed and sent to the customer.
+
+        """
+        visible_states = ['confirmed', 'assigned', 'done']
+        postlog_pickings = self.filetered(
+            lambda rec: rec.carrier_id.delivery_type == 'postlogistics'
+        )
+        for pick in postlog_pickings:
+            pick.show_label_button = (
+                pick.state in visible_states and pick.carrier_code
+            )
+        others = self - postlog_pickings
+        return super(StockPicking, others)._compute_show_label_button()
+
     @api.multi
     def postlogistics_cod_amount(self):
         """ Return the Postlogistic Cash on Delivery amount of a picking
