@@ -391,7 +391,6 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_picking_recreate_picking_label
 #, fuzzy
-#| msgid "Create Shipping Label"
 msgid "Recreate picking label"
 msgstr "Crear etiqueta de envío"
 
