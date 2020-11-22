@@ -97,7 +97,6 @@ msgstr "Spediteur"
 #: model:ir.actions.act_window,name:base_delivery_carrier_label.action_carrier_account
 #: model:ir.ui.menu,name:base_delivery_carrier_label.carrier_account_menu
 #, fuzzy
-#| msgid "Carrier"
 msgid "Carrier Account"
 msgstr "Spediteur"
 
@@ -127,7 +126,6 @@ msgstr "Unternehmen"
 #. module: base_delivery_carrier_label
 #: model_terms:ir.ui.view,arch_db:base_delivery_carrier_label.view_picking_withcarrier_out_form
 #, fuzzy
-#| msgid "Create Shipping Label"
 msgid "Create Shipping Label 🚚"
 msgstr "Paketaufkleber erzeugen"
 
@@ -169,7 +167,6 @@ msgstr "Schlüssel der Liefermethode (gem. Spediteur)"
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_delivery_carrier
 #, fuzzy
-#| msgid "Delivery carrier option"
 msgid "Delivery Methods"
 msgstr "Spediteureinstellungen"
 
@@ -248,7 +245,6 @@ msgstr "Dateityp"
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__datas_fname
 #, fuzzy
-#| msgid "File Name"
 msgid "Filename"
 msgstr "Dateiname"
 
@@ -400,7 +396,6 @@ msgstr "Paket"
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_stock_quant_package
 #, fuzzy
-#| msgid "Pack"
 msgid "Packages"
 msgstr "Paket"
 
@@ -483,7 +478,6 @@ msgstr "Paketaufkleber"
 #. module: base_delivery_carrier_label
 #: model_terms:ir.ui.view,arch_db:base_delivery_carrier_label.view_picking_withcarrier_out_form
 #, fuzzy
-#| msgid "Shipping Label"
 msgid "Shipping Label 🚚"
 msgstr "Paketaufkleber"
 
@@ -550,7 +544,6 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: model_terms:ir.ui.view,arch_db:base_delivery_carrier_label.view_quant_package_form
 #, fuzzy
-#| msgid "Parcel Tracking"
 msgid "Tracking"
 msgstr "Sendungsverfolgung"
 

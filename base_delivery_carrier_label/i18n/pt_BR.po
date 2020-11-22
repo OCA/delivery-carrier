@@ -97,7 +97,6 @@ msgstr "Transportador"
 #: model:ir.actions.act_window,name:base_delivery_carrier_label.action_carrier_account
 #: model:ir.ui.menu,name:base_delivery_carrier_label.carrier_account_menu
 #, fuzzy
-#| msgid "Carrier"
 msgid "Carrier Account"
 msgstr "Transportador"
 
@@ -127,7 +126,6 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: model_terms:ir.ui.view,arch_db:base_delivery_carrier_label.view_picking_withcarrier_out_form
 #, fuzzy
-#| msgid "Create Shipping Label"
 msgid "Create Shipping Label 🚚"
 msgstr "Criar etiqueta de envio"
 
@@ -167,7 +165,6 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_delivery_carrier
 #, fuzzy
-#| msgid "Delivery carrier option"
 msgid "Delivery Methods"
 msgstr "Opção de entrega"
 
@@ -473,7 +470,6 @@ msgstr "Etiqueta de envio"
 #. module: base_delivery_carrier_label
 #: model_terms:ir.ui.view,arch_db:base_delivery_carrier_label.view_picking_withcarrier_out_form
 #, fuzzy
-#| msgid "Shipping Label"
 msgid "Shipping Label 🚚"
 msgstr "Etiqueta de envio"
 

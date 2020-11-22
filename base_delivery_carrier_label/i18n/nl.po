@@ -93,7 +93,6 @@ msgstr "Vervoerder"
 #: model:ir.actions.act_window,name:base_delivery_carrier_label.action_carrier_account
 #: model:ir.ui.menu,name:base_delivery_carrier_label.carrier_account_menu
 #, fuzzy
-#| msgid "Carrier"
 msgid "Carrier Account"
 msgstr "Vervoerder"
 

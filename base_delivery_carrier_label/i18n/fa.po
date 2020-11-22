@@ -237,7 +237,6 @@ msgstr "نوع فایل"
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__datas_fname
 #, fuzzy
-#| msgid "File Name"
 msgid "Filename"
 msgstr "نام فایل"
 

@@ -93,7 +93,6 @@ msgstr "Transporteur"
 #: model:ir.actions.act_window,name:base_delivery_carrier_label.action_carrier_account
 #: model:ir.ui.menu,name:base_delivery_carrier_label.carrier_account_menu
 #, fuzzy
-#| msgid "Carrier"
 msgid "Carrier Account"
 msgstr "Transporteur"
 
@@ -123,7 +122,6 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: model_terms:ir.ui.view,arch_db:base_delivery_carrier_label.view_picking_withcarrier_out_form
 #, fuzzy
-#| msgid "Create Shipping Label"
 msgid "Create Shipping Label 🚚"
 msgstr "Créer une étiquette logistique"
 
@@ -163,7 +161,6 @@ msgstr "Code de méthode de livraison (en fonction du transporteur)"
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_delivery_carrier
 #, fuzzy
-#| msgid "Open Delivery Methods Menu"
 msgid "Delivery Methods"
 msgstr "Ouvrir le menu des méthodes de livraison"
 
@@ -389,7 +386,6 @@ msgstr "Pack"
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_stock_quant_package
 #, fuzzy
-#| msgid "Pack"
 msgid "Packages"
 msgstr "Pack"
 
@@ -472,7 +468,6 @@ msgstr "Etiquette logistique"
 #. module: base_delivery_carrier_label
 #: model_terms:ir.ui.view,arch_db:base_delivery_carrier_label.view_picking_withcarrier_out_form
 #, fuzzy
-#| msgid "Shipping Label"
 msgid "Shipping Label 🚚"
 msgstr "Etiquette logistique"
 

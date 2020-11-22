@@ -93,7 +93,6 @@ msgstr "Transportista"
 #: model:ir.actions.act_window,name:base_delivery_carrier_label.action_carrier_account
 #: model:ir.ui.menu,name:base_delivery_carrier_label.carrier_account_menu
 #, fuzzy
-#| msgid "Carrier"
 msgid "Carrier Account"
 msgstr "Transportista"
 
@@ -123,7 +122,6 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: model_terms:ir.ui.view,arch_db:base_delivery_carrier_label.view_picking_withcarrier_out_form
 #, fuzzy
-#| msgid "Create Shipping Label"
 msgid "Create Shipping Label 🚚"
 msgstr "Crear etiqueta de envío"
 
@@ -163,7 +161,6 @@ msgstr "Código del método de envío (de acuerdo con el transportista)"
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_delivery_carrier
 #, fuzzy
-#| msgid "Delivery carrier option"
 msgid "Delivery Methods"
 msgstr "Opción del transportista"
 
@@ -171,7 +168,6 @@ msgstr "Opción del transportista"
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account__delivery_type
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_picking__delivery_type
 #, fuzzy
-#| msgid "Carrier Type"
 msgid "Delivery Type"
 msgstr "Tipo de transportista"
 
@@ -390,7 +386,6 @@ msgstr "Paquete"
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_stock_quant_package
 #, fuzzy
-#| msgid "Pack"
 msgid "Packages"
 msgstr "Paquete"
 
@@ -473,7 +468,6 @@ msgstr "Etiqueta de envío"
 #. module: base_delivery_carrier_label
 #: model_terms:ir.ui.view,arch_db:base_delivery_carrier_label.view_picking_withcarrier_out_form
 #, fuzzy
-#| msgid "Shipping Label"
 msgid "Shipping Label 🚚"
 msgstr "Etiqueta de envío"
 

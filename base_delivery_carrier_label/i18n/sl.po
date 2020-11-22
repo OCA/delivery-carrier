@@ -98,7 +98,6 @@ msgstr "Prevoznik"
 #: model:ir.actions.act_window,name:base_delivery_carrier_label.action_carrier_account
 #: model:ir.ui.menu,name:base_delivery_carrier_label.carrier_account_menu
 #, fuzzy
-#| msgid "Carrier"
 msgid "Carrier Account"
 msgstr "Prevoznik"
 
@@ -128,7 +127,6 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: model_terms:ir.ui.view,arch_db:base_delivery_carrier_label.view_picking_withcarrier_out_form
 #, fuzzy
-#| msgid "Create Shipping Label"
 msgid "Create Shipping Label 🚚"
 msgstr "Ustvari etiketo za odpošiljanje"
 
@@ -391,7 +389,6 @@ msgstr "Paket"
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_stock_quant_package
 #, fuzzy
-#| msgid "Pack"
 msgid "Packages"
 msgstr "Paket"
 
@@ -474,7 +471,6 @@ msgstr "Etiketa za odpošiljanje"
 #. module: base_delivery_carrier_label
 #: model_terms:ir.ui.view,arch_db:base_delivery_carrier_label.view_picking_withcarrier_out_form
 #, fuzzy
-#| msgid "Shipping Label"
 msgid "Shipping Label 🚚"
 msgstr "Etiketa za odpošiljanje"
 
@@ -541,7 +537,6 @@ msgstr "Skupna masa pakiranja v kg, vključno masa logistične enote."
 #. module: base_delivery_carrier_label
 #: model_terms:ir.ui.view,arch_db:base_delivery_carrier_label.view_quant_package_form
 #, fuzzy
-#| msgid "Parcel Tracking"
 msgid "Tracking"
 msgstr "Sledenje pošiljk"
 
