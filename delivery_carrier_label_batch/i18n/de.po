@@ -203,9 +203,6 @@ msgstr ""
 #. module: delivery_carrier_label_batch
 #: code:addons/delivery_carrier_label_batch/models/stock_batch_picking.py:73
 #, fuzzy, python-format
-#| msgid ""
-#| "You can not remove a mandatory option.\n"
-#| "Options are reset to default."
 msgid ""
 "You can not remove a mandatory option.\n"
 "Please reset options to default."
