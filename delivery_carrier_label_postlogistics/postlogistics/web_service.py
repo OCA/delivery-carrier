@@ -64,6 +64,17 @@ class PostlogisticsWebService(object):
             return lang_code
         return 'en'
 
+    def _get_recipient_partner(self, picking):
+        if picking.picking_type_id.code == 'outgoing':
+            return picking.partner_id
+        elif picking.picking_type_id.code == 'incoming':
+            location_dest = picking.location_dest_id
+            return (
+                location_dest.partner_id or
+                location_dest.company_id.partner_id or
+                picking.env.user.company_id
+            )
+
     def _prepare_recipient(self, picking):
         """ Create a ns0:Recipient as a dict from a partner
 
@@ -71,15 +82,7 @@ class PostlogisticsWebService(object):
         :return a dict containing data for ns0:Recipient
 
         """
-        if picking.picking_type_id.code == 'outgoing':
-            partner = picking.partner_id
-        elif picking.picking_type_id.code == 'incoming':
-            location_dest = picking.location_dest_id
-            partner = (
-                location_dest.partner_id or
-                location_dest.company_id.partner_id or
-                picking.env.user.company_id
-            )
+        partner = self._get_recipient_partner(picking)
 
         partner_name = partner.name or partner.parent_id.name
         recipient = {
