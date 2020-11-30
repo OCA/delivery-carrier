@@ -1,0 +1,28 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* base_delivery_carrier_files_grouped
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-11-30 12:36+0000\n"
+"PO-Revision-Date: 2020-11-30 12:36+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: base_delivery_carrier_files_grouped
+#: model:ir.model,name:base_delivery_carrier_files_grouped.model_res_partner
+msgid "Contact"
+msgstr "Contacto"
+
+#. module: base_delivery_carrier_files_grouped
+#: model:ir.model.fields,field_description:base_delivery_carrier_files_grouped.field_res_partner__one_delivery_by_picking
+#: model:ir.model.fields,field_description:base_delivery_carrier_files_grouped.field_res_users__one_delivery_by_picking
+msgid "One Delivery by Picking"
+msgstr "Envío por Pedido"
+
