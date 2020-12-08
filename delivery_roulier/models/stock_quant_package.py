@@ -103,9 +103,19 @@ class StockQuantPackage(models.Model):
             tracking_number = parcel.get('tracking', {}).get('number')
             # expected format by base_delivery_carrier_label module
             label = parcel.get('label')
+            # find for which package the label is. tracking number will be updated on
+            # this pack later on (in base_delivery_carrier_label)
+            package_id = False
+            if len(self) == 1:
+                package_id = self.id
+            else:
+                pack = self.filtered(lambda p: p.name == parcel.get('reference'))
+                if len(pack) == 1:
+                    package_id = pack.id
+
             parcels_data.append({
                 'tracking_number': tracking_number,
-                'package_id': len(self) == 1 and self.id or False,
+                'package_id': package_id,
                 'name': (parcel.get('reference') or tracking_number or 
                         label.get('name')),
                 'file': label.get('data'),
