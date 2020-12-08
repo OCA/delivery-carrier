@@ -58,7 +58,6 @@ class DeliveryRoulierCase(SavepointCase):
         partner = self.env["res.partner"].create(
             {
                 "name": "Carrier label test customer",
-                "customer": True,
                 "country_id": self.env.ref("base.fr").id,
                 "street": "test street",
                 "street2": "test street2",
@@ -80,9 +79,11 @@ class DeliveryRoulierCase(SavepointCase):
                 ],
             }
         )
-        self.env["stock.change.product.qty"].create(
-            {"product_id": product.id, "new_quantity": 1}
-        ).change_product_qty()
+        self.env['stock.quant'].with_context(inventory_mode=True).create({
+            "product_id": product.id,
+            'location_id': self.order.warehouse_id.lot_stock_id.id,
+            'inventory_quantity': 1,
+        })
         self.order.action_confirm()
         self.picking = self.order.picking_ids
         self.env["stock.immediate.transfer"].create(
