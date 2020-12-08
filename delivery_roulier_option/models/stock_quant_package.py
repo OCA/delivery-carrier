@@ -3,13 +3,14 @@
 #          EBII MonsieurB <monsieurb@saaslys.com>
 #          Sébastien BEAU
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from odoo import models, _
+from odoo import _, models
 from odoo.exceptions import UserError
+
 from odoo.addons.delivery_roulier import implemented_by_carrier
 
 
 class StockQuantPackage(models.Model):
-    _inherit = 'stock.quant.package'
+    _inherit = "stock.quant.package"
 
     @implemented_by_carrier
     def _get_cash_on_delivery(self, picking):
@@ -28,8 +29,7 @@ class StockQuantPackage(models.Model):
         pass
 
     def _roulier_get_cash_on_delivery(self, picking):
-        """ for 'cod' option
-        """
+        """for 'cod' option"""
         # TODO improve to take account Sale if picking created from sale
         amount = 0
         for oper in self.get_operations():
@@ -66,18 +66,20 @@ class StockQuantPackage(models.Model):
             # stands for harmonized_system
             hs = product.get_hs_code_recursively()
             if not hs:
-                raise UserError(_(
-                    "No H.S. Code on product '%s' nor on it's "
-                    "product category '%s'.")
-                    % (product.display_name, product.categ_id.display_name))
+                raise UserError(
+                    _(
+                        "No H.S. Code on product '%s' nor on it's "
+                        "product category '%s'."
+                    )
+                    % (product.display_name, product.categ_id.display_name)
+                )
 
-            article['quantity'] = '%.f' % operation.product_qty
-            article['weight'] = (
-                operation.get_weight() / operation.product_qty)
-            article['originCountry'] = product.origin_country_id.code
-            article['description'] = hs.description
-            article['hs'] = hs.hs_code
-            article['value'] = operation.get_unit_price_for_customs()
+            article["quantity"] = "%.f" % operation.product_qty
+            article["weight"] = operation.get_weight() / operation.product_qty
+            article["originCountry"] = product.origin_country_id.code
+            article["description"] = hs.description
+            article["hs"] = hs.hs_code
+            article["value"] = operation.get_unit_price_for_customs()
 
         category = picking.customs_category
         return {
@@ -86,11 +88,10 @@ class StockQuantPackage(models.Model):
         }
 
     def _roulier_get_sale_price(self, picking):
-        """ helper. Could be use to compute an insurance value or a value
-            for customs
+        """helper. Could be use to compute an insurance value or a value
+        for customs
         """
         total = 0.0
         for operation in self.get_operations():
-            total += (operation.get_unit_price_for_customs() *
-                      operation.product_qty)
+            total += operation.get_unit_price_for_customs() * operation.product_qty
         return total
