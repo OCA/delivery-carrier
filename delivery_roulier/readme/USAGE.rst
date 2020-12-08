@@ -1,4 +1,4 @@
-Here is some methods you can use for your carrier implementation 
+Here is some methods you can use for your carrier implementation
 allowing to have a consistent code accross different carrier modules:
 
 .. code-block:: python

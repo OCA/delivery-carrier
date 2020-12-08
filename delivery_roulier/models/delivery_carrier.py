@@ -1,29 +1,30 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import logging
+
 from odoo import models
 
 _logger = logging.getLogger(__name__)
 try:
     from roulier import roulier
 except ImportError:
-    _logger.debug('Cannot `import roulier`.')
+    _logger.debug("Cannot `import roulier`.")
 
 
 class DeliveryCarrier(models.Model):
-    _inherit = 'delivery.carrier'
+    _inherit = "delivery.carrier"
 
     # module using roulier don't use native method to get labels
     # pass False value to avoid failure.
     def send_shipping(self, pickings):
         if self._is_roulier:
-            return [{'exact_price': False, 'tracking_number': False}]
+            return [{"exact_price": False, "tracking_number": False}]
         return super().send_shipping(pickings)
 
     def _is_roulier(self):
         self.ensure_one()
         available_carrier_actions = roulier.get_carriers_action_available() or {}
-        return 'get_label' in available_carrier_actions.get(self.delivery_type, [])
+        return "get_label" in available_carrier_actions.get(self.delivery_type, [])
 
     def cancel_shipment(self, pickings):
         if self._is_roulier:

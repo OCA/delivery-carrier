@@ -17,24 +17,26 @@ def implemented_by_carrier(func):
     the carrier spectific method or fallback to generic _do_something
 
     """
+
     @wraps(func)
     def wrapper(cls, *args, **kwargs):
         fun_name = func.__name__
 
         def get_delivery_type(cls, *args, **kwargs):
-            if hasattr(cls, 'delivery_type'):
+            if hasattr(cls, "delivery_type"):
                 return cls.delivery_type
             pickings = [
-                obj for obj in args
-                if getattr(obj, '_name', '') == 'stock.picking']
+                obj for obj in args if getattr(obj, "_name", "") == "stock.picking"
+            ]
             if len(pickings) > 0:
                 return pickings[0].delivery_type
             if cls[0].carrier_id:
                 return cls[0].carrier_id.delivery_type
 
         delivery_type = get_delivery_type(cls, *args, **kwargs)
-        fun = '_%s%s' % (delivery_type, fun_name)
+        fun = "_{}{}".format(delivery_type, fun_name)
         if not hasattr(cls, fun):
-            fun = '_roulier%s' % (fun_name)
+            fun = "_roulier%s" % (fun_name)
         return getattr(cls, fun)(*args, **kwargs)
+
     return wrapper
