@@ -22,18 +22,13 @@ CUSTOMS_MAP = {
 class StockQuantPackage(models.Model):
     _inherit = "stock.quant.package"
 
-    def _laposte_fr_before_call(self, picking, payload):
-        if self._should_include_customs(picking):
-            payload["customs"] = self._get_customs(picking)
-        return payload
-
     def _laposte_fr_get_parcel(self, picking):
         vals = self._roulier_get_parcel(picking)
 
         def calc_package_price():
             return sum(
                 [
-                    op.product_id.list_price * op.product_qty
+                    op.product_id.lst_price * op.qty_done or op.product_qty
                     for op in self.get_operations()
                 ]
             )
@@ -44,16 +39,17 @@ class StockQuantPackage(models.Model):
         vals.update(picking._laposte_fr_get_options(self))
         if vals.get("COD"):
             vals["codAmount"] = self._get_cash_on_delivery(picking)
+
+        if self._should_include_customs(picking):
+            vals["customs"] = self._get_customs(picking)
         return vals
 
-    @api.multi
     def _laposte_fr_get_customs(self, picking):
         """see _roulier_get_customs() docstring"""
         customs = self._roulier_get_customs(picking)
         customs["category"] = CUSTOMS_MAP.get(picking.customs_category)
         return customs
 
-    @api.multi
     def _laposte_fr_should_include_customs(self, picking):
         """Choose if customs infos should be included in the WS call.
 
@@ -66,8 +62,12 @@ class StockQuantPackage(models.Model):
         #
         # If origin is not France metropole, this implementation may be wrong.
         # see https://boutique.laposte.fr/_ui/doc/formalites_douane.pdf
-        sender_is_intrastat = picking._get_sender(self).country_id.intrastat
-        receiver_is_intrastat = picking._get_receiver(self).country_id.intrastat
+        europe_group = self.env.ref("base.europe")
+        eu_country_ids = europe_group.country_ids.ids
+        sender_is_intrastat = picking._get_sender(self).country_id.id in eu_country_ids
+        receiver_is_intrastat = (
+            picking._get_receiver(self).country_id.id in eu_country_ids
+        )
         if sender_is_intrastat:
             if receiver_is_intrastat:
                 return False  # national or within UE
