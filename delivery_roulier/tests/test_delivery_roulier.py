@@ -1,10 +1,10 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-from unittest.mock import patch, MagicMock
+from unittest.mock import MagicMock, patch
+
+from odoo_test_helper import FakeModelLoader
+from roulier import roulier
 
 from odoo.tests.common import SavepointCase
-from roulier import roulier
-from odoo_test_helper import FakeModelLoader
-
 
 roulier_ret = {
     "parcels": [

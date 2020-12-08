@@ -3,9 +3,8 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import logging
-import base64
 
-from odoo import models, api, fields, _
+from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
 from ..decorator import implemented_by_carrier
@@ -13,16 +12,13 @@ from ..decorator import implemented_by_carrier
 _logger = logging.getLogger(__name__)
 try:
     from roulier import roulier
-    from roulier.exception import (
-        InvalidApiInput,
-        CarrierError
-    )
+    from roulier.exception import CarrierError, InvalidApiInput
 except ImportError:
-    _logger.debug('Cannot `import roulier`.')
+    _logger.debug("Cannot `import roulier`.")
 
 
 class StockQuantPackage(models.Model):
-    _inherit = 'stock.quant.package'
+    _inherit = "stock.quant.package"
 
     carrier_id = fields.Many2one("delivery.carrier", string="Carrier")
 
@@ -33,12 +29,14 @@ class StockQuantPackage(models.Model):
         Usefull for having products and quantities
         """
         self.ensure_one()
-        return self.env['stock.move.line'].search([
-            ('product_id', '!=', False),
-            '|',
-            ('package_id', '=', self.id),
-            ('result_package_id', '=', self.id),
-        ])
+        return self.env["stock.move.line"].search(
+            [
+                ("product_id", "!=", False),
+                "|",
+                ("package_id", "=", self.id),
+                ("result_package_id", "=", self.id),
+            ]
+        )
 
     # API
     # Each method in this class have at least picking arg to directly
@@ -86,6 +84,7 @@ class StockQuantPackage(models.Model):
     @implemented_by_carrier
     def _parse_response(self, picking, response):
         pass
+
     # end of API
 
     # Core functions
@@ -98,21 +97,24 @@ class StockQuantPackage(models.Model):
 
     def _roulier_parse_response(self, picking, response):
         parcels_data = []
-        parcels = response.get('parcels')
+        parcels = response.get("parcels")
         for parcel in parcels:
-            tracking_number = parcel.get('tracking', {}).get('number')
+            tracking_number = parcel.get("tracking", {}).get("number")
             # expected format by base_delivery_carrier_label module
-            label = parcel.get('label')
-            parcels_data.append({
-                'tracking_number': tracking_number,
-                'package_id': len(self) == 1 and self.id or False,
-                'name': (parcel.get('reference') or tracking_number or 
-                        label.get('name')),
-                'file': label.get('data'),
-                'filename': '%s.%s' % (label.get('name'),
-                                       label.get('type', '').lower()),
-                'file_type': label.get('type')
-            })
+            label = parcel.get("label")
+            parcels_data.append(
+                {
+                    "tracking_number": tracking_number,
+                    "package_id": len(self) == 1 and self.id or False,
+                    "name": (
+                        parcel.get("reference") or tracking_number or label.get("name")
+                    ),
+                    "file": label.get("data"),
+                    "filename": "%s.%s"
+                    % (label.get("name"), label.get("type", "").lower()),
+                    "file_type": label.get("type"),
+                }
+            )
         return parcels_data
 
     def _roulier_get_parcels(self, picking):
@@ -129,10 +131,10 @@ class StockQuantPackage(models.Model):
         self.ensure_one()
         url = self._get_tracking_link()
         client_action = {
-            'type': 'ir.actions.act_url',
-            'name': "Shipment Tracking Page",
-            'target': 'new',
-            'url': url,
+            "type": "ir.actions.act_url",
+            "name": "Shipment Tracking Page",
+            "target": "new",
+            "url": url,
         }
         return client_action
 
@@ -142,23 +144,23 @@ class StockQuantPackage(models.Model):
         # Don't forget to implement _a-carrier_before_call
         # and _a-carrier_after_call
         account = picking._get_account(self)
-        self.write({'carrier_id': picking.carrier_id.id})
+        self.write({"carrier_id": picking.carrier_id.id})
 
         payload = {}
 
-        payload['auth'] = picking._get_auth(account, package=self)
+        payload["auth"] = picking._get_auth(account, package=self)
 
-        payload['from_address'] = picking._get_from_address(package=self)
-        payload['to_address'] = picking._get_to_address(package=self)
+        payload["from_address"] = picking._get_from_address(package=self)
+        payload["to_address"] = picking._get_to_address(package=self)
 
-        payload['service'] = picking._get_service(account, package=self)
-        payload['parcels'] = self._get_parcels(picking)
+        payload["service"] = picking._get_service(account, package=self)
+        payload["parcels"] = self._get_parcels(picking)
 
         # hook to override request / payload
         payload = self._before_call(picking, payload)
         try:
             # api call
-            ret = roulier.get(picking.delivery_type, 'get_label', payload)
+            ret = roulier.get(picking.delivery_type, "get_label", payload)
         except InvalidApiInput as e:
             raise UserError(self._invalid_api_input_handling(payload, e))
         except CarrierError as e:
@@ -171,10 +173,7 @@ class StockQuantPackage(models.Model):
     def _roulier_get_parcel(self, picking):
         self.ensure_one()
         weight = self.shipping_weight or self.weight
-        parcel = {
-            'weight': weight,
-            'reference': self.name
-        }
+        parcel = {"weight": weight, "reference": self.name}
         return parcel
 
     def _roulier_before_call(self, picking, payload):
@@ -207,7 +206,6 @@ class StockQuantPackage(models.Model):
             string (url)
         """
         _logger.warning("not implemented")
-        pass
 
     def _roulier_carrier_error_handling(self, payload, exception):
         """Build exception message for carrier error.
@@ -221,12 +219,14 @@ class StockQuantPackage(models.Model):
             _logger.debug(exception.response.text)
             _logger.debug(exception.response.request.body)
         except AttributeError:
-            _logger.debug('No request available')
-        carrier = dict(self.env['delivery.carrier']._fields[
-            'delivery_type'].selection).get(self.carrier_id.delivery_type)
+            _logger.debug("No request available")
+        carrier = dict(
+            self.env["delivery.carrier"]._fields["delivery_type"].selection
+        ).get(self.carrier_id.delivery_type)
         return _(
             "Roulier library Exception for '%s' carrier:\n"
-            "\n%s\n\nSent data:\n%s" % (carrier, str(exception), payload))
+            "\n%s\n\nSent data:\n%s" % (carrier, str(exception), payload)
+        )
 
     def _roulier_invalid_api_input_handling(self, payload, exception):
         """Build exception message for bad input.
@@ -238,14 +238,13 @@ class StockQuantPackage(models.Model):
         returns:
             string
         """
-        return _('Bad input: %s\n' % str(exception))
+        return _("Bad input: %s\n" % str(exception))
 
     # There is low chance you need to override the following methods.
     def _roulier_handle_attachments(self, picking, response):
         attachments = [
-            self.env['ir.attachment'].create(attachment)
-            for attachment in
-            self[0]._roulier_prepare_attachments(picking, response)
+            self.env["ir.attachment"].create(attachment)
+            for attachment in self[0]._roulier_prepare_attachments(picking, response)
         ]  # do it once for all
         return attachments
 
@@ -258,13 +257,16 @@ class StockQuantPackage(models.Model):
             list
         """
         self.ensure_one()
-        attachments = response.get('annexes')
-        return [{
-            'res_id': picking.id,
-            'res_model': 'stock.picking',
-            'name': "%s %s" % (self.name, attachment['name']),
-            'datas': attachment['data'],
-            'type': 'binary',
-            'datas_fname': "%s-%s.%s" % (
-                self.name, attachment['name'], attachment['type']),
-        } for attachment in attachments]
+        attachments = response.get("annexes")
+        return [
+            {
+                "res_id": picking.id,
+                "res_model": "stock.picking",
+                "name": "{} {}".format(self.name, attachment["name"]),
+                "datas": attachment["data"],
+                "type": "binary",
+                "datas_fname": "%s-%s.%s"
+                % (self.name, attachment["name"], attachment["type"]),
+            }
+            for attachment in attachments
+        ]
