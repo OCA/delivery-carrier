@@ -19,14 +19,9 @@
         <!-- Resource: stock.inventory -->
         <record id="stock_inventory_roulier" model="stock.inventory">
             <field name="name">Inventory for Roulier</field>
-            <field name="filter">partial</field>
+            <field name="state">confirm</field>
+            <field name="product_ids" eval="[(6, 0, [ref('product_big'), ref('product_small')])]" />
         </record>
-
-        <function
-        model="stock.inventory"
-        name="action_start"
-        eval="([ref('stock_inventory_roulier')])"
-    />
 
 
         <!-- Resource: stock.inventory.line -->

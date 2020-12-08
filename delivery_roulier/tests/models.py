@@ -5,4 +5,4 @@ from odoo import fields, models
 class FakeDeliveryCarrier(models.Model):
     _inherit = "delivery.carrier"
 
-    delivery_type = fields.Selection(selection_add=[("test", "Test Carrier")])
+    delivery_type = fields.Selection(selection_add=[("test", "Test Carrier")], ondelete={'test': 'set default'})
