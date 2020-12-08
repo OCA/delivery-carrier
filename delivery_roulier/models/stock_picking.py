@@ -80,9 +80,6 @@ class StockPicking(models.Model):
         """Create as many labels as package_ids or in self."""
         self.ensure_one()
         packages = self._get_packages_from_picking()
-        # base_delivery_carrier_label module ensure packages is available
-        self.number_of_packages = len(packages)
-        self.carrier_tracking_ref = True  # display button in view
         return packages._generate_labels(self)
 
     # Default implementations of _roulier_*()
@@ -240,7 +237,7 @@ class StockPicking(models.Model):
         if not self._is_roulier():
             return super().open_website_url()
 
-        packages = self._get_packages_from_picking()
+        packages = self.package_ids
         if len(packages) == 0:
             raise UserError(_("No packages found for this picking"))
         elif len(packages) == 1:

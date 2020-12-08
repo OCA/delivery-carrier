@@ -110,8 +110,8 @@ class StockQuantPackage(models.Model):
                         parcel.get("reference") or tracking_number or label.get("name")
                     ),
                     "file": label.get("data"),
-                    "filename": "%s.%s"
-                    % (label.get("name"), label.get("type", "").lower()),
+                    "name": "%s.%s"
+                    % (parcel.get("reference") or tracking_number or label.get("name"), label.get("type", "").lower()),
                     "file_type": label.get("type"),
                 }
             )
@@ -248,7 +248,6 @@ class StockQuantPackage(models.Model):
         ]  # do it once for all
         return attachments
 
-    @api.multi
     def _roulier_prepare_attachments(self, picking, response):
         """Prepare a list of dicts for building ir.attachments.
         Attachements are annexes like customs declarations, summary
@@ -262,10 +261,9 @@ class StockQuantPackage(models.Model):
             {
                 "res_id": picking.id,
                 "res_model": "stock.picking",
-                "name": "{} {}".format(self.name, attachment["name"]),
                 "datas": attachment["data"],
                 "type": "binary",
-                "datas_fname": "%s-%s.%s"
+                "name": "%s-%s.%s"
                 % (self.name, attachment["name"], attachment["type"]),
             }
             for attachment in attachments
