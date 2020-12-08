@@ -1,7 +1,8 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo.addons.base_delivery_carrier_label.tests import carrier_label_case
 from vcr_unittest import VCRMixin
+
+from odoo.addons.base_delivery_carrier_label.tests import carrier_label_case
 
 
 class LaposteLabelCase(VCRMixin, carrier_label_case.CarrierLabelCase):
