@@ -5,7 +5,7 @@ from vcr_unittest import VCRMixin
 from odoo.addons.base_delivery_carrier_label.tests import carrier_label_case
 
 
-class LaposteLabelCase(VCRMixin, carrier_label_case.CarrierLabelCase):
+class LaposteLabelFranceCase(VCRMixin, carrier_label_case.CarrierLabelCase):
     def setUp(self, *args, **kwargs):
         # need it to be defined before super to avoid failure in _hide_sensitive_data
         self.account = False
