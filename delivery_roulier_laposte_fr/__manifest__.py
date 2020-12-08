@@ -4,10 +4,11 @@
 
 {
     "name": "Delivery Carrier La Poste (fr)",
-    "version": "12.0.1.0.0",
-    "author": "Akretion",
+    "version": "14.0.1.0.0",
     "summary": "Generate Label for La Poste/Colissimo",
-    "maintainer": "Akretion,Odoo Community Association (OCA)",
+    "author": "Akretion,Odoo Community Association (OCA)",
+    "maintainers": ["florian-dacosta"],
+    "website": "https://github.com/OCA/delivery-carrier",
     "category": "Warehouse",
     "depends": [
         "delivery_roulier_option",
