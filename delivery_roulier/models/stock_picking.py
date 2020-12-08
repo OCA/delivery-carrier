@@ -2,12 +2,12 @@
 #          David BEAL <david.beal@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from datetime import datetime, timedelta
 import logging
+from datetime import datetime, timedelta
 
-from odoo import models, fields
-from odoo.tools.translate import _
+from odoo import fields, models
 from odoo.exceptions import UserError
+from odoo.tools.translate import _
 
 from ..decorator import implemented_by_carrier
 
@@ -15,12 +15,11 @@ _logger = logging.getLogger(__name__)
 try:
     from roulier import roulier
 except ImportError:
-    _logger.debug('Cannot `import roulier`.')
+    _logger.debug("Cannot `import roulier`.")
 
 
 class StockPicking(models.Model):
-    _inherit = 'stock.picking'
-
+    _inherit = "stock.picking"
 
     # API:
 
@@ -94,9 +93,9 @@ class StockPicking(models.Model):
             a dict with login and password keys
         """
         auth = {
-            'login': account.account,
-            'password': account.password,
-            'isTest': not self.carrier_id.prod_environment,
+            "login": account.account,
+            "password": account.password,
+            "isTest": not self.carrier_id.prod_environment,
         }
         return auth
 
@@ -114,13 +113,16 @@ class StockPicking(models.Model):
             ("delivery_type", "=", self.carrier_id.delivery_type),
             "|",
             ("company_id", "=", self.company_id.id),
-            ("company_id", "=", False)
+            ("company_id", "=", False),
         ]
         account = self.env["carrier.account"].search(domain, limit=1)
         if not account:
             raise UserError(
-                _("No account available with name '%s' "
-                  "for this carrier" % self.carrier_id.delivery_type))
+                _(
+                    "No account available with name '%s' "
+                    "for this carrier" % self.carrier_id.delivery_type
+                )
+            )
         return account
 
     def _roulier_get_sender(self, package=None):
@@ -137,7 +139,7 @@ class StockPicking(models.Model):
         Return:
             label format (string)
         """
-        return getattr(account, '%s_file_format' % self.delivery_type, None)
+        return getattr(account, "%s_file_format" % self.delivery_type, None)
 
     def _roulier_get_receiver(self, package=None):
         """The guy whom the shippment is for.
@@ -155,7 +157,7 @@ class StockPicking(models.Model):
 
         By default, it's tomorrow."""
         tomorrow = datetime.now() + timedelta(1)
-        return tomorrow.strftime('%Y-%m-%d')
+        return tomorrow.strftime("%Y-%m-%d")
 
     def _roulier_convert_address(self, partner):
         """Convert a partner to an address for roulier.
@@ -167,8 +169,15 @@ class StockPicking(models.Model):
         """
         address = {}
         extract_fields = [
-            'company', 'name', 'zip', 'city', 'phone', 'mobile',
-            'email', 'street2']
+            "company",
+            "name",
+            "zip",
+            "city",
+            "phone",
+            "mobile",
+            "email",
+            "street2",
+        ]
         for elm in extract_fields:
             if elm in partner:
                 # because a value can't be None in odoo's ORM
@@ -180,19 +189,18 @@ class StockPicking(models.Model):
                     # it's a None: nothing to do
                 else:  # it's a boolean: keep the value
                     address[elm] = partner[elm]
-        if not address.get('company', False) and partner.parent_id.is_company:
-            address['company'] = partner.parent_id.name
+        if not address.get("company", False) and partner.parent_id.is_company:
+            address["company"] = partner.parent_id.name
         # Roulier needs street1 (mandatory) not street
-        address['street1'] = partner.street
+        address["street1"] = partner.street
         # Codet ISO 3166-1-alpha-2 (2 letters code)
-        address['country'] = partner.country_id.code
+        address["country"] = partner.country_id.code
 
-        for tel in ['mobile', 'phone']:
+        for tel in ["mobile", "phone"]:
             if address.get(tel):
-                address[tel] = address[tel].replace(u'\u00A0', '').\
-                    replace(' ', '')
+                address[tel] = address[tel].replace(u"\u00A0", "").replace(" ", "")
 
-        address['phone'] = address.get('mobile', address.get('phone'))
+        address["phone"] = address.get("mobile", address.get("phone"))
 
         return address
 
@@ -216,9 +224,9 @@ class StockPicking(models.Model):
         shipping_date = self._get_shipping_date(package)
 
         service = {
-            'product': self.carrier_code,
-            'shippingDate': shipping_date,
-            'labelFormat': self._get_label_format(account)
+            "product": self.carrier_code,
+            "shippingDate": shipping_date,
+            "labelFormat": self._get_label_format(account),
         }
         return service
 
@@ -234,12 +242,12 @@ class StockPicking(models.Model):
 
         packages = self._get_packages_from_picking()
         if len(packages) == 0:
-            raise UserError(_('No packages found for this picking'))
+            raise UserError(_("No packages found for this picking"))
         elif len(packages) == 1:
             return packages.open_website_url()  # shortpath
 
         # display a list of pickings
-        action = self.env.ref('stock.action_package_view').read()[0]
-        action['domain'] = [('id', 'in', packages.ids)]
-        action['context'] = {'picking_id': self.id}
+        action = self.env.ref("stock.action_package_view").read()[0]
+        action["domain"] = [("id", "in", packages.ids)]
+        action["context"] = {"picking_id": self.id}
         return action
