@@ -3,7 +3,7 @@
 import logging
 
 from odoo import api, fields, models, _
-
+from odoo.osv import expression
 
 _logger = logging.getLogger(__name__)
 
@@ -181,8 +181,8 @@ class DeliveryCarrier(models.Model):
                     allowed |= services
                 partner = self.env.ref('delivery_carrier_label_postlogistics'
                                        '.partner_postlogistics')
-                domain.append(('partner_id', '=', partner.id)),
-                domain.append(('id', 'in', allowed.ids))
+                domain = expression.OR([domain, [('partner_id', '=', partner.id)]])
+                domain = expression.OR([domain, [('id', 'in', allowed.ids)]])
 
             carrier.allowed_tmpl_options_ids = option_template_obj.search(
                 domain)

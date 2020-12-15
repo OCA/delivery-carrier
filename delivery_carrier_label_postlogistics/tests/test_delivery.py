@@ -25,6 +25,9 @@ class TestDelivery(common.SavepointCase):
                 'product_postlogistics_service').id,
         })
         cls.carrier_option = cls.create_carrier_option()
+        cls.postlogistics_partner = cls.env.ref(
+            "delivery_carrier_label_postlogistics.partner_postlogistics"
+        )
 
     @classmethod
     def create_carrier_option(cls, template=False, values=None):
@@ -110,7 +113,12 @@ class TestDelivery(common.SavepointCase):
         single_option_types = [x for x in SINGLE_OPTION_TYPES
                                if x != 'resolution']
         services = self.env['delivery.carrier.template.option'].search(
-            [('postlogistics_type', 'in', single_option_types)])
+            [
+                '|',
+                ('postlogistics_type', 'in', single_option_types),
+                ('partner_id', '=', self.postlogistics_partner.id),
+            ]
+        )
         self.assertEqual(
             self.carrier.allowed_tmpl_options_ids,
             services)
