@@ -427,60 +427,62 @@ class PostlogisticsWebService(object):
         labelDefinition = self._prepare_label_definition(picking)
         frankingLicense = self._get_license(picking)
 
-        item = item_list[0]
+        labels = []
+        for item in item_list:
+            res = {'value': []}
 
-        data = self._prepare_data(
-            lang, frankingLicense, post_customer, labelDefinition, item
-        )
+            data = self._prepare_data(
+                lang, frankingLicense, post_customer, labelDefinition, item
+            )
+            icp = picking.env['ir.config_parameter']
+            generate_label_url = icp.get_param(
+                'postlogistics.oauth.generate_label_url'
+            )
+            response = requests.post(
+                url=generate_label_url,
+                headers={
+                    'Authorization': 'Bearer %s' % access_token,
+                    'accept': 'application/json',
+                    'content-type': 'application/json',
+                },
+                data=json.dumps(data),
+                timeout=60,
+            )
 
-        res = {'value': []}
+            if response.status_code != 200:
+                res['success'] = False
+                res['errors'] = [
+                    _('Error when communicating with swisspost API: %s') %
+                    response.content.decode("utf-8")
+                ]
+                labels.append(res)
+                break
 
-        icp = picking.env['ir.config_parameter']
-        generate_label_url = icp.get_param(
-            'postlogistics.oauth.generate_label_url'
-        )
-        response = requests.post(
-            url=generate_label_url,
-            headers={
-                'Authorization': 'Bearer %s' % access_token,
-                'accept': 'application/json',
-                'content-type': 'application/json',
-            },
-            data=json.dumps(data),
-            timeout=60,
-        )
+            response_dict = json.loads(response.content.decode("utf-8"))
 
-        if response.status_code != 200:
-            res['success'] = False
-            res['errors'] = [
-                _('Error when communicating with swisspost API: %s') %
-                response.content.decode("utf-8")
-            ]
-            return res
+            if response_dict['item'].get('errors'):
+                res['success'] = False
+                res['errors'] = []
+                for error in response_dict['item']['errors']:
+                    res['errors'].append(
+                        _(
+                            'Swisspost API returns errors:\n'
+                            'Error code: %s\n'
+                            'Error message: %s'
+                        ) % (error['code'], error['message'])
+                    )
+                labels.append(res)
+                break
 
-        response_dict = json.loads(response.content.decode("utf-8"))
-
-        if response_dict['item'].get('errors'):
-            res['success'] = False
-            res['errors'] = []
-            for error in response_dict['item']['errors']:
-                res['errors'].append(
-                    _(
-                        'Swisspost API returns errors:\n'
-                        'Error code: %s\n'
-                        'Error message: %s'
-                    ) % (error['code'], error['message'])
-                )
-            return res
-
-        output_format = self._get_output_format(picking).lower()
-        file_type = output_format if output_format != 'spdf' else 'pdf'
-        binary = base64.b64encode(bytes(response_dict['item']['label'][0], 'utf-8'))
-        res['success'] = True
-        res['value'].append({
-            'item_id': item_list[0]['itemID'],
-            'binary': binary,
-            'tracking_number': response_dict['item']['identCode'],
-            'file_type': file_type,
-        })
-        return res
+            output_format = self._get_output_format(picking).lower()
+            file_type = output_format if output_format != 'spdf' else 'pdf'
+            binary = base64.b64encode(bytes(response_dict['item']['label'][0], 'utf-8'))
+            res['success'] = True
+            res['value'] = {
+                'item_id': item['itemID'],
+                'binary': binary,
+                'tracking_number': response_dict['item']['identCode'],
+                'file_type': file_type,
+            }
+            labels.append(res)
+        return labels
