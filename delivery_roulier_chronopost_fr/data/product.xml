@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo noupdate="1">
-    
+
     <record id="chronopost_product" model="product.product">
         <field name="default_code">SHIP_CHRONOPOST</field>
         <field name="type">service</field>
