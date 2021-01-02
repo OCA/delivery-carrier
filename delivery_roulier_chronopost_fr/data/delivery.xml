@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo noupdate="1">
 
     <!-- DELIVERY METHODS -->
@@ -6,49 +6,49 @@
       <field name="name">Chrono 8</field>
       <field name="code">75</field>
       <field name="delivery_type">chronopost_fr</field>
-      <field name="product_id" ref="chronopost_product"></field>
+      <field name="product_id" ref="chronopost_product" />
     </record>
 
     <record id="chrono_9" model="delivery.carrier">
       <field name="name">Chrono 9</field>
       <field name="code">76</field>
       <field name="delivery_type">chronopost_fr</field>
-      <field name="product_id" ref="chronopost_product"></field>
+      <field name="product_id" ref="chronopost_product" />
     </record>
 
     <record id="chrono_10" model="delivery.carrier">
       <field name="name">Chrono 10</field>
       <field name="code">02</field>
       <field name="delivery_type">chronopost_fr</field>
-      <field name="product_id" ref="chronopost_product"></field>
+      <field name="product_id" ref="chronopost_product" />
     </record>
 
     <record id="chrono_13" model="delivery.carrier">
       <field name="name">Chrono 13</field>
       <field name="code">01</field>
       <field name="delivery_type">chronopost_fr</field>
-      <field name="product_id" ref="chronopost_product"></field>
+      <field name="product_id" ref="chronopost_product" />
     </record>
 
     <record id="chrono_18" model="delivery.carrier">
       <field name="name">Chrono 18</field>
       <field name="code">16</field>
       <field name="delivery_type">chronopost_fr</field>
-      <field name="product_id" ref="chronopost_product"></field>
+      <field name="product_id" ref="chronopost_product" />
     </record>
 
     <record id="chrono_express" model="delivery.carrier">
       <field name="name">Chrono Express</field>
       <field name="code">17</field>
       <field name="delivery_type">chronopost_fr</field>
-      <field name="product_id" ref="chronopost_product"></field>
+      <field name="product_id" ref="chronopost_product" />
     </record>
 
     <record id="chrono_classic" model="delivery.carrier">
       <field name="name">Chrono Classic</field>
       <field name="code">44</field>
       <field name="delivery_type">chronopost_fr</field>
-      <field name="product_id" ref="chronopost_product"></field>
+      <field name="product_id" ref="chronopost_product" />
     </record>
 
     <!-- OPTIONS -->
@@ -68,14 +68,18 @@
     <record id="chronopost_shipper_alert" model="delivery.carrier.template.option">
       <field name="name">Shipper Pre-alert</field>
       <field name="code">SHIPALERT</field>
-      <field name="description">Subscription Tracking Shipper (no shipper pre-alert if you do not choose this option)</field>
+      <field
+            name="description"
+        >Subscription Tracking Shipper (no shipper pre-alert if you do not choose this option)</field>
     </record>
 
     <!-- Recipient Pre Alert -->
     <record id="chronopost_recipient_alert" model="delivery.carrier.template.option">
       <field name="name">Recipient Pre-alert</field>
       <field name="code">RECIPALERT</field>
-      <field name="description">Recipient mail pre-alert (no recipient pre-alert if you do not choose this option)</field>
+      <field
+            name="description"
+        >Recipient mail pre-alert (no recipient pre-alert if you do not choose this option)</field>
     </record>
 
 </odoo>
