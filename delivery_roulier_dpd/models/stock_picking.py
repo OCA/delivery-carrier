@@ -31,3 +31,13 @@ class StockPicking(models.Model):
             # don't send in the past
             shipping_date = tomorrow
         return shipping_date.strftime('%Y/%m/%d')
+
+    def _dpd_get_auth(self, package):
+        account = self._get_account(package)
+        service = account.get_data()
+        auth = {
+            'login': account.login,
+            'password': account._get_password(),
+            'isTest': service.get('isTest'),
+        }
+        return auth

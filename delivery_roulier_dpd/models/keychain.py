@@ -49,6 +49,7 @@ class AccountProduct(models.Model):
                 'default': 'ZPL',
                 'required': True,
             },
+            "isTest": {'type': 'boolean'}
         }
 
     def _roulier_dpd_init_data(self):
