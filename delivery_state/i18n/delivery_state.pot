@@ -44,6 +44,16 @@ msgid "Incidence"
 msgstr ""
 
 #. module: delivery_state
+#: model:ir.model.fields,field_description:delivery_state.field_res_config_settings__send_delivery_confirmation
+msgid "Send Delivery Confirmation"
+msgstr ""
+
+#. module: delivery_state
+#: model_terms:ir.ui.view,arch_db:delivery_state.res_config_settings_view_form
+msgid "Send automatic tracking info to customer"
+msgstr ""
+
+#. module: delivery_state
 #: model:ir.model.fields,field_description:delivery_state.field_stock_picking__date_shipped
 msgid "Shipment Date"
 msgstr ""
