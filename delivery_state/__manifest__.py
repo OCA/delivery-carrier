@@ -15,5 +15,9 @@
     "category": "Delivery",
     "version": "13.0.1.0.0",
     "depends": ["delivery"],
-    "data": ["data/ir_cron_data.xml", "views/stock_picking_views.xml"],
+    "data": [
+        "data/ir_cron_data.xml",
+        "data/mail_template.xml",
+        "views/stock_picking_views.xml",
+    ],
 }
