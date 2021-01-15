@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="delivery_notification" model="mail.template">
+        <field name="name">Delivery State Notification</field>
+        <field name="model_id" ref="delivery.model_stock_picking" />
+        <field name="partner_to">${object.sale_id.partner_id.id or object.partner_id.id}</field>
+        <field
+            name="subject"
+        >${object.company_id.name} - Your order has been shipped by ${object.carrier_id.name}</field>
+        <field
+            name="body_html"
+        ><![CDATA[
+<div>
+    % set partner = object.sale_id.partner_id or object.partner_id
+    <p>
+        Hello, ${partner.name}.
+    </p>
+    <p>
+        We are glad to inform you that your order has been shipped by ${object.carrier_id.name}.
+        %if object.carrier_tracking_ref:
+            Your tracking reference is
+            <strong>
+            %if object.carrier_tracking_url:
+                % set multiple_carrier_tracking = object.get_multiple_carrier_tracking()
+                %if multiple_carrier_tracking:
+                    % for line in multiple_carrier_tracking:
+                        <br/><a href="${line[1]}" target="_blank">${line[0]}</a>
+                    % endfor
+                %else:
+                    <a href="${object.carrier_tracking_url}" target="_blank">${object.carrier_tracking_ref}</a>.
+                %endif
+            %else:
+                ${object.carrier_tracking_ref}.
+            %endif
+            </strong>
+        %endif
+        <br/><br/>
+        Thank you,<br/>
+        % if user and user.signature:
+          ${user.signature | safe}
+        % endif
+    </p>
+</div>
+]]>
+        </field>
+        <field name="lang">${object.sale_id.partner_id.lang or object.partner_id.lang}</field>
+        <field name="auto_delete" eval="True"/>
+        <field name="user_signature" eval="False"/>
+    </record>
+</odoo>
