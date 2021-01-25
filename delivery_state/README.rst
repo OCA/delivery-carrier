@@ -44,6 +44,12 @@ configured going to *Settings > Technical > Scheduled Actions* and then choosing
 pickings with service providers with tracking methods configured, and in pending
 state (not delivered or cancelled).
 
+In order to send automatic notifications to the customer when the picking is
+confirmed:
+
+  #. Go to *Inventory > Configuration > Settings*.
+  #. Enable the option *Send Delivery Confirmation*.
+
 Usage
 =====
 
@@ -57,6 +63,7 @@ With regular methods (fixed, based on rules):
      based on rules.
   #. Validate the picking and you'll see in the same tab the delivery state
      info with the shipping date and the shipping state.
+  #. If enabled, an automatic notification will be sent to the picking customer.
 
 When service provider methods are implemented, we can follow the same steps as
 described before, but we'll get additionally:
