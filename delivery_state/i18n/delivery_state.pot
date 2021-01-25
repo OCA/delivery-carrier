@@ -163,3 +163,4 @@ msgstr ""
 msgid "When the picking is confirmed, send an automatic delivery tracking\n"
 "                            information email."
 msgstr ""
+
