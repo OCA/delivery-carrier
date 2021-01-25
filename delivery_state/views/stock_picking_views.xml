@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Copyright 2020 Trey, Kilobytes de Soluciones
+Copyright 2020 FactorLibre
+Copyright 2020 Tecnativa - David Vidal
+License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <record id="view_picking_withcarrier_out_form" model="ir.ui.view">
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="delivery.view_picking_withcarrier_out_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='carrier_data']" position="after">
+                <group
+                    name="delivery_tracking"
+                    attrs="{'invisible': ['|', ('state', '!=', 'done'), ('carrier_id', '=', False)]}"
+                >
+                    <field name="date_shipped" />
+                    <field name="date_delivered" />
+                    <field name="delivery_state" />
+                    <field name="tracking_state" class="oe_inline" />
+                    <button
+                        name="tracking_state_update"
+                        string="Update tracking state"
+                        type="object"
+                        class="oe_inline"
+                        attrs="{'invisible': ['|', ('delivery_state', 'in', ['customer_delivered', 'canceled_shipment']), ('delivery_type', 'in', ['base_one_rule', 'fixed'])]}"
+                    />
+                    <field name="tracking_state_history" colspan="3" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
