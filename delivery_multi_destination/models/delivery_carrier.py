@@ -18,7 +18,7 @@ class DeliveryCarrier(models.Model):
         comodel_name="delivery.carrier", string="Parent carrier",
     )
     destination_type = fields.Selection(
-        selection=[("one", "One destination"), ("multi", "Multiple destinations"),],
+        selection=[("one", "One destination"), ("multi", "Multiple destinations")],
         default="one",
         required=True,
     )

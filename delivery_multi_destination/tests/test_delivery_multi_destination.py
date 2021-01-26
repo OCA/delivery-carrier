@@ -2,20 +2,20 @@
 # Copyright 2019-2020 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo.tests import common
+from odoo.tests import Form, common
 
 
 class TestDeliveryMultiDestination(common.SavepointCase):
     @classmethod
     def setUpClass(cls):
         super(TestDeliveryMultiDestination, cls).setUpClass()
-        cls.country_1 = cls.env["res.country"].create({"name": "Test country 1",})
+        cls.country_1 = cls.env["res.country"].create({"name": "Test country 1"})
         cls.partner_1 = cls.env["res.partner"].create(
-            {"name": "Test partner 1", "country_id": cls.country_1.id,}
+            {"name": "Test partner 1", "country_id": cls.country_1.id}
         )
-        cls.country_2 = cls.env["res.country"].create({"name": "Test country 2",})
+        cls.country_2 = cls.env["res.country"].create({"name": "Test country 2"})
         cls.state = cls.env["res.country.state"].create(
-            {"name": "Test state", "code": "TS", "country_id": cls.country_2.id,}
+            {"name": "Test state", "code": "TS", "country_id": cls.country_2.id}
         )
         cls.partner_2 = cls.env["res.partner"].create(
             {
@@ -34,13 +34,13 @@ class TestDeliveryMultiDestination(common.SavepointCase):
             }
         )
         cls.product = cls.env["product.product"].create(
-            {"name": "Test carrier multi", "type": "service",}
+            {"name": "Test carrier multi", "type": "service"}
         )
         cls.product_child_1 = cls.env["product.product"].create(
-            {"name": "Test child 1", "type": "service",}
+            {"name": "Test child 1", "type": "service"}
         )
         cls.product_child_2 = cls.env["product.product"].create(
-            {"name": "Test child 2", "type": "service",}
+            {"name": "Test child 2", "type": "service"}
         )
         cls.carrier_multi = cls.env["delivery.carrier"].create(
             {
@@ -91,7 +91,7 @@ class TestDeliveryMultiDestination(common.SavepointCase):
             }
         )
         cls.product = cls.env["product.product"].create(
-            {"name": "Test product", "type": "product",}
+            {"name": "Test product", "type": "product"}
         )
         cls.pricelist = cls.env["product.pricelist"].create(
             {
@@ -132,15 +132,47 @@ class TestDeliveryMultiDestination(common.SavepointCase):
     def test_delivery_multi_destination(self):
         order = self.sale_order
         order.carrier_id = self.carrier_single.id
-        order.get_delivery_price()
-        self.assertAlmostEqual(order.delivery_price, 100, 2)
+        delivery_wizard = Form(
+            self.env["choose.delivery.carrier"].with_context(
+                {
+                    "default_order_id": order.id,
+                    "default_carrier_id": order.carrier_id.id,
+                }
+            )
+        )
+        choose_delivery_carrier = delivery_wizard.save()
+        choose_delivery_carrier.button_confirm()
+        sale_order_line = order.order_line.filtered("is_delivery")
+        self.assertAlmostEqual(sale_order_line.price_unit, 100, 2)
+        self.assertTrue(sale_order_line.is_delivery)
         order.carrier_id = self.carrier_multi.id
         order.partner_shipping_id = self.partner_2.id
-        order.get_delivery_price()
-        self.assertAlmostEqual(order.delivery_price, 50, 2)
+        delivery_wizard = Form(
+            self.env["choose.delivery.carrier"].with_context(
+                {
+                    "default_order_id": order.id,
+                    "default_carrier_id": order.carrier_id.id,
+                }
+            )
+        )
+        choose_delivery_carrier = delivery_wizard.save()
+        choose_delivery_carrier.button_confirm()
+        sale_order_line = order.order_line.filtered("is_delivery")
+        self.assertAlmostEqual(sale_order_line.price_unit, 50, 2)
+        self.assertTrue(sale_order_line.is_delivery)
         order.partner_shipping_id = self.partner_3.id
-        order.get_delivery_price()
-        self.assertAlmostEqual(order.delivery_price, 150, 2)
+        delivery_wizard = Form(
+            self.env["choose.delivery.carrier"].with_context(
+                {
+                    "default_order_id": order.id,
+                    "default_carrier_id": order.carrier_id.id,
+                }
+            )
+        )
+        choose_delivery_carrier = delivery_wizard.save()
+        choose_delivery_carrier.button_confirm()
+        sale_order_line = order.order_line.filtered("is_delivery")
+        self.assertAlmostEqual(sale_order_line.price_unit, 150, 2)
 
     def test_search(self):
         carriers = self.env["delivery.carrier"].search([])
