@@ -1,6 +1,6 @@
 To configure delivery methods with multiple destinations:
 
-#. Go to Inventory > Configuration > Delivery > Delivery Methods
+#. Go to Inventory > Configuration > Delivery > Shipping Methods
 #. Create or edit an existing record.
 #. Select "Destination type" = "Multiple destinations".
 #. Introduce a line for each destination in the new tab "Destinations"
