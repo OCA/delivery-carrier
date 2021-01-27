@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2016-2020 Tecnativa - Pedro M. Baeza
+     Copyright 2017 Luis M. Ontalba <luis.martinez@tecnativa.com>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_delivery_carrier_form" model="ir.ui.view">
+        <field name="model">delivery.carrier</field>
+        <field name="inherit_id" ref="delivery.view_delivery_carrier_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='delivery_type']/../../.." position="before">
+                <group name="group_destination_type">
+                    <field
+                        name="destination_type"
+                        invisible="context.get('show_children_fields', False)"
+                    />
+                </group>
+            </xpath>
+            <xpath expr="//field[@name='delivery_type']/../.." position="attributes">
+                <attribute
+                    name="attrs"
+                >{'invisible': [('destination_type', '=', 'multi')]}</attribute>
+            </xpath>
+            <label for="margin" position="attributes">
+                <attribute
+                    name="attrs"
+                >{'invisible': [('destination_type', '=', 'multi')]}</attribute>
+            </label>
+            <xpath expr="//field[@name='margin']/.." position="attributes">
+                <attribute
+                    name="attrs"
+                >{'invisible': [('destination_type', '=', 'multi')]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='free_over']/.." position="attributes">
+                <attribute
+                    name="attrs"
+                >{'invisible': [('destination_type', '=', 'multi')]}</attribute>
+            </xpath>
+            <field name="amount" position="attributes">
+                <attribute
+                    name="attrs"
+                >{'required':[('free_over','!=', False)], 'invisible':['|', ('free_over','=', False), ('destination_type', '=', 'multi')]}</attribute>
+            </field>
+            <xpath
+                expr="//field[@name='fixed_price']/ancestor::page"
+                position="attributes"
+            >
+                <attribute
+                    name="attrs"
+                >{'invisible': [('destination_type', '=', 'multi')]}</attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='country_ids']/ancestor::page"
+                position="attributes"
+            >
+                <attribute
+                    name="attrs"
+                >{'invisible': [('destination_type', '=', 'multi')]}</attribute>
+            </xpath>
+            <notebook position="inside">
+                <page
+                    string="Destinations"
+                    name="page_multi_destination"
+                    attrs="{'invisible': [('destination_type', '!=', 'multi')]}"
+                >
+                    <field name="child_ids" context="{'show_children_fields': True}" />
+                </page>
+            </notebook>
+        </field>
+    </record>
+    <record id="view_delivery_carrier_tree" model="ir.ui.view">
+        <field name="model">delivery.carrier</field>
+        <field name="inherit_id" ref="delivery.view_delivery_carrier_tree" />
+        <field name="arch" type="xml">
+            <field name="delivery_type" position="after">
+                <field name="destination_type" />
+                <field
+                    name="country_ids"
+                    invisible="not context.get('show_children_fields', False)"
+                />
+                <field
+                    name="state_ids"
+                    invisible="not context.get('show_children_fields', False)"
+                />
+                <field
+                    name="zip_from"
+                    invisible="not context.get('show_children_fields', False)"
+                />
+                <field
+                    name="zip_to"
+                    invisible="not context.get('show_children_fields', False)"
+                />
+            </field>
+        </field>
+    </record>
+    <record id="delivery.action_delivery_carrier_form" model="ir.actions.act_window">
+        <field name="domain">[('parent_id', '=', False)]</field>
+        <field name="context">{'show_children_carriers': True}</field>
+    </record>
+</odoo>
