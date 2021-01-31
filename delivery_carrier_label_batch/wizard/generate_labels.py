@@ -3,8 +3,8 @@
 import queue
 import logging
 import odoo
-import threading
 import codecs
+import concurrent.futures
 from contextlib import contextmanager
 from itertools import groupby
 from odoo import _, api, exceptions, fields, models, tools
@@ -150,14 +150,14 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
         # create few workers to parallelize label generation
         num_workers = self._get_num_workers()
         _logger.info('Starting %s workers to generate labels', num_workers)
-        for i in range(num_workers):
-            t = threading.Thread(target=self._worker,
-                                 args=(data_queue, error_queue))
-            t.daemon = True
-            t.start()
+        with concurrent.futures.ThreadPoolExecutor() as executor:
+            res = [
+                executor.submit(self._worker, args=(data_queue, error_queue))
+                for i in range(num_workers)
+            ]
 
         # wait for all tasks to be done
-        data_queue.join()
+        concurrent.futures.as_completed(res)
 
         # We will not create a partial PDF if some labels weren't
         # generated thus we raise catched exceptions by the workers
