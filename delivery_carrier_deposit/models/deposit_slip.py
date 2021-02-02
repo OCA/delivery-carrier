@@ -7,46 +7,27 @@
 
 from odoo import api, fields, models
 
-import odoo.addons.decimal_precision as dp
-
 
 class DepositSlip(models.Model):
     _name = "deposit.slip"
     _description = "Deposit Slip"
     _order = "id desc"
-    _inherit = ["mail.thread"]
-    _track = {
-        "state": {
-            "delivery_carrier_deposit.deposit_slip_done": lambda self, cr, uid, obj, ctx=None: obj.state
-            == "done",
-        }
-    }
+    _inherit = ["mail.thread", "mail.activity.mixin"]
 
-    @api.one
     @api.depends("picking_ids")
-    def _compute_deposit_slip(self):
+    def _compute_weight(self):
         weight = 0.0
-        number_of_packages = 0
         for picking in self.picking_ids:
-            number_of_packages += picking.number_of_packages
-            weight += picking.weight
+            weight += picking.shipping_weight
         self.weight = weight
-        self.number_of_packages = number_of_packages
-
-    @api.model
-    def _get_carrier_type_selection(self):
-        return self.env["delivery.carrier"]._get_carrier_type_selection()
 
     name = fields.Char(
         readonly=True, states={"draft": [("readonly", False)]}, default="/", copy=False
     )
-    carrier_type = fields.Selection(
-        selection="_get_carrier_type_selection",
-        string="Type",
-        readonly=True,
-        required=True,
-        copy=False,
-        help="Carrier type (combines several delivery methods)",
+    delivery_type = fields.Selection(
+        selection=lambda self: self.env["delivery.carrier"]
+        ._fields["delivery_type"]
+        .selection
     )
     picking_ids = fields.One2many(
         comodel_name="stock.picking",
@@ -67,18 +48,11 @@ class DepositSlip(models.Model):
     company_id = fields.Many2one(
         comodel_name="res.company",
         string="Company",
-        default=lambda self: self.env["res.company"]._company_default_get(
-            "deposit.slip"
-        ),
+        default=lambda self: self.env.company,
     )
     weight = fields.Float(
         string="Total Weight",
-        compute="_compute_deposit_slip",
-        digits=dp.get_precision("Stock Weight"),
-        readonly=True,
-    )
-    number_of_packages = fields.Integer(
-        string="Number of Packages", compute="_compute_deposit_slip", readonly=True
+        compute="_compute_weight",
     )
 
     _sql_constraints = [
@@ -95,32 +69,15 @@ class DepositSlip(models.Model):
             vals = {}
         if vals.get("name", "/") == "/":
             vals["name"] = self.env["ir.sequence"].next_by_code("delivery.deposit")
-        return super(DepositSlip, self).create(vals)
+        return super().create(vals)
 
-    @api.multi
     def create_edi_file(self):
         """
         Override this method for the proper carrier
         """
         return True
 
-    @api.multi
     def validate_deposit(self):
         self.create_edi_file()
         self.write({"state": "done"})
         return True
-
-
-class StockPicking(models.Model):
-    _inherit = "stock.picking"
-
-    deposit_slip_id = fields.Many2one("deposit.slip", "Deposit Slip")
-
-
-class DeliveryCarrier(models.Model):
-    _inherit = "delivery.carrier"
-
-    deposit_slip = fields.Boolean(
-        string="Deposit Slip",
-        help="Allow to create a 'Deposit Slip' report on delivery orders",
-    )
