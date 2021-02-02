@@ -3,25 +3,25 @@
 
 {
     "name": "Delivery Deposit",
-    "version": "10.0.0.1.2",
+    "version": "14.0.1.0.0",
     "category": "Delivery",
     "author": "Akretion,Odoo Community Association (OCA)",
     "maintainer": "Akretion",
     "summary": "Create deposit slips",
     "depends": [
-        "base_delivery_carrier_label",
+        "delivery",
     ],
     "website": "https://github.com/OCA/delivery-carrier",
     "data": [
-        "views/stock_view.xml",
-        "wizards/deposit.xml",
+        "views/deposit_slip_view.xml",
+        "views/stock_picking_view.xml",
+        "wizards/delivery_deposit_wizard_view.xml",
         "data/ir_sequence_data.xml",
         "report/report.xml",
         "report/deposit_slip.xml",
         "security/ir.model.access.csv",
         "security/model_security.xml",
     ],
-    "demo": [],
     "installable": True,
     "license": "AGPL-3",
 }
