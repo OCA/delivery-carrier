@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
 <!-- FORM-->
 <record id="view_wiz_create_deposit" model="ir.ui.view">
@@ -7,12 +7,16 @@
     <field name="arch" type="xml">
         <form string="Create Deposit Slip">
             <group name="main">
-                <field name="carrier_type" colspan="2"/>
+                <field name="carrier_type" colspan="2" />
             </group>
             <footer>
-                <button name="create_deposit_slip" string="Create"
-                    type="object" class="oe_highlight"/>
-                <button special="cancel" string="Cancel" class="oe_link"/>
+                <button
+                        name="create_deposit_slip"
+                        string="Create"
+                        type="object"
+                        class="oe_highlight"
+                    />
+                <button special="cancel" string="Cancel" class="oe_link" />
             </footer>
        </form>
     </field>
@@ -28,10 +32,12 @@
 </record>
 
 <!-- MENU -->
-<menuitem id="menu_wiz_delivery_deposit"
-          action="action_wiz_create_deposit"
-          parent="menu_delivery_deposit_slip"
-          groups="stock.group_stock_user"
-          sequence="10" />
+<menuitem
+        id="menu_wiz_delivery_deposit"
+        action="action_wiz_create_deposit"
+        parent="menu_delivery_deposit_slip"
+        groups="stock.group_stock_user"
+        sequence="10"
+    />
 
 </odoo>
