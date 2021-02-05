@@ -13,6 +13,7 @@ setuptools.setup(
         'odoo13-addon-delivery_carrier_partner',
         'odoo13-addon-delivery_free_fee_removal',
         'odoo13-addon-delivery_multi_destination',
+        'odoo13-addon-delivery_purchase',
         'odoo13-addon-delivery_state',
         'odoo13-addon-partner_delivery_schedule',
         'odoo13-addon-partner_delivery_zone',
