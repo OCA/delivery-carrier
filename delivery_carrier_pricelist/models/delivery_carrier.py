@@ -17,10 +17,12 @@ class DeliveryCarrier(models.Model):
     _inherit = "delivery.carrier"
 
     delivery_type = fields.Selection(
-        selection_add=[("pricelist", "Based on Product Pricelist")]
+        selection_add=[("pricelist", "Based on Product Pricelist")],
+        ondelete={"pricelist": "set default"},
     )
     invoice_policy = fields.Selection(
         selection_add=[("pricelist", "Pricelist Cost")],
+        ondelete={"pricelist": "set default"},
         help="Estimated Cost: the customer will be invoiced the estimated"
         " cost of the shipping.\n"
         "Real Cost: the customer will be invoiced the real cost of the"
@@ -135,7 +137,7 @@ class DeliveryCarrier(models.Model):
             field.set("attrs", str(attrs))
             modifiers = {}
             transfer_node_to_modifiers(
-                field, modifiers, self.env.context, in_tree_view=True
+                field, modifiers, self.env.context, current_node_path=["tree"]
             )
             transfer_modifiers_to_node(modifiers, field)
 
