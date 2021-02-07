@@ -1,5 +1,8 @@
 # Copyright 2020 Camptocamp
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+
+from lxml import etree
+
 from odoo.tests.common import Form, SavepointCase
 
 
@@ -41,12 +44,13 @@ class TestRoutePutaway(SavepointCase):
                 "name": "Pricelist Based",
                 "delivery_type": "pricelist",
                 "product_id": cls.fee_product.id,
+                "country_ids": [(6, 0, [cls.partner_18.country_id.id])],
             }
         )
 
-    def test_wizard_price(self):
+    def create_price_list(self):
         price = 13.0
-        self.env["product.pricelist.item"].create(
+        self.pricelist_item = self.env["product.pricelist.item"].create(
             {
                 "pricelist_id": self.pricelist.id,
                 "product_id": self.fee_product.id,
@@ -55,10 +59,54 @@ class TestRoutePutaway(SavepointCase):
             }
         )
 
-        delivery_wizard = Form(
+    def create_wizard(self):
+        self.delivery_wizard = Form(
             self.env["choose.delivery.carrier"].with_context(
                 {"default_order_id": self.sale_normal_delivery_charges.id}
             )
         )
+
+    def test_wizard_price(self):
+        self.create_price_list()
+        self.create_wizard()
+        price = self.pricelist_item.fixed_price
+        delivery_wizard = self.delivery_wizard
+        saved_carrier = delivery_wizard.carrier_id
         delivery_wizard.carrier_id = self.carrier_pricelist
         self.assertEqual(delivery_wizard.display_price, price)
+
+        delivery_wizard.carrier_id = saved_carrier
+        self.assertEqual(delivery_wizard.display_price, 0.0)
+        self.partner_18.country_id = self.env.ref("base.fr")
+        delivery_wizard.carrier_id = self.carrier_pricelist
+        self.assertEqual(delivery_wizard.display_price, 0.0)
+
+    def test_wizard_invoice_policy(self):
+        self.create_price_list()
+        self.create_wizard()
+        delivery_wizard = self.delivery_wizard
+
+        self.carrier_pricelist.invoice_policy = "pricelist"
+        delivery_wizard.carrier_id = self.carrier_pricelist
+
+    def test_wizard_send_shipping(self):
+        self.create_price_list()
+        self.create_wizard()
+        self.carrier_pricelist.invoice_policy = "pricelist"
+        delivery_wizard = self.delivery_wizard
+        delivery_wizard.carrier_id = self.carrier_pricelist
+        so = self.sale_normal_delivery_charges
+        so.action_confirm()
+        link = delivery_wizard.carrier_id.get_tracking_link(so.picking_ids)
+        self.assertFalse(link)
+        result = delivery_wizard.carrier_id.send_shipping(so.picking_ids)
+        self.assertEqual(result, [{"exact_price": 0.0, "tracking_number": False}])
+
+    def test_fields_view_get(self):
+        carrier = self.carrier_pricelist
+        result = carrier.fields_view_get()
+        doc = etree.XML(result["arch"])
+        xpath_expr = "//notebook"
+        nodes = doc.xpath(xpath_expr)
+        nodes[0].attrib["attrs"] = '{"invisible": 0}'
+        carrier._add_pricelist_domain(doc, "//notebook", "invisible")
