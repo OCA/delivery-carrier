@@ -39,6 +39,7 @@ class SaleOrder(models.Model):
 
     @api.onchange('partner_shipping_id')
     def onchange_partner_shipping_id(self):
+        super(SaleOrder, self).onchange_partner_shipping_id()
         if self.partner_shipping_id and\
                 self.partner_shipping_id.dropoff_site_id and\
                 not self.final_shipping_partner_id:
