@@ -26,18 +26,22 @@ msgid ""
 "        Hello, ${partner.name}.\n"
 "    </p>\n"
 "    <p>\n"
-"        We are glad to inform you that your order has been shipped by ${object.carrier_id.name}.\n"
+"        We are glad to inform you that your order has been shipped by "
+"${object.carrier_id.name}.\n"
 "        %if object.carrier_tracking_ref:\n"
 "            Your tracking reference is\n"
 "            <strong>\n"
 "            %if object.carrier_tracking_url:\n"
-"                % set multiple_carrier_tracking = object.get_multiple_carrier_tracking()\n"
+"                % set multiple_carrier_tracking = object."
+"get_multiple_carrier_tracking()\n"
 "                %if multiple_carrier_tracking:\n"
 "                    % for line in multiple_carrier_tracking:\n"
-"                        <br/><a href=\"${line[1]}\" target=\"_blank\">${line[0]}</a>\n"
+"                        <br/><a href=\"${line[1]}\" target=\"_blank\">"
+"${line[0]}</a>\n"
 "                    % endfor\n"
 "                %else:\n"
-"                    <a href=\"${object.carrier_tracking_url}\" target=\"_blank\">${object.carrier_tracking_ref}</a>.\n"
+"                    <a href=\"${object.carrier_tracking_url}\" target="
+"\"_blank\">${object.carrier_tracking_ref}</a>.\n"
 "                %endif\n"
 "            %else:\n"
 "                ${object.carrier_tracking_ref}.\n"
@@ -61,18 +65,22 @@ msgstr ""
 "        Hola, ${partner.name}.\n"
 "    </p>\n"
 "    <p>\n"
-"        Nos complace informarle de que su pedido ha sido enviado por ${object.carrier_id.name}.\n"
+"        Nos complace informarle de que su pedido ha sido enviado por "
+"${object.carrier_id.name}.\n"
 "        %if object.carrier_tracking_ref:\n"
 "            Su número de seguimiento es\n"
 "            <strong>\n"
 "            %if object.carrier_tracking_url:\n"
-"                % set multiple_carrier_tracking = object.get_multiple_carrier_tracking()\n"
+"                % set multiple_carrier_tracking = object."
+"get_multiple_carrier_tracking()\n"
 "                %if multiple_carrier_tracking:\n"
 "                    % for line in multiple_carrier_tracking:\n"
-"                        <br/><a href=\"${line[1]}\" target=\"_blank\">${line[0]}</a>\n"
+"                        <br/><a href=\"${line[1]}\" target=\"_blank\">"
+"${line[0]}</a>\n"
 "                    % endfor\n"
 "                %else:\n"
-"                    <a href=\"${object.carrier_tracking_url}\" target=\"_blank\">${object.carrier_tracking_ref}</a>.\n"
+"                    <a href=\"${object.carrier_tracking_url}\" target="
+"\"_blank\">${object.carrier_tracking_ref}</a>.\n"
 "                %endif\n"
 "            %else:\n"
 "                ${object.carrier_tracking_ref}.\n"
@@ -91,11 +99,15 @@ msgstr ""
 
 #. module: delivery_state
 #: model:mail.template,subject:delivery_state.delivery_notification
-msgid "${object.company_id.name} - Your order has been shipped by ${object.carrier_id.name}"
-msgstr "${object.company_id.name} - Su pedido ha sido enviado por ${object.carrier_id.name}"
+msgid ""
+"${object.company_id.name} - Your order has been shipped by ${object."
+"carrier_id.name}"
+msgstr ""
+"${object.company_id.name} - Su pedido ha sido enviado por ${object."
+"carrier_id.name}"
 
 #. module: delivery_state
-#: selection:stock.picking,delivery_state:0
+#: model:ir.model.fields.selection,name:delivery_state.selection__stock_picking__delivery_state__canceled_shipment
 msgid "Canceled shipment"
 msgstr "Envío cancelado"
 
@@ -105,17 +117,7 @@ msgid "Carrier State"
 msgstr "Estado del transportista"
 
 #. module: delivery_state
-#: model:ir.model,name:delivery_state.model_res_company
-msgid "Companies"
-msgstr "Compañías"
-
-#. module: delivery_state
-#: model:ir.model,name:delivery_state.model_res_config_settings
-msgid "Config Settings"
-msgstr "Opciones de Configuración"
-
-#. module: delivery_state
-#: selection:stock.picking,delivery_state:0
+#: model:ir.model.fields.selection,name:delivery_state.selection__stock_picking__delivery_state__customer_delivered
 msgid "Customer delivered"
 msgstr "Entregado a cliente"
 
@@ -125,29 +127,14 @@ msgid "Delivery Date"
 msgstr "Fecha de entrega"
 
 #. module: delivery_state
-#: model:ir.model,name:delivery_state.model_delivery_carrier
-msgid "Delivery Methods"
-msgstr "Método de envío"
-
-#. module: delivery_state
-#: selection:stock.picking,delivery_state:0
+#: model:ir.model.fields.selection,name:delivery_state.selection__stock_picking__delivery_state__in_transit
 msgid "In transit"
 msgstr "En tránsito"
 
 #. module: delivery_state
-#: selection:stock.picking,delivery_state:0
+#: model:ir.model.fields.selection,name:delivery_state.selection__stock_picking__delivery_state__incidence
 msgid "Incidence"
 msgstr "Incidencia"
-
-#. module: delivery_state
-#: model:ir.model.fields,field_description:delivery_state.field_res_config_settings__send_delivery_confirmation
-msgid "Send Delivery Confirmation"
-msgstr "Enviar confirmación de envío"
-
-#. module: delivery_state
-#: model_terms:ir.ui.view,arch_db:delivery_state.res_config_settings_view_form
-msgid "Send automatic tracking info to customer"
-msgstr "Enviar automáticamente información del seguimiento al cliente"
 
 #. module: delivery_state
 #: model:ir.model.fields,field_description:delivery_state.field_stock_picking__date_shipped
@@ -155,7 +142,12 @@ msgid "Shipment Date"
 msgstr "Fecha de envío"
 
 #. module: delivery_state
-#: selection:stock.picking,delivery_state:0
+#: model:ir.model,name:delivery_state.model_delivery_carrier
+msgid "Shipping Methods"
+msgstr ""
+
+#. module: delivery_state
+#: model:ir.model.fields.selection,name:delivery_state.selection__stock_picking__delivery_state__shipping_recorded_in_carrier
 msgid "Shipping recorded in carrier"
 msgstr "Envío registrado en el transportista"
 
@@ -187,18 +179,35 @@ msgid "Update tracking state"
 msgstr "Actualizar seguimiento"
 
 #. module: delivery_state
-#: selection:stock.picking,delivery_state:0
+#: model:ir.model.fields.selection,name:delivery_state.selection__stock_picking__delivery_state__warehouse_delivered
 msgid "Warehouse delivered"
 msgstr "Entregado por almacén"
 
-#. module: delivery_state
-#: model:ir.model.fields,field_description:delivery_state.field_res_company__send_delivery_confirmation
-msgid "When the delivery is done send a confirmation email to the customer with the tracking number."
-msgstr "Cuando se confirme el albarán, enviar un correo de confirmación al cliente con el número de seguimiento."
+#~ msgid "Companies"
+#~ msgstr "Compañías"
 
-#. module: delivery_state
-#: model_terms:ir.ui.view,arch_db:delivery_state.res_config_settings_view_form
-msgid ""
-"When the picking is confirmed, send an automatic delivery tracking\n"
-"                            information email."
-msgstr "Cuando se valide el albarán, enviar un correo automático con la información de seguimiento del envío."
+#~ msgid "Config Settings"
+#~ msgstr "Opciones de Configuración"
+
+#~ msgid "Delivery Methods"
+#~ msgstr "Método de envío"
+
+#~ msgid "Send Delivery Confirmation"
+#~ msgstr "Enviar confirmación de envío"
+
+#~ msgid "Send automatic tracking info to customer"
+#~ msgstr "Enviar automáticamente información del seguimiento al cliente"
+
+#~ msgid ""
+#~ "When the delivery is done send a confirmation email to the customer with "
+#~ "the tracking number."
+#~ msgstr ""
+#~ "Cuando se confirme el albarán, enviar un correo de confirmación al "
+#~ "cliente con el número de seguimiento."
+
+#~ msgid ""
+#~ "When the picking is confirmed, send an automatic delivery tracking\n"
+#~ "                            information email."
+#~ msgstr ""
+#~ "Cuando se valide el albarán, enviar un correo automático con la "
+#~ "información de seguimiento del envío."
