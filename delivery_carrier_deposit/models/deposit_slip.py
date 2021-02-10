@@ -22,9 +22,9 @@ class DepositSlip(models.Model):
             }
         }
 
-    @api.one
     @api.depends('picking_ids')
     def _compute_deposit_slip(self):
+        self.ensure_one()
         weight = 0.0
         number_of_packages = 0
         for picking in self.picking_ids:
