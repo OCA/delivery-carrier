@@ -1,0 +1,207 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* delivery_roulier_chronopost_fr
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: delivery_roulier_chronopost_fr
+#: model:ir.model,name:delivery_roulier_chronopost_fr.model_carrier_account
+msgid "Base account datas"
+msgstr ""
+
+#. module: delivery_roulier_chronopost_fr
+#: model:delivery.carrier,name:delivery_roulier_chronopost_fr.chrono_10
+msgid "Chrono 10"
+msgstr ""
+
+#. module: delivery_roulier_chronopost_fr
+#: model:delivery.carrier,name:delivery_roulier_chronopost_fr.chrono_13
+msgid "Chrono 13"
+msgstr ""
+
+#. module: delivery_roulier_chronopost_fr
+#: model:delivery.carrier,name:delivery_roulier_chronopost_fr.chrono_18
+msgid "Chrono 18"
+msgstr ""
+
+#. module: delivery_roulier_chronopost_fr
+#: model:delivery.carrier,name:delivery_roulier_chronopost_fr.chrono_8
+msgid "Chrono 8"
+msgstr ""
+
+#. module: delivery_roulier_chronopost_fr
+#: model:delivery.carrier,name:delivery_roulier_chronopost_fr.chrono_9
+msgid "Chrono 9"
+msgstr ""
+
+#. module: delivery_roulier_chronopost_fr
+#: model:delivery.carrier,name:delivery_roulier_chronopost_fr.chrono_classic
+msgid "Chrono Classic"
+msgstr ""
+
+#. module: delivery_roulier_chronopost_fr
+#: model:delivery.carrier,name:delivery_roulier_chronopost_fr.chrono_express
+msgid "Chrono Express"
+msgstr ""
+
+#. module: delivery_roulier_chronopost_fr
+#: model:ir.model.fields.selection,name:delivery_roulier_chronopost_fr.selection__delivery_carrier__delivery_type__chronopost_fr
+msgid "Chronopost"
+msgstr ""
+
+#. module: delivery_roulier_chronopost_fr
+#: model:ir.model.fields,field_description:delivery_roulier_chronopost_fr.field_carrier_account__chronopost_fr_file_format
+msgid "Chronopost File Format"
+msgstr ""
+
+#. module: delivery_roulier_chronopost_fr
+#: model:ir.model.fields,field_description:delivery_roulier_chronopost_fr.field_carrier_account__chronopost_fr_subaccount
+msgid "Chronopost Sub Account"
+msgstr ""
+
+#. module: delivery_roulier_chronopost_fr
+#: model:product.product,name:delivery_roulier_chronopost_fr.chronopost_product
+#: model:product.template,name:delivery_roulier_chronopost_fr.chronopost_product_product_template
+msgid "Coûts de livraison - Chronopost"
+msgstr ""
+
+#. module: delivery_roulier_chronopost_fr
+#: model:ir.model.fields,help:delivery_roulier_chronopost_fr.field_carrier_account__chronopost_fr_file_format
+msgid "Default format of the carrier's label you want to print"
+msgstr ""
+
+#. module: delivery_roulier_chronopost_fr
+#: model:delivery.carrier.template.option,name:delivery_roulier_chronopost_fr.chronopost_service_monday
+msgid "Delivery on Monday"
+msgstr ""
+
+#. module: delivery_roulier_chronopost_fr
+#: model:delivery.carrier.template.option,name:delivery_roulier_chronopost_fr.chronopost_service_saturday
+msgid "Delivery on Saturday"
+msgstr ""
+
+#. module: delivery_roulier_chronopost_fr
+#: model:ir.model.fields,field_description:delivery_roulier_chronopost_fr.field_carrier_account__display_name
+#: model:ir.model.fields,field_description:delivery_roulier_chronopost_fr.field_delivery_carrier__display_name
+#: model:ir.model.fields,field_description:delivery_roulier_chronopost_fr.field_stock_picking__display_name
+#: model:ir.model.fields,field_description:delivery_roulier_chronopost_fr.field_stock_quant_package__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: delivery_roulier_chronopost_fr
+#: model:ir.model.fields,field_description:delivery_roulier_chronopost_fr.field_carrier_account__id
+#: model:ir.model.fields,field_description:delivery_roulier_chronopost_fr.field_delivery_carrier__id
+#: model:ir.model.fields,field_description:delivery_roulier_chronopost_fr.field_stock_picking__id
+#: model:ir.model.fields,field_description:delivery_roulier_chronopost_fr.field_stock_quant_package__id
+msgid "ID"
+msgstr ""
+
+#. module: delivery_roulier_chronopost_fr
+#: model:ir.model.fields,field_description:delivery_roulier_chronopost_fr.field_carrier_account____last_update
+#: model:ir.model.fields,field_description:delivery_roulier_chronopost_fr.field_delivery_carrier____last_update
+#: model:ir.model.fields,field_description:delivery_roulier_chronopost_fr.field_stock_picking____last_update
+#: model:ir.model.fields,field_description:delivery_roulier_chronopost_fr.field_stock_quant_package____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: delivery_roulier_chronopost_fr
+#: model:ir.model.fields.selection,name:delivery_roulier_chronopost_fr.selection__carrier_account__chronopost_fr_file_format__pdf
+msgid "PDF"
+msgstr ""
+
+#. module: delivery_roulier_chronopost_fr
+#: model:ir.model.fields.selection,name:delivery_roulier_chronopost_fr.selection__carrier_account__chronopost_fr_file_format__ppr
+msgid "PPR"
+msgstr ""
+
+#. module: delivery_roulier_chronopost_fr
+#: model:ir.model,name:delivery_roulier_chronopost_fr.model_stock_quant_package
+msgid "Packages"
+msgstr ""
+
+#. module: delivery_roulier_chronopost_fr
+#: model:ir.model.fields,field_description:delivery_roulier_chronopost_fr.field_delivery_carrier__delivery_type
+msgid "Provider"
+msgstr ""
+
+#. module: delivery_roulier_chronopost_fr
+#: model:delivery.carrier.template.option,name:delivery_roulier_chronopost_fr.chronopost_recipient_alert
+msgid "Recipient Pre-alert"
+msgstr ""
+
+#. module: delivery_roulier_chronopost_fr
+#: model:ir.model.fields.selection,name:delivery_roulier_chronopost_fr.selection__carrier_account__chronopost_fr_file_format__ser
+msgid "SER"
+msgstr ""
+
+#. module: delivery_roulier_chronopost_fr
+#: model:ir.model.fields.selection,name:delivery_roulier_chronopost_fr.selection__carrier_account__chronopost_fr_file_format__spd
+msgid "SPD"
+msgstr ""
+
+#. module: delivery_roulier_chronopost_fr
+#: model:delivery.carrier.template.option,name:delivery_roulier_chronopost_fr.chronopost_shipper_alert
+msgid "Shipper Pre-alert"
+msgstr ""
+
+#. module: delivery_roulier_chronopost_fr
+#: model:ir.model,name:delivery_roulier_chronopost_fr.model_delivery_carrier
+msgid "Shipping Methods"
+msgstr ""
+
+#. module: delivery_roulier_chronopost_fr
+#: model:ir.model.fields.selection,name:delivery_roulier_chronopost_fr.selection__carrier_account__chronopost_fr_file_format__the
+msgid "THE"
+msgstr ""
+
+#. module: delivery_roulier_chronopost_fr
+#: model:ir.model.fields.selection,name:delivery_roulier_chronopost_fr.selection__carrier_account__chronopost_fr_file_format__thepsg
+msgid "THEPSG"
+msgstr ""
+
+#. module: delivery_roulier_chronopost_fr
+#: model:ir.model,name:delivery_roulier_chronopost_fr.model_stock_picking
+msgid "Transfer"
+msgstr ""
+
+#. module: delivery_roulier_chronopost_fr
+#: model:product.product,uom_name:delivery_roulier_chronopost_fr.chronopost_product
+#: model:product.template,uom_name:delivery_roulier_chronopost_fr.chronopost_product_product_template
+msgid "Units"
+msgstr ""
+
+#. module: delivery_roulier_chronopost_fr
+#: model:ir.model.fields.selection,name:delivery_roulier_chronopost_fr.selection__carrier_account__chronopost_fr_file_format__xml
+msgid "XML"
+msgstr ""
+
+#. module: delivery_roulier_chronopost_fr
+#: model:ir.model.fields.selection,name:delivery_roulier_chronopost_fr.selection__carrier_account__chronopost_fr_file_format__z2d
+msgid "Z2D"
+msgstr ""
+
+#. module: delivery_roulier_chronopost_fr
+#: model:ir.model.fields.selection,name:delivery_roulier_chronopost_fr.selection__carrier_account__chronopost_fr_file_format__z2dpsg
+msgid "Z2DPSG"
+msgstr ""
+
+#. module: delivery_roulier_chronopost_fr
+#: model:product.product,weight_uom_name:delivery_roulier_chronopost_fr.chronopost_product
+#: model:product.template,weight_uom_name:delivery_roulier_chronopost_fr.chronopost_product_product_template
+msgid "kg"
+msgstr ""
+
+#. module: delivery_roulier_chronopost_fr
+#: model:product.product,volume_uom_name:delivery_roulier_chronopost_fr.chronopost_product
+#: model:product.template,volume_uom_name:delivery_roulier_chronopost_fr.chronopost_product_product_template
+msgid "m³"
+msgstr ""

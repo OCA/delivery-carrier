@@ -1,0 +1,211 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* delivery_roulier_chronopost_fr
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2023-12-20 19:35+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
+"Language-Team: none\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: delivery_roulier_chronopost_fr
+#: model:ir.model,name:delivery_roulier_chronopost_fr.model_carrier_account
+msgid "Base account datas"
+msgstr "Datos de la cuenta base"
+
+#. module: delivery_roulier_chronopost_fr
+#: model:delivery.carrier,name:delivery_roulier_chronopost_fr.chrono_10
+msgid "Chrono 10"
+msgstr "Crono 10"
+
+#. module: delivery_roulier_chronopost_fr
+#: model:delivery.carrier,name:delivery_roulier_chronopost_fr.chrono_13
+msgid "Chrono 13"
+msgstr "Crono 13"
+
+#. module: delivery_roulier_chronopost_fr
+#: model:delivery.carrier,name:delivery_roulier_chronopost_fr.chrono_18
+msgid "Chrono 18"
+msgstr "Crono 18"
+
+#. module: delivery_roulier_chronopost_fr
+#: model:delivery.carrier,name:delivery_roulier_chronopost_fr.chrono_8
+msgid "Chrono 8"
+msgstr "Crono 8"
+
+#. module: delivery_roulier_chronopost_fr
+#: model:delivery.carrier,name:delivery_roulier_chronopost_fr.chrono_9
+msgid "Chrono 9"
+msgstr "Crono 9"
+
+#. module: delivery_roulier_chronopost_fr
+#: model:delivery.carrier,name:delivery_roulier_chronopost_fr.chrono_classic
+msgid "Chrono Classic"
+msgstr "Crono Clásico"
+
+#. module: delivery_roulier_chronopost_fr
+#: model:delivery.carrier,name:delivery_roulier_chronopost_fr.chrono_express
+msgid "Chrono Express"
+msgstr "Crono Exprés"
+
+#. module: delivery_roulier_chronopost_fr
+#: model:ir.model.fields.selection,name:delivery_roulier_chronopost_fr.selection__delivery_carrier__delivery_type__chronopost_fr
+msgid "Chronopost"
+msgstr "Cronopost"
+
+#. module: delivery_roulier_chronopost_fr
+#: model:ir.model.fields,field_description:delivery_roulier_chronopost_fr.field_carrier_account__chronopost_fr_file_format
+msgid "Chronopost File Format"
+msgstr "Formato de Archivo Cronopost"
+
+#. module: delivery_roulier_chronopost_fr
+#: model:ir.model.fields,field_description:delivery_roulier_chronopost_fr.field_carrier_account__chronopost_fr_subaccount
+msgid "Chronopost Sub Account"
+msgstr "Subcuenta de Cronopost"
+
+#. module: delivery_roulier_chronopost_fr
+#: model:product.product,name:delivery_roulier_chronopost_fr.chronopost_product
+#: model:product.template,name:delivery_roulier_chronopost_fr.chronopost_product_product_template
+msgid "Coûts de livraison - Chronopost"
+msgstr "Gastos de envío - Cronopost"
+
+#. module: delivery_roulier_chronopost_fr
+#: model:ir.model.fields,help:delivery_roulier_chronopost_fr.field_carrier_account__chronopost_fr_file_format
+msgid "Default format of the carrier's label you want to print"
+msgstr ""
+"Formato predeterminado de la etiqueta del transportista que desea imprimir"
+
+#. module: delivery_roulier_chronopost_fr
+#: model:delivery.carrier.template.option,name:delivery_roulier_chronopost_fr.chronopost_service_monday
+msgid "Delivery on Monday"
+msgstr "Entrega el Lunes"
+
+#. module: delivery_roulier_chronopost_fr
+#: model:delivery.carrier.template.option,name:delivery_roulier_chronopost_fr.chronopost_service_saturday
+msgid "Delivery on Saturday"
+msgstr "Entrega el Sábado"
+
+#. module: delivery_roulier_chronopost_fr
+#: model:ir.model.fields,field_description:delivery_roulier_chronopost_fr.field_carrier_account__display_name
+#: model:ir.model.fields,field_description:delivery_roulier_chronopost_fr.field_delivery_carrier__display_name
+#: model:ir.model.fields,field_description:delivery_roulier_chronopost_fr.field_stock_picking__display_name
+#: model:ir.model.fields,field_description:delivery_roulier_chronopost_fr.field_stock_quant_package__display_name
+msgid "Display Name"
+msgstr "Mostrar Nombre"
+
+#. module: delivery_roulier_chronopost_fr
+#: model:ir.model.fields,field_description:delivery_roulier_chronopost_fr.field_carrier_account__id
+#: model:ir.model.fields,field_description:delivery_roulier_chronopost_fr.field_delivery_carrier__id
+#: model:ir.model.fields,field_description:delivery_roulier_chronopost_fr.field_stock_picking__id
+#: model:ir.model.fields,field_description:delivery_roulier_chronopost_fr.field_stock_quant_package__id
+msgid "ID"
+msgstr "ID (identificación)"
+
+#. module: delivery_roulier_chronopost_fr
+#: model:ir.model.fields,field_description:delivery_roulier_chronopost_fr.field_carrier_account____last_update
+#: model:ir.model.fields,field_description:delivery_roulier_chronopost_fr.field_delivery_carrier____last_update
+#: model:ir.model.fields,field_description:delivery_roulier_chronopost_fr.field_stock_picking____last_update
+#: model:ir.model.fields,field_description:delivery_roulier_chronopost_fr.field_stock_quant_package____last_update
+msgid "Last Modified on"
+msgstr "Última Modificación el"
+
+#. module: delivery_roulier_chronopost_fr
+#: model:ir.model.fields.selection,name:delivery_roulier_chronopost_fr.selection__carrier_account__chronopost_fr_file_format__pdf
+msgid "PDF"
+msgstr "PDF"
+
+#. module: delivery_roulier_chronopost_fr
+#: model:ir.model.fields.selection,name:delivery_roulier_chronopost_fr.selection__carrier_account__chronopost_fr_file_format__ppr
+msgid "PPR"
+msgstr "PPR"
+
+#. module: delivery_roulier_chronopost_fr
+#: model:ir.model,name:delivery_roulier_chronopost_fr.model_stock_quant_package
+msgid "Packages"
+msgstr "Paquetes"
+
+#. module: delivery_roulier_chronopost_fr
+#: model:ir.model.fields,field_description:delivery_roulier_chronopost_fr.field_delivery_carrier__delivery_type
+msgid "Provider"
+msgstr "Proveedor"
+
+#. module: delivery_roulier_chronopost_fr
+#: model:delivery.carrier.template.option,name:delivery_roulier_chronopost_fr.chronopost_recipient_alert
+msgid "Recipient Pre-alert"
+msgstr "Prealerta del Destinatario"
+
+#. module: delivery_roulier_chronopost_fr
+#: model:ir.model.fields.selection,name:delivery_roulier_chronopost_fr.selection__carrier_account__chronopost_fr_file_format__ser
+msgid "SER"
+msgstr "SER"
+
+#. module: delivery_roulier_chronopost_fr
+#: model:ir.model.fields.selection,name:delivery_roulier_chronopost_fr.selection__carrier_account__chronopost_fr_file_format__spd
+msgid "SPD"
+msgstr "SPD"
+
+#. module: delivery_roulier_chronopost_fr
+#: model:delivery.carrier.template.option,name:delivery_roulier_chronopost_fr.chronopost_shipper_alert
+msgid "Shipper Pre-alert"
+msgstr "Prealerta del Expedidor"
+
+#. module: delivery_roulier_chronopost_fr
+#: model:ir.model,name:delivery_roulier_chronopost_fr.model_delivery_carrier
+msgid "Shipping Methods"
+msgstr "Métodos de Envío"
+
+#. module: delivery_roulier_chronopost_fr
+#: model:ir.model.fields.selection,name:delivery_roulier_chronopost_fr.selection__carrier_account__chronopost_fr_file_format__the
+msgid "THE"
+msgstr "EL/La"
+
+#. module: delivery_roulier_chronopost_fr
+#: model:ir.model.fields.selection,name:delivery_roulier_chronopost_fr.selection__carrier_account__chronopost_fr_file_format__thepsg
+msgid "THEPSG"
+msgstr "THEPSG"
+
+#. module: delivery_roulier_chronopost_fr
+#: model:ir.model,name:delivery_roulier_chronopost_fr.model_stock_picking
+msgid "Transfer"
+msgstr "Transferencia"
+
+#. module: delivery_roulier_chronopost_fr
+#: model:product.product,uom_name:delivery_roulier_chronopost_fr.chronopost_product
+#: model:product.template,uom_name:delivery_roulier_chronopost_fr.chronopost_product_product_template
+msgid "Units"
+msgstr "Unidades"
+
+#. module: delivery_roulier_chronopost_fr
+#: model:ir.model.fields.selection,name:delivery_roulier_chronopost_fr.selection__carrier_account__chronopost_fr_file_format__xml
+msgid "XML"
+msgstr "XML"
+
+#. module: delivery_roulier_chronopost_fr
+#: model:ir.model.fields.selection,name:delivery_roulier_chronopost_fr.selection__carrier_account__chronopost_fr_file_format__z2d
+msgid "Z2D"
+msgstr "Z2D"
+
+#. module: delivery_roulier_chronopost_fr
+#: model:ir.model.fields.selection,name:delivery_roulier_chronopost_fr.selection__carrier_account__chronopost_fr_file_format__z2dpsg
+msgid "Z2DPSG"
+msgstr "Z2DPSG"
+
+#. module: delivery_roulier_chronopost_fr
+#: model:product.product,weight_uom_name:delivery_roulier_chronopost_fr.chronopost_product
+#: model:product.template,weight_uom_name:delivery_roulier_chronopost_fr.chronopost_product_product_template
+msgid "kg"
+msgstr "kg"
+
+#. module: delivery_roulier_chronopost_fr
+#: model:product.product,volume_uom_name:delivery_roulier_chronopost_fr.chronopost_product
+#: model:product.template,volume_uom_name:delivery_roulier_chronopost_fr.chronopost_product_product_template
+msgid "m³"
+msgstr "metros cúbicos"
