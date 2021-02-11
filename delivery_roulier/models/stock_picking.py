@@ -2,20 +2,13 @@
 #          David BEAL <david.beal@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-import logging
-from datetime import datetime, timedelta
+from datetime import date, timedelta
 
 from odoo import fields, models
 from odoo.exceptions import UserError
 from odoo.tools.translate import _
 
 from ..decorator import implemented_by_carrier
-
-_logger = logging.getLogger(__name__)
-try:
-    from roulier import roulier
-except ImportError:
-    _logger.debug("Cannot `import roulier`.")
 
 
 class StockPicking(models.Model):
@@ -153,8 +146,8 @@ class StockPicking(models.Model):
         """Choose a shipping date.
 
         By default, it's tomorrow."""
-        tomorrow = datetime.now() + timedelta(1)
-        return tomorrow.strftime("%Y-%m-%d")
+        tomorrow = date.today() + timedelta(1)
+        return tomorrow
 
     def _roulier_convert_address(self, partner):
         """Convert a partner to an address for roulier.
