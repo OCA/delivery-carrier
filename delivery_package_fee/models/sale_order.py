@@ -6,12 +6,22 @@ from odoo import fields, models
 class SaleOrder(models.Model):
     _inherit = "sale.order"
 
+    def _get_fee_line_qty_from_out_package(self, package_fee, picking, package):
+        """Compute the fee qty for the package to deliver.
+
+        Return 1 by default.
+        """
+        return 1
+
     def _package_fee_line_qty_and_price(self, package_fee, picking):
         fee_product = package_fee.product_id
 
         # line units
         out_packages = picking.mapped("move_line_ids.result_package_id")
-        qty = len(out_packages)
+        qty = sum(
+            self._get_fee_line_qty_from_out_package(package_fee, picking, package)
+            for package in out_packages
+        )
         if not qty:
             return 0, 0.0
 
