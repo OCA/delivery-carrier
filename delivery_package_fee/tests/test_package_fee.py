@@ -95,7 +95,7 @@ class TestPackageFee(SavepointCase):
         picking.move_line_ids[0].qty_done = 10.0
         picking.move_line_ids[1].result_package_id = self.pack2
         picking.move_line_ids[1].qty_done = 10.0
-        picking.action_done()
+        picking._action_done()
         self.assertEqual(picking.state, "done")
 
         self.assertRecordValues(
@@ -143,7 +143,7 @@ class TestPackageFee(SavepointCase):
         self.assertEqual(picking.state, "assigned")
         picking.move_line_ids[0].result_package_id = self.pack1
         picking.move_line_ids[0].qty_done = 10.0
-        picking.action_done()
+        picking._action_done()
         self.assertEqual(picking.state, "done")
         backorder = picking.backorder_ids
 
@@ -188,7 +188,7 @@ class TestPackageFee(SavepointCase):
 
         backorder.move_line_ids[0].result_package_id = self.pack2
         backorder.move_line_ids[0].qty_done = 10.0
-        backorder.action_done()
+        backorder._action_done()
         self.assertEqual(backorder.state, "done")
 
         self.assertRecordValues(
@@ -274,7 +274,7 @@ class TestPackageFee(SavepointCase):
         picking.move_line_ids[0].qty_done = 10.0
         picking.move_line_ids[1].result_package_id = self.pack2
         picking.move_line_ids[1].qty_done = 10.0
-        picking.action_done()
+        picking._action_done()
         self.assertEqual(picking.state, "done")
 
         self.assertRecordValues(
@@ -322,7 +322,7 @@ class TestPackageFee(SavepointCase):
         self.assertEqual(picking.state, "assigned")
         picking.move_line_ids[0].qty_done = 10.0
         picking.move_line_ids[1].qty_done = 10.0
-        picking.action_done()
+        picking._action_done()
         self.assertEqual(picking.state, "done")
 
         self.assertRecordValues(
@@ -358,7 +358,7 @@ class TestPackageFee(SavepointCase):
         picking.move_line_ids[0].qty_done = 10.0
         picking.move_line_ids[1].result_package_id = self.pack2
         picking.move_line_ids[1].qty_done = 10.0
-        picking.action_done()
+        picking._action_done()
         self.assertEqual(picking.state, "done")
 
         self.assertRecordValues(
