@@ -14,107 +14,116 @@ def _execute_onchanges(records, field_name):
 class TestDeliveryAutoRefresh(common.HttpCase):
     def setUp(self):
         super(TestDeliveryAutoRefresh, self).setUp()
-        service = self.env['product.product'].create({
-            'name': 'Service Test',
-            'type': 'service',
-        })
-        self.carrier = self.env['delivery.carrier'].create({
-            'name': 'Test carrier',
-            'delivery_type': 'base_on_rule',
-            'product_id': service.id,
-            'price_rule_ids': [
-                (0, 0, {
-                    'variable': 'weight',
-                    'operator': '<=',
-                    'max_value': 20,
-                    'list_base_price': 50,
-                }),
-                (0, 0, {
-                    'variable': 'weight',
-                    'operator': '<=',
-                    'max_value': 40,
-                    'list_base_price': 30,
-                    'list_price': 1,
-                    'variable_factor': 'weight',
-                }),
-                (0, 0, {
-                    'variable': 'weight',
-                    'operator': '>',
-                    'max_value': 40,
-                    'list_base_price': 20,
-                    'list_price': 1.5,
-                    'variable_factor': 'weight',
-                }),
-            ]
-        })
-        self.product = self.env['product.product'].create({
-            'name': 'Test product',
-            'weight': 10,
-            'list_price': 20,
-        })
-        self.partner = self.env['res.partner'].create({
-            'name': 'Test partner',
-            'property_delivery_carrier_id': self.carrier.id,
-        })
-        self.param_name1 = 'delivery_auto_refresh.auto_add_delivery_line'
-        self.param_name2 = 'delivery_auto_refresh.refresh_after_picking'
-        order_obj = self.env['sale.order']
+        service = self.env["product.product"].create(
+            {"name": "Service Test", "type": "service",}
+        )
+        self.carrier = self.env["delivery.carrier"].create(
+            {
+                "name": "Test carrier",
+                "delivery_type": "base_on_rule",
+                "product_id": service.id,
+                "price_rule_ids": [
+                    (
+                        0,
+                        0,
+                        {
+                            "variable": "weight",
+                            "operator": "<=",
+                            "max_value": 20,
+                            "list_base_price": 50,
+                        },
+                    ),
+                    (
+                        0,
+                        0,
+                        {
+                            "variable": "weight",
+                            "operator": "<=",
+                            "max_value": 40,
+                            "list_base_price": 30,
+                            "list_price": 1,
+                            "variable_factor": "weight",
+                        },
+                    ),
+                    (
+                        0,
+                        0,
+                        {
+                            "variable": "weight",
+                            "operator": ">",
+                            "max_value": 40,
+                            "list_base_price": 20,
+                            "list_price": 1.5,
+                            "variable_factor": "weight",
+                        },
+                    ),
+                ],
+            }
+        )
+        self.product = self.env["product.product"].create(
+            {"name": "Test product", "weight": 10, "list_price": 20,}
+        )
+        self.partner = self.env["res.partner"].create(
+            {"name": "Test partner", "property_delivery_carrier_id": self.carrier.id,}
+        )
+        self.param_name1 = "delivery_auto_refresh.auto_add_delivery_line"
+        self.param_name2 = "delivery_auto_refresh.refresh_after_picking"
+        order_obj = self.env["sale.order"]
         order_vals = order_obj.default_get(order_obj._fields.keys())
-        order_vals.update({
-            'partner_id': self.partner.id,
-            'partner_shipping_id': self.partner.id,
-            'order_line': [
-                (0, 0, {
-                    'product_id': self.product.id,
-                    'product_uom_qty': 2,
-                })
-            ]
-        })
+        order_vals.update(
+            {
+                "partner_id": self.partner.id,
+                "partner_shipping_id": self.partner.id,
+                "order_line": [
+                    (0, 0, {"product_id": self.product.id, "product_uom_qty": 2,})
+                ],
+            }
+        )
         order = order_obj.new(order_vals)
-        _execute_onchanges(order, 'partner_shipping_id')
-        _execute_onchanges(order.order_line, 'product_id')
+        _execute_onchanges(order, "partner_shipping_id")
+        _execute_onchanges(order.order_line, "product_id")
         self.order = order.create(order._convert_to_write(order._cache))
 
     def test_auto_refresh_so(self):
-        self.assertFalse(self.order.order_line.filtered('is_delivery'))
-        self.env['ir.config_parameter'].sudo().set_param(self.param_name1, 1)
-        self.order.write({
-            'order_line': [
-                (1, self.order.order_line.id, {'product_uom_qty': 3}),
-            ],
-        })
-        line_delivery = self.order.order_line.filtered('is_delivery')
+        self.assertFalse(self.order.order_line.filtered("is_delivery"))
+        self.env["ir.config_parameter"].sudo().set_param(self.param_name1, 1)
+        self.order.write(
+            {"order_line": [(1, self.order.order_line.id, {"product_uom_qty": 3}),],}
+        )
+        line_delivery = self.order.order_line.filtered("is_delivery")
         self.assertEqual(line_delivery.price_unit, 60)
-        line2 = self.order.order_line.new({
-            'order_id': self.order.id,
-            'product_id': self.product.id,
-            'product_uom_qty': 2,
-        })
-        _execute_onchanges(line2, 'product_id')
+        line2 = self.order.order_line.new(
+            {
+                "order_id": self.order.id,
+                "product_id": self.product.id,
+                "product_uom_qty": 2,
+            }
+        )
+        _execute_onchanges(line2, "product_id")
         vals = line2._convert_to_write(line2._cache)
-        del vals['order_id']
-        self.order.write({'order_line': [(0, 0, vals)]})
-        line_delivery = self.order.order_line.filtered('is_delivery')
+        del vals["order_id"]
+        self.order.write({"order_line": [(0, 0, vals)]})
+        line_delivery = self.order.order_line.filtered("is_delivery")
         self.assertEqual(line_delivery.price_unit, 95)
 
     def test_auto_refresh_picking(self):
-        self.env['ir.config_parameter'].sudo().set_param(self.param_name2, 1)
+        self.env["ir.config_parameter"].sudo().set_param(self.param_name2, 1)
         self.order.order_line.product_uom_qty = 3
         self.order.action_confirm()
         picking = self.order.picking_ids
         picking.action_assign()
         picking.move_line_ids[0].qty_done = 2
         picking.action_done()
-        line_delivery = self.order.order_line.filtered('is_delivery')
+        line_delivery = self.order.order_line.filtered("is_delivery")
         self.assertEqual(line_delivery.price_unit, 50)
 
     def test_no_auto_refresh_picking(self):
-        self.env['ir.config_parameter'].sudo().set_param(self.param_name2, "0")
+        self.env["ir.config_parameter"].sudo().set_param(self.param_name2, "0")
         self.order.order_line.product_uom_qty = 3
         self.order.action_confirm()
         picking = self.order.picking_ids
         picking.action_assign()
         picking.move_line_ids[0].qty_done = 2
         picking.action_done()
-        line_delivery = self.order.order_line.filtered('is_delivery')
+        line_delivery = self.order.order_line.filtered("is_delivery")
         self.assertEqual(line_delivery.price_unit, 60)
