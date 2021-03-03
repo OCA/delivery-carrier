@@ -11,6 +11,6 @@
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": ["delivery",],
-    "data": ["data/ir_config_parameter.xml",],
+    "depends": ["delivery"],
+    "data": ["data/ir_config_parameter.xml"],
 }
