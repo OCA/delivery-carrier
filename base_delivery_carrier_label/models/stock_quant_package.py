@@ -12,28 +12,25 @@ class StockQuantPackage(models.Model):
     parcel_tracking_uri = fields.Char(
         help="Link to the carrier's tracking page for this package."
     )
-    total_weight = fields.Float(
-        digits="Stock Weight",
-        help="Total weight of the package in kg, including the "
-        "weight of the logistic unit.",
-    )
 
-    @api.depends("total_weight")
+    @api.depends("shipping_weight")
     def _compute_weight(self):
         """Use total_weight if defined
         otherwise fallback on the computed weight
         """
         to_do = self.browse()
         for pack in self:
-            if pack.total_weight:
-                pack.weight = pack.total_weight
-            elif not pack.quant_ids:
+            if pack.shipping_weight:
+                pack.weight = pack.shipping_weight
+            elif not pack.quant_ids and not self.env.context.get("picking_id"):
                 # package.pack_operations would be too easy
                 operations = self.env["stock.move.line"].search(
-                    [("result_package_id", "=", pack.id), ("product_id", "!=", False)]
+                    [
+                        ("result_package_id", "=", pack.id),
+                        ("package_id", "=", False),
+                        ("product_id", "!=", False),
+                    ]
                 )
-
-                # Note: get_weight will return the sum of all operations weight
                 pack.weight = operations.get_weight()
             else:
                 to_do |= pack
