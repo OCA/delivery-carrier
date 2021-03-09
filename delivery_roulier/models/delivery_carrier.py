@@ -14,12 +14,12 @@ except ImportError:
 class DeliveryCarrier(models.Model):
     _inherit = "delivery.carrier"
 
-    # module using roulier don't use native method to get labels
-    # pass False value to avoid failure.
-    def send_shipping(self, pickings):
+    def alternative_send_shipping(self, pickings):
+        self.ensure_one()
         if self._is_roulier:
-            return [{"exact_price": False, "tracking_number": False}]
-        return super().send_shipping(pickings)
+            return pickings._roulier_generate_labels()
+        else:
+            return super().alternative_send_shipping(pickings)
 
     def _is_roulier(self):
         self.ensure_one()
@@ -28,7 +28,7 @@ class DeliveryCarrier(models.Model):
 
     def cancel_shipment(self, pickings):
         if self._is_roulier:
-            raise NotImplementedError()
+            pickings._cancel_shipment()
         else:
             return super().cancel_shipment(pickings)
 

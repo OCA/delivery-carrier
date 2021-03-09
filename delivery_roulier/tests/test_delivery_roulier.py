@@ -101,7 +101,7 @@ class DeliveryRoulierCase(SavepointCase):
         )
         with patch("roulier.roulier.get") as mock_roulier:
             mock_roulier.return_value = roulier_ret
-            self.picking.action_generate_carrier_label()
+            self.picking.send_to_shipper()
             roulier_args = mock_roulier.mock_calls[0][1]
             self.assertEqual("get_label", roulier_args[1])
             roulier_payload = roulier_args[2]
