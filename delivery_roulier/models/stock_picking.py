@@ -56,6 +56,10 @@ class StockPicking(models.Model):
     def _get_to_address(self):
         pass
 
+    @implemented_by_carrier
+    def _cancel_shipment(self):
+        pass
+
     # End of API.
 
     # Implementations for base_delivery_carrier_label
@@ -63,17 +67,20 @@ class StockPicking(models.Model):
         self.ensure_one()
         return self.carrier_id._is_roulier()
 
-    def generate_shipping_labels(self):
-        self.ensure_one()
-        if self._is_roulier():
-            return self._roulier_generate_labels()
-        return super().generate_shipping_labels()
-
     def _roulier_generate_labels(self):
-        """Create as many labels as package_ids or in self."""
-        self.ensure_one()
-        packages = self._get_packages_from_picking()
-        return packages._generate_labels(self)
+        """
+            Return format expected by send_shipping : a list of dict (one dict per
+            picking).
+            {
+                'exact_price': 0.0,
+                'tracking_number': "concatenated numbers",
+                'labels': list of dict of labels, managed by base_delivery_carrier_label
+            }
+        """
+        label_info = []
+        for picking in self:
+            label_info.append(picking.package_ids._generate_labels(picking))
+        return label_info
 
     # Default implementations of _roulier_*()
     def _roulier_get_auth(self, account, package=None):
@@ -88,6 +95,13 @@ class StockPicking(models.Model):
             "isTest": not self.carrier_id.prod_environment,
         }
         return auth
+
+    def _roulier_cancel_shipment(self):
+        self.write({'carrier_tracking_ref': False})
+        labels = self.env['shipping.label'].search(
+            [("res_id", "in", self.ids), ("res_model", "=", "stock.picking")]
+        )
+        labels.mapped('attachment_id').unlink()
 
     def _roulier_get_account(self, package=None):
         """Return an 'account'.
