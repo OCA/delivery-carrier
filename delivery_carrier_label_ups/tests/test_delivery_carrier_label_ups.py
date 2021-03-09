@@ -103,3 +103,26 @@ class TestDeliveryCarrierLabelUps(
                 ),
             )
             return super().test_labels()
+
+    def test_return(self):
+        shipping_data = self.picking._ups_shipping_data()['ShipmentRequest']
+        action = self.env['stock.return.picking'].with_context(
+            active_id=self.picking.id
+        ).create({}).create_returns()
+        return_picking = self.env[action['res_model']].browse(action['res_id'])
+        return_data = return_picking._ups_shipping_data()['ShipmentRequest']
+        self.assertEqual(
+            shipping_data['Shipment']['ShipFrom']['Name'],
+            return_data['Shipment']['ShipTo']['Name'],
+        )
+        self.assertEqual(
+            shipping_data['Shipment']['ShipTo']['Name'],
+            return_data['Shipment']['ShipFrom']['Name'],
+        )
+        ref = 'a reference'
+        self.picking.carrier_tracking_ref = ref
+        self.assertEqual(
+            self.picking._ups_send()[0]['tracking_number'], ref,
+        )
+        return_picking.carrier_id = self._get_carrier()
+        self.assertTrue(return_picking.show_label_button)

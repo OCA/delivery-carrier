@@ -4,7 +4,7 @@ import logging
 
 import requests
 
-from odoo import _, fields, models
+from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
@@ -12,6 +12,21 @@ _logger = logging.getLogger(__name__)
 
 class StockPicking(models.Model):
     _inherit = "stock.picking"
+
+    @api.depends(
+        'delivery_type', 'location_id.usage', 'carrier_tracking_ref', 'state'
+    )
+    def _compute_show_label_button(self):
+        """Show the label button for returns via UPS in any active state to allow
+        users requesting an ERL when it fits their workflow"""
+        for this in self:
+            if this.delivery_type == 'ups' and this.location_id.usage == 'customer':
+                this.show_label_button = (
+                    not this.carrier_tracking_ref and
+                    this.state not in ('done', 'cancel')
+                )
+            else:
+                super(StockPicking, this)._compute_show_label_button()
 
     def generate_shipping_labels(self):
         """Generate labels on button click"""
@@ -102,6 +117,26 @@ class StockPicking(models.Model):
         """Return a dict that can be passed to the shipping endpoint of the UPS API"""
         self.ensure_one()
         account = self._ups_auth_account()
+        shipping_data = dict(
+            ShipTo=self._ups_partner_to_shipping_data(self.partner_id),
+            ShipFrom=self._ups_partner_to_shipping_data(
+                self.picking_type_id.warehouse_id.partner_id
+            ),
+            Service=dict(
+                Code=self.option_ids[:1].code,
+                Description=self.option_ids[:1].name,
+            ),
+        )
+        if self.location_id.usage == 'customer':
+            # this is a return, so issue a pickup order and swap to/from
+            shipping_data.update(
+                ShipTo=shipping_data.pop('ShipFrom'),
+                ShipFrom=shipping_data.pop('ShipTo'),
+                ReturnService=dict(
+                    # UPS Electronic Return Label (ERL)
+                    Code='8',
+                ),
+            )
         return dict(
             ShipmentRequest=dict(
                 Shipment=dict(
@@ -109,10 +144,6 @@ class StockPicking(models.Model):
                     Shipper=self._ups_partner_to_shipping_data(
                         self.company_id.partner_id,
                         ShipperNumber=account.ups_shipper_number,
-                    ),
-                    ShipTo=self._ups_partner_to_shipping_data(self.partner_id),
-                    ShipFrom=self._ups_partner_to_shipping_data(
-                        self.picking_type_id.warehouse_id.partner_id
                     ),
                     PaymentInformation=dict(
                         ShipmentCharge=dict(
@@ -124,14 +155,11 @@ class StockPicking(models.Model):
                             ),
                         )
                     ),
-                    Service=dict(
-                        Code=self.option_ids[:1].code,
-                        Description=self.option_ids[:1].name,
-                    ),
                     Package=[
                         self._ups_quant_package_data(package)
                         for package in self.package_ids
                     ],
+                    **shipping_data,
                 ),
             )
         )
