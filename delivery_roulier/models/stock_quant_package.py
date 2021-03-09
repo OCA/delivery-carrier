@@ -96,10 +96,17 @@ class StockQuantPackage(models.Model):
         return self._parse_response(picking, response)
 
     def _roulier_parse_response(self, picking, response):
+        res = {
+            # price is not managed in roulier...not yet at least
+            "exact_price": 0.0,
+        }
         parcels_data = []
         parcels = response.get("parcels")
+        tracking_refs = []
         for parcel in parcels:
             tracking_number = parcel.get("tracking", {}).get("number")
+            if tracking_number:
+                tracking_refs.append(tracking_number)
             # expected format by base_delivery_carrier_label module
             label = parcel.get("label")
             # find for which package the label is. tracking number will be updated on
@@ -122,7 +129,9 @@ class StockQuantPackage(models.Model):
                     "file_type": label.get("type"),
                 }
             )
-        return parcels_data
+        res["tracking_number"] = ';'.join(tracking_refs)
+        res['labels'] = parcels_data
+        return res
 
     def _roulier_get_parcels(self, picking):
         return [pack._get_parcel(picking) for pack in self]
