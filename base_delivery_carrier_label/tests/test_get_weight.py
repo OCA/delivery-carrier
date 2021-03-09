@@ -115,7 +115,7 @@ class TestGetWeight(TransactionCase):
                     "result_package_id": package.id,
                 },
             )
-        package.total_weight = 1542.0
+        package.shipping_weight = 1542.0
         # end of prepare data
 
         # test operation.get_weight()
@@ -126,7 +126,7 @@ class TestGetWeight(TransactionCase):
             )
 
         # test package.weight
-        self.assertEqual(package.weight, package.total_weight)
+        self.assertEqual(package.weight, package.shipping_weight)
 
     def test_get_weight_with_qty(self):
         """Ensure qty are taken in account."""

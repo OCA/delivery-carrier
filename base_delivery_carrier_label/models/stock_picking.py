@@ -18,53 +18,10 @@ class StockPicking(models.Model):
         string="Carrier",
         states={"done": [("readonly", True)]},
     )
-    delivery_type = fields.Selection(
-        related="carrier_id.delivery_type", string="Delivery Type", readonly=True
-    )
     carrier_code = fields.Char(related="carrier_id.code", readonly=True)
     option_ids = fields.Many2many(
         comodel_name="delivery.carrier.option", string="Options"
     )
-    show_label_button = fields.Boolean(compute="_compute_show_label_button")
-
-    def _compute_show_label_button(self):
-        """Determine if we should show the button to generate labels"""
-        for this in self:
-            this.show_label_button = this.state == "done" and this.carrier_code
-
-    def generate_default_label(self):
-        """Abstract method
-
-        :return: (file_binary, file_type)
-
-        """
-        raise NotImplementedError(
-            _("No label is configured for the " "selected delivery method.")
-        )
-
-    def generate_shipping_labels(self):
-        """Generate a shipping label by default
-
-        This method can be inherited to create specific shipping labels
-        a list of label must be return as we can have multiple
-        stock.quant.package for a single picking representing packs
-
-        :return: list of dict containing
-           name: name to give to the attachement
-           file: file as base64
-           file_type: string of file type like 'PDF'
-           (optional)
-           tracking_number: tracking id defined by your carrier
-
-        """
-        self.ensure_one()
-        default_label = self.generate_default_label()
-        labels = []
-        for package in self._get_packages_from_picking():
-            pack_label = default_label.copy()
-            pack_label["tracking_number"] = package.id
-            labels.append(pack_label)
-        return labels
 
     def get_shipping_label_values(self, label):
         self.ensure_one()
@@ -99,27 +56,21 @@ class StockPicking(models.Model):
         """
         for picking in self:
             move_lines = picking.move_line_ids.filtered(
-                lambda s: not (s.package_id or s.result_package_id)
+                lambda s: not s.result_package_id
             )
             if move_lines:
-                package = self.env["stock.quant.package"].create({})
-                move_lines.write({"result_package_id": package.id})
+                picking._put_in_pack(move_lines)
 
-    def action_generate_carrier_label(self):
-        """Method for the 'Generate Label' button.
-
-        It will generate the labels for all the packages of the picking.
-        Packages are mandatory in this case
-
-        """
-        for pick in self:
-            pick._set_a_default_package()
-            shipping_labels = pick.generate_shipping_labels()
-            for label in shipping_labels:
-                pick.attach_shipping_label(label)
-            if len(shipping_labels) == 1:
-                pick.write({"carrier_tracking_ref": label.get("tracking_number")})
-        return True
+    def send_to_shipper(self):
+        self.ensure_one()
+        self._set_a_default_package()
+        # We consider that label has already been generated in case we have a
+        # carrier tracking ref, this way we may print the labels before shipping
+        # and not generated in second time during shipment
+        if self.carrier_tracking_ref:
+            return
+        else:
+            return super().send_to_shipper()
 
     @api.onchange("carrier_id")
     def onchange_carrier_id(self):
@@ -174,25 +125,6 @@ class StockPicking(models.Model):
             if default_options:
                 values.update(option_ids=[(6, 0, default_options.ids)])
         return values
-
-    def _get_packages_from_picking(self):
-        """ Get all the packages from the picking """
-        self.ensure_one()
-        operation_obj = self.env["stock.move.line"]
-        packages = self.env["stock.quant.package"].browse()
-        operations = operation_obj.search(
-            [
-                "|",
-                ("package_id", "!=", False),
-                ("result_package_id", "!=", False),
-                ("picking_id", "=", self.id),
-            ]
-        )
-        for operation in operations:
-            # Take the destination package. If empty, the package is
-            # moved so take the source one.
-            packages |= operation.result_package_id or operation.package_id
-        return packages
 
     def write(self, vals):
         """Set the default options when the delivery method is changed.
