@@ -11,6 +11,7 @@ recorder = VCR(
     cassette_library_dir=join(dirname(__file__), "fixtures/cassettes"),
     path_transformer=VCR.ensure_suffix(".yaml"),
     filter_headers=["Authorization"],
+    filter_post_data_parameters=["client_id", "client_secret"],
     # ignore scheme, host, port
     match_on=("method", "path", "query"),
     # allow to read and edit content in cassettes
