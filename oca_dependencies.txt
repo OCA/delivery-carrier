@@ -1,2 +1,3 @@
 server-env
 product-attribute
+community-data-files
