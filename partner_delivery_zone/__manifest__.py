@@ -3,7 +3,7 @@
 {
     "name": "Partner Delivery Zone",
     "summary": "Set on partners a zone for delivery goods",
-    "version": "13.0.1.0.2",
+    "version": "13.0.1.0.3",
     "development_status": "Beta",
     "category": "Delivery",
     "website": "https://github.com/OCA/delivery-carrier",
