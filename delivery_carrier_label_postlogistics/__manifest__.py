@@ -28,7 +28,7 @@
           'views/stock.xml',
           'security/ir.model.access.csv',
           ],
- 'installable': True,
+ 'installable': False,
  'auto_install': False,
  'application': True,
  }
