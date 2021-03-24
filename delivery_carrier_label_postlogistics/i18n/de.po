@@ -159,7 +159,6 @@ msgstr "Unternehmen"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_company__postlogistics_logo
-#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_config_settings__logo
 #: model_terms:ir.ui.view,arch_db:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
 msgid "Company Logo on Post labels"
 msgstr "Unternehmenslogo auf Post-Etikett"
@@ -210,19 +209,16 @@ msgstr "Vorgabeeinstellungen"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_company__postlogistics_label_layout
-#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_config_settings__label_layout
 msgid "Default label layout"
 msgstr "Vorgabe Etikettgestalt"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_company__postlogistics_output_format
-#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_config_settings__output_format
 msgid "Default output format"
 msgstr "Ausgabeformatvorgabe"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_company__postlogistics_resolution
-#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_config_settings__resolution
 msgid "Default resolution"
 msgstr "Standardauflösung"
 
@@ -269,7 +265,6 @@ msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_company__postlogistics_office
-#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_config_settings__office
 msgid "Domicile Post office"
 msgstr "Haupt-Postamt"
 
@@ -280,7 +275,6 @@ msgstr "EPS"
 
 #. module: delivery_carrier_label_postlogistics
 #: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:455
-#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:456
 #, python-format
 msgid "Error when communicating with swisspost API: %s"
 msgstr ""
@@ -451,7 +445,6 @@ msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,help:delivery_carrier_label_postlogistics.field_res_company__postlogistics_logo
-#: model:ir.model.fields,help:delivery_carrier_label_postlogistics.field_res_config_settings__logo
 msgid ""
 "Optional company logo to show on label.\n"
 "If using an image / logo, please note the following:\n"
@@ -507,7 +500,6 @@ msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_company__postlogistics_password
-#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_config_settings__password
 msgid "Password"
 msgstr "Passwort"
 
@@ -528,7 +520,6 @@ msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,help:delivery_carrier_label_postlogistics.field_res_company__postlogistics_office
-#: model:ir.model.fields,help:delivery_carrier_label_postlogistics.field_res_config_settings__office
 #: model_terms:ir.ui.view,arch_db:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
 msgid "Post office which will receive the shipped goods"
 msgstr "Empfangendes Postamt der Lieferung"
@@ -543,7 +534,6 @@ msgstr ""
 #: model:ir.model,name:delivery_carrier_label_postlogistics.model_postlogistics_license
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_delivery_carrier__postlogistics_license_id
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_company__postlogistics_license_ids
-#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_config_settings__license_ids
 msgid "PostLogistics Franking License"
 msgstr ""
 
@@ -716,13 +706,11 @@ msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_company__postlogistics_username
-#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_config_settings__username
 msgid "Username"
 msgstr "Benutzername"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_company__postlogistics_wsdl_url
-#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_config_settings__wsdl_url
 msgid "WSDL URL"
 msgstr ""
 
