@@ -21,13 +21,6 @@ _compile_itemid = re.compile(r'[^0-9A-Za-z+\-_]')
 _compile_itemnum = re.compile(r'[^0-9]')
 
 
-def _sanitize_string(string):
-    """Temporary fix, remove all non ascii char as the API
-    weirdly doesn't support them in some cases.
-    """
-    return unidecode.unidecode(string)
-
-
 class PostlogisticsWebService(object):
 
     """ Connector with PostLogistics for labels using post.ch API
@@ -77,8 +70,8 @@ class PostlogisticsWebService(object):
         partner_name = partner.name or partner.parent_id.name
         email = parseaddr(partner.email)[1]
         recipient = {
-            'name1': _sanitize_string(partner_name),
-            'street': _sanitize_string(partner.street),
+            'name1': partner_name,
+            'street': partner.street,
             'zip': partner.zip,
             'city': partner.city,
             'email': email or None,
@@ -88,10 +81,10 @@ class PostlogisticsWebService(object):
             recipient['country'] = partner.country_id.code.upper()
 
         if partner.street2:
-            recipient['addressSuffix'] = _sanitize_string(partner.street2)
+            recipient['addressSuffix'] = partner.street2
 
         if partner.parent_id and partner.parent_id.name != partner_name:
-            recipient['name2'] = _sanitize_string(partner.parent_id.name)
+            recipient['name2'] = partner.parent_id.name
             recipient['personallyAddressed'] = False
 
         # Phone and / or mobile should only be displayed if instruction to
@@ -122,8 +115,8 @@ class PostlogisticsWebService(object):
         partner = company.partner_id
 
         customer = {
-            'name1': _sanitize_string(partner.name),
-            'street': _sanitize_string(partner.street),
+            'name1': partner.name,
+            'street': partner.street,
             'zip': partner.zip,
             'city': partner.city,
             'country': partner.country_id.code,
@@ -447,7 +440,7 @@ class PostlogisticsWebService(object):
                     'accept': 'application/json',
                     'content-type': 'application/json',
                 },
-                data=json.dumps(data),
+                data=json.dumps(data, ensure_ascii=False).encode("utf-8"),
                 timeout=60,
             )
 
