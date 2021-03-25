@@ -18,15 +18,15 @@ Available addons
 ----------------
 addon | version | summary
 --- | --- | ---
-[base_delivery_carrier_label](base_delivery_carrier_label/) | 10.0.1.2.0 | Base module for carrier labels
+[base_delivery_carrier_label](base_delivery_carrier_label/) | 10.0.1.3.0 | Base module for carrier labels
 [delivery_auto_refresh](delivery_auto_refresh/) | 10.0.1.0.0 | Auto-refresh delivery price in sales orders
 [delivery_carrier_b2c](delivery_carrier_b2c/) | 10.0.0.1.0 | Delivery Carrier Business To Customer
-[delivery_carrier_category](delivery_carrier_category/) | 10.0.1.0.0 | Adds a category to delivery carriers in order to help users classifying them
-[delivery_carrier_default_tracking_url](delivery_carrier_default_tracking_url/) | 10.0.1.0.0 | Adds the default tracking url on delivery carrier
-[delivery_carrier_deposit](delivery_carrier_deposit/) | 10.0.0.1.2 | Create deposit slips
-[delivery_carrier_label_postlogistics](delivery_carrier_label_postlogistics/) | 10.0.1.0.2 | Print postlogistics shipping labels
+[delivery_carrier_category](delivery_carrier_category/) | 10.0.1.1.0 | Adds a category to delivery carriers in order to help users classifying them
+[delivery_carrier_default_tracking_url](delivery_carrier_default_tracking_url/) | 10.0.1.1.0 | Adds the default tracking url on delivery carrier
+[delivery_carrier_deposit](delivery_carrier_deposit/) | 10.0.0.2.0 | Create deposit slips
+[delivery_carrier_label_postlogistics](delivery_carrier_label_postlogistics/) | 10.0.1.1.0 | Print postlogistics shipping labels
 [delivery_carrier_partner](delivery_carrier_partner/) | 10.0.1.0.0 | Add a partner in the delivery carrier
-[delivery_dropoff_site](delivery_dropoff_site/) | 10.0.1.0.1 | Send goods to sites in which customers come pick up package
+[delivery_dropoff_site](delivery_dropoff_site/) | 10.0.1.1.0 | Send goods to sites in which customers come pick up package
 [delivery_multi_destination](delivery_multi_destination/) | 10.0.1.1.0 | Multiple destinations for the same delivery method
 [delivery_price_by_category](delivery_price_by_category/) | 10.0.1.0.0 | Change delivery price based on product's category
 [delivery_price_rule_untaxed](delivery_price_rule_untaxed/) | 10.0.1.0.0 | Add untaxed amount to variables for price delivery price rule
