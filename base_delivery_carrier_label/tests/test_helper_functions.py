@@ -64,4 +64,3 @@ class TestHelperFunctions(TransactionCase):
             )
         )
         self.assertEqual(label.name, "hello_world.pdf")
-        self.assertFalse(picking.show_label_button)
