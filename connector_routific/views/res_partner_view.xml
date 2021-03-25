@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 Tecnativa - Carlos Roca
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="res_partner_form_view" model="ir.ui.view">
+        <field name="name">res.partner.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='vat']" position="after">
+
+            </xpath>
+            <xpath expr="//page[@name='internal_notes']" position="after">
+                <page name="routific_driver_config" string="Routific">
+                    <group name="stop">
+                        <field name="is_routific_driver" />
+                        <field name="routific_start" widget="float_time" />
+                        <field name="routific_end" widget="float_time" />
+                        <field name="delivery_duration" />
+                    </group>
+                    <separator
+                        string="Driver Settings"
+                        attrs="{'invisible': [('is_routific_driver', '=', False)]}"
+                    />
+                    <group
+                        name="driver"
+                        attrs="{'invisible': [('is_routific_driver', '=', False)]}"
+                    >
+                        <group name="left">
+                            <field name="routific_driver_active" />
+                            <field
+                                name="partner_start_id"
+                                attrs="{'required': [('is_routific_driver', '=', True)]}"
+                            />
+                            <field name="finish_at_start" />
+                            <field
+                                name="partner_end_id"
+                                attrs="{'invisible': [('finish_at_start', '=', True)]}"
+                            />
+                        </group>
+                        <group name="right">
+                            <field name="speed" />
+                            <field name="capacity" />
+                            <field name="routific_type_ids" widget="many2many_tags" />
+                            <field name="allowed_routific_type_ids" invisible="1" />
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
