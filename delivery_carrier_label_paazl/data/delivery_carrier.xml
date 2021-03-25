@@ -4,7 +4,7 @@
 <odoo>
     <record id="carrier_paazl" model="delivery.carrier">
         <field name="name">Paazl</field>
-        <field name="code">PAZZL</field>
+        <field name="code">PAAZL</field>
         <field name="delivery_type">paazl</field>
         <field name="integration_level">rate_and_ship</field>
         <field name="product_id" ref="delivery.product_product_delivery" />
