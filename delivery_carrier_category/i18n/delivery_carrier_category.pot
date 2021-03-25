@@ -57,6 +57,7 @@ msgstr ""
 #. module: delivery_carrier_category
 #: model:ir.actions.act_window,name:delivery_carrier_category.delivery_carrier_category_act_window
 #: model:ir.ui.menu,name:delivery_carrier_category.delivery_carrier_category_menu
+#: model:ir.ui.menu,name:delivery_carrier_category.delivery_carrier_category_sale_menu
 msgid "Delivery Methods Categories"
 msgstr ""
 
