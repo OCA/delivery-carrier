@@ -21,13 +21,13 @@ msgstr ""
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/patches/suds_recursion_patch.py:76
+#: code:addons/delivery_carrier_label_postlogistics/patches/suds_recursion_patch.py:77
 #, python-format
 msgid "%s : Connection error to retrieve URL : %s"
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/patches/suds_recursion_patch.py:79
+#: code:addons/delivery_carrier_label_postlogistics/patches/suds_recursion_patch.py:80
 #, python-format
 msgid "%s. Please check your credentials."
 msgstr ""
