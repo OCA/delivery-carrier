@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 Tecnativa - Carlos Roca
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="project_creation_from_picking_view" model="ir.ui.view">
+        <field name="name">routific.project.creator.form</field>
+        <field name="model">routific.project.creator</field>
+        <field name="arch" type="xml">
+            <form string="Create new Routific Project">
+                <group name="main">
+                    <field name="driver_ids" widget="many2many_tags" />
+                    <field name="config_id" />
+                    <field name="date" />
+                </group>
+                <footer>
+                    <button
+                        name="create_project"
+                        string="Create"
+                        type="object"
+                        class="oe_highlight"
+                    />
+                    <button special="cancel" string="Cancel" class="oe_link" />
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="act_wizard_create_project" model="ir.actions.act_window">
+        <field name="name">Create Routific Project</field>
+        <field name="res_model">routific.project.creator</field>
+        <field name="binding_model_id" ref="stock.model_stock_picking" />
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="project_creation_from_picking_view" />
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

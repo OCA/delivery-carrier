@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 Tecnativa - Carlos Roca
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="routific_project_driver_form_view" model="ir.ui.view">
+        <field name="name">routific.project.driver.form</field>
+        <field name="model">routific.project.driver</field>
+        <field name="arch" type="xml">
+            <form string="Project Driver">
+                <sheet>
+                    <group name="main">
+                        <field name="driver_id" />
+                        <field
+                            name="project_id"
+                            attrs="{'invisible': [('project_id', '=', False)]}"
+                        />
+                        <field name="routific_driver_id" readonly="1" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>
