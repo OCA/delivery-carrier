@@ -425,9 +425,9 @@ class PostlogisticsWebService(object):
             'ImageResolution': image_resolution,
             'PrintPreview': False,
         }
-        license = self._get_license(picking)
+        frankingLicense = self._get_license(picking)
         file_infos = {
-            'FrankingLicense': license,
+            'FrankingLicense': frankingLicense,
             'PpFranking': False,
             'CustomerSystem': 'Odoo',
             'Customer': post_customer,

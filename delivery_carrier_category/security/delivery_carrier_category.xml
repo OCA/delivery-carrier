@@ -24,16 +24,6 @@
         <field name="perm_unlink" eval="1"/>
     </record>
 
-    <record model="ir.model.access" id="delivery_carrier_category_sale_manager">
-        <field name="name">delivery.carrier.category Sales Manager</field>
-        <field name="model_id" ref="model_delivery_carrier_category"/>
-        <field name="group_id" ref="sales_team.group_sale_manager"/>
-        <field name="perm_read" eval="1"/>
-        <field name="perm_create" eval="1"/>
-        <field name="perm_write" eval="1"/>
-        <field name="perm_unlink" eval="1"/>
-    </record>
-
     <record model="ir.model.access" id="delivery_carrier_category_partner_manager">
         <field name="name">delivery.carrier.category Partner Manager</field>
         <field name="model_id" ref="model_delivery_carrier_category"/>
