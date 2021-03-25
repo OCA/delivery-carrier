@@ -315,7 +315,7 @@ msgid "Manifest"
 msgstr ""
 
 #. module: base_delivery_carrier_label
-#: code:addons/base_delivery_carrier_label/wizard/manifest_wizard.py:42
+#: code:addons/base_delivery_carrier_label/wizard/manifest_wizard.py:41
 #, python-format
 msgid "Manifest not implemented for '%s' carrier type."
 msgstr ""
