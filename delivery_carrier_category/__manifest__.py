@@ -7,7 +7,7 @@
     'summary': """
         Adds a category to delivery carriers in order to help users
         classifying them""",
-    'version': '10.0.1.0.0',
+    'version': '10.0.1.1.0',
     'license': 'AGPL-3',
     'author': 'ACSONE SA/NV,Odoo Community Association (OCA)',
     'website': 'https://github.com/OCA/delivery-carrier',
