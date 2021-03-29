@@ -172,7 +172,9 @@ class PostlogisticsWebService(object):
         franking_license = picking.carrier_id.postlogistics_license_id
         return franking_license.number
 
-    def _prepare_attributes(self, picking, pack=None, pack_num=None, pack_total=None):
+    def _prepare_attributes(
+        self, picking, pack=None, pack_num=None, pack_total=None, pack_weight=None
+    ):
         packaging = (
             pack
             and pack.packaging_id
@@ -180,7 +182,10 @@ class PostlogisticsWebService(object):
         )
         services = packaging._get_packaging_codes()
 
-        total_weight = pack.shipping_weight if pack else picking.shipping_weight
+        if pack_weight:
+            total_weight = pack_weight
+        else:
+            total_weight = pack.shipping_weight if pack else picking.shipping_weight
         total_weight *= 1000
 
         if not services:
