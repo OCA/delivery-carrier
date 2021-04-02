@@ -41,6 +41,8 @@ class DeliveryCarrierLabelPaazlCase(carrier_label_case.CarrierLabelCase):
                 mock_client.service.order.call_args[1]["products"]["product"],
                 "No products were sent",
             )
+            call_args = mock_client.service.order.call_args
+        return call_args
 
     @contextmanager
     def _setup_mock_client(self):
