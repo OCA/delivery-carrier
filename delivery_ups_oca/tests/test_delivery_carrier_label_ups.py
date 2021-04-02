@@ -69,6 +69,10 @@ class DeliveryCarrierLabelUpsCase(carrier_label_case.CarrierLabelCase):
     def _get_carrier(self):
         return self.env.ref("delivery_carrier_label_ups.carrier_ups")
 
+
+class TestDeliveryCarrierLabelUps(
+        DeliveryCarrierLabelUpsCase,
+        carrier_label_case.TestCarrierLabel):
     def test_cancel_shipment(self):
         self.assertTrue(self.picking.carrier_tracking_ref)
         with patch(
