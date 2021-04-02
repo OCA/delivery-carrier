@@ -13,6 +13,10 @@ class CarrierLabelCase(TransactionCase):
         super().setUp(*args, **kwargs)
         self._create_order_picking()
 
+    @property
+    def transfer_in_setup(self):
+        return True
+
     def _create_order_picking(self):
         """Create a sale order and deliver the picking"""
         self.order = self.env["sale.order"].create(self._sale_order_data())
@@ -29,6 +33,10 @@ class CarrierLabelCase(TransactionCase):
         self.order.action_confirm()
         self.picking = self.order.picking_ids
         self.picking.write(self._picking_data())
+        if self.transfer_in_setup:
+            self._transfer_order_picking()
+
+    def _transfer_order_picking(self):
         self.env["stock.immediate.transfer"].create(
             {"pick_ids": [(6, 0, self.picking.ids)]}
         ).process()
