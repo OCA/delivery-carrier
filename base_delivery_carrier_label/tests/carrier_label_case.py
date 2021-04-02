@@ -90,6 +90,8 @@ class CarrierLabelCase(TransactionCase):
             return
         self.fail("No labels found")
 
+
+class TestCarrierLabel(CarrierLabelCase):
     def test_labels(self):
         """Test if labels are created by the button"""
         self.picking.send_to_shipper()
