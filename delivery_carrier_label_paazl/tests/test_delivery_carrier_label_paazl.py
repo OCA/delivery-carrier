@@ -35,8 +35,11 @@ class DeliveryCarrierLabelPaazlCase(carrier_label_case.CarrierLabelCase):
 
     def _create_order_picking(self):
         self._create_account()
+        super()._create_order_picking()
+
+    def _transfer_order_picking(self):
         with self._setup_mock_client() as mock_client:
-            super()._create_order_picking()
+            super()._transfer_order_picking()
             self.assertTrue(
                 mock_client.service.order.call_args[1]["products"]["product"],
                 "No products were sent",
