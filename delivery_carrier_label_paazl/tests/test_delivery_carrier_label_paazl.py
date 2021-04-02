@@ -171,10 +171,11 @@ class DeliveryCarrierLabelPaazlCasePackage(DeliveryCarrierLabelPaazlCase):
     def _picking_data(self):
         self.picking.move_line_ids.write({'qty_done': 1})
         self.picking._put_in_pack()
-        self.picking.package_ids.write({
-            'name': 'Test',
-            'width': 42,
-            'height': 42,
-            'length': 42,
-        })
+        self.picking.package_ids.packaging_id = self.env[
+            "product.packaging"].create({
+                'name': 'Test',
+                'width': 42,
+                'height': 42,
+                'length': 42,
+            })
         return super()._picking_data()
