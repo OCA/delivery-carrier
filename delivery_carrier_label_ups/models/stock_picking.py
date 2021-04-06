@@ -50,7 +50,7 @@ class StockPicking(models.Model):
             )
         return result
 
-    def _ups_send(self):
+    def _ups_send(self, force=False):
         """Send packages of the picking to UPS
         return a list of dicts {'exact_price': 'tracking_number':}
         suitable for delivery.carrier#send_shipping"""
@@ -60,6 +60,12 @@ class StockPicking(models.Model):
                 raise UserError(
                     _("Picking %s must set exactly one shipping option") % this.name
                 )
+            if this.carrier_tracking_ref and not force:
+                result.append({
+                    "exact_price": 0,
+                    "tracking_number": this.carrier_tracking_ref,
+                })
+                continue
             this._set_a_default_package()
             status = this._ups_request("shipping", this._ups_shipping_data())
             this._ups_raise_error(status)
