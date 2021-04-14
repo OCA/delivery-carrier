@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2019 Camptocamp SA
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_picking_withcarrier_out_form" model="ir.ui.view">
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="delivery.view_picking_withcarrier_out_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page//group[@name='carrier_data']/.." position="after">
+                <separator
+                    string="Delivery instructions"
+                    attrs="{'invisible': [('delivery_type', '!=', 'postlogistics')]}"
+                />
+                <group>
+                    <group
+                        name="delivery_instructions"
+                        attrs="{'invisible': [('delivery_type', '!=', 'postlogistics')]}"
+                    >
+                        <field name="delivery_fixed_date" />
+                        <field name="delivery_place" />
+                        <field name="delivery_phone" />
+                        <field name="delivery_mobile" />
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
