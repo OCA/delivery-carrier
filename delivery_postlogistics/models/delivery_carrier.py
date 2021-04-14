@@ -1,235 +1,136 @@
-# Copyright 2013-2019 Yannick Vaucher (Camptocamp SA)
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-import logging
+# Copyright 2013-2016 Camptocamp SA
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models, _
-
-
-_logger = logging.getLogger(__name__)
-
-
-class PostlogisticsLicense(models.Model):
-    _name = 'postlogistics.license'
-    _description = 'PostLogistics Franking License'
-
-    _order = 'sequence'
-
-    name = fields.Char(string='Description',
-                       translate=True,
-                       required=True)
-    number = fields.Char(string='Number',
-                         required=True)
-    company_id = fields.Many2one(comodel_name='res.company',
-                                 string='Company',
-                                 required=True,
-                                 default=lambda self: self.env.user.company_id)
-    sequence = fields.Integer(
-        string='Sequence',
-        help="Gives the sequence on company to define priority on license "
-             "when multiple licenses are available for the same group of "
-             "service."
-    )
-
-
-POSTLOGISTIC_TYPES = [
-    ('label_layout', 'Label Layout'),
-    ('output_format', 'Output Format'),
-    ('resolution', 'Output Resolution'),
-    ('basic', 'Basic Service'),
-    ('additional', 'Additional Service'),
-    ('delivery', 'Delivery Instructions')
-]
-
-
-class DeliveryCarrierTemplateOption(models.Model):
-    """ Set name translatable and add service group """
-    _inherit = 'delivery.carrier.template.option'
-
-    name = fields.Char(translate=True)
-    postlogistics_type = fields.Selection(
-        selection=POSTLOGISTIC_TYPES,
-        string="PostLogistics option type",
-    )
-    # relation tables to manage compatiblity between basic services
-    # and other services
-    postlogistics_basic_service_ids = fields.Many2many(
-        comodel_name='delivery.carrier.template.option',
-        relation='postlogistics_compatibility_service_rel',
-        column1='service_id',
-        column2='basic_service_id',
-        string="Basic Services",
-        domain=[('postlogistics_type', '=', 'basic')],
-        help="List of basic service for which this service is compatible",
-    )
-    postlogistics_additonial_service_ids = fields.Many2many(
-        comodel_name='delivery.carrier.template.option',
-        relation='postlogistics_compatibility_service_rel',
-        column1='basic_service_id',
-        column2='service_id',
-        string="Compatible Additional Services",
-        domain=[('postlogistics_type', '=', 'additional')],
-    )
-    postlogistics_delivery_instruction_ids = fields.Many2many(
-        comodel_name='delivery.carrier.template.option',
-        relation='postlogistics_compatibility_service_rel',
-        column1='basic_service_id',
-        column2='service_id',
-        string="Compatible Delivery Instructions",
-        domain=[('postlogistics_type', '=', 'delivery')],
-    )
-
-
-class DeliveryCarrierOption(models.Model):
-    """ Set name translatable and add service group """
-    _inherit = 'delivery.carrier.option'
-
-    name = fields.Char(translate=True)
-
-    allowed_tmpl_options_ids = fields.Many2many(
-        'delivery.carrier.template.option',
-        compute='_compute_allowed_tmpl_options_ids',
-        store=False,
-    )
-
-    @api.depends('carrier_id.allowed_tmpl_options_ids')
-    def _compute_allowed_tmpl_options_ids(self):
-        """ Gets the available template options from related delivery.carrier
-            (be it from cache or context)."""
-        for option in self:
-            defaults = self.env.context.get('default_allowed_tmpl_options_ids')
-            option.allowed_tmpl_options_ids = (
-                option.carrier_id.allowed_tmpl_options_ids or defaults or False
-            )
+from odoo import _, api, fields, models
+from odoo.exceptions import UserError
 
 
 class DeliveryCarrier(models.Model):
     """ Add service group """
-    _inherit = 'delivery.carrier'
 
-    delivery_type = fields.Selection(selection_add=[('postlogistics',
-                                                     'Post logistics')])
-    allowed_tmpl_options_ids = fields.Many2many(
-        'delivery.carrier.template.option',
-        compute='_compute_allowed_options_ids',
-        store=False,
+    _inherit = "delivery.carrier"
+
+    delivery_type = fields.Selection(
+        selection_add=[("postlogistics", "Post logistics")]
+    )
+    postlogistics_default_packaging_id = fields.Many2one(
+        "product.packaging", domain=[("package_carrier_type", "=", "postlogistics")]
     )
 
-    @api.depends('delivery_type',
-                 'available_option_ids',
-                 'available_option_ids.tmpl_option_id',
-                 'available_option_ids.postlogistics_type',
-                 )
-    def _compute_basic_service_ids(self):
-        """ Search in all options for PostLogistics basic services if set """
-        for carrier in self:
-            if carrier.delivery_type != 'postlogistics':
-                continue
+    postlogistics_endpoint_url = fields.Char(
+        string="Endpoint URL", default="https://wedecint.post.ch/", required=True,
+    )
+    postlogistics_client_id = fields.Char(
+        string="Client ID", groups="base.group_system"
+    )
+    postlogistics_client_secret = fields.Char(
+        string="Client Secret", groups="base.group_system"
+    )
+    postlogistics_logo = fields.Binary(
+        string="Company Logo on Post labels",
+        help="Optional company logo to show on label.\n"
+        "If using an image / logo, please note the following:\n"
+        "– Image width: 47 mm\n"
+        "– Image height: 25 mm\n"
+        "– File size: max. 30 kb\n"
+        "– File format: GIF or PNG\n"
+        "– Colour table: indexed colours, max. 200 colours\n"
+        "– The logo will be printed rotated counter-clockwise by 90°"
+        "\n"
+        "We recommend using a black and white logo for printing in "
+        " the ZPL2 format.",
+    )
+    postlogistics_office = fields.Char(
+        string="Domicile Post office",
+        help="Post office which will receive the shipped goods",
+    )
 
-            options = carrier.available_option_ids.filtered(
-                lambda option: option.postlogistics_type == 'basic'
-            ).mapped('tmpl_option_id')
-
-            if not options:
-                continue
-            self.postlogistics_basic_service_ids = options
-
-    @api.depends('delivery_type',
-                 'postlogistics_basic_service_ids',
-                 'available_option_ids',
-                 'available_option_ids.postlogistics_type',
-                 )
-    def _compute_allowed_options_ids(self):
-        """ Compute allowed delivery.carrier.option.
-
-        We do this to ensure the user first select a basic service. And
-        then he adds additional services.
-        """
-        option_template_obj = self.env['delivery.carrier.template.option']
-
-        for carrier in self:
-            allowed = option_template_obj.browse()
-            domain = []
-            if carrier.delivery_type != 'postlogistics':
-                domain.append(('partner_id', '=', False))
-            else:
-                basic_services = carrier.postlogistics_basic_service_ids
-                if basic_services:
-                    related_services = option_template_obj.search(
-                        [('postlogistics_basic_service_ids', 'in',
-                          basic_services.ids)]
-                    )
-                    allowed |= related_services
-
-                # Allows to set multiple optional single option in order to
-                # let the user select them
-                single_option_types = [
-                    'label_layout',
-                    'output_format',
-                    'resolution',
-                ]
-                selected_single_options = [
-                    opt.tmpl_option_id.postlogistics_type
-                    for opt in carrier.available_option_ids
-                    if opt.postlogistics_type in single_option_types and
-                    opt.mandatory]
-                if selected_single_options != single_option_types:
-                    services = option_template_obj.search(
-                        [('postlogistics_type', 'in', single_option_types),
-                         ('postlogistics_type', 'not in',
-                          selected_single_options)],
-                    )
-                    allowed |= services
-                partner = self.env.ref('delivery_carrier_label_postlogistics'
-                                       '.partner_postlogistics')
-                domain.append(('partner_id', '=', partner.id)),
-                domain.append(('id', 'in', allowed.ids))
-
-            carrier.allowed_tmpl_options_ids = option_template_obj.search(
-                domain)
+    postlogistics_label_layout = fields.Many2one(
+        comodel_name="postlogistics.delivery.carrier.template.option",
+        string="Label layout",
+        domain=[("postlogistics_type", "=", "label_layout")],
+    )
+    postlogistics_output_format = fields.Many2one(
+        comodel_name="postlogistics.delivery.carrier.template.option",
+        string="Output format",
+        domain=[("postlogistics_type", "=", "output_format")],
+    )
+    postlogistics_resolution = fields.Many2one(
+        comodel_name="postlogistics.delivery.carrier.template.option",
+        string="Resolution",
+        domain=[("postlogistics_type", "=", "resolution")],
+    )
+    postlogistics_tracking_format = fields.Selection(
+        [
+            ("postlogistics", "Use default postlogistics tracking numbers"),
+            ("picking_num", "Use picking number with pack counter"),
+        ],
+        string="Tracking number format",
+        default="postlogistics",
+        help="Allows you to define how the ItemNumber (the last 8 digits) "
+        "of the tracking number will be generated:\n"
+        "- Default postlogistics numbers: The webservice generates it"
+        " for you.\n"
+        "- Picking number with pack counter: Generate it using the "
+        "digits of picking name and add the pack number. 2 digits for"
+        "pack number and 6 digits for picking number. (eg. 07000042 "
+        "for picking 42 and 7th pack",
+    )
+    postlogistics_proclima_logo = fields.Boolean(
+        "Print ProClima logo",
+        help="The “pro clima” logo indicates an item for which the "
+        "surcharge for carbon-neutral shipping has been paid and a "
+        "contract to that effect has been signed. For Letters with "
+        "barcode (BMB) domestic, the ProClima logo is printed "
+        "automatically (at no additional charge)",
+    )
 
     postlogistics_license_id = fields.Many2one(
-        comodel_name='postlogistics.license',
-        string='PostLogistics Franking License',
+        comodel_name="postlogistics.license", string="Franking License",
     )
-    postlogistics_basic_service_ids = fields.One2many(
-        comodel_name='delivery.carrier.template.option',
-        compute='_compute_basic_service_ids',
-        string='PostLogistics Service Group',
-        help="Basic Service defines the available "
-             "additional options for this delivery method",
+    zpl_patch_string = fields.Char(
+        string="ZPL Patch String", default="^XA^CW0,E:TT0003M_.TTF^XZ^XA^CI28"
     )
 
-    @api.multi
+    @api.onchange("prod_environment")
+    def onchange_prod_environment(self):
+        """
+        Auto change the end point url following the environment
+        - Test: https://wedecint.post.ch/
+        - Prod: https://wedec.post.ch/
+        """
+        for carrier in self:
+            if carrier.prod_environment:
+                carrier.postlogistics_endpoint_url = "https://wedec.post.ch/"
+            else:
+                carrier.postlogistics_endpoint_url = "https://wedecint.post.ch/"
+
+    def postlogistics_get_tracking_link(self, picking):
+        return (
+            "https://service.post.ch/EasyTrack/"
+            "submitParcelData.do?formattedParcelCodes=%s" % picking.carrier_tracking_ref
+        )
+
+    def postlogistics_cancel_shipment(self, pickings):
+        raise UserError(_("This feature is under development"))
+
     def postlogistics_rate_shipment(self, order):
         self.ensure_one()
-        delivery_product_price = self.product_id and self.product_id.lst_price
-        if delivery_product_price:
-            return {
-                'success': True,
-                'price': delivery_product_price,
-                'error_message': False,
-                'warning_message': False
-            }
-        else:
-            return {
-                'success': False,
-                'price': 0.0,
-                'error_message': False,
-                'warning_message': _(
-                    'No sales price is defined on delivery product % ' %
-                    self.product_id)
-            }
+        delivery_product_price = self.product_id and self.product_id.lst_price or 0
+        return {
+            "success": True,
+            "price": delivery_product_price,
+            "error_message": False,
+            "warning_message": False,
+        }
 
-    @api.multi
     def postlogistics_send_shipping(self, pickings):
-        return [{'exact_price': False, 'tracking_number': False}]
+        """
+        It will generate the labels for all the packages of the picking.
+        Packages are mandatory in this case
+        """
+        for pick in pickings:
+            pick._set_a_default_package()
+            pick._generate_postlogistics_label()
 
-    @api.multi
-    def postlogistics_get_tracking_link(self, picking):
-        return "https://service.post.ch/EasyTrack/" \
-               "submitParcelData.do?formattedParcelCodes=%s" % \
-               picking.carrier_tracking_ref
-
-    @api.multi
-    def postlogistics_cancel_shipment(self, pickings):
-        raise NotImplementedError()
+        return [{"exact_price": False, "tracking_number": False}]
