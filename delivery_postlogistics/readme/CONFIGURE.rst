@@ -6,8 +6,8 @@
 
 To configure:
 
-* Go to `Configurations -> Settings -> Postlogistics`
-* Set your login informations
+* Go to `Inventory -> Configuration -> Delivery -> Shipping Methods`
+* Create new shipping methods for postlogistics and set your login informations
 * launch the Update PostLogistics Services
 
 This will load available services and generate carrier options.
