@@ -1,5 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_postlogistics_license_salesman,postlogistics.license.salesman,model_postlogistics_license,sales_team.group_sale_salesman,1,0,0,0
-access_postlogistics_license_manager,postlogistics.license.manager,model_postlogistics_license,sales_team.group_sale_manager,1,1,1,1
-access_postlogistics_license_stock_user,postlogistics.license.stock_user,model_postlogistics_license,stock.group_stock_user,1,0,0,0
-access_postlogistics_license_stock_manager,postlogistics.license.stock_manager,model_postlogistics_license,stock.group_stock_manager,1,1,1,1

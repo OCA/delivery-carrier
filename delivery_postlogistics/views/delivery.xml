@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2019 Camptocamp SA
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="delivery_carrier_postlogistics_inherit_view" model="ir.ui.view">
+        <field name="name">delivery.carrier.postlogistics.inherit.view</field>
+        <field name="model">delivery.carrier</field>
+        <field name="inherit_id" ref="delivery.view_delivery_carrier_form" />
+        <field name="arch" type="xml">
+            <page name="destination" position="after">
+                <page
+                    name="postlogistics"
+                    string="Postlogistics"
+                    attrs="{'invisible': [('delivery_type', '!=', 'postlogistics')]}"
+                >
+                    <group>
+                        <group string="Credentials">
+                            <field
+                                name="postlogistics_endpoint_url"
+                                attrs="{'required': [('delivery_type', '=', 'postlogistics')]}"
+                            />
+                            <field
+                                name="postlogistics_client_id"
+                                attrs="{'required': [('delivery_type', '=', 'postlogistics')]}"
+                            />
+                            <field
+                                name="postlogistics_client_secret"
+                                attrs="{'required': [('delivery_type', '=', 'postlogistics')]}"
+                            />
+                        </group>
+                        <group string="Template">
+                            <field
+                                name="postlogistics_label_layout"
+                                attrs="{'required': [('delivery_type', '=', 'postlogistics')]}"
+                            />
+                            <field
+                                name="postlogistics_output_format"
+                                attrs="{'required': [('delivery_type', '=', 'postlogistics')]}"
+                            />
+                            <field
+                                name="postlogistics_resolution"
+                                attrs="{'required': [('delivery_type', '=', 'postlogistics')]}"
+                            />
+                        </group>
+                        <group string="Misc.">
+                            <field
+                                name="postlogistics_license_id"
+                                attrs="{'required': [('delivery_type', '=', 'postlogistics')]}"
+                            />
+                            <field
+                                name="postlogistics_default_packaging_id"
+                                attrs="{'required': [('delivery_type', '=', 'postlogistics')]}"
+                            />
+                            <field
+                                name="postlogistics_tracking_format"
+                                attrs="{'required': [('delivery_type', '=', 'postlogistics')]}"
+                            />
+                            <field
+                                name="postlogistics_proclima_logo"
+                                attrs="{'required': [('delivery_type', '=', 'postlogistics')]}"
+                            />
+                            <field name="postlogistics_office" />
+                        </group>
+                        <group string="Post Label Logo">
+                            <field
+                                name="postlogistics_logo"
+                                widget="image"
+                                nolabel="1"
+                            />
+                        </group>
+                        <group string="ZPL Patch">
+                            <field name="zpl_patch_string" />
+                        </group>
+                    </group>
+                </page>
+            </page>
+        </field>
+    </record>
+    <!-- <record
+        id="action_postlogistics_delivery_carrier_options"
+        model="ir.actions.act_window"
+    >
+        <field name="name">Postlogistics Delivery Carrier Options</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">postlogistics.delivery.carrier.option</field>
+        <field name='view_mode'>tree,form</field>
+    </record> -->
+    <!-- <menuitem
+        id="menu_postlogistics_delivery_carrier_options"
+        name="Delivery Carrier Options"
+        parent="delivery.menu_delivery"
+        sequence="20"
+        action="action_postlogistics_delivery_carrier_options"
+    /> -->
+</odoo>
