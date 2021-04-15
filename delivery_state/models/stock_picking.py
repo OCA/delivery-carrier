@@ -8,13 +8,23 @@ from odoo import api, fields, models
 class StockPicking(models.Model):
     _inherit = "stock.picking"
 
-    date_shipped = fields.Date(string="Shipment Date", readonly=True,)
-    date_delivered = fields.Datetime(string="Delivery Date", readonly=True,)
+    date_shipped = fields.Date(
+        string="Shipment Date",
+        readonly=True,
+    )
+    date_delivered = fields.Datetime(
+        string="Delivery Date",
+        readonly=True,
+    )
     tracking_state = fields.Char(
-        string="Tracking state", readonly=True, index=True, tracking=True,
+        string="Tracking state",
+        readonly=True,
+        index=True,
+        tracking=True,
     )
     tracking_state_history = fields.Text(
-        string="Tracking state history", readonly=True,
+        string="Tracking state history",
+        readonly=True,
     )
     delivery_state = fields.Selection(
         selection=[
