@@ -8,24 +8,12 @@ class StockPicking(models.Model):
 
     number_of_packages = fields.Integer(
         string="Number of Packages",
-        default=1,
-        copy=False,
+        compute="_compute_number_of_packages",
+        readonly=False,
+        store=True,
     )
 
-
-class StockMoveLine(models.Model):
-    _inherit = "stock.move.line"
-
-    @api.onchange("result_package_id")
-    def onchange_package_ids(self):
-        """TODO: in v13 Change field to compute readonly=False"""
-        picking = self.picking_id
-        picking.number_of_packages = len(picking.package_ids) or 1
-
-    def write(self, vals):
-        """TODO: in v13 Change field to compute readonly=False"""
-        if "result_package_id" in vals:
-            package_op = vals.get("result_package_id") and 1 or -1
-            for picking in self.mapped("picking_id"):
-                picking.number_of_packages += package_op
-        return super().write(vals)
+    @api.depends("package_ids")
+    def _compute_number_of_packages(self):
+        for picking in self:
+            picking.number_of_packages = len(picking.package_ids) or 1
