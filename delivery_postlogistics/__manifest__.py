@@ -3,7 +3,7 @@
 {
     "name": "Postlogistics Shipping",
     "summary": "Print postlogistics shipping labels",
-    "version": "13.0.1.0.0",
+    "version": "13.0.1.0.1",
     "author": "Camptocamp,Odoo Community Association (OCA)",
     "maintainer": "Camptocamp",
     "license": "AGPL-3",
