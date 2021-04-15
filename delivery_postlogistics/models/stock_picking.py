@@ -38,13 +38,11 @@ class StockPicking(models.Model):
                 ("picking_id", "=", self.id),
             ]
         )
-        package_ids = []
+        package_ids = set()
         for operation in operations:
             # Take the destination package. If empty, the package is
             # moved so take the source one.
-            package_ids.append(
-                operation.result_package_id.id or operation.package_id.id
-            )
+            package_ids.add(operation.result_package_id.id or operation.package_id.id)
 
         packages = self.env["stock.quant.package"].browse(package_ids)
         return packages
