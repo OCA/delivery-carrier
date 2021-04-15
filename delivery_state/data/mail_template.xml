@@ -49,6 +49,5 @@
             name="lang"
         >${object.sale_id.partner_id.lang or object.partner_id.lang}</field>
         <field name="auto_delete" eval="True" />
-        <field name="user_signature" eval="False" />
     </record>
 </odoo>

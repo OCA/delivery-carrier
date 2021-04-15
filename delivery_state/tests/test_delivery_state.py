@@ -72,15 +72,15 @@ class TestDeliveryState(SavepointCase):
         delivery_lines = self.sale.order_line.filtered(lambda r: r.is_delivery)
         delivery_price = sum(delivery_lines.mapped("price_unit"))
         self.assertEqual(float_compare(delivery_price, 99.99, precision_digits=2), 0)
-        self.assertEquals(len(delivery_lines), 1)
+        self.assertEqual(len(delivery_lines), 1)
         self.sale.action_confirm()
         picking = self.sale.picking_ids[0]
-        self.assertEquals(len(picking.move_lines), 1)
-        self.assertEquals(picking.carrier_id, self.carrier)
+        self.assertEqual(len(picking.move_lines), 1)
+        self.assertEqual(picking.carrier_id, self.carrier)
         picking.action_confirm()
         picking.action_assign()
         picking.send_to_shipper()
-        self.assertEquals(picking.delivery_state, "shipping_recorded_in_carrier")
+        self.assertEqual(picking.delivery_state, "shipping_recorded_in_carrier")
         self.assertTrue(picking.date_shipped)
         self.assertFalse(picking.tracking_state_history)
         picking.tracking_state_update()
@@ -91,7 +91,7 @@ class TestDeliveryState(SavepointCase):
             "fixed_cancel_shipment", lambda *args: True
         )
         picking.cancel_shipment()
-        self.assertEquals(picking.delivery_state, "canceled_shipment")
+        self.assertEqual(picking.delivery_state, "canceled_shipment")
         self.assertFalse(picking.date_shipped)
         self.assertFalse(picking.date_delivered)
 
@@ -109,7 +109,7 @@ class TestDeliveryState(SavepointCase):
         picking.company_id.stock_mail_confirmation_template_id = delivery_template
         picking.carrier_tracking_ref = "XX-0000"
         picking.move_lines.quantity_done = 1
-        picking.action_done()
+        picking._action_done()
         mail = self.env["mail.message"].search(
             [("partner_ids", "in", self.partner.ids)]
         )
