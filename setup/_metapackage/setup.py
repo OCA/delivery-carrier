@@ -17,6 +17,7 @@ setuptools.setup(
         'odoo13-addon-delivery_package_fee',
         'odoo13-addon-delivery_package_number',
         'odoo13-addon-delivery_postlogistics',
+        'odoo13-addon-delivery_postlogistics_server_env',
         'odoo13-addon-delivery_price_method',
         'odoo13-addon-delivery_purchase',
         'odoo13-addon-delivery_state',
