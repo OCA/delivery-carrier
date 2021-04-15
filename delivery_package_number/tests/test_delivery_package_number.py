@@ -42,14 +42,13 @@ class TestDeliveryPackageNumber(SavepointCase):
         picking_form.number_of_packages = 3
         picking_form.save()
         self.assertEqual(self.picking.number_of_packages, 3)
-        # Now we put in pack some quantities and the number of packages is set
-        # as the number of packs is added to the number already set
-        self.picking.put_in_pack()
-        self.assertEqual(self.picking.number_of_packages, 4)
+        # We add a package and it recalculates
+        self.picking.action_put_in_pack()
+        self.assertEqual(self.picking.number_of_packages, 1)
         self.ml2.qty_done = 5
-        self.picking.put_in_pack()
-        self.assertEqual(self.picking.number_of_packages, 5)
-        # We can later set it manually if we want to
-        picking_form.number_of_packages = 2
-        picking_form.save()
+        self.picking.action_put_in_pack()
         self.assertEqual(self.picking.number_of_packages, 2)
+        # We can later set it manually if we want to
+        picking_form.number_of_packages = 3
+        picking_form.save()
+        self.assertEqual(self.picking.number_of_packages, 3)
