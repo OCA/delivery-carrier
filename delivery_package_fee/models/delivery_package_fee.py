@@ -13,3 +13,4 @@ class DeliveryPackageFee(models.Model):
     product_id = fields.Many2one(
         comodel_name="product.product", required=True, ondelete="restrict",
     )
+    active = fields.Boolean(string="Active", default=True)

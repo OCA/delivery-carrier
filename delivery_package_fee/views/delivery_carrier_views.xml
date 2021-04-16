@@ -21,6 +21,7 @@
                                     name="product_id"
                                     context="{'default_type': 'service', 'default_sale_ok': False, 'default_purchase_ok': False}"
                                 />
+                                <field name="active" />
                             </tree>
                         </field>
                     </group>
