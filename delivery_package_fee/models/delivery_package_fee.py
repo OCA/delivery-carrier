@@ -17,3 +17,4 @@ class DeliveryPackageFee(models.Model):
         required=True,
         ondelete="restrict",
     )
+    active = fields.Boolean(string="Active", default=True)
