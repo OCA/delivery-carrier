@@ -466,6 +466,7 @@ msgstr ""
 
 #. module: base_delivery_carrier_label
 #: code:addons/base_delivery_carrier_label/models/stock_picking.py:276
+#: code:addons/base_delivery_carrier_label/models/stock_picking.py:281
 #, python-format
 msgid "Some labels already exist for the picking %s.\n"
 "Please delete the existing labels in the attachments of this picking and try again"
@@ -563,6 +564,7 @@ msgstr ""
 
 #. module: base_delivery_carrier_label
 #: code:addons/base_delivery_carrier_label/models/stock_picking.py:173
+#: code:addons/base_delivery_carrier_label/models/stock_picking.py:178
 #, python-format
 msgid "You should not remove a mandatory option.Please cancel the edit or add back the option: %s."
 msgstr ""
