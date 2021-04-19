@@ -476,6 +476,7 @@ msgstr ""
 
 #. module: base_delivery_carrier_label
 #: code:addons/base_delivery_carrier_label/models/stock_picking.py:276
+#: code:addons/base_delivery_carrier_label/models/stock_picking.py:281
 #, python-format
 msgid ""
 "Some labels already exist for the picking %s.\n"
@@ -582,6 +583,7 @@ msgstr "您可以从计算机上传文件，也可以将互联网链接复制/�
 
 #. module: base_delivery_carrier_label
 #: code:addons/base_delivery_carrier_label/models/stock_picking.py:173
+#: code:addons/base_delivery_carrier_label/models/stock_picking.py:178
 #, python-format
 msgid ""
 "You should not remove a mandatory option.Please cancel the edit or add back "
