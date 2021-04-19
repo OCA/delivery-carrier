@@ -1,0 +1,79 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* delivery_send_to_shipper_at_operation
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: delivery_send_to_shipper_at_operation
+#: model:ir.model.fields,help:delivery_send_to_shipper_at_operation.field_delivery_carrier__send_delivery_notice_picking_type_ids
+msgid ""
+"\n"
+"            When an operation of the listed type will be mark as done, the\n"
+"            notification will be sent to the carrier (instead of the default\n"
+"            behavior, which is whenever a delivery method is set on an\n"
+"            operation).\n"
+"        "
+msgstr ""
+
+#. module: delivery_send_to_shipper_at_operation
+#: model:ir.model.fields,help:delivery_send_to_shipper_at_operation.field_delivery_carrier__send_delivery_notice_on
+msgid ""
+"\n"
+"    'Ship operation' (default): send the carrier notification after the\n"
+"    operation having a delivery method defined has been marked as done.\n"
+"\n"
+"    'Defined operations': send the carrier notification after the operation\n"
+"    of the chosen types has been marked as done. In this case, the\n"
+"    carrier will be taken looking at the next operations until a\n"
+"    carrier is found. For instance, in a pick + pack + ship setup,\n"
+"    if you set the notification to be sent on the pack operation type,\n"
+"    it will look at the carrier defined in the next operation (the ship in this case).\n"
+"\n"
+"    If no notification have been sent when reaching the ship step\n"
+"    (e.g. re-route goods from carrier A to B), then a fallback ensure the\n"
+"    ship operation will trigger the call anyway.\n"
+msgstr ""
+
+#. module: delivery_send_to_shipper_at_operation
+#: model:ir.model.fields.selection,name:delivery_send_to_shipper_at_operation.selection__delivery_carrier__send_delivery_notice_on__custom
+msgid "Defined operations"
+msgstr ""
+
+#. module: delivery_send_to_shipper_at_operation
+#: model:ir.model.fields,field_description:delivery_send_to_shipper_at_operation.field_stock_picking__delivery_notification_sent
+msgid "Delivery Notification Sent"
+msgstr ""
+
+#. module: delivery_send_to_shipper_at_operation
+#: model:ir.model.fields,field_description:delivery_send_to_shipper_at_operation.field_delivery_carrier__send_delivery_notice_on
+msgid "Send delivery notice on"
+msgstr ""
+
+#. module: delivery_send_to_shipper_at_operation
+#: model:ir.model.fields,field_description:delivery_send_to_shipper_at_operation.field_delivery_carrier__send_delivery_notice_picking_type_ids
+msgid "Send delivery notice operation types"
+msgstr ""
+
+#. module: delivery_send_to_shipper_at_operation
+#: model:ir.model.fields.selection,name:delivery_send_to_shipper_at_operation.selection__delivery_carrier__send_delivery_notice_on__ship
+msgid "Ship operation"
+msgstr ""
+
+#. module: delivery_send_to_shipper_at_operation
+#: model:ir.model,name:delivery_send_to_shipper_at_operation.model_delivery_carrier
+msgid "Shipping Methods"
+msgstr ""
+
+#. module: delivery_send_to_shipper_at_operation
+#: model:ir.model,name:delivery_send_to_shipper_at_operation.model_stock_picking
+msgid "Transfer"
+msgstr ""
