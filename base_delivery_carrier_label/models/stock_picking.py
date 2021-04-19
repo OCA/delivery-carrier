@@ -116,6 +116,13 @@ class StockPicking(models.Model):
                 package = self.env['stock.quant.package'].create({})
                 move_lines.write({'result_package_id': package.id})
 
+    def _set_carrier_tracking_ref(self, shipping_labels):
+        if len(shipping_labels) == 1:
+            label = shipping_labels[0]
+            self.write(
+                {"carrier_tracking_ref": label.get("tracking_number")}
+            )
+
     def action_generate_carrier_label(self):
         """ Method for the 'Generate Label' button.
 
@@ -128,9 +135,7 @@ class StockPicking(models.Model):
             shipping_labels = pick.generate_shipping_labels()
             for label in shipping_labels:
                 pick.attach_shipping_label(label)
-            if len(shipping_labels) == 1:
-                pick.write(
-                    {'carrier_tracking_ref': label.get('tracking_number')})
+            pick._set_carrier_tracking_ref(shipping_labels)
         return True
 
     @api.onchange('carrier_id')

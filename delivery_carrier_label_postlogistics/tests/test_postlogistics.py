@@ -112,6 +112,11 @@ class TestPostlogistics(common.SavepointCase):
             'location_dest_id': customer_location.id,
         })
         cls.env.user.lang = 'en_US'
+        # creating the default package requires to have move lines
+        # thus the picking must be confirmed
+        cls.picking.action_assign()
+        cls.picking.action_confirm()
+        cls.picking._set_a_default_package()
 
     def test_store_label(self):
         with recorder.use_cassette('test_store_label') as cassette:
@@ -121,10 +126,15 @@ class TestPostlogistics(common.SavepointCase):
         self.assertEqual(res[0]["file_type"], "pdf")
         self.assertEqual(res[0]["name"], "{}.pdf".format(ref))
         self.assertEqual(res[0]["file"][:30], b"JVBERi0xLjQKJeLjz9MKMiAwIG9iag")
-        self.assertEqual(self.picking.carrier_tracking_ref, ref)
+        self.assertEqual(res[0]["tracking_number"], ref)
 
     def test_missing_language(self):
         self.env.user.lang = False
         with recorder.use_cassette('test_missing_language') as cassette:
-            self.picking._generate_postlogistics_label()
+            res = self.picking._generate_postlogistics_label()
             self.assertEqual(len(cassette.requests), 2)
+        ref = "996001321700005958"
+        self.assertEqual(res[0]["file_type"], "pdf")
+        self.assertEqual(res[0]["name"], "{}.pdf".format(ref))
+        self.assertEqual(res[0]["file"][:30], b"JVBERi0xLjQKJeLjz9MKMiAwIG9iag")
+        self.assertEqual(res[0]["tracking_number"], ref)
