@@ -487,7 +487,6 @@ msgid "Show Label Button"
 msgstr ""
 
 #. module: base_delivery_carrier_label
-#: code:addons/base_delivery_carrier_label/models/stock_picking.py:276
 #: code:addons/base_delivery_carrier_label/models/stock_picking.py:281
 #, python-format
 msgid ""
@@ -595,7 +594,6 @@ msgstr ""
 "eingefügt werden."
 
 #. module: base_delivery_carrier_label
-#: code:addons/base_delivery_carrier_label/models/stock_picking.py:173
 #: code:addons/base_delivery_carrier_label/models/stock_picking.py:178
 #, python-format
 msgid ""
