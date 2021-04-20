@@ -1,33 +1,33 @@
-# -*- coding: utf-8 -*-
 # Copyright 2012 Camptocamp SA
 # Author: Guewen Baconnier
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-import os
 import logging
+import os
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
+
 from ..generator import new_file_generator
 
 
 class DeliveryCarrierFile(models.Model):
-    _name = 'delivery.carrier.file'
-    _description = 'Delivery Carrier File'
+    _name = "delivery.carrier.file"
+    _description = "Delivery Carrier File"
 
     @api.model
     def get_type_selection(self):
         """
         Has to be inherited to add carriers
         """
-        return [('generic', 'Generic')]
+        return [("generic", "Generic")]
 
     @api.model
     def get_write_mode_selection(self):
         """
         Selection can be inherited to add more write modes
         """
-        return [('disk', 'Disk')]
+        return [("disk", "Disk")]
 
     @api.multi
     def _write_file(self, filename, file_content):
@@ -44,10 +44,11 @@ class DeliveryCarrierFile(models.Model):
         for carrier_file in self:
             if not carrier_file.export_path:
                 raise UserError(
-                    _('Export path is not defined '
-                      'for carrier file %s') % (carrier_file.name,))
+                    _("Export path is not defined " "for carrier file %s")
+                    % (carrier_file.name,)
+                )
             full_path = os.path.join(carrier_file.export_path, filename)
-            with open(full_path, 'w') as file_handle:
+            with open(full_path, "w") as file_handle:
                 file_handle.write(file_content)
         return True
 
@@ -64,7 +65,7 @@ class DeliveryCarrierFile(models.Model):
         :return: True if successful
         """
         for this in self:
-            log = logging.getLogger('delivery.carrier.file')
+            log = logging.getLogger("delivery.carrier.file")
             file_generator = new_file_generator(this.type)
 
             picking_obj = self.env["stock.picking"]
@@ -83,12 +84,15 @@ class DeliveryCarrierFile(models.Model):
                 # was already modified in the current transaction
                 try:
                     if this._write_file(filename, file_content):
-                        picking_obj.browse(picking_ids).write({
-                            'carrier_file_generated': True})
+                        picking_obj.browse(picking_ids).write(
+                            {"carrier_file_generated": True}
+                        )
                 except Exception as e:
-                    log.exception("Could not create the picking file "
-                                  "for pickings %s: %s",
-                                  picking_ids, e)
+                    log.exception(
+                        "Could not create the picking file " "for pickings %s: %s",
+                        picking_ids,
+                        e,
+                    )
         return True
 
     @api.model
@@ -107,19 +111,25 @@ class DeliveryCarrierFile(models.Model):
         for this in self:
             return this._generate_files(picking_ids)
 
-    name = fields.Char('Name', size=64, required=True)
-    type = fields.Selection(selection='get_type_selection',
-                            string='Type', required=True)
-    group_pickings = fields.Boolean(help='All the pickings will be '
-                                    'grouped in the same file. '
-                                    'Has no effect when the files '
-                                    'are automatically exported at '
-                                    'the delivery order process.')
-    write_mode = fields.Selection(selection='get_write_mode_selection',
-                                  string='Write on', required=True)
-    export_path = fields.Char('Export Path', size=256)
-    auto_export = fields.Boolean(help='The file will be automatically '
-                                 'generated when a delivery order '
-                                 'is processed. If activated, each '
-                                 'delivery order will be exported '
-                                 'in a separate file.')
+    name = fields.Char("Name", size=64, required=True)
+    type = fields.Selection(
+        selection="get_type_selection", string="Type", required=True
+    )
+    group_pickings = fields.Boolean(
+        help="All the pickings will be "
+        "grouped in the same file. "
+        "Has no effect when the files "
+        "are automatically exported at "
+        "the delivery order process."
+    )
+    write_mode = fields.Selection(
+        selection="get_write_mode_selection", string="Write on", required=True
+    )
+    export_path = fields.Char("Export Path", size=256)
+    auto_export = fields.Boolean(
+        help="The file will be automatically "
+        "generated when a delivery order "
+        "is processed. If activated, each "
+        "delivery order will be exported "
+        "in a separate file."
+    )
