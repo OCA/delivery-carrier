@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2012 Camptocamp SA
 # Author: Guewen Baconnier
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
@@ -54,6 +53,7 @@ class BaseLine(object):
     row.get_fields()
     => ['x', 'long']
     """
+
     fields = ()
 
     def __init__(self):
@@ -69,7 +69,7 @@ class BaseLine(object):
             field_name, _ = self._field_definition(field)
             if not field_name:
                 continue
-            setattr(self, field_name, '')
+            setattr(self, field_name, "")
 
     @staticmethod
     def _field_definition(field):
@@ -83,13 +83,13 @@ class BaseLine(object):
         """
         width = False
         if field in (False, None):
-            field_name = ''
+            field_name = ""
         elif isinstance(field, tuple):
             field_name, width = field
         elif isinstance(field, str):
             field_name = field
         else:
-            raise ValueError("Wrong field definition for field %s" % (field,))
+            raise ValueError("Wrong field definition for field {}".format(field))
         return field_name, width
 
     def get_fields(self):
@@ -110,13 +110,13 @@ class BaseLine(object):
                 if isinstance(value, (int, float)):
                     value = str(value)
                 elif value in (False, None):
-                    value = ''
+                    value = ""
                 elif not isinstance(value, str):
-                    value = str(value, 'utf-8')
+                    value = str(value, "utf-8")
                 if width:
                     value = value[0:width]
             else:
-                value = ''
+                value = ""
             res.append(value)
         return res
 
