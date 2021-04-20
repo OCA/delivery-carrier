@@ -47,7 +47,6 @@
         <field name="name">Generate Carrier Files</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">delivery.carrier.file.generate</field>
-        <field name="view_type">form</field>
         <field name="view_mode">form</field>
         <field name="view_id" ref="view_delivery_carrier_file_generate" />
         <field name="groups_id" eval="[(6, 0, [ref('stock.group_stock_manager')])]" />

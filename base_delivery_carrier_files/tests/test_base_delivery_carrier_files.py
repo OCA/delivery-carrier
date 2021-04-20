@@ -70,13 +70,7 @@ class CarrierFilesTest(TransactionCase):
             }
         )
 
-        self.picking_type = self.env["stock.picking.type"].create(
-            {
-                "name": "Outgoing Ice Cream",
-                "code": "outgoing",
-                "sequence_id": self.env.ref("stock.sequence_mrp_op").id,
-            }
-        )
+        self.picking_type = self.env.ref("stock.warehouse0").out_type_id
 
     def test_carrier_file_generation(self):
         """ Test carrier file generation """
@@ -114,8 +108,11 @@ class CarrierFilesTest(TransactionCase):
         # I check outgoing shipment after stock availablity in refrigerator.
         picking.action_assign()
 
-        # I deliver outgoing shipment.
-        picking.action_done()
+        # I deliver the outgoing shipment.
+        action = picking.button_validate()
+        self.env[action["res_model"]].with_context(action["context"]).create(
+            {}
+        ).process()
 
         # I check shipment details after shipment
         # The carrier file must have been generated.
@@ -163,8 +160,11 @@ class CarrierFilesTest(TransactionCase):
         # I check outgoing shipment after stock availablity in refrigerator.
         picking.action_assign()
 
-        # I deliver outgoing shipment.
-        picking.action_done()
+        # I deliver the outgoing shipment.
+        action = picking.button_validate()
+        self.env[action["res_model"]].with_context(action["context"]).create(
+            {}
+        ).process()
 
         # I check shipment details after shipment
         # The carrier file must NOT have been generated.

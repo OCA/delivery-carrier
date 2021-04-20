@@ -2,13 +2,12 @@
 # Author: Guewen Baconnier
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models
+from odoo import fields, models
 
 
 class StockPicking(models.Model):
     _inherit = "stock.picking"
 
-    @api.multi
     def generate_carrier_files(self, auto=True, recreate=False):
         """
         Generates all the files for a list of pickings according to
@@ -48,9 +47,8 @@ class StockPicking(models.Model):
             carrier_file.generate_files(carrier_file_ids[carrier_file.id])
         return True
 
-    @api.multi
-    def action_done(self):
-        result = super(StockPicking, self).action_done()
+    def _action_done(self):
+        result = super(StockPicking, self)._action_done()
         self.generate_carrier_files(auto=True)
         return result
 

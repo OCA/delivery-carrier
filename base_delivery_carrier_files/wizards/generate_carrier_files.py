@@ -17,7 +17,6 @@ class DeliveryCarrierFileGenerate(models.TransientModel):
         if context.get("active_model") == "stock.picking" and context.get("active_ids"):
             return self.env["stock.picking"].browse(context["active_ids"])
 
-    @api.multi
     def action_generate(self):
         """
         Call the creation of the delivery carrier files
@@ -31,7 +30,6 @@ class DeliveryCarrierFileGenerate(models.TransientModel):
         "stock.picking",
         string="Delivery Orders",
         default=_get_pickings,
-        oldname="picking_ids",
     )
     recreate = fields.Boolean(
         "Recreate files",

@@ -29,7 +29,6 @@ class DeliveryCarrierFile(models.Model):
         """
         return [("disk", "Disk")]
 
-    @api.multi
     def _write_file(self, filename, file_content):
         """
         Method responsible of writing the file, on the filesystem or
