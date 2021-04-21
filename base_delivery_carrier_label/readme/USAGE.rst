@@ -8,7 +8,7 @@ calling `send_to_shipper()` in models/stock.picking.py
 ** How to implement my own carrier ? **
 
 
-Define a method `carrier_delivery_type_send_shipping()` which is called by _send_shipping native method.
+Define a method `{carrier}_send_shipping()` which is called by _send_shipping native method.
 Make it return a list of dict of this form :
 
 .. code-block:: python
