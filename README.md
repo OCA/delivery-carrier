@@ -20,6 +20,7 @@ Available addons
 addon | version | summary
 --- | --- | ---
 [delivery_carrier_info](delivery_carrier_info/) | 14.0.1.0.1 | Add code and description on carrier
+[delivery_package_fee](delivery_package_fee/) | 14.0.1.0.0 | Add fees on delivered packages on shipping methods
 
 [//]: # (end addons)
 
