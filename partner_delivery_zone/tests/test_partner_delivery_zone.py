@@ -12,6 +12,7 @@ class TestPartnerDeliveryZone(SavepointCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        cls.warehouse = cls.env.ref("stock.warehouse0")
         cls.delivery_zone_a = cls.env["partner.delivery.zone"].create(
             {"name": "Delivery Zone A", "code": "10"}
         )
@@ -149,3 +150,21 @@ class TestPartnerDeliveryZone(SavepointCase):
         self.assertEqual(self.order.delivery_zone_id, self.delivery_zone_b)
         self.order.delivery_zone_id = self.delivery_zone_a
         self.assertEqual(self.order.picking_ids.delivery_zone_id, self.delivery_zone_a)
+
+    def test_wharehouse_three_steps(self):
+        self.warehouse.delivery_steps = "pick_pack_ship"
+        self.order.action_confirm()
+        for picking in self.order.picking_ids:
+            self.assertEqual(picking.delivery_zone_id, self.order.delivery_zone_id)
+
+    def test_wharehouse_three_steps_so_wo_delivery_zone(self):
+        # If SO has not delivery zone, all pickings obtains the delivery zone
+        # from shipping partner
+        self.warehouse.delivery_steps = "pick_pack_ship"
+        self.order.delivery_zone_id = False
+        self.order.action_confirm()
+        for picking in self.order.picking_ids:
+            self.assertEqual(
+                picking.delivery_zone_id,
+                self.order.partner_shipping_id.delivery_zone_id,
+            )
