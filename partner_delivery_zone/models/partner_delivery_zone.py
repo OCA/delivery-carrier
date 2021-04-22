@@ -9,3 +9,4 @@ class PartnerDeliveryZone(models.Model):
 
     code = fields.Char()
     name = fields.Char(string="Zone", required=True)
+    active = fields.Boolean(default=True)
