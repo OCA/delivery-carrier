@@ -17,6 +17,10 @@
         </group>
       </group>
     </field>
+    <xpath expr="//button[@name='action_generate_carrier_label']" position="attributes">
+      <attribute name="attrs">{'invisible': ['|', '&amp;', ('picking_type_code', '!=', 'incoming'), ('state', '!=', 'done'), '&amp;', ('picking_type_code', '=', 'incoming'), ('state', 'not in',  ('assigned', 'done'))]}
+      </attribute>
+    </xpath>
   </field>
 </record>
 

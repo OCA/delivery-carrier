@@ -161,7 +161,15 @@ class PostlogisticsWebService(object):
         :return a dict containing data for ns0:Recipient
 
         """
-        partner = picking.partner_id
+        if picking.picking_type_id.code == 'outgoing':
+            partner = picking.partner_id
+        elif picking.picking_type_id.code == 'incoming':
+            location_dest = picking.location_dest_id
+            partner = (
+                location_dest.partner_id or
+                location_dest.company_id.partner_id or
+                self.env.user.company_id
+            )
 
         partner_name = partner.name or partner.parent_id.name
         recipient = {
@@ -205,16 +213,30 @@ class PostlogisticsWebService(object):
 
         """
         company = picking.company_id
-        partner = company.partner_id
+        if picking.picking_type_id.code == 'outgoing':
+            partner = company.partner_id
+        elif picking.picking_type_id.code == 'incoming':
+            partner = picking.partner_id
+
+        partner_name = partner.name or partner.parent_id.name
 
         customer = {
-            'Name1': partner.name,
+            'Name1': partner_name,
             'Street': partner.street,
             'ZIP': partner.zip,
             'City': partner.city,
             'Country': partner.country_id.code,
-            'DomicilePostOffice': company.postlogistics_office,
         }
+        if (
+            picking.picking_type_id.code == 'outgoing'
+            and company.postlogistics_office
+        ):
+            customer['DomicilePostOffice'] = company.postlogistics_office
+
+        if partner.parent_id and partner.parent_id.name != partner_name:
+            customer['Name2'] = customer.get('Name1')
+            customer['Name1'] = partner.parent_id.name
+
         logo_format = None
         logo = company.postlogistics_logo
         if logo:
