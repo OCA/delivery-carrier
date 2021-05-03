@@ -9,7 +9,7 @@ class PostlogisticsShippingLabel(models.Model):
 
     _name = "postlogistics.shipping.label"
     _inherits = {"ir.attachment": "attachment_id"}
-    _description = "Shipping Label for Postlogistics"
+    _description = "Shipping Label for PostLogistics"
 
     file_type = fields.Char(string="File type", default="pdf")
     attachment_id = fields.Many2one(
