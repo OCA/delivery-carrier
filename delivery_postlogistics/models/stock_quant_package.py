@@ -7,7 +7,7 @@ class StockQuantPackage(models.Model):
     _inherit = "stock.quant.package"
 
     postlogistics_manual_cod_amount = fields.Float(
-        string="Postlogistics Cash On Delivery Amount",
+        string="PostLogistics Cash On Delivery Amount",
         help="If the cash on delivery amount for this package is different "
         "than the total of the sales order, write the amount there.",
     )
@@ -22,7 +22,7 @@ class StockQuantPackage(models.Model):
         return move_line.mapped("picking_id")
 
     def postlogistics_cod_amount(self):
-        """ Return the Postlogistic Cash on Delivery amount of a package
+        """ Return the PostLogistics Cash on Delivery amount of a package
 
         If we have only 1 package which delivers the whole sales order
         we use the total amount of the sales order.
