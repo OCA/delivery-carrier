@@ -3,7 +3,7 @@
 
 from odoo import fields, models
 
-POSTLOGISTIC_TYPES = [
+POSTLOGISTICS_TYPES = [
     ("label_layout", "Label Layout"),
     ("output_format", "Output Format"),
     ("resolution", "Output Resolution"),
@@ -27,5 +27,5 @@ class DeliveryCarrierTemplateOption(models.Model):
         help="Allow to define a more complete description than in the name field.",
     )
     postlogistics_type = fields.Selection(
-        selection=POSTLOGISTIC_TYPES, string="PostLogistics option type",
+        selection=POSTLOGISTICS_TYPES, string="PostLogistics option type",
     )

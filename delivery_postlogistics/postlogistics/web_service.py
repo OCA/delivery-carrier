@@ -119,7 +119,7 @@ class PostlogisticsWebService(object):
     def _prepare_customer(self, picking):
         """ Create a ns0:Customer as a dict from picking
 
-        This is the Postlogistic Customer, thus the sender
+        This is the PostLogistics Customer, thus the sender
 
         :param picking: picking browse record
         :return a dict containing data for ns0:Customer
@@ -190,7 +190,10 @@ class PostlogisticsWebService(object):
 
         if not services:
             raise exceptions.UserError(
-                _("No Postlogistics packaging services found in this picking.")
+                _(
+                    "No PostLogistics packaging services found "
+                    "in packaging {}, for picking {}."
+                ).format(packaging.name, picking.name)
             )
 
         # Activate phone notification ZAW3213
@@ -375,7 +378,7 @@ class PostlogisticsWebService(object):
                 _(
                     "Missing Configuration\n\n"
                     "Please verify postlogistics endpoint url in:\n"
-                    "Delivery Carrier (Postlogistics)."
+                    "Delivery Carrier (PostLogistics)."
                 )
             )
 
@@ -390,7 +393,7 @@ class PostlogisticsWebService(object):
                 _(
                     "Authorization Required\n\n"
                     "Please verify postlogistics client id and secret in:\n"
-                    "Delivery Carrier (Postlogistics)."
+                    "Delivery Carrier (PostLogistics)."
                 )
             )
 
@@ -427,7 +430,7 @@ class PostlogisticsWebService(object):
                     _(
                         "Authorization Required\n\n"
                         "Please verify postlogistics client id and secret in:\n"
-                        "Configuration -> Postlogistics"
+                        "Configuration -> PostLogistics"
                     )
                 )
 

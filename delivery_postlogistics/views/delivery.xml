@@ -10,7 +10,7 @@
             <page name="destination" position="after">
                 <page
                     name="postlogistics"
-                    string="Postlogistics"
+                    string="PostLogistics"
                     attrs="{'invisible': [('delivery_type', '!=', 'postlogistics')]}"
                 >
                     <group>

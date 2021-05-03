@@ -94,7 +94,7 @@ class StockPicking(models.Model):
                 move_lines.write({"result_package_id": package.id})
 
     def postlogistics_cod_amount(self):
-        """ Return the Postlogistic Cash on Delivery amount of a picking
+        """ Return the PostLogistics Cash on Delivery amount of a picking
 
         If the picking delivers the whole sales order, we use the total
         amount of the sales order.
@@ -229,6 +229,6 @@ class StockPicking(models.Model):
         return labels
 
     def generate_postlogistics_shipping_labels(self, package_ids=None):
-        """ Add label generation for Postlogistics """
+        """ Add label generation for PostLogistics """
         self.ensure_one()
         return self._generate_postlogistics_label(package_ids=package_ids)

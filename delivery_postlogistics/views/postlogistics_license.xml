@@ -15,14 +15,14 @@
         </field>
     </record>
     <record id="action_postlogistics_licenses" model="ir.actions.act_window">
-        <field name="name">Postlogistics Licenses</field>
+        <field name="name">PostLogistics Licenses</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">postlogistics.license</field>
         <field name='view_mode'>tree</field>
     </record>
     <menuitem
         id="menu_postlogistics_licenses"
-        name="Postlogistics Licenses"
+        name="PostLogistics Licenses"
         parent="delivery.menu_delivery"
         sequence="20"
         action="action_postlogistics_licenses"
