@@ -12,7 +12,7 @@ class ResPartner(models.Model):
         relation="postlogistics_options_partner_rel",
         column1="partner_id",
         column2="option_id",
-        string="Postlogistics Options",
+        string="PostLogistics Options",
     )
 
     postlogistics_notification = fields.Selection(
