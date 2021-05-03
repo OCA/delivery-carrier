@@ -10,9 +10,7 @@ class DeliveryCarrier(models.Model):
 
     _inherit = "delivery.carrier"
 
-    delivery_type = fields.Selection(
-        selection_add=[("postlogistics", "Post logistics")]
-    )
+    delivery_type = fields.Selection(selection_add=[("postlogistics", "PostLogistics")])
     postlogistics_default_packaging_id = fields.Many2one(
         "product.packaging", domain=[("package_carrier_type", "=", "postlogistics")]
     )
