@@ -8,7 +8,7 @@ class ProductPackaging(models.Model):
     _inherit = "product.packaging"
 
     package_carrier_type = fields.Selection(
-        selection_add=[("postlogistics", "Postlogistics")]
+        selection_add=[("postlogistics", "PostLogistics")]
     )
 
     def _get_packaging_codes(self):
