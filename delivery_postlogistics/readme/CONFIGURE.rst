@@ -7,20 +7,9 @@
 To configure:
 
 * Go to `Inventory -> Configuration -> Delivery -> Shipping Methods`
-* Create new shipping methods for postlogistics and set your login informations
-* launch the Update PostLogistics Services
-
-This will load available services and generate carrier options.
-
-Now you can create a carrier method for PostLogistics WebService:
-
-* First choose a Service group and save
-* Add a Mandatory Carrier option using a Basic Service
-* Save Carrier Method (this will update filters to show you only
-  compatible services)
-* Then add other `Optional as default` and `Optional` carrier option
-  from listed
-* Add additional Service and Delivery instructions
+* Create new shipping methods for PostLogistics and set your login informations in the "PostLogistics" tab
+* Go to `Inventory -> Configuration ->  Delivery -> Delivery Packages` to create
+  the PostLogistics delivery packaging with the relevant `Package Code` (see section 8.10 of https://developer.post.ch/en/digital-commerce-api for available codes)
 
 .. _Log in: https://account.post.ch/selfadmin/?login&lang=en
 
