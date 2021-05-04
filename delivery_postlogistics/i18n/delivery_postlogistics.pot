@@ -418,7 +418,8 @@ msgstr ""
 #. module: delivery_postlogistics
 #: code:addons/delivery_postlogistics/postlogistics/web_service.py:0
 #, python-format
-msgid "No PostLogistics packaging services found in this picking."
+msgid ""
+"No PostLogistics packaging services found in packaging {}, for picking {}."
 msgstr ""
 
 #. module: delivery_postlogistics
@@ -508,13 +509,20 @@ msgid "Post Label Logo"
 msgstr ""
 
 #. module: delivery_postlogistics
+#: model:ir.model.fields,help:delivery_postlogistics.field_delivery_carrier__postlogistics_office
+msgid "Post office which will receive the shipped goods"
+msgstr ""
+
+#. module: delivery_postlogistics
 #: model:ir.model.fields.selection,name:delivery_postlogistics.selection__delivery_carrier__delivery_type__postlogistics
+#: model:ir.model.fields.selection,name:delivery_postlogistics.selection__product_packaging__package_carrier_type__postlogistics
+#: model_terms:ir.ui.view,arch_db:delivery_postlogistics.delivery_carrier_postlogistics_inherit_view
 msgid "PostLogistics"
 msgstr ""
 
 #. module: delivery_postlogistics
-#: model:ir.model.fields,help:delivery_postlogistics.field_delivery_carrier__postlogistics_office
-msgid "Post office which will receive the shipped goods"
+#: model:ir.model.fields,field_description:delivery_postlogistics.field_stock_quant_package__postlogistics_manual_cod_amount
+msgid "PostLogistics Cash On Delivery Amount"
 msgstr ""
 
 #. module: delivery_postlogistics
@@ -529,42 +537,31 @@ msgid "PostLogistics Franking License"
 msgstr ""
 
 #. module: delivery_postlogistics
-#: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_delivery_carrier_template_option__postlogistics_type
-msgid "PostLogistics option type"
-msgstr ""
-
-#. module: delivery_postlogistics
-#: model:ir.model.fields.selection,name:delivery_postlogistics.selection__product_packaging__package_carrier_type__postlogistics
-#: model_terms:ir.ui.view,arch_db:delivery_postlogistics.delivery_carrier_postlogistics_inherit_view
-msgid "PostLogistics"
-msgstr ""
-
-#. module: delivery_postlogistics
-#: model:ir.model.fields,field_description:delivery_postlogistics.field_stock_quant_package__postlogistics_manual_cod_amount
-msgid "PostLogistics Cash On Delivery Amount"
-msgstr ""
-
-#. module: delivery_postlogistics
-#: model:ir.model.fields,field_description:delivery_postlogistics.field_delivery_carrier__postlogistics_default_packaging_id
-msgid "PostLogistics Default Packaging"
-msgstr ""
-
-#. module: delivery_postlogistics
 #: model:ir.actions.act_window,name:delivery_postlogistics.action_postlogistics_licenses
 #: model:ir.ui.menu,name:delivery_postlogistics.menu_postlogistics_licenses
 msgid "PostLogistics Licenses"
 msgstr ""
 
 #. module: delivery_postlogistics
-#: model:ir.model.fields,field_description:delivery_postlogistics.field_res_partner__postlogistics_notification
-#: model:ir.model.fields,field_description:delivery_postlogistics.field_res_users__postlogistics_notification
-msgid "PostLogistics Notification"
-msgstr ""
-
-#. module: delivery_postlogistics
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_res_partner__postlogistics_option_ids
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_res_users__postlogistics_option_ids
 msgid "PostLogistics Options"
+msgstr ""
+
+#. module: delivery_postlogistics
+#: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_delivery_carrier_template_option__postlogistics_type
+msgid "PostLogistics option type"
+msgstr ""
+
+#. module: delivery_postlogistics
+#: model:ir.model.fields,field_description:delivery_postlogistics.field_delivery_carrier__postlogistics_default_packaging_id
+msgid "Postlogistics Default Packaging"
+msgstr ""
+
+#. module: delivery_postlogistics
+#: model:ir.model.fields,field_description:delivery_postlogistics.field_res_partner__postlogistics_notification
+#: model:ir.model.fields,field_description:delivery_postlogistics.field_res_users__postlogistics_notification
+msgid "Postlogistics Notification"
 msgstr ""
 
 #. module: delivery_postlogistics
@@ -611,6 +608,11 @@ msgstr ""
 #. module: delivery_postlogistics
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_shipping_label__res_name
 msgid "Resource Name"
+msgstr ""
+
+#. module: delivery_postlogistics
+#: model_terms:ir.ui.view,arch_db:delivery_postlogistics.product_packaging_delivery_form
+msgid "See section 8.10 of"
 msgstr ""
 
 #. module: delivery_postlogistics
@@ -773,6 +775,11 @@ msgid "ZPL2"
 msgstr ""
 
 #. module: delivery_postlogistics
+#: model_terms:ir.ui.view,arch_db:delivery_postlogistics.product_packaging_delivery_form
+msgid "for available codes."
+msgstr ""
+
+#. module: delivery_postlogistics
 #: code:addons/delivery_postlogistics/postlogistics/web_service.py:0
 #, python-format
 msgid "label layout"
@@ -793,4 +800,9 @@ msgstr ""
 #. module: delivery_postlogistics
 #: model:postlogistics.delivery.carrier.template.option,name:delivery_postlogistics.postlogistics_output_format_option_spdf
 msgid "sPDF"
+msgstr ""
+
+#. module: delivery_postlogistics
+#: model_terms:ir.ui.view,arch_db:delivery_postlogistics.product_packaging_delivery_form
+msgid "the documentation"
 msgstr ""
