@@ -6,4 +6,9 @@ from odoo import fields, models
 class SaleOrderLine(models.Model):
     _inherit = "sale.order.line"
 
-    package_fee_id = fields.Many2one(comodel_name="delivery.package.fee", default=False)
+    package_fee_id = fields.Many2one(
+        comodel_name="delivery.package.fee", default=False, ondelete="restrict"
+    )
+
+    def _is_delivery(self):
+        return super()._is_delivery() or bool(self.package_fee_id)
