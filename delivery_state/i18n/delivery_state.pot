@@ -1,0 +1,137 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* delivery_state
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: delivery_state
+#: model:mail.template,body_html:delivery_state.delivery_notification
+msgid ""
+"\n"
+"<div>\n"
+"    % set partner = object.sale_id.partner_id or object.partner_id\n"
+"    <p>\n"
+"        Hello, ${partner.name}.\n"
+"    </p>\n"
+"    <p>\n"
+"        We are glad to inform you that your order has been shipped by ${object.carrier_id.name}.\n"
+"        %if object.carrier_tracking_ref:\n"
+"            Your tracking reference is\n"
+"            <strong>\n"
+"            %if object.carrier_tracking_url:\n"
+"                % set multiple_carrier_tracking = object.get_multiple_carrier_tracking()\n"
+"                %if multiple_carrier_tracking:\n"
+"                    % for line in multiple_carrier_tracking:\n"
+"                        <br/><a href=\"${line[1]}\" target=\"_blank\">${line[0]}</a>\n"
+"                    % endfor\n"
+"                %else:\n"
+"                    <a href=\"${object.carrier_tracking_url}\" target=\"_blank\">${object.carrier_tracking_ref}</a>.\n"
+"                %endif\n"
+"            %else:\n"
+"                ${object.carrier_tracking_ref}.\n"
+"            %endif\n"
+"            </strong>\n"
+"        %endif\n"
+"        <br/><br/>\n"
+"        Thank you,<br/>\n"
+"        % if user and user.signature:\n"
+"          ${user.signature | safe}\n"
+"        % endif\n"
+"    </p>\n"
+"</div>\n"
+"\n"
+"        "
+msgstr ""
+
+#. module: delivery_state
+#: model:mail.template,subject:delivery_state.delivery_notification
+msgid ""
+"${object.company_id.name} - Your order has been shipped by "
+"${object.carrier_id.name}"
+msgstr ""
+
+#. module: delivery_state
+#: model:ir.model.fields.selection,name:delivery_state.selection__stock_picking__delivery_state__canceled_shipment
+msgid "Canceled shipment"
+msgstr ""
+
+#. module: delivery_state
+#: model:ir.model.fields,field_description:delivery_state.field_stock_picking__delivery_state
+msgid "Carrier State"
+msgstr ""
+
+#. module: delivery_state
+#: model:ir.model.fields.selection,name:delivery_state.selection__stock_picking__delivery_state__customer_delivered
+msgid "Customer delivered"
+msgstr ""
+
+#. module: delivery_state
+#: model:ir.model.fields,field_description:delivery_state.field_stock_picking__date_delivered
+msgid "Delivery Date"
+msgstr ""
+
+#. module: delivery_state
+#: model:ir.model.fields.selection,name:delivery_state.selection__stock_picking__delivery_state__in_transit
+msgid "In transit"
+msgstr ""
+
+#. module: delivery_state
+#: model:ir.model.fields.selection,name:delivery_state.selection__stock_picking__delivery_state__incidence
+msgid "Incidence"
+msgstr ""
+
+#. module: delivery_state
+#: model:ir.model.fields,field_description:delivery_state.field_stock_picking__date_shipped
+msgid "Shipment Date"
+msgstr ""
+
+#. module: delivery_state
+#: model:ir.model,name:delivery_state.model_delivery_carrier
+msgid "Shipping Methods"
+msgstr ""
+
+#. module: delivery_state
+#: model:ir.model.fields.selection,name:delivery_state.selection__stock_picking__delivery_state__shipping_recorded_in_carrier
+msgid "Shipping recorded in carrier"
+msgstr ""
+
+#. module: delivery_state
+#: model:ir.model.fields,field_description:delivery_state.field_stock_picking__tracking_state
+msgid "Tracking state"
+msgstr ""
+
+#. module: delivery_state
+#: model:ir.model.fields,field_description:delivery_state.field_stock_picking__tracking_state_history
+msgid "Tracking state history"
+msgstr ""
+
+#. module: delivery_state
+#: model:ir.model,name:delivery_state.model_stock_picking
+msgid "Transfer"
+msgstr ""
+
+#. module: delivery_state
+#: model:ir.actions.server,name:delivery_state.ir_cron_delivery_state_ir_actions_server
+#: model:ir.cron,cron_name:delivery_state.ir_cron_delivery_state
+#: model:ir.cron,name:delivery_state.ir_cron_delivery_state
+msgid "Update deliveries states"
+msgstr ""
+
+#. module: delivery_state
+#: model_terms:ir.ui.view,arch_db:delivery_state.view_picking_withcarrier_out_form
+msgid "Update tracking state"
+msgstr ""
+
+#. module: delivery_state
+#: model:ir.model.fields.selection,name:delivery_state.selection__stock_picking__delivery_state__warehouse_delivered
+msgid "Warehouse delivered"
+msgstr ""
