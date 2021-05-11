@@ -11,6 +11,7 @@ setuptools.setup(
         'odoo14-addon-base_delivery_carrier_label',
         'odoo14-addon-delivery_carrier_info',
         'odoo14-addon-delivery_package_fee',
+        'odoo14-addon-delivery_state',
     ],
     classifiers=[
         'Programming Language :: Python',
