@@ -38,6 +38,9 @@ class SaleOrder(models.Model):
             if self.state in {"draft", "sent"}:
                 price_unit = self.carrier_id.rate_shipment(self)["price"]
                 self._create_delivery_line(self.carrier_id, price_unit)
+                self.with_context(auto_refresh_delivery=True).write(
+                    {"recompute_delivery_price": False}
+                )
 
     @api.model
     def create(self, vals):
