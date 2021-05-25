@@ -125,9 +125,10 @@ class StockPicking(models.Model):
             "quantity": int(quant.quantity),
             "weight": quant.product_id.weight,
             "volume": quant.product_id.volume,
-            "code": quant.product_id.default_code,
-            "description": quant.product_id.description_pickingout or "/",
-            "hsTariffCode": quant.product_id.hs_code,
+            "code": quant.product_id.default_code or "",
+            "description": (quant.product_id.description_pickingout
+                            or quant.product_id.name),
+            "hsTariffCode": quant.product_id.hs_code or "",
         }
         # support product_dimension if installed
         for name in ["length", "height", "width"]:
@@ -157,9 +158,9 @@ class StockPicking(models.Model):
             "width": packaging.width,
             "height": packaging.height,
             "length": packaging.length,
-            "code": product.default_code,
-            "description": product.description_pickingout or "/",
-            "hsTariffCode": product.hs_code,
+            "code": product.default_code or "",
+            "description": product.description_pickingout or product.name,
+            "hsTariffCode": product.hs_code or "",
         }
 
     def _paazl_commit_order_data(self):

@@ -35,12 +35,17 @@ class DeliveryCarrierLabelPaazlCase(carrier_label_case.CarrierLabelCase):
 
     def _create_order_picking(self):
         self._create_account()
+        super()._create_order_picking()
+
+    def _transfer_order_picking(self):
         with self._setup_mock_client() as mock_client:
-            super()._create_order_picking()
+            super()._transfer_order_picking()
             self.assertTrue(
                 mock_client.service.order.call_args[1]["products"]["product"],
                 "No products were sent",
             )
+            call_args = mock_client.service.order.call_args
+        return call_args
 
     @contextmanager
     def _setup_mock_client(self):
@@ -75,18 +80,6 @@ class DeliveryCarrierLabelPaazlCase(carrier_label_case.CarrierLabelCase):
     def _get_carrier(self):
         return self.env.ref("delivery_carrier_label_paazl.carrier_paazl")
 
-    def test_cancel_shipment(self):
-        self.assertTrue(self.picking.carrier_tracking_ref)
-        with self._setup_mock_client() as mock_client:
-            mock_client.service.cancelShipments.return_value = Mock(
-                error=Mock(code=42, message="")
-            )
-            with self.assertRaises(UserError):
-                self.picking.carrier_id.cancel_shipment(self.picking)
-            mock_client.service.cancelShipments.return_value = Mock(error=False)
-            self.picking.cancel_shipment()
-            self.assertFalse(self.picking.carrier_tracking_ref)
-
     @contextmanager
     def _request(self, path, method="POST", data=None, headers=None):
         """yield request, endpoint for given http request data."""
@@ -115,6 +108,22 @@ class DeliveryCarrierLabelPaazlCase(carrier_label_case.CarrierLabelCase):
                 return_rule=False,
             )
             yield request, partial(endpoint, **request.params)
+
+
+class TestDeliveryCarrierLabelPaazl(
+        DeliveryCarrierLabelPaazlCase,
+        carrier_label_case.TestCarrierLabel):
+    def test_cancel_shipment(self):
+        self.assertTrue(self.picking.carrier_tracking_ref)
+        with self._setup_mock_client() as mock_client:
+            mock_client.service.cancelShipments.return_value = Mock(
+                error=Mock(code=42, message="")
+            )
+            with self.assertRaises(UserError):
+                self.picking.carrier_id.cancel_shipment(self.picking)
+            mock_client.service.cancelShipments.return_value = Mock(error=False)
+            self.picking.cancel_shipment()
+            self.assertFalse(self.picking.carrier_tracking_ref)
 
     def test_push_api(self):
         """Test we can receive status updates from paazl"""
@@ -167,14 +176,15 @@ class DeliveryCarrierLabelPaazlCase(carrier_label_case.CarrierLabelCase):
             self.assertTrue(self.picking.message_ids - messages_before)
 
 
-class DeliveryCarrierLabelPaazlCasePackage(DeliveryCarrierLabelPaazlCase):
+class TestDeliveryCarrierLabelPaazlPackaging(TestDeliveryCarrierLabelPaazl):
     def _picking_data(self):
         self.picking.move_line_ids.write({'qty_done': 1})
         self.picking._put_in_pack()
-        self.picking.package_ids.write({
-            'name': 'Test',
-            'width': 42,
-            'height': 42,
-            'length': 42,
-        })
+        self.picking.package_ids.packaging_id = self.env[
+            "product.packaging"].create({
+                'name': 'Test',
+                'width': 42,
+                'height': 42,
+                'length': 42,
+            })
         return super()._picking_data()
