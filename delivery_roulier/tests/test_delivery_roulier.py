@@ -79,11 +79,13 @@ class DeliveryRoulierCase(SavepointCase):
                 ],
             }
         )
-        self.env['stock.quant'].with_context(inventory_mode=True).create({
-            "product_id": product.id,
-            'location_id': self.order.warehouse_id.lot_stock_id.id,
-            'inventory_quantity': 1,
-        })
+        self.env["stock.quant"].with_context(inventory_mode=True).create(
+            {
+                "product_id": product.id,
+                "location_id": self.order.warehouse_id.lot_stock_id.id,
+                "inventory_quantity": 1,
+            }
+        )
         self.order.action_confirm()
         self.picking = self.order.picking_ids
         self.env["stock.immediate.transfer"].create(

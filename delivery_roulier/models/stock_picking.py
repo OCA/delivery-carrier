@@ -69,13 +69,13 @@ class StockPicking(models.Model):
 
     def _roulier_generate_labels(self):
         """
-            Return format expected by send_shipping : a list of dict (one dict per
-            picking).
-            {
-                'exact_price': 0.0,
-                'tracking_number': "concatenated numbers",
-                'labels': list of dict of labels, managed by base_delivery_carrier_label
-            }
+        Return format expected by send_shipping : a list of dict (one dict per
+        picking).
+        {
+            'exact_price': 0.0,
+            'tracking_number': "concatenated numbers",
+            'labels': list of dict of labels, managed by base_delivery_carrier_label
+        }
         """
         label_info = []
         for picking in self:
@@ -97,11 +97,11 @@ class StockPicking(models.Model):
         return auth
 
     def _roulier_cancel_shipment(self):
-        self.write({'carrier_tracking_ref': False})
-        labels = self.env['shipping.label'].search(
+        self.write({"carrier_tracking_ref": False})
+        labels = self.env["shipping.label"].search(
             [("res_id", "in", self.ids), ("res_model", "=", "stock.picking")]
         )
-        labels.mapped('attachment_id').unlink()
+        labels.mapped("attachment_id").unlink()
 
     def _roulier_get_account(self, package=None):
         """Return an 'account'.
