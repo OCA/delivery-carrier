@@ -4,7 +4,7 @@
 
 import logging
 
-from odoo import _, api, fields, models
+from odoo import _, fields, models
 from odoo.exceptions import UserError
 
 from ..decorator import implemented_by_carrier
@@ -115,7 +115,7 @@ class StockQuantPackage(models.Model):
             if len(self) == 1:
                 package_id = self.id
             else:
-                pack = self.filtered(lambda p: p.name == parcel.get('reference'))
+                pack = self.filtered(lambda p: p.name == parcel.get("reference"))
                 if len(pack) == 1:
                     package_id = pack.id
 
@@ -125,12 +125,15 @@ class StockQuantPackage(models.Model):
                     "package_id": package_id,
                     "file": label.get("data"),
                     "name": "%s.%s"
-                    % (parcel.get("reference") or tracking_number or label.get("name"), label.get("type", "").lower()),
+                    % (
+                        parcel.get("reference") or tracking_number or label.get("name"),
+                        label.get("type", "").lower(),
+                    ),
                     "file_type": label.get("type"),
                 }
             )
-        res["tracking_number"] = ';'.join(tracking_refs)
-        res['labels'] = parcels_data
+        res["tracking_number"] = ";".join(tracking_refs)
+        res["labels"] = parcels_data
         return res
 
     def _roulier_get_parcels(self, picking):
