@@ -20,7 +20,10 @@
         <record id="stock_inventory_roulier" model="stock.inventory">
             <field name="name">Inventory for Roulier</field>
             <field name="state">confirm</field>
-            <field name="product_ids" eval="[(6, 0, [ref('product_big'), ref('product_small')])]" />
+            <field
+            name="product_ids"
+            eval="[(6, 0, [ref('product_big'), ref('product_small')])]"
+        />
         </record>
 
 
