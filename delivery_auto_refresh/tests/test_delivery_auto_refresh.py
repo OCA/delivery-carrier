@@ -17,6 +17,9 @@ class TestDeliveryAutoRefresh(common.HttpCase):
         service = self.env["product.product"].create(
             {"name": "Service Test", "type": "service"}
         )
+        pricelist = self.env["product.pricelist"].create(
+            {"name": "Test pricelist", "currency_id": self.env.company.currency_id.id}
+        )
         carrier_form = Form(self.env["delivery.carrier"])
         carrier_form.name = "Test carrier 1"
         carrier_form.delivery_type = "base_on_rule"
@@ -55,7 +58,11 @@ class TestDeliveryAutoRefresh(common.HttpCase):
             {"name": "Test product", "weight": 10, "list_price": 20}
         )
         self.partner = self.env["res.partner"].create(
-            {"name": "Test partner", "property_delivery_carrier_id": self.carrier_1.id}
+            {
+                "name": "Test partner",
+                "property_delivery_carrier_id": self.carrier_1.id,
+                "property_product_pricelist": pricelist.id,
+            }
         )
         self.param_name1 = "delivery_auto_refresh.auto_add_delivery_line"
         self.param_name2 = "delivery_auto_refresh.refresh_after_picking"
