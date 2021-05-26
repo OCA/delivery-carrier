@@ -11,7 +11,7 @@
     "depends": [
         "partner_helper",
         "base_phone",  # from oca/telephony
-                "base_delivery_carrier_label",
+        "base_delivery_carrier_label",
     ],
     "website": "https://github.com/OCA/delivery-carrier",
     "data": [
