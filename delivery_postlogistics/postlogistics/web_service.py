@@ -83,6 +83,11 @@ class PostlogisticsWebService(object):
             raise exceptions.UserError(
                 _("Phone number is required for phone call notification.")
             )
+        # PostLogistics supports only numeric values for ZIP
+        if not partner.zip or not partner.zip.isnumeric():
+            raise exceptions.UserError(
+                _("Partner postal code is not well formatted, please check it.")
+            )
 
         partner_name = partner.name or partner.parent_id.name
         recipient = {
