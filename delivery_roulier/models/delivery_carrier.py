@@ -16,7 +16,7 @@ class DeliveryCarrier(models.Model):
 
     def alternative_send_shipping(self, pickings):
         self.ensure_one()
-        if self._is_roulier:
+        if self._is_roulier():
             return pickings._roulier_generate_labels()
         else:
             return super().alternative_send_shipping(pickings)
