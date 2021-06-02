@@ -28,44 +28,64 @@ class StockPicking(models.Model):
         """Register this picking and commit to paazl immediately,
         return a list of dicts {'exact_price': 'tracking_number':}
         suitable for delivery.carrier#send_shipping"""
+        self._paazl_check_picking_consistency()
+        self._set_a_default_package()
         result = []
-        api = self._paazl_api()
+        for this in self:
+            this._paazl_send_update_order()
+            result.append(this._paazl_generate_labels())
+        return result
+
+    def _paazl_check_picking_consistency(self):
+        """ Check consistency of picking data before sending to Paazl """
         for this in self:
             if len(this.option_ids) != 1:
                 raise UserError(
                     _("Picking %s must set exactly one shipping option") % this.name
                 )
-            account = this._get_carrier_account()
-            this._set_a_default_package()
-            status = api.service.order(**this._paazl_order_data())
+
+    def _paazl_send_update_order(self, change_order=False):
+        """ Create Paazl order or update it if already existing """
+        self.ensure_one()
+        api = self._paazl_api()
+        status = api.service.order(**self._paazl_order_data())
+        if status.error and status.error.code == 1003:
+            # this order has been sent already, so we update it
+            status = api.service.updateOrder(**self._paazl_order_data())
+        self._paazl_raise_error(status)
+        status = api.service.commitOrder(**self._paazl_commit_order_data())
+        if change_order:
             if status.error and status.error.code == 1003:
-                # this order has been sent already, so we update it
-                status = api.service.updateOrder(**this._paazl_order_data())
-            this._paazl_raise_error(status)
-            status = api.service.commitOrder(**this._paazl_commit_order_data())
-            if status.error and status.error.code != 1003:
-                this._paazl_raise_error(status)
-            # we need to create labels in order to get a tracking number
-            status = api.service.generateLabels(**this._paazl_generate_labels_data())
-            this._paazl_raise_error(status)
-            # as we have the labels anyways, attach them
-            file_type = (account.file_format or "").lower() or "pdf"
-            label = {
-                "name": this.name,
-                "file": base64.b64encode(status.labels),
-                "filename": "{}.{}".format(this._paazl_reference(), file_type),
-                "file_type": file_type,
-            }
-            result.append(
-                {
-                    # TODO to get this right, we'd have to request shipping options
-                    # and find the price of the shipping option selected
-                    "exact_price": 0,
-                    "tracking_number": status.metaData[0]["trackingNumber"],
-                    "labels": [label],
-                }
-            )
-        return result
+                status = api.service.changeOrder(**self._paazl_change_order_data())
+            self._paazl_raise_error(status)
+        elif status.error and status.error.code != 1003:
+            self._paazl_raise_error(status)
+
+    def _paazl_generate_labels(self):
+        """ Generate Paazl labels.
+        return dict {'exact_price': 'tracking_number':}
+        """
+        self.ensure_one()
+        api = self._paazl_api()
+        # we need to create labels in order to get a tracking number
+        status = api.service.generateLabels(**self._paazl_generate_labels_data())
+        self._paazl_raise_error(status)
+        # as we have the labels anyways, attach them
+        account = self._get_carrier_account()
+        file_type = (account.file_format or "").lower() or "pdf"
+        label = {
+            "name": self._paazl_reference(),
+            "file": base64.b64encode(status.labels),
+            "filename": "{}.{}".format(self._paazl_reference(), file_type),
+            "file_type": file_type,
+        }
+        return {
+            # TODO to get this right, we'd have to request shipping options
+            # and find the price of the shipping option selected
+            "exact_price": 0,
+            "tracking_number": self._paazl_get_tracking_number(status),
+            "labels": [label],
+        }
 
     def _paazl_cancel(self):
         """Cancel a shipment"""
@@ -77,6 +97,10 @@ class StockPicking(models.Model):
             )
             this._paazl_raise_error(status)
 
+    def _paazl_get_tracking_number(self, status):
+        """Return the tracking number that is passed in the status"""
+        return status.metaData[0]['trackingNumber']
+
     def _paazl_get_tracking_link(self):
         """Return the tracking link if we got it already"""
         return self.paazl_carrier_tracking_url
@@ -85,7 +109,7 @@ class StockPicking(models.Model):
         """Return a soap client with the correct url"""
         # TODO use caching for the wsdl
         production = all(self.mapped("carrier_id.prod_environment"))
-        wsdl = self.env["ir.config_parameter"].get_param(
+        wsdl = self.env["ir.config_parameter"].sudo().get_param(
             "delivery_carrier_label_paazl.wsdl_%s"
             % (production and "production" or "test")
         )
@@ -103,21 +127,27 @@ class StockPicking(models.Model):
         """Return a dict that can be passed as parameters to the `order`
         endpoint of the paazl soap api"""
         self.ensure_one()
-        # use packages if they have packaging set, otherwise products
-        use_products = not any(self.mapped('package_ids.packaging_id'))
         return dict(
             **self._paazl_auth_order_id(),
             products=dict(
-                product=[
-                    self._paazl_quant_to_order_data(quant)
-                    for package in self.package_ids
-                    for quant in package.quant_ids
-                ] if use_products else [
-                    self._paazl_package_to_order_data(package)
-                    for package in self.package_ids
-                ]
+                product=self._paazl_order_data_product()
             ),
         )
+
+    def _paazl_order_data_product(self):
+        """ Format the products parameter to be sent to the `order`
+        endpoint of the paazl soap api"""
+        self.ensure_one()
+        # use packages if they have packaging set, otherwise products
+        use_products = not any(self.mapped('package_ids.packaging_id'))
+        return [
+            self._paazl_quant_to_order_data(quant)
+            for package in self.package_ids
+            for quant in package.quant_ids
+        ] if use_products else [
+            self._paazl_package_to_order_data(package)
+            for package in self.package_ids
+        ]
 
     def _paazl_quant_to_order_data(self, quant):
         """Return a dict describing a quant for the `order` endpoint"""
@@ -185,7 +215,7 @@ class StockPicking(models.Model):
                     for product in self._paazl_order_data()["products"]["product"]
                 ),
                 description=self.note or "/",
-                packageCount=len(self.package_ids),
+                packageCount=self._paazl_package_count(),
             ),
             shipperAddress=self._paazl_partner_to_order_data(
                 self.picking_type_id.warehouse_id.partner_id,
@@ -193,6 +223,19 @@ class StockPicking(models.Model):
             shippingAddress=shipping_address,
             totalAmount=0,
         )
+
+    def _paazl_change_order_data(self):
+        """Return a dict that can be passed as parameters to the `changeOrder`
+        endpoint of the paazl soap api"""
+        res = self._paazl_commit_order_data()
+        res.pop("pendingOrderReference")
+        res.update(self._paazl_order_data())
+        return res
+
+    def _paazl_package_count(self):
+        """ Return the number of the packages"""
+        self.ensure_one()
+        return len(self.package_ids)
 
     def _paazl_partner_to_order_data(self, partner):
         """Return a dict describing a partner for the `commitOrder` endpoint"""
