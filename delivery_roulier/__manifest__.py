@@ -6,7 +6,7 @@
     "version": "14.0.1.0.0",
     "author": "Akretion,Odoo Community Association (OCA)",
     "summary": "Integration of multiple carriers",
-    "maintainer": "Akretion, Odoo Community Association (OCA)",
+    "maintainers": ["florian-dacosta"],
     "category": "Warehouse",
     "depends": [
         "partner_helper",
