@@ -234,6 +234,8 @@ class StockQuantPackage(models.Model):
         returns:
             string
         """
+        if payload.get("auth", {}).get("password"):
+            payload["auth"]["password"] = "*****"
         try:
             _logger.debug(exception.response.text)
             _logger.debug(exception.response.request.body)
