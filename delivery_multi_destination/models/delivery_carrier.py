@@ -1,5 +1,6 @@
 # Copyright 2016-2020 Tecnativa - Pedro M. Baeza
 # Copyright 2017 Luis M. Ontalba <luis.martinez@tecnativa.com>
+# Copyright 2021 Gianmarco Conte <gconte@dinamicheaziendali.it>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import _, api, fields, models
@@ -41,16 +42,8 @@ class DeliveryCarrier(models.Model):
     @api.model
     def name_search(self, name="", args=None, operator="ilike", limit=100):
         """Don't show by default children carriers."""
-        if not self.env.context.get("show_children_carriers"):
-            if args is None:
-                args = []
-            args += [("parent_id", "=", False)]
-        return super(DeliveryCarrier, self)._name_search(
-            name=name,
-            args=args,
-            operator=operator,
-            limit=limit,
-        )
+        domain = [("parent_id", "=", False)]
+        return self.search(domain, limit=limit).name_get()
 
     def available_carriers(self, partner):
         """If the carrier is multi, we test the availability on children."""
