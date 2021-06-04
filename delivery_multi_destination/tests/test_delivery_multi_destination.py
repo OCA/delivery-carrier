@@ -202,5 +202,5 @@ class TestDeliveryMultiDestination(common.SavepointCase):
         picking = self.sale_order.picking_ids
         self.assertEqual(picking.carrier_id, self.carrier_multi)
         picking.move_lines.quantity_done = 1
-        picking.action_done()
+        picking._action_done()
         self.assertAlmostEqual(picking.carrier_price, 50)
