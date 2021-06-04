@@ -39,7 +39,7 @@
         <field name="inherit_id" ref="stock.stock_picking_kanban" />
         <field name="priority">999</field>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='date']" position="after">
+            <xpath expr="//field[@name='scheduled_date']" position="after">
                 <field name="delivery_zone_id" />
             </xpath>
             <xpath expr="//div[hasclass('oe_kanban_bottom_left')]" position="replace">
