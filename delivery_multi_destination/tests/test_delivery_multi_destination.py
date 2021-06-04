@@ -190,7 +190,8 @@ class TestDeliveryMultiDestination(common.SavepointCase):
 
     def test_available_carriers(self):
         self.assertEqual(
-            self.carrier_multi.available_carriers(self.partner_2), self.carrier_multi,
+            self.carrier_multi.available_carriers(self.partner_2),
+            self.carrier_multi,
         )
 
     def test_picking_validation(self):
