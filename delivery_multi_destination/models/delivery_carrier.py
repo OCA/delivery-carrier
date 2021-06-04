@@ -15,7 +15,8 @@ class DeliveryCarrier(models.Model):
         string="Destination grid",
     )
     parent_id = fields.Many2one(
-        comodel_name="delivery.carrier", string="Parent carrier",
+        comodel_name="delivery.carrier",
+        string="Parent carrier",
     )
     destination_type = fields.Selection(
         selection=[("one", "One destination"), ("multi", "Multiple destinations")],
@@ -30,7 +31,11 @@ class DeliveryCarrier(models.Model):
                 args = []
             args += [("parent_id", "=", False)]
         return super(DeliveryCarrier, self).search(
-            args, offset=offset, limit=limit, order=order, count=count,
+            args,
+            offset=offset,
+            limit=limit,
+            order=order,
+            count=count,
         )
 
     @api.model
@@ -41,7 +46,10 @@ class DeliveryCarrier(models.Model):
                 args = []
             args += [("parent_id", "=", False)]
         return super(DeliveryCarrier, self)._name_search(
-            name=name, args=args, operator=operator, limit=limit,
+            name=name,
+            args=args,
+            operator=operator,
+            limit=limit,
         )
 
     def available_carriers(self, partner):
@@ -67,7 +75,10 @@ class DeliveryCarrier(models.Model):
             carrier = self.with_context(show_children_carriers=True)
             for subcarrier in carrier.child_ids:
                 if subcarrier._match_address(order.partner_shipping_id):
-                    return super(DeliveryCarrier, subcarrier,).rate_shipment(order)
+                    return super(
+                        DeliveryCarrier,
+                        subcarrier,
+                    ).rate_shipment(order)
 
     def send_shipping(self, pickings):
         """We have to override this method for redirecting the result to the
@@ -93,7 +104,8 @@ class DeliveryCarrier(models.Model):
                     else:
                         try:
                             picking_res = super(
-                                DeliveryCarrier, subcarrier,
+                                DeliveryCarrier,
+                                subcarrier,
                             ).send_shipping(pickings)
                             break
                         except Exception:
