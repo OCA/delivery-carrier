@@ -113,13 +113,7 @@ class StockPicking(models.Model):
         Accounts are resolved at runtime (can be != for dev/prod)
         """
         self.ensure_one()
-        domain = [
-            ("delivery_type", "=", self.carrier_id.delivery_type),
-            "|",
-            ("company_id", "=", self.company_id.id),
-            ("company_id", "=", False),
-        ]
-        account = self.env["carrier.account"].search(domain, limit=1)
+        account = self._get_carrier_account()
         if not account:
             raise UserError(
                 _(
