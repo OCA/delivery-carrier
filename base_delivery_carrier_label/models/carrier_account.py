@@ -23,6 +23,18 @@ class CarrierAccount(models.Model):
         .selection,
         help="This field may be used to link an account to a carrier",
     )
+    carrier_ids = fields.Many2many(
+        "delivery.carrier",
+        "delivery_carrier_account_rel",
+        "account_id",
+        "carrier_id",
+        string="Carriers",
+        help=(
+            "This field may be used to link an account to specific delivery methods"
+            " It may be usefull to find an account with more precision than with "
+            "only the delivery type"
+        ),
+    )
     account = fields.Char(string="Account Number", required=True)
     password = fields.Char(string="Account Password", required=True)
     company_id = fields.Many2one(comodel_name="res.company", string="Company")
