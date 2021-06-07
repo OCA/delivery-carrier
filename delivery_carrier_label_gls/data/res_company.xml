@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+  <record id="base.main_company" model="res.company">
+    <field name="gls_contact_id">TO BE SPECIFIED</field>
+  </record>
+</odoo>
