@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+  <record model="res.groups" id="group_gls_report_manager">
+    <field name="name">GLS Report Manager</field>
+  </record>
+  <record model="res.groups" id="stock.group_stock_manager">
+    <field name="implied_ids" eval="[(4, ref('group_gls_report_manager'))]" />
+  </record>
+</odoo>
