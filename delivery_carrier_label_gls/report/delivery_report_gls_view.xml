@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <report
+    id="report_delivery_report_gls"
+    model="delivery.report.gls"
+    string="GLS Delivery Report"
+    report_type="qweb-pdf"
+    name="delivery_carrier_label_gls.report_delivery_report_gls_document"
+    file="delivery_carrier_label_gls.report_delivery_report_gls"
+  />
+
+</odoo>

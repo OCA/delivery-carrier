@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <record model="ir.ui.view" id="delivery_report_gls_form_view">
+    <field name="name">GLS: Delivery Reports</field>
+    <field name="model">delivery.report.gls</field>
+    <field name="arch" type="xml">
+      <form string="Report">
+        <group>
+          <field name="report_datetime" />
+          <field name="package_ids">
+            <tree>
+              <field name="display_name" />
+              <field name="parcel_tracking" />
+              <field name="shipping_weight" />
+              <field name="packaging_id" />
+            </tree>
+          </field>
+        </group>
+      </form>
+    </field>
+  </record>
+  <record model="ir.ui.view" id="delivery_report_gls_tree_view">
+    <field name="name">delivery.report.gls.tree</field>
+    <field name="model">delivery.report.gls</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="display_name" />
+      </tree>
+    </field>
+  </record>
+  <record id="delivery_report_gls_search_view" model="ir.ui.view">
+        <field name="name">delivery.report.gls.search</field>
+        <field name="model">delivery.report.gls</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="carrier_id" />
+                <field name="report_datetime" />
+                <group expand="0" string="Group By" colspan="4" col="4">
+                    <filter
+            string="Carrier"
+            name="group_by_carrier_id"
+            domain="[]"
+            context="{'group_by':'carrier_id'}"
+          />
+                </group>
+            </search>
+        </field>
+    </record>
+  <record model="ir.actions.act_window" id="delivery_report_gls_act_window">
+    <field name="name">GLS: Delivery Reports</field>
+    <field name="res_model">delivery.report.gls</field>
+    <field name="view_mode">tree,form</field>
+    <field name="domain">[]</field>
+    <field name="context">{}</field>
+  </record>
+  <menuitem
+    id="delivery_report_gls_menu"
+    name="GLS: Delivery Reports"
+    sequence="50"
+    parent="stock.menu_stock_inventory_control"
+    action="delivery_report_gls_act_window"
+  />
+</odoo>
