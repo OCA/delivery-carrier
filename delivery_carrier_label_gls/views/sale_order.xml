@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <record id="view_order_form_with_carrier" model="ir.ui.view">
+    <field name="name">sale.order.form.delivery_gls</field>
+    <field name="model">sale.order</field>
+    <field name="inherit_id" ref="delivery.view_order_form_with_carrier" />
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='id']" position="after">
+        <field name="delivery_type" invisible="1" />
+        <field
+          name="gls_parcel_shop"
+          attrs="{'invisible': [('delivery_type', '!=', 'gls')]}"
+        />
+      </xpath>
+    </field>
+  </record>
+</odoo>

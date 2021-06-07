@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <record model="ir.ui.view" id="delivery_report_gls_wizard_form_view">
+    <field name="name">GLS: Get End of Day Report</field>
+    <field name="model">delivery.report.gls.wizard</field>
+    <field name="arch" type="xml">
+      <form string="Report">
+        <group>
+          <field name="carrier_ids" />
+          <field name="date" />
+        </group>
+        <footer>
+                    <button
+            name="get_end_of_day_report"
+            class="btn btn-primary"
+            type="object"
+            string="GLS: Get End of Day Report"
+          />
+                    <button special="cancel" string="Cancel" />
+                </footer>
+      </form>
+    </field>
+  </record>
+  <record model="ir.actions.act_window" id="delivery_report_gls_wizard_act_window">
+    <field name="name">GLS: Get End of Day Report</field>
+    <field name="res_model">delivery.report.gls.wizard</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">form</field>
+    <field name="target">new</field>
+    <field name="domain">[]</field>
+    <field name="context">{}</field>
+  </record>
+  <menuitem
+    id="delivery_report_gls_wizard_menu"
+    name="GLS: Get End of Day Report"
+    sequence="50"
+    parent="stock.menu_stock_inventory_control"
+    groups="stock.group_stock_manager"
+    action="delivery_report_gls_wizard_act_window"
+  />
+</odoo>

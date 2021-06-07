@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <record id="view_picking_form_gls" model="ir.ui.view">
+    <field name="model">stock.picking</field>
+    <field name="inherit_id" ref="stock.view_picking_form" />
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='delivery_type']" position="after">
+        <field
+          name="gls_package_ref"
+          attrs="{'invisible': [('delivery_type', '!=', 'gls')]}"
+        />
+        <field
+          name="gls_parcel_shop"
+          attrs="{'invisible': [('delivery_type', '!=', 'gls')]}"
+        />
+      </xpath>
+      <xpath
+        expr="//field[@name='pack_operation_pack_ids']//tree//button[@name='show_details']"
+        position="after"
+      >
+        <button
+          type="object"
+          name="open_tracking_url"
+          class="oe_button fa_truck"
+          attrs="{'invisible': [('result_package_id', '=', False)]}"
+          icon="terp-accessories-archiver+"
+        />
+      </xpath>
+    </field>
+  </record>
+  <record id="view_quant_package_form" model="ir.ui.view">
+    <field name="model">stock.quant.package</field>
+    <field name="inherit_id" ref="stock.view_quant_package_form" />
+    <field name="arch" type="xml">
+      <button name="unpack" position="after">
+        <button
+          type="object"
+          name="open_tracking_url"
+          string="Carrier Tracking"
+          attrs="{'invisible': [('parcel_tracking', '=', False)]}"
+          help="Track your parcel in carrier information system"
+        />
+      </button>
+    </field>
+  </record>
+</odoo>

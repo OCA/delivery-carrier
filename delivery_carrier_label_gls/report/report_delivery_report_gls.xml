@@ -1,0 +1,133 @@
+<?xml version="1.0" ?>
+<odoo>
+
+    <template id="report_delivery_report_gls_document">
+        <t t-call="report.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="report.external_layout">
+                    <t t-set="address">
+                        <p id="partner_info"><strong>Partner:</strong></p>
+                        <div
+              t-field="o.carrier_id.company_id.partner_id"
+              t-options='{"widget": "contact", "fields": ["address", "name", "phone", "email"], "no_marker": true, "phone_icons": true}'
+            />
+                    </t>
+                    <div class="page">
+                        <div class="oe_structure" />
+                        <div class="row" id="header_info">
+                            <div class="col-3">
+                                <h3>GLS Delivery Report: <div
+                    t-field="o.report_datetime"
+                  /></h3>
+                                <p>GLS Contact ID: <span
+                    t-field="o.carrier_id.gls_contact_id"
+                  /></p>
+                            </div>
+                        </div>
+                        <div class="row" id="packages_info">
+                            <t t-set="number_packages" t-value="0" />
+                            <t t-set="total_weight" t-value="0" />
+                            <div class="col-12">
+                                <t t-set="total" t-value="0" />
+                                <h5><strong>Parcels</strong></h5>
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                                <th class="text-right"><strong
+                        >Internal Reference</strong></th>
+                                            <th><strong>Tracking</strong></th>
+                                            <th class="text-right"><strong
+                        >Weight</strong></th>
+                                            <th class="text-right"><strong
+                        >Package Reference</strong></th>
+                                            <th class="text-right"><strong
+                        >Name</strong></th>
+                                            <th class="text-right"><strong
+                        >City</strong></th>
+                                            <th class="text-right"><strong
+                        >Country</strong></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-foreach="o.package_ids" t-as="l">
+                                            <tr>
+                                                    <td>
+                                                        <span
+                            t-field="l.gls_picking_id.origin"
+                          />
+                                                    </td>
+                                                    <td>
+                                                        <span
+                            t-field="l.parcel_tracking"
+                          />
+                                                    </td>
+                                                    <td class="text-right">
+                                                        <span
+                            t-field="l.shipping_weight"
+                          />
+                                                    </td>
+                                                    <td class="text-right">
+                                                        <span
+                            t-field="l.gls_package_ref"
+                          />
+                                                    </td>
+                                                    <td class="text-right">
+                                                        <span
+                            t-field="l.gls_picking_id.partner_id.name"
+                          />
+                                                    </td>
+                                                    <td class="text-right">
+                                                        <span
+                            t-field="l.gls_picking_id.partner_id.city"
+                          />
+                                                    </td>
+                                                    <td class="text-right">
+                                                        <span
+                            t-field="l.gls_picking_id.partner_id.country_id.code"
+                          />
+                                                    </td>
+                                                <t
+                          t-set="number_packages"
+                          t-value="number_packages + 1"
+                        />
+                                                <t
+                          t-set="total_weight"
+                          t-value="total_weight + l.shipping_weight"
+                        />
+                                            </tr>
+                                        </t>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div id="total" class="row" name="total">
+                             <div class="col-4 ml-auto">
+                                <table class="table table-sm">
+                                    <tr class="border-black o_subtotal" style="">
+                                        <td><strong>Number of Packages</strong></td>
+                                        <td class="text-right">
+                                            <span t-esc="number_packages" />
+                                        </td>
+                                        <td><strong>Total Weight (kg)</strong></td>
+                                        <td class="text-right">
+                                            <span t-esc="total_weight" />
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row" id="footer_info">
+                            <ul>
+                                <li><strong>Driver's name:</strong></li>
+                                <li><strong>Vehicle registration plate:</strong></li>
+                                <li><strong>Date and time of reception:</strong></li>
+                                <li><strong>Signature:</strong></li>
+                            </ul>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

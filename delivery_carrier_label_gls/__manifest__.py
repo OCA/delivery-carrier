@@ -1,81 +1,41 @@
-# -*- coding: utf-8 -*-
-##############################################################################
-#
-#    Copyright (C) All Rights Reserved 2014 Akretion
-#    @author David BEAL <david.beal@akretion.com>
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-###############################################################################
-
+# coding: utf-8
+# © 2015 David BEAL @ Akretion
+# Copyright 2021 ACSONE SA/NV
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 {
-    'name': 'Delivery Carrier Label GLS',
-    'version': '0.1',
-    'author': "Akretion,Odoo Community Association (OCA)",
-    'maintener': 'Akretion',
-    'category': 'Warehouse',
-    'summary': "GLS carrier label printing",
-    'depends': [
-        'base_delivery_carrier_label',
-        'configuration_helper',
-        'partner_helper',
+    "name": "Delivery Carrier Label GLS",
+    "version": "10.0.1.0.0",
+    "author": "Acsone,Akretion,Odoo Community Association (OCA)",
+    "maintener": "Akretion",
+    "category": "Warehouse",
+    "summary": "GLS carrier label printing",
+    "depends": [
+        "base_delivery_carrier_label",
+        "partner_helper",
+        "document",
+        "delivery",
     ],
-    'description': """
-Delivery Carrier Label GLS (french carrier)
-=============================================
-
-
-GLS Group - Transportation services
--------------------------------------
-
-
-Implémentation du service Unibox:
-- envoi des informations du bon de livraison et des colis au serveur GLS unibox
-- retour par webservice des informations de routage
-- génération des étiquettes GLS Unibox
-
-
-GLS carrier https://gls-group.eu/
-
-
-Contributors
-------------
-* David BEAL <david.beal@akretion.com>
-
-""",
-    'website': 'http://www.akretion.com/',
-    'data': [
-        'data/delivery_carrier.xml',
-        'data/sequence.xml',
-        'config_view.xml',
-        # 'security/ir.model.access.csv',
+    "website": "http://www.acsone.eu/",
+    "data": [
+        "security/ir.model.access.csv",
+        "data/cron_end_of_day_report.xml",
+        "data/product_product.xml",
+        "data/product_packaging.xml",
+        "data/delivery_carrier.xml",
+        "views/gls_config_settings.xml",
+        "views/delivery_carrier.xml",
+        "views/delivery_report_gls.xml",
+        "views/sale_order.xml",
+        "views/stock.xml",
+        "wizards/delivery_report_gls_wizard.xml",
+        "report/report_delivery_report_gls.xml",
+        "report/delivery_report_gls_view.xml",
     ],
-    'demo': [
-        'demo/res.partner.csv',
-        'demo/company.xml',
-        'demo/product.xml',
-    ],
-    'external_dependencies': {
-        'python': [
-            'pycountry',
-            'unidecode',
-        ],
-    },
-    'license': 'AGPL-3',
-    'tests': [],
-    'installable': False,
-    'auto_install': False,
-    'application': False,
+    "demo": ["demo/company.xml"],
+    "license": "AGPL-3",
+    "installable": True,
+    "auto_install": False,
+    "application": False,
+    "pre_init_hook": "pre_init_hook",
 }
