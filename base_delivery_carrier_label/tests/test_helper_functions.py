@@ -29,16 +29,25 @@ class TestHelperFunctions(TransactionCase):
         second_account_with_company = account_with_company.copy(
             default=dict(name="2. Account with company", sequence=-1),
         )
-        account = (
-            self.env["stock.picking"]
-            .new(
-                dict(
-                    carrier_id=self.env.ref("delivery.normal_delivery_carrier").id,
-                    company_id=self.env.user.company_id.id,
-                )
+        carrier_id = self.env.ref("delivery.normal_delivery_carrier").id
+        pick = self.env["stock.picking"].new(
+            dict(
+                carrier_id=carrier_id,
+                company_id=self.env.user.company_id.id,
             )
-            ._get_carrier_account()
         )
+
+        account = pick._get_carrier_account()
+        self.assertEqual(account, second_account_with_company)
+
+        # restrict second_account_with_company to another delivery method
+        free_method = self.env.ref("delivery.free_delivery_carrier")
+        second_account_with_company.write({"carrier_ids": [(6, 0, [free_method.id])]})
+        account = pick._get_carrier_account()
+        self.assertEqual(account, account_with_company)
+
+        second_account_with_company.write({"carrier_ids": [(4, carrier_id, 0)]})
+        account = pick._get_carrier_account()
         self.assertEqual(account, second_account_with_company)
 
     def test_attach_shipping_label(self):
