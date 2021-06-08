@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2019 Camptocamp SA
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+  <record id="partner_postlogistics" model="res.partner">
+    <field name="name">PostLogistics</field>
+    <field name="image" type="base64" file="delivery_carrier_label_postlogistics/static/img/postlogistics-logo.jpg"/>
+    <field name="customer" eval="False"/>
+    <field name="supplier" eval="False"/>
+    <field name="email">webservice@post.ch</field>
+  </record>
+</odoo>
+
