@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_delivery_carrier_agency_wh_user,delivery.carrier.agency.wh.user,model_delivery_carrier_agency,stock.group_stock_user,1,0,0,0
+access_delivery_carrier_agency_wh_manager,delivery.carrier.agency.wh.manager,model_delivery_carrier_agency,stock.group_stock_manager,1,1,1,1
