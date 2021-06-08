@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!--
+    Copyright 2020 Camptocamp SA
+-->
+
+  <record id="view_postlogistics_auth_form" model="ir.ui.view">
+    <field name="name">postlogistics.auth.form</field>
+    <field name="model">postlogistics.auth</field>
+    <field name="arch" type="xml">
+      <form string="Postlogistics Auth">
+
+        <field invisible="1" name="state"/>
+
+        <!--    To do   -->
+        <group states="todo">
+          <h2>Set the swisspost client information</h2>
+        </group>
+
+        <group states="todo">
+          <field name="authentication_url"/>
+          <field name="generate_label_url"/>
+          <field name="client_id" required="1"/>
+          <field name="client_secret" required="1"/>
+        </group>
+
+        <footer states="todo">
+          <button name="generate_access_token" type="object" string="Generate access token"/>
+          <button special="cancel" string="Cancel"/>
+        </footer>
+
+        <!--    Done    -->
+        <group states="done">
+          <h2>OAuth configuration complete</h2>
+        </group>
+
+        <footer states="done">
+          <button name="reset_access_token" type="object" string="Reset access token"/>
+          <button special="cancel" string="Close" class="btn-primary"/>
+        </footer>
+
+      </form>
+    </field>
+  </record>
+
+  <record id="action_postlogistics_auth" model="ir.actions.act_window">
+    <field name="name">Postlogistics Auth</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">postlogistics.auth</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">form</field>
+    <field name="view_id" ref="view_postlogistics_auth_form"/>
+    <field name="target">new</field>
+  </record>
+
+</odoo>
