@@ -1,0 +1,112 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* delivery_carrier_agency
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: delivery_carrier_agency
+#: model:ir.model.fields,field_description:delivery_carrier_agency.field_delivery_carrier_agency__partner_id
+msgid "Address"
+msgstr ""
+
+#. module: delivery_carrier_agency
+#: model:ir.actions.act_window,name:delivery_carrier_agency.action_carrier_agency
+#: model:ir.model,name:delivery_carrier_agency.model_delivery_carrier_agency
+#: model:ir.ui.menu,name:delivery_carrier_agency.carrier_agency_menu
+msgid "Carrier Agency"
+msgstr ""
+
+#. module: delivery_carrier_agency
+#: model:ir.model.fields,field_description:delivery_carrier_agency.field_delivery_carrier_agency__carrier_ids
+msgid "Carriers"
+msgstr ""
+
+#. module: delivery_carrier_agency
+#: model:ir.model.fields,field_description:delivery_carrier_agency.field_delivery_carrier_agency__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: delivery_carrier_agency
+#: model:ir.model.fields,field_description:delivery_carrier_agency.field_delivery_carrier_agency__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: delivery_carrier_agency
+#: model:ir.model.fields,field_description:delivery_carrier_agency.field_delivery_carrier_agency__delivery_type
+msgid "Delivery Type"
+msgstr ""
+
+#. module: delivery_carrier_agency
+#: model:ir.model.fields,field_description:delivery_carrier_agency.field_delivery_carrier_agency__display_name
+#: model:ir.model.fields,field_description:delivery_carrier_agency.field_stock_picking__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: delivery_carrier_agency
+#: model:ir.model.fields,field_description:delivery_carrier_agency.field_delivery_carrier_agency__external_reference
+msgid "External Reference"
+msgstr ""
+
+#. module: delivery_carrier_agency
+#: model:ir.model.fields,field_description:delivery_carrier_agency.field_delivery_carrier_agency__id
+#: model:ir.model.fields,field_description:delivery_carrier_agency.field_stock_picking__id
+msgid "ID"
+msgstr ""
+
+#. module: delivery_carrier_agency
+#: model:ir.model.fields,field_description:delivery_carrier_agency.field_delivery_carrier_agency____last_update
+#: model:ir.model.fields,field_description:delivery_carrier_agency.field_stock_picking____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: delivery_carrier_agency
+#: model:ir.model.fields,field_description:delivery_carrier_agency.field_delivery_carrier_agency__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: delivery_carrier_agency
+#: model:ir.model.fields,field_description:delivery_carrier_agency.field_delivery_carrier_agency__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: delivery_carrier_agency
+#: model:ir.model.fields,field_description:delivery_carrier_agency.field_delivery_carrier_agency__name
+msgid "Name"
+msgstr ""
+
+#. module: delivery_carrier_agency
+#: model:ir.model.fields,help:delivery_carrier_agency.field_delivery_carrier_agency__external_reference
+msgid "Reference or code supplied by the carrier"
+msgstr ""
+
+#. module: delivery_carrier_agency
+#: model:ir.model.fields,field_description:delivery_carrier_agency.field_delivery_carrier_agency__sequence
+msgid "Sequence"
+msgstr ""
+
+#. module: delivery_carrier_agency
+#: model:ir.model.fields,help:delivery_carrier_agency.field_delivery_carrier_agency__carrier_ids
+msgid ""
+"This field may be used to link an account to specific delivery methods It "
+"may be usefull to find an account with more precision than with only the "
+"delivery type"
+msgstr ""
+
+#. module: delivery_carrier_agency
+#: model:ir.model,name:delivery_carrier_agency.model_stock_picking
+msgid "Transfer"
+msgstr ""
+
+#. module: delivery_carrier_agency
+#: model:ir.model.fields,field_description:delivery_carrier_agency.field_delivery_carrier_agency__warehouse_ids
+msgid "Warehouses"
+msgstr ""
