@@ -155,6 +155,11 @@ class StockPicking(models.Model):
         zpl_patch_string = self.carrier_id.zpl_patch_string
 
         labels = []
+
+        # It could happen that no successful label has been returned by the API
+        if not label_result:
+            return labels
+
         if not packages:
             label = label_result[0]["value"][0]
             self.carrier_tracking_ref = label["tracking_number"]
