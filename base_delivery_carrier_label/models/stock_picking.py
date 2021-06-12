@@ -75,12 +75,10 @@ class StockPicking(models.Model):
     def _set_carrier_tracking_ref(self, shipping_labels):
         if len(shipping_labels) == 1:
             label = shipping_labels[0]
-            self.write(
-                {"carrier_tracking_ref": label.get("tracking_number")}
-            )
+            self.write({"carrier_tracking_ref": label.get("tracking_number")})
 
     def action_generate_carrier_label(self):
-        """ Method for the 'Generate Label' button.
+        """Method for the 'Generate Label' button.
 
         It will generate the labels for all the packages of the picking.
         Packages are mandatory in this case
