@@ -2,7 +2,7 @@
 # Copyright 2013-2016 Camptocamp SA
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import fields, models
+from odoo import api, fields, models
 
 
 class DeliveryCarrierOption(models.Model):
@@ -19,7 +19,11 @@ class DeliveryCarrierOption(models.Model):
 
     active = fields.Boolean(default=True)
     mandatory = fields.Boolean(
-        help="If checked, this option is necessarily applied " "to the delivery order"
+        help=(
+            "If checked, this option is necessarily applied "
+            "to the delivery order. Mandatory options show up in orange "
+            "in the option widget on the picking."
+        ),
     )
     by_default = fields.Boolean(
         string="Applied by Default",
@@ -38,3 +42,13 @@ class DeliveryCarrierOption(models.Model):
         help="When True, help to prevent the user to modify some fields "
         "option (if attribute is defined in the view)",
     )
+    color = fields.Integer(
+        compute="_compute_color",
+        help="Orange if the option is mandatory, otherwise no color",
+    )
+
+    @api.depends("mandatory")
+    def _compute_color(self):
+        """Show that a tag is mandatory using the color attribute"""
+        for tag in self:
+            tag.color = 2 if tag.mandatory else False
