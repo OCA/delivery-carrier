@@ -39,8 +39,6 @@ class StockPicking(models.Model):
         for package in self.mapped("pack_operation_product_ids.result_package_id"):
             if not package.parcel_tracking:
                 self.gls_send_shipping_package(package)
-                # TODO: implement cancel on rollback :-/
-                # self.env.cr.commit()  # TODO ? (maybe not necessary with rollback)
         return self.carrier_tracking_ref
 
     def gls_send_shipping_package(self, package):
@@ -61,7 +59,6 @@ class StockPicking(models.Model):
         for package in self.pack_operation_product_ids.result_package_id:
             if package.parcel_tracking:
                 package.gls_cancel_shipment()
-                # self.env.cr.commit()  # TODO? same as above.
 
         self.carrier_tracking_ref = False
         self.gls_package_ref = False

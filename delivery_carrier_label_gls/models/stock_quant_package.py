@@ -79,6 +79,9 @@ class StockQuantPackage(models.Model):
         assert len(response["CreatedShipment"]["ParcelData"]) == 1  # :-/
         parcel_data = response["CreatedShipment"]["ParcelData"][0]
         tracking = parcel_data["TrackID"]
+        # !! if you don't want to pay for lost API calls, you need:
+        # https://github.com/odoo/odoo/pull/54321/
+        self.env.cr.after("rollback", lambda: client.cancel_parcel(tracking))
         self.parcel_tracking = tracking
         self.gls_package_ref = parcel_data["ParcelNumber"]
         label_pdf_content = response["CreatedShipment"]["PrintData"]
