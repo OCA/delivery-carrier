@@ -4,7 +4,7 @@
 {
     "name": "Auto-refresh delivery",
     "summary": "Auto-refresh delivery price in sales orders",
-    "version": "13.0.1.0.4",
+    "version": "13.0.1.0.5",
     "category": "Delivery",
     "website": "https://github.com/OCA/delivery-carrier",
     "author": "Tecnativa, Odoo Community Association (OCA)",
