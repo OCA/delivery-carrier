@@ -10,4 +10,8 @@
         <field name="key">delivery_auto_refresh.refresh_after_picking</field>
         <field name="value">0</field>
     </record>
+    <record id="default_auto_void_delivery_line" model="ir.config_parameter">
+        <field name="key">delivery_auto_refresh.auto_void_delivery_line</field>
+        <field name="value">0</field>
+    </record>
 </odoo>
