@@ -29,6 +29,11 @@ msgid "Sales Order"
 msgstr ""
 
 #. module: delivery_auto_refresh
+#: model:ir.model,name:delivery_auto_refresh.model_sale_order_line
+msgid "Sales Order Line"
+msgstr ""
+
+#. module: delivery_auto_refresh
 #: model:ir.model,name:delivery_auto_refresh.model_stock_picking
 msgid "Transfer"
 msgstr ""
