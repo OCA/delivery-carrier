@@ -114,6 +114,11 @@ msgid "Code"
 msgstr "Code"
 
 #. module: base_delivery_carrier_label
+#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option__color
+msgid "Color"
+msgstr ""
+
+#. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account__company_id
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__company_id
 msgid "Company"
@@ -267,9 +272,10 @@ msgstr "ID"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_delivery_carrier_option__mandatory
-msgid "If checked, this option is necessarily applied to the delivery order"
+msgid ""
+"If checked, this option is necessarily applied to the delivery order. "
+"Mandatory options show up in orange in the option widget on the picking."
 msgstr ""
-"Si coché, cette option est nécessairement appliquée à l'ordre de livraison"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__index_content
@@ -372,6 +378,11 @@ msgstr "Option"
 #: model_terms:ir.ui.view,arch_db:base_delivery_carrier_label.view_delivery_carrier_form
 msgid "Options"
 msgstr "Options"
+
+#. module: base_delivery_carrier_label
+#: model:ir.model.fields,help:base_delivery_carrier_label.field_delivery_carrier_option__color
+msgid "Orange if the option is mandatory, otherwise no color"
+msgstr ""
 
 #. module: base_delivery_carrier_label
 #: selection:delivery.carrier,delivery_type:0
@@ -597,6 +608,10 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:base_delivery_carrier_label.delivery_carrier_template_option_view_tree
 msgid "delivery_carrier_option"
 msgstr ""
+
+#~ msgid "If checked, this option is necessarily applied to the delivery order"
+#~ msgstr ""
+#~ "Si coché, cette option est nécessairement appliquée à l'ordre de livraison"
 
 #~ msgid "Carrier type (combines several delivery methods)"
 #~ msgstr "Type de transport"
