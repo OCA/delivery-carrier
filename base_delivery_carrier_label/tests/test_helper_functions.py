@@ -53,3 +53,13 @@ class TestHelperFunctions(TransactionCase):
         ))
         self.assertEqual(label.name, 'Hello')
         self.assertFalse(picking.show_label_button)
+
+    def test_delivery_carrier_option(self):
+        """Mandatory option on delivery options sets color"""
+        option = self.env["delivery.carrier.option"].create({
+            "name": __name__,
+            "code": __name__,
+        })
+        self.assertFalse(option.color)
+        option.mandatory = True
+        self.assertEqual(option.color, 2)
