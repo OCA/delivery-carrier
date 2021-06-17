@@ -84,8 +84,8 @@ class StockQuantPackage(models.Model):
         self.env.cr.after("rollback", lambda: client.cancel_parcel(tracking))
         self.parcel_tracking = tracking
         self.gls_package_ref = parcel_data["ParcelNumber"]
-        label_pdf_content = response["CreatedShipment"]["PrintData"]
-        self._gls_label_package(label_pdf_content)
+        label_content = response["CreatedShipment"]["PrintData"]
+        self._gls_label_package(label_content)
 
     def _gls_prepare_address(self):
         self.ensure_one()
@@ -130,14 +130,16 @@ class StockQuantPackage(models.Model):
     @api.model
     def _gls_label_package(self, label_data):
         self.ensure_one()
-        name = (self.name or "PACKAGE%s" % self.id) + ".pdf"
+        extension = "pdf" if self.carrier_id.gls_label_format == "pdf" else "txt"
+        file_type = self.carrier_id.gls_label_format
+        name = (self.name or "PACKAGE%s" % self.id) + "." + extension
         vals_label = {
             "package_id": self.id,
             "datas": label_data[0]["Data"],
             "datas_fname": name,
             "res_id": self.gls_picking_id.id,
             "res_model": self.gls_picking_id._name,
-            "file_type": "pdf",
+            "file_type": file_type,
             "type": "binary",
             "name": name,
         }

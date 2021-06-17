@@ -4,6 +4,7 @@ from . import company
 from . import config
 from . import product_packaging
 from . import sale_order
+from . import shipping_label
 from . import stock_picking
 from . import stock_pack_operation
 from . import stock_quant_package

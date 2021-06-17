@@ -66,7 +66,10 @@ class DeliveryClientGls(models.TransientModel):
     def create_parcel(self, payload):
         payload["Shipment"]["Shipper"] = {"ContactID": self._get_contact_id()}
         payload["PrintingOptions"] = {
-            "ReturnLabels": {"TemplateSet": "NONE", "LabelFormat": "PDF"}
+            "ReturnLabels": {
+                "TemplateSet": self.carrier_id.gls_label_template or "NONE",
+                "LabelFormat": self.carrier_id.gls_label_format.upper(),
+            }
         }
         return self._post("shipments", json=payload)
 

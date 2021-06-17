@@ -26,6 +26,33 @@ class DeliveryCarrier(models.Model):
     gls_url_tracking = fields.Char(
         help="Root URL for parcel tracking. Needs a %s for the tracking reference."
     )
+    gls_label_format = fields.Selection(
+        string="Label format",
+        selection=[
+            ("pdf", "PDF"),
+            ("zebra", "Zebra"),
+            ("intermec", "Intermec"),
+            ("datamax", "Datamax"),
+            ("toshiba", "Toshiba"),
+        ],
+        default="pdf",
+        required=True
+    )
+    gls_label_template = fields.Selection(
+        string="Label Template",
+        selection=[
+            ("D_200", "D200"),
+            ("PF_4_I", "PF4I"),
+            ("PF_4_I_200", "PF4I200"),
+            ("PF_4_I_300", "PF4I300"),
+            ("PF_8_D_200", "PF8D200"),
+            ("T_200_BF", "T200BF"),
+            ("T_300_BF", "T300BF"),
+            ("ZPL_200", "ZPL200"),
+            ("ZPL_300", "ZPL300"),
+        ],
+        default=False,
+    )
 
     def gls_get_shipping_price_from_so(self, order):
         self.ensure_one()
