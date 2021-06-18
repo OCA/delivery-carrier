@@ -41,3 +41,28 @@ class StockPicking(models.Model):
             total, weight, volume, quantity,
         )
         return res
+
+    def action_done(self):
+        """If configured, we want to set to 0 automatically the delivery line
+        when we have a returned picking that isn't invoiced so we don't have
+        it as invoiceable line. Otherwise, the salesman has to do it on hand"""
+        res = super().action_done()
+        get_param = self.env["ir.config_parameter"].sudo().get_param
+        param = "delivery_auto_refresh.auto_void_delivery_line"
+        if not safe_eval(get_param(param, "0")):
+            return res
+        sales_to_void_delivery = self.filtered(
+            lambda x: x.sale_id
+            and x.picking_type_code == "incoming"
+            and x.sale_id._is_delivery_line_voidable()
+        ).mapped("sale_id")
+        sales_to_void_delivery.mapped(
+            "order_line"
+        ).filtered(
+            lambda x: x.is_delivery
+        ).with_context(delivery_auto_refresh_override_locked=True).write({
+            "qty_delivered": 0,
+            "product_uom_qty": 0,
+            "price_unit": 0,
+        })
+        return res
