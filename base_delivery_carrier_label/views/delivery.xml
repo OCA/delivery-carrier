@@ -34,13 +34,17 @@
     <field name="model">delivery.carrier.option</field>
     <field name="arch" type="xml">
       <form string="delivery_carrier_option">
-        <group col="4">
-          <field name="active" />
-          <field name="mandatory" attrs="{'readonly': [('readonly_flag','=',True)]}"/>
-          <field name="by_default" attrs="{'invisible': [('mandatory', '=', True)]}"/>
-          <field name="readonly_flag" attrs="{'invisible': True}"/>
-          <field name="tmpl_option_id" colspan="4"
-            attrs="{'readonly': [('readonly_flag','=',True)]}"/>
+        <group>
+          <group>
+            <field name="active" />
+            <field name="mandatory" attrs="{'readonly': [('readonly_flag','=',True)]}"/>
+            <field name="by_default" attrs="{'invisible': [('mandatory', '=', True)]}"/>
+            <field name="readonly_flag" attrs="{'invisible': True}"/>
+          </group>
+          <group>
+            <field name="tmpl_option_id"
+              attrs="{'readonly': [('readonly_flag','=',True)]}"/>
+          </group>
           <newline/>
           <field name="description" colspan="4" readonly="True"/>
         </group>
