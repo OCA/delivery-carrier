@@ -75,7 +75,7 @@ interactions:
           pdf\",\n    \"imageResolution\" : 600,\n    \"printPreview\" : false,\n  \
           \  \"colorPrintRequired\" : true\n  },\n  \"item\" : {\n    \"itemID\" : \"\
           WHOUT00042+WHOUT00042\",\n    \"identCode\" : \"996001321700005959\",\n  \
-          \  \"label\" : [ \"JVBERi0xLjQKJeLjz9MKMiAwIG9iago8PC9Db2xvclNwY...\"\
+          \  \"label\" : [ \"JVBERi0xLjQKJeLjz9MKMiAwIG9iago8PC9Db2xvclNw\"\
           \ ]\n  }\n}"
       headers:
         Cache-Control:

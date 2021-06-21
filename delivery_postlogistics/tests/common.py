@@ -107,7 +107,7 @@ class TestPostlogisticsCommon(SavepointCase):
             {"picking_id": picking.id, "delivery_packaging_id": packaging.id}
         )
         picking.action_assign()
-        choose_delivery_package_wizard.put_in_pack()
+        choose_delivery_package_wizard.action_put_in_pack()
         return picking
 
     @classmethod
