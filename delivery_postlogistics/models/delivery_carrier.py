@@ -4,19 +4,26 @@
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
+from ..postlogistics.web_service import PostlogisticsWebService
+
 
 class DeliveryCarrier(models.Model):
     """ Add service group """
 
     _inherit = "delivery.carrier"
 
-    delivery_type = fields.Selection(selection_add=[("postlogistics", "PostLogistics")])
+    delivery_type = fields.Selection(
+        selection_add=[("postlogistics", "PostLogistics")],
+        ondelete={"postlogistics": "set default"},
+    )
     postlogistics_default_packaging_id = fields.Many2one(
         "product.packaging", domain=[("package_carrier_type", "=", "postlogistics")]
     )
 
     postlogistics_endpoint_url = fields.Char(
-        string="Endpoint URL", default="https://wedecint.post.ch/", required=True,
+        string="Endpoint URL",
+        default="https://wedecint.post.ch/",
+        required=True,
     )
     postlogistics_client_id = fields.Char(
         string="Client ID", groups="base.group_system"
@@ -84,7 +91,8 @@ class DeliveryCarrier(models.Model):
     )
 
     postlogistics_license_id = fields.Many2one(
-        comodel_name="postlogistics.license", string="Franking License",
+        comodel_name="postlogistics.license",
+        string="Franking License",
     )
     zpl_patch_string = fields.Char(
         string="ZPL Patch String", default="^XA^CW0,E:TT0003M_.TTF^XZ^XA^CI28"
@@ -132,3 +140,19 @@ class DeliveryCarrier(models.Model):
             pick._generate_postlogistics_label()
 
         return [{"exact_price": False, "tracking_number": False}]
+
+    def verify_credentials(self):
+        access_token = PostlogisticsWebService.get_access_token(self)
+        if not access_token:
+            # Error has already been risen
+            return
+        message = {
+            "type": "ir.actions.client",
+            "tag": "display_notification",
+            "params": {
+                "title": _("Validated"),
+                "message": _("The credential is valid."),
+                "sticky": False,
+            },
+        }
+        return message

@@ -34,7 +34,7 @@ DISALLOWED_CHARS_MAPPING = {
 
 class PostlogisticsWebService(object):
 
-    """ Connector with PostLogistics for labels using post.ch API
+    """Connector with PostLogistics for labels using post.ch API
 
     Handbook available here:
     https://developer.post.ch/en/digital-commerce-api
@@ -54,7 +54,7 @@ class PostlogisticsWebService(object):
         self.default_lang = company.partner_id.lang or "en"
 
     def _get_language(self, lang):
-        """ Return a language to iso format from odoo format.
+        """Return a language to iso format from odoo format.
 
         `iso_code` field in res.lang is not mandatory thus not always set.
         Use partner language if available, otherwise use english
@@ -72,7 +72,7 @@ class PostlogisticsWebService(object):
         return "en"
 
     def _prepare_recipient(self, picking):
-        """ Create a ns0:Recipient as a dict from a partner
+        """Create a ns0:Recipient as a dict from a partner
 
         :param partner: partner browse record
         :return a dict containing data for ns0:Recipient
@@ -135,7 +135,7 @@ class PostlogisticsWebService(object):
         return recipient
 
     def _prepare_customer(self, picking):
-        """ Create a ns0:Customer as a dict from picking
+        """Create a ns0:Customer as a dict from picking
 
         This is the PostLogistics Customer, thus the sender
 
@@ -181,7 +181,7 @@ class PostlogisticsWebService(object):
         return picking.carrier_id.postlogistics_resolution.code
 
     def _get_license(self, picking):
-        """ Get the license
+        """Get the license
 
         Take it from carrier and if not defined get the first license.
 
@@ -251,7 +251,7 @@ class PostlogisticsWebService(object):
         return attributes
 
     def _get_itemid(self, picking, pack_no):
-        """ Allowed characters are alphanumeric plus `+`, `-` and `_`
+        """Allowed characters are alphanumeric plus `+`, `-` and `_`
         Last `+` separates picking name and package number (if any)
 
         :return string: itemid
@@ -266,10 +266,7 @@ class PostlogisticsWebService(object):
         return "+".join(c for c in codes if c)
 
     def _cash_on_delivery(self, picking, package=None):
-        if package:
-            amount = package.postlogistics_cod_amount()
-        else:
-            amount = picking.postlogistics_cod_amount()
+        amount = (package or picking).postlogistics_cod_amount()
         amount = "{:.2f}".format(amount)
         return [{"Type": "NN_BETRAG", "Value": amount}]
 
@@ -288,7 +285,7 @@ class PostlogisticsWebService(object):
         return result
 
     def _get_item_number(self, picking, pack_num):
-        """ Generate the tracking reference for the last 8 digits
+        """Generate the tracking reference for the last 8 digits
         of tracking number of the label.
 
         2 first digits for a pack counter
@@ -441,14 +438,15 @@ class PostlogisticsWebService(object):
                     return cls.access_token
 
             response = cls._request_access_token(picking_carrier)
-            cls.access_token = response["access_token"]
+            cls.access_token = response.get("access_token", False)
 
             if not (cls.access_token):
                 raise exceptions.UserError(
                     _(
                         "Authorization Required\n\n"
                         "Please verify postlogistics client id and secret in:\n"
-                        "Configuration -> PostLogistics"
+                        "Sale Orders > Configuration -> Sale Orders >"
+                        " Shipping Methods > PostLogistics"
                     )
                 )
 
@@ -463,7 +461,7 @@ class PostlogisticsWebService(object):
         return value
 
     def generate_label(self, picking, packages):
-        """ Generate a label for a picking
+        """Generate a label for a picking
 
         :param picking: picking browse record
         :param user_lang: OpenERP language code
