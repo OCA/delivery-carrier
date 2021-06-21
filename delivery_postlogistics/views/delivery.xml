@@ -27,6 +27,12 @@
                                 name="postlogistics_client_secret"
                                 attrs="{'required': [('delivery_type', '=', 'postlogistics')]}"
                             />
+                            <button
+                                name="verify_credentials"
+                                type="object"
+                                string="Verify"
+                                class="btn-primary"
+                            />
                         </group>
                         <group string="Template">
                             <field
@@ -76,20 +82,4 @@
             </page>
         </field>
     </record>
-    <!-- <record
-        id="action_postlogistics_delivery_carrier_options"
-        model="ir.actions.act_window"
-    >
-        <field name="name">Postlogistics Delivery Carrier Options</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">postlogistics.delivery.carrier.option</field>
-        <field name='view_mode'>tree,form</field>
-    </record> -->
-    <!-- <menuitem
-        id="menu_postlogistics_delivery_carrier_options"
-        name="Delivery Carrier Options"
-        parent="delivery.menu_delivery"
-        sequence="20"
-        action="action_postlogistics_delivery_carrier_options"
-    /> -->
 </odoo>

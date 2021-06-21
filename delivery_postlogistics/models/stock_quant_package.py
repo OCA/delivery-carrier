@@ -12,7 +12,10 @@ class StockQuantPackage(models.Model):
         "than the total of the sales order, write the amount there.",
     )
     parcel_tracking = fields.Char("Parcel Tracking")
-    package_carrier_type = fields.Selection(related="packaging_id.package_carrier_type")
+    package_carrier_type = fields.Selection(
+        related="packaging_id.package_carrier_type",
+        string="Packaging's Carrier",
+    )
 
     @api.returns("stock.picking")
     def _get_origin_pickings(self):
@@ -22,7 +25,7 @@ class StockQuantPackage(models.Model):
         return move_line.mapped("picking_id.sale_id.picking_ids")
 
     def postlogistics_cod_amount(self):
-        """ Return the PostLogistics Cash on Delivery amount of a package
+        """Return the PostLogistics Cash on Delivery amount of a package
 
         If we have only 1 package which delivers the whole sales order
         we use the total amount of the sales order.

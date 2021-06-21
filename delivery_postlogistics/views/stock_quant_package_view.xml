@@ -7,6 +7,7 @@
         <field name="arch" type="xml">
             <field name="packaging_id" position="after">
                 <field name="parcel_tracking" />
+                <field name="postlogistics_manual_cod_amount" />
             </field>
         </field>
     </record>

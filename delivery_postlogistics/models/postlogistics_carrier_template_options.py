@@ -27,5 +27,6 @@ class DeliveryCarrierTemplateOption(models.Model):
         help="Allow to define a more complete description than in the name field.",
     )
     postlogistics_type = fields.Selection(
-        selection=POSTLOGISTICS_TYPES, string="PostLogistics option type",
+        selection=POSTLOGISTICS_TYPES,
+        string="PostLogistics option type",
     )
