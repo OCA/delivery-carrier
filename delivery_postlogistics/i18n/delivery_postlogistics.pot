@@ -4,8 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 13.0\n"
+"Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-06-21 02:01+0000\n"
+"PO-Revision-Date: 2021-06-21 02:01+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -186,9 +188,15 @@ msgid "Disabled"
 msgstr ""
 
 #. module: delivery_postlogistics
+#: model:ir.model.fields,field_description:delivery_postlogistics.field_delivery_carrier__display_name
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_delivery_carrier_template_option__display_name
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_license__display_name
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_shipping_label__display_name
+#: model:ir.model.fields,field_description:delivery_postlogistics.field_product_packaging__display_name
+#: model:ir.model.fields,field_description:delivery_postlogistics.field_res_partner__display_name
+#: model:ir.model.fields,field_description:delivery_postlogistics.field_stock_move__display_name
+#: model:ir.model.fields,field_description:delivery_postlogistics.field_stock_picking__display_name
+#: model:ir.model.fields,field_description:delivery_postlogistics.field_stock_quant_package__display_name
 msgid "Display Name"
 msgstr ""
 
@@ -226,7 +234,12 @@ msgstr ""
 
 #. module: delivery_postlogistics
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_shipping_label__datas
-msgid "File Content"
+msgid "File Content (base64)"
+msgstr ""
+
+#. module: delivery_postlogistics
+#: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_shipping_label__raw
+msgid "File Content (raw)"
 msgstr ""
 
 #. module: delivery_postlogistics
@@ -293,9 +306,15 @@ msgid ""
 msgstr ""
 
 #. module: delivery_postlogistics
+#: model:ir.model.fields,field_description:delivery_postlogistics.field_delivery_carrier__id
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_delivery_carrier_template_option__id
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_license__id
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_shipping_label__id
+#: model:ir.model.fields,field_description:delivery_postlogistics.field_product_packaging__id
+#: model:ir.model.fields,field_description:delivery_postlogistics.field_res_partner__id
+#: model:ir.model.fields,field_description:delivery_postlogistics.field_stock_move__id
+#: model:ir.model.fields,field_description:delivery_postlogistics.field_stock_picking__id
+#: model:ir.model.fields,field_description:delivery_postlogistics.field_stock_quant_package__id
 msgid "ID"
 msgstr ""
 
@@ -347,9 +366,15 @@ msgid "Label layout"
 msgstr ""
 
 #. module: delivery_postlogistics
+#: model:ir.model.fields,field_description:delivery_postlogistics.field_delivery_carrier____last_update
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_delivery_carrier_template_option____last_update
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_license____last_update
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_shipping_label____last_update
+#: model:ir.model.fields,field_description:delivery_postlogistics.field_product_packaging____last_update
+#: model:ir.model.fields,field_description:delivery_postlogistics.field_res_partner____last_update
+#: model:ir.model.fields,field_description:delivery_postlogistics.field_stock_move____last_update
+#: model:ir.model.fields,field_description:delivery_postlogistics.field_stock_picking____last_update
+#: model:ir.model.fields,field_description:delivery_postlogistics.field_stock_quant_package____last_update
 msgid "Last Modified on"
 msgstr ""
 
@@ -439,6 +464,11 @@ msgid ""
 "– Colour table: indexed colours, max. 200 colours\n"
 "– The logo will be printed rotated counter-clockwise by 90°\n"
 "We recommend using a black and white logo for printing in  the ZPL2 format."
+msgstr ""
+
+#. module: delivery_postlogistics
+#: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_shipping_label__original_id
+msgid "Original (unoptimized, unresized) attachment"
 msgstr ""
 
 #. module: delivery_postlogistics
