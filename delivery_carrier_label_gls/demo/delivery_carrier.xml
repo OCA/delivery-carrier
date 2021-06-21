@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+  <record id="delivery_carrier_gls" model="delivery.carrier">
+    <field name="prod_environment" eval="0" />
+  </record>
+</odoo>

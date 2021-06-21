@@ -14,20 +14,41 @@
         >
           <group>
             <group>
-              <field name="gls_url" />
-              <field name="gls_url_test" />
-              <field name="gls_label_format"/>
+              <field
+                name="gls_url"
+                attrs="{'required': [('delivery_type', '=', 'gls'), ('prod_environment', '=', True)]}"
+              />
+              <field
+                name="gls_url_test"
+                attrs="{'required': [('delivery_type', '=', 'gls'), ('prod_environment', '=', False)]}"
+              />
+              <field
+                name="gls_label_format"
+                attrs="{'required': [('delivery_type', '=', 'gls')]}"
+              />
               <field name="gls_label_template" />
             </group>
             <group>
-              <field name="gls_login" />
-              <field name="gls_password" />
+              <field
+                name="gls_login"
+                attrs="{'required': [('delivery_type', '=', 'gls')]}"
+              />
+              <field
+                name="gls_password"
+                attrs="{'required': [('delivery_type', '=', 'gls')]}"
+              />
             </group>
             <group>
-              <field name="gls_contact_id" />
+              <field
+                name="gls_contact_id"
+                attrs="{'required': [('delivery_type', '=', 'gls')]}"
+              />
             </group>
             <group>
-              <field name="gls_url_tracking" />
+              <field
+                name="gls_url_tracking"
+                attrs="{'required': [('delivery_type', '=', 'gls')]}"
+              />
             </group>
           </group>
         </page>

@@ -1,7 +1,5 @@
 from . import delivery_carrier
 from . import delivery_report_gls
-from . import company
-from . import config
 from . import product_packaging
 from . import sale_order
 from . import shipping_label

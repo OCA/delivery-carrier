@@ -32,14 +32,14 @@ class DeliveryClientGls(models.TransientModel):
 
     def _get_contact_id(self):
         self.ensure_one()
-        contact_id = self.carrier_id.company_id.gls_contact_id
+        contact_id = self.carrier_id.gls_contact_id
         if not contact_id:
             raise ValidationError(_("Your GLS Contact ID is not configured."))
         return contact_id
 
     def _get_gls_connections_parameters(self):
         self.ensure_one()
-        test_mode = self.carrier_id.company_id.gls_test
+        test_mode = not self.carrier_id.prod_environment
         keys = ["gls_url_test" if test_mode else "gls_url"]
         keys += ["gls_login", "gls_password"]
         parameters = []
