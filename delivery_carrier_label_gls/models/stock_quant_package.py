@@ -67,10 +67,11 @@ class StockQuantPackage(models.Model):
         self.ensure_one()
         self.gls_validate_package()
         client = self.carrier_id._get_gls_client()
+        weight = max(self.shipping_weight, 0.1)  # GLS API requirement
         shipment = {
             "Product": self.packaging_id.shipper_package_code,
             "Consignee": {"Address": self._gls_prepare_address()},
-            "ShipmentUnit": [{"Weight": "{:05.2f}".format(self.shipping_weight)}],
+            "ShipmentUnit": [{"Weight": "{:05.2f}".format(weight)}],
             "ShipmentReference": [self.gls_picking_id.name or "PICKING%s" % self.id],
             "Service": self._gls_prepare_package_service(),
         }
