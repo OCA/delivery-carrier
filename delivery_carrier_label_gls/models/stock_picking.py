@@ -24,15 +24,16 @@ class StockPicking(models.Model):
     )
     gls_package_ref = fields.Char("GLS Package Identifiers", readonly=True, copy=False)
 
+    def _check_is_everything_packaged(self):
+        for picking in self:
+            if not all(o.result_package_id for o in picking.pack_operation_product_ids):
+                msg = _("For GLS every operation should be put in a pack.")
+                raise ValidationError(msg)
+
     def do_transfer(self):
         """Check that each GLS picking has been completely sent."""
-        key_packages = "pack_operation_product_ids.result_package_id"
-        for picking in self:
-            if picking.delivery_type == "gls":
-                number_operations = len(picking.pack_operation_product_ids)
-                if len(picking.mapped(key_packages)) != number_operations:
-                    msg = _("For GLS every operation should be put in a pack.")
-                    raise ValidationError(msg)
+        gls_pickings = self.filtered(lambda p: p.delivery_type == "gls")
+        gls_pickings._check_is_everything_packaged()
         return super(StockPicking, self).do_transfer()
 
     def gls_send_shipping(self, delivery_carrier=False):
