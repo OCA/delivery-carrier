@@ -2,6 +2,10 @@
 # Copyright 2021 ACSONE SA/NV.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
+from contextlib import contextmanager
+
+import mock
+
 from odoo.tests.common import SavepointCase
 
 
@@ -54,6 +58,16 @@ class TestGLS(SavepointCase):
             "product_id": cls.product.id,
         }
         cls.order_line = cls.env["sale.order.line"].create(vals_order_line)
+
+
+@contextmanager
+def mock_gls_client(mock_client=None):
+    mock_client = mock_client or MockGlsClient()
+    mock_path_prefix = "odoo.addons.delivery_carrier_label_gls.models"
+    mock_path_class = "delivery_carrier.DeliveryCarrier._get_gls_client"
+    mock_path = ".".join((mock_path_prefix, mock_path_class))
+    with mock.patch(mock_path, return_value=mock_client) as mocked:
+        yield mocked, mock_client
 
 
 class MockGlsClient(object):

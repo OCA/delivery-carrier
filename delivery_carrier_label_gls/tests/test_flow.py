@@ -2,11 +2,9 @@
 # Copyright 2021 ACSONE SA/NV.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-import mock
-
 from odoo.exceptions import ValidationError
 
-from .common import MockGlsClient, TestGLS
+from .common import TestGLS, mock_gls_client
 
 
 class TestGlsFlow(TestGLS):
@@ -14,12 +12,6 @@ class TestGlsFlow(TestGLS):
         """We test the complete flow, since actions depend on each other.
            To call cancel, you need to call create before; same with the report.
         """
-        # given
-        mock_client = MockGlsClient()
-        mock_path_prefix = "odoo.addons.delivery_carrier_label_gls.models"
-        mock_path_class = "delivery_carrier.DeliveryCarrier._get_gls_client"
-        mock_path = ".".join((mock_path_prefix, mock_path_class))
-
         # when
         self.sale_order.action_confirm()
         # then
@@ -52,7 +44,7 @@ class TestGlsFlow(TestGLS):
         package.packaging_id = packaging_parcel
 
         # when
-        with mock.patch(mock_path, return_value=mock_client):
+        with mock_gls_client():
             picking.do_transfer()
 
         # then: following is true since we have only one package
@@ -64,7 +56,7 @@ class TestGlsFlow(TestGLS):
         self.assertEqual(len(label), 1, "There should be one label for this picking.")
 
         # optional: we cancel and resend the package, that should cancel itself out
-        with mock.patch(mock_path, return_value=mock_client):
+        with mock_gls_client():
             package.gls_cancel_shipment()
             package.gls_send_shipping_package()
 
@@ -76,12 +68,11 @@ class TestGlsFlow(TestGLS):
         # given
         wizard_report.carrier_ids = self.gls_carrier
         # when
-        with mock.patch(mock_path, return_value=mock_client):
+        with mock_gls_client():  # two report calls within the same mock!
             reports = wizard_report._get_end_of_day_report()
-        # then
-        self.assertTrue(package in reports.mapped("package_ids"))
+            # then
+            self.assertTrue(package in reports.mapped("package_ids"))
 
-        # this time it will raise since there are no new packages
-        with self.assertRaises(ValidationError):
-            with mock.patch(mock_path, return_value=mock_client):
+            # this time it will raise since there are no new packages
+            with self.assertRaises(ValidationError):
                 wizard_report.get_end_of_day_report()
