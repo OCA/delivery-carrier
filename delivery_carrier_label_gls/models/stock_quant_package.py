@@ -68,9 +68,10 @@ class StockQuantPackage(models.Model):
         self.gls_validate_package()
         client = self.carrier_id._get_gls_client()
         weight = max(self.shipping_weight, 0.1)  # GLS API requirement
+        address = self.gls_picking_id.partner_id._gls_prepare_address()
         shipment = {
             "Product": self.packaging_id.shipper_package_code,
-            "Consignee": {"Address": self._gls_prepare_address()},
+            "Consignee": {"Address": address},
             "ShipmentUnit": [{"Weight": "{:05.2f}".format(weight)}],
             "ShipmentReference": [self.gls_picking_id.name or "PICKING%s" % self.id],
             "Service": self._gls_prepare_package_service(),
@@ -87,34 +88,6 @@ class StockQuantPackage(models.Model):
         self.gls_package_ref = parcel_data["ParcelNumber"]
         label_content = response["CreatedShipment"]["PrintData"]
         self._gls_label_package(label_content)
-
-    def _gls_prepare_address(self):
-        self.ensure_one()
-        address_payload = {}
-        mapping = {
-            "name": "Name1",
-            "street": "Street",
-            "city": "City",
-            "email": "eMail",
-            "zip": "ZIPCode",
-            "phone": "FixedLinePhonenumber",
-            "country_id.code": "CountryCode",
-            "state_id.name": "Province",
-        }
-        mapping_optional = {"phone", "state_id.name"}
-        partner = self.gls_picking_id.partner_id
-        for key in mapping:
-            if "." in key:
-                value = partner.mapped(key)
-                value = value[0] if value else value
-            else:
-                value = partner[key]
-            if not value and key not in mapping_optional:
-                msg = _("Missing required parameter %s on partner %s")
-                raise ValidationError(msg % (key, partner.name))
-            if value:
-                address_payload[mapping[key]] = value
-        return address_payload
 
     @api.model
     def _gls_prepare_package_service(self):

@@ -49,6 +49,18 @@ class DeliveryCarrier(models.Model):
         ],
         default=False,
     )
+    gls_return_partner_id = fields.Many2one(
+        "res.partner",
+        string="Return Address",
+        help="If set, this partner's adress will be used on the return label.",
+    )
+
+    @api.constrains("gls_return_partner_id")
+    def _check_gls_return_partner_id(self):
+        filter_check = lambda c: c.delivery_type == "gls" and c.gls_return_partner_id
+        records_to_check = self.filtered(filter_check)
+        for carrier in records_to_check:
+            carrier.gls_return_partner_id._gls_prepare_address()
 
     @api.constrains(
         "delivery_type",
@@ -57,6 +69,7 @@ class DeliveryCarrier(models.Model):
         "gls_password",
         "gls_url_tracking",
         "gls_label_format",
+        "gls_return_partner_id",
     )
     def _check_gls_fields(self):
         gls_field_names = [

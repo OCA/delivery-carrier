@@ -43,6 +43,7 @@
                 name="gls_contact_id"
                 attrs="{'required': [('delivery_type', '=', 'gls')]}"
               />
+              <field name="gls_return_partner_id" />
             </group>
             <group>
               <field

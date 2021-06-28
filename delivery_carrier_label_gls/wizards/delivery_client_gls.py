@@ -65,6 +65,9 @@ class DeliveryClientGls(models.TransientModel):
 
     def create_parcel(self, payload):
         payload["Shipment"]["Shipper"] = {"ContactID": self._get_contact_id()}
+        if self.carrier_id.gls_return_partner_id:
+            address = self.carrier_id.gls_return_partner_id._gls_prepare_address()
+            payload["Shipment"]["Shipper"]["AlternativeShipperAddress"] = address
         payload["PrintingOptions"] = {
             "ReturnLabels": {
                 "TemplateSet": self.carrier_id.gls_label_template or "NONE",

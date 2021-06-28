@@ -1,6 +1,7 @@
 from . import delivery_carrier
 from . import delivery_report_gls
 from . import product_packaging
+from . import res_partner
 from . import sale_order
 from . import shipping_label
 from . import stock_picking
