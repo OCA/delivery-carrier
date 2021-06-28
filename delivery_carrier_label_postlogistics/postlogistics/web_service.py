@@ -11,6 +11,7 @@ import threading
 from PIL import Image
 from io import StringIO
 from datetime import datetime, timedelta
+from email.utils import parseaddr
 
 from odoo import _, exceptions
 
@@ -74,12 +75,13 @@ class PostlogisticsWebService(object):
         partner = picking.partner_id
 
         partner_name = partner.name or partner.parent_id.name
+        email = parseaddr(partner.email)[1]
         recipient = {
             'name1': _sanitize_string(partner_name),
             'street': _sanitize_string(partner.street),
             'zip': partner.zip,
             'city': partner.city,
-            'email': partner.email or None,
+            'email': email or None,
         }
 
         if partner.country_id.code:
