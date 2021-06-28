@@ -80,7 +80,9 @@ class StockPicking(models.Model):
                                          user_lang=user.lang)
         for res_line in res:
             if res_line.get('errors'):
-                raise exceptions.UserError('\n'.join(res_line['errors']))
+                raise exceptions.UserError(
+                    "%s\n\n%s" % (self.display_name, '\n'.join(res_line['errors']))
+                )
 
         def info_from_label(label):
             tracking_number = label['tracking_number']
