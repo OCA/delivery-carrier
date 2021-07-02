@@ -24,6 +24,7 @@ addon | version | summary
 [delivery_carrier_info](delivery_carrier_info/) | 14.0.1.0.1 | Add code and description on carrier
 [delivery_package_fee](delivery_package_fee/) | 14.0.1.0.0 | Add fees on delivered packages on shipping methods
 [delivery_state](delivery_state/) | 14.0.1.0.0 | Provides fields to be able to contemplate the tracking statesand also adds a global fields
+[stock_picking_delivery_link](stock_picking_delivery_link/) | 14.0.1.0.0 | Adds link to the delivery on all intermediate operations.
 
 [//]: # (end addons)
 
