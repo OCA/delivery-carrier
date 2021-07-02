@@ -4,7 +4,7 @@
 {
     "name": "Stock Picking Delivery Link",
     "summary": "Adds link to the delivery on all intermediate operations.",
-    "version": "13.0.1.0.0",
+    "version": "14.0.1.0.0",
     "author": "Camptocamp, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/delivery-carrier",
     "category": "Warehouse Management",
