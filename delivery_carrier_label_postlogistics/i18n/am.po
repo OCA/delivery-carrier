@@ -95,7 +95,9 @@ msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
 #: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:357
+#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:359
 #: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:392
+#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:394
 #, python-format
 msgid ""
 "Authorization Required\n"
@@ -159,6 +161,7 @@ msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_company__postlogistics_logo
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_config_settings__logo
 #: model_terms:ir.ui.view,arch_db:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
 msgid "Company Logo on Post labels"
 msgstr ""
@@ -209,16 +212,19 @@ msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_company__postlogistics_label_layout
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_config_settings__label_layout
 msgid "Default label layout"
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_company__postlogistics_output_format
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_config_settings__output_format
 msgid "Default output format"
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_company__postlogistics_resolution
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_config_settings__resolution
 msgid "Default resolution"
 msgstr ""
 
@@ -265,6 +271,7 @@ msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_company__postlogistics_office
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_config_settings__office
 msgid "Domicile Post office"
 msgstr ""
 
@@ -275,6 +282,7 @@ msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
 #: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:455
+#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:457
 #, python-format
 msgid "Error when communicating with swisspost API: %s"
 msgstr ""
@@ -385,6 +393,7 @@ msgstr "Última actualización en"
 
 #. module: delivery_carrier_label_postlogistics
 #: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:310
+#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:312
 #, python-format
 msgid "Layout not set"
 msgstr ""
@@ -402,6 +411,7 @@ msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
 #: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:194
+#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:196
 #, python-format
 msgid "Missing required delivery option on picking."
 msgstr ""
@@ -445,6 +455,7 @@ msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,help:delivery_carrier_label_postlogistics.field_res_company__postlogistics_logo
+#: model:ir.model.fields,help:delivery_carrier_label_postlogistics.field_res_config_settings__logo
 msgid ""
 "Optional company logo to show on label.\n"
 "If using an image / logo, please note the following:\n"
@@ -474,6 +485,7 @@ msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
 #: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:316
+#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:318
 #, python-format
 msgid "Output format not set"
 msgstr ""
@@ -500,6 +512,7 @@ msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_company__postlogistics_password
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_config_settings__password
 msgid "Password"
 msgstr ""
 
@@ -520,6 +533,7 @@ msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,help:delivery_carrier_label_postlogistics.field_res_company__postlogistics_office
+#: model:ir.model.fields,help:delivery_carrier_label_postlogistics.field_res_config_settings__office
 #: model_terms:ir.ui.view,arch_db:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
 msgid "Post office which will receive the shipped goods"
 msgstr ""
@@ -534,6 +548,7 @@ msgstr ""
 #: model:ir.model,name:delivery_carrier_label_postlogistics.model_postlogistics_license
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_delivery_carrier__postlogistics_license_id
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_company__postlogistics_license_ids
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_config_settings__license_ids
 msgid "PostLogistics Franking License"
 msgstr ""
 
@@ -589,6 +604,7 @@ msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
 #: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:322
+#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:324
 #, python-format
 msgid "Resolution not set"
 msgstr ""
@@ -625,6 +641,7 @@ msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
 #: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:468
+#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:470
 #, python-format
 msgid ""
 "Swisspost API returns errors:\n"
@@ -706,16 +723,19 @@ msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_company__postlogistics_username
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_config_settings__username
 msgid "Username"
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_company__postlogistics_wsdl_url
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_config_settings__wsdl_url
 msgid "WSDL URL"
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
 #: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:302
+#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:304
 #, python-format
 msgid ""
 "You need to configure %s. You can set a defaultvalue in Settings/"
@@ -736,18 +756,21 @@ msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
 #: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:311
+#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:313
 #, python-format
 msgid "label layout"
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
 #: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:317
+#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:319
 #, python-format
 msgid "output format"
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
 #: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:323
+#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:325
 #, python-format
 msgid "resolution"
 msgstr ""
