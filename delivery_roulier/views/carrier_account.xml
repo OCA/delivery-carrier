@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="view_roulier_carrier_account_tree" model="ir.ui.view">
+        <field name="model">carrier.account</field>
+        <field
+            name="inherit_id"
+            ref="base_delivery_carrier_label.carrier_account_view_tree"
+        />
+        <field name="arch" type="xml">
+            <field name="file_format" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_roulier_carrier_account_form" model="ir.ui.view">
+        <field name="model">carrier.account</field>
+        <field
+            name="inherit_id"
+            ref="base_delivery_carrier_label.carrier_account_view_form"
+        />
+        <field name="arch" type="xml">
+            <field name="file_format" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+        </field>
+    </record>
+
+</odoo>

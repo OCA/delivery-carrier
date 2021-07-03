@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+        <!-- product.product -->
+        <record id="product_big" model="product.product">
+            <field name="name">carrier 3.7 kg</field>
+            <field name="type">product</field>
+            <field name="qty_available">1000</field>
+            <field name="weight">3.7</field>
+        </record>
+        <record id="product_small" model="product.product">
+            <field name="name">carrier 1.3 kg</field>
+            <field name="type">product</field>
+            <field name="qty_available">1000</field>
+            <field name="weight">1.3</field>
+        </record>
+
+
+        <!-- Resource: stock.inventory -->
+        <record id="stock_inventory_roulier" model="stock.inventory">
+            <field name="name">Inventory for Roulier</field>
+            <field name="state">confirm</field>
+            <field
+            name="product_ids"
+            eval="[(6, 0, [ref('product_big'), ref('product_small')])]"
+        />
+        </record>
+
+
+        <!-- Resource: stock.inventory.line -->
+        <record id="stock_inventory_line_carrier1" model="stock.inventory.line">
+            <field name="product_id" ref="product_big" />
+            <field name="product_uom_id" ref="uom.product_uom_unit" />
+            <field name="inventory_id" ref="stock_inventory_roulier" />
+            <field name="product_qty">1000.0</field>
+            <field name="location_id" ref="stock.stock_location_stock" />
+        </record>
+
+        <record id="stock_inventory_line_carrier2" model="stock.inventory.line">
+            <field name="product_id" ref="product_small" />
+            <field name="product_uom_id" ref="uom.product_uom_unit" />
+            <field name="inventory_id" ref="stock_inventory_roulier" />
+            <field name="product_qty">1000.0</field>
+            <field name="location_id" ref="stock.stock_location_stock" />
+        </record>
+
+        <!-- We must execute another action before to be sure that 'action_validate' is executed correctly -->
+        <function
+        model="stock.inventory"
+        name="action_validate"
+        eval="([ref('stock_inventory_roulier')])"
+    />
+
+</odoo>
