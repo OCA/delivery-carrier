@@ -1,0 +1,127 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * delivery_multi_destination
+#
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-12-15 18:21+0000\n"
+"PO-Revision-Date: 2017-12-15 18:21+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: delivery_multi_destination
+#: model:delivery.carrier,name:delivery_multi_destination.delivery_carrier_multi_child_1
+msgid "Belgium"
+msgstr ""
+
+#. module: delivery_multi_destination
+#: model:ir.model,name:delivery_multi_destination.model_delivery_carrier
+msgid "Delivery Methods"
+msgstr ""
+
+#. module: delivery_multi_destination
+#: model:ir.model.fields,field_description:delivery_multi_destination.field_delivery_carrier__destination_type
+msgid "Destination Type"
+msgstr ""
+
+#. module: delivery_multi_destination
+#: model:ir.model.fields,field_description:delivery_multi_destination.field_delivery_carrier__child_ids
+msgid "Destination grid"
+msgstr ""
+
+#. module: delivery_multi_destination
+#: model_terms:ir.ui.view,arch_db:delivery_multi_destination.view_delivery_carrier_form
+msgid "Destinations"
+msgstr ""
+
+#. module: delivery_multi_destination
+#: model:delivery.carrier,name:delivery_multi_destination.delivery_carrier_multi_child_2
+msgid "France"
+msgstr ""
+
+#. module: delivery_multi_destination
+#: model:delivery.carrier,name:delivery_multi_destination.delivery_carrier_multi
+#: model:product.product,name:delivery_multi_destination.product_product_delivery_carrier_multi
+#: model:product.template,name:delivery_multi_destination.product_product_delivery_carrier_multi_product_template
+msgid "International Carrier Inc."
+msgstr ""
+
+#. module: delivery_multi_destination
+#: model:product.product,name:delivery_multi_destination.product_product_delivery_carrier_multi_child_1
+#: model:product.template,name:delivery_multi_destination.product_product_delivery_carrier_multi_child_1_product_template
+msgid "International Carrier Inc., Belgium"
+msgstr ""
+
+#. module: delivery_multi_destination
+#: model:product.product,name:delivery_multi_destination.product_product_delivery_carrier_multi_child_2
+#: model:product.template,name:delivery_multi_destination.product_product_delivery_carrier_multi_child_2_product_template
+msgid "International Carrier Inc., France"
+msgstr ""
+
+#. module: delivery_multi_destination
+#: model:product.product,name:delivery_multi_destination.product_product_delivery_carrier_multi_child_3
+#: model:product.template,name:delivery_multi_destination.product_product_delivery_carrier_multi_child_3_product_template
+msgid "International Carrier Inc., United Kingdom"
+msgstr ""
+
+#. module: delivery_multi_destination
+#: selection:delivery.carrier,destination_type:0
+msgid "Multiple destinations"
+msgstr ""
+
+#. module: delivery_multi_destination
+#: selection:delivery.carrier,destination_type:0
+msgid "One destination"
+msgstr ""
+
+#. module: delivery_multi_destination
+#: model:ir.model.fields,field_description:delivery_multi_destination.field_delivery_carrier__parent_id
+msgid "Parent carrier"
+msgstr ""
+
+#. module: delivery_multi_destination
+#: code:addons/delivery_multi_destination/models/delivery_carrier.py:103
+#, python-format
+msgid "There is no matching delivery rule."
+msgstr ""
+
+#. module: delivery_multi_destination
+#: model:product.product,uom_name:delivery_multi_destination.product_product_delivery_carrier_multi
+#: model:product.product,uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_1
+#: model:product.product,uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_2
+#: model:product.product,uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_3
+#: model:product.template,uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_1_product_template
+#: model:product.template,uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_2_product_template
+#: model:product.template,uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_3_product_template
+#: model:product.template,uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_product_template
+msgid "Unit(s)"
+msgstr ""
+
+#. module: delivery_multi_destination
+#: model:delivery.carrier,name:delivery_multi_destination.delivery_carrier_multi_child_3
+msgid "United Kingdom"
+msgstr ""
+
+#. module: delivery_multi_destination
+#: model:product.product,weight_uom_name:delivery_multi_destination.product_product_delivery_carrier_multi
+#: model:product.product,weight_uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_1
+#: model:product.product,weight_uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_2
+#: model:product.product,weight_uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_3
+#: model:product.template,weight_uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_1_product_template
+#: model:product.template,weight_uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_2_product_template
+#: model:product.template,weight_uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_3_product_template
+#: model:product.template,weight_uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_product_template
+msgid "kg"
+msgstr ""
+
+#~ msgid "Carrier"
+#~ msgstr "Transporteur"
