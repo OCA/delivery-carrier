@@ -94,9 +94,7 @@ msgid "Authentication url"
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:357
 #: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:359
-#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:392
 #: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:394
 #, python-format
 msgid ""
@@ -281,7 +279,6 @@ msgid "EPS"
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:455
 #: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:457
 #, python-format
 msgid "Error when communicating with swisspost API: %s"
@@ -394,7 +391,6 @@ msgid "Last Updated on"
 msgstr "Dernière mise à jour le"
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:310
 #: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:312
 #, python-format
 msgid "Layout not set"
@@ -412,7 +408,6 @@ msgid "List of basic service for which this service is compatible"
 msgstr "Liste des services basiques avec lesquels ce service est compatible"
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:194
 #: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:196
 #, python-format
 msgid "Missing required delivery option on picking."
@@ -498,7 +493,6 @@ msgid "Output Resolution"
 msgstr "Résolution de sortie"
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:316
 #: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:318
 #, python-format
 msgid "Output format not set"
@@ -617,7 +611,6 @@ msgid "Reset access token"
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:322
 #: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:324
 #, python-format
 msgid "Resolution not set"
@@ -654,7 +647,6 @@ msgid "State"
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:468
 #: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:470
 #, python-format
 msgid ""
@@ -754,7 +746,6 @@ msgid "WSDL URL"
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:302
 #: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:304
 #, python-format
 msgid ""
@@ -775,21 +766,18 @@ msgid "kg"
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:311
 #: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:313
 #, python-format
 msgid "label layout"
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:317
 #: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:319
 #, python-format
 msgid "output format"
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
-#: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:323
 #: code:addons/delivery_carrier_label_postlogistics/postlogistics/web_service.py:325
 #, python-format
 msgid "resolution"
