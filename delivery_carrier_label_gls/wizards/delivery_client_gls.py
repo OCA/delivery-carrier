@@ -74,7 +74,15 @@ class DeliveryClientGls(models.TransientModel):
                 "LabelFormat": self.carrier_id.gls_label_format.upper(),
             }
         }
-        return self._post("shipments", json=payload)
+        try:
+            response = self._post("shipments", json=payload)
+        except ValidationError as e:
+            if "ARTICLES_VALID_FOR_COUNTRY" in e.args[0]:
+                payload["Shipment"].pop("Service")  # let GLS use default available service
+                response = self._post("shipments", json=payload)
+            else:
+                raise
+        return response
 
     def cancel_parcel(self, parcel_tracking):
         end_url = "shipments/cancel/%s" % parcel_tracking
