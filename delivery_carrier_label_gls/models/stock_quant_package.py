@@ -69,11 +69,12 @@ class StockQuantPackage(models.Model):
         client = self.carrier_id._get_gls_client()
         weight = max(self.shipping_weight, 0.1)  # GLS API requirement
         address = self.gls_picking_id.partner_id._gls_prepare_address()
+        reference = (self.gls_picking_id.name or "PICKING%s" % self.id)[:40]
         shipment = {
             "Product": self.packaging_id.shipper_package_code,
             "Consignee": {"Address": address},
             "ShipmentUnit": [{"Weight": "{:05.2f}".format(weight)}],
-            "ShipmentReference": [self.gls_picking_id.name or "PICKING%s" % self.id],
+            "ShipmentReference": [reference],
             "Service": self._gls_prepare_package_service(),
         }
         response = client.create_parcel({"Shipment": shipment})
