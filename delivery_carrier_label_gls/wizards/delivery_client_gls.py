@@ -98,8 +98,10 @@ class DeliveryClientGls(models.TransientModel):
     def _request(self, verb, url_endpoint, **kwargs):
         root_url, login, password = self._get_gls_connections_parameters()
         url = root_url + url_endpoint if url_endpoint else root_url
+        _logger.info("GLS request: %s" % kwargs)
         response = verb(url, auth=(login, password), headers=HEADERS, **kwargs)
-        _logger.info(response)
+        log = (response.status_code, response.headers, response.content)
+        _logger.info("GLS response:\ncode: %s\nheaders: %s\ncontent: %s" % log)
         if not response.ok:
             error = _("GLS: cannot perform this operation. Original error: %s")
             msg = response.headers.get("message") or response.text
