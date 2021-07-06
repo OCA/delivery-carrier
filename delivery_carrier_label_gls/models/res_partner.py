@@ -21,6 +21,7 @@ class ResPartner(models.Model):
         mapping = {
             "name": "Name1",
             "street": "Street",
+            "street2": "StreetNumber",
             "city": "City",
             "email": "eMail",
             "zip": "ZIPCode",
@@ -29,7 +30,7 @@ class ResPartner(models.Model):
             "country_id.code": "CountryCode",
             "state_id.name": "Province",
         }
-        mapping_optional = {"phone", "mobile", "state_id.name"}
+        mapping_optional = {"phone", "mobile", "street2", "state_id.name"}
         for key in mapping:
             if "." in key:
                 value = self.mapped(key)
