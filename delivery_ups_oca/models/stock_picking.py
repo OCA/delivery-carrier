@@ -156,8 +156,9 @@ class StockPicking(models.Model):
 
     def _ups_quant_package_data(self, package):
         """Return a dict describing a package for the shipping request"""
+        get_param = self.env["ir.config_parameter"].sudo().get_param
         weight_uom = (
-            int(self.env["ir.config_parameter"].get_param("product.weight_in_lbs", 0,))
+            int(get_param("product.weight_in_lbs", 0,))
             and "LBS"
             or "KGS"
         )
@@ -221,7 +222,7 @@ class StockPicking(models.Model):
         account = self._ups_auth_account()
         if not account:
             raise UserError(_("No UPS account found for this company"))
-        url = self.env["ir.config_parameter"].get_param(
+        url = self.env["ir.config_parameter"].sudo().get_param(
             "delivery_carrier_label_ups.%s_%s"
             % (
                 request_type,
