@@ -63,21 +63,23 @@ class StockQuantPackage(models.Model):
             msg = _("The shipping weight is missing on package %s.")
             raise ValidationError(msg % package_name)
 
-    def gls_send_shipping_package(self):
-        self.ensure_one()
-        self.gls_validate_package()
-        client = self.carrier_id._get_gls_client()
+    def _gls_prepare_shipment(self):
         weight = max(self.shipping_weight, 0.1)  # GLS API requirement
         address = self.gls_picking_id.partner_id._gls_prepare_address()
         reference = (self.gls_picking_id.name or "PICKING%s" % self.id)[:40]
-        shipment = {
+        return {
             "Product": self.packaging_id.shipper_package_code,
             "Consignee": {"Address": address},
             "ShipmentUnit": [{"Weight": "{:05.2f}".format(weight)}],
             "ShipmentReference": [reference],
             "Service": self._gls_prepare_package_service(),
         }
-        response = client.create_parcel({"Shipment": shipment})
+
+    def gls_send_shipping_package(self):
+        self.ensure_one()
+        self.gls_validate_package()
+        client = self.carrier_id._get_gls_client()
+        response = client.create_parcel({"Shipment": self._gls_prepare_shipment()})
 
         assert len(response["CreatedShipment"]["ParcelData"]) == 1  # :-/
         parcel_data = response["CreatedShipment"]["ParcelData"][0]
