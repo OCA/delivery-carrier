@@ -6,11 +6,16 @@
         <field name="model">delivery.carrier.template.option</field>
         <field name="arch" type="xml">
             <form string="delivery_carrier_option">
-                <field name="partner_id" />
-                <field name="code" />
-                <field name="name" />
-                <newline />
-                <field name="description" />
+                <group>
+                  <group>
+                    <field name="name" />
+                  </group>
+                  <group>
+                    <field name="partner_id" />
+                    <field name="code" />
+                  </group>
+                  <field name="description" />
+                </group>
             </form>
         </field>
     </record>
