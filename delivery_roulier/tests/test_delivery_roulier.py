@@ -34,6 +34,7 @@ class DeliveryRoulierCase(SavepointCase):
         from .models import FakeDeliveryCarrier
 
         cls.loader.update_registry((FakeDeliveryCarrier,))
+        cls.real_get_carriers_action_available = roulier.get_carriers_action_available
 
     def setUp(self):
         super().setUp()
@@ -95,6 +96,7 @@ class DeliveryRoulierCase(SavepointCase):
     @classmethod
     def tearDownClass(cls):
         cls.loader.restore_registry()
+        roulier.get_carriers_action_available = cls.real_get_carriers_action_available
         super().tearDownClass()
 
     def test_roulier(self):
