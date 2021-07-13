@@ -78,9 +78,11 @@ class StockPicking(models.Model):
         res = web_service.generate_label(self,
                                          packages,
                                          user_lang=user.lang)
-
-        if 'errors' in res:
-            raise exceptions.Warning('\n'.join(res['errors']))
+        for res_line in res:
+            if res_line.get('errors'):
+                raise exceptions.UserError(
+                    "%s\n\n%s" % (self.display_name, '\n'.join(res_line['errors']))
+                )
 
         def info_from_label(label):
             tracking_number = label['tracking_number']
