@@ -1,0 +1,123 @@
+interactions:
+- request:
+    body: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<soap:Envelope xmlns:soap=\"\
+      http://schemas.xmlsoap.org/soap/envelope/\"> \n\t<soap:Header />\n\t<soap:Body>\n\
+      \t\t<sls:generateLabel xmlns:sls=\"http://sls.ws.coliposte.fr\">\n  <generateLabelRequest>\n\
+      \    <contractNumber>000000</contractNumber>\n    <password>password</password>\n\
+      \    <outputFormat>\n      <x>0</x>\n      <y>0</y>\n      <outputPrintingType>ZPL_10x15_203dpi</outputPrintingType>\n\
+      \    </outputFormat>\n    <letter>\n      <service>\n        <productCode>DOM</productCode>\n\
+      \        <depositDate>2021-07-13</depositDate>\n        <totalAmount>100</totalAmount>\n\
+      \        <returnTypeChoice>3</returnTypeChoice>\n      </service>\n      <parcel>\n\
+      \        <insuranceValue>0</insuranceValue>\n        <weight>1.2</weight>\n\
+      \        <nonMachinable>false</nonMachinable>\n        <COD>false</COD>\n  \
+      \      <CODAmount>0</CODAmount>\n        <returnReceipt>0</returnReceipt>\n\
+      \        <ftd>false</ftd>\n      </parcel>\n      <customsDeclarations>\n  \
+      \      <includeCustomsDeclarations>false</includeCustomsDeclarations>\n    \
+      \  </customsDeclarations>\n      <sender>\n        <address>\n          <lastName>My\
+      \ Company (San Francisco)</lastName>\n          <firstName>.</firstName>\n \
+      \         <line2>250 Executive Park Blvd, Suite 3400</line2>\n          <countryCode>FR</countryCode>\n\
+      \          <city>San Francisco</city>\n          <zipCode>94134</zipCode>\n\
+      \          <mobileNumber>+1(650)691-3277</mobileNumber>\n          <email>info@yourcompany.com</email>\n\
+      \        </address>\n      </sender>\n      <addressee>\n        <codeBarForReference>false</codeBarForReference>\n\
+      \        <serviceInfo>service info</serviceInfo>\n        <address>\n      \
+      \    <lastName>Carrier label test customer</lastName>\n          <firstName>.</firstName>\n\
+      \          <line2>27 Rue Henri Rolland</line2>\n          <countryCode>FR</countryCode>\n\
+      \          <city>VILLEURBANNE</city>\n          <zipCode>69100</zipCode>\n \
+      \       </address>\n      </addressee>\n    </letter>\n  </generateLabelRequest>\n\
+      </sls:generateLabel>\n\n\t</soap:Body>\n</soap:Envelope>"
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '2011'
+      User-Agent:
+      - python-requests/2.21.0
+      content-type:
+      - text/xml;charset=UTF-8
+    method: POST
+    uri: https://ws.colissimo.fr/sls-ws/SlsServiceWS/2.0?wsdl
+  response:
+    body:
+      string: "--uuid:3036c367-3711-4dfa-90d6-1d7709b30839\r\nContent-Type: application/xop+xml;\
+        \ charset=UTF-8; type=\"text/xml\";\r\nContent-Transfer-Encoding: binary\r\
+        \nContent-ID: <root.message@cxf.apache.org>\r\n\r\n<soap:Envelope xmlns:soap=\"\
+        http://schemas.xmlsoap.org/soap/envelope/\"><soap:Body><ns2:generateLabelResponse\
+        \ xmlns:ns2=\"http://sls.ws.coliposte.fr\"><return><messages><id>0</id><messageContent>La\
+        \ requ\xEAte a \xE9t\xE9 trait\xE9e avec succ\xE8s</messageContent><type>INFOS</type></messages><labelV2Response><label><xop:Include\
+        \ xmlns:xop=\"http://www.w3.org/2004/08/xop/include\" href=\"cid:1ad1c8a5-41d8-47b7-8901-756f4a712a6e-46217@cxf.apache.org\"\
+        /></label><parcelNumber>6A21539158956</parcelNumber><parcelNumberPartner>0069100116A2153915895801250O</parcelNumberPartner><fields><field><key>NETWORK_NAME</key><value></value></field><field><key>PARTNER_NAME</key><value></value></field><field><key>PARTNER_CAB</key><value></value></field><field><key>CN23_THERMIQUE</key><value></value></field></fields></labelV2Response></return></ns2:generateLabelResponse></soap:Body></soap:Envelope>\r\
+        \n--uuid:3036c367-3711-4dfa-90d6-1d7709b30839\r\nContent-Type: application/octet-stream\r\
+        \nContent-Transfer-Encoding: binary\r\nContent-ID: <1ad1c8a5-41d8-47b7-8901-756f4a712a6e-46217@cxf.apache.org>\r\
+        \n\r\n\x10CT~~CD,~CC^~CT~\r\n^XA\r\n^PW799\r\n^LS0000\r\n^LT0000\r\n^FO704,0^GFA,03456,03456,00012,:Z64:\n\
+        eJzl1kFuwyAQBVAjFix9hByFq/QmdtVFr2WpFyHKBciOSpYpGDzzcYxip5GqtrN6ilr4A9PQpvkf1Xrv++zTysvP6GCZ3UX35Ell++hhpggeW7Y7mRvLYKvtbDXbURzTsYdupDiDZ7/6iaKhZU7dJfcUjT1mp5hhWYoWts7R0FYnx5gmOIZubdrDrW3SHsvnAiyzlUut2bymz5bZJudZe8j5C7/nvmK/CrycQzqT6ebc8DzblZfzV2C8r9kbd4r33qxMc4Lzg3OlYd5wDnE+f2Upy9YTG9vKFxpLpEufS5amheR4IivHGygr2UY6tthj/N3NNWVhRdmKUo59gn47z670K6r9tpCn1u+uHsGVHh3vJb0Gb+cU0Etxpxr6beFMahX+AEZehyzAcocVGkZPmW3XKp7/C/vqHreFGHdLON1TBgvzYGEezmxVmu/38gm+gu325xw5ZD5XfKG9hP/gtvAbqtvTVzdAX4Z8rfYImff0+Jy+hH+jbA2Mc61+amZWGUzF9ojjzbAF2h2zPLTv0czfyylhBjz6aM4B3Nwt/D4s34iefPRNdPhGFO/gk94ItblX7UwwM/ZS9Ij/D6hHJ/5v1hcBbaxB:F590\n\
+        ^BY3,0^FT533,538^BON,3,N,23,N,1,\r\n^FH\\^FD[)>\\1E01\\1D02\\1D0069100\\1D250\\\
+        1D801\\1D116A2153915895\\1DGEOP\\1D834420\\1D193\\1D\\1D001/001\\1D01.20KG\\\
+        1DN\\1D27 Rue Henri Rolland\\1DVILLEURBANNE\\1D\\1D\\1D\\1E07\\1DG03\\1D0\\\
+        1D0\\1D1\\1D\\1FCarrier label test customer \\1FCarrier label test customer\
+        \ \\1F\\1F\\1F\\1F\\1F\\1F\\1F\\1DB\\1D01.20KG\\1D\\1DMy Company San Francisco\
+        \ \\1D\\1D\\1D\\1D\\1D\\1D0\\1D\\1D\\1E07\\1DS010\\1D\\1F1650691\\1FMy Company\
+        \ San Francisco \\1F\\1F250 Executive Park Blvd Suite 3400\\1F\\1FFONTENAY\
+        \ SOUS BOIS CEDEX\\1F94134\\1F250\\1D\\1E\\04\r^FS\r\n^FT26,725^A0N,68,67^FH\\\
+        ^FD^FS\r\n^BY3,3,185^FT46,933^BCN,,N,N\r\n^FD>:%>50069100116>6A>52153915895801250^FS\r\
+        \n^FO0,3^GB799,0,1^FS\r\n^FO531,269^GB264,0,1^FS\r\n^FO0,542^GB799,0,1^FS\r\
+        \n^FO527,3^GB0,537,2^FS\r\n^FO715,5^GB0,264,1^FS\r\n^FT191,965^A0N,23,24^FB418,1,0,C^FH\\\
+        ^FD0069 1001 16A2 1539 1589 5801 250O                 ^FS\r\n^FT495,14^A0R,14,14^FH\\\
+        ^FDR\\82f desti. : ^FS\r\n^FT513,14^A0R,14,14^FH\\^FDDestinataire / Destinee^FS\r\
+        \n^FT744,594^A0N,17,16^FH\\^FDService^FS\r\n^FT259,717^A0N,17,16^FB421,1,0,C^FH\\\
+        ^FD12/07/21 19:48 WS_SLS 21070504 2.0                                    \
+        \                          ^FS\r\n^FT350,588^A0N,39,38^FH\\^FD4^FS\r\n^FT237,725^A0N,68,67^FB548,1,0,R^FH\\\
+        ^FD^FS\r\n^FO397,412^GB132,0,1^FS\r\n^FT25,671^A0N,107,69^FH\\^FDFR-COL-1155-69VXV^FS\r\
+        \n^FO45,744^GB696,0,3^FS\r\n^FT581,14^A0R,17,16^FH\\^FDFR FRANCE^FS\r\n^FT135,588^A0N,45,43^FH\\\
+        ^FD2153915895^FS\r\n^FO1,305^GB527,0,1^FS\r\n^FT13,588^A0N,56,55^FH\\^FD116A^FS\r\
+        \n^FT265,580^A0N,45,40^FB522,1,0,R^FH\\^FD            J+2_Dom^FS\r\n^FT599,14^A0R,17,16^FH\\\
+        ^FD94134 FONTENAY SOUS BOIS C^FS\r\n^FT535,77^A0R,31,31^FH\\^FD834420^FS\r\
+        \n^FT535,15^A0R,17,16^FH\\^FDCompte :^FS\r\n^FT560,15^A0R,17,16^FH\\^FD^FS\r\
+        \n^FT10,209^A0N,23,24^FH\\^FD^FS\r\n^FT9,125^A0N,23,24^FH\\^FD^FS\r\n^FT10,98^A0N,23,24^FH\\\
+        ^FD^FS\r\n^FT614,15^A0R,17,16^FH\\^FD^FS\r\n^FT630,15^A0R,17,16^FH\\^FD^FS\r\
+        \n^FT231,700^A0N,28,28^FB339,1,0,C^FH\\^FD801-FR-69100^FS\r\n^FT10,185^A0N,34,33^FH\\\
+        ^FD^FS\r\n^FT10,156^A0N,34,33^FH\\^FD27 Rue Henri Rolland^FS\r\n^FT680,14^A0R,17,16^FH\\\
+        ^FDMy Company (San Francisco^FS\r\n^FT646,15^A0R,17,16^FH\\^FD^FS\r\n^FT9,70^A0N,28,28^FH\\\
+        ^FDCarrier label test customer .^FS\r\n^FT661,15^A0R,17,16^FH\\^FD250 Executive\
+        \ Park Blvd,^FS\r\n^FT9,44^A0N,28,28^FH\\^FD^FS\r\n^FT14,301^A0N,45,45^FH\\\
+        ^FD^FS\r\n^FT699,15^A0R,14,14^FH\\^FDExp\\82diteur / Sender^FS\r\n^FT168,261^A0N,45,45^FH\\\
+        ^FDVILLEURBANNE^FS\r\n^FT9,261^A0N,62,62^FH\\^FD69100^FS\r\n^FT390,395^A0N,23,24^FB146,1,0,C^FH\\\
+        ^FD1.2 kg^FS\r\n^FT440,359^A0N,23,24^FH\\^FDPoids^FS\r\n^FT405,334^A0N,20,19^FH\\\
+        ^FDLivraison : 1/1^FS\r\n^FT118,427^A0N,20,19^FH\\^FD^FS\r\n^FT103,449^A0N,25,24^FH\\\
+        ^FD^FS\r\n^FT103,471^A0N,25,24^FH\\^FD^FS\r\n^FT9,411^A0N,20,19^FH\\^FDInstructions\
+        \ : ^FS\r\n^FT11,449^A0N,20,19^FH\\^FDR\\82f client :^FS\r\n^FT10,329^A0N,20,19^FH\\\
+        ^FDNum. colis :^FS\r\n^FT9,350^A0N,20,19^FH\\^FDSite d\\82p\\93t : MONTEREAU\
+        \ SUR LE J^FS\r\n^FT109,330^A0N,28,28^FH\\^FD6A 21539 15895 6^FS\r\n^FT9,391^A0N,20,19^FH\\\
+        ^FDCode porte :  /  Interphone : ^FS\r\n^FT9,371^A0N,20,19^FH\\^FDT\\82l\\\
+        82phone :  / ^FS\r\n^FO396,305^GB0,90,1^FS\r\n^FO396,396^GB0,145,1^FS\r\n\
+        ^FO265,478^GB0,64,1^FS\r\n^FO129,478^GB0,64,1^FS\r\n^FO1,477^GB527,0,1^FS\r\
+        \n^FT0,534^A0N,68,67^FH\\^FD^FS\r\n^FT396,534^A0N,68,67^FH\\^FD^FS\r\n^FT397,468^A0N,68,67^FH\\\
+        ^FD^FS\r\n^FT266,534^A0N,68,67^FH\\^FDDom^FS\r\n^FT131,534^A0N,68,67^FH\\\
+        ^FDJ+2^FS\r\n^FO0,2^GB529,305,2^FS\r\n^PQ1,0,1,Y^XZ\r\n\r\n--uuid:3036c367-3711-4dfa-90d6-1d7709b30839--"
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      Connection:
+      - Keep-Alive
+      Content-Length:
+      - '5251'
+      Content-Type:
+      - multipart/related; type="application/xop+xml"; boundary="uuid:3036c367-3711-4dfa-90d6-1d7709b30839";
+        start="<root.message@cxf.apache.org>"; start-info="text/xml"
+      Date:
+      - Mon, 12 Jul 2021 17:48:54 GMT
+      Keep-Alive:
+      - timeout=15, max=200
+      P3P:
+      - policyref="/w3c/p3p.xml", CP="NOI DSP COR NID CUR ADM DEV OUR BUS"
+      Server:
+      - Apache
+      Vary:
+      - User-Agent
+    status:
+      code: 200
+      message: OK
+version: 1
