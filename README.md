@@ -25,6 +25,7 @@ addon | version | summary
 [delivery_multi_destination](delivery_multi_destination/) | 14.0.1.0.0 | Multiple destinations for the same delivery method
 [delivery_package_fee](delivery_package_fee/) | 14.0.1.0.0 | Add fees on delivered packages on shipping methods
 [delivery_roulier](delivery_roulier/) | 14.0.1.0.0 | Integration of multiple carriers
+[delivery_roulier_laposte_fr](delivery_roulier_laposte_fr/) | 14.0.1.0.0 | Generate Label for La Poste/Colissimo
 [delivery_roulier_option](delivery_roulier_option/) | 14.0.1.0.0 | Add options to roulier modules
 [delivery_state](delivery_state/) | 14.0.1.0.0 | Provides fields to be able to contemplate the tracking statesand also adds a global fields
 [stock_picking_delivery_link](stock_picking_delivery_link/) | 14.0.1.0.0 | Adds link to the delivery on all intermediate operations.
