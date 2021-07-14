@@ -8,7 +8,6 @@
     "version": "14.0.1.0.0",
     "license": "AGPL-3",
     "maintainers": ["rousseldenis"],
-    "development_status": "Alpha",
     "author": "ACSONE SA/NV,Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/delivery-carrier",
     "depends": ["delivery"],
