@@ -7,11 +7,16 @@
     <field name="model">delivery.carrier.template.option</field>
     <field name="arch" type="xml">
       <form string="delivery_carrier_option">
-        <field name="partner_id" />
-        <field name="code"/>
-        <field name="name"/>
-        <newline/>
-        <field name="description" colspan="4"/>
+        <group>
+          <group>
+            <field name="name"/>
+          </group>
+          <group>
+            <field name="partner_id"/>
+            <field name="code"/>
+          </group>
+          <field name="description"/>
+        </group>
       </form>
     </field>
   </record>
@@ -34,15 +39,18 @@
     <field name="model">delivery.carrier.option</field>
     <field name="arch" type="xml">
       <form string="delivery_carrier_option">
-        <group col="4">
-          <field name="active" />
-          <field name="mandatory" attrs="{'readonly': [('readonly_flag','=',True)]}"/>
-          <field name="by_default" attrs="{'invisible': [('mandatory', '=', True)]}"/>
-          <field name="readonly_flag" attrs="{'invisible': True}"/>
-          <field name="tmpl_option_id" colspan="4"
-            attrs="{'readonly': [('readonly_flag','=',True)]}"/>
-          <newline/>
-          <field name="description" colspan="4" readonly="True"/>
+        <group>
+          <group>
+            <field name="active" />
+            <field name="mandatory" attrs="{'readonly': [('readonly_flag','=',True)]}"/>
+            <field name="by_default" attrs="{'invisible': [('mandatory', '=', True)]}"/>
+            <field name="readonly_flag" attrs="{'invisible': True}"/>
+          </group>
+          <group>
+            <field name="tmpl_option_id"
+              attrs="{'readonly': [('readonly_flag','=',True)]}"/>
+          </group>
+          <field name="description" readonly="True"/>
         </group>
       </form>
     </field>
