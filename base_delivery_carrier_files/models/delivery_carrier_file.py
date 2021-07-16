@@ -29,7 +29,7 @@ class DeliveryCarrierFile(models.Model):
         """
         return [("disk", "Disk")]
 
-    def _write_file(self, filename, file_content):
+    def _write_file(self, filename, file_content, pickings):
         """
         Method responsible of writing the file, on the filesystem or
         by inheriting the module, in the document module as instance
@@ -38,6 +38,7 @@ class DeliveryCarrierFile(models.Model):
                                            (configuration)
         :param tuple filename: name of the file to write
         :param tuple file_content: content of the file to write
+        :param recordset pickings: pickings to which the file applies
         :return: True if write is successful
         """
         for carrier_file in self:
@@ -75,6 +76,7 @@ class DeliveryCarrierFile(models.Model):
 
             for f in files:
                 filename, file_content, picking_ids = f
+                pickings = self.env["stock.picking"].browse(picking_ids or [])
                 # we pass the errors because the files can still be
                 # generated manually
                 # at first I would like to open a new cursor and
@@ -82,13 +84,13 @@ class DeliveryCarrierFile(models.Model):
                 # but I encountered lock because the picking
                 # was already modified in the current transaction
                 try:
-                    if this._write_file(filename, file_content):
+                    if this._write_file(filename, file_content, pickings):
                         picking_obj.browse(picking_ids).write(
                             {"carrier_file_generated": True}
                         )
                 except Exception as e:
                     log.exception(
-                        "Could not create the picking file " "for pickings %s: %s",
+                        "Could not create the picking file for pickings %s: %s",
                         picking_ids,
                         e,
                     )

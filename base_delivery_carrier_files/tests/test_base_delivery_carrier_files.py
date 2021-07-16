@@ -19,7 +19,7 @@ class CarrierFilesTest(TransactionCase):
                 "auto_export": True,
                 "group_pickings": False,
                 "write_mode": "disk",
-                "export_path": "/tmp",
+                "export_path": tempfile.gettempdir(),
             }
         )
 
@@ -30,7 +30,7 @@ class CarrierFilesTest(TransactionCase):
                 "auto_export": False,
                 "group_pickings": True,
                 "write_mode": "disk",
-                "export_path": "/tmp",
+                "export_path": tempfile.gettempdir(),
             }
         )
 
@@ -74,12 +74,6 @@ class CarrierFilesTest(TransactionCase):
 
     def test_carrier_file_generation(self):
         """ Test carrier file generation """
-        # I configure the carrier file configuration
-        # to write to the root document directory.
-        self.carrier_file.write(
-            {"export_path": tempfile.gettempdir(), "write_mode": "disk"}
-        )
-
         # I confirm outgoing shipment of 130 kgm Ice-cream.
         picking = self.env["stock.picking"].create(
             {
@@ -125,12 +119,6 @@ class CarrierFilesTest(TransactionCase):
 
     def test_manual_carrier_file_generation(self):
         """ Test manual carrier file generation """
-        # I configure the carrier file configuration
-        # to write to the root document directory.
-        self.carrier_file_manual.write(
-            {"export_path": tempfile.gettempdir(), "write_mode": "disk"}
-        )
-
         # I confirm outgoing shipment of 130 kgm Ice-cream.
         picking = self.env["stock.picking"].create(
             {
