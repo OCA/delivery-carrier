@@ -13,5 +13,4 @@ class HTMLRenderMixin(object):
         return html.fragments_fromstring(html_)
 
     def find_div_class(self, node, name):
-        return node.xpath(
-            '(//div)[@class="{}"]'.format(name))
+        return node.xpath('(//div)[@class="{}"]'.format(name))
