@@ -1,14 +1,18 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <!-- Carrier File -->
-    <record id="base_delivery_carrier_files.delivery_carrier_file"
-            model="delivery.carrier.file">
+    <record
+        id="base_delivery_carrier_files.delivery_carrier_file"
+        model="delivery.carrier.file"
+    >
         <field name="write_mode">document</field>
         <field name="type">generic</field>
     </record>
 
-    <record id="base_delivery_carrier_files.delivery_carrier_file_manual"
-            model="delivery.carrier.file">
+    <record
+        id="base_delivery_carrier_files.delivery_carrier_file_manual"
+        model="delivery.carrier.file"
+    >
         <field name="write_mode">document</field>
         <field name="type">generic</field>
     </record>
