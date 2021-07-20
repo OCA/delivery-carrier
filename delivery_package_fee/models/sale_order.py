@@ -93,7 +93,7 @@ class SaleOrder(models.Model):
         new_result = []
         for values in result:
             # "sale" module sets this key
-            if "order_line" in values:
+            if "order_line" in values and values["order_line"]:
                 # remove package fee lines
                 order_lines = [
                     line
