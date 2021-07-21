@@ -22,7 +22,14 @@ _compile_itemnum = re.compile(r"[^0-9]")
 AUTH_PATH = "/WEDECOAuth/token"
 GENERATE_LABEL_PATH = "/api/barcode/v1/generateAddressLabel"
 
-DISALLOWED_CHARS = ["|", "\\", "<", ">"]
+DISALLOWED_CHARS_MAPPING = {
+    "|": "",
+    "\\": "",
+    "<": "",
+    ">": "",
+    "\u2018": "'",
+    "\u2019": "'",
+}
 
 
 class PostlogisticsWebService(object):
@@ -449,10 +456,10 @@ class PostlogisticsWebService(object):
             return cls.access_token
 
     def _sanitize_string(self, value):
-        """Removes disallowed chars ("|", "\", "<", ">") from strings."""
+        """Removes disallowed chars ("|", "\", "<", ">", "’", "‘") from strings."""
         if isinstance(value, str):
-            for char in DISALLOWED_CHARS:
-                value = value.replace(char, "")
+            for char, repl in DISALLOWED_CHARS_MAPPING.items():
+                value = value.replace(char, repl)
         return value
 
     def generate_label(self, picking, packages):

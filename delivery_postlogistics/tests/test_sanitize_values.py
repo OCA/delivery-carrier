@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
 
-from ..postlogistics.web_service import DISALLOWED_CHARS
+from ..postlogistics.web_service import DISALLOWED_CHARS_MAPPING
 from .common import TestPostlogisticsCommon
 
 
@@ -15,7 +15,7 @@ class TestSanitizeValues(TestPostlogisticsCommon):
     def setUpPartner(cls):
         cls.partner = cls.env["res.partner"].create(
             {
-                "name": "P<o\\t|at>o",
+                "name": "‘P<o\\t|at>o’",
                 "mobile": "+33123456789>",
                 "phone": ">+33123456789<",
                 "email": "w<>|\\hatever@whatever.too",
@@ -40,7 +40,9 @@ class TestSanitizeValues(TestPostlogisticsCommon):
 
     def check_strings_in_list(self, values):
         for value in values:
-            self.assertFalse(any(char in value for char in DISALLOWED_CHARS))
+            self.assertFalse(
+                any(char in value for char in DISALLOWED_CHARS_MAPPING.keys())
+            )
 
     def test_sanitize(self):
         customer = self.service_class._prepare_customer(self.picking)
