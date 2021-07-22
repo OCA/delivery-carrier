@@ -1,1 +1,2 @@
 zeep
+git+https://github.com/daramousk/postnl_service_shipment.git

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo noupdate="1">
+
+    <record id="apikey" model="ir.config_parameter">
+        <field name="key">delivery_carrier_label_postnl.apikey</field>
+        <field name="value">dumpkey</field>
+    </record>
+
+    <record id="url_shipping_service" model="ir.config_parameter">
+        <field name="key">delivery_carrier_label_postnl.url_shipping_service</field>
+        <field name="value">https://api-sandbox.postnl.nl/v1/shipment</field>
+    </record>
+
+</odoo>

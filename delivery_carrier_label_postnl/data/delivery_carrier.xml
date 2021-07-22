@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo noupdate="1">
+    <record id="delivery_carrier_postnl" model="delivery.carrier">
+        <field name="name">PostNL</field>
+        <field name="code">POSTNL</field>
+        <field name="delivery_type">postnl</field>
+        <field name="integration_level">rate_and_ship</field>
+        <field name="product_id" ref="delivery.product_product_delivery"></field>
+    </record>
+</odoo>
