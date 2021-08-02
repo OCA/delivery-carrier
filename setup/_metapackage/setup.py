@@ -21,6 +21,7 @@ setuptools.setup(
         'odoo13-addon-delivery_postlogistics',
         'odoo13-addon-delivery_postlogistics_server_env',
         'odoo13-addon-delivery_price_method',
+        'odoo13-addon-delivery_price_rule_volumetric_weight',
         'odoo13-addon-delivery_purchase',
         'odoo13-addon-delivery_send_to_shipper_at_operation',
         'odoo13-addon-delivery_state',
