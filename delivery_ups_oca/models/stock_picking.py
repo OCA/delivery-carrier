@@ -2,10 +2,10 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 import logging
 
-import requests
-
 from odoo import _, fields, models
 from odoo.exceptions import UserError
+
+import requests
 
 _logger = logging.getLogger(__name__)
 
@@ -157,11 +157,7 @@ class StockPicking(models.Model):
     def _ups_quant_package_data(self, package):
         """Return a dict describing a package for the shipping request"""
         get_param = self.env["ir.config_parameter"].sudo().get_param
-        weight_uom = (
-            int(get_param("product.weight_in_lbs", 0,))
-            and "LBS"
-            or "KGS"
-        )
+        weight_uom = int(get_param("product.weight_in_lbs", 0,)) and "LBS" or "KGS"
         return dict(
             Description=package.name,
             NumOfPieces=str(sum(package.mapped("quant_ids.quantity"))),

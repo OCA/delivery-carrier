@@ -71,8 +71,8 @@ class DeliveryCarrierLabelUpsCase(carrier_label_case.CarrierLabelCase):
 
 
 class TestDeliveryCarrierLabelUps(
-        DeliveryCarrierLabelUpsCase,
-        carrier_label_case.TestCarrierLabel):
+    DeliveryCarrierLabelUpsCase, carrier_label_case.TestCarrierLabel
+):
     def test_cancel_shipment(self):
         self.assertTrue(self.picking.carrier_tracking_ref)
         with patch(
