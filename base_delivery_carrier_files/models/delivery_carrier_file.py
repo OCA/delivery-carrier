@@ -15,21 +15,29 @@ class DeliveryCarrierFile(models.Model):
     _name = "delivery.carrier.file"
     _description = "Delivery Carrier File"
 
-    @api.model
-    def get_type_selection(self):
-        """
-        Has to be inherited to add carriers
-        """
-        return [("generic", "Generic")]
+    name = fields.Char(string="Name", size=64, required=True)
+    type = fields.Selection(
+        selection=[("generic", "Generic")], string="Type", required=True
+    )
+    group_pickings = fields.Boolean(
+        help="All the pickings will be "
+        "grouped in the same file. "
+        "Has no effect when the files "
+        "are automatically exported at "
+        "the delivery order process."
+    )
+    write_mode = fields.Selection(
+        selection=[("disk", "Disk")], string="Write on", required=True
+    )
+    export_path = fields.Char(string="Export Path", size=256)
+    auto_export = fields.Boolean(
+        help="The file will be automatically "
+        "generated when a delivery order "
+        "is processed. If activated, each "
+        "delivery order will be exported "
+        "in a separate file."
+    )
 
-    @api.model
-    def get_write_mode_selection(self):
-        """
-        Selection can be inherited to add more write modes
-        """
-        return [("disk", "Disk")]
-
-    @api.multi
     def _write_file(self, filename, file_content):
         """
         Method responsible of writing the file, on the filesystem or
@@ -110,26 +118,3 @@ class DeliveryCarrierFile(models.Model):
         """
         for this in self:
             return this._generate_files(picking_ids)
-
-    name = fields.Char("Name", size=64, required=True)
-    type = fields.Selection(
-        selection="get_type_selection", string="Type", required=True
-    )
-    group_pickings = fields.Boolean(
-        help="All the pickings will be "
-        "grouped in the same file. "
-        "Has no effect when the files "
-        "are automatically exported at "
-        "the delivery order process."
-    )
-    write_mode = fields.Selection(
-        selection="get_write_mode_selection", string="Write on", required=True
-    )
-    export_path = fields.Char("Export Path", size=256)
-    auto_export = fields.Boolean(
-        help="The file will be automatically "
-        "generated when a delivery order "
-        "is processed. If activated, each "
-        "delivery order will be exported "
-        "in a separate file."
-    )

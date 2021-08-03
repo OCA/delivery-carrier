@@ -3,13 +3,13 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 {
     "name": "Base Delivery Carrier Files",
-    "version": "12.0.1.0.1",
+    "version": "13.0.1.0.0",
     "category": "Generic Modules/Warehouse",
     "author": "Camptocamp,Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "website": "https://github.com/OCA/delivery-carrier",
     "depends": ["base", "stock", "delivery"],
-    "demo": ["data/carrier_file_demo.xml",],
+    "demo": ["data/carrier_file_demo.xml"],
     "data": [
         "views/carrier_file_view.xml",
         "views/stock_view.xml",

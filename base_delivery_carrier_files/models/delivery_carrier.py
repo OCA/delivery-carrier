@@ -8,4 +8,6 @@ from odoo import fields, models
 class DeliveryCarrier(models.Model):
     _inherit = "delivery.carrier"
 
-    carrier_file_id = fields.Many2one("delivery.carrier.file", "Carrier File")
+    carrier_file_id = fields.Many2one(
+        comodel_name="delivery.carrier.file", string="Carrier File"
+    )

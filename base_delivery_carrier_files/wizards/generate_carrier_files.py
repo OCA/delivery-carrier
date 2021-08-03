@@ -7,7 +7,6 @@ from odoo.exceptions import UserError
 
 
 class DeliveryCarrierFileGenerate(models.TransientModel):
-
     _name = "delivery.carrier.file.generate"
     _description = "Wizard to generate delivery carrier files"
 
@@ -17,24 +16,21 @@ class DeliveryCarrierFileGenerate(models.TransientModel):
         if context.get("active_model") == "stock.picking" and context.get("active_ids"):
             return self.env["stock.picking"].browse(context["active_ids"])
 
-    @api.multi
     def action_generate(self):
         """
         Call the creation of the delivery carrier files
         """
-        if not self.pickings:
-            raise UserError(_("No delivery orders selected"))
-        self.pickings.generate_carrier_files(auto=False, recreate=self.recreate)
+        for item in self:
+            if not item.pickings:
+                raise UserError(_("No delivery orders selected"))
+            item.pickings.generate_carrier_files(auto=False, recreate=item.recreate)
         return {"type": "ir.actions.act_window_close"}
 
     pickings = fields.Many2many(
-        "stock.picking",
-        string="Delivery Orders",
-        default=_get_pickings,
-        oldname="picking_ids",
+        comodel_name="stock.picking", string="Delivery Orders", default=_get_pickings
     )
     recreate = fields.Boolean(
-        "Recreate files",
+        string="Recreate files",
         help=(
             "If this option is used, new files will be generated "
             "for selected picking even if they already had one.\n"

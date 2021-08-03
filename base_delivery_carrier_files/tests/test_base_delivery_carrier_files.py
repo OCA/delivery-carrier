@@ -4,14 +4,12 @@
 
 import tempfile
 
-from odoo.tests.common import TransactionCase, tagged
+from odoo.tests import common
 
 
-@tagged("-at_install", "post_install")
-class CarrierFilesTest(TransactionCase):
+class CarrierFilesTest(common.TransactionCase):
     def setUp(self):
-        super(CarrierFilesTest, self).setUp()
-
+        super().setUp()
         self.carrier_file = self.env["delivery.carrier.file"].create(
             {
                 "name": "Generic",
@@ -22,7 +20,6 @@ class CarrierFilesTest(TransactionCase):
                 "export_path": "/tmp",
             }
         )
-
         self.carrier_file_manual = self.env["delivery.carrier.file"].create(
             {
                 "name": "Generic",
@@ -33,25 +30,19 @@ class CarrierFilesTest(TransactionCase):
                 "export_path": "/tmp",
             }
         )
-
         self.carrier = self.env.ref("delivery.delivery_carrier")
         self.carrier.carrier_file_id = self.carrier_file.id
-
         self.carrier_manual = self.env.ref("delivery.free_delivery_carrier")
         self.carrier_manual.carrier_file_id = self.carrier_file_manual.id
-
         self.location_refrigerator = self.env["stock.location"].create(
-            {"name": "Refrigerator", "usage": "internal",}
+            {"name": "Refrigerator", "usage": "internal"}
         )
-
         self.location_delivery_counter = self.env["stock.location"].create(
-            {"name": "Delivery Counter", "usage": "internal",}
+            {"name": "Delivery Counter", "usage": "internal"}
         )
-
         self.owner = self.env["res.partner"].create(
-            {"name": "test_delivery_carrier_file",}
+            {"name": "test_delivery_carrier_file"}
         )
-
         self.product = self.env["product.product"].create(
             {
                 "name": "Icecream",
@@ -61,37 +52,28 @@ class CarrierFilesTest(TransactionCase):
                 "uom_po_id": self.env.ref("uom.product_uom_kgm").id,
             }
         )
-
         self.picking_type = self.env["stock.picking.type"].create(
             {
                 "name": "Outgoing Ice Cream",
                 "code": "outgoing",
                 "sequence_id": self.env.ref("stock.sequence_mrp_op").id,
+                "sequence_code": "OIC",
             }
         )
 
-    def test_carrier_file_generation(self):
-        """ Test carrier file generation """
-        # I configure the carrier file configuration
-        # to write to the root document directory.
-        self.carrier_file.write(
-            {"export_path": tempfile.gettempdir(), "write_mode": "disk"}
-        )
-
-        # I confirm outgoing shipment of 130 kgm Ice-cream.
+    def _create_picking(self, carrier_id, move_name):
         picking = self.env["stock.picking"].create(
             {
                 "location_id": self.location_refrigerator.id,
                 "location_dest_id": self.location_delivery_counter.id,
                 "partner_id": self.owner.id,
                 "picking_type_id": self.picking_type.id,
-                "carrier_id": self.carrier.id,
+                "carrier_id": carrier_id.id,
             }
         )
-
         self.env["stock.move"].create(
             {
-                "name": "test_carrier_file",
+                "name": move_name,
                 "location_id": self.location_refrigerator.id,
                 "location_dest_id": self.location_delivery_counter.id,
                 "picking_id": picking.id,
@@ -100,19 +82,25 @@ class CarrierFilesTest(TransactionCase):
                 "product_uom_qty": 130.0,
             }
         )
+        return picking
 
+    def test_carrier_file_generation(self):
+        """ Test carrier file generation """
+        # I configure the carrier file configuration
+        # to write to the root document directory.
+        self.carrier_file.write(
+            {"export_path": tempfile.gettempdir(), "write_mode": "disk"}
+        )
+        # I confirm outgoing shipment of 130 kgm Ice-cream.
+        picking = self._create_picking(self.carrier, "test_carrier_file")
         picking.action_confirm()
-
         # I check outgoing shipment after stock availablity in refrigerator.
         picking.action_assign()
-
         # I deliver outgoing shipment.
         picking.action_done()
-
         # I check shipment details after shipment
         # The carrier file must have been generated.
         self.assertTrue(picking.carrier_file_generated)
-
         # I check outgoing shipment copy
         # The carrier_file_generated field must be unchecked.
         new_picking = picking.copy()
@@ -125,43 +113,16 @@ class CarrierFilesTest(TransactionCase):
         self.carrier_file_manual.write(
             {"export_path": tempfile.gettempdir(), "write_mode": "disk"}
         )
-
         # I confirm outgoing shipment of 130 kgm Ice-cream.
-        picking = self.env["stock.picking"].create(
-            {
-                "location_id": self.location_refrigerator.id,
-                "location_dest_id": self.location_delivery_counter.id,
-                "partner_id": self.owner.id,
-                "picking_type_id": self.picking_type.id,
-                "carrier_id": self.carrier_manual.id,
-            }
-        )
-
-        self.env["stock.move"].create(
-            {
-                "name": "test_carrier_file_manual",
-                "location_id": self.location_refrigerator.id,
-                "location_dest_id": self.location_delivery_counter.id,
-                "picking_id": picking.id,
-                "product_id": self.product.id,
-                "product_uom": self.env.ref("uom.product_uom_kgm").id,
-                "product_uom_qty": 130.0,
-            }
-        )
-
-        # I confirm outgoing shipment of 130 kgm Ice-cream.
+        picking = self._create_picking(self.carrier_manual, "test_carrier_file_manual")
         picking.action_confirm()
-
         # I check outgoing shipment after stock availablity in refrigerator.
         picking.action_assign()
-
         # I deliver outgoing shipment.
         picking.action_done()
-
         # I check shipment details after shipment
         # The carrier file must NOT have been generated.
         self.assertFalse(picking.carrier_file_generated)
-
         # I generate the carrier files of my shipment from the wizard
         wizard = (
             self.env["delivery.carrier.file.generate"]
@@ -169,7 +130,6 @@ class CarrierFilesTest(TransactionCase):
             .create({})
         )
         wizard.action_generate()
-
         # I check shipment details after manual generation
         # The carrier file must have been generated.
         self.assertTrue(picking.carrier_file_generated)
