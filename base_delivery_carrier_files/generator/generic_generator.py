@@ -1,36 +1,36 @@
-# -*- coding: utf-8 -*-
 # Copyright 2012 Camptocamp SA
 # Author: Guewen Baconnier
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import csv
 
-from .file_generator import CarrierFileGenerator
-from .base_line import BaseLine
 from ..csv_writer import UnicodeWriter
+from .base_line import BaseLine
+from .file_generator import CarrierFileGenerator
 
 
 class GenericLine(BaseLine):
-    fields = ('reference',
-              'name',
-              'contact',
-              'street1',
-              'street2',
-              'zip',
-              'city',
-              'state',
-              'country_code',
-              'phone',
-              'mail',
-              'delivery_name',
-              'weight')
+    fields = (
+        "reference",
+        "name",
+        "contact",
+        "street1",
+        "street2",
+        "zip",
+        "city",
+        "state",
+        "country_code",
+        "phone",
+        "mail",
+        "delivery_name",
+        "weight",
+    )
 
 
 class LaPosteFileGenerator(CarrierFileGenerator):
-
     @classmethod
     def carrier_for(cls, carrier_name):
-        return carrier_name == 'generic'
+        return carrier_name == "generic"
 
     def _get_rows(self, picking, configuration):
         """
@@ -53,13 +53,13 @@ class LaPosteFileGenerator(CarrierFileGenerator):
             line.zip = partner.zip
             line.city = partner.city
             line.state = (partner.state_id and partner.state_id.name) or False
-            line.country_code =\
-                (partner.country_id and partner.country_id.code) or False
+            line.country_code = (
+                partner.country_id and partner.country_id.code
+            ) or False
             line.phone = partner.phone or partner.mobile
             line.mail = partner.email
-        line.delivery_name =\
-            (picking.carrier_id and picking.carrier_id.name) or False
-        line.weight = "%.2f" % (picking.weight,)
+        line.delivery_name = (picking.carrier_id and picking.carrier_id.name) or False
+        line.weight = "{:.2f}".format(picking.weight)
         return [line.get_fields()]
 
     def _write_rows(self, file_handle, rows, configuration):
@@ -72,7 +72,12 @@ class LaPosteFileGenerator(CarrierFileGenerator):
                                             the file to generate
         :return: the file_handle as StringIO with the rows written in it
         """
-        writer = UnicodeWriter(file_handle, delimiter=',', quotechar='"',
-                               lineterminator='\n', quoting=csv.QUOTE_ALL)
+        writer = UnicodeWriter(
+            file_handle,
+            delimiter=",",
+            quotechar='"',
+            lineterminator="\n",
+            quoting=csv.QUOTE_ALL,
+        )
         writer.writerows(rows)
         return file_handle

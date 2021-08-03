@@ -1,46 +1,55 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
     <record id="view_delivery_carrier_file_generate" model="ir.ui.view">
         <field name="name">delivery.carrier.file.generate.form</field>
         <field name="model">delivery.carrier.file.generate</field>
         <field name="arch" type="xml">
             <form string="Carrier Files">
                 <sheet>
-                    <form class="o_form_label">Generate the carrier files for the selected delivery orders.</form>
-                    <field name="pickings" nolabel="1" colspan="4"
-                      domain="[('picking_type_id.code', '=', 'outgoing')]">
+                    <form
+                        class="o_form_label"
+                    >Generate the carrier files for the selected delivery orders.</form>
+                    <field
+                        name="pickings"
+                        nolabel="1"
+                        colspan="4"
+                        domain="[('picking_type_id.code', '=', 'outgoing')]"
+                    >
                         <tree string="Delivery Orders">
-                            <field name="name"/>
-                            <field name="carrier_id"/>
-                            <field name="partner_id"/>
-                            <field name="origin"/>
-                            <field name="state" invisible="1"/>
+                            <field name="name" />
+                            <field name="carrier_id" />
+                            <field name="partner_id" />
+                            <field name="origin" />
+                            <field name="state" invisible="1" />
                         </tree>
                     </field>
                     <group>
-                        <field name="recreate"/>
+                        <field name="recreate" />
                     </group>
                 </sheet>
                 <footer>
-                    <button name="action_generate" string="Generate Files" type="object" icon="fa-archive" class="oe_highlight"/>
+                    <button
+                        name="action_generate"
+                        string="Generate Files"
+                        type="object"
+                        icon="fa-archive"
+                        class="oe_highlight"
+                    />
                       or
                     <button string="Close" class="oe_link" special="cancel" />
                 </footer>
             </form>
         </field>
     </record>
-
     <record id="action_delivery_carrier_file_generate" model="ir.actions.act_window">
         <field name="name">Generate Carrier Files</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">delivery.carrier.file.generate</field>
         <field name="view_type">form</field>
         <field name="view_mode">form</field>
-        <field name="view_id" ref="view_delivery_carrier_file_generate"/>
-        <field name="groups_id" eval="[(6, 0, [ref('stock.group_stock_manager')])]"/>
+        <field name="view_id" ref="view_delivery_carrier_file_generate" />
+        <field name="groups_id" eval="[(6, 0, [ref('stock.group_stock_manager')])]" />
         <field name="target">new</field>
         <field name="binding_model_id" ref="stock.model_stock_picking" />
     </record>
-
 </odoo>
