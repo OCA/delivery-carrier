@@ -13,9 +13,9 @@ class DeliveryCarrier(models.Model):
 
     def ups_get_tracking_link(self, picking):
         return picking._ups_tracking_url(
-            len(picking.package_ids) <= 1 and
-            picking.carrier_tracking_ref or
-            '+'.join(picking.mapped('package_ids.parcel_tracking'))
+            len(picking.package_ids) <= 1
+            and picking.carrier_tracking_ref
+            or "+".join(picking.mapped("package_ids.parcel_tracking"))
         )
 
     def ups_cancel_shipment(self, pickings):
