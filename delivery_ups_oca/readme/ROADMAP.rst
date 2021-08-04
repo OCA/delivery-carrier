@@ -1,2 +1,2 @@
-* support international forms
-* support package service options
+* Support international forms
+* Support package service options
