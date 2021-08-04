@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Copyright 2021 Tecnativa - Víctor Martínez
+License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <record id="view_delivery_carrier_form" model="ir.ui.view">
+        <field name="model">delivery.carrier</field>
+        <field name="inherit_id" ref="delivery.view_delivery_carrier_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page
+                    string="UPS"
+                    name="configuration_ups_oca"
+                    attrs="{'invisible': ['|', ('delivery_type', '!=', 'ups')]}"
+                >
+                    <group>
+                        <group string="Service">
+                            <field
+                                name="ups_service_code"
+                                attrs="{'required': [('delivery_type', '=', 'ups')]}"
+                            />
+                        </group>
+                        <group string="Misc">
+                            <field
+                                name="ups_access_license"
+                                attrs="{'required': [('delivery_type', '=', 'ups')]}"
+                            />
+                            <field
+                                name="ups_shipper_number"
+                                attrs="{'required': [('delivery_type', '=', 'ups')]}"
+                            />
+                            <field
+                                name="ups_default_packaging_id"
+                                attrs="{'required': [('delivery_type', '=', 'ups')]}"
+                            />
+                            <field
+                                name="ups_package_dimension_code"
+                                attrs="{'required': [('delivery_type', '=', 'ups')]}"
+                            />
+                            <field
+                                name="ups_package_weight_code"
+                                attrs="{'required': [('delivery_type', '=', 'ups')]}"
+                            />
+                            <field
+                                name="ups_tracking_state_update_sync"
+                                attrs="{'required': [('delivery_type', '=', 'ups')]}"
+                            />
+                        </group>
+                        <group string="WS Credentials">
+                            <field
+                                name="ups_ws_username"
+                                attrs="{'required': [('delivery_type', '=', 'ups')]}"
+                            />
+                            <field
+                                name="ups_ws_password"
+                                attrs="{'required': [('delivery_type', '=', 'ups')]}"
+                            />
+                        </group>
+                        <group string="Label">
+                            <field
+                                name="ups_file_format"
+                                attrs="{'required': [('delivery_type', '=', 'ups')]}"
+                            />
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
