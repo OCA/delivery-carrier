@@ -66,18 +66,23 @@ class ResPartner(models.Model):
             if value:
                 gls_key = mapping[key]
                 address_payload[gls_key] = value[:GLS_MAX_LENGTHS[gls_key]]
-        address_payload["ZIPCode"] = self._get_iso_zip(validate_raises=True)
+        if address_payload["CountryCode"] == "MC":  # for GLS Monaco is France
+            address_payload["CountryCode"] = "FR"  # read commit for explanation
+        address_payload["ZIPCode"] = self._get_iso_zip(
+            validate_raises=True, country_code=address_payload["CountryCode"]
+        )
         return address_payload
 
-    def _get_iso_zip(self, validate_raises=False):
+    def _get_iso_zip(self, validate_raises=False, country_code=None):
         """GLS does not support common ways to format the zip, and will raise.
            Typically in Luxembourg they are written L-4280 or in certain countries
            they might add some space or dash for readability.
         """
         self.ensure_one()
-        normalize, validate = COUNTRY_NORMALIZE_VALIDATE[self.country_id.code]
+        country_code = country_code or self.country_id.code
+        normalize, validate = COUNTRY_NORMALIZE_VALIDATE[country_code]
         iso_zip = normalize(self.zip)
         if validate_raises and not validate(iso_zip):
             msg = _("Not a valid ZIP code for country %s: %s")
-            raise ValidationError(msg % (self.country_id.code, self.zip))
+            raise ValidationError(msg % (country_code, self.zip))
         return iso_zip
