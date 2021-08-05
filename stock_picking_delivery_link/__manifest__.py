@@ -6,7 +6,7 @@
     "summary": "Adds link to the delivery on all intermediate operations.",
     "version": "13.0.1.0.0",
     "author": "Camptocamp, Odoo Community Association (OCA)",
-    "website": "https://github.com/OCA/stock-logistics-workflow",
+    "website": "https://github.com/OCA/delivery-carrier",
     "category": "Warehouse Management",
     "depends": ["stock", "delivery"],
     "data": ["views/stock_picking.xml"],
