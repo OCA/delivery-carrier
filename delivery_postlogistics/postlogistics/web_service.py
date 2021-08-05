@@ -10,10 +10,10 @@ import urllib.parse
 from datetime import datetime, timedelta
 from io import BytesIO
 
-from odoo import _, exceptions
-
 import requests
 from PIL import Image
+
+from odoo import _, exceptions
 
 _logger = logging.getLogger(__name__)
 
