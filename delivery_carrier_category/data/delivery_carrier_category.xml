@@ -1,25 +1,24 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright 2020 ACSONE SA/NV
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
-
 <odoo noupdate="1">
 
     <record model="delivery.carrier.category" id="delivery_carrier_category_delivery">
         <field name="name">Delivery</field>
         <field name="code">DEL</field>
-        <field name="sequence" eval="1"/>
+        <field name="sequence" eval="1" />
     </record>
 
     <record model="delivery.carrier.category" id="delivery_carrier_category_pickup">
         <field name="name">Pickup</field>
         <field name="code">PICK</field>
-        <field name="sequence" eval="2"/>
+        <field name="sequence" eval="2" />
     </record>
 
     <record model="delivery.carrier.category" id="delivery_carrier_category_dropoff">
         <field name="name">Drop-off</field>
         <field name="code">DROP</field>
-        <field name="sequence" eval="3"/>
+        <field name="sequence" eval="3" />
     </record>
 
 </odoo>
