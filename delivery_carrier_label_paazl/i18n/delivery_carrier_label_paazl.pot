@@ -120,6 +120,7 @@ msgstr ""
 
 #. module: delivery_carrier_label_paazl
 #: code:addons/delivery_carrier_label_paazl/models/stock_picking.py:235
+#: code:addons/delivery_carrier_label_paazl/models/stock_picking.py:278
 #, python-format
 msgid "No paazl account found for this company"
 msgstr ""
@@ -137,6 +138,7 @@ msgstr ""
 
 #. module: delivery_carrier_label_paazl
 #: code:addons/delivery_carrier_label_paazl/models/stock_picking.py:36
+#: code:addons/delivery_carrier_label_paazl/models/stock_picking.py:44
 #, python-format
 msgid "Picking %s must set exactly one shipping option"
 msgstr ""
@@ -153,6 +155,7 @@ msgstr ""
 
 #. module: delivery_carrier_label_paazl
 #: code:addons/delivery_carrier_label_paazl/models/stock_picking.py:98
+#: code:addons/delivery_carrier_label_paazl/models/stock_picking.py:122
 #, python-format
 msgid "Sending %s to paazl: %s %s"
 msgstr ""
