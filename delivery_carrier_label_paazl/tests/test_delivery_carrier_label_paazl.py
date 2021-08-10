@@ -52,6 +52,7 @@ class DeliveryCarrierLabelPaazlCase(carrier_label_case.CarrierLabelCase):
         mock_client = Mock()
         mock_client.service.order.return_value = Mock(error=False)
         mock_client.service.commitOrder.return_value = Mock(error=False)
+        mock_client.service.changeOrder.return_value = Mock(error=False)
         mock_client.service.generateLabels.return_value = Mock(
             error=False, labels=b"hello world", metaData=[{"trackingNumber": "number"}],
         )
@@ -174,6 +175,16 @@ class TestDeliveryCarrierLabelPaazl(
                 self.picking.carrier_tracking_url, request_data["trackTraceURL"]
             )
             self.assertTrue(self.picking.message_ids - messages_before)
+
+    def test_change_order(self):
+        """Test change order in paazl"""
+        self.assertTrue(self.picking.carrier_tracking_ref)
+        with self._setup_mock_client() as mock_client:
+            mock_client.service.commitOrder.return_value = Mock(
+                error=Mock(code=1003, message="")
+            )
+            self.picking._paazl_send_update_order(change_order=True)
+            self.assertTrue(self.picking.carrier_tracking_ref)
 
 
 class TestDeliveryCarrierLabelPaazlPackaging(TestDeliveryCarrierLabelPaazl):
