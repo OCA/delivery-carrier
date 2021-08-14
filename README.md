@@ -17,30 +17,30 @@ This project aim to deal with modules related to manage carriers and deliveries 
 
 Available addons
 ----------------
-addon | version | summary
---- | --- | ---
-[base_delivery_carrier_label](base_delivery_carrier_label/) | 13.0.2.0.0 | Base module for carrier labels
-[delivery_auto_refresh](delivery_auto_refresh/) | 13.0.1.0.2 | Auto-refresh delivery price in sales orders
-[delivery_carrier_info](delivery_carrier_info/) | 13.0.1.0.0 | Add code and description on carrier
-[delivery_carrier_partner](delivery_carrier_partner/) | 13.0.1.0.1 | Add a partner in the delivery carrier
-[delivery_carrier_pricelist](delivery_carrier_pricelist/) | 13.0.1.0.0 | Compute method method fees based on the product's pricelist.
-[delivery_carrier_service_level](delivery_carrier_service_level/) | 13.0.1.0.1 | Add service levels to carrier
-[delivery_free_fee_removal](delivery_free_fee_removal/) | 13.0.1.0.2 | Hide free fee lines on sales orders
-[delivery_multi_destination](delivery_multi_destination/) | 13.0.1.0.0 | Multiple destinations for the same delivery method
-[delivery_package_fee](delivery_package_fee/) | 13.0.1.1.3 | Add fees on delivered packages on shipping methods
-[delivery_package_number](delivery_package_number/) | 13.0.1.0.0 | Set or compute number of packages for a picking
-[delivery_postlogistics](delivery_postlogistics/) | 13.0.1.2.0 | Print PostLogistics shipping labels using the Barcode web service
-[delivery_postlogistics_server_env](delivery_postlogistics_server_env/) | 13.0.1.0.0 | Server Environment layer for Delivery Postlogistics
-[delivery_price_method](delivery_price_method/) | 13.0.1.0.0 | Provides fields to be able to contemplate the tracking statesand also adds a global fields
-[delivery_price_rule_volumetric_weight](delivery_price_rule_volumetric_weight/) | 13.0.1.0.0 | Delivery Price Rule Volumetric weight
-[delivery_purchase](delivery_purchase/) | 13.0.1.0.0 | Delivery costs in purchases
-[delivery_send_to_shipper_at_operation](delivery_send_to_shipper_at_operation/) | 13.0.1.0.0 | Send delivery notice to the shipper from any operation.
-[delivery_state](delivery_state/) | 13.0.2.0.0 | Provides fields to be able to contemplate the tracking statesand also adds a global fields
-[partner_delivery_schedule](partner_delivery_schedule/) | 13.0.1.0.0 | Set on partners a schedule for delivery goods
-[partner_delivery_zone](partner_delivery_zone/) | 13.0.1.1.0 | Set on partners a zone for delivery goods
-[server_environment_delivery](server_environment_delivery/) | 13.0.1.0.0 | Configure prod environment for delivery carriers
-[stock_picking_delivery_link](stock_picking_delivery_link/) | 13.0.1.0.0 | Adds link to the delivery on all intermediate operations.
-[stock_picking_report_delivery_cost](stock_picking_report_delivery_cost/) | 13.0.1.0.0 | Show delivery cost in delivery slip and picking operations reports
+addon | version | maintainers | summary
+--- | --- | --- | ---
+[base_delivery_carrier_label](base_delivery_carrier_label/) | 13.0.2.0.0 |  | Base module for carrier labels
+[delivery_auto_refresh](delivery_auto_refresh/) | 13.0.1.0.2 |  | Auto-refresh delivery price in sales orders
+[delivery_carrier_info](delivery_carrier_info/) | 13.0.1.0.0 |  | Add code and description on carrier
+[delivery_carrier_partner](delivery_carrier_partner/) | 13.0.1.0.1 |  | Add a partner in the delivery carrier
+[delivery_carrier_pricelist](delivery_carrier_pricelist/) | 13.0.1.0.0 |  | Compute method method fees based on the product's pricelist.
+[delivery_carrier_service_level](delivery_carrier_service_level/) | 13.0.1.0.1 |  | Add service levels to carrier
+[delivery_free_fee_removal](delivery_free_fee_removal/) | 13.0.1.0.2 |  | Hide free fee lines on sales orders
+[delivery_multi_destination](delivery_multi_destination/) | 13.0.1.0.0 |  | Multiple destinations for the same delivery method
+[delivery_package_fee](delivery_package_fee/) | 13.0.1.1.3 |  | Add fees on delivered packages on shipping methods
+[delivery_package_number](delivery_package_number/) | 13.0.1.0.0 |  | Set or compute number of packages for a picking
+[delivery_postlogistics](delivery_postlogistics/) | 13.0.1.2.0 |  | Print PostLogistics shipping labels using the Barcode web service
+[delivery_postlogistics_server_env](delivery_postlogistics_server_env/) | 13.0.1.0.0 |  | Server Environment layer for Delivery Postlogistics
+[delivery_price_method](delivery_price_method/) | 13.0.1.0.0 |  | Provides fields to be able to contemplate the tracking statesand also adds a global fields
+[delivery_price_rule_volumetric_weight](delivery_price_rule_volumetric_weight/) | 13.0.1.0.0 | [![victoralmau](https://github.com/victoralmau.png?size=30px)](https://github.com/victoralmau) | Delivery Price Rule Volumetric weight
+[delivery_purchase](delivery_purchase/) | 13.0.1.0.0 |  | Delivery costs in purchases
+[delivery_send_to_shipper_at_operation](delivery_send_to_shipper_at_operation/) | 13.0.1.0.0 |  | Send delivery notice to the shipper from any operation.
+[delivery_state](delivery_state/) | 13.0.2.0.0 |  | Provides fields to be able to contemplate the tracking statesand also adds a global fields
+[partner_delivery_schedule](partner_delivery_schedule/) | 13.0.1.0.0 |  | Set on partners a schedule for delivery goods
+[partner_delivery_zone](partner_delivery_zone/) | 13.0.1.1.0 |  | Set on partners a zone for delivery goods
+[server_environment_delivery](server_environment_delivery/) | 13.0.1.0.0 |  | Configure prod environment for delivery carriers
+[stock_picking_delivery_link](stock_picking_delivery_link/) | 13.0.1.0.0 |  | Adds link to the delivery on all intermediate operations.
+[stock_picking_report_delivery_cost](stock_picking_report_delivery_cost/) | 13.0.1.0.0 |  | Show delivery cost in delivery slip and picking operations reports
 
 [//]: # (end addons)
 
