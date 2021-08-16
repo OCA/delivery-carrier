@@ -2,6 +2,8 @@
 
 from vcr_unittest import VCRMixin
 
+from odoo import tools
+
 from odoo.addons.base_delivery_carrier_label.tests import carrier_label_case
 
 
@@ -9,7 +11,10 @@ class LaposteLabelDomCase(VCRMixin, carrier_label_case.CarrierLabelCase):
     def setUp(self, *args, **kwargs):
         # need it to be defined before super to avoid failure in _hide_sensitive_data
         self.account = False
-        super().setUp(*args, **kwargs)
+        # the cassettes for this case contain some big requests
+        # that are causing travis build to fail when logged
+        with tools.mute_logger("vcr.cassette"):
+            super().setUp(*args, **kwargs)
         # french carrier sender need to be from France
         self.picking.company_id.partner_id.write(
             {"country_id": self.env.ref("base.fr").id}
