@@ -1,0 +1,47 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* delivery_package_number
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-07-20 06:48+0000\n"
+"PO-Revision-Date: 2020-07-20 06:48+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: delivery_package_number
+#: model:ir.model,name:delivery_package_number.model_stock_immediate_transfer
+msgid "Immediate Transfer"
+msgstr "Transferencia inmediata"
+
+#. module: delivery_package_number
+#: model:ir.model.fields,field_description:delivery_package_number.field_stock_immediate_transfer__number_of_packages
+msgid "Number Of Packages"
+msgstr "Número de Bultos"
+
+#. module: delivery_package_number
+#: model:ir.model.fields,field_description:delivery_package_number.field_stock_picking__number_of_packages
+msgid "Number of Packages"
+msgstr "Número de Bultos"
+
+#. module: delivery_package_number
+#: model:ir.model,name:delivery_package_number.model_stock_move_line
+msgid "Product Moves (Stock Move Line)"
+msgstr "Operaciones detalladas"
+
+#. module: delivery_package_number
+#: model:ir.model.fields,help:delivery_package_number.field_stock_immediate_transfer__number_of_packages
+msgid "Set the number of packages for this picking(s)"
+msgstr "Establezca el número de bultos para esto(s) albaran(es)"
+
+#. module: delivery_package_number
+#: model:ir.model,name:delivery_package_number.model_stock_picking
+msgid "Transfer"
+msgstr "Albarán"
