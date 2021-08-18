@@ -240,20 +240,20 @@ class StockPicking(models.Model):
     def _paazl_partner_to_order_data(self, partner):
         """Return a dict describing a partner for the `commitOrder` endpoint"""
         result = {
-            "addresseeLine": partner.name,
-            "street": partner.street,
+            "addresseeLine": partner.name or "",
+            "street": partner.street or "",
             "housenumber": "",
-            "zipcode": partner.zip,
-            "city": partner.city,
-            "province": partner.state_id.code,
-            "country": partner.country_id.code,
+            "zipcode": partner.zip or "",
+            "city": partner.city or "",
+            "province": partner.state_id.code or "",
+            "country": partner.country_id.code or "",
         }
         # support base_address_extended if installed
         if "street_name" in partner._fields:
             result.update(
-                street=partner.street_name,
-                housenumber=partner.street_number,
-                addition=partner.street_number2,
+                street=partner.street_name or "",
+                housenumber=partner.street_number or "",
+                addition=partner.street_number2 or "",
             )
         return result
 
