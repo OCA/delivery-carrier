@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2018 Tecnativa - Sergio Teruel
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_picking_form" model="ir.ui.view">
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='extra']" position="inside">
+                <group name="delivery_zone">
+                    <field
+                        name="delivery_zone_id"
+                        attrs="{'readonly': [('state', '=', 'done')]}"
+                    />
+                </group>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_picking_internal_search" model="ir.ui.view">
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_internal_search" />
+        <field name="arch" type="xml">
+            <field name="picking_type_id" position="after">
+                <field name="delivery_zone_id" />
+                <separator />
+            </field>
+            <filter name="activities_exception" position="after">
+                <filter
+                    name="delivery_zone_group"
+                    string="Delivery Zone"
+                    context="{'group_by': 'delivery_zone_id'}"
+                />
+            </filter>
+        </field>
+    </record>
+    <record id="picking_view_delivery_kanban" model="ir.ui.view">
+        <field name="name">stock.picking.delivery.kanban</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.stock_picking_kanban" />
+        <field name="priority">999</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='scheduled_date']" position="after">
+                <field name="delivery_zone_id" />
+            </xpath>
+            <xpath expr="//div[hasclass('oe_kanban_bottom_left')]" position="replace">
+                <div class="oe_kanban_bottom_left">
+                    <div>
+                        <t t-esc="record.partner_id.value" />
+                    </div>
+                    <div t-if="record.delivery_zone_id">
+                        <t t-esc="record.delivery_zone_id.value" />
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+    <record id="picking_view_delivery_tree" model="ir.ui.view">
+        <field name="name">stock.picking.delivery.tree</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.vpicktree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="delivery_zone_id" />
+            </xpath>
+        </field>
+    </record>
+</odoo>
