@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2020 Tecnativa - David Vidal
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_delivery_carrier_form" model="ir.ui.view">
+        <field name="model">delivery.carrier</field>
+        <field name="inherit_id" ref="delivery.view_delivery_carrier_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook/page[1]" position='before'>
+                <page
+                    string="Schenker Configuration"
+                    attrs="{'invisible': [('delivery_type', '!=', 'schenker')]}"
+                >
+                    <group>
+                        <group string="Connection">
+                            <field
+                                name="schenker_access_key"
+                                attrs="{'required': [('delivery_type', '=', 'schenker')]}"
+                            />
+                            <field name="schenker_group_id" />
+                            <field name="schenker_user" />
+                        </group>
+                        <group string="Label">
+                            <field
+                                name="schenker_barcode_format"
+                                attrs="{'required': [('delivery_type', '=', 'schenker')]}"
+                            />
+                            <field name="schenker_barcode_mail" />
+                            <field
+                                name="schenker_barcode_a4_start_pos"
+                                attrs="{'required': [('schenker_barcode_format', '=', 'A4')], 'invisible': [('schenker_barcode_format', '!=', 'A4')]}"
+                            />
+                            <field
+                                name="schenker_barcode_a4_separated"
+                                attrs="{'required': [('schenker_barcode_format', '=', 'A4')], 'invisible': [('schenker_barcode_format', '!=', 'A4')]}"
+                            />
+                        </group>
+                        <group string="Service">
+                            <field
+                                name="schenker_booking_type"
+                                attrs="{'required': [('delivery_type', '=', 'schenker')]}"
+                            />
+                            <field
+                                name="schenker_incoterm_id"
+                                attrs="{'required': [('delivery_type', '=', 'schenker')]}"
+                            />
+                            <field
+                                name="schenker_service_type"
+                                attrs="{'required': [('delivery_type', '=', 'schenker')]}"
+                            />
+                            <field
+                                name="schenker_service_land"
+                                attrs="{'required': [('delivery_type', '=', 'schenker'), ('schenker_booking_type', '=', 'land')], 'invisible': [('schenker_booking_type', '!=', 'land')]}"
+                            />
+                            <field name="schenker_indoor_delivery" />
+                            <field name="schenker_express" />
+                            <field name="schenker_food_related" />
+                            <field name="schenker_heated_transport" />
+                            <field name="schenker_home_delivery" />
+                            <field name="schenker_own_pickup" />
+                            <field name="schenker_pharmaceuticals" />
+                        </group>
+                        <group string="Logistics">
+                            <field
+                                name="schenker_default_packaging_id"
+                                attrs="{'required': [('delivery_type', '=', 'schenker')]}"
+                            />
+                            <field
+                                name="schenker_measure_unit"
+                                attrs="{'required': [('delivery_type', '=', 'schenker')]}"
+                            />
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
