@@ -45,3 +45,16 @@ class DeliveryCarrier(models.Model):
                 return first_package._get_tracking_link(picking)
         else:
             return super().get_tracking_link(picking)
+
+    def rate_shipment(self, order):
+        res = super().rate_shipment(order)
+        # for roulier carrier, usually getting the price by carrier webservice
+        # is usually not available for now. Avoid failure in that case.
+        if not res and self.is_roulier():
+            res = {
+                "success": True,
+                "price": 0.0,
+                "error_message": False,
+                "warning_message": False,
+            }
+        return res
