@@ -38,6 +38,9 @@ class TestPackageFee(SavepointCase):
             }
         )
         cls.sale = cls._create_sale()
+        # carrier added with delivery_auto_refresh addon which installed previously
+        # force it to empty
+        cls.sale.carrier_id = False
 
     @classmethod
     def _create_sale(cls):
