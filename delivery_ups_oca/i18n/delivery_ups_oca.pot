@@ -6,8 +6,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-05 07:58+0000\n"
-"PO-Revision-Date: 2021-08-05 07:58+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -36,28 +34,13 @@ msgid "Access license number"
 msgstr ""
 
 #. module: delivery_ups_oca
-#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__product_packaging__ups_code__58
-msgid "BPM"
-msgstr ""
-
-#. module: delivery_ups_oca
-#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__product_packaging__ups_code__66
-msgid "BPM Flat"
-msgstr ""
-
-#. module: delivery_ups_oca
-#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__product_packaging__ups_code__64
-msgid "BPM Parcel"
-msgstr ""
-
-#. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_package_dimension_code__cm
 msgid "CM"
 msgstr ""
 
 #. module: delivery_ups_oca
-#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__product_packaging__ups_code__02
-msgid "Customer Supplied Package"
+#: model:ir.model.fields,field_description:delivery_ups_oca.field_product_packaging__package_carrier_type
+msgid "Carrier"
 msgstr ""
 
 #. module: delivery_ups_oca
@@ -101,18 +84,8 @@ msgid "File format"
 msgstr ""
 
 #. module: delivery_ups_oca
-#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__product_packaging__ups_code__59
-msgid "First Class"
-msgstr ""
-
-#. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__m2
 msgid "First Class Mail"
-msgstr ""
-
-#. module: delivery_ups_oca
-#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__product_packaging__ups_code__56
-msgid "Flats"
 msgstr ""
 
 #. module: delivery_ups_oca
@@ -130,11 +103,6 @@ msgstr ""
 msgid ""
 "If checked, odoo try to state update from picking according to UPS "
 "webservice (you will necessary to activate tracking API)"
-msgstr ""
-
-#. module: delivery_ups_oca
-#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__product_packaging__ups_code__62
-msgid "Irregulars"
 msgstr ""
 
 #. module: delivery_ups_oca
@@ -166,28 +134,8 @@ msgid "Label"
 msgstr ""
 
 #. module: delivery_ups_oca
-#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__product_packaging__ups_code__2c
-msgid "Large Express Box"
-msgstr ""
-
-#. module: delivery_ups_oca
-#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__product_packaging__ups_code__61
-msgid "Machineables"
-msgstr ""
-
-#. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__m7
 msgid "Mail Innovations (MI) Returns"
-msgstr ""
-
-#. module: delivery_ups_oca
-#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__product_packaging__ups_code__65
-msgid "Media Mail"
-msgstr ""
-
-#. module: delivery_ups_oca
-#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__product_packaging__ups_code__2b
-msgid "Medium Express Box"
 msgstr ""
 
 #. module: delivery_ups_oca
@@ -211,11 +159,6 @@ msgid "OZS"
 msgstr ""
 
 #. module: delivery_ups_oca
-#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__product_packaging__ups_code__04
-msgid "PAK"
-msgstr ""
-
-#. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_file_format__gif
 msgid "PDF"
 msgstr ""
@@ -231,28 +174,8 @@ msgid "Package Weight code"
 msgstr ""
 
 #. module: delivery_ups_oca
-#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__product_packaging__ups_code__30
-msgid "Pallet"
-msgstr ""
-
-#. module: delivery_ups_oca
-#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__product_packaging__ups_code__63
-msgid "Parcel Post"
-msgstr ""
-
-#. module: delivery_ups_oca
-#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__product_packaging__ups_code__57
-msgid "Parcels"
-msgstr ""
-
-#. module: delivery_ups_oca
 #: model:ir.model.fields,field_description:delivery_ups_oca.field_delivery_carrier__ups_ws_password
 msgid "Password WS"
-msgstr ""
-
-#. module: delivery_ups_oca
-#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__product_packaging__ups_code__60
-msgid "Priority"
 msgstr ""
 
 #. module: delivery_ups_oca
@@ -281,9 +204,9 @@ msgid "SPL"
 msgstr ""
 
 #. module: delivery_ups_oca
-#: code:addons/delivery_ups_oca/models/delivery_carrier.py:0
+#: code:addons/delivery_ups_oca/models/ups_request.py:0
 #, python-format
-msgid "Sending %s to UPS: %s"
+msgid "Sending to UPS: %s"
 msgstr ""
 
 #. module: delivery_ups_oca
@@ -307,39 +230,15 @@ msgid "Shipping Methods"
 msgstr ""
 
 #. module: delivery_ups_oca
-#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__product_packaging__ups_code__2a
-msgid "Small Express Box"
-msgstr ""
-
-#. module: delivery_ups_oca
-#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__product_packaging__ups_code__67
-msgid "Standard Flat"
-msgstr ""
-
-#. module: delivery_ups_oca
 #: model:ir.model.fields,field_description:delivery_ups_oca.field_delivery_carrier__ups_tracking_state_update_sync
 msgid "Tracking state update sync"
 msgstr ""
 
 #. module: delivery_ups_oca
-#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__product_packaging__ups_code__03
-msgid "Tube"
-msgstr ""
-
-#. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__delivery_type__ups
+#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__product_packaging__package_carrier_type__ups
 #: model_terms:ir.ui.view,arch_db:delivery_ups_oca.view_delivery_carrier_form
 msgid "UPS"
-msgstr ""
-
-#. module: delivery_ups_oca
-#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__product_packaging__ups_code__25
-msgid "UPS 10KG Box"
-msgstr ""
-
-#. module: delivery_ups_oca
-#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__product_packaging__ups_code__24
-msgid "UPS 25KG Box"
 msgstr ""
 
 #. module: delivery_ups_oca
@@ -348,18 +247,8 @@ msgid "UPS Access PointTM Economy"
 msgstr ""
 
 #. module: delivery_ups_oca
-#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__product_packaging__ups_code__21
-msgid "UPS Express Box"
-msgstr ""
-
-#. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__74
 msgid "UPS Express®12:00"
-msgstr ""
-
-#. module: delivery_ups_oca
-#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__product_packaging__ups_code__01
-msgid "UPS Letter"
 msgstr ""
 
 #. module: delivery_ups_oca
@@ -420,11 +309,6 @@ msgstr ""
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__71
 msgid "UPS Worldwide Express Freight Midday"
-msgstr ""
-
-#. module: delivery_ups_oca
-#: model:ir.model.fields,field_description:delivery_ups_oca.field_product_packaging__ups_code
-msgid "UPS code"
 msgstr ""
 
 #. module: delivery_ups_oca
