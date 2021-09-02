@@ -1,0 +1,41 @@
+interactions:
+- request:
+    body: '{"Language": "EN", "Envelope": {"Data": {"Provider": {"Sending": {"SendingID":
+      "1234567890", "Item": [{"Attributes": {"Dimensions": {"Weight": 0.0}, "PRZL":
+      ["2000"]}, "ItemID": "WHOUT00039+PACK0000015", "Recipient": {"City": "Attiswil",
+      "Name1": "Camptocamp SA", "ZIP": "4536", "Street": ""}, "Notification": [{"Service":
+      "441", "Type": "EMAIL", "Language": "EN", "Communication": {"Item": false}}]}]}}},
+      "LabelDefinition": {"PrintAddresses": "RecipientAndCustomer", "ImageResolution":
+      "600", "LabelLayout": "A6", "ImageFileType": "PDF", "PrintPreview": false},
+      "FileInfos": {"Customer": {"City": "Bussigny", "Name1": "YourCompany", "ZIP":
+      "1030", "Street": "Rue de Lausanne 1"}, "FrankingLicense": "103700", "Mode":
+      "Label"}}}'
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Swagger-Codegen/1.0.0/python
+    method: POST
+    uri: https://api.quickpac.ch/Barcode/GenerateLabel
+  response:
+    body:
+      string: '{"Envelope":{"LabelDefinition":{"ColorPrintRequired":false,"PrintAddresses":3,"ImageFileType":"PDF","ImageResolution":600,"PrintPreview":true,"LabelLayout":null},"Data":{"Provider":{"Sending":{"SendingID":"1234567890","Item":[{"IdentCode":"440010370000000023","Label":"JVBERi0xLjQKJdP0zOEKMSAwIG9iago","ItemID":"WHOUT00039+PACK0000015","Errors":[],"Warnings":[]}]}}}}}'
+    headers:
+      Content-Length:
+      - '231685'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Mon, 30 Aug 2021 15:23:07 GMT
+      Server:
+      - Microsoft-IIS/10.0
+      Strict-Transport-Security:
+      - max-age=2592000
+      X-Powered-By:
+      - ASP.NET
+    status:
+      code: 200
+      message: OK
+version: 1

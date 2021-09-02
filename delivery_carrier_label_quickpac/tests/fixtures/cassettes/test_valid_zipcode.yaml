@@ -1,0 +1,32 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Swagger-Codegen/1.0.0/python
+    method: GET
+    uri: https://api.quickpac.ch/ZIP/IsDeliverableZipCode?zipCode=3372
+  response:
+    body:
+      string: '{"ZipCode":3372,"Deliverable":true,"Errors":null,"Warnings":null}'
+    headers:
+      Content-Length:
+      - '65'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Mon, 30 Aug 2021 15:18:20 GMT
+      Server:
+      - Microsoft-IIS/10.0
+      Strict-Transport-Security:
+      - max-age=2592000
+      X-Powered-By:
+      - ASP.NET
+    status:
+      code: 200
+      message: OK
+version: 1

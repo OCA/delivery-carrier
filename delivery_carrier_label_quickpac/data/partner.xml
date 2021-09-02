@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+  <record id="partner_quickpac" model="res.partner">
+    <field name="name">Quicpac</field>
+    <field name="image" type="base64" file="delivery_carrier_label_quickpac/static/img/quickpac-logo.jpg"/>
+    <field name="customer" eval="False"/>
+    <field name="supplier" eval="False"/>
+    <field name="email">webservice@quickpac.ch</field>
+  </record>
+</odoo>
+

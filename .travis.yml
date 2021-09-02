@@ -37,6 +37,7 @@ install:
   - pip install unidecode
   - pip install pycountry
   - pip install suds-jurko==0.6
+  - pip install quickpac==1.0.0
 
 script:
   - travis_run_tests
