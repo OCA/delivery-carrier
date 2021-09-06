@@ -15,6 +15,7 @@ class TestDeliveryFreeFeeRemoval(SavepointCase):
         product_delivery = cls.env["product.product"].create(
             {"name": "Delivery Product", "type": "service"}
         )
+
         cls.delivery = cls.env["delivery.carrier"].create(
             {
                 "name": "Delivery",
@@ -44,8 +45,10 @@ class TestDeliveryFreeFeeRemoval(SavepointCase):
         )
 
     def test_delivery_free_fee_removal_with_fee(self):
+        self.delivery.product_id.write({"invoice_policy": "order"})
         self.sale.set_delivery_line(self.delivery, 100)
         delivery_line = self.sale.mapped("order_line").filtered(lambda x: x.is_delivery)
+        self.assertFalse(delivery_line.is_free_delivery)
         self.sale.action_confirm()
         self.assertRecordValues(
             delivery_line,
@@ -58,9 +61,44 @@ class TestDeliveryFreeFeeRemoval(SavepointCase):
             ],
         )
 
+    def test_delivery_free_fee_removal_with_fee_invoice_policy_delivery(self):
+        self.sale.set_delivery_line(self.delivery, 100)
+        delivery_line = self.sale.mapped("order_line").filtered(lambda x: x.is_delivery)
+        self.assertFalse(delivery_line.is_free_delivery)
+        self.sale.action_confirm()
+        self.assertRecordValues(
+            delivery_line,
+            [
+                {
+                    "is_free_delivery": False,
+                    "qty_to_invoice": 0,
+                    # SO not yet delivered so nothing to invoice
+                    "invoice_status": "no",
+                }
+            ],
+        )
+
     def test_delivery_free_fee_removal_free_fee(self):
         self.sale.set_delivery_line(self.delivery, 0)
         delivery_line = self.sale.mapped("order_line").filtered(lambda x: x.is_delivery)
+        self.assertTrue(delivery_line.is_free_delivery)
+        self.sale.action_confirm()
+        self.assertRecordValues(
+            delivery_line,
+            [
+                {
+                    "is_free_delivery": True,
+                    "qty_to_invoice": 0,
+                    "invoice_status": "invoiced",
+                }
+            ],
+        )
+
+    def test_delivery_free_fee_removal_free_fee_invoice_policy_order(self):
+        self.delivery.product_id.write({"invoice_policy": "order"})
+        self.sale.set_delivery_line(self.delivery, 0)
+        delivery_line = self.sale.mapped("order_line").filtered(lambda x: x.is_delivery)
+        self.assertTrue(delivery_line.is_free_delivery)
         self.sale.action_confirm()
         self.assertRecordValues(
             delivery_line,
