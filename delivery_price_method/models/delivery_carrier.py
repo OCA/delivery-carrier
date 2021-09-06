@@ -24,10 +24,10 @@ class DeliveryCarrier(models.Model):
         previous_method = False
         if self.price_method in ("fixed", "base_on_rule"):
             previous_method = self.delivery_type
-            self.delivery_type = self.price_method
+            self.sudo().delivery_type = self.price_method
         res = super().rate_shipment(order)
         if previous_method:
-            self.delivery_type = previous_method
+            self.sudo().delivery_type = previous_method
         return res
 
     def send_shipping(self, pickings):
