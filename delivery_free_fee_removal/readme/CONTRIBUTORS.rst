@@ -7,3 +7,7 @@
 
   * Guewen Baconnier
   * Thierry Ducrest
+
+* `Trobz <https://trobz.com>`_:
+
+    * Son Ho <sonhd@trobz.com>
