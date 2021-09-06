@@ -15,4 +15,4 @@ class SaleOrder(models.Model):
             lambda line: line.order_id.state == "sale" and line.is_free_delivery
         )
         for line in delivery_lines:
-            line.qty_invoiced = line.product_uom_qty
+            line.qty_delivered = line.qty_invoiced = line.product_uom_qty
