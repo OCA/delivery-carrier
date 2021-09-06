@@ -17,8 +17,6 @@ class StockMove(models.Model):
         return domain
 
     def _get_new_picking_values(self):
-        pass
-        # pdb.set_trace()
         vals = super()._get_new_picking_values()
         carrier = self.mapped("sale_line_id.carrier_id")
         if len(carrier) > 1:
