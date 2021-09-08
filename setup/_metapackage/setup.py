@@ -22,6 +22,7 @@ setuptools.setup(
         'odoo12-addon-delivery_multi_destination',
         'odoo12-addon-delivery_package_number',
         'odoo12-addon-delivery_price_method',
+        'odoo12-addon-delivery_price_rule_untaxed',
         'odoo12-addon-delivery_state',
         'odoo12-addon-partner_delivery_schedule',
         'odoo12-addon-partner_delivery_zone',
