@@ -10,7 +10,7 @@
         <field name="model">delivery.carrier</field>
         <field name="inherit_id" ref="delivery.view_delivery_carrier_form" />
         <field name="arch" type="xml">
-            <field name="delivery_type" position="before">
+            <field name="company_id" position="before">
                 <field name="default_tracking_url" />
             </field>
         </field>
