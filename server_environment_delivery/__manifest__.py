@@ -3,7 +3,7 @@
 {
     "name": "Server Environment Delivery",
     "summary": "Configure prod environment for delivery carriers",
-    "version": "13.0.1.0.0",
+    "version": "14.0.1.0.0",
     "development_status": "Alpha",
     "category": "Operations/Inventory/Delivery",
     "website": "https://github.com/OCA/delivery-carrier",
