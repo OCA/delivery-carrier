@@ -1,11 +1,14 @@
 # Copyright 2020 Camptocamp SA
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl)
-from odoo import models
+
+from odoo import fields, models
 
 
 class DeliveryCarrier(models.Model):
     _name = "delivery.carrier"
     _inherit = ["delivery.carrier", "server.env.techname.mixin", "server.env.mixin"]
+
+    tech_name = fields.Char(required=False)
 
     @property
     def _server_env_fields(self):
