@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 Tecnativa - Víctor Martínez
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <template id="website_local_address">
+        <t t-call="website.layout">
+            <div class="container">
+                <h2 class="mt-2 mb-3" t-esc="picking.carrier_id.name" />
+                <div id="informations" class="row">
+                    <div id="information_left" class="col-6">
+                        <p><strong>Picking:</strong> <span t-esc="picking.name" /></p>
+                        <p t-if="picking.origin">
+                            <strong>Origin:</strong> <span t-esc="picking.origin" />
+                        </p>
+                    </div>
+                    <div id="information_right" class="col-6">
+                        <div class="address">
+                            <strong>Local Address:</strong>
+                            <div
+                                t-esc="picking.carrier_id.local_address_id"
+                                t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>
