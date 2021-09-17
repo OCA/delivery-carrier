@@ -3,7 +3,7 @@
 {
     "name": "Carrier labels for paazl",
     "summary": "Print carrier labels for paazl",
-    "version": "12.0.1.1.2",
+    "version": "12.0.1.1.3",
     "development_status": "Beta",
     "category": "Delivery",
     "website": "https://github.com/OCA/delivery-carrier",
