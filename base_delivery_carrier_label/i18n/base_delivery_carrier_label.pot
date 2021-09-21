@@ -85,6 +85,7 @@ msgid "Carrier Account"
 msgstr ""
 
 #. module: base_delivery_carrier_label
+#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account__carrier_ids
 #: model:ir.ui.menu,name:base_delivery_carrier_label.menu_carriers_config
 msgid "Carriers"
 msgstr ""
@@ -475,6 +476,14 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_carrier_account__delivery_type
 msgid "This field may be used to link an account to a carrier"
+msgstr ""
+
+#. module: base_delivery_carrier_label
+#: model:ir.model.fields,help:base_delivery_carrier_label.field_carrier_account__carrier_ids
+msgid ""
+"This field may be used to link an account to specific delivery methods It "
+"may be usefull to find an account with more precision than with only the "
+"delivery type"
 msgstr ""
 
 #. module: base_delivery_carrier_label
