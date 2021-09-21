@@ -19,6 +19,7 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
+[base_delivery_carrier_files](base_delivery_carrier_files/) | 13.0.1.0.0 |  | Base module for creation of delivery carrier files
 [base_delivery_carrier_label](base_delivery_carrier_label/) | 13.0.2.0.0 |  | Base module for carrier labels
 [delivery_auto_refresh](delivery_auto_refresh/) | 13.0.1.0.2 |  | Auto-refresh delivery price in sales orders
 [delivery_carrier_info](delivery_carrier_info/) | 13.0.1.0.0 |  | Add code and description on carrier
