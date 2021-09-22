@@ -1,0 +1,35 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* delivery_free_fee_removal
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-01-25 09:22+0000\n"
+"PO-Revision-Date: 2019-01-25 09:22+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: delivery_free_fee_removal
+#: model:ir.model.fields,field_description:delivery_free_fee_removal.field_sale_order_line__is_free_delivery
+msgid "Is Free Delivery"
+msgstr ""
+
+#. module: delivery_free_fee_removal
+#: model:ir.model,name:delivery_free_fee_removal.model_sale_order
+msgid "Sales Order"
+msgstr ""
+
+#. module: delivery_free_fee_removal
+#: model:ir.model,name:delivery_free_fee_removal.model_sale_order_line
+msgid "Sales Order Line"
+msgstr ""
+
+#~ msgid "Quotation"
+#~ msgstr "Presupuesto"
