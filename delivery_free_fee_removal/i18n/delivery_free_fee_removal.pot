@@ -14,8 +14,26 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: delivery_free_fee_removal
+#: model:ir.model.fields,field_description:delivery_free_fee_removal.field_sale_order__display_name
+#: model:ir.model.fields,field_description:delivery_free_fee_removal.field_sale_order_line__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: delivery_free_fee_removal
+#: model:ir.model.fields,field_description:delivery_free_fee_removal.field_sale_order__id
+#: model:ir.model.fields,field_description:delivery_free_fee_removal.field_sale_order_line__id
+msgid "ID"
+msgstr ""
+
+#. module: delivery_free_fee_removal
 #: model:ir.model.fields,field_description:delivery_free_fee_removal.field_sale_order_line__is_free_delivery
 msgid "Is Free Delivery"
+msgstr ""
+
+#. module: delivery_free_fee_removal
+#: model:ir.model.fields,field_description:delivery_free_fee_removal.field_sale_order____last_update
+#: model:ir.model.fields,field_description:delivery_free_fee_removal.field_sale_order_line____last_update
+msgid "Last Modified on"
 msgstr ""
 
 #. module: delivery_free_fee_removal
