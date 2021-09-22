@@ -119,6 +119,22 @@ class TestDeliveryCarrierLabelUps(
             shipping_data['Shipment']['ShipTo']['Name'],
             return_data['Shipment']['ShipFrom']['Name'],
         )
+        self.assertEqual(
+            return_data['Shipment']['ReturnService']['Code'],
+            '8',
+        )
+        options = return_data['Shipment']['ShipmentServiceOptions']
+        self.assertNotEqual(self.picking.partner_id.country_id.code, 'US')
+        self.assertEqual(
+            options['LabelDelivery']['EMailMessage']['SubjectCode'],
+            '01',
+        )
+        self.assertEqual(
+            len(options['Notification']),
+            4,
+        )
+        for notification in options['Notification']:
+            self.assertIn(notification['NotificationCode'], ('2', '5', '7', '8'))
         ref = 'a reference'
         self.picking.carrier_tracking_ref = ref
         self.assertEqual(
