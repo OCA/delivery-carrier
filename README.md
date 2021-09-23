@@ -41,6 +41,7 @@ addon | version | maintainers | summary
 [partner_delivery_schedule](partner_delivery_schedule/) | 13.0.1.0.0 |  | Set on partners a schedule for delivery goods
 [partner_delivery_zone](partner_delivery_zone/) | 13.0.1.1.1 |  | Set on partners a zone for delivery goods
 [server_environment_delivery](server_environment_delivery/) | 13.0.1.0.0 |  | Configure prod environment for delivery carriers
+[stock_picking_carrier_from_rule](stock_picking_carrier_from_rule/) | 13.0.1.0.0 |  | Set the carrier on picking if the stock rule used has a partner address set with a delivery method.
 [stock_picking_delivery_link](stock_picking_delivery_link/) | 13.0.1.0.0 |  | Adds link to the delivery on all intermediate operations.
 [stock_picking_report_delivery_cost](stock_picking_report_delivery_cost/) | 13.0.1.0.0 |  | Show delivery cost in delivery slip and picking operations reports
 
