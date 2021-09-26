@@ -1,7 +1,7 @@
 # Copyright 2021 Camptocamp
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 {
-    "name": "Delivery by per Carrier",
+    "name": "Delivery carrier by sales order line",
     "summary": "",
     "version": "13.0.1.0.0",
     "category": "Delivery",
