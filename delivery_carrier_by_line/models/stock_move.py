@@ -1,11 +1,8 @@
 # Copyright 2021 Camptocamp (https://www.camptocamp.com)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-import logging
-
-from odoo import models
-
-_logger = logging.getLogger(__name__)
+from odoo import _, models
+from odoo.exceptions import UserError
 
 
 class StockMove(models.Model):
@@ -20,7 +17,7 @@ class StockMove(models.Model):
         vals = super()._get_new_picking_values()
         carrier = self.mapped("sale_line_id.carrier_id")
         if len(carrier) > 1:
-            _logger.warning("Moves belongs to different carriers %s" % carrier)
+            raise UserError(_("Moves belongs to different carriers %s" % carrier))
         elif carrier:
             vals["carrier_id"] = carrier[0].id
         return vals
