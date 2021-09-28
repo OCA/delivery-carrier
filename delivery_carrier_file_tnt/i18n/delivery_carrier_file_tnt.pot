@@ -1,32 +1,30 @@
-# Translation of OpenERP Server.
+# Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* delivery_carrier_file_tnt
+#	* delivery_carrier_file_tnt
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenERP Server 6.1rc1\n"
+"Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-16 09:10+0000\n"
-"PO-Revision-Date: 2015-01-05 14:10+0100\n"
-"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
+"Last-Translator: <>\n"
 "Language-Team: \n"
-"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.4\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
 
 #. module: delivery_carrier_file_tnt
 #: model:ir.model.fields,field_description:delivery_carrier_file_tnt.field_delivery_carrier_file_tnt_account
 msgid "TNT Account"
-msgstr "TNT Konto"
+msgstr ""
 
 #. module: delivery_carrier_file_tnt
 #: model:ir.ui.view,arch_db:delivery_carrier_file_tnt.view_delivery_carrier_file_form_tnt
 msgid "TNT Express Shipper Options"
-msgstr "TNT Express Versand Optionen"
+msgstr ""
 
 #. module: delivery_carrier_file_tnt
 #: model:ir.model,name:delivery_carrier_file_tnt.model_delivery_carrier_file
 msgid "delivery.carrier.file"
-msgstr "delivery.carrier.file"
+msgstr ""
+
