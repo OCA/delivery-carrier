@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo.tests.common import TransactionCase
+from odoo.tools import mute_logger
 
 
 class TestGetWeight(TransactionCase):
@@ -212,7 +213,10 @@ class TestGetWeight(TransactionCase):
         # end of prepare data
 
         # because uom conversion is not implemented
-        self.assertEqual(package.weight, False)
+        _module = 'odoo.addons.base_delivery_carrier_label'\
+            '.models.stock_pack_operation'
+        with mute_logger(_module):
+            self.assertEqual(package.weight, False)
 
         # if one day, uom conversion is implemented:
         # self.assertEqual(package.get_weight(), products_weight)
