@@ -24,7 +24,7 @@ msgid "Carrier"
 msgstr ""
 
 #. module: delivery_carrier_category
-#: model:ir.model.fields,field_description:delivery_carrier_category.field_delivery_carrier_category_id_5276
+#: model:ir.model.fields,field_description:delivery_carrier_category.field_delivery_carrier_category_id_5300
 #: model:ir.ui.view,arch_db:delivery_carrier_category.delivery_carrier_search_view
 msgid "Category"
 msgstr ""
