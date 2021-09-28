@@ -85,6 +85,16 @@ class DeliveryUps(common.SavepointCase):
         self.assertGreater(res["price"], 0)
         self.assertTrue(res["success"])
 
+    def test_order_ups_rate_shipment_currency_extra(self):
+        usd = self.env.ref("base.USD")
+        eur = self.env.ref("base.EUR")
+        currency = self.env.ref("base.main_company").currency_id
+        currency_extra = eur if currency == usd else usd
+        self.sale.currency_id = currency_extra
+        res = self.carrier.ups_rate_shipment(self.sale)
+        self.assertGreater(res["price"], 0)
+        self.assertTrue(res["success"])
+
     def test_delivery_carrier_ups_integration(self):
         self.picking.action_confirm()
         self.picking.action_assign()
