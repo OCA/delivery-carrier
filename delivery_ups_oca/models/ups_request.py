@@ -5,7 +5,7 @@ import logging
 
 import requests
 
-from odoo import _, fields
+from odoo import _
 
 _logger = logging.getLogger(__name__)
 
@@ -155,29 +155,11 @@ class UpsRequest:
     def _send_shipping(self, picking):
         status = self._process_reply(payload=self._prepare_create_shipping(picking))
         res = status["ShipmentResponse"]["ShipmentResults"]
-        price = self._get_response_price(
-            res["ShipmentCharges"]["TotalCharges"],
-            picking.company_id.currency_id,
-            picking.company_id,
-        )
         return {
-            "price": price,
+            "price": res["ShipmentCharges"]["TotalCharges"],
             "ShipmentIdentificationNumber": res["ShipmentIdentificationNumber"],
             "GraphicImage": res["PackageResults"]["ShippingLabel"]["GraphicImage"],
         }
-
-    def _get_response_price(self, total_charges, currency, company):
-        price = float(total_charges["MonetaryValue"])
-        if total_charges["CurrencyCode"] != currency.name:
-            price = currency._convert(
-                price,
-                self.env["res.currency"].search(
-                    [("name", "=", total_charges["CurrencyCode"])]
-                ),
-                company,
-                fields.Date.today(),
-            )
-        return price
 
     def _quant_package_data_from_order(self, order):
         PackageWeight = 0
@@ -220,11 +202,7 @@ class UpsRequest:
 
     def rate_shipment(self, order):
         status = self._process_reply(payload=self._prepare_rate_shipment(order))
-        return self._get_response_price(
-            status["RateResponse"]["RatedShipment"]["TotalCharges"],
-            order.currency_id,
-            order.company_id,
-        )
+        return status["RateResponse"]["RatedShipment"]["TotalCharges"]
 
     def _prepare_shipping_label(self, carrier_tracking_ref):
         return {
