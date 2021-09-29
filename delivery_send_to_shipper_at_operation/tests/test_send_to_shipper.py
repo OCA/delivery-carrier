@@ -25,7 +25,9 @@ class TestDeliverySendToShipper(SavepointCase):
         # put product in stock
         cls.product = cls.env.ref("product.product_delivery_01")
         cls.env["stock.quant"]._update_available_quantity(
-            cls.product, cls.stock_location, 10.0,
+            cls.product,
+            cls.stock_location,
+            10.0,
         )
         # create carriers
         cls.delivery_fee = cls.env.ref("delivery.product_product_delivery")
