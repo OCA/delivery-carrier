@@ -103,7 +103,7 @@ class StockPicking(models.Model):
             field.set("attrs", str(attrs))
             modifiers = {}
             transfer_node_to_modifiers(
-                field, modifiers, self.env.context, in_tree_view=True
+                field, modifiers, self.env.context, current_node_path=["tree"]
             )
             transfer_modifiers_to_node(modifiers, field)
         return etree.tostring(doc, encoding="unicode")

@@ -3,7 +3,7 @@
 {
     "name": "Delivery Send To Shipper at Operation",
     "summary": "Send delivery notice to the shipper from any operation.",
-    "version": "13.0.1.0.0",
+    "version": "14.0.1.0.0",
     "development_status": "Beta",
     "category": "Inventory",
     "website": "https://github.com/OCA/delivery-carrier",

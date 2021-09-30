@@ -85,7 +85,7 @@ class TestDeliverySendToShipper(SavepointCase):
     def _validate_picking(self, picking):
         for ml in picking.move_line_ids:
             ml.qty_done = ml.product_uom_qty
-        picking.action_done()
+        picking._action_done()
 
     def test_send_to_shipper_on_ship(self):
         """Check sending of delivery notification on ship.
@@ -112,7 +112,7 @@ class TestDeliverySendToShipper(SavepointCase):
             self._validate_picking(self.shipping)
             self.assertEqual(self.shipping.state, "done")
             self.assertFalse(self.shipping.delivery_notification_sent)
-            self.assertEqual(self.order.order_line.product_id, self.delivery_fee)
+            self.assertIn(self.delivery_fee, self.order.order_line.product_id)
 
     def test_send_to_shipper_on_pack(self):
         """Check sending of delivery notification on pack.
@@ -148,7 +148,7 @@ class TestDeliverySendToShipper(SavepointCase):
             self._validate_picking(self.shipping)
             self.assertEqual(self.shipping.state, "done")
             self.assertTrue(self.shipping.delivery_notification_sent)
-            self.assertEqual(self.order.order_line.product_id, self.delivery_fee)
+            self.assertIn(self.delivery_fee, self.order.order_line.product_id)
 
     def test_picking_fields_view_get(self):
         """Check that the invisible domain of "Send to Shipper" button
