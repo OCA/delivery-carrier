@@ -12,6 +12,7 @@ from odoo import api, fields, models
 class DropoffSite(models.Model):
     _name = 'dropoff.site'
     _inherits = {'res.partner': 'partner_id'}
+    _description = 'Dropoff site (a.k.a Pickup site)'
     _order = "code, name"
 
     code = fields.Char(string='Code')
