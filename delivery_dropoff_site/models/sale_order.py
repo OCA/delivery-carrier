@@ -44,9 +44,13 @@ class SaleOrder(models.Model):
                 not self.final_shipping_partner_id:
             self.final_shipping_partner_id = self.partner_id
 
-    def _prepare_procurement_group(self):
-        res = super(SaleOrder, self)._prepare_procurement_group()
+
+class SaleOrderLine(models.Model):
+    _inherit = 'sale.order.line'
+
+    def _prepare_procurement_values(self, group_id):
+        res = super(SaleOrderLine, self)._prepare_procurement_values(group_id=group_id)
         res.update({
-            'final_shipping_partner_id': self.final_shipping_partner_id.id,
+            'final_shipping_partner_id': self.order_id.final_shipping_partner_id.id,
         })
         return res

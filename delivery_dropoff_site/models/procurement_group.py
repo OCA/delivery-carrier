@@ -6,10 +6,14 @@
 from odoo import fields, models
 
 
-class ProcurementGroup(models.Model):
-    _inherit = 'procurement.group'
+class StockRule(models.Model):
+    """ A rule describe what a procurement should do; produce, buy, move, ... """
+    _inherit = 'stock.rule'
 
-    final_shipping_partner_id = fields.Many2one(
-        comodel_name='res.partner', string='Final Recipient',
-        help="It is the partner that will pick up the parcel "
-        "in the dropoff site.")
+    def _get_custom_move_fields(self):
+        """ The purpose of this method is to be override in order to easily add
+        fields from procurement 'values' argument to move data.
+        """
+        ret = super(StockRule, self)._get_custom_move_fields()
+        ret.append('final_shipping_partner_id')
+        return ret
