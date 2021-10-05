@@ -138,10 +138,13 @@ class DeliveryCarrier(models.Model):
         self.ensure_one()
         ups_request = UpsRequest(**self._get_ups_params("shipping"))
         response = ups_request._send_shipping(picking)
+        extra_price = self._ups_get_response_price(
+            response["price"], picking.company_id.currency_id, picking.company_id
+        )
         picking.carrier_tracking_ref = response["ShipmentIdentificationNumber"]
         self.ups_get_label(picking.carrier_tracking_ref)
         return {
-            "exact_price": response["price"],
+            "exact_price": extra_price,
             "tracking_number": picking.carrier_tracking_ref,
         }
 
@@ -168,9 +171,26 @@ class DeliveryCarrier(models.Model):
     def ups_rate_shipment(self, order):
         ups_request = UpsRequest(**self._get_ups_params("rate"))
         response = ups_request.rate_shipment(order)
+        price = self._ups_get_response_price(
+            response, order.currency_id, order.company_id
+        )
         return {
             "success": True,
-            "price": response,
+            "price": price,
             "error_message": False,
             "warning_message": False,
         }
+
+    def _ups_get_response_price(self, total_charges, currency, company):
+        """We need to convert the price if the currency is different."""
+        price = float(total_charges["MonetaryValue"])
+        if total_charges["CurrencyCode"] != currency.name:
+            price = currency._convert(
+                price,
+                self.env["res.currency"].search(
+                    [("name", "=", total_charges["CurrencyCode"])]
+                ),
+                company,
+                fields.Date.today(),
+            )
+        return price
