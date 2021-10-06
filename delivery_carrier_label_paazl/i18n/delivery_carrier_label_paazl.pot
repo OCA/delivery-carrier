@@ -120,7 +120,6 @@ msgstr ""
 
 #. module: delivery_carrier_label_paazl
 #: code:addons/delivery_carrier_label_paazl/models/stock_picking.py:277
-#: code:addons/delivery_carrier_label_paazl/models/stock_picking.py:278
 #, python-format
 msgid "No paazl account found for this company"
 msgstr ""
