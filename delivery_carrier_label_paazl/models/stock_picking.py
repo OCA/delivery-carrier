@@ -214,7 +214,6 @@ class StockPicking(models.Model):
                     product["quantity"] * product["weight"]
                     for product in self._paazl_order_data()["products"]["product"]
                 ),
-                description=self.note or "/",
                 packageCount=self._paazl_package_count(),
             ),
             shipperAddress=self._paazl_partner_to_order_data(
