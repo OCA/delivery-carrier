@@ -34,6 +34,7 @@ addon | version | maintainers | summary
 [delivery_send_to_shipper_at_operation](delivery_send_to_shipper_at_operation/) | 14.0.1.0.0 |  | Send delivery notice to the shipper from any operation.
 [delivery_state](delivery_state/) | 14.0.1.0.0 |  | Provides fields to be able to contemplate the tracking statesand also adds a global fields
 [partner_delivery_zone](partner_delivery_zone/) | 14.0.1.1.0 |  | Set on partners a zone for delivery goods
+[server_environment_delivery](server_environment_delivery/) | 14.0.1.0.0 |  | Configure prod environment for delivery carriers
 [stock_picking_delivery_link](stock_picking_delivery_link/) | 14.0.1.0.0 |  | Adds link to the delivery on all intermediate operations.
 
 [//]: # (end addons)
