@@ -19,7 +19,7 @@ class StockQuantPackage(models.Model):
         self.ensure_one()
         move_line_model = self.env["stock.move.line"]
         move_line = move_line_model.search([("package_id", "=", self.id)])
-        return move_line.mapped("picking_id")
+        return move_line.mapped("picking_id.sale_id.picking_ids")
 
     def postlogistics_cod_amount(self):
         """ Return the PostLogistics Cash on Delivery amount of a package
@@ -56,18 +56,6 @@ class StockQuantPackage(models.Model):
                     "The cash on delivery amount must be manually specified "
                     "on the packages when a package contains products "
                     "from different sales orders."
-                )
-            )
-
-        order_moves = order.mapped("order_line.procurement_ids.move_ids")
-        package_moves = self.mapped("quant_ids.history_ids")
-        # check if the package delivers the whole sales order
-        if order_moves != package_moves:
-            raise exceptions.Warning(
-                _(
-                    "The cash on delivery amount must be manually specified "
-                    "on the packages when a sales order is delivered "
-                    "in several packages."
                 )
             )
 
