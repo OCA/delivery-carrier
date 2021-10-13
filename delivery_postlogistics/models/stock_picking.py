@@ -106,7 +106,12 @@ class StockPicking(models.Model):
         self.ensure_one()
         order = self.sale_id
         if not order:
-            return 0.0
+            raise exceptions.Warning(
+                _(
+                    "The cash on delivery is only available "
+                    "if there's a related sale order."
+                )
+            )
         if len(order) > 1:
             raise exceptions.Warning(
                 _(
@@ -228,7 +233,7 @@ class StockPicking(models.Model):
         if failed_label_results:
             # Commit the change to save the changes,
             # This ensures the label pushed recored correctly in Odoo
-            self._cr.commit()
+            self._cr.commit()  # pylint: disable=E8102
             error_message = "\n".join(label["errors"] for label in failed_label_results)
             raise exceptions.Warning(error_message)
         return labels

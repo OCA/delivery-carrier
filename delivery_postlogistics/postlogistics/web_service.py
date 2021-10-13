@@ -271,7 +271,7 @@ class PostlogisticsWebService(object):
         else:
             amount = picking.postlogistics_cod_amount()
         amount = "{:.2f}".format(amount)
-        return [{"Type": "NN_BETRAG", "Value": amount}]
+        return [{"type": "NN_BETRAG", "value": amount}]
 
     def _get_item_additional_data(self, picking, package=None):
         if package and not package.packaging_id:

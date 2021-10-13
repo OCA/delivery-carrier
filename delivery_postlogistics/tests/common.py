@@ -49,14 +49,19 @@ class TestPostlogisticsCommon(SavepointCase):
             {
                 "name": "PRI-TEST",
                 "package_carrier_type": "postlogistics",
-                "shipper_package_code": "PRI, BLN",
+                "shipper_package_code": "PRI",
             }
         )
 
     @classmethod
     def setUpClassUserCompany(cls):
         cls.env.user.company_id.write(
-            {"street": "Rue de Lausanne 1", "zip": "1030", "city": "Bussigny"}
+            {
+                "name": "My Company",
+                "street": "Rue de Lausanne 1",
+                "zip": "1030",
+                "city": "Bussigny",
+            }
         )
         cls.env.user.company_id.partner_id.country_id = cls.env.ref("base.ch")
         cls.env.user.lang = "en_US"

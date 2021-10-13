@@ -49,7 +49,12 @@ class StockQuantPackage(models.Model):
 
         order = pickings.sale_id
         if not order:
-            return 0.0
+            raise exceptions.Warning(
+                _(
+                    "The cash on delivery is only available "
+                    "if there's a related sale order."
+                )
+            )
         if len(order) > 1:
             raise exceptions.Warning(
                 _(
