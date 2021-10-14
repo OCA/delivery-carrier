@@ -1,0 +1,116 @@
+interactions:
+  - request:
+      body: scope=WEDEC_BARCODE_READ&client_secret=c70e3696ae5146e7fe317434e50a90cd&grant_type=client_credentials&client_id=865783331e39e91e633c3916fe892d92
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "144"
+        User-Agent:
+          - python-requests/2.20.0
+        content-type:
+          - application/x-www-form-urlencoded
+      method: POST
+      uri: https://wedecint.post.ch/WEDECOAuth/token
+    response:
+      body:
+        string: '{"access_token":"XXX","token_type":"Bearer","expires_in":60}'
+      headers:
+        Cache-Control:
+          - no-store
+        Connection:
+          - Keep-Alive
+        Content-Length:
+          - "1279"
+        Content-Type:
+          - application/json; charset=UTF-8
+        Date:
+          - Tue, 13 Oct 2020 10:52:22 GMT
+        Keep-Alive:
+          - timeout=5, max=100
+        Pragma:
+          - no-cache
+        Server:
+          - Apache
+        Set-Cookie:
+          - NavajoIWedec=; Max-Age=0; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT;
+            Secure; HttpOnly
+      status:
+        code: 200
+        message: OK
+  - request:
+      body:
+        '{"customerSystem": null, "labelDefinition": {"imageFileType": "PDF",
+        "printAddresses": "RECIPIENT_AND_CUSTOMER", "labelLayout": "A6",
+        "imageResolution": "600", "printPreview": false}, "sendingID": null, "item":
+        {"attributes": {"przl": ["PRI"], "weight": 0.0}, "recipient": {"city":
+        "Lausanne", "street": "EPFL Innovation Park, B\u00e2t A", "zip": "1015",
+        "name1": "Camptocamp SA", "email": null}, "itemID": "WHOUT00042+WHOUT00042"},
+        "customer": {"street": "Rue de Lausanne 1", "domicilePostOffice": false, "city":
+        "Bussigny", "country": "CH", "zip": "1030", "name1": "YourCompany"},
+        "frankingLicense": "60013217", "ppFranking": false, "language": "EN"}'
+      headers:
+        Accept-Encoding:
+          - gzip, deflate
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "652"
+        User-Agent:
+          - python-requests/2.20.0
+        accept:
+          - application/json
+        content-type:
+          - application/json
+      method: POST
+      uri: https://wedecint.post.ch/api/barcode/v1/generateAddressLabel
+    response:
+      body:
+        string: "{\n  \"labelDefinition\" : {\n    \"labelLayout\" : \"A6\",\n    \"\
+          printAddresses\" : \"RECIPIENT_AND_CUSTOMER\",\n    \"imageFileType\" : \"\
+          pdf\",\n    \"imageResolution\" : 600,\n    \"printPreview\" : false,\n  \
+          \  \"colorPrintRequired\" : true\n  },\n  \"item\" : {\n    \"itemID\" : \"\
+          WHOUT00042+WHOUT00042\",\n    \"identCode\" : \"996001321700005958\",\n  \
+          \  \"label\" : [ \"JVBERi0xLjQKJeLjz9MKMiAwIG9iago8PC9Db2xvclNwY...\"\
+          \ ]\n  }\n}"
+      headers:
+        Cache-Control:
+          - no-cache, no-store, max-age=0, must-revalidate
+        Connection:
+          - Keep-Alive
+        Content-Type:
+          - application/json;charset=UTF-8
+        Date:
+          - Tue, 13 Oct 2020 10:52:25 GMT
+        Expires:
+          - "0"
+        Keep-Alive:
+          - timeout=5, max=100
+        Pragma:
+          - no-cache
+        Server:
+          - Apache
+        Strict-Transport-Security:
+          - max-age=15552000; includeSubDomains
+        Transfer-Encoding:
+          - chunked
+        Vary:
+          - Accept-Encoding
+        X-Content-Type-Options:
+          - nosniff
+        X-Frame-Options:
+          - SAMEORIGIN
+        X-XSS-Protection:
+          - 1; mode=block
+        content-length:
+          - "78215"
+        isiwebauthstate:
+          - valid
+      status:
+        code: 200
+        message: OK
+version: 1
