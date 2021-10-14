@@ -6,8 +6,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-21 02:01+0000\n"
-"PO-Revision-Date: 2021-06-21 02:01+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -70,7 +68,7 @@ msgid ""
 "Authorization Required\n"
 "\n"
 "Please verify postlogistics client id and secret in:\n"
-"Configuration -> PostLogistics"
+"Delivery Carrier (PostLogistics)."
 msgstr ""
 
 #. module: delivery_postlogistics
@@ -80,7 +78,7 @@ msgid ""
 "Authorization Required\n"
 "\n"
 "Please verify postlogistics client id and secret in:\n"
-"Delivery Carrier (PostLogistics)."
+"Sale Orders > Configuration -> Sale Orders > Shipping Methods > PostLogistics"
 msgstr ""
 
 #. module: delivery_postlogistics
@@ -91,7 +89,6 @@ msgstr ""
 #. module: delivery_postlogistics
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_delivery_carrier_template_option__partner_id
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_product_packaging__package_carrier_type
-#: model:ir.model.fields,field_description:delivery_postlogistics.field_stock_quant_package__package_carrier_type
 msgid "Carrier"
 msgstr ""
 
@@ -508,6 +505,11 @@ msgid "Packages"
 msgstr ""
 
 #. module: delivery_postlogistics
+#: model:ir.model.fields,field_description:delivery_postlogistics.field_stock_quant_package__package_carrier_type
+msgid "Packaging's Carrier"
+msgstr ""
+
+#. module: delivery_postlogistics
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_stock_quant_package__parcel_tracking
 msgid "Parcel Tracking"
 msgstr ""
@@ -699,11 +701,9 @@ msgid ""
 msgstr ""
 
 #. module: delivery_postlogistics
-#: code:addons/delivery_postlogistics/models/stock_quant_package.py:0
+#: code:addons/delivery_postlogistics/models/delivery_carrier.py:0
 #, python-format
-msgid ""
-"The cash on delivery amount must be manually specified on the packages when "
-"a sales order is delivered in several packages."
+msgid "The credential is valid."
 msgstr ""
 
 #. module: delivery_postlogistics
@@ -771,6 +771,17 @@ msgstr ""
 #. module: delivery_postlogistics
 #: model:ir.model.fields.selection,name:delivery_postlogistics.selection__delivery_carrier__postlogistics_tracking_format__picking_num
 msgid "Use picking number with pack counter"
+msgstr ""
+
+#. module: delivery_postlogistics
+#: code:addons/delivery_postlogistics/models/delivery_carrier.py:0
+#, python-format
+msgid "Validated"
+msgstr ""
+
+#. module: delivery_postlogistics
+#: model_terms:ir.ui.view,arch_db:delivery_postlogistics.delivery_carrier_postlogistics_inherit_view
+msgid "Verify"
 msgstr ""
 
 #. module: delivery_postlogistics
