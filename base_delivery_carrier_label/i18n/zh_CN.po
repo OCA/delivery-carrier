@@ -281,6 +281,11 @@ msgid "Is public document"
 msgstr "是公共文件"
 
 #. module: base_delivery_carrier_label
+#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__key
+msgid "Key"
+msgstr ""
+
+#. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account____last_update
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option____last_update
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_template_option____last_update
@@ -480,6 +485,13 @@ msgid "Stored Filename"
 msgstr "存储的文件名"
 
 #. module: base_delivery_carrier_label
+#: model:ir.model.fields,help:base_delivery_carrier_label.field_shipping_label__key
+msgid ""
+"Technical field used to resolve multiple attachments in a multi-website "
+"environment."
+msgstr ""
+
+#. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_shipping_label__res_model
 msgid "The database object this attachment will be attached to."
 msgstr "此附件将附加到的数据库对象。"
@@ -488,6 +500,11 @@ msgstr "此附件将附加到的数据库对象。"
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_shipping_label__res_id
 msgid "The record id this is attached to."
 msgstr "附加的记录ID。"
+
+#. module: base_delivery_carrier_label
+#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__theme_template_id
+msgid "Theme Template"
+msgstr ""
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_carrier_account__delivery_type
@@ -529,6 +546,16 @@ msgstr "类型"
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__url
 msgid "Url"
 msgstr "Url"
+
+#. module: base_delivery_carrier_label
+#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__website_id
+msgid "Website"
+msgstr ""
+
+#. module: base_delivery_carrier_label
+#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__website_url
+msgid "Website URL"
+msgstr ""
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_move_line__weight
