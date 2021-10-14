@@ -17,6 +17,7 @@ setuptools.setup(
         'odoo14-addon-delivery_multi_destination',
         'odoo14-addon-delivery_package_fee',
         'odoo14-addon-delivery_package_number',
+        'odoo14-addon-delivery_postlogistics',
         'odoo14-addon-delivery_roulier',
         'odoo14-addon-delivery_roulier_laposte_fr',
         'odoo14-addon-delivery_roulier_option',
