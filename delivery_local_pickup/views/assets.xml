@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- License AGPL-3.0 (http://www.gnu.org/licenses/agpl.html). -->
+<odoo>
+    <template id="delivery_local_pickup_frontend_demo" inherit_id="web.assets_tests">
+        <xpath expr="//script[last()]" position="after">
+            <script
+                type="text/javascript"
+                src="/delivery_local_pickup/static/src/js/local_pickup_tour.js"
+            />
+        </xpath>
+    </template>
+</odoo>
