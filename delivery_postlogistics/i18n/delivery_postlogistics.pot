@@ -337,6 +337,11 @@ msgid "JPG"
 msgstr ""
 
 #. module: delivery_postlogistics
+#: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_shipping_label__key
+msgid "Key"
+msgstr ""
+
+#. module: delivery_postlogistics
 #: model:ir.model.fields.selection,name:delivery_postlogistics.selection__postlogistics_delivery_carrier_template_option__postlogistics_type__label_layout
 msgid "Label Layout"
 msgstr ""
@@ -646,6 +651,13 @@ msgid "Stored Filename"
 msgstr ""
 
 #. module: delivery_postlogistics
+#: model:ir.model.fields,help:delivery_postlogistics.field_postlogistics_shipping_label__key
+msgid ""
+"Technical field used to resolve multiple attachments in a multi-website "
+"environment."
+msgstr ""
+
+#. module: delivery_postlogistics
 #: model_terms:ir.ui.view,arch_db:delivery_postlogistics.delivery_carrier_postlogistics_inherit_view
 msgid "Template"
 msgstr ""
@@ -702,6 +714,11 @@ msgid ""
 msgstr ""
 
 #. module: delivery_postlogistics
+#: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_shipping_label__theme_template_id
+msgid "Theme Template"
+msgstr ""
+
+#. module: delivery_postlogistics
 #: code:addons/delivery_postlogistics/models/delivery_carrier.py:0
 #, python-format
 msgid "This feature is under development"
@@ -741,6 +758,16 @@ msgstr ""
 #. module: delivery_postlogistics
 #: model:ir.model.fields.selection,name:delivery_postlogistics.selection__delivery_carrier__postlogistics_tracking_format__picking_num
 msgid "Use picking number with pack counter"
+msgstr ""
+
+#. module: delivery_postlogistics
+#: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_shipping_label__website_id
+msgid "Website"
+msgstr ""
+
+#. module: delivery_postlogistics
+#: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_shipping_label__website_url
+msgid "Website URL"
 msgstr ""
 
 #. module: delivery_postlogistics
