@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <template id="label_delivery_tnt_oca_template">
+            <t t-foreach="docs" t-as="picking">
+                <t t-foreach="range(picking.number_of_packages)" t-as="package_number">
+                    <t t-translation="off">
+^XA
+^CI27
+^CI0,154,220
+^SZ2
+^JMA
+^MCY
+^PMN
+^PW791~JSN
+^JZY
+^LH0,0
+^LRN
+^XZ
+~DGR:SSGFX000.GRF,1750,25,:Z64:eJyNlV1uHSEMhUHzwCNLYCksjbkr6JIyVRcSlkDUh04linv8A5mJbqJE0ZjwOTYYfHDORdod/0QS4/JQ6wo1s1Us0SE2EJFZcU1E3SKQxEpmszkgAkkstojlYTQWD06bgMNG6qCDoak4+LQ6ILNDUwmIAnbOebGymO45W6ZzY4tdBQEZXhFZ+Y+ErGwzL6sQLwBAFtA8x08MeKmOw8mSEa6qo0y40mUCXoGdvYAqBVVQupYa3ptsP1HQeg2tfelOJwLpRBpJK9ztdDb6MbT0uauDi0PB6wSnHAVA5+I8UOCEPTzopaH8WAqiyQEB5JMBVQO5CUCFEja5G8BogXoFbgGULbFfoUPBkesCxAGYCSiHgPQBlHeA38cduCAnDfCTPxhjj/mgCdwd1Cv49QREBm8AY4H9BuJT8Pc7oF3An3+fgN/0HXDN8fYZaHTbx3EHz0qCa3ABl+q2/AXIq+wLHAmnzwcloODMvwZ8GVrkc1WAW9IElAWOj6AmdCtfOAa4L/gqaKltcncNxM7A86VW0BjgUkdpFE+vp/bJy6l9shpnddRsnGDqNkGarbZJc0aKs2vFAZ2o/T3bOVufo529yl6fArCUwS3JaO9aoqDLhIlME4fAn3LRq0jVq/wdXNcqAlZE9ljIdi6piaNIn2pimZo4xTLZRDI1vevuMMfuTKGHOZzmcE5tP03Kp7bLe5FtUEzsyV4F+V8t5Ho/9JnwNgj2oARLYfs0zdakap3Tl8d5fapcEPsfYAUjKA==:4FF6
+^XA
+^CI27
+^FO16,183^GB775,0,4^FS
+^FO16,327^GB775,0,4^FS
+^FO16,423^GB400,0,4^FS
+^FO16,619^GB400,0,1^FS
+^FO16,820^GB400,0,4^FS
+^FO16,924^GB775,0,4^FS
+^FO414,184^GB0,740,4^FS
+^FO214,24^GB0,161,4^FS
+^FO614,24^GB0,161,95^FS
+^FO127,831^GB282,0,86^FS
+^FO417,184^GB375,0,145^FS
+^FO416,398^GB375,0,1^FS
+^FO416,775^GB375,0,1^FS
+^FO416,840^GB375,0,1^FS
+^FT240,1210^A0N,16,16^FD^FS
+^CI0
+^FT24,207^A0N,17,19^FDCon No.^FS
+^FT24,286^A0N,17,19^FDPiece^FS
+^FT24,350^A0N,17,19^FDCustomer Reference^FS
+^FT24,414^A0N,17,19^FDS/R Account No.^FS
+^FT24,447^A0N,17,19^FDSender Address^FS
+^FT24,641^A0N,17,19^FDDelivery Address^FS
+^FT24,868^A0N,17,19^FDPostcode /^FS
+^FT24,892^A0N,17,19^FDCluster Code^FS
+^FT240,286^A0N,17,19^FDWeight^FS
+^FT424,207^A0N,17,23^FR^FDService^FS
+^FT424,275^A0N,17,23^FR^FDOption^FS
+^FT424,347^A0N,17,19^FDOrigin^FS
+^FT424,424^A0N,17,19^FDRouting^FS
+^FT424,800^A0N,17,19^FDSort^FS
+^FT424,876^A0N,17,19^FDDest^FS
+^FT424,900^A0N,17,19^FDDepot^FS
+^FT635,347^A0N,17,19^FDPickup Date^FS
+^CI27
+^FT232,74^A0N,39,54^FD<t t-esc="picking.tnt_consignment_market" />/<t
+                            t-esc="picking.tnt_consignment_transport"
+                        />^FS
+^FT232,120^A0N,39,54^FD^FS
+^FB400,3,0,L,0^FT232,177^A0N,17,18^FD<t t-esc="picking.tnt_consignment_xray" />^FS
+^FT424,240^A0N,34,39^FR^FD<t t-esc="picking.tnt_consignment_product" />^FS
+^FT424,317^A0N,34,39^FR^FD<t t-esc="picking.tnt_consignment_option" />^FS
+^FT440,310^A0N,34,39^FD^FS
+^FT480,388^A0N,56,64^FD<t t-esc="picking.tnt_consignment_origin_depot" />^FS
+^FT640,375^A0N,23,28^FD<t t-esc="picking.tnt_consignment_date" />^FS
+^FT620,138^A0N,102,150^FR^FD<t t-esc="picking.tnt_consignment_free_circulation" />^FS
+^FT710,138^A0N,102,150^FD<t t-esc="picking.tnt_consignment_sort_split" />^FS
+^FT32,248^A0N,45,57^FD<t t-esc="picking.tnt_consignment_mumber" />^FS
+^FT32,317^A0N,28,32^FD<t t-esc="package_number+1" /> of <t
+                            t-esc="picking.number_of_packages"
+                        />^FS
+^FT240,317^A0N,28,32^FR^FD<t t-esc="picking.weight" /><t
+                            t-esc="picking.weight_uom_name"
+                        />^FS
+^FT24,373^A0N,25,23^FD<t t-esc="picking.name" />^FS
+^FT184,417^A0N,25,27^FD<t t-esc="picking.carrier_id.tnt_oca_ws_account" />^FS
+^FT141,902^A0N,73,58^FR^FD<t t-esc="picking.tnt_consignment_cluster_code" />^FS
+^FT40,477^A0N,25,20^FD<t t-esc="picking.company_id.name" />^FS
+^FT40,507^A0N,25,20^FD<t t-esc="picking.company_id.street" />^FS
+^FT40,537^A0N,25,20^FD<t t-esc="picking.company_id.city" />^FS
+^FT40,567^A0N,25,20^FD<t t-esc="picking.company_id.state_id.name" /> <t
+                            t-esc="picking.company_id.zip"
+                        />^FS
+^FT40,597^A0N,25,20^FD<t t-esc="picking.company_id.country_id.code" />^FS
+^FT40,671^A0N,25,20^FD<t t-esc="picking.partner_id.name" />^FS
+^FT40,704^A0N,25,20^FD<t t-esc="picking.partner_id.street" />^FS
+^FT40,735^A0N,25,20^FD<t t-esc="picking.partner_id.city" />^FS
+^FT40,768^A0N,25,20^FD<t t-esc="picking.partner_id.state_id.name" /> <t
+                            t-esc="picking.partner_id.zip"
+                        />^FS
+^FT40,799^A0N,25,20^FD<t t-esc="picking.partner_id.country_id.code" />^FS
+^FT510,480^A0N,80,82^FD<t t-esc="picking.tnt_consignment_transit_depot" />^FS
+^FT510,550^A0N,80,82^FD^FS
+^FT510,625^A0N,80,82^FD^FS
+^FT510,695^A0N,80,82^FD^FS
+^FT470,820^A0N,56,64^FD^FS
+^FT496,915^A0N,80,82^FD<t t-esc="picking.tnt_consignment_destination_depot" /> <t
+                            t-esc="picking.tnt_consignment_destination_depot_day"
+                        />^FS
+^FO82,945^BY3^BCN,220,N,N^FD>;<t t-esc="picking.tnt_piece_barcode" />^FS
+^FT160,1187^A0N,23,32^FD<t t-esc="picking.tnt_piece_barcode" />^FS
+^FO17,66 ^XGR:SSGFX000.GRF,1,1^FS
+^PQ1,0,1,Y
+^XZ
+^XA
+^IDR:SSGFX000.GRF^FS
+^XZ
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
