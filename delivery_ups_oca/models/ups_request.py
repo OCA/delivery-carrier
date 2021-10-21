@@ -163,10 +163,10 @@ class UpsRequest:
 
     def _quant_package_data_from_order(self, order):
         PackageWeight = 0
-        for product in order.order_line.filtered(
+        for line in order.order_line.filtered(
             lambda x: x.product_id and x.product_id.weight > 0
         ):
-            PackageWeight += product.product_id.weight
+            PackageWeight += line.product_id.weight * line.product_uom_qty
         return {
             "PackagingType": {"Code": self.default_packaging_id.shipper_package_code},
             "Dimensions": {
