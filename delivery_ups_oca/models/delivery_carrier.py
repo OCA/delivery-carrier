@@ -77,24 +77,6 @@ class DeliveryCarrier(models.Model):
         "webservice (you will necessary to activate tracking API)",
     )
 
-    def _get_ups_params(self, service):
-        return {
-            "prod": self.prod_environment,
-            "service": service,
-            "params": {
-                "access_license_number": self.ups_access_license,
-                "username": self.ups_ws_username,
-                "password": self.ups_ws_password,
-                "default_packaging_id": self.ups_default_packaging_id,
-                "shipper_number": self.ups_shipper_number,
-                "service_code": self.ups_service_code,
-                "file_format": self.ups_file_format,
-                "package_dimension_code": self.ups_package_dimension_code,
-                "package_weight_code": self.ups_package_weight_code,
-                "transaction_src": "Odoo (%s)" % self.env.cr.dbname,
-            },
-        }
-
     def ups_send_shipping(self, pickings):
         return [self.ups_create_shipping(p) for p in pickings]
 
@@ -106,7 +88,7 @@ class DeliveryCarrier(models.Model):
         self.ensure_one()
         if not carrier_tracking_ref:
             return False
-        ups_request = UpsRequest(**self._get_ups_params("label"))
+        ups_request = UpsRequest(self)
         response = ups_request.shipping_label(carrier_tracking_ref)
         # Create attachment to add pdf label
         picking = self.env["stock.picking"].search(
@@ -136,7 +118,7 @@ class DeliveryCarrier(models.Model):
         return a list of dicts {'exact_price': 'tracking_number':}
         suitable for delivery.carrier#send_shipping"""
         self.ensure_one()
-        ups_request = UpsRequest(**self._get_ups_params("shipping"))
+        ups_request = UpsRequest(self)
         response = ups_request._send_shipping(picking)
         extra_price = self._ups_get_response_price(
             response["price"], picking.company_id.currency_id, picking.company_id
@@ -154,7 +136,7 @@ class DeliveryCarrier(models.Model):
         )
 
     def ups_cancel_shipment(self, pickings):
-        ups_request = UpsRequest(**self._get_ups_params("cancel"))
+        ups_request = UpsRequest(self)
         return ups_request.cancel_shipment(pickings)
 
     def ups_tracking_state_update(self, picking):
@@ -163,13 +145,13 @@ class DeliveryCarrier(models.Model):
             picking.carrier_id.ups_tracking_state_update_sync
             and picking.carrier_tracking_ref
         ):
-            ups_request = UpsRequest(**self._get_ups_params("status"))
+            ups_request = UpsRequest(self)
             response = ups_request.tracking_state_update(picking)
             picking.delivery_state = response["delivery_state"]
             picking.tracking_state_history = response["tracking_state_history"]
 
     def ups_rate_shipment(self, order):
-        ups_request = UpsRequest(**self._get_ups_params("rate"))
+        ups_request = UpsRequest(self)
         response = ups_request.rate_shipment(order)
         price = self._ups_get_response_price(
             response, order.currency_id, order.company_id
