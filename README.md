@@ -38,7 +38,7 @@ addon | version | maintainers | summary
 [delivery_purchase](delivery_purchase/) | 13.0.1.0.0 |  | Delivery costs in purchases
 [delivery_send_to_shipper_at_operation](delivery_send_to_shipper_at_operation/) | 13.0.1.0.0 |  | Send delivery notice to the shipper from any operation.
 [delivery_state](delivery_state/) | 13.0.2.0.0 |  | Provides fields to be able to contemplate the tracking statesand also adds a global fields
-[delivery_ups_oca](delivery_ups_oca/) | 13.0.1.0.1 |  | Integrate UPS webservice
+[delivery_ups_oca](delivery_ups_oca/) | 13.0.1.0.2 |  | Integrate UPS webservice
 [partner_delivery_schedule](partner_delivery_schedule/) | 13.0.1.0.0 |  | Set on partners a schedule for delivery goods
 [partner_delivery_zone](partner_delivery_zone/) | 13.0.1.1.1 |  | Set on partners a zone for delivery goods
 [server_environment_delivery](server_environment_delivery/) | 13.0.1.0.0 |  | Configure prod environment for delivery carriers
