@@ -9,36 +9,26 @@ from odoo import _
 
 _logger = logging.getLogger(__name__)
 
-UPS_API_URL = {
-    "test": "https://onlinetools.ups.com",
-    "prod": "https://wwwcie.ups.com",
-}
-UPS_API_SERVICE = {
-    "shipping": "/ship/v1807/shipments",
-    "label": "/ship/v1807/shipments/labels",
-    "cancel": "/ship/v1/shipments/cancel",
-    "status": "/track/v1/details/",
-    "rate": "/ship/v1807/rating/Rate",
-}
 
-
-class UpsRequest:
-    def __init__(self, prod=False, service="shipping", params=None):
-        self.access_license_number = params.get("access_license_number")
-        self.username = params.get("username")
-        self.password = params.get("password")
-        self.default_packaging_id = params.get("default_packaging_id")
-        self.shipper_number = params.get("shipper_number")
-        self.service_code = params.get("service_code")
-        self.file_format = params.get("file_format")
-        self.package_dimension_code = params.get("package_dimension_code")
-        self.package_weight_code = params.get("package_weight_code")
-        self.transaction_src = params.get("transaction_src")
-        api_env = "prod" if prod else "test"
-        self.url = UPS_API_URL[api_env] + UPS_API_SERVICE[service]
+class UpsRequest(object):
+    def __init__(self, carrier):
+        self.carrier = carrier
+        self.access_license_number = self.carrier.ups_access_license
+        self.username = self.carrier.ups_ws_username
+        self.password = self.carrier.ups_ws_password
+        self.default_packaging_id = self.carrier.ups_default_packaging_id
+        self.shipper_number = self.carrier.ups_shipper_number
+        self.service_code = self.carrier.ups_service_code
+        self.file_format = self.carrier.ups_file_format
+        self.package_dimension_code = self.carrier.ups_package_dimension_code
+        self.package_weight_code = self.carrier.ups_package_weight_code
+        self.transaction_src = "Odoo (%s)" % self.carrier.name
+        self.url = "https://onlinetools.ups.com"
+        if self.carrier.prod_environment:
+            self.url = "https://wwwcie.ups.com"
 
     def _process_reply(
-        self, payload=None, method="post", query_parameters=None,
+        self, url, data=None, method="post", query_parameters=None,
     ):
         headers = {
             "AccessLicenseNumber": self.access_license_number,
@@ -49,8 +39,11 @@ class UpsRequest:
             "Accept": "application/json",
         }
         status = getattr(requests, method)(
-            self.url, json=payload, headers=headers, params=query_parameters
+            url, json=data, headers=headers, params=query_parameters
         ).json()
+        ups_last_request = ("URL: {}\nData: {}").format(self.url, data)
+        self.carrier.log_xml(ups_last_request, "ups_last_request")
+        self.carrier.log_xml(status or "", "ups_last_response")
         errors = status.get("response", {}).get("errors")
         if errors:
             _logger.info(
@@ -153,7 +146,10 @@ class UpsRequest:
         }
 
     def _send_shipping(self, picking):
-        status = self._process_reply(payload=self._prepare_create_shipping(picking))
+        status = self._process_reply(
+            url="%s/ship/v1807/shipments" % self.url,
+            data=self._prepare_create_shipping(picking),
+        )
         res = status["ShipmentResponse"]["ShipmentResults"]
         return {
             "price": res["ShipmentCharges"]["TotalCharges"],
@@ -201,7 +197,10 @@ class UpsRequest:
         }
 
     def rate_shipment(self, order):
-        status = self._process_reply(payload=self._prepare_rate_shipment(order))
+        status = self._process_reply(
+            url="%s/ship/v1807/rating/Rate" % self.url,
+            data=self._prepare_rate_shipment(order),
+        )
         return status["RateResponse"]["RatedShipment"]["TotalCharges"]
 
     def _prepare_shipping_label(self, carrier_tracking_ref):
@@ -214,18 +213,21 @@ class UpsRequest:
 
     def shipping_label(self, carrier_tracking_ref):
         res = self._process_reply(
-            payload=self._prepare_shipping_label(carrier_tracking_ref)
+            url="%s/ship/v1807/shipments/labels" % self.url,
+            data=self._prepare_shipping_label(carrier_tracking_ref),
         )
         return res["LabelRecoveryResponse"]["LabelResults"]["LabelImage"]
 
     def cancel_shipment(self, pickings):
+        url = "%s/ship/v1/shipments/cancel" % self.url
         for item in pickings.filtered(lambda x: x.carrier_tracking_ref):
             self.url = "{}/{}".format(self.url, item.carrier_tracking_ref)
-            self._process_reply(method="delete")
+            self._process_reply(url=url, method="delete")
         return True
 
     def tracking_state_update(self, picking):
         status = self._process_reply(
+            url="%s/track/v1/details/" % self.url,
             method="get",
             query_parameters={"inquiryNumber": picking.carrier_tracking_ref},
         )
