@@ -76,22 +76,7 @@ Known issues / Roadmap
 The following need to be implemented
 
 * Multi label/shipment
-* Shipping status functionality
-* Printer selection
-* HSCode (and relevant stuff)
-* Dimensions
-* Support international shipping
-
-
-On the technical side:
-
-* Integration testing end-to-end
-* Introduce unit testing in the client libraries
-* Dummy default values are provided for some of the api's 
-* Go through all the TODOs and fix
-
-Overall it probably makes sense if the client libraries are pushed with twine
-to pypi and are fetched as wheels
+* Printer format selection, pdf or zebra)
 
 Bug Tracker
 ===========

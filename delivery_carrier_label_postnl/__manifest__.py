@@ -16,6 +16,7 @@
     },
     "depends": [
         "base",
+        "base_address_extended",
         "base_delivery_carrier_label",
     ],
     "data": [
