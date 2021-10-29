@@ -315,6 +315,11 @@ class StockPicking(models.Model):
             and "LBS"
             or "KGS"
         )
+        dimension_uom = (
+            int(get_param("product.weight_in_lbs", 0,))
+            and "IN"
+            or "CM"
+        )
         return dict(
             Description=package.name,
             NumOfPieces=str(sum(package.mapped("quant_ids.quantity"))),
@@ -324,7 +329,7 @@ class StockPicking(models.Model):
                 Description=package.packaging_id.name or "Custom",
             ),
             Dimensions=dict(
-                UnitOfMeasurement=dict(Code="CM"),
+                UnitOfMeasurement=dict(Code=dimension_uom),
                 Length=str(package.packaging_id.length),
                 Width=str(package.packaging_id.width),
                 Height=str(package.packaging_id.height),
