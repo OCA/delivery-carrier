@@ -216,7 +216,7 @@ class StockPicking(models.Model):
                 LabelSpecification=self._ups_label_specification(account),
             )
         )
-        if self.env.context.get("enable_negotiated_rates"):
+        if account.ups_negotiated_rates:
             # Enable negotiated rates
             result['ShipmentRequest']['Shipment'].update(
                 ShipmentRatingOptions=dict(NegotiatedRatesIndicator="")
