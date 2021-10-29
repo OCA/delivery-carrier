@@ -159,7 +159,6 @@ msgid "Next Day Air Saver"
 msgstr ""
 
 #. module: delivery_carrier_label_ups
-#: code:addons/delivery_carrier_label_ups/models/stock_picking.py:258
 #: code:addons/delivery_carrier_label_ups/models/stock_picking.py:320
 #, python-format
 msgid "No UPS account found for this company"
@@ -227,7 +226,6 @@ msgid "Provider"
 msgstr ""
 
 #. module: delivery_carrier_label_ups
-#: code:addons/delivery_carrier_label_ups/models/stock_picking.py:239
 #: code:addons/delivery_carrier_label_ups/models/stock_picking.py:301
 #, python-format
 msgid "Sending %s to UPS: %s"
