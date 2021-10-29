@@ -138,11 +138,8 @@ class StockPicking(models.Model):
             shipping_data.update(
                 ShipTo=shipping_data.pop('ShipFrom'),
                 ShipFrom=shipping_data.pop('ShipTo'),
-                ReturnService=dict(
-                    # UPS Electronic Return Label (ERL)
-                    Code='8',
-                ),
             )
+            shipping_data.update(self._ups_return_service())
         return dict(
             ShipmentRequest=dict(
                 Shipment=dict(
@@ -167,7 +164,67 @@ class StockPicking(models.Model):
                     ],
                     **shipping_data,
                 ),
+                LabelSpecification=self._ups_label_specification(account),
             )
+        )
+
+    def _ups_return_service(self):
+        """Return a dict describing the UPS Return Label code"""
+        self.ensure_one()
+        customer_email = self.partner_id.email
+        warehouse_partner = self.picking_type_id.warehouse_id.partner_id
+        warehouse_partner_email = warehouse_partner.email
+        if self.partner_id.country_id.code != 'US':
+            subject_code = '01'  # First shipment reference
+        else:
+            subject_code = '03'  # First package reference
+
+        return dict(
+            ReturnService=dict(
+                # UPS Electronic Return Label (ERL)
+                Code='8',
+            ),
+            ShipmentServiceOptions=dict(
+                LabelDelivery=dict(
+                    EMailMessage=dict(
+                        EMailAddress=customer_email,
+                        FromEMailAddress=warehouse_partner_email,
+                        SubjectCode=subject_code,
+                    )
+                ),
+                Notification=[
+                    dict(
+                        NotificationCode='2',
+                        EMail=dict(
+                            EMailAddress=customer_email,
+                            UndeliverableEMailAddress=warehouse_partner_email,
+                            FromEMailAddress=warehouse_partner_email,
+                        ),
+                    ),
+                    dict(
+                        NotificationCode='5',
+                        EMail=dict(
+                            EMailAddress=customer_email,
+                            FromEMailAddress=warehouse_partner_email,
+                        ),
+                    ),
+                    dict(
+                        NotificationCode='7',
+                        EMail=dict(
+                            EMailAddress=customer_email,
+                            FromEMailAddress=warehouse_partner_email,
+                        ),
+                    ),
+                    dict(
+                        NotificationCode='8',
+                        EMail=dict(
+                            EMailAddress=customer_email,
+                            UndeliverableEMailAddress=warehouse_partner_email,
+                            FromEMailAddress=warehouse_partner_email,
+                        ),
+                    )
+                ]
+            ),
         )
 
     def _ups_partner_to_shipping_data(self, partner, **kwargs):
@@ -223,12 +280,17 @@ class StockPicking(models.Model):
         account = self._ups_auth_account()
         return dict(
             LabelRecoveryRequest=dict(
-                LabelSpecification=dict(
-                    LabelImageFormat=dict(Code=account.file_format or "PDF",),
-                ),
+                LabelSpecification=self._ups_label_specification(account),
                 # TODO we could add a Translate key here to translate to a few languages
                 TrackingNumber=package.parcel_tracking,
             ),
+        )
+
+    def _ups_label_specification(self, account):
+        """Return a dict containing the UPS Label Specification"""
+        return dict(
+            LabelImageFormat=dict(Code="GIF", ),
+            LabelPrintMethod=dict(Code=account.file_format or "PDF", ),
         )
 
     def _ups_raise_error(self, api_result):
