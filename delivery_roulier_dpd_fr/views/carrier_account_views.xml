@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="view_dpd_carrier_account_form" model="ir.ui.view">
+        <field name="model">carrier.account</field>
+        <field
+            name="inherit_id"
+            ref="base_delivery_carrier_label.carrier_account_view_form"
+        />
+        <field name="arch" type="xml">
+            <field name="password" position="after">
+                <field
+                    name="dpd_fr_soap_customer_country"
+                    attrs="{'invisible': [('delivery_type', '!=', 'dpd_fr_soap')], 'required': [('delivery_type', '=', 'dpd_fr_soap')]}"
+                />
+                <field
+                    name="dpd_fr_soap_customer_id"
+                    attrs="{'invisible': [('delivery_type', '!=', 'dpd_fr_soap')], 'required': [('delivery_type', '=', 'dpd_fr_soap')]}"
+                />
+                <field
+                    name="dpd_fr_soap_agency_id"
+                    attrs="{'invisible': [('delivery_type', '!=', 'dpd_fr_soap')], 'required': [('delivery_type', '=', 'dpd_fr_soap')]}"
+                />
+                <field
+                    name="dpd_fr_soap_file_format"
+                    attrs="{'invisible': [('delivery_type', '!=', 'dpd_fr_soap')], 'required': [('delivery_type', '=', 'dpd_fr_soap')]}"
+                />
+            </field>
+        </field>
+    </record>
+
+</odoo>
