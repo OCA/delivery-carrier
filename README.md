@@ -23,6 +23,7 @@ addon | version | maintainers | summary
 [delivery_carrier_category](delivery_carrier_category/) | 14.0.1.0.0 | [![rousseldenis](https://github.com/rousseldenis.png?size=30px)](https://github.com/rousseldenis) | Adds a category to delivery carriers in order to help users classifying them
 [delivery_carrier_city](delivery_carrier_city/) | 14.0.1.0.0 | [![ivantodorovich](https://github.com/ivantodorovich.png?size=30px)](https://github.com/ivantodorovich) | Integrates delivery with base_address_city
 [delivery_carrier_info](delivery_carrier_info/) | 14.0.1.0.1 |  | Add code and description on carrier
+[delivery_carrier_partner](delivery_carrier_partner/) | 14.0.1.0.0 |  | Add a partner in the delivery carrier
 [delivery_carrier_pricelist](delivery_carrier_pricelist/) | 14.0.1.0.0 |  | Compute method method fees based on the product's pricelist.
 [delivery_free_fee_removal](delivery_free_fee_removal/) | 14.0.1.0.0 |  | Hide free fee lines on sales orders
 [delivery_multi_destination](delivery_multi_destination/) | 14.0.1.0.0 |  | Multiple destinations for the same delivery method
