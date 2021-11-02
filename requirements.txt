@@ -1,6 +1,7 @@
 # generated from manifests external_dependencies
 dicttoxml
 PyPDF2
+cerberus
 roulier
 unidecode
 xmltodict
