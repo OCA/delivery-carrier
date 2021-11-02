@@ -38,6 +38,7 @@ addon | version | maintainers | summary
 [delivery_state](delivery_state/) | 14.0.1.0.0 |  | Provides fields to be able to contemplate the tracking statesand also adds a global fields
 [partner_delivery_zone](partner_delivery_zone/) | 14.0.1.1.0 |  | Set on partners a zone for delivery goods
 [server_environment_delivery](server_environment_delivery/) | 14.0.1.0.0 |  | Configure prod environment for delivery carriers
+[stock_picking_carrier_from_rule](stock_picking_carrier_from_rule/) | 14.0.1.0.0 |  | Set the carrier on picking if the stock rule used has a partner address set with a delivery method.
 [stock_picking_delivery_link](stock_picking_delivery_link/) | 14.0.1.0.0 |  | Adds link to the delivery on all intermediate operations.
 
 [//]: # (end addons)
