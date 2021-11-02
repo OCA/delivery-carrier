@@ -1,9 +1,7 @@
-# Copyright 2016 Raphael REVERDY <raphael.reverdy@akretion.com>
-#        EBII MonsieurB <monsieurb@saaslys.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 {
-    "name": "Delivery Carrier DPD (fr)",
+    "name": "Delivery Carrier DPD FR",
     "version": "14.0.1.0.0",
     "author": "Akretion, Odoo Community Association (OCA)",
     "summary": "Generate Labels for DPD",
@@ -12,7 +10,14 @@
         "delivery_roulier",
     ],
     "website": "https://github.com/OCA/delivery-carrier",
-    "data": ["data/delivery.xml", "data/keychain.xml"],
+    "data": [
+        "views/carrier_account_views.xml",
+        "data/product.product.xml",
+        "data/delivery_carrier.xml",
+    ],
+    "demo": [
+        "demo/carrier_account.xml",
+    ],
     "external_dependencies": {
         "python": [
             "cerberus",
