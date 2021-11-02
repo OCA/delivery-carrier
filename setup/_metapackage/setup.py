@@ -12,6 +12,7 @@ setuptools.setup(
         'odoo14-addon-delivery_carrier_category',
         'odoo14-addon-delivery_carrier_city',
         'odoo14-addon-delivery_carrier_info',
+        'odoo14-addon-delivery_carrier_partner',
         'odoo14-addon-delivery_carrier_pricelist',
         'odoo14-addon-delivery_free_fee_removal',
         'odoo14-addon-delivery_multi_destination',
