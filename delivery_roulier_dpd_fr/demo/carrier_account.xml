@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+
+    <record id="demo_carrier_account_dpd" model="carrier.account">
+        <field name="name">Dpd default</field>
+        <field name="account">Demo Account</field>
+        <field name="password">Demo password</field>
+        <field name="delivery_type">dpd_fr_soap</field>
+    </record>
+</odoo>
