@@ -9,4 +9,5 @@ class DeliveryCarrier(models.Model):
     package_fee_ids = fields.One2many(
         comodel_name="delivery.package.fee",
         inverse_name="carrier_id",
+        context={"active_test": False},
     )
