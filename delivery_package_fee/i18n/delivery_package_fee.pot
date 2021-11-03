@@ -14,6 +14,11 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: delivery_package_fee
+#: model:ir.model.fields,field_description:delivery_package_fee.field_delivery_package_fee__active
+msgid "Active"
+msgstr ""
+
+#. module: delivery_package_fee
 #: model:ir.model.fields,field_description:delivery_package_fee.field_delivery_package_fee__carrier_id
 msgid "Carrier"
 msgstr ""
