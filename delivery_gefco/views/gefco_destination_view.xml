@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Copyright 2021 Tecnativa - Víctor Martínez
+License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <record id="gefco_destination_tree_view" model="ir.ui.view">
+        <field name="name">gefco.destination.tree</field>
+        <field name="model">gefco.destination</field>
+        <field name="arch" type="xml">
+            <tree string="Gefco Destinations">
+                <field name="country_code" />
+                <field name="zip_code" />
+                <field name="directional_code" />
+                <field name="destination_code" />
+            </tree>
+        </field>
+    </record>
+    <record id="gefco_destination_form_view" model="ir.ui.view">
+        <field name="name">gefco.destination.form</field>
+        <field name="model">gefco.destination</field>
+        <field name="arch" type="xml">
+            <form string="Gefco Destination">
+                <group>
+                    <field name="country_code" />
+                    <field name="zip_code" />
+                </group>
+                <group>
+                    <field name="directional_code" />
+                    <field name="destination_code" />
+                </group>
+            </form>
+        </field>
+    </record>
+    <record id="gefco_destination_view_action" model="ir.actions.act_window">
+        <field name="name">Gefco Destinations</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">gefco.destination</field>
+        <field name="view_id" ref="gefco_destination_tree_view" />
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem
+        id="gefco_config_menu"
+        parent="delivery.menu_delivery"
+        name="Gefco Destinations"
+        action="gefco_destination_view_action"
+        groups="stock.group_stock_manager"
+    />
+</odoo>

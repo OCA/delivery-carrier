@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <template id="label_delivery_gefco_template">
+            <t t-foreach="docs" t-as="picking">
+                <t t-foreach="range(picking.number_of_packages)" t-as="package_number">
+                    <t t-translation="off">
+^XA
+
+^FX Cabecera
+^CF0,120
+^FO50,50^FDGEFCO^FS
+^CFC,20
+^FO400,50^FD<t t-esc="picking.carrier_id.partner_id.city" />^FS
+^FO720,50^FD<t t-esc="picking.carrier_id.gefco_agency_code" />^FS
+^FO400,75^FDTel: <t t-esc="picking.carrier_id.partner_id.phone" />^FS
+^FO400,100^FDFax: ^FS
+^FO50,240^GB700,1,3^FS
+
+^FX Nombre y direccion expedidor
+^CF0,30
+^FO50,270^FDExp:^FS
+^CFA,30
+^FO120,260^FD<t t-esc="picking.company_id.name" />^FS
+^CFA,30
+^FO120,300^FD<t t-esc="picking.company_id.street" />^FS
+^CFA,30
+^FO50,330^FD<t t-esc="picking.company_id.country_id.code" />^FS
+^FO120,335^FD<t t-esc="picking.company_id.zip" /> <t
+                            t-esc="picking.company_id.city"
+                        />^FS
+^FO50,370^GB700,1,3^FS
+
+^FX Nombre y direccion destinatario
+^CF0,30
+^FO50,390^FDDest:^FS
+^CFA,30
+^FO120,380^FD<t t-esc="picking.partner_id.name" />^FS
+^FO120,420^FD^FS
+^FO120,460^FD<t t-esc="picking.partner_id.street" />^FS
+^FO50,500^FD<t t-esc="picking.partner_id.country_id.code" />^FS
+^FO120,500^FD<t t-esc="picking.partner_id.zip" />^FS
+^FO270,500^FD<t t-esc="picking.partner_id.city" />^FS
+^FO50,540^GB700,1,3^FS
+
+^FX Codigo de barras
+^CF0,30
+^BY3,3,110
+^FO120,600^BC^FD<t t-esc="picking._get_gefco_barcode(package_number)" />^FS
+
+^FO50,840^GB700,1,3^FS
+^CF0,20
+^FO50,860^FDColis: <t t-esc="package_number+1" />/<t
+                            t-esc="picking.number_of_packages"
+                        />^FS
+^FO220,860^FDRecep:^FS
+^FO320,860^FD<t t-esc="picking.carrier_id.gefco_shipper_id" />^FS
+^FO600,860^FDEdite le:^FS
+^FO670,860^FD<t
+                            t-if="picking.date_done"
+                            t-esc="picking.date_done.strftime('%d/%m/%Y')"
+                        />^FS
+^FO50,880^FDPoids: <t t-esc="picking.weight" />^FS
+^FO220,880^FDRef. client:^FS
+^FO320,880^FD<t t-esc="picking.carrier_id.gefco_shipper_id" />^FS
+^FO600,880^FDA livrer le:^FS
+^FO680,880^FD^FS
+^FO50,910^GB700,1,3^FS
+
+^CFA,180,40
+^FO50,930^FD<t t-esc="picking.gefco_destination_id.directional_code" />^FS
+^CF0,80,50
+^FO570,950^FD<t t-esc="picking.gefco_destination_id.destination_code" />^FS
+^XZ
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

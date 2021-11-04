@@ -1,0 +1,172 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* delivery_gefco
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-11-12 09:05+0000\n"
+"PO-Revision-Date: 2021-11-12 10:09+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: es\n"
+"X-Generator: Poedit 2.3\n"
+
+#. module: delivery_gefco
+#: model:ir.actions.report,print_report_name:delivery_gefco.label_delivery_gefco
+msgid "'GEFCO-%s' % object.carrier_tracking_ref"
+msgstr "'GEFCO-%s' % object.carrier_tracking_ref"
+
+#. module: delivery_gefco
+#: model:ir.model.fields,field_description:delivery_gefco.field_product_packaging__package_carrier_type
+msgid "Carrier"
+msgstr "Transportista"
+
+#. module: delivery_gefco
+#: model:ir.model.fields,field_description:delivery_gefco.field_gefco_destination__country_code
+msgid "Country Code"
+msgstr "Código de país"
+
+#. module: delivery_gefco
+#: model:ir.model.fields,field_description:delivery_gefco.field_gefco_destination__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: delivery_gefco
+#: model:ir.model.fields,field_description:delivery_gefco.field_gefco_destination__create_date
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: delivery_gefco
+#: model:ir.model.fields,field_description:delivery_gefco.field_gefco_destination__destination_code
+msgid "Destination Code"
+msgstr "Código de destino"
+
+#. module: delivery_gefco
+#: model:ir.model.fields,field_description:delivery_gefco.field_gefco_destination__directional_code
+msgid "Directional Code"
+msgstr "Código direccional"
+
+#. module: delivery_gefco
+#: model:ir.model.fields,field_description:delivery_gefco.field_gefco_destination__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: delivery_gefco
+#: model:ir.model.fields.selection,name:delivery_gefco.selection__delivery_carrier__delivery_type__gefco
+#: model:ir.model.fields.selection,name:delivery_gefco.selection__product_packaging__package_carrier_type__gefco
+#: model_terms:ir.ui.view,arch_db:delivery_gefco.view_delivery_carrier_gefco_form
+msgid "Gefco"
+msgstr "Gefco"
+
+#. module: delivery_gefco
+#: model:ir.model.fields,field_description:delivery_gefco.field_delivery_carrier__gefco_agency_code
+msgid "Gefco Agency Code"
+msgstr "Código de agencia Gefco"
+
+#. module: delivery_gefco
+#: model:ir.model.fields,field_description:delivery_gefco.field_stock_picking__gefco_destination_id
+#: model_terms:ir.ui.view,arch_db:delivery_gefco.gefco_destination_form_view
+msgid "Gefco Destination"
+msgstr "Destino Gefco"
+
+#. module: delivery_gefco
+#: model:ir.actions.act_window,name:delivery_gefco.gefco_destination_view_action
+#: model:ir.ui.menu,name:delivery_gefco.gefco_config_menu
+#: model_terms:ir.ui.view,arch_db:delivery_gefco.gefco_destination_tree_view
+msgid "Gefco Destinations"
+msgstr "Destinos Gefco"
+
+#. module: delivery_gefco
+#: model:ir.actions.report,name:delivery_gefco.label_delivery_gefco
+msgid "Gefco Label (ZPL)"
+msgstr "Etiqueta Gefco (ZPL)"
+
+#. module: delivery_gefco
+#: model:ir.model.fields,field_description:delivery_gefco.field_delivery_carrier__gefco_shipper_id
+msgid "Gefco Shipper Identification"
+msgstr "Identificación del remitente de Gefco"
+
+#. module: delivery_gefco
+#: model:ir.model,name:delivery_gefco.model_gefco_destination
+msgid "Gefco destination"
+msgstr "Destino Gefco"
+
+#. module: delivery_gefco
+#: code:addons/delivery_gefco/models/delivery_carrier.py:0
+#, python-format
+msgid "Gefco destination is required"
+msgstr "Se requiere el destino de Gefco"
+
+#. module: delivery_gefco
+#: code:addons/delivery_gefco/models/delivery_carrier.py:0
+#, python-format
+msgid "Gefco does not allow you to cancel a shipment."
+msgstr "Gefco no le permite cancelar un envío."
+
+#. module: delivery_gefco
+#: code:addons/delivery_gefco/models/delivery_carrier.py:0
+#, python-format
+msgid "Gefco does not allow you to get prices."
+msgstr "Gefco no le permite obtener precios."
+
+#. module: delivery_gefco
+#: model:ir.model.fields,field_description:delivery_gefco.field_gefco_destination__id
+msgid "ID"
+msgstr "ID"
+
+#. module: delivery_gefco
+#: model:ir.model.fields,field_description:delivery_gefco.field_gefco_destination____last_update
+msgid "Last Modified on"
+msgstr "Última modificación el"
+
+#. module: delivery_gefco
+#: model:ir.model.fields,field_description:delivery_gefco.field_gefco_destination__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: delivery_gefco
+#: model:ir.model.fields,field_description:delivery_gefco.field_gefco_destination__write_date
+msgid "Last Updated on"
+msgstr "Ultima actualización el"
+
+#. module: delivery_gefco
+#: model_terms:ir.ui.view,arch_db:delivery_gefco.view_delivery_carrier_gefco_form
+msgid "Misc"
+msgstr ""
+
+#. module: delivery_gefco
+#: model:ir.model,name:delivery_gefco.model_product_packaging
+msgid "Product Packaging"
+msgstr "Empaquetado del producto"
+
+#. module: delivery_gefco
+#: model:ir.model.fields,field_description:delivery_gefco.field_delivery_carrier__delivery_type
+msgid "Provider"
+msgstr "Proveedor"
+
+#. module: delivery_gefco
+#: model:ir.model,name:delivery_gefco.model_delivery_carrier
+msgid "Shipping Methods"
+msgstr "Métodos de envío"
+
+#. module: delivery_gefco
+#: code:addons/delivery_gefco/models/delivery_carrier.py:0
+#, python-format
+msgid "Tracking Reference is required"
+msgstr "Se requiere una referencia de seguimiento"
+
+#. module: delivery_gefco
+#: model:ir.model,name:delivery_gefco.model_stock_picking
+msgid "Transfer"
+msgstr "Albarán"
+
+#. module: delivery_gefco
+#: model:ir.model.fields,field_description:delivery_gefco.field_gefco_destination__zip_code
+msgid "Zip Code"
+msgstr "Código postal"

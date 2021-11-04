@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <report
+            id="label_delivery_gefco"
+            model="stock.picking"
+            string="Gefco Label (ZPL)"
+            name="delivery_gefco.label_delivery_gefco_template"
+            file="delivery_gefco.label_delivery_gefco_template"
+            report_type="qweb-text"
+            print_report_name="'GEFCO-%s' % object.carrier_tracking_ref"
+        />
+    </data>
+</odoo>

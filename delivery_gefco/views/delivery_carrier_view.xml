@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Copyright 2021 Tecnativa - Víctor Martínez
+License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <record id="view_delivery_carrier_gefco_form" model="ir.ui.view">
+        <field name="model">delivery.carrier</field>
+        <field name="inherit_id" ref="delivery.view_delivery_carrier_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page
+                    string="Gefco"
+                    name="configuration_gefco"
+                    attrs="{'invisible': [('delivery_type', '!=', 'gefco')]}"
+                >
+                    <group>
+                        <group string="Misc">
+                            <field
+                                name="gefco_agency_code"
+                                attrs="{'required': [('delivery_type', '=', 'gefco')]}"
+                            />
+                            <field
+                                name="gefco_shipper_id"
+                                attrs="{'required': [('delivery_type', '=', 'gefco')]}"
+                            />
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_delivery_carrier_gefco_partner_id_form" model="ir.ui.view">
+        <field name="model">delivery.carrier</field>
+        <field
+            name="inherit_id"
+            ref="delivery_carrier_partner.view_delivery_carrier_form"
+        />
+        <field name="arch" type="xml">
+            <field name="partner_id" position="attributes">
+                <attribute
+                    name="attrs"
+                >{'required': [('delivery_type', '=', 'gefco')]}</attribute>
+            </field>
+        </field>
+    </record>
+</odoo>
