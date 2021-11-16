@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import models
-from odoo.tools import safe_eval
+from odoo.tools.safe_eval import safe_eval
 
 
 class StockPicking(models.Model):
@@ -28,7 +28,8 @@ class StockPicking(models.Model):
                 continue
             move = move_line.move_id
             qty = move.product_uom._compute_quantity(
-                move_line.qty_done, move_line.product_id.uom_id,
+                move_line.qty_done,
+                move_line.product_id.uom_id,
             )
             weight += (move_line.product_id.weight or 0.0) * qty
             volume += (move_line.product_id.volume or 0.0) * qty
@@ -41,18 +42,19 @@ class StockPicking(models.Model):
             sale_order.date_order,
         )
         so_line.price_unit = self.carrier_id._get_price_from_picking(
-            total, weight, volume, quantity,
+            total,
+            weight,
+            volume,
+            quantity,
         )
         return res
 
-    def action_done(self):
-        """If configured, we want to set to 0 automatically the delivery line
-        when we have a returned picking that isn't invoiced so we don't have
-        it as invoiceable line. Otherwise, the salesman has to do it on hand"""
-        res = super().action_done()
-        get_param = self.env["ir.config_parameter"].sudo().get_param
-        param = "delivery_auto_refresh.auto_void_delivery_line"
-        if not safe_eval(get_param(param, "0")):
+    def _action_done(self):
+        res = super()._action_done()
+        # If configured, we want to set to 0 automatically the delivery line
+        # when we have a returned picking that isn't invoiced so we don't have
+        # it as invoiceable line. Otherwise, the salesman has to do it by hand.
+        if not get_bool_param(self.env, "auto_void_delivery_line"):
             return res
         sales_to_void_delivery = self.filtered(
             lambda x: x.sale_id
