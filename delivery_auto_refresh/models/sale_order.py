@@ -64,7 +64,7 @@ class SaleOrder(models.Model):
 
     def _create_delivery_line(self, carrier, price_unit):
         """Allow users to keep discounts to delivery lines. Unit price will
-           be recomputed anyway"""
+        be recomputed anyway"""
         sol = super()._create_delivery_line(carrier, price_unit)
         discount = self.env.context.get("delivery_discount")
         if discount and sol:
