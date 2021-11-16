@@ -130,7 +130,7 @@ class TestDeliveryAutoRefresh(common.HttpCase):
         picking = self.order.picking_ids
         picking.action_assign()
         picking.move_line_ids[0].qty_done = 2
-        picking.action_done()
+        picking._action_done()
         line_delivery = self.order.order_line.filtered("is_delivery")
         self.assertEqual(line_delivery.price_unit, 50)
 
@@ -150,14 +150,14 @@ class TestDeliveryAutoRefresh(common.HttpCase):
         picking = self.order.picking_ids
         picking.action_assign()
         picking.move_line_ids[0].qty_done = 2
-        picking.action_done()
+        picking._action_done()
         line_delivery = self.order.order_line.filtered("is_delivery")
         self.assertEqual(line_delivery.price_unit, 60)
 
     def test_compute_carrier_id(self):
         order_form_1 = Form(self.env["sale.order"])
         order_form_1.partner_id = self.partner
-        self.assertEquals(order_form_1.carrier_id, self.carrier_1)
+        self.assertEqual(order_form_1.carrier_id, self.carrier_1)
         partner_without_carrier = self.env["res.partner"].create(
             {
                 "name": "Test partner without carrier",
@@ -167,4 +167,4 @@ class TestDeliveryAutoRefresh(common.HttpCase):
         no_carrier = self.env["delivery.carrier"]
         order_form_2 = Form(self.env["sale.order"])
         order_form_2.partner_id = partner_without_carrier
-        self.assertEquals(order_form_2.carrier_id, no_carrier)
+        self.assertEqual(order_form_2.carrier_id, no_carrier)

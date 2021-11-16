@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models
-from odoo.tools import safe_eval
+from odoo.tools.safe_eval import safe_eval
 
 
 class SaleOrder(models.Model):
