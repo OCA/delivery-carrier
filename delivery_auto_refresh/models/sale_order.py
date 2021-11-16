@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models
-from odoo.tools import safe_eval
+from odoo.tools.safe_eval import safe_eval
 
 
 class SaleOrder(models.Model):
@@ -67,7 +67,7 @@ class SaleOrder(models.Model):
 
     def _create_delivery_line(self, carrier, price_unit):
         """Allow users to keep discounts to delivery lines. Unit price will
-           be recomputed anyway"""
+        be recomputed anyway"""
         sol = super()._create_delivery_line(carrier, price_unit)
         discount = self.env.context.get("delivery_discount")
         if discount and sol:
