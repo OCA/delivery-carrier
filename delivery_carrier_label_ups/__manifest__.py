@@ -3,7 +3,7 @@
 {
     "name": "Carrier labels for ups",
     "summary": "Print carrier labels for ups",
-    "version": "12.0.1.1.0",
+    "version": "12.0.1.2.0",
     "development_status": "Beta",
     "category": "Delivery",
     "website": "https://github.com/OCA/delivery-carrier",
