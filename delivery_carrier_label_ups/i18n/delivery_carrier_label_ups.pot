@@ -59,6 +59,15 @@ msgid "Based on Rules"
 msgstr ""
 
 #. module: delivery_carrier_label_ups
+#: model:ir.model.fields,help:delivery_carrier_label_ups.field_carrier_account__ups_negotiated_rates
+msgid "By default, shipping to UPS makes use of Published Rates. To\n"
+"        use Negotiated Rates instead, just set this flag to True.\n"
+"        A negotiated rate can be enabled only in case it's established by contract\n"
+"        between your company and UPS.\n"
+"    "
+msgstr ""
+
+#. module: delivery_carrier_label_ups
 #: selection:product.packaging,ups_code:0
 msgid "Customer Supplied Package"
 msgstr ""
@@ -160,6 +169,7 @@ msgstr ""
 
 #. module: delivery_carrier_label_ups
 #: code:addons/delivery_carrier_label_ups/models/stock_picking.py:320
+#: code:addons/delivery_carrier_label_ups/models/stock_picking.py:387
 #, python-format
 msgid "No UPS account found for this company"
 msgstr ""
@@ -191,6 +201,7 @@ msgstr ""
 
 #. module: delivery_carrier_label_ups
 #: code:addons/delivery_carrier_label_ups/models/stock_picking.py:61
+#: code:addons/delivery_carrier_label_ups/models/stock_picking.py:161
 #, python-format
 msgid "Picking %s must set exactly one shipping option"
 msgstr ""
@@ -227,6 +238,7 @@ msgstr ""
 
 #. module: delivery_carrier_label_ups
 #: code:addons/delivery_carrier_label_ups/models/stock_picking.py:301
+#: code:addons/delivery_carrier_label_ups/models/stock_picking.py:368
 #, python-format
 msgid "Sending %s to UPS: %s"
 msgstr ""
@@ -355,5 +367,10 @@ msgstr ""
 #. module: delivery_carrier_label_ups
 #: model:ir.model.fields,field_description:delivery_carrier_label_ups.field_product_packaging__ups_code
 msgid "Ups Code"
+msgstr ""
+
+#. module: delivery_carrier_label_ups
+#: model:ir.model.fields,field_description:delivery_carrier_label_ups.field_carrier_account__ups_negotiated_rates
+msgid "Ups Negotiated Rates"
 msgstr ""
 
