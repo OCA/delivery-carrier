@@ -25,6 +25,10 @@ class SaleOrder(models.Model):
     def _get_param_auto_add_delivery_line(self):
         get_param = self.env["ir.config_parameter"].sudo().get_param
         param = "delivery_auto_refresh.auto_add_delivery_line"
+        # When we have the context 'website_id' it means that we are doing the order from
+        # e-commerce. So we don't want to add the delivery line automatically.
+        if self.env.context.get("website_id"):
+            return False
         return safe_eval(get_param(param, "0"))
 
     def _auto_refresh_delivery(self):
