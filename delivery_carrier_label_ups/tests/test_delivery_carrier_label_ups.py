@@ -19,9 +19,13 @@ class DeliveryCarrierLabelUpsCase(carrier_label_case.CarrierLabelCase):
                 "password": "password",
                 "ups_access_license": "access license",
                 "ups_shipper_number": "shipper number",
+                "ups_negotiated_rates": True,
             }
         )
         with self._setup_mock_requests() as mock_requests:
+            ctx = dict(self.env.context)
+            ctx["get_parcel_labels"] = True
+            self.env = self.env(context=ctx)
             super()._create_order_picking()
             self.assertTrue(
                 mock_requests.post.call_args[1]["json"]["ShipmentRequest"]["Shipment"][
@@ -42,7 +46,70 @@ class DeliveryCarrierLabelUpsCase(carrier_label_case.CarrierLabelCase):
                             TotalCharges=dict(MonetaryValue=42, CurrencyCode="USD",),
                         ),
                         ShipmentIdentificationNumber="shipping_tracking",
-                        PackageResults=dict(TrackingNumber="package_tracking",),
+                        PackageResults=[
+                            {"TrackingNumber": "1ZWA82900192955557",
+                             "BaseServiceCharge": {
+                                 "CurrencyCode": "USD",
+                                 "MonetaryValue": "126.27"
+                             },
+                             "ServiceOptionsCharges": {
+                                 "CurrencyCode": "USD",
+                                 "MonetaryValue": "0.00"
+                             },
+                             "ShippingLabel": {
+                                 "ImageFormat": {
+                                     "Code": "GIF",
+                                     "Description": "GIF"
+                                 },
+                                 "GraphicImage": base64.b64encode(
+                                     bytes("hello", "utf8")),
+                             },
+                             "ItemizedCharges": [
+                                 {
+                                     "Code": "376",
+                                     "CurrencyCode": "USD",
+                                     "MonetaryValue": "0.00",
+                                     "SubType": "Urban"
+                                 },
+                                 {
+                                     "Code": "375",
+                                     "CurrencyCode": "USD",
+                                     "MonetaryValue": "10.73"
+                                 }
+                             ]
+                             },
+                            {"TrackingNumber": "1ZWA82900194633561",
+                             "BaseServiceCharge": {
+                                 "CurrencyCode": "USD",
+                                 "MonetaryValue": "184.76"
+                             },
+                             "ServiceOptionsCharges": {
+                                 "CurrencyCode": "USD",
+                                 "MonetaryValue": "0.00"
+                             },
+                             "ShippingLabel": {
+                                 "ImageFormat": {
+                                     "Code": "GIF",
+                                     "Description": "GIF"
+                                 },
+                                 "GraphicImage": base64.b64encode(
+                                     bytes("hello", "utf8")),
+                             },
+                             "ItemizedCharges": [
+                                 {
+                                     "Code": "376",
+                                     "CurrencyCode": "USD",
+                                     "MonetaryValue": "0.00",
+                                     "SubType": "Urban"
+                                 },
+                                 {
+                                     "Code": "375",
+                                     "CurrencyCode": "USD",
+                                     "MonetaryValue": "15.70"
+                                 }
+                             ]
+                             }
+                        ],
                     ),
                 ),
             )
@@ -110,6 +177,7 @@ class TestDeliveryCarrierLabelUps(
             active_id=self.picking.id
         ).create({}).create_returns()
         return_picking = self.env[action['res_model']].browse(action['res_id'])
+        self.assertTrue(return_picking.location_id.usage == 'customer')
         return_data = return_picking._ups_shipping_data()['ShipmentRequest']
         self.assertEqual(
             shipping_data['Shipment']['ShipFrom']['Name'],

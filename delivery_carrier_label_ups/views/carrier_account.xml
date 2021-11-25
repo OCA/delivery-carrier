@@ -18,6 +18,10 @@
                     name="ups_shipper_number"
                     attrs="{'invisible': [('delivery_type', '!=', 'ups')], 'required': [('delivery_type', '=', 'ups')]}"
                 />
+                <field
+                    name="ups_negotiated_rates"
+                    attrs="{'invisible': [('delivery_type', '!=', 'ups')]}"
+                />
             </field>
         </field>
     </record>
