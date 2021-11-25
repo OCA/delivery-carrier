@@ -19,9 +19,13 @@ class DeliveryCarrierLabelUpsCase(carrier_label_case.CarrierLabelCase):
                 "password": "password",
                 "ups_access_license": "access license",
                 "ups_shipper_number": "shipper number",
+                "ups_negotiated_rates": True,
             }
         )
         with self._setup_mock_requests() as mock_requests:
+            ctx = dict(self.env.context)
+            ctx["get_parcel_labels"] = True
+            self.env = self.env(context=ctx)
             super()._create_order_picking()
             self.assertTrue(
                 mock_requests.post.call_args[1]["json"]["ShipmentRequest"]["Shipment"][
