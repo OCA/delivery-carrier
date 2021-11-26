@@ -22,10 +22,11 @@ class ResConfigSettings(models.TransientModel):
         )
 
     def set_values(self):
-        super().set_values()
+        res = super().set_values()
         self.env["ir.default"].sudo().set(
             "res.partner",
             "property_delivery_carrier_id",
             self.partner_default_delivery_carrier_id.id,
             company_id=self.env.company.id,
         )
+        return res
