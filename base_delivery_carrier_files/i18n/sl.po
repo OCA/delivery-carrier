@@ -1,0 +1,254 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * base_delivery_carrier_files
+# 
+# Translators:
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: carrier-delivery (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-05-03 12:24+0000\n"
+"PO-Revision-Date: 2016-05-01 04:55+0000\n"
+"Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-carrier-delivery-8-0/language/sl/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: sl\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+
+#. module: base_delivery_carrier_files
+#: view:stock.picking:base_delivery_carrier_files.view_picking_out_form_carrier_file
+msgid "Additional Info"
+msgstr "Dodatne informacije"
+
+#. module: base_delivery_carrier_files
+#: help:delivery.carrier.file,group_pickings:0
+msgid ""
+"All the pickings will be grouped in the same file. Has no effect when the "
+"files are automatically exported at the delivery order process."
+msgstr "Vsi zbirniki bodo združeni v isto datoteko. Kadar se datoteke samodejno izvažajo tekom procesa dobavnega naloga, nima vpliva."
+
+#. module: base_delivery_carrier_files
+#: model:ir.model,name:base_delivery_carrier_files.model_delivery_carrier
+msgid "Carrier"
+msgstr "Prevoznik"
+
+#. module: base_delivery_carrier_files
+#: field:delivery.carrier,carrier_file_id:0
+#: view:delivery.carrier.file:base_delivery_carrier_files.view_delivery_carrier_file_form
+#: view:delivery.carrier.file:base_delivery_carrier_files.view_delivery_carrier_file_tree
+#: model:ir.actions.act_window,name:base_delivery_carrier_files.action_delivery_carrier_file_form
+#: model:ir.ui.menu,name:base_delivery_carrier_files.menu_action_delivery_carrier_file_form
+msgid "Carrier File"
+msgstr "Datoteka prevoznika"
+
+#. module: base_delivery_carrier_files
+#: field:stock.picking,carrier_file_generated:0
+msgid "Carrier File Generated"
+msgstr "Datoteka prevoznika ustvarjena"
+
+#. module: base_delivery_carrier_files
+#: view:stock.picking:base_delivery_carrier_files.view_picking_out_search_carrier_file
+msgid "Carrier File To Generate"
+msgstr "Datoteka prevoznika, ki se ustvari"
+
+#. module: base_delivery_carrier_files
+#: view:delivery.carrier.file.generate:base_delivery_carrier_files.view_delivery_carrier_file_generate
+msgid "Carrier Files"
+msgstr "Datoteke prevoznikov"
+
+#. module: base_delivery_carrier_files
+#: view:delivery.carrier.file.generate:base_delivery_carrier_files.view_delivery_carrier_file_generate
+msgid "Close"
+msgstr "Zaključi"
+
+#. module: base_delivery_carrier_files
+#: field:delivery.carrier.file,create_uid:0
+#: field:delivery.carrier.file.generate,create_uid:0
+msgid "Created by"
+msgstr "Ustvaril"
+
+#. module: base_delivery_carrier_files
+#: field:delivery.carrier.file,create_date:0
+#: field:delivery.carrier.file.generate,create_date:0
+msgid "Created on"
+msgstr "Ustvarjeno"
+
+#. module: base_delivery_carrier_files
+#: model:stock.location,name:base_delivery_carrier_files.location_delivery_counter
+msgid "Delivery Counter"
+msgstr "Števec dostav"
+
+#. module: base_delivery_carrier_files
+#: view:delivery.carrier.file.generate:base_delivery_carrier_files.view_delivery_carrier_file_generate
+#: field:delivery.carrier.file.generate,pickings:0
+msgid "Delivery Orders"
+msgstr "Dostavni nalogi"
+
+#. module: base_delivery_carrier_files
+#: view:stock.picking:base_delivery_carrier_files.view_picking_out_search_carrier_file
+msgid "Delivery orders to invoice"
+msgstr "Dostavni nalogi za obračun"
+
+#. module: base_delivery_carrier_files
+#: field:delivery.carrier.file,display_name:0
+#: field:delivery.carrier.file.generate,display_name:0
+msgid "Display Name"
+msgstr "Prikazni naziv"
+
+#. module: base_delivery_carrier_files
+#: field:delivery.carrier.file,export_path:0
+msgid "Export Path"
+msgstr "Izvozna pot"
+
+#. module: base_delivery_carrier_files
+#: field:delivery.carrier.file,auto_export:0
+msgid "Export at delivery order process"
+msgstr "Izvoz ob obdelavi dostavnega naloga"
+
+#. module: base_delivery_carrier_files
+#: code:addons/base_delivery_carrier_files/carrier_file.py:62
+#, python-format
+msgid "Export path is not defined for carrier file %s"
+msgstr "Izvozna pot za datoteko prevoznika %s ni določena"
+
+#. module: base_delivery_carrier_files
+#: model:ir.actions.act_window,name:base_delivery_carrier_files.action_delivery_carrier_file_generate
+msgid "Generate Carrier Files"
+msgstr "Ustvari datoteke prevoznikov"
+
+#. module: base_delivery_carrier_files
+#: view:delivery.carrier.file.generate:base_delivery_carrier_files.view_delivery_carrier_file_generate
+msgid "Generate Files"
+msgstr "Ustvari datoteke"
+
+#. module: base_delivery_carrier_files
+#: view:delivery.carrier.file.generate:base_delivery_carrier_files.view_delivery_carrier_file_generate
+msgid "Generate the carrier files for the selected delivery orders."
+msgstr "Ustvari datoteke prevoznika za izbrane dostavne naloge."
+
+#. module: base_delivery_carrier_files
+#: field:delivery.carrier.file,group_pickings:0
+msgid "Group all pickings in one file"
+msgstr "Združi vse zbirnike v eno datoteko"
+
+#. module: base_delivery_carrier_files
+#: field:delivery.carrier.file,id:0 field:delivery.carrier.file.generate,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: base_delivery_carrier_files
+#: model:product.template,name:base_delivery_carrier_files.product_icecream_product_template
+msgid "Ice Cream"
+msgstr "Sladoled"
+
+#. module: base_delivery_carrier_files
+#: model:product.template,description:base_delivery_carrier_files.product_icecream_product_template
+msgid ""
+"Ice cream can be mass-produced and thus is widely available in developed "
+"parts of the world. Ice cream can be purchased in large cartons (vats and "
+"squrounds) from supermarkets and grocery stores, in smaller quantities from "
+"ice cream shops, convenience stores, and milk bars, and in individual "
+"servings from small carts or vans at public events."
+msgstr "Sladoled se lahko masovno proizvaja in je zato široko dostopen v razvitem svetu. V super marketih in trgovinah z živili se lahko nabavi v veliki embalaži (kartonski ali plastični), v slaščičarnah, barih, javnih prireditvah ipd. pa v manjših količinah."
+
+#. module: base_delivery_carrier_files
+#: help:delivery.carrier.file.generate,recreate:0
+msgid ""
+"If this option is used, new files will be generated for selected picking even if they already had one.\n"
+"By default, delivery orders with existing file will be skipped."
+msgstr "Če se uporabi ta opcija, se za izbrani zbirnik ustvarijo nove datoteke tudi, če je kaka že obstajala.\nPrivzeto se dostavni nalogi z obstoječo datoteko preskočijo."
+
+#. module: base_delivery_carrier_files
+#: field:delivery.carrier.file,__last_update:0
+#: field:delivery.carrier.file.generate,__last_update:0
+msgid "Last Modified on"
+msgstr "Zadnjič spremenjeno"
+
+#. module: base_delivery_carrier_files
+#: field:delivery.carrier.file,write_uid:0
+#: field:delivery.carrier.file.generate,write_uid:0
+msgid "Last Updated by"
+msgstr "Zadnji posodobil"
+
+#. module: base_delivery_carrier_files
+#: field:delivery.carrier.file,write_date:0
+#: field:delivery.carrier.file.generate,write_date:0
+msgid "Last Updated on"
+msgstr "Zadnjič posodobljeno"
+
+#. module: base_delivery_carrier_files
+#: field:delivery.carrier.file,name:0
+msgid "Name"
+msgstr "Naziv"
+
+#. module: base_delivery_carrier_files
+#: code:addons/base_delivery_carrier_files/wizard/generate_carrier_files.py:44
+#, python-format
+msgid "No delivery orders selected"
+msgstr "Ni izbranih dostavnih nalogov"
+
+#. module: base_delivery_carrier_files
+#: model:stock.picking.type,name:base_delivery_carrier_files.outgoing_shipment_type_carrier_file
+#: model:stock.picking.type,name:base_delivery_carrier_files.outgoing_shipment_type_carrier_file_manual
+msgid "Outgoing Ice Cream"
+msgstr "Izhodni sladoled"
+
+#. module: base_delivery_carrier_files
+#: model:ir.model,name:base_delivery_carrier_files.model_stock_picking
+msgid "Picking List"
+msgstr "Zbirnik"
+
+#. module: base_delivery_carrier_files
+#: field:delivery.carrier.file.generate,recreate:0
+msgid "Recreate files"
+msgstr "Ponovno ustvari datoteke"
+
+#. module: base_delivery_carrier_files
+#: model:stock.location,name:base_delivery_carrier_files.location_refrigerator
+msgid "Refrigerator"
+msgstr "Zmrzovalnik"
+
+#. module: base_delivery_carrier_files
+#: model:ir.model,name:base_delivery_carrier_files.model_stock_move
+msgid "Stock Move"
+msgstr "Premik zaloge"
+
+#. module: base_delivery_carrier_files
+#: help:stock.picking,carrier_file_generated:0
+msgid "The file for the delivery carrier has been generated."
+msgstr "Datoteka prevoznika ni bila ustvarjena."
+
+#. module: base_delivery_carrier_files
+#: help:delivery.carrier.file,auto_export:0
+msgid ""
+"The file will be automatically generated when a delivery order is processed."
+" If activated, each delivery order will be exported in a separate file."
+msgstr "Datoteka bo samodejno ustvarjena ob obdelavi dostavnega naloga. Če aktivirano, se vsak dostavni nalog izvozi v ločeno datoteko."
+
+#. module: base_delivery_carrier_files
+#: field:delivery.carrier.file,type:0
+msgid "Type"
+msgstr "Tip"
+
+#. module: base_delivery_carrier_files
+#: field:delivery.carrier.file,write_mode:0
+msgid "Write on"
+msgstr "Zapiši"
+
+#. module: base_delivery_carrier_files
+#: view:delivery.carrier.file:base_delivery_carrier_files.view_delivery_carrier_file_form
+msgid "Write options"
+msgstr "Opcije zapisa"
+
+#. module: base_delivery_carrier_files
+#: model:stock.location,name:base_delivery_carrier_files.location_opening
+msgid "opening"
+msgstr "odprtje"
+
+#. module: base_delivery_carrier_files
+#: view:delivery.carrier.file.generate:base_delivery_carrier_files.view_delivery_carrier_file_generate
+msgid "or"
+msgstr "ali"
