@@ -8,6 +8,7 @@ setuptools.setup(
     description="Meta package for oca-delivery-carrier Odoo addons",
     version=version,
     install_requires=[
+        'odoo14-addon-base_delivery_carrier_files',
         'odoo14-addon-base_delivery_carrier_label',
         'odoo14-addon-delivery_carrier_category',
         'odoo14-addon-delivery_carrier_city',
