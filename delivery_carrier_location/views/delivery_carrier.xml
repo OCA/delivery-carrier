@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    Copyright 2021 Camptocamp SA - Iván Todorovich
+    License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+
+    <record id="view_delivery_carrier_form" model="ir.ui.view">
+        <field name="model">delivery.carrier</field>
+        <field
+            name="inherit_id"
+            ref="delivery_carrier_city.view_delivery_carrier_form"
+        />
+        <field name="arch" type="xml">
+            <field name="city_ids" position="after">
+                <field name="zip_ids" widget="many2many_tags" />
+            </field>
+        </field>
+    </record>
+
+</odoo>
