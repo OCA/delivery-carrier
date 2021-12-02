@@ -493,6 +493,12 @@ msgid "Partner Option"
 msgstr ""
 
 #. module: delivery_postlogistics
+#: code:addons/delivery_postlogistics/postlogistics/web_service.py:0
+#, python-format
+msgid "Partner postal code is not well formatted, please check it."
+msgstr ""
+
+#. module: delivery_postlogistics
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_stock_picking__delivery_phone
 msgid "Phone"
 msgstr ""
