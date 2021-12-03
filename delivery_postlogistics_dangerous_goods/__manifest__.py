@@ -3,7 +3,7 @@
 {
     "name": "Postlogistics Shipping Dangerous Goods",
     "summary": "Declare dangerous goods when generating postlogistics labels",
-    "version": "13.0.1.0.0",
+    "version": "14.0.1.0.0",
     "author": "Camptocamp,Odoo Community Association (OCA)",
     "maintainer": "Camptocamp",
     "license": "AGPL-3",
@@ -13,7 +13,7 @@
         # OCA/delivery-carrier
         "delivery_postlogistics",
         # OCA/community-data-files
-        "l10n_eu_product_adr",
+        "l10n_eu_product_adr_dangerous_goods",
     ],
     "website": "https://github.com/OCA/delivery-carrier",
     "installable": True,

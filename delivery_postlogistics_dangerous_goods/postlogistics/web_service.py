@@ -3,8 +3,6 @@
 
 import re
 
-from odoo import _, exceptions
-
 from odoo.addons.delivery_postlogistics.postlogistics import web_service
 
 UNNUMBER_REGEX = re.compile("^[0-9]{1,4}")
@@ -20,22 +18,16 @@ class PostlogisticsWebServiceDangerousGoods(web_service.PostlogisticsWebService)
             and pack.mapped("quant_ids.product_id")
             or picking.mapped("move_lines.product_id")
         )
-        limited_amount_lq = picking.env.ref("l10n_eu_product_adr.limited_amount_1")
+        limited_amount_lq = picking.env.ref(
+            "l10n_eu_product_adr_dangerous_goods.limited_amount_1"
+        )
         limited_quantity_products = products.filtered(
             lambda p: p.is_dangerous and p.limited_amount_id == limited_amount_lq
         )
-        unnumbers = []
-        for product in limited_quantity_products:
-            unnumber = product.un_ref.name
-            match = UNNUMBER_REGEX.match(unnumber)
-            if not match:
-                raise exceptions.UserError(
-                    _("UNNumber {} is invalid for product {}.").format(
-                        unnumber, product.name
-                    )
-                )
-            unnumbers.append(int(match[0]))
-        return unnumbers
+        # Since 14.0, un numbers checks are done directly in l10n_eu_product_adr
+        return [
+            int(product.adr_goods_id.un_number) for product in limited_quantity_products
+        ]
 
     def _prepare_attributes(
         self, picking, pack=None, pack_num=None, pack_total=None, pack_weight=None

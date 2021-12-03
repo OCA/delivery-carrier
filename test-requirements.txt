@@ -1,3 +1,6 @@
 odoo-test-helper >= 1.1.0
 vcrpy
 vcrpy-unittest
+
+odoo14-addon-l10n_eu_product_adr @ git+https://github.com/OCA/community-data-files@refs/pull/109/head#subdirectory=setup/l10n_eu_product_adr
+odoo14-addon-l10n_eu_product_adr_dangerous_goods @ git+https://github.com/OCA/community-data-files@refs/pull/118/head#subdirectory=setup/l10n_eu_product_adr_dangerous_goods
