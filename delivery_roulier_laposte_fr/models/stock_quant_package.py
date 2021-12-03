@@ -95,7 +95,7 @@ class StockQuantPackage(models.Model):
 
     def _laposte_fr_carrier_error_handling(self, payload, exception):
         response = exception.response
-        request = response.request.body
+        request = response.request.body.decode()
 
         if self._uid > 2:
             # rm pwd from dict and xml
@@ -142,7 +142,7 @@ class StockQuantPackage(models.Model):
             "Incident\n-----------\n%s\n"
             "Données transmises:\n"
             "-----------------------------\n%s"
-        ) % ("\n".join(parts), request.decode("utf-8"))
+        ) % ("\n".join(parts), request)
         return ret_mess
 
     def _laposte_fr_get_tracking_link(self):
