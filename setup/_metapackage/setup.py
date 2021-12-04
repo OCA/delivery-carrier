@@ -13,6 +13,7 @@ setuptools.setup(
         'odoo14-addon-delivery_carrier_agency',
         'odoo14-addon-delivery_carrier_category',
         'odoo14-addon-delivery_carrier_city',
+        'odoo14-addon-delivery_carrier_default_tracking_url',
         'odoo14-addon-delivery_carrier_info',
         'odoo14-addon-delivery_carrier_location',
         'odoo14-addon-delivery_carrier_partner',
