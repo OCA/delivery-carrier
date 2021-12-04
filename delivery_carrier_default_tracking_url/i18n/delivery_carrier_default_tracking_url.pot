@@ -1,12 +1,12 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* delivery_carrier_default_tracking_url
+# 	* delivery_carrier_default_tracking_url
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0\n"
+"Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: <>\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -14,15 +14,31 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: delivery_carrier_default_tracking_url
-#: model:ir.model,name:delivery_carrier_default_tracking_url.model_delivery_carrier
-msgid "Carrier"
+#: model:ir.model.fields,field_description:delivery_carrier_default_tracking_url.field_delivery_carrier__default_tracking_url
+#: model:ir.model.fields,field_description:delivery_carrier_default_tracking_url.field_sale_order__default_tracking_url
+#: model:ir.model.fields,field_description:delivery_carrier_default_tracking_url.field_stock_picking__default_tracking_url
+msgid "Default Tracking Url"
 msgstr ""
 
 #. module: delivery_carrier_default_tracking_url
-#: model:ir.model.fields,field_description:delivery_carrier_default_tracking_url.field_delivery_carrier_default_tracking_url
-#: model:ir.model.fields,field_description:delivery_carrier_default_tracking_url.field_sale_order_default_tracking_url
-#: model:ir.model.fields,field_description:delivery_carrier_default_tracking_url.field_stock_picking_default_tracking_url
-msgid "Default tracking url"
+#: model:ir.model.fields,field_description:delivery_carrier_default_tracking_url.field_delivery_carrier__display_name
+#: model:ir.model.fields,field_description:delivery_carrier_default_tracking_url.field_sale_order__display_name
+#: model:ir.model.fields,field_description:delivery_carrier_default_tracking_url.field_stock_picking__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: delivery_carrier_default_tracking_url
+#: model:ir.model.fields,field_description:delivery_carrier_default_tracking_url.field_delivery_carrier__id
+#: model:ir.model.fields,field_description:delivery_carrier_default_tracking_url.field_sale_order__id
+#: model:ir.model.fields,field_description:delivery_carrier_default_tracking_url.field_stock_picking__id
+msgid "ID"
+msgstr ""
+
+#. module: delivery_carrier_default_tracking_url
+#: model:ir.model.fields,field_description:delivery_carrier_default_tracking_url.field_delivery_carrier____last_update
+#: model:ir.model.fields,field_description:delivery_carrier_default_tracking_url.field_sale_order____last_update
+#: model:ir.model.fields,field_description:delivery_carrier_default_tracking_url.field_stock_picking____last_update
+msgid "Last Modified on"
 msgstr ""
 
 #. module: delivery_carrier_default_tracking_url
@@ -31,9 +47,14 @@ msgid "Sales Order"
 msgstr ""
 
 #. module: delivery_carrier_default_tracking_url
-#: model:ir.model.fields,help:delivery_carrier_default_tracking_url.field_delivery_carrier_default_tracking_url
-#: model:ir.model.fields,help:delivery_carrier_default_tracking_url.field_sale_order_default_tracking_url
-#: model:ir.model.fields,help:delivery_carrier_default_tracking_url.field_stock_picking_default_tracking_url
+#: model:ir.model,name:delivery_carrier_default_tracking_url.model_delivery_carrier
+msgid "Shipping Methods"
+msgstr ""
+
+#. module: delivery_carrier_default_tracking_url
+#: model:ir.model.fields,help:delivery_carrier_default_tracking_url.field_delivery_carrier__default_tracking_url
+#: model:ir.model.fields,help:delivery_carrier_default_tracking_url.field_sale_order__default_tracking_url
+#: model:ir.model.fields,help:delivery_carrier_default_tracking_url.field_stock_picking__default_tracking_url
 msgid "This is the default tracking url for this carrier."
 msgstr ""
 
@@ -41,4 +62,3 @@ msgstr ""
 #: model:ir.model,name:delivery_carrier_default_tracking_url.model_stock_picking
 msgid "Transfer"
 msgstr ""
-
