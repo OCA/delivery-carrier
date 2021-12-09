@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+  <record model="ir.model.access" id="partner_delivery_zone_zip_access_read">
+    <field name="name">Partner Delivery Zone Zip Read</field>
+    <field name="model_id" ref="model_partner_delivery_zone_zip" />
+    <field name="group_id" ref="base.group_user" />
+    <field name="perm_read" eval="1" />
+    <field name="perm_create" eval="0" />
+    <field name="perm_write" eval="0" />
+    <field name="perm_unlink" eval="0" />
+  </record>
+  <record model="ir.model.access" id="partner_delivery_zone_zip_access_all">
+    <field name="name">Partner Delivery Zone Zip Manager</field>
+    <field name="model_id" ref="model_partner_delivery_zone_zip" />
+    <field name="group_id" ref="sales_team.group_sale_manager" />
+    <field name="perm_read" eval="1" />
+    <field name="perm_create" eval="1" />
+    <field name="perm_write" eval="1" />
+    <field name="perm_unlink" eval="1" />
+  </record>
+</odoo>
