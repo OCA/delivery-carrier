@@ -65,15 +65,12 @@ class StockPicking(models.Model):
                 continue
             this._set_a_default_package()
             status = this._ups_request_shipping()
-            total_charges = status["ShipmentResponse"]["ShipmentResults"][
-                "ShipmentCharges"
-            ]["TotalCharges"]
-            price = float(total_charges["MonetaryValue"])
-            if total_charges["CurrencyCode"] != this.company_id.currency_id.name:
+            currency_code, price = self._ups_get_total_price_currency(status)
+            if currency_code != this.company_id.currency_id.name:
                 price = this.company_id.currency_id._convert(
                     price,
                     self.env["res.currency"].search(
-                        [("name", "=", total_charges["CurrencyCode"])]
+                        [("name", "=", currency_code)]
                     ),
                     this.company_id,
                     fields.Date.today(),
@@ -96,6 +93,23 @@ class StockPicking(models.Model):
                 }
             )
         return result
+
+    def _ups_get_total_price_currency(self, status):
+        """ Retrieve total shipment price and its currency from ShipmentResponse.
+        In case of negotiated rate, get the contracted price, otherwise
+        get the published price.
+         """
+        total_charges = status["ShipmentResponse"]["ShipmentResults"][
+            "ShipmentCharges"
+        ]["TotalCharges"]
+        price = float(total_charges["MonetaryValue"])
+        currency_code = total_charges["CurrencyCode"]
+        negotiated_charges = status["ShipmentResponse"]["ShipmentResults"].get(
+            "NegotiatedRateCharges", {}).get("TotalCharge", {})
+        if negotiated_charges:
+            price = float(negotiated_charges["MonetaryValue"])
+            currency_code = negotiated_charges["CurrencyCode"]
+        return currency_code, price
 
     def _ups_get_parcel_labels(self, status):
         """ Retrieve labels data from ShipmentResponse """
