@@ -36,6 +36,7 @@ addon | version | maintainers | summary
 [delivery_price_method](delivery_price_method/) | 13.0.1.0.0 |  | Provides fields to be able to contemplate the tracking statesand also adds a global fields
 [delivery_price_rule_volumetric_weight](delivery_price_rule_volumetric_weight/) | 13.0.1.0.0 | [![victoralmau](https://github.com/victoralmau.png?size=30px)](https://github.com/victoralmau) | Delivery Price Rule Volumetric weight
 [delivery_purchase](delivery_purchase/) | 13.0.1.0.0 |  | Delivery costs in purchases
+[delivery_schenker](delivery_schenker/) | 13.0.1.0.0 |  | Delivery Carrier implementation for DB Schenker API
 [delivery_send_to_shipper_at_operation](delivery_send_to_shipper_at_operation/) | 13.0.1.0.0 |  | Send delivery notice to the shipper from any operation.
 [delivery_state](delivery_state/) | 13.0.2.0.0 |  | Provides fields to be able to contemplate the tracking statesand also adds a global fields
 [delivery_ups_oca](delivery_ups_oca/) | 13.0.1.0.3 |  | Integrate UPS webservice
