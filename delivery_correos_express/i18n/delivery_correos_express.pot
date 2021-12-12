@@ -4,17 +4,14 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 14.0+e\n"
+"Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-23 10:36+0000\n"
-"PO-Revision-Date: 2021-10-23 10:36+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
-
 
 #. module: delivery_correos_express
 #: model:ir.model.fields.selection,name:delivery_correos_express.selection__delivery_carrier__correos_express_product__53
@@ -159,6 +156,16 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_correos_express.field_delivery_carrier__id
 #: model:ir.model.fields,field_description:delivery_correos_express.field_stock_picking__id
 msgid "ID"
+msgstr ""
+
+#. module: delivery_correos_express
+#: model:ir.model.fields.selection,name:delivery_correos_express.selection__delivery_carrier__correos_express_product__90
+msgid "INTERNACIONAL ESTANDAR"
+msgstr ""
+
+#. module: delivery_correos_express
+#: model:ir.model.fields.selection,name:delivery_correos_express.selection__delivery_carrier__correos_express_product__91
+msgid "INTERNACIONAL EXPRES"
 msgstr ""
 
 #. module: delivery_correos_express
