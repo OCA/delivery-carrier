@@ -412,9 +412,16 @@ class StockPicking(models.Model):
             "Password": account.password,
             "transactionSrc": "Odoo (%s)" % self.env.cr.dbname,
         }
-        return getattr(requests, method)(
+        res = getattr(requests, method)(
             url, json=payload, headers=headers, params=query_parameters
         ).json()
+        # log request and response
+        ups_last_request = ("URL: {}").format(url)
+        if payload:
+            ups_last_request += ("\nData: {}").format(str(payload))
+        self.carrier_id.log_xml(ups_last_request, "ups_last_request")
+        self.carrier_id.log_xml(str(res), "ups_last_response")
+        return res
 
     def _ups_auth_account(self):
         """Find a carrier.account matching our carrier"""
