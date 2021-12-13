@@ -25,10 +25,10 @@ SCHENKER_API_SERVICE = {
 
 class SchenkerRequest:
     """Interface between Schenker SOAP API and Odoo recordset
-       Abstract Schenker API Operations to connect them with Odoo
+    Abstract Schenker API Operations to connect them with Odoo
 
-       Not all the features are implemented, but could be easily extended with
-       the provided API. We leave the operations empty for future.
+    Not all the features are implemented, but could be easily extended with
+    the provided API. We leave the operations empty for future.
     """
 
     def __init__(
@@ -127,10 +127,7 @@ class SchenkerRequest:
         response = self._process_reply(
             self.client.service[self._shipping_type_method(method)], vals
         )
-        return {
-            "booking_id": response.bookingId,
-            "barcode": response.barcodeDocument,
-        }
+        return {"booking_id": response.bookingId, "barcode": response.barcodeDocument}
 
     def _shipping_label(self, reference_list=None):
         """Get shipping label for the given ref
