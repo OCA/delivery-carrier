@@ -27,7 +27,7 @@ class DeliveryCarrier(models.Model):
         help="Choose Scnecker booking type. Only land is currently suported",
     )
     schenker_barcode_format = fields.Selection(
-        selection=[("A4", "A4"), ("A6", "A6")], default="A6", string="Barcode Format",
+        selection=[("A4", "A4"), ("A6", "A6")], default="A6", string="Barcode Format"
     )
     schenker_barcode_mail = fields.Char(
         string="Barcode Copy Email",
@@ -110,26 +110,26 @@ class DeliveryCarrier(models.Model):
         ],
     )
     schenker_indoor_delivery = fields.Boolean(
-        string="Indoor Delivery", help="Defines if indoor delivery is required",
+        string="Indoor Delivery", help="Defines if indoor delivery is required"
     )
     schenker_express = fields.Boolean(
-        string="Express", help="Defines if shipment is express",
+        string="Express", help="Defines if shipment is express"
     )
     schenker_food_related = fields.Boolean(
-        string="Food Related", help="Defines if shipment is food related",
+        string="Food Related", help="Defines if shipment is food related"
     )
     schenker_heated_transport = fields.Boolean(
         string="Heated Transport",
         help="Defines if shipment is required heated transport",
     )
     schenker_home_delivery = fields.Boolean(
-        string="Home Delivery", help="Defines if shipment is required home delivery",
+        string="Home Delivery", help="Defines if shipment is required home delivery"
     )
     schenker_own_pickup = fields.Boolean(
-        string="Own Pickup", help="Defines if shipment is required own pickup",
+        string="Own Pickup", help="Defines if shipment is required own pickup"
     )
     schenker_pharmaceuticals = fields.Boolean(
-        string="Pharmaceuticals", help="Defines if shipment is pharmaceutical",
+        string="Pharmaceuticals", help="Defines if shipment is pharmaceutical"
     )
     schenker_measure_unit = fields.Selection(
         string="Measure Unit",
@@ -189,9 +189,7 @@ class DeliveryCarrier(models.Model):
     def _prepare_schenker_barcode(self):
         """Always request the barcode label when generating the booking. We can choose
         between two formats: A6 and A4, where an starting position can be set"""
-        vals = {
-            "barcodeRequest": self.schenker_barcode_format,
-        }
+        vals = {"barcodeRequest": self.schenker_barcode_format}
         if self.schenker_barcode_mail:
             vals["barcodeRequestEmail"] = self.schenker_barcode_mail
         if self.schenker_barcode_format == "A6":
@@ -292,10 +290,7 @@ class DeliveryCarrier(models.Model):
         date_to = fields.Datetime.context_timestamp(
             self, picking.date_done.replace(hour=23, minute=59, second=59)
         ).isoformat()
-        return {
-            "pickUpDateFrom": date_from,
-            "pickUpDateTo": date_to,
-        }
+        return {"pickUpDateFrom": date_from, "pickUpDateTo": date_to}
 
     def _schenker_shipping_information_package(self, picking, package):
         weight = package.shipping_weight or package.weight
@@ -364,9 +359,7 @@ class DeliveryCarrier(models.Model):
         :returns dict values for the proper unit key and value
         """
         if self.schenker_measure_unit == "VOLUME":
-            return {
-                "measureUnitVolume": round(picking.volume, 2) or 0.01,
-            }
+            return {"measureUnitVolume": round(picking.volume, 2) or 0.01}
         return {}
 
     def _prepare_schenker_shipping(self, picking):
