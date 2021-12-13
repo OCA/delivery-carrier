@@ -11,7 +11,10 @@ from .schenker_request import SchenkerRequest
 class DeliveryCarrier(models.Model):
     _inherit = "delivery.carrier"
 
-    delivery_type = fields.Selection(selection_add=[("schenker", "DB Schenker")])
+    delivery_type = fields.Selection(
+        selection_add=[("schenker", "DB Schenker")],
+        ondelete={"schenker": "set default"},
+    )
     schenker_access_key = fields.Char(string="Access Key", help="Schenker Access Key")
     schenker_group_id = fields.Char(string="Group")
     schenker_user = fields.Char(string="User")
