@@ -28,6 +28,7 @@ setuptools.setup(
         'odoo13-addon-delivery_schenker',
         'odoo13-addon-delivery_send_to_shipper_at_operation',
         'odoo13-addon-delivery_state',
+        'odoo13-addon-delivery_tnt_oca',
         'odoo13-addon-delivery_ups_oca',
         'odoo13-addon-partner_delivery_schedule',
         'odoo13-addon-partner_delivery_zone',
