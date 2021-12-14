@@ -1,6 +1,6 @@
 # Copyright 2021 Tecnativa - David Vidal
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-import binascii
+
 import logging
 from xml.etree import ElementTree as ET
 
@@ -135,18 +135,21 @@ class SchenkerRequest:
         )
         return {"booking_id": response.bookingId, "barcode": response.barcodeDocument}
 
-    def _shipping_label(self, reference_list=None):
+    def _shipping_label(self, reference_list=None, label_format="A6"):
         """Get shipping label for the given ref
         :param list reference -- shipping reference list
         :returns: base64 with pdf labels
         """
         reference_list = reference_list or []
-        vals = self._shipping_api_credentials()
-        vals.update({"barcodeRequest": [{"booking_id": ref} for ref in reference_list]})
+        vals = dict(
+            **self._shipping_api_credentials(),
+            **{"barcodeRequest": {"format": label_format}}
+        )
+        vals["barcodeRequest"].update({"bookingId": ref for ref in reference_list})
         label = self._process_reply(
-            self.client.service.getBookingRequestLand, vals
+            self.client.service.getBookingBarcodeRequest, vals
         ).document
-        return label and binascii.a2b_base64(label)
+        return label
 
     def _cancel_shipment(self, reference=False):
         """Cancel de expedition for the given ref
