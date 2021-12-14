@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<wsdl:definitions
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+  xmlns:tns="http://www.schenker.com/CustomerServices/eBusiness/ShipmentService/v2"
+  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+  name="PublicShipmentService"
+  targetNamespace="http://www.schenker.com/CustomerServices/eBusiness/ShipmentService/v2"
+>
+  <wsdl:types>
+    <xsd:schema
+      xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+      xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+      xmlns:tns="http://www.schenker.com/CustomerServices/eBusiness/ShipmentService/v2"
+      xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+      xmlns:Q1="http://www.schenker.com/SGI/v4_0"
+      targetNamespace="http://www.schenker.com/CustomerServices/eBusiness/ShipmentService/v2"
+    >
+      <xsd:import
+        namespace="http://www.schenker.com/SGI/v4_0"
+        schemaLocation="https://eschenker.dbschenker.com/webservice/trackingWebServiceV2?xsd=XSDs/ShipmentDetailsPublicView_v1.0.xsd"
+      />
+      <xsd:import
+        namespace="http://www.schenker.com/SGI/v4_0"
+        schemaLocation="https://eschenker.dbschenker.com/webservice/trackingWebServiceV2?xsd=XSDs/ShipmentDetailsPublicRequest_v1.1.xsd"
+      />
+      <xsd:complexType name="ShipmentExceptionType">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="BDID" type="xsd:string" />
+          <xsd:element name="faultCode" type="xsd:QName" />
+          <xsd:element name="faultString" type="xsd:string" />
+          <xsd:element minOccurs="0" name="details" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="getPublicServiceShipmentDetails">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="AccessKey" type="xsd:string" />
+            <xsd:element name="in" type="Q1:ShipmentDetailsRequestType" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getPublicShipmentDetailsResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="out" type="Q1:ShipmentDetailsPublicViewType" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element
+        name="getPublicShipmentDetailsFault"
+        type="tns:ShipmentExceptionType"
+      >
+
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="getPublicShipmentDetailsResponse">
+    <wsdl:part element="tns:getPublicShipmentDetailsResponse" name="parameters">
+
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getPublicShipmentDetailsRequest">
+    <wsdl:part element="tns:getPublicServiceShipmentDetails" name="parameters">
+
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getPublicShipmentDetailsFault">
+    <wsdl:part element="tns:getPublicShipmentDetailsFault" name="parameters">
+
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="PublicShipmentService">
+    <wsdl:operation name="getPublicShipmentDetails">
+      <wsdl:input message="tns:getPublicShipmentDetailsRequest">
+
+      </wsdl:input>
+      <wsdl:output message="tns:getPublicShipmentDetailsResponse">
+
+      </wsdl:output>
+      <wsdl:fault message="tns:getPublicShipmentDetailsFault" name="fault">
+
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="PublicShipmentServiceSOAP" type="tns:PublicShipmentService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getPublicShipmentDetails">
+      <soap:operation
+        soapAction="http://www.schenker.com/CustomerServices/eBusiness/ShipmentService/v2/getPublicShipmentDetails"
+      />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="fault">
+        <soap:fault name="fault" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="PublicShipmentService">
+    <wsdl:port binding="tns:PublicShipmentServiceSOAP" name="PublicShipmentServiceSOAP">
+      <soap:address
+        location="https://eschenker.dbschenker.com/webservice/trackingWebServiceV2"
+      />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
