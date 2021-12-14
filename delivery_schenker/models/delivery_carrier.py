@@ -310,7 +310,7 @@ class DeliveryCarrier(models.Model):
             "cargoDesc": picking.name + " / " + package.name,
             "grossWeight": round(weight, 2),
             # Default to 1 if no volume informed
-            "volume": volume,
+            "volume": volume or 0.01,
             "packageType": (
                 package.packaging_id.shipper_package_code
                 or self.schenker_default_packaging_id.shipper_package_code
