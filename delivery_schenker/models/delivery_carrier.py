@@ -40,7 +40,7 @@ class DeliveryCarrier(models.Model):
         ],
         default="land",
         string="Booking Type",
-        help="Choose Scnecker booking type. Only land is currently suported",
+        help="Choose Schenker booking type. Only land is currently supported",
     )
     schenker_barcode_format = fields.Selection(
         selection=[("A4", "A4"), ("A6", "A6")], default="A6", string="Barcode Format"
@@ -68,7 +68,7 @@ class DeliveryCarrier(models.Model):
         string="Service Type",
         help="Defines service type: D2D, D2P, P2D, P2P, D2A, A2D, A2A. Depending on "
         "the Transport mode the service will be validated. For instance if the "
-        "transport mode is AIR, the service type P2P (PortToPort)",
+        "transport mode is AIR, the service type A2A (AirportToAirport)",
         selection=[
             ("D2D", "Door-to-door"),
             ("D2P", "Door-to-port"),
