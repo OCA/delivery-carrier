@@ -7,6 +7,19 @@ from odoo.exceptions import UserError
 
 from .schenker_request import SchenkerRequest
 
+SCHENKER_STATUS_CODES = {
+    "ENT": ("Booked", "shipping_recorded_in_carrier"),
+    "COL": ("Collected", "shipping_recorded_in_carrier"),
+    "DET": ("Delivered to terminal by shipper", "in_transit"),
+    "ENM": ("Arrived", "in_transit"),
+    "MAN": ("Departed", "in_transit"),
+    "DIS": ("To Consignee's Disposal", "warehouse_delivered"),
+    "DOT": ("Out for Delivery", "in_transit"),
+    "PUP": ("Picked up by consignee", "customer_delivered"),
+    "DLV": ("Delivered", "customer_delivered"),
+    "NDL": ("Not delivered", "canceled_shipment"),
+}
+
 
 class DeliveryCarrier(models.Model):
     _inherit = "delivery.carrier"
@@ -496,9 +509,52 @@ class DeliveryCarrier(models.Model):
             % picking.carrier_tracking_ref
         )
 
+    def _prepare_schenker_tracking(self, picking):
+        self.ensure_one()
+        return {
+            "reference": picking.carrier_tracking_ref,
+            "reference_type": "cu",
+            "booking_type": self.schenker_booking_type,
+        }
+
     def schenker_tracking_state_update(self, picking):
         """Tracking state update"""
-        # TODO: To be implemented
+        self.ensure_one()
+        if not picking.carrier_tracking_ref:
+            return
+        schenker_request = SchenkerRequest(
+            **self._get_schenker_credentials(), service="tracking"
+        )
+        response = schenker_request._get_tracking_states(
+            **self._prepare_schenker_tracking(picking)
+        )
+        if response.get("shipment"):
+            shipment = response.get("shipment")[0]
+            info = shipment.ShipmentInfo.ShipmentBasicInfo
+            status_event_list = info.StatusEventList.StatusEvent
+            last_event = SCHENKER_STATUS_CODES.get(info.LastEvent, ("",))
+            picking.write(
+                {
+                    "tracking_state_history": (
+                        "\n".join(
+                            [
+                                "{} {} {} - [{}] {}".format(
+                                    fields.Datetime.from_string(t.Date).strftime(
+                                        "%d/%m/%Y"
+                                    ),
+                                    t.Time.strftime("%H:%M:%S"),
+                                    t.OccurredAt.LocationName,
+                                    t.Status,
+                                    t.StatusDescription._value_1,
+                                )
+                                for t in status_event_list
+                            ]
+                        )
+                    ),
+                    "tracking_state": "[{}] {}".format(info.LastEvent, last_event[0]),
+                    "delivery_state": last_event[1],
+                }
+            )
         return
 
     def schenker_rate_shipment(self, order):
