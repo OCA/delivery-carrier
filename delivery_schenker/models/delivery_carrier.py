@@ -484,7 +484,7 @@ class DeliveryCarrier(models.Model):
                 self._schenker_log_request(schenker_request, picking)
         return True
 
-    def schenker_get_label(self, reference, reference_type):
+    def schenker_get_label(self, reference):
         """Generate label for picking
         :param picking - stock.picking record
         :returns pdf file
@@ -493,7 +493,13 @@ class DeliveryCarrier(models.Model):
         if not reference:
             return False
         schenker_request = SchenkerRequest(**self._get_schenker_credentials())
-        label = schenker_request._shipping_label(reference, reference_type)
+        format_vals = self.schenker_barcode_format
+        if format_vals == "A4":
+            format_vals = {
+                "start_pos": self.schenker_barcode_a4_start_pos,
+                "_value_1": self.schenker_barcode_format,
+            }
+        label = schenker_request._shipping_label([reference], format_vals)
         if not label:
             return False
         return label
