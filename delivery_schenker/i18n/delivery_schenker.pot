@@ -495,11 +495,6 @@ msgid "Schenker Configuration"
 msgstr ""
 
 #. module: delivery_schenker
-#: model_terms:ir.ui.view,arch_db:delivery_schenker.view_picking_withcarrier_out_form
-msgid "Schenker Label"
-msgstr ""
-
-#. module: delivery_schenker
 #: code:addons/delivery_schenker/models/delivery_carrier.py:0
 #, python-format
 msgid "Schenker Shipping barcode document"
