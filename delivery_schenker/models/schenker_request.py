@@ -1,6 +1,6 @@
 # Copyright 2021 Tecnativa - David Vidal
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-import binascii
+
 import logging
 from xml.etree import ElementTree as ET
 
@@ -19,7 +19,7 @@ SCHENKER_API_URL = {
 }
 SCHENKER_API_SERVICE = {
     "booking": "/webservice/bookingWebServiceV1_1?wsdl",
-    "tracking": "/webservice/bookingWebServiceV1_1?wsdl",
+    "tracking": "/webservice/trackingWebServiceV2?wsdl",
 }
 
 
@@ -47,15 +47,21 @@ class SchenkerRequest:
             plugins=[self.history],
         )
 
-    def _process_reply(self, service, vals=None):
+    def _process_reply(self, service, vals=None, send_as_kw=False):
         """Schenker API returns error petitions as server exceptions wich makes zeep to
         raise a Fault exception as well. To catch the error info we need to make a
         raw_response request and the extract the error codes from the response."""
         try:
-            response = service(vals)
+            if not send_as_kw:
+                response = service(vals)
+            else:
+                response = service(**vals)
         except Fault as e:
             with self.client.settings(raw_response=True):
-                response = service(vals)
+                if not send_as_kw:
+                    response = service(vals)
+                else:
+                    response = service(**vals)
                 try:
                     root = ET.fromstring(response.text)
                     error_text = next(root.iter("faultstring")).text
@@ -132,18 +138,21 @@ class SchenkerRequest:
             "barcode": response.barcodeDocument,
         }
 
-    def _shipping_label(self, reference_list=None):
+    def _shipping_label(self, reference_list=None, label_format="A6"):
         """Get shipping label for the given ref
         :param list reference -- shipping reference list
         :returns: base64 with pdf labels
         """
         reference_list = reference_list or []
-        vals = self._shipping_api_credentials()
-        vals.update({"barcodeRequest": [{"booking_id": ref} for ref in reference_list]})
+        vals = dict(
+            **self._shipping_api_credentials(),
+            **{"barcodeRequest": {"format": label_format}}
+        )
+        vals["barcodeRequest"].update({"bookingId": ref for ref in reference_list})
         label = self._process_reply(
-            self.client.service.getBookingRequestLand, vals
+            self.client.service.getBookingBarcodeRequest, vals
         ).document
-        return label and binascii.a2b_base64(label)
+        return label
 
     def _cancel_shipment(self, reference=False):
         """Cancel de expedition for the given ref
@@ -164,27 +173,22 @@ class SchenkerRequest:
 
     def _tracking_api_credentials(self):
         """Each API has a different credentials SOAP declaration"""
-        credentials = {"accessKey": self.access_key, "in": {}}
-        if self.user:
-            credentials["in"].setdefault("applicationArea", {})
-            credentials["in"]["applicationArea"]["userId"] = self.user
-        if self.group_id:
-            credentials["in"].setdefault("applicationArea", {})
-            credentials["in"]["applicationArea"]["groupId"] = self.group_id
-        return credentials
+        return {"AccessKey": self.access_key, "in": {}}
 
-    def _get_shipment_details(self, reference=False, reference_type="BID"):
-        vals = self._shipping_api_credentials()
-        vals["in"]["referenceNumber"] = reference
-        response = self._process_reply(
-            self.client.service.getPublicServiceShipmentDetails, vals
-        )
-        return response
-
-    def _get_tracking_states(self, reference=False):
-        # TODO: Test Shipping API isn't connected to Test Booking API
+    def _get_tracking_states(
+        self, reference=False, reference_type="cu", booking_type="land"
+    ):
         if not reference:
             return {}
-        # response = self._get_shipment_details(reference)
-        # It should come from ShipmentInfo.ShipmentBasicInfo.StatusEventList
-        return {}
+        vals = self._tracking_api_credentials()
+        vals["in"].update(
+            {
+                "referenceNumber": reference,
+                "referenceType": reference_type,
+                "transportNature": "exp" if booking_type == "land" else "int",
+            }
+        )
+        response = self._process_reply(
+            self.client.service.getPublicShipmentDetails, vals, send_as_kw=True
+        )
+        return {"shipment": response.Shipment}
