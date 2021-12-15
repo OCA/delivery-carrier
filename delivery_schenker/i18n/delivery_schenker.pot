@@ -4,10 +4,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 14.0+e\n"
+"Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-14 15:46+0000\n"
-"PO-Revision-Date: 2021-12-14 15:46+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -297,13 +295,6 @@ msgid ""
 msgstr ""
 
 #. module: delivery_schenker
-#: model:ir.model.fields,field_description:delivery_schenker.field_delivery_carrier__display_name
-#: model:ir.model.fields,field_description:delivery_schenker.field_product_packaging__display_name
-#: model:ir.model.fields,field_description:delivery_schenker.field_stock_picking__display_name
-msgid "Display Name"
-msgstr ""
-
-#. module: delivery_schenker
 #: model:ir.model.fields.selection,name:delivery_schenker.selection__delivery_carrier__schenker_service_type__d2a
 msgid "Door-to-airport"
 msgstr ""
@@ -364,13 +355,6 @@ msgid "Home Delivery"
 msgstr ""
 
 #. module: delivery_schenker
-#: model:ir.model.fields,field_description:delivery_schenker.field_delivery_carrier__id
-#: model:ir.model.fields,field_description:delivery_schenker.field_product_packaging__id
-#: model:ir.model.fields,field_description:delivery_schenker.field_stock_picking__id
-msgid "ID"
-msgstr ""
-
-#. module: delivery_schenker
 #: model:ir.model.fields,help:delivery_schenker.field_delivery_carrier__schenker_default_packaging_id
 msgid ""
 "If not delivery package or the package doesn't have defined the packagingit "
@@ -407,13 +391,6 @@ msgstr ""
 msgid ""
 "Land shipping product options. Depending on your customer account, some "
 "services could not be available"
-msgstr ""
-
-#. module: delivery_schenker
-#: model:ir.model.fields,field_description:delivery_schenker.field_delivery_carrier____last_update
-#: model:ir.model.fields,field_description:delivery_schenker.field_product_packaging____last_update
-#: model:ir.model.fields,field_description:delivery_schenker.field_stock_picking____last_update
-msgid "Last Modified on"
 msgstr ""
 
 #. module: delivery_schenker
@@ -597,85 +574,4 @@ msgstr ""
 #. module: delivery_schenker
 #: model:ir.model.fields.selection,name:delivery_schenker.selection__delivery_carrier__schenker_service_land__auc8
 msgid "austroexpress PUNKT 8"
-msgstr ""
-
-#. module: delivery_schenker
-#: model:product.packaging,length_uom_name:delivery_schenker.schenker_packaging_01
-#: model:product.packaging,length_uom_name:delivery_schenker.schenker_packaging_02
-#: model:product.packaging,length_uom_name:delivery_schenker.schenker_packaging_03
-#: model:product.packaging,length_uom_name:delivery_schenker.schenker_packaging_04
-#: model:product.packaging,length_uom_name:delivery_schenker.schenker_packaging_05
-#: model:product.packaging,length_uom_name:delivery_schenker.schenker_packaging_06
-#: model:product.packaging,length_uom_name:delivery_schenker.schenker_packaging_07
-#: model:product.packaging,length_uom_name:delivery_schenker.schenker_packaging_08
-#: model:product.packaging,length_uom_name:delivery_schenker.schenker_packaging_09
-#: model:product.packaging,length_uom_name:delivery_schenker.schenker_packaging_10
-#: model:product.packaging,length_uom_name:delivery_schenker.schenker_packaging_11
-#: model:product.packaging,length_uom_name:delivery_schenker.schenker_packaging_12
-#: model:product.packaging,length_uom_name:delivery_schenker.schenker_packaging_13
-#: model:product.packaging,length_uom_name:delivery_schenker.schenker_packaging_14
-#: model:product.packaging,length_uom_name:delivery_schenker.schenker_packaging_15
-#: model:product.packaging,length_uom_name:delivery_schenker.schenker_packaging_16
-#: model:product.packaging,length_uom_name:delivery_schenker.schenker_packaging_17
-#: model:product.packaging,length_uom_name:delivery_schenker.schenker_packaging_18
-#: model:product.packaging,length_uom_name:delivery_schenker.schenker_packaging_19
-#: model:product.packaging,length_uom_name:delivery_schenker.schenker_packaging_20
-#: model:product.packaging,length_uom_name:delivery_schenker.schenker_packaging_21
-#: model:product.packaging,length_uom_name:delivery_schenker.schenker_packaging_22
-#: model:product.packaging,length_uom_name:delivery_schenker.schenker_packaging_23
-msgid "cm"
-msgstr ""
-
-#. module: delivery_schenker
-#: model:product.packaging,weight_uom_name:delivery_schenker.schenker_packaging_01
-#: model:product.packaging,weight_uom_name:delivery_schenker.schenker_packaging_02
-#: model:product.packaging,weight_uom_name:delivery_schenker.schenker_packaging_03
-#: model:product.packaging,weight_uom_name:delivery_schenker.schenker_packaging_04
-#: model:product.packaging,weight_uom_name:delivery_schenker.schenker_packaging_05
-#: model:product.packaging,weight_uom_name:delivery_schenker.schenker_packaging_06
-#: model:product.packaging,weight_uom_name:delivery_schenker.schenker_packaging_07
-#: model:product.packaging,weight_uom_name:delivery_schenker.schenker_packaging_08
-#: model:product.packaging,weight_uom_name:delivery_schenker.schenker_packaging_09
-#: model:product.packaging,weight_uom_name:delivery_schenker.schenker_packaging_10
-#: model:product.packaging,weight_uom_name:delivery_schenker.schenker_packaging_11
-#: model:product.packaging,weight_uom_name:delivery_schenker.schenker_packaging_12
-#: model:product.packaging,weight_uom_name:delivery_schenker.schenker_packaging_13
-#: model:product.packaging,weight_uom_name:delivery_schenker.schenker_packaging_14
-#: model:product.packaging,weight_uom_name:delivery_schenker.schenker_packaging_15
-#: model:product.packaging,weight_uom_name:delivery_schenker.schenker_packaging_16
-#: model:product.packaging,weight_uom_name:delivery_schenker.schenker_packaging_17
-#: model:product.packaging,weight_uom_name:delivery_schenker.schenker_packaging_18
-#: model:product.packaging,weight_uom_name:delivery_schenker.schenker_packaging_19
-#: model:product.packaging,weight_uom_name:delivery_schenker.schenker_packaging_20
-#: model:product.packaging,weight_uom_name:delivery_schenker.schenker_packaging_21
-#: model:product.packaging,weight_uom_name:delivery_schenker.schenker_packaging_22
-#: model:product.packaging,weight_uom_name:delivery_schenker.schenker_packaging_23
-msgid "kg"
-msgstr ""
-
-#. module: delivery_schenker
-#: model:product.packaging,volume_uom_name:delivery_schenker.schenker_packaging_01
-#: model:product.packaging,volume_uom_name:delivery_schenker.schenker_packaging_02
-#: model:product.packaging,volume_uom_name:delivery_schenker.schenker_packaging_03
-#: model:product.packaging,volume_uom_name:delivery_schenker.schenker_packaging_04
-#: model:product.packaging,volume_uom_name:delivery_schenker.schenker_packaging_05
-#: model:product.packaging,volume_uom_name:delivery_schenker.schenker_packaging_06
-#: model:product.packaging,volume_uom_name:delivery_schenker.schenker_packaging_07
-#: model:product.packaging,volume_uom_name:delivery_schenker.schenker_packaging_08
-#: model:product.packaging,volume_uom_name:delivery_schenker.schenker_packaging_09
-#: model:product.packaging,volume_uom_name:delivery_schenker.schenker_packaging_10
-#: model:product.packaging,volume_uom_name:delivery_schenker.schenker_packaging_11
-#: model:product.packaging,volume_uom_name:delivery_schenker.schenker_packaging_12
-#: model:product.packaging,volume_uom_name:delivery_schenker.schenker_packaging_13
-#: model:product.packaging,volume_uom_name:delivery_schenker.schenker_packaging_14
-#: model:product.packaging,volume_uom_name:delivery_schenker.schenker_packaging_15
-#: model:product.packaging,volume_uom_name:delivery_schenker.schenker_packaging_16
-#: model:product.packaging,volume_uom_name:delivery_schenker.schenker_packaging_17
-#: model:product.packaging,volume_uom_name:delivery_schenker.schenker_packaging_18
-#: model:product.packaging,volume_uom_name:delivery_schenker.schenker_packaging_19
-#: model:product.packaging,volume_uom_name:delivery_schenker.schenker_packaging_20
-#: model:product.packaging,volume_uom_name:delivery_schenker.schenker_packaging_21
-#: model:product.packaging,volume_uom_name:delivery_schenker.schenker_packaging_22
-#: model:product.packaging,volume_uom_name:delivery_schenker.schenker_packaging_23
-msgid "m³"
 msgstr ""
