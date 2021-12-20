@@ -27,6 +27,7 @@ addon | version | maintainers | summary
 [delivery_carrier_default_tracking_url](delivery_carrier_default_tracking_url/) | 10.0.1.1.0 | [![rousseldenis](https://github.com/rousseldenis.png?size=30px)](https://github.com/rousseldenis) | Adds the default tracking url on delivery carrier
 [delivery_carrier_deposit](delivery_carrier_deposit/) | 10.0.0.2.0 |  | Create deposit slips
 [delivery_carrier_file_tnt](delivery_carrier_file_tnt/) | 10.0.1.0.1 |  | Sub-module for Base Delivery Carrier Files. Definition of the delivery carrier file for "TNT Express Shipper".
+[delivery_carrier_label_default](delivery_carrier_label_default/) | 10.0.1.0.0 |  | Default label for carrier labels
 [delivery_carrier_label_postlogistics](delivery_carrier_label_postlogistics/) | 10.0.1.2.0 |  | Print postlogistics shipping labels
 [delivery_carrier_partner](delivery_carrier_partner/) | 10.0.1.0.0 |  | Add a partner in the delivery carrier
 [delivery_dropoff_site](delivery_dropoff_site/) | 10.0.1.1.0 |  | Send goods to sites in which customers come pick up package
