@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 {
     "name": "Default label for carrier labels",
-    "version": "10.0.1.0.0",
+    "version": "10.0.1.0.1",
     "author": "Camptocamp,Sunflower IT,Odoo Community Association (OCA)",
     "category": "Warehouse",
     "depends": [
