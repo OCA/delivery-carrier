@@ -17,6 +17,7 @@ setuptools.setup(
         'odoo10-addon-delivery_carrier_default_tracking_url',
         'odoo10-addon-delivery_carrier_deposit',
         'odoo10-addon-delivery_carrier_file_tnt',
+        'odoo10-addon-delivery_carrier_label_default',
         'odoo10-addon-delivery_carrier_label_postlogistics',
         'odoo10-addon-delivery_carrier_partner',
         'odoo10-addon-delivery_dropoff_site',
