@@ -1,7 +1,7 @@
 # Copyright 2013-2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
-from io import BytesIO
 import logging
+from io import BytesIO
 
 _logger = logging.getLogger(__name__)
 
