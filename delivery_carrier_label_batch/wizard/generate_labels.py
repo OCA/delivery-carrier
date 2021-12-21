@@ -22,7 +22,6 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
     _name = "delivery.carrier.label.generate"
     _description = "Generate labels from batch pickings"
 
-    @api.multi
     def _get_batch_ids(self):
         res = False
         if self.env.context.get(
@@ -65,7 +64,7 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
     def _do_in_new_env(self):
         if tools.config["test_enable"]:
             yield self.env
-            raise StopIteration
+            return
 
         with odoo.api.Environment.manage():
             with odoo.registry(self.env.cr.dbname).cursor() as new_cr:
@@ -82,7 +81,7 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
         with self._do_in_new_env() as new_env:
             for pack, picking, _label in group:
                 try:
-                    picking.with_env(new_env).action_generate_carrier_label()
+                    picking.with_env(new_env).send_to_shipper()
                 except Exception as e:
                     # add information on picking and pack in the exception
                     picking_name = _("Picking: %s") % picking.name
@@ -122,7 +121,6 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
             return 1
         return int(num_workers)
 
-    @api.multi
     def _get_all_files(self, batch):
         self.ensure_one()
 
@@ -197,7 +195,6 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
                 labels.append((label.file_type, label.attachment_id.datas, label_name))
             return labels
 
-    @api.multi
     def _check_pickings(self):
         """Check pickings have at least one pack"""
         missing_packages = self.env["stock.picking"]
@@ -213,7 +210,6 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
             )
             raise exceptions.UserError(msg)
 
-    @api.multi
     def action_generate_labels(self):
         """
         Call the creation of the delivery carrier label
@@ -260,7 +256,6 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
                             "res_id": batch.id,
                             "res_model": "stock.picking.batch",
                             "datas": label["data"],
-                            "datas_fname": filename,
                         }
                         self.env["ir.attachment"].create(data)
                 else:
@@ -281,7 +276,6 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
                         "res_id": batch.id,
                         "res_model": "stock.picking.batch",
                         "datas": codecs.encode(filedata, "base64"),
-                        "datas_fname": filename,
                     }
                     self.env["ir.attachment"].create(data)
 

@@ -18,7 +18,7 @@
         <separator string="Options" />
         <field name="option_ids" nolabel="1" />
         <label
-                        for=""
+                        for="action_set_options"
                         string="Warning, setting options will erase the existing ones in delivery orders"
                     />
         <button
