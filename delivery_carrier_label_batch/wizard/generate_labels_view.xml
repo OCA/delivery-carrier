@@ -8,7 +8,7 @@
     <form string="Generate Carriers Labels">
       <group>
         <label
-                        for=""
+                        for="action_generate_labels"
                         string="This wizard creates an attachement on each selected batch containing picking labels"
                     />
       </group>
@@ -33,7 +33,6 @@
 <record id="action_delivery_carrier_label_generate" model="ir.actions.act_window">
   <field name="name">Generate Carrier Labels</field>
   <field name="res_model">delivery.carrier.label.generate</field>
-  <field name="view_type">form</field>
   <field name="view_mode">form</field>
   <field name="view_id" ref="view_delivery_carrier_label_generate" />
   <field name="groups_id" eval="[(6, 0, [ref('stock.group_stock_manager')])]" />

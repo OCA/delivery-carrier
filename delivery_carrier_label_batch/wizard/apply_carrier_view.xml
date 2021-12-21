@@ -7,7 +7,7 @@
   <field name="arch" type="xml">
     <form string="Apply a carrier and its options">
       <label
-                    for=""
+                    for="apply"
                     string="Warning, setting options will erase the existing ones in delivery orders"
                 />
       <group>
@@ -24,7 +24,6 @@
 <record id="action_picking_batch_apply_carrier" model="ir.actions.act_window">
   <field name="name">Apply a carrier and its options</field>
   <field name="res_model">picking.batch.apply.carrier</field>
-  <field name="view_type">form</field>
   <field name="view_mode">form</field>
   <field name="view_id" ref="view_picking_batch_apply_carrier" />
   <field
