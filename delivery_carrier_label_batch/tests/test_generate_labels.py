@@ -86,13 +86,14 @@ class TestGenerateLabels(common.SavepointCase):
             }
         )
 
-        cls.batch.confirm_picking()
+        cls.batch.action_confirm()
+        cls.batch.action_assign()
 
         move1.move_line_ids[0].qty_done = 2
         move2.move_line_ids[0].qty_done = 2
 
-        picking_out_1.put_in_pack()
-        picking_out_2.put_in_pack()
+        picking_out_1.action_put_in_pack()
+        picking_out_2.action_put_in_pack()
 
         label = ""
         dummy_pdf_path = get_module_resource(
