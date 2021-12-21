@@ -1,6 +1,6 @@
 # Copyright 2016-2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
-from odoo import _, api, exceptions, fields, models
+from odoo import _, exceptions, fields, models
 
 
 class PickingBatchApplyCarrier(models.TransientModel):
@@ -9,7 +9,6 @@ class PickingBatchApplyCarrier(models.TransientModel):
 
     carrier_id = fields.Many2one("delivery.carrier", string="Carrier", required=True)
 
-    @api.multi
     def _check_domain(self, batch_ids):
         """A domain excluding the batches on which we don't allow
         to change the carrier.
@@ -18,7 +17,6 @@ class PickingBatchApplyCarrier(models.TransientModel):
         """
         return [("state", "!=", "done"), ("id", "in", batch_ids)]
 
-    @api.multi
     def apply(self):
         self.ensure_one()
         batch_ids = self.env.context.get("active_ids")
