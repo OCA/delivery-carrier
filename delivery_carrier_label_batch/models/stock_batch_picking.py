@@ -18,7 +18,6 @@ class StockBatchPicking(models.Model):
     )
     option_ids = fields.Many2many("delivery.carrier.option", string="Options")
 
-    @api.multi
     def action_set_options(self):
         """Apply options to picking of the batch
 
@@ -32,7 +31,6 @@ class StockBatchPicking(models.Model):
             }
             rec.picking_ids.write(options_datas)
 
-    @api.multi
     def _get_options_to_add(self, carrier=None):
         carrier = carrier or self.carrier_id
         options = carrier.available_option_ids
@@ -79,7 +77,6 @@ class StockBatchPicking(models.Model):
                 # self.option_ids = self._get_options_to_add()
         return res
 
-    @api.multi
     def _values_with_carrier_options(self, values):
         values = values.copy()
         carrier_id = values.get("carrier_id")
@@ -91,7 +88,6 @@ class StockBatchPicking(models.Model):
                 values.update(option_ids=[(6, 0, options.ids)])
         return values
 
-    @api.multi
     def write(self, values):
         """Set the default options when the delivery method is changed.
 
