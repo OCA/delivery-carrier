@@ -1,3 +1,4 @@
 odoo-test-helper >= 1.1.0
 vcrpy
 vcrpy-unittest
+odoo14-addon-stock_picking_batch_extended @git+https://github.com/OCA/stock-logistics-workflow@refs/pull/943/head#subdirectory=setup/stock_picking_batch_extended
