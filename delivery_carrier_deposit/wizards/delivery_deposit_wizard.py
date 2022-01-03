@@ -25,7 +25,7 @@ class DeliveryDepositWizard(models.TransientModel):
         self.ensure_one()
         return {
             "delivery_type": self.delivery_type,
-            "company_id": self.env.user.company_id.id,
+            "company_id": self.env.company.id
         }
 
     def _fetch_pickings(self):
