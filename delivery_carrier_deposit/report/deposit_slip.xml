@@ -4,7 +4,7 @@
 <template id="report_generic_deposit_slip">
 
 <t t-call="web.html_container">
-<t t-call="report.internal_layout">
+<t t-call="web.internal_layout">
 
 
 <t t-foreach="docs" t-as="o">
@@ -14,8 +14,7 @@
 <h1>Deposit Slip n°<span t-field="o.name" /></h1>
 
     <div>Delivery Method Type: <span t-field="o.delivery_type" /></div>
-    <div>Customer No.: </div>
-    <div>Account Name: <span t-field="user.company_id.name" /></div>
+    <div>Account Name: <span t-field="o.env.company.name" /></div>
     <div>Date: <span t-field="o.create_date" /></div>
 
     <table class="table table-condensed">
