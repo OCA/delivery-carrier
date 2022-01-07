@@ -157,6 +157,18 @@ class StockPicking(models.Model):
         tomorrow = date.today() + timedelta(1)
         return tomorrow
 
+    def _get_address_info_from_parent(self, partner, address):
+        res = {}
+        if not address.get("company") and partner.parent_id.is_company:
+            res["company"] = partner.parent_id.name
+
+        # these fields could be filled only on parent
+        if not address.get("email") and partner.parent_id.email:
+            res["email"] = partner.parent_id.email
+        if not address.get("mobile") and partner.parent_id.mobile:
+            res["mobile"] = partner.parent_id.mobile
+        return res
+
     def _roulier_convert_address(self, partner):
         """Convert a partner to an address for roulier.
 
@@ -187,18 +199,19 @@ class StockPicking(models.Model):
                     # it's a None: nothing to do
                 else:  # it's a boolean: keep the value
                     address[elm] = partner[elm]
-        if not address.get("company", False) and partner.parent_id.is_company:
-            address["company"] = partner.parent_id.name
         # Roulier needs street1 (mandatory) not street
         address["street1"] = partner.street
         # Codet ISO 3166-1-alpha-2 (2 letters code)
         address["country"] = partner.country_id.code
 
+        # keep in a separated method to easily override if not a desirable behavior
+        address.update(self._get_address_info_from_parent(partner, address))
+
         for tel in ["mobile", "phone"]:
             if address.get(tel):
                 address[tel] = address[tel].replace(u"\u00A0", "").replace(" ", "")
 
-        address["phone"] = address.get("mobile", address.get("phone"))
+        address["phone"] = address.get("mobile", address.get("phone")) or ""
 
         return address
 
