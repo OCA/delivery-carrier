@@ -29,7 +29,7 @@ class DeliveryCarrier(models.Model):
     def send_shipping(self, pickings):
         """Handle labels and  if we have them. Expected format is {'labels': [{}, ...]}
         The dicts are input for stock.picking#attach_label"""
-        result = super().send_shipping(pickings)
+        result = None
         # We could want to generate labels calling a method that does not depend
         # on one specific delivery_type.
         # For instance, if we want to generate a default label in case there are not
@@ -38,7 +38,9 @@ class DeliveryCarrier(models.Model):
         # or at the contrary, we could call a common method for multiple delivery_type
         # for instance, in delivery_roulier, the same method is always called for any
         # carrier implemented in roulier lib.
-        if result is None:
+        if pickings.carrier_id:
+            result = super().send_shipping(pickings)
+        if not result:
             result = self.alternative_send_shipping(pickings)
         for result_dict, picking in zip(result, pickings):
             for label in result_dict.get("labels", []):
