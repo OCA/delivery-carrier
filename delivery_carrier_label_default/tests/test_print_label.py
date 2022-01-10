@@ -1,8 +1,7 @@
 # Copyright 2013-2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 import base64
-
-import mock
+from unittest import mock
 
 from odoo.tests import common
 
@@ -87,12 +86,12 @@ class TestPrintLabel(common.SavepointCase, HTMLRenderMixin):
         # assign picking to generate 'stock.move.line'
         self.picking.action_confirm()
         self.picking.action_assign()
-        self.picking.action_generate_carrier_label()
+        self.picking.send_to_shipper()
         label = self.env["shipping.label"].search([("res_id", "=", self.picking.id)])
-        self.assertEquals(len(label), 1)
+        self.assertEqual(len(label), 1)
         self.assertTrue(label.datas)
-        self.assertEquals(label.name, "Shipping Label.html")
-        self.assertEquals(label.file_type, "html")
+        self.assertEqual(label.name, "Shipping Label.html")
+        self.assertEqual(label.file_type, "html")
         self.check_label_content(label.datas)
 
     @patch_label_file_type
@@ -102,17 +101,17 @@ class TestPrintLabel(common.SavepointCase, HTMLRenderMixin):
         self.picking.action_assign()
         self.picking.move_line_ids[0].qty_done = 3
         self.picking.move_line_ids[1].qty_done = 3
-        self.picking.put_in_pack()
+        self.picking.action_put_in_pack()
         for ope in self.picking.move_line_ids:
             if ope.qty_done == 0:
                 ope.qty_done = 9
                 break
-        self.picking.put_in_pack()
-        self.picking.action_generate_carrier_label()
+        self.picking.action_put_in_pack()
+        self.picking.send_to_shipper()
         labels = self.env["shipping.label"].search([("res_id", "=", self.picking.id)])
-        self.assertEquals(len(labels), 2)
+        self.assertEqual(len(labels), 2)
         for label in labels:
             self.assertTrue(label.datas)
-            self.assertEquals(label.name, "Shipping Label.html")
-            self.assertEquals(label.file_type, "html")
+            self.assertEqual(label.name, "Shipping Label.html")
+            self.assertEqual(label.file_type, "html")
             self.check_label_content(label.datas)
