@@ -59,7 +59,7 @@ class DeliveryCarrier(models.Model):
         national = partner.country_id.code == sending_partner.country_id.code
         return {
             "codDest": "",
-            "nomDest": partner.name or "",  # mandatory
+            "nomDest": partner.name[:40] if partner.name else "",  # mandatory
             "nifDest": partner.vat or "",
             "dirDest": "".join(streets)[:300] if streets else "",  # mandatory
             "pobDest": partner.city[:40] if partner.city else "",  # mandatory
