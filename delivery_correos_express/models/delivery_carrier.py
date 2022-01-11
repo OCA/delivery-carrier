@@ -53,17 +53,19 @@ class DeliveryCarrier(models.Model):
 
     def _get_correos_express_receiver_info(self, picking):
         partner = picking.partner_id
+        sending_partner = picking.picking_type_id.warehouse_id.partner_id
         streets = self._get_partner_streets(partner)
         phone = partner.mobile or partner.phone or ""
+        national = partner.country_id.code == sending_partner.country_id.code
         return {
             "codDest": "",
             "nomDest": partner.name or "",  # mandatory
             "nifDest": partner.vat or "",
             "dirDest": "".join(streets)[:300] if streets else "",  # mandatory
             "pobDest": partner.city[:40] if partner.city else "",  # mandatory
-            "codPosNacDest": partner.zip,  # mandatory
+            "codPosNacDest": partner.zip if national else "",  # mandatory
             "paisISODest": partner.country_id.code or "",
-            "codPosIntDest": "",
+            "codPosIntDest": partner.zip if not national else "",
             "contacDest": partner.name[:40] if partner.name else "",  # mandatory
             "telefDest": phone[:15] if phone else "",  # mandatory
             "emailDest": partner.email[:75] if partner.email else "",
