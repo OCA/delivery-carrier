@@ -561,13 +561,20 @@ class DeliveryCarrier(models.Model):
 
     def schenker_rate_shipment(self, order):
         """There's no public API so another price method should be used."""
-        raise NotImplementedError(
-            _(
+        return {
+            "success": True,
+            "price": self.product_id.lst_price,
+            "error_message": _(
                 "Schenker API doesn't provide methods to compute delivery "
                 "rates, so you should relay on another price method instead or "
                 "override this one in your custom code."
-            )
-        )
+            ),
+            "warning_message": _(
+                "Schenker API doesn't provide methods to compute delivery "
+                "rates, so you should relay on another price method instead or "
+                "override this one in your custom code."
+            ),
+        }
 
     # UX Control over not implemented features.
 
