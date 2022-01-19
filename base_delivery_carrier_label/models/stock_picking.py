@@ -63,7 +63,8 @@ class StockPicking(models.Model):
 
     def send_to_shipper(self):
         self.ensure_one()
-        self._set_a_default_package()
+        if self.env.context.get("set_default_package", True):
+            self._set_a_default_package()
         # We consider that label has already been generated in case we have a
         # carrier tracking ref, this way we may print the labels before shipping
         # and not generated in second time during shipment
