@@ -48,6 +48,7 @@ class StockPicking(models.Model):
         return packages
 
     def get_shipping_label_values(self, label):
+        # TODO: consider to depends on base_delivery_carrier_label
         self.ensure_one()
         return {
             "name": label["name"],
@@ -59,6 +60,8 @@ class StockPicking(models.Model):
 
     def attach_shipping_label(self, label):
         """Attach a label returned by generate_shipping_labels to a picking"""
+        if self.delivery_type != "postlogistics":
+            return super().attach_shipping_label(label)
         self.ensure_one()
         data = self.get_shipping_label_values(label)
         context_attachment = self.env.context.copy()
@@ -76,6 +79,7 @@ class StockPicking(models.Model):
         """Pickings using this module must have a package
         If not this method put it one silently
         """
+        # TODO: consider to depends on base_delivery_carrier_label
         for picking in self:
             move_lines = picking.move_line_ids.filtered(
                 lambda s: not (s.package_id or s.result_package_id)
