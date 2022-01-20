@@ -13,14 +13,13 @@ class SaleOrder(models.Model):
         compute="_compute_carrier_id", store=True, readonly=False
     )
 
-    @api.depends("partner_id")
+    @api.depends("partner_id", "partner_shipping_id")
     def _compute_carrier_id(self):
         if hasattr(super(), "_compute_carrier_id"):
             super()._compute_carrier_id()
-        for rec in self:
-            if rec.partner_id:
-                if rec.partner_id.property_delivery_carrier_id:
-                    rec.carrier_id = rec.partner_id.property_delivery_carrier_id
+        for order in self:
+            action = order.action_open_delivery_wizard()
+            order.carrier_id = action["context"]["default_carrier_id"]
 
     def _get_param_auto_add_delivery_line(self):
         get_param = self.env["ir.config_parameter"].sudo().get_param
