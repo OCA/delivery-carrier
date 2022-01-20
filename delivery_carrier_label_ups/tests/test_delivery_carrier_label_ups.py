@@ -210,3 +210,11 @@ class TestDeliveryCarrierLabelUps(
         )
         return_picking.carrier_id = self._get_carrier()
         self.assertTrue(return_picking.show_label_button)
+
+    def test_no_invoice_line_total(self):
+        """ InvoiceLineTotal is not present in request payload
+        when shipments destination is not Puerto Rico nor Canada.
+        """
+        self.assertNotIn(self.picking.partner_id.country_id.code, ["CA", "PR"])
+        shipping_data = self.picking._ups_shipping_data()['ShipmentRequest']
+        self.assertNotIn('InvoiceLineTotal', shipping_data['Shipment'])

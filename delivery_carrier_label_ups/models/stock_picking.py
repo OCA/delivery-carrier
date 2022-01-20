@@ -221,7 +221,49 @@ class StockPicking(models.Model):
             result['ShipmentRequest']['Shipment'].update(
                 ShipmentRatingOptions=dict(NegotiatedRatesIndicator="")
             )
+
+        # InvoiceLineTotal is Required for shipments whose origin
+        # is the US and destination is Puerto Rico or Canada.
+        shipment_data = result['ShipmentRequest']['Shipment']
+        country_from = shipment_data['ShipFrom']['Address']['CountryCode']
+        country_to = shipment_data['ShipTo']['Address']['CountryCode']
+        if country_from == "US" and country_to in ("CA", "PR"):
+            invoice_line_value = self._ups_invoice_line_value()
+            result['ShipmentRequest']['Shipment'].update(
+                InvoiceLineTotal=dict(
+                    CurrencyCode=self.company_id.currency_id.name,
+                    MonetaryValue=str(invoice_line_value),
+                )
+            )
         return result
+
+    def _ups_invoice_line_value(self):
+        """ Computes the InvoiceLineTotal amount that is a required information to be
+        communicated to UPS for shipments whose origin is the US and destination is
+        Puerto Rico or Canada.
+        """
+        self.ensure_one()
+        invoice_line_value = 0.0
+        for line in self.move_lines:
+            if line.sale_line_id:
+                price_unit = line.sale_line_id.price_unit
+                uom = line.sale_line_id.product_uom
+                company_currency = self.company_id.currency_id
+                order_currency = line.sale_line_id.order_id.currency_id
+                if order_currency != company_currency:
+                    price_unit = order_currency._convert(
+                        price_unit,
+                        company_currency,
+                        self.company_id,
+                        fields.Date.today()
+                    )
+            else:
+                price_unit = line.product_id.lst_price
+                uom = line.product_id.uom_id
+            if line.product_uom and line.product_uom != uom:
+                price_unit = uom._compute_price(price_unit, line.product_uom)
+            invoice_line_value += price_unit * line.product_qty
+        return self.company_id.currency_id.round(invoice_line_value)
 
     def _ups_order_data_product(self):
         """Return a dict describing all the packages for the shipping request"""
