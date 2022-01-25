@@ -145,8 +145,8 @@ class TestDeliveryMultiDestination(common.SavepointCase):
         sale_order_line = order.order_line.filtered("is_delivery")
         self.assertAlmostEqual(sale_order_line.price_unit, 100, 2)
         self.assertTrue(sale_order_line.is_delivery)
-        order.carrier_id = self.carrier_multi.id
         order.partner_shipping_id = self.partner_2.id
+        order.carrier_id = self.carrier_multi.id
         delivery_wizard = Form(
             self.env["choose.delivery.carrier"].with_context(
                 {
@@ -161,6 +161,7 @@ class TestDeliveryMultiDestination(common.SavepointCase):
         self.assertAlmostEqual(sale_order_line.price_unit, 50, 2)
         self.assertTrue(sale_order_line.is_delivery)
         order.partner_shipping_id = self.partner_3.id
+        order.carrier_id = self.carrier_multi
         delivery_wizard = Form(
             self.env["choose.delivery.carrier"].with_context(
                 {
@@ -195,8 +196,8 @@ class TestDeliveryMultiDestination(common.SavepointCase):
 
     def test_picking_validation(self):
         """Test a complete sales flow with picking."""
-        self.sale_order.carrier_id = self.carrier_multi.id
         self.sale_order.partner_shipping_id = self.partner_2.id
+        self.sale_order.carrier_id = self.carrier_multi.id
         self.sale_order.action_confirm()
         picking = self.sale_order.picking_ids
         self.assertEqual(picking.carrier_id, self.carrier_multi)
