@@ -245,7 +245,8 @@ class StockPicking(models.Model):
             return packages.open_website_url()  # shortpath
 
         # display a list of pickings
-        action = self.env.ref("stock.action_package_view").read()[0]
+        xmlid = "stock.action_package_view"
+        action = self.env["ir.actions.act_window"]._for_xml_id(xmlid)
         action["domain"] = [("id", "in", packages.ids)]
         action["context"] = {"picking_id": self.id}
         return action
