@@ -198,7 +198,7 @@ class StockPicking(models.Model):
             if address.get(tel):
                 address[tel] = address[tel].replace(u"\u00A0", "").replace(" ", "")
 
-        address["phone"] = address.get("mobile", address.get("phone"))
+        address["phone"] = address.get("phone", address.get("mobile", ""))
 
         return address
 
