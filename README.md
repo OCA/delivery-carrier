@@ -33,7 +33,7 @@ addon | version | maintainers | summary
 [delivery_package_number](delivery_package_number/) | 13.0.1.0.0 |  | Set or compute number of packages for a picking
 [delivery_postlogistics](delivery_postlogistics/) | 13.0.1.2.1 |  | Print PostLogistics shipping labels using the Barcode web service
 [delivery_postlogistics_server_env](delivery_postlogistics_server_env/) | 13.0.1.0.0 |  | Server Environment layer for Delivery Postlogistics
-[delivery_price_method](delivery_price_method/) | 13.0.1.0.0 |  | Provides fields to be able to contemplate the tracking statesand also adds a global fields
+[delivery_price_method](delivery_price_method/) | 13.0.1.0.1 |  | Provides fields to be able to contemplate the tracking statesand also adds a global fields
 [delivery_price_rule_volumetric_weight](delivery_price_rule_volumetric_weight/) | 13.0.1.0.0 | [![victoralmau](https://github.com/victoralmau.png?size=30px)](https://github.com/victoralmau) | Delivery Price Rule Volumetric weight
 [delivery_purchase](delivery_purchase/) | 13.0.1.0.0 |  | Delivery costs in purchases
 [delivery_schenker](delivery_schenker/) | 13.0.1.1.0 |  | Delivery Carrier implementation for DB Schenker API
