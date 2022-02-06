@@ -43,7 +43,12 @@ class DeliveryCarrierLabelUpsCase(carrier_label_case.CarrierLabelCase):
                 ShipmentResponse=dict(
                     ShipmentResults=dict(
                         ShipmentCharges=dict(
-                            TotalCharges=dict(MonetaryValue=42, CurrencyCode="USD",),
+                            TotalCharges=dict(
+                                MonetaryValue="42.00", CurrencyCode="USD",),
+                        ),
+                        NegotiatedRateCharges=dict(
+                            TotalCharge=dict(
+                                MonetaryValue="39.89", CurrencyCode="USD",),
                         ),
                         ShipmentIdentificationNumber="shipping_tracking",
                         PackageResults=[
@@ -135,6 +140,14 @@ class DeliveryCarrierLabelUpsCase(carrier_label_case.CarrierLabelCase):
 
     def _get_carrier(self):
         return self.env.ref("delivery_carrier_label_ups.carrier_ups")
+
+    def test_picking_total_price(self):
+        """ Check total contracted price. Negotiated rates
+        have the priority over the published rates.
+         """
+        self._create_order_picking()
+        self.assertTrue(self.picking)
+        self.assertEqual(self.picking.carrier_price, 39.89)
 
 
 class TestDeliveryCarrierLabelUps(

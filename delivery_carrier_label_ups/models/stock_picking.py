@@ -65,15 +65,12 @@ class StockPicking(models.Model):
                 continue
             this._set_a_default_package()
             status = this._ups_request_shipping()
-            total_charges = status["ShipmentResponse"]["ShipmentResults"][
-                "ShipmentCharges"
-            ]["TotalCharges"]
-            price = float(total_charges["MonetaryValue"])
-            if total_charges["CurrencyCode"] != this.company_id.currency_id.name:
+            currency_code, price = self._ups_get_total_price_currency(status)
+            if currency_code != this.company_id.currency_id.name:
                 price = this.company_id.currency_id._convert(
                     price,
                     self.env["res.currency"].search(
-                        [("name", "=", total_charges["CurrencyCode"])]
+                        [("name", "=", currency_code)]
                     ),
                     this.company_id,
                     fields.Date.today(),
@@ -96,6 +93,23 @@ class StockPicking(models.Model):
                 }
             )
         return result
+
+    def _ups_get_total_price_currency(self, status):
+        """ Retrieve total shipment price and its currency from ShipmentResponse.
+        In case of negotiated rate, get the contracted price, otherwise
+        get the published price.
+         """
+        total_charges = status["ShipmentResponse"]["ShipmentResults"][
+            "ShipmentCharges"
+        ]["TotalCharges"]
+        price = float(total_charges["MonetaryValue"])
+        currency_code = total_charges["CurrencyCode"]
+        negotiated_charges = status["ShipmentResponse"]["ShipmentResults"].get(
+            "NegotiatedRateCharges", {}).get("TotalCharge", {})
+        if negotiated_charges:
+            price = float(negotiated_charges["MonetaryValue"])
+            currency_code = negotiated_charges["CurrencyCode"]
+        return currency_code, price
 
     def _ups_get_parcel_labels(self, status):
         """ Retrieve labels data from ShipmentResponse """
@@ -398,9 +412,16 @@ class StockPicking(models.Model):
             "Password": account.password,
             "transactionSrc": "Odoo (%s)" % self.env.cr.dbname,
         }
-        return getattr(requests, method)(
+        res = getattr(requests, method)(
             url, json=payload, headers=headers, params=query_parameters
         ).json()
+        # log request and response
+        ups_last_request = ("URL: {}").format(url)
+        if payload:
+            ups_last_request += ("\nData: {}").format(str(payload))
+        self.carrier_id.log_xml(ups_last_request, "ups_last_request")
+        self.carrier_id.log_xml(str(res), "ups_last_response")
+        return res
 
     def _ups_auth_account(self):
         """Find a carrier.account matching our carrier"""
