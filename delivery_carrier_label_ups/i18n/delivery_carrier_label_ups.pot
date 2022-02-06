@@ -169,6 +169,7 @@ msgstr ""
 
 #. module: delivery_carrier_label_ups
 #: code:addons/delivery_carrier_label_ups/models/stock_picking.py:387
+#: code:addons/delivery_carrier_label_ups/models/stock_picking.py:401
 #, python-format
 msgid "No UPS account found for this company"
 msgstr ""
@@ -200,6 +201,7 @@ msgstr ""
 
 #. module: delivery_carrier_label_ups
 #: code:addons/delivery_carrier_label_ups/models/stock_picking.py:161
+#: code:addons/delivery_carrier_label_ups/models/stock_picking.py:175
 #, python-format
 msgid "Picking %s must set exactly one shipping option"
 msgstr ""
@@ -236,6 +238,7 @@ msgstr ""
 
 #. module: delivery_carrier_label_ups
 #: code:addons/delivery_carrier_label_ups/models/stock_picking.py:368
+#: code:addons/delivery_carrier_label_ups/models/stock_picking.py:382
 #, python-format
 msgid "Sending %s to UPS: %s"
 msgstr ""
