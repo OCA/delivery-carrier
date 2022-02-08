@@ -227,12 +227,8 @@ class PostlogisticsWebService(object):
             'ZIP': partner.zip,
             'City': partner.city,
             'Country': partner.country_id.code,
+            'DomicilePostOffice': company.postlogistics_office or "",
         }
-        if (
-            picking.picking_type_id.code == 'outgoing'
-            and company.postlogistics_office
-        ):
-            customer['DomicilePostOffice'] = company.postlogistics_office
 
         if partner.parent_id and partner.parent_id.name != partner_name:
             customer['Name2'] = customer.get('Name1')
