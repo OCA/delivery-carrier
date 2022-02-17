@@ -76,6 +76,14 @@ class DeliveryCarrier(models.Model):
         help="If checked, odoo try to state update from picking according to UPS "
         "webservice (you will necessary to activate tracking API)",
     )
+    ups_insurance = fields.Boolean(
+        string="Manage UPS Insurance",
+        help="If checked, we send insurance information to get rate",
+    )
+    ups_negotiated_rates = fields.Boolean(
+        string="Manage UPS Negotiated Rates",
+        help="If checked, negotiated rates are used instead of total charges",
+    )
 
     def ups_send_shipping(self, pickings):
         return [self.ups_create_shipping(p) for p in pickings]

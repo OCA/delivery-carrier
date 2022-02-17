@@ -4,3 +4,7 @@ You have to set the created shipping method in the delivery order to ship:
 * If the shipment creation process fails, a validation error will appear displaying UPS error.
 * When the delivery order is cancelled, it's automatically cancelled too in UPS.
 * If you have "Tracking state update sync" checked in the shipping method, a periodical state check will be done querying UPS services.
+* You can find a section in UPS settings form named `Insurance`, if you want
+  information about insurance to be sent to UPS server.
+* You can find a section in UPS settings form named `Service Package Options`,
+  if you have some negotiated rates with UPS.

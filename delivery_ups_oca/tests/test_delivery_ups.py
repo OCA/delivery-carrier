@@ -96,6 +96,7 @@ class DeliveryUps(common.SavepointCase):
         self.assertTrue(res["success"])
 
     def test_delivery_carrier_ups_integration(self):
+        self.carrier.prod_environment = True
         self.picking.action_confirm()
         self.picking.action_assign()
         self.picking.send_to_shipper()

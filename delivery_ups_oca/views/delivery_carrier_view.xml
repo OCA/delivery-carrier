@@ -57,6 +57,18 @@ License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
                                 attrs="{'required': [('delivery_type', '=', 'ups')]}"
                             />
                         </group>
+                        <group string="Insurance">
+                            <field
+                                name="ups_insurance"
+                                attrs="{'required': [('delivery_type', '=', 'ups')]}"
+                            />
+                        </group>
+                        <group string="Service Package Options">
+                            <field
+                                name="ups_negotiated_rates"
+                                attrs="{'required': [('delivery_type', '=', 'ups')]}"
+                            />
+                        </group>
                         <group string="Label">
                             <field
                                 name="ups_file_format"

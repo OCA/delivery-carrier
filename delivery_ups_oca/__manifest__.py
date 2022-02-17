@@ -16,7 +16,12 @@
         "delivery_package_number",
         "delivery_price_method",
         "delivery_state",
+        "sale_stock",
     ],
-    "data": ["data/product_packaging_data.xml", "views/delivery_carrier_view.xml"],
+    "data": [
+        "data/product_packaging_data.xml",
+        "views/delivery_carrier_view.xml",
+        "views/stock_picking_views.xml",
+    ],
     "demo": [],
 }

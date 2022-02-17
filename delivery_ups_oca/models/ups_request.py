@@ -6,6 +6,7 @@ import logging
 import requests
 
 from odoo import _
+from odoo.exceptions import ValidationError
 
 _logger = logging.getLogger(__name__)
 
@@ -23,9 +24,9 @@ class UpsRequest(object):
         self.package_dimension_code = self.carrier.ups_package_dimension_code
         self.package_weight_code = self.carrier.ups_package_weight_code
         self.transaction_src = "Odoo (%s)" % self.carrier.name
-        self.url = "https://onlinetools.ups.com"
+        self.url = "https://wwwcie.ups.com"
         if self.carrier.prod_environment:
-            self.url = "https://wwwcie.ups.com"
+            self.url = "https://onlinetools.ups.com"
 
     def _process_reply(
         self, url, data=None, method="post", query_parameters=None,
@@ -46,11 +47,16 @@ class UpsRequest(object):
         self.carrier.log_xml(status or "", "ups_last_response")
         errors = status.get("response", {}).get("errors")
         if errors:
-            _logger.info(
-                _("Sending to UPS: %s")
+            raise ValidationError(
+                _("Error on Sending to UPS: \n\n%s")
                 % ("\n".join("%(code)s %(message)s" % error for error in errors),)
             )
         return status
+
+    def _format_dimweight(self, dimweight):
+        if not dimweight:
+            return "0"
+        return str(round(dimweight / 5000, 1)).replace(".", "")
 
     def _quant_package_data_from_picking(self, package, picking, is_package=True):
         NumOfPieces = picking.number_of_packages
@@ -58,6 +64,24 @@ class UpsRequest(object):
         if is_package:
             NumOfPieces = sum(package.mapped("quant_ids.quantity"))
             PackageWeight = package.weight
+        DimWeight = 0
+        if not (package.length * package.width * package.height):
+            for line in picking.move_lines.filtered(lambda x: x.product_id.volume):
+                DimWeight += line.product_id.volume * line.product_uom_qty
+        else:
+            DimWeight = package.length * package.width * package.height
+        DeclaredValue = ""
+        if picking.ups_insurance:
+            CurrencyCode = (
+                picking.sale_id.currency_id.name or picking.company_id.currency_id.name
+            )
+            MonetaryValue = str(picking.ups_insurance_value)
+            DeclaredValue = {
+                "DeclaredValue": {
+                    "CurrencyCode": CurrencyCode,
+                    "MonetaryValue": MonetaryValue,
+                }
+            }
         return {
             "Description": package.name,
             "NumOfPieces": str(NumOfPieces),
@@ -73,26 +97,40 @@ class UpsRequest(object):
             },
             "PackageWeight": {
                 "UnitOfMeasurement": {"Code": self.package_weight_code},
-                "Weight": str(PackageWeight),
+                "Weight": str(PackageWeight)
+                if PackageWeight
+                else str(DimWeight / 5000),
             },
-            "PackageServiceOptions": "",
+            "DimWeight": {
+                "UnitOfMeasurement": {"Code": self.package_weight_code},
+                "Weight": self._format_dimweight(DimWeight),
+            },
+            "PackageServiceOptions": DeclaredValue,
         }
 
     def _partner_to_shipping_data(self, partner, **kwargs):
         """Return a dict describing a partner for the shipping request"""
+        country_code = partner.country_id.code
+        state_code = partner.state_id.code
+        if country_code == "ES" and state_code in ["TF", "GC"]:
+            # Canary Islands (and others) have a special country code
+            # https://en.wikipedia.org/wiki/ISO_3166-1
+            country_code = "IC"
+        if country_code not in ["US", "CA", "IC"]:
+            state_code = ""
         return dict(
             **kwargs,
             Name=(partner.parent_id or partner).name,
             AttentionName=partner.name,
-            TaxIdentificationNumber=partner.vat,
+            TaxIdentificationNumber=partner.vat or "",
             Phone=dict(Number=partner.phone or partner.mobile),
-            EMailAddress=partner.email,
+            EMailAddress=partner.email or "",
             Address=dict(
                 AddressLine=[partner.street, partner.street2 or ""],
                 City=partner.city,
-                StateProvinceCode=partner.state_id.code,
+                StateProvinceCode=state_code,
                 PostalCode=partner.zip,
-                CountryCode=partner.country_id.code,
+                CountryCode=country_code,
             ),
         )
 
@@ -151,34 +189,65 @@ class UpsRequest(object):
             data=self._prepare_create_shipping(picking),
         )
         res = status["ShipmentResponse"]["ShipmentResults"]
+        if self.carrier.ups_negotiated_rates:
+            price = res["ShipmentCharges"]["ServiceOptionsCharges"]
+        else:
+            price = res["ShipmentCharges"]["TotalCharges"]
         return {
-            "price": res["ShipmentCharges"]["TotalCharges"],
+            "price": price,
             "ShipmentIdentificationNumber": res["ShipmentIdentificationNumber"],
             "GraphicImage": res["PackageResults"]["ShippingLabel"]["GraphicImage"],
         }
 
     def _quant_package_data_from_order(self, order):
         PackageWeight = 0
+        DimWeight = 0
+        product_length = 0
+        width = 0
+        height = 0
         for line in order.order_line.filtered(
             lambda x: x.product_id and x.product_id.weight > 0
         ):
             PackageWeight += line.product_id.weight * line.product_uom_qty
+        for line in order.order_line.filtered(
+            lambda x: x.product_id and x.product_id.volume > 0
+        ):
+            DimWeight += line.product_id.volume * line.product_uom_qty
+            if not DimWeight:
+                product_length = self.default_packaging_id.length
+                width = self.default_packaging_id.width
+                height = self.default_packaging_id.height
+        DeclaredValue = ""
+        if self.carrier.ups_insurance:
+            DeclaredValue = {
+                "DeclaredValue": {
+                    "CurrencyCode": order.currency_id.name,
+                    "MonetaryValue": str(order.amount_untaxed),
+                }
+            }
         return {
             "PackagingType": {"Code": self.default_packaging_id.shipper_package_code},
             "Dimensions": {
                 "UnitOfMeasurement": {"Code": self.package_dimension_code},
-                "Length": str(self.default_packaging_id.length),
-                "Width": str(self.default_packaging_id.width),
-                "Height": str(self.default_packaging_id.height),
+                "Length": str(product_length),
+                "Width": str(width),
+                "Height": str(height),
             },
             "PackageWeight": {
                 "UnitOfMeasurement": {"Code": self.package_weight_code},
-                "Weight": str(PackageWeight),
+                "Weight": str(PackageWeight)
+                if PackageWeight
+                else str(DimWeight / 5000),
             },
+            "DimWeight": {
+                "UnitOfMeasurement": {"Code": self.package_weight_code},
+                "Weight": self._format_dimweight(DimWeight),
+            },
+            "PackageServiceOptions": DeclaredValue,
         }
 
     def _prepare_rate_shipment(self, order):
-        packages = [self._quant_package_data_from_order(order)]
+        packages = self._quant_package_data_from_order(order)
         return {
             "RateRequest": {
                 "Shipment": {
@@ -192,6 +261,8 @@ class UpsRequest(object):
                     ),
                     "Service": {"Code": self.service_code},
                     "Package": packages,
+                    "TaxInformationIndicator": "",
+                    "ShipmentRatingOptions": {"NegotiatedRatesIndicator": ""},
                 }
             }
         }
@@ -201,7 +272,17 @@ class UpsRequest(object):
             url="%s/ship/v1807/rating/Rate" % self.url,
             data=self._prepare_rate_shipment(order),
         )
-        return status["RateResponse"]["RatedShipment"]["TotalCharges"]
+        if self.carrier.ups_negotiated_rates:
+            if "TotalChargesWithTaxes" in status:
+                return status["RateResponse"]["RatedShipment"]["NegotiatedRateCharges"][
+                    "TotalChargesWithTaxes"
+                ]
+            else:
+                return status["RateResponse"]["RatedShipment"]["NegotiatedRateCharges"][
+                    "TotalCharge"
+                ]
+        else:
+            return status["RateResponse"]["RatedShipment"]["TotalCharges"]
 
     def _prepare_shipping_label(self, carrier_tracking_ref):
         return {
