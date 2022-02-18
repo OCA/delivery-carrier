@@ -21,11 +21,29 @@ msgstr ""
 "X-Generator: Weblate 3.8\n"
 
 #. module: delivery_auto_refresh
+#: model:ir.model.fields,field_description:delivery_auto_refresh.field_sale_order__carrier_id
+msgid "Delivery Method"
+msgstr ""
+
+#. module: delivery_auto_refresh
+#: model:ir.model.fields,help:delivery_auto_refresh.field_sale_order__carrier_id
+msgid "Fill this field if you plan to invoice the shipping based on picking."
+msgstr ""
+
+#. module: delivery_auto_refresh
 #: model:ir.model,name:delivery_auto_refresh.model_sale_order
-msgid "Sale Order"
-msgstr "销售订单"
+msgid "Sales Order"
+msgstr ""
+
+#. module: delivery_auto_refresh
+#: model:ir.model,name:delivery_auto_refresh.model_sale_order_line
+msgid "Sales Order Line"
+msgstr ""
 
 #. module: delivery_auto_refresh
 #: model:ir.model,name:delivery_auto_refresh.model_stock_picking
 msgid "Transfer"
 msgstr "调拨"
+
+#~ msgid "Sale Order"
+#~ msgstr "销售订单"
