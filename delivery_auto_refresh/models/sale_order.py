@@ -3,7 +3,8 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models
-from odoo.tools.safe_eval import safe_eval
+
+from ..utils import get_bool_param
 
 
 class SaleOrder(models.Model):
@@ -22,13 +23,11 @@ class SaleOrder(models.Model):
             order.carrier_id = action["context"]["default_carrier_id"]
 
     def _get_param_auto_add_delivery_line(self):
-        get_param = self.env["ir.config_parameter"].sudo().get_param
-        param = "delivery_auto_refresh.auto_add_delivery_line"
         # When we have the context 'website_id' it means that we are doing the order from
         # e-commerce. So we don't want to add the delivery line automatically.
         if self.env.context.get("website_id"):
             return False
-        return safe_eval(get_param(param, "0"))
+        return get_bool_param(self.env, "auto_add_delivery_line")
 
     def _auto_refresh_delivery(self):
         self.ensure_one()
