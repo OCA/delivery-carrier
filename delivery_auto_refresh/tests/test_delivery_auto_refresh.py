@@ -1,7 +1,7 @@
 # Copyright 2018 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo.tests import Form, common
+from odoo.tests import Form, common, tagged
 
 
 def _execute_onchanges(records, field_name):
@@ -11,16 +11,19 @@ def _execute_onchanges(records, field_name):
             onchange(record)
 
 
-class TestDeliveryAutoRefresh(common.HttpCase):
-    def setUp(self):
-        super().setUp()
-        service = self.env["product.product"].create(
+@tagged("post_install", "-at_install")
+class TestDeliveryAutoRefresh(common.SavepointCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
+        service = cls.env["product.product"].create(
             {"name": "Service Test", "type": "service"}
         )
-        pricelist = self.env["product.pricelist"].create(
-            {"name": "Test pricelist", "currency_id": self.env.company.currency_id.id}
+        pricelist = cls.env["product.pricelist"].create(
+            {"name": "Test pricelist", "currency_id": cls.env.company.currency_id.id}
         )
-        carrier_form = Form(self.env["delivery.carrier"])
+        carrier_form = Form(cls.env["delivery.carrier"])
         carrier_form.name = "Test carrier 1"
         carrier_form.delivery_type = "base_on_rule"
         carrier_form.product_id = service
@@ -43,8 +46,8 @@ class TestDeliveryAutoRefresh(common.HttpCase):
             price_rule_form.list_base_price = 20
             price_rule_form.list_price = 1.5
             price_rule_form.variable_factor = "weight"
-        self.carrier_1 = carrier_form.save()
-        carrier_form = Form(self.env["delivery.carrier"])
+        cls.carrier_1 = carrier_form.save()
+        carrier_form = Form(cls.env["delivery.carrier"])
         carrier_form.name = "Test carrier 2"
         carrier_form.delivery_type = "base_on_rule"
         carrier_form.product_id = service
@@ -53,27 +56,28 @@ class TestDeliveryAutoRefresh(common.HttpCase):
             price_rule_form.operator = "<="
             price_rule_form.max_value = 20
             price_rule_form.list_base_price = 50
-        self.carrier_2 = carrier_form.save()
-        self.product = self.env["product.product"].create(
+        cls.carrier_2 = carrier_form.save()
+        cls.product = cls.env["product.product"].create(
             {"name": "Test product", "weight": 10, "list_price": 20}
         )
-        self.partner = self.env["res.partner"].create(
+        cls.partner = cls.env["res.partner"].create(
             {
                 "name": "Test partner",
-                "property_delivery_carrier_id": self.carrier_1.id,
+                "property_delivery_carrier_id": cls.carrier_1.id,
                 "property_product_pricelist": pricelist.id,
             }
         )
-        self.param_name1 = "delivery_auto_refresh.auto_add_delivery_line"
-        self.param_name2 = "delivery_auto_refresh.refresh_after_picking"
-        self.param_name3 = "delivery_auto_refresh.auto_void_delivery_line"
-        order_form = Form(self.env["sale.order"])
-        order_form.partner_id = self.partner
-        order_form.partner_shipping_id = self.partner
+        cls.param_name1 = "delivery_auto_refresh.auto_add_delivery_line"
+        cls.param_name2 = "delivery_auto_refresh.refresh_after_picking"
+        cls.param_name3 = "delivery_auto_refresh.auto_void_delivery_line"
+        order_form = Form(cls.env["sale.order"])
+        order_form.partner_id = cls.partner
+        order_form.partner_invoice_id = cls.partner
+        order_form.partner_shipping_id = cls.partner
         with order_form.order_line.new() as ol_form:
-            ol_form.product_id = self.product
+            ol_form.product_id = cls.product
             ol_form.product_uom_qty = 2
-        self.order = order_form.save()
+        cls.order = order_form.save()
 
     def test_auto_refresh_so(self):
         self.assertFalse(self.order.order_line.filtered("is_delivery"))
