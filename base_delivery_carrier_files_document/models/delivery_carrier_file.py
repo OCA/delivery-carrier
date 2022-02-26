@@ -24,6 +24,8 @@ class DeliveryCarrierFile(models.Model):
             "name": "%s_%s" % (carrier_file.name, filename),
             "datas": base64.b64encode(file_c),
             "type": "binary",
+            "res_model": self.env.context.get("active_model", ""),
+            "res_id": self.env.context.get('active_id', "")
         }
 
     def _write_file(self, filename, file_content, pickings):
