@@ -13,7 +13,6 @@
     "license": "AGPL-3",
     "installable": True,
     "depends": [
-        "stock",
         "base_delivery_carrier_label",
     ],
     "data": [
