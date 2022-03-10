@@ -60,7 +60,7 @@ class SaleOrder(models.Model):
             for order in self:
                 delivery_line = order.order_line.filtered("is_delivery")
                 order.with_context(
-                    delivery_discount=delivery_line.discount,
+                    delivery_discount=delivery_line[-1:].discount,
                 )._auto_refresh_delivery()
         return res
 
