@@ -11,11 +11,13 @@ class CarrierAccount(models.Model):
     @property
     def _server_env_fields(self):
         carrier_fields = super()._server_env_fields
-        carrier_fields.update({
-            "account": {},
-            "password": {},
-            "file_format": {},
-        })
+        carrier_fields.update(
+            {
+                "account": {},
+                "password": {},
+                "file_format": {},
+            }
+        )
         return carrier_fields
 
     @api.model
@@ -24,4 +26,4 @@ class CarrierAccount(models.Model):
 
         Can be customized in your model
         """
-        return 'carrier_account'
+        return "carrier_account"
