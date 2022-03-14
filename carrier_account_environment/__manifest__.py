@@ -3,7 +3,7 @@
 
 {
     "name": "Carrier accounts configuration with server_environment",
-    "version": "14.0.1.0.0",
+    "version": "14.0.1.0.1",
     "category": "Tools",
     "summary": "Configure carriers with server_environment_files",
     "maintainers": ["florian-dacosta"],
