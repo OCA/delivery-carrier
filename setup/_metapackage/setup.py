@@ -10,6 +10,7 @@ setuptools.setup(
     install_requires=[
         'odoo14-addon-base_delivery_carrier_files',
         'odoo14-addon-base_delivery_carrier_label',
+        'odoo14-addon-carrier_account_environment',
         'odoo14-addon-delivery_carrier_agency',
         'odoo14-addon-delivery_carrier_category',
         'odoo14-addon-delivery_carrier_city',
