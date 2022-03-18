@@ -12,6 +12,9 @@ class SaleOrder(models.Model):
     carrier_id = fields.Many2one(
         compute="_compute_carrier_id", store=True, readonly=False
     )
+    available_carrier_ids = fields.Many2many(
+        comodel_name="delivery.carrier", compute="_compute_available_carrier_ids",
+    )
 
     @api.depends("partner_id", "partner_shipping_id")
     def _compute_carrier_id(self):
@@ -19,7 +22,23 @@ class SaleOrder(models.Model):
             super()._compute_carrier_id()
         for order in self:
             action = order.action_open_delivery_wizard()
-            order.carrier_id = action["context"]["default_carrier_id"]
+            carrier_id = self.env["delivery.carrier"].browse(
+                action["context"]["default_carrier_id"]
+            )
+            # If the carrier isn't allowed for the current shipping address, we wont
+            # default to it. In that case we'd try to fallback to the former carrier.
+            order.carrier_id = fields.first(
+                (carrier_id | order.carrier_id).filtered(
+                    lambda x: x in order.available_carrier_ids._origin
+                )
+            )
+
+    @api.depends("partner_shipping_id")
+    def _compute_available_carrier_ids(self):
+        """We want to apply the same carriers filter in the header as in the wizard"""
+        for sale in self:
+            wizard = self.env["choose.delivery.carrier"].new({"order_id": sale.id})
+            sale.available_carrier_ids = wizard.available_carrier_ids._origin
 
     def _get_param_auto_add_delivery_line(self):
         get_param = self.env["ir.config_parameter"].sudo().get_param
