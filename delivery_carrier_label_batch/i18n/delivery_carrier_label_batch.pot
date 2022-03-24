@@ -1,12 +1,12 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* delivery_carrier_label_batch
+# 	* delivery_carrier_label_batch
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 12.0\n"
+"Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: <>\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,7 +26,7 @@ msgstr ""
 
 #. module: delivery_carrier_label_batch
 #: model:ir.model,name:delivery_carrier_label_batch.model_stock_picking_batch
-msgid "Batch Picking"
+msgid "Batch Transfer"
 msgstr ""
 
 #. module: delivery_carrier_label_batch
@@ -70,6 +70,7 @@ msgstr ""
 #. module: delivery_carrier_label_batch
 #: model:ir.model.fields,field_description:delivery_carrier_label_batch.field_delivery_carrier_label_generate__display_name
 #: model:ir.model.fields,field_description:delivery_carrier_label_batch.field_picking_batch_apply_carrier__display_name
+#: model:ir.model.fields,field_description:delivery_carrier_label_batch.field_stock_picking_batch__display_name
 msgid "Display Name"
 msgstr ""
 
@@ -101,25 +102,29 @@ msgstr ""
 #. module: delivery_carrier_label_batch
 #: model:ir.model.fields,field_description:delivery_carrier_label_batch.field_delivery_carrier_label_generate__id
 #: model:ir.model.fields,field_description:delivery_carrier_label_batch.field_picking_batch_apply_carrier__id
+#: model:ir.model.fields,field_description:delivery_carrier_label_batch.field_stock_picking_batch__id
 msgid "ID"
 msgstr ""
 
 #. module: delivery_carrier_label_batch
 #: model:ir.model.fields,help:delivery_carrier_label_batch.field_delivery_carrier_label_generate__generate_new_labels
-msgid "If this option is used, new labels will be generated for the packs even if they already have one.\n"
+msgid ""
+"If this option is used, new labels will be generated for the packs even if they already have one.\n"
 "The default is to use the existing label."
 msgstr ""
 
 #. module: delivery_carrier_label_batch
-#: code:addons/delivery_carrier_label_batch/wizard/generate_labels.py:216
+#: code:addons/delivery_carrier_label_batch/wizard/generate_labels.py:0
 #, python-format
-msgid "Impossible to generate the labels. Those pickings don't have packages:\n"
+msgid ""
+"Impossible to generate the labels. Those pickings don't have packages:\n"
 "{}"
 msgstr ""
 
 #. module: delivery_carrier_label_batch
 #: model:ir.model.fields,field_description:delivery_carrier_label_batch.field_delivery_carrier_label_generate____last_update
 #: model:ir.model.fields,field_description:delivery_carrier_label_batch.field_picking_batch_apply_carrier____last_update
+#: model:ir.model.fields,field_description:delivery_carrier_label_batch.field_stock_picking_batch____last_update
 msgid "Last Modified on"
 msgstr ""
 
@@ -136,13 +141,13 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: delivery_carrier_label_batch
-#: code:addons/delivery_carrier_label_batch/wizard/generate_labels.py:235
+#: code:addons/delivery_carrier_label_batch/wizard/generate_labels.py:0
 #, python-format
 msgid "No picking batch selected"
 msgstr ""
 
 #. module: delivery_carrier_label_batch
-#: code:addons/delivery_carrier_label_batch/wizard/apply_carrier.py:31
+#: code:addons/delivery_carrier_label_batch/wizard/apply_carrier.py:0
 #, python-format
 msgid "No selected picking batch"
 msgstr ""
@@ -154,7 +159,7 @@ msgid "Options"
 msgstr ""
 
 #. module: delivery_carrier_label_batch
-#: code:addons/delivery_carrier_label_batch/wizard/generate_labels.py:91
+#: code:addons/delivery_carrier_label_batch/wizard/generate_labels.py:0
 #, python-format
 msgid "Pack: %s"
 msgstr ""
@@ -170,7 +175,7 @@ msgid "Picking Batch Apply Carrier"
 msgstr ""
 
 #. module: delivery_carrier_label_batch
-#: code:addons/delivery_carrier_label_batch/wizard/generate_labels.py:90
+#: code:addons/delivery_carrier_label_batch/wizard/generate_labels.py:0
 #, python-format
 msgid "Picking: %s"
 msgstr ""
@@ -181,20 +186,22 @@ msgid "Set Options"
 msgstr ""
 
 #. module: delivery_carrier_label_batch
-#: code:addons/delivery_carrier_label_batch/wizard/generate_labels.py:185
+#: code:addons/delivery_carrier_label_batch/wizard/generate_labels.py:0
 #, python-format
-msgid "Some labels couldn't be generated. Please correct following errors and generate labels again to create the ones which failed.\n"
+msgid ""
+"Some labels couldn't be generated. Please correct following errors and generate labels again to create the ones which failed.\n"
 "\n"
-""
 msgstr ""
 
 #. module: delivery_carrier_label_batch
 #: model_terms:ir.ui.view,arch_db:delivery_carrier_label_batch.view_delivery_carrier_label_generate
-msgid "This wizard creates an attachement on each selected batch containing picking labels"
+msgid ""
+"This wizard creates an attachement on each selected batch containing picking"
+" labels"
 msgstr ""
 
 #. module: delivery_carrier_label_batch
-#: code:addons/delivery_carrier_label_batch/models/stock_batch_picking.py:71
+#: code:addons/delivery_carrier_label_batch/models/stock_batch_picking.py:0
 #, python-format
 msgid "User Error !"
 msgstr ""
@@ -202,13 +209,14 @@ msgstr ""
 #. module: delivery_carrier_label_batch
 #: model_terms:ir.ui.view,arch_db:delivery_carrier_label_batch.stock_batch_picking_form
 #: model_terms:ir.ui.view,arch_db:delivery_carrier_label_batch.view_picking_batch_apply_carrier
-msgid "Warning, setting options will erase the existing ones in delivery orders"
+msgid ""
+"Warning, setting options will erase the existing ones in delivery orders"
 msgstr ""
 
 #. module: delivery_carrier_label_batch
-#: code:addons/delivery_carrier_label_batch/models/stock_batch_picking.py:72
+#: code:addons/delivery_carrier_label_batch/models/stock_batch_picking.py:0
 #, python-format
-msgid "You can not remove a mandatory option.\n"
+msgid ""
+"You can not remove a mandatory option.\n"
 "Please reset options to default."
 msgstr ""
-
