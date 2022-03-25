@@ -19,6 +19,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: delivery_auto_refresh
+#: model:ir.model.fields,field_description:delivery_auto_refresh.field_sale_order__available_carrier_ids
+msgid "Available Carrier"
+msgstr ""
+
+#. module: delivery_auto_refresh
 #: model:ir.model.fields,field_description:delivery_auto_refresh.field_sale_order__carrier_id
 msgid "Delivery Method"
 msgstr ""
