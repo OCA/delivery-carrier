@@ -9,7 +9,7 @@ from odoo.modules import get_module_resource
 
 class TestGenerateLabels(common.SavepointCase):
 
-    """ Test the wizard for delivery carrier label generation """
+    """Test the wizard for delivery carrier label generation"""
 
     @classmethod
     def setUpClass(cls):

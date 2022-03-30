@@ -38,7 +38,7 @@ class StockBatchPicking(models.Model):
 
     @api.onchange("carrier_id")
     def carrier_id_change(self):
-        """ Inherit this method in your module """
+        """Inherit this method in your module"""
         if self.carrier_id:
             # This can look useless as the field carrier_code and
             # carrier_type are related field. But it's needed to fill
