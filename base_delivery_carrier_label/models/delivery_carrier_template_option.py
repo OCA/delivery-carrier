@@ -6,7 +6,7 @@ from odoo import fields, models
 
 
 class DeliveryCarrierTemplateOption(models.Model):
-    """ Available options for a carrier (partner) """
+    """Available options for a carrier (partner)"""
 
     _name = "delivery.carrier.template.option"
     _description = "Delivery carrier template option"
