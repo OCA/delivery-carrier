@@ -73,7 +73,7 @@ class CarrierFilesTest(TransactionCase):
         self.picking_type = self.env.ref("stock.warehouse0").out_type_id
 
     def test_carrier_file_generation(self):
-        """ Test carrier file generation """
+        """Test carrier file generation"""
         # I confirm outgoing shipment of 130 kgm Ice-cream.
         picking = self.env["stock.picking"].create(
             {
@@ -118,7 +118,7 @@ class CarrierFilesTest(TransactionCase):
         self.assertFalse(new_picking.carrier_file_generated)
 
     def test_manual_carrier_file_generation(self):
-        """ Test manual carrier file generation """
+        """Test manual carrier file generation"""
         # I confirm outgoing shipment of 130 kgm Ice-cream.
         picking = self.env["stock.picking"].create(
             {

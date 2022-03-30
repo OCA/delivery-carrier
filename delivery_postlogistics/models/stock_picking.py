@@ -27,7 +27,7 @@ class StockPicking(models.Model):
     )
 
     def _get_packages_from_picking(self):
-        """ Get all the packages from the picking """
+        """Get all the packages from the picking"""
         self.ensure_one()
         operation_obj = self.env["stock.move.line"]
         operations = operation_obj.search(
@@ -184,7 +184,7 @@ class StockPicking(models.Model):
     def _generate_postlogistics_label(
         self, webservice_class=None, package_ids=None, skip_attach_file=False
     ):
-        """ Generate labels and write tracking numbers received """
+        """Generate labels and write tracking numbers received"""
         self.ensure_one()
         user = self.env.user
         company = user.company_id
@@ -231,6 +231,6 @@ class StockPicking(models.Model):
         return labels
 
     def generate_postlogistics_shipping_labels(self, package_ids=None):
-        """ Add label generation for PostLogistics """
+        """Add label generation for PostLogistics"""
         self.ensure_one()
         return self._generate_postlogistics_label(package_ids=package_ids)

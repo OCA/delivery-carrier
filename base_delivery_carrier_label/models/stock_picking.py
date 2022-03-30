@@ -74,7 +74,7 @@ class StockPicking(models.Model):
 
     @api.onchange("carrier_id")
     def onchange_carrier_id(self):
-        """ Inherit this method in your module """
+        """Inherit this method in your module"""
         if not self.carrier_id:
             return
         # This can look useless as the field carrier_code and
@@ -159,7 +159,7 @@ class StockPicking(models.Model):
         ]
 
     def _get_carrier_account(self):
-        """ Return a carrier suitable for the current picking """
+        """Return a carrier suitable for the current picking"""
         domain = self._get_carrier_account_domain()
         return self.env["carrier.account"].search(
             domain,
@@ -191,7 +191,7 @@ class StockPicking(models.Model):
         return self.env["res.partner"].browse(address_id)
 
     def _check_existing_shipping_label(self):
-        """ Check that labels don't already exist for this picking """
+        """Check that labels don't already exist for this picking"""
         self.ensure_one()
         labels = self.env["shipping.label"].search(
             [("res_id", "=", self.id), ("res_model", "=", "stock.picking")]

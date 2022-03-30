@@ -12,7 +12,7 @@ class CarrierAccount(models.Model):
 
     @api.model
     def _selection_file_format(self):
-        """ To inherit to add label file types"""
+        """To inherit to add label file types"""
         return [("PDF", "PDF"), ("ZPL", "ZPL"), ("XML", "XML")]
 
     name = fields.Char(required=True)

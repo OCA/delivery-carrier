@@ -19,7 +19,7 @@ class DeliveryCarrier(models.Model):
         return {}
 
     def default_options(self):
-        """ Returns default and available options for a carrier """
+        """Returns default and available options for a carrier"""
         options = self.env["delivery.carrier.option"].browse()
         for available_option in self.available_option_ids:
             if available_option.mandatory or available_option.by_default:

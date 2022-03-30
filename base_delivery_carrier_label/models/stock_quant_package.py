@@ -47,5 +47,5 @@ class StockQuantPackage(models.Model):
         return res
 
     def open_website_url(self):
-        """ Implement you own action in your module """
+        """Implement you own action in your module"""
         return None
