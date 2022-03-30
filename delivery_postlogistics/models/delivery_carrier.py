@@ -8,7 +8,7 @@ from ..postlogistics.web_service import PostlogisticsWebService
 
 
 class DeliveryCarrier(models.Model):
-    """ Add service group """
+    """Add service group"""
 
     _inherit = "delivery.carrier"
 
