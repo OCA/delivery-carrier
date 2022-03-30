@@ -297,7 +297,7 @@ class PostlogisticsWebService(object):
         return "%02d%s" % (pack_num, picking_num[-6:].zfill(6))
 
     def _prepare_item_list(self, picking, recipient, packages):
-        """ Return a list of item made from the pickings """
+        """Return a list of item made from the pickings"""
         carrier = picking.carrier_id
         item_list = []
         pack_counter = 1
