@@ -13,7 +13,8 @@ class SaleOrder(models.Model):
         compute="_compute_carrier_id", store=True, readonly=False
     )
     available_carrier_ids = fields.Many2many(
-        comodel_name="delivery.carrier", compute="_compute_available_carrier_ids",
+        comodel_name="delivery.carrier",
+        compute="_compute_available_carrier_ids",
     )
 
     @api.depends("partner_id", "partner_shipping_id")
@@ -86,7 +87,7 @@ class SaleOrder(models.Model):
 
     def _create_delivery_line(self, carrier, price_unit):
         """Allow users to keep discounts to delivery lines. Unit price will
-           be recomputed anyway"""
+        be recomputed anyway"""
         sol = super()._create_delivery_line(carrier, price_unit)
         discount = self.env.context.get("delivery_discount")
         if discount and sol:

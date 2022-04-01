@@ -28,7 +28,8 @@ class StockPicking(models.Model):
                 continue
             move = move_line.move_id
             qty = move.product_uom._compute_quantity(
-                move_line.qty_done, move_line.product_id.uom_id,
+                move_line.qty_done,
+                move_line.product_id.uom_id,
             )
             weight += (move_line.product_id.weight or 0.0) * qty
             volume += (move_line.product_id.volume or 0.0) * qty
@@ -41,7 +42,10 @@ class StockPicking(models.Model):
             sale_order.date_order,
         )
         so_line.price_unit = self.carrier_id._get_price_from_picking(
-            total, weight, volume, quantity,
+            total,
+            weight,
+            volume,
+            quantity,
         )
         return res
 
