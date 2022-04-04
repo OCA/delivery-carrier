@@ -63,7 +63,8 @@ class StockPicking(models.Model):
 
     def send_to_shipper(self):
         self.ensure_one()
-        self._set_a_default_package()
+        if self.env.context.get("set_default_package", True):
+            self._set_a_default_package()
         # We consider that label has already been generated in case we have a
         # carrier tracking ref, this way we may print the labels before shipping
         # and not generated in second time during shipment
@@ -74,7 +75,7 @@ class StockPicking(models.Model):
 
     @api.onchange("carrier_id")
     def onchange_carrier_id(self):
-        """ Inherit this method in your module """
+        """Inherit this method in your module"""
         if not self.carrier_id:
             return
         # This can look useless as the field carrier_code and
@@ -159,7 +160,7 @@ class StockPicking(models.Model):
         ]
 
     def _get_carrier_account(self):
-        """ Return a carrier suitable for the current picking """
+        """Return a carrier suitable for the current picking"""
         domain = self._get_carrier_account_domain()
         return self.env["carrier.account"].search(
             domain,
@@ -191,7 +192,7 @@ class StockPicking(models.Model):
         return self.env["res.partner"].browse(address_id)
 
     def _check_existing_shipping_label(self):
-        """ Check that labels don't already exist for this picking """
+        """Check that labels don't already exist for this picking"""
         self.ensure_one()
         labels = self.env["shipping.label"].search(
             [("res_id", "=", self.id), ("res_model", "=", "stock.picking")]

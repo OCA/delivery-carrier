@@ -6,7 +6,7 @@ from odoo import fields, models
 
 
 class ShippingLabel(models.Model):
-    """ Child class of ir attachment to identify which are labels """
+    """Child class of ir attachment to identify which are labels"""
 
     _name = "shipping.label"
     _inherits = {"ir.attachment": "attachment_id"}

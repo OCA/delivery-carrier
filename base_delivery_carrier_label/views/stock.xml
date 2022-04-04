@@ -8,9 +8,12 @@
         <field name="arch" type="xml">
             <xpath expr="//page//field[@name='carrier_id']" position="after">
                 <field name="carrier_code" />
-            </xpath>
-            <xpath expr="//page//group[@name='carrier_data']/.." position="after">
-                <field name="option_ids" domain="[('carrier_id', '=', carrier_id)]" />
+                <field
+                    name="option_ids"
+                    domain="[('carrier_id', '=', carrier_id)]"
+                    widget="many2many_tags"
+                    options="{'color_field': 'color', 'no_create_edit': True}"
+                />
             </xpath>
         </field>
     </record>
