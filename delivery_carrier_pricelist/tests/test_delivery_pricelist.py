@@ -100,8 +100,8 @@ class TestRoutePutaway(SavepointCase):
         link = delivery_wizard.carrier_id.get_tracking_link(so.picking_ids)
         self.assertFalse(link)
         result = delivery_wizard.carrier_id.send_shipping(so.picking_ids)
-        delivery_auto_refresh = self.env['ir.module.module'].search(
-            [('name', '=', 'delivery_auto_refresh'), ('state', '=', 'installed')]
+        delivery_auto_refresh = self.env["ir.module.module"].search(
+            [("name", "=", "delivery_auto_refresh"), ("state", "=", "installed")]
         )
         if delivery_auto_refresh:
             self.assertEqual(result, [{"exact_price": 10.0, "tracking_number": False}])
