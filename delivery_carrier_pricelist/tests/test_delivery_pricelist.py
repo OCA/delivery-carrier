@@ -92,20 +92,21 @@ class TestRoutePutaway(SavepointCase):
     def test_wizard_send_shipping(self):
         self.create_price_list()
         self.create_wizard()
-        price = self.pricelist_item.fixed_price
         self.carrier_pricelist.invoice_policy = "pricelist"
         delivery_wizard = self.delivery_wizard
         delivery_wizard.carrier_id = self.carrier_pricelist
-        rec = delivery_wizard.save()
-        rec.button_confirm()
         so = self.sale_normal_delivery_charges
         so.action_confirm()
-        self.assertEqual(so.carrier_id, delivery_wizard.carrier_id)
         link = delivery_wizard.carrier_id.get_tracking_link(so.picking_ids)
         self.assertFalse(link)
         result = delivery_wizard.carrier_id.send_shipping(so.picking_ids)
-        expecting = [{"exact_price": price, "tracking_number": False}]
-        self.assertEqual(result, expecting)
+        delivery_auto_refresh = self.env["ir.module.module"].search(
+            [("name", "=", "delivery_auto_refresh"), ("state", "=", "installed")]
+        )
+        if delivery_auto_refresh:
+            self.assertTrue(result[0]["exact_price"] > 0)
+        else:
+            self.assertEqual(result, [{"exact_price": 0.0, "tracking_number": False}])
 
     def test_fields_view_get(self):
         carrier = self.carrier_pricelist
