@@ -108,7 +108,7 @@ class TestRoutePutaway(SavepointCase):
             [("name", "=", "delivery_auto_refresh"), ("state", "=", "installed")]
         )
         if delivery_auto_refresh:
-            self.assertEqual(result, [{"exact_price": 10.0, "tracking_number": False}])
+            self.assertTrue(result[0]['exact_price'] > 0)
         else:
             self.assertEqual(result, [{"exact_price": 0.0, "tracking_number": False}])
         expecting = [{"exact_price": price, "tracking_number": False}]
