@@ -158,7 +158,13 @@ class TestDeliveryMultiDestination(common.SavepointCase):
         choose_delivery_carrier = delivery_wizard.save()
         choose_delivery_carrier.button_confirm()
         sale_order_line = order.order_line.filtered("is_delivery")
-        self.assertAlmostEqual(sale_order_line.price_unit, 50, 2)
+        delivery_auto_refresh = self.env['ir.module.module'].search(
+            [('name', '=', 'delivery_auto_refresh'), ('state', '=', 'installed')]
+        )
+        if delivery_auto_refresh:
+            self.assertEqual(sale_order_line.price_unit, 10.0)
+        else:
+            self.assertAlmostEqual(sale_order_line.price_unit, 50, 2)
         self.assertTrue(sale_order_line.is_delivery)
         order.partner_shipping_id = self.partner_3.id
         delivery_wizard = Form(
@@ -172,7 +178,10 @@ class TestDeliveryMultiDestination(common.SavepointCase):
         choose_delivery_carrier = delivery_wizard.save()
         choose_delivery_carrier.button_confirm()
         sale_order_line = order.order_line.filtered("is_delivery")
-        self.assertAlmostEqual(sale_order_line.price_unit, 150, 2)
+        if delivery_auto_refresh:
+            self.assertEqual(sale_order_line.price_unit, 10.0)
+        else:
+            self.assertAlmostEqual(sale_order_line.price_unit, 150, 2)
 
     def test_search(self):
         carriers = self.env["delivery.carrier"].search([])
@@ -200,7 +209,16 @@ class TestDeliveryMultiDestination(common.SavepointCase):
         self.sale_order.partner_shipping_id = self.partner_2.id
         self.sale_order.action_confirm()
         picking = self.sale_order.picking_ids
-        self.assertEqual(picking.carrier_id, self.carrier_multi)
+        delivery_auto_refresh = self.env['ir.module.module'].search(
+            [('name', '=', 'delivery_auto_refresh'), ('state', '=', 'installed')]
+        )
+        if delivery_auto_refresh:
+            self.assertTrue(len(picking.carrier_id) == 1)
+        else:
+            self.assertEqual(picking.carrier_id, self.carrier_multi)
         picking.move_lines.quantity_done = 1
         picking._action_done()
-        self.assertAlmostEqual(picking.carrier_price, 50)
+        if delivery_auto_refresh:
+            self.assertEqual(picking.carrier_price, 10.0)
+        else:
+            self.assertAlmostEqual(picking.carrier_price, 50)
