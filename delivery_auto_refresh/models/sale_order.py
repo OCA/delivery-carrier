@@ -11,7 +11,8 @@ class SaleOrder(models.Model):
     _inherit = "sale.order"
 
     available_carrier_ids = fields.Many2many(
-        comodel_name="delivery.carrier", compute="_compute_available_carrier_ids",
+        comodel_name="delivery.carrier",
+        compute="_compute_available_carrier_ids",
     )
 
     @api.onchange("partner_id", "partner_shipping_id")
