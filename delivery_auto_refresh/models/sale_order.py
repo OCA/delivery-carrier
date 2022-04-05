@@ -10,29 +10,27 @@ from ..utils import get_bool_param
 class SaleOrder(models.Model):
     _inherit = "sale.order"
 
-    carrier_id = fields.Many2one(
-        compute="_compute_carrier_id", store=True, readonly=False
-    )
     available_carrier_ids = fields.Many2many(
         comodel_name="delivery.carrier", compute="_compute_available_carrier_ids",
     )
 
-    @api.depends("partner_id", "partner_shipping_id")
-    def _compute_carrier_id(self):
-        if hasattr(super(), "_compute_carrier_id"):
-            super()._compute_carrier_id()
-        for order in self:
-            action = order.action_open_delivery_wizard()
-            carrier_id = self.env["delivery.carrier"].browse(
-                action["context"]["default_carrier_id"]
-            )
-            # If the carrier isn't allowed for the current shipping address, we wont
-            # default to it. In that case we'd try to fallback to the former carrier.
-            order.carrier_id = fields.first(
-                (carrier_id | order.carrier_id).filtered(
-                    lambda x: x in order.available_carrier_ids._origin
+    @api.onchange("partner_id", "partner_shipping_id")
+    def _onchange_partner_id(self):
+        if hasattr(super(), "_onchange_partner_id"):
+            super()._onchange_partner_id()
+        if get_bool_param(self.env, "set_default_carrier"):
+            for order in self:
+                action = order.action_open_delivery_wizard()
+                carrier_id = self.env["delivery.carrier"].browse(
+                    action["context"]["default_carrier_id"]
                 )
-            )
+                # If the carrier isn't allowed for the current shipping address, we wont
+                # default to it. In that case we'd try to fallback to the former carrier.
+                order.carrier_id = fields.first(
+                    (carrier_id | order.carrier_id).filtered(
+                        lambda x: x in order.available_carrier_ids._origin
+                    )
+                )
 
     @api.depends("partner_shipping_id")
     def _compute_available_carrier_ids(self):
@@ -51,10 +49,11 @@ class SaleOrder(models.Model):
     def _auto_refresh_delivery(self):
         self.ensure_one()
         # Make sure that if you have removed the carrier, the line is gone
-        if self.state in {"draft", "sent"}:
-            # Context added to avoid the recursive calls and save the new
-            # value of carrier_id
-            self.with_context(auto_refresh_delivery=True)._remove_delivery_line()
+        if self._get_param_auto_add_delivery_line():
+            if self.state in {"draft", "sent"}:
+                # Context added to avoid the recursive calls and save the new
+                # value of carrier_id
+                self.with_context(auto_refresh_delivery=True)._remove_delivery_line()
         if self._get_param_auto_add_delivery_line() and self.carrier_id:
             if self.state in {"draft", "sent"}:
                 price_unit = self.carrier_id.rate_shipment(self)["price"]
