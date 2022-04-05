@@ -1,5 +1,9 @@
 * Activate developer mode.
 * Go to *Settings > Technical > Parameters > System Parameters*.
+* Locate the setting with key "delivery_auto_refresh.set_default_carrier"
+  or create a new one if not exists.
+  Put a non Falsy value (1, True...) if you want to have default carrier computed
+  automatically.
 * Locate the setting with key "delivery_auto_refresh.auto_add_delivery_line"
   or create a new one if not exists.
   Put a non Falsy value (1, True...) if you want to add automatically the
