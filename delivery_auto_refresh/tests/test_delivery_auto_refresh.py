@@ -70,6 +70,8 @@ class TestDeliveryAutoRefresh(common.SavepointCase):
         cls.param_name1 = "delivery_auto_refresh.auto_add_delivery_line"
         cls.param_name2 = "delivery_auto_refresh.refresh_after_picking"
         cls.param_name3 = "delivery_auto_refresh.auto_void_delivery_line"
+        cls.param_name4 = "delivery_auto_refresh.set_default_carrier"
+        cls.env["ir.config_parameter"].sudo().set_param(cls.param_name4, 1)
         order_form = Form(cls.env["sale.order"])
         order_form.partner_id = cls.partner
         order_form.partner_invoice_id = cls.partner
@@ -172,7 +174,7 @@ class TestDeliveryAutoRefresh(common.SavepointCase):
         no_carrier = self.env["delivery.carrier"]
         order_form_2 = Form(self.env["sale.order"])
         order_form_2.partner_id = partner_without_carrier
-        self.assertEquals(order_form_2.carrier_id, no_carrier)
+        self.assertEqual(order_form_2.carrier_id, no_carrier)
 
     def _confirm_sale_order(self, order):
         sale_form = Form(order)
