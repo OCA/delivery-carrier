@@ -821,9 +821,21 @@ msgid "for available codes."
 msgstr ""
 
 #. module: delivery_postlogistics
+#: model:product.product,weight_uom_name:delivery_postlogistics.product_postlogistics_service
+#: model:product.template,weight_uom_name:delivery_postlogistics.product_postlogistics_service_product_template
+msgid "kg"
+msgstr ""
+
+#. module: delivery_postlogistics
 #: code:addons/delivery_postlogistics/postlogistics/web_service.py:0
 #, python-format
 msgid "label layout"
+msgstr ""
+
+#. module: delivery_postlogistics
+#: model:product.product,volume_uom_name:delivery_postlogistics.product_postlogistics_service
+#: model:product.template,volume_uom_name:delivery_postlogistics.product_postlogistics_service_product_template
+msgid "m³"
 msgstr ""
 
 #. module: delivery_postlogistics
