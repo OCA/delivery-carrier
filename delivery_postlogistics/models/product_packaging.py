@@ -16,4 +16,6 @@ class ProductPackaging(models.Model):
         Return the list of packaging codes
         """
         self.ensure_one()
-        return [code.strip() for code in self.shipper_package_code.split(",")]
+        if self.shipper_package_code:
+            return [code.strip() for code in self.shipper_package_code.split(",")]
+        return []
