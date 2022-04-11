@@ -1,20 +1,17 @@
 # Copyright 2018 Simone Rubino - Agile Business Group
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import _, api, models
-from odoo.exceptions import UserError
+from odoo import models
 from odoo.tools.safe_eval import safe_eval
 
 
 class DeliveryCarrier(models.Model):
     _inherit = "delivery.carrier"
 
-    @api.multi
     def _get_price_available(self, order):
         self.ensure_one()
         self = self.with_context({"order_amount_untaxed": order.amount_untaxed})
-        res = super(DeliveryCarrier, self)._get_price_available(order)
-        return res
+        return super(DeliveryCarrier, self)._get_price_available(order)
 
     def _get_price_from_picking(self, total, weight, volume, quantity):
         price = 0.0
@@ -27,13 +24,11 @@ class DeliveryCarrier(models.Model):
             "quantity": quantity,
             "untaxed_price": self.env.context.get("order_amount_untaxed", 0),
         }
-        untaxed_rule_present = False
         for line in self.price_rule_ids:
             test = safe_eval(
                 line.variable + line.operator + str(line.max_value), price_dict
             )
             if line.is_untaxed_rule():
-                untaxed_rule_present = True
                 if test:
                     price = (
                         line.list_base_price
@@ -45,17 +40,21 @@ class DeliveryCarrier(models.Model):
                 break
 
         if not untaxed_criteria_found:
-            if untaxed_rule_present:
-                # We cannot send everything to super if an untaxed rule
-                # has failed because super doesn't know how to
-                # handle untaxed_price variable
-                raise UserError(
-                    _(
-                        "Selected product in the delivery method doesn't "
-                        "fulfill any of the delivery carrier(s) criteria."
-                    )
-                )
             return super(DeliveryCarrier, self)._get_price_from_picking(
                 total, weight, volume, quantity
             )
         return price
+
+    def _get_price_dict(self, total, weight, volume, quantity):
+        """Hook allowing to retrieve dict to be used in _get_price_from_picking() function.
+        Hook to be overridden when we need to add some field to product
+        and use it in variable factor from price rules."""
+        res = super(DeliveryCarrier, self)._get_price_dict(
+            total, weight, volume, quantity
+        )
+        res.update(
+            {
+                "untaxed_price": self.env.context.get("order_amount_untaxed", 0),
+            }
+        )
+        return res
