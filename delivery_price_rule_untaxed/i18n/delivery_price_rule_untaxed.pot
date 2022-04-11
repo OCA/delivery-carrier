@@ -1,12 +1,12 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* delivery_price_rule_untaxed
+# 	* delivery_price_rule_untaxed
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 12.0\n"
+"Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: <>\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,36 +19,36 @@ msgid "Carrier price on untaxed"
 msgstr ""
 
 #. module: delivery_price_rule_untaxed
-#: model:ir.model,name:delivery_price_rule_untaxed.model_delivery_carrier
-msgid "Delivery Methods"
-msgstr ""
-
-#. module: delivery_price_rule_untaxed
 #: model:ir.model,name:delivery_price_rule_untaxed.model_delivery_price_rule
 msgid "Delivery Price Rules"
 msgstr ""
 
 #. module: delivery_price_rule_untaxed
-#: selection:delivery.price.rule,variable:0
-#: selection:delivery.price.rule,variable_factor:0
-msgid "Price"
+#: model:ir.model.fields,field_description:delivery_price_rule_untaxed.field_delivery_carrier__display_name
+#: model:ir.model.fields,field_description:delivery_price_rule_untaxed.field_delivery_price_rule__display_name
+msgid "Display Name"
 msgstr ""
 
 #. module: delivery_price_rule_untaxed
-#: selection:delivery.price.rule,variable:0
-#: selection:delivery.price.rule,variable_factor:0
-msgid "Quantity"
+#: model:ir.model.fields,field_description:delivery_price_rule_untaxed.field_delivery_carrier__id
+#: model:ir.model.fields,field_description:delivery_price_rule_untaxed.field_delivery_price_rule__id
+msgid "ID"
 msgstr ""
 
 #. module: delivery_price_rule_untaxed
-#: code:addons/delivery_price_rule_untaxed/models/delivery_carrier.py:51
-#, python-format
-msgid "Selected product in the delivery method doesn't fulfill any of the delivery carrier(s) criteria."
+#: model:ir.model.fields,field_description:delivery_price_rule_untaxed.field_delivery_carrier____last_update
+#: model:ir.model.fields,field_description:delivery_price_rule_untaxed.field_delivery_price_rule____last_update
+msgid "Last Modified on"
 msgstr ""
 
 #. module: delivery_price_rule_untaxed
-#: selection:delivery.price.rule,variable:0
-#: selection:delivery.price.rule,variable_factor:0
+#: model:ir.model,name:delivery_price_rule_untaxed.model_delivery_carrier
+msgid "Shipping Methods"
+msgstr ""
+
+#. module: delivery_price_rule_untaxed
+#: model:ir.model.fields.selection,name:delivery_price_rule_untaxed.selection__delivery_price_rule__variable__untaxed_price
+#: model:ir.model.fields.selection,name:delivery_price_rule_untaxed.selection__delivery_price_rule__variable_factor__untaxed_price
 msgid "Untaxed price"
 msgstr ""
 
@@ -61,22 +61,3 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_price_rule_untaxed.field_delivery_price_rule__variable_factor
 msgid "Variable Factor"
 msgstr ""
-
-#. module: delivery_price_rule_untaxed
-#: selection:delivery.price.rule,variable:0
-#: selection:delivery.price.rule,variable_factor:0
-msgid "Volume"
-msgstr ""
-
-#. module: delivery_price_rule_untaxed
-#: selection:delivery.price.rule,variable:0
-#: selection:delivery.price.rule,variable_factor:0
-msgid "Weight"
-msgstr ""
-
-#. module: delivery_price_rule_untaxed
-#: selection:delivery.price.rule,variable:0
-#: selection:delivery.price.rule,variable_factor:0
-msgid "Weight * Volume"
-msgstr ""
-
