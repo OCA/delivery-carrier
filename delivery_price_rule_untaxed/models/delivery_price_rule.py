@@ -5,14 +5,14 @@ from odoo import api, fields, models
 
 
 class DeliveryPriceRule(models.Model):
-    _inherit = 'delivery.price.rule'
+    _inherit = "delivery.price.rule"
 
-    variable = fields.Selection(
-        selection_add=[('untaxed_price', 'Untaxed price')])
+    variable = fields.Selection(selection_add=[("untaxed_price", "Untaxed price")])
     variable_factor = fields.Selection(
-        selection_add=[('untaxed_price', 'Untaxed price')])
+        selection_add=[("untaxed_price", "Untaxed price")]
+    )
 
     @api.multi
     def is_untaxed_rule(self):
         self.ensure_one()
-        return 'untaxed_price' in (self.variable, self.variable_factor)
+        return "untaxed_price" in (self.variable, self.variable_factor)
