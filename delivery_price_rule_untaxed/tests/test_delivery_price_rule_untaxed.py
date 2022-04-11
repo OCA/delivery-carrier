@@ -1,7 +1,6 @@
 # Copyright 2018 Simone Rubino - Agile Business Group
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo.exceptions import UserError
 from odoo.tests import common
 
 
@@ -43,15 +42,12 @@ class TestDeliveryCost(common.TransactionCase):
             }
         )
 
-        # Raise exception because total untaxed (750) is above threshold (300)
-        with self.assertRaises(UserError):
-            self.sale_untaxed_delivery_charges.set_delivery_line()
-
         self.sale_untaxed_delivery_charges.order_line.price_unit = 300
 
-        # Add untaxed delivery cost in sale order
-        self.sale_untaxed_delivery_charges.get_delivery_price()
-        self.sale_untaxed_delivery_charges.set_delivery_line()
+        self.sale_untaxed_delivery_charges.set_delivery_line(
+            self.sale_untaxed_delivery_charges.carrier_id,
+            self.sale_untaxed_delivery_charges.recompute_delivery_price,
+        )
 
         # Check sale order after adding delivery cost
         line = self.SaleOrderLine.search(
@@ -66,6 +62,3 @@ class TestDeliveryCost(common.TransactionCase):
         )
 
         self.assertEqual(len(line), 1, "Delivery cost is not Added")
-        self.assertEqual(
-            line.price_subtotal, 2 * 300, "Delivey cost does not correspond."
-        )
