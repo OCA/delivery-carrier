@@ -27,6 +27,7 @@ addon | version | maintainers | summary
 [delivery_carrier_agency](delivery_carrier_agency/) | 14.0.1.0.1 |  | Add a model for Carrier Agencies
 [delivery_carrier_category](delivery_carrier_category/) | 14.0.1.0.0 | [![rousseldenis](https://github.com/rousseldenis.png?size=30px)](https://github.com/rousseldenis) | Adds a category to delivery carriers in order to help users classifying them
 [delivery_carrier_city](delivery_carrier_city/) | 14.0.1.0.0 | [![ivantodorovich](https://github.com/ivantodorovich.png?size=30px)](https://github.com/ivantodorovich) | Integrates delivery with base_address_city
+[delivery_carrier_customer_info](delivery_carrier_customer_info/) | 14.0.1.0.0 |  | Send delivery notice to the shipper from any operation.
 [delivery_carrier_default_tracking_url](delivery_carrier_default_tracking_url/) | 14.0.1.0.0 | [![rousseldenis](https://github.com/rousseldenis.png?size=30px)](https://github.com/rousseldenis) | Adds the default tracking url on delivery carrier
 [delivery_carrier_info](delivery_carrier_info/) | 14.0.1.0.1 |  | Add code and description on carrier
 [delivery_carrier_label_batch](delivery_carrier_label_batch/) | 14.0.1.0.0 |  | Carrier labels - Stock Batch Picking (link)
