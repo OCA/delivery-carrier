@@ -71,6 +71,11 @@
         <field name="model">delivery.carrier</field>
         <field name="inherit_id" ref="delivery.view_delivery_carrier_tree" />
         <field name="arch" type="xml">
+            <field name="delivery_type" position="attributes">
+                <attribute
+                    name="attrs"
+                >{'invisible': [('destination_type', '!=', 'one')]}</attribute>
+            </field>
             <field name="delivery_type" position="after">
                 <field name="destination_type" />
                 <field
