@@ -21,6 +21,7 @@ class DeliveryCarrier(models.Model):
     parent_id = fields.Many2one(
         comodel_name="delivery.carrier",
         string="Parent carrier",
+        ondelete="cascade",
     )
     destination_type = fields.Selection(
         selection=[("one", "One destination"), ("multi", "Multiple destinations")],
