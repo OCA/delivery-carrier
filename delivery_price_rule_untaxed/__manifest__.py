@@ -3,7 +3,7 @@
 {
     "name": "Delivery price rule untaxed",
     "summary": "Add untaxed amount to variables for price delivery price rule",
-    "version": "14.0.1.0.0",
+    "version": "14.0.1.0.1",
     "category": "Stock",
     "website": "https://github.com/OCA/delivery-carrier"
     "14.0/delivery_price_rule_untaxed",
