@@ -1,6 +1,7 @@
 
 [![Runboat](https://img.shields.io/badge/runboat-Try%20me-875A7B.png)](https://runboat.odoo-community.org/builds?repo=OCA/delivery-carrier&target_branch=13.0)
-[![Build Status](https://travis-ci.com/OCA/delivery-carrier.svg?branch=13.0)](https://travis-ci.com/OCA/delivery-carrier)
+[![Pre-commit Status](https://github.com/OCA/delivery-carrier/actions/workflows/pre-commit.yml/badge.svg?branch=13.0)](https://github.com/OCA/delivery-carrier/actions/workflows/pre-commit.yml?query=branch%3A13.0)
+[![Build Status](https://github.com/OCA/delivery-carrier/actions/workflows/test.yml/badge.svg?branch=13.0)](https://github.com/OCA/delivery-carrier/actions/workflows/test.yml?query=branch%3A13.0)
 [![codecov](https://codecov.io/gh/OCA/delivery-carrier/branch/13.0/graph/badge.svg)](https://codecov.io/gh/OCA/delivery-carrier)
 [![Translation Status](https://translation.odoo-community.org/widgets/delivery-carrier-13-0/-/svg-badge.svg)](https://translation.odoo-community.org/engage/delivery-carrier-13-0/?utm_source=widget)
 
