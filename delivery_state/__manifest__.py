@@ -12,6 +12,7 @@
     "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/delivery-carrier",
     "license": "AGPL-3",
+    "development_status": "Production/Stable",
     "category": "Delivery",
     "version": "13.0.2.0.0",
     "depends": ["delivery"],
