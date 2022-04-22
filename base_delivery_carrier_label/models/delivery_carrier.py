@@ -16,7 +16,7 @@ class DeliveryCarrier(models.Model):
     )
 
     def alternative_send_shipping(self, pickings):
-        return {}
+        return [{"exact_price": False, "tracking_number": False}]
 
     def default_options(self):
         """Returns default and available options for a carrier"""
