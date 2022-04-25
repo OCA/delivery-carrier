@@ -77,6 +77,11 @@ class DeliveryCarrier(models.Model):
         "webservice (you will necessary to activate tracking API)",
     )
 
+    def ups_test_call(self, order):
+        self.ensure_one()
+        ups_request = UpsRequest(self)
+        return ups_request.test_call(order)
+
     def ups_send_shipping(self, pickings):
         return [self.ups_create_shipping(p) for p in pickings]
 
