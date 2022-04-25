@@ -196,11 +196,17 @@ class UpsRequest(object):
             }
         }
 
-    def rate_shipment(self, order):
-        status = self._process_reply(
+    def _rate_shipment(self, order):
+        return self._process_reply(
             url="%s/ship/v1807/rating/Rate" % self.url,
             data=self._prepare_rate_shipment(order),
         )
+
+    def test_call(self, order):
+        return self._rate_shipment(order)["response"]
+
+    def rate_shipment(self, order):
+        status = self._rate_shipment(order)
         return status["RateResponse"]["RatedShipment"]["TotalCharges"]
 
     def _prepare_shipping_label(self, carrier_tracking_ref):
