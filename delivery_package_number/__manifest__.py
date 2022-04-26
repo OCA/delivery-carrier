@@ -10,6 +10,7 @@
     "license": "AGPL-3",
     "installable": True,
     "application": False,
+    "development_status": "Production/Stable",
     "depends": ["delivery"],
     "data": [
         "views/stock_picking_views.xml",

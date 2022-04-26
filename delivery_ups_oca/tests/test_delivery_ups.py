@@ -63,6 +63,9 @@ class DeliveryUps(common.SavepointCase):
         cls.sale = cls._create_sale_order(cls)
         cls.picking = cls.sale.picking_ids[0]
         cls.picking.move_lines.quantity_done = 10
+        # We make a test call to avoid errors in tests
+        response = cls.carrier.ups_test_call(cls.sale)
+        cls.ups_ws_status = True if not response["errors"] else False
 
     def _create_sale_order(self):
         order_form = Form(self.env["sale.order"])
@@ -81,11 +84,15 @@ class DeliveryUps(common.SavepointCase):
         return sale
 
     def test_order_ups_rate_shipment(self):
+        if not self.ups_ws_status:
+            self.skipTest("UPS webservice with errors")
         res = self.carrier.ups_rate_shipment(self.sale)
         self.assertGreater(res["price"], 0)
         self.assertTrue(res["success"])
 
     def test_order_ups_rate_shipment_currency_extra(self):
+        if not self.ups_ws_status:
+            self.skipTest("UPS webservice with errors")
         usd = self.env.ref("base.USD")
         eur = self.env.ref("base.EUR")
         currency = self.env.ref("base.main_company").currency_id
@@ -96,6 +103,8 @@ class DeliveryUps(common.SavepointCase):
         self.assertTrue(res["success"])
 
     def test_delivery_carrier_ups_integration(self):
+        if not self.ups_ws_status:
+            self.skipTest("UPS webservice with errors")
         self.picking.action_confirm()
         self.picking.action_assign()
         self.picking.send_to_shipper()
