@@ -8,3 +8,4 @@ access_carrier_form_fields,access_carrier_form_fields,model_carrier_form_field,s
 
 access_carrier_form_mngr,access_carrier_form_mngr,model_carrier_form,stock.group_stock_manager,1,1,1,1
 access_carrier_form_fields_mngr,access_carrier_form_fields_mngr,model_carrier_form_field,stock.group_stock_manager,1,1,1,1
+carrier_deutsche_post.access_download_file,access_download_file,carrier_deutsche_post.model_download_file,base.group_user,1,1,1,1
