@@ -6,21 +6,15 @@
 {
     "name": "Delivery Carrier Info",
     "summary": "Add code and description on carrier",
-    "version": "14.0.1.0.1",
+    "version": "15.0.1.0.0",
     "category": "Delivery",
     "website": "https://github.com/OCA/delivery-carrier",
     "author": "Akretion,Odoo Community Association (OCA)",
     "license": "AGPL-3",
-    "application": False,
-    "installable": True,
-    "external_dependencies": {
-        "python": [],
-        "bin": [],
-    },
     "depends": [
         "delivery",
     ],
     "data": ["views/delivery_view.xml"],
-    "demo": [],
-    "qweb": [],
+    "application": False,
+    "installable": True,
 }
