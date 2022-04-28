@@ -25,7 +25,7 @@ addon | version | maintainers | summary
 [base_delivery_carrier_label](base_delivery_carrier_label/) | 13.0.2.0.0 |  | Base module for carrier labels
 [delivery_auto_refresh](delivery_auto_refresh/) | 13.0.1.0.7 |  | Auto-refresh delivery price in sales orders
 [delivery_carrier_info](delivery_carrier_info/) | 13.0.1.0.0 |  | Add code and description on carrier
-[delivery_carrier_multi_zip](delivery_carrier_multi_zip/) | 13.0.1.0.0 |  | Multiple ZIP intervals for the same delivery method
+[delivery_carrier_multi_zip](delivery_carrier_multi_zip/) | 13.0.1.0.1 |  | Multiple ZIP intervals for the same delivery method
 [delivery_carrier_partner](delivery_carrier_partner/) | 13.0.1.0.1 |  | Add a partner in the delivery carrier
 [delivery_carrier_pricelist](delivery_carrier_pricelist/) | 13.0.1.0.0 |  | Compute method method fees based on the product's pricelist.
 [delivery_carrier_service_level](delivery_carrier_service_level/) | 13.0.1.0.2 |  | Add service levels to carrier
