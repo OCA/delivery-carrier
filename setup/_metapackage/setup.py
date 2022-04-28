@@ -12,6 +12,7 @@ setuptools.setup(
         'odoo13-addon-base_delivery_carrier_label',
         'odoo13-addon-delivery_auto_refresh',
         'odoo13-addon-delivery_carrier_info',
+        'odoo13-addon-delivery_carrier_multi_zip',
         'odoo13-addon-delivery_carrier_partner',
         'odoo13-addon-delivery_carrier_pricelist',
         'odoo13-addon-delivery_carrier_service_level',
