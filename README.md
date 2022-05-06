@@ -21,7 +21,7 @@ Available addons
 addon | version | maintainers | summary
 --- | --- | --- | ---
 [base_delivery_carrier_files](base_delivery_carrier_files/) | 14.0.1.0.0 |  | Base module for creation of delivery carrier files
-[base_delivery_carrier_label](base_delivery_carrier_label/) | 14.0.1.2.1 |  | Base module for carrier labels
+[base_delivery_carrier_label](base_delivery_carrier_label/) | 14.0.1.2.2 |  | Base module for carrier labels
 [carrier_account_environment](carrier_account_environment/) | 14.0.1.0.1 | [![florian-dacosta](https://github.com/florian-dacosta.png?size=30px)](https://github.com/florian-dacosta) | Configure carriers with server_environment_files
 [delivery_auto_refresh](delivery_auto_refresh/) | 14.0.1.1.0 |  | Auto-refresh delivery price in sales orders
 [delivery_carrier_agency](delivery_carrier_agency/) | 14.0.1.0.1 |  | Add a model for Carrier Agencies
