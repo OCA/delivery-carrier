@@ -75,26 +75,34 @@ class StockPicking(models.Model):
             .create(data)
         )
 
+    # When base_delivery_carrier_label is installed, its _set_a_default_package
+    # is called instead of this module's one. So the logic should be moved to
+    # _put_in_pack.
+    # TODO 15.0: refactor to depends on base_delivery_carrier_label
     def _set_a_default_package(self):
         """Pickings using this module must have a package
         If not this method put it one silently
         """
-        # TODO: consider to depends on base_delivery_carrier_label
         for picking in self:
             move_lines = picking.move_line_ids.filtered(
-                lambda s: not (s.package_id or s.result_package_id)
+                lambda s: not s.result_package_id
             )
             if move_lines:
-                carrier = picking.carrier_id
-                default_packaging = carrier.postlogistics_default_packaging_id
-                package = self.env["stock.quant.package"].create(
-                    {
-                        "packaging_id": default_packaging
-                        and default_packaging.id
-                        or False
-                    }
-                )
-                move_lines.write({"result_package_id": package.id})
+                picking._put_in_pack(move_lines)
+
+    def _put_in_pack(self, move_line_ids, create_package_level=True):
+        result = super()._put_in_pack(move_line_ids, create_package_level)
+        if self.delivery_type != "postlogistics":
+            return result
+        for move_line in move_line_ids:
+            package = move_line.result_package_id
+            carrier = move_line.picking_id.carrier_id
+            default_packaging = carrier.postlogistics_default_packaging_id
+            if not default_packaging:
+                continue
+            vals = {"packaging_id": default_packaging}
+            package.write(vals)
+        return result
 
     def postlogistics_cod_amount(self):
         """Return the PostLogistics Cash on Delivery amount of a picking
