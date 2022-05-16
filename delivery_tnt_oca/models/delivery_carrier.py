@@ -10,7 +10,10 @@ from .tnt_request import TntRequest
 class DeliveryCarrier(models.Model):
     _inherit = "delivery.carrier"
 
-    delivery_type = fields.Selection(selection_add=[("tnt_oca", "TNT")])
+    delivery_type = fields.Selection(
+        selection_add=[("tnt_oca", "TNT")],
+        ondelete={"tnt_oca": "set default"},
+    )
     tnt_oca_ws_username = fields.Char(string="WS Username")
     tnt_oca_ws_password = fields.Char(string="WS Password")
     tnt_oca_ws_account = fields.Char(string="WS Account")
@@ -24,7 +27,8 @@ class DeliveryCarrier(models.Model):
         string="Product type",
     )
     tnt_product_code = fields.Char(
-        compute="_compute_tnt_product_code", string="Product code",
+        compute="_compute_tnt_product_code",
+        string="Product code",
     )
     tnt_product_code_d = fields.Selection(
         selection=[
@@ -41,7 +45,8 @@ class DeliveryCarrier(models.Model):
         string="Product code (Non docs)",
     )
     tnt_product_service = fields.Char(
-        compute="_compute_tnt_product_service", string="Product service",
+        compute="_compute_tnt_product_service",
+        string="Product service",
     )
     tnt_product_service_d = fields.Selection(
         selection=[
@@ -83,25 +88,23 @@ class DeliveryCarrier(models.Model):
 
     @api.depends("delivery_type", "tnt_product_type")
     def _compute_tnt_product_code(self):
-        for item in self:
-            if item.delivery_type == "tnt_oca":
-                if item.tnt_product_type == "D":
-                    item.tnt_product_code = item.tnt_product_code_d
-                else:
-                    item.tnt_product_code = item.tnt_product_code_n
-            else:
-                item.tnt_product_code = item.tnt_product_code
+        self.tnt_product_code = self.tnt_product_code
+        for item in self.filtered(lambda x: x.delivery_type == "tnt_oca"):
+            item.tnt_product_code = (
+                item.tnt_product_code_d
+                if item.tnt_product_type == "D"
+                else item.tnt_product_code_n
+            )
 
     @api.depends("delivery_type", "tnt_product_type")
     def _compute_tnt_product_service(self):
-        for item in self:
-            if item.delivery_type == "tnt_oca":
-                if item.tnt_product_type == "D":
-                    item.tnt_product_service = item.tnt_product_service_d
-                else:
-                    item.tnt_product_service = item.tnt_product_service_n
-            else:
-                item.tnt_product_service = item.tnt_product_service
+        self.tnt_product_service = self.tnt_product_service
+        for item in self.filtered(lambda x: x.delivery_type == "tnt_oca"):
+            item.tnt_product_service = (
+                item.tnt_product_service_d
+                if item.tnt_product_type == "D"
+                else item.tnt_product_service_n
+            )
 
     def tnt_oca_rate_shipment(self, order):
         tnt_request = TntRequest(self, order)
