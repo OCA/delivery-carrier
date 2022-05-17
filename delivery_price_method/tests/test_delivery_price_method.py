@@ -58,34 +58,35 @@ class TestDeliveryPriceMethod(SavepointCase):
 
     def test_delivery_price_fixed(self):
         sale = self.sale
+        self.pricelist.item_ids[0].write({"fixed_price": 99.99})
         self._add_delivery()
         delivery_lines = sale.order_line.filtered(lambda r: r.is_delivery)
         delivery_price = sum(delivery_lines.mapped("price_unit"))
         self.assertEqual(float_compare(delivery_price, 99.99, precision_digits=2), 0)
-        self.assertEquals(len(delivery_lines), 1)
+        self.assertEqual(len(delivery_lines), 1)
         sale.action_confirm()
         picking = sale.picking_ids[0]
-        self.assertEquals(len(picking.move_lines), 1)
-        self.assertEquals(picking.carrier_id, self.carrier)
+        self.assertEqual(len(picking.move_lines), 1)
+        self.assertEqual(picking.carrier_id, self.carrier)
         picking.action_confirm()
         picking.action_assign()
         self.assertFalse(picking.carrier_price)
         picking.send_to_shipper()
-        self.assertEquals(picking.carrier_price, 99.99)
+        self.assertEqual(picking.carrier_price, 99.99)
 
     def test_delivery_price_method(self):
-        self.carrier.write({"price_method": "fixed", "fixed_price": 99.99})
+        self.pricelist.item_ids[0].write({"fixed_price": 99.99})
         sale = self.sale
         self._add_delivery()
         delivery_lines = sale.order_line.filtered(lambda r: r.is_delivery)
         delivery_price = sum(delivery_lines.mapped("price_unit"))
         self.assertEqual(float_compare(delivery_price, 99.99, precision_digits=2), 0)
-        self.assertEquals(len(delivery_lines), 1)
-        self.carrier.write({"price_method": "fixed", "fixed_price": 5})
+        self.assertEqual(len(delivery_lines), 1)
+        self.pricelist.item_ids[0].write({"fixed_price": 5})
         self._add_delivery()
         delivery_lines = sale.order_line.filtered(lambda r: r.is_delivery)
         delivery_price = sum(delivery_lines.mapped("price_unit"))
-        self.assertEquals(delivery_price, 5)
+        self.assertEqual(delivery_price, 5)
         self.carrier.write(
             {
                 "price_method": "base_on_rule",
@@ -106,4 +107,4 @@ class TestDeliveryPriceMethod(SavepointCase):
         self._add_delivery()
         delivery_lines = sale.order_line.filtered(lambda r: r.is_delivery)
         delivery_price = sum(delivery_lines.mapped("price_unit"))
-        self.assertEquals(delivery_price, 11.11)
+        self.assertEqual(delivery_price, 11.11)
