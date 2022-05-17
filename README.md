@@ -29,7 +29,7 @@ addon | version | maintainers | summary
 [delivery_carrier_partner](delivery_carrier_partner/) | 13.0.1.0.1 |  | Add a partner in the delivery carrier
 [delivery_carrier_pricelist](delivery_carrier_pricelist/) | 13.0.1.0.0 |  | Compute method method fees based on the product's pricelist.
 [delivery_carrier_service_level](delivery_carrier_service_level/) | 13.0.1.0.2 |  | Add service levels to carrier
-[delivery_free_fee_removal](delivery_free_fee_removal/) | 13.0.1.0.2 |  | Hide free fee lines on sales orders
+[delivery_free_fee_removal](delivery_free_fee_removal/) | 13.0.1.0.3 |  | Hide free fee lines on sales orders
 [delivery_local_pickup](delivery_local_pickup/) | 13.0.1.0.0 | [![victoralmau](https://github.com/victoralmau.png?size=30px)](https://github.com/victoralmau) | Delivery Local pickup
 [delivery_multi_destination](delivery_multi_destination/) | 13.0.1.1.0 |  | Multiple destinations for the same delivery method
 [delivery_package_fee](delivery_package_fee/) | 13.0.1.1.3 |  | Add fees on delivered packages on shipping methods
