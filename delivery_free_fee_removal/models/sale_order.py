@@ -8,7 +8,7 @@ class SaleOrder(models.Model):
     _inherit = "sale.order"
 
     def action_confirm(self):
-        super().action_confirm()
+        res = super().action_confirm()
         # Invoice all the free delivery line on order confirmation
         # Or the order will never be fully invoiced.
         delivery_lines = self.order_line.filtered(
@@ -16,3 +16,4 @@ class SaleOrder(models.Model):
         )
         for line in delivery_lines:
             line.qty_invoiced = line.product_uom_qty
+        return res
