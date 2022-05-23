@@ -76,11 +76,10 @@ class PostlogisticsWebService(object):
             return picking.partner_id
         elif picking.picking_type_id.code == "incoming":
             location_dest = picking.location_dest_id
-            return (
-                location_dest.partner_id
-                or location_dest.company_id.partner_id
-                or picking.env.user.company_id
-            )
+            # partner_id removed since 13.0 by below commit
+            # https://github.com/odoo/odoo/commit/2062ac6dec37841d23d2b5d8475305546a6f0df9
+            company = location_dest.company_id or picking.env.user.company_id
+            return company.partner_id
 
     def _prepare_recipient(self, picking):
         """Create a ns0:Recipient as a dict from a partner
