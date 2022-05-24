@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2022-05-24 05:32+0000\n"
+"PO-Revision-Date: 2022-05-24 09:05+0000\n"
 "Last-Translator: Leonardo J. Caballero G. <leonardocaballero@gmail.com>\n"
 "Language-Team: none\n"
 "Language: es\n"
@@ -19,18 +19,18 @@ msgstr ""
 #. module: delivery_carrier_pricelist
 #: model:ir.model.fields.selection,name:delivery_carrier_pricelist.selection__delivery_carrier__delivery_type__pricelist
 msgid "Based on Product Pricelist"
-msgstr ""
+msgstr "Basado en la lista de precios del producto"
 
 #. module: delivery_carrier_pricelist
 #: model:ir.model,name:delivery_carrier_pricelist.model_choose_delivery_carrier
 msgid "Delivery Carrier Selection Wizard"
-msgstr ""
+msgstr "Asistente de selección de transportista de entrega"
 
 #. module: delivery_carrier_pricelist
 #: code:addons/delivery_carrier_pricelist/models/delivery_carrier.py:0
 #, python-format
 msgid "Error: this delivery method is not available for this address."
-msgstr ""
+msgstr "Error: este método de envío no está disponible para esta dirección."
 
 #. module: delivery_carrier_pricelist
 #: model:ir.model.fields,help:delivery_carrier_pricelist.field_choose_delivery_carrier__invoice_policy
@@ -40,22 +40,28 @@ msgid ""
 "Real Cost: the customer will be invoiced the real cost of the shipping, the cost of the shipping will be updated on the SO after the delivery.\n"
 "Pricelist Cost: the customer will be invoiced the price of the product based on the pricelist of the sales order. The provider's cost is ignored."
 msgstr ""
+"Coste Estimado: se facturará al cliente el coste estimado del envío.\n"
+"Costo real: al cliente se le facturará el costo real del envío, el costo del "
+"envío se actualizará en el SO después de la entrega.\n"
+"Coste de lista de precios: al cliente se le facturará el precio del producto "
+"en función de la lista de precios de la orden de venta. Se ignora el costo "
+"del proveedor."
 
 #. module: delivery_carrier_pricelist
 #: model:ir.model.fields,field_description:delivery_carrier_pricelist.field_choose_delivery_carrier__invoice_policy
 #: model:ir.model.fields,field_description:delivery_carrier_pricelist.field_delivery_carrier__invoice_policy
 msgid "Invoicing Policy"
-msgstr ""
+msgstr "Política de facturación"
 
 #. module: delivery_carrier_pricelist
 #: model:ir.model.fields.selection,name:delivery_carrier_pricelist.selection__delivery_carrier__invoice_policy__pricelist
 msgid "Pricelist Cost"
-msgstr ""
+msgstr "Costo de la lista de precios"
 
 #. module: delivery_carrier_pricelist
 #: model:ir.model.fields,field_description:delivery_carrier_pricelist.field_delivery_carrier__delivery_type
 msgid "Provider"
-msgstr ""
+msgstr "Proveedor"
 
 #. module: delivery_carrier_pricelist
 #: model:ir.model,name:delivery_carrier_pricelist.model_delivery_carrier
@@ -65,4 +71,4 @@ msgstr "Métodos de envío"
 #. module: delivery_carrier_pricelist
 #: model:ir.model,name:delivery_carrier_pricelist.model_stock_picking
 msgid "Transfer"
-msgstr ""
+msgstr "Transferir"
