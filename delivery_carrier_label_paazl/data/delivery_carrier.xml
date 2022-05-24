@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright 2020 Hunki Enterprises BV
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
-<odoo>
+<odoo noupdate="1">
     <record id="carrier_paazl" model="delivery.carrier">
         <field name="name">Paazl</field>
         <field name="code">PAAZL</field>
