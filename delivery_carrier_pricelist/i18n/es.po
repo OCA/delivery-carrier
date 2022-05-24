@@ -6,13 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2022-05-24 05:32+0000\n"
+"Last-Translator: Leonardo J. Caballero G. <leonardocaballero@gmail.com>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: delivery_carrier_pricelist
 #: model:ir.model.fields.selection,name:delivery_carrier_pricelist.selection__delivery_carrier__delivery_type__pricelist
@@ -58,7 +60,7 @@ msgstr ""
 #. module: delivery_carrier_pricelist
 #: model:ir.model,name:delivery_carrier_pricelist.model_delivery_carrier
 msgid "Shipping Methods"
-msgstr ""
+msgstr "Métodos de envío"
 
 #. module: delivery_carrier_pricelist
 #: model:ir.model,name:delivery_carrier_pricelist.model_stock_picking
