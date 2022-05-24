@@ -6,40 +6,42 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2022-05-24 05:34+0000\n"
+"Last-Translator: Leonardo J. Caballero G. <leonardocaballero@gmail.com>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: delivery_purchase
 #: model:ir.model.fields,field_description:delivery_purchase.field_purchase_order__carrier_id
 msgid "Delivery Method"
-msgstr ""
+msgstr "Método de entrega"
 
 #. module: delivery_purchase
 #: model:ir.model.fields,field_description:delivery_purchase.field_purchase_order__delivery_price
 msgid "Delivery Price"
-msgstr ""
+msgstr "Precio de entrega"
 
 #. module: delivery_purchase
 #: code:addons/delivery_purchase/models/delivery_carrier.py:0
 #, python-format
 msgid "Error: no matching grid."
-msgstr ""
+msgstr "Error: no hay cuadrícula coincidente."
 
 #. module: delivery_purchase
 #: code:addons/delivery_purchase/models/delivery_carrier.py:0
 #, python-format
 msgid "Error: this delivery method is not available for this address."
-msgstr ""
+msgstr "Error: este método de envío no está disponible para esta dirección."
 
 #. module: delivery_purchase
 #: model:ir.model,name:delivery_purchase.model_purchase_order
 msgid "Purchase Order"
-msgstr ""
+msgstr "Orden de compra"
 
 #. module: delivery_purchase
 #: code:addons/delivery_purchase/models/stock_picking.py:0
@@ -48,25 +50,27 @@ msgid ""
 "Shipment sent to carrier %s for shipping with tracking number %s<br/>Cost: "
 "%.2f %s"
 msgstr ""
+"Envío enviado al transportista %s para envío con número de seguimiento %s<br/"
+">Coste: %.2f %s"
 
 #. module: delivery_purchase
 #: model:ir.model,name:delivery_purchase.model_delivery_carrier
 msgid "Shipping Methods"
-msgstr ""
+msgstr "Métodos de envío"
 
 #. module: delivery_purchase
 #: code:addons/delivery_purchase/models/delivery_carrier.py:0
 #, python-format
 msgid "The shipping is free since the order amount exceeds %.2f."
-msgstr ""
+msgstr "El envío es gratuito ya que el importe del pedido supera %.2f."
 
 #. module: delivery_purchase
 #: code:addons/delivery_purchase/models/delivery_carrier.py:0
 #, python-format
 msgid "There is no matching delivery rule."
-msgstr ""
+msgstr "No hay una regla de entrega coincidente."
 
 #. module: delivery_purchase
 #: model:ir.model,name:delivery_purchase.model_stock_picking
 msgid "Transfer"
-msgstr ""
+msgstr "Transferir"
