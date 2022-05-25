@@ -160,6 +160,7 @@ msgstr "Družba"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_company__postlogistics_logo
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_config_settings__logo
 #: model_terms:ir.ui.view,arch_db:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
 msgid "Company Logo on Post labels"
 msgstr "Logotip družbe na poštnih nalepkah"
@@ -210,16 +211,19 @@ msgstr "Privzete nastavitve"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_company__postlogistics_label_layout
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_config_settings__label_layout
 msgid "Default label layout"
 msgstr "Privzeta postavitev etiket"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_company__postlogistics_output_format
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_config_settings__output_format
 msgid "Default output format"
 msgstr "Privzeti izhodni format"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_company__postlogistics_resolution
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_config_settings__resolution
 msgid "Default resolution"
 msgstr "Privzeta ločljivost"
 
@@ -266,6 +270,7 @@ msgstr "Prikazni naziv"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_company__postlogistics_office
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_config_settings__office
 msgid "Domicile Post office"
 msgstr "Domači poštni urad"
 
@@ -450,6 +455,7 @@ msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,help:delivery_carrier_label_postlogistics.field_res_company__postlogistics_logo
+#: model:ir.model.fields,help:delivery_carrier_label_postlogistics.field_res_config_settings__logo
 msgid ""
 "Optional company logo to show on label.\n"
 "If using an image / logo, please note the following:\n"
@@ -514,6 +520,7 @@ msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_company__postlogistics_password
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_config_settings__password
 msgid "Password"
 msgstr "Geslo"
 
@@ -534,6 +541,7 @@ msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,help:delivery_carrier_label_postlogistics.field_res_company__postlogistics_office
+#: model:ir.model.fields,help:delivery_carrier_label_postlogistics.field_res_config_settings__office
 #: model_terms:ir.ui.view,arch_db:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
 msgid "Post office which will receive the shipped goods"
 msgstr "Poštni urad, ki bo prejel odposlane dobrine"
@@ -548,6 +556,7 @@ msgstr ""
 #: model:ir.model,name:delivery_carrier_label_postlogistics.model_postlogistics_license
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_delivery_carrier__postlogistics_license_id
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_company__postlogistics_license_ids
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_config_settings__license_ids
 msgid "PostLogistics Franking License"
 msgstr "Licenca PostLogistics Franking"
 
@@ -726,11 +735,13 @@ msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_company__postlogistics_username
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_config_settings__username
 msgid "Username"
 msgstr "Uporabniško ime"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_company__postlogistics_wsdl_url
+#: model:ir.model.fields,field_description:delivery_carrier_label_postlogistics.field_res_config_settings__wsdl_url
 msgid "WSDL URL"
 msgstr ""
 
