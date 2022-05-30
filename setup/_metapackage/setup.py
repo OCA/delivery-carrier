@@ -10,6 +10,7 @@ setuptools.setup(
     install_requires=[
         'odoo13-addon-base_delivery_carrier_files',
         'odoo13-addon-base_delivery_carrier_label',
+        'odoo13-addon-connector_routific',
         'odoo13-addon-delivery_auto_refresh',
         'odoo13-addon-delivery_carrier_info',
         'odoo13-addon-delivery_carrier_multi_zip',
