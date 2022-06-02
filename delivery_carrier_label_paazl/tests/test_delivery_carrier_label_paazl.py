@@ -56,6 +56,11 @@ class DeliveryCarrierLabelPaazlCase(carrier_label_case.CarrierLabelCase):
         mock_client.service.generateLabels.return_value = Mock(
             error=False, labels=b"hello world", metaData=[{"trackingNumber": "number"}],
         )
+        mock_client.service.generatePdfReturnLabels.return_value = Mock(
+            error=False,
+            label=b"generatePdfReturnLabel",
+            metaData=[{"trackingNumber": "number"}],
+        )
         with patch.object(zeep, "Client") as mock_client_class:
             mock_client_class.return_value = mock_client
             yield mock_client
@@ -114,6 +119,11 @@ class DeliveryCarrierLabelPaazlCase(carrier_label_case.CarrierLabelCase):
 class TestDeliveryCarrierLabelPaazl(
         DeliveryCarrierLabelPaazlCase,
         carrier_label_case.TestCarrierLabel):
+    def _picking_data(self):
+        """Add the boxes that vanmoof_shipping module makes required for Paazl"""
+        self.picking.paazl_pack_detail_ids = [(0, 0, {"name": __name__})]
+        return super()._picking_data()
+
     def test_cancel_shipment(self):
         self.assertTrue(self.picking.carrier_tracking_ref)
         with self._setup_mock_client() as mock_client:
@@ -185,6 +195,41 @@ class TestDeliveryCarrierLabelPaazl(
             )
             self.picking._paazl_send_update_order(change_order=True)
             self.assertTrue(self.picking.carrier_tracking_ref)
+
+    def test_paazl_return_pdf_label(self):
+        """
+        Test generatePdfReturnLabel paazl API method.
+        """
+        picking = self.picking.copy()
+        customer_location = self.env['stock.location'].search(
+            [("usage", "=", "customer")]
+        )
+        picking.location_id = customer_location[0].id
+        picking.picking_type_code = "incoming"
+        picking.move_lines.quantity_done = 1
+        with self._setup_mock_client():
+            picking._paazl_send_update_order()
+        with self._setup_mock_client():
+            picking.button_paazl_get_label()
+        picking.button_validate()
+        labels = self.env["shipping.label"].search([
+            ("res_id", "=", picking.id),
+            ("res_model", "=", "stock.picking")])
+        self.assertEqual(
+            picking.message_main_attachment_id.mimetype,
+            labels[0].attachment_id.mimetype)
+        self.assertEqual(
+            labels[0].attachment_id.mimetype,
+            "application/pdf"
+        )
+        self.assertEqual(
+            picking.message_main_attachment_id.mimetype,
+            "application/pdf"
+        )
+        self.assertEqual(
+            picking.message_main_attachment_id.datas_fname.split('.')[1],
+            "pdf"
+        )
 
 
 class TestDeliveryCarrierLabelPaazlPackaging(TestDeliveryCarrierLabelPaazl):

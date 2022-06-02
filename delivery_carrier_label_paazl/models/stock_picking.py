@@ -67,15 +67,26 @@ class StockPicking(models.Model):
         """
         self.ensure_one()
         api = self._paazl_api()
-        # we need to create labels in order to get a tracking number
-        status = api.service.generateLabels(**self._paazl_generate_labels_data())
+        is_return = self.location_id.usage == "customer"
+        return_rma = all([is_return and self.picking_type_code == "incoming"])
+        if return_rma:
+            payload = self._paazl_generate_labels_data()
+            # Removing since generatePdfReturnLabels call doesn't accept labelFormat
+            if "labelFormat" in payload:
+                payload.pop("labelFormat")
+            # Generating return labels
+            status = api.service.generatePdfReturnLabels(**payload)
+        else:
+            # we need to create labels in order to get a tracking number
+            status = api.service.generateLabels(**self._paazl_generate_labels_data())
         self._paazl_raise_error(status)
         # as we have the labels anyways, attach them
         account = self._get_carrier_account()
+        status_label = status.label if return_rma else status.labels
         file_type = (account.file_format or "").lower() or "pdf"
         label = {
             "name": self._paazl_reference(),
-            "file": base64.b64encode(status.labels),
+            "file": base64.b64encode(status_label),
             "filename": "{}.{}".format(self._paazl_reference(), file_type),
             "file_type": file_type,
         }
@@ -260,6 +271,9 @@ class StockPicking(models.Model):
         """Return a dict to be passed to the generateLabels endpoint"""
         self.ensure_one()
         auth_order_id = self._paazl_auth_order_id()
+        is_return = self.location_id.usage == "customer"
+        if is_return and self.picking_type_code == "incoming":
+            auth_order_id['shippingOption'] = self.option_ids.tmpl_option_id.code
         account = self._get_carrier_account()
         return {
             "webshop": auth_order_id.pop("webshop"),
