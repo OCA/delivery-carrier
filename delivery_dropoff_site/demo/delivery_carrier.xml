@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="product_product_delivery_drop_off" model="product.product">
+        <field name="name">Drop off method</field>
+        <field name="default_code">Delivery_010</field>
+        <field name="type">service</field>
+        <field name="categ_id" ref="delivery.product_category_deliveries" />
+        <field name="sale_ok" eval="False" />
+        <field name="purchase_ok" eval="False" />
+        <field name="list_price">20.0</field>
+    </record>
+    <record id="delivery_carrier" model="delivery.carrier">
+        <field name="name">Delivery With Drop-off Sites</field>
+        <field name="delivery_type">fixed</field>
+        <field name="with_dropoff_site" eval="True" />
+        <field name="fixed_price">30.0</field>
+        <field name="product_id" ref="product_product_delivery_drop_off" />
+        <field name="country_ids" eval="[(4, ref('base.fr')), (4, ref('base.be'))]" />
+    </record>
+</odoo>
