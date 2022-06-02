@@ -56,6 +56,11 @@ class DeliveryCarrierLabelPaazlCase(carrier_label_case.CarrierLabelCase):
         mock_client.service.generateLabels.return_value = Mock(
             error=False, labels=b"hello world", metaData=[{"trackingNumber": "number"}],
         )
+        mock_client.service.generatePdfReturnLabels.return_value = Mock(
+            error=False,
+            label=b"generatePdfReturnLabel",
+            metaData=[{"trackingNumber": "number"}],
+        )
         with patch.object(zeep, "Client") as mock_client_class:
             mock_client_class.return_value = mock_client
             yield mock_client
@@ -114,6 +119,7 @@ class DeliveryCarrierLabelPaazlCase(carrier_label_case.CarrierLabelCase):
 class TestDeliveryCarrierLabelPaazl(
         DeliveryCarrierLabelPaazlCase,
         carrier_label_case.TestCarrierLabel):
+
     def test_cancel_shipment(self):
         self.assertTrue(self.picking.carrier_tracking_ref)
         with self._setup_mock_client() as mock_client:
@@ -185,6 +191,28 @@ class TestDeliveryCarrierLabelPaazl(
             )
             self.picking._paazl_send_update_order(change_order=True)
             self.assertTrue(self.picking.carrier_tracking_ref)
+
+    def test_paazl_return_pdf_label(self):
+        """
+        Test paazl generatePdfReturnLabel API endpoint to generate return labels.
+        """
+        picking = self.picking.copy()
+        customer_location = self.env['stock.location'].search(
+            [("usage", "=", "customer")]
+        )
+        self.assertTrue(customer_location)
+        picking.location_id = customer_location[0].id
+        picking.picking_type_code = "incoming"
+        self.assertEqual(picking.picking_type_code, "incoming")
+        picking.move_lines.quantity_done = 1
+        with self._setup_mock_client():
+            payload = picking._paazl_generate_labels()
+
+        labels = payload["labels"][0]
+        self.assertTrue(labels)
+        self.assertTrue(labels["file"])
+        self.assertEqual(labels["file_type"], "pdf")
+        self.assertEqual(labels["filename"].split('.')[1], "pdf")
 
 
 class TestDeliveryCarrierLabelPaazlPackaging(TestDeliveryCarrierLabelPaazl):
