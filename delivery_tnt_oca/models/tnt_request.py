@@ -39,10 +39,12 @@ class TntRequest(object):
         if data is None:
             data = {}
         try:
-            headers = {"Content-Type": content_type}
+            headers = {"Content-Type": content_type, "charset": "UTF-8"}
             if auth:
                 headers["Authorization"] = "Basic {}".format(self.authorization)
-            res = requests.post(url=url, data=data, headers=headers, timeout=60)
+            res = requests.post(
+                url=url, data=data.encode("utf-8"), headers=headers, timeout=60
+            )
             res.raise_for_status()
             tnt_last_request = ("URL: {}\nData: {}").format(self.url, data)
             self.carrier.log_xml(tnt_last_request, "tnt_last_request")
