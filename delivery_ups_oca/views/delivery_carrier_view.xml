@@ -54,6 +54,7 @@ License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
                             />
                             <field
                                 name="ups_ws_password"
+                                password="True"
                                 attrs="{'required': [('delivery_type', '=', 'ups')]}"
                             />
                         </group>
