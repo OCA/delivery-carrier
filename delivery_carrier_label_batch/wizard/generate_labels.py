@@ -88,7 +88,7 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
                     pack_num = _("Pack: %s") % pack.name if pack else ""
                     # pylint: disable=translation-required
                     raise exceptions.UserError(
-                        ("%s %s - %s") % (picking_name, pack_num, e)
+                        ("%s %s - %s") % (picking_name, pack_num, str(e))
                     )
 
     def _worker(self, data_queue, error_queue):
@@ -134,9 +134,14 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
         # as a whole to a thread worker.
         groups = {}
         for pack, operations, label in self._get_packs(batch):
-            if not label or self.generate_new_labels:
-                picking = operations[0].picking_id
-                groups.setdefault(picking.id, []).append((pack, picking, label))
+            if label and not self.generate_new_labels:
+                continue
+            picking = operations[0].picking_id
+            if picking.carrier_tracking_ref:
+                picking.write({"carrier_tracking_ref": False})
+            if pack.parcel_tracking:
+                pack.write({"parcel_tracking": False})
+            groups.setdefault(picking.id, []).append((pack, picking, label))
 
         for group in groups.values():
             data_queue.put(group)
