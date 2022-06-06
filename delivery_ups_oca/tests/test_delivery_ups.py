@@ -1,5 +1,5 @@
 # Copyright 2020 Hunki Enterprises BV
-# Copyright 2021 Tecnativa - Víctor Martínez
+# Copyright 2021-2022 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from odoo.tests import Form, common
 
@@ -65,7 +65,7 @@ class DeliveryUps(common.SavepointCase):
         cls.picking.move_lines.quantity_done = 10
         # We make a test call to avoid errors in tests
         response = cls.carrier.ups_test_call(cls.sale)
-        cls.ups_ws_status = True if not response["errors"] else False
+        cls.ups_ws_status = not ("errors" in response)
 
     def _create_sale_order(self):
         order_form = Form(self.env["sale.order"])
