@@ -6,6 +6,7 @@ import logging
 import requests
 
 from odoo import _
+from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
 
@@ -44,13 +45,18 @@ class UpsRequest(object):
         ups_last_request = ("URL: {}\nData: {}").format(self.url, data)
         self.carrier.log_xml(ups_last_request, "ups_last_request")
         self.carrier.log_xml(status or "", "ups_last_response")
+        return status
+
+    def _raise_for_status(self, status, skip_errors=True):
         errors = status.get("response", {}).get("errors")
         if errors:
-            _logger.info(
-                _("Sending to UPS: %s")
-                % ("\n".join("%(code)s %(message)s" % error for error in errors),)
+            msg = _("Sending to UPS: %s") % (
+                "\n".join("%(code)s %(message)s" % error for error in errors),
             )
-        return status
+            if skip_errors:
+                _logger.info(msg)
+            else:
+                raise UserError(msg)
 
     def _quant_package_data_from_picking(self, package, picking, is_package=True):
         NumOfPieces = picking.number_of_packages
@@ -150,6 +156,7 @@ class UpsRequest(object):
             url="%s/ship/v1807/shipments" % self.url,
             data=self._prepare_create_shipping(picking),
         )
+        self._raise_for_status(status, False)
         res = status["ShipmentResponse"]["ShipmentResults"]
         return {
             "price": res["ShipmentCharges"]["TotalCharges"],
@@ -196,14 +203,17 @@ class UpsRequest(object):
             }
         }
 
-    def _rate_shipment(self, order):
-        return self._process_reply(
+    def _rate_shipment(self, order, skip_errors=False):
+        status = self._process_reply(
             url="%s/ship/v1807/rating/Rate" % self.url,
             data=self._prepare_rate_shipment(order),
         )
+        self._raise_for_status(status, skip_errors)
+        return status
 
     def test_call(self, order):
-        return self._rate_shipment(order)["response"]
+        res = self._rate_shipment(order, True)
+        return res["response"] if "response" in res else res
 
     def rate_shipment(self, order):
         status = self._rate_shipment(order)
@@ -218,17 +228,19 @@ class UpsRequest(object):
         }
 
     def shipping_label(self, carrier_tracking_ref):
-        res = self._process_reply(
+        status = self._process_reply(
             url="%s/ship/v1807/shipments/labels" % self.url,
             data=self._prepare_shipping_label(carrier_tracking_ref),
         )
-        return res["LabelRecoveryResponse"]["LabelResults"]["LabelImage"]
+        self._raise_for_status(status, False)
+        return status["LabelRecoveryResponse"]["LabelResults"]["LabelImage"]
 
     def cancel_shipment(self, pickings):
         url = "%s/ship/v1/shipments/cancel" % self.url
         for item in pickings.filtered(lambda x: x.carrier_tracking_ref):
             self.url = "{}/{}".format(self.url, item.carrier_tracking_ref)
-            self._process_reply(url=url, method="delete")
+            status = self._process_reply(url=url, method="delete")
+            self._raise_for_status(status, False)
         return True
 
     def tracking_state_update(self, picking):
@@ -237,6 +249,7 @@ class UpsRequest(object):
             method="get",
             query_parameters={"inquiryNumber": picking.carrier_tracking_ref},
         )
+        self._raise_for_status(status, False)
         state = False
         for package in status["trackResponse"]["shipment"]["package"]:
             for activity in package["activity"]:
