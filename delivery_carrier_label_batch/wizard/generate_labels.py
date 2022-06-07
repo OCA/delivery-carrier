@@ -138,13 +138,14 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
                 picking = operations[0].picking_id
                 groups.setdefault(picking.id, []).append((pack, picking, label))
 
+        is_in_testing = getattr(threading.current_thread(), "testing", False)
         for group in groups.values():
-            if not getattr(threading.currentThread(), "testing", False):
+            if not is_in_testing:
                 data_queue.put(group)
             else:
                 self._do_generate_labels(group)
 
-        if not getattr(threading.currentThread(), "testing", False):
+        if not is_in_testing:
             # create few workers to parallelize label generation
             num_workers = self._get_num_workers()
             _logger.info("Starting %s workers to generate labels", num_workers)
