@@ -34,7 +34,7 @@ addon | version | maintainers | summary
 [delivery_carrier_location](delivery_carrier_location/) | 14.0.1.0.0 | [![ivantodorovich](https://github.com/ivantodorovich.png?size=30px)](https://github.com/ivantodorovich) | Integrates delivery with base_location
 [delivery_carrier_partner](delivery_carrier_partner/) | 14.0.1.0.0 |  | Add a partner in the delivery carrier
 [delivery_carrier_pricelist](delivery_carrier_pricelist/) | 14.0.1.0.1 |  | Compute method method fees based on the product's pricelist.
-[delivery_correos_express](delivery_correos_express/) | 14.0.1.0.0 |  | Delivery Carrier implementation for Correos Express using their API
+[delivery_correos_express](delivery_correos_express/) | 14.0.1.0.1 |  | Delivery Carrier implementation for Correos Express using their API
 [delivery_free_fee_removal](delivery_free_fee_removal/) | 14.0.1.0.0 |  | Hide free fee lines on sales orders
 [delivery_multi_destination](delivery_multi_destination/) | 14.0.1.1.0 |  | Multiple destinations for the same delivery method
 [delivery_package_fee](delivery_package_fee/) | 14.0.1.0.2 |  | Add fees on delivered packages on shipping methods
