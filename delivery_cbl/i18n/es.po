@@ -1,0 +1,146 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* delivery_cbl
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-06-13 09:42+0000\n"
+"PO-Revision-Date: 2022-06-13 09:42+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: delivery_cbl
+#: code:addons/delivery_cbl/models/delivery_carrier.py:0
+#, python-format
+msgid "* The kilos field is empty"
+msgstr "* El campo kilos está vacío"
+
+#. module: delivery_cbl
+#: code:addons/delivery_cbl/models/delivery_carrier.py:0
+#, python-format
+msgid "* The number of package field is empty"
+msgstr "* El campo número de paquetes está vacío"
+
+#. module: delivery_cbl
+#: code:addons/delivery_cbl/models/delivery_carrier.py:0
+#, python-format
+msgid "* The receiver address field is empty"
+msgstr "* El campo dirección está vacío"
+
+#. module: delivery_cbl
+#: code:addons/delivery_cbl/models/delivery_carrier.py:0
+#, python-format
+msgid "* The receiver city field is empty"
+msgstr "* El campo ciudad está vacío"
+
+#. module: delivery_cbl
+#: code:addons/delivery_cbl/models/delivery_carrier.py:0
+#, python-format
+msgid "* The receiver name field is empty"
+msgstr "* El campo nombre está vacío"
+
+#. module: delivery_cbl
+#: code:addons/delivery_cbl/models/delivery_carrier.py:0
+#, python-format
+msgid "* The receiver postal code field is empty"
+msgstr "* El campo código postal está vacío"
+
+#. module: delivery_cbl
+#: code:addons/delivery_cbl/models/delivery_carrier.py:0
+#, python-format
+msgid "* The reference code field is empty"
+msgstr "* El campo referencia está vacío"
+
+#. module: delivery_cbl
+#: code:addons/delivery_cbl/models/delivery_carrier.py:0
+#, python-format
+msgid "* The volume field is empty"
+msgstr "* El campo volumen está vacío"
+
+#. module: delivery_cbl
+#: model:ir.model.fields.selection,name:delivery_cbl.selection__delivery_carrier__delivery_type__cbl
+msgid "CBL"
+msgstr ""
+
+#. module: delivery_cbl
+#: code:addons/delivery_cbl/models/delivery_carrier.py:0
+#: code:addons/delivery_cbl/models/delivery_carrier.py:0
+#, python-format
+msgid ""
+"CBL API doesn't provide methods to compute delivery rates, so you should "
+"rely on another price method instead or override this one in your custom "
+"code."
+msgstr ""
+"CBL API no provee ninguna forma de calcular las tarifas de envío, por lo "
+"tanto se deberia usar otro método o sobreescribir este en código "
+"personalizado"
+
+#. module: delivery_cbl
+#: model_terms:ir.ui.view,arch_db:delivery_cbl.view_delivery_carrier_form
+msgid "CBL Configuration"
+msgstr "Configuración CBL"
+
+#. module: delivery_cbl
+#: model:ir.model.fields,field_description:delivery_cbl.field_delivery_carrier__display_name
+#: model:ir.model.fields,field_description:delivery_cbl.field_stock_picking__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: delivery_cbl
+#: model:ir.model.fields.selection,name:delivery_cbl.selection__delivery_carrier__cbl_expenses__d
+msgid "Due"
+msgstr "Debido"
+
+#. module: delivery_cbl
+#: model_terms:ir.ui.view,arch_db:delivery_cbl.view_picking_form
+msgid "Generate CBL file"
+msgstr "Generar fichero CBL"
+
+#. module: delivery_cbl
+#: code:addons/delivery_cbl/models/stock_picking.py:0
+#, python-format
+msgid "Generated CBL file."
+msgstr "Fichero CBL generado."
+
+#. module: delivery_cbl
+#: model:ir.model.fields,field_description:delivery_cbl.field_delivery_carrier__id
+#: model:ir.model.fields,field_description:delivery_cbl.field_stock_picking__id
+msgid "ID"
+msgstr "ID (identificación)"
+
+#. module: delivery_cbl
+#: model:ir.model.fields,field_description:delivery_cbl.field_delivery_carrier____last_update
+#: model:ir.model.fields,field_description:delivery_cbl.field_stock_picking____last_update
+msgid "Last Modified on"
+msgstr "Última modificación el"
+
+#. module: delivery_cbl
+#: model:ir.model.fields.selection,name:delivery_cbl.selection__delivery_carrier__cbl_expenses__p
+msgid "Prepaid"
+msgstr "Pagado"
+
+#. module: delivery_cbl
+#: model:ir.model.fields,field_description:delivery_cbl.field_delivery_carrier__delivery_type
+msgid "Provider"
+msgstr "Proveedor"
+
+#. module: delivery_cbl
+#: model:ir.model,name:delivery_cbl.model_delivery_carrier
+msgid "Shipping Methods"
+msgstr "Métodos de envío"
+
+#. module: delivery_cbl
+#: model:ir.model,name:delivery_cbl.model_stock_picking
+msgid "Transfer"
+msgstr "Albarán"
+
+#. module: delivery_cbl
+#: model:ir.model.fields,field_description:delivery_cbl.field_delivery_carrier__cbl_expenses
+msgid "Type of expenses"
+msgstr "Portes"
