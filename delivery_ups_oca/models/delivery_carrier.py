@@ -1,5 +1,5 @@
 # Copyright 2020 Hunki Enterprises BV
-# Copyright 2021 Tecnativa - Víctor Martínez
+# Copyright 2021-2022 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from odoo import fields, models
 
@@ -85,6 +85,23 @@ class DeliveryCarrier(models.Model):
     def ups_send_shipping(self, pickings):
         return [self.ups_create_shipping(p) for p in pickings]
 
+    def _create_ups_label(self, picking, data):
+        format_code = data["LabelImageFormat"]["Code"].upper()
+        attachment_name = "%s-%s.%s" % (
+            picking.carrier_tracking_ref,
+            format_code,
+            ("txt" if format_code != "PDF" else "pdf"),
+        )
+        return self.env["ir.attachment"].create(
+            {
+                "name": attachment_name,
+                "type": "binary",
+                "datas": data["GraphicImage"],
+                "res_model": picking._name,
+                "res_id": picking.id,
+            }
+        )
+
     def ups_get_label(self, carrier_tracking_ref):
         """Generate label for picking
         :param picking - stock.picking record
@@ -99,24 +116,7 @@ class DeliveryCarrier(models.Model):
         picking = self.env["stock.picking"].search(
             [("carrier_tracking_ref", "=", carrier_tracking_ref)]
         )
-        LabelImageFormatCode = response["LabelImageFormat"]["Code"].upper()
-        if LabelImageFormatCode != "GIF":
-            attachment_name = "%s.pdf" % carrier_tracking_ref
-        else:
-            attachment_name = "%s-%s.%s" % (
-                carrier_tracking_ref,
-                LabelImageFormatCode,
-                LabelImageFormatCode.lower(),
-            )
-        return self.env["ir.attachment"].create(
-            {
-                "name": attachment_name,
-                "type": "binary",
-                "datas": response["GraphicImage"],
-                "res_model": picking._name,
-                "res_id": picking.id,
-            }
-        )
+        return self._create_ups_label(picking, response)
 
     def ups_create_shipping(self, picking):
         """Send packages of the picking to UPS
@@ -129,7 +129,9 @@ class DeliveryCarrier(models.Model):
             response["price"], picking.company_id.currency_id, picking.company_id
         )
         picking.carrier_tracking_ref = response["ShipmentIdentificationNumber"]
-        self.ups_get_label(picking.carrier_tracking_ref)
+        # Create label from response
+        self._create_ups_label(picking, response)
+        # Return
         return {
             "exact_price": extra_price,
             "tracking_number": picking.carrier_tracking_ref,
