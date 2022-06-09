@@ -161,6 +161,7 @@ class UpsRequest(object):
         return {
             "price": res["ShipmentCharges"]["TotalCharges"],
             "ShipmentIdentificationNumber": res["ShipmentIdentificationNumber"],
+            "LabelImageFormat": res["PackageResults"]["ShippingLabel"]["ImageFormat"],
             "GraphicImage": res["PackageResults"]["ShippingLabel"]["GraphicImage"],
         }
 

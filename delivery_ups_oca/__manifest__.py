@@ -1,5 +1,5 @@
 # Copyright 2020 Hunki Enterprises BV
-# Copyright 2021 Tecnativa - Víctor Martínez
+# Copyright 2021-2022 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 {
     "name": "Delivery UPS OCA",
@@ -17,6 +17,9 @@
         "delivery_price_method",
         "delivery_state",
     ],
-    "data": ["data/product_packaging_data.xml", "views/delivery_carrier_view.xml"],
-    "demo": [],
+    "data": [
+        "data/product_packaging_data.xml",
+        "views/delivery_carrier_view.xml",
+        "views/stock_picking_view.xml",
+    ],
 }
