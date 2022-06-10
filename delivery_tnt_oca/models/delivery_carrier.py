@@ -135,7 +135,7 @@ class DeliveryCarrier(models.Model):
         res = iar._get_report_from_name(report_name).render_qweb_text(picking.ids)
         return self.env["ir.attachment"].create(
             {
-                "name": "TNT-%s.zpl" % picking.carrier_tracking_ref,
+                "name": "TNT-%s.txt" % picking.carrier_tracking_ref,
                 "type": "binary",
                 "datas": base64.b64encode(res[0]),
                 "res_model": picking._name,
