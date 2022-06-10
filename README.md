@@ -48,6 +48,7 @@ addon | version | maintainers | summary
 [delivery_schenker](delivery_schenker/) | 14.0.1.0.0 |  | Delivery Carrier implementation for DB Schenker API
 [delivery_send_to_shipper_at_operation](delivery_send_to_shipper_at_operation/) | 14.0.1.0.0 |  | Send delivery notice to the shipper from any operation.
 [delivery_state](delivery_state/) | 14.0.1.0.0 |  | Provides fields to be able to contemplate the tracking statesand also adds a global fields
+[delivery_tnt_oca](delivery_tnt_oca/) | 14.0.1.0.0 | [![victoralmau](https://github.com/victoralmau.png?size=30px)](https://github.com/victoralmau) | Integrate TNT webservice
 [partner_default_delivery_carrier](partner_default_delivery_carrier/) | 14.0.1.0.0 | [![SilvioC2C](https://github.com/SilvioC2C.png?size=30px)](https://github.com/SilvioC2C) | Allows defining default delivery methods for partners
 [partner_delivery_zone](partner_delivery_zone/) | 14.0.1.1.0 |  | Set on partners a zone for delivery goods
 [server_environment_delivery](server_environment_delivery/) | 14.0.1.0.0 |  | Configure prod environment for delivery carriers
