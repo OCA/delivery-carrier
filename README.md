@@ -43,7 +43,7 @@ addon | version | maintainers | summary
 [delivery_schenker](delivery_schenker/) | 13.0.1.1.0 |  | Delivery Carrier implementation for DB Schenker API
 [delivery_send_to_shipper_at_operation](delivery_send_to_shipper_at_operation/) | 13.0.1.0.0 |  | Send delivery notice to the shipper from any operation.
 [delivery_state](delivery_state/) | 13.0.2.0.1 |  | Provides fields to be able to contemplate the tracking statesand also adds a global fields
-[delivery_tnt_oca](delivery_tnt_oca/) | 13.0.1.0.1 | [![victoralmau](https://github.com/victoralmau.png?size=30px)](https://github.com/victoralmau) | Integrate TNT webservice
+[delivery_tnt_oca](delivery_tnt_oca/) | 13.0.1.0.2 | [![victoralmau](https://github.com/victoralmau.png?size=30px)](https://github.com/victoralmau) | Integrate TNT webservice
 [delivery_ups_oca](delivery_ups_oca/) | 13.0.1.0.5 |  | Integrate UPS webservice
 [partner_delivery_schedule](partner_delivery_schedule/) | 13.0.1.0.0 |  | Set on partners a schedule for delivery goods
 [partner_delivery_zone](partner_delivery_zone/) | 13.0.1.1.1 |  | Set on partners a zone for delivery goods
