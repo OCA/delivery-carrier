@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="label_delivery_tnt_oca" model="ir.actions.report">
+        <field name="name">TNT Label (ZPL)</field>
+        <field name="model">stock.picking</field>
+        <field name="report_type">qweb-text</field>
+        <field
+            name="report_name"
+        >delivery_tnt_oca.label_delivery_tnt_oca_template</field>
+        <field
+            name="report_file"
+        >delivery_tnt_oca.label_delivery_tnt_oca_template</field>
+    </record>
+</odoo>

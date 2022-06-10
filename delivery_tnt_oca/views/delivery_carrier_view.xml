@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Copyright 2021 Tecnativa - Víctor Martínez
+License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <record id="view_delivery_carrier_tnt_oca_form" model="ir.ui.view">
+        <field name="model">delivery.carrier</field>
+        <field name="inherit_id" ref="delivery.view_delivery_carrier_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page
+                    string="TNT"
+                    name="configuration_tnt_oca"
+                    attrs="{'invisible': [('delivery_type', '!=', 'tnt_oca')]}"
+                >
+                    <group>
+                        <group string="Credentials">
+                            <field
+                                name="tnt_oca_ws_username"
+                                attrs="{'required': [('delivery_type', '=', 'tnt_oca')]}"
+                                string="Username"
+                            />
+                            <field
+                                name="tnt_oca_ws_password"
+                                password="True"
+                                attrs="{'required': [('delivery_type', '=', 'tnt_oca')]}"
+                                string="Password"
+                            />
+                            <field
+                                name="tnt_oca_ws_account"
+                                attrs="{'required': [('delivery_type', '=', 'tnt_oca')]}"
+                                string="Account"
+                            />
+                        </group>
+                        <group string="Misc">
+                            <field
+                                name="tnt_product_type"
+                                attrs="{'required': [('delivery_type', '=', 'tnt_oca')]}"
+                            />
+                            <field
+                                name="tnt_product_code_d"
+                                attrs="{'required': [('delivery_type', '=', 'tnt_oca')], 'invisible': [('tnt_product_type', '!=', 'D')]}"
+                            />
+                            <field
+                                name="tnt_product_code_n"
+                                attrs="{'required': [('delivery_type', '=', 'tnt_oca')], 'invisible': [('tnt_product_type', '!=', 'N')]}"
+                            />
+                            <field
+                                name="tnt_product_service_d"
+                                attrs="{'required': [('delivery_type', '=', 'tnt_oca')], 'invisible': [('tnt_product_type', '!=', 'D')]}"
+                            />
+                            <field
+                                name="tnt_product_service_n"
+                                attrs="{'required': [('delivery_type', '=', 'tnt_oca')], 'invisible': [('tnt_product_type', '!=', 'N')]}"
+                            />
+                            <field
+                                name="tnt_payment_indicator"
+                                attrs="{'required': [('delivery_type', '=', 'tnt_oca')]}"
+                            />
+                            <field
+                                name="tnt_line_of_business"
+                                attrs="{'required': [('delivery_type', '=', 'tnt_oca')]}"
+                            />
+                            <field
+                                name="tnt_collect_time_from"
+                                attrs="{'required': [('delivery_type', '=', 'tnt_oca')]}"
+                                widget="float_time"
+                            />
+                            <field
+                                name="tnt_collect_time_to"
+                                attrs="{'required': [('delivery_type', '=', 'tnt_oca')]}"
+                                widget="float_time"
+                            />
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
