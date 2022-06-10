@@ -36,6 +36,7 @@ setuptools.setup(
         'odoo14-addon-delivery_schenker',
         'odoo14-addon-delivery_send_to_shipper_at_operation',
         'odoo14-addon-delivery_state',
+        'odoo14-addon-delivery_tnt_oca',
         'odoo14-addon-partner_default_delivery_carrier',
         'odoo14-addon-partner_delivery_zone',
         'odoo14-addon-server_environment_delivery',
