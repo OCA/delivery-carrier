@@ -17,6 +17,7 @@
     ],
     "external_dependencies": {"python": ["dicttoxml", "xmltodict"]},
     "data": [
+        "data/product_packaging_data.xml",
         "views/delivery_carrier_view.xml",
         "report/picking_templates.xml",
         "report/stock_report_views.xml",

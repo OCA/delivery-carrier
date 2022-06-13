@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 Tecnativa - Víctor Martínez
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="product_packaging_tnt_default" model="product.packaging">
+        <field name="name">TNT Default (cm)</field>
+        <field name="package_carrier_type">tnt_oca</field>
+        <field name="length">35</field>
+        <field name="width">35</field>
+        <field name="height">35</field>
+    </record>
+</odoo>
