@@ -78,7 +78,8 @@ class StockPicking(models.Model):
     # When base_delivery_carrier_label is installed, its _set_a_default_package
     # is called instead of this module's one. So the logic should be moved to
     # _put_in_pack.
-    # TODO 15.0: refactor to depends on base_delivery_carrier_label
+    # TODO: Add a glue module to be auto installed when both delivery_postlogistics
+    #  and base_delivery_carrier_label are installed
     def _set_a_default_package(self):
         """Pickings using this module must have a package
         If not this method put it one silently
