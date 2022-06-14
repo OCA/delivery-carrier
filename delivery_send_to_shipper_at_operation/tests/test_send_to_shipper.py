@@ -150,6 +150,40 @@ class TestDeliverySendToShipper(SavepointCase):
             self.assertTrue(self.shipping.delivery_notification_sent)
             self.assertIn(self.delivery_fee, self.order.order_line.product_id)
 
+    def test_send_to_shipper_on_pack_multi_tracking(self):
+        """Check sending of delivery notification on pack with multi tracking."""
+
+        with mock.patch.object(
+            type(self.carrier_on_pack),
+            "send_shipping",
+            return_value=SEND_SHIPPING_RETURN_VALUE,
+        ):
+            carrier_tracking_ref = "99999"
+            self.shipping.carrier_id = self.carrier_on_pack
+            self.shipping.carrier_tracking_ref = carrier_tracking_ref
+
+            self._validate_picking(self.picking)
+            self.assertEqual(self.picking.state, "done")
+
+            self.assertFalse(self.order.order_line)
+            self._validate_picking(self.packing)
+
+            self.assertEqual(self.packing.state, "done")
+            self.assertTrue(self.shipping.delivery_notification_sent)
+            self.assertFalse(self.order.order_line)
+            self.assertEqual(self.packing.carrier_price, self.shipping.carrier_price)
+
+            # Check multi tracking
+            self.assertEqual(
+                self.shipping.carrier_tracking_ref,
+                carrier_tracking_ref + "," + self.packing.carrier_tracking_ref,
+            )
+
+            self._validate_picking(self.shipping)
+            self.assertEqual(self.shipping.state, "done")
+            self.assertTrue(self.shipping.delivery_notification_sent)
+            self.assertIn(self.delivery_fee, self.order.order_line.product_id)
+
     def test_picking_fields_view_get(self):
         """Check that the invisible domain of "Send to Shipper" button
         takes into account the 'delivery_notification_sent' flag.
