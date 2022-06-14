@@ -136,7 +136,7 @@ class DeliveryCarrier(models.Model):
         Packages are mandatory in this case
         """
         for pick in pickings:
-            pick._set_a_default_package()
+            pick._postlogistics_set_a_default_package()
             pick._generate_postlogistics_label()
 
         return [{"exact_price": False, "tracking_number": False}]
