@@ -91,6 +91,15 @@ class StockPicking(models.Model):
             if move_lines:
                 picking._put_in_pack(move_lines)
 
+    def _set_delivery_packaging(self):
+        res = super()._set_delivery_packaging()
+        if self.carrier_id.delivery_type == "postlogistics":
+            ctx = res.get("context")
+            default_packaging = self.carrier_id.postlogistics_default_packaging_id
+            if default_packaging and "default_delivery_packaging_id" not in ctx:
+                ctx["default_delivery_packaging_id"] = default_packaging.id
+        return res
+
     def _put_in_pack(self, move_line_ids, create_package_level=True):
         result = super()._put_in_pack(move_line_ids, create_package_level)
         if self.delivery_type != "postlogistics":
