@@ -8,7 +8,6 @@ from odoo import _, exceptions, fields, models
 
 from ..postlogistics.web_service import PostlogisticsWebService
 
-
 _logger = logging.getLogger(__name__)
 
 
@@ -94,7 +93,9 @@ class StockPicking(models.Model):
             )
             if move_lines:
                 picking._put_in_pack(move_lines)
-        postlogistics_picks = self.filtered(lambda p: p.delivery_type == "postlogistics")
+        postlogistics_picks = self.filtered(
+            lambda p: p.delivery_type == "postlogistics"
+        )
         if postlogistics_picks:
             postlogistics_picks._assign_postlogistics_packaging_on_packages()
 
@@ -109,7 +110,9 @@ class StockPicking(models.Model):
 
     def _put_in_pack(self, move_line_ids, create_package_level=True):
         result = super()._put_in_pack(move_line_ids, create_package_level)
-        postlogistics_picks = self.filtered(lambda p: p.delivery_type == "postlogistics")
+        postlogistics_picks = self.filtered(
+            lambda p: p.delivery_type == "postlogistics"
+        )
         if postlogistics_picks:
             postlogistics_picks._assign_postlogistics_packaging_on_packages()
         return result
@@ -118,13 +121,30 @@ class StockPicking(models.Model):
         for pick in self:
             carrier = pick.carrier_id
             if carrier.delivery_type != "postlogistics":
-                _logger.warning("Function '_assign_postlogistics_packaging_on_packages' was called on picking having a carrier that is not postlogistics!")
+                _logger.warning(
+                    "Function '_assign_postlogistics_packaging_on_packages'"
+                    " was called on picking having a carrier that is"
+                    " not postlogistics!"
+                )
                 continue
-            lines_with_package = self.env["stock.move.line"].search([('picking_id', '=', pick.id), ('result_package_id', '!=', False)])
+            lines_with_package = self.env["stock.move.line"].search(
+                [("picking_id", "=", pick.id), ("result_package_id", "!=", False)]
+            )
             if lines_with_package:
-                packages_without_packaging = self.env["stock.quant.package"].search([("id", "in", lines_with_package.mapped("result_package_id").ids), ("packaging_id", "=", False)])
+                packages_without_packaging = self.env["stock.quant.package"].search(
+                    [
+                        (
+                            "id",
+                            "in",
+                            lines_with_package.mapped("result_package_id").ids,
+                        ),
+                        ("packaging_id", "=", False),
+                    ]
+                )
                 if packages_without_packaging:
-                    packages_without_packaging.write({"packaging_id": carrier.postlogistics_default_packaging_id.id})
+                    packages_without_packaging.write(
+                        {"packaging_id": carrier.postlogistics_default_packaging_id.id}
+                    )
         return True
 
     def postlogistics_cod_amount(self):
