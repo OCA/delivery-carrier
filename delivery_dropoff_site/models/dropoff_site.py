@@ -17,7 +17,10 @@ class DropoffSite(models.Model):
     code = fields.Char(string="Code")
 
     partner_id = fields.Many2one(
-        comodel_name="res.partner", string="Partner", required=True, ondelete="cascade",
+        comodel_name="res.partner",
+        string="Partner",
+        required=True,
+        ondelete="cascade",
     )
 
     carrier_id = fields.Many2one(

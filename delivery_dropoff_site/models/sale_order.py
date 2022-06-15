@@ -2,12 +2,11 @@
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import api, fields, models
 import logging
 
+from odoo import api, fields, models
 
 _logger = logging.getLogger(__name__)
-
 
 
 class SaleOrder(models.Model):
@@ -66,13 +65,14 @@ class SaleOrder(models.Model):
             self.final_shipping_partner_id = self.partner_id
 
 
-
 class SaleOrderLine(models.Model):
-    _inherit = 'sale.order.line'
+    _inherit = "sale.order.line"
 
     def _prepare_procurement_values(self, group_id):
         res = super(SaleOrderLine, self)._prepare_procurement_values(group_id=group_id)
-        res.update({
-            'final_shipping_partner_id': self.order_id.final_shipping_partner_id.id,
-        })
+        res.update(
+            {
+                "final_shipping_partner_id": self.order_id.final_shipping_partner_id.id,
+            }
+        )
         return res

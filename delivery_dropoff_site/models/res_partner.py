@@ -31,7 +31,9 @@ class ResPartner(models.Model):
     )
 
     is_dropoff_site = fields.Boolean(
-        compute="_compute_multi_dropoff_site", string="Is Drop-off Site", store=True,
+        compute="_compute_multi_dropoff_site",
+        string="Is Drop-off Site",
+        store=True,
     )
 
     @api.depends("dropoff_site_ids.partner_id", "dropoff_site_ids.carrier_id")
