@@ -228,7 +228,9 @@ class StockPicking(models.Model):
                     if package.name in label_value["item_id"].split("+")[-1]:
                         tracking_numbers.append(label_value["tracking_number"])
                         labels.append(
-                            self.info_from_label(label_value, zpl_patch_string, package=package)
+                            self.info_from_label(
+                                label_value, zpl_patch_string, package=package
+                            )
                         )
             package.parcel_tracking = "; ".join(tracking_numbers)
             tracking_refs += tracking_numbers
