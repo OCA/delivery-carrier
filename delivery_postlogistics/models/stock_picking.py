@@ -180,7 +180,7 @@ class StockPicking(models.Model):
             )
         return order.amount_total
 
-    def info_from_label(self, label, zpl_patch_string=False):
+    def info_from_label(self, label, zpl_patch_string=False, package=None):
         tracking_number = label["tracking_number"]
         data = base64.b64decode(label["binary"])
 
@@ -192,11 +192,14 @@ class StockPicking(models.Model):
                 .replace("^XA", zpl_patch_string)
                 .encode("utf-8")
             )
-        return {
+        info = {
             "file": data,
             "file_type": label["file_type"],
             "name": tracking_number + "." + label["file_type"],
         }
+        if package:
+            info["package_id"] = package.id
+        return info
 
     def write_tracking_number_label(self, label_result, packages):
         """
@@ -225,7 +228,7 @@ class StockPicking(models.Model):
                     if package.name in label_value["item_id"].split("+")[-1]:
                         tracking_numbers.append(label_value["tracking_number"])
                         labels.append(
-                            self.info_from_label(label_value, zpl_patch_string)
+                            self.info_from_label(label_value, zpl_patch_string, package=package)
                         )
             package.parcel_tracking = "; ".join(tracking_numbers)
             tracking_refs += tracking_numbers
