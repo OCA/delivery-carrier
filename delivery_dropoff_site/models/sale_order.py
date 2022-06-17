@@ -2,7 +2,11 @@
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
+import logging
+
 from odoo import api, fields, models
+
+_logger = logging.getLogger(__name__)
 
 
 class SaleOrder(models.Model):
@@ -17,10 +21,7 @@ class SaleOrder(models.Model):
     final_shipping_partner_id = fields.Many2one(
         comodel_name="res.partner",
         string="Final Recipient",
-        states={
-            "draft": [("readonly", False)],
-            "sent": [("readonly", False)],
-        },
+        states={"draft": [("readonly", False)], "sent": [("readonly", False)]},
         readonly=True,
         help="It is the partner that will pick up the parcel " "in the dropoff site.",
     )
@@ -55,8 +56,7 @@ class SaleOrder(models.Model):
             }
 
     @api.onchange("partner_shipping_id")
-    def onchange_partner_shipping_id(self):
-        super(SaleOrder, self).onchange_partner_shipping_id()
+    def onchange_partner_shipping_id_final(self):
         if (
             self.partner_shipping_id
             and self.partner_shipping_id.dropoff_site_id
@@ -64,11 +64,15 @@ class SaleOrder(models.Model):
         ):
             self.final_shipping_partner_id = self.partner_id
 
-    def _prepare_procurement_group(self):
-        res = super(SaleOrder, self)._prepare_procurement_group()
+
+class SaleOrderLine(models.Model):
+    _inherit = "sale.order.line"
+
+    def _prepare_procurement_values(self, group_id):
+        res = super(SaleOrderLine, self)._prepare_procurement_values(group_id=group_id)
         res.update(
             {
-                "final_shipping_partner_id": self.final_shipping_partner_id.id,
+                "final_shipping_partner_id": self.order_id.final_shipping_partner_id.id,
             }
         )
         return res
