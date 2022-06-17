@@ -1,4 +1,3 @@
-# coding: utf-8
 from . import dropoff_site
 from . import res_partner
 from . import sale_order
