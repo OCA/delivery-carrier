@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
     <record id="calendar" model="resource.calendar">
         <field name="name">40 Hours/Week</field>
     </record>
-
     <record model="resource.calendar.attendance" id="calendar_attendance_mon1">
         <field name="name">Monday morning</field>
         <field name="dayofweek">0</field>
@@ -75,7 +73,6 @@
         <field name="hour_to">17</field>
         <field name="calendar_id" ref="calendar" />
     </record>
-
     <record id="resource_analyst" model="resource.resource">
         <field eval="100" name="time_efficiency" />
         <field name="user_id" ref="base.user_root" />
@@ -84,7 +81,6 @@
         <field name="calendar_id" ref="calendar" />
         <field name="resource_type">user</field>
     </record>
-
     <record id="resource_designer" model="resource.resource">
         <field eval="100" name="time_efficiency" />
         <field name="user_id" ref="base.user_demo" />
@@ -93,7 +89,6 @@
         <field name="calendar_id" ref="calendar" />
         <field name="resource_type">user</field>
     </record>
-
     <record id="resource_developer" model="resource.resource">
         <field eval="100" name="time_efficiency" />
         <field name="user_id" ref="base.user_demo" />
@@ -102,5 +97,4 @@
         <field name="calendar_id" ref="calendar" />
         <field name="resource_type">user</field>
     </record>
-
 </odoo>
