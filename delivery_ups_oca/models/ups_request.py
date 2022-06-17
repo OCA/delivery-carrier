@@ -24,9 +24,9 @@ class UpsRequest(object):
         self.package_dimension_code = self.carrier.ups_package_dimension_code
         self.package_weight_code = self.carrier.ups_package_weight_code
         self.transaction_src = "Odoo (%s)" % self.carrier.name
-        self.url = "https://onlinetools.ups.com"
+        self.url = "https://wwwcie.ups.com"
         if self.carrier.prod_environment:
-            self.url = "https://wwwcie.ups.com"
+            self.url = "https://onlinetools.ups.com"
 
     def _process_reply(
         self, url, data=None, method="post", query_parameters=None,
