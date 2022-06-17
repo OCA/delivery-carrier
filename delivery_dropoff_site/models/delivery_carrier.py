@@ -11,5 +11,7 @@ class DeliveryCarrier(models.Model):
     with_dropoff_site = fields.Boolean(string="With Drop-off Sites")
 
     dropoff_site_ids = fields.One2many(
-        comodel_name="dropoff.site", inverse_name="carrier_id", string="Drop-off Sites"
+        comodel_name="dropoff.site",
+        inverse_name="carrier_id",
+        string="Drop-off Sites",
     )
