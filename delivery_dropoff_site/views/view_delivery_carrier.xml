@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-
     <record id="view_delivery_carrier_form" model="ir.ui.view">
         <field name="model">delivery.carrier</field>
         <field name="type">form</field>
         <field name="inherit_id" ref="delivery.view_delivery_carrier_form" />
         <field name="arch" type="xml">
-            <field name="delivery_type" position="before">
+            <xpath expr="//label[@for='delivery_type']" position="before">
                 <field name="with_dropoff_site" />
-            </field>
+            </xpath>
             <xpath expr="//notebook" position="inside">
                 <page
                     name="dropoff_site"
@@ -30,5 +29,4 @@
             </xpath>
         </field>
     </record>
-
 </odoo>

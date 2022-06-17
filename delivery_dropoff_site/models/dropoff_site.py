@@ -12,16 +12,20 @@ class DropoffSite(models.Model):
     _name = "dropoff.site"
     _inherits = {"res.partner": "partner_id"}
     _order = "code, name"
+    _description = "Dropoff site"
 
     code = fields.Char(string="Code")
 
     partner_id = fields.Many2one(
-        comodel_name="res.partner", string="Partner", required=True, ondelete="cascade"
+        comodel_name="res.partner",
+        string="Partner",
+        required=True,
+        ondelete="cascade",
     )
 
     carrier_id = fields.Many2one(
         comodel_name="delivery.carrier",
-        string="Delivery Method",
+        string="Delivery Carrier",
         required=True,
         domain="[('with_dropoff_site', '=', True)]",
     )
@@ -37,39 +41,30 @@ class DropoffSite(models.Model):
     )
 
     # Inherit part
-    @api.model
-    def create(self, vals):
-        vals.update(
-            {
-                "customer": False,
-                "supplier": False,
-            }
-        )
-        return super(DropoffSite, self).create(vals)
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            vals.update({"customer_rank": 0, "supplier_rank": 0})
+        return super().create(vals_list)
 
-    @api.multi
     def unlink(self):
         self.mapped("calendar_id").unlink()
-        return super(DropoffSite, self).unlink()
+        return super().unlink()
 
     # Action Part
-    @api.multi
     def action_enable_calendar(self):
         for site in self:
             if not site.calendar_id:
                 site.calendar_id = site.calendar_id.create(site._prepare_calendar_id())
 
-    @api.multi
     def action_disable_calendar(self):
         self.mapped("calendar_id").unlink()
 
-    @api.multi
     def geo_localize(self):
         for site in self:
             site.partner_id.geo_localize()
 
     # Custom Part
-    @api.multi
     def _prepare_calendar_id(self):
         self.ensure_one()
         return {"name": self.name}

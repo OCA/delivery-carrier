@@ -6,6 +6,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo import api, fields, models
+from odoo.fields import first
 
 
 class ResPartner(models.Model):
@@ -30,15 +31,16 @@ class ResPartner(models.Model):
     )
 
     is_dropoff_site = fields.Boolean(
-        compute="_compute_multi_dropoff_site", string="Is Drop-off Site", store=True
+        compute="_compute_multi_dropoff_site",
+        string="Is Drop-off Site",
+        store=True,
     )
 
-    @api.multi
     @api.depends("dropoff_site_ids.partner_id", "dropoff_site_ids.carrier_id")
     def _compute_multi_dropoff_site(self):
         for partner in self:
-            partner.dropoff_site_id = (
-                partner.dropoff_site_ids and partner.dropoff_site_ids[0]
+            partner.dropoff_site_id = partner.dropoff_site_ids and first(
+                partner.dropoff_site_ids
             )
             partner.dropoff_site_carrier_id = partner.dropoff_site_id.carrier_id
             partner.is_dropoff_site = partner.dropoff_site_id
@@ -56,6 +58,4 @@ class ResPartner(models.Model):
         args = args or []
         if not self.env.context.get("default_type", False) == "delivery":
             args.append(["dropoff_site_id", "=", False])
-        return super(ResPartner, self).name_search(
-            name=name, args=args, operator=operator, limit=limit
-        )
+        return super().name_search(name=name, args=args, operator=operator, limit=limit)
