@@ -55,7 +55,9 @@ class DeliveryCarrier(models.Model):
         string="Service code",
     )
     ups_default_packaging_id = fields.Many2one(
-        comodel_name="product.packaging", string="Default Packaging Type"
+        comodel_name="product.packaging",
+        string="Default Packaging Type",
+        domain=[("package_carrier_type", "=", "ups")],
     )
     ups_package_dimension_code = fields.Selection(
         selection=[("IN", "IN"), ("CM", "CM")],
