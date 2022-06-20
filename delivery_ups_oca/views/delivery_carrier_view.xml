@@ -33,6 +33,7 @@ License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
                             <field
                                 name="ups_default_packaging_id"
                                 attrs="{'required': [('delivery_type', '=', 'ups')]}"
+                                context="{'default_package_carrier_type': 'ups'}"
                             />
                             <field
                                 name="ups_package_dimension_code"
