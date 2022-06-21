@@ -158,6 +158,9 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
 
             # wait for all tasks to be done
             data_queue.join()
+            # empty the cache so the main env doesn't miss any data updates
+            # (parcel tracking numbers...) done by the threads
+            self.invalidate_cache()
 
         # We will not create a partial PDF if some labels weren't
         # generated thus we raise catched exceptions by the workers
