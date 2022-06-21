@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="report.paperformat" id="paperformat_a7_label">
+        <field name="name">Label A7 format</field>
+        <field name="format">A7</field>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">20</field>
+        <field name="margin_bottom">20</field>
+        <field name="margin_left">7</field>
+    </record>
+
+    <record id="default_label" model="ir.actions.report">
+        <field name="name">Shipping Label</field>
+        <field name="model">stock.picking</field>
+        <field name="report_type">qweb-pdf</field>
+        <field
+            name="report_name"
+        >delivery_carrier_label_default.report_default_label</field>
+        <field
+            name="report_file"
+        >delivery_carrier_label_default.report_default_label</field>
+        <field
+            name="paperformat_id"
+            ref="delivery_carrier_label_default.paperformat_a7_label"
+        />
+    </record>
+</odoo>
