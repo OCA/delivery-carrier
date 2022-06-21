@@ -138,19 +138,27 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
                 picking = operations[0].picking_id
                 groups.setdefault(picking.id, []).append((pack, picking, label))
 
+        is_in_testing = getattr(threading.current_thread(), 'testing', False)
         for group in groups.values():
-            data_queue.put(group)
+            if not is_in_testing:
+                data_queue.put(group)
+            else:
+                self._do_generate_labels(group)
 
-        # create few workers to parallelize label generation
-        num_workers = self._get_num_workers()
-        _logger.info("Starting %s workers to generate labels", num_workers)
-        for _i in range(num_workers):
-            t = threading.Thread(target=self._worker, args=(data_queue, error_queue))
-            t.daemon = True
-            t.start()
+        if not is_in_testing:
+            # create few workers to parallelize label generation
+            num_workers = self._get_num_workers()
+            _logger.info("Starting %s workers to generate labels", num_workers)
+            for _i in range(num_workers):
+                t = threading.Thread(target=self._worker, args=(data_queue, error_queue))
+                t.daemon = True
+                t.start()
 
-        # wait for all tasks to be done
-        data_queue.join()
+            # wait for all tasks to be done
+            data_queue.join()
+            # empty the cache so the main env doesn't miss any data updates
+            # (parcel tracking numbers...) done by the threads
+            self.invalidate_cache()
 
         # We will not create a partial PDF if some labels weren't
         # generated thus we raise catched exceptions by the workers

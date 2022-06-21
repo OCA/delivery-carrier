@@ -127,13 +127,13 @@ class TestGenerateLabels(common.SavepointCase):
     def test_action_generate_labels(self):
         """Check merging of pdf labels
 
-        We don't test pdf generation as without dependancies the
-        test would fail
+        Test pdf generation without multiple threading
 
         """
         wizard = self.DeliveryCarrierLabelGenerate.with_context(
             active_ids=self.batch.ids, active_model="stock.picking.batch"
-        ).create({})
+        ).create({"generate_new_labels": True})
+
         wizard.action_generate_labels()
 
         attachment = self.env["ir.attachment"].search(
