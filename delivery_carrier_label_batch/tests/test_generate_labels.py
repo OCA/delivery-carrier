@@ -124,6 +124,17 @@ class TestGenerateLabels(common.SavepointCase):
             }
         )
 
+    def _set_tracking_numbers(self):
+        picking_1 = self.batch.picking_ids[0]
+        picking_1.carrier_tracking_ref = "PICK0001"
+        pack_1 = picking_1.package_ids[0]
+        pack_1.parcel_tracking = "PACK0001"
+        picking_2 = self.batch.picking_ids[1]
+        picking_2.carrier_tracking_ref = "PICK0002"
+        pack_2 = picking_2.package_ids[0]
+        pack_2.parcel_tracking = "PACK0002"
+        return picking_1, pack_1, picking_2, pack_2
+
     def test_action_generate_labels(self):
         """Check merging of pdf labels
 
@@ -157,3 +168,43 @@ class TestGenerateLabels(common.SavepointCase):
         ).create({})
         with self.assertRaises(exceptions.UserError):
             wizard.action_generate_labels()
+
+    def test_action_generate_labels_again(self):
+        """Check re-generating labels"""
+        picking_1, pack_1, picking_2, pack_2 = self._set_tracking_numbers()
+        wizard = self.DeliveryCarrierLabelGenerate.with_context(
+            active_ids=self.batch.ids, active_model="stock.picking.batch"
+        ).create({"generate_new_labels": True})
+
+        wizard.action_generate_labels()
+
+        attachment = self.env["ir.attachment"].search(
+            [("res_model", "=", "stock.picking.batch"), ("res_id", "=", self.batch.id)]
+        )
+
+        self.assertEqual(len(attachment), 1)
+        self.assertTrue(attachment.datas)
+        self.assertTrue(attachment.name, "demo_prep001.pdf")
+        self.assertTrue(attachment.mimetype, "application/pdf")
+        self.assertFalse(picking_1.carrier_tracking_ref)
+        self.assertFalse(picking_2.carrier_tracking_ref)
+        self.assertFalse(pack_1.parcel_tracking)
+        self.assertFalse(pack_2.parcel_tracking)
+
+        self._set_tracking_numbers()
+        wizard = self.DeliveryCarrierLabelGenerate.with_context(
+            active_ids=self.batch.ids, active_model="stock.picking.batch"
+        ).create({"generate_new_labels": False})
+        result = wizard._get_all_files(self.batch)
+        pack_nums = {r[2] for r in result}
+        self.assertEqual(pack_nums, {"PACK0001", "PACK0002"})
+        wizard.action_generate_labels()
+
+        attachment = self.env["ir.attachment"].search(
+            [("res_model", "=", "stock.picking.batch"), ("res_id", "=", self.batch.id)]
+        )
+        self.assertEqual(len(attachment), 1)
+        self.assertEqual(picking_1.carrier_tracking_ref, "PICK0001")
+        self.assertEqual(picking_2.carrier_tracking_ref, "PICK0002")
+        self.assertEqual(pack_1.parcel_tracking, "PACK0001")
+        self.assertEqual(pack_2.parcel_tracking, "PACK0002")
