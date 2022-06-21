@@ -71,6 +71,16 @@ class PostlogisticsWebService(object):
             return lang_code
         return "en"
 
+    def _get_recipient_partner(self, picking):
+        if picking.picking_type_id.code == "outgoing":
+            return picking.partner_id
+        elif picking.picking_type_id.code == "incoming":
+            location_dest = picking.location_dest_id
+            # partner_id removed since 13.0 by below commit
+            # https://github.com/odoo/odoo/commit/2062ac6dec37841d23d2b5d8475305546a6f0df9
+            company = location_dest.company_id or picking.env.user.company_id
+            return company.partner_id
+
     def _prepare_recipient(self, picking):
         """Create a ns0:Recipient as a dict from a partner
 
@@ -78,7 +88,7 @@ class PostlogisticsWebService(object):
         :return a dict containing data for ns0:Recipient
 
         """
-        partner = picking.partner_id
+        partner = self._get_recipient_partner(picking)
         partner_mobile = self._sanitize_string(
             picking.delivery_mobile or partner.mobile
         )
@@ -144,7 +154,10 @@ class PostlogisticsWebService(object):
 
         """
         company = picking.company_id
-        partner = company.partner_id
+        if picking.picking_type_id.code == "outgoing":
+            partner = company.partner_id
+        elif picking.picking_type_id.code == "incoming":
+            partner = picking.partner_id
 
         customer = {
             "name1": self._sanitize_string(partner.name),
@@ -155,6 +168,10 @@ class PostlogisticsWebService(object):
             "domicilePostOffice": picking.carrier_id.postlogistics_office or None,
         }
         logo = picking.carrier_id.postlogistics_logo
+
+        if partner.parent_id and partner.parent_id.name != partner.name:
+            customer["name2"] = customer.get("name1")
+            customer["name1"] = partner.parent_id.name
         if logo:
             logo_image = Image.open(BytesIO(base64.b64decode(logo)))
             logo_format = logo_image.format
