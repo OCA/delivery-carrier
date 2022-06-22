@@ -6,6 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-06-27 13:57+0000\n"
+"PO-Revision-Date: 2022-06-27 13:57+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -235,6 +237,11 @@ msgid "Tracking state update sync"
 msgstr ""
 
 #. module: delivery_ups_oca
+#: model:ir.model,name:delivery_ups_oca.model_stock_picking
+msgid "Transfer"
+msgstr ""
+
+#. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__delivery_type__ups
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__product_packaging__package_carrier_type__ups
 #: model_terms:ir.ui.view,arch_db:delivery_ups_oca.view_delivery_carrier_form
@@ -249,6 +256,11 @@ msgstr ""
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__74
 msgid "UPS Express®12:00"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model_terms:ir.ui.view,arch_db:delivery_ups_oca.view_picking_withcarrier_out_form
+msgid "UPS Label"
 msgstr ""
 
 #. module: delivery_ups_oca
@@ -309,6 +321,11 @@ msgstr ""
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__71
 msgid "UPS Worldwide Express Freight Midday"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields,field_description:delivery_ups_oca.field_delivery_carrier__ups_use_packages_from_picking
+msgid "Use packages from picking"
 msgstr ""
 
 #. module: delivery_ups_oca
