@@ -78,6 +78,7 @@ class DeliveryCarrier(models.Model):
         help="If checked, odoo try to state update from picking according to UPS "
         "webservice (you will necessary to activate tracking API)",
     )
+    ups_use_packages_from_picking = fields.Boolean(string="Use packages from picking")
 
     def ups_test_call(self, order):
         self.ensure_one()
@@ -87,22 +88,34 @@ class DeliveryCarrier(models.Model):
     def ups_send_shipping(self, pickings):
         return [self.ups_create_shipping(p) for p in pickings]
 
+    def _prepare_ups_label_attachment(self, picking, values):
+        return {
+            "name": values["name"],
+            "type": "binary",
+            "datas": values["datas"],
+            "res_model": picking._name,
+            "res_id": picking.id,
+        }
+
     def _create_ups_label(self, picking, data):
-        format_code = data["LabelImageFormat"]["Code"].upper()
-        attachment_name = "%s-%s.%s" % (
-            picking.carrier_tracking_ref,
-            format_code,
-            ("txt" if format_code != "PDF" else "pdf"),
-        )
-        return self.env["ir.attachment"].create(
-            {
-                "name": attachment_name,
-                "type": "binary",
-                "datas": data["GraphicImage"],
-                "res_model": picking._name,
-                "res_id": picking.id,
-            }
-        )
+        val_list = []
+        for PackageResult in data["PackageResults"]:
+            format_code = PackageResult["ShippingLabel"]["ImageFormat"]["Code"].upper()
+            attachment_name = "%s-%s.%s" % (
+                picking.carrier_tracking_ref,
+                format_code,
+                ("txt" if format_code != "PDF" else "pdf"),
+            )
+            val_list.append(
+                self._prepare_ups_label_attachment(
+                    picking,
+                    {
+                        "name": attachment_name,
+                        "datas": PackageResult["ShippingLabel"]["GraphicImage"],
+                    },
+                )
+            )
+        return self.env["ir.attachment"].create(val_list)
 
     def ups_get_label(self, carrier_tracking_ref):
         """Generate label for picking
