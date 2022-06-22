@@ -63,7 +63,7 @@ class UpsRequest(object):
         PackageWeight = picking.shipping_weight
         if is_package:
             NumOfPieces = sum(package.mapped("quant_ids.quantity"))
-            PackageWeight = package.weight
+            PackageWeight = max(package.shipping_weight, package.weight)
         return {
             "Description": package.name,
             "NumOfPieces": str(NumOfPieces),
