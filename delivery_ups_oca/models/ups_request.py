@@ -18,6 +18,7 @@ class UpsRequest(object):
         self.username = self.carrier.ups_ws_username
         self.password = self.carrier.ups_ws_password
         self.default_packaging_id = self.carrier.ups_default_packaging_id
+        self.use_packages_from_picking = self.carrier.ups_use_packages_from_picking
         self.shipper_number = self.carrier.ups_shipper_number
         self.service_code = self.carrier.ups_service_code
         self.file_format = self.carrier.ups_file_format
@@ -111,17 +112,27 @@ class UpsRequest(object):
 
     def _prepare_create_shipping(self, picking):
         """Return a dict that can be passed to the shipping endpoint of the UPS API"""
-        if picking.package_ids:
+        if self.use_packages_from_picking and picking.package_ids:
             packages = [
                 self._quant_package_data_from_picking(package, picking, True)
                 for package in picking.package_ids
             ]
         else:
-            packages = [
-                self._quant_package_data_from_picking(
-                    self.default_packaging_id, picking, False
-                )
-            ]
+            packages = []
+            package_info = self._quant_package_data_from_picking(
+                self.default_packaging_id, picking, False
+            )
+            package_weight = round(
+                (picking.shipping_weight / picking.number_of_packages), 2
+            )
+            for i in range(0, picking.number_of_packages):
+                package_item = package_info
+                package_name = "%s (%s)" % (picking.name, i + 1)
+                package_item["Description"] = package_name
+                package_item["NumOfPieces"] = "1"
+                package_item["Packaging"]["Description"] = package_name
+                package_item["PackageWeight"]["Weight"] = str(package_weight)
+                packages.append(package_item)
         return {
             "ShipmentRequest": {
                 "Shipment": {
@@ -158,11 +169,13 @@ class UpsRequest(object):
         )
         self._raise_for_status(status, False)
         res = status["ShipmentResponse"]["ShipmentResults"]
+        PackageResults = res["PackageResults"]
+        if not isinstance(PackageResults, list):
+            PackageResults = [PackageResults]
         return {
             "price": res["ShipmentCharges"]["TotalCharges"],
             "ShipmentIdentificationNumber": res["ShipmentIdentificationNumber"],
-            "LabelImageFormat": res["PackageResults"]["ShippingLabel"]["ImageFormat"],
-            "GraphicImage": res["PackageResults"]["ShippingLabel"]["GraphicImage"],
+            "PackageResults": PackageResults,
         }
 
     def _quant_package_data_from_order(self, order):
