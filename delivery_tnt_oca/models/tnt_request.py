@@ -28,6 +28,7 @@ class TntRequest(object):
         self.password = self.carrier.tnt_oca_ws_password
         self.account = self.carrier.tnt_oca_ws_account
         self.default_packaging_id = self.carrier.tnt_default_packaging_id
+        self.use_packages_from_picking = self.carrier.tnt_use_packages_from_picking
         self.url = "https://express.tnt.com"
         auth_encoding = "%s:%s" % (self.username, self.password)
         self.authorization = base64.b64encode(auth_encoding.encode("utf-8")).decode(
@@ -200,7 +201,7 @@ class TntRequest(object):
 
     def _get_data_total_shipping(self):
         weight = self.record.shipping_weight
-        if self.record.package_ids:
+        if self.use_packages_from_picking and self.record.package_ids:
             height = sum(self.record.package_ids.mapped("height"))
             width = sum(self.record.package_ids.mapped("width"))
             p_length = sum(self.record.package_ids.mapped("length"))
