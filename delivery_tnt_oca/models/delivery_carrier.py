@@ -85,6 +85,7 @@ class DeliveryCarrier(models.Model):
         string="Default Packaging Type",
         domain=[("package_carrier_type", "=", "tnt_oca")],
     )
+    tnt_use_packages_from_picking = fields.Boolean(string="Use packages from picking")
 
     @api.depends("delivery_type", "tnt_product_type")
     def _compute_tnt_product_code(self):
