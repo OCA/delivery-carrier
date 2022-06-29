@@ -35,7 +35,6 @@ class StockPicking(models.Model):
             )
         super(StockPicking, self - with_pack_ops)._cal_weight()
 
-    @api.multi
     def action_calculate_volume(self):
         for rec in self:
             field = rec._determine_qty_field()
@@ -45,12 +44,8 @@ class StockPicking(models.Model):
                 )
             )
 
-    def _create_backorder(self, backorder_moves=None):
+    def _create_backorder(self):
         """Compute volume on newly created backorders."""
-        if backorder_moves is None:
-            backorder_moves = []
-        backorders = super(StockPicking, self)._create_backorder(
-            backorder_moves=backorder_moves,
-        )
+        backorders = super()._create_backorder()
         backorders.action_calculate_volume()
         return backorders

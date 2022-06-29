@@ -19,7 +19,7 @@ class TestStockPickingInfoComputation(TestSale):
             }
         )
         self.product_b = self.env["product.product"].create(
-            {"name": "Test product B", "type": "consu", "weight": 0.25, "volume": 0.03,}
+            {"name": "Test product B", "type": "consu", "weight": 0.25, "volume": 0.03}
         )
         self.sale_test = self.env["sale.order"].create(
             {
