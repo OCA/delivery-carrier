@@ -5,43 +5,45 @@ from odoo import api, fields, models
 
 
 class StockPicking(models.Model):
-    _inherit = 'stock.picking'
+    _inherit = "stock.picking"
 
-    number_of_packages = fields.Integer(
-        string='Number of Packages',
-        copy=False
-    )
+    number_of_packages = fields.Integer(string="Number of Packages", copy=False)
 
     def _determine_qty_field(self):
         self.ensure_one()
-        field = 'product_uom_qty'
-        for opt_field in ['quantity_done', 'reserved_availability']:
-            has = any(self.mapped('move_ids_without_package.' + opt_field))
+        field = "product_uom_qty"
+        for opt_field in ["quantity_done", "reserved_availability"]:
+            has = any(self.mapped("move_ids_without_package." + opt_field))
             if has:
                 return opt_field
         return field
 
     @api.depends(
-        'move_ids_without_package',
-        'move_ids_without_package.product_id',
-        'move_ids_without_package.product_uom_qty',
-        'move_ids_without_package.quantity_done')
+        "move_ids_without_package",
+        "move_ids_without_package.product_id",
+        "move_ids_without_package.product_uom_qty",
+        "move_ids_without_package.quantity_done",
+    )
     def _cal_weight(self):
-        with_pack_ops = self.filtered('move_ids_without_package')
+        with_pack_ops = self.filtered("move_ids_without_package")
         for rec in self:
             field = rec._determine_qty_field()
-            rec.weight = sum(rec.move_ids_without_package.mapped(
-                lambda x: x[field] * x.product_id.weight
-            ))
+            rec.weight = sum(
+                rec.move_ids_without_package.mapped(
+                    lambda x: x[field] * x.product_id.weight
+                )
+            )
         super(StockPicking, self - with_pack_ops)._cal_weight()
 
     @api.multi
     def action_calculate_volume(self):
         for rec in self:
             field = rec._determine_qty_field()
-            rec.volume = sum(rec.move_ids_without_package.mapped(
-                lambda x: x[field] * x.product_id.volume
-            ))
+            rec.volume = sum(
+                rec.move_ids_without_package.mapped(
+                    lambda x: x[field] * x.product_id.volume
+                )
+            )
 
     def _create_backorder(self, backorder_moves=None):
         """Compute volume on newly created backorders."""

@@ -8,43 +8,52 @@ from odoo.addons.sale.tests.test_sale_common import TestSale
 class TestStockPickingInfoComputation(TestSale):
     def setUp(self):
         super(TestStockPickingInfoComputation, self).setUp()
-        self.product_category_5 = self.env.ref('product.product_category_5')
-        self.product_pricelist_0 = self.env.ref('product.list0')
-        self.product_a = self.env['product.product'].create({
-            'name': 'Test product A',
-            'type': 'product',
-            'weight': 0.3,
-            'volume': 0.02,
-        })
-        self.product_b = self.env['product.product'].create({
-            'name': 'Test product B',
-            'type': 'consu',
-            'weight': 0.25,
-            'volume': 0.03,
-        })
-        self.sale_test = self.env['sale.order'].create({
-            'partner_id': self.partner.id,
-            'partner_invoice_id': self.partner.id,
-            'partner_shipping_id': self.partner.id,
-            'pricelist_id': self.product_pricelist_0.id,
-            'order_line': [
-                (0, 0, {
-                    'name': self.product_a.name,
-                    'product_id': self.product_a.id,
-                    'product_uom_qty': 2,
-                    'product_uom': self.product_a.uom_id.id,
-                    'price_unit': 300.00,
-                }),
-                (0, 0, {
-                    'name': self.product_b.name,
-                    'product_id': self.product_b.id,
-                    'product_uom_qty': 5,
-                    'product_uom': self.product_b.uom_id.id,
-                    'price_unit': 390.00,
-                })
-            ],
-            'picking_policy': 'direct',
-        })
+        self.product_category_5 = self.env.ref("product.product_category_5")
+        self.product_pricelist_0 = self.env.ref("product.list0")
+        self.product_a = self.env["product.product"].create(
+            {
+                "name": "Test product A",
+                "type": "product",
+                "weight": 0.3,
+                "volume": 0.02,
+            }
+        )
+        self.product_b = self.env["product.product"].create(
+            {"name": "Test product B", "type": "consu", "weight": 0.25, "volume": 0.03,}
+        )
+        self.sale_test = self.env["sale.order"].create(
+            {
+                "partner_id": self.partner.id,
+                "partner_invoice_id": self.partner.id,
+                "partner_shipping_id": self.partner.id,
+                "pricelist_id": self.product_pricelist_0.id,
+                "order_line": [
+                    (
+                        0,
+                        0,
+                        {
+                            "name": self.product_a.name,
+                            "product_id": self.product_a.id,
+                            "product_uom_qty": 2,
+                            "product_uom": self.product_a.uom_id.id,
+                            "price_unit": 300.00,
+                        },
+                    ),
+                    (
+                        0,
+                        0,
+                        {
+                            "name": self.product_b.name,
+                            "product_id": self.product_b.id,
+                            "product_uom_qty": 5,
+                            "product_uom": self.product_b.uom_id.id,
+                            "price_unit": 390.00,
+                        },
+                    ),
+                ],
+                "picking_policy": "direct",
+            }
+        )
 
     def test_weight_volume_with_done_qty(self):
         self.sale_test.action_confirm()
@@ -55,7 +64,7 @@ class TestStockPickingInfoComputation(TestSale):
             lambda x: x.product_id == self.product_a
         )
         # Needed for creating backorder
-        move.write({'quantity_done': 1})
+        move.write({"quantity_done": 1})
         self.assertAlmostEqual(picking.weight, 0.3)  # Prod. A - 0.3 * 1
         picking.action_calculate_volume()
         self.assertAlmostEqual(picking.volume, 0.02)  # Prod. A - 0.02 * 1
@@ -71,11 +80,13 @@ class TestStockPickingInfoComputation(TestSale):
 
     def test_weight_volume_with_reserved_qty(self):
         # Add stock quantity
-        self.env['stock.quant'].create({
-            'product_id': self.product_a.id,
-            'location_id': self.sale_test.warehouse_id.lot_stock_id.id,
-            'quantity': 1,
-        })
+        self.env["stock.quant"].create(
+            {
+                "product_id": self.product_a.id,
+                "location_id": self.sale_test.warehouse_id.lot_stock_id.id,
+                "quantity": 1,
+            }
+        )
         self.sale_test.action_confirm()
         picking = self.sale_test.picking_ids
         picking.action_assign()
