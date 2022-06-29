@@ -4,13 +4,12 @@
         id="report_delivery_document_info"
         inherit_id="delivery.report_delivery_document2"
     >
-            <xpath expr="//th[@t-if='o.shipping_weight']" position="after">
-                <th t-if="o.volume"><strong>Volume</strong></th>
-            </xpath>
-            <xpath expr="//td[@t-if='o.shipping_weight']" position="after">
-                <td t-if="o.volume">
-                    <span t-field="o.volume" />
-                </td>
-            </xpath>
+        <xpath expr="//div[@t-if='o.shipping_weight']" position="after">
+            <div t-if="o.volume" class="col-auto">
+                <strong>Volume:</strong>
+                <br />
+                <span t-field="o.volume" />
+            </div>
+        </xpath>
     </template>
 </odoo>

@@ -8,6 +8,6 @@ class SaleOrder(models.Model):
 
     def action_confirm(self):
         """Recompute picking volume when confirming sales order."""
-        res = super(SaleOrder, self).action_confirm()
+        res = super().action_confirm()
         self.mapped("picking_ids").action_calculate_volume()
         return res
