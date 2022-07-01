@@ -144,6 +144,7 @@ class UpsRequest(object):
                     "ShipTo": self._partner_to_shipping_data(picking.partner_id),
                     "ShipFrom": self._partner_to_shipping_data(
                         picking.picking_type_id.warehouse_id.partner_id
+                        or picking.company_id.partner_id
                     ),
                     "PaymentInformation": {
                         "ShipmentCharge": {
@@ -209,7 +210,7 @@ class UpsRequest(object):
                     ),
                     "ShipTo": self._partner_to_shipping_data(order.partner_shipping_id),
                     "ShipFrom": self._partner_to_shipping_data(
-                        order.warehouse_id.partner_id
+                        order.warehouse_id.partner_id or order.company_id.partner_id
                     ),
                     "Service": {"Code": self.service_code},
                     "Package": packages,
