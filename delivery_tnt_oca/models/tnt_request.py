@@ -103,7 +103,8 @@ class TntRequest(object):
             "priceCheck": {
                 "rateId": self.record.name,
                 "sender": self._partner_to_shipping_data(
-                    self.record.company_id.partner_id
+                    self.record.warehouse_id.partner_id
+                    or self.record.company_id.partner_id
                 ),
                 "delivery": self._partner_to_shipping_data(
                     self.record.partner_shipping_id
@@ -223,7 +224,10 @@ class TntRequest(object):
         }
 
     def _prepare_create_shipping(self):
-        receiver = self._prepare_address(self.record.company_id.partner_id)
+        receiver = self._prepare_address(
+            self.record.picking_type_id.warehouse_id.partner_id
+            or self.record.company_id.partner_id
+        )
         del receiver["ACCOUNT"]
         delivery = self._prepare_address(self.record.partner_id)
         del delivery["ACCOUNT"]
