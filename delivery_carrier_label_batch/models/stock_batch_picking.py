@@ -1,5 +1,7 @@
 # Copyright 2013-2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
+from itertools import groupby
+
 from odoo import _, api, fields, models
 
 
@@ -30,6 +32,7 @@ class StockBatchPicking(models.Model):
                 "option_ids": [(6, 0, rec.option_ids.ids)],
             }
             rec.picking_ids.write(options_datas)
+            rec.purge_tracking_references()
 
     def _get_options_to_add(self, carrier=None):
         carrier = carrier or self.carrier_id
@@ -107,3 +110,23 @@ class StockBatchPicking(models.Model):
         """
         values = self._values_with_carrier_options(values)
         return super(StockBatchPicking, self).create(values)
+
+    def purge_tracking_references(self):
+        """Purge tracking references and labels for each batch"""
+        self.env["ir.attachment"].search(
+            [
+                ("res_model", "=", "stock.picking.batch"),
+                ("res_id", "in", self.batch_ids.ids),
+            ]
+        ).unlink()
+        for batch in self:
+            for pack, grp_operations in groupby(
+                batch.move_line_ids, key=lambda r: (
+                    r.result_package_id or r.package_id
+                )
+            ):
+                if pack.parcel_tracking:
+                    pack.write({"parcel_tracking": False})
+            for picking in batch.move_line_ids.mapped("picking_id"):
+                if picking.carrier_tracking_ref:
+                    picking.write({"carrier_tracking_ref": False})

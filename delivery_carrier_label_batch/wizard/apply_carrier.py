@@ -28,4 +28,5 @@ class PickingBatchApplyCarrier(models.TransientModel):
         batchs = batch_obj.search(domain)
         batchs.write({"carrier_id": self.carrier_id.id})
         batchs.action_set_options()
+        batchs.purge_tracking_references()
         return {"type": "ir.actions.act_window_close"}

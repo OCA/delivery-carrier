@@ -137,10 +137,6 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
             if label and not self.generate_new_labels:
                 continue
             picking = operations[0].picking_id
-            if picking.carrier_tracking_ref:
-                picking.write({"carrier_tracking_ref": False})
-            if pack.parcel_tracking:
-                pack.write({"parcel_tracking": False})
             groups.setdefault(picking.id, []).append((pack, picking, label))
 
         is_in_testing = getattr(threading.current_thread(), 'testing', False)
@@ -254,6 +250,8 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
             to_generate = to_generate.filtered(
                 lambda rec: rec.id not in already_generated_ids
             )
+        else:
+            to_generate.purge_tracking_references()
 
         for batch in to_generate:
             labels = self._get_all_files(batch)
