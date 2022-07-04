@@ -43,6 +43,7 @@ class StockBatchPicking(models.Model):
             available_options = self.carrier_id.available_option_ids
             default_options = self._get_options_to_add()
             self.option_ids = [(6, 0, default_options.ids)]
+            self.carrier_code = self.carrier_id.code
             return {
                 "domain": {
                     "option_ids": [("id", "in", available_options.ids)],
@@ -81,14 +82,17 @@ class StockBatchPicking(models.Model):
         return values
 
     def write(self, values):
-        """Set the default options when the delivery method is changed.
-
-        So we are sure that the options are always in line with the
-        current delivery method.
-
-        """
+        # - Set the default options when the delivery method is changed (So we
+        #   are sure that the options are always in line with the current
+        #   delivery method)
+        # - Purge all tracking references if a new carrier is applied
         values = self._values_with_carrier_options(values)
-        return super(StockBatchPicking, self).write(values)
+        result = super().write(values)
+        # If a carrier is removed, tracking references are kept until next
+        # carrier change
+        if values.get("carrier_id", False):
+            self.purge_tracking_references()
+        return result
 
     @api.model
     def create(self, values):
@@ -99,4 +103,20 @@ class StockBatchPicking(models.Model):
 
         """
         values = self._values_with_carrier_options(values)
-        return super(StockBatchPicking, self).create(values)
+        return super().create(values)
+
+    def purge_tracking_references(self):
+        """Purge tracking for each picking and destination package"""
+        for batch in self:
+            move_lines = batch.move_line_ids
+            packs = move_lines.result_package_id.filtered(lambda p: p.parcel_tracking)
+            if packs:
+                packs.write({"parcel_tracking": False})
+            pickings = self.env["stock.picking"].search(
+                [
+                    ("move_line_ids", "in", move_lines.ids),
+                    ("carrier_tracking_ref", "!=", False),
+                ]
+            )
+            if pickings:
+                pickings.write({"carrier_tracking_ref": False})
