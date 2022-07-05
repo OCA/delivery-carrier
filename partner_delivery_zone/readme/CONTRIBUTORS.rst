@@ -1,4 +1,8 @@
-* Sergio Teruel <sergio.teruel@tecnativa.com>
+* `Tecnativa <https://www.tecnativa.com>`_
+
+  * Sergio Teruel
+  * César A. Sánchez
+  * Luis Daniel Lafaurie
 
 * `Pesol <https://www.pesol.es>`_
 
