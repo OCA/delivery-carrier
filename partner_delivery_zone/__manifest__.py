@@ -2,8 +2,8 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 {
     "name": "Partner Delivery Zone",
-    "summary": "Set on partners a zone for delivery goods",
-    "version": "14.0.1.1.0",
+    "summary": "This module allows to create partner delivery zones for physical products",
+    "version": "15.0.1.0.0",
     "development_status": "Beta",
     "category": "Delivery",
     "website": "https://github.com/OCA/delivery-carrier",
@@ -11,7 +11,7 @@
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": ["sale_stock"],
+    "depends": ["sale_stock", "contacts"],
     "data": [
         "security/ir.model.access.csv",
         "views/partner_delivery_zone_view.xml",
