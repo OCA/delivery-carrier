@@ -1,3 +1,3 @@
-To configure this module you need to:
+To configure this module, you need to:
 
-#. Go to *Sales > Configuration> Delivery Zones* and create any zones
+#. Go to **Contacts > Configuration > Delivery Zones** and create required codes
