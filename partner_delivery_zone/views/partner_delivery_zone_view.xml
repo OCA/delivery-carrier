@@ -20,7 +20,7 @@
         <field name="name">partner.delivery.zone.tree</field>
         <field name="model">partner.delivery.zone</field>
         <field name="arch" type="xml">
-            <tree string="Delivery Zone">
+            <tree>
                 <field name="code" />
                 <field name="name" />
             </tree>
@@ -37,7 +37,7 @@
         </field>
     </record>
     <record id="partner_delivery_zone_action" model="ir.actions.act_window">
-        <field name="name">Delivery Zone</field>
+        <field name="name">Delivery Zones</field>
         <field name="res_model">partner.delivery.zone</field>
         <field name="view_mode">tree,form</field>
         <field name="view_id" ref="view_partner_delivery_zone_tree" />
@@ -49,7 +49,7 @@
     </record>
     <menuitem
         id="partner_delivery_zone_menu"
-        parent="sale.menu_sale_config"
+        parent="contacts.res_partner_menu_config"
         action="partner_delivery_zone_action"
         sequence="30"
     />
