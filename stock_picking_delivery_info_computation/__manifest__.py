@@ -4,7 +4,7 @@
 {
     "name": "Stock Picking Delivery Info Computation",
     "summary": "Improve weight and volume calculation",
-    "version": "13.0.1.0.0",
+    "version": "14.0.1.0.0",
     "category": "Sales, Stock, Delivery",
     "website": "https://github.com/OCA/delivery-carrier",
     "author": "Tecnativa, Odoo Community Association (OCA)",

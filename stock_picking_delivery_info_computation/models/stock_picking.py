@@ -8,6 +8,7 @@ class StockPicking(models.Model):
     _inherit = "stock.picking"
 
     number_of_packages = fields.Integer(string="Number of Packages", copy=False)
+    volume = fields.Float(copy=False, string="Volume")
 
     def _determine_qty_field(self):
         self.ensure_one()

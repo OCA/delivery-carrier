@@ -2,14 +2,14 @@
 # Copyright 2019-2020 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo.addons.sale.tests.test_sale_common import TestSale
+from odoo.tests import SavepointCase
 
 
-class TestStockPickingInfoComputation(TestSale):
+class TestStockPickingInfoComputation(SavepointCase):
     def setUp(self):
         super(TestStockPickingInfoComputation, self).setUp()
-        self.product_category_5 = self.env.ref("product.product_category_5")
         self.product_pricelist_0 = self.env.ref("product.list0")
+        self.partner = self.env.ref("base.res_partner_1")
         self.product_a = self.env["product.product"].create(
             {
                 "name": "Test product A",
@@ -69,7 +69,7 @@ class TestStockPickingInfoComputation(TestSale):
         picking.action_calculate_volume()
         self.assertAlmostEqual(picking.volume, 0.02)  # Prod. A - 0.02 * 1
         # Confirm and create backorder
-        picking.action_done()
+        picking._action_done()
         backorder = self.sale_test.picking_ids - picking
         self.assertAlmostEqual(backorder.weight, 1.25)  # Prod. B - 0.25 * 5
         self.assertAlmostEqual(backorder.volume, 0.15)  # Prod. B - 0.03 * 5
