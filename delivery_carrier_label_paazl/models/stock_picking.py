@@ -208,11 +208,21 @@ class StockPicking(models.Model):
         """Return a dict that can be passed as parameters to the `commitOrder`
         endpoint of the paazl soap api"""
         self.ensure_one()
-        shipping_address = self._paazl_partner_to_order_data(self.partner_id)
-        shipping_address["customerName"] = shipping_address.pop("addresseeLine")
-        if self.partner_id.parent_id:
-            shipping_address["companyName"] = self.partner_id.parent_id.name
-        return dict(
+        warehouse_partner_id = self.picking_type_id.warehouse_id.partner_id
+        is_return = self.location_id.usage == "customer"
+        if is_return and self.picking_type_code == "incoming":
+            shipping_address = self._paazl_partner_to_order_data(warehouse_partner_id)
+            shipper_address = self.partner_id
+            shipping_address["customerName"] = shipping_address.pop("addresseeLine")
+            if warehouse_partner_id.parent_id:
+                shipping_address["companyName"] = warehouse_partner_id.parent_id.name
+        else:
+            shipping_address = self._paazl_partner_to_order_data(self.partner_id)
+            shipper_address = warehouse_partner_id
+            shipping_address["customerName"] = shipping_address.pop("addresseeLine")
+            if self.partner_id.parent_id:
+                shipping_address["companyName"] = self.partner_id.parent_id.name
+        res = dict(
             **self._paazl_auth_order_id(),
             pendingOrderReference=self._paazl_reference(),
             customerEmail=self.partner_id.email,
@@ -228,11 +238,17 @@ class StockPicking(models.Model):
                 packageCount=self._paazl_package_count(),
             ),
             shipperAddress=self._paazl_partner_to_order_data(
-                self.picking_type_id.warehouse_id.partner_id,
+                shipper_address,
             ),
             shippingAddress=shipping_address,
             totalAmount=0,
         )
+        if is_return and self.picking_type_code == "incoming":
+            # in case of a return set the return address to the shipper
+            res.update(returnAddress=self._paazl_partner_to_order_data(
+                shipper_address,
+            ))
+        return res
 
     def _paazl_change_order_data(self):
         """Return a dict that can be passed as parameters to the `changeOrder`

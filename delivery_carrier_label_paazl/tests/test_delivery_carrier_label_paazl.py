@@ -204,6 +204,11 @@ class TestDeliveryCarrierLabelPaazl(
         picking.location_id = customer_location[0].id
         picking.picking_type_code = "incoming"
         self.assertEqual(picking.picking_type_code, "incoming")
+        with self._setup_mock_client() as mock_client:
+            mock_client.service.commitOrder.return_value = Mock(
+                error=Mock(code=1003, message="")
+            )
+            picking._paazl_send_update_order(change_order=True)
         picking.move_lines.quantity_done = 1
         with self._setup_mock_client():
             payload = picking._paazl_generate_labels()
