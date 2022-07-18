@@ -17,7 +17,7 @@ Delivery Carrier Info
     :target: https://github.com/OCA/delivery-carrier/tree/15.0/delivery_carrier_info
     :alt: OCA/delivery-carrier
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/delivery-carrier-12-0/delivery-carrier-12-0-delivery_carrier_info
+    :target: https://translation.odoo-community.org/projects/delivery-carrier-15-0/delivery-carrier-15-0-delivery_carrier_info
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runbot-Try%20me-875A7B.png
     :target: https://runbot.odoo-community.org/runbot/99/15.0
@@ -60,6 +60,7 @@ Contributors
 
 * Sébastien BEAU <sebastien.beau@akretion.com>
 * Guewen Baconnier <guewen.baconnier@camptocamp.com>
+* Foram Shah <foram.shah@initos.com>
 
 Maintainers
 ~~~~~~~~~~~
