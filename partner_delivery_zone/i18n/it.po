@@ -1,0 +1,131 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* partner_delivery_zone
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2022-04-08 17:05+0000\n"
+"Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.3.2\n"
+
+#. module: partner_delivery_zone
+#: model_terms:ir.ui.view,arch_db:partner_delivery_zone.report_delivery_document
+#: model_terms:ir.ui.view,arch_db:partner_delivery_zone.report_picking
+msgid "<strong>Zone</strong>"
+msgstr "<strong>Zona</strong>"
+
+#. module: partner_delivery_zone
+#: model:ir.model.fields,field_description:partner_delivery_zone.field_partner_delivery_zone__active
+msgid "Active"
+msgstr "Attivo"
+
+#. module: partner_delivery_zone
+#: model_terms:ir.actions.act_window,help:partner_delivery_zone.partner_delivery_zone_action
+msgid "Click to set a new delivery zone for partners."
+msgstr "Clicca per impostare una nuova zona di consegna per i contatti."
+
+#. module: partner_delivery_zone
+#: model:ir.model.fields,field_description:partner_delivery_zone.field_partner_delivery_zone__code
+msgid "Code"
+msgstr "Codice"
+
+#. module: partner_delivery_zone
+#: model:ir.model,name:partner_delivery_zone.model_res_partner
+msgid "Contact"
+msgstr "Contatto"
+
+#. module: partner_delivery_zone
+#: model:ir.model.fields,field_description:partner_delivery_zone.field_partner_delivery_zone__create_uid
+msgid "Created by"
+msgstr "Creato da"
+
+#. module: partner_delivery_zone
+#: model:ir.model.fields,field_description:partner_delivery_zone.field_partner_delivery_zone__create_date
+msgid "Created on"
+msgstr "Creato il"
+
+#. module: partner_delivery_zone
+#: model:ir.actions.act_window,name:partner_delivery_zone.partner_delivery_zone_action
+#: model:ir.model.fields,field_description:partner_delivery_zone.field_res_partner__delivery_zone_id
+#: model:ir.model.fields,field_description:partner_delivery_zone.field_res_users__delivery_zone_id
+#: model:ir.model.fields,field_description:partner_delivery_zone.field_sale_order__delivery_zone_id
+#: model:ir.model.fields,field_description:partner_delivery_zone.field_stock_picking__delivery_zone_id
+#: model:ir.ui.menu,name:partner_delivery_zone.partner_delivery_zone_menu
+#: model_terms:ir.ui.view,arch_db:partner_delivery_zone.view_partner_delivery_zone_form
+#: model_terms:ir.ui.view,arch_db:partner_delivery_zone.view_partner_delivery_zone_search
+#: model_terms:ir.ui.view,arch_db:partner_delivery_zone.view_partner_delivery_zone_tree
+#: model_terms:ir.ui.view,arch_db:partner_delivery_zone.view_picking_internal_search
+#: model_terms:ir.ui.view,arch_db:partner_delivery_zone.view_res_partner_filter
+#: model_terms:ir.ui.view,arch_db:partner_delivery_zone.view_sales_order_filter
+msgid "Delivery Zone"
+msgstr "Zona di consegna"
+
+#. module: partner_delivery_zone
+#: model:ir.model.fields,field_description:partner_delivery_zone.field_partner_delivery_zone__display_name
+#: model:ir.model.fields,field_description:partner_delivery_zone.field_res_partner__display_name
+#: model:ir.model.fields,field_description:partner_delivery_zone.field_sale_order__display_name
+#: model:ir.model.fields,field_description:partner_delivery_zone.field_stock_move__display_name
+#: model:ir.model.fields,field_description:partner_delivery_zone.field_stock_picking__display_name
+msgid "Display Name"
+msgstr "Nome da visualizzare"
+
+#. module: partner_delivery_zone
+#: model:ir.model.fields,field_description:partner_delivery_zone.field_partner_delivery_zone__id
+#: model:ir.model.fields,field_description:partner_delivery_zone.field_res_partner__id
+#: model:ir.model.fields,field_description:partner_delivery_zone.field_sale_order__id
+#: model:ir.model.fields,field_description:partner_delivery_zone.field_stock_move__id
+#: model:ir.model.fields,field_description:partner_delivery_zone.field_stock_picking__id
+msgid "ID"
+msgstr "ID"
+
+#. module: partner_delivery_zone
+#: model:ir.model.fields,field_description:partner_delivery_zone.field_partner_delivery_zone____last_update
+#: model:ir.model.fields,field_description:partner_delivery_zone.field_res_partner____last_update
+#: model:ir.model.fields,field_description:partner_delivery_zone.field_sale_order____last_update
+#: model:ir.model.fields,field_description:partner_delivery_zone.field_stock_move____last_update
+#: model:ir.model.fields,field_description:partner_delivery_zone.field_stock_picking____last_update
+msgid "Last Modified on"
+msgstr "Ultima modifica il"
+
+#. module: partner_delivery_zone
+#: model:ir.model.fields,field_description:partner_delivery_zone.field_partner_delivery_zone__write_uid
+msgid "Last Updated by"
+msgstr "Ultimo aggiornamento di"
+
+#. module: partner_delivery_zone
+#: model:ir.model.fields,field_description:partner_delivery_zone.field_partner_delivery_zone__write_date
+msgid "Last Updated on"
+msgstr "Ultimo aggiornamento il"
+
+#. module: partner_delivery_zone
+#: model:ir.model,name:partner_delivery_zone.model_partner_delivery_zone
+msgid "Partner delivery zone"
+msgstr "Zona di consegna del contatto"
+
+#. module: partner_delivery_zone
+#: model:ir.model,name:partner_delivery_zone.model_sale_order
+msgid "Sales Order"
+msgstr "Ordine di vendita"
+
+#. module: partner_delivery_zone
+#: model:ir.model,name:partner_delivery_zone.model_stock_move
+msgid "Stock Move"
+msgstr "Movimento di magazzino"
+
+#. module: partner_delivery_zone
+#: model:ir.model,name:partner_delivery_zone.model_stock_picking
+msgid "Transfer"
+msgstr "Trasferimento"
+
+#. module: partner_delivery_zone
+#: model:ir.model.fields,field_description:partner_delivery_zone.field_partner_delivery_zone__name
+msgid "Zone"
+msgstr "Zona"

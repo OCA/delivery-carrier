@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2018 Tecnativa - Sergio Teruel
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_order_form" model="ir.ui.view">
+        <field name="name">sale.order.delivery.zone.form.view</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+                <field
+                    name="delivery_zone_id"
+                    attrs="{'readonly':[('state','in', ['done', 'cancel'])]}"
+                />
+            </xpath>
+        </field>
+    </record>
+    <record id="view_sales_order_filter" model="ir.ui.view">
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_sales_order_filter" />
+        <field name="arch" type="xml">
+            <field name="order_line" position="after">
+                <separator />
+                <field name="delivery_zone_id" />
+            </field>
+            <xpath expr="//filter[@name='customer']/.." position="inside">
+                <filter
+                    name="delivery_zone_group"
+                    string="Delivery Zone"
+                    context="{'group_by': 'delivery_zone_id'}"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
