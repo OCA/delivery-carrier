@@ -53,7 +53,10 @@ class StockPicking(models.Model):
                 self.delivery_notification_sent = True
                 related_ship.delivery_notification_sent = True
                 related_ship.carrier_price = self.carrier_price
-                related_ship.carrier_tracking_ref = self.carrier_tracking_ref
+                if not related_ship.carrier_tracking_ref:
+                    related_ship.carrier_tracking_ref = self.carrier_tracking_ref
+                else:
+                    related_ship.carrier_tracking_ref += "," + self.carrier_tracking_ref
                 return True
         return False
 
