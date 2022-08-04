@@ -1,10 +1,10 @@
 # Copyright 2020 Tecnativa - David Vidal
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from odoo.tests import Form
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 
 
-class TestDeliveryPackageNumber(SavepointCase):
+class TestDeliveryPackageNumber(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
