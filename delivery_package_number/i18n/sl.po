@@ -59,6 +59,3 @@ msgstr "Nastavi število pakiranj za te zbirnike"
 #: model:ir.model,name:delivery_package_number.model_stock_picking
 msgid "Transfer"
 msgstr "Premestitev"
-
-#~ msgid "Product Moves (Stock Move Line)"
-#~ msgstr "Premiki proizvoda (postavka premika zaloge)"
