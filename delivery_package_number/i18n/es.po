@@ -58,6 +58,3 @@ msgstr "Establezca el número de bultos para esto(s) albaran(es)"
 #: model:ir.model,name:delivery_package_number.model_stock_picking
 msgid "Transfer"
 msgstr "Albarán"
-
-#~ msgid "Product Moves (Stock Move Line)"
-#~ msgstr "Operaciones detalladas"
