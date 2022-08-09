@@ -17,13 +17,11 @@ class StockPicking(models.Model):
         readonly=True,
     )
     tracking_state = fields.Char(
-        string="Tracking state",
         readonly=True,
         index=True,
         tracking=True,
     )
     tracking_state_history = fields.Text(
-        string="Tracking state history",
         readonly=True,
     )
     delivery_state = fields.Selection(
@@ -71,11 +69,7 @@ class StockPicking(models.Model):
         # Split them by delivery type so we can ignore those without the
         # proper method.
         for delivery_type in delivery_types:
-            method = "%s_tracking_state_update" % delivery_type
-            if not hasattr(self.env["delivery.carrier"], method):
-                continue
             delivery_type_pickings = pickings.filtered(
                 lambda x: x.delivery_type == delivery_type
             )
-            for picking in delivery_type_pickings:
-                getattr(picking.carrier_id, method)(picking)
+            delivery_type_pickings.tracking_state_update()
