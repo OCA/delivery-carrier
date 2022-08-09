@@ -18,7 +18,7 @@ class DeliveryCarrier(models.Model):
         return res
 
     def cancel_shipment(self, pickings):
-        super().cancel_shipment(pickings)
+        res = super().cancel_shipment(pickings)
         pickings.write(
             {
                 "delivery_state": "canceled_shipment",
@@ -26,3 +26,4 @@ class DeliveryCarrier(models.Model):
                 "date_shipped": False,
             }
         )
+        return res
