@@ -9,6 +9,7 @@ setuptools.setup(
     version=version,
     install_requires=[
         'odoo-addon-delivery_carrier_info>=15.0dev,<15.1dev',
+        'odoo-addon-delivery_package_number>=15.0dev,<15.1dev',
         'odoo-addon-partner_delivery_zone>=15.0dev,<15.1dev',
     ],
     classifiers=[
