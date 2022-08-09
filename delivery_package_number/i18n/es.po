@@ -17,27 +17,9 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: delivery_package_number
-#: model:ir.model.fields,field_description:delivery_package_number.field_stock_immediate_transfer__display_name
-#: model:ir.model.fields,field_description:delivery_package_number.field_stock_picking__display_name
-msgid "Display Name"
-msgstr ""
-
-#. module: delivery_package_number
-#: model:ir.model.fields,field_description:delivery_package_number.field_stock_immediate_transfer__id
-#: model:ir.model.fields,field_description:delivery_package_number.field_stock_picking__id
-msgid "ID"
-msgstr ""
-
-#. module: delivery_package_number
 #: model:ir.model,name:delivery_package_number.model_stock_immediate_transfer
 msgid "Immediate Transfer"
 msgstr "Transferencia inmediata"
-
-#. module: delivery_package_number
-#: model:ir.model.fields,field_description:delivery_package_number.field_stock_immediate_transfer____last_update
-#: model:ir.model.fields,field_description:delivery_package_number.field_stock_picking____last_update
-msgid "Last Modified on"
-msgstr ""
 
 #. module: delivery_package_number
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_immediate_transfer__number_of_packages
