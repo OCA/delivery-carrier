@@ -9,4 +9,5 @@
 
   * Pedro M. Baeza
   * David Vidal
+  * Víctor Martínez
 * Marçal Isern <marsal.isern@qubiq.es>
