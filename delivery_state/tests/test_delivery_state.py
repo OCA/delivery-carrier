@@ -3,11 +3,11 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from odoo import fields
 from odoo.tests import Form
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 from odoo.tools import float_compare
 
 
-class TestDeliveryState(SavepointCase):
+class TestDeliveryState(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -64,7 +64,7 @@ class TestDeliveryState(SavepointCase):
     def test_delivery_state(self):
         delivery_wizard = Form(
             self.env["choose.delivery.carrier"].with_context(
-                {"default_order_id": self.sale.id, "default_carrier_id": self.carrier}
+                **{"default_order_id": self.sale.id, "default_carrier_id": self.carrier}
             )
         )
         choose_delivery_carrier = delivery_wizard.save()
@@ -94,23 +94,3 @@ class TestDeliveryState(SavepointCase):
         self.assertEqual(picking.delivery_state, "canceled_shipment")
         self.assertFalse(picking.date_shipped)
         self.assertFalse(picking.date_delivered)
-
-    def test_delivery_confirmation_send(self):
-        """Check that the shipping notification is sent to the right partner"""
-        self.env.ref("delivery_state.delivery_notification").auto_delete = False
-        self.sale.action_confirm()
-        previous_mails = self.env["mail.mail"].search(
-            [("partner_ids", "in", self.partner.ids)]
-        )
-        self.assertFalse(previous_mails)
-        picking = self.sale.picking_ids
-        picking.company_id.stock_move_email_validation = True
-        delivery_template = self.env.ref("delivery_state.delivery_notification")
-        picking.company_id.stock_mail_confirmation_template_id = delivery_template
-        picking.carrier_tracking_ref = "XX-0000"
-        picking.move_lines.quantity_done = 1
-        picking._action_done()
-        mail = self.env["mail.message"].search(
-            [("partner_ids", "in", self.partner.ids)]
-        )
-        self.assertTrue("XX-0000" in mail.body)
