@@ -4,7 +4,7 @@
 from odoo.tests import Form, common
 
 
-class DeliveryUps(common.SavepointCase):
+class TestDeliveryUpsBase(common.SavepointCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -58,14 +58,10 @@ class DeliveryUps(common.SavepointCase):
                 "vat": cls.company.partner_id.vat,
             }
         )
-        cls.product = cls.env.ref("product.product_delivery_01")
-        cls.product.write({"weight": 10})
+        cls.product = cls.env["product.product"].create(
+            {"name": "Test product", "type": "product", "weight": 10}
+        )
         cls.sale = cls._create_sale_order(cls)
-        cls.picking = cls.sale.picking_ids[0]
-        cls.picking.move_lines.quantity_done = 10
-        # We make a test call to avoid errors in tests
-        response = cls.carrier.ups_test_call(cls.sale)
-        cls.ups_ws_status = not ("errors" in response)
 
     def _create_sale_order(self):
         order_form = Form(self.env["sale.order"])
@@ -82,6 +78,17 @@ class DeliveryUps(common.SavepointCase):
         delivery_wizard.button_confirm()
         sale.action_confirm()
         return sale
+
+
+class TestDeliveryUps(TestDeliveryUpsBase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.picking = cls.sale.picking_ids[0]
+        cls.picking.move_lines.quantity_done = 10
+        # We make a test call to avoid errors in tests
+        response = cls.carrier.ups_test_call(cls.sale)
+        cls.ups_ws_status = not ("errors" in response)
 
     def test_order_ups_rate_shipment(self):
         if not self.ups_ws_status:
