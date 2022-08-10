@@ -17,6 +17,8 @@
     "depends": ["delivery"],
     "data": [
         "data/ir_cron_data.xml",
+        "data/mail_template.xml",
+        "views/res_config_settings_view.xml",
         "views/stock_picking_views.xml",
     ],
 }
