@@ -1,6 +1,7 @@
 # Copyright 2020 Trey, Kilobytes de Soluciones
 # Copyright 2020 FactorLibre
 # Copyright 2020 Tecnativa - David Vidal
+# Copyright 2022 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from odoo import api, fields, models
 
@@ -73,3 +74,20 @@ class StockPicking(models.Model):
                 lambda x: x.delivery_type == delivery_type
             )
             delivery_type_pickings.tracking_state_update()
+
+    def _send_delivery_state_delivered_email(self):
+        for item in self.filtered(
+            lambda p: p.company_id.delivery_state_delivered_email_validation
+            and p.picking_type_id.code == "outgoing"
+            and p.delivery_state == "customer_delivered"
+        ):
+            template_id = item.company_id.delivery_state_delivered_mail_template_id.id
+            item.with_context(force_send=True).message_post_with_template(
+                template_id, email_layout_xmlid="mail.mail_notification_light"
+            )
+
+    def write(self, vals):
+        res = super().write(vals)
+        if vals.get("delivery_state") == "customer_delivered":
+            self._send_delivery_state_delivered_email()
+        return res
