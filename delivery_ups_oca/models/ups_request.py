@@ -18,15 +18,16 @@ class UpsRequest(object):
         self.username = self.carrier.ups_ws_username
         self.password = self.carrier.ups_ws_password
         self.default_packaging_id = self.carrier.ups_default_packaging_id
+        self.use_packages_from_picking = self.carrier.ups_use_packages_from_picking
         self.shipper_number = self.carrier.ups_shipper_number
         self.service_code = self.carrier.ups_service_code
         self.file_format = self.carrier.ups_file_format
         self.package_dimension_code = self.carrier.ups_package_dimension_code
         self.package_weight_code = self.carrier.ups_package_weight_code
         self.transaction_src = "Odoo (%s)" % self.carrier.name
-        self.url = "https://onlinetools.ups.com"
+        self.url = "https://wwwcie.ups.com"
         if self.carrier.prod_environment:
-            self.url = "https://wwwcie.ups.com"
+            self.url = "https://onlinetools.ups.com"
 
     def _process_reply(
         self, url, data=None, method="post", query_parameters=None,
@@ -63,7 +64,7 @@ class UpsRequest(object):
         PackageWeight = picking.shipping_weight
         if is_package:
             NumOfPieces = sum(package.mapped("quant_ids.quantity"))
-            PackageWeight = package.weight
+            PackageWeight = max(package.shipping_weight, package.weight)
         return {
             "Description": package.name,
             "NumOfPieces": str(NumOfPieces),
@@ -111,17 +112,27 @@ class UpsRequest(object):
 
     def _prepare_create_shipping(self, picking):
         """Return a dict that can be passed to the shipping endpoint of the UPS API"""
-        if picking.package_ids:
+        if self.use_packages_from_picking and picking.package_ids:
             packages = [
                 self._quant_package_data_from_picking(package, picking, True)
                 for package in picking.package_ids
             ]
         else:
-            packages = [
-                self._quant_package_data_from_picking(
-                    self.default_packaging_id, picking, False
-                )
-            ]
+            packages = []
+            package_info = self._quant_package_data_from_picking(
+                self.default_packaging_id, picking, False
+            )
+            package_weight = round(
+                (picking.shipping_weight / picking.number_of_packages), 2
+            )
+            for i in range(0, picking.number_of_packages):
+                package_item = package_info
+                package_name = "%s (%s)" % (picking.name, i + 1)
+                package_item["Description"] = package_name
+                package_item["NumOfPieces"] = "1"
+                package_item["Packaging"]["Description"] = package_name
+                package_item["PackageWeight"]["Weight"] = str(package_weight)
+                packages.append(package_item)
         return {
             "ShipmentRequest": {
                 "Shipment": {
@@ -133,6 +144,7 @@ class UpsRequest(object):
                     "ShipTo": self._partner_to_shipping_data(picking.partner_id),
                     "ShipFrom": self._partner_to_shipping_data(
                         picking.picking_type_id.warehouse_id.partner_id
+                        or picking.company_id.partner_id
                     ),
                     "PaymentInformation": {
                         "ShipmentCharge": {
@@ -158,10 +170,13 @@ class UpsRequest(object):
         )
         self._raise_for_status(status, False)
         res = status["ShipmentResponse"]["ShipmentResults"]
+        PackageResults = res["PackageResults"]
+        if not isinstance(PackageResults, list):
+            PackageResults = [PackageResults]
         return {
             "price": res["ShipmentCharges"]["TotalCharges"],
             "ShipmentIdentificationNumber": res["ShipmentIdentificationNumber"],
-            "GraphicImage": res["PackageResults"]["ShippingLabel"]["GraphicImage"],
+            "PackageResults": PackageResults,
         }
 
     def _quant_package_data_from_order(self, order):
@@ -195,7 +210,7 @@ class UpsRequest(object):
                     ),
                     "ShipTo": self._partner_to_shipping_data(order.partner_shipping_id),
                     "ShipFrom": self._partner_to_shipping_data(
-                        order.warehouse_id.partner_id
+                        order.warehouse_id.partner_id or order.company_id.partner_id
                     ),
                     "Service": {"Code": self.service_code},
                     "Package": packages,
