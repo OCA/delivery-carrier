@@ -82,7 +82,7 @@ class TntRequest(object):
             "accountCountry": partner.country_id.code,
         }
 
-    def _prepare_rate_shipment(self):
+    def _prepare_rate_shipment_data(self):
         totalWeight = 0
         lines = self.record.order_line.filtered(
             lambda x: x.product_id and x.product_id.weight > 0
@@ -97,7 +97,7 @@ class TntRequest(object):
         totalVolume = height * width * p_length
         # Set 0.1 as the minimum value of the volume
         totalVolume = max(totalVolume, 0.01)
-        data = {
+        return {
             "appId": "PC",
             "appVersion": self.appVersion,
             "priceCheck": {
@@ -121,6 +121,9 @@ class TntRequest(object):
                 },
             },
         }
+
+    def _prepare_rate_shipment(self):
+        data = self._prepare_rate_shipment_data()
         return dicttoxml.dicttoxml(
             data, attr_type=False, custom_root="priceRequest"
         ).decode("utf-8")
