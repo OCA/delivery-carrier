@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-10 08:13+0000\n"
-"PO-Revision-Date: 2022-08-10 10:14+0200\n"
+"POT-Creation-Date: 2022-09-01 16:51+0000\n"
+"PO-Revision-Date: 2022-09-01 18:53+0200\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -15,7 +15,47 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: \n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#. module: delivery_state
+#: model:mail.template,body_html:delivery_state.delivery_state_delivered_notification
+msgid ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"                <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"                    Hello <t t-out=\"object.partner_id.name\"/>,<br/><br/>\n"
+"                    Your package has been delivered!<br/><br/>\n"
+"                    Order information<br/>\n"
+"                    Order <t t-out=\"object.carrier_tracking_ref\"/><br/>\n"
+"                    <t t-if=\"user.signature\">\n"
+"                        <br/>\n"
+"                        <t t-out=\"user.signature\"/>\n"
+"                    </t>\n"
+"                </p>\n"
+"            </div>\n"
+"        "
+msgstr ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"                <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"                    Hola <t t-out=\"object.partner_id.name\"/>,<br/><br/>\n"
+"                    ¡Su paquete ha sido entregado!<br/><br/>\n"
+"                    Información del pedido<br/>\n"
+"                    Pedido <t t-out=\"object.carrier_tracking_ref\"/><br/>\n"
+"                    <t t-if=\"user.signature\">\n"
+"                        <br/>\n"
+"                        <t t-out=\"user.signature\"/>\n"
+"                    </t>\n"
+"                </p>\n"
+"            </div>\n"
+"        "
+
+#. module: delivery_state
+#: model_terms:ir.ui.view,arch_db:delivery_state.res_config_settings_view_form
+msgid ""
+"<span class=\"fa fa-lg fa-building-o\" title=\"Values set here are company-"
+"specific.\" groups=\"base.group_multi_company\"/>"
+msgstr ""
+"<span class=\"fa fa-lg fa-building-o\" title=\"Valores específicos por "
+"compañía.\" groups=\"base.group_multi_company\"/>"
 
 #. module: delivery_state
 #: model:ir.model.fields.selection,name:delivery_state.selection__stock_picking__delivery_state__canceled_shipment
@@ -28,6 +68,16 @@ msgid "Carrier State"
 msgstr "Estado del transportista"
 
 #. module: delivery_state
+#: model:ir.model,name:delivery_state.model_res_company
+msgid "Companies"
+msgstr "Compañías"
+
+#. module: delivery_state
+#: model:ir.model,name:delivery_state.model_res_config_settings
+msgid "Config Settings"
+msgstr "Opciones de Configuración"
+
+#. module: delivery_state
 #: model:ir.model.fields.selection,name:delivery_state.selection__stock_picking__delivery_state__customer_delivered
 msgid "Customer delivered"
 msgstr "Entregado a cliente"
@@ -38,6 +88,33 @@ msgid "Delivery Date"
 msgstr "Fecha de entrega"
 
 #. module: delivery_state
+#: model:mail.template,name:delivery_state.delivery_state_delivered_notification
+msgid "Delivery: Picking delivered by Email"
+msgstr "Entrega: Albarán entregado por email"
+
+#. module: delivery_state
+#: model_terms:ir.ui.view,arch_db:delivery_state.res_config_settings_view_form
+msgid "Email Confirmation (customer delivered)"
+msgstr "Confirmación de email (Entregado a cliente)"
+
+#. module: delivery_state
+#: model:ir.model.fields,field_description:delivery_state.field_res_company__delivery_state_delivered_email_validation
+#: model:ir.model.fields,field_description:delivery_state.field_res_config_settings__delivery_state_delivered_email_validation
+msgid "Email Confirmation delivered picking"
+msgstr "Email de confirmación de albarán entregado"
+
+#. module: delivery_state
+#: model_terms:ir.ui.view,arch_db:delivery_state.res_config_settings_view_form
+msgid "Email Template"
+msgstr "Plantilla de correo"
+
+#. module: delivery_state
+#: model:ir.model.fields,field_description:delivery_state.field_res_company__delivery_state_delivered_mail_template_id
+#: model:ir.model.fields,field_description:delivery_state.field_res_config_settings__delivery_state_delivered_mail_template_id
+msgid "Email Template delivered picking"
+msgstr "Plantilla de email de albarán entregado"
+
+#. module: delivery_state
 #: model:ir.model.fields.selection,name:delivery_state.selection__stock_picking__delivery_state__in_transit
 msgid "In transit"
 msgstr "En tránsito"
@@ -46,6 +123,12 @@ msgstr "En tránsito"
 #: model:ir.model.fields.selection,name:delivery_state.selection__stock_picking__delivery_state__incidence
 msgid "Incidence"
 msgstr "Incidencia"
+
+#. module: delivery_state
+#: model_terms:ir.ui.view,arch_db:delivery_state.res_config_settings_view_form
+msgid "Send an automatic confirmation email when Delivery Orders are delivered"
+msgstr ""
+"Envíe un email de confirmación automático cuando se entreguen los albaranes"
 
 #. module: delivery_state
 #: model:ir.model.fields,field_description:delivery_state.field_stock_picking__date_shipped
@@ -93,3 +176,12 @@ msgstr "Actualizar seguimiento"
 #: model:ir.model.fields.selection,name:delivery_state.selection__stock_picking__delivery_state__warehouse_delivered
 msgid "Warehouse delivered"
 msgstr "Entregado por almacén"
+
+#. module: delivery_state
+#: model:mail.template,subject:delivery_state.delivery_state_delivered_notification
+msgid ""
+"Your order {{ object.carrier_tracking_ref or object.name }} from {{ object."
+"company_id.name }}"
+msgstr ""
+"Su pedido {{ object.carrier_tracking_ref or object.name }} de {{ object."
+"company_id.name }}"
