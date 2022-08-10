@@ -80,6 +80,12 @@ class DeliveryCarrier(models.Model):
     )
     tnt_collect_time_from = fields.Float(default=10.5, string="Collect time from")
     tnt_collect_time_to = fields.Float(default=16, string="Collect time to")
+    tnt_default_packaging_id = fields.Many2one(
+        comodel_name="product.packaging",
+        string="Default Packaging Type",
+        domain=[("package_carrier_type", "=", "tnt_oca")],
+    )
+    tnt_use_packages_from_picking = fields.Boolean(string="Use packages from picking")
 
     @api.depends("delivery_type", "tnt_product_type")
     def _compute_tnt_product_code(self):

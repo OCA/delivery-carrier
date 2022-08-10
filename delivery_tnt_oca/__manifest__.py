@@ -1,4 +1,4 @@
-# Copyright 2021 Tecnativa - Víctor Martínez
+# Copyright 2021-2022 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 {
     "name": "Delivery TNT OCA",
@@ -17,6 +17,7 @@
     ],
     "external_dependencies": {"python": ["dicttoxml", "xmltodict"]},
     "data": [
+        "data/product_packaging_data.xml",
         "views/delivery_carrier_view.xml",
         "report/picking_templates.xml",
         "report/stock_report_views.xml",

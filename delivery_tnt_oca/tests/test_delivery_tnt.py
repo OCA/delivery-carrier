@@ -1,4 +1,4 @@
-# Copyright 2021 Tecnativa - Víctor Martínez
+# Copyright 2021-2022 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from datetime import timedelta
 
@@ -6,7 +6,7 @@ from odoo.exceptions import UserError
 from odoo.tests import Form, common
 
 
-class DeliveryTnt(common.SavepointCase):
+class TestDeliveryTntBase(common.SavepointCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -27,9 +27,10 @@ class DeliveryTnt(common.SavepointCase):
                 "vat": cls.company.partner_id.vat,
             }
         )
-        cls.product = cls.env.ref("product.product_delivery_01")
-        cls.product.write(
+        cls.product = cls.env["product.product"].create(
             {
+                "name": "Test product",
+                "type": "product",
                 "weight": 1,
                 "volume": 1,
                 "product_length": 1,
@@ -39,8 +40,6 @@ class DeliveryTnt(common.SavepointCase):
             }
         )
         cls.sale = cls._create_sale_order(cls)
-        cls.picking = cls.sale.picking_ids[0]
-        cls.picking.move_lines.quantity_done = 1
 
     def _create_sale_order(self):
         order_form = Form(self.env["sale.order"])
@@ -58,6 +57,14 @@ class DeliveryTnt(common.SavepointCase):
             delivery_wizard.button_confirm()
         sale.action_confirm()
         return sale
+
+
+class DeliveryTnt(TestDeliveryTntBase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.picking = cls.sale.picking_ids[0]
+        cls.picking.move_lines.quantity_done = 1
 
     def test_order_tnt_oca_rate_shipment(self):
         if not self.carrier or self.carrier.prod_environment:

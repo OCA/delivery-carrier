@@ -1,4 +1,4 @@
-# Copyright 2021 Tecnativa - Víctor Martínez
+# Copyright 2021-2022 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 import base64
 import json
@@ -27,6 +27,8 @@ class TntRequest(object):
         self.username = self.carrier.tnt_oca_ws_username
         self.password = self.carrier.tnt_oca_ws_password
         self.account = self.carrier.tnt_oca_ws_account
+        self.default_packaging_id = self.carrier.tnt_default_packaging_id
+        self.use_packages_from_picking = self.carrier.tnt_use_packages_from_picking
         self.url = "https://express.tnt.com"
         auth_encoding = "%s:%s" % (self.username, self.password)
         self.authorization = base64.b64encode(auth_encoding.encode("utf-8")).decode(
@@ -80,22 +82,29 @@ class TntRequest(object):
             "accountCountry": partner.country_id.code,
         }
 
-    def _prepare_rate_shipment(self):
+    def _prepare_rate_shipment_data(self):
         totalWeight = 0
-        totalVolume = 0
-        for line in self.record.order_line.filtered(
-            lambda x: x.product_id
-            and (x.product_id.weight > 0 or x.product_id.volume > 0)
-        ):
-            totalWeight += line.product_id.weight * line.product_uom_qty
-            totalVolume += line.product_id.volume * line.product_uom_qty
-        data = {
+        lines = self.record.order_line.filtered(
+            lambda x: x.product_id and x.product_id.weight > 0
+        )
+        for line in lines:
+            weight_line = line.product_id.weight
+            totalWeight += weight_line * line.product_uom_qty
+        # Set totalVolume (in cm, we need to convert to m)
+        height = self.default_packaging_id.height / 100
+        width = self.default_packaging_id.width / 100
+        p_length = self.default_packaging_id.length / 100
+        totalVolume = height * width * p_length
+        # Set 0.1 as the minimum value of the volume
+        totalVolume = max(totalVolume, 0.01)
+        return {
             "appId": "PC",
             "appVersion": self.appVersion,
             "priceCheck": {
                 "rateId": self.record.name,
                 "sender": self._partner_to_shipping_data(
-                    self.record.company_id.partner_id
+                    self.record.warehouse_id.partner_id
+                    or self.record.company_id.partner_id
                 ),
                 "delivery": self._partner_to_shipping_data(
                     self.record.partner_shipping_id
@@ -106,12 +115,15 @@ class TntRequest(object):
                 "currency": self.record.currency_id.name,
                 "priceBreakDown": True,
                 "consignmentDetails": {
-                    "totalWeight": totalWeight,
-                    "totalVolume": totalVolume,
+                    "totalWeight": round(totalWeight, 2),
+                    "totalVolume": round(totalVolume, 2),
                     "totalNumberOfPieces": 1,
                 },
             },
         }
+
+    def _prepare_rate_shipment(self):
+        data = self._prepare_rate_shipment_data()
         return dicttoxml.dicttoxml(
             data, attr_type=False, custom_root="priceRequest"
         ).decode("utf-8")
@@ -192,32 +204,36 @@ class TntRequest(object):
         return data
 
     def _get_data_total_shipping(self):
-        weight = self.record.shipping_weight
-        volume = p_length = height = width = 0
-        if self.record.package_ids:
-            weight = sum(self.record.package_ids.mapped("quant_ids.quantity"))
-            height = max(self.record.package_ids.mapped("height"))
-            width = max(self.record.package_ids.mapped("width"))
-            p_length = max(self.record.package_ids.mapped("length"))
-            for quant in self.record.package_ids.mapped("quant_ids"):
-                volume += quant.product_id.volume * quant.quantity
+        if self.use_packages_from_picking and self.record.package_ids:
+            weight = sum(
+                [p.shipping_weight or p.weight for p in self.record.package_ids]
+            )
+            height = sum(self.record.package_ids.mapped("height"))
+            width = sum(self.record.package_ids.mapped("width"))
+            p_length = sum(self.record.package_ids.mapped("length"))
         else:
-            lines = self.record.move_line_ids_without_package
-            for line in lines.filtered(lambda x: x.qty_done > 0):
-                volume += line.product_id.volume * line.qty_done
-                p_length += line.product_id.product_length * line.qty_done
-                height += line.product_id.product_height * line.qty_done
-                width += line.product_id.product_width * line.qty_done
+            weight = self.record.shipping_weight
+            # in cm, we need to convert to m
+            height = self.default_packaging_id.height / 100
+            width = self.default_packaging_id.width / 100
+            p_length = self.default_packaging_id.length / 100
+        # Set volume
+        volume = height * width * p_length
+        # Set 0.1 as the minimum value of the volume
+        volume = max(volume, 0.01)
         return {
-            "weight": weight,
-            "volume": volume,
-            "length": p_length,
-            "height": height,
-            "width": width,
+            "weight": round(weight, 2),
+            "volume": round(volume, 2),
+            "length": round(p_length, 2),
+            "height": round(height, 2),
+            "width": round(width, 2),
         }
 
     def _prepare_create_shipping(self):
-        receiver = self._prepare_address(self.record.company_id.partner_id)
+        receiver = self._prepare_address(
+            self.record.picking_type_id.warehouse_id.partner_id
+            or self.record.company_id.partner_id
+        )
         del receiver["ACCOUNT"]
         delivery = self._prepare_address(self.record.partner_id)
         del delivery["ACCOUNT"]
@@ -340,15 +356,24 @@ class TntRequest(object):
 
     # TntLabel
     def _prepare_label_address(self, partner):
-        return {
+        """Adapt to limit addressLine to 30 characters."""
+        address = partner.street or ""
+        if partner.street2:
+            address += " " + partner.street2
+        res = {
             "name": partner.name,
-            "addressLine1": partner.street,
+            "addressLine1": address[:30],
             "town": partner.city,
             "exactMatch": "Y",
             "province": partner.state_id.name,
             "postcode": partner.zip,
             "country": partner.country_id.code,
         }
+        if len(address) > 30:
+            res.update({"addressLine2": address[30:30]})
+        if len(address) > 60:
+            res.update({"addressLine3": address[60:30]})
+        return res
 
     def _prepare_label(self):
         data_total = self._get_data_total_shipping()
