@@ -23,6 +23,7 @@ addon | version | maintainers | summary
 --- | --- | --- | ---
 [delivery_carrier_info](delivery_carrier_info/) | 15.0.1.0.1 |  | Add code and description on carrier
 [delivery_package_number](delivery_package_number/) | 15.0.1.0.0 |  | Set or compute number of packages for a picking
+[delivery_translatable](delivery_translatable/) | 15.0.1.0.0 |  | name and website_description field of delivery carrier setup translatable.
 [partner_delivery_zone](partner_delivery_zone/) | 15.0.1.0.0 |  | This module allows to create partner delivery zones for physical products
 
 [//]: # (end addons)
