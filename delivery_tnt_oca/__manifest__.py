@@ -3,7 +3,7 @@
 {
     "name": "Delivery TNT OCA",
     "summary": "Integrate TNT webservice",
-    "version": "14.0.1.0.1",
+    "version": "14.0.1.1.0",
     "category": "Delivery",
     "website": "https://github.com/OCA/delivery-carrier",
     "author": "Tecnativa, Odoo Community Association (OCA)",
