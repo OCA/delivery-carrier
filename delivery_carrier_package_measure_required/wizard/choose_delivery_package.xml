@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="choose_delivery_package_view_form" model="ir.ui.view">
+        <field name="name">choose.delivery.package.inherit</field>
+        <field name="model">choose.delivery.package</field>
+        <field name="inherit_id" ref="delivery.choose_delivery_package_view_form" />
+        <field name="arch" type="xml">
+          <xpath expr="//label[@for='shipping_weight']" position="before">
+
+            <field name="package_height_required" invisible="1" />
+            <field name="package_length_required" invisible="1" />
+            <field name="package_weight_required" invisible="1" />
+            <field name="package_width_required" invisible="1" />
+            <label
+                    for="package_length"
+                    attrs="{'invisible': ['|', ('delivery_packaging_id', '=', False), ('package_length_required', '=', False)]}"
+                />
+            <div
+                    class="o_row"
+                    attrs="{'invisible': ['|', ('delivery_packaging_id', '=', False), ('package_length_required', '=', False)]}"
+                    name="package_length"
+                >
+              <field name="package_length" />
+              <field name="dimension_uom_name" />
+            </div>
+            <label
+                    for="package_width"
+                    attrs="{'invisible': ['|', ('delivery_packaging_id', '=', False), ('package_width_required', '=', False)]}"
+                />
+            <div
+                    class="o_row"
+                    attrs="{'invisible': ['|', ('delivery_packaging_id', '=', False), ('package_width_required', '=', False)]}"
+                    name="package_width"
+                >
+              <field name="package_width" />
+              <field name="dimension_uom_name" />
+            </div>
+            <label
+                    for="package_height"
+                    attrs="{'invisible': ['|', ('delivery_packaging_id', '=', False), ('package_height_required', '=', False)]}"
+                />
+            <div
+                    class="o_row"
+                    attrs="{'invisible': ['|', ('delivery_packaging_id', '=', False), ('package_height_required', '=', False)]}"
+                    name="package_height"
+                >
+              <field name="package_height" />
+              <field name="dimension_uom_name" />
+            </div>
+
+          </xpath>
+        </field>
+    </record>
+</odoo>

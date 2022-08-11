@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_product_packaging_delivery_form_inherit" model="ir.ui.view">
+        <field name="name">product.packaging.form.delivery</field>
+        <field name="model">product.packaging</field>
+        <field name="inherit_id" ref="delivery.product_packaging_delivery_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='delivery']" position="inside">
+                        <group
+                    name="carrier_required_mesaurement"
+                    string="Carrier Required Measurements"
+                >
+                            <field name="package_length_required" />
+                            <field name="package_width_required" />
+                            <field name="package_height_required" />
+                            <field name="package_weight_required" />
+                        </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
