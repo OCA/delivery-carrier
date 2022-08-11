@@ -6,8 +6,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-27 14:10+0000\n"
-"PO-Revision-Date: 2022-06-27 14:10+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -74,15 +72,15 @@ msgid "Credentials"
 msgstr ""
 
 #. module: delivery_tnt_oca
+#: model:ir.model.fields,field_description:delivery_tnt_oca.field_delivery_carrier__tnt_default_packaging_id
+msgid "Default Packaging Type"
+msgstr ""
+
+#. module: delivery_tnt_oca
 #: model:ir.model.fields,field_description:delivery_tnt_oca.field_delivery_carrier__display_name
 #: model:ir.model.fields,field_description:delivery_tnt_oca.field_product_packaging__display_name
 #: model:ir.model.fields,field_description:delivery_tnt_oca.field_stock_picking__display_name
 msgid "Display Name"
-msgstr ""
-
-#. module: delivery_tnt_oca
-#: model:ir.model.fields,field_description:delivery_tnt_oca.field_delivery_carrier__tnt_default_packaging_id
-msgid "Default Packaging Type"
 msgstr ""
 
 #. module: delivery_tnt_oca
