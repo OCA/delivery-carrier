@@ -63,6 +63,12 @@ License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
                                 attrs="{'required': [('delivery_type', '=', 'tnt_oca')]}"
                             />
                             <field
+                                name="tnt_default_packaging_id"
+                                attrs="{'required': [('delivery_type', '=', 'tnt_oca')]}"
+                                context="{'default_package_carrier_type': 'tnt_oca'}"
+                            />
+                            <field name="tnt_use_packages_from_picking" />
+                            <field
                                 name="tnt_collect_time_from"
                                 attrs="{'required': [('delivery_type', '=', 'tnt_oca')]}"
                                 widget="float_time"
