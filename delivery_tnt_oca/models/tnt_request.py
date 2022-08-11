@@ -93,7 +93,7 @@ class TntRequest(object):
         # Set totalVolume (in cm, we need to convert to m)
         height = self.default_packaging_id.height / 100
         width = self.default_packaging_id.width / 100
-        p_length = self.default_packaging_id.length / 100
+        p_length = self.default_packaging_id.packaging_length / 100
         totalVolume = height * width * p_length
         # Set 0.1 as the minimum value of the volume
         totalVolume = max(totalVolume, 0.01)
@@ -208,12 +208,12 @@ class TntRequest(object):
         if self.use_packages_from_picking and self.record.package_ids:
             height = sum(self.record.package_ids.mapped("height"))
             width = sum(self.record.package_ids.mapped("width"))
-            p_length = sum(self.record.package_ids.mapped("length"))
+            p_length = sum(self.record.package_ids.mapped("packaging_length"))
         else:
             # in cm, we need to convert to m
             height = self.default_packaging_id.height / 100
             width = self.default_packaging_id.width / 100
-            p_length = self.default_packaging_id.length / 100
+            p_length = self.default_packaging_id.packaging_length / 100
         # Set volume
         volume = height * width * p_length
         # Set 0.1 as the minimum value of the volume
