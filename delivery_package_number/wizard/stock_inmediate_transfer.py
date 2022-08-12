@@ -9,6 +9,11 @@ class StockImmediateTransfer(models.TransientModel):
     number_of_packages = fields.Integer(
         help="Set the number of packages for this picking(s)",
     )
+    ask_number_of_packages = fields.Boolean(compute="_compute_ask_number_of_packages")
+
+    def _compute_ask_number_of_packages(self):
+        for item in self:
+            item.ask_number_of_packages = bool(item.pick_ids.carrier_id)
 
     def process(self):
         if self.number_of_packages:
