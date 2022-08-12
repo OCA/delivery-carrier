@@ -14,6 +14,11 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: delivery_package_number
+#: model:ir.model.fields,field_description:delivery_package_number.field_stock_immediate_transfer__ask_number_of_packages
+msgid "Ask Number Of Packages"
+msgstr ""
+
+#. module: delivery_package_number
 #: model:ir.model,name:delivery_package_number.model_stock_immediate_transfer
 msgid "Immediate Transfer"
 msgstr ""
