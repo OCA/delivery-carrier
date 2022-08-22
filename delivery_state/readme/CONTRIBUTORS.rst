@@ -10,3 +10,6 @@
   * Pedro M. Baeza
   * David Vidal
 * Marçal Isern <marsal.isern@qubiq.es>
+* `Hibou Corp. <https://hibou.io>`_:
+
+  * Jared Kipe

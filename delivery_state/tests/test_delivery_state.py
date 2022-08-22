@@ -1,13 +1,14 @@
 # Copyright 2020 Trey, Kilobytes de Soluciones
 # Copyright 2020 FactorLibre
+# Copyright 2022 Hibou Corp.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from odoo import fields
 from odoo.tests import Form
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 from odoo.tools import float_compare
 
 
-class TestDeliveryState(SavepointCase):
+class TestDeliveryState(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
