@@ -1,12 +1,13 @@
 # Copyright 2020 Trey, Kilobytes de Soluciones
 # Copyright 2020 Tecnativa - Pedro M. Baeza
+# Copyright 2022 Hibou Corp.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from odoo.tests import Form
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 from odoo.tools import float_compare
 
 
-class TestDeliveryPriceMethod(SavepointCase):
+class TestDeliveryPriceMethod(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
