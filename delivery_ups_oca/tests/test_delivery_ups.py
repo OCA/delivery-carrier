@@ -1,10 +1,11 @@
 # Copyright 2020 Hunki Enterprises BV
 # Copyright 2021-2022 Tecnativa - Víctor Martínez
+# Copyright 2022 Hibou Corp.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from odoo.tests import Form, common
 
 
-class TestDeliveryUpsBase(common.SavepointCase):
+class TestDeliveryUpsBase(common.TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -22,7 +23,7 @@ class TestDeliveryUpsBase(common.SavepointCase):
                 "delivery_type": "ups",
                 "product_id": product_shipping_cost.id,
                 "price_method": "fixed",
-                "ups_default_packaging_id": cls.env.ref(
+                "ups_default_package_type_id": cls.env.ref(
                     "delivery_ups_oca.product_packaging_ups_02"
                 ).id,
                 #

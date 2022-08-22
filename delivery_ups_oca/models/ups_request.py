@@ -17,7 +17,7 @@ class UpsRequest(object):
         self.access_license_number = self.carrier.ups_access_license
         self.username = self.carrier.ups_ws_username
         self.password = self.carrier.ups_ws_password
-        self.default_packaging_id = self.carrier.ups_default_packaging_id
+        self.default_packaging_id = self.carrier.ups_default_package_type_id
         self.use_packages_from_picking = self.carrier.ups_use_packages_from_picking
         self.shipper_number = self.carrier.ups_shipper_number
         self.service_code = self.carrier.ups_service_code
@@ -189,7 +189,7 @@ class UpsRequest(object):
             "PackagingType": {"Code": self.default_packaging_id.shipper_package_code},
             "Dimensions": {
                 "UnitOfMeasurement": {"Code": self.package_dimension_code},
-                "Length": str(self.default_packaging_id.length),
+                "Length": str(self.default_packaging_id.packaging_length),
                 "Width": str(self.default_packaging_id.width),
                 "Height": str(self.default_packaging_id.height),
             },

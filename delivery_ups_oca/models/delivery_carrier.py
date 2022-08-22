@@ -9,7 +9,8 @@ from .ups_request import UpsRequest
 class DeliveryCarrier(models.Model):
     _inherit = "delivery.carrier"
 
-    delivery_type = fields.Selection(selection_add=[("ups", "UPS")])
+    delivery_type = fields.Selection(selection_add=[("ups", "UPS")],
+                                     ondelete={'ups': lambda recs: recs.write({'delivery_type': 'fixed', 'fixed_price': 0})})
     ups_file_format = fields.Selection(
         selection=[("GIF", "PDF"), ("ZPL", "ZPL"), ("EPL", "EPL"), ("SPL", "SPL")],
         default="GIF",
@@ -54,8 +55,8 @@ class DeliveryCarrier(models.Model):
         default="11",
         string="Service code",
     )
-    ups_default_packaging_id = fields.Many2one(
-        comodel_name="product.packaging",
+    ups_default_package_type_id = fields.Many2one(
+        comodel_name="stock.package.type",
         string="Default Packaging Type",
         domain=[("package_carrier_type", "=", "ups")],
     )

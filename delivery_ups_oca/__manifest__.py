@@ -8,7 +8,7 @@
     "development_status": "Production/Stable",
     "category": "Delivery",
     "website": "https://github.com/OCA/delivery-carrier",
-    "author": "Hunki Enterprises BV, Tecnativa, Odoo Community Association (OCA)",
+    "author": "Hunki Enterprises BV, Tecnativa, Hibou Corp., Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "excludes": ["delivery_ups"],
     "depends": [
@@ -18,7 +18,7 @@
         "delivery_state",
     ],
     "data": [
-        "data/product_packaging_data.xml",
+        "data/stock_package_type_data.xml",
         "views/delivery_carrier_view.xml",
         "views/stock_picking_view.xml",
     ],

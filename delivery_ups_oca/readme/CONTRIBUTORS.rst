@@ -3,3 +3,6 @@
 
   * Víctor Martínez
   * Pedro M. Baeza
+* `Hibou Corp. <https://hibou.io>`_:
+
+  * Jared Kipe

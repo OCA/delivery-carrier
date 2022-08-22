@@ -44,7 +44,7 @@ msgid "Carrier"
 msgstr ""
 
 #. module: delivery_ups_oca
-#: model:ir.model.fields,field_description:delivery_ups_oca.field_delivery_carrier__ups_default_packaging_id
+#: model:ir.model.fields,field_description:delivery_ups_oca.field_delivery_carrier__ups_default_package_type_id
 msgid "Default Packaging Type"
 msgstr ""
 
