@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-21 17:27+0000\n"
-"PO-Revision-Date: 2022-04-21 19:29+0200\n"
+"POT-Creation-Date: 2022-08-26 23:39+0000\n"
+"PO-Revision-Date: 2022-08-27 01:40+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: \n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 2.2.4\n"
 
 #. module: delivery_carrier_multi_zip
 #: model:ir.model.fields,field_description:delivery_carrier_multi_zip.field_delivery_carrier_zip__carrier_id
@@ -38,16 +38,19 @@ msgid "Delivery destination availability ZIP interval line"
 msgstr "Línea de intervalo de CP de disponibilidad de destino de transportista"
 
 #. module: delivery_carrier_multi_zip
+#: model:ir.model.fields,field_description:delivery_carrier_multi_zip.field_delivery_carrier__display_name
 #: model:ir.model.fields,field_description:delivery_carrier_multi_zip.field_delivery_carrier_zip__display_name
 msgid "Display Name"
 msgstr "Nombre mostrado"
 
 #. module: delivery_carrier_multi_zip
+#: model:ir.model.fields,field_description:delivery_carrier_multi_zip.field_delivery_carrier__id
 #: model:ir.model.fields,field_description:delivery_carrier_multi_zip.field_delivery_carrier_zip__id
 msgid "ID"
 msgstr "ID"
 
 #. module: delivery_carrier_multi_zip
+#: model:ir.model.fields,field_description:delivery_carrier_multi_zip.field_delivery_carrier____last_update
 #: model:ir.model.fields,field_description:delivery_carrier_multi_zip.field_delivery_carrier_zip____last_update
 msgid "Last Modified on"
 msgstr "Última modificación el"
@@ -73,7 +76,7 @@ msgid "Shipping Methods"
 msgstr "Métodos de envío"
 
 #. module: delivery_carrier_multi_zip
-#: model:ir.model.fields,field_description:delivery_carrier_multi_zip.field_delivery_carrier__zip_ids
+#: model:ir.model.fields,field_description:delivery_carrier_multi_zip.field_delivery_carrier__zip_range_ids
 msgid "ZIP codes"
 msgstr "Códigos postales"
 
