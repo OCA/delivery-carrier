@@ -7,7 +7,7 @@ from odoo import api, fields, models
 class DeliveryCarrier(models.Model):
     _inherit = "delivery.carrier"
 
-    zip_ids = fields.One2many(
+    zip_range_ids = fields.One2many(
         comodel_name="delivery.carrier.zip",
         inverse_name="carrier_id",
         string="ZIP codes",
@@ -18,8 +18,8 @@ class DeliveryCarrier(models.Model):
         if self.env.context.get("bypass_multi_zip"):
             return
         if vals.get("zip_from") or vals.get("zip_to"):
-            vals.setdefault("zip_ids", [])
-            vals["zip_ids"].append(
+            vals.setdefault("zip_range_ids", [])
+            vals["zip_range_ids"].append(
                 (
                     0,
                     0,
@@ -47,10 +47,10 @@ class DeliveryCarrier(models.Model):
     def _match_address(self, partner):
         """Match as well by zip intervals if they are present."""
         res = super()._match_address(partner)  # it has self.ensure_one()
-        if res and self.zip_ids:
+        if res and self.zip_range_ids:
             partner_zip = partner.zip or ""
             res = bool(
-                self.zip_ids.filtered(
+                self.zip_range_ids.filtered(
                     lambda r: r.zip_from <= partner_zip and r.zip_to >= partner_zip
                 )
             )
