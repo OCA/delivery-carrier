@@ -15,7 +15,7 @@
             <xpath expr="//group[@name='country_details']/.." position="after">
                 <group name="group_zip_range_ids" colspan="2">
                     <field name="zip_range_ids">
-                        <tree editable="bottom">
+                        <tree editable="bottom" default_order="zip_from, zip_to">
                             <field name="zip_from" />
                             <field name="zip_to" />
                         </tree>
