@@ -13,8 +13,8 @@
                 <attribute name="invisible">1</attribute>
             </group>
             <xpath expr="//group[@name='country_details']/.." position="after">
-                <group name="group_zip_ids" colspan="2">
-                    <field name="zip_ids">
+                <group name="group_zip_range_ids" colspan="2">
+                    <field name="zip_range_ids">
                         <tree editable="bottom">
                             <field name="zip_from" />
                             <field name="zip_to" />
