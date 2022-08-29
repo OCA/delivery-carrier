@@ -58,7 +58,7 @@ install:
   - travis_install_nightly
   - pip install PyPDF2==1.18
   - pip install unidecode
-  - pip install pycountry>=16.11.08
+  - pip install "pycountry>=16.11.08,<20"  # <20 because of pycountry error in delivery_carrier_label_gls test
   - pip install suds-jurko==0.6
 
 script:

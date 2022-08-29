@@ -8,7 +8,7 @@ import logging
 
 from openerp import models, api, fields, _
 from openerp.exceptions import Warning as UserError
-from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
+from openerp.tools import config, DEFAULT_SERVER_DATETIME_FORMAT
 from ..report.label import GLSLabel, InvalidDataForMako
 from ..report.exception_helper import (InvalidAccountNumber)
 from ..report.label_helper import (
@@ -25,7 +25,10 @@ except (ImportError, IOError) as err:
 
 
 def raise_exception(message):
-    raise UserError(map_except_message(message))
+    if config["test_enable"]:
+        raise
+    else:
+        raise UserError(map_except_message(message))
 
 
 def map_except_message(message):
