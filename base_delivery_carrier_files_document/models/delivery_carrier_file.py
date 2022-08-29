@@ -1,11 +1,10 @@
-# -*- coding: utf-8 -*-
 # Copyright 2012 Camptocamp SA
-# Author: Guewen Baconnier
+# Copyright 2021 Sunflower IT
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import base64
 
-from openerp import api, models, fields
+from odoo import api, models
 
 
 class DeliveryCarrierFile(models.Model):
@@ -18,18 +17,16 @@ class DeliveryCarrierFile(models.Model):
             res.append(('document', 'Document'))
         return res
 
-    document_directory_id = fields.Many2one('document.directory')
-
     @api.model
     def _prepare_attachment(self, carrier_file, filename, file_content):
-        return {'name': "%s_%s" % (carrier_file.name, filename),
-                'datas_fname': filename,
-                'datas': base64.encodestring(file_content),
-                'parent_id': carrier_file.document_directory_id.id,
-                'type': 'binary'}
+        file_c = file_content.encode("utf-8")
+        return {
+            'name': "%s_%s" % (carrier_file.name, filename),
+            'datas': base64.b64encode(file_c),
+            'type': 'binary'
+        }
 
-    @api.multi
-    def _write_file(self, filename, file_content):
+    def _write_file(self, filename, file_content, pickings):
         ret = True
         for this in self:
             if this.write_mode == 'document':
@@ -39,5 +36,5 @@ class DeliveryCarrierFile(models.Model):
                 ret &= True
             else:
                 ret &= super(DeliveryCarrierFile, this)._write_file(
-                    filename, file_content)
+                    filename, file_content, pickings)
         return ret
