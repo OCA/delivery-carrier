@@ -8,7 +8,7 @@ from odoo.tests.common import TransactionCase
 
 class CarrierFilesDocumentTest(TransactionCase):
     def test_carrier_file_generation(self):
-        """ Test carrier file generation """
+        """Test carrier file generation"""
         carrier_file = self.env.ref("base_delivery_carrier_files.delivery_carrier_file")
 
         # Save as attachment
