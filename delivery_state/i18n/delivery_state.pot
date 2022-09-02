@@ -1,0 +1,168 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* delivery_state
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-09-01 16:51+0000\n"
+"PO-Revision-Date: 2022-09-01 16:51+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: delivery_state
+#: model:mail.template,body_html:delivery_state.delivery_state_delivered_notification
+msgid ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"                <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"                    Hello <t t-out=\"object.partner_id.name\"/>,<br/><br/>\n"
+"                    Your package has been delivered!<br/><br/>\n"
+"                    Order information<br/>\n"
+"                    Order <t t-out=\"object.carrier_tracking_ref\"/><br/>\n"
+"                    <t t-if=\"user.signature\">\n"
+"                        <br/>\n"
+"                        <t t-out=\"user.signature\"/>\n"
+"                    </t>\n"
+"                </p>\n"
+"            </div>\n"
+"        "
+msgstr ""
+
+#. module: delivery_state
+#: model_terms:ir.ui.view,arch_db:delivery_state.res_config_settings_view_form
+msgid ""
+"<span class=\"fa fa-lg fa-building-o\" title=\"Values set here are company-"
+"specific.\" groups=\"base.group_multi_company\"/>"
+msgstr ""
+
+#. module: delivery_state
+#: model:ir.model.fields.selection,name:delivery_state.selection__stock_picking__delivery_state__canceled_shipment
+msgid "Canceled shipment"
+msgstr ""
+
+#. module: delivery_state
+#: model:ir.model.fields,field_description:delivery_state.field_stock_picking__delivery_state
+msgid "Carrier State"
+msgstr ""
+
+#. module: delivery_state
+#: model:ir.model,name:delivery_state.model_res_company
+msgid "Companies"
+msgstr ""
+
+#. module: delivery_state
+#: model:ir.model,name:delivery_state.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: delivery_state
+#: model:ir.model.fields.selection,name:delivery_state.selection__stock_picking__delivery_state__customer_delivered
+msgid "Customer delivered"
+msgstr ""
+
+#. module: delivery_state
+#: model:ir.model.fields,field_description:delivery_state.field_stock_picking__date_delivered
+msgid "Delivery Date"
+msgstr ""
+
+#. module: delivery_state
+#: model:mail.template,name:delivery_state.delivery_state_delivered_notification
+msgid "Delivery: Picking delivered by Email"
+msgstr ""
+
+#. module: delivery_state
+#: model_terms:ir.ui.view,arch_db:delivery_state.res_config_settings_view_form
+msgid "Email Confirmation (customer delivered)"
+msgstr ""
+
+#. module: delivery_state
+#: model:ir.model.fields,field_description:delivery_state.field_res_company__delivery_state_delivered_email_validation
+#: model:ir.model.fields,field_description:delivery_state.field_res_config_settings__delivery_state_delivered_email_validation
+msgid "Email Confirmation delivered picking"
+msgstr ""
+
+#. module: delivery_state
+#: model_terms:ir.ui.view,arch_db:delivery_state.res_config_settings_view_form
+msgid "Email Template"
+msgstr ""
+
+#. module: delivery_state
+#: model:ir.model.fields,field_description:delivery_state.field_res_company__delivery_state_delivered_mail_template_id
+#: model:ir.model.fields,field_description:delivery_state.field_res_config_settings__delivery_state_delivered_mail_template_id
+msgid "Email Template delivered picking"
+msgstr ""
+
+#. module: delivery_state
+#: model:ir.model.fields.selection,name:delivery_state.selection__stock_picking__delivery_state__in_transit
+msgid "In transit"
+msgstr ""
+
+#. module: delivery_state
+#: model:ir.model.fields.selection,name:delivery_state.selection__stock_picking__delivery_state__incidence
+msgid "Incidence"
+msgstr ""
+
+#. module: delivery_state
+#: model_terms:ir.ui.view,arch_db:delivery_state.res_config_settings_view_form
+msgid ""
+"Send an automatic confirmation email when Delivery Orders are delivered"
+msgstr ""
+
+#. module: delivery_state
+#: model:ir.model.fields,field_description:delivery_state.field_stock_picking__date_shipped
+msgid "Shipment Date"
+msgstr ""
+
+#. module: delivery_state
+#: model:ir.model,name:delivery_state.model_delivery_carrier
+msgid "Shipping Methods"
+msgstr ""
+
+#. module: delivery_state
+#: model:ir.model.fields.selection,name:delivery_state.selection__stock_picking__delivery_state__shipping_recorded_in_carrier
+msgid "Shipping recorded in carrier"
+msgstr ""
+
+#. module: delivery_state
+#: model:ir.model.fields,field_description:delivery_state.field_stock_picking__tracking_state
+msgid "Tracking State"
+msgstr ""
+
+#. module: delivery_state
+#: model:ir.model.fields,field_description:delivery_state.field_stock_picking__tracking_state_history
+msgid "Tracking State History"
+msgstr ""
+
+#. module: delivery_state
+#: model:ir.model,name:delivery_state.model_stock_picking
+msgid "Transfer"
+msgstr ""
+
+#. module: delivery_state
+#: model:ir.actions.server,name:delivery_state.ir_cron_delivery_state_ir_actions_server
+#: model:ir.cron,cron_name:delivery_state.ir_cron_delivery_state
+#: model:ir.cron,name:delivery_state.ir_cron_delivery_state
+msgid "Update deliveries states"
+msgstr ""
+
+#. module: delivery_state
+#: model_terms:ir.ui.view,arch_db:delivery_state.view_picking_withcarrier_out_form
+msgid "Update tracking state"
+msgstr ""
+
+#. module: delivery_state
+#: model:ir.model.fields.selection,name:delivery_state.selection__stock_picking__delivery_state__warehouse_delivered
+msgid "Warehouse delivered"
+msgstr ""
+
+#. module: delivery_state
+#: model:mail.template,subject:delivery_state.delivery_state_delivered_notification
+msgid ""
+"Your order {{ object.carrier_tracking_ref or object.name }} from {{ "
+"object.company_id.name }}"
+msgstr ""
