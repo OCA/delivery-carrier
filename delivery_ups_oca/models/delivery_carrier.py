@@ -105,7 +105,7 @@ class DeliveryCarrier(models.Model):
             attachment_name = "%s-%s.%s" % (
                 picking.carrier_tracking_ref,
                 format_code,
-                ("txt" if format_code != "PDF" else "pdf"),
+                ("zpl" if format_code != "PDF" else "pdf"),
             )
             val_list.append(
                 self._prepare_ups_label_attachment(

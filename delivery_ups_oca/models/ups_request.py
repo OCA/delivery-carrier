@@ -59,24 +59,24 @@ class UpsRequest(object):
             else:
                 raise UserError(msg)
 
-    def _quant_package_data_from_picking(self, package, picking, is_package=True):
+    def _quant_package_data_from_picking(self, package_type, picking, is_package=True):
         NumOfPieces = picking.number_of_packages
         PackageWeight = picking.shipping_weight
         if is_package:
-            NumOfPieces = sum(package.mapped("quant_ids.quantity"))
-            PackageWeight = max(package.shipping_weight, package.weight)
+            NumOfPieces = len(picking.package_ids)
+            PackageWeight = sum(picking.mapped('package_ids.shipping_weight') or [0.0])
         return {
-            "Description": package.name,
+            "Description": package_type.name,
             "NumOfPieces": str(NumOfPieces),
             "Packaging": {
-                "Code": package.shipper_package_code,
-                "Description": package.name,
+                "Code": package_type.shipper_package_code,
+                "Description": package_type.name,
             },
             "Dimensions": {
                 "UnitOfMeasurement": {"Code": self.package_dimension_code},
-                "Length": str(package.length),
-                "Width": str(package.width),
-                "Height": str(package.height),
+                "Length": str(package_type.packaging_length),
+                "Width": str(package_type.width),
+                "Height": str(package_type.height),
             },
             "PackageWeight": {
                 "UnitOfMeasurement": {"Code": self.package_weight_code},

@@ -12,7 +12,7 @@ License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
                 <page
                     string="UPS"
                     name="configuration_ups_oca"
-                    attrs="{'invisible': ['|', ('delivery_type', '!=', 'ups')]}"
+                    attrs="{'invisible': [('delivery_type', '!=', 'ups')]}"
                 >
                     <group>
                         <group string="Service">
