@@ -21,8 +21,30 @@ class DeliveryCarrier(models.Model):
             ('one', 'One destination'),
             ('multi', 'Multiple destinations'),
         ],
-        default="one", required=True,
+        compute="_compute_destination_type",
+        inverse="_inverse_destination_type",
+        store=True,
     )
+    delivery_type = fields.Selection(
+        selection_add=[("base_on_destination", "Based on Destination")]
+    )
+
+    @api.depends("delivery_type")
+    def _compute_destination_type(self):
+        for carrier in self:
+            if carrier.delivery_type == "base_on_destination":
+                carrier.destination_type = "multi"
+            else:
+                carrier.destination_type = "one"
+
+    def _inverse_destination_type(self):
+        for carrier in self:
+            # Switch to multi
+            if carrier.destination_type == "multi":
+                carrier.delivery_type = "base_on_destination"
+            # Switch away from multi
+            elif carrier.delivery_type == "base_on_destination":
+                carrier.delivery_type = "fixed"
 
     def search(self, args, offset=0, limit=None, order=None, count=False):
         """Don't show by default children carriers."""

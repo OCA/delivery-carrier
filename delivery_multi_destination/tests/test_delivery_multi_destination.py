@@ -52,7 +52,7 @@ class TestDeliveryMultiDestination(common.SavepointCase):
             'name': 'Test carrier multi',
             'product_id': cls.product.id,
             'destination_type': 'multi',
-            'delivery_type': 'fixed',
+            'delivery_type': 'base_on_destination',
             'fixed_price': 100,
             'child_ids': [
                 (0, 0, {
@@ -122,6 +122,20 @@ class TestDeliveryMultiDestination(common.SavepointCase):
         order.partner_shipping_id = self.partner_3.id
         order.get_delivery_price()
         self.assertAlmostEqual(order.delivery_price, 150, 2)
+
+    def test_compute(self):
+        self.carrier_multi.delivery_type = "fixed"
+        self.assertEqual(self.carrier_multi.destination_type, "one")
+        self.carrier_multi.delivery_type = "base_on_destination"
+        self.assertEqual(self.carrier_multi.destination_type, "multi")
+
+    def test_inverse(self):
+        self.carrier_multi.destination_type = "one"
+        self.assertEqual(self.carrier_multi.destination_type, "one")
+        self.assertEqual(self.carrier_multi.delivery_type, "fixed")
+        self.carrier_multi.destination_type = "multi"
+        self.assertEqual(self.carrier_multi.destination_type, "multi")
+        self.assertEqual(self.carrier_multi.delivery_type, "base_on_destination")
 
     def test_search(self):
         carriers = self.env['delivery.carrier'].search([])
