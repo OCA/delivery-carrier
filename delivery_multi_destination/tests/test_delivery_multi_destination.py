@@ -72,6 +72,7 @@ class TestDeliveryMultiDestination(common.TransactionCase):
             {
                 "name": "Test carrier single",
                 "destination_type": "one",
+                "fixed_price": 100,
                 "child_ids": False,
             }
         )
@@ -84,8 +85,7 @@ class TestDeliveryMultiDestination(common.TransactionCase):
         carrier_form = Form(self.env["delivery.carrier"])
         carrier_form.name = "Test carrier multi"
         carrier_form.product_id = self.product
-        carrier_form.delivery_type = "fixed"
-        carrier_form.fixed_price = 100
+        carrier_form.delivery_type = "base_on_destination"
         # this needs to be done in this order
         carrier_form.destination_type = "multi"
         for child_item in childs:
@@ -135,6 +135,20 @@ class TestDeliveryMultiDestination(common.TransactionCase):
         self._choose_delivery_carrier(order, order.carrier_id)
         sale_order_line = order.order_line.filtered("is_delivery")
         self.assertAlmostEqual(sale_order_line.price_unit, 150, 2)
+
+    def test_compute(self):
+        self.carrier_multi.delivery_type = "fixed"
+        self.assertEqual(self.carrier_multi.destination_type, "one")
+        self.carrier_multi.delivery_type = "base_on_destination"
+        self.assertEqual(self.carrier_multi.destination_type, "multi")
+
+    def test_inverse(self):
+        self.carrier_multi.destination_type = "one"
+        self.assertEqual(self.carrier_multi.destination_type, "one")
+        self.assertEqual(self.carrier_multi.delivery_type, "fixed")
+        self.carrier_multi.destination_type = "multi"
+        self.assertEqual(self.carrier_multi.destination_type, "multi")
+        self.assertEqual(self.carrier_multi.delivery_type, "base_on_destination")
 
     def test_search(self):
         carriers = self.env["delivery.carrier"].search([])
