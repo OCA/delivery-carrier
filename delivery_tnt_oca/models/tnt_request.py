@@ -198,8 +198,12 @@ class TntRequest(object):
         }
 
     def _prepare_sender(self):
-        data = self._prepare_address(self.record.company_id.partner_id)
-        collection = self._prepare_collection(self.record.company_id.partner_id)
+        partner = (
+            self.record.picking_type_id.warehouse_id.partner_id
+            or self.record.company_id.partner_id
+        )
+        data = self._prepare_address(partner)
+        collection = self._prepare_collection(partner)
         data.update(collection)
         return data
 
