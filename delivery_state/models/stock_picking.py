@@ -57,15 +57,4 @@ class StockPicking(models.Model):
                 ("delivery_type", "not in", [False, "fixed", "base_one_rule"]),
             ]
         )
-        delivery_types = self.mapped("delivery_type")
-        # Split them by delivery type so we can ignore those without the
-        # proper method.
-        for delivery_type in delivery_types:
-            method = "%s_tracking_state_update" % delivery_type
-            if not hasattr(self.env["delivery.carrier"], method):
-                continue
-            delivery_type_pickings = pickings.filtered(
-                lambda x: x.delivery_type == delivery_type
-            )
-            for picking in delivery_type_pickings:
-                getattr(picking.carrier_id, method)(picking)
+        pickings.tracking_state_update()
