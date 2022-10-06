@@ -7,14 +7,15 @@ from odoo import fields, models
 class DeliveryCarrier(models.Model):
     _inherit = "delivery.carrier"
 
+    # pylint: disable=W8113
     price_method = fields.Selection(
         selection=[
             ("carrier", "Carrier obtained price"),
             ("fixed", "Fixed price"),
             ("base_on_rule", "Based on Rules"),
         ],
-        string="Price method",
         default="carrier",
+        string="Price method",
     )
 
     def rate_shipment(self, order):
