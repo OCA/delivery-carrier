@@ -2,11 +2,11 @@
 # Copyright 2020 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from odoo.tests import Form
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 from odoo.tools import float_compare
 
 
-class TestDeliveryPriceMethod(SavepointCase):
+class TestDeliveryPriceMethod(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -60,7 +60,7 @@ class TestDeliveryPriceMethod(SavepointCase):
         sale = self.sale
         delivery_wizard = Form(
             self.env["choose.delivery.carrier"].with_context(
-                {"default_order_id": sale.id, "default_carrier_id": self.carrier}
+                default_order_id=sale.id, default_carrier_id=self.carrier
             )
         )
         choose_delivery_carrier = delivery_wizard.save()
