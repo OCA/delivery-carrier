@@ -4,7 +4,7 @@
 
 {
     'name': 'Delivery Carrier Label GLS',
-    'version': '8.0.0.1.0',
+    'version': '8.0.0.1.1',
     'author': "Akretion,Odoo Community Association (OCA)",
     'maintener': 'Akretion',
     'category': 'Warehouse',
