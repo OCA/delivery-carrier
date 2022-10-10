@@ -13,6 +13,7 @@ setuptools.setup(
         'odoo-addon-delivery_state>=15.0dev,<15.1dev',
         'odoo-addon-delivery_translatable>=15.0dev,<15.1dev',
         'odoo-addon-partner_delivery_zone>=15.0dev,<15.1dev',
+        'odoo-addon-stock_picking_delivery_link>=15.0dev,<15.1dev',
     ],
     classifiers=[
         'Programming Language :: Python',
