@@ -223,7 +223,7 @@ msgid "Shipping Label"
 msgstr ""
 
 #. module: delivery_carrier_label_gls
-#: code:addons/delivery_carrier_label_gls/models/picking.py:296
+#: code:addons/delivery_carrier_label_gls/models/picking.py:299
 #, python-format
 msgid "There is no sequence defined for the label '%s'"
 msgstr ""
