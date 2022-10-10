@@ -6,24 +6,23 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: carriers-deliveries\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-02-16 09:09+0000\n"
 "PO-Revision-Date: 2015-01-05 13:40+0100\n"
 "Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
 "Language-Team: German <de@li.org>\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2014-06-27 07:09+0000\n"
 "X-Generator: Poedit 1.5.4\n"
-"Language: de\n"
-
-#. module: base_delivery_carrier_files_document
-#: model:ir.model,name:base_delivery_carrier_files_document.model_delivery_carrier_file
-msgid "delivery.carrier.file"
-msgstr "delivery.carrier.file"
 
 #. module: base_delivery_carrier_files_document
 #: field:delivery.carrier.file,document_directory_id:0
-msgid "Document Directory"
+#, fuzzy
+msgid "Document directory id"
 msgstr "Dokumentenverzeichnis"
+
+#~ msgid "delivery.carrier.file"
+#~ msgstr "delivery.carrier.file"
