@@ -4,7 +4,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 {
     'name': 'Base Delivery Carrier Files',
-    'version': '8.0.1.2.4',
+    'version': '8.0.1.2.5',
     'category': 'Generic Modules/Warehouse',
     'author': "Camptocamp,Odoo Community Association (OCA)",
     'license': 'AGPL-3',
