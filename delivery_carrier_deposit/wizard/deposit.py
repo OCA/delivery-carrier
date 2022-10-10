@@ -23,7 +23,7 @@
 ##############################################################################
 
 from openerp import fields, models, api, _
-from openerp.exceptions import Warning
+from openerp.exceptions import Warning as UserError
 
 
 class DeliveryDepositWizard(models.TransientModel):
@@ -90,7 +90,7 @@ class DeliveryDepositWizard(models.TransientModel):
             }
             return action
         else:
-            raise Warning(
+            raise UserError(
                 _("There are no delivery orders in transferred "
                     "state with a delivery method type '%s' "
                     "not already linked to a deposit slip.")

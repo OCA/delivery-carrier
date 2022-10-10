@@ -121,6 +121,7 @@ class DeliveryCarrierOption(models.Model):
 
     name = fields.Char(translate=True)
 
+    # pylint: disable=old-api7-method-defined
     def fields_view_get(self, cr, uid, view_id=None, view_type='form',
                         context=None, toolbar=False, submenu=False):
         _super = super(DeliveryCarrierOption, self)
@@ -252,6 +253,7 @@ class DeliveryCarrier(models.Model):
         help="Service group defines the available options for "
              "this delivery method.",
     )
+    # pylint: disable=method-compute
     postlogistics_basic_service_ids = fields.One2many(
         comodel_name='delivery.carrier.template.option',
         compute='_get_basic_service_ids',
@@ -259,6 +261,7 @@ class DeliveryCarrier(models.Model):
         help="Basic Service defines the available "
              "additional options for this delivery method",
     )
+    # pylint: disable=method-compute
     allowed_option_ids = fields.Many2many(
         comodel_name='delivery.carrier.template.option',
         compute='_get_allowed_option_ids',

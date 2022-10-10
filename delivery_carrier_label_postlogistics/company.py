@@ -25,8 +25,10 @@ from openerp.tools import file_open
 class ResCompany(models.Model):
     _inherit = 'res.company'
 
-    postlogistics_wsdl_url = fields.Char(compute='_get_wsdl_url',
-                                         string='WSDL URL')
+    # pylint: disable=method-compute
+    postlogistics_wsdl_url = fields.Char(
+        compute='_get_wsdl_url',
+        string='WSDL URL')
     postlogistics_username = fields.Char('Username')
     postlogistics_password = fields.Char('Password')
     postlogistics_license_ids = fields.One2many(

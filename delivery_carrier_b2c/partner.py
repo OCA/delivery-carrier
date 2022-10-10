@@ -22,9 +22,10 @@
 from openerp.osv import orm, fields
 
 
-class res_partner(orm.Model):
+class ResPartner(orm.Model):
     _inherit = "res.partner"
 
+    # pylint: disable=attribute-deprecated
     _columns = {
         'use_b2c_info': fields.boolean(
             'Advanced address',
@@ -39,6 +40,7 @@ class res_partner(orm.Model):
                  "or number on the intercom"),
     }
 
+    # pylint: disable=attribute-deprecated
     _defaults = {
         'use_b2c_info': False,
     }
