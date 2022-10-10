@@ -9,6 +9,7 @@ setuptools.setup(
     version=version,
     install_requires=[
         'odoo8-addon-base_delivery_carrier_files',
+        'odoo8-addon-base_delivery_carrier_files_document',
         'odoo8-addon-base_delivery_carrier_label',
         'odoo8-addon-delivery_carrier_b2c',
         'odoo8-addon-delivery_carrier_deposit',
