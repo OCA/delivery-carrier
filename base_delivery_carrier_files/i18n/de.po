@@ -114,7 +114,7 @@ msgid "Export at delivery order process"
 msgstr "Bei Lieferauftragbearbeitung erzeugen"
 
 #. module: base_delivery_carrier_files
-#: code:addons/base_delivery_carrier_files/carrier_file.py:62
+#: code:addons/base_delivery_carrier_files/models/delivery_carrier_file.py:47
 #, python-format
 msgid "Export path is not defined for carrier file %s"
 msgstr "Pfad für den Export der Frachtführerdatei %s ist nicht festgelegt"
@@ -200,7 +200,7 @@ msgid "Name"
 msgstr "Bezeichnung"
 
 #. module: base_delivery_carrier_files
-#: code:addons/base_delivery_carrier_files/wizard/generate_carrier_files.py:44
+#: code:addons/base_delivery_carrier_files/wizards/generate_carrier_files.py:28
 #, python-format
 msgid "No delivery orders selected"
 msgstr "Kein Lieferauftrag ausgewählt"
