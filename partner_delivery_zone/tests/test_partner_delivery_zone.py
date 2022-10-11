@@ -2,10 +2,10 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from lxml import etree
 
-from odoo.tests import SavepointCase
+from odoo.tests import TransactionCase
 
 
-class TestPartnerDeliveryZone(SavepointCase):
+class TestPartnerDeliveryZone(TransactionCase):
     at_install = False
     post_install = True
 
