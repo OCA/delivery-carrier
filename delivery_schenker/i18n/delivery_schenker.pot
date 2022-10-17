@@ -498,6 +498,7 @@ msgstr ""
 
 #. module: delivery_schenker
 #: code:addons/delivery_schenker/models/delivery_carrier.py:0
+#: code:addons/delivery_schenker/models/delivery_carrier.py:0
 #, python-format
 msgid ""
 "Schenker API doesn't provide methods to compute delivery rates, so you "
