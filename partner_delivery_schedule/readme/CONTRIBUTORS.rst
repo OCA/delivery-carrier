@@ -1,1 +1,3 @@
-* Sergio Teruel <sergio.teruel@tecnativa.com>
+* `Tecnativa <https://www.tecnativa.com>`_:
+
+  * Sergio Teruel
