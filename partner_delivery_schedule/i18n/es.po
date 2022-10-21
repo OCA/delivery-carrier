@@ -166,15 +166,3 @@ msgstr "Martes"
 #, python-format
 msgid "Wednesday"
 msgstr "Miércoles"
-
-#~ msgid "delivery.schedule"
-#~ msgstr "'delivery.schedule'"
-
-#~ msgid "Partner"
-#~ msgstr "Empresa"
-
-#~ msgid "Group By"
-#~ msgstr "Agrupado por ..."
-
-#~ msgid "Partner Delivery Schedule"
-#~ msgstr "Horario de entrega del partner"
