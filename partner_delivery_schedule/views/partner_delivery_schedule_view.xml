@@ -30,7 +30,7 @@
         <field name="name">delivery.schedule.tree</field>
         <field name="model">delivery.schedule</field>
         <field name="arch" type="xml">
-            <tree string="Delivery Schedule">
+            <tree>
                 <field name="name" />
                 <field name="hour_from" widget="float_time" />
                 <field name="hour_to" widget="float_time" />
