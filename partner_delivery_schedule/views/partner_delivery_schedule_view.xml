@@ -65,9 +65,15 @@
         </field>
     </record>
     <menuitem
-        id="partner_delivery_schedule_menu"
-        parent="sale.menu_sale_config"
         action="partner_delivery_schedule_action"
+        id="sale_menu_action_delivery_schedule"
+        parent="sale.menu_sales_config"
         sequence="30"
+    />
+    <menuitem
+        action="partner_delivery_schedule_action"
+        id="stock_menu_action_delivery_schedule"
+        parent="stock.menu_delivery"
+        sequence="10"
     />
 </odoo>
