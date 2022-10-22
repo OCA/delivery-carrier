@@ -1,0 +1,168 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* partner_delivery_schedule
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-11-29 11:18+0000\n"
+"PO-Revision-Date: 2019-11-29 12:19+0100\n"
+"Last-Translator: Marta Vázquez Rodríguez <vazrodmar@gmail.com>\n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Poedit 2.0.6\n"
+
+#. module: partner_delivery_schedule
+#: model_terms:ir.ui.view,arch_db:partner_delivery_schedule.report_delivery_document
+#: model_terms:ir.ui.view,arch_db:partner_delivery_schedule.report_picking
+msgid "<strong>Delivery Schedule</strong>"
+msgstr "<strong>Horario de entrega</strong>"
+
+#. module: partner_delivery_schedule
+#: code:addons/partner_delivery_schedule/models/partner_delivery_schedule.py:0
+#, python-format
+msgid "All days"
+msgstr "Todos los días"
+
+#. module: partner_delivery_schedule
+#: model_terms:ir.actions.act_window,help:partner_delivery_schedule.partner_delivery_schedule_action
+msgid "Click to set a new delivery schedule for partners."
+msgstr "Click para establecer un horario de entrega a un partner."
+
+#. module: partner_delivery_schedule
+#: model:ir.model.fields,field_description:partner_delivery_schedule.field_delivery_schedule__color
+msgid "Color Index"
+msgstr "Color inicial"
+
+#. module: partner_delivery_schedule
+#: model:ir.model,name:partner_delivery_schedule.model_res_partner
+msgid "Contact"
+msgstr "Contacto"
+
+#. module: partner_delivery_schedule
+#: model:ir.model.fields,field_description:partner_delivery_schedule.field_delivery_schedule__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: partner_delivery_schedule
+#: model:ir.model.fields,field_description:partner_delivery_schedule.field_delivery_schedule__create_date
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: partner_delivery_schedule
+#: model:ir.actions.act_window,name:partner_delivery_schedule.partner_delivery_schedule_action
+#: model:ir.model,name:partner_delivery_schedule.model_delivery_schedule
+#: model:ir.model.fields,field_description:partner_delivery_schedule.field_res_partner__delivery_schedule_ids
+#: model:ir.model.fields,field_description:partner_delivery_schedule.field_res_users__delivery_schedule_ids
+#: model:ir.ui.menu,name:partner_delivery_schedule.partner_delivery_schedule_menu
+#: model_terms:ir.ui.view,arch_db:partner_delivery_schedule.view_partner_delivery_schedule_form
+#: model_terms:ir.ui.view,arch_db:partner_delivery_schedule.view_partner_delivery_schedule_search
+#: model_terms:ir.ui.view,arch_db:partner_delivery_schedule.view_partner_delivery_schedule_tree
+msgid "Delivery Schedule"
+msgstr "Horario de entrega"
+
+#. module: partner_delivery_schedule
+#: model:ir.model.fields,field_description:partner_delivery_schedule.field_delivery_schedule__display_name
+msgid "Display Name"
+msgstr "Mostrar Nombre"
+
+#. module: partner_delivery_schedule
+#: code:addons/partner_delivery_schedule/models/partner_delivery_schedule.py:0
+#, python-format
+msgid "Error ! You can not set hour_from greater or equal than hour_to ."
+msgstr "Error! No puedes establecer el campo hora desde mayor a hora hasta."
+
+#. module: partner_delivery_schedule
+#: code:addons/partner_delivery_schedule/models/partner_delivery_schedule.py:0
+#, python-format
+msgid "Error ! You must set one day to delivery."
+msgstr "Error! Debes de establecer un día en el horario."
+
+#. module: partner_delivery_schedule
+#: code:addons/partner_delivery_schedule/models/partner_delivery_schedule.py:0
+#: model:ir.model.fields,field_description:partner_delivery_schedule.field_delivery_schedule__friday
+#, python-format
+msgid "Friday"
+msgstr "Viernes"
+
+#. module: partner_delivery_schedule
+#: model:ir.model.fields,field_description:partner_delivery_schedule.field_delivery_schedule__hour_from
+msgid "From"
+msgstr "De"
+
+#. module: partner_delivery_schedule
+#: model:ir.model.fields,field_description:partner_delivery_schedule.field_delivery_schedule__id
+msgid "ID"
+msgstr "ID"
+
+#. module: partner_delivery_schedule
+#: model:ir.model.fields,field_description:partner_delivery_schedule.field_delivery_schedule____last_update
+msgid "Last Modified on"
+msgstr "Última modificación en"
+
+#. module: partner_delivery_schedule
+#: model:ir.model.fields,field_description:partner_delivery_schedule.field_delivery_schedule__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización de"
+
+#. module: partner_delivery_schedule
+#: model:ir.model.fields,field_description:partner_delivery_schedule.field_delivery_schedule__write_date
+msgid "Last Updated on"
+msgstr "Última actualización en"
+
+#. module: partner_delivery_schedule
+#: code:addons/partner_delivery_schedule/models/partner_delivery_schedule.py:0
+#: model:ir.model.fields,field_description:partner_delivery_schedule.field_delivery_schedule__monday
+#, python-format
+msgid "Monday"
+msgstr "Lunes"
+
+#. module: partner_delivery_schedule
+#: model:ir.model.fields,field_description:partner_delivery_schedule.field_delivery_schedule__name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: partner_delivery_schedule
+#: code:addons/partner_delivery_schedule/models/partner_delivery_schedule.py:0
+#: model:ir.model.fields,field_description:partner_delivery_schedule.field_delivery_schedule__saturday
+#, python-format
+msgid "Saturday"
+msgstr "Sábado"
+
+#. module: partner_delivery_schedule
+#: code:addons/partner_delivery_schedule/models/partner_delivery_schedule.py:0
+#: model:ir.model.fields,field_description:partner_delivery_schedule.field_delivery_schedule__sunday
+#, python-format
+msgid "Sunday"
+msgstr "Domingo"
+
+#. module: partner_delivery_schedule
+#: code:addons/partner_delivery_schedule/models/partner_delivery_schedule.py:0
+#: model:ir.model.fields,field_description:partner_delivery_schedule.field_delivery_schedule__thursday
+#, python-format
+msgid "Thursday"
+msgstr "Jueves"
+
+#. module: partner_delivery_schedule
+#: model:ir.model.fields,field_description:partner_delivery_schedule.field_delivery_schedule__hour_to
+msgid "To"
+msgstr "A"
+
+#. module: partner_delivery_schedule
+#: code:addons/partner_delivery_schedule/models/partner_delivery_schedule.py:0
+#: model:ir.model.fields,field_description:partner_delivery_schedule.field_delivery_schedule__tuesday
+#, python-format
+msgid "Tuesday"
+msgstr "Martes"
+
+#. module: partner_delivery_schedule
+#: code:addons/partner_delivery_schedule/models/partner_delivery_schedule.py:0
+#: model:ir.model.fields,field_description:partner_delivery_schedule.field_delivery_schedule__wednesday
+#, python-format
+msgid "Wednesday"
+msgstr "Miércoles"
