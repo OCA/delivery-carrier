@@ -42,7 +42,12 @@ class DeliveryCarrier(models.Model):
             # Switch to multi
             if carrier.destination_type == "multi":
                 carrier.delivery_type = "base_on_destination"
-            # Switch away from multi
+            # Switch away from multi -> we know that destination_type is
+            # non-multi. However, in a hypothetical scenario where we switch
+            # from one non-multi destination_type to another, we don't want to
+            # forcibly reset delivery_type to 'fixed' each time, so we check
+            # whether delivery_type is invalid for a non-multi destination_type
+            # before we forcibly reset to 'fixed'.
             elif carrier.delivery_type == "base_on_destination":
                 carrier.delivery_type = "fixed"
 
