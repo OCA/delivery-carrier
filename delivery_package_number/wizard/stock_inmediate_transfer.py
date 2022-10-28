@@ -13,4 +13,7 @@ class StockImmediateTransfer(models.TransientModel):
     def process(self):
         if self.number_of_packages:
             self.pick_ids.write({"number_of_packages": self.number_of_packages})
-        return super().process()
+        return super(
+            StockImmediateTransfer,
+            self.with_context(force_write_number_of_packages=True),
+        ).process()

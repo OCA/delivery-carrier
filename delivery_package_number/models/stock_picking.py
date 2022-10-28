@@ -14,6 +14,8 @@ class StockPicking(models.Model):
     )
 
     @api.depends("package_ids")
+    @api.depends_context("force_write_number_of_packages")
     def _compute_number_of_packages(self):
         for picking in self:
-            picking.number_of_packages = len(picking.package_ids) or 1
+            if not self.env.context.get("force_write_number_of_packages", False):
+                picking.number_of_packages = len(picking.package_ids) or 1
