@@ -4,8 +4,7 @@ from odoo import fields, models
 
 
 class RoutificProjectDriver(models.Model):
-    """ Routifc creates new drivers for every project created.
-    """
+    """Routifc creates new drivers for every project created."""
 
     _name = "routific.project.driver"
     _description = "Routific drivers for every project"

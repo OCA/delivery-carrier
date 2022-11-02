@@ -97,8 +97,7 @@ class RoutificProject(models.Model):
         return res
 
     def _get_drivers(self):
-        """ With this method we get the info of all drivers selected.
-        """
+        """With this method we get the info of all drivers selected."""
         drivers = []
         for driver in self.project_driver_ids.mapped("driver_id"):
             vals = driver.get_routific_data(self.routific_config_id)
@@ -106,8 +105,7 @@ class RoutificProject(models.Model):
         return drivers
 
     def _get_stops(self, picking_ids):
-        """ With this method we get the info of all stops selected.
-        """
+        """With this method we get the info of all stops selected."""
         stops = []
         for stop in picking_ids:
             if stop.picking_type_id == self.routific_config_id.picking_type_id:
@@ -119,8 +117,8 @@ class RoutificProject(models.Model):
         return self._get_stops(self.picking_ids)
 
     def send_project(self):
-        """ With this method we make the dictionary that has to be posted and we process
-            the response.
+        """With this method we make the dictionary that has to be posted and we process
+        the response.
         """
         data = {
             "name": self.name,
@@ -143,8 +141,7 @@ class RoutificProject(models.Model):
         self.state = "send"
 
     def _set_routific_driver_id(self, drivers):
-        """ Set the id of Routific to each routific.project.driver
-        """
+        """Set the id of Routific to each routific.project.driver"""
         for driver in drivers:
             id_start = driver["name"].index("[") + 1
             id_end = driver["name"].index("]")
@@ -155,8 +152,7 @@ class RoutificProject(models.Model):
             project_driver.routific_driver_id = driver["id"]
 
     def _set_routific_stop_id(self, stops):
-        """ Set the id of Routific to each stock.picking
-        """
+        """Set the id of Routific to each stock.picking"""
         for stop in stops:
             picking = self.picking_ids.search(
                 [("id", "=", int(stop.get("custom_notes", {}).get("picking_id")))]
@@ -164,8 +160,7 @@ class RoutificProject(models.Model):
             picking.routific_stop_id = stop.get("id")
 
     def get_solution(self):
-        """ Method that process the solution
-        """
+        """Method that process the solution"""
         res = self.routific_config_id.get_solution(self.routific_project_id)
         json_str = res + "\n"
         self.json_solution = (

@@ -65,12 +65,11 @@ class ResPartner(models.Model):
     )
 
     def _compute_routific_active(self):
-        """ Method to be extended in possible extra modules
-        """
+        """Method to be extended in possible extra modules"""
 
     def get_address(self, address_format="", partner_id=False):
-        """ With this method we achieve to calculate the address that has to be sent to
-            Routific API.
+        """With this method we achieve to calculate the address that has to be sent to
+        Routific API.
         """
         args = {
             "street": partner_id.street or "",
@@ -82,8 +81,8 @@ class ResPartner(models.Model):
         return address_format % args
 
     def get_routific_data(self, config_id):
-        """ With this method we build the diccionary of one driver that has to be sent
-            to Routific.
+        """With this method we build the diccionary of one driver that has to be sent
+        to Routific.
         """
         vals = {
             "name": "{} [{}]".format(self.name, self.id),
@@ -118,8 +117,8 @@ class ResPartner(models.Model):
 
     @api.depends("company_id")
     def _compute_allowed_routific_type_ids(self):
-        """ This method give us the allowed product.attribute.values that can be
-            selected on routific_type_ids field.
+        """This method give us the allowed product.attribute.values that can be
+        selected on routific_type_ids field.
         """
         for record in self:
             attributes = self.env["product.attribute"].search(

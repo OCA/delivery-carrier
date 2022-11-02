@@ -7,8 +7,8 @@ from odoo.exceptions import UserError
 
 
 class RoutificProjectCreator(models.TransientModel):
-    """ Wizard launched from stock.pickings that allow us to create routific.project
-        by selecting all the pickings that have to be delivered.
+    """Wizard launched from stock.pickings that allow us to create routific.project
+    by selecting all the pickings that have to be delivered.
     """
 
     _name = "routific.project.creator"

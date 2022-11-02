@@ -53,8 +53,8 @@ class RoutificConfig(models.Model):
     )
 
     def get_settings(self):
-        """ With this method we build the settings dictionary that has to be sent
-            to Routific.
+        """With this method we build the settings dictionary that has to be sent
+        to Routific.
         """
         return {
             "max_stop_lateness": self.max_stop_lateness,
@@ -68,8 +68,7 @@ class RoutificConfig(models.Model):
         }
 
     def _routific_header(self):
-        """ This method does the construction of headers for the requests to the API.
-        """
+        """This method does the construction of headers for the requests to the API."""
         self.ensure_one()
         if self.token:
             return {
@@ -80,8 +79,7 @@ class RoutificConfig(models.Model):
             raise UserError(_("Token needed to make the comunication with Routific."))
 
     def send_project(self, json_object):
-        """ This method is for post the project to Routific.
-        """
+        """This method is for post the project to Routific."""
         url = self.post_endpoint + "/v1.0/project"
         response = requests.post(url, headers=self._routific_header(), json=json_object)
         if response.status_code != 200:
@@ -92,8 +90,7 @@ class RoutificConfig(models.Model):
         return response.text
 
     def send_new_stops(self, routific_project_id, json_object):
-        """ This method is for post the new stops to a Routific project.
-        """
+        """This method is for post the new stops to a Routific project."""
         url = self.post_endpoint + "/v0.1/project/%s/stops/" % routific_project_id
         response = requests.post(url, headers=self._routific_header(), json=json_object)
         if response.status_code != 200:
@@ -104,8 +101,7 @@ class RoutificConfig(models.Model):
         return response.text
 
     def get_solution(self, project_id):
-        """ This method is for get the solution from Routific.
-        """
+        """This method is for get the solution from Routific."""
         url = self.get_endpoint + "/product/projects/%s" % (project_id)
         response = requests.get(url, headers=self._routific_header())
         if response.status_code != 200:

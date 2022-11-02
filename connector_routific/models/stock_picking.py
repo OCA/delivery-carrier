@@ -18,8 +18,8 @@ class StockPicking(models.Model):
     routific_stop_sequence = fields.Integer(string="Sequence stop")
 
     def get_routific_data(self, config_id):
-        """ With this method we build the diccionary of one stop that has to be sent
-            to Routific.
+        """With this method we build the diccionary of one stop that has to be sent
+        to Routific.
         """
         vals = {
             "name": self.partner_id.name,
@@ -57,8 +57,7 @@ class StockPicking(models.Model):
         return vals
 
     def _get_product_types(self):
-        """ Method to get the afected types of products on a picking.
-        """
+        """Method to get the afected types of products on a picking."""
         attribute_value_ids = self.env["product.attribute.value"]
         for product in self.move_lines.mapped("product_id"):
             for tmpl_attribute_value in product.product_template_attribute_value_ids:

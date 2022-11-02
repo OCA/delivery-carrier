@@ -237,8 +237,8 @@ class TestConnectorRoutific(SavepointCase):
     def test_wizard_fill_info(self):
         wizard_form = Form(self.env["routific.project.creator"])
         self.assertTrue(self.driver_1 in wizard_form.driver_ids)
-        self.assertEquals(wizard_form.config_id, self.config)
-        self.assertEquals(
+        self.assertEqual(wizard_form.config_id, self.config)
+        self.assertEqual(
             datetime.datetime.strptime(wizard_form.date, "%Y-%m-%d %H:%M:%S").date(),
             datetime.date.today() + datetime.timedelta(days=1),
         )
@@ -249,8 +249,8 @@ class TestConnectorRoutific(SavepointCase):
             self.driver_1 in project_id.project_driver_ids.mapped("driver_id")
         )
         self.assertTrue(self.picking_1 == project_id.picking_ids)
-        self.assertEquals(project_id.routific_config_id, self.config)
-        self.assertEquals(
+        self.assertEqual(project_id.routific_config_id, self.config)
+        self.assertEqual(
             project_id.date, datetime.date.today() + datetime.timedelta(days=1)
         )
 
@@ -312,9 +312,9 @@ class TestConnectorRoutific(SavepointCase):
                 json=self._get_post_creation_data(project_id),
             )
         # Assert that project, stops and drivers have his ids from Routific
-        self.assertEquals(project_id.routific_project_id, "project_id")
-        self.assertEquals(self.picking_1.routific_stop_id, "stop_id_1")
-        self.assertEquals(
+        self.assertEqual(project_id.routific_project_id, "project_id")
+        self.assertEqual(self.picking_1.routific_stop_id, "stop_id_1")
+        self.assertEqual(
             project_id.project_driver_ids[0].routific_driver_id, "driver_id_1"
         )
         project_id.picking_ids += self.picking_2
@@ -327,7 +327,7 @@ class TestConnectorRoutific(SavepointCase):
                 headers=self._get_header(),
                 json=self._get_post_new_data(project_id),
             )
-        self.assertEquals(self.picking_2.routific_stop_id, "stop_id_2")
+        self.assertEqual(self.picking_2.routific_stop_id, "stop_id_2")
         with patch_get(return_value=get_response()) as get_mock:
             project_id.get_solution()
             # Assert module did the correct API call
@@ -336,5 +336,5 @@ class TestConnectorRoutific(SavepointCase):
                 % (project_id.routific_project_id),
                 headers=self._get_header(),
             )
-        self.assertEquals(self.picking_1.driver_id, self.driver_1)
-        self.assertEquals(self.picking_2.driver_id, self.driver_1)
+        self.assertEqual(self.picking_1.driver_id, self.driver_1)
+        self.assertEqual(self.picking_2.driver_id, self.driver_1)
