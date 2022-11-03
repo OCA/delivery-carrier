@@ -21,6 +21,7 @@ setuptools.setup(
         'odoo14-addon-delivery_carrier_label_batch',
         'odoo14-addon-delivery_carrier_location',
         'odoo14-addon-delivery_carrier_multi_zip',
+        'odoo14-addon-delivery_carrier_package_measure_required',
         'odoo14-addon-delivery_carrier_partner',
         'odoo14-addon-delivery_carrier_pricelist',
         'odoo14-addon-delivery_correos_express',
