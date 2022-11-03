@@ -120,3 +120,27 @@ msgstr ""
 #: model:product.template,uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_product_template
 msgid "Units"
 msgstr ""
+
+#. module: delivery_multi_destination
+#: model:product.product,weight_uom_name:delivery_multi_destination.product_product_delivery_carrier_multi
+#: model:product.product,weight_uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_1
+#: model:product.product,weight_uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_2
+#: model:product.product,weight_uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_3
+#: model:product.template,weight_uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_1_product_template
+#: model:product.template,weight_uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_2_product_template
+#: model:product.template,weight_uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_3_product_template
+#: model:product.template,weight_uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_product_template
+msgid "kg"
+msgstr ""
+
+#. module: delivery_multi_destination
+#: model:product.product,volume_uom_name:delivery_multi_destination.product_product_delivery_carrier_multi
+#: model:product.product,volume_uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_1
+#: model:product.product,volume_uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_2
+#: model:product.product,volume_uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_3
+#: model:product.template,volume_uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_1_product_template
+#: model:product.template,volume_uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_2_product_template
+#: model:product.template,volume_uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_3_product_template
+#: model:product.template,volume_uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_product_template
+msgid "m³"
+msgstr ""
