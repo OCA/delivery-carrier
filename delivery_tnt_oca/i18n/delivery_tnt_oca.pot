@@ -373,3 +373,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_tnt_oca.field_delivery_carrier__tnt_oca_ws_username
 msgid "WS Username"
 msgstr ""
+
+#. module: delivery_tnt_oca
+#: model:product.packaging,weight_uom_name:delivery_tnt_oca.product_packaging_tnt_default
+msgid "kg"
+msgstr ""
+
+#. module: delivery_tnt_oca
+#: model:product.packaging,volume_uom_name:delivery_tnt_oca.product_packaging_tnt_default
+msgid "m³"
+msgstr ""
