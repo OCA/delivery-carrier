@@ -11,8 +11,8 @@ msgstr ""
 "POT-Creation-Date: 2017-12-15 18:21+0000\n"
 "PO-Revision-Date: 2022-02-01 19:33+0000\n"
 "Last-Translator: Rodrigo Macedo <rmsolucoeseminformatica@protonmail.com>\n"
-"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/teams/"
-"23907/pt_BR/)\n"
+"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/"
+"teams/23907/pt_BR/)\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,11 +24,6 @@ msgstr ""
 #: model:delivery.carrier,name:delivery_multi_destination.delivery_carrier_multi_child_1
 msgid "Belgium"
 msgstr "Bélgica"
-
-#. module: delivery_multi_destination
-#: model:ir.model,name:delivery_multi_destination.model_delivery_carrier
-msgid "Delivery Methods"
-msgstr "Métodos de entrega"
 
 #. module: delivery_multi_destination
 #: model:ir.model.fields,field_description:delivery_multi_destination.field_delivery_carrier__destination_type
@@ -46,9 +41,19 @@ msgid "Destinations"
 msgstr "Destinatários"
 
 #. module: delivery_multi_destination
+#: model:ir.model.fields,field_description:delivery_multi_destination.field_delivery_carrier__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: delivery_multi_destination
 #: model:delivery.carrier,name:delivery_multi_destination.delivery_carrier_multi_child_2
 msgid "France"
 msgstr "França"
+
+#. module: delivery_multi_destination
+#: model:ir.model.fields,field_description:delivery_multi_destination.field_delivery_carrier__id
+msgid "ID"
+msgstr ""
 
 #. module: delivery_multi_destination
 #: model:delivery.carrier,name:delivery_multi_destination.delivery_carrier_multi
@@ -76,12 +81,17 @@ msgid "International Carrier Inc., United Kingdom"
 msgstr "International Carrier Inc., Reino Unido"
 
 #. module: delivery_multi_destination
-#: selection:delivery.carrier,destination_type:0
+#: model:ir.model.fields,field_description:delivery_multi_destination.field_delivery_carrier____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: delivery_multi_destination
+#: model:ir.model.fields.selection,name:delivery_multi_destination.selection__delivery_carrier__destination_type__multi
 msgid "Multiple destinations"
 msgstr "Múltiplos destinatários"
 
 #. module: delivery_multi_destination
-#: selection:delivery.carrier,destination_type:0
+#: model:ir.model.fields.selection,name:delivery_multi_destination.selection__delivery_carrier__destination_type__one
 msgid "One destination"
 msgstr "Um destino"
 
@@ -91,10 +101,20 @@ msgid "Parent carrier"
 msgstr "Transportadora Matriz"
 
 #. module: delivery_multi_destination
-#: code:addons/delivery_multi_destination/models/delivery_carrier.py:103
+#: model:ir.model,name:delivery_multi_destination.model_delivery_carrier
+msgid "Shipping Methods"
+msgstr ""
+
+#. module: delivery_multi_destination
+#: code:addons/delivery_multi_destination/models/delivery_carrier.py:0
 #, python-format
 msgid "There is no matching delivery rule."
 msgstr "Não há regra de entrega correspondente."
+
+#. module: delivery_multi_destination
+#: model:delivery.carrier,name:delivery_multi_destination.delivery_carrier_multi_child_3
+msgid "United Kingdom"
+msgstr "Reino Unido"
 
 #. module: delivery_multi_destination
 #: model:product.product,uom_name:delivery_multi_destination.product_product_delivery_carrier_multi
@@ -105,13 +125,8 @@ msgstr "Não há regra de entrega correspondente."
 #: model:product.template,uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_2_product_template
 #: model:product.template,uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_3_product_template
 #: model:product.template,uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_product_template
-msgid "Unit(s)"
-msgstr "Unidade(s)"
-
-#. module: delivery_multi_destination
-#: model:delivery.carrier,name:delivery_multi_destination.delivery_carrier_multi_child_3
-msgid "United Kingdom"
-msgstr "Reino Unido"
+msgid "Units"
+msgstr ""
 
 #. module: delivery_multi_destination
 #: model:product.product,weight_uom_name:delivery_multi_destination.product_product_delivery_carrier_multi
@@ -124,6 +139,24 @@ msgstr "Reino Unido"
 #: model:product.template,weight_uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_product_template
 msgid "kg"
 msgstr "kg"
+
+#. module: delivery_multi_destination
+#: model:product.product,volume_uom_name:delivery_multi_destination.product_product_delivery_carrier_multi
+#: model:product.product,volume_uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_1
+#: model:product.product,volume_uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_2
+#: model:product.product,volume_uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_3
+#: model:product.template,volume_uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_1_product_template
+#: model:product.template,volume_uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_2_product_template
+#: model:product.template,volume_uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_3_product_template
+#: model:product.template,volume_uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_product_template
+msgid "m³"
+msgstr ""
+
+#~ msgid "Delivery Methods"
+#~ msgstr "Métodos de entrega"
+
+#~ msgid "Unit(s)"
+#~ msgstr "Unidade(s)"
 
 #~ msgid "Carrier"
 #~ msgstr "Transportador"

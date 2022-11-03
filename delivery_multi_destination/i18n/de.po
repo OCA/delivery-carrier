@@ -25,11 +25,6 @@ msgid "Belgium"
 msgstr "Belgien"
 
 #. module: delivery_multi_destination
-#: model:ir.model,name:delivery_multi_destination.model_delivery_carrier
-msgid "Delivery Methods"
-msgstr "Liefermethoden"
-
-#. module: delivery_multi_destination
 #: model:ir.model.fields,field_description:delivery_multi_destination.field_delivery_carrier__destination_type
 msgid "Destination Type"
 msgstr "Zieltyp"
@@ -45,9 +40,19 @@ msgid "Destinations"
 msgstr "Ziele"
 
 #. module: delivery_multi_destination
+#: model:ir.model.fields,field_description:delivery_multi_destination.field_delivery_carrier__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: delivery_multi_destination
 #: model:delivery.carrier,name:delivery_multi_destination.delivery_carrier_multi_child_2
 msgid "France"
 msgstr "Frankreich"
+
+#. module: delivery_multi_destination
+#: model:ir.model.fields,field_description:delivery_multi_destination.field_delivery_carrier__id
+msgid "ID"
+msgstr ""
 
 #. module: delivery_multi_destination
 #: model:delivery.carrier,name:delivery_multi_destination.delivery_carrier_multi
@@ -75,12 +80,17 @@ msgid "International Carrier Inc., United Kingdom"
 msgstr ""
 
 #. module: delivery_multi_destination
-#: selection:delivery.carrier,destination_type:0
+#: model:ir.model.fields,field_description:delivery_multi_destination.field_delivery_carrier____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: delivery_multi_destination
+#: model:ir.model.fields.selection,name:delivery_multi_destination.selection__delivery_carrier__destination_type__multi
 msgid "Multiple destinations"
 msgstr "Mehrere Ziele"
 
 #. module: delivery_multi_destination
-#: selection:delivery.carrier,destination_type:0
+#: model:ir.model.fields.selection,name:delivery_multi_destination.selection__delivery_carrier__destination_type__one
 msgid "One destination"
 msgstr "Ein Ziel"
 
@@ -90,10 +100,20 @@ msgid "Parent carrier"
 msgstr ""
 
 #. module: delivery_multi_destination
-#: code:addons/delivery_multi_destination/models/delivery_carrier.py:103
+#: model:ir.model,name:delivery_multi_destination.model_delivery_carrier
+msgid "Shipping Methods"
+msgstr ""
+
+#. module: delivery_multi_destination
+#: code:addons/delivery_multi_destination/models/delivery_carrier.py:0
 #, python-format
 msgid "There is no matching delivery rule."
 msgstr ""
+
+#. module: delivery_multi_destination
+#: model:delivery.carrier,name:delivery_multi_destination.delivery_carrier_multi_child_3
+msgid "United Kingdom"
+msgstr "Vereinigtes Königreich"
 
 #. module: delivery_multi_destination
 #: model:product.product,uom_name:delivery_multi_destination.product_product_delivery_carrier_multi
@@ -104,13 +124,8 @@ msgstr ""
 #: model:product.template,uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_2_product_template
 #: model:product.template,uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_3_product_template
 #: model:product.template,uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_product_template
-msgid "Unit(s)"
+msgid "Units"
 msgstr ""
-
-#. module: delivery_multi_destination
-#: model:delivery.carrier,name:delivery_multi_destination.delivery_carrier_multi_child_3
-msgid "United Kingdom"
-msgstr "Vereinigtes Königreich"
 
 #. module: delivery_multi_destination
 #: model:product.product,weight_uom_name:delivery_multi_destination.product_product_delivery_carrier_multi
@@ -123,6 +138,21 @@ msgstr "Vereinigtes Königreich"
 #: model:product.template,weight_uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_product_template
 msgid "kg"
 msgstr "kg"
+
+#. module: delivery_multi_destination
+#: model:product.product,volume_uom_name:delivery_multi_destination.product_product_delivery_carrier_multi
+#: model:product.product,volume_uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_1
+#: model:product.product,volume_uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_2
+#: model:product.product,volume_uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_3
+#: model:product.template,volume_uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_1_product_template
+#: model:product.template,volume_uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_2_product_template
+#: model:product.template,volume_uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_3_product_template
+#: model:product.template,volume_uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_product_template
+msgid "m³"
+msgstr ""
+
+#~ msgid "Delivery Methods"
+#~ msgstr "Liefermethoden"
 
 #~ msgid "Carrier"
 #~ msgstr "Spediteur"
