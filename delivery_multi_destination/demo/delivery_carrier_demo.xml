@@ -2,7 +2,7 @@
 <odoo noupdate="1">
     <record id="product_product_delivery_carrier_multi" model="product.product">
         <field name="name">International Carrier Inc.</field>
-        <field name="type">service</field>
+        <field name="detailed_type">service</field>
     </record>
     <record id="delivery_carrier_multi" model="delivery.carrier">
         <field name="name">International Carrier Inc.</field>
@@ -12,7 +12,7 @@
     </record>
     <record id="product_product_delivery_carrier_multi_child_1" model="product.product">
         <field name="name">International Carrier Inc., Belgium</field>
-        <field name="type">service</field>
+        <field name="detailed_type">service</field>
     </record>
     <record id="delivery_carrier_multi_child_1" model="delivery.carrier">
         <field name="name">Belgium</field>
@@ -45,7 +45,7 @@
     </record>
     <record id="product_product_delivery_carrier_multi_child_2" model="product.product">
         <field name="name">International Carrier Inc., France</field>
-        <field name="type">service</field>
+        <field name="detailed_type">service</field>
     </record>
     <record id="delivery_carrier_multi_child_2" model="delivery.carrier">
         <field name="name">France</field>
@@ -58,7 +58,7 @@
     </record>
     <record id="product_product_delivery_carrier_multi_child_3" model="product.product">
         <field name="name">International Carrier Inc., United Kingdom</field>
-        <field name="type">service</field>
+        <field name="detailed_type">service</field>
     </record>
     <record id="delivery_carrier_multi_child_3" model="delivery.carrier">
         <field name="name">United Kingdom</field>

@@ -123,6 +123,3 @@ msgstr "Vereinigtes Königreich"
 #: model:product.template,weight_uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_product_template
 msgid "kg"
 msgstr "kg"
-
-#~ msgid "Carrier"
-#~ msgstr "Spediteur"
