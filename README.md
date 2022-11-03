@@ -34,6 +34,7 @@ addon | version | maintainers | summary
 [delivery_carrier_label_batch](delivery_carrier_label_batch/) | 14.0.1.0.1 |  | Carrier labels - Stock Batch Picking (link)
 [delivery_carrier_location](delivery_carrier_location/) | 14.0.1.0.0 | [![ivantodorovich](https://github.com/ivantodorovich.png?size=30px)](https://github.com/ivantodorovich) | Integrates delivery with base_location
 [delivery_carrier_multi_zip](delivery_carrier_multi_zip/) | 14.0.1.0.0 |  | Multiple ZIP intervals for the same delivery method
+[delivery_carrier_package_measure_required](delivery_carrier_package_measure_required/) | 14.0.1.0.0 |  | Allow the configuration of which package measurements are required on a delivery carrier basis.
 [delivery_carrier_partner](delivery_carrier_partner/) | 14.0.1.0.0 |  | Add a partner in the delivery carrier
 [delivery_carrier_pricelist](delivery_carrier_pricelist/) | 14.0.1.0.1 |  | Compute method method fees based on the product's pricelist.
 [delivery_correos_express](delivery_correos_express/) | 14.0.1.0.1 |  | Delivery Carrier implementation for Correos Express using their API
