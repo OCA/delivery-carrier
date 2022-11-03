@@ -127,6 +127,3 @@ msgstr "Spojené království"
 #: model:product.template,weight_uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_product_template
 msgid "kg"
 msgstr ""
-
-#~ msgid "Carrier"
-#~ msgstr "Dopravce"

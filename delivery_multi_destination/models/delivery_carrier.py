@@ -1,5 +1,5 @@
 # Copyright 2016-2020 Tecnativa - Pedro M. Baeza
-# Copyright 2017 Luis M. Ontalba <luis.martinez@tecnativa.com>
+# Copyright 2017 Tecnativa - Luis M. Ontalba
 # Copyright 2021 Gianmarco Conte <gconte@dinamicheaziendali.it>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 import logging
