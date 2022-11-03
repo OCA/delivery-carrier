@@ -268,3 +268,15 @@ msgstr ""
 #: model:product.template,uom_name:delivery_roulier_laposte_fr.laposte_product_product_template
 msgid "Units"
 msgstr ""
+
+#. module: delivery_roulier_laposte_fr
+#: model:product.product,weight_uom_name:delivery_roulier_laposte_fr.laposte_product
+#: model:product.template,weight_uom_name:delivery_roulier_laposte_fr.laposte_product_product_template
+msgid "kg"
+msgstr ""
+
+#. module: delivery_roulier_laposte_fr
+#: model:product.product,volume_uom_name:delivery_roulier_laposte_fr.laposte_product
+#: model:product.template,volume_uom_name:delivery_roulier_laposte_fr.laposte_product_product_template
+msgid "m³"
+msgstr ""
