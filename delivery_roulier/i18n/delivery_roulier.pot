@@ -116,3 +116,19 @@ msgstr ""
 #: model:product.template,name:delivery_roulier.product_big_product_template
 msgid "carrier 3.7 kg"
 msgstr ""
+
+#. module: delivery_roulier
+#: model:product.product,weight_uom_name:delivery_roulier.product_big
+#: model:product.product,weight_uom_name:delivery_roulier.product_small
+#: model:product.template,weight_uom_name:delivery_roulier.product_big_product_template
+#: model:product.template,weight_uom_name:delivery_roulier.product_small_product_template
+msgid "kg"
+msgstr ""
+
+#. module: delivery_roulier
+#: model:product.product,volume_uom_name:delivery_roulier.product_big
+#: model:product.product,volume_uom_name:delivery_roulier.product_small
+#: model:product.template,volume_uom_name:delivery_roulier.product_big_product_template
+#: model:product.template,volume_uom_name:delivery_roulier.product_small_product_template
+msgid "m³"
+msgstr ""
