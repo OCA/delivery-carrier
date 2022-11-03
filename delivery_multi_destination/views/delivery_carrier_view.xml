@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright 2016-2020 Tecnativa - Pedro M. Baeza
-     Copyright 2017 Luis M. Ontalba <luis.martinez@tecnativa.com>
+     Copyright 2017 Tecnativa - Luis M. Ontalba
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
     <record id="view_delivery_carrier_form" model="ir.ui.view">
         <field name="model">delivery.carrier</field>
         <field name="inherit_id" ref="delivery.view_delivery_carrier_form" />
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='delivery_type']/../../.." position="before">
+            <div name="title" position="after">
                 <group name="group_destination_type">
                     <field
                         name="destination_type"
                         invisible="context.get('show_children_fields', False)"
                     />
                 </group>
-            </xpath>
-            <xpath expr="//field[@name='delivery_type']/../.." position="attributes">
+            </div>
+            <group name="provider_details" position="attributes">
                 <attribute
                     name="attrs"
                 >{'invisible': [('destination_type', '=', 'multi')]}</attribute>
-            </xpath>
+            </group>
             <label for="margin" position="attributes">
                 <attribute
                     name="attrs"
@@ -40,22 +40,16 @@
                     name="attrs"
                 >{'required':[('free_over','!=', False)], 'invisible':['|', ('free_over','=', False), ('destination_type', '=', 'multi')]}</attribute>
             </field>
-            <xpath
-                expr="//field[@name='fixed_price']/ancestor::page"
-                position="attributes"
-            >
+            <page name="pricing" position="attributes">
                 <attribute
                     name="attrs"
                 >{'invisible': [('destination_type', '=', 'multi')]}</attribute>
-            </xpath>
-            <xpath
-                expr="//field[@name='country_ids']/ancestor::page"
-                position="attributes"
-            >
+            </page>
+            <page name="destination" position="attributes">
                 <attribute
                     name="attrs"
                 >{'invisible': [('destination_type', '=', 'multi')]}</attribute>
-            </xpath>
+            </page>
             <notebook position="inside">
                 <page
                     string="Destinations"
