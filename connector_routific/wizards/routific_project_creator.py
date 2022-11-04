@@ -49,16 +49,20 @@ class RoutificProjectCreator(models.TransientModel):
             if picking.picking_type_id != self.config_id.picking_type_id:
                 raise UserError(
                     _(
-                        "The operation type %s is not allowed on %s configuration"
-                        % (picking.picking_type_id.name, self.config_id.name)
+                        "The operation type %(picking_name)s is not allowed on "
+                        "%(config_name)s configuration"
                     )
+                    % {
+                        "picking_name": picking.picking_type_id.name,
+                        "config_name": self.config_id.name,
+                    }
                 )
             if picking.driver_id:
                 raise UserError(
-                    _("The picking %s has a driver assigned yet" % (picking.name))
+                    _("The picking %s has a driver assigned yet") % (picking.name)
                 )
             if picking.state != "assigned":
-                raise UserError(_("The picking %s is not Ready" % (picking.name)))
+                raise UserError(_("The picking %s is not Ready") % (picking.name))
         project = self.env["routific.project"].create(
             {
                 "routific_config_id": self.config_id.id,

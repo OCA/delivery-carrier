@@ -28,9 +28,7 @@ class RoutificProject(models.Model):
             )
         return project_drivers
 
-    name = fields.Char(
-        string="Name", readonly=True, default="New", copy=False, required=True
-    )
+    name = fields.Char(readonly=True, default="New", copy=False, required=True)
     company_id = fields.Many2one(
         comodel_name="res.company",
         default=lambda self: self.env.company.id,

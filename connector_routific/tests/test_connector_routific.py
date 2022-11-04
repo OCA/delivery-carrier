@@ -9,7 +9,7 @@ import requests
 
 import odoo
 from odoo.exceptions import UserError
-from odoo.tests.common import Form, SavepointCase
+from odoo.tests.common import Form, TransactionCase
 
 PATH = "odoo.addons.connector_routific.models.routific_config.requests"
 patch_post = partial(patch, PATH + ".post")
@@ -17,7 +17,7 @@ patch_get = partial(patch, PATH + ".get")
 
 
 @odoo.tests.tagged("post_install", "-at_install")
-class TestConnectorRoutific(SavepointCase):
+class TestConnectorRoutific(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -227,7 +227,7 @@ class TestConnectorRoutific(SavepointCase):
     def _create_project_wiz(self):
         wizard_form = Form(
             self.env["routific.project.creator"].with_context(
-                {"active_ids": self.picking_1.ids}
+                active_ids=self.picking_1.ids
             )
         )
         wizard = wizard_form.save()
@@ -239,7 +239,7 @@ class TestConnectorRoutific(SavepointCase):
         self.assertTrue(self.driver_1 in wizard_form.driver_ids)
         self.assertEqual(wizard_form.config_id, self.config)
         self.assertEqual(
-            datetime.datetime.strptime(wizard_form.date, "%Y-%m-%d %H:%M:%S").date(),
+            wizard_form.date,
             datetime.date.today() + datetime.timedelta(days=1),
         )
 

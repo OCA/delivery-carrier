@@ -44,13 +44,11 @@ class ResPartner(models.Model):
     )
     delivery_duration = fields.Integer(string="Delivery duration (MIN)")
     speed = fields.Float(
-        string="Speed",
         default=1.0,
         help="""Set the average speed of the driver
         being 0.1 the smallest and 2.0 the biggest""",
     )
     capacity = fields.Integer(
-        string="Capacity",
         company_dependent=True,
         help="Keep as 0 for no control of capacity",
     )
@@ -148,7 +146,7 @@ class ResPartner(models.Model):
 
     def get_formatted_mobile_or_phone(self):
         phone = self.mobile or self.phone
-        country = self._phone_get_country()
+        country = self.country_id or self.env.company.country_id
         if phone:
             try:
                 phone = phone_format(

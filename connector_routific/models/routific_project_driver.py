@@ -19,4 +19,4 @@ class RoutificProjectDriver(models.Model):
         ],
     )
     project_id = fields.Many2one(comodel_name="routific.project", string="Project")
-    routific_driver_id = fields.Char(string="Routific Driver Id")
+    routific_driver_id = fields.Char()

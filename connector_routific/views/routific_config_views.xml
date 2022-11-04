@@ -13,7 +13,7 @@
         <field name="name">routific.config.tree</field>
         <field name="model">routific.config</field>
         <field name="arch" type="xml">
-            <tree string="Settings">
+            <tree>
                 <field name="sequence" widget="handle" />
                 <field name="name" />
             </tree>

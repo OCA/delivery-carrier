@@ -6,7 +6,7 @@
         <field name="name">routific.project.tree</field>
         <field name="model">routific.project</field>
         <field name="arch" type="xml">
-            <tree string="Projects">
+            <tree>
                 <field name="name" />
                 <field name="date" />
             </tree>

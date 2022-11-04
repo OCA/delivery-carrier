@@ -12,8 +12,8 @@ class RoutificConfig(models.Model):
     _description = "Settings for Routific connexion."
     _order = "sequence,id"
 
-    name = fields.Char(string="Name", required=True)
-    sequence = fields.Integer(string="Sequence")
+    name = fields.Char(required=True)
+    sequence = fields.Integer()
     company_id = fields.Many2one(
         comodel_name="res.company",
         default=lambda self: self.env.company.id,
@@ -25,7 +25,7 @@ class RoutificConfig(models.Model):
     get_endpoint = fields.Char(
         "Get URL", default="https://api.routific.com", required=True
     )
-    token = fields.Text(string="Token", required=True)
+    token = fields.Text(required=True)
     max_stop_lateness = fields.Integer(string="Maximum stop lateness")
     max_driver_overtime = fields.Integer(string="Maximum driver overtime")
     shortest_distance = fields.Boolean(string="Optimize by shortest distance")
@@ -84,8 +84,8 @@ class RoutificConfig(models.Model):
         response = requests.post(url, headers=self._routific_header(), json=json_object)
         if response.status_code != 200:
             raise UserError(
-                _("Error on project posting %s \n\n %s")
-                % (response.status_code, response.text)
+                _("Error on project posting %(code)s \n\n %(response)s")
+                % {"code": response.status_code, "response": response.text}
             )
         return response.text
 
@@ -95,8 +95,8 @@ class RoutificConfig(models.Model):
         response = requests.post(url, headers=self._routific_header(), json=json_object)
         if response.status_code != 200:
             raise UserError(
-                _("Error at new stop posting %s \n\n %s")
-                % (response.status_code, response.text)
+                _("Error at new stop posting %(code)s \n\n %(response)s")
+                % {"code": response.status_code, "response": response.text}
             )
         return response.text
 
@@ -106,8 +106,8 @@ class RoutificConfig(models.Model):
         response = requests.get(url, headers=self._routific_header())
         if response.status_code != 200:
             raise UserError(
-                _("Error at new stop posting %s \n\n %s")
-                % (response.status_code, response.text)
+                _("Error at new stop posting %(code)s \n\n %(response)s")
+                % {"code": response.status_code, "response": response.text}
             )
         return response.text
 
