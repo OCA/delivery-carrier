@@ -49,47 +49,59 @@ class TestDeliveryCarrierPackageMeasureRequire(TestPackingCommon):
             }
         )
         cls.pick.action_confirm()
-
-    def test_required_measurement_are_properly_set(self):
-        """Check required measurement are fullfilled on validation."""
-        pack_action = self.pick.action_put_in_pack()
+        pack_action = cls.pick.action_put_in_pack()
         pack_action_ctx = pack_action["context"]
         pack_wiz = (
-            self.env["choose.delivery.package"].with_context(pack_action_ctx).create({})
+            cls.env["choose.delivery.package"]
+            .with_context(**pack_action_ctx)
+            .create({})
         )
         pack_wiz.action_put_in_pack()
-        package = self.pick.move_line_ids.mapped("result_package_id")
-        package.packaging_id = self.packaging
+        cls.package = cls.pick.move_line_ids.mapped("result_package_id")
+        cls.package.packaging_id = cls.packaging
+
+    def test_force_check_required_measurement(self):
+        self.packaging.package_length_required = True
+        # Picking is not done no validation error
+        self.pick._check_required_package_measurement()
+        # Force validation error raised
+        pick = self.pick.with_context(delivery_pkg_measure__ignore_package_content=True)
+        with self.assertRaises(ValidationError):
+            pick.button_validate()
+
+    def test_required_measurement_are_properly_set(self):
+        """Check required measurement are fullfilled on done picking."""
+        self.pick._action_done()
         # No measurement required
         self.pick._check_required_package_measurement()
         # Check length is required
         self.packaging.package_length_required = True
         with self.assertRaises(ValidationError):
             self.pick.button_validate()
-        package.pack_length = 55
+        self.package.pack_length = 55
         self.pick._check_required_package_measurement()
         # Check width is required
         self.packaging.package_width_required = True
         with self.assertRaises(ValidationError):
             self.pick._check_required_package_measurement()
-        package.width = 25
+        self.package.width = 25
         self.pick._check_required_package_measurement()
         # Check weight is required
         self.packaging.package_weight_required = True
-        package.shipping_weight = False
+        self.package.shipping_weight = False
         with self.assertRaises(ValidationError):
             self.pick._check_required_package_measurement()
-        package.shipping_weight = 250
+        self.package.shipping_weight = 250
         self.pick._check_required_package_measurement()
         # Check height is required
         self.packaging.package_height_required = True
         with self.assertRaises(ValidationError):
             self.pick._check_required_package_measurement()
-        package.height = 250
+        self.package.height = 250
         self.pick._check_required_package_measurement()
         # Missing requirement on validate
-        package.width_required = False
-        package.width = False
-        package.width_required = True
+        self.package.width_required = False
+        self.package.width = False
+        self.package.width_required = True
         with self.assertRaises(ValidationError):
             self.pick.button_validate()
