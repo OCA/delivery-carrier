@@ -13,11 +13,17 @@ class StockQuantPackage(models.Model):
     height_required = fields.Boolean(related="packaging_id.package_height_required")
     weight_required = fields.Boolean(related="packaging_id.package_weight_required")
 
-    @api.constrains("length", "width", "height", "weight")
     # The boolean field use to check if a dimension is required are intentionally left out.
     # To not raise error when changing packaging configuration.
+    @api.constrains("length", "width", "height", "weight", "quant_ids")
     def _check_required_dimension(self):
+        ignore_pack_content = self.env.context.get(
+            "delivery_pkg_measure__ignore_package_content"
+        )
         for package in self:
+            if not ignore_pack_content and not package.quant_ids:
+                # Only validate a package when it contains goods
+                continue
             required_dimension = []
             if package.length_required and not package.pack_length:
                 required_dimension.append(_("length"))
