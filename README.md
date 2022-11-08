@@ -38,6 +38,7 @@ addon | version | maintainers | summary
 [delivery_carrier_label_postlogistics](delivery_carrier_label_postlogistics/) | 12.0.1.0.8 |  | Print postlogistics shipping labels
 [delivery_carrier_label_ups](delivery_carrier_label_ups/) | 12.0.1.2.1 |  | Print carrier labels for ups
 [delivery_carrier_partner](delivery_carrier_partner/) | 12.0.1.0.1 |  | Add a partner in the delivery carrier
+[delivery_cttexpress](delivery_cttexpress/) | 12.0.1.0.0 |  | Delivery Carrier implementation for CTT Express API
 [delivery_free_fee_removal](delivery_free_fee_removal/) | 12.0.1.0.0 |  | Remove free fee lines from sales order
 [delivery_multi_destination](delivery_multi_destination/) | 12.0.1.1.0 |  | Multiple destinations for the same delivery method
 [delivery_package_number](delivery_package_number/) | 12.0.1.0.0 |  | Set or compute number of packages for a picking
