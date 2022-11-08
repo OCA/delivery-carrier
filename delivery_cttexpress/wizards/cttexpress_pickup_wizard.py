@@ -51,8 +51,8 @@ class CTTExpressPickupWizard(models.TransientModel):
         self.code = code
         self.state = "done"
         return dict(
-            self.env["ir.actions.act_window"].for_xml_id(
-                "delivery_cttexpress", "action_delivery_cttexpress_pickup_wizard"
+            self.env["ir.actions.act_window"]._for_xml_id(
+                "delivery_cttexpress.action_delivery_cttexpress_pickup_wizard"
             ),
             res_id=self.id,
         )
