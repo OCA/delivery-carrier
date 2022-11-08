@@ -60,15 +60,15 @@
                             />
                         </group>
                         <group string="Label format">
-                            <field 
+                            <field
                                 name="cttexpress_document_model_code"
                                 attrs="{'required': [('delivery_type', '=', 'cttexpress')]}"
                             />
-                            <field 
+                            <field
                                 name="cttexpress_document_format"
                                 attrs="{'required': [('delivery_type', '=', 'cttexpress')]}"
                             />
-                            <field 
+                            <field
                                 name="cttexpress_document_offset"
                                 attrs="{'required': [('delivery_type', '=', 'cttexpress')]}"
                             />

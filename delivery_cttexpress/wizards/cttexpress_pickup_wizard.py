@@ -8,22 +8,17 @@ class CTTExpressPickupWizard(models.TransientModel):
     _description = "Generate shipping pickups"
 
     carrier_id = fields.Many2one(
-        comodel_name="delivery.carrier",
-        domain=[("delivery_type", "=", "cttexpress")],
+        comodel_name="delivery.carrier", domain=[("delivery_type", "=", "cttexpress")],
     )
-    delivery_date = fields.Date(
-        required=True, default=fields.Date.context_today
-    )
+    delivery_date = fields.Date(required=True, default=fields.Date.context_today)
     min_hour = fields.Float(required=True)
     max_hour = fields.Float(required=True, default=23.99)
     code = fields.Char(readonly=True)
     state = fields.Selection(
-        selection=[("new", "new"), ("done", "done")],
-        default="new",
-        readonly=True,
+        selection=[("new", "new"), ("done", "done")], default="new", readonly=True,
     )
 
-    @api.onchange('min_hour', 'max_hour')
+    @api.onchange("min_hour", "max_hour")
     def _onchange_hours(self):
         """Min and max hours UX"""
         # Avoid negative or after midnight
@@ -36,16 +31,17 @@ class CTTExpressPickupWizard(models.TransientModel):
 
     def create_pickup_request(self):
         """Get the pickup code"""
+
         def convert_float_time_to_str(float_time):
             """Helper to pass the times in the expexted format 'HH:MM'"""
-            return "{0:02.0f}:{1:02.0f}".format(*divmod(float_time * 60, 60))
+            return "{:02.0f}:{:02.0f}".format(*divmod(float_time * 60, 60))
 
         ctt_request = self.carrier_id._ctt_request()
         delivery_date = fields.Date.to_string(self.delivery_date)
         error, code = ctt_request.create_request(
             delivery_date,
             convert_float_time_to_str(self.min_hour),
-            convert_float_time_to_str(self.max_hour)
+            convert_float_time_to_str(self.max_hour),
         )
         self.carrier_id._ctt_check_error(error)
         self.carrier_id._ctt_log_request(ctt_request)
@@ -53,8 +49,7 @@ class CTTExpressPickupWizard(models.TransientModel):
         self.state = "done"
         return dict(
             self.env["ir.actions.act_window"].for_xml_id(
-                "delivery_cttexpress",
-                "action_delivery_cttexpress_pickup_wizard"
+                "delivery_cttexpress", "action_delivery_cttexpress_pickup_wizard"
             ),
-            res_id=self.id
+            res_id=self.id,
         )
