@@ -69,6 +69,11 @@ msgid "Bearer token"
 msgstr ""
 
 #. module: delivery_carrier_label_paazl
+#: selection:delivery.carrier,delivery_type:0
+msgid "CTT Express"
+msgstr ""
+
+#. module: delivery_carrier_label_paazl
 #: model:delivery.carrier.template.option,name:delivery_carrier_label_paazl.carrier_dhl_DHL_FOR_YOU
 msgid "DHL For You"
 msgstr ""
