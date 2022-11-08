@@ -41,7 +41,7 @@ def log_request(method):
 
 class CTTExpressRequest:
     """Interface between CTT Express SOAP API and Odoo recordset.
-       Abstract CTT Express API Operations to connect them with Odoo
+    Abstract CTT Express API Operations to connect them with Odoo
     """
 
     def __init__(self, user, password, agency, customer, contract, prod=False):
@@ -55,7 +55,8 @@ class CTTExpressRequest:
         self.ctt_last_request = False
         self.ctt_last_response = False
         self.client = Client(
-            wsdl=CTTEXPRESS_API_URL["prod" if prod else "test"], plugins=[self.history],
+            wsdl=CTTEXPRESS_API_URL["prod" if prod else "test"],
+            plugins=[self.history],
         )
 
     @staticmethod
