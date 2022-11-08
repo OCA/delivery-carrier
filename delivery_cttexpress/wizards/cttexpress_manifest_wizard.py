@@ -81,8 +81,8 @@ class CTTExpressManifestWizard(models.TransientModel):
                 )
         self.state = "done"
         return dict(
-            self.env["ir.actions.act_window"].for_xml_id(
-                "delivery_cttexpress", "action_delivery_cttexpress_manifest_wizard"
+            self.env["ir.actions.act_window"]._for_xml_id(
+                "delivery_cttexpress.action_delivery_cttexpress_manifest_wizard"
             ),
             res_id=self.id,
         )
