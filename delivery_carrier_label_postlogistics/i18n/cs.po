@@ -128,6 +128,11 @@ msgid "Basic Services"
 msgstr ""
 
 #. module: delivery_carrier_label_postlogistics
+#: selection:delivery.carrier,delivery_type:0
+msgid "CTT Express"
+msgstr ""
+
+#. module: delivery_carrier_label_postlogistics
 #: model_terms:ir.ui.view,arch_db:delivery_carrier_label_postlogistics.view_postlogistics_auth_form
 msgid "Cancel"
 msgstr "Zrušit"
