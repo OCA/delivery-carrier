@@ -28,13 +28,15 @@
             </form>
         </field>
     </record>
-    <act_window
+    <record
         id="action_delivery_cttexpress_manifest_wizard"
-        name="CTT Express Manifest"
-        res_model="cttexpress.manifest.wizard"
-        view_mode="form"
-        target="new"
-    />
+        model="ir.actions.act_window"
+    >
+        <field name="name">CTT Express Manifest</field>
+        <field name="res_model">cttexpress.manifest.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
     <menuitem
         id="menu_cttexpress_manifest"
         name="CTT Express Manifest"
