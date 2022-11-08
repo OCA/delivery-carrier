@@ -360,6 +360,11 @@ msgid "PUNTOS CERCANÍA"
 msgstr "PUNTOS CERCANÍA"
 
 #. module: delivery_cttexpress
+#: selection:delivery.carrier,delivery_type:0
+msgid "Paazl"
+msgstr ""
+
+#. module: delivery_cttexpress
 #: model:ir.model.fields,field_description:delivery_cttexpress.field_delivery_carrier__cttexpress_password
 msgid "Password"
 msgstr "Contraseña"
@@ -369,6 +374,11 @@ msgstr "Contraseña"
 #: model_terms:ir.ui.view,arch_db:delivery_cttexpress.view_delivery_carrier_form
 msgid "Pickup request"
 msgstr "Solicitud de recogida"
+
+#. module: delivery_cttexpress
+#: selection:delivery.carrier,delivery_type:0
+msgid "Post logistics"
+msgstr ""
 
 #. module: delivery_cttexpress
 #: model:ir.model.fields,field_description:delivery_cttexpress.field_delivery_carrier__delivery_type
@@ -430,10 +440,12 @@ msgstr "Comprobar conexión"
 #: code:addons/delivery_cttexpress/models/delivery_carrier.py:132
 #, python-format
 msgid ""
-"This CTT Express service (%s) isn't allowed for this account configuration. Please choose one of the followings\n"
+"This CTT Express service (%s) isn't allowed for this account configuration. "
+"Please choose one of the followings\n"
 "%s"
 msgstr ""
-"Este servicio de CTT Express (%s) no está permitido para esta configuración de cuenta. Por favor, escoja uno de los siguientes\n"
+"Este servicio de CTT Express (%s) no está permitido para esta configuración "
+"de cuenta. Por favor, escoja uno de los siguientes\n"
 "%s"
 
 #. module: delivery_cttexpress
@@ -445,6 +457,11 @@ msgstr "Hasta la Fecha"
 #: model:ir.model,name:delivery_cttexpress.model_stock_picking
 msgid "Transfer"
 msgstr "Albarán"
+
+#. module: delivery_cttexpress
+#: selection:delivery.carrier,delivery_type:0
+msgid "UPS"
+msgstr ""
 
 #. module: delivery_cttexpress
 #: model:ir.model.fields,field_description:delivery_cttexpress.field_delivery_carrier__cttexpress_user
