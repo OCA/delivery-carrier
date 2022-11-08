@@ -24,7 +24,30 @@ You'll find:
 
 [//]: # (addons)
 
-This part will be replaced when running the oca-gen-addons-table script from OCA/maintainer-tools.
+Available addons
+----------------
+addon | version | maintainers | summary
+--- | --- | --- | ---
+[base_delivery_carrier_files](base_delivery_carrier_files/) | 12.0.1.0.1 |  | Base module for creation of delivery carrier files
+[base_delivery_carrier_label](base_delivery_carrier_label/) | 12.0.3.4.0 |  | Base module for carrier labels
+[delivery_auto_refresh](delivery_auto_refresh/) | 12.0.2.0.0 |  | Auto-refresh delivery price in sales orders
+[delivery_carrier_info](delivery_carrier_info/) | 12.0.1.0.1 |  | Add code and description on carrier
+[delivery_carrier_label_batch](delivery_carrier_label_batch/) | 12.0.1.0.1 |  | Carrier labels - Stock Batch Picking (link)
+[delivery_carrier_label_default](delivery_carrier_label_default/) | 12.0.1.0.0 |  | This module defines a basic label to print when no specific carrier is selected.
+[delivery_carrier_label_paazl](delivery_carrier_label_paazl/) | 12.0.1.3.0 |  | Print carrier labels for paazl
+[delivery_carrier_label_postlogistics](delivery_carrier_label_postlogistics/) | 12.0.1.0.8 |  | Print postlogistics shipping labels
+[delivery_carrier_label_ups](delivery_carrier_label_ups/) | 12.0.1.2.1 |  | Print carrier labels for ups
+[delivery_carrier_partner](delivery_carrier_partner/) | 12.0.1.0.0 |  | Add a partner in the delivery carrier
+[delivery_free_fee_removal](delivery_free_fee_removal/) | 12.0.1.0.0 |  | Remove free fee lines from sales order
+[delivery_multi_destination](delivery_multi_destination/) | 12.0.1.1.0 |  | Multiple destinations for the same delivery method
+[delivery_package_number](delivery_package_number/) | 12.0.1.0.0 |  | Set or compute number of packages for a picking
+[delivery_price_method](delivery_price_method/) | 12.0.1.0.1 |  | Provides fields to be able to contemplate the tracking statesand also adds a global fields
+[delivery_price_rule_untaxed](delivery_price_rule_untaxed/) | 12.0.1.0.1 |  | Add untaxed amount to variables for price delivery price rule
+[delivery_state](delivery_state/) | 12.0.2.0.1 |  | Provides fields to be able to contemplate the tracking statesand also adds a global fields
+[partner_delivery_schedule](partner_delivery_schedule/) | 12.0.1.2.0 |  | Set on partners a schedule for delivery goods
+[partner_delivery_zone](partner_delivery_zone/) | 12.0.1.1.2 |  | Set on partners a zone for delivery goods
+[stock_picking_delivery_info_computation](stock_picking_delivery_info_computation/) | 12.0.1.0.1 |  | Improve weight and volume calculation
+[stock_picking_report_delivery_cost](stock_picking_report_delivery_cost/) | 12.0.1.0.0 |  | Show delivery cost in delivery slip and picking operations reports
 
 [//]: # (end addons)
 
