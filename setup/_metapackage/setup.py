@@ -17,6 +17,7 @@ setuptools.setup(
         'odoo13-addon-delivery_carrier_partner',
         'odoo13-addon-delivery_carrier_pricelist',
         'odoo13-addon-delivery_carrier_service_level',
+        'odoo13-addon-delivery_cttexpress',
         'odoo13-addon-delivery_free_fee_removal',
         'odoo13-addon-delivery_local_pickup',
         'odoo13-addon-delivery_multi_destination',
