@@ -4,7 +4,7 @@ To configure your CTT Express services, go to:
 #. Choose *CTT Express* as provider.
 #. Configure your CTT credentials: contract, agency, customer code, user and password.
 #. Configure your label format:
-   
+
    - Single: Thermal printer (single label).
    - MULTI1: One label per sheet.
    - MULTI3: Protrait 3 labels per sheet.

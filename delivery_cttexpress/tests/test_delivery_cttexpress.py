@@ -9,11 +9,7 @@ class TestDeliveryCTTExpress(common.SavepointCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.shipping_product = cls.env["product.product"].create(
-            {
-                "type": "service",
-                "name": "Test Shipping costs",
-                "list_price": 10.
-            }
+            {"type": "service", "name": "Test Shipping costs", "list_price": 10.0}
         )
         cls.carrier_cttexpress = cls.env["delivery.carrier"].create(
             {
@@ -99,10 +95,7 @@ class TestDeliveryCTTExpress(common.SavepointCase):
     def test_04_cttexpress_pickup(self):
         """API work although without data"""
         wizard = self.env["cttexpress.pickup.wizard"].create(
-            {
-                "carrier_id": self.carrier_cttexpress.id,
-                "min_hour": 0.,
-            }
+            {"carrier_id": self.carrier_cttexpress.id, "min_hour": 0.0}
         )
         wizard.create_pickup_request()
         # There we have our manifest
