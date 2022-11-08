@@ -31,11 +31,10 @@
             </form>
         </field>
     </record>
-    <act_window
-        id="action_delivery_cttexpress_pickup_wizard"
-        name="CTT Express Pickup Request"
-        res_model="cttexpress.pickup.wizard"
-        view_mode="form"
-        target="new"
-    />
+    <record id="action_delivery_cttexpress_pickup_wizard" model="ir.actions.act_window">
+        <field name="name">CTT Express Pickup Request</field>
+        <field name="res_model">cttexpress.pickup.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
 </odoo>

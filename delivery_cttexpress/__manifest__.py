@@ -3,7 +3,7 @@
 {
     "name": "Delivery CTT Express",
     "summary": "Delivery Carrier implementation for CTT Express API",
-    "version": "13.0.1.0.0",
+    "version": "14.0.1.0.0",
     "category": "Delivery",
     "website": "https://github.com/OCA/delivery-carrier",
     "author": "Tecnativa, Odoo Community Association (OCA)",
@@ -12,6 +12,7 @@
     "depends": ["delivery_package_number", "delivery_state"],
     "external_dependencies": {"python": ["zeep"]},
     "data": [
+        "security/ir.model.access.csv",
         "wizards/cttexpress_manifest_wizard_views.xml",
         "wizards/cttexpress_pickup_wizard.xml",
         "views/delivery_cttexpress_view.xml",
