@@ -8,14 +8,17 @@ class CTTExpressPickupWizard(models.TransientModel):
     _description = "Generate shipping pickups"
 
     carrier_id = fields.Many2one(
-        comodel_name="delivery.carrier", domain=[("delivery_type", "=", "cttexpress")],
+        comodel_name="delivery.carrier",
+        domain=[("delivery_type", "=", "cttexpress")],
     )
     delivery_date = fields.Date(required=True, default=fields.Date.context_today)
     min_hour = fields.Float(required=True)
     max_hour = fields.Float(required=True, default=23.99)
     code = fields.Char(readonly=True)
     state = fields.Selection(
-        selection=[("new", "new"), ("done", "done")], default="new", readonly=True,
+        selection=[("new", "new"), ("done", "done")],
+        default="new",
+        readonly=True,
     )
 
     @api.onchange("min_hour", "max_hour")
