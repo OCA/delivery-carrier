@@ -68,6 +68,11 @@ msgid "By default, shipping to UPS makes use of Published Rates. To\n"
 msgstr ""
 
 #. module: delivery_carrier_label_ups
+#: selection:delivery.carrier,delivery_type:0
+msgid "CTT Express"
+msgstr ""
+
+#. module: delivery_carrier_label_ups
 #: selection:product.packaging,ups_code:0
 msgid "Customer Supplied Package"
 msgstr ""
