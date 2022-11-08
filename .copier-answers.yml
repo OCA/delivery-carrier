@@ -1,0 +1,27 @@
+# Do NOT update manually; changes here will be overwritten by Copier
+_commit: v1.11.0
+_src_path: https://github.com/OCA/oca-addons-repo-template.git
+ci: GitHub
+dependency_installation_mode: PIP
+generate_requirements_txt: true
+github_check_license: true
+github_enable_codecov: true
+github_enable_makepot: true
+github_enable_stale_action: true
+github_enforce_dev_status_compatibility: false
+include_wkhtmltopdf: false
+odoo_version: 12.0
+org_name: Odoo Community Association (OCA)
+org_slug: OCA
+rebel_module_groups: []
+repo_description: "This project aim to deal with modules related to manage carriers\
+    \ and deliveries in a generic way.\n\nYou'll find:\n\n - Generic module to generate\
+    \ file for carrier\n - Specific implementation for specific carrier (like la poste,\
+    \ tnt,..)\n - Generation of shipping labels for specific carrier (PostLogistics,\
+    \ ...)\n"
+repo_name: Carriers And Deliveries Management
+repo_slug: delivery-carrier
+repo_website: https://github.com/OCA/delivery-carrier
+travis_apt_packages: []
+travis_apt_sources: []
+

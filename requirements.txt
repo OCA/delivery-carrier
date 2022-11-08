@@ -1,1 +1,4 @@
+# generated from manifests external_dependencies
+PyPDF2
+unidecode
 zeep
