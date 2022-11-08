@@ -72,7 +72,6 @@ class CTTExpressManifestWizard(models.TransientModel):
                     {
                         "datas": base64.b64encode(file),
                         "name": filename,
-                        "datas_fname": filename,
                         "res_model": self._name,
                         "res_id": self.id,
                         "type": "binary",
