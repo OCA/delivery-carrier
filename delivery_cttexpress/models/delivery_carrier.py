@@ -13,7 +13,10 @@ from .cttexpress_request import CTTExpressRequest
 class DeliveryCarrier(models.Model):
     _inherit = "delivery.carrier"
 
-    delivery_type = fields.Selection(selection_add=[("cttexpress", "CTT Express")])
+    delivery_type = fields.Selection(
+        selection_add=[("cttexpress", "CTT Express")],
+        ondelete={"cttexpress": "set default"},
+    )
     cttexpress_user = fields.Char(string="User")
     cttexpress_password = fields.Char(string="Password")
     cttexpress_customer = fields.Char(string="Customer code")
@@ -158,10 +161,7 @@ class DeliveryCarrier(models.Model):
         )
         recipient = picking.partner_id
         recipient_entity = picking.partner_id.commercial_partner_id
-        if picking.package_ids:
-            weight = sum([p.shipping_weight or p.weight for p in picking.package_ids])
-        else:
-            weight = picking.shipping_weight
+        weight = picking.shipping_weight
         reference = picking.name
         if picking.sale_id:
             reference = "{}-{}".format(picking.sale_id.name, reference)
