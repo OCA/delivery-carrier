@@ -24,7 +24,9 @@ class CTTExpressManifestWizard(models.TransientModel):
         help="Leave empty to gather all the CTT account manifests",
     )
     state = fields.Selection(
-        selection=[("new", "new"), ("done", "done")], default="new", readonly=True,
+        selection=[("new", "new"), ("done", "done")],
+        default="new",
+        readonly=True,
     )
     attachment_ids = fields.Many2many(
         comodel_name="ir.attachment", readonly=True, string="Manifests"

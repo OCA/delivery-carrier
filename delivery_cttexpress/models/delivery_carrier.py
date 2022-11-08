@@ -20,7 +20,8 @@ class DeliveryCarrier(models.Model):
     cttexpress_agency = fields.Char(string="Agency code")
     cttexpress_contract = fields.Char(string="Contract code")
     cttexpress_shipping_type = fields.Selection(
-        selection=CTTEXPRESS_SERVICES, string="Shipping type",
+        selection=CTTEXPRESS_SERVICES,
+        string="Shipping type",
     )
     cttexpress_document_model_code = fields.Selection(
         selection=[

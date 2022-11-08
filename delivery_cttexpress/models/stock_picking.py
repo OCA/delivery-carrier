@@ -18,6 +18,7 @@ class StockPicking(models.Model):
             return
         label = self.carrier_id.cttexpress_get_label(tracking_ref)
         self.message_post(
-            body=(_("CTT Express label for %s") % tracking_ref), attachments=label,
+            body=(_("CTT Express label for %s") % tracking_ref),
+            attachments=label,
         )
         return label
