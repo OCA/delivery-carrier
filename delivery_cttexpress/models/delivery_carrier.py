@@ -3,11 +3,11 @@
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
-from .cttexpress_request import CTTExpressRequest
 from .cttexpress_master_data import (
     CTTEXPRESS_DELIVERY_STATES_STATIC,
-    CTTEXPRESS_SERVICES
+    CTTEXPRESS_SERVICES,
 )
+from .cttexpress_request import CTTExpressRequest
 
 
 class DeliveryCarrier(models.Model):
@@ -20,25 +20,20 @@ class DeliveryCarrier(models.Model):
     cttexpress_agency = fields.Char(string="Agency code")
     cttexpress_contract = fields.Char(string="Contract code")
     cttexpress_shipping_type = fields.Selection(
-        selection=CTTEXPRESS_SERVICES,
-        string="Shipping type",
+        selection=CTTEXPRESS_SERVICES, string="Shipping type",
     )
     cttexpress_document_model_code = fields.Selection(
         selection=[
             ("SINGLE", "Single"),
             ("MULTI1", "Multi 1"),
             ("MULTI3", "Multi 3"),
-            ("MULTI4", "Multi 4")
+            ("MULTI4", "Multi 4"),
         ],
         default="SINGLE",
         string="Document model",
     )
     cttexpress_document_format = fields.Selection(
-        selection=[
-            ("PDF", "PDF"),
-            ("PNG", "PNG"),
-            ("BMP", "BMP")
-        ],
+        selection=[("PDF", "PDF"), ("PNG", "PNG"), ("BMP", "BMP")],
         default="PDF",
         string="Document format",
     )
@@ -55,7 +50,7 @@ class DeliveryCarrier(models.Model):
             agency=self.cttexpress_agency,
             customer=self.cttexpress_customer,
             contract=self.cttexpress_contract,
-            prod=self.prod_environment
+            prod=self.prod_environment,
         )
 
     @api.model
@@ -82,7 +77,7 @@ class DeliveryCarrier(models.Model):
             error_msg += "{} - {}\n".format(code, msg)
         if not error_msg:
             return
-        raise UserError("CTT Express Error:\n\n{}".format(error_msg))
+        raise UserError(_("CTT Express Error:\n\n%s") % error_msg)
 
     @api.model
     def _cttexpress_format_tracking(self, tracking):
@@ -94,7 +89,7 @@ class DeliveryCarrier(models.Model):
         status = "{} - [{}] {}".format(
             fields.Datetime.to_string(tracking["StatusDateTime"]),
             tracking["StatusCode"],
-            tracking["StatusDescription"]
+            tracking["StatusDescription"],
         )
         if tracking["IncidentCode"]:
             status += " ({}) - {}".format(
@@ -108,7 +103,7 @@ class DeliveryCarrier(models.Model):
 
         :raises UserError: We list the available services for given credentials
         """
-        if not self.cttexpress_shipping_type :
+        if not self.cttexpress_shipping_type:
             return
         # Avoid checking if credentianls aren't setup or are invalid
         try:
@@ -122,15 +117,17 @@ class DeliveryCarrier(models.Model):
         type_codes, type_descriptions = zip(*service_types)
         if self.cttexpress_shipping_type not in type_codes:
             service_name = dict(
-                self._fields['cttexpress_shipping_type']._description_selection(
+                self._fields["cttexpress_shipping_type"]._description_selection(
                     self.env
                 )
             )[self.cttexpress_shipping_type]
-            raise UserError(_(
-                "This CTT Express service (%s) isn't allowed for this account "
-                "configuration. Please choose one of the followings\n%s"
-                % (service_name, type_descriptions)
-            ))
+            raise UserError(
+                _(
+                    "This CTT Express service (%s) isn't allowed for this account "
+                    "configuration. Please choose one of the followings\n%s"
+                    % (service_name, type_descriptions)
+                )
+            )
 
     def action_ctt_validate_user(self):
         """Maps to API's ValidateUser method
@@ -215,7 +212,7 @@ class DeliveryCarrier(models.Model):
                 error, documents, tracking = ctt_request.manifest_shipping(vals)
                 self._ctt_check_error(error)
             except Exception as e:
-                raise(e)
+                raise (e)
             finally:
                 self._ctt_log_request(ctt_request)
             vals.update({"tracking_number": tracking, "exact_price": 0})
@@ -238,9 +235,7 @@ class DeliveryCarrier(models.Model):
         ctt_request = self._ctt_request()
         for picking in pickings.filtered("carrier_tracking_ref"):
             try:
-                error = ctt_request.cancel_shipping(
-                    picking.carrier_tracking_ref
-                )
+                error = ctt_request.cancel_shipping(picking.carrier_tracking_ref)
                 self._ctt_check_error(error)
             except Exception as e:
                 raise (e)
@@ -263,7 +258,7 @@ class DeliveryCarrier(models.Model):
                 reference,
                 model_code=self.cttexpress_document_model_code,
                 kind_code=self.cttexpress_document_format,
-                offset=self.cttexpress_document_offset
+                offset=self.cttexpress_document_offset,
             )
             self._ctt_check_error(error)
         except Exception as e:
@@ -284,24 +279,17 @@ class DeliveryCarrier(models.Model):
             return
         ctt_request = self._ctt_request()
         try:
-            error, trackings = (
-                ctt_request.get_tracking(picking.carrier_tracking_ref)
-            )
+            error, trackings = ctt_request.get_tracking(picking.carrier_tracking_ref)
             self._ctt_check_error(error)
         except Exception as e:
             raise (e)
         finally:
             self._ctt_log_request(ctt_request)
         picking.tracking_state_history = "\n".join(
-            [
-                self._cttexpress_format_tracking(tracking)
-                for tracking in trackings
-            ]
+            [self._cttexpress_format_tracking(tracking) for tracking in trackings]
         )
         current_tracking = trackings.pop()
-        picking.tracking_state = (
-            self._cttexpress_format_tracking(current_tracking)
-        )
+        picking.tracking_state = self._cttexpress_format_tracking(current_tracking)
         picking.delivery_state = CTTEXPRESS_DELIVERY_STATES_STATIC.get(
             current_tracking["StatusCode"], "incidence"
         )
@@ -313,7 +301,6 @@ class DeliveryCarrier(models.Model):
         :return str: tracking url
         """
         tracking_url = (
-            "https://app.cttexpress.com/AreaClientes/Views/"
-            "Destinatarios.aspx?s={}"
+            "https://app.cttexpress.com/AreaClientes/Views/" "Destinatarios.aspx?s={}"
         )
         return tracking_url.format(picking.carrier_tracking_ref)

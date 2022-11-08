@@ -9,8 +9,8 @@
                     <group name="config">
                         <field name="carrier_id" widget="selection" />
                         <field name="delivery_date" />
-                        <field name="min_hour" widget="float_time"/>
-                        <field name="max_hour" widget="float_time"/>
+                        <field name="min_hour" widget="float_time" />
+                        <field name="max_hour" widget="float_time" />
                     </group>
                 </group>
                 <group attrs="{'invisible': [('state', '!=', 'done')]}">
