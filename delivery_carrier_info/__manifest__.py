@@ -8,7 +8,7 @@
     "summary": "Add code and description on carrier",
     "version": "12.0.1.0.1",
     "category": "Delivery",
-    "website": "http://github.com/OCA/delivery-carrier",
+    "website": "https://github.com/OCA/delivery-carrier",
     "author": "Akretion,Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "application": False,
