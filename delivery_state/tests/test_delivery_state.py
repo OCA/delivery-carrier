@@ -76,7 +76,7 @@ class TestDeliveryState(TransactionCase):
         self.assertEqual(len(delivery_lines), 1)
         self.sale.action_confirm()
         picking = self.sale.picking_ids[0]
-        self.assertEqual(len(picking.move_lines), 1)
+        self.assertEqual(len(picking.move_ids), 1)
         self.assertEqual(picking.carrier_id, self.carrier)
         picking.action_confirm()
         picking.action_assign()
@@ -104,7 +104,7 @@ class TestDeliveryState(TransactionCase):
         picking.company_id.delivery_state_delivered_email_validation = True
         picking.company_id.delivery_state_delivered_mail_template_id = template
         picking.carrier_tracking_ref = "XX-0000"
-        picking.move_lines.quantity_done = 1
+        picking.move_ids.quantity_done = 1
         picking._action_done()
         picking.write({"delivery_state": "customer_delivered"})
         mails = picking.message_ids.filtered(

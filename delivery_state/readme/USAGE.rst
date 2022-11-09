@@ -21,7 +21,7 @@ described before, but we'll get additionally:
         * Shipping recorded in carrier
         * In transit
         * Canceled shipment (finished)
-        * Incidence
+        * Incident
         * Warehouse delivered
         * Customer delivered (finished)
   #. In the field *Tracking state* we'll get the tracking state name given by
