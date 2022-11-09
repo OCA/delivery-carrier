@@ -120,8 +120,8 @@ msgid "In transit"
 msgstr "En tránsito"
 
 #. module: delivery_state
-#: model:ir.model.fields.selection,name:delivery_state.selection__stock_picking__delivery_state__incidence
-msgid "Incidence"
+#: model:ir.model.fields.selection,name:delivery_state.selection__stock_picking__delivery_state__incident
+msgid "Incident"
 msgstr "Incidencia"
 
 #. module: delivery_state
