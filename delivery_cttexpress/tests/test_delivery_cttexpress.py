@@ -4,7 +4,7 @@ from odoo.exceptions import UserError
 from odoo.tests import Form, common
 
 
-class TestDeliveryCTTExpress(common.SavepointCase):
+class TestDeliveryCTTExpress(common.TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
