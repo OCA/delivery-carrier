@@ -1,25 +1,12 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+# Copyright 2022 Impulso Diagonal - Javier Colmeiro
+# Copyright 2022 Tecnativa - Víctor Martínez
 import logging
 
-from odoo import _
-from odoo.exceptions import UserError
+from suds.client import Client
+from suds.sax.text import Raw
 
 _logger = logging.getLogger(__name__)
-
-try:
-    from suds.client import Client
-    from suds.sax.text import Raw
-    from suds.plugin import MessagePlugin
-except (ImportError, IOError) as err:
-    _logger.debug(err)
-
-
-class LogPlugin(MessagePlugin):
-    def sending(self, context):
-        print(str(context.envelope))
-
-    def received(self, context):
-        print(str(context.reply))
 
 
 class SendingRequest:
@@ -27,13 +14,12 @@ class SendingRequest:
        Abstract Sending API Operations to connect them with Odoo
     """
 
-    def __init__(self, uidcustomer=None, uidpass=None):
+    def __init__(self, uidcustomer, uidpass):
         """As the wsdl isn't public, we have to load it from local"""
-        print("ENTRO INIT SENDING")
-        wsdl_url = "http://padua.sending.es/sending/ws_clientes?wsdl"
-        self.uidcustomer = uidcustomer or ""
-        self.uidpass = uidpass or ""
-        self.client = Client(wsdl_url, plugins=[LogPlugin()])
+        self.uidcustomer = uidcustomer
+        self.uidpass = uidpass
+        self.url = "http://padua.sending.es/sending/ws_clientes?wsdl"
+        self.client = Client(self.url)
 
     def _prepare_send_shipping_docin(self, **kwargs):
         """Sending is not very standard. Prepare parameters to pass them raw in
@@ -71,92 +57,40 @@ class SendingRequest:
             **kwargs
         )
 
-    def _send_shipping(self, vals):
-        """Create new shipment
-        """
-        print("ENTRO _SEND_SHIPPING")
+    def send_shipping(self, vals):
+        """Create new shipment"""
         vals.update({"uidcustomer": self.uidcustomer, "uidpass": self.uidpass})
-        fichero = Raw(self._prepare_send_shipping_docin(**vals))
-        _logger.debug(fichero)
-        print(fichero)
-        try:
-            res = self.client.service.entrada_expediciones(
-                cliente=self.uidcustomer,
-                formato="xml",
-                param1=self.uidpass,
-                fichero=fichero,
-            )
-        except Exception as e:
-            raise UserError(
-                _(
-                    "No response from server recording Sending delivery {}.\n"
-                    "Traceback:\n{}"
-                ).format(vals.get("ref", ""), e)
-            )
-
-        if res[:2] != "OK" and res[:2] != "TE":
-            raise UserError(
-                _(
-                    "Sending returned an error trying to record the shipping for {}.\n"
-                    "Error:\n{}"
-                ).format(vals.get("ref", ""), res)
-            )
-        # todo get label
-        print(res)
-        return res
+        data = self._prepare_send_shipping_docin(**vals)
+        return self.client.service.entrada_expediciones(
+            cliente=self.uidcustomer,
+            formato="xml",
+            param1=self.uidpass,
+            fichero=Raw(data),
+        )
 
     def _shipping_label_zpl(self, reference):
         """Get shipping label ZPL for the given ref
         :param reference -- shipping reference
         :returns: base64 with pdf labels
         """
-        try:
-            res = self.client.service.etiquetarExpedicionZPL(
-                cliente=self.uidcustomer, expedicion=reference
-            )
-        except Exception as e:
-            raise UserError(
-                _(
-                    "No response from server recording Sending delivery {}.\n"
-                    "Traceback:\n{}"
-                ).format(vals.get("ref", ""), e)
-            )
-        return res
+        return self.client.service.etiquetarExpedicionZPL(
+            cliente=self.uidcustomer, expedicion=reference
+        )
 
     def _shipping_label_pdf(self, reference):
         """Get shipping label PDF for the given ref
         :param reference -- shipping reference
         :returns: base64 with pdf labels
         """
-        try:
-            res = self.client.service.etiquetarExpedicionPDF(
-                cliente=self.uidcustomer,
-                expedicion=reference,
-                usuario=self.uidcustomer,
-                param1=self.uidpass,
-            )
-        except Exception as e:
-            raise UserError(
-                _(
-                    "No response from server recording Sending delivery {}.\n"
-                    "Traceback:\n{}"
-                ).format(vals.get("ref", ""), e)
-            )
-        return res
+        return self.client.service.etiquetarExpedicionPDF(
+            cliente=self.uidcustomer,
+            expedicion=reference,
+            usuario=self.uidcustomer,
+            param1=self.uidpass,
+        )
 
     def _cancel_shipment(self, reference=False):
-        """Cancel shipment for a given reference
-        """
-        try:
-            response = self.client.service.cancelarExpedicion(
-                cliente=self.uidcustomer, param1=self.uidpass, expedicion=reference
-            )
-            _logger.debug(response)
-        except Exception as e:
-            _logger.error(
-                "No response from server canceling Sending ref {}.\n"
-                "Traceback:\n{}".format(reference, e)
-            )
-            return {}
-        print(response)
-        return response
+        """Cancel shipment for a given reference"""
+        return self.client.service.cancelarExpedicion(
+            cliente=self.uidcustomer, param1=self.uidpass, expedicion=reference
+        )
