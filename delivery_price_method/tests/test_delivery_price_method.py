@@ -75,7 +75,8 @@ class TestDeliveryPriceMethod(TransactionCase):
         self.assertEqual(len(delivery_lines), 1)
         sale.action_confirm()
         picking = sale.picking_ids[0]
-        self.assertEqual(len(picking.move_lines), 1)
+        picking.move_ids.quantity_done = 1
+        self.assertEqual(len(picking.move_line_ids), 1)
         self.assertEqual(picking.carrier_id, self.carrier)
         picking.action_confirm()
         picking.action_assign()
