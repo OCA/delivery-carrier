@@ -434,10 +434,12 @@ msgstr "Comprobar conexión"
 #: code:addons/delivery_cttexpress/models/delivery_carrier.py:0
 #, python-format
 msgid ""
-"This CTT Express service (%(service_name)s) isn't allowed for this account configuration. Please choose one of the followings\n"
+"This CTT Express service (%(service_name)s) isn't allowed for this account "
+"configuration. Please choose one of the followings\n"
 "%(type_descriptions)s"
 msgstr ""
-"Este servicio de CTT Express (%(service_name)s) no está permitido para esta configuración de cuenta. Por favor, escoja uno de los siguientes\n"
+"Este servicio de CTT Express (%(service_name)s) no está permitido para esta "
+"configuración de cuenta. Por favor, escoja uno de los siguientes\n"
 "%(type_descriptions)s"
 
 #. module: delivery_cttexpress
