@@ -59,10 +59,10 @@ msgstr "Creado en"
 #: model:ir.model,name:partner_delivery_schedule.model_delivery_schedule
 #: model:ir.model.fields,field_description:partner_delivery_schedule.field_res_partner__delivery_schedule_ids
 #: model:ir.model.fields,field_description:partner_delivery_schedule.field_res_users__delivery_schedule_ids
-#: model:ir.ui.menu,name:partner_delivery_schedule.partner_delivery_schedule_menu
+#: model:ir.ui.menu,name:partner_delivery_schedule.sale_menu_action_delivery_schedule
+#: model:ir.ui.menu,name:partner_delivery_schedule.stock_menu_action_delivery_schedule
 #: model_terms:ir.ui.view,arch_db:partner_delivery_schedule.view_partner_delivery_schedule_form
 #: model_terms:ir.ui.view,arch_db:partner_delivery_schedule.view_partner_delivery_schedule_search
-#: model_terms:ir.ui.view,arch_db:partner_delivery_schedule.view_partner_delivery_schedule_tree
 msgid "Delivery Schedule"
 msgstr "Horario de entrega"
 
