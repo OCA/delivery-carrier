@@ -2,3 +2,7 @@
 
   * Pedro Gracia
   * Javier Colmeiro
+
+* `Tecnativa <https://www.tecnativa.com>`_:
+
+    * Víctor Martínez

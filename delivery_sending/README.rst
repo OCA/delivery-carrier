@@ -25,7 +25,7 @@ Delivery Sending
 
 |badge1| |badge2| |badge3| |badge4| |badge5| 
 
-This module links the `Sending <https://www.senging.es>`_ booking and tracking
+This module links the `Sending <https://www.sending.es>`_ booking and tracking
 APIs with Odoo delivery system.
 
 **Table of contents**
@@ -99,6 +99,7 @@ Authors
 ~~~~~~~
 
 * Impulso Diagonal
+* Tecnativa
 
 Contributors
 ~~~~~~~~~~~~
@@ -107,6 +108,10 @@ Contributors
 
   * Pedro Gracia
   * Javier Colmeiro
+
+* `Tecnativa <https://www.tecnativa.com>`_:
+
+    * Víctor Martínez
 
 Maintainers
 ~~~~~~~~~~~
