@@ -1,4 +1,4 @@
-# Copyright 2021 Tecnativa - Víctor Martínez
+# Copyright 2021-2022 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo import models
@@ -12,6 +12,7 @@ class DeliveryCarrier(models.Model):
         self = self.sudo()
         order = order.sudo()
         volumetric_weight = 0
+        highest_weight = 0
         for line in order.order_line.filtered(
             lambda x: x.state != "cancel" and x.product_id and not x.is_delivery
         ):
@@ -19,10 +20,16 @@ class DeliveryCarrier(models.Model):
                 line.product_uom_qty, line.product_id.uom_id
             )
             volumetric_weight += (line.product_id.volumetric_weight or 0.0) * qty
-        _self = self.with_context(volumetric_weight=volumetric_weight)
+            highest_weight += (
+                max(line.product_id.volumetric_weight, line.product_id.weight) * qty
+            )
+        _self = self.with_context(
+            volumetric_weight=volumetric_weight, highest_weight=highest_weight
+        )
         return super(DeliveryCarrier, _self)._get_price_available(order)
 
     def _get_price_dict(self, total, weight, volume, quantity):
         res = super()._get_price_dict(total, weight, volume, quantity)
         res["volumetric_weight"] = self.env.context.get("volumetric_weight", 0)
+        res["highest_weight"] = self.env.context.get("highest_weight", 0)
         return res
