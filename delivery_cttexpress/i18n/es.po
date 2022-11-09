@@ -1,0 +1,493 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* delivery_cttexpress
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-11-08 10:02+0000\n"
+"PO-Revision-Date: 2022-11-08 11:04+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"X-Generator: Poedit 3.1.1\n"
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields.selection,name:delivery_cttexpress.selection__delivery_carrier__cttexpress_shipping_type__10h
+msgid "10 HORAS"
+msgstr ""
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields.selection,name:delivery_cttexpress.selection__delivery_carrier__cttexpress_shipping_type__13h
+msgid "13 HORAS"
+msgstr ""
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields.selection,name:delivery_cttexpress.selection__delivery_carrier__cttexpress_shipping_type__13a
+msgid "13 HORAS ISLAS"
+msgstr ""
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields.selection,name:delivery_cttexpress.selection__delivery_carrier__cttexpress_shipping_type__19e
+msgid "19 E-COMMERCE"
+msgstr ""
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields.selection,name:delivery_cttexpress.selection__delivery_carrier__cttexpress_shipping_type__19h
+msgid "19 HORAS"
+msgstr ""
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields.selection,name:delivery_cttexpress.selection__delivery_carrier__cttexpress_shipping_type__48m
+msgid "48 CANARIAS MARITIMO"
+msgstr ""
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields.selection,name:delivery_cttexpress.selection__delivery_carrier__cttexpress_shipping_type__48e
+msgid "48 E-COMMERCE"
+msgstr ""
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields.selection,name:delivery_cttexpress.selection__delivery_carrier__cttexpress_shipping_type__48p
+msgid "48 E-COMMERCE NUEVOS CLIENTES"
+msgstr ""
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields.selection,name:delivery_cttexpress.selection__delivery_carrier__cttexpress_shipping_type__48h
+msgid "48 HORAS"
+msgstr ""
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields.selection,name:delivery_cttexpress.selection__delivery_carrier__cttexpress_shipping_type__48n
+msgid "48H NUEVOS CLIENTES"
+msgstr ""
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields.selection,name:delivery_cttexpress.selection__delivery_carrier__cttexpress_shipping_type__830
+msgid "8.30 HORAS"
+msgstr ""
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields,field_description:delivery_cttexpress.field_delivery_carrier__cttexpress_agency
+msgid "Agency code"
+msgstr "Código de agencia"
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields.selection,name:delivery_cttexpress.selection__delivery_carrier__cttexpress_document_format__bmp
+msgid "BMP"
+msgstr ""
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields.selection,name:delivery_cttexpress.selection__delivery_carrier__cttexpress_shipping_type__19a
+msgid "CANARIAS E-COMMERCE"
+msgstr ""
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields.selection,name:delivery_cttexpress.selection__delivery_carrier__delivery_type__cttexpress
+msgid "CTT Express"
+msgstr ""
+
+#. module: delivery_cttexpress
+#: model_terms:ir.ui.view,arch_db:delivery_cttexpress.view_delivery_carrier_form
+msgid "CTT Express Configuration"
+msgstr "Configuración de CTT Express"
+
+#. module: delivery_cttexpress
+#: code:addons/delivery_cttexpress/models/delivery_carrier.py:0
+#, python-format
+msgid ""
+"CTT Express Error:\n"
+"\n"
+"%s"
+msgstr ""
+"Error de CTT Express:\n"
+"\n"
+"%s"
+
+#. module: delivery_cttexpress
+#: model_terms:ir.ui.view,arch_db:delivery_cttexpress.view_picking_withcarrier_out_form
+msgid "CTT Express Label"
+msgstr "Etiqueta CTT Express"
+
+#. module: delivery_cttexpress
+#: model:ir.actions.act_window,name:delivery_cttexpress.action_delivery_cttexpress_manifest_wizard
+#: model:ir.ui.menu,name:delivery_cttexpress.menu_cttexpress_manifest
+msgid "CTT Express Manifest"
+msgstr "Manifiesto CTT Express"
+
+#. module: delivery_cttexpress
+#: model_terms:ir.ui.view,arch_db:delivery_cttexpress.delivery_manifest_wizard_form
+msgid "CTT Express Manifest Report"
+msgstr "Informe de manifiesto CTT Express"
+
+#. module: delivery_cttexpress
+#: model_terms:ir.ui.view,arch_db:delivery_cttexpress.delivery_pickup_wizard_form
+msgid "CTT Express Pickup Report"
+msgstr "Informe de recogida de CTT Express"
+
+#. module: delivery_cttexpress
+#: model:ir.actions.act_window,name:delivery_cttexpress.action_delivery_cttexpress_pickup_wizard
+msgid "CTT Express Pickup Request"
+msgstr "Solicitud de recogida CTT Express"
+
+#. module: delivery_cttexpress
+#: code:addons/delivery_cttexpress/models/stock_picking.py:0
+#, python-format
+msgid "CTT Express label for %s"
+msgstr "Etiqueta CTT Express para %s"
+
+#. module: delivery_cttexpress
+#: code:addons/delivery_cttexpress/models/delivery_carrier.py:0
+#, python-format
+msgid "CTT Shipping Documents"
+msgstr "Documentos de envío CTT"
+
+#. module: delivery_cttexpress
+#: model_terms:ir.ui.view,arch_db:delivery_cttexpress.delivery_manifest_wizard_form
+#: model_terms:ir.ui.view,arch_db:delivery_cttexpress.delivery_pickup_wizard_form
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields,field_description:delivery_cttexpress.field_cttexpress_pickup_wizard__carrier_id
+msgid "Carrier"
+msgstr "Transportista"
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields,field_description:delivery_cttexpress.field_cttexpress_pickup_wizard__code
+msgid "Code"
+msgstr "Código"
+
+#. module: delivery_cttexpress
+#: model_terms:ir.ui.view,arch_db:delivery_cttexpress.view_delivery_carrier_form
+msgid "Connection"
+msgstr "Conexión"
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields,field_description:delivery_cttexpress.field_delivery_carrier__cttexpress_contract
+msgid "Contract code"
+msgstr "Código de contrato"
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields,field_description:delivery_cttexpress.field_cttexpress_manifest_wizard__create_uid
+#: model:ir.model.fields,field_description:delivery_cttexpress.field_cttexpress_pickup_wizard__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields,field_description:delivery_cttexpress.field_cttexpress_manifest_wizard__create_date
+#: model:ir.model.fields,field_description:delivery_cttexpress.field_cttexpress_pickup_wizard__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields,field_description:delivery_cttexpress.field_delivery_carrier__cttexpress_customer
+msgid "Customer code"
+msgstr "Código de cliente"
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields,field_description:delivery_cttexpress.field_cttexpress_pickup_wizard__delivery_date
+msgid "Delivery Date"
+msgstr "Fecha de entrega"
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields,field_description:delivery_cttexpress.field_cttexpress_manifest_wizard__display_name
+#: model:ir.model.fields,field_description:delivery_cttexpress.field_cttexpress_pickup_wizard__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields,field_description:delivery_cttexpress.field_delivery_carrier__cttexpress_document_offset
+msgid "Document Offset"
+msgstr "Offset del documento"
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields,field_description:delivery_cttexpress.field_delivery_carrier__cttexpress_document_format
+msgid "Document format"
+msgstr "Formato del documento"
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields,field_description:delivery_cttexpress.field_delivery_carrier__cttexpress_document_model_code
+msgid "Document model"
+msgstr "Modelo de documento"
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields.selection,name:delivery_cttexpress.selection__cttexpress_manifest_wizard__document_type__xlsx
+msgid "Excel"
+msgstr ""
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields.selection,name:delivery_cttexpress.selection__delivery_carrier__cttexpress_shipping_type__13m
+msgid "FRANCIA 13M"
+msgstr ""
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields.selection,name:delivery_cttexpress.selection__delivery_carrier__cttexpress_shipping_type__18m
+msgid "FRANCIA 18M"
+msgstr ""
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields,field_description:delivery_cttexpress.field_cttexpress_manifest_wizard__carrier_ids
+msgid "Filter accounts"
+msgstr "Filtrar cuentas"
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields,field_description:delivery_cttexpress.field_cttexpress_manifest_wizard__document_type
+msgid "Format"
+msgstr "Formatear"
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields,field_description:delivery_cttexpress.field_cttexpress_manifest_wizard__from_date
+msgid "From Date"
+msgstr "Desde la fecha"
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields.selection,name:delivery_cttexpress.selection__delivery_carrier__cttexpress_shipping_type__80i
+#: model:ir.model.fields.selection,name:delivery_cttexpress.selection__delivery_carrier__cttexpress_shipping_type__80t
+msgid "GLOBAL EXPRESS"
+msgstr ""
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields.selection,name:delivery_cttexpress.selection__delivery_carrier__cttexpress_shipping_type__80r
+msgid "GLOBAL RECOGIDA INTERNACIONAL"
+msgstr ""
+
+#. module: delivery_cttexpress
+#: model:ir.model,name:delivery_cttexpress.model_cttexpress_pickup_wizard
+msgid "Generate shipping pickups"
+msgstr "Generar recogidas de envíos"
+
+#. module: delivery_cttexpress
+#: model_terms:ir.ui.view,arch_db:delivery_cttexpress.delivery_manifest_wizard_form
+msgid "Get Manifest"
+msgstr "Obtener manifiesto"
+
+#. module: delivery_cttexpress
+#: model:ir.model,name:delivery_cttexpress.model_cttexpress_manifest_wizard
+msgid "Get the CTT Express Manifest for the given date range"
+msgstr "Obtener el manifiesto de CTT Express para un rango de fechas"
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields,field_description:delivery_cttexpress.field_cttexpress_manifest_wizard__id
+#: model:ir.model.fields,field_description:delivery_cttexpress.field_cttexpress_pickup_wizard__id
+msgid "ID"
+msgstr ""
+
+#. module: delivery_cttexpress
+#: model_terms:ir.ui.view,arch_db:delivery_cttexpress.view_delivery_carrier_form
+msgid "Label format"
+msgstr "Formato de etiqueta"
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields,field_description:delivery_cttexpress.field_cttexpress_manifest_wizard____last_update
+#: model:ir.model.fields,field_description:delivery_cttexpress.field_cttexpress_pickup_wizard____last_update
+msgid "Last Modified on"
+msgstr "Última modificación en"
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields,field_description:delivery_cttexpress.field_cttexpress_manifest_wizard__write_uid
+#: model:ir.model.fields,field_description:delivery_cttexpress.field_cttexpress_pickup_wizard__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields,field_description:delivery_cttexpress.field_cttexpress_manifest_wizard__write_date
+#: model:ir.model.fields,field_description:delivery_cttexpress.field_cttexpress_pickup_wizard__write_date
+msgid "Last Updated on"
+msgstr "Última actualización el"
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields,help:delivery_cttexpress.field_cttexpress_manifest_wizard__carrier_ids
+msgid "Leave empty to gather all the CTT account manifests"
+msgstr "Dejar vacío para obtener los manifiestos de todas las cuentas de CTT"
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields,field_description:delivery_cttexpress.field_cttexpress_manifest_wizard__attachment_ids
+msgid "Manifests"
+msgstr "Manifiestos"
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields,field_description:delivery_cttexpress.field_cttexpress_pickup_wizard__max_hour
+msgid "Max Hour"
+msgstr "Hora máxima"
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields,field_description:delivery_cttexpress.field_cttexpress_pickup_wizard__min_hour
+msgid "Min Hour"
+msgstr "Hora mínima"
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields.selection,name:delivery_cttexpress.selection__delivery_carrier__cttexpress_document_model_code__multi1
+msgid "Multi 1"
+msgstr ""
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields.selection,name:delivery_cttexpress.selection__delivery_carrier__cttexpress_document_model_code__multi3
+msgid "Multi 3"
+msgstr ""
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields.selection,name:delivery_cttexpress.selection__delivery_carrier__cttexpress_document_model_code__multi4
+msgid "Multi 4"
+msgstr ""
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields.selection,name:delivery_cttexpress.selection__delivery_carrier__cttexpress_shipping_type__13o
+msgid "OPTICA"
+msgstr ""
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields.selection,name:delivery_cttexpress.selection__cttexpress_manifest_wizard__document_type__pdf
+#: model:ir.model.fields.selection,name:delivery_cttexpress.selection__delivery_carrier__cttexpress_document_format__pdf
+msgid "PDF"
+msgstr ""
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields.selection,name:delivery_cttexpress.selection__delivery_carrier__cttexpress_document_format__png
+msgid "PNG"
+msgstr ""
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields.selection,name:delivery_cttexpress.selection__delivery_carrier__cttexpress_shipping_type__63p
+msgid "PUNTOS CERCANÍA"
+msgstr ""
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields,field_description:delivery_cttexpress.field_delivery_carrier__cttexpress_password
+msgid "Password"
+msgstr "Contraseña"
+
+#. module: delivery_cttexpress
+#: model_terms:ir.ui.view,arch_db:delivery_cttexpress.delivery_pickup_wizard_form
+#: model_terms:ir.ui.view,arch_db:delivery_cttexpress.view_delivery_carrier_form
+msgid "Pickup request"
+msgstr "Solicitud de recogida"
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields,field_description:delivery_cttexpress.field_delivery_carrier__delivery_type
+msgid "Provider"
+msgstr "Proveedor"
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields.selection,name:delivery_cttexpress.selection__delivery_carrier__cttexpress_shipping_type__63e
+msgid "RECOGERAN E-COMMERCE CANARIAS"
+msgstr ""
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields.selection,name:delivery_cttexpress.selection__delivery_carrier__cttexpress_shipping_type__63r
+msgid "RECOGERAN EN AGENCIA"
+msgstr ""
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields.selection,name:delivery_cttexpress.selection__delivery_carrier__cttexpress_shipping_type__81r
+msgid "RECOGIDA TERRESTRE ECONOMY"
+msgstr ""
+
+#. module: delivery_cttexpress
+#: model_terms:ir.ui.view,arch_db:delivery_cttexpress.view_delivery_carrier_form
+msgid "Shipping"
+msgstr "Envío"
+
+#. module: delivery_cttexpress
+#: model:ir.model,name:delivery_cttexpress.model_delivery_carrier
+msgid "Shipping Methods"
+msgstr ""
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields,field_description:delivery_cttexpress.field_delivery_carrier__cttexpress_shipping_type
+msgid "Shipping type"
+msgstr "Tipo de envío"
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields.selection,name:delivery_cttexpress.selection__delivery_carrier__cttexpress_document_model_code__single
+msgid "Single"
+msgstr ""
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields,field_description:delivery_cttexpress.field_cttexpress_manifest_wizard__state
+#: model:ir.model.fields,field_description:delivery_cttexpress.field_cttexpress_pickup_wizard__state
+msgid "State"
+msgstr "Estado"
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields.selection,name:delivery_cttexpress.selection__delivery_carrier__cttexpress_shipping_type__93t
+msgid "TERRESTE E-COMMERCE"
+msgstr ""
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields.selection,name:delivery_cttexpress.selection__delivery_carrier__cttexpress_shipping_type__81i
+#: model:ir.model.fields.selection,name:delivery_cttexpress.selection__delivery_carrier__cttexpress_shipping_type__81t
+msgid "TERRESTRE ECONOMY"
+msgstr ""
+
+#. module: delivery_cttexpress
+#: model_terms:ir.ui.view,arch_db:delivery_cttexpress.view_delivery_carrier_form
+msgid "Test connection"
+msgstr "Comprobar conexión"
+
+#. module: delivery_cttexpress
+#: code:addons/delivery_cttexpress/models/delivery_carrier.py:0
+#, python-format
+msgid ""
+"This CTT Express service (%s) isn't allowed for this account configuration. Please choose one of the followings\n"
+"%s"
+msgstr ""
+"Este servicio de CTT Express (%s) no está permitido para esta configuración de cuenta. Por favor, escoja uno de los siguientes\n"
+"%s"
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields,field_description:delivery_cttexpress.field_cttexpress_manifest_wizard__to_date
+msgid "To Date"
+msgstr "Hasta la Fecha"
+
+#. module: delivery_cttexpress
+#: model:ir.model,name:delivery_cttexpress.model_stock_picking
+msgid "Transfer"
+msgstr "Albarán"
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields,field_description:delivery_cttexpress.field_delivery_carrier__cttexpress_user
+msgid "User"
+msgstr "Usuario"
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields.selection,name:delivery_cttexpress.selection__delivery_carrier__cttexpress_shipping_type__04v
+msgid "VALIJA BITOQUE 3 DÍAS"
+msgstr ""
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields.selection,name:delivery_cttexpress.selection__delivery_carrier__cttexpress_shipping_type__02v
+msgid "VALIJA BITOQUE DIARIA"
+msgstr ""
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields.selection,name:delivery_cttexpress.selection__delivery_carrier__cttexpress_shipping_type__03v
+msgid "VALIJA UNITOQUE 3 DIAS"
+msgstr ""
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields.selection,name:delivery_cttexpress.selection__delivery_carrier__cttexpress_shipping_type__01v
+msgid "VALIJA UNITOQUE DIARIA"
+msgstr ""
+
+#. module: delivery_cttexpress
+#: model_terms:ir.ui.view,arch_db:delivery_cttexpress.delivery_pickup_wizard_form
+msgid "Your pickup request code:"
+msgstr "Su código de recogida:"
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields.selection,name:delivery_cttexpress.selection__cttexpress_manifest_wizard__state__done
+#: model:ir.model.fields.selection,name:delivery_cttexpress.selection__cttexpress_pickup_wizard__state__done
+msgid "done"
+msgstr ""
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields.selection,name:delivery_cttexpress.selection__cttexpress_manifest_wizard__state__new
+#: model:ir.model.fields.selection,name:delivery_cttexpress.selection__cttexpress_pickup_wizard__state__new
+msgid "new"
+msgstr ""
