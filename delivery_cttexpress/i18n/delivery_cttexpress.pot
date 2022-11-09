@@ -4,8 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 14.0\n"
+"Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-11-09 09:51+0000\n"
+"PO-Revision-Date: 2022-11-09 09:51+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -191,8 +193,6 @@ msgstr ""
 #. module: delivery_cttexpress
 #: model:ir.model.fields,field_description:delivery_cttexpress.field_cttexpress_manifest_wizard__display_name
 #: model:ir.model.fields,field_description:delivery_cttexpress.field_cttexpress_pickup_wizard__display_name
-#: model:ir.model.fields,field_description:delivery_cttexpress.field_delivery_carrier__display_name
-#: model:ir.model.fields,field_description:delivery_cttexpress.field_stock_picking__display_name
 msgid "Display Name"
 msgstr ""
 
@@ -270,8 +270,6 @@ msgstr ""
 #. module: delivery_cttexpress
 #: model:ir.model.fields,field_description:delivery_cttexpress.field_cttexpress_manifest_wizard__id
 #: model:ir.model.fields,field_description:delivery_cttexpress.field_cttexpress_pickup_wizard__id
-#: model:ir.model.fields,field_description:delivery_cttexpress.field_delivery_carrier__id
-#: model:ir.model.fields,field_description:delivery_cttexpress.field_stock_picking__id
 msgid "ID"
 msgstr ""
 
@@ -283,8 +281,6 @@ msgstr ""
 #. module: delivery_cttexpress
 #: model:ir.model.fields,field_description:delivery_cttexpress.field_cttexpress_manifest_wizard____last_update
 #: model:ir.model.fields,field_description:delivery_cttexpress.field_cttexpress_pickup_wizard____last_update
-#: model:ir.model.fields,field_description:delivery_cttexpress.field_delivery_carrier____last_update
-#: model:ir.model.fields,field_description:delivery_cttexpress.field_stock_picking____last_update
 msgid "Last Modified on"
 msgstr ""
 
@@ -433,8 +429,8 @@ msgstr ""
 #: code:addons/delivery_cttexpress/models/delivery_carrier.py:0
 #, python-format
 msgid ""
-"This CTT Express service (%s) isn't allowed for this account configuration. Please choose one of the followings\n"
-"%s"
+"This CTT Express service (%(service_name)s) isn't allowed for this account configuration. Please choose one of the followings\n"
+"%(type_descriptions)s"
 msgstr ""
 
 #. module: delivery_cttexpress

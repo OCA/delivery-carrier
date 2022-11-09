@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 13.0\n"
+"Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-08 10:02+0000\n"
-"PO-Revision-Date: 2022-11-08 11:04+0100\n"
+"POT-Creation-Date: 2022-11-09 09:48+0000\n"
+"PO-Revision-Date: 2022-11-09 10:53+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -396,7 +396,7 @@ msgstr "Envío"
 #. module: delivery_cttexpress
 #: model:ir.model,name:delivery_cttexpress.model_delivery_carrier
 msgid "Shipping Methods"
-msgstr ""
+msgstr "Métodos de envío"
 
 #. module: delivery_cttexpress
 #: model:ir.model.fields,field_description:delivery_cttexpress.field_delivery_carrier__cttexpress_shipping_type
@@ -434,11 +434,11 @@ msgstr "Comprobar conexión"
 #: code:addons/delivery_cttexpress/models/delivery_carrier.py:0
 #, python-format
 msgid ""
-"This CTT Express service (%s) isn't allowed for this account configuration. Please choose one of the followings\n"
-"%s"
+"This CTT Express service (%(service_name)s) isn't allowed for this account configuration. Please choose one of the followings\n"
+"%(type_descriptions)s"
 msgstr ""
-"Este servicio de CTT Express (%s) no está permitido para esta configuración de cuenta. Por favor, escoja uno de los siguientes\n"
-"%s"
+"Este servicio de CTT Express (%(service_name)s) no está permitido para esta configuración de cuenta. Por favor, escoja uno de los siguientes\n"
+"%(type_descriptions)s"
 
 #. module: delivery_cttexpress
 #: model:ir.model.fields,field_description:delivery_cttexpress.field_cttexpress_manifest_wizard__to_date

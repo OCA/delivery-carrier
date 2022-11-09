@@ -127,9 +127,10 @@ class DeliveryCarrier(models.Model):
             )[self.cttexpress_shipping_type]
             raise UserError(
                 _(
-                    "This CTT Express service (%s) isn't allowed for this account "
-                    "configuration. Please choose one of the followings\n%s"
-                    % (service_name, type_descriptions)
+                    "This CTT Express service (%(service_name)s) isn't allowed for "
+                    "this account configuration. Please choose one of the followings\n"
+                    "%(type_descriptions)s",
+                    (service_name, type_descriptions),
                 )
             )
 
