@@ -39,7 +39,9 @@ class TestStockPikingReturnRefundOption(TransactionCase):
             }
         )
         cls.report_model = cls.env["ir.actions.report"]
-        cls.product = cls.env["product.product"].create({"name": "Test product"})
+        cls.product = cls.env["product.product"].create(
+            {"name": "Test product", "type": "product"}
+        )
         cls.order = cls._create_sale_order(cls)
         cls.order.action_confirm()
         cls.picking = cls.order.picking_ids[0]
@@ -49,6 +51,7 @@ class TestStockPikingReturnRefundOption(TransactionCase):
         order_form.partner_id = self.partner
         with order_form.order_line.new() as line_form:
             line_form.product_id = self.product
+            line_form.product_uom_qty = 1.0
         return order_form.save()
 
     def test_partner_schedule_name(self):
