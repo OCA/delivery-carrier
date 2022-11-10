@@ -23,12 +23,10 @@ msgid "Delivery Price Rules"
 msgstr "Reglas Entrega Precio"
 
 #. module: delivery_price_rule_volumetric_weight
-#: code:addons/delivery_price_rule_volumetric_weight/models/delivery_carrier.py:0
-#, python-format
-msgid "No price rule matching this order; delivery cost cannot be computed."
+#: model:ir.model.fields.selection,name:delivery_price_rule_volumetric_weight.selection__delivery_price_rule__variable__highest_weight
+#: model:ir.model.fields.selection,name:delivery_price_rule_volumetric_weight.selection__delivery_price_rule__variable_factor__highest_weight
+msgid "Highest weight"
 msgstr ""
-"Ninguna regla concordante con este pedido; los costes de envío no pueden ser "
-"calculados."
 
 #. module: delivery_price_rule_volumetric_weight
 #: model:ir.model,name:delivery_price_rule_volumetric_weight.model_delivery_carrier
@@ -50,3 +48,9 @@ msgstr "Factor variable"
 #: model:ir.model.fields.selection,name:delivery_price_rule_volumetric_weight.selection__delivery_price_rule__variable_factor__volumetric_weight
 msgid "Volumetric weight"
 msgstr "Peso volumétrico"
+
+#, python-format
+#~ msgid "No price rule matching this order; delivery cost cannot be computed."
+#~ msgstr ""
+#~ "Ninguna regla concordante con este pedido; los costes de envío no pueden "
+#~ "ser calculados."
