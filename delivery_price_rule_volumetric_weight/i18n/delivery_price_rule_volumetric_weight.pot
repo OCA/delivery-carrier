@@ -19,6 +19,12 @@ msgid "Delivery Price Rules"
 msgstr ""
 
 #. module: delivery_price_rule_volumetric_weight
+#: model:ir.model.fields.selection,name:delivery_price_rule_volumetric_weight.selection__delivery_price_rule__variable__highest_weight
+#: model:ir.model.fields.selection,name:delivery_price_rule_volumetric_weight.selection__delivery_price_rule__variable_factor__highest_weight
+msgid "Highest weight"
+msgstr ""
+
+#. module: delivery_price_rule_volumetric_weight
 #: model:ir.model,name:delivery_price_rule_volumetric_weight.model_delivery_carrier
 msgid "Shipping Methods"
 msgstr ""
