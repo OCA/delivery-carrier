@@ -1,0 +1,1144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- pylint: disable=wrong-tabs-instead-of-spaces -->
+<definitions
+    xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:wsp="http://www.w3.org/ns/ws-policy"
+    xmlns:tns="http://webservices.sending.alerce.es/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata"
+    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+    targetNamespace="http://webservices.sending.alerce.es/"
+    name="WS_clientes"
+>
+  <types>
+    <xsd:schema>
+      <xsd:import
+                namespace="http://webservices.sending.alerce.es/"
+                schemaLocation="https://wssending.alertran.net:443/sending/ws_clientes?xsd=1"
+            />
+    </xsd:schema>
+  </types>
+  <message name="expediciones_documentadas_fecha">
+    <part name="parameters" element="tns:expediciones_documentadas_fecha" />
+  </message>
+  <message name="expediciones_documentadas_fechaResponse">
+    <part name="parameters" element="tns:expediciones_documentadas_fechaResponse" />
+  </message>
+  <message name="consignatariosPudoCodigoPostal">
+    <part name="parameters" element="tns:consignatariosPudoCodigoPostal" />
+  </message>
+  <message name="consignatariosPudoCodigoPostalResponse">
+    <part name="parameters" element="tns:consignatariosPudoCodigoPostalResponse" />
+  </message>
+  <message name="estado_expedicion">
+    <part name="parameters" element="tns:estado_expedicion" />
+  </message>
+  <message name="estado_expedicionResponse">
+    <part name="parameters" element="tns:estado_expedicionResponse" />
+  </message>
+  <message name="incidencias_expediciones">
+    <part name="parameters" element="tns:incidencias_expediciones" />
+  </message>
+  <message name="incidencias_expedicionesResponse">
+    <part name="parameters" element="tns:incidencias_expedicionesResponse" />
+  </message>
+  <message name="incidencias_expedicion">
+    <part name="parameters" element="tns:incidencias_expedicion" />
+  </message>
+  <message name="incidencias_expedicionResponse">
+    <part name="parameters" element="tns:incidencias_expedicionResponse" />
+  </message>
+  <message name="entrada_expediciones">
+    <part name="parameters" element="tns:entrada_expediciones" />
+  </message>
+  <message name="entrada_expedicionesResponse">
+    <part name="parameters" element="tns:entrada_expedicionesResponse" />
+  </message>
+  <message name="etiquetarExpedicionZPL">
+    <part name="parameters" element="tns:etiquetarExpedicionZPL" />
+  </message>
+  <message name="etiquetarExpedicionZPLResponse">
+    <part name="parameters" element="tns:etiquetarExpedicionZPLResponse" />
+  </message>
+  <message name="etiquetarDevolucionZPL">
+    <part name="parameters" element="tns:etiquetarDevolucionZPL" />
+  </message>
+  <message name="etiquetarDevolucionZPLResponse">
+    <part name="parameters" element="tns:etiquetarDevolucionZPLResponse" />
+  </message>
+  <message name="etiquetarExpedicionPDF">
+    <part name="parameters" element="tns:etiquetarExpedicionPDF" />
+  </message>
+  <message name="etiquetarExpedicionPDFResponse">
+    <part name="parameters" element="tns:etiquetarExpedicionPDFResponse" />
+  </message>
+  <message name="etiquetarExpedicionesPDF">
+    <part name="parameters" element="tns:etiquetarExpedicionesPDF" />
+ </message>
+ <message name="etiquetarExpedicionesPDFResponse">
+    <part name="parameters" element="tns:etiquetarExpedicionesPDFResponse" />
+ </message>
+ <message name="etiquetarExpedicionDevoPDF">
+    <part name="parameters" element="tns:etiquetarExpedicionDevoPDF" />
+  </message>
+  <message name="etiquetarExpedicionDevoPDFResponse">
+    <part name="parameters" element="tns:etiquetarExpedicionDevoPDFResponse" />
+  </message>
+  <message name="etiquetarRecogidaPDF">
+    <part name="parameters" element="tns:etiquetarRecogidaPDF" />
+  </message>
+  <message name="etiquetarRecogidaPDFResponse">
+    <part name="parameters" element="tns:etiquetarRecogidaPDFResponse" />
+  </message>
+  <message name="cancelarExpedicion">
+    <part name="parameters" element="tns:cancelarExpedicion" />
+  </message>
+  <message name="cancelarExpedicionResponse">
+    <part name="parameters" element="tns:cancelarExpedicionResponse" />
+  </message>
+  <message name="entradaRecogidas">
+    <part name="parameters" element="tns:entradaRecogidas" />
+  </message>
+  <message name="entradaRecogidasResponse">
+    <part name="parameters" element="tns:entradaRecogidasResponse" />
+  </message>
+  <message name="entradaRecogidasAgrupadas">
+    <part name="parameters" element="tns:entradaRecogidasAgrupadas" />
+  </message>
+  <message name="entradaRecogidasAgrupadasResponse">
+    <part name="parameters" element="tns:entradaRecogidasAgrupadasResponse" />
+  </message>
+  <message name="expedicionesEntregadas">
+    <part name="parameters" element="tns:expedicionesEntregadas" />
+  </message>
+  <message name="expedicionesEntregadasResponse">
+    <part name="parameters" element="tns:expedicionesEntregadasResponse" />
+  </message>
+  <message name="expedicionesEntregadasBulto">
+    <part name="parameters" element="tns:expedicionesEntregadasBulto" />
+  </message>
+  <message name="expedicionesEntregadasBultoResponse">
+    <part name="parameters" element="tns:expedicionesEntregadasBultoResponse" />
+  </message>
+  <message name="incidenciasPendientes">
+    <part name="parameters" element="tns:incidenciasPendientes" />
+  </message>
+  <message name="incidenciasPendientesResponse">
+    <part name="parameters" element="tns:incidenciasPendientesResponse" />
+  </message>
+  <message name="modificarCampoExpedicion">
+    <part name="parameters" element="tns:modificarCampoExpedicion" />
+  </message>
+  <message name="modificarCampoExpedicionResponse">
+    <part name="parameters" element="tns:modificarCampoExpedicionResponse" />
+  </message>
+  <message name="codigoPostal">
+    <part name="parameters" element="tns:codigoPostal" />
+  </message>
+  <message name="codigoPostalResponse">
+    <part name="parameters" element="tns:codigoPostalResponse" />
+  </message>
+  <message name="entrada_expediciones_agrupadas">
+    <part name="parameters" element="tns:entrada_expediciones_agrupadas" />
+  </message>
+  <message name="entrada_expediciones_agrupadasResponse">
+    <part name="parameters" element="tns:entrada_expediciones_agrupadasResponse" />
+  </message>
+  <message name="entradaReferencias">
+    <part name="parameters" element="tns:entradaReferencias" />
+  </message>
+  <message name="entradaReferenciasResponse">
+    <part name="parameters" element="tns:entradaReferenciasResponse" />
+  </message>
+    <message name="entradaReferenciasMultiples">
+    <part name="parameters" element="tns:entradaReferenciasMultiples" />
+  </message>
+  <message name="entradaReferenciasMultiplesResponse">
+    <part name="parameters" element="tns:entradaReferenciasMultiplesResponse" />
+  </message>
+    <message name="referenciasExpedicion">
+    <part name="parameters" element="tns:referenciasExpedicion" />
+  </message>
+  <message name="referenciasExpedicionResponse">
+    <part name="parameters" element="tns:referenciasExpedicionResponse" />
+  </message>
+  <message name="estadoRecogida">
+    <part name="parameters" element="tns:estadoRecogida" />
+  </message>
+  <message name="estadoRecogidaResponse">
+    <part name="parameters" element="tns:estadoRecogidaResponse" />
+  </message>
+  <message name="recogidasFecha">
+    <part name="parameters" element="tns:recogidasFecha" />
+  </message>
+  <message name="recogidasFechaResponse">
+    <part name="parameters" element="tns:recogidasFechaResponse" />
+  </message>
+  <message name="valijasCliente">
+    <part name="parameters" element="tns:valijasCliente" />
+  </message>
+  <message name="valijasClienteResponse">
+    <part name="parameters" element="tns:valijasClienteResponse" />
+  </message>
+  <message name="etiquetarBultoZPL">
+    <part name="parameters" element="tns:etiquetarBultoZPL" />
+  </message>
+  <message name="etiquetarBultoZPLResponse">
+    <part name="parameters" element="tns:etiquetarBultoZPLResponse" />
+  </message>
+  <message name="etiquetarBultoEspecialZPL">
+    <part name="parameters" element="tns:etiquetarBultoEspecialZPL" />
+  </message>
+  <message name="etiquetarBultoEspecialZPLResponse">
+    <part name="parameters" element="tns:etiquetarBultoEspecialZPLResponse" />
+  </message>
+  <message name="edicion_expediciones">
+    <part name="parameters" element="tns:edicion_expediciones" />
+  </message>
+  <message name="edicion_expedicionesResponse">
+    <part name="parameters" element="tns:edicion_expedicionesResponse" />
+  </message>
+  <message name="entradaExpedicionesAlereti">
+    <part name="parameters" element="tns:entradaExpedicionesAlereti" />
+  </message>
+  <message name="entradaExpedicionesAleretiResponse">
+    <part name="parameters" element="tns:entradaExpedicionesAleretiResponse" />
+  </message>
+  <message name="entrada_expedicionesB64">
+    <part name="parameters" element="tns:entrada_expedicionesB64" />
+  </message>
+  <message name="entrada_expedicionesB64Response">
+    <part name="parameters" element="tns:entrada_expedicionesB64Response" />
+  </message>
+  <message name="estadoRecogidas">
+    <part name="parameters" element="tns:estadoRecogidas" />
+  </message>
+   <message name="estadoRecogidasResponse">
+    <part name="parameters" element="tns:estadoRecogidasResponse" />
+  </message>
+  <message name="confirmarExpediciones">
+    <part name="parameters" element="tns:confirmarExpediciones" />
+  </message>
+   <message name="confirmarExpedicionesResponse">
+    <part name="parameters" element="tns:confirmarExpedicionesResponse" />
+  </message>
+  <message name="datosBultos">
+    <part name="parameters" element="tns:datosBultos" />
+  </message>
+   <message name="datosBultosResponse">
+    <part name="parameters" element="tns:datosBultosResponse" />
+  </message>
+  <message name="cancelarRecogida">
+    <part name="parameters" element="tns:cancelarRecogida" />
+  </message>
+  <message name="cancelarRecogidaResponse">
+    <part name="parameters" element="tns:cancelarRecogidaResponse" />
+  </message>
+    <message name="devolucionPudo">
+    <part name="parameters" element="tns:devolucionPudo" />
+  </message>
+  <message name="devolucionPudoResponse">
+    <part name="parameters" element="tns:devolucionPudoResponse" />
+  </message>
+    <message name="cancelarBulto">
+    <part name="parameters" element="tns:cancelarBulto" />
+  </message>
+  <message name="cancelarBultoResponse">
+    <part name="parameters" element="tns:cancelarBultoResponse" />
+  </message>
+  <message name="entradaExpedicionesLectura">
+    <part name="parameters" element="tns:entradaExpedicionesLectura" />
+  </message>
+  <message name="entradaExpedicionesLecturaResponse">
+    <part name="parameters" element="tns:entradaExpedicionesLecturaResponse" />
+  </message>
+  <message name="entrada_expediciones_agrupadas_proceso">
+    <part name="parameters" element="tns:entrada_expediciones_agrupadas_proceso" />
+  </message>
+  <message name="entrada_expediciones_agrupadas_procesoResponse">
+    <part
+            name="parameters"
+            element="tns:entrada_expediciones_agrupadas_procesoResponse"
+        />
+  </message>
+  <message name="entrada_expediciones_proceso">
+    <part name="parameters" element="tns:entrada_expediciones_proceso" />
+  </message>
+  <message name="entrada_expediciones_procesoResponse">
+    <part name="parameters" element="tns:entrada_expediciones_procesoResponse" />
+  </message>
+   <message name="etiquetaPDF">
+    <part name="parameters" element="tns:etiquetaPDF" />
+  </message>
+  <message name="etiquetaPDFResponse">
+    <part name="parameters" element="tns:etiquetaPDFResponse" />
+  </message>
+     <message name="adjuntarDocumentacion">
+    <part name="parameters" element="tns:adjuntarDocumentacion" />
+  </message>
+  <message name="adjuntarDocumentacionResponse">
+    <part name="parameters" element="tns:adjuntarDocumentacionResponse" />
+  </message>
+  <message name="etiquetarBultoPDF">
+    <part name="parameters" element="tns:etiquetarBultoPDF" />
+  </message>
+  <message name="etiquetarBultoPDFResponse">
+    <part name="parameters" element="tns:etiquetarBultoPDFResponse" />
+  </message>
+
+  <portType name="WS_clientes">
+    <operation name="expediciones_documentadas_fecha">
+      <input
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/expediciones_documentadas_fechaRequest"
+                message="tns:expediciones_documentadas_fecha"
+            />
+      <output
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/expediciones_documentadas_fechaResponse"
+                message="tns:expediciones_documentadas_fechaResponse"
+            />
+    </operation>
+    <operation name="consignatariosPudoCodigoPostal">
+      <input
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/consignatariosPudoCodigoPostalRequest"
+                message="tns:consignatariosPudoCodigoPostal"
+            />
+      <output
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/consignatariosPudoCodigoPostalResponse"
+                message="tns:consignatariosPudoCodigoPostalResponse"
+            />
+    </operation>
+    <operation name="estado_expedicion">
+      <input
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/estado_expedicionRequest"
+                message="tns:estado_expedicion"
+            />
+      <output
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/estado_expedicionResponse"
+                message="tns:estado_expedicionResponse"
+            />
+    </operation>
+    <operation name="incidencias_expediciones">
+      <input
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/incidencias_expedicionesRequest"
+                message="tns:incidencias_expediciones"
+            />
+      <output
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/incidencias_expedicionesResponse"
+                message="tns:incidencias_expedicionesResponse"
+            />
+    </operation>
+    <operation name="incidencias_expedicion">
+      <input
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/incidencias_expedicionRequest"
+                message="tns:incidencias_expedicion"
+            />
+      <output
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/incidencias_expedicionResponse"
+                message="tns:incidencias_expedicionResponse"
+            />
+    </operation>
+    <operation name="entrada_expediciones">
+      <input
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/entrada_expedicionesRequest"
+                message="tns:entrada_expediciones"
+            />
+      <output
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/entrada_expedicionesResponse"
+                message="tns:entrada_expedicionesResponse"
+            />
+    </operation>
+    <operation name="etiquetarExpedicionZPL">
+      <input
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/etiquetarExpedicionZPLRequest"
+                message="tns:etiquetarExpedicionZPL"
+            />
+      <output
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/etiquetarExpedicionZPLResponse"
+                message="tns:etiquetarExpedicionZPLResponse"
+            />
+    </operation>
+    <operation name="etiquetarDevolucionZPL">
+      <input
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/etiquetarDevolucionZPLRequest"
+                message="tns:etiquetarDevolucionZPL"
+            />
+      <output
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/etiquetarDevolucionZPLResponse"
+                message="tns:etiquetarDevolucionZPLResponse"
+            />
+    </operation>
+    <operation name="etiquetarExpedicionPDF">
+      <input
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/etiquetarExpedicionPDFRequest"
+                message="tns:etiquetarExpedicionPDF"
+            />
+      <output
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/etiquetarExpedicionPDFResponse"
+                message="tns:etiquetarExpedicionPDFResponse"
+            />
+    </operation>
+        <operation name="etiquetarExpedicionesPDF">
+      <input
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/etiquetarExpedicionesPDFRequest"
+                message="tns:etiquetarExpedicionesPDF"
+            />
+      <output
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/etiquetarExpedicionesPDFResponse"
+                message="tns:etiquetarExpedicionesPDFResponse"
+            />
+    </operation>
+    <operation name="etiquetarExpedicionDevoPDF">
+      <input
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/etiquetarExpedicionDevoPDFRequest"
+                message="tns:etiquetarExpedicionDevoPDF"
+            />
+      <output
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/etiquetarExpedicionDevoPDFResponse"
+                message="tns:etiquetarExpedicionDevoPDFResponse"
+            />
+    </operation>
+    <operation name="etiquetarRecogidaPDF">
+      <input
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/etiquetarRecogidaPDFRequest"
+                message="tns:etiquetarRecogidaPDF"
+            />
+      <output
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/etiquetarRecogidaPDFResponse"
+                message="tns:etiquetarRecogidaPDFResponse"
+            />
+    </operation>
+    <operation name="cancelarExpedicion">
+      <input
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/cancelarExpedicionRequest"
+                message="tns:cancelarExpedicion"
+            />
+      <output
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/cancelarExpedicionResponse"
+                message="tns:cancelarExpedicionResponse"
+            />
+    </operation>
+    <operation name="entradaRecogidas">
+      <input
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/entradaRecogidasRequest"
+                message="tns:entradaRecogidas"
+            />
+      <output
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/entradaRecogidasResponse"
+                message="tns:entradaRecogidasResponse"
+            />
+    </operation>
+    <operation name="entradaRecogidasAgrupadas">
+      <input
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/entradaRecogidasAgrupadasRequest"
+                message="tns:entradaRecogidasAgrupadas"
+            />
+      <output
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/entradaRecogidasAgrupadasResponse"
+                message="tns:entradaRecogidasAgrupadasResponse"
+            />
+    </operation>
+    <operation name="expedicionesEntregadas">
+      <input
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/expedicionesEntregadasRequest"
+                message="tns:expedicionesEntregadas"
+            />
+      <output
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/expedicionesEntregadasResponse"
+                message="tns:expedicionesEntregadasResponse"
+            />
+    </operation>
+    <operation name="expedicionesEntregadasBulto">
+      <input
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/expedicionesEntregadasBultoRequest"
+                message="tns:expedicionesEntregadasBulto"
+            />
+      <output
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/expedicionesEntregadasBultoResponse"
+                message="tns:expedicionesEntregadasBultoResponse"
+            />
+    </operation>
+    <operation name="incidenciasPendientes">
+      <input
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/incidenciasPendientesRequest"
+                message="tns:incidenciasPendientes"
+            />
+      <output
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/incidenciasPendientesResponse"
+                message="tns:incidenciasPendientesResponse"
+            />
+    </operation>
+    <operation name="modificarCampoExpedicion">
+      <input
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/modificarCampoExpedicionRequest"
+                message="tns:modificarCampoExpedicion"
+            />
+      <output
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/modificarCampoExpedicionResponse"
+                message="tns:modificarCampoExpedicionResponse"
+            />
+    </operation>
+    <operation name="codigoPostal">
+      <input
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/codigoPostalRequest"
+                message="tns:codigoPostal"
+            />
+      <output
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/codigoPostalResponse"
+                message="tns:codigoPostalResponse"
+            />
+    </operation>
+    <operation name="entrada_expediciones_agrupadas">
+      <input
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/entrada_expediciones_agrupadasRequest"
+                message="tns:entrada_expediciones_agrupadas"
+            />
+      <output
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/entrada_expediciones_agrupadasResponse"
+                message="tns:entrada_expediciones_agrupadasResponse"
+            />
+    </operation>
+    <operation name="entradaReferencias">
+      <input
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/entradaReferenciasRequest"
+                message="tns:entradaReferencias"
+            />
+      <output
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/entradaReferenciasResponse"
+                message="tns:entradaReferenciasResponse"
+            />
+    </operation>
+    <operation name="entradaReferenciasMultiples">
+      <input
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/entradaReferenciasMultiplesRequest"
+                message="tns:entradaReferenciasMultiples"
+            />
+      <output
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/entradaReferenciasMultiplesResponse"
+                message="tns:entradaReferenciasMultiplesResponse"
+            />
+    </operation>
+    <operation name="referenciasExpedicion">
+      <input
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/referenciasExpedicionRequest"
+                message="tns:referenciasExpedicion"
+            />
+      <output
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/referenciasExpedicionResponse"
+                message="tns:referenciasExpedicionResponse"
+            />
+    </operation>
+    <operation name="estadoRecogida">
+      <input
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/estadoRecogidaRequest"
+                message="tns:estadoRecogida"
+            />
+      <output
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/estadoRecogidaResponse"
+                message="tns:estadoRecogidaResponse"
+            />
+    </operation>
+    <operation name="recogidasFecha">
+      <input
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/recogidasFechaRequest"
+                message="tns:recogidasFecha"
+            />
+      <output
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/recogidasFechaResponse"
+                message="tns:recogidasFechaResponse"
+            />
+    </operation>
+    <operation name="valijasCliente">
+      <input
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/valijasClienteRequest"
+                message="tns:valijasCliente"
+            />
+      <output
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/valijasClienteResponse"
+                message="tns:valijasClienteResponse"
+            />
+    </operation>
+    <operation name="etiquetarBultoZPL">
+      <input
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/etiquetarBultoZPLRequest"
+                message="tns:etiquetarBultoZPL"
+            />
+      <output
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/etiquetarbultoZPLResponse"
+                message="tns:etiquetarBultoZPLResponse"
+            />
+    </operation>
+	<operation name="etiquetarBultoEspecialZPL">
+      <input
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/etiquetarBultoEspecialZPLRequest"
+                message="tns:etiquetarBultoEspecialZPL"
+            />
+      <output
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/etiquetarBultoEspecialZPLResponse"
+                message="tns:etiquetarBultoEspecialZPLResponse"
+            />
+    </operation>
+    <operation name="edicion_expediciones">
+      <input
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/edicion_expedicionesRequest"
+                message="tns:edicion_expediciones"
+            />
+      <output
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/edicion_expedicionesResponse"
+                message="tns:edicion_expedicionesResponse"
+            />
+    </operation>
+    <operation name="entradaExpedicionesAlereti">
+      <input
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/entradaExpedicionesAleretiRequest"
+                message="tns:entradaExpedicionesAlereti"
+            />
+      <output
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/entradaExpedicionesAleretiResponse"
+                message="tns:entradaExpedicionesAleretiResponse"
+            />
+    </operation>
+    <operation name="entrada_expedicionesB64">
+      <input
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/entrada_expedicionesB64Request"
+                message="tns:entrada_expedicionesB64"
+            />
+      <output
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/entrada_expedicionesB64Response"
+                message="tns:entrada_expedicionesB64Response"
+            />
+    </operation>
+    <operation name="estadoRecogidas">
+      <input
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/estadoRecogidasRequest"
+                message="tns:estadoRecogidas"
+            />
+      <output
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/estadoRecogidasResponse"
+                message="tns:estadoRecogidasResponse"
+            />
+    </operation>
+    <operation name="confirmarExpediciones">
+      <input
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/confirmarExpedicionesRequest"
+                message="tns:confirmarExpediciones"
+            />
+      <output
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/confirmarExpedicionesResponse"
+                message="tns:confirmarExpedicionesResponse"
+            />
+    </operation>
+    <operation name="datosBultos">
+      <input
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/datosBultosRequest"
+                message="tns:datosBultos"
+            />
+      <output
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/datosBultosResponse"
+                message="tns:datosBultosResponse"
+            />
+    </operation>
+    <operation name="cancelarRecogida">
+      <input
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/cancelarRecogidaRequest"
+                message="tns:cancelarRecogida"
+            />
+      <output
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/cancelarRecogidaResponse"
+                message="tns:cancelarRecogidaResponse"
+            />
+    </operation>
+        <operation name="devolucionPudo">
+      <input
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/devolucionPudoRequest"
+                message="tns:devolucionPudo"
+            />
+      <output
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/devolucionPudoResponse"
+                message="tns:devolucionPudo"
+            />
+    </operation>
+    <operation name="cancelarBulto">
+      <input
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/cancelarBultoRequest"
+                message="tns:cancelarBulto"
+            />
+      <output
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/cancelarBultoResponse"
+                message="tns:cancelarBultoResponse"
+            />
+    </operation>
+    <operation name="entradaExpedicionesLectura">
+      <input
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/entradaExpedicionesLecturaRequest"
+                message="tns:entradaExpedicionesLectura"
+            />
+      <output
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/entradaExpedicionesLecturaResponse"
+                message="tns:entradaExpedicionesLecturaResponse"
+            />
+    </operation>
+
+    <operation name="entrada_expediciones_agrupadas_proceso">
+      <input
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/entrada_expediciones_agrupadas_procesoRequest"
+                message="tns:entrada_expediciones_agrupadas_proceso"
+            />
+      <output
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/entrada_expediciones_agrupadas_procesoResponse"
+                message="tns:entrada_expediciones_agrupadas_procesoResponse"
+            />
+	</operation>
+    <operation name="entrada_expediciones_proceso">
+      <input
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/entrada_expediciones_procesoRequest"
+                message="tns:entrada_expediciones_proceso"
+            />
+      <output
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/entrada_expediciones_procesoResponse"
+                message="tns:entrada_expediciones_procesoResponse"
+            />
+    </operation>
+    <operation name="etiquetaPDF">
+      <input
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/etiquetaPDFRequest"
+                message="tns:etiquetaPDF"
+            />
+      <output
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/etiquetaPDFResponse"
+                message="tns:etiquetaPDFResponse"
+            />
+    </operation>
+    <operation name="adjuntarDocumentacion">
+      <input
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/adjuntarDocumentacionRequest"
+                message="tns:adjuntarDocumentacion"
+            />
+      <output
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/adjuntarDocumentacionResponse"
+                message="tns:adjuntarDocumentacionResponse"
+            />
+    </operation>
+    <operation name="etiquetarBultoPDF">
+      <input
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/etiquetarBultoPDFRequest"
+                message="tns:etiquetarBultoPDF"
+            />
+      <output
+                wsam:Action="http://webservices.sending.alerce.es/WS_clientes/etiquetarbultoPDFResponse"
+                message="tns:etiquetarBultoPDFResponse"
+            />
+    </operation>
+  </portType>
+  <binding name="WS_clientesPortBinding" type="tns:WS_clientes">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+    <operation name="expediciones_documentadas_fecha">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="consignatariosPudoCodigoPostal">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="estado_expedicion">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="incidencias_expediciones">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="incidencias_expedicion">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="entrada_expediciones">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="etiquetarExpedicionZPL">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="etiquetarDevolucionZPL">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="etiquetarExpedicionPDF">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="etiquetarExpedicionesPDF">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="etiquetarExpedicionDevoPDF">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="etiquetarRecogidaPDF">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="cancelarExpedicion">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="entradaRecogidas">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="entradaRecogidasAgrupadas">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="expedicionesEntregadas">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="expedicionesEntregadasBulto">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="incidenciasPendientes">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="modificarCampoExpedicion">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="codigoPostal">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="entrada_expediciones_agrupadas">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="entradaReferencias">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+        <operation name="entradaReferenciasMultiples">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="referenciasExpedicion">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="estadoRecogida">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="recogidasFecha">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="valijasCliente">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="etiquetarBultoZPL">
+	<soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="etiquetarBultoEspecialZPL">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="edicion_expediciones">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="entrada_expedicionesB64">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="entradaExpedicionesAlereti">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="estadoRecogidas">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="confirmarExpediciones">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="datosBultos">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="cancelarRecogida">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+        <operation name="devolucionPudo">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="cancelarBulto">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="entradaExpedicionesLectura">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+
+    <operation name="entrada_expediciones_agrupadas_proceso">
+	  <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+
+    <operation name="entrada_expediciones_proceso">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+
+     <operation name="etiquetaPDF">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+
+     <operation name="adjuntarDocumentacion">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+
+    <operation name="etiquetarBultoPDF">
+	<soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+
+  </binding>
+  <service name="WS_clientes">
+    <port name="WS_clientesPort" binding="tns:WS_clientesPortBinding">
+      <soap:address location="https://wssending.alertran.net:443/sending/ws_clientes" />
+    </port>
+  </service>
+<script xmlns="" /><script xmlns="" type="text/javascript" /></definitions>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2020 Impulso Diagonal - Javier Colmeiro
+     Copyright 2022 Tecnativa - Víctor Martínez
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_delivery_carrier_form" model="ir.ui.view">
+        <field name="model">delivery.carrier</field>
+        <field name="inherit_id" ref="delivery.view_delivery_carrier_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook/page[1]" position='before'>
+                <page
+                    string="Sending Configuration"
+                    attrs="{'invisible': [('delivery_type', '!=', 'sending')]}"
+                >
+                    <group>
+                        <group string="Connection">
+                            <field
+                                name="sending_access_key"
+                                attrs="{'required': [('delivery_type', '=', 'sending')]}"
+                                password="True"
+                            />
+                            <field name="sending_user" />
+                        </group>
+                        <group string="Misc">
+                            <field name="sending_service" />
+                            <field
+                                name="sending_file_format"
+                                attrs="{'required': [('delivery_type', '=', 'sending')]}"
+                            />
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
