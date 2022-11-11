@@ -13,7 +13,7 @@
     "website": "https://github.com/OCA/delivery-carrier",
     "license": "AGPL-3",
     "category": "Delivery",
-    "version": "14.0.1.0.0",
+    "version": "14.0.1.0.1",
     "depends": ["delivery"],
     "data": [
         "data/ir_cron_data.xml",
