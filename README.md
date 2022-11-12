@@ -22,6 +22,7 @@ Available addons
 addon | version | maintainers | summary
 --- | --- | --- | ---
 [delivery_package_number](delivery_package_number/) | 16.0.1.0.0 |  | Set or compute number of packages for a picking
+[delivery_state](delivery_state/) | 16.0.1.0.0 |  | Provides fields to be able to contemplate the tracking statesand also adds a global fields
 
 [//]: # (end addons)
 
