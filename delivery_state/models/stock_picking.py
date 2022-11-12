@@ -66,14 +66,7 @@ class StockPicking(models.Model):
                 ("delivery_type", "not in", [False, "fixed", "base_one_rule"]),
             ]
         )
-        delivery_types = self.mapped("delivery_type")
-        # Split them by delivery type so we can ignore those without the
-        # proper method.
-        for delivery_type in delivery_types:
-            delivery_type_pickings = pickings.filtered(
-                lambda x: x.delivery_type == delivery_type
-            )
-            delivery_type_pickings.tracking_state_update()
+        pickings.tracking_state_update()
 
     def _send_delivery_state_delivered_email(self):
         for item in self.filtered(
