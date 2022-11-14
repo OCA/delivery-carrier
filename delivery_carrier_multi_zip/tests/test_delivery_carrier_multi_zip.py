@@ -6,7 +6,7 @@ from odoo.tests import common
 from odoo.addons.delivery_carrier_multi_zip.hooks import post_init_hook
 
 
-class TestDeliveryCarrierMultiZip(common.SavepointCase):
+class TestDeliveryCarrierMultiZip(common.TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
