@@ -64,8 +64,8 @@ class DeliveryCarrierZip(models.Model):
     carrier_id = fields.Many2one(
         comodel_name="delivery.carrier", ondelete="cascade", index=True
     )
-    zip_from = fields.Char("Zip From", required=True)
-    zip_to = fields.Char("Zip To", required=True)
+    zip_from = fields.Char(required=True)
+    zip_to = fields.Char(required=True)
     name = fields.Char(compute="_compute_name")
 
     @api.depends("zip_from", "zip_to")

@@ -38,19 +38,16 @@ msgid "Delivery destination availability ZIP interval line"
 msgstr "Verfügbarer Postleitzahlenbereich für das Lieferziel"
 
 #. module: delivery_carrier_multi_zip
-#: model:ir.model.fields,field_description:delivery_carrier_multi_zip.field_delivery_carrier__display_name
 #: model:ir.model.fields,field_description:delivery_carrier_multi_zip.field_delivery_carrier_zip__display_name
 msgid "Display Name"
 msgstr "Anzeigebezeichnung"
 
 #. module: delivery_carrier_multi_zip
-#: model:ir.model.fields,field_description:delivery_carrier_multi_zip.field_delivery_carrier__id
 #: model:ir.model.fields,field_description:delivery_carrier_multi_zip.field_delivery_carrier_zip__id
 msgid "ID"
 msgstr "ID"
 
 #. module: delivery_carrier_multi_zip
-#: model:ir.model.fields,field_description:delivery_carrier_multi_zip.field_delivery_carrier____last_update
 #: model:ir.model.fields,field_description:delivery_carrier_multi_zip.field_delivery_carrier_zip____last_update
 msgid "Last Modified on"
 msgstr "Letzte Änderung am"
