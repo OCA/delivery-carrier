@@ -114,7 +114,6 @@ class DeliveryCarrier(models.Model):
         if hasattr(sending_request, method):
             try:
                 res = getattr(sending_request, method)(reference)
-                self._sending_check_error(res)
             except Exception as e:
                 raise (e)
             return res
