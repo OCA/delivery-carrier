@@ -1,2 +1,7 @@
+# generated from manifests external_dependencies
 dicttoxml
+email_validator
+lxml
+suds-jurko
 xmltodict
+zeep
