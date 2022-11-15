@@ -3,7 +3,7 @@
 {
     "name": "Delivery Sending",
     "summary": "Delivery Carrier implementation for Sending API",
-    "version": "13.0.1.2.0",
+    "version": "13.0.1.2.1",
     "category": "Stock",
     "website": "https://github.com/OCA/delivery-carrier",
     "author": "Impulso Diagonal, Tecnativa, Odoo Community Association (OCA)",
