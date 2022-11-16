@@ -60,7 +60,7 @@ class TestDeliveryCTTExpress(common.TransactionCase):
         # Ensure shipper address
         cls.sale_order.warehouse_id.partner_id = cls.wh_partner
         cls.picking = cls.sale_order.picking_ids
-        cls.picking.move_lines.quantity_done = 20
+        cls.picking.move_ids.quantity_done = 20
 
     def test_00_cttexpress_test_connection(self):
         """Test credentials validation"""
