@@ -3,14 +3,13 @@
 {
     "name": "Delivery CTT Express",
     "summary": "Delivery Carrier implementation for CTT Express API",
-    "version": "15.0.1.0.0",
+    "version": "16.0.1.0.0",
     "category": "Delivery",
     "website": "https://github.com/OCA/delivery-carrier",
     "author": "Tecnativa, Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "installable": True,
     "depends": ["delivery_package_number", "delivery_state"],
-    "external_dependencies": {"python": ["zeep"]},
     "data": [
         "security/ir.model.access.csv",
         "wizards/cttexpress_manifest_wizard_views.xml",
