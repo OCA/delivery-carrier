@@ -40,6 +40,5 @@ class CarrierAccount(models.Model):
     company_id = fields.Many2one(comodel_name="res.company", string="Company")
     file_format = fields.Selection(
         selection="_selection_file_format",
-        string="File Format",
         help="Default format of the carrier's label you want to print",
     )

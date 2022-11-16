@@ -60,7 +60,7 @@ class TestHelperFunctions(TransactionCase):
         )
         label = picking.with_context(
             # test if the function protect against an unwanted key in the context
-            default_type="some_type",
+            default_type="binary",
         ).attach_shipping_label(
             dict(
                 name="hello_world.pdf",

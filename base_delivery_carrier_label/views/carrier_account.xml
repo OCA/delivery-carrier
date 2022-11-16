@@ -47,7 +47,7 @@
     </record>
     <menuitem
         id="carrier_account_menu"
-        parent="delivery.menu_delivery"
+        parent="stock.menu_delivery"
         action="action_carrier_account"
     />
 </odoo>
