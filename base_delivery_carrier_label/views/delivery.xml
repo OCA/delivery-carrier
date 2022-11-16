@@ -7,14 +7,14 @@
         <field name="arch" type="xml">
             <form string="delivery_carrier_option">
                 <group>
-                  <group>
-                    <field name="name" />
-                  </group>
-                  <group>
-                    <field name="partner_id" />
-                    <field name="code" />
-                  </group>
-                  <field name="description" />
+                    <group>
+                        <field name="name" />
+                    </group>
+                    <group>
+                        <field name="partner_id" />
+                        <field name="code" />
+                    </group>
+                    <field name="description" />
                 </group>
             </form>
         </field>
@@ -25,7 +25,7 @@
         >delivery_base.delivery_carrier_template_option.view_tree</field>
         <field name="model">delivery.carrier.template.option</field>
         <field name="arch" type="xml">
-            <tree string="delivery_carrier_option">
+            <tree>
                 <field name="partner_id" />
                 <field name="code" />
                 <field name="name" />
@@ -38,26 +38,26 @@
         <field name="model">delivery.carrier.option</field>
         <field name="arch" type="xml">
             <form string="delivery_carrier_option">
-            <group>
                 <group>
-                    <field name="active" />
-                    <field
+                    <group>
+                        <field name="active" />
+                        <field
                             name="mandatory"
                             attrs="{'readonly': [('readonly_flag','=',True)]}"
                         />
-                    <field
+                        <field
                             name="by_default"
                             attrs="{'invisible': [('mandatory', '=', True)]}"
                         />
-                    <field name="readonly_flag" attrs="{'invisible': True}" />
-                </group>
-                <group>
-                    <field
+                        <field name="readonly_flag" attrs="{'invisible': True}" />
+                    </group>
+                    <group>
+                        <field
                             name="tmpl_option_id"
                             attrs="{'readonly': [('readonly_flag','=',True)]}"
                         />
-                </group>
-                <newline />
+                    </group>
+                    <newline />
                     <field name="description" readonly="True" />
                 </group>
             </form>
@@ -68,7 +68,7 @@
         <field name="model">delivery.carrier.option</field>
         <field name="type">tree</field>
         <field name="arch" type="xml">
-            <tree string="delivery_carrier_option" decoration-muted="not active">
+            <tree decoration-muted="not active">
                 <field name="active" />
                 <field name="mandatory" />
                 <field name="tmpl_option_id" />
