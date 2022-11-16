@@ -15,8 +15,8 @@ class ManifestWizard(models.TransientModel):
         states={"done": [("readonly", True)]},
         required=True,
     )
-    from_date = fields.Datetime("From Date", required=True)
-    to_date = fields.Datetime("To Date")
+    from_date = fields.Datetime(required=True)
+    to_date = fields.Datetime()
     file_out = fields.Binary("Manifest", readonly=True)
     filename = fields.Char("File Name", readonly=True)
     notes = fields.Text("Result", readonly=True)

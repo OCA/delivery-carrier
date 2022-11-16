@@ -8,7 +8,7 @@ from odoo import api, fields, models
 class StockQuantPackage(models.Model):
     _inherit = "stock.quant.package"
 
-    parcel_tracking = fields.Char(string="Parcel Tracking")
+    parcel_tracking = fields.Char()
     parcel_tracking_uri = fields.Char(
         help="Link to the carrier's tracking page for this package."
     )
@@ -35,7 +35,7 @@ class StockQuantPackage(models.Model):
             else:
                 to_do |= pack
         if to_do:
-            super(StockQuantPackage, to_do)._compute_weight()
+            return super(StockQuantPackage, to_do)._compute_weight()
 
     def _complete_name(self, name, args):
         res = super()._complete_name(name, args)
