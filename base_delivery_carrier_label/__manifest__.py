@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 {
     "name": "Base module for carrier labels",
-    "version": "14.0.1.3.0",
+    "version": "15.0.1.0.0",
     "author": "Camptocamp,Akretion,Odoo Community Association (OCA)",
     "maintainer": "Camptocamp",
     "category": "Delivery",

@@ -30,7 +30,7 @@
         <field name="model">stock.quant.package</field>
         <field name="inherit_id" ref="stock.view_quant_package_form" />
         <field name="arch" type="xml">
-            <field name="packaging_id" position="before">
+            <field name="package_type_id" position="before">
                 <field name="parcel_tracking" />
                 <field name="parcel_tracking_uri" />
                 <field name="weight" />
