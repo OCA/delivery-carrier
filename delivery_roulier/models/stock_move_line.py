@@ -14,7 +14,13 @@ class StockMoveLine(models.Model):
         self.ensure_one()
         prec = self.env["decimal.precision"].precision_get("Product Unit of Measure")
         soline = self.get_sale_order_line()
-        if soline and not float_is_zero(soline.product_uom_qty, precision_digits=prec):
+        # if product is different, it must be a phantom bom we then take price on the
+        # product and apply discount
+        if (
+            soline
+            and not float_is_zero(soline.product_uom_qty, precision_digits=prec)
+            and soline.product_id == self.product_id
+        ):
             price_unit_so_uom = soline.price_subtotal / soline.product_uom_qty
             price_unit = soline.product_uom._compute_price(
                 price_unit_so_uom, self.product_uom_id
@@ -25,6 +31,9 @@ class StockMoveLine(models.Model):
             price_unit = ato._fix_tax_included_price_company(
                 product.list_price, product.taxes_id, ato, self.picking_id.company_id
             )
+            # case of phantom bom
+            if soline.discount:
+                price_unit = price_unit * (1 - (soline.discount or 0.0) / 100.0)
         return price_unit
 
     def get_sale_order_line(self):
