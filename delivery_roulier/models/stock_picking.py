@@ -204,6 +204,10 @@ class StockPicking(models.Model):
         # Codet ISO 3166-1-alpha-2 (2 letters code)
         address["country"] = partner.country_id.code
 
+        # case the partner is not a contact
+        if partner.is_company and not address.get("company"):
+            address["company"] = partner.name
+
         # keep in a separated method to easily override if not a desirable behavior
         address.update(self._get_address_info_from_parent(partner, address))
 
