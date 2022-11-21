@@ -21,6 +21,7 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
+[connector_routific](connector_routific/) | 15.0.1.0.0 | [![CarlosRoca13](https://github.com/CarlosRoca13.png?size=30px)](https://github.com/CarlosRoca13) | Connector for Routific Platform
 [delivery_carrier_info](delivery_carrier_info/) | 15.0.1.0.1 |  | Add code and description on carrier
 [delivery_carrier_multi_zip](delivery_carrier_multi_zip/) | 15.0.1.0.0 |  | Multiple ZIP intervals for the same delivery method
 [delivery_cttexpress](delivery_cttexpress/) | 15.0.1.0.0 |  | Delivery Carrier implementation for CTT Express API
