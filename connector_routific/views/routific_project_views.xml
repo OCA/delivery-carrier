@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 Tecnativa - Carlos Roca
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="routific_project_tree_view" model="ir.ui.view">
+        <field name="name">routific.project.tree</field>
+        <field name="model">routific.project</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="date" />
+            </tree>
+        </field>
+    </record>
+    <record id="routific_project_form_view" model="ir.ui.view">
+        <field name="name">routific.project.form</field>
+        <field name="model">routific.project</field>
+        <field name="arch" type="xml">
+            <form string="Project">
+                <header>
+                    <button
+                        name="send_project"
+                        class="oe_highlight"
+                        states="draft"
+                        string="Send information to Routific"
+                        type="object"
+                    />
+                    <button
+                        name="get_solution"
+                        class="oe_highlight"
+                        states="send"
+                        string="Process solution"
+                        type="object"
+                    />
+                    <field name="state" widget="statusbar" />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="buttons">
+                        <button
+                            class="oe_stat_button"
+                            name="action_affected_picking_tree_view"
+                            type="object"
+                            icon="fa-truck"
+                            attrs="{'invisible': [('name', '=', 'New')]}"
+                        >
+                            <span>Pickings</span>
+                        </button>
+                    </div>
+                    <group name="heading">
+                        <h1>
+                            <field name="name" />
+                        </h1>
+                    </group>
+                    <group name="data">
+                        <field name="routific_config_id" />
+                        <field name="company_id" groups="base.group_multi_company" />
+                        <field name="date" />
+                    </group>
+                    <notebook>
+                        <page string="Stops">
+                            <field name="picking_ids" required="1">
+                                <tree
+                                    editable="bottom"
+                                    decoration-success="routific_stop_id!=False"
+                                    decoration-danger="routific_stop_id==False"
+                                >
+                                    <field name="name" />
+                                    <field name="partner_id" />
+                                    <field name="driver_id" />
+                                    <field name="state" invisible="1" />
+                                    <field name="company_id" invisible="1" />
+                                    <field name="routific_stop_id" invisible="1" />
+                                    <field name="routific_project_id" invisible="1" />
+                                </tree>
+                            </field>
+                            <field name="allowed_picking_ids" invisible="1" />
+                            <field name="has_new_picking" invisible="1" />
+                            <div style="text-align: right">
+                                <button
+                                    name="button_send_new_stops"
+                                    string="Send new stops"
+                                    type="object"
+                                    attrs="{'invisible': [('has_new_picking', '=', False)]}"
+                                />
+                            </div>
+                        </page>
+                        <page string="Drivers">
+                            <field
+                                name="project_driver_ids"
+                                string="Drivers"
+                                context="{'default_project_id': active_id}"
+                                required="1"
+                            >
+                                <tree>
+                                    <field name="driver_id" />
+                                    <field name="routific_driver_id" readonly="1" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Logs" groups="base.group_no_one">
+                            <separator string="Send Log" />
+                            <field name="json_send" readonly="1" />
+                            <separator string="Retrieve Log" />
+                            <field name="json_retrieve" readonly="1" />
+                            <separator string="Solution Log" />
+                            <field name="json_solution" readonly="1" />
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="activity_ids" widget="mail_activity" />
+                    <field
+                        name="message_ids"
+                        widget="mail_thread"
+                        options='{"thread_level": 1}'
+                    />
+                </div>
+            </form>
+        </field>
+    </record>
+    <record id="action_routific_project" model="ir.actions.act_window">
+        <field name="name">Projects</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">routific.project</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Routific project!
+            </p>
+        </field>
+    </record>
+    <menuitem
+        id="menu_routific_project"
+        name="Projects"
+        parent="menu_routific"
+        action="action_routific_project"
+        sequence="5"
+    />
+</odoo>

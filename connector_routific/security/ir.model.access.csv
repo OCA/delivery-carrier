@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_manager_routific_config,access.manager.routific.config,model_routific_config,stock.group_stock_manager,1,1,1,1
+access_manager_routific_project,access.manager.routific.project,model_routific_project,stock.group_stock_manager,1,1,1,1
+access_manager_routific_project_driver,access.manager.routific.project.driver,model_routific_project_driver,stock.group_stock_manager,1,1,1,1
+access_user_routific_config,access.user.routific.config,model_routific_config,stock.group_stock_user,1,1,0,0
+access_user_routific_project,access.user.routific.project,model_routific_project,stock.group_stock_user,1,1,0,0
+access_user_routific_project_driver,access.user.routific.project.driver,model_routific_project_driver,stock.group_stock_user,1,1,0,0
+access_routific_project_creator,access_routific_project_creator,model_routific_project_creator,base.group_user,1,1,1,1

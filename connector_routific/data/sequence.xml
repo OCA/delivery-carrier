@@ -1,0 +1,11 @@
+<!-- Copyright 2021 Tecnativa - Carlos Roca
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+    <record id="seq_routific_project" model="ir.sequence">
+        <field name="name">Routific sequence</field>
+        <field name="code">routific.project</field>
+        <field name="prefix">RP/</field>
+        <field name="padding" eval="7" />
+        <field eval="False" name="company_id" />
+    </record>
+</odoo>

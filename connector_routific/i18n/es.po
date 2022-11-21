@@ -1,0 +1,864 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* connector_routific
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-06-09 06:51+0000\n"
+"PO-Revision-Date: 2021-06-09 08:53+0200\n"
+"Last-Translator: Carlos <carlos.roca@tecnativa.com>\n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.0.6\n"
+
+#. module: connector_routific
+#: model:ir.model.fields,help:connector_routific.field_routific_project__state
+msgid ""
+"\n"
+"            * The 'Draft' is used when a user create a new project\n"
+"\n"
+"            * The 'Sent' is used when the project is sended to Routific\n"
+"        "
+msgstr ""
+"\n"
+"            * El estado  'Borrador' se usa en nuevos proyectos\n"
+"\n"
+"            * El estado 'Enviado' se usa en proyectos enviados a Routific"
+
+#. module: connector_routific
+#: model:ir.model.fields,help:connector_routific.field_res_partner__routific_end
+#: model:ir.model.fields,help:connector_routific.field_res_users__routific_end
+msgid ""
+"\n"
+"        If the partner is a driver, this value shows the end work schedule.\n"
+"        If it isn't it will show the end of the time that can receive a "
+"shipping.\n"
+"        "
+msgstr ""
+"\n"
+"        Si el contacto es un conductor,  este valor muestra el fin de su "
+"horario de trabajo.\n"
+"       Si no lo es, este valor muestra el fin del periodo en el que puede "
+"recibir paquetes."
+
+#. module: connector_routific
+#: model:ir.model.fields,help:connector_routific.field_res_partner__routific_start
+#: model:ir.model.fields,help:connector_routific.field_res_users__routific_start
+msgid ""
+"\n"
+"        If the partner is a driver, this value shows the start work "
+"schedule.\n"
+"        If it isn't it will show the start of the time that can receive a "
+"shipping.\n"
+"        "
+msgstr ""
+"\n"
+"        Si el contacto es un conductor,  este valor muestra el inicio de su "
+"horario de trabajo.\n"
+"       Si no lo es, este valor muestra el inicio del periodo en el que puede "
+"recibir paquetes."
+
+#. module: connector_routific
+#: model_terms:ir.ui.view,arch_db:connector_routific.routific_project_form_view
+msgid "<span>Pickings</span>"
+msgstr "<span>Albaranes</span>"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_config__message_needaction
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project__message_needaction
+msgid "Action Needed"
+msgstr "Acción requerida"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_config__activity_ids
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project__activity_ids
+msgid "Activities"
+msgstr "Actividades"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_config__activity_exception_decoration
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr "Decoración de Actividad  de Excepción"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_config__activity_state
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project__activity_state
+msgid "Activity State"
+msgstr "Estado de la actividad"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_config__address_format
+msgid "Address format"
+msgstr "Formato de la dirección"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project__allowed_picking_ids
+msgid "Allowed Picking"
+msgstr "Albaranes disponibles"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_res_partner__allowed_routific_type_ids
+#: model:ir.model.fields,field_description:connector_routific.field_res_users__allowed_routific_type_ids
+msgid "Allowed Routific Type"
+msgstr "Tipo permitido en Routific"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_config__picking_type_id
+msgid "Allowed operation type"
+msgstr "Tipo de operación disponible"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_config__message_attachment_count
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project__message_attachment_count
+msgid "Attachment Count"
+msgstr "Conteo de archivos adjuntos"
+
+#. module: connector_routific
+#: model_terms:ir.ui.view,arch_db:connector_routific.project_creation_from_picking_view
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_res_partner__capacity
+#: model:ir.model.fields,field_description:connector_routific.field_res_users__capacity
+msgid "Capacity"
+msgstr "Capacidad"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_config__company_id
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project__company_id
+msgid "Company"
+msgstr "Compañía"
+
+#. module: connector_routific
+#: model_terms:ir.ui.view,arch_db:connector_routific.routific_config_form_view
+msgid "Connection"
+msgstr "Conexión"
+
+#. module: connector_routific
+#: model:ir.model,name:connector_routific.model_res_partner
+msgid "Contact"
+msgstr "Contacto"
+
+#. module: connector_routific
+#: model_terms:ir.ui.view,arch_db:connector_routific.project_creation_from_picking_view
+msgid "Create"
+msgstr "Crear"
+
+#. module: connector_routific
+#: model:ir.actions.act_window,name:connector_routific.act_wizard_create_project
+msgid "Create Routific Project"
+msgstr "Crear proyecto de Routific"
+
+#. module: connector_routific
+#: model_terms:ir.ui.view,arch_db:connector_routific.project_creation_from_picking_view
+msgid "Create new Routific Project"
+msgstr "Crear nuevo proyecto de Routific"
+
+#. module: connector_routific
+#: model_terms:ir.actions.act_window,help:connector_routific.action_routific_driver
+msgid "Create your first Driver!"
+msgstr "¡Crea tu primer conductor!"
+
+#. module: connector_routific
+#: model_terms:ir.actions.act_window,help:connector_routific.action_routific_project
+msgid "Create your first Routific project!"
+msgstr "¡Crea tu primer proyecto!"
+
+#. module: connector_routific
+#: model_terms:ir.actions.act_window,help:connector_routific.action_routific_config
+msgid "Create your first Settings!"
+msgstr "¡Crea tus primeros ajustes!"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_config__create_uid
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project__create_uid
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project_creator__create_uid
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project_driver__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_config__create_date
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project__create_date
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project_creator__create_date
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project_driver__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project__date
+msgid "Date"
+msgstr "Fecha"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_config__default_duration
+msgid "Default duration of stops"
+msgstr "Duración por defecto de las paradas"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_config__default_load
+msgid "Default load of stops"
+msgstr "Carga por defecto de las paradas"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project_creator__date
+msgid "Delivery date"
+msgstr "Fecha de entrega"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_res_partner__delivery_duration
+#: model:ir.model.fields,field_description:connector_routific.field_res_users__delivery_duration
+msgid "Delivery duration (MIN)"
+msgstr "Duración de entrega (MIN)"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_config__display_name
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project__display_name
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project_creator__display_name
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project_driver__display_name
+msgid "Display Name"
+msgstr "Mostrar Nombre"
+
+#. module: connector_routific
+#: model:ir.model.fields.selection,name:connector_routific.selection__routific_project__state__draft
+msgid "Draft"
+msgstr "Borrador"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project_driver__driver_id
+#: model:ir.model.fields,field_description:connector_routific.field_stock_picking__driver_id
+msgid "Driver"
+msgstr "Conductor"
+
+#. module: connector_routific
+#: model_terms:ir.ui.view,arch_db:connector_routific.res_partner_form_view
+msgid "Driver Settings"
+msgstr "Ajustes del conductor"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_res_partner__routific_driver_active
+#: model:ir.model.fields,field_description:connector_routific.field_res_users__routific_driver_active
+msgid "Driver active"
+msgstr "Conductor activo"
+
+#. module: connector_routific
+#: model:ir.actions.act_window,name:connector_routific.action_routific_driver
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project__project_driver_ids
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project_creator__driver_ids
+#: model:ir.ui.menu,name:connector_routific.menu_routific_driver
+#: model_terms:ir.ui.view,arch_db:connector_routific.routific_project_form_view
+msgid "Drivers"
+msgstr "Conductores"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_res_partner__routific_end
+#: model:ir.model.fields,field_description:connector_routific.field_res_users__routific_end
+msgid "End"
+msgstr "Fin"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_res_partner__partner_end_id
+#: model:ir.model.fields,field_description:connector_routific.field_res_users__partner_end_id
+msgid "End location"
+msgstr "Ubicación final"
+
+#. module: connector_routific
+#: code:addons/connector_routific/models/routific_config.py:0
+#, python-format
+msgid ""
+"Error at new stop posting %s \n"
+"\n"
+" %s"
+msgstr ""
+"Error al postear la nueva parada %s \n"
+"\n"
+" %s"
+
+#. module: connector_routific
+#: code:addons/connector_routific/models/routific_config.py:0
+#, python-format
+msgid ""
+"Error on project posting %s \n"
+"\n"
+" %s"
+msgstr ""
+"Error al postear el proyecto %s \n"
+"\n"
+" %s"
+
+#. module: connector_routific
+#: model:ir.model.fields,help:connector_routific.field_routific_config__traffic
+msgid "Faster = 1.0 - Slower = 2.0"
+msgstr "Mas rápido = 1.0 - Mas lento = 2.0"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_res_partner__finish_at_start
+#: model:ir.model.fields,field_description:connector_routific.field_res_users__finish_at_start
+msgid "Finish route where start"
+msgstr "Finaliza la ruta al inicio"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_config__message_follower_ids
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project__message_follower_ids
+msgid "Followers"
+msgstr "Seguidores"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_config__message_channel_ids
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project__message_channel_ids
+msgid "Followers (Channels)"
+msgstr "Seguidores (Canales)"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_config__message_partner_ids
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Seguidores (Empresas)"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_config__get_endpoint
+msgid "Get URL"
+msgstr "URL para peticiones GET"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project__has_new_picking
+msgid "Has New Picking"
+msgstr "Tiene nuevo albarán"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_config__id
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project__id
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project_creator__id
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project_driver__id
+msgid "ID"
+msgstr "ID"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_config__activity_exception_icon
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project__activity_exception_icon
+msgid "Icon"
+msgstr "Icono"
+
+#. module: connector_routific
+#: model:ir.model.fields,help:connector_routific.field_routific_config__activity_exception_icon
+#: model:ir.model.fields,help:connector_routific.field_routific_project__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr "Icono para indicar una actividad de excepción."
+
+#. module: connector_routific
+#: model:ir.model.fields,help:connector_routific.field_routific_config__message_needaction
+#: model:ir.model.fields,help:connector_routific.field_routific_config__message_unread
+#: model:ir.model.fields,help:connector_routific.field_routific_project__message_needaction
+#: model:ir.model.fields,help:connector_routific.field_routific_project__message_unread
+msgid "If checked, new messages require your attention."
+msgstr "Si está marcado hay nuevos mensajes que requieren su atención."
+
+#. module: connector_routific
+#: model:ir.model.fields,help:connector_routific.field_routific_config__message_has_error
+#: model:ir.model.fields,help:connector_routific.field_routific_config__message_has_sms_error
+#: model:ir.model.fields,help:connector_routific.field_routific_project__message_has_error
+#: model:ir.model.fields,help:connector_routific.field_routific_project__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Si se encuentra marcado, algunos mensajes tienen error de envío."
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_config__message_is_follower
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project__message_is_follower
+msgid "Is Follower"
+msgstr "Es un seguidor"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_res_partner__is_routific_driver
+#: model:ir.model.fields,field_description:connector_routific.field_res_users__is_routific_driver
+msgid "Is driver"
+msgstr "Es conductor"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_product_attribute__is_routific_type
+msgid "Is routific type"
+msgstr "Es tipo de Routific"
+
+#. module: connector_routific
+#: model:ir.model.fields,help:connector_routific.field_routific_config__strict_start
+msgid ""
+"It forces the departure time of a driver to be at ​shift_start​.\n"
+"        The default is false\n"
+"        "
+msgstr ""
+"Obliga a que la hora de salida de un conductor sea la marcada en su "
+"horario.\n"
+"         El valor predeterminado es falso"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project__json_retrieve
+msgid "Json Retrieve"
+msgstr "Respuesta en JSON"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project__json_send
+msgid "Json Send"
+msgstr "JSON de envio"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project__json_solution
+msgid "Json Solution"
+msgstr "Solucion en JSON"
+
+#. module: connector_routific
+#: model:ir.model.fields,help:connector_routific.field_res_partner__capacity
+#: model:ir.model.fields,help:connector_routific.field_res_users__capacity
+msgid "Keep as 0 for no control of capacity"
+msgstr "Déjalo cómo 0 para no controlar la capacidad"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_config____last_update
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project____last_update
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project_creator____last_update
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project_driver____last_update
+msgid "Last Modified on"
+msgstr "Última modificación en"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_config__write_uid
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project__write_uid
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project_creator__write_uid
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project_driver__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_config__write_date
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project__write_date
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project_creator__write_date
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project_driver__write_date
+msgid "Last Updated on"
+msgstr "Última actualización el"
+
+#. module: connector_routific
+#: model_terms:ir.ui.view,arch_db:connector_routific.routific_project_form_view
+msgid "Logs"
+msgstr "Registros"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_config__message_main_attachment_id
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project__message_main_attachment_id
+msgid "Main Attachment"
+msgstr "Adjuntos principales"
+
+#. module: connector_routific
+#: model:res.groups,name:connector_routific.group_routific_manager
+msgid "Manage Routific data"
+msgstr "Gestionar datos de Routific"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_config__max_driver_overtime
+msgid "Maximum driver overtime"
+msgstr "Máximo tiempo extra del conductor"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_config__max_stop_lateness
+msgid "Maximum stop lateness"
+msgstr "Tardanza máxima de paradas"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_config__message_has_error
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project__message_has_error
+msgid "Message Delivery error"
+msgstr "Error de Envío de Mensaje"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_config__message_ids
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project__message_ids
+msgid "Messages"
+msgstr "Mensajes"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_config__name
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project__name
+#: model_terms:ir.ui.view,arch_db:connector_routific.routific_config_form_view
+msgid "Name"
+msgstr "Nombre"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_config__activity_date_deadline
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "Siguiente plazo de actividad"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_config__activity_summary
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project__activity_summary
+msgid "Next Activity Summary"
+msgstr "Resumen de la siguiente actividad"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_config__activity_type_id
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project__activity_type_id
+msgid "Next Activity Type"
+msgstr "Siguiente tipo de actividad"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_config__message_needaction_counter
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Número de acciones"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_config__message_has_error_counter
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project__message_has_error_counter
+msgid "Number of errors"
+msgstr "Numero de errores"
+
+#. module: connector_routific
+#: model:ir.model.fields,help:connector_routific.field_routific_config__message_needaction_counter
+#: model:ir.model.fields,help:connector_routific.field_routific_project__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr "Número de mensajes que requieren una acción"
+
+#. module: connector_routific
+#: model:ir.model.fields,help:connector_routific.field_routific_config__message_has_error_counter
+#: model:ir.model.fields,help:connector_routific.field_routific_project__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Número de mensajes con error de envío"
+
+#. module: connector_routific
+#: model:ir.model.fields,help:connector_routific.field_routific_config__message_unread_counter
+#: model:ir.model.fields,help:connector_routific.field_routific_project__message_unread_counter
+msgid "Number of unread messages"
+msgstr "Número de mensajes no leidos"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_config__shortest_distance
+msgid "Optimize by shortest distance"
+msgstr "Optimizar por distancia más corta"
+
+#. module: connector_routific
+#: code:addons/connector_routific/models/routific_project.py:0
+#, python-format
+msgid "Pickings"
+msgstr "Albaranes"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_config__post_endpoint
+msgid "Post URL"
+msgstr "URL para peticiones POST"
+
+#. module: connector_routific
+#: model_terms:ir.ui.view,arch_db:connector_routific.routific_project_form_view
+msgid "Process solution"
+msgstr "Procesar solución"
+
+#. module: connector_routific
+#: model:ir.model,name:connector_routific.model_product_attribute
+msgid "Product Attribute"
+msgstr "Atributo de producto"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project_driver__project_id
+#: model_terms:ir.ui.view,arch_db:connector_routific.routific_config_form_view
+#: model_terms:ir.ui.view,arch_db:connector_routific.routific_project_form_view
+msgid "Project"
+msgstr "Proyecto"
+
+#. module: connector_routific
+#: model_terms:ir.ui.view,arch_db:connector_routific.routific_project_driver_form_view
+msgid "Project Driver"
+msgstr "Conductor de proyecto"
+
+#. module: connector_routific
+#: model:ir.model,name:connector_routific.model_routific_project
+msgid "Project for Routific"
+msgstr "Proyecto para Routific"
+
+#. module: connector_routific
+#: model:ir.actions.act_window,name:connector_routific.action_routific_project
+#: model:ir.ui.menu,name:connector_routific.menu_routific_project
+#: model_terms:ir.ui.view,arch_db:connector_routific.routific_project_tree_view
+msgid "Projects"
+msgstr "Proyectos"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_config__activity_user_id
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project__activity_user_id
+msgid "Responsible User"
+msgstr "Usuario responsable"
+
+#. module: connector_routific
+#: model_terms:ir.ui.view,arch_db:connector_routific.routific_project_form_view
+msgid "Retrieve Log"
+msgstr "Log de respuesta"
+
+#. module: connector_routific
+#: model:ir.ui.menu,name:connector_routific.menu_routific
+#: model_terms:ir.ui.view,arch_db:connector_routific.res_partner_form_view
+msgid "Routific"
+msgstr "Routific"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project_driver__routific_driver_id
+msgid "Routific Driver Id"
+msgstr "Id de conductor en Routific"
+
+#. module: connector_routific
+#: model:ir.model,name:connector_routific.model_routific_project_driver
+msgid "Routific drivers for every project"
+msgstr "Conductores de Routific para cada proyecto"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project__routific_project_id
+#: model:ir.model.fields,field_description:connector_routific.field_stock_picking__routific_project_id
+msgid "Routific project id"
+msgstr "Id de proyecto en Routific"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_stock_picking__routific_stop_id
+msgid "Routific stop id"
+msgstr "Id de parada en Routific"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_config__message_has_sms_error
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr "Error de entrega del SMS"
+
+#. module: connector_routific
+#: model_terms:ir.ui.view,arch_db:connector_routific.routific_project_form_view
+msgid "Send Log"
+msgstr "Log de envio"
+
+#. module: connector_routific
+#: model_terms:ir.ui.view,arch_db:connector_routific.routific_project_form_view
+msgid "Send information to Routific"
+msgstr "Enviar información a Routific"
+
+#. module: connector_routific
+#: model_terms:ir.ui.view,arch_db:connector_routific.routific_project_form_view
+msgid "Send new stops"
+msgstr "Enviar nuevas paradas"
+
+#. module: connector_routific
+#: model:ir.model.fields.selection,name:connector_routific.selection__routific_project__state__send
+msgid "Sent"
+msgstr "Enviado"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_config__sequence
+msgid "Sequence"
+msgstr "Secuencia"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_stock_picking__routific_stop_sequence
+#, fuzzy
+#| msgid "Sequence"
+msgid "Sequence stop"
+msgstr "Secuencia"
+
+#. module: connector_routific
+#: model:ir.model.fields,help:connector_routific.field_res_partner__speed
+#: model:ir.model.fields,help:connector_routific.field_res_users__speed
+msgid ""
+"Set the average speed of the driver\n"
+"        being 0.1 the smallest and 2.0 the biggest"
+msgstr ""
+"Define la velocidad media de conducción.\n"
+"        Siendo 0.1 la menor y 2.0 la mayor."
+
+#. module: connector_routific
+#: model:ir.actions.act_window,name:connector_routific.action_routific_config
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project__routific_config_id
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project_creator__config_id
+#: model:ir.ui.menu,name:connector_routific.menu_routific_config
+#: model_terms:ir.ui.view,arch_db:connector_routific.routific_config_form_view
+#: model_terms:ir.ui.view,arch_db:connector_routific.routific_config_tree_view
+msgid "Settings"
+msgstr "Ajustes"
+
+#. module: connector_routific
+#: model:ir.model,name:connector_routific.model_routific_config
+msgid "Settings for Routific connexion."
+msgstr "Ajustes para la conexión con Routific"
+
+#. module: connector_routific
+#: model_terms:ir.ui.view,arch_db:connector_routific.routific_project_form_view
+msgid "Solution Log"
+msgstr "Log de solución"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_res_partner__speed
+#: model:ir.model.fields,field_description:connector_routific.field_res_users__speed
+msgid "Speed"
+msgstr "Velocidad"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_res_partner__routific_start
+#: model:ir.model.fields,field_description:connector_routific.field_res_users__routific_start
+msgid "Start"
+msgstr "Inicio"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_res_partner__partner_start_id
+#: model:ir.model.fields,field_description:connector_routific.field_res_users__partner_start_id
+msgid "Start location"
+msgstr "Ubicación inicial"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project__state
+msgid "Status"
+msgstr "Estado"
+
+#. module: connector_routific
+#: model:ir.model.fields,help:connector_routific.field_routific_config__activity_state
+#: model:ir.model.fields,help:connector_routific.field_routific_project__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"Estado basado en actividades\n"
+"Vencida: la fecha tope ya ha pasado\n"
+"Hoy: La fecha tope es hoy\n"
+"Planificada: futuras actividades."
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project__picking_ids
+#: model_terms:ir.ui.view,arch_db:connector_routific.routific_project_form_view
+msgid "Stops"
+msgstr "Paradas"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_config__auto_balance
+msgid "Stops distributed across all drivers"
+msgstr "Paradas distribuidas entre todos los conductores"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_config__strict_start
+msgid "Strict start"
+msgstr "Inicio obligatorio"
+
+#. module: connector_routific
+#: code:addons/connector_routific/models/res_partner.py:0
+#, python-format
+msgid "The day ends at 24:00"
+msgstr "El día finaliza a las 24:00"
+
+#. module: connector_routific
+#: code:addons/connector_routific/models/res_partner.py:0
+#, python-format
+msgid "The day starts at 00:00"
+msgstr "El día empieza a las 00:00"
+
+#. module: connector_routific
+#: code:addons/connector_routific/wizards/routific_project_creator.py:0
+#, python-format
+msgid "The operation type %s is not allowed on %s configuration"
+msgstr "El tipo de operación %s, is not allowed on %s configuration"
+
+#. module: connector_routific
+#: code:addons/connector_routific/wizards/routific_project_creator.py:0
+#, python-format
+msgid "The picking %s has a driver assigned yet"
+msgstr "El albarán %s ya tiene un conductor asignado"
+
+#. module: connector_routific
+#: code:addons/connector_routific/wizards/routific_project_creator.py:0
+#, python-format
+msgid "The picking %s is not Ready"
+msgstr "El albarán %s no está preparado"
+
+#. module: connector_routific
+#: code:addons/connector_routific/models/res_partner.py:0
+#, python-format
+msgid "The speed of the driver must be a value between 0.1 and 2.0"
+msgstr "La velocidad del conductor debe estar entre 0.1 y 2.0"
+
+#. module: connector_routific
+#: code:addons/connector_routific/models/res_partner.py:0
+#, python-format
+msgid "The start of the schedule must be before the end"
+msgstr "El inicio del horario debe ser antes del final"
+
+#. module: connector_routific
+#: code:addons/connector_routific/models/routific_config.py:0
+#, python-format
+msgid "The traffic estimation value must be between 1.0 and 2.0"
+msgstr "La estimación del trafico debe ser un valor entre 1.0 y 2.0"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_config__token
+msgid "Token"
+msgstr "Token"
+
+#. module: connector_routific
+#: code:addons/connector_routific/models/routific_config.py:0
+#, python-format
+msgid "Token needed to make the comunication with Routific."
+msgstr "Se necesita un Token para hacer la comunicación con Routific"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_config__traffic
+msgid "Traffic estimation"
+msgstr "Estimación de tráfico"
+
+#. module: connector_routific
+#: model:ir.model,name:connector_routific.model_stock_picking
+msgid "Transfer"
+msgstr "Transferir"
+
+#. module: connector_routific
+#: model:ir.model.fields,help:connector_routific.field_routific_config__activity_exception_decoration
+#: model:ir.model.fields,help:connector_routific.field_routific_project__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr "Tipo de actividad de excepción registrada."
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_res_partner__routific_type_ids
+#: model:ir.model.fields,field_description:connector_routific.field_res_users__routific_type_ids
+msgid "Types allowed"
+msgstr "Tipos permitidos"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_config__message_unread
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project__message_unread
+msgid "Unread Messages"
+msgstr "Mensajes sin leer"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_config__message_unread_counter
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr "Contador de mensajes sin leer"
+
+#. module: connector_routific
+#: model:ir.model,name:connector_routific.model_routific_project_creator
+msgid "Wizard for Routific project creation"
+msgstr "Wizar para la creación de proyectos de Routific"
+
+#. module: connector_routific
+#: code:addons/connector_routific/models/routific_project.py:0
+#, python-format
+msgid "You can't delete a stop sent to routific"
+msgstr "No se pueden eliminar paradas ya enviadas a Routific"
+
+#. module: connector_routific
+#: code:addons/connector_routific/models/routific_project.py:0
+#, python-format
+msgid ""
+"You have not optimice the route on Routific Platform for get the solution."
+msgstr ""
+"No se ha optimizado la ruta en la plataforma de Routific para recibir la "
+"solución."
+
+#~ msgid "Website Messages"
+#~ msgstr "Mensajes del sitio web"
+
+#~ msgid "Website communication history"
+#~ msgstr "Historial de comunicaciones del sitio web"
