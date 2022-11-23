@@ -30,6 +30,3 @@ msgstr ""
 #: model:ir.model,name:delivery_free_fee_removal.model_sale_order_line
 msgid "Sales Order Line"
 msgstr ""
-
-#~ msgid "Quotation"
-#~ msgstr "Presupuesto"
