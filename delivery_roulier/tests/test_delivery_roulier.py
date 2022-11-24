@@ -4,7 +4,7 @@ from unittest.mock import MagicMock, patch
 from odoo_test_helper import FakeModelLoader
 from roulier import roulier
 
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 
 roulier_ret = {
     "parcels": [
@@ -23,7 +23,7 @@ roulier_ret = {
 }
 
 
-class DeliveryRoulierCase(SavepointCase):
+class DeliveryRoulierCase(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -86,7 +86,7 @@ class DeliveryRoulierCase(SavepointCase):
                 "location_id": self.order.warehouse_id.lot_stock_id.id,
                 "inventory_quantity": 1,
             }
-        )
+        )._apply_inventory()
         self.order.action_confirm()
         self.picking = self.order.picking_ids
         self.env["stock.immediate.transfer"].create(
