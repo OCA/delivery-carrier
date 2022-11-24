@@ -4,7 +4,7 @@
 {
     "name": "Delivery Carrier Agency",
     "summary": "Add a model for Carrier Agencies",
-    "version": "14.0.1.0.1",
+    "version": "16.0.1.0.0",
     "category": "Delivery",
     "website": "https://github.com/OCA/delivery-carrier",
     "author": "Akretion,Odoo Community Association (OCA)",
