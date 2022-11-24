@@ -11,20 +11,20 @@ class TestCarrierAgency(TransactionCase):
         agency_chicago = self.env["delivery.carrier.agency"].create(
             {
                 "name": "Normal Carrier Chicago agency",
-                "delivery_type": "fixed",
+                "delivery_type": "base_on_rule",
                 "warehouse_ids": [(6, 0, chicago_wh.ids)],
             }
         )
         agency_san_fransisco = self.env["delivery.carrier.agency"].create(
             {
                 "name": "Normal Carrier San Fransisco agency",
-                "delivery_type": "fixed",
+                "delivery_type": "base_on_rule",
                 "warehouse_ids": [(6, 0, san_fransico_wh.ids)],
             }
         )
         san_fransisco_picking = self.env["stock.picking"].new(
             dict(
-                carrier_id=self.env.ref("delivery.normal_delivery_carrier").id,
+                carrier_id=self.env.ref("delivery.delivery_carrier").id,
                 company_id=self.env.user.company_id.id,
                 location_id=san_fransico_wh.lot_stock_id.id,
             )
@@ -34,7 +34,7 @@ class TestCarrierAgency(TransactionCase):
 
         chicago_picking = self.env["stock.picking"].new(
             dict(
-                carrier_id=self.env.ref("delivery.normal_delivery_carrier").id,
+                carrier_id=self.env.ref("delivery.delivery_carrier").id,
                 company_id=self.env.user.company_id.id,
                 location_id=chicago_wh.lot_stock_id.id,
             )

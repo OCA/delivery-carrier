@@ -48,7 +48,7 @@
     </record>
     <menuitem
         id="carrier_agency_menu"
-        parent="delivery.menu_delivery"
+        parent="stock.menu_delivery"
         sequence="10"
         action="action_carrier_agency"
     />

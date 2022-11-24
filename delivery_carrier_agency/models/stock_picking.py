@@ -8,7 +8,7 @@ class StockPicking(models.Model):
 
     def _get_domain_agency(self):
         self.ensure_one()
-        wh = self.location_id.get_warehouse()
+        wh = self.location_id.warehouse_id
         return [
             ("delivery_type", "=", self.carrier_id.delivery_type),
             "|",
