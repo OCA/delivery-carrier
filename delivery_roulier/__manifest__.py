@@ -3,15 +3,14 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 {
     "name": "Delivery Carrier Roulier",
-    "version": "14.0.1.0.1",
+    "version": "16.0.1.0.0",
     "author": "Akretion,Odoo Community Association (OCA)",
     "summary": "Integration of multiple carriers",
     "maintainers": ["florian-dacosta"],
-    "category": "Warehouse",
+    "category": "Delivery",
     "depends": [
-        "partner_helper",
-        "base_phone",  # from oca/telephony
         "base_delivery_carrier_label",
+        "delivery_carrier_account",
     ],
     "website": "https://github.com/OCA/delivery-carrier",
     "data": [
