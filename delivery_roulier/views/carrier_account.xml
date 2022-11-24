@@ -5,7 +5,7 @@
         <field name="model">carrier.account</field>
         <field
             name="inherit_id"
-            ref="base_delivery_carrier_label.carrier_account_view_tree"
+            ref="delivery_carrier_account.carrier_account_view_tree"
         />
         <field name="arch" type="xml">
             <field name="file_format" position="attributes">
@@ -18,7 +18,7 @@
         <field name="model">carrier.account</field>
         <field
             name="inherit_id"
-            ref="base_delivery_carrier_label.carrier_account_view_form"
+            ref="delivery_carrier_account.carrier_account_view_form"
         />
         <field name="arch" type="xml">
             <field name="file_format" position="attributes">
