@@ -12,6 +12,7 @@ setuptools.setup(
         'odoo-addon-delivery_carrier_info>=15.0dev,<15.1dev',
         'odoo-addon-delivery_carrier_multi_zip>=15.0dev,<15.1dev',
         'odoo-addon-delivery_cttexpress>=15.0dev,<15.1dev',
+        'odoo-addon-delivery_free_fee_removal>=15.0dev,<15.1dev',
         'odoo-addon-delivery_package_number>=15.0dev,<15.1dev',
         'odoo-addon-delivery_price_method>=15.0dev,<15.1dev',
         'odoo-addon-delivery_state>=15.0dev,<15.1dev',
