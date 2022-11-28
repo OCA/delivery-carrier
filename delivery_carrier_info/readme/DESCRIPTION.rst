@@ -1,1 +1,1 @@
-This module add the field "code" and "description" on the delivery carrier.
+This module add the field "code"  on the delivery carrier.
