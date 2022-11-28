@@ -11,4 +11,3 @@ class DeliveryCarrier(models.Model):
     code = fields.Char(
         help="Delivery Method Code (according to carrier)",
     )
-    description = fields.Text()
