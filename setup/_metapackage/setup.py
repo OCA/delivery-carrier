@@ -8,6 +8,7 @@ setuptools.setup(
     description="Meta package for oca-delivery-carrier Odoo addons",
     version=version,
     install_requires=[
+        'odoo-addon-delivery_carrier_info>=16.0dev,<16.1dev',
         'odoo-addon-delivery_cttexpress>=16.0dev,<16.1dev',
         'odoo-addon-delivery_package_number>=16.0dev,<16.1dev',
         'odoo-addon-delivery_price_method>=16.0dev,<16.1dev',
