@@ -21,6 +21,7 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
+[delivery_carrier_info](delivery_carrier_info/) | 16.0.1.0.0 |  | Add code on carrier
 [delivery_cttexpress](delivery_cttexpress/) | 16.0.1.0.0 |  | Delivery Carrier implementation for CTT Express API
 [delivery_package_number](delivery_package_number/) | 16.0.1.0.0 |  | Set or compute number of packages for a picking
 [delivery_price_method](delivery_price_method/) | 16.0.1.0.0 |  | Provides fields to be able to contemplate the tracking statesand also adds a global fields
