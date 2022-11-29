@@ -36,9 +36,9 @@ class StockMoveLine(models.Model):
                     "Type conversion not implemented for product %s" % product.id
                 )
                 cant_calc_total = True
-            # product_qty may be 0 if you don't set move line
+            # reserved_qty may be 0 if you don't set move line
             # individually but directly validate the picking
-            qty = operation.qty_done or operation.product_qty
+            qty = operation.qty_done or operation.reserved_qty
             operation.weight = product.weight * qty
 
             total_weight += operation.weight

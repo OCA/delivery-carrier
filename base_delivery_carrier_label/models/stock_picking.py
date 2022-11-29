@@ -91,10 +91,6 @@ class StockPicking(models.Model):
         )
         default_options = carrier.default_options()
         self.option_ids = [(6, 0, default_options.ids)]
-        result = {
-            "domain": {"option_ids": [("id", "in", carrier.available_option_ids.ids)]}
-        }
-        return result
 
     @api.onchange("option_ids")
     def onchange_option_ids(self):
@@ -102,7 +98,10 @@ class StockPicking(models.Model):
             return
         carrier = self.carrier_id
         for available_option in carrier.available_option_ids:
-            if available_option.mandatory and available_option not in self.option_ids:
+            if (
+                available_option.mandatory
+                and available_option.id not in self.option_ids.ids
+            ):
                 # XXX the client does not allow to modify the field that
                 # triggered the onchange:
                 # https://github.com/odoo/odoo/issues/2693#issuecomment-56825399
@@ -139,36 +138,17 @@ class StockPicking(models.Model):
         vals = self._values_with_carrier_options(vals)
         return super().write(vals)
 
-    @api.model
-    def create(self, vals):
+    @api.model_create_multi
+    def create(self, vals_list):
         """Trigger onchange_carrier_id on create
 
         To ensure options are setted on the basis of carrier_id copied from
         Sale order or defined by default.
 
         """
-        vals = self._values_with_carrier_options(vals)
-        return super().create(vals)
-
-    def _get_carrier_account_domain(self):
-        return [
-            ("delivery_type", "in", self.mapped("delivery_type")),
-            "|",
-            ("company_id", "=", False),
-            ("company_id", "in", self.mapped("company_id.id")),
-            "|",
-            ("carrier_ids", "=", False),
-            ("carrier_ids", "in", self.mapped("carrier_id").ids),
-        ]
-
-    def _get_carrier_account(self):
-        """Return a carrier suitable for the current picking"""
-        domain = self._get_carrier_account_domain()
-        return self.env["carrier.account"].search(
-            domain,
-            limit=1,
-            order="company_id asc, sequence asc",
-        )
+        for vals in vals_list:
+            vals = self._values_with_carrier_options(vals)
+        return super().create(vals_list)
 
     def _get_label_sender_address(self):
         """On each carrier label module you need to define
