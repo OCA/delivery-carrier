@@ -26,16 +26,6 @@ msgid "Access Token"
 msgstr "访问令牌"
 
 #. module: base_delivery_carrier_label
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account__account
-msgid "Account Number"
-msgstr "账户号码"
-
-#. module: base_delivery_carrier_label
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account__password
-msgid "Account Password"
-msgstr "账户密码"
-
-#. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option__active
 msgid "Active"
 msgstr "有效"
@@ -62,11 +52,6 @@ msgid "Attachment URL"
 msgstr "附件网址"
 
 #. module: base_delivery_carrier_label
-#: model:ir.model,name:base_delivery_carrier_label.model_carrier_account
-msgid "Base account datas"
-msgstr "基本帐户数据"
-
-#. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_delivery_carrier_option__by_default
 msgid ""
 "By check, user can choose to apply this option to each Delivery Order\n"
@@ -88,13 +73,11 @@ msgid "Carrier"
 msgstr "承运商"
 
 #. module: base_delivery_carrier_label
-#: model:ir.actions.act_window,name:base_delivery_carrier_label.action_carrier_account
-#: model:ir.ui.menu,name:base_delivery_carrier_label.carrier_account_menu
-msgid "Carrier Account"
-msgstr "承运商账户"
+#: model_terms:ir.ui.view,arch_db:base_delivery_carrier_label.view_quant_package_tree
+msgid "Carrier Tracking URL"
+msgstr ""
 
 #. module: base_delivery_carrier_label
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account__carrier_ids
 #: model:ir.ui.menu,name:base_delivery_carrier_label.menu_carriers_config
 msgid "Carriers"
 msgstr "承运商"
@@ -117,13 +100,11 @@ msgid "Color"
 msgstr ""
 
 #. module: base_delivery_carrier_label
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account__company_id
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__company_id
 msgid "Company"
 msgstr "公司"
 
 #. module: base_delivery_carrier_label
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account__create_uid
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option__create_uid
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_template_option__create_uid
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_manifest_wizard__create_uid
@@ -132,7 +113,6 @@ msgid "Created by"
 msgstr "创建者"
 
 #. module: base_delivery_carrier_label
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account__create_date
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option__create_date
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_template_option__create_date
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_manifest_wizard__create_date
@@ -146,19 +126,9 @@ msgid "Database Data"
 msgstr "数据库数据"
 
 #. module: base_delivery_carrier_label
-#: model:ir.model.fields,help:base_delivery_carrier_label.field_carrier_account__file_format
-msgid "Default format of the carrier's label you want to print"
-msgstr "要打印的承运商标签的默认格式"
-
-#. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_stock_picking__carrier_code
 msgid "Delivery Method Code (according to carrier)"
 msgstr "交货方式代码（根据承运商）"
-
-#. module: base_delivery_carrier_label
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account__delivery_type
-msgid "Delivery Type"
-msgstr "交货类型"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_manifest_wizard
@@ -183,15 +153,10 @@ msgid "Description"
 msgstr "说明"
 
 #. module: base_delivery_carrier_label
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account__display_name
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier__display_name
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option__display_name
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_template_option__display_name
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_manifest_wizard__display_name
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__display_name
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_move_line__display_name
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_picking__display_name
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_quant_package__display_name
 msgid "Display Name"
 msgstr "显示名称"
 
@@ -214,11 +179,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__raw
 msgid "File Content (raw)"
 msgstr ""
-
-#. module: base_delivery_carrier_label
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account__file_format
-msgid "File Format"
-msgstr "文件格式"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_manifest_wizard__filename
@@ -246,15 +206,10 @@ msgid "Get Manifest File"
 msgstr "获取清单文件"
 
 #. module: base_delivery_carrier_label
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account__id
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier__id
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option__id
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_template_option__id
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_manifest_wizard__id
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__id
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_move_line__id
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_picking__id
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_quant_package__id
 msgid "ID"
 msgstr "ID"
 
@@ -296,20 +251,14 @@ msgid "Is public document"
 msgstr "是公共文件"
 
 #. module: base_delivery_carrier_label
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account____last_update
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier____last_update
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option____last_update
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_template_option____last_update
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_manifest_wizard____last_update
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label____last_update
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_move_line____last_update
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_picking____last_update
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_quant_package____last_update
 msgid "Last Modified on"
 msgstr "最后修改时间"
 
 #. module: base_delivery_carrier_label
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account__write_uid
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option__write_uid
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_template_option__write_uid
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_manifest_wizard__write_uid
@@ -318,7 +267,6 @@ msgid "Last Updated by"
 msgstr "最后更新者"
 
 #. module: base_delivery_carrier_label
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account__write_date
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option__write_date
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_template_option__write_date
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_manifest_wizard__write_date
@@ -345,6 +293,7 @@ msgid "Manifest"
 msgstr "清单"
 
 #. module: base_delivery_carrier_label
+#. odoo-python
 #: code:addons/base_delivery_carrier_label/wizard/manifest_wizard.py:0
 #, python-format
 msgid "Manifest not implemented for '%s' carrier."
@@ -356,7 +305,6 @@ msgid "Mime Type"
 msgstr "MIME 类型"
 
 #. module: base_delivery_carrier_label
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account__name
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option__name
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_template_option__name
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__name
@@ -452,11 +400,6 @@ msgid "Result"
 msgstr "结果"
 
 #. module: base_delivery_carrier_label
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account__sequence
-msgid "Sequence"
-msgstr ""
-
-#. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_shipping_label
 msgid "Shipping Label"
 msgstr "交货标签"
@@ -467,6 +410,7 @@ msgid "Shipping Methods"
 msgstr ""
 
 #. module: base_delivery_carrier_label
+#. odoo-python
 #: code:addons/base_delivery_carrier_label/models/stock_picking.py:0
 #, python-format
 msgid ""
@@ -486,29 +430,6 @@ msgstr "状态"
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__store_fname
 msgid "Stored Filename"
 msgstr "存储的文件名"
-
-#. module: base_delivery_carrier_label
-#: model:ir.model.fields,help:base_delivery_carrier_label.field_shipping_label__res_model
-msgid "The database object this attachment will be attached to."
-msgstr "此附件将附加到的数据库对象。"
-
-#. module: base_delivery_carrier_label
-#: model:ir.model.fields,help:base_delivery_carrier_label.field_shipping_label__res_id
-msgid "The record id this is attached to."
-msgstr "附加的记录ID。"
-
-#. module: base_delivery_carrier_label
-#: model:ir.model.fields,help:base_delivery_carrier_label.field_carrier_account__delivery_type
-msgid "This field may be used to link an account to a carrier"
-msgstr ""
-
-#. module: base_delivery_carrier_label
-#: model:ir.model.fields,help:base_delivery_carrier_label.field_carrier_account__carrier_ids
-msgid ""
-"This field may be used to link an account to specific delivery methods It "
-"may be usefull to find an account with more precision than with only the "
-"delivery type"
-msgstr ""
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_manifest_wizard__to_date
@@ -560,6 +481,7 @@ msgid ""
 msgstr "您可以从计算机上传文件，也可以将互联网链接复制/粘贴到您的文件中。"
 
 #. module: base_delivery_carrier_label
+#. odoo-python
 #: code:addons/base_delivery_carrier_label/models/stock_picking.py:0
 #, python-format
 msgid ""
@@ -569,11 +491,36 @@ msgstr "您不应删除强制选项。请取消编辑或添加选项：%s。"
 
 #. module: base_delivery_carrier_label
 #: model_terms:ir.ui.view,arch_db:base_delivery_carrier_label.delivery_carrier_option_view_form
-#: model_terms:ir.ui.view,arch_db:base_delivery_carrier_label.delivery_carrier_option_view_tree
 #: model_terms:ir.ui.view,arch_db:base_delivery_carrier_label.delivery_carrier_template_option_view_form
-#: model_terms:ir.ui.view,arch_db:base_delivery_carrier_label.delivery_carrier_template_option_view_tree
 msgid "delivery_carrier_option"
 msgstr "delivery_carrier_option"
+
+#~ msgid "Account Number"
+#~ msgstr "账户号码"
+
+#~ msgid "Account Password"
+#~ msgstr "账户密码"
+
+#~ msgid "Base account datas"
+#~ msgstr "基本帐户数据"
+
+#~ msgid "Carrier Account"
+#~ msgstr "承运商账户"
+
+#~ msgid "Default format of the carrier's label you want to print"
+#~ msgstr "要打印的承运商标签的默认格式"
+
+#~ msgid "Delivery Type"
+#~ msgstr "交货类型"
+
+#~ msgid "File Format"
+#~ msgstr "文件格式"
+
+#~ msgid "The database object this attachment will be attached to."
+#~ msgstr "此附件将附加到的数据库对象。"
+
+#~ msgid "The record id this is attached to."
+#~ msgstr "附加的记录ID。"
 
 #~ msgid "If checked, this option is necessarily applied to the delivery order"
 #~ msgstr "如果选中，则此选项必须应用于交货订单"
