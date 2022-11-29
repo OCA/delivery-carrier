@@ -29,7 +29,7 @@ class CarrierLabelCase(TransactionCase):
                         self.order.mapped("order_line.product_uom_qty")
                     ),
                 }
-            )
+            )._apply_inventory()
         self.order.action_confirm()
         self.picking = self.order.picking_ids
         self.picking.write(self._picking_data())
