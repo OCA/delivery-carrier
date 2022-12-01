@@ -130,7 +130,8 @@ class DeliveryCarrier(models.Model):
                     "This CTT Express service (%(service_name)s) isn't allowed for "
                     "this account configuration. Please choose one of the followings\n"
                     "%(type_descriptions)s",
-                    (service_name, type_descriptions),
+                    service_name=service_name,
+                    type_descriptions=type_descriptions,
                 )
             )
 
