@@ -103,3 +103,4 @@ class DeliveryCarrier(models.Model):
                         _('There is no matching delivery rule.'))
                 res += picking_res
             return res
+                            ).send_shipping(p)
