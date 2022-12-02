@@ -86,15 +86,17 @@ class DeliveryCarrier(models.Model):
                 for subcarrier in carrier.child_ids:
                     if subcarrier.delivery_type == 'fixed':
                         if subcarrier._match_address(p.partner_id):
+                            p.tentative_carrier = subcarrier
                             picking_res = [{
                                 'exact_price': subcarrier.fixed_price,
                                 'tracking_number': False}]
                             break
                     else:
                         try:
+                            p.sale_id.tentative_carrier = subcarrier
                             picking_res = super(
                                 DeliveryCarrier, subcarrier,
-                            ).send_shipping(pickings)
+                            ).send_shipping(p)
                             break
                         except Exception:
                             pass
@@ -103,4 +105,36 @@ class DeliveryCarrier(models.Model):
                         _('There is no matching delivery rule.'))
                 res += picking_res
             return res
-                            ).send_shipping(p)
+
+    def _get_price_available(self, order):
+        if self.destination_type == "one":
+            return super()._get_price_available(order)
+        # NOTE: Depending on `tentative_carrier` here is hacky beyond belief,
+        # and there should exist a better way.
+        #
+        # The problem this solves is as follows: Although `send_shipping()` is
+        # called using the subcarrier, some code in
+        # `base_on_rule_send_shipping()` (if the subcarrier has delivery type
+        # `base_on_rule`) uses the _picking_'s carrier to call
+        # `_get_price_available()`. This obviously breaks, because the picking's
+        # carrier is the subcarrier's parent, and has no rules configured.
+        #
+        # So we need to figure out what the chosen subcarrier was. The problem
+        # is that there exists no hypothetical method
+        # `determine_chosen_subcarrier_for_sale_order()` in this module.
+        # Instead, the chosen subcarrier is determined by simply trying to call
+        # `send_shipping()` until you find one that works.
+        #
+        # So either we write the hypothetical
+        # `determine_chosen_subcarrier_for_sale_order()` method and use it in
+        # both `send_picking()` and here, or we use this workaround hack of
+        # storing `tentative_carrier` on the order. But because you're reading
+        # this, you can see which option was chosen.
+        elif order.tentative_carrier:
+            return super(
+                DeliveryCarrier, order.tentative_carrier
+            )._get_price_available(order)
+        else:
+            raise ValidationError(
+                _("Could not find tentative carrier for %s") % self.name
+            )
