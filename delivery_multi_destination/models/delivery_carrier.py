@@ -86,7 +86,7 @@ class DeliveryCarrier(models.Model):
                 for subcarrier in carrier.child_ids:
                     if subcarrier.delivery_type == 'fixed':
                         if subcarrier._match_address(p.partner_id):
-                            p.tentative_carrier = subcarrier
+                            p.sale_id.tentative_carrier = subcarrier
                             picking_res = [{
                                 'exact_price': subcarrier.fixed_price,
                                 'tracking_number': False}]
