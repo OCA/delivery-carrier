@@ -21,6 +21,7 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
+[delivery_carrier_agency](delivery_carrier_agency/) | 16.0.1.0.0 |  | Add a model for Carrier Agencies
 [delivery_carrier_info](delivery_carrier_info/) | 16.0.1.0.0 |  | Add code on carrier
 [delivery_cttexpress](delivery_cttexpress/) | 16.0.1.0.1 |  | Delivery Carrier implementation for CTT Express API
 [delivery_package_number](delivery_package_number/) | 16.0.1.0.0 |  | Set or compute number of packages for a picking
