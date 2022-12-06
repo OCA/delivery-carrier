@@ -40,16 +40,9 @@ class StockBatchPicking(models.Model):
     def carrier_id_change(self):
         """Inherit this method in your module"""
         if self.carrier_id:
-            # This can look useless as the field carrier_code and
-            # carrier_type are related field. But it's needed to fill
-            # this field for using this fields in the view. Indeed the
-            # module that depend on delivery base can hide some field
-            # depending of the type or the code
-
             available_options = self.carrier_id.available_option_ids
             default_options = self._get_options_to_add()
             self.option_ids = [(6, 0, default_options.ids)]
-            self.carrier_code = self.carrier_id.code
             return {
                 "domain": {
                     "option_ids": [("id", "in", available_options.ids)],
