@@ -23,7 +23,7 @@ Default label for carrier labels
     :target: https://runbot.odoo-community.org/runbot/99/12.0
     :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3| |badge4| |badge5| 
+|badge1| |badge2| |badge3| |badge4| |badge5|
 
 This module defines a basic label to print when no specific carrier is selected.
 
@@ -62,6 +62,7 @@ Contributors
 * Sébastien Alix <sebastien.alix@camptocamp.com>
 * Sergio Teruel <sergio.teruel@tecnativa.com>
 * Iryna Vyshnevska <i.vyshnevska@mobilunity.com>
+* Stéphane Mangin <stephane.mangin@camptocamp.com>
 
 Other credits
 ~~~~~~~~~~~~~

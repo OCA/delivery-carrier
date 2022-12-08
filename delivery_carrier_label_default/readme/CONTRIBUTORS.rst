@@ -2,3 +2,4 @@
 * Sébastien Alix <sebastien.alix@camptocamp.com>
 * Sergio Teruel <sergio.teruel@tecnativa.com>
 * Iryna Vyshnevska <i.vyshnevska@mobilunity.com>
+* Stéphane Mangin <stephane.mangin@camptocamp.com>
