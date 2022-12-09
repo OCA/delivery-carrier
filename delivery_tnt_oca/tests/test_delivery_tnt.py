@@ -5,6 +5,8 @@ from datetime import timedelta
 from odoo.exceptions import UserError
 from odoo.tests import Form, common
 
+from odoo.addons.delivery_tnt_oca.models.tnt_request import TntRequest
+
 
 class TestDeliveryTntBase(common.SavepointCase):
     @classmethod
@@ -65,6 +67,18 @@ class DeliveryTnt(TestDeliveryTntBase):
         super().setUpClass()
         cls.picking = cls.sale.picking_ids[0]
         cls.picking.move_lines.quantity_done = 1
+
+    def test_picking_tnt_oca_misc(self):
+        tnt_request = TntRequest(self.carrier, self.picking)
+        data = tnt_request._get_data_total_shipping()
+        self.assertEqual(data["weight"], 1)
+        package_data = tnt_request._quant_package_data_from_picking()
+        self.assertEqual(package_data["WEIGHT"], 1)
+        self.picking.number_of_packages = 2
+        data = tnt_request._get_data_total_shipping()
+        self.assertEqual(data["weight"], 1)
+        package_data = tnt_request._quant_package_data_from_picking()
+        self.assertEqual(package_data["WEIGHT"], 0.5)
 
     def test_order_tnt_oca_rate_shipment(self):
         if not self.carrier or self.carrier.prod_environment:
