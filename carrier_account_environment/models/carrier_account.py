@@ -15,7 +15,6 @@ class CarrierAccount(models.Model):
             {
                 "account": {},
                 "password": {},
-                "file_format": {},
             }
         )
         return carrier_fields
