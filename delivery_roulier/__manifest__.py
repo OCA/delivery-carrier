@@ -15,7 +15,6 @@
     "website": "https://github.com/OCA/delivery-carrier",
     "data": [
         "views/stock_quant_package.xml",
-        "views/carrier_account.xml",
     ],
     "demo": [
         "demo/product.xml",
