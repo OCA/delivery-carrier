@@ -11,16 +11,15 @@ class CarrierAccount(models.Model):
     _order = "sequence"
 
     @api.model
-    def _selection_file_format(self):
-        """To inherit to add label file types"""
-        return [("PDF", "PDF"), ("ZPL", "ZPL"), ("XML", "XML")]
+    def _get_selection_delivery_type(self):
+        return self.env["delivery.carrier"].fields_get(allfields=["delivery_type"])[
+            "delivery_type"
+        ]["selection"]
 
     name = fields.Char(required=True)
     sequence = fields.Integer()
     delivery_type = fields.Selection(
-        selection=lambda self: self.env["delivery.carrier"]
-        ._fields["delivery_type"]
-        .selection,
+        selection="_get_selection_delivery_type",
         help="This field may be used to link an account to a carrier",
     )
     carrier_ids = fields.Many2many(
@@ -30,15 +29,10 @@ class CarrierAccount(models.Model):
         "carrier_id",
         string="Carriers",
         help=(
-            "This field may be used to link an account to specific delivery methods"
-            " It may be usefull to find an account with more precision than with "
-            "only the delivery type"
+            "This optional field may be used if the carrier account changes depending "
+            "on delivery methods belonging to a same carrier (same delivery type)"
         ),
     )
     account = fields.Char(string="Account Number", required=True)
     password = fields.Char(string="Account Password", required=True)
     company_id = fields.Many2one(comodel_name="res.company", string="Company")
-    file_format = fields.Selection(
-        selection="_selection_file_format",
-        help="Default format of the carrier's label you want to print",
-    )
