@@ -106,6 +106,11 @@ msgid "Incident"
 msgstr ""
 
 #. module: delivery_state
+#: model:ir.model.fields.selection,name:delivery_state.selection__stock_picking__delivery_state__no_update
+msgid "No more updates from carrier"
+msgstr ""
+
+#. module: delivery_state
 #: model_terms:ir.ui.view,arch_db:delivery_state.res_config_settings_view_form
 msgid ""
 "Send an automatic confirmation email when Delivery Orders are delivered"
@@ -144,7 +149,6 @@ msgstr ""
 #. module: delivery_state
 #: model:ir.actions.server,name:delivery_state.ir_cron_delivery_state_ir_actions_server
 #: model:ir.cron,cron_name:delivery_state.ir_cron_delivery_state
-#: model:ir.cron,name:delivery_state.ir_cron_delivery_state
 msgid "Update deliveries states"
 msgstr ""
 
