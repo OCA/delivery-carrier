@@ -32,6 +32,7 @@ class UpsRequest(object):
     def _process_reply(
         self, url, data=None, method="post", query_parameters=None,
     ):
+        data = data or {}
         headers = {
             "AccessLicenseNumber": self.access_license_number,
             "Username": self.username,
