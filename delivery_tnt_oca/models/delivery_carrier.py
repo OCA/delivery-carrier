@@ -18,6 +18,16 @@ class DeliveryCarrier(models.Model):
     tnt_oca_ws_password = fields.Char(string="WS Password")
     tnt_oca_ws_account = fields.Char(string="WS Account")
     # Misc
+    tnt_service_option = fields.Selection(
+        selection=[
+            ("PR", "PR"),
+            ("EQ", "EQ"),
+            ("XBB", "XBB"),
+            ("HZ", "HZ"),
+            ("BB", "BB"),
+        ],
+        string="Service option",
+    )
     tnt_product_type = fields.Selection(
         selection=[
             ("D", "Document (paper/manuals/reports)"),

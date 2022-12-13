@@ -24,6 +24,7 @@ class TntRequest(object):
         self.product_type = self.carrier.tnt_product_type
         self.product_code = self.carrier.tnt_product_code
         self.product_service = self.carrier.tnt_product_service
+        self.service_option = self.carrier.tnt_service_option
         self.username = self.carrier.tnt_oca_ws_username
         self.password = self.carrier.tnt_oca_ws_password
         self.account = self.carrier.tnt_oca_ws_account
@@ -261,7 +262,7 @@ class TntRequest(object):
                         "TOTALWEIGHT": data_total["weight"],
                         "TOTALVOLUME": data_total["volume"],
                         "SERVICE": self.product_code,
-                        "OPTION": "PR",
+                        "OPTION": self.service_option or "",
                         "DESCRIPTION": "",
                         "DELIVERYINST": "",
                         "PACKAGE": package,
