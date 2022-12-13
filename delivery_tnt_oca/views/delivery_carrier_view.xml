@@ -34,6 +34,7 @@ License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
                             />
                         </group>
                         <group string="Misc">
+                            <field name="tnt_service_option" />
                             <field
                                 name="tnt_product_type"
                                 attrs="{'required': [('delivery_type', '=', 'tnt_oca')]}"
