@@ -80,6 +80,19 @@ class DeliveryTnt(TestDeliveryTntBase):
         package_data = tnt_request._quant_package_data_from_picking()
         self.assertEqual(package_data["WEIGHT"], 0.5)
 
+    def test_label_tnt_oca_misc(self):
+        tnt_request = TntRequest(self.carrier, self.picking)
+        self.picking.carrier_tracking_ref = "TEST"
+        label_data = tnt_request._prepare_label_data()
+        self.assertEqual(
+            label_data["consignment"]["pieceLine"]["pieces"]["sequenceNumbers"], "1"
+        )
+        self.picking.number_of_packages = 2
+        label_data = tnt_request._prepare_label_data()
+        self.assertEqual(
+            label_data["consignment"]["pieceLine"]["pieces"]["sequenceNumbers"], "1,2"
+        )
+
     def test_order_tnt_oca_rate_shipment(self):
         if not self.carrier or self.carrier.prod_environment:
             self.skipTest("Without TNT carrier created")
