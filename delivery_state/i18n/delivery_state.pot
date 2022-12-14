@@ -108,6 +108,11 @@ msgid "Last Modified on"
 msgstr ""
 
 #. module: delivery_state
+#: model:ir.model.fields.selection,name:delivery_state.selection__stock_picking__delivery_state__no_update
+msgid "No more updates from carrier"
+msgstr ""
+
+#. module: delivery_state
 #: model:ir.model.fields,field_description:delivery_state.field_stock_picking__date_shipped
 msgid "Shipment Date"
 msgstr ""
