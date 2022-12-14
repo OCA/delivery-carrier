@@ -14,7 +14,7 @@
     "license": "AGPL-3",
     "development_status": "Production/Stable",
     "category": "Delivery",
-    "version": "13.0.2.0.2",
+    "version": "13.0.2.0.3",
     "depends": ["delivery"],
     "data": [
         "data/ir_cron_data.xml",
