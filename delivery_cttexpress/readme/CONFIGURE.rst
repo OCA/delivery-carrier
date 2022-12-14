@@ -1,3 +1,7 @@
+CTT Express Iberic Web Services API doesn't provide shipping price calculation methods.
+So you'll have to rely on Odoo standard methods selecting them in the field
+*Price method*.
+
 To configure your CTT Express services, go to:
 
 #. *Inventory/Sales > Configuration > Delivery methods* and create a new one.
