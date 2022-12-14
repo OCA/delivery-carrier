@@ -34,6 +34,7 @@ class StockPicking(models.Model):
             ("incidence", "Incidence"),
             ("customer_delivered", "Customer delivered"),
             ("warehouse_delivered", "Warehouse delivered"),
+            ("no_update", "No more updates from carrier"),
         ],
         string="Carrier State",
         tracking=True,
@@ -61,7 +62,7 @@ class StockPicking(models.Model):
                 (
                     "delivery_state",
                     "not in",
-                    ["customer_delivered", "canceled_shipment"],
+                    ["customer_delivered", "canceled_shipment", "no_update"],
                 ),
                 # These won't ever autoupdate, so we don't want to evaluate them
                 ("delivery_type", "not in", [False, "fixed", "base_one_rule"]),
