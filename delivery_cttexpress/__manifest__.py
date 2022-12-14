@@ -9,7 +9,7 @@
     "author": "Tecnativa, Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "installable": True,
-    "depends": ["delivery_package_number", "delivery_state"],
+    "depends": ["delivery_package_number", "delivery_state", "delivery_price_method"],
     "data": [
         "security/ir.model.access.csv",
         "wizards/cttexpress_manifest_wizard_views.xml",
