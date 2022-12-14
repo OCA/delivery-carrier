@@ -46,7 +46,7 @@ addon | version | maintainers | summary
 [delivery_sending](delivery_sending/) | 13.0.1.2.1 |  | Delivery Carrier implementation for Sending API
 [delivery_state](delivery_state/) | 13.0.2.0.2 |  | Provides fields to be able to contemplate the tracking statesand also adds a global fields
 [delivery_tnt_oca](delivery_tnt_oca/) | 13.0.1.1.2 | [![victoralmau](https://github.com/victoralmau.png?size=30px)](https://github.com/victoralmau) | Integrate TNT webservice
-[delivery_ups_oca](delivery_ups_oca/) | 13.0.2.0.0 |  | Integrate UPS webservice
+[delivery_ups_oca](delivery_ups_oca/) | 13.0.2.0.1 |  | Integrate UPS webservice
 [partner_delivery_schedule](partner_delivery_schedule/) | 13.0.1.0.0 |  | Set on partners a schedule for delivery goods
 [partner_delivery_zone](partner_delivery_zone/) | 13.0.1.1.1 |  | Set on partners a zone for delivery goods
 [server_environment_delivery](server_environment_delivery/) | 13.0.1.0.0 |  | Configure prod environment for delivery carriers
