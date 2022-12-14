@@ -127,6 +127,18 @@ msgid "Delivery Date"
 msgstr "Fecha de entrega"
 
 #. module: delivery_state
+#: model:ir.model.fields,field_description:delivery_state.field_delivery_carrier__display_name
+#: model:ir.model.fields,field_description:delivery_state.field_stock_picking__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: delivery_state
+#: model:ir.model.fields,field_description:delivery_state.field_delivery_carrier__id
+#: model:ir.model.fields,field_description:delivery_state.field_stock_picking__id
+msgid "ID"
+msgstr ""
+
+#. module: delivery_state
 #: model:ir.model.fields.selection,name:delivery_state.selection__stock_picking__delivery_state__in_transit
 msgid "In transit"
 msgstr "En tránsito"
@@ -135,6 +147,17 @@ msgstr "En tránsito"
 #: model:ir.model.fields.selection,name:delivery_state.selection__stock_picking__delivery_state__incidence
 msgid "Incidence"
 msgstr "Incidencia"
+
+#. module: delivery_state
+#: model:ir.model.fields,field_description:delivery_state.field_delivery_carrier____last_update
+#: model:ir.model.fields,field_description:delivery_state.field_stock_picking____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: delivery_state
+#: model:ir.model.fields.selection,name:delivery_state.selection__stock_picking__delivery_state__no_update
+msgid "No more updates from carrier"
+msgstr ""
 
 #. module: delivery_state
 #: model:ir.model.fields,field_description:delivery_state.field_stock_picking__date_shipped
