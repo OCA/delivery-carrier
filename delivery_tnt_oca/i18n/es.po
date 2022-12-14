@@ -407,3 +407,13 @@ msgstr "Usuario"
 #: model:ir.model.fields.selection,name:delivery_tnt_oca.selection__delivery_carrier__tnt_service_option__xbb
 msgid "XBB"
 msgstr ""
+
+#. module: delivery_tnt_oca
+#: model:product.packaging,weight_uom_name:delivery_tnt_oca.product_packaging_tnt_default
+msgid "kg"
+msgstr ""
+
+#. module: delivery_tnt_oca
+#: model:product.packaging,volume_uom_name:delivery_tnt_oca.product_packaging_tnt_default
+msgid "m³"
+msgstr ""
