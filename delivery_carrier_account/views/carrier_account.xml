@@ -22,14 +22,7 @@
                         </h1>
                     </div>
                     <group>
-                        <!-- To be able to link a carrier account with a delivery method -->
                         <field name="delivery_type" />
-                        <field
-                            name="carrier_ids"
-                            widget="many2many_tags"
-                            attrs="{'invisible': [('delivery_type', '=', False)]}"
-                            domain="[('delivery_type', '=', delivery_type)]"
-                        />
                         <field name="account" />
                         <field name="password" password="True" />
                         <field name="company_id" />
