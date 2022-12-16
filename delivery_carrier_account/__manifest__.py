@@ -11,6 +11,7 @@
     "website": "https://github.com/OCA/delivery-carrier",
     "data": [
         "views/carrier_account.xml",
+        "views/delivery_carrier.xml",
         "security/ir.model.access.csv",
         "security/carrier_security.xml",
     ],
