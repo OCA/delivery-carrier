@@ -43,6 +43,12 @@ class DeliveryCarrier(models.Model):
     )
     cttexpress_document_offset = fields.Integer(string="Document Offset")
 
+    @api.onchange("delivery_type")
+    def _onchange_delivery_type_ctt(self):
+        """Default price method for CTT as the API can't gather prices."""
+        if self.delivery_type == "cttexpress":
+            self.price_method = "base_on_rule"
+
     def _ctt_request(self):
         """Get CTT Request object
 
