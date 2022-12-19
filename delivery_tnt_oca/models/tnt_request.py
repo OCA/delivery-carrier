@@ -160,9 +160,9 @@ class TntRequest(object):
         return {
             "ITEMS": self.record.number_of_packages,
             "DESCRIPTION": self.record.name,
-            "LENGTH": data_total["length"] / self.record.number_of_packages,
-            "HEIGHT": data_total["height"] / self.record.number_of_packages,
-            "WIDTH": data_total["width"] / self.record.number_of_packages,
+            "LENGTH": max((data_total["length"] / self.record.number_of_packages), 0.1),
+            "HEIGHT": max((data_total["height"] / self.record.number_of_packages), 0.1),
+            "WIDTH": max((data_total["width"] / self.record.number_of_packages), 0.1),
             "WEIGHT": data_total["weight"] / self.record.number_of_packages,
         }
 
