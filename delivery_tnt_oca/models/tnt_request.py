@@ -279,7 +279,6 @@ class TntRequest(object):
             },
             "ACTIVITY": {
                 "CREATE": {"CONREF": self.record.name},
-                "BOOK": {"CONREF": self.record.name},
                 "SHIP": {"CONREF": self.record.name},
                 "PRINT": {
                     "CONNOTE": {"CONREF": self.record.name},
