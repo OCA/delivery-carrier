@@ -73,11 +73,17 @@ class DeliveryTnt(TestDeliveryTntBase):
         data = tnt_request._get_data_total_shipping()
         self.assertEqual(data["weight"], 1)
         package_data = tnt_request._quant_package_data_from_picking()
+        self.assertEqual(package_data["LENGTH"], 0.1)
+        self.assertEqual(package_data["HEIGHT"], 0.1)
+        self.assertEqual(package_data["WIDTH"], 0.1)
         self.assertEqual(package_data["WEIGHT"], 1)
         self.picking.number_of_packages = 2
         data = tnt_request._get_data_total_shipping()
         self.assertEqual(data["weight"], 1)
         package_data = tnt_request._quant_package_data_from_picking()
+        self.assertEqual(package_data["LENGTH"], 0.1)
+        self.assertEqual(package_data["HEIGHT"], 0.1)
+        self.assertEqual(package_data["WIDTH"], 0.1)
         self.assertEqual(package_data["WEIGHT"], 0.5)
 
     def test_label_tnt_oca_misc(self):
