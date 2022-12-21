@@ -29,7 +29,7 @@ class StockMoveLine(models.Model):
             product = self.product_id
             ato = self.env["account.tax"]
             price_unit = ato._fix_tax_included_price_company(
-                product.list_price, product.taxes_id, ato, self.picking_id.company_id
+                product.lst_price, product.taxes_id, ato, self.picking_id.company_id
             )
             # case of phantom bom
             if soline.discount:
