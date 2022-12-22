@@ -6,6 +6,7 @@ from odoo import api, fields, models
 
 class DeliveryReport(models.Model):
     _name = "delivery.report.gls"
+    _description = "End of the day GLS report"
 
     report_datetime = fields.Datetime(
         string="Report Date and Time", required=True, readonly=True
@@ -16,7 +17,7 @@ class DeliveryReport(models.Model):
     package_ids = fields.One2many(
         "stock.quant.package",
         "report_id",
-        "Pickings",
+        "Packages",
         readonly=True,
     )
 

@@ -12,16 +12,20 @@ _logger = logging.getLogger(__name__)
 class DeliveryCarrier(models.Model):
     _inherit = "delivery.carrier"
 
-    delivery_type = fields.Selection(selection_add=[("gls", "Gls")])
+    delivery_type = fields.Selection(
+        selection_add=[("gls", "GLS")],
+        ondelete={
+            "gls": lambda recs: recs.write({"delivery_type": "fixed", "fixed_price": 0})
+        },
+    )
 
     gls_contact_id = fields.Char(
-        string="Contact ID",
-        related="company_id.gls_contact_id",
+        string="International",
+        size=10,
+        help="Contact id for GLS International transportation (T8914)",
     )
-    gls_login = fields.Char(string="Login User", group="base.group_system")
-    gls_password = fields.Char(string="Login Password", group="base.group_system")
-    gls_url = fields.Char(string="Service Url", group="base.group_system")
-    gls_url_test = fields.Char(string="Test Service Url", group="base.group_system")
+    gls_url = fields.Char(string="Service Url")
+    gls_url_test = fields.Char(string="Test Service Url")
     gls_url_tracking = fields.Char(
         help="Root URL for parcel tracking. Needs a %s for the tracking reference."
     )
@@ -54,105 +58,66 @@ class DeliveryCarrier(models.Model):
     gls_return_partner_id = fields.Many2one(
         "res.partner",
         string="Return Address",
-        help="If set, this partner's adress will be used on the return label.",
+        help="If set, this partner's address will be used on the return label.",
     )
 
     @api.constrains("gls_return_partner_id")
     def _check_gls_return_partner_id(self):
-        filter_check = lambda c: c.delivery_type == "gls" and c.gls_return_partner_id
-        records_to_check = self.filtered(filter_check)
+        records_to_check = self.filtered(
+            lambda c: c.delivery_type == "gls" and c.gls_return_partner_id
+        )
         for carrier in records_to_check:
             carrier.gls_return_partner_id._gls_prepare_address()
 
     @api.constrains(
         "delivery_type",
         "gls_contact_id",
-        "gls_login",
-        "gls_password",
         "gls_url_tracking",
         "gls_label_format",
-        "gls_return_partner_id",
+        "carrier_account_id",
     )
     def _check_gls_fields(self):
         gls_field_names = [
             "gls_contact_id",
-            "gls_login",
-            "gls_password",
-            "gls_url_tracking",
-        ]
-        gls_records = self.filtered(lambda c: c.delivery_type == "gls")
-        for rec in gls_records:
-            for field_name in gls_field_names + ["gls_label_format"]:
-                value = rec[field_name]
-                if not value:
-                    field = rec._fields[field_name]
-                    description_string = field._description_string(self.env)
-                    msg = _("The GLS field '%s' is required for carrier %s")
-                    raise ValidationError(msg % (description_string, rec.name))
-                if field_name == "gls_url_tracking" and "%s" not in value:
-                    raise ValidationError(_("The tracking url must contain '%s'."))
-        for rec in self - gls_records:
-            if any(rec[f] for f in gls_field_names):
-                msg = _("Incorrect GLS parameters set on carrier %s.")
-                raise ValidationError(msg % rec.name)
-
-    @api.constrains("delivery_type", "prod_environment", "gls_url", "gls_url_test")
-    def _check_gls_url(self):
-        gls_records = self.filtered(lambda c: c.delivery_type == "gls")
-        for rec in gls_records:
-            if not rec.prod_environment and not rec.gls_url_test:
-                msg = _("The GLS field 'Test Service Url' is required in test mode.")
-                raise ValidationError(msg)
-            if rec.prod_environment and not rec.gls_url:
-                msg = _("The GLS field 'Service Url' is required in production mode.")
-                raise ValidationError(msg)
-        for rec in self - gls_records:
-            if rec.gls_url or rec.gls_url_test:
-                msg = _("Incorrect GLS parameters set on carrier %s.")
-                raise ValidationError(msg % rec.name)
-
-    @api.constrains(
-        "delivery_type",
-        "gls_contact_id",
-        "gls_login",
-        "gls_password",
-        "gls_url_tracking",
-        "gls_label_format",
-    )
-    def _check_gls_fields(self):
-        gls_field_names = [
-            "gls_contact_id",
-            "gls_login",
-            "gls_password",
             "gls_url_tracking",
             "gls_label_format",
+            "carrier_account_id",
         ]
-        for rec in self.filtered(lambda c: c.delivery_type == "gls"):
+        gls_records = self.filtered(lambda c: c.delivery_type == "gls")
+        for rec in gls_records:
             for field_name in gls_field_names:
                 value = rec[field_name]
                 if not value:
                     field = rec._fields[field_name]
                     description_string = field._description_string(self.env)
                     raise ValidationError(
-                        _("The GLS field '%s' is required for carrier %s")
-                        % (description_string, rec.name)
+                        _(
+                            f"The GLS field '{description_string}' is required for "
+                            f"carrier {rec.name}"
+                        )
                     )
 
+        for rec in self - gls_records:
+            if any(
+                rec[f]
+                for f in gls_field_names
+                if f not in ("carrier_account_id", "gls_label_format")
+            ):
+                raise ValidationError(
+                    _(f"Incorrect GLS parameters set on carrier {rec.name}.")
+                )
+
     @api.constrains("delivery_type", "prod_environment", "gls_url", "gls_url_test")
-    def _check_fls_url(self):
+    def _check_gls_url(self):
         for rec in self.filtered(lambda c: c.delivery_type == "gls"):
             if not rec.prod_environment and not rec.gls_url_test:
                 raise ValidationError(
-                    _("The GLS field 'Test Service Url' is required in " "test mode")
+                    _("The GLS field 'Test Service Url' is required in test mode")
                 )
             if rec.prod_environment and not rec.gls_url:
                 raise ValidationError(
-                    _("The GLS field 'Service Url' is required in " "non test mode")
+                    _("The GLS field 'Service Url' is required in non test mode")
                 )
-
-    def gls_get_shipping_price_from_so(self, order):
-        self.ensure_one()
-        return [0]  # TODO?
 
     def gls_send_shipping(self, picking):
         tracking_number = picking.gls_send_shipping(self)
@@ -165,14 +130,14 @@ class DeliveryCarrier(models.Model):
     def gls_get_tracking_link(self, pickings):
         links = []
         for picking in pickings:
-            for link in picking.mapped("package_ids.parcel_tracking"):
+            for link in picking.package_ids.parcel_tracking:
                 if link:
                     links.append(self.gls_tracking_url(link))
         return links
 
     def gls_cancel_shipment(self, pickings):
-        if pickings.mapped("package_ids.report_id"):
-            msg = _("Packages cannot be cancelled after the End of Day report.")
+        if pickings.package_ids.report_id:
+            msg = _("Packages cannot be canceled after the End of Day report.")
             raise ValidationError(msg)
         for picking in pickings:
             picking.gls_cancel_shipment()

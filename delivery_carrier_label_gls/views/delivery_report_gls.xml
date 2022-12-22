@@ -12,7 +12,7 @@
               <field name="display_name" />
               <field name="parcel_tracking" />
               <field name="shipping_weight" />
-              <field name="packaging_id" />
+              <field name="package_type_id" />
             </tree>
           </field>
         </group>

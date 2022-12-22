@@ -10,7 +10,7 @@ class ShippingLabel(models.Model):
     @api.model
     def _get_file_type_selection(self):
         """Adds GLS supported file types."""
-        res = super(ShippingLabel, self)._get_file_type_selection()
+        res = super()._get_file_type_selection()
         existing_formats = {t[0] for t in res}
         gls_formats = self.env["delivery.carrier"]._fields["gls_label_format"].selection
         for key, name in gls_formats:

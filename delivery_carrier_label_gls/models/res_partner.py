@@ -59,8 +59,8 @@ class ResPartner(models.Model):
             else:
                 value = self[key]
             if not value and key not in mapping_optional:
-                msg = _("Missing required parameter %s on partner %s")
-                raise ValidationError(msg % (key, self.name))
+                msg = _(f"Missing required parameter {key} on partner {self.name}")
+                raise ValidationError(msg)
             if value:
                 gls_key = mapping[key]
                 address_payload[gls_key] = value[: GLS_MAX_LENGTHS[gls_key]]
@@ -81,6 +81,6 @@ class ResPartner(models.Model):
         normalize, validate = COUNTRY_NORMALIZE_VALIDATE[country_code]
         iso_zip = normalize(self.zip)
         if validate_raises and not validate(iso_zip):
-            msg = _("Not a valid ZIP code for country %s: %s")
-            raise ValidationError(msg % (country_code, self.zip))
+            msg = _(f"Not a valid ZIP code for country {country_code}: {self.zip}")
+            raise ValidationError(msg)
         return iso_zip

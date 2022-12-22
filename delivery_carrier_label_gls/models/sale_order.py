@@ -14,7 +14,7 @@ class SaleOrder(models.Model):
     delivery_type = fields.Selection(related="carrier_id.delivery_type", readonly=True)
 
     def action_confirm(self):
-        res = super(SaleOrder, self).action_confirm()
+        res = super().action_confirm()
         for so in self:
             if so.gls_parcel_shop:
                 so.picking_ids.update({"gls_parcel_shop": so.gls_parcel_shop})
