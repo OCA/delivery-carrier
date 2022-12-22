@@ -26,18 +26,18 @@ class StockPicking(models.Model):
 
     def _check_is_everything_packaged(self):
         for picking in self:
-            if not all(o.result_package_id for o in picking.pack_operation_product_ids):
+            if not all(o.result_package_id for o in picking.move_ids.move_line_ids):
                 msg = _("For GLS every operation should be put in a pack.")
                 raise ValidationError(msg)
 
-    def do_transfer(self):
+    def button_validate(self):
         """Check that each GLS picking has been completely sent."""
         gls_pickings = self.filtered(lambda p: p.delivery_type == "gls")
         gls_pickings._check_is_everything_packaged()
-        return super(StockPicking, self).do_transfer()
+        return super().button_validate()
 
     def gls_send_shipping(self, delivery_carrier=False):
-        for package in self.mapped("pack_operation_product_ids.result_package_id"):
+        for package in self.move_ids.move_line_ids.result_package_id:
             if not package.parcel_tracking:
                 self.gls_send_shipping_package(package)
         return self.carrier_tracking_ref
@@ -57,7 +57,7 @@ class StockPicking(models.Model):
         return self.gls_send_shipping()
 
     def gls_cancel_shipment(self):
-        for package in self.pack_operation_product_ids.result_package_id:
+        for package in self.move_line_ids.result_package_id:
             if package.parcel_tracking:
                 package.gls_cancel_shipment()
 
