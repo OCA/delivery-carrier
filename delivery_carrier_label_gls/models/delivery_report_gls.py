@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -15,7 +14,10 @@ class DeliveryReport(models.Model):
         "delivery.carrier", string="Carrier", required=True, readonly=True
     )
     package_ids = fields.One2many(
-        "stock.quant.package", "report_id", "Pickings", readonly=True,
+        "stock.quant.package",
+        "report_id",
+        "Pickings",
+        readonly=True,
     )
 
     @api.depends("carrier_id", "report_datetime")

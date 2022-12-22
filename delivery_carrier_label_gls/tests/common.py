@@ -1,4 +1,3 @@
-# coding: utf-8
 # Copyright 2021 ACSONE SA/NV.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
@@ -79,49 +78,49 @@ class MockGlsClient(object):
 
     def create_parcel(self, shipment_payload):
         return {
-            u"CreatedShipment": {
-                u"CustomerID": u"0560002709",
-                u"GDPR": [
-                    u"Information about Data Protection in GLS Group can be found at",
-                    u"gls-group.eu/dataprotection",
+            "CreatedShipment": {
+                "CustomerID": "0560002709",
+                "GDPR": [
+                    "Information about Data Protection in GLS Group can be found at",
+                    "gls-group.eu/dataprotection",
                 ],
-                u"ParcelData": [
+                "ParcelData": [
                     {
-                        u"Barcodes": {
-                            u"Primary1D": u"716649153647",
-                            u"Primary1DPrint": True,
-                            u"Primary2D": u"ABE7100BE7311...",
-                            u"Secondary2D": u"A|Dagbladen...",
+                        "Barcodes": {
+                            "Primary1D": "716649153647",
+                            "Primary1DPrint": True,
+                            "Primary2D": "ABE7100BE7311...",
+                            "Secondary2D": "A|Dagbladen...",
                         },
-                        u"HandlingInformation": u"SHD S",
-                        u"ParcelNumber": u"716649153647",
-                        u"RoutingInfo": {
-                            u"FinalLocationCode": u"BE7311",
-                            u"HubLocation": u"B73",
-                            u"InboundSortingFlag": u"2",
-                            u"LastRoutingDate": u"2021-06-12",
-                            u"Tour": u"1101",
+                        "HandlingInformation": "SHD S",
+                        "ParcelNumber": "716649153647",
+                        "RoutingInfo": {
+                            "FinalLocationCode": "BE7311",
+                            "HubLocation": "B73",
+                            "InboundSortingFlag": "2",
+                            "LastRoutingDate": "2021-06-12",
+                            "Tour": "1101",
                         },
-                        u"ServiceArea": {
-                            u"Service": [
+                        "ServiceArea": {
+                            "Service": [
                                 {
-                                    u"Header": u"ShopDeliveryService",
-                                    u"Information": [
+                                    "Header": "ShopDeliveryService",
+                                    "Information": [
                                         {
-                                            u"Name": u"ConsigneeName",
-                                            u"Value": u"partner",
+                                            "Name": "ConsigneeName",
+                                            "Value": "partner",
                                         },
-                                        {u"Name": u"Phone", u"Value": u""},
+                                        {"Name": "Phone", "Value": ""},
                                     ],
                                 }
                             ]
                         },
-                        u"TrackID": u"ZMZE0SRO",
+                        "TrackID": "ZMZE0SRO",
                     }
                 ],
-                u"PickupLocation": u"BE7100",
-                u"PrintData": [{u"Data": u"JVeryLongString==", u"LabelFormat": u"PDF"}],
-                u"ShipmentReference": [u"WH/OUT/00032"],
+                "PickupLocation": "BE7100",
+                "PrintData": [{"Data": "JVeryLongString==", "LabelFormat": "PDF"}],
+                "ShipmentReference": ["WH/OUT/00032"],
             }
         }
 
