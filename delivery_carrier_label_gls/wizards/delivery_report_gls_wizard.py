@@ -32,7 +32,7 @@ class DeliveryReportGls(models.TransientModel):
                 raise ValidationError(_("Only GLS supports delivery reports."))
 
     @api.model
-    def cron(self):
+    def _cron_end_of_day_report(self):
         return self.create({})._get_end_of_day_report()
 
     def get_end_of_day_report(self):
@@ -78,7 +78,7 @@ class DeliveryReportGls(models.TransientModel):
             packages = self.env["stock.quant.package"].search(domain_packages)
             if len(packages) != len(packages_api):
                 _logger.exception("End of day report: wrong number of packages!")
-            for carrier in packages.mapped("carrier_id"):
+            for carrier in packages.carrier_id:
                 vals_report = {"report_datetime": date or now, "carrier_id": carrier.id}
                 report = self.env["delivery.report.gls"].create(vals_report)
                 report_pkgs = packages.filtered(lambda p, c=carrier: p.carrier_id == c)

@@ -24,7 +24,6 @@
   <record model="ir.actions.act_window" id="delivery_report_gls_wizard_act_window">
     <field name="name">GLS: Get End of Day Report</field>
     <field name="res_model">delivery.report.gls.wizard</field>
-    <field name="view_type">form</field>
     <field name="view_mode">form</field>
     <field name="target">new</field>
     <field name="domain">[]</field>
@@ -33,9 +32,9 @@
   <menuitem
         id="delivery_report_gls_wizard_menu"
         name="GLS: Get End of Day Report"
-        sequence="50"
+        sequence="51"
         parent="stock.menu_stock_inventory_control"
-        groups="group_gls_report_manager"
         action="delivery_report_gls_wizard_act_window"
+        groups="group_gls_report_manager"
     />
 </odoo>

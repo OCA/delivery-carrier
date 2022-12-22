@@ -27,33 +27,31 @@ class DeliveryClientGls(models.TransientModel):
     def _constrain_carrier(self):
         for record in self:
             if record.carrier_id.delivery_type != "gls":
-                raise ValidationError(_("This is a GLS client."))
+                raise ValidationError(_("This is not a GLS client."))
 
     def _get_contact_id(self):
         self.ensure_one()
-        contact_id = self.carrier_id.company_id.gls_contact_id
+        contact_id = self.carrier_id.gls_contact_id
         if not contact_id:
             raise ValidationError(_("Your GLS Contact ID is not configured."))
         return contact_id
 
     def _get_gls_connections_parameters(self):
         self.ensure_one()
-        test_mode = not self.carrier_id.company_id.prod_environment
-        keys = ["gls_url_test" if test_mode else "gls_url"]
-        keys += ["gls_login", "gls_password"]
-        parameters = []
-        for key in keys:
-            value = self.carrier_id[key]
-            if not value:
-                msg = _("The %s is missing in the delivery configuration.")
-                raise ValidationError(msg % key)
-            parameters.append(value)
-        return parameters
+        test_mode = not self.carrier_id.prod_environment
+        url_key = "gls_url_test" if test_mode else "gls_url"
+        if not self.carrier_id[url_key]:
+            raise ValidationError(
+                _(f"The {url_key} is missing in the delivery configuration.")
+            )
+        return (
+            self.carrier_id[url_key],
+            self.carrier_id.carrier_account_id.account,
+            self.carrier_id.carrier_account_id.password,
+        )
 
     def get_end_of_day_report(self, date=False):
         date = date or fields.Date.today()
-        if isinstance(date, str):  # v10
-            date = fields.Date.from_string(date)
         params = {"date": fields.Date.to_string(date)}
         return self._post("shipments/endofday", params=params)
 

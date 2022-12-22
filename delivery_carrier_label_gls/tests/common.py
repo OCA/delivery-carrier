@@ -2,13 +2,12 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from contextlib import contextmanager
+from unittest import mock
 
-import mock
-
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 
 
-class TestGLS(SavepointCase):
+class TestGLS(TransactionCase):
     @classmethod
     def _get_gls_carrier_vals(cls):
         return {
@@ -16,18 +15,38 @@ class TestGLS(SavepointCase):
             "company_id": cls.company.id,
             "delivery_type": "gls",
             "prod_environment": False,
-            "gls_login": "LOGIN",  # Fill these if you want to test your integration
-            "gls_password": "PASSWORD",  # the 3 parameters are needed by the client
-            "gls_contact_id": "CONTACTID",  # you may need to adapt the test addresses
+            "carrier_account_id": cls.gls_carrier_account.id,
+            "gls_contact_id": "CONTACTID",  # fill it for client integration test
+            "product_id": cls.gls_product.id,
             "gls_url_test": "https://shipit-wbm-test01.gls-group.eu:8443/backend/rs/",
             "gls_url_tracking": "https://gls-group.eu/EU/en/parcel-tracking/match=%s",
         }
 
     @classmethod
-    def setUpClass(cls):
-        super(TestGLS, cls).setUpClass()
+    def _get_gls_carrier_account_vals(cls):
+        return {
+            "name": "GLS test",
+            "company_id": cls.company.id,
+            "delivery_type": "gls",
+            "account": "GLS Account",  # fill it for client integration test
+            "password": "GLS password",  # fill it for client integration test
+        }
 
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
         cls.company = cls.env.user.company_id
+        vals_gls_product = {
+            "default_code": "Code ship GLS",
+            "type": "service",
+            "sale_ok": False,
+            "name": "Name ship GLS",
+        }
+        cls.gls_product = cls.env["product.product"].create(vals_gls_product)
+        vals_gls_carrier_account = cls._get_gls_carrier_account_vals()
+        cls.gls_carrier_account = cls.env["carrier.account"].create(
+            vals_gls_carrier_account
+        )
         vals_gls_carrier = cls._get_gls_carrier_vals()
         cls.gls_carrier = cls.env["delivery.carrier"].create(vals_gls_carrier)
         cls.gls_client = cls.env["delivery.client.gls"].create(
@@ -44,6 +63,11 @@ class TestGLS(SavepointCase):
             "country_id": cls.env.ref("base.be").id,
         }
         cls.partner = cls.env["res.partner"].create(vals_partner)
+        cls.stock_location = cls.env.ref("stock.stock_location_stock")
+        cls.warehouse = cls.env["stock.warehouse"].search(
+            [("lot_stock_id", "=", cls.stock_location.id)], limit=1
+        )
+        cls.customer_location = cls.env.ref("stock.stock_location_customers")
         cls.gls_parcel_shop = "0560005537"
         vals_sale_order = {
             "partner_id": cls.partner.id,

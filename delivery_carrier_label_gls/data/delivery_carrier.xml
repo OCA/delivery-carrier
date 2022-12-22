@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo noupdate="1">
-  <record id="delivery_carrier_gls" model="delivery.carrier">
-    <field name="name">GLS</field>
-    <field name="delivery_type">gls</field>
-    <field name="code">GLS</field>
-    <field name="product_id" ref="product_product_gls" />
-    <field
+    <record id="delivery_carrier_gls" model="delivery.carrier">
+        <field name="name">GLS</field>
+        <field name="delivery_type">gls</field>
+        <field name="code">GLS</field>
+        <field name="product_id" ref="delivery_carrier_label_gls.product_product_gls" />
+        <field
+            name="carrier_account_id"
+            ref="delivery_carrier_label_gls.carrier_account_gls"
+        />
+        <field name="gls_contact_id">CHANGE ME</field>
+        <field
             name="gls_url"
         >https://shipit-wbm-test01.gls-group.eu:8443/backend/rs/</field>
-    <field
+        <field
             name="gls_url_test"
         >https://shipit-wbm-test01.gls-group.eu:8443/backend/rs/</field>
-    <field
+        <field
             name="gls_url_tracking"
         >https://gls-group.eu/EU/en/parcel-tracking/match=%s</field>
-    <field name="gls_label_format">pdf</field>
-    <field name="gls_login">TO BE SPECIFIED</field>
-    <field name="gls_password">TO BE SPECIFIED</field>
-   </record>
+        <field name="gls_label_format">pdf</field>
+    </record>
 </odoo>

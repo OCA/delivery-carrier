@@ -3,9 +3,9 @@
   <record id="view_order_form_with_carrier" model="ir.ui.view">
     <field name="name">sale.order.form.delivery_gls</field>
     <field name="model">sale.order</field>
-    <field name="inherit_id" ref="delivery.view_order_form_with_carrier" />
+    <field name="inherit_id" ref="sale.view_order_form" />
     <field name="arch" type="xml">
-      <xpath expr="//field[@name='id']" position="after">
+      <xpath expr="//field[@name='payment_term_id']" position="after">
         <field name="delivery_type" invisible="1" />
         <field
                     name="gls_parcel_shop"
