@@ -1,4 +1,3 @@
-# coding: utf-8
 # Copyright 2021 ACSONE SA/NV.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
@@ -10,7 +9,7 @@ from .common import TestGLS, mock_gls_client
 class TestGlsFlow(TestGLS):
     def test_flow(self):
         """We test the complete flow, since actions depend on each other.
-           To call cancel, you need to call create before; same with the report.
+        To call cancel, you need to call create before; same with the report.
         """
         # when
         self.sale_order.action_confirm()

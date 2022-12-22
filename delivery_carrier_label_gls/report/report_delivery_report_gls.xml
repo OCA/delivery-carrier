@@ -8,20 +8,20 @@
                     <t t-set="address">
                         <p id="partner_info"><strong>Partner:</strong></p>
                         <div
-              t-field="o.carrier_id.company_id.partner_id"
-              t-options='{"widget": "contact", "fields": ["address", "name", "phone", "email"], "no_marker": true, "phone_icons": true}'
-            />
+                            t-field="o.carrier_id.company_id.partner_id"
+                            t-options='{"widget": "contact", "fields": ["address", "name", "phone", "email"], "no_marker": true, "phone_icons": true}'
+                        />
                     </t>
                     <div class="page">
                         <div class="oe_structure" />
                         <div class="row" id="header_info">
                             <div class="col-3">
                                 <h3>GLS Delivery Report: <div
-                    t-field="o.report_datetime"
-                  /></h3>
+                                        t-field="o.report_datetime"
+                                    /></h3>
                                 <p>GLS Contact ID: <span
-                    t-field="o.carrier_id.gls_contact_id"
-                  /></p>
+                                        t-field="o.carrier_id.gls_contact_id"
+                                    /></p>
                             </div>
                         </div>
                         <div class="row" id="packages_info">
@@ -34,18 +34,18 @@
                                     <thead>
                                         <tr>
                                                 <th class="text-right"><strong
-                        >Internal Reference</strong></th>
+                                                >Internal Reference</strong></th>
                                             <th><strong>Tracking</strong></th>
                                             <th class="text-right"><strong
-                        >Weight</strong></th>
+                                                >Weight</strong></th>
                                             <th class="text-right"><strong
-                        >Package Reference</strong></th>
+                                                >Package Reference</strong></th>
                                             <th class="text-right"><strong
-                        >Name</strong></th>
+                                                >Name</strong></th>
                                             <th class="text-right"><strong
-                        >City</strong></th>
+                                                >City</strong></th>
                                             <th class="text-right"><strong
-                        >Country</strong></th>
+                                                >Country</strong></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -53,47 +53,47 @@
                                             <tr>
                                                     <td>
                                                         <span
-                            t-field="l.gls_picking_id.origin"
-                          />
+                                                        t-field="l.gls_picking_id.origin"
+                                                    />
                                                     </td>
                                                     <td>
                                                         <span
-                            t-field="l.parcel_tracking"
-                          />
+                                                        t-field="l.parcel_tracking"
+                                                    />
                                                     </td>
                                                     <td class="text-right">
                                                         <span
-                            t-field="l.shipping_weight"
-                          />
+                                                        t-field="l.shipping_weight"
+                                                    />
                                                     </td>
                                                     <td class="text-right">
                                                         <span
-                            t-field="l.gls_package_ref"
-                          />
+                                                        t-field="l.gls_package_ref"
+                                                    />
                                                     </td>
                                                     <td class="text-right">
                                                         <span
-                            t-field="l.gls_picking_id.partner_id.name"
-                          />
+                                                        t-field="l.gls_picking_id.partner_id.name"
+                                                    />
                                                     </td>
                                                     <td class="text-right">
                                                         <span
-                            t-field="l.gls_picking_id.partner_id.city"
-                          />
+                                                        t-field="l.gls_picking_id.partner_id.city"
+                                                    />
                                                     </td>
                                                     <td class="text-right">
                                                         <span
-                            t-field="l.gls_picking_id.partner_id.country_id.code"
-                          />
+                                                        t-field="l.gls_picking_id.partner_id.country_id.code"
+                                                    />
                                                     </td>
                                                 <t
-                          t-set="number_packages"
-                          t-value="number_packages + 1"
-                        />
+                                                    t-set="number_packages"
+                                                    t-value="number_packages + 1"
+                                                />
                                                 <t
-                          t-set="total_weight"
-                          t-value="total_weight + l.shipping_weight"
-                        />
+                                                    t-set="total_weight"
+                                                    t-value="total_weight + l.shipping_weight"
+                                                />
                                             </tr>
                                         </t>
                                     </tbody>
