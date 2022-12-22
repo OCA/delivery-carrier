@@ -52,22 +52,26 @@ class StockQuantPackage(models.Model):
         self.ensure_one()
         package_name = self.name or self.id
         allowed_product_types = ["PARCEL", "EXPRESS", "FREIGHT"]
-        if self.packaging_id.shipper_package_code not in allowed_product_types:
-            msg = _("The GLS package code for package %s should be in %s.")
-            raise ValidationError(msg % (package_name, allowed_product_types))
+        if self.package_type_id.shipper_package_code not in allowed_product_types:
+            msg = _(
+                f"The GLS package code for package {package_name} should be "
+                f"in {allowed_product_types}."
+            )
+            raise ValidationError(msg)
         if not self.gls_picking_id:
-            msg = _("The GLS picking is missing on package %s.")
-            raise ValidationError(msg % package_name)
+            msg = _(f"The GLS picking is missing on package {package_name}.")
+            raise ValidationError(msg)
         if not self.shipping_weight:
-            msg = _("The shipping weight is missing on package %s.")
-            raise ValidationError(msg % package_name)
+            msg = _(f"The shipping weight is missing on package {package_name}.")
+            raise ValidationError(msg)
 
     def _gls_prepare_shipment(self):
         weight = max(self.shipping_weight, 0.1)  # GLS API requirement
-        reference = (self.gls_picking_id.name or "PICKING%s" % self.id)[:40]
+        reference = (self.gls_picking_id.name or f"PICKING{self.id}")[:40]
+        partner = self.gls_picking_id.partner_id
         return {
-            "Product": self.packaging_id.shipper_package_code,
-            "Consignee": {"Address": self._gls_prepare_address()},
+            "Product": self.package_type_id.shipper_package_code,
+            "Consignee": {"Address": partner._gls_prepare_address()},
             "ShipmentUnit": [{"Weight": "{:05.2f}".format(weight)}],
             "ShipmentReference": [reference],
             "Service": self._gls_prepare_package_service(),
@@ -82,41 +86,12 @@ class StockQuantPackage(models.Model):
         assert len(response["CreatedShipment"]["ParcelData"]) == 1  # :-/
         parcel_data = response["CreatedShipment"]["ParcelData"][0]
         tracking = parcel_data["TrackID"]
-        # !! if you don't want to pay for lost API calls, you need:
-        # https://github.com/odoo/odoo/pull/54321/
-        self.env.cr.after("rollback", lambda: client.cancel_parcel(tracking))
+        # avoid paying for lost API calls
+        self.env.cr.postrollback.add(lambda: client.cancel_parcel(tracking))
         self.parcel_tracking = tracking
         self.gls_package_ref = parcel_data["ParcelNumber"]
         label_content = response["CreatedShipment"]["PrintData"]
         self._gls_label_package(label_content)
-
-    def _gls_prepare_address(self):
-        self.ensure_one()
-        address_payload = {}
-        mapping = {
-            "name": "Name1",
-            "street": "Street",
-            "city": "City",
-            "email": "eMail",
-            "zip": "ZIPCode",
-            "phone": "FixedLinePhonenumber",
-            "country_id.code": "CountryCode",
-            "state_id.name": "Province",
-        }
-        mapping_optional = {"phone", "state_id.name"}
-        partner = self.gls_picking_id.partner_id
-        for key in mapping:
-            if "." in key:
-                value = partner.mapped(key)
-                value = value[0] if value else value
-            else:
-                value = partner[key]
-            if not value and key not in mapping_optional:
-                msg = _("Missing required parameter %s on partner %s")
-                raise ValidationError(msg % (key, partner.name))
-            if value:
-                address_payload[mapping[key]] = value
-        return address_payload
 
     @api.model
     def _gls_prepare_package_service(self):
@@ -135,11 +110,10 @@ class StockQuantPackage(models.Model):
         self.ensure_one()
         extension = "pdf" if self.carrier_id.gls_label_format == "pdf" else "txt"
         file_type = self.carrier_id.gls_label_format
-        name = (self.name or "PACKAGE%s" % self.id) + "." + extension
+        name = (self.name or f"PACKAGE{self.id}") + "." + extension
         vals_label = {
             "package_id": self.id,
             "datas": label_data[0]["Data"],
-            "datas_fname": name,
             "res_id": self.gls_picking_id.id,
             "res_model": self.gls_picking_id._name,
             "file_type": file_type,

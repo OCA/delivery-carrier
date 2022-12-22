@@ -8,8 +8,8 @@ from odoo.exceptions import ValidationError
 from .common import TestGLS
 
 
-# to run these tests, you need to put your GLS credentials into the carrier
-# in the common setup.
+# to run these tests, you need to put your GLS credentials into the carrier account
+# and shipping method.
 @unittest.skip("gls_client")
 class TestGlsClient(TestGLS):
     @property
