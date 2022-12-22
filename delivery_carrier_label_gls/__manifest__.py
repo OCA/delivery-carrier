@@ -1,4 +1,3 @@
-# coding: utf-8
 # © 2015 David BEAL @ Akretion
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
@@ -16,7 +15,7 @@
         "document",
         "delivery",
     ],
-    "website": "http://www.acsone.eu/",
+    "website": "https://github.com/OCA/delivery-carrier",
     "data": [
         "security/groups.xml",
         "security/ir.model.access.csv",

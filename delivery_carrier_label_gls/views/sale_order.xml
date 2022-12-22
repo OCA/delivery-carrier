@@ -8,9 +8,9 @@
       <xpath expr="//field[@name='id']" position="after">
         <field name="delivery_type" invisible="1" />
         <field
-          name="gls_parcel_shop"
-          attrs="{'invisible': [('delivery_type', '!=', 'gls')]}"
-        />
+                    name="gls_parcel_shop"
+                    attrs="{'invisible': [('delivery_type', '!=', 'gls')]}"
+                />
       </xpath>
     </field>
   </record>

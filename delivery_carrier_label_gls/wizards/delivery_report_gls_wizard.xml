@@ -11,11 +11,11 @@
         </group>
         <footer>
                     <button
-            name="get_end_of_day_report"
-            class="btn btn-primary"
-            type="object"
-            string="GLS: Get End of Day Report"
-          />
+                        name="get_end_of_day_report"
+                        class="btn btn-primary"
+                        type="object"
+                        string="GLS: Get End of Day Report"
+                    />
                     <button special="cancel" string="Cancel" />
                 </footer>
       </form>
@@ -31,11 +31,11 @@
     <field name="context">{}</field>
   </record>
   <menuitem
-    id="delivery_report_gls_wizard_menu"
-    name="GLS: Get End of Day Report"
-    sequence="50"
-    parent="stock.menu_stock_inventory_control"
-    groups="group_gls_report_manager"
-    action="delivery_report_gls_wizard_act_window"
-  />
+        id="delivery_report_gls_wizard_menu"
+        name="GLS: Get End of Day Report"
+        sequence="50"
+        parent="stock.menu_stock_inventory_control"
+        groups="group_gls_report_manager"
+        action="delivery_report_gls_wizard_act_window"
+    />
 </odoo>

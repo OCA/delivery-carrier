@@ -1,20 +1,18 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from collections import defaultdict
 import re
+from collections import defaultdict
 
 from odoo import _, models
 from odoo.exceptions import ValidationError
-
 
 GLS_MAX_LENGTHS = defaultdict(lambda: 40)
 GLS_MAX_LENGTHS.update(eMail=80, ZIPCode=10, CountryCode=2)
 
 
 def keep_alphanumeric(s):
-    return re.sub("[\W_]", "", s)
+    return re.sub(r"[\W_]", "", s)
 
 
 def keep_digits(s):
@@ -65,7 +63,7 @@ class ResPartner(models.Model):
                 raise ValidationError(msg % (key, self.name))
             if value:
                 gls_key = mapping[key]
-                address_payload[gls_key] = value[:GLS_MAX_LENGTHS[gls_key]]
+                address_payload[gls_key] = value[: GLS_MAX_LENGTHS[gls_key]]
         if address_payload["CountryCode"] == "MC":  # for GLS Monaco is France
             address_payload["CountryCode"] = "FR"  # read commit for explanation
         address_payload["ZIPCode"] = self._get_iso_zip(
@@ -75,8 +73,8 @@ class ResPartner(models.Model):
 
     def _get_iso_zip(self, validate_raises=False, country_code=None):
         """GLS does not support common ways to format the zip, and will raise.
-           Typically in Luxembourg they are written L-4280 or in certain countries
-           they might add some space or dash for readability.
+        Typically in Luxembourg they are written L-4280 or in certain countries
+        they might add some space or dash for readability.
         """
         self.ensure_one()
         country_code = country_code or self.country_id.code

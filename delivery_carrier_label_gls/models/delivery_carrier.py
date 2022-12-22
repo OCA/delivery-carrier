@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -16,7 +15,8 @@ class DeliveryCarrier(models.Model):
     delivery_type = fields.Selection(selection_add=[("gls", "Gls")])
 
     gls_contact_id = fields.Char(
-        string="Contact ID", related="company_id.gls_contact_id",
+        string="Contact ID",
+        related="company_id.gls_contact_id",
     )
     gls_login = fields.Char(string="Login User", group="base.group_system")
     gls_password = fields.Char(string="Login Password", group="base.group_system")
@@ -32,7 +32,7 @@ class DeliveryCarrier(models.Model):
             ("zebra", "Zebra"),
             ("intermec", "Intermec"),
             ("datamax", "Datamax"),
-            ("toshiba", "Toshiba")
+            ("toshiba", "Toshiba"),
         ],
         default="pdf",
     )
@@ -111,15 +111,21 @@ class DeliveryCarrier(models.Model):
                 msg = _("Incorrect GLS parameters set on carrier %s.")
                 raise ValidationError(msg % rec.name)
 
-    @api.constrains("delivery_type", "gls_contact_id", "gls_login",
-                    "gls_password", "gls_url_tracking", "gls_label_format")
+    @api.constrains(
+        "delivery_type",
+        "gls_contact_id",
+        "gls_login",
+        "gls_password",
+        "gls_url_tracking",
+        "gls_label_format",
+    )
     def _check_gls_fields(self):
         gls_field_names = [
             "gls_contact_id",
             "gls_login",
             "gls_password",
             "gls_url_tracking",
-            "gls_label_format"
+            "gls_label_format",
         ]
         for rec in self.filtered(lambda c: c.delivery_type == "gls"):
             for field_name in gls_field_names:
@@ -137,13 +143,11 @@ class DeliveryCarrier(models.Model):
         for rec in self.filtered(lambda c: c.delivery_type == "gls"):
             if not rec.prod_environment and not rec.gls_url_test:
                 raise ValidationError(
-                    _("The GLS field 'Test Service Url' is required in "
-                      "test mode")
+                    _("The GLS field 'Test Service Url' is required in " "test mode")
                 )
             if rec.prod_environment and not rec.gls_url:
                 raise ValidationError(
-                    _("The GLS field 'Service Url' is required in "
-                      "non test mode")
+                    _("The GLS field 'Service Url' is required in " "non test mode")
                 )
 
     def gls_get_shipping_price_from_so(self, order):
