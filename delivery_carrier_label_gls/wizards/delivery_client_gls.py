@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 # pylint: disable=unbalanced-tuple-unpacking
@@ -78,7 +77,9 @@ class DeliveryClientGls(models.TransientModel):
             response = self._post("shipments", json=payload)
         except ValidationError as e:
             if "ARTICLES_VALID_FOR_COUNTRY" in e.args[0]:
-                payload["Shipment"].pop("Service")  # let GLS use default available service
+                payload["Shipment"].pop(
+                    "Service"
+                )  # let GLS use default available service
                 response = self._post("shipments", json=payload)
             else:
                 raise
