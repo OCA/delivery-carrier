@@ -4,7 +4,7 @@
 from odoo.tests import Form, common
 
 
-class TestStockPickingReportDeliveryCost(common.SavepointCase):
+class TestStockPickingReportDeliveryCost(common.TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -52,10 +52,8 @@ class TestStockPickingReportDeliveryCost(common.SavepointCase):
     def test_carrier_price_for_report_before(self):
         delivery_wizard = Form(
             self.env["choose.delivery.carrier"].with_context(
-                {
-                    "default_order_id": self.order.id,
-                    "default_carrier_id": self.carrier.id,
-                }
+                default_order_id=self.order.id,
+                default_carrier_id=self.carrier.id,
             )
         )
         choose_delivery_carrier = delivery_wizard.save()
@@ -69,6 +67,6 @@ class TestStockPickingReportDeliveryCost(common.SavepointCase):
         picking = self.order.picking_ids
         self.assertAlmostEqual(picking.carrier_price_for_report, 0)
         move = picking.move_ids_without_package
-        move.qty_done = move.product_qty
-        picking.action_done()
+        move.quantity_done = move.product_qty
+        picking.button_validate()
         self.assertAlmostEqual(picking.carrier_price_for_report, 5)
