@@ -114,3 +114,13 @@ class Picking(models.Model):
             + "&field=datas&filename_field=name&download=true",
             "target": "download",
         }
+
+    def _action_done(self):
+        res = super(Picking, self)._action_done()
+        for pick in self:
+            if (
+                pick.picking_type_id.code == "outgoing"
+                and pick.carrier_id.delivery_type == "deutsche_post"
+            ):
+                pick.get_deutsche_post_label()
+        return res
