@@ -43,3 +43,29 @@ class StockPicking(models.Model):
             move_dest = get_first_move_dest(move_dest, done=done)
         # Should return an empty record if we reach this line
         return self.browse()
+
+    def _pre_put_in_pack_hook(self, move_line_ids):
+        res = super()._pre_put_in_pack_hook(move_line_ids)
+        if not res:
+            if (
+                self.picking_type_id.set_delivery_package_type_on_put_in_pack
+                and self.ship_carrier_id
+            ):
+                return self._set_delivery_package_type()
+        else:
+            return res
+
+    def _set_delivery_package_type(self):
+        self.ensure_one()
+        res = super()._set_delivery_package_type()
+        context = dict(
+            self.env.context,
+            current_package_carrier_type=self.ship_carrier_id.delivery_type,
+        )
+        # As we pass the `delivery_type` ('fixed' or 'base_on_rule' by default) in a
+        # key which corresponds to the `package_carrier_type` ('none' to default), we
+        # make a conversion. No conversion needed for other carriers as the
+        # `delivery_type` and`package_carrier_type` will be the same in these cases.
+        if context["current_package_carrier_type"] in ["fixed", "base_on_rule"]:
+            context["current_package_carrier_type"] = "none"
+        return res
