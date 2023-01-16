@@ -34,6 +34,7 @@ addon | version | maintainers | summary
 [partner_delivery_schedule](partner_delivery_schedule/) | 15.0.1.0.1 |  | Set on partners a schedule for delivery goods
 [partner_delivery_zone](partner_delivery_zone/) | 15.0.1.0.0 |  | This module allows to create partner delivery zones for physical products
 [stock_picking_delivery_link](stock_picking_delivery_link/) | 15.0.1.0.1 |  | Adds link to the delivery on all intermediate operations.
+[stock_picking_report_delivery_cost](stock_picking_report_delivery_cost/) | 15.0.1.0.0 |  | Show delivery cost in delivery slip and picking operations reports
 
 [//]: # (end addons)
 
