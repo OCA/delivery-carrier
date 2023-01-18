@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-27 03:01+0000\n"
-"PO-Revision-Date: 2022-04-20 17:05+0000\n"
+"PO-Revision-Date: 2023-01-18 09:48+0000\n"
 "Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.3.2\n"
+"X-Generator: Weblate 4.14.1\n"
 
 #. module: delivery_roulier_dpd
 #: model:ir.model,name:delivery_roulier_dpd.model_delivery_carrier
@@ -51,7 +51,7 @@ msgstr ""
 #. module: delivery_roulier_dpd
 #: model:ir.model,name:delivery_roulier_dpd.model_stock_picking
 msgid "Transfer"
-msgstr "Trasferisci"
+msgstr "Trasferimento"
 
 #. module: delivery_roulier_dpd
 #: model:ir.model,name:delivery_roulier_dpd.model_keychain_account
