@@ -10,14 +10,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-27 03:01+0000\n"
-"PO-Revision-Date: 2018-03-27 03:01+0000\n"
-"Last-Translator: Paolo Valier, 2018\n"
+"PO-Revision-Date: 2023-01-18 09:48+0000\n"
+"Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.14.1\n"
 
 #. module: delivery_roulier
 #: code:addons/delivery_roulier/models/stock_quant_package.py:283
@@ -119,7 +120,7 @@ msgstr ""
 #. module: delivery_roulier
 #: model:ir.model,name:delivery_roulier.model_stock_picking
 msgid "Transfer"
-msgstr "Trasferisci"
+msgstr "Trasferimento"
 
 #. module: delivery_roulier
 #: model:ir.model.fields,help:delivery_roulier.field_stock_picking_customs_category
