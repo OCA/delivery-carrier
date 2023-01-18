@@ -6,8 +6,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-10 09:32+0000\n"
-"PO-Revision-Date: 2023-01-10 09:32+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -18,6 +16,16 @@ msgstr ""
 #. module: stock_picking_delivery_link
 #: model_terms:ir.ui.view,arch_db:stock_picking_delivery_link.view_picking_form
 msgid "Delivery Links"
+msgstr ""
+
+#. module: stock_picking_delivery_link
+#: model:ir.model.fields,field_description:stock_picking_delivery_link.field_stock_picking_type__set_delivery_package_type_on_put_in_pack
+msgid "Delivery package type on put in pack"
+msgstr ""
+
+#. module: stock_picking_delivery_link
+#: model:ir.model,name:stock_picking_delivery_link.model_stock_picking_type
+msgid "Picking Type"
 msgstr ""
 
 #. module: stock_picking_delivery_link
