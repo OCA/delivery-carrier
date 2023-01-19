@@ -77,7 +77,7 @@
 
     <record model="ir.ui.menu" id="delivery_carrier_category_menu">
         <field name="name">Delivery Methods Categories</field>
-        <field name="parent_id" ref="delivery.menu_delivery" />
+        <field name="parent_id" ref="stock.menu_delivery" />
         <field name="action" ref="delivery_carrier_category_act_window" />
         <field name="sequence" eval="16" />
     </record>
