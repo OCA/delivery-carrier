@@ -29,6 +29,7 @@ addon | version | maintainers | summary
 [delivery_package_number](delivery_package_number/) | 16.0.1.0.0 |  | Set or compute number of packages for a picking
 [delivery_price_method](delivery_price_method/) | 16.0.1.0.0 |  | Provides fields to be able to contemplate the tracking statesand also adds a global fields
 [delivery_state](delivery_state/) | 16.0.1.1.0 |  | Provides fields to be able to contemplate the tracking statesand also adds a global fields
+[stock_picking_delivery_link](stock_picking_delivery_link/) | 16.0.1.0.1 |  | Adds link to the delivery on all intermediate operations.
 
 [//]: # (end addons)
 
