@@ -17,7 +17,7 @@ class StockPicking(models.Model):
             }
         )
         if self.carrier_code == "DPD_Relais":
-            service["dropOffLocation"] = self._dpd_dropoff_site()
+            service["pickupLocationId"] = self._dpd_dropoff_site()
             service["notifications"] = "AutomaticSMS"
         if self.carrier_code == "DPD_Predict":
             service["notifications"] = "Predict"
