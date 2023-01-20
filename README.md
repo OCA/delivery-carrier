@@ -48,7 +48,7 @@ addon | version | maintainers | summary
 [delivery_tnt_oca](delivery_tnt_oca/) | 13.0.1.1.7 | [![victoralmau](https://github.com/victoralmau.png?size=30px)](https://github.com/victoralmau) | Integrate TNT webservice
 [delivery_ups_oca](delivery_ups_oca/) | 13.0.2.0.1 |  | Integrate UPS webservice
 [partner_delivery_schedule](partner_delivery_schedule/) | 13.0.1.0.0 |  | Set on partners a schedule for delivery goods
-[partner_delivery_zone](partner_delivery_zone/) | 13.0.1.1.1 |  | Set on partners a zone for delivery goods
+[partner_delivery_zone](partner_delivery_zone/) | 13.0.1.2.0 |  | Set on partners a zone for delivery goods
 [server_environment_delivery](server_environment_delivery/) | 13.0.1.0.0 |  | Configure prod environment for delivery carriers
 [stock_picking_carrier_from_rule](stock_picking_carrier_from_rule/) | 13.0.1.0.0 |  | Set the carrier on picking if the stock rule used has a partner address set with a delivery method.
 [stock_picking_delivery_link](stock_picking_delivery_link/) | 13.0.1.0.0 |  | Adds link to the delivery on all intermediate operations.
