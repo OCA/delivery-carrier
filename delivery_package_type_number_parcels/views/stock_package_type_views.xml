@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="stock_package_type_form_delivery">
+        <field
+            name="name"
+        >stock.package.type.form.delivery (in delivery_package_type_number_parcels)</field>
+        <field name="model">stock.package.type</field>
+        <field name="inherit_id" ref="stock.stock_package_type_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='barcode']" position="before">
+                <field name="number_of_parcels" />
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="stock_package_type_tree_delivery">
+        <field
+            name="name"
+        >stock.package.type.tree.delivery (in delivery_package_type_number_parcels)</field>
+        <field name="model">stock.package.type</field>
+        <field name="inherit_id" ref="stock.stock_package_type_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field
+                    name="number_of_parcels"
+                    optional="show"
+                    attrs="{'invisible': [('number_of_parcels', '=', 0)]}"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
