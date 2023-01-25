@@ -23,10 +23,7 @@ class DeliveryDepositWizard(models.TransientModel):
 
     def _prepare_deposit_slip(self):
         self.ensure_one()
-        return {
-            "delivery_type": self.delivery_type,
-            "company_id": self.env.company.id
-        }
+        return {"delivery_type": self.delivery_type, "company_id": self.env.company.id}
 
     def _fetch_pickings(self):
         self.ensure_one()
