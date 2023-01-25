@@ -8,6 +8,8 @@ class CarrierAccount(models.Model):
     _inherit = "carrier.account"
 
     dpd_fr_soap_customer_country = fields.Char()
-    dpd_fr_soap_customer_id = fields.Char()
-    dpd_fr_soap_agency_id = fields.Char()
-    dpd_fr_soap_file_format = fields.Selection([("ZPL", "ZPL"), ("PDF", "PDF")])
+    dpd_fr_soap_customer_id = fields.Char(string="DPD Customer ID")
+    dpd_fr_soap_agency_id = fields.Char(string="DPD Agency ID")
+    dpd_fr_soap_file_format = fields.Selection(
+        [("ZPL", "ZPL"), ("PDF", "PDF")], string="DPD file format"
+    )
