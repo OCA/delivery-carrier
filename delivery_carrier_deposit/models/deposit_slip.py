@@ -15,11 +15,15 @@ class DepositSlip(models.Model):
     _inherit = ["mail.thread", "mail.activity.mixin"]
 
     @api.depends("picking_ids")
-    def _compute_weight(self):
-        weight = 0.0
-        for picking in self.picking_ids:
-            weight += picking.shipping_weight
-        self.weight = weight
+    def _compute_weight_and_packages(self):
+        for deposit in self:
+            weight = 0.0
+            packages = self.env["stock.quant.package"]
+            for picking in self.picking_ids:
+                weight += picking.shipping_weight
+                packages |= picking.package_ids
+            deposit.weight = weight
+            deposit.package_number = len(packages)
 
     name = fields.Char(
         readonly=True, states={"draft": [("readonly", False)]}, default="/", copy=False
@@ -52,7 +56,10 @@ class DepositSlip(models.Model):
     )
     weight = fields.Float(
         string="Total Weight",
-        compute="_compute_weight",
+        compute="_compute_weight_and_packages",
+    )
+    package_number = fields.Integer(
+        string="Number of Package", compute="_compute_weight_and_packages"
     )
 
     _sql_constraints = [
@@ -63,13 +70,12 @@ class DepositSlip(models.Model):
         )
     ]
 
-    @api.model
-    def create(self, vals=None):
-        if vals is None:
-            vals = {}
-        if vals.get("name", "/") == "/":
-            vals["name"] = self.env["ir.sequence"].next_by_code("delivery.deposit")
-        return super().create(vals)
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            if vals.get("name", "/") == "/":
+                vals["name"] = self.env["ir.sequence"].next_by_code("delivery.deposit")
+        return super().create(vals_list)
 
     def create_edi_file(self):
         """
