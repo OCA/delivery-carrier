@@ -54,7 +54,6 @@ class DeliveryDepositWizard(models.TransientModel):
                 "view_type": "form",
                 "view_mode": "form,tree",
                 "res_id": deposit.id,
-                "nodestroy": False,
                 "target": "current",
             }
             return action

@@ -88,12 +88,14 @@
                 <group name="main" col="4">
                     <field name="name" />
                     <field name="weight" />
+                    <field name="package_number" />
                     <field name="delivery_type" />
                 </group>
                 <group name="pickings">
                     <field
                             name="picking_ids"
                             nolabel="1"
+                            colspan="2"
                             widget="many2many"
                             options="{'not_delete': True, 'no_create': True}"
                         >
