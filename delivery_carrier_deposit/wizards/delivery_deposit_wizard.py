@@ -38,6 +38,7 @@ class DeliveryDepositWizard(models.TransientModel):
                 ("carrier_id", "in", carriers.ids),
                 ("deposit_slip_id", "=", False),
                 ("state", "=", "done"),
+                ("picking_type_id.code", "!=", "incoming"),
             ]
         )
         return pickings
