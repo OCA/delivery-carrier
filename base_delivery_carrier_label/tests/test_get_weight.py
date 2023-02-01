@@ -94,7 +94,7 @@ class TestGetWeight(TransactionCase):
             )
 
         # test package.weight
-        self.assertEqual(package.weight, sum([product.weight for product in products]))
+        self.assertEqual(package.weight, sum(product.weight for product in products))
 
     def test_total_weight(self):
         """Test quant.package.weight computed field when a total
@@ -157,7 +157,7 @@ class TestGetWeight(TransactionCase):
 
         # test package._weight
         self.assertEqual(
-            package.weight, sum([operation.get_weight() for operation in operations])
+            package.weight, sum(operation.get_weight() for operation in operations)
         )
 
     def test_get_weight_with_uom(self):
