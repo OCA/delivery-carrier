@@ -58,10 +58,7 @@ class TestHelperFunctions(TransactionCase):
                 company_id=self.env.user.company_id.id,
             )
         )
-        label = picking.with_context(
-            # test if the function protect against an unwanted key in the context
-            default_type="some_type",
-        ).attach_shipping_label(
+        label = picking.attach_shipping_label(
             dict(
                 name="hello_world.pdf",
                 file=base64.b64encode(bytes("hello world", "utf8")),

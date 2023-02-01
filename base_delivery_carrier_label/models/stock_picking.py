@@ -44,11 +44,11 @@ class StockPicking(models.Model):
                     {"parcel_tracking": label.get("tracking_number")}
                 )
         context_attachment = self.env.context.copy()
-        # remove default_type setted for stock_picking
-        # as it would try to define default value of attachement
-        if "default_type" in context_attachment:
-            del context_attachment["default_type"]
-        return self.env["shipping.label"].with_context(context_attachment).create(data)
+        return (
+            self.env["shipping.label"]
+            .with_context(context_attachment=context_attachment)
+            .create(data)
+        )
 
     def _set_a_default_package(self):
         """Pickings using this module must have a package

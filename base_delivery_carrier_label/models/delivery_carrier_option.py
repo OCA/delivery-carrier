@@ -38,7 +38,6 @@ class DeliveryCarrierOption(models.Model):
     )
     carrier_id = fields.Many2one(comodel_name="delivery.carrier", string="Carrier")
     readonly_flag = fields.Boolean(
-        string="Readonly Flag",
         help="When True, help to prevent the user to modify some fields "
         "option (if attribute is defined in the view)",
     )

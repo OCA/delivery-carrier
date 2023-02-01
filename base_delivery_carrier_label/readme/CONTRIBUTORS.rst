@@ -7,3 +7,4 @@
 * Dave Lasley <dave@laslabs.com>
 * Timothée Ringeard <timothee.ringeard@camptocamp.com>
 * Pimolnat Suntian <pimolnats@ecosoft.co.th>
+* Foram Shah <foram.shah@initos.com>

@@ -12,7 +12,7 @@ class ShippingLabel(models.Model):
     _inherits = {"ir.attachment": "attachment_id"}
     _description = "Shipping Label"
 
-    file_type = fields.Char(string="File type", default="pdf")
+    file_type = fields.Char(default="pdf")
     package_id = fields.Many2one(comodel_name="stock.quant.package", string="Pack")
     attachment_id = fields.Many2one(
         comodel_name="ir.attachment",
