@@ -151,7 +151,7 @@ class DeliveryCarrier(models.Model):
     def _tnt_oca_action_label(self, picking):
         report_name = "delivery_tnt_oca.label_delivery_tnt_oca_template"
         iar = self.env["ir.actions.report"]
-        res = iar._get_report_from_name(report_name).render_qweb_text(picking.ids)
+        res = iar._get_report_from_name(report_name)._render_qweb_text(picking.ids)
         return self.env["ir.attachment"].create(
             {
                 "name": "TNT-%s.txt" % picking.carrier_tracking_ref,
