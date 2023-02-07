@@ -3,7 +3,7 @@
 {
     "name": "Delivery Carrier Service Level",
     "summary": "Add service levels to carrier",
-    "version": "13.0.1.0.2",
+    "version": "16.0.1.0.0",
     "category": "Delivery",
     "website": "https://github.com/OCA/delivery-carrier",
     "author": "Therp, Odoo Community Association (OCA)",

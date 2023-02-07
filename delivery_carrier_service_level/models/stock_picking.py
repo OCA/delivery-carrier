@@ -10,6 +10,14 @@ class StockPicking(models.Model):
     _name = "stock.picking"
     _inherit = "stock.picking"
 
+    carrier_service_level_id = fields.Many2one(
+        comodel_name="carrier.service.level",
+        string="Carrier Service Level",
+        domain="[('carrier_id', '=?', carrier_id)]",
+        compute="_compute_carrier_service_level",
+        inverse=lambda x: None,
+    )
+
     def _compute_carrier_service_level(self):
         service_level_model = self.env["carrier.service.level"]
         for this in self:
@@ -21,11 +29,3 @@ class StockPicking(models.Model):
                 if this.carrier_id
                 else service_level_model.browse([])
             )
-
-    carrier_service_level_id = fields.Many2one(
-        comodel_name="carrier.service.level",
-        string="Carrier Service Level",
-        domain="[('carrier_id', '=?', carrier_id)]",
-        compute="_compute_carrier_service_level",
-        inverse=lambda x: None,
-    )

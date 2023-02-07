@@ -22,7 +22,7 @@
         <field name="name">carrier.service.level.tree</field>
         <field name="model">carrier.service.level</field>
         <field name="arch" type="xml">
-            <tree string="Carrier Service Level">
+            <tree>
                 <field name="carrier_id" />
                 <field name="code" />
                 <field name="name" />
@@ -57,7 +57,7 @@
     <menuitem
         id="menu_carrier_service_level"
         name="Carrier Service Level"
-        parent="delivery.menu_delivery"
+        parent="stock.menu_delivery"
         action="carrier_service_level_action"
         groups="stock.group_stock_manager"
         sequence="10"
