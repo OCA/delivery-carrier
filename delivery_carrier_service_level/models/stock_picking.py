@@ -15,7 +15,8 @@ class StockPicking(models.Model):
         for this in self:
             this.carrier_service_level_id = (
                 service_level_model.search(
-                    [("carrier_id", "=", this.carrier_id.id)], limit=1,
+                    [("carrier_id", "=", this.carrier_id.id)],
+                    limit=1,
                 )
                 if this.carrier_id
                 else service_level_model.browse([])
