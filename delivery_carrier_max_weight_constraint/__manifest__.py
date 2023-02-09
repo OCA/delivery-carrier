@@ -3,7 +3,7 @@
 
 {
     "name": "Constrain package maximum weight",
-    "version": "16.0.1.0.0",
+    "version": "16.0.1.0.1",
     "author": "ACSONE SA/NV, Odoo Community Association (OCA)",
     "category": "Delivery",
     "depends": ["delivery"],
