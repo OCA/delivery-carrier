@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record model="ir.ui.view" id="stock_package_type_form_delivery">
+        <field
+            name="name"
+        >stock.package.type.form.delivery (in delivery_carrier_max_weight_constraint)</field>
+        <field name="model">stock.package.type</field>
+        <field name="inherit_id" ref="delivery.stock_package_type_form_delivery" />
+        <field name="arch" type="xml">
+            <field name="shipper_package_code" position="after">
+                <field name="is_strict_weight" />
+            </field>
+        </field>
+    </record>
+
+</odoo>
