@@ -3,10 +3,10 @@
 from odoo.tests import Form, common
 
 
-class TestDeliveryPurchase(common.SavepointCase):
+class TestDeliveryPurchase(common.TransactionCase):
     @classmethod
     def setUpClass(cls):
-        super(TestDeliveryPurchase, cls).setUpClass()
+        super().setUpClass()
         cls.delivery_product = cls.env["product.product"].create(
             {"name": "Delivery test product"}
         )
@@ -86,6 +86,21 @@ class TestDeliveryPurchase(common.SavepointCase):
         self.purchase.button_confirm()
         picking = self.purchase.picking_ids
         picking.carrier_id = self.carrier_rules.id
-        wizard_id = picking.button_validate()["res_id"]
-        self.env["stock.immediate.transfer"].browse(wizard_id).process()
+        res = picking.button_validate()
+        model = self.env[res["res_model"]].with_context(**res["context"])
+        model.create({}).process()
         self.assertEqual(picking.carrier_price, 10)
+
+    def test_onchange_picking_carrier_invoice_policy_real(self):
+        self.carrier_rules.invoice_policy = "real"
+        self.purchase.carrier_id = False
+        self.purchase.button_confirm()
+        picking = self.purchase.picking_ids
+        picking.carrier_id = self.carrier_rules.id
+        res = picking.button_validate()
+        model = self.env[res["res_model"]].with_context(**res["context"])
+        model.create({}).process()
+        self.assertEqual(picking.carrier_id, self.carrier_rules)
+        self.assertEqual(picking.carrier_price, 10)
+        self.assertEqual(self.purchase.carrier_id, self.carrier_rules)
+        self.assertEqual(self.purchase.delivery_price, 10)

@@ -1,5 +1,5 @@
 # Copyright 2015 Serv. Tecnol. Avanzados - Pedro M. Baeza
-# Copyright 2016 Pedro M. Baeza <pedro.baeza@tecnativa.com>
+# Copyright 2016 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models
