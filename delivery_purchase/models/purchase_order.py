@@ -9,7 +9,8 @@ class PurchaseOrder(models.Model):
     _inherit = "purchase.order"
 
     carrier_id = fields.Many2one(
-        comodel_name="delivery.carrier", string="Delivery Method",
+        comodel_name="delivery.carrier",
+        string="Delivery Method",
     )
     delivery_price = fields.Float()
 
