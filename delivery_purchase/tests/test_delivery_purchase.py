@@ -78,7 +78,8 @@ class TestDeliveryPurchase(common.SavepointCase):
     def test_picking_carrier(self):
         self.purchase.button_confirm()
         self.assertEqual(
-            self.purchase.picking_ids[0].carrier_id, self.carrier_fixed,
+            self.purchase.picking_ids[0].carrier_id,
+            self.carrier_fixed,
         )
 
     def test_onchange_picking_carrier(self):
