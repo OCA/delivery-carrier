@@ -29,6 +29,7 @@ addon | version | maintainers | summary
 [delivery_multi_destination](delivery_multi_destination/) | 15.0.1.0.0 |  | Multiple destinations for the same delivery method
 [delivery_package_number](delivery_package_number/) | 15.0.1.1.0 |  | Set or compute number of packages for a picking
 [delivery_price_method](delivery_price_method/) | 15.0.1.0.0 |  | Provides fields to be able to contemplate the tracking statesand also adds a global fields
+[delivery_purchase](delivery_purchase/) | 15.0.1.0.0 |  | Delivery costs in purchases
 [delivery_state](delivery_state/) | 15.0.1.1.0 |  | Provides fields to be able to contemplate the tracking statesand also adds a global fields
 [delivery_translatable](delivery_translatable/) | 15.0.1.0.0 |  | name and website_description field of delivery carrier setup translatable.
 [partner_delivery_schedule](partner_delivery_schedule/) | 15.0.1.0.1 |  | Set on partners a schedule for delivery goods
