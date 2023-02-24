@@ -31,6 +31,7 @@ setuptools.setup(
         'odoo14-addon-delivery_package_fee',
         'odoo14-addon-delivery_package_number',
         'odoo14-addon-delivery_postlogistics',
+        'odoo14-addon-delivery_postlogistics_dangerous_goods',
         'odoo14-addon-delivery_postlogistics_server_env',
         'odoo14-addon-delivery_price_method',
         'odoo14-addon-delivery_price_rule_untaxed',
