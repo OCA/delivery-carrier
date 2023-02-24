@@ -37,14 +37,17 @@ class DeliveryCarrier(models.Model):
     # is on picking. An we could have multiple urls for 1 picking, if there
     # are multiple package...
     # Maybe we will merge all this in future versions
-    def get_tracking_link(self, picking):
+    def get_tracking_link(self, pickings):
         if self._is_roulier():
-            packages = picking.package_ids
-            first_package = packages and packages[0]
-            if first_package:
-                return first_package._get_tracking_link(picking)
+            trackings = []
+            for picking in pickings:
+                packages = picking.package_ids
+                first_package = packages and packages[0]
+                if first_package:
+                    trackings.append(first_package._get_tracking_link())
+            return trackings
         else:
-            return super().get_tracking_link(picking)
+            return super().get_tracking_link(pickings)
 
     def rate_shipment(self, order):
         res = super().rate_shipment(order)
