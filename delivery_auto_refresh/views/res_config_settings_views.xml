@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.sale</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="9" />
+        <field name="inherit_id" ref="sale.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='shipping_costs_easypost']" position="after">
+                <div class="col-12 col-lg-6 o_setting_box" id="set_default_carrier">
+                    <div class="o_setting_left_pane">
+                        <field name="set_default_carrier" />
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <label for="set_default_carrier" />
+                        <div class="text-muted">
+                            Set default carrier automatically
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 o_setting_box" id="auto_add_delivery_line">
+                    <div class="o_setting_left_pane">
+                        <field name="auto_add_delivery_line" />
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <label for="auto_add_delivery_line" />
+                        <div class="text-muted">
+                            Add delivery line automatically
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 o_setting_box" id="refresh_after_picking">
+                    <div class="o_setting_left_pane">
+                        <field name="refresh_after_picking" />
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <label for="refresh_after_picking" />
+                        <div class="text-muted">
+                            Refresh after picking automatically
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 o_setting_box" id="auto_void_delivery_line">
+                    <div class="o_setting_left_pane">
+                        <field name="auto_void_delivery_line" />
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <label for="auto_void_delivery_line" />
+                        <div class="text-muted">
+                            Auto void delivery line
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
