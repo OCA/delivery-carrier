@@ -3,8 +3,6 @@
 
 from odoo import models
 
-from ..utils import get_bool_param
-
 
 class StockPicking(models.Model):
     _inherit = "stock.picking"
@@ -12,7 +10,12 @@ class StockPicking(models.Model):
     def _add_delivery_cost_to_so(self):
         """Update delivery price in SO from picking data."""
         res = super()._add_delivery_cost_to_so()
-        if not get_bool_param(self.env, "refresh_after_picking"):
+        refresh_after_picking = (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("delivery_auto_refresh.refresh_after_picking")
+        )
+        if not refresh_after_picking:
             return res
         self.ensure_one()
         sale_order = self.sale_id
@@ -53,7 +56,12 @@ class StockPicking(models.Model):
         # If configured, we want to set to 0 automatically the delivery line
         # when we have a returned picking that isn't invoiced so we don't have
         # it as invoiceable line. Otherwise, the salesman has to do it by hand.
-        if not get_bool_param(self.env, "auto_void_delivery_line"):
+        auto_void_delivery_line = (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("delivery_auto_refresh.auto_void_delivery_line")
+        )
+        if not auto_void_delivery_line:
             return res
         sales_to_void_delivery = self.filtered(
             lambda x: x.sale_id
