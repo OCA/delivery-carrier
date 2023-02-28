@@ -12,7 +12,7 @@ def _execute_onchanges(records, field_name):
 
 
 @tagged("post_install", "-at_install")
-class TestDeliveryAutoRefresh(common.SavepointCase):
+class TestDeliveryAutoRefresh(common.TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -67,11 +67,12 @@ class TestDeliveryAutoRefresh(common.SavepointCase):
                 "property_product_pricelist": pricelist.id,
             }
         )
-        cls.param_name1 = "delivery_auto_refresh.auto_add_delivery_line"
-        cls.param_name2 = "delivery_auto_refresh.refresh_after_picking"
-        cls.param_name3 = "delivery_auto_refresh.auto_void_delivery_line"
-        cls.param_name4 = "delivery_auto_refresh.set_default_carrier"
-        cls.env["ir.config_parameter"].sudo().set_param(cls.param_name4, 1)
+        cls.auto_add_delivery_line = "delivery_auto_refresh.auto_add_delivery_line"
+        cls.refresh_after_picking = "delivery_auto_refresh.refresh_after_picking"
+        cls.auto_void_delivery_line = "delivery_auto_refresh.auto_void_delivery_line"
+        cls.settings = cls.env["res.config.settings"].create({})
+        cls.settings.set_default_carrier = True
+        cls.settings.execute()
         order_form = Form(cls.env["sale.order"])
         order_form.partner_id = cls.partner
         order_form.partner_invoice_id = cls.partner
@@ -83,7 +84,8 @@ class TestDeliveryAutoRefresh(common.SavepointCase):
 
     def test_auto_refresh_so(self):
         self.assertFalse(self.order.order_line.filtered("is_delivery"))
-        self.env["ir.config_parameter"].sudo().set_param(self.param_name1, 1)
+        self.settings.auto_add_delivery_line = True
+        self.settings.execute()
         self.order.write(
             {"order_line": [(1, self.order.order_line.id, {"product_uom_qty": 3})]}
         )
@@ -110,10 +112,8 @@ class TestDeliveryAutoRefresh(common.SavepointCase):
         # Test change the carrier_id using the wizard
         wiz = Form(
             self.env["choose.delivery.carrier"].with_context(
-                {
-                    "default_order_id": self.order.id,
-                    "default_carrier_id": self.carrier_1.id,
-                }
+                default_order_id=self.order.id,
+                default_carrier_id=self.carrier_1.id,
             )
         ).save()
         wiz.button_confirm()
@@ -122,14 +122,13 @@ class TestDeliveryAutoRefresh(common.SavepointCase):
         self.assertEqual(line_delivery.name, "Test carrier 1")
 
     def test_auto_refresh_picking(self):
-        self.env["ir.config_parameter"].sudo().set_param(self.param_name2, 1)
+        self.settings.refresh_after_picking = True
+        self.settings.execute()
         self.order.order_line.product_uom_qty = 3
         wiz = Form(
             self.env["choose.delivery.carrier"].with_context(
-                {
-                    "default_order_id": self.order.id,
-                    "default_carrier_id": self.carrier_1.id,
-                }
+                default_order_id=self.order.id,
+                default_carrier_id=self.carrier_1.id,
             )
         ).save()
         wiz.button_confirm()
@@ -142,14 +141,13 @@ class TestDeliveryAutoRefresh(common.SavepointCase):
         self.assertEqual(line_delivery.price_unit, 50)
 
     def test_no_auto_refresh_picking(self):
-        self.env["ir.config_parameter"].sudo().set_param(self.param_name2, "0")
+        self.settings.refresh_after_picking = False
+        self.settings.execute()
         self.order.order_line.product_uom_qty = 3
         wiz = Form(
             self.env["choose.delivery.carrier"].with_context(
-                {
-                    "default_order_id": self.order.id,
-                    "default_carrier_id": self.carrier_1.id,
-                }
+                default_order_id=self.order.id,
+                default_carrier_id=self.carrier_1.id,
             )
         ).save()
         wiz.button_confirm()
@@ -205,7 +203,6 @@ class TestDeliveryAutoRefresh(common.SavepointCase):
         return_wiz = return_wiz_form.save()
         return_wiz.product_return_moves.quantity = picking.move_lines.quantity_done
         return_wiz.product_return_moves.to_refund = to_refund
-        # import pdb; pdb.set_trace()
         res = return_wiz.create_returns()
         return_picking = self.env["stock.picking"].browse(res["res_id"])
         self._validate_picking(return_picking)
@@ -213,8 +210,9 @@ class TestDeliveryAutoRefresh(common.SavepointCase):
     def _test_autorefresh_void_line(self, lock=False, to_refund=True, invoice=False):
         """Helper method to test the possible cases for voiding the line"""
         self.assertFalse(self.order.order_line.filtered("is_delivery"))
-        self.env["ir.config_parameter"].sudo().set_param(self.param_name1, 1)
-        self.env["ir.config_parameter"].sudo().set_param(self.param_name3, 1)
+        self.settings.auto_add_delivery_line = True
+        self.settings.auto_void_delivery_line = True
+        self.settings.execute()
         line_delivery = self._confirm_sale_order(self.order)
         self._validate_picking(self.order.picking_ids)
         if invoice:
@@ -254,7 +252,8 @@ class TestDeliveryAutoRefresh(common.SavepointCase):
     def _test_autorefresh_unlink_line(self):
         """Helper method to test the possible cases for voiding the line"""
         self.assertFalse(self.order.order_line.filtered("is_delivery"))
-        self.env["ir.config_parameter"].sudo().set_param(self.param_name1, 1)
+        self.settings.auto_add_delivery_line = True
+        self.settings.execute()
         sale_form = Form(self.order)
         # Force the delivery line creation
         with sale_form.order_line.edit(0) as line_form:
