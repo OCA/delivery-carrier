@@ -2,6 +2,7 @@
   * Pedro M. Baeza
   * Vicent Cubells
   * Carlos Roca
+  * Pilar Vargas
 
 * Camptocamp <https://www.camptocamp.com>:
   * Maksym Yankin

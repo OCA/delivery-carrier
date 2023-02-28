@@ -4,8 +4,6 @@
 
 from odoo import api, fields, models
 
-from ..utils import get_bool_param
-
 
 class SaleOrder(models.Model):
     _inherit = "sale.order"
@@ -17,9 +15,15 @@ class SaleOrder(models.Model):
 
     @api.onchange("partner_id", "partner_shipping_id")
     def _onchange_partner_id(self):
+        res = None
         if hasattr(super(), "_onchange_partner_id"):
-            super()._onchange_partner_id()
-        if get_bool_param(self.env, "set_default_carrier"):
+            res = super()._onchange_partner_id()
+        set_default_carrier = (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("delivery_auto_refresh.set_default_carrier")
+        )
+        if set_default_carrier:
             for order in self:
                 action = order.action_open_delivery_wizard()
                 carrier_id = self.env["delivery.carrier"].browse(
@@ -32,6 +36,7 @@ class SaleOrder(models.Model):
                         lambda x: x in order.available_carrier_ids._origin
                     )
                 )
+        return res
 
     @api.depends("partner_shipping_id")
     def _compute_available_carrier_ids(self):
@@ -45,7 +50,11 @@ class SaleOrder(models.Model):
         # e-commerce. So we don't want to add the delivery line automatically.
         if self.env.context.get("website_id"):
             return False
-        return get_bool_param(self.env, "auto_add_delivery_line")
+        return (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("delivery_auto_refresh.auto_add_delivery_line")
+        )
 
     def _auto_refresh_delivery(self):
         self.ensure_one()
@@ -99,8 +108,9 @@ class SaleOrder(models.Model):
 
     def _remove_delivery_line(self):
         current_carrier = self.carrier_id
-        super()._remove_delivery_line()
+        res = super()._remove_delivery_line()
         self.carrier_id = current_carrier
+        return res
 
     def _is_delivery_line_voidable(self):
         """If the picking is returned before being invoiced, like when the picking
