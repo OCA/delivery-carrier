@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_delivery_carrier,delivery.carrier,model_delivery_withdrawal_point,sales_team.group_sale_salesman,1,0,0,0
+access_delivery_carrier_manager,delivery.carrier,model_delivery_withdrawal_point,sales_team.group_sale_manager,1,1,1,1
+access_delivery_carrier_stock_manager,delivery.carrier,model_delivery_withdrawal_point,stock.group_stock_manager,1,1,1,1

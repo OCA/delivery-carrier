@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+         <record id="product_product_delivery_withdrawal" model="product.product">
+            <field name="name">Withdrawal Point</field>
+            <field name="default_code">Delivery_010</field>
+            <field name="type">service</field>
+            <field name="categ_id" ref="delivery.product_category_deliveries"/>
+            <field name="sale_ok" eval="False"/>
+            <field name="purchase_ok" eval="False"/>
+            <field name="list_price">0.0</field>
+            <field name="invoice_policy">order</field>
+        </record>
+        <record id="stock_picking_type_withdrawal" model="stock.picking.type">
+            <field name="name">Withdrawal Point</field>
+            <field name="code">outgoing</field>
+            <field name="sequence_code">WR</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="default_location_src_id" model="stock.location" eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"/>
+            <field name="warehouse_id" ref="stock.warehouse0"/>
+            <field name="reservation_method">at_confirm</field>
+            <field name="use_create_lots" eval="False"/>
+        </record>
+    </data>
+</odoo>
