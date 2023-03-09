@@ -5,3 +5,5 @@
 * Dung Tran <dungtd@trobz.com>
 * Phuc Tran <phuc@trobz.com>
 * Jacques-Etienne Baudoux <je@bcim.be>
+* `Trobz <https://trobz.com>`_:
+    * Jack Le <anlh@trobz.com>
