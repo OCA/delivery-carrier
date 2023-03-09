@@ -1,7 +1,7 @@
 # Copyright 2021 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 
 from ..postlogistics.web_service import PostlogisticsWebService
 
@@ -11,7 +11,7 @@ CLIENT_SECRET = "XXX"
 LICENSE = "XXX"
 
 
-class TestPostlogisticsCommon(SavepointCase):
+class TestPostlogisticsCommon(TransactionCase):
     @classmethod
     def setUpClassLicense(cls):
         cls.license = cls.env["postlogistics.license"].create(
@@ -45,7 +45,7 @@ class TestPostlogisticsCommon(SavepointCase):
 
     @classmethod
     def setUpClassPackaging(cls):
-        cls.postlogistics_pd_packaging = cls.env["product.packaging"].create(
+        cls.postlogistics_pd_package_type = cls.env["stock.package.type"].create(
             {
                 "name": "PRI-TEST",
                 "package_carrier_type": "postlogistics",
@@ -68,7 +68,7 @@ class TestPostlogisticsCommon(SavepointCase):
 
     @classmethod
     def create_picking(cls, partner=None, product_matrix=None):
-        packaging = cls.postlogistics_pd_packaging
+        package_type = cls.postlogistics_pd_package_type
         if not partner:
             partner = cls.env["res.partner"].create(
                 {
@@ -104,7 +104,7 @@ class TestPostlogisticsCommon(SavepointCase):
                 }
             )
         choose_delivery_package_wizard = cls.env["choose.delivery.package"].create(
-            {"picking_id": picking.id, "delivery_packaging_id": packaging.id}
+            {"picking_id": picking.id, "delivery_package_type_id": package_type.id}
         )
         picking.action_assign()
         choose_delivery_package_wizard.action_put_in_pack()

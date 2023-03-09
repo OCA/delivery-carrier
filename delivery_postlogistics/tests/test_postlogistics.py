@@ -92,8 +92,8 @@ class TestPostlogistics(TestPostlogisticsCommon):
             self.assertEqual(len(cassette.requests), 2)
 
     def test_send_to_shipper_default_package(self):
-        pl_packaging = self.postlogistics_pd_packaging
-        self.carrier.postlogistics_default_packaging_id = pl_packaging
+        pl_package_type = self.postlogistics_pd_package_type
+        self.carrier.postlogistics_default_package_type_id = pl_package_type
         self.picking.move_line_ids.write(
             {
                 "result_package_id": False,
