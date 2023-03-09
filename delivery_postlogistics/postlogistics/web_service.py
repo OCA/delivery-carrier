@@ -195,8 +195,8 @@ class PostlogisticsWebService(object):
     ):
         packaging = (
             pack
-            and pack.packaging_id
-            or picking.carrier_id.postlogistics_default_packaging_id
+            and pack.package_type_id
+            or picking.carrier_id.postlogistics_default_package_type_id
         )
         services = packaging._get_packaging_codes()
 
@@ -271,13 +271,15 @@ class PostlogisticsWebService(object):
         return [{"Type": "NN_BETRAG", "Value": amount}]
 
     def _get_item_additional_data(self, picking, package=None):
-        if package and not package.packaging_id:
+        if package and not package.package_type_id:
             raise exceptions.UserError(
                 _("The package %s must have a package type.") % package.name
             )
 
         result = []
-        packaging_codes = package and package.packaging_id._get_packaging_codes() or []
+        packaging_codes = (
+            package and package.package_type_id._get_packaging_codes() or []
+        )
 
         if set(packaging_codes) & {"BLN", "N"}:
             cod_attributes = self._cash_on_delivery(picking, package=package)
@@ -516,8 +518,9 @@ class PostlogisticsWebService(object):
                 res["errors"] = response.content.decode("utf-8")
                 _logger.warning(
                     "Shipping label could not be generated.\n"
-                    "Request: %s\n"
-                    "Response: %s" % (json.dumps(data), res["errors"])
+                    "Request: %(datas)s\n"
+                    "Response: %(error)s"
+                    % {"datas": json.dumps(data), "error": res["errors"]}
                 )
                 return [res]
 
@@ -528,10 +531,10 @@ class PostlogisticsWebService(object):
                 res["success"] = False
                 res["errors"] = []
                 for error in response_dict["item"]["errors"]:
-                    res["errors"] = _("Error code: %s, Message: %s") % (
-                        error["code"],
-                        error["message"],
-                    )
+                    res["errors"] = _("Error code: %(code)s, Message: %(message)s") % {
+                        "code": error["code"],
+                        "message": error["message"],
+                    }
                 results.append(res)
                 return results
 
