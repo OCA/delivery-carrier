@@ -16,8 +16,8 @@ class DeliveryCarrier(models.Model):
         selection_add=[("postlogistics", "PostLogistics")],
         ondelete={"postlogistics": "set default"},
     )
-    postlogistics_default_packaging_id = fields.Many2one(
-        "product.packaging", domain=[("package_carrier_type", "=", "postlogistics")]
+    postlogistics_default_package_type_id = fields.Many2one(
+        "stock.package.type", domain=[("package_carrier_type", "=", "postlogistics")]
     )
 
     postlogistics_endpoint_url = fields.Char(
