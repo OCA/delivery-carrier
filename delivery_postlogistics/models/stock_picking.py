@@ -16,9 +16,7 @@ class StockPicking(models.Model):
     )
 
     # TODO: consider refactoring these fields using a partner relation instead
-    delivery_place = fields.Char(
-        "Delivery Place", help="For Deposit item service (ZAW3219)"
-    )
+    delivery_place = fields.Char(help="For Deposit item service (ZAW3219)")
     delivery_phone = fields.Char(
         "Phone", help="For notify delivery by telephone (ZAW3213)"
     )
@@ -71,7 +69,7 @@ class StockPicking(models.Model):
             del context_attachment["default_type"]
         return (
             self.env["postlogistics.shipping.label"]
-            .with_context(context_attachment)
+            .with_context(**context_attachment)
             .create(data)
         )
 
@@ -86,10 +84,10 @@ class StockPicking(models.Model):
             )
             if move_lines:
                 carrier = picking.carrier_id
-                default_packaging = carrier.postlogistics_default_packaging_id
+                default_packaging = carrier.postlogistics_default_package_type_id
                 package = self.env["stock.quant.package"].create(
                     {
-                        "packaging_id": default_packaging
+                        "package_type_id": default_packaging
                         and default_packaging.id
                         or False
                     }

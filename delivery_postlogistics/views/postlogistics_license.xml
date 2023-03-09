@@ -23,7 +23,7 @@
     <menuitem
         id="menu_postlogistics_licenses"
         name="PostLogistics Licenses"
-        parent="delivery.menu_delivery"
+        parent="stock.menu_delivery"
         sequence="20"
         action="action_postlogistics_licenses"
     />
