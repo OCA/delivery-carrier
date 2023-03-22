@@ -113,6 +113,7 @@ Contributors
 * `FactorLibre <https://www.factorlibre.com>`_:
 
   * Zahra Velasco <zahra.velasco@factorlibre.com>
+  * Javier de Alcázar <javier.dealcazar@factorlibre.com>
 * `Tecnativa <https://www.tecnativa.com>`_:
 
   * Pedro M. Baeza
