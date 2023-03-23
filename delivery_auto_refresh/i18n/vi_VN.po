@@ -20,13 +20,38 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. module: delivery_auto_refresh
-#: model:ir.model.fields,field_description:delivery_auto_refresh.field_sale_order__carrier_id
-msgid "Delivery Method"
+#: model:ir.model.fields,field_description:delivery_auto_refresh.field_res_config_settings__auto_add_delivery_line
+msgid "Add Delivery Line Automatically"
 msgstr ""
 
 #. module: delivery_auto_refresh
-#: model:ir.model.fields,help:delivery_auto_refresh.field_sale_order__carrier_id
-msgid "Fill this field if you plan to invoice the shipping based on picking."
+#: model_terms:ir.ui.view,arch_db:delivery_auto_refresh.res_config_settings_view_form
+msgid "Add delivery line automatically"
+msgstr ""
+
+#. module: delivery_auto_refresh
+#: model_terms:ir.ui.view,arch_db:delivery_auto_refresh.res_config_settings_view_form
+msgid "Auto void delivery line"
+msgstr ""
+
+#. module: delivery_auto_refresh
+#: model:ir.model.fields,field_description:delivery_auto_refresh.field_sale_order__available_carrier_ids
+msgid "Available Carrier"
+msgstr ""
+
+#. module: delivery_auto_refresh
+#: model:ir.model,name:delivery_auto_refresh.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: delivery_auto_refresh
+#: model:ir.model.fields,field_description:delivery_auto_refresh.field_res_config_settings__refresh_after_picking
+msgid "Refresh After Picking Automatically"
+msgstr ""
+
+#. module: delivery_auto_refresh
+#: model_terms:ir.ui.view,arch_db:delivery_auto_refresh.res_config_settings_view_form
+msgid "Refresh after picking automatically"
 msgstr ""
 
 #. module: delivery_auto_refresh
@@ -40,8 +65,23 @@ msgid "Sales Order Line"
 msgstr ""
 
 #. module: delivery_auto_refresh
+#: model:ir.model.fields,field_description:delivery_auto_refresh.field_res_config_settings__set_default_carrier
+msgid "Set Default Carrier Automatically"
+msgstr ""
+
+#. module: delivery_auto_refresh
+#: model_terms:ir.ui.view,arch_db:delivery_auto_refresh.res_config_settings_view_form
+msgid "Set default carrier automatically"
+msgstr ""
+
+#. module: delivery_auto_refresh
 #: model:ir.model,name:delivery_auto_refresh.model_stock_picking
 msgid "Transfer"
+msgstr ""
+
+#. module: delivery_auto_refresh
+#: model:ir.model.fields,field_description:delivery_auto_refresh.field_res_config_settings__auto_void_delivery_line
+msgid "Void delivery lines automatically"
 msgstr ""
 
 #, fuzzy
