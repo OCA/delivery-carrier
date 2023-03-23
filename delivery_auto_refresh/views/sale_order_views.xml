@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_order_form_with_carrier" model="ir.ui.view">
+        <field name="name">delivery.sale.order.form.show.carrier</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="delivery.view_order_form_with_carrier" />
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//field[@name='payment_term_id']" position='after'>
+                    <field name="available_carrier_ids" invisible="1" />
+                    <field
+                        name="carrier_id"
+                        domain="[('id', 'in', available_carrier_ids)]"
+                    />
+                </xpath>
+            </data>
+        </field>
+    </record>
+</odoo>
