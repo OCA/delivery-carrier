@@ -367,7 +367,7 @@ class DeliveryCarrier(models.Model):
             }
         ]
 
-    def _schenker_measures(self, picking):
+    def _schenker_measures(self, picking, vals):
         """Only volume is supported as a pallet calculations structure should be
         provided to use the other API options. This hook can be used to communicate
         with the API in the future
@@ -375,7 +375,7 @@ class DeliveryCarrier(models.Model):
         :returns dict values for the proper unit key and value
         """
         if self.schenker_measure_unit == "VOLUME":
-            return {"measureUnitVolume": round(picking.volume, 2) or 0.01}
+            return {"measureUnitVolume": vals["shippingInformation"]["volume"]}
         return {}
 
     def _prepare_schenker_shipping(self, picking):
@@ -389,6 +389,7 @@ class DeliveryCarrier(models.Model):
         # account to acomplish a properly formed request.
         vals = {}
         vals.update(self._prepare_schenker_barcode())
+        shipping_information = self._schenker_shipping_information(picking)
         vals.update(
             {
                 "address": self._schenker_shipping_address(picking),
@@ -401,9 +402,9 @@ class DeliveryCarrier(models.Model):
                 "measurementType": self._schenker_metric_system(),
                 "grossWeight": round(picking.shipping_weight, 2),
                 "shippingInformation": {
-                    "shipmentPosition": self._schenker_shipping_information(picking),
+                    "shipmentPosition": shipping_information,
                     "grossWeight": round(picking.shipping_weight, 2),
-                    "volume": round(picking.volume, 2) or 0.01,
+                    "volume": shipping_information["volume"],
                 },
                 "measureUnit": self.schenker_measure_unit,
                 # Customs Clearance not supported for now as it needs a full customs
@@ -426,7 +427,7 @@ class DeliveryCarrier(models.Model):
                 "pharmaceuticals": self.schenker_pharmaceuticals,
             }
         )
-        vals.update(self._schenker_measures(picking))
+        vals.update(self._schenker_measures(picking, vals))
         return vals
 
     def schenker_send_shipping(self, pickings):
