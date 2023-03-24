@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="stock_picking_type_form_view">
+        <field
+            name="name"
+        >stock.picking.type.form (in stock_picking_delivery_link)</field>
+        <field name="model">stock.picking.type</field>
+        <field name="inherit_id" ref="stock.view_picking_type_form" />
+        <field name="arch" type="xml">
+            <field name="show_entire_packs" position="after">
+                <field
+                    name="set_delivery_package_type_on_put_in_pack"
+                    groups="stock.group_tracking_lot"
+                />
+            </field>
+        </field>
+    </record>
+
+</odoo>
