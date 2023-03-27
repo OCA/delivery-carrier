@@ -5,7 +5,7 @@ First you have the *Carrier Account* where you find account number
 and password then you also have *Shipping Methods* with other GLS
 parameters to configure such as contact ID, urls and return address.
 These 2 types of settings use **"GLS"** as delivery type.
-The contact ID corresponds to the sender, which needs to be a contact in the
+The contact ID corresponds to the sender which needs to be a contact in the
 GLS database. This determines the default return address, as well as the billing.
 You can also configure the tracking url that is used for each carrier.
 
