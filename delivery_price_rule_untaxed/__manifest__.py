@@ -5,8 +5,7 @@
     "summary": "Add untaxed amount to variables for price delivery price rule",
     "version": "14.0.1.0.1",
     "category": "Stock",
-    "website": "https://github.com/OCA/delivery-carrier"
-    "14.0/delivery_price_rule_untaxed",
+    "website": "https://github.com/OCA/delivery-carrier",
     "author": "Agile Business Group, Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "application": False,
