@@ -4,75 +4,63 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0+e\n"
+"Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-06 11:33+0000\n"
-"PO-Revision-Date: 2022-04-20 17:05+0000\n"
-"Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
-"Language-Team: \n"
-"Language: it\n"
+"PO-Revision-Date: 2023-12-20 22:33+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
+"Language-Team: none\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.3.2\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: delivery_price_rule_untaxed
 #: model:delivery.carrier,name:delivery_price_rule_untaxed.untaxed_delivery_carrier
 msgid "Carrier price on untaxed"
-msgstr "Costo trasporto su imponibile"
+msgstr "Precio del transportista sin impuestos"
 
 #. module: delivery_price_rule_untaxed
 #: model:ir.model,name:delivery_price_rule_untaxed.model_delivery_price_rule
 msgid "Delivery Price Rules"
-msgstr "Regole sui costi di consegna"
+msgstr "Reglas Entrega Precio"
 
 #. module: delivery_price_rule_untaxed
 #: model:ir.model.fields,field_description:delivery_price_rule_untaxed.field_delivery_carrier__display_name
 #: model:ir.model.fields,field_description:delivery_price_rule_untaxed.field_delivery_price_rule__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Mostrar Nombre"
 
 #. module: delivery_price_rule_untaxed
 #: model:ir.model.fields,field_description:delivery_price_rule_untaxed.field_delivery_carrier__id
 #: model:ir.model.fields,field_description:delivery_price_rule_untaxed.field_delivery_price_rule__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: delivery_price_rule_untaxed
 #: model:ir.model.fields,field_description:delivery_price_rule_untaxed.field_delivery_carrier____last_update
 #: model:ir.model.fields,field_description:delivery_price_rule_untaxed.field_delivery_price_rule____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última Modificación el"
 
 #. module: delivery_price_rule_untaxed
 #: model:ir.model,name:delivery_price_rule_untaxed.model_delivery_carrier
 msgid "Shipping Methods"
-msgstr ""
+msgstr "Métodos de Envío"
 
 #. module: delivery_price_rule_untaxed
 #: model:ir.model.fields.selection,name:delivery_price_rule_untaxed.selection__delivery_price_rule__variable__untaxed_price
 #: model:ir.model.fields.selection,name:delivery_price_rule_untaxed.selection__delivery_price_rule__variable_factor__untaxed_price
 msgid "Untaxed price"
-msgstr ""
+msgstr "Precio sin impuestos"
 
 #. module: delivery_price_rule_untaxed
 #: model:ir.model.fields,field_description:delivery_price_rule_untaxed.field_delivery_price_rule__variable
 msgid "Variable"
-msgstr ""
+msgstr "Variable"
 
 #. module: delivery_price_rule_untaxed
 #: model:ir.model.fields,field_description:delivery_price_rule_untaxed.field_delivery_price_rule__variable_factor
 msgid "Variable Factor"
-msgstr ""
-
-#~ msgid "Carrier"
-#~ msgstr "Vettore"
-
-#, python-format
-#~ msgid ""
-#~ "Selected product in the delivery method doesn't fulfill any of the "
-#~ "delivery carrier(s) criteria."
-#~ msgstr ""
-#~ "Il prodotto indicato nel metodo di consegna non corrisponde pienamente a "
-#~ "nessun criterio del/i vettore/i."
+msgstr "Factor Variable"
