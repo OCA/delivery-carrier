@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: carrier-delivery (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-09-17 06:51+0000\n"
-"PO-Revision-Date: 2022-04-08 17:05+0000\n"
-"Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
+"PO-Revision-Date: 2023-03-30 12:23+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/"
 "OCA-carrier-delivery-8-0/language/it/)\n"
 "Language: it\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.3.2\n"
+"X-Generator: Weblate 4.14.1\n"
 
 #. module: base_delivery_carrier_files
 #: view:stock.picking:base_delivery_carrier_files.view_picking_out_form_carrier_file
@@ -99,7 +99,7 @@ msgstr "Ordini di Spedizione da fatturare"
 #: field:delivery.carrier.file,display_name:0
 #: field:delivery.carrier.file.generate,display_name:0
 msgid "Display Name"
-msgstr "Nome da visualizzare"
+msgstr "Nome visualizzato"
 
 #. module: base_delivery_carrier_files
 #: field:delivery.carrier.file,export_path:0
