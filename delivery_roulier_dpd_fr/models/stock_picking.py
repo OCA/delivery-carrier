@@ -13,7 +13,7 @@ class StockPicking(models.Model):
                 "customerCountry": account.dpd_fr_soap_customer_country,
                 "customerId": account.dpd_fr_soap_customer_id,
                 "agencyId": account.dpd_fr_soap_agency_id,
-                "reference1": self.sale_id.name or self.origin,
+                "reference1": self.sale_id.name or self.origin or self.name,
             }
         )
         if self.carrier_code == "DPD_Relais":
