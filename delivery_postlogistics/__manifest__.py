@@ -3,7 +3,7 @@
 {
     "name": "PostLogistics Shipping - “Barcode” web service",
     "summary": "Print PostLogistics shipping labels using the Barcode web service",
-    "version": "14.0.1.0.2",
+    "version": "15.0.1.0.0",
     "author": "Camptocamp,Odoo Community Association (OCA)",
     "maintainer": "Camptocamp",
     "license": "AGPL-3",
@@ -17,7 +17,7 @@
         "data/product.xml",
         "data/delivery.xml",
         "views/delivery.xml",
-        "views/product_packaging.xml",
+        "views/stock_package_type.xml",
         "views/stock_quant_package_view.xml",
         "views/postlogistics_license.xml",
         "views/res_partner_view.xml",

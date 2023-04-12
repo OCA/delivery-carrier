@@ -5,3 +5,4 @@
 * Dung Tran <dungtd@trobz.com>
 * Phuc Tran <phuc@trobz.com>
 * Jacques-Etienne Baudoux <je@bcim.be>
+* Daniel Herreros <daniel.herreros@braintec.com>

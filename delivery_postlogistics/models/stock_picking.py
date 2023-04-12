@@ -86,10 +86,10 @@ class StockPicking(models.Model):
             )
             if move_lines:
                 carrier = picking.carrier_id
-                default_packaging = carrier.postlogistics_default_packaging_id
+                default_packaging = carrier.postlogistics_default_package_type_id
                 package = self.env["stock.quant.package"].create(
                     {
-                        "packaging_id": default_packaging
+                        "package_type_id": default_packaging
                         and default_packaging.id
                         or False
                     }

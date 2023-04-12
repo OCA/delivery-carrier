@@ -13,7 +13,7 @@ class StockQuantPackage(models.Model):
     )
     parcel_tracking = fields.Char("Parcel Tracking")
     package_carrier_type = fields.Selection(
-        related="packaging_id.package_carrier_type",
+        related="package_type_id.package_carrier_type",
         string="Packaging's Carrier",
     )
 
