@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <!-- Label layouts -->
+    <record
+        id="postlogistics_layout_option_a7"
+        model="postlogistics.delivery.carrier.template.option"
+    >
+        <field name="name">Format A7</field>
+        <field name="code">A7</field>
+        <field name="postlogistics_type">label_layout</field>
+        <field name="partner_id" ref="partner_postlogistics" />
+    </record>
+    <record
+        id="postlogistics_layout_option_a6"
+        model="postlogistics.delivery.carrier.template.option"
+    >
+        <field name="name">Format A6</field>
+        <field name="code">A6</field>
+        <field name="postlogistics_type">label_layout</field>
+        <field name="partner_id" ref="partner_postlogistics" />
+    </record>
+    <record
+        id="postlogistics_layout_option_a5"
+        model="postlogistics.delivery.carrier.template.option"
+    >
+        <field name="name">Format A5</field>
+        <field name="code">A5</field>
+        <field name="postlogistics_type">label_layout</field>
+        <field name="partner_id" ref="partner_postlogistics" />
+    </record>
+    <record
+        id="postlogistics_layout_option_fe"
+        model="postlogistics.delivery.carrier.template.option"
+    >
+        <field name="name">Format FE</field>
+        <field name="code">FE</field>
+        <field name="postlogistics_type">label_layout</field>
+        <field name="partner_id" ref="partner_postlogistics" />
+    </record>
+    <!-- Output formats -->
+    <record
+        id="postlogistics_output_format_option_eps"
+        model="postlogistics.delivery.carrier.template.option"
+    >
+        <field name="name">EPS</field>
+        <field name="code">EPS</field>
+        <field name="postlogistics_type">output_format</field>
+        <field name="partner_id" ref="partner_postlogistics" />
+    </record>
+    <record
+        id="postlogistics_output_format_option_gif"
+        model="postlogistics.delivery.carrier.template.option"
+    >
+        <field name="name">GIF</field>
+        <field name="code">GIF</field>
+        <field name="postlogistics_type">output_format</field>
+        <field name="partner_id" ref="partner_postlogistics" />
+    </record>
+    <record
+        id="postlogistics_output_format_option_jpg"
+        model="postlogistics.delivery.carrier.template.option"
+    >
+        <field name="name">JPG</field>
+        <field name="code">JPG</field>
+        <field name="postlogistics_type">output_format</field>
+        <field name="partner_id" ref="partner_postlogistics" />
+    </record>
+    <record
+        id="postlogistics_output_format_option_png"
+        model="postlogistics.delivery.carrier.template.option"
+    >
+        <field name="name">PNG</field>
+        <field name="code">PNG</field>
+        <field name="postlogistics_type">output_format</field>
+        <field name="partner_id" ref="partner_postlogistics" />
+    </record>
+    <record
+        id="postlogistics_output_format_option_pdf"
+        model="postlogistics.delivery.carrier.template.option"
+    >
+        <field name="name">PDF</field>
+        <field name="code">PDF</field>
+        <field name="postlogistics_type">output_format</field>
+        <field name="partner_id" ref="partner_postlogistics" />
+    </record>
+    <record
+        id="postlogistics_output_format_option_spdf"
+        model="postlogistics.delivery.carrier.template.option"
+    >
+        <field name="name">sPDF</field>
+        <field name="code">sPDF</field>
+        <field name="postlogistics_type">output_format</field>
+        <field name="partner_id" ref="partner_postlogistics" />
+    </record>
+    <record
+        id="postlogistics_output_format_option_zpl2"
+        model="postlogistics.delivery.carrier.template.option"
+    >
+        <field name="name">ZPL2</field>
+        <field name="code">ZPL2</field>
+        <field name="postlogistics_type">output_format</field>
+        <field name="partner_id" ref="partner_postlogistics" />
+    </record>
+    <!-- resolutions -->
+    <record
+        id="postlogistics_output_resolution_option_200ppp"
+        model="postlogistics.delivery.carrier.template.option"
+    >
+        <field name="name">200 ppp</field>
+        <field name="code">200</field>
+        <field name="postlogistics_type">resolution</field>
+        <field name="partner_id" ref="partner_postlogistics" />
+    </record>
+    <record
+        id="postlogistics_output_resolution_option_300ppp"
+        model="postlogistics.delivery.carrier.template.option"
+    >
+        <field name="name">300 ppp</field>
+        <field name="code">300</field>
+        <field name="postlogistics_type">resolution</field>
+        <field name="partner_id" ref="partner_postlogistics" />
+    </record>
+    <record
+        id="postlogistics_output_resolution_option_600ppp"
+        model="postlogistics.delivery.carrier.template.option"
+    >
+        <field name="name">600 ppp</field>
+        <field name="code">600</field>
+        <field name="postlogistics_type">resolution</field>
+        <field name="partner_id" ref="partner_postlogistics" />
+    </record>
+</odoo>
