@@ -35,15 +35,15 @@ class DeliveryCarrier(models.Model):
 
     def rate_shipment(self, order):
         if self.invoice_policy == "pricelist":
-            current_type = self.delivery_type
-            # force computation from pricelist when the invoicing policy says
-            # so
-            self.delivery_type = "pricelist"
-            result = super().rate_shipment(order)
-            self.delivery_type = current_type
+            # Force computation from pricelist based on invoicing policy
+            # using a temporary record.
+            # Required since core's `rate_shipment` relies on `self.delivery_type`
+            # to lookup for the right handler.
+            tmp_rec = self.new(self.copy_data()[0])
+            tmp_rec.delivery_type = "pricelist"
+            result = super(DeliveryCarrier, tmp_rec).rate_shipment(order)
             return result
-        else:
-            return super().rate_shipment(order)
+        return super().rate_shipment(order)
 
     def send_shipping(self, pickings):
         result = super().send_shipping(pickings)
