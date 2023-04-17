@@ -6,7 +6,7 @@ from lxml import etree
 from odoo.tests.common import Form, SavepointCase
 
 
-class TestRoutePutaway(SavepointCase):
+class TestCarrierPricelist(SavepointCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -48,9 +48,9 @@ class TestRoutePutaway(SavepointCase):
             }
         )
 
-    def create_price_list(self):
+    def create_price_list_item(self):
         price = 13.0
-        self.pricelist_item = self.env["product.pricelist.item"].create(
+        return self.env["product.pricelist.item"].create(
             {
                 "pricelist_id": self.pricelist.id,
                 "product_id": self.fee_product.id,
@@ -59,51 +59,45 @@ class TestRoutePutaway(SavepointCase):
             }
         )
 
-    def create_wizard(self):
-        self.delivery_wizard = Form(
-            self.env["choose.delivery.carrier"].with_context(
-                {"default_order_id": self.sale_normal_delivery_charges.id}
-            )
-        )
+    def get_wiz_form(self, **ctx):
+        default_ctx = {"default_order_id": self.sale_normal_delivery_charges.id}
+        ctx = {**default_ctx, **ctx}
+        return Form(self.env["choose.delivery.carrier"].with_context(**ctx))
 
     def test_wizard_price(self):
-        self.create_price_list()
-        self.create_wizard()
-        price = self.pricelist_item.fixed_price
-        delivery_wizard = self.delivery_wizard
-        saved_carrier = delivery_wizard.carrier_id
-        delivery_wizard.carrier_id = self.carrier_pricelist
-        self.assertEqual(delivery_wizard.display_price, price)
+        pl_item = self.create_price_list_item()
+        wiz_form = self.get_wiz_form()
+        price = pl_item.fixed_price
+        saved_carrier = wiz_form.carrier_id
+        wiz_form.carrier_id = self.carrier_pricelist
+        self.assertEqual(wiz_form.display_price, price)
 
-        delivery_wizard.carrier_id = saved_carrier
-        self.assertEqual(delivery_wizard.display_price, 0.0)
+        wiz_form.carrier_id = saved_carrier
+        self.assertEqual(wiz_form.display_price, 0.0)
         self.partner_18.country_id = self.env.ref("base.fr")
-        delivery_wizard.carrier_id = self.carrier_pricelist
-        self.assertEqual(delivery_wizard.display_price, 0.0)
+        wiz_form.carrier_id = self.carrier_pricelist
+        self.assertEqual(wiz_form.display_price, 0.0)
 
     def test_wizard_invoice_policy(self):
-        self.create_price_list()
-        self.create_wizard()
-        delivery_wizard = self.delivery_wizard
-
+        self.create_price_list_item()
+        wiz_form = self.get_wiz_form()
         self.carrier_pricelist.invoice_policy = "pricelist"
-        delivery_wizard.carrier_id = self.carrier_pricelist
+        wiz_form.carrier_id = self.carrier_pricelist
 
     def test_wizard_send_shipping(self):
-        self.create_price_list()
-        self.create_wizard()
-        price = self.pricelist_item.fixed_price
+        pl_item = self.create_price_list_item()
+        wiz_form = self.get_wiz_form()
+        price = pl_item.fixed_price
         self.carrier_pricelist.invoice_policy = "pricelist"
-        delivery_wizard = self.delivery_wizard
-        delivery_wizard.carrier_id = self.carrier_pricelist
-        rec = delivery_wizard.save()
+        wiz_form.carrier_id = self.carrier_pricelist
+        rec = wiz_form.save()
         rec.button_confirm()
         so = self.sale_normal_delivery_charges
         so.action_confirm()
-        self.assertEqual(so.carrier_id, delivery_wizard.carrier_id)
-        link = delivery_wizard.carrier_id.get_tracking_link(so.picking_ids)
+        self.assertEqual(so.carrier_id, wiz_form.carrier_id)
+        link = wiz_form.carrier_id.get_tracking_link(so.picking_ids)
         self.assertFalse(link)
-        result = delivery_wizard.carrier_id.send_shipping(so.picking_ids)
+        result = wiz_form.carrier_id.send_shipping(so.picking_ids)
         expecting = [{"exact_price": price, "tracking_number": False}]
         self.assertEqual(result, expecting)
 
