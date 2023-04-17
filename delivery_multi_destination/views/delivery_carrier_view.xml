@@ -81,11 +81,8 @@
                     invisible="not context.get('show_children_fields', False)"
                 />
                 <field
-                    name="zip_from"
-                    invisible="not context.get('show_children_fields', False)"
-                />
-                <field
-                    name="zip_to"
+                    name="zip_prefix_ids"
+                    widget="many2many_tags"
                     invisible="not context.get('show_children_fields', False)"
                 />
             </field>
