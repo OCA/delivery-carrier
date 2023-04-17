@@ -49,21 +49,21 @@ class TestDeliveryMultiDestination(common.TransactionCase):
         cls.product_child_2 = cls.env["product.product"].create(
             {"name": "Test child 2", "detailed_type": "service"}
         )
+        zip_prefix_child1 = cls.env["delivery.zip.prefix"].create({"name": "22222"})
+        zip_prefix_child2 = cls.env["delivery.zip.prefix"].create({"name": "33333"})
         cls.carrier_multi = cls._create_carrier(
             cls,
             (
                 {
                     "name": "Test child 1",
                     "product_id": cls.product_child_1,
-                    "zip_from": 20000,
-                    "zip_to": 29999,
+                    "zip_prefix_ids": zip_prefix_child1,
                     "fixed_price": 50,
                 },
                 {
                     "name": "Test child 2",
                     "product_id": cls.product_child_2,
-                    "zip_from": 30000,
-                    "zip_to": 39999,
+                    "zip_prefix_ids": zip_prefix_child2,
                     "fixed_price": 150,
                 },
             ),
@@ -84,17 +84,16 @@ class TestDeliveryMultiDestination(common.TransactionCase):
         carrier_form = Form(self.env["delivery.carrier"])
         carrier_form.name = "Test carrier multi"
         carrier_form.product_id = self.product
-        carrier_form.destination_type = "multi"
         carrier_form.delivery_type = "fixed"
         carrier_form.fixed_price = 100
+        carrier_form.destination_type = "multi"
         for child_item in childs:
             with carrier_form.child_ids.new() as child_form:
                 child_form.name = child_item["name"]
                 child_form.product_id = child_item["product_id"]
                 child_form.country_ids.add(self.country_2)
                 child_form.state_ids.add(self.state)
-                child_form.zip_from = child_item["zip_from"]
-                child_form.zip_to = child_item["zip_to"]
+                child_form.zip_prefix_ids.add(child_item["zip_prefix_ids"])
                 child_form.delivery_type = "fixed"
                 child_form.fixed_price = child_item["fixed_price"]
         return carrier_form.save()
@@ -163,7 +162,7 @@ class TestDeliveryMultiDestination(common.TransactionCase):
         self.sale_order.action_confirm()
         picking = self.sale_order.picking_ids
         self.assertEqual(picking.carrier_id, self.carrier_multi)
-        picking.move_lines.quantity_done = 1
+        picking.move_ids.quantity_done = 1
         picking._action_done()
         self.assertAlmostEqual(picking.carrier_price, 50)
 
