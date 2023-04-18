@@ -74,13 +74,13 @@ class SchenkerRequest:
                             "[%s]\n"
                             "%s - %s" % (error_text, error_code, error_message)
                         )
-                    )
+                    ) from e
                 except ValidationError:
                     raise
                 # If we can't get the proper exception, fallback to the first
                 # exception error traceback
-                except Exception:
-                    raise Fault(e)
+                except Exception as exc:
+                    raise Fault(e) from exc
         return response
 
     # Booking API methods
