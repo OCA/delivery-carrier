@@ -158,12 +158,12 @@ class DeliveryCarrier(models.Model):
         ],
         default="VOLUME",
     )
-    schenker_default_packaging_id = fields.Many2one(
-        comodel_name="product.packaging",
+    schenker_default_package_type_id = fields.Many2one(
+        comodel_name="stock.package.type",
         string="Default Package Type",
         domain=[("package_carrier_type", "=", "schenker")],
         help="If not delivery package or the package doesn't have defined the packaging"
-        "it will default to this type",
+        " it will default to this type",
     )
 
     def _get_schenker_credentials(self):
@@ -323,12 +323,12 @@ class DeliveryCarrier(models.Model):
             # Default to 1 if no volume informed
             "volume": volume or 0.01,
             "packageType": (
-                package.packaging_id.shipper_package_code
-                or self.schenker_default_packaging_id.shipper_package_code
+                package.package_type_id.shipper_package_code
+                or self.schenker_default_package_type_id.shipper_package_code
             ),
             "stackable": (
-                package.packaging_id.schenker_stackable
-                or self.schenker_default_packaging_id.schenker_stackable
+                package.package_type_id.schenker_stackable
+                or self.schenker_default_package_type_id.schenker_stackable
             ),
             "pieces": 1,
         }
@@ -361,8 +361,8 @@ class DeliveryCarrier(models.Model):
                 # For a more complex solution use packaging properly
                 "grossWeight": round(weight / picking.number_of_packages, 2),
                 "volume": round(volume, 2) or 0.01,
-                "packageType": self.schenker_default_packaging_id.shipper_package_code,
-                "stackable": self.schenker_default_packaging_id.schenker_stackable,
+                "packageType": self.schenker_default_package_type_id.shipper_package_code,
+                "stackable": self.schenker_default_package_type_id.schenker_stackable,
                 "pieces": picking.number_of_packages,
             }
         ]
@@ -404,7 +404,7 @@ class DeliveryCarrier(models.Model):
                 "shippingInformation": {
                     "shipmentPosition": shipping_information,
                     "grossWeight": round(picking.shipping_weight, 2),
-                    "volume": shipping_information["volume"],
+                    "volume": shipping_information[0]["volume"],
                 },
                 "measureUnit": self.schenker_measure_unit,
                 # Customs Clearance not supported for now as it needs a full customs

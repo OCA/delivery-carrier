@@ -23,7 +23,7 @@ Delivery Schenker
     :target: https://runboat.odoo-community.org/webui/builds.html?repo=OCA/delivery-carrier&target_branch=14.0
     :alt: Try me on Runboat
 
-|badge1| |badge2| |badge3| |badge4| |badge5| 
+|badge1| |badge2| |badge3| |badge4| |badge5|
 
 This module links the `DB Schenker <https://www.dbschenker.com>`_ booking and tracking
 APIs with Odoo delivery system.
@@ -156,6 +156,7 @@ Contributors
 * `Studio73 <https://www.studio73.es>`_:
 
   * Ethan Hildick
+  * Ferran Mora
 
 * Michael Tietz (MT Software) <mtietz@mt-software.de>
 
