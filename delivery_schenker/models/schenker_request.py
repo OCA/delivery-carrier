@@ -71,9 +71,14 @@ class SchenkerRequest:
                         _(
                             "Error in the request to the Schenker API. This is the "
                             "thrown message:\n\n"
-                            "[%s]\n"
-                            "%s - %s" % (error_text, error_code, error_message)
+                            "[%(error_text)s]\n"
+                            "%(error_code)s - %(error_message)s"
                         )
+                        % {
+                            "error_text": error_text,
+                            "error_code": error_code,
+                            "error_message": error_message,
+                        }
                     ) from e
                 except ValidationError:
                     raise
