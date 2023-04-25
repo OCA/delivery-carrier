@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright 2020 Tecnativa - David Vidal
-     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+Copyright 2023 Michael Tietz (MT Software) <mtietz@mt-software.de>
+License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
     <record id="view_delivery_carrier_form" model="ir.ui.view">
         <field name="model">delivery.carrier</field>
@@ -60,15 +61,21 @@
                             <field name="schenker_own_pickup" />
                             <field name="schenker_pharmaceuticals" />
                         </group>
-                        <group string="Logistics">
-                            <field
-                                name="schenker_default_packaging_id"
-                                attrs="{'required': [('delivery_type', '=', 'schenker')]}"
-                            />
-                            <field
-                                name="schenker_measure_unit"
-                                attrs="{'required': [('delivery_type', '=', 'schenker')]}"
-                            />
+                        <group>
+                            <group string="Logistics" colspan="4">
+                                <field
+                                    name="schenker_default_packaging_id"
+                                    attrs="{'required': [('delivery_type', '=', 'schenker')]}"
+                                />
+                                <field
+                                    name="schenker_measure_unit"
+                                    attrs="{'required': [('delivery_type', '=', 'schenker')]}"
+                                />
+                            </group>
+                            <group string="Invoicing" colspan="4">
+                                <field name="schenker_partner_invoice_id" />
+                                <field name="schenker_address_number" />
+                            </group>
                         </group>
                     </group>
                 </page>

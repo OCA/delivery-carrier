@@ -1,4 +1,5 @@
 # Copyright 2021 Tecnativa - David Vidal
+# Copyright 2023 Michael Tietz (MT Software) <mtietz@mt-software.de>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from lxml import etree
 
@@ -165,6 +166,19 @@ class DeliveryCarrier(models.Model):
         help="If not delivery package or the package doesn't have defined the packaging"
         "it will default to this type",
     )
+    schenker_address_number = fields.Char(
+        "Address ID",
+        help="ID assigned by Schenker to you.\nWill be part of the sender or "
+        "if set, the invoice address.\nIf you don't want to send it, use 0",
+        default=0,
+    )
+    schenker_partner_invoice_id = fields.Many2one(
+        "res.partner",
+        "Invoice Address",
+        ondelete="restrict",
+        help="If set, this contact will be sent as invoice address to Schenker."
+        "\nIf Address ID is set, it will be part of it instead of the sender",
+    )
 
     def _get_schenker_credentials(self):
         """Access key is mandatory for every request while group and user are
@@ -219,6 +233,16 @@ class DeliveryCarrier(models.Model):
         )
         return vals
 
+    def _schenker_address_optional_fields(self):
+        return [
+            ("email", "email"),
+            ("mobilePhone", "mobile"),
+            ("phone", "phone"),
+            ("street2", "street2"),
+            ("stateCode", "state_id.code"),
+            ("stateName", "state_id.name"),
+        ]
+
     def _prepare_schenker_address(
         self,
         partner,
@@ -241,20 +265,17 @@ class DeliveryCarrier(models.Model):
             "street": partner.street,
             "postalCode": partner.zip,
             "city": partner.city,
-            "stateCode": partner.state_id.code,
-            "stateName": partner.state_id.name,
             "countryCode": partner.country_id.code,
             "preferredLanguage": self.env["res.lang"]._lang_get(partner.lang).iso_code,
         }
         # Optional stuff. The API doesn't like falsy or empty request fields
-        if partner.email:
-            vals["email"] = partner.email
-        if partner.mobile:
-            vals["mobilePhone"] = partner.mobile
-        if partner.phone:
-            vals["phone"] = partner.phone
-        if partner.street2:
-            vals["street2"] = partner.street2
+        for schenker_key, expression in self._schenker_address_optional_fields():
+            value = partner
+            for field in expression.split("."):
+                value = getattr(value, field)
+            if not value:
+                continue
+            vals[schenker_key] = value
         return vals
 
     def _schenker_shipping_address(self, picking):
@@ -269,10 +290,23 @@ class DeliveryCarrier(models.Model):
             or picking.company_id.partner_id
         )
         consignee_address = picking.partner_id
-        return [
-            self._prepare_schenker_address(shipper_address, "SHIPPER"),
-            self._prepare_schenker_address(consignee_address),
+        shipper_address = self._prepare_schenker_address(shipper_address, "SHIPPER")
+        consignee_address = self._prepare_schenker_address(consignee_address)
+        result = [
+            shipper_address,
+            consignee_address,
         ]
+        invoice_address = False
+        if self.schenker_partner_invoice_id:
+            invoice_address = self._prepare_schenker_address(
+                self.schenker_partner_invoice_id, "INVOICE"
+            )
+            result.append(invoice_address)
+        if self.schenker_address_number:
+            (invoice_address or shipper_address)[
+                "schenkerAddressId"
+            ] = self.schenker_address_number
+        return result
 
     def _schenker_shipping_product(self):
         """Gets the proper shipping product according to the shipping type
@@ -367,7 +401,7 @@ class DeliveryCarrier(models.Model):
             }
         ]
 
-    def _schenker_measures(self, picking):
+    def _schenker_measures(self, picking, vals):
         """Only volume is supported as a pallet calculations structure should be
         provided to use the other API options. This hook can be used to communicate
         with the API in the future
@@ -375,7 +409,7 @@ class DeliveryCarrier(models.Model):
         :returns dict values for the proper unit key and value
         """
         if self.schenker_measure_unit == "VOLUME":
-            return {"measureUnitVolume": round(picking.volume, 2) or 0.01}
+            return {"measureUnitVolume": vals["shippingInformation"]["volume"]}
         return {}
 
     def _prepare_schenker_shipping(self, picking):
@@ -389,6 +423,7 @@ class DeliveryCarrier(models.Model):
         # account to acomplish a properly formed request.
         vals = {}
         vals.update(self._prepare_schenker_barcode())
+        shipping_information = self._schenker_shipping_information(picking)
         vals.update(
             {
                 "address": self._schenker_shipping_address(picking),
@@ -401,9 +436,9 @@ class DeliveryCarrier(models.Model):
                 "measurementType": self._schenker_metric_system(),
                 "grossWeight": round(picking.shipping_weight, 2),
                 "shippingInformation": {
-                    "shipmentPosition": self._schenker_shipping_information(picking),
+                    "shipmentPosition": shipping_information,
                     "grossWeight": round(picking.shipping_weight, 2),
-                    "volume": round(picking.volume, 2) or 0.01,
+                    "volume": shipping_information["volume"],
                 },
                 "measureUnit": self.schenker_measure_unit,
                 # Customs Clearance not supported for now as it needs a full customs
@@ -426,7 +461,7 @@ class DeliveryCarrier(models.Model):
                 "pharmaceuticals": self.schenker_pharmaceuticals,
             }
         )
-        vals.update(self._schenker_measures(picking))
+        vals.update(self._schenker_measures(picking, vals))
         return vals
 
     def schenker_send_shipping(self, pickings):
