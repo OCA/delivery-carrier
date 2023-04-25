@@ -29,6 +29,11 @@ msgid "Access Key"
 msgstr ""
 
 #. module: delivery_schenker
+#: model:ir.model.fields,field_description:delivery_schenker.field_delivery_carrier__schenker_address_number
+msgid "Address ID"
+msgstr ""
+
+#. module: delivery_schenker
 #: model:ir.model.fields.selection,name:delivery_schenker.selection__delivery_carrier__schenker_service_type__a2a
 msgid "Aiport-to-airport"
 msgstr ""
@@ -369,6 +374,14 @@ msgid "ID"
 msgstr ""
 
 #. module: delivery_schenker
+#: model:ir.model.fields,help:delivery_schenker.field_delivery_carrier__schenker_address_number
+msgid ""
+"ID assigned by Schenker to you.\n"
+"Will be part of the sender or if set, the invoice address.\n"
+"If you don't want to send it, use 0"
+msgstr ""
+
+#. module: delivery_schenker
 #: model:ir.model.fields,help:delivery_schenker.field_delivery_carrier__schenker_default_packaging_id
 msgid ""
 "If not delivery package or the package doesn't have defined the packagingit "
@@ -376,8 +389,25 @@ msgid ""
 msgstr ""
 
 #. module: delivery_schenker
+#: model:ir.model.fields,help:delivery_schenker.field_delivery_carrier__schenker_partner_invoice_id
+msgid ""
+"If set, this contact will be sent as invoice address to Schenker.\n"
+"If Address ID is set, it will be part of it instead of the sender"
+msgstr ""
+
+#. module: delivery_schenker
 #: model:ir.model.fields,field_description:delivery_schenker.field_delivery_carrier__schenker_indoor_delivery
 msgid "Indoor Delivery"
+msgstr ""
+
+#. module: delivery_schenker
+#: model:ir.model.fields,field_description:delivery_schenker.field_delivery_carrier__schenker_partner_invoice_id
+msgid "Invoice Address"
+msgstr ""
+
+#. module: delivery_schenker
+#: model_terms:ir.ui.view,arch_db:delivery_schenker.view_delivery_carrier_form
+msgid "Invoicing"
 msgstr ""
 
 #. module: delivery_schenker
