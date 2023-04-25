@@ -39,6 +39,7 @@ setuptools.setup(
         'odoo14-addon-delivery_roulier_laposte_fr',
         'odoo14-addon-delivery_roulier_option',
         'odoo14-addon-delivery_schenker',
+        'odoo14-addon-delivery_schenker_picking_volume',
         'odoo14-addon-delivery_send_to_shipper_at_operation',
         'odoo14-addon-delivery_state',
         'odoo14-addon-delivery_tnt_oca',
