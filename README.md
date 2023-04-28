@@ -31,7 +31,7 @@ addon | version | maintainers | summary
 [delivery_carrier_customer_info](delivery_carrier_customer_info/) | 14.0.1.0.0 |  | Send delivery notice to the shipper from any operation.
 [delivery_carrier_default_tracking_url](delivery_carrier_default_tracking_url/) | 14.0.1.0.0 | [![rousseldenis](https://github.com/rousseldenis.png?size=30px)](https://github.com/rousseldenis) | Adds the default tracking url on delivery carrier
 [delivery_carrier_info](delivery_carrier_info/) | 14.0.1.0.1 |  | Add code and description on carrier
-[delivery_carrier_label_batch](delivery_carrier_label_batch/) | 14.0.1.0.2 |  | Carrier labels - Stock Batch Picking (link)
+[delivery_carrier_label_batch](delivery_carrier_label_batch/) | 14.0.1.1.0 |  | Carrier labels - Stock Batch Picking (link)
 [delivery_carrier_location](delivery_carrier_location/) | 14.0.1.0.0 | [![ivantodorovich](https://github.com/ivantodorovich.png?size=30px)](https://github.com/ivantodorovich) | Integrates delivery with base_location
 [delivery_carrier_multi_zip](delivery_carrier_multi_zip/) | 14.0.1.0.0 |  | Multiple ZIP intervals for the same delivery method
 [delivery_carrier_package_measure_required](delivery_carrier_package_measure_required/) | 14.0.1.0.1 |  | Allow the configuration of which package measurements are required on a delivery carrier basis.
