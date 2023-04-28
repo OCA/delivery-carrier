@@ -87,9 +87,9 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
                     picking_name = _("Picking: %s") % picking.name
                     pack_num = _("Pack: %s") % pack.name if pack else ""
                     # pylint: disable=translation-required
-                    raise exceptions.UserError(
-                        ("%s %s - %s") % (picking_name, pack_num, e)
-                    )
+                    msg = ("%s %s - %s") % (picking_name, pack_num, str(e))
+                    _logger.exception(msg)
+                    raise exceptions.UserError(msg)
 
     def _worker(self, data_queue, error_queue):
         """A worker to generate labels
@@ -251,6 +251,8 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
             to_generate = to_generate.filtered(
                 lambda rec: rec.id not in already_generated_ids
             )
+        else:
+            to_generate.purge_tracking_references()
 
         for batch in to_generate:
             labels = self._get_all_files(batch)
