@@ -438,7 +438,7 @@ class DeliveryCarrier(models.Model):
                 "shippingInformation": {
                     "shipmentPosition": shipping_information,
                     "grossWeight": round(picking.shipping_weight, 2),
-                    "volume": shipping_information["volume"],
+                    "volume": sum(info["volume"] for info in shipping_information),
                 },
                 "measureUnit": self.schenker_measure_unit,
                 # Customs Clearance not supported for now as it needs a full customs
