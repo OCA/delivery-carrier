@@ -204,3 +204,13 @@ class TestDeliveryMultiDestination(common.SavepointCase):
         picking.move_lines.quantity_done = 1
         picking._action_done()
         self.assertAlmostEqual(picking.carrier_price, 50)
+
+    def test_delivery_carrier_multi_form(self):
+        carrier_form = Form(self.env["delivery.carrier"])
+        carrier_form.name = "Multi carrier"
+        carrier_form.destination_type = "multi"
+        with carrier_form.child_ids.new() as child_form:
+            child_form.name = "Child carrier"
+            child_form.product_id = self.product_child_1
+        carrier = carrier_form.save()
+        self.assertEqual(carrier.product_id, self.product_child_1)
