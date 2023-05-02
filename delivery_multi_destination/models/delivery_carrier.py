@@ -29,6 +29,12 @@ class DeliveryCarrier(models.Model):
         required=True,
     )
 
+    @api.onchange("destination_type", "child_ids")
+    def _onchange_destination_type(self):
+        """Define the corresponding value to avoid creation error with UX."""
+        if self.destination_type == "multi" and self.child_ids and not self.product_id:
+            self.product_id = fields.first(self.child_ids.product_id)
+
     def search(self, args, offset=0, limit=None, order=None, count=False):
         """Don't show by default children carriers."""
         if not self.env.context.get("show_children_carriers"):
