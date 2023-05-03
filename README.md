@@ -51,8 +51,8 @@ addon | version | maintainers | summary
 [delivery_roulier](delivery_roulier/) | 14.0.1.0.1 | [![florian-dacosta](https://github.com/florian-dacosta.png?size=30px)](https://github.com/florian-dacosta) | Integration of multiple carriers
 [delivery_roulier_laposte_fr](delivery_roulier_laposte_fr/) | 14.0.1.0.1 | [![florian-dacosta](https://github.com/florian-dacosta.png?size=30px)](https://github.com/florian-dacosta) | Generate Label for La Poste/Colissimo
 [delivery_roulier_option](delivery_roulier_option/) | 14.0.1.0.0 | [![florian-dacosta](https://github.com/florian-dacosta.png?size=30px)](https://github.com/florian-dacosta) | Add options to roulier modules
-[delivery_schenker](delivery_schenker/) | 14.0.1.1.0 |  | Delivery Carrier implementation for DB Schenker API
-[delivery_schenker_picking_volume](delivery_schenker_picking_volume/) | 14.0.1.1.0 |  | Glue module between delivery_schenker and stock_picking_volumeWith this module the transmitted volume is changed,it uses the computed volume from stock_picking_volume
+[delivery_schenker](delivery_schenker/) | 14.0.1.1.1 |  | Delivery Carrier implementation for DB Schenker API
+[delivery_schenker_picking_volume](delivery_schenker_picking_volume/) | 14.0.1.1.1 |  | Glue module between delivery_schenker and stock_picking_volumeWith this module the transmitted volume is changed,it uses the computed volume from stock_picking_volume
 [delivery_send_to_shipper_at_operation](delivery_send_to_shipper_at_operation/) | 14.0.1.0.1 |  | Send delivery notice to the shipper from any operation.
 [delivery_state](delivery_state/) | 14.0.1.1.0 |  | Provides fields to be able to contemplate the tracking statesand also adds a global fields
 [delivery_tnt_oca](delivery_tnt_oca/) | 14.0.1.2.3 | [![victoralmau](https://github.com/victoralmau.png?size=30px)](https://github.com/victoralmau) | Integrate TNT webservice
