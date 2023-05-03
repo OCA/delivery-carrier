@@ -169,8 +169,7 @@ class DeliveryCarrier(models.Model):
     schenker_address_number = fields.Char(
         "Address ID",
         help="ID assigned by Schenker to you.\nWill be part of the sender or "
-        "if set, the invoice address.\nIf you don't want to send it, use 0",
-        default=0,
+        "if set, the invoice address.",
     )
     schenker_partner_invoice_id = fields.Many2one(
         "res.partner",
