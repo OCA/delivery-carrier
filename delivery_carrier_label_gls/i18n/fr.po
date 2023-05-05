@@ -1,0 +1,543 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* delivery_carrier_label_gls
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-01-16 16:53+0000\n"
+"PO-Revision-Date: 2023-01-16 16:53+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: delivery_carrier_label_gls
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_label_gls.res_config_settings_view_form_stock
+msgid "<span class=\"o_form_label\">GLS Connector</span>"
+msgstr "<span class=\"o_form_label\">Connecteur GLS</span>"
+
+#. module: delivery_carrier_label_gls
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_label_gls.report_delivery_report_gls_document
+msgid "<strong>City</strong>"
+msgstr "<strong>Ville</strong>"
+
+#. module: delivery_carrier_label_gls
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_label_gls.report_delivery_report_gls_document
+msgid "<strong>Country</strong>"
+msgstr "<strong>Pays</strong>"
+
+#. module: delivery_carrier_label_gls
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_label_gls.report_delivery_report_gls_document
+msgid "<strong>Date and time of reception:</strong>"
+msgstr "<strong>Date et heure de réception:</strong>"
+
+#. module: delivery_carrier_label_gls
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_label_gls.report_delivery_report_gls_document
+msgid "<strong>Driver's name:</strong>"
+msgstr "<strong>Nom du chauffeur:</strong>"
+
+#. module: delivery_carrier_label_gls
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_label_gls.report_delivery_report_gls_document
+msgid "<strong>Internal Reference</strong>"
+msgstr "<strong>Réference interne</strong>"
+
+#. module: delivery_carrier_label_gls
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_label_gls.report_delivery_report_gls_document
+msgid "<strong>Name</strong>"
+msgstr "<strong>Nom</strong>"
+
+#. module: delivery_carrier_label_gls
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_label_gls.report_delivery_report_gls_document
+msgid "<strong>Number of Packages</strong>"
+msgstr "<strong>Nombre de paquets</strong>"
+
+#. module: delivery_carrier_label_gls
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_label_gls.report_delivery_report_gls_document
+msgid "<strong>Package Reference</strong>"
+msgstr "<strong>Référence de paquet</strong>"
+
+#. module: delivery_carrier_label_gls
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_label_gls.report_delivery_report_gls_document
+msgid "<strong>Parcels</strong>"
+msgstr "<strong>Colis</strong>"
+
+#. module: delivery_carrier_label_gls
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_label_gls.report_delivery_report_gls_document
+msgid "<strong>Partner:</strong>"
+msgstr "<strong>Partenaire:</strong>"
+
+#. module: delivery_carrier_label_gls
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_label_gls.report_delivery_report_gls_document
+msgid "<strong>Signature:</strong>"
+msgstr ""
+
+#. module: delivery_carrier_label_gls
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_label_gls.report_delivery_report_gls_document
+msgid "<strong>Total Weight (kg)</strong>"
+msgstr "<strong>Poiids total (kg)</strong>"
+
+#. module: delivery_carrier_label_gls
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_label_gls.report_delivery_report_gls_document
+msgid "<strong>Tracking</strong>"
+msgstr "<strong>Traçabilité</strong>"
+
+#. module: delivery_carrier_label_gls
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_label_gls.report_delivery_report_gls_document
+msgid "<strong>Vehicle registration plate:</strong>"
+msgstr "<strong>Plaque d'immatriculation:</strong>"
+
+#. module: delivery_carrier_label_gls
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_label_gls.report_delivery_report_gls_document
+msgid "<strong>Weight</strong>"
+msgstr "<strong>Poids</strong>"
+
+#. module: delivery_carrier_label_gls
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_label_gls.delivery_report_gls_wizard_form_view
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: delivery_carrier_label_gls
+#. odoo-python
+#: code:addons/delivery_carrier_label_gls/models/stock_quant_package.py:0
+#, python-format
+msgid "Cannot open tracking URL for this carrier."
+msgstr "Impossible d'ouvrir l'URL de tracking pour ce transporteur."
+
+#. module: delivery_carrier_label_gls
+#: model:ir.model.fields,field_description:delivery_carrier_label_gls.field_delivery_client_gls__carrier_id
+#: model:ir.model.fields,field_description:delivery_carrier_label_gls.field_delivery_report_gls__carrier_id
+#: model:ir.model.fields,field_description:delivery_carrier_label_gls.field_stock_package_type__package_carrier_type
+#: model:ir.model.fields,field_description:delivery_carrier_label_gls.field_stock_quant_package__carrier_id
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_label_gls.delivery_report_gls_search_view
+msgid "Carrier"
+msgstr "Transporteur"
+
+#. module: delivery_carrier_label_gls
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_label_gls.view_carrier_account_search
+msgid "Carrier Account"
+msgstr "Compte du transporteur"
+
+#. module: delivery_carrier_label_gls
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_label_gls.view_quant_package_form
+msgid "Carrier Tracking"
+msgstr "Traçabilité du transporteur"
+
+#. module: delivery_carrier_label_gls
+#: model:ir.model.fields,field_description:delivery_carrier_label_gls.field_delivery_report_gls_wizard__carrier_ids
+msgid "Carriers"
+msgstr "Transporteurs"
+
+#. module: delivery_carrier_label_gls
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_label_gls.res_config_settings_view_form_stock
+msgid "Compute shipping costs and ship with GLS"
+msgstr "Calculer les coûts de livraison et livrer avec GLS"
+
+#. module: delivery_carrier_label_gls
+#: model:ir.model,name:delivery_carrier_label_gls.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: delivery_carrier_label_gls
+#: model:ir.model.fields,help:delivery_carrier_label_gls.field_delivery_carrier__gls_contact_id
+msgid "Contact id for GLS International transportation (T8914)"
+msgstr "Identifiant pour le transport international chez GLS (T8914)"
+
+#. module: delivery_carrier_label_gls
+#: model:product.product,name:delivery_carrier_label_gls.product_product_gls
+#: model:product.template,name:delivery_carrier_label_gls.product_product_gls_product_template
+msgid "Coûts de livraison - GLS"
+msgstr ""
+
+#. module: delivery_carrier_label_gls
+#: model:ir.model.fields,field_description:delivery_carrier_label_gls.field_delivery_client_gls__create_uid
+#: model:ir.model.fields,field_description:delivery_carrier_label_gls.field_delivery_report_gls__create_uid
+#: model:ir.model.fields,field_description:delivery_carrier_label_gls.field_delivery_report_gls_wizard__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: delivery_carrier_label_gls
+#: model:ir.model.fields,field_description:delivery_carrier_label_gls.field_delivery_client_gls__create_date
+#: model:ir.model.fields,field_description:delivery_carrier_label_gls.field_delivery_report_gls__create_date
+#: model:ir.model.fields,field_description:delivery_carrier_label_gls.field_delivery_report_gls_wizard__create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: delivery_carrier_label_gls
+#: model:ir.model.fields.selection,name:delivery_carrier_label_gls.selection__delivery_carrier__gls_label_template__d_200
+msgid "D200"
+msgstr ""
+
+#. module: delivery_carrier_label_gls
+#: model:ir.model.fields.selection,name:delivery_carrier_label_gls.selection__delivery_carrier__gls_label_format__datamax
+msgid "Datamax"
+msgstr ""
+
+#. module: delivery_carrier_label_gls
+#: model:ir.model.fields,field_description:delivery_carrier_label_gls.field_delivery_report_gls_wizard__date
+msgid "Date"
+msgstr ""
+
+#. module: delivery_carrier_label_gls
+#: model:ir.model.fields,field_description:delivery_carrier_label_gls.field_delivery_client_gls__display_name
+#: model:ir.model.fields,field_description:delivery_carrier_label_gls.field_delivery_report_gls__display_name
+#: model:ir.model.fields,field_description:delivery_carrier_label_gls.field_delivery_report_gls_wizard__display_name
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#. module: delivery_carrier_label_gls
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_label_gls.res_config_settings_view_form_stock
+msgid "Documentation"
+msgstr ""
+
+#. module: delivery_carrier_label_gls
+#: model:ir.model,name:delivery_carrier_label_gls.model_delivery_report_gls
+msgid "End of the day GLS report"
+msgstr "Rapport GLS de fin de journée"
+
+#. module: delivery_carrier_label_gls
+#: model:ir.model.fields,help:delivery_carrier_label_gls.field_sale_order__gls_parcel_shop
+#: model:ir.model.fields,help:delivery_carrier_label_gls.field_stock_picking__gls_parcel_shop
+msgid "Fill this for a delivery to a ParcelShop."
+msgstr "Complétez ceci pour une livraison chez un Parcel Shop"
+
+#. module: delivery_carrier_label_gls
+#. odoo-python
+#: code:addons/delivery_carrier_label_gls/models/stock_picking.py:0
+#, python-format
+msgid "For GLS every operation should be put in a pack."
+msgstr "Pour GLS, chaque opération doit être mise en paquet."
+
+#. module: delivery_carrier_label_gls
+#: model:delivery.carrier,name:delivery_carrier_label_gls.delivery_carrier_gls
+#: model:ir.model.fields.selection,name:delivery_carrier_label_gls.selection__delivery_carrier__delivery_type__gls
+#: model:ir.model.fields.selection,name:delivery_carrier_label_gls.selection__stock_package_type__package_carrier_type__gls
+msgid "GLS"
+msgstr ""
+
+#. module: delivery_carrier_label_gls
+#: model:ir.model,name:delivery_carrier_label_gls.model_delivery_client_gls
+msgid "GLS API client"
+msgstr ""
+
+#. module: delivery_carrier_label_gls
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_label_gls.res_config_settings_view_form_stock
+msgid "GLS Carrier Account"
+msgstr "Compte transporteur GLS"
+
+#. module: delivery_carrier_label_gls
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_label_gls.report_delivery_report_gls_document
+msgid "GLS Contact ID:"
+msgstr "Identifiant GLS"
+
+#. module: delivery_carrier_label_gls
+#: model:ir.actions.report,name:delivery_carrier_label_gls.report_delivery_report_gls
+#: model:ir.model.fields,field_description:delivery_carrier_label_gls.field_stock_quant_package__report_id
+msgid "GLS Delivery Report"
+msgstr "Rapport de livraison GLS"
+
+#. module: delivery_carrier_label_gls
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_label_gls.report_delivery_report_gls_document
+msgid "GLS Delivery Report:"
+msgstr "Rapport de livraison GLS:"
+
+#. module: delivery_carrier_label_gls
+#: model:ir.model.fields,field_description:delivery_carrier_label_gls.field_stock_quant_package__gls_package_ref
+msgid "GLS Identifier"
+msgstr "Référence GLS"
+
+#. module: delivery_carrier_label_gls
+#: model:ir.model.fields,field_description:delivery_carrier_label_gls.field_stock_picking__gls_package_ref
+msgid "GLS Package Identifiers"
+msgstr "Identifiants de paquet GLS"
+
+#. module: delivery_carrier_label_gls
+#: model:ir.model.fields,field_description:delivery_carrier_label_gls.field_sale_order__gls_parcel_shop
+#: model:ir.model.fields,field_description:delivery_carrier_label_gls.field_stock_picking__gls_parcel_shop
+msgid "GLS Parcel Shop Identifier"
+msgstr "Identifiant de colis GLS"
+
+#. module: delivery_carrier_label_gls
+#: model:res.groups,name:delivery_carrier_label_gls.group_gls_report_manager
+msgid "GLS Report Manager"
+msgstr "Gestionnaire de rapport GLS"
+
+#. module: delivery_carrier_label_gls
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_label_gls.res_config_settings_view_form_stock
+msgid "GLS Shipping Methods"
+msgstr "Modes de livraison GLS"
+
+#. module: delivery_carrier_label_gls
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_label_gls.view_delivery_carrier_form
+msgid "GLS configuration"
+msgstr "Configuration GLS"
+
+#. module: delivery_carrier_label_gls
+#: model:ir.actions.act_window,name:delivery_carrier_label_gls.delivery_report_gls_act_window
+#: model:ir.ui.menu,name:delivery_carrier_label_gls.delivery_report_gls_menu
+msgid "GLS: Delivery Reports"
+msgstr "GLS: Rapports de livraison"
+
+#. module: delivery_carrier_label_gls
+#: model:ir.actions.server,name:delivery_carrier_label_gls.cron_end_of_day_report_ir_actions_server
+#: model:ir.cron,cron_name:delivery_carrier_label_gls.cron_end_of_day_report
+#: model:ir.cron,name:delivery_carrier_label_gls.cron_end_of_day_report
+msgid "GLS: End of Day Report"
+msgstr "GLS: Rapport de fin de journée"
+
+#. module: delivery_carrier_label_gls
+#: model:ir.actions.act_window,name:delivery_carrier_label_gls.delivery_report_gls_wizard_act_window
+#: model:ir.ui.menu,name:delivery_carrier_label_gls.delivery_report_gls_wizard_menu
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_label_gls.delivery_report_gls_wizard_form_view
+msgid "GLS: Get End of Day Report"
+msgstr ""
+
+#. module: delivery_carrier_label_gls
+#: model:ir.model.fields,field_description:delivery_carrier_label_gls.field_delivery_carrier__gls_url_tracking
+msgid "Gls Url Tracking"
+msgstr "URL de tracking GLS"
+
+#. module: delivery_carrier_label_gls
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_label_gls.delivery_report_gls_search_view
+msgid "Group By"
+msgstr "Groupé par"
+
+#. module: delivery_carrier_label_gls
+#: model:ir.model.fields,field_description:delivery_carrier_label_gls.field_delivery_client_gls__id
+#: model:ir.model.fields,field_description:delivery_carrier_label_gls.field_delivery_report_gls__id
+#: model:ir.model.fields,field_description:delivery_carrier_label_gls.field_delivery_report_gls_wizard__id
+msgid "ID"
+msgstr ""
+
+#. module: delivery_carrier_label_gls
+#: model:ir.model.fields,help:delivery_carrier_label_gls.field_delivery_carrier__gls_return_partner_id
+msgid "If set, this partner's address will be used on the return label."
+msgstr "Si indiqué, l'adresse de ce partenaire sera utilisée sur l'étiquette de retour."
+
+#. module: delivery_carrier_label_gls
+#: model:ir.model.fields.selection,name:delivery_carrier_label_gls.selection__delivery_carrier__gls_label_format__intermec
+msgid "Intermec"
+msgstr ""
+
+#. module: delivery_carrier_label_gls
+#: model:ir.model.fields,field_description:delivery_carrier_label_gls.field_delivery_carrier__gls_contact_id
+msgid "International"
+msgstr ""
+
+#. module: delivery_carrier_label_gls
+#: model:ir.model.fields,field_description:delivery_carrier_label_gls.field_delivery_carrier__gls_label_template
+msgid "Label Template"
+msgstr "Gabarit d'étiquette"
+
+#. module: delivery_carrier_label_gls
+#: model:ir.model.fields,field_description:delivery_carrier_label_gls.field_delivery_carrier__gls_label_format
+msgid "Label format"
+msgstr "Format d'étiquette"
+
+#. module: delivery_carrier_label_gls
+#: model:ir.model.fields,field_description:delivery_carrier_label_gls.field_delivery_client_gls____last_update
+#: model:ir.model.fields,field_description:delivery_carrier_label_gls.field_delivery_report_gls____last_update
+#: model:ir.model.fields,field_description:delivery_carrier_label_gls.field_delivery_report_gls_wizard____last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: delivery_carrier_label_gls
+#: model:ir.model.fields,field_description:delivery_carrier_label_gls.field_delivery_client_gls__write_uid
+#: model:ir.model.fields,field_description:delivery_carrier_label_gls.field_delivery_report_gls__write_uid
+#: model:ir.model.fields,field_description:delivery_carrier_label_gls.field_delivery_report_gls_wizard__write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: delivery_carrier_label_gls
+#: model:ir.model.fields,field_description:delivery_carrier_label_gls.field_delivery_client_gls__write_date
+#: model:ir.model.fields,field_description:delivery_carrier_label_gls.field_delivery_report_gls__write_date
+#: model:ir.model.fields,field_description:delivery_carrier_label_gls.field_delivery_report_gls_wizard__write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: delivery_carrier_label_gls
+#. odoo-python
+#: code:addons/delivery_carrier_label_gls/wizards/delivery_report_gls_wizard.py:0
+#, python-format
+msgid "Only GLS supports delivery reports."
+msgstr "Seul GLS supporte les rapports de livraison."
+
+#. module: delivery_carrier_label_gls
+#: model:ir.model.fields.selection,name:delivery_carrier_label_gls.selection__delivery_carrier__gls_label_format__pdf
+msgid "PDF"
+msgstr ""
+
+#. module: delivery_carrier_label_gls
+#: model:ir.model.fields.selection,name:delivery_carrier_label_gls.selection__delivery_carrier__gls_label_template__pf_4_i
+msgid "PF4I"
+msgstr ""
+
+#. module: delivery_carrier_label_gls
+#: model:ir.model.fields.selection,name:delivery_carrier_label_gls.selection__delivery_carrier__gls_label_template__pf_4_i_200
+msgid "PF4I200"
+msgstr ""
+
+#. module: delivery_carrier_label_gls
+#: model:ir.model.fields.selection,name:delivery_carrier_label_gls.selection__delivery_carrier__gls_label_template__pf_4_i_300
+msgid "PF4I300"
+msgstr ""
+
+#. module: delivery_carrier_label_gls
+#: model:ir.model.fields.selection,name:delivery_carrier_label_gls.selection__delivery_carrier__gls_label_template__pf_8_d_200
+msgid "PF8D200"
+msgstr ""
+
+#. module: delivery_carrier_label_gls
+#: model:ir.model,name:delivery_carrier_label_gls.model_stock_quant_package
+msgid "Packages"
+msgstr "Paquets"
+
+#. module: delivery_carrier_label_gls
+#: model:ir.model.fields,field_description:delivery_carrier_label_gls.field_stock_quant_package__gls_picking_id
+msgid "Picking used in GLS"
+msgstr "Transfert utilisé par GLS"
+
+#. module: delivery_carrier_label_gls
+#: model:ir.model.fields,field_description:delivery_carrier_label_gls.field_delivery_report_gls__package_ids
+msgid "Pickings"
+msgstr "Transferts"
+
+#. module: delivery_carrier_label_gls
+#: model:ir.model.fields,field_description:delivery_carrier_label_gls.field_delivery_carrier__delivery_type
+#: model:ir.model.fields,field_description:delivery_carrier_label_gls.field_sale_order__delivery_type
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_label_gls.view_carrier_account_search
+msgid "Provider"
+msgstr "Fournisseur"
+
+#. module: delivery_carrier_label_gls
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_label_gls.delivery_report_gls_form_view
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_label_gls.delivery_report_gls_wizard_form_view
+msgid "Report"
+msgstr ""
+
+#. module: delivery_carrier_label_gls
+#: model:ir.model.fields,field_description:delivery_carrier_label_gls.field_delivery_report_gls__report_datetime
+msgid "Report Date and Time"
+msgstr "Date et heure de rapport"
+
+#. module: delivery_carrier_label_gls
+#: model:ir.model.fields,field_description:delivery_carrier_label_gls.field_delivery_carrier__gls_return_partner_id
+msgid "Return Address"
+msgstr "Adresse de retour"
+
+#. module: delivery_carrier_label_gls
+#: model:ir.model.fields,help:delivery_carrier_label_gls.field_delivery_carrier__gls_url_tracking
+msgid "Root URL for parcel tracking. Needs a %s for the tracking reference."
+msgstr "URL de base pour la traçabilité des colis. Nécessite une %s pour la référence de tracking."
+
+#. module: delivery_carrier_label_gls
+#: model:ir.model,name:delivery_carrier_label_gls.model_sale_order
+msgid "Sales Order"
+msgstr "Bons de commande"
+
+#. module: delivery_carrier_label_gls
+#: model:ir.model.fields,field_description:delivery_carrier_label_gls.field_delivery_carrier__gls_url
+msgid "Service Url"
+msgstr "URL du service"
+
+#. module: delivery_carrier_label_gls
+#: model:ir.model,name:delivery_carrier_label_gls.model_shipping_label
+msgid "Shipping Label"
+msgstr "Étiquette de livraison"
+
+#. module: delivery_carrier_label_gls
+#: model:ir.model,name:delivery_carrier_label_gls.model_delivery_carrier
+msgid "Shipping Methods"
+msgstr "Modes de livraison"
+
+#. module: delivery_carrier_label_gls
+#: model:ir.model,name:delivery_carrier_label_gls.model_stock_package_type
+msgid "Stock package type"
+msgstr "Type de paquet"
+
+#. module: delivery_carrier_label_gls
+#: model:ir.model.fields.selection,name:delivery_carrier_label_gls.selection__delivery_carrier__gls_label_template__t_200_bf
+msgid "T200BF"
+msgstr ""
+
+#. module: delivery_carrier_label_gls
+#: model:ir.model.fields.selection,name:delivery_carrier_label_gls.selection__delivery_carrier__gls_label_template__t_300_bf
+msgid "T300BF"
+msgstr ""
+
+#. module: delivery_carrier_label_gls
+#: model:ir.model.fields,field_description:delivery_carrier_label_gls.field_delivery_carrier__gls_url_test
+msgid "Test Service Url"
+msgstr "URL du service de test"
+
+#. module: delivery_carrier_label_gls
+#. odoo-python
+#: code:addons/delivery_carrier_label_gls/wizards/delivery_report_gls_wizard.py:0
+#, python-format
+msgid "There are no new shipments."
+msgstr "Il n'y a pas d'expédition."
+
+#. module: delivery_carrier_label_gls
+#. odoo-python
+#: code:addons/delivery_carrier_label_gls/wizards/delivery_client_gls.py:0
+#, python-format
+msgid "This is not a GLS client."
+msgstr "Ce n'est pas un client GLS."
+
+#. module: delivery_carrier_label_gls
+#: model:ir.model.fields.selection,name:delivery_carrier_label_gls.selection__delivery_carrier__gls_label_format__toshiba
+msgid "Toshiba"
+msgstr ""
+
+#. module: delivery_carrier_label_gls
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_label_gls.view_quant_package_form
+msgid "Track your parcel in carrier information system"
+msgstr "Traquez votre colis dans le système du transporteur"
+
+#. module: delivery_carrier_label_gls
+#: model:ir.model,name:delivery_carrier_label_gls.model_stock_picking
+msgid "Transfer"
+msgstr "Transfert"
+
+#. module: delivery_carrier_label_gls
+#: model:product.product,uom_name:delivery_carrier_label_gls.product_product_gls
+#: model:product.template,uom_name:delivery_carrier_label_gls.product_product_gls_product_template
+msgid "Units"
+msgstr "Unités"
+
+#. module: delivery_carrier_label_gls
+#: model:ir.model,name:delivery_carrier_label_gls.model_delivery_report_gls_wizard
+msgid "Wizard to get the End of Day Report"
+msgstr "Assistant d'obtention du rapport de fin de journée"
+
+#. module: delivery_carrier_label_gls
+#. odoo-python
+#: code:addons/delivery_carrier_label_gls/models/stock_quant_package.py:0
+#, python-format
+msgid "You cannot cancel a pack that wasn't sent to GLS."
+msgstr "Vous ne pouvez pas annuler un paquet qui n'a pas été envoyé par GLS."
+
+#. module: delivery_carrier_label_gls
+#. odoo-python
+#: code:addons/delivery_carrier_label_gls/wizards/delivery_client_gls.py:0
+#, python-format
+msgid "Your GLS Contact ID is not configured."
+msgstr "Votre identifiant GLS n'est pas configuré."
+
+#. module: delivery_carrier_label_gls
+#: model:ir.model.fields.selection,name:delivery_carrier_label_gls.selection__delivery_carrier__gls_label_template__zpl_200
+msgid "ZPL200"
+msgstr ""
+
+#. module: delivery_carrier_label_gls
+#: model:ir.model.fields.selection,name:delivery_carrier_label_gls.selection__delivery_carrier__gls_label_template__zpl_300
+msgid "ZPL300"
+msgstr ""
+
+#. module: delivery_carrier_label_gls
+#: model:ir.model.fields.selection,name:delivery_carrier_label_gls.selection__delivery_carrier__gls_label_format__zebra
+msgid "Zebra"
+msgstr ""
