@@ -417,6 +417,7 @@ class DeliveryCarrier(models.Model):
         :returns dict values for the connector
         """
         self.ensure_one()
+        picking.ensure_one()
         # We'll compose the request via some diferenced parts, like label settings,
         # address options, incoterms and so. There are lots of thing to take into
         # account to acomplish a properly formed request.
