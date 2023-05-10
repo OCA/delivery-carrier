@@ -103,13 +103,19 @@ class DeliveryCarrier(models.Model):
                             break
                     else:
                         try:
+                            # on base_on_rule_send_shipping, the method
+                            # _get_price_available is called using p.carrier_id,
+                            # ignoring the self arg, so we need to temporarily replace
+                            # it with the subcarrier
+                            p.carrier_id = subcarrier.id
                             picking_res = super(
-                                DeliveryCarrier,
-                                subcarrier,
-                            ).send_shipping(pickings)
+                                DeliveryCarrier, subcarrier
+                            ).send_shipping(p)
                             break
                         except Exception:
                             pass
+                        finally:
+                            p.carrier_id = carrier
                 if not picking_res:
                     raise ValidationError(_("There is no matching delivery rule."))
                 res += picking_res
