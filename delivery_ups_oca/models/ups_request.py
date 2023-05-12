@@ -30,7 +30,11 @@ class UpsRequest(object):
             self.url = "https://onlinetools.ups.com"
 
     def _process_reply(
-        self, url, data=None, method="post", query_parameters=None,
+        self,
+        url,
+        data=None,
+        method="post",
+        query_parameters=None,
     ):
         data = data or {}
         headers = {
@@ -75,7 +79,7 @@ class UpsRequest(object):
             },
             "Dimensions": {
                 "UnitOfMeasurement": {"Code": self.package_dimension_code},
-                "Length": str(package.length),
+                "Length": str(package.packaging_length),
                 "Width": str(package.width),
                 "Height": str(package.height),
             },
@@ -190,7 +194,7 @@ class UpsRequest(object):
             "PackagingType": {"Code": self.default_packaging_id.shipper_package_code},
             "Dimensions": {
                 "UnitOfMeasurement": {"Code": self.package_dimension_code},
-                "Length": str(self.default_packaging_id.length),
+                "Length": str(self.default_packaging_id.packaging_length),
                 "Width": str(self.default_packaging_id.width),
                 "Height": str(self.default_packaging_id.height),
             },

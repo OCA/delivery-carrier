@@ -1,5 +1,6 @@
 # Copyright 2020 Hunki Enterprises BV
 # Copyright 2021-2022 Tecnativa - Víctor Martínez
+# Copyright 2023 ForgeFlow, S.L. - Jordi Ballester
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from odoo import fields, models
 
@@ -9,7 +10,12 @@ from .ups_request import UpsRequest
 class DeliveryCarrier(models.Model):
     _inherit = "delivery.carrier"
 
-    delivery_type = fields.Selection(selection_add=[("ups", "UPS")])
+    delivery_type = fields.Selection(
+        selection_add=[("ups", "UPS")],
+        ondelete={
+            "ups": lambda recs: recs.write({"delivery_type": "fixed", "fixed_price": 0})
+        },
+    )
     ups_file_format = fields.Selection(
         selection=[("GIF", "PDF"), ("ZPL", "ZPL"), ("EPL", "EPL"), ("SPL", "SPL")],
         default="GIF",

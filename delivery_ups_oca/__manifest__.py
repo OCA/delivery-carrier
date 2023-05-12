@@ -4,11 +4,11 @@
 {
     "name": "Delivery UPS OCA",
     "summary": "Integrate UPS webservice",
-    "version": "13.0.2.0.1",
+    "version": "14.0.1.0.0",
     "development_status": "Production/Stable",
     "category": "Delivery",
     "website": "https://github.com/OCA/delivery-carrier",
-    "author": "Hunki Enterprises BV, Tecnativa, Odoo Community Association (OCA)",
+    "author": "Hunki Enterprises BV, Tecnativa, ForgeFlow, Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "excludes": ["delivery_ups"],
     "depends": [
