@@ -19,14 +19,14 @@ msgstr ""
 #. module: delivery_carrier_partner
 #: model:ir.model,name:delivery_carrier_partner.model_delivery_carrier
 msgid "Shipping Methods"
-msgstr ""
+msgstr "Modes de livraison"
 
 #. module: delivery_carrier_partner
 #: model:ir.model.fields,help:delivery_carrier_partner.field_delivery_carrier__partner_id
 msgid "The partner that is doing the delivery service."
-msgstr "Il partner che effettua il servizio di consegna."
+msgstr "Le partenaire qui assure le service de livraison."
 
 #. module: delivery_carrier_partner
 #: model:ir.model.fields,field_description:delivery_carrier_partner.field_delivery_carrier__partner_id
 msgid "Transporter"
-msgstr "Trasportatore"
+msgstr "Transporteur"
