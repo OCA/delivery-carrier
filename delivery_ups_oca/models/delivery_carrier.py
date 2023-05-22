@@ -107,10 +107,9 @@ class DeliveryCarrier(models.Model):
         val_list = []
         for PackageResult in data["PackageResults"]:
             format_code = PackageResult["ShippingLabel"]["ImageFormat"]["Code"].upper()
-            attachment_name = "%s-%s.%s" % (
+            attachment_name = "%s.%s" % (
                 picking.carrier_tracking_ref,
                 format_code,
-                ("txt" if format_code != "PDF" else "pdf"),
             )
             val_list.append(
                 self._prepare_ups_label_attachment(
