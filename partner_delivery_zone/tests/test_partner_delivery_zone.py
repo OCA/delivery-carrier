@@ -41,7 +41,6 @@ class TestPartnerDeliveryZone(TransactionCase):
                 ],
             }
         )
-        so.onchange_partner_id()
         cls.order = cls.env["sale.order"].create(so._convert_to_write(so._cache))
         cls.View = cls.env["ir.ui.view"]
 
@@ -73,7 +72,7 @@ class TestPartnerDeliveryZone(TransactionCase):
         return partner_field.attrib.get("context", "{}")
 
     def test_default_line_discount_value(self):
-        res = self.partner.fields_view_get(
+        res = self.partner.get_view(
             view_id=self.env.ref("partner_delivery_zone.view_partner_form").id,
             view_type="form",
         )
@@ -93,7 +92,7 @@ class TestPartnerDeliveryZone(TransactionCase):
             """,
             }
         )
-        res = self.partner.fields_view_get(view_id=view.id, view_type="form")
+        res = self.partner.get_view(view_id=view.id, view_type="form")
         ctx = self._get_ctx_from_view(res)
         self.assertTrue("default_delivery_zone_id" in ctx)
 
