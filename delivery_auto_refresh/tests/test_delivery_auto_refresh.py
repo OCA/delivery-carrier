@@ -1,4 +1,4 @@
-# Copyright 2018 Tecnativa - Pedro M. Baeza
+# Copyright 2018-2023 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo.tests import Form, common, tagged
@@ -139,6 +139,37 @@ class TestDeliveryAutoRefresh(common.TransactionCase):
         picking._action_done()
         line_delivery = self.order.order_line.filtered("is_delivery")
         self.assertEqual(line_delivery.price_unit, 50)
+
+    def test_auto_refresh_picking_fixed_price(self):
+        self.settings.refresh_after_picking = True
+        self.settings.execute()
+        product_fixed_price = self.env["product.product"].create(
+            {
+                "name": "Test carrier fixed price auto refresh",
+                "type": "service",
+            }
+        )
+        carrier_form = Form(self.env["delivery.carrier"])
+        carrier_form.name = product_fixed_price.name
+        carrier_form.product_id = product_fixed_price
+        carrier_form.delivery_type = "fixed"
+        carrier_form.fixed_price = 2
+        carrier_fixed_price = carrier_form.save()
+        wiz = Form(
+            self.env["choose.delivery.carrier"].with_context(
+                default_order_id=self.order.id,
+                default_carrier_id=carrier_fixed_price.id,
+            )
+        ).save()
+        wiz.button_confirm()
+        self.order.action_confirm()
+        self.order.action_done()  # Lock order to check writing protection disabling
+        picking = self.order.picking_ids
+        picking.action_assign()
+        picking.move_line_ids[0].qty_done = 2
+        picking._action_done()
+        line_delivery = self.order.order_line.filtered("is_delivery")
+        self.assertEqual(line_delivery.price_unit, 2)
 
     def test_no_auto_refresh_picking(self):
         self.settings.refresh_after_picking = False
