@@ -53,15 +53,12 @@ msgid "Created on"
 msgstr "Creato il"
 
 #. module: partner_delivery_zone
-#: model:ir.actions.act_window,name:partner_delivery_zone.partner_delivery_zone_action
 #: model:ir.model.fields,field_description:partner_delivery_zone.field_res_partner__delivery_zone_id
 #: model:ir.model.fields,field_description:partner_delivery_zone.field_res_users__delivery_zone_id
 #: model:ir.model.fields,field_description:partner_delivery_zone.field_sale_order__delivery_zone_id
 #: model:ir.model.fields,field_description:partner_delivery_zone.field_stock_picking__delivery_zone_id
-#: model:ir.ui.menu,name:partner_delivery_zone.partner_delivery_zone_menu
 #: model_terms:ir.ui.view,arch_db:partner_delivery_zone.view_partner_delivery_zone_form
 #: model_terms:ir.ui.view,arch_db:partner_delivery_zone.view_partner_delivery_zone_search
-#: model_terms:ir.ui.view,arch_db:partner_delivery_zone.view_partner_delivery_zone_tree
 #: model_terms:ir.ui.view,arch_db:partner_delivery_zone.view_picking_internal_search
 #: model_terms:ir.ui.view,arch_db:partner_delivery_zone.view_res_partner_filter
 #: model_terms:ir.ui.view,arch_db:partner_delivery_zone.view_sales_order_filter
@@ -69,29 +66,23 @@ msgid "Delivery Zone"
 msgstr "Zona di consegna"
 
 #. module: partner_delivery_zone
+#: model:ir.actions.act_window,name:partner_delivery_zone.partner_delivery_zone_action
+#: model:ir.ui.menu,name:partner_delivery_zone.partner_delivery_zone_menu
+msgid "Delivery Zones"
+msgstr ""
+
+#. module: partner_delivery_zone
 #: model:ir.model.fields,field_description:partner_delivery_zone.field_partner_delivery_zone__display_name
-#: model:ir.model.fields,field_description:partner_delivery_zone.field_res_partner__display_name
-#: model:ir.model.fields,field_description:partner_delivery_zone.field_sale_order__display_name
-#: model:ir.model.fields,field_description:partner_delivery_zone.field_stock_move__display_name
-#: model:ir.model.fields,field_description:partner_delivery_zone.field_stock_picking__display_name
 msgid "Display Name"
 msgstr "Nome visualizzato"
 
 #. module: partner_delivery_zone
 #: model:ir.model.fields,field_description:partner_delivery_zone.field_partner_delivery_zone__id
-#: model:ir.model.fields,field_description:partner_delivery_zone.field_res_partner__id
-#: model:ir.model.fields,field_description:partner_delivery_zone.field_sale_order__id
-#: model:ir.model.fields,field_description:partner_delivery_zone.field_stock_move__id
-#: model:ir.model.fields,field_description:partner_delivery_zone.field_stock_picking__id
 msgid "ID"
 msgstr "ID"
 
 #. module: partner_delivery_zone
 #: model:ir.model.fields,field_description:partner_delivery_zone.field_partner_delivery_zone____last_update
-#: model:ir.model.fields,field_description:partner_delivery_zone.field_res_partner____last_update
-#: model:ir.model.fields,field_description:partner_delivery_zone.field_sale_order____last_update
-#: model:ir.model.fields,field_description:partner_delivery_zone.field_stock_move____last_update
-#: model:ir.model.fields,field_description:partner_delivery_zone.field_stock_picking____last_update
 msgid "Last Modified on"
 msgstr "Ultima modifica il"
 
