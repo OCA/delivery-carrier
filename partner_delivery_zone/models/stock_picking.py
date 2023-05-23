@@ -17,7 +17,6 @@ class StockPicking(models.Model):
 
     @api.depends("partner_id")
     def _compute_delivery_zone_id(self):
-        print("ENTRO ASDASDASDS")
         for picking in self:
             partner = (
                 picking.partner_id
