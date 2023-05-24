@@ -105,7 +105,7 @@ class StockQuantPackage(models.Model):
         tracking_refs = []
         for parcel in parcels:
             tracking_number = parcel.get("tracking", {}).get("number")
-            if tracking_number:
+            if tracking_number and tracking_number not in tracking_refs:
                 tracking_refs.append(tracking_number)
             # expected format by base_delivery_carrier_label module
             label = parcel.get("label")
@@ -149,6 +149,8 @@ class StockQuantPackage(models.Model):
         """
         self.ensure_one()
         url = self._get_tracking_link()
+        if not url:
+            raise UserError(_("The tracking url is not available."))
         client_action = {
             "type": "ir.actions.act_url",
             "name": "Shipment Tracking Page",
