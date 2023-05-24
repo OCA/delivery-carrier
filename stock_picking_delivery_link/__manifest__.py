@@ -9,7 +9,7 @@
     "website": "https://github.com/OCA/delivery-carrier",
     "category": "Warehouse Management",
     "depends": ["stock", "delivery"],
-    "data": ["views/stock_picking.xml"],
+    "data": ["views/stock_picking.xml", "views/stock_picking_type.xml"],
     "installable": True,
     "license": "AGPL-3",
 }
