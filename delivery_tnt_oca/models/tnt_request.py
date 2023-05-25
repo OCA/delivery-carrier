@@ -59,8 +59,12 @@ class TntRequest(object):
             raise UserError(_("Server not reachable, please try again later"))
         except requests.exceptions.HTTPError as e:
             raise UserError(
-                _("{}\n{}".format(e, res.json().get("Message", "") if res.text else ""))
-            )
+                _("%(error)s\n%(message)s")
+                % {
+                    "error": e,
+                    "message": res.json().get("Message", "") if res.text else "",
+                }
+            ) from e
         return res
 
     def _partner_to_shipping_data(self, partner):

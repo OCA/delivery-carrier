@@ -138,7 +138,7 @@ class DeliveryTnt(TestDeliveryTntBase):
             new_date += timedelta(days=1)
         self.picking.scheduled_date = new_date
         self.picking.send_to_shipper()
-        self.assertEquals(self.picking.message_attachment_count, 1)
+        self.assertEqual(self.picking.message_attachment_count, 1)
         self.assertTrue(self.picking.carrier_tracking_ref)
         self.assertFalse(self.picking.tracking_state_history)
         self.assertEqual(self.picking.delivery_state, "shipping_recorded_in_carrier")
