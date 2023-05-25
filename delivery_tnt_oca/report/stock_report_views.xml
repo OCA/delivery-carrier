@@ -10,6 +10,36 @@
         <field
             name="report_file"
         >delivery_tnt_oca.label_delivery_tnt_oca_template</field>
-        <field name="binding_model_id" ref="stock.model_stock_picking" />
+    </record>
+    <record id="tnt_label_paperformat" model="report.paperformat">
+        <field name="name">TNT Label</field>
+        <field name="default" eval="True" />
+        <field name="format">custom</field>
+        <field name="page_height">150</field>
+        <field name="page_width">100</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">0</field>
+        <field name="margin_bottom">0</field>
+        <field name="margin_left">1</field>
+        <field name="margin_right">1</field>
+        <field name="header_line" eval="False" />
+        <field name="header_spacing">0</field>
+        <field name="dpi">96</field>
+    </record>
+    <record id="label_delivery_tnt_oca_pdf" model="ir.actions.report">
+        <field name="name">TNT Label (PDF)</field>
+        <field name="model">stock.picking</field>
+        <field name="report_type">qweb-pdf</field>
+        <field
+            name="report_name"
+        >delivery_tnt_oca.label_delivery_tnt_oca_pdf_template</field>
+        <field
+            name="report_file"
+        >delivery_tnt_oca.label_delivery_tnt_oca_pdf_template</field>
+        <field
+            name="print_report_name"
+        >'TNT-%s.pdf' % (object.carrier_tracking_ref,)</field>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="tnt_label_paperformat" />
     </record>
 </odoo>

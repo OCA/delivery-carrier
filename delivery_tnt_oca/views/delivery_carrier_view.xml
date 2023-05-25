@@ -79,6 +79,10 @@ License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
                                 attrs="{'required': [('delivery_type', '=', 'tnt_oca')]}"
                                 widget="float_time"
                             />
+                            <field
+                                name="tnt_label_file_format"
+                                attrs="{'required': [('delivery_type', '=', 'tnt_oca')]}"
+                            />
                         </group>
                     </group>
                 </page>

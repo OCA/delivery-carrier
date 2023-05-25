@@ -109,4 +109,337 @@
             </t>
         </t>
     </template>
+    <template id="tnt_label_pdf_template">
+        <t t-call="web.basic_layout">
+            <t t-foreach="range(doc.number_of_packages)" t-as="package_number">
+                <style>
+                    .font_8_n{
+                        font-size:8pt;
+                        font-family:"Arial";
+                    }
+                    .font_8_b{
+                        font-size:8pt;
+                        font-family:"Arial";
+                        font-weight:bold;
+                    }
+                    .font_12_b{
+                        font-size:12pt;
+                        font-family:"Arial";
+                        font-weight:bold;
+                    }
+                    .font_14_b{
+                        font-size:14pt;
+                        font-family:"Arial";
+                        font-weight:bold;
+                    }
+                    .font_16_b{
+                        font-size:16pt;
+                        font-family:"Arial";
+                        font-weight:bold;
+                    }
+                    .font_18_b{
+                        font-size:18pt;
+                        font-family:"Arial";
+                        font-weight:bold;
+                    }
+                    .font_20_b{
+                        font-size:20pt;
+                        font-family:"Arial";
+                        font-weight:bold;
+                    }
+                    .font_22_b{
+                        font-size:22pt;
+                        font-family:"Arial";
+                        font-weight:bold;
+                    }
+                    .font_28_b{
+                        font-size:28pt;
+                        font-family:"Arial";
+                        font-weight:bold;
+                        text-align:center;
+                    }
+                </style>
+                <div
+                    class="page"
+                    style="font-family:'Gilroy Light', sans-serif;font-weight: lighter;font-size: 18pt"
+                >
+                    <div
+                        class="row"
+                        style="padding:0;height:17mm;min-height:17mm;border:solid 1px black"
+                    >
+                        <div class="col-4" style="border-right:1px solid">
+                            <img
+                                src="/delivery_tnt_oca/static/src/img/black_logo.jpg"
+                                style="width: 80%;object-fit: contain;"
+                            />
+                        </div>
+                        <div
+                            class="font_14_b col-7"
+                            style="width:50%;padding-left:5px;"
+                        >
+                            <span t-esc="doc.tnt_consignment_market" />/<span
+                                t-esc="doc.tnt_consignment_transport"
+                            />
+                        </div>
+                        <div
+                            class="font_28_b col-1"
+                            style="width:10%;background-color:black"
+                        >
+                            <span
+                                style="color:white"
+                                t-esc="doc.tnt_consignment_free_circulation"
+                            />
+                        </div>
+                        <div
+                            class="font_28_b col-1"
+                            style="width:10%;padding-right:5px;"
+                        >
+                            <span t-esc="doc.tnt_consignment_sort_split" />
+                        </div>
+                    </div>
+                    <div
+                        class="row"
+                        style="padding:0;height:16mm;min-height:16mm;border:solid 1px black"
+                    >
+                        <div
+                            class="col-6"
+                            style="padding-left:5px;border-right:1px solid"
+                        >
+                            <span class="font_8_n">Con No.</span>
+                            <br />
+                            <span
+                                class="font_18_b"
+                                t-esc="doc.tnt_consignment_mumber"
+                            />
+                        </div>
+                        <div
+                            class="col-6"
+                            style="padding-left:5px;background-color:black;color:white"
+                        >
+                            <span class="font_8_b">Service</span>
+                            <br />
+                            <span
+                                class="font_12_b"
+                                style="text-align:center"
+                                t-esc="doc.tnt_consignment_product"
+                            />
+                        </div>
+                    </div>
+                    <div
+                        class="row"
+                        style="padding:0;height:16mm;min-height:16mm;border:solid 1px black"
+                    >
+                        <div class="col-6" style="border-right:1px solid">
+                            <div class="row" style="">
+                                <div class="col-6" style="padding-left:5px;">
+                                    <span class="font_8_n">Piece</span>
+                                    <br />
+                                    <span
+                                        class="font_14_b"
+                                        t-esc="package_number+1"
+                                    > </span> <span class="font_14_b">of</span> <span
+                                        class="font_14_b"
+                                        t-esc="doc.number_of_packages"
+                                    />
+                                </div>
+                                <div class="col-6" style="padding-left:5px;">
+                                    <span class="font_8_n">Weight</span>
+                                    <br />
+                                    <span class="font_14_b" t-esc="doc.weight" /><span
+                                        class="font_14_b"
+                                        t-esc="doc.weight_uom_name"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            class="col-6"
+                            style="padding-left:5px;background-color:black;color:white"
+                        >
+                            <span class="font_8_b">Option</span>
+                            <br />
+                            <span
+                                class="font_12_b"
+                                style="text-align:center"
+                                t-esc="doc.tnt_consignment_option"
+                            />
+                        </div>
+                    </div>
+                    <div
+                        class="row"
+                        style="padding:0;min-height:86mm;border:solid 1px black"
+                    >
+                        <div class="col-6" style="border-right:1px solid">
+                            <div
+                                style="line-height: 7pt;border-bottom:1px solid black;padding-top:10px;padding-bottom:10px;padding-left:5px;"
+                            >
+                                <span class="font_8_n">Customer Reference</span>
+                                <br />
+                                <span class="font_8_b" t-esc="doc.name" />
+                                <br />
+                                <span class="font_8_n">S/R Account No</span> <span
+                                    class="font_8_n"
+                                    t-esc="doc.carrier_id.tnt_oca_ws_account"
+                                />
+                            </div>
+                            <div
+                                style="line-height: 7pt;border-bottom:1px dotted black;padding-top:10px;padding-bottom:10px;padding-left:5px;"
+                            >
+                                <span
+                                    class="font_8_b"
+                                    style="padding-left:-2px;"
+                                >Sender Address</span>
+                                <br />
+                                <span class="font_8_n" t-esc="doc.company_id.name" />
+                                <br />
+                                <span class="font_8_n" t-esc="doc.company_id.street" />
+                                <br />
+                                <span class="font_8_n" t-esc="doc.company_id.city" />
+                                <br />
+                                <span
+                                    class="font_8_n"
+                                    t-esc="doc.company_id.state_id.name"
+                                /> <span class="font_8_n" t-esc="doc.company_id.zip" />
+                                <br />
+                                <span
+                                    class="font_8_n"
+                                    t-esc="doc.company_id.country_id.code"
+                                />
+                            </div>
+                            <div
+                                style="line-height: 7pt;border-bottom:1px solid black;padding-top:10px;padding-bottom:10px;padding-left:5px;"
+                            >
+                                <span
+                                    class="font_8_b"
+                                    style="padding-left:-2px;"
+                                >Delivery Address</span>
+                                <br />
+                                <span class="font_8_n" t-esc="doc.partner_id.name" />
+                                <br />
+                                <span class="font_8_n" t-esc="doc.partner_id.street" />
+                                <br />
+                                <span class="font_8_n" t-esc="doc.partner_id.street2" />
+                                <br />
+                                <span
+                                    class="font_8_n"
+                                    t-esc="doc.partner_id.state_id.name"
+                                /> <span class="font_8_n" t-esc="doc.partner_id.zip" />
+                                <br />
+                                <span
+                                    class="font_8_n"
+                                    t-esc="doc.partner_id.country_id.code"
+                                />
+                            </div>
+                            <div style="line-height: 7pt;height:10mm;min-height:10mm">
+                                <div class="row" style="height:100%">
+                                    <div
+                                        class="col-5"
+                                        style="height:100%;padding-left:1px;"
+                                    >
+                                        <span class="font_8_n">Postcode/</span>
+                                        <span class="font_8_n">Cluster Code</span>
+                                    </div>
+                                    <div
+                                        class="col-7"
+                                        style="background-color:black;color:white;height:100%;padding-top:5px;padding-left:5px;"
+                                    >
+                                        <span
+                                            class="font_16_b"
+                                            t-esc="doc.tnt_consignment_cluster_code"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6" style="padding:0">
+                            <div
+                                style="border-bottom:1px dotted black;line-height: 13pt;"
+                            >
+                                <div class="row">
+                                    <div class="col-6" style="padding-left:5px;">
+                                        <span class="font_8_n">Origin</span>
+                                        <br />
+                                        <span
+                                            class="font_16_b"
+                                            t-esc="doc.tnt_consignment_origin_depot"
+                                        />
+                                    </div>
+                                    <div class="col-6">
+                                        <span class="font_8_n">Pickup Date</span>
+                                        <br />
+                                        <span
+                                            class="font_8_n"
+                                            t-esc="doc.tnt_consignment_date"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="border-bottom:1px dotted black">
+                                <div class="row">
+                                    <div class="col-4" style="padding-left:5px;">
+                                        <span class="font_8_n">Routing</span>
+                                    </div>
+                                    <div
+                                        class="col-8"
+                                        style="line-height: 20pt;padding-left:5px;"
+                                    >
+                                        <span
+                                            class="font_20_b"
+                                            t-esc="doc.tnt_consignment_transit_depot"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="border-bottom:1px dotted black">
+                                <span
+                                    class="font_8_n"
+                                    style="padding-left:5px;"
+                                >Sort</span>
+                            </div>
+                            <div>
+                                <div class="row">
+                                    <div class="col-4" style="padding-left:5px;">
+                                        <span class="font_8_n">Dest</span>
+                                        <br />
+                                        <span class="font_8_n">Depot</span>
+                                    </div>
+                                    <div class="col-8">
+                                        <span
+                                            class="font_22_b"
+                                            t-esc="doc.tnt_consignment_destination_depot"
+                                        /><span class="font_22_b">-</span><span
+                                            class="font_22_b"
+                                            t-esc="doc.tnt_consignment_destination_depot_day"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="row"
+                        style="padding:0;padding-top:10px;padding-bottom:10px;height:40mm;min-height:40mm;border:solid 1px black"
+                    >
+                        <div class="text-center" style="padding:0;">
+                            <img
+                                t-att-src="'/report/barcode/?barcode_type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;humanreadable=1' % ('Code128', doc.tnt_piece_barcode,800,180)"
+                                style="width:100%;height:100%"
+                            />
+                        </div>
+                    </div>
+                    <div style="page-break-before: always;" />
+                </div>
+            </t>
+        </t>
+    </template>
+    <template id="label_delivery_tnt_oca_pdf_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t
+                    t-call="delivery_tnt_oca.tnt_label_pdf_template"
+                    t-lang="doc.partner_id.lang"
+                />
+            </t>
+        </t>
+    </template>
 </odoo>

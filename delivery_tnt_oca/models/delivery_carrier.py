@@ -102,6 +102,11 @@ class DeliveryCarrier(models.Model):
         domain=[("package_carrier_type", "=", "tnt_oca")],
     )
     tnt_use_packages_from_picking = fields.Boolean(string="Use packages from picking")
+    tnt_label_file_format = fields.Selection(
+        selection=[("ZPL", "ZPL"), ("PDF", "PDF")],
+        default="ZPL",
+        string="Label file type",
+    )
 
     @api.depends("delivery_type", "tnt_product_type")
     def _compute_tnt_product_code(self):
@@ -150,12 +155,18 @@ class DeliveryCarrier(models.Model):
         return price
 
     def _tnt_oca_action_label(self, picking):
-        report_name = "delivery_tnt_oca.label_delivery_tnt_oca_template"
         iar = self.env["ir.actions.report"]
-        res = iar._render_qweb_text(report_name, picking.ids)
+        if self.tnt_label_file_format == "PDF":
+            report_name = "delivery_tnt_oca.label_delivery_tnt_oca_pdf"
+            res = iar._render_qweb_pdf(report_name, picking.ids)
+            file_extension = "pdf"
+        else:
+            report_name = "delivery_tnt_oca.label_delivery_tnt_oca_template"
+            res = iar._render_qweb_text(report_name, picking.ids)
+            file_extension = "txt"
         return self.env["ir.attachment"].create(
             {
-                "name": "TNT-%s.txt" % picking.carrier_tracking_ref,
+                "name": "TNT-%s.%s" % (picking.carrier_tracking_ref, file_extension),
                 "type": "binary",
                 "datas": base64.b64encode(res[0]),
                 "res_model": picking._name,
@@ -186,9 +197,7 @@ class DeliveryCarrier(models.Model):
             picking.tracking_state_history = response["tracking_state_history"]
 
     def tnt_oca_cancel_shipment(self, pickings):
-        raise NotImplementedError(
-            _("""TNT API does not allow you to cancel a shipment.""")
-        )
+        raise UserError(_("""TNT API does not allow you to cancel a shipment."""))
 
     def tnt_oca_get_tracking_link(self, picking):
         return "%s/%s?searchType=con&cons=%s" % (
