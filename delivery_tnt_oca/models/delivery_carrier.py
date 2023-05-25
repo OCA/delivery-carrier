@@ -3,6 +3,7 @@
 import base64
 
 from odoo import _, api, fields, models
+from odoo.exceptions import UserError
 
 from .tnt_request import TntRequest
 
@@ -96,7 +97,7 @@ class DeliveryCarrier(models.Model):
     tnt_collect_time_from = fields.Float(default=10.5, string="Collect time from")
     tnt_collect_time_to = fields.Float(default=16, string="Collect time to")
     tnt_default_packaging_id = fields.Many2one(
-        comodel_name="product.packaging",
+        comodel_name="stock.package.type",
         string="Default Packaging Type",
         domain=[("package_carrier_type", "=", "tnt_oca")],
     )
@@ -151,7 +152,7 @@ class DeliveryCarrier(models.Model):
     def _tnt_oca_action_label(self, picking):
         report_name = "delivery_tnt_oca.label_delivery_tnt_oca_template"
         iar = self.env["ir.actions.report"]
-        res = iar._get_report_from_name(report_name)._render_qweb_text(picking.ids)
+        res = iar._render_qweb_text(report_name, picking.ids)
         return self.env["ir.attachment"].create(
             {
                 "name": "TNT-%s.txt" % picking.carrier_tracking_ref,

@@ -10,5 +10,6 @@
         <field
             name="report_file"
         >delivery_tnt_oca.label_delivery_tnt_oca_template</field>
+        <field name="binding_model_id" ref="stock.model_stock_picking" />
     </record>
 </odoo>

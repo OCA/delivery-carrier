@@ -53,10 +53,10 @@ class TntRequest(object):
             res.raise_for_status()
             self.carrier.log_xml(res.text or "", "tnt_last_response")
             res = res.text
-        except requests.exceptions.Timeout:
-            raise UserError(_("Timeout: the server did not reply within 60s"))
-        except (ValueError, requests.exceptions.ConnectionError):
-            raise UserError(_("Server not reachable, please try again later"))
+        except requests.exceptions.Timeout as e:
+            raise UserError(_("Timeout: the server did not reply within 60s")) from e
+        except (ValueError, requests.exceptions.ConnectionError) as e:
+            raise UserError(_("Server not reachable, please try again later")) from e
         except requests.exceptions.HTTPError as e:
             raise UserError(
                 _("%(error)s\n%(message)s")
@@ -217,7 +217,7 @@ class TntRequest(object):
         if self.use_packages_from_picking and self.record.package_ids:
             height = sum(self.record.package_ids.mapped("height"))
             width = sum(self.record.package_ids.mapped("width"))
-            p_length = sum(self.record.package_ids.mapped("packaging_length"))
+            p_length = sum(self.record.package_ids.mapped("pack_length"))
         else:
             # in cm, we need to convert to m
             height = self.default_packaging_id.height / 100
@@ -294,7 +294,7 @@ class TntRequest(object):
         xml_info = dicttoxml.dicttoxml(
             data, attr_type=False, custom_root="ESHIPPER"
         ).decode("utf-8")
-        return "xml_in=%s" % xml_info
+        return "xml_in=%s" % xml_info.replace("&apos;", "'")
 
     def _action_picking(self, action, complete_id):
         new_data = "xml_in=%s:%s" % (action, complete_id)
@@ -479,7 +479,9 @@ class TntRequest(object):
         }
         if "transitDepots" in c_data and c_data["transitDepots"]:
             transitDepot = c_data["transitDepots"]["transitDepot"]
-            vals["tnt_consignment_transit_depot"] = transitDepot["depotCode"]
+            if isinstance(transitDepot, list):
+                transitDepot = ",".join(depot["depotCode"] for depot in transitDepot)
+            vals["tnt_consignment_transit_depot"] = transitDepot
         if "xrayDisplay" in c_data and "#text" in c_data["xrayDisplay"]:
             vals["tnt_consignment_xray"] = c_data["xrayDisplay"]["#text"]
         self.record.write(vals)

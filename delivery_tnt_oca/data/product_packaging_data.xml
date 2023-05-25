@@ -2,7 +2,7 @@
 <!-- Copyright 2022 Tecnativa - Víctor Martínez
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-    <record id="product_packaging_tnt_default" model="product.packaging">
+    <record id="package_type_tnt_default" model="stock.package.type">
         <field name="name">TNT Default (cm)</field>
         <field name="package_carrier_type">tnt_oca</field>
         <field name="packaging_length">35</field>

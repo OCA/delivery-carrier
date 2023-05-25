@@ -8,7 +8,7 @@ from odoo.tests import Form, common
 from odoo.addons.delivery_tnt_oca.models.tnt_request import TntRequest
 
 
-class TestDeliveryTntBase(common.SavepointCase):
+class TestDeliveryTntBase(common.TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -53,7 +53,7 @@ class TestDeliveryTntBase(common.SavepointCase):
         if self.carrier:
             delivery_wizard = Form(
                 self.env["choose.delivery.carrier"].with_context(
-                    {"default_order_id": sale.id, "default_carrier_id": self.carrier.id}
+                    default_order_id=sale.id, default_carrier_id=self.carrier.id
                 )
             ).save()
             delivery_wizard.button_confirm()
@@ -66,7 +66,7 @@ class DeliveryTnt(TestDeliveryTntBase):
     def setUpClass(cls):
         super().setUpClass()
         cls.picking = cls.sale.picking_ids[0]
-        cls.picking.move_lines.quantity_done = 1
+        cls.picking.move_ids.quantity_done = 1
 
     def test_picking_tnt_oca_misc(self):
         tnt_request = TntRequest(self.carrier, self.picking)
