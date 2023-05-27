@@ -91,7 +91,9 @@ class DeliveryCarrier(models.Model):
             res = []
             for p in pickings:
                 picking_res = False
-                for subcarrier in carrier.child_ids:
+                for subcarrier in carrier.child_ids.filtered(
+                    lambda x: not x.company_id or x.company_id == p.company_id
+                ):
                     if subcarrier.delivery_type == "fixed":
                         if subcarrier._match_address(p.partner_id):
                             picking_res = [
