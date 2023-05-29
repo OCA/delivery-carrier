@@ -17,6 +17,13 @@ class TestDeliveryAutoRefresh(common.TransactionCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
+        cls.env.user.write(
+            {
+                "groups_id": [
+                    (4, cls.env.ref("account.group_delivery_invoice_address").id)
+                ]
+            }
+        )
         service = cls.env["product.product"].create(
             {"name": "Service Test", "type": "service"}
         )
@@ -217,7 +224,7 @@ class TestDeliveryAutoRefresh(common.TransactionCase):
 
     def _validate_picking(self, picking):
         """Helper method to confirm the pickings"""
-        for line in picking.move_lines:
+        for line in picking.move_ids:
             line.quantity_done = line.product_uom_qty
         picking._action_done()
 
@@ -232,7 +239,7 @@ class TestDeliveryAutoRefresh(common.TransactionCase):
             )
         )
         return_wiz = return_wiz_form.save()
-        return_wiz.product_return_moves.quantity = picking.move_lines.quantity_done
+        return_wiz.product_return_moves.quantity = picking.move_ids.quantity_done
         return_wiz.product_return_moves.to_refund = to_refund
         res = return_wiz.create_returns()
         return_picking = self.env["stock.picking"].browse(res["res_id"])
