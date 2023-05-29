@@ -25,3 +25,4 @@ class StockPicking(models.Model):
     tnt_consignment_xray = fields.Char(sparse="tnt_consignment_data")
     tnt_piece_data = fields.Serialized()
     tnt_piece_barcode = fields.Char(sparse="tnt_piece_data")
+    tnt_piece_weight = fields.Char(sparse="tnt_piece_data")

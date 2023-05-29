@@ -3,6 +3,22 @@
     <template id="label_delivery_tnt_oca_template">
         <t t-foreach="docs" t-as="picking">
             <t t-foreach="range(picking.number_of_packages)" t-as="package_number">
+                <t
+                    t-set="date"
+                    t-value="picking.tnt_consignment_date.split('|')[package_number]"
+                />
+                <t
+                    t-set="option"
+                    t-value="picking.tnt_consignment_option.split('|')[package_number]"
+                />
+                <t
+                    t-set="barcode"
+                    t-value="picking.tnt_piece_barcode.split('|')[package_number]"
+                />
+                <t
+                    t-set="weight"
+                    t-value="picking.tnt_piece_weight.split('|')[package_number]"
+                />
                 <t t-translation="off">
 ^XA
 ^CI28
@@ -59,19 +75,17 @@
 ^FT232,120^A0N,39,54^FD^FS
 ^FB400,3,0,L,0^FT232,177^A0N,17,18^FD<t t-esc="picking.tnt_consignment_xray" />^FS
 ^FT424,240^A0N,34,39^FR^FD<t t-esc="picking.tnt_consignment_product" />^FS
-^FT424,317^A0N,34,39^FR^FD<t t-esc="picking.tnt_consignment_option" />^FS
+^FT424,317^A0N,34,39^FR^FD<t t-esc="option" />^FS
 ^FT440,310^A0N,34,39^FD^FS
 ^FT480,388^A0N,56,64^FD<t t-esc="picking.tnt_consignment_origin_depot" />^FS
-^FT640,375^A0N,23,28^FD<t t-esc="picking.tnt_consignment_date" />^FS
+^FT640,375^A0N,23,28^FD<t t-esc="date" />^FS
 ^FT620,138^A0N,102,150^FR^FD<t t-esc="picking.tnt_consignment_free_circulation" />^FS
 ^FT710,138^A0N,102,150^FD<t t-esc="picking.tnt_consignment_sort_split" />^FS
 ^FT32,248^A0N,45,57^FD<t t-esc="picking.tnt_consignment_mumber" />^FS
 ^FT32,317^A0N,28,32^FD<t t-esc="package_number+1" /> of <t
                         t-esc="picking.number_of_packages"
                     />^FS
-^FT240,317^A0N,28,32^FR^FD<t t-esc="picking.weight" /><t
-                        t-esc="picking.weight_uom_name"
-                    />^FS
+^FT240,317^A0N,28,32^FR^FD<t t-esc="weight" /><t t-esc="picking.weight_uom_name" />^FS
 ^FT24,373^A0N,25,23^FD<t t-esc="picking.name" />^FS
 ^FT184,417^A0N,25,27^FD<t t-esc="picking.carrier_id.tnt_oca_ws_account" />^FS
 ^FT141,902^A0N,73,58^FR^FD<t t-esc="picking.tnt_consignment_cluster_code" />^FS
@@ -97,8 +111,8 @@
 ^FT496,915^A0N,80,82^FD<t t-esc="picking.tnt_consignment_destination_depot" /> <t
                         t-esc="picking.tnt_consignment_destination_depot_day"
                     />^FS
-^FO82,945^BY3^BCN,220,N,N^FD>;<t t-esc="picking.tnt_piece_barcode" />^FS
-^FT160,1187^A0N,23,32^FD<t t-esc="picking.tnt_piece_barcode" />^FS
+^FO82,945^BY3^BCN,220,N,N^FD>;<t t-esc="barcode" />^FS
+^FT160,1187^A0N,23,32^FD<t t-esc="barcode" />^FS
 ^FO17,66 ^XGR:SSGFX000.GRF,1,1^FS
 ^PQ1,0,1,Y
 ^XZ
@@ -112,6 +126,22 @@
     <template id="tnt_label_pdf_template">
         <t t-call="web.basic_layout">
             <t t-foreach="range(doc.number_of_packages)" t-as="package_number">
+                <t
+                    t-set="date"
+                    t-value="doc.tnt_consignment_date.split('|')[package_number]"
+                />
+                <t
+                    t-set="consign_option"
+                    t-value="doc.tnt_consignment_option.split('|')[package_number]"
+                />
+                <t
+                    t-set="barcode"
+                    t-value="doc.tnt_piece_barcode.split('|')[package_number]"
+                />
+                <t
+                    t-set="weight"
+                    t-value="doc.tnt_piece_weight.split('|')[package_number]"
+                />
                 <style>
                     .font_8_n{
                         font-size:8pt;
@@ -245,7 +275,7 @@
                                 <div class="col-6" style="padding-left:5px;">
                                     <span class="font_8_n">Weight</span>
                                     <br />
-                                    <span class="font_14_b" t-esc="doc.weight" /><span
+                                    <span class="font_14_b" t-esc="weight" /><span
                                         class="font_14_b"
                                         t-esc="doc.weight_uom_name"
                                     />
@@ -261,7 +291,7 @@
                             <span
                                 class="font_12_b"
                                 style="text-align:center"
-                                t-esc="doc.tnt_consignment_option"
+                                t-esc="consign_option"
                             />
                         </div>
                     </div>
@@ -367,10 +397,7 @@
                                     <div class="col-6">
                                         <span class="font_8_n">Pickup Date</span>
                                         <br />
-                                        <span
-                                            class="font_8_n"
-                                            t-esc="doc.tnt_consignment_date"
-                                        />
+                                        <span class="font_8_n" t-esc="date" />
                                     </div>
                                 </div>
                             </div>
@@ -422,7 +449,7 @@
                     >
                         <div class="text-center" style="padding:0;">
                             <img
-                                t-att-src="'/report/barcode/?barcode_type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;humanreadable=1' % ('Code128', doc.tnt_piece_barcode,800,180)"
+                                t-att-src="'/report/barcode/?barcode_type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;humanreadable=1' % ('Code128', barcode,800,180)"
                                 style="width:100%;height:100%"
                             />
                         </div>

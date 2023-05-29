@@ -456,32 +456,53 @@ class TntRequest(object):
                     )
                 )
             )
-        res = res["consignment"]
-        p_data = res["pieceLabelData"]
-        c_data = res["consignmentLabelData"]
-        twoDBarcode_text_split = p_data["twoDBarcode"]["#text"].split("|")
-        c_data_fcd = c_data["freeCirculationDisplay"]
-        c_data_dd = c_data["destinationDepot"]
+        res = res.get("consignment", {})
+        p_data = res.get("pieceLabelData", {})
+        c_data = res.get("consignmentLabelData", {})
+        if not isinstance(p_data, list):
+            p_data = [p_data]
+        p_data_parsed = {"dates": [], "barcodes": [], "options": [], "weights": []}
+        for piece in p_data:
+            twoDBarcode_text_split = (
+                piece.get("twoDBarcode", {}).get("#text", "").split("|")
+            )
+            p_data_parsed.get("dates", "").append(twoDBarcode_text_split[-2])
+            p_data_parsed.get("barcodes", "").append(
+                piece.get("barcode", {}).get("#text", "")
+            )
+            p_data_parsed.get("options", "").append(twoDBarcode_text_split[19])
+            p_data_parsed.get("weights", "").append(
+                piece.get("weightDisplay", {}).get("@code", "")
+            )
+        c_data_fcd = c_data.get("freeCirculationDisplay", {})
+        c_data_dd = c_data.get("destinationDepot", {})
         vals = {
-            "tnt_consignment_mumber": c_data["consignmentNumber"],
-            "tnt_consignment_date": twoDBarcode_text_split[-2],
-            "tnt_consignment_free_circulation": c_data_fcd["#text"],
-            "tnt_consignment_sort_split": c_data["sortSplitText"],
-            "tnt_consignment_destination_depot": c_data_dd["depotCode"],
-            "tnt_consignment_destination_depot_day": c_data_dd["dueDayOfMonth"],
-            "tnt_consignment_cluster_code": c_data["clusterCode"],
-            "tnt_consignment_origin_depot": c_data["originDepot"]["depotCode"],
-            "tnt_consignment_product": c_data["product"]["#text"],
-            "tnt_consignment_option": twoDBarcode_text_split[19],
-            "tnt_consignment_market": c_data["marketDisplay"]["#text"],
-            "tnt_consignment_transport": c_data["transportDisplay"]["#text"],
-            "tnt_piece_barcode": p_data["barcode"]["#text"],
+            "tnt_consignment_mumber": c_data.get("consignmentNumber", ""),
+            "tnt_consignment_date": "|".join(p_data_parsed.get("dates", "")),
+            "tnt_consignment_free_circulation": c_data_fcd.get("#text", ""),
+            "tnt_consignment_sort_split": c_data.get("sortSplitText", ""),
+            "tnt_consignment_destination_depot": c_data_dd.get("depotCode", ""),
+            "tnt_consignment_destination_depot_day": c_data_dd.get("dueDayOfMonth", ""),
+            "tnt_consignment_cluster_code": c_data.get("clusterCode", ""),
+            "tnt_consignment_origin_depot": c_data.get("originDepot", {}).get(
+                "depotCode", ""
+            ),
+            "tnt_consignment_product": c_data.get("product", {}).get("#text", ""),
+            "tnt_consignment_option": "|".join(p_data_parsed.get("options", "")),
+            "tnt_consignment_market": c_data.get("marketDisplay", {}).get("#text", ""),
+            "tnt_consignment_transport": c_data.get("transportDisplay", {}).get(
+                "#text", ""
+            ),
+            "tnt_piece_barcode": "|".join(p_data_parsed.get("barcodes", "")),
+            "tnt_piece_weight": "|".join(p_data_parsed.get("weights", "")),
         }
         if "transitDepots" in c_data and c_data["transitDepots"]:
-            transitDepot = c_data["transitDepots"]["transitDepot"]
+            transitDepot = c_data.get("transitDepots", {}).get("transitDepot", "")
             if isinstance(transitDepot, list):
-                transitDepot = ",".join(depot["depotCode"] for depot in transitDepot)
+                transitDepot = ",".join(
+                    depot.get("depotCode") for depot in transitDepot
+                )
             vals["tnt_consignment_transit_depot"] = transitDepot
         if "xrayDisplay" in c_data and "#text" in c_data["xrayDisplay"]:
-            vals["tnt_consignment_xray"] = c_data["xrayDisplay"]["#text"]
+            vals["tnt_consignment_xray"] = c_data["xrayDisplay"].get("#text", "")
         self.record.write(vals)
