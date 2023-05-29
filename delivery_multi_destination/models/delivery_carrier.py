@@ -84,7 +84,7 @@ class DeliveryCarrier(models.Model):
         """We have to override this method for redirecting the result to the
         proper "child" carrier.
         """
-        if self.destination_type == "one":
+        if self.destination_type == "one" or not self:
             return super().send_shipping(pickings)
         else:
             carrier = self.with_context(show_children_carriers=True)
