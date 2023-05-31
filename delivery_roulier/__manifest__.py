@@ -13,8 +13,7 @@
         "delivery_carrier_account",
     ],
     "website": "https://github.com/OCA/delivery-carrier",
-    "data": [
-    ],
+    "data": [],
     "demo": [
         "demo/product.xml",
     ],
