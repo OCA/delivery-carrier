@@ -183,9 +183,9 @@ class StockQuantPackage(models.Model):
             # api call
             ret = roulier.get(picking.delivery_type, "get_label", payload)
         except InvalidApiInput as e:
-            raise UserError(self._invalid_api_input_handling(payload, e))
+            raise UserError(self._invalid_api_input_handling(payload, e)) from e
         except CarrierError as e:
-            raise UserError(self._carrier_error_handling(payload, e))
+            raise UserError(self._carrier_error_handling(payload, e)) from e
 
         # give result to someone else
         return self._after_call(picking, ret)
@@ -247,9 +247,9 @@ class StockQuantPackage(models.Model):
             self.env["delivery.carrier"]._fields["delivery_type"].selection
         ).get(self.carrier_id.delivery_type)
         return _(
-            "Roulier library Exception for '%s' carrier:\n"
-            "\n%s\n\nSent data:\n%s" % (carrier, str(exception), payload)
-        )
+            "Roulier library Exception for '%(carrier)s' carrier:\n"
+            "\n%(exception)s\n\nSent data:\n%(payload)s"
+        ) % {"carrier": carrier, "exception": str(exception), "payload": payload}
 
     def _roulier_invalid_api_input_handling(self, payload, exception):
         """Build exception message for bad input.
@@ -261,7 +261,7 @@ class StockQuantPackage(models.Model):
         returns:
             string
         """
-        return _("Bad input: %s\n" % str(exception))
+        return _("Bad input: %s\n") % str(exception)
 
     # There is low chance you need to override the following methods.
     def _roulier_handle_attachments(self, picking, response):
