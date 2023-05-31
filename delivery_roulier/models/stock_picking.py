@@ -79,6 +79,21 @@ class StockPicking(models.Model):
         """
         label_info = []
         for picking in self:
+            move_line_no_pack = picking.move_line_ids.filtered(
+                lambda ml: ml.qty_done > 0.0 and not ml.result_package_id
+            )
+            if move_line_no_pack:
+                # For automatic package creation, for use cases where we only have one
+                # pack per picking and we don't want to force the user to use pack
+                # consider installing delivery_automatic_package OCA module
+                raise UserError(
+                    _(
+                        "Some products have no destination package in picking %s, "
+                        "please add a destination package in order to be able to "
+                        "generate the carrier label."
+                    )
+                    % picking.name
+                )
             label_info.append(picking.package_ids._generate_labels(picking))
         return label_info
 
@@ -116,10 +131,8 @@ class StockPicking(models.Model):
         account = self._get_carrier_account()
         if not account:
             raise UserError(
-                _(
-                    "No account available with name '%s' "
-                    "for this carrier" % self.carrier_id.delivery_type
-                )
+                _("No account available with name '%s' " "for this carrier")
+                % self.carrier_id.delivery_type
             )
         return account
 
