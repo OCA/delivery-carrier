@@ -41,19 +41,20 @@ class DeliveryRoulierCase(TransactionCase):
         delivery_product = self.env["product.product"].create(
             {"name": "test shipping product", "type": "service"}
         )
-        self.test_carrier = self.env["delivery.carrier"].create(
-            {
-                "name": "Test Carrier",
-                "delivery_type": "test",
-                "product_id": delivery_product.id,
-            }
-        )
         self.account = self.env["carrier.account"].create(
             {
                 "name": "Test Carrier Account",
                 "delivery_type": "test",
                 "account": "test",
                 "password": "test",
+            }
+        )
+        self.test_carrier = self.env["delivery.carrier"].create(
+            {
+                "name": "Test Carrier",
+                "delivery_type": "test",
+                "product_id": delivery_product.id,
+                "carrier_account_id": self.account.id,
             }
         )
         partner = self.env["res.partner"].create(
