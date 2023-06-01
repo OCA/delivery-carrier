@@ -2,12 +2,9 @@
 # Copyright 2017 Tecnativa - Luis M. Ontalba
 # Copyright 2021 Gianmarco Conte <gconte@dinamicheaziendali.it>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-import logging
 
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
-
-_logger = logging.getLogger(__name__)
 
 
 class DeliveryCarrier(models.Model):
@@ -87,34 +84,41 @@ class DeliveryCarrier(models.Model):
         """We have to override this method for redirecting the result to the
         proper "child" carrier.
         """
-        # falsy type is considered as one destination
-        if not self.destination_type or self.destination_type == "one":
+        if self.destination_type == "one" or not self:
             return super().send_shipping(pickings)
-        carrier = self.with_context(show_children_carriers=True)
-        res = []
-        for p in pickings:
-            picking_res = False
-            for subcarrier in carrier.child_ids:
-                picking_res = subcarrier._send_shipping_next(p, picking_res)
-            if not picking_res:
-                raise ValidationError(_("There is no matching delivery rule."))
-            res += picking_res
-        return res
-
-    def _send_shipping_next(self, picking, picking_res):
-        if self.delivery_type == "fixed":
-            if self._match_address(picking.partner_id):
-                picking_res = [
-                    {
-                        "exact_price": self.fixed_price,
-                        "tracking_number": False,
-                    }
-                ]
-            # TODO: verify if not match address, previous picking_res (passed
-            # in method's argument) can be used.
         else:
-            try:
-                picking_res = super().send_shipping(picking)
-            except Exception as err:
-                _logger.warning("%s: %s", "_send_shipping_next", str(err))
-        return picking_res
+            carrier = self.with_context(show_children_carriers=True)
+            res = []
+            for p in pickings:
+                picking_res = False
+                for subcarrier in carrier.child_ids.filtered(
+                    lambda x: not x.company_id or x.company_id == p.company_id
+                ):
+                    if subcarrier.delivery_type == "fixed":
+                        if subcarrier._match_address(p.partner_id):
+                            picking_res = [
+                                {
+                                    "exact_price": subcarrier.fixed_price,
+                                    "tracking_number": False,
+                                }
+                            ]
+                            break
+                    else:
+                        try:
+                            # on base_on_rule_send_shipping, the method
+                            # _get_price_available is called using p.carrier_id,
+                            # ignoring the self arg, so we need to temporarily replace
+                            # it with the subcarrier
+                            p.carrier_id = subcarrier.id
+                            picking_res = super(
+                                DeliveryCarrier, subcarrier
+                            ).send_shipping(p)
+                            break
+                        except Exception:  # pylint: disable=except-pass
+                            pass
+                        finally:
+                            p.carrier_id = carrier
+                if not picking_res:
+                    raise ValidationError(_("There is no matching delivery rule."))
+                res += picking_res
+            return res
