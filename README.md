@@ -28,7 +28,7 @@ addon | version | maintainers | summary
 [delivery_carrier_multi_zip](delivery_carrier_multi_zip/) | 15.0.1.0.0 |  | Multiple ZIP intervals for the same delivery method
 [delivery_cttexpress](delivery_cttexpress/) | 15.0.1.1.0 |  | Delivery Carrier implementation for CTT Express API
 [delivery_free_fee_removal](delivery_free_fee_removal/) | 15.0.1.0.0 |  | Hide free fee lines on sales orders
-[delivery_multi_destination](delivery_multi_destination/) | 15.0.1.0.1 |  | Multiple destinations for the same delivery method
+[delivery_multi_destination](delivery_multi_destination/) | 15.0.1.0.2 |  | Multiple destinations for the same delivery method
 [delivery_package_number](delivery_package_number/) | 15.0.1.1.0 |  | Set or compute number of packages for a picking
 [delivery_price_method](delivery_price_method/) | 15.0.1.0.0 |  | Provides fields to be able to contemplate the tracking statesand also adds a global fields
 [delivery_purchase](delivery_purchase/) | 15.0.1.0.0 |  | Delivery costs in purchases
