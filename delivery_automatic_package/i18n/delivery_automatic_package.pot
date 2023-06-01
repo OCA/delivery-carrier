@@ -1,0 +1,72 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* delivery_automatic_package
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: delivery_automatic_package
+#: model:ir.model.fields,field_description:delivery_automatic_package.field_delivery_carrier__automatic_package_creation_at_delivery
+msgid "Automatic Package Creation At Delivery"
+msgstr ""
+
+#. module: delivery_automatic_package
+#: model:ir.model.fields,field_description:delivery_automatic_package.field_res_company__automatic_package_creation_at_delivery_default
+#: model:ir.model.fields,field_description:delivery_automatic_package.field_res_config_settings__automatic_package_creation_at_delivery_default
+msgid "Automatic Package Creation At Delivery Default"
+msgstr ""
+
+#. module: delivery_automatic_package
+#: model:ir.model.fields,help:delivery_automatic_package.field_res_company__automatic_package_creation_at_delivery_default
+#: model:ir.model.fields,help:delivery_automatic_package.field_res_config_settings__automatic_package_creation_at_delivery_default
+msgid ""
+"Check this if you want to have the automatic package creation configuredfor "
+"new delivery carriers."
+msgstr ""
+
+#. module: delivery_automatic_package
+#: model:ir.model.fields,help:delivery_automatic_package.field_delivery_carrier__automatic_package_creation_at_delivery
+msgid ""
+"Check this in order to create automatically a delivery package for this "
+"carrierfor the delivery picking."
+msgstr ""
+
+#. module: delivery_automatic_package
+#: model_terms:ir.ui.view,arch_db:delivery_automatic_package.res_config_settings_view_form
+msgid ""
+"Check this to enable automatic package creation behaviour for all new "
+"delivery carriers."
+msgstr ""
+
+#. module: delivery_automatic_package
+#: model:ir.model,name:delivery_automatic_package.model_res_company
+msgid "Companies"
+msgstr ""
+
+#. module: delivery_automatic_package
+#: model:ir.model,name:delivery_automatic_package.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: delivery_automatic_package
+#: model_terms:ir.ui.view,arch_db:delivery_automatic_package.res_config_settings_view_form
+msgid "Configure the default behaviour for new delivery carriers."
+msgstr ""
+
+#. module: delivery_automatic_package
+#: model:ir.model,name:delivery_automatic_package.model_delivery_carrier
+msgid "Shipping Methods"
+msgstr ""
+
+#. module: delivery_automatic_package
+#: model:ir.model,name:delivery_automatic_package.model_stock_picking
+msgid "Transfer"
+msgstr ""
