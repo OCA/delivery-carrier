@@ -53,15 +53,18 @@ class SaleOrder(models.Model):
         if self.state in {"draft", "sent"}:
             # Context added to avoid the recursive calls and save the new
             # value of carrier_id
-            self.with_context(auto_refresh_delivery=True)._remove_delivery_line()
+            self.with_context(
+                auto_refresh_delivery=True, skip_validation_check=True
+            )._remove_delivery_line()
         if self._get_param_auto_add_delivery_line() and self.carrier_id:
             if self.state in {"draft", "sent"}:
                 price_unit = self.carrier_id.rate_shipment(self)["price"]
-                if not self.is_all_service:
-                    self._create_delivery_line(self.carrier_id, price_unit)
-                self.with_context(auto_refresh_delivery=True).write(
-                    {"recompute_delivery_price": False}
+                self.with_context(skip_validation_check=True)._create_delivery_line(
+                    self.carrier_id, price_unit
                 )
+                self.with_context(
+                    auto_refresh_delivery=True, skip_validation_check=True
+                ).write({"recompute_delivery_price": False})
 
     @api.model
     def create(self, vals):
