@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_deliverea_distribution_center_stock_user,deliverea.distribution.center stock_user,model_deliverea_distribution_center,stock.group_stock_user,1,0,0,0
+access_deliverea_distribution_center_stock_manager,deliverea.distribution.center stock_manager,model_deliverea_distribution_center,stock.group_stock_manager,1,1,1,1
+access_deliverea_state_stock_user,deliverea.state stock_user,model_deliverea_state,stock.group_stock_user,1,0,0,0
+access_deliverea_state_stock_manager,deliverea.state stock_manager,model_deliverea_state,stock.group_stock_manager,1,1,1,1
+access_carrier_deliverea_parameter_user,carrier.deliverea.parameter stock_user,model_carrier_deliverea_parameter,stock.group_stock_user,1,0,0,0
+access_carrier_deliverea_parameter_manager,carrier.deliverea.parameter stock_manager,model_carrier_deliverea_parameter,stock.group_stock_manager,1,1,1,1
+access_carrier_deliverea_service_user,carrier.deliverea.service stock_user,model_carrier_deliverea_service,stock.group_stock_user,1,0,0,0
+access_carrier_deliverea_service_manager,carrier.deliverea.service stock_manager,model_carrier_deliverea_service,stock.group_stock_manager,1,1,1,1

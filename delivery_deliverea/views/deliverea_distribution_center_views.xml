@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="delivery_deliverea_distribution_center_form_view" model="ir.ui.view">
+        <field name="name">delivery.deliverea.distribution.center.view_form</field>
+        <field name="model">deliverea.distribution.center</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="uuid" attrs="{'readonly': True}" />
+                        <field name="billing_account" attrs="{'readonly': True}" />
+                        <field name="name" attrs="{'readonly': True}" />
+                        <field name="phone" attrs="{'readonly': True}" />
+                        <field name="email" attrs="{'readonly': True}" />
+                        <field name="observations" attrs="{'readonly': True}" />
+                        <field name="address" attrs="{'readonly': True}" />
+                    </group>
+                    <group>
+                        <field name="city" attrs="{'readonly': True}" />
+                        <field name="zip" attrs="{'readonly': True}" />
+                        <field name="country_id" attrs="{'readonly': True}" />
+                        <field name="latitude" attrs="{'readonly': True}" />
+                        <field name="longitude" attrs="{'readonly': True}" />
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record
+        id="delivery_deliverea_distribution_center_action"
+        model="ir.actions.act_window"
+    >
+        <field name="name">Deliverea Distribution Center</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">deliverea.distribution.center</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

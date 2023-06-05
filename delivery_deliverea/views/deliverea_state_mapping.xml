@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="delivery_deliverea_state_mapping_tree_view" model="ir.ui.view">
+        <field name="name">delivery.deliverea.state.mapping.tree</field>
+        <field name="model">deliverea.state</field>
+        <field name="arch" type="xml">
+            <tree editable="top">
+                <field name="code" />
+                <field name='state' />
+                <field name="delivery_state" required="1" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="delivery_deliverea_state_mapping_action" model="ir.actions.act_window">
+        <field name="name">Deliverea State Mapping</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">deliverea.state</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+        id="delivery_deliverea_state_mapping_menu"
+        action="delivery_deliverea_state_mapping_action"
+        name="Deliverea State Mapping"
+        sequence="100"
+        parent="stock.menu_delivery"
+    />
+</odoo>
