@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <record id="label_delivery_tnt_oca" model="ir.actions.report">
-        <field name="name">TNT Label (ZPL)</field>
-        <field name="model">stock.picking</field>
-        <field name="report_type">qweb-text</field>
-        <field
-            name="report_name"
-        >delivery_tnt_oca.label_delivery_tnt_oca_template</field>
-        <field
-            name="report_file"
-        >delivery_tnt_oca.label_delivery_tnt_oca_template</field>
+    <record id="tnt_manifest_label_paperformat" model="report.paperformat">
+        <field name="name">TNT Label Manifest</field>
+        <field name="default" eval="True" />
+        <field name="format">A4</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">30</field>
+        <field name="margin_bottom">5</field>
+        <field name="margin_left">5</field>
+        <field name="margin_right">5</field>
+        <field name="header_line" eval="True" />
+        <field name="header_spacing">25</field>
+        <field name="dpi">96</field>
     </record>
     <record id="tnt_label_paperformat" model="report.paperformat">
         <field name="name">TNT Label</field>
@@ -26,6 +30,32 @@
         <field name="header_spacing">0</field>
         <field name="dpi">96</field>
     </record>
+    <record id="tnt_connote_label_paperformat" model="report.paperformat">
+        <field name="name">TNT Label Connote</field>
+        <field name="default" eval="True" />
+        <field name="format">A4</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">20</field>
+        <field name="margin_bottom">5</field>
+        <field name="margin_left">5</field>
+        <field name="margin_right">5</field>
+        <field name="header_line" eval="False" />
+        <field name="header_spacing">15</field>
+        <field name="dpi">96</field>
+    </record>
+    <record id="label_delivery_tnt_oca" model="ir.actions.report">
+        <field name="name">TNT Label (ZPL)</field>
+        <field name="model">stock.picking</field>
+        <field name="report_type">qweb-text</field>
+        <field
+            name="report_name"
+        >delivery_tnt_oca.label_delivery_tnt_oca_template</field>
+        <field
+            name="report_file"
+        >delivery_tnt_oca.label_delivery_tnt_oca_template</field>
+    </record>
     <record id="label_delivery_tnt_oca_pdf" model="ir.actions.report">
         <field name="name">TNT Label (PDF)</field>
         <field name="model">stock.picking</field>
@@ -41,5 +71,38 @@
         >'TNT-%s.pdf' % (object.carrier_tracking_ref,)</field>
         <field name="binding_type">report</field>
         <field name="paperformat_id" ref="tnt_label_paperformat" />
+    </record>
+    <record id="action_report_tnt_manifest" model="ir.actions.report">
+        <field name="name">TNT Manifest</field>
+        <field name="model">stock.picking</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">delivery_tnt_oca.report_tnt_manifest</field>
+        <field name="report_file">delivery_tnt_oca.report_tnt_manifest</field>
+        <field
+            name="print_report_name"
+        >'TNT Manifest-%s.pdf' % (object.carrier_tracking_ref,)</field>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="tnt_manifest_label_paperformat" />
+    </record>
+    <record id="action_report_tnt_manifest_inter" model="ir.actions.report">
+        <field name="name">TNT International manifest</field>
+        <field name="model">stock.picking</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">delivery_tnt_oca.report_tnt_manifest_inter</field>
+        <field name="report_file">delivery_tnt_oca.report_tnt_manifest_inter</field>
+        <field
+            name="print_report_name"
+        >'TNT Inter. Manifest-%s.pdf' % (object.carrier_tracking_ref,)</field>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="tnt_connote_label_paperformat" />
+    </record>
+    <record id="action_tnt_connote_report" model="ir.actions.report">
+        <field name="name">TNT Connote</field>
+        <field name="model">stock.picking</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">delivery_tnt_oca.tnt_connote_label_pdf</field>
+        <field name="report_file">delivery_tnt_oca.tnt_connote_label_pdf</field>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="tnt_connote_label_paperformat" />
     </record>
 </odoo>
