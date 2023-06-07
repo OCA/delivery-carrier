@@ -265,13 +265,13 @@ class UpsRequest(object):
 
     def tracking_state_update(self, picking):
         status = self._process_reply(
-            url="%s/track/v1/details/" % self.url,
+            url="%s/track/v1/details/%s" % (self.url, picking.carrier_tracking_ref),
             method="get",
-            query_parameters={"inquiryNumber": picking.carrier_tracking_ref},
+            query_parameters={},
         )
         self._raise_for_status(status, False)
         state = False
-        for package in status["trackResponse"]["shipment"]["package"]:
+        for package in status["trackResponse"]["shipment"][0]["package"]:
             for activity in package["activity"]:
                 state = activity["status"]["type"]
         static_states = {

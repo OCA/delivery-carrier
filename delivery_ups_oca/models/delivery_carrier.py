@@ -174,8 +174,7 @@ class DeliveryCarrier(models.Model):
         ):
             ups_request = UpsRequest(self)
             response = ups_request.tracking_state_update(picking)
-            picking.delivery_state = response["delivery_state"]
-            picking.tracking_state_history = response["tracking_state_history"]
+            picking.write(response)
 
     def ups_rate_shipment(self, order):
         ups_request = UpsRequest(self)
