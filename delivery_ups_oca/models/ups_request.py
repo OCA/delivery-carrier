@@ -253,12 +253,12 @@ class UpsRequest(object):
             data=self._prepare_shipping_label(carrier_tracking_ref),
         )
         self._raise_for_status(status, False)
-        return status["LabelRecoveryResponse"]["LabelResults"]["LabelImage"]
+        return status
 
     def cancel_shipment(self, pickings):
         url = "%s/ship/v1/shipments/cancel" % self.url
         for item in pickings.filtered(lambda x: x.carrier_tracking_ref):
-            self.url = "{}/{}".format(self.url, item.carrier_tracking_ref)
+            url = "{}/{}".format(url, item.carrier_tracking_ref)
             status = self._process_reply(url=url, method="delete")
             self._raise_for_status(status, False)
         return True

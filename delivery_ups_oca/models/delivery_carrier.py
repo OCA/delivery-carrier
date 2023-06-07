@@ -105,18 +105,13 @@ class DeliveryCarrier(models.Model):
 
     def _create_ups_label(self, picking, data):
         val_list = []
-        for PackageResult in data["PackageResults"]:
-            format_code = PackageResult["ShippingLabel"]["ImageFormat"]["Code"].upper()
-            attachment_name = "%s.%s" % (
-                picking.carrier_tracking_ref,
-                format_code,
-            )
+        for label in data:
             val_list.append(
                 self._prepare_ups_label_attachment(
                     picking,
                     {
-                        "name": attachment_name,
-                        "datas": PackageResult["ShippingLabel"]["GraphicImage"],
+                        "name": label["name"],
+                        "datas": label["datas"],
                     },
                 )
             )
@@ -136,7 +131,17 @@ class DeliveryCarrier(models.Model):
         picking = self.env["stock.picking"].search(
             [("carrier_tracking_ref", "=", carrier_tracking_ref)]
         )
-        return self._create_ups_label(picking, response)
+        label_info = []
+        for label in response["LabelRecoveryResponse"]["LabelResults"]:
+            format_code = label["LabelImage"]["LabelImageFormat"]["Code"].upper()
+            attachment_name = "%s.%s" % (
+                picking.carrier_tracking_ref,
+                format_code,
+            )
+            label_info.append(
+                {"datas": label["LabelImage"]["GraphicImage"], "name": attachment_name}
+            )
+        return self._create_ups_label(picking, label_info)
 
     def ups_create_shipping(self, picking):
         """Send packages of the picking to UPS
@@ -150,7 +155,20 @@ class DeliveryCarrier(models.Model):
         )
         picking.carrier_tracking_ref = response["ShipmentIdentificationNumber"]
         # Create label from response
-        self._create_ups_label(picking, response)
+        label_info = []
+        for response in response["PackageResults"]:
+            format_code = response["ShippingLabel"]["ImageFormat"]["Code"].upper()
+            attachment_name = "%s.%s" % (
+                picking.carrier_tracking_ref,
+                format_code,
+            )
+            label_info.append(
+                {
+                    "datas": response["ShippingLabel"]["GraphicImage"],
+                    "name": attachment_name,
+                }
+            )
+        self._create_ups_label(picking, label_info)
         # Return
         return {
             "exact_price": extra_price,
