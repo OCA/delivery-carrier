@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: delivery-carrier (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-22 09:11+0000\n"
-"PO-Revision-Date: 2023-05-31 15:08+0000\n"
+"PO-Revision-Date: 2023-06-07 17:10+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/"
 "OCA-delivery-carrier-8-0/language/it/)\n"
@@ -229,7 +229,7 @@ msgstr "Ultima modifica il"
 #. module: delivery_carrier_deposit
 #: field:delivery.deposit.wizard,write_uid:0 field:deposit.slip,write_uid:0
 msgid "Last Updated by"
-msgstr "Ultimo aggiornamento da"
+msgstr "Ultimo aggiornamento di"
 
 #. module: delivery_carrier_deposit
 #: field:delivery.deposit.wizard,write_date:0 field:deposit.slip,write_date:0
