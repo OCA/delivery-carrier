@@ -5,7 +5,7 @@
     "name": "Delivery UPS OCA",
     "summary": "Integrate UPS webservice",
     "version": "14.0.1.0.0",
-    "development_status": "Production/Stable",
+    "development_status": "Beta",
     "category": "Delivery",
     "website": "https://github.com/OCA/delivery-carrier",
     "author": "Hunki Enterprises BV, Tecnativa, ForgeFlow, Odoo Community Association (OCA)",
