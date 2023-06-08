@@ -39,9 +39,16 @@ class StockPicking(models.Model):
         data = self.get_shipping_label_values(label)
         if label.get("package_id"):
             data["package_id"] = label["package_id"]
+            package_tracking_vals = {}
             if label.get("tracking_number"):
+                package_tracking_vals["parcel_tracking"] = label["tracking_number"]
+            if label.get("parcel_tracking_uri"):
+                package_tracking_vals["parcel_tracking_uri"] = label[
+                    "parcel_tracking_uri"
+                ]
+            if package_tracking_vals:
                 self.env["stock.quant.package"].browse(label["package_id"]).write(
-                    {"parcel_tracking": label.get("tracking_number")}
+                    package_tracking_vals
                 )
         context_attachment = self.env.context.copy()
         # remove default_type setted for stock_picking
