@@ -217,6 +217,7 @@ class StockPicking(models.Model):
         # Case when there is a failed label, rollback odoo data
         if failed_label_results:
             self._cr.rollback()
+            self = self.exists()
 
         labels = self.write_tracking_number_label(success_label_results, packages)
 
@@ -229,7 +230,7 @@ class StockPicking(models.Model):
             # This ensures the label pushed recored correctly in Odoo
             self._cr.commit()  # pylint: disable=invalid-commit
             error_message = "\n".join(label["errors"] for label in failed_label_results)
-            raise exceptions.Warning(error_message)
+            raise exceptions.UserError(error_message)
         return labels
 
     def generate_postlogistics_shipping_labels(self, package_ids=None):
