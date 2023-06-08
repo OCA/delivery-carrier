@@ -122,6 +122,7 @@ class StockQuantPackage(models.Model):
             parcels_data.append(
                 {
                     "tracking_number": tracking_number,
+                    "parcel_tracking_uri": parcel.get("tracking", {}).get("url", False),
                     "package_id": package_id,
                     "file": label.get("data"),
                     "name": "%s.%s"
