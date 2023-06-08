@@ -346,7 +346,7 @@ class DeliveryCarrier(models.Model):
         weight = package.shipping_weight or package.weight
         # Volume calculations can be unfolded with stock_quant_package_dimension
         if hasattr(package, "volume"):
-            volume = round(package.volume, 2)
+            volume = package.volume
         else:
             volume = sum([q.quantity * q.product_id.volume for q in package.quant_ids])
         return {
@@ -355,7 +355,7 @@ class DeliveryCarrier(models.Model):
             "cargoDesc": picking.name + " / " + package.name,
             "grossWeight": round(weight, 2),
             # Default to 1 if no volume informed
-            "volume": volume or 0.01,
+            "volume": round(volume or 0.01, 2),
             "packageType": (
                 package.packaging_id.shipper_package_code
                 or self.schenker_default_packaging_id.shipper_package_code
