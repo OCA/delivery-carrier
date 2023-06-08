@@ -60,6 +60,10 @@ class StockPicking(models.Model):
     def _cancel_shipment(self):
         pass
 
+    @implemented_by_carrier
+    def _support_multi_tracking(self):
+        pass
+
     # End of API.
 
     # Implementations for base_delivery_carrier_label
@@ -258,6 +262,12 @@ class StockPicking(models.Model):
         }
         return service
 
+    def _roulier_support_multi_tracking(self):
+        # By default roulier carrier may have one tracking ref per pack.
+        # override this method for your carrier if you always have a unique
+        # tracking per picking
+        return True
+
     def open_website_url(self):
         """Open tracking page.
 
@@ -271,8 +281,11 @@ class StockPicking(models.Model):
         packages = self.package_ids
         if len(packages) == 0:
             raise UserError(_("No packages found for this picking"))
-        elif len(packages) == 1:
-            return packages.open_website_url()  # shortpath
+        else:
+            if not self._support_multi_tracking():
+                packages = packages[0]
+            if len(packages) == 1:
+                return packages.open_website_url()  # shortpath
 
         # display a list of pickings
         xmlid = "stock.action_package_view"
