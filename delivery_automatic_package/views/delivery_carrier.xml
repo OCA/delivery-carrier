@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright 2023 ACSONE SA/NV
+     Copyright 2023 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
 
@@ -10,6 +11,7 @@
         <field name="arch" type="xml">
             <field name="invoice_policy" position="after">
                 <field name="automatic_package_creation_at_delivery" />
+                <field name="automatic_package_creation_mode" />
             </field>
         </field>
     </record>

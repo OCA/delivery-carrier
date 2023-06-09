@@ -1,4 +1,5 @@
 # Copyright 2023 ACSONE SA/NV
+# Copyright 2023 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo.tests import Form, SavepointCase
@@ -13,6 +14,13 @@ class TestAutomaticPackage(SavepointCase):
             {
                 "name": "Product Test",
                 "type": "product",
+            }
+        )
+        cls.product_packaging = cls.env["product.packaging"].create(
+            {
+                "name": "Box",
+                "qty": "2",
+                "product_id": cls.product.id,
             }
         )
         cls.product_delivery = cls.env["product.product"].create(
@@ -33,6 +41,8 @@ class TestAutomaticPackage(SavepointCase):
             carrier_form.name = "Carrier Automatic Package"
             carrier_form.product_id = cls.product_delivery
         cls.carrier = carrier_form.save()
+        cls.picking = cls._create_picking()
+        cls.picking.move_lines.update({"quantity_done": 4.0})
 
     @classmethod
     def _create_picking(cls):
@@ -58,19 +68,31 @@ class TestAutomaticPackage(SavepointCase):
         }
         return cls.env["stock.picking"].create(vals)
 
-    def test_automatic_carrier(self):
+    def test_automatic_carrier_single(self):
         """
         Check that the automatic package creation is set on new carrier
         Create a picking, fill in quantities and validate it
         The move line should contain a package
         """
         self.assertTrue(self.carrier.automatic_package_creation_at_delivery)
-        picking = self._create_picking()
-        picking.move_lines.update({"quantity_done": 5.0})
-        picking._action_done()
-        self.assertTrue(picking.move_line_ids.result_package_id)
+        self.assertTrue(self.carrier.automatic_package_creation_mode, "single")
+        self.picking._action_done()
+        self.assertTrue(self.picking.move_line_ids.result_package_id)
+        self.assertTrue(len(self.picking.move_line_ids.result_package_id), 1)
 
-    def test_automatic_context(self):
+    def test_automatic_carrier_packaging(self):
+        """
+        Check that the automatic package creation is set on new carrier
+        Create a picking, fill in quantities and validate it
+        The move line should contain a package per product packaging
+        """
+        self.assertTrue(self.carrier.automatic_package_creation_at_delivery)
+        self.carrier.automatic_package_creation_mode = "packaging"
+        self.picking._action_done()
+        self.assertTrue(self.picking.move_line_ids.result_package_id)
+        self.assertTrue(len(self.picking.move_line_ids.result_package_id), 2)
+
+    def test_automatic_context_single(self):
         """
         Check that the automatic package creation is set on new carrier
         Create a picking, fill in quantities and validate it with good
@@ -78,10 +100,10 @@ class TestAutomaticPackage(SavepointCase):
         The move line should contain a package
         """
         self.carrier.automatic_package_creation_at_delivery = False
-        picking = self._create_picking()
-        picking.move_lines.update({"quantity_done": 5.0})
-        picking.with_context(set_default_package=True)._action_done()
-        self.assertTrue(picking.move_line_ids.result_package_id)
+        self.assertTrue(self.carrier.automatic_package_creation_mode, "single")
+        self.picking.with_context(set_default_package=True)._action_done()
+        self.assertTrue(self.picking.move_line_ids.result_package_id)
+        self.assertTrue(len(self.picking.move_line_ids.result_package_id), 1)
 
     def test_no_automatic(self):
         """
@@ -90,7 +112,5 @@ class TestAutomaticPackage(SavepointCase):
         The move line should not contain a package
         """
         self.carrier.automatic_package_creation_at_delivery = False
-        picking = self._create_picking()
-        picking.move_lines.update({"quantity_done": 5.0})
-        picking._action_done()
-        self.assertFalse(picking.move_line_ids.result_package_id)
+        self.picking._action_done()
+        self.assertFalse(self.picking.move_line_ids.result_package_id)
