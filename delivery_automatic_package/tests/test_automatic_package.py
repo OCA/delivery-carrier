@@ -1,10 +1,10 @@
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo.tests.common import Form, TransactionCase
+from odoo.tests import Form, SavepointCase
 
 
-class TestAutomaticPackage(TransactionCase):
+class TestAutomaticPackage(SavepointCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -23,13 +23,11 @@ class TestAutomaticPackage(TransactionCase):
         )
         cls.stock = cls.env.ref("stock.stock_location_stock")
         cls.customers = cls.env.ref("stock.stock_location_customers")
-        cls.env["stock.quant"].with_context(inventory_mode=True).create(
-            {
-                "location_id": cls.stock.id,
-                "product_id": cls.product.id,
-                "quantity": 10.0,
-            }
-        )._apply_inventory()
+        cls.env["stock.quant"]._update_available_quantity(
+            cls.product,
+            cls.stock,
+            10,
+        )
         cls.env.company.automatic_package_creation_at_delivery_default = True
         with Form(cls.env["delivery.carrier"]) as carrier_form:
             carrier_form.name = "Carrier Automatic Package"
@@ -43,7 +41,7 @@ class TestAutomaticPackage(TransactionCase):
             "location_id": cls.stock.id,
             "location_dest_id": cls.customers.id,
             "picking_type_id": cls.env.ref("stock.picking_type_out").id,
-            "move_ids": [
+            "move_lines": [
                 (
                     0,
                     0,
@@ -68,7 +66,7 @@ class TestAutomaticPackage(TransactionCase):
         """
         self.assertTrue(self.carrier.automatic_package_creation_at_delivery)
         picking = self._create_picking()
-        picking.move_ids.update({"quantity_done": 5.0})
+        picking.move_lines.update({"quantity_done": 5.0})
         picking._action_done()
         self.assertTrue(picking.move_line_ids.result_package_id)
 
@@ -81,7 +79,7 @@ class TestAutomaticPackage(TransactionCase):
         """
         self.carrier.automatic_package_creation_at_delivery = False
         picking = self._create_picking()
-        picking.move_ids.update({"quantity_done": 5.0})
+        picking.move_lines.update({"quantity_done": 5.0})
         picking.with_context(set_default_package=True)._action_done()
         self.assertTrue(picking.move_line_ids.result_package_id)
 
@@ -93,6 +91,6 @@ class TestAutomaticPackage(TransactionCase):
         """
         self.carrier.automatic_package_creation_at_delivery = False
         picking = self._create_picking()
-        picking.move_ids.update({"quantity_done": 5.0})
+        picking.move_lines.update({"quantity_done": 5.0})
         picking._action_done()
         self.assertFalse(picking.move_line_ids.result_package_id)
