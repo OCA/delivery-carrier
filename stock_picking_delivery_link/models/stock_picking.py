@@ -56,10 +56,16 @@ class StockPicking(models.Model):
             return res
 
     def _set_delivery_package_type(self, batch_pack=False):
+        """
+        As we want to filter package types on carrier even on internal
+        pickings, we pass the delivery type to the context from
+        the related carrier taken from the delivery picking.
+        """
         self.ensure_one()
         res = super()._set_delivery_package_type(batch_pack=batch_pack)
+        context = res.get("context", self.env.context)
         context = dict(
-            self.env.context,
+            context,
             current_package_carrier_type=self.ship_carrier_id.delivery_type,
         )
         # As we pass the `delivery_type` ('fixed' or 'base_on_rule' by default) in a
@@ -67,5 +73,6 @@ class StockPicking(models.Model):
         # make a conversion. No conversion needed for other carriers as the
         # `delivery_type` and`package_carrier_type` will be the same in these cases.
         if context["current_package_carrier_type"] in ["fixed", "base_on_rule"]:
-            context["current_package_carrier_type"] = "none"
+            context = dict(context, current_package_carrier_type="none")
+        res["context"] = context
         return res
