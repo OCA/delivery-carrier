@@ -87,9 +87,6 @@ class StockPicking(models.Model):
                 lambda ml: ml.qty_done > 0.0 and not ml.result_package_id
             )
             if move_line_no_pack:
-                # For automatic package creation, for use cases where we only have one
-                # pack per picking and we don't want to force the user to use pack
-                # consider installing delivery_automatic_package OCA module
                 raise UserError(
                     _(
                         "Some products have no destination package in picking %s, "
