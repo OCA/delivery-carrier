@@ -19,6 +19,7 @@ class TestSend(TransactionCase):
         )
         picking_form.carrier_id = carrier
         picking = picking_form.save()
+        package = self.env["stock.quant.package"].create({})
 
         with mock.patch.object(type(carrier), "base_on_rule_send_shipping") as mocked:
             mocked.return_value = [
@@ -28,6 +29,9 @@ class TestSend(TransactionCase):
                             name="hello_world.pdf",
                             file=base64.b64encode(bytes("hello world", "utf8")),
                             file_type="pdf",
+                            package_id=package.id,
+                            tracking_number="Test package tracking ref",
+                            parcel_tracking_uri="https://my_package_tracking_url",
                         ),
                     ]
                 )
@@ -38,4 +42,8 @@ class TestSend(TransactionCase):
             self.assertTrue(label, "No label created")
             self.assertEqual(
                 label.mimetype, "application/pdf", "Wrong attachment created"
+            )
+            self.assertEqual(package.parcel_tracking, "Test package tracking ref")
+            self.assertEqual(
+                package.parcel_tracking_uri, "https://my_package_tracking_url"
             )
