@@ -28,3 +28,9 @@ Example of config file ::
   account = 666
   password = wazaaaaa
   file_format = PDF
+
+
+As an alternative of `server_environment_files`, there is also a module named `server_environment_data_encryption`
+which allow to set the environement dependent values directly in the database, by the user itself.
+It will be encrypted, to avoid security issues with secrets, see the documentationn of `server_environment_data_encryption` for more information.
+The advantage of setting the environment dependent value directly in the database is that it does not require a developper/odoo administrator to change a carrier account.
