@@ -236,3 +236,9 @@ class StockPicking(models.Model):
         """Add label generation for PostLogistics"""
         self.ensure_one()
         return self._generate_postlogistics_label(package_ids=package_ids)
+
+    def action_generate_carrier_label(self):
+        self.ensure_one()
+        if not self.carrier_id:
+            raise exceptions.UserError(_("Please, set a carrier."))
+        self.env["delivery.carrier"].postlogistics_send_shipping(self)
