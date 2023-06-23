@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="withdrawal_config_form" model="ir.ui.view">
+        <field name="name">res.partner.withdrawal_config_form</field>
+        <field name="model">res.partner</field>
+        <field name="priority" eval="20"/>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//span[@name='address_name']" position="before">
+                <field name="is_withdrawal" eval="True"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

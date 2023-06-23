@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_delivery_carrier_form_withdrawal_method" model="ir.ui.view">
+        <field name="name">delivery.delivery_carrier_form_withdrawal_method</field>
+        <field name="model">delivery.carrier</field>
+        <field name="priority" eval="20"/>
+        <field name="inherit_id" ref="delivery.view_delivery_carrier_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='provider_details']" position="inside">
+                <field name="is_withdrawal_point"/>
+                <label for="number_delivery_period" string="Delivery range"
+                       attrs="{'invisible': [('is_withdrawal_point', '!=', True)]}"/>
+                <div class="oe_inline o_withdrawal_config" style="display: flex;"
+                     attrs="{'invisible': [('is_withdrawal_point', '!=', True)]}">
+                    <field name="number_delivery_period" class="o_number_delivery_period" nolabel="1"/>
+                    <field name="select_delivery_period" class="o_select_delivery_period" nolabel="1"/>
+                </div>
+            </xpath>
+
+
+            <xpath expr="//notebook[1]" position="inside">
+                <page name="withdrawal_points" string="Withdrawal points"
+                      attrs="{'invisible': [('is_withdrawal_point', '!=', True)]}">
+                    <group name="withdrawal">
+                        <field name="withdrawal_point_ids" nolabel="1">
+                            <tree editable="top">
+                                <field name="sequence" widget="handle"/>
+                                <field name="partner_id"/>
+                                <field name="resource_calendar_id"/>
+                                <field name="stock_picking_type_id"/>
+                                <field name="opening_hours" optional="hide"/>
+                            </tree>
+                        </field>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

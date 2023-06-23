@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_partner_property_withdrawal_inherit" model="ir.ui.view">
+        <field name="name">res.partner.purchase.property.withdrawal.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='purchase']" position="inside">
+                <h6>Purchase order days</h6>
+                <widget
+                        name="week_days"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
