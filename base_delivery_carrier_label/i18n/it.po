@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: delivery-carrier (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-12-03 01:21+0000\n"
-"PO-Revision-Date: 2023-06-07 17:10+0000\n"
+"PO-Revision-Date: 2023-06-23 13:09+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/"
 "OCA-delivery-carrier-8-0/language/it/)\n"
@@ -366,7 +366,7 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: help:shipping.label,res_model:0
 msgid "The database object this attachment will be attached to"
-msgstr "L'oggetto del database a cui l'allegato verrà collegato"
+msgstr "L'oggetto del database a cui verrà assegnato questo allegato"
 
 #. module: base_delivery_carrier_label
 #: help:shipping.label,res_id:0
