@@ -392,8 +392,7 @@ msgstr ""
 #: model:ir.model.fields,help:delivery_schenker.field_delivery_carrier__schenker_address_number
 msgid ""
 "ID assigned by Schenker to you.\n"
-"Will be part of the sender or if set, the invoice address.\n"
-"If you don't want to send it, use 0"
+"Will be part of the sender or if set, the invoice address."
 msgstr ""
 
 #. module: delivery_schenker
