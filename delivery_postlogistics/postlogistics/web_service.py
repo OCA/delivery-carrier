@@ -102,6 +102,12 @@ class PostlogisticsWebService(object):
                 _("Phone number is required for phone call notification.")
             )
 
+        if not partner.street:
+            raise exceptions.UserError(_("Partner street is required."))
+
+        if not partner.name and not partner.parent_id.name:
+            raise exceptions.UserError(_("Partner name is required."))
+
         partner_name = partner.name or partner.parent_id.name
         sanitized_partner_name = self._sanitize_string(partner_name)
         partner_street = self._sanitize_string(partner.street)
