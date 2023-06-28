@@ -14,21 +14,6 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: delivery_postlogistics_server_env
-#: model:ir.model.fields,field_description:delivery_postlogistics_server_env.field_delivery_carrier__display_name
-msgid "Display Name"
-msgstr ""
-
-#. module: delivery_postlogistics_server_env
-#: model:ir.model.fields,field_description:delivery_postlogistics_server_env.field_delivery_carrier__id
-msgid "ID"
-msgstr ""
-
-#. module: delivery_postlogistics_server_env
-#: model:ir.model.fields,field_description:delivery_postlogistics_server_env.field_delivery_carrier____last_update
-msgid "Last Modified on"
-msgstr ""
-
-#. module: delivery_postlogistics_server_env
 #: model:ir.model.fields,field_description:delivery_postlogistics_server_env.field_delivery_carrier__server_env_defaults
 msgid "Server Env Defaults"
 msgstr ""
