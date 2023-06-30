@@ -53,7 +53,6 @@ class StockPicking(models.Model):
         return result
 
     carrier_file_generated = fields.Boolean(
-        "Carrier File Generated",
         readonly=True,
         copy=False,
         help="The file for the delivery carrier has been generated.",
