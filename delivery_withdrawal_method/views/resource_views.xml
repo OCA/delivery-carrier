@@ -16,7 +16,7 @@
                 <field name="day_period" optional="hide"/>
                 <field name="hour_from" widget="float_time"/>
                 <field name="hour_to" widget="float_time"/>
-                <field name="hour_delay" optional="hide"/>
+                <field name="hour_delay" widget="float_time" optional="hide"/>
                 <field name="select_type_delay" optional="hide"/>
                 <field name="date_from" optional="hide"/>
                 <field name="date_to" optional="hide"/>

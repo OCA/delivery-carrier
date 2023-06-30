@@ -33,6 +33,19 @@
                         </field>
                     </group>
                 </page>
+                <page name="closing_periods" string="Closing periods"
+                      attrs="{'invisible': [('is_withdrawal_point', '!=', True)]}">
+                    <group name="closing_periods">
+                        <field name="closing_period_ids" nolabel="1">
+                            <tree editable="top">
+                                <field name="sequence" widget="handle"/>
+                                <field name="name"/>
+                                <field name="date_from"/>
+                                <field name="date_to"/>
+                            </tree>
+                        </field>
+                    </group>
+                </page>
             </xpath>
         </field>
     </record>

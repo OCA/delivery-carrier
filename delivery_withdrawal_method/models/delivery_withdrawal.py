@@ -10,6 +10,8 @@ class WithdrawalPoints(models.Model):
     _name = "delivery.withdrawal.point"
     _description = "Delivery Withdrawal Point"
     _order = 'sequence, point_id, id'
+    _rec_name = 'partner_id'
+
 
     sequence = fields.Integer(string='Sequence', default=10)
     point_id = fields.Many2one('delivery.carrier', string='Point reference', required=True, ondelete='cascade',

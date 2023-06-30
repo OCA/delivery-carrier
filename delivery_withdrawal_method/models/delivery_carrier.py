@@ -26,3 +26,5 @@ class DeliveryCarrierInherit(models.Model):
     is_withdrawal_point = fields.Boolean("Is a withdrawal point ?", default=False)
 
     withdrawal_point_ids = fields.One2many('delivery.withdrawal.point', 'point_id', copy=True)
+
+    closing_period_ids = fields.One2many('delivery.closing.period', 'closing_id', copy=True)
