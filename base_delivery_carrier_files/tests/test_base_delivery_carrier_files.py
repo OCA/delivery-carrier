@@ -9,10 +9,11 @@ from odoo.tests.common import TransactionCase, tagged
 
 @tagged("-at_install", "post_install")
 class CarrierFilesTest(TransactionCase):
-    def setUp(self):
-        super(CarrierFilesTest, self).setUp()
+    @classmethod
+    def setUpClass(cls):
+        super(CarrierFilesTest, cls).setUpClass()
 
-        self.carrier_file = self.env["delivery.carrier.file"].create(
+        cls.carrier_file = cls.env["delivery.carrier.file"].create(
             {
                 "name": "Generic",
                 "type": "generic",
@@ -23,7 +24,7 @@ class CarrierFilesTest(TransactionCase):
             }
         )
 
-        self.carrier_file_manual = self.env["delivery.carrier.file"].create(
+        cls.carrier_file_manual = cls.env["delivery.carrier.file"].create(
             {
                 "name": "Generic",
                 "type": "generic",
@@ -34,43 +35,43 @@ class CarrierFilesTest(TransactionCase):
             }
         )
 
-        self.carrier = self.env.ref("delivery.delivery_carrier")
-        self.carrier.carrier_file_id = self.carrier_file.id
+        cls.carrier = cls.env.ref("delivery.delivery_carrier")
+        cls.carrier.carrier_file_id = cls.carrier_file.id
 
-        self.carrier_manual = self.env.ref("delivery.free_delivery_carrier")
-        self.carrier_manual.carrier_file_id = self.carrier_file_manual.id
+        cls.carrier_manual = cls.env.ref("delivery.free_delivery_carrier")
+        cls.carrier_manual.carrier_file_id = cls.carrier_file_manual.id
 
-        self.location_refrigerator = self.env["stock.location"].create(
+        cls.location_refrigerator = cls.env["stock.location"].create(
             {
                 "name": "Refrigerator",
                 "usage": "internal",
             }
         )
 
-        self.location_delivery_counter = self.env["stock.location"].create(
+        cls.location_delivery_counter = cls.env["stock.location"].create(
             {
                 "name": "Delivery Counter",
                 "usage": "internal",
             }
         )
 
-        self.owner = self.env["res.partner"].create(
+        cls.owner = cls.env["res.partner"].create(
             {
                 "name": "test_delivery_carrier_file",
             }
         )
 
-        self.product = self.env["product.product"].create(
+        cls.product = cls.env["product.product"].create(
             {
                 "name": "Icecream",
                 "type": "consu",
-                "categ_id": self.env.ref("product.product_category_all").id,
-                "uom_id": self.env.ref("uom.product_uom_kgm").id,
-                "uom_po_id": self.env.ref("uom.product_uom_kgm").id,
+                "categ_id": cls.env.ref("product.product_category_all").id,
+                "uom_id": cls.env.ref("uom.product_uom_kgm").id,
+                "uom_po_id": cls.env.ref("uom.product_uom_kgm").id,
             }
         )
 
-        self.picking_type = self.env.ref("stock.warehouse0").out_type_id
+        cls.picking_type = cls.env.ref("stock.warehouse0").out_type_id
 
     def test_carrier_file_generation(self):
         """Test carrier file generation"""
@@ -104,7 +105,7 @@ class CarrierFilesTest(TransactionCase):
 
         # I deliver the outgoing shipment.
         action = picking.button_validate()
-        self.env[action["res_model"]].with_context(action["context"]).create(
+        self.env[action["res_model"]].with_context(**action["context"]).create(
             {}
         ).process()
 
@@ -150,7 +151,7 @@ class CarrierFilesTest(TransactionCase):
 
         # I deliver the outgoing shipment.
         action = picking.button_validate()
-        self.env[action["res_model"]].with_context(action["context"]).create(
+        self.env[action["res_model"]].with_context(**action["context"]).create(
             {}
         ).process()
 
@@ -161,7 +162,9 @@ class CarrierFilesTest(TransactionCase):
         # I generate the carrier files of my shipment from the wizard
         wizard = (
             self.env["delivery.carrier.file.generate"]
-            .with_context({"active_ids": picking.ids, "active_model": "stock.picking"})
+            .with_context(
+                **{"active_ids": picking.ids, "active_model": "stock.picking"}
+            )
             .create({})
         )
         wizard.action_generate()

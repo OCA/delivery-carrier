@@ -4,7 +4,7 @@
         <field name="name">delivery.carrier.file.tree</field>
         <field name="model">delivery.carrier.file</field>
         <field name="arch" type="xml">
-            <tree string="Carrier File">
+            <tree>
                 <field name="name" />
                 <field name="type" />
                 <field name="auto_export" />
@@ -47,7 +47,7 @@
     <menuitem
         action="action_delivery_carrier_file_form"
         id="menu_action_delivery_carrier_file_form"
-        parent="delivery.menu_delivery"
+        parent="stock.menu_delivery"
     />
 
     <record id="view_delivery_carrier_form_inherit" model="ir.ui.view">

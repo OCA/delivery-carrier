@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-<data>
 
     <record id="delivery_carrier_file" model="delivery.carrier.file">
         <field name="name">Generic</field>
@@ -20,5 +19,4 @@
         <field name="export_path">/tmp</field>
     </record>
 
-</data>
 </odoo>
