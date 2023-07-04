@@ -112,8 +112,9 @@ class PostlogisticsWebService(object):
             recipient["country"] = country_code
 
         if partner.street2:
-            addr_suffix = self._sanitize_string(partner.street2[:35])
-            recipient["addressSuffix"] = addr_suffix
+            # addressSuffix is shown before street on label
+            recipient["addressSuffix"] = recipient["street"]
+            recipient["street"] = self._sanitize_string(partner.street2[:35])
 
         company_partner_name = partner.commercial_company_name
         if company_partner_name and company_partner_name != partner_name:
