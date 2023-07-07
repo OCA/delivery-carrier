@@ -87,8 +87,8 @@ class TestDeliveryCarrierPackageMeasureRequire(TestPackingCommon):
         self.package.width = 25
         self.pick._check_required_package_measurement()
         # Check weight is required
-        self.packaging.package_weight_required = True
         self.package.shipping_weight = False
+        self.packaging.package_weight_required = True
         with self.assertRaises(ValidationError):
             self.pick._check_required_package_measurement()
         self.package.shipping_weight = 250
