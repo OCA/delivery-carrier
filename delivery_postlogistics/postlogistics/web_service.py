@@ -108,6 +108,12 @@ class PostlogisticsWebService(object):
         if not partner.name and not partner.parent_id.name:
             raise exceptions.UserError(_("Partner name is required."))
 
+        if not partner.zip:
+            raise exceptions.UserError(_("Partner zip is required."))
+
+        if not partner.city:
+            raise exceptions.UserError(_("Partner city is required."))
+
         partner_name = partner.name or partner.parent_id.name
         sanitized_partner_name = self._sanitize_string(partner_name)
         partner_street = self._sanitize_string(partner.street)
