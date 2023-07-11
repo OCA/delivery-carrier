@@ -6,7 +6,5 @@ from odoo import models
 class DeliveryCarrier(models.Model):
     _inherit = "delivery.carrier"
 
-    def _prepare_schenker_shipping(self, picking):
-        vals = super()._prepare_schenker_shipping(picking)
-        vals["shippingInformation"]["volume"] = picking.volume
-        return vals
+    def _schenker_shipping_information_product_volume(self, product, qty):
+        return product._get_volume_for_qty(qty)

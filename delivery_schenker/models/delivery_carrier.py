@@ -5,6 +5,7 @@ from lxml import etree
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
+from odoo.tools import float_compare, float_round
 
 from .schenker_request import SchenkerRequest
 
@@ -341,20 +342,39 @@ class DeliveryCarrier(models.Model):
         ).isoformat()
         return {"pickUpDateFrom": date_from, "pickUpDateTo": date_to}
 
-    def _schenker_shipping_information_package(self, picking, package):
-        weight = package.shipping_weight or package.weight
+    def _schenker_shipping_information_product_volume(self, product, qty):
+        return product.volume * qty
+
+    def _schenker_shipping_information_package_volume(self, picking, package):
         # Volume calculations can be unfolded with stock_quant_package_dimension
         if hasattr(package, "volume"):
-            volume = round(package.volume, 2)
-        else:
-            volume = sum([q.quantity * q.product_id.volume for q in package.quant_ids])
+            return package.volume
+        return sum(
+            [
+                self._schenker_shipping_information_product_volume(
+                    q.product_id, q.quantity
+                )
+                for q in package.quant_ids
+            ]
+        )
+
+    def _schenker_shipping_information_round_weight(self, weight, precision_digits=2):
+        return float_round(weight, precision_digits=precision_digits)
+
+    def _schenker_shipping_information_round_volume(self, volume, precision_digits=2):
+        """The schenker api requires 2 decimal points"""
+        return float_round(volume, precision_digits=precision_digits)
+
+    def _schenker_shipping_information_package(self, picking, package):
+        weight = package.shipping_weight or package.weight
         return {
             # Dangerous goods is not supported
             "dgr": False,
             "cargoDesc": picking.name + " / " + package.name,
-            "grossWeight": round(weight, 2),
-            # Default to 1 if no volume informed
-            "volume": volume or 0.01,
+            "grossWeight": self._schenker_shipping_information_round_weight(weight),
+            "volume": self._schenker_shipping_information_round_volume(
+                self._schenker_shipping_information_package_volume(picking, package)
+            ),
             "packageType": (
                 package.packaging_id.shipper_package_code
                 or self.schenker_default_packaging_id.shipper_package_code
@@ -372,28 +392,46 @@ class DeliveryCarrier(models.Model):
         :param picking record with picking to deliver
         :returns list of dicts with delivery packages shipping info
         """
-        if picking.package_ids:
-            return [
-                self._schenker_shipping_information_package(picking, package)
-                for package in picking.package_ids
-            ]
-        weight = picking.shipping_weight or picking.weight
+        schenker_packages = self._schenker_shipping_information_with_packages(picking)
+        return schenker_packages + self._schenker_shipping_information_without_packages(
+            picking
+        )
+
+    def _schenker_shipping_information_with_packages(self, picking):
+        return [
+            self._schenker_shipping_information_package(picking, package)
+            for package in picking.package_ids
+        ]
+
+    def _schenker_shipping_information_without_packages_volume(self, picking):
         # Obviously products should be well configured. This parameter is mandatory.
-        volume = sum(
+        return sum(
             [
-                ml.product_uom_id._compute_quantity(ml.qty_done, ml.product_id.uom_id)
-                * ml.product_id.volume
+                self._schenker_shipping_information_product_volume(
+                    ml.product_id,
+                    ml.product_uom_id._compute_quantity(
+                        ml.qty_done, ml.product_id.uom_id
+                    ),
+                )
                 for ml in picking.move_line_ids
+                if not ml.result_package_id
             ]
         )
+
+    def _schenker_shipping_information_without_packages(self, picking):
+        weight = picking.shipping_weight or picking.weight
         return [
             {
                 # Dangerous goods is not supported
                 "dgr": False,
                 "cargoDesc": picking.name,
                 # For a more complex solution use packaging properly
-                "grossWeight": round(weight / picking.number_of_packages, 2),
-                "volume": round(volume, 2) or 0.01,
+                "grossWeight": self._schenker_shipping_information_round_weight(
+                    weight / picking.number_of_packages
+                ),
+                "volume": self._schenker_shipping_information_round_volume(
+                    self._schenker_shipping_information_without_packages_volume(picking)
+                ),
                 "packageType": self.schenker_default_packaging_id.shipper_package_code,
                 "stackable": self.schenker_default_packaging_id.schenker_stackable,
                 "pieces": picking.number_of_packages,
@@ -408,8 +446,20 @@ class DeliveryCarrier(models.Model):
         :returns dict values for the proper unit key and value
         """
         if self.schenker_measure_unit == "VOLUME":
-            return {"measureUnitVolume": vals["shippingInformation"]["volume"]}
+            return {
+                "measureUnitVolume": self._schenker_shipping_information_round_volume(
+                    vals["shippingInformation"]["volume"]
+                )
+            }
         return {}
+
+    def _schenker_get_total_shipping_volume(self, shipping_information):
+        volume = sum(info["volume"] for info in shipping_information)
+        if float_compare(volume, 0, 3) <= 0:
+            raise UserError(
+                _("There is no volume set on the shipping package information")
+            )
+        return volume
 
     def _prepare_schenker_shipping(self, picking):
         """Convert picking values for schenker api
@@ -434,11 +484,17 @@ class DeliveryCarrier(models.Model):
                 "incotermLocation": picking.partner_id.display_name[:35],
                 "productCode": self._schenker_shipping_product(),
                 "measurementType": self._schenker_metric_system(),
-                "grossWeight": round(picking.shipping_weight, 2),
+                "grossWeight": self._schenker_shipping_information_round_weight(
+                    picking.shipping_weight
+                ),
                 "shippingInformation": {
                     "shipmentPosition": shipping_information,
-                    "grossWeight": round(picking.shipping_weight, 2),
-                    "volume": sum(info["volume"] for info in shipping_information),
+                    "grossWeight": self._schenker_shipping_information_round_weight(
+                        picking.shipping_weight
+                    ),
+                    "volume": self._schenker_get_total_shipping_volume(
+                        shipping_information
+                    ),
                 },
                 "measureUnit": self.schenker_measure_unit,
                 # Customs Clearance not supported for now as it needs a full customs
