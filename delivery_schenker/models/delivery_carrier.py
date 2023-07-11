@@ -372,7 +372,7 @@ class DeliveryCarrier(models.Model):
         :param picking record with picking to deliver
         :returns list of dicts with delivery packages shipping info
         """
-        if picking.package_level_ids and picking.package_ids:
+        if picking.package_ids:
             return [
                 self._schenker_shipping_information_package(picking, package)
                 for package in picking.package_ids
