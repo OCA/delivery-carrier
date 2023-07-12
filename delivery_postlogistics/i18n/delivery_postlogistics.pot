@@ -511,6 +511,34 @@ msgid "Partner Option"
 msgstr ""
 
 #. module: delivery_postlogistics
+#. odoo-python
+#: code:addons/delivery_postlogistics/postlogistics/web_service.py:0
+#, python-format
+msgid "Partner city is required."
+msgstr ""
+
+#. module: delivery_postlogistics
+#. odoo-python
+#: code:addons/delivery_postlogistics/postlogistics/web_service.py:0
+#, python-format
+msgid "Partner name is required."
+msgstr ""
+
+#. module: delivery_postlogistics
+#. odoo-python
+#: code:addons/delivery_postlogistics/postlogistics/web_service.py:0
+#, python-format
+msgid "Partner street is required."
+msgstr ""
+
+#. module: delivery_postlogistics
+#. odoo-python
+#: code:addons/delivery_postlogistics/postlogistics/web_service.py:0
+#, python-format
+msgid "Partner zip is required."
+msgstr ""
+
+#. module: delivery_postlogistics
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_stock_picking__delivery_phone
 msgid "Phone"
 msgstr ""
