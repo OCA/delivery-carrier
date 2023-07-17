@@ -5,7 +5,7 @@
     "summary": "Glue module between delivery_schenker and stock_picking_volume"
     "With this module the transmitted volume is changed,"
     "it uses the computed volume from stock_picking_volume",
-    "version": "14.0.1.1.1",
+    "version": "14.0.1.2.0",
     "category": "Stock",
     "website": "https://github.com/OCA/delivery-carrier",
     "author": "MT Software, Odoo Community Association (OCA)",
