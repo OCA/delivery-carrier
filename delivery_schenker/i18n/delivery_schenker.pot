@@ -588,6 +588,12 @@ msgid "The proper request will be formed accordingly from the picking"
 msgstr ""
 
 #. module: delivery_schenker
+#: code:addons/delivery_schenker/models/delivery_carrier.py:0
+#, python-format
+msgid "There is no volume set on the shipping package information"
+msgstr ""
+
+#. module: delivery_schenker
 #: model:ir.model,name:delivery_schenker.model_stock_picking
 msgid "Transfer"
 msgstr ""
