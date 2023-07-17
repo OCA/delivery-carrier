@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: delivery-carrier (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-22 09:11+0000\n"
-"PO-Revision-Date: 2023-06-07 17:10+0000\n"
-"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"PO-Revision-Date: 2023-07-17 17:11+0000\n"
+"Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/"
 "OCA-delivery-carrier-8-0/language/it/)\n"
 "Language: it\n"
@@ -280,7 +280,7 @@ msgstr "Lista Picking"
 #: field:delivery.deposit.wizard,picking_type_id:0
 #: field:deposit.slip,picking_type_id:0
 msgid "Picking Type"
-msgstr "Tipo Picking"
+msgstr "Tipologia prelievo"
 
 #. module: delivery_carrier_deposit
 #: field:deposit.slip,picking_ids:0
