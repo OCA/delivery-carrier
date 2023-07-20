@@ -5,7 +5,7 @@ from lxml import etree
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
-from odoo.tools import float_compare, float_round
+from odoo.tools import float_compare, float_repr, float_round
 
 from .schenker_request import SchenkerRequest
 
@@ -358,12 +358,27 @@ class DeliveryCarrier(models.Model):
             ]
         )
 
+    def _schenker_float_round(self, value, precision_digits):
+        """
+        The schenker api requires 2 decimal points.
+        Round up to avoid 0 if <0.005.
+        round -> repr -> float to avoid extra decimals that error with the Schema.
+        float_round(2.086, precision_digits=2) = 2.0100000000000002
+        """
+        return float(
+            float_repr(
+                float_round(
+                    value, precision_digits=precision_digits, rounding_method="UP"
+                ),
+                precision_digits=precision_digits,
+            )
+        )
+
     def _schenker_shipping_information_round_weight(self, weight, precision_digits=2):
-        return float_round(weight, precision_digits=precision_digits)
+        return self._schenker_float_round(weight, precision_digits=precision_digits)
 
     def _schenker_shipping_information_round_volume(self, volume, precision_digits=2):
-        """The schenker api requires 2 decimal points"""
-        return float_round(volume, precision_digits=precision_digits)
+        return self._schenker_float_round(volume, precision_digits=precision_digits)
 
     def _schenker_shipping_information_package(self, picking, package):
         weight = package.shipping_weight or package.weight
