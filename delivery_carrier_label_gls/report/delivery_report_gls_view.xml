@@ -11,6 +11,9 @@
         <field
             name="report_file"
         >delivery_carrier_label_gls.report_delivery_report_gls</field>
+        <field name="print_report_name">'GLS Delivery Report'</field>
+        <field name="binding_model_id" ref="model_delivery_report_gls" />
+        <field name="binding_type">report</field>
     </record>
 
 </odoo>
