@@ -37,6 +37,7 @@ addon | version | maintainers | summary
 [delivery_carrier_package_measure_required](delivery_carrier_package_measure_required/) | 14.0.1.0.2 |  | Allow the configuration of which package measurements are required on a delivery carrier basis.
 [delivery_carrier_partner](delivery_carrier_partner/) | 14.0.1.0.0 |  | Add a partner in the delivery carrier
 [delivery_carrier_pricelist](delivery_carrier_pricelist/) | 14.0.1.0.2 |  | Compute method method fees based on the product's pricelist.
+[delivery_carrier_return_barcode_pattern](delivery_carrier_return_barcode_pattern/) | 14.0.1.0.0 | [![mmequignon](https://github.com/mmequignon.png?size=30px)](https://github.com/mmequignon) | Allow to define a return barcode pattern on delivery methods
 [delivery_correos_express](delivery_correos_express/) | 14.0.1.0.1 |  | Delivery Carrier implementation for Correos Express using their API
 [delivery_cttexpress](delivery_cttexpress/) | 14.0.1.0.0 |  | Delivery Carrier implementation for CTT Express API
 [delivery_free_fee_removal](delivery_free_fee_removal/) | 14.0.1.0.0 |  | Hide free fee lines on sales orders
