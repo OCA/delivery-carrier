@@ -13,4 +13,3 @@
     "depends": ["delivery"],
     "data": ["views/delivery_price_rule_views.xml"],
 }
-

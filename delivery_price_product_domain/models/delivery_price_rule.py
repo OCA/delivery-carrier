@@ -1,4 +1,5 @@
-from odoo import models, fields
+from odoo import fields, models
+
 
 class DeliverPriceRule(models.Model):
     _inherit = "delivery.price.rule"

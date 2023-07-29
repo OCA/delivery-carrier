@@ -1,2 +1,2 @@
 * Cetmix <https://cetmix.com>
- * Andrey Solodovnikov  <andrejsolodovnikov699@gmail.com>
+* Andrey Solodovnikov  <andrejsolodovnikov699@gmail.com>
