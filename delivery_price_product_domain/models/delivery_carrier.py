@@ -64,7 +64,9 @@ class DeliveryPriceRule(models.Model):
             total, weight, volume, quantity, order.order_line
         )
 
-    def _get_price_from_picking(self, total, weight, volume, quantity, order_line):
+    def _get_price_from_picking(
+        self, total, weight, volume, quantity, order_line=False
+    ):
         price_dict = self._get_price_dict(total, weight, volume, quantity)
         if self.free_over and total >= self.amount:
             return 0
@@ -74,7 +76,7 @@ class DeliveryPriceRule(models.Model):
             )
             if test:
                 exclude_product_domain_char = line.exclude_product_domain
-                if exclude_product_domain_char:
+                if exclude_product_domain_char and order_line:
                     exclude_product = order_line.product_id.search(
                         ast.literal_eval(exclude_product_domain_char)
                     )
