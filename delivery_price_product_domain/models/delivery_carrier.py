@@ -35,6 +35,34 @@ class DeliveryPriceRule(models.Model):
         price_dict = self._get_price_dict(total, weight, volume, quantity)
         return price_dict
 
+    def _get_price_from_picking(
+        self, total, weight, volume, quantity, order_line=False
+    ):
+        price_dict = self._get_price_dict(total, weight, volume, quantity)
+        if self.free_over and total >= self.amount:
+            return 0
+        for line in self.price_rule_ids:
+            test = safe_eval(
+                line.variable + line.operator + str(line.max_value), price_dict
+            )
+            if test:
+                exclude_product_domain_char = line.exclude_product_domain
+                if exclude_product_domain_char and order_line:
+                    exclude_product = order_line.product_id.search(
+                        ast.literal_eval(exclude_product_domain_char)
+                    )
+                    price_dict = self.recompute_price_available(
+                        order_line.order_id, exclude_product
+                    )
+                break
+
+        return super(DeliveryPriceRule, self)._get_price_from_picking(
+            price_dict.get("price"),
+            price_dict.get("weight"),
+            price_dict.get("volume"),
+            price_dict.get("quantity"),
+        )
+
     def _get_price_available(self, order):
         self.ensure_one()
         self = self.sudo()
@@ -62,32 +90,4 @@ class DeliveryPriceRule(models.Model):
 
         return self._get_price_from_picking(
             total, weight, volume, quantity, order.order_line
-        )
-
-    def _get_price_from_picking(
-        self, total, weight, volume, quantity, order_line=False
-    ):
-        price_dict = self._get_price_dict(total, weight, volume, quantity)
-        if self.free_over and total >= self.amount:
-            return 0
-        for line in self.price_rule_ids:
-            test = safe_eval(
-                line.variable + line.operator + str(line.max_value), price_dict
-            )
-            if test:
-                exclude_product_domain_char = line.exclude_product_domain
-                if exclude_product_domain_char and order_line:
-                    exclude_product = order_line.product_id.search(
-                        ast.literal_eval(exclude_product_domain_char)
-                    )
-                    price_dict = self.recompute_price_available(
-                        order_line.order_id, exclude_product
-                    )
-                break
-
-        return super(DeliveryPriceRule, self)._get_price_from_picking(
-            price_dict.get("price"),
-            price_dict.get("weight"),
-            price_dict.get("volume"),
-            price_dict.get("quantity"),
         )
