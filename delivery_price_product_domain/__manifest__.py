@@ -2,7 +2,7 @@
 {
     "name": "Delivery Price Product Domain",
     "summary": "Exclude Consumables From Shipping Charges",
-    "author": "Odoo Community Association (OCA), Cetmix",
+    "author": "Ooops, Cetmix, Odoo Community Association (OCA)",
     "maintainers": ["solo4games", "CetmixGitDrone"],
     "website": "https://github.com/OCA/delivery-carrier",
     "license": "AGPL-3",
