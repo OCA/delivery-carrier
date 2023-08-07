@@ -29,3 +29,4 @@ class ResConfigSettings(models.TransientModel):
             self.partner_default_delivery_carrier_id.id,
             company_id=self.env.company.id,
         )
+        return
