@@ -4,7 +4,7 @@
 {
     "name": "Partner Default Delivery Method",
     "summary": "Allows defining default delivery methods for partners",
-    "version": "14.0.1.0.0",
+    "version": "16.0.1.0.0",
     "category": "Delivery",
     "website": "https://github.com/OCA/delivery-carrier",
     "author": "Camptocamp, Odoo Community Association (OCA)",
