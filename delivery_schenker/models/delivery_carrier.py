@@ -346,6 +346,7 @@ class DeliveryCarrier(models.Model):
         return product.volume * qty
 
     def _schenker_shipping_information_package_volume(self, picking, package):
+        # TODO: Refactor this and move this into own auto_install module
         # Volume calculations can be unfolded with stock_quant_package_dimension
         if hasattr(package, "volume"):
             return package.volume
@@ -419,6 +420,8 @@ class DeliveryCarrier(models.Model):
         )
 
     def _schenker_shipping_information_without_packages(self, picking):
+        if all(move_line.result_package_id for move_line in picking.move_line_ids):
+            return []
         weight = picking.shipping_weight or picking.weight
         return [
             {
