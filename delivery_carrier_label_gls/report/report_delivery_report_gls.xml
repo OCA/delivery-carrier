@@ -15,7 +15,7 @@
                     <div class="page">
                         <div class="oe_structure" />
                         <div class="row" id="header_info">
-                            <div class="col-3">
+                            <div class="col-12">
                                 <h3>GLS Delivery Report: <div
                                         t-field="o.report_datetime"
                                     /></h3>
@@ -101,7 +101,7 @@
                             </div>
                         </div>
                         <div id="total" class="row" name="total">
-                             <div class="col-4 ml-auto">
+                             <div class="col-12">
                                 <table class="table table-sm">
                                     <tr class="border-black o_subtotal" style="">
                                         <td><strong>Number of Packages</strong></td>
