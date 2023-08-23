@@ -1,13 +1,14 @@
 # Copyright 2018 Tecnativa - Sergio Teruel
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from odoo.exceptions import ValidationError
-from odoo.tests import Form, TransactionCase
+from odoo.tests import Form, SavepointCase
 
 
-class TestStockPikingReturnRefundOption(TransactionCase):
+class TestPartnerDeliverySchedule(SavepointCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         cls.schedule = cls.env["delivery.schedule"].create(
             {
                 "name": "test",
