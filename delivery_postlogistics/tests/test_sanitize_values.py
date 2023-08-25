@@ -58,3 +58,8 @@ class TestSanitizeValues(TestPostlogisticsCommon):
             self.picking, packages, 1, 1
         )
         self.check_strings_in_dict(attributes)
+
+    def test_cleanup_error_message(self):
+        html_text = "<html><body><h1>TEST</h1></body></html>"
+        text = self.env["stock.picking"]._cleanup_error_message(html_text)
+        self.assertEqual(text, "TEST")
