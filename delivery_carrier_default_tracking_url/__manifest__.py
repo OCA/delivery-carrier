@@ -5,7 +5,7 @@
     "name": "Delivery Carrier Default Tracking Url",
     "summary": """
         Adds the default tracking url on delivery carrier""",
-    "version": "14.0.1.0.0",
+    "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "maintainers": ["rousseldenis"],
     "author": "ACSONE SA/NV,Odoo Community Association (OCA)",
