@@ -22,7 +22,7 @@ class TestSanitizeValues(TestPostlogisticsCommon):
                 "street": "42\\|<>whateverstraße",
                 "street2": "42\\|<>whateverstraße",
                 "zip": "43123\\",
-                "city": "Mouais\\<>|",
+                "city": False,
             }
         )
 
