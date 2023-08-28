@@ -455,9 +455,9 @@ class PostlogisticsWebService(object):
 
     def _sanitize_string(self, value):
         """Removes disallowed chars ("|", "\", "<", ">", "’", "‘") from strings."""
-        if isinstance(value, str):
-            for char, repl in DISALLOWED_CHARS_MAPPING.items():
-                value = value.replace(char, repl)
+        value = value or ""
+        for char, repl in DISALLOWED_CHARS_MAPPING.items():
+            value = value.replace(char, repl)
         return value
 
     def generate_label(self, picking, packages):
