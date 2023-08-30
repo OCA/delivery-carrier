@@ -34,7 +34,7 @@ class SaleOrder(models.Model):
             uom=fee_product.uom_id.id,
         )
         price_unit = self.currency_id._convert(
-            product.price,
+            product._get_contextual_price(),
             self.company_id.currency_id,
             self.company_id,
             self.date_order or fields.Date.today(),
