@@ -7,24 +7,20 @@
         <field name="arch" type="xml">
             <page name="pricing" position="after">
                 <page string="Package Fees" name="package_fee">
-                    <group>
-                        <p>
-                            For each line below, each time a transfer is done, a line is added
-                            in the sales order with the product. The unit is the number of packages
-                            in the transfer and the price is the product's pricelist price.
-                        </p>
-                    </group>
-                    <group>
-                        <field name="package_fee_ids" nolabel="1">
-                            <tree string="Package Fees" editable="bottom">
-                                <field
-                                    name="product_id"
-                                    context="{'default_type': 'service', 'default_sale_ok': False, 'default_purchase_ok': False}"
-                                />
-                                <field name="active" />
-                            </tree>
-                        </field>
-                    </group>
+                    <p>
+                        For each line below, each time a transfer is done, a line is added
+                        in the sales order with the product. The unit is the number of packages
+                        in the transfer and the price is the product's pricelist price.
+                    </p>
+                    <field name="package_fee_ids" nolabel="1">
+                        <tree editable="bottom">
+                            <field
+                                name="product_id"
+                                context="{'default_type': 'service', 'default_sale_ok': False, 'default_purchase_ok': False}"
+                            />
+                            <field name="active" />
+                        </tree>
+                    </field>
                 </page>
             </page>
         </field>
