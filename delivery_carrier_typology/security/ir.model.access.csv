@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_delivery_carrier_typology,delivery.carrier.typology,model_delivery_carrier_typology,sales_team.group_sale_salesman,1,0,0,0
+access_delivery_carrier_typology_stock,delivery.carrier.typology.stock,model_delivery_carrier_typology,stock.group_stock_user,1,0,0,0
+access_delivery_carrier_typology_stock_manager,delivery.carrier.typology.stock.manager,model_delivery_carrier_typology,stock.group_stock_manager,1,1,1,1
