@@ -581,6 +581,12 @@ msgid "PostLogistics Options"
 msgstr ""
 
 #. module: delivery_postlogistics
+#: code:addons/delivery_postlogistics/models/stock_picking.py:0
+#, python-format
+msgid "PostLogistics error:"
+msgstr ""
+
+#. module: delivery_postlogistics
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_delivery_carrier_template_option__postlogistics_type
 msgid "PostLogistics option type"
 msgstr ""
