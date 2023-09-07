@@ -1,4 +1,5 @@
 # Copyright 2020 Tecnativa - David Vidal
+# Copyright 2023 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from odoo.tests import Form
 from odoo.tests.common import TransactionCase
@@ -11,6 +12,7 @@ class TestDeliveryPackageNumber(TransactionCase):
         cls.product = cls.env["product.product"].create(
             {"name": "Test product", "type": "product"}
         )
+        cls.partner = cls.env["res.partner"].create({"name": "Test partner"})
         cls.wh1 = cls.env["stock.warehouse"].create(
             {"name": "TEST WH1", "code": "TST1"}
         )
@@ -35,8 +37,8 @@ class TestDeliveryPackageNumber(TransactionCase):
         cls.ml2 = cls.ml1.copy({"qty_done": 0})
 
     def test_number_of_packages(self):
-        # By default it's computed to 1
-        self.assertEqual(self.picking.number_of_packages, 1)
+        # By default it's computed to 0
+        self.assertEqual(self.picking.number_of_packages, 0)
         # We can edit the number of packages as there aren't delivery packages
         picking_form = Form(self.picking)
         picking_form.number_of_packages = 3
@@ -52,3 +54,24 @@ class TestDeliveryPackageNumber(TransactionCase):
         picking_form.number_of_packages = 3
         picking_form.save()
         self.assertEqual(self.picking.number_of_packages, 3)
+
+    def test_backorder(self):
+        order_form = Form(self.env["sale.order"])
+        order_form.partner_id = self.partner
+        with order_form.order_line.new() as line_form:
+            line_form.product_id = self.product
+            line_form.product_uom_qty = 10
+        order = order_form.save()
+        order.action_confirm()
+        picking = order.picking_ids
+        picking.move_ids.quantity_done = 2
+        picking.number_of_packages = 2
+        action = picking.button_validate()
+        backorder_wizard = Form(
+            self.env[action["res_model"]].with_context(**action["context"])
+        ).save()
+        backorder_wizard.process()
+        done_picking = order.picking_ids.filtered(lambda x: x.state == "done")
+        new_picking = order.picking_ids - done_picking
+        self.assertEqual(done_picking.number_of_packages, 2)
+        self.assertEqual(new_picking.number_of_packages, 0)
