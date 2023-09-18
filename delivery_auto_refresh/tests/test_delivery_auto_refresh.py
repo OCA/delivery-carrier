@@ -308,3 +308,20 @@ class TestDeliveryAutoRefresh(common.TransactionCase):
         sale_form.order_line.remove(0)
         sale_form.save()
         self.assertFalse(delivery_line.exists())
+
+    def test_auto_add_delivery_line_add_service(self):
+        """Delivery line should not be created because
+        there are only service products in SO"""
+        service = self.env["product.product"].create(
+            {"name": "Service Test", "type": "service"}
+        )
+        order_form = Form(self.env["sale.order"])
+        order_form.partner_id = self.partner
+        order_form.partner_invoice_id = self.partner
+        order_form.partner_shipping_id = self.partner
+        with order_form.order_line.new() as ol_form:
+            ol_form.product_id = service
+            ol_form.product_uom_qty = 2
+        order = order_form.save()
+        delivery_line = order.order_line.filtered("is_delivery")
+        self.assertFalse(delivery_line.exists())
