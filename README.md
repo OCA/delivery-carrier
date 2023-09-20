@@ -50,6 +50,7 @@ addon | version | maintainers | summary
 [delivery_price_method](delivery_price_method/) | 14.0.1.0.0 |  | Provides fields to be able to contemplate the tracking statesand also adds a global fields
 [delivery_price_rule_untaxed](delivery_price_rule_untaxed/) | 14.0.1.0.2 | [![AshishHirapara](https://github.com/AshishHirapara.png?size=30px)](https://github.com/AshishHirapara) | Add untaxed amount to variables for price delivery price rule
 [delivery_roulier](delivery_roulier/) | 14.0.1.0.1 | [![florian-dacosta](https://github.com/florian-dacosta.png?size=30px)](https://github.com/florian-dacosta) | Integration of multiple carriers
+[delivery_roulier_chronopost_fr](delivery_roulier_chronopost_fr/) | 14.0.1.0.1 |  | Delivery Chronopost France
 [delivery_roulier_laposte_fr](delivery_roulier_laposte_fr/) | 14.0.1.0.1 | [![florian-dacosta](https://github.com/florian-dacosta.png?size=30px)](https://github.com/florian-dacosta) | Generate Label for La Poste/Colissimo
 [delivery_roulier_option](delivery_roulier_option/) | 14.0.1.0.0 | [![florian-dacosta](https://github.com/florian-dacosta.png?size=30px)](https://github.com/florian-dacosta) | Add options to roulier modules
 [delivery_schenker](delivery_schenker/) | 14.0.1.2.0 |  | Delivery Carrier implementation for DB Schenker API

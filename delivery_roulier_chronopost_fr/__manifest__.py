@@ -2,7 +2,7 @@
 
 {
     "name": "Delivery Chronopost France",
-    "version": "14.0.1.0.0",
+    "version": "14.0.1.0.1",
     "author": "Akretion,Odoo Community Association (OCA)",
     "category": "Delivery",
     "complexity": "normal",
