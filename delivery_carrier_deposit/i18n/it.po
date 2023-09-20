@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: delivery-carrier (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-22 09:11+0000\n"
-"PO-Revision-Date: 2023-07-17 17:11+0000\n"
-"Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
+"PO-Revision-Date: 2023-09-20 19:57+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/"
 "OCA-delivery-carrier-8-0/language/it/)\n"
 "Language: it\n"
@@ -128,7 +128,7 @@ msgstr "Data:"
 #: field:delivery.deposit.wizard,carrier_type:0
 #: view:deposit.slip:delivery_carrier_deposit.view_deposit_slip_search
 msgid "Delivery Method Type"
-msgstr "Tipo del Metodo di Spedizione"
+msgstr "Tipo metodo di consegna"
 
 #. module: delivery_carrier_deposit
 #: view:website:delivery_carrier_deposit.report_generic_deposit_slip
