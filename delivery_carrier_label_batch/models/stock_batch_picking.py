@@ -16,6 +16,7 @@ class StockBatchPicking(models.Model):
     carrier_id = fields.Many2one(
         "delivery.carrier", "Carrier", states={"done": [("readonly", True)]}
     )
+    carrier_code = fields.Char(related="carrier_id.code", readonly=True)
     option_ids = fields.Many2many("delivery.carrier.option", string="Options")
 
     def action_set_options(self):
@@ -43,7 +44,6 @@ class StockBatchPicking(models.Model):
             available_options = self.carrier_id.available_option_ids
             default_options = self._get_options_to_add()
             self.option_ids = [(6, 0, default_options.ids)]
-            self.carrier_code = self.carrier_id.code
             return {
                 "domain": {
                     "option_ids": [("id", "in", available_options.ids)],
