@@ -67,6 +67,7 @@ class DeliveryTnt(TestDeliveryTntBase):
         super().setUpClass()
         cls.picking = cls.sale.picking_ids[0]
         cls.picking.move_lines.quantity_done = 1
+        cls.picking.number_of_packages = 1
 
     def test_picking_tnt_oca_misc(self):
         tnt_request = TntRequest(self.carrier, self.picking)
