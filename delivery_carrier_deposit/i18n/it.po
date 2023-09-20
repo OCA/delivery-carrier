@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-29 00:40+0000\n"
-"PO-Revision-Date: 2023-06-16 14:10+0000\n"
+"PO-Revision-Date: 2023-09-20 19:35+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -126,7 +126,7 @@ msgstr "Data:"
 #: model:ir.model.fields,field_description:delivery_carrier_deposit.field_delivery_deposit_wizard_carrier_type
 #: model:ir.ui.view,arch_db:delivery_carrier_deposit.view_deposit_slip_search
 msgid "Delivery Method Type"
-msgstr "Tipo del Metodo di Spedizione"
+msgstr "Tipo metodo di consegna"
 
 #. module: delivery_carrier_deposit
 #: model:ir.ui.view,arch_db:delivery_carrier_deposit.report_generic_deposit_slip
