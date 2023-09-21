@@ -7,7 +7,7 @@
     "website": "https://github.com/OCA/delivery-carrier",
     "license": "AGPL-3",
     "category": "Delivery",
-    "version": "14.0.1.0.0",
+    "version": "14.0.1.0.1",
     "application": False,
     "installable": True,
     "depends": ["delivery", "delivery_price_rule_untaxed"],
