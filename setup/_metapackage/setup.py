@@ -35,6 +35,7 @@ setuptools.setup(
         'odoo14-addon-delivery_postlogistics_dangerous_goods',
         'odoo14-addon-delivery_postlogistics_server_env',
         'odoo14-addon-delivery_price_method',
+        'odoo14-addon-delivery_price_product_domain',
         'odoo14-addon-delivery_price_rule_untaxed',
         'odoo14-addon-delivery_roulier',
         'odoo14-addon-delivery_roulier_chronopost_fr',
