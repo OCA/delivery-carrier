@@ -1,0 +1,55 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* delivery_price_product_domain
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2023-09-22 10:36+0000\n"
+"Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: delivery_price_product_domain
+#: model:ir.model.fields,field_description:delivery_price_product_domain.field_delivery_price_rule__apply_product_domain
+msgid "Apply to products"
+msgstr "Applica ai prodotti"
+
+#. module: delivery_price_product_domain
+#: model:ir.model,name:delivery_price_product_domain.model_delivery_price_rule
+msgid "Delivery Price Rules"
+msgstr "Regole sui costi di consegna"
+
+#. module: delivery_price_product_domain
+#: model:ir.model.fields,field_description:delivery_price_product_domain.field_delivery_carrier__display_name
+#: model:ir.model.fields,field_description:delivery_price_product_domain.field_delivery_price_rule__display_name
+msgid "Display Name"
+msgstr "Nome visualizzato"
+
+#. module: delivery_price_product_domain
+#: model:ir.model.fields,field_description:delivery_price_product_domain.field_delivery_carrier__id
+#: model:ir.model.fields,field_description:delivery_price_product_domain.field_delivery_price_rule__id
+msgid "ID"
+msgstr "ID"
+
+#. module: delivery_price_product_domain
+#: model:ir.model.fields,field_description:delivery_price_product_domain.field_delivery_carrier____last_update
+#: model:ir.model.fields,field_description:delivery_price_product_domain.field_delivery_price_rule____last_update
+msgid "Last Modified on"
+msgstr "Ultima modifica il"
+
+#. module: delivery_price_product_domain
+#: model:ir.model.fields,field_description:delivery_price_product_domain.field_delivery_carrier__order_id
+msgid "Sale Order"
+msgstr "Ordine di vendita"
+
+#. module: delivery_price_product_domain
+#: model:ir.model,name:delivery_price_product_domain.model_delivery_carrier
+msgid "Shipping Methods"
+msgstr "Metodi di spedizione"
