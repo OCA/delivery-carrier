@@ -14,5 +14,6 @@
     "data": [
         "views/stock_picking_views.xml",
         "wizard/stock_immediate_transfer_views.xml",
+        "wizard/stock_backorder_confirmation_views.xml",
     ],
 }
