@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-06-09 06:51+0000\n"
-"PO-Revision-Date: 2023-09-20 21:25+0000\n"
+"PO-Revision-Date: 2023-10-09 07:43+0000\n"
 "Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -29,7 +29,8 @@ msgstr ""
 "\n"
 "            * El estado  'Borrador' se usa en nuevos proyectos\n"
 "\n"
-"            * El estado 'Enviado' se usa en proyectos enviados a Routific"
+"            * El estado 'Enviado' se usa en proyectos enviados a Routific\n"
+"        "
 
 #. module: connector_routific
 #: model:ir.model.fields,help:connector_routific.field_res_partner__routific_end
@@ -45,7 +46,8 @@ msgstr ""
 "        Si el contacto es un conductor,  este valor muestra el fin de su "
 "horario de trabajo.\n"
 "       Si no lo es, este valor muestra el fin del periodo en el que puede "
-"recibir paquetes."
+"recibir paquetes.\n"
+"        "
 
 #. module: connector_routific
 #: model:ir.model.fields,help:connector_routific.field_res_partner__routific_start
@@ -62,7 +64,8 @@ msgstr ""
 "        Si el contacto es un conductor,  este valor muestra el inicio de su "
 "horario de trabajo.\n"
 "       Si no lo es, este valor muestra el inicio del periodo en el que puede "
-"recibir paquetes."
+"recibir paquetes.\n"
+"        "
 
 #. module: connector_routific
 #: model_terms:ir.ui.view,arch_db:connector_routific.routific_project_form_view
@@ -85,7 +88,7 @@ msgstr "Actividades"
 #: model:ir.model.fields,field_description:connector_routific.field_routific_config__activity_exception_decoration
 #: model:ir.model.fields,field_description:connector_routific.field_routific_project__activity_exception_decoration
 msgid "Activity Exception Decoration"
-msgstr "Decoración de Actividad  de Excepción"
+msgstr "Decoración de Actividad de Excepción"
 
 #. module: connector_routific
 #: model:ir.model.fields,field_description:connector_routific.field_routific_config__activity_state
@@ -393,9 +396,10 @@ msgid ""
 "        The default is false\n"
 "        "
 msgstr ""
-"Obliga a que la hora de salida de un conductor sea la marcada en su "
-"horario.\n"
-"         El valor predeterminado es falso"
+"Obliga a que la hora de salida de un conductor sea la marcada en su horario."
+"\n"
+"         El valor predeterminado es falso\n"
+"        "
 
 #. module: connector_routific
 #: model:ir.model.fields,field_description:connector_routific.field_routific_project__json_retrieve
@@ -656,10 +660,8 @@ msgstr "Secuencia"
 
 #. module: connector_routific
 #: model:ir.model.fields,field_description:connector_routific.field_stock_picking__routific_stop_sequence
-#, fuzzy
-#| msgid "Sequence"
 msgid "Sequence stop"
-msgstr "Secuencia"
+msgstr "Detención de secuencia"
 
 #. module: connector_routific
 #: model:ir.model.fields,help:connector_routific.field_res_partner__speed
@@ -669,7 +671,7 @@ msgid ""
 "        being 0.1 the smallest and 2.0 the biggest"
 msgstr ""
 "Define la velocidad media de conducción.\n"
-"        Siendo 0.1 la menor y 2.0 la mayor."
+"        Siendo 0.1 la menor y 2.0 la mayor"
 
 #. module: connector_routific
 #: model:ir.actions.act_window,name:connector_routific.action_routific_config
@@ -684,7 +686,7 @@ msgstr "Ajustes"
 #. module: connector_routific
 #: model:ir.model,name:connector_routific.model_routific_config
 msgid "Settings for Routific connexion."
-msgstr "Ajustes para la conexión con Routific"
+msgstr "Ajustes para la conexión con Routific."
 
 #. module: connector_routific
 #: model_terms:ir.ui.view,arch_db:connector_routific.routific_project_form_view
@@ -801,7 +803,7 @@ msgstr "Token"
 #: code:addons/connector_routific/models/routific_config.py:0
 #, python-format
 msgid "Token needed to make the comunication with Routific."
-msgstr "Se necesita un Token para hacer la comunicación con Routific"
+msgstr "Se necesita un Token para hacer la comunicación con Routific."
 
 #. module: connector_routific
 #: model:ir.model.fields,field_description:connector_routific.field_routific_config__traffic
