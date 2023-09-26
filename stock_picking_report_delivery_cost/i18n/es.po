@@ -1,0 +1,38 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_picking_report_delivery_cost
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-10-28 12:52+0000\n"
+"PO-Revision-Date: 2020-10-28 12:52+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_picking_report_delivery_cost
+#: model_terms:ir.ui.view,arch_db:stock_picking_report_delivery_cost.report_delivery_document
+#: model_terms:ir.ui.view,arch_db:stock_picking_report_delivery_cost.report_picking
+msgid "<strong>Delivery cost:</strong>"
+msgstr "<strong>Coste de envío:</strong>"
+
+#. module: stock_picking_report_delivery_cost
+#: model:ir.model.fields,field_description:stock_picking_report_delivery_cost.field_stock_picking__carrier_price_for_report
+msgid "Carrier Price For Report"
+msgstr "Precio del envío para el informe"
+
+#. module: stock_picking_report_delivery_cost
+#: model:ir.model.fields,field_description:stock_picking_report_delivery_cost.field_stock_picking__currency_id
+msgid "Currency"
+msgstr "Moneda"
+
+#. module: stock_picking_report_delivery_cost
+#: model:ir.model,name:stock_picking_report_delivery_cost.model_stock_picking
+msgid "Transfer"
+msgstr "Albarán"
