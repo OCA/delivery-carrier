@@ -23,7 +23,9 @@ setuptools.setup(
         'odoo-addon-delivery_postlogistics_server_env>=16.0dev,<16.1dev',
         'odoo-addon-delivery_price_method>=16.0dev,<16.1dev',
         'odoo-addon-delivery_state>=16.0dev,<16.1dev',
+        'odoo-addon-partner_delivery_zone>=16.0dev,<16.1dev',
         'odoo-addon-stock_picking_delivery_link>=16.0dev,<16.1dev',
+        'odoo-addon-stock_picking_report_delivery_cost>=16.0dev,<16.1dev',
     ],
     classifiers=[
         'Programming Language :: Python',

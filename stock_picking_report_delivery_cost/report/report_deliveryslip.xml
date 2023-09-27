@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2019 Tecnativa - Pedro M. Baeza
+     Copyright 2020 Tecnativa - Víctor Martínez
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <template id="report_delivery_document" inherit_id="stock.report_delivery_document">
+        <xpath expr="//div[@name='div_sched_date']" position="after">
+            <div
+                t-if="o.carrier_price_for_report"
+                class="col-auto"
+                name="div_carrier_price_for_report"
+            >
+                <strong>Delivery cost:</strong>
+                <p t-field="o.carrier_price_for_report" />
+            </div>
+        </xpath>
+    </template>
+</odoo>
