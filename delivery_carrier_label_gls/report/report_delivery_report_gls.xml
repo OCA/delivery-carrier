@@ -33,18 +33,18 @@
                                 <table class="table table-sm">
                                     <thead>
                                         <tr>
-                                                <th class="text-right"><strong
+                                                <th class="text-end"><strong
                                                 >Internal Reference</strong></th>
                                             <th><strong>Tracking</strong></th>
-                                            <th class="text-right"><strong
+                                            <th class="text-end"><strong
                                                 >Weight</strong></th>
-                                            <th class="text-right"><strong
+                                            <th class="text-end"><strong
                                                 >Package Reference</strong></th>
-                                            <th class="text-right"><strong
+                                            <th class="text-end"><strong
                                                 >Name</strong></th>
-                                            <th class="text-right"><strong
+                                            <th class="text-end"><strong
                                                 >City</strong></th>
-                                            <th class="text-right"><strong
+                                            <th class="text-end"><strong
                                                 >Country</strong></th>
                                         </tr>
                                     </thead>
@@ -61,27 +61,27 @@
                                                         t-field="l.parcel_tracking"
                                                     />
                                                     </td>
-                                                    <td class="text-right">
+                                                    <td class="text-end">
                                                         <span
                                                         t-field="l.shipping_weight"
                                                     />
                                                     </td>
-                                                    <td class="text-right">
+                                                    <td class="text-end">
                                                         <span
                                                         t-field="l.gls_package_ref"
                                                     />
                                                     </td>
-                                                    <td class="text-right">
+                                                    <td class="text-end">
                                                         <span
                                                         t-field="l.gls_picking_id.partner_id.name"
                                                     />
                                                     </td>
-                                                    <td class="text-right">
+                                                    <td class="text-end">
                                                         <span
                                                         t-field="l.gls_picking_id.partner_id.city"
                                                     />
                                                     </td>
-                                                    <td class="text-right">
+                                                    <td class="text-end">
                                                         <span
                                                         t-field="l.gls_picking_id.partner_id.country_id.code"
                                                     />
@@ -105,11 +105,11 @@
                                 <table class="table table-sm">
                                     <tr class="border-black o_subtotal" style="">
                                         <td><strong>Number of Packages</strong></td>
-                                        <td class="text-right">
+                                        <td class="text-end">
                                             <span t-esc="number_packages" />
                                         </td>
                                         <td><strong>Total Weight (kg)</strong></td>
-                                        <td class="text-right">
+                                        <td class="text-end">
                                             <span t-esc="total_weight" />
                                         </td>
                                     </tr>
