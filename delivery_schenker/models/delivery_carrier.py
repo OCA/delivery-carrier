@@ -5,7 +5,7 @@ from lxml import etree
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
-from odoo.tools import float_compare, float_round
+from odoo.tools import float_compare, float_repr, float_round
 
 from .schenker_request import SchenkerRequest
 
@@ -362,11 +362,21 @@ class DeliveryCarrier(models.Model):
             ]
         )
 
+    def _float_round_repr(self, value, precision_digits, rounding_method="UP"):
+        return float_repr(
+            float_round(
+                value,
+                precision_digits=precision_digits,
+                rounding_method=rounding_method,
+            ),
+            precision_digits=precision_digits,
+        )
+
     def _schenker_shipping_information_round_dimension(
         self, dimension, precision_digits=2
     ):
         """The schenker api requires 2 decimal points"""
-        return float_round(dimension, precision_digits=precision_digits)
+        return self._float_round_repr(dimension, precision_digits)
 
     def _schenker_shipping_information_package(self, picking, package):
         weight = package.shipping_weight or package.weight
@@ -451,15 +461,11 @@ class DeliveryCarrier(models.Model):
         :returns dict values for the proper unit key and value
         """
         if self.schenker_measure_unit == "VOLUME":
-            return {
-                "measureUnitVolume": self._schenker_shipping_information_round_dimension(
-                    vals["shippingInformation"]["volume"]
-                )
-            }
+            return {"measureUnitVolume": vals["shippingInformation"]["volume"]}
         return {}
 
     def _schenker_get_total_shipping_volume(self, shipping_information):
-        volume = sum(info["volume"] for info in shipping_information)
+        volume = sum(float(info["volume"]) for info in shipping_information)
         if float_compare(volume, 0, 3) <= 0:
             raise UserError(
                 _("There is no volume set on the shipping package information")
@@ -497,8 +503,8 @@ class DeliveryCarrier(models.Model):
                     "grossWeight": self._schenker_shipping_information_round_dimension(
                         picking.shipping_weight
                     ),
-                    "volume": self._schenker_get_total_shipping_volume(
-                        shipping_information
+                    "volume": self._schenker_shipping_information_round_dimension(
+                        self._schenker_get_total_shipping_volume(shipping_information)
                     ),
                 },
                 "measureUnit": self.schenker_measure_unit,
