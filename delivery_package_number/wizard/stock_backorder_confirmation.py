@@ -1,13 +1,14 @@
-# Copyright 2020 Tecnativa - David Vidal
+# Copyright 2023 Ángel García de la Chica Herrera <angel.garcia@sygel.es>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+
 from odoo import api, fields, models
 
 
-class StockImmediateTransfer(models.TransientModel):
-    _inherit = "stock.immediate.transfer"
+class StockBackorderConfirmation(models.TransientModel):
+    _inherit = "stock.backorder.confirmation"
 
     number_of_packages = fields.Integer(
-        help="Set the number of packages for this picking(s)",
+        help="Set the number of packages for picking to be validated",
     )
     ask_number_of_packages = fields.Boolean(compute="_compute_ask_number_of_packages")
 
@@ -23,5 +24,5 @@ class StockImmediateTransfer(models.TransientModel):
             self.pick_ids.write({"number_of_packages": self.number_of_packages})
         # put context key for avoiding `base_delivery_carrier_label` auto-packaging feature
         return super(
-            StockImmediateTransfer, self.with_context(set_default_package=False)
+            StockBackorderConfirmation, self.with_context(set_default_package=False)
         ).process()
