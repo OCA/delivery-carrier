@@ -45,7 +45,7 @@ class TestCarrierPackages(CarrierLabelCase):
         """
         Test an example of label assignation to a picking's package
         """
-        self.picking.carrier_id.automatic_package_creation = True
+        self.picking.carrier_id.automatic_package_creation_at_delivery = True
         self.picking.send_to_shipper()
 
         self.assertTrue(self.picking.has_packages)
@@ -58,7 +58,7 @@ class TestCarrierPackages(CarrierLabelCase):
         """
         Test an example of label assignation to a picking without package
         """
-        self.picking.carrier_id.automatic_package_creation = False
+        self.picking.carrier_id.automatic_package_creation_at_delivery = False
         self.picking.send_to_shipper()
         self.assertFalse(self.picking.has_packages)
         self.assertEqual("123231", self.picking.carrier_tracking_ref)
