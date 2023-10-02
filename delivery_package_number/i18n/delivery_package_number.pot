@@ -14,8 +14,14 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: delivery_package_number
+#: model:ir.model.fields,field_description:delivery_package_number.field_stock_backorder_confirmation__ask_number_of_packages
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_immediate_transfer__ask_number_of_packages
 msgid "Ask Number Of Packages"
+msgstr ""
+
+#. module: delivery_package_number
+#: model:ir.model,name:delivery_package_number.model_stock_backorder_confirmation
+msgid "Backorder Confirmation"
 msgstr ""
 
 #. module: delivery_package_number
@@ -24,6 +30,7 @@ msgid "Immediate Transfer"
 msgstr ""
 
 #. module: delivery_package_number
+#: model:ir.model.fields,field_description:delivery_package_number.field_stock_backorder_confirmation__number_of_packages
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_immediate_transfer__number_of_packages
 msgid "Number Of Packages"
 msgstr ""
@@ -31,6 +38,11 @@ msgstr ""
 #. module: delivery_package_number
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_picking__number_of_packages
 msgid "Number of Packages"
+msgstr ""
+
+#. module: delivery_package_number
+#: model:ir.model.fields,help:delivery_package_number.field_stock_backorder_confirmation__number_of_packages
+msgid "Set the number of packages for picking to be validated"
 msgstr ""
 
 #. module: delivery_package_number
