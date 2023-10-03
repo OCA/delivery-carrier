@@ -431,7 +431,8 @@ msgstr ""
 #: code:addons/delivery_postlogistics/postlogistics/web_service.py:0
 #, python-format
 msgid ""
-"No PostLogistics packaging services found in packaging {}, for picking {}."
+"No PostLogistics packaging services found in packaging {packaging_name}, for"
+" picking {pickin_name}."
 msgstr ""
 
 #. module: delivery_postlogistics
