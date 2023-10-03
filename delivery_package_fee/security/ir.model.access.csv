@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_delivery_package_fee,delivery.package.fee,model_delivery_package_fee,sales_team.group_sale_salesman,1,0,0,0
+access_delivery_package_fee_manager,delivery.package.fee,model_delivery_package_fee,sales_team.group_sale_manager,1,1,1,1
+access_delivery_package_fee_partner_manager,delivery.package.fee partner_manager,model_delivery_package_fee,base.group_partner_manager,1,0,0,0
+access_delivery_package_fee_stock_user,delivery.package.fee stock_user,model_delivery_package_fee,stock.group_stock_user,1,0,0,0
+access_delivery_package_fee_stock_manager,delivery.package.fee,model_delivery_package_fee,stock.group_stock_manager,1,1,1,1
