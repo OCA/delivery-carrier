@@ -2,7 +2,7 @@ This module adds the possibility to flag some measurements on package to be requ
 
 It depends on the `stock_quant_package_dimension` which adds more dimensions on packages.
 
-The required measurement can be flagged on the product packaging.
+The required measurement can be flagged on the package type.
 
 Then the dimension can be set on the wizard displayed by the Put In Pack button.
 
