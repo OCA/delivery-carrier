@@ -232,8 +232,8 @@ class PostlogisticsWebService(object):
             raise exceptions.UserError(
                 _(
                     "No PostLogistics packaging services found "
-                    "in packaging {}, for picking {}."
-                ).format(packaging.name, picking.name)
+                    "in packaging {packaging_name}, for picking {pickin_name}."
+                ).format(packaging_name=packaging.name, pickin_name=picking.name)
             )
 
         # Activate phone notification ZAW3213
