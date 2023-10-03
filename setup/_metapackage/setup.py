@@ -18,6 +18,7 @@ setuptools.setup(
         'odoo-addon-delivery_carrier_partner>=16.0dev,<16.1dev',
         'odoo-addon-delivery_cttexpress>=16.0dev,<16.1dev',
         'odoo-addon-delivery_estimated_package_quantity_by_weight>=16.0dev,<16.1dev',
+        'odoo-addon-delivery_package_fee>=16.0dev,<16.1dev',
         'odoo-addon-delivery_package_number>=16.0dev,<16.1dev',
         'odoo-addon-delivery_package_type_number_parcels>=16.0dev,<16.1dev',
         'odoo-addon-delivery_postlogistics>=16.0dev,<16.1dev',
