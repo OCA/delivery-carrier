@@ -8,20 +8,23 @@ from odoo.exceptions import ValidationError
 class StockQuantPackage(models.Model):
     _inherit = "stock.quant.package"
 
-    length_required = fields.Boolean(related="packaging_id.package_length_required")
-    width_required = fields.Boolean(related="packaging_id.package_width_required")
-    height_required = fields.Boolean(related="packaging_id.package_height_required")
-    weight_required = fields.Boolean(related="packaging_id.package_weight_required")
+    length_required = fields.Boolean(related="package_type_id.package_length_required")
+    width_required = fields.Boolean(related="package_type_id.package_width_required")
+    height_required = fields.Boolean(related="package_type_id.package_height_required")
+    weight_required = fields.Boolean(related="package_type_id.package_weight_required")
 
     # The boolean field use to check if a dimension is required are intentionally left out.
     # To not raise error when changing packaging configuration.
     @api.constrains("pack_length", "width", "height", "shipping_weight", "quant_ids")
     def _check_required_dimension(self):
         ignore_pack_content = self.env.context.get(
-            "delivery_pkg_measure__ignore_package_content"
+            "delivery_pkg_measure__ignore_package_content", False
+        )
+        force_validation = self.env.context.get(
+            "delivery_pkg_measure__force_validation_package", False
         )
         for package in self:
-            if not ignore_pack_content and not package.quant_ids:
+            if ignore_pack_content or (not force_validation and not package.quant_ids):
                 # Only validate a package when it contains goods
                 continue
             required_dimension = []

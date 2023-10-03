@@ -13,11 +13,11 @@
             <field name="package_width_required" invisible="1" />
             <label
                     for="package_length"
-                    attrs="{'invisible': ['|', ('delivery_packaging_id', '=', False), ('package_length_required', '=', False)]}"
+                    attrs="{'invisible': ['|', ('delivery_package_type_id', '=', False), ('package_length_required', '=', False)]}"
                 />
             <div
                     class="o_row"
-                    attrs="{'invisible': ['|', ('delivery_packaging_id', '=', False), ('package_length_required', '=', False)]}"
+                    attrs="{'invisible': ['|', ('delivery_package_type_id', '=', False), ('package_length_required', '=', False)]}"
                     name="package_length"
                 >
               <field name="package_length" />
@@ -25,11 +25,11 @@
             </div>
             <label
                     for="package_width"
-                    attrs="{'invisible': ['|', ('delivery_packaging_id', '=', False), ('package_width_required', '=', False)]}"
+                    attrs="{'invisible': ['|', ('delivery_package_type_id', '=', False), ('package_width_required', '=', False)]}"
                 />
             <div
                     class="o_row"
-                    attrs="{'invisible': ['|', ('delivery_packaging_id', '=', False), ('package_width_required', '=', False)]}"
+                    attrs="{'invisible': ['|', ('delivery_package_type_id', '=', False), ('package_width_required', '=', False)]}"
                     name="package_width"
                 >
               <field name="package_width" />
@@ -37,11 +37,11 @@
             </div>
             <label
                     for="package_height"
-                    attrs="{'invisible': ['|', ('delivery_packaging_id', '=', False), ('package_height_required', '=', False)]}"
+                    attrs="{'invisible': ['|', ('delivery_package_type_id', '=', False), ('package_height_required', '=', False)]}"
                 />
             <div
                     class="o_row"
-                    attrs="{'invisible': ['|', ('delivery_packaging_id', '=', False), ('package_height_required', '=', False)]}"
+                    attrs="{'invisible': ['|', ('delivery_package_type_id', '=', False), ('package_height_required', '=', False)]}"
                     name="package_height"
                 >
               <field name="package_height" />

@@ -4,8 +4,8 @@
 from odoo import fields, models
 
 
-class ProductPackaging(models.Model):
-    _inherit = "product.packaging"
+class StockPackageType(models.Model):
+    _inherit = "stock.package.type"
 
     package_height_required = fields.Boolean(string="Height required")
     package_length_required = fields.Boolean(string="Length required")

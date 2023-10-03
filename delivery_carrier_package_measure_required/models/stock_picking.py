@@ -19,3 +19,23 @@ class StockPicking(models.Model):
     def button_validate(self):
         self._check_required_package_measurement()
         return super().button_validate()
+
+    def _put_in_pack(self, move_line_ids, create_package_level=True):
+        res = super()._put_in_pack(
+            move_line_ids, create_package_level=create_package_level
+        )
+        package_length = self._context.get("choose_delivery_package_length", 0)
+        package_width = self._context.get("choose_delivery_package_width", 0)
+        package_height = self._context.get("choose_delivery_package_height", 0)
+        package_weight = self._context.get("choose_delivery_package_pack_weight", 0)
+
+        res.write(
+            {
+                "pack_length": package_length,
+                "width": package_width,
+                "height": package_height,
+                "pack_weight": package_weight,
+            }
+        )
+
+        return res
