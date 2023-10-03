@@ -12,7 +12,7 @@ class TestDeliveryCarrierPackageMeasureRequire(TestPackingCommon):
     def setUpClass(cls):
         super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
-        cls.normal_carrier = cls.env.ref("delivery.normal_delivery_carrier")
+        cls.normal_carrier = cls.env.ref("delivery.free_delivery_carrier")
         cls.uom_kg = cls.env.ref("uom.product_uom_kgm")
         cls.product_aw = cls.env["product.product"].create(
             {
@@ -23,7 +23,7 @@ class TestDeliveryCarrierPackageMeasureRequire(TestPackingCommon):
                 "uom_po_id": cls.uom_kg.id,
             }
         )
-        cls.packaging = cls.env["product.packaging"].create(
+        cls.packaging = cls.env["stock.package.type"].create(
             {"name": "Test Delivery Packaging"}
         )
         cls.env["stock.quant"]._update_available_quantity(
@@ -38,12 +38,13 @@ class TestDeliveryCarrierPackageMeasureRequire(TestPackingCommon):
                 "carrier_id": cls.normal_carrier.id,
             }
         )
-        cls.env["stock.move.line"].create(
+        cls.env["stock.move"].create(
             {
+                "name": cls.product_aw.name,
                 "product_id": cls.product_aw.id,
-                "product_uom_id": cls.uom_kg.id,
+                "product_uom_qty": 5,
+                "product_uom": cls.uom_kg.id,
                 "picking_id": cls.pick.id,
-                "qty_done": 5,
                 "location_id": cls.stock_location.id,
                 "location_dest_id": cls.customer_location.id,
             }
@@ -58,14 +59,16 @@ class TestDeliveryCarrierPackageMeasureRequire(TestPackingCommon):
         )
         pack_wiz.action_put_in_pack()
         cls.package = cls.pick.move_line_ids.mapped("result_package_id")
-        cls.package.packaging_id = cls.packaging
+        cls.package.package_type_id = cls.packaging
 
     def test_force_check_required_measurement(self):
         self.packaging.package_length_required = True
         # Picking is not done no validation error
         self.pick._check_required_package_measurement()
         # Force validation error raised
-        pick = self.pick.with_context(delivery_pkg_measure__ignore_package_content=True)
+        pick = self.pick.with_context(
+            delivery_pkg_measure__force_validation_package=True
+        )
         with self.assertRaises(ValidationError):
             pick.button_validate()
 

@@ -4,7 +4,7 @@
     Allow the configuration of which package measurements are required
     on a delivery carrier basis.
     """,
-    "version": "14.0.1.0.2",
+    "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "Camptocamp, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/delivery-carrier",
@@ -15,7 +15,7 @@
         "stock_quant_package_dimension",
     ],
     "data": [
-        "views/product_packaging.xml",
+        "views/stock_package_type_views.xml",
         "wizard/choose_delivery_package.xml",
     ],
     "installable": True,

@@ -8,10 +8,10 @@ from odoo.exceptions import ValidationError
 class StockQuantPackage(models.Model):
     _inherit = "stock.quant.package"
 
-    length_required = fields.Boolean(related="packaging_id.package_length_required")
-    width_required = fields.Boolean(related="packaging_id.package_width_required")
-    height_required = fields.Boolean(related="packaging_id.package_height_required")
-    weight_required = fields.Boolean(related="packaging_id.package_weight_required")
+    length_required = fields.Boolean(related="package_type_id.package_length_required")
+    width_required = fields.Boolean(related="package_type_id.package_width_required")
+    height_required = fields.Boolean(related="package_type_id.package_height_required")
+    weight_required = fields.Boolean(related="package_type_id.package_weight_required")
 
     # The boolean field use to check if a dimension is required are intentionally left out.
     # To not raise error when changing packaging configuration.
