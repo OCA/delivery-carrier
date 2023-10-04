@@ -11,7 +11,13 @@ class SaleOrder(models.Model):
 
         Return 1 by default.
         """
-        return 1
+        res = 1
+        if (
+            package_fee.package_type_id
+            and package_fee.package_type_id != package.package_type_id
+        ):
+            res = 0
+        return res
 
     def _package_fee_line_qty_and_price(self, package_fee, picking):
         fee_product = package_fee.product_id
