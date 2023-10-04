@@ -18,3 +18,4 @@ class DeliveryPackageFee(models.Model):
         ondelete="restrict",
     )
     active = fields.Boolean(default=True)
+    package_type_id = fields.Many2one(comodel_name="stock.package.type")

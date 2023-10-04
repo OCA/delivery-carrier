@@ -57,6 +57,9 @@ class TestPackageFee(TransactionCase):
         cls.pack1 = cls.env["stock.quant.package"].create({})
         cls.pack2 = cls.env["stock.quant.package"].create({})
 
+        cls.sptype1 = cls.env["stock.package.type"].create({"name": "SPType 1"})
+        cls.sptype2 = cls.env["stock.package.type"].create({"name": "SPType 2"})
+
     @classmethod
     def _update_qty_in_location(cls, location, product, quantity):
         quants = cls.env["stock.quant"]._gather(product, location, strict=True)
@@ -389,6 +392,185 @@ class TestPackageFee(TransactionCase):
                     "product_id": self.fee2.id,
                     # one unit per package
                     "product_uom_qty": 2.0,
+                    "price_unit": 4.0,
+                    "name": "Service Fee ({})".format(picking.name),
+                },
+            ],
+        )
+
+    def test_package_with_type_no_fee_line(self):
+        """Assign all fee lines to a package type, no fee line added to SO"""
+        self.carrier.package_fee_ids.write({"package_type_id": self.sptype1.id})
+        picking = self.sale.picking_ids
+        self.assertEqual(picking.state, "assigned")
+        picking.move_line_ids[0].result_package_id = self.pack1
+        picking.move_line_ids[0].qty_done = 10.0
+        picking.move_line_ids[1].result_package_id = self.pack2
+        picking.move_line_ids[1].qty_done = 10.0
+        picking._action_done()
+        self.assertEqual(picking.state, "done")
+
+        self.assertRecordValues(
+            self.sale.order_line,
+            [
+                {
+                    "product_id": self.product1.id,
+                    "product_uom_qty": 10.0,
+                    "price_unit": 1.0,
+                    "name": "Product 1",
+                },
+                {
+                    "product_id": self.product2.id,
+                    "product_uom_qty": 10.0,
+                    "price_unit": 1.0,
+                    "name": "Product 2",
+                },
+                {
+                    "product_id": self.carrier_product.id,
+                    "product_uom_qty": 1.0,
+                    "price_unit": 10.0,
+                    "name": "Delivery",
+                },
+            ],
+        )
+
+    def test_package_with_type_one_fee_line(self):
+        """Assign all fee lines to a package type, but one fee line added to SO"""
+        self.carrier.package_fee_ids[0].package_type_id = self.sptype1
+        self.carrier.package_fee_ids[1].package_type_id = self.sptype2
+        self.pack1.package_type_id = self.sptype1
+        picking = self.sale.picking_ids
+        self.assertEqual(picking.state, "assigned")
+        picking.move_line_ids[0].result_package_id = self.pack1
+        picking.move_line_ids[0].qty_done = 10.0
+        picking.move_line_ids[1].result_package_id = self.pack2
+        picking.move_line_ids[1].qty_done = 10.0
+        picking._action_done()
+        self.assertEqual(picking.state, "done")
+
+        self.assertRecordValues(
+            self.sale.order_line,
+            [
+                {
+                    "product_id": self.product1.id,
+                    "product_uom_qty": 10.0,
+                    "price_unit": 1.0,
+                    "name": "Product 1",
+                },
+                {
+                    "product_id": self.product2.id,
+                    "product_uom_qty": 10.0,
+                    "price_unit": 1.0,
+                    "name": "Product 2",
+                },
+                {
+                    "product_id": self.carrier_product.id,
+                    "product_uom_qty": 1.0,
+                    "price_unit": 10.0,
+                    "name": "Delivery",
+                },
+                # additional package fee lines from here
+                {
+                    "product_id": self.fee1.id,
+                    "product_uom_qty": 1.0,
+                    "price_unit": 3.0,
+                    "name": "LSVA Fee ({})".format(picking.name),
+                },
+            ],
+        )
+
+    def test_package_with_type_one_fee_line_qty(self):
+        """Assign all fee lines to a package type, but one fee line added to SO, qty=2"""
+        self.carrier.package_fee_ids[0].package_type_id = self.sptype1
+        self.carrier.package_fee_ids[1].package_type_id = self.sptype2
+        self.pack1.package_type_id = self.sptype1
+        self.pack2.package_type_id = self.sptype1
+        picking = self.sale.picking_ids
+        self.assertEqual(picking.state, "assigned")
+        picking.move_line_ids[0].result_package_id = self.pack1
+        picking.move_line_ids[0].qty_done = 10.0
+        picking.move_line_ids[1].result_package_id = self.pack2
+        picking.move_line_ids[1].qty_done = 10.0
+        picking._action_done()
+        self.assertEqual(picking.state, "done")
+
+        self.assertRecordValues(
+            self.sale.order_line,
+            [
+                {
+                    "product_id": self.product1.id,
+                    "product_uom_qty": 10.0,
+                    "price_unit": 1.0,
+                    "name": "Product 1",
+                },
+                {
+                    "product_id": self.product2.id,
+                    "product_uom_qty": 10.0,
+                    "price_unit": 1.0,
+                    "name": "Product 2",
+                },
+                {
+                    "product_id": self.carrier_product.id,
+                    "product_uom_qty": 1.0,
+                    "price_unit": 10.0,
+                    "name": "Delivery",
+                },
+                # additional package fee lines from here
+                {
+                    "product_id": self.fee1.id,
+                    "product_uom_qty": 2.0,
+                    "price_unit": 3.0,
+                    "name": "LSVA Fee ({})".format(picking.name),
+                },
+            ],
+        )
+
+    def test_package_with_type_two_fee_line_qty(self):
+        """Assign all fee lines to a package type, 2 fee lines added to SO"""
+        self.carrier.package_fee_ids[0].package_type_id = self.sptype1
+        self.carrier.package_fee_ids[1].package_type_id = self.sptype2
+        self.pack1.package_type_id = self.sptype1
+        self.pack2.package_type_id = self.sptype2
+        picking = self.sale.picking_ids
+        self.assertEqual(picking.state, "assigned")
+        picking.move_line_ids[0].result_package_id = self.pack1
+        picking.move_line_ids[0].qty_done = 10.0
+        picking.move_line_ids[1].result_package_id = self.pack2
+        picking.move_line_ids[1].qty_done = 10.0
+        picking._action_done()
+        self.assertEqual(picking.state, "done")
+
+        self.assertRecordValues(
+            self.sale.order_line,
+            [
+                {
+                    "product_id": self.product1.id,
+                    "product_uom_qty": 10.0,
+                    "price_unit": 1.0,
+                    "name": "Product 1",
+                },
+                {
+                    "product_id": self.product2.id,
+                    "product_uom_qty": 10.0,
+                    "price_unit": 1.0,
+                    "name": "Product 2",
+                },
+                {
+                    "product_id": self.carrier_product.id,
+                    "product_uom_qty": 1.0,
+                    "price_unit": 10.0,
+                    "name": "Delivery",
+                },
+                # additional package fee lines from here
+                {
+                    "product_id": self.fee1.id,
+                    "product_uom_qty": 1.0,
+                    "price_unit": 3.0,
+                    "name": "LSVA Fee ({})".format(picking.name),
+                },
+                {
+                    "product_id": self.fee2.id,
+                    "product_uom_qty": 1.0,
                     "price_unit": 4.0,
                     "name": "Service Fee ({})".format(picking.name),
                 },
