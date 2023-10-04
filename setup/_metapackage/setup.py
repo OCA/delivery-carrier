@@ -9,6 +9,7 @@ setuptools.setup(
     version=version,
     install_requires=[
         'odoo-addon-base_delivery_carrier_label>=16.0dev,<16.1dev',
+        'odoo-addon-carrier_account_environment>=16.0dev,<16.1dev',
         'odoo-addon-delivery_auto_refresh>=16.0dev,<16.1dev',
         'odoo-addon-delivery_automatic_package>=16.0dev,<16.1dev',
         'odoo-addon-delivery_carrier_account>=16.0dev,<16.1dev',
@@ -18,6 +19,7 @@ setuptools.setup(
         'odoo-addon-delivery_carrier_partner>=16.0dev,<16.1dev',
         'odoo-addon-delivery_cttexpress>=16.0dev,<16.1dev',
         'odoo-addon-delivery_estimated_package_quantity_by_weight>=16.0dev,<16.1dev',
+        'odoo-addon-delivery_package_fee>=16.0dev,<16.1dev',
         'odoo-addon-delivery_package_number>=16.0dev,<16.1dev',
         'odoo-addon-delivery_package_type_number_parcels>=16.0dev,<16.1dev',
         'odoo-addon-delivery_postlogistics>=16.0dev,<16.1dev',
