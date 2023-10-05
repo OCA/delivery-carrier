@@ -38,6 +38,7 @@ addon | version | maintainers | summary
 [delivery_postlogistics](delivery_postlogistics/) | 16.0.1.0.3 |  | Print PostLogistics shipping labels using the Barcode web service
 [delivery_postlogistics_server_env](delivery_postlogistics_server_env/) | 16.0.1.0.0 |  | Server Environment layer for Delivery Postlogistics
 [delivery_price_method](delivery_price_method/) | 16.0.1.0.0 |  | Provides fields to be able to contemplate the tracking statesand also adds a global fields
+[delivery_roulier](delivery_roulier/) | 16.0.1.0.0 | [![florian-dacosta](https://github.com/florian-dacosta.png?size=30px)](https://github.com/florian-dacosta) | Integration of multiple carriers
 [delivery_state](delivery_state/) | 16.0.1.1.0 |  | Provides fields to be able to contemplate the tracking statesand also adds a global fields
 [partner_delivery_zone](partner_delivery_zone/) | 16.0.1.0.0 |  | This module allows to create partner delivery zones for physical products
 [stock_picking_delivery_link](stock_picking_delivery_link/) | 16.0.1.1.0 |  | Adds link to the delivery on all intermediate operations.
