@@ -14,6 +14,8 @@ class StockImmediateTransfer(models.TransientModel):
     @api.depends("pick_ids")
     def _compute_ask_number_of_packages(self):
         for item in self:
+            # we use ._origin because if not, a NewId is used for the checks and the returned
+            # value of package_ids is wrong.
             item.ask_number_of_packages = bool(
                 item.pick_ids.carrier_id and not item.pick_ids._origin.package_ids
             )
