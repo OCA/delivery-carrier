@@ -198,6 +198,8 @@ msgstr "Fecha de entrega"
 #. module: delivery_cttexpress
 #: model:ir.model.fields,field_description:delivery_cttexpress.field_cttexpress_manifest_wizard__display_name
 #: model:ir.model.fields,field_description:delivery_cttexpress.field_cttexpress_pickup_wizard__display_name
+#: model:ir.model.fields,field_description:delivery_cttexpress.field_delivery_carrier__display_name
+#: model:ir.model.fields,field_description:delivery_cttexpress.field_stock_picking__display_name
 msgid "Display Name"
 msgstr "Nombre mostrado"
 
@@ -275,6 +277,8 @@ msgstr "Obtener el manifiesto de CTT Express para un rango de fechas"
 #. module: delivery_cttexpress
 #: model:ir.model.fields,field_description:delivery_cttexpress.field_cttexpress_manifest_wizard__id
 #: model:ir.model.fields,field_description:delivery_cttexpress.field_cttexpress_pickup_wizard__id
+#: model:ir.model.fields,field_description:delivery_cttexpress.field_delivery_carrier__id
+#: model:ir.model.fields,field_description:delivery_cttexpress.field_stock_picking__id
 msgid "ID"
 msgstr ""
 
@@ -286,6 +290,8 @@ msgstr "Formato de etiqueta"
 #. module: delivery_cttexpress
 #: model:ir.model.fields,field_description:delivery_cttexpress.field_cttexpress_manifest_wizard____last_update
 #: model:ir.model.fields,field_description:delivery_cttexpress.field_cttexpress_pickup_wizard____last_update
+#: model:ir.model.fields,field_description:delivery_cttexpress.field_delivery_carrier____last_update
+#: model:ir.model.fields,field_description:delivery_cttexpress.field_stock_picking____last_update
 msgid "Last Modified on"
 msgstr "Última modificación en"
 
@@ -434,10 +440,12 @@ msgstr "Comprobar conexión"
 #: code:addons/delivery_cttexpress/models/delivery_carrier.py:0
 #, python-format
 msgid ""
-"This CTT Express service (%s) isn't allowed for this account configuration. Please choose one of the followings\n"
+"This CTT Express service (%s) isn't allowed for this account configuration. "
+"Please choose one of the followings\n"
 "%s"
 msgstr ""
-"Este servicio de CTT Express (%s) no está permitido para esta configuración de cuenta. Por favor, escoja uno de los siguientes\n"
+"Este servicio de CTT Express (%s) no está permitido para esta configuración "
+"de cuenta. Por favor, escoja uno de los siguientes\n"
 "%s"
 
 #. module: delivery_cttexpress
