@@ -44,14 +44,18 @@ msgstr "Servicio adicional"
 #. module: delivery_postlogistics
 #: model:ir.model.fields,help:delivery_postlogistics.field_postlogistics_delivery_carrier_template_option__description
 msgid "Allow to define a more complete description than in the name field."
-msgstr "Permite definir un descripción más completa que en el campo del nombre."
+msgstr ""
+"Permite definir un descripción más completa que en el campo del nombre."
 
 #. module: delivery_postlogistics
 #: model:ir.model.fields,help:delivery_postlogistics.field_delivery_carrier__postlogistics_tracking_format
 msgid ""
-"Allows you to define how the ItemNumber (the last 8 digits) of the tracking number will be generated:\n"
+"Allows you to define how the ItemNumber (the last 8 digits) of the tracking "
+"number will be generated:\n"
 "- Default postlogistics numbers: The webservice generates it for you.\n"
-"- Picking number with pack counter: Generate it using the digits of picking name and add the pack number. 2 digits forpack number and 6 digits for picking number. (eg. 07000042 for picking 42 and 7th pack"
+"- Picking number with pack counter: Generate it using the digits of picking "
+"name and add the pack number. 2 digits forpack number and 6 digits for "
+"picking number. (eg. 07000042 for picking 42 and 7th pack"
 msgstr ""
 "Permite definir cómo se generará el número de artículo (los últimos 8 "
 "dígitos) del número de seguimiento:\n"
@@ -458,10 +462,9 @@ msgstr "Nombre"
 #: code:addons/delivery_postlogistics/postlogistics/web_service.py:0
 #, python-format
 msgid ""
-"No PostLogistics packaging services found in packaging {}, for picking {}."
+"No PostLogistics packaging services found in packaging {packaging_name}, for "
+"picking {pickin_name}."
 msgstr ""
-"No se encontraron servicios de embalaje de PostLogistics en el embalaje {}, "
-"para recoger {}."
 
 #. module: delivery_postlogistics
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_license__number
@@ -859,12 +862,12 @@ msgstr ""
 #, python-format
 msgid ""
 "You need to configure %s. You can set a default value in Inventory / "
-"Configuration / Delivery / Shipping Methods. You can also set it on delivery"
-" method or on the picking."
+"Configuration / Delivery / Shipping Methods. You can also set it on delivery "
+"method or on the picking."
 msgstr ""
-"Necesita configurar %s. Puede establecer un valor por defecto en Inventario /"
-" Configuración / Entrega / Métodos de envío. También puede establecerlo en "
-"el método de entrega o en la recogida."
+"Necesita configurar %s. Puede establecer un valor por defecto en "
+"Inventario / Configuración / Entrega / Métodos de envío. También puede "
+"establecerlo en el método de entrega o en la recogida."
 
 #. module: delivery_postlogistics
 #: model_terms:ir.ui.view,arch_db:delivery_postlogistics.delivery_carrier_postlogistics_inherit_view
@@ -916,3 +919,10 @@ msgstr "sPDF"
 #: model_terms:ir.ui.view,arch_db:delivery_postlogistics.stock_package_type_form_delivery
 msgid "the documentation"
 msgstr "la documentación"
+
+#, python-format
+#~ msgid ""
+#~ "No PostLogistics packaging services found in packaging {}, for picking {}."
+#~ msgstr ""
+#~ "No se encontraron servicios de embalaje de PostLogistics en el embalaje "
+#~ "{}, para recoger {}."
