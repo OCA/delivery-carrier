@@ -105,7 +105,8 @@ msgstr "Métodos de envío"
 #. module: delivery_carrier_account
 #: model:ir.model.fields,help:delivery_carrier_account.field_carrier_account__delivery_type
 msgid "This field may be used to link an account to a carrier"
-msgstr "Este campo puede utilizarse para vincular una cuenta a un transportista"
+msgstr ""
+"Este campo puede utilizarse para vincular una cuenta a un transportista"
 
 #. module: delivery_carrier_account
 #: model:ir.model,name:delivery_carrier_account.model_stock_picking
