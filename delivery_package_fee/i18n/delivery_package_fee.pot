@@ -83,6 +83,11 @@ msgid "Package Fees"
 msgstr ""
 
 #. module: delivery_package_fee
+#: model:ir.model.fields,field_description:delivery_package_fee.field_delivery_package_fee__package_type_id
+msgid "Package Type"
+msgstr ""
+
+#. module: delivery_package_fee
 #: model:ir.model.fields,field_description:delivery_package_fee.field_delivery_package_fee__product_id
 msgid "Product"
 msgstr ""
