@@ -98,6 +98,7 @@ msgid "CTT Express Configuration"
 msgstr "Configuración de CTT Express"
 
 #. module: delivery_cttexpress
+#. odoo-python
 #: code:addons/delivery_cttexpress/models/delivery_carrier.py:0
 #, python-format
 msgid ""
@@ -136,12 +137,14 @@ msgid "CTT Express Pickup Request"
 msgstr "Solicitud de recogida CTT Express"
 
 #. module: delivery_cttexpress
+#. odoo-python
 #: code:addons/delivery_cttexpress/models/stock_picking.py:0
 #, python-format
 msgid "CTT Express label for %s"
 msgstr "Etiqueta CTT Express para %s"
 
 #. module: delivery_cttexpress
+#. odoo-python
 #: code:addons/delivery_cttexpress/models/delivery_carrier.py:0
 #, python-format
 msgid "CTT Shipping Documents"
@@ -431,6 +434,7 @@ msgid "Test connection"
 msgstr "Comprobar conexión"
 
 #. module: delivery_cttexpress
+#. odoo-python
 #: code:addons/delivery_cttexpress/models/delivery_carrier.py:0
 #, python-format
 msgid ""
