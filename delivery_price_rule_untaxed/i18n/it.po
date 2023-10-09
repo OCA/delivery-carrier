@@ -18,14 +18,7 @@ msgstr ""
 "X-Generator: Weblate 4.3.2\n"
 
 #. module: delivery_price_rule_untaxed
-#: model:ir.model,name:delivery_price_rule_untaxed.model_delivery_carrier
-msgid "Carrier"
-msgstr "Vettore"
-
-#. module: delivery_price_rule_untaxed
 #: model:delivery.carrier,name:delivery_price_rule_untaxed.untaxed_delivery_carrier
-#: model:product.product,name:delivery_price_rule_untaxed.untaxed_delivery_carrier_product_product
-#: model:product.template,name:delivery_price_rule_untaxed.untaxed_delivery_carrier_product_template
 msgid "Carrier price on untaxed"
 msgstr "Costo trasporto su imponibile"
 
@@ -35,11 +28,51 @@ msgid "Delivery Price Rules"
 msgstr "Regole sui costi di consegna"
 
 #. module: delivery_price_rule_untaxed
-#: code:addons/delivery_price_rule_untaxed/models/delivery_carrier.py:52
-#, python-format
-msgid ""
-"Selected product in the delivery method doesn't fulfill any of the delivery "
-"carrier(s) criteria."
+#: model:ir.model.fields,field_description:delivery_price_rule_untaxed.field_delivery_carrier__display_name
+#: model:ir.model.fields,field_description:delivery_price_rule_untaxed.field_delivery_price_rule__display_name
+msgid "Display Name"
 msgstr ""
-"Il prodotto indicato nel metodo di consegna non corrisponde pienamente a "
-"nessun criterio del/i vettore/i."
+
+#. module: delivery_price_rule_untaxed
+#: model:ir.model.fields,field_description:delivery_price_rule_untaxed.field_delivery_carrier__id
+#: model:ir.model.fields,field_description:delivery_price_rule_untaxed.field_delivery_price_rule__id
+msgid "ID"
+msgstr ""
+
+#. module: delivery_price_rule_untaxed
+#: model:ir.model.fields,field_description:delivery_price_rule_untaxed.field_delivery_carrier____last_update
+#: model:ir.model.fields,field_description:delivery_price_rule_untaxed.field_delivery_price_rule____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: delivery_price_rule_untaxed
+#: model:ir.model,name:delivery_price_rule_untaxed.model_delivery_carrier
+msgid "Shipping Methods"
+msgstr ""
+
+#. module: delivery_price_rule_untaxed
+#: model:ir.model.fields.selection,name:delivery_price_rule_untaxed.selection__delivery_price_rule__variable__untaxed_price
+#: model:ir.model.fields.selection,name:delivery_price_rule_untaxed.selection__delivery_price_rule__variable_factor__untaxed_price
+msgid "Untaxed price"
+msgstr ""
+
+#. module: delivery_price_rule_untaxed
+#: model:ir.model.fields,field_description:delivery_price_rule_untaxed.field_delivery_price_rule__variable
+msgid "Variable"
+msgstr ""
+
+#. module: delivery_price_rule_untaxed
+#: model:ir.model.fields,field_description:delivery_price_rule_untaxed.field_delivery_price_rule__variable_factor
+msgid "Variable Factor"
+msgstr ""
+
+#~ msgid "Carrier"
+#~ msgstr "Vettore"
+
+#, python-format
+#~ msgid ""
+#~ "Selected product in the delivery method doesn't fulfill any of the "
+#~ "delivery carrier(s) criteria."
+#~ msgstr ""
+#~ "Il prodotto indicato nel metodo di consegna non corrisponde pienamente a "
+#~ "nessun criterio del/i vettore/i."
