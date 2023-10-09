@@ -30,7 +30,7 @@ msgstr "Appliquer un transporteur et ses options"
 
 #. module: delivery_carrier_label_batch
 #: model:ir.model,name:delivery_carrier_label_batch.model_stock_picking_batch
-msgid "Batch Picking"
+msgid "Batch Transfer"
 msgstr ""
 
 #. module: delivery_carrier_label_batch
@@ -74,6 +74,7 @@ msgstr "Livraison"
 #. module: delivery_carrier_label_batch
 #: model:ir.model.fields,field_description:delivery_carrier_label_batch.field_delivery_carrier_label_generate__display_name
 #: model:ir.model.fields,field_description:delivery_carrier_label_batch.field_picking_batch_apply_carrier__display_name
+#: model:ir.model.fields,field_description:delivery_carrier_label_batch.field_stock_picking_batch__display_name
 msgid "Display Name"
 msgstr "Nom affiché"
 
@@ -105,6 +106,7 @@ msgstr "Générer de nouvelles étiquettes"
 #. module: delivery_carrier_label_batch
 #: model:ir.model.fields,field_description:delivery_carrier_label_batch.field_delivery_carrier_label_generate__id
 #: model:ir.model.fields,field_description:delivery_carrier_label_batch.field_picking_batch_apply_carrier__id
+#: model:ir.model.fields,field_description:delivery_carrier_label_batch.field_stock_picking_batch__id
 msgid "ID"
 msgstr "ID"
 
@@ -120,7 +122,7 @@ msgstr ""
 "Par défaut l'étiquette déjà existante sera utilisée."
 
 #. module: delivery_carrier_label_batch
-#: code:addons/delivery_carrier_label_batch/wizard/generate_labels.py:216
+#: code:addons/delivery_carrier_label_batch/wizard/generate_labels.py:0
 #, python-format
 msgid ""
 "Impossible to generate the labels. Those pickings don't have packages:\n"
@@ -130,6 +132,7 @@ msgstr ""
 #. module: delivery_carrier_label_batch
 #: model:ir.model.fields,field_description:delivery_carrier_label_batch.field_delivery_carrier_label_generate____last_update
 #: model:ir.model.fields,field_description:delivery_carrier_label_batch.field_picking_batch_apply_carrier____last_update
+#: model:ir.model.fields,field_description:delivery_carrier_label_batch.field_stock_picking_batch____last_update
 msgid "Last Modified on"
 msgstr "Dernière modification le"
 
@@ -146,13 +149,13 @@ msgid "Last Updated on"
 msgstr "Mise à jour le"
 
 #. module: delivery_carrier_label_batch
-#: code:addons/delivery_carrier_label_batch/wizard/generate_labels.py:235
+#: code:addons/delivery_carrier_label_batch/wizard/generate_labels.py:0
 #, python-format
 msgid "No picking batch selected"
 msgstr "Pas de lot de préparation sélectionné."
 
 #. module: delivery_carrier_label_batch
-#: code:addons/delivery_carrier_label_batch/wizard/apply_carrier.py:31
+#: code:addons/delivery_carrier_label_batch/wizard/apply_carrier.py:0
 #, python-format
 msgid "No selected picking batch"
 msgstr ""
@@ -164,7 +167,7 @@ msgid "Options"
 msgstr "Options"
 
 #. module: delivery_carrier_label_batch
-#: code:addons/delivery_carrier_label_batch/wizard/generate_labels.py:91
+#: code:addons/delivery_carrier_label_batch/wizard/generate_labels.py:0
 #, python-format
 msgid "Pack: %s"
 msgstr "Colis: %s"
@@ -180,7 +183,7 @@ msgid "Picking Batch Apply Carrier"
 msgstr "Applique un transporteur sur des lots de préparation"
 
 #. module: delivery_carrier_label_batch
-#: code:addons/delivery_carrier_label_batch/wizard/generate_labels.py:90
+#: code:addons/delivery_carrier_label_batch/wizard/generate_labels.py:0
 #, python-format
 msgid "Picking: %s"
 msgstr ""
@@ -191,7 +194,7 @@ msgid "Set Options"
 msgstr "Appliquer les options"
 
 #. module: delivery_carrier_label_batch
-#: code:addons/delivery_carrier_label_batch/wizard/generate_labels.py:185
+#: code:addons/delivery_carrier_label_batch/wizard/generate_labels.py:0
 #, python-format
 msgid ""
 "Some labels couldn't be generated. Please correct following errors and "
@@ -209,7 +212,7 @@ msgstr ""
 "étiquettes"
 
 #. module: delivery_carrier_label_batch
-#: code:addons/delivery_carrier_label_batch/models/stock_batch_picking.py:71
+#: code:addons/delivery_carrier_label_batch/models/stock_batch_picking.py:0
 #, python-format
 msgid "User Error !"
 msgstr ""
@@ -224,7 +227,7 @@ msgstr ""
 "livraisons du bon de préparation"
 
 #. module: delivery_carrier_label_batch
-#: code:addons/delivery_carrier_label_batch/models/stock_batch_picking.py:72
+#: code:addons/delivery_carrier_label_batch/models/stock_batch_picking.py:0
 #, python-format
 msgid ""
 "You can not remove a mandatory option.\n"
