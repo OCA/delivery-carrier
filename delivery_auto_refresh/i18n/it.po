@@ -20,16 +20,30 @@ msgstr ""
 "X-Generator: Weblate 4.3.2\n"
 
 #. module: delivery_auto_refresh
-#: model:ir.model.fields,field_description:delivery_auto_refresh.field_sale_order__carrier_id
-msgid "Delivery Method"
-msgstr "Metodo di consegna"
+#: model:ir.model.fields,field_description:delivery_auto_refresh.field_sale_order__available_carrier_ids
+msgid "Available Carrier"
+msgstr ""
 
 #. module: delivery_auto_refresh
-#: model:ir.model.fields,help:delivery_auto_refresh.field_sale_order__carrier_id
-msgid "Fill this field if you plan to invoice the shipping based on picking."
+#: model:ir.model.fields,field_description:delivery_auto_refresh.field_sale_order__display_name
+#: model:ir.model.fields,field_description:delivery_auto_refresh.field_sale_order_line__display_name
+#: model:ir.model.fields,field_description:delivery_auto_refresh.field_stock_picking__display_name
+msgid "Display Name"
 msgstr ""
-"Valorizza questo campo se intendi fatturare la spedizione basata sul "
-"trasferimento."
+
+#. module: delivery_auto_refresh
+#: model:ir.model.fields,field_description:delivery_auto_refresh.field_sale_order__id
+#: model:ir.model.fields,field_description:delivery_auto_refresh.field_sale_order_line__id
+#: model:ir.model.fields,field_description:delivery_auto_refresh.field_stock_picking__id
+msgid "ID"
+msgstr ""
+
+#. module: delivery_auto_refresh
+#: model:ir.model.fields,field_description:delivery_auto_refresh.field_sale_order____last_update
+#: model:ir.model.fields,field_description:delivery_auto_refresh.field_sale_order_line____last_update
+#: model:ir.model.fields,field_description:delivery_auto_refresh.field_stock_picking____last_update
+msgid "Last Modified on"
+msgstr ""
 
 #. module: delivery_auto_refresh
 #: model:ir.model,name:delivery_auto_refresh.model_sale_order
@@ -45,6 +59,15 @@ msgstr "Riga ordine di vendita"
 #: model:ir.model,name:delivery_auto_refresh.model_stock_picking
 msgid "Transfer"
 msgstr "Trasferimento"
+
+#~ msgid "Delivery Method"
+#~ msgstr "Metodo di consegna"
+
+#~ msgid ""
+#~ "Fill this field if you plan to invoice the shipping based on picking."
+#~ msgstr ""
+#~ "Valorizza questo campo se intendi fatturare la spedizione basata sul "
+#~ "trasferimento."
 
 #, fuzzy
 #~ msgid "Sale Order"
