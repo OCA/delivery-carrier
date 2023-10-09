@@ -150,6 +150,13 @@ msgid "Credentials"
 msgstr ""
 
 #. module: delivery_postlogistics
+#. odoo-python
+#: code:addons/delivery_postlogistics/postlogistics/web_service.py:0
+#, python-format
+msgid "Customer name is required."
+msgstr ""
+
+#. module: delivery_postlogistics
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_shipping_label__db_datas
 msgid "Database Data"
 msgstr ""
