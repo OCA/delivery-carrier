@@ -17,6 +17,21 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: delivery_carrier_partner
+#: model:ir.model.fields,field_description:delivery_carrier_partner.field_delivery_carrier__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: delivery_carrier_partner
+#: model:ir.model.fields,field_description:delivery_carrier_partner.field_delivery_carrier__id
+msgid "ID"
+msgstr ""
+
+#. module: delivery_carrier_partner
+#: model:ir.model.fields,field_description:delivery_carrier_partner.field_delivery_carrier____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: delivery_carrier_partner
 #: model:ir.model,name:delivery_carrier_partner.model_delivery_carrier
 msgid "Shipping Methods"
 msgstr ""
