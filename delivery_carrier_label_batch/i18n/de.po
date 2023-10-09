@@ -31,7 +31,7 @@ msgstr ""
 
 #. module: delivery_carrier_label_batch
 #: model:ir.model,name:delivery_carrier_label_batch.model_stock_picking_batch
-msgid "Batch Picking"
+msgid "Batch Transfer"
 msgstr ""
 
 #. module: delivery_carrier_label_batch
@@ -75,6 +75,7 @@ msgstr "Lieferung"
 #. module: delivery_carrier_label_batch
 #: model:ir.model.fields,field_description:delivery_carrier_label_batch.field_delivery_carrier_label_generate__display_name
 #: model:ir.model.fields,field_description:delivery_carrier_label_batch.field_picking_batch_apply_carrier__display_name
+#: model:ir.model.fields,field_description:delivery_carrier_label_batch.field_stock_picking_batch__display_name
 msgid "Display Name"
 msgstr ""
 
@@ -106,6 +107,7 @@ msgstr ""
 #. module: delivery_carrier_label_batch
 #: model:ir.model.fields,field_description:delivery_carrier_label_batch.field_delivery_carrier_label_generate__id
 #: model:ir.model.fields,field_description:delivery_carrier_label_batch.field_picking_batch_apply_carrier__id
+#: model:ir.model.fields,field_description:delivery_carrier_label_batch.field_stock_picking_batch__id
 msgid "ID"
 msgstr "ID"
 
@@ -118,7 +120,7 @@ msgid ""
 msgstr ""
 
 #. module: delivery_carrier_label_batch
-#: code:addons/delivery_carrier_label_batch/wizard/generate_labels.py:216
+#: code:addons/delivery_carrier_label_batch/wizard/generate_labels.py:0
 #, python-format
 msgid ""
 "Impossible to generate the labels. Those pickings don't have packages:\n"
@@ -128,6 +130,7 @@ msgstr ""
 #. module: delivery_carrier_label_batch
 #: model:ir.model.fields,field_description:delivery_carrier_label_batch.field_delivery_carrier_label_generate____last_update
 #: model:ir.model.fields,field_description:delivery_carrier_label_batch.field_picking_batch_apply_carrier____last_update
+#: model:ir.model.fields,field_description:delivery_carrier_label_batch.field_stock_picking_batch____last_update
 msgid "Last Modified on"
 msgstr ""
 
@@ -144,13 +147,13 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: delivery_carrier_label_batch
-#: code:addons/delivery_carrier_label_batch/wizard/generate_labels.py:235
+#: code:addons/delivery_carrier_label_batch/wizard/generate_labels.py:0
 #, python-format
 msgid "No picking batch selected"
 msgstr ""
 
 #. module: delivery_carrier_label_batch
-#: code:addons/delivery_carrier_label_batch/wizard/apply_carrier.py:31
+#: code:addons/delivery_carrier_label_batch/wizard/apply_carrier.py:0
 #, python-format
 msgid "No selected picking batch"
 msgstr ""
@@ -162,7 +165,7 @@ msgid "Options"
 msgstr "Einstellungen"
 
 #. module: delivery_carrier_label_batch
-#: code:addons/delivery_carrier_label_batch/wizard/generate_labels.py:91
+#: code:addons/delivery_carrier_label_batch/wizard/generate_labels.py:0
 #, python-format
 msgid "Pack: %s"
 msgstr ""
@@ -178,7 +181,7 @@ msgid "Picking Batch Apply Carrier"
 msgstr ""
 
 #. module: delivery_carrier_label_batch
-#: code:addons/delivery_carrier_label_batch/wizard/generate_labels.py:90
+#: code:addons/delivery_carrier_label_batch/wizard/generate_labels.py:0
 #, python-format
 msgid "Picking: %s"
 msgstr ""
@@ -189,7 +192,7 @@ msgid "Set Options"
 msgstr "Optionen setzen"
 
 #. module: delivery_carrier_label_batch
-#: code:addons/delivery_carrier_label_batch/wizard/generate_labels.py:185
+#: code:addons/delivery_carrier_label_batch/wizard/generate_labels.py:0
 #, python-format
 msgid ""
 "Some labels couldn't be generated. Please correct following errors and "
@@ -205,7 +208,7 @@ msgid ""
 msgstr ""
 
 #. module: delivery_carrier_label_batch
-#: code:addons/delivery_carrier_label_batch/models/stock_batch_picking.py:71
+#: code:addons/delivery_carrier_label_batch/models/stock_batch_picking.py:0
 #, python-format
 msgid "User Error !"
 msgstr "Anwenderfehler!"
@@ -219,7 +222,7 @@ msgstr ""
 "Warnung: Diese Einstellungen zur Kommissionierung überschreiben vorherige"
 
 #. module: delivery_carrier_label_batch
-#: code:addons/delivery_carrier_label_batch/models/stock_batch_picking.py:72
+#: code:addons/delivery_carrier_label_batch/models/stock_batch_picking.py:0
 #, python-format
 msgid ""
 "You can not remove a mandatory option.\n"
