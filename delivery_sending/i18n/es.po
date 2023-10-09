@@ -52,6 +52,11 @@ msgid "Delivery country not implemented with this carrier!"
 msgstr ""
 
 #. module: delivery_sending
+#: model:ir.model.fields,field_description:delivery_sending.field_delivery_carrier__sending_file_format
+msgid "File format"
+msgstr ""
+
+#. module: delivery_sending
 #: model:ir.model.fields.selection,name:delivery_sending.selection__delivery_carrier__sending_service__04
 msgid "MEDIDODIA SECTOR"
 msgstr ""
@@ -67,12 +72,13 @@ msgid "MEDIODIA ECOMMERCE"
 msgstr ""
 
 #. module: delivery_sending
-#: code:addons/delivery_sending/models/sending_request.py:0
-#, python-format
-msgid ""
-"No response from server recording Sending delivery {}.\n"
-"Traceback:\n"
-"{}"
+#: model_terms:ir.ui.view,arch_db:delivery_sending.view_delivery_carrier_form
+msgid "Misc"
+msgstr ""
+
+#. module: delivery_sending
+#: model:ir.model.fields.selection,name:delivery_sending.selection__delivery_carrier__sending_file_format__pdf
+msgid "PDF"
 msgstr ""
 
 #. module: delivery_sending
@@ -187,12 +193,6 @@ msgid "Sending"
 msgstr "Sending"
 
 #. module: delivery_sending
-#: code:addons/delivery_sending/models/delivery_carrier.py:0
-#, python-format
-msgid "Sending Cancellation failed with reason: %s"
-msgstr ""
-
-#. module: delivery_sending
 #: model_terms:ir.ui.view,arch_db:delivery_sending.view_delivery_carrier_form
 msgid "Sending Configuration"
 msgstr ""
@@ -215,10 +215,10 @@ msgid "Sending label for %s"
 msgstr ""
 
 #. module: delivery_sending
-#: code:addons/delivery_sending/models/sending_request.py:0
+#: code:addons/delivery_sending/models/delivery_carrier.py:0
 #, python-format
 msgid ""
-"Sending returned an error trying to record the shipping for {}.\n"
+"Sending returned an error.\n"
 "Error:\n"
 "{}"
 msgstr ""
@@ -242,6 +242,11 @@ msgstr "Albarán"
 #: model:ir.model.fields,field_description:delivery_sending.field_delivery_carrier__sending_user
 msgid "User"
 msgstr "Usuario"
+
+#. module: delivery_sending
+#: model:ir.model.fields.selection,name:delivery_sending.selection__delivery_carrier__sending_file_format__zpl
+msgid "ZPL"
+msgstr ""
 
 #. module: delivery_sending
 #: model:ir.model.fields,help:delivery_sending.field_delivery_carrier__sending_access_key
