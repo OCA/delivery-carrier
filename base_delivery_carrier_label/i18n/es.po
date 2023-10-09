@@ -43,7 +43,8 @@ msgstr "Activo"
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_delivery_carrier_option__description
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_delivery_carrier_template_option__description
 msgid "Allow to define a more complete description than in the name field."
-msgstr "Permite definir un descripción más completa que en el campo del nombre."
+msgstr ""
+"Permite definir un descripción más completa que en el campo del nombre."
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option__by_default
@@ -185,14 +186,10 @@ msgstr "Descripción"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account__display_name
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier__display_name
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option__display_name
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_template_option__display_name
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_manifest_wizard__display_name
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__display_name
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_move_line__display_name
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_picking__display_name
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_quant_package__display_name
 msgid "Display Name"
 msgstr "Nombre mostrado"
 
@@ -233,8 +230,8 @@ msgstr "Tamaño del archivo"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__file_type
-msgid "File type"
-msgstr "Tipo de fichero"
+msgid "File Type"
+msgstr ""
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_manifest_wizard__from_date
@@ -248,14 +245,10 @@ msgstr "Obtener archivo de manifiesto"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account__id
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier__id
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option__id
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_template_option__id
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_manifest_wizard__id
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__id
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_move_line__id
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_picking__id
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_quant_package__id
 msgid "ID"
 msgstr "ID"
 
@@ -301,14 +294,10 @@ msgstr "Es un documento público"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_carrier_account____last_update
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier____last_update
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option____last_update
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_template_option____last_update
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_manifest_wizard____last_update
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label____last_update
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_move_line____last_update
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_picking____last_update
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_quant_package____last_update
 msgid "Last Modified on"
 msgstr "Última modificación el"
 
@@ -505,7 +494,8 @@ msgstr "Se adjunta el identificador de registro."
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_carrier_account__delivery_type
 msgid "This field may be used to link an account to a carrier"
-msgstr "Este campo puede utilizarse para vincular una cuenta a un transportista"
+msgstr ""
+"Este campo puede utilizarse para vincular una cuenta a un transportista"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_carrier_account__carrier_ids
@@ -581,11 +571,12 @@ msgstr "Por favor, cancele la edición o añada de nuevo la opción: %s."
 
 #. module: base_delivery_carrier_label
 #: model_terms:ir.ui.view,arch_db:base_delivery_carrier_label.delivery_carrier_option_view_form
-#: model_terms:ir.ui.view,arch_db:base_delivery_carrier_label.delivery_carrier_option_view_tree
 #: model_terms:ir.ui.view,arch_db:base_delivery_carrier_label.delivery_carrier_template_option_view_form
-#: model_terms:ir.ui.view,arch_db:base_delivery_carrier_label.delivery_carrier_template_option_view_tree
 msgid "delivery_carrier_option"
 msgstr "delivery_carrier_option"
+
+#~ msgid "File type"
+#~ msgstr "Tipo de fichero"
 
 #, fuzzy
 #~ msgid "Create Shipping Label 🚚"
