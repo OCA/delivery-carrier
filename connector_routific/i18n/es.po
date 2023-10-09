@@ -454,11 +454,6 @@ msgid "Main Attachment"
 msgstr "Adjuntos principales"
 
 #. module: connector_routific
-#: model:res.groups,name:connector_routific.group_routific_manager
-msgid "Manage Routific data"
-msgstr "Gestionar datos de Routific"
-
-#. module: connector_routific
 #: model:ir.model.fields,field_description:connector_routific.field_routific_config__max_driver_overtime
 msgid "Maximum driver overtime"
 msgstr "Máximo tiempo extra del conductor"
@@ -657,7 +652,6 @@ msgstr "Secuencia"
 #. module: connector_routific
 #: model:ir.model.fields,field_description:connector_routific.field_stock_picking__routific_stop_sequence
 #, fuzzy
-#| msgid "Sequence"
 msgid "Sequence stop"
 msgstr "Secuencia"
 
@@ -838,6 +832,18 @@ msgid "Unread Messages Counter"
 msgstr "Contador de mensajes sin leer"
 
 #. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_config__website_message_ids
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project__website_message_ids
+msgid "Website Messages"
+msgstr "Mensajes del sitio web"
+
+#. module: connector_routific
+#: model:ir.model.fields,help:connector_routific.field_routific_config__website_message_ids
+#: model:ir.model.fields,help:connector_routific.field_routific_project__website_message_ids
+msgid "Website communication history"
+msgstr "Historial de comunicaciones del sitio web"
+
+#. module: connector_routific
 #: model:ir.model,name:connector_routific.model_routific_project_creator
 msgid "Wizard for Routific project creation"
 msgstr "Wizar para la creación de proyectos de Routific"
@@ -857,8 +863,5 @@ msgstr ""
 "No se ha optimizado la ruta en la plataforma de Routific para recibir la "
 "solución."
 
-#~ msgid "Website Messages"
-#~ msgstr "Mensajes del sitio web"
-
-#~ msgid "Website communication history"
-#~ msgstr "Historial de comunicaciones del sitio web"
+#~ msgid "Manage Routific data"
+#~ msgstr "Gestionar datos de Routific"
