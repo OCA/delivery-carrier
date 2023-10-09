@@ -103,8 +103,8 @@ msgstr "Referencia"
 #: code:addons/delivery_carrier_package_measure_required/models/stock_quant_package.py:0
 #, python-format
 msgid ""
-"The measurement(s) [{dimension}] are required on the package {pack_name} and"
-" need to be set."
+"The measurement(s) [{dimension}] are required on the package {pack_name} and "
+"need to be set."
 msgstr ""
 "La medida(s) [{dimension}] son requeridas para el paquete {pack_name} y "
 "deben configurarse."
