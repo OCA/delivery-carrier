@@ -18,17 +18,25 @@ msgstr ""
 "X-Generator: Weblate 3.10\n"
 
 #. module: delivery_package_number
+#: model:ir.model.fields,field_description:delivery_package_number.field_stock_backorder_confirmation__ask_number_of_packages
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_immediate_transfer__ask_number_of_packages
 msgid "Ask Number Of Packages"
 msgstr ""
 
 #. module: delivery_package_number
+#: model:ir.model,name:delivery_package_number.model_stock_backorder_confirmation
+msgid "Backorder Confirmation"
+msgstr ""
+
+#. module: delivery_package_number
+#: model:ir.model.fields,field_description:delivery_package_number.field_stock_backorder_confirmation__display_name
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_immediate_transfer__display_name
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_picking__display_name
 msgid "Display Name"
 msgstr ""
 
 #. module: delivery_package_number
+#: model:ir.model.fields,field_description:delivery_package_number.field_stock_backorder_confirmation__id
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_immediate_transfer__id
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_picking__id
 msgid "ID"
@@ -40,12 +48,14 @@ msgid "Immediate Transfer"
 msgstr "Takojšnja premestitev"
 
 #. module: delivery_package_number
+#: model:ir.model.fields,field_description:delivery_package_number.field_stock_backorder_confirmation____last_update
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_immediate_transfer____last_update
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_picking____last_update
 msgid "Last Modified on"
 msgstr ""
 
 #. module: delivery_package_number
+#: model:ir.model.fields,field_description:delivery_package_number.field_stock_backorder_confirmation__number_of_packages
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_immediate_transfer__number_of_packages
 msgid "Number Of Packages"
 msgstr "Število pakiranj"
@@ -54,6 +64,11 @@ msgstr "Število pakiranj"
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_picking__number_of_packages
 msgid "Number of Packages"
 msgstr "Število pakiranj"
+
+#. module: delivery_package_number
+#: model:ir.model.fields,help:delivery_package_number.field_stock_backorder_confirmation__number_of_packages
+msgid "Set the number of packages for picking to be validated"
+msgstr ""
 
 #. module: delivery_package_number
 #: model:ir.model.fields,help:delivery_package_number.field_stock_immediate_transfer__number_of_packages
