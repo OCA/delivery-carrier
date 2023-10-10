@@ -140,6 +140,69 @@ class TestPackageFee(TransactionCase):
             ],
         )
 
+    def test_package_fee_simple_with_fiscal_position_tax(self):
+        """All stock moves processed at once"""
+
+        # Creating taxes and fiscal position
+        tax_price_include = self.env["account.tax"].create(
+            {
+                "name": "10% inc",
+                "type_tax_use": "sale",
+                "amount_type": "percent",
+                "amount": 10,
+                "price_include": True,
+                "include_base_amount": True,
+            }
+        )
+        tax_price_exclude = self.env["account.tax"].create(
+            {
+                "name": "15% exc",
+                "type_tax_use": "sale",
+                "amount_type": "percent",
+                "amount": 15,
+            }
+        )
+
+        fiscal_position = self.env["account.fiscal.position"].create(
+            {
+                "name": "fiscal_pos_a",
+                "tax_ids": [
+                    (
+                        0,
+                        None,
+                        {
+                            "tax_src_id": tax_price_include.id,
+                            "tax_dest_id": tax_price_exclude.id,
+                        },
+                    ),
+                ],
+            }
+        )
+
+        # Setting tax in fiscal position on fee2 product
+        self.fee2.taxes_id = tax_price_include
+        self.sale.fiscal_position_id = fiscal_position
+
+        picking = self.sale.picking_ids
+        self.assertEqual(picking.state, "assigned")
+        picking.move_line_ids[0].result_package_id = self.pack1
+        picking.move_line_ids[0].qty_done = 10.0
+        picking.move_line_ids[1].result_package_id = self.pack2
+        picking.move_line_ids[1].qty_done = 10.0
+        picking._action_done()
+        self.assertEqual(picking.state, "done")
+
+        so_line_fee1 = self.sale.order_line.filtered(
+            lambda l: l.product_id == self.fee1
+        )
+        so_line_fee2 = self.sale.order_line.filtered(
+            lambda l: l.product_id == self.fee2
+        )
+
+        self.assertNotEqual(so_line_fee1.tax_id[0], tax_price_exclude)
+        # only fee2 has tax tax_price_exclude due to defined fiscal position
+        self.assertEqual(so_line_fee2.tax_id[0], tax_price_exclude)
+
     def test_package_fee_backorder(self):
         """Stock moves valided in 2 times using a backorder"""
         picking = self.sale.picking_ids

@@ -57,10 +57,8 @@ class SaleOrder(models.Model):
             lambda t: t.company_id.id == self.company_id.id
         )
         taxes_ids = taxes.ids
-        if self.partner_id and self.fiscal_position_id:
-            taxes_ids = self.fiscal_position_id.map_tax(
-                taxes, fee_product, self.partner_id
-            ).ids
+        if self.fiscal_position_id:
+            taxes_ids = self.fiscal_position_id.map_tax(taxes).ids
 
         # line description
         if fee_product.description_sale:
