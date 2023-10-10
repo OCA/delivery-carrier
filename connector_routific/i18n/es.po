@@ -97,6 +97,12 @@ msgid "Activity State"
 msgstr "Estado de la actividad"
 
 #. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_config__activity_type_icon
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project__activity_type_icon
+msgid "Activity Type Icon"
+msgstr ""
+
+#. module: connector_routific
 #: model:ir.model.fields,field_description:connector_routific.field_routific_config__address_format
 msgid "Address format"
 msgstr "Formato de la dirección"
@@ -277,25 +283,19 @@ msgstr "Ubicación final"
 #: code:addons/connector_routific/models/routific_config.py:0
 #, python-format
 msgid ""
-"Error at new stop posting %s \n"
+"Error at new stop posting %(code)s \n"
 "\n"
-" %s"
+" %(response)s"
 msgstr ""
-"Error al postear la nueva parada %s \n"
-"\n"
-" %s"
 
 #. module: connector_routific
 #: code:addons/connector_routific/models/routific_config.py:0
 #, python-format
 msgid ""
-"Error on project posting %s \n"
+"Error on project posting %(code)s \n"
 "\n"
-" %s"
+" %(response)s"
 msgstr ""
-"Error al postear el proyecto %s \n"
-"\n"
-" %s"
 
 #. module: connector_routific
 #: model:ir.model.fields,help:connector_routific.field_routific_config__traffic
@@ -315,21 +315,27 @@ msgid "Followers"
 msgstr "Seguidores"
 
 #. module: connector_routific
-#: model:ir.model.fields,field_description:connector_routific.field_routific_config__message_channel_ids
-#: model:ir.model.fields,field_description:connector_routific.field_routific_project__message_channel_ids
-msgid "Followers (Channels)"
-msgstr "Seguidores (Canales)"
-
-#. module: connector_routific
 #: model:ir.model.fields,field_description:connector_routific.field_routific_config__message_partner_ids
 #: model:ir.model.fields,field_description:connector_routific.field_routific_project__message_partner_ids
 msgid "Followers (Partners)"
 msgstr "Seguidores (Socios)"
 
 #. module: connector_routific
+#: model:ir.model.fields,help:connector_routific.field_routific_config__activity_type_icon
+#: model:ir.model.fields,help:connector_routific.field_routific_project__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr ""
+
+#. module: connector_routific
 #: model:ir.model.fields,field_description:connector_routific.field_routific_config__get_endpoint
 msgid "Get URL"
 msgstr "URL para peticiones GET"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_config__has_message
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project__has_message
+msgid "Has Message"
+msgstr ""
 
 #. module: connector_routific
 #: model:ir.model.fields,field_description:connector_routific.field_routific_project__has_new_picking
@@ -396,8 +402,8 @@ msgid ""
 "        The default is false\n"
 "        "
 msgstr ""
-"Obliga a que la hora de salida de un conductor sea la marcada en su horario."
-"\n"
+"Obliga a que la hora de salida de un conductor sea la marcada en su "
+"horario.\n"
 "         El valor predeterminado es falso\n"
 "        "
 
@@ -458,11 +464,6 @@ msgid "Main Attachment"
 msgstr "Adjuntos principales"
 
 #. module: connector_routific
-#: model:res.groups,name:connector_routific.group_routific_manager
-msgid "Manage Routific data"
-msgstr "Gestionar datos de Routific"
-
-#. module: connector_routific
 #: model:ir.model.fields,field_description:connector_routific.field_routific_config__max_driver_overtime
 msgid "Maximum driver overtime"
 msgstr "Máximo tiempo extra del conductor"
@@ -483,6 +484,12 @@ msgstr "Error de Envío de Mensaje"
 #: model:ir.model.fields,field_description:connector_routific.field_routific_project__message_ids
 msgid "Messages"
 msgstr "Mensajes"
+
+#. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_config__my_activity_date_deadline
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr ""
 
 #. module: connector_routific
 #: model:ir.model.fields,field_description:connector_routific.field_routific_config__name
@@ -585,7 +592,6 @@ msgstr "Proyecto para Routific"
 #. module: connector_routific
 #: model:ir.actions.act_window,name:connector_routific.action_routific_project
 #: model:ir.ui.menu,name:connector_routific.menu_routific_project
-#: model_terms:ir.ui.view,arch_db:connector_routific.routific_project_tree_view
 msgid "Projects"
 msgstr "Proyectos"
 
@@ -608,8 +614,8 @@ msgstr "Routific"
 
 #. module: connector_routific
 #: model:ir.model.fields,field_description:connector_routific.field_routific_project_driver__routific_driver_id
-msgid "Routific Driver Id"
-msgstr "Id de conductor en Routific"
+msgid "Routific Driver"
+msgstr ""
 
 #. module: connector_routific
 #: model:ir.model,name:connector_routific.model_routific_project_driver
@@ -679,7 +685,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:connector_routific.field_routific_project_creator__config_id
 #: model:ir.ui.menu,name:connector_routific.menu_routific_config
 #: model_terms:ir.ui.view,arch_db:connector_routific.routific_config_form_view
-#: model_terms:ir.ui.view,arch_db:connector_routific.routific_config_tree_view
 msgid "Settings"
 msgstr "Ajustes"
 
@@ -761,8 +766,10 @@ msgstr "El día empieza a las 00:00"
 #. module: connector_routific
 #: code:addons/connector_routific/wizards/routific_project_creator.py:0
 #, python-format
-msgid "The operation type %s is not allowed on %s configuration"
-msgstr "El tipo de operación %s, is not allowed on %s configuration"
+msgid ""
+"The operation type %(picking_name)s is not allowed on %(config_name)s "
+"configuration"
+msgstr ""
 
 #. module: connector_routific
 #: code:addons/connector_routific/wizards/routific_project_creator.py:0
@@ -840,6 +847,18 @@ msgid "Unread Messages Counter"
 msgstr "Contador de mensajes sin leer"
 
 #. module: connector_routific
+#: model:ir.model.fields,field_description:connector_routific.field_routific_config__website_message_ids
+#: model:ir.model.fields,field_description:connector_routific.field_routific_project__website_message_ids
+msgid "Website Messages"
+msgstr "Mensajes del sitio web"
+
+#. module: connector_routific
+#: model:ir.model.fields,help:connector_routific.field_routific_config__website_message_ids
+#: model:ir.model.fields,help:connector_routific.field_routific_project__website_message_ids
+msgid "Website communication history"
+msgstr "Historial de comunicaciones del sitio web"
+
+#. module: connector_routific
 #: model:ir.model,name:connector_routific.model_routific_project_creator
 msgid "Wizard for Routific project creation"
 msgstr "Wizar para la creación de proyectos de Routific"
@@ -859,8 +878,35 @@ msgstr ""
 "No se ha optimizado la ruta en la plataforma de Routific para recibir la "
 "solución."
 
-#~ msgid "Website Messages"
-#~ msgstr "Mensajes del sitio web"
+#, python-format
+#~ msgid ""
+#~ "Error at new stop posting %s \n"
+#~ "\n"
+#~ " %s"
+#~ msgstr ""
+#~ "Error al postear la nueva parada %s \n"
+#~ "\n"
+#~ " %s"
 
-#~ msgid "Website communication history"
-#~ msgstr "Historial de comunicaciones del sitio web"
+#, python-format
+#~ msgid ""
+#~ "Error on project posting %s \n"
+#~ "\n"
+#~ " %s"
+#~ msgstr ""
+#~ "Error al postear el proyecto %s \n"
+#~ "\n"
+#~ " %s"
+
+#~ msgid "Followers (Channels)"
+#~ msgstr "Seguidores (Canales)"
+
+#~ msgid "Manage Routific data"
+#~ msgstr "Gestionar datos de Routific"
+
+#~ msgid "Routific Driver Id"
+#~ msgstr "Id de conductor en Routific"
+
+#, python-format
+#~ msgid "The operation type %s is not allowed on %s configuration"
+#~ msgstr "El tipo de operación %s, is not allowed on %s configuration"
