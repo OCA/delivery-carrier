@@ -18,6 +18,7 @@
                                 name="product_id"
                                 context="{'default_type': 'service', 'default_sale_ok': False, 'default_purchase_ok': False}"
                             />
+                            <field name="package_type_id" />
                             <field name="active" />
                         </tree>
                     </field>
