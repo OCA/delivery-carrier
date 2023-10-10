@@ -17,32 +17,23 @@ class StockMoveLine(models.Model):
     def get_weight(self):
         """Calc and save weight of pack.operations.
 
-        Warning: Type conversion not implemented
-                it will return False if at least one uom or uos not in kg
         return:
             the sum of the weight of [self]
         """
         total_weight = 0
-        kg = self.env.ref("uom.product_uom_kgm").id
-        units = self.env.ref("uom.product_uom_unit").id
-        allowed = (False, kg, units)
-        cant_calc_total = False
         for operation in self:
             product = operation.product_id
 
-            # if not defined we assume it's in kg
-            if product.uom_id.id not in allowed:
-                _logger.warning(
-                    "Type conversion not implemented for product %s", product.id
-                )
-                cant_calc_total = True
             # reserved_qty may be 0 if you don't set move line
             # individually but directly validate the picking
-            qty = operation.qty_done or operation.reserved_qty
+            qty = (
+                operation.qty_done
+                and operation.product_uom_id._compute_quantity(
+                    operation.qty_done, operation.product_id.uom_id
+                )
+                or operation.reserved_qty
+            )
             operation.weight = product.weight * qty
 
             total_weight += operation.weight
-
-        if cant_calc_total:
-            return False
         return total_weight
