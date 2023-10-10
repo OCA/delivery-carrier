@@ -1,3 +1,4 @@
 odoo-test-helper >= 1.1.0
 vcrpy
 vcrpy-unittest
+odoo14-addon-sale_line_service_qty_delivered @ git+https://github.com/OCA/sale-workflow.git@refs/pull/2717/head#subdirectory=setup/sale_line_service_qty_delivered
