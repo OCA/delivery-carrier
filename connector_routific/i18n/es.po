@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-06-09 06:51+0000\n"
-"PO-Revision-Date: 2023-10-09 07:43+0000\n"
+"PO-Revision-Date: 2023-10-12 11:36+0000\n"
 "Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -100,7 +100,7 @@ msgstr "Estado de la actividad"
 #: model:ir.model.fields,field_description:connector_routific.field_routific_config__activity_type_icon
 #: model:ir.model.fields,field_description:connector_routific.field_routific_project__activity_type_icon
 msgid "Activity Type Icon"
-msgstr ""
+msgstr "Icono de tipo de actvidad"
 
 #. module: connector_routific
 #: model:ir.model.fields,field_description:connector_routific.field_routific_config__address_format
@@ -287,6 +287,9 @@ msgid ""
 "\n"
 " %(response)s"
 msgstr ""
+"Error en la nueva parada %(code)s \n"
+"\n"
+" %(response)s"
 
 #. module: connector_routific
 #: code:addons/connector_routific/models/routific_config.py:0
@@ -296,6 +299,9 @@ msgid ""
 "\n"
 " %(response)s"
 msgstr ""
+"Error en la contabilización del proyecto %(code)s \n"
+"\n"
+" %(response)s"
 
 #. module: connector_routific
 #: model:ir.model.fields,help:connector_routific.field_routific_config__traffic
@@ -324,7 +330,7 @@ msgstr "Seguidores (Socios)"
 #: model:ir.model.fields,help:connector_routific.field_routific_config__activity_type_icon
 #: model:ir.model.fields,help:connector_routific.field_routific_project__activity_type_icon
 msgid "Font awesome icon e.g. fa-tasks"
-msgstr ""
+msgstr "Icono de fuente impresionante, por ejemplo fa-tasks"
 
 #. module: connector_routific
 #: model:ir.model.fields,field_description:connector_routific.field_routific_config__get_endpoint
@@ -335,7 +341,7 @@ msgstr "URL para peticiones GET"
 #: model:ir.model.fields,field_description:connector_routific.field_routific_config__has_message
 #: model:ir.model.fields,field_description:connector_routific.field_routific_project__has_message
 msgid "Has Message"
-msgstr ""
+msgstr "Tiene mensaje"
 
 #. module: connector_routific
 #: model:ir.model.fields,field_description:connector_routific.field_routific_project__has_new_picking
@@ -489,7 +495,7 @@ msgstr "Mensajes"
 #: model:ir.model.fields,field_description:connector_routific.field_routific_config__my_activity_date_deadline
 #: model:ir.model.fields,field_description:connector_routific.field_routific_project__my_activity_date_deadline
 msgid "My Activity Deadline"
-msgstr ""
+msgstr "Fecha Límite de Mi Actividad"
 
 #. module: connector_routific
 #: model:ir.model.fields,field_description:connector_routific.field_routific_config__name
@@ -615,7 +621,7 @@ msgstr "Routific"
 #. module: connector_routific
 #: model:ir.model.fields,field_description:connector_routific.field_routific_project_driver__routific_driver_id
 msgid "Routific Driver"
-msgstr ""
+msgstr "Conductor de Routific"
 
 #. module: connector_routific
 #: model:ir.model,name:connector_routific.model_routific_project_driver
@@ -770,6 +776,8 @@ msgid ""
 "The operation type %(picking_name)s is not allowed on %(config_name)s "
 "configuration"
 msgstr ""
+"El tipo de operación %(picking_name)s no está permitido en la configuración "
+"%(config_name)s"
 
 #. module: connector_routific
 #: code:addons/connector_routific/wizards/routific_project_creator.py:0
