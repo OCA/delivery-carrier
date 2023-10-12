@@ -1,4 +1,5 @@
 # Copyright 2021 Camptocamp SA
+# Copyright 2023 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
 from lxml import etree
@@ -16,7 +17,7 @@ from odoo.addons.base.models.ir_ui_view import (
 class StockPicking(models.Model):
     _inherit = "stock.picking"
 
-    delivery_notification_sent = fields.Boolean(default=False)
+    delivery_notification_sent = fields.Boolean(default=False, copy=False)
 
     def _send_confirmation_email(self):
         for picking in self:
