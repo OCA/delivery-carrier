@@ -4,6 +4,8 @@ from lxml import etree
 
 from odoo.tests import TransactionCase
 
+from odoo.addons.base.tests.common import DISABLED_MAIL_CONTEXT
+
 
 class TestPartnerDeliveryZone(TransactionCase):
     at_install = False
@@ -12,6 +14,7 @@ class TestPartnerDeliveryZone(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        cls.env = cls.env(context=dict(cls.env.context, **DISABLED_MAIL_CONTEXT))
         cls.warehouse = cls.env.ref("stock.warehouse0")
         cls.delivery_zone_a = cls.env["partner.delivery.zone"].create(
             {"name": "Delivery Zone A", "code": "10"}
