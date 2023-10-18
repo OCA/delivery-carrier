@@ -3,7 +3,7 @@
 {
     "name": "Partner Delivery Schedule",
     "summary": "Set on partners a schedule for delivery goods",
-    "version": "15.0.1.0.1",
+    "version": "15.0.1.0.2",
     "development_status": "Production/Stable",
     "category": "Delivery",
     "website": "https://github.com/OCA/delivery-carrier",
