@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: delivery-carrier (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-22 09:11+0000\n"
-"PO-Revision-Date: 2023-10-09 09:13+0000\n"
+"PO-Revision-Date: 2023-10-18 16:38+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/"
 "OCA-delivery-carrier-8-0/language/it/)\n"
@@ -323,12 +323,12 @@ msgstr "Numero totale di Pacchi:"
 #. module: delivery_carrier_deposit
 #: field:deposit.slip,weight:0
 msgid "Total Weight"
-msgstr "Peso Totale"
+msgstr "Peso totale"
 
 #. module: delivery_carrier_deposit
 #: view:website:delivery_carrier_deposit.report_generic_deposit_slip
 msgid "Total Weight:"
-msgstr "Peso Totale:"
+msgstr "Peso totale:"
 
 #. module: delivery_carrier_deposit
 #: model:ir.ui.menu,name:delivery_carrier_deposit.menu_delivery_deposit_slip
