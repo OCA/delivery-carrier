@@ -165,6 +165,7 @@ class TestDeliverySchenkerCommon(common.SavepointCase):
             "homeDelivery": True,
             "ownPickup": True,
             "pharmaceuticals": True,
+            "submitBooking": True,
             "measureUnitVolume": 1.0,
         }
         res.update(vals)
