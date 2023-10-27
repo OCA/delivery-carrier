@@ -349,9 +349,7 @@ msgstr ""
 
 #. module: connector_routific
 #: model:ir.model.fields,help:connector_routific.field_routific_config__message_has_error
-#: model:ir.model.fields,help:connector_routific.field_routific_config__message_has_sms_error
 #: model:ir.model.fields,help:connector_routific.field_routific_project__message_has_error
-#: model:ir.model.fields,help:connector_routific.field_routific_project__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr ""
 
@@ -604,12 +602,6 @@ msgstr ""
 #. module: connector_routific
 #: model:ir.model.fields,field_description:connector_routific.field_stock_picking__routific_stop_id
 msgid "Routific stop id"
-msgstr ""
-
-#. module: connector_routific
-#: model:ir.model.fields,field_description:connector_routific.field_routific_config__message_has_sms_error
-#: model:ir.model.fields,field_description:connector_routific.field_routific_project__message_has_sms_error
-msgid "SMS Delivery error"
 msgstr ""
 
 #. module: connector_routific
