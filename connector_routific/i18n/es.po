@@ -378,9 +378,7 @@ msgstr "Si está marcado hay nuevos mensajes que requieren su atención."
 
 #. module: connector_routific
 #: model:ir.model.fields,help:connector_routific.field_routific_config__message_has_error
-#: model:ir.model.fields,help:connector_routific.field_routific_config__message_has_sms_error
 #: model:ir.model.fields,help:connector_routific.field_routific_project__message_has_error
-#: model:ir.model.fields,help:connector_routific.field_routific_project__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr "Si se encuentra marcado, algunos mensajes tienen error de envío."
 
@@ -640,12 +638,6 @@ msgid "Routific stop id"
 msgstr "Id de parada en Routific"
 
 #. module: connector_routific
-#: model:ir.model.fields,field_description:connector_routific.field_routific_config__message_has_sms_error
-#: model:ir.model.fields,field_description:connector_routific.field_routific_project__message_has_sms_error
-msgid "SMS Delivery error"
-msgstr "Error de entrega del SMS"
-
-#. module: connector_routific
 #: model_terms:ir.ui.view,arch_db:connector_routific.routific_project_form_view
 msgid "Send Log"
 msgstr "Log de envio"
@@ -885,6 +877,9 @@ msgid ""
 msgstr ""
 "No se ha optimizado la ruta en la plataforma de Routific para recibir la "
 "solución."
+
+#~ msgid "SMS Delivery error"
+#~ msgstr "Error de entrega del SMS"
 
 #, python-format
 #~ msgid ""
