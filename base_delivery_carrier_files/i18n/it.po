@@ -12,8 +12,8 @@ msgstr ""
 "POT-Creation-Date: 2016-09-17 06:51+0000\n"
 "PO-Revision-Date: 2023-10-29 08:33+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
-"Language-Team: Italian (http://www.transifex.com/oca/"
-"OCA-carrier-delivery-8-0/language/it/)\n"
+"Language-Team: Italian (http://www.transifex.com/oca/OCA-carrier-"
+"delivery-8-0/language/it/)\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -38,7 +38,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_delivery_carrier_files.field_delivery_carrier__carrier_file_id
 #: model:ir.ui.menu,name:base_delivery_carrier_files.menu_action_delivery_carrier_file_form
 #: model_terms:ir.ui.view,arch_db:base_delivery_carrier_files.view_delivery_carrier_file_form
-#: model_terms:ir.ui.view,arch_db:base_delivery_carrier_files.view_delivery_carrier_file_tree
 msgid "Carrier File"
 msgstr ""
 
@@ -81,7 +80,6 @@ msgstr ""
 
 #. module: base_delivery_carrier_files
 #: model:ir.model.fields,field_description:base_delivery_carrier_files.field_delivery_carrier_file_generate__pickings
-#: model_terms:ir.ui.view,arch_db:base_delivery_carrier_files.view_delivery_carrier_file_generate
 msgid "Delivery Orders"
 msgstr "Ordini di consegna"
 
