@@ -563,8 +563,6 @@ msgstr ""
 
 #. module: base_delivery_carrier_label
 #: model_terms:ir.ui.view,arch_db:base_delivery_carrier_label.delivery_carrier_option_view_form
-#: model_terms:ir.ui.view,arch_db:base_delivery_carrier_label.delivery_carrier_option_view_tree
 #: model_terms:ir.ui.view,arch_db:base_delivery_carrier_label.delivery_carrier_template_option_view_form
-#: model_terms:ir.ui.view,arch_db:base_delivery_carrier_label.delivery_carrier_template_option_view_tree
 msgid "delivery_carrier_option"
 msgstr ""

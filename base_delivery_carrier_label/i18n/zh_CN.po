@@ -569,9 +569,7 @@ msgstr "您不应删除强制选项。请取消编辑或添加选项：%s。"
 
 #. module: base_delivery_carrier_label
 #: model_terms:ir.ui.view,arch_db:base_delivery_carrier_label.delivery_carrier_option_view_form
-#: model_terms:ir.ui.view,arch_db:base_delivery_carrier_label.delivery_carrier_option_view_tree
 #: model_terms:ir.ui.view,arch_db:base_delivery_carrier_label.delivery_carrier_template_option_view_form
-#: model_terms:ir.ui.view,arch_db:base_delivery_carrier_label.delivery_carrier_template_option_view_tree
 msgid "delivery_carrier_option"
 msgstr "delivery_carrier_option"
 
