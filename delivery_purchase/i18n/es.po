@@ -28,6 +28,14 @@ msgid "Delivery Price"
 msgstr "Precio de entrega"
 
 #. module: delivery_purchase
+#: model:ir.model.fields,field_description:delivery_purchase.field_delivery_carrier__display_name
+#: model:ir.model.fields,field_description:delivery_purchase.field_purchase_order__display_name
+#: model:ir.model.fields,field_description:delivery_purchase.field_purchase_order_line__display_name
+#: model:ir.model.fields,field_description:delivery_purchase.field_stock_picking__display_name
+msgid "Display Name"
+msgstr "Nombre a mostrar"
+
+#. module: delivery_purchase
 #: code:addons/delivery_purchase/models/delivery_carrier.py:0
 #, python-format
 msgid "Error: no matching grid."
@@ -40,9 +48,41 @@ msgid "Error: this delivery method is not available for this address."
 msgstr "Error: este método de envío no está disponible para esta dirección."
 
 #. module: delivery_purchase
+#: code:addons/delivery_purchase/models/purchase_order.py:0
+#, python-format
+msgid "Free Shipping"
+msgstr "Envío gratis"
+
+#. module: delivery_purchase
+#: model:ir.model.fields,field_description:delivery_purchase.field_delivery_carrier__id
+#: model:ir.model.fields,field_description:delivery_purchase.field_purchase_order__id
+#: model:ir.model.fields,field_description:delivery_purchase.field_purchase_order_line__id
+#: model:ir.model.fields,field_description:delivery_purchase.field_stock_picking__id
+msgid "ID"
+msgstr "ID"
+
+#. module: delivery_purchase
+#: model:ir.model.fields,field_description:delivery_purchase.field_purchase_order_line__is_delivery
+msgid "Is a Delivery"
+msgstr "Es un envío"
+
+#. module: delivery_purchase
+#: model:ir.model.fields,field_description:delivery_purchase.field_delivery_carrier____last_update
+#: model:ir.model.fields,field_description:delivery_purchase.field_purchase_order____last_update
+#: model:ir.model.fields,field_description:delivery_purchase.field_purchase_order_line____last_update
+#: model:ir.model.fields,field_description:delivery_purchase.field_stock_picking____last_update
+msgid "Last Modified on"
+msgstr "Última modificación el"
+
+#. module: delivery_purchase
 #: model:ir.model,name:delivery_purchase.model_purchase_order
 msgid "Purchase Order"
 msgstr "Orden de compra"
+
+#. module: delivery_purchase
+#: model:ir.model,name:delivery_purchase.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "Línea de pedido de compra"
 
 #. module: delivery_purchase
 #: code:addons/delivery_purchase/models/stock_picking.py:0
