@@ -11,5 +11,7 @@ To use this module, you need to:
 #. If necessary, you can change the carrier in the 'Receipt'. When
    it is validated, the 'shipping cost' of the receipt will be
    calculated according to that new selected Carrier.
+#. It is possible to change the shipping cost in picking.
 #. The shipping cost will appear in an internal note created
    automatically when the 'Receipt' is validated.
+#. A purchase order line will have been created for the cost of picking.
