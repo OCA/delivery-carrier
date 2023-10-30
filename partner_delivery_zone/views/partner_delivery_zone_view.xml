@@ -20,7 +20,7 @@
         <field name="name">partner.delivery.zone.tree</field>
         <field name="model">partner.delivery.zone</field>
         <field name="arch" type="xml">
-            <tree string="Delivery Zone">
+            <tree>
                 <field name="code" />
                 <field name="name" />
             </tree>

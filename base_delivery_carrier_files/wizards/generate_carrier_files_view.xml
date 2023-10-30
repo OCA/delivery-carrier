@@ -16,7 +16,7 @@
                         colspan="4"
                         domain="[('picking_type_id.code', '=', 'outgoing')]"
                     >
-                        <tree string="Delivery Orders">
+                        <tree>
                             <field name="name" />
                             <field name="carrier_id" />
                             <field name="partner_id" />

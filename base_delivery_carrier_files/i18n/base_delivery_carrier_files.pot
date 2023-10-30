@@ -30,7 +30,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_delivery_carrier_files.field_delivery_carrier__carrier_file_id
 #: model:ir.ui.menu,name:base_delivery_carrier_files.menu_action_delivery_carrier_file_form
 #: model_terms:ir.ui.view,arch_db:base_delivery_carrier_files.view_delivery_carrier_file_form
-#: model_terms:ir.ui.view,arch_db:base_delivery_carrier_files.view_delivery_carrier_file_tree
 msgid "Carrier File"
 msgstr ""
 
@@ -73,7 +72,6 @@ msgstr ""
 
 #. module: base_delivery_carrier_files
 #: model:ir.model.fields,field_description:base_delivery_carrier_files.field_delivery_carrier_file_generate__pickings
-#: model_terms:ir.ui.view,arch_db:base_delivery_carrier_files.view_delivery_carrier_file_generate
 msgid "Delivery Orders"
 msgstr ""
 
