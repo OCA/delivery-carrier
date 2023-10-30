@@ -6,7 +6,17 @@ from odoo.tests import Form, common
 class TestDeliveryPurchase(common.SavepointCase):
     @classmethod
     def setUpClass(cls):
-        super(TestDeliveryPurchase, cls).setUpClass()
+        super().setUpClass()
+        # Remove this variable in v16 and put instead:
+        # from odoo.addons.base.tests.common import DISABLED_MAIL_CONTEXT
+        DISABLED_MAIL_CONTEXT = {
+            "tracking_disable": True,
+            "mail_create_nolog": True,
+            "mail_create_nosubscribe": True,
+            "mail_notrack": True,
+            "no_reset_password": True,
+        }
+        cls.env = cls.env(context=dict(cls.env.context, **DISABLED_MAIL_CONTEXT))
         cls.delivery_product = cls.env["product.product"].create(
             {"name": "Delivery test product"}
         )
@@ -66,26 +76,35 @@ class TestDeliveryPurchase(common.SavepointCase):
         self.assertEqual(self.purchase.carrier_id, self.carrier_fixed)
 
     def test_delivery_purchase(self):
-        self.purchase.get_delivery_cost()
         self.assertEqual(self.purchase.delivery_price, 20)
         self.purchase.carrier_id = self.carrier_rules.id
-        self.purchase.get_delivery_cost()
         self.assertEqual(self.purchase.delivery_price, 10)
         self.purchase_line.product_id.weight = 8
-        self.purchase.get_delivery_cost()
+        # Change price unit to amount_total change call compute
+        self.purchase_line.price_unit = 2
         self.assertEqual(self.purchase.delivery_price, 30)
 
     def test_picking_carrier(self):
         self.purchase.button_confirm()
-        self.assertEqual(
-            self.purchase.picking_ids[0].carrier_id,
-            self.carrier_fixed,
-        )
+        picking = self.purchase.picking_ids
+        self.assertEqual(picking.carrier_id, self.carrier_fixed)
+        picking = self.purchase.picking_ids
+        picking.carrier_id = self.carrier_rules.id
+        res = picking.button_validate()
+        model = self.env[res["res_model"]].with_context(**res["context"])
+        model.create({}).process()
+        self.assertEqual(picking.carrier_price, 10)
 
-    def test_onchange_picking_carrier(self):
+    def test_picking_carrier_invoice_policy_real(self):
+        self.carrier_rules.invoice_policy = "real"
+        self.purchase.carrier_id = False
         self.purchase.button_confirm()
         picking = self.purchase.picking_ids
         picking.carrier_id = self.carrier_rules.id
-        wizard_id = picking.button_validate()["res_id"]
-        self.env["stock.immediate.transfer"].browse(wizard_id).process()
+        res = picking.button_validate()
+        model = self.env[res["res_model"]].with_context(**res["context"])
+        model.create({}).process()
+        self.assertEqual(picking.carrier_id, self.carrier_rules)
         self.assertEqual(picking.carrier_price, 10)
+        self.assertEqual(self.purchase.carrier_id, self.carrier_rules)
+        self.assertEqual(self.purchase.delivery_price, 10)
