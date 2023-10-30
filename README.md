@@ -21,8 +21,8 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
-[base_delivery_carrier_files](base_delivery_carrier_files/) | 14.0.1.0.1 |  | Base module for creation of delivery carrier files
-[base_delivery_carrier_label](base_delivery_carrier_label/) | 14.0.1.3.0 |  | Base module for carrier labels
+[base_delivery_carrier_files](base_delivery_carrier_files/) | 14.0.1.0.2 |  | Base module for creation of delivery carrier files
+[base_delivery_carrier_label](base_delivery_carrier_label/) | 14.0.1.3.1 |  | Base module for carrier labels
 [carrier_account_environment](carrier_account_environment/) | 14.0.1.0.1 | [![florian-dacosta](https://github.com/florian-dacosta.png?size=30px)](https://github.com/florian-dacosta) | Configure carriers with server_environment_files
 [delivery_auto_refresh](delivery_auto_refresh/) | 14.0.1.1.1 |  | Auto-refresh delivery price in sales orders
 [delivery_carrier_agency](delivery_carrier_agency/) | 14.0.1.0.1 |  | Add a model for Carrier Agencies
@@ -31,7 +31,7 @@ addon | version | maintainers | summary
 [delivery_carrier_customer_info](delivery_carrier_customer_info/) | 14.0.1.0.0 |  | Send delivery notice to the shipper from any operation.
 [delivery_carrier_default_tracking_url](delivery_carrier_default_tracking_url/) | 14.0.1.0.0 | [![rousseldenis](https://github.com/rousseldenis.png?size=30px)](https://github.com/rousseldenis) | Adds the default tracking url on delivery carrier
 [delivery_carrier_info](delivery_carrier_info/) | 14.0.1.0.1 |  | Add code and description on carrier
-[delivery_carrier_label_batch](delivery_carrier_label_batch/) | 14.0.1.1.0 |  | Carrier labels - Stock Batch Picking (link)
+[delivery_carrier_label_batch](delivery_carrier_label_batch/) | 14.0.1.1.1 |  | Carrier labels - Stock Batch Picking (link)
 [delivery_carrier_location](delivery_carrier_location/) | 14.0.1.0.0 | [![ivantodorovich](https://github.com/ivantodorovich.png?size=30px)](https://github.com/ivantodorovich) | Integrates delivery with base_location
 [delivery_carrier_multi_zip](delivery_carrier_multi_zip/) | 14.0.1.0.0 |  | Multiple ZIP intervals for the same delivery method
 [delivery_carrier_package_measure_required](delivery_carrier_package_measure_required/) | 14.0.1.0.2 |  | Allow the configuration of which package measurements are required on a delivery carrier basis.
@@ -42,7 +42,7 @@ addon | version | maintainers | summary
 [delivery_cttexpress](delivery_cttexpress/) | 14.0.1.0.0 |  | Delivery Carrier implementation for CTT Express API
 [delivery_free_fee_removal](delivery_free_fee_removal/) | 14.0.1.0.0 |  | Hide free fee lines on sales orders
 [delivery_multi_destination](delivery_multi_destination/) | 14.0.1.1.2 |  | Multiple destinations for the same delivery method
-[delivery_package_fee](delivery_package_fee/) | 14.0.1.0.2 |  | Add fees on delivered packages on shipping methods
+[delivery_package_fee](delivery_package_fee/) | 14.0.1.0.3 |  | Add fees on delivered packages on shipping methods
 [delivery_package_number](delivery_package_number/) | 14.0.1.2.1 |  | Set or compute number of packages for a picking
 [delivery_postlogistics](delivery_postlogistics/) | 14.0.1.0.5 |  | Print PostLogistics shipping labels using the Barcode web service
 [delivery_postlogistics_dangerous_goods](delivery_postlogistics_dangerous_goods/) | 14.0.1.0.0 |  | Declare dangerous goods when generating postlogistics labels
@@ -58,9 +58,9 @@ addon | version | maintainers | summary
 [delivery_schenker_picking_volume](delivery_schenker_picking_volume/) | 14.0.1.2.0 |  | Glue module between delivery_schenker and stock_picking_volumeWith this module the transmitted volume is changed,it uses the computed volume from stock_picking_volume
 [delivery_send_to_shipper_at_operation](delivery_send_to_shipper_at_operation/) | 14.0.1.0.1 |  | Send delivery notice to the shipper from any operation.
 [delivery_state](delivery_state/) | 14.0.1.1.0 |  | Provides fields to be able to contemplate the tracking statesand also adds a global fields
-[delivery_tnt_oca](delivery_tnt_oca/) | 14.0.1.2.4 | [![victoralmau](https://github.com/victoralmau.png?size=30px)](https://github.com/victoralmau) | Integrate TNT webservice
+[delivery_tnt_oca](delivery_tnt_oca/) | 14.0.1.2.5 | [![victoralmau](https://github.com/victoralmau.png?size=30px)](https://github.com/victoralmau) | Integrate TNT webservice
 [partner_default_delivery_carrier](partner_default_delivery_carrier/) | 14.0.1.0.0 | [![SilvioC2C](https://github.com/SilvioC2C.png?size=30px)](https://github.com/SilvioC2C) | Allows defining default delivery methods for partners
-[partner_delivery_zone](partner_delivery_zone/) | 14.0.1.1.0 |  | Set on partners a zone for delivery goods
+[partner_delivery_zone](partner_delivery_zone/) | 14.0.1.1.1 |  | Set on partners a zone for delivery goods
 [server_environment_delivery](server_environment_delivery/) | 14.0.1.0.0 |  | Configure prod environment for delivery carriers
 [stock_picking_carrier_from_rule](stock_picking_carrier_from_rule/) | 14.0.1.0.0 |  | Set the carrier on picking if the stock rule used has a partner address set with a delivery method.
 [stock_picking_delivery_link](stock_picking_delivery_link/) | 14.0.1.0.0 |  | Adds link to the delivery on all intermediate operations.
