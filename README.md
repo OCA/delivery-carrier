@@ -44,6 +44,7 @@ addon | version | maintainers | summary
 [delivery_multi_destination](delivery_multi_destination/) | 14.0.1.1.2 |  | Multiple destinations for the same delivery method
 [delivery_package_fee](delivery_package_fee/) | 14.0.1.0.3 |  | Add fees on delivered packages on shipping methods
 [delivery_package_number](delivery_package_number/) | 14.0.1.2.1 |  | Set or compute number of packages for a picking
+[delivery_packaging_archive](delivery_packaging_archive/) | 14.0.1.0.1 | [![mt-software-de](https://github.com/mt-software-de.png?size=30px)](https://github.com/mt-software-de) | This module allows archiving a delivery packaging
 [delivery_postlogistics](delivery_postlogistics/) | 14.0.1.0.5 |  | Print PostLogistics shipping labels using the Barcode web service
 [delivery_postlogistics_dangerous_goods](delivery_postlogistics_dangerous_goods/) | 14.0.1.0.0 |  | Declare dangerous goods when generating postlogistics labels
 [delivery_postlogistics_server_env](delivery_postlogistics_server_env/) | 14.0.1.0.0 |  | Server Environment layer for Delivery Postlogistics

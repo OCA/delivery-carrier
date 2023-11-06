@@ -4,7 +4,7 @@
     "name": "Delivery Packaging Archive",
     "summary": """
         This module allows archiving a delivery packaging""",
-    "version": "14.0.1.0.0",
+    "version": "14.0.1.0.1",
     "license": "LGPL-3",
     "author": "MT Software, Odoo Community Association (OCA)",
     "maintainers": ["mt-software-de"],
