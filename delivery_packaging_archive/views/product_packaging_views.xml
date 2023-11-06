@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 Michael Tietz (MT Software) <mtietz@mt-software.de>
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="product_packaging_delivery_form">
+        <field name="name">product.packaging.form.delivery</field>
+        <field name="model">product.packaging</field>
+        <field name="inherit_id" ref="delivery.product_packaging_delivery_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//label[@for='name']" position="before">
+                    <field name="active" invisible="1" />
+                    <widget
+                    name="web_ribbon"
+                    title="Archived"
+                    bg_color="bg-danger"
+                    attrs="{'invisible': [('active', '=', True)]}"
+                />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
