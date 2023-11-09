@@ -33,6 +33,7 @@ class TestStockPickingReportDeliveryCost(common.TransactionCase):
                 "partner_id": cls.partner.id,
                 "carrier_id": cls.carrier.id,
                 "pricelist_id": cls.pricelist.id,
+                "warehouse_id": cls.env.ref("stock.warehouse0").id,
                 "order_line": [
                     (
                         0,
