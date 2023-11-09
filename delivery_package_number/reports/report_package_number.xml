@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="delivery_package_number_document">
+        <t t-call="web.basic_layout">
+            <t
+                t-set="move_ids"
+                t-value="doc.move_ids._rollup_move_dests({doc.move_ids[:1].id})"
+            />
+            <t
+                t-set="dest_picking"
+                t-value="doc.move_ids.browse(move_ids).filtered('sale_line_id')[:1].picking_id"
+            />
+            <t t-foreach="doc.number_of_packages" t-as="pack_num">
+                <div class="page">
+                    <div class="row">
+                        <div class="col-5" name="logo">
+                            <img
+                                t-if="doc.company_id.logo"
+                                t-att-src="image_data_uri(doc.company_id.logo)"
+                                style="max-height: 80px;"
+                                class="float-left"
+                            />
+                        </div>
+                        <div class="col-2" />
+                        <div class="col-5 text-center pt-3" name="picking_ref">
+                            <div
+                                t-field="dest_picking.name"
+                                t-options="{'widget': 'barcode', 'img_style': 'width:100%'}"
+                            />
+                            <h4>
+                                <strong t-field="dest_picking.name" />
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div
+                            class="col-5 border border-dark rounded text-center"
+                            style="padding: 60px 0;"
+                            name="client"
+                        >
+                            <span t-field="dest_picking.partner_id" />
+                        </div>
+                        <div class="col-2" />
+                        <div
+                            class="col-5 border border-dark rounded"
+                            name="package_number"
+                        >
+                            <h6>Number of packages:</h6>
+                            <div style="font-size: 4em" class="text-center">
+                                <span t-out="pack_num + 1" />/<span
+                                    t-field="doc.number_of_packages"
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div style="page-break-before:always;" />
+            </t>
+        </t>
+    </template>
+    <template id="delivery_package_number_report">
+        <t t-foreach="docs" t-as="doc">
+            <t t-call="delivery_package_number.delivery_package_number_document" />
+        </t>
+    </template>
+    <record id="action_delivery_package_number_report" model="ir.actions.report">
+        <field name="name">Delivery package number</field>
+        <field name="model">stock.picking</field>
+        <field name="binding_model_id" ref="stock.model_stock_picking" />
+        <field name="report_type">qweb-pdf</field>
+        <field
+            name="report_name"
+        >delivery_package_number.delivery_package_number_report</field>
+        <field
+            name="report_file"
+        >delivery_package_number.delivery_package_number_report</field>
+        <field name="paperformat_id" ref="paperformat_number_of_packages_label" />
+    </record>
+</odoo>
