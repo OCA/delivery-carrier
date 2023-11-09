@@ -76,6 +76,7 @@ class DeliveryRoulierCase(TransactionCase):
             {
                 "carrier_id": self.test_carrier.id,
                 "partner_id": partner.id,
+                "warehouse_id": self.ref("stock.warehouse0"),
                 "order_line": [
                     (0, 0, {"product_id": product.id, "product_uom_qty": 1})
                 ],
