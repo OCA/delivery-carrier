@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_number_package_validate" model="ir.ui.view">
+        <field name="name">stock.number.package.validate.wizard</field>
+        <field name="model">stock.number.package.validate.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Set number of packages">
+                <group>
+                    <field name="number_of_packages" />
+                </group>
+                <footer>
+                    <button
+                        name="process"
+                        string="Apply"
+                        type="object"
+                        class="btn-primary"
+                    />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                    <field name="print_package_label" widget="boolean_toggle" />
+                    <label for="print_package_label" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

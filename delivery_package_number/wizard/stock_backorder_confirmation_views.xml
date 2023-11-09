@@ -11,6 +11,17 @@
                     <field name="number_of_packages" />
                 </group>
             </xpath>
+            <xpath expr="//button[@special='cancel']" position="after">
+                <field
+                    name="print_package_label"
+                    widget="boolean_toggle"
+                    attrs="{'invisible': [('ask_number_of_packages','=',False)]}"
+                />
+                <label
+                    for="print_package_label"
+                    attrs="{'invisible': [('ask_number_of_packages','=',False)]}"
+                />
+            </xpath>
         </field>
     </record>
 </odoo>
