@@ -28,3 +28,17 @@ class TestDeliverySchenker(TestDeliverySchenkerCommon):
             "schenkerAddressId"
             not in list(filter(lambda a: a["type"] == "SHIPPER", vals["address"]))[0]
         )
+
+    def test_move_lines_only_with_result_package(self):
+        sale, picking = self._create_sale_order()
+        self._process_picking(picking, with_package=True)
+        # TODO: to be removed when there is a auto_install module between
+        # stock_quant_package_dimension and delivery_schenker
+        if hasattr(picking.move_line_ids.result_package_id, "volume"):
+            picking.move_line_ids.result_package_id.volume = 1
+        data = self.carrier._prepare_schenker_shipping(picking)
+        expected = self._prepare_schenker_shipping(picking)
+        expected["shippingInformation"]["shipmentPosition"][0][
+            "cargoDesc"
+        ] = " / ".join([picking.name, picking.move_line_ids.result_package_id.name])
+        self.assertDictEqual(expected, data)

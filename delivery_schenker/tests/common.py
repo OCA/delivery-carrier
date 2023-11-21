@@ -60,13 +60,16 @@ class TestDeliverySchenkerCommon(common.SavepointCase):
         cls.sale, cls.picking = cls._create_sale_order(cls)
         cls._process_picking(cls, cls.picking)
 
-    def _process_picking(self, picking):
+    def _process_picking(self, picking, with_package=False):
         picking.move_lines.quantity_done = 1
+        if with_package:
+            picking._put_in_pack(picking.move_line_ids)
         picking.button_validate()
         # Delete result package, otherwise Unittests will fail
         # because the addon base_delivery_carrier_label gets installed first
         # which creates a default package within the method _set_a_default_package
-        picking.move_line_ids.result_package_id = False
+        if not with_package:
+            picking.move_line_ids.result_package_id = False
         picking.date_done = "2023-05-04 00:00:00"
 
     def _create_sale_order(self):
