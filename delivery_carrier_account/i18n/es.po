@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-08-03 15:09+0000\n"
-"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
+"PO-Revision-Date: 2023-11-29 11:34+0000\n"
+"Last-Translator: Javier Sanchez <jsanchezdeavila@gmail.com>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -45,7 +45,7 @@ msgstr "Cuenta del transportista"
 #. module: delivery_carrier_account
 #: model:ir.model.fields,field_description:delivery_carrier_account.field_carrier_account__company_id
 msgid "Company"
-msgstr "Companía"
+msgstr "Compañía"
 
 #. module: delivery_carrier_account
 #: model:ir.model.fields,field_description:delivery_carrier_account.field_carrier_account__create_uid
