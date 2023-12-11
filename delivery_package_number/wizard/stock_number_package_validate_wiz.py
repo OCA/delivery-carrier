@@ -1,6 +1,6 @@
 # Copyright 2023 Tecnativa - Carlos Roca
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-from odoo import fields, models
+from odoo import api, fields, models
 
 
 class StockNumberPackageValidateWiz(models.TransientModel):
@@ -9,6 +9,24 @@ class StockNumberPackageValidateWiz(models.TransientModel):
     _description = "Wizard to force set number of pickings when validate"
 
     pick_ids = fields.Many2many("stock.picking", "stock_picking_number_package_rel")
+    stock_number_package_validation_line_ids = fields.One2many(
+        comodel_name="stock.number.package.validate.line.wizard",
+        inverse_name="wiz_id",
+        compute="_compute_stock_number_package_validation_line_ids",
+        readonly=False,
+        store=True,
+    )
+
+    @api.depends("pick_ids")
+    def _compute_stock_number_package_validation_line_ids(self):
+        for wiz in self:
+            if len(wiz.pick_ids) <= 1:
+                wiz.stock_number_package_validation_line_ids = False
+            else:
+                wiz.stock_number_package_validation_line_ids = [
+                    fields.Command.create({"picking_id": picking.id})
+                    for picking in wiz.pick_ids
+                ]
 
     def process(self):
         if self.number_of_packages:
@@ -36,3 +54,16 @@ class StockNumberPackageValidateWiz(models.TransientModel):
         report_action = report.report_action(self.pick_ids)
         report_action.update({"close_on_report_download": True})
         return report_action
+
+
+class StockNumberPackageValidateLineWizLine(models.TransientModel):
+    _name = "stock.number.package.validate.line.wizard"
+    _description = "Stock Number Package Lines Wizard"
+
+    wiz_id = fields.Many2one(
+        comodel_name="stock.number.package.validate.wizard", readonly=True
+    )
+    picking_id = fields.Many2one(comodel_name="stock.picking")
+    number_of_packages = fields.Integer(
+        related="picking_id.number_of_packages", readonly=False
+    )
