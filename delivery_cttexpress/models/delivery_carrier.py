@@ -1,5 +1,7 @@
 # Copyright 2022 Tecnativa - David Vidal
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+import time
+
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
@@ -38,6 +40,13 @@ class DeliveryCarrier(models.Model):
         string="Document format",
     )
     cttexpress_document_offset = fields.Integer(string="Document Offset")
+    cttexpress_label_delay = fields.Float(
+        string="Label Fetch Delay (seconds)",
+        help="The server might not be ready to deliver the label right after the "
+        "shipping is saved. We need to introduce a little delay. Tipacally 1 s will be "
+        "enough",
+        default=1,
+    )
 
     def _ctt_request(self):
         """Get CTT Request object
@@ -253,6 +262,7 @@ class DeliveryCarrier(models.Model):
         if not reference:
             return False
         ctt_request = self._ctt_request()
+        time.sleep(self.cttexpress_label_delay)
         try:
             error, label = ctt_request.get_documents_multi(
                 reference,
