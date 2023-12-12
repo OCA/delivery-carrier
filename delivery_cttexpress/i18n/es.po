@@ -135,7 +135,7 @@ msgid "CTT Express label for %s"
 msgstr "Etiqueta CTT Express para %s"
 
 #. module: delivery_cttexpress
-#: code:addons/delivery_cttexpress/models/delivery_carrier.py:227
+#: code:addons/delivery_cttexpress/models/delivery_carrier.py:235
 #, python-format
 msgid "CTT Shipping Documents"
 msgstr "Documentos de envío CTT"
@@ -279,6 +279,11 @@ msgstr "Obtener el manifiesto de CTT Express para un rango de fechas"
 #: model:ir.model.fields,field_description:delivery_cttexpress.field_cttexpress_pickup_wizard__id
 msgid "ID"
 msgstr "ID"
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields,field_description:delivery_cttexpress.field_delivery_carrier__cttexpress_label_delay
+msgid "Label Fetch Delay (seconds)"
+msgstr ""
 
 #. module: delivery_cttexpress
 #: model_terms:ir.ui.view,arch_db:delivery_cttexpress.view_delivery_carrier_form
@@ -437,7 +442,14 @@ msgid "Test connection"
 msgstr "Comprobar conexión"
 
 #. module: delivery_cttexpress
-#: code:addons/delivery_cttexpress/models/delivery_carrier.py:132
+#: model:ir.model.fields,help:delivery_cttexpress.field_delivery_carrier__cttexpress_label_delay
+msgid ""
+"The server might not be ready to deliver the label right after the shipping "
+"is saved. We need to introduce a little delay. Tipacally 1 s will be enough"
+msgstr ""
+
+#. module: delivery_cttexpress
+#: code:addons/delivery_cttexpress/models/delivery_carrier.py:140
 #, python-format
 msgid ""
 "This CTT Express service (%s) isn't allowed for this account configuration. "
