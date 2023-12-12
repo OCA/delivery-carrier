@@ -72,6 +72,7 @@
                                 name="cttexpress_document_offset"
                                 attrs="{'required': [('delivery_type', '=', 'cttexpress')]}"
                             />
+                            <field name="cttexpress_label_delay" />
                         </group>
                     </group>
                 </page>
