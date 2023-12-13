@@ -5,22 +5,19 @@
         <field name="model">purchase.order</field>
         <field name="inherit_id" ref="purchase.purchase_order_form" />
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='company_id']/.." position="inside">
+            <div name="reminder" position="after">
                 <label for="carrier_id" />
-                <div>
-                    <field
-                        name="carrier_id"
-                        class="oe_inline"
-                        style="margin-right: 3.0em;"
-                    />
+                <div class="d-flex">
+                    <field name="carrier_id" options="{'no_open': True}" />
+                    <span class="o_form_label mx-3" />
                     <field
                         name="delivery_price"
-                        class="oe_inline"
                         widget='monetary'
                         options="{'currency_field': 'currency_id'}"
+                        attrs="{'invisible': [('carrier_id', '=', False)]}"
                     />
                 </div>
-            </xpath>
+            </div>
         </field>
     </record>
 </odoo>
