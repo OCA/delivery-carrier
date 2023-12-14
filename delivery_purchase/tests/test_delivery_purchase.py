@@ -3,7 +3,7 @@
 from odoo.tests import Form, common
 
 
-class TestDeliveryPurchase(common.SavepointCase):
+class TestDeliveryPurchaseBase(common.SavepointCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -77,6 +77,8 @@ class TestDeliveryPurchase(common.SavepointCase):
         model = self.env[res["res_model"]].with_context(**res["context"])
         model.create({}).process()
 
+
+class TestDeliveryPurchase(TestDeliveryPurchaseBase):
     def test_onchange_partner_id(self):
         self.assertEqual(self.purchase.carrier_id, self.carrier_fixed)
 
