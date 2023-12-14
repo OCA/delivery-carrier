@@ -105,9 +105,11 @@ class TestDeliveryPurchase(common.SavepointCase):
         self.assertEqual(self.purchase.delivery_price, 30)
 
     def test_picking_carrier_01(self):
+        self.assertEqual(self.purchase.delivery_price, 20)
         self.purchase.button_confirm()
         picking = self.purchase.picking_ids
         self.assertEqual(picking.carrier_id, self.carrier_fixed)
+        self.assertEqual(picking.carrier_price, 20)
         picking.carrier_id = self.carrier_rules.id
         self._action_picking_validate(picking)
         self.assertEqual(picking.carrier_price, 10)

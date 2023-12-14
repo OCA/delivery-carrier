@@ -43,6 +43,7 @@ class PurchaseOrder(models.Model):
         res = super()._prepare_picking()
         if self.carrier_id:
             res["carrier_id"] = self.carrier_id.id
+            res["carrier_price"] = self.delivery_price
         return res
 
     def _create_delivery_line(self, carrier, price_unit):
