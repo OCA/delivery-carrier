@@ -1,0 +1,98 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* delivery_carrier_customer_info
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#. module: delivery_carrier_customer_info
+#: model:ir.model.fields,field_description:delivery_carrier_customer_info.field_res_partner_delivery_info__active
+msgid "Active"
+msgstr ""
+
+#. module: delivery_carrier_customer_info
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_customer_info.res_partner_delivery_info_form_view
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_customer_info.res_partner_delivery_info_search_view
+msgid "Archived"
+msgstr ""
+
+#. module: delivery_carrier_customer_info
+#: model:ir.model,name:delivery_carrier_customer_info.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: delivery_carrier_customer_info
+#: model_terms:ir.actions.act_window,help:delivery_carrier_customer_info.action_res_partner_delivery_info
+msgid ""
+"Create a delivery indication to the carriers, to be used by the customers."
+msgstr ""
+
+#. module: delivery_carrier_customer_info
+#: model:ir.model.fields,field_description:delivery_carrier_customer_info.field_res_partner_delivery_info__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: delivery_carrier_customer_info
+#: model:ir.model.fields,field_description:delivery_carrier_customer_info.field_res_partner_delivery_info__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: delivery_carrier_customer_info
+#: model:ir.actions.act_window,name:delivery_carrier_customer_info.action_res_partner_delivery_info
+#: model:ir.model,name:delivery_carrier_customer_info.model_res_partner_delivery_info
+#: model:ir.ui.menu,name:delivery_carrier_customer_info.menu_action_res_partner_delivery_info
+msgid "Delivery Indications by Customer to Carrier"
+msgstr ""
+
+#. module: delivery_carrier_customer_info
+#: model:ir.model.fields,field_description:delivery_carrier_customer_info.field_res_partner__display_name
+#: model:ir.model.fields,field_description:delivery_carrier_customer_info.field_res_partner_delivery_info__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: delivery_carrier_customer_info
+#: model:ir.model.fields,field_description:delivery_carrier_customer_info.field_res_partner__id
+#: model:ir.model.fields,field_description:delivery_carrier_customer_info.field_res_partner_delivery_info__id
+msgid "ID"
+msgstr ""
+
+#. module: delivery_carrier_customer_info
+#: model:ir.model.fields,field_description:delivery_carrier_customer_info.field_res_partner__delivery_info_id
+#: model:ir.model.fields,field_description:delivery_carrier_customer_info.field_res_users__delivery_info_id
+msgid "Info for Delivery Carrier"
+msgstr ""
+
+#. module: delivery_carrier_customer_info
+#: model:ir.model.fields,field_description:delivery_carrier_customer_info.field_res_partner____last_update
+#: model:ir.model.fields,field_description:delivery_carrier_customer_info.field_res_partner_delivery_info____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: delivery_carrier_customer_info
+#: model:ir.model.fields,field_description:delivery_carrier_customer_info.field_res_partner_delivery_info__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: delivery_carrier_customer_info
+#: model:ir.model.fields,field_description:delivery_carrier_customer_info.field_res_partner_delivery_info__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: delivery_carrier_customer_info
+#: model:ir.model.fields,field_description:delivery_carrier_customer_info.field_res_partner_delivery_info__name
+msgid "Name"
+msgstr ""
+
+#. module: delivery_carrier_customer_info
+#: model:ir.model.fields,field_description:delivery_carrier_customer_info.field_res_partner_delivery_info__text
+msgid "Text"
+msgstr ""
