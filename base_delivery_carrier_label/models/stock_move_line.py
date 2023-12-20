@@ -33,7 +33,7 @@ class StockMoveLine(models.Model):
             # if not defined we assume it's in kg
             if product.uom_id.id not in allowed:
                 _logger.warning(
-                    "Type conversion not implemented for product %s" % product.id
+                    "Type conversion not implemented for product %s", product.id
                 )
                 cant_calc_total = True
             # reserved_qty may be 0 if you don't set move line
