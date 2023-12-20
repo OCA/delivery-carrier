@@ -10,13 +10,10 @@ class StockMove(models.Model):
     def _get_new_picking_values(self):
         vals = super(StockMove, self)._get_new_picking_values()
 
-        order_commitment_date = (
-            self.sale_line_id and self.sale_line_id.order_id.commitment_date
-        )
-
-        if order_commitment_date:
+        order_commitment_dates = self.sale_line_id.order_id.mapped("commitment_date")
+        if order_commitment_dates:
             user_time = fields.Datetime.context_timestamp(
-                self, order_commitment_date
+                self, max(order_commitment_dates)
             ).date()
             vals["delivery_fixed_date"] = user_time
         return vals
