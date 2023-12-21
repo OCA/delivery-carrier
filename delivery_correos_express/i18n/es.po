@@ -7,64 +7,65 @@ msgstr ""
 "Project-Id-Version: Odoo Server 14.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-12-03 11:41+0000\n"
-"PO-Revision-Date: 2021-12-03 11:41+0000\n"
-"Last-Translator: \n"
+"PO-Revision-Date: 2023-12-21 21:34+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: \n"
-"Language: \n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: delivery_correos_express
 #: model:ir.model.fields.selection,name:delivery_correos_express.selection__delivery_carrier__correos_express_product__53
 msgid "53 ENTREGA + MANIPULACION LOINEX"
-msgstr ""
+msgstr "53 ENTREGA + MANIPULACION LOINEX"
 
 #. module: delivery_correos_express
 #: model:ir.model.fields.selection,name:delivery_correos_express.selection__delivery_carrier__correos_express_product__54
 msgid "54 ENTREGA + RECOGIDA LOINEX"
-msgstr ""
+msgstr "54 ENTREGA + RECOGIDA LOINEX"
 
 #. module: delivery_correos_express
 #: model:ir.model.fields.selection,name:delivery_correos_express.selection__delivery_carrier__correos_express_product__55
 msgid "55 ENTREGA + RECOGIDA + MANIPULA LOINEX"
-msgstr ""
+msgstr "55 ENTREGA + RECOGIDA + MANIPULA LOINEX"
 
 #. module: delivery_correos_express
 #: model:ir.model.fields.selection,name:delivery_correos_express.selection__delivery_carrier__correos_express_product__66
 msgid "BALEARES"
-msgstr ""
+msgstr "BALEARES"
 
 #. module: delivery_correos_express
 #: model:ir.model.fields.selection,name:delivery_correos_express.selection__delivery_carrier__correos_express_product__27
 msgid "CAMPAÑA CEX"
-msgstr ""
+msgstr "CAMPAÑA CEX"
 
 #. module: delivery_correos_express
 #: model:ir.model.fields.selection,name:delivery_correos_express.selection__delivery_carrier__correos_express_product__68
 msgid "CANARIAS AEREO"
-msgstr ""
+msgstr "CANARIAS AEREO"
 
 #. module: delivery_correos_express
 #: model:ir.model.fields.selection,name:delivery_correos_express.selection__delivery_carrier__correos_express_product__67
 msgid "CANARIAS EXPRES"
-msgstr ""
+msgstr "CANARIAS EXPRÉS"
 
 #. module: delivery_correos_express
 #: model:ir.model.fields.selection,name:delivery_correos_express.selection__delivery_carrier__correos_express_product__69
 msgid "CANARIAS MARITIMO"
-msgstr ""
+msgstr "CANARIAS MARÍTIMO"
 
 #. module: delivery_correos_express
 #: model:ir.model.fields.selection,name:delivery_correos_express.selection__delivery_carrier__correos_express_product__73
 msgid "CHRONO PORTUGAL OPTICA"
-msgstr ""
+msgstr "CHRONO PORTUGAL ÓPTICA"
 
 #. module: delivery_correos_express
 #: model:ir.model.fields.selection,name:delivery_correos_express.selection__delivery_carrier__delivery_type__correos_express
 msgid "Correos Express"
-msgstr ""
+msgstr "Correos Exprés"
 
 #. module: delivery_correos_express
 #: code:addons/delivery_correos_express/models/delivery_carrier.py:0
@@ -74,9 +75,9 @@ msgid ""
 "you should rely on another price method instead or override this one in your "
 "custom code."
 msgstr ""
-"Correos Express API no provee ninguna forma de calcular las tarifas de "
-"envío, por lo tanto se deberia usar otro método o sobreescribir este en "
-"código personalizado"
+"La API de Correos Express no proporciona métodos para calcular las tarifas "
+"de entrega, por lo que debe utilizar otro método de precio en su lugar o "
+"anular éste en su código personalizado."
 
 #. module: delivery_correos_express
 #: model:ir.model.fields,field_description:delivery_correos_express.field_delivery_carrier__correos_express_customer_code
@@ -159,23 +160,23 @@ msgstr "Debido"
 #. module: delivery_correos_express
 #: model:ir.model.fields.selection,name:delivery_correos_express.selection__delivery_carrier__correos_express_product__93
 msgid "EPAQ24"
-msgstr ""
+msgstr "EPAQ24"
 
 #. module: delivery_correos_express
 #: model:ir.model.fields,field_description:delivery_correos_express.field_delivery_carrier__id
 #: model:ir.model.fields,field_description:delivery_correos_express.field_stock_picking__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: delivery_correos_express
 #: model:ir.model.fields.selection,name:delivery_correos_express.selection__delivery_carrier__correos_express_product__90
 msgid "INTERNACIONAL ESTANDAR"
-msgstr ""
+msgstr "INTERNACIONAL ESTÁNDAR"
 
 #. module: delivery_correos_express
 #: model:ir.model.fields.selection,name:delivery_correos_express.selection__delivery_carrier__correos_express_product__91
 msgid "INTERNACIONAL EXPRES"
-msgstr ""
+msgstr "INTERNACIONAL EXPRÉS"
 
 #. module: delivery_correos_express
 #: model:ir.model.fields,field_description:delivery_correos_express.field_delivery_carrier____last_update
@@ -192,37 +193,37 @@ msgstr "No se ha devuelto ninguna etiqueta"
 #. module: delivery_correos_express
 #: model:ir.model.fields.selection,name:delivery_correos_express.selection__delivery_carrier__correos_express_product__77
 msgid "OPTICA PREPAGADO"
-msgstr ""
+msgstr "ÓPTICA PREPAGADO"
 
 #. module: delivery_correos_express
 #: model:ir.model.fields.selection,name:delivery_correos_express.selection__delivery_carrier__correos_express_product__92
 msgid "PAQ EMPRESA 14"
-msgstr ""
+msgstr "PAQ EMPRESA 14"
 
 #. module: delivery_correos_express
 #: model:ir.model.fields.selection,name:delivery_correos_express.selection__delivery_carrier__correos_express_product__61
 msgid "PAQ10"
-msgstr ""
+msgstr "PAQ10"
 
 #. module: delivery_correos_express
 #: model:ir.model.fields.selection,name:delivery_correos_express.selection__delivery_carrier__correos_express_product__62
 msgid "PAQ14"
-msgstr ""
+msgstr "PAQ14"
 
 #. module: delivery_correos_express
 #: model:ir.model.fields.selection,name:delivery_correos_express.selection__delivery_carrier__correos_express_product__63
 msgid "PAQ24"
-msgstr ""
+msgstr "PAQ24"
 
 #. module: delivery_correos_express
 #: model:ir.model.fields.selection,name:delivery_correos_express.selection__delivery_carrier__correos_express_product__76
 msgid "PAQUETERIA OPTICAS"
-msgstr ""
+msgstr "PAQUETERÍA ÓPTICAS"
 
 #. module: delivery_correos_express
 #: model:ir.model.fields.selection,name:delivery_correos_express.selection__delivery_carrier__correos_express_label_type__1
 msgid "PDF"
-msgstr ""
+msgstr "PDF"
 
 #. module: delivery_correos_express
 #: model:ir.model.fields.selection,name:delivery_correos_express.selection__delivery_carrier__correos_express_transport__p
@@ -264,4 +265,4 @@ msgstr "Tipo de petición no soportado, por favor solo usa 'GET' o 'POST'"
 #. module: delivery_correos_express
 #: model:ir.model.fields.selection,name:delivery_correos_express.selection__delivery_carrier__correos_express_label_type__2
 msgid "ZPL"
-msgstr ""
+msgstr "ZPL"
