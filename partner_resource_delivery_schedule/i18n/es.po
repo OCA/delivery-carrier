@@ -1,0 +1,122 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* partner_resource_delivery_schedule
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-02-01 11:32+0000\n"
+"PO-Revision-Date: 2024-02-01 12:34+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. module: partner_resource_delivery_schedule
+#. odoo-python
+#: code:addons/partner_resource_delivery_schedule/models/sale_order.py:0
+#, python-format
+msgid ""
+"Commitment date or expected date is required to calculate the next "
+"commitment date"
+msgstr ""
+"La Fecha de Entrega o la Fecha Esperada son requeridas para calcular la "
+"siguiente Fecha de Entrega"
+
+#. module: partner_resource_delivery_schedule
+#: model:ir.model,name:partner_resource_delivery_schedule.model_res_partner
+msgid "Contact"
+msgstr "Contacto"
+
+#. module: partner_resource_delivery_schedule
+#: model_terms:ir.actions.act_window,help:partner_resource_delivery_schedule.resource_calendar_delivery_schedule_action
+msgid "Create a new Delivery Schedule record"
+msgstr "Crear un nuevo registro de Planificación de Entrega"
+
+#. module: partner_resource_delivery_schedule
+#: model:ir.model.fields.selection,name:partner_resource_delivery_schedule.selection__resource_resource__resource_type__delivery
+msgid "Delivery"
+msgstr "Entrega"
+
+#. module: partner_resource_delivery_schedule
+#: model:ir.model.fields,field_description:partner_resource_delivery_schedule.field_res_partner__delivery_schedule_calendar_id
+#: model:ir.model.fields,field_description:partner_resource_delivery_schedule.field_res_users__delivery_schedule_calendar_id
+msgid "Delivery Schedule Calendar"
+msgstr "Calendario de planificación de entregas"
+
+#. module: partner_resource_delivery_schedule
+#: model:ir.model.fields,field_description:partner_resource_delivery_schedule.field_res_partner__delivery_schedule_resource_id
+#: model:ir.model.fields,field_description:partner_resource_delivery_schedule.field_res_users__delivery_schedule_resource_id
+msgid "Delivery Schedule Resource"
+msgstr "Recurso de planificación de entregas"
+
+#. module: partner_resource_delivery_schedule
+#: model:ir.actions.act_window,name:partner_resource_delivery_schedule.resource_calendar_delivery_schedule_action
+#: model:ir.ui.menu,name:partner_resource_delivery_schedule.resource_calendar_delivery_schedule_sales_menu
+msgid "Delivery Schedules"
+msgstr "Planificaciones de entregas"
+
+#. module: partner_resource_delivery_schedule
+#: model_terms:ir.ui.view,arch_db:partner_resource_delivery_schedule.view_partner_form
+msgid "Enable Delivery Schedule"
+msgstr "Habilitar planificación de entregas"
+
+#. module: partner_resource_delivery_schedule
+#: model_terms:ir.ui.view,arch_db:partner_resource_delivery_schedule.view_order_form
+msgid "Find next available date"
+msgstr "Buscar la siguiente fecha disponible"
+
+#. module: partner_resource_delivery_schedule
+#: model:ir.model.fields,field_description:partner_resource_delivery_schedule.field_resource_calendar__is_delivery_schedule
+msgid "Is Delivery Schedule"
+msgstr "Es una planificación de entrega"
+
+#. module: partner_resource_delivery_schedule
+#. odoo-python
+#: code:addons/partner_resource_delivery_schedule/models/sale_order.py:0
+#, python-format
+msgid ""
+"No available date found for commitment date in the next %(interval_days)s "
+"days since %(date_start)s."
+msgstr ""
+"No se ha encontrado ninguna fecha para la Fecha de Entrega en los "
+"próximos %(interval_days)s días desde %(date_start)s."
+
+#. module: partner_resource_delivery_schedule
+#: model_terms:ir.actions.act_window,help:partner_resource_delivery_schedule.resource_calendar_delivery_schedule_action
+msgid ""
+"Once the Delivery Schedule record is created, you can assign it to a "
+"Customer."
+msgstr ""
+"Una vez que el registro de Planificación de entrega está creado, puedes "
+"asignarlo a un Cliente."
+
+#. module: partner_resource_delivery_schedule
+#: model:ir.model,name:partner_resource_delivery_schedule.model_resource_calendar
+msgid "Resource Working Time"
+msgstr "Tiempo de Trabajo de Recursos"
+
+#. module: partner_resource_delivery_schedule
+#: model:ir.model,name:partner_resource_delivery_schedule.model_resource_resource
+msgid "Resources"
+msgstr "Recursos"
+
+#. module: partner_resource_delivery_schedule
+#: model:ir.model,name:partner_resource_delivery_schedule.model_sale_order
+msgid "Sales Order"
+msgstr "Pedido de venta"
+
+#. module: partner_resource_delivery_schedule
+#: model:ir.model,name:partner_resource_delivery_schedule.model_stock_picking
+msgid "Transfer"
+msgstr "Albarán"
+
+#. module: partner_resource_delivery_schedule
+#: model:ir.model.fields,field_description:partner_resource_delivery_schedule.field_resource_resource__resource_type
+msgid "Type"
+msgstr "Tipo"
