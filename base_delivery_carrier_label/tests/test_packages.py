@@ -11,7 +11,8 @@ class TestCarrierPackages(CarrierLabelCase):
         super().setUpClass()
         cls.loader = FakeModelLoader(cls.env, cls.__module__)
         cls.loader.backup_registry()
-        from .models.carrier_test import DeliveryCarrierTest, StockPicking
+        from .models.carrier_test import DeliveryCarrierTest
+        from .models.stock_picking import StockPicking
 
         cls.loader.update_registry(
             (
