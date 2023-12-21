@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-08-16 08:08+0000\n"
-"PO-Revision-Date: 2022-08-16 10:09+0200\n"
-"Last-Translator: <>\n"
+"PO-Revision-Date: 2023-12-21 21:34+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: \n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: \n"
-"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: delivery_package_number
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_backorder_confirmation__ask_number_of_packages
@@ -26,7 +26,7 @@ msgstr "Preguntar número de Bultos"
 #. module: delivery_package_number
 #: model:ir.model,name:delivery_package_number.model_stock_backorder_confirmation
 msgid "Backorder Confirmation"
-msgstr ""
+msgstr "Confirmación de pedido pendiente"
 
 #. module: delivery_package_number
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_backorder_confirmation__display_name
@@ -68,7 +68,7 @@ msgstr "Número de Bultos"
 #. module: delivery_package_number
 #: model:ir.model.fields,help:delivery_package_number.field_stock_backorder_confirmation__number_of_packages
 msgid "Set the number of packages for picking to be validated"
-msgstr ""
+msgstr "Establezca el número de paquetes para recoger que deben validarse"
 
 #. module: delivery_package_number
 #: model:ir.model.fields,help:delivery_package_number.field_stock_immediate_transfer__number_of_packages
