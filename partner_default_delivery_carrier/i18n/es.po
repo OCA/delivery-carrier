@@ -6,13 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2023-12-21 21:34+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: partner_default_delivery_carrier
 #: model_terms:ir.ui.view,arch_db:partner_default_delivery_carrier.res_config_settings_view_form_inherit
@@ -22,28 +24,33 @@ msgid ""
 "                        </span>\n"
 "                        <span class=\"fa fa-lg fa-building-o\" title=\"Values set here are company-specific.\" groups=\"base.group_multi_company\"/>"
 msgstr ""
+"<span class=\"o_form_label\">\n"
+"                            Método de entrega predeterminado de socios\n"
+"                        </span>\n"
+"                        <span class=\"fa fa-lg fa-building-o\" title=\"Values"
+" set here are company-specific.\" groups=\"base.group_multi_company\"/>"
 
 #. module: partner_default_delivery_carrier
 #: model:ir.model,name:partner_default_delivery_carrier.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Ajustes de Config"
 
 #. module: partner_default_delivery_carrier
 #: model:ir.model.fields,field_description:partner_default_delivery_carrier.field_res_config_settings__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Mostrar Nombre"
 
 #. module: partner_default_delivery_carrier
 #: model:ir.model.fields,field_description:partner_default_delivery_carrier.field_res_config_settings__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: partner_default_delivery_carrier
 #: model:ir.model.fields,field_description:partner_default_delivery_carrier.field_res_config_settings____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última Modificación el"
 
 #. module: partner_default_delivery_carrier
 #: model:ir.model.fields,field_description:partner_default_delivery_carrier.field_res_config_settings__partner_default_delivery_carrier_id
 msgid "Partner Default Delivery Carrier"
-msgstr ""
+msgstr "Transportista de Entrega Predeterminado del Socio"
