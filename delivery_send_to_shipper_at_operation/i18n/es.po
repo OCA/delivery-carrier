@@ -6,13 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2023-12-21 21:34+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: delivery_send_to_shipper_at_operation
 #: model:ir.model.fields,help:delivery_send_to_shipper_at_operation.field_delivery_carrier__send_delivery_notice_picking_type_ids
@@ -24,6 +26,14 @@ msgid ""
 "            operation).\n"
 "        "
 msgstr ""
+"\n"
+"            Cuando una operación del tipo indicado se marque como realizada, "
+"la\n"
+"            notificación se enviará al transportista (en lugar del "
+"comportamiento por defecto\n"
+"            que es cada vez que se establece un método de entrega en una\n"
+"            operación).\n"
+"        "
 
 #. module: delivery_send_to_shipper_at_operation
 #: model:ir.model.fields,help:delivery_send_to_shipper_at_operation.field_delivery_carrier__send_delivery_notice_on
@@ -43,56 +53,78 @@ msgid ""
 "    (e.g. re-route goods from carrier A to B), then a fallback ensure the\n"
 "    ship operation will trigger the call anyway.\n"
 msgstr ""
+"\n"
+"    'Operación de envío' (por defecto): envía la notificación al "
+"transportista después de que la\n"
+"    operación que tiene un método de entrega definido haya sido marcada como "
+"realizada.\n"
+"\n"
+"    Operaciones definidas': envía la notificación al transportista después "
+"de que la operación\n"
+"    de los tipos elegidos. En este caso, el\n"
+"    En este caso, el transportista se tomará en cuenta para las operaciones "
+"siguientes hasta que se encuentre un transportista.\n"
+"    hasta que se encuentre un transportista. Por ejemplo, en una "
+"configuración de recogida + embalaje + envío,\n"
+"    si configura la notificación para que se envíe en el tipo de operación "
+"de empaquetado,\n"
+"    se buscará el transportista definido en la siguiente operación (el barco "
+"en este caso).\n"
+"\n"
+"    Si no se ha enviado ninguna notificación al llegar al paso del barco\n"
+"    (por ejemplo, redirigir las mercancías del transportista A al B), "
+"entonces un fallback asegurará la\n"
+"    operación de buque activará la llamada de todos modos.\n"
 
 #. module: delivery_send_to_shipper_at_operation
 #: model:ir.model.fields.selection,name:delivery_send_to_shipper_at_operation.selection__delivery_carrier__send_delivery_notice_on__custom
 msgid "Defined operations"
-msgstr ""
+msgstr "Operaciones definidas"
 
 #. module: delivery_send_to_shipper_at_operation
 #: model:ir.model.fields,field_description:delivery_send_to_shipper_at_operation.field_stock_picking__delivery_notification_sent
 msgid "Delivery Notification Sent"
-msgstr ""
+msgstr "Notificación de Entrega Enviada"
 
 #. module: delivery_send_to_shipper_at_operation
 #: model:ir.model.fields,field_description:delivery_send_to_shipper_at_operation.field_delivery_carrier__display_name
 #: model:ir.model.fields,field_description:delivery_send_to_shipper_at_operation.field_stock_picking__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Mostrar Nombre"
 
 #. module: delivery_send_to_shipper_at_operation
 #: model:ir.model.fields,field_description:delivery_send_to_shipper_at_operation.field_delivery_carrier__id
 #: model:ir.model.fields,field_description:delivery_send_to_shipper_at_operation.field_stock_picking__id
 msgid "ID"
-msgstr ""
+msgstr "ID (identificación)"
 
 #. module: delivery_send_to_shipper_at_operation
 #: model:ir.model.fields,field_description:delivery_send_to_shipper_at_operation.field_delivery_carrier____last_update
 #: model:ir.model.fields,field_description:delivery_send_to_shipper_at_operation.field_stock_picking____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última Modificación el"
 
 #. module: delivery_send_to_shipper_at_operation
 #: model:ir.model.fields,field_description:delivery_send_to_shipper_at_operation.field_delivery_carrier__send_delivery_notice_on
 msgid "Send delivery notice on"
-msgstr ""
+msgstr "Enviar notificación de entrega el"
 
 #. module: delivery_send_to_shipper_at_operation
 #: model:ir.model.fields,field_description:delivery_send_to_shipper_at_operation.field_delivery_carrier__send_delivery_notice_picking_type_ids
 msgid "Send delivery notice operation types"
-msgstr ""
+msgstr "Tipos de operaciones de envío de notificación de entrega"
 
 #. module: delivery_send_to_shipper_at_operation
 #: model:ir.model.fields.selection,name:delivery_send_to_shipper_at_operation.selection__delivery_carrier__send_delivery_notice_on__ship
 msgid "Ship operation"
-msgstr ""
+msgstr "Operación del buque"
 
 #. module: delivery_send_to_shipper_at_operation
 #: model:ir.model,name:delivery_send_to_shipper_at_operation.model_delivery_carrier
 msgid "Shipping Methods"
-msgstr ""
+msgstr "Métodos de Envío"
 
 #. module: delivery_send_to_shipper_at_operation
 #: model:ir.model,name:delivery_send_to_shipper_at_operation.model_stock_picking
 msgid "Transfer"
-msgstr ""
+msgstr "Transferencia"
