@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tracking_event,ge_dhl_tracking.tracking_event,model_tracking_event,base.group_user,1,1,1,1
+access_dhl_ric,ge_dhl_tracking.dhl_ric,model_dhl_ric,base.group_user,1,1,1,1
+access_dhl_ice,ge_dhl_tracking.dhl_ice,model_dhl_ice,base.group_user,1,1,1,1
+access_dhl_event,ge_dhl_tracking.dhl_event,model_dhl_event,base.group_user,1,1,1,1

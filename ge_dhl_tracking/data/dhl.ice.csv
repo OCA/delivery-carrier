@@ -1,0 +1,52 @@
+id,code,name
+dhl_ice_csv_1,DLVRD,Delivered
+dhl_ice_csv_2,NTDEL,Not delivered
+dhl_ice_csv_3,DSPSD,Disposed of
+dhl_ice_csv_4,EXPHD,Exception hold
+dhl_ice_csv_5,LDEXC,Loading exception
+dhl_ice_csv_6,NTPUP,Not picked up
+dhl_ice_csv_7,PURCR,Pick up request created
+dhl_ice_csv_8,RETRN,Shipment will be returned to origin
+dhl_ice_csv_9,SECHK,Security checked
+dhl_ice_csv_10,OFWRD,Onforwarded
+dhl_ice_csv_11,DLVRF,Delivery refused
+dhl_ice_csv_12,MSRTD,Mis routed
+dhl_ice_csv_13,DMGDS,Damage discovered
+dhl_ice_csv_14,INFCL,In facility
+dhl_ice_csv_15,ITBAR,In bonded area
+dhl_ice_csv_16,HNDND,Handover to 3rd party - No delivery details expect
+dhl_ice_csv_17,ADVIS,Advise
+dhl_ice_csv_18,ALERT,Alert
+dhl_ice_csv_19,REPCK,Repacked
+dhl_ice_csv_20,MVDEX,Movement / tour vehicle departure exception
+dhl_ice_csv_21,MVTEX,Movement / tour vehicle exception
+dhl_ice_csv_22,SRTED,Sorted
+dhl_ice_csv_23,ICPRC,Into clearance processing
+dhl_ice_csv_24,LDTMV,Loaded to movement / tour vehicle
+dhl_ice_csv_25,RSDCP,Released from clearance processing
+dhl_ice_csv_26,DTNPC,Data, but no piece
+dhl_ice_csv_27,RCCLS,Record closed
+dhl_ice_csv_28,CNRFC,Consignee notified - Ready for collection
+dhl_ice_csv_29,HLDCC,Held for consignee collection
+dhl_ice_csv_30,CNFSC,Confiscation
+dhl_ice_csv_31,PBNDT,Piece, but no data
+dhl_ice_csv_32,HLDCP,Held for clearance purposes
+dhl_ice_csv_33,HLDCU,Held by Customs
+dhl_ice_csv_34,NTADT,Not assigned to delivery tour
+dhl_ice_csv_35,ASMVT,Assigned to movement / tour vehicle
+dhl_ice_csv_36,CANCL,The shipment order was canceled by the sender
+dhl_ice_csv_37,LDTHU,Loaded to handling unit
+dhl_ice_csv_38,MVARR,Movement / tour vehicle arrived
+dhl_ice_csv_39,MVDPT,Movement / tour vehicle departed
+dhl_ice_csv_40,PARCV,PAN Received by Carrier
+dhl_ice_csv_41,PMTCS,Payment received from customer
+dhl_ice_csv_42,SHRCU,Shipment Received from customer
+dhl_ice_csv_43,STORN,The previous event was deleted by driver
+dhl_ice_csv_44,TRBCR,Transferred between carriers
+dhl_ice_csv_45,ULFMV,Unloaded from movement / tour vehicle
+dhl_ice_csv_46,PCKDU,Picked up
+dhl_ice_csv_47,ROUCR,Re-Routed on customer request
+dhl_ice_csv_48,RELBL,Relabeled
+dhl_ice_csv_49,FWDCF,Forwarded to correct facility
+dhl_ice_csv_50,HNDDE,Handover to 3rd party - Delivery details expected
+dhl_ice_csv_51,CHECK,Checked

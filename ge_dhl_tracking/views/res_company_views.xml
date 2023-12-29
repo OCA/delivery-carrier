@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_res_company_dhl_parcel_de_configuration" model="ir.ui.view">
+        <field name="name">dhl_parcel_de Configuration</field>
+        <field name="model">res.company</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[last()]" position="after">
+                <page string="DHL Tracking Configuration">
+                    <group>
+                        <field name="use_dhl_tracking_de_shipping_provider"/>
+                    </group>
+                    <group attrs="{'invisible': [('use_dhl_tracking_de_shipping_provider', '!=', True)]}">
+                        <field name="dhl_tracking_parcel_de_api_url" attrs="{'required':[('use_dhl_tracking_de_shipping_provider','=',True)]}"/>
+                        <field name="dhl_tracking_userid" attrs="{'required':[('use_dhl_tracking_de_shipping_provider','=',True)]}"/>
+                        <field name="dhl_tracking_password" attrs="{'required':[('use_dhl_tracking_de_shipping_provider','=',True)]}"/>
+                        <field name="dhl_tracking_dhl_api_key" attrs="{'required':[('use_dhl_tracking_de_shipping_provider','=',True)]}"/>
+                        <field name="dhl_tracking_dhl_api_secret" attrs="{'required':[('use_dhl_tracking_de_shipping_provider','=',True)]}"/>
+                        <field name="dhl_tracking_domain" attrs="{'required':[('use_dhl_tracking_de_shipping_provider','=',True)]}"/>
+                        <field name="dhl_tracking_endpoint" attrs="{'required':[('use_dhl_tracking_de_shipping_provider','=',True)]}"/>
+                        <field name="dhl_tracking_url" attrs="{'required':[('use_dhl_tracking_de_shipping_provider','=',True)]}"/>
+
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

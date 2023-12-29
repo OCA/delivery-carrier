@@ -1,0 +1,24 @@
+<!--
+Copyright (c) 2023 Grüne Erde GmbH (https://https://www.grueneerde.com)
+All Rights Reserved
+Licensed under the Odoo Proprietary License v1.0 (OPL).
+See LICENSE file for full licensing details.
+-->
+<odoo>
+    <record id="dhl_parcel_de_shiipping_provider_details" model="ir.ui.view">
+        <field name="name">stock.picking.form</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="tracking_state_update" string="tracking_state_update" type="object" class="oe_highlight" />
+            </xpath>
+            <xpath expr="//button[@name='action_see_packages']" position="before">
+                <button name="action_see_dhl_tracking_event_ids" string="DHL Tracking Route" type="object" class="oe_stat_button" icon="fa-cubes" />
+            </xpath>
+            <xpath expr="//group[@name='other_infos']" position="before">
+                <button name="action_see_dhl_tracking_event_ids" string="DHL Tracking Route" type="object" class="oe_stat_button" icon="fa-cubes" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

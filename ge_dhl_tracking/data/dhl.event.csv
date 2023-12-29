@@ -1,0 +1,17 @@
+id,code,name
+dhl_event_csv_1,ZU,Delivery successful
+dhl_event_csv_2,ZN,Delivery attempt not successful
+dhl_event_csv_3,BV,Exception
+dhl_event_csv_4,PO,In delivery process
+dhl_event_csv_5,AN,Pickup not successful
+dhl_event_csv_6,VA,Electronic pre advise
+dhl_event_csv_7,ZF,Delivery to postal outlet
+dhl_event_csv_8,ZO,Customs clearance
+dhl_event_csv_9,GT,Money transfer
+dhl_event_csv_10,AA,Departed from
+dhl_event_csv_11,EE,Arrived at
+dhl_event_csv_12,LA,In storage
+dhl_event_csv_13,DD,Data Service
+dhl_event_csv_14,NB,Normal processing
+dhl_event_csv_15,ES,Handed over to DHL
+dhl_event_csv_16,AE,Pickup successful

@@ -1,0 +1,95 @@
+<odoo>
+
+
+    <record id="view_tracking_event_tree" model="ir.ui.view">
+        <field name="name">tracking.event.tree</field>
+        <field name="model">tracking.event</field>
+        <field name="arch" type="xml">
+            <tree default_order='event_timestamp'>
+                <field name="name"/>
+                <field name="piece_code"/>
+                <field name="event_timestamp"/>
+                <field name="ice"/>
+                <field name="ice_name"/>
+                <field name="ric"/>
+                <field name="ric_name"/>
+                <field name="event_location"/>
+                <field name="event_country"/>
+                <field name="standard_event_code"/>
+                <field name="standard_event_name"/>
+
+                <field name="ruecksendung"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_tracking_event_form" model="ir.ui.view">
+        <field name="name">tracking.event.form</field>
+        <field name="model">tracking.event</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="name"/>
+                    <field name="event_timestamp"/>
+
+                </group>
+                <group>
+                    <field name="ice"/>
+                    <field name="ice_name"/>
+                    <field name="ric"/>
+                    <field name="ric_name"/>
+                    <field name="event_location"/>
+                    <field name="event_country"/>
+                    <field name="standard_event_code"/>
+                    <field name="standard_event_name"/>
+                    <field name="ruecksendung"/>
+                    <field name="image" widget="image" filename="filename"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action: Open Tracking Events -->
+    <record id="action_tracking_event" model="ir.actions.act_window">
+        <field name="name">Tracking Events</field>
+        <field name="res_model">tracking.event</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_ids" eval="[(5,0,0),
+        (0,0,{'view_mode':'tree', 'view_id': ref('ge_dhl_tracking.view_tracking_event_tree')}),
+        (0,0,{'view_mode':'form', 'view_id': ref('ge_dhl_tracking.view_tracking_event_form')})]"/>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                            Click 'Create' to add a new tracking event.
+            </p>
+        </field>
+    </record>
+
+
+
+    <record id="tracking_event_search_view" model="ir.ui.view">
+        <field name="name">tracking.event.search</field>
+        <field name="model">tracking.event</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="piece_code"/>
+                <filter name="delivered" string="delivered" domain="[('standard_event_code', '=', 'ZU')]"/>
+                <group expand="1" string="Group By">
+                    <filter name="group_piece_code" string="Piece Code" context="{'group_by':'piece_code'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="myfavorite_filter" model="ir.filters">
+        <field name="name">Tracking filters</field>
+        <field name="model_id">tracking.event</field>
+        <field name="user_id" eval="False"/>
+        <field name="is_default">True</field>
+        <field name="sort">["event_timestamp"]</field>
+        <field name="domain">[['standard_event_code', '=', 'ZU']]</field>
+        <field name="context">{'group_by': ['piece_code']}</field>
+    </record>
+
+</odoo>

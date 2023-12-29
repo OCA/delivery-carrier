@@ -1,0 +1,43 @@
+<!--
+Copyright (c) 2023 Grüne Erde GmbH (https://https://www.grueneerde.com)
+All Rights Reserved
+Licensed under the Odoo Proprietary License v1.0 (OPL).
+See LICENSE file for full licensing details.
+-->
+<odoo>
+    <record id="view_quant_package_form" model="ir.ui.view">
+        <field name="name">stock.quant.package.form</field>
+        <field name="model">stock.quant.package</field>
+        <field name="inherit_id" ref="stock.view_quant_package_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="inside">
+                <notebook>
+                    <page string="Tracking">
+                        <group>
+                            <field name="delivery_state"/>
+                            <field name="date_delivered"/>
+                        </group>
+                        <group>
+                            <field name="tracking_event_ids"/>
+                        </group>
+                    </page>
+                </notebook>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_quant_package_tree" model="ir.ui.view">
+        <field name="name">stock.quant.package.form</field>
+        <field name="model">stock.quant.package</field>
+        <field name="inherit_id" ref="stock.view_quant_package_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='company_id']" position="after">
+
+                <field name="delivery_state"/>
+                <field name="date_delivered"/>
+
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

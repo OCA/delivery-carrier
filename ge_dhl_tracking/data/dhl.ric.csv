@@ -1,0 +1,137 @@
+id,code,name
+dhl_ric_csv_1,ACCDM,Accepted - damaged
+dhl_ric_csv_2,ACCPK,Collected from automated site
+dhl_ric_csv_3,ACCPT,Accepted
+dhl_ric_csv_4,ACCSI,Accepted - Shipment incomplete
+dhl_ric_csv_5,AGENT,Hand over/delivery to Agent
+dhl_ric_csv_6,AGNEG,Age-Check negativ
+dhl_ric_csv_7,BDADD,Bad address
+dhl_ric_csv_8,BOOKN,Booking
+dhl_ric_csv_9,CAPEX,capacity exceeded
+dhl_ric_csv_10,CCPSD,Content Check - Passed
+dhl_ric_csv_11,CLOSD,Closed
+dhl_ric_csv_12,CLREF,Clearance refused
+dhl_ric_csv_13,CLRTE,Tour exception
+dhl_ric_csv_14,CNCNR,Consignee could not be reached
+dhl_ric_csv_15,CNRFW,Consignee request: Forward to an other address.
+dhl_ric_csv_16,CODAR,Electronic shipment advise received
+dhl_ric_csv_17,CODRP,COD remittance processed
+dhl_ric_csv_18,CPUNK,Company dissolved / unknown
+dhl_ric_csv_19,CRFRD,Customer request for redirection
+dhl_ric_csv_20,CROAT,DHL arrived outside agreed time
+dhl_ric_csv_21,CRQST,Customer request
+dhl_ric_csv_22,CRRCS,Correct Routing information but delivered to wRong
+dhl_ric_csv_23,CRRFN,Correct routing information but at the wrong facil
+dhl_ric_csv_24,CRROT,Courier out of time
+dhl_ric_csv_25,CSDOC,ConSignee DOCumentation
+dhl_ric_csv_26,CSREQ,ConSignee REQuest
+dhl_ric_csv_27,CSTBA,Customs bonded area
+dhl_ric_csv_28,CTCNI,Customer could not identify themselves
+dhl_ric_csv_29,CTCST,Contacted customer
+dhl_ric_csv_30,CUSTM,Customs
+dhl_ric_csv_31,DGCPS,Dangerous goods check - Passed
+dhl_ric_csv_32,DIDLV,Direct delivery at hub/delivery depot
+dhl_ric_csv_33,DLVDT,DeLiVery DaTe
+dhl_ric_csv_34,DLVTM,DeLiVery TiME
+dhl_ric_csv_35,DMGED,Damage under investigation
+dhl_ric_csv_36,DMGPC,Damaged in process
+dhl_ric_csv_37,DMPHD,Damaged by poor handling
+dhl_ric_csv_38,DRCRU,Driver / crew unavailable
+dhl_ric_csv_39,EFIZU,Electronic Delivery List
+dhl_ric_csv_40,FAMLY,Delivery to a family member
+dhl_ric_csv_41,FFTCH,Failed product feature validation
+dhl_ric_csv_42,FRMJR,Force majeur
+dhl_ric_csv_43,FSCCH,Failed dangerous goods check
+dhl_ric_csv_44,FWAPS,ForWarded for Army Postal Service
+dhl_ric_csv_45,FWEXH,ForWarded for Export Handling
+dhl_ric_csv_46,FWEXP,ForWarded for EXPress handling
+dhl_ric_csv_47,GDNMS,Goods / packaging not meet standard
+dhl_ric_csv_48,GDNRD,Goods not ready
+dhl_ric_csv_49,GHSTP,Ghost piece
+dhl_ric_csv_50,HDFCT,Held at DHL facility
+dhl_ric_csv_51,HLDAY,HoLiDAY
+dhl_ric_csv_52,HLDSR,HeLD on Shipper Request
+dhl_ric_csv_53,HNDCA,Held for Next working Day delivery on
+dhl_ric_csv_54,IDDMG,ID damaged or not readable
+dhl_ric_csv_55,IDNEG,Identitycheck negativ
+dhl_ric_csv_56,INCSH,Incomplete shipment
+dhl_ric_csv_57,INSPF,Inspection failed
+dhl_ric_csv_58,INSPT,Inspection
+dhl_ric_csv_59,LDMGD,Loaded Damaged
+dhl_ric_csv_60,LDPCK,Held in automated collection site
+dhl_ric_csv_61,LDTMV,
+dhl_ric_csv_62,LEGAT,LEGal AuThority
+dhl_ric_csv_63,LOSTX,Lost
+dhl_ric_csv_64,MOVED,Moved
+dhl_ric_csv_65,MSDLA,Missed delivery cycle - Received after cut off
+dhl_ric_csv_66,MSDOC,Missing Document
+dhl_ric_csv_67,MSGER,Message Error
+dhl_ric_csv_68,MSGPC,Message processing
+dhl_ric_csv_69,MSGST,Message sent
+dhl_ric_csv_70,MSLBL,Missing Label
+dhl_ric_csv_71,MSSDT,Missing data
+dhl_ric_csv_72,MVMTV,Movement / tour vehicle
+dhl_ric_csv_73,NAGTB,Not According to General Terms of Business
+dhl_ric_csv_74,NDRFC,No data received from customer
+dhl_ric_csv_75,NDRFN,No data received from network
+dhl_ric_csv_76,NEXCH,No exchange unit
+dhl_ric_csv_77,NGHBR,Delivery to neighbor
+dhl_ric_csv_78,NHOME,Not home
+dhl_ric_csv_79,NORSN,No reason
+dhl_ric_csv_80,NPRPF,No piece received from previous facility
+dhl_ric_csv_81,NPYMT,No payment
+dhl_ric_csv_82,NRQRD,ICE Details
+dhl_ric_csv_83,NTCCN,Not collected by consignee
+dhl_ric_csv_84,NTCLM,Not claimed
+dhl_ric_csv_85,NTHND,Customer refused to hand over the shipment to DHL
+dhl_ric_csv_86,NTHNG,Nothing to collect
+dhl_ric_csv_87,NTIHU,Not in Handling Unit
+dhl_ric_csv_88,NTORD,Not ordered
+dhl_ric_csv_89,OARRV,On arrival
+dhl_ric_csv_90,ORDER,Ordered
+dhl_ric_csv_91,OTHER,Other / Delivery to an other person
+dhl_ric_csv_92,OTHRE,Other reason
+dhl_ric_csv_93,OVRLD,Overload
+dhl_ric_csv_94,PBNBR,PO box number
+dhl_ric_csv_95,PCKAD,PaCKstation – Alternate Delivery
+dhl_ric_csv_96,PCKST,Packstation
+dhl_ric_csv_97,PFLOC,Preferred Location/Neighbor
+dhl_ric_csv_98,PKBOX,Delivery to Packetbox
+dhl_ric_csv_99,PLDMG,Piece label damaged
+dhl_ric_csv_100,POBOX,Postbox
+dhl_ric_csv_101,PPQLT,Poor quality piece label
+dhl_ric_csv_102,PUBCR,Piece pick up
+dhl_ric_csv_103,PUDMG,Picked up damaged
+dhl_ric_csv_104,PWMFD,Paperwork missing
+dhl_ric_csv_105,RDRCR,Redirected by customer request
+dhl_ric_csv_106,RDRDO,Redirected by redirection order
+dhl_ric_csv_107,REJCT,Rejected
+dhl_ric_csv_108,RFUSD,Refused
+dhl_ric_csv_109,ROUCR,reROUted on Customer Request
+dhl_ric_csv_110,RSEXW,Return to Shipper EXWorks error
+dhl_ric_csv_111,RTSCR,Return to shipper at customer request
+dhl_ric_csv_112,RTSSA,Return to shipper by customer standard agreement
+dhl_ric_csv_113,RTTSP,Return to shipper
+dhl_ric_csv_114,SECDA,SECond Delivery Attempt
+dhl_ric_csv_115,SECPL,Secure Place
+dhl_ric_csv_116,SERPT,Service Point
+dhl_ric_csv_117,SHINF,SHipper INFormation
+dhl_ric_csv_118,SHNCP,Shipment not complete
+dhl_ric_csv_119,SPCNR,Shipper cannot be reached
+dhl_ric_csv_120,SPOUS,Delivery to spouse
+dhl_ric_csv_121,STBSD,Stopped by sender
+dhl_ric_csv_122,STPRB,Sort problem
+dhl_ric_csv_123,SVCHG,Product feature check - Service changed
+dhl_ric_csv_124,TCATC,Traffic Congestion / Air traffic control
+dhl_ric_csv_125,TCHBD,Technical / Breakdown
+dhl_ric_csv_126,TRPMT,Terms of payment
+dhl_ric_csv_127,UDFPC,Unidentifiable piece
+dhl_ric_csv_128,UDLVR,Undeliverable
+dhl_ric_csv_129,UNLDD,Unloaded
+dhl_ric_csv_130,VHARU,Vehicle / aircraft unavailable
+dhl_ric_csv_131,WESCN,Customer Outbound Scan
+dhl_ric_csv_132,WINPL,Prefered Neighbor/Place
+dhl_ric_csv_133,WRGDT,Wrong Date
+dhl_ric_csv_134,WRGID,Wrong Check-ID
+dhl_ric_csv_135,WRGPN,Wrong Post-ID
+dhl_ric_csv_136,WRGTR,Wrong tour
