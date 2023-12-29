@@ -20,7 +20,6 @@
         "delivery",
         "stock",  # for adding to settings menu
         "delivery_state",  # used for tracking and basic interface in stock -> Additional Information
-        "ge_dhl_tracking_on_package",  # transfer_id on package level.
     ],
     "data": [
         "security/ir.model.access.csv",
