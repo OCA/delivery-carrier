@@ -12,7 +12,7 @@
     "category": "Inventory",
     "author": "Grüne Erde",  # pylint: disable=all
     "website": "https://github.com/OCA/delivery-carrier",
-    "license": "OPL-1",
+    "license": "AGPL-3",
     "depends": [
         "base",
         "delivery",
