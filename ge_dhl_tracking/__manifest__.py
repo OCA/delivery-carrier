@@ -13,13 +13,13 @@
     "version": "15.0.1.0.0",
     "category": "Inventory",
     "author": "Grüne Erde",  # pylint: disable=all
-    "website": "https://github.com/grueneerde/ge_complaint_types",
+    "website": "https://github.com/OCA/delivery-carrier",
     "license": "OPL-1",
     "depends": [
         "base",
         "delivery",
         "stock",  # for adding to settings menu
-        "delivery_state",  # used for tracking and basic interface in stock -> Additional Information
+        "delivery_state",
     ],
     "data": [
         "security/ir.model.access.csv",

@@ -15,7 +15,8 @@ class DhlRequest(object):
     def __init__(self, carrier, record, api=None):
         if api is None:
             _logger.warning(
-                "DhlRequest needs to be initialized with api='' dhl_tracking, dhl_shipping, dhl_return"
+                "DhlRequest needs to be initialized with api='' "
+                "dhl_tracking, dhl_shipping, dhl_return"
             )
         self.carrier = carrier
         self.record = record

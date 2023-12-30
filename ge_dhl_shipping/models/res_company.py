@@ -1,4 +1,4 @@
-from odoo import models, fields, api
+from odoo import api, fields, models
 
 
 class ResCompany(models.Model):
@@ -25,7 +25,8 @@ class ResCompany(models.Model):
         copy=False,
         help=(
             "When use the sandbox account developer portal password "
-            "use to as the password.When use the live account application token use to as the password."
+            "use to as the password.When use the live "
+            "account application token use to as the password."
         ),
     )
     dhl_shipping_dhl_api_key = fields.Char(

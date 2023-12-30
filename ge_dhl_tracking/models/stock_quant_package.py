@@ -5,7 +5,7 @@
 # Licensed under the Odoo Proprietary License v1.0 (OPL).
 # See LICENSE file for full licensing details.
 #####################################################################################
-from odoo import fields, models, api
+from odoo import api, fields, models
 
 
 class StockQuantPackage(models.Model):
@@ -13,7 +13,9 @@ class StockQuantPackage(models.Model):
 
     tracking_id = fields.Char()
 
-    tracking_event_ids = fields.One2many("tracking.event", "package_id", compute="_compute_tracking_event_ids")
+    tracking_event_ids = fields.One2many(
+        "tracking.event", "package_id", compute="_compute_tracking_event_ids"
+    )
 
     delivery_state = fields.Char(compute="_compute_delivery_state", store=True)
     date_delivered = fields.Datetime(store=True)
@@ -21,7 +23,9 @@ class StockQuantPackage(models.Model):
     @api.depends("tracking_id")
     def _compute_tracking_event_ids(self):
         for record in self:
-            tracking_event_ids = self.env["tracking.event"].search([("piece_code", "=", record.tracking_id)])
+            tracking_event_ids = self.env["tracking.event"].search(
+                [("piece_code", "=", record.tracking_id)]
+            )
             record.tracking_event_ids = tracking_event_ids
 
     @api.depends("tracking_event_ids")

@@ -1,5 +1,6 @@
-import requests
 import logging
+
+import requests
 
 from odoo.addons.ge_dhl_base.models.dhl_request import DhlRequest as DhlRequestBase
 

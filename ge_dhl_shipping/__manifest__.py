@@ -13,7 +13,7 @@
     "version": "15.0.1.0.0",
     "category": "Inventory",
     "author": "Grüne Erde",  # pylint: disable=all
-    "website": "https://github.com/grueneerde/ge_complaint_types",
+    "website": "https://github.com/OCA/delivery-carrier",
     "license": "OPL-1",
     "depends": [
         "base",

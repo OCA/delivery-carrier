@@ -1,8 +1,10 @@
-import logging
-import json
 import binascii
-from odoo import models, fields, _
+import json
+import logging
+
+from odoo import _, fields, models
 from odoo.exceptions import ValidationError
+
 from .dhl_request import DhlRequest
 
 _logger = logging.getLogger(__name__)
@@ -37,24 +39,32 @@ class DeliveryCarrier(models.Model):
     )
     dhl_account_no = fields.Char(
         string="DHL Account Number",
-        help="The Account(EKP) number sent to you by DHL and it must be maximum 10 digit allow.",
+        help=(
+            "The Account(EKP) number sent to you by DHL "
+            "and it must be maximum 10 digit allow."
+        ),
     )
     dhl_procedure_no = fields.Char(
         string="DHL Procedure Number",
-        help="The Procedure refers to DHL products that are used for shipping and max length is 2 digit.",
+        help=(
+            "The Procedure refers to DHL products that are "
+            "used for shipping and max length is 2 digit."
+        ),
     )
     dhl_participation_no = fields.Char(
         string="DHL Participation Number",
         help=(
             "Participation number referred to as Partner ID in the web service."
-            "The participation is 2 numerical digits from 00 to 99 or alphanumerical digits from AA to ZZ."
+            "The participation is 2 numerical digits from 00 to 99 "
+            "or alphanumerical digits from AA to ZZ."
         ),
     )
 
     def check_address_details(self, address_id, required_fields):
         """
         check the address of Shipper and Recipient
-        param : address_id: res.partner, required_fields: ['zip', 'city', 'country_id', 'street']
+        param : address_id: res.partner, required_fields:
+        ['zip', 'city', 'country_id', 'street']
         return: missing address message
         """
 
@@ -82,10 +92,7 @@ class DeliveryCarrier(models.Model):
             recipient_address_id, ["zip", "city", "country_id", "street"]
         )
         sum(
-            [
-                (line.product_id.weight * line.product_uom_qty)
-                for line in order.order_line
-            ]
+            (line.product_id.weight * line.product_uom_qty) for line in order.order_line
         ) or 0.0
 
         product_weight = order.order_line.filtered(

@@ -1,6 +1,6 @@
+import binascii
 import json
 
-import binascii
 from odoo import _
 
 from odoo.addons.ge_dhl_base.models.dhl_request import DhlRequest as DhlRequestBase

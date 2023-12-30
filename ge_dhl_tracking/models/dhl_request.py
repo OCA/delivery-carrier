@@ -1,16 +1,16 @@
 # Copyright 2021-2022 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 import base64
+import binascii
 import logging
+from datetime import datetime
 
 import dicttoxml
 import requests
+import xmltodict
 
 from odoo import _
 from odoo.exceptions import UserError
-import xmltodict
-from datetime import datetime
-import binascii
 
 _logger = logging.getLogger(__name__)
 dicttoxml.LOG.setLevel(logging.ERROR)
@@ -75,7 +75,11 @@ class DhlRequest(object):
         except requests.exceptions.HTTPError as e:
             _logger.warning(e)
             raise UserError(
-                _("{}\n{}").format(e, res.json().get("Message", "") if res.text else "")
+                _("%(error)s\n%(message)s")
+                % {
+                    "error": e,
+                    "message": res.json().get("Message", "") if res.text else "",
+                }
             ) from e
         return res
 

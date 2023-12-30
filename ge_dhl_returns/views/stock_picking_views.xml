@@ -8,15 +8,20 @@ See LICENSE file for full licensing details.
     <record id="view_picking_form" model="ir.ui.view">
         <field name="name">stock.picking.form</field>
         <field name="model">stock.picking</field>
-        <field name="inherit_id" ref="ge_dhl_base.view_picking_form"/>
+        <field name="inherit_id" ref="ge_dhl_base.view_picking_form" />
         <field name="arch" type="xml">
             <xpath expr="//header" position="inside">
-                <button name="get_return_label" string="get_return_label" type="object" class="oe_highlight" />
+                <button
+                    name="get_return_label"
+                    string="get_return_label"
+                    type="object"
+                    class="oe_highlight"
+                />
             </xpath>
             <xpath expr="//page[@name='dhl']" position="inside">
                 <group>
-                    <field name="is_return_picking"/>
-                    <field name="picking_type_code"/>
+                    <field name="is_return_picking" />
+                    <field name="picking_type_code" />
                 </group>
             </xpath>
         </field>

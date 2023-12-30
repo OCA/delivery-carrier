@@ -1,9 +1,10 @@
 # Copyright 2021 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import models, _
-from .dhl_request import DhlRequest
+from odoo import _, models
 from odoo.exceptions import UserError
+
+from .dhl_request import DhlRequest
 
 
 class DeliveryCarrier(models.Model):
@@ -12,7 +13,7 @@ class DeliveryCarrier(models.Model):
     def add_tracking_info_to_db(self, tracking_infos):
         # we delete all information for the new piece_codes:
         pice_codes_in_picking = list(
-            set(d["piece_code"] for d in tracking_infos if "piece_code" in d)
+            {d["piece_code"] for d in tracking_infos if "piece_code" in d}
         )
         self.env["tracking.event"].search(
             [("piece_code", "in", pice_codes_in_picking)]
