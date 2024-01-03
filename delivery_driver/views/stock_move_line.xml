@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 Moduon Team S.L.
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0) -->
+<odoo>
+    <record
+        id="view_move_line_tree_detailed_delivery_inherit_delivery_driver"
+        model="ir.ui.view"
+    >
+        <field name="name">Stock Move Line Tree Detailed Driver</field>
+        <field name="model">stock.move.line</field>
+        <field name="inherit_id" ref="delivery.view_move_line_tree_detailed_delivery" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='carrier_id']" position="after">
+                <field name="driver_id" optional="hide" />
+            </xpath>
+        </field>
+    </record>
+    <record id="view_move_line_tree_inherit_delivery_driver" model="ir.ui.view">
+        <field name="name">Stock Move Line Tree Driver</field>
+        <field name="model">stock.move.line</field>
+        <field name="inherit_id" ref="stock.view_move_line_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='location_dest_id']" position="after">
+                <field name="driver_id" optional="hide" />
+            </xpath>
+        </field>
+    </record>
+</odoo>
