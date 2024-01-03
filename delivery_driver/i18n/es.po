@@ -1,0 +1,51 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* delivery_driver
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-01-03 10:00+0000\n"
+"PO-Revision-Date: 2024-01-03 11:02+0100\n"
+"Last-Translator: Emilio Pascual <emilio@moduom.team>\n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4\n"
+
+#. module: delivery_driver
+#: model:ir.model.fields,field_description:delivery_driver.field_delivery_carrier__driver_id
+msgid "Default Driver"
+msgstr "Conductor por defecto"
+
+#. module: delivery_driver
+#: model:ir.model.fields,help:delivery_driver.field_delivery_carrier__driver_id
+msgid "Default driver for this delivery method"
+msgstr "Conductor por defecto para este método de envío"
+
+#. module: delivery_driver
+#: model:ir.model.fields,field_description:delivery_driver.field_stock_move_line__driver_id
+#: model:ir.model.fields,field_description:delivery_driver.field_stock_picking__driver_id
+#: model_terms:ir.ui.view,arch_db:delivery_driver.view_delivery_carrier_search_inherit_delivery_driver
+#: model_terms:ir.ui.view,arch_db:delivery_driver.view_picking_internal_search_inherit_delivery_driver
+msgid "Driver"
+msgstr "Conductor"
+
+#. module: delivery_driver
+#: model:ir.model,name:delivery_driver.model_stock_move_line
+msgid "Product Moves (Stock Move Line)"
+msgstr "Movimientos de Producto (Stock Move Line)"
+
+#. module: delivery_driver
+#: model:ir.model,name:delivery_driver.model_delivery_carrier
+msgid "Shipping Methods"
+msgstr "Métodos de envío"
+
+#. module: delivery_driver
+#: model:ir.model,name:delivery_driver.model_stock_picking
+msgid "Transfer"
+msgstr "Albarán"
