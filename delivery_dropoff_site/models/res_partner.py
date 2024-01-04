@@ -11,6 +11,7 @@ from odoo.fields import first
 
 class ResPartner(models.Model):
     _inherit = "res.partner"
+    _rec_names_search = ["dropoff_site_id"]
 
     dropoff_site_ids = fields.One2many(
         comodel_name="dropoff.site", inverse_name="partner_id"
@@ -52,10 +53,3 @@ class ResPartner(models.Model):
             "Dropoff Site with the same id already exists : must be unique",
         ),
     ]
-
-    @api.model
-    def name_search(self, name="", args=None, operator="ilike", limit=80):
-        args = args or []
-        if not self.env.context.get("default_type", False) == "delivery":
-            args.append(["dropoff_site_id", "=", False])
-        return super().name_search(name=name, args=args, operator=operator, limit=limit)
