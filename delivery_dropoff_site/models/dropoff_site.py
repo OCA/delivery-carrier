@@ -14,7 +14,7 @@ class DropoffSite(models.Model):
     _order = "code, name"
     _description = "Dropoff site"
 
-    code = fields.Char(string="Code")
+    code = fields.Char()
 
     partner_id = fields.Many2one(
         comodel_name="res.partner",

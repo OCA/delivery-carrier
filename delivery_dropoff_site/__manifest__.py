@@ -12,7 +12,12 @@
     "license": "AGPL-3",
     "summary": "Send goods to sites in which customers come pick up package",
     "category": "Delivery",
-    "depends": ["delivery", "base_geolocalize", "resource"],
+    "depends": [
+        "base_geolocalize",
+        "delivery",
+        "resource",
+        "sale_stock",
+    ],
     "website": "https://github.com/OCA/delivery-carrier",
     "data": [
         "security/ir.model.access.csv",
