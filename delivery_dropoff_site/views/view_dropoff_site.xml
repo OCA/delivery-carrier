@@ -132,7 +132,7 @@
                         >
                             <field name="calendar_id" invisible="1" />
                             <field name="attendance_ids">
-                                <tree string="Working Time" editable="top">
+                                <tree editable="top">
                                     <field name="name" />
                                     <field name="dayofweek" />
                                     <field name="hour_from" widget="float_time" />
