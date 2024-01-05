@@ -14,6 +14,10 @@
                     'invisible': [('dropoff_site_required', '=', False)],
                     }"
                 />
+                <field name="partner_shipping_id_domain" invisible="1" />
+            </field>
+            <field name="partner_shipping_id" position="attributes">
+                <attribute name="domain">partner_shipping_id_domain</attribute>
             </field>
         </field>
     </record>

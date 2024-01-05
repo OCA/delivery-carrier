@@ -25,6 +25,11 @@ class SaleOrder(models.Model):
         readonly=True,
         help="It is the partner that will pick up the parcel " "in the dropoff site.",
     )
+    partner_shipping_id_domain = fields.Binary(
+        compute="_compute_partner_shipping_id_domain",
+        store=False,
+        readonly=True,
+    )
 
     @api.onchange("carrier_id")
     def onchange_carrier_id(self):
@@ -42,18 +47,6 @@ class SaleOrder(models.Model):
             )
         ):
             self.partner_shipping_id = False
-        if carrier and carrier.with_dropoff_site:
-            return {
-                "domain": {
-                    "partner_shipping_id": [
-                        ("dropoff_site_carrier_id", "=", carrier.id)
-                    ]
-                }
-            }
-        else:
-            return {
-                "domain": {"partner_shipping_id": [("is_dropoff_site", "=", False)]}
-            }
 
     @api.onchange("partner_shipping_id")
     def onchange_partner_shipping_id_final(self):
@@ -63,6 +56,17 @@ class SaleOrder(models.Model):
             and not self.final_shipping_partner_id
         ):
             self.final_shipping_partner_id = self.partner_id
+
+    @api.depends("carrier_id", "carrier_id.with_dropoff_site")
+    def _compute_partner_shipping_id_domain(self):
+        for rec in self:
+            carrier = rec.carrier_id
+            if carrier and carrier.with_dropoff_site:
+                rec.partner_shipping_id_domain = [
+                    ("dropoff_site_carrier_id", "=", carrier.id)
+                ]
+            else:
+                rec.partner_shipping_id_domain = [("is_dropoff_site", "=", False)]
 
 
 class SaleOrderLine(models.Model):
