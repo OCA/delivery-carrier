@@ -202,6 +202,6 @@
     <menuitem
         id="menu_dropoff_site_stock"
         action="action_dropoff_site"
-        parent="delivery.menu_delivery"
+        parent="stock.menu_delivery"
     />
 </odoo>
