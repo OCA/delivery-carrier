@@ -91,12 +91,3 @@ msgstr "No hay una regla de entrega coincidente."
 #: model:ir.model,name:delivery_purchase.model_stock_picking
 msgid "Transfer"
 msgstr "Transferir"
-
-#~ msgid "Display Name"
-#~ msgstr "Nombre a mostrar"
-
-#~ msgid "ID"
-#~ msgstr "ID"
-
-#~ msgid "Last Modified on"
-#~ msgstr "Última modificación el"
