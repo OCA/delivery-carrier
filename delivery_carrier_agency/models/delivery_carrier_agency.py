@@ -2,7 +2,6 @@
 
 from odoo import fields, models
 
-
 class DeliveryCarrierAgency(models.Model):
     _name = "delivery.carrier.agency"
     _description = "Carrier Agency"
