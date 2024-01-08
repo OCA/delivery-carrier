@@ -9,15 +9,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-05-30 02:55+0000\n"
-"PO-Revision-Date: 2022-01-26 12:40+0000\n"
-"Last-Translator: Yves Le Doeuff <yld@alliasys.fr>\n"
+"PO-Revision-Date: 2024-01-08 21:33+0000\n"
+"Last-Translator: kbentaleb <k.bentaleb@gmail.com>\n"
 "Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.3.2\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__access_token
@@ -47,9 +47,8 @@ msgstr "Attachement"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__local_url
-#, fuzzy
 msgid "Attachment URL"
-msgstr "URL de l'élément joint"
+msgstr "URL de la pièce jointe"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_delivery_carrier_option__by_default
@@ -76,7 +75,7 @@ msgstr "Transporteur"
 #. module: base_delivery_carrier_label
 #: model_terms:ir.ui.view,arch_db:base_delivery_carrier_label.view_quant_package_tree
 msgid "Carrier Tracking URL"
-msgstr ""
+msgstr "URL de suivi du transporteur"
 
 #. module: base_delivery_carrier_label
 #: model:ir.ui.menu,name:base_delivery_carrier_label.menu_carriers_config
@@ -98,7 +97,7 @@ msgstr "Code"
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option__color
 msgid "Color"
-msgstr ""
+msgstr "Couleur"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__company_id
@@ -123,9 +122,8 @@ msgstr "Créé le"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__db_datas
-#, fuzzy
 msgid "Database Data"
-msgstr "Elément de la base de donnée"
+msgstr "Données de la base de données"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_stock_picking__carrier_code
@@ -225,32 +223,32 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__image_height
 msgid "Image Height"
-msgstr ""
+msgstr "Hauteur image"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__image_src
 msgid "Image Src"
-msgstr ""
+msgstr "Src image"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__image_width
 msgid "Image Width"
-msgstr ""
+msgstr "Largeur image"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__index_content
 msgid "Indexed Content"
-msgstr ""
+msgstr "Contenu indexé"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields.selection,name:base_delivery_carrier_label.selection__manifest_wizard__state__init
 msgid "Init"
-msgstr ""
+msgstr "Init"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__public
 msgid "Is public document"
-msgstr ""
+msgstr "Est un document public"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option____last_update
@@ -279,7 +277,7 @@ msgstr "Dernière mise à jour le"
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_stock_quant_package__parcel_tracking_uri
 msgid "Link to the carrier's tracking page for this package."
-msgstr ""
+msgstr "Lien de suivi du transporteur pour ce colis."
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option__mandatory
@@ -299,7 +297,7 @@ msgstr ""
 #: code:addons/base_delivery_carrier_label/wizard/manifest_wizard.py:0
 #, python-format
 msgid "Manifest not implemented for '%s' carrier."
-msgstr ""
+msgstr "Manifest non implémenté pour le transporteur %s."
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__mimetype
@@ -333,12 +331,12 @@ msgstr "Options"
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_delivery_carrier_option__color
 msgid "Orange if the option is mandatory, otherwise no color"
-msgstr ""
+msgstr "Orange si l'option est obligatoire, sinon pas de couleur"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__original_id
 msgid "Original (unoptimized, unresized) attachment"
-msgstr ""
+msgstr "Pièce jointe originale (non optimisée, non redimensionnée)"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__package_id
@@ -347,19 +345,18 @@ msgstr "Pack"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_stock_quant_package
-#, fuzzy
 msgid "Packages"
-msgstr "Pack"
+msgstr "Colis"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_quant_package__parcel_tracking
 msgid "Parcel Tracking"
-msgstr ""
+msgstr "Suivi du colis"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_quant_package__parcel_tracking_uri
 msgid "Parcel Tracking Uri"
-msgstr ""
+msgstr "URI de suivi du colis"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option__partner_id
@@ -370,7 +367,7 @@ msgstr "Partenaire transporteur"
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_stock_move_line
 msgid "Product Moves (Stock Move Line)"
-msgstr ""
+msgstr "Mouvements de produits (Ligne de mouvement de stock)"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option__readonly_flag
@@ -400,7 +397,7 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_manifest_wizard__notes
 msgid "Result"
-msgstr ""
+msgstr "Résultat"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_shipping_label
@@ -410,7 +407,7 @@ msgstr "Etiquette logistique"
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_delivery_carrier
 msgid "Shipping Methods"
-msgstr ""
+msgstr "Modes d'expédition"
 
 #. module: base_delivery_carrier_label
 #. odoo-python
@@ -421,31 +418,33 @@ msgid ""
 "Please delete the existing labels in the attachments of this picking and try "
 "again"
 msgstr ""
+"Certains libellés existent déjà pour le transfert %s.\n"
+"Supprimez les libellés en pièce jointe de ce transfert et recommencez"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_manifest_wizard__state
 msgid "State"
-msgstr ""
+msgstr "État"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__store_fname
 msgid "Stored Filename"
-msgstr ""
+msgstr "Nom de fiché joint stocké"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_manifest_wizard__to_date
 msgid "To Date"
-msgstr ""
+msgstr "À date"
 
 #. module: base_delivery_carrier_label
 #: model_terms:ir.ui.view,arch_db:base_delivery_carrier_label.view_quant_package_form
 msgid "Tracking"
-msgstr ""
+msgstr "Suivi"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_stock_picking
 msgid "Transfer"
-msgstr ""
+msgstr "Transfert"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__type
@@ -455,7 +454,7 @@ msgstr "Type"
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__url
 msgid "Url"
-msgstr ""
+msgstr "URL"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_move_line__weight
@@ -465,7 +464,7 @@ msgstr "Poids"
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_stock_move_line__weight
 msgid "Weight of the pack_operation"
-msgstr ""
+msgstr "Poids de l'opération d'emballage"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_delivery_carrier_option__readonly_flag
@@ -473,6 +472,8 @@ msgid ""
 "When True, help to prevent the user to modify some fields option (if "
 "attribute is defined in the view)"
 msgstr ""
+"Quand Vrai, aide à empêcher l'utilisateur la modification de certaines "
+"options de champs (si l'attribut est défini dans la vue)"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_shipping_label__type
@@ -480,6 +481,8 @@ msgid ""
 "You can either upload a file from your computer or copy/paste an internet "
 "link to your file."
 msgstr ""
+"Vous pouvez soit charger un fichier de votre ordinateur ou copier/coller un "
+"lien internet à votre fichier."
 
 #. module: base_delivery_carrier_label
 #. odoo-python
