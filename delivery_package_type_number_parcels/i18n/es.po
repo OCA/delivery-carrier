@@ -22,9 +22,13 @@ msgid "Delivery Package Selection Wizard"
 msgstr "Asistente de selección de paquetes de entrega"
 
 #. module: delivery_package_type_number_parcels
+#: model:ir.model.fields,field_description:delivery_package_type_number_parcels.field_stock_quant_package__number_of_parcels
+msgid "Number Of Parcels"
+msgstr ""
+
+#. module: delivery_package_type_number_parcels
 #: model:ir.model.fields,field_description:delivery_package_type_number_parcels.field_choose_delivery_package__number_of_parcels
 #: model:ir.model.fields,field_description:delivery_package_type_number_parcels.field_stock_package_type__number_of_parcels
-#: model:ir.model.fields,field_description:delivery_package_type_number_parcels.field_stock_quant_package__number_of_parcels
 msgid "Number of parcels"
 msgstr "Número de parcelas"
 
