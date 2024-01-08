@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="choose_delivery_carrier_view_form" model="ir.ui.view">
+        <field
+            name="name"
+        >choose.delivery.carrier.form - delivery_carrier_manual_price</field>
+        <field name="model">choose.delivery.carrier</field>
+        <field name="inherit_id" ref="delivery.choose_delivery_carrier_view_form" />
+        <field name="arch" type="xml">
+            <field name="delivery_price" position="before">
+                <field name="is_manual_price" invisible="1" />
+            </field>
+            <field name="delivery_price" position="attributes">
+                <attribute name="invisible">0</attribute>
+                <attribute
+                    name="attrs"
+                >{'invisible': [('is_manual_price','=', False)]}</attribute>
+                <attribute name="widget">monetary</attribute>
+                <attribute name="options">{'currency_field': 'currency_id'}</attribute>
+            </field>
+            <field name="display_price" position="attributes">
+                <attribute
+                    name="attrs"
+                >{'invisible': ['|', ('carrier_id','=', False), ('is_manual_price','=', True)]}</attribute>
+            </field>
+            <field name="display_price" position="before">
+                <field name="delivery_price" position="move" />
+            </field>
+        </field>
+    </record>
+</odoo>
