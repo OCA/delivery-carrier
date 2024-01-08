@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_delivery_carrier_form" model="ir.ui.view">
+        <field
+            name="name"
+        >delivery.carrier.form - delivery_carrier_manual_weight</field>
+        <field name="model">delivery.carrier</field>
+        <field name="inherit_id" ref="delivery.view_delivery_carrier_form" />
+        <field name="arch" type="xml">
+            <field name="integration_level" position="before">
+                <field name="is_manual_weight" />
+            </field>
+        </field>
+    </record>
+    <record id="view_picking_withcarrier_out_form" model="ir.ui.view">
+        <field name="name">stock.picking.form - delivery_carrier_manual_weight</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="delivery.view_picking_withcarrier_out_form" />
+        <field name="arch" type="xml">
+            <label for="weight" position="before">
+                <field name="is_manual_weight" invisible="1" />
+                <label
+                    for="weight_manual"
+                    attrs="{'invisible': [('is_manual_weight', '=', False)]}"
+                />
+                <div attrs="{'invisible': [('is_manual_weight', '=', False)]}">
+                    <field name="weight_manual" class="oe_inline" />
+                    <field
+                        name="weight_uom_name"
+                        nolabel="1"
+                        class="oe_inline"
+                        style="margin-left:5px"
+                    />
+                </div>
+                <label
+                    for="shipping_weight_manual"
+                    attrs="{'invisible': [('is_manual_weight', '=', False)]}"
+                />
+                <div attrs="{'invisible': [('is_manual_weight', '=', False)]}">
+                    <field name="shipping_weight_manual" class="oe_inline" />
+                    <field
+                        name="weight_uom_name"
+                        nolabel="1"
+                        class="oe_inline"
+                        style="margin-left:5px"
+                    />
+                </div>
+            </label>
+        </field>
+    </record>
+</odoo>
