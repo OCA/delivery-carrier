@@ -31,6 +31,7 @@ addon | version | maintainers | summary
 [delivery_carrier_max_weight_constraint](delivery_carrier_max_weight_constraint/) | 16.0.1.0.1 |  | Constrain package maximum weight
 [delivery_carrier_partner](delivery_carrier_partner/) | 16.0.1.0.0 |  | Add a partner in the delivery carrier
 [delivery_cttexpress](delivery_cttexpress/) | 16.0.1.1.0 |  | Delivery Carrier implementation for CTT Express API
+[delivery_driver](delivery_driver/) | 16.0.1.0.0 | [![EmilioPascual](https://github.com/EmilioPascual.png?size=30px)](https://github.com/EmilioPascual) [![rafaelbn](https://github.com/rafaelbn.png?size=30px)](https://github.com/rafaelbn) | Allow choose driver in delivery methods
 [delivery_estimated_package_quantity_by_weight](delivery_estimated_package_quantity_by_weight/) | 16.0.1.0.0 |  | Compute the amount of packages a picking out should have depending on the weight of the products and the limit fixed by the carrier
 [delivery_package_fee](delivery_package_fee/) | 16.0.1.1.1 |  | Add fees on delivered packages on shipping methods
 [delivery_package_number](delivery_package_number/) | 16.0.2.0.0 |  | Set or compute number of packages for a picking
