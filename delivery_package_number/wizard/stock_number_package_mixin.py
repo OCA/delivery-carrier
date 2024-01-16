@@ -29,4 +29,6 @@ class StockNumberPackageMixin(models.AbstractModel):
     @api.depends("pick_ids")
     def _compute_print_package_label(self):
         for item in self:
-            item.print_package_label = item.pick_ids.picking_type_id.print_label
+            item.print_package_label = (
+                item.pick_ids.picking_type_id.print_label_on_validate
+            )
