@@ -37,11 +37,13 @@ msgid "Cancel"
 msgstr ""
 
 #. module: delivery_package_number
+#: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_line_wizard__create_uid
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_wizard__create_uid
 msgid "Created by"
 msgstr ""
 
 #. module: delivery_package_number
+#: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_line_wizard__create_date
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_wizard__create_date
 msgid "Created on"
 msgstr ""
@@ -52,6 +54,7 @@ msgid "Delivery package number"
 msgstr ""
 
 #. module: delivery_package_number
+#: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_line_wizard__display_name
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_wizard__display_name
 msgid "Display Name"
 msgstr ""
@@ -62,6 +65,7 @@ msgid "Force Set Number Of Packages"
 msgstr ""
 
 #. module: delivery_package_number
+#: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_line_wizard__id
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_wizard__id
 msgid "ID"
 msgstr ""
@@ -72,16 +76,19 @@ msgid "Immediate Transfer"
 msgstr ""
 
 #. module: delivery_package_number
+#: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_line_wizard____last_update
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_wizard____last_update
 msgid "Last Modified on"
 msgstr ""
 
 #. module: delivery_package_number
+#: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_line_wizard__write_uid
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_wizard__write_uid
 msgid "Last Updated by"
 msgstr ""
 
 #. module: delivery_package_number
+#: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_line_wizard__write_date
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_wizard__write_date
 msgid "Last Updated on"
 msgstr ""
@@ -100,6 +107,7 @@ msgid "Number Of Packages"
 msgstr ""
 
 #. module: delivery_package_number
+#: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_line_wizard__number_of_packages
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_picking__number_of_packages
 msgid "Number of Packages"
 msgstr ""
@@ -117,6 +125,11 @@ msgstr ""
 #. module: delivery_package_number
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_wizard__pick_ids
 msgid "Pick"
+msgstr ""
+
+#. module: delivery_package_number
+#: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_line_wizard__picking_id
+msgid "Picking"
 msgstr ""
 
 #. module: delivery_package_number
@@ -153,8 +166,23 @@ msgid "Set the number of packages for this picking(s)"
 msgstr ""
 
 #. module: delivery_package_number
+#: model:ir.model,name:delivery_package_number.model_stock_number_package_validate_line_wizard
+msgid "Stock Number Package Lines Wizard"
+msgstr ""
+
+#. module: delivery_package_number
+#: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_wizard__stock_number_package_validation_line_ids
+msgid "Stock Number Package Validation Line"
+msgstr ""
+
+#. module: delivery_package_number
 #: model:ir.model,name:delivery_package_number.model_stock_picking
 msgid "Transfer"
+msgstr ""
+
+#. module: delivery_package_number
+#: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_line_wizard__wiz_id
+msgid "Wiz"
 msgstr ""
 
 #. module: delivery_package_number
