@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: delivery-carrier (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-12-03 01:21+0000\n"
-"PO-Revision-Date: 2024-01-10 14:36+0000\n"
+"PO-Revision-Date: 2024-01-18 09:37+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/"
 "OCA-delivery-carrier-8-0/language/it/)\n"
@@ -181,7 +181,7 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: field:carrier.account,file_format:0
 msgid "File Format"
-msgstr "Formato del file"
+msgstr "Formato file"
 
 #. module: base_delivery_carrier_label
 #: field:shipping.label,datas_fname:0
