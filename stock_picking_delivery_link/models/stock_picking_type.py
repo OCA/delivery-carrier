@@ -8,5 +8,5 @@ class StockPickingType(models.Model):
     _inherit = "stock.picking.type"
 
     set_delivery_package_type_on_put_in_pack = fields.Boolean(
-        "Delivery package type on put in pack"
+        "Delivery package type on put in this pack"
     )
