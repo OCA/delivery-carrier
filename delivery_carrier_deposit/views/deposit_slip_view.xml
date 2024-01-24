@@ -47,7 +47,7 @@
 <record id="view_deposit_slip_tree" model="ir.ui.view">
     <field name="model">deposit.slip</field>
     <field name="arch" type="xml">
-    <tree string="Deposit">
+    <tree>
         <field name="name" />
         <field name="delivery_type" />
         <field name="create_date" />
