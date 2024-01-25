@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="delivery_carrier_form_view">
+        <field name="name">delivery.carrier.form (in delivery_package_automatic)</field>
+        <field name="model">delivery.carrier</field>
+        <field name="inherit_id" ref="delivery.view_delivery_carrier_form" />
+        <field name="arch" type="xml">
+            <field name="invoice_policy" position="after">
+                <field name="automatic_package_creation_at_delivery" />
+            </field>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="res_config_settings_view_form">
+        <field
+            name="name"
+        >res.config.settings.form (in delivery_package_automatic)</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="stock.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//div[@data-string='Inventory']//div[@name='shipping_setting_container']"
+                position="inside"
+            >
+                <div
+                    class="col-12 col-lg-6 o_setting_box"
+                    id="delivery_package_automatic"
+                    title="Configure the default behaviour for new delivery carriers."
+                >
+                    <div class="o_setting_left_pane">
+                        <field name="automatic_package_creation_at_delivery_default" />
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <label for="automatic_package_creation_at_delivery_default" />
+                        <div class="text-muted" id="delivery_automatic_package">
+                            Check this to enable automatic package creation behaviour for all new delivery carriers.
+                        </div>
+                    </div>
+
+
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
