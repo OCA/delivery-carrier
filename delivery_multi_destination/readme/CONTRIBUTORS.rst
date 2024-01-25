@@ -3,6 +3,7 @@
   * Pedro M. Baeza
   * Luis M. Ontalba
   * Carlos Roca
+  * Carolina Fernandez
 
 * `Dinamiche Aziendali <https://www.dinamicheaziendali.it>__`:
 

@@ -86,6 +86,7 @@ class TestDeliveryMultiDestination(common.TransactionCase):
         carrier_form.product_id = self.product
         carrier_form.delivery_type = "fixed"
         carrier_form.fixed_price = 100
+        # this needs to be done in this order
         carrier_form.destination_type = "multi"
         for child_item in childs:
             with carrier_form.child_ids.new() as child_form:
