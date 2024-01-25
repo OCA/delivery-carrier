@@ -1,11 +1,12 @@
 # Copyright 2016-2019 Tecnativa - Pedro M. Baeza
 # Copyright 2017 Tecnativa - Luis M. Ontalba
 # Copyright 2021 Gianmarco Conte <gconte@dinamicheaziendali.it>
+# Copyright 2024 Tecnativa - Carolina Fernandez
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 {
     "name": "Multiple destinations for the same delivery method",
-    "version": "16.0.1.0.2",
+    "version": "16.0.1.0.0",
     "category": "Delivery",
     "website": "https://github.com/OCA/delivery-carrier",
     "author": "Tecnativa, Odoo Community Association (OCA)",
