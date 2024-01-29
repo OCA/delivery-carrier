@@ -6,11 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-07 14:38+0000\n"
-"PO-Revision-Date: 2023-06-07 14:38+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -26,13 +23,13 @@ msgstr ""
 #. module: delivery_deliverea
 #: model_terms:ir.ui.view,arch_db:delivery_deliverea.view_delivery_carrier_form
 msgid "API Configuration"
-msgstr "Configuración de la API"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,field_description:delivery_deliverea.field_carrier_deliverea_service__active
 #: model:ir.model.fields,field_description:delivery_deliverea.field_deliverea_distribution_center__active
 msgid "Active"
-msgstr "Activo"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model_terms:ir.ui.view,arch_db:delivery_deliverea.view_delivery_carrier_form
@@ -40,13 +37,11 @@ msgid ""
 "Additional service attributes. Availability depends on the carrier and "
 "service."
 msgstr ""
-"Atributos adicionales del servicio. La disponibilidad depende del "
-"transportista y del servicio."
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,field_description:delivery_deliverea.field_deliverea_distribution_center__address
 msgid "Address"
-msgstr "Dirección"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model_terms:ir.ui.view,arch_db:delivery_deliverea.view_delivery_carrier_form
@@ -54,61 +49,59 @@ msgid ""
 "Attention! Failure to set these fields will not allow you to ship "
 "successfully."
 msgstr ""
-"Atención! Si no se establecen estos campos no se podrán realizar envíos de "
-"forma satisfactoria."
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,field_description:delivery_deliverea.field_deliverea_distribution_center__billing_account
 msgid "Billing Account Id"
-msgstr "Billing Account Id"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model.fields.selection,name:delivery_deliverea.selection__deliverea_state__delivery_state__canceled_shipment
 msgid "Canceled shipment"
-msgstr "Envio cancelado"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,field_description:delivery_deliverea.field_carrier_deliverea_service__carrier_id
 #: model:ir.model.fields,field_description:delivery_deliverea.field_stock_package_type__package_carrier_type
 msgid "Carrier"
-msgstr "Transportista"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,field_description:delivery_deliverea.field_carrier_deliverea_service__carrier_code
 msgid "Carrier Code"
-msgstr "Código de transportista"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model_terms:ir.ui.view,arch_db:delivery_deliverea.view_delivery_carrier_form
 msgid "Carrier Configuration"
-msgstr "Configuración del transportista"
+msgstr ""
 
 #. module: delivery_deliverea
 #. odoo-python
 #: code:addons/delivery_deliverea/models/deliverea_request.py:0
 #, python-format
 msgid "Carrier Error"
-msgstr "Error del transportista"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,field_description:delivery_deliverea.field_deliverea_state__delivery_state
 msgid "Carrier State"
-msgstr "Estado del transportista"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,field_description:delivery_deliverea.field_deliverea_distribution_center__city
 msgid "City"
-msgstr "Cuidad"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model.fields.selection,name:delivery_deliverea.selection__carrier_deliverea_parameter__type__conditional
 msgid "Conditional"
-msgstr "Condicional"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,field_description:delivery_deliverea.field_deliverea_distribution_center__country_id
 msgid "Country"
-msgstr "Pais"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,field_description:delivery_deliverea.field_carrier_deliverea_parameter__create_uid
@@ -129,132 +122,131 @@ msgstr ""
 #. module: delivery_deliverea
 #: model:ir.model.fields.selection,name:delivery_deliverea.selection__deliverea_state__delivery_state__customer_delivered
 msgid "Customer delivered"
-msgstr "Entregado al cliente"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,field_description:delivery_deliverea.field_delivery_carrier__deliverea_default_packaging_id
 msgid "Default Packaging Type"
-msgstr "Tipo de embalaje por defecto"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,help:delivery_deliverea.field_delivery_carrier__deliverea_default_packaging_id
 msgid "Default weight, height, width and length for packages"
-msgstr "Peso, altura, anchura y longitud por defecto de los paquetes"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.actions.server,name:delivery_deliverea.ir_cron_get_service_delivera_ir_actions_server
 #: model:ir.cron,cron_name:delivery_deliverea.ir_cron_get_service_delivera
 msgid "Delivera: Get Services"
-msgstr "Deliverea: Obtener servicios"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model.fields.selection,name:delivery_deliverea.selection__delivery_carrier__delivery_type__deliverea
 #: model:ir.model.fields.selection,name:delivery_deliverea.selection__stock_package_type__package_carrier_type__deliverea
 msgid "Deliverea"
-msgstr "Deliverea"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,field_description:delivery_deliverea.field_delivery_carrier__deliverea_description
 msgid "Deliverea Articles Description"
-msgstr "Descripción de los articulos"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,field_description:delivery_deliverea.field_delivery_carrier__deliverea_carrier_service_id
 msgid "Deliverea Carrier Service"
-msgstr "Servicios del transportista"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model_terms:ir.ui.view,arch_db:delivery_deliverea.view_delivery_carrier_form
 msgid "Deliverea Configuration"
-msgstr "Configuración deliverea"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.actions.act_window,name:delivery_deliverea.delivery_deliverea_distribution_center_action
 #: model:ir.model.fields,field_description:delivery_deliverea.field_carrier_deliverea_service__deliverea_distribution_center_id
 #: model:ir.model.fields,field_description:delivery_deliverea.field_delivery_carrier__deliverea_distribution_center_id
 msgid "Deliverea Distribution Center"
-msgstr "Centro de distribución Deliverea"
+msgstr ""
 
 #. module: delivery_deliverea
 #. odoo-python
 #: code:addons/delivery_deliverea/models/deliverea_request.py:0
 #, python-format
 msgid "Deliverea Error"
-msgstr "Error de Deliverea"
+msgstr ""
 
 #. module: delivery_deliverea
 #. odoo-python
 #: code:addons/delivery_deliverea/models/deliverea_request.py:0
 #, python-format
 msgid "Deliverea Error. Uncontrolled error, it is necessary to check the log"
-msgstr "Error de Deliverea. Error no controlado, es necesario comprobar el log"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,field_description:delivery_deliverea.field_carrier_deliverea_service__deliverea_parameters
-#, fuzzy
 msgid "Deliverea Parameters"
-msgstr "Parametros Deliverea"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,field_description:delivery_deliverea.field_stock_picking__deliverea_parcel_client_code
 msgid "Deliverea Parcel Client Code"
-msgstr "Código de cliente de paquete de Deliverea"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,field_description:delivery_deliverea.field_delivery_carrier__deliverea_password
 msgid "Deliverea Password"
-msgstr "Contraseña Deliverea"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,field_description:delivery_deliverea.field_stock_picking__deliverea_reference
 msgid "Deliverea Reference"
-msgstr "Referencia Deliverea"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,field_description:delivery_deliverea.field_deliverea_state__state
 msgid "Deliverea State"
-msgstr "Estado Deliverea"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,field_description:delivery_deliverea.field_deliverea_state__code
 msgid "Deliverea State Code"
-msgstr "Código de estado Deliverea"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.actions.act_window,name:delivery_deliverea.delivery_deliverea_state_mapping_action
 #: model:ir.ui.menu,name:delivery_deliverea.delivery_deliverea_state_mapping_menu
 msgid "Deliverea State Mapping"
-msgstr "Mapeo de estados deliverea"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,field_description:delivery_deliverea.field_delivery_carrier__deliverea_username
 msgid "Deliverea Username"
-msgstr "Nombre usuario Deliverea"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,field_description:delivery_deliverea.field_delivery_carrier__deliverea_url_prod
 msgid "Deliverea production environment URL"
-msgstr "URL entorno de producción Deliverea"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,field_description:delivery_deliverea.field_carrier_deliverea_service__code
 msgid "Deliverea service code"
-msgstr "Código de servicio de deliverea"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,field_description:delivery_deliverea.field_delivery_carrier__deliverea_url_test
 msgid "Deliverea test environment URL"
-msgstr "URL entorno de test Deliverea"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,field_description:delivery_deliverea.field_delivery_carrier__deliverea_url_tracking
 msgid "Deliverea tracking URL"
-msgstr "URL de seguimiento Deliverea"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,field_description:delivery_deliverea.field_carrier_deliverea_service__description
 msgid "Description"
-msgstr "Descripción"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,help:delivery_deliverea.field_delivery_carrier__deliverea_description
@@ -262,9 +254,6 @@ msgid ""
 "Description of the expedition articles (required for crossborder "
 "international expeditions if no description by parcel[items] is present)"
 msgstr ""
-"Descripción de los artículos de la expedición (necesaria para las "
-"expediciones internacionales transfronterizas si no hay descripción por "
-"paquete[artículos])"
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,field_description:delivery_deliverea.field_carrier_deliverea_parameter__display_name
@@ -272,27 +261,27 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_deliverea.field_deliverea_distribution_center__display_name
 #: model:ir.model.fields,field_description:delivery_deliverea.field_deliverea_state__display_name
 msgid "Display Name"
-msgstr "Nombre mostrado"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,field_description:delivery_deliverea.field_deliverea_distribution_center__name
 msgid "Distribution Center"
-msgstr "Centro de distribución"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,field_description:delivery_deliverea.field_deliverea_distribution_center__email
 msgid "Email"
-msgstr "Email"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model_terms:ir.ui.view,arch_db:delivery_deliverea.view_picking_withcarrier_out_form
 msgid "Get Deliverea Label"
-msgstr "Obtener etiqueta Deliverea"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,field_description:delivery_deliverea.field_delivery_carrier__deliverea_hide_sender
 msgid "Hide Sender"
-msgstr "Ocultar el remitente"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,field_description:delivery_deliverea.field_carrier_deliverea_parameter__id
@@ -305,27 +294,27 @@ msgstr ""
 #. module: delivery_deliverea
 #: model:ir.model.fields.selection,name:delivery_deliverea.selection__carrier_deliverea_parameter__type__ignored
 msgid "Ignored"
-msgstr "Ignorado"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model_terms:ir.ui.view,arch_db:delivery_deliverea.view_delivery_carrier_form
 msgid "Import Carriers and Services"
-msgstr "Importar transportistas y servicios"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model_terms:ir.ui.view,arch_db:delivery_deliverea.view_delivery_carrier_form
 msgid "Import Distribution Centers"
-msgstr "Importar centros de distribución"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model.fields.selection,name:delivery_deliverea.selection__deliverea_state__delivery_state__in_transit
 msgid "In transit"
-msgstr "En tránsito"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model.fields.selection,name:delivery_deliverea.selection__deliverea_state__delivery_state__incidence
 msgid "Incidence"
-msgstr "Incidencia"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,help:delivery_deliverea.field_delivery_carrier__deliverea_note_selection_id
@@ -333,8 +322,6 @@ msgid ""
 "It allows to choose the field that we want to show within the carrier "
 "observations"
 msgstr ""
-"Permite elegir el campo que queremos mostrar dentro de las observaciones del "
-"transportista"
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,field_description:delivery_deliverea.field_carrier_deliverea_parameter____last_update
@@ -363,115 +350,114 @@ msgstr ""
 #. module: delivery_deliverea
 #: model:ir.model.fields,field_description:delivery_deliverea.field_deliverea_distribution_center__latitude
 msgid "Latitude"
-msgstr "Latitud"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,field_description:delivery_deliverea.field_deliverea_distribution_center__longitude
 msgid "Longitude"
-msgstr "Longitud"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,field_description:delivery_deliverea.field_carrier_deliverea_service__name
 msgid "Name"
-msgstr "Nombre"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,field_description:delivery_deliverea.field_delivery_carrier__deliverea_notifications_email
 msgid "Notify by email"
-msgstr "Notificar por email"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,field_description:delivery_deliverea.field_delivery_carrier__deliverea_notifications_sms
 msgid "Notify by sms"
-msgstr "Notificar por sms"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,field_description:delivery_deliverea.field_deliverea_distribution_center__observations
 msgid "Observations"
-msgstr "Observaciones"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model.fields.selection,name:delivery_deliverea.selection__carrier_deliverea_parameter__type__optional
 msgid "Optional"
-msgstr "Opcional"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,field_description:delivery_deliverea.field_carrier_deliverea_parameter__name
 msgid "Parameter Name"
-msgstr "Nombre del parametro"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,field_description:delivery_deliverea.field_deliverea_distribution_center__phone
 msgid "Phone"
-msgstr "Telefono"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,field_description:delivery_deliverea.field_delivery_carrier__delivery_type
 msgid "Provider"
-msgstr "Proveedor"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model.fields.selection,name:delivery_deliverea.selection__carrier_deliverea_parameter__type__required
 msgid "Required"
-msgstr "Requerido"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,field_description:delivery_deliverea.field_delivery_carrier__deliverea_return_label
 msgid "Return Label"
-msgstr "Etiqueta de devolución"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,field_description:delivery_deliverea.field_delivery_carrier__deliverea_return_proof_delivery
 msgid "Return Proof Delivery"
-msgstr "Entrega de la prueba de devolución"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,field_description:delivery_deliverea.field_delivery_carrier__deliverea_saturday_delivery
 msgid "Saturday Delivery"
-msgstr "Entrega el sábado"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,field_description:delivery_deliverea.field_delivery_carrier__deliverea_note_selection_id
 msgid "Select Note Field"
-msgstr "Seleccionar campo para notas"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model_terms:ir.ui.view,arch_db:delivery_deliverea.view_delivery_carrier_form
 msgid "Service Attributes"
-msgstr "Atributos del servicio"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model,name:delivery_deliverea.model_delivery_carrier
 msgid "Shipping Methods"
-msgstr "Forma de envío"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model.fields.selection,name:delivery_deliverea.selection__deliverea_state__delivery_state__shipping_recorded_in_carrier
 msgid "Shipping recorded in carrier"
-msgstr "Envío registrado en el transportista"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model,name:delivery_deliverea.model_stock_package_type
 msgid "Stock package type"
-msgstr "Tipo de paquete de existencias"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,help:delivery_deliverea.field_delivery_carrier__deliverea_notifications_email
 msgid "The carrier will send info email(s) to the final customer"
 msgstr ""
-"El transportista enviará el(los) correo(s) informativo(s) al cliente final"
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,help:delivery_deliverea.field_delivery_carrier__deliverea_notifications_sms
 msgid "The carrier will send info sms(s) to the final customer"
-msgstr "El transportista enviará el(los) sms informativo(s) al cliente final"
+msgstr ""
 
 #. module: delivery_deliverea
 #. odoo-python
 #: code:addons/delivery_deliverea/models/delivery_carrier.py:0
 #, python-format
 msgid "The field %(parameter)s is required"
-msgstr "El campo %(parameter)s es obligatorio"
+msgstr ""
 
 #. module: delivery_deliverea
 #. odoo-python
@@ -481,37 +467,35 @@ msgid ""
 "The max_weight, height, width and length values must be defined in the "
 "package associated with the carrier."
 msgstr ""
-"Los valores de peso máximo, altura, anchura y longitud deben definirse en el "
-"paquete asociado al soporte."
 
 #. module: delivery_deliverea
 #. odoo-python
 #: code:addons/delivery_deliverea/models/delivery_carrier.py:0
 #, python-format
 msgid "The value for %(field)s field/s is mandatory in %(object_id)s"
-msgstr "El valor de los campos %(field)s es obligatorio en %(object_id)s"
+msgstr ""
 
 #. module: delivery_deliverea
 #. odoo-python
 #: code:addons/delivery_deliverea/models/deliverea_request.py:0
 #, python-format
 msgid "Timeout: the server did not reply within 60s"
-msgstr "Tiempo de espera: el servidor no ha respondido en 60s"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model,name:delivery_deliverea.model_stock_picking
 msgid "Transfer"
-msgstr "Albarán"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,field_description:delivery_deliverea.field_carrier_deliverea_parameter__type
 msgid "Type"
-msgstr "Tipo"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model.fields.selection,name:delivery_deliverea.selection__carrier_deliverea_parameter__type__unsupported
 msgid "Unsupported"
-msgstr "No soportado"
+msgstr ""
 
 #. module: delivery_deliverea
 #. odoo-python
@@ -519,7 +503,6 @@ msgstr "No soportado"
 #, python-format
 msgid "Unsupported request type, use 'GET', 'POST', 'UPDATE', 'DELETE'"
 msgstr ""
-"Tipo de solicitud no admitido, utilice 'GET', 'POST', 'UPDATE', 'DELETE'"
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,field_description:delivery_deliverea.field_deliverea_distribution_center__uuid
@@ -529,7 +512,7 @@ msgstr ""
 #. module: delivery_deliverea
 #: model:ir.model.fields.selection,name:delivery_deliverea.selection__deliverea_state__delivery_state__warehouse_delivered
 msgid "Warehouse delivered"
-msgstr "Entregado por almacén"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,help:delivery_deliverea.field_delivery_carrier__deliverea_saturday_delivery
@@ -537,8 +520,6 @@ msgid ""
 "Whether or not the expedition should be delivered on Saturday or wait until "
 "next Monday (availability depends on carrier and service)"
 msgstr ""
-"Si la expedición debe entregarse el sábado o esperar hasta el próximo lunes "
-"(la disponibilidad depende del transportista y del servicio)"
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,help:delivery_deliverea.field_delivery_carrier__deliverea_return_proof_delivery
@@ -546,17 +527,13 @@ msgid ""
 "Whether or not to a proof of delivery should be returned back to origin "
 "(availability depends on carrier and service)"
 msgstr ""
-"Si se debe devolver o no un comprobante de entrega a origen (la "
-"disponibilidad depende del transportista y del servicio)"
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,help:delivery_deliverea.field_delivery_carrier__deliverea_hide_sender
 msgid ""
-"Whether or not to hide sender information in the printed label (availability "
-"depends on carrier and service)"
+"Whether or not to hide sender information in the printed label (availability"
+" depends on carrier and service)"
 msgstr ""
-"Ocultar o no la información del remitente en la etiqueta impresa (la "
-"disponibilidad depende del transportista y del servicio)"
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,help:delivery_deliverea.field_delivery_carrier__deliverea_return_label
@@ -564,68 +541,42 @@ msgid ""
 "Whether or not to include dormant return label in case the final customer "
 "wants to return the expedition (availability depends on carrier and service)"
 msgstr ""
-"Incluir o no la etiqueta de devolución inactiva en caso de que el cliente "
-"final quiera devolver la expedición (la disponibilidad depende del "
-"transportista y del servicio)"
 
 #. module: delivery_deliverea
 #. odoo-python
 #: code:addons/delivery_deliverea/models/delivery_carrier.py:0
 #, python-format
 msgid "You must select a distribution center first"
-msgstr "Primero tienes que seleccionar un centro de distribución"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model_terms:ir.ui.view,arch_db:delivery_deliverea.view_delivery_carrier_form
 msgid ""
-"You will need to import the first time you use Deliverea or when you want to "
-"update these fields."
+"You will need to import the first time you use Deliverea or when you want to"
+" update these fields."
 msgstr ""
-"Será necesario realizar una importación la primera vez que se utilice "
-"Deliverea o cuando se deseen actualizar esos campos."
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,field_description:delivery_deliverea.field_deliverea_distribution_center__zip
 msgid "Zip"
-msgstr "C.P"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model,name:delivery_deliverea.model_carrier_deliverea_parameter
 msgid "carrier.deliverea.parameter"
-msgstr "carrier.deliverea.parameter"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model,name:delivery_deliverea.model_carrier_deliverea_service
 msgid "carrier.deliverea.service"
-msgstr "carrier.deliverea.service"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model,name:delivery_deliverea.model_deliverea_distribution_center
 msgid "deliverea.distribution.center"
-msgstr "deliverea.distribution.center"
+msgstr ""
 
 #. module: delivery_deliverea
 #: model:ir.model,name:delivery_deliverea.model_deliverea_state
 msgid "deliverea.state"
-msgstr "deliverea.state"
-
-#~ msgid "Active?"
-#~ msgstr "Activo?"
-
-#~ msgid "Carrier Name"
-#~ msgstr "Transportista"
-
-#~ msgid "Deliverea Carrier"
-#~ msgstr "Deliverea Carrier"
-
-#~ msgid "Deliverea Service"
-#~ msgstr "Servicio Deliverea"
-
-#~ msgid "Generate Pickup"
-#~ msgstr "Generar recogida deliverea"
-
-#~ msgid "States"
-#~ msgstr "Estados"
-
-#~ msgid "UUID"
-#~ msgstr "UUID"
+msgstr ""
