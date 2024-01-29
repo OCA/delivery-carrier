@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="deliverea_state_01" model="deliverea.state">
+        <field name="code">01</field>
+        <field name="state">Preparing shipment</field>
+        <field name="delivery_state">shipping_recorded_in_carrier</field>
+    </record>
+    <record id="deliverea_state_02" model="deliverea.state">
+        <field name="code">02</field>
+        <field name="state">Pickup assigned</field>
+        <field name="delivery_state">shipping_recorded_in_carrier</field>
+    </record>
+    <record id="deliverea_state_03" model="deliverea.state">
+        <field name="code">03</field>
+        <field name="state">Pending pickup</field>
+        <field name="delivery_state">in_transit</field>
+    </record>
+    <record id="deliverea_state_04" model="deliverea.state">
+        <field name="code">04</field>
+        <field name="state">Documentation errors</field>
+        <field name="delivery_state">incidence</field>
+    </record>
+    <record id="deliverea_state_05" model="deliverea.state">
+        <field name="code">05</field>
+        <field name="state">Picked up</field>
+        <field name="delivery_state">warehouse_delivered</field>
+    </record>
+    <record id="deliverea_state_06" model="deliverea.state">
+        <field name="code">06</field>
+        <field name="state">Package leaving origin</field>
+        <field name="delivery_state">in_transit</field>
+    </record>
+    <record id="deliverea_state_07" model="deliverea.state">
+        <field name="code">07</field>
+        <field name="state">Administrative formalities/custom clearance</field>
+        <field name="delivery_state">in_transit</field>
+    </record>
+    <record id="deliverea_state_08" model="deliverea.state">
+        <field name="code">08</field>
+        <field name="state">Package on way to destination</field>
+        <field name="delivery_state">in_transit</field>
+    </record>
+    <record id="deliverea_state_09" model="deliverea.state">
+        <field name="code">09</field>
+        <field name="state">Administrative documentation received</field>
+        <field name="delivery_state">in_transit</field>
+    </record>
+    <record id="deliverea_state_10" model="deliverea.state">
+        <field name="code">10</field>
+        <field name="state">Ready to deliver</field>
+        <field name="delivery_state">in_transit</field>
+    </record>
+    <record id="deliverea_state_11" model="deliverea.state">
+        <field name="code">11</field>
+        <field name="state">Delivered</field>
+        <field name="delivery_state">customer_delivered</field>
+    </record>
+    <record id="deliverea_state_12" model="deliverea.state">
+        <field name="code">12</field>
+        <field name="state">Delivery failed</field>
+        <field name="delivery_state">incidence</field>
+    </record>
+    <record id="deliverea_state_13" model="deliverea.state">
+        <field name="code">13</field>
+        <field name="state">Errors in address</field>
+        <field name="delivery_state">incidence</field>
+    </record>
+    <record id="deliverea_state_14" model="deliverea.state">
+        <field name="code">14</field>
+        <field name="state">Refused package</field>
+        <field name="delivery_state">incidence</field>
+    </record>
+    <record id="deliverea_state_15" model="deliverea.state">
+        <field name="code">15</field>
+        <field name="state">Waiting sender action</field>
+        <field name="delivery_state">incidence</field>
+    </record>
+    <record id="deliverea_state_16" model="deliverea.state">
+        <field name="code">16</field>
+        <field name="state">Closed for vacations</field>
+        <field name="delivery_state">incidence</field>
+    </record>
+    <record id="deliverea_state_17" model="deliverea.state">
+        <field name="code">17</field>
+        <field name="state">Package returned</field>
+        <field name="delivery_state">incidence</field>
+    </record>
+    <record id="deliverea_state_18" model="deliverea.state">
+        <field name="code">18</field>
+        <field name="state">Waiting recipient action</field>
+        <field name="delivery_state">incidence</field>
+    </record>
+    <record id="deliverea_state_19" model="deliverea.state">
+        <field name="code">19</field>
+        <field name="state">Package withheld</field>
+        <field name="delivery_state">incidence</field>
+    </record>
+    <record id="deliverea_state_20" model="deliverea.state">
+        <field name="code">20</field>
+        <field name="state">Recipient changed delivery date</field>
+        <field name="delivery_state">incidence</field>
+    </record>
+    <record id="deliverea_state_21" model="deliverea.state">
+        <field name="code">21</field>
+        <field name="state">Recipient changed delivery address</field>
+        <field name="delivery_state">incidence</field>
+    </record>
+    <record id="deliverea_state_22" model="deliverea.state">
+        <field name="code">22</field>
+        <field name="state">Incorrect route</field>
+        <field name="delivery_state">incidence</field>
+    </record>
+    <record id="deliverea_state_23" model="deliverea.state">
+        <field name="code">23</field>
+        <field name="state">Reassigned pickup address</field>
+        <field name="delivery_state">incidence</field>
+    </record>
+    <record id="deliverea_state_24" model="deliverea.state">
+        <field name="code">24</field>
+        <field name="state">Pending for recipient pickup</field>
+        <field name="delivery_state">in_transit</field>
+    </record>
+    <record id="deliverea_state_25" model="deliverea.state">
+        <field name="code">25</field>
+        <field name="state">Damaged/Lost/Partial</field>
+        <field name="delivery_state">incidence</field>
+    </record>
+    <record id="deliverea_state_26" model="deliverea.state">
+        <field name="code">26</field>
+        <field name="state">Processing solution</field>
+        <field name="delivery_state">incidence</field>
+    </record>
+    <record id="deliverea_state_27" model="deliverea.state">
+        <field name="code">27</field>
+        <field name="state">Tracking unavailable</field>
+        <field name="delivery_state">incidence</field>
+    </record>
+    <record id="deliverea_state_28" model="deliverea.state">
+        <field name="code">28</field>
+        <field name="state">Expired</field>
+        <field name="delivery_state">incidence</field>
+    </record>
+    <record id="deliverea_state_29" model="deliverea.state">
+        <field name="code">29</field>
+        <field name="state">Collection failed</field>
+        <field name="delivery_state">incidence</field>
+    </record>
+    <record id="deliverea_state_30" model="deliverea.state">
+        <field name="code">30</field>
+        <field name="state">Deposited in drop point</field>
+        <field name="delivery_state">in_transit</field>
+    </record>
+    <record id="deliverea_state_31" model="deliverea.state">
+        <field name="code">31</field>
+        <field name="state">Pickup cancelled</field>
+        <field name="delivery_state">canceled_shipment</field>
+    </record>
+    <record id="deliverea_state_32" model="deliverea.state">
+        <field name="code">32</field>
+        <field name="state">Route cancelled for force majeure</field>
+        <field name="delivery_state">incidence</field>
+    </record>
+    <record id="deliverea_state_35" model="deliverea.state">
+        <field name="code">35</field>
+        <field name="state">Stolen package</field>
+        <field name="delivery_state">incidence</field>
+    </record>
+    <record id="deliverea_state_36" model="deliverea.state">
+        <field name="code">36</field>
+        <field name="state">Without space</field>
+        <field name="delivery_state">incidence</field>
+    </record>
+    <record id="deliverea_state_37" model="deliverea.state">
+        <field name="code">37</field>
+        <field name="state">Delivery cancelled</field>
+        <field name="delivery_state">canceled_shipment</field>
+    </record>
+    <record id="deliverea_state_38" model="deliverea.state">
+        <field name="code">38</field>
+        <field name="state">Without tie to delivery</field>
+        <field name="delivery_state">incidence</field>
+    </record>
+    <record id="deliverea_state_39" model="deliverea.state">
+        <field name="code">39</field>
+        <field name="state">Absent</field>
+        <field name="delivery_state">incidence</field>
+    </record>
+    <record id="deliverea_state_40" model="deliverea.state">
+        <field name="code">40</field>
+        <field name="state">Wrong address</field>
+        <field name="delivery_state">incidence</field>
+    </record>
+    <record id="deliverea_state_99" model="deliverea.state">
+        <field name="code">99</field>
+        <field name="state">Incidence not mapped</field>
+        <field name="delivery_state">incidence</field>
+    </record>
+</odoo>
