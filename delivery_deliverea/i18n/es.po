@@ -7,21 +7,22 @@ msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-07 14:38+0000\n"
-"PO-Revision-Date: 2023-06-07 14:38+0000\n"
-"Last-Translator: \n"
+"PO-Revision-Date: 2024-01-30 14:33+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: \n"
-"Language: \n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: delivery_deliverea
 #. odoo-python
 #: code:addons/delivery_deliverea/models/deliverea_request.py:0
 #, python-format
 msgid "%(name)s: %(rcode)s %(message)s %(detail)s %(ccode)s"
-msgstr ""
+msgstr "%(name)s: %(rcode)s %(message)s %(detail)s %(ccode)s"
 
 #. module: delivery_deliverea
 #: model_terms:ir.ui.view,arch_db:delivery_deliverea.view_delivery_carrier_form
@@ -60,7 +61,7 @@ msgstr ""
 #. module: delivery_deliverea
 #: model:ir.model.fields,field_description:delivery_deliverea.field_deliverea_distribution_center__billing_account
 msgid "Billing Account Id"
-msgstr "Billing Account Id"
+msgstr "Id de Cuenta de Facturación"
 
 #. module: delivery_deliverea
 #: model:ir.model.fields.selection,name:delivery_deliverea.selection__deliverea_state__delivery_state__canceled_shipment
@@ -116,7 +117,7 @@ msgstr "Pais"
 #: model:ir.model.fields,field_description:delivery_deliverea.field_deliverea_distribution_center__create_uid
 #: model:ir.model.fields,field_description:delivery_deliverea.field_deliverea_state__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Creado por"
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,field_description:delivery_deliverea.field_carrier_deliverea_parameter__create_date
@@ -124,7 +125,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_deliverea.field_deliverea_distribution_center__create_date
 #: model:ir.model.fields,field_description:delivery_deliverea.field_deliverea_state__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Creado el"
 
 #. module: delivery_deliverea
 #: model:ir.model.fields.selection,name:delivery_deliverea.selection__deliverea_state__delivery_state__customer_delivered
@@ -151,7 +152,7 @@ msgstr "Deliverea: Obtener servicios"
 #: model:ir.model.fields.selection,name:delivery_deliverea.selection__delivery_carrier__delivery_type__deliverea
 #: model:ir.model.fields.selection,name:delivery_deliverea.selection__stock_package_type__package_carrier_type__deliverea
 msgid "Deliverea"
-msgstr "Deliverea"
+msgstr "Entrega"
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,field_description:delivery_deliverea.field_delivery_carrier__deliverea_description
@@ -191,9 +192,8 @@ msgstr "Error de Deliverea. Error no controlado, es necesario comprobar el log"
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,field_description:delivery_deliverea.field_carrier_deliverea_service__deliverea_parameters
-#, fuzzy
 msgid "Deliverea Parameters"
-msgstr "Parametros Deliverea"
+msgstr "Parámetros de Entrega"
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,field_description:delivery_deliverea.field_stock_picking__deliverea_parcel_client_code
@@ -300,7 +300,7 @@ msgstr "Ocultar el remitente"
 #: model:ir.model.fields,field_description:delivery_deliverea.field_deliverea_distribution_center__id
 #: model:ir.model.fields,field_description:delivery_deliverea.field_deliverea_state__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: delivery_deliverea
 #: model:ir.model.fields.selection,name:delivery_deliverea.selection__carrier_deliverea_parameter__type__ignored
@@ -342,7 +342,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_deliverea.field_deliverea_distribution_center____last_update
 #: model:ir.model.fields,field_description:delivery_deliverea.field_deliverea_state____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última Modificación el"
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,field_description:delivery_deliverea.field_carrier_deliverea_parameter__write_uid
@@ -350,7 +350,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_deliverea.field_deliverea_distribution_center__write_uid
 #: model:ir.model.fields,field_description:delivery_deliverea.field_deliverea_state__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Última Actualización el"
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,field_description:delivery_deliverea.field_carrier_deliverea_parameter__write_date
@@ -358,7 +358,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_deliverea.field_deliverea_distribution_center__write_date
 #: model:ir.model.fields,field_description:delivery_deliverea.field_deliverea_state__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Última Actualización el"
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,field_description:delivery_deliverea.field_deliverea_distribution_center__latitude
@@ -524,7 +524,7 @@ msgstr ""
 #. module: delivery_deliverea
 #: model:ir.model.fields,field_description:delivery_deliverea.field_deliverea_distribution_center__uuid
 msgid "Uuid"
-msgstr ""
+msgstr "Uuid"
 
 #. module: delivery_deliverea
 #: model:ir.model.fields.selection,name:delivery_deliverea.selection__deliverea_state__delivery_state__warehouse_delivered
