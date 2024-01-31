@@ -30,6 +30,7 @@ setuptools.setup(
         'odoo-addon-delivery_roulier>=16.0dev,<16.1dev',
         'odoo-addon-delivery_state>=16.0dev,<16.1dev',
         'odoo-addon-partner_delivery_zone>=16.0dev,<16.1dev',
+        'odoo-addon-server_environment_delivery>=16.0dev,<16.1dev',
         'odoo-addon-stock_picking_delivery_link>=16.0dev,<16.1dev',
         'odoo-addon-stock_picking_report_delivery_cost>=16.0dev,<16.1dev',
     ],
