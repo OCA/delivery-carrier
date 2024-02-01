@@ -6,6 +6,10 @@ from odoo import fields, models
 class StockPickingType(models.Model):
     _inherit = "stock.picking.type"
 
+    print_label_on_validate = fields.Boolean(
+        string="Print label on validate",
+        help="Print the number of packages label when validating a picking of this type",
+    )
     force_set_number_of_packages = fields.Boolean()
     report_number_of_packages = fields.Many2one(
         "ir.actions.report",

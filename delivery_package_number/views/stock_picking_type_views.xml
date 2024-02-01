@@ -6,6 +6,7 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='default_location_src_id']/.." position="after">
                 <group string="Number of packages">
+                    <field name="print_label_on_validate" />
                     <field name="force_set_number_of_packages" />
                     <field name="report_number_of_packages" />
                 </group>
