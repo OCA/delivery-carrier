@@ -1,0 +1,73 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* delivery_carrier_schedule
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-12-21 12:03+0000\n"
+"PO-Revision-Date: 2023-12-21 12:03+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: delivery_carrier_schedule
+#: model:ir.model.fields,field_description:delivery_carrier_schedule.field_delivery_carrier__resource_id
+msgid "Availability Resource"
+msgstr ""
+
+#. module: delivery_carrier_schedule
+#: model:ir.model.fields.selection,name:delivery_carrier_schedule.selection__resource_resource__resource_type__carrier
+msgid "Carrier"
+msgstr ""
+
+#. module: delivery_carrier_schedule
+#: model:ir.model.fields,field_description:delivery_carrier_schedule.field_delivery_carrier__company_id
+msgid "Company"
+msgstr ""
+
+#. module: delivery_carrier_schedule
+#: model:ir.model,name:delivery_carrier_schedule.model_resource_resource
+msgid "Resources"
+msgstr ""
+
+#. module: delivery_carrier_schedule
+#: model:ir.model,name:delivery_carrier_schedule.model_sale_order
+msgid "Sales Order"
+msgstr ""
+
+#. module: delivery_carrier_schedule
+#: model:ir.model,name:delivery_carrier_schedule.model_delivery_carrier
+msgid "Shipping Methods"
+msgstr ""
+
+#. module: delivery_carrier_schedule
+#: model:ir.model.fields,help:delivery_carrier_schedule.field_delivery_carrier__tz
+msgid ""
+"This field is used in order to define in which timezone the resources will "
+"work."
+msgstr ""
+
+#. module: delivery_carrier_schedule
+#: model:ir.model.fields,field_description:delivery_carrier_schedule.field_delivery_carrier__tz
+msgid "Timezone"
+msgstr ""
+
+#. module: delivery_carrier_schedule
+#: model:ir.model,name:delivery_carrier_schedule.model_stock_picking
+msgid "Transfer"
+msgstr ""
+
+#. module: delivery_carrier_schedule
+#: model:ir.model.fields,field_description:delivery_carrier_schedule.field_resource_resource__resource_type
+msgid "Type"
+msgstr ""
+
+#. module: delivery_carrier_schedule
+#: model:ir.model.fields,field_description:delivery_carrier_schedule.field_delivery_carrier__resource_calendar_id
+msgid "Working Hours"
+msgstr ""
