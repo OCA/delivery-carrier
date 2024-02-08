@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="report_deposit_slip" model="ir.actions.report">
+      <field name="name">Generic Deposit Slip</field>
+      <field name="model">deposit.slip</field>
+      <field name="report_type">qweb-pdf</field>
+      <field
+            name="report_name"
+        >delivery_carrier_deposit.report_generic_deposit_slip</field>
+          <!--  <field name="report_file">auth_token.report.label_res_users</field>-->
+      <field name="print_report_name">object.name + '_delivery_slip.pdf'</field>
+      <field
+            name="binding_model_id"
+            ref="delivery_carrier_deposit.model_deposit_slip"
+        />
+      <field name="binding_type">report</field>
+    </record>
+
+</odoo>
