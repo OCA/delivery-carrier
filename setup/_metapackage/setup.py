@@ -14,6 +14,7 @@ setuptools.setup(
         'odoo-addon-delivery_automatic_package>=16.0dev,<16.1dev',
         'odoo-addon-delivery_carrier_account>=16.0dev,<16.1dev',
         'odoo-addon-delivery_carrier_agency>=16.0dev,<16.1dev',
+        'odoo-addon-delivery_carrier_deposit>=16.0dev,<16.1dev',
         'odoo-addon-delivery_carrier_info>=16.0dev,<16.1dev',
         'odoo-addon-delivery_carrier_max_weight_constraint>=16.0dev,<16.1dev',
         'odoo-addon-delivery_carrier_partner>=16.0dev,<16.1dev',
