@@ -87,11 +87,11 @@ class TestPartnerDeliveryZone(TransactionCase):
                 "type": "form",
                 "model": "res.partner",
                 "arch": """
-                <odoo>
+                <form>
                     <field name='child_ids'
                         context="{'default_name': 'test'}">
                     </field>
-                </odoo>
+                </form>
             """,
             }
         )
