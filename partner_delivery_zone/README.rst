@@ -101,6 +101,10 @@ Contributors
   * Angel Moya Pardo <angel.moya@pesol.es>
   * Antonio J Rubio Lorente <antonio.rubio@pesol.es>
 
+* `Puntsistemes <https://www.puntsistemes.com>`_
+
+  * Pedro Guirao <pguirao@puntsistemes.es>
+
 Maintainers
 ~~~~~~~~~~~
 

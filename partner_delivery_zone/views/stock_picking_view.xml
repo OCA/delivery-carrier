@@ -8,10 +8,7 @@
         <field name="arch" type="xml">
             <xpath expr="//page[@name='extra']" position="inside">
                 <group name="delivery_zone">
-                    <field
-                        name="delivery_zone_id"
-                        attrs="{'readonly': [('state', '=', 'done')]}"
-                    />
+                    <field name="delivery_zone_id" readonly="state == 'done'" />
                 </group>
             </xpath>
         </field>

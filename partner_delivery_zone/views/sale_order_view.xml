@@ -8,10 +8,7 @@
         <field name="inherit_id" ref="sale.view_order_form" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='payment_term_id']" position="after">
-                <field
-                    name="delivery_zone_id"
-                    attrs="{'readonly':[('state','in', ['done', 'cancel'])]}"
-                />
+                <field name="delivery_zone_id" readonly="state in ['done', 'cancel']" />
             </xpath>
         </field>
     </record>
@@ -22,7 +19,7 @@
             <xpath expr="//field[@name='company_id']" position="before">
                 <field
                     name="delivery_zone_id"
-                    attrs="{'readonly':[('state','in', ['done', 'cancel'])]}"
+                    readonly="state in ['done', 'cancel']"
                     optional="hidden"
                 />
             </xpath>
