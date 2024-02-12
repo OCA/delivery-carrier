@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2018 Tecnativa - Sergio Teruel
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_partner_form" model="ir.ui.view">
+        <field name="model">res.partner</field>
+        <field name="name">partner delivery zone</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <field name="industry_id" position="after">
+                <field name="delivery_zone_id" />
+            </field>
+            <xpath
+                expr="//field[@name='child_ids']/form//field[@name='mobile']"
+                position="after"
+            >
+                <field
+                    name="delivery_zone_id"
+                    attrs="{'invisible': [('type','!=', 'delivery')]}"
+                />
+            </xpath>
+        </field>
+    </record>
+    <record id="view_res_partner_filter" model="ir.ui.view">
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter" />
+        <field name="arch" type="xml">
+            <field name="parent_id" position="after">
+                <separator />
+                <field name="delivery_zone_id" />
+            </field>
+            <filter name="group_country" position="after">
+                <filter
+                    name="delivery_zone_group"
+                    string="Delivery Zone"
+                    context="{'group_by': 'delivery_zone_id'}"
+                />
+            </filter>
+        </field>
+    </record>
+</odoo>
