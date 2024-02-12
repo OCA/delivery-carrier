@@ -16,7 +16,7 @@
                 <t t-foreach="partner.delivery_schedule_ids" t-as="horary">
                     <div>
                         <span
-                            class="badge badge-pill badge-dark"
+                            class="badge rounded-pill bg-dark"
                             t-field="horary.display_name"
                         />
                     </div>
@@ -38,7 +38,7 @@
                 <t t-foreach="partner.delivery_schedule_ids" t-as="horary">
                     <div>
                         <span
-                            class="badge badge-pill badge-dark"
+                            class="badge rounded-pill bg-dark"
                             t-field="horary.display_name"
                         />
                     </div>
