@@ -1,6 +1,6 @@
-* Go to  *Sale* > *Delivery* > *Drop-off Sites*
+* Go to  *Sales* > *Configuration* > *Drop-off Sites*
 
-.. figure:: https://raw.githubusercontent.com/OCA/delivery-carrier/10.0/delivery_dropoff_site/static/description/dropoff_site_tree.png
+.. figure:: https://raw.githubusercontent.com/OCA/delivery-carrier/14.0/delivery_dropoff_site/static/description/dropoff_site_tree.png
    :width: 80 %
    :align: center
 
@@ -8,13 +8,13 @@
   you have the possilibity to generate geolocalization, base on the module
   ```base_geolocalize```
 
-.. figure:: https://raw.githubusercontent.com/OCA/delivery-carrier/10.0/delivery_dropoff_site/static/description/dropoff_site_form.png
+.. figure:: https://raw.githubusercontent.com/OCA/delivery-carrier/14.0/delivery_dropoff_site/static/description/dropoff_site_form.png
    :width: 80 %
    :align: center
 
 * Optionaly, you can set opening hours.
 
-.. figure:: https://raw.githubusercontent.com/OCA/delivery-carrier/10.0/delivery_dropoff_site/static/description/dropoff_site_form_calendar.png
+.. figure:: https://raw.githubusercontent.com/OCA/delivery-carrier/14.0/delivery_dropoff_site/static/description/dropoff_site_form_calendar.png
    :width: 80 %
    :align: center
 

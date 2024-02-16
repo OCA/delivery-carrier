@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-
     <record id="view_sale_order_form" model="ir.ui.view">
         <field name="model">sale.order</field>
         <field name="type">form</field>
@@ -15,8 +14,13 @@
                     'invisible': [('dropoff_site_required', '=', False)],
                     }"
                 />
+                <field name="allowed_partner_shipping_ids" invisible="1" />
             </field>
+            <xpath expr="//field[@name='partner_shipping_id']" position="attributes">
+                <attribute
+                    name="domain"
+                >[('id', 'in', allowed_partner_shipping_ids)]</attribute>
+            </xpath>
         </field>
     </record>
-
 </odoo>

@@ -7,16 +7,12 @@
 
 {
     "name": "Delivery Drop-off Sites",
-    "version": "10.0.1.1.0",
+    "version": "14.0.1.0.0",
     "author": "Akretion,GRAP,Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "summary": "Send goods to sites in which customers come pick up package",
     "category": "Delivery",
-    "depends": [
-        "delivery",
-        "base_geolocalize",
-        "resource",
-    ],
+    "depends": ["delivery", "base_geolocalize", "resource", "sale_stock"],
     "website": "https://github.com/OCA/delivery-carrier",
     "data": [
         "security/ir.model.access.csv",
