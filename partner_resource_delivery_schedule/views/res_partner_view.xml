@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 Moduon Team S.L.
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0) -->
+<data>
+    <record id="view_partner_form" model="ir.ui.view">
+        <field name="name">res.partner.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='sale']" position="inside">
+                <field name="delivery_schedule_resource_id" invisible="1" />
+                <label for="delivery_schedule_calendar_id" />
+                <div class="o_row">
+                    <button
+                        name="action_create_delivery_schedule_resource"
+                        string="Enable Delivery Schedule"
+                        type="object"
+                        icon="fa-calendar-check-o"
+                        class="btn-secondary"
+                        attrs="{'invisible': [('delivery_schedule_resource_id', '!=', False)]}"
+                    />
+                    <field
+                        name="delivery_schedule_calendar_id"
+                        attrs="{'invisible': [('delivery_schedule_resource_id', '=', False)]}"
+                        context="{'default_is_delivery_schedule': True}"
+                        nolabel="1"
+                    />
+                </div>
+            </xpath>
+        </field>
+    </record>
+</data>

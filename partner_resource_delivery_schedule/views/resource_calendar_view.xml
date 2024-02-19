@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 Moduon Team S.L.
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0) -->
+<data>
+    <record
+        id="resource_calendar_delivery_schedule_action"
+        model="ir.actions.act_window"
+    >
+        <field name="name">Delivery Schedules</field>
+        <field name="res_model">resource.calendar</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('is_delivery_schedule', '=', True)]</field>
+        <field name="context">{'default_is_delivery_schedule': True}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Delivery Schedule record
+            </p>
+            <p>
+                Once the Delivery Schedule record is created, you can assign it to a Customer.
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+        id="resource_calendar_delivery_schedule_sales_menu"
+        action="resource_calendar_delivery_schedule_action"
+        parent="sale.menu_sales_config"
+        groups="sales_team.group_sale_manager"
+        sequence="6"
+    />
+</data>

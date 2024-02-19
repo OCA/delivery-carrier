@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_delivery_schedule_resource_calendar_manager,delivery.schedule.resource.calendar.manager,resource.model_resource_calendar,sales_team.group_sale_manager,1,1,1,1
+access_delivery_schedule_resource_calendar_attendance_manager,delivery.schedule.resource.calendar.attendance.manager,resource.model_resource_calendar_attendance,sales_team.group_sale_manager,1,1,1,1

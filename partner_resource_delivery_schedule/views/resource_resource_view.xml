@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 Moduon Team S.L.
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0) -->
+<data>
+    <record id="resource_resource_form" model="ir.ui.view">
+        <field name="name">resource.resource.form</field>
+        <field name="model">resource.resource</field>
+        <field name="inherit_id" ref="resource.resource_resource_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='user_id']" position="attributes">
+                <attribute
+                    name="attrs"
+                >{'required': [('resource_type', '=', 'user')], 'invisible': [('resource_type', '!=', 'user')]}</attribute>
+            </xpath>
+        </field>
+    </record>
+</data>
