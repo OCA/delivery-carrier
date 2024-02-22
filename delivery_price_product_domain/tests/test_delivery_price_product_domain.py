@@ -40,6 +40,14 @@ class TestDeliveryPriceProductDomain(SavepointCase):
                 "fixed_price": 99.99,
             }
         )
+        self.carrier_2 = self.env["delivery.carrier"].create(
+            {
+                "name": "Carrier based on rule without rule",
+                "delivery_type": "base_on_rule",
+                "product_id": product_shipping_cost.id,
+                "fixed_price": 99.99,
+            }
+        )
         self.pricelist = self.env["product.pricelist"].create(
             {
                 "name": "Test pricelist",
@@ -95,6 +103,23 @@ class TestDeliveryPriceProductDomain(SavepointCase):
                         0,
                         {
                             "product_id": self.product_service.id,
+                            "product_uom_qty": 1,
+                        },
+                    ),
+                ],
+            }
+        )
+        self.sale_2 = self.env["sale.order"].create(
+            {
+                "partner_id": self.partner.id,
+                "pricelist_id": self.pricelist.id,
+                "carrier_id": self.carrier.id,
+                "order_line": [
+                    (
+                        0,
+                        0,
+                        {
+                            "product_id": self.product_delivery_1.id,
                             "product_uom_qty": 1,
                         },
                     ),
@@ -158,3 +183,13 @@ class TestDeliveryPriceProductDomain(SavepointCase):
         self.assertEqual(
             len(delivery_lines), 1, msg="Must be 1 because add only 1 shipping"
         )
+
+    def test_add_delivery(self):
+        sale = self.sale_2
+        delivery_wizard = Form(
+            self.env["choose.delivery.carrier"].with_context(
+                {"default_order_id": sale.id, "default_carrier_id": self.carrier_2}
+            )
+        )
+        choose_delivery_carrier = delivery_wizard.save()
+        choose_delivery_carrier.button_confirm()
