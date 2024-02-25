@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-08-16 08:40+0000\n"
-"PO-Revision-Date: 2023-10-09 12:36+0000\n"
+"PO-Revision-Date: 2024-02-25 19:36+0000\n"
 "Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -20,7 +20,7 @@ msgstr ""
 #. module: delivery_package_number
 #: model_terms:ir.ui.view,arch_db:delivery_package_number.view_number_package_validate
 msgid "Apply"
-msgstr ""
+msgstr "Aplicar"
 
 #. module: delivery_package_number
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_backorder_confirmation__ask_number_of_packages
@@ -38,41 +38,41 @@ msgstr "Confirmación de pedido pendiente"
 #. module: delivery_package_number
 #: model_terms:ir.ui.view,arch_db:delivery_package_number.view_number_package_validate
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #. module: delivery_package_number
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_line_wizard__create_uid
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_wizard__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Creado por"
 
 #. module: delivery_package_number
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_line_wizard__create_date
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_wizard__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Creado el"
 
 #. module: delivery_package_number
 #: model:ir.actions.report,name:delivery_package_number.action_delivery_package_number_report
 msgid "Delivery package number"
-msgstr ""
+msgstr "Número de paquete de entrega"
 
 #. module: delivery_package_number
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_line_wizard__display_name
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_wizard__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Mostrar Nombre"
 
 #. module: delivery_package_number
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_picking_type__force_set_number_of_packages
 msgid "Force Set Number Of Packages"
-msgstr ""
+msgstr "Forzar Establecer Número De Paquetes"
 
 #. module: delivery_package_number
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_line_wizard__id
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_wizard__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: delivery_package_number
 #: model:ir.model,name:delivery_package_number.model_stock_immediate_transfer
@@ -83,24 +83,24 @@ msgstr "Transferencia inmediata"
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_line_wizard____last_update
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_wizard____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última Modificación el"
 
 #. module: delivery_package_number
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_line_wizard__write_uid
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_wizard__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Última Actualización por"
 
 #. module: delivery_package_number
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_line_wizard__write_date
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_wizard__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Última Actualización el"
 
 #. module: delivery_package_number
 #: model:ir.model,name:delivery_package_number.model_stock_number_package_mixin
 msgid "Mixin to set number of packages"
-msgstr ""
+msgstr "Mezclador para establecer el número de paquetes"
 
 #. module: delivery_package_number
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_backorder_confirmation__number_of_packages
@@ -119,27 +119,27 @@ msgstr "Número de Bultos"
 #. module: delivery_package_number
 #: model_terms:ir.ui.view,arch_db:delivery_package_number.view_picking_type_form
 msgid "Number of packages"
-msgstr ""
+msgstr "Número de paquetes"
 
 #. module: delivery_package_number
 #: model_terms:ir.ui.view,arch_db:delivery_package_number.delivery_package_number_document
 msgid "Number of packages:"
-msgstr ""
+msgstr "Número de paquetes:"
 
 #. module: delivery_package_number
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_wizard__pick_ids
 msgid "Pick"
-msgstr ""
+msgstr "Escoja"
 
 #. module: delivery_package_number
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_line_wizard__picking_id
 msgid "Picking"
-msgstr ""
+msgstr "Recogiendo"
 
 #. module: delivery_package_number
 #: model:ir.model,name:delivery_package_number.model_stock_picking_type
 msgid "Picking Type"
-msgstr ""
+msgstr "Tipo de Recogida"
 
 #. module: delivery_package_number
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_backorder_confirmation__print_package_label
@@ -147,19 +147,19 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_mixin__print_package_label
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_wizard__print_package_label
 msgid "Print Package Label"
-msgstr ""
+msgstr "Imprimir Etiqueta de Paquete"
 
 #. module: delivery_package_number
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_picking_type__report_number_of_packages
 msgid "Report Number Of Packages"
-msgstr ""
+msgstr "Informe Número de paquetes"
 
 #. module: delivery_package_number
 #: code:addons/delivery_package_number/models/stock_picking.py:0
 #: model_terms:ir.ui.view,arch_db:delivery_package_number.view_number_package_validate
 #, python-format
 msgid "Set number of packages"
-msgstr ""
+msgstr "Establecer el número de paquetes"
 
 #. module: delivery_package_number
 #: model:ir.model.fields,help:delivery_package_number.field_stock_backorder_confirmation__number_of_packages
@@ -172,12 +172,12 @@ msgstr "Establezca el número de bultos para esto(s) albaran(es)"
 #. module: delivery_package_number
 #: model:ir.model,name:delivery_package_number.model_stock_number_package_validate_line_wizard
 msgid "Stock Number Package Lines Wizard"
-msgstr ""
+msgstr "Asistente de Líneas de Paquete de Números de Inventario"
 
 #. module: delivery_package_number
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_wizard__stock_number_package_validation_line_ids
 msgid "Stock Number Package Validation Line"
-msgstr ""
+msgstr "Número de inventario Línea de validación del Paquete"
 
 #. module: delivery_package_number
 #: model:ir.model,name:delivery_package_number.model_stock_picking
@@ -187,12 +187,12 @@ msgstr "Albarán"
 #. module: delivery_package_number
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_line_wizard__wiz_id
 msgid "Wiz"
-msgstr ""
+msgstr "Asist"
 
 #. module: delivery_package_number
 #: model:ir.model,name:delivery_package_number.model_stock_number_package_validate_wizard
 msgid "Wizard to force set number of pickings when validate"
-msgstr ""
+msgstr "Asistente para forzar el número de selecciones al validar"
 
 #~ msgid "Set the number of packages for picking to be validated"
 #~ msgstr "Establezca el número de paquetes para recoger que deben validarse"
