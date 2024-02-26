@@ -3,7 +3,7 @@
 {
     "name": "Delivery Deliverea",
     "summary": "Delivery Carrier implementation for Deliverea using their API",
-    "version": "16.0.1.0.0",
+    "version": "16.0.1.0.1",
     "category": "Stock",
     "website": "https://github.com/OCA/delivery-carrier",
     "author": "FactorLibre, Odoo Community Association (OCA)",
