@@ -351,7 +351,9 @@ class DeliveryCarrier(models.Model):
                 "email": carrier.deliverea_notifications_email,
             },
             "saturdayDelivery": carrier.deliverea_saturday_delivery,
-            "includeReturnLabel": carrier.deliverea_return_label,
+            "returnLabel": {
+                "include": carrier.deliverea_return_label,
+            },
             "returnProofOfDelivery": carrier.deliverea_return_label,
             "hideSender": carrier.deliverea_hide_sender,
             "insuranceValue": "0.0 EUR",
