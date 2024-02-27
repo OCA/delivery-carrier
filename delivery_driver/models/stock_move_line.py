@@ -10,6 +10,6 @@ class StockMoveLine(models.Model):
 
     driver_id = fields.Many2one(
         related="picking_id.driver_id",
-        domain="[('is_company', '=', False)]",
+        domain="[('is_driver', '=', True)]",
         store="True",
     )

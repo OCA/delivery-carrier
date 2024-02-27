@@ -11,7 +11,11 @@
         <field name="inherit_id" ref="delivery.view_picking_withcarrier_out_form" />
         <field name="arch" type="xml">
             <xpath expr="//group[@name='carrier_data']" position="inside">
-                <field name="driver_id" />
+                <field
+                    name="driver_id"
+                    context="{'show_driver': True}"
+                    options='{"always_reload": True}'
+                />
             </xpath>
         </field>
     </record>
@@ -21,7 +25,12 @@
         <field name="inherit_id" ref="delivery.vpicktree_view_tree" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='carrier_id']" position="after">
-                <field name="driver_id" optional="hide" />
+                <field
+                    name="driver_id"
+                    optional="hide"
+                    context="{'show_driver': True}"
+                    options='{"always_reload": True}'
+                />
             </xpath>
         </field>
     </record>
