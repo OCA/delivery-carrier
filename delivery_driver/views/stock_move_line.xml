@@ -11,7 +11,12 @@
         <field name="inherit_id" ref="delivery.view_move_line_tree_detailed_delivery" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='carrier_id']" position="after">
-                <field name="driver_id" optional="hide" />
+                <field
+                    name="driver_id"
+                    optional="hide"
+                    context="{'show_driver': True}"
+                    options='{"always_reload": True}'
+                />
             </xpath>
         </field>
     </record>
@@ -21,7 +26,12 @@
         <field name="inherit_id" ref="stock.view_move_line_tree" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='location_dest_id']" position="after">
-                <field name="driver_id" optional="hide" />
+                <field
+                    name="driver_id"
+                    optional="hide"
+                    context="{'show_driver': True}"
+                    options='{"always_reload": True}'
+                />
             </xpath>
         </field>
     </record>

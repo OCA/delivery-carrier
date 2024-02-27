@@ -4,7 +4,7 @@
 {
     "name": "Delivery Driver",
     "summary": "Allow choose driver in delivery methods",
-    "version": "16.0.1.0.0",
+    "version": "16.0.1.1.0",
     "development_status": "Alpha",
     "category": "Inventory/Delivery",
     "website": "https://github.com/OCA/delivery-carrier",
@@ -20,5 +20,6 @@
         "views/delivery_carrier.xml",
         "views/stock_picking.xml",
         "views/stock_move_line.xml",
+        "views/res_partner.xml",
     ],
 }
