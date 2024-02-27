@@ -2,6 +2,7 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0)
 
 
+from odoo.exceptions import ValidationError
 from odoo.tests.common import TransactionCase
 
 
@@ -32,6 +33,14 @@ class TestDeliverDriver(TransactionCase):
                 "driver_id": cls.driver_test.id,
             }
         )
+
+    def test_partner_is_driver(self):
+        self.assertTrue(self.driver_test.is_driver)
+        self.assertFalse(self.partner_test.is_driver)
+        with self.assertRaises(ValidationError):
+            self.driver_test.write({"is_driver": False})
+        self.delivery_test.write({"driver_id": self.partner_test.id})
+        self.assertTrue(self.partner_test.is_driver)
 
     def test_sale_flow(self):
         sale_order = self.env["sale.order"].create(
