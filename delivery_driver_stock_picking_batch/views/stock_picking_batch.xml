@@ -8,7 +8,12 @@
         <field name="inherit_id" ref="stock_picking_batch.view_picking_tree_batch" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='scheduled_date']" position="after">
-                <field name="driver_id" optional="hide" />
+                <field
+                    name="driver_id"
+                    optional="hide"
+                    context="{'show_driver': True}"
+                    options='{"always_reload": True}'
+                />
             </xpath>
         </field>
     </record>
@@ -18,7 +23,12 @@
         <field name="inherit_id" ref="stock_picking_batch.stock_picking_batch_form" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='scheduled_date']" position="after">
-                <field name="driver_ids" widget="many2many_tags" />
+                <field
+                    name="driver_ids"
+                    widget="many2many_tags"
+                    context="{'show_driver': True}"
+                    options='{"always_reload": True}'
+                />
             </xpath>
         </field>
     </record>
@@ -28,7 +38,13 @@
         <field name="inherit_id" ref="stock_picking_batch.stock_picking_batch_tree" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='scheduled_date']" position="after">
-                <field name="driver_ids" widget="many2many_tags" optional="hide" />
+                <field
+                    name="driver_ids"
+                    widget="many2many_tags"
+                    optional="hide"
+                    context="{'show_driver': True}"
+                    options='{"always_reload": True}'
+                />
             </xpath>
         </field>
     </record>
