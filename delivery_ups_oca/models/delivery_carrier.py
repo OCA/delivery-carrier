@@ -1,6 +1,9 @@
 # Copyright 2020 Hunki Enterprises BV
 # Copyright 2021-2022 Tecnativa - Víctor Martínez
+# Copyright 2023 ForgeFlow, S.L. - Jordi Ballester
+# Copyright 2024 Sygel - Manuel Regidor
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+
 from odoo import fields, models
 
 from .ups_request import UpsRequest
@@ -9,15 +12,17 @@ from .ups_request import UpsRequest
 class DeliveryCarrier(models.Model):
     _inherit = "delivery.carrier"
 
-    delivery_type = fields.Selection(selection_add=[("ups", "UPS")])
+    delivery_type = fields.Selection(
+        selection_add=[("ups", "UPS")],
+        ondelete={
+            "ups": lambda recs: recs.write({"delivery_type": "fixed", "fixed_price": 0})
+        },
+    )
     ups_file_format = fields.Selection(
-        selection=[("GIF", "PDF"), ("ZPL", "ZPL"), ("EPL", "EPL"), ("SPL", "SPL")],
+        selection=[("GIF", "GIF"), ("ZPL", "ZPL"), ("EPL", "EPL"), ("SPL", "SPL")],
         default="GIF",
         string="File format",
     )
-    ups_ws_username = fields.Char(string="Username WS")
-    ups_ws_password = fields.Char(string="Password WS")
-    ups_access_license = fields.Char(string="Access license number")
     ups_shipper_number = fields.Char(string="Shipper number")
     ups_service_code = fields.Selection(
         selection=[
@@ -79,11 +84,61 @@ class DeliveryCarrier(models.Model):
         "webservice (you will necessary to activate tracking API)",
     )
     ups_use_packages_from_picking = fields.Boolean(string="Use packages from picking")
+    ups_client_id = fields.Char()
+    ups_client_secret = fields.Char()
+    ups_token = fields.Char()
+    ups_token_expiration_date = fields.Datetime(readonly=True)
+    ups_cash_on_delivery = fields.Boolean(string="UPS Cash On Delivery")
+    ups_cod_funds_code = fields.Selection(
+        selection=[("1", "Cash"), ("9", "Check/Cashier Check/Money Order")],
+        string="UPS Cod Funds Code",
+    )
 
-    def ups_test_call(self, order):
+    def _ups_get_response_price(self, total_charges, currency, company):
+        """We need to convert the price if the currency is different."""
+        price = float(total_charges["MonetaryValue"])
+        if total_charges["CurrencyCode"] != currency.name:
+            price = currency._convert(
+                price,
+                self.env["res.currency"].search(
+                    [("name", "=", total_charges["CurrencyCode"])]
+                ),
+                company,
+                fields.Date.today(),
+            )
+        return price
+
+    def ups_rate_shipment(self, order):
+        ups_request = UpsRequest(self)
+        response = ups_request.rate_shipment(order)
+        price = self._ups_get_response_price(
+            response, order.currency_id, order.company_id
+        )
+        return {
+            "success": True,
+            "price": price,
+            "error_message": False,
+            "warning_message": False,
+        }
+
+    def ups_create_shipping(self, picking):
+        """Send packages of the picking to UPS
+        return a list of dicts {'exact_price': 'tracking_number':}
+        suitable for delivery.carrier#send_shipping"""
         self.ensure_one()
         ups_request = UpsRequest(self)
-        return ups_request.test_call(order)
+        response = ups_request._send_shipping(picking)
+        extra_price = self._ups_get_response_price(
+            response["price"], picking.company_id.currency_id, picking.company_id
+        )
+        picking.carrier_tracking_ref = response["ShipmentIdentificationNumber"]
+        # Create label from response
+        self._create_ups_label(picking, response["labels"])
+        # Return
+        return {
+            "exact_price": extra_price,
+            "tracking_number": picking.carrier_tracking_ref,
+        }
 
     def ups_send_shipping(self, pickings):
         return [self.ups_create_shipping(p) for p in pickings]
@@ -97,21 +152,21 @@ class DeliveryCarrier(models.Model):
             "res_id": picking.id,
         }
 
-    def _create_ups_label(self, picking, data):
+    def _create_ups_label(self, picking, labels):
         val_list = []
-        for PackageResult in data["PackageResults"]:
-            format_code = PackageResult["ShippingLabel"]["ImageFormat"]["Code"].upper()
+        for label in labels:
+            format_code = label["format_code"].upper()
             attachment_name = "%s-%s.%s" % (
-                picking.carrier_tracking_ref,
+                label["tracking_ref"],
                 format_code,
-                ("txt" if format_code != "PDF" else "pdf"),
+                format_code,
             )
             val_list.append(
                 self._prepare_ups_label_attachment(
                     picking,
                     {
                         "name": attachment_name,
-                        "datas": PackageResult["ShippingLabel"]["GraphicImage"],
+                        "datas": label["datas"],
                     },
                 )
             )
@@ -133,25 +188,6 @@ class DeliveryCarrier(models.Model):
         )
         return self._create_ups_label(picking, response)
 
-    def ups_create_shipping(self, picking):
-        """Send packages of the picking to UPS
-        return a list of dicts {'exact_price': 'tracking_number':}
-        suitable for delivery.carrier#send_shipping"""
-        self.ensure_one()
-        ups_request = UpsRequest(self)
-        response = ups_request._send_shipping(picking)
-        extra_price = self._ups_get_response_price(
-            response["price"], picking.company_id.currency_id, picking.company_id
-        )
-        picking.carrier_tracking_ref = response["ShipmentIdentificationNumber"]
-        # Create label from response
-        self._create_ups_label(picking, response)
-        # Return
-        return {
-            "exact_price": extra_price,
-            "tracking_number": picking.carrier_tracking_ref,
-        }
-
     def ups_get_tracking_link(self, picking):
         return "https://ups.com/WebTracking/track?trackingNumber=%s" % (
             picking.carrier_tracking_ref
@@ -159,7 +195,10 @@ class DeliveryCarrier(models.Model):
 
     def ups_cancel_shipment(self, pickings):
         ups_request = UpsRequest(self)
-        return ups_request.cancel_shipment(pickings)
+        for picking in pickings.filtered(lambda a: a.carrier_tracking_ref):
+            if ups_request.cancel_shipment(pickings):
+                picking.write({"tracking_state_history": False})
+        return True
 
     def ups_tracking_state_update(self, picking):
         self.ensure_one()
@@ -172,29 +211,7 @@ class DeliveryCarrier(models.Model):
             picking.delivery_state = response["delivery_state"]
             picking.tracking_state_history = response["tracking_state_history"]
 
-    def ups_rate_shipment(self, order):
+    def ups_update_token(self):
+        self.ensure_one()
         ups_request = UpsRequest(self)
-        response = ups_request.rate_shipment(order)
-        price = self._ups_get_response_price(
-            response, order.currency_id, order.company_id
-        )
-        return {
-            "success": True,
-            "price": price,
-            "error_message": False,
-            "warning_message": False,
-        }
-
-    def _ups_get_response_price(self, total_charges, currency, company):
-        """We need to convert the price if the currency is different."""
-        price = float(total_charges["MonetaryValue"])
-        if total_charges["CurrencyCode"] != currency.name:
-            price = currency._convert(
-                price,
-                self.env["res.currency"].search(
-                    [("name", "=", total_charges["CurrencyCode"])]
-                ),
-                company,
-                fields.Date.today(),
-            )
-        return price
+        ups_request._get_new_token()
