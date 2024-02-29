@@ -3,3 +3,11 @@
 
   * Víctor Martínez
   * Pedro M. Baeza
+
+* `ForgeFlow <https://www.forgeflow.com>`_:
+
+  * Jordi Ballester
+
+* `Sygel <https://www.sygel.es>`_:
+
+  * Manuel Regidor
