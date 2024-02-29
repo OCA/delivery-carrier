@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!--
 Copyright 2021 Tecnativa - Víctor Martínez
+Copyright 2024 Sygel - Manuel Regidor
 License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 -->
 <odoo>
@@ -12,7 +13,7 @@ License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
                 <page
                     string="UPS"
                     name="configuration_ups_oca"
-                    attrs="{'invisible': ['|', ('delivery_type', '!=', 'ups')]}"
+                    attrs="{'invisible': [('delivery_type', '!=', 'ups')]}"
                 >
                     <group>
                         <group string="Service">
@@ -22,10 +23,6 @@ License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
                             />
                         </group>
                         <group string="Misc">
-                            <field
-                                name="ups_access_license"
-                                attrs="{'required': [('delivery_type', '=', 'ups')]}"
-                            />
                             <field
                                 name="ups_shipper_number"
                                 attrs="{'required': [('delivery_type', '=', 'ups')]}"
@@ -46,21 +43,36 @@ License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
                             />
                             <field name="ups_tracking_state_update_sync" />
                         </group>
-                        <group string="WS Credentials">
+                        <group string="Credentials">
                             <field
-                                name="ups_ws_username"
+                                name="ups_client_id"
                                 attrs="{'required': [('delivery_type', '=', 'ups')]}"
                             />
                             <field
-                                name="ups_ws_password"
+                                name="ups_client_secret"
                                 password="True"
                                 attrs="{'required': [('delivery_type', '=', 'ups')]}"
+                            />
+                            <button
+                                name="ups_update_token"
+                                string="Update Token"
+                                type="object"
+                                groups="stock.group_stock_manager"
                             />
                         </group>
                         <group string="Label">
                             <field
                                 name="ups_file_format"
                                 attrs="{'required': [('delivery_type', '=', 'ups')]}"
+                            />
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Cash On Delivery">
+                            <field name="ups_cash_on_delivery" />
+                            <field
+                                name="ups_cod_funds_code"
+                                attrs="{'required': [('delivery_type', '=', 'ups'), ('ups_cash_on_delivery', '=', True)], 'invisible': [('ups_cash_on_delivery', '=', False)]}"
                             />
                         </group>
                     </group>
