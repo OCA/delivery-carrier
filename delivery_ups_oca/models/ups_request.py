@@ -30,7 +30,11 @@ class UpsRequest(object):
             self.url = "https://onlinetools.ups.com"
 
     def _process_reply(
-        self, url, data=None, method="post", query_parameters=None,
+        self,
+        url,
+        data=None,
+        method="post",
+        query_parameters=None,
     ):
         data = data or {}
         headers = {
