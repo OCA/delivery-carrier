@@ -88,6 +88,11 @@ class DeliveryCarrier(models.Model):
     ups_client_secret = fields.Char()
     ups_token = fields.Char()
     ups_token_expiration_date = fields.Datetime(readonly=True)
+    ups_cash_on_delivery = fields.Boolean(string="UPS Cash On Delivery")
+    ups_cod_funds_code = fields.Selection(
+        selection=[("1", "Cash"), ("9", "Check/Cashier Check/Money Order")],
+        string="UPS Cod Funds Code",
+    )
 
     # Not in use! It will be activated as long with tests
     # def ups_test_call(self, order):

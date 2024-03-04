@@ -67,6 +67,15 @@ License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
                             />
                         </group>
                     </group>
+                    <group>
+                        <group string="Cash On Delivery">
+                            <field name="ups_cash_on_delivery" />
+                            <field
+                                name="ups_cod_funds_code"
+                                attrs="{'required': [('delivery_type', '=', 'ups'), ('ups_cash_on_delivery', '=', True)], 'invisible': [('ups_cash_on_delivery', '=', False)]}"
+                            />
+                        </group>
+                    </group>
                 </page>
             </xpath>
         </field>

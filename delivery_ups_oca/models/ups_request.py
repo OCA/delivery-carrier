@@ -216,6 +216,18 @@ class UpsRequest(object):
                 "LabelSpecification": self._label_data(),
             }
         }
+        if picking.carrier_id.ups_cash_on_delivery and picking.sale_id:
+            vals["ShipmentRequest"]["Shipment"]["ShipmentServiceOptions"] = (
+                {
+                    "COD": {
+                        "CODFundsCode": picking.carrier_id.ups_cod_funds_code,
+                        "CODAmount": {
+                            "CurrencyCode": picking.sale_id.currency_id.name,
+                            "MonetaryValue": str(picking.sale_id.amount_total),
+                        },
+                    }
+                },
+            )
         return vals
 
     def _send_shipping(self, picking):
