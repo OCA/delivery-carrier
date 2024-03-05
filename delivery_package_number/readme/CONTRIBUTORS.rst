@@ -2,8 +2,8 @@
 
   * Pedro M. Baeza
   * David Vidal
-  * Marçal Isern
   * Carlos Roca
+  * Sergio Teruel
 
 
  * `Sygel <https://www.sygel.es>`_:

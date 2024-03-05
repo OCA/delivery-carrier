@@ -2,6 +2,7 @@
 # Copyright 2023 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from odoo import _, api, fields, models
+from odoo.tools import config
 
 
 class StockPicking(models.Model):
@@ -15,6 +16,7 @@ class StockPicking(models.Model):
         default=0,
         copy=False,
     )
+    ask_number_of_packages = fields.Boolean(compute="_compute_ask_number_of_packages")
 
     @api.depends("package_ids")
     def _compute_number_of_packages(self):
@@ -37,24 +39,36 @@ class StockPicking(models.Model):
             ),
         }
 
-    def _check_set_number_of_packages(self):
+    def _compute_ask_number_of_packages(self):
+        """To Know if is needed raise wizard to ask user by package number"""
+        for picking in self:
+            picking.ask_number_of_packages = bool(
+                picking.carrier_id
+                and not picking.package_ids
+                or picking.picking_type_id.force_set_number_of_packages
+            )
+
+    def _get_pickings_to_set_number_of_packages(self):
+        """Get pickings that needed raise wizard to fill number of packages"""
         pickings_to_set_number_of_packages = self.browse()
         for picking in self:
-            if (
-                picking.picking_type_id.force_set_number_of_packages
-                and not picking.number_of_packages
-            ):
+            if not picking.number_of_packages:
                 pickings_to_set_number_of_packages |= picking
         return pickings_to_set_number_of_packages
 
     def _pre_action_done_hook(self):
         res = super()._pre_action_done_hook()
+        test_condition = not config["test_enable"] or self.env.context.get(
+            "test_delivery_package_number"
+        )
         if (
             res
+            and test_condition
             and isinstance(res, bool)
+            and any(picking.ask_number_of_packages for picking in self)
             and not self.env.context.get("bypass_set_number_of_packages")
         ):
-            pickings_to_set_nop = self._check_set_number_of_packages()
+            pickings_to_set_nop = self._get_pickings_to_set_number_of_packages()
             if pickings_to_set_nop:
                 return pickings_to_set_nop._action_generate_number_of_packages_wizard()
         return res
