@@ -17,8 +17,6 @@
         "reports/report_package_number.xml",
         "views/stock_picking_type_views.xml",
         "views/stock_picking_views.xml",
-        "wizard/stock_immediate_transfer_views.xml",
-        "wizard/stock_backorder_confirmation_views.xml",
         "wizard/stock_number_package_validate_wiz_view.xml",
     ],
 }
