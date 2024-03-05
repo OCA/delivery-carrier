@@ -4,11 +4,13 @@ from odoo import api, fields, models
 
 
 class StockNumberPackageValidateWiz(models.TransientModel):
-    _inherit = "stock.number.package.mixin"
     _name = "stock.number.package.validate.wizard"
     _description = "Wizard to force set number of pickings when validate"
 
     pick_ids = fields.Many2many("stock.picking", "stock_picking_number_package_rel")
+    number_of_packages = fields.Integer(
+        help="Set the number of packages for this picking(s)",
+    )
     stock_number_package_validation_line_ids = fields.One2many(
         comodel_name="stock.number.package.validate.line.wizard",
         inverse_name="wiz_id",
@@ -16,6 +18,14 @@ class StockNumberPackageValidateWiz(models.TransientModel):
         readonly=False,
         store=True,
     )
+    print_package_label = fields.Boolean(
+        compute="_compute_print_package_label", readonly=False, store=True
+    )
+
+    @api.depends("pick_ids")
+    def _compute_print_package_label(self):
+        for item in self:
+            item.print_package_label = item.pick_ids.picking_type_id.print_label
 
     @api.depends("pick_ids")
     def _compute_stock_number_package_validation_line_ids(self):
