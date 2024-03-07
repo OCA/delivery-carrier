@@ -52,7 +52,7 @@ class StockQuantPackage(models.Model):
         self.ensure_one()
         package_name = self.name or self.id
         allowed_product_types = ["PARCEL", "EXPRESS", "FREIGHT"]
-        if self.package_type_id.shipper_package_code not in allowed_product_types:
+        if self.packaging_id.shipper_package_code not in allowed_product_types:
             msg = _(
                 f"The GLS package code for package {package_name} should be "
                 f"in {allowed_product_types}."
@@ -70,7 +70,7 @@ class StockQuantPackage(models.Model):
         reference = (self.gls_picking_id.name or f"PICKING{self.id}")[:40]
         partner = self.gls_picking_id.partner_id
         return {
-            "Product": self.package_type_id.shipper_package_code,
+            "Product": self.packaging_id.shipper_package_code,
             "Consignee": {"Address": partner._gls_prepare_address()},
             "ShipmentUnit": [{"Weight": "{:05.2f}".format(weight)}],
             "ShipmentReference": [reference],

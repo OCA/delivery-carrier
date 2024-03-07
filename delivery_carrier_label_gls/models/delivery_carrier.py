@@ -19,6 +19,14 @@ class DeliveryCarrier(models.Model):
         },
     )
 
+    # Backport
+    carrier_account_id = fields.Many2one(
+        "carrier.account",
+        string="Account",
+        company_dependent=True,
+        domain="[('delivery_type', '=', delivery_type)]",
+    )
+
     gls_contact_id = fields.Char(
         string="International",
         size=10,

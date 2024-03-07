@@ -26,7 +26,7 @@ class StockPicking(models.Model):
 
     def _check_is_everything_packaged(self):
         for picking in self:
-            if not all(o.result_package_id for o in picking.move_ids.move_line_ids):
+            if not all(o.result_package_id for o in picking.move_lines.move_line_ids):
                 msg = _("For GLS every operation should be put in a pack.")
                 raise ValidationError(msg)
 
@@ -37,7 +37,7 @@ class StockPicking(models.Model):
         return super().button_validate()
 
     def gls_send_shipping(self, delivery_carrier=False):
-        for package in self.move_ids.move_line_ids.result_package_id:
+        for package in self.move_lines.move_line_ids.result_package_id:
             if not package.parcel_tracking:
                 self.gls_send_shipping_package(package)
         return self.carrier_tracking_ref

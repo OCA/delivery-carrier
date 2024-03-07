@@ -33,7 +33,7 @@ class TestGlsFlow(TestGLS):
         # given
         # pack_operation = picking.pack_operation_ids
         # pack_operation.qty_done = pack_operation.product_qty
-        picking.move_ids.write({"quantity_done": 5})
+        picking.move_lines.write({"quantity_done": 5})
         # when
         pack_action = picking.action_put_in_pack()
         pack_action_ctx = pack_action["context"]
@@ -50,9 +50,9 @@ class TestGlsFlow(TestGLS):
         )
 
         # given
-        parcel_xmlid = "delivery_carrier_label_gls.packaging_gls_parcel"
+        parcel_xmlid = "delivery_carrier_label_gls.product_packaging_gls_parcel"
         packaging_parcel = self.env.ref(parcel_xmlid)
-        pack_wiz.delivery_package_type_id = packaging_parcel
+        pack_wiz.delivery_packaging_id = packaging_parcel
         self.assertNotEqual(pack_wiz.shipping_weight, 0.0)
         pack_wiz.action_put_in_pack()
 

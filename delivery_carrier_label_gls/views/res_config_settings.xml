@@ -26,7 +26,7 @@
                         <div class="content-group">
                             <div class="mt8">
                                 <button
-                                    name="%(delivery_carrier_account.action_carrier_account)d"
+                                    name="%(base_delivery_carrier_label.action_carrier_account)d"
                                     icon="fa-arrow-right"
                                     type="action"
                                     string="GLS Carrier Account"

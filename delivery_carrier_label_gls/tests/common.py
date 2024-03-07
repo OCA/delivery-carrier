@@ -4,10 +4,10 @@
 from contextlib import contextmanager
 from unittest import mock
 
-from odoo.tests.common import TransactionCase
+from odoo.tests.common import SavepointCase
 
 
-class TestGLS(TransactionCase):
+class TestGLS(SavepointCase):
     @classmethod
     def _get_gls_carrier_vals(cls):
         return {

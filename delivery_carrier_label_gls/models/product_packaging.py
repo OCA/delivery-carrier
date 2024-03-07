@@ -4,8 +4,8 @@
 from odoo import fields, models
 
 
-class PackageType(models.Model):
-    _inherit = "stock.package.type"
+class ProductPackaging(models.Model):
+    _inherit = "product.packaging"
 
     package_carrier_type = fields.Selection(
         selection_add=[("gls", "GLS")],

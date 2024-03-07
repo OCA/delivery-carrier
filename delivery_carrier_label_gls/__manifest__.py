@@ -9,11 +9,7 @@
     "maintener": "Akretion",
     "category": "Warehouse",
     "summary": "GLS carrier label printing",
-    "depends": [
-        "base_delivery_carrier_label",
-        "delivery",
-        "delivery_carrier_account",
-    ],
+    "depends": ["base_delivery_carrier_label", "delivery"],
     "website": "https://github.com/OCA/delivery-carrier",
     "data": [
         "security/groups.xml",
@@ -22,7 +18,7 @@
         "data/product_product.xml",
         "data/carrier_account.xml",
         "data/delivery_carrier.xml",
-        "data/stock_package_type.xml",
+        "data/product_packaging.xml",
         "views/res_config_settings.xml",
         "views/delivery_carrier.xml",
         "views/delivery_report_gls.xml",
