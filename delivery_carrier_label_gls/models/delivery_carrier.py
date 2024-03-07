@@ -2,6 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import logging
+import json
 
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
@@ -138,10 +139,13 @@ class DeliveryCarrier(models.Model):
     def gls_get_tracking_link(self, pickings):
         links = []
         for picking in pickings:
-            for link in picking.package_ids.parcel_tracking:
+            for link in picking.mapped("package_ids.parcel_tracking"):
                 if link:
                     links.append(self.gls_tracking_url(link))
-        return links
+        # Prevent wrong json string coercion (' instead of ") in case of multiple links
+        if len(links) == 1:
+            return links[0]
+        return json.dumps(links)
 
     def gls_cancel_shipment(self, pickings):
         if pickings.package_ids.report_id:
