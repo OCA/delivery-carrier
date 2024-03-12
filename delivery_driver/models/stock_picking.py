@@ -11,14 +11,16 @@ class StockPicking(models.Model):
     driver_id = fields.Many2one(
         "res.partner",
         string="Driver",
-        domain="[('is_company', '=', False)]",
+        domain="[('is_driver', '=', True)]",
         compute="_compute_driver_id",
+        recursive=True,
         store=True,
         readonly=False,
     )
 
-    @api.depends("carrier_id")
+    @api.depends("carrier_id", "move_ids.move_dest_ids.picking_id.driver_id")
     def _compute_driver_id(self):
         for picking in self:
             if picking.state not in {"done", "cancel"}:
-                picking.driver_id = picking.carrier_id.driver_id
+                driver = picking.move_ids.mapped("move_dest_ids.picking_id.driver_id")
+                picking.driver_id = driver[:1] or picking.carrier_id.driver_id
