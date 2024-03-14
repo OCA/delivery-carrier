@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+<!-- DEPOSIT SLIP -->
+<!-- ACTION / MENU -->
+<record id="act_delivery_deposit" model="ir.actions.act_window">
+    <field name="name">Deposit Slip</field>
+    <field name="res_model">deposit.slip</field>
+    <field name="view_mode">tree,form</field>
+</record>
+
+<menuitem
+        id="menu_delivery_deposit_slip"
+        name="Transport"
+        parent="stock.menu_stock_root"
+        sequence="2"
+    />
+
+<menuitem
+        id="menu_delivery_deposit_slip_model"
+        action="act_delivery_deposit"
+        parent="menu_delivery_deposit_slip"
+        sequence="20"
+    />
+
+
+<!-- SEARCH -->
+<record id="view_deposit_slip_search" model="ir.ui.view">
+    <field name="name">delivery_deposit.slip.search</field>
+    <field name="model">deposit.slip</field>
+    <field name="arch" type="xml">
+    <search>
+        <field name="name" />
+        <field name="create_date" />
+        <separator />
+        <filter string="Creation Date" name="create_date" date="create_date" />
+        <group string="Group By" name="groupby">
+            <filter
+                        name="delivery_type_groupby"
+                        string="Delivery Type"
+                        context="{'group_by': 'delivery_type'}"
+                    />
+        </group>
+    </search>
+    </field>
+</record>
+
+
+<!-- TREE -->
+<record id="view_deposit_slip_tree" model="ir.ui.view">
+    <field name="model">deposit.slip</field>
+    <field name="arch" type="xml">
+    <tree>
+        <field name="name" />
+        <field name="delivery_type" />
+        <field name="create_date" optional="show" />
+        <field name="company_id" groups="base.group_multi_company" optional="show" />
+        <field
+                    name="state"
+                    widget="badge"
+                    decoration-info="state == 'draft'"
+                    decoration-success="state == 'done'"
+                />
+    </tree>
+    </field>
+</record>
+
+
+ <!--FORM-->
+<record id="view_deposit_slip_form" model="ir.ui.view">
+    <field name="model">deposit.slip</field>
+    <field name="arch" type="xml">
+        <form>
+            <header>
+                <button
+                        name="validate_deposit"
+                        string="Confirm"
+                        type="object"
+                        attrs="{'invisible' : ['|', ('state','!=','draft'), ('delivery_type', '=', False)]}"
+                        class="oe_highlight"
+                    />
+                <button
+                        name="create_edi_file"
+                        string="Re-generate EDI file"
+                        type="object"
+                        confirm="Are you sure that you re-generate the EDI file ?"
+                        attrs="{'invisible': True}"
+                    />
+                <field
+                        name="state"
+                        widget="statusbar"
+                        statusbar_visible="draft,done"
+                        statusbar_colors='{"draft": "blue", "done": "blue"}'
+                    />
+            </header>
+            <sheet>
+                <group name="main" col="4">
+                    <field name="name" />
+                    <field name="weight" />
+                    <field name="delivery_type" />
+                </group>
+                <group name="pickings">
+                    <field
+                            name="picking_ids"
+                            nolabel="1"
+                            widget="many2many"
+                            options="{'not_delete': True, 'no_create': True}"
+                        >
+                        <tree>
+                            <field name="name" />
+                            <field name="partner_id" />
+                            <field name="weight" />
+                            <field name="origin" />
+                            <field name="backorder_id" />
+                            <field name="date_done" />
+                            <field name="state" invisible="1" />
+                        </tree>
+                    </field>
+                </group>
+            </sheet>
+            <div class="oe_chatter">
+                <field name="message_follower_ids" widget="mail_followers" />
+                <field name="activity_ids" widget="mail_activity" />
+                <field name="message_ids" widget="mail_thread" />
+            </div>
+        </form>
+    </field>
+</record>
+
+</odoo>
