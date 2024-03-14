@@ -17,6 +17,7 @@ setuptools.setup(
         'odoo14-addon-delivery_carrier_city',
         'odoo14-addon-delivery_carrier_customer_info',
         'odoo14-addon-delivery_carrier_default_tracking_url',
+        'odoo14-addon-delivery_carrier_deposit',
         'odoo14-addon-delivery_carrier_info',
         'odoo14-addon-delivery_carrier_label_batch',
         'odoo14-addon-delivery_carrier_location',
