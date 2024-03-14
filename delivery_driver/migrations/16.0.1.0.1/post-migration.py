@@ -12,7 +12,7 @@ def migrate(cr, version):
     with api.Environment.manage():
         env = api.Environment(cr, SUPERUSER_ID, {})
         partners = (
-            env["carrier.driver"]
+            env["delivery.carrier"]
             .search([("driver_id", "!=", False)])
             .mapped("driver_id")
         )
