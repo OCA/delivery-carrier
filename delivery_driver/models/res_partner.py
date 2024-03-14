@@ -16,7 +16,9 @@ class ResPartner(models.Model):
         drivers_in_carrier = self.env["delivery.carrier"].search(
             [("driver_id", "in", self.ids)]
         )
-        if drivers_in_carrier and not self.is_driver:
+        if drivers_in_carrier and drivers_in_carrier.filtered_domain(
+            [("driver_id.is_driver", "=", False)]
+        ):
             raise ValidationError(
                 _(
                     "You can't remove the driver flag from a partner that"
