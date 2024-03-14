@@ -28,6 +28,11 @@ class TestDepositSlip(SavepointCase):
         cls.delivery_order = cls.env.ref("stock.outgoing_shipment_main_warehouse4")
         cls.delivery_order.write({"carrier_id": cls.carrier.id})
 
+    @classmethod
+    def tearDownClass(cls):
+        cls.loader.restore_registry()
+        super().tearDownClass()
+
     def test_delivery_slip_creation(self):
         self.delivery_order._action_done()
         wizard = self.env["delivery.deposit.wizard"].create(
