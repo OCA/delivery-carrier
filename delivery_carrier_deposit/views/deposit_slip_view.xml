@@ -28,13 +28,15 @@
     <field name="name">delivery_deposit.slip.search</field>
     <field name="model">deposit.slip</field>
     <field name="arch" type="xml">
-    <search string="Deposit">
+    <search>
         <field name="name" />
         <field name="create_date" />
+        <separator />
+        <filter string="Creation Date" name="create_date" date="create_date" />
         <group string="Group By" name="groupby">
             <filter
                         name="delivery_type_groupby"
-                        string="Delivery Method Type"
+                        string="Delivery Type"
                         context="{'group_by': 'delivery_type'}"
                     />
         </group>
@@ -47,11 +49,17 @@
 <record id="view_deposit_slip_tree" model="ir.ui.view">
     <field name="model">deposit.slip</field>
     <field name="arch" type="xml">
-    <tree string="Deposit">
+    <tree>
         <field name="name" />
         <field name="delivery_type" />
-        <field name="create_date" />
-        <field name="state" decoration-info="state=='draft'" />
+        <field name="create_date" optional="show" />
+        <field name="company_id" groups="base.group_multi_company" optional="show" />
+        <field
+                    name="state"
+                    widget="badge"
+                    decoration-info="state == 'draft'"
+                    decoration-success="state == 'done'"
+                />
     </tree>
     </field>
 </record>
@@ -61,7 +69,7 @@
 <record id="view_deposit_slip_form" model="ir.ui.view">
     <field name="model">deposit.slip</field>
     <field name="arch" type="xml">
-        <form string="Deposit">
+        <form>
             <header>
                 <button
                         name="validate_deposit"
