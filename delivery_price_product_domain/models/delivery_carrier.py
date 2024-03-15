@@ -57,7 +57,7 @@ class DeliveryPriceRule(models.Model):
         price_dict = self._get_price_dict(total, weight, volume, quantity)
         untaxed_in_dict = "untaxed_price" in price_dict
         test = False
-        rule_line = self.price_rule_ids[0]
+        rule_line = self.price_rule_ids.browse()
         for line in self.price_rule_ids:
             apply_product_domain_char = line.apply_product_domain
             if apply_product_domain_char and self.order_id:
@@ -74,7 +74,7 @@ class DeliveryPriceRule(models.Model):
                     rule_line = line
                     break
 
-        if test and untaxed_in_dict:
+        if test and untaxed_in_dict and rule_line:
             return (
                 rule_line.list_base_price
                 + rule_line.list_price * price_dict[rule_line.variable_factor]
