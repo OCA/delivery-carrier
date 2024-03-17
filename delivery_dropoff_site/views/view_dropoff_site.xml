@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_partner_dropoff_site_form" model="ir.ui.view">
+        <field name="model">dropoff.site</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button
+                        name="action_enable_calendar"
+                        string="Enable Calendar"
+                        type="object"
+                        class="btn-primary"
+                        icon="fa-calendar-plus-o"
+                        attrs="{'invisible': [('calendar_id', '!=', False)]}"
+                    />
+                    <button
+                        name="action_disable_calendar"
+                        string="Disable Calendar"
+                        type="object"
+                        icon="fa-calendar-minus-o"
+                        attrs="{'invisible': [('calendar_id', '=', False)]}"
+                    />
+                    <button
+                        name="geo_localize"
+                        string="Geolocate"
+                        type="object"
+                        icon="fa-map-marker"
+                    />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            name="toggle_active"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-archive"
+                        >
+                            <field
+                                name="active"
+                                widget="boolean_button"
+                                options="{&quot;terminology&quot;: &quot;archive&quot;}"
+                            />
+                        </button>
+                    </div>
+                    <field
+                        name="image_1920"
+                        widget="image"
+                        class="oe_avatar"
+                        options="{&quot;preview_image&quot;: &quot;image_128&quot;}"
+                    />
+                    <div class="oe_title">
+                        <h1>
+                            <field
+                                name="name"
+                                default_focus="1"
+                                placeholder="Name"
+                                required="1"
+                            />
+                        </h1>
+                        <label for="carrier_id" />
+                        <h2 style="display: inline-block;">
+                            <field name="carrier_id" />
+                        </h2>
+                        <label for="code" />
+                        <h2 style="display: inline-block;">
+                            <field name="code" />
+                        </h2>
+                    </div>
+                    <group>
+                        <group>
+                            <label for="street" string="Address" />
+                            <div class="o_address_format">
+                                <field
+                                    name="street"
+                                    placeholder="Street..."
+                                    class="o_address_street"
+                                />
+                                <field
+                                    name="street2"
+                                    placeholder="Street 2..."
+                                    class="o_address_street"
+                                />
+                                <field
+                                    name="city"
+                                    placeholder="City"
+                                    class="o_address_city"
+                                />
+                                <field
+                                    name="state_id"
+                                    class="o_address_state"
+                                    placeholder="State"
+                                    options="{&quot;no_open&quot;: True}"
+                                    context="{'country_id': country_id, 'zip': zip}"
+                                />
+                                <field
+                                    name="zip"
+                                    placeholder="ZIP"
+                                    class="o_address_zip"
+                                />
+                                <field
+                                    name="country_id"
+                                    placeholder="Country"
+                                    class="o_address_country"
+                                    options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"
+                                />
+                            </div>
+                            <field name="partner_latitude" />
+                            <field name="partner_longitude" />
+                            <field name="date_localization" />
+                        </group>
+                        <group>
+                            <field name="phone" widget="phone" />
+                            <field name="mobile" widget="phone" />
+                            <field name="email" widget="email" />
+                            <field
+                                name="website"
+                                widget="url"
+                                placeholder="e.g. www.odoo.com"
+                            />
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                                options="{'no_create': True}"
+                            />
+                        </group>
+                    </group>
+                    <notebook colspan="4">
+                        <page
+                            name="calendar"
+                            string="Calendar"
+                            attrs="{'invisible': [('calendar_id', '=', False)]}"
+                        >
+                            <field name="calendar_id" invisible="1" />
+                            <field name="attendance_ids">
+                                <tree editable="top">
+                                    <field name="name" />
+                                    <field name="dayofweek" />
+                                    <field name="hour_from" widget="float_time" />
+                                    <field name="hour_to" widget="float_time" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page name="internal_notes" string="Internal Notes">
+                            <field name="comment" placeholder="Internal note..." />
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_partner_dropoff_site_search" model="ir.ui.view">
+        <field name="model">dropoff.site</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="country_id" />
+                <field name="carrier_id" />
+                <field name="company_id" groups="base.group_multi_company" />
+                <filter
+                    name="group_country_id"
+                    string="Country"
+                    context="{'group_by': 'country_id'}"
+                />
+                <filter
+                    name="group_carrier_id"
+                    string="Delivery Method"
+                    context="{'group_by': 'carrier_id'}"
+                />
+                <filter
+                    name="group_company_id"
+                    string="Company"
+                    context="{'group_by': 'company_id'}"
+                    groups="base.group_multi_company"
+                />
+            </search>
+        </field>
+    </record>
+    <record id="view_partner_dropoff_site_tree" model="ir.ui.view">
+        <field name="model">dropoff.site</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="code" />
+                <field name="name" />
+                <field name="zip" />
+                <field name="city" />
+                <field name="country_id" />
+                <field name="carrier_id" />
+                <field name="company_id" groups="base.group_multi_company" />
+            </tree>
+        </field>
+    </record>
+    <record id="action_dropoff_site" model="ir.actions.act_window">
+        <field name="name">Drop-off Sites</field>
+        <field name="res_model">dropoff.site</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem
+        id="menu_dropoff_site_sale"
+        action="action_dropoff_site"
+        parent="sale.menu_sales_config"
+        sequence="5"
+    />
+    <menuitem
+        id="menu_dropoff_site_stock"
+        action="action_dropoff_site"
+        parent="stock.menu_delivery"
+    />
+</odoo>
