@@ -10,19 +10,21 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-29 12:19+0000\n"
-"PO-Revision-Date: 2018-03-29 12:19+0000\n"
-"Last-Translator: enjolras <yo@miguelrevilla.com>, 2018\n"
+"PO-Revision-Date: 2024-03-18 00:58+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: delivery_carrier_deposit
 #: sql_constraint:deposit.slip:0
 msgid "'Deposit Slip' name must be unique per company!"
 msgstr ""
+"¡El nombre de la \"ficha de depósito\" debe ser único para cada empresa!"
 
 #. module: delivery_carrier_deposit
 #: model:ir.ui.view,arch_db:delivery_carrier_deposit.report_generic_deposit_slip
@@ -33,11 +35,13 @@ msgstr "Nombre de cuenta:"
 #: model:ir.model.fields,help:delivery_carrier_deposit.field_delivery_carrier_deposit_slip
 msgid "Allow to create a 'Deposit Slip' report on delivery orders"
 msgstr ""
+"Permitir la creación de un informe de \"Resguardo de depósito\" en las "
+"órdenes de entrega"
 
 #. module: delivery_carrier_deposit
 #: model:ir.ui.view,arch_db:delivery_carrier_deposit.view_deposit_slip_form
 msgid "Are you sure that you re-generate the EDI file ?"
-msgstr ""
+msgstr "¿Está seguro de que ha vuelto a generar el fichero EDI?"
 
 #. module: delivery_carrier_deposit
 #: model:ir.ui.view,arch_db:delivery_carrier_deposit.view_wiz_create_deposit
@@ -61,6 +65,9 @@ msgid ""
 "'Deposit Slip' is checked on the delivery methods that have this carrier "
 "type."
 msgstr ""
+"Tipo de transportista (combina varios métodos de entrega). Asegúrese de que "
+"la opción \"Resguardo de depósito\" está marcada en los métodos de entrega "
+"que tienen este tipo de transportista."
 
 #. module: delivery_carrier_deposit
 #: model:ir.model.fields,field_description:delivery_carrier_deposit.field_deposit_slip_company_id
@@ -87,7 +94,7 @@ msgstr "Crear"
 #: model:ir.ui.menu,name:delivery_carrier_deposit.menu_wiz_delivery_deposit
 #: model:ir.ui.view,arch_db:delivery_carrier_deposit.view_wiz_create_deposit
 msgid "Create Deposit Slip"
-msgstr ""
+msgstr "Crear Resguardo de Ingreso"
 
 #. module: delivery_carrier_deposit
 #: model:ir.model.fields,field_description:delivery_carrier_deposit.field_delivery_deposit_wizard_create_uid
@@ -136,18 +143,18 @@ msgstr "Depósito"
 #: model:ir.model.fields,field_description:delivery_carrier_deposit.field_stock_picking_deposit_slip_id
 #: model:ir.ui.menu,name:delivery_carrier_deposit.menu_delivery_deposit_slip_model
 msgid "Deposit Slip"
-msgstr ""
+msgstr "Resguardo de Depósito"
 
 #. module: delivery_carrier_deposit
 #: model:mail.message.subtype,description:delivery_carrier_deposit.deposit_slip_done
 #: model:mail.message.subtype,name:delivery_carrier_deposit.deposit_slip_done
 msgid "Deposit Slip Validated"
-msgstr ""
+msgstr "Resguardo de Depósito Validado"
 
 #. module: delivery_carrier_deposit
 #: model:ir.ui.view,arch_db:delivery_carrier_deposit.report_generic_deposit_slip
 msgid "Deposit Slip n°"
-msgstr ""
+msgstr "Resguardo de Depósito n°"
 
 #. module: delivery_carrier_deposit
 #: model:ir.model.fields,field_description:delivery_carrier_deposit.field_delivery_deposit_wizard_display_name
@@ -168,7 +175,7 @@ msgstr "Borrador"
 #. module: delivery_carrier_deposit
 #: model:ir.actions.report.xml,name:delivery_carrier_deposit.report_deposit_slip
 msgid "Generic Deposit Slip"
-msgstr ""
+msgstr "Ficha de Depósito Genérica"
 
 #. module: delivery_carrier_deposit
 #: model:ir.ui.view,arch_db:delivery_carrier_deposit.view_deposit_slip_search
@@ -207,12 +214,12 @@ msgstr "Nombre"
 #. module: delivery_carrier_deposit
 #: model:ir.ui.view,arch_db:delivery_carrier_deposit.report_generic_deposit_slip
 msgid "Name and address<br/>recipient"
-msgstr ""
+msgstr "Nombre y dirección<br/>del destinatario"
 
 #. module: delivery_carrier_deposit
 #: model:ir.ui.view,arch_db:delivery_carrier_deposit.report_generic_deposit_slip
 msgid "Nr of<br/>packages"
-msgstr ""
+msgstr "Número de<br/>paquetes"
 
 #. module: delivery_carrier_deposit
 #: model:ir.model.fields,field_description:delivery_carrier_deposit.field_deposit_slip_number_of_packages
@@ -227,12 +234,12 @@ msgstr "Números de envío"
 #. module: delivery_carrier_deposit
 #: model:ir.model.fields,field_description:delivery_carrier_deposit.field_deposit_slip_picking_ids
 msgid "Pickings"
-msgstr ""
+msgstr "Recogidas"
 
 #. module: delivery_carrier_deposit
 #: model:ir.ui.view,arch_db:delivery_carrier_deposit.view_deposit_slip_form
 msgid "Re-generate EDI file"
-msgstr ""
+msgstr "Volver a generar el fichero EDI"
 
 #. module: delivery_carrier_deposit
 #: model:ir.ui.view,arch_db:delivery_carrier_deposit.report_generic_deposit_slip
@@ -251,6 +258,8 @@ msgid ""
 "There are no delivery orders in transferred state with a delivery method "
 "type '%s' not already linked to a deposit slip."
 msgstr ""
+"No hay órdenes de entrega en estado transferido con un tipo de método de "
+"entrega '%s' que no esté ya vinculado a un comprobante de depósito."
 
 #. module: delivery_carrier_deposit
 #: model:ir.ui.view,arch_db:delivery_carrier_deposit.report_generic_deposit_slip
@@ -275,7 +284,7 @@ msgstr "Transferir"
 #. module: delivery_carrier_deposit
 #: model:ir.ui.menu,name:delivery_carrier_deposit.menu_delivery_deposit_slip
 msgid "Transport"
-msgstr ""
+msgstr "Transporte"
 
 #. module: delivery_carrier_deposit
 #: model:ir.model.fields,field_description:delivery_carrier_deposit.field_deposit_slip_carrier_type
@@ -290,7 +299,7 @@ msgstr "Peso<br/>(kg)"
 #. module: delivery_carrier_deposit
 #: model:ir.model,name:delivery_carrier_deposit.model_delivery_deposit_wizard
 msgid "Wizard to create Deposit Slip"
-msgstr ""
+msgstr "Asistente para crear el Comprobante de Depósito"
 
 #. module: delivery_carrier_deposit
 #: model:ir.ui.view,arch_db:delivery_carrier_deposit.report_generic_deposit_slip
