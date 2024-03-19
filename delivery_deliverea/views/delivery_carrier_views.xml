@@ -105,6 +105,7 @@
                             <field name="deliverea_return_label" />
                             <field name="deliverea_return_proof_delivery" />
                             <field name="deliverea_saturday_delivery" />
+                            <field name="deliverea_exchange" />
                         </group>
                     </group>
                 </page>
