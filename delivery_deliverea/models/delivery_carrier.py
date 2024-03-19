@@ -107,6 +107,12 @@ class DeliveryCarrier(models.Model):
         comodel_name="carrier.deliverea.service",
         domain="[('deliverea_distribution_center_id', '=', deliverea_distribution_center_id)]",
     )
+    deliverea_exchange = fields.Boolean(
+        string="Exchange",
+        help="Mark expedition as exchange (when delivering the package,"
+        " another package has to be picked up from the final client and will be sent"
+        " back to the original sender. Availability depends on carrier and service)",
+    )
 
     def deliverea_get_distribution_centers(self):
         deliverea_request = DelivereaRequest(self)
@@ -357,6 +363,7 @@ class DeliveryCarrier(models.Model):
             "returnProofOfDelivery": carrier.deliverea_return_label,
             "hideSender": carrier.deliverea_hide_sender,
             "insuranceValue": "0.0 EUR",
+            "exchange": carrier.deliverea_exchange,
         }
         for parameter in service.deliverea_parameters:
             if parameter.name in values.keys():
