@@ -96,3 +96,11 @@ class TestCarrierLabel(CarrierLabelCase):
         """Test if labels are created by the button"""
         self.picking.send_to_shipper()
         self._assert_labels()
+
+    def test_labels_with_packages(self):
+        """Test if labels are created by the button"""
+        self.picking.send_to_shipper()
+        if self.picking.carrier_id.automatic_package_creation:
+            self.assertTrue(self.picking.has_packages)
+        else:
+            self.assertFalse(self.picking.has_packages)

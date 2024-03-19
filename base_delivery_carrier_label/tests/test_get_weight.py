@@ -1,4 +1,5 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+import logging
 
 from odoo.tests.common import TransactionCase
 
@@ -217,7 +218,16 @@ class TestGetWeight(TransactionCase):
         # end of prepare data
 
         # because uom conversion is not implemented
-        self.assertEqual(package.weight, False)
+        with self.assertLogs(
+            "odoo.addons.base_delivery_carrier_label", level=logging.WARNING
+        ) as cm:
+            self.assertEqual(package.weight, False)
+        msg = cm.output[0]
+        self.assertIn(
+            "odoo.addons.base_delivery_carrier_label.models.stock_move_line:"
+            "Type conversion not implemented for product",
+            msg,
+        )
 
         # if one day, uom conversion is implemented:
         # self.assertEqual(package.get_weight(), products_weight)
