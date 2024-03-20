@@ -404,7 +404,7 @@ class DeliveryCarrier(models.Model):
             for package in picking.package_ids
         ]
 
-    def _schenker_shipping_information_without_packages_volume(self, picking):
+    def _schenker_shipping_information_without_packages_volume(self, move_lines):
         # Obviously products should be well configured. This parameter is mandatory.
         return sum(
             [
@@ -414,13 +414,16 @@ class DeliveryCarrier(models.Model):
                         ml.qty_done, ml.product_id.uom_id
                     ),
                 )
-                for ml in picking.move_line_ids
+                for ml in move_lines
                 if not ml.result_package_id
             ]
         )
 
     def _schenker_shipping_information_without_packages(self, picking):
-        if all(move_line.result_package_id for move_line in picking.move_line_ids):
+        move_lines_without_package = picking.move_line_ids.filtered(
+            lambda ml: not ml.result_package_id
+        )
+        if not move_lines_without_package:
             return []
         weight = picking.shipping_weight or picking.weight
         return [
@@ -429,15 +432,15 @@ class DeliveryCarrier(models.Model):
                 "dgr": False,
                 "cargoDesc": picking.name,
                 # For a more complex solution use packaging properly
-                "grossWeight": self._schenker_shipping_information_round_weight(
-                    weight / picking.number_of_packages
-                ),
+                "grossWeight": self._schenker_shipping_information_round_weight(weight),
                 "volume": self._schenker_shipping_information_round_volume(
-                    self._schenker_shipping_information_without_packages_volume(picking)
+                    self._schenker_shipping_information_without_packages_volume(
+                        move_lines_without_package
+                    )
                 ),
                 "packageType": self.schenker_default_packaging_id.shipper_package_code,
                 "stackable": self.schenker_default_packaging_id.schenker_stackable,
-                "pieces": picking.number_of_packages,
+                "pieces": 1,
             }
         ]
 
