@@ -1,5 +1,6 @@
 # Copyright 2021 Camptocamp SA
 # Copyright 2023 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
+# Copyright 2024 Michael Tietz (MT Software) <mtietz@mt-software.de>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
 from lxml import etree
@@ -48,10 +49,6 @@ class StockPicking(models.Model):
                 in carrier.send_delivery_notice_picking_type_ids
             ):
                 self.carrier_id = carrier
-                self.with_context(skip_delivery_cost=True).send_to_shipper()
-                # Flag the current operation and the ship one.
-                # Mandatory to not execute twice 'send_to_shipper' method
-                self.delivery_notification_sent = True
                 related_ship.delivery_notification_sent = True
                 related_ship.carrier_price = self.carrier_price
                 if not related_ship.carrier_tracking_ref:
@@ -111,3 +108,13 @@ class StockPicking(models.Model):
             )
             transfer_modifiers_to_node(modifiers, field)
         return etree.tostring(doc, encoding="unicode")
+
+    def _create_backorder(self):
+        backorders = super()._create_backorder()
+        for backorder in backorders:
+            delivery_notification_sent = (
+                backorder.backorder_id.delivery_notification_sent
+            )
+            if delivery_notification_sent:
+                backorder.delivery_notification_sent = delivery_notification_sent
+        return backorders
