@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_carrier_account_search" model="ir.ui.view">
+        <field name="name">carrier.account.search</field>
+        <field name="model">carrier.account</field>
+        <field name="arch" type="xml">
+            <search string="Carrier Account">
+                <field name="delivery_type" string="Provider" />
+            </search>
+        </field>
+    </record>
+ </odoo>
