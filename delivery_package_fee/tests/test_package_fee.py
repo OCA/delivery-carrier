@@ -1,4 +1,5 @@
 # Copyright 2020 Camptocamp
+# Copyright 2024 Michael Tietz (MT Software) <mtietz@mt-software.de>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo.tests.common import Form, SavepointCase
@@ -322,7 +323,7 @@ class TestPackageFee(SavepointCase):
         self.assertEqual(picking.state, "assigned")
         picking.move_line_ids[0].qty_done = 10.0
         picking.move_line_ids[1].qty_done = 10.0
-        picking.with_context(set_default_package=False)._action_done()
+        picking._action_done()
         self.assertEqual(picking.state, "done")
 
         self.assertRecordValues(
