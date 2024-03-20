@@ -612,6 +612,19 @@ msgid "Stackable"
 msgstr "Apilable"
 
 #. module: delivery_schenker
+#: model:ir.model.fields,field_description:delivery_schenker.field_delivery_carrier__schenker_submit_booking
+msgid "Submit Booking"
+msgstr ""
+
+#. module: delivery_schenker
+#: model:ir.model.fields,help:delivery_schenker.field_delivery_carrier__schenker_submit_booking
+msgid ""
+"Submit Booking On Schenker site.\n"
+"If set, submits booking on site automatically.\n"
+"If not set, user has to submit booking manually."
+msgstr ""
+
+#. module: delivery_schenker
 #: model:ir.model.fields,help:delivery_schenker.field_delivery_carrier__schenker_measure_unit
 msgid "The proper request will be formed accordingly from the picking"
 msgstr "La petición apropiada será creada a partir del albarán"
