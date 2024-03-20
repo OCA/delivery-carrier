@@ -53,6 +53,7 @@ License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
                                 name="schenker_service_land"
                                 attrs="{'required': [('delivery_type', '=', 'schenker'), ('schenker_booking_type', '=', 'land')], 'invisible': [('schenker_booking_type', '!=', 'land')]}"
                             />
+                            <field name="schenker_submit_booking" />
                             <field name="schenker_indoor_delivery" />
                             <field name="schenker_express" />
                             <field name="schenker_food_related" />

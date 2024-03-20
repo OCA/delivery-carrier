@@ -179,6 +179,13 @@ class DeliveryCarrier(models.Model):
         help="If set, this contact will be sent as invoice address to Schenker."
         "\nIf Address ID is set, it will be part of it instead of the sender",
     )
+    schenker_submit_booking = fields.Boolean(
+        string="Submit Booking",
+        default=True,
+        help="Submit Booking On Schenker site."
+        "\nIf set, submits booking on site automatically."
+        "\nIf not set, user has to submit booking manually.",
+    )
 
     def _get_schenker_credentials(self):
         """Access key is mandatory for every request while group and user are
@@ -518,6 +525,11 @@ class DeliveryCarrier(models.Model):
                 "homeDelivery": self.schenker_home_delivery,
                 "ownPickup": self.schenker_own_pickup,
                 "pharmaceuticals": self.schenker_pharmaceuticals,
+                # From the Schenker docs:
+                # Defines if booking shall be submitted. If false,
+                # the booking can be edited
+                # in the frontend and MUST be submitted manually.
+                "submitBooking": self.schenker_submit_booking,
             }
         )
         vals.update(self._schenker_measures(picking, vals))

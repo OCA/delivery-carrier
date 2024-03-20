@@ -126,10 +126,6 @@ class SchenkerRequest:
         vals = self._shipping_api_credentials()
         method_wrapper = self._scheneker_shipping_api_wrapper(method)
         vals[method_wrapper] = picking_vals
-        # From the Schenker docs:
-        # Defines if booking shall be submitted. If false, the booking can be edited
-        # in the frontend and MUST be submitted manually.
-        vals[method_wrapper].update({"submitBooking": True})
         response = self._process_reply(
             self.client.service[self._shipping_type_method(method)], vals
         )
