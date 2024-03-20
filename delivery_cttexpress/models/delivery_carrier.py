@@ -1,4 +1,5 @@
 # Copyright 2022 Tecnativa - David Vidal
+# Copyright 2024 Michael Tietz (MT Software) <mtietz@mt-software.de>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
@@ -168,7 +169,7 @@ class DeliveryCarrier(models.Model):
         return {
             "ClientReference": reference,  # Optional
             "ClientDepartmentCode": None,  # Optional (no core field matches)
-            "ItemsCount": picking.number_of_packages,
+            "ItemsCount": picking.number_of_packages or 1,
             "IsClientPodScanRequired": None,  # Optional
             "RecipientAddress": recipient.street,
             "RecipientCountry": recipient.country_id.code,
