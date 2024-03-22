@@ -94,12 +94,6 @@ class DeliveryCarrier(models.Model):
         string="UPS Cod Funds Code",
     )
 
-    # Not in use! It will be activated as long with tests
-    # def ups_test_call(self, order):
-    #     self.ensure_one()
-    #     ups_request = UpsRequest(self)
-    #     return ups_request.test_call(order)
-
     def _ups_get_response_price(self, total_charges, currency, company):
         """We need to convert the price if the currency is different."""
         price = float(total_charges["MonetaryValue"])
@@ -165,7 +159,6 @@ class DeliveryCarrier(models.Model):
             attachment_name = "%s-%s.%s" % (
                 label["tracking_ref"],
                 format_code,
-                # ANTES ERA ("txt" if format_code != "PDF" else "pdf"),
                 format_code,
             )
             val_list.append(

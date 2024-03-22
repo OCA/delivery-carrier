@@ -109,26 +109,20 @@ class UpsRequest(object):
         NumOfPieces = picking.number_of_packages
         PackageWeight = picking.shipping_weight
         if is_package:
-            # stock.quant.package
             NumOfPieces = sum(package.mapped("quant_ids.quantity"))
-            # stock.quant.package
             PackageWeight = max(package.shipping_weight, package.weight)
             package = package.packaging_id
         return {
             "Description": package.name,
             "NumOfPieces": str(NumOfPieces),
             "Packaging": {
-                # product.packaging
                 "Code": package.shipper_package_code,
                 "Description": package.name,
             },
             "Dimensions": {
                 "UnitOfMeasurement": {"Code": self.package_dimension_code},
-                # product.packaging
                 "Length": str(package.packaging_length),
-                # product.packaging
                 "Width": str(package.width),
-                # product.packaging
                 "Height": str(package.height),
             },
             "PackageWeight": {
@@ -310,10 +304,6 @@ class UpsRequest(object):
         )
         self._raise_for_status(status, skip_errors)
         return status
-
-    def test_call(self, order):
-        res = self._rate_shipment(order, True)
-        return res["response"] if "response" in res else res
 
     def rate_shipment(self, order):
         status = self._rate_shipment(order)
