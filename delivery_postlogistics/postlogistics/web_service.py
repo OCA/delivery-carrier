@@ -168,10 +168,11 @@ class PostlogisticsWebService(object):
         if picking.picking_type_id.code != "outgoing":
             partner = picking.partner_id
 
-        if not partner.name:
+        partner_name = partner.name or partner.parent_id.name
+        if not partner_name:
             raise exceptions.UserError(_("Customer name is required."))
         customer = {
-            "name1": self._sanitize_string(partner.name),
+            "name1": self._sanitize_string(partner_name),
             "street": self._sanitize_string(partner.street),
             "zip": self._sanitize_string(partner.zip),
             "city": self._sanitize_string(partner.city),
