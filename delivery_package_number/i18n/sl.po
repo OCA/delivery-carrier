@@ -23,10 +23,7 @@ msgid "Apply"
 msgstr ""
 
 #. module: delivery_package_number
-#: model:ir.model.fields,field_description:delivery_package_number.field_stock_backorder_confirmation__ask_number_of_packages
-#: model:ir.model.fields,field_description:delivery_package_number.field_stock_immediate_transfer__ask_number_of_packages
-#: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_mixin__ask_number_of_packages
-#: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_wizard__ask_number_of_packages
+#: model:ir.model.fields,field_description:delivery_package_number.field_stock_picking__ask_number_of_packages
 msgid "Ask Number Of Packages"
 msgstr ""
 
@@ -98,14 +95,6 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: delivery_package_number
-#: model:ir.model,name:delivery_package_number.model_stock_number_package_mixin
-msgid "Mixin to set number of packages"
-msgstr ""
-
-#. module: delivery_package_number
-#: model:ir.model.fields,field_description:delivery_package_number.field_stock_backorder_confirmation__number_of_packages
-#: model:ir.model.fields,field_description:delivery_package_number.field_stock_immediate_transfer__number_of_packages
-#: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_mixin__number_of_packages
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_wizard__number_of_packages
 msgid "Number Of Packages"
 msgstr "Število pakiranj"
@@ -142,9 +131,6 @@ msgid "Picking Type"
 msgstr ""
 
 #. module: delivery_package_number
-#: model:ir.model.fields,field_description:delivery_package_number.field_stock_backorder_confirmation__print_package_label
-#: model:ir.model.fields,field_description:delivery_package_number.field_stock_immediate_transfer__print_package_label
-#: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_mixin__print_package_label
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_wizard__print_package_label
 msgid "Print Package Label"
 msgstr ""
@@ -162,9 +148,6 @@ msgid "Set number of packages"
 msgstr ""
 
 #. module: delivery_package_number
-#: model:ir.model.fields,help:delivery_package_number.field_stock_backorder_confirmation__number_of_packages
-#: model:ir.model.fields,help:delivery_package_number.field_stock_immediate_transfer__number_of_packages
-#: model:ir.model.fields,help:delivery_package_number.field_stock_number_package_mixin__number_of_packages
 #: model:ir.model.fields,help:delivery_package_number.field_stock_number_package_validate_wizard__number_of_packages
 msgid "Set the number of packages for this picking(s)"
 msgstr "Nastavi število pakiranj za te zbirnike"
