@@ -55,9 +55,9 @@ class StockPicking(models.Model):
         else:
             return res
 
-    def _set_delivery_package_type(self):
+    def _set_delivery_package_type(self, batch_pack=False):
         self.ensure_one()
-        res = super()._set_delivery_package_type()
+        res = super()._set_delivery_package_type(batch_pack=batch_pack)
         context = dict(
             self.env.context,
             current_package_carrier_type=self.ship_carrier_id.delivery_type,
