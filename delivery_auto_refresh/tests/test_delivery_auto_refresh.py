@@ -273,6 +273,7 @@ class TestDeliveryAutoRefresh(common.SavepointCase):
         self.assertFalse(delivery_line.exists())
 
     def test_auto_add_delivery_line_add_service(self):
+        self.env["ir.config_parameter"].sudo().set_param(self.param_name1, 1)
         service = self.env["product.product"].create(
             {"name": "Service Test", "type": "service"}
         )
