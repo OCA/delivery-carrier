@@ -1,0 +1,113 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* delivery_carrier_typology
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-09-04 13:52+0000\n"
+"PO-Revision-Date: 2023-09-04 13:52+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: delivery_carrier_typology
+#: model:ir.model.fields,field_description:delivery_carrier_typology.field_delivery_carrier_typology__company_id
+msgid "Company"
+msgstr "Société"
+
+#. module: delivery_carrier_typology
+#: model:ir.model.fields,field_description:delivery_carrier_typology.field_delivery_carrier_typology__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: delivery_carrier_typology
+#: model:ir.model.fields,field_description:delivery_carrier_typology.field_delivery_carrier_typology__create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: delivery_carrier_typology
+#: model_terms:ir.actions.act_window,help:delivery_carrier_typology.action_delivery_carrier_typology_form
+msgid "Define new shipping means"
+msgstr "Créez un nouveau moyen de transport"
+
+#. module: delivery_carrier_typology
+#: model:ir.model.fields,field_description:delivery_carrier_typology.field_delivery_carrier_typology__description
+msgid "Description"
+msgstr "Description"
+
+#. module: delivery_carrier_typology
+#: model:ir.model.fields,field_description:delivery_carrier_typology.field_delivery_carrier__display_name
+#: model:ir.model.fields,field_description:delivery_carrier_typology.field_delivery_carrier_typology__display_name
+#: model:ir.model.fields,field_description:delivery_carrier_typology.field_product_template__display_name
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#. module: delivery_carrier_typology
+#: model:ir.model.fields,field_description:delivery_carrier_typology.field_delivery_carrier__id
+#: model:ir.model.fields,field_description:delivery_carrier_typology.field_delivery_carrier_typology__id
+#: model:ir.model.fields,field_description:delivery_carrier_typology.field_product_template__id
+msgid "ID"
+msgstr "ID"
+
+#. module: delivery_carrier_typology
+#: model:ir.model.fields,field_description:delivery_carrier_typology.field_delivery_carrier____last_update
+#: model:ir.model.fields,field_description:delivery_carrier_typology.field_delivery_carrier_typology____last_update
+#: model:ir.model.fields,field_description:delivery_carrier_typology.field_product_template____last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: delivery_carrier_typology
+#: model:ir.model.fields,field_description:delivery_carrier_typology.field_delivery_carrier_typology__write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour faite par"
+
+#. module: delivery_carrier_typology
+#: model:ir.model.fields,field_description:delivery_carrier_typology.field_delivery_carrier_typology__write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: delivery_carrier_typology
+#: model:ir.model,name:delivery_carrier_typology.model_delivery_carrier_typology
+#: model:ir.model.fields,field_description:delivery_carrier_typology.field_delivery_carrier__shipping_means_id
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_typology.view_delivery_carrier_typology_form
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_typology.view_delivery_carrier_typology_tree
+msgid "Shipping means"
+msgstr "Moyens de transport"
+
+#. module: delivery_carrier_typology
+#: model:ir.model.fields,field_description:delivery_carrier_typology.field_delivery_carrier_typology__name
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_typology.view_delivery_carrier_typology_form
+msgid "Name"
+msgstr "Nom"
+
+#. module: delivery_carrier_typology
+#: model:ir.model,name:delivery_carrier_typology.model_product_template
+msgid "Product Template"
+msgstr "Modèle d'article"
+
+#. module: delivery_carrier_typology
+#: model:ir.model.fields,field_description:delivery_carrier_typology.field_product_product__prohibited_shipping_means_ids
+#: model:ir.model.fields,field_description:delivery_carrier_typology.field_product_template__prohibited_shipping_means_ids
+msgid "Prohibited shipping means"
+msgstr "Moyens de transport interdits"
+
+#. module: delivery_carrier_typology
+#: model:ir.actions.act_window,name:delivery_carrier_typology.action_delivery_carrier_typology_form
+#: model:ir.ui.menu,name:delivery_carrier_typology.menu_action_delivery_carrier_typology_form
+msgid "Shipping Means"
+msgstr "Moyens de transport"
+
+#. module: delivery_carrier_typology
+#: model:ir.model,name:delivery_carrier_typology.model_delivery_carrier
+msgid "Shipping Methods"
+msgstr "Méthodes d'expédition"
+
+#. module: delivery_carrier_typology
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_typology.view_delivery_carrier_typology_form
+msgid "e.g. Air freight"
+msgstr "ex. Frêt aérien"

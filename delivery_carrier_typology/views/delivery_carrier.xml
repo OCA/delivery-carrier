@@ -1,0 +1,98 @@
+<odoo>
+
+    <record id="view_delivery_carrier_form" model="ir.ui.view">
+        <field name="model">delivery.carrier</field>
+        <field name="inherit_id" ref="delivery.view_delivery_carrier_form" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//group/group[@name='provider_details']/div[1]"
+                position="after"
+            >
+                <label for="shipping_means_ids" />
+                <div>
+                    <field name="shipping_means_ids" widget="many2many_tags" />
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_delivery_carrier_tree" model="ir.ui.view">
+        <field name="model">delivery.carrier</field>
+        <field name="inherit_id" ref="delivery.view_delivery_carrier_tree" />
+        <field name="arch" type="xml">
+            <field name="delivery_type" position="after">
+                <field name="shipping_means_ids" widget="many2many_tags" />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_delivery_carrier_typology_form" model="ir.ui.view">
+        <field name="name">delivery.carrier.typology.form</field>
+        <field name="model">delivery.carrier.typology</field>
+        <field name="arch" type="xml">
+            <form string="Means of Shipping">
+                <sheet>
+                    <div class="oe_title" name="title">
+                        <label for="name" string="Name" class="oe_edit_only" />
+                        <h1>
+                            <field name="name" placeholder="e.g. Air freight" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <label for="code" />
+                            <div>
+                                <field name="code" />
+                            </div>
+                        </group>
+                        <group>
+                            <label for="description" />
+                            <div>
+                                <field name="description" />
+                            </div>
+                        </group>
+                        <group groups="base.group_multi_company">
+                            <label for="company_id" />
+                            <div>
+                                <field name="company_id" />
+                            </div>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_delivery_carrier_typology_tree" model="ir.ui.view">
+        <field name="name">delivery.carrier.typology.tree</field>
+        <field name="model">delivery.carrier.typology</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="code" />
+                <field name="description" />
+                <field name="company_id" groups="base.group_multi_company" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_delivery_carrier_typology_form" model="ir.actions.act_window">
+        <field name="name">Shipping Means</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">delivery.carrier.typology</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Define new shipping means
+          </p>
+        </field>
+    </record>
+
+    <menuitem
+        action="action_delivery_carrier_typology_form"
+        id="menu_action_delivery_carrier_typology_form"
+        parent="delivery.menu_delivery"
+        sequence="2"
+    />
+
+</odoo>
