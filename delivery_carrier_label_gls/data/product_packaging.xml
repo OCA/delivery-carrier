@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+  <record id="product_packaging_gls_parcel" model="product.packaging">
+    <field name="name">GLS: Parcel</field>
+    <field name="package_carrier_type">gls</field>
+    <field name="shipper_package_code">PARCEL</field>
+    <field name="max_weight">40</field>
+  </record>
+  <record id="product_packaging_gls_express" model="product.packaging">
+    <field name="name">GLS: Express</field>
+    <field name="package_carrier_type">gls</field>
+    <field name="shipper_package_code">EXPRESS</field>
+    <field name="max_weight">40</field>
+  </record>
+  <record id="product_packaging_gls_freight" model="product.packaging">
+    <field name="name">GLS: Freight</field>
+    <field name="package_carrier_type">gls</field>
+    <field name="shipper_package_code">FREIGHT</field>
+    <field name="max_weight">40</field>
+  </record>
+</odoo>
