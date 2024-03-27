@@ -3,7 +3,9 @@
 import base64
 from operator import attrgetter
 
-from odoo import _, exceptions, fields, models
+import lxml.html
+
+from odoo import _, api, exceptions, fields, models
 
 from ..postlogistics.web_service import PostlogisticsWebService
 
@@ -217,6 +219,7 @@ class StockPicking(models.Model):
         # Case when there is a failed label, rollback odoo data
         if failed_label_results:
             self._cr.rollback()
+            self = self.exists()
 
         labels = self.write_tracking_number_label(success_label_results, packages)
 
@@ -228,9 +231,21 @@ class StockPicking(models.Model):
             # Commit the change to save the changes,
             # This ensures the label pushed recored correctly in Odoo
             self._cr.commit()  # pylint: disable=invalid-commit
-            error_message = "\n".join(label["errors"] for label in failed_label_results)
-            raise exceptions.Warning(error_message)
+            error_message = "\n".join(
+                self._cleanup_error_message(label["errors"])
+                for label in failed_label_results
+            )
+            raise exceptions.UserError(
+                _("PostLogistics error:") + "\n\n" + error_message
+            )
         return labels
+
+    @api.model
+    def _cleanup_error_message(self, error_message):
+        """Cleanup HTML error message to be readable by users."""
+        texts_no_html = lxml.html.fromstring(error_message).text_content()
+        texts = [text for text in texts_no_html.split("\n") if text]
+        return "\n".join(texts)
 
     def generate_postlogistics_shipping_labels(self, package_ids=None):
         """Add label generation for PostLogistics"""
