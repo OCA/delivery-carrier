@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2018 Tecnativa - Sergio Teruel
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_partner_delivery_schedule_form" model="ir.ui.view">
+        <field name="name">delivery.schedule.form</field>
+        <field name="model">delivery.schedule</field>
+        <field name="arch" type="xml">
+            <form string="Delivery Schedule">
+                <sheet>
+                    <group>
+                        <field name="name" />
+                    </group>
+                    <group>
+                        <field name="hour_from" widget="float_time" />
+                        <field name="hour_to" widget="float_time" />
+                        <field name="monday" />
+                        <field name="tuesday" />
+                        <field name="wednesday" />
+                        <field name="thursday" />
+                        <field name="friday" />
+                        <field name="saturday" />
+                        <field name="sunday" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_partner_delivery_schedule_tree" model="ir.ui.view">
+        <field name="name">delivery.schedule.tree</field>
+        <field name="model">delivery.schedule</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="hour_from" widget="float_time" />
+                <field name="hour_to" widget="float_time" />
+                <field name="monday" />
+                <field name="tuesday" />
+                <field name="wednesday" />
+                <field name="thursday" />
+                <field name="friday" />
+                <field name="saturday" />
+                <field name="sunday" />
+            </tree>
+        </field>
+    </record>
+    <record id="view_partner_delivery_schedule_search" model="ir.ui.view">
+        <field name="name">delivery.schedule.tree</field>
+        <field name="model">delivery.schedule</field>
+        <field name="arch" type="xml">
+            <search string="Delivery Schedule">
+                <field name="name" />
+            </search>
+        </field>
+    </record>
+    <record id="partner_delivery_schedule_action" model="ir.actions.act_window">
+        <field name="name">Delivery Schedule</field>
+        <field name="res_model">delivery.schedule</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_partner_delivery_schedule_tree" />
+        <field name="help" type="html">
+            <p
+                class="oe_view_nocontent_create"
+            >Click to set a new delivery schedule for partners.</p>
+        </field>
+    </record>
+    <menuitem
+        action="partner_delivery_schedule_action"
+        id="sale_menu_action_delivery_schedule"
+        parent="sale.menu_sales_config"
+        sequence="30"
+    />
+</odoo>
