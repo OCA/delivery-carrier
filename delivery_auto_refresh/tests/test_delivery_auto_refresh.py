@@ -286,3 +286,11 @@ class TestDeliveryAutoRefresh(common.SavepointCase):
         order = order_form.save()
         delivery_line = order.order_line.filtered("is_delivery")
         self.assertFalse(delivery_line.exists())
+
+    def test_auto_refresh_so_and_manually_unlink_delivery_line(self):
+        """Test that we are able to manually remove the delivery line"""
+        self._test_autorefresh_unlink_line()
+        sale_form = Form(self.order)
+        # Deleting the delivery line
+        sale_form.order_line.remove(1)
+        sale_form.save()

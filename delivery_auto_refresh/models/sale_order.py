@@ -50,7 +50,9 @@ class SaleOrder(models.Model):
     def _auto_refresh_delivery(self):
         self.ensure_one()
         # Make sure that if you have removed the carrier, the line is gone
-        if self.state in {"draft", "sent"}:
+        if self.state in {"draft", "sent"} and not self.env.context.get(
+            "deleting_delivery_line"
+        ):
             # Context added to avoid the recursive calls and save the new
             # value of carrier_id
             self.with_context(
@@ -74,7 +76,15 @@ class SaleOrder(models.Model):
         return order
 
     def write(self, vals):
-        """Create or refresh delivery line after saving."""
+        """Create or refresh the delivery line after saving."""
+        # Check if it's already deleting a delivery line to not
+        # delete it again inside `_auto_refresh_delivery()`
+        deleting_delivery_line = vals.get("order_line") and any(
+            i[0] == 2 and self.env["sale.order.line"].browse(i[1]).is_delivery
+            for i in vals["order_line"]
+        )
+        if deleting_delivery_line:
+            self = self.with_context(deleting_delivery_line=deleting_delivery_line)
         res = super().write(vals)
         if self._get_param_auto_add_delivery_line() and not self.env.context.get(
             "auto_refresh_delivery"
