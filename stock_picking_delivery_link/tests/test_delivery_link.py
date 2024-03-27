@@ -26,6 +26,16 @@ class TestStockPickingDeliveryLink(StockPickingDeliveryLinkCommonCase):
                 "product_id": test_carrier_product.id,
             }
         )
+        # We need to know if purchase module is installed
+        cls.purchase_installed = False
+        if "purchased_product_qty" in cls.env["product.product"]._fields:
+            cls.purchase_installed = True
+            cls.vendor = cls.env["res.partner"].create({"name": "Test vendor"})
+            cls.product.write(
+                {
+                    "seller_ids": [(0, 0, {"partner_id": cls.vendor.id})],
+                }
+            )
 
     def test_ship_data_from_pick(self):
         move1 = self._create_move(
@@ -123,6 +133,12 @@ class TestStockPickingDeliveryLink(StockPickingDeliveryLinkCommonCase):
         )
         ship_move._assign_picking()
         ship_move._action_confirm()
+        # Confirm purchase order
+        if self.purchase_installed:
+            purchase = self.env["purchase.order"].search(
+                [("partner_id", "=", self.vendor.id)]
+            )
+            purchase.button_confirm()
         pick_move = ship_move.move_orig_ids[0]
         pick_picking = pick_move.picking_id
         ship_picking = ship_move.picking_id
@@ -170,6 +186,12 @@ class TestStockPickingDeliveryLink(StockPickingDeliveryLinkCommonCase):
         )
         ship_move._assign_picking()
         ship_move._action_confirm()
+        # Confirm purchase order
+        if self.purchase_installed:
+            purchase = self.env["purchase.order"].search(
+                [("partner_id", "=", self.vendor.id)]
+            )
+            purchase.button_confirm()
         pick_move = ship_move.move_orig_ids[0]
         pick_picking = pick_move.picking_id
         ship_picking = ship_move.picking_id
