@@ -303,8 +303,7 @@ class TestDeliveryAutoRefresh(common.TransactionCase):
         self.assertFalse(delivery_line.exists())
 
     def test_auto_add_delivery_line_add_service(self):
-        """Delivery line should not be created because
-        there are only service products in SO"""
+        self.env["ir.config_parameter"].sudo().set_param(self.auto_add_delivery_line, 1)
         service = self.env["product.product"].create(
             {"name": "Service Test", "type": "service"}
         )
