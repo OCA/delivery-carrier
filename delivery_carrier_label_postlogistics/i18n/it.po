@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: carrier-delivery (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 12:24+0000\n"
-"PO-Revision-Date: 2023-06-07 17:10+0000\n"
+"PO-Revision-Date: 2024-03-27 15:34+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/"
 "OCA-carrier-delivery-8-0/language/it/)\n"
@@ -444,7 +444,7 @@ msgstr ""
 #. module: delivery_carrier_label_postlogistics
 #: view:postlogistics.config.settings:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
 msgid "Select Company"
-msgstr "Seleziona Azienda"
+msgstr "Seleziona azienda"
 
 #. module: delivery_carrier_label_postlogistics
 #: view:postlogistics.config.settings:delivery_carrier_label_postlogistics.view_postlogistics_config_settings
