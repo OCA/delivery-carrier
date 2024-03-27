@@ -97,3 +97,15 @@ class TestStockQuantPackageDelivery(TestPackingCommon):
         self.assertEqual(
             package1.number_of_parcels, self.package_type.number_of_parcels
         )
+        return package1
+
+    def test_manual_number_of_parcels(self):
+        package = self.test_put_in_pack_choose_carrier_wizard()
+        self.assertEqual(package.number_of_parcels, 7)
+        self.package_type.number_of_parcels = 8
+        self.assertEqual(package.number_of_parcels, 7)
+        package.number_of_parcels = 9
+        self.assertEqual(package.number_of_parcels, 9)
+        self.assertEqual(self.package_type.number_of_parcels, 8)
+        package.package_type_id = self.package_type.copy({"number_of_parcels": 10})
+        self.assertEqual(package.number_of_parcels, 10)
