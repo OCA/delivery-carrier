@@ -62,6 +62,8 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
     @contextmanager
     @api.model
     def _do_in_new_env(self):
+        # Be careful with the test_enable flag, as this behavior won't be the same on tests.
+        # If in test mode, there won't be any concurrent threading.
         if tools.config["test_enable"]:
             yield self.env
             return
@@ -252,7 +254,7 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
                 lambda rec: rec.id not in already_generated_ids
             )
         else:
-            to_generate.purge_tracking_references()
+            to_generate.purge_tracking_references_in_new_env()
 
         for batch in to_generate:
             labels = self._get_all_files(batch)
