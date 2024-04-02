@@ -1,5 +1,6 @@
 # Copyright 2013-2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
+
 from odoo import Command, api, fields, models
 from odoo.exceptions import UserError
 
@@ -112,7 +113,6 @@ class StockBatchPicking(models.Model):
         return super().create(vals_list)
 
     def purge_tracking_references(self):
-        """Purge tracking for each picking and destination package"""
         for batch in self:
             move_lines = batch.move_line_ids
             packs = move_lines.result_package_id.filtered(lambda p: p.parcel_tracking)
