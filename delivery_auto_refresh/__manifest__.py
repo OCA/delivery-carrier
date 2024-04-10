@@ -8,6 +8,7 @@
     "category": "Delivery",
     "website": "https://github.com/OCA/delivery-carrier",
     "author": "Tecnativa, Odoo Community Association (OCA)",
+    "maintainers": ["aleuffre", "renda-dev", "PicchiSeba"],
     "license": "AGPL-3",
     "application": False,
     "installable": True,
