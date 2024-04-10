@@ -1,11 +1,12 @@
 # Copyright 2021 Camptocamp SA
+# Copyright 2024 Michael Tietz (MT Software) <mtietz@mt-software.de>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
 from unittest import mock
 
 from lxml import etree
 
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import Form, SavepointCase
 from odoo.tools.safe_eval import safe_eval
 
 SEND_SHIPPING_RETURN_VALUE = [{"exact_price": 10.0, "tracking_number": "TEST"}]
@@ -82,10 +83,19 @@ class TestDeliverySendToShipper(SavepointCase):
         )
         (cls.picking | cls.packing | cls.shipping).sale_id = cls.order
 
-    def _validate_picking(self, picking):
+    def _validate_picking(self, picking, qty_done=None):
         for ml in picking.move_line_ids:
-            ml.qty_done = ml.product_uom_qty
-        picking._action_done()
+            ml.qty_done = qty_done or ml.product_uom_qty
+        action_data = picking.button_validate()
+        if not action_data or action_data is True:
+            return picking.browse()
+        backorder_wizard = Form(
+            self.env["stock.backorder.confirmation"].with_context(
+                action_data["context"]
+            )
+        ).save()
+        backorder_wizard.process()
+        return self.env["stock.picking"].search([("backorder_id", "=", picking.id)])
 
     def test_send_to_shipper_on_ship(self):
         """Check sending of delivery notification on ship.
@@ -195,3 +205,47 @@ class TestDeliverySendToShipper(SavepointCase):
         attrs_str = button_send_to_shipper.attrib["attrs"]
         attrs = safe_eval(attrs_str)
         self.assertIn(("delivery_notification_sent", "=", True), attrs["invisible"])
+
+    def test_send_to_shipper_on_partial_pack(self):
+        """Check that the field delivery_notification_sent
+        is not set on a pack backorder
+        but on the ship transfer
+        """
+        with mock.patch.object(
+            type(self.carrier_on_pack),
+            "send_shipping",
+            return_value=SEND_SHIPPING_RETURN_VALUE,
+        ):
+            self.shipping.carrier_id = self.carrier_on_pack
+            self._validate_picking(self.picking)
+            pack_backorder = self._validate_picking(self.packing, 5)
+            self.assertTrue(self.shipping.delivery_notification_sent)
+            self.assertFalse(pack_backorder.delivery_notification_sent)
+            self._validate_picking(pack_backorder, 5)
+            self.assertTrue(self.shipping.delivery_notification_sent)
+            backorder = self._validate_picking(self.shipping, 5)
+            self.assertEqual(self.shipping.state, "done")
+            self.assertTrue(self.shipping.delivery_notification_sent)
+            self.assertTrue(backorder.delivery_notification_sent)
+            backorder2 = self._validate_picking(backorder, 5)
+            self.assertFalse(backorder2)
+            self.assertTrue(backorder.delivery_notification_sent)
+
+    def test_send_to_shipper_on_pack_partial_shipping(self):
+        """Check that delivery_notification_sent is set on a ship backorder"""
+        with mock.patch.object(
+            type(self.carrier_on_pack),
+            "send_shipping",
+            return_value=SEND_SHIPPING_RETURN_VALUE,
+        ):
+            self.shipping.carrier_id = self.carrier_on_pack
+            self._validate_picking(self.picking)
+            self._validate_picking(self.packing)
+            self.assertTrue(self.shipping.delivery_notification_sent)
+            backorder = self._validate_picking(self.shipping, 5)
+            self.assertEqual(self.shipping.state, "done")
+            self.assertTrue(self.shipping.delivery_notification_sent)
+            self.assertTrue(backorder.delivery_notification_sent)
+            backorder2 = self._validate_picking(backorder, 5)
+            self.assertFalse(backorder2)
+            self.assertTrue(backorder.delivery_notification_sent)
