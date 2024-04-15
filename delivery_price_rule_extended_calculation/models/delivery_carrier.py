@@ -10,7 +10,10 @@ class DeliveryCarrier(models.Model):
 
     def _get_price_available(self, order):
         self.ensure_one()
-        self = self.with_context(order_amount_untaxed=order.amount_untaxed)
+        self = self.with_context(
+            order_amount_untaxed=order.amount_untaxed,
+            order_amount_undiscounted=order.amount_undiscounted,
+        )
         return super(DeliveryCarrier, self)._get_price_available(order)
 
     def _get_price_from_picking(self, total, weight, volume, quantity):
@@ -23,12 +26,13 @@ class DeliveryCarrier(models.Model):
             "wv": volume * weight,
             "quantity": quantity,
             "untaxed_price": self.env.context.get("order_amount_untaxed", 0),
+            "undiscounted_price": self.env.context.get("order_amount_undiscounted", 0),
         }
         for line in self.price_rule_ids:
             test = safe_eval(
                 line.variable + line.operator + str(line.max_value), price_dict
             )
-            if line.is_untaxed_rule():
+            if line.is_specific_rule():
                 if test:
                     price = (
                         line.list_base_price
@@ -55,6 +59,9 @@ class DeliveryCarrier(models.Model):
         res.update(
             {
                 "untaxed_price": self.env.context.get("order_amount_untaxed", 0),
+                "undiscounted_price": self.env.context.get(
+                    "order_amount_undiscounted", 0
+                ),
             }
         )
         return res

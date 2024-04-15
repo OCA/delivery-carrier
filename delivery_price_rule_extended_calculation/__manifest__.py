@@ -1,7 +1,8 @@
 # Copyright 2018 Simone Rubino - Agile Business Group
+# Copyright 2024 Denis Leemann - Camptocamp SA
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 {
-    "name": "Delivery price rule untaxed",
+    "name": "Delivery price rule extended calculation",
     "summary": "Add untaxed amount to variables for price delivery price rule",
     "version": "15.0.1.0.0",
     "category": "Stock",
@@ -12,5 +13,5 @@
     "installable": True,
     "depends": ["delivery"],
     "maintainers": ["AshishHirapara"],
-    "demo": ["data/delivery_price_rule_untaxed_demo.xml"],
+    "demo": ["data/delivery_price_rule_extended_calculation_demo.xml"],
 }
