@@ -42,12 +42,11 @@ class StockNumberPackageValidateWiz(models.TransientModel):
         if self.number_of_packages:
             self.pick_ids.write({"number_of_packages": self.number_of_packages})
         # put context key for avoiding `base_delivery_carrier_label` auto-packaging feature
-        res = self.pick_ids.with_context(
+        self.pick_ids.with_context(
             set_default_package=False, bypass_set_number_of_packages=True
         ).button_validate()
         if self.print_package_label:
-            self._print_package_label()
-        return res
+            return self._print_package_label()
 
     def _print_package_label(self):
         """Method to be inherited by other modules and allow print the report in
