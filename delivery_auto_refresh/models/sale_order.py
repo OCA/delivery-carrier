@@ -160,14 +160,3 @@ class SaleOrder(models.Model):
         ):
             return False
         return True
-
-
-class SaleOrderLine(models.Model):
-    _inherit = "sale.order.line"
-
-    def _get_protected_fields(self):
-        # Avoid locked orders validation error when voiding the delivery line
-        fields = super()._get_protected_fields()
-        if self.env.context.get("delivery_auto_refresh_override_locked"):
-            return [x for x in fields if x not in ["product_uom_qty", "price_unit"]]
-        return fields
