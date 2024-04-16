@@ -448,22 +448,26 @@ class DeliveryCarrier(models.Model):
                 )
         return res
 
-    def deliverea_get_return_label(self, pickings):
-        self.deliverea_return_shipping(pickings)
+    def _deliverea_check_response(self, response):
+        if not response.get("carrierReference") or not response.get(
+            "delivereaReference"
+        ):
+            error_msg = _("References missing in response.\n")
+            raise UserError(_("Deliverea Error:\n\n%s") % error_msg)
 
     def deliverea_return_shipping(self, pickings):
-        res = []
         deliverea_request = DelivereaRequest(self)
         for picking in pickings:
             vals = self._prepare_deliverea_order(picking)
             response = deliverea_request.create_return(vals)
+            self._deliverea_check_response(response)
             picking.write(
                 {
                     "carrier_tracking_ref": response.get("carrierReference", ""),
                     "deliverea_reference": response.get("delivereaReference", ""),
                 }
             )
-        return res
+        return True
 
     def deliverea_cancel_shipment(self, pickings):
         deliverea_request = DelivereaRequest(self)
@@ -494,6 +498,22 @@ class DeliveryCarrier(models.Model):
                     )
             self.deliverea_tracking_state_update(picking)
         return True
+
+    def deliverea_get_return_label(self, pickings):
+        deliverea_request = DelivereaRequest(self)
+        for picking in pickings.filtered("deliverea_reference"):
+            response = deliverea_request.get_return_label(picking.deliverea_reference)
+            if response:
+                file_type = response.get("type")
+                self.env["ir.attachment"].create(
+                    {
+                        "name": "Return_%s.%s" % (picking.name, file_type),
+                        "type": "binary",
+                        "datas": response.get("content"),
+                        "res_model": picking._name,
+                        "res_id": picking.id,
+                    }
+                )
 
     def deliverea_get_tracking_link(self, picking):
         domain = (

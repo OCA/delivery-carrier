@@ -193,6 +193,7 @@ class TestDeliverea(common.TransactionCase):
     def test_01_create_order(self):
         create_shipment_value = {
             "delivereaReference": "Sbe2fd53e94869d",
+            "carrierReference": "test",
             "carrierCode": "dummy",
             "serviceCode": "standard",
             "costCenterCode": "DEFAULT",
@@ -290,6 +291,7 @@ class TestDeliverea(common.TransactionCase):
     def test_04_create_return_and_delete(self):
         return_value = {
             "delivereaReference": "Sbe2fd53e94869d",
+            "carrierReference": "test",
             "carrierCode": "dummy",
             "serviceCode": "standard",
             "costCenterCode": "DEFAULT",
@@ -352,6 +354,7 @@ class TestDeliverea(common.TransactionCase):
     def test_06_create_return(self):
         return_value = {
             "delivereaReference": "Sbe2fd53e94869d",
+            "carrierReference": "test",
             "carrierCode": "dummy",
             "serviceCode": "standard",
             "costCenterCode": "DEFAULT",
@@ -423,3 +426,34 @@ class TestDeliverea(common.TransactionCase):
         return_value = {"Error test": "Error"}
         with self.assertRaises(UserError):
             DelivereaRequest._check_error(DelivereaRequest, return_value)
+
+    def test_12_get_exception(self):
+        return_value = {
+            "delivereaReference": "Sbe2fd53e94869d",
+            "carrierCode": "dummy",
+            "serviceCode": "standard",
+            "costCenterCode": "DEFAULT",
+        }
+        requests_mock_call = mock.MagicMock(
+            return_value=MockResponse(return_value, code=200)
+        )
+        with self.assertRaises(UserError):
+            with mock.patch.object(requests, "post", new=requests_mock_call):
+                self.carrier.deliverea_return_shipping(self.picking)
+
+    def test_13_get_return_label(self):
+        self.picking.deliverea_reference = "Sbe2fd53e94869d"
+        return_value = {"type": "zpl", "content": "TEST"}
+        requests_mock_call = mock.MagicMock(
+            return_value=MockResponse(return_value, code=200)
+        )
+        with mock.patch.object(requests, "get", new=requests_mock_call):
+            self.carrier.deliverea_get_return_label(self.picking)
+
+        attachment = self.env["ir.attachment"].search(
+            [
+                ("res_model", "=", "stock.picking"),
+                ("res_id", "=", self.picking.id),
+            ]
+        )
+        self.assertTrue(attachment)

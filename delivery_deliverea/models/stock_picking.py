@@ -19,6 +19,13 @@ class StockPicking(models.Model):
             return
         return self.carrier_id.deliverea_get_label(self)
 
+    def send_to_shipper(self):
+        self.ensure_one()
+        if self.delivery_type == "deliverea":
+            self.carrier_id.deliverea_return_shipping(self)
+            self.carrier_id.deliverea_get_return_label(self)
+        return super().send_to_shipper()
+
     @api.model
     def deliverea_update_tracking_state(self, data):
         if data.get("delivereaReference"):

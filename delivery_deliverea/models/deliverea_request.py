@@ -30,6 +30,7 @@ class DelivereaRequest(object):
             "create_return": path + "returns",
             "get_shipment_tracking": path + "shipments/{delivereaReference}/trackings",
             "get_return_tracking": path + "returns/{delivereaReference}/trackings",
+            "get_return_label": path + "returns/{delivereaReference}/label",
         }
 
     def _send_api_request(self, request_type, url, data=None, skip_auth=False):
@@ -158,6 +159,15 @@ class DelivereaRequest(object):
         res = self._send_api_request(
             request_type="GET",
             url=self.urls["get_shipment_label"].format(
+                delivereaReference=deliverea_reference,
+            ),
+        )
+        return res.json()
+
+    def get_return_label(self, deliverea_reference):
+        res = self._send_api_request(
+            request_type="GET",
+            url=self.urls["get_return_label"].format(
                 delivereaReference=deliverea_reference,
             ),
         )

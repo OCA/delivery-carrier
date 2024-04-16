@@ -27,6 +27,11 @@
                     name="attrs"
                 >{'invisible': ['|','|','|',('carrier_tracking_ref','=',False),('delivery_type','in', ['fixed', 'base_on_rule']),('delivery_type','=',False),('state','not in',('done', 'assigned'))]}</attribute>
             </xpath>
+            <xpath expr="//button[@name='print_return_label']" position="attributes">
+                <attribute
+                    name="attrs"
+                >{'invisible':['|', '|', '|', ('is_return_picking', '=', False),('state', '=', 'done'),('picking_type_code', '!=', 'incoming'),('delivery_type','=', 'deliverea')]}</attribute>
+            </xpath>
         </field>
     </record>
 </odoo>
