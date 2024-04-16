@@ -74,13 +74,13 @@ class SaleOrder(models.Model):
 
     @api.model
     def create(self, vals):
-        """Create or refresh delivery line on create."""
+        # Create or refresh delivery line on create
         order = super().create(vals)
         order._auto_refresh_delivery()
         return order
 
     def write(self, vals):
-        """Create or refresh delivery line after saving."""
+        # Create or refresh delivery line after saving
         res = super().write(vals)
         if self._get_param_auto_add_delivery_line() and not self.env.context.get(
             "auto_refresh_delivery"
@@ -93,8 +93,7 @@ class SaleOrder(models.Model):
         return res
 
     def _create_delivery_line(self, carrier, price_unit):
-        """Allow users to keep discounts to delivery lines. Unit price will
-        be recomputed anyway"""
+        # Allow users to keep discounts to delivery lines. Unit price will be recomputed anyway
         sol = super()._create_delivery_line(carrier, price_unit)
         discount = self.env.context.get("delivery_discount")
         if discount and sol:
@@ -145,8 +144,7 @@ class SaleOrderLine(models.Model):
     _inherit = "sale.order.line"
 
     def _get_protected_fields(self):
-        """Avoid locked orders validation error when voiding the
-        delivery line"""
+        # Avoid locked orders validation error when voiding the delivery line
         fields = super()._get_protected_fields()
         if self.env.context.get("delivery_auto_refresh_override_locked"):
             return [x for x in fields if x not in ["product_uom_qty", "price_unit"]]
