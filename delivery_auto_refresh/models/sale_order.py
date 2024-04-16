@@ -1,5 +1,6 @@
 # Copyright 2018 Tecnativa - Pedro M. Baeza
 # Copyright 2021 Tecnativa - Carlos Roca
+# Copyright 2024 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models
@@ -72,12 +73,13 @@ class SaleOrder(models.Model):
                     {"recompute_delivery_price": False}
                 )
 
-    @api.model
-    def create(self, vals):
+    @api.model_create_multi
+    def create(self, vals_list):
         # Create or refresh delivery line on create
-        order = super().create(vals)
-        order._auto_refresh_delivery()
-        return order
+        orders = super().create(vals_list)
+        for order in orders:
+            order._auto_refresh_delivery()
+        return orders
 
     def write(self, vals):
         # Create or refresh delivery line after saving
