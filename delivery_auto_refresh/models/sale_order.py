@@ -72,12 +72,12 @@ class SaleOrder(models.Model):
         delivery_discount = self._get_delivery_discount()
 
         # Make sure that if you have removed the carrier, the line is gone
-        if self.state in {"draft", "sent"}:
+        if self.state in ("draft", "sent"):
             # Context added to avoid the recursive calls and save the new
             # value of carrier_id
             self.with_context(auto_refresh_delivery=True)._remove_delivery_line()
         if self.carrier_id:
-            if self.state in {"draft", "sent"}:
+            if self.state in ("draft", "sent"):
                 price_unit = self.carrier_id.rate_shipment(self)["price"]
                 if not self.is_all_service:
                     sol = self._create_delivery_line(self.carrier_id, price_unit)
@@ -105,7 +105,7 @@ class SaleOrder(models.Model):
         return res
 
     def set_delivery_line(self, carrier, amount):
-        if self._get_param_auto_add_delivery_line() and self.state in {"draft", "sent"}:
+        if self._get_param_auto_add_delivery_line() and self.state in ("draft", "sent"):
             self.carrier_id = carrier.id
         else:
             return super().set_delivery_line(carrier, amount)
@@ -133,7 +133,7 @@ class SaleOrder(models.Model):
         # nothing to be done either. If there are more than one delivery lines
         # we won't be doing anything as well.
         if (
-            self.state not in {"done", "sale"}
+            self.state not in ("done", "sale")
             or self.invoice_ids
             or not self.order_line.filtered("is_delivery")
             or len(self.order_line.filtered("is_delivery")) > 1
