@@ -19,6 +19,7 @@
                         On the sales quotation, refresh the shipping cost line when saving
                     </div>
                 </div>
+
                 <div class="o_setting_left_pane">
                     <field name="refresh_after_picking" />
                 </div>
@@ -28,6 +29,7 @@
                         After delivering a sales order, update the shipping cost line based on what has been delivered
                     </div>
                 </div>
+
                 <div class="o_setting_left_pane">
                     <field name="auto_void_delivery_line" />
                 </div>
