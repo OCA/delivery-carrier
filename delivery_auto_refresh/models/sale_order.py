@@ -164,3 +164,20 @@ class SaleOrderLine(models.Model):
         if self.env.context.get("delivery_auto_refresh_override_locked"):
             return [x for x in fields if x not in ["product_uom_qty", "price_unit"]]
         return fields
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        lines = super(
+            SaleOrderLine, self.with_context(auto_refresh_delivery=True)
+        ).create(vals_list)
+        for order in lines.order_id:
+            order._auto_refresh_delivery()
+        return lines
+
+    def write(self, vals):
+        res = super(SaleOrderLine, self.with_context(auto_refresh_delivery=True)).write(
+            vals
+        )
+        for order in self.order_id:
+            order._auto_refresh_delivery()
+        return res
