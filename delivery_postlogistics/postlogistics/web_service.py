@@ -568,7 +568,7 @@ class PostlogisticsWebService(object):
             res["success"] = True
             res["value"].append(
                 {
-                    "item_id": item_list[0]["itemID"],
+                    "item_id": item["itemID"],
                     "binary": binary,
                     "tracking_number": response_dict["item"]["identCode"],
                     "file_type": file_type,
