@@ -52,10 +52,37 @@ class SaleOrder(models.Model):
             .get_param("delivery_auto_refresh.auto_add_delivery_line")
         )
 
-    def _get_delivery_discount(self):
-        self.ensure_one()
-        delivery_lines = self.order_line.filtered("is_delivery")
-        return delivery_lines[-1:].discount
+    def _update_delivery_line(self, delivery_line, price_unit):
+        """Update the existing delivery line"""
+        values = self._prepare_delivery_line_vals(self.carrier_id, price_unit)
+        new_vals = {}
+        for f, val in values.items():
+            field_def = delivery_line._fields.get(f)
+            if isinstance(field_def, (fields.One2many, fields.Many2many)):
+                # Tax is set with a SET command
+                clear = update = False
+                for cmd in val:
+                    if cmd[0] == fields.Command.SET:
+                        if delivery_line[f].ids != cmd[2]:
+                            update = True
+                    else:
+                        clear = True
+                if clear:
+                    new_vals[f] = [fields.Command.CLEAR] + val
+                elif update:
+                    new_vals[f] = val
+            elif isinstance(field_def, fields.Many2one):
+                if delivery_line[f].id != val:
+                    new_vals[f] = val
+            elif f == "sequence":
+                # sequence is last sequence + 1. As the delivery line already
+                # exists, substract 1
+                if delivery_line[f] != val - 1:
+                    new_vals[f] = val
+            elif delivery_line[f] != val:
+                new_vals[f] = val
+        if new_vals:
+            delivery_line.write(new_vals)
 
     def _auto_refresh_delivery(self):
         self.ensure_one()
@@ -63,29 +90,40 @@ class SaleOrder(models.Model):
             return
         if not self._get_param_auto_add_delivery_line():
             return
+        if self.state not in ("draft", "sent"):
+            return
 
-        delivery_discount = self._get_delivery_discount()
+        self = self.with_context(auto_refresh_delivery=True)
 
-        # Make sure that if you have removed the carrier, the line is gone
-        if self.state in ("draft", "sent"):
-            # Context added to avoid the recursive calls and save the new
-            # value of carrier_id
-            self.with_context(auto_refresh_delivery=True)._remove_delivery_line()
-        if self.carrier_id:
-            if self.state in ("draft", "sent"):
-                price_unit = self.carrier_id.rate_shipment(self)["price"]
-                if not self.is_all_service:
-                    sol = self._create_delivery_line(self.carrier_id, price_unit)
-                    if delivery_discount and sol:
-                        sol.discount = delivery_discount
-                self.with_context(auto_refresh_delivery=True).write(
-                    {"recompute_delivery_price": False}
-                )
+        if not self.carrier_id:
+            self._set_delivery_carrier()
+
+        if not self.carrier_id or self.is_all_service:
+            self._remove_delivery_line()
+        else:
+            price_unit = self.carrier_id.rate_shipment(self)["price"]
+            delivery_lines = self.order_line.filtered("is_delivery")
+            if not delivery_lines:
+                self._create_delivery_line(self.carrier_id, price_unit)
+            elif len(delivery_lines) > 1:
+                delivery_discount = delivery_lines[-1:].discount
+                self._remove_delivery_line()
+                sol = self._create_delivery_line(self.carrier_id, price_unit)
+                if delivery_discount and sol:
+                    sol.discount = delivery_discount
+            else:
+                self._update_delivery_line(delivery_lines[0], price_unit)
+        if self.recompute_delivery_price:
+            self.recompute_delivery_price = False
 
     @api.model_create_multi
     def create(self, vals_list):
-        # Create or refresh delivery line on create
-        orders = super().create(vals_list)
+        # Prevent to refresh delivery in the call to super
+        orders = (
+            super(SaleOrder, self.with_context(auto_refresh_delivery=True))
+            .create(vals_list)
+            .with_context(auto_refresh_delivery=False)
+        )
         for order in orders:
             order._auto_refresh_delivery()
         return orders
@@ -104,11 +142,6 @@ class SaleOrder(models.Model):
             self.carrier_id = carrier.id
         else:
             return super().set_delivery_line(carrier, amount)
-
-    def _remove_delivery_line(self):
-        current_carrier = self.carrier_id
-        super()._remove_delivery_line()
-        self.carrier_id = current_carrier
 
     def _is_delivery_line_voidable(self):
         """If the picking is returned before being invoiced, like when the picking
