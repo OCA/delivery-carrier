@@ -46,29 +46,43 @@ class SaleOrder(models.Model):
         # e-commerce. So we don't want to add the delivery line automatically.
         if self.env.context.get("website_id"):
             return False
-        return get_bool_param(self.env, "auto_add_delivery_line")
+        return (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("delivery_auto_refresh.auto_add_delivery_line")
+        )
+
+    def _get_delivery_discount(self):
+        self.ensure_one()
+        delivery_lines = self.order_line.filtered("is_delivery")
+        return delivery_lines[-1:].discount
 
     def _auto_refresh_delivery(self):
         self.ensure_one()
+        if self.env.context.get("auto_refresh_delivery"):
+            return
+        if not self._get_param_auto_add_delivery_line():
+            return
+
+        delivery_discount = self._get_delivery_discount()
+
         # Make sure that if you have removed the carrier, the line is gone
         if self.state in {"draft", "sent"} and not self.env.context.get(
             "deleting_delivery_line"
         ):
             # Context added to avoid the recursive calls and save the new
             # value of carrier_id
-            self.with_context(
-                auto_refresh_delivery=True, skip_validation_check=True
-            )._remove_delivery_line()
-        if self._get_param_auto_add_delivery_line() and self.carrier_id:
+            self.with_context(auto_refresh_delivery=True)._remove_delivery_line()
+        if self.carrier_id:
             if self.state in {"draft", "sent"}:
                 price_unit = self.carrier_id.rate_shipment(self)["price"]
                 if not self.is_all_service:
-                    self.with_context(skip_validation_check=True)._create_delivery_line(
-                        self.carrier_id, price_unit
-                    )
-                self.with_context(
-                    auto_refresh_delivery=True, skip_validation_check=True
-                ).write({"recompute_delivery_price": False})
+                    sol = self._create_delivery_line(self.carrier_id, price_unit)
+                    if delivery_discount and sol:
+                        sol.discount = delivery_discount
+                self.with_context(auto_refresh_delivery=True).write(
+                    {"recompute_delivery_price": False}
+                )
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -79,25 +93,13 @@ class SaleOrder(models.Model):
         return orders
 
     def write(self, vals):
-        # Create or refresh delivery line after saving
-        res = super().write(vals)
-        if self._get_param_auto_add_delivery_line() and not self.env.context.get(
-            "auto_refresh_delivery"
-        ):
-            for order in self:
-                delivery_line = order.order_line.filtered("is_delivery")
-                order.with_context(
-                    delivery_discount=delivery_line[-1:].discount,
-                )._auto_refresh_delivery()
+        # Prevent to refresh delivery in the call to super
+        res = super(SaleOrder, self.with_context(auto_refresh_delivery=True)).write(
+            vals
+        )
+        for order in self:
+            order._auto_refresh_delivery()
         return res
-
-    def _create_delivery_line(self, carrier, price_unit):
-        # Allow users to keep discounts to delivery lines. Unit price will be recomputed anyway
-        sol = super()._create_delivery_line(carrier, price_unit)
-        discount = self.env.context.get("delivery_discount")
-        if discount and sol:
-            sol.discount = discount
-        return sol
 
     def set_delivery_line(self, carrier, amount):
         if self._get_param_auto_add_delivery_line() and self.state in {"draft", "sent"}:

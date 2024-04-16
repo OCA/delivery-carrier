@@ -109,6 +109,8 @@ Contributors
   * Maksym Yankin
   * Simone Orsi
 
+* Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
+
 Maintainers
 ~~~~~~~~~~~
 
