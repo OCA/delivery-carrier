@@ -10,7 +10,10 @@ class StockPicking(models.Model):
     _inherit = "stock.picking"
 
     def _add_delivery_cost_to_so(self):
-        """Update delivery price in SO from picking data."""
+        # Update delivery price in SO (no matter the type of carrier invoicing
+        # policy) and in picking from picking data if indicated so. Carriers
+        # based on rules doesn't refresh with real picking data, only with SO
+        # ones.
         res = super()._add_delivery_cost_to_so()
         if not get_bool_param(self.env, "refresh_after_picking"):
             return res
