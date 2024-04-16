@@ -12,6 +12,10 @@
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": ["delivery"],
-    "data": ["data/ir_config_parameter.xml", "views/sale_order_views.xml"],
+    "depends": ["delivery", "sale_order_carrier_auto_assign"],
+    "data": [
+        "data/ir_config_parameter.xml",
+        "views/sale_order_views.xml",
+        "views/res_config_settings_views.xml",
+    ],
 }

@@ -67,11 +67,11 @@ class TestDeliveryAutoRefresh(common.SavepointCase):
                 "property_product_pricelist": pricelist.id,
             }
         )
-        cls.param_name1 = "delivery_auto_refresh.auto_add_delivery_line"
-        cls.param_name2 = "delivery_auto_refresh.refresh_after_picking"
-        cls.param_name3 = "delivery_auto_refresh.auto_void_delivery_line"
-        cls.param_name4 = "delivery_auto_refresh.set_default_carrier"
-        cls.env["ir.config_parameter"].sudo().set_param(cls.param_name4, 1)
+        cls.auto_add_delivery_line = "delivery_auto_refresh.auto_add_delivery_line"
+        cls.refresh_after_picking = "delivery_auto_refresh.refresh_after_picking"
+        cls.auto_void_delivery_line = "delivery_auto_refresh.auto_void_delivery_line"
+        cls.settings = cls.env["res.config.settings"].create({})
+        cls.settings.execute()
         order_form = Form(cls.env["sale.order"])
         order_form.partner_id = cls.partner
         order_form.partner_invoice_id = cls.partner
@@ -191,21 +191,6 @@ class TestDeliveryAutoRefresh(common.SavepointCase):
         picking._action_done()
         line_delivery = self.order.order_line.filtered("is_delivery")
         self.assertEqual(line_delivery.price_unit, 60)
-
-    def test_compute_carrier_id(self):
-        order_form_1 = Form(self.env["sale.order"])
-        order_form_1.partner_id = self.partner
-        self.assertEqual(order_form_1.carrier_id, self.carrier_1)
-        partner_without_carrier = self.env["res.partner"].create(
-            {
-                "name": "Test partner without carrier",
-                "property_delivery_carrier_id": False,
-            }
-        )
-        no_carrier = self.env["delivery.carrier"]
-        order_form_2 = Form(self.env["sale.order"])
-        order_form_2.partner_id = partner_without_carrier
-        self.assertEqual(order_form_2.carrier_id, no_carrier)
 
     def _confirm_sale_order(self, order):
         sale_form = Form(order)

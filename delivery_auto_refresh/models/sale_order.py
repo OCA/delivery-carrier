@@ -5,34 +5,15 @@
 
 from odoo import api, fields, models
 
-from ..utils import get_bool_param
-
 
 class SaleOrder(models.Model):
     _inherit = "sale.order"
 
+    # Migration note: This field is not used anymore and can be dropped in later versions
     available_carrier_ids = fields.Many2many(
         comodel_name="delivery.carrier",
         compute="_compute_available_carrier_ids",
     )
-
-    @api.onchange("partner_id", "partner_shipping_id")
-    def _onchange_partner_id(self):
-        if hasattr(super(), "_onchange_partner_id"):
-            super()._onchange_partner_id()
-        if get_bool_param(self.env, "set_default_carrier"):
-            for order in self:
-                action = order.action_open_delivery_wizard()
-                carrier_id = self.env["delivery.carrier"].browse(
-                    action["context"]["default_carrier_id"]
-                )
-                # If the carrier isn't allowed for the current shipping address, we wont
-                # default to it. In that case we'd try to fallback to the former carrier.
-                order.carrier_id = fields.first(
-                    (carrier_id | order.carrier_id).filtered(
-                        lambda x: x in order.available_carrier_ids._origin
-                    )
-                )
 
     @api.depends("partner_shipping_id")
     def _compute_available_carrier_ids(self):
@@ -40,6 +21,8 @@ class SaleOrder(models.Model):
         for sale in self:
             wizard = self.env["choose.delivery.carrier"].new({"order_id": sale.id})
             sale.available_carrier_ids = wizard.available_carrier_ids._origin
+
+    # End migration note
 
     def _get_param_auto_add_delivery_line(self):
         # When we have the context 'website_id' it means that we are doing the order from
@@ -139,6 +122,7 @@ class SaleOrder(models.Model):
 
     def set_delivery_line(self, carrier, amount):
         if self._get_param_auto_add_delivery_line() and self.state in ("draft", "sent"):
+            # This will trigger an _auto_refresh_delivery in write
             self.carrier_id = carrier.id
         else:
             return super().set_delivery_line(carrier, amount)
