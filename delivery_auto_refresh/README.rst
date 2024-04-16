@@ -46,10 +46,14 @@ Configuration
 =============
 
 Go to *Settings > Sales > Shipping*:
-* Enable "Refresh shipping cost line automatically" if you want to add automatically the delivery line on save and refresh the cost. This will also set the shipping method.
-* Enable "Refresh After Picking Automatically" if you want to refresh delivery price after delivering based on what has been delivered.
-* Enable "Void delivery lines automatically" if you want to void the delivery line values (price, units ordered, units delivered) in the sale order when the delivery is returned to refund prior to be invoiced.
 
+* Enable "Refresh shipping cost line automatically" if you want to add automatically the
+  delivery line on save and refresh the cost. This will also set the shipping method.
+* Enable "Refresh After Picking Automatically" if you want to refresh delivery
+  price after delivering based on what has been delivered.
+* Enable "Void delivery lines automatically" if you want to void the delivery
+  line values (price, units ordered, units delivered) in the sale order when
+  the delivery is returned to refund prior to be invoiced.
 
 Known issues / Roadmap
 ======================
@@ -59,9 +63,6 @@ Known issues / Roadmap
   might modify the order lines.
 * On multiple deliveries, second and successive pickings update the delivery
   price, but you can't invoice the new delivery price.
-* This is only working from user interface, as there's no way of making
-  compatible the auto-refresh intercepting create/write methods from sale order
-  lines.
 
 Bug Tracker
 ===========
