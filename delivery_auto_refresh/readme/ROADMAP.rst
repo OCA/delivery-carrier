@@ -3,6 +3,3 @@
   might modify the order lines.
 * On multiple deliveries, second and successive pickings update the delivery
   price, but you can't invoice the new delivery price.
-* This is only working from user interface, as there's no way of making
-  compatible the auto-refresh intercepting create/write methods from sale order
-  lines.
