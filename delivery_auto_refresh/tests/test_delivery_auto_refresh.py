@@ -294,8 +294,8 @@ class TestDeliveryAutoRefresh(common.TransactionCase):
         self.assertFalse(delivery_line.exists())
 
     def test_auto_add_delivery_line_add_service(self):
-        """Delivery line should not be created because
-        there are only service products in SO"""
+        """No delivery line when service only"""
+        self.env["ir.config_parameter"].sudo().set_param(self.auto_add_delivery_line, 1)
         service = self.env["product.product"].create(
             {"name": "Service Test", "type": "service"}
         )
@@ -309,3 +309,11 @@ class TestDeliveryAutoRefresh(common.TransactionCase):
         order = order_form.save()
         delivery_line = order.order_line.filtered("is_delivery")
         self.assertFalse(delivery_line.exists())
+
+    def test_auto_refresh_so_and_manually_unlink_delivery_line(self):
+        """Manually remove the delivery line"""
+        self._test_autorefresh_unlink_line()
+        sale_form = Form(self.order)
+        # Deleting the delivery line
+        sale_form.order_line.remove(1)
+        sale_form.save()
