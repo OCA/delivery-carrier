@@ -289,7 +289,8 @@ class TestDeliveryAutoRefresh(common.SavepointCase):
         self.assertFalse(delivery_line.exists())
 
     def test_auto_add_delivery_line_add_service(self):
-        self.env["ir.config_parameter"].sudo().set_param(self.param_name1, 1)
+        """No delivery line when service only"""
+        self.env["ir.config_parameter"].sudo().set_param(self.auto_add_delivery_line, 1)
         service = self.env["product.product"].create(
             {"name": "Service Test", "type": "service"}
         )
@@ -305,7 +306,7 @@ class TestDeliveryAutoRefresh(common.SavepointCase):
         self.assertFalse(delivery_line.exists())
 
     def test_auto_refresh_so_and_manually_unlink_delivery_line(self):
-        """Test that we are able to manually remove the delivery line"""
+        """Manually remove the delivery line"""
         self._test_autorefresh_unlink_line()
         sale_form = Form(self.order)
         # Deleting the delivery line
