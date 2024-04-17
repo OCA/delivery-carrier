@@ -1,3 +1,4 @@
 odoo-test-helper
 vcrpy
 vcrpy-unittest
+odoo-addon-sale-order-carrier-auto-assign @ git+https://github.com/OCA/sale-workflow.git@refs/pull/3081/head#subdirectory=setup/sale_order_carrier_auto_assign
