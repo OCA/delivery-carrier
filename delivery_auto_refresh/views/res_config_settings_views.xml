@@ -29,30 +29,30 @@
                 <!-- End Migratio note -->
 
                 <div class="o_setting_left_pane">
-                    <field name="auto_add_delivery_line" />
+                    <field name="sale_auto_add_delivery_line" />
                 </div>
                 <div class="o_setting_right_pane">
-                    <label for="auto_add_delivery_line" />
+                    <label for="sale_auto_add_delivery_line" />
                     <div class="text-muted">
                         On the sales quotation, refresh the shipping cost line when saving
                     </div>
                 </div>
 
                 <div class="o_setting_left_pane">
-                    <field name="refresh_after_picking" />
+                    <field name="sale_refresh_delivery_after_picking" />
                 </div>
                 <div class="o_setting_right_pane">
-                    <label for="refresh_after_picking" />
+                    <label for="sale_refresh_delivery_after_picking" />
                     <div class="text-muted">
                         After delivering a sales order, update the shipping cost line based on what has been delivered
                     </div>
                 </div>
 
                 <div class="o_setting_left_pane">
-                    <field name="auto_void_delivery_line" />
+                    <field name="sale_auto_void_delivery_line" />
                 </div>
                 <div class="o_setting_right_pane">
-                    <label for="auto_void_delivery_line" />
+                    <label for="sale_auto_void_delivery_line" />
                     <div class="text-muted">
                         Void the shipping cost line when the delivery is returned before invoicing
                     </div>

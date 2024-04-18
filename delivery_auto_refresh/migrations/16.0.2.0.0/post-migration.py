@@ -10,6 +10,21 @@ def _migrate_setting_to_company(env):
     ):
         env["res.company"].search([]).sale_auto_assign_carrier_on_create = True
 
+    if env["ir.config_parameter"].get_param(
+        "delivery_auto_refresh.auto_add_delivery_line"
+    ):
+        env["res.company"].search([]).sale_auto_add_delivery_line = True
+
+    if env["ir.config_parameter"].get_param(
+        "delivery_auto_refresh.refresh_after_picking"
+    ):
+        env["res.company"].search([]).sale_refresh_delivery_after_picking = True
+
+    if env["ir.config_parameter"].get_param(
+        "delivery_auto_refresh.auto_void_delivery_line"
+    ):
+        env["res.company"].search([]).sale_auto_void_delivery_line = True
+
 
 def migrate(cr, version):
     env = api.Environment(cr, SUPERUSER_ID, {})

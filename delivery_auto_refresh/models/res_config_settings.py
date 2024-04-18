@@ -14,15 +14,15 @@ class ResConfigSettings(models.TransientModel):
     )
     # End migration note
 
-    auto_add_delivery_line = fields.Boolean(
-        "Refresh shipping cost line automatically",
-        config_parameter="delivery_auto_refresh.auto_add_delivery_line",
+    sale_auto_add_delivery_line = fields.Boolean(
+        related="company_id.sale_auto_add_delivery_line",
+        readonly=False,
     )
-    refresh_after_picking = fields.Boolean(
-        "Refresh after picking automatically",
-        config_parameter="delivery_auto_refresh.refresh_after_picking",
+    sale_refresh_delivery_after_picking = fields.Boolean(
+        related="company_id.sale_refresh_delivery_after_picking",
+        readonly=False,
     )
-    auto_void_delivery_line = fields.Boolean(
-        "Void delivery lines automatically",
-        config_parameter="delivery_auto_refresh.auto_void_delivery_line",
+    sale_auto_void_delivery_line = fields.Boolean(
+        related="company_id.sale_auto_void_delivery_line",
+        readonly=False,
     )
