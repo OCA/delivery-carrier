@@ -7,6 +7,13 @@ from odoo import fields, models
 class ResConfigSettings(models.TransientModel):
     _inherit = "res.config.settings"
 
+    # Migration Note 17.0: move this to module sale_order_carrier_auto_assign
+    carrier_auto_assign_on_create = fields.Boolean(
+        related="company_id.carrier_auto_assign_on_create",
+        readonly=False,
+    )
+    # End migration note
+
     auto_add_delivery_line = fields.Boolean(
         "Refresh shipping cost line automatically",
         config_parameter="delivery_auto_refresh.auto_add_delivery_line",
