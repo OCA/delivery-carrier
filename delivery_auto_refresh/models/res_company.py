@@ -12,3 +12,13 @@ class ResCompany(models.Model):
         "Set default shipping method automatically"
     )
     # End migration note
+
+    sale_auto_add_delivery_line = fields.Boolean(
+        "Refresh shipping cost line automatically",
+    )
+    sale_refresh_delivery_after_picking = fields.Boolean(
+        "Refresh delivery after picking automatically",
+    )
+    sale_auto_void_delivery_line = fields.Boolean(
+        "Void delivery lines automatically",
+    )
