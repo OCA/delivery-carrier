@@ -8,7 +8,7 @@ def _migrate_setting_to_company(env):
     if env["ir.config_parameter"].get_param(
         "delivery_auto_refresh.set_default_carrier"
     ):
-        env["res.company"].search([]).carrier_auto_assign_on_create = True
+        env["res.company"].search([]).sale_auto_assign_carrier_on_create = True
 
 
 def migrate(cr, version):

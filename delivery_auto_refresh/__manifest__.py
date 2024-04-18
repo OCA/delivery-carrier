@@ -11,6 +11,8 @@
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": ["delivery", "sale_order_carrier_auto_assign"],
+    "depends": ["delivery"],
+    # Migration Note 17.0: Add dependency to sale_order_carrier_auto_assign
+    # "depends": ["delivery", "sale_order_carrier_auto_assign"],
     "data": ["views/sale_order_views.xml", "views/res_config_settings_views.xml"],
 }
