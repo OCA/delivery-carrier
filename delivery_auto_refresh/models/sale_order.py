@@ -24,6 +24,54 @@ class SaleOrder(models.Model):
 
     # End migration note
 
+    # Migration Note 17.0: move this section to module sale_order_carrier_auto_assign
+    def _set_delivery_carrier(self, set_delivery_line=True):
+        for order in self:
+            delivery_wiz_action = order.action_open_delivery_wizard()
+            delivery_wiz_context = delivery_wiz_action.get("context", {})
+            if not delivery_wiz_context.get("default_carrier_id"):
+                continue
+            delivery_wiz = (
+                self.env[delivery_wiz_action.get("res_model")]
+                .with_context(**delivery_wiz_context)
+                .new({})
+            )
+
+            # Do not override carrier
+            if order.carrier_id:
+                delivery_wiz.carrier_id = order.carrier_id
+
+            # If the carrier isn't allowed, we won't default to it
+            if (
+                delivery_wiz.carrier_id
+                not in delivery_wiz.available_carrier_ids._origin
+            ):
+                continue
+
+            if not set_delivery_line or order.is_all_service:
+                # Only set the carrier
+                if order.carrier_id != delivery_wiz.carrier_id:
+                    order.carrier_id = delivery_wiz.carrier_id
+            else:
+                delivery_wiz._get_shipment_rate()
+                delivery_wiz.button_confirm()
+
+    @api.onchange("partner_id", "partner_shipping_id")
+    def _add_delivery_carrier_on_partner_change(self):
+        partner = self.partner_shipping_id or self.partner_id
+        if not partner:
+            return
+        if self.company_id.sale_auto_assign_carrier_on_create:
+            self._set_delivery_carrier(set_delivery_line=False)
+
+    def _is_auto_set_carrier_on_create(self):
+        self.ensure_one()
+        if self.state not in ("draft", "sent"):
+            return False
+        return self.company_id.sale_auto_assign_carrier_on_create
+
+    # End migration note
+
     def _get_param_auto_add_delivery_line(self):
         # When we have the context 'website_id' it means that we are doing the order from
         # e-commerce. So we don't want to add the delivery line automatically.
@@ -108,6 +156,10 @@ class SaleOrder(models.Model):
             .with_context(auto_refresh_delivery=False)
         )
         for order in orders:
+            # Migration Note 17.0: move this to module sale_order_carrier_auto_assign
+            if not order.carrier_id and order._is_auto_set_carrier_on_create():
+                order._set_delivery_carrier()
+            # End migration note
             order._auto_refresh_delivery()
         return orders
 
