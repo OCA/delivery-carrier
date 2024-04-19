@@ -5,7 +5,7 @@
     "name": "Make Delivery Text Properties Translatable",
     "category": "Hidden",
     "summary": """name and website_description field of delivery carrier setup translatable.""",
-    "version": "15.0.1.0.0",
+    "version": "16.0.1.0.0",
     "depends": [
         "delivery",
     ],
