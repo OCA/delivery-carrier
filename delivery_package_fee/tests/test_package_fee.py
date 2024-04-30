@@ -1,11 +1,11 @@
 # Copyright 2020 Camptocamp
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo.tests.common import Form, SavepointCase
+from odoo.tests.common import Form, TransactionCase
 from odoo.tools import mute_logger
 
 
-class TestPackageFee(SavepointCase):
+class TestPackageFee(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -81,7 +81,7 @@ class TestPackageFee(SavepointCase):
     def _add_sale_carrier(cls, sale, carrier):
         delivery_wizard = Form(
             cls.env["choose.delivery.carrier"].with_context(
-                {"default_order_id": sale.id, "default_carrier_id": carrier.id}
+                default_order_id=sale.id, default_carrier_id=carrier.id
             )
         )
         choose_delivery_carrier = delivery_wizard.save()

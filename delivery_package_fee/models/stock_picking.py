@@ -8,7 +8,7 @@ class StockPicking(models.Model):
 
     def _add_delivery_cost_to_so(self):
         super()._add_delivery_cost_to_so()
-        self._add_package_fee_cost_to_so()
+        return self._add_package_fee_cost_to_so()
 
     def _add_package_fee_cost_to_so(self):
         if not self.carrier_id.package_fee_ids:
