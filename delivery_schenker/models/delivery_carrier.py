@@ -266,7 +266,7 @@ class DeliveryCarrier(models.Model):
         """
         vals = {
             "type": address_type,
-            "name1": partner.name,
+            "name1": partner.display_name,
             "locationType": location_type,  # POSTAL or PHYSICAL
             "personType": person_type,  # PERSON OR COMPANY
             "street": partner.street,
