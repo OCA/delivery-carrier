@@ -98,6 +98,9 @@ Contributors
 -  Dave Lasley <dave@laslabs.com>
 -  Timothée Ringeard <timothee.ringeard@camptocamp.com>
 -  Pimolnat Suntian <pimolnats@ecosoft.co.th>
+-  `Binhex <https://binhex.cloud//com>`__:
+
+   -  David Luis Mora <d.luis@binhex.cloud>
 
 Maintainers
 -----------
