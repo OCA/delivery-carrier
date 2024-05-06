@@ -12,17 +12,15 @@ class ManifestWizard(models.TransientModel):
     carrier_id = fields.Many2one(
         comodel_name="delivery.carrier",
         string="Carrier",
-        states={"done": [("readonly", True)]},
         required=True,
     )
     from_date = fields.Datetime(required=True)
     to_date = fields.Datetime()
-    file_out = fields.Binary("Manifest", readonly=True)
-    filename = fields.Char("File Name", readonly=True)
-    notes = fields.Text("Result", readonly=True)
+    file_out = fields.Binary("Manifest")
+    filename = fields.Char("File Name")
+    notes = fields.Text("Result")
     state = fields.Selection(
         [("init", "Init"), ("file", "File"), ("end", "END")],
-        readonly=True,
         default="init",
     )
 

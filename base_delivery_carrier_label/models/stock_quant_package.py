@@ -13,7 +13,7 @@ class StockQuantPackage(models.Model):
         help="Link to the carrier's tracking page for this package."
     )
 
-    @api.depends("shipping_weight")
+    @api.depends("shipping_weight", "quant_ids", "package_type_id")
     def _compute_weight(self):
         """Use shipping_weight if defined
         otherwise fallback on the computed weight
@@ -22,7 +22,7 @@ class StockQuantPackage(models.Model):
         for pack in self:
             if pack.shipping_weight:
                 pack.weight = pack.shipping_weight
-            elif not pack.quant_ids and not self.env.context.get("picking_id"):
+            elif pack.quant_ids and not self.env.context.get("picking_id"):
                 # package.pack_operations would be too easy
                 operations = self.env["stock.move.line"].search(
                     [
@@ -31,6 +31,7 @@ class StockQuantPackage(models.Model):
                         ("product_id", "!=", False),
                     ]
                 )
+
                 pack.weight = operations.get_weight()
             else:
                 to_do |= pack

@@ -6,9 +6,10 @@ from odoo.tests.common import TransactionCase
 
 
 class ManifestWizardCase(TransactionCase):
-    def setUp(self):
-        super(ManifestWizardCase, self).setUp()
-        self.free_delivery = self.env.ref("delivery.free_delivery_carrier")
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.free_delivery = cls.env.ref("delivery.free_delivery_carrier")
 
     def test_wizard(self):
         """Create manifest wizard."""

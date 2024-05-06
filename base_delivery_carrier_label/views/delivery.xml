@@ -8,13 +8,13 @@
             <form string="delivery_carrier_option">
                 <group>
                     <group>
-                        <field name="name" />
+                        <field name="name" readonly="True" />
                     </group>
                     <group>
                         <field name="partner_id" />
-                        <field name="code" />
+                        <field name="code" readonly="True" />
                     </group>
-                    <field name="description" />
+                    <field name="description" readonly="True" />
                 </group>
             </form>
         </field>
@@ -27,8 +27,8 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="partner_id" />
-                <field name="code" />
-                <field name="name" />
+                <field name="code" readonly="True" />
+                <field name="name" readonly="True" />
             </tree>
         </field>
     </record>
@@ -41,21 +41,12 @@
                 <group>
                     <group>
                         <field name="active" />
-                        <field
-                            name="mandatory"
-                            attrs="{'readonly': [('readonly_flag','=',True)]}"
-                        />
-                        <field
-                            name="by_default"
-                            attrs="{'invisible': [('mandatory', '=', True)]}"
-                        />
-                        <field name="readonly_flag" attrs="{'invisible': True}" />
+                        <field name="mandatory" readonly="readonly_flag" />
+                        <field name="by_default" invisible="mandatory" />
+                        <field name="readonly_flag" invisible="True" />
                     </group>
                     <group>
-                        <field
-                            name="tmpl_option_id"
-                            attrs="{'readonly': [('readonly_flag','=',True)]}"
-                        />
+                        <field name="tmpl_option_id" readonly="readonly_flag" />
                     </group>
                     <newline />
                     <field name="description" readonly="True" />

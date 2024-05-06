@@ -42,7 +42,7 @@ class DeliveryCarrier(models.Model):
             result = super().send_shipping(pickings)
         if not result:
             result = self.alternative_send_shipping(pickings)
-        for result_dict, picking in zip(result, pickings):
+        for result_dict, picking in zip(result, pickings, strict=False):
             for label in result_dict.get("labels", []):
                 picking.attach_shipping_label(label)
         return result

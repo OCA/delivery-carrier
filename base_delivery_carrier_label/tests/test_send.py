@@ -3,7 +3,7 @@
 import base64
 from unittest import mock
 
-from odoo.tests.common import Form, TransactionCase
+from odoo.tests.common import TransactionCase
 
 
 class TestSend(TransactionCase):
@@ -12,13 +12,13 @@ class TestSend(TransactionCase):
     def test_send(self):
         """Test if the module picks up labels returned from delivery.carrier#send"""
         carrier = self.env.ref("delivery.delivery_carrier")
-        picking_form = Form(
-            self.env["stock.picking"].with_context(
+        picking = (
+            self.env["stock.picking"]
+            .with_context(
                 default_picking_type_id=self.env.ref("stock.picking_type_out").id,
             )
+            .create({"carrier_id": carrier.id})
         )
-        picking_form.carrier_id = carrier
-        picking = picking_form.save()
         package = self.env["stock.quant.package"].create({})
 
         with mock.patch.object(type(carrier), "base_on_rule_send_shipping") as mocked:

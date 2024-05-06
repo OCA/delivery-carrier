@@ -6,20 +6,20 @@
         <field name="type">form</field>
         <field name="arch" type="xml">
             <form string="Manifest">
-                <field name="state" invisible="1" />
-                <group attrs="{'invisible': [('state', '!=', 'init')]}">
-                    <field name="carrier_id" />
+                <field name="state" invisible="True" readonly="True" />
+                <group invisible="state != 'init'">
+                    <field name="carrier_id" readonly="state == 'done'" />
                     <field name="from_date" />
                     <field name="to_date" />
                 </group>
-                <group attrs="{'invisible': [('state', '!=', 'file')]}">
-                    <field name="file_out" filename="filename" />
-                    <field name="filename" invisible="1" />
+                <group invisible="state != 'file'">
+                    <field name="file_out" filename="filename" readonly="True" />
+                    <field name="filename" invisible="True" readonly="True" />
                 </group>
-                <group attrs="{'invisible': [('state', '=', 'init')]}">
-                    <field name="notes" />
+                <group invisible="state == 'init'">
+                    <field name="notes" readonly="True" />
                 </group>
-                <footer attrs="{'invisible': [('state', '!=', 'init')]}">
+                <footer invisible="state != 'init'">
                     <button
                         name="get_manifest_file"
                         type="object"

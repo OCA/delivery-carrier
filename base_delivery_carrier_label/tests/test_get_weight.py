@@ -78,7 +78,7 @@ class TestGetWeight(TransactionCase):
             operations |= self._create_operation(
                 picking,
                 {
-                    "reserved_uom_qty": 1,
+                    "quantity": 1,
                     "product_id": product.id,
                     "product_uom_id": product.uom_id.id,
                     "result_package_id": package.id,
@@ -90,7 +90,7 @@ class TestGetWeight(TransactionCase):
         for operation in operations:
             self.assertEqual(
                 operation.get_weight(),
-                operation.product_id.weight * operation.reserved_uom_qty,
+                operation.product_id.weight * operation.quantity_product_uom,
             )
 
         # test package.weight
@@ -109,7 +109,7 @@ class TestGetWeight(TransactionCase):
             operations |= self._create_operation(
                 picking,
                 {
-                    "reserved_uom_qty": 1,
+                    "quantity": 1,
                     "product_id": product.id,
                     "product_uom_id": product.uom_id.id,
                     "result_package_id": package.id,
@@ -122,7 +122,7 @@ class TestGetWeight(TransactionCase):
         for operation in operations:
             self.assertEqual(
                 operation.get_weight(),
-                operation.product_id.weight * operation.reserved_uom_qty,
+                operation.product_id.weight * operation.quantity_product_uom,
             )
 
         # test package.weight
@@ -136,11 +136,11 @@ class TestGetWeight(TransactionCase):
         picking = self._generate_picking(products)
         package = self.env["stock.quant.package"].create({})
         operations = self.env["stock.move.line"]
-        for idx, product in enumerate(products):
+        for idx, product in enumerate(products, start=1):
             operations |= self._create_operation(
                 picking,
                 {
-                    "reserved_uom_qty": idx,  # nice one
+                    "quantity": idx,  # nice one
                     "product_id": product.id,
                     "product_uom_id": product.uom_id.id,
                     "result_package_id": package.id,
@@ -152,7 +152,7 @@ class TestGetWeight(TransactionCase):
         for operation in operations:
             self.assertEqual(
                 operation.get_weight(),
-                operation.product_id.weight * operation.reserved_uom_qty,
+                operation.product_id.weight * operation.quantity_product_uom,
             )
 
         # test package._weight
@@ -208,7 +208,7 @@ class TestGetWeight(TransactionCase):
             operations |= self._create_operation(
                 picking,
                 {
-                    "reserved_uom_qty": 1,
+                    "quantity": 1,
                     "product_id": product.id,
                     "product_uom_id": product.uom_id.id,
                     "result_package_id": package.id,
