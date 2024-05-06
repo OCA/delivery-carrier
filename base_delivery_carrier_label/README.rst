@@ -17,21 +17,22 @@ Base module for carrier labels
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fdelivery--carrier-lightgray.png?logo=github
-    :target: https://github.com/OCA/delivery-carrier/tree/16.0/base_delivery_carrier_label
+    :target: https://github.com/OCA/delivery-carrier/tree/17.0/base_delivery_carrier_label
     :alt: OCA/delivery-carrier
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/delivery-carrier-16-0/delivery-carrier-16-0-base_delivery_carrier_label
+    :target: https://translation.odoo-community.org/projects/delivery-carrier-17-0/delivery-carrier-17-0-base_delivery_carrier_label
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/delivery-carrier&target_branch=16.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/delivery-carrier&target_branch=17.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-This module adds some function and generic stuff to help for carrier label generation.
-For example it adds the concept of option on carriers that can differ depending on the picking or class to store carrier accounts
-This module doesn't do anything by itself, it serves as a
-base module for other carrier-specific modules.
+This module adds some function and generic stuff to help for carrier
+label generation. For example it adds the concept of option on carriers
+that can differ depending on the picking or class to store carrier
+accounts This module doesn't do anything by itself, it serves as a base
+module for other carrier-specific modules.
 
 **Table of contents**
 
@@ -41,32 +42,30 @@ base module for other carrier-specific modules.
 Usage
 =====
 
-** How does it works ? **
-
+\*\* How does it works ? \*\*
 
 In picking UI a button "Send to shipper" trigger label generation
-calling `send_to_shipper()` in models/stock.picking.py
+calling send_to_shipper() in models/stock.picking.py
 
+\*\* How to implement my own carrier ? \*\*
 
-** How to implement my own carrier ? **
+Define a method {carrier}_send_shipping() which is called by
+\_send_shipping native method. Make it return a list of dict of this
+form :
 
+.. code:: python
 
-Define a method `{carrier}_send_shipping()` which is called by _send_shipping native method.
-Make it return a list of dict of this form :
-
-.. code-block:: python
-
-  {
-      "exact_price": price,
-      "tracking_number": 'number'
-      "labels": [{
-          "package_id": package_id,
-          "name": filename,
-          "datas": file_content (base64),
-          "file_type": extension,
-          "tracking_number": package_number
-      }]
-  }
+   {
+       "exact_price": price,
+       "tracking_number": 'number'
+       "labels": [{
+           "package_id": package_id,
+           "name": filename,
+           "datas": file_content (base64),
+           "file_type": extension,
+           "tracking_number": package_number
+       }]
+   }
 
 Bug Tracker
 ===========
@@ -74,7 +73,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/delivery-carrier/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/delivery-carrier/issues/new?body=module:%20base_delivery_carrier_label%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/delivery-carrier/issues/new?body=module:%20base_delivery_carrier_label%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -82,26 +81,26 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * Camptocamp
 * Akretion
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* David BEAL <david.beal@akretion.com>
-* Sébastien BEAU <sebastien.beau@akretion.com>
-* Yannick Vaucher <yannick.vaucher@camptocamp.com>
-* Alexis de Lattre <alexis.delattre@akretion.com>
-* Angel Moya <angel.moya@pesol.es>
-* Ismael Calvo <ismael.calvo@factorlibre.com>
-* Dave Lasley <dave@laslabs.com>
-* Timothée Ringeard <timothee.ringeard@camptocamp.com>
-* Pimolnat Suntian <pimolnats@ecosoft.co.th>
+-  David BEAL <david.beal@akretion.com>
+-  Sébastien BEAU <sebastien.beau@akretion.com>
+-  Yannick Vaucher <yannick.vaucher@camptocamp.com>
+-  Alexis de Lattre <alexis.delattre@akretion.com>
+-  Angel Moya <angel.moya@pesol.es>
+-  Ismael Calvo <ismael.calvo@factorlibre.com>
+-  Dave Lasley <dave@laslabs.com>
+-  Timothée Ringeard <timothee.ringeard@camptocamp.com>
+-  Pimolnat Suntian <pimolnats@ecosoft.co.th>
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 
@@ -113,6 +112,6 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-This module is part of the `OCA/delivery-carrier <https://github.com/OCA/delivery-carrier/tree/16.0/base_delivery_carrier_label>`_ project on GitHub.
+This module is part of the `OCA/delivery-carrier <https://github.com/OCA/delivery-carrier/tree/17.0/base_delivery_carrier_label>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.

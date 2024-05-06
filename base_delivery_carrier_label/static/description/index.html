@@ -368,11 +368,12 @@ ul.auto-toc {
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !! source digest: sha256:0e3f544d15b8a8af6e102e1395183b4b0b410f0b7645d584c7c08ddf15db6329
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-<p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html"><img alt="License: AGPL-3" src="https://img.shields.io/badge/licence-AGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/OCA/delivery-carrier/tree/16.0/base_delivery_carrier_label"><img alt="OCA/delivery-carrier" src="https://img.shields.io/badge/github-OCA%2Fdelivery--carrier-lightgray.png?logo=github" /></a> <a class="reference external image-reference" href="https://translation.odoo-community.org/projects/delivery-carrier-16-0/delivery-carrier-16-0-base_delivery_carrier_label"><img alt="Translate me on Weblate" src="https://img.shields.io/badge/weblate-Translate%20me-F47D42.png" /></a> <a class="reference external image-reference" href="https://runboat.odoo-community.org/builds?repo=OCA/delivery-carrier&amp;target_branch=16.0"><img alt="Try me on Runboat" src="https://img.shields.io/badge/runboat-Try%20me-875A7B.png" /></a></p>
-<p>This module adds some function and generic stuff to help for carrier label generation.
-For example it adds the concept of option on carriers that can differ depending on the picking or class to store carrier accounts
-This module doesn’t do anything by itself, it serves as a
-base module for other carrier-specific modules.</p>
+<p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html"><img alt="License: AGPL-3" src="https://img.shields.io/badge/licence-AGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/OCA/delivery-carrier/tree/17.0/base_delivery_carrier_label"><img alt="OCA/delivery-carrier" src="https://img.shields.io/badge/github-OCA%2Fdelivery--carrier-lightgray.png?logo=github" /></a> <a class="reference external image-reference" href="https://translation.odoo-community.org/projects/delivery-carrier-17-0/delivery-carrier-17-0-base_delivery_carrier_label"><img alt="Translate me on Weblate" src="https://img.shields.io/badge/weblate-Translate%20me-F47D42.png" /></a> <a class="reference external image-reference" href="https://runboat.odoo-community.org/builds?repo=OCA/delivery-carrier&amp;target_branch=17.0"><img alt="Try me on Runboat" src="https://img.shields.io/badge/runboat-Try%20me-875A7B.png" /></a></p>
+<p>This module adds some function and generic stuff to help for carrier
+label generation. For example it adds the concept of option on carriers
+that can differ depending on the picking or class to store carrier
+accounts This module doesn’t do anything by itself, it serves as a base
+module for other carrier-specific modules.</p>
 <p><strong>Table of contents</strong></p>
 <div class="contents local topic" id="contents">
 <ul class="simple">
@@ -390,10 +391,11 @@ base module for other carrier-specific modules.</p>
 <h1><a class="toc-backref" href="#toc-entry-1">Usage</a></h1>
 <p>** How does it works ? **</p>
 <p>In picking UI a button “Send to shipper” trigger label generation
-calling <cite>send_to_shipper()</cite> in models/stock.picking.py</p>
+calling send_to_shipper() in models/stock.picking.py</p>
 <p>** How to implement my own carrier ? **</p>
-<p>Define a method <cite>{carrier}_send_shipping()</cite> which is called by _send_shipping native method.
-Make it return a list of dict of this form :</p>
+<p>Define a method {carrier}_send_shipping() which is called by
+_send_shipping native method. Make it return a list of dict of this
+form :</p>
 <pre class="code python literal-block">
 <span class="p">{</span><span class="w">
 </span>    <span class="s2">&quot;exact_price&quot;</span><span class="p">:</span> <span class="n">price</span><span class="p">,</span><span class="w">
@@ -413,7 +415,7 @@ Make it return a list of dict of this form :</p>
 <p>Bugs are tracked on <a class="reference external" href="https://github.com/OCA/delivery-carrier/issues">GitHub Issues</a>.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-<a class="reference external" href="https://github.com/OCA/delivery-carrier/issues/new?body=module:%20base_delivery_carrier_label%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**">feedback</a>.</p>
+<a class="reference external" href="https://github.com/OCA/delivery-carrier/issues/new?body=module:%20base_delivery_carrier_label%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**">feedback</a>.</p>
 <p>Do not contact contributors directly about support or help with technical issues.</p>
 </div>
 <div class="section" id="credits">
@@ -446,7 +448,7 @@ If you spotted it first, help us to smash it by providing a detailed and welcome
 <p>OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.</p>
-<p>This module is part of the <a class="reference external" href="https://github.com/OCA/delivery-carrier/tree/16.0/base_delivery_carrier_label">OCA/delivery-carrier</a> project on GitHub.</p>
+<p>This module is part of the <a class="reference external" href="https://github.com/OCA/delivery-carrier/tree/17.0/base_delivery_carrier_label">OCA/delivery-carrier</a> project on GitHub.</p>
 <p>You are welcome to contribute. To learn how please visit <a class="reference external" href="https://odoo-community.org/page/Contribute">https://odoo-community.org/page/Contribute</a>.</p>
 </div>
 </div>
