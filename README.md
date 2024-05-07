@@ -26,7 +26,7 @@ addon | version | maintainers | summary
 [delivery_auto_refresh](delivery_auto_refresh/) | 15.0.1.0.2 |  | Auto-refresh delivery price in sales orders
 [delivery_carrier_info](delivery_carrier_info/) | 15.0.1.0.1 |  | Add code and description on carrier
 [delivery_carrier_multi_zip](delivery_carrier_multi_zip/) | 15.0.1.0.0 |  | Multiple ZIP intervals for the same delivery method
-[delivery_cttexpress](delivery_cttexpress/) | 15.0.1.1.0 |  | Delivery Carrier implementation for CTT Express API
+[delivery_cttexpress](delivery_cttexpress/) | 15.0.1.1.1 |  | Delivery Carrier implementation for CTT Express API
 [delivery_free_fee_removal](delivery_free_fee_removal/) | 15.0.1.0.0 |  | Hide free fee lines on sales orders
 [delivery_multi_destination](delivery_multi_destination/) | 15.0.1.0.2 |  | Multiple destinations for the same delivery method
 [delivery_package_number](delivery_package_number/) | 15.0.2.2.0 |  | Set or compute number of packages for a picking
