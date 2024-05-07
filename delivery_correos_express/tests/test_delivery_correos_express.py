@@ -48,7 +48,7 @@ class TestCorreosExpressParcel(common.SingleTransactionCase):
         cls.sale_order.carrier_id = cls.carrier_correos_express.id
         cls.sale_order.action_confirm()
         cls.picking = cls.sale_order.picking_ids[0]
-        cls.picking.move_lines.quantity_done = 20
+        cls.picking.move_ids.quantity_done = 20
 
     @mock.patch(
         "%s.create_shipment" % request_model,
