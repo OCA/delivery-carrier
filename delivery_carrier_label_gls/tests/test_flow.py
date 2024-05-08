@@ -7,6 +7,12 @@ from .common import TestGLS, mock_gls_client
 
 
 class TestGlsFlow(TestGLS):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls._create_gls_carrier()
+        cls._create_sale_order()
+
     def test_flow(self):
         """We test the complete flow, since actions depend on each other.
         To call cancel, you need to call create before; same with the report.
