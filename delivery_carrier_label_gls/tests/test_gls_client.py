@@ -12,6 +12,12 @@ from .common import TestGLS
 # and shipping method.
 @unittest.skip("gls_client")
 class TestGlsClient(TestGLS):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls._create_gls_carrier()
+        cls._create_sale_order()
+
     @property
     def create_payload(self):
         return {
