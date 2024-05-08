@@ -36,22 +36,7 @@ class TestGLS(TransactionCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.company = cls.env.user.company_id
-        vals_gls_product = {
-            "default_code": "Code ship GLS",
-            "type": "service",
-            "sale_ok": False,
-            "name": "Name ship GLS",
-        }
-        cls.gls_product = cls.env["product.product"].create(vals_gls_product)
-        vals_gls_carrier_account = cls._get_gls_carrier_account_vals()
-        cls.gls_carrier_account = cls.env["carrier.account"].create(
-            vals_gls_carrier_account
-        )
-        vals_gls_carrier = cls._get_gls_carrier_vals()
-        cls.gls_carrier = cls.env["delivery.carrier"].create(vals_gls_carrier)
-        cls.gls_client = cls.env["delivery.client.gls"].create(
-            {"carrier_id": cls.gls_carrier.id}
-        )
+
         vals_product = {"name": "product", "type": "product", "weight": 0.5}
         cls.product = cls.env["product.product"].create(vals_product)
         vals_partner = {
@@ -69,6 +54,9 @@ class TestGLS(TransactionCase):
         )
         cls.customer_location = cls.env.ref("stock.stock_location_customers")
         cls.gls_parcel_shop = "0560005537"
+
+    @classmethod
+    def _create_sale_order(cls):
         vals_sale_order = {
             "partner_id": cls.partner.id,
             "gls_parcel_shop": cls.gls_parcel_shop,
@@ -81,6 +69,33 @@ class TestGLS(TransactionCase):
             "product_id": cls.product.id,
         }
         cls.order_line = cls.env["sale.order.line"].create(vals_order_line)
+
+    @classmethod
+    def _create_gls_account(cls):
+        vals_gls_carrier_account = cls._get_gls_carrier_account_vals()
+        cls.gls_carrier_account = cls.env["carrier.account"].create(
+            vals_gls_carrier_account
+        )
+
+    @classmethod
+    def _create_gls_product(cls):
+        vals_gls_product = {
+            "default_code": "Code ship GLS",
+            "type": "service",
+            "sale_ok": False,
+            "name": "Name ship GLS",
+        }
+        cls.gls_product = cls.env["product.product"].create(vals_gls_product)
+
+    @classmethod
+    def _create_gls_carrier(cls):
+        cls._create_gls_account()
+        cls._create_gls_product()
+        vals_gls_carrier = cls._get_gls_carrier_vals()
+        cls.gls_carrier = cls.env["delivery.carrier"].create(vals_gls_carrier)
+        cls.gls_client = cls.env["delivery.client.gls"].create(
+            {"carrier_id": cls.gls_carrier.id}
+        )
 
 
 @contextmanager

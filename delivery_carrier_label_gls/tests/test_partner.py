@@ -7,6 +7,12 @@ from .common import TestGLS
 
 
 class TestPartner(TestGLS):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls._create_gls_carrier()
+        cls._create_sale_order()
+
     def test_belgian_zip(self):
         """Check that we have a string formatting parameter"""
         expected = "1367"

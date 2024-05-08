@@ -13,6 +13,12 @@ gls_required_fields = [
 
 
 class TestCarrierConstraints(TestGLS):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls._create_gls_account()
+        cls._create_gls_product()
+
     def test_missing_field(self):
         for field in gls_required_fields:
             values = self._get_gls_carrier_vals()
