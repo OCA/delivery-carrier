@@ -82,8 +82,10 @@ class SaleOrder(models.Model):
     def write(self, vals):
         """Create or refresh delivery line after saving."""
         res = super().write(vals)
-        if self._get_param_auto_add_delivery_line() and not self.env.context.get(
-            "auto_refresh_delivery"
+        if (
+            "order_line" in vals
+            and self._get_param_auto_add_delivery_line()
+            and not self.env.context.get("auto_refresh_delivery")
         ):
             for order in self:
                 delivery_line = order.order_line.filtered("is_delivery")
