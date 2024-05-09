@@ -30,7 +30,9 @@ class DeliveryCarrier(models.Model):
     def _onchange_destination_type(self):
         """Define the corresponding value to avoid creation error with UX."""
         if self.destination_type == "multi" and self.child_ids and not self.product_id:
-            self.product_id = fields.first(self.child_ids.product_id) or self.env.ref('delivery_multi_destination.dummy_shipping_product')
+            self.product_id = fields.first(self.child_ids.product_id) or self.env.ref(
+                "delivery_multi_destination.dummy_shipping_product"
+            )
 
     def search(self, args, offset=0, limit=None, order=None, count=False):
         """Don't show by default children carriers."""
