@@ -13,5 +13,5 @@
     "installable": True,
     "depends": ["delivery"],
     "demo": ["demo/delivery_carrier_demo.xml"],
-    "data": ["views/delivery_carrier_view.xml"],
+    "data": ["data/product_product.xml", "views/delivery_carrier_view.xml"],
 }
