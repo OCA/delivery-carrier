@@ -57,5 +57,7 @@ class DeliveryCarrier(models.Model):
         if self.ids:
             pattern_query += "AND id IN %s"
             ids = tuple(self.ids)
+        else:
+            pattern_query += "AND active"
         pattern_query += ";"
         return (pattern_query, [ids])
