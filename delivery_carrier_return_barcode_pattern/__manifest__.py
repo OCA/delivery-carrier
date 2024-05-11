@@ -4,7 +4,7 @@
 {
     "name": "Delivery Carrier Return Barcode Pattern",
     "summary": "Allow to define a return barcode pattern on delivery methods",
-    "version": "14.0.1.0.0",
+    "version": "14.0.1.0.1",
     "category": "Delivery",
     "website": "https://github.com/OCA/delivery-carrier",
     "author": "Camptocamp SA, Odoo Community Association (OCA)",
