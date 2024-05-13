@@ -14,6 +14,7 @@ class StockPicking(models.Model):
         store=True,
         default=0,
         copy=False,
+        tracking=True,
     )
 
     @api.depends("package_ids")
