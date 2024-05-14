@@ -279,6 +279,11 @@ msgid "ID"
 msgstr ""
 
 #. module: delivery_cttexpress
+#: model:ir.model.fields,field_description:delivery_cttexpress.field_delivery_carrier__cttexpress_label_delay
+msgid "Label Fetch Delay (seconds)"
+msgstr ""
+
+#. module: delivery_cttexpress
 #: model_terms:ir.ui.view,arch_db:delivery_cttexpress.view_delivery_carrier_form
 msgid "Label format"
 msgstr "Formato de etiqueta"
@@ -429,6 +434,13 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:delivery_cttexpress.view_delivery_carrier_form
 msgid "Test connection"
 msgstr "Comprobar conexión"
+
+#. module: delivery_cttexpress
+#: model:ir.model.fields,help:delivery_cttexpress.field_delivery_carrier__cttexpress_label_delay
+msgid ""
+"The server might not be ready to deliver the label right after the shipping "
+"is saved. We need to introduce a little delay. Tipacally 1 s will be enough"
+msgstr ""
 
 #. module: delivery_cttexpress
 #: code:addons/delivery_cttexpress/models/delivery_carrier.py:0
