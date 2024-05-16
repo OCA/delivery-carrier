@@ -39,9 +39,9 @@ class DeliveryCarrier(models.Model):
     # Maybe we will merge all this in future versions
     def get_tracking_link(self, picking):
         if self._is_roulier():
-            packages = picking._get_packages_from_picking()
+            packages = picking.package_ids
             first_package = packages and packages[0]
             if first_package:
-                return first_package._get_tracking_link(picking)
+                return first_package._get_tracking_link()
         else:
             return super().get_tracking_link(picking)
