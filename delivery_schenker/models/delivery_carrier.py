@@ -353,10 +353,6 @@ class DeliveryCarrier(models.Model):
         return product.volume * qty
 
     def _schenker_shipping_information_package_volume(self, picking, package):
-        # TODO: Refactor this and move this into own auto_install module
-        # Volume calculations can be unfolded with stock_quant_package_dimension
-        if hasattr(package, "volume"):
-            return package.volume
         return sum(
             [
                 self._schenker_shipping_information_product_volume(
@@ -366,12 +362,11 @@ class DeliveryCarrier(models.Model):
             ]
         )
 
-    def _schenker_shipping_information_round_weight(self, weight, precision_digits=2):
-        return float_round(weight, precision_digits=precision_digits)
-
-    def _schenker_shipping_information_round_volume(self, volume, precision_digits=2):
+    def _schenker_shipping_information_round_dimension(
+        self, dimension, precision_digits=2
+    ):
         """The schenker api requires 2 decimal points"""
-        return float_round(volume, precision_digits=precision_digits)
+        return float_round(dimension, precision_digits=precision_digits)
 
     def _schenker_shipping_information_package(self, picking, package):
         weight = package.shipping_weight or package.weight
@@ -379,8 +374,8 @@ class DeliveryCarrier(models.Model):
             # Dangerous goods is not supported
             "dgr": False,
             "cargoDesc": picking.name + " / " + package.name,
-            "grossWeight": self._schenker_shipping_information_round_weight(weight),
-            "volume": self._schenker_shipping_information_round_volume(
+            "grossWeight": self._schenker_shipping_information_round_dimension(weight),
+            "volume": self._schenker_shipping_information_round_dimension(
                 self._schenker_shipping_information_package_volume(picking, package)
             ),
             "packageType": (
@@ -436,10 +431,10 @@ class DeliveryCarrier(models.Model):
                 "dgr": False,
                 "cargoDesc": picking.name,
                 # For a more complex solution use packaging properly
-                "grossWeight": self._schenker_shipping_information_round_weight(
+                "grossWeight": self._schenker_shipping_information_round_dimension(
                     weight / picking.number_of_packages
                 ),
-                "volume": self._schenker_shipping_information_round_volume(
+                "volume": self._schenker_shipping_information_round_dimension(
                     self._schenker_shipping_information_without_packages_volume(picking)
                 ),
                 "packageType": self.schenker_default_packaging_id.shipper_package_code,
@@ -457,7 +452,7 @@ class DeliveryCarrier(models.Model):
         """
         if self.schenker_measure_unit == "VOLUME":
             return {
-                "measureUnitVolume": self._schenker_shipping_information_round_volume(
+                "measureUnitVolume": self._schenker_shipping_information_round_dimension(
                     vals["shippingInformation"]["volume"]
                 )
             }
@@ -494,12 +489,12 @@ class DeliveryCarrier(models.Model):
                 "incotermLocation": picking.partner_id.display_name[:35],
                 "productCode": self._schenker_shipping_product(),
                 "measurementType": self._schenker_metric_system(),
-                "grossWeight": self._schenker_shipping_information_round_weight(
+                "grossWeight": self._schenker_shipping_information_round_dimension(
                     picking.shipping_weight
                 ),
                 "shippingInformation": {
                     "shipmentPosition": shipping_information,
-                    "grossWeight": self._schenker_shipping_information_round_weight(
+                    "grossWeight": self._schenker_shipping_information_round_dimension(
                         picking.shipping_weight
                     ),
                     "volume": self._schenker_get_total_shipping_volume(
