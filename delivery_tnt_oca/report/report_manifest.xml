@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="report_tnt_manifest_document">
+        <div class="header">
+            <t t-set="pick" t-value="docs[0]" />
+            <div class="row">
+                <div class="col-6">
+                    <p class="mb-0"><strong>COLLECTION MANIFEST (SUMMARY)</strong></p>
+                    <p class="mb-0"><span>Sender Account:</span> <span
+                            t-field="pick.carrier_id.tnt_oca_ws_account"
+                        /></p>
+                    <p class="mb-0"><span>Sender Name:</span> <span
+                            t-field="pick.company_id.name"
+                        /></p>
+                    <p class="mb-0"><span>Address:</span> <span
+                            t-field="pick.company_id.street"
+                        /></p>
+                </div>
+                <div class="col-3 pt-1">
+                    <img
+                        src="/delivery_tnt_oca/static/src/img/black_logo.jpg"
+                        style="width: 90%;object-fit: contain;"
+                    />
+                </div>
+                <div class="col-3">
+                    <p class="mb-0"><span
+                            t-esc="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y %H:%M')"
+                        /></p>
+                    <p class="mb-0">
+                        <span>Page</span>
+                        <span class="page" />
+                        <span>of</span>
+                        <span class="topage" />
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="article">
+            <div
+                class="page"
+                style="font-family:'Gilroy Light', sans-serif;font-weight: lighter;font-size: 10pt"
+            >
+                <div class="row" style="padding:0">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Con Nr</th>
+                                <th>No of Pieces</th>
+                                <th>Weight(kg)</th>
+                                <th>Shipper Ref.</th>
+                                <th>Receiver</th>
+                                <th>Address</th>
+                                <th>Postal Code</th>
+                                <th>City</th>
+                                <th>Destination</th>
+                                <th>Service</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-set="total_w" t-value="0.0" />
+                            <t t-set="total_p" t-value="0" />
+                            <t t-foreach="docs" t-as="doc">
+                                <tr>
+                                    <td>
+
+                                        <span t-field="doc.carrier_tracking_ref" />
+                                    </td>
+                                    <td>
+                                        <span t-field="doc.number_of_packages" />
+                                    </td>
+                                    <td>
+                                        <span t-field="doc.weight" />
+                                    </td>
+                                    <td>
+                                        <span t-field="doc.name" />
+                                    </td>
+                                    <td>
+                                        <span t-field="doc.partner_id.name" />
+                                    </td>
+                                    <td>
+                                        <span t-field="doc.partner_id.street" />
+                                    </td>
+                                    <td>
+                                        <span t-field="doc.partner_id.zip" />
+                                    </td>
+                                    <td>
+                                        <span t-field="doc.partner_id.city" />
+                                    </td>
+                                    <td>
+                                        <span
+                                            t-field="doc.partner_id.country_id.name"
+                                        />
+                                    </td>
+                                    <td>
+                                        <span
+                                            t-field="doc.carrier_id.tnt_product_code_n"
+                                        />
+                                    </td>
+                                    <t t-set="total_w" t-value="total_w + doc.weight" />
+                                    <t
+                                        t-set="total_p"
+                                        t-value="total_p + doc.number_of_packages"
+                                    />
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row mt-3" style="border-bottom:1px solid black">
+                    <div class="col-12">
+                        <strong>Account</strong> <strong
+                            t-field="pick.carrier_id.tnt_oca_ws_account"
+                        /> <strong>Totals</strong>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <span t-esc="len(docs)" /> <![CDATA[]]>        <span
+                            t-esc="total_p"
+                        />       <span t-esc="total_w" />
+                    </div>
+                </div>
+                <div class="row" style="border-bottom:1px solid black">
+                    <div class="col-12">
+                        <strong>Sender</strong>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <span t-esc="len(docs)" /> <span t-esc="total_p" /> <span
+                            t-esc="total_w"
+                        />
+                    </div>
+                </div>
+                <div class="row" style="border-bottom:1px solid black">
+                    <div class="col-12">
+                        <strong>Grand Totals</strong>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <span t-esc="len(docs)" /> <span t-esc="total_p" /> <span
+                            t-esc="total_w"
+                        />
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-6">
+                        <p class="mb-0"><strong
+                            >Sender's Signature______________________</strong></p>
+                        <p class="mb-0 mt-5"><strong
+                            >Received by TNT_________________________</strong></p>
+                    </div>
+                    <div class="col-6">
+                        <p class="mb-0"><strong>Date</strong> <strong
+                                t-esc="datetime.date.today()"
+                                t-options="{'widget':'date','format':'dd/MM/yyyy'}"
+                            /></p>
+                        <p class="mb-0 mt-5"><strong
+                            >Date: ____/____/____ Time: ____:____</strong></p>
+                    </div>
+                </div>
+                <div class="row mt-5 pt-5" style="border-bottom:1px solid black">
+                    <span
+                    >The consignment(s) has been loaded by TNT or a designated agent of TNT and a check of the number and condition of the consignment(s) has been undertaken by TNT.</span>
+                </div>
+                <div class="row" style="border-bottom:1px solid black">
+                    <span
+                    >TNT'S LIABILITY FOR LOSS, DAMAGE AND DELAY IS LIMITED BY THE CMR CONVENTION OR THE WARSAW CONVENTION WHICHEVER IS APPLICABLE. THE SENDER AGREES THAT
+                        THE GENERAL CONDITIONS, WHICH CAN BE VIEWED AT https://www.tnt.com/terms , ARE ACCEPTABLE AND GOVERN THIS CONTRACT. IF NO SERVICES OR BILLING OPTIONS ARE
+                        SELECTED THE FASTEST AVAILABLE SERVICE WILL BE CHARGED TO THE SENDER.</span>
+                </div>
+            </div>
+        </div>
+        <div class="footer" />
+    </template>
+    <template id="report_tnt_manifest">
+        <t t-call="web.html_container">
+            <t t-call="delivery_tnt_oca.report_tnt_manifest_document" />
+        </t>
+    </template>
+</odoo>
