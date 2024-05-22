@@ -1,10 +1,14 @@
 # Copyright 2018 Tecnativa - Sergio Teruel
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-from odoo import models
+from odoo import fields, models
 
 
 class StockMove(models.Model):
     _inherit = "stock.move"
+
+    delivery_zone_id = fields.Many2one(
+        comodel_name="partner.delivery.zone", related="picking_id.delivery_zone_id"
+    )
 
     def get_original_move(self):
         if self.move_dest_ids:
