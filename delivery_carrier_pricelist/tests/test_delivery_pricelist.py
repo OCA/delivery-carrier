@@ -3,10 +3,10 @@
 
 from lxml import etree
 
-from odoo.tests.common import Form, SavepointCase
+from odoo.tests.common import Form, TransactionCase
 
 
-class TestCarrierPricelist(SavepointCase):
+class TestCarrierPricelist(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -103,7 +103,7 @@ class TestCarrierPricelist(SavepointCase):
 
     def test_fields_view_get(self):
         carrier = self.carrier_pricelist
-        result = carrier.fields_view_get()
+        result = carrier.get_view()
         doc = etree.XML(result["arch"])
         xpath_expr = "//notebook"
         nodes = doc.xpath(xpath_expr)
