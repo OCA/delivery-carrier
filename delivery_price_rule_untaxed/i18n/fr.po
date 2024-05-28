@@ -27,24 +27,6 @@ msgid "Delivery Price Rules"
 msgstr "Règles de prix de livraison"
 
 #. module: delivery_price_rule_untaxed
-#: model:ir.model.fields,field_description:delivery_price_rule_untaxed.field_delivery_carrier__display_name
-#: model:ir.model.fields,field_description:delivery_price_rule_untaxed.field_delivery_price_rule__display_name
-msgid "Display Name"
-msgstr ""
-
-#. module: delivery_price_rule_untaxed
-#: model:ir.model.fields,field_description:delivery_price_rule_untaxed.field_delivery_carrier__id
-#: model:ir.model.fields,field_description:delivery_price_rule_untaxed.field_delivery_price_rule__id
-msgid "ID"
-msgstr ""
-
-#. module: delivery_price_rule_untaxed
-#: model:ir.model.fields,field_description:delivery_price_rule_untaxed.field_delivery_carrier____last_update
-#: model:ir.model.fields,field_description:delivery_price_rule_untaxed.field_delivery_price_rule____last_update
-msgid "Last Modified on"
-msgstr ""
-
-#. module: delivery_price_rule_untaxed
 #: model:ir.model,name:delivery_price_rule_untaxed.model_delivery_carrier
 msgid "Shipping Methods"
 msgstr ""
