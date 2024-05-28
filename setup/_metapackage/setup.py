@@ -19,6 +19,7 @@ setuptools.setup(
         'odoo-addon-delivery_multi_destination>=15.0dev,<15.1dev',
         'odoo-addon-delivery_package_number>=15.0dev,<15.1dev',
         'odoo-addon-delivery_price_method>=15.0dev,<15.1dev',
+        'odoo-addon-delivery_price_rule_untaxed>=15.0dev,<15.1dev',
         'odoo-addon-delivery_purchase>=15.0dev,<15.1dev',
         'odoo-addon-delivery_state>=15.0dev,<15.1dev',
         'odoo-addon-delivery_translatable>=15.0dev,<15.1dev',
