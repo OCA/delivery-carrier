@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="purchase_order_form_carrier" model="ir.ui.view">
+        <field name="name">purchase.order.form.carrier</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form" />
+        <field name="arch" type="xml">
+            <div name="reminder" position="after">
+                <label for="carrier_id" />
+                <div class="d-flex">
+                    <field name="carrier_id" options="{'no_open': True}" />
+                    <span class="o_form_label mx-3" />
+                    <field
+                        name="delivery_price"
+                        widget='monetary'
+                        options="{'currency_field': 'currency_id'}"
+                        attrs="{'invisible': [('carrier_id', '=', False)]}"
+                    />
+                </div>
+            </div>
+        </field>
+    </record>
+</odoo>
