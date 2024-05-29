@@ -30,6 +30,7 @@ setuptools.setup(
         'odoo-addon-delivery_postlogistics>=16.0dev,<16.1dev',
         'odoo-addon-delivery_postlogistics_server_env>=16.0dev,<16.1dev',
         'odoo-addon-delivery_price_method>=16.0dev,<16.1dev',
+        'odoo-addon-delivery_purchase>=16.0dev,<16.1dev',
         'odoo-addon-delivery_roulier>=16.0dev,<16.1dev',
         'odoo-addon-delivery_state>=16.0dev,<16.1dev',
         'odoo-addon-partner_delivery_schedule>=16.0dev,<16.1dev',
