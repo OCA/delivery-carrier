@@ -28,18 +28,21 @@ msgid "Delivery Price"
 msgstr "Precio de entrega"
 
 #. module: delivery_purchase
+#. odoo-python
 #: code:addons/delivery_purchase/models/delivery_carrier.py:0
 #, python-format
 msgid "Error: no matching grid."
 msgstr "Error: no hay cuadrícula coincidente."
 
 #. module: delivery_purchase
+#. odoo-python
 #: code:addons/delivery_purchase/models/delivery_carrier.py:0
 #, python-format
 msgid "Error: this delivery method is not available for this address."
 msgstr "Error: este método de envío no está disponible para esta dirección."
 
 #. module: delivery_purchase
+#. odoo-python
 #: code:addons/delivery_purchase/models/purchase_order.py:0
 #, python-format
 msgid "Free Shipping"
@@ -61,6 +64,7 @@ msgid "Purchase Order Line"
 msgstr "Línea de pedido de compra"
 
 #. module: delivery_purchase
+#. odoo-python
 #: code:addons/delivery_purchase/models/stock_picking.py:0
 #, python-format
 msgid ""
@@ -76,12 +80,14 @@ msgid "Shipping Methods"
 msgstr "Métodos de envío"
 
 #. module: delivery_purchase
+#. odoo-python
 #: code:addons/delivery_purchase/models/delivery_carrier.py:0
 #, python-format
 msgid "The shipping is free since the order amount exceeds %.2f."
 msgstr "El envío es gratuito ya que el importe del pedido supera %.2f."
 
 #. module: delivery_purchase
+#. odoo-python
 #: code:addons/delivery_purchase/models/delivery_carrier.py:0
 #, python-format
 msgid "There is no matching delivery rule."
