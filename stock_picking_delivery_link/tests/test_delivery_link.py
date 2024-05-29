@@ -201,6 +201,12 @@ class TestStockPickingDeliveryLink(StockPickingDeliveryLinkCommonCase):
         )
         ship_move._assign_picking()
         ship_move._action_confirm()
+        # Confirm purchase order
+        if self.purchase_installed:
+            purchase = self.env["purchase.order"].search(
+                [("partner_id", "=", self.vendor.id)]
+            )
+            purchase.button_confirm()
         pick_move = ship_move.move_orig_ids[0]
         pick_picking = pick_move.picking_id
         ship_picking = ship_move.picking_id
