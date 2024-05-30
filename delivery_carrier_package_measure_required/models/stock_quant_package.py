@@ -18,10 +18,13 @@ class StockQuantPackage(models.Model):
     @api.constrains("pack_length", "width", "height", "shipping_weight", "quant_ids")
     def _check_required_dimension(self):
         ignore_pack_content = self.env.context.get(
-            "delivery_pkg_measure__ignore_package_content"
+            "delivery_pkg_measure__ignore_package_content", False
+        )
+        force_validation = self.env.context.get(
+            "delivery_pkg_measure__force_validation_package", False
         )
         for package in self:
-            if not ignore_pack_content and not package.quant_ids:
+            if ignore_pack_content or (not force_validation and not package.quant_ids):
                 # Only validate a package when it contains goods
                 continue
             required_dimension = []
