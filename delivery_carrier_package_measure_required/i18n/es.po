@@ -17,7 +17,7 @@ msgstr ""
 "X-Generator: Weblate 4.17\n"
 
 #. module: delivery_carrier_package_measure_required
-#: model_terms:ir.ui.view,arch_db:delivery_carrier_package_measure_required.view_product_packaging_delivery_form_inherit
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_package_measure_required.view_stock_package_type_form_delivery_inherit
 msgid "Carrier Required Measurements"
 msgstr "Medidas requeridas por el transportista"
 
@@ -27,44 +27,20 @@ msgid "Delivery Package Selection Wizard"
 msgstr "Asistente selección paquete para el envío"
 
 #. module: delivery_carrier_package_measure_required
-#: model:ir.model.fields,field_description:delivery_carrier_package_measure_required.field_choose_delivery_package__dimension_uom_id
-msgid "Dimension Uom"
-msgstr "Dimensión Uom"
-
-#. module: delivery_carrier_package_measure_required
-#: model:ir.model.fields,field_description:delivery_carrier_package_measure_required.field_choose_delivery_package__display_name
-#: model:ir.model.fields,field_description:delivery_carrier_package_measure_required.field_product_packaging__display_name
-#: model:ir.model.fields,field_description:delivery_carrier_package_measure_required.field_stock_picking__display_name
-#: model:ir.model.fields,field_description:delivery_carrier_package_measure_required.field_stock_quant_package__display_name
-msgid "Display Name"
-msgstr "Nombre mostrado"
+#: model:ir.model.fields,field_description:delivery_carrier_package_measure_required.field_choose_delivery_package__dimension_uom_name
+msgid "Dimension Uom Name"
+msgstr ""
 
 #. module: delivery_carrier_package_measure_required
 #: model:ir.model.fields,field_description:delivery_carrier_package_measure_required.field_choose_delivery_package__package_height_required
-#: model:ir.model.fields,field_description:delivery_carrier_package_measure_required.field_product_packaging__package_height_required
+#: model:ir.model.fields,field_description:delivery_carrier_package_measure_required.field_stock_package_type__package_height_required
 #: model:ir.model.fields,field_description:delivery_carrier_package_measure_required.field_stock_quant_package__height_required
 msgid "Height required"
 msgstr "Necesario altura"
 
 #. module: delivery_carrier_package_measure_required
-#: model:ir.model.fields,field_description:delivery_carrier_package_measure_required.field_choose_delivery_package__id
-#: model:ir.model.fields,field_description:delivery_carrier_package_measure_required.field_product_packaging__id
-#: model:ir.model.fields,field_description:delivery_carrier_package_measure_required.field_stock_picking__id
-#: model:ir.model.fields,field_description:delivery_carrier_package_measure_required.field_stock_quant_package__id
-msgid "ID"
-msgstr "ID"
-
-#. module: delivery_carrier_package_measure_required
-#: model:ir.model.fields,field_description:delivery_carrier_package_measure_required.field_choose_delivery_package____last_update
-#: model:ir.model.fields,field_description:delivery_carrier_package_measure_required.field_product_packaging____last_update
-#: model:ir.model.fields,field_description:delivery_carrier_package_measure_required.field_stock_picking____last_update
-#: model:ir.model.fields,field_description:delivery_carrier_package_measure_required.field_stock_quant_package____last_update
-msgid "Last Modified on"
-msgstr "Ultima modificación en"
-
-#. module: delivery_carrier_package_measure_required
 #: model:ir.model.fields,field_description:delivery_carrier_package_measure_required.field_choose_delivery_package__package_length_required
-#: model:ir.model.fields,field_description:delivery_carrier_package_measure_required.field_product_packaging__package_length_required
+#: model:ir.model.fields,field_description:delivery_carrier_package_measure_required.field_stock_package_type__package_length_required
 #: model:ir.model.fields,field_description:delivery_carrier_package_measure_required.field_stock_quant_package__length_required
 msgid "Length required"
 msgstr "Necesaria longitud"
@@ -90,21 +66,17 @@ msgid "Packages"
 msgstr "Paquetes"
 
 #. module: delivery_carrier_package_measure_required
-#: model:ir.model,name:delivery_carrier_package_measure_required.model_product_packaging
-msgid "Product Packaging"
-msgstr "Empaquetado del producto"
+#: model:ir.model,name:delivery_carrier_package_measure_required.model_stock_package_type
+msgid "Stock package type"
+msgstr ""
 
 #. module: delivery_carrier_package_measure_required
-#: model:ir.model.fields,field_description:delivery_carrier_package_measure_required.field_choose_delivery_package__pick_name
-msgid "Reference"
-msgstr "Referencia"
-
-#. module: delivery_carrier_package_measure_required
+#. odoo-python
 #: code:addons/delivery_carrier_package_measure_required/models/stock_quant_package.py:0
 #, python-format
 msgid ""
-"The measurement(s) [{dimension}] are required on the package {pack_name} and"
-" need to be set."
+"The measurement(s) [{dimension}] are required on the package {pack_name} and "
+"need to be set."
 msgstr ""
 "La medida(s) [{dimension}] son requeridas para el paquete {pack_name} y "
 "deben configurarse."
@@ -115,44 +87,64 @@ msgid "Transfer"
 msgstr "Transferir"
 
 #. module: delivery_carrier_package_measure_required
-#: model:ir.model.fields,field_description:delivery_carrier_package_measure_required.field_choose_delivery_package__dimension_uom_name
-msgid "Unit of Measure"
-msgstr "Unidad de medida"
-
-#. module: delivery_carrier_package_measure_required
 #: model:ir.model.fields,field_description:delivery_carrier_package_measure_required.field_choose_delivery_package__package_weight_required
-#: model:ir.model.fields,field_description:delivery_carrier_package_measure_required.field_product_packaging__package_weight_required
+#: model:ir.model.fields,field_description:delivery_carrier_package_measure_required.field_stock_package_type__package_weight_required
 #: model:ir.model.fields,field_description:delivery_carrier_package_measure_required.field_stock_quant_package__weight_required
 msgid "Weight required"
 msgstr "Necesario peso"
 
 #. module: delivery_carrier_package_measure_required
 #: model:ir.model.fields,field_description:delivery_carrier_package_measure_required.field_choose_delivery_package__package_width_required
-#: model:ir.model.fields,field_description:delivery_carrier_package_measure_required.field_product_packaging__package_width_required
+#: model:ir.model.fields,field_description:delivery_carrier_package_measure_required.field_stock_package_type__package_width_required
 #: model:ir.model.fields,field_description:delivery_carrier_package_measure_required.field_stock_quant_package__width_required
 msgid "Width required"
 msgstr "Necesario ancho"
 
 #. module: delivery_carrier_package_measure_required
+#. odoo-python
 #: code:addons/delivery_carrier_package_measure_required/models/stock_quant_package.py:0
 #, python-format
 msgid "height"
 msgstr "Altura"
 
 #. module: delivery_carrier_package_measure_required
+#. odoo-python
 #: code:addons/delivery_carrier_package_measure_required/models/stock_quant_package.py:0
 #, python-format
 msgid "length"
 msgstr "Longitud"
 
 #. module: delivery_carrier_package_measure_required
+#. odoo-python
 #: code:addons/delivery_carrier_package_measure_required/models/stock_quant_package.py:0
 #, python-format
 msgid "weight"
 msgstr "Peso"
 
 #. module: delivery_carrier_package_measure_required
+#. odoo-python
 #: code:addons/delivery_carrier_package_measure_required/models/stock_quant_package.py:0
 #, python-format
 msgid "width"
 msgstr "Ancho"
+
+#~ msgid "Dimension Uom"
+#~ msgstr "Dimensión Uom"
+
+#~ msgid "Display Name"
+#~ msgstr "Nombre mostrado"
+
+#~ msgid "ID"
+#~ msgstr "ID"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Ultima modificación en"
+
+#~ msgid "Product Packaging"
+#~ msgstr "Empaquetado del producto"
+
+#~ msgid "Reference"
+#~ msgstr "Referencia"
+
+#~ msgid "Unit of Measure"
+#~ msgstr "Unidad de medida"
