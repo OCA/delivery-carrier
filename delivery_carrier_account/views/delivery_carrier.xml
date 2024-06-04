@@ -8,7 +8,8 @@
             <field name="integration_level" position="after">
                 <field
                     name="carrier_account_id"
-                    attrs="{'invisible': [('delivery_type', 'in', ('fixed', 'base_on_rule'))], 'required': [('delivery_type', 'not in', ('fixed', 'base_on_rule'))]}"
+                    invisible="delivery_type in ('fixed', 'base_on_rule')"
+                    required="delivery_type not in ('fixed', 'base_on_rule')"
                 />
             </field>
         </field>
