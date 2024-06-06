@@ -10,7 +10,9 @@ class DeliveryCarrier(models.Model):
 
     def _get_price_available(self, order):
         self.ensure_one()
-        self = self.with_context({"order_amount_untaxed": order.amount_untaxed})
+        self = self.with_context(
+            order_amount_untaxed=order.amount_untaxed, **self.env.context
+        )
         return super(DeliveryCarrier, self)._get_price_available(order)
 
     def _get_price_from_picking(self, total, weight, volume, quantity):
