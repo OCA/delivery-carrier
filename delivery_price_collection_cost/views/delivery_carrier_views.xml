@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <record id="view_delivery_carrier_form" model="ir.ui.view">
+        <field name="model">delivery.carrier</field>
+        <field name="inherit_id" ref="delivery.view_delivery_carrier_form" />
+        <field name="arch" type="xml">
+            <group name="delivery_details" position="inside">
+                <field
+                    name="collection_product_id"
+                    context="{'default_type': 'service', 'default_sale_ok': False, 'default_purchase_ok': False, 'default_invoice_policy': 'order'}"
+                />
+            </group>
+            <group name="fixed_price" position="after">
+                <group
+                    name="collection_price"
+                    attrs="{'invisible':[('collection_product_id', '=', False)]}"
+                >
+                    <field name="collection_price" />
+                </group>
+            </group>
+            <field name="price_rule_ids" position="attributes">
+                <attribute name="context">
+                    {'show_collection_price_field': collection_product_id}
+                </attribute>
+            </field>
+        </field>
+    </record>
+</odoo>
