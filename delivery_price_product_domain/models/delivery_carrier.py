@@ -31,8 +31,10 @@ class DeliveryPriceRule(models.Model):
                 continue
             if line.is_delivery:
                 total_delivery += line.price_total
-            if (not line.product_id or line.is_delivery) and (
-                line.product_id.type == "service"
+            if (
+                (not line.product_id)
+                or line.is_delivery
+                or line.product_id.type == "service"
             ):
                 continue
             weight += (line.product_id.weight or 0.0) * qty
