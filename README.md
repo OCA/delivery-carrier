@@ -49,9 +49,11 @@ addon | version | maintainers | summary
 [delivery_postlogistics](delivery_postlogistics/) | 14.0.1.1.0 |  | Print PostLogistics shipping labels using the Barcode web service
 [delivery_postlogistics_dangerous_goods](delivery_postlogistics_dangerous_goods/) | 14.0.1.0.0 |  | Declare dangerous goods when generating postlogistics labels
 [delivery_postlogistics_server_env](delivery_postlogistics_server_env/) | 14.0.1.0.0 |  | Server Environment layer for Delivery Postlogistics
+[delivery_price_collection_cost](delivery_price_collection_cost/) | 14.0.1.0.0 |  | Add delivery collection costs as a separate line in the SO
+[delivery_price_collection_cost_product_domain](delivery_price_collection_cost_product_domain/) | 14.0.1.0.0 |  | Bridge module between Delivery Collection Cost and Product Domain
 [delivery_price_method](delivery_price_method/) | 14.0.1.0.0 |  | Provides fields to be able to contemplate the tracking statesand also adds a global fields
-[delivery_price_product_domain](delivery_price_product_domain/) | 14.0.1.0.2 | [![solo4games](https://github.com/solo4games.png?size=30px)](https://github.com/solo4games) [![CetmixGitDrone](https://github.com/CetmixGitDrone.png?size=30px)](https://github.com/CetmixGitDrone) | Apply domain to product in shipping charges rules
-[delivery_price_rule_untaxed](delivery_price_rule_untaxed/) | 14.0.1.0.2 | [![AshishHirapara](https://github.com/AshishHirapara.png?size=30px)](https://github.com/AshishHirapara) | Add untaxed amount to variables for price delivery price rule
+[delivery_price_product_domain](delivery_price_product_domain/) | 14.0.1.0.3 | [![solo4games](https://github.com/solo4games.png?size=30px)](https://github.com/solo4games) [![CetmixGitDrone](https://github.com/CetmixGitDrone.png?size=30px)](https://github.com/CetmixGitDrone) | Apply domain to product in shipping charges rules
+[delivery_price_rule_untaxed](delivery_price_rule_untaxed/) | 14.0.1.0.3 | [![AshishHirapara](https://github.com/AshishHirapara.png?size=30px)](https://github.com/AshishHirapara) | Add untaxed amount to variables for price delivery price rule
 [delivery_purchase](delivery_purchase/) | 14.0.1.1.1 |  | Delivery costs in purchases
 [delivery_roulier](delivery_roulier/) | 14.0.1.0.1 | [![florian-dacosta](https://github.com/florian-dacosta.png?size=30px)](https://github.com/florian-dacosta) | Integration of multiple carriers
 [delivery_roulier_chronopost_fr](delivery_roulier_chronopost_fr/) | 14.0.1.0.1 |  | Delivery Chronopost France
