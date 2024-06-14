@@ -7,19 +7,22 @@ from odoo import fields, models
 class ResConfigSettings(models.TransientModel):
     _inherit = "res.config.settings"
 
-    set_default_carrier = fields.Boolean(
-        "Set Default Carrier Automatically",
-        config_parameter="delivery_auto_refresh.set_default_carrier",
+    # Migration Note 17.0: move this to module sale_order_carrier_auto_assign
+    sale_auto_assign_carrier_on_create = fields.Boolean(
+        related="company_id.sale_auto_assign_carrier_on_create",
+        readonly=False,
     )
-    auto_add_delivery_line = fields.Boolean(
-        "Add Delivery Line Automatically",
-        config_parameter="delivery_auto_refresh.auto_add_delivery_line",
+    # End migration note
+
+    sale_auto_add_delivery_line = fields.Boolean(
+        related="company_id.sale_auto_add_delivery_line",
+        readonly=False,
     )
-    refresh_after_picking = fields.Boolean(
-        "Refresh After Picking Automatically",
-        config_parameter="delivery_auto_refresh.refresh_after_picking",
+    sale_refresh_delivery_after_picking = fields.Boolean(
+        related="company_id.sale_refresh_delivery_after_picking",
+        readonly=False,
     )
-    auto_void_delivery_line = fields.Boolean(
-        "Void delivery lines automatically",
-        config_parameter="delivery_auto_refresh.auto_void_delivery_line",
+    sale_auto_void_delivery_line = fields.Boolean(
+        related="company_id.sale_auto_void_delivery_line",
+        readonly=False,
     )

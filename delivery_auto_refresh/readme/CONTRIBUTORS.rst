@@ -7,3 +7,5 @@
 * Camptocamp <https://www.camptocamp.com>:
   * Maksym Yankin
   * Simone Orsi
+
+* Jacques-Etienne Baudoux (BCIM) <je@bcim.be>

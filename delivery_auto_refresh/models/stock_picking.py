@@ -8,20 +8,14 @@ class StockPicking(models.Model):
     _inherit = "stock.picking"
 
     def _add_delivery_cost_to_so(self):
-        """Update delivery price in SO (no matter the type of carrier invoicing policy)
-        and in picking from picking data if indicated so. Carriers based on rules
-        doesn't refresh with real picking data, only with SO ones.
-        """
+        # Update delivery price in SO (no matter the type of carrier invoicing
+        # policy) and in picking from picking data if indicated so. Carriers
+        # based on rules doesn't refresh with real picking data, only with SO
+        # ones.
         res = super()._add_delivery_cost_to_so()
-        refresh_after_picking = (
-            self.env["ir.config_parameter"]
-            .sudo()
-            .get_param("delivery_auto_refresh.refresh_after_picking")
-        )
-        if not refresh_after_picking:
-            return res
-        self.ensure_one()
         sale_order = self.sale_id
+        if not sale_order.company_id.sale_refresh_delivery_after_picking:
+            return res
         if not sale_order or not self.carrier_id:  # pragma: no cover
             return res
         so_line = sale_order.order_line.filtered(lambda x: x.is_delivery)[:1]
@@ -65,13 +59,6 @@ class StockPicking(models.Model):
         # If configured, we want to set to 0 automatically the delivery line
         # when we have a returned picking that isn't invoiced so we don't have
         # it as invoiceable line. Otherwise, the salesman has to do it by hand.
-        auto_void_delivery_line = (
-            self.env["ir.config_parameter"]
-            .sudo()
-            .get_param("delivery_auto_refresh.auto_void_delivery_line")
-        )
-        if not auto_void_delivery_line:
-            return res
         sales_to_void_delivery = self.filtered(
             lambda x: x.sale_id
             and x.picking_type_code == "incoming"

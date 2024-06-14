@@ -74,11 +74,7 @@ class TestDeliveryAutoRefresh(common.TransactionCase):
                 "property_product_pricelist": pricelist.id,
             }
         )
-        cls.auto_add_delivery_line = "delivery_auto_refresh.auto_add_delivery_line"
-        cls.refresh_after_picking = "delivery_auto_refresh.refresh_after_picking"
-        cls.auto_void_delivery_line = "delivery_auto_refresh.auto_void_delivery_line"
         cls.settings = cls.env["res.config.settings"].create({})
-        cls.settings.set_default_carrier = True
         cls.settings.execute()
         order_form = Form(cls.env["sale.order"])
         order_form.partner_id = cls.partner
@@ -91,7 +87,7 @@ class TestDeliveryAutoRefresh(common.TransactionCase):
 
     def test_auto_refresh_so(self):
         self.assertFalse(self.order.order_line.filtered("is_delivery"))
-        self.settings.auto_add_delivery_line = True
+        self.settings.sale_auto_add_delivery_line = True
         self.settings.execute()
         self.order.write(
             {"order_line": [(1, self.order.order_line.id, {"product_uom_qty": 3})]}
@@ -129,7 +125,7 @@ class TestDeliveryAutoRefresh(common.TransactionCase):
         self.assertEqual(line_delivery.name, "Test carrier 1")
 
     def test_auto_refresh_picking(self):
-        self.settings.refresh_after_picking = True
+        self.settings.sale_refresh_delivery_after_picking = True
         self.settings.execute()
         self.order.order_line.product_uom_qty = 3
         wiz = Form(
@@ -148,7 +144,7 @@ class TestDeliveryAutoRefresh(common.TransactionCase):
         self.assertEqual(line_delivery.price_unit, 50)
 
     def test_auto_refresh_picking_fixed_price(self):
-        self.settings.refresh_after_picking = True
+        self.settings.sale_refresh_delivery_after_picking = True
         self.settings.execute()
         product_fixed_price = self.env["product.product"].create(
             {
@@ -179,7 +175,7 @@ class TestDeliveryAutoRefresh(common.TransactionCase):
         self.assertEqual(line_delivery.price_unit, 2)
 
     def test_no_auto_refresh_picking(self):
-        self.settings.refresh_after_picking = False
+        self.settings.sale_refresh_delivery_after_picking = False
         self.settings.execute()
         self.order.order_line.product_uom_qty = 3
         wiz = Form(
@@ -196,21 +192,6 @@ class TestDeliveryAutoRefresh(common.TransactionCase):
         picking._action_done()
         line_delivery = self.order.order_line.filtered("is_delivery")
         self.assertEqual(line_delivery.price_unit, 60)
-
-    def test_compute_carrier_id(self):
-        order_form_1 = Form(self.env["sale.order"])
-        order_form_1.partner_id = self.partner
-        self.assertEqual(order_form_1.carrier_id, self.carrier_1)
-        partner_without_carrier = self.env["res.partner"].create(
-            {
-                "name": "Test partner without carrier",
-                "property_delivery_carrier_id": False,
-            }
-        )
-        no_carrier = self.env["delivery.carrier"]
-        order_form_2 = Form(self.env["sale.order"])
-        order_form_2.partner_id = partner_without_carrier
-        self.assertEqual(order_form_2.carrier_id, no_carrier)
 
     def _confirm_sale_order(self, order):
         sale_form = Form(order)
@@ -248,8 +229,8 @@ class TestDeliveryAutoRefresh(common.TransactionCase):
     def _test_autorefresh_void_line(self, lock=False, to_refund=True, invoice=False):
         """Helper method to test the possible cases for voiding the line"""
         self.assertFalse(self.order.order_line.filtered("is_delivery"))
-        self.settings.auto_add_delivery_line = True
-        self.settings.auto_void_delivery_line = True
+        self.settings.sale_auto_add_delivery_line = True
+        self.settings.sale_auto_void_delivery_line = True
         self.settings.execute()
         line_delivery = self._confirm_sale_order(self.order)
         self._validate_picking(self.order.picking_ids)
@@ -290,7 +271,7 @@ class TestDeliveryAutoRefresh(common.TransactionCase):
     def _test_autorefresh_unlink_line(self):
         """Helper method to test the possible cases for voiding the line"""
         self.assertFalse(self.order.order_line.filtered("is_delivery"))
-        self.settings.auto_add_delivery_line = True
+        self.settings.sale_auto_add_delivery_line = True
         self.settings.execute()
         sale_form = Form(self.order)
         # Force the delivery line creation
@@ -310,8 +291,9 @@ class TestDeliveryAutoRefresh(common.TransactionCase):
         self.assertFalse(delivery_line.exists())
 
     def test_auto_add_delivery_line_add_service(self):
-        """Delivery line should not be created because
-        there are only service products in SO"""
+        """No delivery line when service only"""
+        self.settings.sale_auto_add_delivery_line = True
+        self.settings.set_values()
         service = self.env["product.product"].create(
             {"name": "Service Test", "type": "service"}
         )
@@ -325,3 +307,11 @@ class TestDeliveryAutoRefresh(common.TransactionCase):
         order = order_form.save()
         delivery_line = order.order_line.filtered("is_delivery")
         self.assertFalse(delivery_line.exists())
+
+    def test_auto_refresh_so_and_manually_unlink_delivery_line(self):
+        """Manually remove the delivery line"""
+        self._test_autorefresh_unlink_line()
+        sale_form = Form(self.order)
+        # Deleting the delivery line
+        sale_form.order_line.remove(1)
+        sale_form.save()
