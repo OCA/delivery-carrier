@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="manifest_wizard_form" model="ir.ui.view">
+        <field name="name">manifest.wizard.form</field>
+        <field name="model">manifest.wizard</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Manifest">
+                <field name="state" invisible="True" readonly="True" />
+                <group invisible="state != 'init'">
+                    <field name="carrier_id" readonly="state == 'done'" />
+                    <field name="from_date" />
+                    <field name="to_date" />
+                </group>
+                <group invisible="state != 'file'">
+                    <field name="file_out" filename="filename" readonly="True" />
+                    <field name="filename" invisible="True" readonly="True" />
+                </group>
+                <group invisible="state == 'init'">
+                    <field name="notes" readonly="True" />
+                </group>
+                <footer invisible="state != 'init'">
+                    <button
+                        name="get_manifest_file"
+                        type="object"
+                        string="Get Manifest File"
+                        class="oe_highlight"
+                    />
+                    <button string="Cancel" class="oe_link" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="manifest_wizard_action" model="ir.actions.act_window">
+        <field name="name">Manifest</field>
+        <field name="res_model">manifest.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="manifest_wizard_form" />
+        <field name="target">new</field>
+    </record>
+    <menuitem
+        id="manifest_wizard_menu"
+        action="manifest_wizard_action"
+        name="Manifest"
+        parent="stock.menu_stock_warehouse_mgmt"
+    />
+</odoo>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- VIEW FOR THE OBJECT : delivery_carrier_template_option -->
+    <record id="delivery_carrier_template_option_view_form" model="ir.ui.view">
+        <field name="name">delivery_base.delivery_carrier_option.view_form</field>
+        <field name="model">delivery.carrier.template.option</field>
+        <field name="arch" type="xml">
+            <form string="delivery_carrier_option">
+                <group>
+                    <group>
+                        <field name="name" readonly="True" />
+                    </group>
+                    <group>
+                        <field name="partner_id" />
+                        <field name="code" readonly="True" />
+                    </group>
+                    <field name="description" readonly="True" />
+                </group>
+            </form>
+        </field>
+    </record>
+    <record id="delivery_carrier_template_option_view_tree" model="ir.ui.view">
+        <field
+            name="name"
+        >delivery_base.delivery_carrier_template_option.view_tree</field>
+        <field name="model">delivery.carrier.template.option</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="partner_id" />
+                <field name="code" readonly="True" />
+                <field name="name" readonly="True" />
+            </tree>
+        </field>
+    </record>
+    <!-- VIEW FOR THE OBJECT : delivery_carrier_option -->
+    <record id="delivery_carrier_option_view_form" model="ir.ui.view">
+        <field name="name">delivery_base.delivery_carrier_option.view_form</field>
+        <field name="model">delivery.carrier.option</field>
+        <field name="arch" type="xml">
+            <form string="delivery_carrier_option">
+                <group>
+                    <group>
+                        <field name="active" />
+                        <field name="mandatory" readonly="readonly_flag" />
+                        <field name="by_default" invisible="mandatory" />
+                        <field name="readonly_flag" invisible="True" />
+                    </group>
+                    <group>
+                        <field name="tmpl_option_id" readonly="readonly_flag" />
+                    </group>
+                    <newline />
+                    <field name="description" readonly="True" />
+                </group>
+            </form>
+        </field>
+    </record>
+    <record id="delivery_carrier_option_view_tree" model="ir.ui.view">
+        <field name="name">delivery_base.delivery_carrier_option.view_tree</field>
+        <field name="model">delivery.carrier.option</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree decoration-muted="not active">
+                <field name="active" />
+                <field name="mandatory" />
+                <field name="tmpl_option_id" />
+                <field name="code" />
+            </tree>
+        </field>
+    </record>
+    <!-- INHERITED VIEW FOR THE OBJECT : delivery.carrier -->
+    <record id="view_delivery_carrier_form" model="ir.ui.view">
+        <field name="name">delivery_base.delivery.carrier.view_form</field>
+        <field name="model">delivery.carrier</field>
+        <field name="inherit_id" ref="delivery.view_delivery_carrier_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Options">
+                    <field name="available_option_ids" nolabel="1" colspan="4" />
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
