@@ -247,14 +247,6 @@ msgid "Is public document"
 msgstr ""
 
 #. module: base_delivery_carrier_label
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option____last_update
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_template_option____last_update
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_manifest_wizard____last_update
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label____last_update
-msgid "Last Modified on"
-msgstr ""
-
-#. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option__write_uid
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_template_option__write_uid
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_manifest_wizard__write_uid
@@ -448,6 +440,11 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__url
 msgid "Url"
+msgstr ""
+
+#. module: base_delivery_carrier_label
+#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__voice_ids
+msgid "Voice"
 msgstr ""
 
 #. module: base_delivery_carrier_label
