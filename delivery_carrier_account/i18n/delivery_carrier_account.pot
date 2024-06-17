@@ -70,11 +70,6 @@ msgid "ID"
 msgstr ""
 
 #. module: delivery_carrier_account
-#: model:ir.model.fields,field_description:delivery_carrier_account.field_carrier_account____last_update
-msgid "Last Modified on"
-msgstr ""
-
-#. module: delivery_carrier_account
 #: model:ir.model.fields,field_description:delivery_carrier_account.field_carrier_account__write_uid
 msgid "Last Updated by"
 msgstr ""
