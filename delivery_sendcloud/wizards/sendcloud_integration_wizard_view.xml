@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 Onestein (<https://www.onestein.nl>)
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl) -->
+<odoo>
+
+    <record id="sendcloud_onboarding_integration_configuration_form" model="ir.ui.view">
+        <field name="model">sendcloud.integration.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <div>
+                    <p>
+                        To make the connection between Odoo and Sendcloud, Odoo needs authorization to access the data on your Sendcloud Account.
+                    </p>
+                </div>
+                <div
+                    role="alert"
+                    class="alert alert-warning"
+                    invisible="not error_message"
+                >
+                    <field name="error_message" nolabel="1" />
+                </div>
+                <div role="alert" class="alert alert-info" invisible="not info_message">
+                    <field name="info_message" nolabel="1" />
+                </div>
+                <footer>
+                    <button
+                        string="Start Setup"
+                        name="button_update"
+                        type="object"
+                        class="btn-primary"
+                    />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

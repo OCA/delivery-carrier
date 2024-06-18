@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 Onestein (<https://www.onestein.nl>)
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl) -->
+<odoo>
+
+    <record id="view_sendcloud_integration_form" model="ir.ui.view">
+        <field name="model">sendcloud.integration</field>
+        <field name="arch" type="xml">
+            <form create="false">
+                <header />
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="shop_name" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="public_key" />
+                            <field name="secret_key" />
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                            />
+                        </group>
+                        <group>
+                            <field name="sendcloud_code" />
+                            <field name="shop_url" widget="url" />
+                            <field name="active" />
+                        </group>
+                        <group string="Service Points">
+                            <field name="service_point_enabled" string="Enabled" />
+                            <field
+                                name="service_point_carrier_ids"
+                                widget="many2many_tags"
+                                options="{'no_create_edit': True}"
+                            />
+                        </group>
+                        <group string="Webhook">
+                            <field name="webhook_active" widget="boolean_toggle" />
+                            <field name="webhook_url" widget="url" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_sendcloud_integration_tree" model="ir.ui.view">
+        <field name="model">sendcloud.integration</field>
+        <field name="arch" type="xml">
+            <tree create="false" banner_route="/onboarding/sendcloud_onboarding_panel">
+                <field name="sequence" widget="handle" />
+                <field name="shop_name" />
+                <field name="sendcloud_code" />
+                <field name="service_point_enabled" widget="boolean_toggle" />
+                <field name="webhook_active" widget="boolean_toggle" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_sendcloud_integration" model="ir.actions.act_window">
+        <field name="name">Sendcloud Integrations</field>
+        <field name="res_model">sendcloud.integration</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

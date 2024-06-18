@@ -1,0 +1,52 @@
+interactions:
+  - request:
+      body:
+        '[{"external_order_id": "cb4467fa-4cf4-4471-af4e-564c7bd71eac",
+        "external_shipment_id": "c9b2058d-2621-4ce5-afb0-f14e8e5565b6", "created_at":
+        "2022-07-06T11:06:35.471670", "updated_at": "2022-07-06T11:06:35.471670",
+        "name": "Deco Addict", "address": "Santa Barbara Rd", "house_number": "77",
+        "city": "Pleasant Hill", "postal_code": "94523", "country": "US",
+        "country_state": "CA", "customs_invoice_nr": "", "customs_shipment_type": 2,
+        "to_state": "CA", "company_name": "Deco Addict", "address_2": "", "currency":
+        "USD", "telephone": "(603)-996-3829", "email": "deco.addict82@example.com",
+        "to_post_number": "", "to_service_point": null, "shipping_method_checkout_name":
+        "", "order_status": null, "payment_status": null, "parcel_items":
+        [{"description": "[FURN_6666] Acoustic Bloc Screens", "quantity": 3, "weight":
+        0.03, "value": 295.0, "hs_code": "123", "origin_country": "US", "sku":
+        "FURN_6666", "product_id": "", "properties": {}}, {"description": "[FURN_8888]
+        Office Lamp", "quantity": 5, "weight": 0.05, "value": 145.0, "hs_code": "123",
+        "origin_country": "US", "sku": "FURN_8888", "product_id": "", "properties": {}},
+        {"description": "[FURN_7777] Office Chair", "quantity": 2, "weight": 0.02,
+        "value": 65.0, "hs_code": "123", "origin_country": "US", "sku": "FURN_7777",
+        "product_id": "", "properties": {}}], "order_number": "S00070", "weight": 0.1,
+        "is_return": false, "request_label": true, "shipment": {"id": 9},
+        "apply_shipping_rules": false, "external_reference": "WH/OUT/00046,0",
+        "shipping_method": 9}]'
+      headers:
+        Accept: ["*/*"]
+        Accept-Encoding: ["gzip, deflate"]
+        Connection: [keep-alive]
+        Content-Length: ["1514"]
+        Content-Type: [application/json]
+        User-Agent: [python-requests/2.28.1]
+      method: POST
+      uri: https://panel.sendcloud.sc/api/v2/integrations/241526/shipments
+    response:
+      body:
+        {
+          string: '[{"external_order_id":"cb4467fa-4cf4-4471-af4e-564c7bd71eac","external_shipment_id":"c9b2058d-2621-4ce5-afb0-f14e8e5565b6","shipment_uuid":"df9007cc-9399-425b-8c71-d34d8b1e260c","status":"created"}]',
+        }
+      headers:
+        Connection: [keep-alive]
+        Content-Length: ["198"]
+        Content-Type: [application/json]
+        Date: ["Wed, 06 Jul 2022 11:07:41 GMT"]
+        allow: ["GET, POST, DELETE, HEAD, OPTIONS"]
+        referrer-policy: [same-origin]
+        server: [envoy]
+        vary: [Origin]
+        x-content-type-options: [nosniff]
+        x-envoy-upstream-service-time: ["124"]
+        x-frame-options: [DENY]
+      status: {code: 200, message: OK}
+version: 1
