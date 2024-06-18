@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: carrier-delivery (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 12:24+0000\n"
-"PO-Revision-Date: 2024-03-27 15:34+0000\n"
+"PO-Revision-Date: 2024-06-18 18:35+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/"
 "OCA-carrier-delivery-8-0/language/it/)\n"
@@ -217,7 +217,7 @@ msgstr "Istruzioni di spedizione"
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model,name:delivery_carrier_label_postlogistics.model_delivery_carrier_option
 msgid "Delivery carrier option"
-msgstr "Opzione vettore di spedizione"
+msgstr "Opzione vettore consegna"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model,name:delivery_carrier_label_postlogistics.model_delivery_carrier_template_option
