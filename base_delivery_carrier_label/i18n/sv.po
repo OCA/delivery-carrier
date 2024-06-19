@@ -9,45 +9,47 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-06-25 00:44+0000\n"
-"PO-Revision-Date: 2017-06-25 00:44+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"PO-Revision-Date: 2024-06-19 14:34+0000\n"
+"Last-Translator: jakobkrabbe <jakob@syscare.se>\n"
 "Language-Team: Swedish (https://www.transifex.com/oca/teams/23907/sv/)\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__access_token
 msgid "Access Token"
-msgstr ""
+msgstr "Tillgångspollett"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option__active
 msgid "Active"
-msgstr ""
+msgstr "Aktiv"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_delivery_carrier_option__description
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_delivery_carrier_template_option__description
 msgid "Allow to define a more complete description than in the name field."
 msgstr ""
+"Gör det möjligt att ange en mer fullständig beskrivning än i namnfältet."
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option__by_default
 msgid "Applied by Default"
-msgstr ""
+msgstr "Tillämpas som standard"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__attachment_id
 msgid "Attachement"
-msgstr ""
+msgstr "Attachment"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__local_url
 msgid "Attachment URL"
-msgstr ""
+msgstr "URL för bifogad fil"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_delivery_carrier_option__by_default
@@ -55,50 +57,53 @@ msgid ""
 "By check, user can choose to apply this option to each Delivery Order\n"
 " using this delivery method"
 msgstr ""
+"Genom att markera kan användaren välja att tillämpa detta alternativ på "
+"varje leveransorder\n"
+" som använder denna leveransmetod"
 
 #. module: base_delivery_carrier_label
 #: model_terms:ir.ui.view,arch_db:base_delivery_carrier_label.manifest_wizard_form
 msgid "Cancel"
-msgstr ""
+msgstr "Avbryt"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option__carrier_id
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_manifest_wizard__carrier_id
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_picking__carrier_id
 msgid "Carrier"
-msgstr ""
+msgstr "Bärare"
 
 #. module: base_delivery_carrier_label
 #: model_terms:ir.ui.view,arch_db:base_delivery_carrier_label.view_quant_package_tree
 msgid "Carrier Tracking URL"
-msgstr ""
+msgstr "URL för spårning av transportör"
 
 #. module: base_delivery_carrier_label
 #: model:ir.ui.menu,name:base_delivery_carrier_label.menu_carriers_config
 msgid "Carriers"
-msgstr ""
+msgstr "Transportörer"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__checksum
 msgid "Checksum/SHA1"
-msgstr ""
+msgstr "Kontrollsumma/SHA1"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option__code
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_template_option__code
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_picking__carrier_code
 msgid "Code"
-msgstr ""
+msgstr "Kod"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option__color
 msgid "Color"
-msgstr ""
+msgstr "Färg"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__company_id
 msgid "Company"
-msgstr ""
+msgstr "Företag"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option__create_uid
@@ -119,34 +124,34 @@ msgstr "Skapad den"
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__db_datas
 msgid "Database Data"
-msgstr ""
+msgstr "Databas Data"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_stock_picking__carrier_code
 msgid "Delivery Method Code (according to carrier)"
-msgstr ""
+msgstr "Leveransmetod Kod (enligt transportör)"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_manifest_wizard
 msgid "Delivery carrier manifest wizard"
-msgstr ""
+msgstr "Assistent för manifest för budfirma"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_delivery_carrier_option
 msgid "Delivery carrier option"
-msgstr ""
+msgstr "Val av leveransföretag"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_delivery_carrier_template_option
 msgid "Delivery carrier template option"
-msgstr ""
+msgstr "Alternativ för leveransmall för transportör"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option__description
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_template_option__description
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__description
 msgid "Description"
-msgstr ""
+msgstr "Beskrivning"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option__display_name
@@ -159,47 +164,47 @@ msgstr "Visa namn"
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields.selection,name:base_delivery_carrier_label.selection__manifest_wizard__state__end
 msgid "END"
-msgstr ""
+msgstr "SLUT"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields.selection,name:base_delivery_carrier_label.selection__manifest_wizard__state__file
 msgid "File"
-msgstr ""
+msgstr "Fil"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__datas
 msgid "File Content (base64)"
-msgstr ""
+msgstr "Filinnehåll (base64)"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__raw
 msgid "File Content (raw)"
-msgstr ""
+msgstr "Filinnehåll (rå)"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_manifest_wizard__filename
 msgid "File Name"
-msgstr ""
+msgstr "Filens namn"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__file_size
 msgid "File Size"
-msgstr ""
+msgstr "Filstorlek"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__file_type
 msgid "File type"
-msgstr ""
+msgstr "Filtyp"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_manifest_wizard__from_date
 msgid "From Date"
-msgstr ""
+msgstr "Från datum"
 
 #. module: base_delivery_carrier_label
 #: model_terms:ir.ui.view,arch_db:base_delivery_carrier_label.manifest_wizard_form
 msgid "Get Manifest File"
-msgstr ""
+msgstr "Hämta manifestfil"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option__id
@@ -215,36 +220,39 @@ msgid ""
 "If checked, this option is necessarily applied to the delivery order. "
 "Mandatory options show up in orange in the option widget on the picking."
 msgstr ""
+"Om detta alternativ är markerat måste det tillämpas på leveransordern. "
+"Obligatoriska alternativ visas i orange färg i alternativwidgeten på "
+"plockningen."
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__image_height
 msgid "Image Height"
-msgstr ""
+msgstr "Bildhöjd"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__image_src
 msgid "Image Src"
-msgstr ""
+msgstr "Bildkälla"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__image_width
 msgid "Image Width"
-msgstr ""
+msgstr "Bildbredd"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__index_content
 msgid "Indexed Content"
-msgstr ""
+msgstr "Indexerat innehåll"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields.selection,name:base_delivery_carrier_label.selection__manifest_wizard__state__init
 msgid "Init"
-msgstr ""
+msgstr "Init"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__public
 msgid "Is public document"
-msgstr ""
+msgstr "Är allmän handling"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option____last_update
@@ -273,12 +281,12 @@ msgstr "Senast uppdaterad"
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_stock_quant_package__parcel_tracking_uri
 msgid "Link to the carrier's tracking page for this package."
-msgstr ""
+msgstr "Länk till transportörens spårningssida för detta paket."
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option__mandatory
 msgid "Mandatory"
-msgstr ""
+msgstr "Obligatoriskt"
 
 #. module: base_delivery_carrier_label
 #: model:ir.actions.act_window,name:base_delivery_carrier_label.manifest_wizard_action
@@ -286,124 +294,124 @@ msgstr ""
 #: model:ir.ui.menu,name:base_delivery_carrier_label.manifest_wizard_menu
 #: model_terms:ir.ui.view,arch_db:base_delivery_carrier_label.manifest_wizard_form
 msgid "Manifest"
-msgstr ""
+msgstr "Manifest"
 
 #. module: base_delivery_carrier_label
 #. odoo-python
 #: code:addons/base_delivery_carrier_label/wizard/manifest_wizard.py:0
 #, python-format
 msgid "Manifest not implemented for '%s' carrier."
-msgstr ""
+msgstr "Manifestet är inte implementerat för \"%s\"-bäraren."
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__mimetype
 msgid "Mime Type"
-msgstr ""
+msgstr "Mime-typ"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option__name
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_template_option__name
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__name
 msgid "Name"
-msgstr ""
+msgstr "Namn"
 
 #. module: base_delivery_carrier_label
 #: model:ir.actions.client,name:base_delivery_carrier_label.action_delivery_method_from_carrier_module_install
 msgid "Open Delivery Methods Menu"
-msgstr ""
+msgstr "Öppna menyn Leveransmetoder"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier__available_option_ids
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option__tmpl_option_id
 msgid "Option"
-msgstr ""
+msgstr "Alternativ"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_picking__option_ids
 #: model_terms:ir.ui.view,arch_db:base_delivery_carrier_label.view_delivery_carrier_form
 msgid "Options"
-msgstr ""
+msgstr "Alternativ"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_delivery_carrier_option__color
 msgid "Orange if the option is mandatory, otherwise no color"
-msgstr ""
+msgstr "Orange om alternativet är obligatoriskt, annars ingen färg"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__original_id
 msgid "Original (unoptimized, unresized) attachment"
-msgstr ""
+msgstr "Original (ej optimerad, ej storleksanpassad) bifogad fil"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__package_id
 msgid "Pack"
-msgstr ""
+msgstr "Paket"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_stock_quant_package
 msgid "Packages"
-msgstr ""
+msgstr "Paket"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_quant_package__parcel_tracking
 msgid "Parcel Tracking"
-msgstr ""
+msgstr "Spårning av paket"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_quant_package__parcel_tracking_uri
 msgid "Parcel Tracking Uri"
-msgstr ""
+msgstr "Paketspårning Uri"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option__partner_id
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_template_option__partner_id
 msgid "Partner Carrier"
-msgstr ""
+msgstr "Partner Transportör"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_stock_move_line
 msgid "Product Moves (Stock Move Line)"
-msgstr ""
+msgstr "Produktflyttar (Stock Move Line)"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option__readonly_flag
 msgid "Readonly Flag"
-msgstr ""
+msgstr "Skrivskyddad Flagga"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__res_field
 msgid "Resource Field"
-msgstr ""
+msgstr "Resursfält"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__res_id
 msgid "Resource ID"
-msgstr ""
+msgstr "Resurs-ID"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__res_model
 msgid "Resource Model"
-msgstr ""
+msgstr "Resursmodell"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__res_name
 msgid "Resource Name"
-msgstr ""
+msgstr "Namn på resurs"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_manifest_wizard__notes
 msgid "Result"
-msgstr ""
+msgstr "Resultat"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_shipping_label
 msgid "Shipping Label"
-msgstr ""
+msgstr "Etikett för frakt"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_delivery_carrier
 msgid "Shipping Methods"
-msgstr ""
+msgstr "Leveransmetoder"
 
 #. module: base_delivery_carrier_label
 #. odoo-python
@@ -414,51 +422,54 @@ msgid ""
 "Please delete the existing labels in the attachments of this picking and try "
 "again"
 msgstr ""
+"Vissa etiketter finns redan för plockningen %s.\n"
+"Ta bort de befintliga etiketterna i bilagorna för det här plocket och försök "
+"igen"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_manifest_wizard__state
 msgid "State"
-msgstr ""
+msgstr "Stat"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__store_fname
 msgid "Stored Filename"
-msgstr ""
+msgstr "Lagrad filnamn"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_manifest_wizard__to_date
 msgid "To Date"
-msgstr ""
+msgstr "Hittills"
 
 #. module: base_delivery_carrier_label
 #: model_terms:ir.ui.view,arch_db:base_delivery_carrier_label.view_quant_package_form
 msgid "Tracking"
-msgstr ""
+msgstr "Spårning"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_stock_picking
 msgid "Transfer"
-msgstr ""
+msgstr "Överföring"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__type
 msgid "Type"
-msgstr ""
+msgstr "Typ"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__url
 msgid "Url"
-msgstr ""
+msgstr "Url"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_move_line__weight
 msgid "Weight"
-msgstr ""
+msgstr "Vikt"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_stock_move_line__weight
 msgid "Weight of the pack_operation"
-msgstr ""
+msgstr "Vikt av packningen_operation"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_delivery_carrier_option__readonly_flag
@@ -466,6 +477,8 @@ msgid ""
 "When True, help to prevent the user to modify some fields option (if "
 "attribute is defined in the view)"
 msgstr ""
+"När Sant, hjälper till att förhindra att användaren ändrar vissa "
+"fältalternativ (om attributet är definierat i vyn)"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_shipping_label__type
@@ -473,6 +486,8 @@ msgid ""
 "You can either upload a file from your computer or copy/paste an internet "
 "link to your file."
 msgstr ""
+"Du kan antingen ladda upp en fil från din dator eller kopiera/klistra in en "
+"internetlänk till din fil."
 
 #. module: base_delivery_carrier_label
 #. odoo-python
@@ -482,9 +497,11 @@ msgid ""
 "You should not remove a mandatory option.Please cancel the edit or add back "
 "the option: %s."
 msgstr ""
+"Du bör inte ta bort ett obligatoriskt alternativ. Avbryt redigeringen eller "
+"lägg tillbaka alternativet: %s."
 
 #. module: base_delivery_carrier_label
 #: model_terms:ir.ui.view,arch_db:base_delivery_carrier_label.delivery_carrier_option_view_form
 #: model_terms:ir.ui.view,arch_db:base_delivery_carrier_label.delivery_carrier_template_option_view_form
 msgid "delivery_carrier_option"
-msgstr ""
+msgstr "leverans_transportör_val"
