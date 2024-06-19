@@ -9,49 +9,50 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-28 01:44+0000\n"
-"PO-Revision-Date: 2018-02-28 01:44+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2018\n"
+"PO-Revision-Date: 2024-06-19 14:34+0000\n"
+"Last-Translator: jakobkrabbe <jakob@syscare.se>\n"
 "Language-Team: Swedish (https://www.transifex.com/oca/teams/23907/sv/)\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: delivery_carrier_deposit
 #: sql_constraint:deposit.slip:0
 msgid "'Deposit Slip' name must be unique per company!"
-msgstr ""
+msgstr "Namnet på inbetalningskortet måste vara unikt för varje företag!"
 
 #. module: delivery_carrier_deposit
 #: model:ir.ui.view,arch_db:delivery_carrier_deposit.report_generic_deposit_slip
 msgid "Account Name:"
-msgstr ""
+msgstr "Kontots namn:"
 
 #. module: delivery_carrier_deposit
 #: model:ir.model.fields,help:delivery_carrier_deposit.field_delivery_carrier_deposit_slip
 msgid "Allow to create a 'Deposit Slip' report on delivery orders"
-msgstr ""
+msgstr "Tillåt att skapa en \"Deposit Slip\"-rapport på leveransorder"
 
 #. module: delivery_carrier_deposit
 #: model:ir.ui.view,arch_db:delivery_carrier_deposit.view_deposit_slip_form
 msgid "Are you sure that you re-generate the EDI file ?"
-msgstr ""
+msgstr "Är du säker på att du genererar filen EDI på nytt?"
 
 #. module: delivery_carrier_deposit
 #: model:ir.ui.view,arch_db:delivery_carrier_deposit.view_wiz_create_deposit
 msgid "Cancel"
-msgstr ""
+msgstr "Avbryt"
 
 #. module: delivery_carrier_deposit
 #: model:ir.model,name:delivery_carrier_deposit.model_delivery_carrier
 msgid "Carrier"
-msgstr ""
+msgstr "Bärare"
 
 #. module: delivery_carrier_deposit
 #: model:ir.model.fields,help:delivery_carrier_deposit.field_deposit_slip_carrier_type
 msgid "Carrier type (combines several delivery methods)"
-msgstr ""
+msgstr "Typ av transportör (kombinerar flera leveransmetoder)"
 
 #. module: delivery_carrier_deposit
 #: model:ir.model.fields,help:delivery_carrier_deposit.field_delivery_deposit_wizard_carrier_type
@@ -60,33 +61,36 @@ msgid ""
 "'Deposit Slip' is checked on the delivery methods that have this carrier "
 "type."
 msgstr ""
+"Transportörstyp (kombinerar flera leveransmetoder). Kontrollera att "
+"alternativet \"Deposit Slip\" är markerat för de leveransmetoder som har "
+"denna transportörstyp."
 
 #. module: delivery_carrier_deposit
 #: model:ir.model.fields,field_description:delivery_carrier_deposit.field_deposit_slip_company_id
 msgid "Company"
-msgstr ""
+msgstr "Företag"
 
 #. module: delivery_carrier_deposit
 #: model:ir.ui.view,arch_db:delivery_carrier_deposit.view_deposit_slip_form
 msgid "Confirm"
-msgstr ""
+msgstr "Bekräfta"
 
 #. module: delivery_carrier_deposit
 #: model:ir.ui.view,arch_db:delivery_carrier_deposit.report_generic_deposit_slip
 msgid "Country"
-msgstr ""
+msgstr "Land"
 
 #. module: delivery_carrier_deposit
 #: model:ir.ui.view,arch_db:delivery_carrier_deposit.view_wiz_create_deposit
 msgid "Create"
-msgstr ""
+msgstr "Skapa"
 
 #. module: delivery_carrier_deposit
 #: model:ir.actions.act_window,name:delivery_carrier_deposit.action_wiz_create_deposit
 #: model:ir.ui.menu,name:delivery_carrier_deposit.menu_wiz_delivery_deposit
 #: model:ir.ui.view,arch_db:delivery_carrier_deposit.view_wiz_create_deposit
 msgid "Create Deposit Slip"
-msgstr ""
+msgstr "Skapa inbetalningskort"
 
 #. module: delivery_carrier_deposit
 #: model:ir.model.fields,field_description:delivery_carrier_deposit.field_delivery_deposit_wizard_create_uid
@@ -103,30 +107,30 @@ msgstr "Skapad den"
 #. module: delivery_carrier_deposit
 #: model:ir.ui.view,arch_db:delivery_carrier_deposit.report_generic_deposit_slip
 msgid "Customer No.:"
-msgstr ""
+msgstr "Kundnummer:"
 
 #. module: delivery_carrier_deposit
 #: model:ir.ui.view,arch_db:delivery_carrier_deposit.report_generic_deposit_slip
 msgid "Date:"
-msgstr ""
+msgstr "Datum:"
 
 #. module: delivery_carrier_deposit
 #: model:ir.model.fields,field_description:delivery_carrier_deposit.field_delivery_deposit_wizard_carrier_type
 #: model:ir.ui.view,arch_db:delivery_carrier_deposit.view_deposit_slip_search
 msgid "Delivery Method Type"
-msgstr ""
+msgstr "Leveransmetod Typ"
 
 #. module: delivery_carrier_deposit
 #: model:ir.ui.view,arch_db:delivery_carrier_deposit.report_generic_deposit_slip
 msgid "Delivery Method Type:"
-msgstr ""
+msgstr "Leveransmetod Typ:"
 
 #. module: delivery_carrier_deposit
 #: model:ir.ui.view,arch_db:delivery_carrier_deposit.view_deposit_slip_form
 #: model:ir.ui.view,arch_db:delivery_carrier_deposit.view_deposit_slip_search
 #: model:ir.ui.view,arch_db:delivery_carrier_deposit.view_deposit_slip_tree
 msgid "Deposit"
-msgstr ""
+msgstr "Insättning"
 
 #. module: delivery_carrier_deposit
 #: model:ir.actions.act_window,name:delivery_carrier_deposit.act_delivery_deposit
@@ -135,18 +139,18 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_carrier_deposit.field_stock_picking_deposit_slip_id
 #: model:ir.ui.menu,name:delivery_carrier_deposit.menu_delivery_deposit_slip_model
 msgid "Deposit Slip"
-msgstr ""
+msgstr "Insättningsavi"
 
 #. module: delivery_carrier_deposit
 #: model:mail.message.subtype,description:delivery_carrier_deposit.deposit_slip_done
 #: model:mail.message.subtype,name:delivery_carrier_deposit.deposit_slip_done
 msgid "Deposit Slip Validated"
-msgstr ""
+msgstr "Insättningskvitto validerat"
 
 #. module: delivery_carrier_deposit
 #: model:ir.ui.view,arch_db:delivery_carrier_deposit.report_generic_deposit_slip
 msgid "Deposit Slip n°"
-msgstr ""
+msgstr "Insättningsbevis nr"
 
 #. module: delivery_carrier_deposit
 #: model:ir.model.fields,field_description:delivery_carrier_deposit.field_delivery_deposit_wizard_display_name
@@ -157,22 +161,22 @@ msgstr "Visa namn"
 #. module: delivery_carrier_deposit
 #: selection:deposit.slip,state:0
 msgid "Done"
-msgstr ""
+msgstr "Klar"
 
 #. module: delivery_carrier_deposit
 #: selection:deposit.slip,state:0
 msgid "Draft"
-msgstr ""
+msgstr "Utkast"
 
 #. module: delivery_carrier_deposit
 #: model:ir.actions.report.xml,name:delivery_carrier_deposit.report_deposit_slip
 msgid "Generic Deposit Slip"
-msgstr ""
+msgstr "Generiskt inbetalningskort"
 
 #. module: delivery_carrier_deposit
 #: model:ir.ui.view,arch_db:delivery_carrier_deposit.view_deposit_slip_search
 msgid "Group By"
-msgstr ""
+msgstr "Grupp av"
 
 #. module: delivery_carrier_deposit
 #: model:ir.model.fields,field_description:delivery_carrier_deposit.field_delivery_deposit_wizard_id
@@ -201,47 +205,47 @@ msgstr "Senast uppdaterad"
 #. module: delivery_carrier_deposit
 #: model:ir.model.fields,field_description:delivery_carrier_deposit.field_deposit_slip_name
 msgid "Name"
-msgstr ""
+msgstr "Namn"
 
 #. module: delivery_carrier_deposit
 #: model:ir.ui.view,arch_db:delivery_carrier_deposit.report_generic_deposit_slip
 msgid "Name and address<br/>recipient"
-msgstr ""
+msgstr "Namn och adress<br/>mottagare"
 
 #. module: delivery_carrier_deposit
 #: model:ir.ui.view,arch_db:delivery_carrier_deposit.report_generic_deposit_slip
 msgid "Nr of<br/>packages"
-msgstr ""
+msgstr "Antal<br/>förpackningar"
 
 #. module: delivery_carrier_deposit
 #: model:ir.model.fields,field_description:delivery_carrier_deposit.field_deposit_slip_number_of_packages
 msgid "Number of Packages"
-msgstr ""
+msgstr "Antal paket"
 
 #. module: delivery_carrier_deposit
 #: model:ir.ui.view,arch_db:delivery_carrier_deposit.report_generic_deposit_slip
 msgid "Parcel numbers"
-msgstr ""
+msgstr "Skiftenummer"
 
 #. module: delivery_carrier_deposit
 #: model:ir.model.fields,field_description:delivery_carrier_deposit.field_deposit_slip_picking_ids
 msgid "Pickings"
-msgstr ""
+msgstr "Plockning"
 
 #. module: delivery_carrier_deposit
 #: model:ir.ui.view,arch_db:delivery_carrier_deposit.view_deposit_slip_form
 msgid "Re-generate EDI file"
-msgstr ""
+msgstr "Återgenerera EDI-fil"
 
 #. module: delivery_carrier_deposit
 #: model:ir.ui.view,arch_db:delivery_carrier_deposit.report_generic_deposit_slip
 msgid "Sender Ref"
-msgstr ""
+msgstr "Sändare Ref"
 
 #. module: delivery_carrier_deposit
 #: model:ir.model.fields,field_description:delivery_carrier_deposit.field_deposit_slip_state
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #. module: delivery_carrier_deposit
 #: code:addons/delivery_carrier_deposit/wizards/deposit.py:61
@@ -250,53 +254,55 @@ msgid ""
 "There are no delivery orders in transferred state with a delivery method "
 "type '%s' not already linked to a deposit slip."
 msgstr ""
+"Det finns inga leveransorder i överförd stat med en leveransmetod av typen \""
+"%s\" som inte redan är kopplad till en inbetalningskupong."
 
 #. module: delivery_carrier_deposit
 #: model:ir.ui.view,arch_db:delivery_carrier_deposit.report_generic_deposit_slip
 msgid "Total Number of Packages:"
-msgstr ""
+msgstr "Totalt antal paket:"
 
 #. module: delivery_carrier_deposit
 #: model:ir.model.fields,field_description:delivery_carrier_deposit.field_deposit_slip_weight
 msgid "Total Weight"
-msgstr ""
+msgstr "Total vikt"
 
 #. module: delivery_carrier_deposit
 #: model:ir.ui.view,arch_db:delivery_carrier_deposit.report_generic_deposit_slip
 msgid "Total Weight:"
-msgstr ""
+msgstr "Total vikt:"
 
 #. module: delivery_carrier_deposit
 #: model:ir.model,name:delivery_carrier_deposit.model_stock_picking
 msgid "Transfer"
-msgstr ""
+msgstr "Överföring"
 
 #. module: delivery_carrier_deposit
 #: model:ir.ui.menu,name:delivery_carrier_deposit.menu_delivery_deposit_slip
 msgid "Transport"
-msgstr ""
+msgstr "Transport"
 
 #. module: delivery_carrier_deposit
 #: model:ir.model.fields,field_description:delivery_carrier_deposit.field_deposit_slip_carrier_type
 msgid "Type"
-msgstr ""
+msgstr "Typ"
 
 #. module: delivery_carrier_deposit
 #: model:ir.ui.view,arch_db:delivery_carrier_deposit.report_generic_deposit_slip
 msgid "Weight<br/>(kg)"
-msgstr ""
+msgstr "Vikt<br/>(kg)"
 
 #. module: delivery_carrier_deposit
 #: model:ir.model,name:delivery_carrier_deposit.model_delivery_deposit_wizard
 msgid "Wizard to create Deposit Slip"
-msgstr ""
+msgstr "Guide för att skapa inbetalningskort"
 
 #. module: delivery_carrier_deposit
 #: model:ir.ui.view,arch_db:delivery_carrier_deposit.report_generic_deposit_slip
 msgid "ZIP"
-msgstr ""
+msgstr "ZIP"
 
 #. module: delivery_carrier_deposit
 #: model:ir.ui.view,arch_db:delivery_carrier_deposit.report_generic_deposit_slip
 msgid "kg"
-msgstr ""
+msgstr "kg"
