@@ -58,7 +58,7 @@ class LaposteLabelDomCase(VCRMixin, carrier_label_case.CarrierLabelCase):
         return data
 
     def _create_order_picking(self):
-        super()._create_order_picking()
+        return super()._create_order_picking()
 
     def _get_carrier(self):
         return self.env.ref("delivery_roulier_laposte_fr.delivery_carrier_COM")

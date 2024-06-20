@@ -63,9 +63,10 @@ class StockPicking(models.Model):
     def _laposte_fr_check_insurance(self):
         for rec in self:
             if rec.laposte_recommande and rec.laposte_insurance:
-                raise (
+                message = (
                     "Les paramètres 'recommandé' et 'assurance' " "sont incompatibles."
                 )
+                raise UserError(message)
             if rec.laposte_recommande and rec.partner_id.country_id != self.env.ref(
                 "base.fr"
             ):

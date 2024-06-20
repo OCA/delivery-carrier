@@ -139,10 +139,13 @@ class StockQuantPackage(models.Model):
                 parts.append(format_one_exception(message, map_responses))
 
         ret_mess = _(
-            "Incident\n-----------\n%s\n"
+            "Incident\n-----------\n%(displ_exception_message)s\n"
             "Données transmises:\n"
-            "-----------------------------\n%s"
-        ) % ("\n".join(parts), request.decode("utf-8"))
+            "-----------------------------\n%(displ_data_transmitted)s"
+        ) % {
+            "displ_exception_message": "\n".join(parts),
+            "displ_data_transmitted": request.decode("utf-8"),
+        }
         return ret_mess
 
     def _laposte_fr_get_tracking_link(self):
