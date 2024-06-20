@@ -68,10 +68,13 @@ class StockQuantPackage(models.Model):
             if not hs:
                 raise UserError(
                     _(
-                        "No H.S. Code on product '%s' nor on it's "
-                        "product category '%s'."
+                        "No H.S. Code on product '%(prod_displ_name)s' nor on it's "
+                        "product category '%(categ_displ_name)s'."
                     )
-                    % (product.display_name, product.categ_id.display_name)
+                    % {
+                        "prod_displ_name": product.display_name,
+                        "categ_displ_name": product.categ_id.display_name,
+                    }
                 )
 
             article["quantity"] = "%.f" % (operation.qty_done or operation.product_qty)
