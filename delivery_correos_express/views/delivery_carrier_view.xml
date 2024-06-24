@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_delivery_carrier_form" model="ir.ui.view">
+        <field name="model">delivery.carrier</field>
+        <field name="inherit_id" ref="delivery.view_delivery_carrier_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook/page[1]" position='before'>
+                <page
+                    string="Correos Express Configuration"
+                    attrs="{'invisible': [('delivery_type', '!=', 'correos_express')]}"
+                >
+                    <group>
+                        <group>
+                            <field
+                                name="correos_express_username"
+                                attrs="{
+                                    'required': [
+                                        ('delivery_type', '=', 'correos_express')
+                                    ]
+                                }"
+                            />
+                            <field
+                                name="correos_express_password"
+                                password="True"
+                                attrs="{
+                                    'required': [
+                                        ('delivery_type', '=', 'correos_express')
+                                    ]
+                                }"
+                            />
+                            <field
+                                name="correos_express_customer_code"
+                                attrs="{
+                                    'required': [
+                                        ('delivery_type', '=', 'correos_express')
+                                    ]
+                                }"
+                            />
+                            <field
+                                name="correos_express_sender_code"
+                                attrs="{
+                                    'required': [
+                                        ('delivery_type', '=', 'correos_express')
+                                    ]
+                                }"
+                            />
+                            <field
+                                name="correos_express_label_type"
+                                attrs="{
+                                    'required': [
+                                        ('delivery_type', '=', 'correos_express')
+                                    ]
+                                }"
+                            />
+                            <field
+                                name="correos_express_product"
+                                attrs="{
+                                    'required': [
+                                        ('delivery_type', '=', 'correos_express')
+                                    ]
+                                }"
+                            />
+                            <field
+                                name="correos_express_transport"
+                                attrs="{
+                                    'required': [
+                                        ('delivery_type', '=', 'correos_express')
+                                    ]
+                                }"
+                            />
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
