@@ -28,13 +28,13 @@ class TestDeliveryPackageNumber(TransactionCase):
             {
                 "product_id": cls.product.id,
                 "product_uom_id": cls.product.uom_id.id,
-                "qty_done": 5,
+                "quantity": 5,
                 "location_id": cls.wh1.lot_stock_id.id,
                 "location_dest_id": cls.wh1.wh_output_stock_loc_id.id,
                 "picking_id": cls.picking.id,
             }
         )
-        cls.ml2 = cls.ml1.copy({"qty_done": 0})
+        cls.ml2 = cls.ml1.copy({"quantity": 0})
 
     def test_number_of_packages(self):
         # By default it's computed to 0
@@ -47,7 +47,7 @@ class TestDeliveryPackageNumber(TransactionCase):
         # We add a package and it recalculates
         self.picking.action_put_in_pack()
         self.assertEqual(self.picking.number_of_packages, 1)
-        self.ml2.qty_done = 5
+        self.ml2.quantity = 5
         self.picking.action_put_in_pack()
         self.assertEqual(self.picking.number_of_packages, 2)
         # We can later set it manually if we want to
@@ -64,7 +64,7 @@ class TestDeliveryPackageNumber(TransactionCase):
         order = order_form.save()
         order.action_confirm()
         picking = order.picking_ids
-        picking.move_ids.quantity_done = 2
+        picking.move_ids.quantity = 2
         picking.number_of_packages = 2
         action = picking.with_context(
             test_delivery_package_number=True

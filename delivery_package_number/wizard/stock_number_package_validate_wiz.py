@@ -41,7 +41,8 @@ class StockNumberPackageValidateWiz(models.TransientModel):
     def process(self):
         if self.number_of_packages:
             self.pick_ids.write({"number_of_packages": self.number_of_packages})
-        # put context key for avoiding `base_delivery_carrier_label` auto-packaging feature
+        # put context key for avoiding `base_delivery_carrier_label`
+        # auto-packaging feature
         self.pick_ids.with_context(
             set_default_package=False, bypass_set_number_of_packages=True
         ).button_validate()

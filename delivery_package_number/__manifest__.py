@@ -10,7 +10,7 @@
     "license": "AGPL-3",
     "installable": True,
     "application": False,
-    "depends": ["delivery"],
+    "depends": ["stock_delivery"],
     "data": [
         "security/ir.model.access.csv",
         "data/paperformat_data.xml",
