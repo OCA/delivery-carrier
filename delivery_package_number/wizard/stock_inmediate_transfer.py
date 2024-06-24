@@ -10,7 +10,8 @@ class StockImmediateTransfer(models.TransientModel):
     def process(self):
         if self.number_of_packages:
             self.pick_ids.write({"number_of_packages": self.number_of_packages})
-        # put context key for avoiding `base_delivery_carrier_label` auto-packaging feature
+        # put context key for avoiding
+        # `base_delivery_carrier_label` auto-packaging feature
         res = super(
             StockImmediateTransfer, self.with_context(set_default_package=False)
         ).process()
