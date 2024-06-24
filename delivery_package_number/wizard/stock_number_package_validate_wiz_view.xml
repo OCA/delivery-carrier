@@ -9,26 +9,24 @@
                 <group>
                     <field
                         name="number_of_packages"
-                        attrs="{'invisible': [('stock_number_package_validation_line_ids', '!=', [])]}"
+                        invisible="stock_number_package_validation_line_ids"
                     />
                 </group>
-                <group>
-                    <field
-                        name="stock_number_package_validation_line_ids"
-                        attrs="{'invisible': [('stock_number_package_validation_line_ids', '=', [])]}"
-                        nolabel="1"
-                    >
-                        <tree create="0" delete="0" editable="1">
-                            <field
-                                name="picking_id"
-                                options="{'no_open': True}"
-                                readonly="1"
-                                force_save="1"
-                            />
-                            <field name="number_of_packages" />
-                        </tree>
-                    </field>
-                </group>
+                <field
+                    name="stock_number_package_validation_line_ids"
+                    invisible="not stock_number_package_validation_line_ids"
+                    nolabel="1"
+                >
+                    <tree create="0" delete="0" editable="1">
+                        <field
+                            name="picking_id"
+                            options="{'no_open': True}"
+                            readonly="1"
+                            force_save="1"
+                        />
+                        <field name="number_of_packages" />
+                    </tree>
+                </field>
                 <footer>
                     <button
                         name="process"

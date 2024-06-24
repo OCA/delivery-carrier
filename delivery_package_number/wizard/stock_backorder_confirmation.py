@@ -8,7 +8,8 @@ class StockBackorderConfirmation(models.TransientModel):
     _inherit = "stock.backorder.confirmation"
 
     def process(self):
-        # put context key for avoiding `base_delivery_carrier_label` auto-packaging feature
+        # put context key for avoiding `base_delivery_carrier_label`
+        # auto-packaging feature
         return super(
             StockBackorderConfirmation, self.with_context(set_default_package=False)
         ).process()
