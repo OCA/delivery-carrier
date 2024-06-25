@@ -554,7 +554,7 @@ class DeliveryCarrier(models.Model):
                             ]
                         )
                     ),
-                    "tracking_state": "[{}] {}".format(info.LastEvent, last_event[0]),
+                    "tracking_state": f"[{info.LastEvent}] {last_event[0]}",
                     "delivery_state": last_event[1],
                 }
             )
