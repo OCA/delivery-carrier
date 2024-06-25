@@ -388,8 +388,10 @@ class UpsRequest(object):
                             activity.get("status").get("description"),
                         )
                     )
+                if shipment["package"][0]["activity"]:
                     delivery_state = static_states.get(
-                        activity["status"]["type"], "incidence"
+                        shipment["package"][0]["activity"][0]["status"]["type"],
+                        "incidence",
                     )
             else:
                 for warning in shipment.get("warnings"):
