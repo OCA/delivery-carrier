@@ -5,7 +5,7 @@
 {
     "name": "Delivery Schenker",
     "summary": "Delivery Carrier implementation for DB Schenker API",
-    "version": "16.0.1.0.0",
+    "version": "17.0.1.0.0",
     "category": "Stock",
     "website": "https://github.com/OCA/delivery-carrier",
     "author": "Tecnativa, Studio73, Odoo Community Association (OCA)",

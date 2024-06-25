@@ -1,0 +1,5 @@
+- [Tecnativa](https://www.tecnativa.com):
+  - David Vidal
+- [Studio73](https://www.studio73.es):
+  - Ethan Hildick
+- Michael Tietz (MT Software) \<<mtietz@mt-software.de>\>
