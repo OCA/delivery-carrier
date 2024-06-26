@@ -9,13 +9,13 @@
             <xpath expr="//notebook/page[1]" position='before'>
                 <page
                     string="Schenker Configuration"
-                    attrs="{'invisible': [('delivery_type', '!=', 'schenker')]}"
+                    invisible="delivery_type != 'schenker'"
                 >
                     <group>
                         <group string="Connection">
                             <field
                                 name="schenker_access_key"
-                                attrs="{'required': [('delivery_type', '=', 'schenker')]}"
+                                required="delivery_type == 'schenker'"
                             />
                             <field name="schenker_group_id" />
                             <field name="schenker_user" />
@@ -23,34 +23,37 @@
                         <group string="Label">
                             <field
                                 name="schenker_barcode_format"
-                                attrs="{'required': [('delivery_type', '=', 'schenker')]}"
+                                required="delivery_type == 'schenker'"
                             />
                             <field name="schenker_barcode_mail" />
                             <field
                                 name="schenker_barcode_a4_start_pos"
-                                attrs="{'required': [('schenker_barcode_format', '=', 'A4')], 'invisible': [('schenker_barcode_format', '!=', 'A4')]}"
+                                required="schenker_barcode_format == 'A4'"
+                                invisible="schenker_barcode_format != 'A4'"
                             />
                             <field
                                 name="schenker_barcode_a4_separated"
-                                attrs="{'required': [('schenker_barcode_format', '=', 'A4')], 'invisible': [('schenker_barcode_format', '!=', 'A4')]}"
+                                required="schenker_barcode_format == 'A4'"
+                                invisible="schenker_barcode_format != 'A4'"
                             />
                         </group>
                         <group string="Service">
                             <field
                                 name="schenker_booking_type"
-                                attrs="{'required': [('delivery_type', '=', 'schenker')]}"
+                                required="delivery_type == 'schenker'"
                             />
                             <field
                                 name="schenker_incoterm_id"
-                                attrs="{'required': [('delivery_type', '=', 'schenker')]}"
+                                required="delivery_type == 'schenker'"
                             />
                             <field
                                 name="schenker_service_type"
-                                attrs="{'required': [('delivery_type', '=', 'schenker')]}"
+                                required="delivery_type == 'schenker'"
                             />
                             <field
                                 name="schenker_service_land"
-                                attrs="{'required': [('delivery_type', '=', 'schenker'), ('schenker_booking_type', '=', 'land')], 'invisible': [('schenker_booking_type', '!=', 'land')]}"
+                                required="delivery_type == 'schenker' and schenker_booking_type == 'land'"
+                                invisible="schenker_booking_type != 'land'"
                             />
                             <field name="schenker_indoor_delivery" />
                             <field name="schenker_express" />
@@ -63,11 +66,11 @@
                         <group string="Logistics">
                             <field
                                 name="schenker_default_package_type_id"
-                                attrs="{'required': [('delivery_type', '=', 'schenker')]}"
+                                required="delivery_type == 'schenker'"
                             />
                             <field
                                 name="schenker_measure_unit"
-                                attrs="{'required': [('delivery_type', '=', 'schenker')]}"
+                                required="delivery_type == 'schenker'"
                             />
                         </group>
                     </group>
