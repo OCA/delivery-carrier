@@ -361,7 +361,9 @@ class DeliveryCarrier(models.Model):
                 # For a more complex solution use packaging properly
                 "grossWeight": round(weight / picking.number_of_packages, 2),
                 "volume": round(volume, 2) or 0.01,
-                "packageType": self.schenker_default_package_type_id.shipper_package_code,
+                "packageType": (
+                    self.schenker_default_package_type_id.shipper_package_code
+                ),
                 "stackable": self.schenker_default_package_type_id.schenker_stackable,
                 "pieces": picking.number_of_packages,
             }
