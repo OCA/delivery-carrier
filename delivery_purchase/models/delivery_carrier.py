@@ -1,4 +1,5 @@
 # Copyright 2015 Serv. Tecnol. Avanzados - Pedro M. Baeza
+# Copyright 2024 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import _, api, fields, models
@@ -22,6 +23,7 @@ class DeliveryCarrier(models.Model):
                        'warning_message': a string containing a warning message}
         """
         self.ensure_one()
+        order.ensure_one()
         if hasattr(self, "purchase_%s_rate_shipment" % self.delivery_type):
             res = getattr(self, "purchase_%s_rate_shipment" % self.delivery_type)(order)
             # apply margin on computed price
@@ -39,6 +41,7 @@ class DeliveryCarrier(models.Model):
                 ) % (self.amount)
                 res["price"] = 0.0
             return res
+        return {}
 
     def purchase_send_shipping(self, pickings):
         """Send the package to the service provider

@@ -1,3 +1,5 @@
+# Copyright 2021 Tecnativa
+# Copyright 2024 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
 from odoo.tests import Form, common
@@ -131,6 +133,33 @@ class TestDeliveryPurchase(TestDeliveryPurchaseBase):
             len(self.purchase.order_line.filtered(lambda x: x.is_delivery)), 1
         )
         self.assertEqual(self.purchase.delivery_price, 20)
+
+    def test_picking_carrier_other(self):
+        """Simulate another carrier
+
+        Test when purchase_%s_rate_shipment and
+        purchase_%s_send_shipping are not implemented
+        """
+        self.env["delivery.carrier"]._fields["delivery_type"].selection.append(
+            ("other", "Other")
+        )
+        carrier_other = self.env["delivery.carrier"].create(
+            {
+                "product_id": self.delivery_product.id,
+                "delivery_type": "other",
+                "name": "Carrier Other",
+            }
+        )
+        self.purchase.carrier_id = carrier_other
+        self.purchase.button_confirm()
+        picking = self.purchase.picking_ids
+        self._action_picking_validate(picking)
+        self.assertEqual(picking.carrier_id, carrier_other)
+        self.assertEqual(picking.carrier_price, 0)
+        self.assertEqual(
+            len(self.purchase.order_line.filtered(lambda x: x.is_delivery)), 0
+        )
+        self.assertEqual(self.purchase.delivery_price, 0)
 
     def test_picking_carrier_multi(self):
         self.purchase.order_line.product_qty = 2
