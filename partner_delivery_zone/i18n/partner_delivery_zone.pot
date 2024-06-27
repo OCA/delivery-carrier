@@ -53,6 +53,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:partner_delivery_zone.field_res_partner__delivery_zone_id
 #: model:ir.model.fields,field_description:partner_delivery_zone.field_res_users__delivery_zone_id
 #: model:ir.model.fields,field_description:partner_delivery_zone.field_sale_order__delivery_zone_id
+#: model:ir.model.fields,field_description:partner_delivery_zone.field_stock_move__delivery_zone_id
 #: model:ir.model.fields,field_description:partner_delivery_zone.field_stock_picking__delivery_zone_id
 #: model_terms:ir.ui.view,arch_db:partner_delivery_zone.view_partner_delivery_zone_form
 #: model_terms:ir.ui.view,arch_db:partner_delivery_zone.view_partner_delivery_zone_search
