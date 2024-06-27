@@ -49,7 +49,7 @@ addon | version | maintainers | summary
 [delivery_roulier](delivery_roulier/) | 16.0.1.0.0 | [![florian-dacosta](https://github.com/florian-dacosta.png?size=30px)](https://github.com/florian-dacosta) | Integration of multiple carriers
 [delivery_state](delivery_state/) | 16.0.1.1.0 |  | Provides fields to be able to contemplate the tracking statesand also adds a global fields
 [partner_delivery_schedule](partner_delivery_schedule/) | 16.0.1.0.0 |  | Set on partners a schedule for delivery goods
-[partner_delivery_zone](partner_delivery_zone/) | 16.0.1.0.1 |  | This module allows to create partner delivery zones for physical products
+[partner_delivery_zone](partner_delivery_zone/) | 16.0.1.1.0 |  | This module allows to create partner delivery zones for physical products
 [server_environment_delivery](server_environment_delivery/) | 16.0.1.0.0 |  | Configure prod environment for delivery carriers
 [stock_picking_delivery_link](stock_picking_delivery_link/) | 16.0.1.1.3 |  | Adds link to the delivery on all intermediate operations.
 [stock_picking_report_delivery_cost](stock_picking_report_delivery_cost/) | 16.0.1.0.0 |  | Show delivery cost in delivery slip and picking operations reports
