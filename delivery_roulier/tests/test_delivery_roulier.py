@@ -27,6 +27,7 @@ class DeliveryRoulierCase(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         cls.loader = FakeModelLoader(cls.env, cls.__module__)
         cls.loader.backup_registry()
 
@@ -35,13 +36,10 @@ class DeliveryRoulierCase(TransactionCase):
 
         cls.loader.update_registry((FakeDeliveryCarrier,))
         cls.real_get_carriers_action_available = roulier.get_carriers_action_available
-
-    def setUp(self):
-        super().setUp()
-        delivery_product = self.env["product.product"].create(
+        delivery_product = cls.env["product.product"].create(
             {"name": "test shipping product", "type": "service"}
         )
-        self.account = self.env["carrier.account"].create(
+        cls.account = cls.env["carrier.account"].create(
             {
                 "name": "Test Carrier Account",
                 "delivery_type": "test",
@@ -49,18 +47,18 @@ class DeliveryRoulierCase(TransactionCase):
                 "password": "test",
             }
         )
-        self.test_carrier = self.env["delivery.carrier"].create(
+        cls.test_carrier = cls.env["delivery.carrier"].create(
             {
                 "name": "Test Carrier",
                 "delivery_type": "test",
                 "product_id": delivery_product.id,
-                "carrier_account_id": self.account.id,
+                "carrier_account_id": cls.account.id,
             }
         )
-        partner = self.env["res.partner"].create(
+        partner = cls.env["res.partner"].create(
             {
                 "name": "Carrier label test customer",
-                "country_id": self.env.ref("base.fr").id,
+                "country_id": cls.env.ref("base.fr").id,
                 "street": "test street",
                 "street2": "test street2",
                 "city": "test city",
@@ -69,30 +67,27 @@ class DeliveryRoulierCase(TransactionCase):
                 "zip": "00000",
             }
         )
-        product = self.env["product.product"].create(
+        product = cls.env["product.product"].create(
             {"name": "Carrier test product", "type": "product", "weight": 1.2}
         )
-        self.order = self.env["sale.order"].create(
+        cls.order = cls.env["sale.order"].create(
             {
-                "carrier_id": self.test_carrier.id,
+                "carrier_id": cls.test_carrier.id,
                 "partner_id": partner.id,
                 "order_line": [
                     (0, 0, {"product_id": product.id, "product_uom_qty": 1})
                 ],
             }
         )
-        self.env["stock.quant"].with_context(inventory_mode=True).create(
+        cls.env["stock.quant"].with_context(inventory_mode=True).create(
             {
                 "product_id": product.id,
-                "location_id": self.order.warehouse_id.lot_stock_id.id,
+                "location_id": cls.order.warehouse_id.lot_stock_id.id,
                 "inventory_quantity": 1,
             }
-        )._apply_inventory()
-        self.order.action_confirm()
-        self.picking = self.order.picking_ids
-        self.env["stock.immediate.transfer"].create(
-            {"pick_ids": [(6, 0, self.picking.ids)]}
-        ).process()
+        ).action_apply_inventory()
+        cls.order.action_confirm()
+        cls.picking = cls.order.picking_ids
 
     @classmethod
     def tearDownClass(cls):
