@@ -7,12 +7,16 @@ from odoo import fields, models
 class DeliveryCarrier(models.Model):
     _inherit = "delivery.carrier"
 
+    track_carrier_state = fields.Boolean(default=True)
+
     def send_shipping(self, pickings):
         res = super().send_shipping(pickings)
         pickings.write(
             {
-                "delivery_state": "shipping_recorded_in_carrier",
                 "date_shipped": fields.Date.today(),
+                "delivery_state": "shipping_recorded_in_carrier"
+                if self.track_carrier_state
+                else "no_update",
             }
         )
         return res

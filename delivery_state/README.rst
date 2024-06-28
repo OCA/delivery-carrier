@@ -54,6 +54,13 @@ confirmed:
   #. Enable the option *Email Confirmation*.
   #. Choose the template "Delivery State Notification to Customer".
 
+In order to deactivate the automatic update of the carrier state in a shipping
+method:
+
+  #. Go to *Inventory > Configuration > Shipping Methods*.
+  #. Go to the form view of the shipping method.
+  #. Uncheck the "Track Carrier State" option.
+
 Usage
 =====
 
@@ -122,6 +129,10 @@ Contributors
   * Pedro M. Baeza
   * David Vidal
 * Marçal Isern <marsal.isern@qubiq.es>
+* `Sygel <https://www.sygel.es>`_:
+
+  * Manuel Regidor
+  * Valentín Vinagre
 
 Maintainers
 ~~~~~~~~~~~

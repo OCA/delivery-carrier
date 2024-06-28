@@ -10,3 +10,7 @@
   * Pedro M. Baeza
   * David Vidal
 * Marçal Isern <marsal.isern@qubiq.es>
+* `Sygel <https://www.sygel.es>`_:
+
+  * Manuel Regidor
+  * Valentín Vinagre

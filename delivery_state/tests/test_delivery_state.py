@@ -1,6 +1,7 @@
 # Copyright 2020 Trey, Kilobytes de Soluciones
 # Copyright 2020 FactorLibre
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+
 from odoo import fields
 from odoo.tests import Form
 from odoo.tests.common import SavepointCase
@@ -94,6 +95,22 @@ class TestDeliveryState(SavepointCase):
         self.assertEqual(picking.delivery_state, "canceled_shipment")
         self.assertFalse(picking.date_shipped)
         self.assertFalse(picking.date_delivered)
+
+    def test_delivery_state_no_tracking(self):
+        self.carrier.write({"track_carrier_state": False})
+        delivery_wizard = Form(
+            self.env["choose.delivery.carrier"].with_context(
+                {"default_order_id": self.sale.id, "default_carrier_id": self.carrier}
+            )
+        )
+        choose_delivery_carrier = delivery_wizard.save()
+        choose_delivery_carrier.button_confirm()
+        self.sale.action_confirm()
+        picking = self.sale.picking_ids[0]
+        picking.action_confirm()
+        picking.action_assign()
+        picking.send_to_shipper()
+        self.assertEqual(picking.delivery_state, "no_update")
 
     def test_delivery_confirmation_send(self):
         """Check that the shipping notification is sent to the right partner"""
