@@ -17,13 +17,13 @@ Delivery Carrier Roulier
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fdelivery--carrier-lightgray.png?logo=github
-    :target: https://github.com/OCA/delivery-carrier/tree/16.0/delivery_roulier
+    :target: https://github.com/OCA/delivery-carrier/tree/17.0/delivery_roulier
     :alt: OCA/delivery-carrier
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/delivery-carrier-16-0/delivery-carrier-16-0-delivery_roulier
+    :target: https://translation.odoo-community.org/projects/delivery-carrier-17-0/delivery-carrier-17-0-delivery_roulier
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/delivery-carrier&target_branch=16.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/delivery-carrier&target_branch=17.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
@@ -32,16 +32,17 @@ Integration of multiple carriers with Roulier library
 
 Base module for integration with Roulier.
 
-`Roulier <https://pypi.python.org/pypi/roulier>`_ is a python library which implements carriers API.
-This modules contains the core functions for this implementation.
+`Roulier <https://pypi.python.org/pypi/roulier>`__ is a python library
+which implements carriers API. This modules contains the core functions
+for this implementation.
 
 You should install one of the specific modules :
 
-- delivery_roulier_laposte
-- delivery_roulier_dpd
-- delivery_roulier_geodis
-- delivery_carrier_label_gls
-- more to come
+-  delivery_roulier_laposte
+-  delivery_roulier_dpd
+-  delivery_roulier_geodis
+-  delivery_carrier_label_gls
+-  more to come
 
 **Table of contents**
 
@@ -51,8 +52,14 @@ You should install one of the specific modules :
 Configuration
 =============
 
-This module needs package in order to work.
-To generate the carrier labels on the picking, each products need to be assigned to a destination package. In case you don't want to bother with the use of package because the whole content of the picking usually fit in a unique package, you may consider installing the module delivery_automatic_package from the same repository (delivery-carrier). The package will be assigned automatically when asking the carrier labels.
+This module needs package in order to work. To generate the carrier
+labels on the picking, each products need to be assigned to a
+destination package. In case you don't want to bother with the use of
+package because the whole content of the picking usually fit in a unique
+package, you may consider installing the module
+delivery_automatic_package from the same repository (delivery-carrier).
+The package will be assigned automatically when asking the carrier
+labels.
 
 Usage
 =====
@@ -60,43 +67,39 @@ Usage
 Here is some methods you can use for your carrier implementation
 allowing to have a consistent code accross different carrier modules:
 
-.. code-block:: python
+.. code:: python
 
-    def _mycarrier_get_sender(...):
-
-
-    def _mycarrier_get_receiver(...):
+   def _mycarrier_get_sender(...):
 
 
-    def _mycarrier_get_shipping_date(...):
+   def _mycarrier_get_receiver(...):
 
 
-    def _mycarrier_get_account(...):
+   def _mycarrier_get_shipping_date(...):
 
 
-    def _mycarrier_get_auth(...):
+   def _mycarrier_get_account(...):
 
 
-    def _mycarrier_get_service(...):
+   def _mycarrier_get_auth(...):
 
 
-    def _mycarrier_convert_address(...):
+   def _mycarrier_get_service(...):
 
 
-|
+   def _mycarrier_convert_address(...):
 
+Instead of calling super() you can use:
 
-Instead of calling `super()` you can use:
+.. code:: python
 
-.. code-block:: python
+   def _mycarrier_get_service(...):
 
-    def _mycarrier_get_service(...):
+       result = _roulier_get_service(...)
 
-        result = _roulier_get_service(...)
+       result["specific_key"] = "blabla"
 
-        result["specific_key"] = "blabla"
-
-        return result
+       return result
 
 Bug Tracker
 ===========
@@ -104,7 +107,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/delivery-carrier/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/delivery-carrier/issues/new?body=module:%20delivery_roulier%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/delivery-carrier/issues/new?body=module:%20delivery_roulier%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -112,18 +115,18 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * Akretion
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* Raphaël Reverdy <sebastien.beau@akretion.com>
-* David Béal <david.beal@akretion.com>
+-  Raphaël Reverdy <sebastien.beau@akretion.com>
+-  David Béal <david.beal@akretion.com>
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 
@@ -143,6 +146,6 @@ Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
 
 |maintainer-florian-dacosta| 
 
-This module is part of the `OCA/delivery-carrier <https://github.com/OCA/delivery-carrier/tree/16.0/delivery_roulier>`_ project on GitHub.
+This module is part of the `OCA/delivery-carrier <https://github.com/OCA/delivery-carrier/tree/17.0/delivery_roulier>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
