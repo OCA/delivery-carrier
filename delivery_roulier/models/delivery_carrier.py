@@ -1,14 +1,8 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-import logging
+from roulier import roulier
 
 from odoo import models
-
-_logger = logging.getLogger(__name__)
-try:
-    from roulier import roulier
-except ImportError:
-    _logger.debug("Cannot `import roulier`.")
 
 
 class DeliveryCarrier(models.Model):

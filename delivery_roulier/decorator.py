@@ -34,7 +34,7 @@ def implemented_by_carrier(func):
                 return cls[0].carrier_id.delivery_type
 
         delivery_type = get_delivery_type(cls, *args, **kwargs)
-        fun = "_{}{}".format(delivery_type, fun_name)
+        fun = f"_{delivery_type}{fun_name}"
         if not hasattr(cls, fun):
             fun = "_roulier%s" % (fun_name)
         return getattr(cls, fun)(*args, **kwargs)
