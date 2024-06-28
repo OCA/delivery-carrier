@@ -112,24 +112,22 @@ class StockQuantPackage(models.Model):
             # find for which package the label is. tracking number will be updated on
             # this pack later on (in base_delivery_carrier_label)
             package_id = False
+            ref = parcel.get("reference")
             if len(self) == 1:
                 package_id = self.id
             else:
-                pack = self.filtered(lambda p: p.name == parcel.get("reference"))
+                pack = self.filtered(lambda p, ref=ref: p.name == ref)
                 if len(pack) == 1:
                     package_id = pack.id
-
+            name_prefix = ref or tracking_number or label.get("name")
+            name_suffix = label.get("type", "").lower()
             parcels_data.append(
                 {
                     "tracking_number": tracking_number,
                     "parcel_tracking_uri": parcel.get("tracking", {}).get("url", False),
                     "package_id": package_id,
                     "file": label.get("data"),
-                    "name": "%s.%s"
-                    % (
-                        parcel.get("reference") or tracking_number or label.get("name"),
-                        label.get("type", "").lower(),
-                    ),
+                    "name": f"{name_prefix}.{name_suffix}",
                     "file_type": label.get("type"),
                 }
             )
@@ -287,8 +285,7 @@ class StockQuantPackage(models.Model):
                 "res_model": "stock.picking",
                 "datas": attachment["data"],
                 "type": "binary",
-                "name": "%s-%s.%s"
-                % (self.name, attachment["name"], attachment["type"]),
+                "name": f"{self.name}-{attachment['name']}.{attachment['type']}",
             }
             for attachment in attachments
         ]
