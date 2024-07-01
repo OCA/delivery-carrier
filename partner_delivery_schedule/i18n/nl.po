@@ -23,6 +23,7 @@ msgid "<strong>Delivery Schedule</strong>"
 msgstr ""
 
 #. module: partner_delivery_schedule
+#. odoo-python
 #: code:addons/partner_delivery_schedule/models/partner_delivery_schedule.py:0
 #, python-format
 msgid "All days"
@@ -56,6 +57,7 @@ msgstr ""
 #. module: partner_delivery_schedule
 #: model:ir.actions.act_window,name:partner_delivery_schedule.partner_delivery_schedule_action
 #: model:ir.model,name:partner_delivery_schedule.model_delivery_schedule
+#: model:ir.model.fields,field_description:partner_delivery_schedule.field_dropoff_site__delivery_schedule_ids
 #: model:ir.model.fields,field_description:partner_delivery_schedule.field_res_partner__delivery_schedule_ids
 #: model:ir.model.fields,field_description:partner_delivery_schedule.field_res_users__delivery_schedule_ids
 #: model:ir.ui.menu,name:partner_delivery_schedule.sale_menu_action_delivery_schedule
@@ -71,18 +73,21 @@ msgid "Display Name"
 msgstr ""
 
 #. module: partner_delivery_schedule
+#. odoo-python
 #: code:addons/partner_delivery_schedule/models/partner_delivery_schedule.py:0
 #, python-format
 msgid "Error ! You can not set hour_from greater or equal than hour_to ."
 msgstr ""
 
 #. module: partner_delivery_schedule
+#. odoo-python
 #: code:addons/partner_delivery_schedule/models/partner_delivery_schedule.py:0
 #, python-format
 msgid "Error ! You must set one day to delivery."
 msgstr "Fout ! Er dient ten minste een afleverdag te worden geselecteerd."
 
 #. module: partner_delivery_schedule
+#. odoo-python
 #: code:addons/partner_delivery_schedule/models/partner_delivery_schedule.py:0
 #: model:ir.model.fields,field_description:partner_delivery_schedule.field_delivery_schedule__friday
 #, python-format
@@ -115,6 +120,7 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: partner_delivery_schedule
+#. odoo-python
 #: code:addons/partner_delivery_schedule/models/partner_delivery_schedule.py:0
 #: model:ir.model.fields,field_description:partner_delivery_schedule.field_delivery_schedule__monday
 #, python-format
@@ -127,6 +133,7 @@ msgid "Name"
 msgstr "Naam"
 
 #. module: partner_delivery_schedule
+#. odoo-python
 #: code:addons/partner_delivery_schedule/models/partner_delivery_schedule.py:0
 #: model:ir.model.fields,field_description:partner_delivery_schedule.field_delivery_schedule__saturday
 #, python-format
@@ -134,6 +141,7 @@ msgid "Saturday"
 msgstr "Zaterdag"
 
 #. module: partner_delivery_schedule
+#. odoo-python
 #: code:addons/partner_delivery_schedule/models/partner_delivery_schedule.py:0
 #: model:ir.model.fields,field_description:partner_delivery_schedule.field_delivery_schedule__sunday
 #, python-format
@@ -141,6 +149,7 @@ msgid "Sunday"
 msgstr "Zondag"
 
 #. module: partner_delivery_schedule
+#. odoo-python
 #: code:addons/partner_delivery_schedule/models/partner_delivery_schedule.py:0
 #: model:ir.model.fields,field_description:partner_delivery_schedule.field_delivery_schedule__thursday
 #, python-format
@@ -153,6 +162,7 @@ msgid "To"
 msgstr "Naar"
 
 #. module: partner_delivery_schedule
+#. odoo-python
 #: code:addons/partner_delivery_schedule/models/partner_delivery_schedule.py:0
 #: model:ir.model.fields,field_description:partner_delivery_schedule.field_delivery_schedule__tuesday
 #, python-format
@@ -160,6 +170,7 @@ msgid "Tuesday"
 msgstr "Dinsdag"
 
 #. module: partner_delivery_schedule
+#. odoo-python
 #: code:addons/partner_delivery_schedule/models/partner_delivery_schedule.py:0
 #: model:ir.model.fields,field_description:partner_delivery_schedule.field_delivery_schedule__wednesday
 #, python-format
