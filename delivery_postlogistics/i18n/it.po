@@ -47,9 +47,12 @@ msgstr ""
 #. module: delivery_postlogistics
 #: model:ir.model.fields,help:delivery_postlogistics.field_delivery_carrier__postlogistics_tracking_format
 msgid ""
-"Allows you to define how the ItemNumber (the last 8 digits) of the tracking number will be generated:\n"
+"Allows you to define how the ItemNumber (the last 8 digits) of the tracking "
+"number will be generated:\n"
 "- Default postlogistics numbers: The webservice generates it for you.\n"
-"- Picking number with pack counter: Generate it using the digits of picking name and add the pack number. 2 digits forpack number and 6 digits for picking number. (eg. 07000042 for picking 42 and 7th pack"
+"- Picking number with pack counter: Generate it using the digits of picking "
+"name and add the pack number. 2 digits forpack number and 6 digits for "
+"picking number. (eg. 07000042 for picking 42 and 7th pack"
 msgstr ""
 
 #. module: delivery_postlogistics
@@ -439,8 +442,8 @@ msgstr ""
 #: code:addons/delivery_postlogistics/postlogistics/web_service.py:0
 #, python-format
 msgid ""
-"No PostLogistics packaging services found in packaging {packaging_name}, for"
-" picking {pickin_name}."
+"No PostLogistics packaging services found in packaging {packaging_name}, for "
+"picking {pickin_name}."
 msgstr ""
 
 #. module: delivery_postlogistics
@@ -603,6 +606,7 @@ msgid "PostLogistics Licenses"
 msgstr ""
 
 #. module: delivery_postlogistics
+#: model:ir.model.fields,field_description:delivery_postlogistics.field_dropoff_site__postlogistics_option_ids
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_res_partner__postlogistics_option_ids
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_res_users__postlogistics_option_ids
 msgid "PostLogistics Options"
@@ -619,6 +623,7 @@ msgid "Postlogistics Default Package Type"
 msgstr ""
 
 #. module: delivery_postlogistics
+#: model:ir.model.fields,field_description:delivery_postlogistics.field_dropoff_site__postlogistics_notification
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_res_partner__postlogistics_notification
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_res_users__postlogistics_notification
 msgid "Postlogistics Notification"
@@ -816,8 +821,8 @@ msgstr ""
 #, python-format
 msgid ""
 "You need to configure %s. You can set a default value in Inventory / "
-"Configuration / Delivery / Shipping Methods. You can also set it on delivery"
-" method or on the picking."
+"Configuration / Delivery / Shipping Methods. You can also set it on delivery "
+"method or on the picking."
 msgstr ""
 
 #. module: delivery_postlogistics
