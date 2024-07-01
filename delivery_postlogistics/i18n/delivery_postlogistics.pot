@@ -602,6 +602,7 @@ msgid "PostLogistics Licenses"
 msgstr ""
 
 #. module: delivery_postlogistics
+#: model:ir.model.fields,field_description:delivery_postlogistics.field_dropoff_site__postlogistics_option_ids
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_res_partner__postlogistics_option_ids
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_res_users__postlogistics_option_ids
 msgid "PostLogistics Options"
@@ -618,6 +619,7 @@ msgid "Postlogistics Default Package Type"
 msgstr ""
 
 #. module: delivery_postlogistics
+#: model:ir.model.fields,field_description:delivery_postlogistics.field_dropoff_site__postlogistics_notification
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_res_partner__postlogistics_notification
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_res_users__postlogistics_notification
 msgid "Postlogistics Notification"
