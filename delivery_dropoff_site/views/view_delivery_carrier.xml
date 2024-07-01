@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_delivery_carrier_form" model="ir.ui.view">
+        <field name="model">delivery.carrier</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="delivery.view_delivery_carrier_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//label[@for='delivery_type']" position="before">
+                <field name="with_dropoff_site" />
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page
+                    name="dropoff_site"
+                    string="Drop-off Sites"
+                    attrs="{'invisible': [('with_dropoff_site', '=', False)]}"
+                >
+                    <field name="dropoff_site_ids" nolabel="1">
+                        <tree editable="bottom">
+                            <field name="name" attrs="{'required': True}" />
+                            <field name="street" />
+                            <field name="street2" />
+                            <field name="city" />
+                            <field name="zip" />
+                            <field name="state_id" />
+                            <field name="country_id" />
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
