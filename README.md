@@ -37,6 +37,7 @@ addon | version | maintainers | summary
 [delivery_deliverea](delivery_deliverea/) | 16.0.1.0.1 |  | Delivery Carrier implementation for Deliverea using their API
 [delivery_driver](delivery_driver/) | 16.0.1.3.0 | [![EmilioPascual](https://github.com/EmilioPascual.png?size=30px)](https://github.com/EmilioPascual) [![rafaelbn](https://github.com/rafaelbn.png?size=30px)](https://github.com/rafaelbn) | Allow choose driver in delivery methods
 [delivery_driver_stock_picking_batch](delivery_driver_stock_picking_batch/) | 16.0.1.1.0 | [![EmilioPascual](https://github.com/EmilioPascual.png?size=30px)](https://github.com/EmilioPascual) | Add drivers from delivery in stock picking batch
+[delivery_dropoff_site](delivery_dropoff_site/) | 16.0.1.0.0 |  | Send goods to sites in which customers come pick up package
 [delivery_estimated_package_quantity_by_weight](delivery_estimated_package_quantity_by_weight/) | 16.0.1.0.0 |  | Compute the amount of packages a picking out should have depending on the weight of the products and the limit fixed by the carrier
 [delivery_multi_destination](delivery_multi_destination/) | 16.0.1.0.0 |  | Multiple destinations for the same delivery method
 [delivery_package_fee](delivery_package_fee/) | 16.0.1.1.1 |  | Add fees on delivered packages on shipping methods
