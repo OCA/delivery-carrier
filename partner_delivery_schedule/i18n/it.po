@@ -55,6 +55,7 @@ msgstr ""
 #. module: partner_delivery_schedule
 #: model:ir.actions.act_window,name:partner_delivery_schedule.partner_delivery_schedule_action
 #: model:ir.model,name:partner_delivery_schedule.model_delivery_schedule
+#: model:ir.model.fields,field_description:partner_delivery_schedule.field_dropoff_site__delivery_schedule_ids
 #: model:ir.model.fields,field_description:partner_delivery_schedule.field_res_partner__delivery_schedule_ids
 #: model:ir.model.fields,field_description:partner_delivery_schedule.field_res_users__delivery_schedule_ids
 #: model:ir.ui.menu,name:partner_delivery_schedule.sale_menu_action_delivery_schedule
