@@ -65,7 +65,7 @@ class StockPicking(models.Model):
                     ["customer_delivered", "canceled_shipment", "no_update"],
                 ),
                 # These won't ever autoupdate, so we don't want to evaluate them
-                ("delivery_type", "not in", [False, "fixed", "base_one_rule"]),
+                ("delivery_type", "not in", [False, "fixed", "base_on_rule"]),
             ]
         )
         pickings.tracking_state_update()

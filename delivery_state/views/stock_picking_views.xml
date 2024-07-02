@@ -24,7 +24,7 @@ License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
                         string="Update tracking state"
                         type="object"
                         class="oe_inline"
-                        attrs="{'invisible': ['|', ('delivery_state', 'in', ['customer_delivered', 'canceled_shipment']), ('delivery_type', 'in', ['base_one_rule', 'fixed'])]}"
+                        attrs="{'invisible': ['|', ('delivery_state', 'in', ['customer_delivered', 'canceled_shipment']), ('delivery_type', 'in', ['base_on_rule', 'fixed'])]}"
                     />
                     <field name="tracking_state_history" colspan="3" />
                 </group>
