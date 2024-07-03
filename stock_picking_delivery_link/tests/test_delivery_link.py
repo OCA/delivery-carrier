@@ -274,3 +274,38 @@ class TestStockPickingDeliveryLink(StockPickingDeliveryLinkCommonCase):
         pip_action = pick_picking.action_put_in_pack()
         # the action is not a dict so not a wizard
         self.assertNotIsInstance(pip_action, dict)
+
+    def test_put_in_pack_from_ship_with_wizard(self):
+        """
+        Let the warehouse configuration to one step delivery
+        Create a delivery picking
+        Set a carrier on it
+        Launch the put in pack operation
+        The current_package_carrier_type in context should be 'none'
+        """
+        self.wh.delivery_steps = "ship_only"
+        self.env["stock.quant"]._update_available_quantity(
+            self.product, self.shelf1_loc, 20.0
+        )
+        ship_move = self.env["stock.move"].create(
+            {
+                "name": "The ship move",
+                "product_id": self.product.id,
+                "product_uom_qty": 5.0,
+                "product_uom": self.product.uom_id.id,
+                "location_id": self.shelf1_loc.id,
+                "location_dest_id": self.customer_location.id,
+                "warehouse_id": self.wh.id,
+                "picking_type_id": self.wh.out_type_id.id,
+                "procure_method": "make_to_stock",
+                "state": "draft",
+            }
+        )
+
+        ship_move._action_confirm()
+        ship_move._assign_picking()
+        ship_move.picking_id.carrier_id = self.test_carrier
+
+        res = ship_move.picking_id.action_put_in_pack()
+        carrier_type = res["context"].get("current_package_carrier_type")
+        self.assertEqual("none", carrier_type)
