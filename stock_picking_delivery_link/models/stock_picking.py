@@ -64,10 +64,13 @@ class StockPicking(models.Model):
         self.ensure_one()
         res = super()._set_delivery_package_type(batch_pack=batch_pack)
         context = res.get("context", self.env.context)
-        context = dict(
-            context,
-            current_package_carrier_type=self.ship_carrier_id.delivery_type,
-        )
+        # We don't want to overwrite the value set if carrier_id is filled in
+        # and not ship_carrier_id (e.g.: one step delivery or propagate_carrier is enabled)
+        if self.ship_carrier_id.delivery_type:
+            context = dict(
+                context,
+                current_package_carrier_type=self.ship_carrier_id.delivery_type,
+            )
         # As we pass the `delivery_type` ('fixed' or 'base_on_rule' by default) in a
         # key which corresponds to the `package_carrier_type` ('none' to default), we
         # make a conversion. No conversion needed for other carriers as the
