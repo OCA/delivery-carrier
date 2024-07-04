@@ -3,20 +3,27 @@
 
 # MIGRATION NOTE for 17.0: Move this to module sale_order_carrier_auto_assign
 
-from odoo.tests import Form, TransactionCase
-
-from odoo.addons.base.tests.common import DISABLED_MAIL_CONTEXT
+from odoo.tests import Form, common
 
 
-class TestSaleOrderCarrierAutoAssignCommon(TransactionCase):
+class TestSaleOrderCarrierAutoAssignCommon(common.SavepointCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.env = cls.env["base"].with_context(**DISABLED_MAIL_CONTEXT).env
+        # Remove this variable in v16 and put instead:
+        # from odoo.addons.base.tests.common import DISABLED_MAIL_CONTEXT
+        DISABLED_MAIL_CONTEXT = {
+            "tracking_disable": True,
+            "mail_create_nolog": True,
+            "mail_create_nosubscribe": True,
+            "mail_notrack": True,
+            "no_reset_password": True,
+        }
+        cls.env = cls.env(context=dict(cls.env.context, **DISABLED_MAIL_CONTEXT))
 
         cls.partner = cls.env.ref("base.res_partner_2")
         cls.product_storable = cls.env.ref("product.product_product_9")
-        cls.delivery_local_delivery = cls.env.ref("delivery.delivery_local_delivery")
+        cls.delivery_local_delivery = cls.env.ref("delivery.normal_delivery_carrier")
         cls.delivery_local_delivery.fixed_price = 10
 
 
