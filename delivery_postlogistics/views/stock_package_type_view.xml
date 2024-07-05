@@ -5,17 +5,20 @@
     <record id="stock_package_type_form_delivery" model="ir.ui.view">
         <field name="name">stock.package.type.form.inherit</field>
         <field name="model">stock.package.type</field>
-        <field name="inherit_id" ref="delivery.stock_package_type_form_delivery" />
+        <field
+            name="inherit_id"
+            ref="stock_delivery.stock_package_type_form_delivery"
+        />
         <field name="arch" type="xml">
             <field name="shipper_package_code" position="attributes">
                 <attribute
-                    name="attrs"
-                >{"required": [("package_carrier_type", "=", "postlogistics")]}</attribute>
+                    name="required"
+                >package_carrier_type == 'postlogistics'</attribute>
             </field>
             <field name="shipper_package_code" position="after">
                 <span
                     colspan="2"
-                    attrs="{'invisible': [('package_carrier_type', '!=', 'postlogistics')]}"
+                    invisible="package_carrier_type != 'postlogistics'"
                 >See section 8.10 of <a
                         target="new"
                         href="https://developer.post.ch/en/digital-commerce-api"

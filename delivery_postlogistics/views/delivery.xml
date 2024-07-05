@@ -11,21 +11,29 @@
                 <page
                     name="postlogistics"
                     string="PostLogistics"
-                    attrs="{'invisible': [('delivery_type', '!=', 'postlogistics')]}"
+                    invisible="delivery_type != 'postlogistics'"
                 >
                     <group>
                         <group string="Credentials">
                             <field
+                                name="postlogistics_token_url"
+                                required="delivery_type == 'postlogistics'"
+                            />
+                            <field
                                 name="postlogistics_endpoint_url"
-                                attrs="{'required': [('delivery_type', '=', 'postlogistics')]}"
+                                required="delivery_type == 'postlogistics'"
                             />
                             <field
                                 name="postlogistics_client_id"
-                                attrs="{'required': [('delivery_type', '=', 'postlogistics')]}"
+                                required="delivery_type == 'postlogistics'"
                             />
                             <field
                                 name="postlogistics_client_secret"
-                                attrs="{'required': [('delivery_type', '=', 'postlogistics')]}"
+                                required="delivery_type == 'postlogistics'"
+                            />
+                            <field
+                                name="postlogistics_scope"
+                                required="delivery_type == 'postlogistics'"
                             />
                             <button
                                 name="verify_credentials"
@@ -37,33 +45,33 @@
                         <group string="Template">
                             <field
                                 name="postlogistics_label_layout"
-                                attrs="{'required': [('delivery_type', '=', 'postlogistics')]}"
+                                required="delivery_type == 'postlogistics'"
                             />
                             <field
                                 name="postlogistics_output_format"
-                                attrs="{'required': [('delivery_type', '=', 'postlogistics')]}"
+                                required="delivery_type == 'postlogistics'"
                             />
                             <field
                                 name="postlogistics_resolution"
-                                attrs="{'required': [('delivery_type', '=', 'postlogistics')]}"
+                                required="delivery_type == 'postlogistics'"
                             />
                         </group>
                         <group string="Misc.">
                             <field
                                 name="postlogistics_license_id"
-                                attrs="{'required': [('delivery_type', '=', 'postlogistics')]}"
+                                required="delivery_type == 'postlogistics'"
                             />
                             <field
                                 name="postlogistics_default_package_type_id"
-                                attrs="{'required': [('delivery_type', '=', 'postlogistics')]}"
+                                required="delivery_type == 'postlogistics'"
                             />
                             <field
                                 name="postlogistics_tracking_format"
-                                attrs="{'required': [('delivery_type', '=', 'postlogistics')]}"
+                                required="delivery_type == 'postlogistics'"
                             />
                             <field
                                 name="postlogistics_proclima_logo"
-                                attrs="{'required': [('delivery_type', '=', 'postlogistics')]}"
+                                required="delivery_type == 'postlogistics'"
                             />
                             <field name="postlogistics_office" />
                         </group>

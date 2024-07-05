@@ -1,6 +1,6 @@
 interactions:
   - request:
-      body: scope=WEDEC_BARCODE_READ&client_secret=c70e3696ae5146e7fe317434e50a90cd&grant_type=client_credentials&client_id=865783331e39e91e633c3916fe892d92
+      body: scope=DCAPI_BARCODE_READ&client_secret=c70e3696ae5146e7fe317434e50a90cd&grant_type=client_credentials&client_id=865783331e39e91e633c3916fe892d92
       headers:
         Accept:
           - "*/*"
@@ -15,7 +15,7 @@ interactions:
         content-type:
           - application/x-www-form-urlencoded
       method: POST
-      uri: https://wedecint.post.ch/WEDECOAuth/token
+      uri: https://api-int.post.ch/OAuth/token
     response:
       body:
         string: '{"access_token":"XXX","token_type":"Bearer","expires_in":60}'
@@ -67,7 +67,7 @@ interactions:
         content-type:
           - application/json
       method: POST
-      uri: https://wedecint.post.ch/api/barcode/v1/generateAddressLabel
+      uri: https://dcapi.apis-int.post.ch/barcode/v1/generateAddressLabel
     response:
       body:
         string: "{\n  \"labelDefinition\" : {\n    \"labelLayout\" : \"A6\",\n    \"\

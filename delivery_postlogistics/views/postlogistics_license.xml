@@ -9,7 +9,7 @@
             <tree editable="bottom">
                 <field name="name" />
                 <field name="number" />
-                <field name="sequence" invisible="True" />
+                <field name="sequence" column_invisible="1" />
                 <field name="company_id" groups="base.group_multi_company" />
             </tree>
         </field>

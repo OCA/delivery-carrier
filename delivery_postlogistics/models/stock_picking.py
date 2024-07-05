@@ -109,7 +109,7 @@ class StockPicking(models.Model):
         if not order:
             return 0.0
         if len(order) > 1:
-            raise exceptions.Warning(
+            raise exceptions.UserError(
                 _(
                     "The cash on delivery amount must be manually specified "
                     "on the packages when a package contains products "
@@ -118,7 +118,7 @@ class StockPicking(models.Model):
             )
         # check if the package delivers the whole sales order
         if len(order.picking_ids) > 1:
-            raise exceptions.Warning(
+            raise exceptions.UserError(
                 _(
                     "The cash on delivery amount must be manually specified "
                     "on the packages when a sales order is delivered "
@@ -229,7 +229,7 @@ class StockPicking(models.Model):
             # This ensures the label pushed recored correctly in Odoo
             self._cr.commit()  # pylint: disable=invalid-commit
             error_message = "\n".join(label["errors"] for label in failed_label_results)
-            raise exceptions.Warning(error_message)
+            raise exceptions.UserError(error_message)
         return labels
 
     def generate_postlogistics_shipping_labels(self, package_ids=None):

@@ -42,7 +42,7 @@ class StockQuantPackage(models.Model):
 
         pickings = self._get_origin_pickings()
         if len(pickings) > 1:
-            raise exceptions.Warning(
+            raise exceptions.UserError(
                 _(
                     "The cash on delivery amount must be manually specified "
                     "on the packages when a sales order is delivered "
@@ -54,7 +54,7 @@ class StockQuantPackage(models.Model):
         if not order:
             return 0.0
         if len(order) > 1:
-            raise exceptions.Warning(
+            raise exceptions.UserError(
                 _(
                     "The cash on delivery amount must be manually specified "
                     "on the packages when a package contains products "
