@@ -1,0 +1,9 @@
+<odoo noupdate="1">
+    <record id="picking_type_send_label" model="stock.picking.type">
+        <field name="name">Dropship Carrier Label</field>
+        <field name="code">internal</field>
+        <field name="sequence_code">LBL</field>
+        <field name="default_location_dest_id" ref="stock.stock_location_suppliers" />
+        <field name="default_location_src_id" ref="stock.stock_location_suppliers" />
+    </record>
+</odoo>
