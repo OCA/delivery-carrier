@@ -17,28 +17,28 @@ PostLogistics Shipping - “Barcode” web service
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fdelivery--carrier-lightgray.png?logo=github
-    :target: https://github.com/OCA/delivery-carrier/tree/16.0/delivery_postlogistics
+    :target: https://github.com/OCA/delivery-carrier/tree/17.0/delivery_postlogistics
     :alt: OCA/delivery-carrier
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/delivery-carrier-16-0/delivery-carrier-16-0-delivery_postlogistics
+    :target: https://translation.odoo-community.org/projects/delivery-carrier-17-0/delivery-carrier-17-0-delivery_postlogistics
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/delivery-carrier&target_branch=16.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/delivery-carrier&target_branch=17.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-This module uses `PostLogistics BarCodes WebService`_ to generate labels
-for your Delivery Orders.
+This module uses `PostLogistics BarCodes
+WebService <https://www.post.ch/en/business/a-z-of-subjects/dropping-off-mail-items/business-sending-letters/sending-consignments-web-service-barcode>`__
+to generate labels for your Delivery Orders.
 
-It adds a `Create label` button on Delivery Orders.
-A generated label will be an attachement of your Delivery Order.
+It adds a Create label button on Delivery Orders. A generated label will
+be an attachement of your Delivery Order.
 
 To see it, please install documents module.
 
-You can create multiple delivery method to match your diffent package types.
-
-.. _PostLogistics BarCodes WebService: https://www.post.ch/en/business/a-z-of-subjects/dropping-off-mail-items/business-sending-letters/sending-consignments-web-service-barcode
+You can create multiple delivery method to match your diffent package
+types.
 
 **Table of contents**
 
@@ -49,36 +49,37 @@ Configuration
 =============
 
 .. important::
-   A "Swiss Post Business customer" account is required to use this module.
 
-   See `Log in`_
+   A "Swiss Post Business customer" account is required to use this
+   module.
 
+   See `Log in <https://account.post.ch/selfadmin/?login&lang=en>`__
 
 To configure:
 
-* Go to `Inventory -> Configuration -> Delivery -> Shipping Methods`
-* Create new shipping methods for PostLogistics and set your login informations in the "PostLogistics" tab
-* Go to `Inventory -> Configuration ->  Delivery -> Delivery Packages` to create
-  the PostLogistics delivery packaging with the relevant `Package Code` (see section 8.10 of https://developer.post.ch/en/digital-commerce-api for available codes)
-
-.. _Log in: https://account.post.ch/selfadmin/?login&lang=en
+-  Go to Inventory -> Configuration -> Delivery -> Shipping Methods
+-  Create new shipping methods for PostLogistics and set your login
+   informations in the "PostLogistics" tab
+-  Go to Inventory -> Configuration -> Delivery -> Delivery Packages to
+   create the PostLogistics delivery packaging with the relevant Package
+   Code (see section 8.10 of
+   https://developer.post.ch/en/digital-commerce-api for available
+   codes)
 
 Technical references
-~~~~~~~~~~~~~~~~~~~~
+--------------------
 
-`"Barcode" web service documentation`_
-
-.. _"Barcode" web service documentation: https://www.post.ch/en/business/a-z-of-subjects/dropping-off-mail-items/business-sending-letters/barcode-support
+`"Barcode" web service
+documentation <https://www.post.ch/en/business/a-z-of-subjects/dropping-off-mail-items/business-sending-letters/barcode-support>`__
 
 Known issues / Roadmap
 ======================
 
-* Integration of price webservice :
-  https://www.post.ch/en/customer-center/all-online-services/preise-berechnen/info
-
-* Not sure if the recursive patch of suds is still needed as there's no need
-  to use the integration WS anymore. However we still want to patch open to
-  get meaningful error messages.
+-  Integration of price webservice :
+   https://www.post.ch/en/customer-center/all-online-services/preise-berechnen/info
+-  Not sure if the recursive patch of suds is still needed as there's no
+   need to use the integration WS anymore. However we still want to
+   patch open to get meaningful error messages.
 
 Bug Tracker
 ===========
@@ -86,7 +87,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/delivery-carrier/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/delivery-carrier/issues/new?body=module:%20delivery_postlogistics%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/delivery-carrier/issues/new?body=module:%20delivery_postlogistics%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -94,32 +95,43 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * Camptocamp
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* Yannick Vaucher <yannick.vaucher@camptocamp.com>
-* Guewen Baconnier <guewen.baconnier@camptocamp.com>
-* Akim Juillerat <akim.juillerat@camptocamp.com>
-* Julien Coux <julien.coux@camptocamp.com>
-* Dung Tran <dungtd@trobz.com>
-* Phuc Tran <phuc@trobz.com>
-* Jacques-Etienne Baudoux <je@bcim.be>
-* `Trobz <https://trobz.com>`_:
-    * Jack Le <anlh@trobz.com>
+-  Yannick Vaucher <yannick.vaucher@camptocamp.com>
+
+-  Guewen Baconnier <guewen.baconnier@camptocamp.com>
+
+-  Akim Juillerat <akim.juillerat@camptocamp.com>
+
+-  Julien Coux <julien.coux@camptocamp.com>
+
+-  Dung Tran <dungtd@trobz.com>
+
+-  Phuc Tran <phuc@trobz.com>
+
+-  Jacques-Etienne Baudoux <je@bcim.be>
+
+-  `Trobz <https://trobz.com>`__:
+
+   -  Jack Le <anlh@trobz.com>
+
+-  David Moreno <david.moreno@braintec.com>
 
 Other credits
-~~~~~~~~~~~~~
+-------------
 
-The development of this module in version 14.0 and its migration from 14.0 to 16.0 has been financially supported by:
+The development of this module in version 14.0 and its migration from
+14.0 to 16.0 has been financially supported by:
 
-* Camptocamp
+-  Camptocamp
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 
@@ -131,6 +143,6 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-This module is part of the `OCA/delivery-carrier <https://github.com/OCA/delivery-carrier/tree/16.0/delivery_postlogistics>`_ project on GitHub.
+This module is part of the `OCA/delivery-carrier <https://github.com/OCA/delivery-carrier/tree/17.0/delivery_postlogistics>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.

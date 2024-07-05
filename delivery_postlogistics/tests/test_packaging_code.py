@@ -13,7 +13,7 @@ class TestPackagingCode(TransactionCase):
 
     @classmethod
     def setUpClass(cls):
-        super(TestPackagingCode, cls).setUpClass()
+        super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         cls.carrier = cls.env.ref("delivery.delivery_carrier")
         cls.carrier.delivery_type = "postlogistics"

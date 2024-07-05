@@ -45,7 +45,7 @@ class TestPostlogistics(TestPostlogisticsCommon):
             self.assertEqual(len(cassette.requests), 2)
         ref = "996001321700005959"
         self.assertEqual(res[0]["file_type"], "pdf")
-        self.assertEqual(res[0]["name"], "{}.pdf".format(ref))
+        self.assertEqual(res[0]["name"], f"{ref}.pdf")
         self.assertEqual(res[0]["file"][:30], b"JVBERi0xLjQKJeLjz9MKMiAwIG9iag")
         self.assertEqual(self.picking.carrier_tracking_ref, ref)
 
@@ -62,7 +62,7 @@ class TestPostlogistics(TestPostlogisticsCommon):
             self.assertEqual(len(cassette.requests), 2)
         ref = "996001321700005959"
         self.assertEqual(res[0]["file_type"], "pdf")
-        self.assertEqual(res[0]["name"], "{}.pdf".format(ref))
+        self.assertEqual(res[0]["name"], f"{ref}.pdf")
         self.assertEqual(res[0]["file"][:30], b"JVBERi0xLjQKJeLjz9MKMiAwIG9iag")
         self.assertEqual(self.picking.carrier_tracking_ref, ref)
 

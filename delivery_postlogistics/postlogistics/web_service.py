@@ -32,7 +32,7 @@ DISALLOWED_CHARS_MAPPING = {
 }
 
 
-class PostlogisticsWebService(object):
+class PostlogisticsWebService:
 
     """Connector with PostLogistics for labels using post.ch API
 
@@ -292,7 +292,7 @@ class PostlogisticsWebService(object):
 
     def _cash_on_delivery(self, picking, package=None):
         amount = (package or picking).postlogistics_cod_amount()
-        amount = "{:.2f}".format(amount)
+        amount = f"{amount:.2f}"
         return [{"Type": "NN_BETRAG", "Value": amount}]
 
     def _get_item_additional_data(self, picking, package=None):
@@ -542,10 +542,9 @@ class PostlogisticsWebService(object):
                 res["success"] = False
                 res["errors"] = response.content.decode("utf-8")
                 _logger.warning(
-                    "Shipping label could not be generated.\n"
-                    "Request: %(datas)s\n"
-                    "Response: %(error)s"
-                    % {"datas": json.dumps(data), "error": res["errors"]}
+                    f"Shipping label could not be generated.\n"
+                    f"Request: {json.dumps(data)}\n"
+                    f"Response: {res['errors']}"
                 )
                 return [res]
 
