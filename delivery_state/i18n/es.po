@@ -176,6 +176,11 @@ msgid "Shipping recorded in carrier"
 msgstr "Envío registrado en el transportista"
 
 #. module: delivery_state
+#: model:ir.model.fields,field_description:delivery_state.field_delivery_carrier__track_carrier_state
+msgid "Track Carrier State"
+msgstr ""
+
+#. module: delivery_state
 #: model:ir.model.fields,field_description:delivery_state.field_stock_picking__tracking_state
 msgid "Tracking state"
 msgstr "Estado del seguimiento"
