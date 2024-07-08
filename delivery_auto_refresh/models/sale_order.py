@@ -79,6 +79,7 @@ class SaleOrder(models.Model):
             return False
         return self.company_id.sale_auto_add_delivery_line
 
+    # Part of Odoo. See LICENSE file for full copyright and licensing details.
     def _prepare_delivery_line_vals(self, carrier, price_unit):
         context = {}
         if self.partner_id:
@@ -118,6 +119,7 @@ class SaleOrder(models.Model):
             values['sequence'] = self.order_line[-1].sequence + 1
         del context
         return values
+    # end of the odoo part
 
     def _update_delivery_line(self, delivery_line, price_unit):
         """Update the existing delivery line"""

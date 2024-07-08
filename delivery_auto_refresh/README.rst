@@ -37,6 +37,9 @@ This module automates the delivery price handling for the following cases:
 * If you deliver a different quantity than the ordered one, the delivery price
   is adjusted on the linked SO when the picking is transferred.
 
+Part of this module is a backport from Odoo SA and as such, it is not included in the OCA CLA.
+That means we do not have a copy of the copyright on it like all other OCA modules.
+
 **Table of contents**
 
 .. contents::
@@ -97,6 +100,11 @@ Contributors
   * Simone Orsi
 
 * Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
+
+* Odoo SA <odoo@odoo.com>
+
+* Ooops404 <https://www.ooops404.com/>:
+  * Eduard Brahas <eduardbrhas@outlook.it>
 
 Maintainers
 ~~~~~~~~~~~
