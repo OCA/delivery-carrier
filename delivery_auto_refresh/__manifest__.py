@@ -13,8 +13,6 @@
     "application": False,
     "installable": True,
     "depends": ["delivery"],
-    # Migration Note 17.0: Add dependency to sale_order_carrier_auto_assign
-    # "depends": ["delivery", "sale_order_carrier_auto_assign"],
     "data": [
         "data/ir_config_parameter.xml",
         "views/sale_order_views.xml",

@@ -1,8 +1,6 @@
 # Copyright 2024 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl)
 
-# MIGRATION NOTE for 17.0: Move this to module sale_order_carrier_auto_assign
-
 from odoo.tests import Form, common
 
 

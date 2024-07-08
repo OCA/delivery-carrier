@@ -3,13 +3,12 @@
 # Copyright 2024 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models, _
+from odoo import _, api, fields, models
 
 
 class SaleOrder(models.Model):
     _inherit = "sale.order"
 
-    # Migration note: This field is not used anymore and can be dropped in later versions
     available_carrier_ids = fields.Many2many(
         comodel_name="delivery.carrier",
         compute="_compute_available_carrier_ids",
@@ -22,9 +21,6 @@ class SaleOrder(models.Model):
             wizard = self.env["choose.delivery.carrier"].new({"order_id": sale.id})
             sale.available_carrier_ids = wizard.available_carrier_ids._origin
 
-    # End migration note
-
-    # Migration Note 17.0: move this section to module sale_order_carrier_auto_assign
     def _set_delivery_carrier(self, set_delivery_line=True):
         for order in self:
             delivery_wiz_action = order.action_open_delivery_wizard()
@@ -70,8 +66,6 @@ class SaleOrder(models.Model):
             return False
         return self.company_id.sale_auto_assign_carrier_on_create
 
-    # End migration note
-
     def _is_auto_add_delivery_line(self):
         # When we have the context 'website_id' it means that we are doing the order from
         # e-commerce. So we don't want to add the delivery line automatically.
@@ -84,11 +78,13 @@ class SaleOrder(models.Model):
         context = {}
         if self.partner_id:
             # set delivery detail in the customer language
-            context['lang'] = self.partner_id.lang
+            context["lang"] = self.partner_id.lang
             carrier = carrier.with_context(lang=self.partner_id.lang)
 
         # Apply fiscal position
-        taxes = carrier.product_id.taxes_id.filtered(lambda t: t.company_id.id == self.company_id.id)
+        taxes = carrier.product_id.taxes_id.filtered(
+            lambda t: t.company_id.id == self.company_id.id
+        )
         taxes_ids = taxes.ids
         if self.partner_id and self.fiscal_position_id:
             taxes_ids = self.fiscal_position_id.map_tax(taxes).ids
@@ -96,29 +92,35 @@ class SaleOrder(models.Model):
         # Create the sales order line
 
         if carrier.product_id.description_sale:
-            so_description = '%s: %s' % (carrier.name, carrier.product_id.description_sale)
+            so_description = "%s: %s" % (
+                carrier.name,
+                carrier.product_id.description_sale,
+            )
         else:
             so_description = carrier.name
         values = {
-            'order_id': self.id,
-            'name': so_description,
-            'product_uom_qty': 1,
-            'product_uom': carrier.product_id.uom_id.id,
-            'product_id': carrier.product_id.id,
-            'tax_id': [(6, 0, taxes_ids)],
-            'is_delivery': True,
+            "order_id": self.id,
+            "name": so_description,
+            "product_uom_qty": 1,
+            "product_uom": carrier.product_id.uom_id.id,
+            "product_id": carrier.product_id.id,
+            "tax_id": [(6, 0, taxes_ids)],
+            "is_delivery": True,
         }
-        if carrier.invoice_policy == 'real':
-            values['price_unit'] = 0
-            values['name'] += _(' (Estimated Cost: %s )', self._format_currency_amount(price_unit))
+        if carrier.invoice_policy == "real":
+            values["price_unit"] = 0
+            values["name"] += _(
+                " (Estimated Cost: %s )", self._format_currency_amount(price_unit)
+            )
         else:
-            values['price_unit'] = price_unit
-        if carrier.free_over and self.currency_id.is_zero(price_unit) :
-            values['name'] += '\n' + _('Free Shipping')
+            values["price_unit"] = price_unit
+        if carrier.free_over and self.currency_id.is_zero(price_unit):
+            values["name"] += "\n" + _("Free Shipping")
         if self.order_line:
-            values['sequence'] = self.order_line[-1].sequence + 1
+            values["sequence"] = self.order_line[-1].sequence + 1
         del context
         return values
+
     # end of the odoo part
 
     def _update_delivery_line(self, delivery_line, price_unit):
@@ -131,13 +133,13 @@ class SaleOrder(models.Model):
                 # Tax is set with a SET command
                 clear = update = False
                 for cmd in val:
-                    if cmd[0] == fields.Command.SET:
+                    if cmd[0] == 6:
                         if delivery_line[f].ids != cmd[2]:
                             update = True
                     else:
                         clear = True
                 if clear:
-                    new_vals[f] = [fields.Command.CLEAR] + val
+                    new_vals[f] = [(5, 0, 0)] + val
                 elif update:
                     new_vals[f] = val
             elif isinstance(field_def, fields.Many2one):
@@ -194,10 +196,8 @@ class SaleOrder(models.Model):
             .with_context(auto_refresh_delivery=False)
         )
         for order in orders:
-            # Migration Note 17.0: move this to module sale_order_carrier_auto_assign
             if not order.carrier_id and order._is_auto_set_carrier_on_create():
                 order._set_delivery_carrier()
-            # End migration note
             order._auto_refresh_delivery()
         return orders
 
