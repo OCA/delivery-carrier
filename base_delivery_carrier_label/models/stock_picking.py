@@ -59,21 +59,8 @@ class StockPicking(models.Model):
             self.env["shipping.label"].with_context(**context_attachment).create(data)
         )
 
-    def _set_a_default_package(self):
-        """Pickings using this module must have a package
-        If not this method put it one silently
-        """
-        for picking in self:
-            move_lines = picking.move_line_ids.filtered(
-                lambda s: not s.result_package_id
-            )
-            if move_lines:
-                picking._put_in_pack(move_lines)
-
     def send_to_shipper(self):
         self.ensure_one()
-        if self.env.context.get("set_default_package", True):
-            self._set_a_default_package()
         # We consider that label has already been generated in case we have a
         # carrier tracking ref, this way we may print the labels before shipping
         # and not generated in second time during shipment
