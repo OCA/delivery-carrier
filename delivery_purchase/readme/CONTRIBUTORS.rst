@@ -4,3 +4,5 @@
   * Pedro M. Baeza
   * Vicent Cubells
   * Víctor Martínez
+
+* Jacques-Etienne Baudoux (BCIM) <je@bcim.be>

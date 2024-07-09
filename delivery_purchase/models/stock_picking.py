@@ -16,7 +16,10 @@ class StockPicking(models.Model):
 
     def purchase_send_to_shipper(self):
         self.ensure_one()
-        res = self.carrier_id.purchase_send_shipping(self)[0]
+        res = self.carrier_id.purchase_send_shipping(self)
+        if not res:
+            return
+        res = res[0]
         if (
             self.carrier_id.free_over
             and self.purchase_id
