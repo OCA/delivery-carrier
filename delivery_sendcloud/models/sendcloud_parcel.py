@@ -129,7 +129,7 @@ class SendcloudParcel(models.Model):
                     {
                         "name": document_data["type"],
                         "size": document_data["size"],
-                        "link": document_data["link"],
+                        "link": document_data.get("link"),
                         "parcel_id": parcel.id,
                     }
                 )
