@@ -280,7 +280,7 @@ class SendcloudRequest(models.AbstractModel):
         return self._get_panel_request("/returns/%s" % code)
 
     def get_return_portal_settings(self, domain_brand, language=""):
-        url = "/brand/%s/return-portal/" % domain_brand
+        url = "/brand/%s/return-portal" % domain_brand
         if language:
             url += "?language=" + language
         url = self._base_panel_url() + url
@@ -288,13 +288,13 @@ class SendcloudRequest(models.AbstractModel):
         return res.json()
 
     def get_return_portal_outgoing_parcel(self, domain_brand, params):
-        url = "/brand/%s/return-portal/outgoing/" % domain_brand
+        url = "/brand/%s/return-portal/outgoing" % domain_brand
         url = self._base_panel_url() + url
         res = self._do_request("GET", url, data=params)
         return res.json()
 
     def create_return_portal_incoming_parcel(self, domain_brand, payload, headers):
-        url = "/brand/%s/return-portal/incoming/" % domain_brand
+        url = "/brand/%s/return-portal/incoming" % domain_brand
         url = self._base_panel_url() + url
         res = self._do_request("POST", url, data=payload, headers=headers)
         return res.json()
