@@ -7,7 +7,8 @@ from os.path import dirname, join
 import requests
 from vcr import VCR
 
-from odoo.tests import HttpCase, tagged
+from odoo import http
+from odoo.tests import Form, HttpCase, tagged
 from odoo.tools import mute_logger
 
 _super_send = requests.Session.send
@@ -220,5 +221,47 @@ class TestDeliverySendCloudControllers(HttpCase):
                     },
                 }
             ),
+        )
+        self.assertEqual(res.status_code, 200)
+
+    @mute_logger("py.warnings")
+    def test_06_sendcloud_picking_download_labels(self):
+        self.integration.sendcloud_code = 241526
+        delivery_carrier_obj = self.env["delivery.carrier"]
+        # Retrieve Sendcloud shipping methods
+        with recorder.use_cassette("shipping_methods"):
+            delivery_carrier_obj.sendcloud_sync_shipping_method()
+        shipping_method0 = delivery_carrier_obj.search(
+            [("delivery_type", "=", "sendcloud")], limit=1
+        )
+        sale_order = self.env.ref("sale.sale_order_1").copy()
+        # Set Sendcloud delivery method
+        choose_delivery_form = Form(
+            self.env["choose.delivery.carrier"].with_context(
+                **{
+                    "default_order_id": sale_order.id,
+                    "default_carrier_id": shipping_method0.id,
+                }
+            )
+        )
+        choose_delivery_wizard = choose_delivery_form.save()
+        choose_delivery_wizard.button_confirm()
+        sale_order.mapped("order_line.product_id").write(
+            {
+                "hs_code": "123",
+                "country_of_origin": sale_order.warehouse_id.partner_id.country_id,
+            }
+        )
+        with recorder.use_cassette("shipping_02"):
+            sale_order.with_context(
+                force_sendcloud_shipment_code="c9b2058d-2621-4ce5-afb0-f14e8e5565b6"
+            ).action_confirm()
+        self.authenticate("admin", "admin")
+        res = self.url_open(
+            url="/sendcloud/picking/download_labels",
+            data={
+                "ids": sale_order.picking_ids.ids,
+                "csrf_token": http.Request.csrf_token(self),
+            },
         )
         self.assertEqual(res.status_code, 200)
