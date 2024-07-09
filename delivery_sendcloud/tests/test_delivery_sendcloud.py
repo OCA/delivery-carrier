@@ -564,11 +564,6 @@ class TestDeliverySendCloud(TransactionCase):
                 "brand_id": sendcloud_brand.id,
             }
         )
-        sendcloud_create_return_parcel_wizard_rec.onchange_parcel_id()
-        self.assertEqual(
-            sendcloud_create_return_parcel_wizard_rec.postal_code,
-            sendcloud_create_return_parcel_wizard_rec.postal_code,
-        )
         sendcloud_create_return_parcel_wizard_rec._onchange_configuration()
         sendcloud_create_return_parcel_wizard_rec.button_confirm()
         with recorder.use_cassette("outgoing_parcel"):
