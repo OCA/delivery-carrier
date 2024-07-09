@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 Onestein (<https://www.onestein.nl>)
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl) -->
+<odoo>
+
+    <record id="sendcloud_create_return_parcel_wizard_form" model="ir.ui.view">
+        <field name="model">sendcloud.create.return.parcel.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <header />
+                <group name="main">
+                    <group string="Query Parameters">
+                        <field name="brand_id" readonly="access_token" />
+                        <field name="parcel_id" readonly="access_token" />
+                        <field name="postal_code" readonly="access_token" />
+                        <field name="identifier" readonly="access_token" />
+                        <field name="language" readonly="access_token" />
+                    </group>
+                    <group string="Tokens" invisible="1">
+                        <field name="access_token" />
+                        <field name="service_points_token" />
+                    </group>
+                </group>
+                <div
+                    role="alert"
+                    class="alert alert-warning"
+                    invisible="not error_message"
+                >
+                    <field name="error_message" nolabel="1" />
+                </div>
+                <div role="alert" class="alert alert-info" invisible="not info_message">
+                    <field name="info_message" nolabel="1" />
+                </div>
+                <group invisible="not access_token">
+                    <group>
+                        <field name="support_url" readonly="1" />
+                        <field name="return_policy_url" readonly="1" />
+                        <field name="enable_refunds" readonly="1" />
+                    </group>
+                    <group>
+                        <field name="return_fee" readonly="1" />
+                        <field
+                            name="service_point"
+                            widget="sendcloud_service_point_selector"
+                        />
+                        <field name="collo_count" />
+                    </group>
+                    <field name="line_ids">
+                        <tree editable="bottom" create="false" delete="false">
+                            <field name="name" />
+                            <field name="quantity" />
+                            <field name="price" />
+                        </tree>
+                    </field>
+                    <field name="refund_option_ids" invisible="1">
+                        <tree>
+                            <field name="name" />
+                            <field name="code" />
+                            <field name="require_message" />
+                        </tree>
+                    </field>
+                    <group>
+                        <field
+                            name="refund_option_id"
+                            required="access_token"
+                            options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"
+                        />
+                        <field name="refund_option_require_message" invisible="1" />
+                        <field
+                            name="refund_message"
+                            invisible="not refund_option_require_message"
+                            required="refund_option_require_message"
+                        />
+                    </group>
+                    <field name="reason_ids" invisible="1">
+                        <tree>
+                            <field name="name" />
+                            <field name="code" />
+                        </tree>
+                    </field>
+                    <group>
+                        <field
+                            name="reason_id"
+                            options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"
+                        />
+                        <field name="reason_message" />
+                    </group>
+                    <field name="return_location_ids" invisible="1">
+                        <tree>
+                            <field name="name" />
+                            <field name="code" />
+                        </tree>
+                    </field>
+                    <group>
+                        <field
+                            name="return_location_id"
+                            options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"
+                        />
+                    </group>
+                    <field name="delivery_option_ids" invisible="1">
+                        <tree>
+                            <field name="name" />
+                        </tree>
+                    </field>
+                    <group>
+                        <field
+                            name="delivery_option_id"
+                            required="access_token"
+                            options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"
+                        />
+                    </group>
+                </group>
+                <group name="extra" string="Extra data">
+                    <field name="shop_distances" />
+                    <field name="national_carrier_contact" />
+                    <field name="poller_url" widget="url" />
+                </group>
+                <footer>
+                    <button
+                        string="Confirm step 1/2"
+                        name="button_confirm"
+                        type="object"
+                        class="btn-primary"
+                        invisible="access_token not in [False, None]"
+                    />
+                    <button
+                        string="Confirm step 2/2"
+                        name="button_confirm"
+                        type="object"
+                        class="btn-primary"
+                        invisible="access_token in [False, None]"
+                    />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record
+        id="action_sendcloud_create_return_parcel_wizard"
+        model="ir.actions.act_window"
+    >
+        <field name="name">Create Return Parcel</field>
+        <field name="res_model">sendcloud.create.return.parcel.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="sendcloud_create_return_parcel_wizard_form" />
+        <field name="target">new</field>
+    </record>
+
+</odoo>

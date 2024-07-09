@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 Onestein (<https://www.onestein.nl>)
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl) -->
+<odoo>
+
+    <record id="view_sendcloud_return_form" model="ir.ui.view">
+        <field name="model">sendcloud.return</field>
+        <field name="arch" type="xml">
+            <form create="false" edit="false">
+                <header />
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="sendcloud_code" string="Internal Code" />
+                            <field name="email" widget="email" />
+                            <field name="reason" />
+                            <field name="outgoing_parcel_id" />
+                            <field name="incoming_parcel_id" />
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                            />
+                            <field name="active" />
+                        </group>
+                        <group>
+                            <field name="message" />
+                            <field name="status" />
+                            <field name="status_display" />
+                            <field name="is_cancellable" />
+                        </group>
+                        <group>
+                            <field name="label_cost" />
+                            <field name="items_cost" />
+                            <field name="delivered_at" />
+                            <field name="delivery_option" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Incoming Parcel">
+                            <group>
+                                <group string="Details">
+                                    <field
+                                        name="incoming_parcel_tracking_url"
+                                        widget="url"
+                                        string="Tracking URL"
+                                    />
+                                    <field
+                                        name="incoming_parcel_tracking_number"
+                                        string="Tracking Number"
+                                    />
+                                    <field
+                                        name="incoming_parcel_brand_name"
+                                        string="Brand Name"
+                                    />
+                                    <field
+                                        name="incoming_parcel_order_number"
+                                        string="Order Number"
+                                    />
+                                    <field
+                                        name="incoming_parcel_from_email"
+                                        widget="email"
+                                        string="From Email"
+                                    />
+                                    <field
+                                        name="incoming_parcel_deleted"
+                                        string="Deleted"
+                                    />
+                                </group>
+                                <group string="Status">
+                                    <field
+                                        name="incoming_parcel_parcel_status"
+                                        string="Status"
+                                    />
+                                    <field
+                                        name="incoming_parcel_status_code"
+                                        string="Status Code"
+                                    />
+                                    <field
+                                        name="incoming_parcel_status_message"
+                                        string="Message"
+                                    />
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Outgoing Parcel">
+                            <group>
+                                <group string="Details">
+                                    <field
+                                        name="outgoing_parcel_tracking_url"
+                                        widget="url"
+                                        string="Tracking URL"
+                                    />
+                                    <field
+                                        name="outgoing_parcel_tracking_number"
+                                        string="Tracking Number"
+                                    />
+                                    <field
+                                        name="outgoing_parcel_brand_name"
+                                        string="Brand Name"
+                                    />
+                                    <field
+                                        name="outgoing_parcel_order_number"
+                                        string="Order Number"
+                                    />
+                                    <field
+                                        name="outgoing_parcel_from_email"
+                                        widget="email"
+                                        string="From Email"
+                                    />
+                                    <field
+                                        name="outgoing_parcel_deleted"
+                                        string="Deleted"
+                                    />
+                                </group>
+                                <group string="Status">
+                                    <field
+                                        name="outgoing_parcel_parcel_status"
+                                        string="Status"
+                                    />
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_sendcloud_return_tree" model="ir.ui.view">
+        <field name="model">sendcloud.return</field>
+        <field name="arch" type="xml">
+            <tree create="false">
+                <field name="sendcloud_code" string="Internal Code" />
+                <field name="email" widget="email" />
+                <field name="reason" />
+                <field name="outgoing_parcel_id" />
+                <field name="incoming_parcel_id" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_sendcloud_returns" model="ir.actions.act_window">
+        <field name="name">Sendcloud Returns</field>
+        <field name="res_model">sendcloud.return</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>
