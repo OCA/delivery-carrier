@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 Onestein (<https://www.onestein.nl>)
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl) -->
+<odoo>
+
+    <record id="sendcloud_sync_order_form" model="ir.ui.view">
+        <field name="model">sendcloud.sync.order.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <header />
+                <group name="main">
+                    <group>
+                        <field name="sync_from_date" />
+                    </group>
+                </group>
+                <footer>
+                    <button
+                        string="Confirm"
+                        name="button_sync"
+                        type="object"
+                        class="btn-primary"
+                    />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_sendcloud_sync_order_wizard" model="ir.actions.act_window">
+        <field name="name">Sync past orders to Sendcloud</field>
+        <field name="res_model">sendcloud.sync.order.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="sendcloud_sync_order_form" />
+        <field name="target">new</field>
+    </record>
+
+</odoo>
