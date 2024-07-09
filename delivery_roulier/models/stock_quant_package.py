@@ -91,6 +91,8 @@ class StockQuantPackage(models.Model):
     def _roulier_generate_labels(self, picking):
         # send all packs to roulier. It will decide if it makes one call per pack or
         # one call for all pack depending on the carrier.
+        if not self:
+            raise UserError(_("No pack found for picking %s", picking.name))
         response = self._call_roulier_api(picking)
         self._handle_attachments(picking, response)
         return self._parse_response(picking, response)

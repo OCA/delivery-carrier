@@ -4,6 +4,7 @@ from unittest.mock import MagicMock, patch
 from odoo_test_helper import FakeModelLoader
 from roulier import roulier
 
+from odoo.exceptions import UserError
 from odoo.tests.common import TransactionCase
 
 roulier_ret = {
@@ -100,13 +101,33 @@ class DeliveryRoulierCase(TransactionCase):
         roulier.get_carriers_action_available = cls.real_get_carriers_action_available
         super().tearDownClass()
 
+    def test_roulier_no_pack(self):
+        # having a pack is mandatory for roulier
+        # it should fail if no pack provided.
+        # in <16 packs were silently created
+        roulier.get_carriers_action_available = MagicMock(
+            return_value={"test": ["get_label"]}
+        )
+        with patch("roulier.roulier.get") as mock_roulier:
+            mock_roulier.return_value = roulier_ret
+            self.assertRaises(UserError, self.picking.send_to_shipper)
+
     def test_roulier(self):
         roulier.get_carriers_action_available = MagicMock(
             return_value={"test": ["get_label"]}
         )
         with patch("roulier.roulier.get") as mock_roulier:
             mock_roulier.return_value = roulier_ret
+
+            # create pack
+            move_lines = self.picking.move_line_ids.filtered(
+                lambda s: not s.result_package_id
+            )
+            if move_lines:
+                self.picking._put_in_pack(move_lines)
+
             self.picking.send_to_shipper()
+
             roulier_args = mock_roulier.mock_calls[0][1]
             self.assertEqual("get_label", roulier_args[1])
             roulier_payload = roulier_args[2]
