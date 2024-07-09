@@ -418,7 +418,7 @@ class TestDeliverySendCloud(TransactionCase):
         shipping_method0 = self.env["delivery.carrier"].search(
             [("delivery_type", "=", "sendcloud"), ("sendcloud_code", "=", 9)], limit=1
         )
-        self.assertTrue(shipping_method0._compute_can_generate_return())
+        self.assertTrue(shipping_method0.can_generate_return)
         with recorder.use_cassette("shipping_method"):
             shipping_method0.button_from_sendcloud_sync()
         self.assertFalse(shipping_method0.is_sendcloud_test_mode)

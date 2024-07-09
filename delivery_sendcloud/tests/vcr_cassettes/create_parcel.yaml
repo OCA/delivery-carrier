@@ -40,8 +40,7 @@ interactions:
             "88296eff-595c-4c62-9b6f-075112bf54f6", "collo_nr": 0, "collo_count": 1,
             "awb_tracking_number": null, "box_number": null, "length": null, "width":
             null, "height": null, "shipping_method_checkout_name": "DHL Express
-            Worldwide 0-1kg - incoterm DAP", "external_reference": "WH/OUT/00524,0",
-            "documents":[{"type":"label","size":"a6"}]}] }',
+            Worldwide 0-1kg - incoterm DAP", "external_reference": "WH/OUT/00524,0" }',
         }
       headers:
         Allow: ["GET, POST, PUT, HEAD, OPTIONS"]
