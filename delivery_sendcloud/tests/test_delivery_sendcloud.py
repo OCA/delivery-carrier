@@ -571,6 +571,8 @@ class TestDeliverySendCloud(TransactionCase):
         )
         sendcloud_create_return_parcel_wizard_rec._onchange_configuration()
         sendcloud_create_return_parcel_wizard_rec.button_confirm()
+        with recorder.use_cassette("outgoing_parcel"):
+            sendcloud_create_return_parcel_wizard_rec._step1(self.integration)
 
     @mute_logger("py.warnings")
     def test_13_sendcloud_country_specific_product(self):
