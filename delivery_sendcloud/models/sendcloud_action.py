@@ -165,8 +165,7 @@ class SendcloudAction(models.Model):
                     .search([("sendcloud_code", "=", sendcloud_code)])
                     .mapped("picking_id")
                 )
-                assert len(picking) == 1  # TODO raise error?
-            if picking.sendcloud_parcel_ids:
+            if picking and picking.sendcloud_parcel_ids:
                 parcels = picking._sendcloud_create_update_received_parcels(
                     [parcel_data], self.company_id.id
                 )
