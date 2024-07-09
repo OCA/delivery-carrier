@@ -72,19 +72,6 @@ class TestAutomaticPackage(TransactionCase):
         picking._action_done()
         self.assertTrue(picking.move_line_ids.result_package_id)
 
-    def test_automatic_context(self):
-        """
-        Check that the automatic package creation is set on new carrier
-        Create a picking, fill in quantities and validate it with good
-        context key
-        The move line should contain a package
-        """
-        self.carrier.automatic_package_creation_at_delivery = False
-        picking = self._create_picking()
-        picking.move_ids.update({"quantity_done": 5.0})
-        picking.with_context(set_default_package=True)._action_done()
-        self.assertTrue(picking.move_line_ids.result_package_id)
-
     def test_no_automatic(self):
         """
         Disable the automatic package creation on carrier

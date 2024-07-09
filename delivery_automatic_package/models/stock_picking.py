@@ -26,9 +26,6 @@ class StockPicking(models.Model):
         set a new one for concerned moves.
         """
         self.ensure_one()
-        if (
-            self.carrier_id.automatic_package_creation_at_delivery
-            or self.env.context.get("set_default_package", False)
-        ):
+        if self.carrier_id.automatic_package_creation_at_delivery:
             self._set_a_default_package()
         return super().send_to_shipper()
