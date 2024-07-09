@@ -22,6 +22,7 @@ msgid "Acknowledgment"
 msgstr "Acuse de recibo"
 
 #. module: delivery_roulier_option
+#. odoo-python
 #: code:addons/delivery_roulier_option/models/stock_picking.py:0
 #: model:ir.model.fields.selection,name:delivery_roulier_option.selection__stock_picking__customs_category__commercial
 #, python-format
@@ -39,13 +40,7 @@ msgid "Delivery carrier template option"
 msgstr "Opción de plantilla de transportista de entrega"
 
 #. module: delivery_roulier_option
-#: model:ir.model.fields,field_description:delivery_roulier_option.field_delivery_carrier_template_option__display_name
-#: model:ir.model.fields,field_description:delivery_roulier_option.field_stock_picking__display_name
-#: model:ir.model.fields,field_description:delivery_roulier_option.field_stock_quant_package__display_name
-msgid "Display Name"
-msgstr "Mostrar Nombre"
-
-#. module: delivery_roulier_option
+#. odoo-python
 #: code:addons/delivery_roulier_option/models/stock_picking.py:0
 #: model:ir.model.fields.selection,name:delivery_roulier_option.selection__stock_picking__customs_category__document
 #, python-format
@@ -58,6 +53,7 @@ msgid "Free of charges and rights"
 msgstr "Libre de cargas y derechos"
 
 #. module: delivery_roulier_option
+#. odoo-python
 #: code:addons/delivery_roulier_option/models/stock_picking.py:0
 #: model:ir.model.fields.selection,name:delivery_roulier_option.selection__stock_picking__customs_category__gift
 #, python-format
@@ -65,6 +61,7 @@ msgid "Gift"
 msgstr "Regalo"
 
 #. module: delivery_roulier_option
+#. odoo-python
 #: code:addons/delivery_roulier_option/models/stock_picking.py:0
 #: model:ir.model.fields.selection,name:delivery_roulier_option.selection__stock_picking__customs_category__return
 #, python-format
@@ -72,23 +69,9 @@ msgid "Goods return"
 msgstr "Devolución de mercancías"
 
 #. module: delivery_roulier_option
-#: model:ir.model.fields,field_description:delivery_roulier_option.field_delivery_carrier_template_option__id
-#: model:ir.model.fields,field_description:delivery_roulier_option.field_stock_picking__id
-#: model:ir.model.fields,field_description:delivery_roulier_option.field_stock_quant_package__id
-msgid "ID"
-msgstr "ID"
-
-#. module: delivery_roulier_option
 #: model:delivery.carrier.template.option,name:delivery_roulier_option.carrier_opt_tmpl_INS
 msgid "Insurance"
 msgstr "Seguro"
-
-#. module: delivery_roulier_option
-#: model:ir.model.fields,field_description:delivery_roulier_option.field_delivery_carrier_template_option____last_update
-#: model:ir.model.fields,field_description:delivery_roulier_option.field_stock_picking____last_update
-#: model:ir.model.fields,field_description:delivery_roulier_option.field_stock_quant_package____last_update
-msgid "Last Modified on"
-msgstr "Última Modificación el"
 
 #. module: delivery_roulier_option
 #: model:ir.model.fields,field_description:delivery_roulier_option.field_delivery_carrier_option__name
@@ -97,13 +80,16 @@ msgid "Name"
 msgstr "Nombre"
 
 #. module: delivery_roulier_option
+#. odoo-python
 #: code:addons/delivery_roulier_option/models/stock_quant_package.py:0
 #, python-format
-msgid "No H.S. Code on product '%s' nor on it's product category '%s'."
+msgid ""
+"No H.S. Code on product '%(prod_displ_name)s' nor on it's product category "
+"'%(categ_displ_name)s'."
 msgstr ""
-"No hay código H.S. en el producto '%s' ni en su categoría de producto '%s'."
 
 #. module: delivery_roulier_option
+#. odoo-python
 #: code:addons/delivery_roulier_option/models/stock_picking.py:0
 #: model:ir.model.fields.selection,name:delivery_roulier_option.selection__stock_picking__customs_category__other
 #, python-format
@@ -116,6 +102,7 @@ msgid "Packages"
 msgstr "Paquetes"
 
 #. module: delivery_roulier_option
+#. odoo-python
 #: code:addons/delivery_roulier_option/models/stock_picking.py:0
 #: model:ir.model.fields.selection,name:delivery_roulier_option.selection__stock_picking__customs_category__sample
 #, python-format
@@ -136,3 +123,18 @@ msgstr "Transferencia"
 #: model:ir.model.fields,help:delivery_roulier_option.field_stock_picking__customs_category
 msgid "Type of sending for the customs"
 msgstr "Tipo de envío para la aduana"
+
+#~ msgid "Display Name"
+#~ msgstr "Mostrar Nombre"
+
+#~ msgid "ID"
+#~ msgstr "ID"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Última Modificación el"
+
+#, python-format
+#~ msgid "No H.S. Code on product '%s' nor on it's product category '%s'."
+#~ msgstr ""
+#~ "No hay código H.S. en el producto '%s' ni en su categoría de producto "
+#~ "'%s'."
