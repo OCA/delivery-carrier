@@ -322,7 +322,7 @@ class TestDeliverySendCloud(TransactionCase):
             UserError, "Document not available: no link provided."
         ):
             sendcloud_parcel_rec.document_ids.action_get_parcel_document()
-        with self.assertRaisesRegex(UserError, "Sendcloud: Invalid username/password"):
+        with recorder.use_cassette("cancel_parcel_182588401"):
             sendcloud_parcel_rec.with_context(skip_raise_error_401=True).unlink()
 
     def test_08_retrieve_invoices(self):
