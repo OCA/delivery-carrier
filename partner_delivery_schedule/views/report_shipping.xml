@@ -28,7 +28,7 @@
         <xpath expr="//div[@name='div_sched_date']" position="after">
             <div
                 t-if="o.picking_type_id.code == 'outgoing' and o.partner_id"
-                class="col-auto"
+                class="col-auto col-3 mw-100 mb-2"
             >
                 <t
                     t-set="partner"
