@@ -14,9 +14,13 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: stock_picking_report_delivery_cost
-#: model_terms:ir.ui.view,arch_db:stock_picking_report_delivery_cost.report_delivery_document
 #: model_terms:ir.ui.view,arch_db:stock_picking_report_delivery_cost.report_picking
 msgid "<strong>Delivery cost:</strong>"
+msgstr ""
+
+#. module: stock_picking_report_delivery_cost
+#: model_terms:ir.ui.view,arch_db:stock_picking_report_delivery_cost.report_delivery_document
+msgid "<strong>Delivery cost</strong>"
 msgstr ""
 
 #. module: stock_picking_report_delivery_cost
