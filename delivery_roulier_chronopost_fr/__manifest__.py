@@ -2,13 +2,11 @@
 
 {
     "name": "Delivery Chronopost France",
-    "version": "14.0.1.0.1",
+    "version": "17.0.1.0.1",
     "author": "Akretion,Odoo Community Association (OCA)",
     "category": "Delivery",
     "complexity": "normal",
-    "depends": [
-        "delivery_roulier_option",
-    ],
+    "depends": ["delivery_roulier_option"],
     "website": "https://github.com/OCA/delivery-carrier",
     "data": [
         "views/carrier_account.xml",
