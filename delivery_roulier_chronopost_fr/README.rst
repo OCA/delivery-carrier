@@ -63,7 +63,7 @@ Authors
 Contributors
 ------------
 
--  Florian da Costa <florian.dacosta@akretion.com>
+- Florian da Costa <florian.dacosta@akretion.com>
 
 Maintainers
 -----------
