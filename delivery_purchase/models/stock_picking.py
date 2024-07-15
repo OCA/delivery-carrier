@@ -53,5 +53,8 @@ class StockPicking(models.Model):
                     1.0 + (float(self.carrier_id.margin) / 100.0)
                 )
             # Create delivery line allways
-            self.purchase_id._create_delivery_line(self.carrier_id, carrier_price)
+            line = self.purchase_id._create_delivery_line(
+                self.carrier_id, carrier_price
+            )
+            line.delivery_picking_orig_id = self
             self.purchase_id.write({"carrier_id": self.carrier_id})

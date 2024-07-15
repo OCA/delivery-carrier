@@ -6,6 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-07-19 14:16+0000\n"
+"PO-Revision-Date: 2024-07-19 14:16+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -47,6 +49,11 @@ msgstr ""
 #. module: delivery_purchase
 #: model:ir.model.fields,field_description:delivery_purchase.field_purchase_order_line__is_delivery
 msgid "Is a Delivery"
+msgstr ""
+
+#. module: delivery_purchase
+#: model:ir.model.fields,field_description:delivery_purchase.field_purchase_order_line__delivery_picking_orig_id
+msgid "Origin picking (delivery)"
 msgstr ""
 
 #. module: delivery_purchase

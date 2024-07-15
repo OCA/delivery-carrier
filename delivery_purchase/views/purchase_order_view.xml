@@ -18,6 +18,15 @@
                     />
                 </div>
             </div>
+            <xpath
+                expr="//field[@name='order_line']/form//field[@name='taxes_id']"
+                position="after"
+            >
+                <field
+                    name="delivery_picking_orig_id"
+                    attrs="{'invisible': [('delivery_picking_orig_id', '=', False)]}"
+                />
+            </xpath>
         </field>
     </record>
 </odoo>
