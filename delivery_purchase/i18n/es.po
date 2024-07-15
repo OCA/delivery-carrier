@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-20 09:51+0000\n"
-"PO-Revision-Date: 2023-02-20 10:51+0100\n"
+"POT-Creation-Date: 2024-07-19 08:32+0000\n"
+"PO-Revision-Date: 2024-07-19 10:33+0200\n"
 "Last-Translator: Leonardo J. Caballero G. <leonardocaballero@gmail.com>\n"
 "Language-Team: none\n"
 "Language: es\n"
@@ -51,6 +51,12 @@ msgid "Is a Delivery"
 msgstr "Es un envío"
 
 #. module: delivery_purchase
+#: model:ir.model.fields,field_description:delivery_purchase.field_purchase_order_line__delivery_picking_orig_id
+#, fuzzy
+msgid "Origin picking (delivery)"
+msgstr "Albarán origen (entrega)"
+
+#. module: delivery_purchase
 #: model:ir.model,name:delivery_purchase.model_purchase_order
 msgid "Purchase Order"
 msgstr "Orden de compra"
@@ -91,12 +97,3 @@ msgstr "No hay una regla de entrega coincidente."
 #: model:ir.model,name:delivery_purchase.model_stock_picking
 msgid "Transfer"
 msgstr "Transferir"
-
-#~ msgid "Display Name"
-#~ msgstr "Nombre a mostrar"
-
-#~ msgid "ID"
-#~ msgstr "ID"
-
-#~ msgid "Last Modified on"
-#~ msgstr "Última modificación el"
