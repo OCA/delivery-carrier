@@ -67,6 +67,9 @@ class PurchaseOrderLine(models.Model):
     _inherit = "purchase.order.line"
 
     is_delivery = fields.Boolean(string="Is a Delivery", default=False)
+    delivery_picking_orig_id = fields.Many2one(
+        comodel_name="stock.picking", string="Origin picking (delivery)"
+    )
 
     @api.depends("is_delivery")
     def _compute_qty_invoiced(self):
