@@ -119,9 +119,8 @@ class TestDeliveryPurchase(TestDeliveryPurchaseBase):
         picking.carrier_id = self.carrier_fixed
         self._action_picking_validate(picking)
         self.assertEqual(picking.carrier_price, 20)
-        self.assertEqual(
-            len(self.purchase.order_line.filtered(lambda x: x.is_delivery)), 1
-        )
+        delivery_line = self.purchase.order_line.filtered(lambda x: x.is_delivery)
+        self.assertEqual(delivery_line.delivery_picking_orig_id, picking)
         self.assertEqual(self.purchase.delivery_price, 20)
 
     def test_picking_carrier_multi(self):
@@ -135,17 +134,17 @@ class TestDeliveryPurchase(TestDeliveryPurchaseBase):
         model = self.env[res["res_model"]].with_context(**res["context"])
         model.create({}).process_cancel_backorder()
         self.assertEqual(picking.carrier_price, 20)
-        self.assertEqual(
-            len(self.purchase.order_line.filtered(lambda x: x.is_delivery)), 1
-        )
+        delivery_line = self.purchase.order_line.filtered(lambda x: x.is_delivery)
+        self.assertEqual(delivery_line.delivery_picking_orig_id, picking)
         self.assertEqual(self.purchase.delivery_price, 20)
         new_picking = self.purchase.picking_ids - picking
         new_picking.carrier_id = self.carrier_rules
         self._action_picking_validate(new_picking)
         self.assertEqual(new_picking.carrier_price, 10)
-        self.assertEqual(
-            len(self.purchase.order_line.filtered(lambda x: x.is_delivery)), 2
+        new_delivery_line = (
+            self.purchase.order_line.filtered(lambda x: x.is_delivery) - delivery_line
         )
+        self.assertEqual(new_delivery_line.delivery_picking_orig_id, new_picking)
         self.assertEqual(self.purchase.delivery_price, 30)
 
     def test_onchange_picking_carrier_invoice_policy_real(self):
@@ -158,4 +157,6 @@ class TestDeliveryPurchase(TestDeliveryPurchaseBase):
         self.assertEqual(picking.carrier_id, self.carrier_rules)
         self.assertEqual(picking.carrier_price, 10)
         self.assertEqual(self.purchase.carrier_id, self.carrier_rules)
+        delivery_line = self.purchase.order_line.filtered(lambda x: x.is_delivery)
+        self.assertEqual(delivery_line.delivery_picking_orig_id, picking)
         self.assertEqual(self.purchase.delivery_price, 10)
