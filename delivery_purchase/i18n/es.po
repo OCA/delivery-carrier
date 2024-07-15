@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-20 09:51+0000\n"
-"PO-Revision-Date: 2023-02-20 10:51+0100\n"
+"POT-Creation-Date: 2024-07-19 14:16+0000\n"
+"PO-Revision-Date: 2024-07-19 16:16+0200\n"
 "Last-Translator: Leonardo J. Caballero G. <leonardocaballero@gmail.com>\n"
 "Language-Team: none\n"
 "Language: es\n"
@@ -52,6 +52,12 @@ msgstr "Envío gratis"
 #: model:ir.model.fields,field_description:delivery_purchase.field_purchase_order_line__is_delivery
 msgid "Is a Delivery"
 msgstr "Es un envío"
+
+#. module: delivery_purchase
+#: model:ir.model.fields,field_description:delivery_purchase.field_purchase_order_line__delivery_picking_orig_id
+#, fuzzy
+msgid "Origin picking (delivery)"
+msgstr "Albarán origen (entrega)"
 
 #. module: delivery_purchase
 #: model:ir.model,name:delivery_purchase.model_purchase_order
