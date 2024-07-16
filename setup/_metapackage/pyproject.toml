@@ -1,11 +1,12 @@
 [project]
 name = "odoo-addons-oca-delivery-carrier"
-version = "17.0.20240712.0"
+version = "17.0.20240716.0"
 dependencies = [
     "odoo-addon-base_delivery_carrier_label>=17.0dev,<17.1dev",
     "odoo-addon-delivery_carrier_account>=17.0dev,<17.1dev",
     "odoo-addon-delivery_carrier_info>=17.0dev,<17.1dev",
     "odoo-addon-delivery_roulier>=17.0dev,<17.1dev",
+    "odoo-addon-delivery_roulier_option>=17.0dev,<17.1dev",
 ]
 classifiers=[
     "Programming Language :: Python",
