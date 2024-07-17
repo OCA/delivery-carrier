@@ -9,6 +9,7 @@ class CarrierLabelCase(TransactionCase):
     """Base class for carrier label tests. Inherit and override _get_carrier
     to return the carrier you want to test"""
 
+    @classmethod
     def setUpClass(self):
         super().setUpClass(self)
         self._create_order_picking()
