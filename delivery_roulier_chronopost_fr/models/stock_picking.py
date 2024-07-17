@@ -33,3 +33,12 @@ class StockPicking(models.Model):
         # Civility for shipper seems always requirer...
         vals["civility"] = "E"
         return vals
+
+    def _get_carrier_account(self):
+        # dummy carrier account injected in the context
+        # is a workaround to avoid issues while running tests
+        account = super()._get_carrier_account()
+        ctx = self.env.context
+        if not account and ctx.get("dummy_account_id"):
+            account = self.env["carrier.account"].browse(ctx["dummy_account_id"])
+        return account
