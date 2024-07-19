@@ -51,6 +51,11 @@ msgid "Is a Delivery"
 msgstr ""
 
 #. module: delivery_purchase
+#: model:ir.model.fields,field_description:delivery_purchase.field_purchase_order_line__delivery_picking_orig_id
+msgid "Origin picking (delivery)"
+msgstr ""
+
+#. module: delivery_purchase
 #: model:ir.model,name:delivery_purchase.model_purchase_order
 msgid "Purchase Order"
 msgstr ""
