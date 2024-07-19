@@ -7,7 +7,6 @@ from odoo import fields, models
 class DeliveryCarrier(models.Model):
     _inherit = "delivery.carrier"
 
-    # pylint: disable=W8113
     price_method = fields.Selection(
         selection=[
             ("carrier", "Carrier obtained price"),
@@ -19,9 +18,8 @@ class DeliveryCarrier(models.Model):
     )
 
     def rate_shipment(self, order):
-        """Trick the method for using all the upstream code for the
-        price computation in case of using fixed or base_on_rule.
-        """
+        # Trick the method for using all the upstream code for the
+        # price computation in case of using fixed or base_on_rule.
         previous_method = False
         if self.price_method in ("fixed", "base_on_rule"):
             previous_method = self.delivery_type
