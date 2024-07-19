@@ -82,6 +82,10 @@ Contributors
 
    -  Marçal Isern
 
+-  `Open Source Integrators <https://opensourceintegrators.com>`__:
+
+   -  Daniel Reis <dreis@opensourceintegrators.com>
+
 Maintainers
 -----------
 

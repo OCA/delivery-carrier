@@ -8,27 +8,25 @@ License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
         <field name="model">delivery.carrier</field>
         <field name="inherit_id" ref="delivery.view_delivery_carrier_form" />
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='integration_level']" position="after">
+            <field name="integration_level" position="after">
                 <field
                     name="price_method"
-                    attrs="{'invisible': [('delivery_type', 'in', ['fixed', 'base_on_rule'])], 'required': [('delivery_type', 'not in', ['fixed', 'base_on_rule'])]}"
+                    invisible="delivery_type in ['fixed', 'base_on_rule']"
+                    required="delivery_type not in ['fixed', 'base_on_rule']"
                 />
-            </xpath>
+            </field>
             <xpath expr="(//page)[1]" position="before">
                 <page
                     string="Pricing"
-                    attrs="{'invisible': [('delivery_type', 'in', ['fixed', 'base_on_rule'])]}"
+                    invisible="delivery_type in ['fixed', 'base_on_rule']"
                 >
-                    <group attrs="{'invisible':[('price_method', '!=', 'fixed')]}">
+                    <group invisible="price_method != 'fixed'">
                         <group>
                             <field name="fixed_price" />
                         </group>
                     </group>
-                    <group
-                        name="general"
-                        attrs="{'invisible':[('price_method', '!=', 'base_on_rule')]}"
-                    >
-                        <field name="price_rule_ids" nolabel="1" />
+                    <group name="general" invisible="price_method != 'base_on_rule'">
+                        <field name="price_rule_ids" nolabel="1" colspan="2" />
                     </group>
                 </page>
             </xpath>

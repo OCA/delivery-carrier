@@ -3,14 +3,14 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 {
     "name": "Delivery Price Method",
-    "summary": "Provides fields to be able to contemplate the tracking states"
-    "and also adds a global fields",
+    "summary": "Force a fixed or rule price calculation on Delivery Methods"
+    ", for example to override a webservice provided prices.",
     "author": "Trey (www.trey.es), " "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/delivery-carrier",
     "license": "AGPL-3",
     "development_status": "Production/Stable",
     "category": "Delivery",
-    "version": "16.0.1.0.0",
+    "version": "17.0.1.0.0",
     "depends": ["delivery"],
     "data": ["views/delivery_carrier_views.xml"],
 }
