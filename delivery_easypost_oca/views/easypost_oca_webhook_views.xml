@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <!-- View easypost.oca.webhook View Tree -->
+    <record id="view_easypost_oca_webhook_tree" model="ir.ui.view">
+        <field name="name">view.easypost.oca.webhook.tree</field>
+        <field name="model">easypost.oca.webhook</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- View easypost.oca.webhook form -->
+    <record id="view_easypost_oca_webhook_form" model="ir.ui.view">
+        <field name="name">view.easypost.oca.webhook.form</field>
+        <field name="model">easypost.oca.webhook</field>
+        <field name="arch" type="xml">
+            <form string="Easypost Oca Webhook">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" />
+                        <h1>
+                            <field name="name" placeholder="Name..." />
+                        </h1>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- View easypost.oca.webhook search -->
+    <record id="view_easypost_oca_webhook_search" model="ir.ui.view">
+        <field name="name">view.easypost.oca.webhook.search</field>
+        <field name="model">easypost.oca.webhook</field>
+        <field name="arch" type="xml">
+            <search>
+                <group expand="1" string="Group By">
+                    <filter
+                        string="Name"
+                        name="name"
+                        domain="[]"
+                        context="{'group_by':'name'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action easypost.oca.webhook -->
+    <record id="action_easypost_oca_webhook" model="ir.actions.act_window">
+        <field name="name">Easypost Oca Webhook</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">easypost.oca.webhook</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                There is no examples click here to add new Easypost Oca Webhook.
+            </p>
+        </field>
+    </record>
+
+</odoo>

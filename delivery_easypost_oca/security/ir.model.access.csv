@@ -1,0 +1,3 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+access_choose_delivery_carrier_manager,choose_delivery_carrier_manager,model_choose_delivery_carrier,,1,1,1,1
+access_easypost_oca_webhook_manager,easypost_oca_webhook_manager,model_easypost_oca_webhook,,1,1,1,1
