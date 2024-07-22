@@ -1,9 +1,9 @@
 {
     "name": "Easypost Shipping OCA",
-    "version": "14.0.1.0.0",
+    "version": "14.0.1.0.1",
     "summary": """ OCA Delivery Easypost """,
-    "author": "Binhex",
-    "website": "https://binhex.cloud",
+    "author": "Binhex, Odoo Community Association (OCA)",
+    "website": "https://github.com/OCA/delivery-carrier",
     "category": "Inventory/Delivery",
     "depends": [
         "delivery",
@@ -11,13 +11,9 @@
     ],
     "data": [
         "views/delivery_carrier_views.xml",
-        "security/ir.model.access.csv",
         "views/product_packaging_views.xml",
-        "views/easypost_oca_webhook_views.xml",
     ],
     "external_dependencies": {"python": ["easypost"]},
-    "application": True,
     "installable": True,
-    "auto_install": False,
-    "license": "LGPL-3",
+    "license": "AGPL-3",
 }

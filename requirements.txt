@@ -1,8 +1,8 @@
 # generated from manifests external_dependencies
 dicttoxml
+easypost
 PyPDF2
 roulier
 unidecode
 xmltodict
 zeep
-easypost

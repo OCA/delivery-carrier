@@ -1,17 +1,15 @@
 import logging
-import time
 from datetime import datetime
 
-from odoo import _, api, fields, models
+from odoo import _, fields, models
 from odoo.exceptions import UserError
 from odoo.tools.float_utils import float_round
 
 from ..utils.pdf import assemble_pdf
-from ..utils.zpl import assemble_zpl2
+from ..utils.zpl import assemble_zpl
 from .easypost_request import EasypostRequest
 
 _logger = logging.getLogger(__name__)
-synchronous_sleep_seconds = 5
 
 
 class DeliveryCarrier(models.Model):
@@ -85,12 +83,6 @@ class DeliveryCarrier(models.Model):
         }
 
     def easypost_oca_send_shipping(self, pickings) -> list:
-        BATCH_MODE = (
-            False
-            if self.easypost_oca_delivery_multiple_packages == "shipments"
-            else True
-        )
-        start_time = time.perf_counter()
         res = []
         ep_request = EasypostRequest(self)
         for picking in pickings:
@@ -105,28 +97,12 @@ class DeliveryCarrier(models.Model):
             picking_shipments = self._prepare_shipments(picking)
             if len(picking_shipments) > 1:
                 # Create a batch with all shipments
-                shipments = ep_request.create_multiples_shipments(
-                    picking_shipments, batch_mode=BATCH_MODE
-                )
+                shipments = ep_request.create_multiples_shipments(picking_shipments)
 
-                if BATCH_MODE:
-                    batch = ep_request.create_batch(shipments)
-                    bought_batch = ep_request.buy_batch(batch.id)
-                    picking.write({"easypost_oca_batch_id": bought_batch.id})
-                    shipment_ids = [shipment["id"] for shipment in shipments]
-
-                    time.sleep(synchronous_sleep_seconds)
-                    processed_shipments = ep_request.retreive_multiple_shipment(
-                        ids=shipment_ids
-                    )
-                else:
-                    # Buy multiple shipments
-                    processed_shipments = ep_request.buy_shipments(shipments)
-
+                processed_shipments = ep_request.buy_shipments(shipments)
                 price, tracking_code = self._get_shipment_info(
                     processed_shipments,
                     picking.sale_id,
-                    batch_mode=BATCH_MODE,
                 )
 
                 shipping_data.update(
@@ -135,7 +111,7 @@ class DeliveryCarrier(models.Model):
                         "tracking_number": tracking_code,
                     }
                 )
-                self._easypost_message_post(processed_shipments, picking, BATCH_MODE)
+                self._easypost_message_post(processed_shipments, picking)
 
             else:
                 # Create a single shipment
@@ -149,9 +125,7 @@ class DeliveryCarrier(models.Model):
                 bought_shipment = ep_request.buy_shipment(shipment)
 
                 price, tracking_code = self._get_shipment_info(
-                    [bought_shipment],
-                    picking.sale_id,
-                    batch_mode=BATCH_MODE,
+                    [bought_shipment], picking.sale_id
                 )
 
                 shipping_data.update(
@@ -173,29 +147,7 @@ class DeliveryCarrier(models.Model):
                 self._easypost_message_post([bought_shipment], picking)
 
             res = res + [shipping_data]
-        end_time = time.perf_counter()
-        _logger.info(
-            "Easypost OCA send shipping time: %s",
-            end_time - start_time,
-        )
         return res
-
-    @api.model
-    def easypost_oca_batch_buy(self, ep: EasypostRequest, batch_id, picking):
-        bought_batch = ep.buy_batch(batch_id)
-        picking.message_post(body=_("Buying batch"))
-        return bought_batch
-
-    @api.model
-    def easypost_oca_batch_label(self, ep: EasypostRequest, batch_id, picking):
-        bought_batch = ep.label_batch(batch_id, self.easypost_oca_label_file_type)
-        picking.message_post(body=_("Making labels"))
-        return bought_batch
-
-    @api.model
-    def easypost_oca_batch_retrieve(self, ep: EasypostRequest, batch_id):
-        bought_batch = ep.retrieve_batch(batch_id)
-        return bought_batch
 
     def easypost_oca_get_tracking_link(self, picking):
         return picking.easypost_oca_tracking_url
@@ -219,9 +171,6 @@ class DeliveryCarrier(models.Model):
             0.1, float_round((weight_in_pounds * 16), precision_digits=1)
         )
         return weigth_in_ounces
-
-    def easypost_oca_create_webhook(self):
-        _logger.info("Create webhook")
 
     def _get_delivery_type(self):
         """Override of delivery to return the easypost delivery type."""
@@ -473,6 +422,6 @@ class DeliveryCarrier(models.Model):
         if f_type == "PDF":
             return assemble_pdf(files)
         elif f_type == "ZPL":
-            return assemble_zpl2(files)
+            return assemble_zpl(files)
 
         return files
