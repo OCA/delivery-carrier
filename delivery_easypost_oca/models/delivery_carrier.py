@@ -1,4 +1,3 @@
-import logging
 from datetime import datetime
 
 from odoo import _, fields, models
@@ -8,8 +7,6 @@ from odoo.tools.float_utils import float_round
 from ..utils.pdf import assemble_pdf
 from ..utils.zpl import assemble_zpl
 from .easypost_request import EasypostRequest
-
-_logger = logging.getLogger(__name__)
 
 
 class DeliveryCarrier(models.Model):
@@ -294,17 +291,6 @@ class DeliveryCarrier(models.Model):
         }
 
     def _prepare_address(self, addr_obj):
-        """Create a dictionary with list of available
-        value to easypost.
-        param string: addr_type: 'from_address' for shipper
-        or 'to_address' for recipient.
-        param addr_obj res.partner: partner linked to order/picking
-        in order to retrieve shipping information
-        return str: response address id of API request to create an address.
-        We do an extra API request since the address creation is free of charge.
-        If there is an error about address it will be raise before the rate
-        or shipment request.
-        """
         addr_fields = {
             "street1": "street",
             "street2": "street2",
@@ -314,7 +300,7 @@ class DeliveryCarrier(models.Model):
             "email": "email",
         }
         address = {
-            "%s" % (field_name,): addr_obj[addr_obj_field]
+            f"{field_name}": addr_obj[addr_obj_field]
             for field_name, addr_obj_field in addr_fields.items()
             if addr_obj[addr_obj_field]
         }
