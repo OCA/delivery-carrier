@@ -120,7 +120,6 @@ class DeliveryCarrier(models.Model):
                     reference=picking_shipments[0]["reference"],
                 )
                 bought_shipment = ep_request.buy_shipment(shipment)
-
                 price, tracking_code = self._get_shipment_info(
                     [bought_shipment], picking.sale_id
                 )
@@ -134,7 +133,7 @@ class DeliveryCarrier(models.Model):
 
                 picking.write(
                     {
-                        "easypost_oca_shipment_id": bought_shipment.id,
+                        "easypost_oca_shipment_id": bought_shipment.shipment_id,
                         "easypost_oca_rate_id": bought_shipment.rate,
                         "easypost_oca_carrier_id": bought_shipment.carrier_id,
                         "easypost_oca_carrier_name": bought_shipment.carrier_name,
