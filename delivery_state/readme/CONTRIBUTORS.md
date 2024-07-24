@@ -1,0 +1,9 @@
+- [Trey](https://www.trey.es):
+  - Roberto Lizana \<<roberto@trey.es>\>
+- [FactorLibre](https://www.factorlibre.com):
+  - Zahra Velasco \<<zahra.velasco@factorlibre.com>\>
+- [Tecnativa](https://www.tecnativa.com):
+  - Pedro M. Baeza
+  - David Vidal
+  - Víctor Martínez
+- Marçal Isern \<<marsal.isern@qubiq.es>\>
