@@ -13,7 +13,7 @@
         "views/delivery_carrier_views.xml",
         "views/product_packaging_views.xml",
     ],
-    "external_dependencies": {"python": ["easypost"]},
+    "external_dependencies": {"python": ["easypost==9.3.0"]},
     "installable": True,
     "license": "AGPL-3",
 }
