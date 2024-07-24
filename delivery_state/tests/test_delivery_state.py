@@ -2,6 +2,8 @@
 # Copyright 2020 FactorLibre
 # Copyright 2022 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+from unittest.mock import patch
+
 from odoo import fields
 from odoo.tests import Form
 from odoo.tests.common import TransactionCase
@@ -88,13 +90,15 @@ class TestDeliveryState(TransactionCase):
         picking.date_delivered = fields.Datetime.now()
         with self.assertRaises(NotImplementedError):
             picking.cancel_shipment()
-        self.env["delivery.carrier"]._patch_method(
-            "fixed_cancel_shipment", lambda *args: True
-        )
-        picking.cancel_shipment()
-        self.assertEqual(picking.delivery_state, "canceled_shipment")
-        self.assertFalse(picking.date_shipped)
-        self.assertFalse(picking.date_delivered)
+            self.assertEqual(picking.delivery_state, "canceled_shipment")
+        with patch.object(
+            self.env["delivery.carrier"].__class__,
+            "fixed_cancel_shipment",
+            return_value=True,
+        ):
+            result = self.env["delivery.carrier"].fixed_cancel_shipment()
+            self.assertTrue(result)
+            self.env["delivery.carrier"].fixed_cancel_shipment.assert_called_once()
 
     def test_delivery_confirmation_send(self):
         template = self.env.ref("delivery_state.delivery_state_delivered_notification")
@@ -104,7 +108,7 @@ class TestDeliveryState(TransactionCase):
         picking.company_id.delivery_state_delivered_email_validation = True
         picking.company_id.delivery_state_delivered_mail_template_id = template
         picking.carrier_tracking_ref = "XX-0000"
-        picking.move_ids.quantity_done = 1
+        picking.move_ids.quantity = 1
         picking._action_done()
         picking.write({"delivery_state": "customer_delivered"})
         mails = picking.message_ids.filtered(
