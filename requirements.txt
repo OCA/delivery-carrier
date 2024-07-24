@@ -1,7 +1,6 @@
 # generated from manifests external_dependencies
 dicttoxml
-easypost
-easypost==9.2.0
+easypost==9.3.0
 PyPDF2
 roulier
 unidecode
