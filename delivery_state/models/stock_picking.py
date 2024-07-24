@@ -75,9 +75,9 @@ class StockPicking(models.Model):
             and p.picking_type_id.code == "outgoing"
             and p.delivery_state == "customer_delivered"
         ):
-            template_id = item.company_id.delivery_state_delivered_mail_template_id.id
-            item.with_context(force_send=True).message_post_with_template(
-                template_id, email_layout_xmlid="mail.mail_notification_light"
+            source_ref = item.company_id.delivery_state_delivered_mail_template_id
+            item.with_context(force_send=True).message_post_with_source(
+                source_ref, email_layout_xmlid="mail.mail_notification_light"
             )
 
     def write(self, vals):
