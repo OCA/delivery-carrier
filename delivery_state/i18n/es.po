@@ -168,7 +168,6 @@ msgstr "Albarán"
 
 #. module: delivery_state
 #: model:ir.actions.server,name:delivery_state.ir_cron_delivery_state_ir_actions_server
-#: model:ir.cron,cron_name:delivery_state.ir_cron_delivery_state
 msgid "Update deliveries states"
 msgstr "Actualizar estados de entrega"
 
