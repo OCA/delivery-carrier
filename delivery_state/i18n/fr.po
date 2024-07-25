@@ -117,8 +117,7 @@ msgstr "Plus de mises à jour du transporteur"
 
 #. module: delivery_state
 #: model_terms:ir.ui.view,arch_db:delivery_state.res_config_settings_view_form
-msgid ""
-"Send an automatic confirmation email when Delivery Orders are delivered"
+msgid "Send an automatic confirmation email when Delivery Orders are delivered"
 msgstr ""
 "Envoyer un email de confirmation automatique quand les Livraisons sont "
 "livrées"
@@ -155,7 +154,6 @@ msgstr "Transfert"
 
 #. module: delivery_state
 #: model:ir.actions.server,name:delivery_state.ir_cron_delivery_state_ir_actions_server
-#: model:ir.cron,cron_name:delivery_state.ir_cron_delivery_state
 msgid "Update deliveries states"
 msgstr "Mettre à jour les état de livraison"
 
@@ -172,8 +170,8 @@ msgstr "Livré à l'entrepôt"
 #. module: delivery_state
 #: model:mail.template,subject:delivery_state.delivery_state_delivered_notification
 msgid ""
-"Your order {{ object.carrier_tracking_ref or object.name }} from {{ "
-"object.company_id.name }}"
+"Your order {{ object.carrier_tracking_ref or object.name }} from {{ object."
+"company_id.name }}"
 msgstr ""
-"Votre commande {{ object.carrier_tracking_ref or object.name }} de {{ "
-"object.company_id.name }}"
+"Votre commande {{ object.carrier_tracking_ref or object.name }} de {{ object."
+"company_id.name }}"
