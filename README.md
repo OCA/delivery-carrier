@@ -26,6 +26,7 @@ addon | version | maintainers | summary
 [delivery_carrier_info](delivery_carrier_info/) | 17.0.1.0.0 |  | Add code on carrier
 [delivery_roulier](delivery_roulier/) | 17.0.1.0.0 | [![florian-dacosta](https://github.com/florian-dacosta.png?size=30px)](https://github.com/florian-dacosta) | Integration of multiple carriers
 [delivery_roulier_option](delivery_roulier_option/) | 17.0.1.0.0 | [![florian-dacosta](https://github.com/florian-dacosta.png?size=30px)](https://github.com/florian-dacosta) | Add options to roulier modules
+[delivery_state](delivery_state/) | 17.0.1.0.0 |  | Provides fields to be able to contemplate the tracking statesand also adds a global fields
 
 [//]: # (end addons)
 
