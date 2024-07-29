@@ -6,7 +6,7 @@
     "version": "14.0.1.0.0",
     "category": "Delivery",
     "website": "https://github.com/OCA/delivery-carrier",
-    "author": "Camptocamp, Odoo Community Association (OCA)",
+    "author": "Camptocamp, BCIM, Odoo Community Association (OCA)",
     "maintainers": ["TDu", "jbaudoux"],
     "installable": True,
     "license": "AGPL-3",

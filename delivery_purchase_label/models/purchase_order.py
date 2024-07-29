@@ -26,8 +26,7 @@ class PurchaseOrder(models.Model):
 
     def action_rfq_send(self):
         self.ensure_one()
-        if self._states:
-            self._generate_purchase_delivery_label()
+        self._generate_purchase_delivery_label()
         return super().action_rfq_send()
 
     def button_send_label(self):
@@ -35,23 +34,23 @@ class PurchaseOrder(models.Model):
 
     def _is_valid_for_vendor_labels(self):
         self.ensure_one()
+        if self.state not in self._states_to_generate_delivery_label():
+            return
         if not self.dest_address_id:
+            return False
+        if not any(
+            product.type in ["product", "consu"]
+            for product in self.order_line.product_id
+        ):
             return False
         return True
 
     def _generate_purchase_delivery_label(self):
         """Create a transfer to generate the carrier labels."""
         self.ensure_one()
-        if self.state not in self._states_to_generate_delivery_label():
-            return
         if not self._is_valid_for_vendor_labels():
             return
-        if not any(
-            product.type in ["product", "consu"]
-            for product in self.order_line.product_id
-        ):
-            return
-        # Find the carrier and that will be used
+        # Find the carrier that will be used
         carrier = self.partner_id.purchase_delivery_carrier_id
         if not carrier.purchase_label_picking_type:
             return
