@@ -1,6 +1,6 @@
 from odoo.tests import Form, TransactionCase, tagged
 
-EASYPOST_TEST_KEY = "EZTK021562ee5970484a95ca47cdb1fa9f57r46GQz79xFPvBa0Oq2Zaow"
+EASYPOST_TEST_KEY = "EZTK52f7d94f77344a44854f45762f3a4a11QfNflQ9TqssKdvK5fdGuUw"
 EASYPOST_PROD_KEY = "zhiDnLnzKCVkelNzVAfWEQ"
 
 
@@ -10,8 +10,7 @@ class EasypostTestBaseCase(TransactionCase):
         super().setUp()
 
         product_sudo = self.env["product.product"]
-        self.company = self.env.ref("base.main_partner")
-        self.company.write(
+        self.company = self.env["res.partner"].create(
             {
                 "name": "Odoo SA",
                 "street": "44 Wall Street",
@@ -21,15 +20,18 @@ class EasypostTestBaseCase(TransactionCase):
                 "state_id": self.env.ref("base.state_us_27").id,
                 "country_id": self.env.ref("base.us").id,
                 "phone": "+1 (929) 352-6366",
+                "email": "",
+                "website": "www.example.com",
             }
         )
 
-        self.partner = self.env.ref("base.res_partner_10")
-        self.partner.write(
+        self.partner = self.env["res.partner"].create(
             {
+                "name": "The Jackson Group",
                 "street": "1515 Main Street",
                 "street2": "",
                 "city": "Columbia",
+                "phone": "+1 (929) 352-6364",
                 "zip": 29201,
                 "state_id": self.env.ref("base.state_us_41").id,
                 "country_id": self.env.ref("base.us").id,
@@ -64,7 +66,7 @@ class EasypostTestBaseCase(TransactionCase):
                 "delivery_type": "easypost_oca",
                 "easypost_oca_test_api_key": EASYPOST_TEST_KEY,
                 "easypost_oca_production_api_key": EASYPOST_PROD_KEY,
-                "easypost_oca_label_file_type": "PDF",
+                "easypost_oca_label_file_type": "ZPL",
                 "product_id": self.delivery_product.id,
             }
         )

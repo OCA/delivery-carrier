@@ -137,6 +137,7 @@ class DeliveryCarrier(models.Model):
                         "easypost_oca_rate_id": bought_shipment.rate,
                         "easypost_oca_carrier_id": bought_shipment.carrier_id,
                         "easypost_oca_carrier_name": bought_shipment.carrier_name,
+                        "easypost_oca_carrier_service": bought_shipment.carrier_service,
                         "easypost_oca_tracking_url": bought_shipment.public_url,
                     }
                 )
@@ -345,6 +346,7 @@ class DeliveryCarrier(models.Model):
                 (
                     f"<a target='_blank' href='{public_url}'> {tracking_code}</a>",
                     shipment.carrier_name,
+                    shipment.carrier_service,
                 )
             )
             files_to_merge.append(shipment.get_label_content())
@@ -353,9 +355,11 @@ class DeliveryCarrier(models.Model):
             "Shipment created into Easypost<br/>"
             "<b>Tracking Numbers:</b> %s<br/>"
             "<b>Carrier Account:</b> %s<br/>"
+            "<b>Carrier Service:</b> %s<br/>"
         ) % (
             ", ".join([link[0] for link in carrier_tracking_links]),
             ", ".join({link[1] for link in carrier_tracking_links}),
+            ", ".join({link[2] for link in carrier_tracking_links}),
         )
 
         file_merged = self._contact_files(

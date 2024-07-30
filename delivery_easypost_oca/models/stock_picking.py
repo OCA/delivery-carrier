@@ -10,5 +10,6 @@ class StockPicking(models.Model):
     easypost_oca_batch_id = fields.Char(tracking=True)
     easypost_oca_rate_id = fields.Char()
     easypost_oca_carrier_name = fields.Char()
+    easypost_oca_carrier_service = fields.Char()
     easypost_oca_carrier_id = fields.Char()
     easypost_oca_tracking_url = fields.Char()
