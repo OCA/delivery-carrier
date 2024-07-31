@@ -74,9 +74,6 @@ class DeliveryCarrier(models.Model):
             "price": price,
             "error_message": False,
             "warning_message": False,
-            "easypost_oca_carrier_name": lowest_rate.get("carrier", None),
-            "easypost_oca_shipment_id": lowest_rate.get("shipment_id", None),
-            "easypost_oca_rate_id": lowest_rate.get("id", None),
         }
 
     def easypost_oca_send_shipping(self, pickings) -> list:
