@@ -28,4 +28,5 @@ class SaleOrder(models.Model):
             if self.easypost_oca_carrier_name
             else ""
         )
-        sol.write({"name": f"{sol.name}{carrier_name}"})
+        sol.name = f"{sol.name}{carrier_name}"
+        return sol
