@@ -5,6 +5,7 @@ from odoo import fields, models
 
 class DelivereaDistributionCenter(models.Model):
     _name = "deliverea.distribution.center"
+    _description = "Deliverea Distribution Center"
 
     uuid = fields.Char()
     active = fields.Boolean()

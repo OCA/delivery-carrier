@@ -5,6 +5,7 @@ from odoo import fields, models
 
 class CarrierDelivereaService(models.Model):
     _name = "carrier.deliverea.service"
+    _description = "Carrier Deliverea Service"
 
     name = fields.Char()
     description = fields.Char()

@@ -5,6 +5,7 @@ from odoo import fields, models
 
 class DelivereaState(models.Model):
     _name = "deliverea.state"
+    _description = "Deliverea State"
 
     code = fields.Char("Deliverea State Code")
     state = fields.Char("Deliverea State")
