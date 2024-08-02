@@ -5,6 +5,7 @@ from odoo import fields, models
 
 class CarrierDeliveaParameter(models.Model):
     _name = "carrier.deliverea.parameter"
+    _description = "Carrier Deliverea Parameter"
 
     name = fields.Char(string="Parameter Name")
     type = fields.Selection(
