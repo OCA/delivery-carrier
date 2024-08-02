@@ -85,6 +85,16 @@ msgid "Carrier Configuration"
 msgstr "Configuración del transportista"
 
 #. module: delivery_deliverea
+#: model:ir.model,name:delivery_deliverea.model_carrier_deliverea_parameter
+msgid "Carrier Deliverea Parameter"
+msgstr ""
+
+#. module: delivery_deliverea
+#: model:ir.model,name:delivery_deliverea.model_carrier_deliverea_service
+msgid "Carrier Deliverea Service"
+msgstr ""
+
+#. module: delivery_deliverea
 #. odoo-python
 #: code:addons/delivery_deliverea/models/deliverea_request.py:0
 #, python-format
@@ -171,6 +181,7 @@ msgstr "Configuración deliverea"
 
 #. module: delivery_deliverea
 #: model:ir.actions.act_window,name:delivery_deliverea.delivery_deliverea_distribution_center_action
+#: model:ir.model,name:delivery_deliverea.model_deliverea_distribution_center
 #: model:ir.model.fields,field_description:delivery_deliverea.field_carrier_deliverea_service__deliverea_distribution_center_id
 #: model:ir.model.fields,field_description:delivery_deliverea.field_delivery_carrier__deliverea_distribution_center_id
 msgid "Deliverea Distribution Center"
@@ -211,6 +222,7 @@ msgid "Deliverea Reference"
 msgstr "Referencia Deliverea"
 
 #. module: delivery_deliverea
+#: model:ir.model,name:delivery_deliverea.model_deliverea_state
 #: model:ir.model.fields,field_description:delivery_deliverea.field_deliverea_state__state
 msgid "Deliverea State"
 msgstr "Estado Deliverea"
@@ -589,25 +601,17 @@ msgstr ""
 msgid "Zip"
 msgstr "C.P"
 
-#. module: delivery_deliverea
-#: model:ir.model,name:delivery_deliverea.model_carrier_deliverea_parameter
-msgid "carrier.deliverea.parameter"
-msgstr "carrier.deliverea.parameter"
+#~ msgid "carrier.deliverea.parameter"
+#~ msgstr "carrier.deliverea.parameter"
 
-#. module: delivery_deliverea
-#: model:ir.model,name:delivery_deliverea.model_carrier_deliverea_service
-msgid "carrier.deliverea.service"
-msgstr "carrier.deliverea.service"
+#~ msgid "carrier.deliverea.service"
+#~ msgstr "carrier.deliverea.service"
 
-#. module: delivery_deliverea
-#: model:ir.model,name:delivery_deliverea.model_deliverea_distribution_center
-msgid "deliverea.distribution.center"
-msgstr "deliverea.distribution.center"
+#~ msgid "deliverea.distribution.center"
+#~ msgstr "deliverea.distribution.center"
 
-#. module: delivery_deliverea
-#: model:ir.model,name:delivery_deliverea.model_deliverea_state
-msgid "deliverea.state"
-msgstr "deliverea.state"
+#~ msgid "deliverea.state"
+#~ msgstr "deliverea.state"
 
 #~ msgid "Active?"
 #~ msgstr "Activo?"
