@@ -9,69 +9,71 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-13 03:45+0000\n"
-"PO-Revision-Date: 2018-03-13 03:45+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2018\n"
+"PO-Revision-Date: 2024-08-05 10:05+0000\n"
+"Last-Translator: Nikolaus Weingartmair <nikolaus.weingartmair@grueneerde.com>"
+"\n"
 "Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #. module: delivery_auto_refresh
 #: model:ir.model.fields,field_description:delivery_auto_refresh.field_res_config_settings__auto_add_delivery_line
 msgid "Add Delivery Line Automatically"
-msgstr ""
+msgstr "Lieferzeile automatisch hinzufügen"
 
 #. module: delivery_auto_refresh
 #: model_terms:ir.ui.view,arch_db:delivery_auto_refresh.res_config_settings_view_form
 msgid "Add delivery line automatically"
-msgstr ""
+msgstr "Lieferzeile automatisch hinzufügen"
 
 #. module: delivery_auto_refresh
 #: model_terms:ir.ui.view,arch_db:delivery_auto_refresh.res_config_settings_view_form
 msgid "Auto void delivery line"
-msgstr ""
+msgstr "Automatisches Stornieren der Lieferleitung"
 
 #. module: delivery_auto_refresh
 #: model:ir.model.fields,field_description:delivery_auto_refresh.field_sale_order__available_carrier_ids
 msgid "Available Carrier"
-msgstr ""
+msgstr "Verfügbarer Versanddienstleister"
 
 #. module: delivery_auto_refresh
 #: model:ir.model,name:delivery_auto_refresh.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Einstellungen"
 
 #. module: delivery_auto_refresh
 #: model:ir.model.fields,field_description:delivery_auto_refresh.field_res_config_settings__refresh_after_picking
 msgid "Refresh After Picking Automatically"
-msgstr ""
+msgstr "Nach automatischer Kommissionierung aktualisieren"
 
 #. module: delivery_auto_refresh
 #: model_terms:ir.ui.view,arch_db:delivery_auto_refresh.res_config_settings_view_form
 msgid "Refresh after picking automatically"
-msgstr ""
+msgstr "Aktualisieren nach automatischer Entnahme"
 
 #. module: delivery_auto_refresh
 #: model:ir.model,name:delivery_auto_refresh.model_sale_order
 msgid "Sales Order"
-msgstr ""
+msgstr "Verkaufsauftrag"
 
 #. module: delivery_auto_refresh
 #: model:ir.model,name:delivery_auto_refresh.model_sale_order_line
 msgid "Sales Order Line"
-msgstr ""
+msgstr "Verkaufsposition"
 
 #. module: delivery_auto_refresh
 #: model:ir.model.fields,field_description:delivery_auto_refresh.field_res_config_settings__set_default_carrier
 msgid "Set Default Carrier Automatically"
-msgstr ""
+msgstr "Standard-Versanddienstleister automatisch festlegen"
 
 #. module: delivery_auto_refresh
 #: model_terms:ir.ui.view,arch_db:delivery_auto_refresh.res_config_settings_view_form
 msgid "Set default carrier automatically"
-msgstr ""
+msgstr "Standardversanddienstleister automatisch festlegen"
 
 #. module: delivery_auto_refresh
 #: model:ir.model,name:delivery_auto_refresh.model_stock_picking
@@ -81,7 +83,7 @@ msgstr "Umbuchung"
 #. module: delivery_auto_refresh
 #: model:ir.model.fields,field_description:delivery_auto_refresh.field_res_config_settings__auto_void_delivery_line
 msgid "Void delivery lines automatically"
-msgstr ""
+msgstr "Lieferzeilen automatisch stornieren"
 
 #, fuzzy
 #~ msgid "Sale Order"
