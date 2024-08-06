@@ -14,7 +14,6 @@
     "data": [
         "data/stock_picking_type.xml",
         "views/delivery_carrier.xml",
-        "views/purchase_order.xml",
         "views/res_partner.xml",
     ],
 }

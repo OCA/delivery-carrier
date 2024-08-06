@@ -29,9 +29,6 @@ class PurchaseOrder(models.Model):
         self._generate_purchase_delivery_label()
         return super().action_rfq_send()
 
-    def button_send_label(self):
-        self._generate_purchase_delivery_label()
-
     def _is_valid_for_vendor_labels(self):
         self.ensure_one()
         if self.state not in self._states_to_generate_delivery_label():

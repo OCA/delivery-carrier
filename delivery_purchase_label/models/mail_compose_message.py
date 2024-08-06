@@ -17,8 +17,6 @@ class MailComposer(models.TransientModel):
             in self.env["purchase.order"]._mail_templates_to_not_attach_labels()
         ):
             return
-        if isinstance(res_ids, int):
-            res_ids = [res_ids]
         purchase_orders = self.env["purchase.order"].browse(res_ids)
         for order in purchase_orders:
             # Add the labels generated when sending the order by email
