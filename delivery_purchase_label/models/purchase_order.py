@@ -63,6 +63,10 @@ class PurchaseOrder(models.Model):
         values = order._get_purchase_delivery_label_picking_value(carrier)
         picking = self.env["stock.picking"].with_user(SUPERUSER_ID).create(values)
         moves = order.order_line._create_stock_moves(picking)
+        # Remove the link on the sale and purchase
+        # To not impact the delivered quantity on them
+        picking.sale_id = False
+        moves.sale_line_id = False
         moves.purchase_line_id = False
         picking.action_assign()
         for move in moves:
