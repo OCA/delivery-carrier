@@ -3,7 +3,7 @@
 {
     "name": "Delivery carrier partner",
     "summary": "Add a partner in the delivery carrier",
-    "version": "16.0.1.0.0",
+    "version": "17.0.1.0.0",
     "category": "Delivery",
     "website": "https://github.com/OCA/delivery-carrier",
     "author": "Agile Business Group, Odoo Community Association (OCA)",
