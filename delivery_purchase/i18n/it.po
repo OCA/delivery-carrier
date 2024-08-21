@@ -6,30 +6,32 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2024-08-21 16:06+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #. module: delivery_purchase
 #: model:ir.model.fields,field_description:delivery_purchase.field_purchase_order__carrier_id
 msgid "Delivery Method"
-msgstr ""
+msgstr "Metodo di consegna"
 
 #. module: delivery_purchase
 #: model:ir.model.fields,field_description:delivery_purchase.field_purchase_order__delivery_price
 msgid "Delivery Price"
-msgstr ""
+msgstr "Prezzo di consegna"
 
 #. module: delivery_purchase
 #. odoo-python
 #: code:addons/delivery_purchase/models/delivery_carrier.py:0
 #, python-format
 msgid "Error: no matching grid."
-msgstr ""
+msgstr "Errore: nessuna griglia corrispondente."
 
 #. module: delivery_purchase
 #. odoo-python
@@ -37,33 +39,34 @@ msgstr ""
 #, python-format
 msgid "Error: this delivery method is not available for this address."
 msgstr ""
+"Errore: questo metodo di consegna non è disponibile per questo indirizzo."
 
 #. module: delivery_purchase
 #. odoo-python
 #: code:addons/delivery_purchase/models/purchase_order.py:0
 #, python-format
 msgid "Free Shipping"
-msgstr ""
+msgstr "Spedizione gratuita"
 
 #. module: delivery_purchase
 #: model:ir.model.fields,field_description:delivery_purchase.field_purchase_order_line__is_delivery
 msgid "Is a Delivery"
-msgstr ""
+msgstr "È una consegna"
 
 #. module: delivery_purchase
 #: model:ir.model.fields,field_description:delivery_purchase.field_purchase_order_line__delivery_picking_orig_id
 msgid "Origin picking (delivery)"
-msgstr ""
+msgstr "Prelievo origine (consegna)"
 
 #. module: delivery_purchase
 #: model:ir.model,name:delivery_purchase.model_purchase_order
 msgid "Purchase Order"
-msgstr ""
+msgstr "Ordine di acquisto"
 
 #. module: delivery_purchase
 #: model:ir.model,name:delivery_purchase.model_purchase_order_line
 msgid "Purchase Order Line"
-msgstr ""
+msgstr "Riga ordine di acquisto"
 
 #. module: delivery_purchase
 #. odoo-python
@@ -73,27 +76,29 @@ msgid ""
 "Shipment sent to carrier %(carrier_name)s for shipping with tracking number "
 "%(tracking_ref)s<br/>Cost: %(carrier_price)s %(currency_name)s"
 msgstr ""
+"Spedizione inviata al corriere %(carrier_name)s per spedire con tracciamento "
+"numero %(tracking_ref)s<br/>Costo: %(carrier_price)s %(currency_name)s"
 
 #. module: delivery_purchase
 #: model:ir.model,name:delivery_purchase.model_delivery_carrier
 msgid "Shipping Methods"
-msgstr ""
+msgstr "Metodi di spedizione"
 
 #. module: delivery_purchase
 #. odoo-python
 #: code:addons/delivery_purchase/models/delivery_carrier.py:0
 #, python-format
 msgid "The shipping is free since the order amount exceeds %.2f."
-msgstr ""
+msgstr "La spedizione è gratuita poiché il valore dell'ordine supera %.2f."
 
 #. module: delivery_purchase
 #. odoo-python
 #: code:addons/delivery_purchase/models/delivery_carrier.py:0
 #, python-format
 msgid "There is no matching delivery rule."
-msgstr ""
+msgstr "Non c'è una regola di consegna corrispondente."
 
 #. module: delivery_purchase
 #: model:ir.model,name:delivery_purchase.model_stock_picking
 msgid "Transfer"
-msgstr ""
+msgstr "Trasferimento"
