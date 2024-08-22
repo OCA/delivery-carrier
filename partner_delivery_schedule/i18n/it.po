@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-06-22 13:09+0000\n"
+"PO-Revision-Date: 2024-08-22 10:06+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -14,13 +14,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #. module: partner_delivery_schedule
 #: model_terms:ir.ui.view,arch_db:partner_delivery_schedule.report_delivery_document
 #: model_terms:ir.ui.view,arch_db:partner_delivery_schedule.report_picking
 msgid "<strong>Delivery Schedule</strong>"
-msgstr "<strong>Pianificazione Consegna</strong>"
+msgstr "<strong>Pianificazione consegna</strong>"
 
 #. module: partner_delivery_schedule
 #: code:addons/partner_delivery_schedule/models/partner_delivery_schedule.py:67
@@ -31,7 +31,8 @@ msgstr "Tutti i giorni"
 #. module: partner_delivery_schedule
 #: model_terms:ir.actions.act_window,help:partner_delivery_schedule.partner_delivery_schedule_action
 msgid "Click to set a new delivery schedule for partners."
-msgstr "Clicca per impostare una nuova pianificazione consegne per il cliente."
+msgstr ""
+"Fare clic per impostare una nuova pianificazione consegna per i partner."
 
 #. module: partner_delivery_schedule
 #: model:ir.model.fields,field_description:partner_delivery_schedule.field_delivery_schedule__color
@@ -63,7 +64,7 @@ msgstr "Creato il"
 #: model_terms:ir.ui.view,arch_db:partner_delivery_schedule.view_partner_delivery_schedule_search
 #: model_terms:ir.ui.view,arch_db:partner_delivery_schedule.view_partner_delivery_schedule_tree
 msgid "Delivery Schedule"
-msgstr "Pianificazione Consegna"
+msgstr "Schedulazione consegna"
 
 #. module: partner_delivery_schedule
 #: model:ir.model.fields,field_description:partner_delivery_schedule.field_delivery_schedule__display_name
@@ -74,13 +75,13 @@ msgstr "Nome visualizzato"
 #: code:addons/partner_delivery_schedule/models/partner_delivery_schedule.py:27
 #, python-format
 msgid "Error ! You can not set hour_from greater or equal than hour_to ."
-msgstr "Errore! Non puoi impostare hour_from maggiore o uguale a hour_to ."
+msgstr "Errore! Non si può impostare hour_from maggiore o uguale a hour_to ."
 
 #. module: partner_delivery_schedule
 #: code:addons/partner_delivery_schedule/models/partner_delivery_schedule.py:39
 #, python-format
 msgid "Error ! You must set one day to delivery."
-msgstr "Errore ! Devi impostare un giorno di consegna."
+msgstr "Errore ! Bisogna impostare un giorno di consegna."
 
 #. module: partner_delivery_schedule
 #: code:addons/partner_delivery_schedule/models/partner_delivery_schedule.py:49
