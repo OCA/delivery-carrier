@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-06-18 18:38+0000\n"
+"PO-Revision-Date: 2024-08-22 10:06+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #. module: delivery_carrier_account
 #: model:ir.model.fields,field_description:delivery_carrier_account.field_delivery_carrier__carrier_account_id
@@ -29,18 +29,18 @@ msgstr "Numero conto"
 #. module: delivery_carrier_account
 #: model:ir.model.fields,field_description:delivery_carrier_account.field_carrier_account__password
 msgid "Account Password"
-msgstr "Password dell'Account"
+msgstr "Password dell'account"
 
 #. module: delivery_carrier_account
 #: model:ir.model,name:delivery_carrier_account.model_carrier_account
 msgid "Base account datas"
-msgstr "Dati conto base"
+msgstr "Dati account base"
 
 #. module: delivery_carrier_account
 #: model:ir.actions.act_window,name:delivery_carrier_account.action_carrier_account
 #: model:ir.ui.menu,name:delivery_carrier_account.carrier_account_menu
 msgid "Carrier Account"
-msgstr "Conto vettore"
+msgstr "Account corriere"
 
 #. module: delivery_carrier_account
 #: model:ir.model.fields,field_description:delivery_carrier_account.field_carrier_account__company_id
@@ -100,7 +100,7 @@ msgstr "Metodi di spedizione"
 #. module: delivery_carrier_account
 #: model:ir.model.fields,help:delivery_carrier_account.field_carrier_account__delivery_type
 msgid "This field may be used to link an account to a carrier"
-msgstr "Campo che può essere usato per collegare un conto a un vettore"
+msgstr "Campo che può essere usato per collegare un account a un corriere"
 
 #. module: delivery_carrier_account
 #: model:ir.model,name:delivery_carrier_account.model_stock_picking
