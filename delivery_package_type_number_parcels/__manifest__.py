@@ -4,7 +4,7 @@
 {
     "name": "Delivery Package Type Number Parcels",
     "summary": "Number of parcels in a package type",
-    "version": "16.0.1.0.1",
+    "version": "16.0.1.0.2",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV,Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/delivery-carrier",
