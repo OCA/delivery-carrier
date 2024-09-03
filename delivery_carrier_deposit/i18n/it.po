@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: delivery-carrier (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-22 09:11+0000\n"
-"PO-Revision-Date: 2024-08-22 10:06+0000\n"
+"PO-Revision-Date: 2024-09-03 12:06+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/"
 "OCA-delivery-carrier-8-0/language/it/)\n"
@@ -36,7 +36,7 @@ msgstr "(kg)"
 #. module: delivery_carrier_deposit
 #: view:website:delivery_carrier_deposit.report_generic_deposit_slip
 msgid "Account Name:"
-msgstr "Nome dell'Account:"
+msgstr "Nome dell'account:"
 
 #. module: delivery_carrier_deposit
 #: help:delivery.carrier,deposit_slip:0
@@ -133,7 +133,7 @@ msgstr "Tipo metodo di consegna"
 #. module: delivery_carrier_deposit
 #: view:website:delivery_carrier_deposit.report_generic_deposit_slip
 msgid "Delivery Method Type:"
-msgstr "Tipo del Metodo di Spedizione:"
+msgstr "Tipo metodo di consegna:"
 
 #. module: delivery_carrier_deposit
 #: view:deposit.slip:delivery_carrier_deposit.view_deposit_slip_form
@@ -318,7 +318,7 @@ msgstr ""
 #. module: delivery_carrier_deposit
 #: view:website:delivery_carrier_deposit.report_generic_deposit_slip
 msgid "Total Number of Packages:"
-msgstr "Numero totale di Pacchi:"
+msgstr "Numero totale di colli:"
 
 #. module: delivery_carrier_deposit
 #: field:deposit.slip,weight:0
