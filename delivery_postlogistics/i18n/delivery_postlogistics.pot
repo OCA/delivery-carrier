@@ -131,6 +131,11 @@ msgid "Contact"
 msgstr ""
 
 #. module: delivery_postlogistics
+#: model_terms:ir.ui.view,arch_db:delivery_postlogistics.view_picking_withcarrier_out_form
+msgid "Create Shipping Label 🚚"
+msgstr ""
+
+#. module: delivery_postlogistics
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_delivery_carrier_template_option__create_uid
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_license__create_uid
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_shipping_label__create_uid
@@ -564,6 +569,13 @@ msgid "Phone number is required for phone call notification."
 msgstr ""
 
 #. module: delivery_postlogistics
+#. odoo-python
+#: code:addons/delivery_postlogistics/models/stock_picking.py:0
+#, python-format
+msgid "Please, set a carrier."
+msgstr ""
+
+#. module: delivery_postlogistics
 #: model_terms:ir.ui.view,arch_db:delivery_postlogistics.delivery_carrier_postlogistics_inherit_view
 msgid "Post Label Logo"
 msgstr ""
@@ -665,6 +677,11 @@ msgstr ""
 #. module: delivery_postlogistics
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_shipping_label__res_name
 msgid "Resource Name"
+msgstr ""
+
+#. module: delivery_postlogistics
+#: model:ir.model,name:delivery_postlogistics.model_stock_return_picking
+msgid "Return Picking"
 msgstr ""
 
 #. module: delivery_postlogistics
