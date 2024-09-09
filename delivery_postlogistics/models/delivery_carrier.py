@@ -156,3 +156,15 @@ class DeliveryCarrier(models.Model):
             },
         }
         return message
+
+    def _compute_can_generate_return(self):
+        res = super(DeliveryCarrier, self)._compute_can_generate_return()
+        for carrier in self:
+            if carrier.delivery_type == "postlogistics":
+                carrier.can_generate_return = True
+        return res
+
+    def postlogistics_get_return_label(
+        self, picking, tracking_number=None, origin_date=None
+    ):
+        return self.postlogistics_send_shipping(picking)
