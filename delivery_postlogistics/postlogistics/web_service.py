@@ -172,10 +172,10 @@ class PostlogisticsWebService(object):
         if not partner_name:
             raise exceptions.UserError(_("Customer name is required."))
         customer = {
-            "name1": self._sanitize_string(partner_name)[:35],
-            "street": self._sanitize_string(partner.street)[:35],
+            "name1": self._sanitize_string(partner_name)[:25],
+            "street": self._sanitize_string(partner.street)[:25],
             "zip": self._sanitize_string(partner.zip)[:10],
-            "city": self._sanitize_string(partner.city)[:35],
+            "city": self._sanitize_string(partner.city)[:25],
             "country": partner.country_id.code,
             "domicilePostOffice": picking.carrier_id.postlogistics_office or None,
         }
