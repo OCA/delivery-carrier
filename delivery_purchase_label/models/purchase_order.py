@@ -69,6 +69,8 @@ class PurchaseOrder(models.Model):
         moves.sale_line_id = False
         moves.purchase_line_id = False
         picking.action_assign()
+        # Moves can change on action assign
+        moves = picking.move_lines
         for move in moves:
             move.quantity_done = move.product_uom_qty
         picking._action_done()
