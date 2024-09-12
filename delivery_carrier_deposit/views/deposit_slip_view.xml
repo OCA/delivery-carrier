@@ -32,6 +32,9 @@
         <field name="name" />
         <field name="create_date" />
         <separator />
+        <filter name="draft" string="Draft" domain="[('state', '=', 'draft')]" />
+        <filter name="done" string="Done" domain="[('state', '=', 'done')]" />
+        <separator />
         <filter string="Creation Date" name="create_date" date="create_date" />
         <group string="Group By" name="groupby">
             <filter
@@ -39,6 +42,17 @@
                         string="Delivery Type"
                         context="{'group_by': 'delivery_type'}"
                     />
+            <filter
+                        name="create_date_groupby"
+                        string="Creation Date"
+                        context="{'group_by': 'create_date'}"
+                    />
+            <filter
+                        name="state_groupby"
+                        string="State"
+                        context="{'group_by': 'state'}"
+                    />
+
         </group>
     </search>
     </field>
@@ -50,7 +64,7 @@
     <field name="model">deposit.slip</field>
     <field name="arch" type="xml">
     <tree>
-        <field name="name" />
+        <field name="name" decoration-bf="1" />
         <field name="delivery_type" />
         <field name="create_date" optional="show" />
         <field name="company_id" groups="base.group_multi_company" optional="show" />
@@ -85,36 +99,30 @@
                         confirm="Are you sure that you re-generate the EDI file ?"
                         attrs="{'invisible': True}"
                     />
-                <field
-                        name="state"
-                        widget="statusbar"
-                        statusbar_visible="draft,done"
-                        statusbar_colors='{"draft": "blue", "done": "blue"}'
-                    />
+                <field name="state" widget="statusbar" />
             </header>
-            <sheet>
+        <sheet>
+            <div class="oe_title">
+                    <h1>
+                        <field name="name" />
+                    </h1>
+                </div>
                 <group name="main" col="4">
-                    <field name="name" />
-                    <field name="weight" />
                     <field name="delivery_type" />
+                    <field name="company_id" groups="base.group_multi_company" />
+                    <label for="weight" />
+                    <div name="weight">
+                        <field name="weight" class="oe_inline" /> kg
+                    </div>
                 </group>
                 <group name="pickings">
                     <field
                             name="picking_ids"
                             nolabel="1"
+                            colspan="2"
                             widget="many2many"
                             options="{'not_delete': True, 'no_create': True}"
-                        >
-                        <tree>
-                            <field name="name" />
-                            <field name="partner_id" />
-                            <field name="weight" />
-                            <field name="origin" />
-                            <field name="backorder_id" />
-                            <field name="date_done" />
-                            <field name="state" invisible="1" />
-                        </tree>
-                    </field>
+                        />
                 </group>
             </sheet>
             <div class="oe_chatter">
