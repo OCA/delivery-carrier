@@ -8,7 +8,7 @@ class DeliveryCarrier(models.Model):
     _inherit = "delivery.carrier"
 
     city_ids = fields.Many2many(
-        "res.city",
+        comodel_name="res.city",
         relation="delivery_carrier_city_rel",
         column1="carrier_id",
         column2="city_id",
