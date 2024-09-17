@@ -3,7 +3,7 @@
 
     <record id="delivery_carrier_dpd_classic" model="delivery.carrier">
         <field name="name">DPD Classic max 30kg</field>
-        <field name="delivery_type">dpd_fr_soap</field>
+        <field name="delivery_type">dpd_fr</field>
         <field name="code">DPD_Classic</field>
         <field name="product_id" ref="dpd_product" />
     </record>
@@ -12,14 +12,14 @@
         <field name="name">DPD Relais max 20kg</field>
         <field name="product_id" ref="dpd_product" />
         <field name="code">DPD_Relais</field>
-        <field name="delivery_type">dpd_fr_soap</field>
+        <field name="delivery_type">dpd_fr</field>
     </record>
 
      <record id="delivery_carrier_dpd_Predict" model="delivery.carrier">
         <field name="name">DPD Predict max 20kg</field>
         <field name="product_id" ref="dpd_product" />
         <field name="code">DPD_Predict</field>
-        <field name="delivery_type">dpd_fr_soap</field>
+        <field name="delivery_type">dpd_fr</field>
     </record>
 
 </odoo>

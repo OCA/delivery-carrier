@@ -5,6 +5,6 @@
         <field name="name">Dpd default</field>
         <field name="account">Demo Account</field>
         <field name="password">Demo password</field>
-        <field name="delivery_type">dpd_fr_soap</field>
+        <field name="delivery_type">dpd_fr</field>
     </record>
 </odoo>
