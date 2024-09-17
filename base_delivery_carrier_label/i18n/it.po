@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: delivery-carrier (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-12-03 01:21+0000\n"
-"PO-Revision-Date: 2024-08-22 10:06+0000\n"
+"PO-Revision-Date: 2024-09-17 11:06+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/"
 "OCA-delivery-carrier-8-0/language/it/)\n"
@@ -312,7 +312,7 @@ msgstr "Partner"
 #: field:delivery.carrier.option,partner_id:0
 #: field:delivery.carrier.template.option,partner_id:0
 msgid "Partner Carrier"
-msgstr "Vettore del Partner"
+msgstr "Vettore partner"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_stock_quant_package
