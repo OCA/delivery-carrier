@@ -1,0 +1,44 @@
+interactions:
+  - request:
+      body: null
+      headers:
+        Accept: ["*/*"]
+        Accept-Encoding: ["gzip, deflate"]
+        Connection: [keep-alive]
+        User-Agent: [python-requests/2.28.1]
+      method: GET
+      uri: https://panel.sendcloud.sc/api/v2/parcels/182588401
+    response:
+      body:
+        {
+          string:
+            '{"parcel":{"id":182588401,"address":"Reduitlaan
+            45","address_2":"","address_divided":{"street":"Reduitlaan","house_number":"45"},"city":"Breda","company_name":"Onestein
+            BV","country":{"iso_2":"NL","iso_3":"NLD","name":"Netherlands"},"data":{},"date_created":"19-05-2022
+            13:20:11","date_announced":"19-05-2022 13:20:12","date_updated":"19-05-2022
+            14:32:40","email":"b.colpaert@onestein.nl","name":"Bastian
+            Colpaert","postal_code":"4814
+            DC","reference":"0","shipment":{"id":1602,"name":"DHLForYou Drop
+            Off"},"status":{"id":1,"message":"Announced"},"to_service_point":null,"telephone":"+31886270400","tracking_number":"JVGL06097547001969761800","weight":"5.000","label":{"normal_printer":["https://panel.sendcloud.sc/api/v2/labels/normal_printer/182588401?start_from=0","https://panel.sendcloud.sc/api/v2/labels/normal_printer/182588401?start_from=1","https://panel.sendcloud.sc/api/v2/labels/normal_printer/182588401?start_from=2","https://panel.sendcloud.sc/api/v2/labels/normal_printer/182588401?start_from=3"]},"customs_declaration":{},"order_number":"","insured_value":0,"total_insured_value":0,"to_state":null,"customs_invoice_nr":"","customs_shipment_type":null,"parcel_items":[{"description":"Test
+            product","quantity":1,"weight":"0.001","value":"0.00","hs_code":"","origin_country":null,"product_id":"","properties":{},"sku":"","return_reason":null,"return_message":"Not
+            good"}],"documents":[{"type":"label","size":"a6"}],"type":"parcel","shipment_uuid":null,"shipping_method":1602,"external_order_id":"","external_shipment_id":"","external_reference":null,"is_return":true,"note":null,"to_post_number":"","total_order_value":null,"total_order_value_currency":null,"colli_tracking_number":"","colli_uuid":"ac6bb5ec-c235-4d96-97da-8d5b32e9d641","collo_nr":0,"collo_count":1,"awb_tracking_number":null,"box_number":null,"length":null,"width":null,"height":null,"shipping_method_checkout_name":null,"carrier":{"code":"dhl"},"tracking_url":"https://andrea1.shipping-portal.com/tracking/?country=nl&tracking_number=jvgl06097547001969761800&postal_code=4814+dc"}}',
+        }
+      headers:
+        Allow: ["GET, POST, PUT, HEAD, OPTIONS"]
+        Connection: [keep-alive]
+        Content-Type: [application/json]
+        Date: ["Tue, 05 Jul 2022 09:00:25 GMT"]
+        Referrer-Policy: [same-origin]
+        Server: [nginx]
+        Strict-Transport-Security: [max-age=15552000; includeSubDomains; preload]
+        Transfer-Encoding: [chunked]
+        Vary: [Accept-Encoding, "Origin, Cookie"]
+        X-Content-Type-Options: [nosniff]
+        X-Frame-Options: [DENY]
+        X-SendCloud-Client-Latest-Version-Linux: [1.0.2]
+        X-SendCloud-Client-Latest-Version-Windows: [1.0.4]
+        X-SendCloud-Client-Latest-Version-macOS: [1.0.5]
+        X-XSS-Protection: [1; mode=block]
+        content-length: ["236764"]
+      status: {code: 200, message: OK}
+version: 1

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+
+    <t t-name="delivery_sendcloud_oca.ServicePointField" owl="1">
+        <div class="o_delivery_sendcloud_widget">
+            <div class="input-group">
+                <div class="form-control o_delivery_sendcloud_detail">
+                    <div>
+                        <t t-esc="sp_name" />
+                    </div>
+                    <div>
+                        <t t-esc="street" /> <t t-esc="house_number" />
+                    </div>
+                    <div>
+                        <t t-esc="postal_code" />
+                    </div>
+                    <div>
+                        <t t-esc="city" />
+                    </div>
+                </div>
+                <div class="input-group-append">
+                    <button
+                        class="btn btn-primary o_delivery_sendcloud_select"
+                        title="Select"
+                        t-on-click="onInputClick"
+                    >
+                        <i class="fa fa-map-marker" />
+                    </button>
+                    <button
+                        t-if="props.value"
+                        title="Clear"
+                        class="btn btn-secondary o_delivery_sendcloud_clear"
+                        t-on-click="onClearClick"
+                    >
+                        <i class="fa fa-times" />
+                    </button>
+                </div>
+            </div>
+        </div>
+    </t>
+
+</templates>

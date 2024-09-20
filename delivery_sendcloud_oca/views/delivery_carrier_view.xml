@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 Onestein (<https://www.onestein.nl>)
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl) -->
+<odoo>
+    <record id="view_delivery_carrier_form" model="ir.ui.view">
+        <field name="model">delivery.carrier</field>
+        <field name="inherit_id" ref="delivery.view_delivery_carrier_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='destination']" position='before'>
+                <page
+                    string="Sendcloud Configuration"
+                    name="sendcloud_configuration"
+                    invisible="delivery_type != 'sendcloud'"
+                >
+                    <group>
+                        <group>
+                            <field
+                                name="sendcloud_carrier"
+                                string="Carrier"
+                                readonly="1"
+                            />
+                            <field
+                                name="sendcloud_service_point_required"
+                                string="Service Point"
+                                readonly="1"
+                            />
+                        </group>
+                        <field name="is_sendcloud_test_mode" invisible="1" />
+                        <group
+                            name="testing"
+                            string="Only for Testing"
+                            invisible="not is_sendcloud_test_mode"
+                        >
+                            <button
+                                name="button_from_sendcloud_sync"
+                                type="object"
+                                string="Sync From Sendcloud"
+                            />
+                        </group>
+                        <group>
+                            <field
+                                name="sendcloud_min_weight"
+                                string="Min Weight"
+                                readonly="1"
+                            />
+                            <field
+                                name="sendcloud_max_weight"
+                                string="Max Weight"
+                                readonly="1"
+                            />
+                            <field name="sendcloud_price" string="Price" readonly="1" />
+                            <field
+                                name="sendcloud_is_return"
+                                string="Is Return"
+                                readonly="1"
+                            />
+                        </group>
+                    </group>
+                    <field name="sendcloud_country_ids">
+                        <tree editable="bottom" create="true" delete="false">
+                            <field name="from_country_id" readonly="1" />
+                            <field name="from_iso_2" readonly="1" />
+                            <field name="country_id" readonly="1" />
+                            <field name="iso_2" readonly="1" />
+                            <field name="product_id" readonly="1" />
+                            <field
+                                name="price_custom"
+                                string="Price"
+                                decoration-warning="price_check == 'custom'"
+                            />
+                            <field name="price_check" invisible="1" />
+                            <button
+                                name="sendcloud_custom_price_details"
+                                type="object"
+                                class="btn fa fa-arrow-circle-right o_price_check"
+                                title="Set Custom Price"
+                            />
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+            <xpath expr="//field[@name='country_ids']" position="after">
+                <field
+                    name="sendcloud_sync_countries"
+                    invisible="delivery_type != 'sendcloud'"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_sendcloud_shipping_methods" model="ir.actions.act_window">
+        <field name="name">Sendcloud Shipping Methods</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">delivery.carrier</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('sendcloud_is_return', '!=', True)]</field>
+        <field name="context">{'search_default_delivery_type': 'sendcloud'}</field>
+    </record>
+
+    <record
+        id="action_sendcloud_shipping_methods_returns"
+        model="ir.actions.act_window"
+    >
+        <field name="name">Sendcloud Shipping Methods for Returns</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">delivery.carrier</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('sendcloud_is_return', '=', True)]</field>
+        <field name="context">{'search_default_delivery_type': 'sendcloud'}</field>
+    </record>
+</odoo>
