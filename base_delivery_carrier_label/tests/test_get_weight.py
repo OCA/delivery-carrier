@@ -48,7 +48,8 @@ class TestGetWeight(TransactionCase):
         unit_id = self.env.ref("uom.product_uom_unit").id
 
         products = self.env["product.product"].search(
-            [["uom_id", "in", (False, kg_id, unit_id)]], limit=len(weights)
+            [["uom_id", "in", (False, kg_id, unit_id)], ["type", "!=", "service"]],
+            limit=len(weights),
         )
         for idx, product in enumerate(products):
             # by default there is no weight on products

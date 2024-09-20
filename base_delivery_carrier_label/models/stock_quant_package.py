@@ -22,7 +22,7 @@ class StockQuantPackage(models.Model):
         for pack in self:
             if pack.shipping_weight:
                 pack.weight = pack.shipping_weight
-            elif pack.quant_ids and not self.env.context.get("picking_id"):
+            elif not pack.quant_ids and not self.env.context.get("picking_id"):
                 # package.pack_operations would be too easy
                 operations = self.env["stock.move.line"].search(
                     [
