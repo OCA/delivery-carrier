@@ -246,12 +246,17 @@ class TestDeliverySendCloudControllers(HttpCase):
         )
         choose_delivery_wizard = choose_delivery_form.save()
         choose_delivery_wizard.button_confirm()
-        sale_order.mapped("order_line.product_id").write(
-            {
-                "hs_code": "123",
-                "country_of_origin": sale_order.warehouse_id.partner_id.country_id,
-            }
+        is_product_harmonized_system_installed = self.env["ir.module.module"].search(
+            [("name", "=", "product_harmonized_system"), ("state", "=", "installed")],
+            limit=1,
         )
+        if is_product_harmonized_system_installed:
+            sale_order.mapped("order_line.product_id").write(
+                {"hs_code_id": self.env.ref("product_harmonized_system.84715000").id,
+                 "origin_country_id": sale_order.warehouse_id.partner_id.country_id, })
+        else:
+            sale_order.mapped("order_line.product_id").write({"hs_code": "123",
+                                                              "country_of_origin": sale_order.warehouse_id.partner_id.country_id, })
         with recorder.use_cassette("shipping_02"):
             sale_order.with_context(
                 force_sendcloud_shipment_code="c9b2058d-2621-4ce5-afb0-f14e8e5565b6"
