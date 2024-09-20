@@ -173,7 +173,7 @@ class TestDeliverySendCloud(TransactionCase):
 
         # Feature "Auto create invoice" not enabled by default
         self.assertFalse(sale_order.company_id.sendcloud_auto_create_invoice)
-
+        self.assertFalse(sale_order.mapped("order_line").mapped("product_id").hs_code)
         # Set Sendcloud delivery method
         choose_delivery_form = Form(
             self.env["choose.delivery.carrier"].with_context(
@@ -185,7 +185,6 @@ class TestDeliverySendCloud(TransactionCase):
         )
         choose_delivery_wizard = choose_delivery_form.save()
         choose_delivery_wizard.button_confirm()
-        self.assertFalse(sale_order.mapped("order_line").mapped("product_id").hs_code)
         with rollback():
             # HS code consistency
             with self.assertRaisesRegex(
