@@ -151,20 +151,22 @@ class TestDeliverySendCloud(TransactionCase):
         with recorder.use_cassette("shipping_methods"):
             delivery_carrier_obj.sendcloud_sync_shipping_method()
         # Sale order to outside EU
-        sale_order = self.env["sale.order"].create({
-            "partner_id": self.env.ref("base.res_partner_2").id,
-            "date_order": fields.Date.today(),
-            "order_line": [
-                (
-                    0,
-                    None,
-                    {
-                        "product_id": self.env.ref("product.product_product_25").id,
-                        "product_uom_qty": 1,
-                    },
-                )
-            ],
-        })
+        sale_order = self.env["sale.order"].create(
+            {
+                "partner_id": self.env.ref("base.res_partner_2").id,
+                "date_order": fields.Date.today(),
+                "order_line": [
+                    (
+                        0,
+                        None,
+                        {
+                            "product_id": self.env.ref("product.product_product_25").id,
+                            "product_uom_qty": 1,
+                        },
+                    )
+                ],
+            }
+        )
         europe_codes = self.env.ref("base.europe").country_ids.mapped("code")
         partner_country = sale_order.partner_id.country_id.code
         self.assertFalse(partner_country in europe_codes)
@@ -183,6 +185,7 @@ class TestDeliverySendCloud(TransactionCase):
         )
         choose_delivery_wizard = choose_delivery_form.save()
         choose_delivery_wizard.button_confirm()
+        self.assertFalse(sale_order.mapped("order_line").mapped("product_id").hs_code)
         with rollback():
             # HS code consistency
             with self.assertRaisesRegex(
@@ -403,20 +406,22 @@ class TestDeliverySendCloud(TransactionCase):
     def test_10_auto_create_invoice(self):
         """Test the "Auto create invoice" feature: when shipping outside EU"""
         # Sale order to outside EU
-        sale_order = self.env["sale.order"].create({
-            "partner_id": self.env.ref("base.res_partner_2").id,
-            "date_order": fields.Date.today(),
-            "order_line": [
-                (
-                    0,
-                    None,
-                    {
-                        "product_id": self.env.ref("product.product_product_25").id,
-                        "product_uom_qty": 1,
-                    },
-                )
-            ],
-        })
+        sale_order = self.env["sale.order"].create(
+            {
+                "partner_id": self.env.ref("base.res_partner_2").id,
+                "date_order": fields.Date.today(),
+                "order_line": [
+                    (
+                        0,
+                        None,
+                        {
+                            "product_id": self.env.ref("product.product_product_25").id,
+                            "product_uom_qty": 1,
+                        },
+                    )
+                ],
+            }
+        )
         self.assertEqual(sale_order.partner_id.country_id.code, "US")
         sale_order.mapped("order_line").mapped("product_id").write(
             {
