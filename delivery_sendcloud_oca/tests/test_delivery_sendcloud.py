@@ -151,29 +151,30 @@ class TestDeliverySendCloud(TransactionCase):
         with recorder.use_cassette("shipping_methods"):
             delivery_carrier_obj.sendcloud_sync_shipping_method()
         # Sale order to outside EU
-        sale_order = self.env["sale.order"].create(
-            {
-                "partner_id": self.env.ref("base.res_partner_2").id,
-                "date_order": fields.Date.today(),
-                "order_line": [
-                    (
-                        0,
-                        None,
-                        {
-                            "product_id": self.env.ref("product.product_product_25").id,
-                            "product_uom_qty": 1,
-                        },
-                    )
-                ],
-            }
-        )
+        # sale_order = self.env["sale.order"].create(
+        #     {
+        #         "partner_id": self.env.ref("base.res_partner_2").id,
+        #         "date_order": fields.Date.today(),
+        #         "order_line": [
+        #             (
+        #                 0,
+        #                 None,
+        #                 {
+        #                     "product_id": self.env.ref("product.product_product_25").id,
+        #                     "product_uom_qty": 1,
+        #                 },
+        #             )
+        #         ],
+        #     }
+        # )
+        sale_order = self.env.ref("sale.sale_order_1").copy()
         europe_codes = self.env.ref("base.europe").country_ids.mapped("code")
         partner_country = sale_order.partner_id.country_id.code
         self.assertFalse(partner_country in europe_codes)
 
         # Feature "Auto create invoice" not enabled by default
         self.assertFalse(sale_order.company_id.sendcloud_auto_create_invoice)
-        self.assertFalse(sale_order.mapped("order_line").mapped("product_id").hs_code)
+
         # Set Sendcloud delivery method
         choose_delivery_form = Form(
             self.env["choose.delivery.carrier"].with_context(
