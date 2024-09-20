@@ -435,7 +435,7 @@ class StockPicking(models.Model):
             origin_country = (
                 product_tmplate.intrastat_origin_country_id.code or origin_country
             )
-        _logger.info("Product Name(%s) : Hs Code(%s) HS Code"%(product_tmplate.name,product_tmplate.hs_code,hs_code))
+        _logger.info("Product Name(%s) : Hs Code(%s) HS Code", product_tmplate.name,product_tmplate.hs_code,hs_code)
         return {"hs_code": hs_code, "origin_country": origin_country}
 
     def _prepare_sendcloud_parcels_from_picking(self):
