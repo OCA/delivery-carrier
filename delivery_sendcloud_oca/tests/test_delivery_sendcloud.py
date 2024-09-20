@@ -10,7 +10,7 @@ from vcr import VCR
 
 from odoo import fields
 from odoo.exceptions import UserError, ValidationError
-from odoo.tests import Form, TransactionCase
+from odoo.tests import Form, TransactionCase,tagged
 from odoo.tools import mute_logger
 
 _super_send = requests.Session.send
@@ -26,7 +26,7 @@ recorder = VCR(
     decode_compressed_response=True,
 )
 
-
+@tagged("post_install", "-at_install")
 class TestDeliverySendCloud(TransactionCase):
     @classmethod
     def _request_handler(cls, s, r, /, **kw):
