@@ -10,7 +10,7 @@ from vcr import VCR
 
 from odoo import fields
 from odoo.exceptions import UserError, ValidationError
-from odoo.tests import Form, TransactionCase,tagged
+from odoo.tests import Form, TransactionCase
 from odoo.tools import mute_logger
 
 _super_send = requests.Session.send
@@ -26,7 +26,7 @@ recorder = VCR(
     decode_compressed_response=True,
 )
 
-@tagged("post_install", "-at_install")
+
 class TestDeliverySendCloud(TransactionCase):
     @classmethod
     def _request_handler(cls, s, r, /, **kw):
@@ -181,8 +181,15 @@ class TestDeliverySendCloud(TransactionCase):
                     force_sendcloud_shipment_code="c9b2058d-2621-4ce5-afb0-f14e8e5565b6"
                 ).action_confirm()
         # Set HS code and confirm order
-        sale_order.mapped("order_line").mapped("product_id").mapped("product_tmpl_id").write({"hs_code": "123"})
-        _logger.info(("Hs codes %s",sale_order.mapped("order_line").mapped("product_id").mapped("product_tmpl_id").mapped("hs_code")))
+        is_product_harmonized_system_installed = self.env["ir.module.module"].search(
+            [("name", "=", "product_harmonized_system"), ("state", "=", "installed")],
+            limit=1,
+        )
+        if is_product_harmonized_system_installed:
+            sale_order.mapped("order_line.product_id").write(
+                {"hs_code_id": self.env.ref("product_harmonized_system.84715000").id})
+        else:
+            sale_order.mapped("order_line.product_id").write({"hs_code": "123"})
         with rollback():
             # Origin Country consistency
             with self.assertRaisesRegex(
@@ -194,9 +201,11 @@ class TestDeliverySendCloud(TransactionCase):
                     force_sendcloud_shipment_code="c9b2058d-2621-4ce5-afb0-f14e8e5565b6"
                 ).action_confirm()
         # Set country_of_origin and confirm order
-        sale_order.mapped("order_line").mapped("product_id").write(
-            {"country_of_origin": sale_order.warehouse_id.partner_id.country_id}
-        )
+        if is_product_harmonized_system_installed:
+            sale_order.mapped("order_line.product_id").write(
+                {"origin_country_id": sale_order.warehouse_id.partner_id.country_id})
+        else:
+            sale_order.mapped("order_line.product_id").write({"country_of_origin": sale_order.warehouse_id.partner_id.country_id})
         with recorder.use_cassette("shipping_02"):
             sale_order.with_context(
                 force_sendcloud_shipment_code="c9b2058d-2621-4ce5-afb0-f14e8e5565b6"
@@ -394,12 +403,17 @@ class TestDeliverySendCloud(TransactionCase):
         # Sale order to outside EU
         sale_order = self.env.ref("sale.sale_order_1").copy()
         self.assertEqual(sale_order.partner_id.country_id.code, "US")
-        sale_order.mapped("order_line").mapped("product_id").mapped("product_tmpl_id").write(
-            {
-                "hs_code": "123",
-                "country_of_origin": sale_order.warehouse_id.partner_id.country_id,
-            }
+        is_product_harmonized_system_installed = self.env["ir.module.module"].search(
+            [("name", "=", "product_harmonized_system"), ("state", "=", "installed")],
+            limit=1,
         )
+        if is_product_harmonized_system_installed:
+            sale_order.mapped("order_line.product_id").write(
+                {"hs_code_id": self.env.ref("product_harmonized_system.84715000").id,
+                 "origin_country_id": sale_order.warehouse_id.partner_id.country_id,})
+        else:
+            sale_order.mapped("order_line.product_id").write({"hs_code": "123",
+                                                              "country_of_origin": sale_order.warehouse_id.partner_id.country_id,})
 
         # Enable "Auto create invoice"
         sale_order.company_id.sendcloud_auto_create_invoice = True
