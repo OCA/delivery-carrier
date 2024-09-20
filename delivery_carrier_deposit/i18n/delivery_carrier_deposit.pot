@@ -151,11 +151,13 @@ msgstr ""
 
 #. module: delivery_carrier_deposit
 #: model:ir.model.fields.selection,name:delivery_carrier_deposit.selection__deposit_slip__state__done
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_deposit.view_deposit_slip_search
 msgid "Done"
 msgstr ""
 
 #. module: delivery_carrier_deposit
 #: model:ir.model.fields.selection,name:delivery_carrier_deposit.selection__deposit_slip__state__draft
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_deposit.view_deposit_slip_search
 msgid "Draft"
 msgstr ""
 
@@ -337,6 +339,11 @@ msgid "Sender Ref"
 msgstr ""
 
 #. module: delivery_carrier_deposit
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_deposit.view_deposit_slip_search
+msgid "State"
+msgstr ""
+
+#. module: delivery_carrier_deposit
 #: model:ir.model.fields,field_description:delivery_carrier_deposit.field_deposit_slip__state
 msgid "Status"
 msgstr ""
@@ -420,6 +427,7 @@ msgstr ""
 
 #. module: delivery_carrier_deposit
 #: model_terms:ir.ui.view,arch_db:delivery_carrier_deposit.report_generic_deposit_slip
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_deposit.view_deposit_slip_form
 msgid "kg"
 msgstr ""
 
