@@ -8,6 +8,7 @@ from os.path import dirname, join
 import requests
 from vcr import VCR
 
+from odoo import fields
 from odoo.exceptions import UserError, ValidationError
 from odoo.tests import Form, TransactionCase
 from odoo.tools import mute_logger
@@ -150,7 +151,20 @@ class TestDeliverySendCloud(TransactionCase):
         with recorder.use_cassette("shipping_methods"):
             delivery_carrier_obj.sendcloud_sync_shipping_method()
         # Sale order to outside EU
-        sale_order = self.env.ref("sale.sale_order_1").copy()
+        sale_order = self.env["sale.order"].create({
+            "partner_id": self.env.ref("base.res_partner_2").id,
+            "date_order": fields.Date.today(),
+            "order_line": [
+                (
+                    0,
+                    None,
+                    {
+                        "product_id": self.env.ref("product.product_product_25").id,
+                        "product_uom_qty": 1,
+                    },
+                )
+            ],
+        })
         europe_codes = self.env.ref("base.europe").country_ids.mapped("code")
         partner_country = sale_order.partner_id.country_id.code
         self.assertFalse(partner_country in europe_codes)
@@ -179,7 +193,6 @@ class TestDeliverySendCloud(TransactionCase):
                     force_sendcloud_shipment_code="c9b2058d-2621-4ce5-afb0-f14e8e5565b6"
                 ).action_confirm()
         # Set HS code and confirm order
-        self.env.ref("product.product_delivery_02").write({"hs_code": "123"})
         sale_order.mapped("order_line").mapped("product_id").write({"hs_code": "123"})
         with rollback():
             # Origin Country consistency
@@ -390,7 +403,20 @@ class TestDeliverySendCloud(TransactionCase):
     def test_10_auto_create_invoice(self):
         """Test the "Auto create invoice" feature: when shipping outside EU"""
         # Sale order to outside EU
-        sale_order = self.env.ref("sale.sale_order_1").copy()
+        sale_order = self.env["sale.order"].create({
+            "partner_id": self.env.ref("base.res_partner_2").id,
+            "date_order": fields.Date.today(),
+            "order_line": [
+                (
+                    0,
+                    None,
+                    {
+                        "product_id": self.env.ref("product.product_product_25").id,
+                        "product_uom_qty": 1,
+                    },
+                )
+            ],
+        })
         self.assertEqual(sale_order.partner_id.country_id.code, "US")
         sale_order.mapped("order_line").mapped("product_id").write(
             {
