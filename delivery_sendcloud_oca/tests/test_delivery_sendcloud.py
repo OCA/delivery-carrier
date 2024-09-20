@@ -197,6 +197,7 @@ class TestDeliverySendCloud(TransactionCase):
                 ).action_confirm()
         # Set HS code and confirm order
         sale_order.mapped("order_line").mapped("product_id").write({"hs_code": "123"})
+        self.assertFalse(self.env.ref("product.product_delivery_02").hs_code)
         with rollback():
             # Origin Country consistency
             with self.assertRaisesRegex(
