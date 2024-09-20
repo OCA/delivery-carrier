@@ -179,7 +179,8 @@ class TestDeliverySendCloud(TransactionCase):
                     force_sendcloud_shipment_code="c9b2058d-2621-4ce5-afb0-f14e8e5565b6"
                 ).action_confirm()
         # Set HS code and confirm order
-        sale_order.mapped("order_line.product_id").write({"hs_code": "123"})
+        self.env.ref("product.product_delivery_02").write({"hs_code": "123"})
+        sale_order.mapped("order_line").mapped("product_id").write({"hs_code": "123"})
         with rollback():
             # Origin Country consistency
             with self.assertRaisesRegex(
@@ -191,7 +192,7 @@ class TestDeliverySendCloud(TransactionCase):
                     force_sendcloud_shipment_code="c9b2058d-2621-4ce5-afb0-f14e8e5565b6"
                 ).action_confirm()
         # Set country_of_origin and confirm order
-        sale_order.mapped("order_line.product_id").write(
+        sale_order.mapped("order_line").mapped("product_id").write(
             {"country_of_origin": sale_order.warehouse_id.partner_id.country_id}
         )
         with recorder.use_cassette("shipping_02"):
@@ -391,7 +392,7 @@ class TestDeliverySendCloud(TransactionCase):
         # Sale order to outside EU
         sale_order = self.env.ref("sale.sale_order_1").copy()
         self.assertEqual(sale_order.partner_id.country_id.code, "US")
-        sale_order.mapped("order_line.product_id").write(
+        sale_order.mapped("order_line").mapped("product_id").write(
             {
                 "hs_code": "123",
                 "country_of_origin": sale_order.warehouse_id.partner_id.country_id,
