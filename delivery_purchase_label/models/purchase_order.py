@@ -42,6 +42,29 @@ class PurchaseOrder(models.Model):
             return False
         return True
 
+    def _is_picking_label_uptodate(self):
+        """Check if the picking label needs to be regenerated."""
+        self.ensure_one()
+        if not self.delivery_label_picking_id:
+            return False
+        pick = self.delivery_label_picking_id
+        moves_new = []
+        for line in self.order_line:
+            for value in line._prepare_stock_moves(self.delivery_label_picking_id):
+                moves_new.append(
+                    {key: value[key] for key in ("product_id", "product_uom_qty")}
+                )
+        move_prev = [
+            {"product_id": move.product_id.id, "product_uom_qty": move.product_uom_qty}
+            for move in pick.move_lines
+        ]
+        if len(move_prev) == len(moves_new):
+            if [
+                move_value for move_value in move_prev if move_value not in moves_new
+            ] == []:
+                return True
+        return False
+
     def _generate_purchase_delivery_label(self):
         """Create a transfer to generate the carrier labels."""
         self.ensure_one()
@@ -58,11 +81,15 @@ class PurchaseOrder(models.Model):
                     self.partner_id.name,
                 )
             )
+        if self._is_picking_label_uptodate():
+            return
         order = self.with_company(self.company_id)
         # Create and process the transer to send the labels
         values = order._get_purchase_delivery_label_picking_value(carrier)
         picking = self.env["stock.picking"].with_user(SUPERUSER_ID).create(values)
         moves = order.order_line._create_stock_moves(picking)
+        moves.location_id = picking.location_id
+        moves.location_dest_id = picking.location_dest_id
         # Remove the link on the sale and purchase
         # To not impact the delivered quantity on them
         picking.sale_id = False
@@ -73,6 +100,16 @@ class PurchaseOrder(models.Model):
         moves = picking.move_lines
         for move in moves:
             move.quantity_done = move.product_uom_qty
+        if order.delivery_label_picking_id:
+            # Canceling the previous picking.
+            pick = order.delivery_label_picking_id
+            # Using wirte to by pass internal checks
+            # Should not be a problem because this is a fake
+            # move (Vendor to Vendor)
+            pick.move_line_ids.write({"state": "cancel"})
+            pick.move_lines.write({"state": "cancel"})
+            pick.write({"state": "cancel"})
+        # Generating a new label picking
         picking._action_done()
         order.delivery_label_picking_id = picking
         picking.message_post_with_view(
