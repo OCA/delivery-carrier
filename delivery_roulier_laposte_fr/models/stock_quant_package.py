@@ -100,10 +100,11 @@ class StockQuantPackage(models.Model):
         if self._uid > 2:
             # rm pwd from dict and xml
             payload["auth"]["password"] = "****"
-            request = "{}<password>****{}".format(
-                request[: request.index("<password>")],
-                request[request.index("</password>") :],
+            request_str = "{}<password>****{}".format(
+                request[: request.index(b"<password>")],
+                request[request.index(b"</password>") :],
             )
+            request = request_str.encode("utf-8")
 
         # Webservice error
         # on contextualise les réponses ws aux objets Odoo
