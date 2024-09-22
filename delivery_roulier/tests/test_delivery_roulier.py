@@ -55,6 +55,7 @@ class DeliveryRoulierCase(TransactionCase):
                 "delivery_type": "test",
                 "product_id": delivery_product.id,
                 "carrier_account_id": self.account.id,
+                "automatic_package_creation_at_delivery": True,
             }
         )
         partner = self.env["res.partner"].create(
