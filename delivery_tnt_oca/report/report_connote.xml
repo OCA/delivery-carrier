@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="tnt_connote_label_pdf_document">
+        <t t-call="web_custom_report.external_layout_custom_document">
+            <div class="header">
+                <div class="row">
+                    <div class="col-12" style="text-align:center;font-size:20pt">
+                        <strong>Consignment Note</strong>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="page"
+                style="font-family:'Gilroy Light', sans-serif;font-size: 10pt;"
+            >
+                <div class="row border border-dark">
+                    <div class="col-6 p-2 border-end border-dark">
+                        <div class="border-bottom border-dark mb-2">
+                            <p class="fw-bold mb-0">1. From (Collection Address)</p>
+                        </div>
+                        <div class=" row">
+                            <div class="col-5">
+                                <span>Sender's Account No:</span>
+                            </div>
+                            <div class="col-7">
+                                <p
+                                    class="mb-0"
+                                    t-field="doc.carrier_id.tnt_oca_ws_account"
+                                />
+                            </div>
+                        </div>
+                        <div class=" row">
+                            <div class="col-5">
+                                <span>Name:</span>
+                            </div>
+                            <div class="col-7">
+                                <span t-field="doc.company_id.name" />
+                            </div>
+                        </div>
+                        <div class="  row">
+                            <div class="col-5">
+                                <span>Address:</span>
+                            </div>
+                            <div class="col-7">
+                                <span t-field="doc.company_id.street" />
+                            </div>
+                        </div>
+                        <div class=" row">
+                            <div class="col-5">
+                                <span>City:</span>
+                            </div>
+                            <div class="col-7">
+                                <span t-field="doc.company_id.city" />
+                            </div>
+                        </div>
+                        <div class=" row">
+                            <div class="col-5">
+                                <span>Province:</span>
+                            </div>
+                            <div class="col-7">
+                                <span t-field="doc.company_id.state_id.name" />
+                            </div>
+                        </div>
+                        <div class="  row">
+                            <div class="col-5">
+                                <span>Postal/Zip Code:</span>
+                            </div>
+                            <div class="col-7">
+                                <span t-field="doc.company_id.zip" />
+                            </div>
+                        </div>
+                        <div class=" row">
+                            <div class="col-5">
+                                <span>Location:</span>
+                            </div>
+                            <div class="col-7">
+                                <span t-field="doc.company_id.country_id.name" />
+                            </div>
+                        </div>
+                        <div class=" row">
+                            <div class="col-5">
+                                <span>Contact Name:</span>
+                            </div>
+                            <div class="col-7">
+                                <span t-field="doc.user_id.name" />
+                            </div>
+                        </div>
+                        <div class=" row">
+                            <div class="col-5">
+                                <span>Tel No:</span>
+                            </div>
+                            <div class="col-7">
+                                <span t-field="doc.user_id.partner_id.phone" />
+                            </div>
+                        </div>
+                        <div class="border-bottom border-dark mt-1">
+                            <p class="mb-0 fw-bold">2. To (Receiver Address)</p>
+                        </div>
+                        <t t-if="doc.partner_id.parent_id">
+                            <div class=" row">
+                                <div class="col-5">
+                                    <span>Name:</span>
+                                </div>
+                                <div class="col-7">
+                                    <span t-field="doc.partner_id.parent_id.name" />
+                                </div>
+                            </div>
+                            <div class=" row">
+                                <div class="col-5">
+                                    <span>Address:</span>
+                                </div>
+                                <div class="col-7">
+                                    <span t-field="doc.partner_id.parent_id.street" />
+                                    <br />
+                                    <span t-field="doc.partner_id.parent_id.street2" />
+                                </div>
+                            </div>
+                            <div class=" row">
+                                <div class="col-5">
+                                    <span>City:</span>
+                                </div>
+                                <div class="col-7">
+                                    <span t-field="doc.partner_id.parent_id.city" />
+                                </div>
+                            </div>
+                            <div class=" row">
+                                <div class="col-5">
+                                    <span>Province:</span>
+                                </div>
+                                <div class="col-7">
+                                    <span
+                                        t-field="doc.partner_id.parent_id.state_id.name"
+                                    />
+                                </div>
+                            </div>
+                            <div class=" row">
+                                <div class="col-5">
+                                    <span>Postal/Zip Code:</span>
+                                </div>
+                                <div class="col-7">
+                                    <span t-field="doc.partner_id.parent_id.zip" />
+                                </div>
+                            </div>
+                            <div class=" row">
+                                <div class="col-5">
+                                    <span>Location:</span>
+                                </div>
+                                <div class="col-7">
+                                    <span
+                                        t-field="doc.partner_id.parent_id.country_id.name"
+                                    />
+                                </div>
+                            </div>
+                            <div class=" row">
+                                <div class="col-5">
+                                    <span>Contact Name:</span>
+                                </div>
+                                <div class="col-7">
+                                    <span t-field="doc.partner_id.parent_id.name" />
+                                </div>
+                            </div>
+                            <div class=" row">
+                                <div class="col-5">
+                                    <span>Tel No:</span>
+                                </div>
+                                <div class="col-7">
+                                    <span t-field="doc.partner_id.parent_id.phone" />
+                                </div>
+                            </div>
+                        </t>
+                        <t t-else="">
+                            <div class=" row">
+                                <div class="col-5">
+                                    <span>Name:</span>
+                                </div>
+                                <div class="col-7">
+                                    <span t-field="doc.partner_id.name" />
+                                </div>
+                            </div>
+                            <div class=" row">
+                                <div class="col-5">
+                                    <span>Address:</span>
+                                </div>
+                                <div class="col-7">
+                                    <span t-field="doc.partner_id.street" />
+                                    <br />
+                                    <span t-field="doc.partner_id.street2" />
+                                </div>
+                            </div>
+                            <div class=" row">
+                                <div class="col-5">
+                                    <span>City:</span>
+                                </div>
+                                <div class="col-7">
+                                    <span t-field="doc.partner_id.city" />
+                                </div>
+                            </div>
+                            <div class=" row">
+                                <div class="col-5">
+                                    <span>Province:</span>
+                                </div>
+                                <div class="col-7">
+                                    <span t-field="doc.partner_id.state_id.name" />
+                                </div>
+                            </div>
+                            <div class=" row">
+                                <div class="col-5">
+                                    <span>Postal/Zip Code:</span>
+                                </div>
+                                <div class="col-7">
+                                    <span t-field="doc.partner_id.zip" />
+                                </div>
+                            </div>
+                            <div class=" row">
+                                <div class="col-5">
+                                    <span>Location:</span>
+                                </div>
+                                <div class="col-7">
+                                    <span t-field="doc.partner_id.country_id.name" />
+                                </div>
+                            </div>
+                            <div class=" row">
+                                <div class="col-5">
+                                    <span>Contact Name:</span>
+                                </div>
+                                <div class="col-7">
+                                    <span t-field="doc.partner_id.name" />
+                                </div>
+                            </div>
+                            <div class=" row">
+                                <div class="col-5">
+                                    <span>Tel No:</span>
+                                </div>
+                                <div class="col-7">
+                                    <span t-field="doc.partner_id.phone" />
+                                </div>
+                            </div>
+                        </t>
+                        <div class="border-bottom border-dark mt-1">
+                            <strong>3. Goods</strong>
+                        </div>
+                        <div>
+                                <p class="mb-0">General Description:</p>
+                                <p class="mb-0">LAMPARAS</p>
+                                <p class="mb-0">HS Tariff Code:</p>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <span>Total Packages:</span>
+                            </div>
+                            <div class="col-4">
+                                <span>Total Weight:</span>
+                            </div>
+                            <div class="col-4">
+                                <span>Total Volume:</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <span t-field="doc.number_of_packages" />
+                            </div>
+                            <div class="col-4">
+                                <span t-field="doc.shipping_weight" /><span>Kg</span>
+                            </div>
+                            <div class="col-4">
+                                <span t-field="doc.volume" /><span>m3</span>
+                            </div>
+                        </div>
+                        <div class="border-bottom border-dark mt-1">
+                            <p class="fw-bold mb-0">4. Services</p>
+                        </div>
+                        <div class="row">
+                            <div class="col-5">
+                                <span>Service:</span>
+                            </div>
+                            <div class="col-7">
+                                <span t-field="doc.carrier_id.tnt_product_code_n" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-5 pb-3">
+                                <span>Options:</span>
+                            </div>
+                        </div>
+                        <div class=" row">
+                            <div class="col-5">
+                                <span>Payment Terms:</span>
+                            </div>
+                            <div class="col-7">
+                                <span>Sender Pays</span>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-12">
+                                <p class="mb-0 fw-bold">NON DANGEROUS GOODS</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 p-2">
+                        <div class="text-center">
+                            <img
+                                src="/delivery_tnt_oca/static/src/img/black_logo.jpg"
+                                style="width: 30%;object-fit: contain;"
+                            />
+                        </div>
+
+                        <div class="p-2 text-center">
+                            <img
+                                t-if="doc.carrier_tracking_ref"
+                                t-att-src="'/report/barcode/?barcode_type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;humanreadable=1' % ('Code128',doc.carrier_tracking_ref,800,200)"
+                                style="width:100%;height:6rem"
+                            />
+                        </div>
+
+                        <div class="text-center">
+                            <span
+                            >Please quote this number if you have an enquiry.</span>
+                        </div>
+                        <div class="border-bottom border-dark mt-1">
+                            <p class="fw-bold mb-0">A. Delivery Address</p>
+                        </div>
+                        <div class="row">
+                            <div class="col-5">
+                                <span>Name:</span>
+                            </div>
+                            <div class="col-7">
+                                <span t-field="doc.partner_id.name" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-5">
+                                <span>Address:</span>
+                            </div>
+                            <div class="col-7">
+                                <p class="mb-1" t-field="doc.partner_id.street" />
+                                <p class="mb-0" t-field="doc.partner_id.street2" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-5">
+                                <span>City:</span>
+                            </div>
+                            <div class="col-7">
+                                <span t-field="doc.partner_id.city" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-5">
+                                <span>Province:</span>
+                            </div>
+                            <div class="col-7">
+                                <span t-field="doc.partner_id.state_id.name" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-5">
+                                <span>Postal/Zip Code:</span>
+                            </div>
+                            <div class="col-7">
+                                <span t-field="doc.partner_id.zip" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-5">
+                                <span>Location:</span>
+                            </div>
+                            <div class="col-7">
+                                <span t-field="doc.partner_id.country_id.name" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-5">
+                                <span>Contact Name:</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-5">
+                                <span>Tel No:</span>
+                            </div>
+                        </div>
+                        <div class="border-bottom border-dark mt-1">
+                            <strong>B. Dutiable Shipment Details</strong>
+                        </div>
+                        <p>Receivers VAT/TVA/BTW/MWST No.:</p>
+                        <p>Invoice Value of Dutiables: <span
+                                t-field="doc.sale_id.amount_total"
+                            /></p>
+                        <div class="border-bottom border-dark mt-1 mb-5 pb-2">
+                            <strong>C. Special Delivery Instructions</strong>
+                        </div>
+                        <div class="border-bottom border-dark mt-1">
+                            <strong>D. Customer Reference</strong>
+                        </div>
+                        <p t-field="doc.name" />
+                    </div>
+                </div>
+                <div class="row border-start border-end border-bottom border-dark">
+                    <div class="col-6 p-2 pt-5 border-end border-dark">
+                        <p class="mb-0"><strong
+                            >Sender's Signature______________________</strong></p>
+                        <p class="mb-0 mt-5"><strong>Date: ____/____/____</strong></p>
+                        <p
+                            class="mb-0 mt-5 pb-5 mb-5"
+                            style="font-size:6pt"
+                        >TNT'S LIABILITY FOR LOSS, DAMAGE AND DELAY IS LIMITED BY THE CMR CONVENTION OR THE WARSAW CONVENTION WHICHEVER IS APPLICABLE. THE SENDER AGREES THAT THE GENERAL CONDITIONS, WHICH
+                        CAN BE VIEWED AT HTTPS://WWW.TNT.COM/TERMS , ARE ACCEPTABLE AND GOVERN THIS CONTRACT. IF NO SERVICES OR BILLING OPTIONS ARE SELECTED THE FASTEST AVAILABLE SERVICE WILL BE CHARGED TO
+                        THE SENDER.</p>
+                    </div>
+                    <div class="col-6 p-2 pt-5">
+                        <p class="mb-0"><strong
+                            >Received by TNT (Name): ___________________________</strong></p>
+                        <p class="mb-0 mt-5"><strong
+                            >Date: ____/____/____ Time: ____:____</strong></p>
+                        <p class="mb-0 mt-5">
+                            <strong>Customs Copy</strong>
+                            <p>Please keep for reference</p>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer" />
+        </t>
+    </template>
+    <template id="tnt_connote_label_pdf">
+        <t t-call="web.html_container">
+            <t t-call="delivery_tnt_oca.tnt_connote_label_pdf_document" />
+        </t>
+    </template>
+</odoo>

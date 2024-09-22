@@ -1,3 +1,8 @@
 # generated from manifests external_dependencies
+dicttoxml
 roulier
+<<<<<<< HEAD
 unidecode
+=======
+xmltodict
+>>>>>>> bd9f6cc17d1d628908f1a3432532c5322572ad18

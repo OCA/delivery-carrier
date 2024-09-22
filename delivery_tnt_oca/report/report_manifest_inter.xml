@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="report_tnt_manifest_inter_document">
+        <t t-call="web_custom_report.external_layout_custom_document">
+            <div class="header" />
+            <div
+                class="page"
+                style="font-family:'Gilroy Light', sans-serif;font-weight: lighter;font-size: 10pt"
+            >
+                <div class="row border border-dark">
+                    <div class="col-6 overflow-hidden border-end border-dark p-2">
+                        <h6 class="mb-0 fw-bold">DETAILED MANIFEST</h6>
+                        <p
+                            class="mt-2 mb-2 fw-bold"
+                            style="font-size: 14px;"
+                        >SENDER PAYS</p>
+                        <p class="mb-0"><strong>Pickup id:</strong></p>
+                        <p class="mb-0"><strong>Printed on:</strong> <span
+                                t-esc="datetime.datetime.now()"
+                            /></p>
+                        <p class="mb-0 mb-3 pb-5"><strong>Shipment Date:</strong> <span
+                                t-field="doc.tnt_consignment_date"
+                            /></p>
+                        <div class="row">
+                            <div class="col-4">
+                                <strong>Service</strong>
+                            </div>
+                            <div class="col-8">
+                                <span t-field="doc.carrier_id.tnt_product_code" />
+                            </div>
+                        </div>
+                        <p class="mb-0 fw-bold">Options</p>
+                    </div>
+                    <div class="col-6 overflow-hidden">
+                        <div class="text-center overflow-hidden p-2">
+                            <img
+                                src="/delivery_tnt_oca/static/src/img/black_logo.jpg"
+                                style="width: 30%;object-fit: contain;"
+                            />
+                        </div>
+                        <div class="p-2" style="text-align:center">
+                            <img
+                                t-if="doc.carrier_tracking_ref"
+                                t-att-src="'/report/barcode/?barcode_type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;humanreadable=1' % ('Code128',doc.carrier_tracking_ref,800,200)"
+                                style="width:100%;height:6rem"
+                            />
+                        </div>
+                        <p
+                            class="border-top border-dark pt-2 mb-2 ps-2 pe-2 fw-bold"
+                        >NON DANGEROUS GOODS</p>
+                    </div>
+                </div>
+                <div class="row border border-dark">
+                    <div class="col-6 p-4 ps-2 border-end border-dark">
+                        <strong>Special Instructions</strong>
+                    </div>
+                    <div class="col-6 p-3 ps-2">
+                        <p class="mb-0"><strong>Shipment reference</strong></p>
+                        <span t-field="doc.name" />
+                    </div>
+                </div>
+                <div class="row border border-dark">
+                    <div class="col-6 p-2 border-end border-dark">
+                        <div class="row">
+                            <div class="col-6">
+                                <p class="fw-bold" style="font-size: 14px;">Sender</p>
+                                <p
+                                    class="mb-0"
+                                    t-field="doc.carrier_id.tnt_oca_ws_account"
+                                />
+                                <p class="mb-0" t-field="doc.company_id.name" />
+                                <p class="mb-0" t-field="doc.company_id.street" />
+                                <p class="mb-0" t-field="doc.company_id.city" />
+                                <p class="mb-0" t-field="doc.company_id.zip" />
+                                <p
+                                    class="mb-0"
+                                    t-field="doc.company_id.country_id.name"
+                                />
+                                <p class="mb-0"><strong>Contact:</strong> <span
+                                        t-field="doc.user_id.name"
+                                    /></p>
+                                <strong>Tel No:</strong> <span
+                                    t-field="doc.user_id.partner_id.phone"
+                                />
+                            </div>
+                            <div class="col-6">
+                                <p
+                                    class="fw-bold text-end"
+                                    style="font-size: 14px;"
+                                >Account:</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 p-2">
+                        <p class="fw-bold" style="font-size: 14px;">Receiver</p>
+                        <p class="mb-0" t-field="doc.partner_id.name" />
+                        <p class="mb-0" t-field="doc.partner_id.street" />
+                        <p class="mb-0" t-field="doc.partner_id.street2" />
+                        <p class="mb-0" t-field="doc.partner_id.city" />
+                        <p class="mb-0" t-field="doc.partner_id.zip" />
+                        <p class="mb-0" t-field="doc.partner_id.country_id.name" />
+                        <p class="mb-0"><strong>Contact:</strong> <span
+                                t-field="doc.partner_id.name"
+                            /></p>
+                        <p class="mb-0"><strong>Tel No:</strong> <span
+                                t-field="doc.partner_id.phone"
+                            /></p>
+                        <strong>VAT Nr:</strong> <span t-field="doc.partner_id.vat" />
+                    </div>
+                </div>
+                <div class="border border-dark p-2">
+                    <div class="row pt-2">
+                        <div class="col-3">
+                            <p class="mb-2 mt-2 fw-bold">Collection Name</p>
+                        </div>
+                        <div class="col-9">
+                            <p class="mb-0" t-field="doc.company_id.name" />
+                        </div>
+                    </div>
+                    <div class="row pt-2">
+                        <div class="col-3">
+                            <p class="mb-2 mt-2 fw-bold">Collection Address</p>
+                        </div>
+                        <div class="col-9">
+                            <p class="mb-0" t-field="doc.company_id.street" />
+                            <span class="mb-0" t-field="doc.company_id.city" />, <span
+                                t-field="doc.company_id.zip"
+                            />, <span t-field="doc.company_id.country_id.name" />
+                        </div>
+                    </div>
+                    <div class="row pt-2">
+                        <div class="col-3">
+                            <p class="mb-2 mt-2 fw-bold">Delivery Name</p>
+                        </div>
+                        <div class="col-9">
+                            <p class="mb-0" t-field="doc.partner_id.name" />
+                        </div>
+                    </div>
+                    <div class="row pt-2">
+                        <div class="col-3">
+                            <p class="mb-2 mt-2 fw-bold">Delivery Address</p>
+                        </div>
+                        <div class="col-9">
+                            <p class="mb-0" t-field="doc.partner_id.street" />
+                            <p class="mb-0" t-field="doc.partner_id.street2" />
+                            <span class="mb-0" t-field="doc.partner_id.city" />, <span
+                                t-field="doc.partner_id.zip"
+                            />, <span t-field="doc.partner_id.country_id.name" />
+                        </div>
+                    </div>
+                    <div class="row pt-2">
+                        <div class="col-3">
+                            <p class="mb-2 mt-2 fw-bold">Goods Description</p>
+                        </div>
+                        <div class="col-9">
+                            <p class="mb-0">Lamparas</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row p-2 pt-4 pb-4">
+                    <div class="col-auto">
+                        <strong>No Pieces:</strong>
+                        <span class="mb-0" t-field="doc.number_of_packages" />
+                    </div>
+                    <div class="col-auto">
+                        <strong>Weight:</strong>
+                        <span t-field="doc.shipping_weight" />
+                        <span t-field="doc.weight_uom_name" />
+                    </div>
+                    <div class="col-auto">
+                        <strong>Volume:</strong>
+                        <span t-field="doc.volume" />
+                        <span t-field="doc.volume_uom_name" />
+                    </div>
+                    <div class="col-auto">
+                        <strong>Insurance Value:</strong>
+                    </div>
+                    <div class="col-auto">
+                        <strong>Invoice Value:</strong>
+                        <span t-field="doc.sale_id.amount_total" />
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <div class="row" style="border-bottom:solid 1px black">
+                        <t t-set="packages" t-value="doc.package_ids" />
+                        <div class="col-6 p-2">
+                            <p class="mb-0"><strong>Package Description</strong></p>
+                            <t t-foreach="packages" t-as="pack">
+                                <p class="mb-0" t-field="pack.name" />
+                            </t>
+                        </div>
+                        <div class="col-6 p-2">
+                            <p class="mb-0"><strong>Dimensions (L x W x H)</strong></p>
+                            <t t-foreach="packages" t-as="pack">
+                                <p class="mb-0">
+                                    <span t-field="pack.pack_length" /> <span
+                                        t-field="pack.length_uom_name"
+                                    /> x
+                                    <span t-field="pack.width" /> <span
+                                        t-field="pack.length_uom_name"
+                                    /> x
+                                    <span t-field="pack.height" /> <span
+                                        t-field="pack.length_uom_name"
+                                    />
+                                </p>
+                            </t>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-6">
+                        <p class="mb-0"><strong
+                            >Sender's Signature______________________</strong></p>
+                        <p class="mb-0 mt-5"><strong>Date: ____/____/____</strong></p>
+                    </div>
+                    <div class="col-6">
+                        <p class="mb-0"><strong
+                            >Received by TNT (Name): ___________________________</strong></p>
+                        <p class="mb-0 mt-5"><strong
+                            >Date: ____/____/____ Time: ____:____</strong></p>
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <span
+                        style="font-size:6pt"
+                    >TNT'S LIABILITY FOR LOSS, DAMAGE AND DELAY IS LIMITED BY THE CMR CONVENTION OR THE WARSAW CONVENTION WHICHEVER IS APPLICABLE. THE SENDER AGREES THAT THE GENERAL CONDITIONS, WHICH
+                    CAN BE VIEWED AT HTTPS://WWW.TNT.COM/TERMS , ARE ACCEPTABLE AND GOVERN THIS CONTRACT. IF NO SERVICES OR BILLING OPTIONS ARE SELECTED THE FASTEST AVAILABLE SERVICE WILL BE CHARGED TO
+                    THE SENDER.</span>
+                </div>
+            </div>
+            <div class="footer" />
+        </t>
+    </template>
+    <template id="report_tnt_manifest_inter">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="delivery_tnt_oca.report_tnt_manifest_inter_document" />
+                <t t-call="delivery_tnt_oca.tnt_connote_label_pdf" />
+            </t>
+        </t>
+    </template>
+</odoo>
