@@ -95,16 +95,15 @@ class StockQuantPackage(models.Model):
 
     def _laposte_fr_carrier_error_handling(self, payload, exception):
         response = exception.response
-        request = response.request.body
+        request = response.request.body.decode("utf-8")
 
         if self._uid > 2:
             # rm pwd from dict and xml
             payload["auth"]["password"] = "****"
-            request_str = "{}<password>****{}".format(
-                request[: request.index(b"<password>")],
-                request[request.index(b"</password>") :],
+            request = "{}<password>****{}".format(
+                request[: request.index("<password>")],
+                request[request.index("</password>") :],
             )
-            request = request_str.encode("utf-8")
 
         # Webservice error
         # on contextualise les réponses ws aux objets Odoo
@@ -145,7 +144,7 @@ class StockQuantPackage(models.Model):
             "-----------------------------\n%(displ_data_transmitted)s"
         ) % {
             "displ_exception_message": "\n".join(parts),
-            "displ_data_transmitted": request.decode("utf-8"),
+            "displ_data_transmitted": request,
         }
         return ret_mess
 
