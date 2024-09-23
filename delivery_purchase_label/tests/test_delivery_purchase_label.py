@@ -11,7 +11,7 @@ class TestDeliveryPurchaseLabel(SavepointCase):
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         # Mocking to avoid a NotImplementedError
         cls.env["delivery.carrier"]._patch_method(
-            "fixed_cancel_shipment", lambda x, y: True
+            "base_on_rule_cancel_shipment", lambda x, y: True
         )
         cls.picking_type = cls.env.ref(
             "delivery_purchase_label.picking_type_send_label"
@@ -19,7 +19,7 @@ class TestDeliveryPurchaseLabel(SavepointCase):
         cls.supplier = cls.env.ref("base.res_partner_1")
         cls.customer = cls.env.ref("base.res_partner_2")
         cls.carrier = cls.env.ref("delivery.delivery_carrier")
-        cls.carrier.delivery_type = "fixed"
+        # cls.carrier.delivery_type = "fixed"
         cls.carrier.purchase_label_picking_type = cls.picking_type
         cls.supplier.purchase_label_carrier_id = cls.carrier
 
