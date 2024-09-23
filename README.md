@@ -57,7 +57,7 @@ addon | version | maintainers | summary
 [delivery_purchase](delivery_purchase/) | 14.0.1.3.0 |  | Delivery costs in purchases
 [delivery_roulier](delivery_roulier/) | 14.0.1.1.0 | [![florian-dacosta](https://github.com/florian-dacosta.png?size=30px)](https://github.com/florian-dacosta) | Integration of multiple carriers
 [delivery_roulier_chronopost_fr](delivery_roulier_chronopost_fr/) | 14.0.1.0.1 |  | Delivery Chronopost France
-[delivery_roulier_laposte_fr](delivery_roulier_laposte_fr/) | 14.0.1.0.1 | [![florian-dacosta](https://github.com/florian-dacosta.png?size=30px)](https://github.com/florian-dacosta) | Generate Label for La Poste/Colissimo
+[delivery_roulier_laposte_fr](delivery_roulier_laposte_fr/) | 14.0.1.1.0 | [![florian-dacosta](https://github.com/florian-dacosta.png?size=30px)](https://github.com/florian-dacosta) | Generate Label for La Poste/Colissimo
 [delivery_roulier_option](delivery_roulier_option/) | 14.0.1.0.0 | [![florian-dacosta](https://github.com/florian-dacosta.png?size=30px)](https://github.com/florian-dacosta) | Add options to roulier modules
 [delivery_schenker](delivery_schenker/) | 14.0.2.0.0 |  | Delivery Carrier implementation for DB Schenker API
 [delivery_schenker_picking_volume](delivery_schenker_picking_volume/) | 14.0.1.2.0 |  | Glue module between delivery_schenker and stock_picking_volumeWith this module the transmitted volume is changed,it uses the computed volume from stock_picking_volume
