@@ -29,6 +29,11 @@ class PurchaseOrder(models.Model):
         self._generate_purchase_delivery_label()
         return super().action_rfq_send()
 
+    def button_cancel(self):
+        self.ensure_one()
+        self._cancel_purchase_delivery_label_picking()
+        return super().button_cancel()
+
     def _is_valid_for_vendor_labels(self):
         self.ensure_one()
         if self.state not in self._states_to_generate_delivery_label():
@@ -46,6 +51,8 @@ class PurchaseOrder(models.Model):
         """Check if the picking label needs to be regenerated."""
         self.ensure_one()
         if not self.delivery_label_picking_id:
+            return False
+        if self.delivery_label_picking_id.state != "done":
             return False
         pick = self.delivery_label_picking_id
         moves_new = []
@@ -71,7 +78,7 @@ class PurchaseOrder(models.Model):
         if not self._is_valid_for_vendor_labels():
             return
         # Find the carrier that will be used
-        carrier = self.partner_id.purchase_delivery_carrier_id
+        carrier = self.partner_id.purchase_label_carrier_id
         if not carrier.purchase_label_picking_type:
             return
         if not self.partner_id.property_stock_supplier.id:
@@ -83,11 +90,25 @@ class PurchaseOrder(models.Model):
             )
         if self._is_picking_label_uptodate():
             return
+
         order = self.with_company(self.company_id)
-        # Create and process the transer to send the labels
-        values = order._get_purchase_delivery_label_picking_value(carrier)
+        picking = order._create_purchase_delivery_label_picking(carrier)
+
+        if order.delivery_label_picking_id:
+            order._cancel_purchase_delivery_label_picking()
+
+        order.delivery_label_picking_id = picking
+        picking.message_post_with_view(
+            "mail.message_origin_link",
+            values={"self": picking, "origin": self},
+            subtype_id=self.env.ref("mail.mt_note").id,
+        )
+
+    def _create_purchase_delivery_label_picking(self, carrier):
+        self.ensure_one()
+        values = self._get_purchase_delivery_label_picking_value(carrier)
         picking = self.env["stock.picking"].with_user(SUPERUSER_ID).create(values)
-        moves = order.order_line._create_stock_moves(picking)
+        moves = self.order_line._create_stock_moves(picking)
         moves.location_id = picking.location_id
         moves.location_dest_id = picking.location_dest_id
         # Remove the link on the sale and purchase
@@ -96,27 +117,20 @@ class PurchaseOrder(models.Model):
         moves.sale_line_id = False
         moves.purchase_line_id = False
         picking.action_assign()
-        # Moves can change on action assign
-        moves = picking.move_lines
-        for move in moves:
+        for move in picking.move_lines:
             move.quantity_done = move.product_uom_qty
-        if order.delivery_label_picking_id:
-            # Canceling the previous picking.
-            pick = order.delivery_label_picking_id
-            # Using wirte to by pass internal checks
-            # Should not be a problem because this is a fake
-            # move (Vendor to Vendor)
-            pick.move_line_ids.write({"state": "cancel"})
-            pick.move_lines.write({"state": "cancel"})
-            pick.write({"state": "cancel"})
-        # Generating a new label picking
         picking._action_done()
-        order.delivery_label_picking_id = picking
-        picking.message_post_with_view(
-            "mail.message_origin_link",
-            values={"self": picking, "origin": self},
-            subtype_id=self.env.ref("mail.mt_note").id,
-        )
+        return picking
+
+    def _cancel_purchase_delivery_label_picking(self):
+        self.ensure_one()
+        picking = self.delivery_label_picking_id
+        picking.cancel_shipment()
+        # Using wirte to by pass internal checks, not a problem
+        # because this is a fake move (Vendor to Vendor)
+        picking.move_line_ids.write({"state": "cancel"})
+        picking.move_lines.write({"state": "cancel"})
+        picking.write({"state": "cancel"})
 
     def _get_purchase_delivery_label_picking_value(self, carrier):
         return {
@@ -124,7 +138,7 @@ class PurchaseOrder(models.Model):
             "partner_id": self.dest_address_id.id,
             "user_id": False,
             "date": fields.Datetime.now(),
-            "origin": self.name,
+            "origin": self.origin,
             "location_dest_id": self.partner_id.property_stock_supplier.id,
             "location_id": self.partner_id.property_stock_supplier.id,
             "company_id": self.company_id.id,

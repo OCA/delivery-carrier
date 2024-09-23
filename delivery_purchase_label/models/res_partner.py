@@ -6,9 +6,9 @@ from odoo import fields, models
 
 class ResPartner(models.Model):
     _inherit = "res.partner"
-    purchase_delivery_carrier_id = fields.Many2one(
+    purchase_label_carrier_id = fields.Many2one(
         "delivery.carrier",
-        string="Purchase Delivery Method",
+        string="Purchase Label Delivery Method",
         domain=[("purchase_label_picking_type", "!=", False)],
         help="Default carrier used for sending labels to the vendor",
     )

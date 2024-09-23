@@ -9,14 +9,19 @@ class TestDeliveryPurchaseLabel(SavepointCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
+        # Mocking to avoid a NotImplementedError
+        cls.env["delivery.carrier"]._patch_method(
+            "fixed_cancel_shipment", lambda x, y: True
+        )
         cls.picking_type = cls.env.ref(
             "delivery_purchase_label.picking_type_send_label"
         )
         cls.supplier = cls.env.ref("base.res_partner_1")
         cls.customer = cls.env.ref("base.res_partner_2")
         cls.carrier = cls.env.ref("delivery.delivery_carrier")
+        cls.carrier.delivery_type = "fixed"
         cls.carrier.purchase_label_picking_type = cls.picking_type
-        cls.supplier.purchase_delivery_carrier_id = cls.carrier
+        cls.supplier.purchase_label_carrier_id = cls.carrier
 
         cls.product = cls.env.ref("product.product_product_5")
         cls.order = cls.env["purchase.order"].create(
@@ -85,3 +90,8 @@ class TestDeliveryPurchaseLabel(SavepointCase):
         res = wiz.generate_email_for_composer(template.id, self.order.ids, ["subject"])
         self.assertTrue(res[self.order.id].get("attachment_ids"))
         self.assertEqual(res[self.order.id].get("attachment_ids"), pdf_label.ids)
+
+    def test_cancel_purchase_order(self):
+        self.order._generate_purchase_delivery_label()
+        self.order.button_cancel()
+        self.assertTrue(self.order.delivery_label_picking_id.state == "cancel")

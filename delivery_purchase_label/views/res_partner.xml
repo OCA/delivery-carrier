@@ -7,7 +7,7 @@
     <field name="inherit_id" ref="base.view_partner_form" />
     <field name="arch" type="xml">
       <group name="purchase" position="inside">
-        <field name="purchase_delivery_carrier_id" />
+        <field name="purchase_label_carrier_id" />
       </group>
     </field>
   </record>
