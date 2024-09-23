@@ -38,6 +38,13 @@ msgstr ""
 
 #. module: delivery_roulier
 #. odoo-python
+#: code:addons/delivery_roulier/models/stock_quant_package.py:0
+#, python-format
+msgid "No pack found for picking %s"
+msgstr ""
+
+#. module: delivery_roulier
+#. odoo-python
 #: code:addons/delivery_roulier/models/stock_picking.py:0
 #, python-format
 msgid "No packages found for this picking"
