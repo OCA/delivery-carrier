@@ -143,7 +143,9 @@ class PurchaseOrder(models.Model):
             "partner_id": self.dest_address_id.id,
             "user_id": False,
             "date": fields.Datetime.now(),
-            "origin": self.origin,
+            "origin": " - ".join(
+                [origin for origin in [self.origin, self.name] if origin]
+            ),
             "location_dest_id": self.partner_id.property_stock_supplier.id,
             "location_id": self.partner_id.property_stock_supplier.id,
             "company_id": self.company_id.id,
