@@ -9,7 +9,9 @@ class PurchaseOrder(models.Model):
     _inherit = "purchase.order"
 
     vendor_label_carrier_id = fields.Many2one(
-        "delivery.carrier", "Vendor Label Carrier"
+        "delivery.carrier",
+        "Vendor Label Carrier",
+        domain=[("purchase_label_picking_type", "!=", False)],
     )
     delivery_label_picking_id = fields.Many2one(
         "stock.picking",
