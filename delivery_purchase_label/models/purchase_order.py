@@ -8,6 +8,9 @@ from odoo.exceptions import UserError
 class PurchaseOrder(models.Model):
     _inherit = "purchase.order"
 
+    vendor_label_carrier_id = fields.Many2one(
+        "delivery.carrier", "Vendor Label Carrier"
+    )
     delivery_label_picking_id = fields.Many2one(
         "stock.picking",
         "Delivery Label Picking",
@@ -78,7 +81,7 @@ class PurchaseOrder(models.Model):
         if not self._is_valid_for_vendor_labels():
             return
         # Find the carrier that will be used
-        carrier = self.partner_id.purchase_label_carrier_id
+        carrier = self.vendor_label_carrier_id
         if not carrier.purchase_label_picking_type:
             return
         if not self.partner_id.property_stock_supplier.id:

@@ -19,15 +19,14 @@ class TestDeliveryPurchaseLabel(SavepointCase):
         cls.supplier = cls.env.ref("base.res_partner_1")
         cls.customer = cls.env.ref("base.res_partner_2")
         cls.carrier = cls.env.ref("delivery.delivery_carrier")
-        # cls.carrier.delivery_type = "fixed"
         cls.carrier.purchase_label_picking_type = cls.picking_type
-        cls.supplier.purchase_label_carrier_id = cls.carrier
 
         cls.product = cls.env.ref("product.product_product_5")
         cls.order = cls.env["purchase.order"].create(
             {
                 "partner_id": cls.supplier.id,
                 "dest_address_id": cls.customer.id,
+                "vendor_label_carrier_id": cls.carrier.id,
                 "order_line": [
                     (
                         0,

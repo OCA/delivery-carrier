@@ -11,6 +11,9 @@
                     attrs="{'invisible': [('delivery_label_picking_id','=',False)]}"
                 />
             </field>
+            <field name="picking_type_id" position="after">
+                <field name="vendor_label_carrier_id" />
+            </field>
         </field>
     </record>
 </odoo>
