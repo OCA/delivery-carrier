@@ -2,7 +2,6 @@ import logging
 
 import requests
 
-from odoo import api
 from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
@@ -133,12 +132,12 @@ class EasypostRequest:
         if selected_rate.carrier in ("USPS", "UPS"):
             end_shippers = self.client.EndShipper.all(page_size=1)["end_shippers"]
             if not end_shippers:
-                end_shipper = self.create_end_shipper(shipment.from_address)
+                end_shipper = self.create_end_shipper(shipment.from_address)["id"]
             else:
-                end_shipper = end_shippers[0]
+                end_shipper = end_shippers[0]["id"]
         try:
             bought_shipment = shipment.buy(
-                rate=selected_rate, end_shipper_id=end_shipper.get("id", None)
+                rate=selected_rate, end_shipper_id=end_shipper
             )
         except Exception as e:
             raise UserError(self._get_message_errors(e)) from e
@@ -225,25 +224,13 @@ class EasypostRequest:
 
     def _get_message_errors(self, e: Exception) -> str:
         if not hasattr(e, "errors"):
-            return f"Error: {e.message}\nError Body: {e.http_body}"
+            error_message = e.get("message")
+            if e.get("http_body", False):
+                error_message = f"Error: {error_message}\nError Body: {e.http_body}"
+            return error_message
         return "\n".join(
             [
                 f"Error: {err['message']}\nError Body: {err['http_body']}"
                 for err in e.errors
             ]
-        )
-
-    @api.model
-    def _log_logging(self, message, function_name, path):
-        self.env["ir.logging"].sudo().create(
-            {
-                "name": f"{self._name}",
-                "type": "costco",
-                "level": "DEBUG",
-                "dbname": self.env.cr.dbname,
-                "message": message,
-                "func": function_name,
-                "path": path,
-                "line": "0",
-            }
         )
