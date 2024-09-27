@@ -1,9 +1,15 @@
-import easypost
+import logging
+
 import requests
 
+from odoo import api
 from odoo.exceptions import UserError
 
-ENDSHIPPER_MESSAGE = "ProviderEndShipper address.name or address.company required"
+_logger = logging.getLogger(__name__)
+try:
+    import easypost
+except ImportError as err:
+    _logger.debug(err)
 
 
 class EasyPostShipment:
@@ -47,6 +53,9 @@ class EasypostRequest:
 
     def create_end_shipper(self, address):
         try:
+            if not address["street2"]:
+                address["street2"] = address["street1"]
+
             end_shipper = self.client.end_shipper.create(**address)
         except Exception as e:
             raise UserError(self._get_message_errors(e)) from e
@@ -77,6 +86,7 @@ class EasypostRequest:
                 parcel=shipment["parcel"],
                 options=shipment["options"],
                 reference=shipment["reference"],
+                carrier_accounts=shipment["carrier_accounts"],
             )
             created_shipments.append(_ship)
         return created_shipments
@@ -88,9 +98,12 @@ class EasypostRequest:
         parcel: dict,
         options=None,
         reference=None,
+        carrier_accounts=None,
     ):
         if options is None:
             options = {}
+        if carrier_accounts is None:
+            carrier_accounts = []
         try:
             created_shipment = self.client.Shipment.create(
                 from_address=from_address,
@@ -98,20 +111,35 @@ class EasypostRequest:
                 parcel=parcel,
                 options=options,
                 reference=reference,
+                carrier_accounts=carrier_accounts,
             )
         except Exception as e:
             raise UserError(self._get_message_errors(e)) from e
         return created_shipment
 
-    def buy_shipments(self, shipments):
+    def buy_shipments(self, shipments, carrier_services=None):
         bought_shipments = []
         for shipment in shipments:
-            bought_shipments.append(self.buy_shipment(shipment))
+            bought_shipments.append(self.buy_shipment(shipment, carrier_services))
         return bought_shipments
 
-    def buy_shipment(self, shipment):
+    @staticmethod
+    def _get_selected_rate(shipment, carrier_services=None):
+        return shipment.lowest_rate()
+
+    def buy_shipment(self, shipment, carrier_services=None):
+        selected_rate = self._get_selected_rate(shipment, carrier_services)
+        end_shipper = None
+        if selected_rate.carrier in ("USPS", "UPS"):
+            end_shippers = self.client.EndShipper.all(page_size=1)["end_shippers"]
+            if not end_shippers:
+                end_shipper = self.create_end_shipper(shipment.from_address)
+            else:
+                end_shipper = end_shippers[0]
         try:
-            bought_shipment = shipment.buy(rate=shipment.lowest_rate())
+            bought_shipment = shipment.buy(
+                rate=selected_rate, end_shipper_id=end_shipper.get("id", None)
+            )
         except Exception as e:
             raise UserError(self._get_message_errors(e)) from e
 
@@ -185,7 +213,37 @@ class EasypostRequest:
     def retrieve_shipment(self, shipment_id: str):
         return self.client.shipment.retrieve(id=shipment_id)
 
+    def retrieve_carrier_metadata(self):
+        return self.client.beta.CarrierMetadata.retrieve_carrier_metadata()
+
+    def retrieve_all_carrier_accounts(self):
+        try:
+            carrier_accounts = self.client.CarrierAccount.all()
+        except Exception as e:
+            raise UserError(self._get_message_errors(e)) from e
+        return carrier_accounts
+
     def _get_message_errors(self, e: Exception) -> str:
         if not hasattr(e, "errors"):
-            return e.message
-        return "\n".join([err["message"] for err in e.errors])
+            return f"Error: {e.message}\nError Body: {e.http_body}"
+        return "\n".join(
+            [
+                f"Error: {err['message']}\nError Body: {err['http_body']}"
+                for err in e.errors
+            ]
+        )
+
+    @api.model
+    def _log_logging(self, message, function_name, path):
+        self.env["ir.logging"].sudo().create(
+            {
+                "name": f"{self._name}",
+                "type": "costco",
+                "level": "DEBUG",
+                "dbname": self.env.cr.dbname,
+                "message": message,
+                "func": function_name,
+                "path": path,
+                "line": "0",
+            }
+        )

@@ -33,7 +33,7 @@ class DeliveryCarrier(models.Model):
     )
 
     easypost_oca_label_file_type = fields.Selection(
-        [("PNG", "PNG"), ("PDF", "PDF"), ("ZPL", "ZPL"), ("EPL2", "EPL2")],
+        [("PDF", "PDF"), ("ZPL", "ZPL"), ("EPL2", "EPL2")],
         string="Label Format",
         default="PDF",
     )
@@ -74,6 +74,9 @@ class DeliveryCarrier(models.Model):
             "price": price,
             "error_message": False,
             "warning_message": False,
+            "easypost_oca_carrier_name": lowest_rate.get("carrier", None),
+            "easypost_oca_shipment_id": lowest_rate.get("shipment_id", None),
+            "easypost_oca_rate_id": lowest_rate.get("id", None),
         }
 
     def easypost_oca_send_shipping(self, pickings) -> list:
@@ -89,11 +92,14 @@ class DeliveryCarrier(models.Model):
             }
             processed_shipments = []
             picking_shipments = self._prepare_shipments(picking)
+            carrier_services = self._get_easypost_carrier_services(picking)
+
             if len(picking_shipments) > 1:
                 # Create a batch with all shipments
                 shipments = ep_request.create_multiples_shipments(picking_shipments)
-
-                processed_shipments = ep_request.buy_shipments(shipments)
+                processed_shipments = ep_request.buy_shipments(
+                    shipments, carrier_services=carrier_services
+                )
                 price, tracking_code = self._get_shipment_info(
                     processed_shipments,
                     picking.sale_id,
@@ -115,8 +121,11 @@ class DeliveryCarrier(models.Model):
                     parcel=picking_shipments[0]["parcel"],
                     options=picking_shipments[0]["options"],
                     reference=picking_shipments[0]["reference"],
+                    carrier_accounts=picking_shipments[0]["carrier_accounts"],
                 )
-                bought_shipment = ep_request.buy_shipment(shipment)
+                bought_shipment = ep_request.buy_shipment(
+                    shipment, carrier_services=carrier_services
+                )
                 price, tracking_code = self._get_shipment_info(
                     [bought_shipment], picking.sale_id
                 )
@@ -149,6 +158,10 @@ class DeliveryCarrier(models.Model):
     def easypost_oca_cancel_shipment(self, pickings):
         raise UserError(_("You can't cancel Easypost shipping."))
 
+    @staticmethod
+    def _get_easypost_carrier_services(picking=None):
+        return False
+
     def _easypost_oca_convert_weight(self, weight):
         """Each API request for easypost required
         a weight in pounds.
@@ -178,7 +191,7 @@ class DeliveryCarrier(models.Model):
         recipient = self._prepare_address(picking.partner_id)
         shipper = self._prepare_address(picking.picking_type_id.warehouse_id.partner_id)
         options = self._prepare_options(self.easypost_oca_label_file_type)
-
+        carrier_accounts = self._prepare_carrier_account(picking)
         move_lines_with_package = picking.move_line_ids.filtered(
             lambda ml: ml.result_package_id
         )
@@ -216,13 +229,18 @@ class DeliveryCarrier(models.Model):
             parcel = self._prepare_parcel(
                 weight=self._easypost_oca_convert_weight(weight)
             )
+
             shipments.append(
                 {
                     "to_address": recipient,
                     "from_address": shipper,
                     "parcel": parcel,
-                    "options": options,
-                    "reference": f"odoo_picking_{picking.id}",
+                    "options": {
+                        **options,
+                        **{"print_custom_1": (picking.name if picking.name else "")},
+                    },
+                    "reference": picking.name if picking.name else "",
+                    "carrier_accounts": carrier_accounts,
                 }
             )
 
@@ -257,8 +275,14 @@ class DeliveryCarrier(models.Model):
                         "to_address": recipient,
                         "from_address": shipper,
                         "parcel": parcel,
-                        "options": options,
-                        "reference": f"odoo_picking_{picking.id}",
+                        "options": {
+                            **options,
+                            **{
+                                "print_custom_1": (package.name if package.name else "")
+                            },
+                        },
+                        "reference": package.name if package.name else "",
+                        "carrier_accounts": carrier_accounts,
                     }
                 )
                 # Prepare an easypost parcel with same info than package.
@@ -286,6 +310,9 @@ class DeliveryCarrier(models.Model):
             "label_date": datetime.now().isoformat(),
             "label_format": easypost_oca_label_file_type,
         }
+
+    def _prepare_carrier_account(self, picking):
+        return []
 
     def _prepare_address(self, addr_obj):
         addr_fields = {

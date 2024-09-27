@@ -1,6 +1,5 @@
 # generated from manifests external_dependencies
 dicttoxml
-easypost
 easypost==7.15.0
 PyPDF2
 roulier
