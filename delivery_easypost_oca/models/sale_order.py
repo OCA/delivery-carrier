@@ -10,7 +10,15 @@ class SaleOrder(models.Model):
 
     def _create_delivery_line(self, carrier, price_unit):
         sol = super()._create_delivery_line(carrier=carrier, price_unit=price_unit)
-        self.write(
+        if self.env.context.get("easypost_oca_carrier_name", False):
+            carrier_name = (
+                f" - {self.easypost_oca_carrier_name}"
+                if self.easypost_oca_carrier_name
+                else ""
+            )
+            sol.name = f"{sol.name}{carrier_name}"
+
+        self.with_context(auto_refresh_delivery=True).write(
             {
                 "easypost_oca_rate_id": self.env.context.get(
                     "easypost_oca_rate_id", False
@@ -23,9 +31,4 @@ class SaleOrder(models.Model):
                 ),
             }
         )
-        carrier_name = (
-            f" - {self.easypost_oca_carrier_name}"
-            if self.easypost_oca_carrier_name
-            else ""
-        )
-        sol.write({"name": f"{sol.name}{carrier_name}"})
+        return sol
