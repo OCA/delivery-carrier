@@ -139,8 +139,8 @@ class EasypostRequest:
             bought_shipment = shipment.buy(
                 rate=selected_rate, end_shipper_id=end_shipper
             )
-        except Exception as e:
-            raise UserError(self._get_message_errors(e)) from e
+        except easypost.Error as error:
+            raise UserError(self._get_message_errors(error)) from error
 
         return EasyPostShipment(
             shipment_id=bought_shipment.id,
@@ -222,12 +222,9 @@ class EasypostRequest:
             raise UserError(self._get_message_errors(e)) from e
         return carrier_accounts
 
-    def _get_message_errors(self, e: Exception) -> str:
+    def _get_message_errors(self, e: easypost.Error) -> str:
         if not hasattr(e, "errors"):
-            error_message = e.get("message")
-            if e.get("http_body", False):
-                error_message = f"Error: {error_message}\nError Body: {e.http_body}"
-            return error_message
+            return getattr(e, "message", str(e))
         return "\n".join(
             [
                 f"Error: {err['message']}\nError Body: {err['http_body']}"
