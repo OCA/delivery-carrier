@@ -194,6 +194,16 @@ msgid "Deliverea Error. Uncontrolled error, it is necessary to check the log"
 msgstr ""
 
 #. module: delivery_deliverea
+#. odoo-python
+#: code:addons/delivery_deliverea/models/delivery_carrier.py:0
+#, python-format
+msgid ""
+"Deliverea Error:\n"
+"\n"
+"%s"
+msgstr ""
+
+#. module: delivery_deliverea
 #: model:ir.model.fields,field_description:delivery_deliverea.field_carrier_deliverea_service__deliverea_parameters
 msgid "Deliverea Parameters"
 msgstr ""
@@ -407,6 +417,13 @@ msgstr ""
 #. module: delivery_deliverea
 #: model:ir.model.fields,field_description:delivery_deliverea.field_delivery_carrier__delivery_type
 msgid "Provider"
+msgstr ""
+
+#. module: delivery_deliverea
+#. odoo-python
+#: code:addons/delivery_deliverea/models/delivery_carrier.py:0
+#, python-format
+msgid "References missing in response.\n"
 msgstr ""
 
 #. module: delivery_deliverea
