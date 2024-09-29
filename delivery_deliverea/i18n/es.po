@@ -196,6 +196,13 @@ msgstr "Error de Deliverea"
 
 #. module: delivery_deliverea
 #. odoo-python
+#: code:addons/delivery_deliverea/models/deliverea_request.py:0
+#, python-format
+msgid "Deliverea Error. Uncontrolled error, it is necessary to check the log"
+msgstr "Error de Deliverea. Error no controlado, es necesario comprobar el log"
+
+#. module: delivery_deliverea
+#. odoo-python
 #: code:addons/delivery_deliverea/models/delivery_carrier.py:0
 #, python-format
 msgid ""
@@ -206,13 +213,6 @@ msgstr ""
 "Error de Deliverea:\n"
 "\n"
 "%s"
-
-#. module: delivery_deliverea
-#. odoo-python
-#: code:addons/delivery_deliverea/models/deliverea_request.py:0
-#, python-format
-msgid "Deliverea Error. Uncontrolled error, it is necessary to check the log"
-msgstr "Error de Deliverea. Error no controlado, es necesario comprobar el log"
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,field_description:delivery_deliverea.field_carrier_deliverea_service__deliverea_parameters
@@ -436,6 +436,13 @@ msgid "Provider"
 msgstr "Proveedor"
 
 #. module: delivery_deliverea
+#. odoo-python
+#: code:addons/delivery_deliverea/models/delivery_carrier.py:0
+#, python-format
+msgid "References missing in response.\n"
+msgstr "Faltan referencias en la respuesta.\n"
+
+#. module: delivery_deliverea
 #: model:ir.model.fields.selection,name:delivery_deliverea.selection__carrier_deliverea_parameter__type__required
 msgid "Required"
 msgstr "Requerido"
@@ -555,13 +562,6 @@ msgstr "Uuid"
 #: model:ir.model.fields.selection,name:delivery_deliverea.selection__deliverea_state__delivery_state__warehouse_delivered
 msgid "Warehouse delivered"
 msgstr "Entregado por almacén"
-
-#. module: delivery_deliverea
-#. odoo-python
-#: code:addons/delivery_deliverea/models/delivery_carrier.py:0
-#, python-format
-msgid "References missing in response.\n"
-msgstr "Faltan referencias en la respuesta.\n"
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,help:delivery_deliverea.field_delivery_carrier__deliverea_saturday_delivery
