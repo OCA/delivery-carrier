@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 14.0\n"
+"Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -81,7 +81,7 @@ msgid "Booking Type"
 msgstr ""
 
 #. module: delivery_schenker
-#: model:ir.model.fields,field_description:delivery_schenker.field_product_packaging__package_carrier_type
+#: model:ir.model.fields,field_description:delivery_schenker.field_stock_package_type__package_carrier_type
 msgid "Carrier"
 msgstr ""
 
@@ -197,7 +197,7 @@ msgstr ""
 
 #. module: delivery_schenker
 #: model:ir.model.fields.selection,name:delivery_schenker.selection__delivery_carrier__delivery_type__schenker
-#: model:ir.model.fields.selection,name:delivery_schenker.selection__product_packaging__package_carrier_type__schenker
+#: model:ir.model.fields.selection,name:delivery_schenker.selection__stock_package_type__package_carrier_type__schenker
 msgid "DB Schenker"
 msgstr ""
 
@@ -242,12 +242,12 @@ msgid "Default Incoterm"
 msgstr ""
 
 #. module: delivery_schenker
-#: model:ir.model.fields,field_description:delivery_schenker.field_delivery_carrier__schenker_default_packaging_id
+#: model:ir.model.fields,field_description:delivery_schenker.field_delivery_carrier__schenker_default_package_type_id
 msgid "Default Package Type"
 msgstr ""
 
 #. module: delivery_schenker
-#: model:ir.model.fields,help:delivery_schenker.field_product_packaging__schenker_stackable
+#: model:ir.model.fields,help:delivery_schenker.field_stock_package_type__schenker_stackable
 msgid "Define if the package is stackable by default"
 msgstr ""
 
@@ -295,13 +295,6 @@ msgid ""
 msgstr ""
 
 #. module: delivery_schenker
-#: model:ir.model.fields,field_description:delivery_schenker.field_delivery_carrier__display_name
-#: model:ir.model.fields,field_description:delivery_schenker.field_product_packaging__display_name
-#: model:ir.model.fields,field_description:delivery_schenker.field_stock_picking__display_name
-msgid "Display Name"
-msgstr ""
-
-#. module: delivery_schenker
 #: model:ir.model.fields.selection,name:delivery_schenker.selection__delivery_carrier__schenker_service_type__d2a
 msgid "Door-to-airport"
 msgstr ""
@@ -317,13 +310,14 @@ msgid "Door-to-port"
 msgstr ""
 
 #. module: delivery_schenker
+#. odoo-python
 #: code:addons/delivery_schenker/models/schenker_request.py:0
 #, python-format
 msgid ""
 "Error in the request to the Schenker API. This is the thrown message:\n"
 "\n"
-"[%s]\n"
-"%s - %s"
+"[%(error_text)s]\n"
+"%(error_code)s - %(error_message)s"
 msgstr ""
 
 #. module: delivery_schenker
@@ -362,17 +356,10 @@ msgid "Home Delivery"
 msgstr ""
 
 #. module: delivery_schenker
-#: model:ir.model.fields,field_description:delivery_schenker.field_delivery_carrier__id
-#: model:ir.model.fields,field_description:delivery_schenker.field_product_packaging__id
-#: model:ir.model.fields,field_description:delivery_schenker.field_stock_picking__id
-msgid "ID"
-msgstr ""
-
-#. module: delivery_schenker
-#: model:ir.model.fields,help:delivery_schenker.field_delivery_carrier__schenker_default_packaging_id
+#: model:ir.model.fields,help:delivery_schenker.field_delivery_carrier__schenker_default_package_type_id
 msgid ""
-"If not delivery package or the package doesn't have defined the packagingit "
-"will default to this type"
+"If not delivery package or the package doesn't have defined the packaging it"
+" will default to this type"
 msgstr ""
 
 #. module: delivery_schenker
@@ -408,13 +395,6 @@ msgid ""
 msgstr ""
 
 #. module: delivery_schenker
-#: model:ir.model.fields,field_description:delivery_schenker.field_delivery_carrier____last_update
-#: model:ir.model.fields,field_description:delivery_schenker.field_product_packaging____last_update
-#: model:ir.model.fields,field_description:delivery_schenker.field_stock_picking____last_update
-msgid "Last Modified on"
-msgstr ""
-
-#. module: delivery_schenker
 #: model:ir.model.fields.selection,name:delivery_schenker.selection__delivery_carrier__schenker_measure_unit__loading_meters
 msgid "Loading meters"
 msgstr ""
@@ -440,12 +420,14 @@ msgid "Ocean LCL"
 msgstr ""
 
 #. module: delivery_schenker
+#. odoo-python
 #: code:addons/delivery_schenker/models/delivery_carrier.py:0
 #, python-format
 msgid "Only land shipping is currently supported"
 msgstr ""
 
 #. module: delivery_schenker
+#. odoo-python
 #: code:addons/delivery_schenker/models/delivery_carrier.py:0
 #, python-format
 msgid "Only volume is currently supported"
@@ -482,11 +464,6 @@ msgid "Port-to-door"
 msgstr ""
 
 #. module: delivery_schenker
-#: model:ir.model,name:delivery_schenker.model_product_packaging
-msgid "Product Packaging"
-msgstr ""
-
-#. module: delivery_schenker
 #: model:ir.model.fields,field_description:delivery_schenker.field_delivery_carrier__delivery_type
 msgid "Provider"
 msgstr ""
@@ -497,6 +474,7 @@ msgid "SCHENKERsystem-plus"
 msgstr ""
 
 #. module: delivery_schenker
+#. odoo-python
 #: code:addons/delivery_schenker/models/delivery_carrier.py:0
 #: code:addons/delivery_schenker/models/delivery_carrier.py:0
 #, python-format
@@ -522,12 +500,14 @@ msgid "Schenker Label"
 msgstr ""
 
 #. module: delivery_schenker
+#. odoo-python
 #: code:addons/delivery_schenker/models/delivery_carrier.py:0
 #, python-format
 msgid "Schenker Shipping barcode document"
 msgstr ""
 
 #. module: delivery_schenker
+#. odoo-python
 #: code:addons/delivery_schenker/models/stock_picking.py:0
 #, python-format
 msgid "Schenker label for %s"
@@ -549,8 +529,13 @@ msgid "Shipping Methods"
 msgstr ""
 
 #. module: delivery_schenker
-#: model:ir.model.fields,field_description:delivery_schenker.field_product_packaging__schenker_stackable
+#: model:ir.model.fields,field_description:delivery_schenker.field_stock_package_type__schenker_stackable
 msgid "Stackable"
+msgstr ""
+
+#. module: delivery_schenker
+#: model:ir.model,name:delivery_schenker.model_stock_package_type
+msgid "Stock package type"
 msgstr ""
 
 #. module: delivery_schenker
@@ -596,58 +581,4 @@ msgstr ""
 #. module: delivery_schenker
 #: model:ir.model.fields.selection,name:delivery_schenker.selection__delivery_carrier__schenker_service_land__auc8
 msgid "austroexpress PUNKT 8"
-msgstr ""
-
-#. module: delivery_schenker
-#: model:product.packaging,weight_uom_name:delivery_schenker.schenker_packaging_01
-#: model:product.packaging,weight_uom_name:delivery_schenker.schenker_packaging_02
-#: model:product.packaging,weight_uom_name:delivery_schenker.schenker_packaging_03
-#: model:product.packaging,weight_uom_name:delivery_schenker.schenker_packaging_04
-#: model:product.packaging,weight_uom_name:delivery_schenker.schenker_packaging_05
-#: model:product.packaging,weight_uom_name:delivery_schenker.schenker_packaging_06
-#: model:product.packaging,weight_uom_name:delivery_schenker.schenker_packaging_07
-#: model:product.packaging,weight_uom_name:delivery_schenker.schenker_packaging_08
-#: model:product.packaging,weight_uom_name:delivery_schenker.schenker_packaging_09
-#: model:product.packaging,weight_uom_name:delivery_schenker.schenker_packaging_10
-#: model:product.packaging,weight_uom_name:delivery_schenker.schenker_packaging_11
-#: model:product.packaging,weight_uom_name:delivery_schenker.schenker_packaging_12
-#: model:product.packaging,weight_uom_name:delivery_schenker.schenker_packaging_13
-#: model:product.packaging,weight_uom_name:delivery_schenker.schenker_packaging_14
-#: model:product.packaging,weight_uom_name:delivery_schenker.schenker_packaging_15
-#: model:product.packaging,weight_uom_name:delivery_schenker.schenker_packaging_16
-#: model:product.packaging,weight_uom_name:delivery_schenker.schenker_packaging_17
-#: model:product.packaging,weight_uom_name:delivery_schenker.schenker_packaging_18
-#: model:product.packaging,weight_uom_name:delivery_schenker.schenker_packaging_19
-#: model:product.packaging,weight_uom_name:delivery_schenker.schenker_packaging_20
-#: model:product.packaging,weight_uom_name:delivery_schenker.schenker_packaging_21
-#: model:product.packaging,weight_uom_name:delivery_schenker.schenker_packaging_22
-#: model:product.packaging,weight_uom_name:delivery_schenker.schenker_packaging_23
-msgid "kg"
-msgstr ""
-
-#. module: delivery_schenker
-#: model:product.packaging,volume_uom_name:delivery_schenker.schenker_packaging_01
-#: model:product.packaging,volume_uom_name:delivery_schenker.schenker_packaging_02
-#: model:product.packaging,volume_uom_name:delivery_schenker.schenker_packaging_03
-#: model:product.packaging,volume_uom_name:delivery_schenker.schenker_packaging_04
-#: model:product.packaging,volume_uom_name:delivery_schenker.schenker_packaging_05
-#: model:product.packaging,volume_uom_name:delivery_schenker.schenker_packaging_06
-#: model:product.packaging,volume_uom_name:delivery_schenker.schenker_packaging_07
-#: model:product.packaging,volume_uom_name:delivery_schenker.schenker_packaging_08
-#: model:product.packaging,volume_uom_name:delivery_schenker.schenker_packaging_09
-#: model:product.packaging,volume_uom_name:delivery_schenker.schenker_packaging_10
-#: model:product.packaging,volume_uom_name:delivery_schenker.schenker_packaging_11
-#: model:product.packaging,volume_uom_name:delivery_schenker.schenker_packaging_12
-#: model:product.packaging,volume_uom_name:delivery_schenker.schenker_packaging_13
-#: model:product.packaging,volume_uom_name:delivery_schenker.schenker_packaging_14
-#: model:product.packaging,volume_uom_name:delivery_schenker.schenker_packaging_15
-#: model:product.packaging,volume_uom_name:delivery_schenker.schenker_packaging_16
-#: model:product.packaging,volume_uom_name:delivery_schenker.schenker_packaging_17
-#: model:product.packaging,volume_uom_name:delivery_schenker.schenker_packaging_18
-#: model:product.packaging,volume_uom_name:delivery_schenker.schenker_packaging_19
-#: model:product.packaging,volume_uom_name:delivery_schenker.schenker_packaging_20
-#: model:product.packaging,volume_uom_name:delivery_schenker.schenker_packaging_21
-#: model:product.packaging,volume_uom_name:delivery_schenker.schenker_packaging_22
-#: model:product.packaging,volume_uom_name:delivery_schenker.schenker_packaging_23
-msgid "m³"
 msgstr ""
