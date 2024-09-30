@@ -412,6 +412,7 @@ class DeliveryCarrier(models.Model):
                 "freeLabelText": hasattr(self, carrier.deliverea_note_selection_id.name)
                 and getattr(self, carrier.deliverea_note_selection_id.name)
                 or "",
+                "bulky": self.check_picking_sale_order(picking),
             },
         }
         self._delete_empty_values(payload)
@@ -558,3 +559,10 @@ class DeliveryCarrier(models.Model):
             picking.date_delivered = datetime.strftime(
                 datetime.now(), DEFAULT_SERVER_DATETIME_FORMAT
             )
+
+    def _get_bulky_deliverea(self, picking):
+        bulky = []
+        if picking.sale_id:
+            bulky.append({"code": picking.sale_id.incoterm.code})
+        else:
+            bulky.append({"code": self.env.company.incoterm_id.code})
