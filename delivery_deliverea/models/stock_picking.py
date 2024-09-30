@@ -19,9 +19,16 @@ class StockPicking(models.Model):
             return
         return self.carrier_id.deliverea_get_label(self)
 
+    def is_deliverea_pickup(self):
+        self.ensure_one()
+        return (
+            self.carrier_id.delivery_type == "deliverea"
+            and self.carrier_id.deliverea_return_label
+        )
+
     def send_to_shipper(self):
         self.ensure_one()
-        if self.delivery_type == "deliverea":
+        if self.is_deliverea_pickup():
             self.carrier_id.deliverea_return_shipping(self)
             self.carrier_id.deliverea_get_return_label(self)
         return super().send_to_shipper()
