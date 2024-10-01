@@ -563,10 +563,13 @@ class DeliveryCarrier(models.Model):
     def _get_bulky_deliverea(self, picking, payload):
         # here we can add the zip code and the warehouse
         bulky = {"incoterm": {"code": ""}}
-        if picking.sale_id:
-            if picking.sale_id.incoterm.code:
-                bulky["incoterm"]["code"] = picking.sale_id.incoterm.code
-        elif self.env.company.incoterm_id.code:
-            bulky["incoterm"]["code"] = self.env.company.incoterm_id.code
-        payload["bulky"] = bulky
+        incoterm_code = (
+            picking.sale_id.incoterm.code
+            if picking.sale_id and picking.sale_id.incoterm
+            else self.env.company.incoterm_id.code
+        )
+
+        if incoterm_code:
+            bulky["incoterm"]["code"] = incoterm_code
+            payload["bulky"] = bulky
         return payload
