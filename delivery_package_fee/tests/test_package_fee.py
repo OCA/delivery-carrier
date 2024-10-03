@@ -388,7 +388,7 @@ class TestPackageFee(TransactionCase):
         self.assertEqual(picking.state, "assigned")
         picking.move_line_ids[0].qty_done = 10.0
         picking.move_line_ids[1].qty_done = 10.0
-        picking.with_context(set_default_package=False)._action_done()
+        picking._action_done()
         self.assertEqual(picking.state, "done")
 
         self.assertRecordValues(
