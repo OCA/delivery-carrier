@@ -94,7 +94,7 @@ class DeliveryCarrier(models.Model):
             return {
                 "success": False,
                 "price": 0.0,
-                "error_message": e.name,
+                "error_message": e.args[0],
                 "warning_message": False,
             }
         if order.company_id.currency_id.id != order.currency_id.id:
@@ -144,7 +144,7 @@ class DeliveryCarrier(models.Model):
         order = order.sudo()
         weight = volume = quantity = 0
         for line in order.order_line.filtered(
-            lambda l: l.state != "cancel" and bool(l.product_id)
+            lambda ln: ln.state != "cancel" and bool(ln.product_id)
         ):
             qty = line.product_uom._compute_quantity(
                 line.product_uom_qty, line.product_id.uom_id

@@ -1,5 +1,7 @@
 # Copyright 2021 Tecnativa - Ernesto Tejeda
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+from markupsafe import Markup
+
 from odoo import _, models
 
 
@@ -29,13 +31,18 @@ class StockPicking(models.Model):
         if res["tracking_number"]:
             self.carrier_tracking_ref = res["tracking_number"]
         order_currency = self.purchase_id.currency_id or self.company_id.currency_id
-        msg = _(
-            "Shipment sent to carrier %(carrier_name)s for shipping with tracking "
-            "number %(tracking_ref)s<br/>Cost: %(carrier_price)s %(currency_name)s"
-        ) % (
-            {
+        msg = (
+            _(
+                "Shipment sent to carrier %(carrier_name)s for shipping with \
+                tracking number %(tracking_ref)s"
+            )
+            % {
                 "carrier_name": self.carrier_id.name,
                 "tracking_ref": self.carrier_tracking_ref,
+            }
+            + Markup("<br/>")
+            + _("Cost: %(carrier_price)s %(currency_name)s")
+            % {
                 "carrier_price": "%.2f" % self.carrier_price,
                 "currency_name": order_currency.name,
             }

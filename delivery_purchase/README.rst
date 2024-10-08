@@ -89,6 +89,10 @@ Contributors
    -  Vicent Cubells
    -  Carolina Fernandez
 
+-  `Sodexis <https://www.sodexis.com>`__:
+
+   -  Sandeep J
+
 Maintainers
 -----------
 
