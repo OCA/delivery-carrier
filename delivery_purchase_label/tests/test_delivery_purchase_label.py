@@ -63,11 +63,15 @@ class TestDeliveryPurchaseLabel(SavepointCase):
         # Does not change the picking label
         self.order._generate_purchase_delivery_label()
         self.assertEqual(label_picking, self.order.delivery_label_picking_id)
+        self.assertEqual(label_picking.delivery_label_purchase_id, self.order)
         # Changing the PO
         self.order.order_line[0].product_qty = 10
         self.order._generate_purchase_delivery_label()
         self.assertTrue(label_picking.state == "cancel")
         self.assertTrue(label_picking != self.order.delivery_label_picking_id)
+        self.assertEqual(
+            self.order.delivery_label_picking_id.delivery_label_purchase_id, self.order
+        )
 
     def test_transfer_label_not_generated(self):
         self.carrier.purchase_label_picking_type = False

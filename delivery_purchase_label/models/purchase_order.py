@@ -1,4 +1,5 @@
 # Copyright 2024 Camptocamp SA
+# Copyright 2024 Michael Tietz (MT Software) <mtietz@mt-software.de>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
 from odoo import SUPERUSER_ID, _, api, fields, models
@@ -150,4 +151,5 @@ class PurchaseOrder(models.Model):
             "location_id": self.partner_id.property_stock_supplier.id,
             "company_id": self.company_id.id,
             "carrier_id": carrier.id,
+            "delivery_label_purchase_id": self.id,
         }
