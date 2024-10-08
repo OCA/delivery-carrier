@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+     <record id="view_chronopost_carrier_account_form" model="ir.ui.view">
+        <field name="model">carrier.account</field>
+        <field
+            name="inherit_id"
+            ref="delivery_carrier_account.carrier_account_view_form"
+        />
+        <field name="arch" type="xml">
+            <field name="account" position="after">
+                <field
+                    name="chronopost_fr_subaccount"
+                    invisible="delivery_type != 'chronopost_fr'"
+                />
+            </field>
+            <field name="password" position="after">
+                <field
+                    name="chronopost_fr_file_format"
+                    invisible="delivery_type != 'chronopost_fr'"
+                    required="name != 'chronopost'"
+                />
+            </field>
+        </field>
+    </record>
+
+</odoo>
