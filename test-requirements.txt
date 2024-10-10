@@ -1,3 +1,5 @@
 odoo-test-helper
 vcrpy
 vcrpy-unittest
+odoo-addon-stock-package-type-category @ git+https://github.com/OCA/stock-logistics-warehouse@refs/pull/2091/head#subdirectory=setup/stock_package_type_category
+odoo-addon-stock-picking-delivery-package-type-domain @ git+https://github.com/OCA/delivery-carrier@refs/pull/846/head#subdirectory=setup/stock_picking_delivery_package_type_domain
