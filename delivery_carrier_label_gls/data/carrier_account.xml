@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+  <record id="carrier_account_gls" model="carrier.account">
+    <field name="name">GLS</field>
+    <field name="delivery_type">gls</field>
+    <field name="account">CHANGE ME</field>
+    <field name="password">CHANGE ME</field>
+  </record>
+    <record forcecreate="True" id="carrier_account_id_gls" model="ir.property">
+        <field name="name">carrier_account_id</field>
+        <field
+            name="fields_id"
+            search="[('model','=','delivery.carrier'),('name','=','carrier_account_id')]"
+        />
+        <field name="value" eval="'carrier.account,'+str(ref('carrier_account_gls'))" />
+    </record>
+</odoo>
