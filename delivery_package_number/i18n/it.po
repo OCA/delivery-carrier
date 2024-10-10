@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-08-22 10:06+0000\n"
+"PO-Revision-Date: 2024-10-10 13:06+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -122,7 +122,7 @@ msgstr "Preleva"
 #. module: delivery_package_number
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_line_wizard__picking_id
 msgid "Picking"
-msgstr ""
+msgstr "Prelievo"
 
 #. module: delivery_package_number
 #: model:ir.model,name:delivery_package_number.model_stock_picking_type
@@ -155,12 +155,12 @@ msgstr "Imposta il numero di colli per questo prelievo(i)"
 #. module: delivery_package_number
 #: model:ir.model,name:delivery_package_number.model_stock_number_package_validate_line_wizard
 msgid "Stock Number Package Lines Wizard"
-msgstr ""
+msgstr "Procedura guidata numeri righe colli magazzino"
 
 #. module: delivery_package_number
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_wizard__stock_number_package_validation_line_ids
 msgid "Stock Number Package Validation Line"
-msgstr ""
+msgstr "Riga validazione numero collo magazzino"
 
 #. module: delivery_package_number
 #: model:ir.model,name:delivery_package_number.model_stock_picking
@@ -170,7 +170,7 @@ msgstr "Trasferimento"
 #. module: delivery_package_number
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_line_wizard__wiz_id
 msgid "Wiz"
-msgstr ""
+msgstr "Procedura guidata"
 
 #. module: delivery_package_number
 #: model:ir.model,name:delivery_package_number.model_stock_number_package_validate_wizard
