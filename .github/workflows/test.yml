@@ -37,9 +37,18 @@ jobs:
         include:
           - container: ghcr.io/oca/oca-ci/py3.6-odoo14.0:latest
             name: test with Odoo
+            exclude: "base_delivery_carrier_label,delivery_carrier_label_batch,delivery_roulier,delivery_roulier_option,delivery_roulier_laposte_fr,delivery_roulier_chronopost_fr,carrier_account_environment"
           - container: ghcr.io/oca/oca-ci/py3.6-ocb14.0:latest
             name: test with OCB
             makepot: "true"
+            exclude: "base_delivery_carrier_label,delivery_carrier_label_batch,delivery_roulier,delivery_roulier_option,delivery_roulier_laposte_fr,delivery_roulier_chronopost_fr,carrier_account_environment"
+          - container: ghcr.io/oca/oca-ci/py3.6-odoo14.0:latest
+            name: test with Odoo
+            include: "base_delivery_carrier_label,delivery_carrier_label_batch,delivery_roulier,delivery_roulier_option,delivery_roulier_laposte_fr,delivery_roulier_chronopost_fr,carrier_account_environment"
+          - container: ghcr.io/oca/oca-ci/py3.6-ocb14.0:latest
+            name: test with OCB
+            makepot: "true"
+            include: "base_delivery_carrier_label,delivery_carrier_label_batch,delivery_roulier,delivery_roulier_option,delivery_roulier_laposte_fr,delivery_roulier_chronopost_fr,carrier_account_environment"
     services:
       postgres:
         image: postgres:9.6
@@ -49,6 +58,9 @@ jobs:
           POSTGRES_DB: odoo
         ports:
           - 5432:5432
+    env:
+      INCLUDE: "${{ matrix.include }}"
+      EXCLUDE: "${{ matrix.exclude }}"
     steps:
       - uses: actions/checkout@v3
         with:
