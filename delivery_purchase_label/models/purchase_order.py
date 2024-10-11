@@ -36,7 +36,6 @@ class PurchaseOrder(models.Model):
         return super().action_rfq_send()
 
     def button_cancel(self):
-        self.ensure_one()
         self._cancel_purchase_delivery_label_picking()
         return super().button_cancel()
 
@@ -129,14 +128,14 @@ class PurchaseOrder(models.Model):
         return picking
 
     def _cancel_purchase_delivery_label_picking(self):
-        self.ensure_one()
-        picking = self.delivery_label_picking_id
-        picking.cancel_shipment()
+        delivery_label_pickings = self.delivery_label_picking_id
+        for picking in delivery_label_pickings:
+            picking.cancel_shipment()
         # Using wirte to by pass internal checks, not a problem
         # because this is a fake move (Vendor to Vendor)
-        picking.move_line_ids.write({"state": "cancel"})
-        picking.move_lines.write({"state": "cancel"})
-        picking.write({"state": "cancel"})
+        delivery_label_pickings.move_line_ids.write({"state": "cancel"})
+        delivery_label_pickings.move_lines.write({"state": "cancel"})
+        delivery_label_pickings.write({"state": "cancel"})
 
     def _get_purchase_delivery_label_picking_value(self, carrier):
         return {
