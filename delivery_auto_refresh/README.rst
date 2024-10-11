@@ -37,6 +37,9 @@ This module automates the delivery price handling for the following cases:
 * If you deliver a different quantity than the ordered one, the delivery price
   is adjusted on the linked SO when the picking is transferred.
 
+Part of this module is a backport from Odoo SA and as such, it is not included in the OCA CLA.
+That means we do not have a copy of the copyright on it like all other OCA modules.
+
 **Table of contents**
 
 .. contents::
@@ -45,25 +48,17 @@ This module automates the delivery price handling for the following cases:
 Configuration
 =============
 
-* Activate developer mode.
-* Go to *Settings > Technical > Parameters > System Parameters*.
-* Locate the setting with key "delivery_auto_refresh.set_default_carrier"
-  or create a new one if not exists.
-  Put a non Falsy value (1, True...) if you want to have default carrier computed
-  automatically.
-* Locate the setting with key "delivery_auto_refresh.auto_add_delivery_line"
-  or create a new one if not exists.
-  Put a non Falsy value (1, True...) if you want to add automatically the
-  delivery line on save.
-* Locate the setting with key "delivery_auto_refresh.refresh_after_picking"
-  or create a new one if not exists.
-  Put a non Falsy value (1, True...) if you want to refresh delivery price
-  after transferring.
-* Locate the setting with key "delivery_auto_refresh.auto_void_delivery_line"
-  or create a new one if it doesn't exists.
-  Put a non Falsy value (1, True...) if you want to void the delivery line
-  values (price, units ordered, units delivered) in the sale order when the
-  delivered picking is returned to refund prior to be invoiced.
+Go to *Settings > Sales > Shipping*:
+
+* Enable "Set default shipping method automalically" if you want to add
+  automatically the carrier on the sales quotation creation.
+* Enable "Refresh shipping cost line automatically" if you want to add automatically the
+  delivery line on save and refresh the cost. This will also set the shipping method.
+* Enable "Refresh After Picking Automatically" if you want to refresh delivery
+  price after delivering based on what has been delivered.
+* Enable "Void delivery lines automatically" if you want to void the delivery
+  line values (price, units ordered, units delivered) in the sale order when
+  the delivery is returned to refund prior to be invoiced.
 
 Known issues / Roadmap
 ======================
@@ -71,13 +66,8 @@ Known issues / Roadmap
 * After confirming the sales order, the price of the delivery line (if exists)
   will be only updated after the picking is transferred, but not when you
   might modify the order lines.
-* There can be some duplicate delivery unset/set for assuring that the refresh
-  is done on all cases.
 * On multiple deliveries, second and successive pickings update the delivery
   price, but you can't invoice the new delivery price.
-* This is only working from user interface, as there's no way of making
-  compatible the auto-refresh intercepting create/write methods from sale order
-  lines.
 
 Bug Tracker
 ===========
@@ -108,6 +98,13 @@ Contributors
 * Camptocamp <https://www.camptocamp.com>:
   * Maksym Yankin
   * Simone Orsi
+
+* Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
+
+* Odoo SA <odoo@odoo.com>
+
+* Ooops404 <https://www.ooops404.com/>:
+  * Eduard Brahas <eduardbrhas@outlook.it>
 
 Maintainers
 ~~~~~~~~~~~

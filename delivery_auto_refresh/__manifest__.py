@@ -13,5 +13,9 @@
     "application": False,
     "installable": True,
     "depends": ["delivery"],
-    "data": ["data/ir_config_parameter.xml", "views/sale_order_views.xml"],
+    "data": [
+        "data/ir_config_parameter.xml",
+        "views/sale_order_views.xml",
+        "views/res_config_settings_views.xml",
+    ],
 }
