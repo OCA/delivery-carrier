@@ -21,10 +21,40 @@ class DeliveryCarrier(models.Model):
         ondelete="cascade",
     )
     destination_type = fields.Selection(
-        selection=[("one", "One destination"), ("multi", "Multiple destinations")],
-        default="one",
-        required=True,
+        selection=[
+            ("one", "One destination"),
+            ("multi", "Multiple destinations"),
+        ],
+        compute="_compute_destination_type",
+        inverse="_inverse_destination_type",
+        store=True,
     )
+    delivery_type = fields.Selection(
+        selection_add=[("base_on_destination", "Based on Destination")],
+        ondelete={"base_on_destination": "set default"},
+    )
+
+    @api.depends("delivery_type")
+    def _compute_destination_type(self):
+        for carrier in self:
+            if carrier.delivery_type == "base_on_destination":
+                carrier.destination_type = "multi"
+            else:
+                carrier.destination_type = "one"
+
+    def _inverse_destination_type(self):
+        for carrier in self:
+            # Switch to multi
+            if carrier.destination_type == "multi":
+                carrier.delivery_type = "base_on_destination"
+            # Switch away from multi -> we know that destination_type is
+            # non-multi. However, in a hypothetical scenario where we switch
+            # from one non-multi destination_type to another, we don't want to
+            # forcibly reset delivery_type to 'fixed' each time, so we check
+            # whether delivery_type is invalid for a non-multi destination_type
+            # before we forcibly reset to 'fixed'.
+            elif carrier.delivery_type == "base_on_destination":
+                carrier.delivery_type = "fixed"
 
     @api.onchange("destination_type", "child_ids")
     def _onchange_destination_type(self):
