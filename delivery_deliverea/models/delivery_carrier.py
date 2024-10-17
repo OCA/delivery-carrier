@@ -458,15 +458,16 @@ class DeliveryCarrier(models.Model):
     def deliverea_return_shipping(self, pickings):
         deliverea_request = DelivereaRequest(self)
         for picking in pickings:
-            vals = self._prepare_deliverea_order(picking)
-            response = deliverea_request.create_return(vals)
-            self._deliverea_check_response(response)
-            picking.write(
-                {
-                    "carrier_tracking_ref": response.get("carrierReference", ""),
-                    "deliverea_reference": response.get("delivereaReference", ""),
-                }
-            )
+            if picking.picking_type_code == "incoming":
+                vals = self._prepare_deliverea_order(picking)
+                response = deliverea_request.create_return(vals)
+                self._deliverea_check_response(response)
+                picking.write(
+                    {
+                        "carrier_tracking_ref": response.get("carrierReference", ""),
+                        "deliverea_reference": response.get("delivereaReference", ""),
+                    }
+                )
         return True
 
     def deliverea_cancel_shipment(self, pickings):
