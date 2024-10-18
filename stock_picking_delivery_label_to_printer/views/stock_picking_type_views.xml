@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="view_picking_type_form">
+        <field name="model">stock.picking.type</field>
+        <field
+            name="inherit_id"
+            ref="stock_picking_auto_print.view_picking_type_form"
+        />
+        <field name="arch" type="xml">
+            <field name="auto_print_delivery_slip" position="after">
+                <field name="auto_print_shipping_labels" string="Shipping Labels" />
+            </field>
+        </field>
+    </record>
+</odoo>

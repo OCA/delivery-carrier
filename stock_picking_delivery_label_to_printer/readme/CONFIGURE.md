@@ -1,0 +1,6 @@
+Configure the report preferences:
+  - Go to...
+
+Configure the picking operation type preferences:
+  - Go to...
+
