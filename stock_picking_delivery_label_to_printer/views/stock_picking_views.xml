@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="view_picking_form">
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="arch" type="xml">
+            <header position="inside">
+                <button
+                    name="action_print_shipping_labels"
+                    attrs="{'invisible': [('shipping_label_ids', '=', [])]}"
+                    string="Print shipping labels"
+                    type="object"
+                    class="oe_highlight"
+                    groups="base.group_user"
+                />
+            </header>
+        </field>
+    </record>
+</odoo>
