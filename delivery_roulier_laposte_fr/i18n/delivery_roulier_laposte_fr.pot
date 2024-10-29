@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 14.0\n"
+"Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -12,14 +12,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
-
-#. module: delivery_roulier_laposte_fr
-#: model:delivery.carrier.option,name:delivery_roulier_laposte_fr.CDS_laposte_carrier_opt_tmpl_ACK
-#: model:delivery.carrier.option,name:delivery_roulier_laposte_fr.COLI_laposte_carrier_opt_tmpl_ACK
-#: model:delivery.carrier.option,name:delivery_roulier_laposte_fr.CORI_laposte_carrier_opt_tmpl_ACK
-#: model:delivery.carrier.option,name:delivery_roulier_laposte_fr.DOS_laposte_carrier_opt_tmpl_ACK
-msgid "Acknowledgment"
-msgstr ""
 
 #. module: delivery_roulier_laposte_fr
 #: model:ir.model.fields,field_description:delivery_roulier_laposte_fr.field_stock_picking__laposte_insurance
@@ -112,7 +104,6 @@ msgid "Colissimo Retour International"
 msgstr ""
 
 #. module: delivery_roulier_laposte_fr
-#: model:product.product,name:delivery_roulier_laposte_fr.laposte_product
 #: model:product.template,name:delivery_roulier_laposte_fr.laposte_product_product_template
 msgid "Coûts de livraison - Laposte"
 msgstr ""
@@ -125,45 +116,16 @@ msgid ""
 msgstr ""
 
 #. module: delivery_roulier_laposte_fr
-#: model:ir.model.fields,field_description:delivery_roulier_laposte_fr.field_delivery_carrier__display_name
-#: model:ir.model.fields,field_description:delivery_roulier_laposte_fr.field_stock_picking__display_name
-#: model:ir.model.fields,field_description:delivery_roulier_laposte_fr.field_stock_quant_package__display_name
-msgid "Display Name"
-msgstr ""
-
-#. module: delivery_roulier_laposte_fr
-#: model:delivery.carrier.option,name:delivery_roulier_laposte_fr.CDS_laposte_carrier_opt_tmpl_FCR
-#: model:delivery.carrier.option,name:delivery_roulier_laposte_fr.COM_laposte_carrier_opt_tmpl_FCR
-#: model:delivery.carrier.option,name:delivery_roulier_laposte_fr.DOS_laposte_carrier_opt_tmpl_FCR
-msgid "Free of charges and rights"
-msgstr ""
-
-#. module: delivery_roulier_laposte_fr
-#: model:ir.model.fields,field_description:delivery_roulier_laposte_fr.field_delivery_carrier__id
-#: model:ir.model.fields,field_description:delivery_roulier_laposte_fr.field_stock_picking__id
-#: model:ir.model.fields,field_description:delivery_roulier_laposte_fr.field_stock_quant_package__id
-msgid "ID"
-msgstr ""
-
-#. module: delivery_roulier_laposte_fr
+#. odoo-python
 #: code:addons/delivery_roulier_laposte_fr/models/stock_quant_package.py:0
 #, python-format
 msgid ""
 "Incident\n"
 "-----------\n"
-"%s\n"
+"%(displ_exception_message)s\n"
 "Données transmises:\n"
 "-----------------------------\n"
-"%s"
-msgstr ""
-
-#. module: delivery_roulier_laposte_fr
-#: model:delivery.carrier.option,name:delivery_roulier_laposte_fr.CDS_laposte_carrier_opt_tmpl_INS
-#: model:delivery.carrier.option,name:delivery_roulier_laposte_fr.COLI_laposte_carrier_opt_tmpl_INS
-#: model:delivery.carrier.option,name:delivery_roulier_laposte_fr.CORE_laposte_carrier_opt_tmpl_INS
-#: model:delivery.carrier.option,name:delivery_roulier_laposte_fr.CORI_laposte_carrier_opt_tmpl_INS
-#: model:delivery.carrier.option,name:delivery_roulier_laposte_fr.DOS_laposte_carrier_opt_tmpl_INS
-msgid "Insurance"
+"%(displ_data_transmitted)s"
 msgstr ""
 
 #. module: delivery_roulier_laposte_fr
@@ -172,20 +134,6 @@ msgid "Laposte"
 msgstr ""
 
 #. module: delivery_roulier_laposte_fr
-#: model:ir.model.fields,field_description:delivery_roulier_laposte_fr.field_delivery_carrier____last_update
-#: model:ir.model.fields,field_description:delivery_roulier_laposte_fr.field_stock_picking____last_update
-#: model:ir.model.fields,field_description:delivery_roulier_laposte_fr.field_stock_quant_package____last_update
-msgid "Last Modified on"
-msgstr ""
-
-#. module: delivery_roulier_laposte_fr
-#: model:delivery.carrier.option,name:delivery_roulier_laposte_fr.CDS_laposte_carrier_opt_tmpl_NM
-#: model:delivery.carrier.option,name:delivery_roulier_laposte_fr.COLI_laposte_carrier_opt_tmpl_NM
-#: model:delivery.carrier.option,name:delivery_roulier_laposte_fr.COM_laposte_carrier_opt_tmpl_NM
-#: model:delivery.carrier.option,name:delivery_roulier_laposte_fr.CORE_laposte_carrier_opt_tmpl_NM
-#: model:delivery.carrier.option,name:delivery_roulier_laposte_fr.CORI_laposte_carrier_opt_tmpl_NM
-#: model:delivery.carrier.option,name:delivery_roulier_laposte_fr.DOM_laposte_carrier_opt_tmpl_NM
-#: model:delivery.carrier.option,name:delivery_roulier_laposte_fr.DOS_laposte_carrier_opt_tmpl_NM
 #: model:delivery.carrier.template.option,name:delivery_roulier_laposte_fr.carrier_opt_tmpl_NM
 msgid "Non Mécanisable"
 msgstr ""
@@ -231,6 +179,7 @@ msgid "Recommendation R3"
 msgstr ""
 
 #. module: delivery_roulier_laposte_fr
+#. odoo-python
 #: code:addons/delivery_roulier_laposte_fr/models/stock_quant_package.py:0
 #, python-format
 msgid ""
@@ -240,17 +189,13 @@ msgid ""
 msgstr ""
 
 #. module: delivery_roulier_laposte_fr
+#. odoo-python
 #: code:addons/delivery_roulier_laposte_fr/models/stock_quant_package.py:0
 #, python-format
 msgid ""
 "Résolution\n"
 "-------------\n"
 "%sid"
-msgstr ""
-
-#. module: delivery_roulier_laposte_fr
-#: model:delivery.carrier.option,name:delivery_roulier_laposte_fr.DOS_laposte_carrier_opt_tmpl_COD
-msgid "Shipping Cash On Delivery"
 msgstr ""
 
 #. module: delivery_roulier_laposte_fr
@@ -261,22 +206,4 @@ msgstr ""
 #. module: delivery_roulier_laposte_fr
 #: model:ir.model,name:delivery_roulier_laposte_fr.model_stock_picking
 msgid "Transfer"
-msgstr ""
-
-#. module: delivery_roulier_laposte_fr
-#: model:product.product,uom_name:delivery_roulier_laposte_fr.laposte_product
-#: model:product.template,uom_name:delivery_roulier_laposte_fr.laposte_product_product_template
-msgid "Units"
-msgstr ""
-
-#. module: delivery_roulier_laposte_fr
-#: model:product.product,weight_uom_name:delivery_roulier_laposte_fr.laposte_product
-#: model:product.template,weight_uom_name:delivery_roulier_laposte_fr.laposte_product_product_template
-msgid "kg"
-msgstr ""
-
-#. module: delivery_roulier_laposte_fr
-#: model:product.product,volume_uom_name:delivery_roulier_laposte_fr.laposte_product
-#: model:product.template,volume_uom_name:delivery_roulier_laposte_fr.laposte_product_product_template
-msgid "m³"
 msgstr ""
