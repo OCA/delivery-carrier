@@ -6,6 +6,10 @@ from odoo import SUPERUSER_ID, _, api, fields, models
 from odoo.exceptions import UserError
 
 
+class SameDeliveryLabelGenerated(Exception):
+    pass
+
+
 class PurchaseOrder(models.Model):
     _inherit = "purchase.order"
 
@@ -54,30 +58,16 @@ class PurchaseOrder(models.Model):
             return False
         return True
 
-    def _is_picking_label_uptodate(self):
-        """Check if the picking label needs to be regenerated."""
-        self.ensure_one()
-        if not self.delivery_label_picking_id:
+    def _are_delivery_label_equivalent(self, pick_1, pick_2):
+        if len(pick_1.move_lines) != len(pick_2.move_lines):
             return False
-        if self.delivery_label_picking_id.state != "done":
-            return False
-        pick = self.delivery_label_picking_id
-        moves_new = []
-        for line in self.order_line:
-            for value in line._prepare_stock_moves(self.delivery_label_picking_id):
-                moves_new.append(
-                    {key: value[key] for key in ("product_id", "product_uom_qty")}
-                )
-        move_prev = [
-            {"product_id": move.product_id.id, "product_uom_qty": move.product_uom_qty}
-            for move in pick.move_lines
-        ]
-        if len(move_prev) == len(moves_new):
-            if [
-                move_value for move_value in move_prev if move_value not in moves_new
-            ] == []:
-                return True
-        return False
+        for move_old, move_new in zip(pick_1.move_lines, pick_2.move_lines):
+            if (
+                move_old.product_id != move_new.product_id
+                or move_old.product_uom_qty != move_new.product_uom_qty
+            ):
+                return False
+        return True
 
     def _generate_purchase_delivery_label(self):
         """Create a transfer to generate the carrier labels."""
@@ -91,19 +81,31 @@ class PurchaseOrder(models.Model):
                     self.partner_id.name,
                 )
             )
-        if self._is_picking_label_uptodate():
-            return
-
+        carrier = self.vendor_label_carrier_id
         order = self.with_company(self.company_id)
-        picking = order._create_purchase_delivery_label_picking(carrier)
-
+        new_label_picking = None
+        try:
+            with self.env.cr.savepoint():
+                # Using a savepoint for generating the transfer for the label
+                # and keep the new one only if it is different
+                new_label_picking = order._create_purchase_delivery_label_picking(
+                    carrier
+                )
+                if self._are_delivery_label_equivalent(
+                    new_label_picking, order.delivery_label_picking_id
+                ):
+                    new_label_picking = None
+                    raise SameDeliveryLabelGenerated
+        except SameDeliveryLabelGenerated:
+            pass
+        if not new_label_picking:
+            return
         if order.delivery_label_picking_id:
             order._cancel_purchase_delivery_label_picking()
-
-        order.delivery_label_picking_id = picking
-        picking.message_post_with_view(
+        order.delivery_label_picking_id = new_label_picking
+        new_label_picking.message_post_with_view(
             "mail.message_origin_link",
-            values={"self": picking, "origin": self},
+            values={"self": new_label_picking, "origin": self},
             subtype_id=self.env.ref("mail.mt_note").id,
         )
 
