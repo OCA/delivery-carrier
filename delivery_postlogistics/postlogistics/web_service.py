@@ -9,11 +9,13 @@ import threading
 import urllib.parse
 from datetime import datetime, timedelta
 from io import BytesIO
+from json import JSONDecodeError
 
 import requests
 from PIL import Image
 
 from odoo import _, exceptions
+from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
 
@@ -450,7 +452,22 @@ class PostlogisticsWebService(object):
             },
             timeout=60,
         )
-        return response.json()
+
+        try:
+            response.raise_for_status()
+            json_response = response.json()
+        except (
+            JSONDecodeError,
+            requests.exceptions.HTTPError,
+        ) as error:
+            raise UserError(
+                _(
+                    "Postlogistics service is not accessible at the moment. Error code: %s. "
+                    "Please try again later." % (response.status_code or "None")
+                )
+            ) from error
+
+        return json_response
 
     @classmethod
     def get_access_token(cls, picking_carrier):
