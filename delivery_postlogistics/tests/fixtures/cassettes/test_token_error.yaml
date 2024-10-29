@@ -1,0 +1,36 @@
+interactions:
+- request:
+    body: client_secret=c70e3696ae5146e7fe317434e50a90cd&grant_type=client_credentials&client_id=865783331e39e91e633c3916fe892d92
+    headers:
+      Accept:
+        - "*/*"
+      Accept-Encoding:
+        - gzip, deflate
+      Connection:
+        - keep-alive
+      Content-Length:
+        - "144"
+      User-Agent:
+        - python-requests/2.20.0
+      content-type:
+        - application/x-www-form-urlencoded
+    method: POST
+    uri: https://wedecint.post.ch/WEDECOAuth/token
+  response:
+    body:
+      string: ''
+    headers:
+      Cache-Control:
+        - no-cache; private
+      Connection:
+        - Close
+      Content-Length:
+        - "0"
+      Content-Type:
+        - text/html; charset=UTF-8
+      Date:
+        - Tue, 13 Oct 2020 10:52:26 GMT
+    status:
+      code: 503
+      message: Service Unavailable
+version: 1
