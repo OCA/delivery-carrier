@@ -6,6 +6,7 @@
     "author": "Akretion, Odoo Community Association (OCA)",
     "summary": "Generate Labels for DPD",
     "category": "Warehouse",
+    "maintainers": ["florian-dacosta"],
     "depends": [
         "delivery_roulier",
     ],
