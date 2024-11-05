@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 Onestein (<https://www.onestein.nl>)
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl) -->
+<odoo>
+
+    <record id="sendcloud_custom_price_details_wizard_form" model="ir.ui.view">
+        <field name="model">sendcloud.custom.price.details.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <header />
+                <group name="main">
+                    <group>
+                        <field name="shipping_method_country_id" />
+                        <field name="price_check" invisible="1" />
+                    </group>
+                    <group>
+                        <field name="price" />
+                        <label for="price_custom" />
+                        <div class="o_row">
+                            <field
+                                name="enable_price_custom"
+                                class="oe_inline"
+                                nolabel="1"
+                            />
+                            <field
+                                name="price_custom"
+                                readonly="not enable_price_custom"
+                                class="oe_inline"
+                                nolabel="1"
+                            />
+                        </div>
+                        <field name="product_id" />
+                    </group>
+                </group>
+                <footer>
+                    <button
+                        string="Store"
+                        name="set_custom_price"
+                        type="object"
+                        class="btn-primary"
+                        invisible="price_check != 'standard'"
+                    />
+                    <button
+                        string="Update"
+                        name="set_custom_price"
+                        type="object"
+                        class="btn-primary"
+                        invisible="price_check != 'custom'"
+                    />
+                    <button
+                        string="Restore"
+                        name="remove_custom_price"
+                        type="object"
+                        class="btn-primary"
+                        invisible="price_check != 'custom'"
+                    />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record
+        id="action_sendcloud_custom_price_details_wizard"
+        model="ir.actions.act_window"
+    >
+        <field name="name">Custom Price Details</field>
+        <field name="res_model">sendcloud.custom.price.details.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="sendcloud_custom_price_details_wizard_form" />
+        <field name="target">new</field>
+    </record>
+
+</odoo>

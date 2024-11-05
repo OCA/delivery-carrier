@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 Onestein (<https://www.onestein.nl>)
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl) -->
+<odoo>
+
+    <record id="sendcloud_cancel_shipment_confirm_wizard_form" model="ir.ui.view">
+        <field name="model">sendcloud.cancel.shipment.confirm.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <div>This will delete all the parcels of this picking.</div>
+                <div>Do you confirm?</div>
+                <footer>
+                    <button
+                        string="Confirm"
+                        name="do_cancel_shipment"
+                        type="object"
+                        class="btn-primary"
+                    />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="sendcloud_cancel_shipment_confirm_wizard" model="ir.actions.act_window">
+        <field name="name">Confirm cancel of shipment</field>
+        <field name="res_model">sendcloud.cancel.shipment.confirm.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="sendcloud_cancel_shipment_confirm_wizard_form" />
+        <field name="target">new</field>
+    </record>
+
+</odoo>

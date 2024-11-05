@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 Onestein (<https://www.onestein.nl>)
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl) -->
+<odoo>
+
+    <record id="view_sendcloud_sender_address_form" model="ir.ui.view">
+        <field name="model">sendcloud.sender.address</field>
+        <field name="arch" type="xml">
+            <form create="false" edit="false">
+                <header />
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="company_name" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                            />
+                            <field name="sendcloud_code" />
+                            <field name="contact_name" />
+                            <field name="email" widget="email" />
+                            <field name="telephone" widget="phone" />
+                            <field name="active" />
+                        </group>
+                        <group>
+                            <field name="street" />
+                            <field name="house_number" />
+                            <field name="postal_box" />
+                            <field name="postal_code" />
+                            <field name="city" />
+                            <field name="country" />
+                            <field name="vat_number" />
+                            <field name="eori_number" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_sendcloud_sender_address_tree" model="ir.ui.view">
+        <field name="model">sendcloud.sender.address</field>
+        <field name="arch" type="xml">
+            <tree create="false" banner_route="/onboarding/sendcloud_onboarding_panel">
+                <field name="company_name" />
+                <field name="sendcloud_code" />
+                <field name="contact_name" />
+                <field name="email" widget="email" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_sendcloud_sender_address" model="ir.actions.act_window">
+        <field name="name">Sendcloud Sender Addresses</field>
+        <field name="res_model">sendcloud.sender.address</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>
