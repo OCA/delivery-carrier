@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 Onestein (<https://www.onestein.nl>)
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl) -->
+<odoo>
+
+    <record id="view_sendcloud_invoice_form" model="ir.ui.view">
+        <field name="model">sendcloud.invoice</field>
+        <field name="arch" type="xml">
+            <form create="false" edit="false">
+                <header />
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="sendcloud_code" string="Internal Code" />
+                            <field name="invoice_date" />
+                            <field name="is_paid" />
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                            />
+                        </group>
+                        <group>
+                            <field name="price_excl" />
+                            <field name="price_incl" />
+                            <field name="ref" />
+                            <field name="invoice_type" />
+                            <field name="active" />
+                        </group>
+                    </group>
+                    <group string="Items">
+                        <label
+                            for="ref"
+                            string=""
+                            class="o_form_label oe_inline d-none"
+                        />
+                        <div class="o_row o_row_readonly">
+                            <button
+                                name="button_get_invoice_details"
+                                class="oe_link"
+                                type="object"
+                                string=" -> Update Items"
+                            />
+                        </div>
+                    </group>
+                    <field name="item_ids" />
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_sendcloud_invoice_tree" model="ir.ui.view">
+        <field name="model">sendcloud.invoice</field>
+        <field name="arch" type="xml">
+            <tree create="false">
+                <field name="sendcloud_code" string="Internal Code" />
+                <field name="invoice_date" />
+                <field name="is_paid" />
+                <field name="ref" />
+                <field name="invoice_type" />
+                <field name="price_excl" />
+                <field name="price_incl" />
+                <field name="company_id" groups="base.group_multi_company" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_sendcloud_invoices" model="ir.actions.act_window">
+        <field name="name">Sendcloud Invoices</field>
+        <field name="res_model">sendcloud.invoice</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

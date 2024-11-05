@@ -1,0 +1,663 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils: https://docutils.sourceforge.io/" />
+<title>Sendcloud Shipping</title>
+<style type="text/css">
+
+/*
+:Author: David Goodger (goodger@python.org)
+:Id: $Id: html4css1.css 9511 2024-01-13 09:50:07Z milde $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+Despite the name, some widely supported CSS2 features are used.
+
+See https://docutils.sourceforge.io/docs/howto/html-stylesheets.html for how to
+customize this style sheet.
+*/
+
+/* used to remove borders from tables and images */
+.borderless, table.borderless td, table.borderless th {
+  border: 0 }
+
+table.borderless td, table.borderless th {
+  /* Override padding for "table.docutils td" with "! important".
+     The right padding separates the table cells. */
+  padding: 0 0.5em 0 0 ! important }
+
+.first {
+  /* Override more specific margin styles with "! important". */
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+.subscript {
+  vertical-align: sub;
+  font-size: smaller }
+
+.superscript {
+  vertical-align: super;
+  font-size: smaller }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+object[type="image/svg+xml"], object[type="application/x-shockwave-flash"] {
+  overflow: hidden;
+}
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em ;
+  border: medium outset ;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title, .code .error {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin: 0 0 0.5em 1em ;
+  border: medium outset ;
+  padding: 1em ;
+  background-color: #ffffee ;
+  width: 40% ;
+  float: right ;
+  clear: right }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left, .figure.align-left, object.align-left, table.align-left {
+  clear: left ;
+  float: left ;
+  margin-right: 1em }
+
+img.align-right, .figure.align-right, object.align-right, table.align-right {
+  clear: right ;
+  float: right ;
+  margin-left: 1em }
+
+img.align-center, .figure.align-center, object.align-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+table.align-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.align-left {
+  text-align: left }
+
+.align-center {
+  clear: both ;
+  text-align: center }
+
+.align-right {
+  text-align: right }
+
+/* reset inner alignment in figures */
+div.align-right {
+  text-align: inherit }
+
+/* div.align-center * { */
+/*   text-align: left } */
+
+.align-top    {
+  vertical-align: top }
+
+.align-middle {
+  vertical-align: middle }
+
+.align-bottom {
+  vertical-align: bottom }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font: inherit }
+
+pre.literal-block, pre.doctest-block, pre.math, pre.code {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+pre.code .ln { color: gray; } /* line numbers */
+pre.code, code { background-color: #eeeeee }
+pre.code .comment, code .comment { color: #5C6576 }
+pre.code .keyword, code .keyword { color: #3B0D06; font-weight: bold }
+pre.code .literal.string, code .literal.string { color: #0C5404 }
+pre.code .name.builtin, code .name.builtin { color: #352B84 }
+pre.code .deleted, code .deleted { background-color: #DEB0A1}
+pre.code .inserted, code .inserted { background-color: #A3D289}
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic, pre.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid 1px gray;
+  margin-left: 1px }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-left: solid 1px black;
+  margin-left: 1px }
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+/* "booktabs" style (no vertical lines) */
+table.docutils.booktabs {
+  border: 0px;
+  border-top: 2px solid;
+  border-bottom: 2px solid;
+  border-collapse: collapse;
+}
+table.docutils.booktabs * {
+  border: 0px;
+}
+table.docutils.booktabs th {
+  border-bottom: thin solid;
+  text-align: left;
+}
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+ul.auto-toc {
+  list-style-type: none }
+
+</style>
+</head>
+<body>
+<div class="document" id="sendcloud-shipping">
+<h1 class="title">Sendcloud Shipping</h1>
+
+<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!! This file is generated by oca-gen-addon-readme !!
+!! changes will be overwritten.                   !!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!! source digest: sha256:dbe01d1d34d6b43fe7239a4179838085ee43b5a8e5eef4ad0a384761109282be
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+<p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/lgpl-3.0-standalone.html"><img alt="License: LGPL-3" src="https://img.shields.io/badge/licence-LGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/OCA/delivery-carrier/tree/17.0/delivery_sendcloud_oca"><img alt="OCA/delivery-carrier" src="https://img.shields.io/badge/github-OCA%2Fdelivery--carrier-lightgray.png?logo=github" /></a> <a class="reference external image-reference" href="https://translation.odoo-community.org/projects/delivery-carrier-17-0/delivery-carrier-17-0-delivery_sendcloud_oca"><img alt="Translate me on Weblate" src="https://img.shields.io/badge/weblate-Translate%20me-F47D42.png" /></a> <a class="reference external image-reference" href="https://runboat.odoo-community.org/builds?repo=OCA/delivery-carrier&amp;target_branch=17.0"><img alt="Try me on Runboat" src="https://img.shields.io/badge/runboat-Try%20me-875A7B.png" /></a></p>
+<p>This module provides sendcloud shipping integration with Odoo</p>
+<p>This module mostly implements what’s described in
+<a class="reference external" href="https://docs.sendcloud.sc/api/v2/shipping/">https://docs.sendcloud.sc/api/v2/shipping/</a></p>
+<p>Full documentation for developers is in <a class="reference external" href="https://docs.sendcloud.sc/">https://docs.sendcloud.sc/</a>.</p>
+<p>This module works for the Community Edition as well as the Enterprise
+Edition.</p>
+<p><strong>Table of contents</strong></p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#installation" id="toc-entry-1">Installation</a><ul>
+<li><a class="reference internal" href="#odoo-integration" id="toc-entry-2">Odoo Integration</a></li>
+<li><a class="reference internal" href="#sendcloud-panel-settings" id="toc-entry-3">Sendcloud panel settings</a></li>
+<li><a class="reference internal" href="#synchronize-sendcloud-objects" id="toc-entry-4">Synchronize Sendcloud objects</a></li>
+<li><a class="reference internal" href="#initial-sync-of-past-orders" id="toc-entry-5">Initial sync of past orders</a></li>
+<li><a class="reference internal" href="#auto-create-invoice" id="toc-entry-6">Auto create invoice</a></li>
+<li><a class="reference internal" href="#test-mode" id="toc-entry-7">Test Mode</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#usage" id="toc-entry-8">Usage</a><ul>
+<li><a class="reference internal" href="#map-of-sendcloud-odoo-data-models" id="toc-entry-9">Map of Sendcloud-Odoo data models</a></li>
+<li><a class="reference internal" href="#multicollo-parcels" id="toc-entry-10">Multicollo parcels</a></li>
+<li><a class="reference internal" href="#service-point-picker" id="toc-entry-11">Service Point Picker</a></li>
+<li><a class="reference internal" href="#cancel-parcels" id="toc-entry-12">Cancel parcels</a></li>
+<li><a class="reference internal" href="#delivery-outside-eu" id="toc-entry-13">Delivery outside EU</a></li>
+<li><a class="reference internal" href="#troubleshooting" id="toc-entry-14">Troubleshooting</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#bug-tracker" id="toc-entry-15">Bug Tracker</a></li>
+<li><a class="reference internal" href="#credits" id="toc-entry-16">Credits</a><ul>
+<li><a class="reference internal" href="#authors" id="toc-entry-17">Authors</a></li>
+<li><a class="reference internal" href="#contributors" id="toc-entry-18">Contributors</a></li>
+<li><a class="reference internal" href="#maintainers" id="toc-entry-19">Maintainers</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="installation">
+<h1><a class="toc-backref" href="#toc-entry-1">Installation</a></h1>
+<p>Create an account on sendcloud.com and choose a plan. Go to integrations
+and select Odoo integration to use the Odoo integration or select api
+integration if you only want to use the api integration (see readme for
+more information).</p>
+<div class="section" id="odoo-integration">
+<h2><a class="toc-backref" href="#toc-entry-2">Odoo Integration</a></h2>
+<p>Verify that the value of “web.base.url” parameter in System Parameters
+is set with the correct url (eg.: “<a class="reference external" href="https://demo.onestein.eu">https://demo.onestein.eu</a>” instead of
+“<a class="reference external" href="http://localhost:8069">http://localhost:8069</a>”).</p>
+<p>Go to Sendcloud &gt; Configuration &gt; Wizards &gt; Setup the Sendcloud
+Integration. A wizard will pop up.</p>
+<p><img alt="image1" src="https://raw.githubusercontent.com/OCA/delivery-carrier/17.0/delivery_sendcloud_oca/static/description/Image_10.png" /></p>
+<p>Select Odoo Integration. Start Setup. You will be redirected to a
+Sendcloud page asking you to authorize OdooShop to access your Sendcloud
+account. Click on Connect in the Sendcloud page.</p>
+<p><img alt="image2" src="https://raw.githubusercontent.com/OCA/delivery-carrier/17.0/delivery_sendcloud_oca/static/description/Image_20.png" /></p>
+<p>Go back to the Odoo Integration configuration. An integration “OdooShop”
+is now present in the Integration list view. Open the OdooShop
+Integration form. Edit the OdooShop Integration. The changes you make
+will be in sync, Sendcloud side, with the integration configuration.</p>
+<p><img alt="image3" src="https://raw.githubusercontent.com/OCA/delivery-carrier/17.0/delivery_sendcloud_oca/static/description/Image_30.png" /></p>
+<p>In case multiple integrations are present, sort the integrations by
+sequence, to allow Odoo to choose the default one that will be used.
+Please note that when using the Odoo integration an “incoming order” is
+created in Sendcloud as soon as you validate the salesorder. The
+“incoming order” has status “in process” in Sendcloud and is not
+forwarded to the carrier yet.</p>
+<p><img alt="image4" src="https://raw.githubusercontent.com/OCA/delivery-carrier/17.0/delivery_sendcloud_oca/static/description/Image_40.png" /></p>
+<p>When you validate the delivery in Odoo the label is created and the
+pick-up assignment is send to the carrier.</p>
+<p><img alt="image5" src="https://raw.githubusercontent.com/OCA/delivery-carrier/17.0/delivery_sendcloud_oca/static/description/Image_50.png" /></p>
+<p>In previous version there was a possibility to connect to the API
+integration instead of the Odoo integration. To benefit from Sendcloud
+support we highly recommend you to upgrade to the latest version of this
+module with the Odoo integration.</p>
+</div>
+<div class="section" id="sendcloud-panel-settings">
+<h2><a class="toc-backref" href="#toc-entry-3">Sendcloud panel settings</a></h2>
+<p>When you configure the Integration settings in the online Sendcloud
+panel (<a class="reference external" href="https://panel.sendcloud.sc/">https://panel.sendcloud.sc/</a>) those settings are also sync-ed with
+the Integration settings Odoo side.</p>
+</div>
+<div class="section" id="synchronize-sendcloud-objects">
+<h2><a class="toc-backref" href="#toc-entry-4">Synchronize Sendcloud objects</a></h2>
+<p>After the setup of the integration with Sendcloud server is completed,
+second step is to synchronize the objects present in Sendcloud server to
+Odoo. To synchronize Sendcloud objects for the first time:</p>
+<ul class="simple">
+<li>Go to Sendcloud &gt; Configuration &gt; Wizards &gt; Sync the Sendcloud
+Objects. A wizard will pop up.</li>
+</ul>
+<p><img alt="image6" src="https://raw.githubusercontent.com/OCA/delivery-carrier/17.0/delivery_sendcloud_oca/static/description/Image_70.png" /></p>
+<ul class="simple">
+<li>Select all the objects. Confirm. This will retrieve the required data
+from Sendcloud server.</li>
+</ul>
+<p><img alt="image7" src="https://raw.githubusercontent.com/OCA/delivery-carrier/17.0/delivery_sendcloud_oca/static/description/Image_80.png" /></p>
+<p>Some Sendcloud objects will be automatically synchronized from the
+Sendcloud server to Odoo. Those Sendcloud objects are:</p>
+<ul class="simple">
+<li>Parcel Statuses</li>
+<li>Invoices</li>
+<li>Shipping Methods</li>
+<li>Sender Addresses</li>
+</ul>
+<p>To configure how often those objects should be retrieved from the
+Sendcloud server:</p>
+<ul class="simple">
+<li>Go to Settings &gt; Technical &gt; Automation &gt; Scheduled Actions. Search
+Scheduled Actions for “Sendcloud”.</li>
+</ul>
+<p><img alt="image8" src="https://raw.githubusercontent.com/OCA/delivery-carrier/17.0/delivery_sendcloud_oca/static/description/Image_90.png" /></p>
+<ul class="simple">
+<li>Set the “Execute Every” value according to your needs.</li>
+</ul>
+<p>Sender Addresses and Warehouses</p>
+<p>In case of multiple warehouses configured in Odoo (eg.: user belongs to
+group “Manage multiple Warehouse”):</p>
+<p>Go to Sendcloud &gt; Configuration &gt; Integration. Click on Configure
+Warehouse Addresses. A wizard will pop up. Set the corresponding
+Sendcloud Sender Address for each of the warehouse addresses.</p>
+<p><img alt="image9" src="https://raw.githubusercontent.com/OCA/delivery-carrier/17.0/delivery_sendcloud_oca/static/description/Image_100.png" /></p>
+<p>Alternatively, in Inventory &gt; Configuration &gt; Warehouses, select an
+address. In the address form, go to Sales and Purchase tab and set the
+Sencloud Sender Address. In Sale Order &gt; Delivery: select the Warehouse.
+Check that the address of the Warehouse has a Sendcloud Senser Address.</p>
+<p><img alt="image10" src="https://raw.githubusercontent.com/OCA/delivery-carrier/17.0/delivery_sendcloud_oca/static/description/Image_110.png" /></p>
+</div>
+<div class="section" id="initial-sync-of-past-orders">
+<h2><a class="toc-backref" href="#toc-entry-5">Initial sync of past orders</a></h2>
+<p>Once all the previous configuration steps are completed, it is possible
+to synchronize all the past Odoo outgoing shipments to Sendcloud. Those
+shipments are the ones already setup with a Sendcloud shipping method.</p>
+<p>Go to Sendcloud &gt; Configuration &gt; Wizards &gt; Sync past orders to
+Sendcloud. A wizard will pop up. Select the date (by default set to 30
+days back from today) from which the shipments must be synchronized.</p>
+<p>Click on Confirm button: the shipments will be displayed in the Incoming
+Order View tab of the Sendcloud panel. They will contain a status “Ready
+to Process” if they are ready to generate a label and the order
+fulfillment will continue.</p>
+</div>
+<div class="section" id="auto-create-invoice">
+<h2><a class="toc-backref" href="#toc-entry-6">Auto create invoice</a></h2>
+<p>When sending a product outside the EU, Sendcloud requires an invoice
+number. In case shipment is made with a product that can be invoiced
+based on delivered quantities, this combination of factors prevents the
+label being created in Sendcloud when confirming the SO.</p>
+<p>A possible solution is to automatically create a 100% down-payment
+invoice when shipping to outside the EU. To enable this feature, go to
+the “General Settings”: under the Sendcloud section you can find the
+“Auto create invoice” flag. Notice: this feature is still in beta
+testing.</p>
+</div>
+<div class="section" id="test-mode">
+<h2><a class="toc-backref" href="#toc-entry-7">Test Mode</a></h2>
+<p>To enable the Test Mode, go to the “General Settings”: under the
+Sendcloud section you can find the “Enable Test Mode” flag. Enabling the
+Test Mode allows you to access extra functionalities that are useful to
+test the connector.</p>
+<p>There is no seperate test environment available on the Sendcloud portal.
+This means that as soon as you create labels the carries is given the
+order to pickup the goods. You can use carrier “unstamped letter” for
+testing. When testing with other carriers make sure that you cancel the
+labels in the Sendcloud portal within a couple of hours otherwise the
+label will be billed and picked up.</p>
+<p>Since there is no test environment it’s very important to know that
+Sendcloud stores it records based on the delivery number, for instance
+WH/OUT/0001, this field is idempotent. So when you start testing and you
+will use delivery number WH/OUT/00001 this number is stored in
+Sendcloud. When you go live and use the same delivery numbers, in this
+case WH/OUT/00001, Sendcloud will treat this as an update of the
+existing record and will send back the shipping-address that was already
+stored (created while testing). To avoid this problem you should set a
+different prefix on the sequence out in your testenvironment. In debug
+mode, Technical/Sequences Identifiers/Sequences, select the sequence out
+and adjust this to WH/OUT/TEST for instance.</p>
+<p><img alt="image11" src="https://raw.githubusercontent.com/OCA/delivery-carrier/17.0/delivery_sendcloud_oca/static/description/Image_120.png" /></p>
+</div>
+</div>
+<div class="section" id="usage">
+<h1><a class="toc-backref" href="#toc-entry-8">Usage</a></h1>
+<p>In short this is how the module works:</p>
+<ul class="simple">
+<li>the user creates a sale order in Odoo; the user clicks on “Add
+shipping” button and selects one of the shipping methods provided by
+Sendcloud</li>
+<li>when confirming the sale order, a delivery document is generated
+(stock.picking)</li>
+<li>when confirming the picking, a parcel (or multiple parcels) for the
+specific sales order are created in Sendcloud under Shipping &gt;
+Created labels</li>
+<li>the picking is updated with the information from Sendcloud (tracking
+number, tracking url, label etc…)</li>
+</ul>
+<div class="section" id="map-of-sendcloud-odoo-data-models">
+<h2><a class="toc-backref" href="#toc-entry-9">Map of Sendcloud-Odoo data models</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="69%" />
+<col width="31%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Sendcloud</th>
+<th class="head">Odoo</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<p>| | Brand | Website Shop | | Order | Sales Order | | Shipment |
+Picking | | Parcel (colli) | Picking packs | | Sender address |
+Warehouse address | | Shipping Method | Shipping Method |</p>
+</div>
+<div class="section" id="multicollo-parcels">
+<h2><a class="toc-backref" href="#toc-entry-10">Multicollo parcels</a></h2>
+<p>In Inventory &gt; Configuration &gt; Delivery Packages, set the carrier to
+Sendcloud. In the out picking, put the products in different Sendcloud
+packages to create Multicollo parcels.</p>
+</div>
+<div class="section" id="service-point-picker">
+<h2><a class="toc-backref" href="#toc-entry-11">Service Point Picker</a></h2>
+<p>The module contains a widget, the Service Point Picker, that allows the
+selection of the service point. The widget is placed in the “Sendcloud
+Shipping” tab of the picking. The widget is visible in case the
+following is true:</p>
+<ul class="simple">
+<li>the configuration in the Sendcloud panel has the Service Point flag
+to True (in the Sendcloud integration config)</li>
+<li>the Shipping Method selected in the picking is provided by Sendcloud</li>
+<li>the Shipping Method has field sendcloud_service_point_input ==
+“required”</li>
+<li>all the criteria (from country, to country, weight) match with the
+current order</li>
+</ul>
+</div>
+<div class="section" id="cancel-parcels">
+<h2><a class="toc-backref" href="#toc-entry-12">Cancel parcels</a></h2>
+<p>When canceling parcels a confirmation popup will ask for confirmation.</p>
+</div>
+<div class="section" id="delivery-outside-eu">
+<h2><a class="toc-backref" href="#toc-entry-13">Delivery outside EU</a></h2>
+<p>Install either OCA module ‘product_harmonized_system’ or Enterprise
+module ‘account_intrastat’ for delivery outside of EU. Both include
+extra field ‘country of origin’.</p>
+</div>
+<div class="section" id="troubleshooting">
+<h2><a class="toc-backref" href="#toc-entry-14">Troubleshooting</a></h2>
+<p>If the communication to the Sendcloud server fails (eg.: while creating
+a parcel), the exchanged message is stored in a Log section, under
+Logging &gt; Actions.</p>
+</div>
+</div>
+<div class="section" id="bug-tracker">
+<h1><a class="toc-backref" href="#toc-entry-15">Bug Tracker</a></h1>
+<p>Bugs are tracked on <a class="reference external" href="https://github.com/OCA/delivery-carrier/issues">GitHub Issues</a>.
+In case of trouble, please check there if your issue has already been reported.
+If you spotted it first, help us to smash it by providing a detailed and welcomed
+<a class="reference external" href="https://github.com/OCA/delivery-carrier/issues/new?body=module:%20delivery_sendcloud_oca%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**">feedback</a>.</p>
+<p>Do not contact contributors directly about support or help with technical issues.</p>
+</div>
+<div class="section" id="credits">
+<h1><a class="toc-backref" href="#toc-entry-16">Credits</a></h1>
+<div class="section" id="authors">
+<h2><a class="toc-backref" href="#toc-entry-17">Authors</a></h2>
+<ul class="simple">
+<li>Onestein</li>
+</ul>
+</div>
+<div class="section" id="contributors">
+<h2><a class="toc-backref" href="#toc-entry-18">Contributors</a></h2>
+<ul class="simple">
+<li><tt class="docutils literal">Onestein <span class="pre">&lt;https://www.onestein.nl&gt;</span></tt>__</li>
+</ul>
+</div>
+<div class="section" id="maintainers">
+<h2><a class="toc-backref" href="#toc-entry-19">Maintainers</a></h2>
+<p>This module is maintained by the OCA.</p>
+<a class="reference external image-reference" href="https://odoo-community.org">
+<img alt="Odoo Community Association" src="https://odoo-community.org/logo.png" />
+</a>
+<p>OCA, or the Odoo Community Association, is a nonprofit organization whose
+mission is to support the collaborative development of Odoo features and
+promote its widespread use.</p>
+<p>This module is part of the <a class="reference external" href="https://github.com/OCA/delivery-carrier/tree/17.0/delivery_sendcloud_oca">OCA/delivery-carrier</a> project on GitHub.</p>
+<p>You are welcome to contribute. To learn how please visit <a class="reference external" href="https://odoo-community.org/page/Contribute">https://odoo-community.org/page/Contribute</a>.</p>
+</div>
+</div>
+</div>
+</body>
+</html>

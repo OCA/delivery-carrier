@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 Onestein (<https://www.onestein.nl>)
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl) -->
+<odoo>
+
+    <!-- Top menu item -->
+    <menuitem
+        id="menu_sendcloud_sendcloud"
+        name="Sendcloud"
+        web_icon="delivery_sendcloud_oca,static/description/icon.png"
+        sequence="10"
+    />
+
+    <menuitem
+        id="menu_sendcloud_sale"
+        name="Sales"
+        parent="menu_sendcloud_sendcloud"
+        sequence="2"
+    />
+
+    <menuitem
+        id="menu_sendcloud_quotations"
+        name="Quotations"
+        parent="menu_sendcloud_sale"
+        action="action_quotations_sendcloud"
+        sequence="1"
+    />
+
+    <menuitem
+        id="menu_sendcloud_order"
+        name="Orders"
+        parent="menu_sendcloud_sale"
+        action="action_orders_sendcloud"
+        sequence="2"
+    />
+
+    <menuitem
+        id="menu_sendcloud_sendcloud_brands"
+        name="Brands"
+        parent="menu_sendcloud_sale"
+        action="action_sendcloud_brands"
+    />
+
+    <menuitem
+        id="menu_sendcloud_delivery"
+        name="Delivery"
+        parent="menu_sendcloud_sendcloud"
+        sequence="5"
+    />
+
+    <menuitem
+        id="menu_sendcloud_sendcloud_shipments"
+        name="Shipments"
+        parent="menu_sendcloud_delivery"
+        action="action_sendcloud_shipments"
+    />
+
+    <menuitem
+        id="menu_sendcloud_sendcloud_parcels"
+        name="Parcels"
+        parent="menu_sendcloud_delivery"
+        action="action_sendcloud_parcels"
+    />
+
+    <menuitem
+        id="menu_sendcloud_sendcloud_shipping_methods"
+        name="Shipping Methods"
+        parent="menu_sendcloud_delivery"
+        action="action_sendcloud_shipping_methods"
+    />
+
+    <menuitem
+        id="menu_sendcloud_returns"
+        name="Returns"
+        parent="menu_sendcloud_sendcloud"
+        sequence="8"
+    />
+
+    <menuitem
+        id="menu_sendcloud_sendcloud_returns"
+        name="Returns"
+        parent="menu_sendcloud_returns"
+        action="action_sendcloud_returns"
+    />
+
+    <menuitem
+        id="menu_sendcloud_sendcloud_return_parcels"
+        name="Parcels"
+        parent="menu_sendcloud_returns"
+        action="action_sendcloud_return_parcels"
+    />
+
+    <menuitem
+        id="menu_sendcloud_sendcloud_shipping_methods_returns"
+        name="Shipping Methods"
+        parent="menu_sendcloud_returns"
+        action="action_sendcloud_shipping_methods_returns"
+    />
+
+    <menuitem
+        id="menu_sendcloud_sendcloud_invoices"
+        name="Invoices"
+        parent="menu_sendcloud_sendcloud"
+        action="action_sendcloud_invoices"
+        sequence="12"
+    />
+
+    <menuitem
+        id="menu_sendcloud_sendcloud_log"
+        name="Logging"
+        parent="menu_sendcloud_sendcloud"
+        sequence="15"
+    />
+
+    <menuitem
+        id="menu_sendcloud_sendcloud_action"
+        name="Actions"
+        parent="menu_sendcloud_sendcloud_log"
+        action="action_sendcloud_action"
+    />
+
+    <menuitem
+        id="menu_sendcloud_sendcloud_config"
+        name="Configuration"
+        parent="menu_sendcloud_sendcloud"
+        sequence="50"
+    />
+
+    <menuitem
+        id="menu_sendcloud_sendcloud_integration"
+        name="Integration"
+        parent="menu_sendcloud_sendcloud_config"
+        action="action_sendcloud_integration"
+        sequence="10"
+    />
+
+    <menuitem
+        id="menu_sendcloud_sendcloud_sender_address"
+        name="Sender Address"
+        parent="menu_sendcloud_sendcloud_config"
+        action="action_sendcloud_sender_address"
+        sequence="20"
+    />
+
+    <menuitem
+        id="menu_sendcloud_sendcloud_parcel_status"
+        name="Parcel Status"
+        parent="menu_sendcloud_sendcloud_config"
+        action="action_sendcloud_parcel_statuses"
+        sequence="30"
+    />
+
+    <menuitem
+        id="menu_sendcloud_sendcloud_carriers"
+        name="Carriers"
+        parent="menu_sendcloud_sendcloud_config"
+        action="action_sendcloud_carriers"
+        sequence="40"
+    />
+
+    <menuitem
+        id="menu_sendcloud_sendcloud_config_wizards"
+        name="Wizards"
+        parent="menu_sendcloud_sendcloud_config"
+        sequence="50"
+    />
+
+    <menuitem
+        id="menu_configuration_sendcloud_integration"
+        action="action_sendcloud_onboarding_integration_wizard"
+        parent="menu_sendcloud_sendcloud_config_wizards"
+    />
+
+    <menuitem
+        id="menu_configuration_sendcloud_sync"
+        action="action_sendcloud_onboarding_sync_wizard"
+        parent="menu_sendcloud_sendcloud_config_wizards"
+    />
+
+    <menuitem
+        id="menu_configuration_sendcloud_warehouse"
+        action="action_sendcloud_onboarding_warehouse_wizard"
+        parent="menu_sendcloud_sendcloud_config_wizards"
+    />
+
+    <menuitem
+        id="menu_configuration_sendcloud_sync_order"
+        action="action_sendcloud_sync_order_wizard"
+        parent="menu_sendcloud_sendcloud_config_wizards"
+    />
+
+</odoo>

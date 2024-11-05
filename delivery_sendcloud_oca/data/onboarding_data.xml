@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <!-- ONBOARDING STEPS -->
+    <!-- Sendcloud -->
+    <record id="onboarding_integration_step" model="onboarding.onboarding.step">
+        <field name="title">Setup Integration</field>
+        <field name="description">Setup Sendcloud Integration.</field>
+        <field name="button_text">Setup</field>
+        <field name="done_text">Well done!</field>
+        <field
+            name="panel_step_open_action_name"
+        >action_open_sendcloud_onboarding_integration</field>
+        <field name="sequence">1</field>
+    </record>
+
+    <record id="onboarding_sync_step" model="onboarding.onboarding.step">
+        <field name="title">Sync Sendcloud objects</field>
+        <field name="description">Synchronize Sendcloud objects.</field>
+        <field name="button_text">Sync</field>
+        <field name="done_text">Looks great!</field>
+        <field
+            name="panel_step_open_action_name"
+        >action_sendcloud_onboarding_sync</field>
+        <field name="sequence">3</field>
+    </record>
+
+    <record id="onboarding_warehouse_address_step" model="onboarding.onboarding.step">
+        <field name="title">Configure Warehouse Addresses</field>
+        <field name="description">Set Sendcloud Warehouse Addresses.</field>
+        <field name="button_text">Configure</field>
+        <field name="done_text">Enjoy!</field>
+        <field
+            name="panel_step_open_action_name"
+        >action_open_sendcloud_onboarding_warehouse_address</field>
+        <field name="sequence">4</field>
+    </record>
+
+    <!-- ONBOARDING PANELS -->
+    <record id="onboarding_onboarding_sendcloud" model="onboarding.onboarding">
+    <field name="name">Sendcloud Onboarding</field>
+    <field
+            name="step_ids"
+            eval="[
+        Command.link(ref('onboarding_integration_step')),
+        Command.link(ref('onboarding_sync_step')),
+        Command.link(ref('onboarding_warehouse_address_step')),
+    ]"
+        />
+    <field name="route_name">sendcloud_onboarding_panel</field>
+    <field name="panel_close_action_name">action_close_sendcloud_onboarding</field>
+    </record>
+</odoo>

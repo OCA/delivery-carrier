@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 Onestein (<https://www.onestein.nl>)
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl) -->
+<odoo>
+
+    <record id="view_sendcloud_parcel_form" model="ir.ui.view">
+        <field name="model">sendcloud.parcel</field>
+        <field name="arch" type="xml">
+            <form create="false" edit="false">
+                <header>
+                    <button
+                        name="button_sync_parcel"
+                        string="Sync"
+                        type="object"
+                        class="oe_highlight"
+                        invisible="not is_sendcloud_test_mode"
+                    />
+                    <field
+                        name="sendcloud_status"
+                        widget="statusbar"
+                        statusbar_visible="1000,5"
+                    />
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="is_sendcloud_test_mode" invisible="1" />
+                            <field name="picking_id" />
+                            <field name="package_id" />
+                            <field name="is_return" />
+                            <field name="brand_id" />
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                            />
+                        </group>
+                        <group>
+                            <field name="tracking_number" />
+                            <field name="tracking_url" widget="url" />
+                            <field name="shipment_id" />
+                        </group>
+                        <group string="Parcel Label">
+                            <field name="label_printer_url" />
+                            <field name="label" />
+                            <label for="label" string="" class="oe_inline d-none" />
+                            <div class="o_row o_row_readonly">
+                                <button
+                                    name="action_get_parcel_label"
+                                    class="oe_link"
+                                    type="object"
+                                    string=" -> Get Label"
+                                    invisible="label"
+                                />
+                            </div>
+                        </group>
+                        <group string="Return Portal" invisible="is_return">
+                            <field
+                                name="return_portal_url"
+                                invisible="not return_portal_url"
+                            />
+                            <label
+                                for="return_portal_url"
+                                string=""
+                                class="oe_inline d-none"
+                            />
+                            <div class="o_row o_row_readonly">
+                                <button
+                                    name="action_get_return_portal_url"
+                                    class="oe_link"
+                                    type="object"
+                                    string=" -> Get Return Portal Url"
+                                    invisible="return_portal_url"
+                                />
+                                <button
+                                    name="action_create_return_parcel"
+                                    class="oe_link"
+                                    type="object"
+                                    string=" -> Create Return Parcel"
+                                    invisible="is_return"
+                                />
+                            </div>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Parcel Items" name="parcel_items">
+                            <field name="parcel_item_ids" readonly="1">
+                                <tree>
+                                    <field name="description" />
+                                    <field name="quantity" />
+                                    <field name="weight" />
+                                    <field name="value" />
+                                    <field name="hs_code" />
+                                    <field name="origin_country" />
+                                    <field name="product_id" />
+                                    <field name="properties" />
+                                    <field name="sku" />
+                                    <field name="return_reason" />
+                                    <field name="return_message" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Parcel Details" name="parcel_details">
+                            <group>
+                                <group string="Shipping">
+                                    <field name="carrier" />
+                                    <field name="sendcloud_customs_shipment_type" />
+                                    <field name="to_service_point" />
+                                    <field name="to_state" />
+                                    <field name="to_post_number" />
+                                </group>
+                                <group string="Documents">
+                                    <field name="customs_invoice_nr" />
+                                    <field name="order_number" />
+                                    <field name="type" />
+                                    <field name="note" />
+                                </group>
+                                <group string="Shipment Details">
+                                    <field name="insured_value" />
+                                    <field name="total_insured_value" />
+                                    <field name="weight" />
+                                </group>
+                                <group string="Reference">
+                                    <field
+                                        name="sendcloud_code"
+                                        string="Internal Code"
+                                    />
+                                    <field name="external_reference" />
+                                    <field name="reference" />
+                                    <field name="external_shipment_id" />
+                                    <field name="external_order_id" />
+                                    <field name="shipping_method" />
+                                    <field name="shipment_uuid" />
+                                </group>
+                            </group>
+                        </page>
+                        <page
+                            string="Documents"
+                            name="parcel_documents"
+                            invisible="not documents"
+                        >
+                            <button
+                                name="action_parcel_documents"
+                                class="oe_link"
+                                type="object"
+                                string=" -> Get Documents"
+                            />
+                            <field name="documents" invisible="1" />
+                            <field name="document_ids" invisible="not document_ids">
+                                <tree>
+                                    <field name="name" />
+                                    <field name="size" />
+                                    <field name="attachment" widget="binary" />
+                                    <button
+                                        name="action_get_parcel_document"
+                                        class="oe_link"
+                                        type="object"
+                                        string=" -> Get Document"
+                                        invisible="attachment"
+                                    />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Partner Details" name="partner_details">
+                            <group>
+                                <group string="Address">
+                                    <field name="partner_name" />
+                                    <field name="address" />
+                                    <field name="address_2" />
+                                    <field name="house_number" />
+                                    <field name="street" />
+                                    <field name="city" />
+                                    <field name="postal_code" />
+                                </group>
+                                <group string="Reference">
+                                    <field name="company_name" />
+                                    <field name="country_iso_2" />
+                                    <field name="email" />
+                                    <field name="telephone" />
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="o_attachment_preview" />
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_sendcloud_parcel_tree" model="ir.ui.view">
+        <field name="model">sendcloud.parcel</field>
+        <field name="arch" type="xml">
+            <tree create="false">
+                <field name="picking_id" />
+                <field name="package_id" />
+                <field name="tracking_number" />
+                <field name="is_return" />
+                <field name="company_id" groups="base.group_multi_company" />
+                <field name="sendcloud_status" />
+                <field name="label_print_status" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_sendcloud_parcels" model="ir.actions.act_window">
+        <field name="name">Sendcloud Parcels</field>
+        <field name="res_model">sendcloud.parcel</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('is_return', '!=', True)]</field>
+    </record>
+
+    <record id="action_sendcloud_return_parcels" model="ir.actions.act_window">
+        <field name="name">Sendcloud Return Parcels</field>
+        <field name="res_model">sendcloud.parcel</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('is_return', '=', True)]</field>
+    </record>
+
+</odoo>

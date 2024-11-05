@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 Onestein (<https://www.onestein.nl>)
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl) -->
+<odoo>
+    <record id="view_picking_withcarrier_out_form" model="ir.ui.view">
+        <field name="model">stock.picking</field>
+        <field
+            name="inherit_id"
+            ref="stock_delivery.view_picking_withcarrier_out_form"
+        />
+        <field name="arch" type="xml">
+            <header>
+                <button
+                    name="button_create_sendcloud_labels"
+                    invisible="delivery_type != 'sendcloud' or picking_type_code != 'outgoing'"
+                    string="Sendcloud Labels"
+                    type="object"
+                    class="oe_highlight"
+                    groups="stock.group_stock_user"
+                />
+            </header>
+            <div name="button_box" position="inside">
+                <button
+                    name="action_open_sendcloud_parcels"
+                    type="object"
+                    class="oe_stat_button"
+                    icon='fa-cube'
+                    invisible="not sendcloud_parcel_count"
+                >
+                    <field name="sendcloud_parcel_count" widget="statinfo" />
+                </button>
+            </div>
+            <page name="extra" position="after">
+                <page
+                    string="Sendcloud Shipping"
+                    name="sendcloud_parcel"
+                    invisible="delivery_type != 'sendcloud' or picking_type_code != 'outgoing'"
+                >
+                    <group>
+                        <group name="sendcloud_parcel_details">
+                            <field name="sendcloud_announce" string="Announce" />
+                            <field
+                                name="sendcloud_apply_shipping_rules"
+                                string="Apply Shipping Rules"
+                            />
+                            <field
+                                name="sendcloud_customs_shipment_type"
+                                string="Shipment Type"
+                            />
+                            <field
+                                name="sendcloud_shipment_uuid"
+                                string="Shipment UUID"
+                            />
+                            <field
+                                name="sendcloud_insured_value"
+                                string="Insured Value"
+                            />
+                            <field
+                                name="sendcloud_shipping_method_checkout_name"
+                                string="Shipping Method Checkout Name"
+                            />
+                            <field
+                                name="sendcloud_service_point_required"
+                                invisible="1"
+                            />
+                            <field name="sendcloud_sp_details" invisible="1" />
+                            <field
+                                name="sendcloud_service_point_address"
+                                string="Service Point"
+                                invisible="not sendcloud_service_point_required"
+                                widget="sendcloud_service_point_selector"
+                            />
+                        </group>
+                    </group>
+                    <field name="is_sendcloud_test_mode" invisible="1" />
+                    <group
+                        name="testing"
+                        string="Only for Testing"
+                        invisible="not is_sendcloud_test_mode"
+                    >
+                        <button
+                            name="button_to_sendcloud_sync"
+                            type="object"
+                            string="Sync To Sendcloud"
+                        />
+                        <button
+                            name="button_delete_sendcloud_picking"
+                            type="object"
+                            string="Delete From Sendcloud"
+                        />
+                    </group>
+                </page>
+            </page>
+        </field>
+    </record>
+
+    <record id="vpicktree" model="ir.ui.view">
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.vpicktree" />
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_assign']" position="after">
+                <button
+                    name="action_multi_create_sendcloud_labels"
+                    type="object"
+                    string="Create Labels"
+                />
+                <button
+                    name="action_download_sendcloud_labels"
+                    type="object"
+                    string="Print Labels"
+                />
+                <button
+                    name="action_multi_create_sendcloud_labels_download"
+                    type="object"
+                    string="Create and Download Labels"
+                />
+            </xpath>
+            <xpath expr="//field[@name='state']" position="after">
+                <field name="label_print_status" optional="show" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_sendcloud_shipments" model="ir.actions.act_window">
+        <field name="name">Sendcloud Shipments</field>
+        <field name="res_model">stock.picking</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('delivery_type','=','sendcloud')]</field>
+    </record>
+
+</odoo>
