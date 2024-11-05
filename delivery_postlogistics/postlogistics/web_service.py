@@ -415,6 +415,7 @@ class PostlogisticsWebService(object):
 
     @classmethod
     def _request_access_token(cls, delivery_carrier):
+        """Request an access token from PostLogistics API"""
         if not delivery_carrier.postlogistics_endpoint_url:
             raise exceptions.UserError(
                 _(
