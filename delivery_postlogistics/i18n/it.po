@@ -642,6 +642,15 @@ msgid "Postlogistics Notification"
 msgstr ""
 
 #. module: delivery_postlogistics
+#. odoo-python
+#: code:addons/delivery_postlogistics/postlogistics/web_service.py:0
+#, python-format
+msgid ""
+"Postlogistics service is not accessible at the moment. Error code: %s. "
+"Please try again later."
+msgstr ""
+
+#. module: delivery_postlogistics
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_delivery_carrier__postlogistics_proclima_logo
 msgid "Print ProClima logo"
 msgstr ""
