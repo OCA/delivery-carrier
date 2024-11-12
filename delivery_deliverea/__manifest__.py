@@ -13,6 +13,7 @@
     "depends": [
         "delivery_state",
         "delivery_package_number",
+        "stock_quant_package_dimension",
     ],
     "external_dependencies": {"python": ["unidecode"]},
     "data": [

@@ -310,37 +310,65 @@ class DeliveryCarrier(models.Model):
             )
         return items
 
+    def _get_package_weight(self, package):
+        return package.weight_uom_id._compute_quantity(
+            package.pack_weight, self.env.ref("uom.product_uom_kgm")
+        )
+
+    def _get_package_length(self, package, field):
+        return package.length_uom_id._compute_quantity(
+            getattr(package, field), self.env.ref("uom.product_uom_cm")
+        )
+
+    def assert_default_values(self, default_package):
+        if not all(
+            (
+                default_package.base_weight,
+                default_package.height,
+                default_package.width,
+                default_package.packaging_length,
+            )
+        ):
+            raise UserError(
+                _(
+                    "The base_weight, height, width and length values must be defined"
+                    " in the package associated with the carrier."
+                )
+            )
+
     def _get_deliverea_parcel_info(self, carrier, picking):
         parcels = []
         num_packages = picking.number_of_packages or 1
         default_package = carrier.deliverea_default_packaging_id
-        if (
-            not default_package.max_weight
-            or not default_package.height
-            or not default_package.width
-            or not default_package.packaging_length
-        ):
-            raise UserError(
-                _(
-                    "The max_weight, height, width and length values must be defined"
-                    " in the package associated with the carrier."
-                )
-            )
-        for i in range(num_packages):
+        warehouse_country_id = (
+            picking.picking_type_id.warehouse_id.partner_id.country_id
+        )
+        self.assert_default_values(default_package)
+        for package in picking.package_ids:
             parcels.append(
                 {
-                    "weight": default_package.max_weight,
-                    "height": default_package.height,
-                    "width": default_package.width,
-                    "length": default_package.packaging_length,
+                    "weight": self._get_package_weight(package)
+                    or default_package.base_weight,
+                    "height": self._get_package_length(package, "height")
+                    or default_package.height,
+                    "width": self._get_package_length(package, "width")
+                    or default_package.width,
+                    "length": self._get_package_length(package, "pack_length")
+                    or default_package.packaging_length,
                 }
             )
-            if (
-                i == 0
-                and picking.picking_type_id.warehouse_id.partner_id.country_id.code
-                != picking.partner_id.country_id.code
-            ):
-                parcels[0].update({"items": self._get_deliverea_parcel_items(picking)})
+        if not picking.package_ids:
+            for __ in range(num_packages):
+                parcels.append(
+                    {
+                        "weight": default_package.base_weight,
+                        "height": default_package.height,
+                        "width": default_package.width,
+                        "length": default_package.packaging_length,
+                    }
+                )
+        if warehouse_country_id.code != picking.partner_id.country_id.code:
+            parcels[0].update({"items": self._get_deliverea_parcel_items(picking)})
         return parcels
 
     def _get_service_attributes(self, carrier, service):

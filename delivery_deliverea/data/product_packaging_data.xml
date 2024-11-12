@@ -7,6 +7,7 @@
         <field name="height">15</field>
         <field name="width">10</field>
         <field name="packaging_length">20</field>
-        <field name="max_weight">2</field>
+        <field name="max_weight">0</field>
+        <field name="base_weight">2</field>
     </record>
 </odoo>

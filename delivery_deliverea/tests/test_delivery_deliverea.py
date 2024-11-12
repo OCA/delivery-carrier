@@ -457,3 +457,54 @@ class TestDeliverea(common.TransactionCase):
             ]
         )
         self.assertTrue(attachment)
+
+    def test_14_get_default_packages(self):
+        default_package = self.carrier.deliverea_default_packaging_id
+        packages = self.carrier._get_deliverea_parcel_info(self.carrier, self.picking)
+        self.assertEqual(len(packages), 2)
+        self.assertTrue(packages[0].get("items"))
+        for package in packages:
+            self.assertEqual(package.get("weight"), default_package.base_weight)
+            self.assertEqual(package.get("width"), default_package.width)
+            self.assertEqual(package.get("height"), default_package.height)
+            self.assertEqual(package.get("length"), default_package.packaging_length)
+
+    def test_15_get_data_packages(self):
+        self.picking.package_ids = [
+            (
+                0,
+                0,
+                {
+                    "name": "Test Package",
+                    "pack_weight": 1,
+                    "width": 1,
+                    "height": 1,
+                    "pack_length": 1,
+                },
+            ),
+            (
+                0,
+                0,
+                {
+                    "name": "Test Package 2",
+                    "pack_weight": 0,
+                    "width": 0,
+                    "height": 0,
+                    "pack_length": 0,
+                },
+            ),
+        ]
+        # Package length uom is mm, weight uom is kg
+        packages = self.carrier._get_deliverea_parcel_info(self.carrier, self.picking)
+        self.assertEqual(len(packages), 2)
+        self.assertEqual(packages[0].get("weight"), 1.0)
+        self.assertEqual(packages[0].get("height"), 0.1)
+        self.assertEqual(packages[0].get("width"), 0.1)
+        self.assertEqual(packages[0].get("length"), 0.1)
+        self.assertTrue(packages[0].get("items"))
+        # Check default values
+        default_package = self.carrier.deliverea_default_packaging_id
+        self.assertEqual(packages[1].get("weight"), default_package.base_weight)
+        self.assertEqual(packages[1].get("width"), default_package.width)
+        self.assertEqual(packages[1].get("height"), default_package.height)
+        self.assertEqual(packages[1].get("length"), default_package.packaging_length)
