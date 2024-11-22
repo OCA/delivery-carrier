@@ -27,9 +27,7 @@ class StockPicking(models.Model):
             body=(_("Correos Express label for %s") % tracking_ref),
             attachments=[
                 (
-                    "correos_express_{}_{}.{}".format(
-                        tracking_ref, index + 1, label_format
-                    ),
+                    f"correos_express_{tracking_ref}_{index + 1}.{label_format}",
                     label,
                 )
                 for index, label in enumerate(decoded_labels)

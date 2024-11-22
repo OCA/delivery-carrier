@@ -8,10 +8,11 @@
 
 /*
 :Author: David Goodger (goodger@python.org)
-:Id: $Id: html4css1.css 8954 2022-01-20 10:10:25Z milde $
+:Id: $Id: html4css1.css 9511 2024-01-13 09:50:07Z milde $
 :Copyright: This stylesheet has been placed in the public domain.
 
 Default cascading style sheet for the HTML output of Docutils.
+Despite the name, some widely supported CSS2 features are used.
 
 See https://docutils.sourceforge.io/docs/howto/html-stylesheets.html for how to
 customize this style sheet.
@@ -274,7 +275,7 @@ pre.literal-block, pre.doctest-block, pre.math, pre.code {
   margin-left: 2em ;
   margin-right: 2em }
 
-pre.code .ln { color: grey; } /* line numbers */
+pre.code .ln { color: gray; } /* line numbers */
 pre.code, code { background-color: #eeeeee }
 pre.code .comment, code .comment { color: #5C6576 }
 pre.code .keyword, code .keyword { color: #3B0D06; font-weight: bold }
@@ -300,7 +301,7 @@ span.option {
 span.pre {
   white-space: pre }
 
-span.problematic {
+span.problematic, pre.problematic {
   color: red }
 
 span.section-subtitle {
@@ -368,7 +369,7 @@ ul.auto-toc {
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !! source digest: sha256:7c21510dc4cb49a4897983dafa5674ee9c29a7fe44fa1929b7d06980f1cdfcd8
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-<p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html"><img alt="License: AGPL-3" src="https://img.shields.io/badge/licence-AGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/OCA/delivery-carrier/tree/16.0/delivery_correos_express"><img alt="OCA/delivery-carrier" src="https://img.shields.io/badge/github-OCA%2Fdelivery--carrier-lightgray.png?logo=github" /></a> <a class="reference external image-reference" href="https://translation.odoo-community.org/projects/delivery-carrier-16-0/delivery-carrier-16-0-delivery_correos_express"><img alt="Translate me on Weblate" src="https://img.shields.io/badge/weblate-Translate%20me-F47D42.png" /></a> <a class="reference external image-reference" href="https://runboat.odoo-community.org/builds?repo=OCA/delivery-carrier&amp;target_branch=16.0"><img alt="Try me on Runboat" src="https://img.shields.io/badge/runboat-Try%20me-875A7B.png" /></a></p>
+<p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html"><img alt="License: AGPL-3" src="https://img.shields.io/badge/licence-AGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/OCA/delivery-carrier/tree/17.0/delivery_correos_express"><img alt="OCA/delivery-carrier" src="https://img.shields.io/badge/github-OCA%2Fdelivery--carrier-lightgray.png?logo=github" /></a> <a class="reference external image-reference" href="https://translation.odoo-community.org/projects/delivery-carrier-17-0/delivery-carrier-17-0-delivery_correos_express"><img alt="Translate me on Weblate" src="https://img.shields.io/badge/weblate-Translate%20me-F47D42.png" /></a> <a class="reference external image-reference" href="https://runboat.odoo-community.org/builds?repo=OCA/delivery-carrier&amp;target_branch=17.0"><img alt="Try me on Runboat" src="https://img.shields.io/badge/runboat-Try%20me-875A7B.png" /></a></p>
 <p>Este módulo integra la API de Correos Express con Odoo.</p>
 <p><strong>Table of contents</strong></p>
 <div class="contents local topic" id="contents">
@@ -396,19 +397,21 @@ ul.auto-toc {
 </div>
 <div class="section" id="installation">
 <h1><a class="toc-backref" href="#toc-entry-1">Installation</a></h1>
-<p>Depende de los módulos de OCA/delivery-carrier <cite>delivery_package_number</cite> y <cite>delivery_state</cite>.</p>
-<p>La API de Correos Express no provee métodos de cálculo de precio, de modo que para poder
-calcular los costes de envío sería recomendable instalar el módulo
-<cite>delivery_price_method</cite>.</p>
+<p>Depende de los módulos de OCA/delivery-carrier delivery_package_number y
+delivery_state.</p>
+<p>La API de Correos Express no provee métodos de cálculo de precio, de
+modo que para poder calcular los costes de envío sería recomendable
+instalar el módulo delivery_price_method.</p>
 </div>
 <div class="section" id="configuration">
 <h1><a class="toc-backref" href="#toc-entry-2">Configuration</a></h1>
 <p>Para configurar el transportista:</p>
 <ol class="arabic simple">
-<li>Vaya a <em>Inventario &gt; Configuración &gt; Entrega &gt; Método de envío</em> y cree uno
-nuevo.</li>
+<li>Vaya a <em>Inventario &gt; Configuración &gt; Entrega &gt; Método de envío</em> y
+cree uno nuevo.</li>
 <li>Escoja <em>Correos Express</em> Como proveedor.</li>
-<li>Configure los datos de servicio que tiene contratados y el tipo de etiqueta a usar</li>
+<li>Configure los datos de servicio que tiene contratados y el tipo de
+etiqueta a usar</li>
 </ol>
 </div>
 <div class="section" id="usage">
@@ -418,14 +421,16 @@ nuevo.</li>
 <h2><a class="toc-backref" href="#toc-entry-4">Grabar servicios</a></h2>
 <blockquote>
 <ol class="arabic simple">
-<li>Al confirmar el albarán, el servicio se grabará en Correos Express.</li>
-<li>Con la respuesta, se registrará en el chatter la referencia de envío y
-las etiquetas correspondientes.</li>
-<li>Para gestionar los bultos del envío, se puede utilizar el campo de número
-de bultos que añade <cite>delivery_package_number</cite> (ver el README para mayor
-información) o bien el flujo nativo de Odoo con paquetes de envío. El
-módulo mandará a la API de Correos Express el número correspondiente y podremos
-descargar las etiquetas con su correspondiente numeración.</li>
+<li>Al confirmar el albarán, el servicio se grabará en Correos
+Express.</li>
+<li>Con la respuesta, se registrará en el chatter la referencia de
+envío y las etiquetas correspondientes.</li>
+<li>Para gestionar los bultos del envío, se puede utilizar el campo de
+número de bultos que añade delivery_package_number (ver el README
+para mayor información) o bien el flujo nativo de Odoo con
+paquetes de envío. El módulo mandará a la API de Correos Express
+el número correspondiente y podremos descargar las etiquetas con
+su correspondiente numeración.</li>
 </ol>
 </blockquote>
 </div>
@@ -433,9 +438,11 @@ descargar las etiquetas con su correspondiente numeración.</li>
 <h2><a class="toc-backref" href="#toc-entry-5">Cancelar servicios</a></h2>
 <blockquote>
 <ol class="arabic simple">
-<li>Correos Express no dispone de un servicio para cancelar los envíos.</li>
-<li>Si se ha de corregir algún dato, hay que grabar un nuevo envío con una nueva etiqueta.
-Esto no hace que dicho envío se facture, solamente sucede si el paquete es recogido y entra en reparto</li>
+<li>Correos Express no dispone de un servicio para cancelar los
+envíos.</li>
+<li>Si se ha de corregir algún dato, hay que grabar un nuevo envío con
+una nueva etiqueta. Esto no hace que dicho envío se facture,
+solamente sucede si el paquete es recogido y entra en reparto</li>
 </ol>
 </blockquote>
 </div>
@@ -443,10 +450,10 @@ Esto no hace que dicho envío se facture, solamente sucede si el paquete es reco
 <h2><a class="toc-backref" href="#toc-entry-6">Obtener etiquetas</a></h2>
 <blockquote>
 <ol class="arabic simple">
-<li>Si por error hubiésemos eliminado el adjunto de las etiquetas que obtuvimos
-en la grabación del servicio, podemos obtenerlas de nuevo pulsando en el
-botón “Etiqueta Correos Express” que tenemos en la parte superior de la vista
-formulario del albarán.</li>
+<li>Si por error hubiésemos eliminado el adjunto de las etiquetas que
+obtuvimos en la grabación del servicio, podemos obtenerlas de
+nuevo pulsando en el botón “Etiqueta Correos Express” que tenemos
+en la parte superior de la vista formulario del albarán.</li>
 </ol>
 </blockquote>
 </div>
@@ -454,12 +461,13 @@ formulario del albarán.</li>
 <h2><a class="toc-backref" href="#toc-entry-7">Seguimiento de envíos</a></h2>
 <blockquote>
 <ol class="arabic simple">
-<li>El módulo está integrado con <cite>delivery_state</cite> para poder recabar la
-información de seguimiento de nuestros envíos directamente desde la API de
-Correos Express.</li>
-<li>Para ello, vaya al albarán con un envío Correos Express ya grabado y en la pestaña de
-<em>Información adicional</em> verá el botón <em>Actualizar seguimiento</em> para pedir
-a la API que actualice el estado de este envío en Odoo.</li>
+<li>El módulo está integrado con delivery_state para poder recabar la
+información de seguimiento de nuestros envíos directamente desde
+la API de Correos Express.</li>
+<li>Para ello, vaya al albarán con un envío Correos Express ya grabado
+y en la pestaña de <em>Información adicional</em> verá el botón
+<em>Actualizar seguimiento</em> para pedir a la API que actualice el
+estado de este envío en Odoo.</li>
 </ol>
 </blockquote>
 </div>
@@ -476,7 +484,7 @@ Por lo tanto se tiene que sacar desde su interfaz web</li>
 <h2><a class="toc-backref" href="#toc-entry-9">Depuración de errores</a></h2>
 <blockquote>
 <ol class="arabic simple">
-<li>Se puede activar Odoo con <cite>–log-level=debug</cite> para registrar las
+<li>Se puede activar Odoo con –log-level=debug para registrar las
 peticiones y las respuestas en el log.</li>
 </ol>
 </blockquote>
@@ -485,10 +493,11 @@ peticiones y las respuestas en el log.</li>
 <div class="section" id="known-issues-roadmap">
 <h1><a class="toc-backref" href="#toc-entry-10">Known issues / Roadmap</a></h1>
 <ul class="simple">
-<li>La API no facilita métodos para cotizar el coste real de los envíos, por lo
-que siempre se cotizan a 0. Si la cotización de envíos es necesaria,
-puede instalarse el módulo OCA <cite>delivery_price_method</cite> o bien personalizar
-el método de cotización para este tipo de transportista.</li>
+<li>La API no facilita métodos para cotizar el coste real de los envíos,
+por lo que siempre se cotizan a 0. Si la cotización de envíos es
+necesaria, puede instalarse el módulo OCA delivery_price_method o
+bien personalizar el método de cotización para este tipo de
+transportista.</li>
 </ul>
 </div>
 <div class="section" id="bug-tracker">
@@ -496,7 +505,7 @@ el método de cotización para este tipo de transportista.</li>
 <p>Bugs are tracked on <a class="reference external" href="https://github.com/OCA/delivery-carrier/issues">GitHub Issues</a>.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-<a class="reference external" href="https://github.com/OCA/delivery-carrier/issues/new?body=module:%20delivery_correos_express%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**">feedback</a>.</p>
+<a class="reference external" href="https://github.com/OCA/delivery-carrier/issues/new?body=module:%20delivery_correos_express%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**">feedback</a>.</p>
 <p>Do not contact contributors directly about support or help with technical issues.</p>
 </div>
 <div class="section" id="credits">
@@ -519,11 +528,13 @@ If you spotted it first, help us to smash it by providing a detailed and welcome
 <div class="section" id="maintainers">
 <h2><a class="toc-backref" href="#toc-entry-15">Maintainers</a></h2>
 <p>This module is maintained by the OCA.</p>
-<a class="reference external image-reference" href="https://odoo-community.org"><img alt="Odoo Community Association" src="https://odoo-community.org/logo.png" /></a>
+<a class="reference external image-reference" href="https://odoo-community.org">
+<img alt="Odoo Community Association" src="https://odoo-community.org/logo.png" />
+</a>
 <p>OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.</p>
-<p>This module is part of the <a class="reference external" href="https://github.com/OCA/delivery-carrier/tree/16.0/delivery_correos_express">OCA/delivery-carrier</a> project on GitHub.</p>
+<p>This module is part of the <a class="reference external" href="https://github.com/OCA/delivery-carrier/tree/17.0/delivery_correos_express">OCA/delivery-carrier</a> project on GitHub.</p>
 <p>You are welcome to contribute. To learn how please visit <a class="reference external" href="https://odoo-community.org/page/Contribute">https://odoo-community.org/page/Contribute</a>.</p>
 </div>
 </div>
