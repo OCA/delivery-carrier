@@ -17,13 +17,13 @@ Delivery Correos Express
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fdelivery--carrier-lightgray.png?logo=github
-    :target: https://github.com/OCA/delivery-carrier/tree/16.0/delivery_correos_express
+    :target: https://github.com/OCA/delivery-carrier/tree/17.0/delivery_correos_express
     :alt: OCA/delivery-carrier
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/delivery-carrier-16-0/delivery-carrier-16-0-delivery_correos_express
+    :target: https://translation.odoo-community.org/projects/delivery-carrier-17-0/delivery-carrier-17-0-delivery_correos_express
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/delivery-carrier&target_branch=16.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/delivery-carrier&target_branch=17.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
@@ -38,21 +38,23 @@ Este módulo integra la API de Correos Express con Odoo.
 Installation
 ============
 
-Depende de los módulos de OCA/delivery-carrier `delivery_package_number` y `delivery_state`.
+Depende de los módulos de OCA/delivery-carrier delivery_package_number y
+delivery_state.
 
-La API de Correos Express no provee métodos de cálculo de precio, de modo que para poder
-calcular los costes de envío sería recomendable instalar el módulo
-`delivery_price_method`.
+La API de Correos Express no provee métodos de cálculo de precio, de
+modo que para poder calcular los costes de envío sería recomendable
+instalar el módulo delivery_price_method.
 
 Configuration
 =============
 
 Para configurar el transportista:
 
-#. Vaya a *Inventario > Configuración > Entrega > Método de envío* y cree uno
-   nuevo.
-#. Escoja *Correos Express* Como proveedor.
-#. Configure los datos de servicio que tiene contratados y el tipo de etiqueta a usar
+1. Vaya a *Inventario > Configuración > Entrega > Método de envío* y
+   cree uno nuevo.
+2. Escoja *Correos Express* Como proveedor.
+3. Configure los datos de servicio que tiene contratados y el tipo de
+   etiqueta a usar
 
 Usage
 =====
@@ -60,61 +62,67 @@ Usage
 Estas son las distintas operaciones posibles con este módulo:
 
 Grabar servicios
-~~~~~~~~~~~~~~~~
+----------------
 
-  #. Al confirmar el albarán, el servicio se grabará en Correos Express.
-  #. Con la respuesta, se registrará en el chatter la referencia de envío y
-     las etiquetas correspondientes.
-  #. Para gestionar los bultos del envío, se puede utilizar el campo de número
-     de bultos que añade `delivery_package_number` (ver el README para mayor
-     información) o bien el flujo nativo de Odoo con paquetes de envío. El
-     módulo mandará a la API de Correos Express el número correspondiente y podremos
-     descargar las etiquetas con su correspondiente numeración.
+   1. Al confirmar el albarán, el servicio se grabará en Correos
+      Express.
+   2. Con la respuesta, se registrará en el chatter la referencia de
+      envío y las etiquetas correspondientes.
+   3. Para gestionar los bultos del envío, se puede utilizar el campo de
+      número de bultos que añade delivery_package_number (ver el README
+      para mayor información) o bien el flujo nativo de Odoo con
+      paquetes de envío. El módulo mandará a la API de Correos Express
+      el número correspondiente y podremos descargar las etiquetas con
+      su correspondiente numeración.
 
 Cancelar servicios
-~~~~~~~~~~~~~~~~~~
+------------------
 
-  #. Correos Express no dispone de un servicio para cancelar los envíos.
-  #. Si se ha de corregir algún dato, hay que grabar un nuevo envío con una nueva etiqueta.
-     Esto no hace que dicho envío se facture, solamente sucede si el paquete es recogido y entra en reparto
+   1. Correos Express no dispone de un servicio para cancelar los
+      envíos.
+   2. Si se ha de corregir algún dato, hay que grabar un nuevo envío con
+      una nueva etiqueta. Esto no hace que dicho envío se facture,
+      solamente sucede si el paquete es recogido y entra en reparto
 
 Obtener etiquetas
-~~~~~~~~~~~~~~~~~
+-----------------
 
-  #. Si por error hubiésemos eliminado el adjunto de las etiquetas que obtuvimos
-     en la grabación del servicio, podemos obtenerlas de nuevo pulsando en el
-     botón "Etiqueta Correos Express" que tenemos en la parte superior de la vista
-     formulario del albarán.
+   1. Si por error hubiésemos eliminado el adjunto de las etiquetas que
+      obtuvimos en la grabación del servicio, podemos obtenerlas de
+      nuevo pulsando en el botón "Etiqueta Correos Express" que tenemos
+      en la parte superior de la vista formulario del albarán.
 
 Seguimiento de envíos
-~~~~~~~~~~~~~~~~~~~~~
+---------------------
 
-  #. El módulo está integrado con `delivery_state` para poder recabar la
-     información de seguimiento de nuestros envíos directamente desde la API de
-     Correos Express.
-  #. Para ello, vaya al albarán con un envío Correos Express ya grabado y en la pestaña de
-     *Información adicional* verá el botón *Actualizar seguimiento* para pedir
-     a la API que actualice el estado de este envío en Odoo.
+   1. El módulo está integrado con delivery_state para poder recabar la
+      información de seguimiento de nuestros envíos directamente desde
+      la API de Correos Express.
+   2. Para ello, vaya al albarán con un envío Correos Express ya grabado
+      y en la pestaña de *Información adicional* verá el botón
+      *Actualizar seguimiento* para pedir a la API que actualice el
+      estado de este envío en Odoo.
 
 Manifiesto
-~~~~~~~~~~
+----------
 
-  #. Correos Express no dispone de un servicio para sacar el manifiesto
-     Por lo tanto se tiene que sacar desde su interfaz web
+   1. Correos Express no dispone de un servicio para sacar el manifiesto
+      Por lo tanto se tiene que sacar desde su interfaz web
 
 Depuración de errores
-~~~~~~~~~~~~~~~~~~~~~
+---------------------
 
-  #. Se puede activar Odoo con `--log-level=debug` para registrar las
-     peticiones y las respuestas en el log.
+   1. Se puede activar Odoo con --log-level=debug para registrar las
+      peticiones y las respuestas en el log.
 
 Known issues / Roadmap
 ======================
 
-* La API no facilita métodos para cotizar el coste real de los envíos, por lo
-  que siempre se cotizan a 0. Si la cotización de envíos es necesaria,
-  puede instalarse el módulo OCA `delivery_price_method` o bien personalizar
-  el método de cotización para este tipo de transportista.
+-  La API no facilita métodos para cotizar el coste real de los envíos,
+   por lo que siempre se cotizan a 0. Si la cotización de envíos es
+   necesaria, puede instalarse el módulo OCA delivery_price_method o
+   bien personalizar el método de cotización para este tipo de
+   transportista.
 
 Bug Tracker
 ===========
@@ -122,7 +130,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/delivery-carrier/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/delivery-carrier/issues/new?body=module:%20delivery_correos_express%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/delivery-carrier/issues/new?body=module:%20delivery_correos_express%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -130,19 +138,19 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * Studio73
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* `Studio73 <https://www.studio73.es>`_:
+-  `Studio73 <https://www.studio73.es>`__:
 
-  * Ethan Hildick
+   -  Ethan Hildick
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 
@@ -154,6 +162,6 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-This module is part of the `OCA/delivery-carrier <https://github.com/OCA/delivery-carrier/tree/16.0/delivery_correos_express>`_ project on GitHub.
+This module is part of the `OCA/delivery-carrier <https://github.com/OCA/delivery-carrier/tree/17.0/delivery_correos_express>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
