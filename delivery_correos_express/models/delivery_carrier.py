@@ -42,6 +42,12 @@ class DeliveryCarrier(models.Model):
         tracking_url = "https://s.correosexpress.com/c?n={}"
         return tracking_url.format(picking.carrier_tracking_ref)
 
+    def _format_correos_express_phone(self, phone):
+        """Switch international prefix + to 00, as it's the one accepted by Correos
+        Express, and remove spaces in the string for not overpassing the 15 chars limit.
+        """
+        return phone.replace("+", "00").replace(" ", "").replace("-", "")[:15]
+
     def _get_partner_streets(self, partner):
         streets = []
         if partner.street:
@@ -66,7 +72,7 @@ class DeliveryCarrier(models.Model):
             "paisISODest": partner.country_id.code or "",
             "codPosIntDest": partner.zip if not national else "",
             "contacDest": partner.name[:40] if partner.name else "",  # mandatory
-            "telefDest": phone[:15] if phone else "",  # mandatory
+            "telefDest": self._format_correos_express_phone(phone),  # mandatory
             "emailDest": partner.email[:75] if partner.email else "",
         }
 
@@ -83,7 +89,7 @@ class DeliveryCarrier(models.Model):
             "paisISORte": partner.country_id.code or "",
             "codPosIntRte": "",
             "contacRte": partner.name or "",
-            "telefRte": partner.phone or "",
+            "telefRte": self._format_correos_express_phone(partner.phone or ""),
             "emailRte": partner.email or "",
         }
 
