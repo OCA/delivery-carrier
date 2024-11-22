@@ -11,6 +11,7 @@ from odoo.exceptions import UserError
 _logger = logging.getLogger(__name__)
 CORREOS_EXPRESS_LABEL_TYPE = [("1", "PDF"), ("2", "ZPL")]
 CORREOS_EXPRESS_SERVICE = [
+    ("26", "ISLAS EXPRESS"),
     ("61", "PAQ10"),
     ("62", "PAQ14"),
     ("63", "PAQ24"),
@@ -96,15 +97,15 @@ class CorreosExpressRequest:
         return_code = 999
         message = "Webservice ERROR."
         # shipment
-        if type(result.get("codigoRetorno", "false")) != str:
+        if not isinstance(result.get("codigoRetorno", "false"), str):
             return_code = result.get("codigoRetorno")
             message = result.get("mensajeRetorno") or ""
         # label
-        if type(result.get("codErr", "false")) != str:
+        if not isinstance(result.get("codErr", "false"), str):
             return_code = result.get("codErr")
             message = result.get("desErr") or ""
         # tracking
-        if type(result.get("error", "false")) != str:
+        if not isinstance(result.get("error", "false"), str):
             return_code = result.get("error")
             message = result.get("mensajeError") or ""
         return return_code, message
