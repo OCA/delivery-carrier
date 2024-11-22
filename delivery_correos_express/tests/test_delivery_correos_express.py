@@ -59,7 +59,7 @@ class TestCorreosExpressParcel(common.SingleTransactionCase):
         },
     )
     def test_01_correos_express_picking_confirm_success(self, redirect_mock, *args):
-        self.picking.name = "ODOO-TEST-{}".format(time.time())
+        self.picking.name = f"ODOO-TEST-{time.time()}"
         self.picking.button_validate()
         self.assertEqual(
             self.picking.carrier_tracking_ref,

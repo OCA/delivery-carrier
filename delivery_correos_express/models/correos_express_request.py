@@ -37,7 +37,7 @@ TEST_PATH = "https://www.test.cexpr.es/wsps/"
 PROD_PATH = "https://www.cexpr.es/wspsc/"
 
 
-class CorreosExpressRequest(object):
+class CorreosExpressRequest:
     def __init__(self, carrier):
         self.carrier_id = carrier
         path = PROD_PATH if self.carrier_id.prod_environment else TEST_PATH
@@ -70,7 +70,7 @@ class CorreosExpressRequest(object):
                     _("Unsupported request type, please only use 'GET' or 'POST'")
                 )
             result = res.json()
-            correos_express_last_request = ("URL: {}\nData: {}").format(url, data)
+            correos_express_last_request = f"URL: {url}\nData: {data}"
             self.carrier_id.log_xml(
                 correos_express_last_request, "correos_express_last_request"
             )
