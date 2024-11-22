@@ -73,28 +73,11 @@ class DelivereaRequest(object):
             if isinstance(error, list):
                 error = error[0]
             return_code = error.get("code")
-            message = error.get("message")
-            detail = error.get("detail", "")
             if return_code:
                 raise UserError(
-                    _("%(name)s: %(rcode)s %(message)s %(detail)s %(ccode)s")
-                    % {
-                        "name": _("Deliverea Error"),
-                        "rcode": return_code,
-                        "message": message,
-                        "detail": " ".join(
-                            ["%s: %s" % (key, value) for key, value in detail.items()]
-                        )
-                        if detail and not isinstance(detail, str)
-                        else detail or "",
-                        "ccode": "\n{}: {} {}".format(
-                            _("Carrier Error"),
-                            error.get("carrierCode"),
-                            error.get("carrierMessage"),
-                        )
-                        if error.get("carrierCode")
-                        else "",
-                    }
+                    error.get("carrierMessage")
+                    if error.get("carrierMessage")
+                    else "Uncontrolled error, it is necessary to check the log"
                 )
         else:
             raise UserError(
