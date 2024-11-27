@@ -3,8 +3,9 @@
 # Copyright 2021 Gianmarco Conte <gconte@dinamicheaziendali.it>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
+from odoo.osv import expression
 
 
 class DeliveryCarrier(models.Model):
@@ -32,27 +33,24 @@ class DeliveryCarrier(models.Model):
         if self.destination_type == "multi" and self.child_ids and not self.product_id:
             self.product_id = fields.first(self.child_ids.product_id)
 
-    def search(self, args, offset=0, limit=None, order=None, count=False):
+    @api.model
+    @api.readonly
+    @api.returns("self")
+    def search(self, domain, offset=0, limit=None, order=None):
         """Don't show by default children carriers."""
         if not self.env.context.get("show_children_carriers"):
-            if args is None:
-                args = []
-            args += [("parent_id", "=", False)]
-        return super(DeliveryCarrier, self).search(
-            args,
-            offset=offset,
-            limit=limit,
-            order=order,
-            count=count,
-        )
+            if domain is None:
+                domain = []
+            domain += [("parent_id", "=", False)]
+        return super().search(domain, offset=offset, limit=limit, order=order)
 
     @api.model
-    def name_search(self, name="", args=None, operator="ilike", limit=100):
-        """Don't show by default children carriers."""
-        domain = [("parent_id", "=", False)]
-        return self.search(domain, limit=limit).name_get()
+    def _search_display_name(self, operator, value):
+        domain = super()._search_display_name(operator, value)
+        domain = expression.AND([[("parent_id", "=", False)], domain])
+        return domain
 
-    def available_carriers(self, partner):
+    def available_carriers(self, partner, order):
         """If the carrier is multi, we test the availability on children."""
         available = self.env["delivery.carrier"]
         for carrier in self:
@@ -61,7 +59,7 @@ class DeliveryCarrier(models.Model):
             else:
                 carrier = carrier.with_context(show_children_carriers=True)
                 candidates = carrier.child_ids
-            if super(DeliveryCarrier, candidates).available_carriers(partner):
+            if super(DeliveryCarrier, candidates).available_carriers(partner, order):
                 available |= carrier
         return available
 
@@ -92,7 +90,7 @@ class DeliveryCarrier(models.Model):
             for p in pickings:
                 picking_res = False
                 for subcarrier in carrier.child_ids.filtered(
-                    lambda x: not x.company_id or x.company_id == p.company_id
+                    lambda x, p=p: not x.company_id or x.company_id == p.company_id
                 ):
                     if subcarrier.delivery_type == "fixed":
                         if subcarrier._match_address(p.partner_id):
@@ -119,6 +117,8 @@ class DeliveryCarrier(models.Model):
                         finally:
                             p.carrier_id = carrier
                 if not picking_res:
-                    raise ValidationError(_("There is no matching delivery rule."))
+                    raise ValidationError(
+                        p.env._("There is no matching delivery rule.")
+                    )
                 res += picking_res
             return res
