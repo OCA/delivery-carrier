@@ -11,9 +11,9 @@ class SaleOrder(models.Model):
         res = super().action_confirm()
         # Invoice all the free delivery line on order confirmation
         # Or the order will never be fully invoiced.
-        delivery_lines = self.order_line.filtered(
-            lambda line: line.order_id.state == "sale" and line.is_free_delivery
+        free_delivery_lines = self.order_line.filtered(
+            lambda line: line.is_free_delivery and line.order_id.state == "sale"
         )
-        for line in delivery_lines:
+        for line in free_delivery_lines:
             line.qty_delivered = line.qty_invoiced = line.product_uom_qty
         return res
