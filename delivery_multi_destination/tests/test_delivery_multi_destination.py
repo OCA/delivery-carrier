@@ -9,7 +9,9 @@ class TestDeliveryMultiDestination(common.TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.country_1 = cls.env["res.country"].create({"name": "Test country 1"})
+        cls.country_1 = cls.env["res.country"].create(
+            {"name": "Test country 1", "code": "T1"}
+        )
         cls.pricelist = cls.env["product.pricelist"].create(
             {"name": "Test pricelist", "currency_id": cls.env.company.currency_id.id}
         )
@@ -20,7 +22,9 @@ class TestDeliveryMultiDestination(common.TransactionCase):
                 "property_product_pricelist": cls.pricelist.id,
             }
         )
-        cls.country_2 = cls.env["res.country"].create({"name": "Test country 2"})
+        cls.country_2 = cls.env["res.country"].create(
+            {"name": "Test country 2", "code": "T2"}
+        )
         cls.state = cls.env["res.country.state"].create(
             {"name": "Test state", "code": "TS", "country_id": cls.country_2.id}
         )
@@ -41,13 +45,13 @@ class TestDeliveryMultiDestination(common.TransactionCase):
             }
         )
         cls.product = cls.env["product.product"].create(
-            {"name": "Test carrier multi", "detailed_type": "service"}
+            {"name": "Test carrier multi", "type": "service"}
         )
         cls.product_child_1 = cls.env["product.product"].create(
-            {"name": "Test child 1", "detailed_type": "service"}
+            {"name": "Test child 1", "type": "service"}
         )
         cls.product_child_2 = cls.env["product.product"].create(
-            {"name": "Test child 2", "detailed_type": "service"}
+            {"name": "Test child 2", "type": "service"}
         )
         zip_prefix_child1 = cls.env["delivery.zip.prefix"].create({"name": "22222"})
         zip_prefix_child2 = cls.env["delivery.zip.prefix"].create({"name": "33333"})
@@ -76,7 +80,12 @@ class TestDeliveryMultiDestination(common.TransactionCase):
             }
         )
         cls.product = cls.env["product.product"].create(
-            {"name": "Test product", "detailed_type": "product", "list_price": 1}
+            {
+                "name": "Test product",
+                "type": "consu",
+                "is_storable": True,
+                "list_price": 1,
+            }
         )
         cls.sale_order = cls._create_sale_order(cls)
 
@@ -151,8 +160,9 @@ class TestDeliveryMultiDestination(common.TransactionCase):
         self.assertTrue(all(x[0] != children_carrier.id for x in carrier_names))
 
     def test_available_carriers(self):
+        self.sale_order.partner_shipping_id = self.partner_2.id
         self.assertEqual(
-            self.carrier_multi.available_carriers(self.partner_2),
+            self.carrier_multi.available_carriers(self.partner_2, self.sale_order),
             self.carrier_multi,
         )
 
@@ -163,7 +173,7 @@ class TestDeliveryMultiDestination(common.TransactionCase):
         self.sale_order.action_confirm()
         picking = self.sale_order.picking_ids
         self.assertEqual(picking.carrier_id, self.carrier_multi)
-        picking.move_ids.quantity_done = 1
+        picking.move_ids.quantity = 1
         picking._action_done()
         self.assertAlmostEqual(picking.carrier_price, 50)
 
