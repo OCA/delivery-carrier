@@ -5,14 +5,55 @@
     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 -->
 <odoo>
+    <record id="stock_picking_batch_tree" model="ir.ui.view">
+        <field name="model">stock.picking.batch</field>
+        <field name="inherit_id" ref="stock_picking_batch.stock_picking_batch_tree" />
+        <field name="arch" type="xml">
+            <field name="user_id" position="after">
+                <field name="partner_id" />
+                <field name="carrier_id" />
+            </field>
+        </field>
+    </record>
+
+    <record id="stock_picking_batch_filter" model="ir.ui.view">
+        <field name="model">stock.picking.batch</field>
+        <field name="inherit_id" ref="stock_picking_batch.stock_picking_batch_filter" />
+        <field name="arch" type="xml">
+            <field name="user_id" position="after">
+                <field name="partner_id" />
+                <field name="carrier_id" />
+            </field>
+            <filter name="user" position="after">
+                <filter
+                    string="Partner"
+                    name="partner"
+                    domain="[]"
+                    context="{'group_by': 'partner_id'}"
+                />
+                <filter
+                    string="Carrier"
+                    name="carrier"
+                    domain="[]"
+                    context="{'group_by': 'carrier_id'}"
+                />
+            </filter>
+        </field>
+    </record>
+
 
     <record id="stock_picking_batch_form" model="ir.ui.view">
         <field name="model">stock.picking.batch</field>
         <field name="inherit_id" ref="stock_picking_batch.stock_picking_batch_form" />
         <field name="arch" type="xml">
-            <xpath expr="//notebook/page[2]" position="after">
-                <page string="Additional Info" name="extra">
+            <xpath expr="//field[@name='user_id']/../.." position="after">
+                <group>
                     <group name='carrier_data' string="Shipping Information">
+                        <field
+                            name="partner_id"
+                            attrs="{'readonly': [('state', 'in', ('done', 'cancel'))]}"
+                            options="{'no_create': True, 'no_open': True}"
+                        />
                         <field
                             name="carrier_id"
                             attrs="{'readonly': [('state', 'in', ('done', 'cancel'))]}"
@@ -45,7 +86,7 @@
                             />
                         </div>
                     </group>
-                </page>
+                </group>
             </xpath>
             <xpath expr="//div[hasclass('oe_title')]" position="before">
                 <div class="oe_button_box" name="button_box">

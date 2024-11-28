@@ -19,6 +19,11 @@ class StockPickingBatch(models.Model):
     carrier_id = fields.Many2one(
         "delivery.carrier", string="Carrier", check_company=True
     )
+    partner_id = fields.Many2one(
+        "res.partner",
+        string="Delivery Address",
+        check_company=True,
+    )
     weight = fields.Float(
         compute="_compute_weight",
         digits="Stock Weight",
@@ -41,6 +46,15 @@ class StockPickingBatch(models.Model):
         "batch_id",
         string="Packages",
     )
+
+    @api.depends("partner_id")
+    def _compute_allowed_picking_ids(self):
+        super()._compute_allowed_picking_ids()
+        for record in self:
+            if record.partner_id:
+                record.allowed_picking_ids = record.allowed_picking_ids.filtered(
+                    lambda s: s.partner_id == record.partner_id
+                )
 
     @api.constrains("carrier_id")
     def _check_carrier_id_is_roulier(self):
