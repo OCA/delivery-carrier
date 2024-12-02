@@ -1,0 +1,167 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* delivery_package_number
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2024-12-02 10:06+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.6.2\n"
+
+#. module: delivery_package_number
+#: model_terms:ir.ui.view,arch_db:delivery_package_number.view_number_package_validate
+msgid "Apply"
+msgstr "Applica"
+
+#. module: delivery_package_number
+#: model:ir.model.fields,field_description:delivery_package_number.field_stock_picking__ask_number_of_packages
+msgid "Ask Number Of Packages"
+msgstr "Chiedi numero di colli"
+
+#. module: delivery_package_number
+#: model:ir.model,name:delivery_package_number.model_stock_backorder_confirmation
+msgid "Backorder Confirmation"
+msgstr "Conferma ordine residuo"
+
+#. module: delivery_package_number
+#: model_terms:ir.ui.view,arch_db:delivery_package_number.view_number_package_validate
+msgid "Cancel"
+msgstr "Annulla"
+
+#. module: delivery_package_number
+#: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_line_wizard__create_uid
+#: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_wizard__create_uid
+msgid "Created by"
+msgstr "Creato da"
+
+#. module: delivery_package_number
+#: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_line_wizard__create_date
+#: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_wizard__create_date
+msgid "Created on"
+msgstr "Creato il"
+
+#. module: delivery_package_number
+#: model:ir.actions.report,name:delivery_package_number.action_delivery_package_number_report
+msgid "Delivery package number"
+msgstr "Numero collo consegna"
+
+#. module: delivery_package_number
+#: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_line_wizard__display_name
+#: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_wizard__display_name
+msgid "Display Name"
+msgstr "Nome visualizzato"
+
+#. module: delivery_package_number
+#: model:ir.model.fields,field_description:delivery_package_number.field_stock_picking_type__force_set_number_of_packages
+msgid "Force Set Number Of Packages"
+msgstr "Forza impostazione numero di colli"
+
+#. module: delivery_package_number
+#: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_line_wizard__id
+#: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_wizard__id
+msgid "ID"
+msgstr "ID"
+
+#. module: delivery_package_number
+#: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_line_wizard__write_uid
+#: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_wizard__write_uid
+msgid "Last Updated by"
+msgstr "Ultimo aggiornamento di"
+
+#. module: delivery_package_number
+#: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_line_wizard__write_date
+#: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_wizard__write_date
+msgid "Last Updated on"
+msgstr "Ultimo aggiornamento il"
+
+#. module: delivery_package_number
+#: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_wizard__number_of_packages
+msgid "Number Of Packages"
+msgstr "Numero di colli"
+
+#. module: delivery_package_number
+#: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_line_wizard__number_of_packages
+#: model:ir.model.fields,field_description:delivery_package_number.field_stock_picking__number_of_packages
+msgid "Number of Packages"
+msgstr "Numero di colli"
+
+#. module: delivery_package_number
+#: model_terms:ir.ui.view,arch_db:delivery_package_number.view_picking_type_form
+msgid "Number of packages"
+msgstr "Numero di colli"
+
+#. module: delivery_package_number
+#: model_terms:ir.ui.view,arch_db:delivery_package_number.delivery_package_number_document
+msgid "Number of packages:"
+msgstr "Numero di colli:"
+
+#. module: delivery_package_number
+#: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_wizard__pick_ids
+msgid "Pick"
+msgstr "Preleva"
+
+#. module: delivery_package_number
+#: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_line_wizard__picking_id
+msgid "Picking"
+msgstr "Prelievo"
+
+#. module: delivery_package_number
+#: model:ir.model,name:delivery_package_number.model_stock_picking_type
+msgid "Picking Type"
+msgstr "Tipo prelievo"
+
+#. module: delivery_package_number
+#: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_wizard__print_package_label
+msgid "Print Package Label"
+msgstr "Stampa etichetta collo"
+
+#. module: delivery_package_number
+#: model:ir.model.fields,field_description:delivery_package_number.field_stock_picking_type__report_number_of_packages
+msgid "Report Number Of Packages"
+msgstr "Resoconto numero di colli"
+
+#. module: delivery_package_number
+#. odoo-python
+#: code:addons/delivery_package_number/models/stock_picking.py:0
+#: model_terms:ir.ui.view,arch_db:delivery_package_number.view_number_package_validate
+#, python-format
+msgid "Set number of packages"
+msgstr "Imposta numero di colli"
+
+#. module: delivery_package_number
+#: model:ir.model.fields,help:delivery_package_number.field_stock_number_package_validate_wizard__number_of_packages
+msgid "Set the number of packages for this picking(s)"
+msgstr "Imposta il numero di colli per questo prelievo(i)"
+
+#. module: delivery_package_number
+#: model:ir.model,name:delivery_package_number.model_stock_number_package_validate_line_wizard
+msgid "Stock Number Package Lines Wizard"
+msgstr "Procedura guidata numeri righe colli magazzino"
+
+#. module: delivery_package_number
+#: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_wizard__stock_number_package_validation_line_ids
+msgid "Stock Number Package Validation Line"
+msgstr "Riga validazione numero collo magazzino"
+
+#. module: delivery_package_number
+#: model:ir.model,name:delivery_package_number.model_stock_picking
+msgid "Transfer"
+msgstr "Trasferimento"
+
+#. module: delivery_package_number
+#: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_line_wizard__wiz_id
+msgid "Wiz"
+msgstr "Procedura guidata"
+
+#. module: delivery_package_number
+#: model:ir.model,name:delivery_package_number.model_stock_number_package_validate_wizard
+msgid "Wizard to force set number of pickings when validate"
+msgstr "Procedura guidata per forzare il numero di prelievi quando validati"
