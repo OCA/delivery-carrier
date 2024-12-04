@@ -4,10 +4,7 @@
 <odoo>
     <template id="report_picking" inherit_id="stock.report_picking">
         <xpath expr="//div[@name='div_sched_date']" position="after">
-            <div
-                t-if="o.picking_type_id.code == 'outgoing' and o.delivery_zone_id"
-                class="col-auto"
-            >
+            <div t-if="o.delivery_zone_id" class="col-auto">
                 <strong>Zone</strong>
                 <span t-field="o.delivery_zone_id" />
             </div>
