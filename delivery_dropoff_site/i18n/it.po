@@ -595,6 +595,11 @@ msgid "Invoices"
 msgstr ""
 
 #. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__is_coa_installed
+msgid "Is Coa Installed"
+msgstr ""
+
+#. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__is_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_res_partner__is_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_res_users__is_dropoff_site
