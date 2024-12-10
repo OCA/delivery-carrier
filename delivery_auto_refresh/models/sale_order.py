@@ -25,7 +25,14 @@ class SaleOrder(models.Model):
     # End migration note
 
     # Migration Note 17.0: move this section to module sale_order_carrier_auto_assign
-    def _set_delivery_carrier(self, set_delivery_line=True):
+    def _set_delivery_carrier(
+        self, set_delivery_line=True, preserve_order_carrier=True
+    ):
+        """Automatically change delivery carrier.
+
+        :param set_delivery_line: It will create or update the delivery line
+        :param preserve_order_carrier: It will respect the carrier set on the order
+        """
         for order in self:
             delivery_wiz_action = order.action_open_delivery_wizard()
             delivery_wiz_context = delivery_wiz_action.get("context", {})
@@ -38,7 +45,7 @@ class SaleOrder(models.Model):
             )
 
             # Do not override carrier
-            if order.carrier_id:
+            if preserve_order_carrier and order.carrier_id:
                 delivery_wiz.carrier_id = order.carrier_id
 
             # If the carrier isn't allowed, we won't default to it
@@ -62,7 +69,10 @@ class SaleOrder(models.Model):
         if not partner:
             return
         if self.company_id.sale_auto_assign_carrier_on_create:
-            self._set_delivery_carrier(set_delivery_line=False)
+            self._set_delivery_carrier(
+                set_delivery_line=False,
+                preserve_order_carrier=False,
+            )
 
     def _is_auto_set_carrier_on_create(self):
         self.ensure_one()
