@@ -26,7 +26,7 @@ class TestDeliveryCarrierManualPrice(TransactionCase):
             }
         )
         cls.product = cls.env["product.product"].create(
-            {"name": "Test product", "type": "product"}
+            {"name": "Test product", "type": "consu"}
         )
         cls.partner = cls.env["res.partner"].create({"name": "Test Partner"})
         cls.sale = cls.env["sale.order"].create(
