@@ -11,17 +11,14 @@
                 <field name="is_manual_price" invisible="1" />
             </field>
             <field name="delivery_price" position="attributes">
-                <attribute name="invisible">0</attribute>
-                <attribute
-                    name="attrs"
-                >{'invisible': [('is_manual_price','=', False)]}</attribute>
+                <attribute name="invisible">not is_manual_price</attribute>
                 <attribute name="widget">monetary</attribute>
                 <attribute name="options">{'currency_field': 'currency_id'}</attribute>
             </field>
             <field name="display_price" position="attributes">
                 <attribute
-                    name="attrs"
-                >{'invisible': ['|', ('carrier_id','=', False), ('is_manual_price','=', True)]}</attribute>
+                    name="invisible"
+                >not carrier_id or is_manual_price</attribute>
             </field>
             <field name="display_price" position="before">
                 <field name="delivery_price" position="move" />
