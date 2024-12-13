@@ -6,12 +6,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-12-20 08:52+0000\n"
+"PO-Revision-Date: 2024-12-20 08:52+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: delivery_package_number
+#: model:ir.model.fields.selection,name:delivery_package_number.selection__stock_picking_type__force_set_number_of_packages__always
+msgid "Always"
+msgstr ""
 
 #. module: delivery_package_number
 #: model_terms:ir.ui.view,arch_db:delivery_package_number.view_number_package_validate
@@ -31,6 +38,11 @@ msgstr ""
 #. module: delivery_package_number
 #: model_terms:ir.ui.view,arch_db:delivery_package_number.view_number_package_validate
 msgid "Cancel"
+msgstr ""
+
+#. module: delivery_package_number
+#: model:ir.model,name:delivery_package_number.model_res_partner
+msgid "Contact"
 msgstr ""
 
 #. module: delivery_package_number
@@ -57,6 +69,8 @@ msgid "Display Name"
 msgstr ""
 
 #. module: delivery_package_number
+#: model:ir.model.fields,field_description:delivery_package_number.field_res_partner__force_set_number_of_packages
+#: model:ir.model.fields,field_description:delivery_package_number.field_res_users__force_set_number_of_packages
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_picking_type__force_set_number_of_packages
 msgid "Force Set Number Of Packages"
 msgstr ""
@@ -91,12 +105,12 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: delivery_package_number
+#: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_line_wizard__number_of_packages
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_wizard__number_of_packages
 msgid "Number Of Packages"
 msgstr ""
 
 #. module: delivery_package_number
-#: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_line_wizard__number_of_packages
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_picking__number_of_packages
 msgid "Number of Packages"
 msgstr ""
@@ -109,6 +123,11 @@ msgstr ""
 #. module: delivery_package_number
 #: model_terms:ir.ui.view,arch_db:delivery_package_number.delivery_package_number_document
 msgid "Number of packages:"
+msgstr ""
+
+#. module: delivery_package_number
+#: model:ir.model.fields.selection,name:delivery_package_number.selection__stock_picking_type__force_set_number_of_packages__partner
+msgid "Partner condition"
 msgstr ""
 
 #. module: delivery_package_number

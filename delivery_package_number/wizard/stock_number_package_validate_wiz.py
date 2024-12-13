@@ -42,9 +42,10 @@ class StockNumberPackageValidateWiz(models.TransientModel):
         if self.number_of_packages:
             self.pick_ids.write({"number_of_packages": self.number_of_packages})
         # put context key for avoiding `base_delivery_carrier_label` auto-packaging feature
-        self.pick_ids.with_context(
-            set_default_package=False, bypass_set_number_of_packages=True
-        ).button_validate()
+        if not self.env.context.get("skip_picking_validate", False):
+            self.pick_ids.with_context(
+                set_default_package=False, bypass_set_number_of_packages=True
+            ).button_validate()
         if self.print_package_label:
             return self._print_package_label()
 
@@ -54,11 +55,10 @@ class StockNumberPackageValidateWiz(models.TransientModel):
         For example, you can use base_report_to_printer to send the report directly to
         printer.
         """
-        report = (
-            self.pick_ids.picking_type_id.report_number_of_packages
-            or self.env.ref(
-                "delivery_package_number.action_delivery_package_number_report"
-            )
+        report = self.env.context.get(
+            "report_action", self.pick_ids.picking_type_id.report_number_of_packages
+        ) or self.env.ref(
+            "delivery_package_number.action_delivery_package_number_report"
         )
         report_action = report.report_action(self.pick_ids)
         report_action.update({"close_on_report_download": True})

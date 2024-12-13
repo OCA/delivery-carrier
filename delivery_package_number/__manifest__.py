@@ -15,6 +15,7 @@
         "security/ir.model.access.csv",
         "data/paperformat_data.xml",
         "reports/report_package_number.xml",
+        "views/res_partner_view.xml",
         "views/stock_picking_type_views.xml",
         "views/stock_picking_views.xml",
         "wizard/stock_number_package_validate_wiz_view.xml",
