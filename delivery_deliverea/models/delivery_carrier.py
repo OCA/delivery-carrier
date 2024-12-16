@@ -266,29 +266,25 @@ class DeliveryCarrier(models.Model):
                 % {"field": ", ".join(errors), "object_id": object_id.name}
             )
 
-    def _get_field_from_partner_or_parent_id(self, partner, field):
-        return partner[field] or partner.parent_id and partner.parent_id[field] or ""
-
     def _get_deliverea_sender_info(self, partner, request_type):
-        country_id = self._get_field_from_partner_or_parent_id(partner, "country_id")
-        state_id = self._get_field_from_partner_or_parent_id(partner, "state_id")
+        country_id = partner.country_id or ""
+        state_id = partner.state_id or ""
         values = {
-            "name": self._get_field_from_partner_or_parent_id(partner, "name"),
+            "name": partner.name or "",
             "address": " ".join(
                 [
-                    self._get_field_from_partner_or_parent_id(partner, "street"),
-                    self._get_field_from_partner_or_parent_id(partner, "street2"),
+                    partner.street or "",
+                    partner.street2 or "",
                 ]
             ).strip(),
-            "city": self._get_field_from_partner_or_parent_id(partner, "city"),
-            "zipCode": self._get_field_from_partner_or_parent_id(partner, "zip"),
+            "city": partner.city or "",
+            "zipCode": partner.zip or "",
             "countryCode": country_id.code if country_id else "",
-            "idNumber": self._get_field_from_partner_or_parent_id(partner, "vat"),
+            "idNumber": partner.vat or "",
             "stateCode": state_id.code if state_id else "",
             "observations": "",
-            "phone": self._get_field_from_partner_or_parent_id(partner, "phone")
-            or self._get_field_from_partner_or_parent_id(partner, "mobile"),
-            "email": self._get_field_from_partner_or_parent_id(partner, "email"),
+            "phone": partner.phone or partner.mobile or "",
+            "email": partner.email or "",
         }
         self._check_mandatory_fields(
             values,
