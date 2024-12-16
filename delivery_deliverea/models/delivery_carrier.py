@@ -414,6 +414,7 @@ class DeliveryCarrier(models.Model):
                 or "",
             },
         }
+        self._get_bulky_deliverea(picking, payload)
         self._delete_empty_values(payload)
         self._check_mandatory_fields(payload, MANDATORY_SENDER_FIELDS, carrier)
         return payload
@@ -558,3 +559,17 @@ class DeliveryCarrier(models.Model):
             picking.date_delivered = datetime.strftime(
                 datetime.now(), DEFAULT_SERVER_DATETIME_FORMAT
             )
+
+    def _get_bulky_deliverea(self, picking, payload):
+        # here we can add the zip code and the warehouse
+        bulky = {"incoterm": {"code": ""}}
+        incoterm_code = (
+            picking.sale_id.incoterm.code
+            if picking.sale_id and picking.sale_id.incoterm
+            else self.env.company.incoterm_id.code
+        )
+
+        if incoterm_code:
+            bulky["incoterm"]["code"] = incoterm_code
+            payload["bulky"] = bulky
+        return payload
