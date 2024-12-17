@@ -94,18 +94,65 @@
                         <group colspan="12">
                             <p
                                 colspan="12"
-                            >Additional service attributes. Availability depends on the carrier and service.</p>
+                            >Additional service attributes. Availability depends on the carrier and service. If the attribute is 'Unsupported' or 'Required' the check pass to be unalterable</p>
                         </group>
                         <group>
-                            <field name="deliverea_notifications_sms" />
-                            <field name="deliverea_notifications_email" />
-                            <field name="deliverea_hide_sender" />
+                            <field
+                                name="deliverea_notifications_sms"
+                                attrs="{'readonly': [('deliverea_notifications_sms_readonly', '=', True)]}"
+                            />
+                            <field
+                                name="deliverea_notifications_email"
+                                attrs="{'readonly': [('deliverea_notifications_email_readonly', '=', True)]}"
+                            />
+                            <field
+                                name="deliverea_hide_sender"
+                                attrs="{'readonly': [('deliverea_hide_sender_readonly', '=', True)]}"
+                            />
                         </group>
                         <group>
-                            <field name="deliverea_return_label" />
-                            <field name="deliverea_return_proof_delivery" />
-                            <field name="deliverea_saturday_delivery" />
+                            <field
+                                name="deliverea_return_label"
+                                attrs="{'readonly': [('deliverea_return_label_readonly', '=', True)]}"
+                            />
+                            <field
+                                name="deliverea_return_proof_delivery"
+                                attrs="{'readonly': [('deliverea_return_proof_delivery_readonly', '=', True)]}"
+                            />
+                            <field
+                                name="deliverea_saturday_delivery"
+                                attrs="{'readonly': [('deliverea_saturday_delivery_readonly', '=', True)]}"
+                            />
+                            <field
+                                name="deliverea_exchange"
+                                attrs="{'readonly': [('deliverea_exchange_readonly', '=', True)]}"
+                            />
                         </group>
+                            <field
+                            name="deliverea_notifications_sms_readonly"
+                            invisible="1"
+                        />
+                            <field
+                            name="deliverea_notifications_email_readonly"
+                            invisible="1"
+                        />
+                            <field
+                            name="deliverea_saturday_delivery_readonly"
+                            invisible="1"
+                        />
+                            <field
+                            name="deliverea_return_label_readonly"
+                            invisible="1"
+                        />
+                            <field
+                            name="deliverea_return_proof_delivery_readonly"
+                            invisible="1"
+                        />
+                            <field
+                            name="deliverea_hide_sender_readonly"
+                            invisible="1"
+                        />
+                        <field name="deliverea_exchange_readonly" invisible="1" />
                     </group>
                 </page>
             </xpath>

@@ -39,10 +39,10 @@ msgstr "Activo"
 #: model_terms:ir.ui.view,arch_db:delivery_deliverea.view_delivery_carrier_form
 msgid ""
 "Additional service attributes. Availability depends on the carrier and "
-"service."
+"service. If the attribute is 'Unsupported' or 'Required' the check pass to be unalterable"
 msgstr ""
 "Atributos adicionales del servicio. La disponibilidad depende del "
-"transportista y del servicio."
+"transportista y del servicio. Si el atributo es 'Unsupported' o 'Required', el check será inalterable."
 
 #. module: delivery_deliverea
 #: model:ir.model.fields,field_description:delivery_deliverea.field_deliverea_distribution_center__address

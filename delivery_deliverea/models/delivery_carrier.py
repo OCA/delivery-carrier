@@ -29,6 +29,16 @@ MANDATORY_PAYLOAD_FIELDS = (
     "clientReference",
 )
 
+parameter_keys = {
+    "notificationViaSMS": "deliverea_notifications_sms",
+    "notificationViaEmail": "deliverea_notifications_email",
+    "saturdayDelivery": "deliverea_saturday_delivery",
+    "hideSender": "deliverea_hide_sender",
+    "returnLabel": "deliverea_return_label",
+    "returnProofOfDelivery": "deliverea_return_proof_delivery",
+    "exchange": "deliverea_exchange",
+}
+
 
 class DeliveryCarrier(models.Model):
     _inherit = "delivery.carrier"
@@ -76,37 +86,62 @@ class DeliveryCarrier(models.Model):
         help="Default weight, height, width and length for packages",
     )
     deliverea_notifications_sms = fields.Boolean(
+        store=True,
         string="Notify by sms",
         help="The carrier will send info sms(s) to the final customer",
+        compute="_compute_deliverea_parameter",
     )
     deliverea_notifications_email = fields.Boolean(
+        store=True,
         string="Notify by email",
         help="The carrier will send info email(s) to the final customer",
+        compute="_compute_deliverea_parameter",
     )
     deliverea_saturday_delivery = fields.Boolean(
+        store=True,
         string="Saturday Delivery",
         help="Whether or not the expedition should be delivered on Saturday"
         " or wait until next Monday (availability depends on carrier and service)",
+        compute="_compute_deliverea_parameter",
     )
     deliverea_return_label = fields.Boolean(
+        store=True,
         string="Return Label",
         help="Whether or not to include dormant return label in case the final customer"
         " wants to return the expedition (availability depends on carrier and service)",
+        compute="_compute_deliverea_parameter",
     )
     deliverea_return_proof_delivery = fields.Boolean(
+        store=True,
         string="Return Proof Delivery",
         help="Whether or not to a proof of delivery should be returned"
         " back to origin (availability depends on carrier and service)",
+        compute="_compute_deliverea_parameter",
     )
     deliverea_hide_sender = fields.Boolean(
+        store=True,
         string="Hide Sender",
         help="Whether or not to hide sender information in the printed label"
         " (availability depends on carrier and service)",
+        compute="_compute_deliverea_parameter",
     )
     deliverea_carrier_service_id = fields.Many2one(
         comodel_name="carrier.deliverea.service",
         domain="[('deliverea_distribution_center_id', '=', deliverea_distribution_center_id)]",
     )
+    deliverea_exchange = fields.Boolean(
+        string="Exchange",
+        help="Mark expedition as exchange (when delivering the package,"
+        " another package has to be picked up from the final client and will be sent"
+        " back to the original sender. Availability depends on carrier and service)",
+    )
+    deliverea_notifications_sms_readonly = fields.Boolean()
+    deliverea_notifications_email_readonly = fields.Boolean()
+    deliverea_saturday_delivery_readonly = fields.Boolean()
+    deliverea_return_label_readonly = fields.Boolean()
+    deliverea_return_proof_delivery_readonly = fields.Boolean()
+    deliverea_hide_sender_readonly = fields.Boolean()
+    deliverea_exchange_readonly = fields.Boolean()
 
     def deliverea_get_distribution_centers(self):
         deliverea_request = DelivereaRequest(self)
@@ -165,6 +200,48 @@ class DeliveryCarrier(models.Model):
                 self.env.cr.rollback()
         return True
 
+    def manage_deliverea_params(self, service_id, service_parameter):
+        for parameter in service_parameter.get("parameters", []):
+            parameter_name = parameter.get("name")
+            parameter_type = parameter.get("necessity").get("type")
+            parameter_id = self.env["carrier.deliverea.parameter"].search(
+                # change the search domain for manage type changes
+                [
+                    ("name", "=", parameter_name),
+                    # ("type", "=", parameter_type),
+                    ("service_id", "=", service_id.id),
+                ]
+            )
+            if not parameter_id:
+                self.env["carrier.deliverea.parameter"].create(
+                    {
+                        "name": parameter_name,
+                        "type": parameter_type,
+                        "service_id": service_id.id,
+                    }
+                )
+            else:
+                if parameter_id.type != parameter_type:
+                    parameter_id.write({"type": parameter_type})
+
+    def _create_service(
+        self, carrier_code, service_code, service_parameter, active_service
+    ):
+        return self.env["carrier.deliverea.service"].create(
+            {
+                "name": (carrier_code or "").upper()
+                + " "
+                + (service_parameter.get("name", "") or (service_code or "")),
+                "code": service_code,
+                "description": service_parameter.get("description") or "",
+                "carrier_code": carrier_code,
+                "deliverea_distribution_center_id": (
+                    self.deliverea_distribution_center_id.id
+                ),
+                "active": active_service,
+            }
+        )
+
     def deliverea_get_services(self):
         deliverea_request = DelivereaRequest(self)
         if not self.deliverea_distribution_center_id:
@@ -173,16 +250,18 @@ class DeliveryCarrier(models.Model):
             self.deliverea_distribution_center_id.uuid
         )
         for carrier in carriers.get("data"):
+            carrier_code = carrier.get("code")
             services = deliverea_request.get_carrier_detail(
                 distribution_center_id=self.deliverea_distribution_center_id.uuid,
-                carrier_code=carrier.get("code"),
+                carrier_code=carrier_code,
                 cost_center=carrier.get("costCenters")[0].get("code"),
             )
             for service in services.get("services"):
+                service_code = service.get("code")
                 service_id = self.env["carrier.deliverea.service"].search(
                     [
-                        ("carrier_code", "=", carrier.get("code")),
-                        ("code", "=", service.get("code")),
+                        ("carrier_code", "=", carrier_code),
+                        ("code", "=", service_code),
                         ("active", "in", [True, False]),
                     ]
                 )
@@ -194,56 +273,23 @@ class DeliveryCarrier(models.Model):
                     continue
                 services_parameter = (
                     deliverea_request.get_carrier_services_integrations(
-                        carrier.get("code"), services.get("integrationCode")
+                        carrier_code, services.get("integrationCode")
                     )
                 )
                 service_parameter = next(
                     (
                         item
                         for item in services_parameter.get("services")
-                        if item.get("code") == service.get("code")
+                        if item.get("code") == service_code
                     ),
                     {},
                 )
                 if not service_id:
-                    service_id = self.env["carrier.deliverea.service"].create(
-                        {
-                            "name": carrier.get("code", "").upper()
-                            + " "
-                            + (
-                                service_parameter.get("name", "")
-                                or service.get("code", "")
-                            ),
-                            "code": service.get("code"),
-                            "description": service_parameter.get("description") or "",
-                            "carrier_code": carrier.get("code"),
-                            "deliverea_distribution_center_id": (
-                                self.deliverea_distribution_center_id.id
-                            ),
-                            "active": active_service,
-                        }
+                    self._create_service(
+                        carrier_code, service_code, service_parameter, active_service
                     )
-                for parameter in service_parameter.get("parameters", []):
-                    parameter_id = self.env["carrier.deliverea.parameter"].search(
-                        [
-                            ("name", "=", parameter.get("name")),
-                            ("type", "=", parameter.get("necessity").get("type")),
-                        ]
-                    )
-                    if not parameter_id:
-                        parameter_id = self.env["carrier.deliverea.parameter"].create(
-                            {
-                                "name": parameter.get("name"),
-                                "type": parameter.get("necessity").get("type"),
-                            }
-                        )
-                    if parameter_id.id not in service_id.deliverea_parameters.ids:
-                        service_id.deliverea_parameters = [
-                            (
-                                4,
-                                parameter_id.id,
-                            )
-                        ]
+                self.manage_deliverea_params(service_id, service_parameter)
+        self._compute_deliverea_parameter()
 
     def _delete_empty_values(self, values):
         delete = []
@@ -358,7 +404,7 @@ class DeliveryCarrier(models.Model):
             "hideSender": carrier.deliverea_hide_sender,
             "insuranceValue": "0.0 EUR",
         }
-        for parameter in service.deliverea_parameters:
+        for parameter in service.deliverea_parameters_ids:
             if parameter.name in values.keys():
                 if parameter.type in ("ignored", "unsupported"):
                     del values[parameter.name]
@@ -538,3 +584,30 @@ class DeliveryCarrier(models.Model):
             picking.date_delivered = datetime.strftime(
                 datetime.now(), DEFAULT_SERVER_DATETIME_FORMAT
             )
+
+    def deliverea_check_parameters(self, parameter):
+        # this function is for check the parameters and auto check the checkbox
+        parameters_key = parameter_keys
+        param = parameters_key.get(parameter.name)
+        param_readonly = param + "_readonly"
+        param_state = self[param]
+        readonly_state = self[param + "_readonly"]
+        if param:
+            if parameter.type == "unsupported":
+                param_state = False
+                readonly_state = True
+            elif parameter.type == "required":
+                param_state = True
+                readonly_state = True
+            self.write({param: param_state, param_readonly: readonly_state})
+
+    @api.depends("deliverea_carrier_service_id")
+    def _compute_deliverea_parameter(self):
+        parameter_key_list = list(parameter_keys.keys())
+        parameters = (
+            self.deliverea_carrier_service_id.deliverea_parameters_ids.filtered(
+                lambda a: a.name in parameter_key_list
+            )
+        )
+        for parameter in parameters:
+            self.deliverea_check_parameters(parameter)

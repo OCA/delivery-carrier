@@ -8,7 +8,9 @@ class CarrierDelivereaService(models.Model):
 
     name = fields.Char()
     description = fields.Char()
-    deliverea_parameters = fields.Many2many(comodel_name="carrier.deliverea.parameter")
+    deliverea_parameters_ids = fields.One2many(
+        "carrier.deliverea.parameter", "service_id"
+    )
     carrier_code = fields.Char()
     deliverea_distribution_center_id = fields.Many2one(
         comodel_name="deliverea.distribution.center",
