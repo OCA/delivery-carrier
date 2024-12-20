@@ -1,7 +1,7 @@
 To use this module, you need to:
 
 * Identify your SSCC range. For example: `123456789012xxxxx`.
-* Go to the form view of the `ir.sequence` record for your packages.
+* Go to the form view of the sequence record for your packages.
 * Clear the Prefix field (eg from `PACK` to empty)
 * Set the Sequence Size (padding) field to the number of variable digits.
   In the above example, it would be 5.
