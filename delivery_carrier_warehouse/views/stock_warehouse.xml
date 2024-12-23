@@ -6,10 +6,7 @@
         <field name="inherit_id" ref="stock.view_warehouse" />
         <field name="arch" type="xml">
             <field name="partner_id" position="after">
-                <field
-                    name="delivery_carrier_id"
-                    domain="['|', ('company_id', '=', False), ('company_id', '=', company_id)]"
-                />
+                <field name="delivery_carrier_id" />
             </field>
         </field>
     </record>

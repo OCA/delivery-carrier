@@ -9,6 +9,7 @@ class StockWarehouse(models.Model):
     delivery_carrier_id = fields.Many2one(
         "delivery.carrier",
         string="Delivery Method",
+        check_company=True,
         help="Default delivery method used in sales orders. Will be applied "
         "only if the partner does not have a default delivery method.",
     )

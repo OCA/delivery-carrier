@@ -62,11 +62,13 @@ Contributors
 -  Akim Juillerat <akim.juillerat@camptocamp.com>
 -  Phuc Tran Thanh <phuc@trobz.com>
 -  Fernando La Chica - GreenIce <fernandolachica@gmail.com>
+-  Chau Le <chaulb@trobz.com>
 
 Other credits
 -------------
 
-The development of this module has been financially supported by:
+The development and migration of this module has been financially
+supported by:
 
 -  Camptocamp
 
