@@ -4,7 +4,6 @@ from odoo import fields, models
 
 
 class StockWarehouse(models.Model):
-
     _inherit = "stock.warehouse"
 
     delivery_carrier_id = fields.Many2one(
