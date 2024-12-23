@@ -17,33 +17,34 @@ Delivery Package Fees
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fdelivery--carrier-lightgray.png?logo=github
-    :target: https://github.com/OCA/delivery-carrier/tree/16.0/delivery_package_fee
+    :target: https://github.com/OCA/delivery-carrier/tree/18.0/delivery_package_fee
     :alt: OCA/delivery-carrier
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/delivery-carrier-16-0/delivery-carrier-16-0-delivery_package_fee
+    :target: https://translation.odoo-community.org/projects/delivery-carrier-18-0/delivery-carrier-18-0-delivery_package_fee
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/delivery-carrier&target_branch=16.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/delivery-carrier&target_branch=18.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
 Add delivery fees on Sales Orders based on the delivered packages.
 
-A list of Package Fees can be added on shipping methods.
-When a outgoing transfer is done, for each package fee configured on the
-shipping method, a new sale order line is created with:
+A list of Package Fees can be added on shipping methods. When a outgoing
+transfer is done, for each package fee configured on the shipping
+method, a new sale order line is created with:
 
-* The product selected on the Package Fee
-* The product name with the number of the transfer in the line's description
-  (e.g. "Service Fee (WH/OUT/00036)")
-* The quantity equal to the number of packages in the transfer
-* The unit price equal to the price set on the product's pricelist (so it can be
-  different per customer and even have different pricing depending on the number
-  of packages)
-* The taxes configured on the product, fiscal position applies if any.
+-  The product selected on the Package Fee
+-  The product name with the number of the transfer in the line's
+   description (e.g. "Service Fee (WH/OUT/00036)")
+-  The quantity equal to the number of packages in the transfer
+-  The unit price equal to the price set on the product's pricelist (so
+   it can be different per customer and even have different pricing
+   depending on the number of packages)
+-  The taxes configured on the product, fiscal position applies if any.
 
-Package Fee lines are added only if their quantity and price is above zero.
+Package Fee lines are added only if their quantity and price is above
+zero.
 
 **Table of contents**
 
@@ -53,9 +54,9 @@ Package Fee lines are added only if their quantity and price is above zero.
 Configuration
 =============
 
-In "Inventory > Configuration > Delivery > Shipping Methods", a new tab allow to
-select the package fees. For each product added, a new fee line will be added in
-the sales order.
+In "Inventory > Configuration > Delivery > Shipping Methods", a new tab
+allow to select the package fees. For each product added, a new fee line
+will be added in the sales order.
 
 Bug Tracker
 ===========
@@ -63,7 +64,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/delivery-carrier/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/delivery-carrier/issues/new?body=module:%20delivery_package_fee%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/delivery-carrier/issues/new?body=module:%20delivery_package_fee%0Aversion:%2018.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -71,22 +72,23 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * Camptocamp
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* Guewen Baconnier <guewen.baconnier@camptocamp.com>
+-  Guewen Baconnier <guewen.baconnier@camptocamp.com>
 
 Other credits
-~~~~~~~~~~~~~
+-------------
 
-The migration of this module from 14.0 to 16.0 was financially supported by Camptocamp.
+The migration of this module from 14.0 to 16.0 was financially supported
+by Camptocamp.
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 
@@ -98,6 +100,6 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-This module is part of the `OCA/delivery-carrier <https://github.com/OCA/delivery-carrier/tree/16.0/delivery_package_fee>`_ project on GitHub.
+This module is part of the `OCA/delivery-carrier <https://github.com/OCA/delivery-carrier/tree/18.0/delivery_package_fee>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.

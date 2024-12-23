@@ -62,12 +62,10 @@ class SaleOrder(models.Model):
 
         # line description
         if fee_product.description_sale:
-            so_description = "{}: {}".format(
-                fee_product.name, fee_product.description_sale
-            )
+            so_description = f"{fee_product.name}: {fee_product.description_sale}"
         else:
             so_description = fee_product.name
-        so_description = "{} ({})".format(so_description, picking.name)
+        so_description = f"{so_description} ({picking.name})"
 
         values = {
             "order_id": self.id,

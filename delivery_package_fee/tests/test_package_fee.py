@@ -128,14 +128,14 @@ class TestPackageFee(TransactionCase):
                     # one unit per package
                     "product_uom_qty": 2.0,
                     "price_unit": 3.0,
-                    "name": "LSVA Fee ({})".format(picking.name),
+                    "name": f"LSVA Fee ({picking.name})",
                 },
                 {
                     "product_id": self.fee2.id,
                     # one unit per package
                     "product_uom_qty": 2.0,
                     "price_unit": 4.0,
-                    "name": "Service Fee ({})".format(picking.name),
+                    "name": f"Service Fee ({picking.name})",
                 },
             ],
         )
@@ -240,14 +240,14 @@ class TestPackageFee(TransactionCase):
                     # one unit per package
                     "product_uom_qty": 1.0,
                     "price_unit": 3.0,
-                    "name": "LSVA Fee ({})".format(picking.name),
+                    "name": f"LSVA Fee ({picking.name})",
                 },
                 {
                     "product_id": self.fee2.id,
                     # one unit per package
                     "product_uom_qty": 1.0,
                     "price_unit": 4.0,
-                    "name": "Service Fee ({})".format(picking.name),
+                    "name": f"Service Fee ({picking.name})",
                 },
             ],
         )
@@ -284,14 +284,14 @@ class TestPackageFee(TransactionCase):
                     # one unit per package
                     "product_uom_qty": 1.0,
                     "price_unit": 3.0,
-                    "name": "LSVA Fee ({})".format(picking.name),
+                    "name": f"LSVA Fee ({picking.name})",
                 },
                 {
                     "product_id": self.fee2.id,
                     # one unit per package
                     "product_uom_qty": 1.0,
                     "price_unit": 4.0,
-                    "name": "Service Fee ({})".format(picking.name),
+                    "name": f"Service Fee ({picking.name})",
                 },
                 # new lines added for the backorder
                 {
@@ -299,14 +299,14 @@ class TestPackageFee(TransactionCase):
                     # one unit per package
                     "product_uom_qty": 1.0,
                     "price_unit": 3.0,
-                    "name": "LSVA Fee ({})".format(backorder.name),
+                    "name": f"LSVA Fee ({backorder.name})",
                 },
                 {
                     "product_id": self.fee2.id,
                     # one unit per package
                     "product_uom_qty": 1.0,
                     "price_unit": 4.0,
-                    "name": "Service Fee ({})".format(backorder.name),
+                    "name": f"Service Fee ({backorder.name})",
                 },
             ],
         )
@@ -370,14 +370,14 @@ class TestPackageFee(TransactionCase):
                     # one unit per package
                     "product_uom_qty": 2.0,
                     "price_unit": fee1_price,
-                    "name": "LSVA Fee ({})".format(picking.name),
+                    "name": f"LSVA Fee ({picking.name})",
                 },
                 {
                     "product_id": self.fee2.id,
                     # one unit per package
                     "product_uom_qty": 2.0,
                     "price_unit": fee2_price,
-                    "name": "Service Fee ({})".format(picking.name),
+                    "name": f"Service Fee ({picking.name})",
                 },
             ],
         )
@@ -456,7 +456,7 @@ class TestPackageFee(TransactionCase):
                     # one unit per package
                     "product_uom_qty": 2.0,
                     "price_unit": 4.0,
-                    "name": "Service Fee ({})".format(picking.name),
+                    "name": f"Service Fee ({picking.name})",
                 },
             ],
         )
@@ -537,7 +537,7 @@ class TestPackageFee(TransactionCase):
                     "product_id": self.fee1.id,
                     "product_uom_qty": 1.0,
                     "price_unit": 3.0,
-                    "name": "LSVA Fee ({})".format(picking.name),
+                    "name": f"LSVA Fee ({picking.name})",
                 },
             ],
         )
@@ -583,7 +583,7 @@ class TestPackageFee(TransactionCase):
                     "product_id": self.fee1.id,
                     "product_uom_qty": 2.0,
                     "price_unit": 3.0,
-                    "name": "LSVA Fee ({})".format(picking.name),
+                    "name": f"LSVA Fee ({picking.name})",
                 },
             ],
         )
@@ -629,13 +629,13 @@ class TestPackageFee(TransactionCase):
                     "product_id": self.fee1.id,
                     "product_uom_qty": 1.0,
                     "price_unit": 3.0,
-                    "name": "LSVA Fee ({})".format(picking.name),
+                    "name": f"LSVA Fee ({picking.name})",
                 },
                 {
                     "product_id": self.fee2.id,
                     "product_uom_qty": 1.0,
                     "price_unit": 4.0,
-                    "name": "Service Fee ({})".format(picking.name),
+                    "name": f"Service Fee ({picking.name})",
                 },
             ],
         )
