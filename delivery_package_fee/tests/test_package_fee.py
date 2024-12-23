@@ -1,7 +1,8 @@
 # Copyright 2020 Camptocamp
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo.tests.common import Form, TransactionCase
+from odoo.tests import Form
+from odoo.tests.common import TransactionCase
 from odoo.tools import mute_logger
 
 
@@ -10,10 +11,15 @@ class TestPackageFee(TransactionCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.product1 = cls.env["product.product"].create(
-            {"name": "Product 1", "type": "product", "lst_price": 1.0}
+            {"name": "Product 1", "is_storable": True, "lst_price": 1.0}
         )
         cls.product2 = cls.env["product.product"].create(
-            {"name": "Product 2", "type": "product", "lst_price": 1.0}
+            {"name": "Product 2", "is_storable": True, "lst_price": 1.0}
+        )
+        cls.pricelist = cls.env["product.pricelist"].create(
+            {
+                "name": "Test Pricelist",
+            }
         )
         cls.partner = cls.env["res.partner"].create({"name": "Partner"})
 
@@ -94,10 +100,12 @@ class TestPackageFee(TransactionCase):
         """All stock moves processed at once"""
         picking = self.sale.picking_ids
         self.assertEqual(picking.state, "assigned")
-        picking.move_line_ids[0].result_package_id = self.pack1
-        picking.move_line_ids[0].qty_done = 10.0
-        picking.move_line_ids[1].result_package_id = self.pack2
-        picking.move_line_ids[1].qty_done = 10.0
+        picking.move_line_ids[0].write(
+            {"result_package_id": self.pack1, "quantity": 10.0, "picked": True}
+        )
+        picking.move_line_ids[1].write(
+            {"result_package_id": self.pack2, "quantity": 10.0, "picked": True}
+        )
         picking._action_done()
         self.assertEqual(picking.state, "done")
 
@@ -185,18 +193,20 @@ class TestPackageFee(TransactionCase):
 
         picking = self.sale.picking_ids
         self.assertEqual(picking.state, "assigned")
-        picking.move_line_ids[0].result_package_id = self.pack1
-        picking.move_line_ids[0].qty_done = 10.0
-        picking.move_line_ids[1].result_package_id = self.pack2
-        picking.move_line_ids[1].qty_done = 10.0
+        picking.move_line_ids[0].write(
+            {"result_package_id": self.pack1, "quantity": 10.0, "picked": True}
+        )
+        picking.move_line_ids[1].write(
+            {"result_package_id": self.pack2, "quantity": 10.0, "picked": True}
+        )
         picking._action_done()
         self.assertEqual(picking.state, "done")
 
         so_line_fee1 = self.sale.order_line.filtered(
-            lambda l: l.product_id == self.fee1
+            lambda line: line.product_id == self.fee1
         )
         so_line_fee2 = self.sale.order_line.filtered(
-            lambda l: l.product_id == self.fee2
+            lambda line: line.product_id == self.fee2
         )
 
         self.assertNotEqual(so_line_fee1.tax_id[0], tax_price_exclude)
@@ -207,8 +217,9 @@ class TestPackageFee(TransactionCase):
         """Stock moves valided in 2 times using a backorder"""
         picking = self.sale.picking_ids
         self.assertEqual(picking.state, "assigned")
-        picking.move_line_ids[0].result_package_id = self.pack1
-        picking.move_line_ids[0].qty_done = 10.0
+        picking.move_line_ids[0].write(
+            {"result_package_id": self.pack1, "quantity": 10.0, "picked": True}
+        )
         picking._action_done()
         self.assertEqual(picking.state, "done")
         backorder = picking.backorder_ids
@@ -252,8 +263,9 @@ class TestPackageFee(TransactionCase):
             ],
         )
 
-        backorder.move_line_ids[0].result_package_id = self.pack2
-        backorder.move_line_ids[0].qty_done = 10.0
+        backorder.move_line_ids[0].write(
+            {"result_package_id": self.pack2, "quantity": 10.0, "picked": True}
+        )
         backorder._action_done()
         self.assertEqual(backorder.state, "done")
 
@@ -336,10 +348,12 @@ class TestPackageFee(TransactionCase):
 
         picking = self.sale.picking_ids
         self.assertEqual(picking.state, "assigned")
-        picking.move_line_ids[0].result_package_id = self.pack1
-        picking.move_line_ids[0].qty_done = 10.0
-        picking.move_line_ids[1].result_package_id = self.pack2
-        picking.move_line_ids[1].qty_done = 10.0
+        picking.move_line_ids[0].write(
+            {"result_package_id": self.pack1, "quantity": 10.0, "picked": True}
+        )
+        picking.move_line_ids[1].write(
+            {"result_package_id": self.pack2, "quantity": 10.0, "picked": True}
+        )
         picking._action_done()
         self.assertEqual(picking.state, "done")
 
@@ -386,8 +400,8 @@ class TestPackageFee(TransactionCase):
         """No packages, no fees"""
         picking = self.sale.picking_ids
         self.assertEqual(picking.state, "assigned")
-        picking.move_line_ids[0].qty_done = 10.0
-        picking.move_line_ids[1].qty_done = 10.0
+        picking.move_line_ids[0].write({"quantity": 10.0, "picked": True})
+        picking.move_line_ids[1].write({"quantity": 10.0, "picked": True})
         picking.with_context(set_default_package=False)._action_done()
         self.assertEqual(picking.state, "done")
 
@@ -420,10 +434,12 @@ class TestPackageFee(TransactionCase):
         picking = self.sale.picking_ids
         self.fee1.lst_price = 0.0
         self.assertEqual(picking.state, "assigned")
-        picking.move_line_ids[0].result_package_id = self.pack1
-        picking.move_line_ids[0].qty_done = 10.0
-        picking.move_line_ids[1].result_package_id = self.pack2
-        picking.move_line_ids[1].qty_done = 10.0
+        picking.move_line_ids[0].write(
+            {"result_package_id": self.pack1, "quantity": 10.0, "picked": True}
+        )
+        picking.move_line_ids[1].write(
+            {"result_package_id": self.pack2, "quantity": 10.0, "picked": True}
+        )
         picking._action_done()
         self.assertEqual(picking.state, "done")
 
@@ -466,10 +482,12 @@ class TestPackageFee(TransactionCase):
         self.carrier.package_fee_ids.write({"package_type_id": self.sptype1.id})
         picking = self.sale.picking_ids
         self.assertEqual(picking.state, "assigned")
-        picking.move_line_ids[0].result_package_id = self.pack1
-        picking.move_line_ids[0].qty_done = 10.0
-        picking.move_line_ids[1].result_package_id = self.pack2
-        picking.move_line_ids[1].qty_done = 10.0
+        picking.move_line_ids[0].write(
+            {"result_package_id": self.pack1, "quantity": 10.0, "picked": True}
+        )
+        picking.move_line_ids[1].write(
+            {"result_package_id": self.pack2, "quantity": 10.0, "picked": True}
+        )
         picking._action_done()
         self.assertEqual(picking.state, "done")
 
@@ -504,10 +522,12 @@ class TestPackageFee(TransactionCase):
         self.pack1.package_type_id = self.sptype1
         picking = self.sale.picking_ids
         self.assertEqual(picking.state, "assigned")
-        picking.move_line_ids[0].result_package_id = self.pack1
-        picking.move_line_ids[0].qty_done = 10.0
-        picking.move_line_ids[1].result_package_id = self.pack2
-        picking.move_line_ids[1].qty_done = 10.0
+        picking.move_line_ids[0].write(
+            {"result_package_id": self.pack1, "quantity": 10.0, "picked": True}
+        )
+        picking.move_line_ids[1].write(
+            {"result_package_id": self.pack2, "quantity": 10.0, "picked": True}
+        )
         picking._action_done()
         self.assertEqual(picking.state, "done")
 
@@ -543,17 +563,22 @@ class TestPackageFee(TransactionCase):
         )
 
     def test_package_with_type_one_fee_line_qty(self):
-        """Assign all fee lines to a package type, but one fee line added to SO, qty=2"""
+        """
+        Assign all fee lines to a package type
+        but one fee line added to SO, qty=2
+        """
         self.carrier.package_fee_ids[0].package_type_id = self.sptype1
         self.carrier.package_fee_ids[1].package_type_id = self.sptype2
         self.pack1.package_type_id = self.sptype1
         self.pack2.package_type_id = self.sptype1
         picking = self.sale.picking_ids
         self.assertEqual(picking.state, "assigned")
-        picking.move_line_ids[0].result_package_id = self.pack1
-        picking.move_line_ids[0].qty_done = 10.0
-        picking.move_line_ids[1].result_package_id = self.pack2
-        picking.move_line_ids[1].qty_done = 10.0
+        picking.move_line_ids[0].write(
+            {"result_package_id": self.pack1, "quantity": 10.0, "picked": True}
+        )
+        picking.move_line_ids[1].write(
+            {"result_package_id": self.pack2, "quantity": 10.0, "picked": True}
+        )
         picking._action_done()
         self.assertEqual(picking.state, "done")
 
@@ -596,10 +621,12 @@ class TestPackageFee(TransactionCase):
         self.pack2.package_type_id = self.sptype2
         picking = self.sale.picking_ids
         self.assertEqual(picking.state, "assigned")
-        picking.move_line_ids[0].result_package_id = self.pack1
-        picking.move_line_ids[0].qty_done = 10.0
-        picking.move_line_ids[1].result_package_id = self.pack2
-        picking.move_line_ids[1].qty_done = 10.0
+        picking.move_line_ids[0].write(
+            {"result_package_id": self.pack1, "quantity": 10.0, "picked": True}
+        )
+        picking.move_line_ids[1].write(
+            {"result_package_id": self.pack2, "quantity": 10.0, "picked": True}
+        )
         picking._action_done()
         self.assertEqual(picking.state, "done")
 

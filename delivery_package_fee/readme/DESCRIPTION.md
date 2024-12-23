@@ -1,8 +1,8 @@
 Add delivery fees on Sales Orders based on the delivered packages.
 
-A list of Package Fees can be added on shipping methods. When a outgoing
-transfer is done, for each package fee configured on the shipping
-method, a new sale order line is created with:
+A list of Package Fees can be configured on delivery methods. When a outgoing
+transfer is done, for each package fee configured on the delivery
+method, a new sales order line is created with:
 
 - The product selected on the Package Fee
 - The product name with the number of the transfer in the line's

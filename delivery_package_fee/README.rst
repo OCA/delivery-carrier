@@ -30,9 +30,9 @@ Delivery Package Fees
 
 Add delivery fees on Sales Orders based on the delivered packages.
 
-A list of Package Fees can be added on shipping methods. When a outgoing
-transfer is done, for each package fee configured on the shipping
-method, a new sale order line is created with:
+A list of Package Fees can be configured on delivery methods. When a
+outgoing transfer is done, for each package fee configured on the
+delivery method, a new sales order line is created with:
 
 -  The product selected on the Package Fee
 -  The product name with the number of the transfer in the line's
@@ -54,7 +54,7 @@ zero.
 Configuration
 =============
 
-In "Inventory > Configuration > Delivery > Shipping Methods", a new tab
+In "Inventory > Configuration > Delivery > Delivery Methods", a new tab
 allow to select the package fees. For each product added, a new fee line
 will be added in the sales order.
 
@@ -80,12 +80,13 @@ Contributors
 ------------
 
 -  Guewen Baconnier <guewen.baconnier@camptocamp.com>
+-  Chau Le <chaulb@trobz.com>
 
 Other credits
 -------------
 
-The migration of this module from 14.0 to 16.0 was financially supported
-by Camptocamp.
+The migration of this module from 14.0 to 16.0 and 16.0 to 18.0 was
+financially supported by Camptocamp.
 
 Maintainers
 -----------
