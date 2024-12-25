@@ -31,7 +31,7 @@ class ChooseDeliveryCarrier(models.TransientModel):
     def _onchange_carrier_id(self):
         self.delivery_message = False
         if "pricelist" in (self.delivery_type, self.invoice_policy):
-            vals = self._get_shipment_rate()
+            vals = self._get_delivery_rate()
             if vals.get("error_message"):
                 return {"error": vals["error_message"]}
         else:

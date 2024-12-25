@@ -3,18 +3,23 @@
 
 from lxml import etree
 
-from odoo.tests.common import Form, TransactionCase
+from odoo.tests import Form
+
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class TestCarrierPricelist(TransactionCase):
+class TestCarrierPricelist(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         cls.partner_18 = cls.env.ref("base.res_partner_18")
         cls.product_4 = cls.env.ref("product.product_product_4")
         cls.product_uom_unit = cls.env.ref("uom.product_uom_unit")
-        cls.pricelist = cls.env.ref("product.list0")
+        cls.pricelist = cls.env["product.pricelist"].create(
+            {
+                "name": "Public Pricelist",
+            }
+        )
         cls.sale_normal_delivery_charges = cls.env["sale.order"].create(
             {
                 "partner_id": cls.partner_18.id,

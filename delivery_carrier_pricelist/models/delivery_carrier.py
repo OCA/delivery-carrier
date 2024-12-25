@@ -1,15 +1,7 @@
 # Copyright 2020 Camptocamp
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-
-from odoo import _, api, fields, models
-from odoo.osv import expression
-from odoo.tools.safe_eval import safe_eval
-
-from odoo.addons.base.models.ir_ui_view import (
-    transfer_modifiers_to_node,
-    transfer_node_to_modifiers,
-)
+from odoo import api, fields, models
 
 
 class DeliveryCarrier(models.Model):
@@ -20,16 +12,16 @@ class DeliveryCarrier(models.Model):
         ondelete={"pricelist": "set default"},
     )
     invoice_policy = fields.Selection(
-        selection_add=[("pricelist", "Pricelist Cost")],
+        selection_add=[("pricelist", "Delivery Product Price")],
         ondelete={"pricelist": "set default"},
         help="Estimated Cost: the customer will be invoiced the estimated"
         " cost of the shipping.\n"
         "Real Cost: the customer will be invoiced the real cost of the"
         " shipping, the cost of the shipping will be updated on the"
         " SO after the delivery.\n"
-        "Pricelist Cost: the customer will be invoiced the price of the "
-        "product based on the pricelist of the sales order. The provider's "
-        "cost is ignored.",
+        "Delivery Product Price: the customer will be invoiced the price of the "
+        "related delivery product based on the pricelist of the sales order. "
+        "The provider's cost is ignored.",
     )
 
     def rate_shipment(self, order):
@@ -77,7 +69,7 @@ class DeliveryCarrier(models.Model):
             return {
                 "success": False,
                 "price": 0.0,
-                "error_message": _(
+                "error_message": self.env._(
                     "Error: this delivery method is not available for this address."
                 ),
                 "warning_message": False,
@@ -114,32 +106,32 @@ class DeliveryCarrier(models.Model):
             arch = self._fields_view_get_adapt_attrs(arch)
         return arch, view
 
+    @property
+    def attrs_list(self):
+        return ["invisible", "required", "readonly"]
+
     def _add_pricelist_domain(
         self,
         doc,
         xpath_expr,
         attrs_key,
-        domain_operator=expression.OR,
-        field_operator="=",
+        domain_operator="or",
+        field_operator="==",
     ):
         """Add the delivery type domain for 'pricelist' in attrs"""
+
+        if attrs_key not in self.attrs_list:
+            return
+
         nodes = doc.xpath(xpath_expr)
         for field in nodes:
-            attrs = safe_eval(field.attrib.get("attrs", "{}"))
-            if not attrs.get(attrs_key):
+            domain = field.attrib.get(attrs_key, "")
+            if not domain:
                 continue
 
-            invisible_domain = domain_operator(
-                [attrs[attrs_key], [("delivery_type", field_operator, "pricelist")]]
-            )
-            attrs[attrs_key] = invisible_domain
-            field.set("attrs", str(attrs))
-            modifiers = {}
-            transfer_node_to_modifiers(
-                field,
-                modifiers,
-            )
-            transfer_modifiers_to_node(modifiers, field)
+            delivery_type_domain = f"delivery_type {field_operator} 'pricelist'"
+            domain = f"{domain} {domain_operator} {delivery_type_domain}"
+            field.set(attrs_key, domain)
 
     def _fields_view_get_adapt_attrs(self, view_arch):
         """Adapt the attrs of elements in the view with 'pricelist' delivery type"""

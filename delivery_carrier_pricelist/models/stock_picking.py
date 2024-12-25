@@ -2,7 +2,6 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import api, models
-from odoo.osv import expression
 
 
 class StockPicking(models.Model):
@@ -30,7 +29,7 @@ class StockPicking(models.Model):
             view_arch,
             "//field[@name='partner_id']",
             "required",
-            domain_operator=expression.AND,
+            domain_operator="and",
             field_operator="!=",
         )
         return view_arch

@@ -1,5 +1,5 @@
 =========================
-Shipping Method Pricelist
+Delivery Method Pricelist
 =========================
 
 .. 
@@ -28,10 +28,11 @@ Shipping Method Pricelist
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-Compute shipping methods fees based on Product Pricelists.
+Compute the delivery method price based on its related delivery product
+price according to the sales order pricelist.
 
 It allows to have different pricing per customer, prices depending on
-dates, ... The pricelist based cost is computed from the shipping
+dates, ... The pricelist based cost is computed from the delivery
 method's product and the sales order's pricelist.
 
 It supports the following use cases:
@@ -70,11 +71,13 @@ Contributors
 
 -  Guewen Baconnier <guewen.baconnier@camptocamp.com>
 -  Phuc Tran Thanh <phuc@trobz.com>
+-  Chau Le <chaulb@trobz.com>
 
 Other credits
 -------------
 
-The development of this module has been financially supported by:
+The development and migration of this module has been financially
+supported by:
 
 -  Camptocamp
 

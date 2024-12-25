@@ -1,7 +1,7 @@
-Compute shipping methods fees based on Product Pricelists.
+Compute the delivery method price based on its related delivery product price according to the sales order pricelist.
 
 It allows to have different pricing per customer, prices depending on
-dates, ... The pricelist based cost is computed from the shipping
+dates, ... The pricelist based cost is computed from the delivery
 method's product and the sales order's pricelist.
 
 It supports the following use cases:
