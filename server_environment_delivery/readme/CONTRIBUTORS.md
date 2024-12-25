@@ -4,5 +4,6 @@
 
 - Simone Orsi \<<simahawk@gmail.com>\>
 
-- [Trobz](https://trobz.com):  
+- [Trobz](https://trobz.com):
   - Son Ho \<<sonhd@trobz.com>\>
+  - Khoi (Kien Kim) \<<khoikk@trobz.com>\>

@@ -94,12 +94,15 @@ Contributors
 -  `Trobz <https://trobz.com>`__:
 
    -  Son Ho <sonhd@trobz.com>
+   -  Khoi (Kien Kim) <khoikk@trobz.com>
 
 Other credits
 -------------
 
-The migration of this module from 13.0 to 14.0 was financially supported
-by Camptocamp
+The migration of this module from 16.0 to 18.0 was financially supported
+by:
+
+-  Camptocamp
 
 Maintainers
 -----------
