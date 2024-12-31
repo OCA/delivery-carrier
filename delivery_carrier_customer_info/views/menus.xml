@@ -3,7 +3,7 @@
     <menuitem
         action="action_res_partner_delivery_info"
         id="menu_action_res_partner_delivery_info"
-        parent="delivery.menu_delivery"
+        parent="stock.menu_delivery"
         sequence="10"
     />
 </odoo>

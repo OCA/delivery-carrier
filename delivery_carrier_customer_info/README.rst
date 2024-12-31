@@ -59,6 +59,15 @@ Contributors
 
 -  Carlos Serra-Toro
 -  Sébastien Alix <sebastien.alix@camptocamp.com>
+-  Khoi (Kien Kim) <khoikk@trobz.com>
+
+Other credits
+-------------
+
+The migration of this module from 14.0 to 17.0 was financially supported
+by:
+
+-  Camptocamp
 
 Maintainers
 -----------
