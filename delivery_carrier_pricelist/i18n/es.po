@@ -27,15 +27,13 @@ msgid "Delivery Carrier Selection Wizard"
 msgstr "Asistente de Selección de Transportista de Entrega"
 
 #. module: delivery_carrier_pricelist
-#: model:ir.model.fields,field_description:delivery_carrier_pricelist.field_choose_delivery_carrier__display_name
-#: model:ir.model.fields,field_description:delivery_carrier_pricelist.field_delivery_carrier__display_name
-#: model:ir.model.fields,field_description:delivery_carrier_pricelist.field_stock_picking__display_name
-msgid "Display Name"
-msgstr "Mostrar Nombre"
+#: model:ir.model.fields.selection,name:delivery_carrier_pricelist.selection__delivery_carrier__invoice_policy__pricelist
+msgid "Delivery Product Price"
+msgstr ""
 
 #. module: delivery_carrier_pricelist
+#. odoo-python
 #: code:addons/delivery_carrier_pricelist/models/delivery_carrier.py:0
-#, python-format
 msgid "Error: this delivery method is not available for this address."
 msgstr "Error: este método de envío no está disponible para esta dirección."
 
@@ -43,41 +41,20 @@ msgstr "Error: este método de envío no está disponible para esta dirección."
 #: model:ir.model.fields,help:delivery_carrier_pricelist.field_choose_delivery_carrier__invoice_policy
 #: model:ir.model.fields,help:delivery_carrier_pricelist.field_delivery_carrier__invoice_policy
 msgid ""
-"Estimated Cost: the customer will be invoiced the estimated cost of the shipping.\n"
-"Real Cost: the customer will be invoiced the real cost of the shipping, the cost of the shipping will be updated on the SO after the delivery.\n"
-"Pricelist Cost: the customer will be invoiced the price of the product based on the pricelist of the sales order. The provider's cost is ignored."
+"Estimated Cost: the customer will be invoiced the estimated cost of the "
+"shipping.\n"
+"Real Cost: the customer will be invoiced the real cost of the shipping, the "
+"cost of the shipping will be updated on the SO after the delivery.\n"
+"Delivery Product Price: the customer will be invoiced the price of the "
+"related delivery product based on the pricelist of the sales order. The "
+"provider's cost is ignored."
 msgstr ""
-"Coste Estimado: se facturará al cliente el coste estimado del envío.\n"
-"Costo real: al cliente se le facturará el costo real del envío, el costo del "
-"envío se actualizará en el SO después de la entrega.\n"
-"Coste de lista de precios: al cliente se le facturará el precio del producto "
-"en función de la lista de precios de la orden de venta. Se ignora el costo "
-"del proveedor."
-
-#. module: delivery_carrier_pricelist
-#: model:ir.model.fields,field_description:delivery_carrier_pricelist.field_choose_delivery_carrier__id
-#: model:ir.model.fields,field_description:delivery_carrier_pricelist.field_delivery_carrier__id
-#: model:ir.model.fields,field_description:delivery_carrier_pricelist.field_stock_picking__id
-msgid "ID"
-msgstr "ID (identificación)"
 
 #. module: delivery_carrier_pricelist
 #: model:ir.model.fields,field_description:delivery_carrier_pricelist.field_choose_delivery_carrier__invoice_policy
 #: model:ir.model.fields,field_description:delivery_carrier_pricelist.field_delivery_carrier__invoice_policy
 msgid "Invoicing Policy"
 msgstr "Política de Facturación"
-
-#. module: delivery_carrier_pricelist
-#: model:ir.model.fields,field_description:delivery_carrier_pricelist.field_choose_delivery_carrier____last_update
-#: model:ir.model.fields,field_description:delivery_carrier_pricelist.field_delivery_carrier____last_update
-#: model:ir.model.fields,field_description:delivery_carrier_pricelist.field_stock_picking____last_update
-msgid "Last Modified on"
-msgstr "Última Modificación el"
-
-#. module: delivery_carrier_pricelist
-#: model:ir.model.fields.selection,name:delivery_carrier_pricelist.selection__delivery_carrier__invoice_policy__pricelist
-msgid "Pricelist Cost"
-msgstr "Costo de la lista de Precios"
 
 #. module: delivery_carrier_pricelist
 #: model:ir.model.fields,field_description:delivery_carrier_pricelist.field_delivery_carrier__delivery_type
@@ -93,3 +70,30 @@ msgstr "Métodos de Envío"
 #: model:ir.model,name:delivery_carrier_pricelist.model_stock_picking
 msgid "Transfer"
 msgstr "Transferencia"
+
+#~ msgid "Display Name"
+#~ msgstr "Mostrar Nombre"
+
+#~ msgid ""
+#~ "Estimated Cost: the customer will be invoiced the estimated cost of the "
+#~ "shipping.\n"
+#~ "Real Cost: the customer will be invoiced the real cost of the shipping, "
+#~ "the cost of the shipping will be updated on the SO after the delivery.\n"
+#~ "Pricelist Cost: the customer will be invoiced the price of the product "
+#~ "based on the pricelist of the sales order. The provider's cost is ignored."
+#~ msgstr ""
+#~ "Coste Estimado: se facturará al cliente el coste estimado del envío.\n"
+#~ "Costo real: al cliente se le facturará el costo real del envío, el costo "
+#~ "del envío se actualizará en el SO después de la entrega.\n"
+#~ "Coste de lista de precios: al cliente se le facturará el precio del "
+#~ "producto en función de la lista de precios de la orden de venta. Se "
+#~ "ignora el costo del proveedor."
+
+#~ msgid "ID"
+#~ msgstr "ID (identificación)"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Última Modificación el"
+
+#~ msgid "Pricelist Cost"
+#~ msgstr "Costo de la lista de Precios"
