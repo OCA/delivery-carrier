@@ -68,11 +68,6 @@ msgid "ID"
 msgstr "ID (identificación)"
 
 #. module: delivery_package_fee
-#: model:ir.model.fields,field_description:delivery_package_fee.field_delivery_package_fee____last_update
-msgid "Last Modified on"
-msgstr "Última Modificación el"
-
-#. module: delivery_package_fee
 #: model:ir.model.fields,field_description:delivery_package_fee.field_delivery_package_fee__write_uid
 msgid "Last Updated by"
 msgstr "Última actualización por"
@@ -122,3 +117,6 @@ msgstr "Métodos de Envío"
 #: model:ir.model,name:delivery_package_fee.model_stock_picking
 msgid "Transfer"
 msgstr "Transferencia"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Última Modificación el"
