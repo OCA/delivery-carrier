@@ -1,3 +1,4 @@
 - Sébastien BEAU \<<sebastien.beau@akretion.com>\>
 - Guewen Baconnier \<<guewen.baconnier@camptocamp.com>\>
 - Foram Shah \<<foram.shah@initos.com>\>
+- `Heliconia Solutions Pvt. Ltd. <https://www.heliconia.io>`_
