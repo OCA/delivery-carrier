@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 Alberto Martínez <alberto.martinez@sygel.es>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="view_picking_withcarrier_out_form" model="ir.ui.view">
+        <field name="model">stock.picking</field>
+        <field
+            name="inherit_id"
+            ref="delivery_state.view_picking_withcarrier_out_form"
+        />
+        <field name="arch" type="xml">
+            <field name="delivery_state" position="after">
+                <field name="delivery_state_manual" invisible="1" />
+            </field>
+            <field name="delivery_state" position="attributes">
+                <attribute
+                    name="attrs"
+                >{'readonly': [('delivery_state_manual', '=', False)]}</attribute>
+            </field>
+            <field name="date_shipped" position="attributes">
+                <attribute name="force_save">1</attribute>
+            </field>
+            <field name="date_delivered" position="attributes">
+                <attribute name="force_save">1</attribute>
+            </field>
+            <field name="tracking_state" position="attributes">
+                <attribute
+                    name="attrs"
+                >{'invisible': [('delivery_state_manual', '!=', False)]}</attribute>
+            </field>
+            <button name="tracking_state_update" position="attributes">
+                <attribute
+                    name="attrs"
+                >{'invisible': [('delivery_state_manual', '!=', False)]}</attribute>
+            </button>
+            <field name="tracking_state_history" position="attributes">
+                <attribute
+                    name="attrs"
+                >{'invisible': [('delivery_state_manual', '!=', False)]}</attribute>            </field>
+        </field>
+    </record>
+
+    <record id="vpicktree_view_tree" model="ir.ui.view">
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="delivery.vpicktree_view_tree" />
+        <field name="arch" type="xml">
+            <field name="carrier_id" position="after">
+                <field name="delivery_state_manual" invisible="1" />
+                <field name="delivery_state" optional="hide" />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_picking_internal_search" model="ir.ui.view">
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_internal_search" />
+        <field name="arch" type="xml">
+            <field name="picking_type_id" position="after">
+                <field name="delivery_state" />
+            </field>
+            <xpath expr="//filter[@name='picking_type']" position="after">
+                <filter
+                    string="Delivery State"
+                    name="delivery_state"
+                    context="{'group_by': 'delivery_state'}"
+                />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
