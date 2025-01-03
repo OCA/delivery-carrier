@@ -38,7 +38,18 @@
                             style="padding: 60px 0;"
                             name="client"
                         >
-                            <span t-field="dest_picking.partner_id" />
+                            <span t-field="dest_picking.partner_id.name" />
+                            <t t-if="dest_picking.partner_id.contact_address">
+                                <br /><span
+                                    t-raw="dest_picking.partner_id.contact_address"
+                                />
+                            </t>
+                            <t t-if="dest_picking.partner_id.phone">
+                                <br /><t t-esc="dest_picking.partner_id.phone" />
+                            </t>
+                            <t t-if="dest_picking.partner_id.mobile">
+                                <br /><t t-esc="dest_picking.partner_id.mobile" />
+                            </t>
                         </div>
                         <div class="col-2" />
                         <div
