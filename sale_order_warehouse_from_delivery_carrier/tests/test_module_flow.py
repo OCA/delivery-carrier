@@ -75,6 +75,9 @@ class TestModuleFlow(TransactionCase):
             msg="Order Warehouse must be equal to 'Test Warehouse #1'",
         )
         self.sale_order.action_confirm()
+        self.sale_order.order_line.filtered(
+            lambda line: line.is_delivery
+        ).qty_invoiced = 0
         self._set_shipping_method(self.poste_delivery)
         self.assertNotEqual(
             self.sale_order.warehouse_id.id,
