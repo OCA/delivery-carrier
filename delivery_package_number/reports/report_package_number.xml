@@ -48,12 +48,11 @@
                             <h6>Number of packages:</h6>
                             <div style="font-size: 4em" class="text-center">
                                 <span t-out="pack_num + 1" />/<span
-                                    t-field="doc.number_of_packages"
-                                />
+                                t-field="doc.number_of_packages"
+                            />
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <div style="page-break-before:always;" />
             </t>
