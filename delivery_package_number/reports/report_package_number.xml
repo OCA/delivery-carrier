@@ -2,10 +2,7 @@
 <odoo>
     <template id="delivery_package_number_document">
         <t t-call="web.basic_layout">
-            <t
-                t-set="move_ids"
-                t-value="doc.move_ids._rollup_move_dests({doc.move_ids[:1].id})"
-            />
+            <t t-set="move_ids" t-value="doc.move_ids._rollup_move_dests()" />
             <t
                 t-set="dest_picking"
                 t-value="doc.move_ids.browse(move_ids).filtered('sale_line_id')[:1].picking_id"

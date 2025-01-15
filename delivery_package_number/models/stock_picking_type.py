@@ -6,6 +6,7 @@ from odoo import fields, models
 class StockPickingType(models.Model):
     _inherit = "stock.picking.type"
 
+    avoid_set_number_of_packages = fields.Boolean()
     force_set_number_of_packages = fields.Boolean()
     report_number_of_packages = fields.Many2one(
         "ir.actions.report",

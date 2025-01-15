@@ -11,3 +11,7 @@ If delivey packages are used:
 
 When the picking is confirmed, the user has the chance to change the
 number of packages in the confirmation wizard.
+
+Note: You can prevent the wizard from popping up to set the number of packages
+by selecting the option "Avoid set number of packages" in the operation
+type.

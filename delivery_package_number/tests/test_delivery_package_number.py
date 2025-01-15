@@ -10,7 +10,7 @@ class TestDeliveryPackageNumber(TransactionCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.product = cls.env["product.product"].create(
-            {"name": "Test product", "type": "product"}
+            {"name": "Test product", "type": "consu", "is_storable": True}
         )
         cls.partner = cls.env["res.partner"].create({"name": "Test partner"})
         cls.wh1 = cls.env["stock.warehouse"].create(
