@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo noupdate="1">
-
     <record id="paperformat_number_of_packages_label" model="report.paperformat">
         <field name="name">Number of package label</field>
         <field name="default" eval="True" />
@@ -16,5 +15,4 @@
         <field name="header_spacing">0</field>
         <field name="dpi">150</field>
     </record>
-
 </odoo>
