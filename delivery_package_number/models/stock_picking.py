@@ -18,11 +18,12 @@ class StockPicking(models.Model):
     )
     ask_number_of_packages = fields.Boolean(compute="_compute_ask_number_of_packages")
 
-    @api.depends("package_ids")
+    @api.depends("move_line_ids", "move_line_ids.result_package_id")
     def _compute_number_of_packages(self):
         for picking in self:
-            if picking.package_ids:
-                picking.number_of_packages = len(picking.package_ids)
+            packages = picking.move_line_ids.result_package_id
+            if packages:
+                picking.number_of_packages = len(packages)
 
     def _action_generate_number_of_packages_wizard(self):
         view = self.env.ref("delivery_package_number.view_number_package_validate")
@@ -43,9 +44,12 @@ class StockPicking(models.Model):
         """To Know if is needed raise wizard to ask user by package number"""
         for picking in self:
             picking.ask_number_of_packages = bool(
-                picking.carrier_id
-                and not picking.package_ids
-                or picking.picking_type_id.force_set_number_of_packages
+                (
+                    picking.carrier_id
+                    and not picking.move_line_ids.result_package_id
+                    or picking.picking_type_id.force_set_number_of_packages
+                )
+                and not picking.picking_type_id.avoid_set_number_of_packages
             )
 
     def _get_pickings_to_set_number_of_packages(self):

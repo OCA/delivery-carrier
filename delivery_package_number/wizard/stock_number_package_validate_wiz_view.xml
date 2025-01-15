@@ -17,7 +17,7 @@
                     invisible="not stock_number_package_validation_line_ids"
                     nolabel="1"
                 >
-                    <tree create="0" delete="0" editable="1">
+                    <list create="0" delete="0" editable="bottom">
                         <field
                             name="picking_id"
                             options="{'no_open': True}"
@@ -25,7 +25,7 @@
                             force_save="1"
                         />
                         <field name="number_of_packages" />
-                    </tree>
+                    </list>
                 </field>
                 <footer>
                     <button
