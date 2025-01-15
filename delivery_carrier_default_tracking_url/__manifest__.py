@@ -10,6 +10,6 @@
     "maintainers": ["rousseldenis"],
     "author": "ACSONE SA/NV,Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/delivery-carrier",
-    "depends": ["delivery"],
+    "depends": ["delivery", "stock_delivery"],
     "data": ["views/delivery_carrier.xml", "views/stock_picking.xml"],
 }

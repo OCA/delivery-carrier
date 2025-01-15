@@ -7,13 +7,16 @@
             name="name"
         >stock.picking.form (in delivery_carrier_default_tracking_url)</field>
         <field name="model">stock.picking</field>
-        <field name="inherit_id" ref="delivery.view_picking_withcarrier_out_form" />
+        <field
+            name="inherit_id"
+            ref="stock_delivery.view_picking_withcarrier_out_form"
+        />
         <field name="arch" type="xml">
             <field name="carrier_id" position="after">
                 <field
                     name="default_tracking_url"
                     widget="url"
-                    attrs="{'invisible': [('carrier_id', '=', False)]}"
+                    invisible="carrier_id==False"
                 />
             </field>
         </field>
