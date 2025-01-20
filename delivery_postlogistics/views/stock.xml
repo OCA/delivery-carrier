@@ -17,7 +17,7 @@
             </field>
 
             <button name="print_return_label" position="attributes">
-                    <attribute
+                <attribute
                     name="attrs"
                 >{'invisible':['|', ('is_return_picking', '=', False),('picking_type_code', '!=', 'incoming')]}</attribute>
             </button>

@@ -34,8 +34,7 @@ DISALLOWED_CHARS_MAPPING = {
 }
 
 
-class PostlogisticsWebService(object):
-
+class PostlogisticsWebService:
     """Connector with PostLogistics for labels using post.ch API
 
     Handbook available here:
@@ -294,7 +293,7 @@ class PostlogisticsWebService(object):
 
     def _cash_on_delivery(self, picking, package=None):
         amount = (package or picking).postlogistics_cod_amount()
-        amount = "{:.2f}".format(amount)
+        amount = f"{amount:.2f}"
         return [{"Type": "NN_BETRAG", "Value": amount}]
 
     def _get_item_additional_data(self, picking, package=None):

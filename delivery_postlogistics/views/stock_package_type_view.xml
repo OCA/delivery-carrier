@@ -17,9 +17,9 @@
                     colspan="2"
                     attrs="{'invisible': [('package_carrier_type', '!=', 'postlogistics')]}"
                 >See section 8.10 of <a
-                        target="new"
-                        href="https://developer.post.ch/en/digital-commerce-api"
-                    >the documentation</a> for available codes.</span>
+                    target="new"
+                    href="https://developer.post.ch/en/digital-commerce-api"
+                >the documentation</a> for available codes.</span>
             </field>
         </field>
     </record>
