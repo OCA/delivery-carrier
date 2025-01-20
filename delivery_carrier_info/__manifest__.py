@@ -6,7 +6,7 @@
 {
     "name": "Delivery Carrier Info",
     "summary": "Add code on carrier",
-    "version": "17.0.1.0.0",
+    "version": "18.0.1.0.0",
     "category": "Delivery",
     "website": "https://github.com/OCA/delivery-carrier",
     "author": "Akretion,Odoo Community Association (OCA)",
