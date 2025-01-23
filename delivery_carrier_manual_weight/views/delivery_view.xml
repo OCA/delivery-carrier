@@ -15,15 +15,15 @@
     <record id="view_picking_withcarrier_out_form" model="ir.ui.view">
         <field name="name">stock.picking.form - delivery_carrier_manual_weight</field>
         <field name="model">stock.picking</field>
-        <field name="inherit_id" ref="delivery.view_picking_withcarrier_out_form" />
+        <field
+            name="inherit_id"
+            ref="stock_delivery.view_picking_withcarrier_out_form"
+        />
         <field name="arch" type="xml">
             <label for="weight" position="before">
                 <field name="is_manual_weight" invisible="1" />
-                <label
-                    for="weight_manual"
-                    attrs="{'invisible': [('is_manual_weight', '=', False)]}"
-                />
-                <div attrs="{'invisible': [('is_manual_weight', '=', False)]}">
+                <label for="weight_manual" invisible="not is_manual_weight" />
+                <div invisible="not is_manual_weight">
                     <field name="weight_manual" class="oe_inline" />
                     <field
                         name="weight_uom_name"
@@ -32,11 +32,8 @@
                         style="margin-left:5px"
                     />
                 </div>
-                <label
-                    for="shipping_weight_manual"
-                    attrs="{'invisible': [('is_manual_weight', '=', False)]}"
-                />
-                <div attrs="{'invisible': [('is_manual_weight', '=', False)]}">
+                <label for="shipping_weight_manual" invisible="not is_manual_weight" />
+                <div invisible="not is_manual_weight">
                     <field name="shipping_weight_manual" class="oe_inline" />
                     <field
                         name="weight_uom_name"
