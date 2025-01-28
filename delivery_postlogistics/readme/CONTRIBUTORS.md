@@ -12,5 +12,7 @@
 
 - Jacques-Etienne Baudoux \<<je@bcim.be>\>
 
-- [Trobz](https://trobz.com):  
+- [Trobz](https://trobz.com):
   - Jack Le \<<anlh@trobz.com>\>
+
+- Stéphane Mangin <stephane.mangin@camptocamp.com>

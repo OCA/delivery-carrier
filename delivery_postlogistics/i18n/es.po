@@ -17,17 +17,17 @@ msgstr ""
 "X-Generator: Weblate 4.17\n"
 
 #. module: delivery_postlogistics
-#: model:postlogistics.delivery.carrier.template.option,name:delivery_postlogistics.postlogistics_output_resolution_option_200ppp
+#: model:delivery.carrier.template.option,name:delivery_postlogistics.postlogistics_output_resolution_option_200ppp
 msgid "200 ppp"
 msgstr "200 ppp"
 
 #. module: delivery_postlogistics
-#: model:postlogistics.delivery.carrier.template.option,name:delivery_postlogistics.postlogistics_output_resolution_option_300ppp
+#: model:delivery.carrier.template.option,name:delivery_postlogistics.postlogistics_output_resolution_option_300ppp
 msgid "300 ppp"
 msgstr "300 ppp"
 
 #. module: delivery_postlogistics
-#: model:postlogistics.delivery.carrier.template.option,name:delivery_postlogistics.postlogistics_output_resolution_option_600ppp
+#: model:delivery.carrier.template.option,name:delivery_postlogistics.postlogistics_output_resolution_option_600ppp
 msgid "600 ppp"
 msgstr "600 ppp"
 
@@ -37,7 +37,7 @@ msgid "Access Token"
 msgstr "Ficha de acceso"
 
 #. module: delivery_postlogistics
-#: model:ir.model.fields.selection,name:delivery_postlogistics.selection__postlogistics_delivery_carrier_template_option__postlogistics_type__additional
+#: model:ir.model.fields.selection,name:delivery_postlogistics.selection__postlogistics_delivery_carrier_template_option__type__additional
 msgid "Additional Service"
 msgstr "Servicio adicional"
 
@@ -107,7 +107,7 @@ msgstr ""
 "PostLogistics"
 
 #. module: delivery_postlogistics
-#: model:ir.model.fields.selection,name:delivery_postlogistics.selection__postlogistics_delivery_carrier_template_option__postlogistics_type__basic
+#: model:ir.model.fields.selection,name:delivery_postlogistics.selection__postlogistics_delivery_carrier_template_option__type__basic
 msgid "Basic Service"
 msgstr "Servicio básico"
 
@@ -190,7 +190,7 @@ msgid "Database Data"
 msgstr "Fecha de la base de datos"
 
 #. module: delivery_postlogistics
-#: model:ir.model.fields.selection,name:delivery_postlogistics.selection__postlogistics_delivery_carrier_template_option__postlogistics_type__delivery
+#: model:ir.model.fields.selection,name:delivery_postlogistics.selection__postlogistics_delivery_carrier_template_option__type__delivery
 msgid "Delivery Instructions"
 msgstr "Instrucciones de entrega"
 
@@ -233,7 +233,7 @@ msgid "Domicile Post office"
 msgstr "Domicilio Oficina de Correos"
 
 #. module: delivery_postlogistics
-#: model:postlogistics.delivery.carrier.template.option,name:delivery_postlogistics.postlogistics_output_format_option_eps
+#: model:delivery.carrier.template.option,name:delivery_postlogistics.postlogistics_output_format_option_eps
 msgid "EPS"
 msgstr "EPS"
 
@@ -298,22 +298,22 @@ msgid "For notify delivery by telephone (ZAW3213)"
 msgstr "Para notificación de entrega por teléfono (ZAW3213)"
 
 #. module: delivery_postlogistics
-#: model:postlogistics.delivery.carrier.template.option,name:delivery_postlogistics.postlogistics_layout_option_a5
+#: model:delivery.carrier.template.option,name:delivery_postlogistics.postlogistics_layout_option_a5
 msgid "Format A5"
 msgstr "Formato A5"
 
 #. module: delivery_postlogistics
-#: model:postlogistics.delivery.carrier.template.option,name:delivery_postlogistics.postlogistics_layout_option_a6
+#: model:delivery.carrier.template.option,name:delivery_postlogistics.postlogistics_layout_option_a6
 msgid "Format A6"
 msgstr "Formato A6"
 
 #. module: delivery_postlogistics
-#: model:postlogistics.delivery.carrier.template.option,name:delivery_postlogistics.postlogistics_layout_option_a7
+#: model:delivery.carrier.template.option,name:delivery_postlogistics.postlogistics_layout_option_a7
 msgid "Format A7"
 msgstr "Formato A7"
 
 #. module: delivery_postlogistics
-#: model:postlogistics.delivery.carrier.template.option,name:delivery_postlogistics.postlogistics_layout_option_fe
+#: model:delivery.carrier.template.option,name:delivery_postlogistics.postlogistics_layout_option_fe
 msgid "Format FE"
 msgstr "Formato FE"
 
@@ -323,7 +323,7 @@ msgid "Franking License"
 msgstr "Licencia de franquicia"
 
 #. module: delivery_postlogistics
-#: model:postlogistics.delivery.carrier.template.option,name:delivery_postlogistics.postlogistics_output_format_option_gif
+#: model:delivery.carrier.template.option,name:delivery_postlogistics.postlogistics_output_format_option_gif
 msgid "GIF"
 msgstr "GIF"
 
@@ -378,12 +378,12 @@ msgid "Is public document"
 msgstr "Es un documento público"
 
 #. module: delivery_postlogistics
-#: model:postlogistics.delivery.carrier.template.option,name:delivery_postlogistics.postlogistics_output_format_option_jpg
+#: model:delivery.carrier.template.option,name:delivery_postlogistics.postlogistics_output_format_option_jpg
 msgid "JPG"
 msgstr "JPG"
 
 #. module: delivery_postlogistics
-#: model:ir.model.fields.selection,name:delivery_postlogistics.selection__postlogistics_delivery_carrier_template_option__postlogistics_type__label_layout
+#: model:ir.model.fields.selection,name:delivery_postlogistics.selection__postlogistics_delivery_carrier_template_option__type__label_layout
 msgid "Label Layout"
 msgstr "Diseño de etiqueta"
 
@@ -474,11 +474,11 @@ msgstr "Nombre"
 #: code:addons/delivery_postlogistics/postlogistics/web_service.py:0
 #, python-format
 msgid ""
-"No PostLogistics packaging services found in packaging {packaging_name}, for "
-"picking {pickin_name}."
+"No PostLogistics packaging services found in package type {package_type_name}, for "
+"picking {picking_name}."
 msgstr ""
-"No se han encontrado servicios de embalaje PostLogistics en embalaje "
-"{packaging_name}, para recogida {pickin_name}."
+"No se han encontrado servicios de embalaje PostLogistics en tipo de paquete "
+"{package_type_name}, para recogida {picking_name}."
 
 #. module: delivery_postlogistics
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_license__number
@@ -516,12 +516,12 @@ msgid "Original (unoptimized, unresized) attachment"
 msgstr "Archivo adjunto original (sin optimizar y sin redimensionar)"
 
 #. module: delivery_postlogistics
-#: model:ir.model.fields.selection,name:delivery_postlogistics.selection__postlogistics_delivery_carrier_template_option__postlogistics_type__output_format
+#: model:ir.model.fields.selection,name:delivery_postlogistics.selection__postlogistics_delivery_carrier_template_option__type__output_format
 msgid "Output Format"
 msgstr "Formato de Salida"
 
 #. module: delivery_postlogistics
-#: model:ir.model.fields.selection,name:delivery_postlogistics.selection__postlogistics_delivery_carrier_template_option__postlogistics_type__resolution
+#: model:ir.model.fields.selection,name:delivery_postlogistics.selection__postlogistics_delivery_carrier_template_option__type__resolution
 msgid "Output Resolution"
 msgstr "Resolución de salida"
 
@@ -538,12 +538,12 @@ msgid "Output format not set"
 msgstr "Formato de salida no establecido"
 
 #. module: delivery_postlogistics
-#: model:postlogistics.delivery.carrier.template.option,name:delivery_postlogistics.postlogistics_output_format_option_pdf
+#: model:delivery.carrier.template.option,name:delivery_postlogistics.postlogistics_output_format_option_pdf
 msgid "PDF"
 msgstr "PDF"
 
 #. module: delivery_postlogistics
-#: model:postlogistics.delivery.carrier.template.option,name:delivery_postlogistics.postlogistics_output_format_option_png
+#: model:delivery.carrier.template.option,name:delivery_postlogistics.postlogistics_output_format_option_png
 msgid "PNG"
 msgstr "PNG"
 
@@ -563,7 +563,7 @@ msgid "Parcel Tracking"
 msgstr "Seguimiento del envío"
 
 #. module: delivery_postlogistics
-#: model:ir.model.fields.selection,name:delivery_postlogistics.selection__postlogistics_delivery_carrier_template_option__postlogistics_type__partner_option
+#: model:ir.model.fields.selection,name:delivery_postlogistics.selection__postlogistics_delivery_carrier_template_option__type__partner_option
 msgid "Partner Option"
 msgstr "Opción de Socio"
 
@@ -674,7 +674,7 @@ msgid "PostLogistics error:"
 msgstr ""
 
 #. module: delivery_postlogistics
-#: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_delivery_carrier_template_option__postlogistics_type
+#: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_delivery_carrier_template_option__type
 msgid "PostLogistics option type"
 msgstr "Tipo de Opción Postlogística"
 
@@ -924,7 +924,7 @@ msgid "ZPL Patch String"
 msgstr "Cadena de parches ZPL"
 
 #. module: delivery_postlogistics
-#: model:postlogistics.delivery.carrier.template.option,name:delivery_postlogistics.postlogistics_output_format_option_zpl2
+#: model:delivery.carrier.template.option,name:delivery_postlogistics.postlogistics_output_format_option_zpl2
 msgid "ZPL2"
 msgstr "ZPL2"
 
@@ -955,7 +955,7 @@ msgid "resolution"
 msgstr "resolución"
 
 #. module: delivery_postlogistics
-#: model:postlogistics.delivery.carrier.template.option,name:delivery_postlogistics.postlogistics_output_format_option_spdf
+#: model:delivery.carrier.template.option,name:delivery_postlogistics.postlogistics_output_format_option_spdf
 msgid "sPDF"
 msgstr "sPDF"
 
@@ -966,7 +966,7 @@ msgstr "la documentación"
 
 #, python-format
 #~ msgid ""
-#~ "No PostLogistics packaging services found in packaging {}, for picking {}."
+#~ "No PostLogistics packaging services found in package type {package_type_name}, for picking {picking_name}."
 #~ msgstr ""
 #~ "No se encontraron servicios de embalaje de PostLogistics en el embalaje "
-#~ "{}, para recoger {}."
+#~ "{package_type_name}, para recoger {picking_name}."

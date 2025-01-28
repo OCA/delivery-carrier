@@ -1,15 +1,13 @@
-# Copyright 2013-2016 Camptocamp SA
+# Copyright 2013 Camptocamp SA
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 
 from ..postlogistics.web_service import PostlogisticsWebService
 
 
 class DeliveryCarrier(models.Model):
-    """Add service group"""
-
     _inherit = "delivery.carrier"
 
     delivery_type = fields.Selection(
@@ -17,9 +15,9 @@ class DeliveryCarrier(models.Model):
         ondelete={"postlogistics": "set default"},
     )
     postlogistics_default_package_type_id = fields.Many2one(
-        "stock.package.type", domain=[("package_carrier_type", "=", "postlogistics")]
+        "stock.package.type",
+        domain=[("package_carrier_type", "=", "postlogistics")],
     )
-
     postlogistics_endpoint_url = fields.Char(
         string="Endpoint URL",
         default="https://wedecint.post.ch/",
@@ -49,21 +47,20 @@ class DeliveryCarrier(models.Model):
         string="Domicile Post office",
         help="Post office which will receive the shipped goods",
     )
-
     postlogistics_label_layout = fields.Many2one(
-        comodel_name="postlogistics.delivery.carrier.template.option",
+        comodel_name="delivery.carrier.template.option",
         string="Label layout",
-        domain=[("postlogistics_type", "=", "label_layout")],
+        domain=[("type", "=", "label_layout")],
     )
     postlogistics_output_format = fields.Many2one(
-        comodel_name="postlogistics.delivery.carrier.template.option",
+        comodel_name="delivery.carrier.template.option",
         string="Output format",
-        domain=[("postlogistics_type", "=", "output_format")],
+        domain=[("type", "=", "output_format")],
     )
     postlogistics_resolution = fields.Many2one(
-        comodel_name="postlogistics.delivery.carrier.template.option",
+        comodel_name="delivery.carrier.template.option",
         string="Resolution",
-        domain=[("postlogistics_type", "=", "resolution")],
+        domain=[("type", "=", "resolution")],
     )
     postlogistics_tracking_format = fields.Selection(
         [
@@ -89,7 +86,6 @@ class DeliveryCarrier(models.Model):
         "barcode (BMB) domestic, the ProClima logo is printed "
         "automatically (at no additional charge)",
     )
-
     postlogistics_license_id = fields.Many2one(
         comodel_name="postlogistics.license",
         string="Franking License",
@@ -97,6 +93,15 @@ class DeliveryCarrier(models.Model):
     zpl_patch_string = fields.Char(
         string="ZPL Patch String", default="^XA^CW0,E:TT0003M_.TTF^XZ^XA^CI28"
     )
+
+    def default_get(self, fields_list):
+        res = super().default_get(fields_list)
+        if package_type := self.env.ref(
+            "delivery_postlogistics.postlogistics_default_package_type",
+            raise_if_not_found=False,
+        ):
+            res["postlogistics_default_package_type_id"] = package_type.id
+        return res
 
     @api.onchange("prod_environment")
     def onchange_prod_environment(self):
@@ -111,14 +116,21 @@ class DeliveryCarrier(models.Model):
             else:
                 carrier.postlogistics_endpoint_url = "https://wedecint.post.ch/"
 
+    def _postlogistics_get_default_custom_package_code(self):
+        # Used while changing the carrier on the stock.package.type Form
+        if package_type := self.postlogistics_default_package_type_id:
+            return ",".join(package_type._get_shipper_package_code_list())
+        # Ultimate fallback
+        return "ECO"
+
     def postlogistics_get_tracking_link(self, picking):
         return (
             "https://service.post.ch/EasyTrack/"
-            "submitParcelData.do?formattedParcelCodes=%s" % picking.carrier_tracking_ref
+            f"submitParcelData.do?formattedParcelCodes={picking.carrier_tracking_ref}"
         )
 
     def postlogistics_cancel_shipment(self, pickings):
-        raise UserError(_("This feature is under development"))
+        raise UserError(self.env._("This feature is under development"))
 
     def postlogistics_rate_shipment(self, order):
         self.ensure_one()
@@ -135,30 +147,38 @@ class DeliveryCarrier(models.Model):
         It will generate the labels for all the packages of the picking.
         Packages are mandatory in this case
         """
-        for pick in pickings:
-            pick._set_a_default_package()
-            pick._generate_postlogistics_label()
+        for picking in pickings:
+            carrier = picking.carrier_id
+            move_lines = picking.move_line_ids.filtered(
+                lambda s: not (s.package_id or s.result_package_id)
+            )
+            if move_lines:
+                default_packaging = carrier.postlogistics_default_package_type_id
+                package = self.env["stock.quant.package"].create(
+                    [{"package_type_id": default_packaging.id}]
+                )
+                move_lines.write({"result_package_id": package.id})
+            picking.generate_postlogistics_shipping_labels()
 
         return [{"exact_price": False, "tracking_number": False}]
 
     def verify_credentials(self):
-        access_token = PostlogisticsWebService.get_access_token(self)
-        if not access_token:
+        if not PostlogisticsWebService.get_access_token(self):
             # Error has already been risen
             return
         message = {
             "type": "ir.actions.client",
             "tag": "display_notification",
             "params": {
-                "title": _("Validated"),
-                "message": _("The credential is valid."),
+                "title": self.env._("Validated"),
+                "message": self.env._("The credential is valid."),
                 "sticky": False,
             },
         }
         return message
 
     def _compute_can_generate_return(self):
-        res = super(DeliveryCarrier, self)._compute_can_generate_return()
+        res = super()._compute_can_generate_return()
         for carrier in self:
             if carrier.delivery_type == "postlogistics":
                 carrier.can_generate_return = True

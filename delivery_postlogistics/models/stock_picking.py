@@ -1,11 +1,12 @@
-# Copyright 2013-2016 Camptocamp SA
+# Copyright 2013 Camptocamp SA
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 import base64
 from operator import attrgetter
 
 import lxml.html
 
-from odoo import _, api, exceptions, fields, models
+from odoo import api, fields, models, tools
+from odoo.exceptions import UserError
 
 from ..postlogistics.web_service import PostlogisticsWebService
 
@@ -26,11 +27,10 @@ class StockPicking(models.Model):
         "Mobile", help="For notify delivery by telephone (ZAW3213)"
     )
 
-    def _get_packages_from_picking(self):
-        """Get all the packages from the picking"""
+    def _get_quant_packages_from_picking(self):
+        """Get all the quant packages from the picking"""
         self.ensure_one()
-        operation_obj = self.env["stock.move.line"]
-        operations = operation_obj.search(
+        operations = self.env["stock.move.line"].search(
             [
                 "|",
                 ("package_id", "!=", False),
@@ -44,8 +44,7 @@ class StockPicking(models.Model):
             # moved so take the source one.
             package_ids.add(operation.result_package_id.id or operation.package_id.id)
 
-        packages = self.env["stock.quant.package"].browse(package_ids)
-        return packages
+        return self.env["stock.quant.package"].browse(package_ids)
 
     def get_shipping_label_values(self, label):
         # TODO: consider to depends on base_delivery_carrier_label
@@ -70,31 +69,8 @@ class StockPicking(models.Model):
         if "default_type" in context_attachment:
             del context_attachment["default_type"]
         return (
-            self.env["postlogistics.shipping.label"]
-            .with_context(**context_attachment)
-            .create(data)
+            self.env["shipping.label"].with_context(**context_attachment).create(data)
         )
-
-    def _set_a_default_package(self):
-        """Pickings using this module must have a package
-        If not this method put it one silently
-        """
-        # TODO: consider to depends on base_delivery_carrier_label
-        for picking in self:
-            move_lines = picking.move_line_ids.filtered(
-                lambda s: not (s.package_id or s.result_package_id)
-            )
-            if move_lines:
-                carrier = picking.carrier_id
-                default_packaging = carrier.postlogistics_default_package_type_id
-                package = self.env["stock.quant.package"].create(
-                    {
-                        "package_type_id": default_packaging
-                        and default_packaging.id
-                        or False
-                    }
-                )
-                move_lines.write({"result_package_id": package.id})
 
     def postlogistics_cod_amount(self):
         """Return the PostLogistics Cash on Delivery amount of a picking
@@ -111,8 +87,8 @@ class StockPicking(models.Model):
         if not order:
             return 0.0
         if len(order) > 1:
-            raise exceptions.Warning(
-                _(
+            raise UserError(
+                self.env._(
                     "The cash on delivery amount must be manually specified "
                     "on the packages when a package contains products "
                     "from different sales orders."
@@ -120,8 +96,8 @@ class StockPicking(models.Model):
             )
         # check if the package delivers the whole sales order
         if len(order.picking_ids) > 1:
-            raise exceptions.Warning(
-                _(
+            raise UserError(
+                self.env._(
                     "The cash on delivery amount must be manually specified "
                     "on the packages when a sales order is delivered "
                     "in several delivery orders."
@@ -186,7 +162,7 @@ class StockPicking(models.Model):
         return labels
 
     def _generate_postlogistics_label(
-        self, webservice_class=None, package_ids=None, skip_attach_file=False
+        self, webservice_class=None, packages=None, skip_attach_file=False
     ):
         """Generate labels and write tracking numbers received"""
         self.ensure_one()
@@ -195,13 +171,9 @@ class StockPicking(models.Model):
         if webservice_class is None:
             webservice_class = PostlogisticsWebService
 
-        if package_ids is None:
-            packages = self._get_packages_from_picking()
-            packages = packages.sorted(key=attrgetter("name"))
-        else:
-            # restrict on the provided packages
-            package_obj = self.env["stock.quant.package"]
-            packages = package_obj.browse(package_ids)
+        if packages is None:
+            packages = self._get_quant_packages_from_picking()
+        packages = packages.sorted(key=attrgetter("name"))
 
         web_service = webservice_class(company)
 
@@ -218,8 +190,13 @@ class StockPicking(models.Model):
 
         # Case when there is a failed label, rollback odoo data
         if failed_label_results:
-            self._cr.rollback()
-            self = self.exists()
+            # We can't commit during testing phases, so instead we invalidate
+            # the cache for current records if any fields has to be tested
+            if tools.config["test_enable"]:
+                self.env.cache.invalidate()
+            else:
+                self.env.cr.rollback()
+                self = self.exists()
 
         labels = self.write_tracking_number_label(success_label_results, packages)
 
@@ -230,14 +207,15 @@ class StockPicking(models.Model):
         if failed_label_results:
             # Commit the change to save the changes,
             # This ensures the label pushed recored correctly in Odoo
-            self._cr.commit()  # pylint: disable=invalid-commit
+            # FIXME: But we can't commit during testing phases... This method
+            # avoids a proper testing. This should be changed somehow.
+            if not tools.config["test_enable"]:
+                self.env.cr.commit()  # pylint: disable=invalid-commit
             error_message = "\n".join(
                 self._cleanup_error_message(label["errors"])
                 for label in failed_label_results
             )
-            raise exceptions.UserError(
-                _("PostLogistics error:") + "\n\n" + error_message
-            )
+            raise UserError(self.env._("PostLogistics error:") + "\n\n" + error_message)
         return labels
 
     @api.model
@@ -247,13 +225,13 @@ class StockPicking(models.Model):
         texts = [text for text in texts_no_html.split("\n") if text]
         return "\n".join(texts)
 
-    def generate_postlogistics_shipping_labels(self, package_ids=None):
+    def generate_postlogistics_shipping_labels(self, packages=None):
         """Add label generation for PostLogistics"""
         self.ensure_one()
-        return self._generate_postlogistics_label(package_ids=package_ids)
+        return self._generate_postlogistics_label(packages=packages)
 
     def action_generate_carrier_label(self):
         self.ensure_one()
         if not self.carrier_id:
-            raise exceptions.UserError(_("Please, set a carrier."))
+            raise UserError(self.env._("Please, set a carrier."))
         self.env["delivery.carrier"].postlogistics_send_shipping(self)

@@ -3,7 +3,6 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
     <record id="delivery_carrier_postlogistics_inherit_view" model="ir.ui.view">
-        <field name="name">delivery.carrier.postlogistics.inherit.view</field>
         <field name="model">delivery.carrier</field>
         <field name="inherit_id" ref="delivery.view_delivery_carrier_form" />
         <field name="arch" type="xml">
@@ -11,22 +10,22 @@
                 <page
                     name="postlogistics"
                     string="PostLogistics"
-                    attrs="{'invisible': [('delivery_type', '!=', 'postlogistics')]}"
+                    invisible="delivery_type != 'postlogistics'"
                 >
                     <group>
                         <group string="Credentials">
                             <field
                                 name="postlogistics_endpoint_url"
-                                attrs="{'required': [('delivery_type', '=', 'postlogistics')]}"
+                                required="delivery_type == 'postlogistics'"
                             />
                             <field
                                 name="postlogistics_client_id"
-                                attrs="{'required': [('delivery_type', '=', 'postlogistics')]}"
+                                required="delivery_type == 'postlogistics'"
                             />
                             <field
                                 name="postlogistics_client_secret"
                                 password="True"
-                                attrs="{'required': [('delivery_type', '=', 'postlogistics')]}"
+                                required="delivery_type == 'postlogistics'"
                             />
                             <button
                                 name="verify_credentials"
@@ -38,33 +37,33 @@
                         <group string="Template">
                             <field
                                 name="postlogistics_label_layout"
-                                attrs="{'required': [('delivery_type', '=', 'postlogistics')]}"
+                                required="delivery_type == 'postlogistics'"
                             />
                             <field
                                 name="postlogistics_output_format"
-                                attrs="{'required': [('delivery_type', '=', 'postlogistics')]}"
+                                required="delivery_type == 'postlogistics'"
                             />
                             <field
                                 name="postlogistics_resolution"
-                                attrs="{'required': [('delivery_type', '=', 'postlogistics')]}"
+                                required="delivery_type == 'postlogistics'"
                             />
                         </group>
                         <group string="Misc.">
                             <field
                                 name="postlogistics_license_id"
-                                attrs="{'required': [('delivery_type', '=', 'postlogistics')]}"
+                                required="delivery_type == 'postlogistics'"
                             />
                             <field
                                 name="postlogistics_default_package_type_id"
-                                attrs="{'required': [('delivery_type', '=', 'postlogistics')]}"
+                                required="delivery_type == 'postlogistics'"
                             />
                             <field
                                 name="postlogistics_tracking_format"
-                                attrs="{'required': [('delivery_type', '=', 'postlogistics')]}"
+                                required="delivery_type == 'postlogistics'"
                             />
                             <field
                                 name="postlogistics_proclima_logo"
-                                attrs="{'required': [('delivery_type', '=', 'postlogistics')]}"
+                                required="delivery_type == 'postlogistics'"
                             />
                             <field name="postlogistics_office" />
                         </group>
