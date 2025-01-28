@@ -57,7 +57,7 @@ Authors
 Contributors
 ------------
 
--  Matthieu Méquignon <matthieu.mequignon@camptocamp.com>
+- Matthieu Méquignon <matthieu.mequignon@camptocamp.com>
 
 Maintainers
 -----------
