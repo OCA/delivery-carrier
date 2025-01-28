@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: delivery-carrier (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-12-03 01:21+0000\n"
-"PO-Revision-Date: 2024-09-17 11:06+0000\n"
+"PO-Revision-Date: 2025-01-28 13:06+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/"
 "OCA-delivery-carrier-8-0/language/it/)\n"
@@ -108,7 +108,7 @@ msgstr "Azienda"
 #. module: base_delivery_carrier_label
 #: view:stock.picking:base_delivery_carrier_label.view_picking_withcarrier_out_form
 msgid "Create Shipping Label"
-msgstr "Crea Etichetta di Spedizione"
+msgstr "Crea etichetta di spedizione 🚚"
 
 #. module: base_delivery_carrier_label
 #: field:carrier.account,create_uid:0
