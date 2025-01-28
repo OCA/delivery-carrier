@@ -3,8 +3,6 @@
 
 from odoo.addons.delivery_postlogistics.tests.common import TestPostlogisticsCommon
 
-from ..postlogistics.web_service import PostlogisticsWebServiceDangerousGoods
-
 
 class TestPostlogisticsDangerousGoods(TestPostlogisticsCommon):
     @classmethod
@@ -25,13 +23,6 @@ class TestPostlogisticsDangerousGoods(TestPostlogisticsCommon):
         cls.product_no_lq = cls.env["product.product"].create({"name": "Wrench"})
 
     @classmethod
-    def setUpClassWebservice(cls):
-        super().setUpClassWebservice()
-        cls.service_class = PostlogisticsWebServiceDangerousGoods(
-            cls.env.user.company_id
-        )
-
-    @classmethod
     def setUpClass(cls):
         super().setUpClass()
         cls.setUpClassProduct()
@@ -41,12 +32,7 @@ class TestPostlogisticsDangerousGoods(TestPostlogisticsCommon):
         # no unnumber should be sent through the api
         products = [(self.product_no_lq, 10.0)]
         picking = self.create_picking(product_matrix=products)
-        package_ids = picking._get_packages_from_picking()
-        recipient = self.service_class._prepare_recipient(picking)
-        item_list = self.service_class._prepare_item_list(
-            picking, recipient, package_ids
-        )
-        attributes = item_list[0]["attributes"]
+        attributes = picking.postlogistics_label_prepare_attributes()
         self.assertFalse(attributes.get("unnumbers"))
         self.assertNotIn("LQ", attributes["przl"])
 
@@ -55,14 +41,9 @@ class TestPostlogisticsDangerousGoods(TestPostlogisticsCommon):
         # we should have the list of unnumbers
         products = [(self.dangerous_weapon, 10.0)]
         picking = self.create_picking(product_matrix=products)
-        package_ids = picking._get_packages_from_picking()
-        recipient = self.service_class._prepare_recipient(picking)
-        item_list = self.service_class._prepare_item_list(
-            picking, recipient, package_ids
-        )
         expected_unnumbers = [
             7,
         ]
-        attributes = item_list[0]["attributes"]
+        attributes = picking.postlogistics_label_prepare_attributes()
         self.assertEqual(attributes["unnumbers"], expected_unnumbers)
         self.assertIn("LQ", attributes["przl"])
