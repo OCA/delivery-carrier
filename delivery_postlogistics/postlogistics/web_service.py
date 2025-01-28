@@ -1,4 +1,4 @@
-# Copyright 2013-2019 Yannick Vaucher (Camptocamp SA)
+# Copyright 2013 Yannick Vaucher (Camptocamp SA)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import base64
@@ -14,7 +14,6 @@ from json import JSONDecodeError
 import requests
 from PIL import Image
 
-from odoo import _, exceptions
 from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
@@ -93,27 +92,27 @@ class PostlogisticsWebService:
         partner_phone = self._sanitize_string(picking.delivery_phone or partner.phone)
 
         if partner.postlogistics_notification == "email" and not partner.email:
-            raise exceptions.UserError(_("Email is required for notification."))
+            raise UserError(picking.env._("Email is required for notification."))
         elif partner.postlogistics_notification == "sms" and not partner_mobile:
-            raise exceptions.UserError(
-                _("Mobile number is required for sms notification.")
+            raise UserError(
+                picking.env._("Mobile number is required for sms notification.")
             )
         elif partner.postlogistics_notification == "phone" and not partner_phone:
-            raise exceptions.UserError(
-                _("Phone number is required for phone call notification.")
+            raise UserError(
+                picking.env._("Phone number is required for phone call notification.")
             )
 
         if not partner.street:
-            raise exceptions.UserError(_("Partner street is required."))
+            raise UserError(picking.env._("Partner street is required."))
 
         if not partner.name and not partner.parent_id.name:
-            raise exceptions.UserError(_("Partner name is required."))
+            raise UserError(picking.env._("Partner name is required."))
 
         if not partner.zip:
-            raise exceptions.UserError(_("Partner zip is required."))
+            raise UserError(picking.env._("Partner zip is required."))
 
         if not partner.city:
-            raise exceptions.UserError(_("Partner city is required."))
+            raise UserError(picking.env._("Partner city is required."))
 
         partner_name = partner.name or partner.parent_id.name
         sanitized_partner_name = self._sanitize_string(partner_name)
@@ -171,7 +170,7 @@ class PostlogisticsWebService:
 
         partner_name = partner.name or partner.parent_id.name
         if not partner_name:
-            raise exceptions.UserError(_("Customer name is required."))
+            raise UserError(picking.env._("Customer name is required."))
         customer = {
             "name1": self._sanitize_string(partner_name)[:25],
             "street": self._sanitize_string(partner.street)[:25],
@@ -219,12 +218,12 @@ class PostlogisticsWebService:
     def _prepare_attributes(
         self, picking, pack=None, pack_num=None, pack_total=None, pack_weight=None
     ):
-        packaging = (
+        package_type = (
             pack
             and pack.package_type_id
             or picking.carrier_id.postlogistics_default_package_type_id
         )
-        services = packaging._get_packaging_codes()
+        package_codes = package_type._get_shipper_package_code_list()
 
         if pack_weight:
             total_weight = pack_weight
@@ -232,51 +231,51 @@ class PostlogisticsWebService:
             total_weight = pack.shipping_weight if pack else picking.shipping_weight
         total_weight *= 1000
 
-        if not services:
-            raise exceptions.UserError(
-                _(
+        if not package_codes:
+            raise UserError(
+                picking.env._(
                     "No PostLogistics packaging services found "
-                    "in packaging {packaging_name}, for picking {pickin_name}."
-                ).format(packaging_name=packaging.name, pickin_name=picking.name)
+                    "in package type {package_type_name}, for picking {picking_name}."
+                ).format(package_type_name=package_type.name, picking_name=picking.name)
             )
 
         # Activate phone notification ZAW3213
         # if phone call notification is set on partner
         if picking.partner_id.postlogistics_notification == "phone":
-            services.append("ZAW3213")
+            package_codes.append("ZAW3213")
 
         attributes = {
             "weight": int(total_weight),
         }
 
         # Remove the services if the delivery fixed date is not set
-        if "ZAW3217" in services:
+        if "ZAW3217" in package_codes:
             if picking.delivery_fixed_date:
                 attributes["deliveryDate"] = picking.delivery_fixed_date
             else:
-                services.remove("ZAW3217")
+                package_codes.remove("ZAW3217")
 
         # parcelNo / parcelTotal cannot be used if service ZAW3218 is not activated
-        if "ZAW3218" in services:
+        if "ZAW3218" in package_codes:
             if pack_total > 1:
                 attributes.update(
                     {"parcelTotal": pack_total - 1, "parcelNo": pack_num - 1}
                 )
             else:
-                services.remove("ZAW3218")
+                package_codes.remove("ZAW3218")
 
-        if "ZAW3219" in services and picking.delivery_place:
+        if "ZAW3219" in package_codes and picking.delivery_place:
             attributes["deliveryPlace"] = picking.delivery_place
         if picking.carrier_id.postlogistics_proclima_logo:
             attributes["proClima"] = True
         else:
             attributes["proClima"] = False
 
-        attributes["przl"] = services
+        attributes["przl"] = package_codes
 
         return attributes
 
-    def _get_itemid(self, picking, pack_no):
+    def _get_itemid(self, picking, package):
         """Allowed characters are alphanumeric plus `+`, `-` and `_`
         Last `+` separates picking name and package number (if any)
 
@@ -284,10 +283,10 @@ class PostlogisticsWebService:
 
         """
         name = _compile_itemid.sub("", picking.name)
-        if not pack_no:
+        if not package:
             return name
 
-        pack_no = _compile_itemid.sub("", pack_no)
+        pack_no = _compile_itemid.sub("", package.name)
         codes = [name, pack_no]
         return "+".join(c for c in codes if c)
 
@@ -298,13 +297,13 @@ class PostlogisticsWebService:
 
     def _get_item_additional_data(self, picking, package=None):
         if package and not package.package_type_id:
-            raise exceptions.UserError(
-                _("The package %s must have a package type.") % package.name
+            raise UserError(
+                picking.env._("The package %s must have a package type.") % package.name
             )
 
         result = []
         packaging_codes = (
-            package and package.package_type_id._get_packaging_codes() or []
+            package and package.package_type_id._get_shipper_package_code_list() or []
         )
 
         if set(packaging_codes) & {"BLN", "N"}:
@@ -312,7 +311,7 @@ class PostlogisticsWebService:
             result += cod_attributes
         return result
 
-    def _get_item_number(self, picking, pack_num):
+    def _get_item_number(self, picking, package):
         """Generate the tracking reference for the last 8 digits
         of tracking number of the label.
 
@@ -322,17 +321,17 @@ class PostlogisticsWebService:
         e.g. 03000042 for 3rd pack of picking OUT/19000042
         """
         picking_num = _compile_itemnum.sub("", picking.name)
-        return "%02d%s" % (pack_num, picking_num[-6:].zfill(6))
+        package_number = self.get_package_number_hook(package)
+        return "%02d%s" % (package_number, picking_num[-6:].zfill(6))
 
     def _prepare_item_list(self, picking, recipient, packages):
         """Return a list of item made from the pickings"""
         carrier = picking.carrier_id
         item_list = []
-        pack_counter = 1
 
-        def add_item(package=None):
+        def add_item(package_number=1, package=None):
             assert picking or package
-            itemid = self._get_itemid(picking, package.name if package else None)
+            itemid = self._get_itemid(picking, package)
             item = {
                 "itemID": itemid,
                 "recipient": recipient,
@@ -343,9 +342,9 @@ class PostlogisticsWebService:
                     # start with 9 to ensure uniqueness and use 7 digits
                     # of picking number
                     picking_num = _compile_itemnum.sub("", picking.name)
-                    item_number = "9%s" % picking_num[-7:].zfill(7)
+                    item_number = f"9{picking_num[-7:].zfill(7)}"
                 else:
-                    item_number = self._get_item_number(picking, pack_counter)
+                    item_number = self._get_item_number(picking, package_number)
                 item["itemNumber"] = item_number
 
             additional_data = self._get_item_additional_data(picking, package=package)
@@ -354,42 +353,46 @@ class PostlogisticsWebService:
 
             item_list.append(item)
 
-        if not packages:
+        total_packages = len(packages)
+        for package in packages:
+            package_number = self.get_package_number_hook(package)
+            attributes = self._prepare_attributes(
+                picking, package, package_number, total_packages
+            )
+            add_item(package_number, package=package)
+        else:
             attributes = self._prepare_attributes(picking)
             add_item()
-            return item_list
-
-        pack_total = len(packages)
-        for pack in packages:
-            attributes = self._prepare_attributes(
-                picking, pack, pack_counter, pack_total
-            )
-            add_item(package=pack)
-            pack_counter += 1
         return item_list
 
     def _prepare_label_definition(self, picking):
-        error_missing = _(
+        error_missing = picking.env._(
             "You need to configure %s. You can set a default"
             " value in Inventory / Configuration / Delivery / Shipping Methods."
             " You can also set it on delivery method or on the picking."
         )
         label_layout = self._get_label_layout(picking)
         if not label_layout:
-            raise exceptions.UserError(
-                _("Layout not set") + "\n" + error_missing % _("label layout")
+            raise UserError(
+                picking.env._("Layout not set")
+                + "\n"
+                + error_missing % picking.env._("label layout")
             )
 
         output_format = self._get_output_format(picking)
         if not output_format:
-            raise exceptions.UserError(
-                _("Output format not set") + "\n" + error_missing % _("output format")
+            raise UserError(
+                picking.env._("Output format not set")
+                + "\n"
+                + error_missing % picking.env._("output format")
             )
 
         image_resolution = self._get_image_resolution(picking)
         if not image_resolution:
-            raise exceptions.UserError(
-                _("Resolution not set") + "\n" + error_missing % _("resolution")
+            raise UserError(
+                picking.env._("Resolution not set")
+                + "\n"
+                + error_missing % picking.env._("resolution")
             )
 
         return {
@@ -417,8 +420,8 @@ class PostlogisticsWebService:
     @classmethod
     def _request_access_token(cls, delivery_carrier):
         if not delivery_carrier.postlogistics_endpoint_url:
-            raise exceptions.UserError(
-                _(
+            raise UserError(
+                delivery_carrier.env._(
                     "Missing Configuration\n\n"
                     "Please verify postlogistics endpoint url in:\n"
                     "Delivery Carrier (PostLogistics)."
@@ -432,8 +435,8 @@ class PostlogisticsWebService:
         )
 
         if not (client_id and client_secret):
-            raise exceptions.UserError(
-                _(
+            raise UserError(
+                delivery_carrier.env._(
                     "Authorization Required\n\n"
                     "Please verify postlogistics client id and secret in:\n"
                     "Delivery Carrier (PostLogistics)."
@@ -460,8 +463,9 @@ class PostlogisticsWebService:
             requests.exceptions.HTTPError,
         ) as error:
             raise UserError(
-                _(
-                    "Postlogistics service is not accessible at the moment. Error code: %s. "
+                delivery_carrier.env._(
+                    "Postlogistics service is not accessible at the moment. Error code:"
+                    " %s. "
                     "Please try again later." % (response.status_code or "None")
                 )
             ) from error
@@ -484,8 +488,8 @@ class PostlogisticsWebService:
             cls.access_token = response.get("access_token", False)
 
             if not (cls.access_token):
-                raise exceptions.UserError(
-                    _(
+                raise UserError(
+                    picking_carrier.env._(
                         "Authorization Required\n\n"
                         "Please verify postlogistics client id and secret in:\n"
                         "Sale Orders > Configuration -> Sale Orders >"
@@ -546,7 +550,7 @@ class PostlogisticsWebService:
             response = requests.post(
                 url=generate_label_url,
                 headers={
-                    "Authorization": "Bearer %s" % access_token,
+                    "Authorization": f"Bearer {access_token}",
                     "accept": "application/json",
                     "content-type": "application/json",
                 },
@@ -559,9 +563,10 @@ class PostlogisticsWebService:
                 res["errors"] = response.content.decode("utf-8")
                 _logger.warning(
                     "Shipping label could not be generated.\n"
-                    "Request: %(datas)s\n"
-                    "Response: %(error)s"
-                    % {"datas": json.dumps(data), "error": res["errors"]}
+                    "Request: {datas}\n"
+                    "Response: {error}".format(
+                        datas=json.dumps(data), error=res["errors"]
+                    )
                 )
                 return [res]
 
@@ -572,7 +577,9 @@ class PostlogisticsWebService:
                 res["success"] = False
                 res["errors"] = []
                 for error in response_dict["item"]["errors"]:
-                    res["errors"] = _("Error code: %(code)s, Message: %(message)s") % {
+                    res["errors"] = picking.env._(
+                        "Error code: %(code)s, Message: %(message)s"
+                    ) % {
                         "code": error["code"],
                         "message": error["message"],
                     }
@@ -593,3 +600,7 @@ class PostlogisticsWebService:
             )
             results.append(res)
         return results
+
+    def get_package_number_hook(self, package):
+        """Hook method to customize the package number retrieval"""
+        return package

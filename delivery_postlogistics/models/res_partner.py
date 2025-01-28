@@ -1,4 +1,4 @@
-# Copyright 2013-2016 Camptocamp SA
+# Copyright 2013 Camptocamp SA
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import fields, models
@@ -7,12 +7,12 @@ from odoo import fields, models
 class ResPartner(models.Model):
     _inherit = "res.partner"
 
-    postlogistics_option_ids = fields.Many2many(
-        "postlogistics.delivery.carrier.template.option",
-        relation="postlogistics_options_partner_rel",
+    delivery_carrier_template_option_ids = fields.Many2many(
+        "delivery.carrier.template.option",
+        relation="delivery_carrier_template_options_res_partners_rel",
         column1="partner_id",
         column2="option_id",
-        string="PostLogistics Options",
+        string="Postlogistics Options",
     )
 
     postlogistics_notification = fields.Selection(
