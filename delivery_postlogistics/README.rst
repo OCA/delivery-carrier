@@ -56,14 +56,13 @@ See `Log in <https://account.post.ch/selfadmin/?login&lang=en>`__
 
 To configure:
 
--  Go to Inventory -> Configuration -> Delivery -> Shipping Methods
--  Create new shipping methods for PostLogistics and set your login
-   informations in the "PostLogistics" tab
--  Go to Inventory -> Configuration -> Delivery -> Delivery Packages to
-   create the PostLogistics delivery packaging with the relevant Package
-   Code (see section 8.10 of
-   https://developer.post.ch/en/digital-commerce-api for available
-   codes)
+- Go to Inventory -> Configuration -> Delivery -> Shipping Methods
+- Create new shipping methods for PostLogistics and set your login
+  informations in the "PostLogistics" tab
+- Go to Inventory -> Configuration -> Delivery -> Delivery Packages to
+  create the PostLogistics delivery packaging with the relevant Package
+  Code (see section 8.10 of
+  https://developer.post.ch/en/digital-commerce-api for available codes)
 
 Technical references
 --------------------
@@ -74,11 +73,11 @@ documentation <https://www.post.ch/en/business/a-z-of-subjects/dropping-off-mail
 Known issues / Roadmap
 ======================
 
--  Integration of price webservice :
-   https://www.post.ch/en/customer-center/all-online-services/preise-berechnen/info
--  Not sure if the recursive patch of suds is still needed as there's no
-   need to use the integration WS anymore. However we still want to
-   patch open to get meaningful error messages.
+- Integration of price webservice :
+  https://www.post.ch/en/customer-center/all-online-services/preise-berechnen/info
+- Not sure if the recursive patch of suds is still needed as there's no
+  need to use the integration WS anymore. However we still want to patch
+  open to get meaningful error messages.
 
 Bug Tracker
 ===========
@@ -101,23 +100,23 @@ Authors
 Contributors
 ------------
 
--  Yannick Vaucher <yannick.vaucher@camptocamp.com>
+- Yannick Vaucher <yannick.vaucher@camptocamp.com>
 
--  Guewen Baconnier <guewen.baconnier@camptocamp.com>
+- Guewen Baconnier <guewen.baconnier@camptocamp.com>
 
--  Akim Juillerat <akim.juillerat@camptocamp.com>
+- Akim Juillerat <akim.juillerat@camptocamp.com>
 
--  Julien Coux <julien.coux@camptocamp.com>
+- Julien Coux <julien.coux@camptocamp.com>
 
--  Dung Tran <dungtd@trobz.com>
+- Dung Tran <dungtd@trobz.com>
 
--  Phuc Tran <phuc@trobz.com>
+- Phuc Tran <phuc@trobz.com>
 
--  Jacques-Etienne Baudoux <je@bcim.be>
+- Jacques-Etienne Baudoux <je@bcim.be>
 
--  `Trobz <https://trobz.com>`__:
+- `Trobz <https://trobz.com>`__:
 
-   -  Jack Le <anlh@trobz.com>
+  - Jack Le <anlh@trobz.com>
 
 Other credits
 -------------
@@ -125,7 +124,7 @@ Other credits
 The development of this module in version 14.0 and its migration from
 14.0 to 16.0 has been financially supported by:
 
--  Camptocamp
+- Camptocamp
 
 Maintainers
 -----------

@@ -8,7 +8,7 @@ class StockMove(models.Model):
     _inherit = "stock.move"
 
     def _get_new_picking_values(self):
-        vals = super(StockMove, self)._get_new_picking_values()
+        vals = super()._get_new_picking_values()
 
         order_commitment_date = (
             self.sale_line_id and self.sale_line_id.order_id.commitment_date

@@ -15,7 +15,7 @@ interactions:
       content-type:
         - application/x-www-form-urlencoded
     method: POST
-    uri: https://wedecint.post.ch/WEDECOAuth/token
+    uri: https://localhost:8069/WEDECOAuth/token
   response:
     body:
       string: ''

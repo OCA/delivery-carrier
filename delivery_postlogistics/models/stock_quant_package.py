@@ -1,6 +1,7 @@
 # Copyright 2013-2016 Camptocamp SA
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-from odoo import _, api, exceptions, fields, models
+from odoo import api, fields, models
+from odoo.exceptions import UserError
 
 
 class StockQuantPackage(models.Model):
@@ -42,8 +43,8 @@ class StockQuantPackage(models.Model):
 
         pickings = self._get_origin_pickings()
         if len(pickings) > 1:
-            raise exceptions.Warning(
-                _(
+            raise UserError(
+                self.env._(
                     "The cash on delivery amount must be manually specified "
                     "on the packages when a sales order is delivered "
                     "in several delivery orders."
@@ -54,8 +55,8 @@ class StockQuantPackage(models.Model):
         if not order:
             return 0.0
         if len(order) > 1:
-            raise exceptions.Warning(
-                _(
+            raise UserError(
+                self.env._(
                     "The cash on delivery amount must be manually specified "
                     "on the packages when a package contains products "
                     "from different sales orders."

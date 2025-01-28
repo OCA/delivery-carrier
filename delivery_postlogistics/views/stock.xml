@@ -4,13 +4,16 @@
 <odoo>
     <record id="view_picking_withcarrier_out_form" model="ir.ui.view">
         <field name="model">stock.picking</field>
-        <field name="inherit_id" ref="delivery.view_picking_withcarrier_out_form" />
+        <field
+            name="inherit_id"
+            ref="stock_delivery.view_picking_withcarrier_out_form"
+        />
         <field name="arch" type="xml">
             <field name="state" position="before">
                 <button
                     name="action_generate_carrier_label"
                     help="Create Shipping Label 🚚"
-                    attrs="{'invisible': ['|', '|', ('state', '!=', 'done'), ('delivery_type', '!=', 'postlogistics'), ('picking_type_code', '=', 'incoming')]}"
+                    invisible="state != 'done' or delivery_type != 'postlogistics' or picking_type_code == 'incoming'"
                     string="Create Shipping Label 🚚"
                     type="object"
                 />
@@ -18,19 +21,19 @@
 
             <button name="print_return_label" position="attributes">
                 <attribute
-                    name="attrs"
-                >{'invisible':['|', ('is_return_picking', '=', False),('picking_type_code', '!=', 'incoming')]}</attribute>
+                    name="invisible"
+                >"is_return_picking == False or picking_type_code != 'incoming'"</attribute>
             </button>
 
             <xpath expr="//page//group[@name='carrier_data']/.." position="after">
                 <separator
                     string="Delivery instructions"
-                    attrs="{'invisible': [('delivery_type', '!=', 'postlogistics')]}"
+                    invisible="delivery_type != 'postlogistics'"
                 />
                 <group>
                     <group
                         name="delivery_instructions"
-                        attrs="{'invisible': [('delivery_type', '!=', 'postlogistics')]}"
+                        invisible="delivery_type != 'postlogistics'"
                     >
                         <field name="delivery_fixed_date" />
                         <field name="delivery_place" />

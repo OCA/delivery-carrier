@@ -15,8 +15,6 @@ POSTLOGISTICS_TYPES = [
 
 
 class DeliveryCarrierTemplateOption(models.Model):
-    """Available options for a carrier (partner)"""
-
     _name = "postlogistics.delivery.carrier.template.option"
     _description = "Delivery carrier template option"
 

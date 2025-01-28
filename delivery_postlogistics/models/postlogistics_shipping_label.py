@@ -5,8 +5,6 @@ from odoo import fields, models
 
 
 class PostlogisticsShippingLabel(models.Model):
-    """Child class of ir attachment to identify which are labels"""
-
     _name = "postlogistics.shipping.label"
     _inherits = {"ir.attachment": "attachment_id"}
     _description = "Shipping Label for PostLogistics"

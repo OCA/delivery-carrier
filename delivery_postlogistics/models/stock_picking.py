@@ -5,7 +5,8 @@ from operator import attrgetter
 
 import lxml.html
 
-from odoo import _, api, exceptions, fields, models
+from odoo import api, fields, models
+from odoo.exceptions import UserError
 
 from ..postlogistics.web_service import PostlogisticsWebService
 
@@ -111,8 +112,8 @@ class StockPicking(models.Model):
         if not order:
             return 0.0
         if len(order) > 1:
-            raise exceptions.Warning(
-                _(
+            raise UserError(
+                self.env._(
                     "The cash on delivery amount must be manually specified "
                     "on the packages when a package contains products "
                     "from different sales orders."
@@ -120,8 +121,8 @@ class StockPicking(models.Model):
             )
         # check if the package delivers the whole sales order
         if len(order.picking_ids) > 1:
-            raise exceptions.Warning(
-                _(
+            raise UserError(
+                self.env._(
                     "The cash on delivery amount must be manually specified "
                     "on the packages when a sales order is delivered "
                     "in several delivery orders."
@@ -235,9 +236,7 @@ class StockPicking(models.Model):
                 self._cleanup_error_message(label["errors"])
                 for label in failed_label_results
             )
-            raise exceptions.UserError(
-                _("PostLogistics error:") + "\n\n" + error_message
-            )
+            raise UserError(self.env._("PostLogistics error:") + "\n\n" + error_message)
         return labels
 
     @api.model
@@ -255,5 +254,5 @@ class StockPicking(models.Model):
     def action_generate_carrier_label(self):
         self.ensure_one()
         if not self.carrier_id:
-            raise exceptions.UserError(_("Please, set a carrier."))
+            raise UserError(self.env._("Please, set a carrier."))
         self.env["delivery.carrier"].postlogistics_send_shipping(self)
