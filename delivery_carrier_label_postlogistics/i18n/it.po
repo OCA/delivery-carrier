@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: carrier-delivery (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-03 12:24+0000\n"
-"PO-Revision-Date: 2024-06-18 18:35+0000\n"
+"PO-Revision-Date: 2025-01-28 13:06+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/"
 "OCA-carrier-delivery-8-0/language/it/)\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:delivery.carrier.template.option,name:delivery_carrier_label_postlogistics.postlogistics_output_resolution_option_200ppp
@@ -44,7 +44,7 @@ msgstr "L'ID di un gruppo di servizi deve essere univoco."
 #. module: delivery_carrier_label_postlogistics
 #: selection:delivery.carrier.template.option,postlogistics_type:0
 msgid "Additional Service"
-msgstr "Servizio Addizionale"
+msgstr "Servizio addizionale"
 
 #. module: delivery_carrier_label_postlogistics
 #: field:delivery.carrier,allowed_option_ids:0
@@ -74,7 +74,7 @@ msgstr ""
 #. module: delivery_carrier_label_postlogistics
 #: selection:delivery.carrier.template.option,postlogistics_type:0
 msgid "Basic Service"
-msgstr "Servizio Base"
+msgstr "Servizio base"
 
 #. module: delivery_carrier_label_postlogistics
 #: help:delivery.carrier,postlogistics_basic_service_ids:0
@@ -212,7 +212,7 @@ msgstr ""
 #. module: delivery_carrier_label_postlogistics
 #: selection:delivery.carrier.template.option,postlogistics_type:0
 msgid "Delivery Instructions"
-msgstr "Istruzioni di spedizione"
+msgstr "Istruzioni di consegna"
 
 #. module: delivery_carrier_label_postlogistics
 #: model:ir.model,name:delivery_carrier_label_postlogistics.model_delivery_carrier_option
