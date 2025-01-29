@@ -77,9 +77,7 @@ class DeliverySchedule(models.Model):
             result.append(
                 (
                     schedule.id,
-                    "{hour_from}-{hour_to} ({days})".format(
-                        hour_from=hour_from, hour_to=hour_to, days=days
-                    ),
+                    f"{hour_from}-{hour_to} ({days})",
                 )
             )
         return result
