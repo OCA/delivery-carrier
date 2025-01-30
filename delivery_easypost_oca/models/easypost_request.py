@@ -1,14 +1,11 @@
 import logging
 
+import easypost
 import requests
 
 from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
-try:
-    import easypost
-except ImportError as err:
-    _logger.debug(err)
 
 
 class EasyPostShipment:

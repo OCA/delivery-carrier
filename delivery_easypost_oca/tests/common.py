@@ -1,7 +1,7 @@
 from odoo.tests import Form, TransactionCase, tagged
 
 EASYPOST_TEST_KEY = "EZTK52f7d94f77344a44854f45762f3a4a11QfNflQ9TqssKdvK5fdGuUw"
-EASYPOST_PROD_KEY = "zhiDnLnzKCVkelNzVAfWEQ"
+EASYPOST_PROD_KEY = "EZTK52f7d94f77344a44854f45762f3a4a11QfNflQ9TqssKdvK5fdGuUw"
 
 
 @tagged("post_install", "-at_install")
