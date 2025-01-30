@@ -1,6 +1,6 @@
 # Copyright 2018 Tecnativa - Sergio Teruel
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
 
@@ -28,7 +28,7 @@ class DeliverySchedule(models.Model):
             or self.hour_from >= self.hour_to
         ):
             raise ValidationError(
-                _(
+                self.env._(
                     "Error ! You can not set hour_from greater or equal "
                     "than hour_to ."
                 )
@@ -47,37 +47,43 @@ class DeliverySchedule(models.Model):
     )
     def _check_day_selected(self):
         if not any([self[x[0]] for x in self._days_of_week()]):
-            raise ValidationError(_("Error ! You must set one day to delivery."))
+            raise ValidationError(
+                self.env._("Error ! You must set one day to delivery.")
+            )
         return True
 
     def _days_of_week(self):
         return [
-            ("monday", _("Monday")),
-            ("tuesday", _("Tuesday")),
-            ("wednesday", _("Wednesday")),
-            ("thursday", _("Thursday")),
-            ("friday", _("Friday")),
-            ("saturday", _("Saturday")),
-            ("sunday", _("Sunday")),
+            ("monday", self.env._("Monday")),
+            ("tuesday", self.env._("Tuesday")),
+            ("wednesday", self.env._("Wednesday")),
+            ("thursday", self.env._("Thursday")),
+            ("friday", self.env._("Friday")),
+            ("saturday", self.env._("Saturday")),
+            ("sunday", self.env._("Sunday")),
         ]
 
-    def name_get(self):
-        result = []
+    @api.depends(
+        "hour_from",
+        "hour_to",
+        "monday",
+        "tuesday",
+        "wednesday",
+        "thursday",
+        "friday",
+        "saturday",
+        "sunday",
+    )
+    def _compute_display_name(self):
         for schedule in self:
             hour_from = "{:02.0f}:{:02.0f}".format(*divmod(schedule.hour_from * 60, 60))
             hour_to = "{:02.0f}:{:02.0f}".format(*divmod(schedule.hour_to * 60, 60))
-            days_accepted = [d[1][:2] for d in self._days_of_week() if schedule[d[0]]]
+            days_accepted = [
+                d[1][:2] for d in schedule._days_of_week() if schedule[d[0]]
+            ]
             days = (
-                days_accepted
-                and len(days_accepted) > 0
-                and len(days_accepted) < 7
-                and ", ".join(days_accepted)
-                or _("All days")
+                ", ".join(days_accepted)
+                if days_accepted and len(days_accepted) < 7
+                else self.env._("All days")
             )
-            result.append(
-                (
-                    schedule.id,
-                    f"{hour_from}-{hour_to} ({days})",
-                )
-            )
-        return result
+            schedule.display_name = f"{hour_from}-{hour_to} ({days})"
