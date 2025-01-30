@@ -42,7 +42,7 @@ class TestStockPikingReturnRefundOption(BaseCommon):
         )
         cls.report_model = cls.env["ir.actions.report"]
         cls.product = cls.env["product.product"].create(
-            {"name": "Test product", "type": "product"}
+            {"name": "Test product", "type": "consu", "is_storable": True}
         )
         cls.order = cls._create_sale_order(cls)
         cls.order.action_confirm()
@@ -57,12 +57,12 @@ class TestStockPikingReturnRefundOption(BaseCommon):
         return order_form.save()
 
     def test_partner_schedule_name(self):
-        self.assertEqual(self.schedule.name_get()[0][1], "08:00-10:00 (Mo, Tu)")
+        self.assertEqual(self.schedule.display_name, "08:00-10:00 (Mo, Tu)")
         day_update = {}
         for day in self.schedule._days_of_week():
             day_update[day[0]] = True
         self.schedule.update(day_update)
-        self.assertEqual(self.schedule.name_get()[0][1], "08:00-10:00 (All days)")
+        self.assertEqual(self.schedule.display_name, "08:00-10:00 (All days)")
         with self.assertRaises(ValidationError):
             self.schedule.update({"hour_from": 0, "hour_to": 25})
         day_update = {}
