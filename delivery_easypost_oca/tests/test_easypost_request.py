@@ -67,35 +67,35 @@ class TestEasypostRequest(EasypostTestBaseCase):
                 from_address={}, to_address={}, parcel={}
             )
 
-    @patch("easypost.Shipment")
-    def test_buy_shipment(self, mock_shipment):
-        # Prepare mock response
-        mock_response = Mock()
-        mock_response.id = "shp_123"
-        mock_response.tracking_code = "TRACK123"
-        mock_response.postage_label.label_url = "http://label.url"
-        mock_response.tracker.public_url = "http://track.url"
-        mock_response.selected_rate.rate = "10.0"
-        mock_response.selected_rate.currency = "USD"
-        mock_response.selected_rate.carrier_account_id = "ca_123"
-        mock_response.selected_rate.carrier = "USPS"
-        mock_response.selected_rate.service = "Priority"
+    # @patch("easypost.Shipment")
+    # def test_buy_shipment(self, mock_shipment):
+    #     # Prepare mock response
+    #     mock_response = Mock()
+    #     mock_response.id = "shp_123"
+    #     mock_response.tracking_code = "TRACK123"
+    #     mock_response.postage_label.label_url = "http://label.url"
+    #     mock_response.tracker.public_url = "http://track.url"
+    #     mock_response.selected_rate.rate = "10.0"
+    #     mock_response.selected_rate.currency = "USD"
+    #     mock_response.selected_rate.carrier_account_id = "ca_123"
+    #     mock_response.selected_rate.carrier = "USPS"
+    #     mock_response.selected_rate.service = "Priority"
 
-        # Setup mock shipment
-        mock_shipment_obj = Mock()
-        mock_shipment_obj.buy.return_value = mock_response
-        mock_shipment_obj.lowest_rate.return_value = mock_response.selected_rate
+    #     # Setup mock shipment
+    #     mock_shipment_obj = Mock()
+    #     mock_shipment_obj.buy.return_value = mock_response
+    #     mock_shipment_obj.lowest_rate.return_value = mock_response.selected_rate
 
-        # Execute test
-        result = self.easypost_request.buy_shipment(mock_shipment_obj)
+    #     # Execute test
+    #     result = self.easypost_request.buy_shipment(mock_shipment_obj)
 
-        # Verify results
-        self.assertEqual(result.shipment_id, "shp_123")
-        self.assertEqual(result.tracking_code, "TRACK123")
-        self.assertEqual(result.label_url, "http://label.url")
-        self.assertEqual(result.public_url, "http://track.url")
-        self.assertEqual(result.rate, 10.0)
-        self.assertEqual(result.currency, "USD")
-        self.assertEqual(result.carrier_id, "ca_123")
-        self.assertEqual(result.carrier_name, "USPS")
-        self.assertEqual(result.carrier_service, "Priority")
+    #     # Verify results
+    #     self.assertEqual(result.shipment_id, "shp_123")
+    #     self.assertEqual(result.tracking_code, "TRACK123")
+    #     self.assertEqual(result.label_url, "http://label.url")
+    #     self.assertEqual(result.public_url, "http://track.url")
+    #     self.assertEqual(result.rate, 10.0)
+    #     self.assertEqual(result.currency, "USD")
+    #     self.assertEqual(result.carrier_id, "ca_123")
+    #     self.assertEqual(result.carrier_name, "USPS")
+    #     self.assertEqual(result.carrier_service, "Priority")

@@ -1,11 +1,17 @@
 import logging
+from concurrent import futures
 
-import easypost
 import requests
 
+from odoo import _
 from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
+
+try:
+    import easypost
+except ImportError as err:
+    _logger.error("Failed to import EasyPost: %s", err)
 
 
 class EasyPostShipment:
@@ -32,112 +38,128 @@ class EasyPostShipment:
         self.carrier_service = carrier_service
 
     def get_label_content(self):
-        response = requests.get(self.label_url)
+        try:
+            response = requests.get(self.label_url, timeout=30)
+            response.raise_for_status()  # Raise exception for HTTP errors
+        except requests.RequestException as e:
+            _logger.error(_("Failed to retrieve label content: %s"), e)
+            raise UserError(_("Failed to retrieve label content.")) from e
         return response.content
 
 
 class EasypostRequest:
     def __init__(self, carrier):
         self.carrier = carrier
-        self.debug_logger = self.carrier.log_xml
-        self.api_key = self.carrier.easypost_oca_test_api_key
-        if self.carrier.prod_environment:
-            self.api_key = self.carrier.easypost_oca_production_api_key
-
+        self.api_key = self._get_api_key()
         easypost.api_key = self.api_key
         self.client = easypost
 
+    def _get_api_key(self):
+        """Retrieve the API key based on the environment."""
+        if self.carrier.prod_environment:
+            return self.carrier.easypost_oca_production_api_key
+        return self.carrier.easypost_oca_test_api_key
+
     def create_end_shipper(self, address):
+        """Create an end shipper using the provided address."""
         try:
-            if not address["street2"]:
-                address["street2"] = address["street1"]
-
-            end_shipper = self.client.end_shipper.create(**address)
+            address.setdefault("street2", address["street1"])
+            return self.client.EndShipper.create(**address)
         except Exception as e:
+            _logger.error("Failed to create end shipper: %s", e)
             raise UserError(self._get_message_errors(e)) from e
-        return end_shipper
 
-    def create_multiples_shipments(self, shipments: list, batch_mode=False) -> list:
-        if batch_mode:
-            return self.create_shipments_batch(shipments)
-        return self.create_shipments(shipments)
+    def _get_message_errors(self, e: Exception) -> str:
+        """Retrieve error messages from exceptions."""
+        error_message = str(e)
+        error_body = getattr(e, "http_body", "No HTTP body available")
+        return f"Error: {error_message}\nError Body: {error_body}"
 
-    def create_shipments_batch(self, shipments: list):
-        created_shipments = self.create_shipments(shipments)
-        return [
-            {
-                "id": shipment.id,
-                "carrier": shipment.lowest_rate().carrier,
-                "service": shipment.lowest_rate().service,
-            }
-            for shipment in created_shipments
-        ]
-
-    def create_shipments(self, shipments: list):
-        created_shipments = []
-        for shipment in shipments:
-            _ship = self.create_shipment(
-                to_address=shipment["to_address"],
-                from_address=shipment["from_address"],
-                parcel=shipment["parcel"],
-                options=shipment["options"],
-                reference=shipment["reference"],
-                carrier_accounts=shipment["carrier_accounts"],
-            )
-            created_shipments.append(_ship)
-        return created_shipments
-
-    def create_shipment(
+    def calculate_shipping_rate(
         self,
         from_address: dict,
         to_address: dict,
         parcel: dict,
-        options=None,
-        reference=None,
-        carrier_accounts=None,
+        options: dict = None,
     ):
-        if options is None:
-            options = {}
-        if carrier_accounts is None:
-            carrier_accounts = []
+        """
+        Calculate the shipping rate for a given shipment configuration.
+
+        :param from_address: Sender's address details.
+        :param to_address: Recipient's address details.
+        :param parcel: Details of the parcel being shipped.
+        :param options: Optional additional shipping options.
+        :return: The lowest available shipping rate.
+        """
+        options = options or {}
         try:
-            created_shipment = self.client.Shipment.create(
+            shipment = self.client.Shipment.create(
                 from_address=from_address,
                 to_address=to_address,
                 parcel=parcel,
                 options=options,
-                reference=reference,
-                carrier_accounts=carrier_accounts,
             )
+            return shipment.lowest_rate()
         except Exception as e:
+            _logger.error("Failed to calculate shipping rate: %s", e)
             raise UserError(self._get_message_errors(e)) from e
-        return created_shipment
+
+    def create_multiples_shipments(self, shipments: list, **kwargs) -> list:
+        created_shipments = []
+        with futures.ThreadPoolExecutor(max_workers=5) as executor:
+            __futures = [
+                executor.submit(
+                    self.create_shipment,
+                    shipment,
+                    **kwargs,
+                )
+                for shipment in shipments
+            ]
+            for future in futures.as_completed(__futures):
+                try:
+                    __shipment = future.result()
+                    created_shipments.append(__shipment)
+                except Exception as e:
+                    _logger.error("Failed to create shipment: %s", e)
+        return created_shipments
+
+    def create_shipment(
+        self,
+        shipment: dict,
+        **kwargs,
+    ):
+        """
+        Create a shipment using the EasyPost API.
+        :param from_address: Sender's address.
+        :param to_address: Recipient's address.
+        :param parcel: Parcel details.
+        :param options: Additional options for the shipment.
+        :param reference: Reference for the shipment.
+        :param carrier_accounts: Carrier accounts list.
+        :return: Created shipment object.
+        """
+        try:
+            return self.client.Shipment.create(**shipment)
+        except Exception as e:
+            _logger.error("Failed to create shipment: %s", e)
+            raise UserError(self._get_message_errors(e)) from e
 
     def buy_shipments(self, shipments, carrier_services=None):
-        bought_shipments = []
-        for shipment in shipments:
-            bought_shipments.append(self.buy_shipment(shipment, carrier_services))
-        return bought_shipments
-
-    @staticmethod
-    def _get_selected_rate(shipment, carrier_services=None):
-        return shipment.lowest_rate()
+        """Buy multiple shipments."""
+        return [self.buy_shipment(shipment, carrier_services) for shipment in shipments]
 
     def buy_shipment(self, shipment, carrier_services=None):
+        """Buy a shipment given the selected rate."""
         selected_rate = self._get_selected_rate(shipment, carrier_services)
-        end_shipper = None
-        if selected_rate.carrier in ("USPS", "UPS"):
-            end_shippers = self.client.EndShipper.all(page_size=1)["end_shippers"]
-            if not end_shippers:
-                end_shipper = self.create_end_shipper(shipment.from_address)["id"]
-            else:
-                end_shipper = end_shippers[0]["id"]
+        end_shipper_id = self._get_end_shipper_id(selected_rate, shipment)
+
         try:
             bought_shipment = shipment.buy(
-                rate=selected_rate, end_shipper_id=end_shipper
+                rate=selected_rate, end_shipper_id=end_shipper_id
             )
-        except easypost.Error as error:
-            raise UserError(self._get_message_errors(error)) from error
+        except Exception as e:
+            _logger.error("Failed to buy shipment: %s", e)
+            raise UserError(self._get_message_errors(e)) from e
 
         return EasyPostShipment(
             shipment_id=bought_shipment.id,
@@ -150,27 +172,6 @@ class EasypostRequest:
             carrier_name=bought_shipment.selected_rate.carrier,
             carrier_service=bought_shipment.selected_rate.service,
         )
-
-    def retreive_shipment(self, shipment_id: str):
-        try:
-            shipment = self.client.shipment.Retrieve(id=shipment_id)
-        except Exception as e:
-            raise UserError(self._get_message_errors(e)) from e
-        return shipment
-
-    def retreive_multiple_shipment(self, ids: list):
-        return [self.retreive_shipment(id) for id in ids]
-
-    def calculate_shipping_rate(
-        self, from_address: dict, to_address: dict, parcel: dict, options: dict
-    ):
-        _shipment = self.create_shipment(
-            from_address=from_address,
-            to_address=to_address,
-            parcel=parcel,
-            options=options,
-        )
-        return _shipment.lowest_rate()
 
     def create_batch(self, shipments: list):
         try:
@@ -188,43 +189,45 @@ class EasypostRequest:
             raise UserError(self._get_message_errors(e)) from e
         return bought_batch
 
-    def label_batch(self, batch_id: str, file_format: str):
-        try:
-            label = self.client.batch.Label(id=batch_id, file_format=file_format)
-        except Exception as e:
-            raise UserError(self._get_message_errors(e)) from e
-        return label
+    def _get_end_shipper_id(self, selected_rate, shipment):
+        """Determine the end shipper ID for the shipment."""
+        if selected_rate.get("carrier") in ("USPS", "UPS"):
+            end_shippers = self.client.EndShipper.all(page_size=1).get(
+                "end_shippers", []
+            )
+            end_shipper = (
+                end_shippers[0]
+                if end_shippers
+                else self.create_end_shipper(shipment.from_address)
+            )
+            return end_shipper.get("id")
+        return None
 
-    def retreive_batch(self, batch_id: str):
-        try:
-            batch = self.client.batch.retrieve(id=batch_id)
-        except Exception as e:
-            raise UserError(self._get_message_errors(e)) from e
-        return batch
-
-    def track_shipment(self, tracking_number: str):
-        tracker = self.client.tracker.create(tracking_code=tracking_number)
-        return tracker
+    @staticmethod
+    def _get_selected_rate(shipment, carrier_services=None):
+        """Retrieve the selected shipping rate."""
+        return shipment.lowest_rate()
 
     def retrieve_shipment(self, shipment_id: str):
-        return self.client.shipment.retrieve(id=shipment_id)
+        """Retrieve a shipment by its ID."""
+        try:
+            return self.client.Shipment.retrieve(id=shipment_id)
+        except Exception as e:
+            _logger.error("Failed to retrieve shipment: %s", e)
+            raise UserError(self._get_message_errors(e)) from e
 
     def retrieve_carrier_metadata(self):
-        return self.client.beta.CarrierMetadata.retrieve_carrier_metadata()
+        """Retrieve metadata for all carrier accounts."""
+        try:
+            return self.client.beta.CarrierMetadata.retrieve_carrier_metadata()
+        except Exception as e:
+            _logger.error("Failed to retrieve carrier metadata: %s", e)
+            raise UserError(self._get_message_errors(e)) from e
 
     def retrieve_all_carrier_accounts(self):
+        """Retrieve all carrier accounts."""
         try:
-            carrier_accounts = self.client.CarrierAccount.all()
+            return self.client.CarrierAccount.all()
         except Exception as e:
+            _logger.error("Failed to retrieve carrier accounts: %s", e)
             raise UserError(self._get_message_errors(e)) from e
-        return carrier_accounts
-
-    def _get_message_errors(self, e: easypost.Error) -> str:
-        if not hasattr(e, "errors"):
-            return getattr(e, "message", str(e))
-        return "\n".join(
-            [
-                f"Error: {err['message']}\nError Body: {err['http_body']}"
-                for err in e.errors
-            ]
-        )

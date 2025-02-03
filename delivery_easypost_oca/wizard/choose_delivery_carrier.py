@@ -30,4 +30,4 @@ class ChooseDeliveryCarrier(models.TransientModel):
             easypost_oca_shipment_id=self.easypost_oca_shipment_id,
             easypost_oca_rate_id=self.easypost_oca_rate_id,
         )
-        super(ChooseDeliveryCarrier, self).button_confirm()
+        return super().button_confirm()

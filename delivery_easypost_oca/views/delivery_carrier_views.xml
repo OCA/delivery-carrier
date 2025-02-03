@@ -26,8 +26,7 @@
                                 name="easypost_oca_production_api_key"
                                 attrs="{'required':[('delivery_type', '=', 'easypost_oca')]}"
                             />
-
-
+                            <field name="is_saturday_delivery" />
                         </group>
                     </group>
                 </page>
