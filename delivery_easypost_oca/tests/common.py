@@ -71,7 +71,7 @@ class EasypostTestBaseCase(TransactionCase):
             }
         )
 
-        self.default_packaging = self.env["product.packaging"].create(
+        self.default_packaging = self.env["stock.package.type"].create(
             {
                 "name": "My Easypost OCA Box",
                 "package_carrier_type": "easypost_oca",
@@ -91,10 +91,8 @@ class EasypostTestBaseCase(TransactionCase):
         sale = order_form.save()
         delivery_wizard = Form(
             self.env["choose.delivery.carrier"].with_context(
-                {
-                    "default_order_id": sale.id,
-                    "default_carrier_id": self.carrier.id,
-                }
+                default_order_id=sale.id,
+                default_carrier_id=self.carrier.id,
             )
         ).save()
         delivery_wizard.button_confirm()
@@ -110,7 +108,7 @@ class EasypostTestBaseCase(TransactionCase):
         )
         wiz = (
             self.env[wiz_action["res_model"]]
-            .with_context(wiz_action["context"])
-            .create({"delivery_packaging_id": self.default_packaging.id})
+            .with_context(**wiz_action["context"])
+            .create({"delivery_package_type_id": self.default_packaging.id})
         )
         wiz.action_put_in_pack()

@@ -40,10 +40,13 @@ class TestEasypostRequest(EasypostTestBaseCase):
         }
         parcel = {"weight": 17.5}
 
-        # Execute test
-        result = self.easypost_request.create_shipment(
-            from_address=from_address, to_address=to_address, parcel=parcel
-        )
+        # Execute test - pass as shipment dictionary
+        shipment_data = {
+            "from_address": from_address,
+            "to_address": to_address,
+            "parcel": parcel,
+        }
+        result = self.easypost_request.create_shipment(shipment_data)
 
         # Verify results
         self.assertEqual(result.id, "shp_123")
@@ -51,9 +54,6 @@ class TestEasypostRequest(EasypostTestBaseCase):
             from_address=from_address,
             to_address=to_address,
             parcel=parcel,
-            options={},
-            reference=None,
-            carrier_accounts=[],
         )
 
     @patch("easypost.Shipment")
@@ -62,10 +62,19 @@ class TestEasypostRequest(EasypostTestBaseCase):
         mock_shipment.create.side_effect = Exception("API Error")
 
         # Test error handling
-        with self.assertRaises(UserError):
-            self.easypost_request.create_shipment(
-                from_address={}, to_address={}, parcel={}
-            )
+        shipment_data = {
+            "from_address": {},
+            "to_address": {},
+            "parcel": {},
+        }
+        # Verify that error is logged and UserError is raised
+        with self.assertLogs(
+            "odoo.addons.delivery_easypost_oca.models.easypost_request", level="ERROR"
+        ) as log:
+            with self.assertRaises(UserError):
+                self.easypost_request.create_shipment(shipment_data)
+            # Verify error was logged correctly
+            self.assertIn("Failed to create shipment: API Error", log.output[0])
 
     @patch("easypost.Shipment")
     def test_buy_shipment(self, mock_shipment):

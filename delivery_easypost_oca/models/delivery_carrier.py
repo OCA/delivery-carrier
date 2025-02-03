@@ -12,6 +12,7 @@ from .easypost_request import EasypostRequest
 class DeliveryCarrier(models.Model):
     _inherit = "delivery.carrier"
 
+    is_saturday_delivery = fields.Boolean("Delivery On Saturday?")
     delivery_type = fields.Selection(
         selection_add=[("easypost_oca", "Easypost OCA")],
         ondelete={
@@ -93,10 +94,13 @@ class DeliveryCarrier(models.Model):
             processed_shipments = []
             picking_shipments = self._prepare_shipments(picking)
             carrier_services = self._get_easypost_carrier_services(picking)
+            carrier_services_params = {"carrier_services": carrier_services}
 
             if len(picking_shipments) > 1:
                 # Create a batch with all shipments
-                shipments = ep_request.create_multiples_shipments(picking_shipments)
+                shipments = ep_request.create_multiples_shipments(
+                    picking_shipments, **carrier_services_params
+                )
                 processed_shipments = ep_request.buy_shipments(
                     shipments, carrier_services=carrier_services
                 )
@@ -116,12 +120,7 @@ class DeliveryCarrier(models.Model):
             else:
                 # Create a single shipment
                 shipment = ep_request.create_shipment(
-                    to_address=picking_shipments[0]["to_address"],
-                    from_address=picking_shipments[0]["from_address"],
-                    parcel=picking_shipments[0]["parcel"],
-                    options=picking_shipments[0]["options"],
-                    reference=picking_shipments[0]["reference"],
-                    carrier_accounts=picking_shipments[0]["carrier_accounts"],
+                    picking_shipments[0], **carrier_services_params
                 )
                 bought_shipment = ep_request.buy_shipment(
                     shipment, carrier_services=carrier_services
@@ -158,9 +157,8 @@ class DeliveryCarrier(models.Model):
     def easypost_oca_cancel_shipment(self, pickings):
         raise UserError(_("You can't cancel Easypost shipping."))
 
-    @staticmethod
-    def _get_easypost_carrier_services(picking=None):
-        return False
+    def _get_easypost_carrier_services(self, picking=None):
+        return {}
 
     def _easypost_oca_convert_weight(self, weight):
         """Each API request for easypost required
@@ -190,7 +188,11 @@ class DeliveryCarrier(models.Model):
         shipments = []
         recipient = self._prepare_address(picking.partner_id)
         shipper = self._prepare_address(picking.picking_type_id.warehouse_id.partner_id)
-        options = self._prepare_options(self.easypost_oca_label_file_type)
+        options = self._prepare_options(
+            picking,
+            self.easypost_oca_label_file_type,
+            self.is_saturday_delivery,
+        )
         carrier_accounts = self._prepare_carrier_account(picking)
         move_lines_with_package = picking.move_line_ids.filtered(
             lambda ml: ml.result_package_id
@@ -203,27 +205,23 @@ class DeliveryCarrier(models.Model):
             # mistake happens.
             if picking.picking_type_code == "incoming":
                 weight = sum(
-                    [
-                        ml.product_id.weight
-                        * ml.product_uom_id._compute_quantity(
-                            ml.product_qty,
-                            ml.product_id.uom_id,
-                            rounding_method="HALF-UP",
-                        )
-                        for ml in move_lines_without_package
-                    ]
+                    ml.product_id.weight
+                    * ml.product_uom_id._compute_quantity(
+                        ml.product_qty,
+                        ml.product_id.uom_id,
+                        rounding_method="HALF-UP",
+                    )
+                    for ml in move_lines_without_package
                 )
             else:
                 weight = sum(
-                    [
-                        ml.product_id.weight
-                        * ml.product_uom_id._compute_quantity(
-                            ml.qty_done,
-                            ml.product_id.uom_id,
-                            rounding_method="HALF-UP",
-                        )
-                        for ml in move_lines_without_package
-                    ]
+                    ml.product_id.weight
+                    * ml.product_uom_id._compute_quantity(
+                        ml.qty_done,
+                        ml.product_id.uom_id,
+                        rounding_method="HALF-UP",
+                    )
+                    for ml in move_lines_without_package
                 )
 
             parcel = self._prepare_parcel(
@@ -253,21 +251,19 @@ class DeliveryCarrier(models.Model):
                 )
                 if picking.picking_type_code == "incoming":
                     weight = sum(
-                        [
-                            ml.product_id.weight
-                            * ml.product_uom_id._compute_quantity(
-                                ml.product_qty,
-                                ml.product_id.uom_id,
-                                rounding_method="HALF-UP",
-                            )
-                            for ml in move_lines
-                        ]
+                        ml.product_id.weight
+                        * ml.product_uom_id._compute_quantity(
+                            ml.product_qty,
+                            ml.product_id.uom_id,
+                            rounding_method="HALF-UP",
+                        )
+                        for ml in move_lines
                     )
                 else:
                     weight = package.shipping_weight
 
                 parcel = self._prepare_parcel(
-                    package=package.packaging_id,
+                    package=package.package_type_id,
                     weight=self._easypost_oca_convert_weight(weight),
                 )
                 shipments.append(
@@ -285,7 +281,6 @@ class DeliveryCarrier(models.Model):
                         "carrier_accounts": carrier_accounts,
                     }
                 )
-                # Prepare an easypost parcel with same info than package.
 
         return shipments
 
@@ -305,13 +300,19 @@ class DeliveryCarrier(models.Model):
 
         return parcel
 
-    def _prepare_options(self, easypost_oca_label_file_type: str = "PDF"):
+    def _prepare_options(
+        self,
+        picking=None,
+        easypost_oca_label_file_type: str = "PDF",
+        is_saturday_delivery: bool = False,
+    ):
         return {
             "label_date": datetime.now().isoformat(),
             "label_format": easypost_oca_label_file_type,
+            "saturday_delivery": is_saturday_delivery,
         }
 
-    def _prepare_carrier_account(self, picking):
+    def _prepare_carrier_account(self, picking) -> list:
         return []
 
     def _prepare_address(self, addr_obj):
@@ -377,13 +378,12 @@ class DeliveryCarrier(models.Model):
 
         logmessage = _(
             "Shipment created into Easypost<br/>"
-            "<b>Tracking Numbers:</b> %s<br/>"
-            "<b>Carrier Account:</b> %s<br/>"
-            "<b>Carrier Service:</b> %s<br/>"
-        ) % (
-            ", ".join([link[0] for link in carrier_tracking_links]),
-            ", ".join({link[1] for link in carrier_tracking_links}),
-            ", ".join({link[2] for link in carrier_tracking_links}),
+            "<b>Tracking Numbers:</b> %(tracking)s<br/>"
+            "<b>Carrier Account:</b> %(carrier)s<br/>"
+            "<b>Carrier Service:</b> %(service)s<br/>",
+            tracking=", ".join([link[0] for link in carrier_tracking_links]),
+            carrier=", ".join({link[1] for link in carrier_tracking_links}),
+            service=", ".join({link[2] for link in carrier_tracking_links}),
         )
 
         file_merged = self._contact_files(
@@ -401,28 +401,24 @@ class DeliveryCarrier(models.Model):
         price, tracking_code = (0.0, "")
         if batch_mode:
             price = sum(
-                [
-                    self._get_price_currency(
-                        float(shipment.selected_rate.get("rate", 0.0)),
-                        shipment.selected_rate.get("currency"),
-                        sale_id,
-                    )
-                    for shipment in shipments
-                ]
+                self._get_price_currency(
+                    float(shipment.selected_rate.get("rate", 0.0)),
+                    shipment.selected_rate.get("currency"),
+                    sale_id,
+                )
+                for shipment in shipments
             )
             tracking_code = ", ".join(
                 [shipment.tracker.get("tracking_code", "") for shipment in shipments]
             )
         else:
             price = sum(
-                [
-                    self._get_price_currency(
-                        shipment.rate,
-                        shipment.currency,
-                        sale_id,
-                    )
-                    for shipment in shipments
-                ]
+                self._get_price_currency(
+                    shipment.rate,
+                    shipment.currency,
+                    sale_id,
+                )
+                for shipment in shipments
             )
             tracking_code = ", ".join(
                 [shipment.tracking_code for shipment in shipments]
