@@ -8,7 +8,6 @@
       <field
             name="report_name"
         >delivery_carrier_deposit.report_generic_deposit_slip</field>
-          <!--  <field name="report_file">auth_token.report.label_res_users</field>-->
       <field name="print_report_name">object.name + '_delivery_slip.pdf'</field>
       <field
             name="binding_model_id"

@@ -1,44 +1,23 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo_test_helper import FakeModelLoader
-
-from odoo.tests.common import TransactionCase
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class TestDepositSlip(TransactionCase):
+class TestDepositSlip(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.loader = FakeModelLoader(cls.env, cls.__module__)
-        cls.loader.backup_registry()
 
-        # The fake class is imported here !! After the backup_registry
-        from .models import FakeDeliveryCarrier
-
-        cls.loader.update_registry((FakeDeliveryCarrier,))
-
-        delivery_free_product = cls.env.ref("delivery.product_product_delivery")
-        cls.carrier = cls.env["delivery.carrier"].create(
-            {
-                "name": "Test Carrier",
-                "delivery_type": "test",
-                "product_id": delivery_free_product.id,
-            }
-        )
+        carrier_id = cls.env.ref("delivery.free_delivery_carrier")
         cls.delivery_order = cls.env.ref("stock.outgoing_shipment_main_warehouse4")
-        cls.delivery_order.write({"carrier_id": cls.carrier.id})
-
-    @classmethod
-    def tearDownClass(cls):
-        cls.loader.restore_registry()
-        super().tearDownClass()
+        cls.delivery_order.write({"carrier_id": carrier_id.id})
 
     def test_delivery_slip_creation(self):
-        self.delivery_order.move_line_ids.qty_done = 16
-        self.delivery_order._action_done()
+        self.delivery_order.move_line_ids.quantity = 16
+        self.delivery_order.button_validate()
         wizard = self.env["delivery.deposit.wizard"].create(
             {
-                "delivery_type": "test",
+                "delivery_type": "fixed",
             }
         )
         wizard.create_deposit_slip()

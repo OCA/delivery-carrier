@@ -25,9 +25,7 @@ class DepositSlip(models.Model):
             deposit.weight = weight
             deposit.package_number = len(packages)
 
-    name = fields.Char(
-        readonly=True, states={"draft": [("readonly", False)]}, default="/", copy=False
-    )
+    name = fields.Char(default="/", copy=False)
     delivery_type = fields.Selection(
         selection=lambda self: self.env["delivery.carrier"]
         ._fields["delivery_type"]
@@ -37,8 +35,6 @@ class DepositSlip(models.Model):
         comodel_name="stock.picking",
         inverse_name="deposit_slip_id",
         string="Pickings",
-        readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     state = fields.Selection(
         selection=[

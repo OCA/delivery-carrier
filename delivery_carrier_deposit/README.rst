@@ -30,6 +30,7 @@ Contributors
 * Alexis de Lattre <alexis.delattre@akretion.com>
 * Raphael Reverdy <raphael.reverdy@akretion.com>
 * MonsieurB <monsieurb@saaslys.com>
+* Heliconia Solutions Pvt. Ltd. <https://www.heliconia.io>
 
 Maintainer
 ----------
