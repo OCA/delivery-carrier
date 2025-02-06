@@ -1,5 +1,6 @@
 # Copyright 2024 ForgeFlow S.L. (https://www.forgeflow.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl)
+from odoo import Command
 from odoo.tests import Form
 from odoo.tests.common import TransactionCase
 
@@ -33,14 +34,12 @@ class TestDeliveryCarrierManualPrice(TransactionCase):
             {
                 "partner_id": cls.partner.id,
                 "order_line": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "product_id": cls.product.id,
                             "product_uom_qty": 1,
                             "price_unit": 10,
-                        },
+                        }
                     )
                 ],
             }
