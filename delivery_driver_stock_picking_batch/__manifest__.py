@@ -4,7 +4,7 @@
 {
     "name": "Delivery Driver Stock Picking Batch",
     "summary": "Add drivers from delivery in stock picking batch",
-    "version": "16.0.1.1.0",
+    "version": "17.0.1.0.0",
     "development_status": "Alpha",
     "category": "Inventory/Delivery",
     "website": "https://github.com/OCA/delivery-carrier",
@@ -20,4 +20,7 @@
     "data": [
         "views/stock_picking_batch.xml",
     ],
+    "external_dependencies": {
+        "python": ["odoo_test_helper"],
+    },
 }

@@ -2,10 +2,12 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0)
 
 
-from odoo.tests.common import TransactionCase
+from odoo import Command
+
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class TestDeliveryDriverStockPickingBatch(TransactionCase):
+class TestDeliveryDriverStockPickingBatch(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -52,9 +54,7 @@ class TestDeliveryDriverStockPickingBatch(TransactionCase):
                 "location_id": self.env.ref("stock.stock_location_stock").id,
                 "location_dest_id": self.env.ref("stock.stock_location_customers").id,
                 "move_ids": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "name": "Test",
                             "product_id": self.product_test.id,
@@ -79,9 +79,7 @@ class TestDeliveryDriverStockPickingBatch(TransactionCase):
                 "location_id": self.env.ref("stock.stock_location_stock").id,
                 "location_dest_id": self.env.ref("stock.stock_location_customers").id,
                 "move_ids": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "name": "Test",
                             "product_id": self.product_test.id,
@@ -102,12 +100,12 @@ class TestDeliveryDriverStockPickingBatch(TransactionCase):
         batch = self.env["stock.picking.batch"].create(
             {
                 "name": "Test Batch",
-                "picking_ids": [(4, picking_1.id), (4, picking_2.id)],
+                "picking_ids": [Command.link(picking_1.id), Command.link(picking_2.id)],
             }
         )
         self.assertEqual(batch.driver_ids, self.driver_test_1 | self.driver_test_2)
-        batch.write({"picking_ids": [(3, picking_2.id)]})
+        batch.write({"picking_ids": [Command.unlink(picking_2.id)]})
         self.assertEqual(batch.driver_ids, self.driver_test_1)
-        batch.write({"picking_ids": [(4, picking_2.id)]})
+        batch.write({"picking_ids": [Command.link(picking_2.id)]})
         picking_2.write({"carrier_id": self.delivery_test_1.id})
         self.assertEqual(batch.driver_ids, self.driver_test_1)
