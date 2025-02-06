@@ -17,13 +17,13 @@ Delivery Drop-off Sites
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fdelivery--carrier-lightgray.png?logo=github
-    :target: https://github.com/OCA/delivery-carrier/tree/16.0/delivery_dropoff_site
+    :target: https://github.com/OCA/delivery-carrier/tree/17.0/delivery_dropoff_site
     :alt: OCA/delivery-carrier
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/delivery-carrier-16-0/delivery-carrier-16-0-delivery_dropoff_site
+    :target: https://translation.odoo-community.org/projects/delivery-carrier-17-0/delivery-carrier-17-0-delivery_dropoff_site
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/delivery-carrier&target_branch=16.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/delivery-carrier&target_branch=17.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
@@ -31,8 +31,8 @@ Delivery Drop-off Sites
 This module extend Odoo functionnalities, regarding delivery features to
 add a new concept of drop-off Sites.
 
-Main international carriers provide transportation services to specific areas
-managed by them or by subcontractors.
+Main international carriers provide transportation services to specific
+areas managed by them or by subcontractors.
 
 Then, recipients come pick up their packages in these sites.
 
@@ -44,39 +44,36 @@ Then, recipients come pick up their packages in these sites.
 Configuration
 =============
 
-* To configure drop-off sites, users should be member of 'Sale / Manager' or
-  'Inventory / Manager'.
-
-* To use this drop-off sites on sale orders, users should be member of
+- To configure drop-off sites, users should be member of 'Sale /
+  Manager' or 'Inventory / Manager'.
+- To use this drop-off sites on sale orders, users should be member of
   'Technical Settings / Addresses in Sales Orders'.
 
 Usage
 =====
 
-* Go to  *Sale* > *Delivery* > *Drop-off Sites*
+- Go to *Sale* > *Delivery* > *Drop-off Sites*
 
-.. figure:: https://raw.githubusercontent.com/OCA/delivery-carrier/10.0/delivery_dropoff_site/static/description/dropoff_site_tree.png
-   :width: 80 %
-   :align: center
+|image1|
 
-* You can add create new drop-off sites, filling address.
-  you have the possilibity to generate geolocalization, base on the module
-  ```base_geolocalize```
+- You can add create new drop-off sites, filling address. you have the
+  possilibity to generate geolocalization, base on the module
+  :literal:`\`base_geolocalize`\ \`
 
-.. figure:: https://raw.githubusercontent.com/OCA/delivery-carrier/10.0/delivery_dropoff_site/static/description/dropoff_site_form.png
-   :width: 80 %
-   :align: center
+|image2|
 
-* Optionaly, you can set opening hours.
+- Optionaly, you can set opening hours.
 
-.. figure:: https://raw.githubusercontent.com/OCA/delivery-carrier/10.0/delivery_dropoff_site/static/description/dropoff_site_form_calendar.png
-   :width: 80 %
-   :align: center
+|image3|
 
-Then, in your sale order form, if you select a Delivery with drop-off sites
-enabled, you can select in the delivery address an drop-off site, and
-so use a new field Final recipitient to mention the name of partner that will
-pick up the parcel in the dropoff site.
+Then, in your sale order form, if you select a Delivery with drop-off
+sites enabled, you can select in the delivery address an drop-off site,
+and so use a new field Final recipitient to mention the name of partner
+that will pick up the parcel in the dropoff site.
+
+.. |image1| image:: https://raw.githubusercontent.com/OCA/delivery-carrier/10.0/delivery_dropoff_site/static/description/dropoff_site_tree.png
+.. |image2| image:: https://raw.githubusercontent.com/OCA/delivery-carrier/10.0/delivery_dropoff_site/static/description/dropoff_site_form.png
+.. |image3| image:: https://raw.githubusercontent.com/OCA/delivery-carrier/10.0/delivery_dropoff_site/static/description/dropoff_site_form_calendar.png
 
 Bug Tracker
 ===========
@@ -84,7 +81,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/delivery-carrier/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/delivery-carrier/issues/new?body=module:%20delivery_dropoff_site%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/delivery-carrier/issues/new?body=module:%20delivery_dropoff_site%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -92,28 +89,29 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * Akretion
 * GRAP
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* David BEAL <david.beal@akretion.com>
-* Aymeric LECOMTE, akretion
-* Sébastien BEAU <sebastien.beau@akretion.com>
-* Sylvain LE GAL (https://twitter.com/legalsylvain)
+- David BEAL <david.beal@akretion.com>
+- Aymeric LECOMTE, akretion
+- Sébastien BEAU <sebastien.beau@akretion.com>
+- Sylvain LE GAL (https://twitter.com/legalsylvain)
 
 Other credits
-~~~~~~~~~~~~~
+-------------
 
 The development of this module has been financially supported by:
 
-* GRAP, Groupement Régional Alimentaire de Proximité (http://www.grap.coop)
+- GRAP, Groupement Régional Alimentaire de Proximité
+  (http://www.grap.coop)
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 
@@ -125,6 +123,6 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-This module is part of the `OCA/delivery-carrier <https://github.com/OCA/delivery-carrier/tree/16.0/delivery_dropoff_site>`_ project on GitHub.
+This module is part of the `OCA/delivery-carrier <https://github.com/OCA/delivery-carrier/tree/17.0/delivery_dropoff_site>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
