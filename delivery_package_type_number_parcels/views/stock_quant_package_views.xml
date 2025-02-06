@@ -10,10 +10,7 @@
         <field name="inherit_id" ref="stock.view_quant_package_form" />
         <field name="arch" type="xml">
           <field name="package_type_id" position="after">
-            <field
-                    name="number_of_parcels"
-                    attrs="{'invisible': [('number_of_parcels', '=', 0)]}"
-                />
+            <field name="number_of_parcels" invisible="number_of_parcels == 0" />
           </field>
         </field>
     </record>
@@ -29,7 +26,7 @@
                 <field
                     name="number_of_parcels"
                     optional="show"
-                    attrs="{'invisible': [('number_of_parcels', '=', 0)]}"
+                    invisible="number_of_parcels == 0"
                 />
             </field>
         </field>

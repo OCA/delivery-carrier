@@ -65,7 +65,7 @@ class TestStockQuantPackageDelivery(TestPackingCommon):
                 "product_id": self.product_test.id,
                 "product_uom_id": self.uom_kg.id,
                 "picking_id": picking_ship.id,
-                "qty_done": 5,
+                "quantity": 5,
                 "location_id": self.stock_location.id,
                 "location_dest_id": self.customer_location.id,
             }

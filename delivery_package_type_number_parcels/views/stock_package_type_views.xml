@@ -26,7 +26,7 @@
                 <field
                     name="number_of_parcels"
                     optional="show"
-                    attrs="{'invisible': [('number_of_parcels', '=', 0)]}"
+                    invisible="number_of_parcels == 0"
                 />
             </xpath>
         </field>
