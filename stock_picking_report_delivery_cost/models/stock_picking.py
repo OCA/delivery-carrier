@@ -13,6 +13,7 @@ class StockPicking(models.Model):
         compute="_compute_currency_id",
         compute_sudo=True,  # for avoiding access problems
     )
+
     carrier_price_for_report = fields.Monetary(
         compute="_compute_carrier_price_for_report",
     )
