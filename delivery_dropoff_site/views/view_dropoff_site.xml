@@ -11,14 +11,14 @@
                         type="object"
                         class="btn-primary"
                         icon="fa-calendar-plus-o"
-                        attrs="{'invisible': [('calendar_id', '!=', False)]}"
+                        invisible="not calendar_id"
                     />
                     <button
                         name="action_disable_calendar"
                         string="Disable Calendar"
                         type="object"
                         icon="fa-calendar-minus-o"
-                        attrs="{'invisible': [('calendar_id', '=', False)]}"
+                        invisible="not calendar_id"
                     />
                     <button
                         name="geo_localize"
@@ -128,7 +128,7 @@
                         <page
                             name="calendar"
                             string="Calendar"
-                            attrs="{'invisible': [('calendar_id', '=', False)]}"
+                            invisible="not calendar_id"
                         >
                             <field name="calendar_id" invisible="1" />
                             <field name="attendance_ids">

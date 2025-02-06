@@ -12,11 +12,11 @@
                 <page
                     name="dropoff_site"
                     string="Drop-off Sites"
-                    attrs="{'invisible': [('with_dropoff_site', '=', False)]}"
+                    invisible="not with_dropoff_site"
                 >
                     <field name="dropoff_site_ids" nolabel="1">
                         <tree editable="bottom">
-                            <field name="name" attrs="{'required': True}" />
+                            <field name="name" required='1' />
                             <field name="street" />
                             <field name="street2" />
                             <field name="city" />

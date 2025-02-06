@@ -21,7 +21,6 @@ class SaleOrder(models.Model):
     final_shipping_partner_id = fields.Many2one(
         comodel_name="res.partner",
         string="Final Recipient",
-        states={"draft": [("readonly", False)], "sent": [("readonly", False)]},
         readonly=True,
         help="It is the partner that will pick up the parcel " "in the dropoff site.",
     )
