@@ -1,10 +1,12 @@
 # Copyright 2021 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.tests.common import TransactionCase
+from odoo import Command
+
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class TestStockPicking(TransactionCase):
+class TestStockPicking(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -183,16 +185,10 @@ class TestStockPicking(TransactionCase):
 
     @classmethod
     def _confirm_sale_order(cls, partner=None, products=None, qty=10, carrier=None):
-        if partner is None:
-            partner = cls.partner
-        if products is None:
-            products = [cls.product1]
         warehouse = cls.warehouse_1
         Sale = cls.env["sale.order"]
         lines = [
-            (
-                0,
-                0,
+            Command.create(
                 {
                     "name": p.name,
                     "product_id": p.id,
@@ -304,9 +300,7 @@ class TestStockPicking(TransactionCase):
             self.product9,
         ]
         lines = [
-            (
-                0,
-                0,
+            Command.create(
                 {
                     "name": p.name,
                     "product_id": p.id,
@@ -349,9 +343,7 @@ class TestStockPicking(TransactionCase):
             "warehouse_id": self.warehouse_1.id,
             "carrier_id": self.delivery_carrier.id,
             "order_line": [
-                (
-                    0,
-                    0,
+                Command.create(
                     {
                         "name": self.product4.name,
                         "product_id": self.product4.id,
@@ -384,9 +376,7 @@ class TestStockPicking(TransactionCase):
         """
         products = [self.product1, self.product2, self.product3]
         lines = [
-            (
-                0,
-                0,
+            Command.create(
                 {
                     "name": p.name,
                     "product_id": p.id,
@@ -451,7 +441,7 @@ class TestStockPicking(TransactionCase):
         self.assertEqual(picking.number_of_packages_done, 0)
         self.assertFalse(picking.is_number_of_packages_outranged)
         # make a first put in pack with quantity done 1
-        picking.move_ids.quantity_done = 1
+        picking.move_ids.quantity = 1
         pack_action = picking.action_put_in_pack()
         pack_action_ctx = pack_action["context"]
         pack_wiz = (
@@ -463,7 +453,7 @@ class TestStockPicking(TransactionCase):
         self.assertEqual(picking.number_of_packages_done, 1)
         self.assertFalse(picking.is_number_of_packages_outranged)
         # make a second put in pack with quantity done 2
-        picking.move_ids.quantity_done = 2
+        picking.move_ids.quantity = 2
         pack_action = picking.action_put_in_pack()
         pack_action_ctx = pack_action["context"]
         pack_wiz = (
@@ -477,3 +467,98 @@ class TestStockPicking(TransactionCase):
         # validate the picking
         picking.button_validate()
         self.assertEqual(picking.state, "done")
+
+    def test_weight_uom_name(self):
+        """
+        Test case to verify the weight unit of measure name computation
+        """
+        # The weight uom name should be computed from ir.config_parameter
+        self.delivery_carrier._compute_weight_uom_name()
+        self.assertTrue(self.delivery_carrier.weight_uom_name)
+
+    def test_number_of_packages_edge_cases(self):
+        """
+        Test edge cases for package number computations
+        """
+        # Case 1: Non-outgoing picking
+        picking = self.env["stock.picking"].create(
+            {
+                "picking_type_id": self.picking_type_out.id,
+                "location_id": self.stock_location.id,
+                "location_dest_id": self.customer_location.id,
+            }
+        )
+        picking._compute_is_number_of_packages_visible()
+        self.assertFalse(picking.is_number_of_packages_visible)
+
+        # Case 2: No carrier maximum weight
+        picking.write({"carrier_id": self.delivery_carrier.id})
+        self.delivery_carrier.maximum_weight_per_package = 0
+        picking._compute_is_number_of_packages_visible()
+        self.assertFalse(picking.is_number_of_packages_visible)
+
+        # Case 3: No moves for theoretical packages
+        picking._compute_theoretical_number_of_packages()
+        self.assertFalse(picking.theoretical_number_of_packages)
+
+        # Case 4: No move lines for packages done
+        picking._compute_number_of_packages_done()
+        self.assertFalse(picking.number_of_packages_done)
+
+        # Case 5: Number of packages not visible for outranged check
+        picking._compute_is_number_of_packages_outranged()
+        self.assertFalse(picking.is_number_of_packages_outranged)
+
+    def test_packages_with_no_weight(self):
+        """
+        Test package computations with products having no weight
+        """
+        # Create a product with no weight
+        product_no_weight = self.env["product.product"].create(
+            {
+                "name": "No Weight Product",
+                "type": "product",
+                "weight": 0.0,
+            }
+        )
+
+        # Create picking with proper carrier_id reference
+        picking = self.env["stock.picking"].create(
+            {
+                "picking_type_id": self.picking_type_out.id,
+                "location_id": self.stock_location.id,
+                "location_dest_id": self.customer_location.id,
+                "carrier_id": self.delivery_carrier.id,  # Pass the ID instead of record
+            }
+        )
+
+        # Set picking type code after creation
+        picking.picking_type_id.code = "outgoing"
+
+        # Add move with the no-weight product
+        self.env["stock.move"].create(
+            {
+                "name": product_no_weight.name,
+                "product_id": product_no_weight.id,
+                "product_uom_qty": 1,
+                "product_uom": product_no_weight.uom_id.id,
+                "picking_id": picking.id,
+                "location_id": self.stock_location.id,
+                "location_dest_id": self.customer_location.id,
+            }
+        )
+
+        picking.action_confirm()
+        self.delivery_carrier.maximum_weight_per_package = 37
+
+        # Force recompute all required fields
+        picking.invalidate_recordset()
+        picking._compute_is_number_of_packages_visible()
+        picking._compute_theoretical_number_of_packages()
+        picking._compute_number_of_packages_done()
+        picking._compute_is_number_of_packages_outranged()
+
+        self.assertTrue(picking.is_number_of_packages_visible)
+        self.assertEqual(picking.theoretical_number_of_packages, 1)
+        self.assertEqual(picking.number_of_packages_done, 0)
+        self.assertFalse(picking.is_number_of_packages_outranged)

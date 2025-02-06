@@ -82,6 +82,9 @@ Contributors
 
 - Lindsay Marion <lindsay.marion@acsone.eu>
 - Hughes Damry <hughes.damry@acsone.eu>
+- `Heliconia Solutions Pvt. Ltd. <https://www.heliconia.io>`__
+
+  - Bhavesh Heliconia
 
 Maintainers
 -----------

@@ -15,7 +15,7 @@
             <div
                     class="alert alert-warning"
                     role="alert"
-                    attrs="{'invisible': [('is_number_of_packages_outranged', '=', False)]}"
+                    invisible="not is_number_of_packages_outranged"
                 >
               The number of packages outranged the adviced number of packages
             </div>
@@ -27,17 +27,15 @@
                         for="number_of_packages_done"
                         string="Number of packages"
                         style="font-size:30px"
-                        attrs="{'invisible':[('is_number_of_packages_visible','=',False)]}"
+                        invisible="not is_number_of_packages_visible"
                     />
                 </h1>
-                <div
-                    attrs="{'invisible':[('is_number_of_packages_visible','=',False)]}"
-                >
+                <div invisible="not is_number_of_packages_visible">
                 <h1>
                     <field
                             name="number_of_packages_done"
                             class="oe_inline"
-                            attrs="{'invisible':[('is_number_of_packages_visible','=',False)]}"
+                            invisible="not is_number_of_packages_visible"
                             style="margin-right:5px,font-size:30px"
                         />
                   /
@@ -45,7 +43,7 @@
                             name="theoretical_number_of_packages"
                             nolabel="1"
                             class="oe_inline"
-                            attrs="{'invisible':[('is_number_of_packages_visible','=',False)]}"
+                            invisible="not is_number_of_packages_visible"
                             style="margin-left:5px,font-size:30px"
                         /></h1>
                 </div>
