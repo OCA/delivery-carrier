@@ -3,25 +3,19 @@
     <record id="res_config_settings_view_form" model="ir.ui.view">
         <field
             name="name"
-        >res.config.settings.view.form (in delivery_carrier_max_weight_constraint)</field>
+        >res.config.settings.view.form (in delivery_carrier_max_weight_constraint)
+        </field>
         <field name="model">res.config.settings</field>
         <field name="inherit_id" ref="stock.res_config_settings_view_form" />
         <field name="arch" type="xml">
-            <xpath
-                expr="//field[@name='stock_move_email_validation']/../../.."
-                position="inside"
-            >
-                <div class="col-12 col-lg-6 o_setting_box" id="strict_weight_package">
-                    <div class="o_setting_left_pane">
-                        <field name="delivery_carrier_strict_weight_package" />
-                    </div>
-                    <div class="o_setting_right_pane">
-                        <label for="delivery_carrier_strict_weight_package" />
-                        <div class="text-muted">
-                            Constrain the maximum weight of packages to be respected
-                        </div>
-                    </div>
-                </div>
+            <xpath expr="//setting[@id='stock_move_email']" position="after">
+                <setting
+                    id="strict_weight_package"
+                    string="Overweight packages forbidden"
+                    help="Constrain the maximum weight of packages to be respected"
+                >
+                    <field name="delivery_carrier_strict_weight_package" />
+                </setting>
             </xpath>
         </field>
     </record>
