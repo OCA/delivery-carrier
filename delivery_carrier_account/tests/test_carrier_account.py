@@ -27,3 +27,17 @@ class TestCarrierAccount(TransactionCase):
 
         picking_account = pick._get_carrier_account()
         self.assertEqual(picking_account, account)
+
+    def test_get_selection_delivery_type(self):
+        """Test that the delivery type selection is correctly fetched"""
+        carrier_account = self.env["carrier.account"].create(
+            {
+                "name": "Test Account",
+                "account": "test_account",
+                "password": "test_password",
+                "delivery_type": "base_on_rule",
+                "sequence": 1,
+            }
+        )
+        selection = carrier_account._get_selection_delivery_type()
+        self.assertIn("base_on_rule", [item[0] for item in selection])
