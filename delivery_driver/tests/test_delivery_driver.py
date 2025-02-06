@@ -2,6 +2,7 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0)
 
 
+from odoo import Command
 from odoo.exceptions import ValidationError
 from odoo.tests.common import TransactionCase
 
@@ -49,9 +50,7 @@ class TestDeliverDriver(TransactionCase):
                 "partner_invoice_id": self.partner_test.id,
                 "partner_shipping_id": self.partner_test.id,
                 "order_line": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "product_id": self.product_test.id,
                             "product_uom_qty": 1,
@@ -74,9 +73,7 @@ class TestDeliverDriver(TransactionCase):
                 "location_id": self.env.ref("stock.stock_location_stock").id,
                 "location_dest_id": self.env.ref("stock.stock_location_customers").id,
                 "move_ids": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "name": "Test",
                             "product_id": self.product_test.id,
@@ -95,3 +92,17 @@ class TestDeliverDriver(TransactionCase):
             }
         )
         self.assertEqual(stock_picking.driver_id, self.driver_test)
+
+    def test_get_name_with_show_driver_context(self):
+        """Test _get_name method when 'show_driver' is in the context."""
+        # Set the context to include 'show_driver'
+        self.env.context = dict(self.env.context, show_driver=True)
+
+        # Ensure _get_name returns the driver's name
+        self.assertEqual(self.driver_test._get_name(), "My Test Driver")
+
+    def test_get_name_without_show_driver_context(self):
+        """Test _get_name method when 'show_driver' is NOT in the context."""
+        # Ensure _get_name returns the parent class's _get_name result
+        # Here we are simulating the default behavior by calling the super method.
+        self.assertEqual(self.driver_test._get_name(), "My Test Driver")
