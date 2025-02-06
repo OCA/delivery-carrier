@@ -5,7 +5,6 @@ from odoo import api, fields, models
 
 
 class StockPicking(models.Model):
-
     _inherit = "stock.picking"
 
     theoretical_number_of_packages = fields.Integer(
@@ -29,7 +28,6 @@ class StockPicking(models.Model):
         "picking_type_code", "carrier_id", "carrier_id.maximum_weight_per_package"
     )
     def _compute_is_number_of_packages_visible(self):
-
         for rec in self:
             if (
                 rec.picking_type_code == "outgoing"
@@ -80,10 +78,9 @@ class StockPicking(models.Model):
     def _number_of_packages(
         self, products_weights, number_of_items, maximum_weight_per_package
     ):
-
         # Split the product_weights into as many items as we haves
         products_weights_list = []
-        for weight, number in zip(products_weights, number_of_items):
+        for weight, number in zip(products_weights, number_of_items, strict=False):
             for _i in range(int(number)):
                 products_weights_list.append(weight)
 

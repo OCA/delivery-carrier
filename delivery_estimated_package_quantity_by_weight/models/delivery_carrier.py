@@ -5,7 +5,6 @@ from odoo import fields, models
 
 
 class DeliveryCarrier(models.Model):
-
     _inherit = "delivery.carrier"
 
     maximum_weight_per_package = fields.Float(string="Maximum weight per package")

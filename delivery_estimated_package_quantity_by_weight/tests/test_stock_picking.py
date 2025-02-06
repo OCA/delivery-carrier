@@ -220,7 +220,8 @@ class TestStockPicking(TransactionCase):
         Data:
             All the products are in the SO, some are heavy, others light
         Test case:
-            Check the number of packages in the shipping. Each box should not exceed 37 kg
+            Check the number of packages in the shipping.
+            Each box should not exceed 37 kg
             We have a lot of products in this shipping:
             10 product1 with weight of 25kg each => 250kg
             10 product2 with weight of 30kg each => 300kg
