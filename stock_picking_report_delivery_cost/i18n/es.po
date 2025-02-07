@@ -18,13 +18,8 @@ msgstr ""
 
 #. module: stock_picking_report_delivery_cost
 #: model_terms:ir.ui.view,arch_db:stock_picking_report_delivery_cost.report_picking
-msgid "<strong>Delivery cost:</strong>"
-msgstr "<strong>Coste de envío:</strong>"
-
-#. module: stock_picking_report_delivery_cost
-#: model_terms:ir.ui.view,arch_db:stock_picking_report_delivery_cost.report_delivery_document
 msgid "<strong>Delivery cost</strong>"
-msgstr ""
+msgstr "<strong>Coste de envío</strong>"
 
 #. module: stock_picking_report_delivery_cost
 #: model:ir.model.fields,field_description:stock_picking_report_delivery_cost.field_stock_picking__carrier_price_for_report

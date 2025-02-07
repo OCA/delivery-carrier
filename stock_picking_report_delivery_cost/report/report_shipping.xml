@@ -6,10 +6,10 @@
         <xpath expr="//div[@name='div_sched_date']" position="after">
             <div
                 t-if="o.carrier_price_for_report"
-                class="col-auto"
+                class="col"
                 name="div_carrier_price_for_report"
             >
-                <strong>Delivery cost:</strong>
+                <strong>Delivery cost</strong>
                 <p t-field="o.carrier_price_for_report" />
             </div>
         </xpath>

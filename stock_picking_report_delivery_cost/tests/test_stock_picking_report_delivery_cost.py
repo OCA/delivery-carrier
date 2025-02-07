@@ -1,7 +1,6 @@
 # Copyright 2019 Tecnativa - Pedro M. Baeza
 # Copyright 2025 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-
 from odoo import Command
 from odoo.tests import Form
 
@@ -38,9 +37,7 @@ class TestStockPickingReportDeliveryCost(BaseCommon):
                 "carrier_id": cls.carrier.id,
                 "pricelist_id": cls.pricelist.id,
                 "order_line": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "name": cls.product.name,
                             "product_id": cls.product.id,
@@ -79,7 +76,7 @@ class TestStockPickingReportDeliveryCost(BaseCommon):
         picking = self.order.picking_ids
         self.assertAlmostEqual(picking.carrier_price_for_report, 0)
         move = picking.move_ids_without_package
-        move.quantity_done = move.product_qty
+        move.quantity = move.product_qty
         picking.button_validate()
         self.assertAlmostEqual(picking.carrier_price_for_report, 5)
 

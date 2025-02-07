@@ -4,12 +4,12 @@
 {
     "name": "Delivery cost in Picking Reports",
     "summary": "Show delivery cost in delivery slip and picking operations " " reports",
-    "version": "16.0.1.1.0",
+    "version": "18.0.1.0.0",
     "category": "Stock",
     "website": "https://github.com/OCA/delivery-carrier",
     "author": "Tecnativa, Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "installable": True,
-    "depends": ["delivery"],
+    "depends": ["stock_delivery"],
     "data": ["report/report_shipping.xml", "report/report_deliveryslip.xml"],
 }
