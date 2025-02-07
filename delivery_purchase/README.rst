@@ -89,6 +89,10 @@ Contributors
   - Vicent Cubells
   - Carolina Fernandez
 
+- `Heliconia Solutions Pvt. Ltd. <https://www.heliconia.io>`__
+
+  - Bhavesh Heliconia
+
 Maintainers
 -----------
 

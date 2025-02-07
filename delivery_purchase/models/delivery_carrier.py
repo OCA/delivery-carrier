@@ -1,7 +1,7 @@
 # Copyright 2015 Serv. Tecnol. Avanzados - Pedro M. Baeza
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError, ValidationError
 
 
@@ -34,7 +34,7 @@ class DeliveryCarrier(models.Model):
                 and self.free_over
                 and (order.amount_total + order.delivery_price) >= self.amount
             ):
-                res["warning_message"] = _(
+                res["warning_message"] = self.env._(
                     "The shipping is free since the order amount exceeds %.2f."
                 ) % (self.amount)
                 res["price"] = 0.0
@@ -61,7 +61,7 @@ class DeliveryCarrier(models.Model):
             return {
                 "success": False,
                 "price": 0.0,
-                "error_message": _(
+                "error_message": self.env._(
                     "Error: this delivery method is not available for this address."
                 ),
                 "warning_message": False,
@@ -86,7 +86,7 @@ class DeliveryCarrier(models.Model):
             return {
                 "success": False,
                 "price": 0.0,
-                "error_message": _("Error: no matching grid."),
+                "error_message": self.env._("Error: no matching grid."),
                 "warning_message": False,
             }
 
@@ -128,7 +128,7 @@ class DeliveryCarrier(models.Model):
             partner = p.purchase_id.dest_address_id or p.partner_id
             carrier = self._match_address(partner)
             if not carrier:
-                raise ValidationError(_("There is no matching delivery rule."))
+                raise ValidationError(self.env._("There is no matching delivery rule."))
             res = res + [
                 {
                     "exact_price": p.carrier_id._purchase_get_price_available(
@@ -145,7 +145,7 @@ class DeliveryCarrier(models.Model):
         self.ensure_one()
         self = self.sudo()
         order = order.sudo()
-        weight = volume = quantity = 0
+        weight = volume = quantity = wv = 0
         for line in order.order_line.filtered(
             lambda o_line: o_line.state != "cancel" and bool(o_line.product_id)
         ):
@@ -154,6 +154,9 @@ class DeliveryCarrier(models.Model):
             )
             weight += (line.product_id.weight or 0.0) * qty
             volume += (line.product_id.volume or 0.0) * qty
+            wv += (
+                (line.product_id.weight or 0.0) * (line.product_id.volume or 0.0) * qty
+            )
             quantity += qty
         total = order.amount_total or 0.0
         total = order.currency_id._convert(
@@ -162,4 +165,4 @@ class DeliveryCarrier(models.Model):
             order.company_id,
             order.date_order or fields.Date.today(),
         )
-        return self._get_price_from_picking(total, weight, volume, quantity)
+        return self._get_price_from_picking(total, weight, volume, quantity, wv=wv)

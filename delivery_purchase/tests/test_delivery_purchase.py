@@ -28,9 +28,7 @@ class TestDeliveryPurchaseBase(BaseCommon):
                 "product_id": cls.delivery_product.id,
                 "delivery_type": "base_on_rule",
                 "price_rule_ids": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "variable": "weight",
                             "operator": ">",
@@ -38,9 +36,7 @@ class TestDeliveryPurchaseBase(BaseCommon):
                             "list_base_price": "30",
                         },
                     ),
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "variable": "weight",
                             "operator": "<=",
@@ -67,9 +63,7 @@ class TestDeliveryPurchaseBase(BaseCommon):
         cls.purchase_line = cls.purchase.order_line
 
     def _action_picking_validate(self, picking):
-        res = picking.button_validate()
-        model = self.env[res["res_model"]].with_context(**res["context"])
-        model.create({}).process()
+        picking.button_validate()
 
 
 class TestDeliveryPurchase(TestDeliveryPurchaseBase):
@@ -126,8 +120,11 @@ class TestDeliveryPurchase(TestDeliveryPurchaseBase):
         self.assertEqual(self.purchase.delivery_price, 1)
         self.assertEqual(picking.carrier_price, 1)
         res = picking.button_validate()
-        wizard = self.env[res["res_model"]].with_context(**res["context"]).create({})
-        wizard.process()
+        if isinstance(res, dict):
+            wizard = (
+                self.env[res["res_model"]].with_context(**res["context"]).create({})
+            )
+            wizard.process()
         self.assertEqual(picking.state, "done")
         self.assertEqual(picking.carrier_price, 2)
 
@@ -172,7 +169,7 @@ class TestDeliveryPurchase(TestDeliveryPurchaseBase):
         picking = self.purchase.picking_ids
         picking.carrier_id = self.carrier_fixed
         for move in picking.move_ids_without_package:
-            move.quantity_done = 1
+            move.quantity = 1
         res = picking.button_validate()
         model = self.env[res["res_model"]].with_context(**res["context"])
         model.create({}).process_cancel_backorder()
