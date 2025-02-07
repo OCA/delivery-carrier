@@ -2,6 +2,7 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0)
 
 
+from odoo import Command
 from odoo.exceptions import ValidationError
 from odoo.tests.common import TransactionCase
 
@@ -49,9 +50,7 @@ class TestDeliverDriver(TransactionCase):
                 "partner_invoice_id": self.partner_test.id,
                 "partner_shipping_id": self.partner_test.id,
                 "order_line": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "product_id": self.product_test.id,
                             "product_uom_qty": 1,
@@ -74,9 +73,7 @@ class TestDeliverDriver(TransactionCase):
                 "location_id": self.env.ref("stock.stock_location_stock").id,
                 "location_dest_id": self.env.ref("stock.stock_location_customers").id,
                 "move_ids": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "name": "Test",
                             "product_id": self.product_test.id,
@@ -95,3 +92,15 @@ class TestDeliverDriver(TransactionCase):
             }
         )
         self.assertEqual(stock_picking.driver_id, self.driver_test)
+
+    def test_get_name_with_show_driver_context(self):
+        """Test _compute_display_name method when 'show_driver' is in the context."""
+        driver_with_context = self.driver_test.with_context(show_driver=True)
+        driver_with_context._compute_display_name()
+        self.assertEqual(driver_with_context.display_name, "My Test Driver")
+
+    def test_get_name_without_show_driver_context(self):
+        """Test _compute_display_name method when 'show_driver' is NOT in the
+        context."""
+        self.driver_test._compute_display_name()
+        self.assertTrue(self.driver_test.display_name)
