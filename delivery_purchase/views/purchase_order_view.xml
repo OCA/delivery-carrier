@@ -14,7 +14,8 @@
                         name="delivery_price"
                         widget='monetary'
                         options="{'currency_field': 'currency_id'}"
-                        attrs="{'invisible': [('carrier_id', '=', False)], 'readonly': [('state', 'in', ('purchase', 'done', 'cancel'))]}"
+                        invisible="not carrier_id"
+                        readonly="state in ('purchase', 'done', 'cancel')"
                     />
                 </div>
             </div>
@@ -24,7 +25,7 @@
             >
                 <field
                     name="delivery_picking_orig_id"
-                    attrs="{'invisible': [('delivery_picking_orig_id', '=', False)]}"
+                    invisible="not delivery_picking_orig_id"
                 />
             </xpath>
         </field>

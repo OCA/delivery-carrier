@@ -3,7 +3,7 @@
 # Copyright 2023-2025 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.tools.float_utils import float_is_zero
 
 
@@ -57,7 +57,7 @@ class PurchaseOrder(models.Model):
         # Override misc info: price_unit, name and sequence
         values.update(price_unit=price_unit)
         if carrier.free_over and self.currency_id.is_zero(price_unit):
-            values["name"] += "\n" + _("Free Shipping")
+            values["name"] += "\n" + self.env._("Free Shipping")
         if self.order_line:
             values.update(sequence=self.order_line[-1].sequence + 1)
         return pol_model.sudo().create(values)
