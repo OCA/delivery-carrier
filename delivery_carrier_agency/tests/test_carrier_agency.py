@@ -1,25 +1,33 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+from odoo import Command
 
-from odoo.tests.common import TransactionCase
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class TestCarrierAgency(TransactionCase):
+class TestCarrierAgency(BaseCommon):
     def test_get_carrier_agency(self):
         """Test finding the correct account for a picking"""
-        chicago_wh = self.env.ref("stock.stock_warehouse_shop0")
         san_fransico_wh = self.env.ref("stock.warehouse0")
+        partner = self.env.ref("stock.res_partner_address_41")
+        chicago_wh = self.env["stock.warehouse"].create(
+            {
+                "name": "Chicago 1",
+                "code": "CHIC1",
+                "partner_id": partner.id,
+            }
+        )
         agency_chicago = self.env["delivery.carrier.agency"].create(
             {
                 "name": "Normal Carrier Chicago agency",
                 "delivery_type": "base_on_rule",
-                "warehouse_ids": [(6, 0, chicago_wh.ids)],
+                "warehouse_ids": [Command.set(chicago_wh.ids)],
             }
         )
         agency_san_fransisco = self.env["delivery.carrier.agency"].create(
             {
                 "name": "Normal Carrier San Fransisco agency",
                 "delivery_type": "base_on_rule",
-                "warehouse_ids": [(6, 0, san_fransico_wh.ids)],
+                "warehouse_ids": [Command.set(san_fransico_wh.ids)],
             }
         )
         san_fransisco_picking = self.env["stock.picking"].new(
