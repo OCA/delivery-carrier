@@ -1,10 +1,12 @@
 # Copyright 2024 ForgeFlow S.L. (https://www.forgeflow.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl)
+from odoo import Command
 from odoo.tests import Form
-from odoo.tests.common import TransactionCase
+
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class TestDeliveryCarrierManualWeight(TransactionCase):
+class TestDeliveryCarrierManualWeight(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -26,16 +28,14 @@ class TestDeliveryCarrierManualWeight(TransactionCase):
             }
         )
         cls.product = cls.env["product.product"].create(
-            {"name": "Test product", "type": "product"}
+            {"name": "Test product", "type": "consu"}
         )
         cls.partner = cls.env["res.partner"].create({"name": "Test Partner"})
         cls.sale = cls.env["sale.order"].create(
             {
                 "partner_id": cls.partner.id,
                 "order_line": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "product_id": cls.product.id,
                             "product_uom_qty": 1,
