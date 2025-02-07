@@ -36,7 +36,7 @@ class StockPicking(models.Model):
             {
                 "carrier_name": self.carrier_id.name,
                 "tracking_ref": self.carrier_tracking_ref,
-                "carrier_price": "%.2f" % self.carrier_price,
+                "carrier_price": f"{self.carrier_price}.2f",
                 "currency_name": order_currency.name,
             }
         )
