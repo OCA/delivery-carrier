@@ -8,7 +8,10 @@
     >
         <field name="name">Stock Picking Driver Form</field>
         <field name="model">stock.picking</field>
-        <field name="inherit_id" ref="delivery.view_picking_withcarrier_out_form" />
+        <field
+            name="inherit_id"
+            ref="stock_delivery.view_picking_withcarrier_out_form"
+        />
         <field name="arch" type="xml">
             <xpath expr="//group[@name='carrier_data']" position="inside">
                 <field
@@ -22,7 +25,7 @@
     <record id="vpicktree_view_tree_inherit_delivery_driver" model="ir.ui.view">
         <field name="name">Stock Picking Driver Tree</field>
         <field name="model">stock.picking</field>
-        <field name="inherit_id" ref="delivery.vpicktree_view_tree" />
+        <field name="inherit_id" ref="stock_delivery.vpicktree_view_tree" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='carrier_id']" position="after">
                 <field

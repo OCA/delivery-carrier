@@ -8,7 +8,10 @@
     >
         <field name="name">Stock Move Line Tree Detailed Driver</field>
         <field name="model">stock.move.line</field>
-        <field name="inherit_id" ref="delivery.view_move_line_tree_detailed_delivery" />
+        <field
+            name="inherit_id"
+            ref="stock_delivery.view_move_line_tree_detailed_delivery"
+        />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='carrier_id']" position="after">
                 <field
