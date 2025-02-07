@@ -11,14 +11,14 @@
                         type="object"
                         class="btn-primary"
                         icon="fa-calendar-plus-o"
-                        attrs="{'invisible': [('calendar_id', '!=', False)]}"
+                        invisible="not calendar_id"
                     />
                     <button
                         name="action_disable_calendar"
                         string="Disable Calendar"
                         type="object"
                         icon="fa-calendar-minus-o"
-                        attrs="{'invisible': [('calendar_id', '=', False)]}"
+                        invisible="not calendar_id"
                     />
                     <button
                         name="geo_localize"
@@ -128,16 +128,16 @@
                         <page
                             name="calendar"
                             string="Calendar"
-                            attrs="{'invisible': [('calendar_id', '=', False)]}"
+                            invisible="not calendar_id"
                         >
                             <field name="calendar_id" invisible="1" />
                             <field name="attendance_ids">
-                                <tree editable="top">
+                                <list editable="top">
                                     <field name="name" />
                                     <field name="dayofweek" />
                                     <field name="hour_from" widget="float_time" />
                                     <field name="hour_to" widget="float_time" />
-                                </tree>
+                                </list>
                             </field>
                         </page>
                         <page name="internal_notes" string="Internal Notes">
@@ -177,7 +177,7 @@
     <record id="view_partner_dropoff_site_tree" model="ir.ui.view">
         <field name="model">dropoff.site</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="code" />
                 <field name="name" />
                 <field name="zip" />
@@ -185,13 +185,13 @@
                 <field name="country_id" />
                 <field name="carrier_id" />
                 <field name="company_id" groups="base.group_multi_company" />
-            </tree>
+            </list>
         </field>
     </record>
     <record id="action_dropoff_site" model="ir.actions.act_window">
         <field name="name">Drop-off Sites</field>
         <field name="res_model">dropoff.site</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
     <menuitem
         id="menu_dropoff_site_sale"

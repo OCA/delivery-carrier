@@ -9,10 +9,9 @@
                 <field name="dropoff_site_required" readonly="1" invisible="1" />
                 <field
                     name="final_shipping_partner_id"
-                    attrs="{
-                    'required': [('dropoff_site_required', '=', True)],
-                    'invisible': [('dropoff_site_required', '=', False)],
-                    }"
+                    required="dropoff_site_required"
+                    invisible="not dropoff_site_required"
+                    readonly="state in ['sale' ,'cancel']"
                 />
                 <field name="partner_shipping_id_domain" invisible="1" />
             </field>
