@@ -31,7 +31,7 @@
                         <field
                             name="carrier_ids"
                             widget="many2many_tags"
-                            attrs="{'invisible': [('delivery_type', '=', False)]}"
+                            invisible="not delivery_type"
                             domain="[('delivery_type', '=', delivery_type)]"
                         />
                         <field name="warehouse_ids" widget="many2many_tags" />
