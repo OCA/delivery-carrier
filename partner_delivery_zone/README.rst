@@ -102,6 +102,10 @@ Contributors
   - Angel Moya Pardo <angel.moya@pesol.es>
   - Antonio J Rubio Lorente <antonio.rubio@pesol.es>
 
+- `Heliconia Solutions Pvt. Ltd. <https://www.heliconia.io>`__
+
+  - Bhavesh Heliconia
+
 Maintainers
 -----------
 

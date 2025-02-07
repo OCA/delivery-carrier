@@ -4,7 +4,7 @@
     "name": "Partner Delivery Zone",
     "summary": "This module allows to create partner "
     "delivery zones for physical products",
-    "version": "16.0.1.3.0",
+    "version": "18.0.1.0.0",
     "development_status": "Beta",
     "category": "Delivery",
     "website": "https://github.com/OCA/delivery-carrier",
