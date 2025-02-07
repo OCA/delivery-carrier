@@ -22,8 +22,8 @@ class DeliveryCarrier(models.Model):
                        'warning_message': a string containing a warning message}
         """
         self.ensure_one()
-        if hasattr(self, "purchase_%s_rate_shipment" % self.delivery_type):
-            res = getattr(self, "purchase_%s_rate_shipment" % self.delivery_type)(order)
+        if hasattr(self, f"purchase_{self.delivery_type}_rate_shipment"):
+            res = getattr(self, f"purchase_{self.delivery_type}_rate_shipment")(order)
             # apply margin on computed price
             res["price"] = float(res["price"]) * (1.0 + (self.margin / 100.0))
             # save the real price in case a free_over rule overide it to 0
@@ -49,8 +49,8 @@ class DeliveryCarrier(models.Model):
                            'tracking_number': number }
         """
         self.ensure_one()
-        if hasattr(self, "purchase_%s_send_shipping" % self.delivery_type):
-            return getattr(self, "purchase_%s_send_shipping" % self.delivery_type)(
+        if hasattr(self, f"purchase_{self.delivery_type}_send_shipping"):
+            return getattr(self, f"purchase_{self.delivery_type}_send_shipping")(
                 pickings
             )
 
@@ -147,7 +147,7 @@ class DeliveryCarrier(models.Model):
         order = order.sudo()
         weight = volume = quantity = 0
         for line in order.order_line.filtered(
-            lambda l: l.state != "cancel" and bool(l.product_id)
+            lambda o_line: o_line.state != "cancel" and bool(o_line.product_id)
         ):
             qty = line.product_uom._compute_quantity(
                 line.product_uom_qty, line.product_id.uom_id
