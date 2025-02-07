@@ -17,21 +17,21 @@ Partner Delivery Zone
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fdelivery--carrier-lightgray.png?logo=github
-    :target: https://github.com/OCA/delivery-carrier/tree/16.0/partner_delivery_zone
+    :target: https://github.com/OCA/delivery-carrier/tree/18.0/partner_delivery_zone
     :alt: OCA/delivery-carrier
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/delivery-carrier-16-0/delivery-carrier-16-0-partner_delivery_zone
+    :target: https://translation.odoo-community.org/projects/delivery-carrier-18-0/delivery-carrier-18-0-partner_delivery_zone
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/delivery-carrier&target_branch=16.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/delivery-carrier&target_branch=18.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-This module allows to allocate delivery zones to customers. Information is
-shown on sale orders and stock pickings.
-It also allows to group and search by delivery zone in partners, sale orders
-and stock pickings views.
+This module allows to allocate delivery zones to customers. Information
+is shown on sale orders and stock pickings. It also allows to group and
+search by delivery zone in partners, sale orders and stock pickings
+views.
 
 **Table of contents**
 
@@ -43,30 +43,31 @@ Configuration
 
 To configure this module, you need to:
 
-#. Go to **Contacts > Configuration > Delivery Zones** and create the required
-   codes.
+1. Go to **Contacts > Configuration > Delivery Zones** and create the
+   required codes.
 
 Usage
 =====
 
 To use this module you need to:
 
-#. Go to Sales > Orders > Customers.
-#. Choose a customer.
-#. Click on 'Edit' button.
-#. Go to Sales & Purchase tab.
-#. In 'Delivery Zone' field select an option for this partner.
-#. Click on 'Save' button to apply changes.
-#. Go to Sales > Orders > Quotations.
-#. Create a quotation. 'Delivery zone' field is automatically filled. Confirm
-   quotation.
-#. Open picking or 'Delivery' info (top right). In 'Additional Info' tab you
-   can see a 'Delivery Zone' choice has been added.
+1. Go to Sales > Orders > Customers.
+2. Choose a customer.
+3. Click on 'Edit' button.
+4. Go to Sales & Purchase tab.
+5. In 'Delivery Zone' field select an option for this partner.
+6. Click on 'Save' button to apply changes.
+7. Go to Sales > Orders > Quotations.
+8. Create a quotation. 'Delivery zone' field is automatically filled.
+   Confirm quotation.
+9. Open picking or 'Delivery' info (top right). In 'Additional Info' tab
+   you can see a 'Delivery Zone' choice has been added.
 
 Known issues / Roadmap
 ======================
 
-* In future versions, the system will be capable of setting delivery zones based on partner's zip or postal codes.
+- In future versions, the system will be capable of setting delivery
+  zones based on partner's zip or postal codes.
 
 Bug Tracker
 ===========
@@ -74,7 +75,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/delivery-carrier/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/delivery-carrier/issues/new?body=module:%20partner_delivery_zone%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/delivery-carrier/issues/new?body=module:%20partner_delivery_zone%0Aversion:%2018.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -82,27 +83,27 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * Tecnativa
 * Pesol
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* `Tecnativa <https://www.tecnativa.com>`_
+- `Tecnativa <https://www.tecnativa.com>`__
 
-  * Sergio Teruel
-  * César A. Sánchez
-  * Luis Daniel Lafaurie
+  - Sergio Teruel
+  - César A. Sánchez
+  - Luis Daniel Lafaurie
 
-* `Pesol <https://www.pesol.es>`_
+- `Pesol <https://www.pesol.es>`__
 
-  * Angel Moya Pardo <angel.moya@pesol.es>
-  * Antonio J Rubio Lorente <antonio.rubio@pesol.es>
+  - Angel Moya Pardo <angel.moya@pesol.es>
+  - Antonio J Rubio Lorente <antonio.rubio@pesol.es>
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 
@@ -114,6 +115,6 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-This module is part of the `OCA/delivery-carrier <https://github.com/OCA/delivery-carrier/tree/16.0/partner_delivery_zone>`_ project on GitHub.
+This module is part of the `OCA/delivery-carrier <https://github.com/OCA/delivery-carrier/tree/18.0/partner_delivery_zone>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.

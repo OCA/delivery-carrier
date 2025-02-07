@@ -2,7 +2,8 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 {
     "name": "Partner Delivery Zone",
-    "summary": "This module allows to create partner delivery zones for physical products",
+    "summary": "This module allows to create partner "
+    "delivery zones for physical products",
     "version": "16.0.1.3.0",
     "development_status": "Beta",
     "category": "Delivery",
