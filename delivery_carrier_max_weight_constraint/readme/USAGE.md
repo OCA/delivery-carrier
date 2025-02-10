@@ -1,6 +1,6 @@
 The constraint can be enabled at multiple levels:
 
-- Company: *Settings* - *Inventory* - *Shipping*
+- Company: *Settings* - *Inventory* - *Shipping* -> Overweight packages forbidden
 - Carrier with company level as default
 - Package type with carrier level as default
 

@@ -14,7 +14,8 @@ class TestMaxWeightConstraint(TestPackingCommon):
         cls.product_test = cls.env["product.product"].create(
             {
                 "name": "Product TEST",
-                "type": "product",
+                "type": "consu",
+                "is_storable": True,
                 "weight": 2,
                 "uom_id": cls.uom_kg.id,
                 "uom_po_id": cls.uom_kg.id,
@@ -50,7 +51,7 @@ class TestMaxWeightConstraint(TestPackingCommon):
         The validation is ok even if the package is over the max_weight of the
         package type
         """
-        # check package type hasn't weight constraint enabled
+        # check package type has the weight constraint enabled
         self.assertFalse(self.package_type.is_strict_weight)
 
         picking_ship = self.env["stock.picking"].create(
@@ -67,7 +68,7 @@ class TestMaxWeightConstraint(TestPackingCommon):
                 "product_id": self.product_test.id,
                 "product_uom_id": self.uom_kg.id,
                 "picking_id": picking_ship.id,
-                "qty_done": 6,
+                "quantity": 6,
                 "location_id": self.stock_location.id,
                 "location_dest_id": self.customer_location.id,
             }
@@ -96,7 +97,7 @@ class TestMaxWeightConstraint(TestPackingCommon):
         package type
         """
         self.package_type.is_strict_weight = True
-        # check package type hasn't weight constraint enabled
+        # check package type has the weight constraint enabled
         self.assertTrue(self.package_type.is_strict_weight)
 
         picking_ship = self.env["stock.picking"].create(
@@ -113,7 +114,7 @@ class TestMaxWeightConstraint(TestPackingCommon):
                 "product_id": self.product_test.id,
                 "product_uom_id": self.uom_kg.id,
                 "picking_id": picking_ship.id,
-                "qty_done": 4,
+                "quantity": 4,
                 "location_id": self.stock_location.id,
                 "location_dest_id": self.customer_location.id,
             }
@@ -158,7 +159,7 @@ class TestMaxWeightConstraint(TestPackingCommon):
                 "product_id": self.product_test.id,
                 "product_uom_id": self.uom_kg.id,
                 "picking_id": picking_ship.id,
-                "qty_done": 6,
+                "quantity": 6,
                 "location_id": self.stock_location.id,
                 "location_dest_id": self.customer_location.id,
             }
@@ -184,7 +185,7 @@ class TestMaxWeightConstraint(TestPackingCommon):
         with self.assertRaises(ValidationError, msg=error_msg):
             pack_wiz.delivery_package_type_id = self.package_type.id
 
-    def test_strict_weight_set_max_weightb_not_set(self):
+    def test_strict_weight_set_max_weight_not_set(self):
         """
         Check that the 'choose.delivery.package' wizard is working the normal way
         when the constraint is set but package type max_weight not.
@@ -207,7 +208,7 @@ class TestMaxWeightConstraint(TestPackingCommon):
                 "product_id": self.product_test.id,
                 "product_uom_id": self.uom_kg.id,
                 "picking_id": picking_ship.id,
-                "qty_done": 6,
+                "quantity": 6,
                 "location_id": self.stock_location.id,
                 "location_dest_id": self.customer_location.id,
             }
