@@ -18,7 +18,6 @@ _logger = logging.getLogger(__name__)
 
 
 class DeliveryCarrierLabelGenerate(models.TransientModel):
-
     _name = "delivery.carrier.label.generate"
     _description = "Generate labels from batch pickings"
 
@@ -166,7 +165,6 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
         # generated thus we raise catched exceptions by the workers
         # We will try to regroup all orm exception in one
         if not error_queue.empty():
-
             error_count = {}
             messages = []
             while not error_queue.empty():
@@ -216,7 +214,7 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
             package_list = "\n".join(missing_packages.mapped("name"))
             msg = _(
                 "Impossible to generate the labels."
-                " Those pickings don't have packages:\n{}".format(package_list)
+                f" Those pickings don't have packages:\n{package_list}"
             )
             raise exceptions.UserError(msg)
 
