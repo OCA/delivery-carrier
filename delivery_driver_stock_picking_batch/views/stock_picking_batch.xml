@@ -2,21 +2,6 @@
 <!-- Copyright 2023 Moduon Team S.L.
      License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0) -->
 <data>
-    <record id="view_picking_tree_batch_inherit_delivery_driver" model="ir.ui.view">
-        <field name="name">Stock Picking Batch Transfer Tree Delivery Driver</field>
-        <field name="model">stock.picking</field>
-        <field name="inherit_id" ref="stock_picking_batch.view_picking_tree_batch" />
-        <field name="arch" type="xml">
-            <xpath expr="//field[@name='scheduled_date']" position="after">
-                <field
-                    name="driver_id"
-                    optional="hide"
-                    context="{'show_driver': True}"
-                    options='{"always_reload": True}'
-                />
-            </xpath>
-        </field>
-    </record>
     <record id="stock_picking_batch_form_inherit_delivery_driver" model="ir.ui.view">
         <field name="name">Stock Picking Batch Form Delivery Driver</field>
         <field name="model">stock.picking.batch</field>
