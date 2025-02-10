@@ -4,7 +4,6 @@ from odoo import _, api, fields, models
 
 
 class StockBatchPicking(models.Model):
-
     """Add carrier and carrier options on batch
 
     to be able to massively set those options on related picking.

@@ -1,36 +1,39 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
-<record id="view_picking_batch_apply_carrier" model="ir.ui.view">
-  <field name="name">picking.batch.apply.carrier.form</field>
-  <field name="model">picking.batch.apply.carrier</field>
-  <field name="arch" type="xml">
-    <form string="Apply a carrier and its options">
-      <label
+    <record id="view_picking_batch_apply_carrier" model="ir.ui.view">
+        <field name="name">picking.batch.apply.carrier.form</field>
+        <field name="model">picking.batch.apply.carrier</field>
+        <field name="arch" type="xml">
+            <form string="Apply a carrier and its options">
+                <label
                     for="apply"
                     string="Warning, setting options will erase the existing ones in delivery orders"
                 />
-      <group>
-        <field name="carrier_id" />
-      </group>
-      <footer>
-        <button name="apply" string="Apply" type="object" class="oe_highlight" />
-        <button string="Cancel" class="oe_link" special="cancel" />
-      </footer>
-    </form>
-  </field>
-</record>
+                <group>
+                    <field name="carrier_id" />
+                </group>
+                <footer>
+                    <button
+                        name="apply"
+                        string="Apply"
+                        type="object"
+                        class="oe_highlight"
+                    />
+                    <button string="Cancel" class="oe_link" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
 
-<record id="action_picking_batch_apply_carrier" model="ir.actions.act_window">
-  <field name="name">Apply a carrier and its options</field>
-  <field name="res_model">picking.batch.apply.carrier</field>
-  <field name="view_mode">form</field>
-  <field name="view_id" ref="view_picking_batch_apply_carrier" />
-  <field
+    <record id="action_picking_batch_apply_carrier" model="ir.actions.act_window">
+        <field name="name">Apply a carrier and its options</field>
+        <field name="res_model">picking.batch.apply.carrier</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_picking_batch_apply_carrier" />
+        <field
             name="binding_model_id"
             ref="stock_picking_batch_extended.model_stock_picking_batch"
         />
-  <field name="target">new</field>
-</record>
-
+        <field name="target">new</field>
+    </record>
 </odoo>
