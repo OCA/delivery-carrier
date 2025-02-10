@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
     <record model="ir.ui.view" id="stock_package_type_form_delivery">
         <field
             name="name"
@@ -13,5 +12,4 @@
             </field>
         </field>
     </record>
-
 </odoo>
