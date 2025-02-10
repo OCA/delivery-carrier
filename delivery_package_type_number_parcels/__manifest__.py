@@ -4,11 +4,11 @@
 {
     "name": "Delivery Package Type Number Parcels",
     "summary": "Number of parcels in a package type",
-    "version": "16.0.1.0.2",
+    "version": "18.0.1.0.0",
     "license": "AGPL-3",
-    "author": "ACSONE SA/NV,Odoo Community Association (OCA)",
+    "author": "ACSONE SA/NV,BCIM,Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/delivery-carrier",
-    "depends": ["delivery"],
+    "depends": ["stock_delivery"],
     "data": [
         "views/stock_quant_package_views.xml",
         "views/stock_package_type_views.xml",

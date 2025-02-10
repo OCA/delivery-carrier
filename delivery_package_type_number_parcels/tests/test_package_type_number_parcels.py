@@ -13,8 +13,9 @@ class TestStockQuantPackageDelivery(TestPackingCommon):
         cls.product_test = cls.env["product.product"].create(
             {
                 "name": "Product TEST",
-                "type": "product",
+                "type": "consu",
                 "weight": 0.1,
+                "is_storable": True,
                 "uom_id": cls.uom_kg.id,
                 "uom_po_id": cls.uom_kg.id,
             }
@@ -65,7 +66,7 @@ class TestStockQuantPackageDelivery(TestPackingCommon):
                 "product_id": self.product_test.id,
                 "product_uom_id": self.uom_kg.id,
                 "picking_id": picking_ship.id,
-                "qty_done": 5,
+                "quantity": 5,
                 "location_id": self.stock_location.id,
                 "location_dest_id": self.customer_location.id,
             }
@@ -76,7 +77,7 @@ class TestStockQuantPackageDelivery(TestPackingCommon):
         # We make sure the correct action was returned
         self.assertEqual(pack_action_model, "choose.delivery.package")
         # check there is no package yet for the picking
-        self.assertEqual(len(picking_ship.package_ids), 0)
+        self.assertEqual(len(picking_ship.package_level_ids), 0)
         # We instanciate the wizard with the context of the action
         pack_wiz = (
             self.env["choose.delivery.package"]
@@ -91,21 +92,23 @@ class TestStockQuantPackageDelivery(TestPackingCommon):
         )
         pack_wiz.action_put_in_pack()
         # check that one package has been created with the same number of packages
-        self.assertEqual(len(picking_ship.package_ids), 1)
-        package1 = picking_ship.package_ids[0]
+        self.assertEqual(len(picking_ship.package_level_ids), 1)
+        package1 = picking_ship.package_level_ids[0]
         # check the related number_of_parcels is ok in the package
         self.assertEqual(
-            package1.number_of_parcels, self.package_type.number_of_parcels
+            package1.package_id.number_of_parcels, self.package_type.number_of_parcels
         )
         return package1
 
     def test_manual_number_of_parcels(self):
         package = self.test_put_in_pack_choose_carrier_wizard()
-        self.assertEqual(package.number_of_parcels, 7)
+        self.assertEqual(package.package_id.number_of_parcels, 7)
         self.package_type.number_of_parcels = 8
-        self.assertEqual(package.number_of_parcels, 7)
-        package.number_of_parcels = 9
-        self.assertEqual(package.number_of_parcels, 9)
+        self.assertEqual(package.package_id.number_of_parcels, 7)
+        package.package_id.number_of_parcels = 9
+        self.assertEqual(package.package_id.number_of_parcels, 9)
         self.assertEqual(self.package_type.number_of_parcels, 8)
-        package.package_type_id = self.package_type.copy({"number_of_parcels": 10})
-        self.assertEqual(package.number_of_parcels, 10)
+        package.package_id.package_type_id = self.package_type.copy(
+            {"number_of_parcels": 10}
+        )
+        self.assertEqual(package.package_id.number_of_parcels, 10)
