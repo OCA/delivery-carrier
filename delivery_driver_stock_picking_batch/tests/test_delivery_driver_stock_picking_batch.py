@@ -2,6 +2,7 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0)
 
 
+from odoo import Command
 from odoo.tests.common import TransactionCase
 
 
@@ -52,9 +53,7 @@ class TestDeliveryDriverStockPickingBatch(TransactionCase):
                 "location_id": self.env.ref("stock.stock_location_stock").id,
                 "location_dest_id": self.env.ref("stock.stock_location_customers").id,
                 "move_ids": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "name": "Test",
                             "product_id": self.product_test.id,
@@ -79,9 +78,7 @@ class TestDeliveryDriverStockPickingBatch(TransactionCase):
                 "location_id": self.env.ref("stock.stock_location_stock").id,
                 "location_dest_id": self.env.ref("stock.stock_location_customers").id,
                 "move_ids": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "name": "Test",
                             "product_id": self.product_test.id,
