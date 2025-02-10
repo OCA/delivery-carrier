@@ -4,5 +4,5 @@ The constraint can be enabled at multiple levels:
 - Carrier with company level as default
 - Package type with carrier level as default
 
-If the constraint is disabled at the package type level
-Odoo behaves the usual way.
+If the constraint is disabled at the package type level Odoo behaves the
+usual way.
