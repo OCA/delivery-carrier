@@ -9,12 +9,11 @@ from odoo.modules import get_module_resource
 
 
 class TestGenerateLabels(common.SavepointCase):
-
     """Test the wizard for delivery carrier label generation"""
 
     @classmethod
     def setUpClass(cls):
-        super(TestGenerateLabels, cls).setUpClass()
+        super().setUpClass()
 
         Move = cls.env["stock.move"]
         Picking = cls.env["stock.picking"]
