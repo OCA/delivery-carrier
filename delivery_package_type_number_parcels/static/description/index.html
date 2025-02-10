@@ -370,11 +370,18 @@ ul.auto-toc {
 !! source digest: sha256:b89957d7d07f4d3269e752c71675921b863468114cfd1c19987f589d0c3227fd
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 <p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html"><img alt="License: AGPL-3" src="https://img.shields.io/badge/licence-AGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/OCA/delivery-carrier/tree/18.0/delivery_package_type_number_parcels"><img alt="OCA/delivery-carrier" src="https://img.shields.io/badge/github-OCA%2Fdelivery--carrier-lightgray.png?logo=github" /></a> <a class="reference external image-reference" href="https://translation.odoo-community.org/projects/delivery-carrier-18-0/delivery-carrier-18-0-delivery_package_type_number_parcels"><img alt="Translate me on Weblate" src="https://img.shields.io/badge/weblate-Translate%20me-F47D42.png" /></a> <a class="reference external image-reference" href="https://runboat.odoo-community.org/builds?repo=OCA/delivery-carrier&amp;target_branch=18.0"><img alt="Try me on Runboat" src="https://img.shields.io/badge/runboat-Try%20me-875A7B.png" /></a></p>
-<p>This module adds the number_of_parcels on package type and its related
-on package. As so it gives a simple way to have the number of
-pieces/boxes of the package type without playing with the package levels
-if this latter is overkill.</p>
-<p>This field is set manually by the user on package type.</p>
+<p>This module allows to pre-configure a number of parcels on the delivery
+package type. When creating a delivery package and associating a package
+type, the number of parcels of the package will be initialized from the
+delivery package type. You can create one package type per possible
+number of parcels, like “1 parcel”, “2 parcels”, “3 parcels”… When
+packing, select or scan the package type barcode to make a package for
+all picked lines with the right declared amount of parcels. This
+prevents you to declare which picked line and corresponding quantity is
+in which parcel.</p>
+<p>The number of parcels is also displayed in the delivery package wizard
+when selecting a package type, giving users immediate visibility of the
+parcel count during the delivery process.</p>
 <p><strong>Table of contents</strong></p>
 <div class="contents local topic" id="contents">
 <ul class="simple">
@@ -401,12 +408,18 @@ If you spotted it first, help us to smash it by providing a detailed and welcome
 <h2><a class="toc-backref" href="#toc-entry-3">Authors</a></h2>
 <ul class="simple">
 <li>ACSONE SA/NV</li>
+<li>BCIM</li>
 </ul>
 </div>
 <div class="section" id="contributors">
 <h2><a class="toc-backref" href="#toc-entry-4">Contributors</a></h2>
 <ul class="simple">
 <li>Hughes Damry &lt;<a class="reference external" href="mailto:hughes.damry&#64;acsone.eu">hughes.damry&#64;acsone.eu</a>&gt;</li>
+<li>Jacques-Etienne Baudoux (BCIM) <a class="reference external" href="mailto:je&#64;bcim.be">je&#64;bcim.be</a></li>
+<li><a class="reference external" href="https://www.heliconia.io">Heliconia Solutions Pvt. Ltd.</a><ul>
+<li>Bhavesh Heliconia</li>
+</ul>
+</li>
 </ul>
 </div>
 <div class="section" id="maintainers">
