@@ -4,8 +4,7 @@
         <field name="type">form</field>
         <field name="arch" type="xml">
             <form string="CTT Express Manifest Report">
-                <field name="state" invisible="1" />
-                <group attrs="{'invisible': [('state', '=', 'done')]}">
+                <group invisble="state == 'done'">
                     <group name="config">
                         <field name="document_type" />
                         <field name="from_date" />
@@ -13,10 +12,10 @@
                         <field name="carrier_ids" widget="many2many_tags" />
                     </group>
                 </group>
-                <group attrs="{'invisible': [('state', '!=', 'done')]}">
+                <group invisble="state != 'done'">
                     <field name="attachment_ids" widget="many2many_binary" />
                 </group>
-                <footer attrs="{'invisible': [('state', '=', 'done')]}">
+                <footer invisble="state == 'done'">
                     <button
                         name="get_manifest"
                         string="Get Manifest"

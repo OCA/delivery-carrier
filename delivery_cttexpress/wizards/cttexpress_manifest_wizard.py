@@ -47,7 +47,10 @@ class CTTExpressManifestWizard(models.TransientModel):
         for customer, contract, agency in unique_accounts:
             filtered_carriers += fields.first(
                 carriers.filtered(
-                    lambda x: x.cttexpress_customer == customer
+                    lambda x,
+                    customer=customer,
+                    contract=contract,
+                    agency=agency: x.cttexpress_customer == customer
                     and x.cttexpress_contract == contract
                     and x.cttexpress_agency == agency
                 )

@@ -13,37 +13,37 @@
                     class="oe_stat_button"
                     icon="fa-truck"
                     string="Pickup request"
-                    context="{'default_carrier_id': active_id}"
-                    attrs="{'invisible': [('delivery_type', '!=', 'cttexpress')]}"
+                    context="{'default_carrier_id': id}"
+                    invisible="delivery_type != 'cttexpress'"
                 />
             </xpath>
             <xpath expr="//notebook/page[1]" position='before'>
                 <page
                     string="CTT Express Configuration"
-                    attrs="{'invisible': [('delivery_type', '!=', 'cttexpress')]}"
+                    invisible="delivery_type != 'cttexpress'"
                 >
                     <group>
                         <group string="Connection">
                             <field
                                 name="cttexpress_user"
-                                attrs="{'required': [('delivery_type', '=', 'cttexpress')]}"
+                                required="delivery_type == 'cttexpress'"
                             />
                             <field
                                 name="cttexpress_password"
                                 password="True"
-                                attrs="{'required': [('delivery_type', '=', 'cttexpress')]}"
+                                required="delivery_type == 'cttexpress'"
                             />
                             <field
                                 name="cttexpress_agency"
-                                attrs="{'required': [('delivery_type', '=', 'cttexpress')]}"
+                                required="delivery_type == 'cttexpress'"
                             />
                             <field
                                 name="cttexpress_customer"
-                                attrs="{'required': [('delivery_type', '=', 'cttexpress')]}"
+                                required="delivery_type == 'cttexpress'"
                             />
                             <field
                                 name="cttexpress_contract"
-                                attrs="{'required': [('delivery_type', '=', 'cttexpress')]}"
+                                required="delivery_type == 'cttexpress'"
                             />
                             <button
                                 name="action_ctt_validate_user"
@@ -56,21 +56,21 @@
                         <group string="Shipping">
                             <field
                                 name="cttexpress_shipping_type"
-                                attrs="{'required': [('delivery_type', '=', 'cttexpress')]}"
+                                required="delivery_type == 'cttexpress'"
                             />
                         </group>
                         <group string="Label format">
                             <field
                                 name="cttexpress_document_model_code"
-                                attrs="{'required': [('delivery_type', '=', 'cttexpress')]}"
+                                required="delivery_type == 'cttexpress'"
                             />
                             <field
                                 name="cttexpress_document_format"
-                                attrs="{'required': [('delivery_type', '=', 'cttexpress')]}"
+                                required="delivery_type == 'cttexpress'"
                             />
                             <field
                                 name="cttexpress_document_offset"
-                                attrs="{'required': [('delivery_type', '=', 'cttexpress')]}"
+                                required="delivery_type == 'cttexpress'"
                             />
                         </group>
                     </group>
