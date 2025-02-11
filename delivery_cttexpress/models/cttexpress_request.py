@@ -177,7 +177,7 @@ class CTTExpressRequest:
                 "ModelCode": model_code,
                 "KindCode": kind_code,
                 "Offset": offset,
-            }
+            },
         )
         response = self.client.service.GetDocumentsV2(**values)
         return (
@@ -268,7 +268,7 @@ class CTTExpressRequest:
                 "DeliveryDate": delivery_date,
                 "HourMinuteMin1": min_hour,
                 "HourMinuteMax1": max_hour,
-            }
+            },
         )
         response = self.client.service.CreateRequest(**values)
         return (self._format_error(response.ErrorCodes), response.RequestShippingCode)
