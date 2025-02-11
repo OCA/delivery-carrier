@@ -1,12 +1,22 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 # Copyright 2022 Tecnativa - David Vidal
+import requests
+
 from odoo.exceptions import UserError
-from odoo.tests import Form, common
+from odoo.tests.common import Form
+
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class TestDeliveryCTTExpress(common.TransactionCase):
+class TestDeliveryCTTExpress(BaseCommon):
+    @classmethod
+    def _request_handler(cls, s, r, /, **kw):
+        """Don't block external requests."""
+        return cls._super_send(s, r, **kw)
+
     @classmethod
     def setUpClass(cls):
+        cls._super_send = requests.Session.send
         super().setUpClass()
         cls.shipping_product = cls.env["product.product"].create(
             {"type": "service", "name": "Test Shipping costs", "list_price": 10.0}
@@ -17,8 +27,9 @@ class TestDeliveryCTTExpress(common.TransactionCase):
                 "delivery_type": "cttexpress",
                 "product_id": cls.shipping_product.id,
                 "debug_logging": True,
-                "prod_environment": False,
-                # CTT will maintain these credentials in order to allow OCA testing
+                "prod_environment": True,
+                # TODO: these credentials aren't valid anymore. You can use these tests
+                # with your own credentials locally to check that the integration works.
                 "cttexpress_user": "000002ODOO1",
                 "cttexpress_password": "CAL%224271",
                 "cttexpress_agency": "000002",
@@ -60,7 +71,7 @@ class TestDeliveryCTTExpress(common.TransactionCase):
         # Ensure shipper address
         cls.sale_order.warehouse_id.partner_id = cls.wh_partner
         cls.picking = cls.sale_order.picking_ids
-        cls.picking.move_ids.quantity_done = 20
+        cls.picking.move_ids.quantity = 20
 
     def test_00_cttexpress_test_connection(self):
         """Test credentials validation"""

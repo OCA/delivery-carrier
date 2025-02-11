@@ -47,6 +47,8 @@ class DeliveryCarrier(models.Model):
     def _onchange_delivery_type_ctt(self):
         """Default price method for CTT as the API can't gather prices."""
         if self.delivery_type == "cttexpress":
+            # TODO: Right now, the test environment port isn't working
+            self.prod_environment = True
             self.price_method = "base_on_rule"
 
     def _ctt_request(self):
@@ -124,7 +126,7 @@ class DeliveryCarrier(models.Model):
         error, service_types = ctt_request.get_service_types()
         self._ctt_log_request(ctt_request)
         self._ctt_check_error(error)
-        type_codes, type_descriptions = zip(*service_types)
+        type_codes, type_descriptions = zip(*service_types, strict=False)
         if self.cttexpress_shipping_type not in type_codes:
             service_name = dict(
                 self._fields["cttexpress_shipping_type"]._description_selection(
@@ -176,7 +178,7 @@ class DeliveryCarrier(models.Model):
         return {
             "ClientReference": reference,  # Optional
             "ClientDepartmentCode": None,  # Optional (no core field matches)
-            "ItemsCount": picking.number_of_packages,
+            "ItemsCount": picking.number_of_packages or 1,
             "IsClientPodScanRequired": None,  # Optional
             "RecipientAddress": recipient.street,
             "RecipientCountry": recipient.country_id.code,
@@ -227,10 +229,21 @@ class DeliveryCarrier(models.Model):
             vals.update({"tracking_number": tracking, "exact_price": 0})
             # The default shipping method doesn't allow to configure the label
             # format, so once we get the tracking, we ask for it again.
-            documents = self.cttexpress_get_label(tracking)
+            documents = False
+            body = _("CTT Shipping Documents")
+            try:
+                documents = self.cttexpress_get_label(tracking)
+            except UserError as e:
+                # The labels could be generated after an undetermined delay. If we try
+                # to retrieve them before that, we'll get this error code
+                if "CTT Express Error" not in str(e) and "1004" not in str(e):
+                    raise e
+                body = _(
+                    "CTT labels for this document aren't yet ready. Download them "
+                    "manually using the button in the header of the picking."
+                )
             # We post an extra message in the chatter with the barcode and the
             # label because there's clean way to override the one sent by core.
-            body = _("CTT Shipping Documents")
             picking.message_post(body=body, attachments=documents)
             result.append(vals)
         return result
