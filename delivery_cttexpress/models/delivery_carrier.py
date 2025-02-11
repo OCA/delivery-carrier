@@ -84,7 +84,7 @@ class DeliveryCarrier(models.Model):
         for code, msg in error:
             if not code:
                 continue
-            error_msg += "{} - {}\n".format(code, msg)
+            error_msg += f"{code} - {msg}\n"
         if not error_msg:
             return
         raise UserError(_("CTT Express Error:\n\n%s") % error_msg)
@@ -172,7 +172,7 @@ class DeliveryCarrier(models.Model):
         weight = picking.shipping_weight
         reference = picking.name
         if picking.sale_id:
-            reference = "{}-{}".format(picking.sale_id.name, reference)
+            reference = f"{picking.sale_id.name}-{reference}"
         return {
             "ClientReference": reference,  # Optional
             "ClientDepartmentCode": None,  # Optional (no core field matches)
