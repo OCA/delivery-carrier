@@ -3,7 +3,7 @@
 {
     "name": "Partner Delivery Schedule",
     "summary": "Set on partners a schedule for delivery goods",
-    "version": "18.0.1.0.0",
+    "version": "18.0.1.0.1",
     "development_status": "Production/Stable",
     "category": "Delivery",
     "website": "https://github.com/OCA/delivery-carrier",
@@ -11,7 +11,7 @@
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": ["delivery"],
+    "depends": ["stock_delivery"],
     "data": [
         "security/ir.model.access.csv",
         "views/partner_delivery_schedule_view.xml",
