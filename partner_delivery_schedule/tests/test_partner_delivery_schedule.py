@@ -42,7 +42,7 @@ class TestStockPikingReturnRefundOption(BaseCommon):
         )
         cls.report_model = cls.env["ir.actions.report"]
         cls.product = cls.env["product.product"].create(
-            {"name": "Test product", "type": "consu", "is_storable": True}
+            {"name": "Test product", "type": "product"}
         )
         cls.order = cls._create_sale_order(cls)
         cls.order.action_confirm()
