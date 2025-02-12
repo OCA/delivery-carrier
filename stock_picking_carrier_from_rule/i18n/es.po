@@ -17,21 +17,15 @@ msgstr ""
 "X-Generator: Weblate 4.17\n"
 
 #. module: stock_picking_carrier_from_rule
-#: model:ir.model.fields,field_description:stock_picking_carrier_from_rule.field_stock_move__display_name
-msgid "Display Name"
-msgstr "Mostrar Nombre"
-
-#. module: stock_picking_carrier_from_rule
-#: model:ir.model.fields,field_description:stock_picking_carrier_from_rule.field_stock_move__id
-msgid "ID"
-msgstr "ID"
-
-#. module: stock_picking_carrier_from_rule
-#: model:ir.model.fields,field_description:stock_picking_carrier_from_rule.field_stock_move____last_update
-msgid "Last Modified on"
-msgstr "Última Modificación el"
-
-#. module: stock_picking_carrier_from_rule
 #: model:ir.model,name:stock_picking_carrier_from_rule.model_stock_move
 msgid "Stock Move"
 msgstr "Movimiento de Existencias"
+
+#~ msgid "Display Name"
+#~ msgstr "Mostrar Nombre"
+
+#~ msgid "ID"
+#~ msgstr "ID"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Última Modificación el"
