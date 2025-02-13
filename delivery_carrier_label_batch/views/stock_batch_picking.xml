@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <record model="ir.ui.view" id="stock_batch_picking_form">
+    <record model="ir.ui.view" id="stock_picking_batch_form">
         <field name="name">stock.picking.batch.form</field>
         <field name="model">stock.picking.batch</field>
         <field
             name="inherit_id"
-            ref="stock_picking_batch_extended.stock_batch_picking_form"
+            ref="stock_picking_batch_extended.stock_picking_batch_form"
         />
         <field name="arch" type="xml">
             <notebook position="inside">
                 <page name="carrier" string="Carrier Info">
                     <separator string="Delivery" />
                     <group>
-                        <field name="carrier_id" />
+                        <field name="carrier_id" readonly="state == 'done'" />
                     </group>
                     <separator string="Options" />
-                    <field name="option_ids" nolabel="1" />
+                    <field name="option_ids" nolabel="1" domain="option_ids_domain" />
                     <label
                         for="action_set_options"
                         string="Warning, setting options will erase the existing ones in delivery orders"
