@@ -78,11 +78,11 @@ Authors
 Contributors
 ------------
 
--  Yannick Vaucher <yannick.vaucher@camptocamp.com>
+- Yannick Vaucher <yannick.vaucher@camptocamp.com>
 
--  `Trobz <https://trobz.com>`__:
+- `Trobz <https://trobz.com>`__:
 
-   -  Khoi Vo <khoivha@trobz.com>
+  - Khoi Vo <khoivha@trobz.com>
 
 Other credits
 -------------
