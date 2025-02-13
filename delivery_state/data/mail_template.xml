@@ -17,9 +17,9 @@
                     Order information<br />
                     Order <t t-out="object.carrier_tracking_ref" /><br />
                     <t t-if="user.signature">
-                        <br />
-                        <t t-out="user.signature" />
-                    </t>
+                    <br />
+                    <t t-out="user.signature" />
+                </t>
                 </p>
             </div>
         </field>
