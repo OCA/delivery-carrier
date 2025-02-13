@@ -1,6 +1,7 @@
 # Copyright 2013-2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
-from odoo import _, api, fields, models
+from odoo import Command, api, fields, models
+from odoo.exceptions import UserError
 
 
 class StockBatchPicking(models.Model):
@@ -13,9 +14,24 @@ class StockBatchPicking(models.Model):
     _inherit = "stock.picking.batch"
 
     carrier_id = fields.Many2one(
-        "delivery.carrier", "Carrier", states={"done": [("readonly", True)]}
+        comodel_name="delivery.carrier",
     )
-    option_ids = fields.Many2many("delivery.carrier.option", string="Options")
+    option_ids = fields.Many2many(
+        comodel_name="delivery.carrier.option",
+    )
+    option_ids_domain = fields.Binary(
+        string="Options domain",
+        help="Dynamic domain used for the carrier options",
+        compute="_compute_option_ids_domain",
+    )
+
+    @api.depends("carrier_id")
+    def _compute_option_ids_domain(self):
+        for rec in self:
+            options_domain = None
+            if available_options := self.carrier_id.available_option_ids:
+                options_domain = [("id", "in", available_options.ids)]
+            rec.option_ids_domain = options_domain
 
     def action_set_options(self):
         """Apply options to picking of the batch
@@ -26,7 +42,7 @@ class StockBatchPicking(models.Model):
         for rec in self:
             options_datas = {
                 "carrier_id": rec.carrier_id.id,
-                "option_ids": [(6, 0, rec.option_ids.ids)],
+                "option_ids": [Command.set(rec.option_ids.ids)],
             }
             rec.picking_ids.write(options_datas)
 
@@ -36,38 +52,29 @@ class StockBatchPicking(models.Model):
         return options.filtered(lambda rec: rec.mandatory or rec.by_default)
 
     @api.onchange("carrier_id")
-    def carrier_id_change(self):
+    def onchange_carrier_id(self):
         """Inherit this method in your module"""
-        if self.carrier_id:
-            available_options = self.carrier_id.available_option_ids
-            default_options = self._get_options_to_add()
-            self.option_ids = [(6, 0, default_options.ids)]
-            self.carrier_code = self.carrier_id.code
-            return {
-                "domain": {
-                    "option_ids": [("id", "in", available_options.ids)],
-                }
-            }
-        return {}
+        if not self.carrier_id:
+            return
+        default_options = self._get_options_to_add()
+        self.option_ids = [Command.set(default_options.ids)]
+        self.carrier_code = self.carrier_id.code
 
     @api.onchange("option_ids")
-    def option_ids_change(self):
-        res = {}
+    def onchange_option_ids(self):
         if not self.carrier_id:
-            return res
+            return
+
         for available_option in self.carrier_id.available_option_ids:
             if available_option.mandatory and available_option not in self.option_ids:
-                res["warning"] = {
-                    "title": _("User Error !"),
-                    "message": _(
-                        "You can not remove a mandatory option."
+                # Optionally, reset the options to the default values.
+                self.option_ids = self._get_options_to_add()
+                raise UserError(
+                    self.env._(
+                        "You cannot remove a mandatory option. "
                         "\nPlease reset options to default."
-                    ),
-                }
-                # Due to https://github.com/odoo/odoo/issues/2693 we cannot
-                # reset options
-                # self.option_ids = self._get_options_to_add()
-        return res
+                    )
+                )
 
     def _values_with_carrier_options(self, values):
         values = values.copy()
@@ -77,7 +84,7 @@ class StockBatchPicking(models.Model):
             carrier = self.env["delivery.carrier"].browse(carrier_id)
             options = self._get_options_to_add(carrier)
             if options:
-                values.update(option_ids=[(6, 0, options.ids)])
+                values.update(option_ids=[Command.set(options.ids)])
         return values
 
     def write(self, values):
@@ -93,16 +100,17 @@ class StockBatchPicking(models.Model):
             self.purge_tracking_references()
         return result
 
-    @api.model
-    def create(self, values):
+    @api.model_create_multi
+    def create(self, vals_list):
         """Set the default options when the delivery method is set on creation
 
         So we are sure that the options are always in line with the
         current delivery method.
 
         """
-        values = self._values_with_carrier_options(values)
-        return super().create(values)
+        for values in vals_list:
+            self._values_with_carrier_options(values)
+        return super().create(vals_list)
 
     def purge_tracking_references(self):
         """Purge tracking for each picking and destination package"""
