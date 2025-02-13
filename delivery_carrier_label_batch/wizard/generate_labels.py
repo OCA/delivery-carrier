@@ -7,8 +7,8 @@ import threading
 from contextlib import contextmanager
 from itertools import groupby
 
-import odoo
-from odoo import _, api, exceptions, fields, models, tools
+from odoo import api, exceptions, fields, models, tools
+from odoo.modules.registry import Registry
 from odoo.tools.safe_eval import safe_eval
 
 from ..pdf_utils import assemble_pdf
@@ -23,10 +23,10 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
 
     def _get_batch_ids(self):
         res = False
-        if self.env.context.get(
-            "active_model"
-        ) == "stock.picking.batch" and self.env.context.get("active_ids"):
-            res = self.env.context["active_ids"]
+        active_model = self.env.context.get("active_model")
+        if active_model == "stock.picking.batch":
+            if active_ids := self.env.context.get("active_ids"):
+                res = active_ids
         return res
 
     batch_ids = fields.Many2many(
@@ -65,9 +65,8 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
             yield self.env
             return
 
-        with odoo.api.Environment.manage():
-            with odoo.registry(self.env.cr.dbname).cursor() as new_cr:
-                yield odoo.api.Environment(new_cr, self.env.uid, self.env.context)
+        with Registry(self.env.cr.dbname).cursor() as new_cr:
+            yield api.Environment(new_cr, self.env.uid, self.env.context)
 
     def _do_generate_labels(self, group):
         """Generate a label in a thread safe context
@@ -83,12 +82,13 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
                     picking.with_env(new_env).send_to_shipper()
                 except Exception as e:
                     # add information on picking and pack in the exception
-                    picking_name = _("Picking: %s") % picking.name
-                    pack_num = _("Pack: %s") % pack.name if pack else ""
+                    picking_name = self.env._(f"Picking: {picking.name}")
+                    pack_name = pack.name if pack else ""
+                    pack_num = self.env._(f"Pack: {pack_name}")
                     # pylint: disable=translation-required
-                    msg = ("%s %s - %s") % (picking_name, pack_num, str(e))
+                    msg = f"{picking_name} {pack_num} - {str(e)}"
                     _logger.exception(msg)
-                    raise exceptions.UserError(msg)
+                    raise exceptions.UserError(msg) from e
 
     def _worker(self, data_queue, error_queue):
         """A worker to generate labels
@@ -147,7 +147,7 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
         if not is_in_testing:
             # create few workers to parallelize label generation
             num_workers = self._get_num_workers()
-            _logger.info("Starting %s workers to generate labels", num_workers)
+            _logger.info(f"Starting {num_workers} workers to generate labels")
             for _i in range(num_workers):
                 t = threading.Thread(
                     target=self._worker, args=(data_queue, error_queue)
@@ -159,7 +159,7 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
             data_queue.join()
             # empty the cache so the main env doesn't miss any data updates
             # (parcel tracking numbers...) done by the threads
-            self.invalidate_cache()
+            self.env.invalidate_all()
 
         # We will not create a partial PDF if some labels weren't
         # generated thus we raise catched exceptions by the workers
@@ -181,9 +181,9 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
                     raise e
             titles = []
             for key, v in error_count.items():
-                titles.append("%sx %s" % (v, key))
+                titles.append(f"{v}x {key}")
 
-            message = _(
+            message = self.env._(
                 "Some labels couldn't be generated. Please correct "
                 "following errors and generate labels again to create "
                 "the ones which failed.\n\n"
@@ -212,7 +212,7 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
                     missing_packages |= picking
         if missing_packages:
             package_list = "\n".join(missing_packages.mapped("name"))
-            msg = _(
+            msg = self.env._(
                 "Impossible to generate the labels."
                 f" Those pickings don't have packages:\n{package_list}"
             )
@@ -230,7 +230,13 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
             self.env["ir.config_parameter"].get_param("zpl2.batch.merge")
         )
         if not self.batch_ids:
-            raise exceptions.UserError(_("No picking batch selected"))
+            raise exceptions.UserError(self.env._("No picking batch selected"))
+
+        # It shouldn't be possible to print labels when packages are missing
+        operations = self.batch_ids.move_line_ids
+        packages = operations.result_package_id or operations.package_id
+        if not packages:
+            raise exceptions.UserError(self.env._("Packages are missing"))
 
         self._check_pickings()
 
@@ -260,7 +266,8 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
                     # We do not want to merge zpl2
                     # because too big file can failed on zebra printers
                     for label in labels:
-                        filename = "%s.%s" % (label["name"], f_type)
+                        f_name = label["name"]
+                        filename = f"{f_name}.{f_type}"
                         data = {
                             "name": filename,
                             "res_id": batch.id,

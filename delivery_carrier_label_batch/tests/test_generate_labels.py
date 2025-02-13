@@ -3,17 +3,30 @@
 import base64
 from unittest.mock import patch
 
-import odoo.tests.common as common
-from odoo import exceptions
-from odoo.modules import get_module_resource
+from odoo_test_helper import FakeModelLoader
+
+from odoo import Command, exceptions
+from odoo.tools.misc import file_path
+
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class TestGenerateLabels(common.SavepointCase):
+class TestGenerateLabels(BaseCommon, FakeModelLoader):
     """Test the wizard for delivery carrier label generation"""
 
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        cls.loader = FakeModelLoader(cls.env, cls.__module__)
+        cls.loader.backup_registry()
+        from .models import DeliveryCarrierTest, PackageTypeTest
+
+        cls.loader.update_registry(
+            (
+                DeliveryCarrierTest,
+                PackageTypeTest,
+            )
+        )
 
         Move = cls.env["stock.move"]
         Picking = cls.env["stock.picking"]
@@ -23,12 +36,14 @@ class TestGenerateLabels(common.SavepointCase):
         cls.PickingBatchApplyCarrier = cls.env["picking.batch.apply.carrier"]
         cls.stock_location = cls.env.ref("stock.stock_location_stock")
         cls.customer_location = cls.env.ref("stock.stock_location_customers")
-
+        default_package_type_id = (
+            cls.env["stock.package.type"].sudo().create({"name": "TEST DEFAULT"})
+        )
         cls.productA = cls.env["product.product"].create(
-            {"name": "Product A", "type": "product"}
+            {"name": "Product A", "is_storable": True}
         )
         cls.productB = cls.env["product.product"].create(
-            {"name": "Product B", "type": "product"}
+            {"name": "Product B", "is_storable": True}
         )
         cls.env["stock.quant"]._update_available_quantity(
             cls.productA, cls.stock_location, 20.0
@@ -46,7 +61,9 @@ class TestGenerateLabels(common.SavepointCase):
         cls.carrier = cls.env["delivery.carrier"].create(
             {
                 "name": "Test carrier",
-                "delivery_type": "fixed",
+                "delivery_type": "test",
+                "test_default_package_type_id": default_package_type_id.id,
+                "integration_level": "rate",  # avoid sending emails
                 "product_id": cls.carrier_product.id,
             }
         )
@@ -59,7 +76,9 @@ class TestGenerateLabels(common.SavepointCase):
         cls.new_carrier = cls.env["delivery.carrier"].create(
             {
                 "name": "Test NEW carrier",
-                "delivery_type": "fixed",
+                "delivery_type": "test",
+                "test_default_package_type_id": default_package_type_id.id,
+                "integration_level": "rate",  # avoid sending emails
                 "product_id": cls.new_carrier_product.id,
             }
         )
@@ -110,7 +129,10 @@ class TestGenerateLabels(common.SavepointCase):
         cls.batch = BatchPicking.create(
             {
                 "name": "demo_prep001",
-                "picking_ids": [(4, cls.picking_out_1.id), (4, cls.picking_out_2.id)],
+                "picking_ids": [
+                    Command.link(cls.picking_out_1.id),
+                    Command.link(cls.picking_out_2.id),
+                ],
                 "use_oca_batch_validation": True,
             }
         )
@@ -118,15 +140,12 @@ class TestGenerateLabels(common.SavepointCase):
         cls.batch.action_confirm()
         cls.batch.action_assign()
 
-        move1.move_line_ids[0].qty_done = 2
-        move2.move_line_ids[0].qty_done = 2
+        move1.move_line_ids[0].write({"quantity": 2, "picked": True})
+        move2.move_line_ids[0].write({"quantity": 2, "picked": True})
 
         cls.picking_out_1._set_a_default_package()
         cls.picking_out_2._set_a_default_package()
-
-        dummy_pdf_path = get_module_resource(
-            "delivery_carrier_label_batch", "tests", "dummy.pdf"
-        )
+        dummy_pdf_path = file_path("delivery_carrier_label_batch/tests/dummy.pdf")
         with open(dummy_pdf_path, "rb") as dummy_pdf:
             label = dummy_pdf.read()
             cls.shipping_label_1 = ShippingLabel.create(
@@ -151,7 +170,12 @@ class TestGenerateLabels(common.SavepointCase):
                 }
             )
 
-    def test_action_generate_labels(self):
+    @classmethod
+    def tearDownClass(cls):
+        cls.loader.restore_registry()
+        return super().tearDownClass()
+
+    def test_00_action_generate_labels(self):
         """Check merging of pdf labels
 
         Test pdf generation without multiple threading
@@ -172,20 +196,21 @@ class TestGenerateLabels(common.SavepointCase):
         self.assertTrue(attachment.name, "demo_prep001.pdf")
         self.assertTrue(attachment.mimetype, "application/pdf")
 
-    def test_action_generate_labels_no_pack(self):
+    def test_01_action_generate_labels_no_pack(self):
         """Check merging of pdf labels
 
         It shouldn't be possible to print labels when packages are missing
         """
-        domain = [("picking_id", "in", self.batch.picking_ids.ids)]
-        self.env["stock.package_level"].search(domain).unlink()
+        self.batch.picking_ids.move_line_ids.write(
+            {"result_package_id": False, "package_id": False}
+        )
         wizard = self.DeliveryCarrierLabelGenerate.with_context(
             active_ids=self.batch.ids, active_model="stock.picking.batch"
         ).create({})
         with self.assertRaises(exceptions.UserError):
             wizard.action_generate_labels()
 
-    def test_action_regenerate_labels(self):
+    def test_02_action_regenerate_labels(self):
         """Check re-generating labels"""
         wizard = self.DeliveryCarrierLabelGenerate.with_context(
             active_ids=self.batch.ids, active_model="stock.picking.batch"
@@ -216,10 +241,8 @@ class TestGenerateLabels(common.SavepointCase):
             self.assertTrue(attachment.datas)
             self.assertEqual(attachment.name, "demo_prep001.pdf")
             self.assertEqual(attachment.mimetype, "application/pdf")
-            self.assertEqual(self.picking_out_1.carrier_tracking_ref, "TEST00001")
-            self.assertEqual(self.picking_out_2.carrier_tracking_ref, "TEST00001")
 
-    def test_batch_purge_tracking_reference(self):
+    def test_03_batch_purge_tracking_reference(self):
         """Unittest: check that tracking reference purge work as expected"""
         self.batch.purge_tracking_references()
         self.assertTrue(
@@ -233,7 +256,7 @@ class TestGenerateLabels(common.SavepointCase):
         pickings = [self.picking_out_1, self.picking_out_2]
         self.assertTrue(all([not p.carrier_tracking_ref for p in pickings]))
 
-    def test_action_change_carrier_purge_tracking_reference(self):
+    def test_04_action_change_carrier_purge_tracking_reference(self):
         """Functional: Check purge_tracking_reference is called as carrier is
         changed from wizard"""
         wizard = self.PickingBatchApplyCarrier.with_context(

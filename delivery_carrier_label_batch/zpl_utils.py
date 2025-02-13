@@ -10,7 +10,7 @@ def assemble_zpl2_single_images(files):
     for file_nr, zpl_file in enumerate(files):
         # ^XA stands for label start
         images_def, label_def = zpl_file.split("^XA")
-        label_def = "^XA%s" % label_def
+        label_def = f"^XA{label_def}"
         zpl_labels[file_nr] = label_def
         # ~DGR:IMGx stands for image start
         split_images = images_def.split("~DGR:IMG")
@@ -20,7 +20,7 @@ def assemble_zpl2_single_images(files):
         if split_images:
             file_images = list()
             for img in split_images:
-                zpl_image = "~DGR:IMG%s" % img
+                zpl_image = f"~DGR:IMG{img}"
                 file_images.append(zpl_image)
             zpl_images[file_nr] = file_images
     # Check images definition to avoid different images using the same ref
@@ -65,7 +65,7 @@ def assemble_zpl2_single_images(files):
     res = header
     # Add all the images with their ref
     for img_to_add, img_number in to_add_images.items():
-        res += "~DGR:%s.GRF%s" % (img_number, img_to_add)
+        res += f"~DGR:{img_number}.GRF{img_to_add}"
     # Add all the updated labels
     for label in zpl_labels.values():
         res += header
