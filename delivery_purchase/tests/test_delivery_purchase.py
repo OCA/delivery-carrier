@@ -65,9 +65,7 @@ class TestDeliveryPurchaseBase(BaseCommon):
         cls.purchase_line = cls.purchase.order_line
 
     def _action_picking_validate(self, picking):
-        res = picking.button_validate()
-        model = self.env[res["res_model"]].with_context(**res["context"])
-        model.create({}).process()
+        picking.button_validate()
 
 
 class TestDeliveryPurchase(TestDeliveryPurchaseBase):
@@ -129,7 +127,7 @@ class TestDeliveryPurchase(TestDeliveryPurchaseBase):
         picking = self.purchase.picking_ids
         picking.carrier_id = self.carrier_fixed
         for move in picking.move_ids_without_package:
-            move.quantity_done = 1
+            move.quantity = 1
         res = picking.button_validate()
         model = self.env[res["res_model"]].with_context(**res["context"])
         model.create({}).process_cancel_backorder()

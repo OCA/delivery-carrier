@@ -6,12 +6,12 @@
 
 {
     "name": "Delivery costs in purchases",
-    "version": "16.0.1.1.0",
+    "version": "17.0.1.1.0",
     "development_status": "Production/Stable",
     "category": "Operations/Purchase",
     "website": "https://github.com/OCA/delivery-carrier",
     "author": "Tecnativa, Odoo Community Association (OCA)",
     "license": "AGPL-3",
-    "depends": ["purchase", "delivery"],
+    "depends": ["purchase", "stock_delivery"],
     "data": ["views/purchase_order_view.xml", "views/stock_picking_view.xml"],
 }
