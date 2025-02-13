@@ -46,7 +46,7 @@ class StockPicking(models.Model):
             <my_provider>_tracking_state_update
         It can be triggered manually or by the cron."""
         for picking in self.filtered("carrier_id"):
-            method = "%s_tracking_state_update" % picking.delivery_type
+            method = f"{picking.delivery_type}_tracking_state_update"
             if hasattr(picking.carrier_id, method):
                 getattr(picking.carrier_id, method)(picking)
 

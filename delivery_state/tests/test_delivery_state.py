@@ -31,7 +31,7 @@ class TestDeliveryState(TransactionCase):
             }
         )
         cls.product = cls.env["product.product"].create(
-            {"name": "Test product", "type": "product"}
+            {"name": "Test product", "type": "consu"}
         )
         cls.partner = cls.env["res.partner"].create({"name": "Mr. Odoo"})
         cls.partner_shipping = cls.env["res.partner"].create(
@@ -60,6 +60,36 @@ class TestDeliveryState(TransactionCase):
                 "pricelist_id": cls.pricelist.id,
                 "order_line": [
                     (0, 0, {"product_id": cls.product.id, "product_uom_qty": 1})
+                ],
+            }
+        )
+        cls.picking = cls.env["stock.picking"].create(
+            {
+                "picking_type_id": cls.env["stock.picking.type"].search([], limit=1).id,
+                "partner_id": cls.partner.id,
+                "location_id": cls.env["stock.location"]
+                .search([("usage", "=", "internal")], limit=1)
+                .id,
+                "location_dest_id": cls.env["stock.location"]
+                .search([("usage", "=", "customer")], limit=1)
+                .id,
+                "move_ids": [
+                    (
+                        0,
+                        0,
+                        {
+                            "name": cls.product.name,
+                            "product_id": cls.product.id,
+                            "product_uom_qty": 1,
+                            "product_uom": cls.product.uom_id.id,
+                            "location_id": cls.env["stock.location"]
+                            .search([("usage", "=", "internal")], limit=1)
+                            .id,
+                            "location_dest_id": cls.env["stock.location"]
+                            .search([("usage", "=", "customer")], limit=1)
+                            .id,
+                        },
+                    )
                 ],
             }
         )
@@ -116,3 +146,14 @@ class TestDeliveryState(TransactionCase):
         )
         last_mail = fields.first(mails)
         self.assertTrue("XX-0000" in last_mail.body)
+
+    def test_update_delivery_state(self):
+        self.picking.carrier_id = self.carrier.id
+        self.picking.state = "done"
+        self.picking.delivery_state = "shipping_recorded_in_carrier"
+        with patch.object(type(self.picking), "tracking_state_update") as mock_update:
+            self.env["stock.picking"]._update_delivery_state()
+            mock_update.assert_called()
+            self.assertEqual(
+                self.picking.delivery_state, "shipping_recorded_in_carrier"
+            )
