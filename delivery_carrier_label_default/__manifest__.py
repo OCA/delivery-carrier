@@ -4,15 +4,15 @@
     "name": "Default label for carrier labels",
     "summary": "This module defines a basic label to print "
     "when no specific carrier is selected.",
-    "version": "12.0.1.0.0",
-    "development_status": "Production/Stable",
+    "version": "18.0.1.0.0",
     "category": "Delivery",
     "website": "https://github.com/OCA/delivery-carrier",
     "author": "Camptocamp, Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "installable": True,
     "depends": [
-        "base_delivery_carrier_label",
+        "stock_delivery",
+        "delivery_carrier_shipping_label",
     ],
     "data": [
         "views/report_default_label.xml",

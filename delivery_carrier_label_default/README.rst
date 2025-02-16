@@ -10,9 +10,9 @@ Default label for carrier labels
    !! source digest: sha256:e63d345236f826a7ea806aac0780e01f91e9d07acc0ade837f666b76a7de4d00
    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-.. |badge1| image:: https://img.shields.io/badge/maturity-Production%2FStable-green.png
+.. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
-    :alt: Production/Stable
+    :alt: Beta
 .. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
@@ -66,6 +66,7 @@ Contributors
 -  Sébastien Alix <sebastien.alix@camptocamp.com>
 -  Sergio Teruel <sergio.teruel@tecnativa.com>
 -  Iryna Vyshnevska <i.vyshnevska@mobilunity.com>
+-  Italo Lopes <italo.lopes@camptocamp.com>
 
 Other credits
 -------------

@@ -1,26 +1,31 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
+    <record model="report.paperformat" id="paperformat_a7_label">
+        <field name="name">Label A7 format</field>
+        <field name="format">A7</field>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">20</field>
+        <field name="margin_bottom">20</field>
+        <field name="margin_left">7</field>
+    </record>
 
-  <record model="report.paperformat" id="paperformat_a7_label">
-    <field name="name">Label A7 format</field>
-    <field name="format">A7</field>
-    <field name="orientation">Landscape</field>
-    <field name="margin_top">20</field>
-    <field name="margin_bottom">20</field>
-    <field name="margin_left">7</field>
-</record>
-
-  <report
-    id="default_label"
-    model="stock.picking"
-    string="Shipping Label"
-    name="delivery_carrier_label_default.report_default_label"
-    file="delivery_carrier_label_default.report_default_label"
-    report_type="qweb-pdf"
-    attachment_use="True"
-    multi="False"
-    paperformat="paperformat_a7_label"
-/>
-    />
-
+    <record id="action_report_default_label" model="ir.actions.report">
+        <field name="name">Shipping Label</field>
+        <field name="model">stock.picking</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="multi" eval="True" />
+        <field name="attachment_use">True</field>
+        <field name="binding_model_id" ref="model_stock_picking" />
+        <field
+            name="paperformat_id"
+            ref="delivery_carrier_label_default.paperformat_a7_label"
+        />
+        <field name="binding_type">report</field>
+        <field
+            name="report_name"
+        >delivery_carrier_label_default.report_default_label</field>
+        <field
+            name="report_file"
+        >delivery_carrier_label_default.report_default_label</field>
+    </record>
 </odoo>
