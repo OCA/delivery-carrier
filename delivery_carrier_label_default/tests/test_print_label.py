@@ -21,8 +21,8 @@ class TestPrintLabel(BaseCommon, HTMLRenderMixin):
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
 
         Product = cls.env["product.product"]
-        Picking = cls.env["stock.picking"]
-        Move = cls.env["stock.move"]
+        cls.Picking = cls.env["stock.picking"]
+        cls.Move = cls.env["stock.move"]
         Carrier = cls.env["delivery.carrier"]
         ShippingLabel = cls.env["shipping.label"]
 
@@ -43,7 +43,7 @@ class TestPrintLabel(BaseCommon, HTMLRenderMixin):
             }
         )
 
-        cls.picking = Picking.create(
+        cls.picking = cls.Picking.create(
             {
                 "partner_id": cls.env.ref("base.res_partner_12").id,
                 "picking_type_id": cls.env.ref("stock.picking_type_out").id,
@@ -55,7 +55,7 @@ class TestPrintLabel(BaseCommon, HTMLRenderMixin):
         cls.product_a = Product.create({"name": "Product A"})
         cls.product_b = Product.create({"name": "Product B"})
 
-        cls.move1 = Move.create(
+        cls.move1 = cls.Move.create(
             {
                 "name": "Move A",
                 "picking_id": cls.picking.id,
@@ -67,7 +67,7 @@ class TestPrintLabel(BaseCommon, HTMLRenderMixin):
             }
         )
 
-        cls.move2 = Move.create(
+        cls.move2 = cls.Move.create(
             {
                 "name": "a second move",
                 "product_id": cls.product_b.id,
@@ -106,7 +106,6 @@ class TestPrintLabel(BaseCommon, HTMLRenderMixin):
             tags = self.find_div_class(node, div_class)
             self.assertEqual(len(tags), 1)
 
-    # @patch_label_file_type
     def test_001_print_default_label(self):
         # assign picking to generate 'stock.move.line'
         self.picking.send_to_shipper()
@@ -117,7 +116,6 @@ class TestPrintLabel(BaseCommon, HTMLRenderMixin):
         self.assertEqual(label.file_type, "html")
         self.check_label_content(label.datas)
 
-    # @patch_label_file_type
     def test_002_print_default_label_selected_packs(self):
         # create packs
         self.move1.move_line_ids[0].write({"quantity": 3, "picked": True})
