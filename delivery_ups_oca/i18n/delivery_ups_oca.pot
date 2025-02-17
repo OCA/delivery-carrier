@@ -1,0 +1,470 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* delivery_ups_oca
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__02
+msgid "2nd Day Air"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__59
+msgid "2nd Day Air A.M."
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__12
+msgid "3 Day Select"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: code:addons/delivery_ups_oca/models/ups_request.py:0
+#, python-format
+msgid "Both Client ID and Client Secret must be set in UPS delivery carriers."
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_package_dimension_code__cm
+msgid "CM"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields,field_description:delivery_ups_oca.field_product_packaging__package_carrier_type
+msgid "Carrier"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_cod_funds_code__1
+msgid "Cash"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model_terms:ir.ui.view,arch_db:delivery_ups_oca.view_delivery_carrier_form
+msgid "Cash On Delivery"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_cod_funds_code__9
+msgid "Check/Cashier Check/Money Order"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model_terms:ir.ui.view,arch_db:delivery_ups_oca.view_delivery_carrier_form
+msgid "Credentials"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields,field_description:delivery_ups_oca.field_delivery_carrier__ups_default_packaging_id
+msgid "Default Packaging Type"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields,field_description:delivery_ups_oca.field_delivery_carrier__display_name
+#: model:ir.model.fields,field_description:delivery_ups_oca.field_product_packaging__display_name
+#: model:ir.model.fields,field_description:delivery_ups_oca.field_stock_picking__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_file_format__epl
+msgid "EPL"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__m6
+msgid "Economy Mail Innovations"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__08
+msgid "Expedited"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__m4
+msgid "Expedited Mail Innovations"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__07
+msgid "Express"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__54
+msgid "Express Plus"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields,field_description:delivery_ups_oca.field_delivery_carrier__ups_file_format
+msgid "File format"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__m2
+msgid "First Class Mail"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_file_format__gif
+msgid "GIF"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__03
+msgid "Ground"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields,field_description:delivery_ups_oca.field_delivery_carrier__id
+#: model:ir.model.fields,field_description:delivery_ups_oca.field_product_packaging__id
+#: model:ir.model.fields,field_description:delivery_ups_oca.field_stock_picking__id
+msgid "ID"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_package_dimension_code__in
+msgid "IN"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields,help:delivery_ups_oca.field_delivery_carrier__ups_tracking_state_update_sync
+msgid ""
+"If checked, odoo try to state update from picking according to UPS "
+"webservice (you will necessary to activate tracking API)"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields,help:delivery_ups_oca.field_delivery_carrier__ups_package_dimension_code
+msgid ""
+"Is necessary to set dimension code from packages in shipping creation "
+"process"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields,help:delivery_ups_oca.field_delivery_carrier__ups_package_weight_code
+msgid ""
+"Is necessary to set weight code from packages in shipping creation process"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_package_weight_code__kgs
+msgid "KGS"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_package_weight_code__lbs
+msgid "LBS"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model_terms:ir.ui.view,arch_db:delivery_ups_oca.view_delivery_carrier_form
+msgid "Label"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields,field_description:delivery_ups_oca.field_delivery_carrier____last_update
+#: model:ir.model.fields,field_description:delivery_ups_oca.field_product_packaging____last_update
+#: model:ir.model.fields,field_description:delivery_ups_oca.field_stock_picking____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__m7
+msgid "Mail Innovations (MI) Returns"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model_terms:ir.ui.view,arch_db:delivery_ups_oca.view_delivery_carrier_form
+msgid "Misc"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__01
+msgid "Next Day Air"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__13
+msgid "Next Day Air Saver"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_package_weight_code__ozs
+msgid "OZS"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields,field_description:delivery_ups_oca.field_delivery_carrier__ups_package_dimension_code
+msgid "Package Dimension code"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields,field_description:delivery_ups_oca.field_delivery_carrier__ups_package_weight_code
+msgid "Package Weight code"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__m3
+msgid "Priority Mail"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__m5
+msgid "Priority Mail Innovations"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model,name:delivery_ups_oca.model_product_packaging
+msgid "Product Packaging"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields,field_description:delivery_ups_oca.field_delivery_carrier__delivery_type
+msgid "Provider"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_file_format__spl
+msgid "SPL"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: code:addons/delivery_ups_oca/models/ups_request.py:0
+#, python-format
+msgid "Sending to UPS: %s"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model_terms:ir.ui.view,arch_db:delivery_ups_oca.view_delivery_carrier_form
+msgid "Service"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields,field_description:delivery_ups_oca.field_delivery_carrier__ups_service_code
+msgid "Service code"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields,field_description:delivery_ups_oca.field_delivery_carrier__ups_shipper_number
+msgid "Shipper number"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model,name:delivery_ups_oca.model_delivery_carrier
+msgid "Shipping Methods"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields,field_description:delivery_ups_oca.field_delivery_carrier__ups_tracking_state_update_sync
+msgid "Tracking state update sync"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model,name:delivery_ups_oca.model_stock_picking
+msgid "Transfer"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__delivery_type__ups
+#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__product_packaging__package_carrier_type__ups
+#: model_terms:ir.ui.view,arch_db:delivery_ups_oca.view_delivery_carrier_form
+msgid "UPS"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__70
+msgid "UPS Access PointTM Economy"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields,field_description:delivery_ups_oca.field_delivery_carrier__ups_cash_on_delivery
+msgid "UPS Cash On Delivery"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields,field_description:delivery_ups_oca.field_delivery_carrier__ups_cod_funds_code
+msgid "UPS Cod Funds Code"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__74
+msgid "UPS Express®12:00"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model_terms:ir.ui.view,arch_db:delivery_ups_oca.view_picking_withcarrier_out_form
+msgid "UPS Label"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__14
+msgid "UPS Next Day Air® Early"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__65
+msgid "UPS Saver"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__11
+msgid "UPS Standard"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__83
+msgid "UPS Today Dedicated Courier"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__85
+msgid "UPS Today Express"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__86
+msgid "UPS Today Express Saver"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__84
+msgid "UPS Today Intercity"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__82
+msgid "UPS Today Standard"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__72
+msgid "UPS Worldwide Economy"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__17
+msgid "UPS Worldwide Economy DDU"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__96
+msgid "UPS Worldwide Express Freight"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__71
+msgid "UPS Worldwide Express Freight Midday"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model_terms:ir.ui.view,arch_db:delivery_ups_oca.view_delivery_carrier_form
+msgid "Update Token"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields,field_description:delivery_ups_oca.field_delivery_carrier__ups_client_id
+msgid "Ups Client"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields,field_description:delivery_ups_oca.field_delivery_carrier__ups_client_secret
+msgid "Ups Client Secret"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields,field_description:delivery_ups_oca.field_delivery_carrier__ups_token
+msgid "Ups Token"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields,field_description:delivery_ups_oca.field_delivery_carrier__ups_token_expiration_date
+msgid "Ups Token Expiration Date"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields,field_description:delivery_ups_oca.field_delivery_carrier__ups_use_packages_from_picking
+msgid "Use packages from picking"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_file_format__zpl
+msgid "ZPL"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:product.packaging,weight_uom_name:delivery_ups_oca.product_packaging_ups_01
+#: model:product.packaging,weight_uom_name:delivery_ups_oca.product_packaging_ups_02
+#: model:product.packaging,weight_uom_name:delivery_ups_oca.product_packaging_ups_03
+#: model:product.packaging,weight_uom_name:delivery_ups_oca.product_packaging_ups_04
+#: model:product.packaging,weight_uom_name:delivery_ups_oca.product_packaging_ups_21
+#: model:product.packaging,weight_uom_name:delivery_ups_oca.product_packaging_ups_24
+#: model:product.packaging,weight_uom_name:delivery_ups_oca.product_packaging_ups_25
+#: model:product.packaging,weight_uom_name:delivery_ups_oca.product_packaging_ups_2a
+#: model:product.packaging,weight_uom_name:delivery_ups_oca.product_packaging_ups_2b
+#: model:product.packaging,weight_uom_name:delivery_ups_oca.product_packaging_ups_2c
+#: model:product.packaging,weight_uom_name:delivery_ups_oca.product_packaging_ups_30
+#: model:product.packaging,weight_uom_name:delivery_ups_oca.product_packaging_ups_56
+#: model:product.packaging,weight_uom_name:delivery_ups_oca.product_packaging_ups_57
+#: model:product.packaging,weight_uom_name:delivery_ups_oca.product_packaging_ups_58
+#: model:product.packaging,weight_uom_name:delivery_ups_oca.product_packaging_ups_59
+#: model:product.packaging,weight_uom_name:delivery_ups_oca.product_packaging_ups_60
+#: model:product.packaging,weight_uom_name:delivery_ups_oca.product_packaging_ups_61
+#: model:product.packaging,weight_uom_name:delivery_ups_oca.product_packaging_ups_62
+#: model:product.packaging,weight_uom_name:delivery_ups_oca.product_packaging_ups_63
+#: model:product.packaging,weight_uom_name:delivery_ups_oca.product_packaging_ups_64
+#: model:product.packaging,weight_uom_name:delivery_ups_oca.product_packaging_ups_65
+#: model:product.packaging,weight_uom_name:delivery_ups_oca.product_packaging_ups_66
+#: model:product.packaging,weight_uom_name:delivery_ups_oca.product_packaging_ups_67
+msgid "kg"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:product.packaging,volume_uom_name:delivery_ups_oca.product_packaging_ups_01
+#: model:product.packaging,volume_uom_name:delivery_ups_oca.product_packaging_ups_02
+#: model:product.packaging,volume_uom_name:delivery_ups_oca.product_packaging_ups_03
+#: model:product.packaging,volume_uom_name:delivery_ups_oca.product_packaging_ups_04
+#: model:product.packaging,volume_uom_name:delivery_ups_oca.product_packaging_ups_21
+#: model:product.packaging,volume_uom_name:delivery_ups_oca.product_packaging_ups_24
+#: model:product.packaging,volume_uom_name:delivery_ups_oca.product_packaging_ups_25
+#: model:product.packaging,volume_uom_name:delivery_ups_oca.product_packaging_ups_2a
+#: model:product.packaging,volume_uom_name:delivery_ups_oca.product_packaging_ups_2b
+#: model:product.packaging,volume_uom_name:delivery_ups_oca.product_packaging_ups_2c
+#: model:product.packaging,volume_uom_name:delivery_ups_oca.product_packaging_ups_30
+#: model:product.packaging,volume_uom_name:delivery_ups_oca.product_packaging_ups_56
+#: model:product.packaging,volume_uom_name:delivery_ups_oca.product_packaging_ups_57
+#: model:product.packaging,volume_uom_name:delivery_ups_oca.product_packaging_ups_58
+#: model:product.packaging,volume_uom_name:delivery_ups_oca.product_packaging_ups_59
+#: model:product.packaging,volume_uom_name:delivery_ups_oca.product_packaging_ups_60
+#: model:product.packaging,volume_uom_name:delivery_ups_oca.product_packaging_ups_61
+#: model:product.packaging,volume_uom_name:delivery_ups_oca.product_packaging_ups_62
+#: model:product.packaging,volume_uom_name:delivery_ups_oca.product_packaging_ups_63
+#: model:product.packaging,volume_uom_name:delivery_ups_oca.product_packaging_ups_64
+#: model:product.packaging,volume_uom_name:delivery_ups_oca.product_packaging_ups_65
+#: model:product.packaging,volume_uom_name:delivery_ups_oca.product_packaging_ups_66
+#: model:product.packaging,volume_uom_name:delivery_ups_oca.product_packaging_ups_67
+msgid "m³"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: code:addons/delivery_ups_oca/models/ups_request.py:0
+#, python-format
+msgid "{} - Error retrieving the tracking information."
+msgstr ""
+
+#. module: delivery_ups_oca
+#: code:addons/delivery_ups_oca/models/ups_request.py:0
+#, python-format
+msgid "{} - Warning: {}"
+msgstr ""
