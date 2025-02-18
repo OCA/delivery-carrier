@@ -25,6 +25,7 @@ msgstr "<strong>送货时间</strong>"
 #. module: partner_delivery_schedule
 #. odoo-python
 #: code:addons/partner_delivery_schedule/models/partner_delivery_schedule.py:0
+#, python-format
 msgid "All days"
 msgstr "全部日期"
 
@@ -73,12 +74,14 @@ msgstr "显示名称"
 #. module: partner_delivery_schedule
 #. odoo-python
 #: code:addons/partner_delivery_schedule/models/partner_delivery_schedule.py:0
+#, python-format
 msgid "Error ! You can not set hour_from greater or equal than hour_to ."
 msgstr "错误！开始时间不能大于或等于结束时间。"
 
 #. module: partner_delivery_schedule
 #. odoo-python
 #: code:addons/partner_delivery_schedule/models/partner_delivery_schedule.py:0
+#, python-format
 msgid "Error ! You must set one day to delivery."
 msgstr "错误！你必须设置可以送货的日期。"
 
@@ -86,6 +89,7 @@ msgstr "错误！你必须设置可以送货的日期。"
 #. odoo-python
 #: code:addons/partner_delivery_schedule/models/partner_delivery_schedule.py:0
 #: model:ir.model.fields,field_description:partner_delivery_schedule.field_delivery_schedule__friday
+#, python-format
 msgid "Friday"
 msgstr "周五"
 
@@ -113,6 +117,7 @@ msgstr "最近更新时间"
 #. odoo-python
 #: code:addons/partner_delivery_schedule/models/partner_delivery_schedule.py:0
 #: model:ir.model.fields,field_description:partner_delivery_schedule.field_delivery_schedule__monday
+#, python-format
 msgid "Monday"
 msgstr "周一"
 
@@ -125,6 +130,7 @@ msgstr "名称"
 #. odoo-python
 #: code:addons/partner_delivery_schedule/models/partner_delivery_schedule.py:0
 #: model:ir.model.fields,field_description:partner_delivery_schedule.field_delivery_schedule__saturday
+#, python-format
 msgid "Saturday"
 msgstr "周六"
 
@@ -132,6 +138,7 @@ msgstr "周六"
 #. odoo-python
 #: code:addons/partner_delivery_schedule/models/partner_delivery_schedule.py:0
 #: model:ir.model.fields,field_description:partner_delivery_schedule.field_delivery_schedule__sunday
+#, python-format
 msgid "Sunday"
 msgstr "周日"
 
@@ -139,6 +146,7 @@ msgstr "周日"
 #. odoo-python
 #: code:addons/partner_delivery_schedule/models/partner_delivery_schedule.py:0
 #: model:ir.model.fields,field_description:partner_delivery_schedule.field_delivery_schedule__thursday
+#, python-format
 msgid "Thursday"
 msgstr "周四"
 
@@ -151,6 +159,7 @@ msgstr "至"
 #. odoo-python
 #: code:addons/partner_delivery_schedule/models/partner_delivery_schedule.py:0
 #: model:ir.model.fields,field_description:partner_delivery_schedule.field_delivery_schedule__tuesday
+#, python-format
 msgid "Tuesday"
 msgstr "周二"
 
@@ -158,6 +167,7 @@ msgstr "周二"
 #. odoo-python
 #: code:addons/partner_delivery_schedule/models/partner_delivery_schedule.py:0
 #: model:ir.model.fields,field_description:partner_delivery_schedule.field_delivery_schedule__wednesday
+#, python-format
 msgid "Wednesday"
 msgstr "周三"
 

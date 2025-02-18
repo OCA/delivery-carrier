@@ -25,6 +25,7 @@ msgstr "<strong>Pianificazione consegna</strong>"
 #. module: partner_delivery_schedule
 #. odoo-python
 #: code:addons/partner_delivery_schedule/models/partner_delivery_schedule.py:0
+#, python-format
 msgid "All days"
 msgstr "Tutti i giorni"
 
@@ -74,12 +75,14 @@ msgstr "Nome visualizzato"
 #. module: partner_delivery_schedule
 #. odoo-python
 #: code:addons/partner_delivery_schedule/models/partner_delivery_schedule.py:0
+#, python-format
 msgid "Error ! You can not set hour_from greater or equal than hour_to ."
 msgstr "Errore! Non si può impostare hour_from maggiore o uguale a hour_to ."
 
 #. module: partner_delivery_schedule
 #. odoo-python
 #: code:addons/partner_delivery_schedule/models/partner_delivery_schedule.py:0
+#, python-format
 msgid "Error ! You must set one day to delivery."
 msgstr "Errore ! Bisogna impostare un giorno di consegna."
 
@@ -87,6 +90,7 @@ msgstr "Errore ! Bisogna impostare un giorno di consegna."
 #. odoo-python
 #: code:addons/partner_delivery_schedule/models/partner_delivery_schedule.py:0
 #: model:ir.model.fields,field_description:partner_delivery_schedule.field_delivery_schedule__friday
+#, python-format
 msgid "Friday"
 msgstr "Venerdì"
 
@@ -114,6 +118,7 @@ msgstr "Ultimo aggiornamento il"
 #. odoo-python
 #: code:addons/partner_delivery_schedule/models/partner_delivery_schedule.py:0
 #: model:ir.model.fields,field_description:partner_delivery_schedule.field_delivery_schedule__monday
+#, python-format
 msgid "Monday"
 msgstr "Lunedì"
 
@@ -126,6 +131,7 @@ msgstr "Nome"
 #. odoo-python
 #: code:addons/partner_delivery_schedule/models/partner_delivery_schedule.py:0
 #: model:ir.model.fields,field_description:partner_delivery_schedule.field_delivery_schedule__saturday
+#, python-format
 msgid "Saturday"
 msgstr "Sabato"
 
@@ -133,6 +139,7 @@ msgstr "Sabato"
 #. odoo-python
 #: code:addons/partner_delivery_schedule/models/partner_delivery_schedule.py:0
 #: model:ir.model.fields,field_description:partner_delivery_schedule.field_delivery_schedule__sunday
+#, python-format
 msgid "Sunday"
 msgstr "Domenica"
 
@@ -140,6 +147,7 @@ msgstr "Domenica"
 #. odoo-python
 #: code:addons/partner_delivery_schedule/models/partner_delivery_schedule.py:0
 #: model:ir.model.fields,field_description:partner_delivery_schedule.field_delivery_schedule__thursday
+#, python-format
 msgid "Thursday"
 msgstr "Giovedì"
 
@@ -152,6 +160,7 @@ msgstr "Al"
 #. odoo-python
 #: code:addons/partner_delivery_schedule/models/partner_delivery_schedule.py:0
 #: model:ir.model.fields,field_description:partner_delivery_schedule.field_delivery_schedule__tuesday
+#, python-format
 msgid "Tuesday"
 msgstr "Martedì"
 
@@ -159,6 +168,7 @@ msgstr "Martedì"
 #. odoo-python
 #: code:addons/partner_delivery_schedule/models/partner_delivery_schedule.py:0
 #: model:ir.model.fields,field_description:partner_delivery_schedule.field_delivery_schedule__wednesday
+#, python-format
 msgid "Wednesday"
 msgstr "Mercoledì"
 
