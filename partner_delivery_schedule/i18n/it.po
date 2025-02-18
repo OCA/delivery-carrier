@@ -1,0 +1,166 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* partner_delivery_schedule
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2024-08-22 10:06+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.6.2\n"
+
+#. module: partner_delivery_schedule
+#: model_terms:ir.ui.view,arch_db:partner_delivery_schedule.report_delivery_document
+#: model_terms:ir.ui.view,arch_db:partner_delivery_schedule.report_picking
+msgid "<strong>Delivery Schedule</strong>"
+msgstr "<strong>Pianificazione consegna</strong>"
+
+#. module: partner_delivery_schedule
+#. odoo-python
+#: code:addons/partner_delivery_schedule/models/partner_delivery_schedule.py:0
+msgid "All days"
+msgstr "Tutti i giorni"
+
+#. module: partner_delivery_schedule
+#: model_terms:ir.actions.act_window,help:partner_delivery_schedule.partner_delivery_schedule_action
+msgid "Click to set a new delivery schedule for partners."
+msgstr ""
+"Fare clic per impostare una nuova pianificazione consegna per i partner."
+
+#. module: partner_delivery_schedule
+#: model:ir.model.fields,field_description:partner_delivery_schedule.field_delivery_schedule__color
+msgid "Color Index"
+msgstr "Indice colore"
+
+#. module: partner_delivery_schedule
+#: model:ir.model,name:partner_delivery_schedule.model_res_partner
+msgid "Contact"
+msgstr "Contatto"
+
+#. module: partner_delivery_schedule
+#: model:ir.model.fields,field_description:partner_delivery_schedule.field_delivery_schedule__create_uid
+msgid "Created by"
+msgstr "Creato da"
+
+#. module: partner_delivery_schedule
+#: model:ir.model.fields,field_description:partner_delivery_schedule.field_delivery_schedule__create_date
+msgid "Created on"
+msgstr "Creato il"
+
+#. module: partner_delivery_schedule
+#: model:ir.actions.act_window,name:partner_delivery_schedule.partner_delivery_schedule_action
+#: model:ir.model,name:partner_delivery_schedule.model_delivery_schedule
+#: model:ir.model.fields,field_description:partner_delivery_schedule.field_res_partner__delivery_schedule_ids
+#: model:ir.model.fields,field_description:partner_delivery_schedule.field_res_users__delivery_schedule_ids
+#: model:ir.ui.menu,name:partner_delivery_schedule.sale_menu_action_delivery_schedule
+#: model:ir.ui.menu,name:partner_delivery_schedule.stock_menu_action_delivery_schedule
+#: model_terms:ir.ui.view,arch_db:partner_delivery_schedule.view_partner_delivery_schedule_form
+#: model_terms:ir.ui.view,arch_db:partner_delivery_schedule.view_partner_delivery_schedule_search
+msgid "Delivery Schedule"
+msgstr "Schedulazione consegna"
+
+#. module: partner_delivery_schedule
+#: model:ir.model.fields,field_description:partner_delivery_schedule.field_delivery_schedule__display_name
+msgid "Display Name"
+msgstr "Nome visualizzato"
+
+#. module: partner_delivery_schedule
+#. odoo-python
+#: code:addons/partner_delivery_schedule/models/partner_delivery_schedule.py:0
+msgid "Error ! You can not set hour_from greater or equal than hour_to ."
+msgstr "Errore! Non si può impostare hour_from maggiore o uguale a hour_to ."
+
+#. module: partner_delivery_schedule
+#. odoo-python
+#: code:addons/partner_delivery_schedule/models/partner_delivery_schedule.py:0
+msgid "Error ! You must set one day to delivery."
+msgstr "Errore ! Bisogna impostare un giorno di consegna."
+
+#. module: partner_delivery_schedule
+#. odoo-python
+#: code:addons/partner_delivery_schedule/models/partner_delivery_schedule.py:0
+#: model:ir.model.fields,field_description:partner_delivery_schedule.field_delivery_schedule__friday
+msgid "Friday"
+msgstr "Venerdì"
+
+#. module: partner_delivery_schedule
+#: model:ir.model.fields,field_description:partner_delivery_schedule.field_delivery_schedule__hour_from
+msgid "From"
+msgstr "Dal"
+
+#. module: partner_delivery_schedule
+#: model:ir.model.fields,field_description:partner_delivery_schedule.field_delivery_schedule__id
+msgid "ID"
+msgstr "ID"
+
+#. module: partner_delivery_schedule
+#: model:ir.model.fields,field_description:partner_delivery_schedule.field_delivery_schedule__write_uid
+msgid "Last Updated by"
+msgstr "Ultimo aggiornamento di"
+
+#. module: partner_delivery_schedule
+#: model:ir.model.fields,field_description:partner_delivery_schedule.field_delivery_schedule__write_date
+msgid "Last Updated on"
+msgstr "Ultimo aggiornamento il"
+
+#. module: partner_delivery_schedule
+#. odoo-python
+#: code:addons/partner_delivery_schedule/models/partner_delivery_schedule.py:0
+#: model:ir.model.fields,field_description:partner_delivery_schedule.field_delivery_schedule__monday
+msgid "Monday"
+msgstr "Lunedì"
+
+#. module: partner_delivery_schedule
+#: model:ir.model.fields,field_description:partner_delivery_schedule.field_delivery_schedule__name
+msgid "Name"
+msgstr "Nome"
+
+#. module: partner_delivery_schedule
+#. odoo-python
+#: code:addons/partner_delivery_schedule/models/partner_delivery_schedule.py:0
+#: model:ir.model.fields,field_description:partner_delivery_schedule.field_delivery_schedule__saturday
+msgid "Saturday"
+msgstr "Sabato"
+
+#. module: partner_delivery_schedule
+#. odoo-python
+#: code:addons/partner_delivery_schedule/models/partner_delivery_schedule.py:0
+#: model:ir.model.fields,field_description:partner_delivery_schedule.field_delivery_schedule__sunday
+msgid "Sunday"
+msgstr "Domenica"
+
+#. module: partner_delivery_schedule
+#. odoo-python
+#: code:addons/partner_delivery_schedule/models/partner_delivery_schedule.py:0
+#: model:ir.model.fields,field_description:partner_delivery_schedule.field_delivery_schedule__thursday
+msgid "Thursday"
+msgstr "Giovedì"
+
+#. module: partner_delivery_schedule
+#: model:ir.model.fields,field_description:partner_delivery_schedule.field_delivery_schedule__hour_to
+msgid "To"
+msgstr "Al"
+
+#. module: partner_delivery_schedule
+#. odoo-python
+#: code:addons/partner_delivery_schedule/models/partner_delivery_schedule.py:0
+#: model:ir.model.fields,field_description:partner_delivery_schedule.field_delivery_schedule__tuesday
+msgid "Tuesday"
+msgstr "Martedì"
+
+#. module: partner_delivery_schedule
+#. odoo-python
+#: code:addons/partner_delivery_schedule/models/partner_delivery_schedule.py:0
+#: model:ir.model.fields,field_description:partner_delivery_schedule.field_delivery_schedule__wednesday
+msgid "Wednesday"
+msgstr "Mercoledì"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Ultima modifica il"

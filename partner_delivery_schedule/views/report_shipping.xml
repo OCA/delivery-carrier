@@ -1,0 +1,40 @@
+<odoo>
+    <template id="report_picking" inherit_id="stock.report_picking">
+        <xpath expr="//div[@name='div_sched_date']" position="after">
+            <div
+                t-if="o.picking_type_id.code == 'outgoing' and o.partner_id and o.partner_id.delivery_schedule_ids"
+                class="col-auto mw-100 mb-2 mx-3"
+            >
+                <t
+                    t-set="partner"
+                    t-value="o.partner_id if o.partner_id.type == 'delivery' else o.partner_id.commercial_partner_id"
+                />
+                <strong>Delivery Schedule</strong>
+                <t t-foreach="partner.delivery_schedule_ids" t-as="horary">
+                    <div>
+                        <span t-field="horary.display_name" />
+                    </div>
+                </t>
+            </div>
+        </xpath>
+    </template>
+    <template id="report_delivery_document" inherit_id="stock.report_delivery_document">
+        <xpath expr="//div[@name='div_sched_date']" position="after">
+            <div
+                t-if="o.picking_type_id.code == 'outgoing' and o.partner_id and o.partner_id.delivery_schedule_ids"
+                class="col-auto col-3 mw-100 mb-2"
+            >
+                <t
+                    t-set="partner"
+                    t-value="o.partner_id if o.partner_id.type == 'delivery' else o.partner_id.commercial_partner_id"
+                />
+                <strong>Delivery Schedule</strong>
+                <t t-foreach="partner.delivery_schedule_ids" t-as="horary">
+                    <div>
+                        <span t-field="horary.display_name" />
+                    </div>
+                </t>
+            </div>
+        </xpath>
+    </template>
+</odoo>
