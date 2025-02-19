@@ -11,7 +11,7 @@
                 <group
                     name="ship_data"
                     string="Delivery Links"
-                    attrs="{'invisible': [('ship_picking_id', '=', False)]}"
+                    invisible="not ship_picking_id"
                 >
                     <field name="ship_picking_id" />
                     <field name="ship_carrier_id" />
