@@ -65,7 +65,8 @@ class StockPicking(models.Model):
         res = super()._set_delivery_package_type(batch_pack=batch_pack)
         context = res.get("context", self.env.context)
         # We don't want to overwrite the value set if carrier_id is filled in
-        # and not ship_carrier_id (e.g.: one step delivery or propagate_carrier is enabled)
+        # and not ship_carrier_id (e.g.: one step delivery or propagate_carrier
+        # is enabled)
         if self.ship_carrier_id.delivery_type:
             context = dict(
                 context,
