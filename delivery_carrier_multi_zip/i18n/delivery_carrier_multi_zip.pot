@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.0\n"
+"Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -44,11 +44,6 @@ msgid "ID"
 msgstr ""
 
 #. module: delivery_carrier_multi_zip
-#: model:ir.model.fields,field_description:delivery_carrier_multi_zip.field_delivery_carrier_zip____last_update
-msgid "Last Modified on"
-msgstr ""
-
-#. module: delivery_carrier_multi_zip
 #: model:ir.model.fields,field_description:delivery_carrier_multi_zip.field_delivery_carrier_zip__write_uid
 msgid "Last Updated by"
 msgstr ""
@@ -64,6 +59,16 @@ msgid "Name"
 msgstr ""
 
 #. module: delivery_carrier_multi_zip
+#: model:ir.model.fields.selection,name:delivery_carrier_multi_zip.selection__delivery_carrier__zip_option__prefix
+msgid "Prefixes"
+msgstr ""
+
+#. module: delivery_carrier_multi_zip
+#: model:ir.model.fields.selection,name:delivery_carrier_multi_zip.selection__delivery_carrier__zip_option__range
+msgid "Ranges"
+msgstr ""
+
+#. module: delivery_carrier_multi_zip
 #: model:ir.model,name:delivery_carrier_multi_zip.model_delivery_carrier
 msgid "Shipping Methods"
 msgstr ""
@@ -76,6 +81,11 @@ msgstr ""
 #. module: delivery_carrier_multi_zip
 #: model:ir.model.fields,field_description:delivery_carrier_multi_zip.field_delivery_carrier_zip__zip_from
 msgid "Zip From"
+msgstr ""
+
+#. module: delivery_carrier_multi_zip
+#: model:ir.model.fields,field_description:delivery_carrier_multi_zip.field_delivery_carrier__zip_option
+msgid "Zip Option"
 msgstr ""
 
 #. module: delivery_carrier_multi_zip
