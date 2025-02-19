@@ -7,14 +7,14 @@
             <form string="delivery_carrier_option">
                 <group>
                     <group>
-                        <field name="name" />
+                        <field name="name" readonly="True" />
                     </group>
                     <group>
                         <field name="partner_id" />
                         <field name="type" />
-                        <field name="code" />
+                        <field name="code" readonly="True" />
                     </group>
-                    <field name="description" />
+                    <field name="description" readonly="True" />
                 </group>
             </form>
         </field>
