@@ -38,7 +38,7 @@ class DeliveryCarrier(models.Model):
             if args is None:
                 args = []
             args += [("parent_id", "=", False)]
-        return super(DeliveryCarrier, self).search(
+        return super().search(
             args,
             offset=offset,
             limit=limit,
