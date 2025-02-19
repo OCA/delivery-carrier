@@ -108,12 +108,3 @@ msgstr "英国"
 #: model:product.template,uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_product_template
 msgid "Units"
 msgstr ""
-
-#~ msgid "Delivery Methods"
-#~ msgstr "交货方式"
-
-#~ msgid "Unit(s)"
-#~ msgstr "件"
-
-#~ msgid "kg"
-#~ msgstr "千克"

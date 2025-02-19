@@ -2,14 +2,19 @@
 # Copyright 2019-2020 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo.tests import Form, common
+from odoo.tests import Form
+from odoo.tools import mute_logger
+
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class TestDeliveryMultiDestination(common.TransactionCase):
+class TestDeliveryMultiDestination(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.country_1 = cls.env["res.country"].create({"name": "Test country 1"})
+        cls.country_1 = cls.env["res.country"].create(
+            {"name": "Test country 1", "code": "T1"}
+        )
         cls.pricelist = cls.env["product.pricelist"].create(
             {"name": "Test pricelist", "currency_id": cls.env.company.currency_id.id}
         )
@@ -20,7 +25,9 @@ class TestDeliveryMultiDestination(common.TransactionCase):
                 "property_product_pricelist": cls.pricelist.id,
             }
         )
-        cls.country_2 = cls.env["res.country"].create({"name": "Test country 2"})
+        cls.country_2 = cls.env["res.country"].create(
+            {"name": "Test country 2", "code": "T2"}
+        )
         cls.state = cls.env["res.country.state"].create(
             {"name": "Test state", "code": "TS", "country_id": cls.country_2.id}
         )
@@ -76,7 +83,7 @@ class TestDeliveryMultiDestination(common.TransactionCase):
             }
         )
         cls.product = cls.env["product.product"].create(
-            {"name": "Test product", "detailed_type": "product", "list_price": 1}
+            {"name": "Test product", "detailed_type": "consu", "list_price": 1}
         )
         cls.sale_order = cls._create_sale_order(cls)
 
@@ -118,6 +125,7 @@ class TestDeliveryMultiDestination(common.TransactionCase):
         choose_delivery_carrier = wizard.save()
         choose_delivery_carrier.button_confirm()
 
+    @mute_logger("odoo.models.unlink")
     def test_delivery_multi_destination(self):
         order = self.sale_order
         order.carrier_id = self.carrier_single.id
@@ -163,8 +171,8 @@ class TestDeliveryMultiDestination(common.TransactionCase):
         self.sale_order.action_confirm()
         picking = self.sale_order.picking_ids
         self.assertEqual(picking.carrier_id, self.carrier_multi)
-        picking.move_ids.quantity_done = 1
-        picking._action_done()
+        picking.move_ids.quantity = 1
+        picking.button_validate()
         self.assertAlmostEqual(picking.carrier_price, 50)
 
     def test_delivery_carrier_multi_form(self):

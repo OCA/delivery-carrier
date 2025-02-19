@@ -6,13 +6,13 @@
 
 {
     "name": "Multiple destinations for the same delivery method",
-    "version": "16.0.1.0.0",
+    "version": "17.0.1.0.0",
     "category": "Delivery",
     "website": "https://github.com/OCA/delivery-carrier",
     "author": "Tecnativa, Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "installable": True,
-    "depends": ["delivery"],
+    "depends": ["stock_delivery"],
     "demo": ["demo/delivery_carrier_demo.xml"],
     "data": ["views/delivery_carrier_view.xml"],
 }

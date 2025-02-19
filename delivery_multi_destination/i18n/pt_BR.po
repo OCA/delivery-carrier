@@ -113,12 +113,3 @@ msgstr "Reino Unido"
 #: model:product.template,uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_product_template
 msgid "Units"
 msgstr "Unidades"
-
-#~ msgid "Delivery Methods"
-#~ msgstr "Métodos de entrega"
-
-#~ msgid "Unit(s)"
-#~ msgstr "Unidade(s)"
-
-#~ msgid "kg"
-#~ msgstr "kg"
