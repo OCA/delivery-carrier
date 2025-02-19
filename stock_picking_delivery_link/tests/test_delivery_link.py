@@ -11,7 +11,7 @@ class TestStockPickingDeliveryLink(StockPickingDeliveryLinkCommonCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.product = cls.env["product.product"].create(
-            {"name": "Test Product", "type": "product"}
+            {"name": "Test Product", "type": "consu", "is_storable": True}
         )
         cls.customer_location = cls.env.ref("stock.stock_location_customers")
         test_carrier_product = cls.env["product.product"].create(
@@ -159,9 +159,11 @@ class TestStockPickingDeliveryLink(StockPickingDeliveryLinkCommonCase):
         # force wizard on pick operation picking_type_id
         pick_picking.picking_type_id.set_delivery_package_type_on_put_in_pack = True
         pick_picking.action_assign()
-        pick_picking.move_line_ids.filtered(
+        pick_line = pick_picking.move_line_ids.filtered(
             lambda ml: ml.product_id == self.product
-        ).qty_done = 5.0
+        )
+        self.assertEqual(pick_line.quantity, 5)
+        pick_line.picked = True
         pip_action = pick_picking.action_put_in_pack()
         # check the action is a dict
         self.assertIsInstance(pip_action, dict)
@@ -215,9 +217,11 @@ class TestStockPickingDeliveryLink(StockPickingDeliveryLinkCommonCase):
         # force wizard on pick operation picking_type_id
         pick_picking.picking_type_id.set_delivery_package_type_on_put_in_pack = True
         pick_picking.action_assign()
-        pick_picking.move_line_ids.filtered(
+        pick_line = pick_picking.move_line_ids.filtered(
             lambda ml: ml.product_id == self.product
-        ).qty_done = 5.0
+        )
+        self.assertEqual(pick_line.quantity, 5)
+        pick_line.picked = True
         pip_action = pick_picking.action_put_in_pack()
         # check the action is a dict
         self.assertIsInstance(pip_action, dict)
@@ -268,9 +272,11 @@ class TestStockPickingDeliveryLink(StockPickingDeliveryLinkCommonCase):
         # set a carrier on shipment picking but do not force wizard on picking type
         ship_picking.carrier_id = self.test_carrier
         pick_picking.action_assign()
-        pick_picking.move_line_ids.filtered(
+        pick_line = pick_picking.move_line_ids.filtered(
             lambda ml: ml.product_id == self.product
-        ).qty_done = 5.0
+        )
+        self.assertEqual(pick_line.quantity, 5)
+        pick_line.picked = True
         pip_action = pick_picking.action_put_in_pack()
         # the action is not a dict so not a wizard
         self.assertNotIsInstance(pip_action, dict)
