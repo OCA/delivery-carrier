@@ -5,7 +5,6 @@ from odoo import fields, models
 
 
 class SaleOrder(models.Model):
-
     _inherit = "sale.order"
 
     default_tracking_url = fields.Char(
