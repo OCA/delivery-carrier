@@ -36,13 +36,6 @@ matching each shipping method.
 .. contents::
    :local:
 
-Installation
-============
-
-This module generates the initial ZIP interval entry from existing "ZIP
-from" and "ZIP to", filling one of the two interval parts with wildcard
-strings.
-
 Configuration
 =============
 
@@ -50,15 +43,8 @@ To configure delivery methods with multiple ZIPs:
 
 1. Go to Inventory > Configuration > Delivery > Shipping Methods
 2. Create or edit an existing record.
-3. Introduce a line for each interval of zip codes.
-
-Known issues / Roadmap
-======================
-
--  There's some code for proxying the standard values to the new
-   intervals, for covering cases like automatisms or other modules that
-   touch such fields, but there are still non covered cases like
-   multiple consecutive writings creating weird ZIP interval tables.
+3. Set Zip Option as Ranges.
+4. Introduce a line for each interval of zip codes.
 
 Bug Tracker
 ===========
@@ -84,6 +70,7 @@ Contributors
 -  \`Tecnativa <https://www.tecnativa.com>\_\_\`:
 
    -  Pedro M. Baeza
+   -  Víctor Martínez
 
 -  Philipp Zimmer
 
