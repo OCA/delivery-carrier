@@ -19,12 +19,11 @@ class DeliveryCarrierTemplateOption(models.Model):
             ("partner_option", "Partner Option"),
         ],
         default="basic",
-        string="Option type",
+        string="Option Type",
     )
     partner_id = fields.Many2one(comodel_name="res.partner", string="Partner Carrier")
-    name = fields.Char(readonly=True)
-    code = fields.Char(readonly=True)
+    name = fields.Char()
+    code = fields.Char()
     description = fields.Char(
-        readonly=True,
         help="Allow to define a more complete description " "than in the name field.",
     )
