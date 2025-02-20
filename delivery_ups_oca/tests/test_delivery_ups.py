@@ -6,14 +6,13 @@
 import base64
 from unittest import mock
 
-from odoo.modules import get_module_resource
 from odoo.tests import Form, common
 
 _module_ns = "odoo.addons.delivery_ups_oca"
 _provider_class = _module_ns + ".models.ups_request.UpsRequest"
 
 
-class TestDeliveryUpsBase(common.SavepointCase):
+class TestDeliveryUpsBase(common.TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -32,15 +31,21 @@ class TestDeliveryUpsBase(common.SavepointCase):
                 "product_id": product_shipping_cost.id,
                 "price_method": "fixed",
                 "ups_default_packaging_id": cls.env.ref(
-                    "delivery_ups_oca.product_packaging_ups_02"
+                    "delivery_ups_oca.package_type_ups_02"
                 ).id,
+                "ups_package_dimension_code": "IN",
+                "ups_package_weight_code": "LBS",
+                "ups_service_code": "03",
+                "ups_shipper_number": "123456",
+                "ups_client_id": "dummy",
+                "ups_client_secret": "dummy",
+                "ups_file_format": "GIF",
             }
         )
         cls.company = cls.env.ref("base.main_company")
         cls.company.partner_id.write(
             {
                 "phone": "+%s976123456" % cls.company.country_id.phone_code,
-                "vat": "%s09915370R" % cls.company.country_id.code,
             }
         )
         cls.partner = cls.env["res.partner"].create(
@@ -53,7 +58,6 @@ class TestDeliveryUpsBase(common.SavepointCase):
                 "city": cls.company.partner_id.city,
                 "zip": cls.company.partner_id.zip,
                 "state_id": cls.company.partner_id.state_id.id,
-                "vat": cls.company.partner_id.vat,
             }
         )
         cls.product = cls.env["product.product"].create(
@@ -70,7 +74,8 @@ class TestDeliveryUpsBase(common.SavepointCase):
         sale = order_form.save()
         delivery_wizard = Form(
             self.env["choose.delivery.carrier"].with_context(
-                {"default_order_id": sale.id, "default_carrier_id": self.carrier.id}
+                default_order_id=sale.id,
+                default_carrier_id=self.carrier.id,
             )
         ).save()
         delivery_wizard.button_confirm()
@@ -123,47 +128,44 @@ class TestDeliveryUps(TestDeliveryUpsBase):
     def test_delivery_carrier_ups_integration(self):
         self.picking.action_confirm()
         self.picking.action_assign()
-        dummy_pdf_path = get_module_resource(
-            "delivery_carrier_label_batch", "tests", "dummy.pdf"
-        )
-        with open(dummy_pdf_path, "rb") as dummy_pdf:
-            label = dummy_pdf.read()
-            with mock.patch(
-                _provider_class + "._send_shipping",
-                return_value={
-                    "price": {"CurrencyCode": "USD", "MonetaryValue": "0.0"},
-                    "ShipmentIdentificationNumber": "123456",
-                    "labels": [
-                        {
-                            "tracking_ref": "123456",
-                            "format_code": "png",
-                            "datas": base64.b64encode(label),
-                        }
-                    ],
-                },
-            ):
-                self.picking.send_to_shipper()
-                self.assertEqual(self.picking.message_attachment_count, 1)
-                self.assertTrue(self.picking.carrier_tracking_ref)
-                self.assertFalse(self.picking.tracking_state_history)
-                self.assertEqual(
-                    self.picking.delivery_state, "shipping_recorded_in_carrier"
-                )
-                if self.picking.carrier_id.ups_tracking_state_update_sync:
-                    with mock.patch(
-                        _provider_class + ".tracking_state_update",
-                        return_value={
-                            "delivery_state": "in_transit",
-                            "tracking_state_history": "history",
-                        },
-                    ):
-                        self.picking.tracking_state_update()
-                        self.assertEqual(self.picking.delivery_state, "in_transit")
-                        self.assertTrue(self.picking.tracking_state_history)
+        # Create a simple PDF-like bytes object for testing
+        label = b"%PDF-1.4\n%EOF"
+        with mock.patch(
+            _provider_class + "._send_shipping",
+            return_value={
+                "price": {"CurrencyCode": "USD", "MonetaryValue": "0.0"},
+                "ShipmentIdentificationNumber": "123456",
+                "labels": [
+                    {
+                        "tracking_ref": "123456",
+                        "format_code": "png",
+                        "datas": base64.b64encode(label),
+                    }
+                ],
+            },
+        ):
+            self.picking.send_to_shipper()
+            self.assertEqual(self.picking.message_attachment_count, 1)
+            self.assertTrue(self.picking.carrier_tracking_ref)
+            self.assertFalse(self.picking.tracking_state_history)
+            self.assertEqual(
+                self.picking.delivery_state, "shipping_recorded_in_carrier"
+            )
+            if self.picking.carrier_id.ups_tracking_state_update_sync:
                 with mock.patch(
-                    _provider_class + ".cancel_shipment",
-                    return_value=True,
+                    _provider_class + ".tracking_state_update",
+                    return_value={
+                        "delivery_state": "in_transit",
+                        "tracking_state_history": "history",
+                    },
                 ):
-                    self.picking.cancel_shipment()
-                    self.assertFalse(self.picking.carrier_tracking_ref)
-                    self.assertEqual(self.picking.delivery_state, "canceled_shipment")
+                    self.picking.tracking_state_update()
+                    self.assertEqual(self.picking.delivery_state, "in_transit")
+                    self.assertTrue(self.picking.tracking_state_history)
+            with mock.patch(
+                _provider_class + ".cancel_shipment",
+                return_value=True,
+            ):
+                self.picking.cancel_shipment()
+                self.assertFalse(self.picking.carrier_tracking_ref)
+                self.assertEqual(self.picking.delivery_state, "canceled_shipment")

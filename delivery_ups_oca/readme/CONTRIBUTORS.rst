@@ -11,3 +11,7 @@
 * `Sygel <https://www.sygel.es>`_:
 
   * Manuel Regidor
+
+* `Nitrokey <https://www.nitrokey.com>`_:
+
+  * Jan Suhr

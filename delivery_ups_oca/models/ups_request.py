@@ -111,7 +111,7 @@ class UpsRequest(object):
         if is_package:
             NumOfPieces = sum(package.mapped("quant_ids.quantity"))
             PackageWeight = max(package.shipping_weight, package.weight)
-            package = package.packaging_id
+            package = package.package_type_id
         return {
             "Description": package.name,
             "NumOfPieces": str(NumOfPieces),
@@ -165,15 +165,21 @@ class UpsRequest(object):
                 for package in picking.package_ids
             ]
         else:
-            # modelo: product.packaging
+            # modelo: stock.package.type
             packages = []
             package_info = self._quant_package_data_from_picking(
                 self.default_packaging_id, picking, False
             )
-            package_weight = round(
-                (picking.shipping_weight / picking.number_of_packages), 2
-            )
-            for i in range(0, picking.number_of_packages):
+            package_weight = 0
+            if picking.number_of_packages > 0:
+                package_weight = round(
+                    (picking.shipping_weight / picking.number_of_packages), 2
+                )
+            else:
+                package_weight = picking.shipping_weight
+            # Ensure at least one package is created
+            num_packages = max(1, picking.number_of_packages)
+            for i in range(0, num_packages):
                 package_item = package_info
                 package_name = "%s (%s)" % (picking.name, i + 1)
                 package_item["Description"] = package_name
@@ -396,17 +402,21 @@ class UpsRequest(object):
             else:
                 for warning in shipment.get("warnings"):
                     states_list.append(
-                        _("{} - Warning: {}").format(
-                            datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                            warning.get("message"),
-                        )
+                        _("%(datetime)s - Warning: %(message)s")
+                        % {
+                            "datetime": datetime.datetime.now().strftime(
+                                "%Y-%m-%d %H:%M:%S"
+                            ),
+                            "message": warning.get("message"),
+                        }
                     )
 
         except Exception:
             states_list.append(
-                _("{} - Error retrieving the tracking information.").format(
-                    datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                )
+                _("%(datetime)s - Error retrieving the tracking information.")
+                % {
+                    "datetime": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                }
             )
         return {
             "delivery_state": delivery_state,

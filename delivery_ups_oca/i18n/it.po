@@ -376,12 +376,12 @@ msgstr ""
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields,field_description:delivery_ups_oca.field_delivery_carrier__ups_client_id
-msgid "Ups Client"
+msgid "Client ID"
 msgstr ""
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields,field_description:delivery_ups_oca.field_delivery_carrier__ups_client_secret
-msgid "Ups Client Secret"
+msgid "Client Secret"
 msgstr ""
 
 #. module: delivery_ups_oca
