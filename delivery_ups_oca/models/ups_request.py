@@ -14,7 +14,7 @@ from odoo.exceptions import UserError
 _logger = logging.getLogger(__name__)
 
 
-class UpsRequest(object):
+class UpsRequest:
     def __init__(self, carrier):
         self.carrier = carrier
         self.default_packaging_id = self.carrier.ups_default_packaging_id
@@ -90,7 +90,7 @@ class UpsRequest(object):
             self._get_new_token()
         data = data or {}
         headers = {
-            "Authorization": "Bearer {}".format(self.token),
+            "Authorization": f"Bearer {self.token}",
         }
         if headers_extra:
             headers = {**headers, **headers_extra}
@@ -100,7 +100,7 @@ class UpsRequest(object):
             self._get_new_token()
             status = self._send_request(url, json, data, headers, method)
         status = status.json()
-        ups_last_request = ("URL: {}\nData: {}").format(self.url, data)
+        ups_last_request = f"URL: {self.url}\nData: {data}"
         self.carrier.log_xml(ups_last_request, "ups_last_request")
         self.carrier.log_xml(status or "", "ups_last_response")
         return status
@@ -349,7 +349,7 @@ class UpsRequest(object):
 
     def cancel_shipment(self, picking):
         url = "%s/api/shipments/v1/void/cancel" % self.url
-        url = "{}/{}".format(url, picking.carrier_tracking_ref)
+        url = f"{url}/{picking.carrier_tracking_ref}"
         status = self._process_reply(url=url, method="delete")
         self._raise_for_status(status, False)
         return True
@@ -366,8 +366,8 @@ class UpsRequest(object):
             url="%s/api/track/v1/details/%s" % (self.url, picking.carrier_tracking_ref),
             method="get",
             headers_extra={
-                "transId": "{}".format(datetime.datetime.now().timestamp()),
-                "transactionSrc": "{} - Odoo".format(picking.company_id.name),
+                "transId": f"{datetime.datetime.now().timestamp()}",
+                "transactionSrc": f"{picking.company_id.name} - Odoo",
             },
         )
         self._raise_for_status(status, False)
