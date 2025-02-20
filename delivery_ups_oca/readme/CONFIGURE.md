@@ -1,7 +1,7 @@
 To configure this module, you need to:
 
-1.  Add a carrier account with delivery type `ups` and fill in your
-    credentials (UPS Client and UPS Client Secret)
+1.  Add a Shipping Method with Provider ``UPS`` and fill in your UPS credentials
+    (Client ID and Client Secret)
 2.  Configure in Odoo all required fields of the UPS tab with your
     account data <https://wwwapps.ups.com/ppc/ppc.html> (Shipper number,
     Default Packaging, Package Dimension Code, Package Weight Code and
