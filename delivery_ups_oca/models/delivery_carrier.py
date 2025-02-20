@@ -60,7 +60,7 @@ class DeliveryCarrier(models.Model):
         string="Service code",
     )
     ups_default_packaging_id = fields.Many2one(
-        comodel_name="product.packaging",
+        comodel_name="stock.package.type",
         string="Default Packaging Type",
         domain=[("package_carrier_type", "=", "ups")],
     )
@@ -156,11 +156,7 @@ class DeliveryCarrier(models.Model):
         val_list = []
         for label in labels:
             format_code = label["format_code"].upper()
-            attachment_name = "%s-%s.%s" % (
-                label["tracking_ref"],
-                format_code,
-                format_code,
-            )
+            attachment_name = f"{label['tracking_ref']}-{format_code}.{format_code}"
             val_list.append(
                 self._prepare_ups_label_attachment(
                     picking,

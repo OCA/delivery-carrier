@@ -36,8 +36,8 @@ class UpsRequest:
     def _raise_for_status(self, status, skip_errors=True):
         errors = status.get("response", {}).get("errors")
         if errors:
-            msg = _("Sending to UPS: %s") % (
-                "\n".join("%(code)s %(message)s" % error for error in errors),
+            msg = _("Sending to UPS: {}").format(
+                "\n".join("{code} {message}".format(**error) for error in errors),
             )
             if skip_errors:
                 _logger.info(msg)
@@ -55,7 +55,8 @@ class UpsRequest:
         if not (self.client_id and self.client_secret):
             raise UserError(
                 _(
-                    "Both Client ID and Client Secret must be set in UPS delivery carriers."
+                    "Both Client ID and Client Secret"
+                    " must be set in UPS delivery carriers."
                 )
             )
         url = "%s/security/v1/oauth/token" % self.url
@@ -111,7 +112,7 @@ class UpsRequest:
         if is_package:
             NumOfPieces = sum(package.mapped("quant_ids.quantity"))
             PackageWeight = max(package.shipping_weight, package.weight)
-            package = package.packaging_id
+            package = package.package_type_id
         return {
             "Description": package.name,
             "NumOfPieces": str(NumOfPieces),
@@ -165,7 +166,7 @@ class UpsRequest:
                 for package in picking.package_ids
             ]
         else:
-            # modelo: product.packaging
+            # modelo: stock.package.type
             packages = []
             package_info = self._quant_package_data_from_picking(
                 self.default_packaging_id, picking, False
@@ -174,8 +175,8 @@ class UpsRequest:
                 (picking.shipping_weight / picking.number_of_packages), 2
             )
             for i in range(0, picking.number_of_packages):
-                package_item = package_info
-                package_name = "%s (%s)" % (picking.name, i + 1)
+                package_item = package_info.copy()
+                package_name = f"{picking.name} ({i+1})"
                 package_item["Description"] = package_name
                 package_item["NumOfPieces"] = "1"
                 package_item["Packaging"]["Description"] = package_name
@@ -363,7 +364,7 @@ class UpsRequest:
             "M": "in_transit",
         }
         status = self._process_reply(
-            url="%s/api/track/v1/details/%s" % (self.url, picking.carrier_tracking_ref),
+            url=f"{self.url}/api/track/v1/details/{picking.carrier_tracking_ref}",
             method="get",
             headers_extra={
                 "transId": f"{datetime.datetime.now().timestamp()}",
@@ -396,9 +397,9 @@ class UpsRequest:
             else:
                 for warning in shipment.get("warnings"):
                     states_list.append(
-                        _("{} - Warning: {}").format(
-                            datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                            warning.get("message"),
+                        _("{date} - Warning: {warn}").format(
+                            date=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                            warn=warning.get("message"),
                         )
                     )
 
