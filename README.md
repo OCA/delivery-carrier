@@ -25,6 +25,7 @@ addon | version | maintainers | summary
 --- | --- | --- | ---
 [delivery_carrier_account](delivery_carrier_account/) | 18.0.1.0.0 |  | Delivery Carrier Account
 [delivery_carrier_info](delivery_carrier_info/) | 18.0.1.0.0 |  | Add code on carrier
+[delivery_carrier_option](delivery_carrier_option/) | 18.0.1.0.0 | [![florian-dacosta](https://github.com/florian-dacosta.png?size=30px)](https://github.com/florian-dacosta) | Delivery Carrier Option
 [delivery_carrier_partner](delivery_carrier_partner/) | 18.0.1.0.0 |  | Add a partner in the delivery carrier
 [delivery_carrier_pricelist](delivery_carrier_pricelist/) | 18.0.1.0.0 |  | Compute delivery method price based on the product's pricelist.
 [delivery_carrier_shipping_label](delivery_carrier_shipping_label/) | 18.0.1.0.0 | [![florian-dacosta](https://github.com/florian-dacosta.png?size=30px)](https://github.com/florian-dacosta) | Delivery Carrier Shipping Label
