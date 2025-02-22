@@ -1,0 +1,8 @@
+- \`Tecnativa \<<https://www.tecnativa.com>\>\_\_\`:
+  - Pedro M. Baeza
+  - Luis M. Ontalba
+  - Carlos Roca
+  - Carolina Fernandez
+  - Víctor Martínez
+- \`Dinamiche Aziendali \<<https://www.dinamicheaziendali.it>\>\_\_\`:
+  - Gianmarco Conte
