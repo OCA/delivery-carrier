@@ -43,25 +43,21 @@ msgstr "法国"
 
 #. module: delivery_multi_destination
 #: model:delivery.carrier,name:delivery_multi_destination.delivery_carrier_multi
-#: model:product.product,name:delivery_multi_destination.product_product_delivery_carrier_multi
 #: model:product.template,name:delivery_multi_destination.product_product_delivery_carrier_multi_product_template
 msgid "International Carrier Inc."
 msgstr "国际航空公司。"
 
 #. module: delivery_multi_destination
-#: model:product.product,name:delivery_multi_destination.product_product_delivery_carrier_multi_child_1
 #: model:product.template,name:delivery_multi_destination.product_product_delivery_carrier_multi_child_1_product_template
 msgid "International Carrier Inc., Belgium"
 msgstr "比利时国际航空公司"
 
 #. module: delivery_multi_destination
-#: model:product.product,name:delivery_multi_destination.product_product_delivery_carrier_multi_child_2
 #: model:product.template,name:delivery_multi_destination.product_product_delivery_carrier_multi_child_2_product_template
 msgid "International Carrier Inc., France"
 msgstr "法国国际航空公司"
 
 #. module: delivery_multi_destination
-#: model:product.product,name:delivery_multi_destination.product_product_delivery_carrier_multi_child_3
 #: model:product.template,name:delivery_multi_destination.product_product_delivery_carrier_multi_child_3_product_template
 msgid "International Carrier Inc., United Kingdom"
 msgstr "英国国际航空公司"
@@ -87,6 +83,7 @@ msgid "Shipping Methods"
 msgstr ""
 
 #. module: delivery_multi_destination
+#. odoo-python
 #: code:addons/delivery_multi_destination/models/delivery_carrier.py:0
 #, python-format
 msgid "There is no matching delivery rule."
@@ -96,15 +93,3 @@ msgstr ""
 #: model:delivery.carrier,name:delivery_multi_destination.delivery_carrier_multi_child_3
 msgid "United Kingdom"
 msgstr "英国"
-
-#. module: delivery_multi_destination
-#: model:product.product,uom_name:delivery_multi_destination.product_product_delivery_carrier_multi
-#: model:product.product,uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_1
-#: model:product.product,uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_2
-#: model:product.product,uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_3
-#: model:product.template,uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_1_product_template
-#: model:product.template,uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_2_product_template
-#: model:product.template,uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_3_product_template
-#: model:product.template,uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_product_template
-msgid "Units"
-msgstr ""
