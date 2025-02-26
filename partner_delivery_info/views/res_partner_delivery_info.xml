@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="res_partner_delivery_info_tree_view" model="ir.ui.view">
+        <field name="name">res.partner.delivery.info list</field>
+        <field name="model">res.partner.delivery.info</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+                <field name="text" />
+                <field name="active" />
+            </list>
+        </field>
+    </record>
+    <record id="res_partner_delivery_info_form_view" model="ir.ui.view">
+        <field name="name">res.partner.delivery.info form</field>
+        <field name="model">res.partner.delivery.info</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <field name="active" invisible="1" />
+                    <widget
+                        name="web_ribbon"
+                        title="Archived"
+                        bg_color="bg-danger"
+                        invisible="active"
+                    />
+                    <group>
+                        <group>
+                            <field name="name" />
+                            <field name="text" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="res_partner_delivery_info_search_view" model="ir.ui.view">
+        <field name="name">res.partner.delivery.info search</field>
+        <field name="model">res.partner.delivery.info</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="text" />
+                <field name="active" />
+                <separator />
+                <filter
+                    string="Archived"
+                    name="inactive"
+                    domain="[('active', '=', False)]"
+                />
+            </search>
+        </field>
+    </record>
+    <record id="action_res_partner_delivery_info" model="ir.actions.act_window">
+        <field name="name">Delivery Indications by Customer to Carrier</field>
+        <field name="res_model">res.partner.delivery.info</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_empty_folder">
+                Create a delivery indication to the carriers, to be used by the customers.
+            </p>
+        </field>
+    </record>
+</odoo>
