@@ -1,0 +1,47 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_picking_delivery_link
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2024-08-22 10:06+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.6.2\n"
+
+#. module: stock_picking_delivery_link
+#: model_terms:ir.ui.view,arch_db:stock_picking_delivery_link.view_picking_form
+msgid "Delivery Links"
+msgstr "Collegamenti consegna"
+
+#. module: stock_picking_delivery_link
+#: model:ir.model.fields,field_description:stock_picking_delivery_link.field_stock_picking_type__set_delivery_package_type_on_put_in_pack
+msgid "Delivery package type on put in pack"
+msgstr "Tipo collo consegna inserito nel pacco"
+
+#. module: stock_picking_delivery_link
+#: model:ir.model,name:stock_picking_delivery_link.model_stock_picking_type
+msgid "Picking Type"
+msgstr "Tipo prelievo"
+
+#. module: stock_picking_delivery_link
+#: model:ir.model.fields,field_description:stock_picking_delivery_link.field_stock_picking__ship_carrier_id
+msgid "Related carrier"
+msgstr "Vettore relativo"
+
+#. module: stock_picking_delivery_link
+#: model:ir.model.fields,field_description:stock_picking_delivery_link.field_stock_picking__ship_picking_id
+msgid "Related delivery"
+msgstr "Consegna relativa"
+
+#. module: stock_picking_delivery_link
+#: model:ir.model,name:stock_picking_delivery_link.model_stock_picking
+msgid "Transfer"
+msgstr "Trasferimento"
