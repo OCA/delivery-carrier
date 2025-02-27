@@ -59,7 +59,6 @@ msgstr "Creado el"
 #: model:ir.model.fields,field_description:partner_delivery_zone.field_sale_order__delivery_zone_id
 #: model:ir.model.fields,field_description:partner_delivery_zone.field_stock_move__delivery_zone_id
 #: model:ir.model.fields,field_description:partner_delivery_zone.field_stock_picking__delivery_zone_id
-#: model_terms:ir.ui.view,arch_db:partner_delivery_zone.view_partner_delivery_zone_form
 #: model_terms:ir.ui.view,arch_db:partner_delivery_zone.view_partner_delivery_zone_search
 #: model_terms:ir.ui.view,arch_db:partner_delivery_zone.view_picking_internal_search
 #: model_terms:ir.ui.view,arch_db:partner_delivery_zone.view_res_partner_filter
@@ -82,11 +81,6 @@ msgstr "Nombre a mostrar"
 #: model:ir.model.fields,field_description:partner_delivery_zone.field_partner_delivery_zone__id
 msgid "ID"
 msgstr "ID (identificación)"
-
-#. module: partner_delivery_zone
-#: model:ir.model.fields,field_description:partner_delivery_zone.field_partner_delivery_zone____last_update
-msgid "Last Modified on"
-msgstr "Última modificación el"
 
 #. module: partner_delivery_zone
 #: model:ir.model.fields,field_description:partner_delivery_zone.field_partner_delivery_zone__write_uid
@@ -122,6 +116,9 @@ msgstr "Transferir"
 #: model:ir.model.fields,field_description:partner_delivery_zone.field_partner_delivery_zone__name
 msgid "Zone"
 msgstr "Zona"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Última modificación el"
 
 #~ msgid "Quotation"
 #~ msgstr "Presupuesto"
