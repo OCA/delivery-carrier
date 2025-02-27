@@ -37,6 +37,7 @@ addon | version | maintainers | summary
 [delivery_state](delivery_state/) | 17.0.1.0.0 |  | Provides fields to be able to contemplate the tracking statesand also adds a global fields
 [partner_delivery_info](partner_delivery_info/) | 17.0.1.0.0 |  | Send delivery notice to the shipper from any operation.
 [partner_delivery_schedule](partner_delivery_schedule/) | 17.0.1.0.0 |  | Set on partners a schedule for delivery goods
+[partner_delivery_zone](partner_delivery_zone/) | 17.0.1.0.0 |  | Enables partner delivery zones for physical products
 [sale_order_warehouse_from_delivery_carrier](sale_order_warehouse_from_delivery_carrier/) | 17.0.1.0.0 |  | Sale Order WH from Delivery Carrier
 
 [//]: # (end addons)
