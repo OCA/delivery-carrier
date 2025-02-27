@@ -96,6 +96,7 @@ Contributors
   - Sergio Teruel
   - César A. Sánchez
   - Luis Daniel Lafaurie
+  - Juan Carlos Oñate
 
 - `Pesol <https://www.pesol.es>`__
 

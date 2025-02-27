@@ -8,10 +8,7 @@
         <field name="arch" type="xml">
             <xpath expr="//page[@name='extra']" position="inside">
                 <group name="delivery_zone">
-                    <field
-                        name="delivery_zone_id"
-                        attrs="{'readonly': [('state', '=', 'done')]}"
-                    />
+                    <field name="delivery_zone_id" readonly="state == 'done'" />
                 </group>
             </xpath>
         </field>
@@ -42,15 +39,10 @@
             <xpath expr="//field[@name='scheduled_date']" position="after">
                 <field name="delivery_zone_id" />
             </xpath>
-            <xpath expr="//div[hasclass('oe_kanban_bottom_left')]" position="replace">
-                <div class="oe_kanban_bottom_left">
-                    <div>
-                        <t t-esc="record.partner_id.value" />
-                    </div>
+            <xpath expr="//div[hasclass('oe_kanban_bottom_left')]" position="inside">
                     <div t-if="record.delivery_zone_id">
                         <t t-esc="record.delivery_zone_id.value" />
                     </div>
-                </div>
             </xpath>
         </field>
     </record>

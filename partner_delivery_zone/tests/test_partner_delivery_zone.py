@@ -2,19 +2,20 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from lxml import etree
 
-from odoo.tests import TransactionCase
+from odoo import Command
+from odoo.tests import tagged
 
-from odoo.addons.base.tests.common import DISABLED_MAIL_CONTEXT
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class TestPartnerDeliveryZone(TransactionCase):
+@tagged("post_install", "-at_install")
+class TestPartnerDeliveryZone(BaseCommon):
     at_install = False
     post_install = True
 
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.env = cls.env(context=dict(cls.env.context, **DISABLED_MAIL_CONTEXT))
         cls.warehouse = cls.env.ref("stock.warehouse0")
         cls.delivery_zone_a = cls.env["partner.delivery.zone"].create(
             {"name": "Delivery Zone A", "code": "10"}
@@ -30,16 +31,14 @@ class TestPartnerDeliveryZone(TransactionCase):
             {
                 "partner_id": cls.partner.id,
                 "order_line": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "name": cls.product.name,
                             "product_id": cls.product.id,
                             "product_uom_qty": 10.0,
                             "product_uom": cls.product.uom_id.id,
                             "price_unit": 1000.00,
-                        },
+                        }
                     )
                 ],
             }
@@ -87,11 +86,11 @@ class TestPartnerDeliveryZone(TransactionCase):
                 "type": "form",
                 "model": "res.partner",
                 "arch": """
-                <data>
+                <form>
                     <field name='child_ids'
                         context="{'default_name': 'test'}">
                     </field>
-                </data>
+                </form>
             """,
             }
         )
