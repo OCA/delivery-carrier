@@ -11,25 +11,50 @@
             <!-- Add currency field (invisible) for monetary fields -->
             <field name="origin" position="after">
                 <field name="currency_id" invisible="1" />
-                <field name="sale_id" readonly="1" attrs="{'invisible': [('sale_id', '=', False)]}" />
+                <field
+                    name="sale_id"
+                    readonly="1"
+                    attrs="{'invisible': [('sale_id', '=', False)]}"
+                />
             </field>
-            
+
             <!-- Add declared value fields to the move lines -->
-            <xpath expr="//field[@name='move_ids_without_package']/tree" position="inside">
+            <xpath
+                expr="//field[@name='move_ids_without_package']/tree"
+                position="inside"
+            >
                 <field name="currency_id" invisible="1" />
                 <field name="sale_line_id" invisible="1" />
-                <field name="sale_unit_price" attrs="{'column_invisible': [('parent.sale_id', '=', False)]}" optional="hide" />
-                <field name="discount" attrs="{'column_invisible': [('parent.sale_id', '=', False)]}" optional="hide" />
-                <field name="price_subtotal" widget="monetary" 
-                       attrs="{'column_invisible': [('parent.sale_id', '=', False)]}" optional="hide" />
+                <field
+                    name="sale_unit_price"
+                    attrs="{'column_invisible': [('parent.sale_id', '=', False)]}"
+                    optional="hide"
+                />
+                <field
+                    name="discount"
+                    attrs="{'column_invisible': [('parent.sale_id', '=', False)]}"
+                    optional="hide"
+                />
+                <field
+                    name="price_subtotal"
+                    widget="monetary"
+                    attrs="{'column_invisible': [('parent.sale_id', '=', False)]}"
+                    optional="hide"
+                />
             </xpath>
-            
+
             <!-- Add declared amount and total declared value to the Additional Info page -->
             <xpath expr="//page[@name='extra']" position="inside">
                 <group name="declared_value" string="Declared Value">
-                    <field name="declared_amount" attrs="{'invisible': [('sale_id', '=', False)]}" />
-                    <field name="amount_total" widget="monetary" 
-                           attrs="{'invisible': [('sale_id', '=', False)]}" />
+                    <field
+                        name="declared_amount"
+                        attrs="{'invisible': [('sale_id', '=', False)]}"
+                    />
+                    <field
+                        name="amount_total"
+                        widget="monetary"
+                        attrs="{'invisible': [('sale_id', '=', False)]}"
+                    />
                 </group>
             </xpath>
         </field>

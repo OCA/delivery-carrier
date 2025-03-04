@@ -11,10 +11,19 @@
             <field name="product_uom" position="after">
                 <field name="currency_id" invisible="1" />
                 <field name="sale_line_id" invisible="1" />
-                <field name="sale_unit_price" attrs="{'invisible': [('sale_line_id', '=', False)]}" />
-                <field name="discount" attrs="{'invisible': [('sale_line_id', '=', False)]}" />
-                <field name="price_subtotal" widget="monetary" 
-                       attrs="{'invisible': [('sale_line_id', '=', False)]}" />
+                <field
+                    name="sale_unit_price"
+                    attrs="{'invisible': [('sale_line_id', '=', False)]}"
+                />
+                <field
+                    name="discount"
+                    attrs="{'invisible': [('sale_line_id', '=', False)]}"
+                />
+                <field
+                    name="price_subtotal"
+                    widget="monetary"
+                    attrs="{'invisible': [('sale_line_id', '=', False)]}"
+                />
             </field>
         </field>
     </record>
