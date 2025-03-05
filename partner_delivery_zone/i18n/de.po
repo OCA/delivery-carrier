@@ -54,6 +54,7 @@ msgid "Created on"
 msgstr "Erstellt am"
 
 #. module: partner_delivery_zone
+#: model:ir.model.fields,field_description:partner_delivery_zone.field_dropoff_site__delivery_zone_id
 #: model:ir.model.fields,field_description:partner_delivery_zone.field_res_partner__delivery_zone_id
 #: model:ir.model.fields,field_description:partner_delivery_zone.field_res_users__delivery_zone_id
 #: model:ir.model.fields,field_description:partner_delivery_zone.field_sale_order__delivery_zone_id
