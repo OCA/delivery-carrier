@@ -39,9 +39,11 @@
             <xpath expr="//field[@name='scheduled_date']" position="after">
                 <field name="delivery_zone_id" />
             </xpath>
-            <xpath expr="//div[hasclass('oe_kanban_bottom_left')]" position="inside">
-                <div t-if="record.delivery_zone_id">
-                    <t t-esc="record.delivery_zone_id.value" />
+            <xpath expr="//t[@t-name='card']//footer//div[1]" position="after">
+                <div class="d-flex">
+                    <div t-if="record.delivery_zone_id" class="ml8">
+                        <field name="delivery_zone_id" />
+                    </div>
                 </div>
             </xpath>
         </field>
