@@ -26,6 +26,7 @@ addon | version | maintainers | summary
 [delivery_carrier_info](delivery_carrier_info/) | 17.0.1.0.0 |  | Add code on carrier
 [delivery_carrier_manual_price](delivery_carrier_manual_price/) | 17.0.1.0.0 |  | Allow setting manual shipping cost in sale order.
 [delivery_carrier_manual_weight](delivery_carrier_manual_weight/) | 17.0.1.0.0 |  | Allow setting weight and shipping weight in stock transfers manually based on carrier.
+[delivery_carrier_multi_zip](delivery_carrier_multi_zip/) | 17.0.1.0.0 |  | Multiple ZIP intervals for the same delivery method
 [delivery_carrier_partner](delivery_carrier_partner/) | 17.0.1.0.0 |  | Add a partner in the delivery carrier
 [delivery_cttexpress](delivery_cttexpress/) | 17.0.1.0.0 |  | Delivery Carrier implementation for CTT Express API
 [delivery_free_fee_removal](delivery_free_fee_removal/) | 17.0.1.0.0 |  | Hide free fee lines on sales orders
