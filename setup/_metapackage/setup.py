@@ -42,6 +42,7 @@ setuptools.setup(
         'odoo14-addon-delivery_price_product_domain',
         'odoo14-addon-delivery_price_rule_untaxed',
         'odoo14-addon-delivery_purchase',
+        'odoo14-addon-delivery_purchase_label',
         'odoo14-addon-delivery_roulier',
         'odoo14-addon-delivery_roulier_chronopost_fr',
         'odoo14-addon-delivery_roulier_laposte_fr',
