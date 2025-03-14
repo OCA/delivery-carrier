@@ -30,7 +30,7 @@ class PurchaseOrder(models.Model):
             if delivery_lines:
                 item.delivery_price = sum(delivery_lines.mapped("price_unit"))
             else:
-                item.delivery_price = item.carrier_id.purchase_rate_shipment(self)[
+                item.delivery_price = item.carrier_id.purchase_rate_shipment(item)[
                     "price"
                 ]
 
