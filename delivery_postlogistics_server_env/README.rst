@@ -54,24 +54,27 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * Camptocamp
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* Thierry Ducrest <thierry.ducrest@camptocamp.com>
-* `Trobz <https://trobz.com>`_:
-    * Jack Le <anlh@trobz.com>
+- Thierry Ducrest <thierry.ducrest@camptocamp.com>
+
+- `Trobz <https://trobz.com>`__:
+
+  - Jack Le <anlh@trobz.com>
 
 Other credits
-~~~~~~~~~~~~~
+-------------
 
-The migration of this module from 14.0 to 16.0 was financially supported by Camptocamp
+The migration of this module from 14.0 to 16.0 was financially supported
+by Camptocamp
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 

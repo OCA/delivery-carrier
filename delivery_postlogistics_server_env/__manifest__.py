@@ -9,7 +9,7 @@
     "license": "AGPL-3",
     "depends": ["delivery_postlogistics", "server_environment"],
     "website": "https://github.com/OCA/delivery-carrier",
-    "installable": True,
+    "installable": False,
     "auto_install": True,
     "development_status": "Alpha",
 }
