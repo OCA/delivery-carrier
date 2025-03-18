@@ -1,1 +1,2 @@
 odoo-test-helper
+odoo-addon-delivery_postlogistics @ git+https://github.com/OCA/delivery-carrier.git@refs/pull/974/head#subdirectory=delivery_postlogistics
