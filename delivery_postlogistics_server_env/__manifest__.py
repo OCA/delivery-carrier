@@ -3,13 +3,13 @@
 {
     "name": "Delivery Postlogistics Server Environment",
     "summary": "Server Environment layer for Delivery Postlogistics",
-    "version": "16.0.1.0.0",
+    "version": "18.0.1.0.0",
     "category": "Operations/Inventory/Delivery",
     "author": "Camptocamp, Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "depends": ["delivery_postlogistics", "server_environment"],
     "website": "https://github.com/OCA/delivery-carrier",
-    "installable": False,
+    "installable": True,
     "auto_install": True,
     "development_status": "Alpha",
 }
