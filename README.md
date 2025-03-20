@@ -26,6 +26,7 @@ addon | version | maintainers | summary
 [delivery_carrier_account](delivery_carrier_account/) | 18.0.1.0.0 |  | Delivery Carrier Account
 [delivery_carrier_info](delivery_carrier_info/) | 18.0.1.0.0 |  | Add code on carrier
 [delivery_carrier_label_default](delivery_carrier_label_default/) | 18.0.1.0.0 |  | This module defines a basic label to print when no specific carrier is selected.
+[delivery_carrier_manual_weight](delivery_carrier_manual_weight/) | 18.0.1.0.0 |  | Allow setting weight and shipping weight in stock transfers manually based on carrier.
 [delivery_carrier_option](delivery_carrier_option/) | 18.0.1.0.0 | [![florian-dacosta](https://github.com/florian-dacosta.png?size=30px)](https://github.com/florian-dacosta) | Delivery Carrier Option
 [delivery_carrier_partner](delivery_carrier_partner/) | 18.0.1.0.0 |  | Add a partner in the delivery carrier
 [delivery_carrier_pricelist](delivery_carrier_pricelist/) | 18.0.1.0.0 |  | Compute delivery method price based on the product's pricelist.
