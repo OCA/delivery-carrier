@@ -42,7 +42,7 @@ class TestPostlogistics(TestPostlogisticsCommon):
             }
         )
         self.picking.partner_id = recipient
-        customer = self.service_class._prepare_recipient(self.picking)
+        customer = self.picking.postlogistics_label_prepare_recipient()
         self.assertEqual(customer["country"], "FR")
         self.assertEqual(customer["name2"], "Camptocamp SA")
 

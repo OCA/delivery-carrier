@@ -8,11 +8,10 @@ import re
 import threading
 import urllib.parse
 from datetime import datetime, timedelta
-from io import BytesIO
 from json import JSONDecodeError
 
 import requests
-from PIL import Image
+from typing_extensions import deprecated
 
 from odoo.exceptions import UserError
 
@@ -31,6 +30,21 @@ DISALLOWED_CHARS_MAPPING = {
     "\u2018": "'",
     "\u2019": "'",
 }
+
+
+def sanitize_string(value, mapping=None):
+    """Remove disallowed characters ("|", "\", "<", ">", "’", "‘") from a string
+
+    :param value: string to sanitize
+    :param mapping: dict of disallowed characters to remove
+    :return: sanitized string
+
+    """
+    mapping = mapping or DISALLOWED_CHARS_MAPPING
+    value = value or ""
+    for char, repl in mapping.items():
+        value = value.replace(char, repl)
+    return value
 
 
 class PostlogisticsWebService:
@@ -71,122 +85,6 @@ class PostlogisticsWebService:
             return lang_code
         return "en"
 
-    def _prepare_recipient(self, picking):
-        """Create a ns0:Recipient as a dict from a partner
-
-        :param partner: partner browse record
-        :return a dict containing data for ns0:Recipient
-
-        """
-        partner = picking.partner_id
-        if picking.picking_type_id.code != "outgoing":
-            location_dest = picking.location_dest_id
-            partner = (
-                location_dest.company_id.partner_id
-                or self.env.user.company_id.partner_id
-            )
-
-        partner_mobile = self._sanitize_string(
-            picking.delivery_mobile or partner.mobile
-        )
-        partner_phone = self._sanitize_string(picking.delivery_phone or partner.phone)
-
-        if partner.postlogistics_notification == "email" and not partner.email:
-            raise UserError(picking.env._("Email is required for notification."))
-        elif partner.postlogistics_notification == "sms" and not partner_mobile:
-            raise UserError(
-                picking.env._("Mobile number is required for sms notification.")
-            )
-        elif partner.postlogistics_notification == "phone" and not partner_phone:
-            raise UserError(
-                picking.env._("Phone number is required for phone call notification.")
-            )
-
-        if not partner.street:
-            raise UserError(picking.env._("Partner street is required."))
-
-        if not partner.name and not partner.parent_id.name:
-            raise UserError(picking.env._("Partner name is required."))
-
-        if not partner.zip:
-            raise UserError(picking.env._("Partner zip is required."))
-
-        if not partner.city:
-            raise UserError(picking.env._("Partner city is required."))
-
-        partner_name = partner.name or partner.parent_id.name
-        sanitized_partner_name = self._sanitize_string(partner_name)
-        partner_street = self._sanitize_string(partner.street)
-        partner_zip = self._sanitize_string(partner.zip)
-        partner_city = self._sanitize_string(partner.city)
-        recipient = {
-            "name1": sanitized_partner_name[:35],
-            "street": partner_street[:35],
-            "zip": partner_zip[:10],
-            "city": partner_city[:35],
-        }
-
-        if partner.country_id.code:
-            country_code = self._sanitize_string(partner.country_id.code.upper())
-            recipient["country"] = country_code
-
-        if partner.street2:
-            # addressSuffix is shown before street on label
-            recipient["addressSuffix"] = recipient["street"]
-            recipient["street"] = self._sanitize_string(partner.street2[:35])
-
-        company_partner_name = partner.commercial_company_name
-        if company_partner_name and company_partner_name != partner_name:
-            parent_name = self._sanitize_string(partner.parent_id.name)
-            recipient["name2"] = parent_name[:35]
-            recipient["personallyAddressed"] = False
-
-        # Phone and / or mobile should only be displayed if instruction to
-        # Notify delivery by telephone is set
-        if partner.postlogistics_notification == "email":
-            recipient["email"] = self._sanitize_string(partner.email)
-        elif partner.postlogistics_notification == "phone":
-            recipient["phone"] = self._sanitize_string(partner_phone)
-            if partner_mobile:
-                recipient["mobile"] = partner_mobile
-        elif partner.postlogistics_notification == "sms":
-            recipient["mobile"] = partner_mobile
-
-        return recipient
-
-    def _prepare_customer(self, picking):
-        """Create a ns0:Customer as a dict from picking
-
-        This is the PostLogistics Customer, thus the sender
-
-        :param picking: picking browse record
-        :return a dict containing data for ns0:Customer
-
-        """
-        company = picking.company_id
-        partner = company.partner_id
-        if picking.picking_type_id.code != "outgoing":
-            partner = picking.partner_id
-
-        partner_name = partner.name or partner.parent_id.name
-        if not partner_name:
-            raise UserError(picking.env._("Customer name is required."))
-        customer = {
-            "name1": self._sanitize_string(partner_name)[:25],
-            "street": self._sanitize_string(partner.street)[:25],
-            "zip": self._sanitize_string(partner.zip)[:10],
-            "city": self._sanitize_string(partner.city)[:25],
-            "country": partner.country_id.code,
-            "domicilePostOffice": picking.carrier_id.postlogistics_office or None,
-        }
-        logo = picking.carrier_id.postlogistics_logo
-        if logo:
-            logo_image = Image.open(BytesIO(base64.b64decode(logo)))
-            logo_format = logo_image.format
-            customer["logo"] = logo.decode()
-            customer["logoFormat"] = logo_format
-        return customer
-
     def _get_label_layout(self, picking):
         """
         Get Label layout define in carrier
@@ -215,66 +113,6 @@ class PostlogisticsWebService:
         franking_license = picking.carrier_id.postlogistics_license_id
         return franking_license.number
 
-    def _prepare_attributes(
-        self, picking, pack=None, pack_num=None, pack_total=None, pack_weight=None
-    ):
-        package_type = (
-            pack
-            and pack.package_type_id
-            or picking.carrier_id.postlogistics_default_package_type_id
-        )
-        package_codes = package_type._get_shipper_package_code_list()
-
-        if pack_weight:
-            total_weight = pack_weight
-        else:
-            total_weight = pack.shipping_weight if pack else picking.shipping_weight
-        total_weight *= 1000
-
-        if not package_codes:
-            raise UserError(
-                picking.env._(
-                    "No PostLogistics packaging services found "
-                    "in package type {package_type_name}, for picking {picking_name}."
-                ).format(package_type_name=package_type.name, picking_name=picking.name)
-            )
-
-        # Activate phone notification ZAW3213
-        # if phone call notification is set on partner
-        if picking.partner_id.postlogistics_notification == "phone":
-            package_codes.append("ZAW3213")
-
-        attributes = {
-            "weight": int(total_weight),
-        }
-
-        # Remove the services if the delivery fixed date is not set
-        if "ZAW3217" in package_codes:
-            if picking.delivery_fixed_date:
-                attributes["deliveryDate"] = picking.delivery_fixed_date
-            else:
-                package_codes.remove("ZAW3217")
-
-        # parcelNo / parcelTotal cannot be used if service ZAW3218 is not activated
-        if "ZAW3218" in package_codes:
-            if pack_total > 1:
-                attributes.update(
-                    {"parcelTotal": pack_total - 1, "parcelNo": pack_num - 1}
-                )
-            else:
-                package_codes.remove("ZAW3218")
-
-        if "ZAW3219" in package_codes and picking.delivery_place:
-            attributes["deliveryPlace"] = picking.delivery_place
-        if picking.carrier_id.postlogistics_proclima_logo:
-            attributes["proClima"] = True
-        else:
-            attributes["proClima"] = False
-
-        attributes["przl"] = package_codes
-
-        return attributes
-
     def _get_itemid(self, picking, package):
         """Allowed characters are alphanumeric plus `+`, `-` and `_`
         Last `+` separates picking name and package number (if any)
@@ -290,28 +128,21 @@ class PostlogisticsWebService:
         codes = [name, pack_no]
         return "+".join(c for c in codes if c)
 
-    def _cash_on_delivery(self, picking, package=None):
-        amount = (package or picking).postlogistics_cod_amount()
-        amount = f"{amount:.2f}"
-        return [{"Type": "NN_BETRAG", "Value": amount}]
+    def _prepare_data(
+        self, lang, frankingLicense, post_customer, labelDefinition, item
+    ):
+        return {
+            "language": lang.upper(),
+            "frankingLicense": frankingLicense,
+            "ppFranking": False,
+            "customer": post_customer,
+            "customerSystem": None,
+            "labelDefinition": labelDefinition,
+            "sendingID": None,
+            "item": item,
+        }
 
-    def _get_item_additional_data(self, picking, package=None):
-        if package and not package.package_type_id:
-            raise UserError(
-                picking.env._("The package %s must have a package type.") % package.name
-            )
-
-        result = []
-        packaging_codes = (
-            package and package.package_type_id._get_shipper_package_code_list() or []
-        )
-
-        if set(packaging_codes) & {"BLN", "N"}:
-            cod_attributes = self._cash_on_delivery(picking, package=package)
-            result += cod_attributes
-        return result
-
-    def _get_item_number(self, picking, package):
+    def _get_item_number(self, picking, package, index=1):
         """Generate the tracking reference for the last 8 digits
         of tracking number of the label.
 
@@ -321,7 +152,9 @@ class PostlogisticsWebService:
         e.g. 03000042 for 3rd pack of picking OUT/19000042
         """
         picking_num = _compile_itemnum.sub("", picking.name)
-        package_number = self.get_package_number_hook(package)
+        package_number = picking.get_package_number_hook(package)
+        if not package_number:
+            package_number = index
         return "%02d%s" % (package_number, picking_num[-6:].zfill(6))
 
     def _prepare_item_list(self, picking, recipient, packages):
@@ -329,7 +162,7 @@ class PostlogisticsWebService:
         carrier = picking.carrier_id
         item_list = []
 
-        def add_item(package_number=1, package=None):
+        def add_item(index=1, package=None):
             assert picking or package
             itemid = self._get_itemid(picking, package)
             item = {
@@ -344,7 +177,7 @@ class PostlogisticsWebService:
                     picking_num = _compile_itemnum.sub("", picking.name)
                     item_number = f"9{picking_num[-7:].zfill(7)}"
                 else:
-                    item_number = self._get_item_number(picking, package_number)
+                    item_number = self._get_item_number(picking, package, index)
                 item["itemNumber"] = item_number
 
             additional_data = self._get_item_additional_data(picking, package=package)
@@ -354,8 +187,10 @@ class PostlogisticsWebService:
             item_list.append(item)
 
         total_packages = len(packages)
-        for package in packages:
-            package_number = self.get_package_number_hook(package)
+        for index, package in enumerate(packages):
+            package_number = picking.get_package_number_hook(package)
+            if not package_number:
+                package_number = index + 1
             attributes = self._prepare_attributes(
                 picking, package, package_number, total_packages
             )
@@ -401,20 +236,6 @@ class PostlogisticsWebService:
             "imageFileType": output_format,
             "imageResolution": image_resolution,
             "printPreview": False,
-        }
-
-    def _prepare_data(
-        self, lang, frankingLicense, post_customer, labelDefinition, item
-    ):
-        return {
-            "language": lang.upper(),
-            "frankingLicense": frankingLicense,
-            "ppFranking": False,
-            "customer": post_customer,
-            "customerSystem": None,
-            "labelDefinition": labelDefinition,
-            "sendingID": None,
-            "item": item,
         }
 
     @classmethod
@@ -499,13 +320,6 @@ class PostlogisticsWebService:
 
             cls.access_token_expiry = now + timedelta(seconds=response["expires_in"])
             return cls.access_token
-
-    def _sanitize_string(self, value):
-        """Removes disallowed chars ("|", "\", "<", ">", "’", "‘") from strings."""
-        value = value or ""
-        for char, repl in DISALLOWED_CHARS_MAPPING.items():
-            value = value.replace(char, repl)
-        return value
 
     def generate_label(self, picking, packages):
         """Generate a label for a picking
@@ -601,6 +415,73 @@ class PostlogisticsWebService:
             results.append(res)
         return results
 
-    def get_package_number_hook(self, package):
-        """Hook method to customize the package number retrieval"""
-        return package
+    # These methods could be overridden in a custom module, thus if several
+    # modules are installed but not chained properly, the last one will be used.
+    # Meaning if you doesn't inherit from the last module, this module override
+    # will not be used. This is a big issue in a modular environment, thus we
+    # need to provide a better way to allow to override these methods by
+    # implementing them in the picking model.
+
+    @deprecated(
+        "This method will be removed in version > 18.0. Please use \
+`stock.picking::postlogistics_label_cash_on_delivery` instead."
+    )
+    def _cash_on_delivery(self, picking, package=None):
+        # TODO: remove this method in versions > 18.0
+        return picking.postlogistics_label_cash_on_delivery(package=package)
+
+    @deprecated(
+        "This method will be removed in version > 18.0. Please use \
+`stock.picking::postlogistics_label_get_item_additional_data` instead."
+    )
+    def _get_item_additional_data(self, picking, package=None):
+        # TODO: remove this method in versions > 18.0 and reimplement current
+        #  behavior inside stock.picking::postlogistics_label_get_item_additional_data
+        if package and not package.package_type_id:
+            raise UserError(
+                self.env._("The package %s must have a package type.") % package.name
+            )
+        result = picking.postlogistics_label_get_item_additional_data(package=package)
+        packaging_codes = (
+            package and package.package_type_id._get_shipper_package_code_list() or []
+        )
+        if set(packaging_codes) & {"BLN", "N"}:
+            cod_attributes = self._cash_on_delivery(picking, package=package)
+            result += cod_attributes
+        return result
+
+    @deprecated(
+        "This method will be removed in version > 18.0. \
+Please use global `sanitize_string` instead."
+    )
+    def _sanitize_string(self, value, mapping=None):
+        # TODO: remove this method in versions > 18.0
+        return sanitize_string(value, mapping)
+
+    @deprecated(
+        "This method will be removed in version > 18.0. Please use \
+`stock.picking::postlogistics_label_prepare_attributes` instead."
+    )
+    def _prepare_attributes(
+        self, picking, pack=None, pack_num=None, pack_total=None, pack_weight=None
+    ):
+        # TODO: remove this method in versions > 18.0
+        return picking.postlogistics_label_prepare_attributes(
+            pack=pack, pack_num=pack_num, pack_total=pack_total, pack_weight=pack_weight
+        )
+
+    @deprecated(
+        "This method will be removed in version > 18.0. Please use \
+`stock.picking::postlogistics_label_prepare_customer` instead."
+    )
+    def _prepare_customer(self, picking):
+        # TODO: remove this method in versions > 18.0
+        return picking.postlogistics_label_prepare_customer()
+
+    @deprecated(
+        "This method will be removed in version > 18.0. Please use \
+`stock.picking::postlogistics_label_prepare_recipient` instead."
+    )
+    def _prepare_recipient(self, picking):
+        # TODO: remove this method in versions > 18.0
+        return picking.postlogistics_label_prepare_recipient()
