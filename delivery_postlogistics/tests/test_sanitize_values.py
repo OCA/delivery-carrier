@@ -46,18 +46,16 @@ class TestSanitizeValues(TestPostlogisticsCommon):
             )
 
     def test_sanitize(self):
-        customer = self.service_class._prepare_customer(self.picking)
+        customer = self.picking.postlogistics_label_prepare_customer()
         self.check_strings_in_dict(customer)
-        recipient = self.service_class._prepare_recipient(self.picking)
+        recipient = self.picking.postlogistics_label_prepare_recipient()
         self.check_strings_in_dict(recipient)
         packages = self.picking._get_quant_packages_from_picking()
         item_list = self.service_class._prepare_item_list(
             self.picking, recipient, packages
         )
         self.check_strings_in_list(item_list)
-        attributes = self.service_class._prepare_attributes(
-            self.picking, packages, 1, 1
-        )
+        attributes = self.picking.postlogistics_label_prepare_attributes(packages, 1, 1)
         self.check_strings_in_dict(attributes)
 
     def test_cleanup_error_message(self):
