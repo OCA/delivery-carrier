@@ -1,7 +1,10 @@
 # Copyright 2018-2023 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo.tests import Form, common, tagged
+from odoo.tests import Form, tagged
+from odoo.tools import mute_logger
+
+from odoo.addons.base.tests.common import BaseCommon
 
 
 def _execute_onchanges(records, field_name):
@@ -12,20 +15,10 @@ def _execute_onchanges(records, field_name):
 
 
 @tagged("post_install", "-at_install")
-class TestDeliveryAutoRefresh(common.TransactionCase):
+class TestDeliveryAutoRefresh(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
-        if not cls.env.company.chart_template_id:
-            # Load a CoA if there's none in current company
-            coa = cls.env.ref("l10n_generic_coa.configurable_chart_template", False)
-            if not coa:
-                # Load the first available CoA
-                coa = cls.env["account.chart.template"].search(
-                    [("visible", "=", True)], limit=1
-                )
-            coa.try_loading(company=cls.env.company, install_demo=False)
         cls.env.user.write(
             {
                 "groups_id": [
@@ -34,7 +27,7 @@ class TestDeliveryAutoRefresh(common.TransactionCase):
             }
         )
         service = cls.env["product.product"].create(
-            {"name": "Service Test", "type": "service"}
+            {"name": "Service Test", "detailed_type": "service"}
         )
         pricelist = cls.env["product.pricelist"].create(
             {"name": "Test pricelist", "currency_id": cls.env.company.currency_id.id}
@@ -74,7 +67,12 @@ class TestDeliveryAutoRefresh(common.TransactionCase):
             price_rule_form.list_base_price = 50
         cls.carrier_2 = carrier_form.save()
         cls.product = cls.env["product.product"].create(
-            {"name": "Test product", "weight": 10, "list_price": 20}
+            {
+                "name": "Test product",
+                "detailed_type": "consu",
+                "weight": 10,
+                "list_price": 20,
+            }
         )
         cls.partner = cls.env["res.partner"].create(
             {
@@ -147,8 +145,15 @@ class TestDeliveryAutoRefresh(common.TransactionCase):
         self.order.action_confirm()
         picking = self.order.picking_ids
         picking.action_assign()
-        picking.move_line_ids[0].qty_done = 2
-        picking._action_done()
+        picking.move_ids.quantity = 2
+        backorder_wiz = picking.button_validate()
+        backorder_wiz = Form(
+            self.env[backorder_wiz["res_model"]].with_context(
+                **backorder_wiz["context"]
+            )
+        ).save()
+        backorder_wiz.process()
+        self.assertEqual(picking.state, "done")
         line_delivery = self.order.order_line.filtered("is_delivery")
         self.assertEqual(line_delivery.price_unit, 50)
 
@@ -158,7 +163,7 @@ class TestDeliveryAutoRefresh(common.TransactionCase):
         product_fixed_price = self.env["product.product"].create(
             {
                 "name": "Test carrier fixed price auto refresh",
-                "type": "service",
+                "detailed_type": "service",
             }
         )
         carrier_form = Form(self.env["delivery.carrier"])
@@ -175,11 +180,12 @@ class TestDeliveryAutoRefresh(common.TransactionCase):
         ).save()
         wiz.button_confirm()
         self.order.action_confirm()
-        self.order.action_done()  # Lock order to check writing protection disabling
+        self.order.action_lock()  # Lock order to check writing protection disabling
         picking = self.order.picking_ids
         picking.action_assign()
-        picking.move_line_ids[0].qty_done = 2
-        picking._action_done()
+        picking.move_ids.quantity = 2
+        picking.button_validate()
+        self.assertEqual(picking.state, "done")
         line_delivery = self.order.order_line.filtered("is_delivery")
         self.assertEqual(line_delivery.price_unit, 2)
 
@@ -197,8 +203,15 @@ class TestDeliveryAutoRefresh(common.TransactionCase):
         self.order.action_confirm()
         picking = self.order.picking_ids
         picking.action_assign()
-        picking.move_line_ids[0].qty_done = 2
-        picking._action_done()
+        picking.move_ids.quantity = 2
+        backorder_wiz = picking.button_validate()
+        backorder_wiz = Form(
+            self.env[backorder_wiz["res_model"]].with_context(
+                **backorder_wiz["context"]
+            )
+        ).save()
+        backorder_wiz.process()
+        self.assertEqual(picking.state, "done")
         line_delivery = self.order.order_line.filtered("is_delivery")
         self.assertEqual(line_delivery.price_unit, 60)
 
@@ -215,8 +228,8 @@ class TestDeliveryAutoRefresh(common.TransactionCase):
     def _validate_picking(self, picking):
         """Helper method to confirm the pickings"""
         for line in picking.move_ids:
-            line.quantity_done = line.product_uom_qty
-        picking._action_done()
+            line.quantity = line.product_uom_qty
+        picking.button_validate()
 
     def _return_whole_picking(self, picking, to_refund=True):
         """Helper method to create a return of the original picking. It could
@@ -229,7 +242,7 @@ class TestDeliveryAutoRefresh(common.TransactionCase):
             )
         )
         return_wiz = return_wiz_form.save()
-        return_wiz.product_return_moves.quantity = picking.move_ids.quantity_done
+        return_wiz.product_return_moves.quantity = picking.move_ids.quantity
         return_wiz.product_return_moves.to_refund = to_refund
         res = return_wiz.create_returns()
         return_picking = self.env["stock.picking"].browse(res["res_id"])
@@ -246,7 +259,7 @@ class TestDeliveryAutoRefresh(common.TransactionCase):
         if invoice:
             self.order._create_invoices()
         if lock:
-            self.order.action_done()
+            self.order.action_lock()
         self._return_whole_picking(self.order.picking_ids, to_refund)
         return line_delivery
 
@@ -259,7 +272,7 @@ class TestDeliveryAutoRefresh(common.TransactionCase):
 
     def test_auto_refresh_so_and_return_no_invoiced_locked(self):
         """The delivery line is voided as all conditions apply when the return
-        is made. We overrided the locked state in this case"""
+        is made. We overrided the locked field in this case"""
         line_delivery = self._test_autorefresh_void_line(lock=True)
         self.assertEqual(line_delivery.price_unit, 0)
         self.assertEqual(line_delivery.product_uom_qty, 0)
@@ -289,6 +302,7 @@ class TestDeliveryAutoRefresh(common.TransactionCase):
         sale_form.save()
         return self.order.order_line.filtered("is_delivery")
 
+    @mute_logger("odoo.models.unlink")
     def test_auto_refresh_so_and_unlink_line(self):
         """The return wasn't flagged to refund, so the delivered qty won't
         change, thus the delivery line shouldn't be either"""
@@ -304,7 +318,7 @@ class TestDeliveryAutoRefresh(common.TransactionCase):
         self.settings.sale_auto_add_delivery_line = True
         self.settings.set_values()
         service = self.env["product.product"].create(
-            {"name": "Service Test", "type": "service"}
+            {"name": "Service Test", "detailed_type": "service"}
         )
         order_form = Form(self.env["sale.order"])
         order_form.partner_id = self.partner
@@ -317,10 +331,12 @@ class TestDeliveryAutoRefresh(common.TransactionCase):
         delivery_line = order.order_line.filtered("is_delivery")
         self.assertFalse(delivery_line.exists())
 
+    @mute_logger("odoo.models.unlink")
     def test_auto_refresh_so_and_manually_unlink_delivery_line(self):
         """Manually remove the delivery line"""
-        self._test_autorefresh_unlink_line()
+        delivery_line = self._test_autorefresh_unlink_line()
         sale_form = Form(self.order)
         # Deleting the delivery line
         sale_form.order_line.remove(1)
         sale_form.save()
+        self.assertFalse(delivery_line.exists())

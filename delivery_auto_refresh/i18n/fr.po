@@ -100,7 +100,3 @@ msgid ""
 msgstr ""
 "Annuler la ligne des frais d'expédition lorsque la livraison est retournée "
 "avant la facturation"
-
-#, fuzzy
-#~ msgid "Sale Order"
-#~ msgstr "Bon de commande"

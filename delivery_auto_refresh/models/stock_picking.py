@@ -24,12 +24,12 @@ class StockPicking(models.Model):
         so_line = so_line.with_context(delivery_auto_refresh_override_locked=True)
         if self.carrier_id.delivery_type == "base_on_rule":
             total = weight = volume = quantity = 0
-            for move_line in self.move_line_ids.filtered("qty_done"):
+            for move_line in self.move_line_ids.filtered("quantity"):
                 if not move_line.product_id:
                     continue
                 move = move_line.move_id
                 qty = move.product_uom._compute_quantity(
-                    move_line.qty_done,
+                    move_line.quantity,
                     move_line.product_id.uom_id,
                 )
                 weight += (move_line.product_id.weight or 0.0) * qty
