@@ -9,82 +9,9 @@ from odoo import api, fields, models
 class SaleOrder(models.Model):
     _inherit = "sale.order"
 
-    # Migration note: This field is not used anymore and can be dropped in later versions
-    available_carrier_ids = fields.Many2many(
-        comodel_name="delivery.carrier",
-        compute="_compute_available_carrier_ids",
-    )
-
-    @api.depends("partner_shipping_id")
-    def _compute_available_carrier_ids(self):
-        """We want to apply the same carriers filter in the header as in the wizard"""
-        for sale in self:
-            wizard = self.env["choose.delivery.carrier"].new({"order_id": sale.id})
-            sale.available_carrier_ids = wizard.available_carrier_ids._origin
-
-    # End migration note
-
-    # Migration Note 17.0: move this section to module sale_order_carrier_auto_assign
-    def _set_delivery_carrier(
-        self, set_delivery_line=True, preserve_order_carrier=True
-    ):
-        """Automatically change delivery carrier.
-
-        :param set_delivery_line: It will create or update the delivery line
-        :param preserve_order_carrier: It will respect the carrier set on the order
-        """
-        for order in self:
-            delivery_wiz_action = order.action_open_delivery_wizard()
-            delivery_wiz_context = delivery_wiz_action.get("context", {})
-            if not delivery_wiz_context.get("default_carrier_id"):
-                continue
-            delivery_wiz = (
-                self.env[delivery_wiz_action.get("res_model")]
-                .with_context(**delivery_wiz_context)
-                .new({})
-            )
-
-            # Do not override carrier
-            if preserve_order_carrier and order.carrier_id:
-                delivery_wiz.carrier_id = order.carrier_id
-
-            # If the carrier isn't allowed, we won't default to it
-            if (
-                delivery_wiz.carrier_id
-                not in delivery_wiz.available_carrier_ids._origin
-            ):
-                continue
-
-            if not set_delivery_line or order.is_all_service:
-                # Only set the carrier
-                if order.carrier_id != delivery_wiz.carrier_id:
-                    order.carrier_id = delivery_wiz.carrier_id
-            else:
-                delivery_wiz._get_shipment_rate()
-                delivery_wiz.button_confirm()
-
-    @api.onchange("partner_id", "partner_shipping_id")
-    def _add_delivery_carrier_on_partner_change(self):
-        partner = self.partner_shipping_id or self.partner_id
-        if not partner:
-            return
-        if self.company_id.sale_auto_assign_carrier_on_create:
-            self._set_delivery_carrier(
-                set_delivery_line=False,
-                preserve_order_carrier=False,
-            )
-
-    def _is_auto_set_carrier_on_create(self):
-        self.ensure_one()
-        if self.state not in ("draft", "sent"):
-            return False
-        return self.company_id.sale_auto_assign_carrier_on_create
-
-    # End migration note
-
     def _is_auto_add_delivery_line(self):
-        # When we have the context 'website_id' it means that we are doing the order from
-        # e-commerce. So we don't want to add the delivery line automatically.
+        # When we have the context 'website_id' it means that we are doing the order
+        # from e-commerce. So we don't want to add the delivery line automatically.
         if self.env.context.get("website_id"):
             return False
         return self.company_id.sale_auto_add_delivery_line
@@ -95,7 +22,7 @@ class SaleOrder(models.Model):
         new_vals = {}
         for f, val in values.items():
             field_def = delivery_line._fields.get(f)
-            if isinstance(field_def, (fields.One2many, fields.Many2many)):
+            if isinstance(field_def, fields.One2many | fields.Many2many):
                 # Tax is set with a SET command
                 clear = update = False
                 for cmd in val:
@@ -162,24 +89,16 @@ class SaleOrder(models.Model):
     @api.model_create_multi
     def create(self, vals_list):
         # Prevent to refresh delivery in the call to super
-        orders = (
-            super(SaleOrder, self.with_context(auto_refresh_delivery=True))
-            .create(vals_list)
-            .with_context(auto_refresh_delivery=False)
-        )
-        for order in orders:
-            # Migration Note 17.0: move this to module sale_order_carrier_auto_assign
-            if not order.carrier_id and order._is_auto_set_carrier_on_create():
-                order._set_delivery_carrier()
-            # End migration note
+        self = self.with_context(auto_refresh_delivery=True)
+        orders = super().create(vals_list)
+        for order in orders.with_context(auto_refresh_delivery=False):
             order._auto_refresh_delivery()
         return orders
 
     def write(self, vals):
         # Prevent to refresh delivery in the call to super
-        res = super(SaleOrder, self.with_context(auto_refresh_delivery=True)).write(
-            vals
-        )
+        _self = self.with_context(auto_refresh_delivery=True)
+        res = super(SaleOrder, _self).write(vals)
         for order in self:
             order._auto_refresh_delivery()
         return res
@@ -203,7 +122,7 @@ class SaleOrder(models.Model):
         # were not set to refund.
         qty_delivered = sum(
             self.order_line.filtered(
-                lambda x: not x.is_delivery and x.product_id.type != "service"
+                lambda x: not x.is_delivery and x.product_id.detailed_type != "service"
             ).mapped("qty_delivered")
         )
         # There must be validated pickings
@@ -212,7 +131,7 @@ class SaleOrder(models.Model):
         # nothing to be done either. If there are more than one delivery lines
         # we won't be doing anything as well.
         if (
-            self.state not in ("done", "sale")
+            self.state != "sale"
             or self.invoice_ids
             or not self.order_line.filtered("is_delivery")
             or len(self.order_line.filtered("is_delivery")) > 1
@@ -235,17 +154,15 @@ class SaleOrderLine(models.Model):
 
     @api.model_create_multi
     def create(self, vals_list):
-        lines = super(
-            SaleOrderLine, self.with_context(auto_refresh_delivery=True)
-        ).create(vals_list)
+        self = self.with_context(auto_refresh_delivery=True)
+        lines = super().create(vals_list)
         for order in lines.order_id:
             order._auto_refresh_delivery()
         return lines
 
     def write(self, vals):
-        res = super(SaleOrderLine, self.with_context(auto_refresh_delivery=True)).write(
-            vals
-        )
+        self = self.with_context(auto_refresh_delivery=True)
+        res = super().write(vals)
         for order in self.order_id:
             order._auto_refresh_delivery()
         return res

@@ -94,7 +94,3 @@ msgstr ""
 msgid ""
 "Void the shipping cost line when the delivery is returned before invoicing"
 msgstr ""
-
-#, fuzzy
-#~ msgid "Sale Order"
-#~ msgstr "Ordem de Venda"

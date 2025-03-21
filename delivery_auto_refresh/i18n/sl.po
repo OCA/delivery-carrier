@@ -96,6 +96,3 @@ msgstr ""
 msgid ""
 "Void the shipping cost line when the delivery is returned before invoicing"
 msgstr ""
-
-#~ msgid "Sale Order"
-#~ msgstr "Prodajni nalog"

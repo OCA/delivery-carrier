@@ -95,28 +95,3 @@ msgstr "Anular líneas de entrega automáticamente"
 msgid ""
 "Void the shipping cost line when the delivery is returned before invoicing"
 msgstr ""
-
-#~ msgid "Add Delivery Line Automatically"
-#~ msgstr "Añadir línea de entrega automáticamente"
-
-#~ msgid "Add delivery line automatically"
-#~ msgstr "Añadir línea de entrega automáticamente"
-
-#~ msgid "Auto void delivery line"
-#~ msgstr "Línea de entrega de anulación automática"
-
-#~ msgid "Refresh After Picking Automatically"
-#~ msgstr "Actualizar automáticamente después de la recogida"
-
-#~ msgid "Refresh after picking automatically"
-#~ msgstr "Actualizar automáticamente después de la recogida"
-
-#~ msgid "Set Default Carrier Automatically"
-#~ msgstr "Establecer automáticamente el transportista predeterminado"
-
-#~ msgid "Set default carrier automatically"
-#~ msgstr "Establecer automáticamente el transportista predeterminado"
-
-#, fuzzy
-#~ msgid "Sale Order"
-#~ msgstr "Pedido de venta"
