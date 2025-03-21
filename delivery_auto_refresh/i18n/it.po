@@ -103,37 +103,3 @@ msgid ""
 msgstr ""
 "Annullare la riga costo spedizione quando la consegna è resa prima della "
 "fatturazione"
-
-#~ msgid "Add Delivery Line Automatically"
-#~ msgstr "Aggiunge automaticamente la riga consegna"
-
-#~ msgid "Add delivery line automatically"
-#~ msgstr "Aggiunge automaticamente la riga consegna"
-
-#~ msgid "Auto void delivery line"
-#~ msgstr "Svuota automaticamente la riga consegna"
-
-#~ msgid "Refresh After Picking Automatically"
-#~ msgstr "Aggiorna automaticamente dopo il prelievo"
-
-#~ msgid "Refresh after picking automatically"
-#~ msgstr "Aggiorna automaticamente dopo il prelievo"
-
-#~ msgid "Set Default Carrier Automatically"
-#~ msgstr "Imposta il vettore predefinito automaticamente"
-
-#~ msgid "Set default carrier automatically"
-#~ msgstr "Imposta il vettore predefinito automaticamente"
-
-#~ msgid "Delivery Method"
-#~ msgstr "Metodo di consegna"
-
-#~ msgid ""
-#~ "Fill this field if you plan to invoice the shipping based on picking."
-#~ msgstr ""
-#~ "Valorizza questo campo se intendi fatturare la spedizione basata sul "
-#~ "trasferimento."
-
-#, fuzzy
-#~ msgid "Sale Order"
-#~ msgstr "Ordini vendita"

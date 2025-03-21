@@ -101,27 +101,3 @@ msgid ""
 msgstr ""
 "Anular a linha de custo de envio quando a entrega for devolvida antes do "
 "faturamento"
-
-#~ msgid "Add Delivery Line Automatically"
-#~ msgstr "Adicionar linha de entrega automaticamente"
-
-#~ msgid "Add delivery line automatically"
-#~ msgstr "Adicionar linha de entrega automaticamente"
-
-#~ msgid "Auto void delivery line"
-#~ msgstr "Linha de entrega automática anulada"
-
-#~ msgid "Refresh After Picking Automatically"
-#~ msgstr "Atualizar após escolher automaticamente"
-
-#~ msgid "Refresh after picking automatically"
-#~ msgstr "Atualizar após escolher automaticamente"
-
-#~ msgid "Set Default Carrier Automatically"
-#~ msgstr "Definir operadora padrão automaticamente"
-
-#~ msgid "Set default carrier automatically"
-#~ msgstr "Definir operadora padrão automaticamente"
-
-#~ msgid "Sale Order"
-#~ msgstr "Ordem de Venda"
