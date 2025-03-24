@@ -20,7 +20,7 @@ def implemented_by_carrier(func):
 
     @wraps(func)
     def wrapper(cls, *args, **kwargs):
-        fun_name = func.__name__
+        method_name = func.__name__
 
         def get_delivery_type(cls, *args, **kwargs):
             if hasattr(cls, "delivery_type"):
@@ -34,9 +34,9 @@ def implemented_by_carrier(func):
                 return cls[0].carrier_id.delivery_type
 
         delivery_type = get_delivery_type(cls, *args, **kwargs)
-        fun = f"_{delivery_type}{fun_name}"
-        if not hasattr(cls, fun):
-            fun = "_roulier%s" % (fun_name)
-        return getattr(cls, fun)(*args, **kwargs)
+        method = f"_{delivery_type}{method_name}"
+        if not hasattr(cls, method):
+            method = f"_roulier{method_name}"
+        return getattr(cls, method)(*args, **kwargs)
 
     return wrapper
