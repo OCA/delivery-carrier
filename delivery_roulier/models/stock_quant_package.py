@@ -21,22 +21,30 @@ class StockQuantPackage(models.Model):
     _inherit = "stock.quant.package"
 
     carrier_id = fields.Many2one("delivery.carrier", string="Carrier")
+    parcel_tracking = fields.Char()
+    parcel_tracking_uri = fields.Char(
+        help="Link to the carrier's tracking page for this package."
+    )
 
-    # helper : move it to base ?
-    def get_operations(self):
-        """Get operations of the package.
-
-        Usefull for having products and quantities
-        """
-        self.ensure_one()
-        return self.env["stock.move.line"].search(
-            [
-                ("product_id", "!=", False),
-                "|",
-                ("package_id", "=", self.id),
-                ("result_package_id", "=", self.id),
-            ]
-        )
+    # Seems useless now, drop it, we can just have picking.move_line_ids
+    # all stock.move.line have a product_id and in roulier we check that all
+    # stock.move.line have a result_package_id...
+    # I keep the method commented until submodules using it are migrated.
+    # remove it at next migration
+    #    def get_operations(self):
+    #        """Get operations of the package.
+    #
+    #        Usefull for having products and quantities
+    #        """
+    #        self.ensure_one()
+    #        return self.env["stock.move.line"].search(
+    #            [
+    #                ("product_id", "!=", False),
+    #                "|",
+    #                ("package_id", "=", self.id),
+    #                ("result_package_id", "=", self.id),
+    #            ]
+    #        )
 
     # API
     # Each method in this class have at least picking arg to directly
@@ -102,17 +110,16 @@ class StockQuantPackage(models.Model):
             # price is not managed in roulier...not yet at least
             "exact_price": 0.0,
         }
-        parcels_data = []
         parcels = response.get("parcels")
         tracking_refs = []
         for parcel in parcels:
             tracking_number = parcel.get("tracking", {}).get("number")
             if tracking_number and tracking_number not in tracking_refs:
                 tracking_refs.append(tracking_number)
-            # expected format by base_delivery_carrier_label module
+            # expected format by delivery_carrier_shipping_label module
             label = parcel.get("label")
-            # find for which package the label is. tracking number will be updated on
-            # this pack later on (in base_delivery_carrier_label)
+            # find for which package the label is in order to update tracking of the
+            # package
             package_id = False
             ref = parcel.get("reference")
             if len(self) == 1:
@@ -121,20 +128,24 @@ class StockQuantPackage(models.Model):
                 pack = self.filtered(lambda p, ref=ref: p.name == ref)
                 if len(pack) == 1:
                     package_id = pack.id
+            if package_id:
+                self.env["stock.quant.package"].browse(package_id).write(
+                    {
+                        "parcel_tracking": tracking_number,
+                        "parcel_tracking_uri": parcel.get("tracking", {}).get(
+                            "url", False
+                        ),
+                    }
+                )
             name_prefix = ref or tracking_number or label.get("name")
             name_suffix = label.get("type", "").lower()
-            parcels_data.append(
-                {
-                    "tracking_number": tracking_number,
-                    "parcel_tracking_uri": parcel.get("tracking", {}).get("url", False),
-                    "package_id": package_id,
-                    "file": label.get("data"),
-                    "name": f"{name_prefix}.{name_suffix}",
-                    "file_type": label.get("type"),
-                }
-            )
+            attachment_label_vals = {
+                "file": label.get("data"),
+                "name": f"{name_prefix}.{name_suffix}",
+                "file_type": label.get("type"),
+            }
+            picking.attach_shipping_label(attachment_label_vals)
         res["tracking_number"] = ";".join(tracking_refs)
-        res["labels"] = parcels_data
         return res
 
     def _roulier_get_parcels(self, picking):
@@ -194,6 +205,10 @@ class StockQuantPackage(models.Model):
     # default implementations
     def _roulier_get_parcel(self, picking):
         self.ensure_one()
+        # Context is used in stock.quant.package._get_weight
+        # could be usefull if we try to print label before the picking is done
+        # (and then before the package contains quants)
+        self = self.with_context(picking_id=picking.id)
         weight = self.shipping_weight or self.weight
         parcel = {"weight": weight, "reference": self.name}
         return parcel

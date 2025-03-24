@@ -10,3 +10,10 @@ class FakeDeliveryCarrier(models.Model):
     delivery_type = fields.Selection(
         selection_add=[("test", "Test Carrier")], ondelete={"test": "set default"}
     )
+
+
+class Package(models.Model):
+    _inherit = "stock.quant.package"
+
+    def _test_get_tracking_link(self):
+        return f"http://www.test.com/{self.parcel_tracking}"

@@ -66,7 +66,6 @@ class StockPicking(models.Model):
 
     # End of API.
 
-    # Implementations for base_delivery_carrier_label
     def _is_roulier(self):
         self.ensure_one()
         return self.carrier_id._is_roulier()
@@ -78,7 +77,6 @@ class StockPicking(models.Model):
         {
             'exact_price': 0.0,
             'tracking_number': "concatenated numbers",
-            'labels': list of dict of labels, managed by base_delivery_carrier_label
         }
         """
         label_info = []
@@ -95,7 +93,9 @@ class StockPicking(models.Model):
                     )
                     % picking.name
                 )
-            label_info.append(picking.package_ids._generate_labels(picking))
+            label_info.append(
+                picking.move_line_ids.result_package_id._generate_labels(picking)
+            )
         return label_info
 
     # Default implementations of _roulier_*()
@@ -151,7 +151,7 @@ class StockPicking(models.Model):
         Return:
             label format (string)
         """
-        return getattr(account, "%s_file_format" % self.delivery_type, None)
+        return getattr(account, f"{self.delivery_type}_file_format", None)
 
     def _roulier_get_receiver(self, package=None):
         """The guy whom the shippment is for.
@@ -253,7 +253,7 @@ class StockPicking(models.Model):
         shipping_date = self._get_shipping_date(package)
 
         service = {
-            "product": self.carrier_code,
+            "product": self.carrier_id.code,
             "shippingDate": shipping_date,
             "labelFormat": self._get_label_format(account),
         }
@@ -275,7 +275,7 @@ class StockPicking(models.Model):
         if not self._is_roulier():
             return super().open_website_url()
 
-        packages = self.package_ids
+        packages = self.move_line_ids.result_package_id
         if len(packages) == 0:
             raise UserError(_("No packages found for this picking"))
         else:

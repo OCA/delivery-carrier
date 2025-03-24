@@ -1,5 +1,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
+import json
+
 from roulier import roulier
 
 from odoo import models
@@ -8,12 +10,11 @@ from odoo import models
 class DeliveryCarrier(models.Model):
     _inherit = "delivery.carrier"
 
-    def alternative_send_shipping(self, pickings):
+    def send_shipping(self, pickings):
         self.ensure_one()
         if self._is_roulier():
             return pickings._roulier_generate_labels()
-        else:
-            return super().alternative_send_shipping(pickings)
+        return super().send_shipping(pickings)
 
     def _is_roulier(self):
         self.ensure_one()
@@ -26,19 +27,25 @@ class DeliveryCarrier(models.Model):
         else:
             return super().cancel_shipment(pickings)
 
-    # For now we keep our own roulier method _get_tracking_link instead of the
-    # native one because the roulier logic is on packages when the Odoo logic
-    # is on picking. An we could have multiple urls for 1 picking, if there
-    # are multiple package...
-    # Maybe we will merge all this in future versions
     def get_tracking_link(self, picking):
         if not self._is_roulier():
             return super().get_tracking_link(picking)
-        packages = picking.package_ids
+        packages = picking.move_line_ids.result_package_id
         if not packages:
             return ""
-        first_package = packages[0]
-        return first_package._get_tracking_link()
+        tracking_urls = []
+        for package in packages:
+            tracking_link = package._get_tracking_link()
+            if tracking_link and tracking_link not in tracking_urls:
+                tracking_urls.append(tracking_link)
+        if not tracking_urls:
+            return ""
+        else:
+            return (
+                tracking_urls[0]
+                if len(tracking_urls) == 1
+                else json.dumps(tracking_urls)
+            )
 
     def rate_shipment(self, order):
         res = super().rate_shipment(order)
