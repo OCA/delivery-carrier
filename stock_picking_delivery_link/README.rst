@@ -28,8 +28,9 @@ Stock Picking Delivery Link
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-This module adds a link to the delivery (and its carrier) on all intermediate
-operations (from a pick or a pack in a pick/pack/ship setup for instance).
+This module adds a link to the delivery (and its carrier) on all
+intermediate operations (from a pick or a pack in a pick/pack/ship setup
+for instance).
 
 **Table of contents**
 
@@ -50,19 +51,19 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * Camptocamp
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* Sébastien Alix <sebastien.alix@camptocamp.com>
-* Fernando La Chica - GreenIce <fernandolachica@gmail.com>
-* Hughes Damry <hughes.damry@acsone.eu>
+- Sébastien Alix <sebastien.alix@camptocamp.com>
+- Fernando La Chica - GreenIce <fernandolachica@gmail.com>
+- Hughes Damry <hughes.damry@acsone.eu>
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 
