@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="view_picking_type_form">
+        <field name="model">stock.picking.type</field>
+        <field name="inherit_id" ref="stock.view_picking_type_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='locations']" position="after">
+                <group string="Number of packages">
+                    <field name="avoid_set_number_of_packages" />
+                    <field
+                        name="force_set_number_of_packages"
+                        invisible="avoid_set_number_of_packages"
+                    />
+                    <field name="report_number_of_packages" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
