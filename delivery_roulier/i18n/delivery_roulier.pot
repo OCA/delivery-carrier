@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -16,7 +16,6 @@ msgstr ""
 #. module: delivery_roulier
 #. odoo-python
 #: code:addons/delivery_roulier/models/stock_quant_package.py:0
-#, python-format
 msgid "Bad input: %s\n"
 msgstr ""
 
@@ -26,22 +25,46 @@ msgid "Carrier"
 msgstr ""
 
 #. module: delivery_roulier
-#. odoo-python
-#: code:addons/delivery_roulier/models/stock_picking.py:0
-#, python-format
-msgid "No account available with name '%s' for this carrier"
+#: model_terms:ir.ui.view,arch_db:delivery_roulier.view_quant_package_tree
+msgid "Carrier Tracking URL"
+msgstr ""
+
+#. module: delivery_roulier
+#: model:ir.model.fields,help:delivery_roulier.field_stock_quant_package__parcel_tracking_uri
+msgid "Link to the carrier's tracking page for this package."
 msgstr ""
 
 #. module: delivery_roulier
 #. odoo-python
 #: code:addons/delivery_roulier/models/stock_picking.py:0
-#, python-format
+msgid "No account available with name '%s' for this carrier"
+msgstr ""
+
+#. module: delivery_roulier
+#. odoo-python
+#: code:addons/delivery_roulier/models/stock_quant_package.py:0
+msgid "No pack found for picking %s"
+msgstr ""
+
+#. module: delivery_roulier
+#. odoo-python
+#: code:addons/delivery_roulier/models/stock_picking.py:0
 msgid "No packages found for this picking"
 msgstr ""
 
 #. module: delivery_roulier
 #: model:ir.model,name:delivery_roulier.model_stock_quant_package
 msgid "Packages"
+msgstr ""
+
+#. module: delivery_roulier
+#: model:ir.model.fields,field_description:delivery_roulier.field_stock_quant_package__parcel_tracking
+msgid "Parcel Tracking"
+msgstr ""
+
+#. module: delivery_roulier
+#: model:ir.model.fields,field_description:delivery_roulier.field_stock_quant_package__parcel_tracking_uri
+msgid "Parcel Tracking Uri"
 msgstr ""
 
 #. module: delivery_roulier
@@ -52,7 +75,6 @@ msgstr ""
 #. module: delivery_roulier
 #. odoo-python
 #: code:addons/delivery_roulier/models/stock_quant_package.py:0
-#, python-format
 msgid ""
 "Roulier library Exception for '%(carrier)s' carrier:\n"
 "\n"
@@ -70,7 +92,6 @@ msgstr ""
 #. module: delivery_roulier
 #. odoo-python
 #: code:addons/delivery_roulier/models/stock_picking.py:0
-#, python-format
 msgid ""
 "Some products have no destination package in picking %s, please add a "
 "destination package in order to be able to generate the carrier label."
@@ -79,8 +100,12 @@ msgstr ""
 #. module: delivery_roulier
 #. odoo-python
 #: code:addons/delivery_roulier/models/stock_quant_package.py:0
-#, python-format
 msgid "The tracking url is not available."
+msgstr ""
+
+#. module: delivery_roulier
+#: model_terms:ir.ui.view,arch_db:delivery_roulier.view_quant_package_form
+msgid "Tracking"
 msgstr ""
 
 #. module: delivery_roulier
