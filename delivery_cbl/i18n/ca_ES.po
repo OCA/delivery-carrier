@@ -1,0 +1,229 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* delivery_cbl
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-04-02 14:23+0000\n"
+"PO-Revision-Date: 2025-04-02 16:38+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ca_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.4\n"
+
+#. module: delivery_cbl
+#: model_terms:ir.ui.view,arch_db:delivery_cbl.report_cbl_manifest
+msgid "<strong>Contact</strong>"
+msgstr "<strong>Contacte</strong>"
+
+#. module: delivery_cbl
+#: model_terms:ir.ui.view,arch_db:delivery_cbl.report_cbl_manifest
+msgid "<strong>Date</strong>"
+msgstr "<strong>Data</strong>"
+
+#. module: delivery_cbl
+#: model_terms:ir.ui.view,arch_db:delivery_cbl.report_cbl_manifest
+msgid "<strong>Delivery Date</strong>"
+msgstr "<strong>Data lliurament</strong>"
+
+#. module: delivery_cbl
+#: model_terms:ir.ui.view,arch_db:delivery_cbl.report_cbl_manifest
+msgid "<strong>Number of pickings</strong>"
+msgstr "<strong>Nombre albarans</strong>"
+
+#. module: delivery_cbl
+#: model_terms:ir.ui.view,arch_db:delivery_cbl.report_cbl_manifest
+msgid "<strong>Packages</strong>"
+msgstr "<strong>Paquets</strong>"
+
+#. module: delivery_cbl
+#: model_terms:ir.ui.view,arch_db:delivery_cbl.report_cbl_manifest
+msgid "<strong>Picking</strong>"
+msgstr "<strong>Albarà</strong>"
+
+#. module: delivery_cbl
+#: model_terms:ir.ui.view,arch_db:delivery_cbl.report_cbl_manifest
+msgid "<strong>Total of packages</strong>"
+msgstr "<strong>Total paquets</strong>"
+
+#. module: delivery_cbl
+#: model_terms:ir.ui.view,arch_db:delivery_cbl.report_cbl_manifest
+msgid "<strong>Total weight</strong>"
+msgstr "<strong>Pes total</strong>"
+
+#. module: delivery_cbl
+#: model_terms:ir.ui.view,arch_db:delivery_cbl.report_cbl_manifest
+msgid "<strong>Tracking</strong>"
+msgstr "<strong>Seguiment</strong>"
+
+#. module: delivery_cbl
+#: model_terms:ir.ui.view,arch_db:delivery_cbl.report_cbl_manifest
+msgid "<strong>Weight</strong>"
+msgstr "<strong>Peso</strong>"
+
+#. module: delivery_cbl
+#: model_terms:ir.ui.view,arch_db:delivery_cbl.cbl_view_picking_form
+msgid "Are you sure you want to confirm this CBL shipping?"
+msgstr "Segur que vols confirmar l'enviament de CBL?"
+
+#. module: delivery_cbl
+#: model:ir.model.fields.selection,name:delivery_cbl.selection__delivery_carrier__delivery_type__cbl
+#: model_terms:ir.ui.view,arch_db:delivery_cbl.cbl_view_delivery_carrier_form
+msgid "CBL"
+msgstr ""
+
+#. module: delivery_cbl
+#. odoo-python
+#: code:addons/delivery_cbl/models/delivery_carrier.py:0
+#, python-format
+msgid "CBL Expedition confirmed."
+msgstr "Expedició CBL confirmada"
+
+#. module: delivery_cbl
+#: model:ir.actions.report,name:delivery_cbl.action_cbl_manifest
+#: model_terms:ir.ui.view,arch_db:delivery_cbl.report_cbl_manifest
+msgid "CBL Manifest"
+msgstr "Manifest CBL"
+
+#. module: delivery_cbl
+#. odoo-python
+#: code:addons/delivery_cbl/models/delivery_carrier.py:0
+#, python-format
+msgid "CBL Parcel Expedition with reference %(tracking)s cancelled."
+msgstr "L'expedició de CBL amb referència %(tracking)s s'ha cancel·lat."
+
+#. module: delivery_cbl
+#. odoo-python
+#: code:addons/delivery_cbl/models/cbl_request.py:0
+#, python-format
+msgid ""
+"CBL Shipping for picking %(picking)s could not be created. Reason: "
+"%(reason)s"
+msgstr ""
+"L'enviament de CBL per a l'albarà %(picking)s no s'ha creat. Raó: %(reason)s"
+
+#. module: delivery_cbl
+#. odoo-python
+#: code:addons/delivery_cbl/models/delivery_carrier.py:0
+#, python-format
+msgid "CBL label(s) created."
+msgstr "Etiqueta/es CBL creades."
+
+#. module: delivery_cbl
+#: model:ir.actions.server,name:delivery_cbl.cbl_confirm_shipments_cron_ir_actions_server
+msgid "CBL: Confirm Shipments"
+msgstr "CBL: Confirmar expedicions"
+
+#. module: delivery_cbl
+#: model:ir.model.fields,field_description:delivery_cbl.field_delivery_carrier__cbl_cash_on_delivery
+msgid "Cash On Delivery"
+msgstr "Contra reembossament"
+
+#. module: delivery_cbl
+#: model:ir.model.fields,field_description:delivery_cbl.field_stock_picking__cbl_confirmed
+msgid "Cbl Confirmed"
+msgstr "CBL confirmat"
+
+#. module: delivery_cbl
+#: model:ir.model.fields,field_description:delivery_cbl.field_delivery_carrier__cbl_client_code
+msgid "Client Code"
+msgstr "Codi client"
+
+#. module: delivery_cbl
+#: model:ir.model.fields,field_description:delivery_cbl.field_delivery_carrier__cbl_client_token
+msgid "Client Token"
+msgstr "Token client"
+
+#. module: delivery_cbl
+#: model_terms:ir.ui.view,arch_db:delivery_cbl.cbl_view_picking_form
+msgid "Confirm"
+msgstr "Confirmar"
+
+#. module: delivery_cbl
+#: model:ir.model,name:delivery_cbl.model_manifest_wizard
+msgid "Delivery carrier manifest wizard"
+msgstr "Assistent de manifest de transportista"
+
+#. module: delivery_cbl
+#: model:ir.model.fields,help:delivery_cbl.field_delivery_carrier__cbl_needs_confirmation
+msgid ""
+"If checked, expeditions need to be confirmed after the tracking number is "
+"generated to be officially introduced in CBL pending shipments database."
+msgstr ""
+"Si està marcat, les expedicions necessiten confirmació després que es "
+"genere el número de seguiment perquè siga oficialment introduït a la base "
+"de dades de CBL."
+
+#. module: delivery_cbl
+#: model:ir.model.fields,help:delivery_cbl.field_delivery_carrier__cbl_cash_on_delivery
+msgid ""
+"If checked, it means that the carrier is paid with cash. It assumes there "
+"is a sale order linked and it will use that total amount as the value to be "
+"paid"
+msgstr ""
+"Si està marcat, significa que el transportista se li paga en cash. "
+"S'assumeix que n'hi ha una ordre de venda relacionada i s'utilitzarà la "
+"quantitat total com el valor que s'ha de pagar"
+
+#. module: delivery_cbl
+#. odoo-python
+#: code:addons/delivery_cbl/wizard/manifest_wizard.py:0
+#, python-format
+msgid "Manifest"
+msgstr ""
+
+#. module: delivery_cbl
+#: model:ir.model.fields,field_description:delivery_cbl.field_delivery_carrier__cbl_needs_confirmation
+msgid "Needs Confirmation"
+msgstr "Necessita confirmació"
+
+#. module: delivery_cbl
+#: model:ir.model.fields,field_description:delivery_cbl.field_delivery_carrier__cbl_password
+msgid "Password"
+msgstr "Contrassenya"
+
+#. module: delivery_cbl
+#: model:ir.model.fields,field_description:delivery_cbl.field_delivery_carrier__delivery_type
+msgid "Provider"
+msgstr "Proveïdor"
+
+#. module: delivery_cbl
+#: model:ir.model,name:delivery_cbl.model_delivery_carrier
+msgid "Shipping Methods"
+msgstr "Mètodes d'enviament"
+
+#. module: delivery_cbl
+#. odoo-python
+#: code:addons/delivery_cbl/wizard/manifest_wizard.py:0
+#, python-format
+msgid "There are no pickings to proceed"
+msgstr "No s'han trobat albarans"
+
+#. module: delivery_cbl
+#: model:ir.model,name:delivery_cbl.model_stock_picking
+msgid "Transfer"
+msgstr "Transferència"
+
+#. module: delivery_cbl
+#. odoo-python
+#: code:addons/delivery_cbl/models/delivery_carrier.py:0
+#, python-format
+msgid ""
+"Unable to cancel CBL Expedition with reference %(tracking)s. Please, make "
+"sure that the reference is correct and the expedition has not been already "
+"canceled."
+msgstr ""
+"No s'ha pogut cancel·lar l'expedició CBL amb referència %(tracking)s. Si us "
+"plau, assegura't que la referència és correcta i que l'expedició no s'ha "
+"cancel·lat prèviament."
+
+#. module: delivery_cbl
+#: model:ir.model.fields,field_description:delivery_cbl.field_delivery_carrier__cbl_user
+msgid "User"
+msgstr "Usuari"

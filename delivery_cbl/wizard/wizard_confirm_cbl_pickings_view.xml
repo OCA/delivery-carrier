@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 Ángel Rivas <angel.rivas@sygel.es>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="wizard_confirm_cbl_pickings" model="ir.ui.view">
+        <field name="name">wizard.confirm.cbl.pickings.form</field>
+        <field name="model">wizard.confirm.cbl.pickings</field>
+        <field name="arch" type="xml">
+            <form string="Confirm CBL pickings">
+                <group>
+                    <field name="picking_ids" readonly="1">
+                        <tree>
+                            <field name="company_id" column_invisible="1" />
+                            <field name="name" />
+                            <field name="state" />
+                            <field name="partner_id" />
+                            <field name="carrier_tracking_ref" />
+                            <field name="carrier_id" />
+                        </tree>
+                    </field>
+                </group>
+                <footer>
+                    <button
+                        name="action_confirm_cbl_pickings"
+                        string="Confirm Shipments"
+                        type="object"
+                        class="btn-primary"
+                    />
+                    <button string="Close" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_wizard_confirm_cbl_pickings" model="ir.actions.act_window">
+        <field name="name">Confirm pickings</field>
+        <field name="res_model">wizard.confirm.cbl.pickings</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="delivery_cbl.wizard_confirm_cbl_pickings" />
+        <field name="target">new</field>
+    </record>
+    <record
+        id="server_action_open_wizard_confirm_cbl_pickings"
+        model="ir.actions.server"
+    >
+        <field name="name">Confirm CBL pickings</field>
+        <field name="model_id" ref="stock.model_stock_picking" />
+        <field name="binding_model_id" ref="stock.model_stock_picking" />
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">
+            action = records.action_open_wizard_confirm_cbl_pickings()
+        </field>
+    </record>
+</odoo>
