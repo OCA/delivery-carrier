@@ -3,7 +3,7 @@
 {
     "name": "Delivery Purchase Label",
     "summary": "Allows printing carrier delivery labels for a dropshipping vendor.",
-    "version": "14.0.1.0.0",
+    "version": "14.0.1.1.0",
     "category": "Delivery",
     "website": "https://github.com/OCA/delivery-carrier",
     "author": "Camptocamp, BCIM, Odoo Community Association (OCA)",
