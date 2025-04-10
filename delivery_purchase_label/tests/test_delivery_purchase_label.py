@@ -1,4 +1,5 @@
 # Copyright 2024 Camptocamp SA
+# Copyright 2025 Raumschmiede GmbH
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
 from odoo.tests.common import SavepointCase
@@ -22,7 +23,12 @@ class TestDeliveryPurchaseLabel(SavepointCase):
         cls.carrier.purchase_label_picking_type = cls.picking_type
 
         cls.product = cls.env.ref("product.product_product_5")
-        cls.order = cls.env["purchase.order"].create(
+        cls.product2 = cls.env.ref("product.product_product_6")
+        cls.order = cls._create_purchase_order(cls.product)
+
+    @classmethod
+    def _create_purchase_order(cls, products):
+        po = cls.env["purchase.order"].create(
             {
                 "partner_id": cls.supplier.id,
                 "dest_address_id": cls.customer.id,
@@ -32,17 +38,21 @@ class TestDeliveryPurchaseLabel(SavepointCase):
                         0,
                         0,
                         {
-                            "name": cls.product.name,
-                            "product_id": cls.product.id,
+                            "name": product.name,
+                            "product_id": product.id,
                             "product_qty": 5.0,
-                            "product_uom": cls.product.uom_id.id,
+                            "product_uom": product.uom_id.id,
                             "price_unit": 10,
                         },
                     )
+                    for product in products
                 ],
             }
         )
-        cls.order.order_line._onchange_quantity()
+        for line in po.order_line:
+            line._onchange_quantity()
+
+        return po
 
     def _create_fake_label_attachment(self, linked_to):
         return self.env["ir.attachment"].create(
@@ -98,3 +108,36 @@ class TestDeliveryPurchaseLabel(SavepointCase):
         self.order._generate_purchase_delivery_label()
         self.order.button_cancel()
         self.assertTrue(self.order.delivery_label_picking_id.state == "cancel")
+
+    def test_label_picking_stock_moves(self):
+        self.order._generate_purchase_delivery_label()
+        self.assertEqual(
+            self.order.delivery_label_picking_id.move_lines.delivery_label_purchase_line_id,
+            self.order.order_line,
+        )
+        self.order = self._create_purchase_order(self.product2 | self.product)
+        self.order._generate_purchase_delivery_label()
+        moves = self.order.delivery_label_picking_id.move_lines
+        self.assertEqual(
+            moves[0].delivery_label_purchase_line_id, self.order.order_line[0]
+        )
+        self.assertEqual(
+            moves[1].delivery_label_purchase_line_id, self.order.order_line[1]
+        )
+
+        self.order = self._create_purchase_order(
+            [self.product, self.product2, self.product]
+        )
+        self.order._generate_purchase_delivery_label()
+        moves = self.order.delivery_label_picking_id.move_lines
+        # Moves must not be merged because they reference different label PO lines
+        self.assertEqual(len(moves), 3)
+        self.assertEqual(
+            moves[0].delivery_label_purchase_line_id, self.order.order_line[0]
+        )
+        self.assertEqual(
+            moves[1].delivery_label_purchase_line_id, self.order.order_line[1]
+        )
+        self.assertEqual(
+            moves[2].delivery_label_purchase_line_id, self.order.order_line[2]
+        )

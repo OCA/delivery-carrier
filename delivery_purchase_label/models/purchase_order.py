@@ -109,11 +109,20 @@ class PurchaseOrder(models.Model):
             subtype_id=self.env.ref("mail.mt_note").id,
         )
 
+    def _create_stock_moves_for_delivery_label_picking(self, picking):
+        res = self.env["stock.move"]
+        for line in self.order_line:
+            moves = line._create_stock_moves(picking)
+            moves.delivery_label_purchase_line_id = line
+            res |= moves
+
+        return res
+
     def _create_purchase_delivery_label_picking(self, carrier):
         self.ensure_one()
         values = self._get_purchase_delivery_label_picking_value(carrier)
         picking = self.env["stock.picking"].with_user(SUPERUSER_ID).create(values)
-        moves = self.order_line._create_stock_moves(picking)
+        moves = self._create_stock_moves_for_delivery_label_picking(picking)
         moves.location_id = picking.location_id
         moves.location_dest_id = picking.location_dest_id
         # Remove the link on the sale and purchase
