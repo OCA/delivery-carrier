@@ -19,6 +19,11 @@ msgid "Delivery Label Picking"
 msgstr ""
 
 #. module: delivery_purchase_label
+#: model:ir.model.fields,field_description:delivery_purchase_label.field_stock_move__delivery_label_purchase_line_id
+msgid "Delivery Label Purchase Order Line"
+msgstr ""
+
+#. module: delivery_purchase_label
 #: model:ir.model.fields,field_description:delivery_purchase_label.field_stock_picking__delivery_label_purchase_id
 msgid "Delivery label purchase order"
 msgstr ""
@@ -27,6 +32,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_purchase_label.field_delivery_carrier__display_name
 #: model:ir.model.fields,field_description:delivery_purchase_label.field_mail_compose_message__display_name
 #: model:ir.model.fields,field_description:delivery_purchase_label.field_purchase_order__display_name
+#: model:ir.model.fields,field_description:delivery_purchase_label.field_stock_move__display_name
 #: model:ir.model.fields,field_description:delivery_purchase_label.field_stock_picking__display_name
 msgid "Display Name"
 msgstr ""
@@ -45,6 +51,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_purchase_label.field_delivery_carrier__id
 #: model:ir.model.fields,field_description:delivery_purchase_label.field_mail_compose_message__id
 #: model:ir.model.fields,field_description:delivery_purchase_label.field_purchase_order__id
+#: model:ir.model.fields,field_description:delivery_purchase_label.field_stock_move__id
 #: model:ir.model.fields,field_description:delivery_purchase_label.field_stock_picking__id
 msgid "ID"
 msgstr ""
@@ -53,6 +60,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_purchase_label.field_delivery_carrier____last_update
 #: model:ir.model.fields,field_description:delivery_purchase_label.field_mail_compose_message____last_update
 #: model:ir.model.fields,field_description:delivery_purchase_label.field_purchase_order____last_update
+#: model:ir.model.fields,field_description:delivery_purchase_label.field_stock_move____last_update
 #: model:ir.model.fields,field_description:delivery_purchase_label.field_stock_picking____last_update
 msgid "Last Modified on"
 msgstr ""
@@ -70,6 +78,11 @@ msgstr ""
 #. module: delivery_purchase_label
 #: model:ir.model,name:delivery_purchase_label.model_delivery_carrier
 msgid "Shipping Methods"
+msgstr ""
+
+#. module: delivery_purchase_label
+#: model:ir.model,name:delivery_purchase_label.model_stock_move
+msgid "Stock Move"
 msgstr ""
 
 #. module: delivery_purchase_label
