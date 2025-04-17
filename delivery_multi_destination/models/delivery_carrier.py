@@ -71,6 +71,14 @@ class DeliveryCarrier(models.Model):
                     return super(
                         DeliveryCarrier, subcarrier,
                     ).rate_shipment(order)
+        return {
+            "success": False,
+            "price": 0.0,
+            "error_message": _(
+                "Error: this delivery method is not available for this address."
+            ),
+            "warning_message": False,
+        }
 
     def send_shipping(self, pickings):
         """We have to override this method for redirecting the result to the
