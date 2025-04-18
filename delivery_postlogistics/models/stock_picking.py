@@ -280,6 +280,13 @@ Please use _get_quant_packages_from_picking instead."
             and pack.package_type_id
             or self.carrier_id.postlogistics_default_package_type_id
         )
+        if not package_type:
+            raise UserError(
+                self.env._(
+                    "No package type found either for the package "
+                    f"or for the {self.carrier_id.name} delivery method."
+                )
+            )
         package_codes = package_type._get_shipper_package_code_list()
 
         if pack_weight:

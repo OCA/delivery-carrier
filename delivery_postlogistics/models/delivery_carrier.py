@@ -17,6 +17,7 @@ class DeliveryCarrier(models.Model):
     postlogistics_default_package_type_id = fields.Many2one(
         "stock.package.type",
         domain=[("package_carrier_type", "=", "postlogistics")],
+        default=lambda self: self._default_postlogistics_default_package_type_id(),
     )
     postlogistics_endpoint_url = fields.Char(
         string="Endpoint URL",
@@ -94,14 +95,12 @@ class DeliveryCarrier(models.Model):
         string="ZPL Patch String", default="^XA^CW0,E:TT0003M_.TTF^XZ^XA^CI28"
     )
 
-    def default_get(self, fields_list):
-        res = super().default_get(fields_list)
-        if package_type := self.env.ref(
+    @api.model
+    def _default_postlogistics_default_package_type_id(self):
+        return self.env.ref(
             "delivery_postlogistics.postlogistics_default_package_type",
             raise_if_not_found=False,
-        ):
-            res["postlogistics_default_package_type_id"] = package_type.id
-        return res
+        )
 
     @api.onchange("prod_environment")
     def onchange_prod_environment(self):
