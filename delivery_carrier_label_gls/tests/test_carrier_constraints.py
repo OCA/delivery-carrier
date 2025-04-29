@@ -34,6 +34,10 @@ class TestCarrierConstraints(TestGLS):
     def test_url_prod(self):
         values = self._get_gls_carrier_vals()
         values["prod_environment"] = True  # gls_url is already missing
+        #with self.assertRaises(ValidationError):
+        print("VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV", values)
+        rec = self.env["delivery.carrier"].create(values)
+        rec.unlink()
         with self.assertRaises(ValidationError):
             self.env["delivery.carrier"].create(values)
 

@@ -110,6 +110,7 @@ class DeliveryCarrier(models.Model):
     @api.constrains("delivery_type", "prod_environment", "gls_url", "gls_url_test")
     def _check_gls_url(self):
         for rec in self.filtered(lambda c: c.delivery_type == "gls"):
+            print("CCCCCCCCCCCC", rec.delivery_type, rec.prod_environment, rec.gls_url)
             if not rec.prod_environment and not rec.gls_url_test:
                 raise ValidationError(
                     _("The GLS field 'Test Service Url' is required in test mode")
