@@ -122,7 +122,7 @@ class StockPickingBatch(models.Model):
             )
         pickings.write({"carrier_id": self.carrier_id.id})
         # Delivery Roulier works with packages, so we need to generate a package
-        # if it doesn't exist, this is simalar to action_put_in_pack but without
+        # if it doesn't exist, this is similar to action_put_in_pack but without
         # the checks
         picking_move_lines = self.move_line_ids
         move_line_ids = picking_move_lines.filtered(
@@ -132,7 +132,9 @@ class StockPickingBatch(models.Model):
             > 0
             and not ml.result_package_id
         )
-        if not move_line_ids:
+        if not move_line_ids and not picking_move_lines.filtered(
+            lambda ml: ml.result_package_id
+        ):
             move_line_ids = picking_move_lines.filtered(
                 lambda ml: float_compare(
                     ml.product_uom_qty,
