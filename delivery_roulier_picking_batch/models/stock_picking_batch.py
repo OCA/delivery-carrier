@@ -56,12 +56,6 @@ class StockPickingBatch(models.Model):
                     lambda s: s.partner_id == record.partner_id
                 )
 
-    @api.constrains("carrier_id")
-    def _check_carrier_id_is_roulier(self):
-        for batch in self:
-            if batch.carrier_id and not batch.carrier_id._is_roulier():
-                raise UserError(_("Only Roulier carrier is supported"))
-
     def _compute_weight_uom_name(self):
         for package in self:
             package.weight_uom_name = self.env[
@@ -93,15 +87,19 @@ class StockPickingBatch(models.Model):
     def cancel_shipment(self):
         for batch in self:
             batch.carrier_id.cancel_shipment(self)
-            msg = "Shipment %s cancelled" % batch.carrier_tracking_ref
+            msg = _("Shipment %(ref)s cancelled") % {"ref": batch.carrier_tracking_ref}
             batch.message_post(body=msg)
             batch.carrier_tracking_ref = False
             batch.sent_package_ids = [(5, 0, 0)]
 
     def action_done(self):
-        if not self.carrier_id or not (
-            self.carrier_id.integration_level == "rate_and_ship"
-            and self.picking_type_id.code != "incoming"
+        if (
+            not self.carrier_id
+            or not (
+                self.carrier_id.integration_level == "rate_and_ship"
+                and self.picking_type_id.code != "incoming"
+            )
+            or not self.carrier_id._is_roulier()
         ):
             return super().action_done()
 

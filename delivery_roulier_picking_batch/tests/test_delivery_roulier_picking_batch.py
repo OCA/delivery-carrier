@@ -181,5 +181,10 @@ class TestDeliveryRoulierPickingBatch(TestDeliveryRoulierPickingBatchCommon):
     def test_delivery_roulier_picking_batch_not_roulier(self):
         self.confirm_batch()
         self.assertFalse(self.batch.picking_ids.package_ids)
-        with self.assertRaisesRegex(UserError, "Only Roulier carrier is supported"):
-            self.batch.carrier_id = self.env.ref("delivery.normal_delivery_carrier").id
+        self.batch.carrier_id = self.env.ref("delivery.normal_delivery_carrier").id
+        self.batch.action_done()
+        pkg = self.batch.picking_ids.package_ids
+        self.assertEqual(len(pkg), 0)
+        self.assertFalse(self.picking_client_1.carrier_tracking_ref)
+        self.assertFalse(self.picking_client_2.carrier_tracking_ref)
+        self.assertFalse(self.batch.carrier_tracking_ref)
