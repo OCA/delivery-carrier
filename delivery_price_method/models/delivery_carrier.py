@@ -32,7 +32,7 @@ class DeliveryCarrier(models.Model):
     def send_shipping(self, pickings):
         res = super().send_shipping(pickings)
         if self.price_method in ("fixed", "base_on_rule"):
-            rates = getattr(self, "%s_send_shipping" % self.price_method)(pickings)
+            rates = getattr(self, f"{self.price_method}_send_shipping")(pickings)
             for index, rate in enumerate(rates):
                 del rate["tracking_number"]  # remove offending key
                 res[index].update(rate)
