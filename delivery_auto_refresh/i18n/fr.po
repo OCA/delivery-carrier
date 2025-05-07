@@ -1,0 +1,102 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * delivery_auto_refresh
+#
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2018
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-03-13 03:45+0000\n"
+"PO-Revision-Date: 2024-11-06 16:06+0000\n"
+"Last-Translator: samibc2c <sami.bouzidi@camptocamp.com>\n"
+"Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 5.6.2\n"
+
+#. module: delivery_auto_refresh
+#: model_terms:ir.ui.view,arch_db:delivery_auto_refresh.res_config_settings_view_form
+msgid ""
+"After delivering a sales order, update the shipping cost line based on what "
+"has been delivered"
+msgstr ""
+"Après la livraison d'une commande, mettre à jour la ligne des frais "
+"d'expédition en fonction de ce qui a été livré"
+
+#. module: delivery_auto_refresh
+#: model:ir.model.fields,field_description:delivery_auto_refresh.field_sale_order__available_carrier_ids
+msgid "Available Carrier"
+msgstr "Transporteur disponible"
+
+#. module: delivery_auto_refresh
+#: model:ir.model,name:delivery_auto_refresh.model_res_company
+msgid "Companies"
+msgstr "Société"
+
+#. module: delivery_auto_refresh
+#: model:ir.model,name:delivery_auto_refresh.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: delivery_auto_refresh
+#: model_terms:ir.ui.view,arch_db:delivery_auto_refresh.res_config_settings_view_form
+msgid "On the sales quotation, add the shipping method on creation."
+msgstr "Sur les devis, ajouter la méthode d'expédition à la création."
+
+#. module: delivery_auto_refresh
+#: model_terms:ir.ui.view,arch_db:delivery_auto_refresh.res_config_settings_view_form
+msgid "On the sales quotation, refresh the shipping cost line when saving"
+msgstr ""
+"Sur le devis, actualiser la ligne des frais d'expédition à l'enregistrement"
+
+#. module: delivery_auto_refresh
+#: model:ir.model.fields,field_description:delivery_auto_refresh.field_res_company__sale_refresh_delivery_after_picking
+#: model:ir.model.fields,field_description:delivery_auto_refresh.field_res_config_settings__sale_refresh_delivery_after_picking
+msgid "Refresh delivery after picking automatically"
+msgstr ""
+
+#. module: delivery_auto_refresh
+#: model:ir.model.fields,field_description:delivery_auto_refresh.field_res_company__sale_auto_add_delivery_line
+#: model:ir.model.fields,field_description:delivery_auto_refresh.field_res_config_settings__sale_auto_add_delivery_line
+msgid "Refresh shipping cost line automatically"
+msgstr "Actualiser automatiquement la ligne des frais d'expédition"
+
+#. module: delivery_auto_refresh
+#: model:ir.model,name:delivery_auto_refresh.model_sale_order
+msgid "Sales Order"
+msgstr "Bon de commande"
+
+#. module: delivery_auto_refresh
+#: model:ir.model,name:delivery_auto_refresh.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Ligne de bon de commande"
+
+#. module: delivery_auto_refresh
+#: model:ir.model.fields,field_description:delivery_auto_refresh.field_res_company__sale_auto_assign_carrier_on_create
+#: model:ir.model.fields,field_description:delivery_auto_refresh.field_res_config_settings__sale_auto_assign_carrier_on_create
+msgid "Set default shipping method automatically"
+msgstr "Définir automatiquement la méthode d'expédition par défaut"
+
+#. module: delivery_auto_refresh
+#: model:ir.model,name:delivery_auto_refresh.model_stock_picking
+msgid "Transfer"
+msgstr "Transférer"
+
+#. module: delivery_auto_refresh
+#: model:ir.model.fields,field_description:delivery_auto_refresh.field_res_company__sale_auto_void_delivery_line
+#: model:ir.model.fields,field_description:delivery_auto_refresh.field_res_config_settings__sale_auto_void_delivery_line
+msgid "Void delivery lines automatically"
+msgstr "Annulation automatique des lignes de livraison"
+
+#. module: delivery_auto_refresh
+#: model_terms:ir.ui.view,arch_db:delivery_auto_refresh.res_config_settings_view_form
+msgid ""
+"Void the shipping cost line when the delivery is returned before invoicing"
+msgstr ""
+"Annuler la ligne des frais d'expédition lorsque la livraison est retournée "
+"avant la facturation"
