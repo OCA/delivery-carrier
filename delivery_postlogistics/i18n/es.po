@@ -964,9 +964,3 @@ msgstr "sPDF"
 msgid "the documentation"
 msgstr "la documentación"
 
-#, python-format
-#~ msgid ""
-#~ "No PostLogistics packaging services found in package type {package_type_name}, for picking {picking_name}."
-#~ msgstr ""
-#~ "No se encontraron servicios de embalaje de PostLogistics en el embalaje "
-#~ "{package_type_name}, para recoger {picking_name}."
