@@ -1,8 +1,9 @@
 [project]
 name = "odoo-addons-oca-delivery-carrier"
-version = "17.0.20250326.0"
+version = "17.0.20250507.0"
 dependencies = [
     "odoo-addon-base_delivery_carrier_label>=17.0dev,<17.1dev",
+    "odoo-addon-delivery_auto_refresh>=17.0dev,<17.1dev",
     "odoo-addon-delivery_carrier_account>=17.0dev,<17.1dev",
     "odoo-addon-delivery_carrier_info>=17.0dev,<17.1dev",
     "odoo-addon-delivery_carrier_manual_price>=17.0dev,<17.1dev",
