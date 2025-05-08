@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 Alberto Martínez <alberto.martinez@sygel.es>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="True">
+
+    <template id="report_global_carrier_manifest">
+        <t t-foreach="docs" t-as="doc">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <t t-set="total_packages" t-value="0" />
+                    <t t-set="total_weight" t-value="0" />
+                    <h4>Carrier Manifest</h4>
+                    <table class="table table-sm mt48">
+                        <thead>
+                            <tr style="border: none !important;">
+                                <th id="th_carrier"><strong>Carrier</strong></th>
+                                <th id="th_track"><strong>Tracking</strong></th>
+                                <th id="th_date"><strong>Date</strong></th>
+                                <th id="th_contact"><strong>Contact</strong></th>
+                                <th id="th_addr"><strong>Address</strong></th>
+                                <th id="th_d_date"><strong>Delivery Date</strong></th>
+                                <th id="th_weight"><strong>Weight</strong></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="pickings" t-as="picking">
+                                <t
+                                    t-set="total_weight"
+                                    t-value="total_weight + picking.weight"
+                                />
+                                <tr>
+                                    <td id="td_carrier"><span
+                                            t-field="picking.carrier_id.name"
+                                        /></td>
+                                    <td id="td_track"><span
+                                            t-field="picking.carrier_tracking_ref"
+                                        /></td>
+                                    <td id="td_date"><span
+                                            t-esc="picking.date_done and picking.date_done.strftime('%d/%m/%Y') or ''"
+                                        /></td>
+                                    <td id="td_contact"><span
+                                            t-field="picking.partner_id.name"
+                                        /></td>
+                                    <td id="td_addr"><span
+                                            t-field="picking.partner_id"
+                                            t-options='{"widget": "contact", "fields": ["address"], "no_marker": true}'
+                                        /></td>
+                                    <td id="td_d_date"><span
+                                            t-esc="picking.scheduled_date.strftime('%d/%m/%Y')"
+                                        /></td>
+                                    <td id="td_weight"><span
+                                            t-field="picking.weight"
+                                        /> <span
+                                            t-field="picking.weight_uom_name"
+                                        /></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                    <div class="col-3">
+                        <table class="table table-sm">
+                            <tr>
+                                <td><strong>Number of pickings</strong></td>
+                                <td class="text-end">
+                                    <span t-esc="len(pickings)" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Total of packages</strong></td>
+                                <td class="text-end">
+                                    <span t-esc="total_packages" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Total weight</strong></td>
+                                <td class="text-end">
+                                    <span t-esc="total_weight" /> <span
+                                        t-esc="pickings.env['product.template']._get_weight_uom_id_from_ir_config_parameter().name"
+                                    />
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <record id="paperformat_global_carrier_manifest" model="report.paperformat">
+        <field name="name">Global Carrier Manifest</field>
+        <field name="default" eval="True" />
+        <field name="format">A4</field>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">40</field>
+        <field name="margin_bottom">10</field>
+        <field name="margin_left">5</field>
+        <field name="margin_right">5</field>
+        <field name="header_line" eval="False" />
+        <field name="header_spacing">35</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <record id="action_global_carrier_manifest" model="ir.actions.report">
+        <field name="model">manifest.wizard</field>
+        <field name="name">Global Carrier Manifest</field>
+        <field name="report_type">qweb-pdf</field>
+        <field
+            name="report_name"
+        >delivery_carrier_global_manifest.report_global_carrier_manifest</field>
+        <field
+            name="report_file"
+        >delivery_carrier_global_manifest.report_global_carrier_manifest</field>
+        <field name="paperformat_id" ref="paperformat_global_carrier_manifest" />
+    </record>
+
+</odoo>
