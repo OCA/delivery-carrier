@@ -127,11 +127,13 @@ class PurchaseOrder(models.Model):
         moves.location_dest_id = picking.location_dest_id
         # Remove the link on the sale and purchase
         # To not impact the delivered quantity on them
-        moves.write({
-            "group_id": False,
-            "moves.sale_line_id": False,
-            "purchase_line_id": False,
-        })
+        moves.write(
+            {
+                "group_id": False,
+                "sale_line_id": False,
+                "purchase_line_id": False,
+            }
+        )
         picking.action_assign()
         for move in picking.move_lines:
             move.quantity_done = move.product_uom_qty
