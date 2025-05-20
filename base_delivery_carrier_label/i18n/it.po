@@ -52,6 +52,11 @@ msgid "Attachment URL"
 msgstr "URL allegato"
 
 #. module: base_delivery_carrier_label
+#: model_terms:ir.ui.view,arch_db:base_delivery_carrier_label.res_config_settings_view_form_inherit_delivery_carrier_label
+msgid "Automatically assign a single package before shipping"
+msgstr ""
+
+#. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_delivery_carrier_option__by_default
 msgid ""
 "By check, user can choose to apply this option to each Delivery Order\n"
@@ -101,9 +106,19 @@ msgid "Color"
 msgstr "Colore"
 
 #. module: base_delivery_carrier_label
+#: model:ir.model,name:base_delivery_carrier_label.model_res_company
+msgid "Companies"
+msgstr ""
+
+#. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__company_id
 msgid "Company"
 msgstr "Azienda"
+
+#. module: base_delivery_carrier_label
+#: model:ir.model,name:base_delivery_carrier_label.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option__create_uid
@@ -125,6 +140,12 @@ msgstr "Creato il"
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__db_datas
 msgid "Database Data"
 msgstr "Dati database"
+
+#. module: base_delivery_carrier_label
+#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_res_company__delivery_set_default_package
+#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_res_config_settings__delivery_set_default_package
+msgid "Default Packages"
+msgstr ""
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_stock_picking__carrier_code
@@ -253,14 +274,6 @@ msgstr "Inizializza"
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__public
 msgid "Is public document"
 msgstr "È un documento pubblico"
-
-#. module: base_delivery_carrier_label
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option____last_update
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_template_option____last_update
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_manifest_wizard____last_update
-#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label____last_update
-msgid "Last Modified on"
-msgstr "Ultima modifica il"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option__write_uid
@@ -461,6 +474,11 @@ msgid "Url"
 msgstr "URL"
 
 #. module: base_delivery_carrier_label
+#: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__voice_ids
+msgid "Voice"
+msgstr ""
+
+#. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_move_line__weight
 msgid "Weight"
 msgstr "Peso"
@@ -476,8 +494,18 @@ msgid ""
 "When True, help to prevent the user to modify some fields option (if "
 "attribute is defined in the view)"
 msgstr ""
-"Quando vero, aiuta a prevenire che l'utente modifichi alcune opzioni campi ("
-"se l'attributo è definito nella vista)"
+"Quando vero, aiuta a prevenire che l'utente modifichi alcune opzioni campi "
+"(se l'attributo è definito nella vista)"
+
+#. module: base_delivery_carrier_label
+#: model_terms:ir.ui.view,arch_db:base_delivery_carrier_label.res_config_settings_view_form_inherit_delivery_carrier_label
+msgid ""
+"When sending a picking to the carrier, this option ensures all items are "
+"grouped into one package if none exist. This helps shipping connectors that "
+"require at least one package for label generation or tracking. If no "
+"packages are assigned, the system will group all items into a single package "
+"before shipping."
+msgstr ""
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_shipping_label__type
@@ -504,6 +532,9 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:base_delivery_carrier_label.delivery_carrier_template_option_view_form
 msgid "delivery_carrier_option"
 msgstr "delivery_carrier_option"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Ultima modifica il"
 
 #~ msgid "Carrier Account"
 #~ msgstr "Conto vettore"
