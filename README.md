@@ -39,6 +39,7 @@ addon | version | maintainers | summary
 [delivery_postlogistics](delivery_postlogistics/) | 18.0.1.0.0 |  | Print PostLogistics shipping labels using the Barcode web service
 [delivery_postlogistics_dangerous_goods](delivery_postlogistics_dangerous_goods/) | 18.0.1.0.0 |  | Declare dangerous goods when generating postlogistics labels
 [delivery_postlogistics_server_env](delivery_postlogistics_server_env/) | 18.0.1.0.0 |  | Server Environment layer for Delivery Postlogistics
+[delivery_price_method](delivery_price_method/) | 18.0.1.0.0 |  | Force a fixed or rule price calculation on Delivery Methods, for example to override a webservice provided prices.
 [delivery_roulier](delivery_roulier/) | 18.0.1.0.0 | [![florian-dacosta](https://github.com/florian-dacosta.png?size=30px)](https://github.com/florian-dacosta) [![hparfr](https://github.com/hparfr.png?size=30px)](https://github.com/hparfr) | Integration of multiple carriers
 [partner_delivery_info](partner_delivery_info/) | 18.0.1.0.0 |  | Send delivery notice to the shipper from any operation.
 [partner_delivery_schedule](partner_delivery_schedule/) | 18.0.1.0.1 |  | Set on partners a schedule for delivery goods
