@@ -21,7 +21,12 @@ class DeliveryCarrier(models.Model):
         # Trick the method for using all the upstream code for the
         # price computation in case of using fixed or base_on_rule.
         previous_method = False
-        if self.price_method in ("fixed", "base_on_rule"):
+        if self.price_method in ("fixed", "base_on_rule") and (
+            not self.free_over
+            or not self.amount
+            or self._compute_currency(order, order.amount_total, "pricelist_to_company")
+            < self.amount
+        ):
             previous_method = self.delivery_type
             self.sudo().delivery_type = self.price_method
         res = super().rate_shipment(order)
