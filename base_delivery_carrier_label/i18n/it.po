@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-15 18:21+0000\n"
-"PO-Revision-Date: 2025-02-12 16:06+0000\n"
+"PO-Revision-Date: 2025-05-22 10:26+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__access_token
@@ -54,7 +54,7 @@ msgstr "URL allegato"
 #. module: base_delivery_carrier_label
 #: model_terms:ir.ui.view,arch_db:base_delivery_carrier_label.res_config_settings_view_form_inherit_delivery_carrier_label
 msgid "Automatically assign a single package before shipping"
-msgstr ""
+msgstr "Assegna automaticamente un collo singolo prima della spedizione"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_delivery_carrier_option__by_default
@@ -108,7 +108,7 @@ msgstr "Colore"
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Aziende"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__company_id
@@ -118,7 +118,7 @@ msgstr "Azienda"
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Impostazioni configurazione"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_delivery_carrier_option__create_uid
@@ -145,7 +145,7 @@ msgstr "Dati database"
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_res_company__delivery_set_default_package
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_res_config_settings__delivery_set_default_package
 msgid "Default Packages"
-msgstr ""
+msgstr "Colli predefiniti"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_stock_picking__carrier_code
@@ -476,7 +476,7 @@ msgstr "URL"
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_shipping_label__voice_ids
 msgid "Voice"
-msgstr ""
+msgstr "Voce"
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,field_description:base_delivery_carrier_label.field_stock_move_line__weight
@@ -506,6 +506,12 @@ msgid ""
 "packages are assigned, the system will group all items into a single package "
 "before shipping."
 msgstr ""
+"Quando si invia un prelievo al corriere, questa opzione garantisce che tutti "
+"gli articoli vengano raggruppati in un unico collo, se non ne esiste "
+"nessuno. Questo facilita i connettori di spedizione che richiedono almeno un "
+"collo per la generazione di etichette o il tracciamento. Se non viene "
+"assegnato alcun collo, il sistema raggrupperà tutti gli articoli in un unico "
+"collo prima della spedizione."
 
 #. module: base_delivery_carrier_label
 #: model:ir.model.fields,help:base_delivery_carrier_label.field_shipping_label__type
