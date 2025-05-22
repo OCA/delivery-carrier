@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-05-21 10:26+0000\n"
+"PO-Revision-Date: 2025-05-22 10:26+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -19,7 +19,7 @@ msgstr ""
 #. module: delivery_postlogistics_dangerous_goods
 #: model:ir.model.fields,field_description:delivery_postlogistics_dangerous_goods.field_stock_picking__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome visualizzato"
 
 #. module: delivery_postlogistics_dangerous_goods
 #: model:ir.model.fields,field_description:delivery_postlogistics_dangerous_goods.field_stock_picking__id
@@ -34,4 +34,4 @@ msgstr "Ultima modifica il"
 #. module: delivery_postlogistics_dangerous_goods
 #: model:ir.model,name:delivery_postlogistics_dangerous_goods.model_stock_picking
 msgid "Transfer"
-msgstr ""
+msgstr "Trasferimento"
