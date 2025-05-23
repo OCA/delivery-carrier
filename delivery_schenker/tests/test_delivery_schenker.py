@@ -42,3 +42,15 @@ class TestDeliverySchenker(TestDeliverySchenkerCommon):
             "cargoDesc"
         ] = " / ".join([picking.name, picking.move_line_ids.result_package_id.name])
         self.assertDictEqual(expected, data)
+
+    def test_fallback_parent_partner_name(self):
+        parent_partner_name = "Parent partner name"
+        parent_partner = self.partner.create({"name": parent_partner_name})
+        self.partner.parent_id = parent_partner
+        self.partner.type = "delivery"
+        self.partner.name = False
+        expected = self._prepare_schenker_shipping(self.picking)
+        expected["address"][1]["name1"] = parent_partner.name
+        expected["incotermLocation"] = self.partner.display_name[:35]
+        vals = self.carrier._prepare_schenker_shipping(self.picking)
+        self.assertDictEqual(vals, expected)
