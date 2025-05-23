@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2018 Tecnativa - Sergio Teruel
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <template id="report_picking" inherit_id="stock.report_picking">
+        <xpath expr="//div[@name='div_sched_date']" position="after">
+            <div t-if="o.delivery_zone_id" class="col">
+                <strong>Zone</strong>
+                <p t-field="o.delivery_zone_id" />
+            </div>
+        </xpath>
+    </template>
+</odoo>
