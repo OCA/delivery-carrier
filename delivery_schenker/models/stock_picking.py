@@ -13,7 +13,7 @@ class StockPicking(models.Model):
         if self.delivery_type != "schenker" or not tracking_ref:
             return
         label = self.carrier_id.schenker_get_label(tracking_ref)
-        label_name = "schenker_label_{}.pdf".format(tracking_ref)
+        label_name = f"schenker_label_{tracking_ref}.pdf"
         self.message_post(
             body=(_("Schenker label for %s") % tracking_ref),
             attachments=[(label_name, label)],
