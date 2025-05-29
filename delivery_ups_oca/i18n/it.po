@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-05-22 10:25+0000\n"
+"PO-Revision-Date: 2025-05-29 16:26+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -77,7 +77,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_ups_oca.field_product_packaging__display_name
 #: model:ir.model.fields,field_description:delivery_ups_oca.field_stock_picking__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome visualizzato"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_file_format__epl
