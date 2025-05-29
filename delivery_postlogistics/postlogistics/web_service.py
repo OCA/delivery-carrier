@@ -180,7 +180,9 @@ class PostlogisticsWebService:
                     item_number = self._get_item_number(picking, package, index)
                 item["itemNumber"] = item_number
 
-            additional_data = self._get_item_additional_data(picking, package=package)
+            additional_data = picking.postlogistics_label_get_item_additional_data(
+                package=package
+            )
             if additional_data:
                 item["additionalData"] = additional_data
 
@@ -191,12 +193,12 @@ class PostlogisticsWebService:
             package_number = picking.get_package_number_hook(package)
             if not package_number:
                 package_number = index + 1
-            attributes = self._prepare_attributes(
-                picking, package, package_number, total_packages
+            attributes = picking.postlogistics_label_prepare_attributes(
+                pack=package, pack_num=package_number, pack_total=total_packages
             )
             add_item(package_number, package=package)
         else:
-            attributes = self._prepare_attributes(picking)
+            attributes = picking.postlogistics_label_prepare_attributes()
             add_item()
         return item_list
 
@@ -345,8 +347,8 @@ class PostlogisticsWebService:
 
         # get options
         lang = self._get_language(picking.partner_id.lang)
-        post_customer = self._prepare_customer(picking)
-        recipient = self._prepare_recipient(picking)
+        post_customer = picking.postlogistics_label_prepare_customer()
+        recipient = picking.postlogistics_label_prepare_recipient()
         item_list = self._prepare_item_list(picking, recipient, packages)
         labelDefinition = self._prepare_label_definition(picking)
         frankingLicense = self._get_license(picking)
@@ -446,7 +448,9 @@ class PostlogisticsWebService:
             package and package.package_type_id._get_shipper_package_code_list() or []
         )
         if set(packaging_codes) & {"BLN", "N"}:
-            cod_attributes = self._cash_on_delivery(picking, package=package)
+            cod_attributes = picking.postlogistics_label_cash_on_delivery(
+                package=package
+            )
             result += cod_attributes
         return result
 
