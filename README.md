@@ -28,10 +28,10 @@ addon | version | maintainers | summary
 [delivery_carrier_label_default](delivery_carrier_label_default/) | 18.0.1.0.0 |  | This module defines a basic label to print when no specific carrier is selected.
 [delivery_carrier_manual_price](delivery_carrier_manual_price/) | 18.0.1.0.0 |  | Allow setting manual shipping cost in sale order.
 [delivery_carrier_manual_weight](delivery_carrier_manual_weight/) | 18.0.1.0.0 |  | Allow setting weight and shipping weight in stock transfers manually based on carrier.
-[delivery_carrier_option](delivery_carrier_option/) | 18.0.1.0.0 | [![florian-dacosta](https://github.com/florian-dacosta.png?size=30px)](https://github.com/florian-dacosta) | Delivery Carrier Option
+[delivery_carrier_option](delivery_carrier_option/) | 18.0.1.0.0 | <a href='https://github.com/florian-dacosta'><img src='https://github.com/florian-dacosta.png' width='32' height='32' style='border-radius:50%;' alt='florian-dacosta'/></a> | Delivery Carrier Option
 [delivery_carrier_partner](delivery_carrier_partner/) | 18.0.1.0.0 |  | Add a partner in the delivery carrier
 [delivery_carrier_pricelist](delivery_carrier_pricelist/) | 18.0.1.0.0 |  | Compute delivery method price based on the product's pricelist.
-[delivery_carrier_shipping_label](delivery_carrier_shipping_label/) | 18.0.1.0.0 | [![florian-dacosta](https://github.com/florian-dacosta.png?size=30px)](https://github.com/florian-dacosta) | Delivery Carrier Shipping Label
+[delivery_carrier_shipping_label](delivery_carrier_shipping_label/) | 18.0.1.0.0 | <a href='https://github.com/florian-dacosta'><img src='https://github.com/florian-dacosta.png' width='32' height='32' style='border-radius:50%;' alt='florian-dacosta'/></a> | Delivery Carrier Shipping Label
 [delivery_carrier_warehouse](delivery_carrier_warehouse/) | 18.0.1.0.1 |  | Get delivery method used in sales orders from warehouse
 [delivery_free_fee_removal](delivery_free_fee_removal/) | 18.0.1.0.0 |  | Hide free fee lines on sales orders
 [delivery_package_fee](delivery_package_fee/) | 18.0.1.0.0 |  | Add fees on sales order for delivered packages
@@ -40,7 +40,7 @@ addon | version | maintainers | summary
 [delivery_postlogistics_dangerous_goods](delivery_postlogistics_dangerous_goods/) | 18.0.1.0.0 |  | Declare dangerous goods when generating postlogistics labels
 [delivery_postlogistics_server_env](delivery_postlogistics_server_env/) | 18.0.1.0.0 |  | Server Environment layer for Delivery Postlogistics
 [delivery_price_method](delivery_price_method/) | 18.0.1.0.0 |  | Force a fixed or rule price calculation on Delivery Methods, for example to override a webservice provided prices.
-[delivery_roulier](delivery_roulier/) | 18.0.1.0.0 | [![florian-dacosta](https://github.com/florian-dacosta.png?size=30px)](https://github.com/florian-dacosta) [![hparfr](https://github.com/hparfr.png?size=30px)](https://github.com/hparfr) | Integration of multiple carriers
+[delivery_roulier](delivery_roulier/) | 18.0.1.0.0 | <a href='https://github.com/florian-dacosta'><img src='https://github.com/florian-dacosta.png' width='32' height='32' style='border-radius:50%;' alt='florian-dacosta'/></a> <a href='https://github.com/hparfr'><img src='https://github.com/hparfr.png' width='32' height='32' style='border-radius:50%;' alt='hparfr'/></a> | Integration of multiple carriers
 [delivery_state](delivery_state/) | 18.0.1.0.0 |  | Provides fields to be able to contemplate the tracking statesand also adds a global fields
 [partner_delivery_info](partner_delivery_info/) | 18.0.1.0.0 |  | Send delivery notice to the shipper from any operation.
 [partner_delivery_schedule](partner_delivery_schedule/) | 18.0.1.0.1 |  | Set on partners a schedule for delivery goods
