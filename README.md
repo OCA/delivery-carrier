@@ -23,7 +23,7 @@ addon | version | maintainers | summary
 --- | --- | --- | ---
 [base_delivery_carrier_files](base_delivery_carrier_files/) | 13.0.1.0.0 |  | Base module for creation of delivery carrier files
 [base_delivery_carrier_label](base_delivery_carrier_label/) | 13.0.2.0.0 |  | Base module for carrier labels
-[connector_routific](connector_routific/) | 13.0.1.0.0 | [![CarlosRoca13](https://github.com/CarlosRoca13.png?size=30px)](https://github.com/CarlosRoca13) | Connector for Routific Platform
+[connector_routific](connector_routific/) | 13.0.1.0.0 | <a href='https://github.com/CarlosRoca13'><img src='https://github.com/CarlosRoca13.png' width='32' height='32' style='border-radius:50%;' alt='CarlosRoca13'/></a> | Connector for Routific Platform
 [delivery_auto_refresh](delivery_auto_refresh/) | 13.0.1.0.7 |  | Auto-refresh delivery price in sales orders
 [delivery_carrier_info](delivery_carrier_info/) | 13.0.1.0.0 |  | Add code and description on carrier
 [delivery_carrier_multi_zip](delivery_carrier_multi_zip/) | 13.0.1.0.1 |  | Multiple ZIP intervals for the same delivery method
@@ -32,20 +32,20 @@ addon | version | maintainers | summary
 [delivery_carrier_service_level](delivery_carrier_service_level/) | 13.0.1.0.2 |  | Add service levels to carrier
 [delivery_cttexpress](delivery_cttexpress/) | 13.0.1.1.0 |  | Delivery Carrier implementation for CTT Express API
 [delivery_free_fee_removal](delivery_free_fee_removal/) | 13.0.1.0.3 |  | Hide free fee lines on sales orders
-[delivery_local_pickup](delivery_local_pickup/) | 13.0.1.0.0 | [![victoralmau](https://github.com/victoralmau.png?size=30px)](https://github.com/victoralmau) | Delivery Local pickup
+[delivery_local_pickup](delivery_local_pickup/) | 13.0.1.0.0 | <a href='https://github.com/victoralmau'><img src='https://github.com/victoralmau.png' width='32' height='32' style='border-radius:50%;' alt='victoralmau'/></a> | Delivery Local pickup
 [delivery_multi_destination](delivery_multi_destination/) | 13.0.1.1.3 |  | Multiple destinations for the same delivery method
 [delivery_package_fee](delivery_package_fee/) | 13.0.1.1.3 |  | Add fees on delivered packages on shipping methods
 [delivery_package_number](delivery_package_number/) | 13.0.1.1.0 |  | Set or compute number of packages for a picking
 [delivery_postlogistics](delivery_postlogistics/) | 13.0.1.2.1 |  | Print PostLogistics shipping labels using the Barcode web service
 [delivery_postlogistics_server_env](delivery_postlogistics_server_env/) | 13.0.1.0.0 |  | Server Environment layer for Delivery Postlogistics
 [delivery_price_method](delivery_price_method/) | 13.0.1.0.2 |  | Provides fields to be able to contemplate the tracking statesand also adds a global fields
-[delivery_price_rule_volumetric_weight](delivery_price_rule_volumetric_weight/) | 13.0.2.0.0 | [![victoralmau](https://github.com/victoralmau.png?size=30px)](https://github.com/victoralmau) | Delivery Price Rule Volumetric weight
+[delivery_price_rule_volumetric_weight](delivery_price_rule_volumetric_weight/) | 13.0.2.0.0 | <a href='https://github.com/victoralmau'><img src='https://github.com/victoralmau.png' width='32' height='32' style='border-radius:50%;' alt='victoralmau'/></a> | Delivery Price Rule Volumetric weight
 [delivery_purchase](delivery_purchase/) | 13.0.1.0.0 |  | Delivery costs in purchases
 [delivery_schenker](delivery_schenker/) | 13.0.1.1.0 |  | Delivery Carrier implementation for DB Schenker API
 [delivery_send_to_shipper_at_operation](delivery_send_to_shipper_at_operation/) | 13.0.1.0.0 |  | Send delivery notice to the shipper from any operation.
 [delivery_sending](delivery_sending/) | 13.0.1.2.1 |  | Delivery Carrier implementation for Sending API
 [delivery_state](delivery_state/) | 13.0.2.0.3 |  | Provides fields to be able to contemplate the tracking statesand also adds a global fields
-[delivery_tnt_oca](delivery_tnt_oca/) | 13.0.1.1.7 | [![victoralmau](https://github.com/victoralmau.png?size=30px)](https://github.com/victoralmau) | Integrate TNT webservice
+[delivery_tnt_oca](delivery_tnt_oca/) | 13.0.1.1.7 | <a href='https://github.com/victoralmau'><img src='https://github.com/victoralmau.png' width='32' height='32' style='border-radius:50%;' alt='victoralmau'/></a> | Integrate TNT webservice
 [delivery_ups_oca](delivery_ups_oca/) | 13.0.2.0.1 |  | Integrate UPS webservice
 [partner_delivery_schedule](partner_delivery_schedule/) | 13.0.1.0.0 |  | Set on partners a schedule for delivery goods
 [partner_delivery_zone](partner_delivery_zone/) | 13.0.1.2.0 |  | Set on partners a zone for delivery goods
