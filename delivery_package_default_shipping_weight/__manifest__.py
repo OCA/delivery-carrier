@@ -6,7 +6,7 @@
     "version": "14.0.1.0.1",
     "development_status": "Production/Stable",
     "category": "Inventory",
-    "website": "https://github.com/OCA/stock-logistics-workflow",
+    "website": "https://github.com/OCA/delivery-carrier",
     "author": "Camptocamp, Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "application": False,
