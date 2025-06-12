@@ -31,7 +31,7 @@
     ],
     "installable": True,
     "auto_install": False,
-    "application": True,
+    "application": False,
     "external_dependencies": {
         "python": [
             "openupgradelib",
