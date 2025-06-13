@@ -58,7 +58,6 @@ class StockBatchPicking(models.Model):
             return
         default_options = self._get_options_to_add()
         self.option_ids = [Command.set(default_options.ids)]
-        self.carrier_code = self.carrier_id.code
 
     @api.onchange("option_ids")
     def onchange_option_ids(self):
