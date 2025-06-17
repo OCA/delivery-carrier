@@ -55,7 +55,9 @@ class TestSanitizeValues(TestPostlogisticsCommon):
             self.picking, recipient, packages
         )
         self.check_strings_in_list(item_list)
-        attributes = self.picking.postlogistics_label_prepare_attributes(packages, 1, 1)
+        attributes = self.picking.postlogistics_label_prepare_attributes(
+            pack=packages[0], pack_num=1, pack_total=1
+        )
         self.check_strings_in_dict(attributes)
 
     def test_cleanup_error_message(self):
