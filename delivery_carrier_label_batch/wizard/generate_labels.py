@@ -170,10 +170,10 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
             while not error_queue.empty():
                 e = error_queue.get()
                 if isinstance(e, exceptions.UserError):
-                    if e.name not in error_count:
-                        error_count[e.name] = 1
+                    if e.args[0] not in error_count:
+                        error_count[e.args[0]] = 1
                     else:
-                        error_count[e.name] += 1
+                        error_count[e.args[0]] += 1
                     messages.append(str(e) or "")
                 else:
                     # raise other exceptions like PoolError if
