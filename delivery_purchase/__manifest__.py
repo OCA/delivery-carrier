@@ -12,5 +12,9 @@
     "author": "Tecnativa, Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "depends": ["purchase", "delivery"],
-    "data": ["views/purchase_order_view.xml", "views/stock_picking_view.xml"],
+    "data": [
+        "views/purchase_order_view.xml",
+        "views/stock_picking_view.xml",
+        "wizards/res_config_settings_views.xml",
+    ],
 }

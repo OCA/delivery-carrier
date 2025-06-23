@@ -3,6 +3,7 @@
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
+from odoo.tools.misc import str2bool
 
 
 class DeliveryCarrier(models.Model):
@@ -121,6 +122,11 @@ class DeliveryCarrier(models.Model):
         return res
 
     def purchase_base_on_rule_send_shipping(self, pickings):
+        use_picking = str2bool(
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("delivery_purchase.use_delivered_qty_to_set_cost", "False")
+        )
         res = []
         for p in pickings:
             carrier = self._match_address(p.partner_id)
@@ -128,8 +134,10 @@ class DeliveryCarrier(models.Model):
                 raise ValidationError(_("There is no matching delivery rule."))
             res = res + [
                 {
-                    "exact_price": p.carrier_id._purchase_get_price_available(
-                        p.purchase_id
+                    "exact_price": (
+                        p.carrier_id._purchase_get_price_available(p.purchase_id)
+                        if not use_picking
+                        else p.carrier_id._picking_get_price_available(p)
                     )
                     if p.purchase_id
                     else 0.0,
@@ -138,16 +146,13 @@ class DeliveryCarrier(models.Model):
             ]
         return res
 
-    def _purchase_get_price_available(self, order):
-        self.ensure_one()
-        self = self.sudo()
-        order = order.sudo()
+    def _get_delivery_data(self, order, lines, qty_field):
         weight = volume = quantity = 0
-        for line in order.order_line.filtered(
+        for line in lines.filtered(
             lambda l: l.state != "cancel" and bool(l.product_id)
         ):
             qty = line.product_uom._compute_quantity(
-                line.product_uom_qty, line.product_id.uom_id
+                line[qty_field], line.product_id.uom_id
             )
             weight += (line.product_id.weight or 0.0) * qty
             volume += (line.product_id.volume or 0.0) * qty
@@ -158,5 +163,23 @@ class DeliveryCarrier(models.Model):
             order.company_id.currency_id,
             order.company_id,
             order.date_order or fields.Date.today(),
+        )
+        return weight, volume, quantity, total
+
+    def _purchase_get_price_available(self, order):
+        self.ensure_one()
+        self = self.sudo()
+        order = order.sudo()
+        weight, volume, quantity, total = self._get_delivery_data(
+            order, order.order_line, "product_uom_qty"
+        )
+        return self._get_price_from_picking(total, weight, volume, quantity)
+
+    def _picking_get_price_available(self, picking):
+        self.ensure_one()
+        self = self.sudo()
+        picking = picking.sudo()
+        weight, volume, quantity, total = self._get_delivery_data(
+            picking.purchase_id, picking.move_lines, "quantity_done"
         )
         return self._get_price_from_picking(total, weight, volume, quantity)
