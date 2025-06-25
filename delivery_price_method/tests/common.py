@@ -29,6 +29,15 @@ class TestDeliveryPriceMethodCommon(BaseCommon):
                 "fixed_price": 99.99,
             }
         )
+        self.carrier_free = self.env["delivery.carrier"].create(
+            {
+                "name": "Free carrier",
+                "price_method": "base_on_rule",
+                "product_id": product_shipping_cost.id,
+                "free_over": True,
+                "amount": 0,
+            }
+        )
         self.pricelist = self.env["product.pricelist"].create(
             {
                 "name": "Test pricelist",
@@ -57,6 +66,16 @@ class TestDeliveryPriceMethodCommon(BaseCommon):
                 ],
             }
         )
+        self.sale_2 = self.env["sale.order"].create(
+            {
+                "partner_id": self.partner.id,
+                "pricelist_id": self.pricelist.id,
+                "carrier_id": self.carrier_free.id,
+                "order_line": [
+                    (0, 0, {"product_id": self.product.id, "product_uom_qty": 1})
+                ],
+            }
+        )
 
     def _add_delivery(self):
         sale = self.sale
@@ -67,3 +86,11 @@ class TestDeliveryPriceMethodCommon(BaseCommon):
         )
         choose_delivery_carrier = delivery_wizard.save()
         choose_delivery_carrier.button_confirm()
+        sale_2 = self.sale_2
+        delivery_wizard_2 = Form(
+            self.env["choose.delivery.carrier"].with_context(
+                default_order_id=sale_2.id, default_carrier_id=self.carrier_free
+            )
+        )
+        choose_delivery_carrier_2 = delivery_wizard_2.save()
+        choose_delivery_carrier_2.button_confirm()
