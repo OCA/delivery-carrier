@@ -19,15 +19,8 @@ class TestDeliveryAutoRefresh(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.env.user.write(
-            {
-                "groups_id": [
-                    (4, cls.env.ref("account.group_delivery_invoice_address").id)
-                ]
-            }
-        )
-        service = cls.env["product.product"].create(
-            {"name": "Service Test", "detailed_type": "service"}
+        cls.service = cls.env["product.product"].create(
+            {"name": "Service Test", "type": "service"}
         )
         pricelist = cls.env["product.pricelist"].create(
             {"name": "Test pricelist", "currency_id": cls.env.company.currency_id.id}
@@ -35,7 +28,7 @@ class TestDeliveryAutoRefresh(BaseCommon):
         carrier_form = Form(cls.env["delivery.carrier"])
         carrier_form.name = "Test carrier 1"
         carrier_form.delivery_type = "base_on_rule"
-        carrier_form.product_id = service
+        carrier_form.product_id = cls.service
         with carrier_form.price_rule_ids.new() as price_rule_form:
             price_rule_form.variable = "weight"
             price_rule_form.operator = "<="
@@ -59,7 +52,7 @@ class TestDeliveryAutoRefresh(BaseCommon):
         carrier_form = Form(cls.env["delivery.carrier"])
         carrier_form.name = "Test carrier 2"
         carrier_form.delivery_type = "base_on_rule"
-        carrier_form.product_id = service
+        carrier_form.product_id = cls.service
         with carrier_form.price_rule_ids.new() as price_rule_form:
             price_rule_form.variable = "weight"
             price_rule_form.operator = "<="
@@ -69,7 +62,7 @@ class TestDeliveryAutoRefresh(BaseCommon):
         cls.product = cls.env["product.product"].create(
             {
                 "name": "Test product",
-                "detailed_type": "consu",
+                "type": "consu",
                 "weight": 10,
                 "list_price": 20,
             }
@@ -85,8 +78,6 @@ class TestDeliveryAutoRefresh(BaseCommon):
         cls.settings.execute()
         order_form = Form(cls.env["sale.order"])
         order_form.partner_id = cls.partner
-        order_form.partner_invoice_id = cls.partner
-        order_form.partner_shipping_id = cls.partner
         with order_form.order_line.new() as ol_form:
             ol_form.product_id = cls.product
             ol_form.product_uom_qty = 2
@@ -96,28 +87,20 @@ class TestDeliveryAutoRefresh(BaseCommon):
         self.assertFalse(self.order.order_line.filtered("is_delivery"))
         self.settings.sale_auto_add_delivery_line = True
         self.settings.execute()
-        self.order.write(
-            {"order_line": [(1, self.order.order_line.id, {"product_uom_qty": 3})]}
-        )
+        sale_form = Form(self.order)
+        with sale_form.order_line.edit(0) as line_form:
+            line_form.product_uom_qty = 3
+        sale_form.save()
         line_delivery = self.order.order_line.filtered("is_delivery")
         self.assertEqual(line_delivery.price_unit, 60)
-        line2 = self.order.order_line.new(
-            {
-                "order_id": self.order.id,
-                "product_id": self.product.id,
-                "product_uom_qty": 2,
-            }
-        )
-        _execute_onchanges(line2, "product_id")
-        vals = line2._convert_to_write(line2._cache)
-        del vals["order_id"]
-        self.order.write({"order_line": [(0, 0, vals)]})
-        line_delivery = self.order.order_line.filtered("is_delivery")
+        with sale_form.order_line.new() as line_form:
+            line_form.product_id = self.product
+            line_form.product_uom_qty = 2
+        sale_form.save()
         self.assertEqual(line_delivery.price_unit, 95)
         # Test saving the discount
         line_delivery.discount = 10
         self.order.carrier_id = self.carrier_2
-        line_delivery = self.order.order_line.filtered("is_delivery")
         self.assertEqual(line_delivery.discount, 10)
         # Test change the carrier_id using the wizard
         wiz = Form(
@@ -128,7 +111,6 @@ class TestDeliveryAutoRefresh(BaseCommon):
         ).save()
         wiz.button_confirm()
         self.assertEqual(self.order.carrier_id, self.carrier_1)
-        line_delivery = self.order.order_line.filtered("is_delivery")
         self.assertEqual(line_delivery.name, "Test carrier 1")
 
     def test_auto_refresh_picking(self):
@@ -160,15 +142,9 @@ class TestDeliveryAutoRefresh(BaseCommon):
     def test_auto_refresh_picking_fixed_price(self):
         self.settings.sale_refresh_delivery_after_picking = True
         self.settings.execute()
-        product_fixed_price = self.env["product.product"].create(
-            {
-                "name": "Test carrier fixed price auto refresh",
-                "detailed_type": "service",
-            }
-        )
         carrier_form = Form(self.env["delivery.carrier"])
-        carrier_form.name = product_fixed_price.name
-        carrier_form.product_id = product_fixed_price
+        carrier_form.name = self.service.name
+        carrier_form.product_id = self.service
         carrier_form.delivery_type = "fixed"
         carrier_form.fixed_price = 2
         carrier_fixed_price = carrier_form.save()
@@ -244,7 +220,7 @@ class TestDeliveryAutoRefresh(BaseCommon):
         return_wiz = return_wiz_form.save()
         return_wiz.product_return_moves.quantity = picking.move_ids.quantity
         return_wiz.product_return_moves.to_refund = to_refund
-        res = return_wiz.create_returns()
+        res = return_wiz.action_create_returns()
         return_picking = self.env["stock.picking"].browse(res["res_id"])
         self._validate_picking(return_picking)
 
@@ -317,15 +293,10 @@ class TestDeliveryAutoRefresh(BaseCommon):
         """No delivery line when service only"""
         self.settings.sale_auto_add_delivery_line = True
         self.settings.set_values()
-        service = self.env["product.product"].create(
-            {"name": "Service Test", "detailed_type": "service"}
-        )
         order_form = Form(self.env["sale.order"])
         order_form.partner_id = self.partner
-        order_form.partner_invoice_id = self.partner
-        order_form.partner_shipping_id = self.partner
         with order_form.order_line.new() as ol_form:
-            ol_form.product_id = service
+            ol_form.product_id = self.service
             ol_form.product_uom_qty = 2
         order = order_form.save()
         delivery_line = order.order_line.filtered("is_delivery")
