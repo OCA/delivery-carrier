@@ -13,7 +13,7 @@
                 <field
                     name="carrier_price"
                     force_save="1"
-                    attrs="{'invisible': ['|', ('purchase_id', '=', False),('carrier_id', '=', False)]}"
+                    invisible="not purchase_id or not carrier_id"
                 />
             </field>
         </field>

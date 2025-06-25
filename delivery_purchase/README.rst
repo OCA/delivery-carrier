@@ -95,6 +95,11 @@ Contributors
   - Pedro M. Baeza
   - Vicent Cubells
   - Carolina Fernandez
+  - Carlos Roca
+
+- `Sodexis <https://www.sodexis.com>`__:
+
+  - Sandeep J
 
 Maintainers
 -----------

@@ -64,11 +64,6 @@ class TestDeliveryPurchaseBase(BaseCommon):
         cls.purchase = purchase_form.save()
         cls.purchase_line = cls.purchase.order_line
 
-    def _action_picking_validate(self, picking):
-        res = picking.button_validate()
-        model = self.env[res["res_model"]].with_context(**res["context"])
-        model.create({}).process()
-
 
 class TestDeliveryPurchase(TestDeliveryPurchaseBase):
     def test_onchange_partner_id(self):
@@ -85,7 +80,7 @@ class TestDeliveryPurchase(TestDeliveryPurchaseBase):
         self.assertEqual(self.purchase.invoice_status, "no")
         picking = self.purchase.picking_ids
         picking.carrier_id = False
-        self._action_picking_validate(picking)
+        picking.button_validate()
         self.assertEqual(delivery_line.qty_to_invoice, 1)
         self.assertEqual(self.purchase.invoice_status, "to invoice")
 
@@ -105,7 +100,7 @@ class TestDeliveryPurchase(TestDeliveryPurchaseBase):
         self.assertEqual(picking.carrier_id, self.carrier_fixed)
         self.assertEqual(picking.carrier_price, 20)
         picking.carrier_id = self.carrier_rules.id
-        self._action_picking_validate(picking)
+        picking.button_validate()
         self.assertEqual(picking.carrier_price, 10)
         self.assertEqual(
             len(self.purchase.order_line.filtered(lambda x: x.is_delivery)), 1
@@ -117,7 +112,7 @@ class TestDeliveryPurchase(TestDeliveryPurchaseBase):
         self.purchase.button_confirm()
         picking = self.purchase.picking_ids
         picking.carrier_id = self.carrier_fixed
-        self._action_picking_validate(picking)
+        picking.button_validate()
         self.assertEqual(picking.carrier_price, 20)
         delivery_line = self.purchase.order_line.filtered(lambda x: x.is_delivery)
         self.assertEqual(delivery_line.delivery_picking_orig_id, picking)
@@ -129,7 +124,7 @@ class TestDeliveryPurchase(TestDeliveryPurchaseBase):
         picking = self.purchase.picking_ids
         picking.carrier_id = self.carrier_fixed
         for move in picking.move_ids_without_package:
-            move.quantity_done = 1
+            move.quantity = 1
         res = picking.button_validate()
         model = self.env[res["res_model"]].with_context(**res["context"])
         model.create({}).process_cancel_backorder()
@@ -139,7 +134,7 @@ class TestDeliveryPurchase(TestDeliveryPurchaseBase):
         self.assertEqual(self.purchase.delivery_price, 20)
         new_picking = self.purchase.picking_ids - picking
         new_picking.carrier_id = self.carrier_rules
-        self._action_picking_validate(new_picking)
+        new_picking.button_validate()
         self.assertEqual(new_picking.carrier_price, 10)
         new_delivery_line = (
             self.purchase.order_line.filtered(lambda x: x.is_delivery) - delivery_line
@@ -153,7 +148,7 @@ class TestDeliveryPurchase(TestDeliveryPurchaseBase):
         self.purchase.button_confirm()
         picking = self.purchase.picking_ids
         picking.carrier_id = self.carrier_rules.id
-        self._action_picking_validate(picking)
+        picking.button_validate()
         self.assertEqual(picking.carrier_id, self.carrier_rules)
         self.assertEqual(picking.carrier_price, 10)
         self.assertEqual(self.purchase.carrier_id, self.carrier_rules)

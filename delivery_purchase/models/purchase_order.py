@@ -13,15 +13,20 @@ class PurchaseOrder(models.Model):
     carrier_id = fields.Many2one(
         comodel_name="delivery.carrier",
         string="Delivery Method",
+        compute="_compute_carrier_id",
+        store=True,
+        readonly=False,
     )
     delivery_price = fields.Float(
         compute="_compute_delivery_price", store=True, readonly=False
     )
 
-    @api.onchange("partner_id")
-    def onchange_partner_id_delivery_purchase(self):
-        if self.partner_id.property_delivery_carrier_id:
-            self.carrier_id = self.partner_id.property_delivery_carrier_id.id
+    @api.depends("partner_id")
+    def _compute_carrier_id(self):
+        self.carrier_id = False
+        for record in self:
+            if record.partner_id.property_delivery_carrier_id:
+                record.carrier_id = record.partner_id.property_delivery_carrier_id
 
     @api.depends("order_line", "order_line.is_delivery", "amount_total", "carrier_id")
     def _compute_delivery_price(self):
@@ -38,8 +43,12 @@ class PurchaseOrder(models.Model):
     def _prepare_picking(self):
         res = super()._prepare_picking()
         if self.carrier_id:
-            res["carrier_id"] = self.carrier_id.id
-            res["carrier_price"] = self.delivery_price
+            res.update(
+                {
+                    "carrier_id": self.carrier_id.id,
+                    "carrier_price": self.delivery_price,
+                }
+            )
         return res
 
     def _create_delivery_line(self, carrier, price_unit):
