@@ -15,7 +15,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. module: delivery_purchase
+#: model:ir.model,name:delivery_purchase.model_res_config_settings
+msgid "Config Settings"
+msgstr "Ajustes de configuración"
 
 #. module: delivery_purchase
 #: model:ir.model.fields,field_description:delivery_purchase.field_purchase_order__carrier_id
@@ -70,6 +75,19 @@ msgid "Purchase Order Line"
 msgstr "Línea de pedido de compra"
 
 #. module: delivery_purchase
+#: model:ir.model.fields,field_description:delivery_purchase.field_res_config_settings__recompute_delivery_price_on_picking
+msgid "Recompute Delivery Price When Validate Picking"
+msgstr "Recomputar precio de entrega al validar albarán"
+
+#. module: delivery_purchase
+#: model_terms:ir.ui.view,arch_db:delivery_purchase.res_config_settings_view_form
+msgid ""
+"Recompute shipping costs when validating the picking with the quantity "
+"received."
+msgstr ""
+"Recomputar costes de envío al validar el albarán con la cantidad recibida."
+
+#. module: delivery_purchase
 #. odoo-python
 #: code:addons/delivery_purchase/models/stock_picking.py:0
 #, python-format
@@ -79,6 +97,11 @@ msgid ""
 msgstr ""
 "Envío enviado al transportista %(carrier_name)s para envío con número de "
 "seguimiento %(tracking_ref)s<br/>Coste: %(carrier_price)s %(currency_name)s"
+
+#. module: delivery_purchase
+#: model_terms:ir.ui.view,arch_db:delivery_purchase.res_config_settings_view_form
+msgid "Shipping"
+msgstr "Envío"
 
 #. module: delivery_purchase
 #: model:ir.model,name:delivery_purchase.model_delivery_carrier

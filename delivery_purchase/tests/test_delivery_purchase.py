@@ -160,3 +160,35 @@ class TestDeliveryPurchase(TestDeliveryPurchaseBase):
         delivery_line = self.purchase.order_line.filtered(lambda x: x.is_delivery)
         self.assertEqual(delivery_line.delivery_picking_orig_id, picking)
         self.assertEqual(self.purchase.delivery_price, 10)
+
+    def test_picking_with_backorders(self):
+        self.env["ir.config_parameter"].set_param(
+            "delivery_purchase.use_delivered_qty_to_set_cost", "True"
+        )
+        self.product.weight = 1
+        purchase_form = Form(self.env["purchase.order"])
+        purchase_form.partner_id = self.partner
+        purchase_form.carrier_id = self.carrier_rules
+        with purchase_form.order_line.new() as purchase_line_form:
+            purchase_line_form.product_id = self.product
+            purchase_line_form.product_qty = 10
+            purchase_line_form.price_unit = 1
+        purchase = purchase_form.save()
+        self.assertEqual(purchase.delivery_price, 30)
+        purchase.button_confirm()
+        picking = purchase.picking_ids
+        picking.move_ids.quantity = 4
+        backorder_wizard_dict = picking.button_validate()
+        backorder_wizard = Form(
+            self.env[backorder_wizard_dict["res_model"]].with_context(
+                **backorder_wizard_dict["context"]
+            )
+        ).save()
+        backorder_wizard.process()
+        self.assertEqual(picking.carrier_price, 10)
+        other_picking = purchase.picking_ids - picking
+        other_picking.move_ids.filtered(
+            lambda ml: ml.product_id == self.product
+        ).quantity = 6
+        other_picking.button_validate()
+        self.assertEqual(other_picking.carrier_price, 30)

@@ -6,12 +6,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-06-24 06:39+0000\n"
+"PO-Revision-Date: 2025-06-24 06:39+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: delivery_purchase
+#: model:ir.model,name:delivery_purchase.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
 
 #. module: delivery_purchase
 #: model:ir.model.fields,field_description:delivery_purchase.field_purchase_order__carrier_id
@@ -65,12 +72,29 @@ msgid "Purchase Order Line"
 msgstr ""
 
 #. module: delivery_purchase
+#: model:ir.model.fields,field_description:delivery_purchase.field_res_config_settings__recompute_delivery_price_on_picking
+msgid "Recompute Delivery Price When Validate Picking"
+msgstr ""
+
+#. module: delivery_purchase
+#: model_terms:ir.ui.view,arch_db:delivery_purchase.res_config_settings_view_form
+msgid ""
+"Recompute shipping costs when validating the picking with the quantity "
+"received."
+msgstr ""
+
+#. module: delivery_purchase
 #. odoo-python
 #: code:addons/delivery_purchase/models/stock_picking.py:0
 #, python-format
 msgid ""
 "Shipment sent to carrier %(carrier_name)s for shipping with tracking number "
 "%(tracking_ref)s<br/>Cost: %(carrier_price)s %(currency_name)s"
+msgstr ""
+
+#. module: delivery_purchase
+#: model_terms:ir.ui.view,arch_db:delivery_purchase.res_config_settings_view_form
+msgid "Shipping"
 msgstr ""
 
 #. module: delivery_purchase
