@@ -122,7 +122,7 @@ class SaleOrder(models.Model):
         # were not set to refund.
         qty_delivered = sum(
             self.order_line.filtered(
-                lambda x: not x.is_delivery and x.product_id.detailed_type != "service"
+                lambda x: not x.is_delivery and x.product_id.type == "consu"
             ).mapped("qty_delivered")
         )
         # There must be validated pickings
