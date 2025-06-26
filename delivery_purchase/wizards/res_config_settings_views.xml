@@ -28,6 +28,20 @@
                             </div>
                         </div>
                      </div>
+                     <div
+                        class="col-12 col-lg-6 o_setting_box"
+                        id="no_create_delivery_line"
+                    >
+                        <div class="o_setting_left_pane">
+                            <field name="no_create_delivery_line_on_po" />
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="no_create_delivery_line_on_po" />
+                            <div class="text-muted">
+                                Avoid delivery line creation on purchase order when validating the picking.
+                            </div>
+                        </div>
+                     </div>
                  </div>
             </xpath>
         </field>

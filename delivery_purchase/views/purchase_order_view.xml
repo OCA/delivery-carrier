@@ -8,13 +8,17 @@
             <div name="reminder" position="after">
                 <label for="carrier_id" />
                 <div class="d-flex">
-                    <field name="carrier_id" options="{'no_open': True}" />
+                    <field
+                        name="carrier_id"
+                        options="{'no_open': True}"
+                        attrs="{'readonly': [('state', '!=', 'draft')]}"
+                    />
                     <span class="o_form_label mx-3" />
                     <field
                         name="delivery_price"
                         widget='monetary'
                         options="{'currency_field': 'currency_id'}"
-                        attrs="{'invisible': [('carrier_id', '=', False)]}"
+                        attrs="{'invisible': [('carrier_id', '=', False)], 'readonly': [('state', '!=', 'draft')]}"
                     />
                 </div>
             </div>

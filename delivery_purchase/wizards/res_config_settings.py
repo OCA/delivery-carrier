@@ -11,3 +11,7 @@ class ResConfigSettings(models.TransientModel):
         string="Recompute Delivery Price When Validate Picking",
         config_parameter="delivery_purchase.use_delivered_qty_to_set_cost",
     )
+    no_create_delivery_line_on_po = fields.Boolean(
+        string="Avoid Creation Of Delivery Line On Purchase Order",
+        config_parameter="delivery_purchase.no_create_delivery_line_on_po",
+    )
