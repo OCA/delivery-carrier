@@ -14,6 +14,17 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: delivery_purchase
+#: model:ir.model.fields,field_description:delivery_purchase.field_res_config_settings__no_create_delivery_line_on_po
+msgid "Avoid Creation Of Delivery Line On Purchase Order"
+msgstr ""
+
+#. module: delivery_purchase
+#: model_terms:ir.ui.view,arch_db:delivery_purchase.res_config_settings_view_form
+msgid ""
+"Avoid delivery line creation on purchase order when validating the picking."
+msgstr ""
+
+#. module: delivery_purchase
 #: model:ir.model,name:delivery_purchase.model_res_config_settings
 msgid "Config Settings"
 msgstr ""
