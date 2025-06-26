@@ -5,7 +5,7 @@
 
 {
     "name": "Delivery costs in purchases",
-    "version": "15.0.1.3.0",
+    "version": "15.0.1.4.0",
     "development_status": "Production/Stable",
     "category": "Operations/Purchase",
     "website": "https://github.com/OCA/delivery-carrier",
