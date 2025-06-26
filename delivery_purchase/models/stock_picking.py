@@ -3,6 +3,7 @@
 from markupsafe import Markup
 
 from odoo import _, models
+from odoo.tools.misc import str2bool
 
 
 class StockPicking(models.Model):
@@ -46,7 +47,12 @@ class StockPicking(models.Model):
 
     def _add_delivery_cost_to_po(self):
         self.ensure_one()
-        if self.purchase_id and self.carrier_price:
+        avoid_create_line = str2bool(
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("delivery_purchase.no_create_delivery_line_on_po", "False")
+        )
+        if not avoid_create_line and self.purchase_id and self.carrier_price:
             carrier_price = self.carrier_price
             # Re-set carrier price
             if self.carrier_id.invoice_policy == "real":

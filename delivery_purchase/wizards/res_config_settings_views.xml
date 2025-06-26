@@ -9,14 +9,20 @@
         />
         <field name="arch" type="xml">
             <xpath expr="//block[@name='matrix_setting_container']" position="after">
-                 <block title="Shipping" name="shipping_setting_container">
-                     <setting
+                <block title="Shipping" name="shipping_setting_container">
+                    <setting
                         id="recompute_delivery_cost"
                         help="Recompute shipping costs when validating the picking with the quantity received."
                     >
                         <field name="recompute_delivery_price_on_picking" />
-                     </setting>
-                 </block>
+                    </setting>
+                    <setting
+                        id="no_create_delivery_line"
+                        help="Avoid delivery line creation on purchase order when validating the picking."
+                    >
+                        <field name="no_create_delivery_line_on_po" />
+                    </setting>
+                </block>
             </xpath>
         </field>
     </record>
