@@ -175,7 +175,7 @@ class DeliveryCarrier(models.Model):
         reference = picking.name
         if picking.sale_id:
             reference = f"{picking.sale_id.name}-{reference}"
-        return {
+        vals = {
             "ClientReference": reference,  # Optional
             "ClientDepartmentCode": None,  # Optional (no core field matches)
             "ItemsCount": picking.number_of_packages or 1,
@@ -207,6 +207,9 @@ class DeliveryCarrier(models.Model):
             "HasControl": None,  # Optional
             "HasFinalManagement": None,  # Optional
         }
+        if recipient.street2:
+            vals["RecipientAddress"] += f" {recipient.street2}"
+        return vals
 
     def cttexpress_send_shipping(self, pickings):
         """CTT Express wildcard method called when a picking is confirmed
