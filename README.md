@@ -35,6 +35,7 @@ addon | version | maintainers | summary
 [delivery_price_method](delivery_price_method/) | 15.0.1.0.0 |  | Provides fields to be able to contemplate the tracking statesand also adds a global fields
 [delivery_price_rule_untaxed](delivery_price_rule_untaxed/) | 15.0.1.0.0 | <a href='https://github.com/AshishHirapara'><img src='https://github.com/AshishHirapara.png' width='32' height='32' style='border-radius:50%;' alt='AshishHirapara'/></a> | Add untaxed amount to variables for price delivery price rule
 [delivery_purchase](delivery_purchase/) | 15.0.1.4.0 |  | Delivery costs in purchases
+[delivery_purchase_multi_destination](delivery_purchase_multi_destination/) | 15.0.1.0.0 |  | Multiple origins for delivery costs in purchases
 [delivery_state](delivery_state/) | 15.0.1.1.2 |  | Provides fields to be able to contemplate the tracking statesand also adds a global fields
 [delivery_translatable](delivery_translatable/) | 15.0.1.0.0 |  | name and website_description field of delivery carrier setup translatable.
 [partner_delivery_schedule](partner_delivery_schedule/) | 15.0.1.0.2 |  | Set on partners a schedule for delivery goods
