@@ -2,21 +2,27 @@
 # Copyright 2019-2020 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo.tests import Form, common
+from odoo.tests import Form
+
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class TestDeliveryMultiDestination(common.TransactionCase):
+class TestDeliveryMultiDestination(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.country_1 = cls.env["res.country"].create({"name": "Test country 1"})
+        cls.country_1 = cls.env["res.country"].create(
+            {"name": "Test country 1", "code": "AA"}
+        )
         cls.partner_1 = cls.env["res.partner"].create(
             {
                 "name": "Test partner 1",
                 "country_id": cls.country_1.id,
             }
         )
-        cls.country_2 = cls.env["res.country"].create({"name": "Test country 2"})
+        cls.country_2 = cls.env["res.country"].create(
+            {"name": "Test country 2", "code": "AB"}
+        )
         cls.state = cls.env["res.country.state"].create(
             {"name": "Test state", "code": "TS", "country_id": cls.country_2.id}
         )
@@ -45,14 +51,15 @@ class TestDeliveryMultiDestination(common.TransactionCase):
         cls.product_child_2 = cls.env["product.product"].create(
             {"name": "Test child 2", "detailed_type": "service"}
         )
+        zip_prefix_child1 = cls.env["delivery.zip.prefix"].create({"name": "22222"})
+        zip_prefix_child2 = cls.env["delivery.zip.prefix"].create({"name": "33333"})
         cls.carrier_multi = cls._create_carrier(
             cls,
             (
                 {
                     "name": "Test child 1",
                     "product_id": cls.product_child_1,
-                    "zip_from": 20000,
-                    "zip_to": 29999,
+                    "zip_prefix_ids": zip_prefix_child1,
                     "delivery_type": "base_on_rule",
                     "price_rule_ids": [
                         {
@@ -72,8 +79,7 @@ class TestDeliveryMultiDestination(common.TransactionCase):
                 {
                     "name": "Test child 2",
                     "product_id": cls.product_child_2,
-                    "zip_from": 30000,
-                    "zip_to": 39999,
+                    "zip_prefix_ids": zip_prefix_child2,
                     "delivery_type": "fixed",
                     "fixed_price": 150,
                 },
@@ -84,6 +90,8 @@ class TestDeliveryMultiDestination(common.TransactionCase):
                 "name": "Test carrier single",
                 "destination_type": "one",
                 "child_ids": False,
+                "delivery_type": "fixed",
+                "fixed_price": 100,
             }
         )
         cls.product = cls.env["product.product"].create(
@@ -96,16 +104,13 @@ class TestDeliveryMultiDestination(common.TransactionCase):
         carrier_form.name = "Test carrier multi"
         carrier_form.product_id = self.product
         carrier_form.destination_type = "multi"
-        carrier_form.delivery_type = "fixed"
-        carrier_form.fixed_price = 100
         for child_item in childs:
             with carrier_form.child_ids.new() as child_form:
                 child_form.name = child_item["name"]
                 child_form.product_id = child_item["product_id"]
                 child_form.country_ids.add(self.country_2)
                 child_form.state_ids.add(self.state)
-                child_form.zip_from = child_item["zip_from"]
-                child_form.zip_to = child_item["zip_to"]
+                child_form.zip_prefix_ids.add(child_item["zip_prefix_ids"])
                 child_form.delivery_type = child_item["delivery_type"]
                 if child_item["delivery_type"] == "fixed":
                     child_form.fixed_price = child_item["fixed_price"]
@@ -127,25 +132,31 @@ class TestDeliveryMultiDestination(common.TransactionCase):
 
     def test_rate_shipment_multi_destination(self):
         order = self.purchase_order
-        # When changing partner using carrier single should not change the delivery_price.
+        # When changing partner using carrier single should not change the
+        # delivery_price.
         order.carrier_id = self.carrier_single
         self.assertAlmostEqual(order.delivery_price, 100, 2)
         order.partner_id = self.partner_2
+        # Make sure carrier_single is selected
+        order.carrier_id = self.carrier_single
         self.assertAlmostEqual(order.delivery_price, 100, 2)
-        # Using carrier multi, the price of delivery should depend on the partner selected
+        # Using carrier multi, the price of delivery should depend on the
+        # partner selected
         order.carrier_id = self.carrier_multi
         self.assertAlmostEqual(order.delivery_price, 50, 2)
         order.partner_id = self.partner_3
+        # Make sure carrier_single is selected
+        order.carrier_id = self.carrier_multi
         self.assertAlmostEqual(order.delivery_price, 150, 2)
 
     def test_picking_validation(self):
-        self.purchase_order.carrier_id = self.carrier_multi.id
-        self.purchase_order.partner_id = self.partner_2.id
+        self.purchase_order.partner_id = self.partner_2
+        self.purchase_order.carrier_id = self.carrier_multi
         self.purchase_order.button_confirm()
         picking = self.purchase_order.picking_ids
         self.assertEqual(picking.carrier_id, self.carrier_multi)
-        picking.move_lines.quantity_done = 1
-        picking._action_done()
+        picking.move_ids.quantity = 1
+        picking.button_validate()
         self.assertAlmostEqual(picking.carrier_price, 50)
 
     def test_picking_validation_backorder(self):
@@ -153,19 +164,25 @@ class TestDeliveryMultiDestination(common.TransactionCase):
             "delivery_purchase.use_delivered_qty_to_set_cost", "True"
         )
         self.product.weight = 1
-        self.purchase_order.carrier_id = self.carrier_multi.id
-        self.purchase_order.partner_id = self.partner_2.id
+        self.purchase_order.partner_id = self.partner_2
+        self.purchase_order.carrier_id = self.carrier_multi
         self.purchase_order.order_line.product_qty = 10
         self.assertAlmostEqual(self.purchase_order.delivery_price, 70, 2)
         self.purchase_order.button_confirm()
         picking = self.purchase_order.picking_ids
         self.assertEqual(picking.carrier_id, self.carrier_multi)
-        picking.move_lines.quantity_done = 4
-        picking.with_context(cancel_backorder=False)._action_done()
+        picking.move_ids.quantity = 4
+        backorder_wizard_dict = picking.button_validate()
+        backorder_wizard = Form(
+            self.env[backorder_wizard_dict["res_model"]].with_context(
+                **backorder_wizard_dict["context"]
+            )
+        ).save()
+        backorder_wizard.process()
         self.assertAlmostEqual(picking.carrier_price, 50)
         other_picking = self.purchase_order.picking_ids - picking
-        other_picking.move_lines.filtered(
+        other_picking.move_ids.filtered(
             lambda ml: ml.product_id == self.product
-        ).quantity_done = 6
-        other_picking._action_done()
+        ).quantity = 6
+        other_picking.button_validate()
         self.assertEqual(other_picking.carrier_price, 70)
