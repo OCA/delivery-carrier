@@ -34,7 +34,7 @@ class DeliveryCarrier(models.Model):
             for p in pickings:
                 picking_res = False
                 for subcarrier in carrier.child_ids.filtered(
-                    lambda x: not x.company_id or x.company_id == p.company_id
+                    lambda x, p=p: not x.company_id or x.company_id == p.company_id
                 ):
                     if subcarrier.delivery_type == "fixed":
                         if subcarrier._match_address(p.partner_id):
@@ -66,7 +66,8 @@ class DeliveryCarrier(models.Model):
                 if not picking_res:
                     # If there is no picking_res, it means there is no subcarrier,
                     # so raise a ValidationError to inform the user about the issue.
-                    # This prevents a subsequent error when trying to access a null value.
+                    # This prevents a subsequent error when trying to access a null
+                    # value.
                     raise ValidationError(_("There is no matching delivery rule."))
                 res += picking_res
             return res
