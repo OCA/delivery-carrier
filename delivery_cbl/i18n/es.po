@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-02 14:32+0000\n"
-"PO-Revision-Date: 2025-04-02 16:38+0200\n"
+"POT-Creation-Date: 2025-07-01 13:21+0000\n"
+"PO-Revision-Date: 2025-07-01 15:23+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.6\n"
 
 #. module: delivery_cbl
 #: model_terms:ir.ui.view,arch_db:delivery_cbl.report_cbl_manifest
@@ -102,12 +102,8 @@ msgstr "Se ha cancelado la expedición de CBL con referencia %(tracking)s."
 #. odoo-python
 #: code:addons/delivery_cbl/models/cbl_request.py:0
 #, python-format
-msgid ""
-"CBL Shipping for picking %(picking)s could not be created. Reason: "
-"%(reason)s"
-msgstr ""
-"El envío de CBL para el albarán %(picking)s no se pudo crear. Razón: "
-"%(reason)s"
+msgid "CBL Shipping for picking %(picking)s could not be created. Reason: %(reason)s"
+msgstr "El envío de CBL para el albarán %(picking)s no se pudo crear. Razón: %(reason)s"
 
 #. module: delivery_cbl
 #. odoo-python
@@ -152,25 +148,38 @@ msgid "Delivery carrier manifest wizard"
 msgstr "Asistente de manifiesto de entrega"
 
 #. module: delivery_cbl
+#: model:ir.model.fields,help:delivery_cbl.field_delivery_carrier__cbl_label_format
+msgid ""
+"Format to generate shipping labels.\n"
+"If PDF is selected, labels will be generated using an external service (labelary.com)."
+msgstr ""
+"Formato para generar etiquetas de envío.\n"
+"Si se selecciona PDF, las etiquetas se generarán utilizando un servicio externo "
+"(labelary.com)."
+
+#. module: delivery_cbl
 #: model:ir.model.fields,help:delivery_cbl.field_delivery_carrier__cbl_needs_confirmation
 msgid ""
-"If checked, expeditions need to be confirmed after the tracking number is "
-"generated to be officially introduced in CBL pending shipments database."
+"If checked, expeditions need to be confirmed after the tracking number is generated "
+"to be officially introduced in CBL pending shipments database."
 msgstr ""
-"Si está marcado, las expediciones necesitan confirmarse tras la creación de "
-"su número de seguimiento para que se introduzcan oficialmente en la base de "
-"datos de CBL."
+"Si está marcado, las expediciones necesitan confirmarse tras la creación de su número "
+"de seguimiento para que se introduzcan oficialmente en la base de datos de CBL."
 
 #. module: delivery_cbl
 #: model:ir.model.fields,help:delivery_cbl.field_delivery_carrier__cbl_cash_on_delivery
 msgid ""
-"If checked, it means that the carrier is paid with cash. It assumes there "
-"is a sale order linked and it will use that total amount as the value to be "
-"paid"
+"If checked, it means that the carrier is paid with cash. It assumes there is a sale "
+"order linked and it will use that total amount as the value to be paid"
 msgstr ""
-"Si está marcado, significa que al transportista se le paga en cash. Se "
-"asuma que hay un pedido de venta relacionado y se utilizará su cantidad "
-"total como la cantidad que tiene que pagarse."
+"Si está marcado, significa que al transportista se le paga en cash. Se asuma que hay "
+"un pedido de venta relacionado y se utilizará su cantidad total como la cantidad que "
+"tiene que pagarse."
+
+#. module: delivery_cbl
+#: model:ir.model.fields,field_description:delivery_cbl.field_delivery_carrier__cbl_label_format
+msgid "Label Format"
+msgstr "Formato de etiqueta"
 
 #. module: delivery_cbl
 #. odoo-python
@@ -183,6 +192,11 @@ msgstr "Manifiesto"
 #: model:ir.model.fields,field_description:delivery_cbl.field_delivery_carrier__cbl_needs_confirmation
 msgid "Needs Confirmation"
 msgstr "Necesita confirmación"
+
+#. module: delivery_cbl
+#: model:ir.model.fields.selection,name:delivery_cbl.selection__delivery_carrier__cbl_label_format__pdf
+msgid "PDF"
+msgstr ""
 
 #. module: delivery_cbl
 #: model:ir.model.fields,field_description:delivery_cbl.field_delivery_carrier__cbl_password
@@ -216,15 +230,19 @@ msgstr "Traslado"
 #: code:addons/delivery_cbl/models/delivery_carrier.py:0
 #, python-format
 msgid ""
-"Unable to cancel CBL Expedition with reference %(tracking)s. Please, make "
-"sure that the reference is correct and the expedition has not been already "
-"canceled."
+"Unable to cancel CBL Expedition with reference %(tracking)s. Please, make sure that "
+"the reference is correct and the expedition has not been already canceled."
 msgstr ""
-"No se ha podido cancelar la expedición de CBL con referencia %(tracking)s. "
-"Por favor, asegúrate de que la referencia es correcta y que la expedición "
-"no se ha cancelado previamente."
+"No se ha podido cancelar la expedición de CBL con referencia %(tracking)s. Por favor, "
+"asegúrate de que la referencia es correcta y que la expedición no se ha cancelado "
+"previamente."
 
 #. module: delivery_cbl
 #: model:ir.model.fields,field_description:delivery_cbl.field_delivery_carrier__cbl_user
 msgid "User"
 msgstr "Usuario"
+
+#. module: delivery_cbl
+#: model:ir.model.fields.selection,name:delivery_cbl.selection__delivery_carrier__cbl_label_format__zpl
+msgid "ZPL"
+msgstr ""

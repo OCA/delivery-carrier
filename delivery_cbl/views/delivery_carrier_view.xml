@@ -15,6 +15,7 @@
                     <group>
                         <field name="cbl_cash_on_delivery" />
                         <field name="cbl_needs_confirmation" />
+                        <field name="cbl_label_format" />
                         <field name="cbl_user" required="delivery_type == 'cbl'" />
                         <field
                             name="cbl_password"

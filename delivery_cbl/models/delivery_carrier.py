@@ -38,26 +38,45 @@ class DeliveryCarrier(models.Model):
     cbl_client_code = fields.Char(string="Client Code")
     cbl_client_token = fields.Char(string="Client Token")
 
+    cbl_label_format = fields.Selection(
+        selection=[("zpl", "ZPL"), ("pdf", "PDF")],
+        string="Label Format",
+        default="zpl",
+        help=(
+            "Format to generate shipping labels.\n"
+            "If PDF is selected, labels will be generated "
+            "using an external service (labelary.com)."
+        ),
+    )
+
     @api.model
     def cdl_generate_labels(self, picking, tracking_ref, labels_info):
         labels = []
         attachments = self.env["ir.attachment"]
+        label_format = picking.carrier_id.cbl_label_format
         for index, label in enumerate(labels_info):
             zpl = label.get("tag", "")
-            url = "http://api.labelary.com/v1/printers/8dpmm/labels/4x6/"
-            files = {"file": zpl}
-            headers = {"Accept": "application/pdf"}
-            response = requests.post(
-                url, headers=headers, files=files, stream=True, timeout=30
-            )
+            if label_format == "pdf":
+                url = "http://api.labelary.com/v1/printers/8dpmm/labels/4x6/"
+                files = {"file": zpl}
+                headers = {"Accept": "application/pdf"}
+                response = requests.post(
+                    url, headers=headers, files=files, stream=True, timeout=30
+                )
+                label_content = response.content
+                ext = "pdf"
+            else:
+                label_content = zpl
+                ext = "zpl"
             labels.append(
                 (
-                    "cbl_{}_{}_{}.pdf".format(
+                    "cbl_{}_{}_{}.{}".format(
                         tracking_ref,
                         label.get("sscc", ""),
                         index + 1,
+                        ext,
                     ),
-                    (response.content),
+                    label_content,
                 )
             )
         if labels:
