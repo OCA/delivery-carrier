@@ -16,50 +16,76 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.17\n"
 
-#. module: delivery_package_default_shipping_weight
-#: model:ir.model.fields,field_description:delivery_package_default_shipping_weight.field_product_packaging__package_default_shipping_weight
-msgid "Default shipping weight"
+#. module: delivery_package_type_shipping_weight
+#: model:ir.model,name:delivery_package_type_shipping_weight.model_choose_delivery_package
+msgid "Delivery Package Selection Wizard"
+msgstr ""
+
+#. module: delivery_package_type_shipping_weight
+#: model:ir.model.fields,field_description:delivery_package_type_shipping_weight.field_stock_package_type__is_base_weight_shipping_weight
+#, fuzzy
+msgid "Is shipping weight"
 msgstr "Varsayılan nakliye ağırlığı"
 
-#. module: delivery_package_default_shipping_weight
-#: code:addons/delivery_package_default_shipping_weight/models/product_packaging.py:0
-#, python-format
-msgid "Default shipping weight must be a positive or null value."
-msgstr "Varsayılan sevkiyat ağırlığı pozitif veya null değer olmalıdır."
-
-#. module: delivery_package_default_shipping_weight
-#: model:ir.model.fields,field_description:delivery_package_default_shipping_weight.field_product_packaging__display_name
-#: model:ir.model.fields,field_description:delivery_package_default_shipping_weight.field_stock_quant_package__display_name
-msgid "Display Name"
-msgstr "Görünüm Adı"
-
-#. module: delivery_package_default_shipping_weight
-#: model:ir.model.fields,field_description:delivery_package_default_shipping_weight.field_product_packaging__id
-#: model:ir.model.fields,field_description:delivery_package_default_shipping_weight.field_stock_quant_package__id
-msgid "ID"
-msgstr "ID"
-
-#. module: delivery_package_default_shipping_weight
-#: model:ir.model.fields,help:delivery_package_default_shipping_weight.field_product_packaging__package_default_shipping_weight
-msgid ""
-"If set, this weight will be used as default value for Shipping weight, when "
-"this Package Type is selected on a Package."
-msgstr ""
-"İşaretlenirse, bir Paket üzerinde bu Paket Türü seçildiğinde, bu ağırlık "
-"Nakliye ağırlığı için varsayılan değer olarak kullanılır."
-
-#. module: delivery_package_default_shipping_weight
-#: model:ir.model.fields,field_description:delivery_package_default_shipping_weight.field_product_packaging____last_update
-#: model:ir.model.fields,field_description:delivery_package_default_shipping_weight.field_stock_quant_package____last_update
-msgid "Last Modified on"
-msgstr "Son düzenleme"
-
-#. module: delivery_package_default_shipping_weight
-#: model:ir.model,name:delivery_package_default_shipping_weight.model_stock_quant_package
+#. module: delivery_package_type_shipping_weight
+#: model:ir.model,name:delivery_package_type_shipping_weight.model_stock_quant_package
 msgid "Packages"
 msgstr "Paketler"
 
-#. module: delivery_package_default_shipping_weight
-#: model:ir.model,name:delivery_package_default_shipping_weight.model_product_packaging
-msgid "Product Packaging"
-msgstr "Ürün Paketleme"
+#. module: delivery_package_type_shipping_weight
+#: model:ir.model,name:delivery_package_type_shipping_weight.model_sale_order
+msgid "Sales Order"
+msgstr ""
+
+#. module: delivery_package_type_shipping_weight
+#: model:ir.model,name:delivery_package_type_shipping_weight.model_delivery_carrier
+msgid "Shipping Methods"
+msgstr ""
+
+#. module: delivery_package_type_shipping_weight
+#: model:ir.model,name:delivery_package_type_shipping_weight.model_stock_package_type
+msgid "Stock package type"
+msgstr ""
+
+#. module: delivery_package_type_shipping_weight
+#: model:ir.model,name:delivery_package_type_shipping_weight.model_stock_picking
+msgid "Transfer"
+msgstr ""
+
+#. module: delivery_package_type_shipping_weight
+#. odoo-python
+#: code:addons/delivery_package_type_shipping_weight/models/stock_package_type.py:0
+msgid ""
+"Weight must be a positive or null value if Is shipping\n"
+"                        weight is enabled."
+msgstr ""
+
+#. module: delivery_package_type_shipping_weight
+#: model:ir.model.fields,help:delivery_package_type_shipping_weight.field_stock_package_type__is_base_weight_shipping_weight
+msgid ""
+"When flagged, the package type weight will be the package total weight.\n"
+"         The product weight won't be added"
+msgstr ""
+
+#, python-format
+#~ msgid "Default shipping weight must be a positive or null value."
+#~ msgstr "Varsayılan sevkiyat ağırlığı pozitif veya null değer olmalıdır."
+
+#~ msgid "Display Name"
+#~ msgstr "Görünüm Adı"
+
+#~ msgid "ID"
+#~ msgstr "ID"
+
+#~ msgid ""
+#~ "If set, this weight will be used as default value for Shipping weight, "
+#~ "when this Package Type is selected on a Package."
+#~ msgstr ""
+#~ "İşaretlenirse, bir Paket üzerinde bu Paket Türü seçildiğinde, bu ağırlık "
+#~ "Nakliye ağırlığı için varsayılan değer olarak kullanılır."
+
+#~ msgid "Last Modified on"
+#~ msgstr "Son düzenleme"
+
+#~ msgid "Product Packaging"
+#~ msgstr "Ürün Paketleme"

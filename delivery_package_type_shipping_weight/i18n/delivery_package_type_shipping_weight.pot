@@ -1,20 +1,17 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* delivery_package_default_shipping_weight
+# 	* delivery_package_type_shipping_weight
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 14.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-04-02 19:06+0000\n"
-"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
-"Language-Team: none\n"
-"Language: it\n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10.2\n"
+"Plural-Forms: \n"
 
 #. module: delivery_package_type_shipping_weight
 #: model:ir.model,name:delivery_package_type_shipping_weight.model_choose_delivery_package
@@ -23,14 +20,13 @@ msgstr ""
 
 #. module: delivery_package_type_shipping_weight
 #: model:ir.model.fields,field_description:delivery_package_type_shipping_weight.field_stock_package_type__is_base_weight_shipping_weight
-#, fuzzy
 msgid "Is shipping weight"
-msgstr "Peso spedizione predefinito"
+msgstr ""
 
 #. module: delivery_package_type_shipping_weight
 #: model:ir.model,name:delivery_package_type_shipping_weight.model_stock_quant_package
 msgid "Packages"
-msgstr "Colli"
+msgstr ""
 
 #. module: delivery_package_type_shipping_weight
 #: model:ir.model,name:delivery_package_type_shipping_weight.model_sale_order
@@ -66,26 +62,3 @@ msgid ""
 "When flagged, the package type weight will be the package total weight.\n"
 "         The product weight won't be added"
 msgstr ""
-
-#, python-format
-#~ msgid "Default shipping weight must be a positive or null value."
-#~ msgstr "Il peso spedizione predefinito deve essere positivo o zero."
-
-#~ msgid "Display Name"
-#~ msgstr "Nome visualizzato"
-
-#~ msgid "ID"
-#~ msgstr "ID"
-
-#~ msgid ""
-#~ "If set, this weight will be used as default value for Shipping weight, "
-#~ "when this Package Type is selected on a Package."
-#~ msgstr ""
-#~ "Se impostata, questo peso verrà usato come valore predefinito del peso di "
-#~ "spedizione, quando questo tipo di imballo è selezionato nell'imballo."
-
-#~ msgid "Last Modified on"
-#~ msgstr "Ultima modifica il"
-
-#~ msgid "Product Packaging"
-#~ msgstr "Imballaggio prodotto"
