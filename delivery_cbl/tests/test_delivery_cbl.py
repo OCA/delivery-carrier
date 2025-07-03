@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 import base64
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock, Mock, patch
 
 import requests
 from markupsafe import Markup
@@ -343,3 +343,62 @@ class TestCBLRequest(TransactionCase):
             mock_confirm.assert_called_once()
             args = mock_confirm.call_args[0][1]
             self.assertIn(self.picking, args)
+
+    def create_picking(self):
+        return self.env["stock.picking"].create(
+            {
+                "name": "Test Picking",
+                "location_id": self.location_src.id,
+                "location_dest_id": self.location_dest.id,
+                "picking_type_id": self.picking_type.id,
+                "carrier_id": self.carrier.id,
+            }
+        )
+
+    def test_generate_label_zpl(self):
+        self.carrier.cbl_label_format = "zpl"
+        picking = self.create_picking()
+
+        labels_info = [
+            {
+                "tag": "ZPL_EXAMPLE_CONTENT",
+                "sscc": "ABC123",
+            }
+        ]
+        tracking_ref = "ZPL123"
+
+        attachments = self.carrier.cdl_generate_labels(
+            picking, tracking_ref, labels_info
+        )
+
+        self.assertEqual(len(attachments), 1)
+        attachment = attachments[0]
+        self.assertTrue(attachment.name.startswith("cbl_ZPL123_ABC123_1.zpl"))
+        self.assertIn("ZPL_EXAMPLE_CONTENT", attachment.raw.decode("utf-8"))
+
+    @patch("requests.post")
+    def test_generate_label_pdf(self, mock_post):
+        self.carrier.cbl_label_format = "pdf"
+        picking = self.create_picking()
+
+        mock_response = Mock()
+        mock_response.status_code = 200
+        mock_response.content = b"%PDF-1.4 MOCKED PDF CONTENT"
+        mock_post.return_value = mock_response
+
+        labels_info = [
+            {
+                "tag": "ZPL_FOR_PDF",
+                "sscc": "PDF999",
+            }
+        ]
+        tracking_ref = "PDFTEST"
+
+        attachments = self.carrier.cdl_generate_labels(
+            picking, tracking_ref, labels_info
+        )
+
+        self.assertEqual(len(attachments), 1)
+        attachment = attachments[0]
+        self.assertTrue(attachment.name.startswith("cbl_PDFTEST_PDF999_1.pdf"))
+        self.assertIn("%PDF-1.4", attachment.raw.decode("utf-8"))
