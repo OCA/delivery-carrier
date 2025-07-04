@@ -1,0 +1,155 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* delivery_carrier_global_manifest
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-05-13 13:40+0000\n"
+"PO-Revision-Date: 2025-05-13 13:40+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: delivery_carrier_global_manifest
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_global_manifest.report_global_carrier_manifest
+msgid "<strong>Address</strong>"
+msgstr "<strong>Dirección</strong>"
+
+#. module: delivery_carrier_global_manifest
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_global_manifest.report_global_carrier_manifest
+msgid "<strong>Carrier</strong>"
+msgstr "<strong>Transportista</strong>"
+
+#. module: delivery_carrier_global_manifest
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_global_manifest.report_global_carrier_manifest
+msgid "<strong>Contact</strong>"
+msgstr "<strong>Contacto</strong>"
+
+#. module: delivery_carrier_global_manifest
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_global_manifest.report_global_carrier_manifest
+msgid "<strong>Date</strong>"
+msgstr "<strong>Fecha</strong>"
+
+#. module: delivery_carrier_global_manifest
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_global_manifest.report_global_carrier_manifest
+msgid "<strong>Delivery Date</strong>"
+msgstr "<strong>Fecha entrega</strong>"
+
+#. module: delivery_carrier_global_manifest
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_global_manifest.report_global_carrier_manifest
+msgid "<strong>Number of pickings</strong>"
+msgstr "<strong>Número albaranes</strong>"
+
+#. module: delivery_carrier_global_manifest
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_global_manifest.report_global_carrier_manifest
+msgid "<strong>Total of packages</strong>"
+msgstr "<strong>Paquetes totales</strong>"
+
+#. module: delivery_carrier_global_manifest
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_global_manifest.report_global_carrier_manifest
+msgid "<strong>Total weight</strong>"
+msgstr "<strong>Peso total</strong>"
+
+#. module: delivery_carrier_global_manifest
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_global_manifest.report_global_carrier_manifest
+msgid "<strong>Tracking</strong>"
+msgstr "<strong>Seguimiento</strong>"
+
+#. module: delivery_carrier_global_manifest
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_global_manifest.report_global_carrier_manifest
+msgid "<strong>Weight</strong>"
+msgstr "<strong>Peso</strong>"
+
+#. module: delivery_carrier_global_manifest
+#: model:ir.model.fields,field_description:delivery_carrier_global_manifest.field_manifest_wizard__carrier_id
+msgid "Carrier"
+msgstr "Transportista"
+
+#. module: delivery_carrier_global_manifest
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_global_manifest.report_global_carrier_manifest
+msgid "Carrier Manifest"
+msgstr "Manifiesto de trasportista"
+
+#. module: delivery_carrier_global_manifest
+#: model:ir.model,name:delivery_carrier_global_manifest.model_manifest_wizard
+msgid "Delivery carrier manifest wizard"
+msgstr "Asistente de manifiesto de entrega"
+
+#. module: delivery_carrier_global_manifest
+#: model:ir.actions.report,name:delivery_carrier_global_manifest.action_global_carrier_manifest
+msgid "Global Carrier Manifest"
+msgstr "Manifiesto global de trasportista"
+
+#. module: delivery_carrier_global_manifest
+#: model:ir.model.fields,field_description:delivery_carrier_global_manifest.field_manifest_wizard__is_global_manifest_query
+msgid "Global Manifest Query"
+msgstr "Consulta de manifiesto global"
+
+#. module: delivery_carrier_global_manifest
+#: model:ir.model.fields,help:delivery_carrier_global_manifest.field_manifest_wizard__is_global_manifest_query
+msgid ""
+"If no carriers are selected, a global manifest will be generated using all "
+"carriers configured to be included in the global manifest"
+msgstr ""
+"Si no se selecciona el trasportista, se generará un manifiesto global "
+"utilizando todos los trasportistas configurados para ser incluidos en el "
+"manifiesto global"
+
+#. module: delivery_carrier_global_manifest
+#: model:ir.model.fields,field_description:delivery_carrier_global_manifest.field_delivery_carrier__include_in_global_manifest
+msgid "Include In Global Manifest"
+msgstr "Incluir en el manifiesto global"
+
+#. module: delivery_carrier_global_manifest
+#. odoo-python
+#: code:addons/delivery_carrier_global_manifest/wizards/manifest_wizard.py:0
+#, python-format
+msgid "Manifest"
+msgstr "Manifiesto"
+
+#. module: delivery_carrier_global_manifest
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_global_manifest.view_delivery_carrier_form_global_manifest
+msgid ""
+"No carrier has been selected. A global manifest will be generated using all"
+" carriers configured to be included in it."
+msgstr "No se ha seleccionado ningún trasportista. Se generará un manifiesto global"
+" utilizando todos los trasportistas configurados para ser incluidos en él."
+
+#. module: delivery_carrier_global_manifest
+#: model:ir.model,name:delivery_carrier_global_manifest.model_delivery_carrier
+msgid "Shipping Methods"
+msgstr "Métodos de envío"
+
+#. module: delivery_carrier_global_manifest
+#. odoo-python
+#: code:addons/delivery_carrier_global_manifest/wizards/manifest_wizard.py:0
+#, python-format
+msgid "The selected carrier is not included in the global manifest"
+msgstr ""
+"El transportista seleccionado no está incluido en el manifiesto global"
+
+#. module: delivery_carrier_global_manifest
+#. odoo-python
+#: code:addons/delivery_carrier_global_manifest/wizards/manifest_wizard.py:0
+#, python-format
+msgid "There are no carriers included in the global manifest"
+msgstr "No hay transportistas incluidos en el manifiesto global"
+
+#. module: delivery_carrier_global_manifest
+#. odoo-python
+#: code:addons/delivery_carrier_global_manifest/wizards/manifest_wizard.py:0
+#, python-format
+msgid "There are no pickings to proceed"
+msgstr "No hay albaranes para procesar"
+
+#. module: delivery_carrier_global_manifest
+#. odoo-python
+#: code:addons/delivery_carrier_global_manifest/wizards/manifest_wizard.py:0
+#, python-format
+msgid "global-manifest.pdf"
+msgstr "manifiesto-global.pdf"

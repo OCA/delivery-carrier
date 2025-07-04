@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 Alberto Martínez <alberto.martinez@sygel.es>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="manifest_wizard_form_inherit_global" model="ir.ui.view">
+        <field name="name">manifest.wizard.form.inherit.global</field>
+        <field name="model">manifest.wizard</field>
+        <field
+            name="inherit_id"
+            ref="base_delivery_carrier_label.manifest_wizard_form"
+        />
+        <field name="arch" type="xml">
+            <field name="carrier_id" position="before">
+                <field name="global_manifest_query" widget="boolean_toggle" />
+                <field
+                    name="global_carrier_ids"
+                    invisible="not global_manifest_query"
+                    required="global_manifest_query"
+                    widget="many2many_tags"
+                />
+                <field
+                    name="company_id"
+                    invisible="not global_manifest_query"
+                    groups="base.group_multi_company"
+                />
+            </field>
+            <field name="carrier_id" position="attributes">
+                <attribute name="invisible">global_manifest_query</attribute>
+                <attribute name="required">not global_manifest_query</attribute>
+            </field>
+        </field>
+    </record>
+
+</odoo>
