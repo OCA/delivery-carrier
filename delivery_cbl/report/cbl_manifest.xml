@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 PlanetaTIC - Marc Poch <mpoch@planetatic.com>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="True">
+
+    <template id="report_cbl_manifest">
+        <t t-foreach="docs" t-as="doc">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <t t-set="total_packages" t-value="0" />
+                    <t t-set="total_weight" t-value="0" />
+                    <h4>CBL Manifest</h4>
+                    <table class="table table-sm mt48">
+                        <thead>
+                            <tr style="border: none !important;">
+                                <th><strong>Tracking</strong></th>
+                                <th><strong>Picking</strong></th>
+                                <th><strong>Date</strong></th>
+                                <th><strong>Contact</strong></th>
+                                <th><strong>Delivery Date</strong></th>
+                                <th><strong>Packages</strong></th>
+                                <th><strong>Weight</strong></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="pickings" t-as="picking">
+                                <t
+                                    t-set="total_packages"
+                                    t-value="total_packages + picking.number_of_packages"
+                                />
+                                <t
+                                    t-set="total_weight"
+                                    t-value="total_weight + picking.weight"
+                                />
+                                <tr>
+                                    <td><span
+                                            t-field="picking.carrier_tracking_ref"
+                                        /></td>
+                                    <td><span t-field="picking.name" /></td>
+                                    <td><span
+                                            t-esc="picking.date_done and picking.date_done.strftime('%d/%m/%Y') or ''"
+                                        /></td>
+                                    <td><span t-field="picking.partner_id.name" /></td>
+                                    <td><span
+                                            t-esc="picking.scheduled_date.strftime('%d/%m/%Y')"
+                                        /></td>
+                                    <td><span t-esc="picking.number_of_packages" /></td>
+                                    <td><span t-field="picking.weight" /></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                    <div class="col-3">
+                        <table class="table table-sm">
+                            <tr>
+                                <td><strong>Number of pickings</strong></td>
+                                <td class="text-end">
+                                    <span t-esc="len(pickings)" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Total of packages</strong></td>
+                                <td class="text-end">
+                                    <span t-esc="total_packages" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Total weight</strong></td>
+                                <td class="text-end">
+                                    <span t-esc="total_weight" />
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <record id="paperformat_cbl_manifest" model="report.paperformat">
+        <field name="name">CBL Manifest</field>
+        <field name="default" eval="True" />
+        <field name="format">A4</field>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">32</field>
+        <field name="margin_bottom">10</field>
+        <field name="margin_left">5</field>
+        <field name="margin_right">5</field>
+        <field name="header_line" eval="False" />
+        <field name="header_spacing">30</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <record id="action_cbl_manifest" model="ir.actions.report">
+        <field name="model">manifest.wizard</field>
+        <field name="name">CBL Manifest</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">delivery_cbl.report_cbl_manifest</field>
+        <field name="report_file">delivery_cbl.report_cbl_manifest</field>
+        <field name="paperformat_id" ref="paperformat_cbl_manifest" />
+    </record>
+
+</odoo>

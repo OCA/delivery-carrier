@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 Manuel Regidor <manuel.regidor@sygel.es>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="cbl_view_delivery_carrier_form" model="ir.ui.view">
+        <field name="model">delivery.carrier</field>
+        <field name="inherit_id" ref="delivery.view_delivery_carrier_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page
+                    string="CBL"
+                    name="configuration_cbl"
+                    invisible="delivery_type != 'cbl'"
+                >
+                    <group>
+                        <field name="cbl_cash_on_delivery" />
+                        <field name="cbl_needs_confirmation" />
+                        <field name="cbl_label_format" />
+                        <field name="cbl_user" required="delivery_type == 'cbl'" />
+                        <field
+                            name="cbl_password"
+                            password="True"
+                            required="delivery_type == 'cbl'"
+                        />
+                        <field
+                            name="cbl_client_code"
+                            required="delivery_type == 'cbl'"
+                        />
+                        <field
+                            name="cbl_client_token"
+                            password="True"
+                            required="delivery_type == 'cbl'"
+                        />
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

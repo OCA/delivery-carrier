@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 Manuel Regidor <manuel.regidor@sygel.es>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="cbl_view_picking_form" model="ir.ui.view">
+        <field name="model">stock.picking</field>
+        <field
+            name="inherit_id"
+            ref="stock_delivery.view_picking_withcarrier_out_form"
+        />
+        <field name="arch" type="xml">
+            <field name="carrier_id" position="after">
+                <field
+                    name="cbl_confirmed"
+                    invisible="delivery_type != 'cbl' or not carrier_tracking_ref"
+                    readonly="1"
+                />
+            </field>
+            <button name="cancel_shipment" position="after">
+                <button
+                    type='object'
+                    class="oi oe_link"
+                    icon="fa-check"
+                    confirm="Are you sure you want to confirm this CBL shipping?"
+                    name="cbl_confirm_shipment"
+                    string="Confirm"
+                    invisible="not delivery_type == 'cbl' or not carrier_tracking_ref or cbl_confirmed"
+                />
+            </button>
+        </field>
+    </record>
+</odoo>
