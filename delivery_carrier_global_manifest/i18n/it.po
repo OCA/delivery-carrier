@@ -1,0 +1,138 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* delivery_carrier_global_manifest
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#. module: delivery_carrier_global_manifest
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_global_manifest.report_global_carrier_manifest
+msgid "<strong>Address</strong>"
+msgstr ""
+
+#. module: delivery_carrier_global_manifest
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_global_manifest.report_global_carrier_manifest
+msgid "<strong>Carrier</strong>"
+msgstr ""
+
+#. module: delivery_carrier_global_manifest
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_global_manifest.report_global_carrier_manifest
+msgid "<strong>Contact</strong>"
+msgstr ""
+
+#. module: delivery_carrier_global_manifest
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_global_manifest.report_global_carrier_manifest
+msgid "<strong>Date</strong>"
+msgstr ""
+
+#. module: delivery_carrier_global_manifest
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_global_manifest.report_global_carrier_manifest
+msgid "<strong>Delivery Date</strong>"
+msgstr ""
+
+#. module: delivery_carrier_global_manifest
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_global_manifest.report_global_carrier_manifest
+msgid "<strong>Number of pickings</strong>"
+msgstr ""
+
+#. module: delivery_carrier_global_manifest
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_global_manifest.report_global_carrier_manifest
+msgid "<strong>Total of packages</strong>"
+msgstr ""
+
+#. module: delivery_carrier_global_manifest
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_global_manifest.report_global_carrier_manifest
+msgid "<strong>Total weight</strong>"
+msgstr ""
+
+#. module: delivery_carrier_global_manifest
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_global_manifest.report_global_carrier_manifest
+msgid "<strong>Tracking</strong>"
+msgstr ""
+
+#. module: delivery_carrier_global_manifest
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_global_manifest.report_global_carrier_manifest
+msgid "<strong>Weight</strong>"
+msgstr ""
+
+#. module: delivery_carrier_global_manifest
+#: model:ir.model.fields,help:delivery_carrier_global_manifest.field_manifest_wizard__global_manifest_query
+msgid ""
+"A global manifest query generates a generic global manifest report using all"
+" carriers configured to be included on it"
+msgstr ""
+
+#. module: delivery_carrier_global_manifest
+#: model:ir.model.fields,field_description:delivery_carrier_global_manifest.field_manifest_wizard__carrier_id
+msgid "Carrier"
+msgstr ""
+
+#. module: delivery_carrier_global_manifest
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_global_manifest.report_global_carrier_manifest
+msgid "Carrier Manifest"
+msgstr ""
+
+#. module: delivery_carrier_global_manifest
+#: model:ir.model.fields,field_description:delivery_carrier_global_manifest.field_manifest_wizard__company_id
+msgid "Company"
+msgstr ""
+
+#. module: delivery_carrier_global_manifest
+#: model:ir.model,name:delivery_carrier_global_manifest.model_manifest_wizard
+msgid "Delivery carrier manifest wizard"
+msgstr ""
+
+#. module: delivery_carrier_global_manifest
+#: model:ir.actions.report,name:delivery_carrier_global_manifest.action_global_carrier_manifest
+msgid "Global Carrier Manifest"
+msgstr ""
+
+#. module: delivery_carrier_global_manifest
+#: model:ir.model.fields,field_description:delivery_carrier_global_manifest.field_manifest_wizard__global_carrier_ids
+msgid "Global Carriers"
+msgstr ""
+
+#. module: delivery_carrier_global_manifest
+#: model:ir.model.fields,field_description:delivery_carrier_global_manifest.field_manifest_wizard__global_manifest_query
+msgid "Global Manifest"
+msgstr ""
+
+#. module: delivery_carrier_global_manifest
+#: model:ir.model.fields,field_description:delivery_carrier_global_manifest.field_delivery_carrier__include_in_global_manifest
+msgid "Include In Global Manifest"
+msgstr ""
+
+#. module: delivery_carrier_global_manifest
+#. odoo-python
+#: code:addons/delivery_carrier_global_manifest/wizards/manifest_wizard.py:0
+#, python-format
+msgid "Manifest"
+msgstr ""
+
+#. module: delivery_carrier_global_manifest
+#: model:ir.model,name:delivery_carrier_global_manifest.model_delivery_carrier
+msgid "Shipping Methods"
+msgstr ""
+
+#. module: delivery_carrier_global_manifest
+#. odoo-python
+#: code:addons/delivery_carrier_global_manifest/wizards/manifest_wizard.py:0
+#, python-format
+msgid "There are no pickings to proceed"
+msgstr ""
+
+#. module: delivery_carrier_global_manifest
+#. odoo-python
+#: code:addons/delivery_carrier_global_manifest/wizards/manifest_wizard.py:0
+#, python-format
+msgid "global-manifest.pdf"
+msgstr ""
