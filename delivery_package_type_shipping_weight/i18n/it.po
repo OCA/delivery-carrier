@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-04-02 19:06+0000\n"
+"PO-Revision-Date: 2025-07-07 09:25+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -14,18 +14,17 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10.2\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #. module: delivery_package_type_shipping_weight
 #: model:ir.model,name:delivery_package_type_shipping_weight.model_choose_delivery_package
 msgid "Delivery Package Selection Wizard"
-msgstr ""
+msgstr "Procedura guidata selezione collo consegna"
 
 #. module: delivery_package_type_shipping_weight
 #: model:ir.model.fields,field_description:delivery_package_type_shipping_weight.field_stock_package_type__is_base_weight_shipping_weight
-#, fuzzy
 msgid "Is shipping weight"
-msgstr "Peso spedizione predefinito"
+msgstr "Peso della spedizione"
 
 #. module: delivery_package_type_shipping_weight
 #: model:ir.model,name:delivery_package_type_shipping_weight.model_stock_quant_package
@@ -35,22 +34,22 @@ msgstr "Colli"
 #. module: delivery_package_type_shipping_weight
 #: model:ir.model,name:delivery_package_type_shipping_weight.model_sale_order
 msgid "Sales Order"
-msgstr ""
+msgstr "Ordine di vendita"
 
 #. module: delivery_package_type_shipping_weight
 #: model:ir.model,name:delivery_package_type_shipping_weight.model_delivery_carrier
 msgid "Shipping Methods"
-msgstr ""
+msgstr "Metodi di spedizione"
 
 #. module: delivery_package_type_shipping_weight
 #: model:ir.model,name:delivery_package_type_shipping_weight.model_stock_package_type
 msgid "Stock package type"
-msgstr ""
+msgstr "Tipo collo magazzino"
 
 #. module: delivery_package_type_shipping_weight
 #: model:ir.model,name:delivery_package_type_shipping_weight.model_stock_picking
 msgid "Transfer"
-msgstr ""
+msgstr "Trasferimento"
 
 #. module: delivery_package_type_shipping_weight
 #. odoo-python
@@ -59,6 +58,8 @@ msgid ""
 "Weight must be a positive or null value if Is shipping\n"
 "                        weight is enabled."
 msgstr ""
+"Il peso deve essere un valore positivo o nullo se il\n"
+"                        peso spedizione è abilitato."
 
 #. module: delivery_package_type_shipping_weight
 #: model:ir.model.fields,help:delivery_package_type_shipping_weight.field_stock_package_type__is_base_weight_shipping_weight
@@ -66,6 +67,8 @@ msgid ""
 "When flagged, the package type weight will be the package total weight.\n"
 "         The product weight won't be added"
 msgstr ""
+"Quando spuntato, il peso del tipo collo sarà il peso totale del collo.\n"
+"         Non verrà aggiunto il peso del prodotto"
 
 #, python-format
 #~ msgid "Default shipping weight must be a positive or null value."
