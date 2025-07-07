@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 Moduon Team S.L.
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0) -->
+<odoo>
+    <record id="view_delivery_carrier_tree_inherit_delivery_driver" model="ir.ui.view">
+        <field name="name">Delivery Carrier Driver Tree</field>
+        <field name="model">delivery.carrier</field>
+        <field name="inherit_id" ref="delivery.view_delivery_carrier_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='delivery_type']" position="after">
+                <field name="driver_id" optional="hide" />
+            </xpath>
+        </field>
+    </record>
+    <record
+        id="view_delivery_carrier_search_inherit_delivery_driver"
+        model="ir.ui.view"
+    >
+        <field name="name">Delivery Carrier Driver Search</field>
+        <field name="model">delivery.carrier</field>
+        <field name="inherit_id" ref="delivery.view_delivery_carrier_search" />
+        <field name="arch" type="xml">
+            <xpath expr="field[@name='delivery_type']" position="after">
+                <field name="driver_id" />
+            </xpath>
+            <xpath expr="//filter[@name='provider']" position="after">
+                <filter
+                    name="driver_id"
+                    string="Driver"
+                    context="{'group_by':'driver_id'}"
+                />
+            </xpath>
+        </field>
+    </record>
+    <record id="view_delivery_carrier_form_inherit_delivery_driver" model="ir.ui.view">
+        <field name="name">Delivery Carrier Driver Form</field>
+        <field name="model">delivery.carrier</field>
+        <field name="inherit_id" ref="delivery.view_delivery_carrier_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='delivery_details']" position="inside">
+                <field name="driver_id" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

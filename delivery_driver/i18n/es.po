@@ -1,0 +1,70 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* delivery_driver
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-02-27 14:14+0000\n"
+"PO-Revision-Date: 2024-03-26 20:34+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: delivery_driver
+#: model:ir.model,name:delivery_driver.model_res_partner
+msgid "Contact"
+msgstr "Contacto"
+
+#. module: delivery_driver
+#: model:ir.model.fields,field_description:delivery_driver.field_delivery_carrier__driver_id
+msgid "Default Driver"
+msgstr "Conductor por defecto"
+
+#. module: delivery_driver
+#: model:ir.model.fields,help:delivery_driver.field_delivery_carrier__driver_id
+msgid "Default driver for this delivery method"
+msgstr "Conductor por defecto para este método de envío"
+
+#. module: delivery_driver
+#: model:ir.model.fields,field_description:delivery_driver.field_res_partner__is_driver
+#: model:ir.model.fields,field_description:delivery_driver.field_res_users__is_driver
+#: model:ir.model.fields,field_description:delivery_driver.field_stock_move_line__driver_id
+#: model:ir.model.fields,field_description:delivery_driver.field_stock_picking__driver_id
+#: model_terms:ir.ui.view,arch_db:delivery_driver.view_delivery_carrier_search_inherit_delivery_driver
+#: model_terms:ir.ui.view,arch_db:delivery_driver.view_partner_form_inherit_delivery_driver
+#: model_terms:ir.ui.view,arch_db:delivery_driver.view_picking_internal_search_inherit_delivery_driver
+msgid "Driver"
+msgstr "Conductor"
+
+#. module: delivery_driver
+#: model:ir.model,name:delivery_driver.model_stock_move_line
+msgid "Product Moves (Stock Move Line)"
+msgstr "Movimientos de Producto (Stock Move Line)"
+
+#. module: delivery_driver
+#: model:ir.model,name:delivery_driver.model_delivery_carrier
+msgid "Shipping Methods"
+msgstr "Métodos de envío"
+
+#. module: delivery_driver
+#: model:ir.model,name:delivery_driver.model_stock_picking
+msgid "Transfer"
+msgstr "Albarán"
+
+#. module: delivery_driver
+#. odoo-python
+#: code:addons/delivery_driver/models/res_partner.py:0
+#, python-format
+msgid ""
+"You can't remove the driver flag from a partner that is set as driver in a "
+"delivery method."
+msgstr ""
+"No se puede eliminar el indicador de conductor de un contacto que esté "
+"establecido como conductor en un método de entrega."
