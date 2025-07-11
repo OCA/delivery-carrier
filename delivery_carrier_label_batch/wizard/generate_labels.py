@@ -50,7 +50,11 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
             operations, key=lambda r: r.result_package_id or r.package_id
         ):
             pack_label = self._find_pack_label(pack)
-            yield pack, list(grp_operations), pack_label
+            yield (
+                pack,
+                self.env["stock.move.line"].browse([o.id for o in grp_operations]),
+                pack_label,
+            )
 
     @api.model
     def _find_pack_label(self, pack):
