@@ -1,0 +1,12 @@
+<odoo>
+    <template
+        id="report_picking_batch_delivery_fleet_inherit"
+        inherit_id="stock_fleet.report_picking_batch_inherit"
+    >
+        <xpath expr="//div[@t-if='o.vehicle_id']" position="inside">
+            <t t-if="o.driver_id">
+                <span>(<t t-esc="o.driver_id.name" />)</span>
+            </t>
+        </xpath>
+    </template>
+</odoo>
