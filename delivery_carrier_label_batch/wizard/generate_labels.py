@@ -153,8 +153,10 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
 
         if not is_in_testing:
             # create few workers to parallelize label generation
-            num_workers = self._get_num_workers()
-            _logger.info(f"Starting {num_workers} workers to generate labels")
+            num_workers = min(len(groups), self._get_num_workers())
+            _logger.info(
+                f"Starting {num_workers} workers to generate labels for batch {batch}"
+            )
             for _i in range(num_workers):
                 t = threading.Thread(
                     target=self._worker, args=(data_queue, error_queue)
@@ -164,6 +166,7 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
 
             # wait for all tasks to be done
             data_queue.join()
+            _logger.info(f"all workers completed for batch {batch}")
             # empty the cache so the main env doesn't miss any data updates
             # (parcel tracking numbers...) done by the threads
             self.env.invalidate_all()
