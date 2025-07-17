@@ -1,0 +1,3 @@
+- Configure a delivery carrier with a tracking URL template and separator.
+- Set a tracking reference on a picking.
+- View clickable tracking links on the picking form.

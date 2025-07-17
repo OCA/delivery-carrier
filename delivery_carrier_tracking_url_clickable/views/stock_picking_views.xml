@@ -1,0 +1,18 @@
+<odoo>
+
+  <record id="view_picking_form_inherit_tracking_url_clickable" model="ir.ui.view">
+    <field name="name">stock.picking.form.inherit.tracking.url.clickable</field>
+    <field name="model">stock.picking</field>
+    <field name="inherit_id" ref="delivery.view_picking_withcarrier_out_form" />
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='carrier_tracking_ref']" position="after">
+        <field name="tracking_url_clickable" readonly="1" />
+      </xpath>
+      <!-- Hide existing field from stock.picking -->
+      <xpath expr="//field[@name='default_tracking_url']" position="attributes">
+        <attribute name="invisible">1</attribute>
+      </xpath>
+    </field>
+  </record>
+
+</odoo>
