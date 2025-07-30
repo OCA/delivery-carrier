@@ -51,6 +51,7 @@ class TestCorreosExpressRequest(common.SingleTransactionCase):
 
     @mock.patch("requests.post")
     def test_02_send_api_request_timeout(self, mock_post):
+        self.env = self.env(context=dict(self.env.context, lang="en_US"))
         mock_post.side_effect = requests.exceptions.Timeout()
         with self.assertRaises(UserError):
             self.correos_express_request._send_api_request(
@@ -71,31 +72,31 @@ class TestCorreosExpressRequest(common.SingleTransactionCase):
         self.assertEqual(return_code, 0)
         self.assertEqual(message, "")
 
-    def test_05_check_for_error_shipment_error(self):
+    def test_04_check_for_error_shipment_error(self):
         result = {"codigoRetorno": 1, "mensajeRetorno": "Test Error"}
         return_code, message = self.correos_express_request._check_for_error(result)
         self.assertEqual(return_code, 1)
         self.assertEqual(message, "Test Error")
 
-    def test_06_check_for_error_label_success(self):
+    def test_05_check_for_error_label_success(self):
         result = {"codErr": 0, "desErr": ""}
         return_code, message = self.correos_express_request._check_for_error(result)
         self.assertEqual(return_code, 0)
         self.assertEqual(message, "")
 
-    def test_07_check_for_error_label_error(self):
+    def test_06_check_for_error_label_error(self):
         result = {"codErr": 1, "desErr": "Test Error"}
         return_code, message = self.correos_express_request._check_for_error(result)
         self.assertEqual(return_code, 1)
         self.assertEqual(message, "Test Error")
 
-    def test_08_check_for_error_tracking_success(self):
+    def test_07_check_for_error_tracking_success(self):
         result = {"error": 0, "mensajeError": ""}
         return_code, message = self.correos_express_request._check_for_error(result)
         self.assertEqual(return_code, 0)
         self.assertEqual(message, "")
 
-    def test_09_check_for_error_tracking_error(self):
+    def test_08_check_for_error_tracking_error(self):
         result = {"error": 1, "mensajeError": "Test Error"}
         return_code, message = self.correos_express_request._check_for_error(result)
         self.assertEqual(return_code, 1)

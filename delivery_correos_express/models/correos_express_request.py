@@ -5,7 +5,6 @@ import logging
 
 import requests
 
-from odoo import _
 from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
@@ -68,7 +67,9 @@ class CorreosExpressRequest:
                 res = requests.post(url=url, auth=auth, json=data, timeout=60)
             else:
                 raise UserError(
-                    _("Unsupported request type, please only use 'GET' or 'POST'")
+                    self.carrier_id.env._(
+                        "Unsupported request type, please only use 'GET' or 'POST'"
+                    )
                 )
             result = res.json()
             correos_express_last_request = f"URL: {url}\nData: {data}"
@@ -79,17 +80,21 @@ class CorreosExpressRequest:
             _logger.debug(res.json())
             res.raise_for_status()
         except requests.exceptions.Timeout as tmo:
-            raise UserError(_("Timeout: the server did not reply within 60s")) from tmo
+            raise UserError(
+                self.carrier_id.env._("Timeout: the server did not reply within 60s")
+            ) from tmo
         except Exception as e:
             raise UserError(
-                _("{error}\n{result}".format(error=e, result=result if result else ""))
+                self.carrier_id.env._(
+                    "{error}\n{result}".format(error=e, result=result if result else "")
+                )
             ) from e
         return_code, message = self._check_for_error(result)
         if return_code != 0:
             raise UserError(
-                _("Correos Express Error: {return_code} {message}").format(
-                    return_code=return_code, message=message
-                )
+                self.carrier_id.env._(
+                    "Correos Express Error: {return_code} {message}"
+                ).format(return_code=return_code, message=message)
             )
         return res
 
