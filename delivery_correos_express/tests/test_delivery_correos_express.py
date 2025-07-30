@@ -51,7 +51,7 @@ class TestCorreosExpressParcel(common.SingleTransactionCase):
         cls.picking.move_ids.quantity = 20
 
     @mock.patch(
-        "%s.create_shipment" % request_model,
+        f"{request_model}.create_shipment",
         return_value={
             "codigoRetorno": 0,
             "mensajeRetorno": "",
@@ -68,7 +68,7 @@ class TestCorreosExpressParcel(common.SingleTransactionCase):
         )
 
     @mock.patch(
-        "%s.track_shipment" % request_model,
+        f"{request_model}.track_shipment",
         return_value={
             "estadoEnvios": [
                 {
@@ -98,7 +98,7 @@ class TestCorreosExpressParcel(common.SingleTransactionCase):
         self.assertTrue(tracking)
 
     @mock.patch(
-        "%s.print_shipment" % request_model,
+        f"{request_model}.print_shipment",
         return_value=["JVBERiasdasdsdcfnsdhfbasdf=="],
     )
     def test_04_correos_express_get_label(self, redirect_mock, *args):
