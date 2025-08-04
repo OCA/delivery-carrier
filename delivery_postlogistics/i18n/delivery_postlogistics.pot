@@ -360,12 +360,14 @@ msgid "Postlogistics Default Package Type"
 msgstr ""
 
 #. module: delivery_postlogistics
+#: model:ir.model.fields,field_description:delivery_postlogistics.field_dropoff_site__postlogistics_notification
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_res_partner__postlogistics_notification
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_res_users__postlogistics_notification
 msgid "Postlogistics Notification"
 msgstr ""
 
 #. module: delivery_postlogistics
+#: model:ir.model.fields,field_description:delivery_postlogistics.field_dropoff_site__delivery_carrier_template_option_ids
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_res_partner__delivery_carrier_template_option_ids
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_res_users__delivery_carrier_template_option_ids
 msgid "Postlogistics Options"
