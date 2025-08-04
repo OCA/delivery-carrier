@@ -6,94 +6,96 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2025-08-04 10:27+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #. module: delivery_cbl
 #: model_terms:ir.ui.view,arch_db:delivery_cbl.report_cbl_manifest
 msgid "<strong>Contact</strong>"
-msgstr ""
+msgstr "<strong>Contatto</strong>"
 
 #. module: delivery_cbl
 #: model_terms:ir.ui.view,arch_db:delivery_cbl.report_cbl_manifest
 msgid "<strong>Date</strong>"
-msgstr ""
+msgstr "<strong>Data</strong>"
 
 #. module: delivery_cbl
 #: model_terms:ir.ui.view,arch_db:delivery_cbl.report_cbl_manifest
 msgid "<strong>Delivery Date</strong>"
-msgstr ""
+msgstr "<strong>Data consegna</strong>"
 
 #. module: delivery_cbl
 #: model_terms:ir.ui.view,arch_db:delivery_cbl.report_cbl_manifest
 msgid "<strong>Number of pickings</strong>"
-msgstr ""
+msgstr "<strong>Numero di prelievi</strong>"
 
 #. module: delivery_cbl
 #: model_terms:ir.ui.view,arch_db:delivery_cbl.report_cbl_manifest
 msgid "<strong>Packages</strong>"
-msgstr ""
+msgstr "<strong>Colli</strong>"
 
 #. module: delivery_cbl
 #: model_terms:ir.ui.view,arch_db:delivery_cbl.report_cbl_manifest
 msgid "<strong>Picking</strong>"
-msgstr ""
+msgstr "<strong>Prelievi</strong>"
 
 #. module: delivery_cbl
 #: model_terms:ir.ui.view,arch_db:delivery_cbl.report_cbl_manifest
 msgid "<strong>Total of packages</strong>"
-msgstr ""
+msgstr "<strong>Totale colli</strong>"
 
 #. module: delivery_cbl
 #: model_terms:ir.ui.view,arch_db:delivery_cbl.report_cbl_manifest
 msgid "<strong>Total weight</strong>"
-msgstr ""
+msgstr "<strong>Peso totale</strong>"
 
 #. module: delivery_cbl
 #: model_terms:ir.ui.view,arch_db:delivery_cbl.report_cbl_manifest
 msgid "<strong>Tracking</strong>"
-msgstr ""
+msgstr "<strong>Tracciamento</strong>"
 
 #. module: delivery_cbl
 #: model_terms:ir.ui.view,arch_db:delivery_cbl.report_cbl_manifest
 msgid "<strong>Weight</strong>"
-msgstr ""
+msgstr "<strong>Peso</strong>"
 
 #. module: delivery_cbl
 #: model_terms:ir.ui.view,arch_db:delivery_cbl.cbl_view_picking_form
 msgid "Are you sure you want to confirm this CBL shipping?"
-msgstr ""
+msgstr "Si è sicuri di voler confermare questa spedizione CBL?"
 
 #. module: delivery_cbl
 #: model:ir.model.fields.selection,name:delivery_cbl.selection__delivery_carrier__delivery_type__cbl
 #: model_terms:ir.ui.view,arch_db:delivery_cbl.cbl_view_delivery_carrier_form
 msgid "CBL"
-msgstr ""
+msgstr "CBL"
 
 #. module: delivery_cbl
 #. odoo-python
 #: code:addons/delivery_cbl/models/delivery_carrier.py:0
 #, python-format
 msgid "CBL Expedition confirmed."
-msgstr ""
+msgstr "Spedizione CBL confermata."
 
 #. module: delivery_cbl
 #: model:ir.actions.report,name:delivery_cbl.action_cbl_manifest
 #: model_terms:ir.ui.view,arch_db:delivery_cbl.report_cbl_manifest
 msgid "CBL Manifest"
-msgstr ""
+msgstr "Lista di carico CBL"
 
 #. module: delivery_cbl
 #. odoo-python
 #: code:addons/delivery_cbl/models/delivery_carrier.py:0
 #, python-format
 msgid "CBL Parcel Expedition with reference %(tracking)s cancelled."
-msgstr ""
+msgstr "Spedizione del pacco CBL con riferimento %(tracking)s annullata."
 
 #. module: delivery_cbl
 #. odoo-python
@@ -103,84 +105,86 @@ msgid ""
 "CBL Shipping for picking %(picking)s could not be created. Reason: "
 "%(reason)s"
 msgstr ""
+"Impossibile creare la spedizione CBL per il prelievo di %(picking)s. Motivo: "
+"%(reason)s"
 
 #. module: delivery_cbl
 #. odoo-python
 #: code:addons/delivery_cbl/models/delivery_carrier.py:0
 #, python-format
 msgid "CBL label(s) created."
-msgstr ""
+msgstr "Etichette CBL create."
 
 #. module: delivery_cbl
 #: model:ir.actions.server,name:delivery_cbl.cbl_confirm_shipments_cron_ir_actions_server
 msgid "CBL: Confirm Shipments"
-msgstr ""
+msgstr "CBL: conferma spedizioni"
 
 #. module: delivery_cbl
 #: model:ir.model.fields,field_description:delivery_cbl.field_delivery_carrier__cbl_cash_on_delivery
 msgid "Cash On Delivery"
-msgstr ""
+msgstr "Contanti alla consegna"
 
 #. module: delivery_cbl
 #: model:ir.model.fields,field_description:delivery_cbl.field_stock_picking__cbl_confirmed
 msgid "Cbl Confirmed"
-msgstr ""
+msgstr "CBL confermato"
 
 #. module: delivery_cbl
 #: model:ir.model.fields,field_description:delivery_cbl.field_delivery_carrier__cbl_client_code
 msgid "Client Code"
-msgstr ""
+msgstr "Codice cliente"
 
 #. module: delivery_cbl
 #: model:ir.model.fields,field_description:delivery_cbl.field_delivery_carrier__cbl_client_token
 msgid "Client Token"
-msgstr ""
+msgstr "Token cliente"
 
 #. module: delivery_cbl
 #: model_terms:ir.ui.view,arch_db:delivery_cbl.wizard_confirm_cbl_pickings
 msgid "Close"
-msgstr ""
+msgstr "Chiudi"
 
 #. module: delivery_cbl
 #: model_terms:ir.ui.view,arch_db:delivery_cbl.cbl_view_picking_form
 msgid "Confirm"
-msgstr ""
+msgstr "Conferma"
 
 #. module: delivery_cbl
 #: model:ir.actions.server,name:delivery_cbl.server_action_open_wizard_confirm_cbl_pickings
 #: model_terms:ir.ui.view,arch_db:delivery_cbl.wizard_confirm_cbl_pickings
 msgid "Confirm CBL pickings"
-msgstr ""
+msgstr "Conferma prelievo CBL"
 
 #. module: delivery_cbl
 #: model_terms:ir.ui.view,arch_db:delivery_cbl.wizard_confirm_cbl_pickings
 msgid "Confirm Shipments"
-msgstr ""
+msgstr "Conferma spedizioni"
 
 #. module: delivery_cbl
 #: model:ir.actions.act_window,name:delivery_cbl.action_wizard_confirm_cbl_pickings
 msgid "Confirm pickings"
-msgstr ""
+msgstr "Conferma prelievi"
 
 #. module: delivery_cbl
 #: model:ir.model.fields,field_description:delivery_cbl.field_wizard_confirm_cbl_pickings__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Creato da"
 
 #. module: delivery_cbl
 #: model:ir.model.fields,field_description:delivery_cbl.field_wizard_confirm_cbl_pickings__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Creato il"
 
 #. module: delivery_cbl
 #: model:ir.model,name:delivery_cbl.model_manifest_wizard
 msgid "Delivery carrier manifest wizard"
-msgstr ""
+msgstr "Procedura guidata lista carico vettore consegna"
 
 #. module: delivery_cbl
 #: model:ir.model.fields,field_description:delivery_cbl.field_wizard_confirm_cbl_pickings__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome visualizzato"
 
 #. module: delivery_cbl
 #: model:ir.model.fields,help:delivery_cbl.field_delivery_carrier__cbl_label_format
@@ -188,11 +192,14 @@ msgid ""
 "Format to generate shipping labels.\n"
 "If PDF is selected, labels will be generated using an external service (labelary.com)."
 msgstr ""
+"Formato per generare le etichette di spedizione.\n"
+"Se si seleziona il formato PDF, le etichette verranno generate utilizzando "
+"un servizio esterno (labelary.com)."
 
 #. module: delivery_cbl
 #: model:ir.model.fields,field_description:delivery_cbl.field_wizard_confirm_cbl_pickings__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: delivery_cbl
 #: model:ir.model.fields,help:delivery_cbl.field_delivery_carrier__cbl_needs_confirmation
@@ -200,6 +207,9 @@ msgid ""
 "If checked, expeditions need to be confirmed after the tracking number is "
 "generated to be officially introduced in CBL pending shipments database."
 msgstr ""
+"Se selezionata, le spedizioni devono essere confermate dopo la generazione "
+"del numero di tracciamento per essere inserite ufficialmente nel database "
+"delle spedizioni in sospeso di CBL."
 
 #. module: delivery_cbl
 #: model:ir.model.fields,help:delivery_cbl.field_delivery_carrier__cbl_cash_on_delivery
@@ -208,70 +218,73 @@ msgid ""
 " a sale order linked and it will use that total amount as the value to be "
 "paid"
 msgstr ""
+"Se selezionato, significa che il corriere viene pagato in contanti. "
+"Presuppone che ci sia un ordine di vendita collegato e utilizzerà "
+"quell'importo totale come valore da pagare"
 
 #. module: delivery_cbl
 #: model:ir.model.fields,field_description:delivery_cbl.field_delivery_carrier__cbl_label_format
 msgid "Label Format"
-msgstr ""
+msgstr "Formato etichetta"
 
 #. module: delivery_cbl
 #: model:ir.model.fields,field_description:delivery_cbl.field_wizard_confirm_cbl_pickings__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Ultimo aggiornamento di"
 
 #. module: delivery_cbl
 #: model:ir.model.fields,field_description:delivery_cbl.field_wizard_confirm_cbl_pickings__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Ultimo aggiornamento il"
 
 #. module: delivery_cbl
 #. odoo-python
 #: code:addons/delivery_cbl/wizard/manifest_wizard.py:0
 #, python-format
 msgid "Manifest"
-msgstr ""
+msgstr "Lista di carico"
 
 #. module: delivery_cbl
 #: model:ir.model.fields,field_description:delivery_cbl.field_delivery_carrier__cbl_needs_confirmation
 msgid "Needs Confirmation"
-msgstr ""
+msgstr "Chiede conferma"
 
 #. module: delivery_cbl
 #: model:ir.model.fields.selection,name:delivery_cbl.selection__delivery_carrier__cbl_label_format__pdf
 msgid "PDF"
-msgstr ""
+msgstr "PDF"
 
 #. module: delivery_cbl
 #: model:ir.model.fields,field_description:delivery_cbl.field_delivery_carrier__cbl_password
 msgid "Password"
-msgstr ""
+msgstr "Password"
 
 #. module: delivery_cbl
 #: model:ir.model.fields,field_description:delivery_cbl.field_wizard_confirm_cbl_pickings__picking_ids
 msgid "Picking"
-msgstr ""
+msgstr "Prelievo"
 
 #. module: delivery_cbl
 #: model:ir.model.fields,field_description:delivery_cbl.field_delivery_carrier__delivery_type
 msgid "Provider"
-msgstr ""
+msgstr "Fornitore"
 
 #. module: delivery_cbl
 #: model:ir.model,name:delivery_cbl.model_delivery_carrier
 msgid "Shipping Methods"
-msgstr ""
+msgstr "Metodi di spedizione"
 
 #. module: delivery_cbl
 #. odoo-python
 #: code:addons/delivery_cbl/wizard/manifest_wizard.py:0
 #, python-format
 msgid "There are no pickings to proceed"
-msgstr ""
+msgstr "Non ci sono prelievi da elaborare"
 
 #. module: delivery_cbl
 #: model:ir.model,name:delivery_cbl.model_stock_picking
 msgid "Transfer"
-msgstr ""
+msgstr "Trasferimento"
 
 #. module: delivery_cbl
 #. odoo-python
@@ -282,18 +295,21 @@ msgid ""
 "sure that the reference is correct and the expedition has not been already "
 "canceled."
 msgstr ""
+"Impossibile annullare la spedizione CBL con riferimento %(tracking)s. "
+"Assicurati che il riferimento sia corretto e che la spedizione non sia già "
+"stata annullata."
 
 #. module: delivery_cbl
 #: model:ir.model.fields,field_description:delivery_cbl.field_delivery_carrier__cbl_user
 msgid "User"
-msgstr ""
+msgstr "Utente"
 
 #. module: delivery_cbl
 #: model:ir.model,name:delivery_cbl.model_wizard_confirm_cbl_pickings
 msgid "Wizard to Confirm CBL pickings"
-msgstr ""
+msgstr "Procedura guidata per confermare i prelievi CBL"
 
 #. module: delivery_cbl
 #: model:ir.model.fields.selection,name:delivery_cbl.selection__delivery_carrier__cbl_label_format__zpl
 msgid "ZPL"
-msgstr ""
+msgstr "ZPL"
