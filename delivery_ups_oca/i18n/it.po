@@ -6,138 +6,142 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2025-08-04 10:27+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__02
 msgid "2nd Day Air"
-msgstr ""
+msgstr "Aereo due giorni"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__59
 msgid "2nd Day Air A.M."
-msgstr ""
+msgstr "Aereo due giorni A.M."
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__12
 msgid "3 Day Select"
-msgstr ""
+msgstr "3 selezione giorno"
 
 #. module: delivery_ups_oca
 #: code:addons/delivery_ups_oca/models/ups_request.py:0
 #, python-format
 msgid "Both Client ID and Client Secret must be set in UPS delivery carriers."
 msgstr ""
+"Sia l'ID client che il segreto cliente devono essere impostati nei corrieri "
+"consegna UPS."
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_package_dimension_code__cm
 msgid "CM"
-msgstr ""
+msgstr "CM"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields,field_description:delivery_ups_oca.field_product_packaging__package_carrier_type
 msgid "Carrier"
-msgstr ""
+msgstr "Corriere"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_cod_funds_code__1
 msgid "Cash"
-msgstr ""
+msgstr "Contanti"
 
 #. module: delivery_ups_oca
 #: model_terms:ir.ui.view,arch_db:delivery_ups_oca.view_delivery_carrier_form
 msgid "Cash On Delivery"
-msgstr ""
+msgstr "Contanti alla consegna"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_cod_funds_code__9
 msgid "Check/Cashier Check/Money Order"
-msgstr ""
+msgstr "Assegno/Assegno circolare/Vaglia"
 
 #. module: delivery_ups_oca
 #: model_terms:ir.ui.view,arch_db:delivery_ups_oca.view_delivery_carrier_form
 msgid "Credentials"
-msgstr ""
+msgstr "Credenziali"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields,field_description:delivery_ups_oca.field_delivery_carrier__ups_default_packaging_id
 msgid "Default Packaging Type"
-msgstr ""
+msgstr "Tipo imballo predefinito"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields,field_description:delivery_ups_oca.field_delivery_carrier__display_name
 #: model:ir.model.fields,field_description:delivery_ups_oca.field_product_packaging__display_name
 #: model:ir.model.fields,field_description:delivery_ups_oca.field_stock_picking__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome visualizzato"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_file_format__epl
 msgid "EPL"
-msgstr ""
+msgstr "EPL"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__m6
 msgid "Economy Mail Innovations"
-msgstr ""
+msgstr "Mail Innovations economy"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__08
 msgid "Expedited"
-msgstr ""
+msgstr "Accelerato"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__m4
 msgid "Expedited Mail Innovations"
-msgstr ""
+msgstr "Mail Innovations accelerato"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__07
 msgid "Express"
-msgstr ""
+msgstr "Espresso"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__54
 msgid "Express Plus"
-msgstr ""
+msgstr "Espresso plus"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields,field_description:delivery_ups_oca.field_delivery_carrier__ups_file_format
 msgid "File format"
-msgstr ""
+msgstr "Formato file"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__m2
 msgid "First Class Mail"
-msgstr ""
+msgstr "Posta prima classe"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_file_format__gif
 msgid "GIF"
-msgstr ""
+msgstr "GIF"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__03
 msgid "Ground"
-msgstr ""
+msgstr "Via terra"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields,field_description:delivery_ups_oca.field_delivery_carrier__id
 #: model:ir.model.fields,field_description:delivery_ups_oca.field_product_packaging__id
 #: model:ir.model.fields,field_description:delivery_ups_oca.field_stock_picking__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_package_dimension_code__in
 msgid "IN"
-msgstr ""
+msgstr "Ingresso"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields,help:delivery_ups_oca.field_delivery_carrier__ups_tracking_state_update_sync
@@ -145,6 +149,8 @@ msgid ""
 "If checked, odoo try to state update from picking according to UPS "
 "webservice (you will necessary to activate tracking API)"
 msgstr ""
+"Le selezionata, Odoo cerca di aggiornare lo stato dal prelievo il accordo "
+"con il webservice UPS (è necessario attivare l'API di tracciamento)"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields,help:delivery_ups_oca.field_delivery_carrier__ups_package_dimension_code
@@ -152,257 +158,261 @@ msgid ""
 "Is necessary to set dimension code from packages in shipping creation "
 "process"
 msgstr ""
+"È necessario impostare il codice dimensione dai colli nel processo di "
+"creazione della spedizione"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields,help:delivery_ups_oca.field_delivery_carrier__ups_package_weight_code
 msgid ""
 "Is necessary to set weight code from packages in shipping creation process"
 msgstr ""
+"È necessario impostare il codice peso dai colli nel processo di creazione "
+"della spedizione"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_package_weight_code__kgs
 msgid "KGS"
-msgstr ""
+msgstr "KG"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_package_weight_code__lbs
 msgid "LBS"
-msgstr ""
+msgstr "LB"
 
 #. module: delivery_ups_oca
 #: model_terms:ir.ui.view,arch_db:delivery_ups_oca.view_delivery_carrier_form
 msgid "Label"
-msgstr ""
+msgstr "Etichetta"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields,field_description:delivery_ups_oca.field_delivery_carrier____last_update
 #: model:ir.model.fields,field_description:delivery_ups_oca.field_product_packaging____last_update
 #: model:ir.model.fields,field_description:delivery_ups_oca.field_stock_picking____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Ultima modifica il"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__m7
 msgid "Mail Innovations (MI) Returns"
-msgstr ""
+msgstr "Rientri Mail Innovations (MI)"
 
 #. module: delivery_ups_oca
 #: model_terms:ir.ui.view,arch_db:delivery_ups_oca.view_delivery_carrier_form
 msgid "Misc"
-msgstr ""
+msgstr "Varie"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__01
 msgid "Next Day Air"
-msgstr ""
+msgstr "Aereo giorno successivo"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__13
 msgid "Next Day Air Saver"
-msgstr ""
+msgstr "Aereo giorno successivo risparmio"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_package_weight_code__ozs
 msgid "OZS"
-msgstr ""
+msgstr "OZ"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields,field_description:delivery_ups_oca.field_delivery_carrier__ups_package_dimension_code
 msgid "Package Dimension code"
-msgstr ""
+msgstr "Codice dimensione collo"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields,field_description:delivery_ups_oca.field_delivery_carrier__ups_package_weight_code
 msgid "Package Weight code"
-msgstr ""
+msgstr "Codice peso collo"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__m3
 msgid "Priority Mail"
-msgstr ""
+msgstr "Posta prioritaria"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__m5
 msgid "Priority Mail Innovations"
-msgstr ""
+msgstr "Posta prioritaria Innovations"
 
 #. module: delivery_ups_oca
 #: model:ir.model,name:delivery_ups_oca.model_product_packaging
 msgid "Product Packaging"
-msgstr ""
+msgstr "Imballaggio prodotto"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields,field_description:delivery_ups_oca.field_delivery_carrier__delivery_type
 msgid "Provider"
-msgstr ""
+msgstr "Fornitore"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_file_format__spl
 msgid "SPL"
-msgstr ""
+msgstr "SPL"
 
 #. module: delivery_ups_oca
 #: code:addons/delivery_ups_oca/models/ups_request.py:0
 #, python-format
 msgid "Sending to UPS: %s"
-msgstr ""
+msgstr "Invio a UPS: %s"
 
 #. module: delivery_ups_oca
 #: model_terms:ir.ui.view,arch_db:delivery_ups_oca.view_delivery_carrier_form
 msgid "Service"
-msgstr ""
+msgstr "Servizio"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields,field_description:delivery_ups_oca.field_delivery_carrier__ups_service_code
 msgid "Service code"
-msgstr ""
+msgstr "Codice servizio"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields,field_description:delivery_ups_oca.field_delivery_carrier__ups_shipper_number
 msgid "Shipper number"
-msgstr ""
+msgstr "Numero spedizioniere"
 
 #. module: delivery_ups_oca
 #: model:ir.model,name:delivery_ups_oca.model_delivery_carrier
 msgid "Shipping Methods"
-msgstr ""
+msgstr "Metodi spedizione"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields,field_description:delivery_ups_oca.field_delivery_carrier__ups_tracking_state_update_sync
 msgid "Tracking state update sync"
-msgstr ""
+msgstr "Sincronizza aggiornamento stato tracciamento"
 
 #. module: delivery_ups_oca
 #: model:ir.model,name:delivery_ups_oca.model_stock_picking
 msgid "Transfer"
-msgstr ""
+msgstr "Trasferimento"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__delivery_type__ups
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__product_packaging__package_carrier_type__ups
 #: model_terms:ir.ui.view,arch_db:delivery_ups_oca.view_delivery_carrier_form
 msgid "UPS"
-msgstr ""
+msgstr "UPS"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__70
 msgid "UPS Access PointTM Economy"
-msgstr ""
+msgstr "UPS Access PointTM Economy"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields,field_description:delivery_ups_oca.field_delivery_carrier__ups_cash_on_delivery
 msgid "UPS Cash On Delivery"
-msgstr ""
+msgstr "UPS contanti alla consegna"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields,field_description:delivery_ups_oca.field_delivery_carrier__ups_cod_funds_code
 msgid "UPS Cod Funds Code"
-msgstr ""
+msgstr "UPS Cod Funds Code"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__74
 msgid "UPS Express®12:00"
-msgstr ""
+msgstr "UPS Express®12:00"
 
 #. module: delivery_ups_oca
 #: model_terms:ir.ui.view,arch_db:delivery_ups_oca.view_picking_withcarrier_out_form
 msgid "UPS Label"
-msgstr ""
+msgstr "Etichetta UPS"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__14
 msgid "UPS Next Day Air® Early"
-msgstr ""
+msgstr "UPS Next Day Air® Early"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__65
 msgid "UPS Saver"
-msgstr ""
+msgstr "UPS Saver"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__11
 msgid "UPS Standard"
-msgstr ""
+msgstr "UPS Standard"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__83
 msgid "UPS Today Dedicated Courier"
-msgstr ""
+msgstr "UPS Today corriere dedicato"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__85
 msgid "UPS Today Express"
-msgstr ""
+msgstr "UPS Today Express"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__86
 msgid "UPS Today Express Saver"
-msgstr ""
+msgstr "UPS Today Express Saver"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__84
 msgid "UPS Today Intercity"
-msgstr ""
+msgstr "UPS Today Intercity"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__82
 msgid "UPS Today Standard"
-msgstr ""
+msgstr "UPS Today Standard"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__72
 msgid "UPS Worldwide Economy"
-msgstr ""
+msgstr "UPS Worldwide Economy"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__17
 msgid "UPS Worldwide Economy DDU"
-msgstr ""
+msgstr "UPS Worldwide Economy DDU"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__96
 msgid "UPS Worldwide Express Freight"
-msgstr ""
+msgstr "UPS Worldwide Express Freight"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__71
 msgid "UPS Worldwide Express Freight Midday"
-msgstr ""
+msgstr "UPS Worldwide Express Freight Midday"
 
 #. module: delivery_ups_oca
 #: model_terms:ir.ui.view,arch_db:delivery_ups_oca.view_delivery_carrier_form
 msgid "Update Token"
-msgstr ""
+msgstr "Aggiorna token"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields,field_description:delivery_ups_oca.field_delivery_carrier__ups_client_id
 msgid "Ups Client"
-msgstr ""
+msgstr "Client UPS"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields,field_description:delivery_ups_oca.field_delivery_carrier__ups_client_secret
 msgid "Ups Client Secret"
-msgstr ""
+msgstr "Segreto client UPS"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields,field_description:delivery_ups_oca.field_delivery_carrier__ups_token
 msgid "Ups Token"
-msgstr ""
+msgstr "Token UPS"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields,field_description:delivery_ups_oca.field_delivery_carrier__ups_token_expiration_date
 msgid "Ups Token Expiration Date"
-msgstr ""
+msgstr "Data scadenza token UPS"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields,field_description:delivery_ups_oca.field_delivery_carrier__ups_use_packages_from_picking
 msgid "Use packages from picking"
-msgstr ""
+msgstr "Usa colli dal prelievo"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_file_format__zpl
 msgid "ZPL"
-msgstr ""
+msgstr "ZPL"
 
 #. module: delivery_ups_oca
 #: model:product.packaging,weight_uom_name:delivery_ups_oca.product_packaging_ups_01
@@ -429,7 +439,7 @@ msgstr ""
 #: model:product.packaging,weight_uom_name:delivery_ups_oca.product_packaging_ups_66
 #: model:product.packaging,weight_uom_name:delivery_ups_oca.product_packaging_ups_67
 msgid "kg"
-msgstr ""
+msgstr "kg"
 
 #. module: delivery_ups_oca
 #: model:product.packaging,volume_uom_name:delivery_ups_oca.product_packaging_ups_01
@@ -456,16 +466,16 @@ msgstr ""
 #: model:product.packaging,volume_uom_name:delivery_ups_oca.product_packaging_ups_66
 #: model:product.packaging,volume_uom_name:delivery_ups_oca.product_packaging_ups_67
 msgid "m³"
-msgstr ""
+msgstr "m³"
 
 #. module: delivery_ups_oca
 #: code:addons/delivery_ups_oca/models/ups_request.py:0
 #, python-format
 msgid "{} - Error retrieving the tracking information."
-msgstr ""
+msgstr "{} - Errore nel recuperare informazioni del tracciamento."
 
 #. module: delivery_ups_oca
 #: code:addons/delivery_ups_oca/models/ups_request.py:0
 #, python-format
 msgid "{} - Warning: {}"
-msgstr ""
+msgstr "{} - Attenzione: {}"
