@@ -17,37 +17,6 @@ msgstr ""
 "X-Generator: Weblate 5.10.4\n"
 
 #. module: delivery_postlogistics
-#: model:delivery.carrier.template.option,name:delivery_postlogistics.postlogistics_output_resolution_option_200ppp
-msgid "200 ppp"
-msgstr "200 ppp"
-
-#. module: delivery_postlogistics
-#: model:delivery.carrier.template.option,name:delivery_postlogistics.postlogistics_output_resolution_option_300ppp
-msgid "300 ppp"
-msgstr "300 ppp"
-
-#. module: delivery_postlogistics
-#: model:delivery.carrier.template.option,name:delivery_postlogistics.postlogistics_output_resolution_option_600ppp
-msgid "600 ppp"
-msgstr "600 ppp"
-
-#. module: delivery_postlogistics
-#: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_shipping_label__access_token
-msgid "Access Token"
-msgstr "Token di accesso"
-
-#. module: delivery_postlogistics
-#: model:ir.model.fields.selection,name:delivery_postlogistics.selection__postlogistics_delivery_carrier_template_option__type__additional
-msgid "Additional Service"
-msgstr "Servizio addizionale"
-
-#. module: delivery_postlogistics
-#: model:ir.model.fields,help:delivery_postlogistics.field_postlogistics_delivery_carrier_template_option__description
-msgid "Allow to define a more complete description than in the name field."
-msgstr ""
-"Permette di definire una descrizione più completa che quella del campo nome."
-
-#. module: delivery_postlogistics
 #: model:ir.model.fields,help:delivery_postlogistics.field_delivery_carrier__postlogistics_tracking_format
 msgid ""
 "Allows you to define how the ItemNumber (the last 8 digits) of the tracking "
@@ -59,27 +28,16 @@ msgid ""
 msgstr ""
 "Consente di definire come verrà generato l'ItemNumber (le ultime 8 cifre) "
 "del numero di tracciamento:\n"
-"- Numeri postlogistici predefiniti: il servizio web lo genera autonomamente."
-"\n"
+"- Numeri postlogistici predefiniti: il servizio web lo genera "
+"autonomamente.\n"
 "- Numero di prelievo con contatore pacchi: generalo utilizzando le cifre del "
 "nome di prelievo e aggiunge il numero di pacco. 2 cifre per il numero di "
 "pacco e 6 cifre per il numero di prelievo. (ad esempio 07000042 per il "
 "prelievo 42 e il 7° pacco"
 
 #. module: delivery_postlogistics
-#: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_shipping_label__attachment_id
-msgid "Attachement"
-msgstr "Allegato"
-
-#. module: delivery_postlogistics
-#: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_shipping_label__local_url
-msgid "Attachment URL"
-msgstr "URL allegato"
-
-#. module: delivery_postlogistics
 #. odoo-python
 #: code:addons/delivery_postlogistics/postlogistics/web_service.py:0
-#, python-format
 msgid ""
 "Authorization Required\n"
 "\n"
@@ -94,7 +52,6 @@ msgstr ""
 #. module: delivery_postlogistics
 #. odoo-python
 #: code:addons/delivery_postlogistics/postlogistics/web_service.py:0
-#, python-format
 msgid ""
 "Authorization Required\n"
 "\n"
@@ -108,20 +65,9 @@ msgstr ""
 "spedizione > PostLogistics"
 
 #. module: delivery_postlogistics
-#: model:ir.model.fields.selection,name:delivery_postlogistics.selection__postlogistics_delivery_carrier_template_option__type__basic
-msgid "Basic Service"
-msgstr "Servizio base"
-
-#. module: delivery_postlogistics
-#: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_delivery_carrier_template_option__partner_id
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_stock_package_type__package_carrier_type
 msgid "Carrier"
 msgstr "Corriere"
-
-#. module: delivery_postlogistics
-#: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_shipping_label__checksum
-msgid "Checksum/SHA1"
-msgstr "Checksum/SHA1"
 
 #. module: delivery_postlogistics
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_delivery_carrier__postlogistics_client_id
@@ -134,13 +80,7 @@ msgid "Client Secret"
 msgstr "Chiave segreta client"
 
 #. module: delivery_postlogistics
-#: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_delivery_carrier_template_option__code
-msgid "Code"
-msgstr "Codice"
-
-#. module: delivery_postlogistics
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_license__company_id
-#: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_shipping_label__company_id
 msgid "Company"
 msgstr "Azienda"
 
@@ -160,16 +100,12 @@ msgid "Create Shipping Label 🚚"
 msgstr "Crea etichetta di spedizione 🚚"
 
 #. module: delivery_postlogistics
-#: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_delivery_carrier_template_option__create_uid
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_license__create_uid
-#: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_shipping_label__create_uid
 msgid "Created by"
 msgstr "Creato da"
 
 #. module: delivery_postlogistics
-#: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_delivery_carrier_template_option__create_date
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_license__create_date
-#: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_shipping_label__create_date
 msgid "Created on"
 msgstr "Creato il"
 
@@ -179,29 +115,12 @@ msgid "Credentials"
 msgstr "Credenziali"
 
 #. module: delivery_postlogistics
-#. odoo-python
-#: code:addons/delivery_postlogistics/postlogistics/web_service.py:0
-#, python-format
-msgid "Customer name is required."
-msgstr "È richiesto il nome cliente."
-
-#. module: delivery_postlogistics
-#: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_shipping_label__db_datas
-msgid "Database Data"
-msgstr "Dati database"
-
-#. module: delivery_postlogistics
-#: model:ir.model.fields.selection,name:delivery_postlogistics.selection__postlogistics_delivery_carrier_template_option__type__delivery
-msgid "Delivery Instructions"
-msgstr "Istruzioni di consegna"
-
-#. module: delivery_postlogistics
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_stock_picking__delivery_place
 msgid "Delivery Place"
 msgstr "Luogo consegna"
 
 #. module: delivery_postlogistics
-#: model:ir.model,name:delivery_postlogistics.model_postlogistics_delivery_carrier_template_option
+#: model:ir.model,name:delivery_postlogistics.model_delivery_carrier_template_option
 msgid "Delivery carrier template option"
 msgstr "Opzione modello vettore consegna"
 
@@ -211,20 +130,12 @@ msgid "Delivery instructions"
 msgstr "Istruzioni di consegna"
 
 #. module: delivery_postlogistics
-#: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_delivery_carrier_template_option__description
-#: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_shipping_label__description
-msgid "Description"
-msgstr "Descrizione"
-
-#. module: delivery_postlogistics
 #: model:ir.model.fields.selection,name:delivery_postlogistics.selection__res_partner__postlogistics_notification__disabled
 msgid "Disabled"
 msgstr "Disabilitato"
 
 #. module: delivery_postlogistics
-#: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_delivery_carrier_template_option__display_name
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_license__display_name
-#: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_shipping_label__display_name
 msgid "Display Name"
 msgstr "Nome visualizzato"
 
@@ -234,21 +145,9 @@ msgid "Domicile Post office"
 msgstr "Ufficio postale domicilio"
 
 #. module: delivery_postlogistics
-#: model:delivery.carrier.template.option,name:delivery_postlogistics.postlogistics_output_format_option_eps
-msgid "EPS"
-msgstr "EPS"
-
-#. module: delivery_postlogistics
 #: model:ir.model.fields.selection,name:delivery_postlogistics.selection__res_partner__postlogistics_notification__email
 msgid "Email"
 msgstr "E-mail"
-
-#. module: delivery_postlogistics
-#. odoo-python
-#: code:addons/delivery_postlogistics/postlogistics/web_service.py:0
-#, python-format
-msgid "Email is required for notification."
-msgstr "L' e-mail è richiesta per la notifica."
 
 #. module: delivery_postlogistics
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_delivery_carrier__postlogistics_endpoint_url
@@ -258,29 +157,8 @@ msgstr "URL endpoint"
 #. module: delivery_postlogistics
 #. odoo-python
 #: code:addons/delivery_postlogistics/postlogistics/web_service.py:0
-#, python-format
 msgid "Error code: %(code)s, Message: %(message)s"
 msgstr "Codice errore: %(code)s, Messaggio: %(message)s"
-
-#. module: delivery_postlogistics
-#: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_shipping_label__datas
-msgid "File Content (base64)"
-msgstr "Contenuto file (base64)"
-
-#. module: delivery_postlogistics
-#: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_shipping_label__raw
-msgid "File Content (raw)"
-msgstr "Contenuto file (raw)"
-
-#. module: delivery_postlogistics
-#: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_shipping_label__file_size
-msgid "File Size"
-msgstr "Dimensione file"
-
-#. module: delivery_postlogistics
-#: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_shipping_label__file_type
-msgid "File type"
-msgstr "Tipo file"
 
 #. module: delivery_postlogistics
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_stock_picking__delivery_fixed_date
@@ -299,34 +177,9 @@ msgid "For notify delivery by telephone (ZAW3213)"
 msgstr "Per notifica telefonica consegna (ZAW3213)"
 
 #. module: delivery_postlogistics
-#: model:delivery.carrier.template.option,name:delivery_postlogistics.postlogistics_layout_option_a5
-msgid "Format A5"
-msgstr "Formato A5"
-
-#. module: delivery_postlogistics
-#: model:delivery.carrier.template.option,name:delivery_postlogistics.postlogistics_layout_option_a6
-msgid "Format A6"
-msgstr "Formato A6"
-
-#. module: delivery_postlogistics
-#: model:delivery.carrier.template.option,name:delivery_postlogistics.postlogistics_layout_option_a7
-msgid "Format A7"
-msgstr "Formato A7"
-
-#. module: delivery_postlogistics
-#: model:delivery.carrier.template.option,name:delivery_postlogistics.postlogistics_layout_option_fe
-msgid "Format FE"
-msgstr "Formato FE"
-
-#. module: delivery_postlogistics
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_delivery_carrier__postlogistics_license_id
 msgid "Franking License"
 msgstr "Licenza affrancatura"
-
-#. module: delivery_postlogistics
-#: model:delivery.carrier.template.option,name:delivery_postlogistics.postlogistics_output_format_option_gif
-msgid "GIF"
-msgstr "GIF"
 
 #. module: delivery_postlogistics
 #: model:ir.model.fields,help:delivery_postlogistics.field_postlogistics_license__sequence
@@ -338,9 +191,7 @@ msgstr ""
 "sono disponibili più licenze per lo stesso gruppo di servizi."
 
 #. module: delivery_postlogistics
-#: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_delivery_carrier_template_option__id
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_license__id
-#: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_shipping_label__id
 msgid "ID"
 msgstr "ID"
 
@@ -354,37 +205,7 @@ msgstr ""
 "dell'ordine di vendita, annota l'importo lì."
 
 #. module: delivery_postlogistics
-#: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_shipping_label__image_height
-msgid "Image Height"
-msgstr "Altezza immagine"
-
-#. module: delivery_postlogistics
-#: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_shipping_label__image_src
-msgid "Image Src"
-msgstr "Sorgente immagine"
-
-#. module: delivery_postlogistics
-#: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_shipping_label__image_width
-msgid "Image Width"
-msgstr "Larghezza immagine"
-
-#. module: delivery_postlogistics
-#: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_shipping_label__index_content
-msgid "Indexed Content"
-msgstr "Contenuto indicizzato"
-
-#. module: delivery_postlogistics
-#: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_shipping_label__public
-msgid "Is public document"
-msgstr "È un documento pubblico"
-
-#. module: delivery_postlogistics
-#: model:delivery.carrier.template.option,name:delivery_postlogistics.postlogistics_output_format_option_jpg
-msgid "JPG"
-msgstr "JPG"
-
-#. module: delivery_postlogistics
-#: model:ir.model.fields.selection,name:delivery_postlogistics.selection__postlogistics_delivery_carrier_template_option__type__label_layout
+#: model:ir.model.fields.selection,name:delivery_postlogistics.selection__delivery_carrier_template_option__type__label_layout
 msgid "Label Layout"
 msgstr "Schema etichetta"
 
@@ -394,37 +215,20 @@ msgid "Label layout"
 msgstr "Schema etichetta"
 
 #. module: delivery_postlogistics
-#: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_delivery_carrier_template_option____last_update
-#: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_license____last_update
-#: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_shipping_label____last_update
-msgid "Last Modified on"
-msgstr "Ultima modifica il"
-
-#. module: delivery_postlogistics
-#: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_delivery_carrier_template_option__write_uid
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_license__write_uid
-#: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_shipping_label__write_uid
 msgid "Last Updated by"
 msgstr "Ultimo aggiornamento di"
 
 #. module: delivery_postlogistics
-#: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_delivery_carrier_template_option__write_date
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_license__write_date
-#: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_shipping_label__write_date
 msgid "Last Updated on"
 msgstr "Ultimo aggiornamento il"
 
 #. module: delivery_postlogistics
 #. odoo-python
 #: code:addons/delivery_postlogistics/postlogistics/web_service.py:0
-#, python-format
 msgid "Layout not set"
 msgstr "Schema non impostato"
-
-#. module: delivery_postlogistics
-#: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_shipping_label__mimetype
-msgid "Mime Type"
-msgstr "Tipo MIME"
 
 #. module: delivery_postlogistics
 #: model_terms:ir.ui.view,arch_db:delivery_postlogistics.delivery_carrier_postlogistics_inherit_view
@@ -434,7 +238,6 @@ msgstr "Varie"
 #. module: delivery_postlogistics
 #. odoo-python
 #: code:addons/delivery_postlogistics/postlogistics/web_service.py:0
-#, python-format
 msgid ""
 "Missing Configuration\n"
 "\n"
@@ -457,34 +260,20 @@ msgid "Mobile SMS"
 msgstr "SMS cellulare"
 
 #. module: delivery_postlogistics
-#. odoo-python
-#: code:addons/delivery_postlogistics/postlogistics/web_service.py:0
-#, python-format
-msgid "Mobile number is required for sms notification."
-msgstr "Il numero di cellulare è richiesto per le notifiche SMS."
-
-#. module: delivery_postlogistics
-#: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_delivery_carrier_template_option__name
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_license__name
-#: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_shipping_label__name
 msgid "Name"
 msgstr "Nome"
-
-#. module: delivery_postlogistics
-#. odoo-python
-#: code:addons/delivery_postlogistics/postlogistics/web_service.py:0
-#, python-format
-msgid ""
-"No PostLogistics packaging services found in package type {package_type_name}, for "
-"picking {picking_name}."
-msgstr ""
-"Nessun servizio di imballaggio PostLogistics trovato nel tipo collo "
-"{package_type_name}, per il prelievo di {picking_name}."
 
 #. module: delivery_postlogistics
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_license__number
 msgid "Number"
 msgstr "Numero"
+
+#. module: delivery_postlogistics
+#: model:ir.model.fields,field_description:delivery_postlogistics.field_delivery_carrier_option__type
+#: model:ir.model.fields,field_description:delivery_postlogistics.field_delivery_carrier_template_option__type
+msgid "Option Type"
+msgstr ""
 
 #. module: delivery_postlogistics
 #: model:ir.model.fields,help:delivery_postlogistics.field_delivery_carrier__postlogistics_logo
@@ -511,17 +300,12 @@ msgstr ""
 "formato ZPL2."
 
 #. module: delivery_postlogistics
-#: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_shipping_label__original_id
-msgid "Original (unoptimized, unresized) attachment"
-msgstr "Allegato originale (non ottimizzato, non ridimensionato)"
-
-#. module: delivery_postlogistics
-#: model:ir.model.fields.selection,name:delivery_postlogistics.selection__postlogistics_delivery_carrier_template_option__type__output_format
+#: model:ir.model.fields.selection,name:delivery_postlogistics.selection__delivery_carrier_template_option__type__output_format
 msgid "Output Format"
 msgstr "Formato output"
 
 #. module: delivery_postlogistics
-#: model:ir.model.fields.selection,name:delivery_postlogistics.selection__postlogistics_delivery_carrier_template_option__type__resolution
+#: model:ir.model.fields.selection,name:delivery_postlogistics.selection__delivery_carrier_template_option__type__resolution
 msgid "Output Resolution"
 msgstr "Risoluzione output"
 
@@ -533,19 +317,8 @@ msgstr "Formato output"
 #. module: delivery_postlogistics
 #. odoo-python
 #: code:addons/delivery_postlogistics/postlogistics/web_service.py:0
-#, python-format
 msgid "Output format not set"
 msgstr "Formato output non impostato"
-
-#. module: delivery_postlogistics
-#: model:delivery.carrier.template.option,name:delivery_postlogistics.postlogistics_output_format_option_pdf
-msgid "PDF"
-msgstr "PDF"
-
-#. module: delivery_postlogistics
-#: model:delivery.carrier.template.option,name:delivery_postlogistics.postlogistics_output_format_option_png
-msgid "PNG"
-msgstr "PNG"
 
 #. module: delivery_postlogistics
 #: model:ir.model,name:delivery_postlogistics.model_stock_quant_package
@@ -563,39 +336,6 @@ msgid "Parcel Tracking"
 msgstr "Tracciamento pacchetto"
 
 #. module: delivery_postlogistics
-#: model:ir.model.fields.selection,name:delivery_postlogistics.selection__postlogistics_delivery_carrier_template_option__type__partner_option
-msgid "Partner Option"
-msgstr "Opzione partner"
-
-#. module: delivery_postlogistics
-#. odoo-python
-#: code:addons/delivery_postlogistics/postlogistics/web_service.py:0
-#, python-format
-msgid "Partner city is required."
-msgstr "È richiesta la città del partner."
-
-#. module: delivery_postlogistics
-#. odoo-python
-#: code:addons/delivery_postlogistics/postlogistics/web_service.py:0
-#, python-format
-msgid "Partner name is required."
-msgstr "È richiesto il nome del partner."
-
-#. module: delivery_postlogistics
-#. odoo-python
-#: code:addons/delivery_postlogistics/postlogistics/web_service.py:0
-#, python-format
-msgid "Partner street is required."
-msgstr "È richiesto il foglio del partner."
-
-#. module: delivery_postlogistics
-#. odoo-python
-#: code:addons/delivery_postlogistics/postlogistics/web_service.py:0
-#, python-format
-msgid "Partner zip is required."
-msgstr "È richiesto il CAP del partner."
-
-#. module: delivery_postlogistics
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_stock_picking__delivery_phone
 msgid "Phone"
 msgstr "Telefono"
@@ -607,15 +347,7 @@ msgstr "Telefonata"
 
 #. module: delivery_postlogistics
 #. odoo-python
-#: code:addons/delivery_postlogistics/postlogistics/web_service.py:0
-#, python-format
-msgid "Phone number is required for phone call notification."
-msgstr "È richiesto il numero di telefono per le notifiche telefoniche."
-
-#. module: delivery_postlogistics
-#. odoo-python
 #: code:addons/delivery_postlogistics/models/stock_picking.py:0
-#, python-format
 msgid "Please, set a carrier."
 msgstr "Impostare un vettore."
 
@@ -658,23 +390,10 @@ msgid "PostLogistics Licenses"
 msgstr "Licenze PostLogistics"
 
 #. module: delivery_postlogistics
-#: model:ir.model.fields,field_description:delivery_postlogistics.field_dropoff_site__postlogistics_option_ids
-#: model:ir.model.fields,field_description:delivery_postlogistics.field_res_partner__postlogistics_option_ids
-#: model:ir.model.fields,field_description:delivery_postlogistics.field_res_users__postlogistics_option_ids
-msgid "PostLogistics Options"
-msgstr "Opzioni PostLogistics"
-
-#. module: delivery_postlogistics
 #. odoo-python
 #: code:addons/delivery_postlogistics/models/stock_picking.py:0
-#, python-format
 msgid "PostLogistics error:"
 msgstr "Errore PostLogistics :"
-
-#. module: delivery_postlogistics
-#: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_delivery_carrier_template_option__type
-msgid "PostLogistics option type"
-msgstr "Tipo opzione PostLogistics"
 
 #. module: delivery_postlogistics
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_delivery_carrier__postlogistics_default_package_type_id
@@ -689,9 +408,15 @@ msgid "Postlogistics Notification"
 msgstr "Notifiche PostLogistics"
 
 #. module: delivery_postlogistics
+#: model:ir.model.fields,field_description:delivery_postlogistics.field_dropoff_site__delivery_carrier_template_option_ids
+#: model:ir.model.fields,field_description:delivery_postlogistics.field_res_partner__delivery_carrier_template_option_ids
+#: model:ir.model.fields,field_description:delivery_postlogistics.field_res_users__delivery_carrier_template_option_ids
+msgid "Postlogistics Options"
+msgstr ""
+
+#. module: delivery_postlogistics
 #. odoo-python
 #: code:addons/delivery_postlogistics/postlogistics/web_service.py:0
-#, python-format
 msgid ""
 "Postlogistics service is not accessible at the moment. Error code: %s. "
 "Please try again later."
@@ -717,29 +442,8 @@ msgstr "Risoluzione"
 #. module: delivery_postlogistics
 #. odoo-python
 #: code:addons/delivery_postlogistics/postlogistics/web_service.py:0
-#, python-format
 msgid "Resolution not set"
 msgstr "Risoluzione non impostata"
-
-#. module: delivery_postlogistics
-#: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_shipping_label__res_field
-msgid "Resource Field"
-msgstr "Campo risorsa"
-
-#. module: delivery_postlogistics
-#: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_shipping_label__res_id
-msgid "Resource ID"
-msgstr "ID Risorsa"
-
-#. module: delivery_postlogistics
-#: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_shipping_label__res_model
-msgid "Resource Model"
-msgstr "Modello risorsa"
-
-#. module: delivery_postlogistics
-#: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_shipping_label__res_name
-msgid "Resource Name"
-msgstr "Nome risorsa"
 
 #. module: delivery_postlogistics
 #: model:ir.model,name:delivery_postlogistics.model_stock_return_picking
@@ -755,11 +459,6 @@ msgstr "Vedere sessione 8.10 di"
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_license__sequence
 msgid "Sequence"
 msgstr "Sequenza"
-
-#. module: delivery_postlogistics
-#: model:ir.model,name:delivery_postlogistics.model_postlogistics_shipping_label
-msgid "Shipping Label for PostLogistics"
-msgstr "Etichetta spedizione per PostLogistics"
 
 #. module: delivery_postlogistics
 #: model:ir.model,name:delivery_postlogistics.model_delivery_carrier
@@ -782,11 +481,6 @@ msgid "Stock package type"
 msgstr "Tipo collo magazzino"
 
 #. module: delivery_postlogistics
-#: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_shipping_label__store_fname
-msgid "Stored Filename"
-msgstr "Nome file memorizzato"
-
-#. module: delivery_postlogistics
 #: model_terms:ir.ui.view,arch_db:delivery_postlogistics.delivery_carrier_postlogistics_inherit_view
 msgid "Template"
 msgstr "Modello"
@@ -795,7 +489,6 @@ msgstr "Modello"
 #. odoo-python
 #: code:addons/delivery_postlogistics/models/stock_picking.py:0
 #: code:addons/delivery_postlogistics/models/stock_quant_package.py:0
-#, python-format
 msgid ""
 "The cash on delivery amount must be manually specified on the packages when "
 "a package contains products from different sales orders."
@@ -807,7 +500,6 @@ msgstr ""
 #. odoo-python
 #: code:addons/delivery_postlogistics/models/stock_picking.py:0
 #: code:addons/delivery_postlogistics/models/stock_quant_package.py:0
-#, python-format
 msgid ""
 "The cash on delivery amount must be manually specified on the packages when "
 "a sales order is delivered in several delivery orders."
@@ -818,14 +510,12 @@ msgstr ""
 #. module: delivery_postlogistics
 #. odoo-python
 #: code:addons/delivery_postlogistics/models/delivery_carrier.py:0
-#, python-format
 msgid "The credential is valid."
 msgstr "La credenziale è valida."
 
 #. module: delivery_postlogistics
 #. odoo-python
 #: code:addons/delivery_postlogistics/postlogistics/web_service.py:0
-#, python-format
 msgid "The package %s must have a package type."
 msgstr "Il collo %s deve avere un tipo pacchetto."
 
@@ -846,7 +536,6 @@ msgstr ""
 #. module: delivery_postlogistics
 #. odoo-python
 #: code:addons/delivery_postlogistics/models/delivery_carrier.py:0
-#, python-format
 msgid "This feature is under development"
 msgstr "Questa funzionalità è in sviluppo"
 
@@ -861,16 +550,6 @@ msgid "Transfer"
 msgstr "Trasferimento"
 
 #. module: delivery_postlogistics
-#: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_shipping_label__type
-msgid "Type"
-msgstr "Tipo"
-
-#. module: delivery_postlogistics
-#: model:ir.model.fields,field_description:delivery_postlogistics.field_postlogistics_shipping_label__url
-msgid "Url"
-msgstr "URL"
-
-#. module: delivery_postlogistics
 #: model:ir.model.fields.selection,name:delivery_postlogistics.selection__delivery_carrier__postlogistics_tracking_format__postlogistics
 msgid "Use default postlogistics tracking numbers"
 msgstr "Utilizza i numeri di tracciamento PostLogistics predefiniti"
@@ -883,7 +562,6 @@ msgstr "Utilizza il numero di prelievo con il contatore pacco"
 #. module: delivery_postlogistics
 #. odoo-python
 #: code:addons/delivery_postlogistics/models/delivery_carrier.py:0
-#, python-format
 msgid "Validated"
 msgstr "Validato"
 
@@ -893,26 +571,16 @@ msgid "Verify"
 msgstr "Verifica"
 
 #. module: delivery_postlogistics
-#: model:ir.model.fields,help:delivery_postlogistics.field_postlogistics_shipping_label__type
-msgid ""
-"You can either upload a file from your computer or copy/paste an internet "
-"link to your file."
-msgstr ""
-"È possibile caricare un file dal computer oppure fare copia/incolla di un "
-"collegamento Internet al file."
-
-#. module: delivery_postlogistics
 #. odoo-python
 #: code:addons/delivery_postlogistics/postlogistics/web_service.py:0
-#, python-format
 msgid ""
 "You need to configure %s. You can set a default value in Inventory / "
 "Configuration / Delivery / Shipping Methods. You can also set it on delivery "
 "method or on the picking."
 msgstr ""
-"Si deve configurare %s. Si può impostare un valore predefinito in Inventario "
-"/ Configurazione / Consegna / Metodi di spedizione. Si può anche impostarlo "
-"sul metodo di consegna o sul prelievo."
+"Si deve configurare %s. Si può impostare un valore predefinito in "
+"Inventario / Configurazione / Consegna / Metodi di spedizione. Si può anche "
+"impostarlo sul metodo di consegna o sul prelievo."
 
 #. module: delivery_postlogistics
 #: model_terms:ir.ui.view,arch_db:delivery_postlogistics.delivery_carrier_postlogistics_inherit_view
@@ -925,11 +593,6 @@ msgid "ZPL Patch String"
 msgstr "Stringa patch ZPL"
 
 #. module: delivery_postlogistics
-#: model:delivery.carrier.template.option,name:delivery_postlogistics.postlogistics_output_format_option_zpl2
-msgid "ZPL2"
-msgstr "ZPL2"
-
-#. module: delivery_postlogistics
 #: model_terms:ir.ui.view,arch_db:delivery_postlogistics.stock_package_type_form_delivery
 msgid "for available codes."
 msgstr "per codici disponibili."
@@ -937,30 +600,215 @@ msgstr "per codici disponibili."
 #. module: delivery_postlogistics
 #. odoo-python
 #: code:addons/delivery_postlogistics/postlogistics/web_service.py:0
-#, python-format
 msgid "label layout"
 msgstr "schema etichetta"
 
 #. module: delivery_postlogistics
 #. odoo-python
 #: code:addons/delivery_postlogistics/postlogistics/web_service.py:0
-#, python-format
 msgid "output format"
 msgstr "formato output"
 
 #. module: delivery_postlogistics
 #. odoo-python
 #: code:addons/delivery_postlogistics/postlogistics/web_service.py:0
-#, python-format
 msgid "resolution"
 msgstr "risoluzione"
-
-#. module: delivery_postlogistics
-#: model:delivery.carrier.template.option,name:delivery_postlogistics.postlogistics_output_format_option_spdf
-msgid "sPDF"
-msgstr "sPDF"
 
 #. module: delivery_postlogistics
 #: model_terms:ir.ui.view,arch_db:delivery_postlogistics.stock_package_type_form_delivery
 msgid "the documentation"
 msgstr "la documentazione"
+
+#~ msgid "200 ppp"
+#~ msgstr "200 ppp"
+
+#~ msgid "300 ppp"
+#~ msgstr "300 ppp"
+
+#~ msgid "600 ppp"
+#~ msgstr "600 ppp"
+
+#~ msgid "Access Token"
+#~ msgstr "Token di accesso"
+
+#~ msgid "Additional Service"
+#~ msgstr "Servizio addizionale"
+
+#~ msgid "Allow to define a more complete description than in the name field."
+#~ msgstr ""
+#~ "Permette di definire una descrizione più completa che quella del campo "
+#~ "nome."
+
+#~ msgid "Attachement"
+#~ msgstr "Allegato"
+
+#~ msgid "Attachment URL"
+#~ msgstr "URL allegato"
+
+#~ msgid "Basic Service"
+#~ msgstr "Servizio base"
+
+#~ msgid "Checksum/SHA1"
+#~ msgstr "Checksum/SHA1"
+
+#~ msgid "Code"
+#~ msgstr "Codice"
+
+#, python-format
+#~ msgid "Customer name is required."
+#~ msgstr "È richiesto il nome cliente."
+
+#~ msgid "Database Data"
+#~ msgstr "Dati database"
+
+#~ msgid "Delivery Instructions"
+#~ msgstr "Istruzioni di consegna"
+
+#~ msgid "Description"
+#~ msgstr "Descrizione"
+
+#~ msgid "EPS"
+#~ msgstr "EPS"
+
+#, python-format
+#~ msgid "Email is required for notification."
+#~ msgstr "L' e-mail è richiesta per la notifica."
+
+#~ msgid "File Content (base64)"
+#~ msgstr "Contenuto file (base64)"
+
+#~ msgid "File Content (raw)"
+#~ msgstr "Contenuto file (raw)"
+
+#~ msgid "File Size"
+#~ msgstr "Dimensione file"
+
+#~ msgid "File type"
+#~ msgstr "Tipo file"
+
+#~ msgid "Format A5"
+#~ msgstr "Formato A5"
+
+#~ msgid "Format A6"
+#~ msgstr "Formato A6"
+
+#~ msgid "Format A7"
+#~ msgstr "Formato A7"
+
+#~ msgid "Format FE"
+#~ msgstr "Formato FE"
+
+#~ msgid "GIF"
+#~ msgstr "GIF"
+
+#~ msgid "Image Height"
+#~ msgstr "Altezza immagine"
+
+#~ msgid "Image Src"
+#~ msgstr "Sorgente immagine"
+
+#~ msgid "Image Width"
+#~ msgstr "Larghezza immagine"
+
+#~ msgid "Indexed Content"
+#~ msgstr "Contenuto indicizzato"
+
+#~ msgid "Is public document"
+#~ msgstr "È un documento pubblico"
+
+#~ msgid "JPG"
+#~ msgstr "JPG"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Ultima modifica il"
+
+#~ msgid "Mime Type"
+#~ msgstr "Tipo MIME"
+
+#, python-format
+#~ msgid "Mobile number is required for sms notification."
+#~ msgstr "Il numero di cellulare è richiesto per le notifiche SMS."
+
+#, python-format
+#~ msgid ""
+#~ "No PostLogistics packaging services found in package type "
+#~ "{package_type_name}, for picking {picking_name}."
+#~ msgstr ""
+#~ "Nessun servizio di imballaggio PostLogistics trovato nel tipo collo "
+#~ "{package_type_name}, per il prelievo di {picking_name}."
+
+#~ msgid "Original (unoptimized, unresized) attachment"
+#~ msgstr "Allegato originale (non ottimizzato, non ridimensionato)"
+
+#~ msgid "PDF"
+#~ msgstr "PDF"
+
+#~ msgid "PNG"
+#~ msgstr "PNG"
+
+#~ msgid "Partner Option"
+#~ msgstr "Opzione partner"
+
+#, python-format
+#~ msgid "Partner city is required."
+#~ msgstr "È richiesta la città del partner."
+
+#, python-format
+#~ msgid "Partner name is required."
+#~ msgstr "È richiesto il nome del partner."
+
+#, python-format
+#~ msgid "Partner street is required."
+#~ msgstr "È richiesto il foglio del partner."
+
+#, python-format
+#~ msgid "Partner zip is required."
+#~ msgstr "È richiesto il CAP del partner."
+
+#, python-format
+#~ msgid "Phone number is required for phone call notification."
+#~ msgstr "È richiesto il numero di telefono per le notifiche telefoniche."
+
+#~ msgid "PostLogistics Options"
+#~ msgstr "Opzioni PostLogistics"
+
+#~ msgid "PostLogistics option type"
+#~ msgstr "Tipo opzione PostLogistics"
+
+#~ msgid "Resource Field"
+#~ msgstr "Campo risorsa"
+
+#~ msgid "Resource ID"
+#~ msgstr "ID Risorsa"
+
+#~ msgid "Resource Model"
+#~ msgstr "Modello risorsa"
+
+#~ msgid "Resource Name"
+#~ msgstr "Nome risorsa"
+
+#~ msgid "Shipping Label for PostLogistics"
+#~ msgstr "Etichetta spedizione per PostLogistics"
+
+#~ msgid "Stored Filename"
+#~ msgstr "Nome file memorizzato"
+
+#~ msgid "Type"
+#~ msgstr "Tipo"
+
+#~ msgid "Url"
+#~ msgstr "URL"
+
+#~ msgid ""
+#~ "You can either upload a file from your computer or copy/paste an internet "
+#~ "link to your file."
+#~ msgstr ""
+#~ "È possibile caricare un file dal computer oppure fare copia/incolla di un "
+#~ "collegamento Internet al file."
+
+#~ msgid "ZPL2"
+#~ msgstr "ZPL2"
+
+#~ msgid "sPDF"
+#~ msgstr "sPDF"
