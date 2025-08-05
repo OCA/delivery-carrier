@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-05-15 12:24+0000\n"
+"PO-Revision-Date: 2025-08-05 07:00+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -273,7 +273,7 @@ msgstr "Numero"
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_delivery_carrier_option__type
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_delivery_carrier_template_option__type
 msgid "Option Type"
-msgstr ""
+msgstr "Tipo opzione"
 
 #. module: delivery_postlogistics
 #: model:ir.model.fields,help:delivery_postlogistics.field_delivery_carrier__postlogistics_logo
@@ -412,7 +412,7 @@ msgstr "Notifiche PostLogistics"
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_res_partner__delivery_carrier_template_option_ids
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_res_users__delivery_carrier_template_option_ids
 msgid "Postlogistics Options"
-msgstr ""
+msgstr "Opzioni PostLogistics"
 
 #. module: delivery_postlogistics
 #. odoo-python
