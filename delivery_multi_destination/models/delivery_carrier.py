@@ -33,20 +33,22 @@ class DeliveryCarrier(models.Model):
             self.product_id = fields.first(self.child_ids.product_id)
 
     @api.model
-    def search(self, domain, offset=0, limit=None, order=None):
+    def search_fetch(self, domain, field_names, offset=0, limit=None, order=None):
         """Don't show by default children carriers."""
         if not self.env.context.get("show_children_carriers"):
             if domain is None:
                 domain = []
             domain += [("parent_id", "=", False)]
-        return super().search(domain, offset=offset, limit=limit, order=order)
+        return super().search_fetch(
+            domain, field_names, offset=offset, limit=limit, order=order
+        )
 
     @api.model
     def name_search(self, name="", args=None, operator="ilike", limit=100):
         """Don't show by default children carriers."""
         args = args or []
         args += [("parent_id", "=", False)]
-        return super().name_search(name, args, operator, limit)
+        return super().name_search(name=name, args=args, operator=operator, limit=limit)
 
     def available_carriers(self, partner):
         """If the carrier is multi, we test the availability on children."""
