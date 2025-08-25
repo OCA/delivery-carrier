@@ -96,11 +96,6 @@ msgid "Automatically post bills for this trusted partner"
 msgstr ""
 
 #. module: delivery_dropoff_site
-#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__available_peppol_eas
-msgid "Available Peppol Eas"
-msgstr ""
-
-#. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__avatar_1920
 msgid "Avatar"
 msgstr ""
@@ -187,13 +182,6 @@ msgstr ""
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__code
 msgid "Code"
-msgstr ""
-
-#. module: delivery_dropoff_site
-#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__peppol_eas
-msgid ""
-"Code used to identify the Endpoint for BIS Billing 3.0 and its derivatives.\n"
-"             List available at https://docs.peppol.eu/poacc/billing/3.0/codelist/eas/"
 msgstr ""
 
 #. module: delivery_dropoff_site
@@ -655,18 +643,8 @@ msgid "Is Follower"
 msgstr ""
 
 #. module: delivery_dropoff_site
-#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__is_peppol_edi_format
-msgid "Is Peppol Edi Format"
-msgstr ""
-
-#. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__is_public
 msgid "Is Public"
-msgstr ""
-
-#. module: delivery_dropoff_site
-#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__is_ubl_format
-msgid "Is Ubl Format"
 msgstr ""
 
 #. module: delivery_dropoff_site
@@ -850,16 +828,6 @@ msgstr ""
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__payment_token_ids
 msgid "Payment Tokens"
-msgstr ""
-
-#. module: delivery_dropoff_site
-#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__peppol_endpoint
-msgid "Peppol Endpoint"
-msgstr ""
-
-#. module: delivery_dropoff_site
-#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__peppol_eas
-msgid "Peppol e-address (EAS)"
 msgstr ""
 
 #. module: delivery_dropoff_site
@@ -1192,13 +1160,6 @@ msgstr ""
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__activity_exception_decoration
 msgid "Type of the exception activity on record."
-msgstr ""
-
-#. module: delivery_dropoff_site
-#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__peppol_endpoint
-msgid ""
-"Unique identifier used by the BIS Billing 3.0 and its derivatives, also "
-"known as 'Endpoint ID'."
 msgstr ""
 
 #. module: delivery_dropoff_site
