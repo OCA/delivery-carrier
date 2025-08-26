@@ -297,7 +297,7 @@ Please use _get_quant_packages_from_picking instead."
 
         if not package_codes:
             raise UserError(
-                pack.env._(
+                self.env._(
                     "No PostLogistics packaging services found "
                     "in package type {package_type_name}, for picking {picking_name}."
                 ).format(package_type_name=package_type.name, picking_name=self.name)
