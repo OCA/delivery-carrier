@@ -36,14 +36,19 @@ class Common(BaseCommon):
         )
 
     @classmethod
-    def setUpClassPicking(cls):
+    def _create_picking(cls, product_qty):
         picking_type = cls.env.ref("stock.picking_type_out")
+        with Form(cls.env["stock.picking"]) as pick_form:
+            pick_form.picking_type_id = picking_type
+            for product, qty in product_qty:
+                with pick_form.move_ids_without_package.new() as move:
+                    move.product_id = product
+                    move.product_uom_qty = qty
+        return pick_form.save()
+
+    @classmethod
+    def setUpClassPicking(cls):
         cls.product = cls.env["product.product"].create(
             {"name": "Furniture", "volume": 2, "weight": 2}
         )
-        with Form(cls.env["stock.picking"]) as pick_form:
-            pick_form.picking_type_id = picking_type
-            with pick_form.move_ids_without_package.new() as move:
-                move.product_id = cls.product
-                move.product_uom_qty = 1
-        cls.picking = pick_form.save()
+        cls.picking = cls._create_picking([(cls.product, 1.0)])
