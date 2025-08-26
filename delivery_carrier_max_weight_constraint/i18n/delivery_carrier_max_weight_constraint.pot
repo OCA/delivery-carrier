@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -46,6 +46,7 @@ msgstr ""
 #. module: delivery_carrier_max_weight_constraint
 #: model:ir.model.fields,field_description:delivery_carrier_max_weight_constraint.field_res_company__delivery_carrier_strict_weight_package
 #: model:ir.model.fields,field_description:delivery_carrier_max_weight_constraint.field_res_config_settings__delivery_carrier_strict_weight_package
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_max_weight_constraint.res_config_settings_view_form
 msgid "Overweight packages forbidden"
 msgstr ""
 
@@ -72,7 +73,6 @@ msgstr ""
 #. module: delivery_carrier_max_weight_constraint
 #. odoo-python
 #: code:addons/delivery_carrier_max_weight_constraint/wizards/choose_delivery_package.py:0
-#, python-format
 msgid ""
 "The weight of your package is higher than the maximum weight authorized for "
 "this package type. Please choose another package type."
