@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-01-31 15:06+0000\n"
+"PO-Revision-Date: 2025-08-27 14:25+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__supplier_invoice_count
@@ -93,12 +93,12 @@ msgstr "Conteggio allegati"
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__autopost_bills
 msgid "Auto-post bills"
-msgstr ""
+msgstr "Auto invia fattura"
 
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__autopost_bills
 msgid "Automatically post bills for this trusted partner"
-msgstr ""
+msgstr "Invia automaticamente le fatture per questo partner affidabile"
 
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__avatar_1920
@@ -218,7 +218,7 @@ msgstr "ID azienda"
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__company_registry_label
 msgid "Company ID Label"
-msgstr ""
+msgstr "Etichetta ID azienda"
 
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__company_name
@@ -243,7 +243,7 @@ msgstr "Indirizzo completo"
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__complete_name
 msgid "Complete Name"
-msgstr ""
+msgstr "Nome completo"
 
 #. module: delivery_dropoff_site
 #: model:ir.model,name:delivery_dropoff_site.model_res_partner
@@ -286,7 +286,7 @@ msgstr "Fido"
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__credit_to_invoice
 msgid "Credit To Invoice"
-msgstr ""
+msgstr "Accredito in fattura"
 
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__credit_limit
@@ -316,7 +316,7 @@ msgstr "Classe cliente"
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__days_sales_outstanding
 msgid "Days Sales Outstanding (DSO)"
-msgstr ""
+msgstr "Giorni medi di accredito vendite (DSO)"
 
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__property_delivery_carrier_id
@@ -352,12 +352,12 @@ msgstr "Disabilita calendario"
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__display_invoice_edi_format
 msgid "Display Invoice Edi Format"
-msgstr ""
+msgstr "Visualizza formato EDI fattura"
 
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__display_invoice_template_pdf_report_id
 msgid "Display Invoice Template Pdf Report"
-msgstr ""
+msgstr "Visualizza resoconto PDF modello fattura"
 
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__display_name
@@ -410,7 +410,7 @@ msgstr "Punto di scarico"
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__duplicate_bank_partner_ids
 msgid "Duplicate Bank Partner"
-msgstr ""
+msgstr "Duplica banca partner"
 
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__duplicated_bank_account_partners_count
@@ -454,7 +454,7 @@ msgstr "Contenitore finale"
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__fiscal_country_codes
 msgid "Fiscal Country Codes"
-msgstr ""
+msgstr "Codici fiscali nazione"
 
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__property_account_position_id
@@ -553,12 +553,12 @@ msgstr ""
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__ignore_abnormal_invoice_amount
 msgid "Ignore Abnormal Invoice Amount"
-msgstr ""
+msgstr "Ignora valore anormale fattura"
 
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__ignore_abnormal_invoice_date
 msgid "Ignore Abnormal Invoice Date"
-msgstr ""
+msgstr "Ignora data anormale fattura"
 
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__image_1920
@@ -593,12 +593,12 @@ msgstr "Settore"
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__delivery_info_id
 msgid "Info for Delivery Carrier"
-msgstr ""
+msgstr "Informazione per il vettore consegna"
 
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__contact_address_inline
 msgid "Inlined Complete Address"
-msgstr ""
+msgstr "Indirizzi completi allineati"
 
 #. module: delivery_dropoff_site
 #: model_terms:ir.ui.view,arch_db:delivery_dropoff_site.view_partner_dropoff_site_form
@@ -618,17 +618,17 @@ msgstr "Fattura"
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__invoice_edi_format_store
 msgid "Invoice Edi Format Store"
-msgstr ""
+msgstr "Deposito formato EDI fattura"
 
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__invoice_sending_method
 msgid "Invoice sending"
-msgstr ""
+msgstr "Invio fattura"
 
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__invoice_template_pdf_report_id
 msgid "Invoice template"
-msgstr ""
+msgstr "Modello fattura"
 
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__invoice_ids
@@ -793,7 +793,7 @@ msgstr "Partner"
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__partner_company_registry_placeholder
 msgid "Partner Company Registry Placeholder"
-msgstr ""
+msgstr "Segnaposto registro azienda partner"
 
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__contract_ids
@@ -813,7 +813,7 @@ msgstr "Dominio ID spedizione partner"
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__partner_vat_placeholder
 msgid "Partner Vat Placeholder"
-msgstr ""
+msgstr "Segnaposto P.IVA partner"
 
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__same_company_registry_partner_id
@@ -851,6 +851,9 @@ msgid ""
 "Preferred payment method when buying from this vendor. This will be set by "
 "default on all outgoing payments created for this vendor"
 msgstr ""
+"Metodo di pagamento preferito per l'acquisto da questo fornitore. Verrà "
+"impostato di default su tutti i pagamenti in uscita creati per questo "
+"fornitore"
 
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__property_inbound_payment_method_line_id
@@ -858,6 +861,9 @@ msgid ""
 "Preferred payment method when selling to this customer. This will be set by "
 "default on all incoming payments created for this customer"
 msgstr ""
+"Metodo di pagamento preferito per la vendita a questo cliente. Verrà "
+"impostato di default su tutti i pagamenti in entrata creati per questo "
+"cliente"
 
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__property_product_pricelist
@@ -867,12 +873,12 @@ msgstr "Listino prezzi"
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__property_inbound_payment_method_line_id
 msgid "Property Inbound Payment Method Line"
-msgstr ""
+msgstr "Riga del metodo di pagamento in entrata della proprietà"
 
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__property_outbound_payment_method_line_id
 msgid "Property Outbound Payment Method Line"
-msgstr ""
+msgstr "Riga del metodo di pagamento in uscita della proprietà"
 
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__ref
@@ -937,7 +943,7 @@ msgstr "Se stesso"
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__use_partner_credit_limit
 msgid "Set a value greater than 0.0 to activate a credit limit check"
-msgstr ""
+msgstr "Impostare un valore superiore a 0,0 per attivare un controllo fido"
 
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__partner_share
@@ -962,12 +968,12 @@ msgstr "Tipo token iscrizione"
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__specific_property_product_pricelist
 msgid "Specific Property Product Pricelist"
-msgstr ""
+msgstr "Listino prodotto proprietà specifico"
 
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__starred_message_ids
 msgid "Starred Message"
-msgstr ""
+msgstr "Messaggio preferito"
 
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__state_id
@@ -1041,7 +1047,7 @@ msgstr "Partita IVA"
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__vat_label
 msgid "Tax ID Label"
-msgstr ""
+msgstr "Etichetta ID imposta"
 
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__country_code
@@ -1280,6 +1286,8 @@ msgid ""
 "[(Total Receivable/Total Revenue) * number of days since the first invoice] "
 "for this customer"
 msgstr ""
+"[(Totale esigibile/Totale entrate) * numero di giorni dalla prima fattura] "
+"per questo cliente"
 
 #. module: delivery_dropoff_site
 #: model_terms:ir.ui.view,arch_db:delivery_dropoff_site.view_partner_dropoff_site_form
@@ -1289,7 +1297,7 @@ msgstr "es. www.odoo.com"
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__invoice_edi_format
 msgid "eInvoice format"
-msgstr ""
+msgstr "Formato fattura elettronica"
 
 #~ msgid ""
 #~ "- Contact: Use this to organize the contact details of employees of a "
