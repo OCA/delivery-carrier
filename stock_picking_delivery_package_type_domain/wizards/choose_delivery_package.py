@@ -5,7 +5,6 @@ from odoo import api, fields, models
 
 
 class ChooseDeliveryPackage(models.TransientModel):
-
     _inherit = "choose.delivery.package"
 
     package_type_domain = fields.Binary(
