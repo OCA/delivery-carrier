@@ -46,7 +46,8 @@ class CommonChooseDeliveryPackage:
         cls.product = cls.env["product.product"].create(
             {
                 "name": "Test Product",
-                "type": "product",
+                "type": "consu",
+                "is_storable": True,
             }
         )
 
