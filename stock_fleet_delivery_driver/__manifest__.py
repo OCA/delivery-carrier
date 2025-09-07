@@ -4,7 +4,7 @@
 {
     "name": "Stock Fleet Delivery Driver",
     "summary": "Allow choose Vehicle in Carriers, Transfers and Batches",
-    "version": "18.0.1.0.0",
+    "version": "18.0.1.0.1",
     "development_status": "Alpha",
     "category": "Inventory/Inventory",
     "website": "https://github.com/OCA/delivery-carrier",
