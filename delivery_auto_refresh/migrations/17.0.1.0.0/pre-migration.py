@@ -6,14 +6,8 @@ from openupgradelib import openupgrade
 
 @openupgrade.migrate()
 def migrate(env, version):
-    openupgrade.rename_fields(
-        env,
-        [
-            (
-                "res.company",
-                "res_company",
-                "sale_auto_assign_carrier_on_create",
-                "carrier_on_create",
-            ),
-        ],
+    openupgrade.logged_query(
+        env.cr,
+        """UPDATE res_company SET carrier_on_create = True
+        WHERE sale_auto_assign_carrier_on_create""",
     )
