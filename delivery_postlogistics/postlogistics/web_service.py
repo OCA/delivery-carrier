@@ -44,7 +44,7 @@ def sanitize_string(value, mapping=None):
     value = value or ""
     for char, repl in mapping.items():
         value = value.replace(char, repl)
-    return value
+    return value.encode("iso-8859-1")
 
 
 class PostlogisticsWebService:
