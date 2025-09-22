@@ -14,6 +14,15 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: delivery_schenker
+#: code:addons/delivery_schenker/models/schenker_request.py:0
+#, python-format
+msgid ""
+"\n"
+"Request Data:\n"
+"%s"
+msgstr ""
+
+#. module: delivery_schenker
 #: model:ir.model.fields.selection,name:delivery_schenker.selection__delivery_carrier__schenker_barcode_format__a4
 msgid "A4"
 msgstr ""
@@ -328,7 +337,9 @@ msgid ""
 "Error in the request to the Schenker API. This is the thrown message:\n"
 "\n"
 "[%s]\n"
-"%s - %s"
+"%s - %s\n"
+"Request Data:\n"
+"%s"
 msgstr ""
 
 #. module: delivery_schenker
