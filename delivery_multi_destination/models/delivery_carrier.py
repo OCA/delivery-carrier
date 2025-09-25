@@ -49,8 +49,9 @@ class DeliveryCarrier(models.Model):
     @api.model
     def name_search(self, name="", args=None, operator="ilike", limit=100):
         """Don't show by default children carriers."""
-        domain = [("parent_id", "=", False)]
-        return self.search(domain, limit=limit).name_get()
+        args = args or []
+        args += [("parent_id", "=", False)]
+        return super().name_search(name=name, args=args, operator=operator, limit=limit)
 
     def available_carriers(self, partner):
         """If the carrier is multi, we test the availability on children."""
