@@ -42,7 +42,7 @@ addon | version | maintainers | summary
 [delivery_correos_express](delivery_correos_express/) | 14.0.1.0.1 |  | Delivery Carrier implementation for Correos Express using their API
 [delivery_cttexpress](delivery_cttexpress/) | 14.0.1.0.1 |  | Delivery Carrier implementation for CTT Express API
 [delivery_free_fee_removal](delivery_free_fee_removal/) | 14.0.1.0.0 |  | Hide free fee lines on sales orders
-[delivery_multi_destination](delivery_multi_destination/) | 14.0.1.1.2 |  | Multiple destinations for the same delivery method
+[delivery_multi_destination](delivery_multi_destination/) | 14.0.1.1.3 |  | Multiple destinations for the same delivery method
 [delivery_package_fee](delivery_package_fee/) | 14.0.1.0.3 |  | Add fees on delivered packages on shipping methods
 [delivery_package_number](delivery_package_number/) | 14.0.1.2.1 |  | Set or compute number of packages for a picking
 [delivery_packaging_archive](delivery_packaging_archive/) | 14.0.1.0.1 | <a href='https://github.com/mt-software-de'><img src='https://github.com/mt-software-de.png' width='32' height='32' style='border-radius:50%;' alt='mt-software-de'/></a> | This module allows archiving a delivery packaging
