@@ -61,17 +61,6 @@ Please use _get_quant_packages_from_picking instead."
 
         return self.env["stock.quant.package"].browse(package_ids)
 
-    def get_shipping_label_values(self, label):
-        # TODO: consider to depends on base_delivery_carrier_label
-        self.ensure_one()
-        return {
-            "name": label["name"],
-            "res_id": self.id,
-            "res_model": "stock.picking",
-            "datas": label["file"],
-            "file_type": label["file_type"],
-        }
-
     def attach_shipping_label(self, label):
         """Attach a label returned by generate_shipping_labels to a picking"""
         if self.delivery_type != "postlogistics":
@@ -119,7 +108,7 @@ Please use _get_quant_packages_from_picking instead."
             )
         return order.amount_total
 
-    def info_from_label(self, label, zpl_patch_string=False):
+    def info_from_label(self, label, zpl_patch_string=False, package_id=False):
         tracking_number = label["tracking_number"]
         data = base64.b64decode(label["binary"])
 
@@ -135,6 +124,7 @@ Please use _get_quant_packages_from_picking instead."
             "file": data,
             "file_type": label["file_type"],
             "name": tracking_number + "." + label["file_type"],
+            "package_id": package_id,
         }
 
     def write_tracking_number_label(self, label_result, packages):
@@ -164,7 +154,9 @@ Please use _get_quant_packages_from_picking instead."
                     if package.name in label_value["item_id"].split("+")[-1]:
                         tracking_numbers.append(label_value["tracking_number"])
                         labels.append(
-                            self.info_from_label(label_value, zpl_patch_string)
+                            self.info_from_label(
+                                label_value, zpl_patch_string, package_id=package.id
+                            )
                         )
             package.parcel_tracking = "; ".join(tracking_numbers)
             tracking_refs += tracking_numbers
