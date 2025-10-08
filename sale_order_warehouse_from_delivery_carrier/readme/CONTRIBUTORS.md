@@ -1,0 +1,6 @@
+- Cetmix \<cetmix.com\>
+  - Ivan Sokolov
+  - Maksim Shurupov
+- Codeforward (https://www.codeforward.nl):
+  - Sander Lienaerts <sander.lienaerts@codeforward.nl>
+- Heliconia Solutions Pvt. Ltd. \<<https://www.heliconia.io>\>
