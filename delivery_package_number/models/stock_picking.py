@@ -1,7 +1,7 @@
 # Copyright 2020 Tecnativa - David Vidal
 # Copyright 2023 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.tools import config
 
 
@@ -28,7 +28,7 @@ class StockPicking(models.Model):
     def _action_generate_number_of_packages_wizard(self):
         view = self.env.ref("delivery_package_number.view_number_package_validate")
         return {
-            "name": _("Set number of packages"),
+            "name": self.env._("Set number of packages"),
             "type": "ir.actions.act_window",
             "view_mode": "form",
             "res_model": "stock.number.package.validate.wizard",

@@ -10,6 +10,7 @@ class StockPickingType(models.Model):
     force_set_number_of_packages = fields.Boolean()
     report_number_of_packages = fields.Many2one(
         "ir.actions.report",
+        domain=[("model", "=", "stock.picking")],
         default=lambda self: self.env.ref(
             "delivery_package_number.action_delivery_package_number_report",
             raise_if_not_found=False,
