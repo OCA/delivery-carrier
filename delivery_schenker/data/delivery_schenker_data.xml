@@ -116,5 +116,4 @@
         <field name="name">(Schenker) Other</field>
         <field name="package_carrier_type">schenker</field>
     </record>
-
 </odoo>
