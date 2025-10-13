@@ -150,7 +150,7 @@ class SchenkerRequest:
             **self._shipping_api_credentials(),
             **{"barcodeRequest": {"format": label_format}},
         )
-        vals["barcodeRequest"].update({"bookingId": ref for ref in reference_list})
+        vals["barcodeRequest"].update({"bookingId": reference_list})
         label = self._process_reply(
             self.client.service.getBookingBarcodeRequest, vals
         ).document
