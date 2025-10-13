@@ -339,16 +339,18 @@ class DeliveryCarrier(models.Model):
         :param picking record with picking to deliver
         :returns list of dicts with delivery packages shipping info
         """
-        if picking.package_level_ids and picking.package_ids:
+        if picking.package_level_ids and picking.move_line_ids.mapped(
+            "result_package_id"
+        ):
             return [
                 self._schenker_shipping_information_package(picking, package)
-                for package in picking.package_ids
+                for package in picking.move_line_ids.mapped("result_package_id")
             ]
         weight = picking.shipping_weight or picking.weight
         # Obviously products should be well configured. This parameter is mandatory.
         volume = sum(
             [
-                ml.product_uom_id._compute_quantity(ml.qty_done, ml.product_id.uom_id)
+                ml.product_uom_id._compute_quantity(ml.quantity, ml.product_id.uom_id)
                 * ml.product_id.volume
                 for ml in picking.move_line_ids
             ]
@@ -509,10 +511,7 @@ class DeliveryCarrier(models.Model):
 
     def schenker_get_tracking_link(self, picking):
         """Provide tracking link for the customer"""
-        return (
-            "https://eschenker.dbschenker.com/app/tracking-public/?refNumber=%s"
-            % picking.carrier_tracking_ref
-        )
+        return f"https://eschenker.dbschenker.com/app/tracking-public/?refNumber={picking.carrier_tracking_ref}"
 
     def _prepare_schenker_tracking(self, picking):
         self.ensure_one()
