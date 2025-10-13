@@ -1,6 +1,6 @@
 [project]
 name = "odoo-addons-oca-delivery-carrier"
-version = "18.0.20251008.0"
+version = "18.0.20251013.0"
 dependencies = [
     "odoo-addon-delivery_auto_refresh==18.0.*",
     "odoo-addon-delivery_carrier_account==18.0.*",
@@ -30,6 +30,7 @@ dependencies = [
     "odoo-addon-delivery_postlogistics_server_env==18.0.*",
     "odoo-addon-delivery_price_method==18.0.*",
     "odoo-addon-delivery_roulier==18.0.*",
+    "odoo-addon-delivery_schenker==18.0.*",
     "odoo-addon-delivery_state==18.0.*",
     "odoo-addon-partner_delivery_info==18.0.*",
     "odoo-addon-partner_delivery_schedule==18.0.*",
