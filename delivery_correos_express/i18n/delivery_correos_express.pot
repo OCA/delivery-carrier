@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -66,8 +66,6 @@ msgstr ""
 #. module: delivery_correos_express
 #. odoo-python
 #: code:addons/delivery_correos_express/models/delivery_carrier.py:0
-#: code:addons/delivery_correos_express/models/delivery_carrier.py:0
-#, python-format
 msgid ""
 "Correos Express API doesn't provide methods to compute delivery rates, so "
 "you should rely on another price method instead or override this one in your"
@@ -87,7 +85,6 @@ msgstr ""
 #. module: delivery_correos_express
 #. odoo-python
 #: code:addons/delivery_correos_express/models/correos_express_request.py:0
-#, python-format
 msgid "Correos Express Error: {return_code} {message}"
 msgstr ""
 
@@ -124,7 +121,6 @@ msgstr ""
 #. module: delivery_correos_express
 #. odoo-python
 #: code:addons/delivery_correos_express/models/delivery_carrier.py:0
-#, python-format
 msgid ""
 "Correos Express does not provide a method to cancel a shipment that has been"
 " registered. If you need to change some information you, create a new "
@@ -136,7 +132,6 @@ msgstr ""
 #. module: delivery_correos_express
 #. odoo-python
 #: code:addons/delivery_correos_express/models/stock_picking.py:0
-#, python-format
 msgid "Correos Express label for %s"
 msgstr ""
 
@@ -168,7 +163,6 @@ msgstr ""
 #. module: delivery_correos_express
 #. odoo-python
 #: code:addons/delivery_correos_express/models/stock_picking.py:0
-#, python-format
 msgid "No label was returned"
 msgstr ""
 
@@ -230,7 +224,6 @@ msgstr ""
 #. module: delivery_correos_express
 #. odoo-python
 #: code:addons/delivery_correos_express/models/correos_express_request.py:0
-#, python-format
 msgid "Timeout: the server did not reply within 60s"
 msgstr ""
 
@@ -242,7 +235,6 @@ msgstr ""
 #. module: delivery_correos_express
 #. odoo-python
 #: code:addons/delivery_correos_express/models/correos_express_request.py:0
-#, python-format
 msgid "Unsupported request type, please only use 'GET' or 'POST'"
 msgstr ""
 
@@ -254,7 +246,6 @@ msgstr ""
 #. module: delivery_correos_express
 #. odoo-python
 #: code:addons/delivery_correos_express/models/correos_express_request.py:0
-#, python-format
 msgid ""
 "{error}\n"
 "{result}"
