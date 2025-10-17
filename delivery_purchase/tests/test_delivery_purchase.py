@@ -1,6 +1,8 @@
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
+from odoo import Command
 from odoo.tests import Form
+from odoo.tools import mute_logger
 
 from odoo.addons.base.tests.common import BaseCommon
 
@@ -89,6 +91,46 @@ class TestDeliveryPurchase(TestDeliveryPurchaseBase):
         self.assertEqual(delivery_line.qty_to_invoice, 1)
         self.assertEqual(self.purchase.invoice_status, "to invoice")
 
+    @mute_logger("odoo.models.unlink")
+    def test_purchase_picking_price(self):
+        carrier = self.env["delivery.carrier"].create(
+            {
+                "name": "Carrier Rule custom",
+                "product_id": self.delivery_product.id,
+                "delivery_type": "base_on_rule",
+                "price_rule_ids": [
+                    Command.create(
+                        {
+                            "variable": "quantity",
+                            "operator": ">=",
+                            "max_value": 1,
+                            "list_base_price": 0,
+                            "list_price": 1,
+                            "variable_factor": "quantity",
+                        },
+                    )
+                ],
+            }
+        )
+        self.purchase.carrier_id = carrier
+        self.assertEqual(self.purchase.delivery_price, 1)
+        self.purchase.button_confirm()
+        self.assertEqual(self.purchase.delivery_price, 1)
+        picking = self.purchase.picking_ids
+        self.assertEqual(picking.carrier_id, carrier)
+        self.assertEqual(picking.carrier_price, 1)
+        purchase_form = Form(self.purchase)
+        with purchase_form.order_line.edit(0) as line_form:
+            line_form.product_qty = 2
+        purchase_form.save()
+        self.assertEqual(self.purchase.delivery_price, 1)
+        self.assertEqual(picking.carrier_price, 1)
+        res = picking.button_validate()
+        wizard = self.env[res["res_model"]].with_context(**res["context"]).create({})
+        wizard.process()
+        self.assertEqual(picking.state, "done")
+        self.assertEqual(picking.carrier_price, 2)
+
     def test_delivery_purchase(self):
         self.assertEqual(self.purchase.delivery_price, 20)
         self.purchase.carrier_id = self.carrier_rules.id
@@ -123,6 +165,7 @@ class TestDeliveryPurchase(TestDeliveryPurchaseBase):
         self.assertEqual(delivery_line.delivery_picking_orig_id, picking)
         self.assertEqual(self.purchase.delivery_price, 20)
 
+    @mute_logger("odoo.models.unlink")
     def test_picking_carrier_multi(self):
         self.purchase.order_line.product_qty = 2
         self.purchase.button_confirm()
