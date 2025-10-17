@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 Onestein (<https://www.onestein.nl>)
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl) -->
+<odoo>
+
+    <!-- CONFIGURATION ACTIONS -->
+    <record
+        id="action_sendcloud_onboarding_integration_wizard"
+        model="ir.actions.act_window"
+    >
+        <field name="name">Setup the Sendcloud Integration</field>
+        <field name="res_model">sendcloud.integration.wizard</field>
+        <field name="view_mode">form</field>
+        <field
+            name="view_id"
+            ref="sendcloud_onboarding_integration_configuration_form"
+        />
+        <field name="target">new</field>
+    </record>
+    <record id="action_sendcloud_onboarding_sync_wizard" model="ir.actions.act_window">
+        <field name="name">Sync the Sendcloud Objects</field>
+        <field name="res_model">sendcloud.sync.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="sendcloud_onboarding_sync_configuration_form" />
+        <field name="target">new</field>
+    </record>
+    <record
+        id="action_sendcloud_onboarding_warehouse_wizard"
+        model="ir.actions.act_window"
+    >
+        <field name="name">Setup the sender addresses of the warehouses</field>
+        <field name="res_model">sendcloud.warehouse.address.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="sendcloud_onboarding_warehouse_configuration_form" />
+        <field name="target">new</field>
+    </record>
+
+</odoo>

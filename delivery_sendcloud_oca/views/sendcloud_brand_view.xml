@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 Onestein (<https://www.onestein.nl>)
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl) -->
+<odoo>
+
+    <record id="view_sendcloud_brand_form" model="ir.ui.view">
+        <field name="model">sendcloud.brand</field>
+        <field name="arch" type="xml">
+            <form create="false" edit="false">
+                <header />
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="color" />
+                            <field name="secondary_color" />
+                            <field name="sendcloud_code" string="Internal Code" />
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                            />
+                        </group>
+                        <group>
+                            <field name="website" widget="url" />
+                            <field name="return_portal_url" widget="url" />
+                        </group>
+                        <group>
+                            <field name="screen_thumb" widget="url" />
+                            <field name="print_thumb" widget="url" />
+                        </group>
+                        <group>
+                            <field name="notify_reply_to_email" widget="email" />
+                            <field name="domain" />
+                            <field name="notify_bcc_email" />
+                            <field name="hide_powered_by" />
+                        </group>
+                    </group>
+                    <field name="is_sendcloud_test_mode" invisible="1" />
+                    <group
+                        name="testing"
+                        string="Only for Testing"
+                        invisible="not is_sendcloud_test_mode"
+                    >
+                        <label
+                            for="is_sendcloud_test_mode"
+                            string=""
+                            class="oe_inline d-none"
+                        />
+                        <div class="o_row o_row_readonly">
+                            <button
+                                name="action_create_return_parcel"
+                                class="oe_link"
+                                type="object"
+                                string=" -> Create Return Parcel"
+                            />
+                        </div>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_sendcloud_brand_tree" model="ir.ui.view">
+        <field name="model">sendcloud.brand</field>
+        <field name="arch" type="xml">
+            <tree create="false">
+                <field name="name" />
+                <field name="website" widget="url" />
+                <field name="screen_thumb" widget="url" />
+                <field name="hide_powered_by" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_sendcloud_brands" model="ir.actions.act_window">
+        <field name="name">Sendcloud Brands</field>
+        <field name="res_model">sendcloud.brand</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

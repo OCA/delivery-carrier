@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 Onestein (<https://www.onestein.nl>)
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl) -->
+<odoo>
+    <record id="view_order_form" model="ir.ui.view">
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+            <page name="other_information" position="after">
+                <page
+                    string="Sendcloud"
+                    name="sendcloud_sale"
+                    invisible="not is_sendcloud_delivery_type"
+                >
+                    <group>
+                        <group name="sendcloud_sale">
+                            <field
+                                name="sendcloud_customs_shipment_type"
+                                string="Customs Shipment Type"
+                            />
+                            <field name="is_sendcloud_delivery_type" invisible="1" />
+                            <field
+                                name="sendcloud_service_point_required"
+                                invisible="1"
+                            />
+                            <field name="sendcloud_sp_details" invisible="1" />
+                            <field
+                                name="sendcloud_service_point_address"
+                                string="Service Point"
+                                invisible="not sendcloud_service_point_required"
+                                widget="sendcloud_service_point_selector"
+                            />
+                        </group>
+                    </group>
+                    <field name="is_sendcloud_test_mode" invisible="1" />
+                    <group
+                        name="testing"
+                        string="Only for Testing"
+                        invisible="not is_sendcloud_test_mode"
+                    >
+                        <button
+                            name="button_to_sendcloud_sync"
+                            type="object"
+                            string="Sync To Sendcloud"
+                        />
+                        <button
+                            name="button_delete_sendcloud_order"
+                            type="object"
+                            string="Delete From Sendcloud"
+                        />
+                    </group>
+                </page>
+            </page>
+        </field>
+    </record>
+
+    <record id="view_quotation_tree_with_onboarding" model="ir.ui.view">
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_quotation_tree" />
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute
+                    name="banner_route"
+                >/onboarding/sendcloud_onboarding_panel</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="sale_order_view_search_inherit_quotation" model="ir.ui.view">
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.sale_order_view_search_inherit_quotation" />
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='my_quotation']" position="after">
+                <separator />
+                <filter
+                    string="Sendcloud"
+                    name="is_sendcloud"
+                    domain="[('is_sendcloud_delivery_type', '=', True)]"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_quotations_sendcloud" model="ir.actions.act_window">
+        <field name="name">Quotations</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_id" ref="view_quotation_tree_with_onboarding" />
+        <field name="view_mode">tree,kanban,form,calendar,pivot,graph,activity</field>
+        <field name="search_view_id" ref="sale_order_view_search_inherit_quotation" />
+        <field name="context">{'search_default_is_sendcloud': True}</field>
+    </record>
+
+    <record id="sale_order_view_search_inherit_sale" model="ir.ui.view">
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.sale_order_view_search_inherit_sale" />
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='my_sale_orders_filter']" position="after">
+                <separator />
+                <filter
+                    string="Sendcloud"
+                    name="is_sendcloud"
+                    domain="[('is_sendcloud_delivery_type', '=', True)]"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_orders_sendcloud" model="ir.actions.act_window">
+        <field name="name">Sales Orders</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">tree,kanban,form,calendar,pivot,graph,activity</field>
+        <field name="search_view_id" ref="sale_order_view_search_inherit_sale" />
+        <field name="context">{'search_default_is_sendcloud': True}</field>
+        <field name="domain">[('state', 'not in', ('draft', 'sent', 'cancel'))]</field>
+    </record>
+
+</odoo>

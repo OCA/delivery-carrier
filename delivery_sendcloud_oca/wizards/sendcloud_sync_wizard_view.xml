@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 Onestein (<https://www.onestein.nl>)
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl) -->
+<odoo>
+
+    <record id="sendcloud_onboarding_sync_configuration_form" model="ir.ui.view">
+        <field name="model">sendcloud.sync.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <header />
+                <group name="main">
+                    <group name="config">
+                        <field name="parcel_statuses" />
+                        <field name="invoices" />
+                        <field name="sender_addresses" />
+                        <field name="shipping_methods" />
+                    </group>
+                    <group name="objects">
+                        <field name="parcels" />
+                        <field name="brands" />
+                        <field name="returns" />
+                    </group>
+                    <group name="options" string="Options">
+                    </group>
+                </group>
+                <footer>
+                    <button
+                        string="Confirm"
+                        name="button_sync"
+                        type="object"
+                        class="btn-primary"
+                    />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

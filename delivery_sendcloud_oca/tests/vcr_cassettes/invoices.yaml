@@ -1,0 +1,81 @@
+interactions:
+  - request:
+      body: null
+      headers:
+        Accept: ["*/*"]
+        Accept-Encoding: ["gzip, deflate"]
+        Connection: [keep-alive]
+        User-Agent: [python-requests/2.28.1]
+      method: GET
+      uri: https://panel.sendcloud.sc/api/v2/user/invoices
+    response:
+      body:
+        {
+          string:
+            '{"invoices":[{"id":718097,"ref":"577543","type":"periodic","price_incl":0.0,"price_excl":0.0,"isPayed":true,"date":"29-06-2020
+            02:06:29","items":"https://panel.sendcloud.sc/api/v2/user/invoices/718097"},{"id":731972,"ref":"587399","type":"periodic","price_incl":19.9,"price_excl":16.45,"isPayed":true,"date":"13-07-2020
+            16:29:33","items":"https://panel.sendcloud.sc/api/v2/user/invoices/731972"},{"id":817085,"ref":"650652","type":"periodic","price_incl":-6.11,"price_excl":-5.05,"isPayed":true,"date":"19-10-2020
+            02:07:55","items":"https://panel.sendcloud.sc/api/v2/user/invoices/817085"},{"id":790779,"ref":"631253","type":"periodic","price_incl":6.11,"price_excl":5.05,"isPayed":true,"date":"21-09-2020
+            02:08:26","items":"https://panel.sendcloud.sc/api/v2/user/invoices/790779"},{"id":805148,"ref":"641577","type":"periodic","price_incl":0.0,"price_excl":0.0,"isPayed":true,"date":"05-10-2020
+            02:12:15","items":"https://panel.sendcloud.sc/api/v2/user/invoices/805148"},{"id":832531,"ref":"661824","type":"periodic","price_incl":25.35,"price_excl":20.95,"isPayed":true,"date":"02-11-2020
+            03:10:48","items":"https://panel.sendcloud.sc/api/v2/user/invoices/832531"},{"id":859268,"ref":"682104","type":"periodic","price_incl":-183.68,"price_excl":-151.8,"isPayed":true,"date":"30-11-2020
+            03:16:10","items":"https://panel.sendcloud.sc/api/v2/user/invoices/859268"},{"id":891695,"ref":"706016","type":"periodic","price_incl":0.0,"price_excl":0.0,"isPayed":true,"date":"28-12-2020
+            03:12:53","items":"https://panel.sendcloud.sc/api/v2/user/invoices/891695"},{"id":845611,"ref":"671792","type":"periodic","price_incl":177.75,"price_excl":146.9,"isPayed":true,"date":"16-11-2020
+            03:12:22","items":"https://panel.sendcloud.sc/api/v2/user/invoices/845611"},{"id":877082,"ref":"694855","type":"periodic","price_incl":0.0,"price_excl":0.0,"isPayed":true,"date":"14-12-2020
+            03:11:44","items":"https://panel.sendcloud.sc/api/v2/user/invoices/877082"},{"id":924283,"ref":"729943","type":"periodic","price_incl":0.0,"price_excl":0.0,"isPayed":true,"date":"25-01-2021
+            03:13:13","items":"https://panel.sendcloud.sc/api/v2/user/invoices/924283"},{"id":959516,"ref":"755893","type":"periodic","price_incl":-6.47,"price_excl":-5.35,"isPayed":true,"date":"22-02-2021
+            03:16:52","items":"https://panel.sendcloud.sc/api/v2/user/invoices/959516"},{"id":944144,"ref":"744210","type":"periodic","price_incl":6.47,"price_excl":5.35,"isPayed":true,"date":"08-02-2021
+            04:55:01","items":"https://panel.sendcloud.sc/api/v2/user/invoices/944144"},{"id":995366,"ref":"782188","type":"periodic","price_incl":5.08,"price_excl":4.2,"isPayed":true,"date":"22-03-2021
+            03:10:12","items":"https://panel.sendcloud.sc/api/v2/user/invoices/995366"},{"id":1052512,"ref":"823588","type":"periodic","price_incl":17.61,"price_excl":14.55,"isPayed":true,"date":"03-05-2021
+            02:14:50","items":"https://panel.sendcloud.sc/api/v2/user/invoices/1052512"},{"id":1015523,"ref":"796634","type":"periodic","price_incl":0.97,"price_excl":0.8,"isPayed":true,"date":"05-04-2021
+            02:12:00","items":"https://panel.sendcloud.sc/api/v2/user/invoices/1015523"},{"id":1084282,"ref":"847490","type":"periodic","price_incl":-6.47,"price_excl":-5.35,"isPayed":true,"date":"31-05-2021
+            02:14:54","items":"https://panel.sendcloud.sc/api/v2/user/invoices/1084282"},{"id":1142747,"ref":"889530","type":"periodic","price_incl":56.39,"price_excl":46.6,"isPayed":true,"date":"12-07-2021
+            02:13:01","items":"https://panel.sendcloud.sc/api/v2/user/invoices/1142747"},{"id":1031407,"ref":"808575","type":"periodic","price_incl":0.0,"price_excl":0.0,"isPayed":true,"date":"19-04-2021
+            02:13:56","items":"https://panel.sendcloud.sc/api/v2/user/invoices/1031407"},{"id":1068575,"ref":"835634","type":"periodic","price_incl":-11.13,"price_excl":-9.2,"isPayed":true,"date":"17-05-2021
+            02:13:16","items":"https://panel.sendcloud.sc/api/v2/user/invoices/1068575"},{"id":1121054,"ref":"874181","type":"periodic","price_incl":6.17,"price_excl":5.1,"isPayed":true,"date":"28-06-2021
+            02:20:07","items":"https://panel.sendcloud.sc/api/v2/user/invoices/1121054"},{"id":1105168,"ref":"862293","type":"periodic","price_incl":5.08,"price_excl":4.2,"isPayed":true,"date":"14-06-2021
+            02:14:18","items":"https://panel.sendcloud.sc/api/v2/user/invoices/1105168"},{"id":1179265,"ref":"916000","type":"periodic","price_incl":-34.97,"price_excl":-28.9,"isPayed":true,"date":"09-08-2021
+            02:17:54","items":"https://panel.sendcloud.sc/api/v2/user/invoices/1179265"},{"id":1215365,"ref":"942112","type":"periodic","price_incl":11.13,"price_excl":9.2,"isPayed":true,"date":"06-09-2021
+            02:14:44","items":"https://panel.sendcloud.sc/api/v2/user/invoices/1215365"},{"id":1158307,"ref":"901213","type":"periodic","price_incl":-32.67,"price_excl":-27.0,"isPayed":true,"date":"26-07-2021
+            02:12:06","items":"https://panel.sendcloud.sc/api/v2/user/invoices/1158307"},{"id":1194606,"ref":"927421","type":"periodic","price_incl":0.0,"price_excl":0.0,"isPayed":true,"date":"23-08-2021
+            02:17:26","items":"https://panel.sendcloud.sc/api/v2/user/invoices/1194606"},{"id":742323,"ref":"595379","type":"periodic","price_incl":0.0,"price_excl":0.0,"isPayed":true,"date":"27-07-2020
+            02:04:24","items":"https://panel.sendcloud.sc/api/v2/user/invoices/742323"},{"id":1230694,"ref":"953570","type":"periodic","price_incl":37.03,"price_excl":30.6,"isPayed":true,"date":"20-09-2021
+            02:10:33","items":"https://panel.sendcloud.sc/api/v2/user/invoices/1230694"},{"id":1253127,"ref":"969390","type":"periodic","price_incl":159.78,"price_excl":132.05,"isPayed":true,"date":"04-10-2021
+            02:16:54","items":"https://panel.sendcloud.sc/api/v2/user/invoices/1253127"},{"id":755418,"ref":"604760","type":"periodic","price_incl":0.0,"price_excl":0.0,"isPayed":true,"date":"10-08-2020
+            02:04:19","items":"https://panel.sendcloud.sc/api/v2/user/invoices/755418"},{"id":689092,"ref":"555761","type":"initial_payment","price_incl":0.01,"price_excl":0.01,"isPayed":true,"date":"28-05-2020
+            08:43:56","items":"https://panel.sendcloud.sc/api/v2/user/invoices/689092"},{"id":1289994,"ref":"996131","type":"periodic","price_incl":-159.78,"price_excl":-132.05,"isPayed":true,"date":"01-11-2021
+            03:08:21","items":"https://panel.sendcloud.sc/api/v2/user/invoices/1289994"},{"id":1269593,"ref":"981642","type":"periodic","price_incl":-48.16,"price_excl":-39.8,"isPayed":true,"date":"18-10-2021
+            02:13:29","items":"https://panel.sendcloud.sc/api/v2/user/invoices/1269593"},{"id":1326146,"ref":"1022554","type":"periodic","price_incl":12.64,"price_excl":10.45,"isPayed":true,"date":"29-11-2021
+            03:09:28","items":"https://panel.sendcloud.sc/api/v2/user/invoices/1326146"},{"id":1370383,"ref":"1054003","type":"periodic","price_incl":0.0,"price_excl":0.0,"isPayed":true,"date":"27-12-2021
+            03:10:22","items":"https://panel.sendcloud.sc/api/v2/user/invoices/1370383"},{"id":1351399,"ref":"1040109","type":"periodic","price_incl":-12.64,"price_excl":-10.45,"isPayed":true,"date":"13-12-2021
+            03:08:37","items":"https://panel.sendcloud.sc/api/v2/user/invoices/1351399"},{"id":1414281,"ref":"1085638","type":"periodic","price_incl":0.0,"price_excl":0.0,"isPayed":true,"date":"24-01-2022
+            03:13:07","items":"https://panel.sendcloud.sc/api/v2/user/invoices/1414281"},{"id":1485412,"ref":"1135261","type":"periodic","price_incl":136.49,"price_excl":112.8,"isPayed":true,"date":"07-03-2022
+            03:09:41","items":"https://panel.sendcloud.sc/api/v2/user/invoices/1485412"},{"id":1440083,"ref":"1103623","type":"periodic","price_incl":6.53,"price_excl":5.4,"isPayed":true,"date":"07-02-2022
+            03:08:55","items":"https://panel.sendcloud.sc/api/v2/user/invoices/1440083"},{"id":1530185,"ref":"EU-CENTRAL-1-0-22-NL0013943","type":"periodic","price_incl":-136.49,"price_excl":-112.8,"isPayed":true,"date":"04-04-2022
+            02:08:07","items":"https://panel.sendcloud.sc/api/v2/user/invoices/1530185"},{"id":1503777,"ref":"EU-CENTRAL-1-0-22-NL0002227","type":"periodic","price_incl":6.23,"price_excl":5.15,"isPayed":true,"date":"21-03-2022
+            03:11:00","items":"https://panel.sendcloud.sc/api/v2/user/invoices/1503777"},{"id":1615020,"ref":"EU-CENTRAL-1-0-22-NL0053732","type":"periodic","price_incl":18.88,"price_excl":15.6,"isPayed":true,"date":"30-05-2022
+            02:11:10","items":"https://panel.sendcloud.sc/api/v2/user/invoices/1615020"},{"id":1663383,"ref":"EU-CENTRAL-1-0-22-NL0075408","type":"periodic","price_incl":-0.29,"price_excl":-0.24,"isPayed":false,"date":"27-06-2022
+            02:09:00","items":"https://panel.sendcloud.sc/api/v2/user/invoices/1663383"},{"id":1575960,"ref":"EU-CENTRAL-1-0-22-NL0035138","type":"periodic","price_incl":0.0,"price_excl":0.0,"isPayed":true,"date":"02-05-2022
+            02:10:47","items":"https://panel.sendcloud.sc/api/v2/user/invoices/1575960"},{"id":1642845,"ref":"EU-CENTRAL-1-0-22-NL0065898","type":"periodic","price_incl":-5.74,"price_excl":-4.74,"isPayed":true,"date":"13-06-2022
+            02:13:53","items":"https://panel.sendcloud.sc/api/v2/user/invoices/1642845"},{"id":1595595,"ref":"EU-CENTRAL-1-0-22-NL0044587","type":"periodic","price_incl":-6.53,"price_excl":-5.4,"isPayed":true,"date":"16-05-2022
+            02:10:52","items":[{"id":123456,"name":"test"}]}]}',
+        }
+      headers:
+        Allow: ["GET, HEAD, OPTIONS"]
+        Connection: [keep-alive]
+        Content-Type: [application/json]
+        Date: ["Tue, 05 Jul 2022 08:35:48 GMT"]
+        Referrer-Policy: [same-origin]
+        Server: [nginx]
+        Strict-Transport-Security: [max-age=15552000; includeSubDomains; preload]
+        Transfer-Encoding: [chunked]
+        Vary: [Accept-Encoding, "Origin, Cookie"]
+        X-Content-Type-Options: [nosniff]
+        X-Frame-Options: [DENY]
+        X-SendCloud-Client-Latest-Version-Linux: [1.0.2]
+        X-SendCloud-Client-Latest-Version-Windows: [1.0.4]
+        X-SendCloud-Client-Latest-Version-macOS: [1.0.5]
+        X-XSS-Protection: [1; mode=block]
+        content-length: ["9098"]
+      status: {code: 200, message: OK}
+version: 1
