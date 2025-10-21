@@ -125,22 +125,22 @@
         </field>
     </record>
 
-    <record id="view_sendcloud_return_tree" model="ir.ui.view">
+    <record id="view_sendcloud_return_list" model="ir.ui.view">
         <field name="model">sendcloud.return</field>
         <field name="arch" type="xml">
-            <tree create="false">
+            <list create="false">
                 <field name="sendcloud_code" string="Internal Code" />
                 <field name="email" widget="email" />
                 <field name="reason" />
                 <field name="outgoing_parcel_id" />
                 <field name="incoming_parcel_id" />
-            </tree>
+            </list>
         </field>
     </record>
 
     <record id="action_sendcloud_returns" model="ir.actions.act_window">
         <field name="name">Sendcloud Returns</field>
         <field name="res_model">sendcloud.return</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 </odoo>

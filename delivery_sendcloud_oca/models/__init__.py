@@ -16,7 +16,6 @@ from . import sendcloud_parcel
 from . import sendcloud_parcel_item
 from . import sendcloud_parcel_status
 from . import sendcloud_return
-from . import sendcloud_return_location
 from . import sendcloud_sender_address
 from . import stock_picking
 from . import stock_warehouse

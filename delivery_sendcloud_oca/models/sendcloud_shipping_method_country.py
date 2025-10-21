@@ -132,12 +132,12 @@ class SendcloudShippingMethodCountry(models.Model):
         )
         for record in self:
             to_countries = all_countries.filtered(lambda c, r=record: c.code == r.iso_2)
-            record.country_id = fields.first(to_countries)
+            record.country_id = to_countries[:1]
             record.name = record.country_id.name
             from_countries = all_countries.filtered(
                 lambda c, r=record: c.code == r.from_iso_2
             )
-            record.from_country_id = fields.first(from_countries)
+            record.from_country_id = from_countries and from_countries[:1]
             record.from_name = record.from_country_id.name
 
     def sendcloud_custom_price_details(self):

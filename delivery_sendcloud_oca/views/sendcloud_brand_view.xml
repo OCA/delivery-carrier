@@ -63,21 +63,21 @@
         </field>
     </record>
 
-    <record id="view_sendcloud_brand_tree" model="ir.ui.view">
+    <record id="view_sendcloud_brand_list" model="ir.ui.view">
         <field name="model">sendcloud.brand</field>
         <field name="arch" type="xml">
-            <tree create="false">
+            <list create="false">
                 <field name="name" />
                 <field name="website" widget="url" />
                 <field name="screen_thumb" widget="url" />
                 <field name="hide_powered_by" />
-            </tree>
+            </list>
         </field>
     </record>
 
     <record id="action_sendcloud_brands" model="ir.actions.act_window">
         <field name="name">Sendcloud Brands</field>
         <field name="res_model">sendcloud.brand</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 </odoo>

@@ -57,7 +57,7 @@
                         </group>
                     </group>
                     <field name="sendcloud_country_ids">
-                        <tree editable="bottom" create="true" delete="false">
+                        <list editable="bottom" create="true" delete="false">
                             <field name="from_country_id" readonly="1" />
                             <field name="from_iso_2" readonly="1" />
                             <field name="country_id" readonly="1" />
@@ -75,7 +75,7 @@
                                 class="btn fa fa-arrow-circle-right o_price_check"
                                 title="Set Custom Price"
                             />
-                        </tree>
+                        </list>
                     </field>
                 </page>
             </xpath>
@@ -92,7 +92,7 @@
         <field name="name">Sendcloud Shipping Methods</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">delivery.carrier</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="domain">[('sendcloud_is_return', '!=', True)]</field>
         <field name="context">{'search_default_delivery_type': 'sendcloud'}</field>
     </record>
@@ -104,7 +104,7 @@
         <field name="name">Sendcloud Shipping Methods for Returns</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">delivery.carrier</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="domain">[('sendcloud_is_return', '=', True)]</field>
         <field name="context">{'search_default_delivery_type': 'sendcloud'}</field>
     </record>

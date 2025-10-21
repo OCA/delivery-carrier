@@ -1,41 +1,42 @@
-/** @odoo-module **/
 /* global sendcloud */
 import {Component, onWillStart} from "@odoo/owl";
-import {_lt} from "@web/core/l10n/translation";
+import {WarningDialog} from "@web/core/errors/error_dialogs";
+import {_t} from "@web/core/l10n/translation";
+import {ensureJQuery} from "@web/core/ensure_jquery";
 import {loadJS} from "@web/core/assets";
 import {registry} from "@web/core/registry";
 import {standardFieldProps} from "@web/views/fields/standard_field_props";
 import {useInputField} from "@web/views/fields/input_field_hook";
 import {useService} from "@web/core/utils/hooks";
-import {WarningDialog} from "@web/core/errors/error_dialogs";
 
 export class ServicePointSelectorField extends Component {
     setup() {
-        useInputField({getValue: () => this.props.value || ""});
+        useInputField({getValue: () => this.props.record.data[this.props.name] || ""});
         this.dialog = useService("dialog");
-        onWillStart(() =>
-            loadJS("/delivery_sendcloud_oca/static/src/lib/sendcloud/api.min.js")
-        );
+        onWillStart(async () => {
+            loadJS("/delivery_sendcloud_oca/static/src/lib/sendcloud/api.min.js");
+            await ensureJQuery();
+        });
     }
 
     async onClearClick() {
-        this.props.update("");
+        this.props.record.data[this.props.name] = "";
     }
 
     async _onServicePointError(errors) {
         var irrelevantErrors = ["Closed"];
-        var relevantErrors = _.difference(errors, irrelevantErrors);
+        var relevantErrors = $(errors).not(irrelevantErrors).get();
 
         if (relevantErrors.length) {
             this.dialog.add(WarningDialog, {
-                title: this.env._t("Failure in opening Service Point Selector"),
+                title: _t("Failure in opening Service Point Selector"),
                 message: relevantErrors.join("\n"),
             });
         }
     }
 
     async _onServicePointSelected(servicePoint) {
-        this.props.update(JSON.stringify(servicePoint));
+        this.props.record.data[this.props.name] = JSON.stringify(servicePoint);
     }
 
     async onInputClick() {
@@ -60,7 +61,7 @@ export class ServicePointSelectorField extends Component {
 
     get sp_name() {
         try {
-            return JSON.parse(this.props.value).name;
+            return JSON.parse(this.props.record.data[this.props.name]).name;
         } catch {
             return "";
         }
@@ -68,7 +69,7 @@ export class ServicePointSelectorField extends Component {
 
     get street() {
         try {
-            return JSON.parse(this.props.value).street;
+            return JSON.parse(this.props.record.data[this.props.name]).street;
         } catch {
             return "";
         }
@@ -76,7 +77,7 @@ export class ServicePointSelectorField extends Component {
 
     get house_number() {
         try {
-            return JSON.parse(this.props.value).house_number;
+            return JSON.parse(this.props.record.data[this.props.name]).house_number;
         } catch {
             return "";
         }
@@ -84,7 +85,7 @@ export class ServicePointSelectorField extends Component {
 
     get postal_code() {
         try {
-            return JSON.parse(this.props.value).postal_code;
+            return JSON.parse(this.props.record.data[this.props.name]).postal_code;
         } catch {
             return "";
         }
@@ -92,7 +93,7 @@ export class ServicePointSelectorField extends Component {
 
     get city() {
         try {
-            return JSON.parse(this.props.value).city;
+            return JSON.parse(this.props.record.data[this.props.name]).city;
         } catch {
             return "";
         }
@@ -103,7 +104,7 @@ ServicePointSelectorField.props = standardFieldProps;
 export const servicePointSelectorField = {
     component: ServicePointSelectorField,
     supportedTypes: ["text"],
-    displayName: _lt("Service Point Selector"),
+    displayName: _t("Service Point Selector"),
 };
 
 registry

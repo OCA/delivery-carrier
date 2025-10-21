@@ -9,14 +9,14 @@ import logging
 
 import PyPDF2
 
-from odoo import fields, http
-from odoo.http import content_disposition, request
+from odoo import http
+from odoo.http import content_disposition, request, route
 
 _logger = logging.getLogger(__name__)
 
 
 class DeliverySendcloud(http.Controller):
-    @http.route(["/sendcloud/picking/download_labels"], type="http", auth="user")
+    @route(["/sendcloud/picking/download_labels"], type="http", auth="user")
     def sendcloud_picking_download_labels(self, ids, **post):
         picking_ids = []
         for picking_id in ids.split(","):
@@ -49,11 +49,12 @@ class DeliverySendcloud(http.Controller):
         ]
         return request.make_response(pdf, headers)
 
-    @http.route(
+    @route(
         "/shop/sendcloud_integration_webhook/<int:company_id>",
         methods=["POST"],
         type="json",
         auth="none",
+        readonly=False,
     )
     def sendcloud_integration_webhook(self, company_id, **kwargs):
         payload_data = request.get_json_data()
@@ -110,7 +111,7 @@ class DeliverySendcloud(http.Controller):
                         and not i.secret_key
                         and not i.sendcloud_code
                     )
-                    integration = fields.first(integrations)
+                    integration = integrations and integrations[:1]
                     _logger.info("Sendcloud integration:%s", integration.id)
                     return integration
         return request.env["sendcloud.integration"]

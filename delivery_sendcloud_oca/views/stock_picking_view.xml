@@ -124,7 +124,7 @@
     <record id="action_sendcloud_shipments" model="ir.actions.act_window">
         <field name="name">Sendcloud Shipments</field>
         <field name="res_model">stock.picking</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="domain">[('delivery_type','=','sendcloud')]</field>
     </record>
 </odoo>

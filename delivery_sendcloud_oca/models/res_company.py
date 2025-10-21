@@ -41,4 +41,4 @@ class ResCompany(models.Model):
             integrations = integrations.filtered(
                 lambda i: i.public_key and i.secret_key
             ).sorted(key=lambda i: i.sequence)
-            company.sendcloud_default_integration_id = fields.first(integrations)
+            company.sendcloud_default_integration_id = integrations[:1]

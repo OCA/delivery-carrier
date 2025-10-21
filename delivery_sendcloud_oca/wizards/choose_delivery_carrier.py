@@ -11,7 +11,7 @@ class ChooseDeliveryCarrier(models.TransientModel):
     def _onchange_carrier_id(self):
         res = super()._onchange_carrier_id()
         if self.delivery_type == "sendcloud":
-            vals = self._get_shipment_rate()
+            vals = self._get_delivery_rate()
             if vals.get("error_message"):
                 return {"error": vals["error_message"]}
         return res

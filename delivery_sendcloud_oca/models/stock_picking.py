@@ -50,7 +50,6 @@ class StockPicking(models.Model):
     )
     sendcloud_shipment_code = fields.Char(index=True, copy=False)
     sendcloud_sp_details = fields.Char(compute="_compute_sendcloud_sp_details")
-
     label_print_status = fields.Selection(
         [
             ("generated", "Generated"),
@@ -443,7 +442,8 @@ class StockPicking(models.Model):
         vals_list = []
 
         # multicollo parcels (one collo is the master)
-        colli = self.package_ids
+        packages = self.move_line_ids.mapped("result_package_id")
+        colli = packages
 
         # in case only packages of a certain carrier should be considered
         # invoke this method passing "sendcloud_only_packs_with_carrier" in its context
@@ -465,7 +465,7 @@ class StockPicking(models.Model):
             vals["external_reference"] = self.name + "," + str(package.id)
             vals_list += [vals]
 
-        if self.weight_bulk or (self.package_ids - colli) or not vals_list:
+        if self.weight_bulk or (packages - colli) or not vals_list:
             weight = self._get_total_weight_bulk(total_sendcloud_package_weight)
             weight = self._sendcloud_convert_weight_to_kg(weight)
             weight = self._sendcloud_check_collo_weight(weight)
@@ -579,8 +579,8 @@ class StockPicking(models.Model):
         if self.mapped("sendcloud_parcel_ids").mapped("attachment_id"):
             return {
                 "type": "ir.actions.act_url",
-                "url": "/sendcloud/picking/download_labels?ids=%s"
-                % (",".join([str(id) for id in self.ids])),
+                "url": f"/sendcloud/picking/download_labels?"
+                f"ids={(','.join([str(id) for id in self.ids]))}",
                 "target": "self",
             }
 

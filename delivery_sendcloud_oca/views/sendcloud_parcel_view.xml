@@ -88,7 +88,7 @@
                     <notebook>
                         <page string="Parcel Items" name="parcel_items">
                             <field name="parcel_item_ids" readonly="1">
-                                <tree>
+                                <list>
                                     <field name="description" />
                                     <field name="quantity" />
                                     <field name="weight" />
@@ -100,7 +100,7 @@
                                     <field name="sku" />
                                     <field name="return_reason" />
                                     <field name="return_message" />
-                                </tree>
+                                </list>
                             </field>
                         </page>
                         <page string="Parcel Details" name="parcel_details">
@@ -150,7 +150,7 @@
                             />
                             <field name="documents" invisible="1" />
                             <field name="document_ids" invisible="not document_ids">
-                                <tree>
+                                <list>
                                     <field name="name" />
                                     <field name="size" />
                                     <field name="attachment" widget="binary" />
@@ -161,7 +161,7 @@
                                         string=" -> Get Document"
                                         invisible="attachment"
                                     />
-                                </tree>
+                                </list>
                             </field>
                         </page>
                         <page string="Partner Details" name="partner_details">
@@ -186,18 +186,15 @@
                     </notebook>
                 </sheet>
                 <div class="o_attachment_preview" />
-                <div class="oe_chatter">
-                    <field name="message_follower_ids" widget="mail_followers" />
-                    <field name="message_ids" widget="mail_thread" />
-                </div>
+                <chatter />
             </form>
         </field>
     </record>
 
-    <record id="view_sendcloud_parcel_tree" model="ir.ui.view">
+    <record id="view_sendcloud_parcel_list" model="ir.ui.view">
         <field name="model">sendcloud.parcel</field>
         <field name="arch" type="xml">
-            <tree create="false">
+            <list create="false">
                 <field name="picking_id" />
                 <field name="package_id" />
                 <field name="tracking_number" />
@@ -205,21 +202,21 @@
                 <field name="company_id" groups="base.group_multi_company" />
                 <field name="sendcloud_status" />
                 <field name="label_print_status" />
-            </tree>
+            </list>
         </field>
     </record>
 
     <record id="action_sendcloud_parcels" model="ir.actions.act_window">
         <field name="name">Sendcloud Parcels</field>
         <field name="res_model">sendcloud.parcel</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="domain">[('is_return', '!=', True)]</field>
     </record>
 
     <record id="action_sendcloud_return_parcels" model="ir.actions.act_window">
         <field name="name">Sendcloud Return Parcels</field>
         <field name="res_model">sendcloud.parcel</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="domain">[('is_return', '=', True)]</field>
     </record>
 </odoo>
