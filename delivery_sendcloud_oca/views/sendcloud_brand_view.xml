@@ -2,7 +2,6 @@
 <!-- Copyright 2024 Onestein (<https://www.onestein.nl>)
      License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl) -->
 <odoo>
-
     <record id="view_sendcloud_brand_form" model="ir.ui.view">
         <field name="model">sendcloud.brand</field>
         <field name="arch" type="xml">
@@ -81,5 +80,4 @@
         <field name="res_model">sendcloud.brand</field>
         <field name="view_mode">tree,form</field>
     </record>
-
 </odoo>

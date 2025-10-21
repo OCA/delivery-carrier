@@ -114,5 +114,4 @@
         <field name="context">{'search_default_is_sendcloud': True}</field>
         <field name="domain">[('state', 'not in', ('draft', 'sent', 'cancel'))]</field>
     </record>
-
 </odoo>

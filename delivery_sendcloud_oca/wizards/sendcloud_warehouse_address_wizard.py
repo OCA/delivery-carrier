@@ -49,13 +49,8 @@ class SendcloudWarehouseAddressWizard(models.TransientModel):
         ):
             if line.warehouse_country_code != line.sencloud_sender_address_country_code:
                 err_msg += (
-                    "\n{name}: {country_code} - {company_name}: "
-                    "{sender_address_country_code}"
-                ).format(
-                    name=line.warehouse_id.name,
-                    country_code=line.warehouse_country_code,
-                    company_name=line.sencloud_sender_address_id.company_name,
-                    sender_address_country_code=line.sencloud_sender_address_country_code,
+                    f"\n{line.warehouse_id.name}: {line.warehouse_country_code} - {line.sencloud_sender_address_id.company_name}: "
+                    f"{line.sencloud_sender_address_country_code}"
                 )
         if err_msg:
             raise ValidationError(_("Inconsistent countries:") + err_msg)

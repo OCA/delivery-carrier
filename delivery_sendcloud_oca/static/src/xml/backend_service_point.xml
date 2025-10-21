@@ -9,7 +9,8 @@
                         <t t-esc="sp_name" />
                     </div>
                     <div>
-                        <t t-esc="street" /> <t t-esc="house_number" />
+                        <t t-esc="street" />
+                        <t t-esc="house_number" />
                     </div>
                     <div>
                         <t t-esc="postal_code" />

@@ -2,7 +2,6 @@
 <!-- Copyright 2024 Onestein (<https://www.onestein.nl>)
      License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl) -->
 <odoo>
-
     <record id="sendcloud_custom_price_details_wizard_form" model="ir.ui.view">
         <field name="model">sendcloud.custom.price.details.wizard</field>
         <field name="arch" type="xml">
@@ -70,5 +69,4 @@
         <field name="view_id" ref="sendcloud_custom_price_details_wizard_form" />
         <field name="target">new</field>
     </record>
-
 </odoo>
