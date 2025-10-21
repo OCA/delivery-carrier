@@ -2,7 +2,6 @@
 <!-- Copyright 2024 Onestein (<https://www.onestein.nl>)
      License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl) -->
 <odoo>
-
     <!-- Top menu item -->
     <menuitem
         id="menu_sendcloud_sendcloud"
@@ -188,5 +187,4 @@
         action="action_sendcloud_sync_order_wizard"
         parent="menu_sendcloud_sendcloud_config_wizards"
     />
-
 </odoo>

@@ -37,8 +37,8 @@
 
     <!-- ONBOARDING PANELS -->
     <record id="onboarding_onboarding_sendcloud" model="onboarding.onboarding">
-    <field name="name">Sendcloud Onboarding</field>
-    <field
+        <field name="name">Sendcloud Onboarding</field>
+        <field
             name="step_ids"
             eval="[
         Command.link(ref('onboarding_integration_step')),
@@ -46,7 +46,7 @@
         Command.link(ref('onboarding_warehouse_address_step')),
     ]"
         />
-    <field name="route_name">sendcloud_onboarding_panel</field>
-    <field name="panel_close_action_name">action_close_sendcloud_onboarding</field>
+        <field name="route_name">sendcloud_onboarding_panel</field>
+        <field name="panel_close_action_name">action_close_sendcloud_onboarding</field>
     </record>
 </odoo>

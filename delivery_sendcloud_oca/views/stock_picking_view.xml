@@ -127,5 +127,4 @@
         <field name="view_mode">tree,form</field>
         <field name="domain">[('delivery_type','=','sendcloud')]</field>
     </record>
-
 </odoo>

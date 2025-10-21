@@ -2,7 +2,6 @@
 <!-- Copyright 2024 Onestein (<https://www.onestein.nl>)
      License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl) -->
 <odoo>
-
     <record id="sendcloud_onboarding_integration_configuration_form" model="ir.ui.view">
         <field name="model">sendcloud.integration.wizard</field>
         <field name="arch" type="xml">
@@ -34,5 +33,4 @@
             </form>
         </field>
     </record>
-
 </odoo>

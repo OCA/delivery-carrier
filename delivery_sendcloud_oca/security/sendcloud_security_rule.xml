@@ -2,7 +2,6 @@
 <!-- Copyright 2024 Onestein (<https://www.onestein.nl>)
      License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl) -->
 <odoo noupdate="1">
-
     <record id="sendcloud_action_security_rule" model="ir.rule">
         <field name="name">Sendcloud Action multicompany</field>
         <field name="model_id" ref="model_sendcloud_action" />
@@ -65,5 +64,4 @@
             name="domain_force"
         >['|',('company_id','=',False),('company_id','in',company_ids)]</field>
     </record>
-
 </odoo>

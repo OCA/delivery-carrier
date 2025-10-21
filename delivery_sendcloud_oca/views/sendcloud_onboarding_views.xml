@@ -2,7 +2,6 @@
 <!-- Copyright 2024 Onestein (<https://www.onestein.nl>)
      License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl) -->
 <odoo>
-
     <!-- CONFIGURATION ACTIONS -->
     <record
         id="action_sendcloud_onboarding_integration_wizard"
@@ -34,5 +33,4 @@
         <field name="view_id" ref="sendcloud_onboarding_warehouse_configuration_form" />
         <field name="target">new</field>
     </record>
-
 </odoo>
