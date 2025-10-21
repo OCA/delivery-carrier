@@ -1,7 +1,3 @@
-.. image:: https://odoo-community.org/readme-banner-image
-   :target: https://odoo-community.org/get-involved?utm_source=readme
-   :alt: Odoo Community Association
-
 ==================
 Sendcloud Shipping
 ==================
@@ -17,17 +13,17 @@ Sendcloud Shipping
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/license-LGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/licence-LGPL--3-blue.png
     :target: http://www.gnu.org/licenses/lgpl-3.0-standalone.html
     :alt: License: LGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fdelivery--carrier-lightgray.png?logo=github
-    :target: https://github.com/OCA/delivery-carrier/tree/17.0/delivery_sendcloud_oca
+    :target: https://github.com/OCA/delivery-carrier/tree/18.0/delivery_sendcloud_oca
     :alt: OCA/delivery-carrier
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/delivery-carrier-17-0/delivery-carrier-17-0-delivery_sendcloud_oca
+    :target: https://translation.odoo-community.org/projects/delivery-carrier-18-0/delivery-carrier-18-0-delivery_sendcloud_oca
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/delivery-carrier&target_branch=17.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/delivery-carrier&target_branch=18.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
@@ -113,33 +109,33 @@ After the setup of the integration with Sendcloud server is completed,
 second step is to synchronize the objects present in Sendcloud server to
 Odoo. To synchronize Sendcloud objects for the first time:
 
-- Go to Sendcloud > Configuration > Wizards > Sync the Sendcloud
-  Objects. A wizard will pop up.
+-  Go to Sendcloud > Configuration > Wizards > Sync the Sendcloud
+   Objects. A wizard will pop up.
 
 |image6|
 
-- Select all the objects. Confirm. This will retrieve the required data
-  from Sendcloud server.
+-  Select all the objects. Confirm. This will retrieve the required data
+   from Sendcloud server.
 
 |image7|
 
 Some Sendcloud objects will be automatically synchronized from the
 Sendcloud server to Odoo. Those Sendcloud objects are:
 
-- Parcel Statuses
-- Invoices
-- Shipping Methods
-- Sender Addresses
+-  Parcel Statuses
+-  Invoices
+-  Shipping Methods
+-  Sender Addresses
 
 To configure how often those objects should be retrieved from the
 Sendcloud server:
 
-- Go to Settings > Technical > Automation > Scheduled Actions. Search
-  Scheduled Actions for "Sendcloud".
+-  Go to Settings > Technical > Automation > Scheduled Actions. Search
+   Scheduled Actions for "Sendcloud".
 
 |image8|
 
-- Set the "Execute Every" value according to your needs.
+-  Set the "Execute Every" value according to your needs.
 
 Sender Addresses and Warehouses
 
@@ -218,33 +214,33 @@ and adjust this to WH/OUT/TEST for instance.
 
 |image11|
 
-.. |image1| image:: https://raw.githubusercontent.com/OCA/delivery-carrier/17.0/delivery_sendcloud_oca/static/description/Image_10.png
-.. |image2| image:: https://raw.githubusercontent.com/OCA/delivery-carrier/17.0/delivery_sendcloud_oca/static/description/Image_20.png
-.. |image3| image:: https://raw.githubusercontent.com/OCA/delivery-carrier/17.0/delivery_sendcloud_oca/static/description/Image_30.png
-.. |image4| image:: https://raw.githubusercontent.com/OCA/delivery-carrier/17.0/delivery_sendcloud_oca/static/description/Image_40.png
-.. |image5| image:: https://raw.githubusercontent.com/OCA/delivery-carrier/17.0/delivery_sendcloud_oca/static/description/Image_50.png
-.. |image6| image:: https://raw.githubusercontent.com/OCA/delivery-carrier/17.0/delivery_sendcloud_oca/static/description/Image_70.png
-.. |image7| image:: https://raw.githubusercontent.com/OCA/delivery-carrier/17.0/delivery_sendcloud_oca/static/description/Image_80.png
-.. |image8| image:: https://raw.githubusercontent.com/OCA/delivery-carrier/17.0/delivery_sendcloud_oca/static/description/Image_90.png
-.. |image9| image:: https://raw.githubusercontent.com/OCA/delivery-carrier/17.0/delivery_sendcloud_oca/static/description/Image_100.png
-.. |image10| image:: https://raw.githubusercontent.com/OCA/delivery-carrier/17.0/delivery_sendcloud_oca/static/description/Image_110.png
-.. |image11| image:: https://raw.githubusercontent.com/OCA/delivery-carrier/17.0/delivery_sendcloud_oca/static/description/Image_120.png
+.. |image1| image:: https://raw.githubusercontent.com/OCA/delivery-carrier/18.0/delivery_sendcloud_oca/static/description/Image_10.png
+.. |image2| image:: https://raw.githubusercontent.com/OCA/delivery-carrier/18.0/delivery_sendcloud_oca/static/description/Image_20.png
+.. |image3| image:: https://raw.githubusercontent.com/OCA/delivery-carrier/18.0/delivery_sendcloud_oca/static/description/Image_30.png
+.. |image4| image:: https://raw.githubusercontent.com/OCA/delivery-carrier/18.0/delivery_sendcloud_oca/static/description/Image_40.png
+.. |image5| image:: https://raw.githubusercontent.com/OCA/delivery-carrier/18.0/delivery_sendcloud_oca/static/description/Image_50.png
+.. |image6| image:: https://raw.githubusercontent.com/OCA/delivery-carrier/18.0/delivery_sendcloud_oca/static/description/Image_70.png
+.. |image7| image:: https://raw.githubusercontent.com/OCA/delivery-carrier/18.0/delivery_sendcloud_oca/static/description/Image_80.png
+.. |image8| image:: https://raw.githubusercontent.com/OCA/delivery-carrier/18.0/delivery_sendcloud_oca/static/description/Image_90.png
+.. |image9| image:: https://raw.githubusercontent.com/OCA/delivery-carrier/18.0/delivery_sendcloud_oca/static/description/Image_100.png
+.. |image10| image:: https://raw.githubusercontent.com/OCA/delivery-carrier/18.0/delivery_sendcloud_oca/static/description/Image_110.png
+.. |image11| image:: https://raw.githubusercontent.com/OCA/delivery-carrier/18.0/delivery_sendcloud_oca/static/description/Image_120.png
 
 Usage
 =====
 
 In short this is how the module works:
 
-- the user creates a sale order in Odoo; the user clicks on "Add
-  shipping" button and selects one of the shipping methods provided by
-  Sendcloud
-- when confirming the sale order, a delivery document is generated
-  (stock.picking)
-- when confirming the picking, a parcel (or multiple parcels) for the
-  specific sales order are created in Sendcloud under Shipping > Created
-  labels
-- the picking is updated with the information from Sendcloud (tracking
-  number, tracking url, label etc...)
+-  the user creates a sale order in Odoo; the user clicks on "Add
+   shipping" button and selects one of the shipping methods provided by
+   Sendcloud
+-  when confirming the sale order, a delivery document is generated
+   (stock.picking)
+-  when confirming the picking, a parcel (or multiple parcels) for the
+   specific sales order are created in Sendcloud under Shipping >
+   Created labels
+-  the picking is updated with the information from Sendcloud (tracking
+   number, tracking url, label etc...)
 
 Map of Sendcloud-Odoo data models
 ---------------------------------
@@ -273,13 +269,13 @@ selection of the service point. The widget is placed in the "Sendcloud
 Shipping" tab of the picking. The widget is visible in case the
 following is true:
 
-- the configuration in the Sendcloud panel has the Service Point flag to
-  True (in the Sendcloud integration config)
-- the Shipping Method selected in the picking is provided by Sendcloud
-- the Shipping Method has field sendcloud_service_point_input ==
-  "required"
-- all the criteria (from country, to country, weight) match with the
-  current order
+-  the configuration in the Sendcloud panel has the Service Point flag
+   to True (in the Sendcloud integration config)
+-  the Shipping Method selected in the picking is provided by Sendcloud
+-  the Shipping Method has field sendcloud_service_point_input ==
+   "required"
+-  all the criteria (from country, to country, weight) match with the
+   current order
 
 Cancel parcels
 --------------
@@ -306,7 +302,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/delivery-carrier/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/delivery-carrier/issues/new?body=module:%20delivery_sendcloud_oca%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/delivery-carrier/issues/new?body=module:%20delivery_sendcloud_oca%0Aversion:%2018.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -321,7 +317,7 @@ Authors
 Contributors
 ------------
 
-- ``Onestein <https://www.onestein.nl>``\ \_\_
+-  ``Onestein <https://www.onestein.nl>``\ \_\_
 
 Maintainers
 -----------
@@ -336,6 +332,17 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-This module is part of the `OCA/delivery-carrier <https://github.com/OCA/delivery-carrier/tree/17.0/delivery_sendcloud_oca>`_ project on GitHub.
+.. |maintainer-tarteo| image:: https://github.com/tarteo.png?size=40px
+    :target: https://github.com/tarteo
+    :alt: tarteo
+.. |maintainer-bytemeasap| image:: https://github.com/bytemeasap.png?size=40px
+    :target: https://github.com/bytemeasap
+    :alt: bytemeasap
+
+Current `maintainers <https://odoo-community.org/page/maintainer-role>`__:
+
+|maintainer-tarteo| |maintainer-bytemeasap| 
+
+This module is part of the `OCA/delivery-carrier <https://github.com/OCA/delivery-carrier/tree/18.0/delivery_sendcloud_oca>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.

@@ -242,7 +242,7 @@ class SendcloudCreateReturnParcelWizard(models.TransientModel):
                 % ({"error_code": error_code, "error_msg": error_msg})
             )
         portal = response.get("portal")
-        return_portal_url = "https://%s.shipping-portal.com/rp/" % portal.get("domain")
+        return_portal_url = f"https://{portal.get('domain')}.shipping-portal.com/rp/"
         self.reasons = portal.get("reasons")
         self.support_url = portal.get("support_url")
         self.return_policy_url = portal.get("return_policy_url")
@@ -304,7 +304,7 @@ class SendcloudCreateReturnParcelWizard(models.TransientModel):
             err_msg = _("Sendcloud: %(message)s (error code: '%(code)s')") % (
                 {"message": res_error.get("message"), "code": res_error.get("code")}
             )
-            self.error_message = "%s\n" % err_msg
+            self.error_message = f"{err_msg}\n"
         else:
             self.service_points_token = outgoing_parcel_data.get("service_points_token")
             self.access_token = outgoing_parcel_data.get("access_token")
@@ -323,7 +323,7 @@ class SendcloudCreateReturnParcelWizard(models.TransientModel):
             parcels = self.env["sendcloud.parcel"].sendcloud_create_update_parcels(
                 [parcel_data], self.brand_id.company_id.id
             )
-            self.parcel_id = fields.first(parcels)
+            self.parcel_id = parcels and parcels[:1]
 
             # Carriers
             carriers_data = outgoing_parcel_data.get("data", {}).get("carriers")
@@ -481,7 +481,7 @@ class SendcloudCreateReturnParcelWizard(models.TransientModel):
             ]._prepare_sendcloud_parcel_from_response(parcel)
             parcels_vals["picking_id"] = self.parcel_id.picking_id.id
             parcels_vals["company_id"] = self.env.company.id
-        odoo_parcels_vals += [parcels_vals]
+            odoo_parcels_vals += [parcels_vals]
         self.env["sendcloud.parcel"].create(odoo_parcels_vals)
         # Manage Odoo return
         # Label creation poller

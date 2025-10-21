@@ -7,8 +7,9 @@ from urllib.parse import urlparse
 
 import requests
 
-from odoo import SUPERUSER_ID, _, api, models, registry
+from odoo import SUPERUSER_ID, _, api, models
 from odoo.exceptions import UserError
+from odoo.modules.registry import Registry
 
 TIMEOUT = 60
 
@@ -68,7 +69,7 @@ class SendcloudRequest(models.AbstractModel):
 
         end_time = time.time()
         response_time = end_time - start_time
-        with registry(self.env.cr.dbname).cursor() as new_cr:
+        with Registry(self.env.cr.dbname).cursor() as new_cr:
             # Create a new environment with new cursor database
             new_env = api.Environment(new_cr, SUPERUSER_ID, self.env.context)
             self.with_env(new_env)._log_response_in_action(
@@ -203,7 +204,7 @@ class SendcloudRequest(models.AbstractModel):
         return response.get("invoices")
 
     def get_user_invoice(self, code):
-        response = self._get_panel_request("/user/invoices/%s" % code)
+        response = self._get_panel_request(f"/user/invoices/{code}")
         return response.get("invoice")
 
     def get_integrations(self):
@@ -214,7 +215,7 @@ class SendcloudRequest(models.AbstractModel):
         return response.get("shipping_methods")
 
     def get_shipping_method(self, code, params):
-        response = self._get_panel_request("/shipping_methods/%s" % code, params)
+        response = self._get_panel_request(f"/shipping_methods/{code}", params)
         return response.get("shipping_method")
 
     def get_parcels(self):
@@ -223,7 +224,7 @@ class SendcloudRequest(models.AbstractModel):
         return self._iterate_pagination(response, urlpath, "parcels")
 
     def get_parcel(self, code):
-        response = self._get_panel_request("/parcels/%s" % code)
+        response = self._get_panel_request(f"/parcels/{code}")
         return response.get("parcel")
 
     def get_parcels_statuses(self):
@@ -247,11 +248,11 @@ class SendcloudRequest(models.AbstractModel):
                 }
             )
             post_data += [vals]
-        url = "/integrations/%s/shipments" % integration_code
+        url = f"/integrations/{integration_code}/shipments"
         return self._post_panel_request(url, post_data)
 
     def delete_shipments(self, integration_id, post_data):
-        url = "/integrations/%s/shipments/delete" % integration_id
+        url = f"/integrations/{integration_id}/shipments/delete"
         return self._post_panel_request(url, post_data)
 
     def get_parcel_label(self, label_printer_url):
@@ -259,7 +260,7 @@ class SendcloudRequest(models.AbstractModel):
         return res.content
 
     def get_return_portal_url(self, code):
-        return self._get_panel_request("/parcels/%d/return_portal_url" % code)
+        return self._get_panel_request(f"/parcels/{code}/return_portal_url")
 
     def get_parcel_document(self, link):
         res = self._do_auth_request("GET", link)
@@ -267,10 +268,10 @@ class SendcloudRequest(models.AbstractModel):
 
     def cancel_parcel(self, code):
         self = self.with_context(skip_sendcloud_check_response=True)
-        return self._post_panel_request("/parcels/%s/cancel" % code)
+        return self._post_panel_request(f"/parcels/{code}/cancel")
 
     def update_integration(self, code, data):
-        return self._put_panel_request("/integrations/%s" % code, data)
+        return self._put_panel_request(f"/integrations/{code}", data)
 
     def get_returns(self):
         urlpath = "/returns"
@@ -278,10 +279,10 @@ class SendcloudRequest(models.AbstractModel):
         return self._iterate_pagination(response, urlpath, "returns")
 
     def get_return(self, code):
-        return self._get_panel_request("/returns/%s" % code)
+        return self._get_panel_request(f"/returns/{code}")
 
     def get_return_portal_settings(self, domain_brand, language=""):
-        url = "/brand/%s/return-portal" % domain_brand
+        url = f"/brand/{domain_brand}/return-portal"
         if language:
             url += "?language=" + language
         url = self._base_panel_url() + url
@@ -289,13 +290,13 @@ class SendcloudRequest(models.AbstractModel):
         return res.json()
 
     def get_return_portal_outgoing_parcel(self, domain_brand, params):
-        url = "/brand/%s/return-portal/outgoing" % domain_brand
+        url = f"/brand/{domain_brand}/return-portal/outgoing"
         url = self._base_panel_url() + url
         res = self._do_request("GET", url, data=params)
         return res.json()
 
     def create_return_portal_incoming_parcel(self, domain_brand, payload, headers):
-        url = "/brand/%s/return-portal/incoming" % domain_brand
+        url = f"/brand/{domain_brand}/return-portal/incoming"
         url = self._base_panel_url() + url
         res = self._do_request("POST", url, data=payload, headers=headers)
         return res.json()

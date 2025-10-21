@@ -21,7 +21,7 @@
         <field
             name="panel_step_open_action_name"
         >action_sendcloud_onboarding_sync</field>
-        <field name="sequence">3</field>
+        <field name="sequence">2</field>
     </record>
 
     <record id="onboarding_warehouse_address_step" model="onboarding.onboarding.step">
@@ -32,7 +32,7 @@
         <field
             name="panel_step_open_action_name"
         >action_open_sendcloud_onboarding_warehouse_address</field>
-        <field name="sequence">4</field>
+        <field name="sequence">3</field>
     </record>
 
     <!-- ONBOARDING PANELS -->

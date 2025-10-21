@@ -49,7 +49,8 @@ class SendcloudWarehouseAddressWizard(models.TransientModel):
         ):
             if line.warehouse_country_code != line.sencloud_sender_address_country_code:
                 err_msg += (
-                    f"\n{line.warehouse_id.name}: {line.warehouse_country_code} - {line.sencloud_sender_address_id.company_name}: "
+                    f"\n{line.warehouse_id.name}: {line.warehouse_country_code}"
+                    f" - {line.sencloud_sender_address_id.company_name}: "
                     f"{line.sencloud_sender_address_country_code}"
                 )
         if err_msg:

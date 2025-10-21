@@ -19,19 +19,19 @@
         </field>
     </record>
 
-    <record id="view_sendcloud_parcel_status_tree" model="ir.ui.view">
+    <record id="view_sendcloud_parcel_status_list" model="ir.ui.view">
         <field name="model">sendcloud.parcel.status</field>
         <field name="arch" type="xml">
-            <tree create="false" banner_route="/onboarding/sendcloud_onboarding_panel">
+            <list create="false">
                 <field name="sendcloud_code" />
                 <field name="message" />
-            </tree>
+            </list>
         </field>
     </record>
 
     <record id="action_sendcloud_parcel_statuses" model="ir.actions.act_window">
         <field name="name">Sendcloud Parcel Statuses</field>
         <field name="res_model">sendcloud.parcel.status</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 </odoo>

@@ -36,17 +36,17 @@
         </field>
     </record>
 
-    <record id="view_sendcloud_shipping_method_country_tree" model="ir.ui.view">
+    <record id="view_sendcloud_shipping_method_country_list" model="ir.ui.view">
         <field name="model">sendcloud.shipping.method.country</field>
         <field name="arch" type="xml">
-            <tree create="false">
+            <list create="false">
                 <field name="from_country_id" />
                 <field name="from_iso_2" />
                 <field name="country_id" />
                 <field name="iso_2" />
                 <field name="product_id" />
                 <field name="price_custom" />
-            </tree>
+            </list>
         </field>
     </record>
 </odoo>

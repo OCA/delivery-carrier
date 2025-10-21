@@ -45,22 +45,22 @@
         </field>
     </record>
 
-    <record id="view_sendcloud_integration_tree" model="ir.ui.view">
+    <record id="view_sendcloud_integration_list" model="ir.ui.view">
         <field name="model">sendcloud.integration</field>
         <field name="arch" type="xml">
-            <tree create="false" banner_route="/onboarding/sendcloud_onboarding_panel">
+            <list create="false">
                 <field name="sequence" widget="handle" />
                 <field name="shop_name" />
                 <field name="sendcloud_code" />
                 <field name="service_point_enabled" widget="boolean_toggle" />
                 <field name="webhook_active" widget="boolean_toggle" />
-            </tree>
+            </list>
         </field>
     </record>
 
     <record id="action_sendcloud_integration" model="ir.actions.act_window">
         <field name="name">Sendcloud Integrations</field>
         <field name="res_model">sendcloud.integration</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 </odoo>

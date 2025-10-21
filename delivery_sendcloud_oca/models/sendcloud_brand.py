@@ -37,7 +37,7 @@ class SendcloudBrand(models.Model):
             "delivery_sendcloud_oca.action_sendcloud_create_return_parcel_wizard"
         )
         [action] = self.env.ref(action_name).read()
-        action["context"] = "{'default_brand_id': %s}" % (self.id)
+        action["context"] = f"{{'default_brand_id': {self.id}}}"
         return action
 
     @api.model

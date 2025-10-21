@@ -7,7 +7,7 @@
         <field name="arch" type="xml">
             <form>
                 <field name="warehouse_ids">
-                    <tree editable="bottom" create="false" delete="false">
+                    <list editable="bottom" create="false" delete="false">
                         <field name="warehouse_id" />
                         <field name="warehouse_country_code" />
                         <field name="sencloud_sender_address_id" />
@@ -15,7 +15,7 @@
                             name="sencloud_sender_address_country_code"
                             string="Country Code"
                         />
-                    </tree>
+                    </list>
                 </field>
                 <footer>
                     <button

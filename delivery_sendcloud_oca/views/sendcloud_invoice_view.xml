@@ -47,10 +47,10 @@
         </field>
     </record>
 
-    <record id="view_sendcloud_invoice_tree" model="ir.ui.view">
+    <record id="view_sendcloud_invoice_list" model="ir.ui.view">
         <field name="model">sendcloud.invoice</field>
         <field name="arch" type="xml">
-            <tree create="false">
+            <list create="false">
                 <field name="sendcloud_code" string="Internal Code" />
                 <field name="invoice_date" />
                 <field name="is_paid" />
@@ -59,13 +59,13 @@
                 <field name="price_excl" />
                 <field name="price_incl" />
                 <field name="company_id" groups="base.group_multi_company" />
-            </tree>
+            </list>
         </field>
     </record>
 
     <record id="action_sendcloud_invoices" model="ir.actions.act_window">
         <field name="name">Sendcloud Invoices</field>
         <field name="res_model">sendcloud.invoice</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 </odoo>

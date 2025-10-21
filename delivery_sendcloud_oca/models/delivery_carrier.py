@@ -161,7 +161,7 @@ class DeliveryCarrier(models.Model):
         )
         return res
 
-    def available_carriers(self, partner):
+    def available_carriers(self, partner, order):
         """
         Standard Odoo method, invoked by the super(), already filters shipping
         methods, including Sendcloud shipping methods, by the country of the
@@ -171,30 +171,16 @@ class DeliveryCarrier(models.Model):
          - weight range
          - enabled/disabled service point in Sendcloud integration.
         :param partner:
+        :param order:
         :return:
         """
-        res = super().available_carriers(partner)
+        res = super().available_carriers(partner, order)
 
         sendcloud_carriers = res.filtered(
             lambda c: c.delivery_type == "sendcloud" and c.sendcloud_is_return is False
         )
         other_carriers = res.filtered(lambda c: c.delivery_type != "sendcloud")
         if sendcloud_carriers:
-            # Retrieve current sale order
-            order_id = self.env.context.get("sale_order_id")
-            if not order_id:
-                order_id = self.env.context.get("default_order_id")
-            if (
-                not order_id
-                and self.env.context.get("active_model") == "choose.delivery.carrier"
-            ):
-                wizard = self.env["choose.delivery.carrier"].browse(
-                    self.env.context.get("active_id")
-                )
-                order_id = wizard.order_id.id
-            if not order_id:
-                return other_carriers
-            order = self.env["sale.order"].browse(order_id)
             # get sender address (warehouse)
             warehouse = order.warehouse_id
             if not warehouse.sencloud_sender_address_id:
@@ -246,8 +232,47 @@ class DeliveryCarrier(models.Model):
             sendcloud_carriers = without_service_point + enabled_service_point
 
         return (sendcloud_carriers + other_carriers).sorted(
-            key=lambda carrier: carrier.name
+            key=lambda avl_carrier: (avl_carrier.sequence, avl_carrier.id)
         )
+
+    def _is_available_for_order(self, order):
+        if self.delivery_type == "sendcloud":
+            if self.sendcloud_is_return:
+                return False
+            weight = order.sendcloud_order_weight
+            if not (self.sendcloud_min_weight <= weight <= self.sendcloud_max_weight):
+                return False
+            if (
+                self.sendcloud_service_point_input == "required"
+                and self.sendcloud_integration_id.service_point_enabled
+            ):
+                carrier_names = self.sendcloud_integration_id.service_point_carriers
+                current_carrier = self.sendcloud_carrier
+                if not (
+                    current_carrier
+                    and current_carrier in safe_eval(carrier_names)
+                    or False
+                ):
+                    return False
+            warehouse = order.warehouse_id
+            if not warehouse.sencloud_sender_address_id:
+                # use standard server address
+                sender_address = self._get_default_sender_address_per_company(
+                    warehouse.company_id.id
+                )
+            else:
+                sender_address = warehouse.sencloud_sender_address_id
+            countries = self.env["sendcloud.shipping.method.country"].search(
+                [
+                    ("company_id", "=", order.company_id.id),
+                    ("from_iso_2", "=", sender_address.country),
+                    ("iso_2", "=", order.partner_shipping_id.country_id.code),
+                ]
+            )
+            if self.sendcloud_code not in countries.mapped("method_code"):
+                return False
+        else:
+            return super()._is_available_for_order(order)
 
     # ----------------- #
     # Sendcloud methods #
@@ -272,9 +297,12 @@ class DeliveryCarrier(models.Model):
 
     def _sendcloud_get_price_per_country(self, country_code):
         self.ensure_one()
+        sendcloud_shipping_method_country_obj = self.env[
+            "sendcloud.shipping.method.country"
+        ]
         if self.sendcloud_price:
-            return self.sendcloud_price
-        shipping_method_country = self.env["sendcloud.shipping.method.country"].search(
+            return self.sendcloud_price, sendcloud_shipping_method_country_obj
+        shipping_method_country = sendcloud_shipping_method_country_obj.search(
             [
                 ("iso_2", "=", country_code),
                 ("company_id", "=", self.company_id.id),
@@ -456,6 +484,19 @@ class DeliveryCarrier(models.Model):
         vals = self._prepare_sendcloud_shipping_method_from_response(carrier)
         vals.pop("name")
         self.write(vals)
+
+    def sendcloud_get_return_label(
+        self, pickings, tracking_number=None, origin_date=None
+    ):
+        """Log a warning if the user tries to generate a return label."""
+        if self.delivery_type == "sendcloud":
+            for picking in pickings:
+                picking.message_post(
+                    body=_(
+                        "Sendcloud cannot generate returns."
+                        "Please handle this return with the carrier directly."
+                    )
+                )
 
     def write(self, vals):
         res = super().write(vals)

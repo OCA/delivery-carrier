@@ -5,11 +5,12 @@
     "name": "Sendcloud Shipping",
     "summary": "Compute shipping costs and ship with Sendcloud",
     "category": "Operations/Inventory/Delivery",
-    "version": "17.0.1.0.0",
+    "version": "18.0.1.0.0",
     "website": "https://github.com/OCA/delivery-carrier",
     "author": "Onestein,Odoo Community Association (OCA)",
+    "maintainers": ["tarteo", "bytemeasap"],
     "license": "LGPL-3",
-    "depends": ["base_address_extended", "stock_delivery", "web", "sale"],
+    "depends": ["base_address_extended", "stock_delivery", "web", "sale", "onboarding"],
     "data": [
         "security/ir.model.access.csv",
         "security/sendcloud_security_rule.xml",
@@ -44,7 +45,9 @@
     ],
     "assets": {
         "web.assets_backend": [
+            "delivery_sendcloud_oca/static/src/components/onboarding/*",
             "delivery_sendcloud_oca/static/src/js/*",
+            "delivery_sendcloud_oca/static/src/views/*",
             "delivery_sendcloud_oca/static/src/scss/*",
             "delivery_sendcloud_oca/static/src/xml/*",
         ]
