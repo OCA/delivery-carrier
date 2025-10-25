@@ -1,4 +1,5 @@
 # Copyright 2025 Camptocamp SA
+# Copyright 2025 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 from odoo import fields, models
 
@@ -8,7 +9,7 @@ class DeliveryCarrier(models.Model):
 
     adr_limited_amount_ids = fields.Many2many(
         "limited.amount",
-        string="Restrict selection of preferred carrier for ADR limited amount",
+        string="ADR limited amount",
         help="If a limited amount is defined here, this carrier will be "
         "excluded from the selection of preferred carrier on stock picking if "
         "said picking contains any move with products that define the same "
