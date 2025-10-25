@@ -11,19 +11,24 @@ class DeliveryCarrier(models.Model):
         "limited.amount",
         string="ADR limited amount",
         help="If a limited amount is defined here, this carrier will be "
-        "excluded from the selection of preferred carrier on stock picking if "
-        "said picking contains any move with products that define the same "
+        "excluded from the selection of carrier if any product has that same "
         "limited amount.",
     )
 
-    def _match_picking(self, picking):
-        return super()._match_picking(picking) and self._match_dangerous_goods(picking)
+    def _match(self, partner, order):
+        return super()._match(partner, order) and self._match_dangerous_goods(
+            order.order_line.product_id
+        )
 
-    def _match_dangerous_goods(self, picking):
-        # Returns True if picking is compliant with carrier regarding limited
-        # amounts of dangerous goods
+    def _match_picking(self, picking):
+        return super()._match_picking(picking) and self._match_dangerous_goods(
+            picking.move_ids.product_id
+        )
+
+    def _match_dangerous_goods(self, products):
+        """Test products are compliants with dangerous goods"""
         if limited_amounts := self.adr_limited_amount_ids:
-            for product in picking.move_ids.product_id:
+            for product in products:
                 if product.limited_amount_id in limited_amounts:
                     return False
         return True
