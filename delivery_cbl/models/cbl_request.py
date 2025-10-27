@@ -7,20 +7,23 @@ from datetime import datetime
 
 import requests
 
-from odoo import _
+from odoo import _, fields, models
 from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
 
 
-class CBLRequest:
-    def __init__(self, carrier):
-        self.user = carrier.cbl_user
-        self.password = carrier.cbl_password
-        self.client_code = carrier.cbl_client_code
-        self.client_token = carrier.cbl_client_token
+class CBLRequest(models.TransientModel):
+    _name = "cbl.request"
+    _description = "CBL Request auxiliary model"
+
+    user = fields.Char(required=True)
+    password = fields.Char(required=True)
+    client_code = fields.Char(required=True)
+    client_token = fields.Char(required=True)
 
     def _send_request(self, op, url, headers, json=False):
+        self.ensure_one()
         return getattr(requests, op)(
             url,
             json=json,
@@ -28,6 +31,7 @@ class CBLRequest:
         )
 
     def _manage_errors(self, response, picking):
+        self.ensure_one()
         if response.status_code != 200:
             raise UserError(
                 _(
@@ -39,11 +43,13 @@ class CBLRequest:
             )
 
     def _generate_auth(self):
+        self.ensure_one()
         auth = "{}:{}".format(self.user or "", self.password or "")
         auth64 = base64.encodebytes(auth.encode("ascii"))[:-1]
         return {"Authorization": "Basic " + auth64.decode("utf-8")}
 
     def _generate_daily_token(self, picking):
+        self.ensure_one()
         headers = {
             "Content-Type": "application/json",
         }
@@ -59,6 +65,7 @@ class CBLRequest:
         return response.json().get("dailyToken")
 
     def _get_packages(self, picking):
+        self.ensure_one()
         number_of_packages = picking.number_of_packages or 1
         packages = []
         for i in range(number_of_packages):
@@ -70,6 +77,7 @@ class CBLRequest:
         return packages
 
     def _generate_shipping_json(self, picking, daily_token):
+        self.ensure_one()
         company = picking.company_id
         customer = picking.partner_id
         packages = self._get_packages(picking)
@@ -115,6 +123,7 @@ class CBLRequest:
         return vals
 
     def _send_shipping(self, picking):
+        self.ensure_one()
         daily_token = self._generate_daily_token(picking)
         shipping_json = self._generate_shipping_json(picking, daily_token)
         headers = {
@@ -144,6 +153,7 @@ class CBLRequest:
         return tracking_ref, response.get("packagesTags")
 
     def cancel_shipment(self, picking):
+        self.ensure_one()
         deleted = False
         delete_type = (
             "DeletePendingShipments"
@@ -180,6 +190,7 @@ class CBLRequest:
         return deleted
 
     def confirm_shipments(self, picking):
+        self.ensure_one()
         confirmed = False
         daily_token = self._generate_daily_token(picking)
         headers = {

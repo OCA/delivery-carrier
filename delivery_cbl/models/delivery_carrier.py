@@ -6,8 +6,6 @@ import requests
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
-from .cbl_request import CBLRequest
-
 
 class DeliveryCarrier(models.Model):
     _inherit = "delivery.carrier"
@@ -88,7 +86,12 @@ class DeliveryCarrier(models.Model):
 
     def cbl_send_shipping(self, pickings):
         result = []
-        request = CBLRequest(self)
+        request = self.env["cbl.request"].create({
+            "user": self.cbl_user,
+            "password": self.cbl_password,
+            "client_code": self.cbl_client_code,
+            "client_token": self.cbl_client_token
+        })
         for picking in pickings:
             tracking_ref, labels = request._send_shipping(picking)
             result.append(
@@ -106,7 +109,12 @@ class DeliveryCarrier(models.Model):
         return result
 
     def cbl_cancel_shipment(self, pickings):
-        request = CBLRequest(self)
+        request = self.env["cbl.request"].create({
+            "user": self.cbl_user,
+            "password": self.cbl_password,
+            "client_code": self.cbl_client_code,
+            "client_token": self.cbl_client_token
+        })
         for picking in pickings.filtered(lambda picking: picking.carrier_tracking_ref):
             tracking_ref = picking.carrier_tracking_ref
             if request.cancel_shipment(picking):
@@ -129,7 +137,12 @@ class DeliveryCarrier(models.Model):
         return True
 
     def cbl_confirm_shipment(self, pickings):
-        request = CBLRequest(self)
+        request = self.env["cbl.request"].create({
+            "user": self.cbl_user,
+            "password": self.cbl_password,
+            "client_code": self.cbl_client_code,
+            "client_token": self.cbl_client_token
+        })
         for picking in pickings.filtered(
             lambda picking: picking.carrier_tracking_ref
             and not picking.cbl_confirmed
