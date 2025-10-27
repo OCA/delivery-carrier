@@ -25,6 +25,8 @@ class ManifestWizard(models.TransientModel):
 
     def get_manifest_file(self):
         self.ensure_one()
+        if self.carrier_id.delivery_type != "cbl":
+            return super().get_manifest_file()
         pickings = self._get_cbl_picking()
         if not pickings:
             raise ValidationError(_("There are no pickings to proceed"))
