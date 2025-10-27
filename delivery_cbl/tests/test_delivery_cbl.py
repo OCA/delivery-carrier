@@ -151,7 +151,6 @@ class TestCBLRequest(TransactionCase):
         self.picking.shipping_weight = 2.0
         daily_token = "dummy_token"
         json_data = self.cbl_request._generate_shipping_json(self.picking, daily_token)
-        self.assertEqual(json_data["freight"], "D")
         self.assertNotIn("cashOnDelivery", json_data)
         self.carrier.cbl_cash_on_delivery = True
         sale_order = self.env["sale.order"].create(
@@ -162,7 +161,6 @@ class TestCBLRequest(TransactionCase):
         sale_order.amount_total = 99.99
         self.picking.sale_id = sale_order
         json_data = self.cbl_request._generate_shipping_json(self.picking, daily_token)
-        self.assertEqual(json_data["freight"], "P")
         self.assertAlmostEqual(json_data["cashOnDelivery"], 99.99, places=2)
 
     def test_send_shipping(self):

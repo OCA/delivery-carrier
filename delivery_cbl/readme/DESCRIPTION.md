@@ -7,4 +7,4 @@ The following operations are supported:
   the labelary API (http://api.labelary.com/).
 - Validate shippings (both manually and automatically)
 - Cancel shippings
-- Generate de CBL Manifest
+- Generate the CBL Manifest

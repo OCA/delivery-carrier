@@ -105,13 +105,10 @@ class CBLRequest:
             "numPackages": len(packages),
             "weight": picking.shipping_weight,
             "packages": packages,
+            "freight": picking.carrier_id.cbl_freight_type,
         }
         if picking.carrier_id.cbl_cash_on_delivery and picking.sale_id:
-            vals.update(
-                {"cashOnDelivery": picking.sale_id.amount_total, "freight": "P"}
-            )
-        else:
-            vals.update({"freight": "D"})
+            vals.update({"cashOnDelivery": picking.sale_id.amount_total})
         return vals
 
     def _send_shipping(self, picking):
