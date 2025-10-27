@@ -58,6 +58,25 @@ If delivey packages are used:
 When the picking is confirmed, the user has the chance to change the
 number of packages in the confirmation wizard.
 
+Add extra information to the Delivery package number report
+
+1. Go to *Settings* > *Inventory* > *Section operations*.
+2. Check the *Print extra information package label* option.
+
+|CONFIR_EXTRA_INFORMATION|
+
+3. This will allow you to add the sender, carrier and note values to the
+   report.
+
+|EXAMPLE_REPORT|
+
+4. A field is enabled to enter the height of the report, by default it
+   is 50.
+5. Done, start generating reports
+
+.. |CONFIR_EXTRA_INFORMATION| image:: https://raw.githubusercontent.com/OCA/delivery-carrier/17.0/delivery_package_number/static/img/readme/config_extra_information.png
+.. |EXAMPLE_REPORT| image:: https://raw.githubusercontent.com/OCA/delivery-carrier/17.0/delivery_package_number/static/img/readme/example_report.png
+
 Bug Tracker
 ===========
 
@@ -93,6 +112,10 @@ Contributors
    ..
 
       - Ángel García de la Chica Herrera <angel.garcia@sygel.es>
+
+- `Binhex <https://www.binhex.cloud>`__:
+
+  - Edilio Escalona Almira e.escalona@binhex.cloud
 
 Maintainers
 -----------

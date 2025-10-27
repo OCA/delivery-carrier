@@ -17,6 +17,7 @@
         "reports/report_package_number.xml",
         "views/stock_picking_type_views.xml",
         "views/stock_picking_views.xml",
+        "wizard/res_config_settings.xml",
         "wizard/stock_number_package_validate_wiz_view.xml",
     ],
 }

@@ -7,3 +7,6 @@
 > - [Sygel](https://www.sygel.es):
 >
 > > - Ángel García de la Chica Herrera \<<angel.garcia@sygel.es>\>
+
+- [Binhex](https://www.binhex.cloud):
+  - Edilio Escalona Almira <e.escalona@binhex.cloud>
