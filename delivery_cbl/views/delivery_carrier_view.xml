@@ -13,6 +13,7 @@
                     invisible="delivery_type != 'cbl'"
                 >
                     <group>
+                        <field name="cbl_freight_type" />
                         <field name="cbl_cash_on_delivery" />
                         <field name="cbl_needs_confirmation" />
                         <field name="cbl_label_format" />

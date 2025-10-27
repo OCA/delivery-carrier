@@ -1,7 +1,3 @@
-.. image:: https://odoo-community.org/readme-banner-image
-   :target: https://odoo-community.org/get-involved?utm_source=readme
-   :alt: Odoo Community Association
-
 ============
 Delivery CBL
 ============
@@ -17,7 +13,7 @@ Delivery CBL
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fdelivery--carrier-lightgray.png?logo=github
@@ -37,12 +33,12 @@ available carriers.
 
 The following operations are supported:
 
-- Register shippings
-- Generate shipping labels when shippings are registered. The PDF is
-  generated using the labelary API (http://api.labelary.com/).
-- Validate shippings (both manually and automatically)
-- Cancel shippings
-- Generate de CBL Manifest
+-  Register shippings
+-  Generate shipping labels when shippings are registered. The PDF is
+   generated using the labelary API (http://api.labelary.com/).
+-  Validate shippings (both manually and automatically)
+-  Cancel shippings
+-  Generate the CBL Manifest
 
 **Table of contents**
 
@@ -56,9 +52,12 @@ To configure this module, you need to:
 
 1. Add a Shipping Method with Provider ``CBL`` and introduce the User,
    Password, Client Code and Client Token.
-2. Activate the "Cash On Delivery" option if shippings are paid by cash,
+2. Choose the "Collect" "Freight Type" if the delivery needs to be paid
+   by the receiver, or the "Prepaid" type if it needs to be paid by the
+   shipper.
+3. Activate the "Cash On Delivery" option if shippings are paid by cash,
    assuming that the picking has a related sales order.
-3. Activate the "Needs Confirmation" option if shippings need to be
+4. Activate the "Needs Confirmation" option if shippings need to be
    confirmed after the tracking number is created in order to be
    oficially included in the CBL pending shippings database. It is
    crucial to have the same configuration both in Odoo and in your CBL
@@ -73,55 +72,56 @@ Usage
 To carry out the shipment, the shipping method previously created must
 be set on the delivery order:
 
-- Once the outgoing delivery is “Validated (Done)", the shipping
-  information is automatically transmitted to CBL. If everything is
-  correct, a tracking number and the corresponding labels are generated.
-- Shipments can be cancelled by clicking the "Cancel" button located
-  next to the picking's tracking number. Keep in mind that using a
-  carrier with the "Needs Confirmation" option unchecked, while having
-  the opposite configuration set in CBL, may cause issues when
-  attempting to cancel a shipment. In such cases, contact CBL so they
-  can adjust the confirmation policy accordingly.
-- If a shipment could not be generated or has been cancelled, a new one
-  can be created by clicking the "Send to Shipper" button at the top of
-  the stock picking.
-- Shipments that require confirmation after the tracking number has been
-  assigned can be confirmed as follows:
+-  Once the outgoing delivery is “Validated (Done)", the shipping
+   information is automatically transmitted to CBL. If everything is
+   correct, a tracking number and the corresponding labels are
+   generated.
+-  Shipments can be cancelled by clicking the "Cancel" button located
+   next to the picking's tracking number. Keep in mind that using a
+   carrier with the "Needs Confirmation" option unchecked, while having
+   the opposite configuration set in CBL, may cause issues when
+   attempting to cancel a shipment. In such cases, contact CBL so they
+   can adjust the confirmation policy accordingly.
+-  If a shipment could not be generated or has been cancelled, a new one
+   can be created by clicking the "Send to Shipper" button at the top of
+   the stock picking.
+-  Shipments that require confirmation after the tracking number has
+   been assigned can be confirmed as follows:
 
-  - Individually: By clicking the "Confirm" button in the "Tracking
-    Number" field, located under the "Additional Info" tab within the
-    "Shipping Information" section.
-  - [Improved] Bulk method: In the list view of outgoing deliveries,
-    select all deliveries for the carrier whose status is “Validated
-    (Done)", click the "Actions" gear icon → "Confirm CBL pickings". A
-    wizard will appear listing the deliveries to be confirmed. Verify
-    that all required pickings are included, then click the "Confirm
-    Shipments" button.
-  - Additionally, there is a scheduled action ("CBL: Confirm Shipments")
-    that automatically validates pending CBL shipments once per day by
-    default.
+   -  Individually: By clicking the "Confirm" button in the "Tracking
+      Number" field, located under the "Additional Info" tab within the
+      "Shipping Information" section.
+   -  [Improved] Bulk method: In the list view of outgoing deliveries,
+      select all deliveries for the carrier whose status is “Validated
+      (Done)", click the "Actions" gear icon → "Confirm CBL pickings". A
+      wizard will appear listing the deliveries to be confirmed. Verify
+      that all required pickings are included, then click the "Confirm
+      Shipments" button.
+   -  Additionally, there is a scheduled action ("CBL: Confirm
+      Shipments") that automatically validates pending CBL shipments
+      once per day by default.
 
-- To generate the manifest, you need to Inventory > Operation >
-  Manifest, select a CBL carrier and set the date range to select the
-  picking.
+-  To generate the manifest, you need to Inventory > Operation >
+   Manifest, select a CBL carrier and set the date range to select the
+   picking.
 
 Known issues / Roadmap
 ======================
 
-- During the development of the shipping label generation feature, we
-  initially evaluated the use of the Zebrafy library to convert ZPL
-  labels into PDF format. However, Zebrafy is based on the presence of
-  graphic fields (^GF) in the ZPL source, which are not always included
-  in the labels generated by CBL.
-- To ensure broader compatibility, it's opted to use the external
-  service Labelary.com, returns the corresponding label in PDF format
-  via an HTTP request.
-- To provide flexibility, a new field cbl_label_format has been added to
-  the delivery.carrier model, allowing the user to select between ZPL
-  (default) and PDF formats. The method cdl_generate_labels will only
-  invoke the external Labelary service if the selected format is PDF.
-  Otherwise, the label is stored directly in ZPL format without any
-  transformation.
+-  During the development of the shipping label generation feature, we
+   initially evaluated the use of the Zebrafy library to convert ZPL
+   labels into PDF format. However, Zebrafy is based on the presence of
+   graphic fields (^GF) in the ZPL source, which are not always included
+   in the labels generated by CBL.
+-  To ensure broader compatibility, it's opted to use the external
+   service Labelary.com, returns the corresponding label in PDF format
+   via an HTTP request.
+-  To provide flexibility, a new field cbl_label_format has been added
+   to the delivery.carrier model, allowing the user to select between
+   ZPL (default) and PDF formats. The method cdl_generate_labels will
+   only invoke the external Labelary service if the selected format is
+   PDF. Otherwise, the label is stored directly in ZPL format without
+   any transformation.
 
 Bug Tracker
 ===========
@@ -144,9 +144,9 @@ Authors
 Contributors
 ------------
 
-- Manuel Regidor manuel.regidor@sygel.es
-- Valentín Vinagre valentin.vinagre@sygel.es
-- Ángel Rivas angel.rivas@sygel.es
+-  Manuel Regidor manuel.regidor@sygel.es
+-  Valentín Vinagre valentin.vinagre@sygel.es
+-  Ángel Rivas angel.rivas@sygel.es
 
 Maintainers
 -----------
