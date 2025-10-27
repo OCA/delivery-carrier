@@ -18,6 +18,11 @@ msgstr ""
 "X-Generator: Poedit 2.3\n"
 
 #. module: delivery_package_number
+#: model_terms:ir.ui.view,arch_db:delivery_package_number.delivery_package_number_document
+msgid "Addressee:"
+msgstr "Destinatario:"
+
+#. module: delivery_package_number
 #: model_terms:ir.ui.view,arch_db:delivery_package_number.view_number_package_validate
 msgid "Apply"
 msgstr ""
@@ -38,6 +43,11 @@ msgid "Cancel"
 msgstr ""
 
 #. module: delivery_package_number
+#: model_terms:ir.ui.view,arch_db:delivery_package_number.delivery_package_number_document
+msgid "Carrier:"
+msgstr "Transportista:"
+
+#. module: delivery_package_number
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_line_wizard__create_uid
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_wizard__create_uid
 msgid "Created by"
@@ -52,7 +62,7 @@ msgstr ""
 #. module: delivery_package_number
 #: model:ir.actions.report,name:delivery_package_number.action_delivery_package_number_report
 msgid "Delivery package number"
-msgstr ""
+msgstr "Etiqueta del paquete"
 
 #. module: delivery_package_number
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_line_wizard__display_name
@@ -97,12 +107,12 @@ msgstr "Número de Bultos"
 #. module: delivery_package_number
 #: model_terms:ir.ui.view,arch_db:delivery_package_number.view_picking_type_form
 msgid "Number of packages"
-msgstr ""
+msgstr "Número de Bultos"
 
 #. module: delivery_package_number
 #: model_terms:ir.ui.view,arch_db:delivery_package_number.delivery_package_number_document
 msgid "Number of packages:"
-msgstr ""
+msgstr "Número de Bultos:"
 
 #. module: delivery_package_number
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_wizard__pick_ids
@@ -123,6 +133,16 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_wizard__print_package_label
 msgid "Print Package Label"
 msgstr ""
+
+#. module: delivery_package_number
+#: model:ir.model.fields,field_description:delivery_package_number.field_res_config_settings__extra_information_package_label
+msgid "Print extra information package label"
+msgstr "Imprimir etiqueta del paquete con información adicional"
+
+#. module: delivery_package_number
+#: model_terms:ir.ui.view,arch_db:delivery_package_number.delivery_package_number_document
+msgid "Remitter:"
+msgstr "Remitente:"
 
 #. module: delivery_package_number
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_picking_type__report_number_of_packages
@@ -151,6 +171,20 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_wizard__stock_number_package_validation_line_ids
 msgid "Stock Number Package Validation Line"
 msgstr ""
+
+#. module: delivery_package_number
+#: model_terms:ir.ui.view,arch_db:delivery_package_number.res_config_settings_view_form
+msgid "The height of the report page"
+msgstr "La altura de la página del informe"
+
+#. module: delivery_package_number
+#: model_terms:ir.ui.view,arch_db:delivery_package_number.res_config_settings_view_form
+msgid ""
+"This field allows you to add additional information about the sender "
+"(Company),                          carrier, and picking note to the "
+"'Delivery package number' report"
+msgstr "Este campo permite agregar información adicional sobre el remitente (Empresa), "
+"el transportista y la nota de recogida al informe 'Etiqueta del paquete'."
 
 #. module: delivery_package_number
 #: model:ir.model,name:delivery_package_number.model_stock_picking

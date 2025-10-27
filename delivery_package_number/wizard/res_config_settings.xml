@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field
+            name="name"
+        >res.config.settings.view.form.inherit.delivery.package.number</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="stock.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//setting[@id='annual_inventory_date']" position="after">
+                <setting
+                    id="extra_information_package_label"
+                    help="This field allows you to add additional information about the sender (Company),
+                         carrier, and picking note to the 'Delivery package number' report"
+                >
+                    <field name="extra_information_package_label" />
+                    <div class="mt-2" invisible="not extra_information_package_label">
+                        <field
+                            name="report_package_label_page_height"
+                            class="col flex-grow-0 ml16 mr0 pe-2"
+                        />
+                        <div class="col ps-3">
+                            <div class="text-muted">The height of the report page</div>
+                        </div>
+                    </div>
+                </setting>
+            </xpath>
+        </field>
+    </record>
+</odoo>
