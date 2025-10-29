@@ -1,0 +1,4 @@
+- Go to any delivery order with a delivery method set.
+- When the picking is in the `Assigned` state, a button `Send to shipper manually` will be displayed, click the button.
+- The picking is then sent to the carrier, and the `tracking_ref` field will be filled in.
+- When the picking is validated, it is not sent to the carrier again because the `tracking_ref` field is already set.

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_stock_picking_form" model="ir.ui.view">
+        <field name="name">view.stock.picking.form</field>
+        <field name="model">stock.picking</field>
+        <field
+            name="inherit_id"
+            ref="stock_delivery.view_picking_withcarrier_out_form"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='send_to_shipper']" position="after">
+                <button
+                    name="action_send_to_shipper_manually"
+                    type="object"
+                    string="Send to shipper manually"
+                    invisible="carrier_tracking_ref or delivery_type in ['fixed', 'base_on_rule'] or not delivery_type or state in ['draft', 'cancel', 'done'] or picking_type_code not in ['outgoing', 'internal']"
+                />
+            </xpath>
+            <!-- Allow to cancel the shipment if it is sent to the shipper by mistake
+             Add it as a new button to prevent interference with the existing one,
+             which is used to cancel the shipment after it is done
+            -->
+            <xpath expr="//button[@name='cancel_shipment']" position="after">
+                <button
+                    type='object'
+                    class="oe_link"
+                    icon="oi-arrow-right"
+                    confirm="Cancelling a delivery may not be undoable. Are you sure you want to continue?"
+                    name="cancel_shipment"
+                    string="Cancel"
+                    invisible="not carrier_tracking_ref or delivery_type in ['fixed', 'base_on_rule'] or not delivery_type or state in ['draft', 'done', 'cancel'] or picking_type_code not in ['outgoing', 'internal']"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
