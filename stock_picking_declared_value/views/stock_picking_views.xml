@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 Nitrokey GmbH
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <!-- Add declared value fields to the stock.picking form view -->
+    <record id="view_picking_form_inherit_declared_value" model="ir.ui.view">
+        <field name="name">stock.picking.form.inherit.declared.value</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="arch" type="xml">
+            <!-- Add currency field (invisible) for monetary fields -->
+            <field name="origin" position="after">
+                <field name="currency_id" invisible="1" />
+                <field
+                    name="sale_id"
+                    readonly="1"
+                    invisible="not sale_id"
+                />
+            </field>
+
+            <!-- Add declared value fields to the move lines -->
+            <xpath
+                expr="//field[@name='move_ids_without_package']/list"
+                position="inside"
+            >
+                <field name="currency_id" invisible="1" />
+                <field name="sale_line_id" invisible="1" />
+                <field name="sale_unit_price" optional="hide" />
+                <field name="price_subtotal" widget="monetary" optional="hide" />
+            </xpath>
+
+            <!-- Add declared value fields to the Additional Info page -->
+            <xpath expr="//page[@name='extra']" position="inside">
+                <group name="declared_value" string="Declared Value">
+                    <field name="amount_total" widget="monetary" />
+                    <field name="declared_amount_percentage" />
+                    <field name="declared_value" widget="monetary" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
