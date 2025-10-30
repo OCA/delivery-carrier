@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 Nitrokey GmbH
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <!-- Add declared value fields to the stock move form view -->
+    <record id="view_move_form_inherit_declared_value" model="ir.ui.view">
+        <field name="name">stock.move.form.inherit.declared.value</field>
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock.view_move_form" />
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="currency_id" invisible="1" />
+                <field name="sale_line_id" invisible="1" />
+                <field name="sale_unit_price" invisible="not sale_line_id" />
+                <field
+                    name="price_subtotal"
+                    widget="monetary"
+                    invisible="not sale_line_id"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>
