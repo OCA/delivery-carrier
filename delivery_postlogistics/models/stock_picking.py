@@ -8,7 +8,7 @@ from operator import attrgetter
 import lxml.html
 from PIL import Image
 
-from odoo import api, fields, models, tools
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 
 from ..postlogistics.web_service import PostlogisticsWebService, sanitize_string
@@ -188,40 +188,25 @@ Please use _get_quant_packages_from_picking instead."
 
         label_results = web_service.generate_label(self, packages)
 
-        # Process the success packages first
-        success_label_results = [
-            label for label in label_results if "errors" not in label
-        ]
         failed_label_results = [label for label in label_results if "errors" in label]
-
-        # Case when there is a failed label, rollback odoo data
         if failed_label_results:
-            # We can't commit during testing phases, so instead we invalidate
-            # the cache for current records if any fields has to be tested
-            if tools.config["test_enable"]:
-                self.env.cache.invalidate()
-            else:
-                self.env.cr.rollback()
-                self = self.exists()
-
-        labels = self.write_tracking_number_label(success_label_results, packages)
-
-        if not skip_attach_file:
-            for label in labels:
-                self.attach_shipping_label(label)
-
-        if failed_label_results:
-            # Commit the change to save the changes,
-            # This ensures the label pushed recored correctly in Odoo
-            # FIXME: But we can't commit during testing phases... This method
-            # avoids a proper testing. This should be changed somehow.
-            if not tools.config["test_enable"]:
-                self.env.cr.commit()  # pylint: disable=invalid-commit
+            # Shipments are invoiced by postlogistics only when the label is scanned
+            # for the first time.
+            # Therefore, we don't have to attach labels, we can generate a new one
+            # each time we try to confirm a picking.
+            # Raise and exception, and let odoo rollback the transaction.
             error_message = "\n".join(
                 self._cleanup_error_message(label["errors"])
                 for label in failed_label_results
             )
             raise UserError(self.env._("PostLogistics error:") + "\n\n" + error_message)
+
+        labels = self.write_tracking_number_label(label_results, packages)
+
+        if not skip_attach_file:
+            for label in labels:
+                self.attach_shipping_label(label)
+
         return labels
 
     @api.model
