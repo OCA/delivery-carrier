@@ -61,7 +61,7 @@ class DeliveryCarrier(models.Model):
     )
     ups_default_packaging_id = fields.Many2one(
         comodel_name="stock.package.type",
-        string="Default Packaging Type",
+        string="Default Carrier Packaging Type",
         domain=[("package_carrier_type", "=", "ups")],
     )
     ups_package_dimension_code = fields.Selection(
@@ -185,9 +185,7 @@ class DeliveryCarrier(models.Model):
         return self._create_ups_label(picking, response)
 
     def ups_get_tracking_link(self, picking):
-        return "https://ups.com/WebTracking/track?trackingNumber=%s" % (
-            picking.carrier_tracking_ref
-        )
+        return f"https://ups.com/WebTracking/track?trackingNumber={picking.carrier_tracking_ref}"
 
     def ups_cancel_shipment(self, pickings):
         ups_request = UpsRequest(self)

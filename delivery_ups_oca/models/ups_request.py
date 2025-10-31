@@ -24,7 +24,7 @@ class UpsRequest:
         self.file_format = self.carrier.ups_file_format
         self.package_dimension_code = self.carrier.ups_package_dimension_code
         self.package_weight_code = self.carrier.ups_package_weight_code
-        self.transaction_src = "Odoo (%s)" % self.carrier.name
+        self.transaction_src = f"Odoo ({self.carrier.name})"
         self.client_id = self.carrier.ups_client_id
         self.client_secret = self.carrier.ups_client_secret
         self.token = self.carrier.ups_token
@@ -59,7 +59,7 @@ class UpsRequest:
                     " must be set in UPS delivery carriers."
                 )
             )
-        url = "%s/security/v1/oauth/token" % self.url
+        url = f"{self.url}/security/v1/oauth/token"
         headers = {"x-merchant-id": self.client_id}
         data = {"grant_type": "client_credentials"}
         status = self._send_request(
@@ -159,11 +159,15 @@ class UpsRequest:
 
     def _prepare_create_shipping(self, picking):
         """Return a dict that can be passed to the shipping endpoint of the UPS API"""
-        if self.use_packages_from_picking and picking.package_ids:
+        packages_ids = (
+            picking.move_ids.move_line_ids
+            and picking.move_ids.move_line_ids.mapped("result_package_id")
+        )
+        if self.use_packages_from_picking and packages_ids:
             # modelo: stock.quant.package
             packages = [
                 self._quant_package_data_from_picking(package, picking, True)
-                for package in picking.package_ids
+                for package in packages_ids
             ]
         else:
             # modelo: stock.package.type
@@ -227,7 +231,7 @@ class UpsRequest:
 
     def _send_shipping(self, picking):
         status = self._process_reply(
-            url="%s/api/shipments/v1/ship" % self.url,
+            url=f"{self.url}/api/shipments/v1/ship",
             json=self._prepare_create_shipping(picking),
         )
         self._raise_for_status(status, False)
@@ -300,7 +304,7 @@ class UpsRequest:
 
     def _rate_shipment(self, order, skip_errors=False):
         status = self._process_reply(
-            url="%s/api/rating/v1/Rate" % self.url,
+            url=f"{self.url}/api/rating/v1/Rate",
             json=self._prepare_rate_shipment(order),
         )
         self._raise_for_status(status, skip_errors)
@@ -320,7 +324,7 @@ class UpsRequest:
 
     def shipping_label(self, carrier_tracking_ref):
         status = self._process_reply(
-            url="%s/api/labels/v1/recovery" % self.url,
+            url=f"{self.url}/api/labels/v1/recovery",
             json=self._prepare_shipping_label(carrier_tracking_ref),
         )
         self._raise_for_status(status, False)
@@ -349,7 +353,7 @@ class UpsRequest:
         return labels
 
     def cancel_shipment(self, picking):
-        url = "%s/api/shipments/v1/void/cancel" % self.url
+        url = f"{self.url}/api/shipments/v1/void/cancel"
         url = f"{url}/{picking.carrier_tracking_ref}"
         status = self._process_reply(url=url, method="delete")
         self._raise_for_status(status, False)
