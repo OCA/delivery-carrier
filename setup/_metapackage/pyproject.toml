@@ -1,6 +1,6 @@
 [project]
 name = "odoo-addons-oca-delivery-carrier"
-version = "17.0.20251017.0"
+version = "17.0.20251107.0"
 dependencies = [
     "odoo-addon-base_delivery_carrier_label>=17.0dev,<17.1dev",
     "odoo-addon-delivery_auto_refresh>=17.0dev,<17.1dev",
@@ -22,6 +22,7 @@ dependencies = [
     "odoo-addon-delivery_purchase_multi_destination>=17.0dev,<17.1dev",
     "odoo-addon-delivery_roulier>=17.0dev,<17.1dev",
     "odoo-addon-delivery_roulier_option>=17.0dev,<17.1dev",
+    "odoo-addon-delivery_schenker>=17.0dev,<17.1dev",
     "odoo-addon-delivery_sendcloud_oca>=17.0dev,<17.1dev",
     "odoo-addon-delivery_state>=17.0dev,<17.1dev",
     "odoo-addon-delivery_ups_oca>=17.0dev,<17.1dev",

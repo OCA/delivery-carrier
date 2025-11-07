@@ -41,6 +41,7 @@ addon | version | maintainers | summary
 [delivery_purchase_multi_destination](delivery_purchase_multi_destination/) | 17.0.1.0.0 |  | Multiple origins for delivery costs in purchases
 [delivery_roulier](delivery_roulier/) | 17.0.1.0.1 | <a href='https://github.com/florian-dacosta'><img src='https://github.com/florian-dacosta.png' width='32' height='32' style='border-radius:50%;' alt='florian-dacosta'/></a> | Integration of multiple carriers
 [delivery_roulier_option](delivery_roulier_option/) | 17.0.1.0.0 | <a href='https://github.com/florian-dacosta'><img src='https://github.com/florian-dacosta.png' width='32' height='32' style='border-radius:50%;' alt='florian-dacosta'/></a> | Add options to roulier modules
+[delivery_schenker](delivery_schenker/) | 17.0.1.0.0 |  | Delivery Carrier implementation for DB Schenker API
 [delivery_sendcloud_oca](delivery_sendcloud_oca/) | 17.0.1.0.0 |  | Compute shipping costs and ship with Sendcloud
 [delivery_state](delivery_state/) | 17.0.1.0.0 |  | Provides fields to be able to contemplate the tracking statesand also adds a global fields
 [delivery_ups_oca](delivery_ups_oca/) | 17.0.1.0.0 |  | Integrate UPS webservice
