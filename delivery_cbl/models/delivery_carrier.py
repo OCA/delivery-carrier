@@ -26,6 +26,15 @@ class DeliveryCarrier(models.Model):
             "total amount as the value to be paid"
         ),
     )
+    cbl_freight_type = fields.Selection(
+        string="Freight Type",
+        selection=[
+            ("D", "Freight Collect"),
+            ("P", "Freight Prepaid"),
+        ],
+        required=True,
+        default="D",
+    )
     cbl_needs_confirmation = fields.Boolean(
         string="Needs Confirmation",
         help=(
