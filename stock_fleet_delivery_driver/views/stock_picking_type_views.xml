@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 Moduon Team S.L.
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0) -->
+<odoo>
+    <record id="view_picking_type_form_inherit" model="ir.ui.view">
+        <field name="name">stock.picking.type.form.inherit</field>
+        <field name="model">stock.picking.type</field>
+        <field
+            name="inherit_id"
+            ref="stock_picking_batch.view_picking_type_form_inherit"
+        />
+        <field name="arch" type="xml">
+            <div name="batch_contact" position="after">
+                <span invisible="not auto_batch" />
+                <div name="batch_vehicle" class="o_row" invisible="not auto_batch">
+                    <field name="batch_group_by_vehicle" />
+                    <label for="batch_group_by_vehicle" />
+                </div>
+                <span invisible="not auto_batch" />
+                <div name="batch_driver" class="o_row" invisible="not auto_batch">
+                    <field name="batch_group_by_driver" />
+                    <label for="batch_group_by_driver" />
+                </div>
+            </div>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,252 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* delivery_correos_express
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: delivery_correos_express
+#: model:ir.model.fields.selection,name:delivery_correos_express.selection__delivery_carrier__correos_express_product__53
+msgid "53 ENTREGA + MANIPULACION LOINEX"
+msgstr ""
+
+#. module: delivery_correos_express
+#: model:ir.model.fields.selection,name:delivery_correos_express.selection__delivery_carrier__correos_express_product__54
+msgid "54 ENTREGA + RECOGIDA LOINEX"
+msgstr ""
+
+#. module: delivery_correos_express
+#: model:ir.model.fields.selection,name:delivery_correos_express.selection__delivery_carrier__correos_express_product__55
+msgid "55 ENTREGA + RECOGIDA + MANIPULA LOINEX"
+msgstr ""
+
+#. module: delivery_correos_express
+#: model:ir.model.fields.selection,name:delivery_correos_express.selection__delivery_carrier__correos_express_product__66
+msgid "BALEARES"
+msgstr ""
+
+#. module: delivery_correos_express
+#: model:ir.model.fields.selection,name:delivery_correos_express.selection__delivery_carrier__correos_express_product__27
+msgid "CAMPAÑA CEX"
+msgstr ""
+
+#. module: delivery_correos_express
+#: model:ir.model.fields.selection,name:delivery_correos_express.selection__delivery_carrier__correos_express_product__68
+msgid "CANARIAS AEREO"
+msgstr ""
+
+#. module: delivery_correos_express
+#: model:ir.model.fields.selection,name:delivery_correos_express.selection__delivery_carrier__correos_express_product__67
+msgid "CANARIAS EXPRES"
+msgstr ""
+
+#. module: delivery_correos_express
+#: model:ir.model.fields.selection,name:delivery_correos_express.selection__delivery_carrier__correos_express_product__69
+msgid "CANARIAS MARITIMO"
+msgstr ""
+
+#. module: delivery_correos_express
+#: model:ir.model.fields.selection,name:delivery_correos_express.selection__delivery_carrier__correos_express_product__73
+msgid "CHRONO PORTUGAL OPTICA"
+msgstr ""
+
+#. module: delivery_correos_express
+#: model:ir.model.fields.selection,name:delivery_correos_express.selection__delivery_carrier__delivery_type__correos_express
+msgid "Correos Express"
+msgstr ""
+
+#. module: delivery_correos_express
+#. odoo-python
+#: code:addons/delivery_correos_express/models/delivery_carrier.py:0
+msgid ""
+"Correos Express API doesn't provide methods to compute delivery rates, so "
+"you should rely on another price method instead or override this one in your"
+" custom code."
+msgstr ""
+
+#. module: delivery_correos_express
+#: model:ir.model.fields,field_description:delivery_correos_express.field_delivery_carrier__correos_express_customer_code
+msgid "Correos Express Client code"
+msgstr ""
+
+#. module: delivery_correos_express
+#: model_terms:ir.ui.view,arch_db:delivery_correos_express.view_delivery_carrier_form
+msgid "Correos Express Configuration"
+msgstr ""
+
+#. module: delivery_correos_express
+#. odoo-python
+#: code:addons/delivery_correos_express/models/correos_express_request.py:0
+msgid "Correos Express Error: {return_code} {message}"
+msgstr ""
+
+#. module: delivery_correos_express
+#: model:ir.model.fields,field_description:delivery_correos_express.field_delivery_carrier__correos_express_label_type
+msgid "Correos Express Label type"
+msgstr ""
+
+#. module: delivery_correos_express
+#: model:ir.model.fields,field_description:delivery_correos_express.field_delivery_carrier__correos_express_password
+msgid "Correos Express Password"
+msgstr ""
+
+#. module: delivery_correos_express
+#: model:ir.model.fields,field_description:delivery_correos_express.field_delivery_carrier__correos_express_sender_code
+msgid "Correos Express Sender ID"
+msgstr ""
+
+#. module: delivery_correos_express
+#: model:ir.model.fields,field_description:delivery_correos_express.field_delivery_carrier__correos_express_product
+msgid "Correos Express Service"
+msgstr ""
+
+#. module: delivery_correos_express
+#: model:ir.model.fields,field_description:delivery_correos_express.field_delivery_carrier__correos_express_transport
+msgid "Correos Express Transport"
+msgstr ""
+
+#. module: delivery_correos_express
+#: model:ir.model.fields,field_description:delivery_correos_express.field_delivery_carrier__correos_express_username
+msgid "Correos Express Username"
+msgstr ""
+
+#. module: delivery_correos_express
+#. odoo-python
+#: code:addons/delivery_correos_express/models/delivery_carrier.py:0
+msgid ""
+"Correos Express does not provide a method to cancel a shipment that has been"
+" registered. If you need to change some information you, create a new "
+"shipment with a new label. This doesn't mean that the shipment will be "
+"invoiced, this only happens if the package is picked up and it enters the "
+"shipping stage"
+msgstr ""
+
+#. module: delivery_correos_express
+#. odoo-python
+#: code:addons/delivery_correos_express/models/stock_picking.py:0
+msgid "Correos Express label for %s"
+msgstr ""
+
+#. module: delivery_correos_express
+#: model:ir.model.fields.selection,name:delivery_correos_express.selection__delivery_carrier__correos_express_transport__d
+msgid "Due"
+msgstr ""
+
+#. module: delivery_correos_express
+#: model:ir.model.fields.selection,name:delivery_correos_express.selection__delivery_carrier__correos_express_product__93
+msgid "EPAQ24"
+msgstr ""
+
+#. module: delivery_correos_express
+#: model:ir.model.fields.selection,name:delivery_correos_express.selection__delivery_carrier__correos_express_product__90
+msgid "INTERNACIONAL ESTANDAR"
+msgstr ""
+
+#. module: delivery_correos_express
+#: model:ir.model.fields.selection,name:delivery_correos_express.selection__delivery_carrier__correos_express_product__91
+msgid "INTERNACIONAL EXPRES"
+msgstr ""
+
+#. module: delivery_correos_express
+#: model:ir.model.fields.selection,name:delivery_correos_express.selection__delivery_carrier__correos_express_product__26
+msgid "ISLAS EXPRESS"
+msgstr ""
+
+#. module: delivery_correos_express
+#. odoo-python
+#: code:addons/delivery_correos_express/models/stock_picking.py:0
+msgid "No label was returned"
+msgstr ""
+
+#. module: delivery_correos_express
+#: model:ir.model.fields.selection,name:delivery_correos_express.selection__delivery_carrier__correos_express_product__77
+msgid "OPTICA PREPAGADO"
+msgstr ""
+
+#. module: delivery_correos_express
+#: model:ir.model.fields.selection,name:delivery_correos_express.selection__delivery_carrier__correos_express_product__92
+msgid "PAQ EMPRESA 14"
+msgstr ""
+
+#. module: delivery_correos_express
+#: model:ir.model.fields.selection,name:delivery_correos_express.selection__delivery_carrier__correos_express_product__61
+msgid "PAQ10"
+msgstr ""
+
+#. module: delivery_correos_express
+#: model:ir.model.fields.selection,name:delivery_correos_express.selection__delivery_carrier__correos_express_product__62
+msgid "PAQ14"
+msgstr ""
+
+#. module: delivery_correos_express
+#: model:ir.model.fields.selection,name:delivery_correos_express.selection__delivery_carrier__correos_express_product__63
+msgid "PAQ24"
+msgstr ""
+
+#. module: delivery_correos_express
+#: model:ir.model.fields.selection,name:delivery_correos_express.selection__delivery_carrier__correos_express_product__76
+msgid "PAQUETERIA OPTICAS"
+msgstr ""
+
+#. module: delivery_correos_express
+#: model:ir.model.fields.selection,name:delivery_correos_express.selection__delivery_carrier__correos_express_label_type__1
+msgid "PDF"
+msgstr ""
+
+#. module: delivery_correos_express
+#: model:ir.model.fields.selection,name:delivery_correos_express.selection__delivery_carrier__correos_express_transport__p
+msgid "Paid"
+msgstr ""
+
+#. module: delivery_correos_express
+#: model_terms:ir.ui.view,arch_db:delivery_correos_express.view_picking_withcarrier_out_form
+msgid "Print Correos Express Label"
+msgstr ""
+
+#. module: delivery_correos_express
+#: model:ir.model.fields,field_description:delivery_correos_express.field_delivery_carrier__delivery_type
+msgid "Provider"
+msgstr ""
+
+#. module: delivery_correos_express
+#: model:ir.model,name:delivery_correos_express.model_delivery_carrier
+msgid "Shipping Methods"
+msgstr ""
+
+#. module: delivery_correos_express
+#. odoo-python
+#: code:addons/delivery_correos_express/models/correos_express_request.py:0
+msgid "Timeout: the server did not reply within 60s"
+msgstr ""
+
+#. module: delivery_correos_express
+#: model:ir.model,name:delivery_correos_express.model_stock_picking
+msgid "Transfer"
+msgstr ""
+
+#. module: delivery_correos_express
+#. odoo-python
+#: code:addons/delivery_correos_express/models/correos_express_request.py:0
+msgid "Unsupported request type, please only use 'GET' or 'POST'"
+msgstr ""
+
+#. module: delivery_correos_express
+#: model:ir.model.fields.selection,name:delivery_correos_express.selection__delivery_carrier__correos_express_label_type__2
+msgid "ZPL"
+msgstr ""
+
+#. module: delivery_correos_express
+#. odoo-python
+#: code:addons/delivery_correos_express/models/correos_express_request.py:0
+msgid ""
+"{error}\n"
+"{result}"
+msgstr ""

@@ -33,14 +33,12 @@ msgid "Default driver for this delivery method"
 msgstr "Conductor por defecto para este método de envío"
 
 #. module: delivery_driver
-#: model:ir.model.fields,field_description:delivery_driver.field_dropoff_site__carrier_ids
 #: model:ir.model.fields,field_description:delivery_driver.field_res_partner__carrier_ids
 #: model:ir.model.fields,field_description:delivery_driver.field_res_users__carrier_ids
 msgid "Delivery Carriers"
 msgstr ""
 
 #. module: delivery_driver
-#: model:ir.model.fields,field_description:delivery_driver.field_dropoff_site__is_driver
 #: model:ir.model.fields,field_description:delivery_driver.field_res_partner__is_driver
 #: model:ir.model.fields,field_description:delivery_driver.field_res_users__is_driver
 #: model:ir.model.fields,field_description:delivery_driver.field_stock_move_line__driver_id

@@ -2,3 +2,5 @@
 openupgradelib
 roulier
 PyPDF2
+unidecode
+zeep
