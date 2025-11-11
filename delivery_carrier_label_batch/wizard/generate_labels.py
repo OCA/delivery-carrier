@@ -1,8 +1,10 @@
 # Copyright 2013-2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 import codecs
+import hashlib
 import logging
 import queue
+import struct
 import threading
 from contextlib import contextmanager
 from itertools import groupby
@@ -236,6 +238,22 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
 
         """
         self.ensure_one()
+
+        hasher = hashlib.sha1(str(self.id).encode())
+        # pg_lock accepts an int8 so we build an hash composed with
+        # contextual information and we throw away some bits
+        int_lock = struct.unpack("q", hasher.digest()[:8])
+
+        self.env.cr.execute("SELECT pg_try_advisory_xact_lock(%s);", (int_lock,))
+        acquired = self.env.cr.fetchone()[0]
+        if not acquired:
+            raise exceptions.UserError(
+                self.env._(
+                    "Another label generation process is already "
+                    "running. Please try again later."
+                )
+            )
+
         zpl2_batch_merge = safe_eval(
             self.env["ir.config_parameter"].get_param("zpl2.batch.merge")
         )
