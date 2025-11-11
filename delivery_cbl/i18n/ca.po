@@ -196,6 +196,21 @@ msgid ""
 msgstr ""
 
 #. module: delivery_cbl
+#: model:ir.model.fields.selection,name:delivery_cbl.selection__delivery_carrier__cbl_freight_type__d
+msgid "Freight Collect"
+msgstr ""
+
+#. module: delivery_cbl
+#: model:ir.model.fields.selection,name:delivery_cbl.selection__delivery_carrier__cbl_freight_type__p
+msgid "Freight Prepaid"
+msgstr ""
+
+#. module: delivery_cbl
+#: model:ir.model.fields,field_description:delivery_cbl.field_delivery_carrier__cbl_freight_type
+msgid "Freight Type"
+msgstr ""
+
+#. module: delivery_cbl
 #: model:ir.model.fields,field_description:delivery_cbl.field_wizard_confirm_cbl_pickings__id
 msgid "ID"
 msgstr ""

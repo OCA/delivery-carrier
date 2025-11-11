@@ -102,8 +102,7 @@ msgstr "Spedizione del pacco CBL con riferimento %(tracking)s annullata."
 #: code:addons/delivery_cbl/models/cbl_request.py:0
 #, python-format
 msgid ""
-"CBL Shipping for picking %(picking)s could not be created. Reason: "
-"%(reason)s"
+"CBL Shipping for picking %(picking)s could not be created. Reason: %(reason)s"
 msgstr ""
 "Impossibile creare la spedizione CBL per il prelievo di %(picking)s. Motivo: "
 "%(reason)s"
@@ -190,11 +189,27 @@ msgstr "Nome visualizzato"
 #: model:ir.model.fields,help:delivery_cbl.field_delivery_carrier__cbl_label_format
 msgid ""
 "Format to generate shipping labels.\n"
-"If PDF is selected, labels will be generated using an external service (labelary.com)."
+"If PDF is selected, labels will be generated using an external service "
+"(labelary.com)."
 msgstr ""
 "Formato per generare le etichette di spedizione.\n"
 "Se si seleziona il formato PDF, le etichette verranno generate utilizzando "
 "un servizio esterno (labelary.com)."
+
+#. module: delivery_cbl
+#: model:ir.model.fields.selection,name:delivery_cbl.selection__delivery_carrier__cbl_freight_type__d
+msgid "Freight Collect"
+msgstr ""
+
+#. module: delivery_cbl
+#: model:ir.model.fields.selection,name:delivery_cbl.selection__delivery_carrier__cbl_freight_type__p
+msgid "Freight Prepaid"
+msgstr ""
+
+#. module: delivery_cbl
+#: model:ir.model.fields,field_description:delivery_cbl.field_delivery_carrier__cbl_freight_type
+msgid "Freight Type"
+msgstr ""
 
 #. module: delivery_cbl
 #: model:ir.model.fields,field_description:delivery_cbl.field_wizard_confirm_cbl_pickings__id
@@ -214,9 +229,8 @@ msgstr ""
 #. module: delivery_cbl
 #: model:ir.model.fields,help:delivery_cbl.field_delivery_carrier__cbl_cash_on_delivery
 msgid ""
-"If checked, it means that the carrier is paid with cash. It assumes there is"
-" a sale order linked and it will use that total amount as the value to be "
-"paid"
+"If checked, it means that the carrier is paid with cash. It assumes there is "
+"a sale order linked and it will use that total amount as the value to be paid"
 msgstr ""
 "Se selezionato, significa che il corriere viene pagato in contanti. "
 "Presuppone che ci sia un ordine di vendita collegato e utilizzerà "
