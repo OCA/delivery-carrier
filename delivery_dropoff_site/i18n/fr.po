@@ -99,6 +99,13 @@ msgid "Automatically post bills for this trusted partner"
 msgstr ""
 
 #. module: delivery_dropoff_site
+#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__receipt_reminder_email
+msgid ""
+"Automatically send a confirmation email to the vendor X days before the "
+"expected receipt date, asking him to confirm the exact date."
+msgstr ""
+
+#. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__avatar_1920
 msgid "Avatar"
 msgstr ""
@@ -146,6 +153,11 @@ msgstr ""
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__message_bounce
 msgid "Bounce"
+msgstr ""
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__buyer_id
+msgid "Buyer"
 msgstr ""
 
 #. module: delivery_dropoff_site
@@ -309,6 +321,11 @@ msgstr ""
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__customer_rank
 msgid "Customer Rank"
+msgstr ""
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__reminder_date_before_receipt
+msgid "Days Before Receipt"
 msgstr ""
 
 #. module: delivery_dropoff_site
@@ -701,6 +718,11 @@ msgid "Message for Invoice"
 msgstr ""
 
 #. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__purchase_warn_msg
+msgid "Message for Purchase Order"
+msgstr ""
+
+#. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__sale_warn_msg
 msgid "Message for Sales Order"
 msgstr ""
@@ -762,6 +784,11 @@ msgid "Number of Actions"
 msgstr ""
 
 #. module: delivery_dropoff_site
+#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__reminder_date_before_receipt
+msgid "Number of days to send reminder email before the promised receipt date"
+msgstr ""
+
+#. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__message_has_error_counter
 msgid "Number of errors"
 msgstr ""
@@ -774,6 +801,19 @@ msgstr ""
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__message_has_error_counter
 msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__on_time_rate
+msgid "On-Time Delivery Rate"
+msgstr ""
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__on_time_rate
+msgid ""
+"Over the past x days; the number of products received on time divided by the "
+"number of ordered products.x is either the System Parameter purchase_stock."
+"on_time_delivery_days or the default 365"
 msgstr ""
 
 #. module: delivery_dropoff_site
@@ -871,6 +911,26 @@ msgid "Property Outbound Payment Method Line"
 msgstr ""
 
 #. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__purchase_line_ids
+msgid "Purchase Lines"
+msgstr ""
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__purchase_order_count
+msgid "Purchase Order Count"
+msgstr ""
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__purchase_warn
+msgid "Purchase Order Warning"
+msgstr ""
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__receipt_reminder_email
+msgid "Receipt Reminder"
+msgstr ""
+
+#. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__ref
 msgid "Reference"
 msgstr ""
@@ -914,6 +974,7 @@ msgstr ""
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__invoice_warn
 #: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__picking_warn
+#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__purchase_warn
 #: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__sale_warn
 msgid ""
 "Selecting the \"Warning\" option will notify user with the message, "
@@ -1012,6 +1073,11 @@ msgid "Street2"
 msgstr ""
 
 #. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__property_purchase_currency_id
+msgid "Supplier Currency"
+msgstr ""
+
+#. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__supplier_rank
 msgid "Supplier Rank"
 msgstr ""
@@ -1088,6 +1154,13 @@ msgstr ""
 msgid ""
 "This account will be used instead of the default one as the receivable "
 "account for the current partner"
+msgstr ""
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__property_purchase_currency_id
+msgid ""
+"This currency will be used, instead of the default one, for purchases from "
+"the current partner"
 msgstr ""
 
 #. module: delivery_dropoff_site
