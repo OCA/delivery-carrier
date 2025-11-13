@@ -1,4 +1,4 @@
-This module adds `Easpost <https://easypost.com>`_ to the available carriers.
+This module adds `Easypost <https://easypost.com>`_ to the available carriers.
 
 It allows you to register shippings, generate labels, get rates from order so no need of exchanging
 any kind of file.
