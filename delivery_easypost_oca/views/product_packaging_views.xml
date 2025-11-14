@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record
+        id="view_product_packaging_delivery_form_inherit_easypost_oca"
+        model="ir.ui.view"
+    >
+        <field name="name">product.packaging.form.delivery.inherit.easypost.oca</field>
+        <field name="model">product.packaging</field>
+        <field name="inherit_id" ref="delivery.product_packaging_delivery_form" />
+        <field name="priority">100</field>
+        <field name="arch" type="xml">
+          <xpath expr="//field[@name='package_carrier_type']" position='after'>
+            <field
+                    name="easypost_oca_carrier"
+                    attrs="{'invisible': [('package_carrier_type', '!=', 'easypost_oca')]}"
+                />
+          </xpath>
+          <xpath expr="//field[@name='height']" position='replace'>
+            <div class="o_row">
+              <field name="height" nolabel="1" />
+              <span
+                        attrs="{'invisible': [('package_carrier_type', '!=', 'easypost_oca')]}"
+                    >Inches</span>
+            </div>
+          </xpath>
+          <xpath expr="//field[@name='width']" position='replace'>
+            <div class="o_row">
+              <field name="width" nolabel="1" />
+              <span
+                        attrs="{'invisible': [('package_carrier_type', '!=', 'easypost_oca')]}"
+                    >Inches</span>
+            </div>
+          </xpath>
+          <xpath expr="//field[@name='packaging_length']" position='replace'>
+            <div class="o_row">
+              <field name="packaging_length" nolabel="1" />
+              <span
+                        attrs="{'invisible': [('package_carrier_type', '!=', 'easypost_oca')]}"
+                    >Inches</span>
+            </div>
+          </xpath>
+        </field>
+      </record>
+
+
+</odoo>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <!-- View delivery.carrier form -->
+    <record id="easy_view_delivery_carrier_form_inherit" model="ir.ui.view">
+        <field name="name">easy.view.delivery.carrier.form.inherit</field>
+        <field name="model">delivery.carrier</field>
+        <field name="inherit_id" ref="delivery.view_delivery_carrier_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='destination']" position="before">
+                <page
+                    string="Easypost Configuration"
+                    name="easypost_configuration"
+                    attrs="{'invisible': [('delivery_type', '!=', 'easypost_oca')]}"
+                >
+                    <group>
+                        <group>
+                            <field
+                                name="easypost_oca_test_api_key"
+                                attrs="{'required':[('delivery_type', '=', 'easypost_oca')]}"
+                            />
+                            <field name="easypost_oca_label_file_type" />
+                        </group>
+                        <group>
+                            <field
+                                name="easypost_oca_production_api_key"
+                                attrs="{'required':[('delivery_type', '=', 'easypost_oca')]}"
+                            />
+
+
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
