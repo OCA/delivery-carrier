@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
     <!-- View delivery.carrier form -->
     <record id="easy_view_delivery_carrier_form_inherit" model="ir.ui.view">
         <field name="name">easy.view.delivery.carrier.form.inherit</field>
@@ -33,5 +32,4 @@
             </xpath>
         </field>
     </record>
-
 </odoo>
