@@ -246,7 +246,7 @@ class DeliveryCarrier(models.Model):
 
         if move_lines_with_package:
             # Generate an easypost shipment for each package in picking.
-            for package in picking.package_ids:
+            for package in picking.move_line_ids.mapped("result_package_id"):
                 # compute move line weight in package
                 move_lines = picking.move_line_ids.filtered(
                     lambda ml, pkg=package: ml.result_package_id == pkg

@@ -289,7 +289,11 @@ class TestDeliveryCarrier(EasypostTestBaseCase):
         second_package.package_type_id = self.default_packaging.id
         second_package.shipping_weight = 5.0
 
-        self.assertEqual(len(Picking.package_ids), 2, "Should have created 2 packages")
+        self.assertEqual(
+            len(Picking.move_line_ids.mapped("result_package_id")),
+            2,
+            "Should have created 2 packages",
+        )
 
         # Setup mocks: create multiple shipments
         mock_shipments = create_multiple_mock_shipments(
