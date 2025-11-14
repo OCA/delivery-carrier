@@ -146,6 +146,6 @@ class StockPicking(models.Model):
 
     def _laposte_fr_get_service(self, account, package=None):
         vals = self._roulier_get_service(account, package=package)
-
+        vals["commercialName"] = account.company_id.name
         vals["returnTypeChoice"] = 3  # do not return to sender
         return vals

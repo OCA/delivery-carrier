@@ -6,7 +6,7 @@
     "website": "https://github.com/OCA/delivery-carrier",
     "license": "AGPL-3",
     "category": "Delivery",
-    "version": "14.0.1.0.0",
+    "version": "14.0.1.0.1",
     "depends": [
         "delivery_price_collection_cost",
         "delivery_price_product_domain",

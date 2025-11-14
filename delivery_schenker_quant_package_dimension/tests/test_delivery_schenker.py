@@ -16,6 +16,13 @@ class TestDeliverySchenker(TestDeliverySchenkerCommon):
         package.width = width
         package.height = height
         expected_vals = self._prepare_schenker_shipping(picking)
+
+        # Turn dimensions into str
+        length = str(length) + "0"
+        width = str(width) + "0"
+        height = str(height) + "0"
+        volume = str(volume) + "0"
+
         expected_vals["shippingInformation"]["shipmentPosition"][0].update(
             {
                 "cargoDesc": " / ".join([picking.name, package.name]),

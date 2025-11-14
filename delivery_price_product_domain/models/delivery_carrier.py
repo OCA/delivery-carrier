@@ -3,20 +3,18 @@
 
 import ast
 
-from odoo import fields, models
+from odoo import models
 from odoo.tools.safe_eval import safe_eval
 
 
 class DeliveryPriceRule(models.Model):
     _inherit = "delivery.carrier"
 
-    order_id = fields.Many2one("sale.order", string="Sale Order")
-
     def recompute_price_available(self, apply_product, price_dict, untaxed_in_dict):
         """This method recompute total parameters only with apply products"""
         self.ensure_one()
         self_sudo = self.sudo()
-        order = self_sudo.order_id
+        order = self_sudo.env["sale.order"].browse(self_sudo._context.get("order_id"))
         total = weight = volume = quantity = 0
         total_delivery = 0.0
         untaxed_amount = order.amount_untaxed
@@ -60,10 +58,13 @@ class DeliveryPriceRule(models.Model):
         untaxed_in_dict = "untaxed_price" in price_dict
         test = False
         rule_line = self.price_rule_ids.browse()
+        order = (
+            self.env["sale.order"].sudo().browse(self._context.get("order_id", False))
+        )
         for line in self.price_rule_ids:
             apply_product_domain_char = line.apply_product_domain
-            if apply_product_domain_char and self.order_id:
-                apply_product = self.order_id.order_line.product_id.search(
+            if apply_product_domain_char and order:
+                apply_product = order.order_line.product_id.search(
                     ast.literal_eval(apply_product_domain_char)
                 )
                 self.recompute_price_available(
@@ -91,5 +92,5 @@ class DeliveryPriceRule(models.Model):
 
     def _get_price_available(self, order):
         "Compute price, weight, quantity, volume of SO"
-        self.order_id = order
+        self = self.with_context(order_id=order.id)
         return super(DeliveryPriceRule, self)._get_price_available(order)

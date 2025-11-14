@@ -1,6 +1,8 @@
 # Copyright 2021 Tecnativa - David Vidal
+# Copyright 2025 Raumschmiede GmbH
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+import json
 import logging
 from xml.etree import ElementTree as ET
 
@@ -62,6 +64,8 @@ class SchenkerRequest:
                     response = service(vals)
                 else:
                     response = service(**vals)
+
+                data = self._dump_request_data(vals)
                 try:
                     root = ET.fromstring(response.text)
                     error_text = next(root.iter("faultstring")).text
@@ -72,7 +76,9 @@ class SchenkerRequest:
                             "Error in the request to the Schenker API. This is the "
                             "thrown message:\n\n"
                             "[%s]\n"
-                            "%s - %s" % (error_text, error_code, error_message)
+                            "%s - %s\n"
+                            "Request Data:\n"
+                            "%s" % (error_text, error_code, error_message, data)
                         )
                     )
                 except ValidationError:
@@ -80,8 +86,16 @@ class SchenkerRequest:
                 # If we can't get the proper exception, fallback to the first
                 # exception error traceback
                 except Exception:
-                    raise Fault(e)
+                    msg = str(e) + _("\nRequest Data:\n%s") % data
+                    raise Fault(msg)
         return response
+
+    def _dump_request_data(self, data):
+        res = json.dumps(data, indent="    ", default=str)
+        if self.access_key:
+            res = res.replace(self.access_key, "<REMOVED>")
+
+        return res
 
     # Booking API methods
 

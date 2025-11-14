@@ -19,10 +19,13 @@ class DeliveryCarrier(models.Model):
             return super()._get_price_from_picking(total, weight, volume, quantity)
         price_dict = self._get_price_dict(total, weight, volume, quantity)
         untaxed_in_dict = "untaxed_price" in price_dict
+        order = (
+            self.env["sale.order"].sudo().browse(self._context.get("order_id", False))
+        )
         for line in self.price_rule_ids:
             apply_product_domain_char = line.apply_product_domain
-            if apply_product_domain_char and self.order_id:
-                apply_product = self.order_id.order_line.product_id.search(
+            if apply_product_domain_char and order:
+                apply_product = order.order_line.product_id.search(
                     ast.literal_eval(apply_product_domain_char)
                 )
                 self.recompute_price_available(

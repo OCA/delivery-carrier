@@ -45,11 +45,9 @@ msgid "Last Modified on"
 msgstr "Última Modificación el"
 
 #. module: delivery_price_product_domain
-#: model:ir.model.fields,field_description:delivery_price_product_domain.field_delivery_carrier__order_id
-msgid "Sale Order"
-msgstr "Pedido de Venta"
-
-#. module: delivery_price_product_domain
 #: model:ir.model,name:delivery_price_product_domain.model_delivery_carrier
 msgid "Shipping Methods"
 msgstr "Métodos de Envío"
+
+#~ msgid "Sale Order"
+#~ msgstr "Pedido de Venta"

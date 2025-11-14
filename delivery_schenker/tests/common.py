@@ -54,7 +54,7 @@ class TestDeliverySchenkerCommon(common.SavepointCase):
                 "name": "Test product",
                 "type": "product",
                 "weight": 1,
-                "volume": 1,
+                "volume": 1.875,
             }
         )
         cls.sale, cls.picking = cls._create_sale_order(cls)
@@ -132,21 +132,21 @@ class TestDeliverySchenkerCommon(common.SavepointCase):
             "incotermLocation": "Test partner",
             "productCode": "CON",
             "measurementType": "METRIC",
-            "grossWeight": 1.0,
+            "grossWeight": "1.00",
             "shippingInformation": {
                 "shipmentPosition": [
                     {
                         "dgr": False,
                         "cargoDesc": picking.name,
-                        "grossWeight": 1.0,
-                        "volume": 1.0,
+                        "grossWeight": "1.00",
+                        "volume": "1.88",
                         "packageType": "CI",
                         "stackable": False,
                         "pieces": 1,
                     }
                 ],
-                "grossWeight": 1.0,
-                "volume": 1.0,
+                "grossWeight": "1.00",
+                "volume": "1.88",
             },
             "measureUnit": "VOLUME",
             "customsClearance": False,
@@ -166,7 +166,7 @@ class TestDeliverySchenkerCommon(common.SavepointCase):
             "ownPickup": True,
             "pharmaceuticals": True,
             "submitBooking": True,
-            "measureUnitVolume": 1.0,
+            "measureUnitVolume": "1.88",
         }
         res.update(vals)
         return res

@@ -1,5 +1,6 @@
 # Copyright 2021 Camptocamp SA
 # Copyright 2023 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
+# Copyright 2024 Michael Tietz (MT Software) <mtietz@mt-software.de>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
 from lxml import etree
@@ -20,19 +21,31 @@ class StockPicking(models.Model):
     delivery_notification_sent = fields.Boolean(default=False, copy=False)
 
     def _send_confirmation_email(self):
+        picking_ids_skip_costs = []
         for picking in self:
-            skip_delivery_cost = picking._handle_send_to_shipper_at_operation()
-            picking = picking.with_context(skip_delivery_cost=skip_delivery_cost)
-            super(StockPicking, picking)._send_confirmation_email()
+            if not picking._is_send_to_shipper_at_operation():
+                continue
+            picking_ids_skip_costs.append(picking.id)
+            picking.carrier_id = picking.ship_picking_id.carrier_id
+        pickings_skip_costs = self.browse(picking_ids_skip_costs)
+        if pickings_skip_costs:
+            pickings_skip_costs._handle_send_to_shipper_at_operation()
+        super(StockPicking, self - pickings_skip_costs)._send_confirmation_email()
 
     def _handle_send_to_shipper_at_operation(self):
         """Send the delivery notice to the carrier from a specific operation type.
 
         We are only interested by sending the delivery notice, the delivery fee
         still have to be added to the SO by the ship operation.
-
-        Return True if the operation has send the delivery notice.
         """
+        super().with_context(skip_delivery_cost=True)._send_confirmation_email()
+        for picking in self:
+            related_ship = picking.ship_picking_id
+            values = picking._prepare_values_send_to_ship_at_operation(related_ship)
+            related_ship.write(values)
+
+    def _is_send_to_shipper_at_operation(self):
+        """Return True if the operation needs to send the delivery notice."""
         self.ensure_one()
         if not self.carrier_id:
             # If the current operation has no carrier defined, but a carrier
@@ -47,19 +60,22 @@ class StockPicking(models.Model):
                 and self.picking_type_id
                 in carrier.send_delivery_notice_picking_type_ids
             ):
-                self.carrier_id = carrier
-                self.with_context(skip_delivery_cost=True).send_to_shipper()
-                # Flag the current operation and the ship one.
-                # Mandatory to not execute twice 'send_to_shipper' method
-                self.delivery_notification_sent = True
-                related_ship.delivery_notification_sent = True
-                related_ship.carrier_price = self.carrier_price
-                if not related_ship.carrier_tracking_ref:
-                    related_ship.carrier_tracking_ref = self.carrier_tracking_ref
-                else:
-                    related_ship.carrier_tracking_ref += "," + self.carrier_tracking_ref
                 return True
         return False
+
+    def _prepare_values_send_to_ship_at_operation(self, related_ship):
+        self.ensure_one()
+        related_ship.ensure_one()
+        carrier_tracking_ref = related_ship.carrier_tracking_ref
+        if carrier_tracking_ref:
+            carrier_tracking_ref += "," + self.carrier_tracking_ref
+        else:
+            carrier_tracking_ref = self.carrier_tracking_ref
+        return {
+            "delivery_notification_sent": True,
+            "carrier_price": self.carrier_price,
+            "carrier_tracking_ref": carrier_tracking_ref,
+        }
 
     def send_to_shipper(self):
         # Do not send delivery notice to the carrier if it has already been sent
@@ -111,3 +127,13 @@ class StockPicking(models.Model):
             )
             transfer_modifiers_to_node(modifiers, field)
         return etree.tostring(doc, encoding="unicode")
+
+    def _create_backorder(self):
+        backorders = super()._create_backorder()
+        for backorder in backorders:
+            delivery_notification_sent = (
+                backorder.backorder_id.delivery_notification_sent
+            )
+            if delivery_notification_sent:
+                backorder.delivery_notification_sent = delivery_notification_sent
+        return backorders

@@ -18,6 +18,15 @@ msgstr ""
 "X-Generator: Weblate 4.17\n"
 
 #. module: delivery_schenker
+#: code:addons/delivery_schenker/models/schenker_request.py:0
+#, python-format
+msgid ""
+"\n"
+"Request Data:\n"
+"%s"
+msgstr ""
+
+#. module: delivery_schenker
 #: model:ir.model.fields.selection,name:delivery_schenker.selection__delivery_carrier__schenker_barcode_format__a4
 msgid "A4"
 msgstr "A4"
@@ -339,12 +348,10 @@ msgid ""
 "Error in the request to the Schenker API. This is the thrown message:\n"
 "\n"
 "[%s]\n"
-"%s - %s"
+"%s - %s\n"
+"Request Data:\n"
+"%s"
 msgstr ""
-"Error en el pedido contra la API Schenker. Este es el mensaje devuelto:\n"
-"\n"
-"[%s]\n"
-"%s - %s"
 
 #. module: delivery_schenker
 #: model:ir.model.fields,field_description:delivery_schenker.field_delivery_carrier__schenker_express
@@ -731,3 +738,15 @@ msgstr "kg"
 #: model:product.packaging,volume_uom_name:delivery_schenker.schenker_packaging_23
 msgid "m³"
 msgstr "metros cúbicos"
+
+#, python-format
+#~ msgid ""
+#~ "Error in the request to the Schenker API. This is the thrown message:\n"
+#~ "\n"
+#~ "[%s]\n"
+#~ "%s - %s"
+#~ msgstr ""
+#~ "Error en el pedido contra la API Schenker. Este es el mensaje devuelto:\n"
+#~ "\n"
+#~ "[%s]\n"
+#~ "%s - %s"
