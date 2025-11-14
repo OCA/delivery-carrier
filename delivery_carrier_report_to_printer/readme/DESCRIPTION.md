@@ -1,0 +1,2 @@
+This module allows the user to set a report in the delivery.carrier and enables them to configure it to print directly.
+By default, this module creates a dummy report as a workaround that lets you configure options related to the printer, but the label must be obtained from the API of each delivery integration.
