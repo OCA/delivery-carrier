@@ -154,6 +154,16 @@ class TestPackageFee(TransactionCase):
                 "include_base_amount": True,
             }
         )
+        tax_price_include2 = self.env["account.tax"].create(
+            {
+                "name": "15% inc",
+                "type_tax_use": "sale",
+                "amount_type": "percent",
+                "amount": 15,
+                "price_include": True,
+                "include_base_amount": True,
+            }
+        )
         tax_price_exclude = self.env["account.tax"].create(
             {
                 "name": "15% exc",
@@ -180,6 +190,7 @@ class TestPackageFee(TransactionCase):
         )
 
         # Setting tax in fiscal position on fee2 product
+        self.fee1.taxes_id = tax_price_include2
         self.fee2.taxes_id = tax_price_include
         self.sale.fiscal_position_id = fiscal_position
 

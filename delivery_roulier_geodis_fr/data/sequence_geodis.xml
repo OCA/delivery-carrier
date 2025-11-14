@@ -1,0 +1,9 @@
+<odoo>
+    <record model="ir.sequence" id="geodis_nrecep_sequence">
+        <field name="name">Numerotation des colis geodis</field>
+        <field name="code">geodis.nrecep.number</field>
+        <field name="prefix">%(year)s_</field>
+        <field name="padding">8</field>
+        <field name="implementation">no_gap</field>
+    </record>
+</odoo>

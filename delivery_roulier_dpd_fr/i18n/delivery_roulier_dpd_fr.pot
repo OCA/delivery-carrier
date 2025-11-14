@@ -1,0 +1,94 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* delivery_roulier_dpd_fr
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: delivery_roulier_dpd_fr
+#: model:ir.model,name:delivery_roulier_dpd_fr.model_carrier_account
+msgid "Base account datas"
+msgstr ""
+
+#. module: delivery_roulier_dpd_fr
+#: model:product.template,name:delivery_roulier_dpd_fr.dpd_product_product_template
+msgid "Coûts de livraison - DPD"
+msgstr ""
+
+#. module: delivery_roulier_dpd_fr
+#: model:ir.model.fields.selection,name:delivery_roulier_dpd_fr.selection__delivery_carrier__delivery_type__dpd_fr_soap
+msgid "DPD"
+msgstr ""
+
+#. module: delivery_roulier_dpd_fr
+#: model:ir.model.fields,field_description:delivery_roulier_dpd_fr.field_carrier_account__dpd_fr_soap_agency_id
+msgid "DPD Agency ID"
+msgstr ""
+
+#. module: delivery_roulier_dpd_fr
+#: model:delivery.carrier,name:delivery_roulier_dpd_fr.delivery_carrier_dpd_classic
+msgid "DPD Classic max 30kg"
+msgstr ""
+
+#. module: delivery_roulier_dpd_fr
+#: model:ir.model.fields,field_description:delivery_roulier_dpd_fr.field_carrier_account__dpd_fr_soap_customer_id
+msgid "DPD Customer ID"
+msgstr ""
+
+#. module: delivery_roulier_dpd_fr
+#: model:delivery.carrier,name:delivery_roulier_dpd_fr.delivery_carrier_dpd_Predict
+msgid "DPD Predict max 20kg"
+msgstr ""
+
+#. module: delivery_roulier_dpd_fr
+#: model:delivery.carrier,name:delivery_roulier_dpd_fr.delivery_carrier_dpd_Relais
+msgid "DPD Relais max 20kg"
+msgstr ""
+
+#. module: delivery_roulier_dpd_fr
+#: model:ir.model.fields,field_description:delivery_roulier_dpd_fr.field_carrier_account__dpd_fr_soap_file_format
+msgid "DPD file format"
+msgstr ""
+
+#. module: delivery_roulier_dpd_fr
+#: model:ir.model.fields,field_description:delivery_roulier_dpd_fr.field_carrier_account__dpd_fr_soap_customer_country
+msgid "Dpd Fr Soap Customer Country"
+msgstr ""
+
+#. module: delivery_roulier_dpd_fr
+#: model:ir.model.fields.selection,name:delivery_roulier_dpd_fr.selection__carrier_account__dpd_fr_soap_file_format__pdf
+msgid "PDF"
+msgstr ""
+
+#. module: delivery_roulier_dpd_fr
+#: model:ir.model,name:delivery_roulier_dpd_fr.model_stock_quant_package
+msgid "Packages"
+msgstr ""
+
+#. module: delivery_roulier_dpd_fr
+#: model:ir.model.fields,field_description:delivery_roulier_dpd_fr.field_delivery_carrier__delivery_type
+msgid "Provider"
+msgstr ""
+
+#. module: delivery_roulier_dpd_fr
+#: model:ir.model,name:delivery_roulier_dpd_fr.model_delivery_carrier
+msgid "Shipping Methods"
+msgstr ""
+
+#. module: delivery_roulier_dpd_fr
+#: model:ir.model,name:delivery_roulier_dpd_fr.model_stock_picking
+msgid "Transfer"
+msgstr ""
+
+#. module: delivery_roulier_dpd_fr
+#: model:ir.model.fields.selection,name:delivery_roulier_dpd_fr.selection__carrier_account__dpd_fr_soap_file_format__zpl
+msgid "ZPL"
+msgstr ""

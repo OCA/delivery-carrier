@@ -1,0 +1,204 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* delivery_roulier_geodis_fr
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2025-03-14 11:06+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.10.2\n"
+
+#. module: delivery_roulier_geodis_fr
+#. odoo-python
+#: code:addons/delivery_roulier_geodis_fr/models/deposit.py:0
+#, python-format
+msgid "Bad input: %s\n"
+msgstr "Dato errato: %s\n"
+
+#. module: delivery_roulier_geodis_fr
+#: model:ir.model.fields,help:delivery_roulier_geodis_fr.field_stock_quant_package__geodis_cab
+msgid "Barcode of the label"
+msgstr "Codice a barre dell'etichetta"
+
+#. module: delivery_roulier_geodis_fr
+#: model:ir.model,name:delivery_roulier_geodis_fr.model_carrier_account
+msgid "Base account datas"
+msgstr "Dati account base"
+
+#. module: delivery_roulier_geodis_fr
+#. odoo-python
+#: code:addons/delivery_roulier_geodis_fr/models/stock_picking.py:0
+#, python-format
+msgid "Can't set up a rendez-vous wihout mail or tel"
+msgstr "Non è possibile organizzare un incontro senza e-mail o telefono"
+
+#. module: delivery_roulier_geodis_fr
+#: model:ir.model,name:delivery_roulier_geodis_fr.model_delivery_carrier_agency
+msgid "Carrier Agency"
+msgstr "Agenzia corriere"
+
+#. module: delivery_roulier_geodis_fr
+#: model:ir.model.fields,help:delivery_roulier_geodis_fr.field_carrier_account__geodis_fr_tracking_account
+msgid ""
+"Check this box if this account is used to get the tracking links for geodis"
+msgstr ""
+"Selezionare questa opzione se questo account è utilizzato per ottenere "
+"collegamenti di tracciamento per Geodis"
+
+#. module: delivery_roulier_geodis_fr
+#: model:product.template,name:delivery_roulier_geodis_fr.geodis_shipping_fee_product_template
+msgid "Coûts de livraison - GEODIS"
+msgstr "Costi di consegna - GEODIS"
+
+#. module: delivery_roulier_geodis_fr
+#: model:ir.model.fields,field_description:delivery_roulier_geodis_fr.field_carrier_account__geodis_fr_customer_id
+msgid "Customer Id"
+msgstr "ID cliente"
+
+#. module: delivery_roulier_geodis_fr
+#: model:ir.model,name:delivery_roulier_geodis_fr.model_deposit_slip
+msgid "Deposit Slip"
+msgstr "Bolla di deposito"
+
+#. module: delivery_roulier_geodis_fr
+#: model:ir.model.fields.selection,name:delivery_roulier_geodis_fr.selection__delivery_carrier__delivery_type__geodis_fr
+msgid "Geodis"
+msgstr "Geodis"
+
+#. module: delivery_roulier_geodis_fr
+#: model:delivery.carrier,name:delivery_roulier_geodis_fr.delivery_carrier_cx
+msgid "Geodis CX Expres"
+msgstr "CX Expres Geodis"
+
+#. module: delivery_roulier_geodis_fr
+#: model:delivery.carrier,name:delivery_roulier_geodis_fr.delivery_carrier_cxi
+msgid "Geodis CXI France Express"
+msgstr "CXI France Express Geodis"
+
+#. module: delivery_roulier_geodis_fr
+#: model:ir.model.fields,field_description:delivery_roulier_geodis_fr.field_stock_quant_package__geodis_cab
+msgid "Geodis Cab"
+msgstr "Contenitore Geodis"
+
+#. module: delivery_roulier_geodis_fr
+#: model:delivery.carrier,name:delivery_roulier_geodis_fr.delivery_carrier_cal
+msgid "Geodis Calpack"
+msgstr "Chiamata pacco Geodis"
+
+#. module: delivery_roulier_geodis_fr
+#: model:delivery.carrier,name:delivery_roulier_geodis_fr.delivery_carrier_eex
+msgid "Geodis Euro Express"
+msgstr "Euro Express Geodis"
+
+#. module: delivery_roulier_geodis_fr
+#: model:delivery.carrier,name:delivery_roulier_geodis_fr.delivery_carrier_exp
+msgid "Geodis Express"
+msgstr "Express Geodis"
+
+#. module: delivery_roulier_geodis_fr
+#: model:ir.model.fields,field_description:delivery_roulier_geodis_fr.field_carrier_account__geodis_fr_file_format
+msgid "Geodis File Format"
+msgstr "Formato file Geodis"
+
+#. module: delivery_roulier_geodis_fr
+#: model:ir.model.fields,field_description:delivery_roulier_geodis_fr.field_delivery_carrier_agency__geodis_fr_hub_id
+msgid "Geodis Fr Hub"
+msgstr "HUB Geodis Francia"
+
+#. module: delivery_roulier_geodis_fr
+#: model:ir.model.fields,field_description:delivery_roulier_geodis_fr.field_delivery_carrier_agency__geodis_fr_interchange_recipient
+msgid "Geodis Fr Interchange Recipient"
+msgstr "Contenitore interscambio Geodis Francia"
+
+#. module: delivery_roulier_geodis_fr
+#: model:ir.model.fields,field_description:delivery_roulier_geodis_fr.field_delivery_carrier_agency__geodis_fr_interchange_sender
+msgid "Geodis Fr Interchange Sender"
+msgstr "Mittente interscambio Geodis Francia"
+
+#. module: delivery_roulier_geodis_fr
+#: model:delivery.carrier,name:delivery_roulier_geodis_fr.delivery_carrier_ine
+msgid "Geodis Inter Express"
+msgstr "Inter Express Geodis"
+
+#. module: delivery_roulier_geodis_fr
+#: model:delivery.carrier,name:delivery_roulier_geodis_fr.delivery_carrier_inp
+msgid "Geodis InterPack"
+msgstr "InterPack Geodis"
+
+#. module: delivery_roulier_geodis_fr
+#: model:delivery.carrier,name:delivery_roulier_geodis_fr.delivery_carrier_mes
+msgid "Geodis Messagerie"
+msgstr "Messaggistica Geodis"
+
+#. module: delivery_roulier_geodis_fr
+#: model:delivery.carrier,name:delivery_roulier_geodis_fr.delivery_carrier_mei
+msgid "Geodis Messagerie Internationnale"
+msgstr "Messaggistica internazionale Geodis"
+
+#. module: delivery_roulier_geodis_fr
+#: model:delivery.carrier,name:delivery_roulier_geodis_fr.delivery_carrier_p30
+msgid "Geodis Pack30"
+msgstr "Pack30 Geodis"
+
+#. module: delivery_roulier_geodis_fr
+#: model:delivery.carrier,name:delivery_roulier_geodis_fr.delivery_carrier_rap
+msgid "Geodis Rapide"
+msgstr "Rapido Geodis"
+
+#. module: delivery_roulier_geodis_fr
+#: model:ir.model.fields,field_description:delivery_roulier_geodis_fr.field_stock_picking__geodis_shippingid
+msgid "Geodis Shippingid"
+msgstr "ID spedizione Geodis"
+
+#. module: delivery_roulier_geodis_fr
+#: model:delivery.carrier,name:delivery_roulier_geodis_fr.delivery_carrier_top24
+msgid "Geodis Top24"
+msgstr "Top24 Geodis"
+
+#. module: delivery_roulier_geodis_fr
+#: model:ir.model.fields,field_description:delivery_roulier_geodis_fr.field_carrier_account__geodis_fr_tracking_account
+msgid "Is a Tracking Account"
+msgstr "È un account di tracciamento"
+
+#. module: delivery_roulier_geodis_fr
+#: model:delivery.carrier.template.option,name:delivery_roulier_geodis_fr.carrier_opt_tmpl_RDW
+msgid "On Demand"
+msgstr "Su richiesta"
+
+#. module: delivery_roulier_geodis_fr
+#: model:ir.model,name:delivery_roulier_geodis_fr.model_stock_quant_package
+msgid "Packages"
+msgstr "Colli"
+
+#. module: delivery_roulier_geodis_fr
+#: model:ir.model.fields,field_description:delivery_roulier_geodis_fr.field_delivery_carrier__delivery_type
+msgid "Provider"
+msgstr "Fornitore"
+
+#. module: delivery_roulier_geodis_fr
+#: model:ir.model.fields,help:delivery_roulier_geodis_fr.field_stock_picking__geodis_shippingid
+msgid "Shipping Id in Geodis terminology"
+msgstr "ID spedizione nella terminologia Geodis"
+
+#. module: delivery_roulier_geodis_fr
+#: model:ir.model,name:delivery_roulier_geodis_fr.model_delivery_carrier
+msgid "Shipping Methods"
+msgstr "Metodi di spedizione"
+
+#. module: delivery_roulier_geodis_fr
+#: model:ir.model,name:delivery_roulier_geodis_fr.model_stock_picking
+msgid "Transfer"
+msgstr "Trasferimento"
+
+#. module: delivery_roulier_geodis_fr
+#: model:ir.model.fields.selection,name:delivery_roulier_geodis_fr.selection__carrier_account__geodis_fr_file_format__zpl
+msgid "ZPL"
+msgstr "ZPL"

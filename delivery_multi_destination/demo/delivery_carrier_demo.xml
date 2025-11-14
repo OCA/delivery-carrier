@@ -8,6 +8,7 @@
         <field name="name">International Carrier Inc.</field>
         <field name="sequence">4</field>
         <field name="destination_type">multi</field>
+        <field name="delivery_type">base_on_destination</field>
         <field name="product_id" ref="product_product_delivery_carrier_multi" />
     </record>
     <record id="product_product_delivery_carrier_multi_child_1" model="product.product">

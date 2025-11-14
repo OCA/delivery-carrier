@@ -1,6 +1,6 @@
 # Copyright 2015 Serv. Tecnol. Avanzados - Pedro M. Baeza
 # Copyright 2016 Tecnativa - Pedro M. Baeza
-# Copyright 2023 Tecnativa - Víctor Martínez
+# Copyright 2023-2025 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import _, api, fields, models
@@ -29,8 +29,8 @@ class PurchaseOrder(models.Model):
             delivery_lines = item.order_line.filtered(lambda x: x.is_delivery)
             if delivery_lines:
                 item.delivery_price = sum(delivery_lines.mapped("price_unit"))
-            else:
-                item.delivery_price = item.carrier_id.purchase_rate_shipment(self)[
+            elif item.state not in ("purchase", "done", "cancel"):
+                item.delivery_price = item.carrier_id.purchase_rate_shipment(item)[
                     "price"
                 ]
 

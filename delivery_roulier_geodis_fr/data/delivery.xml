@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+
+    <!-- PARTNER -->
+    <record id="partner_geodis" model="res.partner">
+        <field name="name">Geodis</field>
+        <field name="is_company" eval="True" />
+        <field name="street">26 Quai Charles Pasqua</field>
+        <field name="zip">92300</field>
+        <field name="phone">+33156762600</field>
+        <field name="city">Levallois-Perret</field>
+    </record>
+
+    <record id="default_geodis_calberson_agency_partner" model="res.partner">
+        <field name="parent_id" ref="partner_geodis" />
+        <field name="name">Geodis Lille Europe</field>
+        <field name="is_company" eval="True" />
+        <field name="street">7 Avenue de la Rotonde</field>
+        <field name="zip">59160</field>
+        <field name="phone">+33320085555</field>
+        <field name="country_id" ref="base.fr" />
+        <field name="city">Lomme</field>
+        <field name="siren">457507358</field>
+        <field name="nic">00044</field>
+    </record>
+
+    <record id="default_geodis_france_exress_agency_partner" model="res.partner">
+        <field name="parent_id" ref="partner_geodis" />
+        <field name="name">France Express Lille</field>
+        <field name="is_company" eval="True" />
+        <field name="street">2 RUE DES SAPINS</field>
+        <field name="zip">59810</field>
+        <field name="phone">+336320161718</field>
+        <field name="city">LESQUIN</field>
+        <field name="siren">300089174</field>
+        <field name="country_id" ref="base.fr" />
+        <field name="nic">00035</field>
+    </record>
+
+    <!-- DELIVERY CARRIER TEMPLATE OPTION -->
+    <record id="carrier_opt_tmpl_RDW" model="delivery.carrier.template.option">
+        <field name="name">On Demand</field>
+        <field name="code">RDW</field>
+    </record>
+
+  <!-- DELIVERY CARRIER -->
+    <record id="delivery_carrier_exp" model="delivery.carrier">
+        <field name="name">Geodis Express</field>
+        <field name="code">EXP</field>
+        <field name="delivery_type">geodis_fr</field>
+        <field name="product_id" ref="geodis_shipping_fee" />
+    </record>
+
+    <record id="delivery_carrier_rap" model="delivery.carrier">
+        <field name="name">Geodis Rapide</field>
+        <field name="delivery_type">geodis_fr</field>
+        <field name="product_id" ref="geodis_shipping_fee" />
+        <field name="code">RAP</field>
+    </record>
+
+    <record id="delivery_carrier_mes" model="delivery.carrier">
+        <field name="name">Geodis Messagerie</field>
+        <field name="delivery_type">geodis_fr</field>
+        <field name="product_id" ref="geodis_shipping_fee" />
+        <field name="code">MES</field>
+    </record>
+    <record id="delivery_carrier_top24" model="delivery.carrier">
+        <field name="name">Geodis Top24</field>
+        <field name="delivery_type">geodis_fr</field>
+        <field name="product_id" ref="geodis_shipping_fee" />
+        <field name="code">T24</field>
+    </record>
+
+    <record id="delivery_carrier_cal" model="delivery.carrier">
+        <field name="name">Geodis Calpack</field>
+        <field name="delivery_type">geodis_fr</field>
+        <field name="product_id" ref="geodis_shipping_fee" />
+        <field name="code">CAL</field>
+    </record>
+
+    <record id="delivery_carrier_p30" model="delivery.carrier">
+        <field name="name">Geodis Pack30</field>
+        <field name="delivery_type">geodis_fr</field>
+        <field name="product_id" ref="geodis_shipping_fee" />
+        <field name="code">P30</field>
+    </record>
+
+    <record id="delivery_carrier_inp" model="delivery.carrier">
+        <field name="name">Geodis InterPack</field>
+        <field name="delivery_type">geodis_fr</field>
+        <field name="product_id" ref="geodis_shipping_fee" />
+        <field name="code">INP</field>
+    </record>
+
+    <record id="delivery_carrier_mei" model="delivery.carrier">
+        <field name="name">Geodis Messagerie Internationnale</field>
+        <field name="delivery_type">geodis_fr</field>
+        <field name="product_id" ref="geodis_shipping_fee" />
+        <field name="code">MEI</field>
+    </record>
+
+    <record id="delivery_carrier_cxi" model="delivery.carrier">
+        <field name="name">Geodis CXI France Express</field>
+        <field name="delivery_type">geodis_fr</field>
+        <field name="product_id" ref="geodis_shipping_fee" />
+        <field name="code">CXI</field>
+    </record>
+
+    <record id="delivery_carrier_cx" model="delivery.carrier">
+        <field name="name">Geodis CX Expres</field>
+        <field name="delivery_type">geodis_fr</field>
+        <field name="product_id" ref="geodis_shipping_fee" />
+        <field name="code">CX</field>
+    </record>
+
+    <record id="delivery_carrier_ine" model="delivery.carrier">
+        <field name="name">Geodis Inter Express</field>
+        <field name="delivery_type">geodis_fr</field>
+        <field name="product_id" ref="geodis_shipping_fee" />
+        <field name="code">INE</field>
+    </record>
+
+    <record id="delivery_carrier_eex" model="delivery.carrier">
+        <field name="name">Geodis Euro Express</field>
+        <field name="delivery_type">geodis_fr</field>
+        <field name="product_id" ref="geodis_shipping_fee" />
+        <field name="code">EEX</field>
+    </record>
+
+</odoo>

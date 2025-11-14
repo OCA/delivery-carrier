@@ -7,7 +7,7 @@
 
 {
     "name": "Delivery Drop-off Sites",
-    "version": "16.0.1.0.0",
+    "version": "16.0.1.0.1",
     "author": "Akretion,GRAP,Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "summary": "Send goods to sites in which customers come pick up package",

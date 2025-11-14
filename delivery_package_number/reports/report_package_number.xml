@@ -11,8 +11,8 @@
                 t-value="doc.move_ids.browse(move_ids).filtered('sale_line_id')[:1].picking_id"
             />
             <t t-foreach="doc.number_of_packages" t-as="pack_num">
-                <div class="page">
-                    <div class="row">
+                <div class="page" style="page-break-inside:avoid;">
+                    <div class="row mt-5">
                         <div class="col-5" name="logo">
                             <img
                                 t-if="doc.company_id.logo"
@@ -35,27 +35,31 @@
                     <div class="row mt-3">
                         <div
                             class="col-5 border border-dark rounded text-center"
-                            style="padding: 60px 0;"
+                            style="padding: 10px"
                             name="client"
                         >
-                            <span t-field="dest_picking.partner_id" />
+                            <span
+                                t-field="dest_picking.partner_id"
+                                t-options="{'widget': 'contact', 'fields': ['address', 'name', 'mobile'], 'no_marker': True}"
+                            />
                         </div>
                         <div class="col-2" />
                         <div
                             class="col-5 border border-dark rounded"
+                            style="padding: 10px"
                             name="package_number"
                         >
                             <h6>Number of packages:</h6>
-                            <div style="font-size: 4em" class="text-center">
-                                <span t-out="pack_num + 1" />/<span
-                                    t-field="doc.number_of_packages"
-                                />
+                            <div
+                                style="font-size: 4em;padding:auto;margin:auto;"
+                                class="text-center"
+                            >
+                                <span t-out="pack_num + 1" />/
+                                <span t-field="doc.number_of_packages" />
                             </div>
                         </div>
                     </div>
-
                 </div>
-                <div style="page-break-before:always;" />
             </t>
         </t>
     </template>

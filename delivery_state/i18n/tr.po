@@ -1,0 +1,202 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* delivery_state
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2025-02-18 12:06+0000\n"
+"Last-Translator: İsmail Çağan Yılmaz <ismail.cagan.yilmaz@gmail.com>\n"
+"Language-Team: none\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.6.2\n"
+
+#. module: delivery_state
+#: model:mail.template,body_html:delivery_state.delivery_state_delivered_notification
+msgid ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"                <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"                    Hello <t t-out=\"object.partner_id.name\"></t>,<br><br>\n"
+"                    Your package has been delivered!<br><br>\n"
+"                    Order information<br>\n"
+"                    Order <t t-out=\"object.carrier_tracking_ref\"></t><br>\n"
+"                    <t t-if=\"user.signature\">\n"
+"                        <br>\n"
+"                        <t t-out=\"user.signature\"></t>\n"
+"                    </t>\n"
+"                </p>\n"
+"            </div>\n"
+"        "
+msgstr ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"                <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"                    Merhaba <t t-out=\"object.partner_id.name\"></t>,<br><br>"
+"\n"
+"                    Paketiniz teslim edildi!<br><br>\n"
+"                    SIpariş bilgileri<br>\n"
+"                    Sipariş <t t-out=\"object.carrier_tracking_ref\"></t><br>"
+"\n"
+"                    <t t-if=\"user.signature\">\n"
+"                        <br>\n"
+"                        <t t-out=\"user.signature\"></t>\n"
+"                    </t>\n"
+"                </p>\n"
+"            </div>\n"
+"        "
+
+#. module: delivery_state
+#: model_terms:ir.ui.view,arch_db:delivery_state.res_config_settings_view_form
+msgid ""
+"<span class=\"fa fa-lg fa-building-o\" title=\"Values set here are company-"
+"specific.\" groups=\"base.group_multi_company\"/>"
+msgstr ""
+"<span class=\"fa fa-lg fa-building-o\" title=\"Burada belirlenen değerler "
+"şirkete özeldir.\" groups=\"base.group_multi_company\"/>"
+
+#. module: delivery_state
+#: model:ir.model.fields.selection,name:delivery_state.selection__stock_picking__delivery_state__canceled_shipment
+msgid "Canceled shipment"
+msgstr "Iptal edilen gönderim"
+
+#. module: delivery_state
+#: model:ir.model.fields,field_description:delivery_state.field_stock_picking__delivery_state
+msgid "Carrier State"
+msgstr "Nakliyeci Durumu"
+
+#. module: delivery_state
+#: model:ir.model,name:delivery_state.model_res_company
+msgid "Companies"
+msgstr "Şirketler"
+
+#. module: delivery_state
+#: model:ir.model,name:delivery_state.model_res_config_settings
+msgid "Config Settings"
+msgstr "Yapılandırma Ayarları"
+
+#. module: delivery_state
+#: model:ir.model.fields.selection,name:delivery_state.selection__stock_picking__delivery_state__customer_delivered
+msgid "Customer delivered"
+msgstr "Müşteriye teslim edildi"
+
+#. module: delivery_state
+#: model:ir.model.fields,field_description:delivery_state.field_stock_picking__date_delivered
+msgid "Delivery Date"
+msgstr "Teslimat Tarihi"
+
+#. module: delivery_state
+#: model:mail.template,name:delivery_state.delivery_state_delivered_notification
+msgid "Delivery: Picking delivered by Email"
+msgstr "Teslimat: E-posta ile teslim edilen sevk"
+
+#. module: delivery_state
+#: model_terms:ir.ui.view,arch_db:delivery_state.res_config_settings_view_form
+msgid "Email Confirmation (customer delivered)"
+msgstr "E-posta Onayı (müşteriye teslim edildi)"
+
+#. module: delivery_state
+#: model:ir.model.fields,field_description:delivery_state.field_res_company__delivery_state_delivered_email_validation
+#: model:ir.model.fields,field_description:delivery_state.field_res_config_settings__delivery_state_delivered_email_validation
+msgid "Email Confirmation delivered picking"
+msgstr "E-posta Onayı teslim edilen sevk"
+
+#. module: delivery_state
+#: model_terms:ir.ui.view,arch_db:delivery_state.res_config_settings_view_form
+msgid "Email Template"
+msgstr "E-posta Şablonu"
+
+#. module: delivery_state
+#: model:ir.model.fields,field_description:delivery_state.field_res_company__delivery_state_delivered_mail_template_id
+#: model:ir.model.fields,field_description:delivery_state.field_res_config_settings__delivery_state_delivered_mail_template_id
+msgid "Email Template delivered picking"
+msgstr "E-posta Şablonu teslim edilen sevk"
+
+#. module: delivery_state
+#: model:ir.model.fields.selection,name:delivery_state.selection__stock_picking__delivery_state__in_transit
+msgid "In transit"
+msgstr "Transfer sürecinde"
+
+#. module: delivery_state
+#: model:ir.model.fields.selection,name:delivery_state.selection__stock_picking__delivery_state__incident
+msgid "Incident"
+msgstr "Kaza"
+
+#. module: delivery_state
+#: model:ir.model.fields.selection,name:delivery_state.selection__stock_picking__delivery_state__no_update
+msgid "No more updates from carrier"
+msgstr "Nakliyeciden artık güncelleme yok"
+
+#. module: delivery_state
+#: model_terms:ir.ui.view,arch_db:delivery_state.res_config_settings_view_form
+msgid ""
+"Send an automatic confirmation email when Delivery Orders are delivered"
+msgstr ""
+"Teslimat Siparişleri teslim edildiğinde otomatik onay e-postası gönderin"
+
+#. module: delivery_state
+#: model:ir.model.fields,field_description:delivery_state.field_stock_picking__date_shipped
+msgid "Shipment Date"
+msgstr "Sevkiyat Tarihi"
+
+#. module: delivery_state
+#: model:ir.model,name:delivery_state.model_delivery_carrier
+msgid "Shipping Methods"
+msgstr "Gönderim Yöntemleri"
+
+#. module: delivery_state
+#: model:ir.model.fields.selection,name:delivery_state.selection__stock_picking__delivery_state__shipping_recorded_in_carrier
+msgid "Shipping recorded in carrier"
+msgstr "Nakliyecide kaydedilen gönderim"
+
+#. module: delivery_state
+#: model:ir.model.fields,help:delivery_state.field_stock_picking__delivery_state
+msgid ""
+"This field is set automatically unless the delivery carrier is marked as "
+"manual. If manually edited, the carrier dates will be updated"
+msgstr ""
+"Nakliyeci manuel olarak işaretlenmediği sürece bu alan otomatik olarak "
+"ayarlanır. Manuel olarak düzenlenirse taşıyıcı tarihleri güncellenecektir"
+
+#. module: delivery_state
+#: model:ir.model.fields,field_description:delivery_state.field_stock_picking__tracking_state
+msgid "Tracking State"
+msgstr "Takip Durumu"
+
+#. module: delivery_state
+#: model:ir.model.fields,field_description:delivery_state.field_stock_picking__tracking_state_history
+msgid "Tracking State History"
+msgstr "Takip Durumu Geçmişi"
+
+#. module: delivery_state
+#: model:ir.model,name:delivery_state.model_stock_picking
+msgid "Transfer"
+msgstr "Transfer"
+
+#. module: delivery_state
+#: model:ir.actions.server,name:delivery_state.ir_cron_delivery_state_ir_actions_server
+#: model:ir.cron,cron_name:delivery_state.ir_cron_delivery_state
+msgid "Update deliveries states"
+msgstr "Teslimat durumlarını güncelleme"
+
+#. module: delivery_state
+#: model_terms:ir.ui.view,arch_db:delivery_state.view_picking_withcarrier_out_form
+msgid "Update tracking state"
+msgstr "Takip durumunu güncelle"
+
+#. module: delivery_state
+#: model:ir.model.fields.selection,name:delivery_state.selection__stock_picking__delivery_state__warehouse_delivered
+msgid "Warehouse delivered"
+msgstr "Depoya teslim edildi"
+
+#. module: delivery_state
+#: model:mail.template,subject:delivery_state.delivery_state_delivered_notification
+msgid ""
+"Your order {{ object.carrier_tracking_ref or object.name }} from {{ "
+"object.company_id.name }}"
+msgstr ""
+"{{ object.company_id.name }} adlı şirketten aldığınız {{ "
+"object.carrier_tracking_ref or object.name }} siparişiniz"

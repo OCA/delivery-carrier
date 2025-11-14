@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="view_geodis_carrier_agency_form" model="ir.ui.view">
+        <field name="model">delivery.carrier.agency</field>
+        <field
+            name="inherit_id"
+            ref="delivery_carrier_agency.view_delivery_carrier_agency_form"
+        />
+        <field name="arch" type="xml">
+            <field name="external_reference" position="after">
+                <field
+                    name="geodis_fr_interchange_sender"
+                    attrs="{'invisible': [('delivery_type', '!=', 'geodis_fr')], 'required': [('delivery_type', '=', 'geodis_fr')]}"
+                />
+                <field
+                    name="geodis_fr_interchange_recipient"
+                    attrs="{'invisible': [('delivery_type', '!=', 'geodis_fr')], 'required': [('delivery_type', '=', 'geodis_fr')]}"
+                />
+                <field
+                    name="geodis_fr_hub_id"
+                    attrs="{'invisible': [('delivery_type', '!=', 'geodis_fr')], 'required': [('delivery_type', '=', 'geodis_fr')]}"
+                />
+            </field>
+        </field>
+    </record>
+
+</odoo>

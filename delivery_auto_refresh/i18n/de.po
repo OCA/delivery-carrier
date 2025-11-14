@@ -9,14 +9,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-13 03:45+0000\n"
-"PO-Revision-Date: 2018-03-13 03:45+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2018\n"
+"PO-Revision-Date: 2025-06-18 10:56+0000\n"
+"Last-Translator: André Volksdorf <volksdorf@smartpage.de>\n"
 "Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #. module: delivery_auto_refresh
 #: model_terms:ir.ui.view,arch_db:delivery_auto_refresh.res_config_settings_view_form
@@ -24,59 +25,61 @@ msgid ""
 "After delivering a sales order, update the shipping cost line based on what "
 "has been delivered"
 msgstr ""
+"Nach der Lieferung eines Kundenauftrags die Versandkostenzeile auf der "
+"Grundlage der gelieferten Waren aktualisieren"
 
 #. module: delivery_auto_refresh
 #: model:ir.model.fields,field_description:delivery_auto_refresh.field_sale_order__available_carrier_ids
 msgid "Available Carrier"
-msgstr ""
+msgstr "Verfügbarer Versandmethoden"
 
 #. module: delivery_auto_refresh
 #: model:ir.model,name:delivery_auto_refresh.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Firmen"
 
 #. module: delivery_auto_refresh
 #: model:ir.model,name:delivery_auto_refresh.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Konfigurationseinstellungen"
 
 #. module: delivery_auto_refresh
 #: model_terms:ir.ui.view,arch_db:delivery_auto_refresh.res_config_settings_view_form
 msgid "On the sales quotation, add the shipping method on creation."
-msgstr ""
+msgstr "Die Versandart bei der Erstellung von Angeboten hinzufügen."
 
 #. module: delivery_auto_refresh
 #: model_terms:ir.ui.view,arch_db:delivery_auto_refresh.res_config_settings_view_form
 msgid "On the sales quotation, refresh the shipping cost line when saving"
-msgstr ""
+msgstr "Die Versandkosten beim Speichern von Angeboten aktualisieren"
 
 #. module: delivery_auto_refresh
 #: model:ir.model.fields,field_description:delivery_auto_refresh.field_res_company__sale_refresh_delivery_after_picking
 #: model:ir.model.fields,field_description:delivery_auto_refresh.field_res_config_settings__sale_refresh_delivery_after_picking
 msgid "Refresh delivery after picking automatically"
-msgstr ""
+msgstr "Lieferung nach der Kommissionierung automatisch aktualisieren"
 
 #. module: delivery_auto_refresh
 #: model:ir.model.fields,field_description:delivery_auto_refresh.field_res_company__sale_auto_add_delivery_line
 #: model:ir.model.fields,field_description:delivery_auto_refresh.field_res_config_settings__sale_auto_add_delivery_line
 msgid "Refresh shipping cost line automatically"
-msgstr ""
+msgstr "Versandkostenzeile automatisch aktualisieren"
 
 #. module: delivery_auto_refresh
 #: model:ir.model,name:delivery_auto_refresh.model_sale_order
 msgid "Sales Order"
-msgstr ""
+msgstr "Verkaufsauftrag"
 
 #. module: delivery_auto_refresh
 #: model:ir.model,name:delivery_auto_refresh.model_sale_order_line
 msgid "Sales Order Line"
-msgstr ""
+msgstr "Auftragsposition"
 
 #. module: delivery_auto_refresh
 #: model:ir.model.fields,field_description:delivery_auto_refresh.field_res_company__sale_auto_assign_carrier_on_create
 #: model:ir.model.fields,field_description:delivery_auto_refresh.field_res_config_settings__sale_auto_assign_carrier_on_create
 msgid "Set default shipping method automatically"
-msgstr ""
+msgstr "Standardversandmethode automatisch einstellen"
 
 #. module: delivery_auto_refresh
 #: model:ir.model,name:delivery_auto_refresh.model_stock_picking
@@ -87,13 +90,15 @@ msgstr "Umbuchung"
 #: model:ir.model.fields,field_description:delivery_auto_refresh.field_res_company__sale_auto_void_delivery_line
 #: model:ir.model.fields,field_description:delivery_auto_refresh.field_res_config_settings__sale_auto_void_delivery_line
 msgid "Void delivery lines automatically"
-msgstr ""
+msgstr "Lieferleitungen automatisch entleeren"
 
 #. module: delivery_auto_refresh
 #: model_terms:ir.ui.view,arch_db:delivery_auto_refresh.res_config_settings_view_form
 msgid ""
 "Void the shipping cost line when the delivery is returned before invoicing"
 msgstr ""
+"Streichen Sie die Versandkostenzeile, wenn die Lieferung vor der "
+"Rechnungsstellung zurückgeschickt wird"
 
 #, fuzzy
 #~ msgid "Sale Order"

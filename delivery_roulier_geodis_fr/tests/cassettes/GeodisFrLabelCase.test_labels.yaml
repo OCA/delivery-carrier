@@ -1,0 +1,95 @@
+interactions:
+- request:
+    body: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<soap:Envelope xmlns:soap=\"\
+      http://schemas.xmlsoap.org/soap/envelope/\" xmlns:imp=\"http://impression.service.web.etiquette.geodis.com\"\
+      >\n\t<soap:Header>\n\t\t<imp:authenticationInfo xmlns:imp=\"http://impression.service.web.etiquette.geodis.com\"\
+      >\n\t<imp:userName>000000</imp:userName>\n\t<imp:password>password</imp:password>\
+      \ \n</imp:authenticationInfo>\n\t</soap:Header>\n\t<soap:Body>\n\t\t<imp:demandeImpressionEtiquette\
+      \ xmlns:imp=\"http://impression.service.web.etiquette.geodis.com\">\n  <imp:csadep>459059</imp:csadep>\n\
+      \  <imp:csadepteos>159</imp:csadepteos>\n  <imp:codclidep>000000</imp:codclidep>\n\
+      \  <imp:format>Z</imp:format>\n  <imp:posFirstEtiqu>1</imp:posFirstEtiqu>\n\
+      \  <imp:codpro>MES</imp:codpro>\n  <imp:nrecep>00000001</imp:nrecep>\n  <imp:datdep>20210609</imp:datdep>\n\
+      \  <imp:nomexp>My Company (San Francisco)</imp:nomexp>\n  <imp:payexp>FR</imp:payexp>\n\
+      \  <imp:dptexp>69</imp:dptexp>\n  <imp:cpoexp>69100</imp:cpoexp>\n  <imp:locexp>VILLEURBANNE</imp:locexp>\n\
+      \  <imp:telexp>+1(650)691-3277</imp:telexp>\n  <imp:nomdst>Carrier label test\
+      \ customer</imp:nomdst>\n  <imp:ad1dst>27 Rue Henri Rolland</imp:ad1dst>\n \
+      \ <imp:paydst>FR</imp:paydst>\n  <imp:cpodst>69100</imp:cpodst>\n  <imp:locdst>VILLEURBANNE</imp:locdst>\n\
+      \  <imp:nomcta>Carrier label test customer</imp:nomcta>\n  <imp:nbtumg>1</imp:nbtumg>\n\
+      \  <imp:poids>1.2</imp:poids>\n  <imp:detailUmg>\n    <imp:codumg>PC</imp:codumg>\n\
+      \    <imp:poiumg>1.2</imp:poiumg>\n    <imp:volumg>0</imp:volumg>\n    <imp:numcol>1</imp:numcol>\n\
+      \    <imp:refclicol>PACK0000003</imp:refclicol>\n  </imp:detailUmg>\n</imp:demandeImpressionEtiquette>\n\
+      \n\t</soap:Body>\n</soap:Envelope>"
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '1643'
+      SOAPAction:
+      - <SOAP Action>
+      User-Agent:
+      - python-requests/2.21.0
+      content-type:
+      - text/xml
+    method: POST
+    uri: https://espace-rct.geodis.com/geolabel/services/ImpressionEtiquette
+  response:
+    body:
+      string: "--MIMEBoundary_027599f2fbb7c3a44f903eca180b26ff924943f006c90664\r\n\
+        Content-Type: text/xml; charset=UTF-8\r\nContent-Transfer-Encoding: binary\r\
+        \nContent-ID: <0.327599f2fbb7c3a44f903eca180b26ff924943f006c90664@apache.org>\r\
+        \n\r\n<?xml version='1.0' encoding='UTF-8'?><soapenv:Envelope xmlns:soapenv=\"\
+        http://schemas.xmlsoap.org/soap/envelope/\"><soapenv:Header/><soapenv:Body><ns1:reponseImpressionEtiquette\
+        \ xmlns:ns1=\"http://impression.service.web.etiquette.geodis.com\"><ns1:codeAttachement>cid:127599f2fbb7c3a44f903eca180b26ff924943f006c90664@apache.org</ns1:codeAttachement><ns1:ucar\
+        \ xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:nil=\"1\"/><ns1:paydst>FR</ns1:paydst><ns1:cpodst>69100</ns1:cpodst><ns1:locdst>VILLEURBANNE</ns1:locdst><ns1:reseau>M</ns1:reseau><ns1:priorite>2</ns1:priorite><ns1:codire>069</ns1:codire><ns1:cabRouting>2LM2069</ns1:cabRouting><ns1:infoColis><ns1:codumg>PC</ns1:codumg><ns1:numero>1</ns1:numero><ns1:cab>JVGTC1597870000000130</ns1:cab><ns1:cabclt>PACK0000003</ns1:cabclt></ns1:infoColis></ns1:reponseImpressionEtiquette></soapenv:Body></soapenv:Envelope>\r\
+        \n--MIMEBoundary_027599f2fbb7c3a44f903eca180b26ff924943f006c90664\r\nContent-Type:\
+        \ application/octet-stream\r\nContent-Transfer-Encoding: binary\r\nContent-ID:\
+        \ <127599f2fbb7c3a44f903eca180b26ff924943f006c90664@apache.org>\r\n\r\n^XA\r\
+        \n^PR7,7,8^MCY^LRN^FWN^CFD,24^LH10,15^CI0^MNY^MTD^MD0^PON^PMN\r\n^LL1080\r\
+        \n^FO0,0^GB830,0,3,B,0^FS\r\n^FO115,0^GB0,120,3,B,0^FS\r\n^FO320,0^GB0,120,3,B,0^FS\r\
+        \n^FO576,0^GB0,120,3,B,0^FS\r\n^FO576,60^GB252,0,3,B,0^FS\r\n^FO0,120^GB830,0,3,B,0^FS\r\
+        \n^FO216,120^GB0,256,3,B,0^FS\r\n^FO560,120^GB0,56,3,B,0^FS\r\n^FO0,176^GB830,0,3,B,0^FS\r\
+        \n^FO0,278^GB216,0,3,B,0^FS\r\n^FO0,376^GB830,0,3,B,0^FS\r\n^FO0,416^GB830,0,1,B,0^FS\r\
+        \n^FX --DEBUT IMPRESSION DONNEES-- ^FS\r\n^A0N,135,110^FO5,13^CI0^FDM^FS\r\
+        \n^A0N,90,80^FO80,47^CI0^FD2^FS\r\n^A0N,110,120^FO120,30^CI0^FD0^FS\r\n^A0N,140,130^FO180,10^CI0^FD69^FS\r\
+        \n^A0N,60,70^FO590,10^CI0^FD^FS\r\n^A0N,60,70^FO590,68^CI0^FD^FS\r\n^A0N,25,18^FO0,128^CI0^FD159\
+        \ - FE LILLE^FS\r\n^A0N,25,18^FO0,152^CI0^FDTel: 0892052828^FS\r\n^A0N,25,18^FO224,152^CI0^FDShp:^FS\r\
+        \n^A0N,45,30^FO260,136^CI0^FD00000001^FS\r\n^A0N,25,18^FO376,152^CI0^FDfrom^FS\r\
+        \n^A0N,45,30^FO416,136^CI0^FD09/06/2021^FS\r\n^A0N,45,30^FO568,136^CI0^FD^FS\r\
+        \n^A0N,38,20^FO0,180^CI0^FDMY COMPANY  SAN FRANC^FS\r\n^A0N,38,20^FO0,214^CI0^FDFR\
+        \ 69 VILLEURBANNE^FS\r\n^A0N,38,20^FO0,248^CI0^FD1 650 691-3277^FS\r\n^A0N,45,35^FO228,184^CI0^FDCARRIER\
+        \ LABEL TEST CUSTOMER^FS\r\n^A0N,30,25^FO228,224^CI0^FD27 RUE HENRI ROLLAND^FS\r\
+        \n^A0N,30,25^FO228,254^CI0^FD^FS\r\n^A0N,45,35^FO228,284^CI0^FDFR 69100 VILLEURBANNE^FS\r\
+        \n^A0N,45,35^FO228,336^CI0^FDCARRIER LABEL TEST CUSTOMER^FS\r\n^A0N,25,18^FO0,288^CI0^FDUM^FS\r\
+        \n^A0N,25,18^FO0,320^CI0^FDWGHT^FS\r\n^A0N,25,18^FO0,352^CI0^FDVOL^FS\r\n\
+        ^A0N,37,25^FO80,284^CI0^FD1/1^FS\r\n^A0N,37,25^FO80,316^CI0^FD1.2/1.2^FS\r\
+        \n^A0N,37,25^FO80,348^CI0^FD-/-^FS\r\n^A0N,25,18^FO0,388^CI0^FDRef2 clt :^FS\r\
+        \n^A0N,30,25^FO90,384^CI0^FD^FS\r\n^A0N,25,18^FO0,428^CI0^FDRef colis :^FS\r\
+        \n^A0N,30,25^FO90,424^CI0^FDPACK0000003^FS\r\n^FO0,456^GB830,0,1,B,0^FS\r\n\
+        ^BY3^FO49,732^BCN,180,N,N,N,A^FN1^FS\r\n^A0N,24,24^FO138,922^CI0^FN2^FS\r\n\
+        ^FN1^FDJVGTC1597870000000130^FS\r\n^FN2^FDJVGTC1597870000000130^FS\r\n^BY3^FO280,470^BCN,180,N,N,N,A^FN3^FS\r\
+        \n^A0N,24,24^FO420,655^CI0^FN4^FS\r\n^FN3^FD2LM2069^FS\r\n^FN4^FD2LM2069^FS\r\
+        \n^A0N,35,35^FO640,980^CI0^FD^FS\r\n^FO0,1000^GB840,0,2,B,0^FS\r\n^FO0,1037^GB840,0,2,B,0^FS\r\
+        \n^A0N,32,28^FO5,1006^CI0^FD^FS\r\n^FX --FIN IMPRESSION DONNEES-- ^FS\r\n\
+        ^PQ1,0,1,Y\r\n^XZ\r\n\r\n--MIMEBoundary_027599f2fbb7c3a44f903eca180b26ff924943f006c90664--\r\
+        \n"
+    headers:
+      Connection:
+      - keep-alive
+      Content-Type:
+      - multipart/related; boundary="MIMEBoundary_027599f2fbb7c3a44f903eca180b26ff924943f006c90664";
+        type="text/xml"; start="<0.327599f2fbb7c3a44f903eca180b26ff924943f006c90664@apache.org>"
+      Date:
+      - Tue, 08 Jun 2021 17:07:18 GMT
+      Set-Cookie:
+      - NSC_JOaej3fgcb2frlldhm34a0bv1wqbpdp=ffffffff0949c64645525d5f4f58455e445a4a4229f2;expires=Tue,
+        08-Jun-2021 17:09:18 GMT;path=/;secure;httponly
+      Transfer-Encoding:
+      - chunked
+    status:
+      code: 200
+      message: OK
+version: 1

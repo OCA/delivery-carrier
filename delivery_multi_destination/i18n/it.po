@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-15 18:21+0000\n"
-"PO-Revision-Date: 2024-08-21 16:06+0000\n"
+"PO-Revision-Date: 2025-11-10 11:10+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -17,12 +17,22 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.10.4\n"
+
+#. module: delivery_multi_destination
+#: model:ir.model.fields.selection,name:delivery_multi_destination.selection__delivery_carrier__delivery_type__base_on_destination
+msgid "Based on Destination"
+msgstr "In base alla destinazione"
 
 #. module: delivery_multi_destination
 #: model:delivery.carrier,name:delivery_multi_destination.delivery_carrier_multi_child_1
 msgid "Belgium"
 msgstr "Belgio"
+
+#. module: delivery_multi_destination
+#: model:ir.model,name:delivery_multi_destination.model_choose_delivery_carrier
+msgid "Delivery Carrier Selection Wizard"
+msgstr "Procedura guidata selezione corriere"
 
 #. module: delivery_multi_destination
 #: model:ir.model.fields,field_description:delivery_multi_destination.field_delivery_carrier__destination_type
@@ -40,31 +50,42 @@ msgid "Destinations"
 msgstr "Destinazioni"
 
 #. module: delivery_multi_destination
+#. odoo-python
+#: code:addons/delivery_multi_destination/wizards/choose_delivery_carrier.py:0
+#, python-format
+msgid "Error"
+msgstr "Errore"
+
+#. module: delivery_multi_destination
+#. odoo-python
+#: code:addons/delivery_multi_destination/models/delivery_carrier.py:0
+#, python-format
+msgid "Error: this delivery method is not available for this address."
+msgstr ""
+"Errore: questo metodo di consegna non è disponibile per questo indirizzo."
+
+#. module: delivery_multi_destination
 #: model:delivery.carrier,name:delivery_multi_destination.delivery_carrier_multi_child_2
 msgid "France"
 msgstr "Francia"
 
 #. module: delivery_multi_destination
 #: model:delivery.carrier,name:delivery_multi_destination.delivery_carrier_multi
-#: model:product.product,name:delivery_multi_destination.product_product_delivery_carrier_multi
 #: model:product.template,name:delivery_multi_destination.product_product_delivery_carrier_multi_product_template
 msgid "International Carrier Inc."
 msgstr "Corriere internazionale Inc."
 
 #. module: delivery_multi_destination
-#: model:product.product,name:delivery_multi_destination.product_product_delivery_carrier_multi_child_1
 #: model:product.template,name:delivery_multi_destination.product_product_delivery_carrier_multi_child_1_product_template
 msgid "International Carrier Inc., Belgium"
 msgstr "Corriere internazionale Inc., Belgio"
 
 #. module: delivery_multi_destination
-#: model:product.product,name:delivery_multi_destination.product_product_delivery_carrier_multi_child_2
 #: model:product.template,name:delivery_multi_destination.product_product_delivery_carrier_multi_child_2_product_template
 msgid "International Carrier Inc., France"
 msgstr "Corriere internazionale Inc., Francia"
 
 #. module: delivery_multi_destination
-#: model:product.product,name:delivery_multi_destination.product_product_delivery_carrier_multi_child_3
 #: model:product.template,name:delivery_multi_destination.product_product_delivery_carrier_multi_child_3_product_template
 msgid "International Carrier Inc., United Kingdom"
 msgstr "Corriere internazionale Inc., Regno Unito"
@@ -85,11 +106,17 @@ msgid "Parent carrier"
 msgstr "Corriere partner"
 
 #. module: delivery_multi_destination
+#: model:ir.model.fields,field_description:delivery_multi_destination.field_delivery_carrier__delivery_type
+msgid "Provider"
+msgstr "Fornitore"
+
+#. module: delivery_multi_destination
 #: model:ir.model,name:delivery_multi_destination.model_delivery_carrier
 msgid "Shipping Methods"
 msgstr "Metodi di spedizione"
 
 #. module: delivery_multi_destination
+#. odoo-python
 #: code:addons/delivery_multi_destination/models/delivery_carrier.py:0
 #, python-format
 msgid "There is no matching delivery rule."
@@ -100,14 +127,5 @@ msgstr "Non c'è una regola di consegna corrispondente."
 msgid "United Kingdom"
 msgstr "Regno Unito"
 
-#. module: delivery_multi_destination
-#: model:product.product,uom_name:delivery_multi_destination.product_product_delivery_carrier_multi
-#: model:product.product,uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_1
-#: model:product.product,uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_2
-#: model:product.product,uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_3
-#: model:product.template,uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_1_product_template
-#: model:product.template,uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_2_product_template
-#: model:product.template,uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_3_product_template
-#: model:product.template,uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_product_template
-msgid "Units"
-msgstr "Unità"
+#~ msgid "Units"
+#~ msgstr "Unità"

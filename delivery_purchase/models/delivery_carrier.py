@@ -55,7 +55,8 @@ class DeliveryCarrier(models.Model):
             )
 
     def purchase_fixed_rate_shipment(self, order):
-        carrier = self._match_address(order.partner_id)
+        partner = order.dest_address_id or order.partner_id
+        carrier = self._match_address(partner)
         if not carrier:
             return {
                 "success": False,
@@ -79,7 +80,8 @@ class DeliveryCarrier(models.Model):
         }
 
     def purchase_base_on_rule_rate_shipment(self, order):
-        carrier = self._match_address(order.partner_id)
+        partner = order.dest_address_id or order.partner_id
+        carrier = self._match_address(partner)
         if not carrier:
             return {
                 "success": False,
@@ -123,7 +125,8 @@ class DeliveryCarrier(models.Model):
     def purchase_base_on_rule_send_shipping(self, pickings):
         res = []
         for p in pickings:
-            carrier = self._match_address(p.partner_id)
+            partner = p.purchase_id.dest_address_id or p.partner_id
+            carrier = self._match_address(partner)
             if not carrier:
                 raise ValidationError(_("There is no matching delivery rule."))
             res = res + [

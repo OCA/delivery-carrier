@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-01-23 15:06+0000\n"
+"PO-Revision-Date: 2025-10-15 09:43+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #. module: delivery_schenker
 #: model:ir.model.fields.selection,name:delivery_schenker.selection__delivery_carrier__schenker_barcode_format__a4
@@ -336,7 +336,7 @@ msgstr ""
 #. module: delivery_schenker
 #: model:ir.model.fields,field_description:delivery_schenker.field_delivery_carrier__schenker_express
 msgid "Express"
-msgstr "Espressa"
+msgstr "Espresso"
 
 #. module: delivery_schenker
 #: model:ir.model.fields,field_description:delivery_schenker.field_delivery_carrier__schenker_food_related
@@ -469,7 +469,7 @@ msgstr "Spazio pallet"
 #. module: delivery_schenker
 #: model:ir.model.fields,field_description:delivery_schenker.field_delivery_carrier__schenker_pharmaceuticals
 msgid "Pharmaceuticals"
-msgstr "Farmaci"
+msgstr "Farmaceutici"
 
 #. module: delivery_schenker
 #: model:ir.model.fields.selection,name:delivery_schenker.selection__delivery_carrier__schenker_measure_unit__pieces
@@ -484,7 +484,7 @@ msgstr "Porto-a-porta"
 #. module: delivery_schenker
 #: model:ir.model.fields,field_description:delivery_schenker.field_delivery_carrier__delivery_type
 msgid "Provider"
-msgstr "Provider"
+msgstr "Fornitore"
 
 #. module: delivery_schenker
 #: model:ir.model.fields.selection,name:delivery_schenker.selection__delivery_carrier__schenker_service_land__ecsp

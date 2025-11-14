@@ -14,8 +14,18 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: delivery_multi_destination
+#: model:ir.model.fields.selection,name:delivery_multi_destination.selection__delivery_carrier__delivery_type__base_on_destination
+msgid "Based on Destination"
+msgstr ""
+
+#. module: delivery_multi_destination
 #: model:delivery.carrier,name:delivery_multi_destination.delivery_carrier_multi_child_1
 msgid "Belgium"
+msgstr ""
+
+#. module: delivery_multi_destination
+#: model:ir.model,name:delivery_multi_destination.model_choose_delivery_carrier
+msgid "Delivery Carrier Selection Wizard"
 msgstr ""
 
 #. module: delivery_multi_destination
@@ -31,6 +41,20 @@ msgstr ""
 #. module: delivery_multi_destination
 #: model_terms:ir.ui.view,arch_db:delivery_multi_destination.view_delivery_carrier_form
 msgid "Destinations"
+msgstr ""
+
+#. module: delivery_multi_destination
+#. odoo-python
+#: code:addons/delivery_multi_destination/wizards/choose_delivery_carrier.py:0
+#, python-format
+msgid "Error"
+msgstr ""
+
+#. module: delivery_multi_destination
+#. odoo-python
+#: code:addons/delivery_multi_destination/models/delivery_carrier.py:0
+#, python-format
+msgid "Error: this delivery method is not available for this address."
 msgstr ""
 
 #. module: delivery_multi_destination
@@ -72,6 +96,11 @@ msgstr ""
 #. module: delivery_multi_destination
 #: model:ir.model.fields,field_description:delivery_multi_destination.field_delivery_carrier__parent_id
 msgid "Parent carrier"
+msgstr ""
+
+#. module: delivery_multi_destination
+#: model:ir.model.fields,field_description:delivery_multi_destination.field_delivery_carrier__delivery_type
+msgid "Provider"
 msgstr ""
 
 #. module: delivery_multi_destination

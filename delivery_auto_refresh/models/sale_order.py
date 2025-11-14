@@ -121,6 +121,12 @@ class SaleOrder(models.Model):
         if new_vals:
             delivery_line.write(new_vals)
 
+    def _create_delivery_line(self, carrier, price_unit):
+        # If the order isn't stored in the db the line creation is going to fail
+        if not self._origin:
+            return self.env["sale.order.line"]
+        return super()._create_delivery_line(carrier, price_unit)
+
     def _auto_refresh_delivery(self):
         self.ensure_one()
         if (

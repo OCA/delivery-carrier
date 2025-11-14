@@ -6,7 +6,7 @@
 
 {
     "name": "Multiple destinations for the same delivery method",
-    "version": "16.0.1.0.0",
+    "version": "16.0.2.0.0",
     "category": "Delivery",
     "website": "https://github.com/OCA/delivery-carrier",
     "author": "Tecnativa, Odoo Community Association (OCA)",

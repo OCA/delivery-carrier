@@ -1,0 +1,4 @@
+Introduced 'based on destination' delivery type. This is the delivery type used
+by all multi-destination carriers instead of 'fixed'. Consequently, destination
+type has been turned into a computed field that checks if the delivery type is
+'based on destination' or not.

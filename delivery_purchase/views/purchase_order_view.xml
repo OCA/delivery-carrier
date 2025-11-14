@@ -14,7 +14,7 @@
                         name="delivery_price"
                         widget='monetary'
                         options="{'currency_field': 'currency_id'}"
-                        attrs="{'invisible': [('carrier_id', '=', False)]}"
+                        attrs="{'invisible': [('carrier_id', '=', False)], 'readonly': [('state', 'in', ('purchase', 'done', 'cancel'))]}"
                     />
                 </div>
             </div>

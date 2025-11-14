@@ -21,9 +21,19 @@ msgstr ""
 "X-Generator: Weblate 4.17\n"
 
 #. module: delivery_multi_destination
+#: model:ir.model.fields.selection,name:delivery_multi_destination.selection__delivery_carrier__delivery_type__base_on_destination
+msgid "Based on Destination"
+msgstr ""
+
+#. module: delivery_multi_destination
 #: model:delivery.carrier,name:delivery_multi_destination.delivery_carrier_multi_child_1
 msgid "Belgium"
 msgstr "Bélgica"
+
+#. module: delivery_multi_destination
+#: model:ir.model,name:delivery_multi_destination.model_choose_delivery_carrier
+msgid "Delivery Carrier Selection Wizard"
+msgstr ""
 
 #. module: delivery_multi_destination
 #: model:ir.model.fields,field_description:delivery_multi_destination.field_delivery_carrier__destination_type
@@ -41,31 +51,41 @@ msgid "Destinations"
 msgstr "Destinos"
 
 #. module: delivery_multi_destination
+#. odoo-python
+#: code:addons/delivery_multi_destination/wizards/choose_delivery_carrier.py:0
+#, python-format
+msgid "Error"
+msgstr ""
+
+#. module: delivery_multi_destination
+#. odoo-python
+#: code:addons/delivery_multi_destination/models/delivery_carrier.py:0
+#, python-format
+msgid "Error: this delivery method is not available for this address."
+msgstr ""
+
+#. module: delivery_multi_destination
 #: model:delivery.carrier,name:delivery_multi_destination.delivery_carrier_multi_child_2
 msgid "France"
 msgstr "Francia"
 
 #. module: delivery_multi_destination
 #: model:delivery.carrier,name:delivery_multi_destination.delivery_carrier_multi
-#: model:product.product,name:delivery_multi_destination.product_product_delivery_carrier_multi
 #: model:product.template,name:delivery_multi_destination.product_product_delivery_carrier_multi_product_template
 msgid "International Carrier Inc."
 msgstr "Transportes Internacionales Inc."
 
 #. module: delivery_multi_destination
-#: model:product.product,name:delivery_multi_destination.product_product_delivery_carrier_multi_child_1
 #: model:product.template,name:delivery_multi_destination.product_product_delivery_carrier_multi_child_1_product_template
 msgid "International Carrier Inc., Belgium"
 msgstr "Transportes Internacionales Inc., Bélgica"
 
 #. module: delivery_multi_destination
-#: model:product.product,name:delivery_multi_destination.product_product_delivery_carrier_multi_child_2
 #: model:product.template,name:delivery_multi_destination.product_product_delivery_carrier_multi_child_2_product_template
 msgid "International Carrier Inc., France"
 msgstr "Transportes Internacionales Inc., Francia"
 
 #. module: delivery_multi_destination
-#: model:product.product,name:delivery_multi_destination.product_product_delivery_carrier_multi_child_3
 #: model:product.template,name:delivery_multi_destination.product_product_delivery_carrier_multi_child_3_product_template
 msgid "International Carrier Inc., United Kingdom"
 msgstr "Transporte Internacional Inc., Reino Unido"
@@ -86,11 +106,17 @@ msgid "Parent carrier"
 msgstr "Transportista matriz"
 
 #. module: delivery_multi_destination
+#: model:ir.model.fields,field_description:delivery_multi_destination.field_delivery_carrier__delivery_type
+msgid "Provider"
+msgstr ""
+
+#. module: delivery_multi_destination
 #: model:ir.model,name:delivery_multi_destination.model_delivery_carrier
 msgid "Shipping Methods"
 msgstr "Métodos de Envío"
 
 #. module: delivery_multi_destination
+#. odoo-python
 #: code:addons/delivery_multi_destination/models/delivery_carrier.py:0
 #, python-format
 msgid "There is no matching delivery rule."
@@ -101,14 +127,5 @@ msgstr "No hay una regla de entrega coincidente."
 msgid "United Kingdom"
 msgstr "Reino Unido"
 
-#. module: delivery_multi_destination
-#: model:product.product,uom_name:delivery_multi_destination.product_product_delivery_carrier_multi
-#: model:product.product,uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_1
-#: model:product.product,uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_2
-#: model:product.product,uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_3
-#: model:product.template,uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_1_product_template
-#: model:product.template,uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_2_product_template
-#: model:product.template,uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_3_product_template
-#: model:product.template,uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_product_template
-msgid "Units"
-msgstr "Unidades"
+#~ msgid "Units"
+#~ msgstr "Unidades"
