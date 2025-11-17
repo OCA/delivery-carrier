@@ -1,6 +1,6 @@
 # generated from manifests external_dependencies
+PyPDF2
 openupgradelib
 roulier
-PyPDF2
 unidecode
 zeep
