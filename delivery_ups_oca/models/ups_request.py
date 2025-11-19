@@ -224,15 +224,20 @@ class UpsRequest:
         if partner._is_residential_address():
             address_dict["ResidentialAddressIndicator"] = ""
 
-        return dict(
+        result = dict(
             **kwargs,
             Name=((partner.parent_id or partner).name or "")[:35],
             AttentionName=(partner.name or "")[:35],
             TaxIdentificationNumber=partner.vat,
-            Phone=dict(Number=partner.phone or partner.mobile),
             EMailAddress=partner.email,
             Address=address_dict,
         )
+
+        # Only add phone if it exists
+        phone_number = partner.phone or partner.mobile
+        if phone_number:
+            result["Phone"] = dict(Number=phone_number)
+        return result
 
     def _label_data(self):
         # When PDF is selected,
