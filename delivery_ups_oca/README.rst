@@ -36,7 +36,10 @@ This module adds `UPS <https://ups.com>`__ to the available carriers.
 
 It allows you to register shippings, generate labels, get rates from
 order, read shipping states and cancel shipments using UPS webservice,
-so no need of exchanging any kind of file.
+so no need of exchanging any kind of file. The module also supports insurance for your
+shipments, allowing you to specify a percentage of the shipment value to be insured.
+Additionally, it provides paperless invoice functionality for international shipments,
+automatically sending required documentation to UPS.
 
 When a sales order is created in Odoo and the UPS carrier is assigned,
 the shipping price that will be obtained will be the price that the UPS
@@ -65,7 +68,14 @@ To configure this module, you need to:
    Select the ``ups`` delivery type and check the "Cash on Delivery"
    checkbox under the "UPS" tab. It is required to select the "UPS COD
    Funds Code" when the "Cash on Delivery" option is selected.
-
+5. To enable insurance for your shipments, set the "Declared Value (%)" field in the
+   "Insurance" section of the UPS tab. This percentage will be applied to the total
+   value of the picking to determine the insurance amount. Set to 0 to disable insurance.
+6. For paperless invoice functionality, configure the "Automatically send paperless invoice"
+   field by selecting the country groups for which you want to automatically enable
+   paperless invoices. When a delivery is created with a destination country in one of
+   these groups, the system will automatically prepare and send the required documentation
+   to UPS.
 **NOTE** You need to add an APP from https://developer.ups.com/ for
 using the webservice.
 
@@ -84,6 +94,23 @@ ship:
   in UPS.
 - If you have "Tracking state update sync" checked in the shipping
   method, a periodical state check will be done querying UPS services.
+- If you have configured a "Declared Value (%)" greater than zero in the shipping method,
+  the system will automatically calculate the insurance amount based on the total value
+  of the picking and send it to UPS when creating the shipping label. The insurance amount
+  will be visible in the UPS tracking information and will be used for claims in case of
+  loss or damage.
+- For international shipments to countries configured in the "Automatically send paperless invoice"
+  field, the system will automatically prepare and send the required documentation to UPS
+  when validating the picking. This includes:
+
+  * Commercial Invoice: Automatically generated from the related sale order's invoice
+  * Packing List: Automatically generated from the picking
+  * Additional documents: You can manually attach other required documents (like certificates
+    of origin, export licenses, etc.) to the picking using the "Paperless Document" tab
+
+  If the automatic sending fails, a warning notification will be displayed, but the validation
+  process will continue. You can also manually trigger the paperless invoice sending using
+  the "Generate Paperless Invoice" button on the picking form.
 
 Known issues / Roadmap
 ======================

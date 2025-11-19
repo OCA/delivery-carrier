@@ -79,6 +79,9 @@ License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
                         <group string="Insurance">
                             <field name="declared_amount_percentage" />
                         </group>
+                        <group string="Paperless Invoice">
+                            <field name="country_groups" widget="many2many_tags" />
+                        </group>
                     </group>
                 </page>
             </xpath>

@@ -3,6 +3,7 @@
 # Copyright 2024 Sygel - Manuel Regidor
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+import ast
 import datetime
 import json
 import logging
@@ -136,7 +137,7 @@ class UpsRequest:
         if status.status_code == 401:
             self._get_new_token()
             # Update headers with the new token
-            headers["Authorization"] = "Bearer {}".format(self.token)
+            headers["Authorization"] = "Bearer {}"
 
             # Log the retry request
             # Only include relevant parameters in the log
@@ -330,21 +331,58 @@ class UpsRequest:
                 "LabelSpecification": self._label_data(),
             }
         }
+        # Add ShipmentServiceOptions if needed
+        shipment_service_options = {}
+
+        # Add COD if enabled
         if picking.carrier_id.ups_cash_on_delivery and picking.sale_id:
-            vals["ShipmentRequest"]["Shipment"]["ShipmentServiceOptions"] = (
-                {
-                    "COD": {
-                        "CODFundsCode": picking.carrier_id.ups_cod_funds_code,
-                        "CODAmount": {
-                            "CurrencyCode": picking.sale_id.currency_id.name,
-                            "MonetaryValue": str(picking.sale_id.amount_total),
-                        },
-                    }
+            shipment_service_options["COD"] = {
+                "CODFundsCode": picking.carrier_id.ups_cod_funds_code,
+                "CODAmount": {
+                    "CurrencyCode": picking.sale_id.currency_id.name,
+                    "MonetaryValue": str(picking.sale_id.amount_total),
                 },
-            )
+            }
+
+            # Add paperless invoice if document_id exists and is not empty
+            if picking.document_id and picking.document_id.strip():
+                try:
+                    # Try to convert the document_id to a list if it's a string
+                    # representation of a list
+                    document_id = (
+                        ast.literal_eval(picking.document_id)
+                        if len(picking.document_id) > 30
+                        else picking.document_id
+                    )
+                    shipment_service_options["InternationalForms"] = {
+                        "FormType": "07",
+                        "UserCreatedForm": {"DocumentID": document_id},
+                    }
+                except (ValueError, SyntaxError):
+                    # If it's not a valid Python literal, use it as is
+                    shipment_service_options["InternationalForms"] = {
+                        "FormType": "07",
+                        "UserCreatedForm": {"DocumentID": picking.document_id},
+                    }
+
+            # Add ShipmentServiceOptions to the request if not empty
+            if shipment_service_options:
+                vals["ShipmentRequest"]["Shipment"]["ShipmentServiceOptions"] = (
+                    shipment_service_options
+                )
+
         return vals
 
     def _send_shipping(self, picking):
+        # Check if we need to send paperless invoice
+        if picking.ups_paperless_auto_send and not picking.document_id:
+            try:
+                self.carrier.ups_paperless_invoice_provider(picking)
+            except Exception as e:
+                error_msg = _("Failed to send paperless invoice: %s") % str(e)
+                _logger.error(error_msg)
+                raise UserError(error_msg) from e
+
         status = self._process_reply(
             url=f"{self.url}/api/shipments/v1/ship",
             json=self._prepare_create_shipping(picking),
@@ -542,3 +580,82 @@ class UpsRequest:
             "tracking_state": tracking_state,
             "pod": pod,
         }
+
+    def send_paperless_invoice(self, picking, paperless_document_data):
+        """Send paperless invoice documents to UPS"""
+        if not paperless_document_data:
+            raise UserError(_("No documents to send!"))
+
+        request_data = {
+            "UploadRequest": {
+                "Request": {"TransactionReference": {"CustomerContext": ""}},
+                "ShipperNumber": self.shipper_number,
+                "UserCreatedForm": paperless_document_data,
+            }
+        }
+
+        headers = {
+            "ShipperNumber": self.shipper_number,
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "Authorization": "Bearer {}".format(self.token),
+        }
+
+        url = f"{self.url}/api/paperlessdocuments/v1/upload"
+
+        # Log request details
+        # Create a copy of the request data to mask sensitive information
+        debug_request = json.loads(json.dumps(request_data))
+        for doc in debug_request.get("UploadRequest", {}).get(
+            "UserCreatedForm", []
+        ):
+            if "UserCreatedFormFile" in doc:
+                doc["UserCreatedFormFile"] = "***MASKED***"
+        _logger.debug(
+            "UPS Paperless Invoice Request: URL=%s, Headers=%s, Data=%s",
+            url,
+            headers,
+            debug_request,
+        )
+
+        try:
+            response = requests.request(
+                "POST",
+                url,
+                headers=headers,
+                data=json.dumps(request_data),
+                timeout=10,
+            )
+
+            # Log response
+            _logger.debug(
+                "UPS Paperless Invoice Response: Status=%s, Content=%s",
+                response.status_code,
+                response.text,
+            )
+
+            if response.status_code in [200, 201]:
+                invoice_response = response.json()
+                document_id = (
+                    invoice_response.get("UploadResponse")
+                    and invoice_response.get("UploadResponse").get(
+                    "FormsHistoryDocumentID"
+                )
+                    and invoice_response.get("UploadResponse")
+                    .get("FormsHistoryDocumentID")
+                    .get("DocumentID")
+                )
+                picking.document_id = document_id
+                return document_id
+            else:
+                errors_message = "Paperless Invoice: {}".format(
+                    json.loads(response.text).get("response")
+                    and json.loads(response.text).get("response").get("errors")
+                    and json.loads(response.text)
+                    .get("response")
+                    .get("errors")[0]
+                    .get("message")
+                )
+                raise UserError(errors_message) from None
+        except Exception as e:
+            raise UserError(str(e)) from e

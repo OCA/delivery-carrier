@@ -22,6 +22,7 @@
     ],
     "data": [
         "data/stock_package_type_data.xml",
+        "security/ir.model.access.csv",
         "views/delivery_carrier_view.xml",
         "views/stock_picking_view.xml",
     ],

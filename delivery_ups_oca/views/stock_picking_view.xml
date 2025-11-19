@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!--
 Copyright 2022 Tecnativa - Víctor Martínez
+Copyright 2025 Nitrokey GmbH
 License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 -->
 <odoo>
@@ -18,6 +19,60 @@ License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
                     type="object"
                     invisible="not carrier_tracking_ref or delivery_type != 'ups' or state != 'done'"
                 />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="ups_shipping_delivery_order_view" model="ir.ui.view">
+        <field name="name">stock.picking.ups.paperless</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position='inside'>
+                <page string="UPS Paperless Invoice" invisible="delivery_type != 'ups'">
+                    <group>
+                        <group>
+                            <field
+                                name="document_id"
+                                invisible="not ups_paperless_auto_send"
+                            />
+                            <button
+                                name="generate_paperless_invoice"
+                                string=" Generate Paperless Invoice"
+                                type='object'
+                                class="fa fa-arrow-right oe_link"
+                                invisible="state != 'done' or ups_paperless_auto_send"
+                            />
+                        </group>
+                        <field name="ups_paperless_document">
+                            <list nolabel="1" editable="bottom">
+                                <field name="ups_paperless_file" filename="file_name" />
+                                <field name="file_name" />
+                                <field name="ups_document_type" />
+                                <button
+                                    name="ups_paperless_file_download"
+                                    string="File Download"
+                                    type="object"
+                                    class="fa fa-arrow-right oe_link"
+                                />
+                            </list>
+                        </field>
+
+                        <group>
+                            <field name="ups_paperless_auto_send" />
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+            <xpath expr="//group[@name='carrier_data']" position="inside">
+                <field
+                    name="ups_cod_amount"
+                    readonly="1"
+                    invisible="delivery_type != 'ups'"
+                />
+            </xpath>
+            <xpath expr="//field[@name='origin']" position="after">
+                <field name="ups_description" invisible="delivery_type != 'ups'" />
             </xpath>
         </field>
     </record>

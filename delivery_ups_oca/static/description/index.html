@@ -378,7 +378,10 @@ ul.auto-toc {
 <p>This module adds <a class="reference external" href="https://ups.com">UPS</a> to the available carriers.</p>
 <p>It allows you to register shippings, generate labels, get rates from
 order, read shipping states and cancel shipments using UPS webservice,
-so no need of exchanging any kind of file.</p>
+so no need of exchanging any kind of file. The module also supports insurance for your
+shipments, allowing you to specify a percentage of the shipment value to be insured.
+Additionally, it provides paperless invoice functionality for international shipments,
+automatically sending required documentation to UPS.</p>
 <p>When a sales order is created in Odoo and the UPS carrier is assigned,
 the shipping price that will be obtained will be the price that the UPS
 webservice estimates according to the order information (address and
@@ -414,6 +417,14 @@ state check will be done querying UPS services.</li>
 Select the <tt class="docutils literal">ups</tt> delivery type and check the “Cash on Delivery”
 checkbox under the “UPS” tab. It is required to select the “UPS COD
 Funds Code” when the “Cash on Delivery” option is selected.</li>
+<li><li>To enable insurance for your shipments, set the “Declared Value (%)” field in the
+“Insurance” section of the UPS tab. This percentage will be applied to the total
+value of the picking to determine the insurance amount. Set to 0 to disable insurance.</li>
+<li>For paperless invoice functionality, configure the “Automatically send paperless invoice”
+field by selecting the country groups for which you want to automatically enable
+paperless invoices. When a delivery is created with a destination country in one of
+these groups, the system will automatically prepare and send the required documentation
+to UPS.</li>
 </ol>
 <p><strong>NOTE</strong> You need to add an APP from <a class="reference external" href="https://developer.ups.com/">https://developer.ups.com/</a> for
 using the webservice.</p>
@@ -423,15 +434,36 @@ using the webservice.</p>
 <p>You have to set the created shipping method in the delivery order to
 ship:</p>
 <ul class="simple">
-<li>When the picking is ‘Transferred’, a <em>Create Shipping Label</em> button
-appears. Just click on it, and if all went well, the label will be
-‘attached’.</li>
-<li>If the shipment creation process fails, a validation error will appear
-displaying UPS error.</li>
-<li>When the delivery order is cancelled, it’s automatically cancelled too
-in UPS.</li>
-<li>If you have “Tracking state update sync” checked in the shipping
-method, a periodical state check will be done querying UPS services.</li>
+<li><p class="first">When the picking is ‘Transferred’, a <em>Create Shipping Label</em> button appears. Just
+click on it, and if all went well, the label will be ‘attached’.</p>
+</li>
+<li><p class="first">If the shipment creation process fails, a validation error will appear displaying UPS
+error.</p>
+</li>
+<li><p class="first">When the delivery order is cancelled, it’s automatically cancelled too in UPS.</p>
+</li>
+<li><p class="first">If you have “Tracking state update sync” checked in the shipping method, a periodical
+state check will be done querying UPS services.</p>
+</li>
+<li><p class="first">If you have configured a “Declared Value (%)” greater than zero in the shipping method,
+the system will automatically calculate the insurance amount based on the total value
+of the picking and send it to UPS when creating the shipping label. The insurance amount
+will be visible in the UPS tracking information and will be used for claims in case of
+loss or damage.</p>
+</li>
+<li><p class="first">For international shipments to countries configured in the “Automatically send paperless invoice”
+field, the system will automatically prepare and send the required documentation to UPS
+when validating the picking. This includes:</p>
+<ul class="simple">
+<li>Commercial Invoice: Automatically generated from the related sale order’s invoice</li>
+<li>Packing List: Automatically generated from the picking</li>
+<li>Additional documents: You can manually attach other required documents (like certificates
+of origin, export licenses, etc.) to the picking using the “Paperless Document” tab</li>
+</ul>
+<p>If the automatic sending fails, a warning notification will be displayed, but the validation
+process will continue. You can also manually trigger the paperless invoice sending using
+the “Generate Paperless Invoice” button on the picking form.</p>
+</li>
 </ul>
 </div>
 <div class="section" id="known-issues-roadmap">
