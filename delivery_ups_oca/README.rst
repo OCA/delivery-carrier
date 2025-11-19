@@ -110,6 +110,7 @@ Authors
 * Hunki Enterprises BV
 * Tecnativa
 * ForgeFlow
+* Nitrokey
 
 Contributors
 ------------
@@ -128,6 +129,10 @@ Contributors
 - `Sygel <https://www.sygel.es>`__:
 
   - Manuel Regidor
+
+- `Nitrokey <https://www.nitrokey.com>`__:
+
+  - Jan Suhr
 
 Maintainers
 -----------

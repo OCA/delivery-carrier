@@ -46,6 +46,7 @@ class TestDeliveryUpsBase(common.TransactionCase):
                 "ups_package_dimension_code": "IN",
                 "ups_package_weight_code": "LBS",
                 "ups_cash_on_delivery": False,
+                "declared_amount_percentage": 80,
             }
         )
         cls.company = cls.env.ref("base.main_company")
@@ -884,3 +885,53 @@ class TestDeliveryUps(TestDeliveryUpsBase):
         address_lines = ups_request._build_address_lines(self.partner)
         self.assertEqual(len(address_lines), 1)
         self.assertEqual(address_lines[0], "12345 Short Street Name Suite 678")
+
+    def check_insurance_packages(self, carrier, picking):
+        ups_request = UpsRequest(carrier)
+        vals = ups_request._prepare_create_shipping(picking)
+        packages = vals["ShipmentRequest"]["Shipment"]["Package"]
+        for package in packages:
+            self.assertIn("PackageServiceOptions", package)
+            self.assertIn("DeclaredValue", package["PackageServiceOptions"])
+            self.assertEqual(
+                package["PackageServiceOptions"]["DeclaredValue"]["MonetaryValue"],
+                "8.0",
+            )
+
+    def test_insurance_with_packages(self):
+        """Test that insurance is added when packages exist"""
+        pack_action = self.picking.action_put_in_pack()
+        pack_action_ctx = pack_action["context"]
+        pack_wiz = (
+            self.env["choose.delivery.package"]
+            .with_context(**pack_action_ctx)
+            .create(
+                {"delivery_package_type_id": self.carrier.ups_default_packaging_id.id}
+            )
+        )
+        pack_wiz.action_put_in_pack()
+
+        self.carrier.write({"ups_use_packages_from_picking": True})
+        self.check_insurance_packages(self.carrier, self.picking)
+
+    def test_insurance_without_packages(self):
+        """Test insurance when no packages are defined"""
+        self.picking.move_line_ids.write({"result_package_id": False})
+        self.carrier.write({"ups_use_packages_from_picking": False})
+        self.check_insurance_packages(self.carrier, self.picking)
+
+    def test_insurance_without_packages_cod(self):
+        """Test insurance when no packages are defined and COD option"""
+        self.carrier.write(
+            {
+                "ups_use_packages_from_picking": False,
+                "ups_cash_on_delivery": True,
+            }
+        )
+        ups_request = UpsRequest(self.carrier)
+        vals = ups_request._prepare_create_shipping(self.picking)
+        shipment = vals["ShipmentRequest"]["Shipment"]
+        self.assertIn("ShipmentServiceOptions", shipment)
+        service_option = shipment["ShipmentServiceOptions"][0]
+        self.assertIn("COD", service_option)
+        self.assertEqual(service_option["COD"]["CODAmount"]["MonetaryValue"], "11.9")
