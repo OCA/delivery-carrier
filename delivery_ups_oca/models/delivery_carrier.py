@@ -111,6 +111,11 @@ class DeliveryCarrier(models.Model):
         help="If the destination country is in one of these country groups, "
         "the paperless invoice option will be automatically enabled.",
     )
+    ups_negotiated_rates = fields.Boolean(
+        string="Negotiated Rates",
+        default=True,
+        help="If checked, UPS will use the account's negotiated rates for shipping.",
+    )
 
     def _ups_get_response_price(self, total_charges, currency, company):
         """We need to convert the price if the currency is different."""

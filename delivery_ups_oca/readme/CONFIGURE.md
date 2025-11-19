@@ -12,7 +12,10 @@ To configure this module, you need to:
     Select the `ups` delivery type and check the "Cash on Delivery"
     checkbox under the "UPS" tab. It is required to select the "UPS COD
     Funds Code" when the "Cash on Delivery" option is selected.
-5. To enable insurance for your shipments, set the "Declared Value (%)" field in the
+5. The "Negotiated Rates" checkbox is enabled by default. When checked, UPS will use your
+   account's negotiated rates for shipping cost calculations. If your UPS account does not
+   have negotiated rates, you should uncheck this option.
+6. To enable insurance for your shipments, set the "Declared Value (%)" field in the
    "Insurance" section of the UPS tab. This percentage will be applied to the total
    value of the picking to determine the insurance amount. Set to 0 to disable insurance.
 6. For paperless invoice functionality, configure the "Automatically send paperless invoice"
