@@ -4,3 +4,4 @@ from . import stock_package_type
 from . import stock_picking
 from . import ups_request
 from . import ups_paperless_document
+from . import res_partner
