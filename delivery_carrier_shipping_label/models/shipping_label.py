@@ -13,7 +13,7 @@ class ShippingLabel(models.Model):
     _description = "Shipping Label"
 
     file_type = fields.Char(string="File type", default="pdf")
-    package_id = fields.Many2one(comodel_name="stock.quant.package", string="Pack")
+    package_id = fields.Many2one(comodel_name="stock.package", string="Pack")
     attachment_id = fields.Many2one(
         comodel_name="ir.attachment",
         string="Attachement",
