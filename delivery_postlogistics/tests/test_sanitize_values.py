@@ -14,7 +14,6 @@ class TestSanitizeValues(TestPostlogisticsCommon):
         cls.partner = cls.env["res.partner"].create(
             {
                 "name": "‘P<o\\t|at>o’",
-                "mobile": "+33123456789>",
                 "phone": ">+33123456789<",
                 "email": "w<>|\\hatever@whatever.too",
                 "street": "42\\|<>whateverstraße",

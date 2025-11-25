@@ -376,18 +376,15 @@ Please use _get_quant_packages_from_picking instead."
         """
         partner = self.get_recipient_partner_hook()
 
-        partner_mobile = sanitize_string(
-            self.delivery_mobile or partner.mobile, sanitize_mapping
-        )
         partner_phone = sanitize_string(
             self.delivery_phone or partner.phone, sanitize_mapping
         )
 
         if partner.postlogistics_notification == "email" and not partner.email:
             raise UserError(self.env._("Email is required for notification."))
-        elif partner.postlogistics_notification == "sms" and not partner_mobile:
+        elif partner.postlogistics_notification == "sms" and not partner_phone:
             raise UserError(
-                self.env._("Mobile number is required for sms notification.")
+                self.env._("Phone number is required for sms notification.")
             )
         elif partner.postlogistics_notification == "phone" and not partner_phone:
             raise UserError(
@@ -443,10 +440,8 @@ Please use _get_quant_packages_from_picking instead."
             recipient["email"] = sanitize_string(partner.email, sanitize_mapping)
         elif partner.postlogistics_notification == "phone":
             recipient["phone"] = sanitize_string(partner_phone, sanitize_mapping)
-            if partner_mobile:
-                recipient["mobile"] = partner_mobile
         elif partner.postlogistics_notification == "sms":
-            recipient["mobile"] = partner_mobile
+            recipient["mobile"] = partner_phone
 
         return recipient
 
