@@ -1,13 +1,12 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo.addons.base.tests.common import BaseCommon
+from odoo.addons.delivery.tests.common import DeliveryCommon
 
 
-class TestPickingOption(BaseCommon):
+class TestPickingOption(DeliveryCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.carrier = cls.env.ref("delivery.delivery_carrier")
         cls.option1 = cls.env["delivery.carrier.option"].create(
             {
                 "name": "Option1",
