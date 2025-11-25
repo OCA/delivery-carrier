@@ -162,7 +162,6 @@ class TestPostlogisticsCommon(BaseCommon):
         for product, qty in product_matrix:
             self.env["stock.move"].create(
                 {
-                    "name": product.name,
                     "product_id": product.id,
                     "product_uom_qty": qty,
                     "product_uom": product.uom_id.id,
@@ -171,9 +170,13 @@ class TestPostlogisticsCommon(BaseCommon):
                     "location_dest_id": self.customer_location.id,
                 }
             )
-        choose_delivery_package_wizard = self.env["choose.delivery.package"].create(
-            {"picking_id": picking.id, "delivery_package_type_id": package_type.id}
+        package = self.env["stock.package"].create(
+            {
+                "name": "testpackage",
+                "package_type_id": package_type.id,
+            }
         )
         picking.action_assign()
-        choose_delivery_package_wizard.action_put_in_pack()
+        for stock_move_line in picking.move_line_ids:
+            stock_move_line.result_package_id = package.id
         return picking

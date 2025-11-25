@@ -155,7 +155,7 @@ class PostlogisticsWebService:
         package_number = picking.get_package_number_hook(package)
         if not package_number:
             package_number = index
-        return "%02d%s" % (package_number, picking_num[-6:].zfill(6))
+        return f"{int(package_number):02d}{picking_num[-6:].zfill(6)}"
 
     def _prepare_item_list(self, picking, recipient, packages):
         """Return a list of item made from the pickings"""
@@ -288,8 +288,9 @@ class PostlogisticsWebService:
             raise UserError(
                 delivery_carrier.env._(
                     "Postlogistics service is not accessible at the moment. Error code:"
-                    " %s. "
-                    "Please try again later." % (response.status_code or "None")
+                    " %(code)s. "
+                    "Please try again later.",
+                    code=response.status_code or "None",
                 )
             ) from error
 
@@ -394,11 +395,10 @@ class PostlogisticsWebService:
                 res["errors"] = []
                 for error in response_dict["item"]["errors"]:
                     res["errors"] = picking.env._(
-                        "Error code: %(code)s, Message: %(message)s"
-                    ) % {
-                        "code": error["code"],
-                        "message": error["message"],
-                    }
+                        "Error code: %(code)s, Message: %(message)s",
+                        code=error["code"],
+                        message=error["message"],
+                    )
                 results.append(res)
                 return results
 
@@ -441,7 +441,10 @@ class PostlogisticsWebService:
         #  behavior inside stock.picking::postlogistics_label_get_item_additional_data
         if package and not package.package_type_id:
             raise UserError(
-                self.env._("The package %s must have a package type.") % package.name
+                self.env._(
+                    "The package %(package)s must have a package type.",
+                    package=package.name,
+                )
             )
         result = picking.postlogistics_label_get_item_additional_data(package=package)
         packaging_codes = (

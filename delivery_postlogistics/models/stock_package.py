@@ -1,11 +1,11 @@
 # Copyright 2013 Camptocamp SA
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-from odoo import api, fields, models
+from odoo import fields, models
 from odoo.exceptions import UserError
 
 
-class StockQuantPackage(models.Model):
-    _inherit = "stock.quant.package"
+class StockPackage(models.Model):
+    _inherit = "stock.package"
 
     postlogistics_manual_cod_amount = fields.Float(
         "PostLogistics Cash On Delivery Amount",
@@ -18,7 +18,6 @@ class StockQuantPackage(models.Model):
         string="Packaging's Carrier",
     )
 
-    @api.returns("stock.picking")
     def _get_origin_pickings(self):
         self.ensure_one()
         move_line_model = self.env["stock.move.line"]

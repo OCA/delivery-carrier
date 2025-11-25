@@ -153,7 +153,7 @@ class DeliveryCarrier(models.Model):
             )
             if move_lines:
                 default_packaging = carrier.postlogistics_default_package_type_id
-                package = self.env["stock.quant.package"].create(
+                package = self.env["stock.package"].create(
                     [{"package_type_id": default_packaging.id}]
                 )
                 move_lines.write({"result_package_id": package.id})

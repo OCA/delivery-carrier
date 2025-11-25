@@ -59,7 +59,7 @@ Please use _get_quant_packages_from_picking instead."
             # moved so take the source one.
             package_ids.add(operation.result_package_id.id or operation.package_id.id)
 
-        return self.env["stock.quant.package"].browse(package_ids)
+        return self.env["stock.package"].browse(package_ids)
 
     def attach_shipping_label(self, label):
         """Attach a label returned by generate_shipping_labels to a picking"""
@@ -275,7 +275,8 @@ Please use _get_quant_packages_from_picking instead."
             raise UserError(
                 self.env._(
                     "No package type found either for the package "
-                    f"or for the {self.carrier_id.name} delivery method."
+                    "or for the %(carrier)s delivery method.",
+                    carrier=self.carrier_id.name,
                 )
             )
         package_codes = package_type._get_shipper_package_code_list()
@@ -290,8 +291,10 @@ Please use _get_quant_packages_from_picking instead."
             raise UserError(
                 self.env._(
                     "No PostLogistics packaging services found "
-                    "in package type {package_type_name}, for picking {picking_name}."
-                ).format(package_type_name=package_type.name, picking_name=self.name)
+                    "in package type %(package_type)s, for picking %(picking)s."
+                ),
+                package_type=package_type.name,
+                picking=self.name,
             )
 
         # Activate phone notification ZAW3213

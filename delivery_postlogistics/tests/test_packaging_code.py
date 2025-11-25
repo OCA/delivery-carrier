@@ -64,9 +64,17 @@ class TestPackagingCode(TestPostlogisticsCommon):
         )
 
     def test_postlogistics_cancel_shipment(self):
+        partner = self.env["res.partner"].create(
+            {
+                "name": "Test partner",
+                "street": "Rue de la Tour 5",
+                "zip": "1004",
+                "city": "Lausanne",
+            }
+        )
         self.picking = self.env["stock.picking"].create(
             {
-                "partner_id": self.env.ref("base.partner_demo").id,
+                "partner_id": partner.id,
                 "picking_type_id": self.env.ref("stock.picking_type_out").id,
                 "location_id": self.env.ref("stock.stock_location_stock").id,
                 "location_dest_id": self.env.ref("stock.stock_location_customers").id,

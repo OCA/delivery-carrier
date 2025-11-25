@@ -36,17 +36,6 @@ class TestStockMove(TestPostlogisticsCommon):
             {
                 "partner_id": self.partner.id,
                 "commitment_date": fields.Datetime.now(),
-                "order_line": [
-                    (
-                        0,
-                        0,
-                        {
-                            "product_id": self.env.ref("product.product_product_1").id,
-                            "product_uom_qty": 1,
-                            "price_unit": 100,
-                        },
-                    )
-                ],
             }
         )
 
@@ -71,7 +60,6 @@ class TestStockMove(TestPostlogisticsCommon):
 
         self.stock_move = stock_move_env.create(
             {
-                "name": "Test Stock Move",
                 "product_id": self.product.id,
                 "product_uom_qty": 1,
                 "product_uom": self.product.uom_id.id,
@@ -94,9 +82,17 @@ class TestStockMove(TestPostlogisticsCommon):
 
     def test_cod_amount_no_sale_order(self):
         """Test COD amount when picking has no linked sale order."""
+        partner = self.env["res.partner"].create(
+            {
+                "name": "Test partner",
+                "street": "Rue de la Tour 5",
+                "zip": "1004",
+                "city": "Lausanne",
+            }
+        )
         picking = self.picking.create(
             {
-                "partner_id": self.env.ref("base.res_partner_1").id,
+                "partner_id": partner.id,
                 "location_id": self.env.ref("stock.stock_location_stock").id,
                 "location_dest_id": self.env.ref("stock.stock_location_customers").id,
                 "picking_type_id": self.env.ref("stock.picking_type_out").id,

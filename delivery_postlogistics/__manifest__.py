@@ -24,7 +24,7 @@
         "data/package_type.xml",
         "views/delivery.xml",
         "views/stock_package_type_view.xml",
-        "views/stock_quant_package_view.xml",
+        "views/stock_package_view.xml",
         "views/postlogistics_license.xml",
         "views/res_partner_view.xml",
         "views/stock.xml",
