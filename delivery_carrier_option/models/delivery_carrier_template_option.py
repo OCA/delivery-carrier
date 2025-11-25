@@ -25,5 +25,5 @@ class DeliveryCarrierTemplateOption(models.Model):
     name = fields.Char()
     code = fields.Char()
     description = fields.Char(
-        help="Allow to define a more complete description " "than in the name field.",
+        help="Allow to define a more complete description than in the name field.",
     )
