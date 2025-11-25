@@ -46,9 +46,9 @@ def check_generate_label_body(request, saved_request):
         query_json = json.loads(request.body.decode("utf-8"))
         saved_json = json.loads(saved_request.body.decode("utf-8"))
         query_json["item"]["itemID"] = saved_json["item"]["itemID"]
-        assert (
-            query_json == saved_json
-        ), "Body request not corresponding to the saved one"
+        assert query_json == saved_json, (
+            "Body request not corresponding to the saved one"
+        )
 
 
 recorder.register_matcher("generate_label_body", check_generate_label_body)
