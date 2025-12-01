@@ -103,6 +103,17 @@ class DeliveryCarrier(models.Model):
                 available |= carrier
         return available
 
+    def _match_address(self, partner):
+        """If the delivery carrier is a multi, we need to check
+        their childs"""
+        carrier = self.with_context(show_children_carriers=True)
+        if carrier.destination_type == "multi":
+            for child in carrier.child_ids:
+                if child._match_address(partner):
+                    return True
+            return False
+        return super()._match_address(partner)
+
     def base_on_destination_rate_shipment(self, order):
         carrier = self.with_context(show_children_carriers=True)
         for subcarrier in carrier.child_ids:
