@@ -11,6 +11,7 @@ from io import BytesIO
 from PIL import Image
 
 from odoo import _, fields, models
+from odoo.exceptions import UserError
 
 from .ups_request import UpsRequest
 
@@ -133,16 +134,32 @@ class DeliveryCarrier(models.Model):
 
     def ups_rate_shipment(self, order):
         ups_request = UpsRequest(self)
-        response = ups_request.rate_shipment(order)
-        price = self._ups_get_response_price(
-            response, order.currency_id, order.company_id
-        )
-        return {
-            "success": True,
-            "price": price,
-            "error_message": False,
-            "warning_message": False,
-        }
+        try:
+            response = ups_request.rate_shipment(order)
+            price = self._ups_get_response_price(
+                response, order.currency_id, order.company_id
+            )
+            return {
+                "success": True,
+                "price": price,
+                "error_message": False,
+                "warning_message": False,
+            }
+        except UserError as e:
+            # During rate shopping (checkout), return failure instead of raising
+            # exception
+            # This allows Odoo to gracefully hide unavailable shipping methods
+            # Common UPS errors during rate shopping:
+            # 111100: The requested service is invalid from the selected origin
+            # 111217: The requested service is unavailable between the selected
+            # locations
+            # 111035: Order size too large (would be shipped by LTL Freight)
+            return {
+                "success": False,
+                "price": 0.0,
+                "error_message": str(e),
+                "warning_message": False,
+            }
 
     def ups_create_shipping(self, picking):
         """Send packages of the picking to UPS
@@ -228,7 +245,10 @@ class DeliveryCarrier(models.Model):
         return self._create_ups_label(picking, response)
 
     def ups_get_tracking_link(self, picking):
-        return f"https://ups.com/WebTracking/track?trackingNumber={picking.carrier_tracking_ref}"
+        return (
+            "https://ups.com/WebTracking/track"
+            f"?trackingNumber={picking.carrier_tracking_ref}"
+        )
 
     def ups_cancel_shipment(self, pickings):
         ups_request = UpsRequest(self)
