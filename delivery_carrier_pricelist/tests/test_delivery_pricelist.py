@@ -3,7 +3,8 @@
 
 from lxml import etree
 
-from odoo.tests import Form
+from odoo.tests.common import new_test_user, users
+from odoo.tests.form import Form
 
 from odoo.addons.base.tests.common import BaseCommon
 
@@ -12,6 +13,11 @@ class TestCarrierPricelist(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        cls.sale_user = new_test_user(
+            cls.env,
+            login="test-carrier-pricelist-sale-user",
+            groups="base.group_user,sales_team.group_sale_salesman",
+        )
         cls.partner_18 = cls.env.ref("base.res_partner_18")
         cls.product_4 = cls.env.ref("product.product_product_4")
         cls.product_uom_unit = cls.env.ref("uom.product_uom_unit")
@@ -25,6 +31,7 @@ class TestCarrierPricelist(BaseCommon):
                 "partner_id": cls.partner_18.id,
                 "partner_invoice_id": cls.partner_18.id,
                 "partner_shipping_id": cls.partner_18.id,
+                "user_id": cls.sale_user.id,
                 "pricelist_id": cls.pricelist.id,
                 "order_line": [
                     (
@@ -54,21 +61,24 @@ class TestCarrierPricelist(BaseCommon):
         )
 
     def create_price_list_item(self):
-        price = 13.0
-        return self.env["product.pricelist.item"].create(
-            {
-                "pricelist_id": self.pricelist.id,
-                "product_id": self.fee_product.id,
-                "applied_on": "0_product_variant",
-                "fixed_price": price,
-            }
-        )
+        # Use ``sudo()`` to prevent ``AccessError`` on create when using this method
+        # if necessary, then revert it when returning the pricelist item
+        old_su_flag = self.env.su
+        pricelist_item_model = self.env["product.pricelist.item"].sudo()
+        vals = {
+            "pricelist_id": self.pricelist.id,
+            "product_id": self.fee_product.id,
+            "applied_on": "0_product_variant",
+            "fixed_price": 13.0,
+        }
+        return pricelist_item_model.create(vals).sudo(flag=old_su_flag)
 
     def get_wiz_form(self, **ctx):
         default_ctx = {"default_order_id": self.sale_normal_delivery_charges.id}
         ctx = {**default_ctx, **ctx}
         return Form(self.env["choose.delivery.carrier"].with_context(**ctx))
 
+    @users("test-carrier-pricelist-sale-user")
     def test_wizard_price(self):
         pl_item = self.create_price_list_item()
         wiz_form = self.get_wiz_form()
@@ -83,12 +93,26 @@ class TestCarrierPricelist(BaseCommon):
         wiz_form.carrier_id = self.carrier_pricelist
         self.assertEqual(wiz_form.display_price, 0.0)
 
+    @users("test-carrier-pricelist-sale-user")
+    def test_wizard_price_config_mismatch(self):
+        """Check case ``invoice_type`` is "pricelist" but ``delivery_type`` is not"""
+        self.carrier_pricelist.write(
+            {"delivery_type": "fixed", "invoice_policy": "pricelist"}
+        )
+        pl_item = self.create_price_list_item()
+        wiz_form = self.get_wiz_form()
+        wiz_form.carrier_id = self.carrier_pricelist
+        self.assertEqual(wiz_form.display_price, pl_item.fixed_price)
+        self.assertEqual(self.carrier_pricelist.delivery_type, "fixed")
+
+    @users("test-carrier-pricelist-sale-user")
     def test_wizard_invoice_policy(self):
         self.create_price_list_item()
         wiz_form = self.get_wiz_form()
         self.carrier_pricelist.invoice_policy = "pricelist"
         wiz_form.carrier_id = self.carrier_pricelist
 
+    @users("test-carrier-pricelist-sale-user")
     def test_wizard_send_shipping(self):
         pl_item = self.create_price_list_item()
         wiz_form = self.get_wiz_form()
@@ -106,6 +130,7 @@ class TestCarrierPricelist(BaseCommon):
         expecting = [{"exact_price": price, "tracking_number": False}]
         self.assertEqual(result, expecting)
 
+    @users("test-carrier-pricelist-sale-user")
     def test_fields_view_get(self):
         carrier = self.carrier_pricelist
         result = carrier.get_view()
