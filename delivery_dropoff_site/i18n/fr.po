@@ -502,6 +502,11 @@ msgid "Formatted Email"
 msgstr ""
 
 #. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__global_location_number
+msgid "GLN"
+msgstr ""
+
+#. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__partner_latitude
 msgid "Geo Latitude"
 msgstr ""
@@ -519,6 +524,11 @@ msgstr ""
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__date_localization
 msgid "Geolocation Date"
+msgstr ""
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__global_location_number
+msgid "Global Location Number"
 msgstr ""
 
 #. module: delivery_dropoff_site
