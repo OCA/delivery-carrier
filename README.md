@@ -33,6 +33,7 @@ addon | version | maintainers | summary
 [delivery_cbl](delivery_cbl/) | 17.0.1.1.1 |  | Integrate CBL webservice
 [delivery_correos_express](delivery_correos_express/) | 17.0.1.0.0 |  | Delivery Carrier implementation for Correos Express using their API
 [delivery_cttexpress](delivery_cttexpress/) | 17.0.1.0.1 |  | Delivery Carrier implementation for CTT Express API
+[delivery_estimated_package_quantity_by_weight](delivery_estimated_package_quantity_by_weight/) | 17.0.1.0.0 |  | Compute the amount of packages a picking out should have depending on the weight of the products and the limit fixed by the carrier
 [delivery_free_fee_removal](delivery_free_fee_removal/) | 17.0.1.0.0 |  | Hide free fee lines on sales orders
 [delivery_multi_destination](delivery_multi_destination/) | 17.0.1.0.1 |  | Multiple destinations for the same delivery method
 [delivery_package_number](delivery_package_number/) | 17.0.1.0.0 |  | Set or compute number of packages for a picking
