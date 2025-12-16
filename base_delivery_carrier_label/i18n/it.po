@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: delivery-carrier (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-12-03 01:21+0000\n"
-"PO-Revision-Date: 2025-11-28 10:42+0000\n"
+"PO-Revision-Date: 2025-12-16 12:42+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/"
 "OCA-delivery-carrier-8-0/language/it/)\n"
@@ -322,7 +322,7 @@ msgstr ""
 #. module: base_delivery_carrier_label
 #: model:ir.model,name:base_delivery_carrier_label.model_stock_picking
 msgid "Picking List"
-msgstr "Lista Picking"
+msgstr "Lista prelievo"
 
 #. module: base_delivery_carrier_label
 #: field:delivery.carrier.option,readonly_flag:0
