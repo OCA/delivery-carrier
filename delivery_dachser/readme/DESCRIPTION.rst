@@ -1,1 +1,0 @@
-Dachser integration with Odoo.

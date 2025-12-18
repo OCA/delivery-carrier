@@ -51,7 +51,7 @@ class DachserRequest:
                 result = res.json()
             except json.JSONDecodeError:
                 result = res.text
-            dachser_last_request = ("URL: {}\nData: {}").format(url, data)
+            dachser_last_request = f"URL: {url}\nData: {data}"
             self.carrier_id.log_xml(dachser_last_request, "dachser_last_request")
             self.carrier_id.log_xml(result, "dachser_last_response")
         except requests.exceptions.Timeout as tmo:
