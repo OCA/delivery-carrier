@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 import base64
 
-from odoo import _, fields, models
+from odoo import fields, models
 from odoo.exceptions import UserError
 
 from .dachser_master_data import (
@@ -118,7 +118,7 @@ class DeliveryCarrier(models.Model):
             )
             if not response:
                 raise UserError(
-                    _(
+                    self.env._(
                         "It is not possible to cancel a shipment because "
                         "it has already been sent."
                     )

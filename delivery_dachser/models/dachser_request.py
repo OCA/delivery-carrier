@@ -44,7 +44,8 @@ class DachserRequest:
             else:
                 raise UserError(
                     _(
-                        "Unsupported request type, please only use 'GET', 'POST' or 'DELETE'"
+                        "Unsupported request type, please only use 'GET', 'POST' "
+                        "or 'DELETE'"
                     )
                 )
             try:

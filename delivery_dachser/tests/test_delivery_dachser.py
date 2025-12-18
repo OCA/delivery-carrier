@@ -55,7 +55,7 @@ class TestDeliveryDachser(BaseCommon):
         cls.sale_order.action_confirm()
         # Ensure shipper address
         cls.picking = cls.sale_order.picking_ids
-        cls.picking.move_ids.quantity_done = 20
+        cls.picking.move_ids.quantity = 20
 
     def test_01_dachser_order_rate_shipment(self):
         if not self.carrier_dachser.dachser_api_key:
