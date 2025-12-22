@@ -1,13 +1,14 @@
 # Copyright 2013-2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 import codecs
-import hashlib
 import logging
-import struct
 from itertools import groupby
 
 from odoo import api, exceptions, fields, models
 from odoo.tools.safe_eval import safe_eval
+
+from odoo.addons.queue_job.delay import chain
+from odoo.addons.queue_job.delay import group as job_group
 
 from ..pdf_utils import assemble_pdf
 from ..zpl_utils import assemble_zpl2, assemble_zpl2_single_images
@@ -48,6 +49,8 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
             operations, key=lambda r: r.result_package_id or r.package_id
         ):
             pack_label = self._find_pack_label(pack)
+            # TODO we should maybe try: pack_labelS = _find_pack_labelS(pack)
+            # then iterate on paclk_labels
             yield (
                 pack,
                 self.env["stock.move.line"].browse([o.id for o in grp_operations]),
@@ -66,21 +69,14 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
         too many threads
         """
         self.ensure_one()
-
+        jobs = []
         for pack, picking, _label in group:
-            try:
-                picking.send_to_shipper()
-            except Exception as e:
-                # add information on picking and pack in the exception
-                picking_name = self.env._(f"Picking: {picking.name}")
-                pack_name = pack.name if pack else ""
-                pack_num = self.env._(f"Pack: {pack_name}")
-                # pylint: disable=translation-required
-                msg = f"{picking_name} {pack_num} - {str(e)}"
-                _logger.exception(msg)
-                raise exceptions.UserError(msg) from e
+            _logger.debug("Generating label for pack %s", pack.name)
+            job = picking.delayable().send_to_shipper()
+            jobs.append(job)
+        return jobs
 
-    def _get_all_files(self, batch):
+    def _generate_all_labels(self, batch):
         self.ensure_one()
 
         # If we have more than one pack in a picking, we must ensure
@@ -94,17 +90,59 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
                 picking = operations[0].picking_id
                 groups.setdefault(picking.id, []).append((pack, picking, label))
 
+        jobs = []
         for group in groups.values():
-            self._do_generate_labels(group)
+            jobs.extend(self._do_generate_labels(group))
+        return jobs
 
-            labels = []
-            for pack, _operations, label in self._get_packs(batch):
-                label = self._find_pack_label(pack)
-                if not label:
+    def generate_pdf_summary(self, batch):
+        self.ensure_one()
+
+        zpl2_batch_merge = safe_eval(
+            self.env["ir.config_parameter"].get_param("zpl2.batch.merge")
+        )
+
+        labels = []
+        for pack, _operations, label in self._get_packs(batch):
+            label = self._find_pack_label(pack)
+            if not label:
+                continue
+            label_name = pack.parcel_tracking or pack.name
+            labels.append((label.file_type, label.attachment_id.datas, label_name))
+
+        labels_by_f_type = self._group_labels_by_file_type(labels)
+        for f_type, labels in labels_by_f_type.items():
+            if f_type == "zpl2" and not zpl2_batch_merge:
+                # We do not want to merge zpl2
+                # because too big file can failed on zebra printers
+                for label in labels:
+                    f_name = label["name"]
+                    filename = f"{f_name}.{f_type}"
+                    data = {
+                        "name": filename,
+                        "res_id": batch.id,
+                        "res_model": "stock.picking.batch",
+                        "datas": label["data"],
+                    }
+                    self.env["ir.attachment"].create(data)
+            else:
+                labels_bin = [
+                    codecs.decode(label["data"], "base64") for label in labels if label
+                ]
+                filename = batch.name + "." + f_type
+
+                filedata = self._concat_files(f_type, labels_bin)
+                if not filedata:
+                    # Merging of `f_type` not supported, so we cannot
+                    # create the attachment
                     continue
-                label_name = pack.parcel_tracking or pack.name
-                labels.append((label.file_type, label.attachment_id.datas, label_name))
-            return labels
+                data = {
+                    "name": filename,
+                    "res_id": batch.id,
+                    "res_model": "stock.picking.batch",
+                    "datas": codecs.encode(filedata, "base64"),
+                }
+            self.env["ir.attachment"].create(data)
 
     def _check_pickings(self):
         """Check pickings have at least one pack"""
@@ -130,24 +168,8 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
         """
         self.ensure_one()
 
-        hasher = hashlib.sha1(str(self.id).encode())
-        # pg_lock accepts an int8 so we build an hash composed with
-        # contextual information and we throw away some bits
-        int_lock = struct.unpack("q", hasher.digest()[:8])
+        # TODO ensure there is no pending jobs for those batches
 
-        self.env.cr.execute("SELECT pg_try_advisory_xact_lock(%s);", (int_lock,))
-        acquired = self.env.cr.fetchone()[0]
-        if not acquired:
-            raise exceptions.UserError(
-                self.env._(
-                    "Another label generation process is already "
-                    "running. Please try again later."
-                )
-            )
-
-        zpl2_batch_merge = safe_eval(
-            self.env["ir.config_parameter"].get_param("zpl2.batch.merge")
-        )
         if not self.batch_ids:
             raise exceptions.UserError(self.env._("No picking batch selected"))
 
@@ -160,7 +182,13 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
         self._check_pickings()
 
         to_generate = self.batch_ids
-        if not self.generate_new_labels:
+
+        job_groups = []
+
+        if self.generate_new_labels:
+            job_purge = to_generate.delayable().purge_tracking_references()
+            job_groups.append(job_group(job_purge))
+        else:
             already_generated_ids = (
                 self.env["ir.attachment"]
                 .search(
@@ -174,54 +202,69 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
             to_generate = to_generate.filtered(
                 lambda rec: rec.id not in already_generated_ids
             )
-        else:
-            to_generate.purge_tracking_references()
+
+        if not to_generate:
+            raise exceptions.UserError(
+                self.env._("No labels to generate for the selected batches.")
+            )
+
+        batch_generate = self.env["queue.job.batch"].get_new_batch(
+            "Generate labels for pickings"
+        )
+        batch_summary = self.env["queue.job.batch"].get_new_batch(
+            "Generate summary PDFs"
+        )
+
+        job_summaries = []
 
         for batch in to_generate:
-            labels = self._get_all_files(batch)
-            labels_by_f_type = self._group_labels_by_file_type(labels)
-            for f_type, labels in labels_by_f_type.items():
-                if f_type == "zpl2" and not zpl2_batch_merge:
-                    # We do not want to merge zpl2
-                    # because too big file can failed on zebra printers
-                    for label in labels:
-                        f_name = label["name"]
-                        filename = f"{f_name}.{f_type}"
-                        data = {
-                            "name": filename,
-                            "res_id": batch.id,
-                            "res_model": "stock.picking.batch",
-                            "datas": label["data"],
-                        }
-                        self.env["ir.attachment"].create(data)
-                else:
-                    labels_bin = [
-                        codecs.decode(label["data"], "base64")
-                        for label in labels
-                        if label
-                    ]
-                    filename = batch.name + "." + f_type
+            jobs = self.with_context(job_batch=batch_generate)._generate_all_labels(
+                batch
+            )
+            job_groups.append(job_group(*jobs))
 
-                    filedata = self._concat_files(f_type, labels_bin)
-                    if not filedata:
-                        # Merging of `f_type` not supported, so we cannot
-                        # create the attachment
-                        continue
-                    data = {
-                        "name": filename,
-                        "res_id": batch.id,
-                        "res_model": "stock.picking.batch",
-                        "datas": codecs.encode(filedata, "base64"),
-                    }
-                    self.env["ir.attachment"].create(data)
+            job_summary = (
+                self.with_context(job_batch=batch_summary)
+                .delayable()
+                .generate_pdf_summary(batch)
+            )
+            job_groups.append(job_group(job_summary))
+            job_summaries.append(job_summary)
 
-        return {
-            "type": "ir.actions.act_window_close",
-        }
+        # Commit the transaction so that we can retrieve job_ids and delay them
+        self.env.cr.commit()  # pylint: disable=E8102
+
+        chainnable = chain(*job_groups)
+        chainnable.delay()
+
+        job_ids = batch_summary.job_ids.ids
+
+        if len(job_ids) == 1:
+            return {
+                "type": "ir.actions.act_window",
+                "name": "Job Detail",
+                "res_model": "queue.job",
+                "view_mode": "form",
+                "res_id": job_ids[0],
+                "context": self.env.context,
+                "target": "new",
+            }
+        elif len(job_ids) > 1:
+            return {
+                "type": "ir.actions.act_window",
+                "name": "Summary Jobs",
+                "res_model": "queue.job",
+                "view_mode": "list",
+                "domain": [("id", "in", job_ids)],
+                "context": self.env.context,
+                "target": "new",
+            }
 
     @api.model
     def _group_labels_by_file_type(self, labels):
         res = {}
+        _logger.debug("Grouping %d labels by file type", len(labels))
+        _logger.debug("Labels: %s", labels)
         for f_type, label, label_name in labels:
             res.setdefault(f_type, [])
             res[f_type].append({"data": label, "name": label_name})

@@ -1,0 +1,23 @@
+<odoo>
+    <record id="job_delivery_carrier_batch_send_to_shipper" model="queue.job.function">
+        <field name="model_id" ref="model_stock_picking" />
+        <field name="method">send_to_shipper</field>
+        <field name="channel_id" ref="channel_delivery_carrier_batch" />
+    </record>
+    <record
+        id="job_delivery_carrier_batch_purge_tracking_references"
+        model="queue.job.function"
+    >
+        <field name="model_id" ref="model_stock_picking_batch" />
+        <field name="method">purge_tracking_references</field>
+        <field name="channel_id" ref="channel_delivery_carrier_batch" />
+    </record>
+    <record
+        id="job_delivery_carrier_batch_generate_pdf_summary"
+        model="queue.job.function"
+    >
+        <field name="model_id" ref="model_delivery_carrier_label_generate" />
+        <field name="method">generate_pdf_summary</field>
+        <field name="channel_id" ref="channel_delivery_carrier_batch" />
+    </record>
+</odoo>

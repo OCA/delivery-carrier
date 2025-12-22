@@ -126,3 +126,32 @@ class StockBatchPicking(models.Model):
             )
             if pickings:
                 pickings.write({"carrier_tracking_ref": False})
+
+    def purge_package_labels_and_attachments(self):
+        for batch in self:
+            move_lines = batch.move_line_ids
+            packs = move_lines.result_package_id
+
+            for label in self.env["shipping.label"].search(
+                [("package_id", "in", packs.ids)]
+            ):
+                label.attachment_id.unlink()
+                label.unlink()
+
+            attachment_ids = self.env["ir.attachment"].search(
+                [
+                    ("res_model", "=", "stock.picking"),
+                    ("res_id", "in", batch.picking_ids.ids),
+                    ("mimetype", "=", "application/pdf"),
+                ]
+            )
+            attachment_ids.unlink()
+
+            attachment_ids = self.env["ir.attachment"].search(
+                [
+                    ("res_model", "=", "stock.picking.batch"),
+                    ("res_id", "=", batch.id),
+                    ("mimetype", "=", "application/pdf"),
+                ]
+            )
+            attachment_ids.unlink()

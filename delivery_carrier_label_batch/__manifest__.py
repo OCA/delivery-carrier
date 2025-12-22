@@ -16,6 +16,8 @@
         "delivery_carrier_package_info",
         # OCA/stock-logistics-workflow
         "stock_picking_batch_extended",
+        "queue_job",
+        "queue_job_batch",
     ],
     "website": "https://github.com/OCA/delivery-carrier",
     "data": [
@@ -23,6 +25,8 @@
         "security/ir.model.access.csv",
         # Data
         "data/ir.config_parameter.xml",
+        "data/queue.job.channel.xml",
+        "data/queue.job.function.xml",
         # Views
         "views/stock_batch_picking.xml",
         # Wizard
