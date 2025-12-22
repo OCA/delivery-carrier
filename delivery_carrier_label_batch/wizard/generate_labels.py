@@ -3,14 +3,10 @@
 import codecs
 import hashlib
 import logging
-import queue
 import struct
-import threading
-from contextlib import contextmanager
 from itertools import groupby
 
-from odoo import api, exceptions, fields, models, tools
-from odoo.modules.registry import Registry
+from odoo import api, exceptions, fields, models
 from odoo.tools.safe_eval import safe_eval
 
 from ..pdf_utils import assemble_pdf
@@ -64,19 +60,6 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
         domain = [("package_id", "=", pack.id)]
         return label_obj.search(domain, order="create_date DESC", limit=1)
 
-    @contextmanager
-    @api.model
-    def _do_in_new_env(self):
-        # Be careful with the test_enable flag, as this behavior
-        # won't be the same on tests.
-        # If in test mode, there won't be any concurrent threading.
-        if tools.config["test_enable"]:
-            yield self.env
-            return
-
-        with Registry(self.env.cr.dbname).cursor() as new_cr:
-            yield api.Environment(new_cr, self.env.uid, self.env.context)
-
     def _do_generate_labels(self, group):
         """Generate a label in a thread safe context
         Here we declare a specific cursor so do not launch
@@ -84,56 +67,21 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
         """
         self.ensure_one()
 
-        # create a cursor to be thread safe
-        with self._do_in_new_env() as new_env:
-            for pack, picking, _label in group:
-                try:
-                    picking.with_env(new_env).send_to_shipper()
-                except Exception as e:
-                    # add information on picking and pack in the exception
-                    picking_name = self.env._(f"Picking: {picking.name}")
-                    pack_name = pack.name if pack else ""
-                    pack_num = self.env._(f"Pack: {pack_name}")
-                    # pylint: disable=translation-required
-                    msg = f"{picking_name} {pack_num} - {str(e)}"
-                    _logger.exception(msg)
-                    raise exceptions.UserError(msg) from e
-
-    def _worker(self, data_queue, error_queue):
-        """A worker to generate labels
-        Takes data from queue data_queue
-        And if the worker encounters errors, he will add them in
-        error_queue queue
-        """
-        self.ensure_one()
-        while not data_queue.empty():
+        for pack, picking, _label in group:
             try:
-                group = data_queue.get()
-            except queue.Empty:
-                return
-            try:
-                self._do_generate_labels(group)
+                picking.send_to_shipper()
             except Exception as e:
-                error_queue.put(e)
-            finally:
-                data_queue.task_done()
-
-    @api.model
-    def _get_num_workers(self):
-        """Get number of worker parameter for labels generation
-        Optional ir.config_parameter is `shipping_label.num_workers`
-        """
-        param_model = self.env["ir.config_parameter"]
-        num_workers = param_model.get_param("shipping_label.num_workers")
-        if not num_workers:
-            return 1
-        return int(num_workers)
+                # add information on picking and pack in the exception
+                picking_name = self.env._(f"Picking: {picking.name}")
+                pack_name = pack.name if pack else ""
+                pack_num = self.env._(f"Pack: {pack_name}")
+                # pylint: disable=translation-required
+                msg = f"{picking_name} {pack_num} - {str(e)}"
+                _logger.exception(msg)
+                raise exceptions.UserError(msg) from e
 
     def _get_all_files(self, batch):
         self.ensure_one()
-
-        data_queue = queue.Queue()
-        error_queue = queue.Queue()
 
         # If we have more than one pack in a picking, we must ensure
         # they are not executed concurrently or we will have concurrent
@@ -146,69 +94,12 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
                 picking = operations[0].picking_id
                 groups.setdefault(picking.id, []).append((pack, picking, label))
 
-        is_in_testing = getattr(threading.current_thread(), "testing", False)
         for group in groups.values():
-            if not is_in_testing:
-                data_queue.put(group)
-            else:
-                self._do_generate_labels(group)
+            self._do_generate_labels(group)
 
-        if not is_in_testing:
-            # create few workers to parallelize label generation
-            num_workers = min(len(groups), self._get_num_workers())
-            _logger.info(
-                f"Starting {num_workers} workers to generate labels for batch {batch}"
-            )
-            for _i in range(num_workers):
-                t = threading.Thread(
-                    target=self._worker, args=(data_queue, error_queue)
-                )
-                t.daemon = True
-                t.start()
-
-            # wait for all tasks to be done
-            data_queue.join()
-            _logger.info(f"all workers completed for batch {batch}")
-            # empty the cache so the main env doesn't miss any data updates
-            # (parcel tracking numbers...) done by the threads
-            self.env.invalidate_all()
-
-        # We will not create a partial PDF if some labels weren't
-        # generated thus we raise catched exceptions by the workers
-        # We will try to regroup all orm exception in one
-        if not error_queue.empty():
-            error_count = {}
-            messages = []
-            while not error_queue.empty():
-                e = error_queue.get()
-                if isinstance(e, exceptions.UserError):
-                    if e.args[0] not in error_count:
-                        error_count[e.args[0]] = 1
-                    else:
-                        error_count[e.args[0]] += 1
-                    messages.append(str(e) or "")
-                else:
-                    # raise other exceptions like PoolError if
-                    # too many cursor where created by workers
-                    raise e
-            titles = []
-            for key, v in error_count.items():
-                titles.append(f"{v}x {key}")
-
-            message = self.env._(
-                "Some labels couldn't be generated. Please correct "
-                "following errors and generate labels again to create "
-                "the ones which failed.\n\n"
-            ) + "\n".join(messages)
-            raise exceptions.UserError(message)
-
-        # create a new cursor to be up to date with what was created by workers
-        with self._do_in_new_env() as new_env:
-            # labels = new_env['shipping.label']
-            self_env = self.with_env(new_env)
             labels = []
-            for pack, _operations, label in self_env._get_packs(batch):
-                label = self_env._find_pack_label(pack)
+            for pack, _operations, label in self._get_packs(batch):
+                label = self._find_pack_label(pack)
                 if not label:
                     continue
                 label_name = pack.parcel_tracking or pack.name
@@ -284,13 +175,7 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
                 lambda rec: rec.id not in already_generated_ids
             )
         else:
-            # use a separate cursor to avoid Concurrent Update exceptions
-            # since we are going to use separate transactions that will
-            # set a tracking reference in self._get_all_files(batch) which
-            # is called below, we must be sure that emptying the reference
-            # is committed.
-            with self._do_in_new_env() as new_env:
-                to_generate.with_env(new_env).purge_tracking_references()
+            to_generate.purge_tracking_references()
 
         for batch in to_generate:
             labels = self._get_all_files(batch)
