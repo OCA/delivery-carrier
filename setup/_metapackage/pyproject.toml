@@ -1,6 +1,6 @@
 [project]
 name = "odoo-addons-oca-delivery-carrier"
-version = "17.0.20251215.1"
+version = "17.0.20251222.0"
 dependencies = [
     "odoo-addon-base_delivery_carrier_label>=17.0dev,<17.1dev",
     "odoo-addon-delivery_auto_refresh>=17.0dev,<17.1dev",
@@ -32,6 +32,7 @@ dependencies = [
     "odoo-addon-partner_delivery_schedule>=17.0dev,<17.1dev",
     "odoo-addon-partner_delivery_zone>=17.0dev,<17.1dev",
     "odoo-addon-sale_order_warehouse_from_delivery_carrier>=17.0dev,<17.1dev",
+    "odoo-addon-stock_picking_report_delivery_cost>=17.0dev,<17.1dev",
 ]
 classifiers=[
     "Programming Language :: Python",
