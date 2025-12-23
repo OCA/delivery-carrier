@@ -189,14 +189,15 @@ class PostlogisticsWebService:
             item_list.append(item)
 
         total_packages = len(packages)
-        for index, package in enumerate(packages):
-            package_number = picking.get_package_number_hook(package)
-            if not package_number:
-                package_number = index + 1
-            attributes = picking.postlogistics_label_prepare_attributes(
-                pack=package, pack_num=package_number, pack_total=total_packages
-            )
-            add_item(package_number, package=package)
+        if packages:
+            for index, package in enumerate(packages):
+                package_number = picking.get_package_number_hook(package)
+                if not package_number:
+                    package_number = index + 1
+                attributes = picking.postlogistics_label_prepare_attributes(
+                    pack=package, pack_num=package_number, pack_total=total_packages
+                )
+                add_item(package_number, package=package)
         else:
             attributes = picking.postlogistics_label_prepare_attributes()
             add_item()
