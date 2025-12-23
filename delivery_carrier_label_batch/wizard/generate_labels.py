@@ -103,7 +103,7 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
         )
 
         labels = []
-        for pack, _operations, label in self._get_packs(batch):
+        for pack in batch.move_line_ids.result_package_id:
             label = self._find_pack_label(pack)
             if not label:
                 continue
