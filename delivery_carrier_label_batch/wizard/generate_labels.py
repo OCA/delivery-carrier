@@ -231,9 +231,6 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
             job_groups.append(job_group(job_summary))
             job_summaries.append(job_summary)
 
-        # Commit the transaction so that we can retrieve job_ids and delay them
-        self.env.cr.commit()  # pylint: disable=E8102
-
         chainnable = chain(*job_groups)
         chainnable.delay()
 
