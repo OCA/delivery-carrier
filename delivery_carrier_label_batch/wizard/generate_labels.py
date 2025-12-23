@@ -103,12 +103,15 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
         )
 
         labels = []
+        str_out = f"Labels generated for batch {batch.name}: \n"
+        labels_out = []
         for pack in batch.move_line_ids.result_package_id:
             label = self._find_pack_label(pack)
             if not label:
                 continue
             label_name = pack.parcel_tracking or pack.name
             labels.append((label.file_type, label.attachment_id.datas, label_name))
+            labels_out.append(label_name)
 
         labels_by_f_type = self._group_labels_by_file_type(labels)
         for f_type, labels in labels_by_f_type.items():
@@ -143,6 +146,8 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
                     "datas": codecs.encode(filedata, "base64"),
                 }
             self.env["ir.attachment"].create(data)
+
+            return str_out + "\n".join(sorted(labels_out))
 
     def _check_pickings(self):
         """Check pickings have at least one pack"""
