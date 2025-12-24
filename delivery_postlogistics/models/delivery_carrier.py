@@ -30,6 +30,12 @@ class DeliveryCarrier(models.Model):
     postlogistics_client_secret = fields.Char(
         string="Client Secret", groups="base.group_system"
     )
+
+    postlogistics_token = fields.Char(string="Access Token", groups="base.group_system")
+    postlogistics_token_expiry = fields.Datetime(
+        string="Access Token Expiry", groups="base.group_system"
+    )
+
     postlogistics_logo = fields.Binary(
         string="Company Logo on Post labels",
         help="Optional company logo to show on label.\n"

@@ -4,11 +4,14 @@ import codecs
 import logging
 from itertools import groupby
 
+from psycopg2 import OperationalError
+
 from odoo import api, exceptions, fields, models
 from odoo.tools.safe_eval import safe_eval
 
 from odoo.addons.queue_job.delay import chain
 from odoo.addons.queue_job.delay import group as job_group
+from odoo.addons.queue_job.exception import RetryableJobError
 
 from ..pdf_utils import assemble_pdf
 from ..zpl_utils import assemble_zpl2, assemble_zpl2_single_images
@@ -72,9 +75,22 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
         jobs = []
         for pack, picking, _label in group:
             _logger.debug("Generating label for pack %s", pack.name)
-            job = picking.delayable().send_to_shipper()
+            job = self.delayable().retriable_send_to_shipper(picking)
             jobs.append(job)
         return jobs
+
+    def retriable_send_to_shipper(self, picking):
+        """Wrapper to call send_to_shipper in a retriable way"""
+        self.ensure_one()
+        try:
+            picking.send_to_shipper()
+        except OperationalError as oe:
+            _logger.error("Error sending to shipper: %s", oe.diag)
+            raise RetryableJobError(
+                oe.diag,
+                seconds=3,
+                # ignore_retry=True,
+            ) from oe
 
     def _generate_all_labels(self, batch):
         self.ensure_one()
