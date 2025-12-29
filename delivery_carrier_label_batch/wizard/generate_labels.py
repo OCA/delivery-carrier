@@ -6,7 +6,7 @@ from itertools import groupby
 
 from psycopg2 import OperationalError
 
-from odoo import api, exceptions, fields, models
+from odoo import _, api, exceptions, fields, models
 from odoo.tools.safe_eval import safe_eval
 
 from odoo.addons.queue_job.delay import chain
@@ -255,28 +255,28 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
         chainnable = chain(*job_groups)
         chainnable.delay()
 
-        job_ids = batch_summary.job_ids.ids
-
-        if len(job_ids) == 1:
-            return {
-                "type": "ir.actions.act_window",
-                "name": "Job Detail",
-                "res_model": "queue.job",
-                "view_mode": "form",
-                "res_id": job_ids[0],
-                "context": self.env.context,
-                "target": "new",
-            }
-        elif len(job_ids) > 1:
-            return {
-                "type": "ir.actions.act_window",
-                "name": "Summary Jobs",
-                "res_model": "queue.job",
-                "view_mode": "list",
-                "domain": [("id", "in", job_ids)],
-                "context": self.env.context,
-                "target": "new",
-            }
+        job_count = (
+            len(batch_summary.job_ids.ids)
+            + len(batch_generate.job_ids.ids)
+            + self.generate_new_labels
+        )
+        return {
+            "type": "ir.actions.client",
+            "tag": "display_notification",
+            "params": {
+                "title": _("Label generation"),
+                "message": _(
+                    """%s job(s) have been created for label generation.
+                    Labels will be available as soon as those jobs are finished."""
+                )
+                % (job_count),
+                "type": "warning",
+                "next": {
+                    "type": "ir.actions.client",
+                    "tag": "soft_reload",
+                },
+            },
+        }
 
     @api.model
     def _group_labels_by_file_type(self, labels):
