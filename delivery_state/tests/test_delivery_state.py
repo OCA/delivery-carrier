@@ -78,7 +78,6 @@ class TestDeliveryState(TransactionCase):
                         0,
                         0,
                         {
-                            "name": cls.product.name,
                             "product_id": cls.product.id,
                             "product_uom_qty": 1,
                             "product_uom": cls.product.uom_id.id,
@@ -144,7 +143,7 @@ class TestDeliveryState(TransactionCase):
         mails = picking.message_ids.filtered(
             lambda x: self.partner_shipping in x.partner_ids
         )
-        last_mail = fields.first(mails)
+        last_mail = next(iter(mails))
         self.assertTrue("XX-0000" in last_mail.body)
 
     def test_update_delivery_state(self):

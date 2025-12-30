@@ -4,6 +4,7 @@
 # Copyright 2022 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from odoo import api, fields, models
+from odoo.fields import Domain
 
 
 class StockPicking(models.Model):
@@ -55,7 +56,7 @@ class StockPicking(models.Model):
         """Automated action to query the delivery states to the carriers API.
         every carrier should implement it 's own method. We split them by
         delivery type so only those carries with the method update"""
-        pickings = self.search(
+        domain = Domain(
             [
                 ("state", "=", "done"),
                 (
@@ -67,6 +68,7 @@ class StockPicking(models.Model):
                 ("delivery_type", "not in", [False, "fixed", "base_one_rule"]),
             ]
         )
+        pickings = self.search(domain)
         pickings.tracking_state_update()
 
     def _send_delivery_state_delivered_email(self):
