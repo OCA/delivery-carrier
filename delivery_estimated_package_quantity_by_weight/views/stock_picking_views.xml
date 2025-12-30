@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="stock_picking_form_view">
+        <field
+            name="name"
+        >stock.picking.form (in delivery_number_package_theoretical)</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="arch" type="xml">
+            <div name="button_box" position="before">
+                <field name="is_number_of_packages_outranged" invisible="1" />
+                <div
+                    class="alert alert-warning"
+                    role="alert"
+                    invisible="not is_number_of_packages_outranged"
+                >
+              The number of packages outranged the adviced number of packages
+            </div>
+            </div>
+            <field name="origin" position="after">
+                <field name="is_number_of_packages_visible" invisible="1" />
+                <h1>
+                    <label
+                        for="number_of_packages_done"
+                        string="Number of packages"
+                        style="font-size:30px"
+                        invisible="not is_number_of_packages_visible"
+                    />
+                </h1>
+                <div invisible="not is_number_of_packages_visible">
+                    <h1>
+                    <field
+                        name="number_of_packages_done"
+                        class="oe_inline"
+                        invisible="not is_number_of_packages_visible"
+                        style="margin-right:5px,font-size:30px"
+                    />
+                  /
+                  <field
+                        name="theoretical_number_of_packages"
+                        nolabel="1"
+                        class="oe_inline"
+                        invisible="not is_number_of_packages_visible"
+                        style="margin-left:5px,font-size:30px"
+                    /></h1>
+                </div>
+            </field>
+        </field>
+    </record>
+</odoo>
