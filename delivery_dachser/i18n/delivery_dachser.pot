@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -604,7 +604,6 @@ msgstr ""
 #. module: delivery_dachser
 #. odoo-python
 #: code:addons/delivery_dachser/models/delivery_carrier.py:0
-#, python-format
 msgid ""
 "It is not possible to cancel a shipment because it has already been sent."
 msgstr ""
@@ -652,21 +651,18 @@ msgstr ""
 #. module: delivery_dachser
 #. odoo-python
 #: code:addons/delivery_dachser/models/dachser_request.py:0
-#, python-format
 msgid "Timeout: the server did not reply within 60s"
 msgstr ""
 
 #. module: delivery_dachser
 #. odoo-python
 #: code:addons/delivery_dachser/models/dachser_request.py:0
-#, python-format
 msgid "Unsupported request type, please only use 'GET', 'POST' or 'DELETE'"
 msgstr ""
 
 #. module: delivery_dachser
 #. odoo-python
 #: code:addons/delivery_dachser/models/dachser_request.py:0
-#, python-format
 msgid ""
 "{error}\n"
 "{result}"
