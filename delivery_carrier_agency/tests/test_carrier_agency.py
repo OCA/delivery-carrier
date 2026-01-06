@@ -8,7 +8,7 @@ class TestCarrierAgency(BaseCommon):
     def test_get_carrier_agency(self):
         """Test finding the correct account for a picking"""
         san_fransico_wh = self.env.ref("stock.warehouse0")
-        partner = self.env.ref("stock.res_partner_address_41")
+        partner = self.env["res.partner"].create({"name": "Test Partner"})
         chicago_wh = self.env["stock.warehouse"].create(
             {
                 "name": "Chicago 1",
@@ -30,9 +30,19 @@ class TestCarrierAgency(BaseCommon):
                 "warehouse_ids": [Command.set(san_fransico_wh.ids)],
             }
         )
+        product = self.env["product.product"].create(
+            {"name": "Test Product", "type": "service"}
+        )
+        carrier = self.env["delivery.carrier"].create(
+            {
+                "name": "Test Carrier",
+                "delivery_type": "base_on_rule",
+                "product_id": product.id,
+            }
+        )
         san_fransisco_picking = self.env["stock.picking"].new(
             dict(
-                carrier_id=self.env.ref("delivery.delivery_carrier").id,
+                carrier_id=carrier.id,
                 company_id=self.env.user.company_id.id,
                 location_id=san_fransico_wh.lot_stock_id.id,
             )
@@ -42,7 +52,7 @@ class TestCarrierAgency(BaseCommon):
 
         chicago_picking = self.env["stock.picking"].new(
             dict(
-                carrier_id=self.env.ref("delivery.delivery_carrier").id,
+                carrier_id=carrier.id,
                 company_id=self.env.user.company_id.id,
                 location_id=chicago_wh.lot_stock_id.id,
             )
