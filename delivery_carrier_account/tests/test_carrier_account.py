@@ -1,10 +1,10 @@
-# Copyright 2020 Hunki Enterprises BV
-# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+from odoo.tests import tagged
 
-from odoo.tests.common import TransactionCase
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class TestCarrierAccount(TransactionCase):
+@tagged("post_install", "-at_install")
+class TestCarrierAccount(BaseCommon):
     def test_get_carrier_account(self):
         """Test finding the correct account for a picking"""
         account = self.env["carrier.account"].create(
@@ -16,7 +16,16 @@ class TestCarrierAccount(TransactionCase):
                 "sequence": 1,
             }
         )
-        carrier = self.env.ref("delivery.delivery_carrier")
+        product = self.env["product.product"].create(
+            {"name": "Test Carrier Product", "type": "service"}
+        )
+        carrier = self.env["delivery.carrier"].create(
+            {
+                "name": "Test Carrier",
+                "product_id": product.id,
+                "delivery_type": "base_on_rule",
+            }
+        )
         carrier.write({"carrier_account_id": account.id})
         pick = self.env["stock.picking"].new(
             dict(
