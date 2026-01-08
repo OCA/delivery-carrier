@@ -17,7 +17,7 @@ class DeliveryCarrier(models.Model):
         selection_add=[("cttexpress", "CTT Express")],
         ondelete={"cttexpress": "set default"},
     )
-    cttexpress_user = fields.Char(string="User")
+    cttexpress_user = fields.Char(string="CTT Express User")
     cttexpress_password = fields.Char(string="Password")
     cttexpress_customer = fields.Char(string="Customer code")
     cttexpress_agency = fields.Char(string="Agency code")
