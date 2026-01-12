@@ -161,7 +161,7 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
                     "res_model": "stock.picking.batch",
                     "datas": codecs.encode(filedata, "base64"),
                 }
-            self.env["ir.attachment"].create(data)
+                self.env["ir.attachment"].create(data)
 
             return str_out + "\n".join(sorted(labels_out))
 
