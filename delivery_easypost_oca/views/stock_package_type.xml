@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="view_stock_package_type_easypost_oca" model="ir.ui.view">
+        <field name="name">stock.package.type.easypost.oca</field>
+        <field name="model">stock.package.type</field>
+        <field name="inherit_id" ref="stock.stock_package_type_form" />
+        <field name="priority">100</field>
+        <field name="arch" type="xml">
+          <xpath expr="//field[@name='height']" position='replace'>
+            <div class="o_row">
+              <field name="height" nolabel="1" />
+              <span invisible="package_carrier_type != 'easypost_oca'">Inches</span>
+            </div>
+          </xpath>
+          <xpath expr="//field[@name='width']" position='replace'>
+            <div class="o_row">
+              <field name="width" nolabel="1" />
+              <span invisible="package_carrier_type != 'easypost_oca'">Inches</span>
+            </div>
+          </xpath>
+          <xpath expr="//field[@name='packaging_length']" position='replace'>
+            <div class="o_row">
+              <field name="packaging_length" nolabel="1" />
+              <span invisible="package_carrier_type != 'easypost_oca'">Inches</span>
+            </div>
+          </xpath>
+        </field>
+      </record>
+
+
+</odoo>
