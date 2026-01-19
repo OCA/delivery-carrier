@@ -1,0 +1,115 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* delivery_carrier_agency
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2023-08-03 15:09+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
+"Language-Team: none\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: delivery_carrier_agency
+#: model:ir.model.fields,field_description:delivery_carrier_agency.field_delivery_carrier_agency__partner_id
+msgid "Address"
+msgstr "Dirección"
+
+#. module: delivery_carrier_agency
+#: model:ir.actions.act_window,name:delivery_carrier_agency.action_carrier_agency
+#: model:ir.model,name:delivery_carrier_agency.model_delivery_carrier_agency
+#: model:ir.ui.menu,name:delivery_carrier_agency.carrier_agency_menu
+msgid "Carrier Agency"
+msgstr "Agencia de transportes"
+
+#. module: delivery_carrier_agency
+#: model:ir.model.fields,field_description:delivery_carrier_agency.field_delivery_carrier_agency__carrier_ids
+msgid "Carriers"
+msgstr "Transportistas"
+
+#. module: delivery_carrier_agency
+#: model:ir.model.fields,field_description:delivery_carrier_agency.field_delivery_carrier_agency__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: delivery_carrier_agency
+#: model:ir.model.fields,field_description:delivery_carrier_agency.field_delivery_carrier_agency__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: delivery_carrier_agency
+#: model:ir.model.fields,field_description:delivery_carrier_agency.field_delivery_carrier_agency__delivery_type
+msgid "Delivery Type"
+msgstr "Tipo de entrega"
+
+#. module: delivery_carrier_agency
+#: model:ir.model.fields,field_description:delivery_carrier_agency.field_delivery_carrier_agency__display_name
+msgid "Display Name"
+msgstr "Mostrar Nombre"
+
+#. module: delivery_carrier_agency
+#: model:ir.model.fields,field_description:delivery_carrier_agency.field_delivery_carrier_agency__external_reference
+msgid "External Reference"
+msgstr "Referencia Externa"
+
+#. module: delivery_carrier_agency
+#: model:ir.model.fields,field_description:delivery_carrier_agency.field_delivery_carrier_agency__id
+msgid "ID"
+msgstr "ID (identificación)"
+
+#. module: delivery_carrier_agency
+#: model:ir.model.fields,field_description:delivery_carrier_agency.field_delivery_carrier_agency____last_update
+msgid "Last Modified on"
+msgstr "Última Modificación el"
+
+#. module: delivery_carrier_agency
+#: model:ir.model.fields,field_description:delivery_carrier_agency.field_delivery_carrier_agency__write_uid
+msgid "Last Updated by"
+msgstr "Actualizado por última vez por"
+
+#. module: delivery_carrier_agency
+#: model:ir.model.fields,field_description:delivery_carrier_agency.field_delivery_carrier_agency__write_date
+msgid "Last Updated on"
+msgstr "Actualizado por última vez el"
+
+#. module: delivery_carrier_agency
+#: model:ir.model.fields,field_description:delivery_carrier_agency.field_delivery_carrier_agency__name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: delivery_carrier_agency
+#: model:ir.model.fields,help:delivery_carrier_agency.field_delivery_carrier_agency__external_reference
+msgid "Reference or code supplied by the carrier"
+msgstr "Referencia o código facilitado por el transportista"
+
+#. module: delivery_carrier_agency
+#: model:ir.model.fields,field_description:delivery_carrier_agency.field_delivery_carrier_agency__sequence
+msgid "Sequence"
+msgstr "Secuencia"
+
+#. module: delivery_carrier_agency
+#: model:ir.model.fields,help:delivery_carrier_agency.field_delivery_carrier_agency__carrier_ids
+msgid ""
+"This field may be used to link an account to specific delivery methods It "
+"may be usefull to find an account with more precision than with only the "
+"delivery type"
+msgstr ""
+"Este campo puede utilizarse para vincular una cuenta a métodos de entrega "
+"específicos Puede ser útil para encontrar una cuenta con más precisión que "
+"con sólo el tipo de entrega"
+
+#. module: delivery_carrier_agency
+#: model:ir.model,name:delivery_carrier_agency.model_stock_picking
+msgid "Transfer"
+msgstr "Transferencia"
+
+#. module: delivery_carrier_agency
+#: model:ir.model.fields,field_description:delivery_carrier_agency.field_delivery_carrier_agency__warehouse_ids
+msgid "Warehouses"
+msgstr "Almacenes"
