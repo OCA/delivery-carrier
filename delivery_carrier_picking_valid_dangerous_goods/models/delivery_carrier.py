@@ -8,7 +8,7 @@ class DeliveryCarrier(models.Model):
     _inherit = "delivery.carrier"
 
     adr_limited_amount_ids = fields.Many2many(
-        "limited.amount",
+        "adr.limited.amount",
         string="ADR limited amount",
         help="If a limited amount is defined here, this carrier will be "
         "excluded from the selection of carrier if any product has that same "
@@ -29,6 +29,6 @@ class DeliveryCarrier(models.Model):
         """Test products are compliants with dangerous goods"""
         if limited_amounts := self.adr_limited_amount_ids:
             for product in products:
-                if product.limited_amount_id in limited_amounts:
+                if product.adr_limited_amount_id in limited_amounts:
                     return False
         return True
