@@ -46,7 +46,8 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
     def _get_packs(self, batch):
         operations = batch.move_line_ids  # pack_operation_ids
         operations = sorted(
-            operations, key=lambda r: r.result_package_id.name or r.package_id.name
+            operations,
+            key=lambda r: r.result_package_id.parcel_tracking or r.package_id.name,
         )
         for pack, grp_operations in groupby(
             operations, key=lambda r: r.result_package_id or r.package_id
@@ -121,7 +122,7 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
         labels = []
         str_out = f"Labels generated for batch {batch.name}: \n"
         labels_out = []
-        for pack in batch.move_line_ids.result_package_id:
+        for pack in batch.move_line_ids.result_package_id.sorted("parcel_tracking"):
             label = self._find_pack_label(pack)
             if not label:
                 continue
