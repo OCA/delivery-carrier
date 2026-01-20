@@ -41,7 +41,7 @@ class Common(BaseCommon):
         with Form(cls.env["stock.picking"]) as pick_form:
             pick_form.picking_type_id = picking_type
             for product, qty in product_qty:
-                with pick_form.move_ids_without_package.new() as move:
+                with pick_form.move_ids.new() as move:
                     move.product_id = product
                     move.product_uom_qty = qty
         return pick_form.save()
