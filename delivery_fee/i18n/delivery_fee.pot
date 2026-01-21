@@ -1,0 +1,73 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* delivery_fee
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-26 10:26+0000\n"
+"PO-Revision-Date: 2026-01-26 10:26+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: delivery_fee
+#: model_terms:ir.ui.view,arch_db:delivery_fee.report_invoice_document
+msgid "/ delivery"
+msgstr ""
+
+#. module: delivery_fee
+#: model:ir.model,name:delivery_fee.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: delivery_fee
+#: model:ir.model.fields,field_description:delivery_fee.field_res_partner__delivery_fee_exemption
+#: model:ir.model.fields,field_description:delivery_fee.field_res_users__delivery_fee_exemption
+msgid "Delivery Fee Exemption"
+msgstr ""
+
+#. module: delivery_fee
+#: model:ir.model.fields,field_description:delivery_fee.field_sale_order_line__delivery_fee_picking_id
+msgid "Delivery Fee Picking"
+msgstr ""
+
+#. module: delivery_fee
+#: model:ir.model.fields,field_description:delivery_fee.field_delivery_carrier__fee_product_id
+msgid "Fee Product"
+msgstr ""
+
+#. module: delivery_fee
+#: model_terms:ir.ui.view,arch_db:delivery_fee.report_delivery_document2
+#: model_terms:ir.ui.view,arch_db:delivery_fee.report_invoice_document
+msgid "Fee info"
+msgstr ""
+
+#. module: delivery_fee
+#: model:ir.model.fields,field_description:delivery_fee.field_sale_order_line__is_delivery_fee
+msgid "Is a Delivery Fee"
+msgstr ""
+
+#. module: delivery_fee
+#: model:ir.model,name:delivery_fee.model_sale_order
+msgid "Sales Order"
+msgstr ""
+
+#. module: delivery_fee
+#: model:ir.model,name:delivery_fee.model_sale_order_line
+msgid "Sales Order Line"
+msgstr ""
+
+#. module: delivery_fee
+#: model:ir.model,name:delivery_fee.model_delivery_carrier
+msgid "Shipping Methods"
+msgstr ""
+
+#. module: delivery_fee
+#: model:ir.model,name:delivery_fee.model_stock_picking
+msgid "Transfer"
+msgstr ""
