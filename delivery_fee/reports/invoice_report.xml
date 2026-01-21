@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template
+        id="report_invoice_document"
+        inherit_id="account.report_invoice_document"
+        priority="9999"
+    >
+        <xpath expr="//tbody/t[@t-set='lines']" position="after">
+            <t
+                t-set="fee_lines"
+                t-value="lines.sale_line_ids.filtered('is_delivery_fee')"
+            />
+        </xpath>
+        <xpath expr="//t[@t-set='payment_term_details']" position="before">
+            <t
+                t-set="fee_product"
+                t-value="fee_lines.product_id and fee_lines.product_id[0]"
+            />
+            <div
+                t-if="fee_product.description_sale and not o.partner_shipping_id.delivery_fee_exemption"
+            >
+                <p class="mt-5 fw-bolder fst-italic">
+                    <img
+                        t-if="fee_product.image_128"
+                        t-attf-src="/web/image/product.product/{{ fee_product.id }}/image_128"
+                        style="width: 18px; height: 18px; object-fit: contain;"
+                        alt="Fee info"
+                    />
+                    <span t-field="fee_product.description_sale" />: <span
+                        t-esc="fee_product.list_price"
+                        t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"
+                    /> / delivery
+                </p>
+            </div>
+        </xpath>
+    </template>
+</odoo>
