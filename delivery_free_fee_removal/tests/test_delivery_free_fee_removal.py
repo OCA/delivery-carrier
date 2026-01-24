@@ -64,9 +64,7 @@ class TestDeliveryFreeFeeRemoval(TransactionCase):
                 }
             ],
         )
-        res = self.report_obj._get_report_from_name(
-            "sale.report_saleorder"
-        )._render_qweb_text(self.sale.ids, False)
+        res = self.report_obj._render_qweb_text("sale.report_saleorder", self.sale.ids)
         self.assertRegex(str(res[0]), "Test Delivery")
 
     def test_delivery_free_fee_removal_with_fee_invoice_policy_delivery(self):
@@ -85,9 +83,7 @@ class TestDeliveryFreeFeeRemoval(TransactionCase):
                 }
             ],
         )
-        res = self.report_obj._get_report_from_name(
-            "sale.report_saleorder"
-        )._render_qweb_text(self.sale.ids, False)
+        res = self.report_obj._render_qweb_text("sale.report_saleorder", self.sale.ids)
         self.assertRegex(str(res[0]), "Test Delivery")
 
     def test_delivery_free_fee_removal_free_fee(self):
@@ -105,9 +101,7 @@ class TestDeliveryFreeFeeRemoval(TransactionCase):
                 }
             ],
         )
-        res = self.report_obj._get_report_from_name(
-            "sale.report_saleorder"
-        )._render_qweb_text(self.sale.ids, False)
+        res = self.report_obj._render_qweb_text("sale.report_saleorder", self.sale.ids)
         self.assertNotRegex(str(res[0]), "Test Delivery")
 
     def test_delivery_free_fee_removal_free_fee_invoice_policy_order(self):
@@ -126,7 +120,5 @@ class TestDeliveryFreeFeeRemoval(TransactionCase):
                 }
             ],
         )
-        res = self.report_obj._get_report_from_name(
-            "sale.report_saleorder"
-        )._render_qweb_text(self.sale.ids, False)
+        res = self.report_obj._render_qweb_text("sale.report_saleorder", self.sale.ids)
         self.assertNotRegex(str(res[0]), "Test Delivery")
