@@ -8,3 +8,5 @@ cases:
   auto-added when creating/saving.
 - If you deliver a different quantity than the ordered one, the delivery
   price is adjusted on the linked SO when the picking is transferred.
+
+Shows Delivery Method field on the Sale Order form under Payment Terms.

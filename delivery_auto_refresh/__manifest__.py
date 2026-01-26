@@ -12,5 +12,8 @@
     "application": False,
     "installable": True,
     "depends": ["stock_delivery", "sale_order_carrier_auto_assign"],
-    "data": ["views/res_config_settings_views.xml"],
+    "data": [
+        "views/res_config_settings_views.xml",
+        "views/sale_order_views.xml",
+    ],
 }

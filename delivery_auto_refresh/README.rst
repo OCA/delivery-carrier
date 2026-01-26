@@ -1,7 +1,3 @@
-.. image:: https://odoo-community.org/readme-banner-image
-   :target: https://odoo-community.org/get-involved?utm_source=readme
-   :alt: Odoo Community Association
-
 =====================
 Auto-refresh delivery
 =====================
@@ -17,7 +13,7 @@ Auto-refresh delivery
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fdelivery--carrier-lightgray.png?logo=github
@@ -42,6 +38,8 @@ cases:
   auto-added when creating/saving.
 - If you deliver a different quantity than the ordered one, the delivery
   price is adjusted on the linked SO when the picking is transferred.
+
+Shows Delivery Method field on the Sale Order form under Payment Terms.
 
 **Table of contents**
 
