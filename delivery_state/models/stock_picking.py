@@ -39,6 +39,16 @@ class StockPicking(models.Model):
         tracking=True,
         readonly=True,
     )
+    pod_file = fields.Binary(
+        string="Proof of Delivery File",
+        readonly=True,
+        copy=False,
+    )
+    pod_filename = fields.Char(
+        string="Proof of Delivery Filename",
+        readonly=True,
+        copy=False,
+    )
 
     def tracking_state_update(self):
         """Call to the service provider API which should have the method
