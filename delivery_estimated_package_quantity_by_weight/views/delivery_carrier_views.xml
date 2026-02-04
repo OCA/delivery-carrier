@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="delivery_carrier_form_view">
+        <field
+            name="name"
+        >delivery.carrier.form (in delivery_number_package_theoretical)</field>
+        <field name="model">delivery.carrier</field>
+        <field name="inherit_id" ref="delivery.view_delivery_carrier_form" />
+        <field name="arch" type="xml">
+            <field name="integration_level" position="before">
+                <label for="maximum_weight_per_package" />
+                <div class="o_row" name="maximum_weight_per_package">
+                    <field name="maximum_weight_per_package" class="oe_inline" />
+                    <field name="weight_uom_name" />
+                </div>
+            </field>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="delivery_carrier_tree_view">
+        <field
+            name="name"
+        >delivery.carrier.tree (in delivery_number_package_theoretical)</field>
+        <field name="model">delivery.carrier</field>
+        <field name="inherit_id" ref="delivery.view_delivery_carrier_tree" />
+        <field name="arch" type="xml">
+            <field name="delivery_type" position="after">
+                <field name="maximum_weight_per_package" />
+            </field>
+        </field>
+    </record>
+</odoo>

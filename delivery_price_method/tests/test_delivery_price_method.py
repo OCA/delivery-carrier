@@ -64,3 +64,38 @@ class TestDeliveryPriceMethod(TestDeliveryPriceMethodCommon):
         delivery_lines = sale.order_line.filtered(lambda r: r.is_delivery)
         delivery_price = sum(delivery_lines.mapped("price_unit"))
         self.assertEqual(delivery_price, 11.11)
+
+    def test_03_delivery_price_method_free_over(self):
+        free_price = self.carrier_free._get_price_from_picking(
+            total=50, weight=20, volume=10, quantity=10, wv=0.0
+        )
+        self.assertEqual(free_price, 0.0)
+        prices = self.carrier_free.rate_shipment(self.sale_2)
+        self.assertEqual(prices["price"], 0.0)
+        self.assertEqual(prices["carrier_price"], 0.0)
+        self.carrier_free.write(
+            {
+                "price_method": "base_on_rule",
+                "amount": 100,
+                "free_over": False,
+                "price_rule_ids": [
+                    (
+                        0,
+                        0,
+                        {
+                            "variable": "quantity",
+                            "operator": "==",
+                            "max_value": 1,
+                            "list_base_price": 11.11,
+                        },
+                    )
+                ],
+            }
+        )
+        base_price = self.carrier_free._get_price_from_picking(
+            total=70.0, weight=0.01, volume=0.0, quantity=1.0, wv=0.0
+        )
+        prices = self.carrier_free.rate_shipment(self.sale_2)
+        self.assertEqual(prices["price"], 11.11)
+        self.assertEqual(prices["carrier_price"], 11.11)
+        self.assertEqual(base_price, 11.11)

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 Tecnativa - Víctor Martínez
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_delivery_carrier_form" model="ir.ui.view">
+        <field name="model">delivery.carrier</field>
+        <field name="inherit_id" ref="delivery.view_delivery_carrier_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook/page[1]" position='before'>
+                <page
+                    string="Dachser Configuration"
+                    invisible="delivery_type!='dachser'"
+                >
+                    <group>
+                        <group string="Connection">
+                            <field
+                                name="dachser_api_key"
+                                password="True"
+                                required="delivery_type=='dachser'"
+                            />
+                        </group>
+                        <group string="Shipping">
+                            <field
+                                name="dachser_division"
+                                required="delivery_type=='dachser'"
+                                widget="radio"
+                                string="Division Code"
+                            />
+                            <field
+                                name="dachser_product_t"
+                                required="delivery_type=='dachser' and dachser_division=='T'"
+                                invisible="dachser_division!='T'"
+                                string="Product Code"
+                            />
+                            <field
+                                name="dachser_product_f"
+                                required="delivery_type=='dachser' and dachser_division=='F'"
+                                invisible="dachser_division!='F'"
+                                string="Product Code"
+                            />
+                            <field
+                                name="dachser_term"
+                                required="delivery_type=='dachser'"
+                                string="Term Code"
+                            />
+                            <field
+                                name="dachser_packaging_t"
+                                required="delivery_type=='dachser' and dachser_division=='T'"
+                                invisible="dachser_division!='T'"
+                                string="Packaging Code"
+                            />
+                            <field
+                                name="dachser_packaging_f"
+                                required="delivery_type=='dachser' and dachser_division=='F'"
+                                invisible="dachser_division!='F'"
+                                string="Packaging Code"
+                            />
+                            <field
+                                name="dachser_default_packaging_id"
+                                required="delivery_type=='dachser'"
+                                context="{'default_package_carrier_type': 'dachser'}"
+                                string="Packaging Type"
+                            />
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

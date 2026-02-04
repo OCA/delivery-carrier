@@ -1,10 +1,12 @@
 [project]
 name = "odoo-addons-oca-delivery-carrier"
-version = "18.0.20251014.0"
+version = "18.0.20260204.0"
 dependencies = [
+    "odoo-addon-carrier_account_environment==18.0.*",
     "odoo-addon-delivery_auto_refresh==18.0.*",
     "odoo-addon-delivery_carrier_account==18.0.*",
     "odoo-addon-delivery_carrier_agency==18.0.*",
+    "odoo-addon-delivery_carrier_image==18.0.*",
     "odoo-addon-delivery_carrier_info==18.0.*",
     "odoo-addon-delivery_carrier_label_default==18.0.*",
     "odoo-addon-delivery_carrier_manual_price==18.0.*",
@@ -16,11 +18,16 @@ dependencies = [
     "odoo-addon-delivery_carrier_picking_valid_dangerous_goods==18.0.*",
     "odoo-addon-delivery_carrier_pricelist==18.0.*",
     "odoo-addon-delivery_carrier_shipping_label==18.0.*",
+    "odoo-addon-delivery_carrier_shipping_policy==18.0.*",
     "odoo-addon-delivery_carrier_warehouse==18.0.*",
     "odoo-addon-delivery_correos_express==18.0.*",
+    "odoo-addon-delivery_dachser==18.0.*",
+    "odoo-addon-delivery_date_exclude_service==18.0.*",
     "odoo-addon-delivery_driver==18.0.*",
     "odoo-addon-delivery_driver_stock_picking_batch==18.0.*",
     "odoo-addon-delivery_dropoff_site==18.0.*",
+    "odoo-addon-delivery_easypost_oca==18.0.*",
+    "odoo-addon-delivery_estimated_package_quantity_by_weight==18.0.*",
     "odoo-addon-delivery_free_fee_removal==18.0.*",
     "odoo-addon-delivery_package_fee==18.0.*",
     "odoo-addon-delivery_package_number==18.0.*",
@@ -30,9 +37,11 @@ dependencies = [
     "odoo-addon-delivery_postlogistics_dangerous_goods==18.0.*",
     "odoo-addon-delivery_postlogistics_server_env==18.0.*",
     "odoo-addon-delivery_price_method==18.0.*",
+    "odoo-addon-delivery_purchase==18.0.*",
     "odoo-addon-delivery_roulier==18.0.*",
     "odoo-addon-delivery_schenker==18.0.*",
     "odoo-addon-delivery_state==18.0.*",
+    "odoo-addon-delivery_ups_oca==18.0.*",
     "odoo-addon-partner_delivery_info==18.0.*",
     "odoo-addon-partner_delivery_schedule==18.0.*",
     "odoo-addon-partner_delivery_zone==18.0.*",
