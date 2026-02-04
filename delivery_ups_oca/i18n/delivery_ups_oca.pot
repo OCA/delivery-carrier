@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -31,7 +31,6 @@ msgstr ""
 #. module: delivery_ups_oca
 #. odoo-python
 #: code:addons/delivery_ups_oca/models/ups_request.py:0
-#, python-format
 msgid "Both Client ID and Client Secret must be set in UPS delivery carriers."
 msgstr ""
 
@@ -67,7 +66,7 @@ msgstr ""
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields,field_description:delivery_ups_oca.field_delivery_carrier__ups_default_packaging_id
-msgid "Default Packaging Type"
+msgid "Default Carrier Packaging Type"
 msgstr ""
 
 #. module: delivery_ups_oca
@@ -218,7 +217,6 @@ msgstr ""
 #. module: delivery_ups_oca
 #. odoo-python
 #: code:addons/delivery_ups_oca/models/ups_request.py:0
-#, python-format
 msgid "Sending to UPS: {}"
 msgstr ""
 
@@ -387,13 +385,11 @@ msgstr ""
 #. module: delivery_ups_oca
 #. odoo-python
 #: code:addons/delivery_ups_oca/models/ups_request.py:0
-#, python-format
 msgid "{date} - Warning: {warn}"
 msgstr ""
 
 #. module: delivery_ups_oca
 #. odoo-python
 #: code:addons/delivery_ups_oca/models/ups_request.py:0
-#, python-format
 msgid "{} - Error retrieving the tracking information."
 msgstr ""
