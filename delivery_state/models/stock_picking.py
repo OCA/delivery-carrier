@@ -12,10 +12,12 @@ class StockPicking(models.Model):
     date_shipped = fields.Date(
         string="Shipment Date",
         readonly=True,
+        copy=False,
     )
     date_delivered = fields.Datetime(
         string="Delivery Date",
         readonly=True,
+        copy=False,
     )
     # Technical field to store raw tracking data from the carrier API
     tracking_json = fields.Json(readonly=True, copy=False)
@@ -23,9 +25,11 @@ class StockPicking(models.Model):
         readonly=True,
         index=True,
         tracking=True,
+        copy=False,
     )
     tracking_state_history = fields.Text(
         readonly=True,
+        copy=False,
     )
     delivery_state = fields.Selection(
         selection=[
@@ -40,6 +44,7 @@ class StockPicking(models.Model):
         string="Carrier State",
         tracking=True,
         readonly=True,
+        copy=False,
     )
     pod_file = fields.Binary(
         string="Proof of Delivery File",
