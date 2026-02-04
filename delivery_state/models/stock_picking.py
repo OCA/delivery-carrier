@@ -16,6 +16,8 @@ class StockPicking(models.Model):
         string="Delivery Date",
         readonly=True,
     )
+    # Technical field to store raw tracking data from the carrier API
+    tracking_json = fields.Json(readonly=True, copy=False)
     tracking_state = fields.Char(
         string="Tracking state",
         readonly=True,
