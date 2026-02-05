@@ -142,6 +142,11 @@ msgid "Shipping recorded in carrier"
 msgstr ""
 
 #. module: delivery_state
+#: model:ir.model.fields,field_description:delivery_state.field_stock_picking__tracking_json
+msgid "Tracking Json"
+msgstr ""
+
+#. module: delivery_state
 #: model:ir.model.fields,field_description:delivery_state.field_stock_picking__tracking_state
 msgid "Tracking State"
 msgstr ""
