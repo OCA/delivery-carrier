@@ -429,7 +429,7 @@ class UpsRequest:
                             warn=warning.get("message"),
                         )
                     )
-
+            picking.write({"tracking_json": shipment})
         except Exception:
             states_list.append(
                 _("{} - Error retrieving the tracking information.").format(
