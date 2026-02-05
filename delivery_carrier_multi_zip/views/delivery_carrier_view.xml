@@ -18,10 +18,10 @@
             </field>
             <field name="zip_prefix_ids" position="after">
                 <field name="zip_range_ids" invisible="zip_option!='range'">
-                    <tree editable="bottom" default_order="zip_from, zip_to">
+                    <list editable="bottom" default_order="zip_from, zip_to">
                         <field name="zip_from" />
                         <field name="zip_to" />
-                    </tree>
+                    </list>
                 </field>
             </field>
         </field>
