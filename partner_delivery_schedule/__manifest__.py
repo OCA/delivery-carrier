@@ -17,5 +17,6 @@
         "views/partner_delivery_schedule_view.xml",
         "views/res_partner_view.xml",
         "views/report_shipping.xml",
+        "views/stock_picking_view.xml",
     ],
 }
