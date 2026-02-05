@@ -1,6 +1,6 @@
 <odoo>
     <template id="report_picking" inherit_id="stock.report_picking">
-        <xpath expr="//div[@name='div_sched_date']" position="after">
+        <xpath expr="//div[@name='div_picking_date']" position="after">
             <div
                 t-if="o.picking_type_id.code == 'outgoing' and o.partner_id and o.partner_id.delivery_schedule_ids"
                 class="col-auto mw-100 mb-2 mx-3"
