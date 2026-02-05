@@ -29,8 +29,7 @@ class DeliverySchedule(models.Model):
         ):
             raise ValidationError(
                 self.env._(
-                    "Error ! You can not set hour_from greater or equal "
-                    "than hour_to ."
+                    "Error ! You can not set hour_from greater or equal than hour_to ."
                 )
             )
         return True
