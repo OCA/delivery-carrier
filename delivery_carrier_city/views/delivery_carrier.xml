@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <!--
     Copyright 2021 Camptocamp SA - Iván Todorovich
     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
@@ -10,7 +9,7 @@
         <field name="inherit_id" ref="delivery.view_delivery_carrier_form" />
         <field name="arch" type="xml">
             <field name="state_ids" position="after">
-                <field name="city_ids" widget="many2many_tags" />
+                <field name="city_ids" widget="many2many_tags" domain="[('state_id', 'in', state_ids), ('id', 'not in', city_ids)]"/>
             </field>
         </field>
     </record>

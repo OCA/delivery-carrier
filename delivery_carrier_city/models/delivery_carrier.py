@@ -9,13 +9,14 @@ class DeliveryCarrier(models.Model):
 
     city_ids = fields.Many2many(
         "res.city",
-        relation="delivery_carrier_city_rel",
-        column1="carrier_id",
-        column2="city_id",
+        "delivery_carrier_city_rel",
+        "carrier_id",
+        "city_id",
         string="Cities",
     )
 
     def _match_address(self, partner):
+        self.ensure_one()
         # Override to account for city_ids
         if self.city_ids and partner.city_id not in self.city_ids:
             return False
