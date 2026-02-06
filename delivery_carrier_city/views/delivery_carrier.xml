@@ -9,7 +9,11 @@
         <field name="inherit_id" ref="delivery.view_delivery_carrier_form" />
         <field name="arch" type="xml">
             <field name="state_ids" position="after">
-                <field name="city_ids" widget="many2many_tags" domain="[('state_id', 'in', state_ids), ('id', 'not in', city_ids)]"/>
+                <field 
+                    name="city_ids"
+                    widget="many2many_tags"
+                    domain="[('state_id', 'in', state_ids), ('id', 'not in', city_ids)]"
+                />
             </field>
         </field>
     </record>
