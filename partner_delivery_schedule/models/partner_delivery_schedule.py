@@ -38,7 +38,6 @@ class DeliverySchedule(models.Model):
         "monday",
         "tuesday",
         "wednesday",
-        "wednesday",
         "thursday",
         "friday",
         "saturday",
