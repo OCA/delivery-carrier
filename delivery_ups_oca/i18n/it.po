@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-08-25 11:25+0000\n"
+"PO-Revision-Date: 2026-02-10 15:09+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10.4\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__02
@@ -307,7 +307,7 @@ msgstr "UPS contanti alla consegna"
 #. module: delivery_ups_oca
 #: model:ir.model.fields,field_description:delivery_ups_oca.field_delivery_carrier__ups_cod_funds_code
 msgid "UPS Cod Funds Code"
-msgstr "UPS Cod Funds Code"
+msgstr "Codice UPS Cod Funds"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__74
