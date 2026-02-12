@@ -4,7 +4,7 @@
 {
     "name": "Delivery CBL",
     "summary": "Integrate CBL webservice",
-    "version": "17.0.2.0.0",
+    "version": "17.0.2.0.1",
     "category": "Delivery",
     "website": "https://github.com/OCA/delivery-carrier",
     "author": "Sygel, Odoo Community Association (OCA)",
