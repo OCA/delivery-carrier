@@ -60,7 +60,7 @@ class DeliveryCarrier(models.Model):
         partner = picking.partner_id
         sending_partner = picking.picking_type_id.warehouse_id.partner_id
         streets = self._get_partner_streets(partner)
-        phone = partner.mobile or partner.phone or ""
+        phone = partner.phone or ""
         national = partner.country_id.code == sending_partner.country_id.code
         return {
             "codDest": "",

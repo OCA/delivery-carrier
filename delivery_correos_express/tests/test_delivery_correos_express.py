@@ -122,3 +122,11 @@ class TestCorreosExpressParcel(common.SingleTransactionCase):
             self.picking
         )
         self.assertFalse(result)
+
+    def test_correos_express_get_label_no_delivery_correos(self):
+        delivery = self.env["delivery.carrier"].search(
+            [("delivery_type", "!=", "correos_express")], limit=1
+        )
+        self.picking.write({"carrier_id": delivery.id})
+        label = self.picking.correos_express_get_label()
+        self.assertFalse(label)
