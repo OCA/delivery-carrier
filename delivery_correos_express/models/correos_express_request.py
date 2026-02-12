@@ -86,15 +86,17 @@ class CorreosExpressRequest:
         except Exception as e:
             raise UserError(
                 self.carrier_id.env._(
-                    "{error}\n{result}".format(error=e, result=result if result else "")
+                    "%(error)s\n%(result)s", error=e, result=result if result else ""
                 )
             ) from e
         return_code, message = self._check_for_error(result)
         if return_code != 0:
             raise UserError(
                 self.carrier_id.env._(
-                    "Correos Express Error: {return_code} {message}"
-                ).format(return_code=return_code, message=message)
+                    "Correos Express Error: %(return_code)s %(message)s",
+                    return_code=return_code,
+                    message=message,
+                )
             )
         return res
 

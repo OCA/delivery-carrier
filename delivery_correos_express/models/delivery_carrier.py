@@ -4,7 +4,7 @@ import base64
 
 from unidecode import unidecode
 
-from odoo import _, fields, models
+from odoo import fields, models
 
 from .correos_express_request import (
     CORREOS_EXPRESS_LABEL_TYPE,
@@ -190,7 +190,7 @@ class DeliveryCarrier(models.Model):
                     )
                     for index, label in enumerate(response.get("etiqueta"))
                 ]
-            picking.message_post(body=_(""), attachments=attachments)
+            picking.message_post(body=self.env._(""), attachments=attachments)
             result.append(vals)
         return result
 
@@ -238,7 +238,7 @@ class DeliveryCarrier(models.Model):
     def correos_express_cancel_shipment(self, pickings):
         for picking in pickings.filtered("carrier_tracking_ref"):
             picking.message_post(
-                body=_(
+                body=self.env._(
                     "Correos Express does not provide a method to cancel a shipment "
                     "that has been registered. If you need to change some information "
                     "you, create a new shipment with a new label. This doesn't mean "
@@ -269,12 +269,12 @@ class DeliveryCarrier(models.Model):
         return {
             "success": True,
             "price": self.product_id.lst_price,
-            "error_message": _(
+            "error_message": self.env._(
                 "Correos Express API doesn't provide methods to compute "
                 "delivery rates, so you should rely on another price method "
                 "instead or override this one in your custom code."
             ),
-            "warning_message": _(
+            "warning_message": self.env._(
                 "Correos Express API doesn't provide methods to compute "
                 "delivery rates, so you should rely on another price method "
                 "instead or override this one in your custom code."

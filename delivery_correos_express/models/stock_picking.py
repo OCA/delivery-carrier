@@ -3,7 +3,7 @@
 
 import base64
 
-from odoo import _, models
+from odoo import models
 from odoo.exceptions import UserError
 
 
@@ -17,14 +17,14 @@ class StockPicking(models.Model):
             return
         labels = self.carrier_id.correos_express_get_label(tracking_ref)
         if not labels:
-            raise UserError(_("No label was returned"))
+            raise UserError(self.env._("No label was returned"))
         is_pdf = self.carrier_id.correos_express_label_type != "2"
         decoded_labels = [
             base64.b64decode(label) if is_pdf else label for label in labels
         ]
         label_format = "pdf" if is_pdf else "txt"
         self.message_post(
-            body=(_("Correos Express label for %s") % tracking_ref),
+            body=self.env._("Correos Express label for %s", tracking_ref),
             attachments=[
                 (
                     f"correos_express_{tracking_ref}_{index + 1}.{label_format}",
