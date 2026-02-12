@@ -5,7 +5,7 @@
     "name": "Delivery Price Method",
     "summary": "Force a fixed or rule price calculation on Delivery Methods"
     ", for example to override a webservice provided prices.",
-    "author": "Trey (www.trey.es), " "Odoo Community Association (OCA)",
+    "author": "Trey (www.trey.es), Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/delivery-carrier",
     "license": "AGPL-3",
     "development_status": "Production/Stable",
