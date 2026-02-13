@@ -10,7 +10,7 @@
     "license": "AGPL-3",
     "development_status": "Production/Stable",
     "category": "Delivery",
-    "version": "18.0.1.1.0",
+    "version": "19.0.1.0.0",
     "depends": ["stock_delivery"],
     "data": ["views/delivery_carrier_views.xml"],
 }
