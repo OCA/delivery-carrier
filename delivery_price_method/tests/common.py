@@ -54,8 +54,39 @@ class TestDeliveryPriceMethodCommon(BaseCommon):
                 ],
             }
         )
-        self.product = self.env.ref("product.product_delivery_01")
-        self.partner = self.env.ref("base.res_partner_12")
+        self.product_category = self.env["product.category"].create({"name": "Office"})
+        self.product = self.env["product.product"].create(
+            {
+                "name": "Office Chair",
+                "categ_id": self.product_category.id,
+                "standard_price": 55.0,
+                "list_price": 70.0,
+                "type": "consu",
+                "weight": 0.01,
+                "uom_id": self.env.ref("uom.product_uom_unit").id,
+                "default_code": "FURN_7777",
+                "description_sale": "Comfortable yellow chair for daily work",
+            }
+        )
+        self.res_partner_category = self.env["res.partner.category"].create(
+            {"name": "Services", "color": 7}
+        )
+        self.partner = self.env["res.partner"].create(
+            {
+                "name": "Azure Interior",
+                "category_id": [self.res_partner_category.id],
+                "is_company": True,
+                "street": "4557 De Silva St",
+                "city": "Fremont",
+                "state_id": self.env.ref("base.state_us_5").id,
+                "zip": "94538",
+                "phone": "(870)-931-0505",
+                "country_id": self.env.ref("base.us").id,
+                "email": "azure.Interior24@example.com",
+                "website": "http://www.azure-interior.com",
+                "vat": "US12345677",
+            }
+        )
         self.sale = self.env["sale.order"].create(
             {
                 "partner_id": self.partner.id,
