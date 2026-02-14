@@ -1,0 +1,158 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* delivery_nacex
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-14 17:46+0000\n"
+"PO-Revision-Date: 2026-02-14 17:46+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: pt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: delivery_nacex
+#: model:ir.model.fields,field_description:delivery_nacex.field_delivery_carrier__nacex_agency_code
+msgid "Agency Code"
+msgstr "Código da Agência"
+
+#. module: delivery_nacex
+#: model:ir.model.fields,help:delivery_nacex.field_delivery_carrier__nacex_agency_code
+msgid "NACEX agency code"
+msgstr "Código da agência NACEX"
+
+#. module: delivery_nacex
+#: model:ir.model.fields,field_description:delivery_nacex.field_delivery_carrier__nacex_carriage_code
+msgid "Carriage Code"
+msgstr "Código de Porte"
+
+#. module: delivery_nacex
+#: model:ir.model.fields,help:delivery_nacex.field_delivery_carrier__nacex_carriage_code
+msgid "Enter your Nacex carriage code"
+msgstr "Introduza o seu código de porte Nacex"
+
+#. module: delivery_nacex
+#: model:ir.model.fields,field_description:delivery_nacex.field_delivery_carrier__nacex_customer_code
+msgid "Customer Code"
+msgstr "Código de Cliente"
+
+#. module: delivery_nacex
+#: model:ir.model.fields,help:delivery_nacex.field_delivery_carrier__nacex_customer_code
+msgid "NACEX customer code"
+msgstr "Código de cliente NACEX"
+
+#. module: delivery_nacex
+#: model:ir.model.fields,field_description:delivery_nacex.field_delivery_carrier__nacex_packaging_code
+msgid "Packaging Code"
+msgstr "Código de Embalagem"
+
+#. module: delivery_nacex
+#: model:ir.model.fields,field_description:delivery_nacex.field_delivery_carrier__nacex_service_code
+msgid "Service Code"
+msgstr "Código de Serviço"
+
+#. module: delivery_nacex
+#: model:ir.model.fields,field_description:delivery_nacex.field_stock_picking__nacex_with_return
+#: model:ir.model.fields,field_description:delivery_nacex.field_delivery_carrier__nacex_with_return
+msgid "With Return?"
+msgstr "Com Devolução?"
+
+#. module: delivery_nacex
+#: model:ir.model.fields,help:delivery_nacex.field_stock_picking__nacex_with_return
+msgid "Enable return shipment for NACEX deliveries"
+msgstr "Ativar envio com devolução para entregas NACEX"
+
+#. module: delivery_nacex
+#: model:ir.model.fields.selection,name:delivery_nacex.selection__delivery_carrier__nacex_carriage_code__D
+msgid "Destino"
+msgstr "Destino"
+
+#. module: delivery_nacex
+#: model:ir.model.fields.selection,name:delivery_nacex.selection__delivery_carrier__nacex_carriage_code__O
+msgid "Origen"
+msgstr "Origem"
+
+#. module: delivery_nacex
+#: model:ir.model.fields.selection,name:delivery_nacex.selection__delivery_carrier__nacex_carriage_code__T
+msgid "Tercera"
+msgstr "Terceira"
+
+#. module: delivery_nacex
+#: model:ir.model.fields.selection,name:delivery_nacex.selection__delivery_carrier__nacex_packaging_code__0
+msgid "Docs"
+msgstr "Documentos"
+
+#. module: delivery_nacex
+#: model:ir.model.fields.selection,name:delivery_nacex.selection__delivery_carrier__nacex_packaging_code__1
+msgid "Bag"
+msgstr "Saco"
+
+#. module: delivery_nacex
+#: model:ir.model.fields.selection,name:delivery_nacex.selection__delivery_carrier__nacex_packaging_code__2
+msgid "Pag"
+msgstr "Embalagem"
+
+#. module: delivery_nacex
+#: model:ir.model.fields.selection,name:delivery_nacex.selection__delivery_carrier__delivery_type__nacex
+msgid "NACEX"
+msgstr "NACEX"
+
+#. module: delivery_nacex
+#: model:ir.ui.view,arch_db:delivery_nacex.view_delivery_carrier_form_nacex
+msgid "NACEX Configuration"
+msgstr "Configuração NACEX"
+
+#. module: delivery_nacex
+#: model:ir.model.fields,help:delivery_nacex.field_delivery_carrier__nacex_service_code
+msgid "Select NACEX service type"
+msgstr "Selecionar tipo de serviço NACEX"
+
+#. module: delivery_nacex
+#: model:ir.model.fields,help:delivery_nacex.field_delivery_carrier__nacex_packaging_code
+msgid "Select NACEX packaging type"
+msgstr "Selecionar tipo de embalagem NACEX"
+
+#. module: delivery_nacex
+#: model:ir.model.fields,help:delivery_nacex.field_delivery_carrier__nacex_packaging_id
+msgid "Select NACEX packaging format"
+msgstr "Selecionar formato de embalagem NACEX"
+
+#. module: delivery_nacex
+#: model:ir.model.fields,field_description:delivery_nacex.field_delivery_carrier__nacex_packaging_id
+msgid "Packaging Format"
+msgstr "Formato de Embalagem"
+
+#. module: delivery_nacex
+#: code:addons/delivery_nacex/models/delivery_carrier.py:114
+#, python-format
+msgid "Please configure a NACEX carrier account."
+msgstr "Por favor configure uma conta de transportadora NACEX."
+
+#. module: delivery_nacex
+#: code:addons/delivery_nacex/models/delivery_carrier.py:132
+#, python-format
+msgid "NACEX connection error: %(error)s"
+msgstr "Erro de conexão NACEX: %(error)s"
+
+#. module: delivery_nacex
+#: code:addons/delivery_nacex/models/delivery_carrier.py:167
+#, python-format
+msgid "Please define a correct sender address."
+msgstr "Por favor defina um endereço de remetente correto."
+
+#. module: delivery_nacex
+#: code:addons/delivery_nacex/models/delivery_carrier.py:169
+#, python-format
+msgid "Please define a correct recipient address."
+msgstr "Por favor defina um endereço de destinatário correto."
+
+#. module: delivery_nacex
+#: code:addons/delivery_nacex/models/delivery_carrier.py:243
+#, python-format
+msgid "NACEX cancel shipment API is not available."
+msgstr "A API de cancelamento de envio NACEX não está disponível."
