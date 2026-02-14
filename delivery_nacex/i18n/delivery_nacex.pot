@@ -1,0 +1,244 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* nacex_odoo_integration
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-14 17:06+0000\n"
+"PO-Revision-Date: 2026-02-14 17:06+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: nacex_odoo_integration
+#: model:ir.model.fields.selection,name:nacex_odoo_integration.selection__delivery_carrier__tip_ser__33
+msgid "\tC @ MBIO 33"
+msgstr ""
+
+#. module: nacex_odoo_integration
+#: model:ir.model.fields.selection,name:nacex_odoo_integration.selection__delivery_carrier__tip_ser__27
+msgid "\tE-NACEX 27"
+msgstr ""
+
+#. module: nacex_odoo_integration
+#: model:ir.model.fields.selection,name:nacex_odoo_integration.selection__delivery_carrier__tip_ser__30
+msgid "\tNX-SHOP ORANGE 30"
+msgstr ""
+
+#. module: nacex_odoo_integration
+#: model:ir.model.fields.selection,name:nacex_odoo_integration.selection__delivery_carrier__tip_env__1
+msgid "Bag 1"
+msgstr ""
+
+#. module: nacex_odoo_integration
+#: model:ir.model.fields.selection,name:nacex_odoo_integration.selection__delivery_carrier__tip_ser__22
+msgid "CANARY ISLANDS 22"
+msgstr ""
+
+#. module: nacex_odoo_integration
+#: model:ir.model.fields.selection,name:nacex_odoo_integration.selection__delivery_carrier__tip_ser__24
+msgid "CANARY ISLANDS 24H 24"
+msgstr ""
+
+#. module: nacex_odoo_integration
+#: model:ir.model.fields.selection,name:nacex_odoo_integration.selection__delivery_carrier__tip_ser__48
+msgid "CANARY ISLANDS 48H 48"
+msgstr ""
+
+#. module: nacex_odoo_integration
+#: model:ir.model.fields,field_description:nacex_odoo_integration.field_stock_package_type__package_carrier_type
+msgid "Carrier"
+msgstr ""
+
+#. module: nacex_odoo_integration
+#: model:ir.model,name:nacex_odoo_integration.model_res_company
+msgid "Companies"
+msgstr ""
+
+#. module: nacex_odoo_integration
+#: model:ir.model.fields.selection,name:nacex_odoo_integration.selection__delivery_carrier__tip_ser__96
+msgid "DEV. ORIGIN 96"
+msgstr ""
+
+#. module: nacex_odoo_integration
+#: model:ir.model.fields.selection,name:nacex_odoo_integration.selection__delivery_carrier__tip_cob__d
+msgid "Destino D"
+msgstr ""
+
+#. module: nacex_odoo_integration
+#: model:ir.model.fields,field_description:nacex_odoo_integration.field_delivery_carrier__display_name
+#: model:ir.model.fields,field_description:nacex_odoo_integration.field_res_company__display_name
+#: model:ir.model.fields,field_description:nacex_odoo_integration.field_stock_package_type__display_name
+#: model:ir.model.fields,field_description:nacex_odoo_integration.field_stock_picking__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: nacex_odoo_integration
+#: model:ir.model.fields.selection,name:nacex_odoo_integration.selection__delivery_carrier__tip_env__0
+msgid "Docs 0"
+msgstr ""
+
+#. module: nacex_odoo_integration
+#: model:ir.model.fields.selection,name:nacex_odoo_integration.selection__delivery_carrier__tip_ser__31
+msgid "E-NACEX SHOP 31"
+msgstr ""
+
+#. module: nacex_odoo_integration
+#: model:ir.model.fields.selection,name:nacex_odoo_integration.selection__delivery_carrier__tip_ser__12
+msgid "HEEL RETURN 12"
+msgstr ""
+
+#. module: nacex_odoo_integration
+#: model:ir.model.fields,field_description:nacex_odoo_integration.field_delivery_carrier__id
+#: model:ir.model.fields,field_description:nacex_odoo_integration.field_res_company__id
+#: model:ir.model.fields,field_description:nacex_odoo_integration.field_stock_package_type__id
+#: model:ir.model.fields,field_description:nacex_odoo_integration.field_stock_picking__id
+msgid "ID"
+msgstr ""
+
+#. module: nacex_odoo_integration
+#: model:ir.model.fields.selection,name:nacex_odoo_integration.selection__delivery_carrier__tip_ser__03
+msgid "INTERDIA 03"
+msgstr ""
+
+#. module: nacex_odoo_integration
+#: model:ir.model.fields.selection,name:nacex_odoo_integration.selection__delivery_carrier__delivery_type__nacex
+#: model:ir.model.fields.selection,name:nacex_odoo_integration.selection__stock_package_type__package_carrier_type__nacex
+msgid "NACEX"
+msgstr ""
+
+#. module: nacex_odoo_integration
+#: model:ir.model.fields.selection,name:nacex_odoo_integration.selection__delivery_carrier__tip_ser__eleven
+msgid "NACEX 08: 30H eleven"
+msgstr ""
+
+#. module: nacex_odoo_integration
+#: model:ir.model.fields.selection,name:nacex_odoo_integration.selection__delivery_carrier__tip_ser__01
+msgid "NACEX 10: 00H 01"
+msgstr ""
+
+#. module: nacex_odoo_integration
+#: model:ir.model.fields.selection,name:nacex_odoo_integration.selection__delivery_carrier__tip_ser__02
+msgid "NACEX 12: 00H 02"
+msgstr ""
+
+#. module: nacex_odoo_integration
+#: model:ir.model.fields.selection,name:nacex_odoo_integration.selection__delivery_carrier__tip_ser__08
+msgid "NACEX 19: 00H 08"
+msgstr ""
+
+#. module: nacex_odoo_integration
+#: model_terms:ir.ui.view,arch_db:nacex_odoo_integration.nacex_credential_configuration
+#: model_terms:ir.ui.view,arch_db:nacex_odoo_integration.nacex_deleivery_method_configuration
+msgid "NACEX Configuration"
+msgstr ""
+
+#. module: nacex_odoo_integration
+#: model:ir.model.fields.selection,name:nacex_odoo_integration.selection__delivery_carrier__tip_ser__90
+msgid "NACEX.SHOP 90"
+msgstr ""
+
+#. module: nacex_odoo_integration
+#: model:ir.model.fields.selection,name:nacex_odoo_integration.selection__delivery_carrier__tip_ser__29
+msgid "NX-SHOP GREEN 29"
+msgstr ""
+
+#. module: nacex_odoo_integration
+#: model:ir.model.fields.selection,name:nacex_odoo_integration.selection__delivery_carrier__tip_cob__o
+msgid "Origen O"
+msgstr ""
+
+#. module: nacex_odoo_integration
+#: model:ir.model.fields.selection,name:nacex_odoo_integration.selection__delivery_carrier__tip_ser__04
+msgid "PLUS BAG 1 04"
+msgstr ""
+
+#. module: nacex_odoo_integration
+#: model:ir.model.fields.selection,name:nacex_odoo_integration.selection__delivery_carrier__tip_ser__05
+msgid "PLUS BAG 2, 05"
+msgstr ""
+
+#. module: nacex_odoo_integration
+#: model:ir.model.fields.selection,name:nacex_odoo_integration.selection__delivery_carrier__tip_ser__26
+msgid "PLUS PACK 26"
+msgstr ""
+
+#. module: nacex_odoo_integration
+#: model:ir.model.fields.selection,name:nacex_odoo_integration.selection__delivery_carrier__tip_ser__28
+msgid "PREMIUM 28"
+msgstr ""
+
+#. module: nacex_odoo_integration
+#: model:ir.model.fields,field_description:nacex_odoo_integration.field_delivery_carrier__delivery_type
+msgid "Provider"
+msgstr ""
+
+#. module: nacex_odoo_integration
+#: model:ir.model.fields.selection,name:nacex_odoo_integration.selection__delivery_carrier__tip_ser__10
+msgid "RETURN ALBARAN CUSTOMER 10"
+msgstr ""
+
+#. module: nacex_odoo_integration
+#: model:ir.model.fields.selection,name:nacex_odoo_integration.selection__delivery_carrier__tip_ser__17
+msgid "RETURN E-NACEX 17"
+msgstr ""
+
+#. module: nacex_odoo_integration
+#: model:ir.model.fields.selection,name:nacex_odoo_integration.selection__delivery_carrier__tip_ser__14
+msgid "RETURN PLUS BAG 1 14"
+msgstr ""
+
+#. module: nacex_odoo_integration
+#: model:ir.model.fields.selection,name:nacex_odoo_integration.selection__delivery_carrier__tip_ser__fifteen
+msgid "RETURN PLUS BAG 2 fifteen"
+msgstr ""
+
+#. module: nacex_odoo_integration
+#: model:ir.model.fields.selection,name:nacex_odoo_integration.selection__delivery_carrier__tip_ser__95
+msgid "RETURN SWAP 95"
+msgstr ""
+
+#. module: nacex_odoo_integration
+#: model:ir.model.fields.selection,name:nacex_odoo_integration.selection__delivery_carrier__tip_ser__88
+msgid "RIGH NOW 88"
+msgstr ""
+
+#. module: nacex_odoo_integration
+#: model:ir.model.fields.selection,name:nacex_odoo_integration.selection__delivery_carrier__tip_ser__06
+msgid "SUITCASE 06"
+msgstr ""
+
+#. module: nacex_odoo_integration
+#: model:ir.model.fields.selection,name:nacex_odoo_integration.selection__delivery_carrier__tip_ser__91
+msgid "SWAP 91"
+msgstr ""
+
+#. module: nacex_odoo_integration
+#: model:ir.model,name:nacex_odoo_integration.model_delivery_carrier
+msgid "Shipping Methods"
+msgstr ""
+
+#. module: nacex_odoo_integration
+#: model:ir.model,name:nacex_odoo_integration.model_stock_package_type
+msgid "Stock package type"
+msgstr ""
+
+#. module: nacex_odoo_integration
+#: model:ir.model,name:nacex_odoo_integration.model_stock_picking
+msgid "Transfer"
+msgstr ""
+
+#. module: nacex_odoo_integration
+#: model:ir.model.fields.selection,name:nacex_odoo_integration.selection__delivery_carrier__tip_ser__09
+msgid "URBAN BRIDGE 09"
+msgstr ""
+
+#. module: nacex_odoo_integration
+#: model:ir.model.fields.selection,name:nacex_odoo_integration.selection__delivery_carrier__tip_ser__07
+msgid "VALIJA ROUND TRIP 07"
+msgstr ""

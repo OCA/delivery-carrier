@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="nacex_delivery_method_configuration" model="ir.ui.view">
+        <field name="name">delivery.carrier.form.nacex</field>
+        <field name="model">delivery.carrier</field>
+        <field name="inherit_id" ref="delivery.view_delivery_carrier_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='destination']" position="before">
+                <page
+                    string="NACEX Configuration"
+                    name="nacex_configuration"
+                    invisible="delivery_type != 'nacex'"
+                >
+                    <group>
+                        <group>
+                            <field
+                                name="nacex_agency_code"
+                                required="delivery_type == 'nacex'"
+                            />
+                            <field
+                                name="nacex_customer_code"
+                                required="delivery_type == 'nacex'"
+                            />
+                            <field
+                                name="nacex_service_code"
+                                required="delivery_type == 'nacex'"
+                            />
+                            <field
+                                name="nacex_carriage_code"
+                                required="delivery_type == 'nacex'"
+                            />
+                            <field
+                                name="nacex_packaging_code"
+                                required="delivery_type == 'nacex'"
+                            />
+                            <field name="nacex_with_return"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
