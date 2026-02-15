@@ -20,6 +20,33 @@ class DeliverySchedule(models.Model):
     saturday = fields.Boolean()
     sunday = fields.Boolean()
 
+    partner_ids = fields.Many2many(
+        comodel_name="res.partner",
+        relation="res_partner_delivery_schedule_rel",
+        column1="delivery_schedule_id",
+        column2="partner_id",
+        string="Partners",
+        compute="_compute_partner_ids",
+        inverse="_inverse_partner_ids",
+    )
+
+    def _compute_partner_ids(self):
+        all_partners = self.env["res.partner"].search(
+            [("delivery_schedule_ids", "in", self.ids)]
+        )
+        for schedule in self:
+            schedule.partner_ids = all_partners.filtered(
+                lambda p, s=schedule: s in p.delivery_schedule_ids
+            )
+
+    def _inverse_partner_ids(self):
+        for schedule in self:
+            to_add = schedule.partner_ids.filtered(
+                lambda p, s=schedule: s not in p.delivery_schedule_ids
+            )
+            if to_add:
+                to_add.write({"delivery_schedule_ids": [(4, schedule.id)]})
+
     @api.constrains("hour_from", "hour_to")
     def _check_hour_interval(self):
         if (
