@@ -22,6 +22,9 @@
                         <field name="saturday" />
                         <field name="sunday" />
                     </group>
+                    <group string="Partners">
+                        <field name="partner_ids" />
+                    </group>
                 </sheet>
             </form>
         </field>
