@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 NICO SOLUTIONS - Nils Coenen
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_picking_form_inherit_partner_delivery_schedule" model="ir.ui.view">
+        <field name="name">stock.picking.form.inherit.partner.delivery.schedule</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="after">
+                <div
+                    invisible="not partner_delivery_schedule_warning"
+                    class="alert alert-warning"
+                    role="alert"
+                >
+                    <field
+                        name="partner_delivery_schedule_warning"
+                        readonly="1"
+                        force_save="1"
+                    />
+                </div>
+                <div
+                    invisible="not partner_pickings_schedule_info"
+                    class="alert alert-info"
+                    role="alert"
+                >
+                    <field
+                        name="partner_pickings_schedule_info"
+                        readonly="1"
+                        force_save="1"
+                    />
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
