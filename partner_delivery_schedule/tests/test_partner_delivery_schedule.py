@@ -96,3 +96,8 @@ class TestStockPikingReturnRefundOption(BaseCommon):
         )
         self.assertRegex(str(res[0]), "08:00-10:00")
         self.assertRegex(str(res[0]), "10:00-12:00")
+
+    def test_partner_ids_inverse(self):
+        new_partner = self.env["res.partner"].create({"name": "New Partner"})
+        self.schedule.partner_ids = [(4, new_partner.id)]
+        self.assertIn(self.schedule, new_partner.delivery_schedule_ids)
