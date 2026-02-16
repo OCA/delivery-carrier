@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_picking_withcarrier_out_form" model="ir.ui.view">
+        <field name="model">stock.picking</field>
+        <field
+            name="inherit_id"
+            ref="stock_delivery.view_picking_withcarrier_out_form"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='print_return_label']/.." position='inside'>
+                <button
+                    name="correos_express_get_label"
+                    string="Print Correos Express Label"
+                    type="object"
+                    invisible="carrier_tracking_ref == False or delivery_type != 'correos_express' or state != 'done'"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
