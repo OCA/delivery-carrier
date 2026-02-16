@@ -312,24 +312,26 @@ class PostlogisticsWebService:
 
             # ensure token exists and is not expired
             if (
-                picking_carrier.postlogistics_token
-                and picking_carrier.postlogistics_token_expiry
+                picking_carrier.sudo().postlogistics_token
+                and picking_carrier.sudo().postlogistics_token_expiry
             ):
                 # keep a safe margin on the expiration
-                expiry = picking_carrier.postlogistics_token_expiry - timedelta(
+                expiry = picking_carrier.sudo().postlogistics_token_expiry - timedelta(
                     seconds=5
                 )
                 if now < expiry:
-                    return picking_carrier.postlogistics_token
+                    return picking_carrier.sudo().postlogistics_token
 
             # obtain a new token if needed
             response = cls._request_access_token(picking_carrier)
-            picking_carrier.postlogistics_token = response.get("access_token", False)
-            picking_carrier.postlogistics_token_expiry = now + timedelta(
+            picking_carrier.sudo().postlogistics_token = response.get(
+                "access_token", False
+            )
+            picking_carrier.sudo().postlogistics_token_expiry = now + timedelta(
                 seconds=response["expires_in"]
             )
 
-            if not (picking_carrier.postlogistics_token):
+            if not (picking_carrier.sudo().postlogistics_token):
                 raise UserError(
                     picking_carrier.env._(
                         "Authorization Required\n\n"
@@ -339,10 +341,10 @@ class PostlogisticsWebService:
                     )
                 )
 
-            picking_carrier.postlogistics_token_expiry = now + timedelta(
+            picking_carrier.sudo().postlogistics_token_expiry = now + timedelta(
                 seconds=response["expires_in"]
             )
-            return picking_carrier.postlogistics_token
+            return picking_carrier.sudo().postlogistics_token
 
     def generate_label(self, picking, packages):
         """Generate a label for a picking
