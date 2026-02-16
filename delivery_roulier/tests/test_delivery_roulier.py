@@ -2,9 +2,10 @@
 from unittest.mock import MagicMock, patch
 
 from odoo_test_helper import FakeModelLoader
-from roulier import roulier
 
 from odoo.tests.common import SavepointCase
+
+from roulier import roulier
 
 roulier_ret = {
     "parcels": [

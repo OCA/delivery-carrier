@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    Copyright 2026 Akretion (http://www.akretion.com).
+    @author Florian Mounier <florian.mounier@akretion.com>
+    License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo noupdate="1">
+    <record id="dhl_express_product" model="product.product">
+    <field name="default_code">SHIP_DHL_EXPRESS</field>
+        <field name="type">service</field>
+        <field name="name">Coûts de livraison - DHL Express</field>
+    </record>
+</odoo>

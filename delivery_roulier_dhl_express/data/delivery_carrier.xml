@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    Copyright 2026 Akretion (http://www.akretion.com).
+    @author Florian Mounier <florian.mounier@akretion.com>
+    License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo noupdate="1">
+
+    <record id="delivery_carrier_dhl_express_dom" model="delivery.carrier">
+        <!-- Livraison domestique dans la journée. (Corse & Monaco inclus hors DOM-TOM) -->
+        <field name="name">DHL Domestic Express France (DOM)</field>
+        <field name="code">N</field>
+        <field name="product_id" ref="dhl_express_product" />
+        <field name="delivery_type">dhl_express</field>
+    </record>
+    <record id="delivery_carrier_dhl_express_dot" model="delivery.carrier">
+        <!-- Livraison avant 12h sans dédouanement en France (Corse & Monaco inclus. hors DOM-TOM) (produit disponible selon la destination) -->
+        <field name="name">DHL Domestic Express 12:00 France (DOT)</field>
+        <field name="code">1</field>
+        <field name="product_id" ref="dhl_express_product" />
+        <field name="delivery_type">dhl_express</field>
+    </record>
+    <record id="delivery_carrier_dhl_express_dol" model="delivery.carrier">
+        <!-- Livraison avant 10h30 sans dédouanement, en France (Corse & Monaco inclus. hors DOM-TOM) (produit disponible selon la destination) -->
+        <field name="name">DHL Domestic Express 10:30 France (DOL)</field>
+        <field name="code">O</field>
+        <field name="product_id" ref="dhl_express_product" />
+        <field name="delivery_type">dhl_express</field>
+    </record>
+    <record id="delivery_carrier_dhl_express_ecx" model="delivery.carrier">
+        <!-- Livraison Express au sein de l’Union Européenne. -->
+        <field name="name">DHL Express Worldwide EU UE hors France (ECX)</field>
+        <field name="code">U</field>
+        <field name="product_id" ref="dhl_express_product" />
+        <field name="delivery_type">dhl_express</field>
+    </record>
+    <record id="delivery_carrier_dhl_express_tdt" model="delivery.carrier">
+        <!-- Livraison avant 12h (produit disponible selon la destination). -->
+        <field name="name">DHL Express 12:00 DOC Monde hors France (TDT)</field>
+        <field name="code">T</field>
+        <field name="product_id" ref="dhl_express_product" />
+        <field name="delivery_type">dhl_express</field>
+    </record>
+    <record id="delivery_carrier_dhl_express_tdl" model="delivery.carrier">
+        <!-- Livraison avant 10h30 de produits [DOC] Non soumis à dédouanement (produit disponible selon la destination). -->
+        <field name="name">DHL Express 10:30 DOC Monde hors France (TDL)</field>
+        <field name="code">L</field>
+        <field name="product_id" ref="dhl_express_product" />
+        <field name="delivery_type">dhl_express</field>
+    </record>
+    <record id="delivery_carrier_dhl_express_tdk" model="delivery.carrier">
+        <!-- Livraison avant 9h (produit disponible selon la destination). -->
+        <field name="name">DHL Express 9:00 DOC Monde hors France (TDK)</field>
+        <field name="code">K</field>
+        <field name="product_id" ref="dhl_express_product" />
+        <field name="delivery_type">dhl_express</field>
+    </record>
+    <record id="delivery_carrier_dhl_express_esu" model="delivery.carrier">
+        <!-- Livraison économique -->
+        <field
+            name="name"
+        >DHL Economy Select (EU) UE hors France, Malte et Chypre (ESU)</field>
+        <field name="code">W</field>
+        <field name="product_id" ref="dhl_express_product" />
+        <field name="delivery_type">dhl_express</field>
+    </record>
+    <record id="delivery_carrier_dhl_express_dox" model="delivery.carrier">
+        <!-- Livraison dans la journée de produits [DOC] Non soumis à dédouanement. -->
+        <field name="name">DHL Express Worldwide DOC Monde hors UE hors FR (DOX)</field>
+        <field name="code">D</field>
+        <field name="product_id" ref="dhl_express_product" />
+        <field name="delivery_type">dhl_express</field>
+    </record>
+    <record id="delivery_carrier_dhl_express_wpx" model="delivery.carrier">
+        <!-- Livraison dans la journée de marchandise [Non DOC] avec dédouanement. -->
+        <field
+            name="name"
+        >DHL Express Worldwide Non DOC Monde hors UE hors FR (WPX)</field>
+        <field name="code">P</field>
+        <field name="product_id" ref="dhl_express_product" />
+        <field name="delivery_type">dhl_express</field>
+    </record>
+    <record id="delivery_carrier_dhl_express_tdy" model="delivery.carrier">
+        <!-- Livraison avant 12h de marchandise [Non DOC] avec dédouanement (produit disponible selon la destination). -->
+        <field name="name">DHL Express 12:00 Non DOC Monde hors UE hors FR (TDY)</field>
+        <field name="code">Y</field>
+        <field name="product_id" ref="dhl_express_product" />
+        <field name="delivery_type">dhl_express</field>
+    </record>
+    <record id="delivery_carrier_dhl_express_tdm" model="delivery.carrier">
+        <!-- Livraison avant 10h30 de marchandise [Non DOC] avec dédouanement (produit disponible selon la destination). -->
+        <field name="name">DHL Express 10:30 Non DOC Monde hors UE hors FR (TDM)</field>
+        <field name="code">M</field>
+        <field name="product_id" ref="dhl_express_product" />
+        <field name="delivery_type">dhl_express</field>
+    </record>
+    <record id="delivery_carrier_dhl_express_tde" model="delivery.carrier">
+        <!-- Livraison avant 9h de marchandise [Non DOC] avec dédouanement (produit disponible selon la destination). -->
+        <field name="name">DHL Express 9:00 Non DOC Monde hors UE hors FR (TDE)</field>
+        <field name="code">E</field>
+        <field name="product_id" ref="dhl_express_product" />
+        <field name="delivery_type">dhl_express</field>
+    </record>
+    <record id="delivery_carrier_dhl_express_esi" model="delivery.carrier">
+        <!-- Livraison économique -->
+        <field
+            name="name"
+        >DHL Economy Select (Non DOC) Uniquement Norvège, Suisse et Royaume-Uni (ESI)</field>
+        <field name="code">H</field>
+        <field name="product_id" ref="dhl_express_product" />
+        <field name="delivery_type">dhl_express</field>
+    </record>
+
+
+    </odoo>

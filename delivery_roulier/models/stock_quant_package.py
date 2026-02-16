@@ -11,8 +11,9 @@ from ..decorator import implemented_by_carrier
 
 _logger = logging.getLogger(__name__)
 try:
-    from roulier import roulier
     from roulier.exception import CarrierError, InvalidApiInput
+
+    from roulier import roulier
 except ImportError:
     _logger.debug("Cannot `import roulier`.")
 

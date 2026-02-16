@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    Copyright 2026 Akretion (http://www.akretion.com).
+    @author Florian Mounier <florian.mounier@akretion.com>
+    License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo noupdate="1">
+    <record id="demo_carrier_account_dhl_express" model="carrier.account">
+    <field name="name">DHL Express default</field>
+        <field name="account">Demo Account</field>
+        <field name="password">Demo password</field>
+        <field name="delivery_type">dhl_express</field>
+    </record>
+</odoo>
