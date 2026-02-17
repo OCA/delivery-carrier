@@ -11,3 +11,9 @@ class DeliveryCarrier(models.Model):
         ondelete="restrict",
         domain="[('type', '=', 'service')]",
     )
+    fee_return_percentage = fields.Float(
+        string="Fee return %",
+        default=0,
+        help="% of the fee to be returned to the customer in case of full return. "
+        "E.g.: 0% for no return, 100% for full return",
+    )

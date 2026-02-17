@@ -6,6 +6,22 @@ from odoo import api, fields, models
 class SaleOrder(models.Model):
     _inherit = "sale.order"
 
+    all_fee_pickings_returned = fields.Boolean(
+        compute="_compute_all_fee_pickings_returned"
+    )
+
+    def _compute_all_fee_pickings_returned(self):
+        self.all_fee_pickings_returned = False
+        for order in self:
+            if not order.order_line.filtered("is_delivery_fee"):
+                continue
+            pickings = order.picking_ids.filtered(
+                lambda x: x._is_to_external_location()
+            )
+            order.all_fee_pickings_returned = all(
+                pick._full_returned() for pick in pickings
+            )
+
     def _prepare_delivery_fee_line_vals(self, picking):
         # Based on core `_prepare_delivery_line_vals`
         carrier = picking.carrier_id
@@ -46,6 +62,12 @@ class SaleOrder(models.Model):
     def _create_delivery_fee_line(self, picking):
         values = self._prepare_delivery_fee_line_vals(picking)
         return self.env["sale.order.line"].sudo().create(values)
+
+    def copy(self, default=None):
+        sale_copy = super().copy(default)
+        # Don't copy fees from one order to another
+        sale_copy.order_line.filtered("is_delivery_fee").unlink()
+        return sale_copy
 
 
 class SaleOrderLine(models.Model):
