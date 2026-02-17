@@ -2,7 +2,9 @@
 # Copyright 2020 FactorLibre
 # Copyright 2020 Tecnativa - David Vidal
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-from odoo import api, fields, models
+from markupsafe import Markup
+
+from odoo import SUPERUSER_ID, api, fields, models
 
 
 class StockPicking(models.Model):
@@ -57,6 +59,11 @@ class StockPicking(models.Model):
         readonly=True,
         copy=False,
     )
+    pod_error = fields.Char(
+        string="Proof of Delivery Error",
+        readonly=True,
+        copy=False,
+    )
 
     def tracking_state_update(self):
         """Call to the service provider API which should have the method
@@ -67,6 +74,10 @@ class StockPicking(models.Model):
             method = "%s_tracking_state_update" % picking.delivery_type
             if hasattr(picking.carrier_id, method):
                 getattr(picking.carrier_id, method)(picking)
+        # Filter pickings with errors and notify
+        pickings_with_errors = self.filtered("pod_error")
+        if pickings_with_errors:
+            pickings_with_errors._send_message_pod_error()
 
     @api.model
     def _update_delivery_state(self):
@@ -86,3 +97,26 @@ class StockPicking(models.Model):
             ]
         )
         pickings.tracking_state_update()
+
+    def _send_message_pod_error(self):
+        channel_admin = self.env.ref("mail.channel_admin", raise_if_not_found=False)
+        if not channel_admin:
+            return
+        pickings_by_carrier = self.grouped("carrier_id")
+        for _carrier, pickings in pickings_by_carrier.items():
+            message = pickings._build_message_pod_error()
+            channel_admin.with_user(SUPERUSER_ID).message_post(body=Markup(message))
+
+    def _build_message_pod_error(self):
+        message = self.env._(
+            "<b>Errors while fetching POD for carrier %s:</b><br/>"
+            "Please review the details below "
+            "and take the necessary actions to resolve these issues.:<br/>",
+            self.carrier_id.name,
+        )
+        message += "<ul>"
+        for picking in self:
+            picking_url = picking._get_html_link()
+            message += f"<li>Picking {picking_url}: {picking.pod_error}</li>"
+        message += "</ul>"
+        return message
