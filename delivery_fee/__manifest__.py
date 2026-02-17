@@ -14,6 +14,7 @@
     "data": [
         "views/res_partner_views.xml",
         "views/delivery_carrier_views.xml",
+        "views/res_config_settings.xml",
         "reports/delivery_slip_report.xml",
         "reports/invoice_report.xml",
     ],
