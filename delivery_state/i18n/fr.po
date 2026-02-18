@@ -35,15 +35,6 @@ msgid ""
 msgstr ""
 
 #. module: delivery_state
-#: model_terms:ir.ui.view,arch_db:delivery_state.res_config_settings_view_form
-msgid ""
-"<span class=\"fa fa-lg fa-building-o\" title=\"Values set here are company-"
-"specific.\" groups=\"base.group_multi_company\"/>"
-msgstr ""
-"<span class=\"fa fa-lg fa-building-o\" title=\"Les valeurs définies ici sont "
-"spécifiques à la société.\" groups=\"base.group_multi_company\"/>"
-
-#. module: delivery_state
 #: model:ir.model.fields.selection,name:delivery_state.selection__stock_picking__delivery_state__canceled_shipment
 msgid "Canceled shipment"
 msgstr "Annuler l'expédition"
@@ -178,6 +169,11 @@ msgid "Update tracking state"
 msgstr "Mettre à jour l'état de suivi"
 
 #. module: delivery_state
+#: model_terms:ir.ui.view,arch_db:delivery_state.res_config_settings_view_form
+msgid "Values set here are company-specific."
+msgstr ""
+
+#. module: delivery_state
 #: model:ir.model.fields.selection,name:delivery_state.selection__stock_picking__delivery_state__warehouse_delivered
 msgid "Warehouse delivered"
 msgstr "Livré à l'entrepôt"
@@ -190,3 +186,10 @@ msgid ""
 msgstr ""
 "Votre commande {{ object.carrier_tracking_ref or object.name }} de "
 "{{ object.company_id.name }}"
+
+#~ msgid ""
+#~ "<span class=\"fa fa-lg fa-building-o\" title=\"Values set here are "
+#~ "company-specific.\" groups=\"base.group_multi_company\"/>"
+#~ msgstr ""
+#~ "<span class=\"fa fa-lg fa-building-o\" title=\"Les valeurs définies ici "
+#~ "sont spécifiques à la société.\" groups=\"base.group_multi_company\"/>"
