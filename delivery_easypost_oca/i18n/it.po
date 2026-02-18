@@ -6,202 +6,205 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-02-18 12:46+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: delivery_easypost_oca
 #: model_terms:ir.ui.view,arch_db:delivery_easypost_oca.view_stock_package_type_easypost_oca
 msgid "<span invisible=\"package_carrier_type != 'easypost_oca'\">Inches</span>"
 msgstr ""
+"<span invisible=\"package_carrier_type != 'easypost_oca'\">Pollici</span>"
 
 #. module: delivery_easypost_oca
 #: model:ir.model.fields.selection,name:delivery_easypost_oca.selection__delivery_carrier__easypost_oca_delivery_multiple_packages__batch
 msgid "Batch"
-msgstr ""
+msgstr "Gruppo"
 
 #. module: delivery_easypost_oca
 #: model:ir.model.fields,field_description:delivery_easypost_oca.field_stock_package_type__package_carrier_type
 msgid "Carrier"
-msgstr ""
+msgstr "Corriere"
 
 #. module: delivery_easypost_oca
 #: model:ir.model.fields,field_description:delivery_easypost_oca.field_stock_package_type__easypost_oca_carrier
 msgid "Carrier Prefix"
-msgstr ""
+msgstr "Prefisso corriere"
 
 #. module: delivery_easypost_oca
 #: model:ir.model,name:delivery_easypost_oca.model_choose_delivery_carrier
 msgid "Delivery Carrier Selection Wizard"
-msgstr ""
+msgstr "Procedura guidata selezione corriere"
 
 #. module: delivery_easypost_oca
 #: model:ir.model.fields,field_description:delivery_easypost_oca.field_delivery_carrier__easypost_oca_delivery_multiple_packages
 msgid "Delivery Multiple Packages"
-msgstr ""
+msgstr "Consegna colli multipli"
 
 #. module: delivery_easypost_oca
 #: model:ir.model.fields,field_description:delivery_easypost_oca.field_delivery_carrier__is_saturday_delivery
 msgid "Delivery On Saturday?"
-msgstr ""
+msgstr "Consegna al sabato?"
 
 #. module: delivery_easypost_oca
 #: model:ir.model.fields.selection,name:delivery_easypost_oca.selection__delivery_carrier__easypost_oca_label_file_type__epl2
 msgid "EPL2"
-msgstr ""
+msgstr "EPL2"
 
 #. module: delivery_easypost_oca
 #: model_terms:ir.ui.view,arch_db:delivery_easypost_oca.easy_view_delivery_carrier_form_inherit
 msgid "Easypost Configuration"
-msgstr ""
+msgstr "Configurazione Easypost"
 
 #. module: delivery_easypost_oca
 #: model:ir.model.fields.selection,name:delivery_easypost_oca.selection__delivery_carrier__delivery_type__easypost_oca
 #: model:ir.model.fields.selection,name:delivery_easypost_oca.selection__ir_logging__type__easypost_oca
 #: model:ir.model.fields.selection,name:delivery_easypost_oca.selection__stock_package_type__package_carrier_type__easypost_oca
 msgid "Easypost OCA"
-msgstr ""
+msgstr "Easypost OCA"
 
 #. module: delivery_easypost_oca
 #: model:ir.model.fields,field_description:delivery_easypost_oca.field_stock_picking__easypost_oca_batch_id
 msgid "Easypost Oca Batch"
-msgstr ""
+msgstr "Gruppo Easypost OCA"
 
 #. module: delivery_easypost_oca
 #: model:ir.model.fields,field_description:delivery_easypost_oca.field_stock_picking__easypost_oca_carrier_id
 msgid "Easypost Oca Carrier"
-msgstr ""
+msgstr "Corriere Easypost OCA"
 
 #. module: delivery_easypost_oca
 #: model:ir.model.fields,field_description:delivery_easypost_oca.field_choose_delivery_carrier__easypost_oca_carrier_name
 #: model:ir.model.fields,field_description:delivery_easypost_oca.field_sale_order__easypost_oca_carrier_name
 #: model:ir.model.fields,field_description:delivery_easypost_oca.field_stock_picking__easypost_oca_carrier_name
 msgid "Easypost Oca Carrier Name"
-msgstr ""
+msgstr "Nome corriere Easypost OCA"
 
 #. module: delivery_easypost_oca
 #: model:ir.model.fields,field_description:delivery_easypost_oca.field_stock_picking__easypost_oca_carrier_service
 msgid "Easypost Oca Carrier Service"
-msgstr ""
+msgstr "Servizio corriere Easypost OCA"
 
 #. module: delivery_easypost_oca
 #: model:ir.model.fields,field_description:delivery_easypost_oca.field_choose_delivery_carrier__easypost_oca_rate_id
 #: model:ir.model.fields,field_description:delivery_easypost_oca.field_sale_order__easypost_oca_rate_id
 #: model:ir.model.fields,field_description:delivery_easypost_oca.field_stock_picking__easypost_oca_rate_id
 msgid "Easypost Oca Rate"
-msgstr ""
+msgstr "Tariffa Easypost OCA"
 
 #. module: delivery_easypost_oca
 #: model:ir.model.fields,field_description:delivery_easypost_oca.field_choose_delivery_carrier__easypost_oca_shipment_id
 #: model:ir.model.fields,field_description:delivery_easypost_oca.field_sale_order__easypost_oca_shipment_id
 #: model:ir.model.fields,field_description:delivery_easypost_oca.field_stock_picking__easypost_oca_shipment_id
 msgid "Easypost Oca Shipment"
-msgstr ""
+msgstr "Spedizione Easypost OCA"
 
 #. module: delivery_easypost_oca
 #: model:ir.model.fields,field_description:delivery_easypost_oca.field_stock_picking__easypost_oca_tracking_url
 msgid "Easypost Oca Tracking Url"
-msgstr ""
+msgstr "URL tracciamento Easypost OCA"
 
 #. module: delivery_easypost_oca
 #: model:ir.model.fields,field_description:delivery_easypost_oca.field_delivery_carrier__easypost_oca_production_api_key
 msgid "Easypost Production API Key"
-msgstr ""
+msgstr "Chiave API produzione Easypost"
 
 #. module: delivery_easypost_oca
 #: model:ir.model.fields,field_description:delivery_easypost_oca.field_delivery_carrier__easypost_oca_test_api_key
 msgid "Easypost Test API Key"
-msgstr ""
+msgstr "Chiave API test Easypost"
 
 #. module: delivery_easypost_oca
 #: model:ir.model.fields,help:delivery_easypost_oca.field_delivery_carrier__easypost_oca_production_api_key
 msgid "Enter your API production key from Easypost account"
-msgstr ""
+msgstr "Inserire la chiave API di produzione dell'account Easypost"
 
 #. module: delivery_easypost_oca
 #: model:ir.model.fields,help:delivery_easypost_oca.field_delivery_carrier__easypost_oca_test_api_key
 msgid "Enter your API test key from Easypost account."
-msgstr ""
+msgstr "Inserire la chiave API test dell'account Easypost."
 
 #. module: delivery_easypost_oca
 #. odoo-python
 #: code:addons/delivery_easypost_oca/models/easypost_request.py:0
 msgid "Failed to retrieve label content."
-msgstr ""
+msgstr "Fallito il recupero del contenuto dell'etichetta."
 
 #. module: delivery_easypost_oca
 #. odoo-python
 #: code:addons/delivery_easypost_oca/models/easypost_request.py:0
 msgid "Failed to retrieve label content: %s"
-msgstr ""
+msgstr "Fallito il recupero del contenuto dell'etichetta: %s"
 
 #. module: delivery_easypost_oca
 #: model:ir.model.fields,field_description:delivery_easypost_oca.field_delivery_carrier__easypost_oca_label_file_type
 msgid "Label Format"
-msgstr ""
+msgstr "Formato etichetta"
 
 #. module: delivery_easypost_oca
 #: model:ir.model,name:delivery_easypost_oca.model_ir_logging
 msgid "Logging"
-msgstr ""
+msgstr "Tracciamento"
 
 #. module: delivery_easypost_oca
 #. odoo-python
 #: code:addons/delivery_easypost_oca/models/delivery_carrier.py:0
 msgid "No rate found for this shipping."
-msgstr ""
+msgstr "Nessuna tariffa trovata per questa spedizione."
 
 #. module: delivery_easypost_oca
 #: model:ir.model.fields.selection,name:delivery_easypost_oca.selection__delivery_carrier__easypost_oca_label_file_type__pdf
 msgid "PDF"
-msgstr ""
+msgstr "PDF"
 
 #. module: delivery_easypost_oca
 #: model:ir.model.fields,field_description:delivery_easypost_oca.field_delivery_carrier__delivery_type
 msgid "Provider"
-msgstr ""
+msgstr "Fornitore"
 
 #. module: delivery_easypost_oca
 #: model:ir.model,name:delivery_easypost_oca.model_sale_order
 msgid "Sales Order"
-msgstr ""
+msgstr "Ordine di vendita"
 
 #. module: delivery_easypost_oca
 #: model:ir.model.fields.selection,name:delivery_easypost_oca.selection__delivery_carrier__easypost_oca_delivery_multiple_packages__shipments
 msgid "Shipments"
-msgstr ""
+msgstr "Spedizioni"
 
 #. module: delivery_easypost_oca
 #: model:ir.model,name:delivery_easypost_oca.model_delivery_carrier
 msgid "Shipping Methods"
-msgstr ""
+msgstr "Metodi di spedizione"
 
 #. module: delivery_easypost_oca
 #: model:ir.model,name:delivery_easypost_oca.model_stock_package_type
 msgid "Stock package type"
-msgstr ""
+msgstr "Tipo collo magazzino"
 
 #. module: delivery_easypost_oca
 #: model:ir.model,name:delivery_easypost_oca.model_stock_picking
 msgid "Transfer"
-msgstr ""
+msgstr "Trasferimento"
 
 #. module: delivery_easypost_oca
 #: model:ir.model.fields,field_description:delivery_easypost_oca.field_ir_logging__type
 msgid "Type"
-msgstr ""
+msgstr "Tipo"
 
 #. module: delivery_easypost_oca
 #. odoo-python
 #: code:addons/delivery_easypost_oca/models/delivery_carrier.py:0
 msgid "You can't cancel Easypost shipping."
-msgstr ""
+msgstr "Non si può annullare una spedizione Easypost."
 
 #. module: delivery_easypost_oca
 #: model:ir.model.fields.selection,name:delivery_easypost_oca.selection__delivery_carrier__easypost_oca_label_file_type__zpl
 msgid "ZPL"
-msgstr ""
+msgstr "ZPL"
