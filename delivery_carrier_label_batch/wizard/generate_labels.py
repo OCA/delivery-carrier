@@ -116,7 +116,7 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
         self.ensure_one()
 
         zpl2_batch_merge = safe_eval(
-            self.env["ir.config_parameter"].get_param("zpl2.batch.merge")
+            self.env["ir.config_parameter"].sudo().get_param("zpl2.batch.merge")
         )
 
         labels = []
