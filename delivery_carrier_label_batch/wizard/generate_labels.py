@@ -86,9 +86,21 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
         try:
             picking.send_to_shipper()
         except OperationalError as oe:
-            _logger.error("Error sending to shipper: %s", oe.diag)
+            diag = getattr(oe, "diag", None)
+            message = str(oe)
+            if diag:
+                parts = []
+                for attr in ("message_primary", "detail", "hint", "context"):
+                    value = getattr(diag, attr, None)
+                    if value:
+                        parts.append(value)
+                if parts:
+                    message = " | ".join(parts)
+                else:
+                    message = message or repr(diag)
+            _logger.error("Error sending to shipper: %s", message)
             raise RetryableJobError(
-                oe.diag,
+                message,
                 seconds=3,
                 # ignore_retry=True,
             ) from oe
@@ -295,9 +307,9 @@ class DeliveryCarrierLabelGenerate(models.TransientModel):
             return assemble_pdf(files)
         if file_type == "zpl2":
             zpl2_single_images = safe_eval(
-                self.env["ir.config_parameter"].get_param(
-                    "zpl2.assembler.single.images"
-                )
+                self.env["ir.config_parameter"]
+                .sudo()
+                .get_param("zpl2.assembler.single.images")
             )
             if zpl2_single_images:
                 return assemble_zpl2_single_images(files)
