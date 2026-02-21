@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- DPD Portugal Carrier Configuration -->
+    <record id="view_delivery_carrier_form_dpd_portugal" model="ir.ui.view">
+        <field name="name">delivery.carrier.form.dpd_portugal</field>
+        <field name="model">delivery.carrier</field>
+        <field name="inherit_id" ref="delivery.view_delivery_carrier_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='destination']" position="before">
+                <page
+                    string="DPD Portugal Configuration"
+                    name="dpd_portugal_configuration"
+                    invisible="delivery_type != 'dpd_pt'"
+                >
+                    <group>
+                        <group string="Configuration">
+                            <field name="prod_environment" />
+                        </group>
+                        <group string="Service Configuration">
+                            <field name="dpd_portugal_service_type" />
+                            <field name="dpd_portugal_default_package_type_id" />
+                            <field name="dpd_portugal_label_format" />
+                            <field name="dpd_portugal_package_weight_unit" />
+                            <field name="dpd_portugal_package_dimension_unit" />
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Additional Services">
+                            <field name="dpd_portugal_cod_enabled" />
+                            <field name="dpd_portugal_insurance_enabled" />
+                            <field
+                                name="dpd_portugal_insurance_amount"
+                                invisible="not dpd_portugal_insurance_enabled"
+                            />
+                            <field name="dpd_portugal_saturday_delivery" />
+                            <field name="dpd_portugal_predict_enabled" />
+                        </group>
+                        <group string="Address &amp; Contact Options">
+                            <field name="dpd_portugal_hide_recipient_phone" />
+                            <field name="dpd_portugal_hide_recipient_email" />
+                            <field name="dpd_portugal_send_label_email" />
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

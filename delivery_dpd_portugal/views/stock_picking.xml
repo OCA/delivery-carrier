@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_stock_picking_form_dpd_portugal" model="ir.ui.view">
+        <field name="name">stock.picking.form.dpd_portugal</field>
+        <field name="model">stock.picking</field>
+        <field
+            name="inherit_id"
+            ref="stock_delivery.view_picking_withcarrier_out_form"
+        />
+        <field name="arch" type="xml">
+            <field name="carrier_id" position="after">
+                <field
+                    name="dpd_portugal_cod_amount"
+                    invisible="carrier_id.delivery_type != 'dpd_pt' or not carrier_id.dpd_portugal_cod_enabled"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>

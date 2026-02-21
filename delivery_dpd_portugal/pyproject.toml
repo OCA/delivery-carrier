@@ -1,0 +1,7 @@
+[project]
+name = "delivery-dpd-portugal"
+version = "19.0.1.0.0"
+
+[build-system]
+requires = ["whool"]
+build-backend = "whool.buildapi"
