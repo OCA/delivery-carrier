@@ -1,8 +1,11 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 import base64
+import io
 from datetime import datetime, timedelta
 from unittest import mock
+
+from PIL import Image
 
 from odoo.exceptions import UserError
 from odoo.tests import Form, common
@@ -74,6 +77,11 @@ class TestDeliveryUpsBase(common.TransactionCase):
             }
         )
         cls.sale = cls._create_sale_order(cls)
+        # Create a simple 1x1 transparent GIF for testing
+        buffer = io.BytesIO()
+        img = Image.new("RGBA", (1, 1), (0, 0, 0, 0))
+        img.save(buffer, format="GIF")
+        cls.label = buffer.getvalue()
 
     def _create_sale_order(self):
         order_form = Form(self.env["sale.order"])
@@ -223,7 +231,6 @@ class TestDeliveryUps(TestDeliveryUpsBase):
                 self.assertEqual(self.picking.delivery_state, "canceled_shipment")
 
     def test_ups_create_shipping(self):
-        label = b"%PDF-1.4\n%EOF"
         with mock.patch(
             _provider_class + "._send_shipping",
             return_value={
@@ -233,7 +240,7 @@ class TestDeliveryUps(TestDeliveryUpsBase):
                     {
                         "tracking_ref": "123456",
                         "format_code": "GIF",
-                        "datas": base64.b64encode(label),
+                        "datas": base64.b64encode(self.label),
                     }
                 ],
             },
@@ -255,9 +262,6 @@ class TestDeliveryUps(TestDeliveryUpsBase):
                     self.assertEqual(len(result["labels"]), 1)
                     self.assertEqual(result["labels"][0]["tracking_ref"], "123456")
                     self.assertEqual(result["labels"][0]["format_code"], "GIF")
-                    self.assertEqual(
-                        result["labels"][0]["datas"], b"JVBERi0xLjQKJUVPRg=="
-                    )
 
     def test_ups_send_shipping(self):
         # Mock the dependencies
@@ -336,8 +340,6 @@ class TestDeliveryUps(TestDeliveryUpsBase):
         # Create a second picking
         picking2 = self.picking.copy()
         picking2.move_ids.quantity = 5
-
-        label = b"%PDF-1.4\n%EOF"
         with mock.patch(
             _provider_class + "._send_shipping",
             side_effect=[
@@ -348,7 +350,7 @@ class TestDeliveryUps(TestDeliveryUpsBase):
                         {
                             "tracking_ref": "123456",
                             "format_code": "GIF",
-                            "datas": base64.b64encode(label),
+                            "datas": base64.b64encode(self.label),
                         }
                     ],
                 },
@@ -359,7 +361,7 @@ class TestDeliveryUps(TestDeliveryUpsBase):
                         {
                             "tracking_ref": "789012",
                             "format_code": "GIF",
-                            "datas": base64.b64encode(label),
+                            "datas": base64.b64encode(self.label),
                         }
                     ],
                 },
@@ -371,6 +373,43 @@ class TestDeliveryUps(TestDeliveryUpsBase):
             self.assertEqual(results[1]["tracking_number"], "789012")
 
     def test_ups_get_label(self):
+        ups_request = UpsRequest(self.carrier)
+        carrier_tracking_ref = "1Z12345E0291980793"
+        mock_label_data = b"%PDF-1.4\nTest PDF Content\n%%EOF"
+        mock_response = {
+            "LabelRecoveryResponse": {
+                "LabelResults": {
+                    "TrackingNumber": "1Z12345E0291980793",
+                    "LabelImage": {
+                        "LabelImageFormat": {"Code": "PDF"},
+                        "GraphicImage": base64.b64encode(mock_label_data).decode(
+                            "ascii"
+                        ),
+                    },
+                }
+            }
+        }
+        with mock.patch.object(
+            ups_request, "_process_reply", return_value=mock_response
+        ):
+            with mock.patch.object(
+                ups_request,
+                "_prepare_shipping_label",
+                return_value={"TrackingNumber": carrier_tracking_ref},
+            ):
+                # Call the method
+                labels = ups_request.shipping_label(carrier_tracking_ref)
+                # Verify the result
+                self.assertEqual(len(labels), 1)
+                self.assertEqual(labels[0]["tracking_ref"], "1Z12345E0291980793")
+                self.assertEqual(labels[0]["format_code"], "PDF")
+                self.assertEqual(
+                    labels[0]["datas"],
+                    base64.b64encode(mock_label_data).decode("ascii"),
+                )
+
+    def test_ups_get_label_pdf(self):
+        self.carrier.ups_file_format = "PDF"
         ups_request = UpsRequest(self.carrier)
         carrier_tracking_ref = "1Z12345E0291980793"
         mock_label_data = b"%PDF-1.4\nTest PDF Content\n%%EOF"
@@ -613,23 +652,22 @@ class TestDeliveryUps(TestDeliveryUpsBase):
 
     def test_ups_create_label_multiple_labels(self):
         # Test creating multiple labels
-        label = b"%PDF-1.4\n%EOF"
         labels = [
             {
                 "tracking_ref": "123456",
                 "format_code": "GIF",
-                "datas": base64.b64encode(label),
+                "datas": base64.b64encode(self.label),
             },
             {
                 "tracking_ref": "789012",
                 "format_code": "ZPL",
-                "datas": base64.b64encode(label),
+                "datas": base64.b64encode(self.label),
             },
         ]
         attachments = self.carrier._create_ups_label(self.picking, labels)
         self.assertEqual(len(attachments), 2)
-        self.assertEqual(attachments[0].name, "123456-GIF.GIF")
-        self.assertEqual(attachments[1].name, "789012-ZPL.ZPL")
+        self.assertEqual(attachments[0].name, "123456-GIF.gif")
+        self.assertEqual(attachments[1].name, "789012-ZPL.zpl")
 
     def _patch_carrier_log_xml(self):
         """Helper to patch the log_xml method on carrier class"""

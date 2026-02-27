@@ -151,9 +151,12 @@ class UpsRequest:
         )
 
     def _label_data(self):
-        res = {"LabelImageFormat": {"Code": self.file_format}}
+        # When PDF is selected,
+        # request GIF from UPS API since UPS doesn't support PDF natively
+        api_format = "GIF" if self.file_format == "PDF" else self.file_format
+        res = {"LabelImageFormat": {"Code": api_format}}
         # According to documentation, we need to specify sizes in some formats
-        if self.file_format != "GIF":
+        if api_format != "GIF":
             res["LabelStockSize"] = {"Height": "6", "Width": "4"}
         return res
 

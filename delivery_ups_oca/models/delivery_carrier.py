@@ -4,6 +4,11 @@
 # Copyright 2024 Sygel - Manuel Regidor
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+import base64
+from io import BytesIO
+
+from PIL import Image
+
 from odoo import fields, models
 
 from .ups_request import UpsRequest
@@ -19,7 +24,13 @@ class DeliveryCarrier(models.Model):
         },
     )
     ups_file_format = fields.Selection(
-        selection=[("GIF", "GIF"), ("ZPL", "ZPL"), ("EPL", "EPL"), ("SPL", "SPL")],
+        selection=[
+            ("PDF", "PDF"),
+            ("GIF", "GIF"),
+            ("ZPL", "ZPL"),
+            ("EPL", "EPL"),
+            ("SPL", "SPL"),
+        ],
         default="GIF",
         string="File format",
     )
@@ -156,7 +167,14 @@ class DeliveryCarrier(models.Model):
         val_list = []
         for label in labels:
             format_code = label["format_code"].upper()
-            attachment_name = f"{label['tracking_ref']}-{format_code}.{format_code}"
+            # When the label format is PDF(GIF), convert it to PDF.
+            if format_code == "GIF" and self.ups_file_format == "PDF":
+                label["datas"] = self._convert_gif_to_pdf(label["datas"])
+                label["format_code"] = "PDF"
+                format_code = "PDF"
+            attachment_name = (
+                f"{label['tracking_ref']}-{format_code}.{format_code.lower()}"
+            )
             val_list.append(
                 self._prepare_ups_label_attachment(
                     picking,
@@ -167,6 +185,19 @@ class DeliveryCarrier(models.Model):
                 )
             )
         return self.env["ir.attachment"].create(val_list)
+
+    def _convert_gif_to_pdf(self, gif_data):
+        """Convert GIF image data to PDF format
+        :param gif_data: base64 encoded
+        :returns: base64 encoded PDF data
+        """
+        img_decoded = base64.b64decode(gif_data)
+        image_string = BytesIO(img_decoded)
+        im = Image.open(image_string)
+        label_result = BytesIO()
+        # Set resolution to 236 DPI (standard for 6x4" UPS labels)
+        im.save(label_result, "PDF", resolution=236.0)
+        return base64.b64encode(label_result.getvalue()).decode()
 
     def ups_get_label(self, carrier_tracking_ref):
         """Generate label for picking
