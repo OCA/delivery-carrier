@@ -2,7 +2,7 @@
 <!-- Copyright 2018 Tecnativa - Sergio Teruel
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-    <record id="view_partner_form" model="ir.ui.view">
+        <record id="view_partner_form" model="ir.ui.view">
         <field name="model">res.partner</field>
         <field name="name">partner delivery zone</field>
         <field name="inherit_id" ref="base.view_partner_form" />
@@ -15,6 +15,11 @@
                 position="after"
             >
                 <field name="delivery_zone_id" invisible="type != 'delivery'" />
+            </xpath>
+            <xpath expr="//field[@name='child_ids']" position="attributes">
+                <attribute name="context">
+                    {'default_delivery_zone_id': delivery_zone_id.id if delivery_zone_id else False}
+                </attribute>
             </xpath>
         </field>
     </record>
