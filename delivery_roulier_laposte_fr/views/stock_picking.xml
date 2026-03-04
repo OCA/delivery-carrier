@@ -14,14 +14,14 @@
                     attrs="{
                         'invisible': ['|',
                                       ('display_insurance', '=', False),
-                                      ('delivery_type', '!=', 'laposte')]}"
+                                      ('delivery_type', '!=', 'laposte_fr')]}"
                 />
                     <field
                     name="laposte_insurance"
                     attrs="{
                         'invisible': ['|',
                                       ('display_insurance', '=', False),
-                                      ('delivery_type', '!=', 'laposte')]}"
+                                      ('delivery_type', '!=', 'laposte_fr')]}"
                 />
             </xpath>
                         <!-- 'readonly': [('state','=','done')], -->
