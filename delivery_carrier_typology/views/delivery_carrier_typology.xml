@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright (C) 2025 Akretion (<http://www.akretion.com>).
+@author Kévin Roche <kevin.roche@akretion.com>
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+
+    <record id="view_delivery_carrier_typology_tree" model="ir.ui.view">
+        <field name="name">delivery.carrier.typology.tree</field>
+        <field name="model">delivery.carrier.typology</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="name" />
+                <field name="code" />
+                <field name="carrier_id" />
+                <field name="company_ids" widget="many2many_tags" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_delivery_carrier_typology" model="ir.actions.act_window">
+        <field name="name">Carrier Typologies</field>
+        <field name="res_model">delivery.carrier.typology</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+    <menuitem
+        id="menu_sale_delivery_carrier_typology"
+        name="Carrier Typologies"
+        parent="sale.menu_sales_config"
+        sequence="5"
+        action="action_delivery_carrier_typology"
+    />
+    <menuitem
+        id="menu_stock_delivery_carrier_typology"
+        name="Carrier Typologies"
+        parent="stock.menu_delivery"
+        sequence="2"
+        action="action_delivery_carrier_typology"
+    />
+</odoo>

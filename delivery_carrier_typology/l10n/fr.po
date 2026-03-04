@@ -1,0 +1,102 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* delivery_carrier_typology
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-15 09:52+0000\n"
+"PO-Revision-Date: 2026-02-15 10:54+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.8\n"
+
+#. module: delivery_carrier_typology
+#: model:ir.actions.act_window,name:delivery_carrier_typology.action_delivery_carrier_typology
+#: model:ir.ui.menu,name:delivery_carrier_typology.menu_sale_delivery_carrier_typology
+#: model:ir.ui.menu,name:delivery_carrier_typology.menu_stock_delivery_carrier_typology
+msgid "Carrier Typologies"
+msgstr "Transporteurs Typologies"
+
+#. module: delivery_carrier_typology
+#: model:ir.model.fields,field_description:delivery_carrier_typology.field_delivery_carrier_typology__company_id
+msgid "Company"
+msgstr ""
+
+#. module: delivery_carrier_typology
+#: model:ir.model.fields,field_description:delivery_carrier_typology.field_delivery_carrier_typology__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: delivery_carrier_typology
+#: model:ir.model.fields,field_description:delivery_carrier_typology.field_delivery_carrier_typology__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: delivery_carrier_typology
+#: model:ir.model.fields,field_description:delivery_carrier_typology.field_delivery_carrier_typology__carrier_id
+msgid "Delivery Carrier"
+msgstr "Transporteur"
+
+#. module: delivery_carrier_typology
+#: model:ir.model,name:delivery_carrier_typology.model_choose_delivery_carrier
+msgid "Delivery Carrier Selection Wizard"
+msgstr "Assistant de sélection du transporteur"
+
+#. module: delivery_carrier_typology
+#: model:ir.model,name:delivery_carrier_typology.model_delivery_carrier_typology
+#: model:ir.model.fields,field_description:delivery_carrier_typology.field_choose_delivery_carrier__carrier_typology_id
+#: model:ir.model.fields,field_description:delivery_carrier_typology.field_delivery_carrier__carrier_typology_id
+msgid "Delivery Carrier Typology"
+msgstr "Transporteur Typologie"
+
+#. module: delivery_carrier_typology
+#: model:ir.model.fields,field_description:delivery_carrier_typology.field_delivery_carrier_typology__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: delivery_carrier_typology
+#: model:ir.model.fields,field_description:delivery_carrier_typology.field_delivery_carrier_typology__id
+msgid "ID"
+msgstr ""
+
+#. module: delivery_carrier_typology
+#: model:ir.model.fields,field_description:delivery_carrier_typology.field_delivery_carrier_typology____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: delivery_carrier_typology
+#: model:ir.model.fields,field_description:delivery_carrier_typology.field_delivery_carrier_typology__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: delivery_carrier_typology
+#: model:ir.model.fields,field_description:delivery_carrier_typology.field_delivery_carrier_typology__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: delivery_carrier_typology
+#: model:ir.model.fields,field_description:delivery_carrier_typology.field_delivery_carrier_typology__name
+msgid "Name"
+msgstr ""
+
+#. module: delivery_carrier_typology
+#: model:ir.model.fields,field_description:delivery_carrier_typology.field_choose_delivery_carrier__carrier_id
+msgid "Shipping Method"
+msgstr "Mode d'expédition"
+
+#. module: delivery_carrier_typology
+#: model:ir.model,name:delivery_carrier_typology.model_delivery_carrier
+msgid "Shipping Methods"
+msgstr "Modes d'expédition"
+
+#. module: delivery_carrier_typology
+#: model:ir.model.constraint,message:delivery_carrier_typology.constraint_delivery_carrier_typology_carrier_id_uniq
+msgid "The delivery carrier typology must be unique per company."
+msgstr ""
