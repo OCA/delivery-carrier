@@ -1183,6 +1183,12 @@ msgid "No Delivery Notice"
 msgstr ""
 
 #. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/wizard/dachser_manifest_wizard.py:0
+msgid "No picking has been found with the reference %s"
+msgstr ""
+
+#. module: delivery_dachser
 #: model:ir.model.fields,help:delivery_dachser.field_stock_package_type__dachser_packaging_code
 msgid ""
 "Official package/pallet type code in the Dachser API (e.g. EU = Euro Pallet,"
@@ -1377,6 +1383,16 @@ msgstr ""
 #. module: delivery_dachser
 #: model:ir.model.fields,help:delivery_dachser.field_delivery_carrier__dachser_font_file_name
 msgid "Zebra printer font file name required when using ZPL format."
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.dachser_manifest_report_view
+msgid "Weight"
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.dachser_manifest_report_view
+msgid "ZIP Code"
 msgstr ""
 
 #. module: delivery_dachser

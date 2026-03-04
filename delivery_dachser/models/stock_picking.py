@@ -18,3 +18,21 @@ class StockPicking(models.Model):
         if self.delivery_type != "dachser":
             return False
         return self.carrier_id.dachser_send_order_to_tms(self)
+
+    def _dachser_report_manifest_data(self):
+        self.ensure_one()
+        return {
+            "carrier_tracking_ref": self.carrier_tracking_ref,
+            "reference": (
+                self.sudo().sale_id.client_order_ref or self.sudo().sale_id.name or ""
+            ),
+            "note": self.note[:25] + "..." if self.note else "",
+            "date": self.scheduled_date.date(),
+            "partner": self.partner_id.name or "",
+            "zip": self.partner_id.zip or "",
+            "address": (self.partner_id.street + " " + (self.partner_id.street2 or "")),
+            "city": self.partner_id.city or "",
+            "state": self.partner_id.state_id.name or "",
+            "number_of_packages": self.number_of_packages,
+            "weight": self.weight or "0",
+        }

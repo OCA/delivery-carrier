@@ -1,7 +1,3 @@
-.. image:: https://odoo-community.org/readme-banner-image
-   :target: https://odoo-community.org/get-involved?utm_source=readme
-   :alt: Odoo Community Association
-
 ================
 Delivery Dachser
 ================
@@ -17,7 +13,7 @@ Delivery Dachser
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fdelivery--carrier-lightgray.png?logo=github
@@ -38,51 +34,54 @@ This module integrates Odoo's ``delivery`` framework (along with
 (``https://api-gateway.dachser.com/rest/v2``), providing European
 Logistics (``T``) and Food Logistics (``F``) shipping automation:
 
-- **Online Freight Quotations (``sale.order``)**:
+-  **Online Freight Quotations (``sale.order``)**:
 
-  - Live rate calculation via ``POST /rest/v2/quotations`` with currency
-    conversion and automatic Incoterm-to-Frankatur mapping (``EXW``,
-    ``FCA``, ``DAP``, ``DDP``, etc.).
-  - Compatible with OCA ``delivery_price_method`` when fixed or
-    rule-based local pricing is desired.
+   -  Live rate calculation via ``POST /rest/v2/quotations`` with
+      currency conversion and automatic Incoterm-to-Frankatur mapping
+      (``EXW``, ``FCA``, ``DAP``, ``DDP``, etc.).
+   -  Compatible with OCA ``delivery_price_method`` when fixed or
+      rule-based local pricing is desired.
 
-- **Shipment & Picking Submission (``stock.picking``)**:
+-  **Shipment & Picking Submission (``stock.picking``)**:
 
-  - Transport order creation
-    (``POST /rest/v2/transportorders/{basket}``) in ``imported``,
-    ``labelled``, or ``sent`` baskets, plus standalone label generation
-    (``POST /rest/v2/labels``) with automatic test-environment fallback.
-  - Native integration with ``delivery_package_number``
-    (``number_of_packages``), ``delivery_state`` (``delivery_state``,
-    ``tracking_state``, ``tracking_state_history``, ``tracking_json``,
-    ``date_delivered``, ``pod_file``), and ``stock_picking_volume``
-    (``volume``).
-  - Automatic assignment of 18-digit **GS1 SSCC** codes to physical Odoo
-    packages (``stock.quant.package``).
-  - Automatic 30-character street and name splitting complying with
-    Dachser REST API v2 schema constraints.
+   -  Transport order creation
+      (``POST /rest/v2/transportorders/{basket}``) in ``imported``,
+      ``labelled``, or ``sent`` baskets, plus standalone label
+      generation (``POST /rest/v2/labels``) with automatic
+      test-environment fallback.
+   -  Native integration with ``delivery_package_number``
+      (``number_of_packages``), ``delivery_state`` (``delivery_state``,
+      ``tracking_state``, ``tracking_state_history``, ``tracking_json``,
+      ``date_delivered``, ``pod_file``), and ``stock_picking_volume``
+      (``volume``).
+   -  Automatic assignment of 18-digit **GS1 SSCC** codes to physical
+      Odoo packages (``stock.quant.package``).
+   -  Automatic 30-character street and name splitting complying with
+      Dachser REST API v2 schema constraints.
 
-- **Label Generation (PDF & Thermal ZPL)**:
+-  **Label Generation (PDF & Thermal ZPL)**:
 
-  - Instant attachment of **PDF** (``P``) or **ZPL** (``Z``) shipping
-    labels on the picking, supporting GS1 **EAN** 1D barcodes and **2D
-    DataMatrix (DMC)** labels.
-  - One-click label reprinting (``dachser_get_label``), deferred TMS
-    confirmation (``dachser_send_to_tms``), and return label generation
-    (``dachser_get_return_label``).
+   -  Instant attachment of **PDF** (``P``) or **ZPL** (``Z``) shipping
+      labels on the picking, supporting GS1 **EAN** 1D barcodes and **2D
+      DataMatrix (DMC)** labels.
+   -  One-click label reprinting (``dachser_get_label``), deferred TMS
+      confirmation (``dachser_send_to_tms``), and return label
+      generation (``dachser_get_return_label``).
 
-- **Live Tracking, Event History & Signed POD**:
+-  **Live Tracking, Event History & Signed POD**:
 
-  - Direct link to **Dachser eLogistics ShipmentPointer**.
-  - Live shipment status (``GET /rest/v2/shipmentstatus``), full
-    chronological event history (``GET /rest/v2/shipmenthistory``), and
-    automatic signed **Proof of Delivery (POD PDF)** download
-    (``GET /rest/v2/pods``) stored in ``delivery_state``'s ``pod_file``.
+   -  Direct link to **Dachser eLogistics ShipmentPointer**.
+   -  Live shipment status (``GET /rest/v2/shipmentstatus``), full
+      chronological event history (``GET /rest/v2/shipmenthistory``),
+      and automatic signed **Proof of Delivery (POD PDF)** download
+      (``GET /rest/v2/pods``) stored in ``delivery_state``'s
+      ``pod_file``.
 
-- **Daily Loading Manifest (Transfer List)**:
+-  **Daily Loading Manifest (Transfer List)**:
 
-  - Wizard to download the daily **Transfer List PDF**
-    (``GET /rest/v2/transferlists/{orderdate}``) for the Dachser driver.
+   -  Wizard to download the daily **Transfer List PDF**
+      (``GET /rest/v2/transferlists/{orderdate}``) for the Dachser
+      driver.
 
 **Table of contents**
 
@@ -106,19 +105,19 @@ To configure this module:
    **Provider** = ``Dachser``.
 3. In the **Dachser Configuration** tab:
 
-   - Enter your **Dachser Api Key** (``X-API-Key`` token from the
-     `Dachser API
-     Portal <https://api-portal.dachser.com/bi.b2b.portal/api?2>`__) and
-     toggle **Production Environment** as appropriate.
-   - Set your **Dachser Branch ID** (e.g. ``193``), **Dachser Customer
-     ID**, **Division Code** (``T`` for European Logistics, ``F`` for
-     Food Logistics), **Product Code** (``Y`` targoflex, ``Z``
-     targospeed, ``N`` classicline/vengoflex, etc.), and **Term Code**
-     (``031`` Free delivered, ``021`` EXW, etc.).
-   - Choose your **Packaging Code**, **Packaging Type**
-     (``stock.package.type``), **Label Format** (``PDF`` or ``ZPL``),
-     and target eLogistics **Basket** (``sent``, ``labelled``, or
-     ``imported``).
+   -  Enter your **Dachser Api Key** (``X-API-Key`` token from the
+      `Dachser API
+      Portal <https://api-portal.dachser.com/bi.b2b.portal/api?2>`__)
+      and toggle **Production Environment** as appropriate.
+   -  Set your **Dachser Branch ID** (e.g. ``193``), **Dachser Customer
+      ID**, **Division Code** (``T`` for European Logistics, ``F`` for
+      Food Logistics), **Product Code** (``Y`` targoflex, ``Z``
+      targospeed, ``N`` classicline/vengoflex, etc.), and **Term Code**
+      (``031`` Free delivered, ``021`` EXW, etc.).
+   -  Choose your **Packaging Code**, **Packaging Type**
+      (``stock.package.type``), **Label Format** (``PDF`` or ``ZPL``),
+      and target eLogistics **Basket** (``sent``, ``labelled``, or
+      ``imported``).
 
 4. *(Optional)* Install ``delivery_price_method`` if you wish to define
    fixed or rule-based local shipping prices instead of querying
@@ -146,15 +145,15 @@ Sending Shipments & Printing Labels from Pickings
    attaches the **PDF/ZPL label** in the chatter.
 3. From the picking form you can also:
 
-   - Click **Dachser Label** to reprint PDF/ZPL labels.
-   - Click **Send to Dachser TMS** when the order was created in
-     ``imported`` or ``labelled`` state.
-   - Click **Print Return Label** to generate a Dachser return label.
-   - Use **Tracking** to open Dachser eLogistics ShipmentPointer, or
-     rely on ``delivery_state``'s scheduled action
-     (``tracking_state_update``) to automatically synchronize
-     ``delivery_state``, ``tracking_state_history``, and download the
-     signed **POD PDF** into ``pod_file``.
+   -  Click **Dachser Label** to reprint PDF/ZPL labels.
+   -  Click **Send to Dachser TMS** when the order was created in
+      ``imported`` or ``labelled`` state.
+   -  Click **Print Return Label** to generate a Dachser return label.
+   -  Use **Tracking** to open Dachser eLogistics ShipmentPointer, or
+      rely on ``delivery_state``'s scheduled action
+      (``tracking_state_update``) to automatically synchronize
+      ``delivery_state``, ``tracking_state_history``, and download the
+      signed **POD PDF** into ``pod_file``.
 
 Downloading the Daily Loading Manifest (Transfer List)
 ------------------------------------------------------
@@ -186,15 +185,15 @@ Authors
 Contributors
 ------------
 
-- `Tecnativa <https://www.tecnativa.com>`__:
+-  `Tecnativa <https://www.tecnativa.com>`__:
 
-  - Víctor Martínez
+   -  Víctor Martínez
 
-- `Acysos S.L. <https://www.acysos.com>`__:
+-  `Acysos S.L. <https://www.acysos.com>`__:
 
-  - Ignacio Ibeas ignacio@acysos.com
+   -  Ignacio Ibeas ignacio@acysos.com
 
-- `Acysos S.L. <https://www.acysos.com>`__
+-  `Acysos S.L. <https://www.acysos.com>`__
 
 Maintainers
 -----------

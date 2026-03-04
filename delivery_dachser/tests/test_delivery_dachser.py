@@ -589,3 +589,27 @@ class TestDeliveryDachser(TestDeliveryDachserCommon):
             status_code=200, json_data={"ssccs": ["00340336850590000099"]}
         )
         self.assertIn("ssccs", client.get_ssccs(count=5, use_prefix=True))
+
+    @mute_logger("odoo.addons.delivery_dachser.models.dachser_request")
+    @patch(REQUEST_PATH)
+    def test_09_transfer_list_wizard_report_custom(self, mock_req):
+        self.env.company.external_report_layout_id = self.env.ref(
+            "web.external_layout_standard"
+        )
+        self.carrier.dachser_manifest_report_type = "custom"
+        action = self.carrier.action_open_transfer_list_wizard()
+        wiz = (
+            self.env[action["res_model"]]
+            .with_context(**action["context"])
+            .create({"order_group": "GB"})
+        )
+        self.picking.carrier_tracking_ref = "test_delivery_dachser"
+        mock_req.return_value = self._mock_response(
+            status_code=200, json_data=[({"id": self.picking.carrier_tracking_ref})]
+        )
+        res = wiz.action_download_transfer_list()
+        self.assertEqual(res["type"], "ir.actions.report")
+        self.assertTrue(res["data"])
+        self.assertEqual(len(res["data"]["deliveries"]), 1)
+        delivery_0 = res["data"]["deliveries"][0]
+        self.assertEqual(delivery_0["carrier_tracking_ref"], "test_delivery_dachser")

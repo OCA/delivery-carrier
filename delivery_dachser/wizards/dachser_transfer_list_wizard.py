@@ -37,21 +37,8 @@ class DachserTransferListWizard(models.TransientModel):
         readonly=True,
     )
 
-    def action_download_transfer_list(self):
-        self.ensure_one()
-        client = DachserRequest(self.carrier_id)
+    def _process_transfer_list_dachser(self, doc_b64):
         date_str = fields.Date.to_string(self.order_date)
-        resp = client.get_transfer_list(
-            order_date=date_str,
-            order_group=(
-                self.order_group or self.carrier_id.dachser_order_group or None
-            ),
-        )
-        doc_b64 = resp.get("document") or resp.get("transferList") or resp.get("label")
-        if not doc_b64:
-            raise UserError(
-                _("Dachser did not return any PDF manifest for date %s.") % date_str
-            )
         filename = f"Dachser_Manifest_{date_str}.pdf"
         self.write(
             {
@@ -68,3 +55,52 @@ class DachserTransferListWizard(models.TransientModel):
             "view_mode": "form",
             "target": "new",
         }
+
+    def _process_transfer_list_custom(self, items):
+        manifest_data = []
+        picking_model = self.env["stock.picking"]
+        for item in items:
+            ref = item["id"]
+            picking = picking_model.search(
+                [
+                    ("carrier_id", "=", self.carrier_id.id),
+                    ("carrier_tracking_ref", "=", ref),
+                ],
+                limit=1,
+            )
+            if not picking:
+                raise UserError(
+                    self.env._("No picking has been found with the reference %s") % ref,
+                )
+            manifest_data.append(picking._dachser_report_manifest_data())
+        datas = {
+            "ids": self.env.context.get("active_ids", []),
+            "deliveries": manifest_data,
+            "model": self._name,
+            "order_date": self.order_date,
+            "company_name": self.env.company.name,
+        }
+        return (
+            self.env.ref("delivery_dachser.dachser_manifest_report")
+            .with_context(landscape=True)
+            .report_action(self, data=datas)
+        )
+
+    def action_download_transfer_list(self):
+        self.ensure_one()
+        carrier = self.carrier_id
+        client = DachserRequest(carrier)
+        date_str = fields.Date.to_string(self.order_date)
+        resp = client.get_transfer_list(
+            order_date=date_str,
+            order_group=(self.order_group or carrier.dachser_order_group or None),
+        )
+        report_type = carrier.dachser_manifest_report_type
+        if report_type == "dachser":
+            resp = resp.get("document") or resp.get("transferList") or resp.get("label")
+        if not resp:
+            raise UserError(
+                _("Dachser did not return any PDF manifest for date %s.") % date_str
+            )
+        method_name = f"_process_transfer_list_{report_type}"
+        return getattr(self, method_name)(resp)

@@ -1,4 +1,4 @@
-# Copyright 2025 Tecnativa - Víctor Martínez
+# Copyright 2025-2026 Tecnativa - Víctor Martínez
 # Copyright 2026 Acysos S.L.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 {
@@ -25,6 +25,7 @@
         "views/res_partner_views.xml",
         "views/stock_package_type_views.xml",
         "views/stock_picking_views.xml",
+        "views/dachser_manifest_template.xml",
         "wizards/dachser_transfer_list_wizard_views.xml",
     ],
     "maintainers": ["victoralmau"],
