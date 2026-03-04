@@ -290,9 +290,11 @@ class TestStockPickingDeliveryLink(StockPickingDeliveryLinkCommonCase):
         self.env["stock.quant"]._update_available_quantity(
             self.product, self.shelf1_loc, 20.0
         )
+        group = self.env["procurement.group"].create({"name": "Test group"})
         ship_move = self.env["stock.move"].create(
             {
                 "name": "The ship move",
+                "group_id": group.id,
                 "product_id": self.product.id,
                 "product_uom_qty": 5.0,
                 "product_uom": self.product.uom_id.id,
