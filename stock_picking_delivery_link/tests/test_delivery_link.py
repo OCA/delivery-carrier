@@ -7,20 +7,24 @@ from .common import StockPickingDeliveryLinkCommonCase
 
 
 class TestStockPickingDeliveryLink(StockPickingDeliveryLinkCommonCase):
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-        cls.product = cls.env["product.product"].create(
+    def setUp(self):
+        super().setUp()
+        self.loader = FakeModelLoader(self.env, self.__module__)
+        self.loader.backup_registry()
+        from .models.delivery_carrier import DeliveryCarrier
+
+        self.loader.update_registry((DeliveryCarrier,))
+        self.product = self.env["product.product"].create(
             {"name": "Test Product", "type": "consu", "is_storable": True}
         )
-        cls.customer_location = cls.env.ref("stock.stock_location_customers")
-        test_carrier_product = cls.env["product.product"].create(
+        self.customer_location = self.env.ref("stock.stock_location_customers")
+        test_carrier_product = self.env["product.product"].create(
             {
                 "name": "Test carrier product",
                 "type": "service",
             }
         )
-        cls.test_carrier = cls.env["delivery.carrier"].create(
+        self.test_carrier = self.env["delivery.carrier"].create(
             {
                 "name": "Test carrier",
                 "delivery_type": "fixed",
@@ -28,26 +32,19 @@ class TestStockPickingDeliveryLink(StockPickingDeliveryLinkCommonCase):
             }
         )
         # We need to know if purchase module is installed
-        cls.purchase_installed = False
-        if "purchased_product_qty" in cls.env["product.product"]._fields:
-            cls.purchase_installed = True
-            cls.vendor = cls.env["res.partner"].create({"name": "Test vendor"})
-            cls.product.write(
+        self.purchase_installed = False
+        if "purchased_product_qty" in self.env["product.product"]._fields:
+            self.purchase_installed = True
+            self.vendor = self.env["res.partner"].create({"name": "Test vendor"})
+            self.product.write(
                 {
-                    "seller_ids": [(0, 0, {"partner_id": cls.vendor.id})],
+                    "seller_ids": [(0, 0, {"partner_id": self.vendor.id})],
                 }
             )
 
-        cls.loader = FakeModelLoader(cls.env, cls.__module__)
-        cls.loader.backup_registry()
-        from .models.delivery_carrier import DeliveryCarrier
-
-        cls.loader.update_registry((DeliveryCarrier,))
-
-    @classmethod
-    def tearDownClass(cls):
-        cls.loader.restore_registry()
-        super().tearDownClass()
+    def tearDown(self):
+        self.loader.restore_registry()
+        return super().tearDown()
 
     def test_ship_data_from_pick(self):
         move1 = self._create_move(
@@ -293,9 +290,11 @@ class TestStockPickingDeliveryLink(StockPickingDeliveryLinkCommonCase):
         self.env["stock.quant"]._update_available_quantity(
             self.product, self.shelf1_loc, 20.0
         )
+        group = self.env["procurement.group"].create({"name": "Test group"})
         ship_move = self.env["stock.move"].create(
             {
                 "name": "The ship move",
+                "group_id": group.id,
                 "product_id": self.product.id,
                 "product_uom_qty": 5.0,
                 "product_uom": self.product.uom_id.id,
