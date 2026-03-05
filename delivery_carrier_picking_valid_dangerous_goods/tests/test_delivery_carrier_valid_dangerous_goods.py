@@ -1,5 +1,10 @@
 # Copyright 2025 Camptocamp SA
+# Copyright 2026 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
+
+from odoo import Command
+from odoo.tests import Form
+
 from odoo.addons.delivery_carrier_picking_valid.tests.common import Common
 
 
@@ -42,6 +47,39 @@ class TestPickingValid(Common):
         )
 
     def test_match_dangerous_goods(self):
+        so = self.env["sale.order"].create(
+            {
+                "partner_id": self.partner.id,
+            }
+        )
+        choose_delivery_carrier = Form(
+            self.env["choose.delivery.carrier"].with_context(default_order_id=so.id)
+        )
+        self.assertTrue(
+            self.carrier_limited_quantity
+            in choose_delivery_carrier.available_carrier_ids
+        )
+        so.write(
+            {
+                "order_line": [
+                    Command.create(
+                        {
+                            "product_id": self.limited_quantity_product.id,
+                            "product_uom_qty": 5.0,
+                        }
+                    ),
+                ]
+            }
+        )
+        choose_delivery_carrier = Form(
+            self.env["choose.delivery.carrier"].with_context(default_order_id=so.id)
+        )
+        self.assertFalse(
+            self.carrier_limited_quantity
+            in choose_delivery_carrier.available_carrier_ids
+        )
+
+    def test_match_picking_dangerous_goods(self):
         picking_no_limited_amount = self.picking
         picking_dg_restriction = self.dangerous_goods_picking
         picking_lq_restriction = self.limited_qty_picking

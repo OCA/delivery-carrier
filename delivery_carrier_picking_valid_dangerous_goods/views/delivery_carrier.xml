@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright 2025 Camptocamp SA
+     Copyright 2025 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
     <record id="view_delivery_carrier_form" model="ir.ui.view">
@@ -7,18 +8,9 @@
         <field name="model">delivery.carrier</field>
         <field name="inherit_id" ref="delivery.view_delivery_carrier_form" />
         <field name="arch" type="xml">
-            <xpath expr="//notebook" position="inside">
-                <page name="carrier_preference" string="Carrier preference">
-                    <group name="dangerous_goods">
-                        <group name="limited_amounts">
-                            <field
-                                name="adr_limited_amount_ids"
-                                widget="many2many_tags"
-                            />
-                        </group>
-                    </group>
-                </page>
-            </xpath>
+            <field name="excluded_tag_ids" position="after">
+                <field name="adr_limited_amount_ids" widget="many2many_tags" />
+            </field>
         </field>
     </record>
 </odoo>
