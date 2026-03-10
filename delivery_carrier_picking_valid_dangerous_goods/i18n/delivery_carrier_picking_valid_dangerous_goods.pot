@@ -1,0 +1,37 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* delivery_carrier_picking_valid_dangerous_goods
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: delivery_carrier_picking_valid_dangerous_goods
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_picking_valid_dangerous_goods.view_delivery_carrier_form
+msgid "Carrier preference"
+msgstr ""
+
+#. module: delivery_carrier_picking_valid_dangerous_goods
+#: model:ir.model.fields,help:delivery_carrier_picking_valid_dangerous_goods.field_delivery_carrier__adr_limited_amount_ids
+msgid ""
+"If a limited amount is defined here, this carrier will be excluded from the "
+"selection of preferred carrier on stock picking if said picking contains any"
+" move with products that define the same limited amount."
+msgstr ""
+
+#. module: delivery_carrier_picking_valid_dangerous_goods
+#: model:ir.model.fields,field_description:delivery_carrier_picking_valid_dangerous_goods.field_delivery_carrier__adr_limited_amount_ids
+msgid "Restrict selection of preferred carrier for ADR limited amount"
+msgstr ""
+
+#. module: delivery_carrier_picking_valid_dangerous_goods
+#: model:ir.model,name:delivery_carrier_picking_valid_dangerous_goods.model_delivery_carrier
+msgid "Shipping Methods"
+msgstr ""
