@@ -38,8 +38,8 @@ msgstr ""
 "                    Salve <t t-out=\"object.partner_id.name\"></t>,<br><br>\n"
 "                    il suo pacco è stato consegnato!<br><br>\n"
 "                    Informazioni ordine<br>\n"
-"                    Ordine <t t-out=\"object.carrier_tracking_ref\"></t><br>"
-"\n"
+"                    Ordine <t t-out=\"object.carrier_tracking_ref\"></"
+"t><br>\n"
 "                    <t t-if=\"user.signature\">\n"
 "                        <br>\n"
 "                        <t t-out=\"user.signature\"></t>\n"
@@ -47,15 +47,6 @@ msgstr ""
 "                </p>\n"
 "            </div>\n"
 "        "
-
-#. module: delivery_state
-#: model_terms:ir.ui.view,arch_db:delivery_state.res_config_settings_view_form
-msgid ""
-"<span class=\"fa fa-lg fa-building-o\" title=\"Values set here are company-"
-"specific.\" groups=\"base.group_multi_company\"/>"
-msgstr ""
-"<span class=\"fa fa-lg fa-building-o\" title=\"I valori impostati qui sono "
-"specifici per azienda.\" groups=\"base.group_multi_company\"/>"
 
 #. module: delivery_state
 #: model:ir.model.fields.selection,name:delivery_state.selection__stock_picking__delivery_state__canceled_shipment
@@ -177,6 +168,11 @@ msgid "Update tracking state"
 msgstr "Aggiorna stato tracciamento"
 
 #. module: delivery_state
+#: model_terms:ir.ui.view,arch_db:delivery_state.res_config_settings_view_form
+msgid "Values set here are company-specific."
+msgstr ""
+
+#. module: delivery_state
 #: model:ir.model.fields.selection,name:delivery_state.selection__stock_picking__delivery_state__warehouse_delivered
 msgid "Warehouse delivered"
 msgstr "Consegnato a magazzino"
@@ -184,8 +180,15 @@ msgstr "Consegnato a magazzino"
 #. module: delivery_state
 #: model:mail.template,subject:delivery_state.delivery_state_delivered_notification
 msgid ""
-"Your order {{ object.carrier_tracking_ref or object.name }} from {{ object."
-"company_id.name }}"
+"Your order {{ object.carrier_tracking_ref or object.name }} from "
+"{{ object.company_id.name }}"
 msgstr ""
-"Il suo ordine {{ object.carrier_tracking_ref or object.name }} da {{ "
-"object.company_id.name }}"
+"Il suo ordine {{ object.carrier_tracking_ref or object.name }} da "
+"{{ object.company_id.name }}"
+
+#~ msgid ""
+#~ "<span class=\"fa fa-lg fa-building-o\" title=\"Values set here are "
+#~ "company-specific.\" groups=\"base.group_multi_company\"/>"
+#~ msgstr ""
+#~ "<span class=\"fa fa-lg fa-building-o\" title=\"I valori impostati qui "
+#~ "sono specifici per azienda.\" groups=\"base.group_multi_company\"/>"
