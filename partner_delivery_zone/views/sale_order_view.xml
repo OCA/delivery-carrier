@@ -8,7 +8,7 @@
         <field name="inherit_id" ref="sale.view_order_form" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='payment_term_id']" position="after">
-                <field name="delivery_zone_id" readonly="state in ['sale', 'cancel']" />
+                <field name="delivery_zone_id" readonly="state == 'cancel' or locked" />
             </xpath>
         </field>
     </record>
@@ -17,9 +17,10 @@
         <field name="inherit_id" ref="sale.view_quotation_tree" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='company_id']" position="before">
+                <field name="locked" invisible="1" />
                 <field
                     name="delivery_zone_id"
-                    readonly="state in ['sale', 'cancel']"
+                    readonly="state == 'cancel' or locked"
                     optional="hidden"
                 />
             </xpath>
