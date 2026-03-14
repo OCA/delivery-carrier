@@ -3,8 +3,9 @@
 # Copyright 2023 ForgeFlow, S.L. - Jordi Ballester
 # Copyright 2024 Sygel - Manuel Regidor
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+import re
 
-from odoo import fields, models
+from odoo import api, fields, models
 
 from .ups_request import UpsRequest
 
@@ -209,3 +210,24 @@ class DeliveryCarrier(models.Model):
         self.ensure_one()
         ups_request = UpsRequest(self)
         ups_request._get_new_token()
+
+    @api.model
+    def sanitize_phone_ups(self, phone_number):
+        """Sanitize a phone number for UPS usage."""
+        if not phone_number:
+            return phone_number
+        sanitize_fn = getattr(self, "_phone_format", None)
+        if sanitize_fn:
+            phone_sanitized = sanitize_fn(number=phone_number)
+            if phone_sanitized:
+                return phone_sanitized
+        if phone_number:
+            phone_number = re.sub(r"[^\d+]", "", phone_number)
+            # Clean plus character is there is any in the number in othe positions.
+            # We only want the first plus
+            phone_number = (
+                "+" + phone_number.replace("+", "")
+                if "+" in phone_number
+                else phone_number
+            )
+        return phone_number

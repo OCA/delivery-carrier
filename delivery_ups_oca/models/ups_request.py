@@ -139,7 +139,9 @@ class UpsRequest:
             Name=(partner.parent_id or partner).name,
             AttentionName=partner.name,
             TaxIdentificationNumber=partner.vat,
-            Phone=dict(Number=partner.phone or partner.mobile),
+            Phone=dict(
+                Number=self.carrier.sanitize_phone_ups(partner.phone or partner.mobile)
+            ),
             EMailAddress=partner.email,
             Address=dict(
                 AddressLine=[partner.street, partner.street2 or ""],
