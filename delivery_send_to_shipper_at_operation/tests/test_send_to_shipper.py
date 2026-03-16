@@ -1,5 +1,6 @@
 # Copyright 2021 Camptocamp SA
 # Copyright 2024 Michael Tietz (MT Software) <mtietz@mt-software.de>
+# Copyright 2026 Raumschmiede GmbH
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
 from unittest import mock
@@ -197,6 +198,28 @@ class TestDeliverySendToShipper(SavepointCase):
             self.assertEqual(self.shipping.state, "done")
             self.assertTrue(self.shipping.delivery_notification_sent)
             self.assertIn(self.delivery_fee, self.order.order_line.product_id)
+
+    def test_send_to_shipper_on_pack_duplicate_tracking(self):
+        """Check sending of delivery notification on pack with duplicate trackings."""
+
+        with mock.patch.object(
+            type(self.carrier_on_pack),
+            "send_shipping",
+            return_value=SEND_SHIPPING_RETURN_VALUE,
+        ):
+            carrier_tracking_ref = SEND_SHIPPING_RETURN_VALUE[0]["tracking_number"]
+            self.shipping.carrier_id = self.carrier_on_pack
+            self.shipping.carrier_tracking_ref = carrier_tracking_ref
+
+            self._validate_picking(self.picking)
+            self._validate_picking(self.packing)
+
+            # PACK would add the same tracking number again to the SHIP. Must be
+            # prevented to not have duplicate tracking numbers
+            self.assertEqual(
+                self.shipping.carrier_tracking_ref,
+                carrier_tracking_ref,
+            )
 
     def test_picking_fields_view_get(self):
         """Check that the invisible domain of "Send to Shipper" button

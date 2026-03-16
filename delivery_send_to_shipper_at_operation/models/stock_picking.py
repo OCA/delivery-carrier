@@ -1,6 +1,7 @@
 # Copyright 2021 Camptocamp SA
 # Copyright 2023 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 # Copyright 2024 Michael Tietz (MT Software) <mtietz@mt-software.de>
+# Copyright 2026 Raumschmiede GmbH
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
 from lxml import etree
@@ -68,7 +69,8 @@ class StockPicking(models.Model):
         related_ship.ensure_one()
         carrier_tracking_ref = related_ship.carrier_tracking_ref
         if carrier_tracking_ref:
-            carrier_tracking_ref += "," + self.carrier_tracking_ref
+            if self.carrier_tracking_ref not in carrier_tracking_ref.split(","):
+                carrier_tracking_ref += "," + self.carrier_tracking_ref
         else:
             carrier_tracking_ref = self.carrier_tracking_ref
         return {
