@@ -101,7 +101,7 @@ class UpsRequest:
             self._get_new_token()
             status = self._send_request(url, json, data, headers, method)
         status = status.json()
-        ups_last_request = f"URL: {self.url}\nData: {data}"
+        ups_last_request = f"URL: {self.url}\nData: {data}\nJSON: {json}"
         self.carrier.log_xml(ups_last_request, "ups_last_request")
         self.carrier.log_xml(status or "", "ups_last_response")
         return status
