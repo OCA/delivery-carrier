@@ -1,0 +1,1 @@
+This module adds the option to set the maximum quantity that a carrier can accept. When the total quantity of a sale reaches the limit, the carrier is not available for selection.
