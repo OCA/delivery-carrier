@@ -1,0 +1,1 @@
+This module expects the delivery modules to create an attachment when the send_shipping method is called. Modules that do not generate the label in this method are not compatible.
