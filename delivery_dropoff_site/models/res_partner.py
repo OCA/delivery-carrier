@@ -11,7 +11,7 @@ from odoo.fields import first
 
 class ResPartner(models.Model):
     _inherit = "res.partner"
-    _rec_names_search = ["dropoff_site_id"]
+    _rec_names_search = ["name", "dropoff_site_id"]
 
     dropoff_site_ids = fields.One2many(
         comodel_name="dropoff.site", inverse_name="partner_id"
