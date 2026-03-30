@@ -1,6 +1,6 @@
 [project]
 name = "odoo-addons-oca-delivery-carrier"
-version = "19.0.20260330.0"
+version = "19.0.20260330.1"
 dependencies = [
     "odoo-addon-delivery_carrier_account==19.0.*",
     "odoo-addon-delivery_carrier_agency==19.0.*",
@@ -10,6 +10,7 @@ dependencies = [
     "odoo-addon-delivery_correos_express==19.0.*",
     "odoo-addon-delivery_package_number==19.0.*",
     "odoo-addon-delivery_state==19.0.*",
+    "odoo-addon-partner_delivery_info==19.0.*",
 ]
 classifiers=[
     "Programming Language :: Python",
