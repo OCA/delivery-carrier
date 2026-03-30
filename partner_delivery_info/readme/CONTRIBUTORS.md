@@ -1,0 +1,5 @@
+- Carlos Serra-Toro
+- Sébastien Alix \<<sebastien.alix@camptocamp.com>\>
+- Khoi (Kien Kim) \<<khoikk@trobz.com>\>
+- [Studio73](https://www.studio73.es/):
+- Vicent Castells \<<vicent@studio73.es>\>
