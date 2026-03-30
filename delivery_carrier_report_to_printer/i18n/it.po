@@ -6,25 +6,27 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-03-30 11:05+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: delivery_carrier_report_to_printer
 #: model:ir.actions.report,name:delivery_carrier_report_to_printer.report_carrier_label
 msgid "Generic carrier label"
-msgstr ""
+msgstr "Etichetta corriere generico"
 
 #. module: delivery_carrier_report_to_printer
 #: model:ir.model.fields,field_description:delivery_carrier_report_to_printer.field_delivery_carrier__label_report_id
 msgid "Label Report"
-msgstr ""
+msgstr "Resoconto etichetta"
 
 #. module: delivery_carrier_report_to_printer
 #: model:ir.model,name:delivery_carrier_report_to_printer.model_delivery_carrier
 msgid "Shipping Methods"
-msgstr ""
+msgstr "Metodi di spedizione"
