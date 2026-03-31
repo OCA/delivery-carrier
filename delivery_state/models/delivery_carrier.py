@@ -1,5 +1,6 @@
 # Copyright 2020 Trey, Kilobytes de Soluciones
 # Copyright 2020 FactorLibre
+# Copyright 2026 Raumschmiede GmbH
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from odoo import fields, models
 
@@ -8,6 +9,10 @@ class DeliveryCarrier(models.Model):
     _inherit = "delivery.carrier"
 
     track_carrier_state = fields.Boolean(default=True)
+    days_fetch_tracking_state_update = fields.Integer(
+        help="The tracking state is fetched for a picking for this number of days.\n"
+        "If no final state has been set, the delivery state will be set to 'no_update'"
+    )
 
     def send_shipping(self, pickings):
         res = super().send_shipping(pickings)

@@ -1,7 +1,10 @@
 # Copyright 2020 Trey, Kilobytes de Soluciones
 # Copyright 2020 FactorLibre
 # Copyright 2020 Tecnativa - David Vidal
+# Copyright 2026 Raumschmiede GmbH
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+from datetime import datetime, timedelta
+
 from markupsafe import Markup
 
 from odoo import _, api, fields, models
@@ -72,14 +75,36 @@ class StockPicking(models.Model):
         It can be triggered manually or by the cron."""
         for picking in self.filtered("carrier_id"):
             method = "%s_tracking_state_update" % picking.delivery_type
-            if hasattr(picking.carrier_id, method):
+            carrier = picking.carrier_id
+
+            if hasattr(carrier, method):
                 try:
                     with self.env.cr.savepoint():
-                        getattr(picking.carrier_id, method)(picking)
+                        getattr(carrier, method)(picking)
                 except Exception as e:
                     if not self.env.context.get("lastcall"):
                         raise
                     picking.pod_error = str(e)
+
+            days = carrier.days_fetch_tracking_state_update
+            if (
+                picking.delivery_state
+                in ["customer_delivered", "canceled_shipment", "no_update"]
+                or days <= 0
+            ):
+                continue
+
+            date_tracking_started = None
+            if picking.date_shipped:
+                date_tracking_started = fields.Datetime.to_datetime(
+                    picking.date_shipped
+                )
+            else:
+                date_tracking_started = picking.date_done
+
+            if date_tracking_started <= datetime.now() - timedelta(days=days):
+                picking.delivery_state = "no_update"
+
         # Filter pickings with errors and notify
         pickings_with_errors = self.filtered("pod_error")
         if pickings_with_errors:

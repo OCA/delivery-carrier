@@ -1,6 +1,9 @@
 # Copyright 2020 Trey, Kilobytes de Soluciones
 # Copyright 2020 FactorLibre
+# Copyright 2026 Raumschmiede GmbH
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+from freezegun import freeze_time
+from odoo_test_helper import FakeModelLoader
 
 from odoo import fields
 from odoo.tests import Form
@@ -12,6 +15,13 @@ class TestDeliveryState(SavepointCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+
+        cls.loader = FakeModelLoader(cls.env, cls.__module__)
+        cls.loader.backup_registry()
+        from .delivery_carrier import DeliveryCarrier
+
+        cls.loader.update_registry((DeliveryCarrier,))
+
         product_shipping_cost = cls.env["product.product"].create(
             {
                 "type": "service",
@@ -20,12 +30,19 @@ class TestDeliveryState(SavepointCase):
                 "list_price": 100,
             }
         )
-        cls.carrier = cls.env["delivery.carrier"].create(
+        cls.carrier_fixed = cls.env["delivery.carrier"].create(
             {
-                "name": "Test carrier",
+                "name": "Fixed carrier",
                 "delivery_type": "fixed",
                 "product_id": product_shipping_cost.id,
                 "fixed_price": 99.99,
+            }
+        )
+        cls.carrier_test = cls.env["delivery.carrier"].create(
+            {
+                "name": "Test carrier",
+                "delivery_type": "test",
+                "product_id": product_shipping_cost.id,
             }
         )
         cls.product = cls.env["product.product"].create(
@@ -62,10 +79,18 @@ class TestDeliveryState(SavepointCase):
             }
         )
 
+    @classmethod
+    def tearDownClass(cls):
+        cls.loader.restore_registry()
+        super().tearDownClass()
+
     def test_delivery_state(self):
         delivery_wizard = Form(
             self.env["choose.delivery.carrier"].with_context(
-                {"default_order_id": self.sale.id, "default_carrier_id": self.carrier}
+                {
+                    "default_order_id": self.sale.id,
+                    "default_carrier_id": self.carrier_fixed,
+                }
             )
         )
         choose_delivery_carrier = delivery_wizard.save()
@@ -77,7 +102,7 @@ class TestDeliveryState(SavepointCase):
         self.sale.action_confirm()
         picking = self.sale.picking_ids[0]
         self.assertEqual(len(picking.move_lines), 1)
-        self.assertEqual(picking.carrier_id, self.carrier)
+        self.assertEqual(picking.carrier_id, self.carrier_fixed)
         picking.action_confirm()
         picking.action_assign()
         picking.send_to_shipper()
@@ -97,10 +122,13 @@ class TestDeliveryState(SavepointCase):
         self.assertFalse(picking.date_delivered)
 
     def test_delivery_state_no_tracking(self):
-        self.carrier.write({"track_carrier_state": False})
+        self.carrier_test.write({"track_carrier_state": False})
         delivery_wizard = Form(
             self.env["choose.delivery.carrier"].with_context(
-                {"default_order_id": self.sale.id, "default_carrier_id": self.carrier}
+                {
+                    "default_order_id": self.sale.id,
+                    "default_carrier_id": self.carrier_test,
+                }
             )
         )
         choose_delivery_carrier = delivery_wizard.save()
@@ -121,13 +149,43 @@ class TestDeliveryState(SavepointCase):
         )
         self.assertFalse(previous_mails)
         picking = self.sale.picking_ids
+        picking.carrier_id = self.carrier_test
         picking.company_id.stock_move_email_validation = True
         delivery_template = self.env.ref("delivery_state.delivery_notification")
         picking.company_id.stock_mail_confirmation_template_id = delivery_template
-        picking.carrier_tracking_ref = "XX-0000"
         picking.move_lines.quantity_done = 1
         picking._action_done()
         mail = self.env["mail.message"].search(
             [("partner_ids", "in", self.partner.ids)]
         )
-        self.assertTrue("XX-0000" in mail.body)
+        self.assertTrue("TESTTRACK" in mail.body)
+
+    def test_days_fetch_tracking_state_update(self):
+        self.sale.action_confirm()
+        picking = self.sale.picking_ids
+        picking.carrier_id = self.carrier_test
+        picking.move_lines.quantity_done = 1
+        with freeze_time("2026-03-01"):
+            picking._action_done()
+        picking.tracking_state_update()
+        # No days are set on the carrier, so delivery_state must be the same as before
+        self.assertEqual(picking.delivery_state, "shipping_recorded_in_carrier")
+
+        self.carrier_test.days_fetch_tracking_state_update = 5
+        # date_shipped is not within the time range, delivery_state must be set
+        picking.tracking_state_update()
+        self.assertEqual(picking.delivery_state, "no_update")
+
+        data = {"delivery_state": "incidence"}
+        with freeze_time("2026-03-30"):
+            picking.with_context(track_data=data).tracking_state_update()
+        # Doesn't matter whether the API returned a new delivery state as long as it is
+        # not a final state. State must be set to no_update
+        self.assertEqual(picking.delivery_state, "no_update")
+
+        data = {"delivery_state": "customer_delivered"}
+        with freeze_time("2026-03-30"):
+            picking.with_context(track_data=data).tracking_state_update()
+
+        # API returned a final state, delivery_state must not be overwritten
+        self.assertEqual(picking.delivery_state, "customer_delivered")
