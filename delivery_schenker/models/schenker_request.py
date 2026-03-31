@@ -183,7 +183,7 @@ class SchenkerRequest:
         return {"AccessKey": self.access_key, "in": {}}
 
     def _get_tracking_states(
-        self, reference=False, reference_type="cu", booking_type="land"
+        self, reference=False, reference_type="BID", booking_type="land"
     ):
         if not reference:
             return {}
