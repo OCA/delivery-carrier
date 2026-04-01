@@ -1,5 +1,6 @@
 # Copyright 2021 Tecnativa - David Vidal
 # Copyright 2023 Michael Tietz (MT Software) <mtietz@mt-software.de>
+# Copyright 2026 Raumschmiede GmbH
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from lxml import etree
 
@@ -622,7 +623,7 @@ class DeliveryCarrier(models.Model):
         self.ensure_one()
         return {
             "reference": picking.carrier_tracking_ref,
-            "reference_type": "cu",
+            "reference_type": "BID",
             "booking_type": self.schenker_booking_type,
         }
 
