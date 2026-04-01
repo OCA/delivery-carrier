@@ -4,7 +4,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from markupsafe import Markup
 
-from odoo import SUPERUSER_ID, api, fields, models
+from odoo import _, api, fields, models
 
 
 class StockPicking(models.Model):
@@ -99,24 +99,17 @@ class StockPicking(models.Model):
         pickings.tracking_state_update()
 
     def _send_message_pod_error(self):
-        channel_admin = self.env.ref("mail.channel_admin", raise_if_not_found=False)
-        if not channel_admin:
-            return
-        pickings_by_carrier = self.grouped("carrier_id")
-        for _carrier, pickings in pickings_by_carrier.items():
-            message = pickings._build_message_pod_error()
-            channel_admin.with_user(SUPERUSER_ID).message_post(body=Markup(message))
+        for picking in self:
+            message = picking._build_message_pod_error()
+            picking.message_post(body=Markup(message))
 
     def _build_message_pod_error(self):
-        message = self.env._(
+        self.ensure_one()
+
+        return _(
             "<b>Errors while fetching POD for carrier %s:</b><br/>"
             "Please review the details below "
-            "and take the necessary actions to resolve these issues.:<br/>",
+            "and take the necessary actions to resolve these issues.: %s<br/>",
             self.carrier_id.name,
+            self.pod_error,
         )
-        message += "<ul>"
-        for picking in self:
-            picking_url = picking._get_html_link()
-            message += f"<li>Picking {picking_url}: {picking.pod_error}</li>"
-        message += "</ul>"
-        return message
