@@ -1,7 +1,7 @@
 # Copyright 2022 Impulso Diagonal - Javier Colmeiro
 # Copyright 2022 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-from odoo import _, fields, models
+from odoo import fields, models
 from odoo.exceptions import UserError
 
 from .sending_master_data import SENDING_COUNTRY_CODES, SENDING_SERVICES
@@ -11,12 +11,13 @@ from .sending_request import SendingRequest
 class DeliveryCarrier(models.Model):
     _inherit = "delivery.carrier"
 
-    delivery_type = fields.Selection(selection_add=[("sending", "Sending")])
+    delivery_type = fields.Selection(
+        selection_add=[("sending", "Sending")], ondelete={"sending": "set default"}
+    )
     sending_access_key = fields.Char(string="Access Key", help="sending Access Key")
     sending_user = fields.Char(string="User")
     sending_service = fields.Selection(
         selection=SENDING_SERVICES,
-        string="Sending Service",
         help="Set the contracted Sending Service",
         default="01",
     )
@@ -39,7 +40,7 @@ class DeliveryCarrier(models.Model):
             and not self.env.context.get("skip_errors")
         ):
             raise UserError(
-                _("Sending returned an error.\nError:\n{}").format(response)
+                self.env._("Sending returned an error.\nError:\n%s", response)
             )
 
     def _prepare_sending_shipping(self, picking):
@@ -54,24 +55,24 @@ class DeliveryCarrier(models.Model):
             or picking.company_id.partner_id
         )
         consignee = picking.partner_id
-        if consignee.country_id.code not in SENDING_COUNTRY_CODES.keys():
-            raise UserError(_("Delivery country not implemented with this carrier!"))
+        if consignee.country_id.code not in SENDING_COUNTRY_CODES:
+            raise UserError(
+                self.env._("Delivery country not implemented with this carrier!")
+            )
         return {
             "date": fields.Date.today().strftime("%d/%m/%Y"),
             "uidcustomername": sender_partner.name,
-            "uidcustomeraddress": "%s%s"
-            % (
-                sender_partner.street or "",
-                " " + sender_partner.street2 if sender_partner.street2 else "",
+            "uidcustomeraddress": (
+                f"{sender_partner.street or ''}"
+                f"{' ' + sender_partner.street2 if sender_partner.street2 else ''}"
             ),
             "uidcustomercountry": SENDING_COUNTRY_CODES[sender_partner.country_id.code],
             "uidcustomerzip": sender_partner.zip,
             "uidcustomercity": sender_partner.city,
             "clientname": consignee.name,
-            "clientaddress": "%s%s"
-            % (
-                consignee.street or "",
-                " " + consignee.street2 if consignee.street2 else "",
+            "clientaddress": (
+                f"{consignee.street or ''}"
+                f"{' ' + consignee.street2 if consignee.street2 else ''}"
             ),
             "clientcountry": SENDING_COUNTRY_CODES[consignee.country_id.code],
             "clientzip": consignee.zip,
@@ -112,7 +113,7 @@ class DeliveryCarrier(models.Model):
         if not reference:
             return False
         sending_request = self._sending_request()
-        method = "_shipping_label_%s" % self.sending_file_format.lower()
+        method = f"_shipping_label_{self.sending_file_format.lower()}"
         if hasattr(sending_request, method):
             try:
                 res = getattr(sending_request, method)(reference)
@@ -132,18 +133,18 @@ class DeliveryCarrier(models.Model):
             except Exception as e:
                 raise (e)
             picking.message_post(
-                body=_("Sending Expedition with reference %s cancelled")
-                % picking.carrier_tracking_ref
+                body=self.env._(
+                    "Sending Expedition with reference %s cancelled",
+                    picking.carrier_tracking_ref,
+                )
             )
 
     def sending_rate_shipment(self, order):
         """There's no public API so another price method should be used"""
         raise NotImplementedError(
-            _(
-                """
-            SENDING API doesn't provide methods to compute delivery rates, so
-            you should relay on another price method instead or override this
-            one in your custom code.
-        """
+            self.env._(
+                "SENDING API doesn't provide methods to compute delivery rates, so "
+                "you should relay on another price method instead or override this "
+                "one in your custom code."
             )
         )

@@ -2,23 +2,18 @@
 <odoo>
     <record id="view_picking_withcarrier_out_form" model="ir.ui.view">
         <field name="model">stock.picking</field>
-        <field name="inherit_id" ref="delivery.view_picking_withcarrier_out_form" />
-        <field name="groups_id" eval="[(4, ref('base.group_no_one'))]" />
+        <field
+            name="inherit_id"
+            ref="stock_delivery.view_picking_withcarrier_out_form"
+        />
         <field name="arch" type="xml">
             <xpath expr="//header" position='inside'>
                 <button
                     name="sending_get_label"
                     string="sending Label"
                     type="object"
-                    attrs="{
-                        'invisible':[
-                            '|',
-                            '|',
-                            ('delivery_type', '!=', 'sending'),
-                            ('carrier_tracking_ref', '=', False),
-                            ('state', '!=', 'done')
-                        ]
-                    }"
+                    groups="base.group_no_one"
+                    invisible="delivery_type != 'sending' or not carrier_tracking_ref or state != 'done'"
                 />
             </xpath>
         </field>

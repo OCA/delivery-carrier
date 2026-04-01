@@ -126,6 +126,10 @@ Contributors
 
       -  Víctor Martínez
 
+-  `Studio73 <https://www.studio73.es>`__:
+
+   -  Pablo Cortés
+
 Maintainers
 -----------
 

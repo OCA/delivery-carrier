@@ -19,7 +19,7 @@ class SendingRequest:
         self.uidcustomer = uidcustomer
         self.uidpass = uidpass
         self.url = "http://padua.sending.es/sending/ws_clientes?wsdl"
-        self.client = Client(self.url)
+        self.client = Client(self.url, timeout=20)
 
     def _prepare_send_shipping_docin(self, **kwargs):
         """Sending is not very standard. Prepare parameters to pass them raw in

@@ -1,7 +1,7 @@
 # Copyright 2022 Impulso Diagonal - Javier Colmeiro
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, models
+from odoo import models
 
 
 class StockPicking(models.Model):
@@ -15,7 +15,7 @@ class StockPicking(models.Model):
         label = self.carrier_id.sending_get_label(tracking_ref)
         label_name = f"sending_label_{tracking_ref}.zpl"
         self.message_post(
-            body=(_("Sending label for %s") % tracking_ref),
+            body=self.env._("Sending label for %s", tracking_ref),
             attachments=[(label_name, label)],
         )
         return label

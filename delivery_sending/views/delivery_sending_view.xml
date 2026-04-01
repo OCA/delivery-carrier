@@ -10,13 +10,13 @@
             <xpath expr="//notebook/page[1]" position='before'>
                 <page
                     string="Sending Configuration"
-                    attrs="{'invisible': [('delivery_type', '!=', 'sending')]}"
+                    invisible="delivery_type != 'sending'"
                 >
                     <group>
                         <group string="Connection">
                             <field
                                 name="sending_access_key"
-                                attrs="{'required': [('delivery_type', '=', 'sending')]}"
+                                required="delivery_type == 'sending'"
                                 password="True"
                             />
                             <field name="sending_user" />
@@ -25,7 +25,7 @@
                             <field name="sending_service" />
                             <field
                                 name="sending_file_format"
-                                attrs="{'required': [('delivery_type', '=', 'sending')]}"
+                                required="delivery_type == 'sending'"
                             />
                         </group>
                     </group>
