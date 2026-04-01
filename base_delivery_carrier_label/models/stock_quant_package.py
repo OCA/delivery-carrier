@@ -41,9 +41,9 @@ class StockQuantPackage(models.Model):
         res = super()._complete_name(name, args)
         for pack in self:
             if pack.parcel_tracking:
-                res[pack.id] += " [%s]" % pack.parcel_tracking
+                res[pack.id] += f" [{pack.parcel_tracking}]"
             if pack.weight:
-                res[pack.id] += " %s kg" % pack.weight
+                res[pack.id] += f" {pack.weight} kg"
         return res
 
     def open_website_url(self):

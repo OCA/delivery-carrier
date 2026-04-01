@@ -12,7 +12,6 @@ class ManifestWizard(models.TransientModel):
     carrier_id = fields.Many2one(
         comodel_name="delivery.carrier",
         string="Carrier",
-        states={"done": [("readonly", True)]},
         required=True,
     )
     from_date = fields.Datetime(required=True)

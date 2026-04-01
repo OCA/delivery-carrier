@@ -7,7 +7,7 @@ from odoo.tests.common import TransactionCase
 
 class ManifestWizardCase(TransactionCase):
     def setUp(self):
-        super(ManifestWizardCase, self).setUp()
+        super().setUp()
         self.free_delivery = self.env.ref("delivery.free_delivery_carrier")
 
     def test_wizard(self):

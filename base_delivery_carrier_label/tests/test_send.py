@@ -3,22 +3,29 @@
 import base64
 from unittest import mock
 
-from odoo.tests.common import Form, TransactionCase
+from odoo.tests.common import TransactionCase
 
 
 class TestSend(TransactionCase):
     """Test sending a picking"""
 
     def test_send(self):
-        """Test if the module picks up labels returned from delivery.carrier#send"""
+        """Test if the module picks up labels returned from
+        delivery.carrier#send"""
         carrier = self.env.ref("delivery.delivery_carrier")
-        picking_form = Form(
-            self.env["stock.picking"].with_context(
-                default_picking_type_id=self.env.ref("stock.picking_type_out").id,
-            )
+        picking_type = self.env.ref("stock.picking_type_out")
+        # Note: Form() not used here due to a known issue with
+        # carrier_id.integration_level expression evaluation in
+        # stock_delivery views (evaluates on int instead of record).
+        picking = self.env["stock.picking"].create(
+            {
+                "partner_id": self.env["res.partner"].create({"name": "Test"}).id,
+                "picking_type_id": picking_type.id,
+                "carrier_id": carrier.id,
+                "location_id": (picking_type.default_location_src_id.id),
+                "location_dest_id": (picking_type.default_location_dest_id.id),
+            }
         )
-        picking_form.carrier_id = carrier
-        picking = picking_form.save()
         package = self.env["stock.quant.package"].create({})
 
         with mock.patch.object(type(carrier), "base_on_rule_send_shipping") as mocked:

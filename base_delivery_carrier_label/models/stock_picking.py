@@ -16,7 +16,6 @@ class StockPicking(models.Model):
     carrier_id = fields.Many2one(
         comodel_name="delivery.carrier",
         string="Carrier",
-        states={"done": [("readonly", True)]},
     )
     carrier_code = fields.Char(related="carrier_id.code", readonly=True)
     option_ids = fields.Many2many(

@@ -37,32 +37,34 @@ class TestGetWeight(TransactionCase):
         return self.env["product.product"].create(vals)
 
     def _get_products(self, weights):
-        """A recordset of products without any specific uom.
+        """Create fresh products with specific weights.
 
-        It means : no uom or kg or unit
         Params:
-            weights: recordset will be size of weights and each
-                product will get a size according of weights[i]
+            weights: list of weights, one product per weight
         """
-        kg_id = self.env.ref("uom.product_uom_kgm").id
-        unit_id = self.env.ref("uom.product_uom_unit").id
-
-        products = self.env["product.product"].search(
-            [["uom_id", "in", (False, kg_id, unit_id)]], limit=len(weights)
-        )
-        for idx, product in enumerate(products):
-            # by default there is no weight on products
-            product.weight = weights[idx]
+        products = self.env["product.product"]
+        for idx, w in enumerate(weights):
+            products |= self.env["product.product"].create(
+                {
+                    "name": f"Test Weight Product {idx}",
+                    "type": "consu",
+                    "weight": w,
+                }
+            )
         return products
 
     def _generate_picking(self, products):
-        """Create a picking from products."""
-        customer = self.env["res.partner"].search([], limit=1)
-        order = self._create_order(customer)
-        self._create_order_line(order, products)
-        order.action_confirm()
-        picking = order.picking_ids
-        picking.button_validate()
+        """Create a picking with move lines for given products."""
+        customer = self.env["res.partner"].create({"name": "Test Customer"})
+        picking_type = self.env.ref("stock.picking_type_out")
+        picking = self.env["stock.picking"].create(
+            {
+                "partner_id": customer.id,
+                "picking_type_id": picking_type.id,
+                "location_id": picking_type.default_location_src_id.id,
+                "location_dest_id": picking_type.default_location_dest_id.id,
+            }
+        )
         return picking
 
     def test_get_weight(self):
