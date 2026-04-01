@@ -77,7 +77,7 @@ class StockPicking(models.Model):
                     with self.env.cr.savepoint():
                         getattr(picking.carrier_id, method)(picking)
                 except Exception as e:
-                    if not self.env.context.get("cron_id"):
+                    if not self.env.context.get("lastcall"):
                         raise
                     picking.pod_error = str(e)
         # Filter pickings with errors and notify
