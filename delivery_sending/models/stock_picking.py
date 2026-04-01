@@ -13,7 +13,7 @@ class StockPicking(models.Model):
         if self.delivery_type != "sending" or not tracking_ref:
             return
         label = self.carrier_id.sending_get_label(tracking_ref)
-        label_name = "sending_label_{}.zpl".format(tracking_ref)
+        label_name = f"sending_label_{tracking_ref}.zpl"
         self.message_post(
             body=(_("Sending label for %s") % tracking_ref),
             attachments=[(label_name, label)],

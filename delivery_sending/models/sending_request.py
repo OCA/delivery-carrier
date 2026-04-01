@@ -11,7 +11,7 @@ _logger = logging.getLogger(__name__)
 
 class SendingRequest:
     """Interface between Sending SOAP API and Odoo recordset
-       Abstract Sending API Operations to connect them with Odoo
+    Abstract Sending API Operations to connect them with Odoo
     """
 
     def __init__(self, uidcustomer, uidpass):
@@ -23,7 +23,7 @@ class SendingRequest:
 
     def _prepare_send_shipping_docin(self, **kwargs):
         """Sending is not very standard. Prepare parameters to pass them raw in
-           the SOAP message as fichero requires a raw xml string to function"""
+        the SOAP message as fichero requires a raw xml string to function"""
         return """<![CDATA[<?xml version="1.0" encoding="ISO-8859-1"?>
             <Expediciones>
               <Expedicion>
@@ -53,9 +53,7 @@ class SendingRequest:
                 <Retorno>N</Retorno>
                 <Bultos>{number_of_packages}</Bultos>
               </Expedicion>
-            </Expediciones>]]>""".format(
-            **kwargs
-        )
+            </Expediciones>]]>""".format(**kwargs)
 
     def send_shipping(self, vals):
         """Create new shipment"""

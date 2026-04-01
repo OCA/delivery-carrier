@@ -1,3 +1,7 @@
+.. image:: https://odoo-community.org/readme-banner-image
+   :target: https://odoo-community.org/get-involved?utm_source=readme
+   :alt: Odoo Community Association
+
 ================
 Delivery Sending
 ================
@@ -13,23 +17,23 @@ Delivery Sending
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fdelivery--carrier-lightgray.png?logo=github
-    :target: https://github.com/OCA/delivery-carrier/tree/13.0/delivery_sending
+    :target: https://github.com/OCA/delivery-carrier/tree/19.0/delivery_sending
     :alt: OCA/delivery-carrier
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/delivery-carrier-13-0/delivery-carrier-13-0-delivery_sending
+    :target: https://translation.odoo-community.org/projects/delivery-carrier-19-0/delivery-carrier-19-0-delivery_sending
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/delivery-carrier&target_branch=13.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/delivery-carrier&target_branch=19.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-This module links the `Sending <https://www.sending.es>`_ booking and tracking
-APIs with Odoo delivery system.
+This module links the `Sending <https://www.sending.es>`__ booking and
+tracking APIs with Odoo delivery system.
 
 **Table of contents**
 
@@ -39,21 +43,24 @@ APIs with Odoo delivery system.
 Installation
 ============
 
-This module depends on the `suds` python library and the OCA/delivery-carrier
-`delivery_package_number` and `delivery_state` modules.
+This module depends on the suds python library and the
+OCA/delivery-carrier delivery_package_number and delivery_state modules.
 
 The Sending API doesn't provide delivery rating methods, so OCA's
-`delivery_price_method` is advised in order to use this carrier in a sales workflow.
+delivery_price_method is advised in order to use this carrier in a sales
+workflow.
 
 Configuration
 =============
 
 To configure a Sending delivery method:
 
-#. Go to *Inventory > Configuration > Delivery > Shipping methods* and create a new one.
-#. Choose *Sending* as provider.
-#. Configure the service parameters according to your contract considerations.
-#. Choose a delivery product.
+1. Go to *Inventory > Configuration > Delivery > Shipping methods* and
+   create a new one.
+2. Choose *Sending* as provider.
+3. Configure the service parameters according to your contract
+   considerations.
+4. Choose a delivery product.
 
 Usage
 =====
@@ -61,29 +68,32 @@ Usage
 These are the operations possible with this module:
 
 Place shipping bookings
-~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------
 
-#. When the picking is validated, the shipping will be booked at Sending.
-#. With the response, we'll receive the delivery tracking number.
+1. When the picking is validated, the shipping will be booked at
+   Sending.
+2. With the response, we'll receive the delivery tracking number.
 
 Cancel bookings
-~~~~~~~~~~~~~~~
+---------------
 
-#. As in other carriers, we can cancel the shipping after the picking is done. To do
-   so, go to *Additional Info* tab and click on the *Cancel* action on the side of the
-   tracking number.
-#. We can generate a new shipping if necessary.
+1. As in other carriers, we can cancel the shipping after the picking is
+   done. To do so, go to *Additional Info* tab and click on the *Cancel*
+   action on the side of the tracking number.
+2. We can generate a new shipping if necessary.
 
 Get labels
-~~~~~~~~~~
+----------
 
-#. If by chance we delete the generated labels, we can obtain them again hitting the
-   *Sending Label* buttons in the header of the picking form.
+1. If by chance we delete the generated labels, we can obtain them again
+   hitting the *Sending Label* buttons in the header of the picking
+   form.
 
 Known issues / Roadmap
 ======================
 
-* POC prototype readyfor shipment creation, shipment cancel and shipment zpl label
+-  POC prototype readyfor shipment creation, shipment cancel and
+   shipment zpl label
 
 Bug Tracker
 ===========
@@ -91,7 +101,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/delivery-carrier/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/delivery-carrier/issues/new?body=module:%20delivery_sending%0Aversion:%2013.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/delivery-carrier/issues/new?body=module:%20delivery_sending%0Aversion:%2019.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -99,25 +109,25 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * Impulso Diagonal
 * Tecnativa
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* `Impulso Diagonal <https://www.impulso.xyz>`_:
+-  `Impulso Diagonal <https://www.impulso.xyz>`__:
 
-  * Pedro Gracia
-  * Javier Colmeiro
+   -  Pedro Gracia
+   -  Javier Colmeiro
 
-* `Tecnativa <https://www.tecnativa.com>`_:
+-  `Tecnativa <https://www.tecnativa.com>`__:
 
-    * Víctor Martínez
+      -  Víctor Martínez
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 
@@ -129,6 +139,6 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-This module is part of the `OCA/delivery-carrier <https://github.com/OCA/delivery-carrier/tree/13.0/delivery_sending>`_ project on GitHub.
+This module is part of the `OCA/delivery-carrier <https://github.com/OCA/delivery-carrier/tree/19.0/delivery_sending>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.

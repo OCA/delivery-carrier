@@ -21,12 +21,15 @@ class DeliveryCarrier(models.Model):
         default="01",
     )
     sending_file_format = fields.Selection(
-        selection=[("ZPL", "ZPL"), ("PDF", "PDF")], default="ZPL", string="File format",
+        selection=[("ZPL", "ZPL"), ("PDF", "PDF")],
+        default="ZPL",
+        string="File format",
     )
 
     def _sending_request(self):
         return SendingRequest(
-            uidcustomer=self.sending_user, uidpass=self.sending_access_key,
+            uidcustomer=self.sending_user,
+            uidpass=self.sending_access_key,
         )
 
     def _sending_check_error(self, response):
@@ -86,8 +89,7 @@ class DeliveryCarrier(models.Model):
         return [self.sending_create_shipping(p) for p in pickings]
 
     def sending_create_shipping(self, picking):
-        """Send the package to Sending
-        """
+        """Send the package to Sending"""
         sending_request = self._sending_request()
         vals = self._prepare_sending_shipping(picking)
         try:
