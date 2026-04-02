@@ -136,8 +136,8 @@ class UpsRequest:
         """Return a dict describing a partner for the shipping request"""
         return dict(
             **kwargs,
-            Name=(partner.parent_id or partner).name,
-            AttentionName=partner.name,
+            Name=((partner.parent_id or partner).name or "")[:35],
+            AttentionName=(partner.name or "")[:35],
             TaxIdentificationNumber=partner.vat,
             Phone=dict(Number=partner.phone or partner.mobile),
             EMailAddress=partner.email,
