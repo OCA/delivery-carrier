@@ -391,7 +391,7 @@ class UpsRequest:
             "M": "in_transit",
         }
         status = self._process_reply(
-            url=f"{self.url}/api/track/v1/details/{picking.carrier_tracking_ref}",
+            url=f"{self.url}/api/track/v1/details/{picking.carrier_tracking_ref}?returnPOD=true",
             method="get",
             headers_extra={
                 "transId": f"{datetime.datetime.now().timestamp()}",
@@ -399,10 +399,14 @@ class UpsRequest:
             },
         )
         self._raise_for_status(status, False)
+        shipment = status["trackResponse"]["shipment"][0]
+        package = shipment["package"][0]
         states_list = []
         delivery_state = "incident"
+        pod = (
+            package.get("deliveryInformation", {}).get("pod", {}).get("content", False)
+        )
         try:
-            shipment = status["trackResponse"]["shipment"][0]
             if not shipment.get("warnings"):
                 for activity in shipment["package"][0]["activity"]:
                     states_list.append(
@@ -439,4 +443,5 @@ class UpsRequest:
         return {
             "delivery_state": delivery_state,
             "tracking_state_history": "\n".join(states_list),
+            "pod": pod,
         }
