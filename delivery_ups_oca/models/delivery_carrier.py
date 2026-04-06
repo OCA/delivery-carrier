@@ -236,6 +236,7 @@ class DeliveryCarrier(models.Model):
             picking_vals = {
                 "delivery_state": response["delivery_state"],
                 "tracking_state_history": response["tracking_state_history"],
+                "tracking_state": response.get("tracking_state"),
             }
             if response.get("pod"):
                 picking_vals.update(

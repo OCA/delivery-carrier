@@ -401,8 +401,10 @@ class UpsRequest:
         self._raise_for_status(status, False)
         shipment = status["trackResponse"]["shipment"][0]
         package = shipment["package"][0]
+        current_status = package.get("currentStatus") or {}
         states_list = []
         delivery_state = "incident"
+        tracking_state = f"[{current_status['code']}] {current_status['description']}"
         pod = (
             package.get("deliveryInformation", {}).get("pod", {}).get("content", False)
         )
@@ -443,5 +445,6 @@ class UpsRequest:
         return {
             "delivery_state": delivery_state,
             "tracking_state_history": "\n".join(states_list),
+            "tracking_state": tracking_state,
             "pod": pod,
         }

@@ -216,6 +216,7 @@ class TestDeliveryUps(TestDeliveryUpsBase):
                     return_value={
                         "delivery_state": "in_transit",
                         "tracking_state_history": "history",
+                        "tracking_state": "[300] In Transit",
                     },
                 ):
                     self.picking.tracking_state_update()
@@ -535,6 +536,7 @@ class TestDeliveryUps(TestDeliveryUpsBase):
             return_value={
                 "delivery_state": "in_transit",
                 "tracking_state_history": "Test history",
+                "tracking_state": "[300] In Transit",
             },
         ):
             self.carrier.ups_tracking_state_update(self.picking)
