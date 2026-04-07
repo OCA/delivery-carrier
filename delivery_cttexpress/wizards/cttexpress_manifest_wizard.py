@@ -3,6 +3,7 @@
 import base64
 
 from odoo import fields, models
+from odoo.fields import Domain
 
 
 class CTTExpressManifestWizard(models.TransientModel):
@@ -35,7 +36,7 @@ class CTTExpressManifestWizard(models.TransientModel):
     def get_manifest(self):
         """List of shippings for the given dates as CTT provides them"""
         carriers = self.carrier_ids or self.env["delivery.carrier"].search(
-            [("delivery_type", "=", "cttexpress")]
+            Domain("delivery_type", "in", ["cttexpress"])
         )
         # Avoid getting repeated manifests. Carriers with different service
         # configuration would produce the same manifest.
@@ -45,16 +46,16 @@ class CTTExpressManifestWizard(models.TransientModel):
         }
         filtered_carriers = self.env["delivery.carrier"]
         for customer, contract, agency in unique_accounts:
-            filtered_carriers += fields.first(
-                carriers.filtered(
-                    lambda x,
-                    customer=customer,
-                    contract=contract,
-                    agency=agency: x.cttexpress_customer == customer
-                    and x.cttexpress_contract == contract
-                    and x.cttexpress_agency == agency
-                )
+            matches = carriers.filtered(
+                lambda x,
+                customer=customer,
+                contract=contract,
+                agency=agency: x.cttexpress_customer == customer
+                and x.cttexpress_contract == contract
+                and x.cttexpress_agency == agency
             )
+            if matches:
+                filtered_carriers += matches[0]
         for carrier in filtered_carriers:
             ctt_request = carrier._ctt_request()
             from_date = fields.Date.to_string(self.from_date)
@@ -65,13 +66,10 @@ class CTTExpressManifestWizard(models.TransientModel):
             carrier._ctt_check_error(error)
             carrier._ctt_log_request(ctt_request)
             for _filename, file in manifest:
-                filename = "{}{}{}-{}-{}.{}".format(
-                    carrier.cttexpress_customer,
-                    carrier.cttexpress_contract,
-                    carrier.cttexpress_agency,
-                    from_date.replace("-", ""),
-                    to_date.replace("-", ""),
-                    self.document_type.lower(),
+                filename = (
+                    f"{carrier.cttexpress_customer}{carrier.cttexpress_contract}"
+                    f"{carrier.cttexpress_agency}-{from_date.replace('-', '')}"
+                    f"-{to_date.replace('-', '')}.{self.document_type.lower()}"
                 )
                 self.attachment_ids += self.env["ir.attachment"].create(
                     {

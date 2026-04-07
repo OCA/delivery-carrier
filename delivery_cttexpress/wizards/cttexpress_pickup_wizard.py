@@ -37,7 +37,8 @@ class CTTExpressPickupWizard(models.TransientModel):
 
         def convert_float_time_to_str(float_time):
             """Helper to pass the times in the expexted format 'HH:MM'"""
-            return "{:02.0f}:{:02.0f}".format(*divmod(float_time * 60, 60))
+            hours, minutes = divmod(float_time * 60, 60)
+            return f"{hours:02.0f}:{minutes:02.0f}"
 
         ctt_request = self.carrier_id._ctt_request()
         delivery_date = fields.Date.to_string(self.delivery_date)

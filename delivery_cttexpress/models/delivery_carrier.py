@@ -1,6 +1,6 @@
 # Copyright 2022 Tecnativa - David Vidal
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 
 from .cttexpress_master_data import (
@@ -71,8 +71,10 @@ class DeliveryCarrier(models.Model):
 
         :param ctt_request ctt_request: CTT Express request object
         """
-        self.log_xml(ctt_request.ctt_last_request, "ctt_request")
-        self.log_xml(ctt_request.ctt_last_response, "ctt_response")
+        if ctt_request.ctt_last_request:
+            self.log_xml(ctt_request.ctt_last_request, "ctt_request")
+        if ctt_request.ctt_last_response:
+            self.log_xml(ctt_request.ctt_last_response, "ctt_response")
 
     def _ctt_check_error(self, error):
         """Common error checking. We stop the program when an error is returned.
@@ -89,7 +91,7 @@ class DeliveryCarrier(models.Model):
             error_msg += f"{code} - {msg}\n"
         if not error_msg:
             return
-        raise UserError(_("CTT Express Error:\n\n%s") % error_msg)
+        raise UserError(self.env._("CTT Express Error:\n\n%s", error_msg))
 
     @api.model
     def _cttexpress_format_tracking(self, tracking):
@@ -98,14 +100,13 @@ class DeliveryCarrier(models.Model):
         :param OrderedDict tracking: CTT tracking values
         :return str: Tracking line
         """
-        status = "{} - [{}] {}".format(
-            fields.Datetime.to_string(tracking["StatusDateTime"]),
-            tracking["StatusCode"],
-            tracking["StatusDescription"],
+        status = (
+            f"{fields.Datetime.to_string(tracking['StatusDateTime'])} - "
+            f"[{tracking['StatusCode']}] {tracking['StatusDescription']}"
         )
         if tracking["IncidentCode"]:
-            status += " ({}) - {}".format(
-                tracking["IncidentCode"], tracking["IncidentDescription"]
+            status += (
+                f" ({tracking['IncidentCode']}) - {tracking['IncidentDescription']}"
             )
         return status
 
@@ -134,7 +135,7 @@ class DeliveryCarrier(models.Model):
                 )
             )[self.cttexpress_shipping_type]
             raise UserError(
-                _(
+                self.env._(
                     "This CTT Express service (%(service_name)s) isn't allowed for "
                     "this account configuration. Please choose one of the followings\n"
                     "%(type_descriptions)s",
@@ -175,6 +176,9 @@ class DeliveryCarrier(models.Model):
         reference = picking.name
         if picking.sale_id:
             reference = f"{picking.sale_id.name}-{reference}"
+        recipient_mobile = getattr(recipient, "mobile", False) or getattr(
+            recipient_entity, "mobile", False
+        )
         vals = {
             "ClientReference": reference,  # Optional
             "ClientDepartmentCode": None,  # Optional (no core field matches)
@@ -184,7 +188,7 @@ class DeliveryCarrier(models.Model):
             "RecipientCountry": recipient.country_id.code,
             "RecipientEmail": recipient.email or recipient_entity.email,  # Optional
             "RecipientSMS": None,  # Optional
-            "RecipientMobile": recipient.mobile or recipient_entity.mobile,  # Optional
+            "RecipientMobile": recipient_mobile,  # Optional
             "RecipientName": recipient.name or recipient_entity.name,
             "RecipientPhone": recipient.phone or recipient_entity.phone,
             "RecipientPostalCode": recipient.zip,
@@ -233,7 +237,7 @@ class DeliveryCarrier(models.Model):
             # The default shipping method doesn't allow to configure the label
             # format, so once we get the tracking, we ask for it again.
             documents = False
-            body = _("CTT Shipping Documents")
+            body = self.env._("CTT Shipping Documents")
             try:
                 documents = self.cttexpress_get_label(tracking)
             except UserError as e:
@@ -241,7 +245,7 @@ class DeliveryCarrier(models.Model):
                 # to retrieve them before that, we'll get this error code
                 if "CTT Express Error" not in str(e) and "1004" not in str(e):
                     raise e
-                body = _(
+                body = self.env._(
                     "CTT labels for this document aren't yet ready. Download them "
                     "manually using the button in the header of the picking."
                 )
@@ -316,7 +320,7 @@ class DeliveryCarrier(models.Model):
         current_tracking = trackings.pop()
         picking.tracking_state = self._cttexpress_format_tracking(current_tracking)
         picking.delivery_state = CTTEXPRESS_DELIVERY_STATES_STATIC.get(
-            current_tracking["StatusCode"], "incidence"
+            current_tracking["StatusCode"], "incident"
         )
 
     def cttexpress_get_tracking_link(self, picking):
@@ -325,7 +329,4 @@ class DeliveryCarrier(models.Model):
         :param record picking: `stock.picking` record
         :return str: tracking url
         """
-        tracking_url = (
-            "https://app.cttexpress.com/AreaClientes/Views/Destinatarios.aspx?s={}"
-        )
-        return tracking_url.format(picking.carrier_tracking_ref)
+        return f"https://app.cttexpress.com/AreaClientes/Views/Destinatarios.aspx?s={picking.carrier_tracking_ref}"

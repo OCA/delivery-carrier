@@ -40,20 +40,20 @@ CTTEXPRESS_DELIVERY_STATES_STATIC = {
     "1": "in_transit",  # EN TRANSITO
     "2": "in_transit",  # EN REPARTO
     "3": "customer_delivered",  # ENTREGADO
-    "4": "incidence",  # INCIDENCIA
-    "5": "incidence",  # DEVOLUCION
+    "4": "incident",  # INCIDENCIA
+    "5": "incident",  # DEVOLUCION
     "6": "in_transit",  # RECOGERAN EN AGENCIA
-    "7": "incidence",  # RECANALIZADO
-    "8": "incidence",  # NO REALIZADO
-    "9": "incidence",  # RETORNADO
+    "7": "incident",  # RECANALIZADO
+    "8": "incident",  # NO REALIZADO
+    "9": "incident",  # RETORNADO
     "10": "in_transit",  # EN ADUANA
     "11": "in_transit",  # EN AGENCIA
     "12": "customer_delivered",  # ENTREGA PARCIAL
-    "13": "incidence",  # POSICIONADO EN PER
-    "50": "incidence",  # DEVOLUCION DESDE PLATAFORMA
-    "51": "incidence",  # DEVOLUCION SINIESTROS MERCANCIA YA EVALUADA
-    "70": "incidence",  # RECANALIZADO A SINIESTROS POR PLATAFORMA
-    "71": "incidence",  # REENCAMINADO
+    "13": "incident",  # POSICIONADO EN PER
+    "50": "incident",  # DEVOLUCION DESDE PLATAFORMA
+    "51": "incident",  # DEVOLUCION SINIESTROS MERCANCIA YA EVALUADA
+    "70": "incident",  # RECANALIZADO A SINIESTROS POR PLATAFORMA
+    "71": "incident",  # REENCAMINADO
     "90": "canceled_shipment",  # ANULADO
     "91": "in_transit",  # REACTIVACION ENVIO (TOL)
     "99": "in_transit",  # COMPUESTO
