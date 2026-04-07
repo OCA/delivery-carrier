@@ -5,6 +5,7 @@
 
 import datetime
 import logging
+from urllib.parse import urlencode
 
 import requests
 
@@ -390,8 +391,10 @@ class UpsRequest:
             "P": "customer_delivered",
             "M": "in_transit",
         }
+        params = {"returnSignature": "true", "returnPOD": "true"}
+        query_string = urlencode(params)
         status = self._process_reply(
-            url=f"{self.url}/api/track/v1/details/{picking.carrier_tracking_ref}?returnPOD=true",
+            url=f"{self.url}/api/track/v1/details/{picking.carrier_tracking_ref}?{query_string}",
             method="get",
             headers_extra={
                 "transId": f"{datetime.datetime.now().timestamp()}",
