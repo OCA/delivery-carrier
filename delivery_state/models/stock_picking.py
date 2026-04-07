@@ -72,7 +72,13 @@ class StockPicking(models.Model):
         for picking in self.filtered("carrier_id"):
             method = f"{picking.delivery_type}_tracking_state_update"
             if hasattr(picking.carrier_id, method):
-                getattr(picking.carrier_id, method)(picking)
+                try:
+                    with self.env.cr.savepoint():
+                        getattr(picking.carrier_id, method)(picking)
+                except Exception as e:
+                    if not self.env.context.get("cron_id"):
+                        raise
+                    picking.pod_error = str(e)
         # Filter pickings with errors and notify
         pickings_with_errors = self.filtered("pod_error")
         if pickings_with_errors:
