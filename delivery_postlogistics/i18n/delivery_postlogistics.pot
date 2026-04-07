@@ -538,6 +538,11 @@ msgid "ZPL Patch String"
 msgstr ""
 
 #. module: delivery_postlogistics
+#: model:ir.model.fields.selection,name:delivery_postlogistics.selection__delivery_carrier_template_option__type__b
+msgid "a"
+msgstr ""
+
+#. module: delivery_postlogistics
 #: model_terms:ir.ui.view,arch_db:delivery_postlogistics.stock_package_type_form_delivery
 msgid "for available codes."
 msgstr ""
