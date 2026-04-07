@@ -326,6 +326,6 @@ class DeliveryCarrier(models.Model):
         :return str: tracking url
         """
         tracking_url = (
-            "https://app.cttexpress.com/AreaClientes/Views/" "Destinatarios.aspx?s={}"
+            "https://app.cttexpress.com/AreaClientes/Views/Destinatarios.aspx?s={}"
         )
         return tracking_url.format(picking.carrier_tracking_ref)
