@@ -363,7 +363,7 @@ class UpsRequest:
         static_states = {
             "I": "in_transit",
             "D": "customer_delivered",
-            "E": "incidence",
+            "E": "incident",
             "P": "customer_delivered",
             "M": "in_transit",
         }
@@ -377,7 +377,7 @@ class UpsRequest:
         )
         self._raise_for_status(status, False)
         states_list = []
-        delivery_state = "incidence"
+        delivery_state = "incident"
         try:
             shipment = status["trackResponse"]["shipment"][0]
             if not shipment.get("warnings"):
@@ -396,7 +396,7 @@ class UpsRequest:
                 if shipment["package"][0]["activity"]:
                     delivery_state = static_states.get(
                         shipment["package"][0]["activity"][0]["status"]["type"],
-                        "incidence",
+                        "incident",
                     )
             else:
                 for warning in shipment.get("warnings"):
