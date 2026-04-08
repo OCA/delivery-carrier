@@ -11,10 +11,12 @@
                 <field name="delivery_zone_id" />
             </field>
             <xpath
-                expr="//field[@name='child_ids']/form//field[@name='mobile']"
+                expr="//field[@name='child_ids']/form//group[@name='other_info']"
                 position="after"
             >
-                <field name="delivery_zone_id" invisible="type != 'delivery'" />
+                <group invisible="type != 'delivery'">
+                    <field name="delivery_zone_id" />
+                </group>
             </xpath>
         </field>
     </record>

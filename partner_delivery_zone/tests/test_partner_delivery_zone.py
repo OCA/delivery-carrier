@@ -36,7 +36,7 @@ class TestPartnerDeliveryZone(BaseCommon):
                             "name": cls.product.name,
                             "product_id": cls.product.id,
                             "product_uom_qty": 10.0,
-                            "product_uom": cls.product.uom_id.id,
+                            "product_uom_id": cls.product.uom_id.id,
                             "price_unit": 1000.00,
                         }
                     )

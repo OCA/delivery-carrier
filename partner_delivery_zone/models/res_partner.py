@@ -30,5 +30,5 @@ class ResPartner(models.Model):
                     "{", "{'default_delivery_zone_id': delivery_zone_id, ", 1
                 )
                 partner_field.attrib["context"] = context
-                res["arch"] = etree.tostring(partner_xml)
+                res["arch"] = etree.tostring(partner_xml, encoding="unicode")
         return res
