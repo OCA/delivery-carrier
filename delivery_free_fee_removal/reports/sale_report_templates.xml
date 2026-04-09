@@ -4,10 +4,7 @@
         id="report_saleorder_document"
         inherit_id="sale.report_saleorder_document"
     >
-        <xpath
-            expr="//tbody[hasclass('sale_tbody')]/t[@t-as='line']/tr"
-            position="attributes"
-        >
+        <xpath expr="//tr[@name='tr_product']" position="attributes">
             <attribute name="t-if">not line.is_free_delivery</attribute>
         </xpath>
     </template>
