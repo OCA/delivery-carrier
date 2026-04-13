@@ -11,19 +11,23 @@
             <field name="password" position="after">
                 <field
                     name="dpd_fr_soap_customer_country"
-                    attrs="{'invisible': [('delivery_type', '!=', 'dpd_fr_soap')], 'required': [('delivery_type', '=', 'dpd_fr_soap')]}"
+                    invisible="delivery_type != 'dpd_fr_soap'"
+                    required="delivery_type == 'dpd_fr_soap'"
                 />
                 <field
                     name="dpd_fr_soap_customer_id"
-                    attrs="{'invisible': [('delivery_type', '!=', 'dpd_fr_soap')], 'required': [('delivery_type', '=', 'dpd_fr_soap')]}"
+                    invisible="delivery_type != 'dpd_fr_soap'"
+                    required="delivery_type == 'dpd_fr_soap'"
                 />
                 <field
                     name="dpd_fr_soap_agency_id"
-                    attrs="{'invisible': [('delivery_type', '!=', 'dpd_fr_soap')], 'required': [('delivery_type', '=', 'dpd_fr_soap')]}"
+                    invisible="delivery_type != 'dpd_fr_soap'"
+                    required="delivery_type == 'dpd_fr_soap'"
                 />
                 <field
                     name="dpd_fr_soap_file_format"
-                    attrs="{'invisible': [('delivery_type', '!=', 'dpd_fr_soap')], 'required': [('delivery_type', '=', 'dpd_fr_soap')]}"
+                    invisible="delivery_type != 'dpd_fr_soap'"
+                    required="delivery_type == 'dpd_fr_soap'"
                 />
             </field>
         </field>
