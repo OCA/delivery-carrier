@@ -47,7 +47,12 @@ class StockPicking(models.Model):
                 (
                     picking.carrier_id
                     and not picking.move_line_ids.result_package_id
-                    or picking.picking_type_id.force_set_number_of_packages
+                    or picking.picking_type_id.force_set_number_of_packages == "always"
+                    or (
+                        picking.picking_type_id.force_set_number_of_packages
+                        == "partner"
+                        and picking.partner_id.force_set_number_of_packages
+                    )
                 )
                 and not picking.picking_type_id.avoid_set_number_of_packages
             )
