@@ -17,6 +17,11 @@ msgstr ""
 "X-Generator: Weblate 5.6.2\n"
 
 #. module: delivery_package_number
+#: model:ir.model.fields.selection,name:delivery_package_number.selection__stock_picking_type__force_set_number_of_packages__always
+msgid "Always"
+msgstr ""
+
+#. module: delivery_package_number
 #: model_terms:ir.ui.view,arch_db:delivery_package_number.view_number_package_validate
 msgid "Apply"
 msgstr "Applica"
@@ -27,6 +32,11 @@ msgid "Ask Number Of Packages"
 msgstr "Chiedi numero di colli"
 
 #. module: delivery_package_number
+#: model:ir.model.fields,field_description:delivery_package_number.field_stock_picking_type__avoid_set_number_of_packages
+msgid "Avoid Set Number Of Packages"
+msgstr ""
+
+#. module: delivery_package_number
 #: model:ir.model,name:delivery_package_number.model_stock_backorder_confirmation
 msgid "Backorder Confirmation"
 msgstr "Conferma ordine residuo"
@@ -35,6 +45,11 @@ msgstr "Conferma ordine residuo"
 #: model_terms:ir.ui.view,arch_db:delivery_package_number.view_number_package_validate
 msgid "Cancel"
 msgstr "Annulla"
+
+#. module: delivery_package_number
+#: model:ir.model,name:delivery_package_number.model_res_partner
+msgid "Contact"
+msgstr ""
 
 #. module: delivery_package_number
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_line_wizard__create_uid
@@ -60,6 +75,9 @@ msgid "Display Name"
 msgstr "Nome visualizzato"
 
 #. module: delivery_package_number
+#: model:ir.model.fields,field_description:delivery_package_number.field_dropoff_site__force_set_number_of_packages
+#: model:ir.model.fields,field_description:delivery_package_number.field_res_partner__force_set_number_of_packages
+#: model:ir.model.fields,field_description:delivery_package_number.field_res_users__force_set_number_of_packages
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_picking_type__force_set_number_of_packages
 msgid "Force Set Number Of Packages"
 msgstr "Forza impostazione numero di colli"
@@ -104,6 +122,11 @@ msgid "Number of packages:"
 msgstr "Numero di colli:"
 
 #. module: delivery_package_number
+#: model:ir.model.fields.selection,name:delivery_package_number.selection__stock_picking_type__force_set_number_of_packages__partner
+msgid "Partner condition"
+msgstr ""
+
+#. module: delivery_package_number
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_wizard__pick_ids
 msgid "Pick"
 msgstr "Preleva"
@@ -132,7 +155,6 @@ msgstr "Resoconto numero di colli"
 #. odoo-python
 #: code:addons/delivery_package_number/models/stock_picking.py:0
 #: model_terms:ir.ui.view,arch_db:delivery_package_number.view_number_package_validate
-#, python-format
 msgid "Set number of packages"
 msgstr "Imposta numero di colli"
 

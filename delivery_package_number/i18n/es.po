@@ -36,6 +36,11 @@ msgid "Ask Number Of Packages"
 msgstr "Preguntar número de Bultos"
 
 #. module: delivery_package_number
+#: model:ir.model.fields,field_description:delivery_package_number.field_stock_picking_type__avoid_set_number_of_packages
+msgid "Avoid Set Number Of Packages"
+msgstr ""
+
+#. module: delivery_package_number
 #: model:ir.model,name:delivery_package_number.model_stock_backorder_confirmation
 msgid "Backorder Confirmation"
 msgstr "Confirmación de entrega parcial"
@@ -74,6 +79,7 @@ msgid "Display Name"
 msgstr "Nombre mostrado"
 
 #. module: delivery_package_number
+#: model:ir.model.fields,field_description:delivery_package_number.field_dropoff_site__force_set_number_of_packages
 #: model:ir.model.fields,field_description:delivery_package_number.field_res_partner__force_set_number_of_packages
 #: model:ir.model.fields,field_description:delivery_package_number.field_res_users__force_set_number_of_packages
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_picking_type__force_set_number_of_packages
@@ -85,17 +91,6 @@ msgstr "Forzar solicitud de número de bultos"
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_wizard__id
 msgid "ID"
 msgstr "ID"
-
-#. module: delivery_package_number
-#: model:ir.model,name:delivery_package_number.model_stock_immediate_transfer
-msgid "Immediate Transfer"
-msgstr "Transferencia inmediata"
-
-#. module: delivery_package_number
-#: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_line_wizard____last_update
-#: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_wizard____last_update
-msgid "Last Modified on"
-msgstr "Última modificación en"
 
 #. module: delivery_package_number
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_line_wizard__write_uid
@@ -110,12 +105,12 @@ msgid "Last Updated on"
 msgstr "Última actualización el"
 
 #. module: delivery_package_number
-#: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_line_wizard__number_of_packages
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_wizard__number_of_packages
 msgid "Number Of Packages"
 msgstr "Número de Bultos"
 
 #. module: delivery_package_number
+#: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_line_wizard__number_of_packages
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_picking__number_of_packages
 msgid "Number of Packages"
 msgstr "Número de Bultos"
@@ -164,7 +159,6 @@ msgstr "Reporte para número de bultos"
 #. odoo-python
 #: code:addons/delivery_package_number/models/stock_picking.py:0
 #: model_terms:ir.ui.view,arch_db:delivery_package_number.view_number_package_validate
-#, python-format
 msgid "Set number of packages"
 msgstr "Establecer número de bultos"
 
@@ -197,3 +191,9 @@ msgstr ""
 #: model:ir.model,name:delivery_package_number.model_stock_number_package_validate_wizard
 msgid "Wizard to force set number of pickings when validate"
 msgstr "Asistente para forzar establecer el número de bultos tras validación"
+
+#~ msgid "Immediate Transfer"
+#~ msgstr "Transferencia inmediata"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Última modificación en"
