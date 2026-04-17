@@ -1,4 +1,4 @@
-Send and track parcels with DPD France.
+Generate shipping labels and track parcels with DPD France,
+using the `roulier <https://pypi.org/project/roulier/>`_ library.
 
-Products available: 'Classic', 'Predict', and 'Relais'. (previously
-known as Ici Relais and Exapaq).
+Supported DPD products: Classic, Predict, and Relais.

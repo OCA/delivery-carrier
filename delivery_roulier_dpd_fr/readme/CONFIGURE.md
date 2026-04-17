@@ -1,4 +1,4 @@
-- company form (Settings \> Companies \> Companies): complete address of
-  the company, including phone number
-- configuration the DPD account informations (Inventory \> COnfiguration
-  \> Delivery \> Carrier Account)
+1. Complete your company address, including phone number
+   (Settings > Companies).
+2. Configure the DPD account credentials
+   (Inventory > Configuration > Delivery > Carrier Account).

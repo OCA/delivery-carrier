@@ -28,10 +28,10 @@ Delivery Carrier DPD FR
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-Send and track parcels with DPD France.
+Generate shipping labels and track parcels with DPD France, using the
+``roulier <https://pypi.org/project/roulier/>``\ \_ library.
 
-Products available: 'Classic', 'Predict', and 'Relais'. (previously
-known as Ici Relais and Exapaq).
+Supported DPD products: Classic, Predict, and Relais.
 
 **Table of contents**
 
@@ -41,10 +41,10 @@ known as Ici Relais and Exapaq).
 Configuration
 =============
 
--  company form (Settings > Companies > Companies): complete address of
-   the company, including phone number
--  configuration the DPD account informations (Inventory > COnfiguration
-   > Delivery > Carrier Account)
+1. Complete your company address, including phone number (Settings >
+   Companies).
+2. Configure the DPD account credentials (Inventory > Configuration >
+   Delivery > Carrier Account).
 
 Bug Tracker
 ===========
@@ -70,6 +70,7 @@ Contributors
 -  Raphaël REVERDY <raphael.reverdy@akretion.com>
 -  Florian DA COSTA <florian.dacosta@akretion.com>
 -  Eric Bouhana <monsieurb@saaslys.com>
+-  Daniel Reis <dreis@opensourceintegrators.com>
 
 Maintainers
 -----------
