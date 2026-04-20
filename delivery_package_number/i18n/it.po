@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-12-02 10:06+0000\n"
+"PO-Revision-Date: 2026-04-20 16:45+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -14,12 +14,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: delivery_package_number
 #: model:ir.model.fields.selection,name:delivery_package_number.selection__stock_picking_type__force_set_number_of_packages__always
 msgid "Always"
-msgstr ""
+msgstr "Sempre"
 
 #. module: delivery_package_number
 #: model_terms:ir.ui.view,arch_db:delivery_package_number.view_number_package_validate
@@ -34,7 +34,7 @@ msgstr "Chiedi numero di colli"
 #. module: delivery_package_number
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_picking_type__avoid_set_number_of_packages
 msgid "Avoid Set Number Of Packages"
-msgstr ""
+msgstr "Evitare impostazione numero di colli"
 
 #. module: delivery_package_number
 #: model:ir.model,name:delivery_package_number.model_stock_backorder_confirmation
@@ -49,7 +49,7 @@ msgstr "Annulla"
 #. module: delivery_package_number
 #: model:ir.model,name:delivery_package_number.model_res_partner
 msgid "Contact"
-msgstr ""
+msgstr "Contatto"
 
 #. module: delivery_package_number
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_line_wizard__create_uid
@@ -124,7 +124,7 @@ msgstr "Numero di colli:"
 #. module: delivery_package_number
 #: model:ir.model.fields.selection,name:delivery_package_number.selection__stock_picking_type__force_set_number_of_packages__partner
 msgid "Partner condition"
-msgstr ""
+msgstr "Condizione partner"
 
 #. module: delivery_package_number
 #: model:ir.model.fields,field_description:delivery_package_number.field_stock_number_package_validate_wizard__pick_ids
