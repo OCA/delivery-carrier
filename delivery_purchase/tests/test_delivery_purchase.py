@@ -168,7 +168,7 @@ class TestDeliveryPurchase(TestDeliveryPurchaseBase):
         self.purchase.button_confirm()
         picking = self.purchase.picking_ids
         picking.carrier_id = self.carrier_fixed
-        for move in picking.move_ids_without_package:
+        for move in picking.move_ids:
             move.quantity = 1
         res = picking.button_validate()
         model = self.env[res["res_model"]].with_context(**res["context"])

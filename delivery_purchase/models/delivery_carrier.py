@@ -35,8 +35,9 @@ class DeliveryCarrier(models.Model):
                 and (order.amount_total + order.delivery_price) >= self.amount
             ):
                 res["warning_message"] = self.env._(
-                    "The shipping is free since the order amount exceeds %.2f."
-                ) % (self.amount)
+                    "The shipping is free since the order amount exceeds %.2f.",
+                    self.amount,
+                )
                 res["price"] = 0.0
             return res
 
@@ -149,7 +150,7 @@ class DeliveryCarrier(models.Model):
         for line in order.order_line.filtered(
             lambda o_line: o_line.state != "cancel" and bool(o_line.product_id)
         ):
-            qty = line.product_uom._compute_quantity(
+            qty = line.product_uom_id._compute_quantity(
                 line.product_uom_qty, line.product_id.uom_id
             )
             weight += (line.product_id.weight or 0.0) * qty
