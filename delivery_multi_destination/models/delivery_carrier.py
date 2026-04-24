@@ -5,7 +5,6 @@
 
 from odoo import api, fields, models
 from odoo.exceptions import ValidationError
-from odoo.osv import expression
 
 
 class DeliveryCarrier(models.Model):
@@ -31,24 +30,17 @@ class DeliveryCarrier(models.Model):
     def _onchange_destination_type(self):
         """Define the corresponding value to avoid creation error with UX."""
         if self.destination_type == "multi" and self.child_ids and not self.product_id:
-            self.product_id = fields.first(self.child_ids.product_id)
+            self.product_id = self.child_ids[:1].product_id
 
     @api.model
     @api.readonly
-    @api.returns("self")
-    def search(self, domain, offset=0, limit=None, order=None):
+    def _search(self, domain, *args, **kwargs):
         """Don't show by default children carriers."""
         if not self.env.context.get("show_children_carriers"):
             if domain is None:
                 domain = []
-            domain += [("parent_id", "=", False)]
-        return super().search(domain, offset=offset, limit=limit, order=order)
-
-    @api.model
-    def _search_display_name(self, operator, value):
-        domain = super()._search_display_name(operator, value)
-        domain = expression.AND([[("parent_id", "=", False)], domain])
-        return domain
+            domain = fields.Domain.AND([domain, [("parent_id", "=", False)]])
+        return super()._search(domain, *args, **kwargs)
 
     def available_carriers(self, partner, order):
         """If the carrier is multi, we test the availability on children."""

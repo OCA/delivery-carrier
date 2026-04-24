@@ -24,6 +24,9 @@
             <xpath expr="//field[@name='free_over']/.." position="attributes">
                 <attribute name="invisible">destination_type == 'multi'</attribute>
             </xpath>
+            <xpath expr="//label[@for='free_over']" position="attributes">
+                <attribute name="invisible">destination_type == 'multi'</attribute>
+            </xpath>
             <field name="amount" position="attributes">
                 <attribute name="required">free_over</attribute>
                 <attribute
