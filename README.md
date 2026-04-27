@@ -52,6 +52,7 @@ addon | version | maintainers | summary
 [delivery_easypost_oca](delivery_easypost_oca/) | 18.0.1.0.0 |  | OCA Delivery Easypost
 [delivery_estimated_package_quantity_by_weight](delivery_estimated_package_quantity_by_weight/) | 18.0.1.0.0 |  | Compute the amount of packages a picking out should have depending on the weight of the products and the limit fixed by the carrier
 [delivery_free_fee_removal](delivery_free_fee_removal/) | 18.0.1.0.0 |  | Hide free fee lines on sales orders
+[delivery_free_over_untaxed_price](delivery_free_over_untaxed_price/) | 18.0.1.0.0 |  | Decide if delivery is free over the untaxed price.
 [delivery_multi_destination](delivery_multi_destination/) | 18.0.1.0.0 |  | Multiple destinations for the same delivery method
 [delivery_package_fee](delivery_package_fee/) | 18.0.1.0.0 |  | Add fees on sales order for delivered packages
 [delivery_package_number](delivery_package_number/) | 18.0.2.1.0 |  | Set or compute number of packages for a picking
