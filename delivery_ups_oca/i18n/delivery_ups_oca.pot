@@ -185,6 +185,11 @@ msgid "OZS"
 msgstr ""
 
 #. module: delivery_ups_oca
+#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_file_format__pdf
+msgid "PDF"
+msgstr ""
+
+#. module: delivery_ups_oca
 #: model:ir.model.fields,field_description:delivery_ups_oca.field_delivery_carrier__ups_package_dimension_code
 msgid "Package Dimension code"
 msgstr ""
