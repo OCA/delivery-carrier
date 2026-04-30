@@ -6,31 +6,33 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-04-30 10:45+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: delivery_free_over_untaxed_price
 #: model:ir.model,name:delivery_free_over_untaxed_price.model_sale_order
 msgid "Sales Order"
-msgstr ""
+msgstr "Ordine di vendita"
 
 #. module: delivery_free_over_untaxed_price
 #: model:ir.model,name:delivery_free_over_untaxed_price.model_delivery_carrier
 msgid "Shipping Methods"
-msgstr ""
+msgstr "Metodi di spedizione"
 
 #. module: delivery_free_over_untaxed_price
 #. odoo-python
 #: code:addons/delivery_free_over_untaxed_price/models/delivery_carrier.py:0
 msgid "The shipping is free since the order untaxed amount exceeds %.2f."
-msgstr ""
+msgstr "La spedizione è gratuita perché il valore ante tasse supera %.2f."
 
 #. module: delivery_free_over_untaxed_price
 #: model:ir.model.fields,field_description:delivery_free_over_untaxed_price.field_delivery_carrier__use_amount_untaxed
 msgid "Use amount untaxed"
-msgstr ""
+msgstr "Utilizza valore ante tasse"
