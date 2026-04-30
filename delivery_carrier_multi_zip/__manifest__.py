@@ -8,6 +8,6 @@
     "author": "Tecnativa, Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "installable": True,
-    "depends": ["delivery"],
+    "depends": ["stock_delivery"],
     "data": ["security/ir.model.access.csv", "views/delivery_carrier_view.xml"],
 }
