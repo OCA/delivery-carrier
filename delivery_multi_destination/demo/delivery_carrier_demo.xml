@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="product_product_delivery_carrier_multi" model="product.product">
+        <field name="name">International Carrier Inc.</field>
+        <field name="type">service</field>
+    </record>
+    <record id="delivery_carrier_multi" model="delivery.carrier">
+        <field name="name">International Carrier Inc.</field>
+        <field name="sequence">4</field>
+        <field name="destination_type">multi</field>
+        <field name="product_id" ref="product_product_delivery_carrier_multi" />
+    </record>
+    <record id="product_product_delivery_carrier_multi_child_1" model="product.product">
+        <field name="name">International Carrier Inc., Belgium</field>
+        <field name="type">service</field>
+    </record>
+    <record id="delivery_carrier_multi_child_1" model="delivery.carrier">
+        <field name="name">Belgium</field>
+        <field name="parent_id" ref="delivery_carrier_multi" />
+        <field name="fixed_price">20</field>
+        <field name="sequence">1</field>
+        <field name="delivery_type">base_on_rule</field>
+        <field name="country_ids" eval="[(4, ref('base.be'))]" />
+        <field name="product_id" ref="product_product_delivery_carrier_multi_child_1" />
+    </record>
+    <record id="delivery_price_rule1" model="delivery.price.rule">
+        <field name="carrier_id" ref="delivery_carrier_multi_child_1" />
+        <field name="max_value" eval="5" />
+        <field name="list_base_price" eval="20" />
+    </record>
+    <!--  delivery charge of product if weight more than 5kg-->
+    <record id="delivery_price_rule2" model="delivery.price.rule">
+        <field name="carrier_id" ref="delivery_carrier_multi_child_1" />
+        <field name="operator">&gt;=</field>
+        <field name="max_value" eval="5" />
+        <field name="list_base_price" eval="50" />
+    </record>
+    <!--  free delivery charge if price more than 300-->
+    <record id="delivery_price_rule3" model="delivery.price.rule">
+        <field name="carrier_id" ref="delivery_carrier_multi_child_1" />
+        <field name="operator">&gt;=</field>
+        <field name="variable">price</field>
+        <field name="max_value" eval="300" />
+        <field name="list_base_price" eval="0" />
+    </record>
+    <record id="product_product_delivery_carrier_multi_child_2" model="product.product">
+        <field name="name">International Carrier Inc., France</field>
+        <field name="type">service</field>
+    </record>
+    <record id="delivery_carrier_multi_child_2" model="delivery.carrier">
+        <field name="name">France</field>
+        <field name="parent_id" ref="delivery_carrier_multi" />
+        <field name="fixed_price">40</field>
+        <field name="sequence">2</field>
+        <field name="delivery_type">fixed</field>
+        <field name="country_ids" eval="[(4, ref('base.fr'))]" />
+        <field name="product_id" ref="product_product_delivery_carrier_multi_child_2" />
+    </record>
+    <record id="product_product_delivery_carrier_multi_child_3" model="product.product">
+        <field name="name">International Carrier Inc., United Kingdom</field>
+        <field name="type">service</field>
+    </record>
+    <record id="delivery_carrier_multi_child_3" model="delivery.carrier">
+        <field name="name">United Kingdom</field>
+        <field name="parent_id" ref="delivery_carrier_multi" />
+        <field name="fixed_price">60</field>
+        <field name="sequence">2</field>
+        <field name="delivery_type">fixed</field>
+        <field name="country_ids" eval="[(4, ref('base.uk'))]" />
+        <field name="product_id" ref="product_product_delivery_carrier_multi_child_3" />
+    </record>
+</odoo>
