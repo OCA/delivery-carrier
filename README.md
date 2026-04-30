@@ -27,6 +27,7 @@ addon | version | maintainers | summary
 [delivery_carrier_picking_valid](delivery_carrier_picking_valid/) | 19.0.1.0.0 | <a href='https://github.com/mmequignon'><img src='https://github.com/mmequignon.png' width='32' height='32' style='border-radius:50%;' alt='mmequignon'/></a> | Checks if a transfer matches carrier requirements
 [delivery_carrier_picking_valid_dangerous_goods](delivery_carrier_picking_valid_dangerous_goods/) | 19.0.1.0.0 | <a href='https://github.com/mmequignon'><img src='https://github.com/mmequignon.png' width='32' height='32' style='border-radius:50%;' alt='mmequignon'/></a> | Checks if a transfer matches carrier dangerous goods restrictions
 [delivery_correos_express](delivery_correos_express/) | 19.0.1.0.0 |  | Delivery Carrier implementation for Correos Express using their API
+[delivery_multi_destination](delivery_multi_destination/) | 19.0.1.0.0 |  | Multiple destinations for the same delivery method
 [delivery_package_number](delivery_package_number/) | 19.0.1.0.0 |  | Set or compute number of packages for a picking
 [delivery_state](delivery_state/) | 19.0.1.0.0 |  | Provides fields to be able to contemplate the tracking statesand also adds a global fields
 [partner_delivery_info](partner_delivery_info/) | 19.0.1.0.0 |  | Send delivery notice to the shipper from any operation.
