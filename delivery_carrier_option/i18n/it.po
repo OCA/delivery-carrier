@@ -1,0 +1,212 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* delivery_carrier_option
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2025-02-21 18:06+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.6.2\n"
+
+#. module: delivery_carrier_option
+#: model:ir.model.fields,field_description:delivery_carrier_option.field_delivery_carrier_option__active
+msgid "Active"
+msgstr "Attivo"
+
+#. module: delivery_carrier_option
+#: model:ir.model.fields.selection,name:delivery_carrier_option.selection__delivery_carrier_template_option__type__additional
+msgid "Additional Service"
+msgstr "Servizio addizionale"
+
+#. module: delivery_carrier_option
+#: model:ir.model.fields,help:delivery_carrier_option.field_delivery_carrier_option__description
+#: model:ir.model.fields,help:delivery_carrier_option.field_delivery_carrier_template_option__description
+msgid "Allow to define a more complete description than in the name field."
+msgstr ""
+"Permette di definire una descrizione più completa che quella del campo nome."
+
+#. module: delivery_carrier_option
+#: model:ir.model.fields,field_description:delivery_carrier_option.field_delivery_carrier_option__by_default
+msgid "Applied by Default"
+msgstr "Applicato in modo predefinito"
+
+#. module: delivery_carrier_option
+#: model:ir.model.fields.selection,name:delivery_carrier_option.selection__delivery_carrier_template_option__type__basic
+msgid "Basic Service"
+msgstr "Servizio base"
+
+#. module: delivery_carrier_option
+#: model:ir.model.fields,help:delivery_carrier_option.field_delivery_carrier_option__by_default
+msgid ""
+"By check, user can choose to apply this option to each Delivery Order\n"
+" using this delivery method"
+msgstr ""
+"Selezionandola, l'utente potrà scegliere di applicare questa opzione ad ogni "
+"ordine di consegna\n"
+"utilizzando questo metodo di consegna"
+
+#. module: delivery_carrier_option
+#: model:ir.model.fields,field_description:delivery_carrier_option.field_delivery_carrier_option__carrier_id
+msgid "Carrier"
+msgstr "Corriere"
+
+#. module: delivery_carrier_option
+#: model:ir.model.fields,field_description:delivery_carrier_option.field_delivery_carrier_option__code
+#: model:ir.model.fields,field_description:delivery_carrier_option.field_delivery_carrier_template_option__code
+msgid "Code"
+msgstr "Codice"
+
+#. module: delivery_carrier_option
+#: model:ir.model.fields,field_description:delivery_carrier_option.field_delivery_carrier_option__color
+msgid "Color"
+msgstr "Colore"
+
+#. module: delivery_carrier_option
+#: model:ir.model.fields,field_description:delivery_carrier_option.field_delivery_carrier_option__create_uid
+#: model:ir.model.fields,field_description:delivery_carrier_option.field_delivery_carrier_template_option__create_uid
+msgid "Created by"
+msgstr "Creato da"
+
+#. module: delivery_carrier_option
+#: model:ir.model.fields,field_description:delivery_carrier_option.field_delivery_carrier_option__create_date
+#: model:ir.model.fields,field_description:delivery_carrier_option.field_delivery_carrier_template_option__create_date
+msgid "Created on"
+msgstr "Creato il"
+
+#. module: delivery_carrier_option
+#: model:ir.model.fields.selection,name:delivery_carrier_option.selection__delivery_carrier_template_option__type__delivery
+msgid "Delivery Instructions"
+msgstr "Istruzioni di consegna"
+
+#. module: delivery_carrier_option
+#: model:ir.model,name:delivery_carrier_option.model_delivery_carrier_option
+msgid "Delivery carrier option"
+msgstr "Opzione vettore consegna"
+
+#. module: delivery_carrier_option
+#: model:ir.model,name:delivery_carrier_option.model_delivery_carrier_template_option
+msgid "Delivery carrier template option"
+msgstr "Opzione modello vettore consegna"
+
+#. module: delivery_carrier_option
+#: model:ir.model.fields,field_description:delivery_carrier_option.field_delivery_carrier_option__description
+#: model:ir.model.fields,field_description:delivery_carrier_option.field_delivery_carrier_template_option__description
+msgid "Description"
+msgstr "Descrizione"
+
+#. module: delivery_carrier_option
+#: model:ir.model.fields,field_description:delivery_carrier_option.field_delivery_carrier_option__display_name
+#: model:ir.model.fields,field_description:delivery_carrier_option.field_delivery_carrier_template_option__display_name
+msgid "Display Name"
+msgstr "Nome visualizzato"
+
+#. module: delivery_carrier_option
+#: model:ir.model.fields,field_description:delivery_carrier_option.field_delivery_carrier_option__id
+#: model:ir.model.fields,field_description:delivery_carrier_option.field_delivery_carrier_template_option__id
+msgid "ID"
+msgstr "ID"
+
+#. module: delivery_carrier_option
+#: model:ir.model.fields,help:delivery_carrier_option.field_delivery_carrier_option__mandatory
+msgid ""
+"If checked, this option is necessarily applied to the delivery order. "
+"Mandatory options show up in orange in the option widget on the picking."
+msgstr ""
+"Se selezionata, questa opzione è applicata necessariamente all'ordine di "
+"consegna. Le opzioni obbligatorie sono evidenziate in arancione nel widget "
+"opzione nel prelievo."
+
+#. module: delivery_carrier_option
+#: model:ir.model.fields,field_description:delivery_carrier_option.field_delivery_carrier_option__write_uid
+#: model:ir.model.fields,field_description:delivery_carrier_option.field_delivery_carrier_template_option__write_uid
+msgid "Last Updated by"
+msgstr "Ultimo aggiornamento di"
+
+#. module: delivery_carrier_option
+#: model:ir.model.fields,field_description:delivery_carrier_option.field_delivery_carrier_option__write_date
+#: model:ir.model.fields,field_description:delivery_carrier_option.field_delivery_carrier_template_option__write_date
+msgid "Last Updated on"
+msgstr "Ultimo aggiornamento il"
+
+#. module: delivery_carrier_option
+#: model:ir.model.fields,field_description:delivery_carrier_option.field_delivery_carrier_option__mandatory
+msgid "Mandatory"
+msgstr "Obbligatorio"
+
+#. module: delivery_carrier_option
+#: model:ir.model.fields,field_description:delivery_carrier_option.field_delivery_carrier_option__name
+#: model:ir.model.fields,field_description:delivery_carrier_option.field_delivery_carrier_template_option__name
+msgid "Name"
+msgstr "Nome"
+
+#. module: delivery_carrier_option
+#: model:ir.model.fields,field_description:delivery_carrier_option.field_delivery_carrier__available_option_ids
+#: model:ir.model.fields,field_description:delivery_carrier_option.field_delivery_carrier_option__tmpl_option_id
+msgid "Option"
+msgstr "Opzione"
+
+#. module: delivery_carrier_option
+#: model:ir.model.fields,field_description:delivery_carrier_option.field_delivery_carrier_option__type
+#: model:ir.model.fields,field_description:delivery_carrier_option.field_delivery_carrier_template_option__type
+msgid "Option Type"
+msgstr "Tipo opzione"
+
+#. module: delivery_carrier_option
+#: model:ir.model.fields,field_description:delivery_carrier_option.field_stock_picking__option_ids
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_option.view_delivery_carrier_form
+msgid "Options"
+msgstr "Opzioni"
+
+#. module: delivery_carrier_option
+#: model:ir.model.fields,help:delivery_carrier_option.field_delivery_carrier_option__color
+msgid "Orange if the option is mandatory, otherwise no color"
+msgstr "Arancione se l'opzione è obbligatoria, altrimenti senza colore"
+
+#. module: delivery_carrier_option
+#: model:ir.model.fields,field_description:delivery_carrier_option.field_delivery_carrier_option__partner_id
+#: model:ir.model.fields,field_description:delivery_carrier_option.field_delivery_carrier_template_option__partner_id
+msgid "Partner Carrier"
+msgstr "Vettore partner"
+
+#. module: delivery_carrier_option
+#: model:ir.model.fields.selection,name:delivery_carrier_option.selection__delivery_carrier_template_option__type__partner_option
+msgid "Partner Option"
+msgstr "Opzione partner"
+
+#. module: delivery_carrier_option
+#: model:ir.model.fields,field_description:delivery_carrier_option.field_delivery_carrier_option__readonly_flag
+msgid "Readonly Flag"
+msgstr "Opzione sola lettura"
+
+#. module: delivery_carrier_option
+#: model:ir.model,name:delivery_carrier_option.model_delivery_carrier
+msgid "Shipping Methods"
+msgstr "Metodi di spedizione"
+
+#. module: delivery_carrier_option
+#: model:ir.model,name:delivery_carrier_option.model_stock_picking
+msgid "Transfer"
+msgstr "Trasferimento"
+
+#. module: delivery_carrier_option
+#: model:ir.model.fields,help:delivery_carrier_option.field_delivery_carrier_option__readonly_flag
+msgid ""
+"When True, help to prevent the user to modify some fields option (if "
+"attribute is defined in the view)"
+msgstr ""
+"Quando vero, aiuta a prevenire che l'utente modifichi alcune opzioni campi ("
+"se l'attributo è definito nella vista)"
+
+#. module: delivery_carrier_option
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_option.delivery_carrier_option_view_form
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_option.delivery_carrier_template_option_view_form
+msgid "delivery_carrier_option"
+msgstr "delivery_carrier_option"
