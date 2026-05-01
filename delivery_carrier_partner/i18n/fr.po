@@ -1,0 +1,32 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* delivery_carrier_partner
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-05-15 09:01+0000\n"
+"PO-Revision-Date: 2023-05-15 09:01+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: delivery_carrier_partner
+#: model:ir.model,name:delivery_carrier_partner.model_delivery_carrier
+msgid "Shipping Methods"
+msgstr "Modes de livraison"
+
+#. module: delivery_carrier_partner
+#: model:ir.model.fields,help:delivery_carrier_partner.field_delivery_carrier__partner_id
+msgid "The partner that is doing the delivery service."
+msgstr "Le partenaire qui assure le service de livraison."
+
+#. module: delivery_carrier_partner
+#: model:ir.model.fields,field_description:delivery_carrier_partner.field_delivery_carrier__partner_id
+msgid "Transporter"
+msgstr "Transporteur"
