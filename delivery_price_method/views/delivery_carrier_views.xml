@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Copyright 2020 Trey, Kilobytes de Soluciones
+License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <record id="view_delivery_carrier_form" model="ir.ui.view">
+        <field name="model">delivery.carrier</field>
+        <field name="inherit_id" ref="delivery.view_delivery_carrier_form" />
+        <field name="arch" type="xml">
+            <field name="integration_level" position="after">
+                <field
+                    name="price_method"
+                    invisible="delivery_type in ['fixed', 'base_on_rule']"
+                    required="delivery_type not in ['fixed', 'base_on_rule']"
+                />
+            </field>
+            <xpath expr="(//page)[1]" position="before">
+                <page
+                    string="Pricing"
+                    invisible="delivery_type in ['fixed', 'base_on_rule']"
+                >
+                    <group invisible="price_method != 'fixed'">
+                        <group>
+                            <field name="fixed_price" />
+                        </group>
+                    </group>
+                    <group name="general" invisible="price_method != 'base_on_rule'">
+                        <field name="price_rule_ids" nolabel="1" colspan="2" />
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
