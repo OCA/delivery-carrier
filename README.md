@@ -31,6 +31,7 @@ addon | version | maintainers | summary
 [delivery_correos_express](delivery_correos_express/) | 19.0.1.0.0 |  | Delivery Carrier implementation for Correos Express using their API
 [delivery_multi_destination](delivery_multi_destination/) | 19.0.1.0.0 |  | Multiple destinations for the same delivery method
 [delivery_package_number](delivery_package_number/) | 19.0.1.0.0 |  | Set or compute number of packages for a picking
+[delivery_price_method](delivery_price_method/) | 19.0.1.0.0 |  | Force a fixed or rule price calculation on Delivery Methods, for example to override a webservice provided prices.
 [delivery_state](delivery_state/) | 19.0.1.0.0 |  | Provides fields to be able to contemplate the tracking statesand also adds a global fields
 [partner_delivery_info](partner_delivery_info/) | 19.0.1.0.0 |  | Send delivery notice to the shipper from any operation.
 
