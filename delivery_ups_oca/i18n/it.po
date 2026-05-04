@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2026-02-10 15:09+0000\n"
+"PO-Revision-Date: 2026-05-04 11:45+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -72,7 +72,7 @@ msgstr "Credenziali"
 #. module: delivery_ups_oca
 #: model:ir.model.fields,field_description:delivery_ups_oca.field_delivery_carrier__ups_default_packaging_id
 msgid "Default Carrier Packaging Type"
-msgstr ""
+msgstr "Tipo imballo vettore predefinito"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_file_format__epl
@@ -197,7 +197,7 @@ msgstr "OZ"
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_file_format__pdf
 msgid "PDF"
-msgstr ""
+msgstr "PDF"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields,field_description:delivery_ups_oca.field_delivery_carrier__ups_package_dimension_code
@@ -233,7 +233,7 @@ msgstr "SPL"
 #. odoo-python
 #: code:addons/delivery_ups_oca/models/ups_request.py:0
 msgid "Sending to UPS: {}"
-msgstr ""
+msgstr "Invio a UPS: {}"
 
 #. module: delivery_ups_oca
 #: model_terms:ir.ui.view,arch_db:delivery_ups_oca.view_delivery_carrier_form
@@ -258,7 +258,7 @@ msgstr "Metodi di spedizione"
 #. module: delivery_ups_oca
 #: model:ir.model,name:delivery_ups_oca.model_stock_package_type
 msgid "Stock package type"
-msgstr ""
+msgstr "Tipo collo magazzino"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields,field_description:delivery_ups_oca.field_delivery_carrier__ups_tracking_state_update_sync
@@ -401,7 +401,7 @@ msgstr "ZPL"
 #. odoo-python
 #: code:addons/delivery_ups_oca/models/ups_request.py:0
 msgid "{date} - Warning: {warn}"
-msgstr ""
+msgstr "{date} - Attenzione: {warn}"
 
 #. module: delivery_ups_oca
 #. odoo-python
