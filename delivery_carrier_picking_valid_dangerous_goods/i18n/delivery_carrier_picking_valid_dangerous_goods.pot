@@ -36,6 +36,12 @@ msgid ""
 msgstr ""
 
 #. module: delivery_carrier_picking_valid_dangerous_goods
+#. odoo-python
+#: code:addons/delivery_carrier_picking_valid_dangerous_goods/models/delivery_carrier.py:0
+msgid "Invalid source document type"
+msgstr ""
+
+#. module: delivery_carrier_picking_valid_dangerous_goods
 #: model:ir.model,name:delivery_carrier_picking_valid_dangerous_goods.model_delivery_carrier
 msgid "Shipping Methods"
 msgstr ""
