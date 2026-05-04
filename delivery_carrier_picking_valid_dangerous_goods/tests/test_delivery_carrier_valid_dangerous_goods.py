@@ -119,3 +119,41 @@ class TestPickingValid(Common):
         self.assertTrue(
             self.carrier_dangerous_goods._match_picking(picking_lq_restriction)
         )
+
+    def test_match_with_picking_source_dangerous_goods(self):
+        picking_no_limited_amount = self.picking
+        picking_dg_restriction = self.dangerous_goods_picking
+        picking_lq_restriction = self.limited_qty_picking
+
+        self.assertTrue(
+            self.carrier_limited_quantity._match(
+                picking_no_limited_amount.partner_id, picking_no_limited_amount
+            )
+        )
+        self.assertTrue(
+            self.carrier_dangerous_goods._match(
+                picking_no_limited_amount.partner_id, picking_no_limited_amount
+            )
+        )
+
+        self.assertFalse(
+            self.carrier_limited_quantity._match(
+                picking_lq_restriction.partner_id, picking_lq_restriction
+            )
+        )
+        self.assertFalse(
+            self.carrier_dangerous_goods._match(
+                picking_dg_restriction.partner_id, picking_dg_restriction
+            )
+        )
+
+        self.assertTrue(
+            self.carrier_limited_quantity._match(
+                picking_dg_restriction.partner_id, picking_dg_restriction
+            )
+        )
+        self.assertTrue(
+            self.carrier_dangerous_goods._match(
+                picking_lq_restriction.partner_id, picking_lq_restriction
+            )
+        )

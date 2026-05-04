@@ -2,6 +2,7 @@
 # Copyright 2025 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 from odoo import fields, models
+from odoo.exceptions import UserError
 
 
 class DeliveryCarrier(models.Model):
@@ -15,10 +16,16 @@ class DeliveryCarrier(models.Model):
         "limited amount.",
     )
 
-    def _match(self, partner, order):
-        return super()._match(partner, order) and self._match_dangerous_goods(
-            order.order_line.product_id
-        )
+    def _match(self, partner, source):
+        if source._name == "sale.order":
+            products = source.order_line.product_id
+        elif source._name == "stock.picking":
+            # with_prefetch is needed to avoid a MemoryError on move product fetch
+            # check https://github.com/OCA/OCB/commit/97919d6c28adc750d282a15f86320c576f3de872
+            products = source.move_ids.with_prefetch().product_id
+        else:
+            raise UserError(self.env._("Invalid source document type"))
+        return super()._match(partner, source) and self._match_dangerous_goods(products)
 
     def _match_picking(self, picking):
         return super()._match_picking(picking) and self._match_dangerous_goods(
