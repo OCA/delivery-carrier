@@ -4,7 +4,7 @@
 {
     "name": "Delivery Carrier Valid - Dangerous Goods",
     "summary": "Checks if a transfer matches carrier dangerous goods restrictions",
-    "version": "19.0.1.0.0",
+    "version": "19.0.1.0.1",
     "category": "Delivery",
     "website": "https://github.com/OCA/delivery-carrier",
     "author": "Camptocamp, BCIM, Odoo Community Association (OCA)",
