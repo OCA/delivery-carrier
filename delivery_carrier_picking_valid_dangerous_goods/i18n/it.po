@@ -17,28 +17,51 @@ msgstr ""
 "X-Generator: Weblate 5.10.4\n"
 
 #. module: delivery_carrier_picking_valid_dangerous_goods
-#: model_terms:ir.ui.view,arch_db:delivery_carrier_picking_valid_dangerous_goods.view_delivery_carrier_form
-msgid "Carrier preference"
-msgstr "Preferenza vettore"
+#: model:ir.model.fields,field_description:delivery_carrier_picking_valid_dangerous_goods.field_delivery_carrier__adr_limited_amount_ids
+msgid "ADR limited amount"
+msgstr ""
+
+#. module: delivery_carrier_picking_valid_dangerous_goods
+#: model:ir.model.fields,field_description:delivery_carrier_picking_valid_dangerous_goods.field_delivery_carrier__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: delivery_carrier_picking_valid_dangerous_goods
+#: model:ir.model.fields,field_description:delivery_carrier_picking_valid_dangerous_goods.field_delivery_carrier__id
+msgid "ID"
+msgstr ""
 
 #. module: delivery_carrier_picking_valid_dangerous_goods
 #: model:ir.model.fields,help:delivery_carrier_picking_valid_dangerous_goods.field_delivery_carrier__adr_limited_amount_ids
 msgid ""
 "If a limited amount is defined here, this carrier will be excluded from the "
-"selection of preferred carrier on stock picking if said picking contains any"
-" move with products that define the same limited amount."
+"selection of carrier if any product has that same limited amount."
 msgstr ""
-"Se qui viene definita una quantità limitata, questo vettore verrà escluso "
-"dalla selezione del vettore preferito durante il prelievo delle scorte se "
-"tale prelievo contiene qualsiasi movimento con prodotti che definiscono la "
-"stessa quantità limitata."
 
 #. module: delivery_carrier_picking_valid_dangerous_goods
-#: model:ir.model.fields,field_description:delivery_carrier_picking_valid_dangerous_goods.field_delivery_carrier__adr_limited_amount_ids
-msgid "Restrict selection of preferred carrier for ADR limited amount"
-msgstr "Limitare la selezione del vettore preferito per l'importo limitato ADR"
+#. odoo-python
+#: code:addons/delivery_carrier_picking_valid_dangerous_goods/models/delivery_carrier.py:0
+msgid "Invalid source document type"
+msgstr ""
 
 #. module: delivery_carrier_picking_valid_dangerous_goods
 #: model:ir.model,name:delivery_carrier_picking_valid_dangerous_goods.model_delivery_carrier
 msgid "Shipping Methods"
 msgstr "Metodi di spedizione"
+
+#~ msgid "Carrier preference"
+#~ msgstr "Preferenza vettore"
+
+#~ msgid ""
+#~ "If a limited amount is defined here, this carrier will be excluded from "
+#~ "the selection of preferred carrier on stock picking if said picking "
+#~ "contains any move with products that define the same limited amount."
+#~ msgstr ""
+#~ "Se qui viene definita una quantità limitata, questo vettore verrà escluso "
+#~ "dalla selezione del vettore preferito durante il prelievo delle scorte se "
+#~ "tale prelievo contiene qualsiasi movimento con prodotti che definiscono "
+#~ "la stessa quantità limitata."
+
+#~ msgid "Restrict selection of preferred carrier for ADR limited amount"
+#~ msgstr ""
+#~ "Limitare la selezione del vettore preferito per l'importo limitato ADR"
