@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-08-27 14:41+0000\n"
+"PO-Revision-Date: 2026-05-05 14:45+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -14,22 +14,22 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10.4\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: delivery_carrier_picking_valid_dangerous_goods
 #: model:ir.model.fields,field_description:delivery_carrier_picking_valid_dangerous_goods.field_delivery_carrier__adr_limited_amount_ids
 msgid "ADR limited amount"
-msgstr ""
+msgstr "Valore limitato ADR"
 
 #. module: delivery_carrier_picking_valid_dangerous_goods
 #: model:ir.model.fields,field_description:delivery_carrier_picking_valid_dangerous_goods.field_delivery_carrier__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome visualizzato"
 
 #. module: delivery_carrier_picking_valid_dangerous_goods
 #: model:ir.model.fields,field_description:delivery_carrier_picking_valid_dangerous_goods.field_delivery_carrier__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: delivery_carrier_picking_valid_dangerous_goods
 #: model:ir.model.fields,help:delivery_carrier_picking_valid_dangerous_goods.field_delivery_carrier__adr_limited_amount_ids
@@ -37,12 +37,14 @@ msgid ""
 "If a limited amount is defined here, this carrier will be excluded from the "
 "selection of carrier if any product has that same limited amount."
 msgstr ""
+"Se qui è definito un valore limite, questo corriere verrà escluso dalla "
+"selezione dei corrieri se uno dei prodotti ha lo stesso valore limitato."
 
 #. module: delivery_carrier_picking_valid_dangerous_goods
 #. odoo-python
 #: code:addons/delivery_carrier_picking_valid_dangerous_goods/models/delivery_carrier.py:0
 msgid "Invalid source document type"
-msgstr ""
+msgstr "Tipo documento origine non valido"
 
 #. module: delivery_carrier_picking_valid_dangerous_goods
 #: model:ir.model,name:delivery_carrier_picking_valid_dangerous_goods.model_delivery_carrier
