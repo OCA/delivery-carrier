@@ -1,12 +1,11 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from unittest.mock import MagicMock, patch
 
-from odoo_test_helper import FakeModelLoader
 from roulier import roulier
 
 from odoo.exceptions import UserError
 
-from odoo.addons.base.tests.common import BaseCommon
+from .common import DeliveryRoulierCommonCase
 
 roulier_ret = {
     "parcels": [
@@ -25,76 +24,7 @@ roulier_ret = {
 }
 
 
-class DeliveryRoulierCase(BaseCommon):
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
-        cls.loader = FakeModelLoader(cls.env, cls.__module__)
-        cls.loader.backup_registry()
-
-        # The fake class is imported here !! After the backup_registry
-        from .models import FakeDeliveryCarrier, Package
-
-        cls.loader.update_registry((FakeDeliveryCarrier, Package))
-        cls.real_get_carriers_action_available = roulier.get_carriers_action_available
-        delivery_product = cls.env["product.product"].create(
-            {"name": "test shipping product", "type": "service"}
-        )
-        cls.account = cls.env["carrier.account"].create(
-            {
-                "name": "Test Carrier Account",
-                "delivery_type": "test",
-                "account": "test",
-                "password": "test",
-            }
-        )
-        cls.test_carrier = cls.env["delivery.carrier"].create(
-            {
-                "name": "Test Carrier",
-                "delivery_type": "test",
-                "product_id": delivery_product.id,
-                "carrier_account_id": cls.account.id,
-            }
-        )
-        partner = cls.env["res.partner"].create(
-            {
-                "name": "Carrier label test customer",
-                "country_id": cls.env.ref("base.fr").id,
-                "street": "test street",
-                "street2": "test street2",
-                "city": "test city",
-                "phone": "0000000000",
-                "email": "test@test.com",
-                "zip": "00000",
-            }
-        )
-        product = cls.env.ref("delivery_roulier.product_small")
-        cls.order = cls.env["sale.order"].create(
-            {
-                "carrier_id": cls.test_carrier.id,
-                "partner_id": partner.id,
-                "order_line": [
-                    (0, 0, {"product_id": product.id, "product_uom_qty": 1})
-                ],
-            }
-        )
-        cls.env["stock.quant"].with_context(inventory_mode=True).create(
-            {
-                "product_id": product.id,
-                "location_id": cls.order.warehouse_id.lot_stock_id.id,
-                "inventory_quantity": 1,
-            }
-        ).action_apply_inventory()
-        cls.order.action_confirm()
-        cls.picking = cls.order.picking_ids
-
-    @classmethod
-    def tearDownClass(cls):
-        cls.loader.restore_registry()
-        roulier.get_carriers_action_available = cls.real_get_carriers_action_available
-        super().tearDownClass()
-
+class DeliveryRoulierCase(DeliveryRoulierCommonCase):
     def test_roulier_no_pack(self):
         # having a pack is mandatory for roulier
         # it should fail if no pack provided.
