@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -96,7 +96,6 @@ msgstr ""
 #. module: delivery_cttexpress
 #. odoo-python
 #: code:addons/delivery_cttexpress/models/delivery_carrier.py:0
-#, python-format
 msgid ""
 "CTT Express Error:\n"
 "\n"
@@ -130,23 +129,25 @@ msgid "CTT Express Pickup Request"
 msgstr ""
 
 #. module: delivery_cttexpress
+#: model:ir.model.fields,field_description:delivery_cttexpress.field_delivery_carrier__cttexpress_user
+msgid "CTT Express User"
+msgstr ""
+
+#. module: delivery_cttexpress
 #. odoo-python
 #: code:addons/delivery_cttexpress/models/stock_picking.py:0
-#, python-format
 msgid "CTT Express label for %s"
 msgstr ""
 
 #. module: delivery_cttexpress
 #. odoo-python
 #: code:addons/delivery_cttexpress/models/delivery_carrier.py:0
-#, python-format
 msgid "CTT Shipping Documents"
 msgstr ""
 
 #. module: delivery_cttexpress
 #. odoo-python
 #: code:addons/delivery_cttexpress/models/delivery_carrier.py:0
-#, python-format
 msgid ""
 "CTT labels for this document aren't yet ready. Download them manually using "
 "the button in the header of the picking."
@@ -432,7 +433,6 @@ msgstr ""
 #. module: delivery_cttexpress
 #. odoo-python
 #: code:addons/delivery_cttexpress/models/delivery_carrier.py:0
-#, python-format
 msgid ""
 "This CTT Express service (%(service_name)s) isn't allowed for this account configuration. Please choose one of the followings\n"
 "%(type_descriptions)s"
@@ -446,11 +446,6 @@ msgstr ""
 #. module: delivery_cttexpress
 #: model:ir.model,name:delivery_cttexpress.model_stock_picking
 msgid "Transfer"
-msgstr ""
-
-#. module: delivery_cttexpress
-#: model:ir.model.fields,field_description:delivery_cttexpress.field_delivery_carrier__cttexpress_user
-msgid "User"
 msgstr ""
 
 #. module: delivery_cttexpress
