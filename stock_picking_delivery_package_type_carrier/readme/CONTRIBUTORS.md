@@ -1,0 +1,2 @@
+- Henry Backman <henry.backman@camptocamp.com>
+- Jacques-Etienne Baudoux <je@bcim.be>
