@@ -5,7 +5,6 @@ from odoo import fields, models
 
 
 class PartnerDeliveryZone(models.Model):
-
     _inherit = "partner.delivery.zone"
 
     calendar_id = fields.Many2one(comodel_name="resource.calendar")
