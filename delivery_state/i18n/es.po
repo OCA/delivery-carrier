@@ -27,22 +27,22 @@ msgid ""
 "        Hello, ${partner.name}.\n"
 "    </p>\n"
 "    <p>\n"
-"        We are glad to inform you that your order has been shipped by "
-"${object.carrier_id.name}.\n"
+"        We are glad to inform you that your order has been shipped by $"
+"{object.carrier_id.name}.\n"
 "        %if object.carrier_tracking_ref:\n"
 "            Your tracking reference is\n"
 "            <strong>\n"
 "            %if object.carrier_tracking_url:\n"
-"                % set multiple_carrier_tracking = object."
-"get_multiple_carrier_tracking()\n"
+"                % set multiple_carrier_tracking = "
+"object.get_multiple_carrier_tracking()\n"
 "                %if multiple_carrier_tracking:\n"
 "                    % for line in multiple_carrier_tracking:\n"
-"                        <br/><a href=\"${line[1]}\" target=\"_blank\">"
-"${line[0]}</a>\n"
+"                        <br/><a href=\"${line[1]}\" target=\"_blank\">$"
+"{line[0]}</a>\n"
 "                    % endfor\n"
 "                %else:\n"
-"                    <a href=\"${object.carrier_tracking_url}\" target="
-"\"_blank\">${object.carrier_tracking_ref}</a>.\n"
+"                    <a href=\"${object.carrier_tracking_url}\" "
+"target=\"_blank\">${object.carrier_tracking_ref}</a>.\n"
 "                %endif\n"
 "            %else:\n"
 "                ${object.carrier_tracking_ref}.\n"
@@ -66,22 +66,22 @@ msgstr ""
 "        Hola, ${partner.name}.\n"
 "    </p>\n"
 "    <p>\n"
-"        Nos complace informarle de que su pedido ha sido enviado por "
-"${object.carrier_id.name}.\n"
+"        Nos complace informarle de que su pedido ha sido enviado por $"
+"{object.carrier_id.name}.\n"
 "        %if object.carrier_tracking_ref:\n"
 "            Su número de seguimiento es\n"
 "            <strong>\n"
 "            %if object.carrier_tracking_url:\n"
-"                % set multiple_carrier_tracking = object."
-"get_multiple_carrier_tracking()\n"
+"                % set multiple_carrier_tracking = "
+"object.get_multiple_carrier_tracking()\n"
 "                %if multiple_carrier_tracking:\n"
 "                    % for line in multiple_carrier_tracking:\n"
-"                        <br/><a href=\"${line[1]}\" target=\"_blank\">"
-"${line[0]}</a>\n"
+"                        <br/><a href=\"${line[1]}\" target=\"_blank\">$"
+"{line[0]}</a>\n"
 "                    % endfor\n"
 "                %else:\n"
-"                    <a href=\"${object.carrier_tracking_url}\" target="
-"\"_blank\">${object.carrier_tracking_ref}</a>.\n"
+"                    <a href=\"${object.carrier_tracking_url}\" "
+"target=\"_blank\">${object.carrier_tracking_ref}</a>.\n"
 "                %endif\n"
 "            %else:\n"
 "                ${object.carrier_tracking_ref}.\n"
@@ -101,11 +101,20 @@ msgstr ""
 #. module: delivery_state
 #: model:mail.template,subject:delivery_state.delivery_notification
 msgid ""
-"${object.company_id.name} - Your order has been shipped by ${object."
-"carrier_id.name}"
+"${object.company_id.name} - Your order has been shipped by $"
+"{object.carrier_id.name}"
 msgstr ""
-"${object.company_id.name} - Su pedido ha sido enviado por ${object."
-"carrier_id.name}"
+"${object.company_id.name} - Su pedido ha sido enviado por $"
+"{object.carrier_id.name}"
+
+#. module: delivery_state
+#: code:addons/delivery_state/models/stock_picking.py:0
+#, python-format
+msgid ""
+"<b>Errors while fetching POD for carrier %s:</b><br/>Please review the "
+"details below and take the necessary actions to resolve these issues.: %s<br/"
+">"
+msgstr ""
 
 #. module: delivery_state
 #: model:ir.model.fields.selection,name:delivery_state.selection__stock_picking__delivery_state__canceled_shipment
@@ -161,6 +170,21 @@ msgid "No more updates from carrier"
 msgstr "No hay más actualizaciones del transportista"
 
 #. module: delivery_state
+#: model:ir.model.fields,field_description:delivery_state.field_stock_picking__pod_error
+msgid "Proof of Delivery Error"
+msgstr ""
+
+#. module: delivery_state
+#: model:ir.model.fields,field_description:delivery_state.field_stock_picking__pod_file
+msgid "Proof of Delivery File"
+msgstr ""
+
+#. module: delivery_state
+#: model:ir.model.fields,field_description:delivery_state.field_stock_picking__pod_filename
+msgid "Proof of Delivery Filename"
+msgstr ""
+
+#. module: delivery_state
 #: model:ir.model.fields,field_description:delivery_state.field_stock_picking__date_shipped
 msgid "Shipment Date"
 msgstr "Fecha de envío"
@@ -178,6 +202,11 @@ msgstr "Envío registrado en el transportista"
 #. module: delivery_state
 #: model:ir.model.fields,field_description:delivery_state.field_delivery_carrier__track_carrier_state
 msgid "Track Carrier State"
+msgstr ""
+
+#. module: delivery_state
+#: model:ir.model.fields,field_description:delivery_state.field_stock_picking__tracking_json
+msgid "Tracking Json"
 msgstr ""
 
 #. module: delivery_state
