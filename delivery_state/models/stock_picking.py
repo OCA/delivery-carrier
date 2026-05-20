@@ -2,7 +2,9 @@
 # Copyright 2020 FactorLibre
 # Copyright 2020 Tecnativa - David Vidal
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-from odoo import api, fields, models
+from markupsafe import Markup
+
+from odoo import _, api, fields, models
 
 
 class StockPicking(models.Model):
@@ -11,20 +13,26 @@ class StockPicking(models.Model):
     date_shipped = fields.Date(
         string="Shipment Date",
         readonly=True,
+        copy=False,
     )
     date_delivered = fields.Datetime(
         string="Delivery Date",
         readonly=True,
+        copy=False,
     )
+    # Technical field to store raw tracking data from the carrier API
+    tracking_json = fields.Char(readonly=True, copy=False)
     tracking_state = fields.Char(
         string="Tracking state",
         readonly=True,
         index=True,
         tracking=True,
+        copy=False,
     )
     tracking_state_history = fields.Text(
         string="Tracking state history",
         readonly=True,
+        copy=False,
     )
     delivery_state = fields.Selection(
         selection=[
@@ -39,6 +47,22 @@ class StockPicking(models.Model):
         string="Carrier State",
         tracking=True,
         readonly=True,
+        copy=False,
+    )
+    pod_file = fields.Binary(
+        string="Proof of Delivery File",
+        readonly=True,
+        copy=False,
+    )
+    pod_filename = fields.Char(
+        string="Proof of Delivery Filename",
+        readonly=True,
+        copy=False,
+    )
+    pod_error = fields.Char(
+        string="Proof of Delivery Error",
+        readonly=True,
+        copy=False,
     )
 
     def tracking_state_update(self):
@@ -49,7 +73,17 @@ class StockPicking(models.Model):
         for picking in self.filtered("carrier_id"):
             method = "%s_tracking_state_update" % picking.delivery_type
             if hasattr(picking.carrier_id, method):
-                getattr(picking.carrier_id, method)(picking)
+                try:
+                    with self.env.cr.savepoint():
+                        getattr(picking.carrier_id, method)(picking)
+                except Exception as e:
+                    if not self.env.context.get("lastcall"):
+                        raise
+                    picking.pod_error = str(e)
+        # Filter pickings with errors and notify
+        pickings_with_errors = self.filtered("pod_error")
+        if pickings_with_errors:
+            pickings_with_errors._send_message_pod_error()
 
     @api.model
     def _update_delivery_state(self):
@@ -69,3 +103,19 @@ class StockPicking(models.Model):
             ]
         )
         pickings.tracking_state_update()
+
+    def _send_message_pod_error(self):
+        for picking in self:
+            message = picking._build_message_pod_error()
+            picking.message_post(body=Markup(message))
+
+    def _build_message_pod_error(self):
+        self.ensure_one()
+
+        return _(
+            "<b>Errors while fetching POD for carrier %s:</b><br/>"
+            "Please review the details below "
+            "and take the necessary actions to resolve these issues.: %s<br/>",
+            self.carrier_id.name,
+            self.pod_error,
+        )
