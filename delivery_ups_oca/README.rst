@@ -110,6 +110,7 @@ Authors
 * Hunki Enterprises BV
 * Tecnativa
 * ForgeFlow
+* Nitrokey
 
 Contributors
 ------------
