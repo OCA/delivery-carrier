@@ -4,7 +4,7 @@
 {
     "name": "Delivery Driver",
     "summary": "Allow choose driver in delivery methods",
-    "version": "18.0.1.0.1",
+    "version": "19.0.1.0.0",
     "development_status": "Alpha",
     "category": "Inventory/Delivery",
     "website": "https://github.com/OCA/delivery-carrier",

@@ -54,7 +54,7 @@ class TestDeliverDriver(TransactionCase):
                         {
                             "product_id": self.product_test.id,
                             "product_uom_qty": 1,
-                            "product_uom": self.product_test.uom_id.id,
+                            "product_uom_id": self.product_test.uom_id.id,
                             "price_unit": 100,
                         },
                     )
@@ -75,7 +75,6 @@ class TestDeliverDriver(TransactionCase):
                 "move_ids": [
                     Command.create(
                         {
-                            "name": "Test",
                             "product_id": self.product_test.id,
                             "product_uom_qty": 1,
                             "product_uom": self.product_test.uom_id.id,
