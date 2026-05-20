@@ -76,9 +76,25 @@ License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
                                 required="delivery_type == 'ups' and ups_cash_on_delivery"
                             />
                         </group>
+                        <group string="Insurance">
+                            <field name="declared_amount_percentage" />
+                        </group>
                     </group>
                 </page>
             </xpath>
+        </field>
+    </record>
+
+    <record id="view_delivery_carrier_form_inherit_declared_value" model="ir.ui.view">
+        <field name="model">delivery.carrier</field>
+        <field
+            name="inherit_id"
+            ref="stock_picking_declared_value.view_delivery_carrier_form_inherit_declared_value"
+        />
+        <field name="arch" type="xml">
+            <field name="declared_amount_percentage" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
         </field>
     </record>
 </odoo>

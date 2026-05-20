@@ -160,27 +160,50 @@ class UpsRequest:
             res["LabelStockSize"] = {"Height": "6", "Width": "4"}
         return res
 
+    @staticmethod
+    def _add_insurance_to_package(package_item, picking):
+        """Add insurance to a package if configured"""
+        if not (hasattr(picking, "declared_value") and picking.declared_value > 0):
+            return package_item
+
+        # Add insurance if amount is positive
+        if picking.declared_value > 0:
+            package_item["PackageServiceOptions"]["DeclaredValue"] = {
+                "CurrencyCode": picking.company_id.currency_id.name,
+                "MonetaryValue": str(round(picking.declared_value, 2)),
+            }
+
+        return package_item
+
     def _prepare_create_shipping(self, picking):
         """Return a dict that can be passed to the shipping endpoint of the UPS API"""
-        packages_ids = (
-            picking.move_ids.move_line_ids
-            and picking.move_ids.move_line_ids.mapped("result_package_id")
-        )
-        if self.use_packages_from_picking and packages_ids:
+        if self.use_packages_from_picking and picking.move_line_ids.mapped(
+            "result_package_id"
+        ):
             # modelo: stock.quant.package
-            packages = [
-                self._quant_package_data_from_picking(package, picking, True)
-                for package in packages_ids
-            ]
+            packages = []
+            for package in picking.move_line_ids.mapped("result_package_id"):
+                package_item = self._quant_package_data_from_picking(
+                    package, picking, True
+                )
+                # Add insurance if configured
+                package_item = self._add_insurance_to_package(package_item, picking)
+                packages.append(package_item)
         else:
-            # modelo: stock.package.type
+            # model: stock.package.type
             packages = []
             package_info = self._quant_package_data_from_picking(
                 self.default_packaging_id, picking, False
             )
-            package_weight = round(
-                (picking.shipping_weight / picking.number_of_packages), 2
-            )
+
+            # Calculate package weight
+            if picking.number_of_packages > 0:
+                package_weight = round(
+                    (picking.shipping_weight / picking.number_of_packages), 2
+                )
+            else:
+                package_weight = picking.shipping_weight
+
             for i in range(0, picking.number_of_packages):
                 package_item = package_info.copy()
                 package_name = f"{picking.name} ({i+1})"
@@ -188,6 +211,10 @@ class UpsRequest:
                 package_item["NumOfPieces"] = "1"
                 package_item["Packaging"]["Description"] = package_name
                 package_item["PackageWeight"]["Weight"] = str(package_weight)
+
+                # Add insurance if configured
+                package_item = self._add_insurance_to_package(package_item, picking)
+
                 packages.append(package_item)
         vals = {
             "ShipmentRequest": {
