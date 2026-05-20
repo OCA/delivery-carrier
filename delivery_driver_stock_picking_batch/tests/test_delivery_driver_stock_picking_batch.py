@@ -3,14 +3,14 @@
 
 
 from odoo import Command
-from odoo.tests.common import TransactionCase
+
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class TestDeliveryDriverStockPickingBatch(TransactionCase):
+class TestDeliveryDriverStockPickingBatch(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.partner_test = cls.env["res.partner"].create({"name": "My Test Customer"})
         cls.driver_test_1 = cls.env["res.partner"].create({"name": "My Test Driver 1"})
         cls.driver_test_2 = cls.env["res.partner"].create({"name": "My Test Driver 2"})
         cls.product_test = cls.env["product.product"].create(
@@ -48,14 +48,13 @@ class TestDeliveryDriverStockPickingBatch(TransactionCase):
         """Check Drivers in stock picking batch."""
         picking_1 = self.env["stock.picking"].create(
             {
-                "partner_id": self.partner_test.id,
+                "partner_id": self.partner.id,
                 "picking_type_id": self.env.ref("stock.picking_type_out").id,
                 "location_id": self.env.ref("stock.stock_location_stock").id,
                 "location_dest_id": self.env.ref("stock.stock_location_customers").id,
                 "move_ids": [
                     Command.create(
                         {
-                            "name": "Test",
                             "product_id": self.product_test.id,
                             "product_uom_qty": 1,
                             "product_uom": self.product_test.uom_id.id,
@@ -73,14 +72,13 @@ class TestDeliveryDriverStockPickingBatch(TransactionCase):
         )
         picking_2 = self.env["stock.picking"].create(
             {
-                "partner_id": self.partner_test.id,
+                "partner_id": self.partner.id,
                 "picking_type_id": self.env.ref("stock.picking_type_out").id,
                 "location_id": self.env.ref("stock.stock_location_stock").id,
                 "location_dest_id": self.env.ref("stock.stock_location_customers").id,
                 "move_ids": [
                     Command.create(
                         {
-                            "name": "Test",
                             "product_id": self.product_test.id,
                             "product_uom_qty": 1,
                             "product_uom": self.product_test.uom_id.id,
