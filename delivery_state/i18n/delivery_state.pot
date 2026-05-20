@@ -60,6 +60,15 @@ msgid ""
 msgstr ""
 
 #. module: delivery_state
+#: code:addons/delivery_state/models/stock_picking.py:0
+#, python-format
+msgid ""
+"<b>Errors while fetching POD for carrier %s:</b><br/>Please review the "
+"details below and take the necessary actions to resolve these issues.: "
+"%s<br/>"
+msgstr ""
+
+#. module: delivery_state
 #: model:ir.model.fields.selection,name:delivery_state.selection__stock_picking__delivery_state__canceled_shipment
 msgid "Canceled shipment"
 msgstr ""
@@ -113,6 +122,21 @@ msgid "No more updates from carrier"
 msgstr ""
 
 #. module: delivery_state
+#: model:ir.model.fields,field_description:delivery_state.field_stock_picking__pod_error
+msgid "Proof of Delivery Error"
+msgstr ""
+
+#. module: delivery_state
+#: model:ir.model.fields,field_description:delivery_state.field_stock_picking__pod_file
+msgid "Proof of Delivery File"
+msgstr ""
+
+#. module: delivery_state
+#: model:ir.model.fields,field_description:delivery_state.field_stock_picking__pod_filename
+msgid "Proof of Delivery Filename"
+msgstr ""
+
+#. module: delivery_state
 #: model:ir.model.fields,field_description:delivery_state.field_stock_picking__date_shipped
 msgid "Shipment Date"
 msgstr ""
@@ -130,6 +154,11 @@ msgstr ""
 #. module: delivery_state
 #: model:ir.model.fields,field_description:delivery_state.field_delivery_carrier__track_carrier_state
 msgid "Track Carrier State"
+msgstr ""
+
+#. module: delivery_state
+#: model:ir.model.fields,field_description:delivery_state.field_stock_picking__tracking_json
+msgid "Tracking Json"
 msgstr ""
 
 #. module: delivery_state
