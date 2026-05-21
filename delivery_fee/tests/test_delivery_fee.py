@@ -176,6 +176,34 @@ class DeliveryFeeTestCase(TransactionCase):
         )
         self._common_fee_added_on_picking_validation_refund()
 
+    def test_delivery_fee_added_on_batch_picking_validation(self):
+        """Test that delivery fees are added when pickings are validated in batch"""
+        sales = self.env["sale.order"].create(
+            [
+                {
+                    "partner_id": self.customer.id,
+                    "carrier_id": self.carrier_with_fee.id,
+                    "order_line": [
+                        Command.create(
+                            {
+                                "product_id": self.product.id,
+                                "product_uom_qty": 1,
+                                "price_unit": 100.0,
+                            }
+                        ),
+                    ],
+                }
+                for _dummy in range(2)
+            ]
+        )
+        sales.action_confirm()
+        pickings = sales.picking_ids
+        self._validate_picking(pickings)
+        fee_lines = sales.order_line.filtered("is_delivery_fee")
+        self.assertEqual(len(fee_lines), 2)
+        for sale in sales:
+            self.assertEqual(len(sale.order_line.filtered("is_delivery_fee")), 1)
+
     def test_delivery_fee_added_on_picking_validation_one_fee_per_order(self):
         """Same tests as before, but now only one fee is added when the first
         picking is validated"""
