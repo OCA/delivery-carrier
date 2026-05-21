@@ -1,7 +1,3 @@
-.. image:: https://odoo-community.org/readme-banner-image
-   :target: https://odoo-community.org/get-involved?utm_source=readme
-   :alt: Odoo Community Association
-
 ================================
 Constrain package maximum weight
 ================================
@@ -17,7 +13,7 @@ Constrain package maximum weight
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fdelivery--carrier-lightgray.png?logo=github
@@ -44,12 +40,11 @@ packaging type if the constraint is enabled and maximum weight set.
 Usage
 =====
 
-The constraint can be enabled at multiple levels:
+The constraint can be enabled at two levels:
 
-- Company: *Settings* - *Inventory* - *Shipping* -> Overweight packages
-  forbidden
-- Carrier with company level as default
-- Package type with carrier level as default
+-  Company: *Settings* - *Inventory* - *Shipping* -> Overweight packages
+   forbidden
+-  Package type with company level as default
 
 If the constraint is disabled at the package type level Odoo behaves the
 usual way.
@@ -75,11 +70,11 @@ Authors
 Contributors
 ------------
 
-- Nans Lefebvre <nans.lefebvre@acsone.eu>
-- Hughes Damry <hughes.damry@acsone.eu>
-- `Heliconia Solutions Pvt. Ltd. <https://www.heliconia.io>`__
+-  Nans Lefebvre <nans.lefebvre@acsone.eu>
+-  Hughes Damry <hughes.damry@acsone.eu>
+-  `Heliconia Solutions Pvt. Ltd. <https://www.heliconia.io>`__
 
-  - Bhavesh Heliconia
+   -  Bhavesh Heliconia
 
 Maintainers
 -----------
