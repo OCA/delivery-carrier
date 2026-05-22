@@ -854,3 +854,31 @@ class TestDeliveryUps(TestDeliveryUpsBase):
         self.assertEqual(shipment["Description"], "TEST0006")
         self.assertEqual(shipment["Service"]["Code"], "11")
         self.assertEqual(len(shipment["Package"]), 2)
+
+    def test_ups_address_lines(self):
+        """Test address line splitting for UPS limits"""
+        ups_request = UpsRequest(self.carrier)
+        self.partner.street = "12345 Long Street Name That Exceeds UPS Limits"
+        self.partner.street2 = "Suite 678"
+        address_lines = ups_request._build_address_lines(self.partner)
+        self.assertEqual(len(address_lines), 2)
+        self.assertEqual(address_lines[0], "12345 Long Street Name That Exceeds")
+        self.assertEqual(address_lines[1], "UPS Limits Suite 678")
+        # the Exceedssssssssss part should be moved to the second line
+        # to avoid cutting the word in the first line
+        self.partner.street = "12345 Long Street Name That Exceedssssssssss"
+        address_lines = ups_request._build_address_lines(self.partner)
+        self.assertEqual(len(address_lines), 2)
+        self.assertEqual(address_lines[0], "12345 Long Street Name That")
+        self.assertEqual(address_lines[1], "Exceedssssssssss Suite 678")
+        # A street more long
+        self.partner.street += "12345 Long Street Name That Exceedssssssssss"
+        address_lines = ups_request._build_address_lines(self.partner)
+        self.assertEqual(len(address_lines), 3)
+        self.assertEqual(address_lines[0], "12345 Long Street Name That")
+        self.assertEqual(address_lines[1], "Exceedssssssssss12345 Long Street")
+        self.assertEqual(address_lines[2], "Name That Exceedssssssssss Suite")
+        self.partner.street = "12345 Short Street Name"
+        address_lines = ups_request._build_address_lines(self.partner)
+        self.assertEqual(len(address_lines), 1)
+        self.assertEqual(address_lines[0], "12345 Short Street Name Suite 678")
