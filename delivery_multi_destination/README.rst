@@ -68,8 +68,8 @@ Usage
 Known issues / Roadmap
 ======================
 
-- Delivery prices for e-commerce (website_sale_delivery module) might
-  need an extra module for handling everything properly.
+-  Delivery prices for e-commerce (website_sale_delivery module) might
+   need an extra module for handling everything properly.
 
 Bug Tracker
 ===========
@@ -92,16 +92,16 @@ Authors
 Contributors
 ------------
 
-- \`Tecnativa <https://www.tecnativa.com>\_\_\`:
+-  \`Tecnativa <https://www.tecnativa.com>\_\_\`:
 
-  - Pedro M. Baeza
-  - Luis M. Ontalba
-  - Carlos Roca
-  - Carolina Fernandez
+   -  Pedro M. Baeza
+   -  Luis M. Ontalba
+   -  Carlos Roca
+   -  Carolina Fernandez
 
-- \`Dinamiche Aziendali <https://www.dinamicheaziendali.it>\_\_\`:
+-  \`Dinamiche Aziendali <https://www.dinamicheaziendali.it>\_\_\`:
 
-  - Gianmarco Conte
+   -  Gianmarco Conte
 
 Maintainers
 -----------

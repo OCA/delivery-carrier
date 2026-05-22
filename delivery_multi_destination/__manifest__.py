@@ -12,6 +12,7 @@
     "author": "Tecnativa, Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "installable": True,
+    "uninstall_hook": "uninstall_hook",
     "depends": ["delivery"],
     "demo": ["demo/delivery_carrier_demo.xml"],
     "data": ["views/delivery_carrier_view.xml"],
