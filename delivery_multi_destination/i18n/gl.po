@@ -6,94 +6,96 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-05-23 07:44+0000\n"
+"Last-Translator: Pablo Castelo <pablocv@gmx.es>\n"
 "Language-Team: none\n"
 "Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: delivery_multi_destination
 #: model:delivery.carrier,name:delivery_multi_destination.delivery_carrier_multi_child_1
 msgid "Belgium"
-msgstr ""
+msgstr "Bélxica"
 
 #. module: delivery_multi_destination
 #: model:ir.model.fields,field_description:delivery_multi_destination.field_delivery_carrier__destination_type
 msgid "Destination Type"
-msgstr ""
+msgstr "Tipo de destino"
 
 #. module: delivery_multi_destination
 #: model:ir.model.fields,field_description:delivery_multi_destination.field_delivery_carrier__child_ids
 msgid "Destination grid"
-msgstr ""
+msgstr "Cuadrícula de destino"
 
 #. module: delivery_multi_destination
 #: model_terms:ir.ui.view,arch_db:delivery_multi_destination.view_delivery_carrier_form
 msgid "Destinations"
-msgstr ""
+msgstr "Destinos"
 
 #. module: delivery_multi_destination
 #: model:delivery.carrier,name:delivery_multi_destination.delivery_carrier_multi_child_2
 msgid "France"
-msgstr ""
+msgstr "Francia"
 
 #. module: delivery_multi_destination
 #: model:delivery.carrier,name:delivery_multi_destination.delivery_carrier_multi
 #: model:product.product,name:delivery_multi_destination.product_product_delivery_carrier_multi
 #: model:product.template,name:delivery_multi_destination.product_product_delivery_carrier_multi_product_template
 msgid "International Carrier Inc."
-msgstr ""
+msgstr "Transportes Internacionais Inc."
 
 #. module: delivery_multi_destination
 #: model:product.product,name:delivery_multi_destination.product_product_delivery_carrier_multi_child_1
 #: model:product.template,name:delivery_multi_destination.product_product_delivery_carrier_multi_child_1_product_template
 msgid "International Carrier Inc., Belgium"
-msgstr ""
+msgstr "Transportes Internacionais Inc., Bélxica"
 
 #. module: delivery_multi_destination
 #: model:product.product,name:delivery_multi_destination.product_product_delivery_carrier_multi_child_2
 #: model:product.template,name:delivery_multi_destination.product_product_delivery_carrier_multi_child_2_product_template
 msgid "International Carrier Inc., France"
-msgstr ""
+msgstr "Transportes Internacionais Inc., Francia"
 
 #. module: delivery_multi_destination
 #: model:product.product,name:delivery_multi_destination.product_product_delivery_carrier_multi_child_3
 #: model:product.template,name:delivery_multi_destination.product_product_delivery_carrier_multi_child_3_product_template
 msgid "International Carrier Inc., United Kingdom"
-msgstr ""
+msgstr "Transporte Internacional Inc., Reino Unido"
 
 #. module: delivery_multi_destination
 #: model:ir.model.fields.selection,name:delivery_multi_destination.selection__delivery_carrier__destination_type__multi
 msgid "Multiple destinations"
-msgstr ""
+msgstr "Destinos múltiples"
 
 #. module: delivery_multi_destination
 #: model:ir.model.fields.selection,name:delivery_multi_destination.selection__delivery_carrier__destination_type__one
 msgid "One destination"
-msgstr ""
+msgstr "Un destino"
 
 #. module: delivery_multi_destination
 #: model:ir.model.fields,field_description:delivery_multi_destination.field_delivery_carrier__parent_id
 msgid "Parent carrier"
-msgstr ""
+msgstr "Transportista matriz"
 
 #. module: delivery_multi_destination
 #: model:ir.model,name:delivery_multi_destination.model_delivery_carrier
 msgid "Shipping Methods"
-msgstr ""
+msgstr "Métodos de Envío"
 
 #. module: delivery_multi_destination
 #: code:addons/delivery_multi_destination/models/delivery_carrier.py:0
 #, python-format
 msgid "There is no matching delivery rule."
-msgstr ""
+msgstr "Non hai unha regra de entrega coincidente."
 
 #. module: delivery_multi_destination
 #: model:delivery.carrier,name:delivery_multi_destination.delivery_carrier_multi_child_3
 msgid "United Kingdom"
-msgstr ""
+msgstr "Reino Unido"
 
 #. module: delivery_multi_destination
 #: model:product.product,uom_name:delivery_multi_destination.product_product_delivery_carrier_multi
@@ -105,4 +107,4 @@ msgstr ""
 #: model:product.template,uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_child_3_product_template
 #: model:product.template,uom_name:delivery_multi_destination.product_product_delivery_carrier_multi_product_template
 msgid "Units"
-msgstr ""
+msgstr "Unidades"
