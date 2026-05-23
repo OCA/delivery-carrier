@@ -6,41 +6,43 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-05-23 07:44+0000\n"
+"Last-Translator: Pablo Castelo <pablocv@gmx.es>\n"
 "Language-Team: none\n"
 "Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: delivery_price_rule_untaxed
 #: model:delivery.carrier,name:delivery_price_rule_untaxed.untaxed_delivery_carrier
 msgid "Carrier price on untaxed"
-msgstr ""
+msgstr "Prezo do transportista sen impostos"
 
 #. module: delivery_price_rule_untaxed
 #: model:ir.model,name:delivery_price_rule_untaxed.model_delivery_price_rule
 msgid "Delivery Price Rules"
-msgstr ""
+msgstr "Regras Entrega Prezo"
 
 #. module: delivery_price_rule_untaxed
 #: model:ir.model,name:delivery_price_rule_untaxed.model_delivery_carrier
 msgid "Shipping Methods"
-msgstr ""
+msgstr "Métodos de Envío"
 
 #. module: delivery_price_rule_untaxed
 #: model:ir.model.fields.selection,name:delivery_price_rule_untaxed.selection__delivery_price_rule__variable__untaxed_price
 #: model:ir.model.fields.selection,name:delivery_price_rule_untaxed.selection__delivery_price_rule__variable_factor__untaxed_price
 msgid "Untaxed price"
-msgstr ""
+msgstr "Prezo sen impostos"
 
 #. module: delivery_price_rule_untaxed
 #: model:ir.model.fields,field_description:delivery_price_rule_untaxed.field_delivery_price_rule__variable
 msgid "Variable"
-msgstr ""
+msgstr "Variable"
 
 #. module: delivery_price_rule_untaxed
 #: model:ir.model.fields,field_description:delivery_price_rule_untaxed.field_delivery_price_rule__variable_factor
 msgid "Variable Factor"
-msgstr ""
+msgstr "Factor Variable"
