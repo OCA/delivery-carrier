@@ -6,80 +6,82 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-05-23 07:44+0000\n"
+"Last-Translator: Pablo Castelo <pablocv@gmx.es>\n"
 "Language-Team: none\n"
 "Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: delivery_carrier_multi_zip
 #: model:ir.model.fields,field_description:delivery_carrier_multi_zip.field_delivery_carrier_zip__carrier_id
 msgid "Carrier"
-msgstr ""
+msgstr "Transportista"
 
 #. module: delivery_carrier_multi_zip
 #: model:ir.model.fields,field_description:delivery_carrier_multi_zip.field_delivery_carrier_zip__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Creado por"
 
 #. module: delivery_carrier_multi_zip
 #: model:ir.model.fields,field_description:delivery_carrier_multi_zip.field_delivery_carrier_zip__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Creado o"
 
 #. module: delivery_carrier_multi_zip
 #: model:ir.model,name:delivery_carrier_multi_zip.model_delivery_carrier_zip
 msgid "Delivery destination availability ZIP interval line"
-msgstr ""
+msgstr "Liña de intervalo de CP de dispoñibilidade de destino de transportista"
 
 #. module: delivery_carrier_multi_zip
 #: model:ir.model.fields,field_description:delivery_carrier_multi_zip.field_delivery_carrier_zip__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome mostrado"
 
 #. module: delivery_carrier_multi_zip
 #: model:ir.model.fields,field_description:delivery_carrier_multi_zip.field_delivery_carrier_zip__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: delivery_carrier_multi_zip
 #: model:ir.model.fields,field_description:delivery_carrier_multi_zip.field_delivery_carrier_zip____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última modificación o"
 
 #. module: delivery_carrier_multi_zip
 #: model:ir.model.fields,field_description:delivery_carrier_multi_zip.field_delivery_carrier_zip__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Última modificación por"
 
 #. module: delivery_carrier_multi_zip
 #: model:ir.model.fields,field_description:delivery_carrier_multi_zip.field_delivery_carrier_zip__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Última actualización o"
 
 #. module: delivery_carrier_multi_zip
 #: model:ir.model.fields,field_description:delivery_carrier_multi_zip.field_delivery_carrier_zip__name
 msgid "Name"
-msgstr ""
+msgstr "Nome"
 
 #. module: delivery_carrier_multi_zip
 #: model:ir.model,name:delivery_carrier_multi_zip.model_delivery_carrier
 msgid "Shipping Methods"
-msgstr ""
+msgstr "Métodos de envío"
 
 #. module: delivery_carrier_multi_zip
 #: model:ir.model.fields,field_description:delivery_carrier_multi_zip.field_delivery_carrier__zip_range_ids
 msgid "ZIP codes"
-msgstr ""
+msgstr "Códigos postais"
 
 #. module: delivery_carrier_multi_zip
 #: model:ir.model.fields,field_description:delivery_carrier_multi_zip.field_delivery_carrier_zip__zip_from
 msgid "Zip From"
-msgstr ""
+msgstr "Desde CP"
 
 #. module: delivery_carrier_multi_zip
 #: model:ir.model.fields,field_description:delivery_carrier_multi_zip.field_delivery_carrier_zip__zip_to
 msgid "Zip To"
-msgstr ""
+msgstr "Ata CP"
