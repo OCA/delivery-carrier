@@ -9,69 +9,70 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-13 03:45+0000\n"
-"PO-Revision-Date: 2018-03-13 03:45+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2018\n"
+"PO-Revision-Date: 2026-05-23 04:52+0000\n"
+"Last-Translator: Pablo Castelo <pablocv@gmx.es>\n"
 "Language-Team: Galician (https://www.transifex.com/oca/teams/23907/gl/)\n"
 "Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: delivery_auto_refresh
 #: model:ir.model.fields,field_description:delivery_auto_refresh.field_res_config_settings__auto_add_delivery_line
 msgid "Add Delivery Line Automatically"
-msgstr ""
+msgstr "Engadir liña de entrega automaticamente"
 
 #. module: delivery_auto_refresh
 #: model_terms:ir.ui.view,arch_db:delivery_auto_refresh.res_config_settings_view_form
 msgid "Add delivery line automatically"
-msgstr ""
+msgstr "Engadir liña de entrega automaticamente"
 
 #. module: delivery_auto_refresh
 #: model_terms:ir.ui.view,arch_db:delivery_auto_refresh.res_config_settings_view_form
 msgid "Auto void delivery line"
-msgstr ""
+msgstr "Liña de entrega de anulación automática"
 
 #. module: delivery_auto_refresh
 #: model:ir.model.fields,field_description:delivery_auto_refresh.field_sale_order__available_carrier_ids
 msgid "Available Carrier"
-msgstr ""
+msgstr "Transportista dispoñible"
 
 #. module: delivery_auto_refresh
 #: model:ir.model,name:delivery_auto_refresh.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Configuración de Axustes"
 
 #. module: delivery_auto_refresh
 #: model:ir.model.fields,field_description:delivery_auto_refresh.field_res_config_settings__refresh_after_picking
 msgid "Refresh After Picking Automatically"
-msgstr ""
+msgstr "Actualizar automaticamente despois da recollida"
 
 #. module: delivery_auto_refresh
 #: model_terms:ir.ui.view,arch_db:delivery_auto_refresh.res_config_settings_view_form
 msgid "Refresh after picking automatically"
-msgstr ""
+msgstr "Actualizar automaticamente despois da recollida"
 
 #. module: delivery_auto_refresh
 #: model:ir.model,name:delivery_auto_refresh.model_sale_order
 msgid "Sales Order"
-msgstr ""
+msgstr "Ordes de venda"
 
 #. module: delivery_auto_refresh
 #: model:ir.model,name:delivery_auto_refresh.model_sale_order_line
 msgid "Sales Order Line"
-msgstr ""
+msgstr "Liña de Orde de Venda"
 
 #. module: delivery_auto_refresh
 #: model:ir.model.fields,field_description:delivery_auto_refresh.field_res_config_settings__set_default_carrier
 msgid "Set Default Carrier Automatically"
-msgstr ""
+msgstr "Establecer automaticamente o transportista predeterminado"
 
 #. module: delivery_auto_refresh
 #: model_terms:ir.ui.view,arch_db:delivery_auto_refresh.res_config_settings_view_form
 msgid "Set default carrier automatically"
-msgstr ""
+msgstr "Establecer automaticamente o transportista predeterminado"
 
 #. module: delivery_auto_refresh
 #: model:ir.model,name:delivery_auto_refresh.model_stock_picking
@@ -81,4 +82,4 @@ msgstr "Transferencia"
 #. module: delivery_auto_refresh
 #: model:ir.model.fields,field_description:delivery_auto_refresh.field_res_config_settings__auto_void_delivery_line
 msgid "Void delivery lines automatically"
-msgstr ""
+msgstr "Anular liñas de entrega automaticamente"
