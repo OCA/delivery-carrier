@@ -132,6 +132,26 @@ class UpsRequest:
             },
         }
 
+    def _build_address_lines(self, partner):
+        """Build UPS-compatible address lines with max 35 chars and up to 3 lines."""
+        full_address = f"{partner.street or ''} {partner.street2 or ''}".strip()
+        if not full_address:
+            return [""]
+        lines = []
+        remaining = full_address
+        for _i in range(3):
+            if not remaining:
+                break
+            if len(remaining) <= 35:
+                lines.append(remaining.strip())
+                break
+            split_at = remaining.rfind(" ", 0, 36)
+            if split_at <= 0:
+                split_at = 35
+            lines.append(remaining[:split_at].strip())
+            remaining = remaining[split_at:]
+        return lines
+
     def _partner_to_shipping_data(self, partner, **kwargs):
         """Return a dict describing a partner for the shipping request"""
         return dict(
@@ -142,7 +162,7 @@ class UpsRequest:
             Phone=dict(Number=partner.phone or partner.mobile),
             EMailAddress=partner.email,
             Address=dict(
-                AddressLine=[partner.street, partner.street2 or ""],
+                AddressLine=self._build_address_lines(partner),
                 City=partner.city,
                 StateProvinceCode=partner.state_id.code,
                 PostalCode=partner.zip,
