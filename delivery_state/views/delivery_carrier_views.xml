@@ -10,6 +10,7 @@ License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
         <field name="arch" type="xml">
             <field name="amount" position="after">
                 <field name="track_carrier_state" />
+                <field name="days_fetch_tracking_state_update" />
             </field>
         </field>
     </record>
