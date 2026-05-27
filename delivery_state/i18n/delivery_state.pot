@@ -84,6 +84,11 @@ msgid "Customer delivered"
 msgstr ""
 
 #. module: delivery_state
+#: model:ir.model.fields,field_description:delivery_state.field_delivery_carrier__days_fetch_tracking_state_update
+msgid "Days Fetch Tracking State Update"
+msgstr ""
+
+#. module: delivery_state
 #: model:ir.model.fields,field_description:delivery_state.field_stock_picking__date_delivered
 msgid "Delivery Date"
 msgstr ""
@@ -149,6 +154,13 @@ msgstr ""
 #. module: delivery_state
 #: model:ir.model.fields.selection,name:delivery_state.selection__stock_picking__delivery_state__shipping_recorded_in_carrier
 msgid "Shipping recorded in carrier"
+msgstr ""
+
+#. module: delivery_state
+#: model:ir.model.fields,help:delivery_state.field_delivery_carrier__days_fetch_tracking_state_update
+msgid ""
+"The tracking state is fetched for a picking for this number of days.\n"
+"If no final state has been set, the delivery state will be set to 'no_update'"
 msgstr ""
 
 #. module: delivery_state
