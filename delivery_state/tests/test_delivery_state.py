@@ -10,6 +10,14 @@ from odoo.tests import Form
 from odoo.tests.common import SavepointCase
 from odoo.tools import float_compare
 
+from ..models.stock_picking import (
+    DELIVERY_STATE_CANCELED,
+    DELIVERY_STATE_CUS_DELIVERED,
+    DELIVERY_STATE_INCIDENCE,
+    DELIVERY_STATE_NO_UPDATE,
+    DELIVERY_STATE_SHIPPING_RECORDED,
+)
+
 
 class TestDeliveryState(SavepointCase):
     @classmethod
@@ -106,7 +114,7 @@ class TestDeliveryState(SavepointCase):
         picking.action_confirm()
         picking.action_assign()
         picking.send_to_shipper()
-        self.assertEqual(picking.delivery_state, "shipping_recorded_in_carrier")
+        self.assertEqual(picking.delivery_state, DELIVERY_STATE_SHIPPING_RECORDED)
         self.assertTrue(picking.date_shipped)
         self.assertFalse(picking.tracking_state_history)
         picking.tracking_state_update()
@@ -117,7 +125,7 @@ class TestDeliveryState(SavepointCase):
             "fixed_cancel_shipment", lambda *args: True
         )
         picking.cancel_shipment()
-        self.assertEqual(picking.delivery_state, "canceled_shipment")
+        self.assertEqual(picking.delivery_state, DELIVERY_STATE_CANCELED)
         self.assertFalse(picking.date_shipped)
         self.assertFalse(picking.date_delivered)
 
@@ -138,7 +146,7 @@ class TestDeliveryState(SavepointCase):
         picking.action_confirm()
         picking.action_assign()
         picking.send_to_shipper()
-        self.assertEqual(picking.delivery_state, "no_update")
+        self.assertEqual(picking.delivery_state, DELIVERY_STATE_NO_UPDATE)
 
     def test_delivery_confirmation_send(self):
         """Check that the shipping notification is sent to the right partner"""
@@ -169,23 +177,23 @@ class TestDeliveryState(SavepointCase):
             picking._action_done()
         picking.tracking_state_update()
         # No days are set on the carrier, so delivery_state must be the same as before
-        self.assertEqual(picking.delivery_state, "shipping_recorded_in_carrier")
+        self.assertEqual(picking.delivery_state, DELIVERY_STATE_SHIPPING_RECORDED)
 
         self.carrier_test.days_fetch_tracking_state_update = 5
         # date_shipped is not within the time range, delivery_state must be set
         picking.tracking_state_update()
-        self.assertEqual(picking.delivery_state, "no_update")
+        self.assertEqual(picking.delivery_state, DELIVERY_STATE_NO_UPDATE)
 
-        data = {"delivery_state": "incidence"}
+        data = {"delivery_state": DELIVERY_STATE_INCIDENCE}
         with freeze_time("2026-03-30"):
             picking.with_context(track_data=data).tracking_state_update()
         # Doesn't matter whether the API returned a new delivery state as long as it is
         # not a final state. State must be set to no_update
-        self.assertEqual(picking.delivery_state, "no_update")
+        self.assertEqual(picking.delivery_state, DELIVERY_STATE_NO_UPDATE)
 
-        data = {"delivery_state": "customer_delivered"}
+        data = {"delivery_state": DELIVERY_STATE_CUS_DELIVERED}
         with freeze_time("2026-03-30"):
             picking.with_context(track_data=data).tracking_state_update()
 
         # API returned a final state, delivery_state must not be overwritten
-        self.assertEqual(picking.delivery_state, "customer_delivered")
+        self.assertEqual(picking.delivery_state, DELIVERY_STATE_CUS_DELIVERED)

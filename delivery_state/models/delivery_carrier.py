@@ -4,6 +4,12 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from odoo import fields, models
 
+from ..models.stock_picking import (
+    DELIVERY_STATE_CANCELED,
+    DELIVERY_STATE_NO_UPDATE,
+    DELIVERY_STATE_SHIPPING_RECORDED,
+)
+
 
 class DeliveryCarrier(models.Model):
     _inherit = "delivery.carrier"
@@ -19,9 +25,9 @@ class DeliveryCarrier(models.Model):
         pickings.write(
             {
                 "date_shipped": fields.Date.today(),
-                "delivery_state": "shipping_recorded_in_carrier"
+                "delivery_state": DELIVERY_STATE_SHIPPING_RECORDED
                 if self.track_carrier_state
-                else "no_update",
+                else DELIVERY_STATE_NO_UPDATE,
             }
         )
         return res
@@ -30,7 +36,7 @@ class DeliveryCarrier(models.Model):
         super().cancel_shipment(pickings)
         pickings.write(
             {
-                "delivery_state": "canceled_shipment",
+                "delivery_state": DELIVERY_STATE_CANCELED,
                 "date_delivered": False,
                 "date_shipped": False,
             }
