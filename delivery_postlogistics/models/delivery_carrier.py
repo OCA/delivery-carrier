@@ -19,10 +19,10 @@ class DeliveryCarrier(models.Model):
         domain=[("package_carrier_type", "=", "postlogistics")],
         default=lambda self: self._default_postlogistics_default_package_type_id(),
     )
+    # postlogistics_endpoint_url deprecated, remove in migration to next major version
     postlogistics_endpoint_url = fields.Char(
         string="Endpoint URL",
-        default="https://wedecint.post.ch/",
-        required=True,
+        required=False,
     )
     postlogistics_client_id = fields.Char(
         string="Client ID", groups="base.group_system"
@@ -101,19 +101,6 @@ class DeliveryCarrier(models.Model):
             "delivery_postlogistics.postlogistics_default_package_type",
             raise_if_not_found=False,
         )
-
-    @api.onchange("prod_environment")
-    def onchange_prod_environment(self):
-        """
-        Auto change the end point url following the environment
-        - Test: https://wedecint.post.ch/
-        - Prod: https://wedec.post.ch/
-        """
-        for carrier in self:
-            if carrier.prod_environment:
-                carrier.postlogistics_endpoint_url = "https://wedec.post.ch/"
-            else:
-                carrier.postlogistics_endpoint_url = "https://wedecint.post.ch/"
 
     def _postlogistics_get_default_custom_package_code(self):
         # Used while changing the carrier on the stock.package.type Form

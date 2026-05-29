@@ -2,6 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 from contextlib import contextmanager
 from os.path import dirname, join
+from urllib.parse import urlparse
 
 import requests
 from requests import PreparedRequest, Session
@@ -14,9 +15,12 @@ from odoo.tools.safe_eval import json
 
 from odoo.addons.base.tests.common import BaseCommon
 
-from ..postlogistics.web_service import GENERATE_LABEL_PATH, PostlogisticsWebService
+from ..postlogistics.web_service import (
+    AUTH_URL,
+    GENERATE_LABEL_URL,
+    PostlogisticsWebService,
+)
 
-ENDPOINT_URL = "https://wedecint.post.ch/"
 CLIENT_ID = "XXX"
 CLIENT_SECRET = "XXX"
 LICENSE = "XXX"
@@ -42,7 +46,7 @@ def check_generate_label_body(request, saved_request):
     """
     assert request.path == saved_request.path
 
-    if request.path == GENERATE_LABEL_PATH:
+    if request.path == urlparse(GENERATE_LABEL_URL).path:
         query_json = json.loads(request.body.decode("utf-8"))
         saved_json = json.loads(saved_request.body.decode("utf-8"))
         query_json["item"]["itemID"] = saved_json["item"]["itemID"]
@@ -61,7 +65,7 @@ class TestPostlogisticsCommon(BaseCommon):
     @classmethod
     def _request_handler(cls, s: Session, r: PreparedRequest, /, **kw):
         # We need to override Odoo check to allow API testing
-        if r.url.startswith(ENDPOINT_URL):
+        if r.url in [AUTH_URL, GENERATE_LABEL_URL]:
             return _super_send(s, r, **kw)
         return super()._request_handler(s, r, **kw)
 
@@ -110,7 +114,6 @@ class TestPostlogisticsCommon(BaseCommon):
                 "name": "Postlogistics",
                 "delivery_type": "postlogistics",
                 "product_id": shipping_product.id,
-                "postlogistics_endpoint_url": ENDPOINT_URL,
                 "postlogistics_client_id": CLIENT_ID,
                 "postlogistics_client_secret": CLIENT_SECRET,
                 "postlogistics_license_id": self.license.id,
