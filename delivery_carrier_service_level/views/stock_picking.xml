@@ -7,7 +7,7 @@
             <xpath expr="//field[@name='carrier_id']" position="after">
                 <field
                     name="carrier_service_level_id"
-                    attrs="{'invisible':[('picking_type_code', '!=', 'outgoing')]}"
+                    invisible="picking_type_code != 'outgoing'"
                 />
             </xpath>
         </field>

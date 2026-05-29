@@ -18,15 +18,15 @@
             </form>
         </field>
     </record>
-    <record id="view_carrier_service_level_tree" model="ir.ui.view">
-        <field name="name">carrier.service.level.tree</field>
+    <record id="view_carrier_service_level_list" model="ir.ui.view">
+        <field name="name">carrier.service.level.list</field>
         <field name="model">carrier.service.level</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="carrier_id" />
                 <field name="code" />
                 <field name="name" />
-            </tree>
+            </list>
         </field>
     </record>
     <record id="view_carrier_service_level_search" model="ir.ui.view">
@@ -51,7 +51,7 @@
         <field name="name">Carrier Service Level</field>
         <field name="res_model">carrier.service.level</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="view_id" ref="view_carrier_service_level_tree" />
+        <field name="view_id" ref="view_carrier_service_level_list" />
         <field name="context">{}</field>
     </record>
     <menuitem

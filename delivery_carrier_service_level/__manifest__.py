@@ -1,9 +1,9 @@
-# Copyright 2013-2020 Therp BV <https://therp.nl>
+# Copyright 2026 Therp BV <https://therp.nl>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 {
     "name": "Delivery Carrier Service Level",
     "summary": "Add service levels to carrier",
-    "version": "16.0.1.0.0",
+    "version": "18.0.1.0.0",
     "category": "Delivery",
     "website": "https://github.com/OCA/delivery-carrier",
     "author": "Therp, Odoo Community Association (OCA)",
