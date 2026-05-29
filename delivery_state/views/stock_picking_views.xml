@@ -22,6 +22,9 @@ License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
                     <field name="date_delivered" />
                     <field name="delivery_state" />
                     <field name="tracking_state" class="oe_inline" />
+                    <field name="pod_file" filename="pod_filename" />
+                    <field name="pod_filename" invisible="1" />
+                    <field name="pod_error" invisible="not pod_error" />
                     <button
                         name="tracking_state_update"
                         string="Update tracking state"
