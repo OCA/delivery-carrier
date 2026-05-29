@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2026-03-11 12:45+0000\n"
+"PO-Revision-Date: 2026-05-29 14:46+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -23,6 +23,9 @@ msgid ""
 "<b>Errors while fetching POD for carrier %s:</b><br/>Please review the "
 "details below and take the necessary actions to resolve these issues.:<br/>"
 msgstr ""
+"<b>Errori durante il recupero della RC per l'operatore %s:</b><br/>Si prega "
+"di rivedere i dettagli riportati di seguito e di adottare le misure "
+"necessarie per risolvere questi problemi.:<br/>"
 
 #. module: delivery_state
 #: model:mail.template,body_html:delivery_state.delivery_state_delivered_notification
@@ -146,17 +149,17 @@ msgstr "Nessun altro aggiornamento dal corriere"
 #. module: delivery_state
 #: model:ir.model.fields,field_description:delivery_state.field_stock_picking__pod_error
 msgid "Proof of Delivery Error"
-msgstr ""
+msgstr "Errore ricevuta consegna"
 
 #. module: delivery_state
 #: model:ir.model.fields,field_description:delivery_state.field_stock_picking__pod_file
 msgid "Proof of Delivery File"
-msgstr ""
+msgstr "File ricevuta della consegna"
 
 #. module: delivery_state
 #: model:ir.model.fields,field_description:delivery_state.field_stock_picking__pod_filename
 msgid "Proof of Delivery Filename"
-msgstr ""
+msgstr "Nome file ricevuta della consegna"
 
 #. module: delivery_state
 #: model_terms:ir.ui.view,arch_db:delivery_state.res_config_settings_view_form
@@ -183,7 +186,7 @@ msgstr "Spedizione registrata nel corriere"
 #. module: delivery_state
 #: model:ir.model.fields,field_description:delivery_state.field_stock_picking__tracking_json
 msgid "Tracking Json"
-msgstr ""
+msgstr "JSON tracciamento"
 
 #. module: delivery_state
 #: model:ir.model.fields,field_description:delivery_state.field_stock_picking__tracking_state
