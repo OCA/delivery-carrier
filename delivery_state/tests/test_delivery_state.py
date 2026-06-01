@@ -2,6 +2,8 @@
 # Copyright 2020 FactorLibre
 # Copyright 2026 Raumschmiede GmbH
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+
+import mock
 from freezegun import freeze_time
 from odoo_test_helper import FakeModelLoader
 
@@ -56,6 +58,8 @@ class TestDeliveryState(SavepointCase):
         cls.product = cls.env["product.product"].create(
             {"name": "Test product", "type": "product"}
         )
+        cls._set_stock(cls.product, 100)
+
         cls.partner = cls.env["res.partner"].create({"name": "Mr. Odoo"})
         cls.partner_shipping = cls.env["res.partner"].create(
             {"name": "Mr. Odoo (shipping)"}
@@ -91,6 +95,14 @@ class TestDeliveryState(SavepointCase):
     def tearDownClass(cls):
         cls.loader.restore_registry()
         super().tearDownClass()
+
+    @classmethod
+    def _set_stock(cls, product, qty):
+        return cls.env["stock.quant"]._update_available_quantity(
+            product,
+            cls.env.ref("stock.stock_location_stock"),
+            qty,
+        )
 
     def test_delivery_state(self):
         delivery_wizard = Form(
@@ -197,3 +209,45 @@ class TestDeliveryState(SavepointCase):
 
         # API returned a final state, delivery_state must not be overwritten
         self.assertEqual(picking.delivery_state, DELIVERY_STATE_CUS_DELIVERED)
+
+    def test_cron_pickings(self):
+        self.env.ref("stock.warehouse0").delivery_steps = "pick_pack_ship"
+        self.sale.action_confirm()
+
+        # Set PICK to done
+        pick = self.sale.picking_ids.filtered(lambda p: p.state == "assigned")
+        for ml in pick.move_line_ids:
+            ml.qty_done = ml.product_uom_qty
+        pick.button_validate()
+        pick.carrier_id = self.carrier_test
+
+        # Set PACK to done. Call carrier API with this picking
+        pack = self.sale.picking_ids.filtered(lambda p: p.state == "assigned")
+        for ml in pack.move_line_ids:
+            ml.qty_done = ml.product_uom_qty
+        pack.carrier_id = self.carrier_test
+        pack.button_validate()
+        self.assertTrue(pack)
+
+        # SET OUT to done
+        ship = self.sale.picking_ids.filtered(lambda p: p.state == "assigned")
+        for ml in ship.move_line_ids:
+            ml.qty_done = ml.product_uom_qty
+        ship.button_validate()
+        # NOTE: On version >= 18.0 use the carrier on the picking and the PACK rule
+        # should propagate the carrier to the OUT
+        ship.carrier_id = self.carrier_test
+
+        with mock.patch.object(
+            type(self.env["stock.picking"]),
+            "tracking_state_update",
+            autospec=True,
+        ) as mocked:
+            self.env.ref(
+                "delivery_state.ir_cron_delivery_state"
+            ).method_direct_trigger()
+
+            # As only the PACK picking was sent to the carrier API only for this
+            # the tracking state must be updated even if the other pickings have
+            # a carrier set
+            mocked.assert_called_once_with(pack)

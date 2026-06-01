@@ -76,6 +76,14 @@ class StockPicking(models.Model):
         copy=False,
     )
 
+    def _get_delivery_states_in_progress(self):
+        return [
+            DELIVERY_STATE_SHIPPING_RECORDED,
+            DELIVERY_STATE_IN_TRANSIT,
+            DELIVERY_STATE_INCIDENCE,
+            DELIVERY_STATE_WH_DELIVERED,
+        ]
+
     def tracking_state_update(self):
         """Call to the service provider API which should have the method
         defined in the model as:
@@ -132,12 +140,8 @@ class StockPicking(models.Model):
                 ("state", "=", "done"),
                 (
                     "delivery_state",
-                    "not in",
-                    [
-                        DELIVERY_STATE_CUS_DELIVERED,
-                        DELIVERY_STATE_CANCELED,
-                        DELIVERY_STATE_NO_UPDATE,
-                    ],
+                    "in",
+                    self._get_delivery_states_in_progress(),
                 ),
                 # These won't ever autoupdate, so we don't want to evaluate them
                 ("delivery_type", "not in", [False, "fixed", "base_on_rule"]),
