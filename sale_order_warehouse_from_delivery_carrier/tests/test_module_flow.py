@@ -1,16 +1,49 @@
-from odoo.tests import Form, TransactionCase, tagged
+from odoo.tests import Form, tagged
+
+from odoo.addons.base.tests.common import BaseCommon
 
 
 @tagged("post_install", "-at_install")
-class TestModuleFlow(TransactionCase):
+class TestModuleFlow(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.local_delivery = cls.env.ref(
-            "delivery.delivery_local_delivery", raise_if_not_found=False
+        cls.product = cls.env["product.product"].create(
+            {
+                "name": "Test Product",
+                "type": "consu",
+                "list_price": 100.0,
+            }
         )
-        cls.poste_delivery = cls.env.ref(
-            "delivery.delivery_carrier", raise_if_not_found=False
+        cls.delivery_product = cls.env["product.product"].create(
+            {
+                "name": "Test Delivery Product",
+                "type": "service",
+                "list_price": 5.0,
+            }
+        )
+        cls.local_delivery = cls.env["delivery.carrier"].create(
+            {
+                "name": "Local Delivery",
+                "delivery_type": "fixed",
+                "product_id": cls.delivery_product.id,
+                "fixed_price": 5.0,
+            }
+        )
+        cls.poste_delivery = cls.env["delivery.carrier"].create(
+            {
+                "name": "The Poste",
+                "delivery_type": "base_on_rule",
+                "product_id": cls.delivery_product.id,
+                "fixed_price": 20.0,
+            }
+        )
+        cls.env["delivery.price.rule"].create(
+            {
+                "carrier_id": cls.poste_delivery.id,
+                "max_value": 5,
+                "list_base_price": 20,
+            }
         )
         cls.warehouse0 = cls.env["stock.warehouse"].create(
             {
@@ -24,18 +57,14 @@ class TestModuleFlow(TransactionCase):
                 "code": "TWH-2",
             }
         )
-        cls.local_delivery.write({"so_warehouse_id": cls.warehouse0.id})
-        cls.poste_delivery.write({"so_warehouse_id": cls.warehouse1.id})
+        cls.local_delivery.so_warehouse_id = cls.warehouse0
+        cls.poste_delivery.so_warehouse_id = cls.warehouse1
         cls.saleperson_warehouse = cls.env.user._get_default_warehouse_id()
 
-        form = Form(
-            cls.env["sale.order"],
-        )
-        form.partner_id = cls.env.ref("base.res_partner_2", raise_if_not_found=False)
+        form = Form(cls.env["sale.order"])
+        form.partner_id = cls.partner
         with form.order_line.new() as line:
-            line.product_id = cls.env.ref(
-                "product.product_product_25", raise_if_not_found=False
-            )
+            line.product_id = cls.product
         cls.sale_order = form.save()
 
     def _set_shipping_method(self, delivery_method):

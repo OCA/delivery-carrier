@@ -1,6 +1,6 @@
 {
     "name": "Sale Order Warehouse from Delivery Carrier",
-    "version": "18.0.1.0.0",
+    "version": "19.0.1.0.0",
     "category": "Delivery",
     "summary": "Sale Order WH from Delivery Carrier",
     "depends": ["sale_stock", "delivery"],
