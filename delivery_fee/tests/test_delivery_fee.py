@@ -1,6 +1,8 @@
 # Copyright 2026 Moduon
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl).
-from odoo import Command
+from datetime import datetime, timedelta
+
+from odoo import Command, fields
 from odoo.tests import Form, TransactionCase
 
 
@@ -9,6 +11,15 @@ class DeliveryFeeTestCase(TransactionCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
+        if not cls.env.company.chart_template_id:
+            # Load a CoA if there's none in current company
+            coa = cls.env.ref("l10n_generic_coa.configurable_chart_template", False)
+            if not coa:
+                # Load the first available CoA
+                coa = cls.env["account.chart.template"].search(
+                    [("visible", "=", True)], limit=1
+                )
+            coa.try_loading(company=cls.env.company, install_demo=False)
         cls.delivery_product = cls.env["product.product"].create(
             {
                 "name": "Delivery test",
@@ -72,9 +83,12 @@ class DeliveryFeeTestCase(TransactionCase):
         )
         # Defaults to `False`, but it's useful to declare it explicitly for local tests
         cls.env.company.one_delivery_fee_by_sale_order = False
+        cls.env.company.one_delivery_fee_by_commercial_partner_day = False
 
     def _validate_picking(self, picking):
         picking.action_set_quantities_to_reservation()
+        for move in picking.move_ids.filtered(lambda move: not move.quantity_done):
+            move.quantity_done = move.product_uom_qty
         picking._action_done()
 
     def _picking_return(self, picking, qty=None):
@@ -101,6 +115,59 @@ class DeliveryFeeTestCase(TransactionCase):
             line.product_id = self.product
         so_form.save()
 
+    def _outgoing_pickings(self, pickings):
+        return pickings.filtered(lambda pick: pick.picking_type_code == "outgoing")
+
+    def _create_extra_outgoing_picking(self, sale):
+        picking_type = sale.warehouse_id.out_type_id
+        location_id = picking_type.default_location_src_id.id
+        location_dest_id = sale.partner_shipping_id.property_stock_customer.id
+        sale_line = sale.order_line.filtered(
+            lambda line: line.product_id == self.product
+        )
+        picking = self.env["stock.picking"].create(
+            {
+                "partner_id": sale.partner_shipping_id.id,
+                "sale_id": sale.id,
+                "carrier_id": sale.carrier_id.id,
+                "picking_type_id": picking_type.id,
+                "location_id": location_id,
+                "location_dest_id": location_dest_id,
+                "move_ids": [
+                    Command.create(
+                        {
+                            "name": self.product.display_name,
+                            "product_id": self.product.id,
+                            "product_uom_qty": 1,
+                            "product_uom": self.product.uom_id.id,
+                            "sale_line_id": sale_line[:1].id,
+                            "location_id": location_id,
+                            "location_dest_id": location_dest_id,
+                        }
+                    )
+                ],
+            }
+        )
+        picking.action_confirm()
+        return picking
+
+    def _create_sale_order(self, partner):
+        return self.env["sale.order"].create(
+            {
+                "partner_id": partner.id,
+                "carrier_id": self.carrier_with_fee.id,
+                "order_line": [
+                    Command.create(
+                        {
+                            "product_id": self.product.id,
+                            "product_uom_qty": 1,
+                            "price_unit": 100.0,
+                        }
+                    ),
+                ],
+            }
+        )
+
     def _test_regex_in_report(self, report, res_ids, expression, expected_in_html=True):
         """Helper method to test whether or not a regular expression should be
         expected in the report resulting rendering"""
@@ -125,7 +192,14 @@ class DeliveryFeeTestCase(TransactionCase):
 
     def _common_fee_added_on_picking_validation_refund(self):
         """"""
-        picking_2, picking_1 = self.sale_order.picking_ids
+        outgoing_pickings = self._outgoing_pickings(self.sale_order.picking_ids)
+        self.assertEqual(len(outgoing_pickings), 2)
+        picking_1 = self.sale_order.order_line.filtered("is_delivery_fee")[
+            :1
+        ].delivery_fee_picking_id
+        self.assertTrue(picking_1)
+        picking_2 = outgoing_pickings - picking_1
+        self.assertEqual(len(picking_2), 1)
         return_pick_1 = self._picking_return(picking_1)
         # The fee shouldn't show up in returns
         self._test_regex_in_report(
@@ -155,10 +229,7 @@ class DeliveryFeeTestCase(TransactionCase):
     def test_delivery_fee_added_on_picking_validation(self):
         """Test that delivery fee is added when picking is validated"""
         self._common_test_delivery_fee_added_on_picking_validation()
-        existing_picking = self.sale_order.picking_ids
-        # Let's add a new picking
-        self._add_line_to_sale_order(self.sale_order)
-        new_picking = self.sale_order.picking_ids - existing_picking
+        new_picking = self._create_extra_outgoing_picking(self.sale_order)
         self._validate_picking(new_picking)
         fee_lines = self.sale_order.order_line.filtered("is_delivery_fee")
         self.assertEqual(len(fee_lines), 2)
@@ -204,15 +275,106 @@ class DeliveryFeeTestCase(TransactionCase):
         for sale in sales:
             self.assertEqual(len(sale.order_line.filtered("is_delivery_fee")), 1)
 
+    def test_one_delivery_fee_by_commercial_partner_day(self):
+        """Only one same-day fee is added for the same commercial partner."""
+        self.env.company.one_delivery_fee_by_commercial_partner_day = True
+        child_customer = self.env["res.partner"].create(
+            {
+                "name": "Mr. Odoo child contact",
+                "parent_id": self.customer.id,
+            }
+        )
+        sales = self._create_sale_order(self.customer) | self._create_sale_order(
+            child_customer
+        )
+        sales.action_confirm()
+
+        self._validate_picking(sales.picking_ids)
+
+        fee_lines = sales.order_line.filtered("is_delivery_fee")
+        self.assertEqual(len(fee_lines), 1)
+        self.assertEqual(
+            fee_lines.delivery_fee_picking_id.partner_id.commercial_partner_id,
+            self.customer,
+        )
+
+    def test_batch_one_fee_by_sale_order_and_commercial_partner_day(self):
+        """Batch validation keeps both fee limits active."""
+        self.env.company.one_delivery_fee_by_sale_order = True
+        self.env.company.one_delivery_fee_by_commercial_partner_day = True
+        sales = self.env["sale.order"].create(
+            [
+                {
+                    "partner_id": self.customer.id,
+                    "carrier_id": self.carrier_with_fee.id,
+                    "order_line": [
+                        Command.create(
+                            {
+                                "product_id": self.product.id,
+                                "product_uom_qty": 1,
+                                "price_unit": 100.0,
+                            }
+                        ),
+                    ],
+                }
+                for _dummy in range(5)
+            ]
+        )
+        sales.action_confirm()
+
+        self._validate_picking(sales.picking_ids)
+
+        self.assertEqual(len(sales.order_line.filtered("is_delivery_fee")), 1)
+
+    def test_one_delivery_fee_by_commercial_partner_allows_different_days(self):
+        """A new fee is allowed for the same commercial partner on another day."""
+        self.env.company.one_delivery_fee_by_commercial_partner_day = True
+        sales = self._create_sale_order(self.customer) | self._create_sale_order(
+            self.customer
+        )
+        sales.action_confirm()
+        picking_1 = self._outgoing_pickings(sales[0].picking_ids)
+        picking_2 = self._outgoing_pickings(sales[1].picking_ids)
+
+        self._validate_picking(picking_1)
+        picking_1.date_done = fields.Datetime.now() - timedelta(days=1)
+        self._validate_picking(picking_2)
+
+        fee_lines = sales.order_line.filtered("is_delivery_fee")
+        self.assertEqual(len(fee_lines), 2)
+
+    def test_one_delivery_fee_by_commercial_partner_uses_user_timezone(self):
+        """The daily limit uses the user's timezone instead of the UTC date."""
+        self.env.company.one_delivery_fee_by_commercial_partner_day = True
+        sales = self._create_sale_order(self.customer) | self._create_sale_order(
+            self.customer
+        )
+        sales.action_confirm()
+        picking_1 = self._outgoing_pickings(sales[0].picking_ids)
+        picking_2 = self._outgoing_pickings(sales[1].picking_ids)
+
+        self._validate_picking(picking_1)
+        # In Europe/Madrid, 2026-06-03 23:00 UTC is already 2026-06-04.
+        picking_1.date_done = datetime(2026, 6, 3, 23, 0, 0)
+        picking_2.date_done = datetime(2026, 6, 4, 8, 0, 0)
+
+        self.assertTrue(
+            picking_2.with_context(
+                tz="Europe/Madrid"
+            )._has_delivery_fee_for_commercial_partner_day()
+        )
+        self.assertFalse(
+            picking_2.with_context(
+                tz="UTC"
+            )._has_delivery_fee_for_commercial_partner_day()
+        )
+
     def test_delivery_fee_added_on_picking_validation_one_fee_per_order(self):
         """Same tests as before, but now only one fee is added when the first
         picking is validated"""
         self.env.company.one_delivery_fee_by_sale_order = True
         self._common_test_delivery_fee_added_on_picking_validation()
-        existing_picking = self.sale_order.picking_ids
-        # Let's add a new picking
-        self._add_line_to_sale_order(self.sale_order)
-        new_picking = self.sale_order.picking_ids - existing_picking
+        new_picking = self._create_extra_outgoing_picking(self.sale_order)
         self._validate_picking(new_picking)
         fee_lines = self.sale_order.order_line.filtered("is_delivery_fee")
         self.assertEqual(len(fee_lines), 1, "The fee should be added just once!")

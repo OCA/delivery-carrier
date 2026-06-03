@@ -9,3 +9,7 @@ class ResCompany(models.Model):
     one_delivery_fee_by_sale_order = fields.Boolean(
         help="The delivery fee will be applied just once to the order",
     )
+    one_delivery_fee_by_commercial_partner_day = fields.Boolean(
+        help="The delivery fee will be applied just once per commercial partner "
+        "and day",
+    )

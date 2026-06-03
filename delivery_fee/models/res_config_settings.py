@@ -10,3 +10,7 @@ class ResConfigSetting(models.TransientModel):
         related="company_id.one_delivery_fee_by_sale_order",
         readonly=False,
     )
+    one_delivery_fee_by_commercial_partner_day = fields.Boolean(
+        related="company_id.one_delivery_fee_by_commercial_partner_day",
+        readonly=False,
+    )
