@@ -19,6 +19,20 @@
                         </div>
                     </div>
                 </div>
+                <div
+                    class="col-12 col-lg-6 o_setting_box"
+                    id="display_delivery_fee_commercial_partner_day_settings"
+                >
+                    <div class="o_setting_left_pane">
+                        <field name="one_delivery_fee_by_commercial_partner_day" />
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <label for="one_delivery_fee_by_commercial_partner_day" />
+                        <div class="text-muted">
+                            The delivery fee will be applied just once per commercial partner and day
+                        </div>
+                    </div>
+                </div>
             </xpath>
         </field>
     </record>

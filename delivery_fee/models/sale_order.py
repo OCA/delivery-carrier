@@ -19,12 +19,12 @@ class SaleOrder(models.Model):
                 lambda x: x._is_to_external_location()
             )
             order.all_fee_pickings_returned = all(
-                pick._full_returned() for pick in pickings
+                pick._full_returned_for_delivery_fee() for pick in pickings
             )
 
     def _prepare_delivery_fee_line_vals(self, picking):
         # Based on core `_prepare_delivery_line_vals`
-        carrier = picking.carrier_id
+        carrier = picking._get_delivery_fee_carrier()
         context = {}
         if self.partner_id:
             # Set delivery detail in the customer language
