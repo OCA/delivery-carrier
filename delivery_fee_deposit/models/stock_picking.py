@@ -20,11 +20,22 @@ class StockPicking(models.Model):
                 or self.partner_id.delivery_fee_exemption
                 or not carrier.fee_product_id
             )
+        if self._is_mixed_customer_deposit_delivery():
+            carrier = self._get_delivery_fee_carrier()
+            return not (
+                self.picking_type_code != "outgoing"
+                or not self.sale_id
+                or self.partner_id.delivery_fee_exemption
+                or not carrier.fee_product_id
+            )
         return res
 
     def _get_delivery_fee_carrier(self):
         self.ensure_one()
-        if self._is_customer_deposit_creation():
+        if not self.carrier_id and (
+            self._is_customer_deposit_creation()
+            or self._is_mixed_customer_deposit_delivery()
+        ):
             return self.sale_id.carrier_id
         return super()._get_delivery_fee_carrier()
 
@@ -42,8 +53,19 @@ class StockPicking(models.Model):
         self.ensure_one()
         if self.sale_id.customer_deposit:
             return False
-        deposit_deliveries = self.move_ids.filtered(
+        deposit_deliveries = self._customer_deposit_moves()
+        return bool(deposit_deliveries) and not (self.move_ids - deposit_deliveries)
+
+    def _is_mixed_customer_deposit_delivery(self):
+        self.ensure_one()
+        if self.sale_id.customer_deposit:
+            return False
+        deposit_deliveries = self._customer_deposit_moves()
+        return bool(deposit_deliveries) and bool(self.move_ids - deposit_deliveries)
+
+    def _customer_deposit_moves(self):
+        self.ensure_one()
+        return self.move_ids.filtered(
             lambda x: x.sale_line_id.route_id
             == x.sale_line_id.warehouse_id.customer_deposit_route_id
         )
-        return bool(deposit_deliveries) and not (self.move_ids - deposit_deliveries)

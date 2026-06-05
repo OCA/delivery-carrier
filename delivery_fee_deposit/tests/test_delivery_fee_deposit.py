@@ -102,6 +102,9 @@ class TestDeliveryFeeDeposit(TestStockCustomerDepositCommon):
         self._set_deposit_route(
             sale.order_line.filtered(lambda line: line.product_id == self.productA)
         )
+        # Some flows do not propagate the sale carrier to this mixed picking.
+        sale.picking_ids.carrier_id = False
+        self.assertFalse(sale.picking_ids.carrier_id)
         self._validate_picking(sale.picking_ids)
         self.assertFalse(sale.picking_ids._is_full_customer_deposit_delivery())
         fee_lines = sale.order_line.filtered("is_delivery_fee")
