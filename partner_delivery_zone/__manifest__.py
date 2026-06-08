@@ -3,7 +3,7 @@
 {
     "name": "Partner Delivery Zone",
     "summary": "Enables partner delivery zones for physical products",
-    "version": "18.0.1.0.0",
+    "version": "18.0.1.0.1",
     "development_status": "Beta",
     "category": "Delivery",
     "website": "https://github.com/OCA/delivery-carrier",
