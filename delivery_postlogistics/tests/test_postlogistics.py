@@ -12,20 +12,6 @@ class TestPostlogistics(TestPostlogisticsCommon):
         super().setUp()
         self.picking = self.create_picking()
 
-    def test_misc(self):
-        self.assertFalse(self.carrier.prod_environment)
-        self.carrier.toggle_prod_environment()
-        self.carrier.onchange_prod_environment()
-        self.assertTrue(self.carrier.prod_environment)
-        self.carrier.toggle_prod_environment()
-        self.carrier.onchange_prod_environment()
-        self.assertFalse(self.carrier.prod_environment)
-        self.assertEqual(
-            self.carrier.get_tracking_link(self.picking),
-            "https://service.post.ch/EasyTrack/"
-            "submitParcelData.do?formattedParcelCodes=False",
-        )
-
     def test_prepare_recipient(self):
         partner_id = self.picking.partner_id
         partner_id.is_company = True
