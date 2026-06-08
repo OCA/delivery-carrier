@@ -236,20 +236,6 @@ msgid "Misc."
 msgstr "Varie"
 
 #. module: delivery_postlogistics
-#. odoo-python
-#: code:addons/delivery_postlogistics/postlogistics/web_service.py:0
-msgid ""
-"Missing Configuration\n"
-"\n"
-"Please verify postlogistics endpoint url in:\n"
-"Delivery Carrier (PostLogistics)."
-msgstr ""
-"Configurazione mancante\n"
-"\n"
-"Verificare l'URL dell'endpoint postlogistics in:\n"
-"Corriere di consegna (PostLogistics)."
-
-#. module: delivery_postlogistics
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_stock_picking__delivery_mobile
 msgid "Mobile"
 msgstr "Cellulare"
@@ -624,6 +610,17 @@ msgstr "risoluzione"
 #: model_terms:ir.ui.view,arch_db:delivery_postlogistics.stock_package_type_form_delivery
 msgid "the documentation"
 msgstr "la documentazione"
+
+#~ msgid ""
+#~ "Missing Configuration\n"
+#~ "\n"
+#~ "Please verify postlogistics endpoint url in:\n"
+#~ "Delivery Carrier (PostLogistics)."
+#~ msgstr ""
+#~ "Configurazione mancante\n"
+#~ "\n"
+#~ "Verificare l'URL dell'endpoint postlogistics in:\n"
+#~ "Corriere di consegna (PostLogistics)."
 
 #~ msgid "200 ppp"
 #~ msgstr "200 ppp"
