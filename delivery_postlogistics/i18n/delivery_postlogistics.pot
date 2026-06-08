@@ -209,16 +209,6 @@ msgid "Misc."
 msgstr ""
 
 #. module: delivery_postlogistics
-#. odoo-python
-#: code:addons/delivery_postlogistics/postlogistics/web_service.py:0
-msgid ""
-"Missing Configuration\n"
-"\n"
-"Please verify postlogistics endpoint url in:\n"
-"Delivery Carrier (PostLogistics)."
-msgstr ""
-
-#. module: delivery_postlogistics
 #: model:ir.model.fields,field_description:delivery_postlogistics.field_stock_picking__delivery_mobile
 msgid "Mobile"
 msgstr ""
