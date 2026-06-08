@@ -8,7 +8,7 @@
         <field name="inherit_id" ref="sale.view_order_form" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='payment_term_id']" position="after">
-                <field name="delivery_zone_id" readonly="state in ['sale', 'cancel']" />
+                <field name="delivery_zone_id" readonly="state == 'cancel'" />
             </xpath>
         </field>
     </record>
