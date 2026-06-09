@@ -73,7 +73,7 @@ class TestDeliveryFeeDeposit(TestStockCustomerDepositCommon):
         self.assertEqual(fee_lines.delivery_fee_picking_id, sale.picking_ids)
 
     @users("user_customer_deposit")
-    def test_delivery_fee_not_applied_when_delivering_deposit(self):
+    def test_no_fee_for_full_customer_deposit_delivery_without_exemption(self):
         stock_dict = {self.productA: {self.partner1: 1.0}}
         self.update_availiable_quantity(stock_dict)
         sale = self._create_sale_order()
@@ -82,6 +82,7 @@ class TestDeliveryFeeDeposit(TestStockCustomerDepositCommon):
         # Existing customer-owned stock is already a deposit, even without routes.
         self._validate_picking(sale.picking_ids)
 
+        self.assertTrue(sale.picking_ids._is_full_customer_deposit_delivery())
         self.assertFalse(sale.order_line.filtered("is_delivery_fee"))
 
     @users("user_customer_deposit")
