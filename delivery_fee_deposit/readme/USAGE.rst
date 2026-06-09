@@ -6,6 +6,29 @@ When this module is installed, delivery fees follow these rules:
 * A mixed delivery, with products from the customer deposit and regular stock,
   applies the delivery fee normally.
 
-Customer deposit deliveries are detected from the sale line route: if all stock
-moves in the picking come from sale lines using the warehouse customer deposit
-route, the picking is considered a full customer deposit delivery.
+Behavior matrix
+~~~~~~~~~~~~~~~
+
++---------------------------------------------------+------------+----------------------+
+| Scenario                                          | Exempt     | Delivery fee applied |
++===================================================+============+======================+
+| Sale creating a customer deposit                  | Yes        | No                   |
++---------------------------------------------------+------------+----------------------+
+| Sale creating a customer deposit                  | No         | Yes                  |
++---------------------------------------------------+------------+----------------------+
+| Delivery fully from customer deposit              | Yes        | No                   |
++---------------------------------------------------+------------+----------------------+
+| Delivery fully from customer deposit              | No         | No                   |
++---------------------------------------------------+------------+----------------------+
+| Mixed delivery: customer deposit + regular stock  | Yes        | No                   |
++---------------------------------------------------+------------+----------------------+
+| Mixed delivery: customer deposit + regular stock  | No         | Yes                  |
++---------------------------------------------------+------------+----------------------+
+| Delivery fully from pre-existing customer deposit | Yes        | No                   |
++---------------------------------------------------+------------+----------------------+
+| Delivery fully from pre-existing customer deposit | No         | No                   |
++---------------------------------------------------+------------+----------------------+
+
+A pre-existing customer deposit means customer-owned stock already available
+before the sale being delivered. Releasing it should not create a new delivery
+fee, even for successive deliveries.

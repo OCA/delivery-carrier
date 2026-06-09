@@ -88,6 +88,30 @@ class TestDeliveryFeeDeposit(TestStockCustomerDepositCommon):
         self.assertFalse(sale.order_line.filtered("is_delivery_fee"))
 
     @users("user_customer_deposit")
+    def test_delivery_fee_not_applied_when_delivering_owned_deposit(self):
+        stock_dict = {self.productA: {self.partner1: 1.0}}
+        self.update_availiable_quantity(stock_dict)
+        sale = self._create_sale_order()
+        sale.action_confirm()
+
+        # Existing customer-owned stock is already a deposit, even without routes.
+        self._validate_picking(sale.picking_ids)
+
+        self.assertFalse(sale.order_line.filtered("is_delivery_fee"))
+
+    @users("user_customer_deposit")
+    def test_delivery_fee_not_applied_on_successive_existing_deposit_deliveries(self):
+        stock_dict = {self.productA: {self.partner1: 2.0}}
+        self.update_availiable_quantity(stock_dict)
+
+        for _dummy in range(2):
+            sale = self._create_sale_order()
+            sale.action_confirm()
+            # Pre-existing deposits may be released in several deliveries.
+            self._validate_picking(sale.picking_ids)
+            self.assertFalse(sale.order_line.filtered("is_delivery_fee"))
+
+    @users("user_customer_deposit")
     def test_delivery_fee_applied_to_mixed_deposit_delivery(self):
         stock_dict = {
             self.productA: {False: 1.0},
