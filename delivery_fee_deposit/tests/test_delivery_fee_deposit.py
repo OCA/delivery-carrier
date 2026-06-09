@@ -59,9 +59,6 @@ class TestDeliveryFeeDeposit(TestStockCustomerDepositCommon):
         picking.action_set_quantities_to_reservation()
         picking._action_done()
 
-    def _set_deposit_route(self, lines):
-        lines.route_id = self.warehouse.customer_deposit_route_id
-
     @users("user_customer_deposit")
     def test_delivery_fee_applied_when_sale_makes_deposit(self):
         stock_dict = {self.productA: {False: 1.0}}
@@ -77,18 +74,6 @@ class TestDeliveryFeeDeposit(TestStockCustomerDepositCommon):
 
     @users("user_customer_deposit")
     def test_delivery_fee_not_applied_when_delivering_deposit(self):
-        stock_dict = {self.productA: {False: 1.0}}
-        self.update_availiable_quantity(stock_dict)
-        sale = self._create_sale_order()
-        sale.action_confirm()
-        # Releasing only deposit-routed lines should not charge a second shipment.
-        self._set_deposit_route(sale.order_line)
-        self._validate_picking(sale.picking_ids)
-        self.assertTrue(sale.picking_ids._is_full_customer_deposit_delivery())
-        self.assertFalse(sale.order_line.filtered("is_delivery_fee"))
-
-    @users("user_customer_deposit")
-    def test_delivery_fee_not_applied_when_delivering_owned_deposit(self):
         stock_dict = {self.productA: {self.partner1: 1.0}}
         self.update_availiable_quantity(stock_dict)
         sale = self._create_sale_order()
@@ -114,7 +99,7 @@ class TestDeliveryFeeDeposit(TestStockCustomerDepositCommon):
     @users("user_customer_deposit")
     def test_delivery_fee_applied_to_mixed_deposit_delivery(self):
         stock_dict = {
-            self.productA: {False: 1.0},
+            self.productA: {self.partner1: 1.0},
             self.productB: {False: 1.0},
         }
         self.update_availiable_quantity(stock_dict)
@@ -123,9 +108,6 @@ class TestDeliveryFeeDeposit(TestStockCustomerDepositCommon):
         )
         sale.action_confirm()
         # Mixed deliveries still need a fee because regular stock is shipped too.
-        self._set_deposit_route(
-            sale.order_line.filtered(lambda line: line.product_id == self.productA)
-        )
         # Some flows do not propagate the sale carrier to this mixed picking.
         sale.picking_ids.carrier_id = False
         self.assertFalse(sale.picking_ids.carrier_id)

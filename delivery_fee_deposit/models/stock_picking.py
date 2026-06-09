@@ -49,7 +49,7 @@ class StockPicking(models.Model):
         )
 
     def _is_full_customer_deposit_delivery(self):
-        """Only skip fees when the whole picking comes from the deposit route."""
+        """Only skip fees when the whole picking releases customer-owned stock."""
         self.ensure_one()
         if self.sale_id.customer_deposit:
             return False
@@ -66,6 +66,20 @@ class StockPicking(models.Model):
     def _customer_deposit_moves(self):
         self.ensure_one()
         return self.move_ids.filtered(
-            lambda x: x.sale_line_id.route_id
-            == x.sale_line_id.warehouse_id.customer_deposit_route_id
+            lambda move: move._is_customer_owned_deposit_move()
+        )
+
+
+class StockMove(models.Model):
+    _inherit = "stock.move"
+
+    def _is_customer_owned_deposit_move(self):
+        """Pre-existing deposits are identified by stock owned by the customer."""
+        self.ensure_one()
+        partner = self.sale_line_id.order_id.partner_id.commercial_partner_id
+        if not partner or not self.move_line_ids:
+            return False
+        return all(
+            line.owner_id and line.owner_id.commercial_partner_id == partner
+            for line in self.move_line_ids
         )
