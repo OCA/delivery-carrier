@@ -35,6 +35,7 @@ class TestDeliveryFeeDeposit(TestStockCustomerDepositCommon):
                 "product_id": cls.delivery_product.id,
                 "fixed_price": 5.0,
                 "fee_product_id": cls.fee_product.id,
+                "fee_return_percentage": 75,
             }
         )
         cls.env.company.one_delivery_fee_by_sale_order = False
@@ -59,6 +60,22 @@ class TestDeliveryFeeDeposit(TestStockCustomerDepositCommon):
         picking.action_set_quantities_to_reservation()
         picking._action_done()
 
+    def _return_picking(self, picking, product=None):
+        return_wizard = Form(
+            self.env["stock.return.picking"].with_context(
+                active_ids=picking.ids,
+                active_id=picking.id,
+                active_model="stock.picking",
+            )
+        ).save()
+        if product:
+            for line in return_wizard.product_return_moves:
+                line.quantity = line.quantity if line.product_id == product else 0
+        return_action = return_wizard.create_returns()
+        return_pick = self.env["stock.picking"].browse(return_action["res_id"])
+        self._validate_picking(return_pick)
+        return return_pick
+
     @users("user_customer_deposit")
     def test_delivery_fee_applied_when_sale_makes_deposit(self):
         stock_dict = {self.productA: {False: 1.0}}
@@ -73,6 +90,19 @@ class TestDeliveryFeeDeposit(TestStockCustomerDepositCommon):
         self.assertEqual(fee_lines.delivery_fee_picking_id, sale.picking_ids)
 
     @users("user_customer_deposit")
+    def test_delivery_fee_reimbursed_when_deposit_creation_is_returned(self):
+        stock_dict = {self.productA: {False: 1.0}}
+        self.update_availiable_quantity(stock_dict)
+        sale = self._create_sale_order(customer_deposit=True)
+        sale.action_confirm()
+        self._validate_picking(sale.picking_ids)
+        fee_lines = sale.order_line.filtered("is_delivery_fee")
+
+        self._return_picking(sale.picking_ids)
+
+        self.assertEqual(fee_lines.product_uom_qty, 0.25)
+
+    @users("user_customer_deposit")
     def test_no_fee_for_full_customer_deposit_delivery_without_exemption(self):
         stock_dict = {self.productA: {self.partner1: 1.0}}
         self.update_availiable_quantity(stock_dict)
@@ -82,7 +112,7 @@ class TestDeliveryFeeDeposit(TestStockCustomerDepositCommon):
         # Existing customer-owned stock is already a deposit, even without routes.
         self._validate_picking(sale.picking_ids)
 
-        self.assertTrue(sale.picking_ids._is_full_customer_deposit_delivery())
+        self.assertTrue(sale.picking_ids._delivery_fee_deposit_is_full_delivery())
         self.assertFalse(sale.order_line.filtered("is_delivery_fee"))
 
     @users("user_customer_deposit")
@@ -99,6 +129,56 @@ class TestDeliveryFeeDeposit(TestStockCustomerDepositCommon):
 
     @users("user_customer_deposit")
     def test_delivery_fee_applied_to_mixed_deposit_delivery(self):
+        sale = self._create_mixed_deposit_delivery()
+
+        fee_lines = sale.order_line.filtered("is_delivery_fee")
+        self.assertEqual(len(fee_lines), 1)
+        self.assertEqual(fee_lines.delivery_fee_picking_id, sale.picking_ids)
+
+    @users("user_customer_deposit")
+    def test_mixed_deposit_delivery_keeps_commercial_partner_day_limit(self):
+        self.env.company.sudo().one_delivery_fee_by_commercial_partner_day = True
+        self.update_availiable_quantity({self.productB: {False: 1.0}})
+        sale = self._create_sale_order(products={self.productB: 1.0})
+        sale.action_confirm()
+        self._validate_picking(sale.picking_ids)
+        self.assertEqual(len(sale.order_line.filtered("is_delivery_fee")), 1)
+
+        mixed_sale = self._create_mixed_deposit_delivery()
+
+        self.assertFalse(mixed_sale.order_line.filtered("is_delivery_fee"))
+
+    @users("user_customer_deposit")
+    def test_full_deposit_delivery_does_not_count_for_commercial_partner_day_limit(
+        self,
+    ):
+        self.env.company.sudo().one_delivery_fee_by_commercial_partner_day = True
+        deposit_sale = self._create_full_deposit_delivery()
+        self.assertFalse(deposit_sale.order_line.filtered("is_delivery_fee"))
+
+        mixed_sale = self._create_mixed_deposit_delivery()
+
+        self.assertEqual(len(mixed_sale.order_line.filtered("is_delivery_fee")), 1)
+
+    @users("user_customer_deposit")
+    def test_mixed_deposit_returning_only_deposit_product_keeps_fee(self):
+        sale = self._create_mixed_deposit_delivery()
+        fee_lines = sale.order_line.filtered("is_delivery_fee")
+
+        self._return_picking(sale.picking_ids, product=self.productA)
+
+        self.assertEqual(fee_lines.product_uom_qty, 1)
+
+    @users("user_customer_deposit")
+    def test_mixed_deposit_returning_regular_product_reimburses_fee(self):
+        sale = self._create_mixed_deposit_delivery()
+        fee_lines = sale.order_line.filtered("is_delivery_fee")
+
+        self._return_picking(sale.picking_ids, product=self.productB)
+
+        self.assertEqual(fee_lines.product_uom_qty, 0.25)
+
+    def _create_mixed_deposit_delivery(self):
         stock_dict = {
             self.productA: {self.partner1: 1.0},
             self.productB: {False: 1.0},
@@ -113,7 +193,13 @@ class TestDeliveryFeeDeposit(TestStockCustomerDepositCommon):
         sale.picking_ids.carrier_id = False
         self.assertFalse(sale.picking_ids.carrier_id)
         self._validate_picking(sale.picking_ids)
-        self.assertFalse(sale.picking_ids._is_full_customer_deposit_delivery())
-        fee_lines = sale.order_line.filtered("is_delivery_fee")
-        self.assertEqual(len(fee_lines), 1)
-        self.assertEqual(fee_lines.delivery_fee_picking_id, sale.picking_ids)
+        self.assertFalse(sale.picking_ids._delivery_fee_deposit_is_full_delivery())
+        return sale
+
+    def _create_full_deposit_delivery(self):
+        self.update_availiable_quantity({self.productA: {self.partner1: 1.0}})
+        sale = self._create_sale_order()
+        sale.action_confirm()
+        self._validate_picking(sale.picking_ids)
+        self.assertTrue(sale.picking_ids._delivery_fee_deposit_is_full_delivery())
+        return sale

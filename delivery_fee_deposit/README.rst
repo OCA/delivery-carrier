@@ -86,6 +86,29 @@ A pre-existing customer deposit means customer-owned stock already available
 before the sale being delivered. Releasing it should not create a new delivery
 fee, even for successive deliveries.
 
+Return behavior matrix
+~~~~~~~~~~~~~~~~~~~~~~
+
++----------------------------------------------+-------------------------------------+-------------------------+
+| Scenario                                     | Return condition                    | Delivery fee reimbursed |
++==============================================+=====================================+=========================+
+| Sale creating a customer deposit             | Deposit creation picking fully      | Yes, per carrier config |
+|                                              | returned                            |                         |
++----------------------------------------------+-------------------------------------+-------------------------+
+| Delivery fully from customer deposit         | Returned                            | No fee existed          |
++----------------------------------------------+-------------------------------------+-------------------------+
+| Mixed delivery: deposit + regular stock      | Only deposit products returned      | No                      |
++----------------------------------------------+-------------------------------------+-------------------------+
+| Mixed delivery: deposit + regular stock      | All regular-stock products returned | Yes, per carrier config |
++----------------------------------------------+-------------------------------------+-------------------------+
+| Delivery fully from pre-existing customer    | Returned                            | No fee existed          |
+| deposit                                      |                                     |                         |
++----------------------------------------------+-------------------------------------+-------------------------+
+
+For mixed deliveries, the fee belongs to the regular-stock shipment. Returning
+only the customer-deposit products must not reimburse it; returning all regular
+products does.
+
 Bug Tracker
 ===========
 
