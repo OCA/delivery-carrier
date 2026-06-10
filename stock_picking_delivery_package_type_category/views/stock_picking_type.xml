@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="stock_picking_type_form_view">
+        <field
+            name="name"
+        >stock.picking.type.form (in stock_picking_delivery_package_type_category)</field>
+        <field name="model">stock.picking.type</field>
+        <field name="inherit_id" ref="stock.view_picking_type_form" />
+        <field name="arch" type="xml">
+            <field name="show_entire_packs" position="after">
+                <field
+                    name="authorized_package_type_cateogory_ids"
+                    widget="many2many_tags"
+                />
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="stock_picking_type_search_view">
+        <field
+            name="name"
+        >stock.picking.type.search (in stock_picking_delivery_package_type_category)</field>
+        <field name="model">stock.picking.type</field>
+        <field name="inherit_id" ref="stock.view_pickingtype_filter" />
+        <field name="arch" type="xml">
+            <field name="warehouse_id" position="after">
+                <field name="authorized_package_type_cateogory_ids" />
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="stock_picking_type_tree_view">
+        <field
+            name="name"
+        >stock.picking.type.tree (in stock_picking_delivery_package_type_category)</field>
+        <field name="model">stock.picking.type</field>
+        <field name="inherit_id" ref="stock.view_picking_type_tree" />
+        <field name="arch" type="xml">
+            <field name="warehouse_id" position="after">
+                <field
+                    name="authorized_package_type_cateogory_ids"
+                    widget="many2many_tags"
+                    optional="hide"
+                />
+            </field>
+        </field>
+    </record>
+
+</odoo>
