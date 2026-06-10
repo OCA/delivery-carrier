@@ -1,3 +1,4 @@
 odoo-test-helper
 vcrpy
 vcrpy-unittest
+odoo-addon-delivery_fee @ git+https://github.com/OCA/delivery-carrier.git@refs/pull/1104/head#subdirectory=setup/delivery_fee
