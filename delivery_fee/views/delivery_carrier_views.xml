@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_delivery_carrier_form" model="ir.ui.view">
+        <field name="inherit_id" ref="delivery.view_delivery_carrier_form" />
+        <field name="model">delivery.carrier</field>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='delivery_details']" position="inside">
+                <field
+                    name="fee_product_id"
+                    context="{'default_detailed_type': 'service', 'default_sale_ok': False, 'default_purchase_ok': False, 'default_invoice_policy': 'order'}"
+                />
+                <field
+                    name="fee_return_percentage"
+                    attrs="{'invisible': [('fee_product_id', '=', False)]}"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>

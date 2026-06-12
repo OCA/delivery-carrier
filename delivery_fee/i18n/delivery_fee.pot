@@ -1,0 +1,117 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* delivery_fee
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-24 14:16+0000\n"
+"PO-Revision-Date: 2026-02-24 14:16+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: delivery_fee
+#: model:ir.model.fields,help:delivery_fee.field_delivery_carrier__fee_return_percentage
+msgid ""
+"% of the fee to be returned to the customer in case of full return. E.g.: 0%"
+" for no return, 100% for full return"
+msgstr ""
+
+#. module: delivery_fee
+#: model_terms:ir.ui.view,arch_db:delivery_fee.report_invoice_document
+msgid "/ delivery"
+msgstr ""
+
+#. module: delivery_fee
+#: model:ir.model.fields,field_description:delivery_fee.field_sale_order__all_fee_pickings_returned
+msgid "All Fee Pickings Returned"
+msgstr ""
+
+#. module: delivery_fee
+#: model:ir.model,name:delivery_fee.model_res_company
+msgid "Companies"
+msgstr ""
+
+#. module: delivery_fee
+#: model:ir.model,name:delivery_fee.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: delivery_fee
+#: model:ir.model,name:delivery_fee.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: delivery_fee
+#: model:ir.model.fields,field_description:delivery_fee.field_res_partner__delivery_fee_exemption
+#: model:ir.model.fields,field_description:delivery_fee.field_res_users__delivery_fee_exemption
+msgid "Delivery Fee Exemption"
+msgstr ""
+
+#. module: delivery_fee
+#: model:ir.model.fields,field_description:delivery_fee.field_sale_order_line__delivery_fee_picking_id
+msgid "Delivery Fee Picking"
+msgstr ""
+
+#. module: delivery_fee
+#: model:ir.model.fields,field_description:delivery_fee.field_delivery_carrier__fee_product_id
+msgid "Fee Product"
+msgstr ""
+
+#. module: delivery_fee
+#: model:ir.model.fields,field_description:delivery_fee.field_delivery_carrier__fee_return_percentage
+msgid "Fee Return Percentage"
+msgstr ""
+
+#. module: delivery_fee
+#: model_terms:ir.ui.view,arch_db:delivery_fee.report_delivery_document2
+#: model_terms:ir.ui.view,arch_db:delivery_fee.report_invoice_document
+msgid "Fee info"
+msgstr ""
+
+#. module: delivery_fee
+#: model:ir.model.fields,field_description:delivery_fee.field_sale_order_line__is_delivery_fee
+msgid "Is a Delivery Fee"
+msgstr ""
+
+#. module: delivery_fee
+#: model:ir.model.fields,field_description:delivery_fee.field_res_company__one_delivery_fee_by_sale_order
+#: model:ir.model.fields,field_description:delivery_fee.field_res_config_settings__one_delivery_fee_by_sale_order
+msgid "One Delivery Fee By Sale Order"
+msgstr ""
+
+#. module: delivery_fee
+#: model:ir.model,name:delivery_fee.model_sale_order
+msgid "Sales Order"
+msgstr ""
+
+#. module: delivery_fee
+#: model:ir.model,name:delivery_fee.model_sale_order_line
+msgid "Sales Order Line"
+msgstr ""
+
+#. module: delivery_fee
+#: model:ir.model,name:delivery_fee.model_delivery_carrier
+msgid "Shipping Methods"
+msgstr ""
+
+#. module: delivery_fee
+#: model_terms:ir.ui.view,arch_db:delivery_fee.res_config_settings_view_form_sale
+msgid "The delivery fee will be applied just once per sale order"
+msgstr ""
+
+#. module: delivery_fee
+#: model:ir.model.fields,help:delivery_fee.field_res_company__one_delivery_fee_by_sale_order
+#: model:ir.model.fields,help:delivery_fee.field_res_config_settings__one_delivery_fee_by_sale_order
+msgid "The delivery fee will be applied just once to the order"
+msgstr ""
+
+#. module: delivery_fee
+#: model:ir.model,name:delivery_fee.model_stock_picking
+msgid "Transfer"
+msgstr ""
