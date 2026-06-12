@@ -233,8 +233,20 @@ class DeliveryCarrier(models.Model):
         ):
             ups_request = UpsRequest(self)
             response = ups_request.tracking_state_update(picking)
-            picking.delivery_state = response["delivery_state"]
-            picking.tracking_state_history = response["tracking_state_history"]
+            picking_vals = {
+                "delivery_state": response["delivery_state"],
+                "tracking_state_history": response["tracking_state_history"],
+                "tracking_state": response.get("tracking_state"),
+            }
+            if response.get("pod"):
+                picking_vals.update(
+                    {
+                        "pod_filename": f"ups_pod_{picking.carrier_tracking_ref}.html",
+                        "pod_file": response["pod"],
+                        "pod_error": False,
+                    }
+                )
+            picking.write(picking_vals)
 
     def ups_update_token(self):
         self.ensure_one()
