@@ -1,0 +1,1 @@
+This module enables the option to send a delivery to the carrier before the picking is validated.
