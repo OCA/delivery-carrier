@@ -2,6 +2,8 @@
 # Copyright 2020 FactorLibre
 # Copyright 2026 Raumschmiede GmbH
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+
+import mock
 from freezegun import freeze_time
 from odoo_test_helper import FakeModelLoader
 
@@ -9,6 +11,14 @@ from odoo import fields
 from odoo.tests import Form
 from odoo.tests.common import SavepointCase
 from odoo.tools import float_compare
+
+from ..models.stock_picking import (
+    DELIVERY_STATE_CANCELED,
+    DELIVERY_STATE_CUS_DELIVERED,
+    DELIVERY_STATE_INCIDENCE,
+    DELIVERY_STATE_NO_UPDATE,
+    DELIVERY_STATE_SHIPPING_RECORDED,
+)
 
 
 class TestDeliveryState(SavepointCase):
@@ -48,6 +58,8 @@ class TestDeliveryState(SavepointCase):
         cls.product = cls.env["product.product"].create(
             {"name": "Test product", "type": "product"}
         )
+        cls._set_stock(cls.product, 100)
+
         cls.partner = cls.env["res.partner"].create({"name": "Mr. Odoo"})
         cls.partner_shipping = cls.env["res.partner"].create(
             {"name": "Mr. Odoo (shipping)"}
@@ -84,6 +96,14 @@ class TestDeliveryState(SavepointCase):
         cls.loader.restore_registry()
         super().tearDownClass()
 
+    @classmethod
+    def _set_stock(cls, product, qty):
+        return cls.env["stock.quant"]._update_available_quantity(
+            product,
+            cls.env.ref("stock.stock_location_stock"),
+            qty,
+        )
+
     def test_delivery_state(self):
         delivery_wizard = Form(
             self.env["choose.delivery.carrier"].with_context(
@@ -106,7 +126,7 @@ class TestDeliveryState(SavepointCase):
         picking.action_confirm()
         picking.action_assign()
         picking.send_to_shipper()
-        self.assertEqual(picking.delivery_state, "shipping_recorded_in_carrier")
+        self.assertEqual(picking.delivery_state, DELIVERY_STATE_SHIPPING_RECORDED)
         self.assertTrue(picking.date_shipped)
         self.assertFalse(picking.tracking_state_history)
         picking.tracking_state_update()
@@ -117,7 +137,7 @@ class TestDeliveryState(SavepointCase):
             "fixed_cancel_shipment", lambda *args: True
         )
         picking.cancel_shipment()
-        self.assertEqual(picking.delivery_state, "canceled_shipment")
+        self.assertEqual(picking.delivery_state, DELIVERY_STATE_CANCELED)
         self.assertFalse(picking.date_shipped)
         self.assertFalse(picking.date_delivered)
 
@@ -138,7 +158,7 @@ class TestDeliveryState(SavepointCase):
         picking.action_confirm()
         picking.action_assign()
         picking.send_to_shipper()
-        self.assertEqual(picking.delivery_state, "no_update")
+        self.assertEqual(picking.delivery_state, DELIVERY_STATE_NO_UPDATE)
 
     def test_delivery_confirmation_send(self):
         """Check that the shipping notification is sent to the right partner"""
@@ -169,23 +189,65 @@ class TestDeliveryState(SavepointCase):
             picking._action_done()
         picking.tracking_state_update()
         # No days are set on the carrier, so delivery_state must be the same as before
-        self.assertEqual(picking.delivery_state, "shipping_recorded_in_carrier")
+        self.assertEqual(picking.delivery_state, DELIVERY_STATE_SHIPPING_RECORDED)
 
         self.carrier_test.days_fetch_tracking_state_update = 5
         # date_shipped is not within the time range, delivery_state must be set
         picking.tracking_state_update()
-        self.assertEqual(picking.delivery_state, "no_update")
+        self.assertEqual(picking.delivery_state, DELIVERY_STATE_NO_UPDATE)
 
-        data = {"delivery_state": "incidence"}
+        data = {"delivery_state": DELIVERY_STATE_INCIDENCE}
         with freeze_time("2026-03-30"):
             picking.with_context(track_data=data).tracking_state_update()
         # Doesn't matter whether the API returned a new delivery state as long as it is
         # not a final state. State must be set to no_update
-        self.assertEqual(picking.delivery_state, "no_update")
+        self.assertEqual(picking.delivery_state, DELIVERY_STATE_NO_UPDATE)
 
-        data = {"delivery_state": "customer_delivered"}
+        data = {"delivery_state": DELIVERY_STATE_CUS_DELIVERED}
         with freeze_time("2026-03-30"):
             picking.with_context(track_data=data).tracking_state_update()
 
         # API returned a final state, delivery_state must not be overwritten
-        self.assertEqual(picking.delivery_state, "customer_delivered")
+        self.assertEqual(picking.delivery_state, DELIVERY_STATE_CUS_DELIVERED)
+
+    def test_cron_pickings(self):
+        self.env.ref("stock.warehouse0").delivery_steps = "pick_pack_ship"
+        self.sale.action_confirm()
+
+        # Set PICK to done
+        pick = self.sale.picking_ids.filtered(lambda p: p.state == "assigned")
+        for ml in pick.move_line_ids:
+            ml.qty_done = ml.product_uom_qty
+        pick.button_validate()
+        pick.carrier_id = self.carrier_test
+
+        # Set PACK to done. Call carrier API with this picking
+        pack = self.sale.picking_ids.filtered(lambda p: p.state == "assigned")
+        for ml in pack.move_line_ids:
+            ml.qty_done = ml.product_uom_qty
+        pack.carrier_id = self.carrier_test
+        pack.button_validate()
+        self.assertTrue(pack)
+
+        # SET OUT to done
+        ship = self.sale.picking_ids.filtered(lambda p: p.state == "assigned")
+        for ml in ship.move_line_ids:
+            ml.qty_done = ml.product_uom_qty
+        ship.button_validate()
+        # NOTE: On version >= 18.0 use the carrier on the picking and the PACK rule
+        # should propagate the carrier to the OUT
+        ship.carrier_id = self.carrier_test
+
+        with mock.patch.object(
+            type(self.env["stock.picking"]),
+            "tracking_state_update",
+            autospec=True,
+        ) as mocked:
+            self.env.ref(
+                "delivery_state.ir_cron_delivery_state"
+            ).method_direct_trigger()
+
+            # As only the PACK picking was sent to the carrier API only for this
+            # the tracking state must be updated even if the other pickings have
+            # a carrier set
+            mocked.assert_called_once_with(pack)
