@@ -130,6 +130,7 @@ class TestDeliveryState(SavepointCase):
         self.assertTrue(picking.date_shipped)
         self.assertFalse(picking.tracking_state_history)
         picking.tracking_state_update()
+        self.assertEqual(picking.delivery_state, DELIVERY_STATE_NO_UPDATE)
         picking.date_delivered = fields.Datetime.now()
         with self.assertRaises(NotImplementedError):
             picking.cancel_shipment()

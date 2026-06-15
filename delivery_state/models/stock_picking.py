@@ -89,18 +89,21 @@ class StockPicking(models.Model):
         defined in the model as:
             <my_provider>_tracking_state_update
         It can be triggered manually or by the cron."""
-        for picking in self.filtered("carrier_id"):
+        for picking in self:
             method = "%s_tracking_state_update" % picking.delivery_type
             carrier = picking.carrier_id
 
-            if hasattr(carrier, method):
-                try:
-                    with self.env.cr.savepoint():
-                        getattr(carrier, method)(picking)
-                except Exception as e:
-                    if not self.env.context.get("lastcall"):
-                        raise
-                    picking.pod_error = str(e)
+            if not carrier or not hasattr(carrier, method):
+                picking.delivery_state = DELIVERY_STATE_NO_UPDATE
+                continue
+
+            try:
+                with self.env.cr.savepoint():
+                    getattr(carrier, method)(picking)
+            except Exception as e:
+                if not self.env.context.get("lastcall"):
+                    raise
+                picking.pod_error = str(e)
 
             days = carrier.days_fetch_tracking_state_update
             if (
