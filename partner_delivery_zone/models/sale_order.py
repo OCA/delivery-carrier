@@ -16,15 +16,24 @@ class SaleOrder(models.Model):
         index=True,
     )
 
-    @api.depends("partner_shipping_id")
+    @api.depends(
+        "partner_shipping_id", "company_id.restrict_zone_to_delivery_addresses"
+    )
     def _compute_delivery_zone_id(self):
         for so in self:
-            partner = (
-                so.partner_shipping_id
-                if so.partner_shipping_id.type == "delivery"
-                else so.partner_shipping_id.commercial_partner_id
-            )
-            so.delivery_zone_id = partner.delivery_zone_id
+            so.delivery_zone_id = False
+            if so.company_id.restrict_zone_to_delivery_addresses:
+                # Strict: zone only from delivery-type addresses
+                if so.partner_shipping_id.type == "delivery":
+                    so.delivery_zone_id = so.partner_shipping_id.delivery_zone_id
+            else:
+                # Permissive: delivery address first, fallback to commercial partner
+                partner = (
+                    so.partner_shipping_id
+                    if so.partner_shipping_id.type == "delivery"
+                    else so.partner_shipping_id.commercial_partner_id
+                )
+                so.delivery_zone_id = partner.delivery_zone_id
 
     def write(self, vals):
         # Update picking delivery zone if user update it in sale order that
