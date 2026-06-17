@@ -14,7 +14,10 @@
                 expr="//field[@name='child_ids']/form//field[@name='mobile']"
                 position="after"
             >
-                <field name="delivery_zone_id" invisible="type != 'delivery'" />
+                <field
+                    name="delivery_zone_id"
+                    invisible="company_id.restrict_zone_to_delivery_addresses and type != 'delivery'"
+                />
             </xpath>
         </field>
     </record>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.delivery.zone</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="stock.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//setting[@id='stock_move_email']" position="after">
+                <setting
+                    id="restrict_zone_to_delivery_addresses"
+                    string="Restrict Delivery Zone to Delivery Addresses"
+                    help="When enabled, the Delivery Zone field is only shown
+on delivery-type addresses."
+                    groups="base.group_system"
+                >
+                    <field name="restrict_zone_to_delivery_addresses" />
+                </setting>
+            </xpath>
+        </field>
+    </record>
+</odoo>
