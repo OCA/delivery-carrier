@@ -103,6 +103,17 @@ class SaleOrder(models.Model):
             order._auto_refresh_delivery()
         return res
 
+    def _update_order_line_info(self, product_id, quantity, **kwargs):
+        # Lines added from the product catalog are created directly through
+        # `sale.order.line.create`, whose `_auto_refresh_delivery` call is
+        # skipped because the order inherits the `auto_refresh_delivery`
+        # context. Trigger the refresh here so the delivery line is added like
+        # when adding the line from the order form.
+        res = super()._update_order_line_info(product_id, quantity, **kwargs)
+        if self:
+            self._auto_refresh_delivery()
+        return res
+
     def set_delivery_line(self, carrier, amount):
         if self._is_auto_add_delivery_line() and self.state in ("draft", "sent"):
             # This will trigger an _auto_refresh_delivery in write
