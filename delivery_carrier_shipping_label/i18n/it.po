@@ -1,0 +1,221 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* delivery_carrier_shipping_label
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2025-02-12 15:52+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.6.2\n"
+
+#. module: delivery_carrier_shipping_label
+#: model:ir.model.fields,field_description:delivery_carrier_shipping_label.field_shipping_label__access_token
+msgid "Access Token"
+msgstr "Token di accesso"
+
+#. module: delivery_carrier_shipping_label
+#: model:ir.model.fields,field_description:delivery_carrier_shipping_label.field_shipping_label__attachment_id
+msgid "Attachement"
+msgstr "Allegato"
+
+#. module: delivery_carrier_shipping_label
+#: model:ir.model.fields,field_description:delivery_carrier_shipping_label.field_shipping_label__local_url
+msgid "Attachment URL"
+msgstr "URL allegato"
+
+#. module: delivery_carrier_shipping_label
+#: model:ir.model.fields,field_description:delivery_carrier_shipping_label.field_shipping_label__checksum
+msgid "Checksum/SHA1"
+msgstr "Checksum/SHA1"
+
+#. module: delivery_carrier_shipping_label
+#: model:ir.model.fields,field_description:delivery_carrier_shipping_label.field_shipping_label__company_id
+msgid "Company"
+msgstr "Azienda"
+
+#. module: delivery_carrier_shipping_label
+#: model:ir.model.fields,field_description:delivery_carrier_shipping_label.field_shipping_label__create_uid
+msgid "Created by"
+msgstr "Creato da"
+
+#. module: delivery_carrier_shipping_label
+#: model:ir.model.fields,field_description:delivery_carrier_shipping_label.field_shipping_label__create_date
+msgid "Created on"
+msgstr "Creato il"
+
+#. module: delivery_carrier_shipping_label
+#: model:ir.model.fields,field_description:delivery_carrier_shipping_label.field_shipping_label__db_datas
+msgid "Database Data"
+msgstr "Dati database"
+
+#. module: delivery_carrier_shipping_label
+#: model:ir.model.fields,field_description:delivery_carrier_shipping_label.field_shipping_label__description
+msgid "Description"
+msgstr "Descrizione"
+
+#. module: delivery_carrier_shipping_label
+#: model:ir.model.fields,field_description:delivery_carrier_shipping_label.field_shipping_label__display_name
+msgid "Display Name"
+msgstr "Nome visualizzato"
+
+#. module: delivery_carrier_shipping_label
+#: model:ir.model.fields,field_description:delivery_carrier_shipping_label.field_shipping_label__datas
+msgid "File Content (base64)"
+msgstr "Contenuto file (base64)"
+
+#. module: delivery_carrier_shipping_label
+#: model:ir.model.fields,field_description:delivery_carrier_shipping_label.field_shipping_label__raw
+msgid "File Content (raw)"
+msgstr "Contenuto file (raw)"
+
+#. module: delivery_carrier_shipping_label
+#: model:ir.model.fields,field_description:delivery_carrier_shipping_label.field_shipping_label__file_size
+msgid "File Size"
+msgstr "Dimensione file"
+
+#. module: delivery_carrier_shipping_label
+#: model:ir.model.fields,field_description:delivery_carrier_shipping_label.field_shipping_label__file_type
+msgid "File type"
+msgstr "Tipo file"
+
+#. module: delivery_carrier_shipping_label
+#: model:ir.model.fields,field_description:delivery_carrier_shipping_label.field_shipping_label__id
+msgid "ID"
+msgstr "ID"
+
+#. module: delivery_carrier_shipping_label
+#: model:ir.model.fields,field_description:delivery_carrier_shipping_label.field_shipping_label__image_height
+msgid "Image Height"
+msgstr "Altezza immagine"
+
+#. module: delivery_carrier_shipping_label
+#: model:ir.model.fields,field_description:delivery_carrier_shipping_label.field_shipping_label__image_src
+msgid "Image Src"
+msgstr "Sorgente immagine"
+
+#. module: delivery_carrier_shipping_label
+#: model:ir.model.fields,field_description:delivery_carrier_shipping_label.field_shipping_label__image_width
+msgid "Image Width"
+msgstr "Larghezza immagine"
+
+#. module: delivery_carrier_shipping_label
+#: model:ir.model.fields,field_description:delivery_carrier_shipping_label.field_shipping_label__index_content
+msgid "Indexed Content"
+msgstr "Contenuto indicizzato"
+
+#. module: delivery_carrier_shipping_label
+#: model:ir.model.fields,field_description:delivery_carrier_shipping_label.field_shipping_label__public
+msgid "Is public document"
+msgstr "È un documento pubblico"
+
+#. module: delivery_carrier_shipping_label
+#: model:ir.model.fields,field_description:delivery_carrier_shipping_label.field_shipping_label__write_uid
+msgid "Last Updated by"
+msgstr "Ultimo aggiornamento di"
+
+#. module: delivery_carrier_shipping_label
+#: model:ir.model.fields,field_description:delivery_carrier_shipping_label.field_shipping_label__write_date
+msgid "Last Updated on"
+msgstr "Ultimo aggiornamento il"
+
+#. module: delivery_carrier_shipping_label
+#: model:ir.model.fields,field_description:delivery_carrier_shipping_label.field_shipping_label__mimetype
+msgid "Mime Type"
+msgstr "Tipo MIME"
+
+#. module: delivery_carrier_shipping_label
+#: model:ir.model.fields,field_description:delivery_carrier_shipping_label.field_shipping_label__name
+msgid "Name"
+msgstr "Nome"
+
+#. module: delivery_carrier_shipping_label
+#: model:ir.model.fields,field_description:delivery_carrier_shipping_label.field_shipping_label__original_id
+msgid "Original (unoptimized, unresized) attachment"
+msgstr "Allegato originale (non ottimizzato, non ridimensionato)"
+
+#. module: delivery_carrier_shipping_label
+#: model:ir.model.fields,field_description:delivery_carrier_shipping_label.field_shipping_label__package_id
+msgid "Pack"
+msgstr "Pacco"
+
+#. module: delivery_carrier_shipping_label
+#: model:ir.model.fields,field_description:delivery_carrier_shipping_label.field_shipping_label__res_field
+msgid "Resource Field"
+msgstr "Campo risorsa"
+
+#. module: delivery_carrier_shipping_label
+#: model:ir.model.fields,field_description:delivery_carrier_shipping_label.field_shipping_label__res_id
+msgid "Resource ID"
+msgstr "ID risorsa"
+
+#. module: delivery_carrier_shipping_label
+#: model:ir.model.fields,field_description:delivery_carrier_shipping_label.field_shipping_label__res_model
+msgid "Resource Model"
+msgstr "Modello risorsa"
+
+#. module: delivery_carrier_shipping_label
+#: model:ir.model.fields,field_description:delivery_carrier_shipping_label.field_shipping_label__res_name
+msgid "Resource Name"
+msgstr "Nome risorsa"
+
+#. module: delivery_carrier_shipping_label
+#: model:ir.model,name:delivery_carrier_shipping_label.model_shipping_label
+msgid "Shipping Label"
+msgstr "Etichetta spedizione"
+
+#. module: delivery_carrier_shipping_label
+#: model:ir.model,name:delivery_carrier_shipping_label.model_delivery_carrier
+msgid "Shipping Methods"
+msgstr "Metodi di spedizione"
+
+#. module: delivery_carrier_shipping_label
+#. odoo-python
+#: code:addons/delivery_carrier_shipping_label/models/stock_picking.py:0
+msgid ""
+"Some labels already exist for the picking %s.\n"
+"Please delete the existing labels in the attachments of this picking and try again"
+msgstr ""
+"Alcune etichette esistono già per il prelievo %s.\n"
+"Eliminare le etichette presenti negli allegati di questo prelievo e riprovare"
+
+#. module: delivery_carrier_shipping_label
+#: model:ir.model.fields,field_description:delivery_carrier_shipping_label.field_shipping_label__store_fname
+msgid "Stored Filename"
+msgstr "Nome file memorizzato"
+
+#. module: delivery_carrier_shipping_label
+#: model:ir.model,name:delivery_carrier_shipping_label.model_stock_picking
+msgid "Transfer"
+msgstr "Trasferimento"
+
+#. module: delivery_carrier_shipping_label
+#: model:ir.model.fields,field_description:delivery_carrier_shipping_label.field_shipping_label__type
+msgid "Type"
+msgstr "Tipo"
+
+#. module: delivery_carrier_shipping_label
+#: model:ir.model.fields,field_description:delivery_carrier_shipping_label.field_shipping_label__url
+msgid "Url"
+msgstr "URL"
+
+#. module: delivery_carrier_shipping_label
+#: model:ir.model.fields,field_description:delivery_carrier_shipping_label.field_shipping_label__voice_ids
+msgid "Voice"
+msgstr "Voce"
+
+#. module: delivery_carrier_shipping_label
+#: model:ir.model.fields,help:delivery_carrier_shipping_label.field_shipping_label__type
+msgid ""
+"You can either upload a file from your computer or copy/paste an internet "
+"link to your file."
+msgstr ""
+"È possibile caricare un file dal computer oppure fare copia/incolla di un "
+"collegamento Internet al file."
