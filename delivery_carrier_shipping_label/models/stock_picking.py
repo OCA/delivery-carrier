@@ -2,7 +2,7 @@
 # Copyright 2013-2016 Camptocamp SA
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import _, models
+from odoo import models
 from odoo.exceptions import UserError
 
 
@@ -41,10 +41,10 @@ class StockPicking(models.Model):
         )
         if labels:
             raise UserError(
-                _(
-                    "Some labels already exist for the picking %s.\n"
+                self.env._(
+                    "Some labels already exist for the picking %(picking_name)s.\n"
                     "Please delete the existing labels in the "
-                    "attachments of this picking and try again"
+                    "attachments of this picking and try again",
+                    picking_name=self.name,
                 )
-                % self.name
             )

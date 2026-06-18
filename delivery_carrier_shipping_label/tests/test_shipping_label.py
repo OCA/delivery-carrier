@@ -8,9 +8,19 @@ from odoo.tests.common import TransactionCase
 class TestShippingLabel(TransactionCase):
     def test_attach_shipping_label(self):
         """Test if attaching labels works correctly"""
+        product = self.env["product.product"].create(
+            {"name": "Test Shipping", "type": "service"}
+        )
+        carrier = self.env["delivery.carrier"].create(
+            {
+                "name": "Test Carrier",
+                "product_id": product.id,
+                "delivery_type": "fixed",
+            }
+        )
         picking = self.env["stock.picking"].new(
             dict(
-                carrier_id=self.env.ref("delivery.delivery_carrier").id,
+                carrier_id=carrier.id,
                 company_id=self.env.user.company_id.id,
             )
         )

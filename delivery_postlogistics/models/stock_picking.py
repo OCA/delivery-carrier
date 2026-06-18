@@ -254,7 +254,8 @@ class StockPicking(models.Model):
             raise UserError(
                 self.env._(
                     "No package type found either for the package "
-                    f"or for the {self.carrier_id.name} delivery method."
+                    "or for the %(carrier_name)s delivery method.",
+                    carrier_name=self.carrier_id.name,
                 )
             )
         package_codes = package_type._get_shipper_package_code_list()
@@ -269,8 +270,11 @@ class StockPicking(models.Model):
             raise UserError(
                 self.env._(
                     "No PostLogistics packaging services found "
-                    "in package type {package_type_name}, for picking {picking_name}."
-                ).format(package_type_name=package_type.name, picking_name=self.name)
+                    "in package type %(package_type_name)s,"
+                    " for picking %(picking_name)s.",
+                    package_type_name=package_type.name,
+                    picking_name=self.name,
+                )
             )
 
         # Activate phone notification ZAW3213

@@ -274,8 +274,8 @@ class PostlogisticsWebService:
             raise UserError(
                 delivery_carrier.env._(
                     "Postlogistics service is not accessible at the moment. Error code:"
-                    " %s. "
-                    "Please try again later." % (response.status_code or "None")
+                    " %(status_code)s. Please try again later.",
+                    status_code=response.status_code or "None",
                 )
             ) from error
 
@@ -377,11 +377,10 @@ class PostlogisticsWebService:
                 res["errors"] = []
                 for error in response_dict["item"]["errors"]:
                     res["errors"] = picking.env._(
-                        "Error code: %(code)s, Message: %(message)s"
-                    ) % {
-                        "code": error["code"],
-                        "message": error["message"],
-                    }
+                        "Error code: %(code)s, Message: %(message)s",
+                        code=error["code"],
+                        message=error["message"],
+                    )
                 results.append(res)
                 return results
 
