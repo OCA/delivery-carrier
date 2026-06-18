@@ -1,7 +1,7 @@
 # © 2013 Yannick Vaucher (Camptocamp SA)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 {
-    "name": "PostLogistics Shipping - “Barcode” web service",
+    "name": 'PostLogistics Shipping - "Barcode" web service',
     "summary": "Print PostLogistics shipping labels using the Barcode web service",
     "version": "19.0.1.0.0",
     "author": "Camptocamp,Odoo Community Association (OCA)",
