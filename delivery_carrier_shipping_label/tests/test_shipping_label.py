@@ -22,9 +22,7 @@ class TestShippingLabel(TransactionCase):
                 name="hello_world.pdf",
                 file=base64.b64encode(bytes("hello world", "utf8")),
                 file_type="pdf",
-                package_id=self.env["stock.package"]
-                .create(dict(name="package"))
-                .id,
+                package_id=self.env["stock.package"].create(dict(name="package")).id,
             )
         )
         self.assertEqual(label.name, "hello_world.pdf")

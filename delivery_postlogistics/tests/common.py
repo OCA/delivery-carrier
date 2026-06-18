@@ -50,9 +50,9 @@ def check_generate_label_body(request, saved_request):
         query_json = json.loads(request.body.decode("utf-8"))
         saved_json = json.loads(saved_request.body.decode("utf-8"))
         query_json["item"]["itemID"] = saved_json["item"]["itemID"]
-        assert (
-            query_json == saved_json
-        ), "Body request not corresponding to the saved one"
+        assert query_json == saved_json, (
+            "Body request not corresponding to the saved one"
+        )
 
 
 recorder.register_matcher("generate_label_body", check_generate_label_body)
@@ -75,12 +75,11 @@ class TestPostlogisticsCommon(BaseCommon):
 
     @classmethod
     def setUpClassUserCompany(cls):
-        cls.env.user.company_id.partner_id.with_context(skip_check_zip=True).write(
+        cls.env.user.company_id.partner_id.write(
             {
                 "street": "Rue de Lausanne 1",
                 "zip": "1030",
                 "city": "Bussigny",
-                "zip_id": False,
                 "country_id": cls.env.ref("base.ch").id,
             }
         )

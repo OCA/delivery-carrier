@@ -153,7 +153,7 @@ class PostlogisticsWebService:
         package_number = picking.get_package_number_hook(package)
         if not package_number:
             package_number = index
-        return "%02d%s" % (package_number, picking_num[-6:].zfill(6))
+        return f"{package_number:02d}{picking_num[-6:].zfill(6)}"
 
     def _prepare_item_list(self, picking, recipient, packages):
         """Return a list of item made from the pickings"""
@@ -399,4 +399,3 @@ class PostlogisticsWebService:
             )
             results.append(res)
         return results
-

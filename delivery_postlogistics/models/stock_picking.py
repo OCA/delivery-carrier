@@ -16,6 +16,7 @@ from ..postlogistics.web_service import (
     sanitize_string,
 )
 
+
 class StockPicking(models.Model):
     _inherit = "stock.picking"
 
@@ -141,7 +142,10 @@ class StockPicking(models.Model):
             tracking_numbers = []
             for label in label_result:
                 for label_value in label["value"]:
-                    if _compile_itemid.sub("", package.name) in label_value["item_id"].split("+")[-1]:
+                    if (
+                        _compile_itemid.sub("", package.name)
+                        in label_value["item_id"].split("+")[-1]
+                    ):
                         tracking_numbers.append(label_value["tracking_number"])
                         labels.append(
                             self.info_from_label(
