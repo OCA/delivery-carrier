@@ -36,6 +36,14 @@ are not invoiceable, therefore not added in invoices.
 .. contents::
    :local:
 
+Configuration
+=============
+
+#. Go to *Settings > Sales > Shipping*.
+
+-  Hide free delivery lines: Hide free delivery lines in sale order
+   report
+
 Bug Tracker
 ===========
 
@@ -58,20 +66,20 @@ Authors
 Contributors
 ------------
 
-- `Tecnativa <https://www.tecnativa.com>`__:
+-  `Tecnativa <https://www.tecnativa.com>`__:
 
-  - Vicent Cubells
-  - Pedro M. Baeza
+   -  Vicent Cubells
+   -  Pedro M. Baeza
 
-- `Camptocamp <https://www.camptocamp.com>`__:
+-  `Camptocamp <https://www.camptocamp.com>`__:
 
-  - Guewen Baconnier
-  - Thierry Ducrest
+   -  Guewen Baconnier
+   -  Thierry Ducrest
 
-- `Trobz <https://trobz.com>`__:
+-  `Trobz <https://trobz.com>`__:
 
-     - Son Ho <sonhd@trobz.com>
-     - Nhan Tran <nhant@trobz.com>
+      -  Son Ho <sonhd@trobz.com>
+      -  Nhan Tran <nhant@trobz.com>
 
 Other credits
 -------------
