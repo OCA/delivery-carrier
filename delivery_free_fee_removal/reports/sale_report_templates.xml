@@ -8,7 +8,9 @@
             expr="//tbody[hasclass('sale_tbody')]/t[@t-as='line']/tr"
             position="attributes"
         >
-            <attribute name="t-if">not line.is_free_delivery</attribute>
+            <attribute
+                name="t-if"
+            >not line.is_free_delivery or (line.is_free_delivery and not line.company_id.report_saleorder_hide_free_delivery_lines)</attribute>
         </xpath>
     </template>
 </odoo>

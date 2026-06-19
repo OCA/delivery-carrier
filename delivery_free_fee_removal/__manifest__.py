@@ -4,12 +4,16 @@
 {
     "name": "Delivery Free Fee Removal",
     "summary": "Hide free fee lines on sales orders",
-    "version": "18.0.1.0.0",
+    "version": "18.0.1.1.0",
     "category": "Delivery",
     "website": "https://github.com/OCA/delivery-carrier",
     "author": "Tecnativa, Camptocamp, Odoo Community Association (OCA)",
     "installable": True,
     "license": "AGPL-3",
     "depends": ["delivery"],
-    "data": ["views/sale_order_views.xml", "reports/sale_report_templates.xml"],
+    "data": [
+        "views/sale_order_views.xml",
+        "views/res_config_settings_views.xml",
+        "reports/sale_report_templates.xml",
+    ],
 }
