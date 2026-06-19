@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="sale.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <block name="sale_shipping_setting_container" position="inside">
+                <setting
+                    id="delivery_free_fee_removal"
+                    string="Hide free delivery lines"
+                    help="Hide free delivery lines in PDF"
+                >
+                    <field name="report_saleorder_hide_free_delivery_lines" />
+                </setting>
+            </block>
+        </field>
+    </record>
+</odoo>
