@@ -167,9 +167,20 @@ class UpsRequest:
                 City=partner.city,
                 StateProvinceCode=partner.state_id.code,
                 PostalCode=partner.zip,
-                CountryCode=partner.country_id.code,
+                CountryCode=self._get_country_code(partner),
             ),
         )
+
+    def _get_country_code(self, partner):
+        country_code = partner.country_id.code
+        # The UPS API expects the country code to be XC for Ceuta and XL for Melilla
+        special_state_codes = {"CE": "XC", "ME": "XL"}
+        if (
+            partner.country_id.code == "ES"
+            and partner.state_id.code in special_state_codes
+        ):
+            country_code = special_state_codes[partner.state_id.code]
+        return country_code
 
     def _label_data(self):
         # When PDF is selected,
