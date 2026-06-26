@@ -438,8 +438,9 @@ class UpsRequest:
                             warn=warning.get("message"),
                         )
                     )
-
-        except Exception:
+            picking.write({"tracking_json": shipment, "pod_error": False})
+        except Exception as ex:
+            picking.write({"pod_error": str(ex)})
             states_list.append(
                 _("{} - Error retrieving the tracking information.").format(
                     datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
