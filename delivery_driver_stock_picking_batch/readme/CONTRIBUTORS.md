@@ -1,0 +1,6 @@
+-   Emilio Pascual ([Moduon](https://www.moduon.team/))
+-   Rafael Blasco ([Moduon](https://www.moduon.team/))
+- [Heliconia Solutions Pvt. Ltd.](https://www.heliconia.io)
+  - Bhavesh Heliconia
+- [Studio73](https://www.studio73.es)
+  - Eugenio Micó
