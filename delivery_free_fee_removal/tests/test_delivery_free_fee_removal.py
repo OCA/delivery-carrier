@@ -2,10 +2,10 @@
 # Copyright 2022 Tecnativa - Víctor Martínez
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
-from odoo.tests.common import TransactionCase
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class TestDeliveryFreeFeeRemoval(TransactionCase):
+class TestDeliveryFreeFeeRemoval(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
