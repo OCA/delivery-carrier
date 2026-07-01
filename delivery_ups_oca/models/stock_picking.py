@@ -39,6 +39,7 @@ class StockPicking(models.Model):
                 and rec.partner_id
                 and rec.partner_id.country_id
                 in rec.carrier_id.country_groups.mapped("country_ids")
+                and not rec.partner_id.state_id.outside_customs_territory
             ):
                 rec.ups_paperless_auto_send = True
             else:
@@ -55,6 +56,7 @@ class StockPicking(models.Model):
                 and picking.partner_id
                 and picking.partner_id.country_id
                 in picking.carrier_id.country_groups.mapped("country_ids")
+                and not picking.partner_id.state_id.outside_customs_territory
             ):
                 picking.ups_paperless_auto_send = True
         return pickings
