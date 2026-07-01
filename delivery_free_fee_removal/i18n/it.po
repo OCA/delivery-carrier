@@ -48,11 +48,9 @@ msgid "Is Free Delivery"
 msgstr "È una consegna gratuita"
 
 #. module: delivery_free_fee_removal
-#: model:ir.model,name:delivery_free_fee_removal.model_sale_order
-msgid "Sales Order"
-msgstr "Ordine di vendita"
-
-#. module: delivery_free_fee_removal
 #: model:ir.model,name:delivery_free_fee_removal.model_sale_order_line
 msgid "Sales Order Line"
 msgstr "Riga ordine di vendita"
+
+#~ msgid "Sales Order"
+#~ msgstr "Ordine di vendita"
