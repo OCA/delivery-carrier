@@ -70,11 +70,13 @@ class PurchaseOrderLine(models.Model):
     delivery_picking_orig_id = fields.Many2one(
         comodel_name="stock.picking", string="Origin picking (delivery)"
     )
+    # Add recursive attribute for the new depends we have set
+    qty_to_invoice = fields.Float(recursive=True)
 
-    @api.depends("is_delivery")
+    @api.depends("is_delivery", "order_id.order_line.qty_to_invoice")
     def _compute_qty_invoiced(self):
-        """Overwrite and set qty_to_invoice to 0 for delivery lines if all lines
-        have nothing to invoice."""
+        # Overwrite and set qty_to_invoice to 0 for delivery lines if all lines
+        # have nothing to invoice
         precision = self.env["decimal.precision"].precision_get(
             "Product Unit of Measure"
         )
