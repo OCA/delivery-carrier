@@ -100,6 +100,7 @@ class UpsRequest:
         # Generate a new token
         if status.status_code == 401:
             self._get_new_token()
+            headers["Authorization"] = f"Bearer {self.token}"
             status = self._send_request(url, json, data, headers, method)
         status = status.json()
         ups_last_request = f"URL: {self.url}\nData: {data}\nJSON: {json}"
