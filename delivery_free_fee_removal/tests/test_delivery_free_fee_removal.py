@@ -2,10 +2,13 @@
 # Copyright 2022 Tecnativa - Víctor Martínez
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
-from odoo.tests.common import TransactionCase
+from odoo.tests import Form
+from odoo.tools import mute_logger
+
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class TestDeliveryFreeFeeRemoval(TransactionCase):
+class TestDeliveryFreeFeeRemoval(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -126,3 +129,30 @@ class TestDeliveryFreeFeeRemoval(TransactionCase):
         report = self.report_obj._get_report_from_name("sale.report_saleorder")
         res = report._render_qweb_text(report, self.sale.ids, False)
         self.assertNotRegex(str(res[0]), "Test Delivery")
+
+    def _set_delivery_carrier(self, carrier):
+        form = Form(
+            self.env["choose.delivery.carrier"].with_context(
+                default_order_id=self.sale.id,
+            ),
+            view="delivery.choose_delivery_carrier_view_form",
+        )
+        form.carrier_id = carrier
+        shipping = form.save()
+        shipping.button_confirm()
+
+    @mute_logger("odoo.models.unlink")
+    def test_update_carrier_after_so_confirm(self):
+        self.delivery.fixed_price = 0
+        self._set_delivery_carrier(self.delivery)
+        self.sale.action_confirm()
+        other_carrier = self.env["delivery.carrier"].create(
+            {
+                "name": "Other Delivery (delivery_free_fee_removal)",
+                "delivery_type": "fixed",
+                "fixed_price": 10,
+                "free_over": True,
+                "product_id": self.delivery.product_id.id,
+            }
+        )
+        self._set_delivery_carrier(other_carrier)  # This shouldn't fail
