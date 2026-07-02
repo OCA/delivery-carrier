@@ -84,8 +84,8 @@ msgstr "Inkooporderregel"
 #. odoo-python
 #: code:addons/delivery_purchase/models/stock_picking.py:0
 msgid ""
-"Shipment sent to carrier %(carrier_name)s for shipping with tracking number "
-"%(tracking_ref)s<br/>Cost: %(carrier_price)s %(currency_name)s"
+"Shipment sent to carrier %(carrier_name)s for shipping with tracking number %"
+"(tracking_ref)s<br/>Cost: %(carrier_price)s %(currency_name)s"
 msgstr ""
 "Zending verzonden naar vervoerder %(carrier_name)s voor verzending met "
 "trackingnummer %(tracking_ref)s<br/>Kosten: %(carrier_price)s %"
@@ -107,6 +107,11 @@ msgstr "De verzending is gratis omdat het orderbedrag hoger is dan %.2f."
 #: code:addons/delivery_purchase/models/delivery_carrier.py:0
 msgid "There is no matching delivery rule."
 msgstr "Er is geen overeenkomende leveringsregel."
+
+#. module: delivery_purchase
+#: model:ir.model.fields,field_description:delivery_purchase.field_purchase_order_line__qty_to_invoice
+msgid "To Invoice Quantity"
+msgstr ""
 
 #. module: delivery_purchase
 #: model:ir.model,name:delivery_purchase.model_stock_picking

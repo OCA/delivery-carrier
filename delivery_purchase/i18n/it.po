@@ -27,16 +27,22 @@ msgid "Delivery Price"
 msgstr "Prezzo di consegna"
 
 #. module: delivery_purchase
+#: model:ir.model.fields,field_description:delivery_purchase.field_delivery_carrier__display_name
+#: model:ir.model.fields,field_description:delivery_purchase.field_purchase_order__display_name
+#: model:ir.model.fields,field_description:delivery_purchase.field_purchase_order_line__display_name
+#: model:ir.model.fields,field_description:delivery_purchase.field_stock_picking__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: delivery_purchase
 #. odoo-python
 #: code:addons/delivery_purchase/models/delivery_carrier.py:0
-#, python-format
 msgid "Error: no matching grid."
 msgstr "Errore: nessuna griglia corrispondente."
 
 #. module: delivery_purchase
 #. odoo-python
 #: code:addons/delivery_purchase/models/delivery_carrier.py:0
-#, python-format
 msgid "Error: this delivery method is not available for this address."
 msgstr ""
 "Errore: questo metodo di consegna non è disponibile per questo indirizzo."
@@ -44,9 +50,16 @@ msgstr ""
 #. module: delivery_purchase
 #. odoo-python
 #: code:addons/delivery_purchase/models/purchase_order.py:0
-#, python-format
 msgid "Free Shipping"
 msgstr "Spedizione gratuita"
+
+#. module: delivery_purchase
+#: model:ir.model.fields,field_description:delivery_purchase.field_delivery_carrier__id
+#: model:ir.model.fields,field_description:delivery_purchase.field_purchase_order__id
+#: model:ir.model.fields,field_description:delivery_purchase.field_purchase_order_line__id
+#: model:ir.model.fields,field_description:delivery_purchase.field_stock_picking__id
+msgid "ID"
+msgstr ""
 
 #. module: delivery_purchase
 #: model:ir.model.fields,field_description:delivery_purchase.field_purchase_order_line__is_delivery
@@ -71,10 +84,9 @@ msgstr "Riga ordine di acquisto"
 #. module: delivery_purchase
 #. odoo-python
 #: code:addons/delivery_purchase/models/stock_picking.py:0
-#, python-format
 msgid ""
-"Shipment sent to carrier %(carrier_name)s for shipping with tracking number "
-"%(tracking_ref)s<br/>Cost: %(carrier_price)s %(currency_name)s"
+"Shipment sent to carrier %(carrier_name)s for shipping with tracking number %"
+"(tracking_ref)s<br/>Cost: %(carrier_price)s %(currency_name)s"
 msgstr ""
 "Spedizione inviata al corriere %(carrier_name)s per spedire con tracciamento "
 "numero %(tracking_ref)s<br/>Costo: %(carrier_price)s %(currency_name)s"
@@ -87,16 +99,19 @@ msgstr "Metodi di spedizione"
 #. module: delivery_purchase
 #. odoo-python
 #: code:addons/delivery_purchase/models/delivery_carrier.py:0
-#, python-format
 msgid "The shipping is free since the order amount exceeds %.2f."
 msgstr "La spedizione è gratuita poiché il valore dell'ordine supera %.2f."
 
 #. module: delivery_purchase
 #. odoo-python
 #: code:addons/delivery_purchase/models/delivery_carrier.py:0
-#, python-format
 msgid "There is no matching delivery rule."
 msgstr "Non c'è una regola di consegna corrispondente."
+
+#. module: delivery_purchase
+#: model:ir.model.fields,field_description:delivery_purchase.field_purchase_order_line__qty_to_invoice
+msgid "To Invoice Quantity"
+msgstr ""
 
 #. module: delivery_purchase
 #: model:ir.model,name:delivery_purchase.model_stock_picking
