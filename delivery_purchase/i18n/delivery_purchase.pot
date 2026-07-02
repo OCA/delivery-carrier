@@ -103,6 +103,11 @@ msgid "There is no matching delivery rule."
 msgstr ""
 
 #. module: delivery_purchase
+#: model:ir.model.fields,field_description:delivery_purchase.field_purchase_order_line__qty_to_invoice
+msgid "To Invoice Quantity"
+msgstr ""
+
+#. module: delivery_purchase
 #: model:ir.model,name:delivery_purchase.model_stock_picking
 msgid "Transfer"
 msgstr ""
