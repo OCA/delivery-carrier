@@ -13,6 +13,7 @@ from odoo import _
 from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
+UPS_TAX_IDENTIFICATION_NUMBER_MAX_LENGTH = 15
 
 
 class UpsRequest:
@@ -153,13 +154,21 @@ class UpsRequest:
             remaining = remaining[split_at:]
         return lines
 
+    def _get_tax_identification_number(self, partner):
+        # Remove any whitespace before enforcing UPS' 15-character limit.
+        vat = "".join((partner.vat or "").split())
+        return (
+            vat
+            if vat and len(vat) <= UPS_TAX_IDENTIFICATION_NUMBER_MAX_LENGTH
+            else False
+        )
+
     def _partner_to_shipping_data(self, partner, **kwargs):
         """Return a dict describing a partner for the shipping request"""
-        return dict(
+        vals = dict(
             **kwargs,
             Name=((partner.parent_id or partner).name or "")[:35],
             AttentionName=(partner.name or "")[:35],
-            TaxIdentificationNumber=partner.vat,
             Phone=dict(Number=partner.phone or partner.mobile),
             EMailAddress=partner.email,
             Address=dict(
@@ -170,6 +179,10 @@ class UpsRequest:
                 CountryCode=self._get_country_code(partner),
             ),
         )
+        tax_identification_number = self._get_tax_identification_number(partner)
+        if tax_identification_number:
+            vals["TaxIdentificationNumber"] = tax_identification_number
+        return vals
 
     def _get_country_code(self, partner):
         country_code = partner.country_id.code
