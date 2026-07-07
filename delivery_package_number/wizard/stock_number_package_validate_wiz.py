@@ -43,12 +43,29 @@ class StockNumberPackageValidateWiz(models.TransientModel):
             self.pick_ids.write({"number_of_packages": self.number_of_packages})
         # put context key for avoiding `base_delivery_carrier_label` auto-packaging
         # feature
+        res = None
         if not self.env.context.get("skip_picking_validate", False):
-            self.pick_ids.with_context(
+            res = self.pick_ids.with_context(
                 set_default_package=False, bypass_set_number_of_packages=True
             ).button_validate()
         if self.print_package_label:
-            return self._print_package_label()
+            report_action = self._print_package_label()
+            if not report_action:
+                return res
+            params = res.get("params") if isinstance(res, dict) else None
+            reports = params.get("reports") if isinstance(params, dict) else None
+            if isinstance(reports, list):
+                reports.append(report_action)
+            else:
+                params = {"reports": [report_action]}
+                if isinstance(res, dict):
+                    params["anotherAction"] = res.copy()
+                res = {
+                    "type": "ir.actions.client",
+                    "tag": "do_multi_print",
+                    "params": params,
+                }
+        return res
 
     def _print_package_label(self):
         """Method to be inherited by other modules and allow print the report in
