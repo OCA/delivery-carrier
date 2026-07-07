@@ -884,3 +884,19 @@ class TestDeliveryUps(TestDeliveryUpsBase):
         address_lines = ups_request._build_address_lines(self.partner)
         self.assertEqual(len(address_lines), 1)
         self.assertEqual(address_lines[0], "12345 Short Street Name Suite 678")
+
+    def test_ups_partner_to_shipping_data_tax_identification_number_limit(self):
+        """Do not send TaxIdentificationNumber values rejected by UPS length limit."""
+        ups_request = UpsRequest(self.carrier)
+        self.partner.with_context(no_vat_validation=True).write({"vat": "X" * 16})
+        shipping_data = ups_request._partner_to_shipping_data(self.partner)
+        self.assertNotIn("TaxIdentificationNumber", shipping_data)
+
+    def test_ups_partner_to_shipping_data_tax_identification_number_sanitized(self):
+        """Send valid-length tax ids without whitespace."""
+        ups_request = UpsRequest(self.carrier)
+        self.partner.with_context(no_vat_validation=True).write(
+            {"vat": "IT 12345678901"}
+        )
+        shipping_data = ups_request._partner_to_shipping_data(self.partner)
+        self.assertEqual(shipping_data["TaxIdentificationNumber"], "IT12345678901")
