@@ -3,7 +3,7 @@
 {
     "name": "Delivery Package Number",
     "summary": "Set or compute number of packages for a picking",
-    "version": "18.0.2.1.0",
+    "version": "18.0.2.1.1",
     "category": "Delivery",
     "website": "https://github.com/OCA/delivery-carrier",
     "author": "Tecnativa, Odoo Community Association (OCA)",
