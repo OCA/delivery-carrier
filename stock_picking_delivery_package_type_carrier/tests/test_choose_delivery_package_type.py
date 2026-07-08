@@ -27,6 +27,8 @@ class TestChooseDeliveryPackageType(CommonChooseDeliveryPackage, BaseCommon):
         self.assertEqual(
             self.wizard.package_type_domain,
             [
+                "&",
+                ("package_carrier_type", "=", carrier.delivery_type),
                 "|",
                 ("allowed_package_carrier_ids", "=", False),
                 ("allowed_package_carrier_ids", "in", carrier.ids),

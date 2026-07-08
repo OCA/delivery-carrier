@@ -8,6 +8,7 @@
             <xpath expr="//field[@name='package_carrier_type']" position="after">
                 <field
                     name="allowed_package_carrier_ids"
+                    widget="many2many_tags"
                     domain="[('delivery_type', '=', package_carrier_type)] if package_carrier_type != 'none' else []"
                 />
             </xpath>
