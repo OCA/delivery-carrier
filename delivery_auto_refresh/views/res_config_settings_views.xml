@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.sale</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="9" />
+        <field
+            name="inherit_id"
+            ref="sale_order_carrier_auto_assign.res_config_settings_view_form_sale"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//setting[@id='carrier_on_create']" position="after">
+                <setting
+                    id="sale_auto_add_delivery_line"
+                    help="On the sales quotation, refresh the shipping cost line when saving."
+                    company_dependent="1"
+                >
+                    <field name="sale_auto_add_delivery_line" />
+                </setting>
+                <setting
+                    id="sale_refresh_delivery_after_picking"
+                    help="After delivering a sales order, update the shipping cost line based on what has been delivered."
+                    company_dependent="1"
+                >
+                    <field name="sale_refresh_delivery_after_picking" />
+                </setting>
+                <setting
+                    id="sale_auto_void_delivery_line"
+                    help="Void the shipping cost line when the delivery is returned before invoicing."
+                    company_dependent="1"
+                >
+                    <field name="sale_auto_void_delivery_line" />
+                </setting>
+            </xpath>
+        </field>
+    </record>
+</odoo>
