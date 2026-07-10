@@ -21,6 +21,7 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
+[delivery_auto_refresh](delivery_auto_refresh/) | 19.0.1.0.0 |  | Auto-refresh delivery price in sales orders
 [delivery_carrier_account](delivery_carrier_account/) | 19.0.1.0.0 |  | Delivery Carrier Account
 [delivery_carrier_agency](delivery_carrier_agency/) | 19.0.1.0.0 |  | Add a model for Carrier Agencies
 [delivery_carrier_manual_price](delivery_carrier_manual_price/) | 19.0.1.0.0 |  | Allow setting manual shipping cost in sale order.
