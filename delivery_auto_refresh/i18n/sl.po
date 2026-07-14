@@ -9,16 +9,16 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-13 03:45+0000\n"
-"PO-Revision-Date: 2020-08-11 15:00+0000\n"
-"Last-Translator: Matjaz Mozetic <matjaz@matmoz.si>\n"
+"PO-Revision-Date: 2026-07-14 05:46+0000\n"
+"Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: Slovenian (https://www.transifex.com/oca/teams/23907/sl/)\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
-"%100==4 ? 2 : 3;\n"
-"X-Generator: Weblate 3.10\n"
+"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
+"n%100==4 ? 2 : 3;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: delivery_auto_refresh
 #: model_terms:ir.ui.view,arch_db:delivery_auto_refresh.res_config_settings_view_form
@@ -26,59 +26,61 @@ msgid ""
 "After delivering a sales order, update the shipping cost line based on what "
 "has been delivered"
 msgstr ""
+"Po izvedbi prodajnega naloga posodobi vrstico s stroški dostave glede na to, "
+"kar je bilo dostavljeno"
 
 #. module: delivery_auto_refresh
 #: model:ir.model.fields,field_description:delivery_auto_refresh.field_sale_order__available_carrier_ids
 msgid "Available Carrier"
-msgstr ""
+msgstr "Prevoznik na voljo"
 
 #. module: delivery_auto_refresh
 #: model:ir.model,name:delivery_auto_refresh.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Družbe"
 
 #. module: delivery_auto_refresh
 #: model:ir.model,name:delivery_auto_refresh.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Nastavitve"
 
 #. module: delivery_auto_refresh
 #: model_terms:ir.ui.view,arch_db:delivery_auto_refresh.res_config_settings_view_form
 msgid "On the sales quotation, add the shipping method on creation."
-msgstr ""
+msgstr "Na ponudbo dodajte način dostave že ob njenem nastanku."
 
 #. module: delivery_auto_refresh
 #: model_terms:ir.ui.view,arch_db:delivery_auto_refresh.res_config_settings_view_form
 msgid "On the sales quotation, refresh the shipping cost line when saving"
-msgstr ""
+msgstr "Na ponudbi ob shranjevanju posodobi vrstico s stroški dostave"
 
 #. module: delivery_auto_refresh
 #: model:ir.model.fields,field_description:delivery_auto_refresh.field_res_company__sale_refresh_delivery_after_picking
 #: model:ir.model.fields,field_description:delivery_auto_refresh.field_res_config_settings__sale_refresh_delivery_after_picking
 msgid "Refresh delivery after picking automatically"
-msgstr ""
+msgstr "Ob zaključku izdaje dobavnice samodejno posodobi način dostave"
 
 #. module: delivery_auto_refresh
 #: model:ir.model.fields,field_description:delivery_auto_refresh.field_res_company__sale_auto_add_delivery_line
 #: model:ir.model.fields,field_description:delivery_auto_refresh.field_res_config_settings__sale_auto_add_delivery_line
 msgid "Refresh shipping cost line automatically"
-msgstr ""
+msgstr "Samodejno osveži vrstico s stroški odpreme"
 
 #. module: delivery_auto_refresh
 #: model:ir.model,name:delivery_auto_refresh.model_sale_order
 msgid "Sales Order"
-msgstr ""
+msgstr "Prodajni nalog"
 
 #. module: delivery_auto_refresh
 #: model:ir.model,name:delivery_auto_refresh.model_sale_order_line
 msgid "Sales Order Line"
-msgstr ""
+msgstr "Prodajna postavka"
 
 #. module: delivery_auto_refresh
 #: model:ir.model.fields,field_description:delivery_auto_refresh.field_res_company__sale_auto_assign_carrier_on_create
 #: model:ir.model.fields,field_description:delivery_auto_refresh.field_res_config_settings__sale_auto_assign_carrier_on_create
 msgid "Set default shipping method automatically"
-msgstr ""
+msgstr "Samodejna nastavitev privzete metode dostave"
 
 #. module: delivery_auto_refresh
 #: model:ir.model,name:delivery_auto_refresh.model_stock_picking
@@ -89,10 +91,10 @@ msgstr "Premestitev"
 #: model:ir.model.fields,field_description:delivery_auto_refresh.field_res_company__sale_auto_void_delivery_line
 #: model:ir.model.fields,field_description:delivery_auto_refresh.field_res_config_settings__sale_auto_void_delivery_line
 msgid "Void delivery lines automatically"
-msgstr ""
+msgstr "Samodejno izniči postavke odpreme"
 
 #. module: delivery_auto_refresh
 #: model_terms:ir.ui.view,arch_db:delivery_auto_refresh.res_config_settings_view_form
 msgid ""
 "Void the shipping cost line when the delivery is returned before invoicing"
-msgstr ""
+msgstr "Izniči postavko stroškov odpreme, če je dobava vrnjena pred obračunom"
