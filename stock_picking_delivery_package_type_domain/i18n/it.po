@@ -22,6 +22,16 @@ msgid "Delivery Package Selection Wizard"
 msgstr "Procedura guidata selezione collo consegna"
 
 #. module: stock_picking_delivery_package_type_domain
+#: model:ir.model.fields,field_description:stock_picking_delivery_package_type_domain.field_stock_picking_type__filter_package_type_on_put_in_pack
+msgid "Filter package type on put in pack"
+msgstr ""
+
+#. module: stock_picking_delivery_package_type_domain
 #: model:ir.model.fields,field_description:stock_picking_delivery_package_type_domain.field_choose_delivery_package__package_type_domain
 msgid "Package Type Domain"
 msgstr "Dominio tipo collo"
+
+#. module: stock_picking_delivery_package_type_domain
+#: model:ir.model,name:stock_picking_delivery_package_type_domain.model_stock_picking_type
+msgid "Picking Type"
+msgstr ""
