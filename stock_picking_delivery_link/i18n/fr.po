@@ -22,16 +22,6 @@ msgid "Delivery Links"
 msgstr "Liens de livraison"
 
 #. module: stock_picking_delivery_link
-#: model:ir.model.fields,field_description:stock_picking_delivery_link.field_stock_picking_type__set_delivery_package_type_on_put_in_pack
-msgid "Delivery package type on put in pack"
-msgstr ""
-
-#. module: stock_picking_delivery_link
-#: model:ir.model,name:stock_picking_delivery_link.model_stock_picking_type
-msgid "Picking Type"
-msgstr "Type de picking"
-
-#. module: stock_picking_delivery_link
 #: model:ir.model.fields,field_description:stock_picking_delivery_link.field_stock_picking__ship_carrier_id
 msgid "Related carrier"
 msgstr "Transporteur lié"

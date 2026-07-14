@@ -11,12 +11,22 @@ class ChooseDeliveryPackage(models.TransientModel):
         compute="_compute_package_type_domain", readonly=True
     )
 
-    @api.depends_context("current_package_carrier_type")
-    @api.depends("picking_id")
+    @api.depends(
+        "picking_id.carrier_id",
+        "picking_id.picking_type_id.filter_package_type_on_put_in_pack",
+    )
     def _compute_package_type_domain(self):
-        package_carrier_type = self.env.context.get(
-            "current_package_carrier_type", "none"
-        )
-        domain = [("package_carrier_type", "=", package_carrier_type)]
         for wizard in self:
-            wizard.package_type_domain = domain
+            if not wizard.picking_id.picking_type_id.filter_package_type_on_put_in_pack:
+                wizard.package_type_domain = []
+                continue
+            carrier = wizard.picking_id.carrier_id
+            if carrier:
+                package_carrier_type = carrier.delivery_type
+                if package_carrier_type in ("fixed", "base_on_rule", "pricelist"):
+                    package_carrier_type = "none"
+            else:
+                package_carrier_type = False
+            wizard.package_type_domain = [
+                ("package_carrier_type", "=", package_carrier_type)
+            ]

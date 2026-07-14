@@ -7,6 +7,6 @@ from odoo import fields, models
 class StockPickingType(models.Model):
     _inherit = "stock.picking.type"
 
-    set_delivery_package_type_on_put_in_pack = fields.Boolean(
-        "Delivery package type on put in pack"
+    filter_package_type_on_put_in_pack = fields.Boolean(
+        "Filter package type on put in pack"
     )

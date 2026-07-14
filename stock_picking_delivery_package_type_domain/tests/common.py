@@ -9,34 +9,6 @@ class CommonChooseDeliveryPackage:
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.loader = FakeModelLoader(cls.env, cls.__module__)
-        cls.loader.backup_registry()
-
-        from .models.test import DeliveryCarrier, StockPackageType
-
-        cls.loader.update_registry((DeliveryCarrier, StockPackageType))
-
-        cls.delivery_obj = cls.env["delivery.carrier"]
-        cls.package_type_obj = cls.env["stock.package.type"]
-        cls.package_type = cls.package_type_obj.create(
-            {
-                "name": "Type Test",
-                "package_carrier_type": "test",
-            }
-        )
-        cls.product_delivery = cls.env["product.product"].create(
-            {
-                "name": "Delivery Product",
-                "type": "service",
-            }
-        )
-        cls.delivery = cls.delivery_obj.create(
-            {
-                "name": "Test",
-                "delivery_type": "test",
-                "product_id": cls.product_delivery.id,
-            }
-        )
         cls.partner = cls.env["res.partner"].create(
             {
                 "name": "Test Partner",
@@ -59,25 +31,54 @@ class CommonChooseDeliveryPackage:
             }
         )._apply_inventory()
 
-    @classmethod
-    def _create_sale(cls):
-        cls.sale = cls.env["sale.order"].create(
+    def setUp(self):
+        super().setUp()
+        self.loader = FakeModelLoader(self.env, self.__module__)
+        self.loader.backup_registry()
+
+        from .models.test import DeliveryCarrier, StockPackageType
+
+        self.loader.update_registry((DeliveryCarrier, StockPackageType))
+
+        self.delivery_obj = self.env["delivery.carrier"]
+        self.package_type_obj = self.env["stock.package.type"]
+        self.package_type = self.package_type_obj.create(
             {
-                "partner_id": cls.partner.id,
-                "carrier_id": cls.delivery.id,
+                "name": "Type Test",
+                "package_carrier_type": "test",
+            }
+        )
+        self.product_delivery = self.env["product.product"].create(
+            {
+                "name": "Delivery Product",
+                "type": "service",
+            }
+        )
+        self.delivery = self.delivery_obj.create(
+            {
+                "name": "Test",
+                "delivery_type": "test",
+                "product_id": self.product_delivery.id,
+            }
+        )
+
+    def _create_sale(self):
+        self.sale = self.env["sale.order"].create(
+            {
+                "partner_id": self.partner.id,
+                "carrier_id": self.delivery.id,
                 "order_line": [
                     Command.create(
                         {
-                            "product_id": cls.product.id,
+                            "product_id": self.product.id,
                             "product_uom_qty": 5.0,
                         }
                     )
                 ],
             }
         )
-        return cls.sale
+        return self.sale
 
-    @classmethod
-    def tearDownClass(cls):
-        cls.loader.restore_registry()
-        super().tearDownClass()
+    def tearDown(self):
+        self.loader.restore_registry()
+        super().tearDown()
