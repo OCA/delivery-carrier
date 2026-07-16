@@ -502,11 +502,6 @@ msgid "Formatted Email"
 msgstr ""
 
 #. module: delivery_dropoff_site
-#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__global_location_number
-msgid "GLN"
-msgstr ""
-
-#. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__partner_latitude
 msgid "Geo Latitude"
 msgstr ""
@@ -524,11 +519,6 @@ msgstr ""
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__date_localization
 msgid "Geolocation Date"
-msgstr ""
-
-#. module: delivery_dropoff_site
-#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__global_location_number
-msgid "Global Location Number"
 msgstr ""
 
 #. module: delivery_dropoff_site
@@ -822,8 +812,8 @@ msgstr ""
 #: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__on_time_rate
 msgid ""
 "Over the past x days; the number of products received on time divided by the "
-"number of ordered products.x is either the System Parameter purchase_stock."
-"on_time_delivery_days or the default 365"
+"number of ordered products.x is either the System Parameter "
+"purchase_stock.on_time_delivery_days or the default 365"
 msgstr ""
 
 #. module: delivery_dropoff_site
