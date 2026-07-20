@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-01-22 12:06+0000\n"
+"PO-Revision-Date: 2026-07-20 07:57+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: stock_picking_delivery_package_type_domain
 #: model:ir.model,name:stock_picking_delivery_package_type_domain.model_choose_delivery_package
@@ -24,7 +24,7 @@ msgstr "Procedura guidata selezione collo consegna"
 #. module: stock_picking_delivery_package_type_domain
 #: model:ir.model.fields,field_description:stock_picking_delivery_package_type_domain.field_stock_picking_type__filter_package_type_on_put_in_pack
 msgid "Filter package type on put in pack"
-msgstr ""
+msgstr "Filtra il tipo collo nel confezionamento"
 
 #. module: stock_picking_delivery_package_type_domain
 #: model:ir.model.fields,field_description:stock_picking_delivery_package_type_domain.field_choose_delivery_package__package_type_domain
@@ -34,4 +34,4 @@ msgstr "Dominio tipo collo"
 #. module: stock_picking_delivery_package_type_domain
 #: model:ir.model,name:stock_picking_delivery_package_type_domain.model_stock_picking_type
 msgid "Picking Type"
-msgstr ""
+msgstr "Tipo prelievo"
