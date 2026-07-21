@@ -10,7 +10,6 @@
     "website": "https://github.com/OCA/delivery-carrier",
     "data": [
         "views/res_config_settings_views.xml",
-        "views/delivery_carrier_views.xml",
         "views/stock_package_type_views.xml",
     ],
     "license": "AGPL-3",
