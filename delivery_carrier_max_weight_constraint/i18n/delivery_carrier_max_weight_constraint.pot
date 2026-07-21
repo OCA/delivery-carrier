@@ -39,11 +39,6 @@ msgid "Overweight forbidden"
 msgstr ""
 
 #. module: delivery_carrier_max_weight_constraint
-#: model:ir.model.fields,field_description:delivery_carrier_max_weight_constraint.field_delivery_carrier__is_strict_weight_package
-msgid "Overweight package forbidden"
-msgstr ""
-
-#. module: delivery_carrier_max_weight_constraint
 #: model:ir.model.fields,field_description:delivery_carrier_max_weight_constraint.field_res_company__delivery_carrier_strict_weight_package
 #: model:ir.model.fields,field_description:delivery_carrier_max_weight_constraint.field_res_config_settings__delivery_carrier_strict_weight_package
 #: model_terms:ir.ui.view,arch_db:delivery_carrier_max_weight_constraint.res_config_settings_view_form
@@ -51,18 +46,8 @@ msgid "Overweight packages forbidden"
 msgstr ""
 
 #. module: delivery_carrier_max_weight_constraint
-#: model:ir.model,name:delivery_carrier_max_weight_constraint.model_delivery_carrier
-msgid "Shipping Methods"
-msgstr ""
-
-#. module: delivery_carrier_max_weight_constraint
 #: model:ir.model,name:delivery_carrier_max_weight_constraint.model_stock_package_type
 msgid "Stock package type"
-msgstr ""
-
-#. module: delivery_carrier_max_weight_constraint
-#: model:ir.model.fields,help:delivery_carrier_max_weight_constraint.field_delivery_carrier__is_strict_weight_package
-msgid "The maximum weight of packages can't be exceeded."
 msgstr ""
 
 #. module: delivery_carrier_max_weight_constraint
