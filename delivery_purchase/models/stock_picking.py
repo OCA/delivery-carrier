@@ -1,6 +1,8 @@
 # Copyright 2021 Tecnativa - Ernesto Tejeda
+# Copyright 2026 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from odoo import models
+from odoo.tools import config
 
 
 class StockPicking(models.Model):
@@ -42,7 +44,10 @@ class StockPicking(models.Model):
 
     def _add_delivery_cost_to_po(self):
         self.ensure_one()
-        if self.purchase_id and self.carrier_price:
+        test_condition = not config["test_enable"] or (
+            config["test_enable"] and self.env.context.get("test_delivery_purchase")
+        )
+        if self.purchase_id and self.carrier_price and test_condition:
             carrier_price = self.carrier_price
             # Re-set carrier price
             if self.carrier_id.invoice_policy == "real":
