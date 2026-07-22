@@ -11,6 +11,7 @@ class TestDeliveryPurchaseBase(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        cls.env = cls.env(context=dict(cls.env.context, test_delivery_purchase=True))
         cls.delivery_product = cls.env["product.product"].create(
             {"name": "Delivery test product"}
         )
