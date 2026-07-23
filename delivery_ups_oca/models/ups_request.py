@@ -166,19 +166,25 @@ class UpsRequest:
 
     def _partner_to_shipping_data(self, partner, **kwargs):
         """Return a dict describing a partner for the shipping request"""
+        address_dict = dict(
+            AddressLine=self._build_address_lines(partner),
+            City=partner.city,
+            StateProvinceCode=partner.state_id.code,
+            PostalCode=partner.zip,
+            CountryCode=self._get_country_code(partner),
+        )
+
+        # Add ResidentialAddressIndicator if it's a residential address
+        if partner._is_ups_residential_address():
+            address_dict["ResidentialAddressIndicator"] = ""
+
         vals = dict(
             **kwargs,
             Name=((partner.parent_id or partner).name or "")[:35],
             AttentionName=(partner.name or "")[:35],
             Phone=dict(Number=partner.phone or partner.mobile),
             EMailAddress=partner.email,
-            Address=dict(
-                AddressLine=self._build_address_lines(partner),
-                City=partner.city,
-                StateProvinceCode=partner.state_id.code,
-                PostalCode=partner.zip,
-                CountryCode=self._get_country_code(partner),
-            ),
+            Address=address_dict,
         )
         tax_identification_number = self._get_tax_identification_number(partner)
         if tax_identification_number:
