@@ -184,6 +184,18 @@ class TestDeliveryUps(TestDeliveryUpsBase):
             self.assertGreater(res["price"], 0)
             self.assertTrue(res["success"])
 
+    def test_ups_rate_shipment_unavailable_service(self):
+        """A UserError during rating is swallowed so the method can be hidden."""
+        with mock.patch(
+            _provider_class + "._rate_shipment",
+            side_effect=UserError("111217: service unavailable"),
+        ):
+            res = self.carrier.ups_rate_shipment(self.sale)
+        self.assertFalse(res["success"])
+        self.assertEqual(res["price"], 0.0)
+        self.assertIn("111217", res["error_message"])
+        self.assertFalse(res["warning_message"])
+
     def test_delivery_carrier_ups_integration(self):
         self.picking.action_confirm()
         self.picking.action_assign()
