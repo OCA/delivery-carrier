@@ -65,6 +65,11 @@ msgid "Check/Cashier Check/Money Order"
 msgstr "Assegno/Assegno circolare/Vaglia"
 
 #. module: delivery_ups_oca
+#: model:ir.model,name:delivery_ups_oca.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: delivery_ups_oca
 #: model_terms:ir.ui.view,arch_db:delivery_ups_oca.view_delivery_carrier_form
 msgid "Credentials"
 msgstr "Credenziali"
