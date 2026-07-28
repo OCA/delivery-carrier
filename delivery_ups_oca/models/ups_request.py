@@ -212,6 +212,11 @@ class UpsRequest:
             res["LabelStockSize"] = {"Height": "6", "Width": "4"}
         return res
 
+    def _is_same_origin_dest(self, ship_from, ship_to):
+        if not ship_from.country_id or not ship_to.country_id:
+            return False
+        return ship_from.country_id.id == ship_to.country_id.id
+
     def _prepare_create_shipping(self, picking):
         """Return a dict that can be passed to the shipping endpoint of the UPS API"""
         packages_ids = (
@@ -241,6 +246,18 @@ class UpsRequest:
                 package_item["Packaging"]["Description"] = package_name
                 package_item["PackageWeight"]["Weight"] = str(package_weight)
                 packages.append(package_item)
+
+        partner_from = (
+            picking.picking_type_id.warehouse_id.partner_id
+            or picking.company_id.partner_id
+        )
+        partner_to = picking.partner_id
+        ship_from = self._partner_to_shipping_data(partner_from)
+        ship_to = self._partner_to_shipping_data(partner_to)
+        same_origin_and_dest = self._is_same_origin_dest(partner_from, partner_to)
+        if same_origin_and_dest and not ship_to["Phone"]["Number"]:
+            ship_to.pop("Phone")
+
         vals = {
             "ShipmentRequest": {
                 "Shipment": {
@@ -249,11 +266,8 @@ class UpsRequest:
                         partner=picking.company_id.partner_id,
                         ShipperNumber=self.shipper_number,
                     ),
-                    "ShipTo": self._partner_to_shipping_data(picking.partner_id),
-                    "ShipFrom": self._partner_to_shipping_data(
-                        picking.picking_type_id.warehouse_id.partner_id
-                        or picking.company_id.partner_id
-                    ),
+                    "ShipTo": ship_to,
+                    "ShipFrom": ship_from,
                     "PaymentInformation": {
                         "ShipmentCharge": {
                             "Type": "01",
