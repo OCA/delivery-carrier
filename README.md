@@ -41,6 +41,7 @@ addon | version | maintainers | summary
 [partner_delivery_info](partner_delivery_info/) | 19.0.1.0.0 |  | Send delivery notice to the shipper from any operation.
 [partner_delivery_schedule](partner_delivery_schedule/) | 19.0.1.0.0 |  | Set on partners a schedule for delivery goods
 [partner_delivery_zone](partner_delivery_zone/) | 19.0.1.0.0 |  | Enables partner delivery zones for physical products
+[partner_delivery_zone_calendar](partner_delivery_zone_calendar/) | 19.0.1.0.0 |  | This module allows to define a calendar on a delivery zone
 
 [//]: # (end addons)
 
