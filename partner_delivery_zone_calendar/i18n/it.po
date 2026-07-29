@@ -1,0 +1,35 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* partner_delivery_zone_calendar
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#. module: partner_delivery_zone_calendar
+#: model:ir.model.fields,field_description:partner_delivery_zone_calendar.field_partner_delivery_zone__calendar_id
+msgid "Calendar"
+msgstr ""
+
+#. module: partner_delivery_zone_calendar
+#: model:ir.model.fields,field_description:partner_delivery_zone_calendar.field_partner_delivery_zone__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: partner_delivery_zone_calendar
+#: model:ir.model.fields,field_description:partner_delivery_zone_calendar.field_partner_delivery_zone__id
+msgid "ID"
+msgstr ""
+
+#. module: partner_delivery_zone_calendar
+#: model:ir.model,name:partner_delivery_zone_calendar.model_partner_delivery_zone
+msgid "Partner delivery zone"
+msgstr ""
