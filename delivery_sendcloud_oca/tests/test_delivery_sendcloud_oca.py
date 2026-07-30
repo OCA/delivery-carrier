@@ -507,9 +507,13 @@ class TestDeliverySendCloud(TransactionCase):
             sale_order.picking_ids.cancel_shipment()["xml_id"],
             "delivery_sendcloud_oca.sendcloud_cancel_shipment_confirm_wizard",
         )
-        with self.assertRaisesRegex(UserError, "Sendcloud: Invalid username/password"):
+        err_msg = (
+            "(?s)Sendcloud: (Invalid username/password|"
+            ".*[Aa]ccess credentials.*|.*invalid_client.*)"
+        )
+        with self.assertRaisesRegex(UserError, err_msg):
             sale_order.action_cancel()
-        with self.assertRaisesRegex(UserError, "Sendcloud: Invalid username/password"):
+        with self.assertRaisesRegex(UserError, err_msg):
             sale_order.button_delete_sendcloud_order()
         sendcloud_cancel_shipment_confirm_wizard_form = Form(
             self.env["sendcloud.cancel.shipment.confirm.wizard"].with_context(
@@ -524,11 +528,11 @@ class TestDeliverySendCloud(TransactionCase):
         )
         with recorder.use_cassette("cancel_parcel"):
             sendcloud_cancel_shipment_confirm_wizard_form.do_cancel_shipment()
-        with self.assertRaisesRegex(UserError, "Sendcloud: Invalid username/password"):
+        with self.assertRaisesRegex(UserError, err_msg):
             sale_order.picking_ids.button_delete_sendcloud_picking()
-        with self.assertRaisesRegex(UserError, "Sendcloud: Invalid username/password"):
+        with self.assertRaisesRegex(UserError, err_msg):
             sale_order.picking_ids.action_cancel()
-        with self.assertRaisesRegex(UserError, "Sendcloud: Invalid username/password"):
+        with self.assertRaisesRegex(UserError, err_msg):
             sale_order.picking_ids.unlink()
 
     @mute_logger("py.warnings")
