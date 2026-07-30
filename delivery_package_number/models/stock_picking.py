@@ -45,7 +45,11 @@ class StockPicking(models.Model):
             picking.ask_number_of_packages = bool(
                 picking.carrier_id
                 and not picking.package_ids
-                or picking.picking_type_id.force_set_number_of_packages
+                or picking.picking_type_id.force_set_number_of_packages == "always"
+                or (
+                    picking.picking_type_id.force_set_number_of_packages == "partner"
+                    and picking.partner_id.force_set_number_of_packages
+                )
             )
 
     def _get_pickings_to_set_number_of_packages(self):
