@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 Moduon Team S.L.
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0) -->
+<data>
+    <record id="stock_picking_batch_form_inherit_delivery_driver" model="ir.ui.view">
+        <field name="name">Stock Picking Batch Form Delivery Driver</field>
+        <field name="model">stock.picking.batch</field>
+        <field name="inherit_id" ref="stock_picking_batch.stock_picking_batch_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='scheduled_date']" position="after">
+                <field
+                    name="driver_ids"
+                    widget="many2many_tags"
+                    context="{'show_driver': True}"
+                    options='{"always_reload": True}'
+                />
+            </xpath>
+        </field>
+    </record>
+    <record id="stock_picking_batch_tree_inherit_delivery_driver" model="ir.ui.view">
+        <field name="name">Stock Picking Batch Tree Delivery Driver</field>
+        <field name="model">stock.picking.batch</field>
+        <field name="inherit_id" ref="stock_picking_batch.stock_picking_batch_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='scheduled_date']" position="after">
+                <field
+                    name="driver_ids"
+                    widget="many2many_tags"
+                    optional="hide"
+                    context="{'show_driver': True}"
+                    options='{"always_reload": True}'
+                />
+            </xpath>
+        </field>
+    </record>
+    <record id="stock_picking_batch_filter_inherit_delivery_driver" model="ir.ui.view">
+        <field name="name">Stock Picking Batch Search Delivery Driver</field>
+        <field name="model">stock.picking.batch</field>
+        <field name="inherit_id" ref="stock_picking_batch.stock_picking_batch_filter" />
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='state']" position="after">
+                <filter
+                    string="Drivers"
+                    name="driver"
+                    context="{'group_by': 'driver_ids'}"
+                />
+            </xpath>
+        </field>
+    </record>
+</data>
