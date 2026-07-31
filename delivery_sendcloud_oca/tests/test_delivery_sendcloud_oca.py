@@ -153,11 +153,13 @@ class TestDeliverySendCloud(TransactionCase):
         sale_order = self.env.ref("sale.sale_order_1").copy()
         europe_codes = self.env.ref("base.europe").country_ids.mapped("code")
         partner_country = sale_order.partner_id.country_id.code
+        sale_order.partner_id.street_number2 = "test"
         self.assertFalse(partner_country in europe_codes)
 
         # Feature "Auto create invoice" not enabled by default
         self.assertFalse(sale_order.company_id.sendcloud_auto_create_invoice)
-
+        # Set Sendcloud Price
+        shipping_method0.sendcloud_price = 100.0
         # Set Sendcloud delivery method
         choose_delivery_form = Form(
             self.env["choose.delivery.carrier"].with_context(
@@ -199,6 +201,7 @@ class TestDeliverySendCloud(TransactionCase):
                 sale_order.with_context(
                     force_sendcloud_shipment_code="c9b2058d-2621-4ce5-afb0-f14e8e5565b6"
                 ).action_confirm()
+        shipping_method0.sendcloud_price = 0.0
         # Set country_of_origin and confirm order
         if is_product_harmonized_system_installed:
             sale_order.mapped("order_line.product_id").write(
@@ -683,3 +686,72 @@ class TestDeliverySendCloud(TransactionCase):
         # Should generate an error on receiving message which is not in json format
         self.assertTrue(sendcloud_action_rec.error_on_parsing)
         sendcloud_action_obj.sendcloud_delete_old_actions()
+
+    def test_16_sendcloud_available_carriers(self):
+        delivery_carrier_obj = self.env["delivery.carrier"]
+        test_partner = self.env["res.partner"].create(
+            [
+                {
+                    "name": "test",
+                    "country_id": self.env.ref("base.nl").id,
+                    "street": "Bloemstraat 42",
+                    "zip": "4817RH",
+                    "city": "Groningen",
+                    "phone": "+31 6 12345678",
+                    "state_id": self.env.ref("base.state_nl_gr").id,
+                    "email": "admin@yourcompany.example.com",
+                }
+            ]
+        )
+        sale_order = self.env.ref("sale.sale_order_1").copy()
+        sale_order.partner_id = test_partner.id
+        # Retrieve Sendcloud shipping methods
+        with recorder.use_cassette("shipping_methods"):
+            delivery_carrier_obj.sendcloud_sync_shipping_method()
+        shipping_method0 = delivery_carrier_obj.search(
+            [
+                ("sendcloud_is_return", "=", True),
+                ("company_id", "=", self.env.company.id),
+            ],
+            limit=1,
+        )
+        self.assertFalse(shipping_method0._is_available_for_order(sale_order))
+        shipping_method1 = delivery_carrier_obj.search(
+            [
+                ("delivery_type", "=", "sendcloud"),
+                ("sendcloud_min_weight", ">", 15.00),
+                ("company_id", "=", self.env.company.id),
+            ],
+            limit=1,
+        )
+        self.assertFalse(shipping_method1._is_available_for_order(sale_order))
+        with recorder.use_cassette("update_integration_2"):
+            self.integration.write(
+                {"service_point_enabled": True, "service_point_carriers": "['postnl']"}
+            )
+        shipping_method2 = delivery_carrier_obj.search(
+            [
+                ("delivery_type", "=", "sendcloud"),
+                ("sendcloud_service_point_input", "=", "required"),
+                ("sendcloud_carrier", "=", "dhl"),
+                ("company_id", "=", self.env.company.id),
+            ],
+            limit=1,
+        )
+        self.assertFalse(shipping_method2._is_available_for_order(sale_order))
+        shipping_method3 = delivery_carrier_obj.search(
+            [
+                ("delivery_type", "=", "sendcloud"),
+                ("sendcloud_min_weight", "=", 0.001),
+                ("company_id", "=", self.env.company.id),
+            ],
+            limit=1,
+        )
+        self.assertFalse(shipping_method3._is_available_for_order(sale_order))
+        sale_order.warehouse_id.sencloud_sender_address_id = False
+        self.assertFalse(shipping_method3._is_available_for_order(sale_order))
+        self.assertTrue(
+            self.env.ref("delivery.free_delivery_carrier")._is_available_for_order(
+                sale_order
+            )
+        )
