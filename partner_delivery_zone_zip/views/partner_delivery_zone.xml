@@ -2,23 +2,53 @@
 <!-- Copyright 2021 ACSONE SA/NV
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-    <record model="ir.ui.view" id="partner_delivery_zone_form_view">
+    <record model="ir.ui.view" id="partner_delivery_zone_tree_view">
         <field
             name="name"
-        >partner.delivery.zone.form (in partner_delivery_zone_zip)</field>
+        >partner.delivery.zone.tree (in partner_delivery_zone_zip)</field>
         <field name="model">partner.delivery.zone</field>
         <field
             name="inherit_id"
-            ref="partner_delivery_zone.view_partner_delivery_zone_form"
+            ref="partner_delivery_zone.view_partner_delivery_zone_tree"
         />
         <field name="arch" type="xml">
-            <field name="name" position="after">
-                <field name="zip_ids">
-                    <tree editable="bottom">
-                        <field name="name" />
-                    </tree>
-                </field>
-            </field>
+            <xpath expr="//list" position="attributes">
+                <attribute name="editable" />
+            </xpath>
         </field>
+    </record>
+
+    <record id="view_partner_delivery_zone_form" model="ir.ui.view">
+        <field name="name">partner.delivery.zone.form</field>
+        <field name="model">partner.delivery.zone</field>
+        <field name="arch" type="xml">
+            <form string="Delivery Zone">
+                <group>
+                    <group>
+                        <field name="code" />
+                        <field name="name" />
+                    </group>
+
+                    <group>
+                        <field name="active" />
+                    </group>
+                </group>
+
+                <group>
+                    <field name="zip_ids">
+                        <list editable="bottom">
+                            <field name="name" />
+                        </list>
+                    </field>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record
+        id="partner_delivery_zone.partner_delivery_zone_action"
+        model="ir.actions.act_window"
+    >
+        <field name="view_mode">list,form</field>
     </record>
 </odoo>

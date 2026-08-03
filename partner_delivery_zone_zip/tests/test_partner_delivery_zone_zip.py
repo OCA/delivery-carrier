@@ -2,11 +2,12 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from psycopg2 import IntegrityError
 
-from odoo.tests.common import Form, SavepointCase
+from odoo.tests import Form
+from odoo.tests.common import TransactionCase
 from odoo.tools import mute_logger
 
 
-class TestEriPartnerDeliveryZoneZip(SavepointCase):
+class TestEriPartnerDeliveryZoneZip(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
