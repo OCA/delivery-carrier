@@ -196,7 +196,7 @@ class TestStockPicking(TransactionCase):
                     "name": p.name,
                     "product_id": p.id,
                     "product_uom_qty": qty,
-                    "product_uom": p.uom_id.id,
+                    "product_uom_id": p.uom_id.id,
                     "price_unit": 1,
                 },
             )
@@ -294,6 +294,7 @@ class TestStockPicking(TransactionCase):
         ship._compute_theoretical_number_of_packages()
 
         self.assertEqual(ship.theoretical_number_of_packages, 1)
+        self.assertTrue(self.delivery_carrier.weight_uom_name)
 
     def test_heavy_products(self):
         """
@@ -334,7 +335,6 @@ class TestStockPicking(TransactionCase):
 
         self.env["stock.move"].create(
             {
-                "name": self.product9.name,
                 "product_id": self.product9.id,
                 "product_uom_qty": 2,
                 "product_uom": self.product9.uom_id.id,
@@ -355,9 +355,9 @@ class TestStockPicking(TransactionCase):
         pack_action = picking.action_put_in_pack()
         pack_action_ctx = pack_action["context"]
         pack_wiz = (
-            self.env["choose.delivery.package"]
+            self.env["stock.put.in.pack"]
             .with_context(**pack_action_ctx)
-            .create({"delivery_package_type_id": self.package_type.id})
+            .create({"package_type_id": self.package_type.id})
         )
         pack_wiz.action_put_in_pack()
         self.assertEqual(picking.number_of_packages_done, 1)
@@ -368,9 +368,9 @@ class TestStockPicking(TransactionCase):
         pack_action = picking.action_put_in_pack()
         pack_action_ctx = pack_action["context"]
         pack_wiz = (
-            self.env["choose.delivery.package"]
+            self.env["stock.put.in.pack"]
             .with_context(**pack_action_ctx)
-            .create({"delivery_package_type_id": self.package_type.id})
+            .create({"package_type_id": self.package_type.id})
         )
         pack_wiz.action_put_in_pack()
         self.assertEqual(picking.number_of_packages_done, 2)
@@ -439,7 +439,6 @@ class TestStockPicking(TransactionCase):
         # Add move with the no-weight product
         self.env["stock.move"].create(
             {
-                "name": product_no_weight.name,
                 "product_id": product_no_weight.id,
                 "product_uom_qty": 1,
                 "product_uom": product_no_weight.uom_id.id,
