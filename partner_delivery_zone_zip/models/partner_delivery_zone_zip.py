@@ -5,7 +5,6 @@ from odoo import fields, models
 
 
 class PartnerDeliveryZoneZip(models.Model):
-
     _name = "partner.delivery.zone.zip"
     _description = "Partner Delivery Zone Zip"
 

@@ -9,7 +9,7 @@ from odoo.tools import mute_logger
 class TestEriPartnerDeliveryZoneZip(SavepointCase):
     @classmethod
     def setUpClass(cls):
-        super(TestEriPartnerDeliveryZoneZip, cls).setUpClass()
+        super().setUpClass()
         cls.delivery_zone = cls.env["partner.delivery.zone"].create(
             {
                 "name": "delivery zone test",

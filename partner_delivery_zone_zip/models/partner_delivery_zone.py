@@ -5,7 +5,6 @@ from odoo import fields, models
 
 
 class PartnerDeliveryZone(models.Model):
-
     _inherit = "partner.delivery.zone"
 
     zip_ids = fields.One2many(
