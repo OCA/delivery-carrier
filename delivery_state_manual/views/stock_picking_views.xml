@@ -2,7 +2,6 @@
 <!-- Copyright 2024 Alberto Martínez <alberto.martinez@sygel.es>
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record id="view_picking_withcarrier_out_form" model="ir.ui.view">
         <field name="model">stock.picking</field>
         <field
@@ -37,7 +36,8 @@
             <field name="tracking_state_history" position="attributes">
                 <attribute
                     name="attrs"
-                >{'invisible': [('delivery_state_manual', '!=', False)]}</attribute>            </field>
+                >{'invisible': [('delivery_state_manual', '!=', False)]}</attribute>
+            </field>
         </field>
     </record>
 
@@ -68,5 +68,4 @@
             </xpath>
         </field>
     </record>
-
 </odoo>
