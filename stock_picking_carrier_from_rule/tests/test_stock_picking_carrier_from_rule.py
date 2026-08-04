@@ -20,7 +20,6 @@ class TestStockPickingCarrierFromRule(BaseCommon):
         cls.rule.partner_address_id = cls.partner
         cls.move = cls.env["stock.move"].create(
             {
-                "name": "Test Move 001",
                 "product_id": cls.product.id,
                 "picking_type_id": cls.picking_type_out.id,
                 "product_uom_qty": 2.0,
