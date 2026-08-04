@@ -13,9 +13,7 @@
                 <field name="delivery_state_manual" invisible="1" />
             </field>
             <field name="delivery_state" position="attributes">
-                <attribute
-                    name="attrs"
-                >{'readonly': [('delivery_state_manual', '=', False)]}</attribute>
+                <attribute name="readonly">not delivery_state_manual</attribute>
             </field>
             <field name="date_shipped" position="attributes">
                 <attribute name="force_save">1</attribute>
@@ -24,29 +22,23 @@
                 <attribute name="force_save">1</attribute>
             </field>
             <field name="tracking_state" position="attributes">
-                <attribute
-                    name="attrs"
-                >{'invisible': [('delivery_state_manual', '!=', False)]}</attribute>
+                <attribute name="invisible">delivery_state_manual</attribute>
             </field>
             <button name="tracking_state_update" position="attributes">
-                <attribute
-                    name="attrs"
-                >{'invisible': [('delivery_state_manual', '!=', False)]}</attribute>
+                <attribute name="invisible">delivery_state_manual</attribute>
             </button>
             <field name="tracking_state_history" position="attributes">
-                <attribute
-                    name="attrs"
-                >{'invisible': [('delivery_state_manual', '!=', False)]}</attribute>
+                <attribute name="invisible">delivery_state_manual</attribute>
             </field>
         </field>
     </record>
 
     <record id="vpicktree_view_tree" model="ir.ui.view">
         <field name="model">stock.picking</field>
-        <field name="inherit_id" ref="delivery.vpicktree_view_tree" />
+        <field name="inherit_id" ref="stock_delivery.vpicktree_view_tree" />
         <field name="arch" type="xml">
             <field name="carrier_id" position="after">
-                <field name="delivery_state_manual" invisible="1" />
+                <field name="delivery_state_manual" column_invisible="1" />
                 <field name="delivery_state" optional="hide" />
             </field>
         </field>

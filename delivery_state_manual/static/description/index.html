@@ -369,7 +369,7 @@ ul.auto-toc {
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !! source digest: sha256:f389411d5d7f3daf2898d050b5003af29060e1995b9c7d19d19470e091f95d4d
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-<p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html"><img alt="License: AGPL-3" src="https://img.shields.io/badge/licence-AGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/OCA/delivery-carrier/tree/16.0/delivery_state_manual"><img alt="OCA/delivery-carrier" src="https://img.shields.io/badge/github-OCA%2Fdelivery--carrier-lightgray.png?logo=github" /></a> <a class="reference external image-reference" href="https://translation.odoo-community.org/projects/delivery-carrier-16-0/delivery-carrier-16-0-delivery_state_manual"><img alt="Translate me on Weblate" src="https://img.shields.io/badge/weblate-Translate%20me-F47D42.png" /></a> <a class="reference external image-reference" href="https://runboat.odoo-community.org/builds?repo=OCA/delivery-carrier&amp;target_branch=16.0"><img alt="Try me on Runboat" src="https://img.shields.io/badge/runboat-Try%20me-875A7B.png" /></a></p>
+<p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html"><img alt="License: AGPL-3" src="https://img.shields.io/badge/licence-AGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/OCA/delivery-carrier/tree/18.0/delivery_state_manual"><img alt="OCA/delivery-carrier" src="https://img.shields.io/badge/github-OCA%2Fdelivery--carrier-lightgray.png?logo=github" /></a> <a class="reference external image-reference" href="https://translation.odoo-community.org/projects/delivery-carrier-18-0/delivery-carrier-18-0-delivery_state_manual"><img alt="Translate me on Weblate" src="https://img.shields.io/badge/weblate-Translate%20me-F47D42.png" /></a> <a class="reference external image-reference" href="https://runboat.odoo-community.org/builds?repo=OCA/delivery-carrier&amp;target_branch=18.0"><img alt="Try me on Runboat" src="https://img.shields.io/badge/runboat-Try%20me-875A7B.png" /></a></p>
 <p>This module extends the functionality of delivery_state to allow you to
 manually edit the delivery state of pickings with specific delivery
 carriers</p>
@@ -391,9 +391,9 @@ carriers</p>
 <h1><a class="toc-backref" href="#toc-entry-1">Configuration</a></h1>
 <p>To configure this module, you need to:</p>
 <ol class="arabic simple">
-<li>Go to Inventory / Configuration / Shipping Methods and open the
+<li>Go to Inventory / Configuration / Delivery Methods and open the
 desired method to be manual.</li>
-<li>Mark the “Manual” field</li>
+<li>Mark the “Manual Delivery State” field</li>
 </ol>
 </div>
 <div class="section" id="usage">
@@ -402,16 +402,16 @@ desired method to be manual.</li>
 <ol class="arabic simple">
 <li>Go to Inventory / Operations and open or create an outgoing pending
 picking.</li>
-<li>In the Additional Info tab, assign it a delivery carrier which is
-manual.</li>
+<li>In the Additional Info tab, assign it a manual delivery carrier.</li>
 <li>Validate the picking and you’ll see in the same tab the delivery
 state info with the shipping date and the shipping state. Note: The
 carrier tracking state fields will not be displayed for being manual.</li>
 <li>You will be able to edit the delivery_state field. If you set the
-field to “Customer delivered” or “Warehouse Delivered”, the “Delivery
-Date” field will be automatically set. If you set the field to
-“Shipping recorded in carrier”, the “Shipment Date” will be
-automatically set.</li>
+field to “Shipping recorded in carrier”, the “Shipment Date” will be
+automatically set. If you set the field to “Customer delivered” or
+“Warehouse Delivered”, the “Delivery Date” field will be
+automatically set. If you set a previous state, the dates will be set
+to false if it corresponds.</li>
 </ol>
 </div>
 <div class="section" id="bug-tracker">
@@ -419,7 +419,7 @@ automatically set.</li>
 <p>Bugs are tracked on <a class="reference external" href="https://github.com/OCA/delivery-carrier/issues">GitHub Issues</a>.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-<a class="reference external" href="https://github.com/OCA/delivery-carrier/issues/new?body=module:%20delivery_state_manual%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**">feedback</a>.</p>
+<a class="reference external" href="https://github.com/OCA/delivery-carrier/issues/new?body=module:%20delivery_state_manual%0Aversion:%2018.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**">feedback</a>.</p>
 <p>Do not contact contributors directly about support or help with technical issues.</p>
 </div>
 <div class="section" id="credits">
@@ -452,7 +452,7 @@ mission is to support the collaborative development of Odoo features and
 promote its widespread use.</p>
 <p>Current <a class="reference external" href="https://odoo-community.org/page/maintainer-role">maintainer</a>:</p>
 <p><a class="reference external image-reference" href="https://github.com/tisho99"><img alt="tisho99" src="https://github.com/tisho99.png?size=40px" /></a></p>
-<p>This module is part of the <a class="reference external" href="https://github.com/OCA/delivery-carrier/tree/16.0/delivery_state_manual">OCA/delivery-carrier</a> project on GitHub.</p>
+<p>This module is part of the <a class="reference external" href="https://github.com/OCA/delivery-carrier/tree/18.0/delivery_state_manual">OCA/delivery-carrier</a> project on GitHub.</p>
 <p>You are welcome to contribute. To learn how please visit <a class="reference external" href="https://odoo-community.org/page/Contribute">https://odoo-community.org/page/Contribute</a>.</p>
 </div>
 </div>

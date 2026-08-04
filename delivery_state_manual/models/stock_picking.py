@@ -11,8 +11,8 @@ class StockPicking(models.Model):
 
     delivery_state = fields.Selection(
         readonly=False,
-        help="This field is set automatically unless the delivery carrier is marked as manual. "
-        "If manually edited, the carrier dates will be updated",
+        help="This field is set automatically unless the delivery carrier is "
+        "marked as manual. If manually edited, the carrier dates will be updated",
     )
     delivery_state_manual = fields.Boolean(related="carrier_id.delivery_state_manual")
 

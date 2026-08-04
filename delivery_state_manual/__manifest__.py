@@ -3,7 +3,7 @@
 {
     "name": "Delivery State Manual",
     "summary": "Manually edit the delivery state of pickings",
-    "version": "16.0.1.0.0",
+    "version": "18.0.1.0.0",
     "category": "Delivery",
     "website": "https://github.com/OCA/delivery-carrier",
     "author": "Sygel, Odoo Community Association (OCA)",

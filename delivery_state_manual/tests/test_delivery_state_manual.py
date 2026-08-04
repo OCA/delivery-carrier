@@ -27,7 +27,7 @@ class SomethingCase(TransactionCase):
             }
         )
         cls.product = cls.env["product.product"].create(
-            {"name": "Test product", "type": "product"}
+            {"name": "Test product", "type": "consu", "is_storable": True}
         )
         cls.partner = cls.env["res.partner"].create({"name": "Mr. Odoo"})
         cls.partner_shipping = cls.env["res.partner"].create(
@@ -72,9 +72,9 @@ class SomethingCase(TransactionCase):
         picking = self.sale.picking_ids[0]
         self.assertEqual(len(picking.move_ids), 1)
         self.assertEqual(picking.carrier_id, self.carrier)
-        picking.action_confirm()
-        picking.move_ids.quantity_done = 1
-        picking._action_done()
+        picking.action_assign()
+        picking.move_ids.quantity = 1
+        picking.button_validate()
         self.assertFalse(picking.delivery_state)
         self.assertFalse(picking.date_shipped)
         self.assertFalse(picking.date_delivered)
