@@ -42,6 +42,7 @@ License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
                                 required="delivery_type == 'ups'"
                             />
                             <field name="ups_tracking_state_update_sync" />
+                            <field name="ups_negotiated_rates" />
                         </group>
                         <group string="Credentials">
                             <field

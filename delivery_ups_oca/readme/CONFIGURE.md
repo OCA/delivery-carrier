@@ -12,6 +12,9 @@ To configure this module, you need to:
     Select the `ups` delivery type and check the "Cash on Delivery"
     checkbox under the "UPS" tab. It is required to select the "UPS COD
     Funds Code" when the "Cash on Delivery" option is selected.
+5.  The "Negotiated Rates" checkbox is disabled by default. When checked 
+    and your account has negotiated rates, UPS will use your
+    account's negotiated rates for shipping cost calculations.
 
 **NOTE** You need to add an APP from <https://developer.ups.com/> for
 using the webservice.

@@ -108,6 +108,10 @@ class DeliveryCarrier(models.Model):
         selection=[("1", "Cash"), ("9", "Check/Cashier Check/Money Order")],
         string="UPS Cod Funds Code",
     )
+    ups_negotiated_rates = fields.Boolean(
+        string="Negotiated Rates",
+        help="If checked, UPS will use the account's negotiated rates for shipping.",
+    )
 
     def _ups_get_response_price(self, total_charges, currency, company):
         """We need to convert the price if the currency is different."""
