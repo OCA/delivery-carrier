@@ -4,9 +4,9 @@
 from odoo import fields, models
 
 
-class ChooseDeliveryPackage(models.TransientModel):
-    _inherit = "choose.delivery.package"
+class StockPutInPack(models.TransientModel):
+    _inherit = "stock.put.in.pack"
 
     number_of_parcels = fields.Integer(
-        related="delivery_package_type_id.number_of_parcels",
+        related="package_type_id.number_of_parcels",
     )

@@ -5,7 +5,7 @@ from odoo import api, fields, models
 
 
 class StockQuantPackage(models.Model):
-    _inherit = "stock.quant.package"
+    _inherit = "stock.package"
 
     number_of_parcels = fields.Integer(
         compute="_compute_number_of_parcels", store=True, readonly=False

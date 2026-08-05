@@ -14,10 +14,9 @@ class TestStockQuantPackageDelivery(TestPackingCommon):
             {
                 "name": "Product TEST",
                 "type": "consu",
-                "weight": 0.1,
                 "is_storable": True,
+                "weight": 0.1,
                 "uom_id": cls.uom_kg.id,
-                "uom_po_id": cls.uom_kg.id,
             }
         )
         test_carrier_product = cls.env["product.product"].create(
@@ -42,7 +41,7 @@ class TestStockQuantPackageDelivery(TestPackingCommon):
 
     def test_put_in_pack_choose_carrier_wizard(self):
         """
-        Trigger the 'choose.delivery.package' wizard and choose a package type with
+        Trigger the 'stock.put.in.pack' wizard and choose a package type with
         a number of parcels > 0.
             - check the related has the right value in the wizard
             - check the related has the right value in the created package
@@ -75,40 +74,36 @@ class TestStockQuantPackageDelivery(TestPackingCommon):
         pack_action_ctx = pack_action["context"]
         pack_action_model = pack_action["res_model"]
         # We make sure the correct action was returned
-        self.assertEqual(pack_action_model, "choose.delivery.package")
+        self.assertEqual(pack_action_model, "stock.put.in.pack")
         # check there is no package yet for the picking
-        self.assertEqual(len(picking_ship.package_level_ids), 0)
+        self.assertEqual(len(picking_ship.move_line_ids.result_package_id), 0)
         # We instanciate the wizard with the context of the action
         pack_wiz = (
-            self.env["choose.delivery.package"]
-            .with_context(**pack_action_ctx)
-            .create({})
+            self.env["stock.put.in.pack"].with_context(**pack_action_ctx).create({})
         )
         # set the package type
-        pack_wiz.delivery_package_type_id = self.package_type
+        pack_wiz.package_type_id = self.package_type
         # check the related number_of_parcels is ok
         self.assertEqual(
             pack_wiz.number_of_parcels, self.package_type.number_of_parcels
         )
         pack_wiz.action_put_in_pack()
         # check that one package has been created with the same number of packages
-        self.assertEqual(len(picking_ship.package_level_ids), 1)
-        package1 = picking_ship.package_level_ids[0]
+        self.assertEqual(len(picking_ship.move_line_ids.result_package_id), 1)
+        package1 = picking_ship.move_line_ids.result_package_id[0]
         # check the related number_of_parcels is ok in the package
         self.assertEqual(
-            package1.package_id.number_of_parcels, self.package_type.number_of_parcels
+            package1.number_of_parcels, self.package_type.number_of_parcels
         )
         return package1
 
     def test_manual_number_of_parcels(self):
         package = self.test_put_in_pack_choose_carrier_wizard()
-        self.assertEqual(package.package_id.number_of_parcels, 7)
+        self.assertEqual(package.number_of_parcels, 7)
         self.package_type.number_of_parcels = 8
-        self.assertEqual(package.package_id.number_of_parcels, 7)
-        package.package_id.number_of_parcels = 9
-        self.assertEqual(package.package_id.number_of_parcels, 9)
+        self.assertEqual(package.number_of_parcels, 7)
+        package.number_of_parcels = 9
+        self.assertEqual(package.number_of_parcels, 9)
         self.assertEqual(self.package_type.number_of_parcels, 8)
-        package.package_id.package_type_id = self.package_type.copy(
-            {"number_of_parcels": 10}
-        )
-        self.assertEqual(package.package_id.number_of_parcels, 10)
+        package.package_type_id = self.package_type.copy({"number_of_parcels": 10})
+        self.assertEqual(package.number_of_parcels, 10)

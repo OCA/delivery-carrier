@@ -5,9 +5,9 @@
     <record model="ir.ui.view" id="stock_quant_package_form_view">
         <field
             name="name"
-        >stock.quant.package.form (in delivery_package_type_number_parcels)</field>
-        <field name="model">stock.quant.package</field>
-        <field name="inherit_id" ref="stock.view_quant_package_form" />
+        >stock.package.form (in delivery_package_type_number_parcels)</field>
+        <field name="model">stock.package</field>
+        <field name="inherit_id" ref="stock.stock_package_view_form" />
         <field name="arch" type="xml">
             <field name="package_type_id" position="after">
                 <field name="number_of_parcels" invisible="number_of_parcels == 0" />
@@ -18,9 +18,9 @@
     <record model="ir.ui.view" id="stock_quant_package_tree_view">
         <field
             name="name"
-        >stock.quant.package.tree (in delivery_package_type_number_parcels)</field>
-        <field name="model">stock.quant.package</field>
-        <field name="inherit_id" ref="stock.view_quant_package_tree" />
+        >stock.package.list (in delivery_package_type_number_parcels)</field>
+        <field name="model">stock.package</field>
+        <field name="inherit_id" ref="stock.stock_package_view_list" />
         <field name="arch" type="xml">
             <field name="package_type_id" position="after">
                 <field
