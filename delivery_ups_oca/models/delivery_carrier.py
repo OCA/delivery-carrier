@@ -5,13 +5,17 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 import base64
+import logging
 from io import BytesIO
 
 from PIL import Image
 
 from odoo import fields, models
+from odoo.exceptions import UserError
 
 from .ups_request import UpsRequest
+
+_logger = logging.getLogger(__name__)
 
 
 class DeliveryCarrier(models.Model):
@@ -121,16 +125,27 @@ class DeliveryCarrier(models.Model):
 
     def ups_rate_shipment(self, order):
         ups_request = UpsRequest(self)
-        response = ups_request.rate_shipment(order)
-        price = self._ups_get_response_price(
-            response, order.currency_id, order.company_id
-        )
-        return {
-            "success": True,
-            "price": price,
-            "error_message": False,
-            "warning_message": False,
-        }
+        try:
+            response = ups_request.rate_shipment(order)
+            price = self._ups_get_response_price(
+                response, order.currency_id, order.company_id
+            )
+            return {
+                "success": True,
+                "price": price,
+                "error_message": False,
+                "warning_message": False,
+            }
+        except UserError as e:
+            # During rate shopping (checkout), return failure instead of
+            # raising thus gracefully hide unavailable shipping methods.
+            _logger.debug("UPS rate shipment failed: %s", e)
+            return {
+                "success": False,
+                "price": 0.0,
+                "error_message": str(e),
+                "warning_message": False,
+            }
 
     def ups_create_shipping(self, picking):
         """Send packages of the picking to UPS
