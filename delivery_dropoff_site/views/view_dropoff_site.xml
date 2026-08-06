@@ -11,7 +11,7 @@
                         type="object"
                         class="btn-primary"
                         icon="fa-calendar-plus-o"
-                        invisible="not calendar_id"
+                        invisible="calendar_id"
                     />
                     <button
                         name="action_disable_calendar"
@@ -28,6 +28,7 @@
                     />
                 </header>
                 <sheet>
+                    <field name="calendar_id" invisible="1" />
                     <div class="oe_button_box" name="button_box">
                         <button
                             name="toggle_active"
@@ -110,7 +111,6 @@
                         </group>
                         <group>
                             <field name="phone" widget="phone" />
-                            <field name="mobile" widget="phone" />
                             <field name="email" widget="email" />
                             <field
                                 name="website"
@@ -174,7 +174,7 @@
             </search>
         </field>
     </record>
-    <record id="view_partner_dropoff_site_tree" model="ir.ui.view">
+    <record id="view_partner_dropoff_site_list" model="ir.ui.view">
         <field name="model">dropoff.site</field>
         <field name="arch" type="xml">
             <list>

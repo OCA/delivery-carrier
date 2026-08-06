@@ -12,11 +12,12 @@ class TestDeliveryDropoffSite(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        product_category = cls.env.ref("product.product_category_goods")
         cls.delivery_product = cls.env["product.product"].create(
             {
                 "name": "Delivery Product",
                 "type": "service",
-                "categ_id": cls.env.ref("product.product_category_all").id,
+                "categ_id": product_category.id,
                 "sale_ok": True,
                 "purchase_ok": True,
                 "list_price": 10.0,
@@ -55,7 +56,7 @@ class TestDeliveryDropoffSite(BaseCommon):
             {
                 "name": "Test Product",
                 "type": "consu",
-                "categ_id": cls.env.ref("product.product_category_all").id,
+                "categ_id": product_category.id,
             }
         )
 
@@ -79,7 +80,8 @@ class TestDeliveryDropoffSite(BaseCommon):
         self.assertFalse(self.dropoff_site.calendar_id)
 
     def test_03_sale_order_dropoff(self):
-        """Test sale order with dropoff site delivery"""
+        """Test sale order with dropoff
+        site delivery"""
         sale_order = self.env["sale.order"].create(
             {
                 "partner_id": self.customer.id,
@@ -111,7 +113,7 @@ class TestDeliveryDropoffSite(BaseCommon):
             {
                 "name": "Regular Delivery Product",
                 "type": "service",
-                "categ_id": self.env.ref("product.product_category_all").id,
+                "categ_id": self.env.ref("product.product_category_goods").id,
                 "sale_ok": True,
                 "purchase_ok": True,
                 "list_price": 10.0,
@@ -214,5 +216,44 @@ class TestDeliveryDropoffSite(BaseCommon):
         )
         sale_order.action_confirm()
         order_line = sale_order.order_line[0]
-        values = order_line._prepare_procurement_values(None)
+        values = order_line._prepare_procurement_values()
         self.assertEqual(values.get("final_shipping_partner_id"), self.customer.id)
+
+    def test_10_unlink_dropoff_site_with_calendar(self):
+        """Test unlink() removes associated calendar"""
+        self.dropoff_site.action_enable_calendar()
+        calendar = self.dropoff_site.calendar_id
+        self.assertTrue(calendar.exists())
+        self.dropoff_site.unlink()
+        self.assertFalse(calendar.exists())
+
+    def test_11_onchange_partner_shipping_sets_final_recipient(self):
+        """Test onchange_partner_shipping_id_final auto-sets
+        final_shipping_partner_id"""
+        sale_order = self.env["sale.order"].create(
+            {
+                "partner_id": self.customer.id,
+                "carrier_id": self.carrier.id,
+            }
+        )
+        # No final_shipping_partner_id yet
+        self.assertFalse(sale_order.final_shipping_partner_id)
+        # Simulate onchange: set partner_shipping to the dropoff site partner
+        sale_order.partner_shipping_id = self.dropoff_site.partner_id
+        sale_order.onchange_partner_shipping_id_final()
+        # Should auto-fill final_shipping_partner_id with partner_id
+        self.assertEqual(sale_order.final_shipping_partner_id, self.customer)
+
+    def test_12_partner_shipping_domain_no_carrier(self):
+        """Test _compute_partner_shipping_id_domain else branch"""
+        sale_order = self.env["sale.order"].create(
+            {
+                "partner_id": self.customer.id,
+            }
+        )
+        # No carrier → else branch: domain restricts to non-dropoff partners
+        sale_order._compute_partner_shipping_id_domain()
+        self.assertEqual(
+            sale_order.partner_shipping_id_domain,
+            [("is_dropoff_site", "=", False)],
+        )

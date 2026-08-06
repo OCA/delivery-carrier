@@ -22,7 +22,7 @@ class SaleOrder(models.Model):
         comodel_name="res.partner",
         string="Final Recipient",
         readonly=True,
-        help="It is the partner that will pick up the parcel " "in the dropoff site.",
+        help="It is the partner that will pick up the parcel in the dropoff site.",
     )
     partner_shipping_id_domain = fields.Binary(
         compute="_compute_partner_shipping_id_domain",
@@ -71,8 +71,8 @@ class SaleOrder(models.Model):
 class SaleOrderLine(models.Model):
     _inherit = "sale.order.line"
 
-    def _prepare_procurement_values(self, group_id):
-        res = super()._prepare_procurement_values(group_id=group_id)
+    def _prepare_procurement_values(self):
+        res = super()._prepare_procurement_values()
         res.update(
             {
                 "final_shipping_partner_id": self.order_id.final_shipping_partner_id.id,

@@ -11,7 +11,7 @@ class StockMove(models.Model):
     final_shipping_partner_id = fields.Many2one(
         comodel_name="res.partner",
         string="Final Recipient",
-        help="It is the partner that will pick up the parcel " "in the dropoff site.",
+        help="It is the partner that will pick up the parcel in the dropoff site.",
     )
 
     def _get_new_picking_values(self):
