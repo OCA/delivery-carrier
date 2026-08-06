@@ -32,18 +32,11 @@ class SaleOrder(models.Model):
             return 0, 0.0
 
         # amount
-        product = fee_product.with_context(
-            pricelist=self.pricelist_id.id,
-            partner=self.partner_id,
-            quantity=qty,
-            date=self.date_order,
-            uom=fee_product.uom_id.id,
-        )
-        price_unit = self.currency_id._convert(
-            product._get_contextual_price(),
-            self.company_id.currency_id,
-            self.company_id,
-            self.date_order or fields.Date.today(),
+        price_unit = self.pricelist_id._get_product_price(
+            fee_product,
+            qty,
+            uom=fee_product.uom_id,
+            date=self.date_order or fields.Date.today(),
         )
         return qty, price_unit
 
@@ -71,9 +64,9 @@ class SaleOrder(models.Model):
             "order_id": self.id,
             "name": so_description,
             "product_uom_qty": qty,
-            "product_uom": fee_product.uom_id.id,
+            "product_uom_id": fee_product.uom_id.id,
             "product_id": fee_product.id,
-            "tax_id": [(6, 0, taxes_ids)],
+            "tax_ids": [(6, 0, taxes_ids)],
             "price_unit": price_unit,
             "package_fee_id": package_fee.id,
         }

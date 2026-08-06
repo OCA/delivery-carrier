@@ -58,10 +58,11 @@ class TestPackageFee(TransactionCase):
             cls.sale.order_line[1].product_id,
             cls.sale.order_line[1].product_uom_qty,
         )
+        cls.sale.pricelist_id = cls.pricelist
         cls.sale.action_confirm()
 
-        cls.pack1 = cls.env["stock.quant.package"].create({})
-        cls.pack2 = cls.env["stock.quant.package"].create({})
+        cls.pack1 = cls.env["stock.package"].create({})
+        cls.pack2 = cls.env["stock.package"].create({})
 
         cls.sptype1 = cls.env["stock.package.type"].create({"name": "SPType 1"})
         cls.sptype2 = cls.env["stock.package.type"].create({"name": "SPType 2"})
@@ -168,22 +169,14 @@ class TestPackageFee(TransactionCase):
                 "type_tax_use": "sale",
                 "amount_type": "percent",
                 "amount": 15,
+                "original_tax_ids": [(4, tax_price_include.id)],
             }
         )
 
         fiscal_position = self.env["account.fiscal.position"].create(
             {
                 "name": "fiscal_pos_a",
-                "tax_ids": [
-                    (
-                        0,
-                        None,
-                        {
-                            "tax_src_id": tax_price_include.id,
-                            "tax_dest_id": tax_price_exclude.id,
-                        },
-                    ),
-                ],
+                "tax_ids": [(4, tax_price_exclude.id)],
             }
         )
 
@@ -209,9 +202,9 @@ class TestPackageFee(TransactionCase):
             lambda line: line.product_id == self.fee2
         )
 
-        self.assertNotEqual(so_line_fee1.tax_id[0], tax_price_exclude)
+        self.assertNotEqual(so_line_fee1.tax_ids[0], tax_price_exclude)
         # only fee2 has tax tax_price_exclude due to defined fiscal position
-        self.assertEqual(so_line_fee2.tax_id[0], tax_price_exclude)
+        self.assertEqual(so_line_fee2.tax_ids[0], tax_price_exclude)
 
     def test_package_fee_backorder(self):
         """Stock moves valided in 2 times using a backorder"""
@@ -334,6 +327,7 @@ class TestPackageFee(TransactionCase):
                 "pricelist_id": pricelist.id,
                 "product_id": self.fee1.id,
                 "applied_on": "0_product_variant",
+                "compute_price": "fixed",
                 "fixed_price": fee1_price,
             }
         )
@@ -342,6 +336,7 @@ class TestPackageFee(TransactionCase):
                 "pricelist_id": pricelist.id,
                 "product_id": self.fee2.id,
                 "applied_on": "0_product_variant",
+                "compute_price": "fixed",
                 "fixed_price": fee2_price,
             }
         )
@@ -665,4 +660,35 @@ class TestPackageFee(TransactionCase):
                     "name": f"Service Fee ({picking.name})",
                 },
             ],
+        )
+
+    def test_package_fee_description_sale(self):
+        """Fee product with description_sale uses combined name"""
+        self.fee1.description_sale = "Extra charge"
+        picking = self.sale.picking_ids
+        picking.move_line_ids[0].write(
+            {"result_package_id": self.pack1, "quantity": 10.0, "picked": True}
+        )
+        picking.move_line_ids[1].write(
+            {"result_package_id": self.pack2, "quantity": 10.0, "picked": True}
+        )
+        picking._action_done()
+        fee1_line = self.sale.order_line.filtered(
+            lambda line: line.product_id == self.fee1
+        )
+        self.assertIn("LSVA Fee: Extra charge", fee1_line.name)
+
+    def test_copy_sale_order_removes_package_fee_lines(self):
+        """Copying a sale order excludes package fee lines"""
+        picking = self.sale.picking_ids
+        picking.move_line_ids[0].write(
+            {"result_package_id": self.pack1, "quantity": 10.0, "picked": True}
+        )
+        picking.move_line_ids[1].write(
+            {"result_package_id": self.pack2, "quantity": 10.0, "picked": True}
+        )
+        picking._action_done()
+        sale_copy = self.sale.copy()
+        self.assertFalse(
+            sale_copy.order_line.filtered(lambda line: line.package_fee_id)
         )

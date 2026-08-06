@@ -3,7 +3,7 @@
 {
     "name": "Delivery Package Fees",
     "summary": "Add fees on sales order for delivered packages",
-    "version": "18.0.1.0.0",
+    "version": "19.0.1.0.0",
     "category": "Delivery",
     "website": "https://github.com/OCA/delivery-carrier",
     "author": "Camptocamp, Odoo Community Association (OCA)",
