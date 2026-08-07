@@ -18,7 +18,7 @@ class TestDeliveryCarrierShippingPolicy(BaseCommon):
         )
         cls.partner = cls.env["res.partner"].create({"name": "TEST"})
         cls.product = cls.env["product.product"].create(
-            {"name": "TEST", "is_storable": True}
+            {"name": "TEST", "type": "consu"}
         )
         cls.order = cls.env["sale.order"].create(
             {

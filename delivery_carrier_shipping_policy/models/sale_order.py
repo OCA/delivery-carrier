@@ -10,9 +10,12 @@ class SaleOrder(models.Model):
     carrier_id = fields.Many2one(inverse="_inverse_carrier_id")
 
     def _inverse_carrier_id(self):
-        # pylint: disable=missing-return
-        if hasattr(super(), "_inverse_carrier_id"):
+        res = (
             super()._inverse_carrier_id()
+            if hasattr(super(), "_inverse_carrier_id")
+            else False
+        )
         for rec in self:
             if rec.carrier_id.picking_policy:
                 rec.picking_policy = rec.carrier_id.picking_policy
+        return res
