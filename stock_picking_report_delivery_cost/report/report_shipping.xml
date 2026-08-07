@@ -3,7 +3,7 @@
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
     <template id="report_picking" inherit_id="stock.report_picking">
-        <xpath expr="//div[@name='div_sched_date']" position="after">
+        <xpath expr="//div[@name='div_picking_date']" position="after">
             <div
                 t-if="o.carrier_price_for_report"
                 class="col"

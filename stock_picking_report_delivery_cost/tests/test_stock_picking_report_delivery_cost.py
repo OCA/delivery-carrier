@@ -30,19 +30,16 @@ class TestStockPickingReportDeliveryCost(BaseCommon):
                 "product_id": cls.carrier_product.id,
             }
         )
-        cls.pricelist = cls.env["product.pricelist"].create({"name": "Test pricelist"})
         cls.order = cls.env["sale.order"].create(
             {
                 "partner_id": cls.partner.id,
                 "carrier_id": cls.carrier.id,
-                "pricelist_id": cls.pricelist.id,
                 "order_line": [
                     Command.create(
                         {
                             "name": cls.product.name,
                             "product_id": cls.product.id,
                             "product_uom_qty": 2,
-                            "product_uom": cls.product.uom_id.id,
                             "price_unit": 300.00,
                         },
                     ),
@@ -75,8 +72,8 @@ class TestStockPickingReportDeliveryCost(BaseCommon):
         self.order.action_confirm()
         picking = self.order.picking_ids
         self.assertAlmostEqual(picking.carrier_price_for_report, 0)
-        move = picking.move_ids_without_package
-        move.quantity = move.product_qty
+        move = picking.move_ids
+        move.quantity = move.product_uom_qty
         picking.button_validate()
         self.assertAlmostEqual(picking.carrier_price_for_report, 5)
 
@@ -88,7 +85,7 @@ class TestStockPickingReportDeliveryCost(BaseCommon):
         )
         picking_form.partner_id = self.partner
         picking_form.carrier_id = self.carrier
-        with picking_form.move_ids_without_package.new() as line:
+        with picking_form.move_ids.new() as line:
             line.product_id = self.product
             line.product_uom_qty = 1
         picking = picking_form.save()
