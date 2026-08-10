@@ -2,37 +2,26 @@
 <odoo>
     <record id="res_config_settings_view_form_sale" model="ir.ui.view">
         <field name="model">res.config.settings</field>
-        <field name="inherit_id" ref="sale.res_config_settings_view_form" />
+        <field name="inherit_id" ref="stock.res_config_settings_view_form" />
         <field name="arch" type="xml">
-            <xpath expr="//div[@id='ups']" position="after">
-                <div
-                    class="col-12 col-lg-6 o_setting_box"
+            <xpath
+                expr="//block[@name='shipping_setting_container']/setting[@id='delivery']"
+                position="after"
+            >
+                <setting
                     id="display_delivery_fee_settings"
+                    company_dependent="1"
+                    help="Apply the delivery fee only once per sales order."
                 >
-                    <div class="o_setting_left_pane">
-                        <field name="one_delivery_fee_by_sale_order" />
-                    </div>
-                    <div class="o_setting_right_pane">
-                        <label for="one_delivery_fee_by_sale_order" />
-                        <div class="text-muted">
-                            The delivery fee will be applied just once per sale order
-                        </div>
-                    </div>
-                </div>
-                <div
-                    class="col-12 col-lg-6 o_setting_box"
+                    <field name="one_delivery_fee_by_sale_order" />
+                </setting>
+                <setting
                     id="display_delivery_fee_commercial_partner_day_settings"
+                    company_dependent="1"
+                    help="Apply the delivery fee only once per commercial partner and day."
                 >
-                    <div class="o_setting_left_pane">
-                        <field name="one_delivery_fee_by_commercial_partner_day" />
-                    </div>
-                    <div class="o_setting_right_pane">
-                        <label for="one_delivery_fee_by_commercial_partner_day" />
-                        <div class="text-muted">
-                            The delivery fee will be applied just once per commercial partner and day
-                        </div>
-                    </div>
-                </div>
+                    <field name="one_delivery_fee_by_commercial_partner_day" />
+                </setting>
             </xpath>
         </field>
     </record>

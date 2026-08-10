@@ -9,10 +9,7 @@
                     name="fee_product_id"
                     context="{'default_detailed_type': 'service', 'default_sale_ok': False, 'default_purchase_ok': False, 'default_invoice_policy': 'order'}"
                 />
-                <field
-                    name="fee_return_percentage"
-                    attrs="{'invisible': [('fee_product_id', '=', False)]}"
-                />
+                <field name="fee_return_percentage" invisible="not fee_product_id" />
             </xpath>
         </field>
     </record>

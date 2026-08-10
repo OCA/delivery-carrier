@@ -95,6 +95,8 @@ class SaleOrderLine(models.Model):
         for order in lines.order_id:
             fee_lines = order.order_line.filtered("is_delivery_fee")
             last_sequence = order.order_line[-1].sequence
-            for fee_line, increase in zip(fee_lines, range(1, len(fee_lines) + 1)):
+            for fee_line, increase in zip(
+                fee_lines, range(1, len(fee_lines) + 1), strict=False
+            ):
                 fee_line.sequence = last_sequence + increase
         return lines

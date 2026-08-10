@@ -23,10 +23,10 @@ class StockPicking(models.Model):
         full_returned = False
         for move in self.move_ids:
             full_returned = not float_compare(
-                move.quantity_done,
+                move.quantity,
                 sum(
                     move.returned_move_ids.filtered(lambda x: x.state == "done").mapped(
-                        "quantity_done"
+                        "quantity"
                     )
                 ),
                 precision_rounding=move.product_uom.rounding,

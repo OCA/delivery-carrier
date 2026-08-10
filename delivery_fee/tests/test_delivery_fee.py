@@ -3,23 +3,16 @@
 from datetime import datetime, timedelta
 
 from odoo import Command, fields
-from odoo.tests import Form, TransactionCase
+from odoo.tests import Form
+
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class DeliveryFeeTestCase(TransactionCase):
+class DeliveryFeeTestCase(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
-        if not cls.env.company.chart_template_id:
-            # Load a CoA if there's none in current company
-            coa = cls.env.ref("l10n_generic_coa.configurable_chart_template", False)
-            if not coa:
-                # Load the first available CoA
-                coa = cls.env["account.chart.template"].search(
-                    [("visible", "=", True)], limit=1
-                )
-            coa.try_loading(company=cls.env.company, install_demo=False)
         cls.delivery_product = cls.env["product.product"].create(
             {
                 "name": "Delivery test",
@@ -86,10 +79,9 @@ class DeliveryFeeTestCase(TransactionCase):
         cls.env.company.one_delivery_fee_by_commercial_partner_day = False
 
     def _validate_picking(self, picking):
-        picking.action_set_quantities_to_reservation()
-        for move in picking.move_ids.filtered(lambda move: not move.quantity_done):
-            move.quantity_done = move.product_uom_qty
-        picking._action_done()
+        for move in picking.move_ids:
+            move.quantity = move.product_uom_qty
+        picking.button_validate()
 
     def _picking_return(self, picking, qty=None):
         stock_return_picking_form = Form(
@@ -102,7 +94,10 @@ class DeliveryFeeTestCase(TransactionCase):
         stock_return_picking = stock_return_picking_form.save()
         if qty:
             stock_return_picking.product_return_moves.quantity = qty
-        stock_return_picking_action = stock_return_picking.create_returns()
+        elif not any(stock_return_picking.product_return_moves.mapped("quantity")):
+            for return_move in stock_return_picking.product_return_moves:
+                return_move.quantity = return_move.move_id.quantity
+        stock_return_picking_action = stock_return_picking.action_create_returns()
         return_pick = self.env["stock.picking"].browse(
             stock_return_picking_action["res_id"]
         )

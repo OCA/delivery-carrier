@@ -3,14 +3,14 @@
 {
     "name": "Delivery Fee",
     "summary": "Charge extra fees on deliveries",
-    "version": "16.0.1.0.0",
+    "version": "18.0.1.0.0",
     "development_status": "Alpha",
     "category": "Inventory/Delivery",
     "author": "Moduon, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/delivery-carrier",
     "maintainers": ["chienandalu", "rafaelbn"],
     "license": "LGPL-3",
-    "depends": ["delivery"],
+    "depends": ["stock_delivery"],
     "data": [
         "views/res_partner_views.xml",
         "views/delivery_carrier_views.xml",
