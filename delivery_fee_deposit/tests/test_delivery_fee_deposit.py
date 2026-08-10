@@ -29,6 +29,9 @@ class TestDeliveryFeeDeposit(TestStockCustomerDepositCommon):
                 "fee_return_percentage": 75,
             }
         )
+        # Ensure compatibility with sale_order_warehouse_from_delivery_carrier in CI
+        if "so_warehouse_id" in cls.carrier._fields:
+            cls.carrier.so_warehouse_id = cls.warehouse
         cls.env.company.one_delivery_fee_by_sale_order = False
         cls.env.company.one_delivery_fee_by_commercial_partner_day = False
 

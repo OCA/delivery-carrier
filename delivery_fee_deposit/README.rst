@@ -30,6 +30,10 @@ Delivery Fee Deposit
 
 This glue module integrates delivery fees with customer deposits.
 
+It keeps the regular delivery fee behavior for standard deliveries while
+avoiding extra fees when a delivery only moves products that are already
+in the customer's deposit.
+
 .. IMPORTANT::
    This is an alpha version, the data model and design can change at any time without warning.
    Only for development or testing purpose, do not use in production.
@@ -43,8 +47,74 @@ This glue module integrates delivery fees with customer deposits.
 Usage
 =====
 
-Delivery fees are applied to deposit-creation and mixed deliveries, but
-not to deliveries made entirely from customer-owned deposit stock.
+When this module is installed, delivery fees follow these rules:
+
+- The sale order that creates the customer deposit applies the delivery
+  fee.
+- A delivery that only delivers products from the customer deposit does
+  not apply the delivery fee.
+- A mixed delivery, with products from the customer deposit and regular
+  stock, applies the delivery fee normally.
+
+**Behavior matrix**
+
++--------------------------------------+--------+----------------------+
+| Scenario                             | Exempt | Delivery fee applied |
++======================================+========+======================+
+| Sale creating a customer deposit     | Yes    | No                   |
++--------------------------------------+--------+----------------------+
+| Sale creating a customer deposit     | No     | Yes                  |
++--------------------------------------+--------+----------------------+
+| Delivery fully from customer deposit | Yes    | No                   |
++--------------------------------------+--------+----------------------+
+| Delivery fully from customer deposit | No     | No                   |
++--------------------------------------+--------+----------------------+
+| Mixed delivery: customer deposit +   | Yes    | No                   |
+| regular stock                        |        |                      |
++--------------------------------------+--------+----------------------+
+| Mixed delivery: customer deposit +   | No     | Yes                  |
+| regular stock                        |        |                      |
++--------------------------------------+--------+----------------------+
+| Delivery fully from pre-existing     | Yes    | No                   |
+| customer deposit                     |        |                      |
++--------------------------------------+--------+----------------------+
+| Delivery fully from pre-existing     | No     | No                   |
+| customer deposit                     |        |                      |
++--------------------------------------+--------+----------------------+
+
+A pre-existing customer deposit means customer-owned stock already
+available before the sale being delivered. Releasing it should not
+create a new delivery fee, even for successive deliveries.
+
+**Return behavior matrix**
+
++----------------------+----------------------+----------------------+
+| Scenario             | Return condition     | Delivery fee         |
+|                      |                      | reimbursed           |
++======================+======================+======================+
+| Sale creating a      | Deposit creation     | Yes, per carrier     |
+| customer deposit     | picking fully        | config               |
+|                      | returned             |                      |
++----------------------+----------------------+----------------------+
+| Delivery fully from  | Returned             | No fee existed       |
+| customer deposit     |                      |                      |
++----------------------+----------------------+----------------------+
+| Mixed delivery:      | Only deposit         | No                   |
+| deposit + regular    | products returned    |                      |
+| stock                |                      |                      |
++----------------------+----------------------+----------------------+
+| Mixed delivery:      | All regular-stock    | Yes, per carrier     |
+| deposit + regular    | products returned    | config               |
+| stock                |                      |                      |
++----------------------+----------------------+----------------------+
+| Delivery fully from  | Returned             | No fee existed       |
+| pre-existing         |                      |                      |
+| customer deposit     |                      |                      |
++----------------------+----------------------+----------------------+
+
+For mixed deliveries, the fee belongs to the regular-stock shipment.
+Returning only the customer-deposit products must not reimburse it;
+returning all regular products does.
 
 Bug Tracker
 ===========
@@ -67,7 +137,7 @@ Authors
 Contributors
 ------------
 
-- Moduon Team https://www.moduon.team
+- Moduon Team info@moduon.team
 
 Maintainers
 -----------
