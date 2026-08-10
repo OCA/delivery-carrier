@@ -1,1 +1,1 @@
-* Moduon Team <https://www.moduon.team>
+* Moduon Team <info@moduon.team>

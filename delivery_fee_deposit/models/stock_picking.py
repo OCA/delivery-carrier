@@ -60,11 +60,7 @@ class StockPicking(models.Model):
     def _delivery_fee_deposit_is_creation(self):
         """The first transfer to customer-owned stock is still a delivery."""
         self.ensure_one()
-        return (
-            self.sale_id.customer_deposit
-            and self.sale_id.warehouse_id.customer_deposit_type_id
-            == self.picking_type_id
-        )
+        return self.sale_id.customer_deposit and self.picking_type_id.assign_owner
 
     def _delivery_fee_deposit_is_full_delivery(self):
         """Only skip fees when the whole picking releases customer-owned stock."""
@@ -99,7 +95,7 @@ class StockPicking(models.Model):
         )
 
     def _delivery_fee_deposit_is_move(self, move):
-        partner = move.sale_line_id.order_id.partner_id.commercial_partner_id
+        partner = move.partner_id.commercial_partner_id
         if not partner or not move.move_line_ids:
             return False
         return all(
