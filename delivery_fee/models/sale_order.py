@@ -18,7 +18,7 @@ class SaleOrder(models.Model):
             pickings = order.picking_ids.filtered(
                 lambda x: x._is_to_external_location()
             )
-            order.all_fee_pickings_returned = all(
+            order.all_fee_pickings_returned = bool(pickings) and all(
                 pick._full_returned_for_delivery_fee() for pick in pickings
             )
 
@@ -94,7 +94,13 @@ class SaleOrderLine(models.Model):
         # TODO: It'd be nice to have them in a section
         for order in lines.order_id:
             fee_lines = order.order_line.filtered("is_delivery_fee")
-            last_sequence = order.order_line[-1].sequence
-            for fee_line, increase in zip(fee_lines, range(1, len(fee_lines) + 1)):
+            if not fee_lines:
+                continue
+            last_sequence = max(
+                (order.order_line - fee_lines).mapped("sequence"), default=0
+            )
+            for fee_line, increase in zip(
+                fee_lines, range(1, len(fee_lines) + 1), strict=False
+            ):
                 fee_line.sequence = last_sequence + increase
         return lines

@@ -3,23 +3,16 @@
 from datetime import datetime, timedelta
 
 from odoo import Command, fields
-from odoo.tests import Form, TransactionCase
+from odoo.tests import Form
+
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class DeliveryFeeTestCase(TransactionCase):
+class DeliveryFeeTestCase(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
-        if not cls.env.company.chart_template_id:
-            # Load a CoA if there's none in current company
-            coa = cls.env.ref("l10n_generic_coa.configurable_chart_template", False)
-            if not coa:
-                # Load the first available CoA
-                coa = cls.env["account.chart.template"].search(
-                    [("visible", "=", True)], limit=1
-                )
-            coa.try_loading(company=cls.env.company, install_demo=False)
         cls.delivery_product = cls.env["product.product"].create(
             {
                 "name": "Delivery test",
@@ -86,10 +79,9 @@ class DeliveryFeeTestCase(TransactionCase):
         cls.env.company.one_delivery_fee_by_commercial_partner_day = False
 
     def _validate_picking(self, picking):
-        picking.action_set_quantities_to_reservation()
-        for move in picking.move_ids.filtered(lambda move: not move.quantity_done):
-            move.quantity_done = move.product_uom_qty
-        picking._action_done()
+        for move in picking.move_ids:
+            move.quantity = move.product_uom_qty
+        picking.button_validate()
 
     def _picking_return(self, picking, qty=None):
         stock_return_picking_form = Form(
@@ -102,18 +94,15 @@ class DeliveryFeeTestCase(TransactionCase):
         stock_return_picking = stock_return_picking_form.save()
         if qty:
             stock_return_picking.product_return_moves.quantity = qty
-        stock_return_picking_action = stock_return_picking.create_returns()
+        elif not any(stock_return_picking.product_return_moves.mapped("quantity")):
+            for return_move in stock_return_picking.product_return_moves:
+                return_move.quantity = return_move.move_id.quantity
+        stock_return_picking_action = stock_return_picking.action_create_returns()
         return_pick = self.env["stock.picking"].browse(
             stock_return_picking_action["res_id"]
         )
         self._validate_picking(return_pick)
         return return_pick
-
-    def _add_line_to_sale_order(self, sale):
-        so_form = Form(self.sale_order)
-        with so_form.order_line.new() as line:
-            line.product_id = self.product
-        so_form.save()
 
     def _outgoing_pickings(self, pickings):
         return pickings.filtered(lambda pick: pick.picking_type_code == "outgoing")
@@ -225,6 +214,67 @@ class DeliveryFeeTestCase(TransactionCase):
         self.assertTrue(self.sale_order.all_fee_pickings_returned)
         self.assertAlmostEqual(picking_1_fee.price_subtotal, 0.50)
         self.assertAlmostEqual(picking_1_fee.product_uom_qty, 0.25)
+
+    def test_delivery_fee_line_sequence(self):
+        self.sale_order.order_line.sequence = 10
+        fee_lines = self.env["sale.order.line"].create(
+            [
+                {
+                    "order_id": self.sale_order.id,
+                    "product_id": self.fee_product.id,
+                    "is_delivery_fee": True,
+                }
+                for _dummy in range(2)
+            ]
+        )
+        self.assertEqual(fee_lines.mapped("sequence"), [11, 12])
+        self.env["sale.order.line"].create(
+            {
+                "order_id": self.sale_order.id,
+                "product_id": self.product.id,
+                "sequence": 5,
+            }
+        )
+        self.assertEqual(fee_lines.mapped("sequence"), [11, 12])
+        self.env["sale.order.line"].create(
+            {
+                "order_id": self.sale_order.id,
+                "product_id": self.product.id,
+                "sequence": 20,
+            }
+        )
+        self.assertEqual(fee_lines.mapped("sequence"), [21, 22])
+        self.sale_order.order_line.filtered(
+            lambda line: not line.is_delivery_fee
+        ).unlink()
+        fee_lines |= fee_lines[:1].copy({"order_id": self.sale_order.id})
+        self.assertEqual(sorted(fee_lines.mapped("sequence")), [1, 2, 3])
+
+    def test_fee_not_returned_without_pickings(self):
+        self.env["sale.order.line"].create(
+            {
+                "order_id": self.sale_order.id,
+                "product_id": self.fee_product.id,
+                "is_delivery_fee": True,
+            }
+        )
+        self.assertFalse(self.sale_order.picking_ids)
+        self.assertFalse(self.sale_order.all_fee_pickings_returned)
+
+    def test_full_returned_for_delivery_fee(self):
+        self.sale_order.order_line.product_uom_qty = 2
+        self.sale_order.action_confirm()
+        picking = self._outgoing_pickings(self.sale_order.picking_ids)
+        empty_picking = picking.copy({"move_ids": [Command.clear()]})
+        self.assertFalse(empty_picking._full_returned_for_delivery_fee())
+        with self.assertRaises(ValueError):
+            (picking | empty_picking)._full_returned_for_delivery_fee()
+        self._validate_picking(picking)
+        self.assertFalse(picking._full_returned_for_delivery_fee())
+        self._picking_return(picking, qty=1)
+        self.assertFalse(picking._full_returned_for_delivery_fee())
+        self._picking_return(picking, qty=1)
+        self.assertTrue(picking._full_returned_for_delivery_fee())
 
     def test_delivery_fee_added_on_picking_validation(self):
         """Test that delivery fee is added when picking is validated"""
@@ -358,15 +408,16 @@ class DeliveryFeeTestCase(TransactionCase):
         picking_1.date_done = datetime(2026, 6, 3, 23, 0, 0)
         picking_2.date_done = datetime(2026, 6, 4, 8, 0, 0)
 
-        self.assertTrue(
-            picking_2.with_context(
-                tz="Europe/Madrid"
-            )._has_delivery_fee_for_commercial_partner_day()
-        )
         self.assertFalse(
             picking_2.with_context(
+                tz="Europe/Madrid"
+            )._filter_without_delivery_fee_for_commercial_partner_day()
+        )
+        self.assertEqual(
+            picking_2.with_context(
                 tz="UTC"
-            )._has_delivery_fee_for_commercial_partner_day()
+            )._filter_without_delivery_fee_for_commercial_partner_day(),
+            picking_2,
         )
 
     def test_delivery_fee_added_on_picking_validation_one_fee_per_order(self):

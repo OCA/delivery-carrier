@@ -2,7 +2,7 @@
 <odoo>
     <template
         id="report_delivery_document2"
-        inherit_id="delivery.report_delivery_document2"
+        inherit_id="stock_delivery.report_delivery_document2"
     >
         <xpath expr="//div[hasclass('page')]" position="inside">
             <t
@@ -15,15 +15,15 @@
             >
                 <p class="mt-5 fw-bolder fst-italic">
                     <img
-                        t-if="fee_product.image_128"
-                        t-attf-src="/web/image/product.product/{{ fee_product.id }}/image_128"
-                        style="width: 18px; height: 18px; object-fit: contain;"
-                        alt="Fee info"
-                    />
+                    t-if="fee_product.image_128"
+                    t-attf-src="/web/image/product.product/{{ fee_product.id }}/image_128"
+                    style="width: 18px; height: 18px; object-fit: contain;"
+                    alt="Fee info"
+                />
                     <span t-field="fee_product.description_sale" />: <span
-                        t-esc="fee_product.list_price"
-                        t-options="{'widget': 'monetary', 'display_currency': o.sale_id.currency_id}"
-                    />
+                    t-esc="fee_product.list_price"
+                    t-options="{'widget': 'monetary', 'display_currency': o.sale_id.currency_id}"
+                />
                 </p>
             </div>
         </xpath>

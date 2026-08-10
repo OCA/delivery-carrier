@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0+e\n"
+"Project-Id-Version: Odoo Server 18.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-24 14:16+0000\n"
-"PO-Revision-Date: 2026-02-24 14:16+0000\n"
+"POT-Creation-Date: 2026-08-10 14:14+0000\n"
+"PO-Revision-Date: 2026-08-10 14:14+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -30,6 +30,16 @@ msgstr ""
 #. module: delivery_fee
 #: model:ir.model.fields,field_description:delivery_fee.field_sale_order__all_fee_pickings_returned
 msgid "All Fee Pickings Returned"
+msgstr ""
+
+#. module: delivery_fee
+#: model_terms:ir.ui.view,arch_db:delivery_fee.res_config_settings_view_form_sale
+msgid "Apply the delivery fee only once per commercial partner and day."
+msgstr ""
+
+#. module: delivery_fee
+#: model_terms:ir.ui.view,arch_db:delivery_fee.res_config_settings_view_form_sale
+msgid "Apply the delivery fee only once per sales order."
 msgstr ""
 
 #. module: delivery_fee
@@ -65,7 +75,7 @@ msgstr ""
 
 #. module: delivery_fee
 #: model:ir.model.fields,field_description:delivery_fee.field_delivery_carrier__fee_return_percentage
-msgid "Fee Return Percentage"
+msgid "Fee return %"
 msgstr ""
 
 #. module: delivery_fee
@@ -77,6 +87,12 @@ msgstr ""
 #. module: delivery_fee
 #: model:ir.model.fields,field_description:delivery_fee.field_sale_order_line__is_delivery_fee
 msgid "Is a Delivery Fee"
+msgstr ""
+
+#. module: delivery_fee
+#: model:ir.model.fields,field_description:delivery_fee.field_res_company__one_delivery_fee_by_commercial_partner_day
+#: model:ir.model.fields,field_description:delivery_fee.field_res_config_settings__one_delivery_fee_by_commercial_partner_day
+msgid "One Delivery Fee By Commercial Partner Day"
 msgstr ""
 
 #. module: delivery_fee
@@ -101,8 +117,9 @@ msgid "Shipping Methods"
 msgstr ""
 
 #. module: delivery_fee
-#: model_terms:ir.ui.view,arch_db:delivery_fee.res_config_settings_view_form_sale
-msgid "The delivery fee will be applied just once per sale order"
+#: model:ir.model.fields,help:delivery_fee.field_res_company__one_delivery_fee_by_commercial_partner_day
+#: model:ir.model.fields,help:delivery_fee.field_res_config_settings__one_delivery_fee_by_commercial_partner_day
+msgid "The delivery fee will be applied just once per commercial partner and day"
 msgstr ""
 
 #. module: delivery_fee

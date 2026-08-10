@@ -19,25 +19,23 @@ class StockPicking(models.Model):
         (self - return_pickings)._add_delivery_fee_to_order()
         return res
 
-    def _full_returned(self):
-        full_returned = False
-        for move in self.move_ids:
-            full_returned = not float_compare(
-                move.quantity_done,
-                sum(
-                    move.returned_move_ids.filtered(lambda x: x.state == "done").mapped(
-                        "quantity_done"
-                    )
-                ),
-                precision_rounding=move.product_uom.rounding,
-            )
-            if not full_returned:
-                break
-        return full_returned
-
     def _full_returned_for_delivery_fee(self):
         self.ensure_one()
-        return self._full_returned()
+        if not self.move_ids:
+            return False
+        for move in self.move_ids:
+            returned_qty = sum(
+                move.returned_move_ids.filtered(lambda x: x.state == "done").mapped(
+                    "quantity"
+                )
+            )
+            if float_compare(
+                move.quantity,
+                returned_qty,
+                precision_rounding=move.product_uom.rounding,
+            ):
+                return False
+        return True
 
     def _update_delivery_fee_on_return(self):
         """All pickings returned: we can refund the fee"""
@@ -163,26 +161,3 @@ class StockPicking(models.Model):
             local_next_day_start.astimezone(timezone.utc).replace(tzinfo=None)
         )
         return day_start, next_day_start
-
-    def _has_delivery_fee_for_commercial_partner_day(self):
-        self.ensure_one()
-        if not self.company_id.one_delivery_fee_by_commercial_partner_day:
-            return False
-        day_start, next_day_start = self._delivery_fee_local_day_bounds_utc()
-        return bool(
-            self.env["sale.order.line"].search_count(
-                [
-                    ("is_delivery_fee", "=", True),
-                    ("order_id.company_id", "=", self.company_id.id),
-                    ("delivery_fee_picking_id", "!=", self.id),
-                    ("delivery_fee_picking_id.date_done", ">=", day_start),
-                    ("delivery_fee_picking_id.date_done", "<", next_day_start),
-                    (
-                        "delivery_fee_picking_id.partner_id.commercial_partner_id",
-                        "=",
-                        self.partner_id.commercial_partner_id.id,
-                    ),
-                ],
-                limit=1,
-            )
-        )

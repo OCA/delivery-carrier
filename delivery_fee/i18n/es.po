@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0+e\n"
+"Project-Id-Version: Odoo Server 18.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-24 14:17+0000\n"
-"PO-Revision-Date: 2026-02-24 15:20+0100\n"
+"POT-Creation-Date: 2026-08-10 14:14+0000\n"
+"PO-Revision-Date: 2026-08-10 14:14+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -35,6 +35,16 @@ msgstr "/ entrega"
 #: model:ir.model.fields,field_description:delivery_fee.field_sale_order__all_fee_pickings_returned
 msgid "All Fee Pickings Returned"
 msgstr "Todos los albaranes tasados devueltos"
+
+#. module: delivery_fee
+#: model_terms:ir.ui.view,arch_db:delivery_fee.res_config_settings_view_form_sale
+msgid "Apply the delivery fee only once per commercial partner and day."
+msgstr "Aplicar la tasa de envío solo una vez por socio comercial y día."
+
+#. module: delivery_fee
+#: model_terms:ir.ui.view,arch_db:delivery_fee.res_config_settings_view_form_sale
+msgid "Apply the delivery fee only once per sales order."
+msgstr "Aplicar la tasa de envío solo una vez por pedido de venta."
 
 #. module: delivery_fee
 #: model:ir.model,name:delivery_fee.model_res_company
@@ -69,7 +79,7 @@ msgstr "Producto de tasa de envío"
 
 #. module: delivery_fee
 #: model:ir.model.fields,field_description:delivery_fee.field_delivery_carrier__fee_return_percentage
-msgid "Fee Return Percentage"
+msgid "Fee return %"
 msgstr "Porcentaje de retorno de tasa"
 
 #. module: delivery_fee
@@ -82,6 +92,12 @@ msgstr "Información sobre tasa"
 #: model:ir.model.fields,field_description:delivery_fee.field_sale_order_line__is_delivery_fee
 msgid "Is a Delivery Fee"
 msgstr "Es una tasa de envío"
+
+#. module: delivery_fee
+#: model:ir.model.fields,field_description:delivery_fee.field_res_company__one_delivery_fee_by_commercial_partner_day
+#: model:ir.model.fields,field_description:delivery_fee.field_res_config_settings__one_delivery_fee_by_commercial_partner_day
+msgid "One Delivery Fee By Commercial Partner Day"
+msgstr "Una tasa de envío por socio comercial y día"
 
 #. module: delivery_fee
 #: model:ir.model.fields,field_description:delivery_fee.field_res_company__one_delivery_fee_by_sale_order
@@ -105,9 +121,10 @@ msgid "Shipping Methods"
 msgstr "Métodos de envío"
 
 #. module: delivery_fee
-#: model_terms:ir.ui.view,arch_db:delivery_fee.res_config_settings_view_form_sale
-msgid "The delivery fee will be applied just once per sale order"
-msgstr "La tasa de envío se aplicarán tan solo una vez por cada pedido"
+#: model:ir.model.fields,help:delivery_fee.field_res_company__one_delivery_fee_by_commercial_partner_day
+#: model:ir.model.fields,help:delivery_fee.field_res_config_settings__one_delivery_fee_by_commercial_partner_day
+msgid "The delivery fee will be applied just once per commercial partner and day"
+msgstr "La tasa de envío tan solo se aplicará una vez por socio comercial y día"
 
 #. module: delivery_fee
 #: model:ir.model.fields,help:delivery_fee.field_res_company__one_delivery_fee_by_sale_order

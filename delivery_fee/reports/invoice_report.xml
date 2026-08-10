@@ -21,15 +21,15 @@
             >
                 <p class="mt-5 fw-bolder fst-italic">
                     <img
-                        t-if="fee_product.image_128"
-                        t-attf-src="/web/image/product.product/{{ fee_product.id }}/image_128"
-                        style="width: 18px; height: 18px; object-fit: contain;"
-                        alt="Fee info"
-                    />
+                    t-if="fee_product.image_128"
+                    t-attf-src="/web/image/product.product/{{ fee_product.id }}/image_128"
+                    style="width: 18px; height: 18px; object-fit: contain;"
+                    alt="Fee info"
+                />
                     <span t-field="fee_product.description_sale" />: <span
-                        t-esc="fee_product.list_price"
-                        t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"
-                    /> / delivery
+                    t-esc="fee_product.list_price"
+                    t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"
+                /> / delivery
                 </p>
             </div>
         </xpath>
