@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2026-05-04 11:45+0000\n"
+"PO-Revision-Date: 2026-08-11 14:46+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -67,7 +67,7 @@ msgstr "Assegno/Assegno circolare/Vaglia"
 #. module: delivery_ups_oca
 #: model:ir.model,name:delivery_ups_oca.model_res_partner
 msgid "Contact"
-msgstr ""
+msgstr "Contatto"
 
 #. module: delivery_ups_oca
 #: model_terms:ir.ui.view,arch_db:delivery_ups_oca.view_delivery_carrier_form
