@@ -1,2 +1,4 @@
 odoo-test-helper
 vcrpy
+odoo-addon-delivery_fee @ git+https://github.com/OCA/delivery-carrier.git@refs/pull/1146/head#subdirectory=delivery_fee
+odoo-addon-stock_customer_deposit @ git+https://github.com/OCA/stock-logistics-workflow.git@refs/pull/2189/head#subdirectory=stock_customer_deposit
