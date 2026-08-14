@@ -42,14 +42,14 @@ class TestDeliveryMultiDestination(BaseCommon):
                 "zip": "33333",
             }
         )
-        cls.product = cls.env["product.product"].create(
-            {"name": "Test carrier multi", "detailed_type": "service"}
+        cls.product_multi = cls.env["product.product"].create(
+            {"name": "Test carrier multi", "type": "service"}
         )
         cls.product_child_1 = cls.env["product.product"].create(
-            {"name": "Test child 1", "detailed_type": "service"}
+            {"name": "Test child 1", "type": "service"}
         )
         cls.product_child_2 = cls.env["product.product"].create(
-            {"name": "Test child 2", "detailed_type": "service"}
+            {"name": "Test child 2", "type": "service"}
         )
         zip_prefix_child1 = cls.env["delivery.zip.prefix"].create({"name": "22222"})
         zip_prefix_child2 = cls.env["delivery.zip.prefix"].create({"name": "33333"})
@@ -95,14 +95,19 @@ class TestDeliveryMultiDestination(BaseCommon):
             }
         )
         cls.product = cls.env["product.product"].create(
-            {"name": "Test product", "detailed_type": "product", "list_price": 1}
+            {
+                "name": "Test product",
+                "type": "consu",
+                "is_storable": True,
+                "list_price": 1,
+            }
         )
         cls.purchase_order = cls._create_purchase_order(cls)
 
     def _create_carrier(self, childs):
         carrier_form = Form(self.env["delivery.carrier"])
         carrier_form.name = "Test carrier multi"
-        carrier_form.product_id = self.product
+        carrier_form.product_id = self.product_multi
         carrier_form.destination_type = "multi"
         for child_item in childs:
             with carrier_form.child_ids.new() as child_form:
@@ -130,6 +135,14 @@ class TestDeliveryMultiDestination(BaseCommon):
             line_form.product_id = self.product
         return order_form.save()
 
+    def _validate_picking(self, picking):
+        res = picking.button_validate()
+        if isinstance(res, dict):
+            wizard = (
+                self.env[res["res_model"]].with_context(**res["context"]).create({})
+            )
+            wizard.process()
+
     def test_rate_shipment_multi_destination(self):
         order = self.purchase_order
         # When changing partner using carrier single should not change the
@@ -145,24 +158,29 @@ class TestDeliveryMultiDestination(BaseCommon):
         order.carrier_id = self.carrier_multi
         self.assertAlmostEqual(order.delivery_price, 50, 2)
         order.partner_id = self.partner_3
-        # Make sure carrier_single is selected
+        # Make sure carrier_multi is selected
         order.carrier_id = self.carrier_multi
         self.assertAlmostEqual(order.delivery_price, 150, 2)
 
-    def test_picking_validation(self):
+    def test_rate_shipment_no_matching_rule(self):
+        """No child matches the partner address: no error, but no price."""
+        order = self.purchase_order
+        order.carrier_id = self.carrier_multi
+        rate = self.carrier_multi.purchase_rate_shipment(order)
+        self.assertFalse(rate["success"])
+        self.assertAlmostEqual(order.delivery_price, 0, 2)
+
+    def test_picking_validation_base_on_rule_child(self):
         self.purchase_order.partner_id = self.partner_2
         self.purchase_order.carrier_id = self.carrier_multi
         self.purchase_order.button_confirm()
         picking = self.purchase_order.picking_ids
         self.assertEqual(picking.carrier_id, self.carrier_multi)
         picking.move_ids.quantity = 1
-        picking.button_validate()
+        self._validate_picking(picking)
         self.assertAlmostEqual(picking.carrier_price, 50)
 
     def test_picking_validation_backorder(self):
-        self.env["ir.config_parameter"].set_param(
-            "delivery_purchase.use_delivered_qty_to_set_cost", "True"
-        )
         self.product.weight = 1
         self.purchase_order.partner_id = self.partner_2
         self.purchase_order.carrier_id = self.carrier_multi
@@ -172,17 +190,16 @@ class TestDeliveryMultiDestination(BaseCommon):
         picking = self.purchase_order.picking_ids
         self.assertEqual(picking.carrier_id, self.carrier_multi)
         picking.move_ids.quantity = 4
-        backorder_wizard_dict = picking.button_validate()
-        backorder_wizard = Form(
-            self.env[backorder_wizard_dict["res_model"]].with_context(
-                **backorder_wizard_dict["context"]
-            )
-        ).save()
-        backorder_wizard.process()
-        self.assertAlmostEqual(picking.carrier_price, 50)
+        self._validate_picking(picking)
+        # The price is obtained from the purchase order rules, so both the
+        # original picking and the backorder get the same cost.
+        self.assertAlmostEqual(picking.carrier_price, 70)
         other_picking = self.purchase_order.picking_ids - picking
         other_picking.move_ids.filtered(
             lambda ml: ml.product_id == self.product
         ).quantity = 6
-        other_picking.button_validate()
+        self._validate_picking(other_picking)
         self.assertEqual(other_picking.carrier_price, 70)
+        # The carrier is restored in both pickings after computing the price
+        self.assertEqual(picking.carrier_id, self.carrier_multi)
+        self.assertEqual(other_picking.carrier_id, self.carrier_multi)
