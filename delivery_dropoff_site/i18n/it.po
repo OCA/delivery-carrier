@@ -193,10 +193,22 @@ msgid "Check this box if this contact is an Employee."
 msgstr "Seleziona questa casella se questo contatto è un dipendente."
 
 #. module: delivery_dropoff_site
+#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__country_enforce_cities
+msgid ""
+"Check this box to ensure every address created in that country has a 'City' "
+"chosen in the list of the country's cities."
+msgstr ""
+
+#. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__city
 #: model_terms:ir.ui.view,arch_db:delivery_dropoff_site.view_partner_dropoff_site_form
 msgid "City"
 msgstr "Città"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__city_id
+msgid "City ID"
+msgstr ""
 
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__code
@@ -384,6 +396,11 @@ msgid "Display Name"
 msgstr "Nome visualizzato"
 
 #. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__street_number2
+msgid "Door"
+msgstr ""
+
+#. module: delivery_dropoff_site
 #: model:product.template,name:delivery_dropoff_site.product_product_delivery_drop_off_product_template
 msgid "Drop off method"
 msgstr "Metodo di scarico"
@@ -463,6 +480,11 @@ msgid "Enable Calendar"
 msgstr "Abilita calendario"
 
 #. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__country_enforce_cities
+msgid "Enforce Cities"
+msgstr ""
+
+#. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_sale_order__final_shipping_partner_id
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_stock_move__final_shipping_partner_id
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_stock_picking__final_shipping_partner_id
@@ -529,6 +551,11 @@ msgstr "Data geolocalizzazione"
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__has_message
 msgid "Has Message"
 msgstr "Ha un messaggio"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__street_number
+msgid "House"
+msgstr ""
 
 #. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__id
@@ -1085,6 +1112,11 @@ msgstr "Indirizzo"
 #: model_terms:ir.ui.view,arch_db:delivery_dropoff_site.view_partner_dropoff_site_form
 msgid "Street 2..."
 msgstr "Indirizzo 2..."
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__street_name
+msgid "Street Name"
+msgstr ""
 
 #. module: delivery_dropoff_site
 #: model_terms:ir.ui.view,arch_db:delivery_dropoff_site.view_partner_dropoff_site_form
