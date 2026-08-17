@@ -67,6 +67,7 @@ addon | version | maintainers | summary
 [delivery_purchase](delivery_purchase/) | 18.0.1.0.0 |  | Delivery costs in purchases
 [delivery_roulier](delivery_roulier/) | 18.0.1.0.1 | <a href='https://github.com/florian-dacosta'><img src='https://github.com/florian-dacosta.png' width='32' height='32' style='border-radius:50%;' alt='florian-dacosta'/></a> <a href='https://github.com/hparfr'><img src='https://github.com/hparfr.png' width='32' height='32' style='border-radius:50%;' alt='hparfr'/></a> | Integration of multiple carriers
 [delivery_schenker](delivery_schenker/) | 18.0.1.0.0 |  | Delivery Carrier implementation for DB Schenker API
+[delivery_sendcloud_oca](delivery_sendcloud_oca/) | 18.0.1.0.0 | <a href='https://github.com/tarteo'><img src='https://github.com/tarteo.png' width='32' height='32' style='border-radius:50%;' alt='tarteo'/></a> <a href='https://github.com/bytemeasap'><img src='https://github.com/bytemeasap.png' width='32' height='32' style='border-radius:50%;' alt='bytemeasap'/></a> | Compute shipping costs and ship with Sendcloud
 [delivery_state](delivery_state/) | 18.0.1.2.2 |  | Provides fields to be able to contemplate the tracking statesand also adds a global fields
 [delivery_ups_oca](delivery_ups_oca/) | 18.0.1.4.0 |  | Integrate UPS webservice
 [partner_delivery_info](partner_delivery_info/) | 18.0.1.0.0 |  | Send delivery notice to the shipper from any operation.
