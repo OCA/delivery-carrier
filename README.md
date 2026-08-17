@@ -24,6 +24,7 @@ addon | version | maintainers | summary
 [delivery_auto_refresh](delivery_auto_refresh/) | 19.0.1.0.0 |  | Auto-refresh delivery price in sales orders
 [delivery_carrier_account](delivery_carrier_account/) | 19.0.1.0.0 |  | Delivery Carrier Account
 [delivery_carrier_agency](delivery_carrier_agency/) | 19.0.1.0.0 |  | Add a model for Carrier Agencies
+[delivery_carrier_info](delivery_carrier_info/) | 19.0.1.0.0 |  | Add code on carrier
 [delivery_carrier_manual_price](delivery_carrier_manual_price/) | 19.0.1.0.0 |  | Allow setting manual shipping cost in sale order.
 [delivery_carrier_multi_zip](delivery_carrier_multi_zip/) | 19.0.1.0.0 |  | Multiple ZIP intervals for the same delivery method
 [delivery_carrier_option](delivery_carrier_option/) | 19.0.1.0.0 | <a href='https://github.com/florian-dacosta'><img src='https://github.com/florian-dacosta.png' width='32' height='32' style='border-radius:50%;' alt='florian-dacosta'/></a> | Delivery Carrier Option
