@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -16,7 +16,6 @@ msgstr ""
 #. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/models/stock_picking.py:0
-#, python-format
 msgid ""
 "%(parcel)s:\n"
 "%(errors)s\n"
@@ -131,15 +130,19 @@ msgstr ""
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard_return_location__address_1
-#: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return_location__address_1
 msgid "Address 1"
 msgstr ""
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard_return_location__address_2
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__address_2
-#: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return_location__address_2
 msgid "Address 2"
+msgstr ""
+
+#. module: delivery_sendcloud_oca
+#. odoo-javascript
+#: code:addons/delivery_sendcloud_oca/static/src/components/onboarding/onboarding.xml:0
+msgid "All done!"
 msgstr ""
 
 #. module: delivery_sendcloud_oca
@@ -163,6 +166,12 @@ msgstr ""
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_picking_withcarrier_out_form
 msgid "Apply Shipping Rules"
+msgstr ""
+
+#. module: delivery_sendcloud_oca
+#. odoo-javascript
+#: code:addons/delivery_sendcloud_oca/static/src/components/onboarding/onboarding.xml:0
+msgid "Are you sure you want to hide these configuration steps?"
 msgstr ""
 
 #. module: delivery_sendcloud_oca
@@ -190,7 +199,6 @@ msgstr ""
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard__brand_id
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__brand_id
-#: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return_location__brand_id
 msgid "Brand"
 msgstr ""
 
@@ -211,6 +219,8 @@ msgid "Cached Shipment"
 msgstr ""
 
 #. module: delivery_sendcloud_oca
+#. odoo-javascript
+#: code:addons/delivery_sendcloud_oca/static/src/components/onboarding/onboarding.xml:0
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.sendcloud_cancel_shipment_confirm_wizard_form
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.sendcloud_create_return_parcel_wizard_form
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.sendcloud_custom_price_details_wizard_form
@@ -236,7 +246,6 @@ msgstr ""
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard_return_location__city
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__city
-#: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return_location__city
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_sender_address__city
 msgid "City"
 msgstr ""
@@ -244,8 +253,25 @@ msgstr ""
 #. module: delivery_sendcloud_oca
 #. odoo-javascript
 #: code:addons/delivery_sendcloud_oca/static/src/xml/backend_service_point.xml:0
-#, python-format
 msgid "Clear"
+msgstr ""
+
+#. module: delivery_sendcloud_oca
+#. odoo-javascript
+#: code:addons/delivery_sendcloud_oca/static/src/components/onboarding/onboarding.xml:0
+msgid "Close"
+msgstr ""
+
+#. module: delivery_sendcloud_oca
+#. odoo-javascript
+#: code:addons/delivery_sendcloud_oca/static/src/components/onboarding/onboarding.xml:0
+msgid "Close Panel"
+msgstr ""
+
+#. module: delivery_sendcloud_oca
+#. odoo-javascript
+#: code:addons/delivery_sendcloud_oca/static/src/components/onboarding/onboarding.xml:0
+msgid "Close the onboarding panel"
 msgstr ""
 
 #. module: delivery_sendcloud_oca
@@ -303,7 +329,6 @@ msgstr ""
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard_return_location__company_name
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__company_name
-#: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return_location__company_name
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_sender_address__company_name
 msgid "Company Name"
 msgstr ""
@@ -385,7 +410,6 @@ msgstr ""
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard_return_location__country_name
-#: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return_location__country_name
 msgid "Country Name"
 msgstr ""
 
@@ -398,7 +422,6 @@ msgstr ""
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/wizards/sendcloud_create_return_parcel_wizard.py:0
 #: model:ir.actions.act_window,name:delivery_sendcloud_oca.action_sendcloud_create_return_parcel_wizard
-#, python-format
 msgid "Create Return Parcel"
 msgstr ""
 
@@ -433,7 +456,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel_item__create_uid
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel_status__create_uid
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return__create_uid
-#: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return_location__create_uid
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_sender_address__create_uid
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_shipping_method_country__create_uid
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_shipping_method_country_custom__create_uid
@@ -464,7 +486,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel_item__create_date
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel_status__create_date
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return__create_date
-#: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return_location__create_date
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_sender_address__create_date
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_shipping_method_country__create_date
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_shipping_method_country_custom__create_date
@@ -500,7 +521,6 @@ msgstr ""
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/models/sendcloud_shipping_method_country.py:0
 #: model:ir.actions.act_window,name:delivery_sendcloud_oca.action_sendcloud_custom_price_details_wizard
-#, python-format
 msgid "Custom Price Details"
 msgstr ""
 
@@ -608,7 +628,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel_item__display_name
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel_status__display_name
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return__display_name
-#: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return_location__display_name
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_sender_address__display_name
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_shipping_method_country__display_name
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_shipping_method_country_custom__display_name
@@ -626,7 +645,6 @@ msgstr ""
 #. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/models/sendcloud_parcel.py:0
-#, python-format
 msgid "Document not available: no link provided."
 msgstr ""
 
@@ -655,7 +673,6 @@ msgstr ""
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/wizards/sendcloud_create_return_parcel_wizard.py:0
 #: model:ir.model.fields.selection,name:delivery_sendcloud_oca.selection__sendcloud_create_return_parcel_wizard_delivery_option__code__drop_off_point
-#, python-format
 msgid "Drop-off Point"
 msgstr ""
 
@@ -718,8 +735,6 @@ msgstr ""
 #. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/wizards/sendcloud_integration_wizard.py:0
-#: code:addons/delivery_sendcloud_oca/wizards/sendcloud_integration_wizard.py:0
-#, python-format
 msgid "Error while checking the webhook connection.\n"
 msgstr ""
 
@@ -756,7 +771,6 @@ msgstr ""
 #. module: delivery_sendcloud_oca
 #. odoo-javascript
 #: code:addons/delivery_sendcloud_oca/static/src/js/backend.esm.js:0
-#, python-format
 msgid "Failure in opening Service Point Selector"
 msgstr ""
 
@@ -813,9 +827,14 @@ msgid "Generated"
 msgstr ""
 
 #. module: delivery_sendcloud_oca
+#. odoo-javascript
+#: code:addons/delivery_sendcloud_oca/static/src/components/onboarding/onboarding.xml:0
+msgid "Get them out of my sight!"
+msgstr ""
+
+#. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/models/stock_picking.py:0
-#, python-format
 msgid ""
 "Harmonized System Code is mandatory when shipping outside of EU and to some states.\n"
 "You should set the HS Code for product %s"
@@ -827,6 +846,12 @@ msgid "Has Message"
 msgstr ""
 
 #. module: delivery_sendcloud_oca
+#. odoo-javascript
+#: code:addons/delivery_sendcloud_oca/static/src/components/onboarding/onboarding.xml:0
+msgid "Hide Onboarding Tips"
+msgstr ""
+
+#. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_brand__hide_powered_by
 msgid "Hide Powered By"
 msgstr ""
@@ -834,7 +859,6 @@ msgstr ""
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard_return_location__house_number
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__house_number
-#: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return_location__house_number
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_sender_address__house_number
 msgid "House Number"
 msgstr ""
@@ -866,7 +890,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel_item__id
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel_status__id
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return__id
-#: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return_location__id
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_sender_address__id
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_shipping_method_country__id
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_shipping_method_country_custom__id
@@ -906,7 +929,6 @@ msgstr ""
 #: code:addons/delivery_sendcloud_oca/wizards/sendcloud_create_return_parcel_wizard.py:0
 #: model:ir.model.fields.selection,name:delivery_sendcloud_oca.selection__sendcloud_create_return_parcel_wizard_delivery_option__code__in_store
 #: model:ir.model.fields.selection,name:delivery_sendcloud_oca.selection__sendcloud_return__delivery_option__in_store
-#, python-format
 msgid "In Store"
 msgstr ""
 
@@ -979,7 +1001,6 @@ msgstr ""
 #. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/wizards/sendcloud_warehouse_address_wizard.py:0
-#, python-format
 msgid "Inconsistent countries:"
 msgstr ""
 
@@ -1019,11 +1040,11 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_sendcloud_brand_form
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_sendcloud_carrier_form
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_sendcloud_invoice_form
-#: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_sendcloud_invoice_tree
+#: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_sendcloud_invoice_list
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_sendcloud_parcel_form
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_sendcloud_parcel_status_form
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_sendcloud_return_form
-#: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_sendcloud_return_tree
+#: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_sendcloud_return_list
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_sendcloud_shipping_method_country_form
 msgid "Internal Code"
 msgstr ""
@@ -1031,7 +1052,6 @@ msgstr ""
 #. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/models/abstract_sendcloud_request.py:0
-#, python-format
 msgid "Internal server error."
 msgstr ""
 
@@ -1096,6 +1116,7 @@ msgid "Is Sendcloud Test Mode"
 msgstr ""
 
 #. module: delivery_sendcloud_oca
+#: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_dropoff_site__sendcloud_is_in_eu
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_res_partner__sendcloud_is_in_eu
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_res_users__sendcloud_is_in_eu
 msgid "Is in EU"
@@ -1146,7 +1167,6 @@ msgstr ""
 #. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/models/sendcloud_parcel.py:0
-#, python-format
 msgid "Label not available: no label printer url provided."
 msgstr ""
 
@@ -1155,7 +1175,6 @@ msgstr ""
 #: code:addons/delivery_sendcloud_oca/wizards/sendcloud_create_return_parcel_wizard.py:0
 #: model:ir.model.fields.selection,name:delivery_sendcloud_oca.selection__sendcloud_create_return_parcel_wizard_delivery_option__code__drop_off_labelless
 #: model:ir.model.fields.selection,name:delivery_sendcloud_oca.selection__sendcloud_return__delivery_option__drop_off_labelless
-#, python-format
 msgid "Labelless Drop Off"
 msgstr ""
 
@@ -1185,7 +1204,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel_item__write_uid
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel_status__write_uid
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return__write_uid
-#: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return_location__write_uid
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_sender_address__write_uid
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_shipping_method_country__write_uid
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_shipping_method_country_custom__write_uid
@@ -1216,7 +1234,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel_item__write_date
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel_status__write_date
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return__write_date
-#: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return_location__write_date
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_sender_address__write_date
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_shipping_method_country__write_date
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_shipping_method_country_custom__write_date
@@ -1224,6 +1241,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_sync_wizard__write_date
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_warehouse_address_wizard__write_date
 msgid "Last Updated on"
+msgstr ""
+
+#. module: delivery_sendcloud_oca
+#. odoo-javascript
+#: code:addons/delivery_sendcloud_oca/static/src/components/onboarding/onboarding.xml:0
+msgid "Let's do it"
 msgstr ""
 
 #. module: delivery_sendcloud_oca
@@ -1317,7 +1340,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_invoice_item__name
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__name
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel_document__name
-#: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return_location__name
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_shipping_method_country__name
 msgid "Name"
 msgstr ""
@@ -1346,7 +1368,6 @@ msgstr ""
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/wizards/sendcloud_sync_order_wizard.py:0
 #: code:addons/delivery_sendcloud_oca/wizards/sendcloud_sync_wizard.py:0
-#, python-format
 msgid "No Sendcloud integrations found. Setup an integration first."
 msgstr ""
 
@@ -1423,7 +1444,6 @@ msgstr ""
 #. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/models/stock_picking.py:0
-#, python-format
 msgid ""
 "Order %(external_order_id)s (shipment %(external_shipment_id)s) returned an "
 "error:\n"
@@ -1448,7 +1468,6 @@ msgstr ""
 #. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/models/stock_picking.py:0
-#, python-format
 msgid ""
 "Origin Country is mandatory when shipping outside of EU and to some states."
 msgstr ""
@@ -1572,7 +1591,6 @@ msgstr ""
 #. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/models/delivery_carrier.py:0
-#, python-format
 msgid "Partner does not have any country."
 msgstr ""
 
@@ -1595,7 +1613,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard__postal_code
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard_return_location__postal_code
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__postal_code
-#: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return_location__postal_code
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_sender_address__postal_code
 msgid "Postal Code"
 msgstr ""
@@ -1706,7 +1723,6 @@ msgstr ""
 #. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/wizards/sendcloud_create_return_parcel_wizard.py:0
-#, python-format
 msgid "Reason is required"
 msgstr ""
 
@@ -1776,14 +1792,12 @@ msgstr ""
 #. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/wizards/sendcloud_create_return_parcel_wizard.py:0
-#, python-format
 msgid "Refund message is required"
 msgstr ""
 
 #. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/wizards/sendcloud_create_return_parcel_wizard.py:0
-#, python-format
 msgid "Refund option is required"
 msgstr ""
 
@@ -1795,7 +1809,6 @@ msgstr ""
 #. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/models/abstract_sendcloud_request.py:0
-#, python-format
 msgid "Request: %s"
 msgstr ""
 
@@ -1833,7 +1846,6 @@ msgstr ""
 #. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/wizards/sendcloud_create_return_parcel_wizard.py:0
-#, python-format
 msgid "Return Details"
 msgstr ""
 
@@ -1938,7 +1950,6 @@ msgstr ""
 #. module: delivery_sendcloud_oca
 #. odoo-javascript
 #: code:addons/delivery_sendcloud_oca/static/src/xml/backend_service_point.xml:0
-#, python-format
 msgid "Select"
 msgstr ""
 
@@ -2009,7 +2020,6 @@ msgstr ""
 #. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/models/stock_picking.py:0
-#, python-format
 msgid "Sendcloud Carrier not enabled for this integration."
 msgstr ""
 
@@ -2029,7 +2039,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__sendcloud_code
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel_status__sendcloud_code
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return__sendcloud_code
-#: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return_location__sendcloud_code
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_sender_address__sendcloud_code
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_shipping_method_country__sendcloud_code
 msgid "Sendcloud Code"
@@ -2200,7 +2209,6 @@ msgstr ""
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/models/stock_picking.py:0
 #: model:ir.actions.act_window,name:delivery_sendcloud_oca.action_sendcloud_parcels
-#, python-format
 msgid "Sendcloud Parcels"
 msgstr ""
 
@@ -2220,11 +2228,6 @@ msgid "Sendcloud Return"
 msgstr ""
 
 #. module: delivery_sendcloud_oca
-#: model:ir.model,name:delivery_sendcloud_oca.model_sendcloud_return_location
-msgid "Sendcloud Return Location"
-msgstr ""
-
-#. module: delivery_sendcloud_oca
 #: model:ir.actions.act_window,name:delivery_sendcloud_oca.action_sendcloud_return_parcels
 msgid "Sendcloud Return Parcels"
 msgstr ""
@@ -2238,6 +2241,7 @@ msgstr ""
 #. module: delivery_sendcloud_oca
 #: model:ir.model,name:delivery_sendcloud_oca.model_sendcloud_sender_address
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_delivery_carrier__sendcloud_sender_address_id
+#: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_dropoff_site__sencloud_sender_address_id
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_res_partner__sencloud_sender_address_id
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_res_users__sencloud_sender_address_id
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_stock_warehouse__sencloud_sender_address_id
@@ -2271,21 +2275,18 @@ msgstr ""
 #. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/models/stock_picking.py:0
-#, python-format
 msgid "Sendcloud Service Point is Required!"
 msgstr ""
 
 #. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/models/stock_picking.py:0
-#, python-format
 msgid "Sendcloud Service Point is required."
 msgstr ""
 
 #. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/models/stock_picking.py:0
-#, python-format
 msgid "Sendcloud Service Point not enabled for this integration."
 msgstr ""
 
@@ -2363,6 +2364,14 @@ msgid "Sendcloud Warehouse Address Wizard"
 msgstr ""
 
 #. module: delivery_sendcloud_oca
+#. odoo-python
+#: code:addons/delivery_sendcloud_oca/models/delivery_carrier.py:0
+msgid ""
+"Sendcloud cannot generate returns.Please handle this return with the carrier"
+" directly."
+msgstr ""
+
+#. module: delivery_sendcloud_oca
 #: model:product.template,name:delivery_sendcloud_oca.sendcloud_product_delivery_product_template
 msgid "Sendcloud delivery charges"
 msgstr ""
@@ -2370,7 +2379,6 @@ msgstr ""
 #. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/models/stock_picking.py:0
-#, python-format
 msgid ""
 "Sendcloud shipping method not compatible with selected packaging.\n"
 "Please select a shipping method such that the collis' weights are between Min Weight and Max Weight."
@@ -2379,39 +2387,32 @@ msgstr ""
 #. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/models/abstract_sendcloud_request.py:0
-#, python-format
 msgid "Sendcloud timeout: the server didn't reply within 30s"
 msgstr ""
 
 #. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/models/delivery_carrier.py:0
-#, python-format
 msgid "Sendcloud: %(error_message)s"
 msgstr ""
 
 #. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/wizards/sendcloud_create_return_parcel_wizard.py:0
-#, python-format
 msgid "Sendcloud: %(message)s (error code: '%(code)s')"
 msgstr ""
 
 #. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/models/abstract_sendcloud_request.py:0
-#, python-format
 msgid "Sendcloud: %(reason)s (error code %(status_code)s)"
 msgstr ""
 
 #. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/models/abstract_sendcloud_request.py:0
-#: code:addons/delivery_sendcloud_oca/models/abstract_sendcloud_request.py:0
 #: code:addons/delivery_sendcloud_oca/models/sendcloud_parcel.py:0
 #: code:addons/delivery_sendcloud_oca/models/stock_picking.py:0
-#: code:addons/delivery_sendcloud_oca/models/stock_picking.py:0
-#, python-format
 msgid "Sendcloud: %s"
 msgstr ""
 
@@ -2423,7 +2424,6 @@ msgstr ""
 #. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/wizards/sendcloud_create_return_parcel_wizard.py:0
-#, python-format
 msgid ""
 "Sendcloud: error %(error_code)s\n"
 "%(error_msg)s"
@@ -2432,14 +2432,12 @@ msgstr ""
 #. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/models/sendcloud_integration.py:0
-#, python-format
 msgid "Sendcloud: select at least one service point carrier"
 msgstr ""
 
 #. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/models/abstract_sendcloud_request.py:0
-#, python-format
 msgid "Sendcloud: server not reachable, try again later"
 msgstr ""
 
@@ -2475,7 +2473,6 @@ msgstr ""
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard_return_location__senderaddress_labels
-#: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return_location__senderaddress_labels
 msgid "Senderaddress Labels"
 msgstr ""
 
@@ -2515,7 +2512,6 @@ msgstr ""
 #. module: delivery_sendcloud_oca
 #. odoo-javascript
 #: code:addons/delivery_sendcloud_oca/static/src/js/backend.esm.js:0
-#, python-format
 msgid "Service Point Selector"
 msgstr ""
 
@@ -2782,14 +2778,12 @@ msgstr ""
 #. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/models/delivery_carrier.py:0
-#, python-format
 msgid "The company is mandatory when delivery carrier is Sendcloud."
 msgstr ""
 
 #. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/models/delivery_carrier.py:0
-#, python-format
 msgid "The company is not consistent with the integration company."
 msgstr ""
 
@@ -2801,7 +2795,6 @@ msgstr ""
 #. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/wizards/sendcloud_sync_order_wizard.py:0
-#, python-format
 msgid "There are no outgoing shipments set with Sendcloud shipping method."
 msgstr ""
 
@@ -2823,7 +2816,6 @@ msgstr ""
 #. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/models/delivery_carrier.py:0
-#, python-format
 msgid "This shipping method requires a Service Point."
 msgstr ""
 
@@ -2969,14 +2961,12 @@ msgstr ""
 #. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/wizards/sendcloud_integration_wizard.py:0
-#, python-format
 msgid "Webhook URL: %(reason)s (error code %(status_code)s)"
 msgstr ""
 
 #. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/wizards/sendcloud_integration_wizard.py:0
-#, python-format
 msgid "Webhook URL: %(url)s\n"
 msgstr ""
 
@@ -3043,4 +3033,16 @@ msgstr ""
 #. module: delivery_sendcloud_oca
 #: model:ir.ui.menu,name:delivery_sendcloud_oca.menu_sendcloud_sendcloud_config_wizards
 msgid "Wizards"
+msgstr ""
+
+#. module: delivery_sendcloud_oca
+#. odoo-javascript
+#: code:addons/delivery_sendcloud_oca/static/src/components/onboarding/onboarding.xml:0
+msgid "o_onboarding_confetti"
+msgstr ""
+
+#. module: delivery_sendcloud_oca
+#. odoo-javascript
+#: code:addons/delivery_sendcloud_oca/static/src/components/onboarding/onboarding.xml:0
+msgid "onboarding.onboarding.step"
 msgstr ""
