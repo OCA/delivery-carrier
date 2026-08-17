@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_partner_property_form" model="ir.ui.view">
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="delivery.view_partner_property_form" />
+        <field name="arch" type="xml">
+            <field name="property_delivery_carrier_id" position="after">
+                <field name="postlogistics_notification" />
+                <field
+                    name="delivery_carrier_template_option_ids"
+                    widget="many2many_tags"
+                    domain="[('type', '=', 'partner_option')]"
+                    context="{'default_type': 'partner_option'}"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>
