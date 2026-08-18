@@ -18,7 +18,6 @@ class TestMaxWeightConstraint(TestPackingCommon):
                 "is_storable": True,
                 "weight": 2,
                 "uom_id": cls.uom_kg.id,
-                "uom_po_id": cls.uom_kg.id,
             }
         )
         carrier_product = cls.env["product.product"].create(
@@ -47,7 +46,7 @@ class TestMaxWeightConstraint(TestPackingCommon):
 
     def test_strict_weight_not_set(self):
         """
-        Check that the 'choose.delivery.package' wizard is working the normal way
+        Check that the 'stock.put.in.pack' wizard is working the normal way
         The validation is ok even if the package is over the max_weight of the
         package type
         """
@@ -80,19 +79,17 @@ class TestMaxWeightConstraint(TestPackingCommon):
         # We instanciate the wizard with the context of the action
         # Then set the delivery package type
         pack_wiz = (
-            self.env["choose.delivery.package"]
-            .with_context(**pack_action_ctx)
-            .create({})
+            self.env["stock.put.in.pack"].with_context(**pack_action_ctx).create({})
         )
         # check the package is over the max_weight of package type
         self.assertGreater(pack_wiz.shipping_weight, self.package_type.max_weight)
-        pack_wiz.delivery_package_type_id = self.package_type.id
+        pack_wiz.package_type_id = self.package_type.id
         # validate the wizard
         pack_wiz.action_put_in_pack()
 
     def test_strict_weight_set_ok(self):
         """
-        Check that the 'choose.delivery.package' wizard is working the normal way
+        Check that the 'stock.put.in.pack' wizard is working the normal way
         The validation is ok even if the package is under the max_weight of the
         package type
         """
@@ -126,19 +123,17 @@ class TestMaxWeightConstraint(TestPackingCommon):
         # We instanciate the wizard with the context of the action
         # Then set the delivery package type
         pack_wiz = (
-            self.env["choose.delivery.package"]
-            .with_context(**pack_action_ctx)
-            .create({})
+            self.env["stock.put.in.pack"].with_context(**pack_action_ctx).create({})
         )
         # check the package is under the max_weight of package type
         self.assertGreater(self.package_type.max_weight, pack_wiz.shipping_weight)
-        pack_wiz.delivery_package_type_id = self.package_type.id
+        pack_wiz.package_type_id = self.package_type.id
         # validate the wizard
         pack_wiz.action_put_in_pack()
 
     def test_strict_weight_set_error(self):
         """
-        Check that the 'choose.delivery.package' wizard is raising an error when
+        Check that the 'stock.put.in.pack' wizard is raising an error when
         the package is over the max_weight of the package type
         """
         self.package_type.is_strict_weight = True
@@ -171,9 +166,7 @@ class TestMaxWeightConstraint(TestPackingCommon):
         # We instanciate the wizard with the context of the action
         # Then set the delivery package type
         pack_wiz = (
-            self.env["choose.delivery.package"]
-            .with_context(**pack_action_ctx)
-            .create({})
+            self.env["stock.put.in.pack"].with_context(**pack_action_ctx).create({})
         )
         # check the package is over the max_weight of package type
         self.assertGreater(pack_wiz.shipping_weight, self.package_type.max_weight)
@@ -183,11 +176,11 @@ class TestMaxWeightConstraint(TestPackingCommon):
             "another package type."
         )
         with self.assertRaises(ValidationError, msg=error_msg):
-            pack_wiz.delivery_package_type_id = self.package_type.id
+            pack_wiz.package_type_id = self.package_type.id
 
     def test_strict_weight_set_max_weight_not_set(self):
         """
-        Check that the 'choose.delivery.package' wizard is working the normal way
+        Check that the 'stock.put.in.pack' wizard is working the normal way
         when the constraint is set but package type max_weight not.
         """
         self.package_type.is_strict_weight = True
@@ -220,12 +213,10 @@ class TestMaxWeightConstraint(TestPackingCommon):
         # We instanciate the wizard with the context of the action
         # Then set the delivery package type
         pack_wiz = (
-            self.env["choose.delivery.package"]
-            .with_context(**pack_action_ctx)
-            .create({})
+            self.env["stock.put.in.pack"].with_context(**pack_action_ctx).create({})
         )
         # set max_weight of package type to 0
         self.package_type.max_weight = 0
-        pack_wiz.delivery_package_type_id = self.package_type.id
+        pack_wiz.package_type_id = self.package_type.id
         # validate the wizard
         pack_wiz.action_put_in_pack()
