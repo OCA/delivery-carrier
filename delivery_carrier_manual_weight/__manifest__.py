@@ -8,7 +8,7 @@
         Allow setting weight and shipping weight in stock transfers manually
         based on carrier.
     """,
-    "version": "18.0.1.0.0",
+    "version": "19.0.1.0.0",
     "category": "Delivery",
     "website": "https://github.com/OCA/delivery-carrier",
     "author": "ForgeFlow,Odoo Community Association (OCA)",
