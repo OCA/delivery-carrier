@@ -1,0 +1,55 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* delivery_state_manual
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: delivery_state_manual
+#: model:ir.model.fields,field_description:delivery_state_manual.field_stock_picking__delivery_state
+msgid "Carrier State"
+msgstr ""
+
+#. module: delivery_state_manual
+#: model_terms:ir.ui.view,arch_db:delivery_state_manual.view_picking_internal_search
+msgid "Delivery State"
+msgstr ""
+
+#. module: delivery_state_manual
+#: model:ir.model.fields,field_description:delivery_state_manual.field_delivery_carrier__delivery_state_manual
+#: model:ir.model.fields,field_description:delivery_state_manual.field_stock_picking__delivery_state_manual
+msgid "Manual Delivery State"
+msgstr ""
+
+#. module: delivery_state_manual
+#: model:ir.model.fields,help:delivery_state_manual.field_delivery_carrier__delivery_state_manual
+#: model:ir.model.fields,help:delivery_state_manual.field_stock_picking__delivery_state_manual
+msgid ""
+"Setting this field will allow users to manually edit the delivery state "
+"field of its pickings. It will also hide the picking's tracking state fields"
+msgstr ""
+
+#. module: delivery_state_manual
+#: model:ir.model,name:delivery_state_manual.model_delivery_carrier
+msgid "Shipping Methods"
+msgstr ""
+
+#. module: delivery_state_manual
+#: model:ir.model.fields,help:delivery_state_manual.field_stock_picking__delivery_state
+msgid ""
+"This field is set automatically unless the delivery carrier is marked as "
+"manual. If manually edited, the carrier dates will be updated"
+msgstr ""
+
+#. module: delivery_state_manual
+#: model:ir.model,name:delivery_state_manual.model_stock_picking
+msgid "Transfer"
+msgstr ""

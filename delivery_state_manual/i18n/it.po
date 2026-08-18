@@ -1,0 +1,64 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* delivery_state_manual
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2025-01-16 10:06+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.6.2\n"
+
+#. module: delivery_state_manual
+#: model:ir.model.fields,field_description:delivery_state_manual.field_stock_picking__delivery_state
+msgid "Carrier State"
+msgstr "Stato corriere"
+
+#. module: delivery_state_manual
+#: model_terms:ir.ui.view,arch_db:delivery_state_manual.view_picking_internal_search
+msgid "Delivery State"
+msgstr "Stato di consegna"
+
+#. module: delivery_state_manual
+#: model:ir.model.fields,field_description:delivery_state_manual.field_delivery_carrier__delivery_state_manual
+#: model:ir.model.fields,field_description:delivery_state_manual.field_stock_picking__delivery_state_manual
+msgid "Manual Delivery State"
+msgstr "Stato consegna manuale"
+
+#. module: delivery_state_manual
+#: model:ir.model.fields,help:delivery_state_manual.field_delivery_carrier__delivery_state_manual
+#: model:ir.model.fields,help:delivery_state_manual.field_stock_picking__delivery_state_manual
+msgid ""
+"Setting this field will allow users to manually edit the delivery state "
+"field of its pickings. It will also hide the picking's tracking state fields"
+msgstr ""
+"Impostando questo campo, gli utenti potranno modificare manualmente il campo "
+"dello stato di consegna dei loro prelievi. Nasconderà anche i campi dello "
+"stato di tracciamento del prelievo"
+
+#. module: delivery_state_manual
+#: model:ir.model,name:delivery_state_manual.model_delivery_carrier
+msgid "Shipping Methods"
+msgstr "Metodi di spedizione"
+
+#. module: delivery_state_manual
+#: model:ir.model.fields,help:delivery_state_manual.field_stock_picking__delivery_state
+msgid ""
+"This field is set automatically unless the delivery carrier is marked as "
+"manual. If manually edited, the carrier dates will be updated"
+msgstr ""
+"Questo campo viene impostato automaticamente a meno che il corriere non sia "
+"contrassegnato come manuale. Se modificato manualmente, le date del corriere "
+"verranno aggiornate"
+
+#. module: delivery_state_manual
+#: model:ir.model,name:delivery_state_manual.model_stock_picking
+msgid "Transfer"
+msgstr "Trasferimento"
