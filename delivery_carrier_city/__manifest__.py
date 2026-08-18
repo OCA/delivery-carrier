@@ -4,15 +4,15 @@
 {
     "name": "Delivery Carrier City",
     "summary": "Integrates delivery with base_address_city",
-    "version": "14.0.1.0.0",
+    "version": "18.0.1.0.0",
     "category": "Delivery",
     "website": "https://github.com/OCA/delivery-carrier",
     "author": "Camptocamp, Odoo Community Association (OCA)",
     "maintainers": ["ivantodorovich"],
     "license": "AGPL-3",
     "depends": [
-        "delivery",
-        "base_address_city",
+        "stock_delivery",
+        "base_address_extended",
     ],
     "data": [
         "views/delivery_carrier.xml",

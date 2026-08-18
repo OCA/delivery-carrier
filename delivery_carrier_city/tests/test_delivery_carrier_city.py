@@ -1,10 +1,10 @@
 # Copyright 2021 Camptocamp SA - Iván Todorovich
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.tests import common
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class TestDeliveryCarrierCity(common.SavepointCase):
+class TestDeliveryCarrierCity(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -46,7 +46,9 @@ class TestDeliveryCarrierCity(common.SavepointCase):
         # Disable all other delivery methods
         cls.env["delivery.carrier"].search([]).write({"active": False})
         # Create delivery methods
-        cls.product = cls.env["product.product"].create({"name": "Delivery"})
+        cls.product = cls.env["product.product"].create(
+            {"name": "Delivery", "type": "service"}
+        )
         cls.carrier_paris = cls.env["delivery.carrier"].create(
             {
                 "name": "Delivery in Paris",
@@ -68,9 +70,13 @@ class TestDeliveryCarrierCity(common.SavepointCase):
                 "country_ids": [(4, cls.france.id)],
             }
         )
+        cls.partner = cls.env["res.partner"].create({"name": "Setup Partner"})
+        cls.sale_order = cls.env["sale.order"].create({"partner_id": cls.partner.id})
 
     def _get_available_carriers(self, partner):
-        return self.env["delivery.carrier"].search([]).available_carriers(partner)
+        self.sale_order.write({"partner_id": partner.id})
+        carriers = self.env["delivery.carrier"].search([])
+        return carriers.available_carriers(partner, self.sale_order)
 
     def test_00_delivery_carrier_city_match(self):
         # Partner living in paris
