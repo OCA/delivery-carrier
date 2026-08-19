@@ -1,17 +1,24 @@
 # Copyright 2022 Onestein (<https://www.onestein.nl>)
 # License OPL-1 (https://www.odoo.com/documentation/16.0/legal/licenses.html#odoo-apps).
 
+import base64
+import json
 import logging
 from contextlib import contextmanager
 from os.path import dirname, join
+from unittest.mock import patch
 
 import requests
 import responses
 from vcr import VCR
 
 from odoo.exceptions import UserError, ValidationError
-from odoo.tests import Form, TransactionCase
+from odoo.tests import Form
 from odoo.tools import mute_logger
+
+from odoo.addons.base.tests.common import BaseCommon
+
+from .common import MINIMAL_PDF, SendcloudSaleOrderMixin
 
 _super_send = requests.Session.send
 
@@ -26,17 +33,23 @@ recorder = VCR(
 )
 
 
-class TestDeliverySendCloud(TransactionCase):
+class TestDeliverySendCloud(SendcloudSaleOrderMixin, BaseCommon):
     @classmethod
     def _request_handler(cls, s, r, /, **kw):
         """Don't block external requests."""
         return _super_send(s, r, **kw)
 
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        # Every Sendcloud API call is logged through a cursor of its own, so
+        # the registry has to hand out test cursors for those writes to be
+        # rolled back along with the test.
+        cls.registry_enter_test_mode_cls()
+
     @mute_logger("py.warnings")
     def setUp(self):
         super().setUp()
-        if not self.registry.in_test_mode():
-            self.registry.enter_test_mode(self.cr)
         form = Form(self.env["sendcloud.integration.wizard"])
         wizard = form.save()
         wizard.base_url = "https://f482-185-247-144-87.eu.ngrok.io"
@@ -47,11 +60,6 @@ class TestDeliverySendCloud(TransactionCase):
         self.integration.public_key = "test"
         self.integration.secret_key = "test"
         self.integration.sendcloud_code = 241526
-
-    @classmethod
-    def tearDownClass(self):
-        self.registry.leave_test_mode()
-        super().tearDownClass()
 
     @mute_logger("py.warnings")
     def test_00_sendcloud_integration_wizards(self):
@@ -151,7 +159,8 @@ class TestDeliverySendCloud(TransactionCase):
         with recorder.use_cassette("shipping_methods"):
             delivery_carrier_obj.sendcloud_sync_shipping_method()
         # Sale order to outside EU
-        sale_order = self.env.ref("sale.sale_order_1").copy()
+        self._setup_sendcloud_sender_address()
+        sale_order = self._create_sendcloud_sale_order()
         europe_codes = self.env.ref("base.europe").country_ids.mapped("code")
         partner_country = sale_order.partner_id.country_id.code
         sale_order.partner_id.street_number2 = "test"
@@ -225,7 +234,8 @@ class TestDeliverySendCloud(TransactionCase):
 
     def test_04_auto_create_invoice(self):
         # Sale order to outside EU and "Auto create invoice" enabled
-        sale_order = self.env.ref("sale.sale_order_1").copy()
+        self._setup_sendcloud_accounting()
+        sale_order = self._create_sendcloud_sale_order()
         self.assertEqual(sale_order.partner_id.country_id.code, "US")
         sale_order.company_id.sendcloud_auto_create_invoice = True
 
@@ -381,7 +391,9 @@ class TestDeliverySendCloud(TransactionCase):
         form = Form(sendcloud_warehouse_address_wizard_obj)
         wizard = form.save()
         wizard.button_update()
-        partner_id = self.env.ref("base.res_partner_2")
+        # A partner outside the countries the sender addresses are in, so that
+        # the wizard reports the mismatch below.
+        partner_id = self._create_sendcloud_partner()
         with recorder.use_cassette("sender_address"):
             sendcloud_sender_address_obj.sendcloud_sync_sender_address()
         # To test updation of existing sender addresses
@@ -409,7 +421,8 @@ class TestDeliverySendCloud(TransactionCase):
     def test_10_auto_create_invoice(self):
         """Test the "Auto create invoice" feature: when shipping outside EU"""
         # Sale order to outside EU
-        sale_order = self.env.ref("sale.sale_order_1").copy()
+        self._setup_sendcloud_accounting()
+        sale_order = self._create_sendcloud_sale_order()
         self.assertEqual(sale_order.partner_id.country_id.code, "US")
         is_product_harmonized_system_installed = self.env["ir.module.module"].search(
             [("name", "=", "product_harmonized_system"), ("state", "=", "installed")],
@@ -535,10 +548,7 @@ class TestDeliverySendCloud(TransactionCase):
             sale_order.button_delete_sendcloud_order()
         sendcloud_cancel_shipment_confirm_wizard_form = Form(
             self.env["sendcloud.cancel.shipment.confirm.wizard"].with_context(
-                **{
-                    "active_id": sale_order.picking_ids.ids[0],
-                    "active_model": "stock.picking",
-                }
+                active_id=sale_order.picking_ids.ids[0], active_model="stock.picking"
             )
         )
         sendcloud_cancel_shipment_confirm_wizard_form = (
@@ -634,7 +644,7 @@ class TestDeliverySendCloud(TransactionCase):
                 "email": "admin@yourcompany.example.com",
             }
         )
-        sale_order = self.env.ref("sale.sale_order_1").copy()
+        sale_order = self._create_sendcloud_sale_order()
         sale_order.partner_id = test_partner.id
         # Retrieve Sendcloud shipping methods
         with recorder.use_cassette("shipping_methods"):
@@ -785,7 +795,7 @@ class TestDeliverySendCloud(TransactionCase):
                 "email": "admin@yourcompany.example.com",
             }
         )
-        sale_order = self.env.ref("sale.sale_order_1").copy()
+        sale_order = self._create_sendcloud_sale_order()
         sale_order.partner_id = test_partner.id
         # Retrieve Sendcloud shipping methods
         with recorder.use_cassette("shipping_methods"):
@@ -837,3 +847,560 @@ class TestDeliverySendCloud(TransactionCase):
                 sale_order
             )
         )
+
+    def test_20_selection_helpers(self):
+        """The selections the parcel and invoice views are built from."""
+        mixin = self.env["sendcloud.mixin"]
+        shipment_types = mixin._get_sendcloud_customs_shipment_type()
+        self.assertIn(("2", "Commercial Goods"), shipment_types)
+        invoice_types = self.env["sendcloud.invoice"]._selection_invoice_type()
+        self.assertIn(("periodic", "Periodical"), invoice_types)
+
+    def test_21_price_converted_from_euro(self):
+        """Sendcloud quotes in euro, so other currencies are converted."""
+        currency_obj = self.env["res.currency"].with_context(active_test=False)
+        euro = currency_obj.search([("name", "=", "EUR")], limit=1)
+        self.assertTrue(euro, "Sendcloud prices are quoted in euro")
+        euro.active = True
+        pricelist_obj = self.env["product.pricelist"]
+        order = self._create_sendcloud_sale_order()
+        # Priced in euro already: Sendcloud's price is taken as it is.
+        order.pricelist_id = pricelist_obj.create(
+            {"name": "Sendcloud EUR", "currency_id": euro.id}
+        )
+        self.assertEqual(order._sendcloud_convert_price_in_euro(10.0), 10.0)
+        # Priced in anything else: the euro amount is converted into it.
+        dollar = self.env.ref("base.USD")
+        dollar.active = True
+        order.pricelist_id = pricelist_obj.create(
+            {"name": "Sendcloud USD", "currency_id": dollar.id}
+        )
+        self.assertEqual(
+            order._sendcloud_convert_price_in_euro(10.0),
+            euro._convert(10.0, dollar, order.company_id, order.date_order),
+        )
+
+    @mute_logger("py.warnings")
+    def test_22_rate_needs_a_country(self):
+        """An address with no country cannot be quoted."""
+        delivery_carrier_obj = self.env["delivery.carrier"]
+        with recorder.use_cassette("shipping_methods"):
+            delivery_carrier_obj.sendcloud_sync_shipping_method()
+        carrier = delivery_carrier_obj.search(
+            [("delivery_type", "=", "sendcloud")], limit=1
+        )
+        partner = self.env["res.partner"].create({"name": "Nowhere in particular"})
+        order = self._create_sendcloud_sale_order(partner=partner)
+        res = carrier.sendcloud_rate_shipment(order)
+        self.assertFalse(res["success"])
+        self.assertEqual(res["error_message"], "Partner does not have any country.")
+        # The delivery wizard surfaces that instead of a rate.
+        wizard = self.env["choose.delivery.carrier"].create(
+            {"order_id": order.id, "carrier_id": carrier.id}
+        )
+        self.assertEqual(
+            wizard._onchange_carrier_id().get("error"),
+            "Partner does not have any country.",
+        )
+
+    def test_23_parcel_document(self):
+        """A document needs a link, and is always stored as a PDF."""
+        document_obj = self.env["sendcloud.parcel.document"]
+        document = document_obj.create({"name": "customs", "size": "1"})
+        with self.assertRaisesRegex(UserError, "no link provided"):
+            document.action_get_parcel_document()
+        self.assertEqual(document.generate_parcel_document_filename(), "customs.pdf")
+        document.name = "customs.pdf"
+        self.assertEqual(document.generate_parcel_document_filename(), "customs.pdf")
+
+    @mute_logger("odoo.addons.delivery_sendcloud_oca.models.stock_picking")
+    def test_24_shipment_confirmations(self):
+        """Sendcloud answers with one status per shipment it was sent."""
+        picking = self._create_sendcloud_picking()
+        picking.sendcloud_shipment_uuid = "uuid-1"
+
+        def confirm(*confirmations):
+            return patch.object(
+                type(self.integration), "create_shipments", return_value=confirmations
+            )
+
+        # Created: the shipment is now known to Sendcloud.
+        picking.sendcloud_last_cached = False
+        with confirm({"status": "created", "shipment_uuid": "uuid-1"}):
+            err_msg = picking._sync_shipment_to_sendcloud("", self.integration, {})
+        self.assertFalse(err_msg)
+        self.assertTrue(picking.sendcloud_last_cached)
+
+        # Updated: an already known shipment keeps its uuid.
+        picking.sendcloud_last_cached = False
+        with confirm({"status": "updated", "shipment_uuid": "uuid-1"}):
+            err_msg = picking._sync_shipment_to_sendcloud("", self.integration, {})
+        self.assertFalse(err_msg)
+        self.assertEqual(picking.sendcloud_shipment_uuid, "uuid-1")
+        self.assertTrue(picking.sendcloud_last_cached)
+
+        # Error: collected into the message the caller raises.
+        error = {
+            "status": "error",
+            "shipment_uuid": "uuid-1",
+            "error": {"external_order_id": "SO1", "external_shipment_id": "SH1"},
+        }
+        with confirm(error):
+            err_msg = picking._sync_shipment_to_sendcloud("", self.integration, {})
+        self.assertIn("SO1", err_msg)
+        self.assertIn("SH1", err_msg)
+
+    @mute_logger("py.warnings")
+    def test_25_service_point_is_checked_on_done_pickings(self):
+        """A delivered parcel must carry the service point it was sold with."""
+        delivery_carrier_obj = self.env["delivery.carrier"]
+        with recorder.use_cassette("shipping_methods"):
+            delivery_carrier_obj.sendcloud_sync_shipping_method()
+        carrier = delivery_carrier_obj.search(
+            [("delivery_type", "=", "sendcloud"), ("sendcloud_is_return", "=", False)],
+            limit=1,
+        )
+        carrier.sendcloud_service_point_input = "required"
+        carrier.sendcloud_integration_id = self.integration
+        integration = self.integration.with_context(skip_update_in_sendcloud=True)
+        integration.service_point_enabled = False
+
+        picking = self._create_sendcloud_picking()
+        product = self.env["product.product"].create(
+            {"name": "Shipped thing", "type": "consu", "weight": 0.01}
+        )
+        self.env["stock.move"].create(
+            {
+                "product_id": product.id,
+                "product_uom_qty": 1,
+                "picking_id": picking.id,
+                "location_id": picking.location_id.id,
+                "location_dest_id": picking.location_dest_id.id,
+            }
+        )
+        picking.action_confirm()
+        picking.move_ids.quantity = 1
+        picking.move_ids.picked = True
+        picking.button_validate()
+        self.assertEqual(picking.state, "done")
+
+        @contextmanager
+        def rollback():
+            savepoint = self.cr.savepoint()
+            yield
+            savepoint.rollback()
+
+        with rollback():
+            with self.assertRaisesRegex(
+                ValidationError, "Sendcloud Service Point is required."
+            ):
+                picking.carrier_id = carrier
+        picking.sendcloud_service_point_address = '{"id": 1}'
+        with rollback():
+            with self.assertRaisesRegex(
+                ValidationError, "Service Point not enabled for this integration"
+            ):
+                picking.carrier_id = carrier
+        integration.service_point_enabled = True
+        integration.service_point_carriers = "['postnl']"
+        carrier.sendcloud_carrier = "dhl"
+        with rollback():
+            with self.assertRaisesRegex(
+                ValidationError, "Carrier not enabled for this integration"
+            ):
+                picking.carrier_id = carrier
+
+    def test_26_return_parcel_refund_and_reason_are_required(self):
+        """The return portal refuses a parcel without a refund and a reason."""
+        brand = self.env["sendcloud.brand"].create(
+            {"name": "Test brand", "sendcloud_code": 1, "domain": "testbrand"}
+        )
+        parcel = self.env["sendcloud.parcel"].create(
+            {
+                "name": "182588401",
+                "sendcloud_code": 182588401,
+                "address": "Reduitlaan 45",
+                "city": "Breda",
+                "country_iso_2": "NL",
+                "postal_code": "4814DC",
+                "partner_name": "Acme Corporation",
+                "company_id": self.env.company.id,
+            }
+        )
+        wizard = self.env["sendcloud.create.return.parcel.wizard"].create(
+            {
+                "postal_code": "4814DC",
+                "identifier": "JVGL06097547001969761800",
+                "brand_id": brand.id,
+                "parcel_id": parcel.id,
+                "access_token": "token",
+                "line_ids": [(0, 0, {"sendcloud_code": "182588401", "quantity": 1})],
+            }
+        )
+        with self.assertRaisesRegex(UserError, "Refund option is required"):
+            wizard._step2(self.integration)
+
+        refund_option_obj = self.env[
+            "sendcloud.create.return.parcel.wizard.refund.option"
+        ]
+        wizard.refund_option_id = refund_option_obj.create(
+            {"name": "Money", "code": "money", "require_message": True}
+        )
+        with self.assertRaisesRegex(UserError, "Refund message is required"):
+            wizard._step2(self.integration)
+
+        # Without items, the return needs a reason of its own.
+        wizard.refund_message = "Broken on arrival"
+        wizard.line_ids.unlink()
+        with self.assertRaisesRegex(UserError, "Reason is required"):
+            wizard._step2(self.integration)
+
+    def _create_sendcloud_parcel(self, picking, code, **values):
+        parcel_values = {
+            "name": str(code),
+            "sendcloud_code": code,
+            "picking_id": picking.id,
+            "company_id": self.env.company.id,
+        }
+        parcel_values.update(values)
+        return self.env["sendcloud.parcel"].create(parcel_values)
+
+    def test_27_label_print_status(self):
+        """A transfer reports the state its parcel labels agree on."""
+        picking = self._create_sendcloud_picking()
+        self.assertFalse(picking.label_print_status)
+        first = self._create_sendcloud_parcel(picking, 1)
+        second = self._create_sendcloud_parcel(picking, 2)
+        self.assertEqual(picking.label_print_status, "generated")
+        second.label_print_status = "printed"
+        self.assertEqual(picking.label_print_status, "partial")
+        first.label_print_status = "printed"
+        self.assertEqual(picking.label_print_status, "printed")
+
+    def test_28_parcel_creation_is_reported(self):
+        """Sendcloud refusing the parcels stops the transfer."""
+        picking_obj = self.env["stock.picking"]
+
+        def answer(response):
+            return patch.object(
+                type(self.integration), "create_parcels", return_value=response
+            )
+
+        with answer({"error": {"message": "no such shipping method"}}):
+            with self.assertRaisesRegex(UserError, "no such shipping method"):
+                picking_obj._sendcloud_sync_multiple_parcels(self.integration, [])
+
+        failed = {"failed_parcels": [{"parcel": {"id": 1}, "errors": "too heavy"}]}
+        with answer(failed):
+            with self.assertRaisesRegex(UserError, "too heavy"):
+                picking_obj._sendcloud_sync_multiple_parcels(self.integration, [])
+
+        with answer({"parcels": [{"id": 1}]}):
+            parcels = picking_obj._sendcloud_sync_multiple_parcels(self.integration, [])
+        self.assertEqual(parcels, [{"id": 1}])
+
+    @mute_logger("py.warnings")
+    def test_29_cancel_shipment_outcomes(self):
+        """Sendcloud has several ways of saying a parcel is gone."""
+        delivery_carrier_obj = self.env["delivery.carrier"]
+        with recorder.use_cassette("shipping_methods"):
+            delivery_carrier_obj.sendcloud_sync_shipping_method()
+        carrier = delivery_carrier_obj.search(
+            [("delivery_type", "=", "sendcloud")], limit=1
+        )
+        picking = self._create_sendcloud_picking()
+
+        def answer(response):
+            return patch.object(
+                type(self.integration), "cancel_parcel", return_value=response
+            )
+
+        already_cancelled = {
+            "status": "failed",
+            "message": "This shipment is already being cancelled.",
+        }
+        gone = ({"status": "deleted"}, already_cancelled, {"error": {"code": 404}})
+        for code, response in enumerate(gone, start=1):
+            self._create_sendcloud_parcel(picking, code)
+            with answer(response):
+                carrier.sendcloud_cancel_shipment(picking)
+            self.assertFalse(picking.sendcloud_parcel_ids)
+
+        # Any other error leaves the parcel alone and stops the cancellation.
+        self._create_sendcloud_parcel(picking, 4)
+        with answer({"error": {"code": 400, "message": "still in transit"}}):
+            with self.assertRaisesRegex(ValidationError, "still in transit"):
+                carrier.sendcloud_cancel_shipment(picking)
+
+    def test_30_return_parcel_is_created(self):
+        """A confirmed return brings back a Sendcloud return and its parcels."""
+        brand = self.env["sendcloud.brand"].create(
+            {"name": "Test brand", "sendcloud_code": 1, "domain": "testbrand"}
+        )
+        picking = self._create_sendcloud_picking()
+        parcel = self._create_sendcloud_parcel(
+            picking,
+            182588401,
+            address="Reduitlaan 45",
+            city="Breda",
+            country_iso_2="NL",
+            postal_code="4814DC",
+            partner_name="Acme Corporation",
+        )
+        wizard_obj = self.env["sendcloud.create.return.parcel.wizard"]
+        wizard = wizard_obj.create(
+            {
+                "postal_code": "4814DC",
+                "identifier": "JVGL06097547001969761800",
+                "brand_id": brand.id,
+                "parcel_id": parcel.id,
+                "access_token": "token",
+                "collo_count": 1,
+                "line_ids": [
+                    (0, 0, {"sendcloud_code": "182588401", "quantity": 1, "price": 5.0})
+                ],
+            }
+        )
+        refund_option_obj = self.env[
+            "sendcloud.create.return.parcel.wizard.refund.option"
+        ]
+        wizard.refund_option_id = refund_option_obj.create(
+            {"name": "Money", "code": "money"}
+        )
+        delivery_option_obj = self.env[
+            "sendcloud.create.return.parcel.wizard.delivery.option"
+        ]
+        wizard.delivery_option_id = delivery_option_obj.create(
+            {"code": "drop_off_point"}
+        )
+
+        integration_cls = type(self.integration)
+        incoming_code = 999888
+        with (
+            patch.object(
+                integration_cls,
+                "create_return_portal_incoming_parcel",
+                return_value={
+                    "return": 1910013,
+                    "incoming_parcels": [incoming_code],
+                    "poller_url": "https://panel.sendcloud.sc/poll/1",
+                },
+            ),
+            patch.object(
+                integration_cls,
+                "get_return",
+                return_value={"id": 1910013, "message": "", "status": "created"},
+            ),
+            patch.object(
+                integration_cls,
+                "get_parcel",
+                return_value={"id": incoming_code, "carrier": {"code": "postnl"}},
+            ),
+        ):
+            sendcloud_return = wizard._step2(self.integration)
+
+        self.assertEqual(sendcloud_return.sendcloud_code, 1910013)
+        self.assertEqual(wizard.poller_url, "https://panel.sendcloud.sc/poll/1")
+        incoming = self.env["sendcloud.parcel"].search(
+            [("sendcloud_code", "=", incoming_code)]
+        )
+        self.assertEqual(incoming.picking_id, picking)
+
+    @responses.activate
+    def test_31_request_layer(self):
+        """The corners of the Sendcloud HTTP layer."""
+        base = "https://panel.sendcloud.sc/api/v2"
+
+        # Rate limited once, then served.
+        responses.add(responses.GET, f"{base}/returns/1", json={}, status=429)
+        responses.add(responses.GET, f"{base}/returns/1", json={"id": 1}, status=200)
+        self.assertEqual(self.integration.get_return(1), {"id": 1})
+
+        # An error body carrying nothing but a bare message.
+        responses.add(
+            responses.GET, f"{base}/returns/2", json={"message": "nope"}, status=502
+        )
+        with self.assertRaisesRegex(UserError, "nope"):
+            self.integration.get_return(2)
+
+        # Bad credentials are raised while the response is being logged.
+        responses.add(
+            responses.GET,
+            f"{base}/returns/3",
+            json={"error": {"message": "invalid key"}},
+            status=401,
+        )
+        with self.assertRaisesRegex(UserError, "invalid key"):
+            self.integration.get_return(3)
+
+        # The return portal, which is addressed by brand rather than by code.
+        responses.add(
+            responses.GET,
+            f"{base}/brand/testbrand/return-portal",
+            json={"portal": {}},
+            status=200,
+        )
+        self.assertEqual(
+            self.integration.get_return_portal_settings("testbrand", language="en"),
+            {"portal": {}},
+        )
+        responses.add(
+            responses.POST,
+            f"{base}/brand/testbrand/return-portal/incoming",
+            json={"return": 1},
+            status=200,
+        )
+        self.assertEqual(
+            self.integration.create_return_portal_incoming_parcel(
+                "testbrand", {}, {"Authorization": "Bearer token"}
+            ),
+            {"return": 1},
+        )
+
+    @responses.activate
+    def test_32_parcel_document_is_downloaded(self):
+        """A parcel document is fetched and kept as an attachment."""
+        link = "https://panel.sendcloud.sc/api/v2/documents/1"
+        responses.add(responses.GET, link, body=b"%PDF-1.3 customs", status=200)
+        picking = self._create_sendcloud_picking()
+        parcel = self._create_sendcloud_parcel(picking, 1)
+        document = self.env["sendcloud.parcel.document"].create(
+            {"name": "customs-form", "parcel_id": parcel.id, "link": link}
+        )
+        document.action_get_parcel_document()
+        self.assertEqual(document.attachment_id.name, "customs-form.pdf")
+        self.assertEqual(
+            base64.b64decode(document.attachment_id.datas), b"%PDF-1.3 customs"
+        )
+
+    @responses.activate
+    def test_33_action_log_finds_the_parcel(self):
+        """A parcel webhook is matched back to the transfer that shipped it."""
+        responses.add(
+            responses.GET,
+            "https://panel.sendcloud.sc/api/v2/parcels/3/return_portal_url",
+            json={"url": "https://testbrand.shipping-portal.com/rp/"},
+            status=200,
+        )
+        action_obj = self.env["sendcloud.action"]
+        self.assertTrue(action_obj._reference_models())
+        picking = self._create_sendcloud_picking()
+        parcel = self._create_sendcloud_parcel(picking, 3)
+        action = action_obj.create(
+            {
+                "company_id": self.env.company.id,
+                "sendcloud_integration_id": self.integration.id,
+                "message_type": "received",
+                "action": "parcel_status_changed",
+                "message": json.dumps(
+                    {
+                        "action": "parcel_status_changed",
+                        "parcel": {
+                            "id": 3,
+                            "external_order_id": "",
+                            "external_shipment_id": "",
+                            "status": {"id": 1000, "message": "Ready to send"},
+                        },
+                    }
+                ),
+            }
+        )
+        action.reparse_message()
+        self.assertEqual(action.model, parcel._name)
+        self.assertEqual(action.record_id, parcel)
+
+    @mute_logger("py.warnings")
+    def test_34_picking_label_and_delete_actions(self):
+        """The Sendcloud buttons on the transfer form."""
+        picking = self._create_sendcloud_picking()
+        # Nothing has been labelled yet, so there is nothing to download.
+        self.assertFalse(picking.action_download_sendcloud_labels())
+        attachment = self.env["ir.attachment"].create(
+            {"name": "label.pdf", "datas": base64.b64encode(MINIMAL_PDF)}
+        )
+        self._create_sendcloud_parcel(picking, 1, attachment_id=attachment.id)
+        action = picking.action_download_sendcloud_labels()
+        self.assertEqual(action["type"], "ir.actions.act_url")
+        self.assertIn(str(picking.id), action["url"])
+        # A transfer Sendcloud never saw is cancelled and deleted on its own.
+        untouched = self._create_sendcloud_picking()
+        self.assertFalse(untouched.to_delete_sendcloud_pickings())
+        untouched.action_cancel()
+        untouched.unlink()
+
+    def test_35_exact_price_of_parcel(self):
+        """The parcel price is looked up from the country it ships to."""
+        delivery_carrier_obj = self.env["delivery.carrier"]
+        with recorder.use_cassette("shipping_methods"):
+            delivery_carrier_obj.sendcloud_sync_shipping_method()
+        carrier = delivery_carrier_obj.search(
+            [("delivery_type", "=", "sendcloud")], limit=1
+        )
+        order = self._create_sendcloud_sale_order()
+        order.carrier_id = carrier
+        picking = self._create_sendcloud_picking(partner=order.partner_id)
+        picking.sale_id = order
+        parcel_data = {"external_reference": f"{picking.name},1"}
+        self.assertIsInstance(picking._get_exact_price_of_parcel(parcel_data), float)
+        # Without a country there is no price to look up.
+        order.partner_id.country_id = False
+        self.assertEqual(picking._get_exact_price_of_parcel(parcel_data), 0.0)
+
+    @responses.activate
+    def test_36_response_shapes(self):
+        """Not every Sendcloud answer is a JSON body."""
+        base = "https://panel.sendcloud.sc/api/v2"
+        # A "No Content" answer has nothing to read.
+        responses.add(responses.GET, f"{base}/returns/4", status=204)
+        self.assertEqual(self.integration.get_return(4), {})
+        # A body that is not JSON at all is reported rather than raised.
+        responses.add(responses.GET, f"{base}/returns/5", body="not json", status=200)
+        res = self.integration.get_return(5)
+        self.assertEqual(res["error"]["code"], "JSONDecodeError")
+        # The parcel status selection is built from the synced statuses.
+        statuses = self.env["sendcloud.parcel"]._selection_parcel_statuses()
+        self.assertIsInstance(statuses, list)
+
+    @responses.activate
+    def test_37_parcel_portal_url_and_cancellation(self):
+        """A parcel knows its return portal, and refuses to vanish silently."""
+        base = "https://panel.sendcloud.sc/api/v2"
+        picking = self._create_sendcloud_picking()
+        parcel = self._create_sendcloud_parcel(picking, 7)
+        self.assertEqual(parcel._generate_parcel_label_filename(), "7.pdf")
+
+        # Sendcloud has a portal for this parcel.
+        responses.add(
+            responses.GET,
+            f"{base}/parcels/7/return_portal_url",
+            json={"url": "https://testbrand.shipping-portal.com/rp/"},
+            status=200,
+        )
+        parcel.action_get_return_portal_url()
+        self.assertEqual(
+            parcel.return_portal_url, "https://testbrand.shipping-portal.com/rp/"
+        )
+        # And has none for this one.
+        responses.reset()
+        responses.add(
+            responses.GET,
+            f"{base}/parcels/7/return_portal_url",
+            json={"url": None},
+            status=200,
+        )
+        parcel.action_get_return_portal_url()
+        self.assertEqual(parcel.return_portal_url, "None")
+
+        def cancelling(response):
+            return patch.object(
+                type(self.integration), "cancel_parcel", return_value=response
+            )
+
+        # A parcel Sendcloud will not cancel stays where it is.
+        with cancelling({"error": {"code": 400, "message": "already in transit"}}):
+            with self.assertRaisesRegex(UserError, "already in transit"):
+                parcel.unlink()
+        # One Sendcloud has never heard of is simply dropped.
+        with cancelling({"error": {"code": 404, "message": "not found"}}):
+            parcel.unlink()
+        self.assertFalse(parcel.exists())

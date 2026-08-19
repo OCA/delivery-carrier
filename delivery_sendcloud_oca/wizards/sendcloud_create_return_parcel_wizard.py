@@ -3,7 +3,7 @@
 
 import json
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 from odoo.tools.safe_eval import safe_eval
 
@@ -43,9 +43,9 @@ class SendcloudCreateReturnParcelWizardDeliveryOption(models.TransientModel):
     @api.depends("code")
     def _compute_name(self):
         display_name_map = {
-            "drop_off_point": _("Drop-off Point"),
-            "in_store": _("In Store"),
-            "drop_off_labelless": _("Labelless Drop Off"),
+            "drop_off_point": self.env._("Drop-off Point"),
+            "in_store": self.env._("In Store"),
+            "drop_off_labelless": self.env._("Labelless Drop Off"),
         }
         for wizard in self:
             wizard.name = display_name_map[wizard.code]
@@ -238,8 +238,11 @@ class SendcloudCreateReturnParcelWizard(models.TransientModel):
             error_msg = response.get("error", {}).get("message", "")
             error_code = response.get("error", {}).get("code", "")
             raise UserError(
-                _("Sendcloud: error %(error_code)s\n%(error_msg)s")
-                % ({"error_code": error_code, "error_msg": error_msg})
+                self.env._(
+                    "Sendcloud: error %(error_code)s\n%(error_msg)s",
+                    error_code=error_code,
+                    error_msg=error_msg,
+                )
             )
         portal = response.get("portal")
         return_portal_url = f"https://{portal.get('domain')}.shipping-portal.com/rp/"
@@ -275,7 +278,7 @@ class SendcloudCreateReturnParcelWizard(models.TransientModel):
             self._step1(integration)
 
             return {
-                "name": _("Create Return Parcel"),
+                "name": self.env._("Create Return Parcel"),
                 "type": "ir.actions.act_window",
                 "view_mode": "form",
                 "res_model": "sendcloud.create.return.parcel.wizard",
@@ -285,7 +288,7 @@ class SendcloudCreateReturnParcelWizard(models.TransientModel):
         else:
             sendcloud_return = self._step2(integration)
         return {
-            "name": _("Return Details"),
+            "name": self.env._("Return Details"),
             "view_type": "form",
             "view_mode": "form",
             "res_model": "sendcloud.return",
@@ -301,8 +304,10 @@ class SendcloudCreateReturnParcelWizard(models.TransientModel):
         )
         if outgoing_parcel_data.get("error"):
             res_error = outgoing_parcel_data.get("error")
-            err_msg = _("Sendcloud: %(message)s (error code: '%(code)s')") % (
-                {"message": res_error.get("message"), "code": res_error.get("code")}
+            err_msg = self.env._(
+                "Sendcloud: %(message)s (error code: '%(code)s')",
+                message=res_error.get("message"),
+                code=res_error.get("code"),
             )
             self.error_message = f"{err_msg}\n"
         else:
@@ -432,9 +437,9 @@ class SendcloudCreateReturnParcelWizard(models.TransientModel):
             }
         )
         if not self.refund_option_id:
-            raise UserError(_("Refund option is required"))
+            raise UserError(self.env._("Refund option is required"))
         if self.refund_option_require_message and not self.refund_message:
-            raise UserError(_("Refund message is required"))
+            raise UserError(self.env._("Refund message is required"))
         refund_option_code = self.refund_option_id.code
         refund_message = self.refund_message or ""
         refund_data = {
@@ -450,7 +455,7 @@ class SendcloudCreateReturnParcelWizard(models.TransientModel):
             reason = None
         else:
             if not self.reason_id:
-                raise UserError(_("Reason is required"))
+                raise UserError(self.env._("Reason is required"))
             reason = self.reason_id.code
         payload.update({"reason": reason})
         payload.update(

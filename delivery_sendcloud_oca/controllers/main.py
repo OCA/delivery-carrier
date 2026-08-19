@@ -3,14 +3,12 @@
 
 import base64
 import hmac
-import io
 import json
 import logging
 
-import PyPDF2
-
 from odoo import http
 from odoo.http import content_disposition, request, route
+from odoo.tools.pdf import merge_pdf
 
 _logger = logging.getLogger(__name__)
 
@@ -31,15 +29,7 @@ class DeliverySendcloud(http.Controller):
         if not file_data:
             return
 
-        pdf_merger = PyPDF2.PdfFileMerger()
-        for pdf_data in file_data:
-            pdf_file = io.BytesIO(pdf_data)
-            pdf_merger.append(pdf_file, import_bookmarks=False)
-
-        new_stream = io.BytesIO()
-        pdf_merger.write(new_stream)
-        new_stream.seek(0)
-        pdf = new_stream.read()
+        pdf = merge_pdf(file_data)
 
         file_name = "labels.pdf"  # Change the file name as needed
         headers = [
@@ -52,7 +42,7 @@ class DeliverySendcloud(http.Controller):
     @route(
         "/shop/sendcloud_integration_webhook/<int:company_id>",
         methods=["POST"],
-        type="json",
+        type="jsonrpc",
         auth="none",
         readonly=False,
     )

@@ -1,7 +1,7 @@
 # Copyright 2024 Onestein (<https://www.onestein.nl>)
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl)
 
-from odoo import _, fields, models
+from odoo import fields, models
 from odoo.exceptions import UserError
 
 
@@ -22,7 +22,9 @@ class SendcloudSyncWizard(models.TransientModel):
         integration = company.sendcloud_default_integration_id
         if not integration:
             raise UserError(
-                _("No Sendcloud integrations found. Setup an integration first.")
+                self.env._(
+                    "No Sendcloud integrations found. Setup an integration first."
+                )
             )
 
         if self.brands:

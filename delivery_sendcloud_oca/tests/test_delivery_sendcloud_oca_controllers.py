@@ -1,5 +1,6 @@
 # Copyright 2022 Onestein (<https://www.onestein.nl>)
 # License OPL-1 (https://www.odoo.com/documentation/16.0/legal/licenses.html#odoo-apps).
+import base64
 import json
 import logging
 from os.path import dirname, join
@@ -10,6 +11,8 @@ from vcr import VCR
 from odoo import http
 from odoo.tests import Form, HttpCase, tagged
 from odoo.tools import mute_logger
+
+from .common import MINIMAL_PDF, SendcloudSaleOrderMixin
 
 _super_send = requests.Session.send
 
@@ -25,7 +28,7 @@ recorder = VCR(
 
 
 @tagged("post_install", "-at_install")
-class TestDeliverySendCloudControllers(HttpCase):
+class TestDeliverySendCloudControllers(SendcloudSaleOrderMixin, HttpCase):
     @classmethod
     def _request_handler(cls, s, r, /, **kw):
         """Don't block external requests."""
@@ -234,7 +237,8 @@ class TestDeliverySendCloudControllers(HttpCase):
         shipping_method0 = delivery_carrier_obj.search(
             [("delivery_type", "=", "sendcloud")], limit=1
         )
-        sale_order = self.env.ref("sale.sale_order_1").copy()
+        self._setup_sendcloud_sender_address()
+        sale_order = self._create_sendcloud_sale_order()
         # Set Sendcloud delivery method
         choose_delivery_form = Form(
             self.env["choose.delivery.carrier"].with_context(
@@ -270,7 +274,7 @@ class TestDeliverySendCloudControllers(HttpCase):
             ).action_confirm()
         self.env.ref("base.user_admin").write(
             {
-                "groups_id": [
+                "group_ids": [
                     (4, self.env.ref("stock.group_stock_manager").id),
                 ]
             }
@@ -284,3 +288,35 @@ class TestDeliverySendCloudControllers(HttpCase):
             },
         )
         self.assertEqual(res.status_code, 200)
+
+    @mute_logger("py.warnings")
+    def test_07_download_labels_merges_the_parcel_pdfs(self):
+        """The labels of every parcel on the transfer come back as one PDF."""
+        picking = self._create_sendcloud_picking()
+        for code in (1, 2):
+            attachment = self.env["ir.attachment"].create(
+                {
+                    "name": f"label-{code}.pdf",
+                    "datas": base64.b64encode(MINIMAL_PDF),
+                }
+            )
+            self.env["sendcloud.parcel"].create(
+                {
+                    "name": str(code),
+                    "sendcloud_code": code,
+                    "picking_id": picking.id,
+                    "company_id": self.env.company.id,
+                    "attachment_id": attachment.id,
+                }
+            )
+        self.authenticate("admin", "admin")
+        res = self.url_open(
+            url="/sendcloud/picking/download_labels",
+            data={
+                "ids": ",".join(str(i) for i in picking.ids),
+                "csrf_token": http.Request.csrf_token(self),
+            },
+        )
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(res.headers["Content-Type"], "application/pdf")
+        self.assertTrue(res.content.startswith(b"%PDF"))

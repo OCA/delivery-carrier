@@ -2,7 +2,7 @@
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl)
 
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 from odoo.tools import float_round
 from odoo.tools.safe_eval import safe_eval
@@ -78,6 +78,7 @@ class DeliveryCarrier(models.Model):
         )
 
     def _compute_sendcloud_country_ids(self):
+        # pylint: disable=no-search-all
         countries = self.env["sendcloud.shipping.method.country"].search([])
         for carrier in self:
             carrier.sendcloud_country_ids = countries.filtered(
@@ -99,7 +100,7 @@ class DeliveryCarrier(models.Model):
             "error_message": False,
         }
         if not order.partner_shipping_id.country_id:
-            res["error_message"] = _("Partner does not have any country.")
+            res["error_message"] = self.env._("Partner does not have any country.")
             return res
 
         country = order.partner_shipping_id.country_id
@@ -112,7 +113,9 @@ class DeliveryCarrier(models.Model):
         res["sendcloud_country_specific_product"] = method_country.product_id
 
         if self.sendcloud_service_point_input == "required":
-            res["warning_message"] = _("This shipping method requires a Service Point.")
+            res["warning_message"] = self.env._(
+                "This shipping method requires a Service Point."
+            )
 
         return res
 
@@ -141,8 +144,10 @@ class DeliveryCarrier(models.Model):
                 deleted_parcels.append(parcel_code)  # ignore "Not Found" error
             elif res.get("error"):
                 raise ValidationError(
-                    _("Sendcloud: %(error_message)s")
-                    % {"error_message": res["error"].get("message")}
+                    self.env._(
+                        "Sendcloud: %(error_message)s",
+                        error_message=res["error"].get("message"),
+                    )
                 )
         parcels_to_delete = picking.sendcloud_parcel_ids.filtered(
             lambda p: p.sendcloud_code in deleted_parcels
@@ -236,43 +241,48 @@ class DeliveryCarrier(models.Model):
         )
 
     def _is_available_for_order(self, order):
-        if self.delivery_type == "sendcloud":
-            if self.sendcloud_is_return:
-                return False
-            weight = order.sendcloud_order_weight
-            if not (self.sendcloud_min_weight <= weight <= self.sendcloud_max_weight):
-                return False
-            if (
-                self.sendcloud_service_point_input == "required"
-                and self.sendcloud_integration_id.service_point_enabled
-            ):
-                carrier_names = self.sendcloud_integration_id.service_point_carriers
-                current_carrier = self.sendcloud_carrier
-                if not (
-                    current_carrier
-                    and current_carrier in safe_eval(carrier_names)
-                    or False
-                ):
-                    return False
-            warehouse = order.warehouse_id
-            if not warehouse.sencloud_sender_address_id:
-                # use standard server address
-                sender_address = self._get_default_sender_address_per_company(
-                    warehouse.company_id.id
-                )
-            else:
-                sender_address = warehouse.sencloud_sender_address_id
-            countries = self.env["sendcloud.shipping.method.country"].search(
-                [
-                    ("company_id", "=", order.company_id.id),
-                    ("from_iso_2", "=", sender_address.country),
-                    ("iso_2", "=", order.partner_shipping_id.country_id.code),
-                ]
-            )
-            if self.sendcloud_code not in countries.mapped("method_code"):
-                return False
-        else:
+        """Same filtering as :meth:`available_carriers`, for one carrier.
+
+        The website checkout asks each shipping method whether it is available
+        instead of going through ``available_carriers``, so the Sendcloud
+        criteria have to be applied here as well or the shop offers methods
+        that cannot ship the order.
+        """
+        if self.delivery_type != "sendcloud":
             return super()._is_available_for_order(order)
+        if self.sendcloud_is_return:
+            return False
+        weight = order.sendcloud_order_weight
+        if not (self.sendcloud_min_weight <= weight <= self.sendcloud_max_weight):
+            return False
+        if (
+            self.sendcloud_service_point_input == "required"
+            and self.sendcloud_integration_id.service_point_enabled
+        ):
+            carrier_names = self.sendcloud_integration_id.service_point_carriers
+            current_carrier = self.sendcloud_carrier
+            if not (
+                current_carrier and current_carrier in safe_eval(carrier_names) or False
+            ):
+                return False
+        warehouse = order.warehouse_id
+        if not warehouse.sencloud_sender_address_id:
+            # use standard server address
+            sender_address = self._get_default_sender_address_per_company(
+                warehouse.company_id.id
+            )
+        else:
+            sender_address = warehouse.sencloud_sender_address_id
+        countries = self.env["sendcloud.shipping.method.country"].search(
+            [
+                ("company_id", "=", order.company_id.id),
+                ("from_iso_2", "=", sender_address.country),
+                ("iso_2", "=", order.partner_shipping_id.country_id.code),
+            ]
+        )
+        if self.sendcloud_code not in countries.mapped("method_code"):
+            return False
+        return super()._is_available_for_order(order)
 
     # ----------------- #
     # Sendcloud methods #
@@ -454,6 +464,7 @@ class DeliveryCarrier(models.Model):
 
     @api.model
     def sendcloud_sync_shipping_method(self):
+        # pylint: disable=no-search-all
         for company in self.env["res.company"].search([]):
             integration = company.sendcloud_default_integration_id
             if integration:
@@ -492,7 +503,7 @@ class DeliveryCarrier(models.Model):
         if self.delivery_type == "sendcloud":
             for picking in pickings:
                 picking.message_post(
-                    body=_(
+                    body=self.env._(
                         "Sendcloud cannot generate returns."
                         "Please handle this return with the carrier directly."
                     )
@@ -513,9 +524,13 @@ class DeliveryCarrier(models.Model):
         for record in self.filtered(lambda r: r.delivery_type == "sendcloud"):
             if not record.company_id:
                 raise ValidationError(
-                    _("The company is mandatory when delivery carrier is Sendcloud.")
+                    self.env._(
+                        "The company is mandatory when delivery carrier is Sendcloud."
+                    )
                 )
             if record.sendcloud_integration_id.company_id != record.company_id:
                 raise ValidationError(
-                    _("The company is not consistent with the integration company.")
+                    self.env._(
+                        "The company is not consistent with the integration company."
+                    )
                 )

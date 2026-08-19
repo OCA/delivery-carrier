@@ -1,7 +1,7 @@
 # Copyright 2024 Onestein (<https://www.onestein.nl>)
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl)
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
 
@@ -25,7 +25,7 @@ class SendcloudWarehouseAddressWizard(models.TransientModel):
         "sendcloud.change.warehouse.address.wizard",
         "wizard_id",
         string="Warehouses",
-        default=_default_warehouse_ids,
+        default=lambda self: self._default_warehouse_ids(),
     )
 
     def button_update(self):
@@ -54,7 +54,7 @@ class SendcloudWarehouseAddressWizard(models.TransientModel):
                     f"{line.sencloud_sender_address_country_code}"
                 )
         if err_msg:
-            raise ValidationError(_("Inconsistent countries:") + err_msg)
+            raise ValidationError(self.env._("Inconsistent countries:") + err_msg)
 
 
 class SendcloudChangeWarehouseAddressWizard(models.TransientModel):

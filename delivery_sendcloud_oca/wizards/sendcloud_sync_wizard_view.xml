@@ -19,7 +19,6 @@
                         <field name="brands" />
                         <field name="returns" />
                     </group>
-                    <group name="options" string="Options" />
                 </group>
                 <footer>
                     <button

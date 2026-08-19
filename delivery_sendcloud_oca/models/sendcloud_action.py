@@ -46,6 +46,7 @@ class SendcloudAction(models.Model):
 
     @api.model
     def _reference_models(self):
+        # pylint: disable=no-search-all
         models = self.env["ir.model"].sudo().search([])
         return [(model.model, model.name) for model in models]
 

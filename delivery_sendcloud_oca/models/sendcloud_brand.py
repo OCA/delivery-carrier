@@ -96,6 +96,7 @@ class SendcloudBrand(models.Model):
 
     @api.model
     def sendcloud_sync_brands(self):
+        # pylint: disable=no-search-all
         for company in self.env["res.company"].search([]):
             integration = company.sendcloud_default_integration_id
             if integration:

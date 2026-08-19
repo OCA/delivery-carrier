@@ -7,7 +7,8 @@ from urllib.parse import urlparse
 
 import requests
 
-from odoo import SUPERUSER_ID, _, api, models
+from odoo import api, models
+from odoo.api import SUPERUSER_ID
 from odoo.exceptions import UserError
 from odoo.modules.registry import Registry
 
@@ -50,15 +51,15 @@ class SendcloudRequest(models.AbstractModel):
                 resp = requests.put(url=url, json=data, auth=auth, timeout=TIMEOUT)
         except requests.ConnectionError as CE:
             raise UserError(
-                _("Sendcloud: server not reachable, try again later")
+                self.env._("Sendcloud: server not reachable, try again later")
             ) from CE
         except requests.Timeout as TO:
             raise UserError(
-                _("Sendcloud timeout: the server didn't reply within 30s")
+                self.env._("Sendcloud timeout: the server didn't reply within 30s")
             ) from TO
         except requests.HTTPError as HE:
             error_msg = resp.json().get("error", {}).get("message", "")
-            raise UserError(_("Sendcloud: %s") % error_msg or resp.text) from HE
+            raise UserError(self.env._("Sendcloud: %s", error_msg) or resp.text) from HE
 
         # Handle request limiting (retry after one second)
         if resp.status_code == 429:
@@ -77,7 +78,7 @@ class SendcloudRequest(models.AbstractModel):
             )
         err_msg = self._check_response_ok(resp)
         if err_msg:
-            err_msg = err_msg + "\n" + _("Request: %s") % data
+            err_msg = err_msg + "\n" + self.env._("Request: %s", data)
             raise UserError(err_msg)
         return resp
 
@@ -87,11 +88,13 @@ class SendcloudRequest(models.AbstractModel):
         ok_status = self._ok_response_status()
         err_msg = ""
         if resp.status_code not in ok_status:
-            err_msg = _("Sendcloud: %(reason)s (error code %(status_code)s)") % (
-                {"reason": resp.reason, "status_code": resp.status_code}
+            err_msg = self.env._(
+                "Sendcloud: %(reason)s (error code %(status_code)s)",
+                reason=resp.reason,
+                status_code=resp.status_code,
             )
             if resp.status_code == 500:
-                err_msg += "\n" + _("Internal server error.")
+                err_msg += "\n" + self.env._("Internal server error.")
             else:
                 resp_dict = resp.json()
                 if resp_dict.get("error"):
@@ -121,7 +124,7 @@ class SendcloudRequest(models.AbstractModel):
             decoded_content = "Byte content"
         if resp.status_code == 401 and not self.env.context.get("skip_raise_error_401"):
             error_msg = resp.json().get("error", {}).get("message", "")
-            raise UserError(_("Sendcloud: %s") % error_msg or resp.text)
+            raise UserError(self.env._("Sendcloud: %s", error_msg) or resp.text)
         company = self.company_id
         self.env["sendcloud.action"].create(
             {

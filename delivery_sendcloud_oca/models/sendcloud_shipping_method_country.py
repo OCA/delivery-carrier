@@ -1,7 +1,7 @@
 # Copyright 2024 Onestein (<https://www.onestein.nl>)
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl)
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 
 
 class SendcloudShippingMethodCountry(models.Model):
@@ -143,7 +143,7 @@ class SendcloudShippingMethodCountry(models.Model):
     def sendcloud_custom_price_details(self):
         self.ensure_one()
         return {
-            "name": _("Custom Price Details"),
+            "name": self.env._("Custom Price Details"),
             "type": "ir.actions.act_window",
             "res_model": "sendcloud.custom.price.details.wizard",
             "views": [[False, "form"]],
