@@ -13,20 +13,26 @@ class StockPickingDeliveryLinkCommonCase(TransactionCase):
         cls.wh = cls.env.ref("stock.warehouse0")
 
         cls.stock_loc = cls.wh.lot_stock_id
-        cls.shelf1_loc = cls.env.ref("stock.stock_location_components")
-        cls.shelf2_loc = cls.env.ref("stock.stock_location_14")
-
-    def _create_move(self, product, src_location, dst_location, **values):
-        Move = self.env["stock.move"]
-        # simulate create + onchange
-        move = Move.new(
+        cls.shelf1_loc = cls.env["stock.location"].create(
             {
-                "product_id": product.id,
-                "location_id": src_location.id,
-                "location_dest_id": dst_location.id,
+                "name": "Shelf 1",
+                "location_id": cls.stock_loc.id,
             }
         )
-        move._onchange_product_id()
-        move_values = move._convert_to_write(move._cache)
+        cls.shelf2_loc = cls.env["stock.location"].create(
+            {
+                "name": "Shelf 2",
+                "location_id": cls.stock_loc.id,
+            }
+        )
+
+    def _create_move(self, product, src_location, dst_location, **values):
+        move_values = {
+            "product_id": product.id,
+            "product_uom": product.uom_id.id,
+            "product_uom_qty": 1.0,
+            "location_id": src_location.id,
+            "location_dest_id": dst_location.id,
+        }
         move_values.update(**values)
-        return Move.create(move_values)
+        return self.env["stock.move"].create(move_values)
