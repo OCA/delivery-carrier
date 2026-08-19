@@ -3,7 +3,7 @@
 
 import base64
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 from odoo.tools.safe_eval import safe_eval
 
@@ -15,6 +15,7 @@ class SendcloudParcel(models.Model):
 
     @api.model
     def _selection_parcel_statuses(self):
+        # pylint: disable=no-search-all
         statuses = self.env["sendcloud.parcel.status"].search([])
         return [(status.sendcloud_code, status.message) for status in statuses]
 
@@ -87,7 +88,7 @@ class SendcloudParcel(models.Model):
         selection="_get_sendcloud_customs_shipment_type"
     )
     picking_id = fields.Many2one("stock.picking")
-    package_id = fields.Many2one("stock.quant.package")
+    package_id = fields.Many2one("stock.package")
     sendcloud_status = fields.Selection(
         selection=lambda self: self._selection_parcel_statuses(), readonly=True
     )
@@ -242,7 +243,9 @@ class SendcloudParcel(models.Model):
     def action_get_parcel_label(self):
         self.ensure_one()
         if not self.label_printer_url:
-            raise UserError(_("Label not available: no label printer url provided."))
+            raise UserError(
+                self.env._("Label not available: no label printer url provided.")
+            )
         self._generate_parcel_labels()
 
     def _generate_parcel_labels(self):
@@ -312,6 +315,7 @@ class SendcloudParcel(models.Model):
 
     @api.model
     def sendcloud_sync_parcels(self):
+        # pylint: disable=no-search-all
         for company in self.env["res.company"].search([]):
             integration = company.sendcloud_default_integration_id
             if integration:
@@ -329,6 +333,9 @@ class SendcloudParcel(models.Model):
             self.write(parcels_vals)
 
     def unlink(self):
+        # The raise below is deliberate: a parcel Sendcloud refuses to cancel
+        # still exists on their side, so the record must not be deleted here.
+        # pylint: disable=no-raise-unlink
         if not self.env.context.get("skip_cancel_parcel"):
             for parcel in self:
                 integration = parcel.company_id.sendcloud_default_integration_id
@@ -338,7 +345,7 @@ class SendcloudParcel(models.Model):
                         if res["error"]["code"] == 404:
                             continue  # ignore "Not Found" error
                         raise UserError(
-                            _("Sendcloud: %s") % res["error"].get("message")
+                            self.env._("Sendcloud: %s", res["error"].get("message"))
                         )
         return super().unlink()
 
@@ -387,7 +394,7 @@ class SendcloudParcelDocument(models.Model):
     def action_get_parcel_document(self):
         self.ensure_one()
         if not self.link:
-            raise UserError(_("Document not available: no link provided."))
+            raise UserError(self.env._("Document not available: no link provided."))
         self._generate_parcel_document()
 
     def _generate_parcel_document(self):

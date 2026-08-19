@@ -24,6 +24,7 @@ class SendcloudParcelStatus(models.Model):
         records_data = integration.get_parcels_statuses()
 
         # All records
+        # pylint: disable=no-search-all
         all_records = self.search([])
 
         # Existing records
@@ -52,6 +53,7 @@ class SendcloudParcelStatus(models.Model):
 
     @api.model
     def sendcloud_sync_parcel_statuses(self):
+        # pylint: disable=no-search-all
         for company in self.env["res.company"].search([]):
             integration = company.sendcloud_default_integration_id
             if integration:

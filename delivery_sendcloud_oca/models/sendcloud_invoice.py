@@ -98,6 +98,7 @@ class SendcloudInvoice(models.Model):
 
     @api.model
     def sendcloud_sync_invoices(self):
+        # pylint: disable=no-search-all
         for company in self.env["res.company"].search([]):
             integration = company.sendcloud_default_integration_id
             if integration:

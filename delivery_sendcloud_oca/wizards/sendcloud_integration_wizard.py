@@ -5,7 +5,7 @@ from urllib.parse import urlencode
 
 import requests
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 
 
 class SendcloudIntegrationWizard(models.TransientModel):
@@ -58,15 +58,21 @@ class SendcloudIntegrationWizard(models.TransientModel):
         try:
             resp = requests.post(url=url, json={}, timeout=10)
         except Exception as err:
-            self.error_message = _("Error while checking the webhook connection.\n")
+            self.error_message = self.env._(
+                "Error while checking the webhook connection.\n"
+            )
             self.error_message += f"{str(err)}\n"
-            self.error_message += _("Webhook URL: %(url)s\n") % {"url": url}
+            self.error_message += self.env._("Webhook URL: %(url)s\n", url=url)
             return False
         if resp.status_code != 200:
-            err_msg = _("Webhook URL: %(reason)s (error code %(status_code)s)") % (
-                {"reason": resp.reason, "status_code": resp.status_code}
+            err_msg = self.env._(
+                "Webhook URL: %(reason)s (error code %(status_code)s)",
+                reason=resp.reason,
+                status_code=resp.status_code,
             )
-            self.error_message = _("Error while checking the webhook connection.\n")
+            self.error_message = self.env._(
+                "Error while checking the webhook connection.\n"
+            )
             self.error_message += f"{err_msg}\n"
             self.error_message += f"URL: {url}\n"
             return False

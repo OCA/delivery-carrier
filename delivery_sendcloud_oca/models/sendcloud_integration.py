@@ -1,7 +1,7 @@
 # Copyright 2024 Onestein (<https://www.onestein.nl>)
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl)
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 from odoo.tools.safe_eval import safe_eval
 
@@ -197,7 +197,9 @@ class SendcloudIntegration(models.Model):
         if vals.get("service_point_enabled") and not safe_eval(
             vals.get("service_point_carriers")
         ):
-            raise UserError(_("Sendcloud: select at least one service point carrier"))
+            raise UserError(
+                self.env._("Sendcloud: select at least one service point carrier")
+            )
         if "service_point_carriers" in vals and isinstance(
             vals["service_point_carriers"], str
         ):

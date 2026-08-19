@@ -13,6 +13,7 @@ class SendcloudCarrier(models.Model):
 
     @api.model
     def _create_update_carriers(self, retrieved_carriers):
+        # pylint: disable=no-search-all
         all_carriers = self.search([])
         existing_carriers = all_carriers.mapped("sendcloud_code")
         to_add_carriers = set(retrieved_carriers) - set(existing_carriers)

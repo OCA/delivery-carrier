@@ -1437,11 +1437,6 @@ msgid "Only for Testing"
 msgstr ""
 
 #. module: delivery_sendcloud_oca
-#: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.sendcloud_onboarding_sync_configuration_form
-msgid "Options"
-msgstr ""
-
-#. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/models/stock_picking.py:0
 msgid ""
