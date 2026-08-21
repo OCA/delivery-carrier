@@ -2,7 +2,7 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0)
 
 from odoo import api, fields, models
-from odoo.osv import expression
+from odoo.fields import Domain
 
 
 class StockPicking(models.Model):
@@ -28,7 +28,7 @@ class StockPicking(models.Model):
     def _get_possible_pickings_domain(self):
         domain = super()._get_possible_pickings_domain()
         if self.picking_type_id.batch_group_by_vehicle:
-            domain = expression.AND(
+            domain = Domain.AND(
                 [
                     domain,
                     [
@@ -41,7 +41,7 @@ class StockPicking(models.Model):
                 ]
             )
         if self.picking_type_id.batch_group_by_driver:
-            domain = expression.AND(
+            domain = Domain.AND(
                 [
                     domain,
                     [
@@ -58,7 +58,7 @@ class StockPicking(models.Model):
     def _get_possible_batches_domain(self):
         domain = super()._get_possible_batches_domain()
         if self.picking_type_id.batch_group_by_vehicle:
-            domain = expression.AND(
+            domain = Domain.AND(
                 [
                     domain,
                     [
@@ -71,14 +71,14 @@ class StockPicking(models.Model):
                 ]
             )
         if self.picking_type_id.batch_group_by_driver:
-            domain = expression.AND(
+            domain = Domain.AND(
                 [
                     domain,
                     [
                         (
                             "picking_ids.driver_id",
                             "=",
-                            self.driver_id.id if self.vehicle_id else False,
+                            self.driver_id.id if self.driver_id else False,
                         )
                     ],
                 ]

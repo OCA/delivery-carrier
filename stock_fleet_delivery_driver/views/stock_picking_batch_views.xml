@@ -8,7 +8,11 @@
         <field name="inherit_id" ref="stock_fleet.stock_picking_batch_form" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='vehicle_id']" position="after">
-                <field name="driver_id" placeholder="Driver of the Vehicle" />
+                <field
+                    name="driver_id"
+                    domain="[('is_driver', '=', True)]"
+                    placeholder="Driver of the Vehicle"
+                />
             </xpath>
         </field>
     </record>

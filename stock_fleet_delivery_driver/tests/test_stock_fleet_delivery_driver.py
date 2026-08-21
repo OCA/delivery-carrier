@@ -86,7 +86,7 @@ class TestDeliverFleet(TransactionCase):
                         {
                             "product_id": self.product.id,
                             "product_uom_qty": 1,
-                            "product_uom": self.product.uom_id.id,
+                            "product_uom_id": self.product.uom_id.id,
                             "price_unit": 100,
                         },
                     )
@@ -145,19 +145,14 @@ class TestDeliverFleet(TransactionCase):
         )
         self.assertEqual(len(out_pickings), 5)
         # Check propagation of the correct Vehicle to the batch
-        batch_action = (
-            self.env["stock.picking.to.batch"]
-            .create(
-                {
-                    "mode": "new",
-                    "is_create_draft": False,
-                    "description": "Test Batch",
-                }
-            )
-            .with_context(active_ids=out_pickings.ids)
-            .attach_pickings()
-        )
-        batch = self.env["stock.picking.batch"].browse(batch_action["res_id"])
+        self.env["stock.picking.to.batch"].create(
+            {
+                "mode": "new",
+                "is_create_draft": False,
+                "description": "Test Batch",
+            }
+        ).with_context(active_ids=out_pickings.ids).attach_pickings()
+        batch = out_pickings.batch_id
         self.assertEqual(len(batch.picking_ids), 5)
         self.assertEqual(
             batch.vehicle_id,
@@ -254,7 +249,6 @@ class TestDeliverFleet(TransactionCase):
                 "move_ids": [
                     Command.create(
                         {
-                            "name": self.product.name,
                             "product_id": self.product.id,
                             "product_uom_qty": 2,
                             "product_uom": self.product.uom_id.id,
@@ -276,7 +270,6 @@ class TestDeliverFleet(TransactionCase):
                 "move_ids": [
                     Command.create(
                         {
-                            "name": self.product.name,
                             "product_id": self.product.id,
                             "product_uom_qty": 3,
                             "product_uom": self.product.uom_id.id,
@@ -298,7 +291,6 @@ class TestDeliverFleet(TransactionCase):
                 "move_ids": [
                     Command.create(
                         {
-                            "name": self.product.name,
                             "product_id": self.product.id,
                             "product_uom_qty": 4,
                             "product_uom": self.product.uom_id.id,
@@ -365,7 +357,6 @@ class TestDeliverFleet(TransactionCase):
                 "move_ids": [
                     Command.create(
                         {
-                            "name": self.product.name,
                             "product_id": self.product.id,
                             "product_uom_qty": 2,
                             "product_uom": self.product.uom_id.id,
@@ -387,7 +378,6 @@ class TestDeliverFleet(TransactionCase):
                 "move_ids": [
                     Command.create(
                         {
-                            "name": self.product.name,
                             "product_id": self.product.id,
                             "product_uom_qty": 3,
                             "product_uom": self.product.uom_id.id,
@@ -409,7 +399,6 @@ class TestDeliverFleet(TransactionCase):
                 "move_ids": [
                     Command.create(
                         {
-                            "name": self.product.name,
                             "product_id": self.product.id,
                             "product_uom_qty": 4,
                             "product_uom": self.product.uom_id.id,
