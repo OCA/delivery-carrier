@@ -166,7 +166,7 @@ class DeliveryCarrier(models.Model):
         )
         return res
 
-    def available_carriers(self, partner, order):
+    def available_carriers(self, partner, source):
         """
         Standard Odoo method, invoked by the super(), already filters shipping
         methods, including Sendcloud shipping methods, by the country of the
@@ -176,10 +176,10 @@ class DeliveryCarrier(models.Model):
          - weight range
          - enabled/disabled service point in Sendcloud integration.
         :param partner:
-        :param order:
+        :param source: a ``sale.order`` or a ``stock.picking``
         :return:
         """
-        res = super().available_carriers(partner, order)
+        res = super().available_carriers(partner, source)
 
         sendcloud_carriers = res.filtered(
             lambda c: c.delivery_type == "sendcloud" and c.sendcloud_is_return is False
@@ -187,18 +187,11 @@ class DeliveryCarrier(models.Model):
         other_carriers = res.filtered(lambda c: c.delivery_type != "sendcloud")
         if sendcloud_carriers:
             # get sender address (warehouse)
-            warehouse = order.warehouse_id
-            if not warehouse.sencloud_sender_address_id:
-                # use standard server address
-                sender_address = self._get_default_sender_address_per_company(
-                    warehouse.company_id.id
-                )
-            else:
-                sender_address = warehouse.sencloud_sender_address_id
+            sender_address = self._sendcloud_sender_address(source)
 
             # filter by weight
             # TODO are there sendcloud shipping methods without weight limit?
-            weight = order.sendcloud_order_weight
+            weight = self._sendcloud_source_weight(source)
             sendcloud_carriers = sendcloud_carriers.filtered(
                 lambda c: c.sendcloud_min_weight <= weight <= c.sendcloud_max_weight
             )
@@ -206,7 +199,7 @@ class DeliveryCarrier(models.Model):
             # filter by sender address (warehouse) and delivery address (partner)
             countries = self.env["sendcloud.shipping.method.country"].search(
                 [
-                    ("company_id", "=", order.company_id.id),
+                    ("company_id", "=", source.company_id.id),
                     ("from_iso_2", "=", sender_address.country),
                     ("iso_2", "=", partner.country_id.code),
                 ]
@@ -252,7 +245,7 @@ class DeliveryCarrier(models.Model):
             return super()._is_available_for_order(order)
         if self.sendcloud_is_return:
             return False
-        weight = order.sendcloud_order_weight
+        weight = self._sendcloud_source_weight(order)
         if not (self.sendcloud_min_weight <= weight <= self.sendcloud_max_weight):
             return False
         if (
@@ -265,14 +258,7 @@ class DeliveryCarrier(models.Model):
                 current_carrier and current_carrier in safe_eval(carrier_names) or False
             ):
                 return False
-        warehouse = order.warehouse_id
-        if not warehouse.sencloud_sender_address_id:
-            # use standard server address
-            sender_address = self._get_default_sender_address_per_company(
-                warehouse.company_id.id
-            )
-        else:
-            sender_address = warehouse.sencloud_sender_address_id
+        sender_address = self._sendcloud_sender_address(order)
         countries = self.env["sendcloud.shipping.method.country"].search(
             [
                 ("company_id", "=", order.company_id.id),
@@ -321,6 +307,36 @@ class DeliveryCarrier(models.Model):
             limit=1,
         )
         return shipping_method_country.price_custom, shipping_method_country
+
+    def _sendcloud_sender_address(self, source):
+        """The Sendcloud sender address the goods leave from.
+
+        ``source`` is whatever ``available_carriers`` was handed: a
+        ``sale.order`` from the sale and website flows, a ``stock.picking``
+        from ``stock.picking._compute_allowed_carrier_ids``. The warehouse is
+        reached differently on each, and a transfer may have none at all, so
+        the company falls back to the source's own.
+        """
+        if source._name == "stock.picking":
+            warehouse = source.picking_type_id.warehouse_id
+        else:
+            warehouse = source.warehouse_id
+        if warehouse.sencloud_sender_address_id:
+            return warehouse.sencloud_sender_address_id
+        # use standard server address
+        company = warehouse.company_id or source.company_id
+        return self._get_default_sender_address_per_company(company.id)
+
+    def _sendcloud_source_weight(self, source):
+        """The weight in kg to match the shipping methods against.
+
+        A sale order totals its lines in ``sendcloud_order_weight``; a
+        transfer already carries the total in the standard ``weight`` field,
+        which is expressed in the company's weight unit.
+        """
+        if source._name == "stock.picking":
+            return source._sendcloud_convert_weight_to_kg(source.weight)
+        return source.sendcloud_order_weight
 
     @api.model
     def _get_default_sender_address_per_company(self, company_id):

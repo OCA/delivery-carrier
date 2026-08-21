@@ -1404,3 +1404,69 @@ class TestDeliverySendCloud(SendcloudSaleOrderMixin, BaseCommon):
         with cancelling({"error": {"code": 404, "message": "not found"}}):
             parcel.unlink()
         self.assertFalse(parcel.exists())
+
+    @mute_logger("py.warnings")
+    def test_30_allowed_carriers_on_a_transfer(self):
+        """``available_carriers`` is also called with a transfer.
+
+        ``stock.picking._compute_allowed_carrier_ids`` passes the picking
+        itself as the source, so the Sendcloud filtering may not assume it was
+        handed a sale order.
+        """
+        delivery_carrier_obj = self.env["delivery.carrier"]
+        self._setup_sendcloud_sender_address()
+        partner = self.env["res.partner"].create(
+            {
+                "name": "test",
+                "country_id": self.env.ref("base.nl").id,
+                "street": "Bloemstraat 42",
+                "zip": "4817RH",
+                "city": "Groningen",
+                "phone": "+31 6 12345678",
+                "state_id": self.env.ref("base.state_nl_gr").id,
+                "email": "admin@yourcompany.example.com",
+            }
+        )
+        with recorder.use_cassette("shipping_methods"):
+            delivery_carrier_obj.sendcloud_sync_shipping_method()
+        sendcloud_carriers = delivery_carrier_obj.search(
+            [
+                ("delivery_type", "=", "sendcloud"),
+                ("company_id", "=", self.env.company.id),
+            ]
+        )
+        self.assertTrue(
+            sendcloud_carriers,
+            "the filtering is only reached when Sendcloud methods exist",
+        )
+        picking = self._create_sendcloud_picking(partner=partner)
+
+        # Computing the field is what used to raise AttributeError.
+        allowed = picking.allowed_carrier_ids
+        self.assertNotIn(
+            sendcloud_carriers.filtered("sendcloud_is_return"),
+            allowed,
+            "return methods are never offered",
+        )
+        self.assertIn(self.env.ref("delivery.free_delivery_carrier"), allowed)
+
+        # The weight comes from the transfer, not from a sale order.
+        self.assertEqual(delivery_carrier_obj._sendcloud_source_weight(picking), 0.0)
+        too_heavy = sendcloud_carriers.filtered(
+            lambda c: c.sendcloud_min_weight > 0.001
+        )
+        self.assertTrue(too_heavy)
+        self.assertFalse(
+            too_heavy & allowed,
+            "a method with a minimum weight cannot take an empty transfer",
+        )
+
+        # And the sender address from the operation type's warehouse.
+        warehouse = picking.picking_type_id.warehouse_id
+        self.assertEqual(
+            delivery_carrier_obj._sendcloud_sender_address(picking),
+            warehouse.sencloud_sender_address_id
+            or delivery_carrier_obj._get_default_sender_address_per_company(
+                warehouse.company_id.id
+            ),
+        )
