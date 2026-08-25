@@ -2,6 +2,7 @@
 # Copyright 2022 Tecnativa - Víctor Martínez
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
+from odoo.orm.commands import Command
 from odoo.tests import Form
 from odoo.tools import mute_logger
 
@@ -31,14 +32,11 @@ class TestDeliveryFreeFeeRemoval(BaseCommon):
                 "product_id": product_delivery.id,
             }
         )
-        partner = cls.env["res.partner"].create({"name": "Test Partner"})
         cls.sale = cls.env["sale.order"].create(
             {
-                "partner_id": partner.id,
+                "partner_id": cls.partner.id,
                 "order_line": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "product_id": product.id,
                             "product_uom_qty": 1,

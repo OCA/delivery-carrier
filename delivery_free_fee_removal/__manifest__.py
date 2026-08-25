@@ -11,9 +11,5 @@
     "installable": True,
     "license": "AGPL-3",
     "depends": ["delivery"],
-    "data": [
-        "views/sale_order_views.xml",
-        "views/res_config_settings_views.xml",
-        "reports/sale_report_templates.xml",
-    ],
+    "data": ["views/sale_order_views.xml", "views/res_config_settings_views.xml"],
 }
