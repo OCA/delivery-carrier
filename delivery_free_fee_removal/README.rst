@@ -85,15 +85,6 @@ Contributors
      - Son Ho <sonhd@trobz.com>
      - Nhan Tran <nhant@trobz.com>
 
-Other credits
--------------
-
-The migration of this module from 13.0 to 14.0 was financially supported
-by Camptocamp.
-
-The migration of this module from 15.0 to 18.0 was financially supported
-by Camptocamp.
-
 Maintainers
 -----------
 
