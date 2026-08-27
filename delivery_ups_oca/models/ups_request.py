@@ -236,7 +236,7 @@ class UpsRequest:
                 self.default_packaging_id, picking, False
             )
             package_weight = round(
-                (picking.shipping_weight / picking.number_of_packages), 2
+                (picking.shipping_weight / (picking.number_of_packages or 1)), 2
             )
             for i in range(0, picking.number_of_packages):
                 package_item = package_info.copy()
