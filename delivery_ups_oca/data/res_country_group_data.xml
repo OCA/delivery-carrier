@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Copyright 2026 Nitrokey GmbH
+License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+-->
+<odoo noupdate="1">
+    <record id="country_group_ups_global_checkout" model="res.country.group">
+        <field name="name">UPS Global Checkout destinations</field>
+        <field
+            name="country_ids"
+            eval="[(6, 0, [
+                ref('base.ar'), ref('base.au'), ref('base.at'), ref('base.be'),
+                ref('base.ca'), ref('base.cl'), ref('base.cn'), ref('base.co'),
+                ref('base.cr'), ref('base.cz'), ref('base.dk'), ref('base.do'),
+                ref('base.fi'), ref('base.fr'), ref('base.de'), ref('base.hk'),
+                ref('base.hu'), ref('base.in'), ref('base.id'), ref('base.ie'),
+                ref('base.it'), ref('base.jp'), ref('base.kr'), ref('base.lu'),
+                ref('base.mo'), ref('base.my'), ref('base.mx'), ref('base.nl'),
+                ref('base.no'), ref('base.ph'), ref('base.pl'), ref('base.pt'),
+                ref('base.pr'), ref('base.sg'), ref('base.es'), ref('base.se'),
+                ref('base.ch'), ref('base.tw'), ref('base.th'), ref('base.uk'),
+                ref('base.us'), ref('base.vn'),
+            ])]"
+        />
+    </record>
+</odoo>

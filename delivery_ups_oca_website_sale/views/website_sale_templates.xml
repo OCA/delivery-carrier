@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Copyright 2026 Nitrokey GmbH
+License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <template
+        id="total_ups_landed_cost"
+        inherit_id="website_sale.total"
+        name="Duties, Taxes &amp; Fees"
+    >
+        <xpath expr="//tr[@id='order_delivery']" position="after">
+            <t
+                t-set="ups_landed_cost"
+                t-value="sum(website_sale_order.order_line.filtered('is_ups_landed_cost').mapped('price_total'))"
+            />
+            <tr
+                id="order_ups_landed_cost"
+                t-att-class="'' if ups_landed_cost else 'd-none'"
+            >
+                <td
+                    class="ps-0 pt-0 pb-2 border-0 text-muted"
+                    colspan="2"
+                >Duties, Taxes &amp; Fees</td>
+                <td class="text-end pe-0 pt-0 pb-2 border-0">
+                    <span
+                        class="monetary_field"
+                        style="white-space: nowrap;"
+                        t-out="ups_landed_cost"
+                        t-options="{'widget': 'monetary', 'display_currency': website_sale_order.currency_id}"
+                    />
+                </td>
+            </tr>
+        </xpath>
+    </template>
+</odoo>
