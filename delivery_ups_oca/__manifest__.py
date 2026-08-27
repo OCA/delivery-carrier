@@ -7,7 +7,7 @@
     "version": "18.0.1.5.0",
     "category": "Delivery",
     "website": "https://github.com/OCA/delivery-carrier",
-    "author": """Hunki Enterprises BV, Tecnativa, ForgeFlow,
+    "author": """Hunki Enterprises BV, Tecnativa, ForgeFlow, Nitrokey GmbH,
              Odoo Community Association (OCA)""",
     "license": "AGPL-3",
     "excludes": ["delivery_ups"],
@@ -19,6 +19,7 @@
     ],
     "data": [
         "data/stock_package_type_data.xml",
+        "security/ir.model.access.csv",
         "views/delivery_carrier_view.xml",
         "views/stock_picking_view.xml",
     ],

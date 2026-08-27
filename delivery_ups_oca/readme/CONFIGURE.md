@@ -12,9 +12,15 @@ To configure this module, you need to:
     Select the `ups` delivery type and check the "Cash on Delivery"
     checkbox under the "UPS" tab. It is required to select the "UPS COD
     Funds Code" when the "Cash on Delivery" option is selected.
-5.  The "Negotiated Rates" checkbox is disabled by default. When checked 
+5.  The "Negotiated Rates" checkbox is disabled by default. When checked
     and your account has negotiated rates, UPS will use your
     account's negotiated rates for shipping cost calculations.
+6.  For paperless invoice functionality, configure the "Country group to
+    auto-send paperless invoice" field by selecting the country groups for
+    which you want to automatically enable paperless invoices. When a
+    delivery is created with a destination country in one of these groups,
+    the system will automatically prepare and send the required
+    documentation to UPS.
 
-**NOTE** You need to add an APP from <https://developer.ups.com/> for
+**NOTE** You need to add an app from <https://developer.ups.com/> for
 using the webservice.
