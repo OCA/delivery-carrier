@@ -10,7 +10,7 @@ from io import BytesIO
 
 from PIL import Image
 
-from odoo import fields, models
+from odoo import _, fields, models
 from odoo.exceptions import UserError
 
 from .ups_request import UpsRequest
@@ -111,6 +111,12 @@ class DeliveryCarrier(models.Model):
     ups_negotiated_rates = fields.Boolean(
         string="Negotiated Rates",
         help="If checked, UPS will use the account's negotiated rates for shipping.",
+    )
+    ups_paperless_country_group_ids = fields.Many2many(
+        "res.country.group",
+        string="Country group to auto-send paperless invoice",
+        help="If the destination country is in one of these country groups, "
+        "the paperless invoice option will be automatically enabled.",
     )
 
     def _ups_get_response_price(self, total_charges, currency, company):
@@ -271,3 +277,104 @@ class DeliveryCarrier(models.Model):
         self.ensure_one()
         ups_request = UpsRequest(self)
         ups_request._get_new_token()
+
+    def prepare_ups_paperless_invoice(self, picking):
+        """prepare the paperless document dictionary for up request"""
+        paperless_document_data = []
+        for file_data in picking.ups_paperless_document_ids:
+            document_data = {
+                "UserCreatedFormFileName": file_data.file_name,
+                "UserCreatedFormFileFormat": file_data.file_name.split(".")[1]
+                if len(file_data.file_name.split(".")) >= 2
+                else "txt",
+                "UserCreatedFormDocumentType": file_data.ups_document_type,
+                "UserCreatedFormFile": file_data.ups_paperless_file.decode("utf-8"),
+            }
+            paperless_document_data.append(document_data)
+
+        # Add invoice if not already attached
+        if "002" not in picking.ups_paperless_document_ids.mapped("ups_document_type"):
+            if not picking.sale_id.invoice_ids:
+                raise UserError(_("Please attach the missing invoice."))
+
+            invoice_pdf_file = (
+                self.env["ir.actions.report"]
+                .sudo()
+                .with_context(must_skip_send_to_printer=True)
+                ._render_qweb_pdf(
+                    "account.account_invoices", picking.sale_id.invoice_ids.ids
+                )
+            )
+            pdf_file = bytes(invoice_pdf_file[0])
+            pdf_file = base64.b64encode(pdf_file).decode("utf-8")
+            document_data = {
+                "UserCreatedFormFileName": "commercial_invoice.pdf",
+                "UserCreatedFormFileFormat": "pdf",
+                "UserCreatedFormDocumentType": "002",
+                "UserCreatedFormFile": pdf_file,
+            }
+            paperless_document_data.append(document_data)
+            self.env["ups.paperless.document"].create(
+                {
+                    "ups_paperless_file": pdf_file,
+                    "file_name": "commercial_invoice.pdf",
+                    "ups_document_type": "002",
+                    "ups_stock_picking_id": picking.id,
+                }
+            )
+
+        # Add packing list if not already attached
+        if "010" not in picking.ups_paperless_document_ids.mapped("ups_document_type"):
+            packing_list_pdf_file = (
+                self.env["ir.actions.report"]
+                .sudo()
+                .with_context(must_skip_send_to_printer=True)
+                ._render_qweb_pdf("stock.action_report_delivery", picking.ids)
+            )
+            pdf_file = bytes(packing_list_pdf_file[0])
+            pdf_file = base64.b64encode(pdf_file).decode("utf-8")
+            document_data = {
+                "UserCreatedFormFileName": "packing_list.pdf",
+                "UserCreatedFormFileFormat": "pdf",
+                "UserCreatedFormDocumentType": "010",
+                "UserCreatedFormFile": pdf_file,
+            }
+            paperless_document_data.append(document_data)
+            self.env["ups.paperless.document"].create(
+                {
+                    "ups_paperless_file": pdf_file,
+                    "file_name": "packing_list.pdf",
+                    "ups_document_type": "010",
+                    "ups_stock_picking_id": picking.id,
+                }
+            )
+        return paperless_document_data
+
+    def send_ups_paperless_invoice(self, picking):
+        """Send paperless invoice documents to UPS"""
+        self.ensure_one()
+        if picking.ups_document_identifier:
+            raise UserError(_("Document ID already created."))
+
+        paperless_document_data = self.prepare_ups_paperless_invoice(picking)
+
+        if not paperless_document_data:
+            return {
+                "effect": {
+                    "fadeout": "slow",
+                    "message": "No documents to send!",
+                    "type": "warning",
+                }
+            }
+
+        ups_request = UpsRequest(self)
+        ups_request.send_paperless_invoice(picking, paperless_document_data)
+
+        return {
+            "effect": {
+                "fadeout": "slow",
+                "message": "UPS Document ID Retrieved successfully!",
+                "img_url": "/web/static/img/smile.svg",
+                "type": "rainbow_man",
+            }
+        }
