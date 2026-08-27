@@ -1,0 +1,122 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* delivery_package_fee
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2023-10-09 18:14+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
+"Language-Team: none\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: delivery_package_fee
+#: model:ir.model.fields,field_description:delivery_package_fee.field_delivery_package_fee__active
+msgid "Active"
+msgstr "Activo"
+
+#. module: delivery_package_fee
+#: model:ir.model.fields,field_description:delivery_package_fee.field_delivery_package_fee__carrier_id
+msgid "Carrier"
+msgstr "Transportista"
+
+#. module: delivery_package_fee
+#: model:ir.model.fields,field_description:delivery_package_fee.field_delivery_package_fee__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: delivery_package_fee
+#: model:ir.model.fields,field_description:delivery_package_fee.field_delivery_package_fee__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: delivery_package_fee
+#: model:ir.model,name:delivery_package_fee.model_delivery_package_fee
+msgid "Delivery Package Fees"
+msgstr "Gastos de envío de paquetes"
+
+#. module: delivery_package_fee
+#: model:ir.model.fields,field_description:delivery_package_fee.field_delivery_package_fee__display_name
+msgid "Display Name"
+msgstr "Mostrar Nombre"
+
+#. module: delivery_package_fee
+#: model_terms:ir.ui.view,arch_db:delivery_package_fee.view_delivery_carrier_form
+msgid ""
+"For each line below, each time a transfer is done, a line is added\n"
+"                        in the sales order with the product. The unit is the "
+"number of packages\n"
+"                        in the transfer and the price is the product's "
+"pricelist price."
+msgstr ""
+"Para cada línea de abajo, cada vez que se hace una transferencia, se añade "
+"una línea\n"
+"                        en el pedido de venta con el producto. La unidad es "
+"el número de paquetes\n"
+"                        en la transferencia y el precio es el precio de "
+"lista del producto."
+
+#. module: delivery_package_fee
+#: model:ir.model.fields,field_description:delivery_package_fee.field_delivery_package_fee__id
+msgid "ID"
+msgstr "ID (identificación)"
+
+#. module: delivery_package_fee
+#: model:ir.model.fields,field_description:delivery_package_fee.field_delivery_package_fee__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: delivery_package_fee
+#: model:ir.model.fields,field_description:delivery_package_fee.field_delivery_package_fee__write_date
+msgid "Last Updated on"
+msgstr "Última Actualización el"
+
+#. module: delivery_package_fee
+#: model:ir.model.fields,field_description:delivery_package_fee.field_delivery_carrier__package_fee_ids
+#: model:ir.model.fields,field_description:delivery_package_fee.field_sale_order_line__package_fee_id
+msgid "Package Fee"
+msgstr "Tarifa por paquete"
+
+#. module: delivery_package_fee
+#: model_terms:ir.ui.view,arch_db:delivery_package_fee.view_delivery_carrier_form
+msgid "Package Fees"
+msgstr "Tarifas de los paquetes"
+
+#. module: delivery_package_fee
+#: model:ir.model.fields,field_description:delivery_package_fee.field_delivery_package_fee__package_type_id
+msgid "Package Type"
+msgstr "Tipo de embalaje"
+
+#. module: delivery_package_fee
+#: model:ir.model.fields,field_description:delivery_package_fee.field_delivery_package_fee__product_id
+msgid "Product"
+msgstr "Producto"
+
+#. module: delivery_package_fee
+#: model:ir.model,name:delivery_package_fee.model_sale_order
+msgid "Sales Order"
+msgstr "Orden de Venta"
+
+#. module: delivery_package_fee
+#: model:ir.model,name:delivery_package_fee.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Línea de Orden de Venta"
+
+#. module: delivery_package_fee
+#: model:ir.model,name:delivery_package_fee.model_delivery_carrier
+msgid "Shipping Methods"
+msgstr "Métodos de Envío"
+
+#. module: delivery_package_fee
+#: model:ir.model,name:delivery_package_fee.model_stock_picking
+msgid "Transfer"
+msgstr "Transferencia"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Última Modificación el"
