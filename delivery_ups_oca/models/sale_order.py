@@ -6,7 +6,7 @@ from odoo import _, fields, models
 class SaleOrder(models.Model):
     _inherit = "sale.order"
 
-    ups_landed_cost_quote_id = fields.Char(
+    ups_landed_cost_quote_identifier = fields.Char(
         string="UPS Global Checkout Quote ID",
         help="Quote ID returned by the UPS Global Checkout landed cost calculation. "
         "It must be provided when the shipment is created so UPS can link the "
@@ -42,7 +42,9 @@ class SaleOrder(models.Model):
         self._ups_remove_landed_cost_line()
         product = carrier.ups_landed_cost_product_id
         if not (
-            product and self.ups_landed_cost_quote_id and self.ups_landed_cost_amount
+            product
+            and self.ups_landed_cost_quote_identifier
+            and self.ups_landed_cost_amount
         ):
             return self.env["sale.order.line"]
         taxes = product.taxes_id._filter_taxes_by_company(self.company_id)

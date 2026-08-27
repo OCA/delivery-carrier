@@ -323,7 +323,7 @@ class UpsRequest:
         Taxes) is billed to the shipper so UPS clears customs as Delivered Duty
         Paid (DDP).
         """
-        quote_id = picking.ups_landed_cost_quote_id
+        quote_id = picking.ups_landed_cost_quote_identifier
         if not quote_id:
             return vals
         shipment = vals["ShipmentRequest"]["Shipment"]

@@ -7,7 +7,7 @@ from odoo import api, fields, models
 class StockPicking(models.Model):
     _inherit = "stock.picking"
 
-    ups_landed_cost_quote_id = fields.Char(
+    ups_landed_cost_quote_identifier = fields.Char(
         string="UPS Global Checkout Quote ID",
         help="Quote ID from UPS Global Checkout, copied from the sale order. It is "
         "sent to UPS at shipment creation so the guaranteed duties and taxes are "
@@ -23,11 +23,11 @@ class StockPicking(models.Model):
         for picking in pickings:
             if (
                 picking.carrier_id.delivery_type == "ups"
-                and not picking.ups_landed_cost_quote_id
-                and picking.sale_id.ups_landed_cost_quote_id
+                and not picking.ups_landed_cost_quote_identifier
+                and picking.sale_id.ups_landed_cost_quote_identifier
             ):
-                picking.ups_landed_cost_quote_id = (
-                    picking.sale_id.ups_landed_cost_quote_id
+                picking.ups_landed_cost_quote_identifier = (
+                    picking.sale_id.ups_landed_cost_quote_identifier
                 )
         return pickings
 

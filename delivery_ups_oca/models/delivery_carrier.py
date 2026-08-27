@@ -200,10 +200,10 @@ class DeliveryCarrier(models.Model):
         """
         if not self._ups_is_global_checkout_eligible(order.partner_shipping_id):
             # Feature disabled for this destination: clear any stale quote.
-            if order.ups_landed_cost_quote_id or order.ups_landed_cost_amount:
+            if order.ups_landed_cost_quote_identifier or order.ups_landed_cost_amount:
                 order.write(
                     {
-                        "ups_landed_cost_quote_id": False,
+                        "ups_landed_cost_quote_identifier": False,
                         "ups_landed_cost_amount": 0.0,
                     }
                 )
@@ -217,7 +217,10 @@ class DeliveryCarrier(models.Model):
                 e,
             )
             order.write(
-                {"ups_landed_cost_quote_id": False, "ups_landed_cost_amount": 0.0}
+                {
+                    "ups_landed_cost_quote_identifier": False,
+                    "ups_landed_cost_amount": 0.0,
+                }
             )
             return
         amount = self._ups_get_response_price(
@@ -227,7 +230,7 @@ class DeliveryCarrier(models.Model):
         )
         order.write(
             {
-                "ups_landed_cost_quote_id": quote["quote_id"],
+                "ups_landed_cost_quote_identifier": quote["quote_id"],
                 "ups_landed_cost_amount": amount,
             }
         )

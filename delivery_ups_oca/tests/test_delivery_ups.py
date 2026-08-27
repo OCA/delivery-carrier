@@ -1291,7 +1291,9 @@ class TestUpsGlobalCheckout(TestDeliveryUpsBase):
         self.assertTrue(res["success"])
         # The landed cost is NOT added to the shipping price.
         self.assertEqual(res["price"], 100.0)
-        self.assertEqual(self.sale.ups_landed_cost_quote_id, self.quote["quote_id"])
+        self.assertEqual(
+            self.sale.ups_landed_cost_quote_identifier, self.quote["quote_id"]
+        )
         self.assertEqual(self.sale.ups_landed_cost_amount, 25.0)
 
     def test_rate_shipment_landed_cost_failure_falls_back(self):
@@ -1323,7 +1325,7 @@ class TestUpsGlobalCheckout(TestDeliveryUpsBase):
             res = self.carrier.ups_rate_shipment(self.sale)
         self.assertTrue(res["success"])
         self.assertEqual(res["price"], 100.0)
-        self.assertFalse(self.sale.ups_landed_cost_quote_id)
+        self.assertFalse(self.sale.ups_landed_cost_quote_identifier)
         self.assertTrue(
             any(
                 "UPS Global Checkout landed cost quote failed" in msg
@@ -1337,7 +1339,7 @@ class TestUpsGlobalCheckout(TestDeliveryUpsBase):
         )
         self.sale.write(
             {
-                "ups_landed_cost_quote_id": self.quote["quote_id"],
+                "ups_landed_cost_quote_identifier": self.quote["quote_id"],
                 "ups_landed_cost_amount": 25.0,
             }
         )
@@ -1352,7 +1354,7 @@ class TestUpsGlobalCheckout(TestDeliveryUpsBase):
         self.carrier.ups_landed_cost_product_id = False
         self.sale.write(
             {
-                "ups_landed_cost_quote_id": self.quote["quote_id"],
+                "ups_landed_cost_quote_identifier": self.quote["quote_id"],
                 "ups_landed_cost_amount": 25.0,
             }
         )
@@ -1364,7 +1366,7 @@ class TestUpsGlobalCheckout(TestDeliveryUpsBase):
             {"name": "UPS Duties", "type": "service"}
         )
         self.sale.write(
-            {"ups_landed_cost_quote_id": False, "ups_landed_cost_amount": 0.0}
+            {"ups_landed_cost_quote_identifier": False, "ups_landed_cost_amount": 0.0}
         )
         self.sale._create_delivery_line(self.carrier, 100.0)
         self.assertFalse(self.sale.order_line.filtered("is_ups_landed_cost"))
@@ -1375,7 +1377,7 @@ class TestUpsGlobalCheckout(TestDeliveryUpsBase):
         )
         self.sale.write(
             {
-                "ups_landed_cost_quote_id": self.quote["quote_id"],
+                "ups_landed_cost_quote_identifier": self.quote["quote_id"],
                 "ups_landed_cost_amount": 25.0,
             }
         )
@@ -1389,7 +1391,7 @@ class TestUpsGlobalCheckout(TestDeliveryUpsBase):
         )
         self.sale.write(
             {
-                "ups_landed_cost_quote_id": self.quote["quote_id"],
+                "ups_landed_cost_quote_identifier": self.quote["quote_id"],
                 "ups_landed_cost_amount": 25.0,
             }
         )
@@ -1399,7 +1401,7 @@ class TestUpsGlobalCheckout(TestDeliveryUpsBase):
         self.assertFalse(self.sale.order_line.filtered("is_ups_landed_cost"))
 
     def test_picking_copies_quote_id(self):
-        self.sale.ups_landed_cost_quote_id = self.quote["quote_id"]
+        self.sale.ups_landed_cost_quote_identifier = self.quote["quote_id"]
         picking = self.env["stock.picking"].create(
             {
                 "partner_id": self.us_partner.id,
@@ -1410,11 +1412,13 @@ class TestUpsGlobalCheckout(TestDeliveryUpsBase):
                 "sale_id": self.sale.id,
             }
         )
-        self.assertEqual(picking.ups_landed_cost_quote_id, self.quote["quote_id"])
+        self.assertEqual(
+            picking.ups_landed_cost_quote_identifier, self.quote["quote_id"]
+        )
 
     def test_prepare_shipping_includes_quote_id_and_ddp(self):
         picking = self.sale.picking_ids[0]
-        picking.ups_landed_cost_quote_id = self.quote["quote_id"]
+        picking.ups_landed_cost_quote_identifier = self.quote["quote_id"]
         picking.move_ids.quantity = 10
         picking.number_of_packages = 1
         ups_request = UpsRequest(self.carrier)
