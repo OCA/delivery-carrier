@@ -43,11 +43,16 @@ class DeliveryCarrier(models.Model):
         if self.invoice_policy != "pricelist" or self.delivery_type == "pricelist":
             return super().rate_shipment(order)
 
-        # Use ``sudo()`` to prevent ``AccessError`` when updating the delivery type
+        # Use ``sudo()`` to prevent ``AccessError`` when updating the delivery type,
+        # and protect dependent fields from being recomputed during temporary switch.
         delivery_type = self.delivery_type
-        self.sudo().delivery_type = "pricelist"
-        result = super().rate_shipment(order)
-        self.sudo().delivery_type = delivery_type
+        fields_to_protect = [
+            f for f in self._fields.values() if f.name != "delivery_type"
+        ]
+        with self.env.protecting(fields_to_protect, self):
+            self.sudo().delivery_type = "pricelist"
+            result = super().rate_shipment(order)
+            self.sudo().delivery_type = delivery_type
         return result
 
     def send_shipping(self, pickings):
