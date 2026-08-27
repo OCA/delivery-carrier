@@ -716,6 +716,23 @@ class TestDeliveryUps(TestDeliveryUpsBase):
                 self.assertEqual(result, {"success": True, "data": "test_data"})
                 self.assertEqual(mock_log.call_count, 2)
 
+    def test_send_request_passes_timeout(self):
+        """The timeout must be forwarded to the underlying requests call."""
+        ups_request = UpsRequest(self.carrier)
+        mock_response = mock.Mock()
+        with mock.patch(
+            "odoo.addons.delivery_ups_oca.models.ups_request.requests"
+        ) as mock_requests:
+            mock_requests.post.return_value = mock_response
+            result = ups_request._send_request(
+                "https://api.test.com/endpoint",
+                json={"key": "value"},
+                timeout=10,
+            )
+        self.assertEqual(result, mock_response)
+        mock_requests.post.assert_called_once()
+        self.assertEqual(mock_requests.post.call_args.kwargs["timeout"], 10)
+
     def test_ups_prepare_create_shipping_with_packages(self):
         """Test _prepare_create_shipping with packages from picking"""
         # Enable use packages from picking
