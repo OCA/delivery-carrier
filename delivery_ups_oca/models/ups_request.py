@@ -518,7 +518,10 @@ class UpsRequest:
         currency = order.currency_id.name
         items = []
         for line in order.order_line.filtered(
-            lambda x: x.product_id and not x.display_type
+            lambda x: x.product_id
+            and not x.display_type
+            and not x.is_delivery
+            and not x.is_ups_landed_cost
         ):
             quantity = int(line.product_uom_qty) or 1
             item = {
