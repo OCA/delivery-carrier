@@ -1,0 +1,1 @@
+A sale order can have lines with different units of measure. This module does not perform any conversion between units of measure.

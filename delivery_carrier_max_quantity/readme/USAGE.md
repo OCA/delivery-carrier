@@ -1,0 +1,3 @@
+- Go to any delivery carrier and set the `max_quantity` field.
+- Create a sale order with products that reach the maximum quantity.
+- Try to select a carrier; this carrier is not available
