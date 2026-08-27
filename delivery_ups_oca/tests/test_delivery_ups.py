@@ -1225,3 +1225,216 @@ class TestUpsNegotiatedRates(TestDeliveryUpsBase):
                 ],
             )
             self.assertEqual(self.picking.carrier_tracking_ref, "1ZXXXXXXXXXXXXXXXX")
+
+
+class TestUpsGlobalCheckout(TestDeliveryUpsBase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.us = cls.env.ref("base.us")
+        cls.country_group = cls.env["res.country.group"].create(
+            {"name": "UPS GC Test", "country_ids": [(6, 0, [cls.us.id])]}
+        )
+        cls.us_partner = cls.env["res.partner"].create(
+            {
+                "name": "US Customer",
+                "country_id": cls.us.id,
+                "city": "New York",
+                "zip": "10001",
+            }
+        )
+        cls.quote = {
+            "quote_id": "landed_cost_abc123",
+            "amount": 25.0,
+            "currency": cls.env.ref("base.main_company").currency_id.name,
+            "guarantee_code": "GUARANTEED",
+        }
+
+    def test_eligibility_no_group(self):
+        self.carrier.ups_global_checkout_country_group_ids = False
+        self.assertFalse(
+            self.carrier._ups_is_global_checkout_eligible(self.us_partner)
+        )
+
+    def test_eligibility_country_in_group(self):
+        self.carrier.ups_global_checkout_country_group_ids = self.country_group
+        self.assertTrue(
+            self.carrier._ups_is_global_checkout_eligible(self.us_partner)
+        )
+
+    def test_eligibility_country_not_in_group(self):
+        self.carrier.ups_global_checkout_country_group_ids = self.country_group
+        self.assertFalse(
+            self.carrier._ups_is_global_checkout_eligible(self.partner)
+        )
+
+    def _mock_rate(self):
+        return mock.patch(
+            _provider_class + "._rate_shipment",
+            return_value={
+                "RateResponse": {
+                    "RatedShipment": {
+                        "TotalCharges": {
+                            "MonetaryValue": 100.0,
+                            "CurrencyCode": self.quote["currency"],
+                        }
+                    }
+                }
+            },
+        )
+
+    def test_rate_shipment_keeps_price_and_stores_quote(self):
+        self.carrier.ups_global_checkout_country_group_ids = self.country_group
+        self.sale.partner_shipping_id = self.us_partner
+        with self._mock_rate(), mock.patch(
+            _provider_class + ".landed_cost_quote", return_value=self.quote
+        ):
+            res = self.carrier.ups_rate_shipment(self.sale)
+        self.assertTrue(res["success"])
+        # The landed cost is NOT added to the shipping price.
+        self.assertEqual(res["price"], 100.0)
+        self.assertEqual(
+            self.sale.ups_landed_cost_quote_id, self.quote["quote_id"]
+        )
+        self.assertEqual(self.sale.ups_landed_cost_amount, 25.0)
+
+    def test_rate_shipment_landed_cost_failure_falls_back(self):
+        self.carrier.ups_global_checkout_country_group_ids = self.country_group
+        self.sale.partner_shipping_id = self.us_partner
+        with mock.patch(
+            _provider_class + "._rate_shipment",
+            return_value={
+                "RateResponse": {
+                    "RatedShipment": {
+                        "TotalCharges": {
+                            "MonetaryValue": 100.0,
+                            "CurrencyCode": self.quote["currency"],
+                        }
+                    }
+                }
+            },
+        ), mock.patch(
+            _provider_class + ".landed_cost_quote",
+            side_effect=UserError("no quote"),
+        ):
+            res = self.carrier.ups_rate_shipment(self.sale)
+        self.assertTrue(res["success"])
+        self.assertEqual(res["price"], 100.0)
+        self.assertFalse(self.sale.ups_landed_cost_quote_id)
+
+    def test_create_delivery_line_adds_landed_cost_line(self):
+        self.carrier.ups_landed_cost_product_id = self.env["product.product"].create(
+            {"name": "UPS Duties", "type": "service"}
+        )
+        self.sale.write(
+            {
+                "ups_landed_cost_quote_id": self.quote["quote_id"],
+                "ups_landed_cost_amount": 25.0,
+            }
+        )
+        delivery_sol = self.sale._create_delivery_line(self.carrier, 100.0)
+        lc_lines = self.sale.order_line.filtered("is_ups_landed_cost")
+        self.assertEqual(len(lc_lines), 1)
+        self.assertEqual(lc_lines.price_unit, 25.0)
+        self.assertFalse(lc_lines.is_delivery)
+        self.assertEqual(lc_lines.sequence, delivery_sol.sequence + 1)
+
+    def test_no_landed_cost_line_without_product(self):
+        self.carrier.ups_landed_cost_product_id = False
+        self.sale.write(
+            {
+                "ups_landed_cost_quote_id": self.quote["quote_id"],
+                "ups_landed_cost_amount": 25.0,
+            }
+        )
+        self.sale._create_delivery_line(self.carrier, 100.0)
+        self.assertFalse(self.sale.order_line.filtered("is_ups_landed_cost"))
+
+    def test_no_landed_cost_line_without_quote(self):
+        self.carrier.ups_landed_cost_product_id = self.env["product.product"].create(
+            {"name": "UPS Duties", "type": "service"}
+        )
+        self.sale.write(
+            {"ups_landed_cost_quote_id": False, "ups_landed_cost_amount": 0.0}
+        )
+        self.sale._create_delivery_line(self.carrier, 100.0)
+        self.assertFalse(self.sale.order_line.filtered("is_ups_landed_cost"))
+
+    def test_create_delivery_line_no_duplicate_landed_cost(self):
+        self.carrier.ups_landed_cost_product_id = self.env["product.product"].create(
+            {"name": "UPS Duties", "type": "service"}
+        )
+        self.sale.write(
+            {
+                "ups_landed_cost_quote_id": self.quote["quote_id"],
+                "ups_landed_cost_amount": 25.0,
+            }
+        )
+        self.sale._create_delivery_line(self.carrier, 100.0)
+        self.sale._create_delivery_line(self.carrier, 100.0)
+        self.assertEqual(
+            len(self.sale.order_line.filtered("is_ups_landed_cost")), 1
+        )
+
+    def test_remove_delivery_line_removes_landed_cost_line(self):
+        self.carrier.ups_landed_cost_product_id = self.env["product.product"].create(
+            {"name": "UPS Duties", "type": "service"}
+        )
+        self.sale.write(
+            {
+                "ups_landed_cost_quote_id": self.quote["quote_id"],
+                "ups_landed_cost_amount": 25.0,
+            }
+        )
+        self.sale._create_delivery_line(self.carrier, 100.0)
+        self.assertTrue(self.sale.order_line.filtered("is_ups_landed_cost"))
+        self.sale._remove_delivery_line()
+        self.assertFalse(self.sale.order_line.filtered("is_ups_landed_cost"))
+
+    def test_picking_copies_quote_id(self):
+        self.sale.ups_landed_cost_quote_id = self.quote["quote_id"]
+        picking = self.env["stock.picking"].create(
+            {
+                "partner_id": self.us_partner.id,
+                "picking_type_id": self.env.ref("stock.picking_type_out").id,
+                "location_id": self.env.ref("stock.stock_location_stock").id,
+                "location_dest_id": self.env.ref(
+                    "stock.stock_location_customers"
+                ).id,
+                "carrier_id": self.carrier.id,
+                "sale_id": self.sale.id,
+            }
+        )
+        self.assertEqual(
+            picking.ups_landed_cost_quote_id, self.quote["quote_id"]
+        )
+
+    def test_prepare_shipping_includes_quote_id_and_ddp(self):
+        picking = self.sale.picking_ids[0]
+        picking.ups_landed_cost_quote_id = self.quote["quote_id"]
+        picking.move_ids.quantity = 10
+        ups_request = UpsRequest(self.carrier)
+        vals = ups_request._prepare_create_shipping(picking)
+        shipment = vals["ShipmentRequest"]["Shipment"]
+        self.assertEqual(shipment["QuoteID"], self.quote["quote_id"])
+        charges = shipment["PaymentInformation"]["ShipmentCharge"]
+        self.assertTrue(any(c.get("Type") == "02" for c in charges))
+
+    def test_landed_cost_quote_parses_response(self):
+        ups_request = UpsRequest(self.carrier)
+        self.sale.partner_shipping_id = self.us_partner
+        data = {
+            "landedCostCalculateWorkflow": [
+                {
+                    "id": "landed_cost_xyz",
+                    "currencyCode": self.quote["currency"],
+                    "landedCostGuaranteeCode": "GUARANTEED",
+                    "amountSubtotals": {"landedCostTotal": 42.0},
+                }
+            ]
+        }
+        with mock.patch.object(ups_request, "_send_graphql", return_value=data):
+            result = ups_request.landed_cost_quote(self.sale, 100.0)
+        self.assertEqual(result["quote_id"], "landed_cost_xyz")
+        self.assertEqual(result["amount"], 42.0)
+        self.assertEqual(result["guarantee_code"], "GUARANTEED")

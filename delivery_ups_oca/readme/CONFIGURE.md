@@ -12,9 +12,24 @@ To configure this module, you need to:
     Select the `ups` delivery type and check the "Cash on Delivery"
     checkbox under the "UPS" tab. It is required to select the "UPS COD
     Funds Code" when the "Cash on Delivery" option is selected.
-5.  The "Negotiated Rates" checkbox is disabled by default. When checked 
+5.  The "Negotiated Rates" checkbox is disabled by default. When checked
     and your account has negotiated rates, UPS will use your
     account's negotiated rates for shipping cost calculations.
+6.  To enable UPS Global Checkout (landed cost), under the "UPS" tab in
+    the "Global Checkout (Landed Cost)" group:
+    - Set "UPS Global Checkout Countries" with the destination country
+      groups that UPS has enabled for your account. Landed cost is only
+      requested for destinations in these groups; leaving it empty
+      disables the feature.
+    - Set "UPS Tariffs/Duties Product": the product used for the separate
+      duties and taxes order line. Configure its taxes appropriately for
+      imported duties (usually no additional tax). If left empty, no
+      landed cost line is added to the order (the quote is still
+      generated and stored).
 
-**NOTE** You need to add an APP from <https://developer.ups.com/> for
+**NOTE** You need to add an app from <https://developer.ups.com/> for
 using the webservice.
+
+**NOTE** UPS Global Checkout is a contract-only service. Contact the UPS
+Global Checkout onboarding team to have it enabled on your account before
+configuring it in Odoo.

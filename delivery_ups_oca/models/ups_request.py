@@ -311,6 +311,34 @@ class UpsRequest:
                     }
                 },
             )
+        self._add_global_checkout_to_shipment(vals, picking)
+        return vals
+
+    def _add_global_checkout_to_shipment(self, vals, picking):
+        """Attach the UPS Global Checkout Quote ID and DDP billing to a shipment.
+
+        When the picking carries a Global Checkout Quote ID, the Quote ID is sent
+        in the dedicated ``Shipment.QuoteID`` field (linking the guaranteed
+        duties/taxes) and a second shipment charge of type ``02`` (Duties and
+        Taxes) is billed to the shipper so UPS clears customs as Delivered Duty
+        Paid (DDP).
+        """
+        quote_id = picking.ups_landed_cost_quote_id
+        if not quote_id:
+            return vals
+        shipment = vals["ShipmentRequest"]["Shipment"]
+        shipment["QuoteID"] = quote_id
+        # Bill duties and taxes to the shipper (DDP) in addition to transportation.
+        shipment_charge = shipment["PaymentInformation"]["ShipmentCharge"]
+        if isinstance(shipment_charge, dict):
+            shipment_charge = [shipment_charge]
+        shipment_charge.append(
+            {
+                "Type": "02",
+                "BillShipper": {"AccountNumber": self.shipper_number},
+            }
+        )
+        shipment["PaymentInformation"]["ShipmentCharge"] = shipment_charge
         return vals
 
     def _send_shipping(self, picking):
@@ -409,6 +437,150 @@ class UpsRequest:
         if self.negotiated_rates and "NegotiatedRateCharges" in rated_shipment:
             return rated_shipment["NegotiatedRateCharges"]["TotalCharge"]
         return rated_shipment["TotalCharges"]
+
+    # -------------------------------------------------------------------------
+    # UPS Global Checkout (landed cost) - GraphQL API
+    # -------------------------------------------------------------------------
+    def _gc_url(self):
+        return f"{self.url}/api/globalcheckout/v1/graphql"
+
+    def _raise_for_graphql_errors(self, status_json, skip_errors=True):
+        errors = (status_json or {}).get("errors")
+        if errors:
+            msg = _("UPS Global Checkout error: {}").format(
+                "\n".join(error.get("message", "") for error in errors)
+            )
+            if skip_errors:
+                _logger.info(msg)
+            else:
+                raise UserError(msg)
+
+    def _send_graphql(self, query, variables=None, skip_errors=False, timeout=15):
+        """Send a GraphQL request to the UPS Global Checkout endpoint.
+
+        Reuses the standard OAuth token handling from ``_process_reply`` and adds
+        the required ``shipperNumber`` header.
+        """
+        payload = {"query": query}
+        if variables is not None:
+            payload["variables"] = variables
+        status_json = self._process_reply(
+            url=self._gc_url(),
+            json=payload,
+            headers_extra={
+                "shipperNumber": self.shipper_number,
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+            },
+            timeout=timeout,
+        )
+        self._raise_for_graphql_errors(status_json, skip_errors)
+        return (status_json or {}).get("data") or {}
+
+    def _gc_party_inputs(self, order):
+        """Build the ORIGIN and DESTINATION party inputs for the workflow."""
+        partner_from = order.warehouse_id.partner_id or order.company_id.partner_id
+        partner_to = order.partner_shipping_id
+
+        def _location(partner):
+            location = {"countryCode": self._get_country_code(partner)}
+            if partner.zip:
+                location["postalCode"] = partner.zip
+            if partner.state_id.code:
+                location["administrativeAreaCode"] = partner.state_id.code
+            if partner.city:
+                location["locality"] = partner.city
+            return location
+
+        return [
+            {"type": "ORIGIN", "location": _location(partner_from)},
+            {"type": "DESTINATION", "location": _location(partner_to)},
+        ]
+
+    def _gc_item_inputs(self, order):
+        """Build the item inputs (one per sale order line with a product)."""
+        currency = order.currency_id.name
+        items = []
+        for line in order.order_line.filtered(
+            lambda x: x.product_id and not x.display_type
+        ):
+            quantity = int(line.product_uom_qty) or 1
+            item = {
+                "amount": line.price_unit,
+                "quantity": quantity,
+                "currencyCode": currency,
+                "description": (line.product_id.name or line.name or "")[:255],
+            }
+            origin_country = (
+                line.product_id.country_of_origin
+                if "country_of_origin" in line.product_id._fields
+                else False
+            )
+            if origin_country:
+                item["countryOfOrigin"] = origin_country.code
+            hs_code = getattr(line.product_id, "hs_code", False)
+            if hs_code:
+                item["hsCode"] = hs_code
+            if line.product_id.default_code:
+                item["productId"] = line.product_id.default_code
+            items.append(item)
+        return items
+
+    def landed_cost_quote(self, order, transportation_cost):
+        """Run the UPS Global Checkout landed cost workflow for an order.
+
+        The quote is a multi-step workflow bound to a Root resource created via
+        ``rootCreate``; the subsequent workflow mutations attach to that root
+        within the same session. Returns a dict with ``quote_id``, ``amount``,
+        ``currency`` and ``guarantee_code``.
+        """
+        currency = order.currency_id.name
+        variables = {
+            "parties": self._gc_party_inputs(order),
+            "items": self._gc_item_inputs(order),
+            "rating": {
+                "amount": transportation_cost,
+                "currencyCode": currency,
+                "serviceLevelCode": self.service_code,
+            },
+            "landedCost": {
+                "currencyCode": currency,
+                "calculationMethod": "DDP_PREFERRED",
+            },
+        }
+        query = """
+mutation OdooLandedCost(
+    $parties: [PartyCreateWorkflowInput!]!
+    $items: [ItemCreateWorkflowInput!]!
+    $rating: ShipmentRatingCreateWorkflowInput!
+    $landedCost: LandedCostWorkFlowInput!
+) {
+    rootCreate { id }
+    partyCreateWorkflow(input: $parties) { id }
+    itemCreateWorkflow(input: $items) { id }
+    shipmentRatingCreateWorkflow(input: $rating) { id }
+    landedCostCalculateWorkflow(input: $landedCost) {
+        id
+        currencyCode
+        landedCostGuaranteeCode
+        amountSubtotals { landedCostTotal duties taxes fees }
+    }
+}
+"""
+        data = self._send_graphql(query, variables, skip_errors=False)
+        results = data.get("landedCostCalculateWorkflow") or []
+        if not results:
+            raise UserError(
+                _("UPS Global Checkout returned no landed cost for this order.")
+            )
+        landed_cost = results[0]
+        subtotals = landed_cost.get("amountSubtotals") or {}
+        return {
+            "quote_id": landed_cost["id"],
+            "amount": subtotals.get("landedCostTotal") or 0.0,
+            "currency": landed_cost.get("currencyCode") or currency,
+            "guarantee_code": landed_cost.get("landedCostGuaranteeCode"),
+        }
 
     def _prepare_shipping_label(self, carrier_tracking_ref):
         return {
