@@ -1315,11 +1315,21 @@ class TestUpsGlobalCheckout(TestDeliveryUpsBase):
                 _provider_class + ".landed_cost_quote",
                 side_effect=UserError("no quote"),
             ),
+            self.assertLogs(
+                "odoo.addons.delivery_ups_oca.models.delivery_carrier",
+                level="WARNING",
+            ) as log_catcher,
         ):
             res = self.carrier.ups_rate_shipment(self.sale)
         self.assertTrue(res["success"])
         self.assertEqual(res["price"], 100.0)
         self.assertFalse(self.sale.ups_landed_cost_quote_id)
+        self.assertTrue(
+            any(
+                "UPS Global Checkout landed cost quote failed" in msg
+                for msg in log_catcher.output
+            )
+        )
 
     def test_create_delivery_line_adds_landed_cost_line(self):
         self.carrier.ups_landed_cost_product_id = self.env["product.product"].create(
