@@ -1466,3 +1466,67 @@ class TestUpsGlobalCheckout(TestDeliveryUpsBase):
         self.assertEqual(result["quote_id"], "landed_cost_xyz")
         self.assertEqual(result["amount"], 42.0)
         self.assertEqual(result["guarantee_code"], "GUARANTEED")
+
+    def test_landed_cost_quote_no_result_raises(self):
+        ups_request = UpsRequest(self.carrier)
+        self.sale.partner_shipping_id = self.us_partner
+        with mock.patch.object(
+            ups_request,
+            "_send_graphql",
+            return_value={"landedCostCalculateWorkflow": []},
+        ):
+            with self.assertRaises(UserError):
+                ups_request.landed_cost_quote(self.sale, 100.0)
+
+    def test_send_graphql_success(self):
+        ups_request = UpsRequest(self.carrier)
+        with mock.patch.object(
+            ups_request, "_process_reply", return_value={"data": {"foo": 1}}
+        ) as mock_process:
+            data = ups_request._send_graphql("query { x }", {"a": 1})
+        self.assertEqual(data, {"foo": 1})
+        call_kwargs = mock_process.call_args.kwargs
+        self.assertTrue(call_kwargs["url"].endswith("/api/globalcheckout/v1/graphql"))
+        self.assertEqual(
+            call_kwargs["headers_extra"]["shipperNumber"],
+            self.carrier.ups_shipper_number,
+        )
+        self.assertEqual(call_kwargs["json"]["variables"], {"a": 1})
+
+    def test_send_graphql_raises_on_errors(self):
+        ups_request = UpsRequest(self.carrier)
+        with mock.patch.object(
+            ups_request,
+            "_process_reply",
+            return_value={"errors": [{"message": "bad request"}]},
+        ):
+            with self.assertRaises(UserError) as err:
+                ups_request._send_graphql("query { x }", skip_errors=False)
+        self.assertIn("bad request", str(err.exception))
+
+    def test_raise_for_graphql_errors_skip(self):
+        ups_request = UpsRequest(self.carrier)
+        logger = "odoo.addons.delivery_ups_oca.models.ups_request"
+        with self.assertLogs(logger, level="INFO") as log_catcher:
+            # Should not raise when skip_errors=True.
+            ups_request._raise_for_graphql_errors(
+                {"errors": [{"message": "ignored"}]}, skip_errors=True
+            )
+        self.assertTrue(any("ignored" in msg for msg in log_catcher.output))
+
+    def test_gc_party_and_item_inputs(self):
+        ups_request = UpsRequest(self.carrier)
+        self.sale.partner_shipping_id = self.us_partner
+        self.product.default_code = "SKU-1"
+        parties = ups_request._gc_party_inputs(self.sale)
+        self.assertEqual([p["type"] for p in parties], ["ORIGIN", "DESTINATION"])
+        destination = parties[1]["location"]
+        self.assertEqual(destination["countryCode"], self.us.code)
+        self.assertEqual(destination["postalCode"], self.us_partner.zip)
+        items = ups_request._gc_item_inputs(self.sale)
+        self.assertEqual(len(items), 1)
+        item = items[0]
+        self.assertEqual(item["quantity"], 10)
+        self.assertEqual(item["currencyCode"], self.sale.currency_id.name)
+        self.assertEqual(item["productId"], "SKU-1")
+        self.assertTrue(item["description"])
