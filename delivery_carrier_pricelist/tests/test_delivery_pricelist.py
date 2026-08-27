@@ -18,8 +18,12 @@ class TestCarrierPricelist(BaseCommon):
             login="test-carrier-pricelist-sale-user",
             groups="base.group_user,sales_team.group_sale_salesman",
         )
-        cls.partner_18 = cls.env.ref("base.res_partner_18")
-        cls.product_4 = cls.env.ref("product.product_product_4")
+        cls.partner_18 = cls.env["res.partner"].create(
+            {"name": "Test Partner", "country_id": cls.env.ref("base.in").id}
+        )
+        cls.product_4 = cls.env["product.product"].create(
+            {"name": "PC Assemble + 2GB RAM", "type": "consu"}
+        )
         cls.product_uom_unit = cls.env.ref("uom.product_uom_unit")
         cls.pricelist = cls.env["product.pricelist"].create(
             {
@@ -41,7 +45,7 @@ class TestCarrierPricelist(BaseCommon):
                             "name": "PC Assamble + 2GB RAM",
                             "product_id": cls.product_4.id,
                             "product_uom_qty": 1,
-                            "product_uom": cls.product_uom_unit.id,
+                            "product_uom_id": cls.product_uom_unit.id,
                             "price_unit": 750.00,
                         },
                     )
