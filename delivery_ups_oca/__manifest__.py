@@ -4,7 +4,7 @@
 {
     "name": "Delivery UPS OCA",
     "summary": "Integrate UPS webservice",
-    "version": "18.0.1.4.0",
+    "version": "18.0.1.4.1",
     "development_status": "Beta",
     "category": "Delivery",
     "website": "https://github.com/OCA/delivery-carrier",
