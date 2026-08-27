@@ -497,6 +497,22 @@ class UpsRequest:
             {"type": "DESTINATION", "location": _location(partner_to)},
         ]
 
+    def _gc_product_hs_code(self, product):
+        """Return the HS code to send to UPS Global Checkout for a product.
+
+        When the OCA ``product_harmonized_system`` module is installed, the full
+        national code (``hs.code.local_code``, including extension digits beyond
+        the 6-digit HS heading) is used, resolved recursively so a code set on
+        the product category is also taken into account. If no such code can be
+        resolved, it falls back to the core ``hs_code`` field provided by the
+        ``stock_delivery`` module.
+        """
+        if hasattr(product, "get_hs_code_recursively"):
+            hs_record = product.get_hs_code_recursively()
+            if hs_record:
+                return hs_record.local_code or hs_record.hs_code
+        return getattr(product, "hs_code", False)
+
     def _gc_item_inputs(self, order):
         """Build the item inputs (one per sale order line with a product)."""
         currency = order.currency_id.name
@@ -518,7 +534,7 @@ class UpsRequest:
             )
             if origin_country:
                 item["countryOfOrigin"] = origin_country.code
-            hs_code = getattr(line.product_id, "hs_code", False)
+            hs_code = self._gc_product_hs_code(line.product_id)
             if hs_code:
                 item["hsCode"] = hs_code
             if line.product_id.default_code:

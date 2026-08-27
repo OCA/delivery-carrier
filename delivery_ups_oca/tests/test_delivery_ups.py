@@ -1420,6 +1420,30 @@ class TestUpsGlobalCheckout(TestDeliveryUpsBase):
         charges = shipment["PaymentInformation"]["ShipmentCharge"]
         self.assertTrue(any(c.get("Type") == "02" for c in charges))
 
+    def test_gc_product_hs_code_falls_back_to_core_field(self):
+        # Without product_harmonized_system (or without a resolved hs.code),
+        # the core stock_delivery hs_code field is used as fallback.
+        ups_request = UpsRequest(self.carrier)
+        if hasattr(self.product, "get_hs_code_recursively"):
+            self.skipTest("product_harmonized_system is installed")
+        self.product.product_tmpl_id.hs_code = "610910"
+        self.assertEqual(
+            ups_request._gc_product_hs_code(self.product), "610910"
+        )
+
+    def test_gc_product_hs_code_uses_local_code(self):
+        # With product_harmonized_system, the full local_code is sent.
+        if not hasattr(self.product, "get_hs_code_recursively"):
+            self.skipTest("product_harmonized_system is not installed")
+        hs_code = self.env["hs.code"].create(
+            {"local_code": "6109100010", "description": "T-shirts"}
+        )
+        self.product.product_tmpl_id.hs_code_id = hs_code
+        ups_request = UpsRequest(self.carrier)
+        self.assertEqual(
+            ups_request._gc_product_hs_code(self.product), "6109100010"
+        )
+
     def test_landed_cost_quote_parses_response(self):
         ups_request = UpsRequest(self.carrier)
         self.sale.partner_shipping_id = self.us_partner

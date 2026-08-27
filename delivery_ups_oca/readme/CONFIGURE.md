@@ -33,3 +33,12 @@ using the webservice.
 **NOTE** UPS Global Checkout is a contract-only service. Contact the UPS
 Global Checkout onboarding team to have it enabled on your account before
 configuring it in Odoo.
+
+**NOTE** For more accurate landed cost calculations, install the OCA
+``product_harmonized_system`` module and set an H.S. Code on your products
+(or their categories). When a code is resolved through that module, the
+full national code (including extension digits beyond the 6-digit HS
+heading) is sent to UPS Global Checkout. Otherwise the module falls back
+to the core ``hs_code`` field (from ``stock_delivery``, typically 6
+digits). If no HS code can be resolved at all, none is sent and UPS
+classifies the goods from their description.
