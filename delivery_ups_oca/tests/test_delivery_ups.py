@@ -1252,21 +1252,18 @@ class TestUpsGlobalCheckout(TestDeliveryUpsBase):
 
     def test_eligibility_no_group(self):
         self.carrier.ups_global_checkout_country_group_ids = False
-        self.assertFalse(
-            self.carrier._ups_is_global_checkout_eligible(self.us_partner)
-        )
+        self.assertFalse(self.carrier._ups_is_global_checkout_eligible(self.us_partner))
 
     def test_eligibility_country_in_group(self):
         self.carrier.ups_global_checkout_country_group_ids = self.country_group
-        self.assertTrue(
-            self.carrier._ups_is_global_checkout_eligible(self.us_partner)
-        )
+        self.assertTrue(self.carrier._ups_is_global_checkout_eligible(self.us_partner))
 
     def test_eligibility_country_not_in_group(self):
         self.carrier.ups_global_checkout_country_group_ids = self.country_group
-        self.assertFalse(
-            self.carrier._ups_is_global_checkout_eligible(self.partner)
+        other_partner = self.env["res.partner"].create(
+            {"name": "BE Customer", "country_id": self.env.ref("base.be").id}
         )
+        self.assertFalse(self.carrier._ups_is_global_checkout_eligible(other_partner))
 
     def _mock_rate(self):
         return mock.patch(
@@ -1286,36 +1283,38 @@ class TestUpsGlobalCheckout(TestDeliveryUpsBase):
     def test_rate_shipment_keeps_price_and_stores_quote(self):
         self.carrier.ups_global_checkout_country_group_ids = self.country_group
         self.sale.partner_shipping_id = self.us_partner
-        with self._mock_rate(), mock.patch(
-            _provider_class + ".landed_cost_quote", return_value=self.quote
+        with (
+            self._mock_rate(),
+            mock.patch(_provider_class + ".landed_cost_quote", return_value=self.quote),
         ):
             res = self.carrier.ups_rate_shipment(self.sale)
         self.assertTrue(res["success"])
         # The landed cost is NOT added to the shipping price.
         self.assertEqual(res["price"], 100.0)
-        self.assertEqual(
-            self.sale.ups_landed_cost_quote_id, self.quote["quote_id"]
-        )
+        self.assertEqual(self.sale.ups_landed_cost_quote_id, self.quote["quote_id"])
         self.assertEqual(self.sale.ups_landed_cost_amount, 25.0)
 
     def test_rate_shipment_landed_cost_failure_falls_back(self):
         self.carrier.ups_global_checkout_country_group_ids = self.country_group
         self.sale.partner_shipping_id = self.us_partner
-        with mock.patch(
-            _provider_class + "._rate_shipment",
-            return_value={
-                "RateResponse": {
-                    "RatedShipment": {
-                        "TotalCharges": {
-                            "MonetaryValue": 100.0,
-                            "CurrencyCode": self.quote["currency"],
+        with (
+            mock.patch(
+                _provider_class + "._rate_shipment",
+                return_value={
+                    "RateResponse": {
+                        "RatedShipment": {
+                            "TotalCharges": {
+                                "MonetaryValue": 100.0,
+                                "CurrencyCode": self.quote["currency"],
+                            }
                         }
                     }
-                }
-            },
-        ), mock.patch(
-            _provider_class + ".landed_cost_quote",
-            side_effect=UserError("no quote"),
+                },
+            ),
+            mock.patch(
+                _provider_class + ".landed_cost_quote",
+                side_effect=UserError("no quote"),
+            ),
         ):
             res = self.carrier.ups_rate_shipment(self.sale)
         self.assertTrue(res["success"])
@@ -1372,9 +1371,7 @@ class TestUpsGlobalCheckout(TestDeliveryUpsBase):
         )
         self.sale._create_delivery_line(self.carrier, 100.0)
         self.sale._create_delivery_line(self.carrier, 100.0)
-        self.assertEqual(
-            len(self.sale.order_line.filtered("is_ups_landed_cost")), 1
-        )
+        self.assertEqual(len(self.sale.order_line.filtered("is_ups_landed_cost")), 1)
 
     def test_remove_delivery_line_removes_landed_cost_line(self):
         self.carrier.ups_landed_cost_product_id = self.env["product.product"].create(
@@ -1398,21 +1395,18 @@ class TestUpsGlobalCheckout(TestDeliveryUpsBase):
                 "partner_id": self.us_partner.id,
                 "picking_type_id": self.env.ref("stock.picking_type_out").id,
                 "location_id": self.env.ref("stock.stock_location_stock").id,
-                "location_dest_id": self.env.ref(
-                    "stock.stock_location_customers"
-                ).id,
+                "location_dest_id": self.env.ref("stock.stock_location_customers").id,
                 "carrier_id": self.carrier.id,
                 "sale_id": self.sale.id,
             }
         )
-        self.assertEqual(
-            picking.ups_landed_cost_quote_id, self.quote["quote_id"]
-        )
+        self.assertEqual(picking.ups_landed_cost_quote_id, self.quote["quote_id"])
 
     def test_prepare_shipping_includes_quote_id_and_ddp(self):
         picking = self.sale.picking_ids[0]
         picking.ups_landed_cost_quote_id = self.quote["quote_id"]
         picking.move_ids.quantity = 10
+        picking.number_of_packages = 1
         ups_request = UpsRequest(self.carrier)
         vals = ups_request._prepare_create_shipping(picking)
         shipment = vals["ShipmentRequest"]["Shipment"]
@@ -1427,9 +1421,7 @@ class TestUpsGlobalCheckout(TestDeliveryUpsBase):
         if hasattr(self.product, "get_hs_code_recursively"):
             self.skipTest("product_harmonized_system is installed")
         self.product.product_tmpl_id.hs_code = "610910"
-        self.assertEqual(
-            ups_request._gc_product_hs_code(self.product), "610910"
-        )
+        self.assertEqual(ups_request._gc_product_hs_code(self.product), "610910")
 
     def test_gc_product_hs_code_uses_local_code(self):
         # With product_harmonized_system, the full local_code is sent.
@@ -1440,9 +1432,7 @@ class TestUpsGlobalCheckout(TestDeliveryUpsBase):
         )
         self.product.product_tmpl_id.hs_code_id = hs_code
         ups_request = UpsRequest(self.carrier)
-        self.assertEqual(
-            ups_request._gc_product_hs_code(self.product), "6109100010"
-        )
+        self.assertEqual(ups_request._gc_product_hs_code(self.product), "6109100010")
 
     def test_landed_cost_quote_parses_response(self):
         ups_request = UpsRequest(self.carrier)

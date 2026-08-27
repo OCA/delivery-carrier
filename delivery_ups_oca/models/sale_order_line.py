@@ -12,3 +12,9 @@ class SaleOrderLine(models.Model):
         "Global Checkout landed cost (duties and taxes).",
         copy=False,
     )
+
+    def _check_line_unlink(self):
+        """Allow deletion of the UPS landed cost line from a confirmed order,
+        mirroring the behaviour of the delivery line."""
+        undeletable_lines = super()._check_line_unlink()
+        return undeletable_lines.filtered(lambda line: not line.is_ups_landed_cost)
