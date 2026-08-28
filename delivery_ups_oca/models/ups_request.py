@@ -19,6 +19,7 @@ UPS_TAX_IDENTIFICATION_NUMBER_MAX_LENGTH = 15
 class UpsRequest:
     def __init__(self, carrier):
         self.carrier = carrier
+        self.env = carrier.env
         self.default_packaging_id = self.carrier.ups_default_packaging_id
         self.use_packages_from_picking = self.carrier.ups_use_packages_from_picking
         self.shipper_number = self.carrier.ups_shipper_number
