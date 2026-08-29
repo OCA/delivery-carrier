@@ -194,9 +194,9 @@ class DeliveryCarrier(models.Model):
 
         The landed cost (duties/taxes/fees) and the Quote ID are stored on the
         order so a separate order line can be created for them; this method does
-        not change the shipping price. A failed quote never hides the carrier:
-        we degrade gracefully to the plain Rate API price and clear any stale
-        quote.
+        not change the shipping price. Failures are handled like the Rate API:
+        business errors are raised as ``UserError`` and surfaced to the user,
+        while network errors propagate.
         """
         if not self._ups_is_global_checkout_eligible(order.partner_shipping_id):
             # Feature disabled for this destination: clear any stale quote.
@@ -208,21 +208,7 @@ class DeliveryCarrier(models.Model):
                     }
                 )
             return
-        try:
-            quote = ups_request.landed_cost_quote(order, transportation_cost)
-        except Exception as e:  # noqa: BLE001 - never block checkout on GC errors
-            _logger.warning(
-                "UPS Global Checkout landed cost quote failed for order %s: %s",
-                order.name,
-                e,
-            )
-            order.write(
-                {
-                    "ups_landed_cost_quote_identifier": False,
-                    "ups_landed_cost_amount": 0.0,
-                }
-            )
-            return
+        quote = ups_request.landed_cost_quote(order, transportation_cost)
         amount = self._ups_get_response_price(
             {"MonetaryValue": quote["amount"], "CurrencyCode": quote["currency"]},
             order.currency_id,

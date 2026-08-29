@@ -456,7 +456,7 @@ class UpsRequest:
             else:
                 raise UserError(msg)
 
-    def _send_graphql(self, query, variables=None, skip_errors=False, timeout=15):
+    def _send_graphql(self, query, variables=None, skip_errors=False):
         """Send a GraphQL request to the UPS Global Checkout endpoint.
 
         Reuses the standard OAuth token handling from ``_process_reply`` and adds
@@ -473,7 +473,6 @@ class UpsRequest:
                 "Content-Type": "application/json",
                 "Accept": "application/json",
             },
-            timeout=timeout,
         )
         self._raise_for_graphql_errors(status_json, skip_errors)
         return (status_json or {}).get("data") or {}

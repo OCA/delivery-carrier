@@ -5,6 +5,7 @@ import io
 from datetime import datetime, timedelta
 from unittest import mock
 
+import requests
 from PIL import Image
 
 from odoo.exceptions import UserError
@@ -98,6 +99,10 @@ class TestDeliveryUpsBase(common.TransactionCase):
         delivery_wizard.button_confirm()
         sale.action_confirm()
         return sale
+
+    def _patch_carrier_log_xml(self):
+        """Helper to patch the log_xml method on carrier class"""
+        return mock.patch.object(type(self.carrier), "log_xml")
 
 
 class TestDeliveryUps(TestDeliveryUpsBase):
@@ -682,10 +687,6 @@ class TestDeliveryUps(TestDeliveryUpsBase):
         self.assertEqual(len(attachments), 2)
         self.assertEqual(attachments[0].name, "123456-GIF.gif")
         self.assertEqual(attachments[1].name, "789012-ZPL.zpl")
-
-    def _patch_carrier_log_xml(self):
-        """Helper to patch the log_xml method on carrier class"""
-        return mock.patch.object(type(self.carrier), "log_xml")
 
     def test_ups_process_reply_basic_success_with_helper(self):
         """Test using helper method for patching"""
@@ -1296,42 +1297,33 @@ class TestUpsGlobalCheckout(TestDeliveryUpsBase):
         )
         self.assertEqual(self.sale.ups_landed_cost_amount, 25.0)
 
-    def test_rate_shipment_landed_cost_failure_falls_back(self):
+    def test_rate_shipment_landed_cost_business_error_surfaces(self):
         self.carrier.ups_global_checkout_country_group_ids = self.country_group
         self.sale.partner_shipping_id = self.us_partner
         with (
-            mock.patch(
-                _provider_class + "._rate_shipment",
-                return_value={
-                    "RateResponse": {
-                        "RatedShipment": {
-                            "TotalCharges": {
-                                "MonetaryValue": 100.0,
-                                "CurrencyCode": self.quote["currency"],
-                            }
-                        }
-                    }
-                },
-            ),
+            self._mock_rate(),
             mock.patch(
                 _provider_class + ".landed_cost_quote",
                 side_effect=UserError("no quote"),
             ),
-            self.assertLogs(
-                "odoo.addons.delivery_ups_oca.models.delivery_carrier",
-                level="WARNING",
-            ) as log_catcher,
         ):
             res = self.carrier.ups_rate_shipment(self.sale)
-        self.assertTrue(res["success"])
-        self.assertEqual(res["price"], 100.0)
+        self.assertFalse(res["success"])
+        self.assertIn("no quote", res["error_message"])
         self.assertFalse(self.sale.ups_landed_cost_quote_identifier)
-        self.assertTrue(
-            any(
-                "UPS Global Checkout landed cost quote failed" in msg
-                for msg in log_catcher.output
-            )
-        )
+
+    def test_rate_shipment_landed_cost_network_error_propagates(self):
+        self.carrier.ups_global_checkout_country_group_ids = self.country_group
+        self.sale.partner_shipping_id = self.us_partner
+        with (
+            self._mock_rate(),
+            mock.patch(
+                _provider_class + ".landed_cost_quote",
+                side_effect=requests.exceptions.ConnectionError("boom"),
+            ),
+        ):
+            with self.assertRaises(requests.exceptions.ConnectionError):
+                self.carrier.ups_rate_shipment(self.sale)
 
     def test_create_delivery_line_adds_landed_cost_line(self):
         self.carrier.ups_landed_cost_product_id = self.env["product.product"].create(
@@ -1478,27 +1470,40 @@ class TestUpsGlobalCheckout(TestDeliveryUpsBase):
             with self.assertRaises(UserError):
                 ups_request.landed_cost_quote(self.sale, 100.0)
 
+    def _mock_graphql_response(self, payload):
+        self.carrier.ups_token = "valid_token_123"
+        self.carrier.ups_token_expiration_date = datetime.now() + timedelta(hours=1)
+        mock_response = mock.Mock()
+        mock_response.status_code = 200
+        mock_response.json.return_value = payload
+        return mock_response
+
     def test_send_graphql_success(self):
         ups_request = UpsRequest(self.carrier)
-        with mock.patch.object(
-            ups_request, "_process_reply", return_value={"data": {"foo": 1}}
-        ) as mock_process:
+        mock_response = self._mock_graphql_response({"data": {"foo": 1}})
+        with (
+            mock.patch.object(
+                ups_request, "_send_request", return_value=mock_response
+            ) as mock_send,
+            self._patch_carrier_log_xml(),
+        ):
             data = ups_request._send_graphql("query { x }", {"a": 1})
         self.assertEqual(data, {"foo": 1})
-        call_kwargs = mock_process.call_args.kwargs
-        self.assertTrue(call_kwargs["url"].endswith("/api/globalcheckout/v1/graphql"))
+        call_args = mock_send.call_args
+        self.assertTrue(call_args.args[0].endswith("/api/globalcheckout/v1/graphql"))
         self.assertEqual(
-            call_kwargs["headers_extra"]["shipperNumber"],
-            self.carrier.ups_shipper_number,
+            call_args.args[3]["shipperNumber"], self.carrier.ups_shipper_number
         )
-        self.assertEqual(call_kwargs["json"]["variables"], {"a": 1})
+        self.assertEqual(call_args.kwargs["timeout"], 10)
 
     def test_send_graphql_raises_on_errors(self):
         ups_request = UpsRequest(self.carrier)
-        with mock.patch.object(
-            ups_request,
-            "_process_reply",
-            return_value={"errors": [{"message": "bad request"}]},
+        mock_response = self._mock_graphql_response(
+            {"errors": [{"message": "bad request"}]}
+        )
+        with (
+            mock.patch.object(ups_request, "_send_request", return_value=mock_response),
+            self._patch_carrier_log_xml(),
         ):
             with self.assertRaises(UserError) as err:
                 ups_request._send_graphql("query { x }", skip_errors=False)

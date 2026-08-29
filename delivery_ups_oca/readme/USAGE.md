@@ -15,5 +15,4 @@ When UPS Global Checkout is configured and the destination is eligible:
 
 - On rating an order (from the sales order or the eCommerce checkout), a
   separate "UPS Duties & Taxes (Global Checkout)" line is added below the
-  shipping line. If a landed cost quote cannot be obtained, the order still gets the
-  normal shipping price (graceful fallback) without the duties line.
+  shipping line.
