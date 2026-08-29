@@ -47,10 +47,17 @@ class UpsRequest:
                 raise UserError(msg)
 
     def _send_request(
-        self, url, json=None, data=None, headers=None, method="post", auth=None
+        self,
+        url,
+        json=None,
+        data=None,
+        headers=None,
+        method="post",
+        auth=None,
+        timeout=None,
     ):
         return getattr(requests, method)(
-            url, data=data, json=json, headers=headers, auth=auth
+            url, data=data, json=json, headers=headers, auth=auth, timeout=timeout
         )
 
     def _get_new_token(self):
@@ -84,6 +91,7 @@ class UpsRequest:
         data=None,
         method="post",
         headers_extra=None,
+        timeout=10,
     ):
         if (
             not self.token
@@ -97,12 +105,14 @@ class UpsRequest:
         }
         if headers_extra:
             headers = {**headers, **headers_extra}
-        status = self._send_request(url, json, data, headers, method)
+        status = self._send_request(url, json, data, headers, method, timeout=timeout)
         # Generate a new token
         if status.status_code == 401:
             self._get_new_token()
             headers["Authorization"] = f"Bearer {self.token}"
-            status = self._send_request(url, json, data, headers, method)
+            status = self._send_request(
+                url, json, data, headers, method, timeout=timeout
+            )
         status = status.json()
         ups_last_request = f"URL: {self.url}\nData: {data}\nJSON: {json}"
         self.carrier.log_xml(ups_last_request, "ups_last_request")
