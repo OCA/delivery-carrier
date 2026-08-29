@@ -73,10 +73,22 @@ class UpsRequest:
         url = f"{self.url}/security/v1/oauth/token"
         headers = {"x-merchant-id": self.client_id}
         data = {"grant_type": "client_credentials"}
+        _logger.debug(
+            "UPS Token Request: URL=%s, Headers=%s, Data=%s", url, headers, data
+        )
         status = self._send_request(
             url, data=data, headers=headers, auth=(self.client_id, self.client_secret)
         )
+        status_code = status.status_code
         status = status.json()
+        debug_response = status.copy() if isinstance(status, dict) else status
+        if isinstance(debug_response, dict) and "access_token" in debug_response:
+            debug_response["access_token"] = "***MASKED***"
+        _logger.debug(
+            "UPS Token Response: Status=%s, Content=%s",
+            status_code,
+            debug_response,
+        )
         self._raise_for_status(status, False)
         token = status.get("access_token")
         self.token = token
@@ -107,15 +119,26 @@ class UpsRequest:
         }
         if headers_extra:
             headers = {**headers, **headers_extra}
+        debug_headers = {**headers, "Authorization": "***MASKED***"}
+        _logger.debug(
+            "UPS Request: URL=%s, Method=%s, Headers=%s, Body=%s",
+            url,
+            method,
+            debug_headers,
+            json or data,
+        )
         status = self._send_request(url, json, data, headers, method, timeout=timeout)
         # Generate a new token
         if status.status_code == 401:
             self._get_new_token()
             headers["Authorization"] = f"Bearer {self.token}"
+            _logger.debug("UPS request returned 401; retrying with a refreshed token")
             status = self._send_request(
                 url, json, data, headers, method, timeout=timeout
             )
+        status_code = status.status_code
         status = status.json()
+        _logger.debug("UPS Response: Status=%s, Content=%s", status_code, status)
         ups_last_request = f"URL: {self.url}\nData: {data}\nJSON: {json}"
         self.carrier.log_xml(ups_last_request, "ups_last_request")
         self.carrier.log_xml(status or "", "ups_last_response")
@@ -465,6 +488,12 @@ class UpsRequest:
         payload = {"query": query}
         if variables is not None:
             payload["variables"] = variables
+        _logger.debug(
+            "UPS Global Checkout GraphQL Request: URL=%s, ShipperNumber=%s, Body=%s",
+            self._gc_url(),
+            self.shipper_number,
+            payload,
+        )
         status_json = self._process_reply(
             url=self._gc_url(),
             json=payload,
