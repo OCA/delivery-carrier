@@ -1470,9 +1470,9 @@ class TestUpsGlobalCheckout(TestDeliveryUpsBase):
             with self.assertRaises(UserError):
                 ups_request.landed_cost_quote(self.sale, 100.0)
 
-    def _mock_graphql_response(self, payload):
-        self.carrier.ups_token = "valid_token_123"
-        self.carrier.ups_token_expiration_date = datetime.now() + timedelta(hours=1)
+    def _mock_graphql_response(self, ups_request, payload):
+        ups_request.token = "valid_token_123"
+        ups_request.token_expiration_date = datetime.now() + timedelta(hours=1)
         mock_response = mock.Mock()
         mock_response.status_code = 200
         mock_response.json.return_value = payload
@@ -1480,7 +1480,7 @@ class TestUpsGlobalCheckout(TestDeliveryUpsBase):
 
     def test_send_graphql_success(self):
         ups_request = UpsRequest(self.carrier)
-        mock_response = self._mock_graphql_response({"data": {"foo": 1}})
+        mock_response = self._mock_graphql_response(ups_request, {"data": {"foo": 1}})
         with (
             mock.patch.object(
                 ups_request, "_send_request", return_value=mock_response
@@ -1499,7 +1499,7 @@ class TestUpsGlobalCheckout(TestDeliveryUpsBase):
     def test_send_graphql_raises_on_errors(self):
         ups_request = UpsRequest(self.carrier)
         mock_response = self._mock_graphql_response(
-            {"errors": [{"message": "bad request"}]}
+            ups_request, {"errors": [{"message": "bad request"}]}
         )
         with (
             mock.patch.object(ups_request, "_send_request", return_value=mock_response),
