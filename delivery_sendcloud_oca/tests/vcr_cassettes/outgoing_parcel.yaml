@@ -1,0 +1,78 @@
+interactions:
+  - request:
+      body: null
+      headers:
+        Accept: ["*/*"]
+        Accept-Encoding: ["gzip, deflate"]
+        Connection: [keep-alive]
+        User-Agent: [python-requests/2.28.1]
+      method: GET
+      uri: https://panel.sendcloud.sc/api/v2/brand/andrea1/return-portal/outgoing?postal_code=4814dc&identifier=JVGL06097547001969761800
+    response:
+      body: {string: '
+            {"data": {"parcel": {"id": 182588401, "address": "Reduitlaan 45",
+            "address_divided": {"street": "Reduitlaan", "house_number": "45"},
+            "house_number": "45", "city": "Breda", "company_name": "Onestein BV",
+            "country": {"iso_2": "NL", "iso_3": "NLD", "name": "Netherlands"}, "email":
+            "b.colpaert@onestein.nl", "name": "Bastian Colpaert", "postal_code":
+            "4814dc", "telephone": "+31886270400", "tracking_number":
+            "JVGL06097547001969761800", "collo_count": 1, "weight": "5.000", "carrier":
+            {"code": "dhl"}}, "products": [{"name": "Test Product", "price": "0.00",
+            "quantity": 1,"id":3}], "carriers": [{"code": "dhl"}], "service_point":
+            {"id": 10875349, "code": "217165", "is_active": true, "shop_type": null,
+            "extra_data": {"partner_name": "PostNL", "sales_channel": "AFHAALPUNT",
+            "terminal_type": "NRS"}}, "shop_distances": [{"id": 1, "distance": 1}],
+            "national_carrier_contact": "https://example.com", "national_carrier":
+            {"name": "", "drop_off_finder": "", "logo": { "full":
+            "https://sendcloud-prod-scp-static-files.s3.amazonaws.com/ups/img/logo.svg",
+            "icon":
+            "https://sendcloud-prod-scp-static-files.s3.amazonaws.com/ups/img/icon.svg"},
+            "code": "ups"}}, "service_points_token": "12345678", "access_token":
+            "121331344" }'}
+      headers:
+        Allow: ["GET, POST, PUT, HEAD, OPTIONS"]
+        Connection: [keep-alive]
+        Content-Type: [application/json]
+        Date: ["Tue, 05 Jul 2022 09:00:25 GMT"]
+        Referrer-Policy: [same-origin]
+        Server: [nginx]
+        Strict-Transport-Security: [max-age=15552000; includeSubDomains; preload]
+        Transfer-Encoding: [chunked]
+        Vary: [Accept-Encoding, "Origin, Cookie"]
+        X-Content-Type-Options: [nosniff]
+        X-Frame-Options: [DENY]
+        X-SendCloud-Client-Latest-Version-Linux: [1.0.2]
+        X-SendCloud-Client-Latest-Version-Windows: [1.0.4]
+        X-SendCloud-Client-Latest-Version-macOS: [1.0.5]
+        X-XSS-Protection: [1; mode=block]
+        content-length: ["236764"]
+      status: {code: 200, message: OK}
+  - request:
+      body: null
+      headers:
+        Accept: ["*/*"]
+        Accept-Encoding: ["gzip, deflate"]
+        Connection: [keep-alive]
+        User-Agent: [python-requests/2.28.1]
+      method: GET
+      uri: https://panel.sendcloud.sc/api/v2/parcels/182588401/return_portal_url
+    response:
+      body: {string: '{"url":""}'}
+      headers:
+        Allow: ["GET, POST, PUT, HEAD, OPTIONS"]
+        Connection: [keep-alive]
+        Content-Type: [application/json]
+        Date: ["Tue, 05 Jul 2022 09:00:25 GMT"]
+        Referrer-Policy: [same-origin]
+        Server: [nginx]
+        Strict-Transport-Security: [max-age=15552000; includeSubDomains; preload]
+        Transfer-Encoding: [chunked]
+        Vary: [Accept-Encoding, "Origin, Cookie"]
+        X-Content-Type-Options: [nosniff]
+        X-Frame-Options: [DENY]
+        X-SendCloud-Client-Latest-Version-Linux: [1.0.2]
+        X-SendCloud-Client-Latest-Version-Windows: [1.0.4]
+        X-SendCloud-Client-Latest-Version-macOS: [1.0.5]
+        X-XSS-Protection: [1; mode=block]
+      status: {code: 200, message: OK}
+version: 1
