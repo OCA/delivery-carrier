@@ -135,6 +135,11 @@ msgid "IN"
 msgstr "Ingresso"
 
 #. module: delivery_ups_oca
+#: model:ir.model.fields,help:delivery_ups_oca.field_delivery_carrier__ups_negotiated_rates
+msgid "If checked, UPS will use the account's negotiated rates for shipping."
+msgstr ""
+
+#. module: delivery_ups_oca
 #: model:ir.model.fields,help:delivery_ups_oca.field_delivery_carrier__ups_tracking_state_update_sync
 msgid ""
 "If checked, odoo try to state update from picking according to UPS "
@@ -183,6 +188,11 @@ msgstr "Rientri Mail Innovations (MI)"
 #: model_terms:ir.ui.view,arch_db:delivery_ups_oca.view_delivery_carrier_form
 msgid "Misc"
 msgstr "Varie"
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields,field_description:delivery_ups_oca.field_delivery_carrier__ups_negotiated_rates
+msgid "Negotiated Rates"
+msgstr ""
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__01
