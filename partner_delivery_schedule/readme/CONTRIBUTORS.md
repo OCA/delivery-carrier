@@ -1,3 +1,5 @@
 - [Tecnativa](https://www.tecnativa.com):
   - Sergio Teruel
   - Juan Carlos Oñate
+- [ACSONE SA/NV](https://www.acsone.eu):
+  - Stéphane Mangin <stephane.mangin@acsone.eu>
