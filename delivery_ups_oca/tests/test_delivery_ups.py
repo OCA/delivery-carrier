@@ -1031,3 +1031,197 @@ class TestResidentialAddress(TestDeliveryUpsBase):
             shipping_data["Address"],
             "Commercial address should not contain ResidentialAddressIndicator",
         )
+
+
+class TestUpsNegotiatedRates(TestDeliveryUpsBase):
+    @classmethod
+    def setUpClass(self):
+        super().setUpClass()
+        self.picking = self.sale.picking_ids[0]
+        self.picking.move_ids.quantity = 10
+        self.invoice = self.sale._create_invoices()
+        self.invoice.action_post()
+
+    def get_mock_rate_response_values(
+        self, charges="0", multi_alert=False, negotiated_charges=False
+    ):
+        alert_110971 = {
+            "Code": "110971",
+            "Description": "Your invoice may vary from the displayed reference rates",
+        }
+        response_value = {
+            "RateResponse": {
+                "Response": {
+                    "ResponseStatus": {"Code": "1", "Description": "Success"},
+                    "Alert": alert_110971,
+                    "TransactionReference": "",
+                },
+                "RatedShipment": {
+                    "Service": {"Code": "11", "Description": ""},
+                    "RatedShipmentAlert": alert_110971,
+                    "BillingWeight": {
+                        "UnitOfMeasurement": {
+                            "Code": "KGS",
+                            "Description": "Kilograms",
+                        },
+                        "Weight": "0.5",
+                    },
+                    "TransportationCharges": {
+                        "CurrencyCode": "EUR",
+                        "MonetaryValue": charges,
+                    },
+                    "ServiceOptionsCharges": {
+                        "CurrencyCode": "EUR",
+                        "MonetaryValue": "0.00",
+                    },
+                    "TotalCharges": {
+                        "CurrencyCode": "EUR",
+                        "MonetaryValue": charges,
+                    },
+                    "RatedPackage": {"Weight": "0.1"},
+                },
+            }
+        }
+        if multi_alert:
+            alert_120900 = {
+                "Code": "120900",
+                "Description": (
+                    "User Id and Shipper Number combination is not qualified"
+                    " to receive negotiated rates"
+                ),
+            }
+            response_value["RateResponse"]["Response"]["Alert"] = [
+                alert_110971,
+                alert_120900,
+            ]
+            response_value["RateResponse"]["RatedShipment"]["RatedShipmentAlert"] = [
+                alert_110971,
+                alert_120900,
+            ]
+        if negotiated_charges:
+            response_value["RateResponse"]["RatedShipment"].update(
+                {
+                    "NegotiatedRateCharges": {
+                        "TotalCharge": {
+                            "CurrencyCode": "EUR",
+                            "MonetaryValue": "16.33",
+                        }
+                    }
+                }
+            )
+        return response_value
+
+    def get_mock_shipment_rate_response_values(self, negotiated_charges=False):
+        response_value = {
+            "ShipmentResponse": {
+                "Response": {
+                    "ResponseStatus": {"Code": "1", "Description": "Success"},
+                    "TransactionReference": "",
+                },
+                "ShipmentResults": {
+                    "ShipmentCharges": {
+                        "TransportationCharges": {
+                            "CurrencyCode": "EUR",
+                            "MonetaryValue": "16.49",
+                        },
+                        "ServiceOptionsCharges": {
+                            "CurrencyCode": "EUR",
+                            "MonetaryValue": "0.00",
+                        },
+                        "TotalCharges": {
+                            "CurrencyCode": "EUR",
+                            "MonetaryValue": "16.49",
+                        },
+                    },
+                    "BillingWeight": {
+                        "UnitOfMeasurement": {
+                            "Code": "KGS",
+                            "Description": "Kilograms",
+                        },
+                        "Weight": "0.5",
+                    },
+                    "ShipmentIdentificationNumber": "1ZXXXXXXXXXXXXXXXX",
+                    "PackageResults": {
+                        "TrackingNumber": "1ZXXXXXXXXXXXXXXXX",
+                        "ServiceOptionsCharges": {
+                            "CurrencyCode": "EUR",
+                            "MonetaryValue": "0.00",
+                        },
+                        "ShippingLabel": {
+                            "ImageFormat": {"Code": "GIF", "Description": "GIF"},
+                            "GraphicImage": "R0lGODlhAQABAIAAAP///"
+                            "wAAACwAAAAAAQABAAACAkQBADs=",
+                        },
+                    },
+                },
+            }
+        }
+        if negotiated_charges:
+            response_value["ShipmentResponse"]["ShipmentResults"].update(
+                {
+                    "NegotiatedRateCharges": {
+                        "TotalCharge": {
+                            "CurrencyCode": "EUR",
+                            "MonetaryValue": "16.33",
+                        }
+                    }
+                }
+            )
+        return response_value
+
+    def test_rate_shipment_with_negotiated_rates(self):
+        """When negotiated rates are enabled, the rate request must ask for them
+        and the returned price must be the negotiated one when available."""
+        self.carrier.ups_negotiated_rates = True
+        response_value = self.get_mock_rate_response_values(
+            charges="16.49", negotiated_charges=True
+        )
+        with mock.patch(_provider_class + "._process_reply") as mock_process_reply:
+            mock_process_reply.return_value = response_value
+            res = self.carrier.ups_rate_shipment(self.sale)
+            request_json = mock_process_reply.call_args[1]["json"]
+            self.assertEqual(
+                "Y",
+                request_json["RateRequest"]["Shipment"]["ShipmentRatingOptions"][
+                    "NegotiatedRatesIndicator"
+                ],
+            )
+            self.assertTrue(res["success"])
+            self.assertEqual(res["price"], 16.33)
+
+    def test_rate_shipment_without_negotiated_rates(self):
+        """When negotiated rates are disabled (default), the rate request must not
+        ask for them and the standard price is used."""
+        response_value = self.get_mock_rate_response_values(charges="16.49")
+        with mock.patch(_provider_class + "._process_reply") as mock_process_reply:
+            mock_process_reply.return_value = response_value
+            res = self.carrier.ups_rate_shipment(self.sale)
+            request_json = mock_process_reply.call_args[1]["json"]
+            self.assertNotIn(
+                "ShipmentRatingOptions", request_json["RateRequest"]["Shipment"]
+            )
+            self.assertTrue(res["success"])
+            self.assertEqual(res["price"], 16.49)
+
+    def test_send_shipping_with_negotiated_rates(self):
+        """When negotiated rates are enabled, the shipping request must ask for
+        them and the shipment is recorded with the negotiated price."""
+        self.carrier.ups_negotiated_rates = True
+        self.picking.action_confirm()
+        self.picking.action_assign()
+        self.picking.shipping_weight = 10.0
+        self.picking.number_of_packages = 1
+        response_value = self.get_mock_shipment_rate_response_values(
+            negotiated_charges=True
+        )
+        with mock.patch(_provider_class + "._process_reply") as mock_process_reply:
+            mock_process_reply.return_value = response_value
+            self.picking.send_to_shipper()
+            request_json = mock_process_reply.call_args[1]["json"]
+            self.assertEqual(
+                "Y",
+                request_json["ShipmentRequest"]["Shipment"]["ShipmentRatingOptions"][
+                    "NegotiatedRatesIndicator"
+                ],
+            )
+            self.assertEqual(self.picking.carrier_tracking_ref, "1ZXXXXXXXXXXXXXXXX")
