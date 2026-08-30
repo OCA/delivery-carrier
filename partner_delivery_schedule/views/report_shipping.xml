@@ -10,9 +10,9 @@
                     t-value="o.partner_id if o.partner_id.type == 'delivery' else o.partner_id.commercial_partner_id"
                 />
                 <strong>Delivery Schedule</strong>
-                <t t-foreach="partner.delivery_schedule_ids" t-as="horary">
+                <t t-foreach="partner.delivery_schedule_ids" t-as="schedule">
                     <div>
-                        <span t-field="horary.display_name" />
+                        <span t-field="schedule.display_name" />
                     </div>
                 </t>
             </div>
@@ -29,9 +29,9 @@
                     t-value="o.partner_id if o.partner_id.type == 'delivery' else o.partner_id.commercial_partner_id"
                 />
                 <strong>Delivery Schedule</strong>
-                <t t-foreach="partner.delivery_schedule_ids" t-as="horary">
+                <t t-foreach="partner.delivery_schedule_ids" t-as="schedule">
                     <div>
-                        <span t-field="horary.display_name" />
+                        <span t-field="schedule.display_name" />
                     </div>
                 </t>
             </div>

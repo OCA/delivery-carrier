@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_partner_delivery_zone_list_schedule" model="ir.ui.view">
+        <field name="name">partner.delivery.zone.list.schedule</field>
+        <field name="model">partner.delivery.zone</field>
+        <field
+            name="inherit_id"
+            ref="partner_delivery_zone.view_partner_delivery_zone_tree"
+        />
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="delivery_schedule_ids" widget="many2many_tags" />
+            </field>
+        </field>
+    </record>
+</odoo>

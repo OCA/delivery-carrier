@@ -30,3 +30,20 @@ class ResPartner(models.Model):
             )
         )
         return bool(delivery_records)
+
+    def get_next_schedule(self, from_date=None, tz=None, horizon=None):
+        """Next reachable (schedule, departure) for this partner.
+
+        Only departures strictly after from_date are included.
+        DST (Daylight Saving Time) transitions are handled correctly.
+
+        :param from_date: UTC-naive datetime anchor; defaults to now()
+        :param tz: IANA timezone string for local-time conversion
+        :param horizon: days ahead to search; defaults to company setting
+        """
+        self.ensure_one()
+        return self.delivery_schedule_ids.get_next_schedule(
+            from_date=from_date,
+            tz=tz or self.env.user.tz or self.env.company.tz,
+            horizon=horizon,
+        )
