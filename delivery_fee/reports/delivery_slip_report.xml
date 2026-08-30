@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template
+        id="report_delivery_document2"
+        inherit_id="stock_delivery.report_delivery_document2"
+    >
+        <xpath expr="//div[hasclass('page')]" position="inside">
+            <t
+                t-set="fee_line"
+                t-value="o.sale_id.order_line.filtered(lambda x: x.is_delivery_fee and x.delivery_fee_picking_id == o)"
+            />
+            <t t-set="fee_product" t-value="fee_line and fee_line.product_id" />
+            <div
+                t-if="fee_product and fee_product.description_sale and not o.partner_id.delivery_fee_exemption"
+            >
+                <p class="mt-5 fw-bolder fst-italic">
+                    <img
+                    t-if="fee_product.image_128"
+                    t-attf-src="/web/image/product.product/{{ fee_product.id }}/image_128"
+                    style="width: 18px; height: 18px; object-fit: contain;"
+                    alt="Fee info"
+                />
+                    <span t-field="fee_product.description_sale" />: <span
+                    t-esc="fee_product.list_price"
+                    t-options="{'widget': 'monetary', 'display_currency': o.sale_id.currency_id}"
+                />
+                </p>
+            </div>
+        </xpath>
+    </template>
+</odoo>
