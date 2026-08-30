@@ -1,0 +1,1 @@
+This module extends the functionality of Stock, Delivery and Fleet to allow you to assign default vehicle in delivery Carriers and Transfers and propagate them to the Batch. Also allow propagate drivers to the Batch and lets auto-batch by vehicle and/or driver.
