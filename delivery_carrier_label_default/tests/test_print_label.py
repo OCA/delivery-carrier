@@ -26,6 +26,8 @@ class TestPrintLabel(BaseCommon, HTMLRenderMixin):
         Carrier = cls.env["delivery.carrier"]
         ShippingLabel = cls.env["shipping.label"]
 
+        cls.test_partner = cls.env["res.partner"].create({"name": "Test Partner"})
+
         cls.stock_location = cls.env.ref("stock.stock_location_stock")
         cls.customer_location = cls.env.ref("stock.stock_location_customers")
 
@@ -45,7 +47,7 @@ class TestPrintLabel(BaseCommon, HTMLRenderMixin):
 
         cls.picking = cls.Picking.create(
             {
-                "partner_id": cls.env.ref("base.res_partner_12").id,
+                "partner_id": cls.test_partner.id,
                 "picking_type_id": cls.env.ref("stock.picking_type_out").id,
                 "location_id": cls.stock_location.id,
                 "location_dest_id": cls.customer_location.id,
@@ -57,7 +59,6 @@ class TestPrintLabel(BaseCommon, HTMLRenderMixin):
 
         cls.move1 = cls.Move.create(
             {
-                "name": "Move A",
                 "picking_id": cls.picking.id,
                 "product_id": cls.product_a.id,
                 "product_uom": cls.env.ref("uom.product_uom_unit").id,
@@ -69,7 +70,6 @@ class TestPrintLabel(BaseCommon, HTMLRenderMixin):
 
         cls.move2 = cls.Move.create(
             {
-                "name": "a second move",
                 "product_id": cls.product_b.id,
                 "product_uom_qty": 12.0,
                 "product_uom": cls.product_b.uom_id.id,
@@ -122,8 +122,8 @@ class TestPrintLabel(BaseCommon, HTMLRenderMixin):
         self.move2.move_line_ids[0].write({"quantity": 3, "picked": True})
         self.picking.action_put_in_pack()
         for ope in self.picking.move_line_ids:
-            if ope.quantity == 0:
-                ope.quantity = 9
+            if not ope.result_package_id:
+                ope.write({"quantity": 9, "picked": True})
                 break
         self.picking.action_put_in_pack()
         self.picking.send_to_shipper()
