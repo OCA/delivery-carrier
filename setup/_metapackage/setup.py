@@ -45,6 +45,7 @@ setuptools.setup(
         'odoo14-addon-delivery_purchase_label',
         'odoo14-addon-delivery_roulier',
         'odoo14-addon-delivery_roulier_chronopost_fr',
+        'odoo14-addon-delivery_roulier_dpd_fr',
         'odoo14-addon-delivery_roulier_laposte_fr',
         'odoo14-addon-delivery_roulier_option',
         'odoo14-addon-delivery_schenker',
