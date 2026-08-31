@@ -1,7 +1,7 @@
 # Copyright 2021 Manuel Regidor <manuel.regidor@sygel.es>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import _, fields, models
+from odoo import fields, models
 
 
 class DeliveryCarrier(models.Model):
@@ -30,7 +30,7 @@ class DeliveryCarrier(models.Model):
                 )
                 >= self.amount
             ):
-                res["warning_message"] = _(
+                res["warning_message"] = self.env._(
                     "The shipping is free since the order untaxed amount exceeds %.2f.",
                     self.amount,
                 )

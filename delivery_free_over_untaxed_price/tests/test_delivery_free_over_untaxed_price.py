@@ -27,11 +27,18 @@ class TestDeliveryFreeOverUntaxedPrice(DeliveryCommon):
             amount=100,
             use_amount_untaxed=False,
         )
+
+        tax_group = cls.env["account.tax.group"].create(
+            {
+                "name": "Test Tax Group",
+            }
+        )
         cls.tax = cls.env["account.tax"].create(
             {
                 "name": "Test tax",
                 "amount_type": "percent",
                 "amount": 10,
+                "tax_group_id": tax_group.id,
             }
         )
         cls.sale1 = cls.env["sale.order"].create(
@@ -44,7 +51,7 @@ class TestDeliveryFreeOverUntaxedPrice(DeliveryCommon):
                         {
                             "product_id": cls.product.id,
                             "price_unit": 99.99,
-                            "tax_id": [(6, 0, [cls.tax.id])],
+                            "tax_ids": [(6, 0, [cls.tax.id])],
                         }
                     )
                 ],
