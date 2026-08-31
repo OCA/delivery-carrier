@@ -1,10 +1,10 @@
 # Copyright 2021 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.tests import TransactionCase
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class TestDeliveryCarrier(TransactionCase):
+class TestDeliveryCarrier(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -21,7 +21,7 @@ class TestDeliveryCarrier(TransactionCase):
         cls.carrier = cls.env["delivery.carrier"].create(
             {
                 "name": "Test Carrier",
-                "product_id": cls.delivery_product.id,  # Ensure product_id is set
+                "product_id": cls.delivery_product.id,
                 "delivery_type": "fixed",
             }
         )
