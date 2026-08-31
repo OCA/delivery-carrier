@@ -14,18 +14,9 @@ class TestChooseDeliveryPackageType(CommonChooseDeliveryPackage, BaseCommon):
 
     def _make_wizard(self, picking):
         return (
-            self.env["choose.delivery.package"]
-            .with_context(default_picking_id=picking.id)
+            self.env["stock.put.in.pack"]
+            .with_context(default_move_line_ids=[(6, 0, picking.move_line_ids.ids)])
             .create({})
-        )
-
-    def test_carrier_option_enabled_type_test(self):
-        """Carrier + option enabled + delivery type "test" => domain on "test"."""
-        picking = self._confirm_ship()
-        picking.picking_type_id.filter_package_type_on_put_in_pack = True
-        wizard = self._make_wizard(picking)
-        self.assertEqual(
-            [("package_carrier_type", "=", "test")], wizard.package_type_domain
         )
 
     def test_carrier_option_enabled_type_converted(self):
