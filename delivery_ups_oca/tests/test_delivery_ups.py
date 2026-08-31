@@ -733,6 +733,62 @@ class TestDeliveryUps(TestDeliveryUpsBase):
         mock_requests.post.assert_called_once()
         self.assertEqual(mock_requests.post.call_args.kwargs["timeout"], 10)
 
+    def test_ups_get_new_token_success(self):
+        self.carrier.ups_client_id = "test_id"
+        self.carrier.ups_client_secret = "test_secret"
+
+        ups_request = UpsRequest(self.carrier)
+
+        mock_response = mock.Mock()
+        mock_response.status_code = 200
+        mock_response.json.return_value = {
+            "access_token": "abc123",
+            "expires_in": 3600,
+        }
+
+        with mock.patch.object(
+            ups_request, "_send_request", return_value=mock_response
+        ):
+            before = datetime.now()
+            ups_request._get_new_token()
+
+        self.assertEqual(ups_request.token, "abc123")
+        self.assertEqual(self.carrier.ups_token, "abc123")
+        self.assertGreater(self.carrier.ups_token_expiration_date, before)
+
+    def test_ups_process_reply_401_retry(self):
+        future_date = datetime.now() + timedelta(hours=1)
+        self.carrier.ups_token = "valid_token_123"
+        self.carrier.ups_token_expiration_date = future_date
+
+        ups_request = UpsRequest(self.carrier)
+
+        unauthorized_response = mock.Mock()
+        unauthorized_response.status_code = 401
+
+        success_response = mock.Mock()
+        success_response.status_code = 200
+        success_response.json.return_value = {"success": True, "data": "test_data"}
+
+        with (
+            mock.patch.object(
+                ups_request,
+                "_send_request",
+                side_effect=[unauthorized_response, success_response],
+            ) as mock_send_request,
+            mock.patch.object(ups_request, "_get_new_token") as mock_get_new_token,
+            self._patch_carrier_log_xml(),
+        ):
+            result = ups_request._process_reply(
+                url="https://api.test.com/endpoint",
+                json={"key": "value"},
+                method="post",
+            )
+
+        self.assertEqual(result, {"success": True, "data": "test_data"})
+        self.assertEqual(mock_send_request.call_count, 2)
+        mock_get_new_token.assert_called_once()
+
     def test_ups_prepare_create_shipping_with_packages(self):
         """Test _prepare_create_shipping with packages from picking"""
         # Enable use packages from picking
