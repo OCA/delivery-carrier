@@ -10,7 +10,7 @@ from io import BytesIO
 
 from PIL import Image
 
-from odoo import fields, models
+from odoo import _, fields, models
 from odoo.exceptions import UserError
 
 from .ups_request import UpsRequest
@@ -112,6 +112,39 @@ class DeliveryCarrier(models.Model):
         string="Negotiated Rates",
         help="If checked, UPS will use the account's negotiated rates for shipping.",
     )
+    ups_global_checkout_country_group_ids = fields.Many2many(
+        comodel_name="res.country.group",
+        relation="delivery_carrier_ups_gc_country_group_rel",
+        column1="carrier_id",
+        column2="country_group_id",
+        string="UPS Global Checkout Countries",
+        help="Destination country groups eligible for UPS Global Checkout landed "
+        "cost (duties and taxes). If left empty, Global Checkout is disabled for "
+        "this carrier. Only configure countries that UPS has enabled for your "
+        "account during onboarding.",
+    )
+    ups_landed_cost_product_id = fields.Many2one(
+        comodel_name="product.product",
+        string="UPS Tariffs/Duties Product",
+        help="Product used for the separate sale order line that carries the UPS "
+        "Global Checkout landed cost (duties and taxes). If left empty, no landed "
+        "cost line is added to the order (the quote is still generated and stored). "
+        "Configure this product with the appropriate taxes for imported duties.",
+    )
+
+    def _ups_is_global_checkout_eligible(self, partner):
+        """Return True if UPS Global Checkout landed cost should be requested for
+        the given destination partner.
+
+        The feature is gated purely on a configured destination country group:
+        if no group is set, Global Checkout is disabled; otherwise the partner
+        destination country must belong to one of the configured groups.
+        """
+        self.ensure_one()
+        groups = self.ups_global_checkout_country_group_ids
+        if not groups:
+            return False
+        return partner.country_id in groups.mapped("country_ids")
 
     def _ups_get_response_price(self, total_charges, currency, company):
         """We need to convert the price if the currency is different."""
@@ -134,6 +167,10 @@ class DeliveryCarrier(models.Model):
             price = self._ups_get_response_price(
                 response, order.currency_id, order.company_id
             )
+            # The landed cost (duties/taxes) is NOT added to the shipping price.
+            # It is quoted and stored on the order so it can be shown as a
+            # separate order line (see sale.order._create_delivery_line).
+            self._ups_refresh_landed_cost_quote(ups_request, order, price)
             return {
                 "success": True,
                 "price": price,
@@ -150,6 +187,49 @@ class DeliveryCarrier(models.Model):
                 "error_message": str(e),
                 "warning_message": False,
             }
+
+    def _ups_refresh_landed_cost_quote(self, ups_request, order, transportation_cost):
+        """Request a UPS Global Checkout landed cost quote and persist it on the
+        order.
+
+        The landed cost (duties/taxes/fees) and the Quote ID are stored on the
+        order so a separate order line can be created for them; this method does
+        not change the shipping price. Failures are handled like the Rate API:
+        business errors are raised as ``UserError`` and surfaced to the user,
+        while network errors propagate.
+        """
+        if not self._ups_is_global_checkout_eligible(order.partner_shipping_id):
+            # Feature disabled for this destination: clear any stale quote.
+            if order.ups_landed_cost_quote_identifier or order.ups_landed_cost_amount:
+                order.write(
+                    {
+                        "ups_landed_cost_quote_identifier": False,
+                        "ups_landed_cost_amount": 0.0,
+                    }
+                )
+            return
+        quote = ups_request.landed_cost_quote(order, transportation_cost)
+        amount = self._ups_get_response_price(
+            {"MonetaryValue": quote["amount"], "CurrencyCode": quote["currency"]},
+            order.currency_id,
+            order.company_id,
+        )
+        order.write(
+            {
+                "ups_landed_cost_quote_identifier": quote["quote_id"],
+                "ups_landed_cost_amount": amount,
+            }
+        )
+        order.message_post(
+            body=_(
+                "UPS Global Checkout quote %(quote)s created: landed cost "
+                "%(amount)s %(currency)s (guarantee code: %(guarantee)s).",
+                quote=quote["quote_id"],
+                amount=quote["amount"],
+                currency=quote["currency"],
+                guarantee=quote.get("guarantee_code") or "-",
+            )
+        )
 
     def ups_create_shipping(self, picking):
         """Send packages of the picking to UPS

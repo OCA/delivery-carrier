@@ -19,6 +19,12 @@ License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
                     invisible="not carrier_tracking_ref or delivery_type != 'ups' or state != 'done'"
                 />
             </xpath>
+            <xpath expr="//field[@name='carrier_tracking_ref']" position="after">
+                <field
+                    name="ups_landed_cost_quote_identifier"
+                    invisible="delivery_type != 'ups' or not ups_landed_cost_quote_identifier"
+                />
+            </xpath>
         </field>
     </record>
 </odoo>

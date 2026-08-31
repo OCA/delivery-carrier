@@ -77,6 +77,19 @@ License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
                                 required="delivery_type == 'ups' and ups_cash_on_delivery"
                             />
                         </group>
+                        <group
+                            string="Global Checkout (Landed Cost)"
+                            help="Configure destination countries to enable UPS Global Checkout landed cost (duties and taxes). Leave empty to disable."
+                        >
+                            <field
+                                name="ups_global_checkout_country_group_ids"
+                                widget="many2many_tags"
+                            />
+                            <field
+                                name="ups_landed_cost_product_id"
+                                invisible="not ups_global_checkout_country_group_ids"
+                            />
+                        </group>
                     </group>
                 </page>
             </xpath>

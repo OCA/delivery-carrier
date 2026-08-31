@@ -10,3 +10,9 @@ ship:
   in UPS.
 - If you have "Tracking state update sync" checked in the shipping
   method, a periodical state check will be done querying UPS services.
+
+When UPS Global Checkout is configured and the destination is eligible:
+
+- On rating an order (from the sales order or the eCommerce checkout), a
+  separate "UPS Duties & Taxes (Global Checkout)" line is added below the
+  shipping line.
