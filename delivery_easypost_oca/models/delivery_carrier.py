@@ -2,8 +2,9 @@ from datetime import datetime
 
 from markupsafe import Markup
 
-from odoo import _, fields, models
+from odoo import fields, models
 from odoo.exceptions import UserError
+from odoo.fields import Domain
 from odoo.tools.float_utils import float_round
 
 from ..utils.pdf import assemble_pdf
@@ -63,7 +64,7 @@ class DeliveryCarrier(models.Model):
         )
 
         if not lowest_rate:
-            raise UserError(_("No rate found for this shipping."))
+            raise UserError(self.env._("No rate found for this shipping."))
 
         # Update price with the order currency
         rate = lowest_rate.get("rate", 0.0)
@@ -157,7 +158,7 @@ class DeliveryCarrier(models.Model):
         return picking.easypost_oca_tracking_url
 
     def easypost_oca_cancel_shipment(self, pickings):
-        raise UserError(_("You can't cancel Easypost shipping."))
+        raise UserError(self.env._("You can't cancel Easypost shipping."))
 
     def _get_easypost_carrier_services(self, picking=None):
         return {}
@@ -255,7 +256,7 @@ class DeliveryCarrier(models.Model):
                     weight = sum(
                         ml.product_id.weight
                         * ml.product_uom_id._compute_quantity(
-                            ml.product_qty,
+                            ml.quantity_product_uom,
                             ml.product_id.uom_id,
                             rounding_method="HALF-UP",
                         )
@@ -344,7 +345,7 @@ class DeliveryCarrier(models.Model):
         currency_id = order.currency_id if order else self.env.company.currency_id
         if currency_id.name != currency:
             quote_currency = self.env["res.currency"].search(
-                [("name", "=", currency)], limit=1
+                Domain([("name", "=", currency)]), limit=1
             )
             price = quote_currency._convert(
                 price,

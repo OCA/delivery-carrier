@@ -10,6 +10,7 @@ class EasypostTestBaseCase(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
 
         # Set company currency to USD to match EasyPost rates
         usd_currency = cls.env.ref("base.USD")
@@ -62,7 +63,7 @@ class EasypostTestBaseCase(TransactionCase):
             {
                 "name": "Easypost OCA Delivery",
                 "type": "service",
-                "categ_id": cls.env.ref("product.product_category_all").id,
+                "categ_id": cls.env.ref("product.product_category_services").id,
             }
         )
 
@@ -109,12 +110,12 @@ class EasypostTestBaseCase(TransactionCase):
         wiz_action = picking.action_put_in_pack()
         self.assertEqual(
             wiz_action["res_model"],
-            "choose.delivery.package",
+            "stock.put.in.pack",
             "Wrong wizard returned",
         )
         wiz = (
             self.env[wiz_action["res_model"]]
             .with_context(**wiz_action["context"])
-            .create({"delivery_package_type_id": self.default_packaging.id})
+            .create({"package_type_id": self.default_packaging.id})
         )
         wiz.action_put_in_pack()

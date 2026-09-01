@@ -1,9 +1,9 @@
 from unittest.mock import Mock, patch
 
 from odoo.exceptions import UserError
+from odoo.tools import mute_logger
 
-from odoo.addons.delivery_easypost_oca.models.easypost_request import EasypostRequest
-
+from ..models.easypost_request import EasypostRequest, EasyPostShipment
 from .common import EasypostTestBaseCase
 
 
@@ -57,25 +57,29 @@ class TestEasypostRequest(EasypostTestBaseCase):
             parcel=parcel,
         )
 
-    # @patch("easypost.Shipment")
-    # def test_create_shipment_error(self, mock_shipment):
-    #     # Simulate API error
-    #     mock_shipment.create.side_effect = Exception("API Error")
+    @patch("easypost.Shipment")
+    @mute_logger(
+        "odoo.addons.delivery_easypost_oca.models.easypost_request",
+        "odoo.tools.translate",
+    )
+    def test_create_shipment_error(self, mock_shipment):
+        # Simulate API error
+        mock_shipment.create.side_effect = Exception("API Error")
 
-    #     # Test error handling
-    #     shipment_data = {
-    #         "from_address": {},
-    #         "to_address": {},
-    #         "parcel": {},
-    #     }
-    #     # Verify that error is logged and UserError is raised
-    #     with self.assertLogs(
-    #         "odoo.addons.delivery_easypost_oca.models.easypost_request", level="ERROR"
-    #     ) as log:
-    #         with self.assertRaises(UserError):
-    #             self.easypost_request.create_shipment(shipment_data)
-    #         # Verify error was logged correctly
-    #         self.assertIn("Failed to create shipment: API Error", log.output[0])
+        # Test error handling
+        shipment_data = {
+            "from_address": {},
+            "to_address": {},
+            "parcel": {},
+        }
+        # Verify that error is logged and UserError is raised
+        with self.assertLogs(
+            "odoo.addons.delivery_easypost_oca.models.easypost_request", level="ERROR"
+        ) as log:
+            with self.assertRaises(UserError):
+                self.easypost_request.create_shipment(shipment_data)
+            # Verify error was logged correctly
+            self.assertIn("Failed to create shipment: API Error", log.output[0])
 
     @patch("easypost.Shipment")
     def test_buy_shipment(self, mock_shipment):
@@ -137,15 +141,19 @@ class TestEasypostRequest(EasypostTestBaseCase):
         expected_address["street2"] = address["street1"]
         mock_end_shipper.create.assert_called_once_with(**expected_address)
 
-    # @patch("easypost.EndShipper")
-    # def test_create_end_shipper_error(self, mock_end_shipper):
-    #     # Simulate API error
-    #     mock_end_shipper.create.side_effect = Exception("API Error")
+    @patch("easypost.EndShipper")
+    @mute_logger(
+        "odoo.addons.delivery_easypost_oca.models.easypost_request",
+        "odoo.tools.translate",
+    )
+    def test_create_end_shipper_error(self, mock_end_shipper):
+        # Simulate API error
+        mock_end_shipper.create.side_effect = Exception("API Error")
 
-    #     # Test error handling
-    #     address = {"street1": "123 Main St"}
-    #     with self.assertRaises(UserError):
-    #         self.easypost_request.create_end_shipper(address)
+        # Test error handling
+        address = {"street1": "123 Main St"}
+        with self.assertRaises(UserError):
+            self.easypost_request.create_end_shipper(address)
 
     @patch("easypost.EndShipper")
     def test_get_end_shipper_id_usps(self, mock_end_shipper):
@@ -264,6 +272,10 @@ class TestEasypostRequest(EasypostTestBaseCase):
         mock_batch.create.assert_called_once_with(shipments=shipments)
 
     @patch("easypost.batch")
+    @mute_logger(
+        "odoo.addons.delivery_easypost_oca.models.easypost_request",
+        "odoo.tools.translate",
+    )
     def test_create_batch_error(self, mock_batch):
         # Simulate API error
         mock_batch.create.side_effect = Exception("Batch creation failed")
@@ -289,6 +301,10 @@ class TestEasypostRequest(EasypostTestBaseCase):
         mock_batch.Buy.assert_called_once_with(id="batch_123")
 
     @patch("easypost.batch")
+    @mute_logger(
+        "odoo.addons.delivery_easypost_oca.models.easypost_request",
+        "odoo.tools.translate",
+    )
     def test_buy_batch_error(self, mock_batch):
         # Simulate API error
         mock_batch.Buy.side_effect = Exception("Batch purchase failed")
@@ -322,6 +338,10 @@ class TestEasypostRequest(EasypostTestBaseCase):
         self.assertEqual(result[1].id, "shp_2")
 
     @patch("easypost.Shipment")
+    @mute_logger(
+        "odoo.addons.delivery_easypost_oca.models.easypost_request",
+        "odoo.tools.translate",
+    )
     def test_create_multiples_shipments_with_error(self, mock_shipment):
         # First succeeds, second fails
         mock_response1 = Mock()
@@ -363,14 +383,18 @@ class TestEasypostRequest(EasypostTestBaseCase):
         self.assertEqual(result.tracking_code, "TRACK123")
         mock_shipment.retrieve.assert_called_once_with(id="shp_123")
 
-    # @patch("easypost.Shipment")
-    # def test_retrieve_shipment_error(self, mock_shipment):
-    #     # Simulate API error
-    #     mock_shipment.retrieve.side_effect = Exception("Shipment not found")
+    @patch("easypost.Shipment")
+    @mute_logger(
+        "odoo.addons.delivery_easypost_oca.models.easypost_request",
+        "odoo.tools.translate",
+    )
+    def test_retrieve_shipment_error(self, mock_shipment):
+        # Simulate API error
+        mock_shipment.retrieve.side_effect = Exception("Shipment not found")
 
-    #     # Execute test
-    #     with self.assertRaises(UserError):
-    #         self.easypost_request.retrieve_shipment("shp_invalid")
+        # Execute test
+        with self.assertRaises(UserError):
+            self.easypost_request.retrieve_shipment("shp_invalid")
 
     @patch("easypost.beta.CarrierMetadata")
     def test_retrieve_carrier_metadata(self, mock_metadata):
@@ -386,16 +410,20 @@ class TestEasypostRequest(EasypostTestBaseCase):
         self.assertEqual(len(result.carriers), 2)
         mock_metadata.retrieve_carrier_metadata.assert_called_once()
 
-    # @patch("easypost.beta.CarrierMetadata")
-    # def test_retrieve_carrier_metadata_error(self, mock_metadata):
-    #     # Simulate API error
-    #     mock_metadata.retrieve_carrier_metadata.side_effect = Exception(
-    #         "Metadata retrieval failed"
-    #     )
+    @patch("easypost.beta.CarrierMetadata")
+    @mute_logger(
+        "odoo.addons.delivery_easypost_oca.models.easypost_request",
+        "odoo.tools.translate",
+    )
+    def test_retrieve_carrier_metadata_error(self, mock_metadata):
+        # Simulate API error
+        mock_metadata.retrieve_carrier_metadata.side_effect = Exception(
+            "Metadata retrieval failed"
+        )
 
-    #     # Execute test
-    #     with self.assertRaises(UserError):
-    #         self.easypost_request.retrieve_carrier_metadata()
+        # Execute test
+        with self.assertRaises(UserError):
+            self.easypost_request.retrieve_carrier_metadata()
 
     @patch("easypost.CarrierAccount")
     def test_retrieve_all_carrier_accounts(self, mock_carrier_account):
@@ -415,13 +443,89 @@ class TestEasypostRequest(EasypostTestBaseCase):
         self.assertEqual(result[1]["id"], "ca_2")
         mock_carrier_account.all.assert_called_once()
 
-    # @patch("easypost.CarrierAccount")
-    # def test_retrieve_all_carrier_accounts_error(self, mock_carrier_account):
-    #     # Simulate API error
-    #     mock_carrier_account.all.side_effect = Exception(
-    #         "Failed to retrieve accounts"
-    #     )
+    @patch("easypost.CarrierAccount")
+    @mute_logger(
+        "odoo.addons.delivery_easypost_oca.models.easypost_request",
+        "odoo.tools.translate",
+    )
+    def test_retrieve_all_carrier_accounts_error(self, mock_carrier_account):
+        # Simulate API error
+        mock_carrier_account.all.side_effect = Exception("Failed to retrieve accounts")
 
-    #     # Execute test
-    #     with self.assertRaises(UserError):
-    #         self.easypost_request.retrieve_all_carrier_accounts()
+        # Execute test
+        with self.assertRaises(UserError):
+            self.easypost_request.retrieve_all_carrier_accounts()
+
+    @patch("requests.get")
+    @mute_logger(
+        "odoo.addons.delivery_easypost_oca.models.easypost_request",
+        "odoo.tools.translate",
+    )
+    def test_get_label_content_error(self, mock_get):
+        import requests
+
+        mock_get.side_effect = requests.RequestException("Network Error")
+        shipment = EasyPostShipment(
+            "shp_1",
+            "trk_1",
+            "http://label",
+            "http://public",
+            10.0,
+            "USD",
+            "car_1",
+            "USPS",
+            "Priority",
+            env=self.env,
+        )
+        with self.assertRaises(UserError):
+            shipment.get_label_content()
+
+    @patch("easypost.Shipment.create")
+    @mute_logger(
+        "odoo.addons.delivery_easypost_oca.models.easypost_request",
+        "odoo.tools.translate",
+    )
+    def test_calculate_shipping_rate_error(self, mock_create):
+        mock_create.side_effect = Exception("Rate Error")
+        with self.assertRaises(UserError):
+            self.easypost_request.calculate_shipping_rate({}, {}, {})
+
+    @mute_logger(
+        "odoo.addons.delivery_easypost_oca.models.easypost_request",
+        "odoo.tools.translate",
+    )
+    def test_buy_shipment_error(self):
+        mock_shipment = Mock()
+        mock_shipment.lowest_rate.return_value = {"carrier": "FedEx"}
+        mock_shipment.buy.side_effect = Exception("Buy Error")
+        with self.assertRaises(UserError):
+            self.easypost_request.buy_shipment(mock_shipment)
+
+    def test_get_api_key_prod(self):
+        # hit line 60 in easypost_request.py
+        self.carrier.prod_environment = True
+        self.carrier.easypost_oca_production_api_key = "prod_key_123"
+        self.assertEqual(self.easypost_request._get_api_key(), "prod_key_123")
+        self.carrier.prod_environment = False
+
+    @patch("easypost.Shipment.create")
+    def test_calculate_shipping_rate_success(self, mock_create):
+        # hit line 102 in easypost_request.py
+        mock_shipment = Mock()
+        mock_shipment.lowest_rate.return_value = {"rate": 10.0}
+        mock_create.return_value = mock_shipment
+        rate = self.easypost_request.calculate_shipping_rate({}, {}, {})
+        self.assertEqual(rate, {"rate": 10.0})
+
+    def test_buy_shipments_plural(self):
+        # hit line 149 in easypost_request.py
+        mock_shipment = Mock()
+        mock_shipment.lowest_rate.return_value = {"carrier": "FedEx"}
+        # Avoid buy error
+        mock_shipment.selected_rate = Mock()
+        mock_shipment.selected_rate.rate = "10.0"
+        mock_shipment.tracker = Mock()
+        mock_shipment.tracker.tracking_code = "TRACK"
+        mock_shipment.buy.return_value = mock_shipment
+        res = self.easypost_request.buy_shipments([mock_shipment])
+        self.assertEqual(len(res), 1)

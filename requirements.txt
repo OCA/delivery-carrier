@@ -1,2 +1,3 @@
 # generated from manifests external_dependencies
+easypost==7.15.0
 unidecode

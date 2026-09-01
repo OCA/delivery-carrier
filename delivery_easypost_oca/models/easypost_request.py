@@ -3,7 +3,6 @@ from concurrent import futures
 
 import requests
 
-from odoo import _
 from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
@@ -26,6 +25,7 @@ class EasyPostShipment:
         carrier_id,
         carrier_name,
         carrier_service,
+        env=None,
     ):
         self.shipment_id = shipment_id
         self.tracking_code = tracking_code
@@ -36,14 +36,15 @@ class EasyPostShipment:
         self.carrier_id = carrier_id
         self.carrier_name = carrier_name
         self.carrier_service = carrier_service
+        self.env = env
 
     def get_label_content(self):
         try:
             response = requests.get(self.label_url, timeout=30)
             response.raise_for_status()  # Raise exception for HTTP errors
         except requests.RequestException as e:
-            _logger.error(_("Failed to retrieve label content: %s"), e)
-            raise UserError(_("Failed to retrieve label content.")) from e
+            _logger.error("Failed to retrieve label content: %s", e)
+            raise UserError(self.env._("Failed to retrieve label content.")) from e
         return response.content
 
 
@@ -171,6 +172,7 @@ class EasypostRequest:
             carrier_id=bought_shipment.selected_rate.carrier_account_id,
             carrier_name=bought_shipment.selected_rate.carrier,
             carrier_service=bought_shipment.selected_rate.service,
+            env=self.carrier.env,
         )
 
     def create_batch(self, shipments: list):

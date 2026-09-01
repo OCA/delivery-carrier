@@ -1,6 +1,6 @@
 {
     "name": "Easypost Shipping OCA",
-    "version": "18.0.1.0.0",
+    "version": "19.0.1.0.0",
     "summary": """ OCA Delivery Easypost """,
     "author": "Binhex, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/delivery-carrier",

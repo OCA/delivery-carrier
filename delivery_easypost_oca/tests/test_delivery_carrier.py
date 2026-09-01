@@ -375,3 +375,185 @@ class TestDeliveryCarrier(EasypostTestBaseCase):
 
         # Verify mock was called
         mock_create_shipment.assert_called()
+
+    def test_cancel_shipment(self):
+        with self.assertRaises(UserError):
+            self.carrier.easypost_oca_cancel_shipment(self.env["stock.picking"])
+
+    def test_get_tracking_link(self):
+        picking = self.env["stock.picking"].new(
+            {"easypost_oca_tracking_url": "http://track.me"}
+        )
+        self.assertEqual(
+            self.carrier.easypost_oca_get_tracking_link(picking), "http://track.me"
+        )
+
+    def test_convert_weight_zero(self):
+        self.assertEqual(self.carrier._easypost_oca_convert_weight(0.0), 0.0)
+
+    @patch.object(EasypostRequest, "calculate_shipping_rate")
+    def test_no_rate_found(self, mock_calc_rate):
+        mock_calc_rate.return_value = None
+        order = self._create_sale_order(1)
+        with self.assertRaises(UserError):
+            self.carrier.easypost_oca_rate_shipment(order)
+
+    @patch.object(EasypostRequest, "calculate_shipping_rate")
+    def test_rate_shipment_different_currency(self, mock_calc_rate):
+        mock_rate = create_mock_rate(rate="10.00", carrier="USPS", service="Priority")
+        mock_rate.currency = "EUR"  # Test foreign currency
+        mock_calc_rate.return_value = mock_rate
+
+        # Ensure EUR exists and is active
+        eur = self.env.ref("base.EUR")
+        eur.active = True
+
+        order = self._create_sale_order(1)
+        res = self.carrier.easypost_oca_rate_shipment(order)
+        self.assertTrue(res["success"])
+
+    def test_prepare_parcel_dimensions(self):
+        self.default_packaging.write(
+            {
+                "width": 10,
+                "height": 10,
+                "packaging_length": 10,
+                "shipper_package_code": "BOX01",
+            }
+        )
+        parcel = self.carrier._prepare_parcel(
+            package=self.default_packaging, weight=5.0
+        )
+        self.assertEqual(parcel["width"], 10)
+        self.assertEqual(parcel["height"], 10)
+        self.assertEqual(parcel["length"], 10)
+        self.assertEqual(parcel["predefined_package"], "BOX01")
+
+    def test_batch_mode_shipment_info(self):
+        mock_bought1 = EasyPostShipment(
+            shipment_id="shp_1",
+            tracking_code="T1",
+            label_url="http://label",
+            public_url="http://public",
+            rate=10.0,
+            currency="USD",
+            carrier_id="ca_1",
+            carrier_name="USPS",
+            carrier_service="Priority",
+        )
+        mock_bought2 = EasyPostShipment(
+            shipment_id="shp_2",
+            tracking_code="T2",
+            label_url="http://label",
+            public_url="http://public",
+            rate=20.0,
+            currency="USD",
+            carrier_id="ca_2",
+            carrier_name="USPS",
+            carrier_service="Priority",
+        )
+
+        # Manually mock selected_rate for batch_mode=True logic
+        mock_bought1.selected_rate = {"rate": 10.0, "currency": "USD"}
+        mock_bought1.tracker = {"tracking_code": "T1"}
+        mock_bought2.selected_rate = {"rate": 20.0, "currency": "USD"}
+        mock_bought2.tracker = {"tracking_code": "T2"}
+
+        price, track = self.carrier._get_shipment_info(
+            [mock_bought1, mock_bought2], None, batch_mode=True
+        )
+        self.assertEqual(price, 30.0)
+        self.assertEqual(track, "T1, T2")
+
+    def test_contact_files_pdf(self):
+        # valid pdf to test assemble_pdf
+        import base64
+
+        b64_pdf = (
+            "JVBERi0xLjMKMSAwIG9iago8PAovVHlwZSAvUGFnZXMKL0NvdW50IDEKL0tpZHMgWyAzID"
+            "AgUiBdCj4+CmVuZG9iagoyIDAgb2JqCjw8Ci9Qcm9kdWNlciAoUHlQREYyKQo+PgplbmRv"
+            "YmoKMyAwIG9iago8PAovVHlwZSAvUGFnZQovUGFyZW50IDEgMCBSCi9SZXNvdXJjZXMgPD"
+            "wKPj4KL01lZGlhQm94IFsgMCAwIDEwMCAxMDAgXQo+PgplbmRvYmoKNCAwIG9iago8PAov"
+            "VHlwZSAvQ2F0YWxvZwovUGFnZXMgMSAwIFIKPj4KZW5kb2JqCnhyZWYKMCA1CjAwMDAwMD"
+            "AwMDAgNjU1MzUgZiAKMDAwMDAwMDAwOSAwMDAwMCBuIAowMDAwMDAwMDY4IDAwMDAwIG4g"
+            "CjAwMDAwMDAxMDggMDAwMDAgbiAKMDAwMDAwMDE5OCAwMDAwMCBuIAp0cmFpbGVyCjw8Ci"
+            "9TaXplIDUKL1Jvb3QgNCAwIFIKL0luZm8gMiAwIFIKPj4Kc3RhcnR4cmVmCjI0NwolJUVPR"
+            "go="
+        )
+        minimal_pdf = base64.b64decode(b64_pdf)
+        res = self.carrier._contact_files("PDF", [minimal_pdf, minimal_pdf, None])
+        self.assertTrue(res.startswith(b"%PDF"))
+
+    def test_empty_pdf_assembly(self):
+        # tests assemble_pdf with empty list (line 16 in utils/pdf.py)
+        res = self.carrier._contact_files("PDF", [])
+        self.assertEqual(res, b"")
+
+    def test_single_pdf_assembly(self):
+        # tests assemble_pdf with single element (line 18 in utils/pdf.py)
+        res = self.carrier._contact_files("PDF", [b"dummy_pdf"])
+        self.assertEqual(res, b"dummy_pdf")
+
+    def test_get_delivery_type_coverage(self):
+        self.carrier.delivery_type = "easypost_oca"
+        res = self.carrier._get_delivery_type()
+        self.assertEqual(res, "easypost_oca")
+
+    @patch(
+        "odoo.addons.delivery_easypost_oca.models.delivery_carrier.DeliveryCarrier.easypost_oca_rate_shipment"
+    )
+    def test_wizard_get_delivery_rate(self, mock_rate_shipment):
+        # hit lines 16-25 in wizard/choose_delivery_carrier.py
+        mock_rate_shipment.return_value = {
+            "success": True,
+            "easypost_oca_carrier_name": "USPS",
+            "easypost_oca_shipment_id": "shp_1",
+            "easypost_oca_rate_id": "rate_1",
+            "price": 10.0,
+        }
+        order = self._create_sale_order()
+        wizard = self.env["choose.delivery.carrier"].create(
+            {
+                "order_id": order.id,
+                "carrier_id": self.carrier.id,
+            }
+        )
+        wizard._get_delivery_rate()
+        self.assertEqual(wizard.easypost_oca_carrier_name, "USPS")
+
+    def test_contact_files_other(self):
+        # hit line 443 in delivery_carrier.py
+        res = self.carrier._contact_files("PNG", [b"file1", b"file2"])
+        self.assertEqual(res, [b"file1", b"file2"])
+
+    def test_prepare_incoming_shipments(self):
+        # hit line 209 and 255 in delivery_carrier.py
+        Picking = self.env["stock.picking"]
+        picking = Picking.create(
+            {
+                "partner_id": self.partner.id,
+                "picking_type_id": self.env.ref("stock.picking_type_in").id,
+                "location_id": self.env.ref("stock.stock_location_suppliers").id,
+                "location_dest_id": self.env.ref("stock.stock_location_stock").id,
+            }
+        )
+        self.env["stock.move"].create(
+            {
+                "picking_id": picking.id,
+                "product_id": self.product.id,
+                "product_uom_qty": 1.0,
+                "product_uom": self.product.uom_id.id,
+                "location_id": picking.location_id.id,
+                "location_dest_id": picking.location_dest_id.id,
+            }
+        )
+        picking.action_confirm()
+        picking.move_ids[0].quantity = 1.0
+        # No package
+        res = self.carrier._prepare_shipments(picking)
+        self.assertTrue(len(res) > 0)
+
+        # With package
+        picking.action_put_in_pack()
+        res_pack = self.carrier._prepare_shipments(picking)
+        self.assertTrue(len(res_pack) > 0)

@@ -12,7 +12,7 @@ class ChooseDeliveryCarrier(models.TransientModel):
     easypost_oca_shipment_id = fields.Char()
     easypost_oca_rate_id = fields.Char()
 
-    def _get_shipment_rate(self):
+    def _get_delivery_rate(self):
         vals = self.carrier_id.rate_shipment(self.order_id)
         if vals.get("success"):
             self.write(
@@ -22,7 +22,7 @@ class ChooseDeliveryCarrier(models.TransientModel):
                     "easypost_oca_rate_id": vals.get("easypost_oca_rate_id"),
                 }
             )
-        return super()._get_shipment_rate()
+        return super()._get_delivery_rate()
 
     def button_confirm(self):
         self = self.with_context(
