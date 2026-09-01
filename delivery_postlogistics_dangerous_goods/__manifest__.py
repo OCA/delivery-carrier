@@ -3,7 +3,7 @@
 {
     "name": "Postlogistics Shipping Dangerous Goods",
     "summary": "Declare dangerous goods when generating postlogistics labels",
-    "version": "18.0.1.0.0",
+    "version": "19.0.1.0.0",
     "author": "Camptocamp,Odoo Community Association (OCA)",
     "maintainer": "Camptocamp",
     "license": "AGPL-3",

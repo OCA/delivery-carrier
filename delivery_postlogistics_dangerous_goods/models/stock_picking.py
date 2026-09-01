@@ -18,10 +18,10 @@ class StockPicking(models.Model):
             or self.mapped("move_ids.product_id")
         )
         limited_amount_lq = self.env.ref(
-            "l10n_eu_product_adr_dangerous_goods.limited_amount_1"
+            "l10n_eu_product_adr_dangerous_goods.adr_limited_amount_1"
         )
         limited_quantity_products = products.filtered(
-            lambda p: p.is_dangerous and p.limited_amount_id == limited_amount_lq
+            lambda p: p.is_dangerous and p.adr_limited_amount_id == limited_amount_lq
         )
         # Since 14.0, un numbers checks are done directly in l10n_eu_product_adr
         return [
