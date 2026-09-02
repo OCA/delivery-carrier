@@ -117,13 +117,11 @@ class DeliveryCarrier(models.Model):
         """We need to convert the price if the currency is different."""
         price = float(total_charges["MonetaryValue"])
         if total_charges["CurrencyCode"] != currency.name:
-            price = currency._convert(
-                price,
-                self.env["res.currency"].search(
-                    [("name", "=", total_charges["CurrencyCode"])]
-                ),
-                company,
-                fields.Date.today(),
+            response_currency = self.env["res.currency"].search(
+                [("name", "=", total_charges["CurrencyCode"])], limit=1
+            )
+            price = response_currency._convert(
+                price, currency, company, fields.Date.context_today(self)
             )
         return price
 
