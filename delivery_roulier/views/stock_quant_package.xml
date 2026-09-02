@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <record id="view_quant_package_form" model="ir.ui.view">
-        <field name="model">stock.quant.package</field>
-        <field name="inherit_id" ref="stock.view_quant_package_form" />
+        <field name="model">stock.package</field>
+        <field name="inherit_id" ref="stock.stock_package_view_form" />
         <field name="arch" type="xml">
             <field name="package_type_id" position="before">
                 <field name="parcel_tracking" />
@@ -21,10 +21,10 @@
         </field>
     </record>
     <record id="view_quant_package_tree" model="ir.ui.view">
-        <field name="model">stock.quant.package</field>
-        <field name="inherit_id" ref="stock.view_quant_package_tree" />
+        <field name="model">stock.package</field>
+        <field name="inherit_id" ref="stock.stock_package_view_list" />
         <field name="arch" type="xml">
-            <field name="display_name" position="after">
+            <field name="name" position="after">
                 <button
                     type="object"
                     name="open_website_url"
@@ -38,8 +38,8 @@
         </field>
     </record>
     <record id="quant_package_search_view" model="ir.ui.view">
-        <field name="model">stock.quant.package</field>
-        <field name="inherit_id" ref="stock.quant_package_search_view" />
+        <field name="model">stock.package</field>
+        <field name="inherit_id" ref="stock.stock_package_view_search" />
         <field name="arch" type="xml">
             <field name="name" position="after">
                 <field name="parcel_tracking" />

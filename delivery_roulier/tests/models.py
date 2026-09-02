@@ -13,7 +13,7 @@ class FakeDeliveryCarrier(models.Model):
 
 
 class Package(models.Model):
-    _inherit = "stock.quant.package"
+    _inherit = "stock.package"
 
     def _test_get_tracking_link(self):
         return f"http://www.test.com/{self.parcel_tracking}"

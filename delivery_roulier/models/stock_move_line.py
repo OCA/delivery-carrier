@@ -22,7 +22,7 @@ class StockMoveLine(models.Model):
             and soline.product_id == self.product_id
         ):
             price_unit_so_uom = soline.price_subtotal / soline.product_uom_qty
-            price_unit = soline.product_uom._compute_price(
+            price_unit = soline.product_uom_id._compute_price(
                 price_unit_so_uom, self.product_uom_id
             )
         else:
