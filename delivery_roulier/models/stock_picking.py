@@ -79,6 +79,7 @@ class StockPicking(models.Model):
         }
         """
         label_info = []
+
         for picking in self:
             move_line_no_pack = picking.move_line_ids.filtered(
                 lambda ml: ml.quantity > 0.0 and not ml.result_package_id
