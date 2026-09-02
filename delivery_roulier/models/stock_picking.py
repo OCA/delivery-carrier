@@ -6,7 +6,6 @@ from datetime import date, timedelta
 
 from odoo import fields, models
 from odoo.exceptions import UserError
-from odoo.tools.translate import _
 
 from ..decorator import implemented_by_carrier
 
@@ -86,12 +85,12 @@ class StockPicking(models.Model):
             )
             if move_line_no_pack:
                 raise UserError(
-                    _(
+                    self.env._(
                         "Some products have no destination package in picking %s, "
                         "please add a destination package in order to be able to "
-                        "generate the carrier label."
+                        "generate the carrier label.",
+                        picking.name,
                     )
-                    % picking.name
                 )
             label_info.append(
                 picking.move_line_ids.result_package_id._generate_labels(picking)
@@ -132,8 +131,10 @@ class StockPicking(models.Model):
         account = self._get_carrier_account()
         if not account:
             raise UserError(
-                _("No account available with name '%s' " "for this carrier")
-                % self.carrier_id.delivery_type
+                self.env._(
+                    "No account available with name '%s' for this carrier",
+                    self.carrier_id.delivery_type,
+                )
             )
         return account
 
@@ -179,7 +180,7 @@ class StockPicking(models.Model):
         # these fields could be filled only on parent
         if not address.get("email") and partner.parent_id.email:
             res["email"] = partner.parent_id.email
-        if not address.get("mobile") and partner.parent_id.mobile:
+        if not address.get("mobile") and getattr(partner.parent_id, "mobile", False):
             res["mobile"] = partner.parent_id.mobile
         return res
 
@@ -277,7 +278,7 @@ class StockPicking(models.Model):
 
         packages = self.move_line_ids.result_package_id
         if len(packages) == 0:
-            raise UserError(_("No packages found for this picking"))
+            raise UserError(self.env._("No packages found for this picking"))
         else:
             if not self._support_multi_tracking():
                 packages = packages[0]

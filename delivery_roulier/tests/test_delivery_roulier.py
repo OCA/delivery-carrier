@@ -4,8 +4,9 @@ from unittest.mock import MagicMock, patch
 from roulier import roulier
 
 from odoo.exceptions import UserError
+from odoo.orm.model_classes import add_to_registry
 
-from .common import DeliveryRoulierCommonCase
+from odoo.addons.base.tests.common import BaseCommon
 
 roulier_ret = {
     "parcels": [
@@ -24,7 +25,88 @@ roulier_ret = {
 }
 
 
-class DeliveryRoulierCase(DeliveryRoulierCommonCase):
+class DeliveryRoulierCase(BaseCommon):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
+        from .models import FakeDeliveryCarrier, Package
+
+        add_to_registry(cls.registry, FakeDeliveryCarrier)
+        add_to_registry(cls.registry, Package)
+        cls.registry._setup_models__(cls.env.cr, ["delivery.carrier", "stock.package"])
+        cls.registry.init_models(
+            cls.env.cr, ["delivery.carrier", "stock.package"], {"models_to_check": True}
+        )
+
+        cls.real_get_carriers_action_available = roulier.get_carriers_action_available
+        delivery_product = cls.env["product.product"].create(
+            {"name": "test shipping product", "type": "service"}
+        )
+        cls.account = cls.env["carrier.account"].create(
+            {
+                "name": "Test Carrier Account",
+                "delivery_type": "test",
+                "account": "test",
+                "password": "test",
+            }
+        )
+        cls.test_carrier = cls.env["delivery.carrier"].create(
+            {
+                "name": "Test Carrier",
+                "delivery_type": "test",
+                "product_id": delivery_product.id,
+                "carrier_account_id": cls.account.id,
+            }
+        )
+        partner = cls.env["res.partner"].create(
+            {
+                "name": "Carrier label test customer",
+                "country_id": cls.env.ref("base.fr").id,
+                "street": "test street",
+                "street2": "test street2",
+                "city": "test city",
+                "phone": "0000000000",
+                "email": "test@test.com",
+                "zip": "00000",
+            }
+        )
+        product = cls.env.ref(
+            "delivery_roulier.product_small", raise_if_not_found=False
+        )
+        if not product:
+            product = cls.env["product.product"].create(
+                {
+                    "name": "carrier 1.3 kg",
+                    "type": "consu",
+                    "is_storable": True,
+                    "weight": 1.3,
+                }
+            )
+        cls.order = cls.env["sale.order"].create(
+            {
+                "carrier_id": cls.test_carrier.id,
+                "partner_id": partner.id,
+                "order_line": [
+                    (0, 0, {"product_id": product.id, "product_uom_qty": 1})
+                ],
+            }
+        )
+        cls.env["stock.quant"].with_context(inventory_mode=True).create(
+            {
+                "product_id": product.id,
+                "location_id": cls.order.warehouse_id.lot_stock_id.id,
+                "inventory_quantity": 1,
+            }
+        ).action_apply_inventory()
+        cls.order.action_confirm()
+        cls.picking = cls.order.picking_ids
+
+    @classmethod
+    def tearDownClass(cls):
+        roulier.get_carriers_action_available = cls.real_get_carriers_action_available
+        super().tearDownClass()
+
     def test_roulier_no_pack(self):
         # having a pack is mandatory for roulier
         # it should fail if no pack provided.
@@ -44,11 +126,7 @@ class DeliveryRoulierCase(DeliveryRoulierCommonCase):
             mock_roulier.return_value = roulier_ret
 
             # create pack
-            move_lines = self.picking.move_line_ids.filtered(
-                lambda s: not s.result_package_id
-            )
-            if move_lines:
-                self.picking._put_in_pack(move_lines)
+            self.picking.move_line_ids._put_in_pack()
 
             self.picking.send_to_shipper()
 
@@ -77,3 +155,150 @@ class DeliveryRoulierCase(DeliveryRoulierCommonCase):
             self.assertEqual(
                 package_tracking_action["url"], "http://www.test.com/test_tracking"
             )
+
+    def test_delivery_carrier_flows(self):
+        roulier.get_carriers_action_available = MagicMock(
+            return_value={"test": ["get_label"]}
+        )
+        # Test rate_shipment fallback
+        with patch(
+            "odoo.addons.delivery.models.delivery_carrier.DeliveryCarrier.rate_shipment",
+            return_value=False,
+        ):
+            res = self.test_carrier.rate_shipment(self.order)
+            self.assertTrue(res.get("success"))
+            self.assertEqual(res.get("price"), 0.0)
+
+        # Test cancel_shipment for roulier
+        with patch.object(
+            type(self.picking), "_cancel_shipment", create=True
+        ) as m_cancel:
+            self.test_carrier.cancel_shipment(self.picking)
+            m_cancel.assert_called_once()
+
+        # Test get_tracking_link multi vs single
+        # Test get_tracking_link multi vs single
+        self.picking.carrier_id = self.test_carrier
+        self.picking.move_line_ids._put_in_pack()
+        pkg = self.picking.move_line_ids.result_package_id
+        pkg.carrier_id = self.test_carrier
+        pkg.parcel_tracking = "track1"
+        link = self.test_carrier.get_tracking_link(self.picking)
+        self.assertEqual(link, "http://www.test.com/track1")
+
+        pkg2 = self.env["stock.package"].create(
+            {
+                "name": "P2",
+                "parcel_tracking": "track2",
+                "carrier_id": self.test_carrier.id,
+            }
+        )
+        self.env["stock.move.line"].create(
+            {
+                "picking_id": self.picking.id,
+                "product_id": self.picking.move_line_ids[0].product_id.id,
+                "result_package_id": pkg2.id,
+                "quantity": 1,
+            }
+        )
+        multi_link = self.test_carrier.get_tracking_link(self.picking)
+        self.assertIn("track1", multi_link)
+        self.assertIn("track2", multi_link)
+
+        # Test non-roulier fallback
+        roulier.get_carriers_action_available = MagicMock(return_value={})
+        self.assertFalse(self.test_carrier._is_roulier())
+        non_roulier = self.env["delivery.carrier"].create(
+            {
+                "name": "Non Roulier",
+                "product_id": self.test_carrier.product_id.id,
+                "delivery_type": "fixed",
+                "fixed_price": 10.0,
+            }
+        )
+        self.order.carrier_id = non_roulier
+        with self.assertRaises(NotImplementedError):
+            non_roulier.cancel_shipment(self.picking)
+        non_roulier.get_tracking_link(self.picking)
+        with patch(
+            "odoo.addons.stock_delivery.models.delivery_carrier.DeliveryCarrier.send_shipping",
+            return_value=[{"exact_price": 0}],
+        ):
+            non_roulier.send_shipping(self.picking)
+
+    def test_move_line_customs(self):
+        self.picking.move_line_ids._put_in_pack()
+        line = self.picking.move_line_ids[0]
+        # Same product, soline exists
+        price = line.get_unit_price_for_customs()
+        self.assertGreaterEqual(price, 0)
+
+        # Test fallback branch when product does not match (e.g. kit)
+        sale_line = line.get_sale_order_line()
+        sale_line.discount = 10.0
+        # Temporarily mock the product_id of soline to force fallback
+        with patch.object(
+            type(sale_line), "product_id", new=self.env["product.product"]
+        ):
+            fallback_price = line.get_unit_price_for_customs()
+            self.assertGreaterEqual(fallback_price, 0)
+
+    def test_picking_and_package_methods(self):
+        # Address conversion test
+        parent = self.env["res.partner"].create(
+            {"name": "Parent Co", "is_company": True, "email": "p@test.com"}
+        )
+        child = self.env["res.partner"].create(
+            {"name": "Child", "parent_id": parent.id}
+        )
+        addr = self.picking._roulier_convert_address(child)
+        self.assertEqual(addr.get("company"), "Parent Co")
+        self.assertEqual(addr.get("email"), "p@test.com")
+
+        # stock picking no account
+        with self.assertRaises(UserError):
+            with patch.object(
+                type(self.picking), "_get_carrier_account", return_value=None
+            ):
+                self.picking._roulier_get_account()
+
+        # Generate labels with empty pack
+        with self.assertRaises(UserError):
+            self.env["stock.package"]._roulier_generate_labels(self.picking)
+
+        # Test missing tracking url exception
+        pkg_no_track = self.env["stock.package"].create({"name": "NoTrack"})
+        with patch(
+            "odoo.addons.delivery_roulier.models.stock_quant_package._logger"
+        ) as mock_logger:
+            with self.assertRaises(UserError):
+                pkg_no_track.open_website_url()
+            pkg_no_track._roulier_get_tracking_link()
+            mock_logger.warning.assert_called()
+
+    def test_warehouse_from_address(self):
+        warehouse = self.env["stock.warehouse"].create(
+            {
+                "name": "Test Warehouse",
+                "code": "TWH",
+            }
+        )
+        self.picking.picking_type_id.write({"warehouse_id": warehouse.id})
+        warehouse.partner_id.write(
+            {
+                "name": "Warehouse Co",
+                "is_company": True,
+            }
+        )
+        self.env.flush_all()
+        addr = self.picking._get_from_address()
+        self.assertEqual(addr.get("company"), "Warehouse Co")
+
+    def test_roulier_carrier_error(self):
+        pkg = self.env["stock.package"].create(
+            {"name": "TestPkg", "carrier_id": self.test_carrier.id}
+        )
+        payload = {"auth": {"password": "secret"}}
+        err_msg = pkg._roulier_carrier_error_handling(payload, Exception("Test Error"))
+        self.assertIn("Test Error", err_msg)
+        self.assertEqual(payload["auth"]["password"], "*****")

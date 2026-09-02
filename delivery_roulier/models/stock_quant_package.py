@@ -4,7 +4,7 @@
 
 import logging
 
-from odoo import _, fields, models
+from odoo import fields, models
 from odoo.exceptions import UserError
 
 from ..decorator import implemented_by_carrier
@@ -18,33 +18,13 @@ except ImportError:
 
 
 class StockQuantPackage(models.Model):
-    _inherit = "stock.quant.package"
+    _inherit = "stock.package"
 
-    carrier_id = fields.Many2one("delivery.carrier", string="Carrier")
+    carrier_id = fields.Many2one("delivery.carrier", string="Delivery Carrier")
     parcel_tracking = fields.Char()
     parcel_tracking_uri = fields.Char(
         help="Link to the carrier's tracking page for this package."
     )
-
-    # Seems useless now, drop it, we can just have picking.move_line_ids
-    # all stock.move.line have a product_id and in roulier we check that all
-    # stock.move.line have a result_package_id...
-    # I keep the method commented until submodules using it are migrated.
-    # remove it at next migration
-    #    def get_operations(self):
-    #        """Get operations of the package.
-    #
-    #        Usefull for having products and quantities
-    #        """
-    #        self.ensure_one()
-    #        return self.env["stock.move.line"].search(
-    #            [
-    #                ("product_id", "!=", False),
-    #                "|",
-    #                ("package_id", "=", self.id),
-    #                ("result_package_id", "=", self.id),
-    #            ]
-    #        )
 
     # API
     # Each method in this class have at least picking arg to directly
@@ -100,7 +80,7 @@ class StockQuantPackage(models.Model):
         # send all packs to roulier. It will decide if it makes one call per pack or
         # one call for all pack depending on the carrier.
         if not self:
-            raise UserError(_("No pack found for picking %s", picking.name))
+            raise UserError(self.env._("No pack found for picking %s", picking.name))
         response = self._call_roulier_api(picking)
         self._handle_attachments(picking, response)
         return self._parse_response(picking, response)
@@ -129,7 +109,7 @@ class StockQuantPackage(models.Model):
                 if len(pack) == 1:
                     package_id = pack.id
             if package_id:
-                self.env["stock.quant.package"].browse(package_id).write(
+                self.env["stock.package"].browse(package_id).write(
                     {
                         "parcel_tracking": tracking_number,
                         "parcel_tracking_uri": parcel.get("tracking", {}).get(
@@ -162,7 +142,7 @@ class StockQuantPackage(models.Model):
         self.ensure_one()
         url = self._get_tracking_link()
         if not url:
-            raise UserError(_("The tracking url is not available."))
+            raise UserError(self.env._("The tracking url is not available."))
         client_action = {
             "type": "ir.actions.act_url",
             "name": "Shipment Tracking Page",
@@ -262,10 +242,13 @@ class StockQuantPackage(models.Model):
         carrier = dict(
             self.env["delivery.carrier"]._fields["delivery_type"].selection
         ).get(self.carrier_id.delivery_type)
-        return _(
+        return self.env._(
             "Roulier library Exception for '%(carrier)s' carrier:\n"
-            "\n%(exception)s\n\nSent data:\n%(payload)s"
-        ) % {"carrier": carrier, "exception": str(exception), "payload": payload}
+            "\n%(exception)s\n\nSent data:\n%(payload)s",
+            carrier=carrier,
+            exception=str(exception),
+            payload=payload,
+        )
 
     def _roulier_invalid_api_input_handling(self, payload, exception):
         """Build exception message for bad input.
@@ -277,7 +260,7 @@ class StockQuantPackage(models.Model):
         returns:
             string
         """
-        return _("Bad input: %s\n") % str(exception)
+        return self.env._("Bad input: %s\n", str(exception))
 
     # There is low chance you need to override the following methods.
     def _roulier_handle_attachments(self, picking, response):
