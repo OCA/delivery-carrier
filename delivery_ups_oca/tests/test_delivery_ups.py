@@ -1173,6 +1173,7 @@ class TestUpsNegotiatedRates(TestDeliveryUpsBase):
         """When negotiated rates are enabled, the rate request must ask for them
         and the returned price must be the negotiated one when available."""
         self.carrier.ups_negotiated_rates = True
+        self.sale.currency_id = self.env.ref("base.EUR")
         response_value = self.get_mock_rate_response_values(
             charges="16.49", negotiated_charges=True
         )
@@ -1192,6 +1193,7 @@ class TestUpsNegotiatedRates(TestDeliveryUpsBase):
     def test_rate_shipment_without_negotiated_rates(self):
         """When negotiated rates are disabled (default), the rate request must not
         ask for them and the standard price is used."""
+        self.sale.currency_id = self.env.ref("base.EUR")
         response_value = self.get_mock_rate_response_values(charges="16.49")
         with mock.patch(_provider_class + "._process_reply") as mock_process_reply:
             mock_process_reply.return_value = response_value
