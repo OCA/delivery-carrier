@@ -21,4 +21,46 @@ License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
             </xpath>
         </field>
     </record>
+    <record id="ups_shipping_delivery_order_view" model="ir.ui.view">
+        <field name="name">stock.picking.ups.paperless</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position='inside'>
+                <page string="UPS Paperless Invoice" invisible="delivery_type != 'ups'">
+                    <group>
+                        <group>
+                            <field
+                                name="ups_document_identifier"
+                                invisible="not ups_paperless_auto_send"
+                            />
+                            <button
+                                name="generate_paperless_invoice"
+                                string="Generate Paperless Invoice"
+                                type='object'
+                                class="fa fa-arrow-right oe_link"
+                                invisible="state != 'done' or ups_paperless_auto_send"
+                            />
+                        </group>
+                        <field name="ups_paperless_document_ids">
+                            <list nolabel="1" editable="bottom">
+                                <field name="ups_paperless_file" filename="file_name" />
+                                <field name="file_name" />
+                                <field name="ups_document_type" />
+                                <button
+                                    name="download_ups_paperless_file"
+                                    string="File Download"
+                                    type="object"
+                                    class="fa fa-arrow-right oe_link"
+                                />
+                            </list>
+                        </field>
+                        <group>
+                            <field name="ups_paperless_auto_send" />
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
 </odoo>

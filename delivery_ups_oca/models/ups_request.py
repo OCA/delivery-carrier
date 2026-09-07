@@ -3,7 +3,9 @@
 # Copyright 2024 Sygel - Manuel Regidor
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+import ast
 import datetime
+import json
 import logging
 from urllib.parse import urlencode
 
@@ -311,9 +313,33 @@ class UpsRequest:
                     }
                 },
             )
+        # Add paperless invoice if a document id has been retrieved
+        if picking.ups_document_identifier and picking.ups_document_identifier.strip():
+            try:
+                document_id = (
+                    ast.literal_eval(picking.ups_document_identifier)
+                    if len(picking.ups_document_identifier) > 30
+                    else picking.ups_document_identifier
+                )
+            except (ValueError, SyntaxError):
+                document_id = picking.ups_document_identifier
+            shipment = vals["ShipmentRequest"]["Shipment"]
+            shipment.setdefault("ShipmentServiceOptions", {})["InternationalForms"] = {
+                "FormType": "07",
+                "UserCreatedForm": {"DocumentID": document_id},
+            }
         return vals
 
     def _send_shipping(self, picking):
+        # Send the paperless invoice first so its document ID is included
+        # in the shipment request.
+        if picking.ups_paperless_auto_send and not picking.ups_document_identifier:
+            try:
+                self.carrier.send_ups_paperless_invoice(picking)
+            except Exception as e:
+                error_msg = _("Failed to send paperless invoice: %s") % str(e)
+                _logger.error(error_msg)
+                raise UserError(error_msg) from e
         status = self._process_reply(
             url=f"{self.url}/api/shipments/v1/ship",
             json=self._prepare_create_shipping(picking),
@@ -524,3 +550,62 @@ class UpsRequest:
             "tracking_state": tracking_state,
             "pod": pod,
         }
+
+    def send_paperless_invoice(self, picking, paperless_document_data):
+        """Send paperless invoice documents to UPS"""
+        if not paperless_document_data:
+            raise UserError(picking.env._("No documents to send!"))
+
+        request_data = {
+            "UploadRequest": {
+                "Request": {"TransactionReference": {"CustomerContext": ""}},
+                "ShipperNumber": self.shipper_number,
+                "UserCreatedForm": paperless_document_data,
+            }
+        }
+        headers = {
+            "ShipperNumber": self.shipper_number,
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "Authorization": f"Bearer {self.token}",
+        }
+        url = f"{self.url}/api/paperlessdocuments/v1/upload"
+        # Mask the document files before logging the request
+        debug_request = json.loads(json.dumps(request_data))
+        for doc in debug_request.get("UploadRequest", {}).get("UserCreatedForm", []):
+            if "UserCreatedFormFile" in doc:
+                doc["UserCreatedFormFile"] = "***MASKED***"
+        _logger.debug(
+            "UPS Paperless Invoice Request: URL=%s, Headers=%s, Data=%s",
+            url,
+            headers,
+            debug_request,
+        )
+        try:
+            response = self._send_request(
+                url,
+                data=json.dumps(request_data),
+                headers=headers,
+                timeout=10,
+            )
+            _logger.debug(
+                "UPS Paperless Invoice Response: Status=%s, Content=%s",
+                response.status_code,
+                response.text,
+            )
+            if response.status_code in [200, 201]:
+                invoice_response = response.json()
+                upload_response = invoice_response.get("UploadResponse") or {}
+                forms_history = upload_response.get("FormsHistoryDocumentID") or {}
+                document_id = forms_history.get("DocumentID")
+                picking.ups_document_identifier = document_id
+                return document_id
+            errors = (json.loads(response.text).get("response") or {}).get("errors")
+            error_message = errors[0].get("message") if errors else response.text
+            raise UserError(
+                picking.env._("Paperless Invoice: %s") % error_message
+            ) from None
+        except UserError:
+            raise
+        except Exception as e:
+            raise UserError(str(e)) from e
