@@ -10,8 +10,8 @@ from io import BytesIO
 
 from PIL import Image
 
-from odoo import fields, models
-from odoo.exceptions import UserError
+from odoo import api, fields, models
+from odoo.exceptions import UserError, ValidationError
 
 from .ups_request import UpsRequest
 
@@ -112,6 +112,22 @@ class DeliveryCarrier(models.Model):
         string="Negotiated Rates",
         help="If checked, UPS will use the account's negotiated rates for shipping.",
     )
+    declared_value_percentage = fields.Float(
+        string="Declared Value (%)",
+        default=0.0,
+        help="Percentage of the sale price to be used as the declared value "
+        "for shipping. 100% means the full sale price will be used.",
+    )
+
+    @api.constrains("declared_value_percentage")
+    def _check_declared_value_percentage(self):
+        for carrier in self:
+            if not 0.0 <= carrier.declared_value_percentage <= 100.0:
+                raise ValidationError(
+                    self.env._(
+                        "The declared value percentage must be between 0 and 100."
+                    )
+                )
 
     def _ups_get_response_price(self, total_charges, currency, company):
         """We need to convert the price if the currency is different."""

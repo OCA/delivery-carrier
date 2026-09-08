@@ -7,10 +7,10 @@ from unittest import mock
 
 from PIL import Image
 
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
 from odoo.tests import Form, common
 
-from odoo.addons.delivery_ups_oca.models.ups_request import UpsRequest
+from ..models.ups_request import UpsRequest
 
 _module_ns = "odoo.addons.delivery_ups_oca"
 _provider_class = _module_ns + ".models.ups_request.UpsRequest"
@@ -46,6 +46,7 @@ class TestDeliveryUpsBase(common.TransactionCase):
                 "ups_package_dimension_code": "IN",
                 "ups_package_weight_code": "LBS",
                 "ups_cash_on_delivery": False,
+                "declared_value_percentage": 80,
             }
         )
         cls.company = cls.env.ref("base.main_company")
@@ -776,27 +777,29 @@ class TestDeliveryUps(TestDeliveryUpsBase):
         )
         package2.package_type_id = package_type2
 
-        # Set packages on move lines
-        self.picking.move_ids.move_line_ids = [
-            (
-                0,
-                0,
+        # Set packages on move lines.
+        move = self.picking.move_ids
+        move.move_line_ids.unlink()
+        self.env["stock.move.line"].create(
+            [
                 {
-                    "result_package_id": package1.id,
+                    "move_id": move.id,
+                    "picking_id": self.picking.id,
                     "product_id": self.product.id,
+                    "product_uom_id": move.product_uom.id,
+                    "result_package_id": package1.id,
                     "quantity": 2,
                 },
-            ),
-            (
-                0,
-                0,
                 {
-                    "result_package_id": package2.id,
+                    "move_id": move.id,
+                    "picking_id": self.picking.id,
                     "product_id": self.product.id,
+                    "product_uom_id": move.product_uom.id,
+                    "result_package_id": package2.id,
                     "quantity": 3,
                 },
-            ),
-        ]
+            ]
+        )
 
         # Set picking data
         self.picking.name = "TEST0001"
@@ -807,9 +810,9 @@ class TestDeliveryUps(TestDeliveryUpsBase):
         result = ups_request._prepare_create_shipping(self.picking)
         packages = result["ShipmentRequest"]["Shipment"]["Package"]
         self.assertEqual(len(packages), 2)
-        # Verify package descriptions
-        self.assertEqual(packages[0]["Description"], package_type1.name)
-        self.assertEqual(packages[1]["Description"], package_type2.name)
+        # Verify package descriptions (order is not guaranteed)
+        descriptions = {package["Description"] for package in packages}
+        self.assertEqual(descriptions, {package_type1.name, package_type2.name})
         # Verify service code
         self.assertEqual(result["ShipmentRequest"]["Shipment"]["Service"]["Code"], "11")
         # Verify label specification
@@ -899,6 +902,105 @@ class TestDeliveryUps(TestDeliveryUpsBase):
         self.assertEqual(shipment["Description"], "TEST0006")
         self.assertEqual(shipment["Service"]["Code"], "11")
         self.assertEqual(len(shipment["Package"]), 2)
+
+    def check_declared_value_packages(self, carrier, picking):
+        ups_request = UpsRequest(carrier)
+        vals = ups_request._prepare_create_shipping(picking)
+        packages = vals["ShipmentRequest"]["Shipment"]["Package"]
+        for package in packages:
+            self.assertIn("PackageServiceOptions", package)
+            self.assertIn("DeclaredValue", package["PackageServiceOptions"])
+            declared_value = package["PackageServiceOptions"]["DeclaredValue"]
+            self.assertEqual(declared_value["MonetaryValue"], "8.0")
+            self.assertEqual(
+                declared_value["CurrencyCode"],
+                picking.declared_value_currency_id.name,
+            )
+
+    def test_declared_value_with_packages(self):
+        """Test that declared value is added when packages exist"""
+        pack_action = self.picking.action_put_in_pack()
+        pack_action_ctx = pack_action["context"]
+        pack_wiz = (
+            self.env["choose.delivery.package"]
+            .with_context(**pack_action_ctx)
+            .create(
+                {"delivery_package_type_id": self.carrier.ups_default_packaging_id.id}
+            )
+        )
+        pack_wiz.action_put_in_pack()
+
+        self.carrier.write({"ups_use_packages_from_picking": True})
+        self.picking.declared_value = 8.0
+        self.check_declared_value_packages(self.carrier, self.picking)
+
+    def test_declared_value_without_packages(self):
+        """Test declared value when no packages are defined"""
+        self.picking.move_line_ids.write({"result_package_id": False})
+        self.carrier.write({"ups_use_packages_from_picking": False})
+        self.picking.number_of_packages = 1
+        self.picking.declared_value = 8.0
+        self.check_declared_value_packages(self.carrier, self.picking)
+
+    def test_declared_value_not_added_when_zero(self):
+        """No DeclaredValue is emitted when the declared value is 0."""
+        self.picking.move_line_ids.write({"result_package_id": False})
+        self.carrier.write({"ups_use_packages_from_picking": False})
+        self.picking.number_of_packages = 1
+        self.picking.declared_value = 0.0
+        ups_request = UpsRequest(self.carrier)
+        vals = ups_request._prepare_create_shipping(self.picking)
+        packages = vals["ShipmentRequest"]["Shipment"]["Package"]
+        self.assertTrue(packages)
+        for package in packages:
+            self.assertNotIn("PackageServiceOptions", package)
+
+    def test_declared_value_percentage_constraint(self):
+        """The declared value percentage must be within 0..100."""
+        with self.assertRaises(ValidationError):
+            self.carrier.declared_value_percentage = -1.0
+        with self.assertRaises(ValidationError):
+            self.carrier.declared_value_percentage = 101.0
+
+    def test_declared_value_computed_from_sale_order(self):
+        """The declared value sums the picked items' taxed sale order prices."""
+        self.carrier.declared_value_percentage = 80.0
+        sale_line = self.picking.move_ids.sale_line_id
+        unit_price = sale_line.price_total / sale_line.product_uom_qty
+        expected_base = unit_price * self.picking.move_ids.quantity
+        self.picking.invalidate_recordset(["declared_value"])
+        self.assertAlmostEqual(self.picking.declared_value, expected_base * 0.8, 2)
+        self.assertEqual(
+            self.picking.declared_value_currency_id,
+            self.sale.currency_id,
+        )
+
+    def test_declared_value_partial_delivery(self):
+        """Shipping half the quantity halves the declared value base."""
+        self.carrier.declared_value_percentage = 100.0
+        sale_line = self.picking.move_ids.sale_line_id
+        unit_price = sale_line.price_total / sale_line.product_uom_qty
+        self.picking.move_ids.quantity = sale_line.product_uom_qty / 2.0
+        self.picking.invalidate_recordset(["declared_value"])
+        expected = unit_price * (sale_line.product_uom_qty / 2.0)
+        self.assertAlmostEqual(self.picking.declared_value, expected, 2)
+
+    def test_declared_value_without_packages_cod(self):
+        """Test declared value when no packages are defined and COD option"""
+        self.carrier.write(
+            {
+                "ups_use_packages_from_picking": False,
+                "ups_cash_on_delivery": True,
+            }
+        )
+        ups_request = UpsRequest(self.carrier)
+        vals = ups_request._prepare_create_shipping(self.picking)
+        shipment = vals["ShipmentRequest"]["Shipment"]
+        self.assertIn("ShipmentServiceOptions", shipment)
+        service_option = shipment["ShipmentServiceOptions"][0]
+        self.assertIn("COD", service_option)
+        expected = str(self.picking.sale_id.amount_total)
+        self.assertEqual(service_option["COD"]["CODAmount"]["MonetaryValue"], expected)
 
     def test_ups_address_lines(self):
         """Test address line splitting for UPS limits"""
