@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 Moduon Team S.L.
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0) -->
+<odoo>
+    <record id="view_picking_withcarrier_out_form" model="ir.ui.view">
+        <field name="name">Stock Picking Fleet Form</field>
+        <field name="model">stock.picking</field>
+        <field
+            name="inherit_id"
+            ref="stock_delivery.view_picking_withcarrier_out_form"
+        />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//group[@name='carrier_data']/field[@name='carrier_id']"
+                position="after"
+            >
+                <field
+                    name="vehicle_id"
+                    options="{'always_reload': True, 'no_create': True, 'no_open': True}"
+                    context="{'display_driver_on_date': 'scheduled_date'}"
+                    readonly="state in ('done', 'cancel')"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="vpicktree_view_tree" model="ir.ui.view">
+        <field name="name">Stock Picking Fleet Tree</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock_delivery.vpicktree_view_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='carrier_id']" position="after">
+                <field
+                    name="vehicle_id"
+                    optional="hide"
+                    options="{'always_reload': True}"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_picking_internal_search" model="ir.ui.view">
+        <field name="name">Stock Picking Fleet Tree</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_internal_search" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='picking_type_id']" position="after">
+                <field name="vehicle_id" />
+            </xpath>
+            <xpath expr="//filter[@name='picking_type']" position="after">
+                <filter
+                    name="vehicle_id"
+                    string="Vehicle"
+                    context="{'group_by':'vehicle_id'}"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
