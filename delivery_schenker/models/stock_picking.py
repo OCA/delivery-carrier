@@ -1,7 +1,7 @@
 # Copyright 2021 Studio73 - Ethan Hildick <ethan@studio73.es>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, models
+from odoo import models
 
 
 class StockPicking(models.Model):
@@ -15,7 +15,7 @@ class StockPicking(models.Model):
         label = self.carrier_id.schenker_get_label(tracking_ref)
         label_name = f"schenker_label_{tracking_ref}.pdf"
         self.message_post(
-            body=(_("Schenker label for %s") % tracking_ref),
+            body=self.env._("Schenker label for %s", tracking_ref),
             attachments=[(label_name, label)],
         )
         return label

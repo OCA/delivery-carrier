@@ -8,7 +8,6 @@ from zeep import Client, Settings
 from zeep.exceptions import Fault
 from zeep.plugins import HistoryPlugin
 
-from odoo import _
 from odoo.exceptions import ValidationError
 
 _logger = logging.getLogger(__name__)
@@ -32,8 +31,15 @@ class SchenkerRequest:
     """
 
     def __init__(
-        self, access_key=None, group_id=None, user=None, prod=False, service="booking"
+        self,
+        env,
+        access_key=None,
+        group_id=None,
+        user=None,
+        prod=False,
+        service="booking",
     ):
+        self.env = env
         self.access_key = access_key or ""
         self.group_id = group_id or ""
         self.user = user or ""
@@ -68,17 +74,15 @@ class SchenkerRequest:
                     error_message = next(root.iter("message")).text
                     error_code = next(root.iter("code")).text
                     raise ValidationError(
-                        _(
+                        self.env._(
                             "Error in the request to the Schenker API. This is the "
                             "thrown message:\n\n"
                             "[%(error_text)s]\n"
-                            "%(error_code)s - %(error_message)s"
+                            "%(error_code)s - %(error_message)s",
+                            error_text=error_text,
+                            error_code=error_code,
+                            error_message=error_message,
                         )
-                        % {
-                            "error_text": error_text,
-                            "error_code": error_code,
-                            "error_message": error_message,
-                        }
                     ) from e
                 except ValidationError:
                     raise
@@ -102,7 +106,7 @@ class SchenkerRequest:
             "ocean_fcl": "getBookingRequestOceanFCL",
             "ocean_lcl": "getBookingRequestOceanLCL",
         }
-        return method_map.get("method", "getBookingRequestLand")
+        return method_map.get(method, "getBookingRequestLand")
 
     def _shipping_api_credentials(self):
         """Each API has a different credentials SOAP declaration"""

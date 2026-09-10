@@ -2,4 +2,5 @@
   - David Vidal
 - [Studio73](https://www.studio73.es):
   - Ethan Hildick
+  - Alex Garcia
 - Michael Tietz (MT Software) \<<mtietz@mt-software.de>\>
