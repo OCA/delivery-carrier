@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from lxml import etree
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 
 from .schenker_request import SchenkerRequest
@@ -249,8 +249,9 @@ class DeliveryCarrier(models.Model):
         # Optional stuff. The API doesn't like falsy or empty request fields
         if partner.email:
             vals["email"] = partner.email
-        if partner.mobile:
-            vals["mobilePhone"] = partner.mobile
+        mobile = getattr(partner, "mobile", False)
+        if mobile:
+            vals["mobilePhone"] = mobile
         if partner.phone:
             vals["phone"] = partner.phone
         if partner.street2:
@@ -339,29 +340,32 @@ class DeliveryCarrier(models.Model):
         :param picking record with picking to deliver
         :returns list of dicts with delivery packages shipping info
         """
-        if picking.package_level_ids and picking.move_line_ids.mapped(
-            "result_package_id"
-        ):
-            return [
-                self._schenker_shipping_information_package(picking, package)
-                for package in picking.move_line_ids.mapped("result_package_id")
-            ]
+        packages = self.env["stock.package"]
+        for move_line in picking.move_line_ids:
+            if move_line.result_package_id:
+                packages |= move_line.result_package_id
+        if packages:
+            shipping_information = []
+            for package in packages:
+                shipping_information.append(
+                    self._schenker_shipping_information_package(picking, package)
+                )
+            return shipping_information
         weight = picking.shipping_weight or picking.weight
         # Obviously products should be well configured. This parameter is mandatory.
-        volume = sum(
-            [
-                ml.product_uom_id._compute_quantity(ml.quantity, ml.product_id.uom_id)
-                * ml.product_id.volume
-                for ml in picking.move_line_ids
-            ]
-        )
+        volume = 0.0
+        for move_line in picking.move_line_ids:
+            quantity = move_line.product_uom_id._compute_quantity(
+                move_line.quantity, move_line.product_id.uom_id
+            )
+            volume += quantity * move_line.product_id.volume
         return [
             {
                 # Dangerous goods is not supported
                 "dgr": False,
                 "cargoDesc": picking.name,
                 # For a more complex solution use packaging properly
-                "grossWeight": round(weight / picking.number_of_packages, 2),
+                "grossWeight": round(weight / (picking.number_of_packages or 1.0), 2),
                 "volume": round(volume, 2) or 0.01,
                 "packageType": (
                     self.schenker_default_package_type_id.shipper_package_code
@@ -442,7 +446,7 @@ class DeliveryCarrier(models.Model):
         to this design, we have to inject vals in the context to be able to
         add them to the message.
         """
-        schenker_request = SchenkerRequest(**self._get_schenker_credentials())
+        schenker_request = SchenkerRequest(self.env, **self._get_schenker_credentials())
         result = []
         for picking in pickings:
             vals = self._prepare_schenker_shipping(picking)
@@ -461,7 +465,7 @@ class DeliveryCarrier(models.Model):
             vals["tracking_number"] = response.get("booking_id")
             # We post an extra message in the chatter with the barcode and the
             # label because there's clean way to override the one sent by core.
-            body = _("Schenker Shipping barcode document")
+            body = self.env._("Schenker Shipping barcode document")
             attachment = []
             if response.get("barcode"):
                 attachment = [
@@ -479,8 +483,10 @@ class DeliveryCarrier(models.Model):
         :param pickings - stock.picking recordset
         :returns pdf file
         """
-        schenker_request = SchenkerRequest(**self._get_schenker_credentials())
-        for picking in pickings.filtered("carrier_tracking_ref"):
+        schenker_request = SchenkerRequest(self.env, **self._get_schenker_credentials())
+        for picking in pickings:
+            if not picking.carrier_tracking_ref:
+                continue
             try:
                 schenker_request._cancel_shipment(picking.carrier_tracking_ref)
             except Exception as e:
@@ -497,7 +503,7 @@ class DeliveryCarrier(models.Model):
         self.ensure_one()
         if not reference:
             return False
-        schenker_request = SchenkerRequest(**self._get_schenker_credentials())
+        schenker_request = SchenkerRequest(self.env, **self._get_schenker_credentials())
         format_vals = self.schenker_barcode_format
         if format_vals == "A4":
             format_vals = {
@@ -527,7 +533,7 @@ class DeliveryCarrier(models.Model):
         if not picking.carrier_tracking_ref:
             return
         schenker_request = SchenkerRequest(
-            **self._get_schenker_credentials(), service="tracking"
+            self.env, **self._get_schenker_credentials(), service="tracking"
         )
         response = schenker_request._get_tracking_states(
             **self._prepare_schenker_tracking(picking)
@@ -566,12 +572,12 @@ class DeliveryCarrier(models.Model):
         return {
             "success": True,
             "price": self.product_id.lst_price,
-            "error_message": _(
+            "error_message": self.env._(
                 "Schenker API doesn't provide methods to compute delivery "
                 "rates, so you should relay on another price method instead or "
                 "override this one in your custom code."
             ),
-            "warning_message": _(
+            "warning_message": self.env._(
                 "Schenker API doesn't provide methods to compute delivery "
                 "rates, so you should relay on another price method instead or "
                 "override this one in your custom code."
@@ -586,7 +592,7 @@ class DeliveryCarrier(models.Model):
         the future, this can be removed as long as those method have the proper
         support"""
         if self.schenker_booking_type != "land":
-            raise UserError(_("Only land shipping is currently supported"))
+            raise UserError(self.env._("Only land shipping is currently supported"))
 
     @api.onchange("schenker_measure_unit")
     def onchange_schenker_measure_unit(self):
@@ -594,4 +600,4 @@ class DeliveryCarrier(models.Model):
         calculation structure should be provided to use the other API options. A hook
         method is provided though."""
         if self.schenker_measure_unit != "VOLUME":
-            raise UserError(_("Only volume is currently supported"))
+            raise UserError(self.env._("Only volume is currently supported"))
