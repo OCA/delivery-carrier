@@ -69,7 +69,6 @@ msgid "Chronopost Sub Account"
 msgstr ""
 
 #. module: delivery_roulier_chronopost_fr
-#: model:product.product,name:delivery_roulier_chronopost_fr.chronopost_product
 #: model:product.template,name:delivery_roulier_chronopost_fr.chronopost_product_product_template
 msgid "Coûts de livraison - Chronopost"
 msgstr ""
@@ -87,30 +86,6 @@ msgstr ""
 #. module: delivery_roulier_chronopost_fr
 #: model:delivery.carrier.template.option,name:delivery_roulier_chronopost_fr.chronopost_service_saturday
 msgid "Delivery on Saturday"
-msgstr ""
-
-#. module: delivery_roulier_chronopost_fr
-#: model:ir.model.fields,field_description:delivery_roulier_chronopost_fr.field_carrier_account__display_name
-#: model:ir.model.fields,field_description:delivery_roulier_chronopost_fr.field_delivery_carrier__display_name
-#: model:ir.model.fields,field_description:delivery_roulier_chronopost_fr.field_stock_picking__display_name
-#: model:ir.model.fields,field_description:delivery_roulier_chronopost_fr.field_stock_quant_package__display_name
-msgid "Display Name"
-msgstr ""
-
-#. module: delivery_roulier_chronopost_fr
-#: model:ir.model.fields,field_description:delivery_roulier_chronopost_fr.field_carrier_account__id
-#: model:ir.model.fields,field_description:delivery_roulier_chronopost_fr.field_delivery_carrier__id
-#: model:ir.model.fields,field_description:delivery_roulier_chronopost_fr.field_stock_picking__id
-#: model:ir.model.fields,field_description:delivery_roulier_chronopost_fr.field_stock_quant_package__id
-msgid "ID"
-msgstr ""
-
-#. module: delivery_roulier_chronopost_fr
-#: model:ir.model.fields,field_description:delivery_roulier_chronopost_fr.field_carrier_account____last_update
-#: model:ir.model.fields,field_description:delivery_roulier_chronopost_fr.field_delivery_carrier____last_update
-#: model:ir.model.fields,field_description:delivery_roulier_chronopost_fr.field_stock_picking____last_update
-#: model:ir.model.fields,field_description:delivery_roulier_chronopost_fr.field_stock_quant_package____last_update
-msgid "Last Modified on"
 msgstr ""
 
 #. module: delivery_roulier_chronopost_fr
@@ -174,12 +149,6 @@ msgid "Transfer"
 msgstr ""
 
 #. module: delivery_roulier_chronopost_fr
-#: model:product.product,uom_name:delivery_roulier_chronopost_fr.chronopost_product
-#: model:product.template,uom_name:delivery_roulier_chronopost_fr.chronopost_product_product_template
-msgid "Units"
-msgstr ""
-
-#. module: delivery_roulier_chronopost_fr
 #: model:ir.model.fields.selection,name:delivery_roulier_chronopost_fr.selection__carrier_account__chronopost_fr_file_format__xml
 msgid "XML"
 msgstr ""
@@ -192,16 +161,4 @@ msgstr ""
 #. module: delivery_roulier_chronopost_fr
 #: model:ir.model.fields.selection,name:delivery_roulier_chronopost_fr.selection__carrier_account__chronopost_fr_file_format__z2dpsg
 msgid "Z2DPSG"
-msgstr ""
-
-#. module: delivery_roulier_chronopost_fr
-#: model:product.product,weight_uom_name:delivery_roulier_chronopost_fr.chronopost_product
-#: model:product.template,weight_uom_name:delivery_roulier_chronopost_fr.chronopost_product_product_template
-msgid "kg"
-msgstr ""
-
-#. module: delivery_roulier_chronopost_fr
-#: model:product.product,volume_uom_name:delivery_roulier_chronopost_fr.chronopost_product
-#: model:product.template,volume_uom_name:delivery_roulier_chronopost_fr.chronopost_product_product_template
-msgid "m³"
 msgstr ""
