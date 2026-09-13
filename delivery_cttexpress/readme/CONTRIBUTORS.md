@@ -1,0 +1,4 @@
+- [Tecnativa](https://www.tecnativa.com):
+  - David Vidal
+- [Studio73](https://www.studio73.es):
+  - Pablo Cortés
