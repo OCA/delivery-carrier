@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_picking_withcarrier_out_form" model="ir.ui.view">
+        <field name="model">stock.picking</field>
+        <field
+            name="inherit_id"
+            ref="stock_delivery.view_picking_withcarrier_out_form"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//header" position='inside'>
+                <button
+                    name="schenker_get_label"
+                    string="Schenker Label"
+                    type="object"
+                    groups="base.group_no_one"
+                    invisible="delivery_type != 'schenker' or carrier_tracking_ref == False or state != 'done'"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
