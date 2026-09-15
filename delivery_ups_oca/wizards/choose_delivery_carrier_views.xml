@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Copyright 2026 Nitrokey GmbH
+License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <record id="choose_delivery_carrier_view_form" model="ir.ui.view">
+        <field name="model">choose.delivery.carrier</field>
+        <field name="inherit_id" ref="delivery.choose_delivery_carrier_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='display_price']/.." position="after">
+                <label
+                    for="ups_landed_cost_amount"
+                    invisible="delivery_type != 'ups' or not ups_landed_cost_amount"
+                />
+                <div
+                    class="o_row"
+                    invisible="delivery_type != 'ups' or not ups_landed_cost_amount"
+                >
+                    <field
+                        name="ups_landed_cost_amount"
+                        widget="monetary"
+                        options="{'currency_field': 'currency_id'}"
+                    />
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
