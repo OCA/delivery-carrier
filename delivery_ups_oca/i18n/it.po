@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2026-08-11 14:46+0000\n"
+"PO-Revision-Date: 2026-09-15 06:19+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -138,6 +138,8 @@ msgstr "Ingresso"
 #: model:ir.model.fields,help:delivery_ups_oca.field_delivery_carrier__ups_negotiated_rates
 msgid "If checked, UPS will use the account's negotiated rates for shipping."
 msgstr ""
+"Se l'opzione è selezionata, UPS utilizzerà le tariffe negoziate dell'account "
+"per la spedizione."
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields,help:delivery_ups_oca.field_delivery_carrier__ups_tracking_state_update_sync
@@ -192,7 +194,7 @@ msgstr "Varie"
 #. module: delivery_ups_oca
 #: model:ir.model.fields,field_description:delivery_ups_oca.field_delivery_carrier__ups_negotiated_rates
 msgid "Negotiated Rates"
-msgstr ""
+msgstr "Tariffe negoziate"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__01
