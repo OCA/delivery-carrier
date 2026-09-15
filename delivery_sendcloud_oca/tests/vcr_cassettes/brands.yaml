@@ -1,0 +1,35 @@
+interactions:
+  - request:
+      body: null
+      headers:
+        Accept: ["*/*"]
+        Accept-Encoding: ["gzip, deflate"]
+        Connection: [keep-alive]
+        User-Agent: [python-requests/2.28.1]
+      method: GET
+      uri: https://panel.sendcloud.sc/api/v2/brands
+    response:
+      body:
+        {
+          string: '{"next":null,"previous":null,"brands":[{"id":93524,"name":"Onestein","color":"#112857","secondary_color":"#112855","website":"","overlay_logo":{},"screen_logo":{"url":"https://media.sendcloud.sc/brands/85609/onestein_logo.png"},"print_logo":{"url":"https://media.sendcloud.sc/brands/85609/onestein_logo_XAgCJw8.png"},"overlay_thumb":null,"screen_thumb":"https://media.sendcloud.sc/brands/85609/c1e21c7d2cb765eec349e3086ebd3d0a_thumbnail.png","print_thumb":"https://media.sendcloud.sc/brands/85609/c558a0208262c12fbffc2fe138c49bd1_thumbnail.png","notify_reply_to_email":null,"domain":"andrea1","notify_bcc_email":null,"hide_powered_by":false,"customization_settings":{"footer":{"city":"","street":"","country":"","font_color":"#212121","postal_code":"","phone_number":"","social_media":{"twitter":"","facebook":"","linkedin":"","instagram":""},"support_email":"","background_color":"#ffffff"},"header":{"faq_url":"","shop_url":"","font_color":"#212121","contact_url":"","homepage_url":"","background_color":"#ffffff"}}}]}',
+        }
+      headers:
+        Connection: [keep-alive]
+        Content-Type: [application/json]
+        Date: ["Tue, 05 Jul 2022 08:20:33 GMT"]
+        Transfer-Encoding: [chunked]
+        allow: ["GET, HEAD, OPTIONS"]
+        content-length: ["1020"]
+        referrer-policy: [same-origin]
+        server: [envoy]
+        strict-transport-security: [max-age=15552000; includeSubDomains; preload]
+        vary: ["Accept-Encoding,Origin, Cookie"]
+        x-content-type-options: [nosniff]
+        x-envoy-upstream-service-time: ["133"]
+        x-frame-options: [DENY]
+        x-sendcloud-client-latest-version-linux: [1.0.2]
+        x-sendcloud-client-latest-version-macos: [1.0.5]
+        x-sendcloud-client-latest-version-windows: [1.0.4]
+        x-xss-protection: [1; mode=block]
+      status: {code: 200, message: OK}
+version: 1

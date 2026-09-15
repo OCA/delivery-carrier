@@ -1,0 +1,36 @@
+interactions:
+  - request:
+      body: null
+      headers:
+        Accept: ["*/*"]
+        Accept-Encoding: ["gzip, deflate"]
+        Connection: [keep-alive]
+        User-Agent: [python-requests/2.28.1]
+      method: GET
+      uri: https://panel.sendcloud.sc/api/v2/user/invoices/718097
+    response:
+      body:
+        {
+          string:
+            '{"invoice":{"id":718097,"ref":"577543","type":"periodic","price_incl":0.0,"price_excl":0.0,"isPayed":true,"date":"29-06-2020
+            02:06:29","items":"https://panel.sendcloud.sc/api/v2/user/invoices/718097"}}',
+        }
+      headers:
+        Allow: ["GET, HEAD, OPTIONS"]
+        Connection: [keep-alive]
+        Content-Type: [application/json]
+        Date: ["Tue, 05 Jul 2022 08:35:48 GMT"]
+        Referrer-Policy: [same-origin]
+        Server: [nginx]
+        Strict-Transport-Security: [max-age=15552000; includeSubDomains; preload]
+        Transfer-Encoding: [chunked]
+        Vary: [Accept-Encoding, "Origin, Cookie"]
+        X-Content-Type-Options: [nosniff]
+        X-Frame-Options: [DENY]
+        X-SendCloud-Client-Latest-Version-Linux: [1.0.2]
+        X-SendCloud-Client-Latest-Version-Windows: [1.0.4]
+        X-SendCloud-Client-Latest-Version-macOS: [1.0.5]
+        X-XSS-Protection: [1; mode=block]
+        content-length: ["9098"]
+      status: {code: 200, message: OK}
+version: 1
