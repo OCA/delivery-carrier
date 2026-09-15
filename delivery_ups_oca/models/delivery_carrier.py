@@ -8,6 +8,7 @@ import base64
 import logging
 from io import BytesIO
 
+import PIL
 from PIL import Image
 
 from odoo import fields, models
@@ -211,6 +212,17 @@ class DeliveryCarrier(models.Model):
         img_decoded = base64.b64decode(gif_data)
         image_string = BytesIO(img_decoded)
         im = Image.open(image_string)
+
+        # rotate to make it portrait
+        im = im.transpose(PIL.Image.ROTATE_270)
+
+        # UPS returns a 4"x8" label with whitespace at the bottom
+        # crop image to 4" to 6"
+        target_width = im.width
+        target_height = int(target_width * 1.5)  # 4"x6" ratio calculation
+        # Crop from the top left (0,0) down to the target dimension
+        im = im.crop((0, 0, target_width, target_height))
+
         label_result = BytesIO()
         # Set resolution to 236 DPI (standard for 6x4" UPS labels)
         im.save(label_result, "PDF", resolution=236.0)
