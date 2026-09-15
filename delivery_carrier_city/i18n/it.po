@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-05-27 14:26+0000\n"
+"PO-Revision-Date: 2026-09-15 06:19+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -14,12 +14,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10.4\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: delivery_carrier_city
 #: model:ir.model.fields,field_description:delivery_carrier_city.field_delivery_carrier__city_ids
 msgid "Cities"
-msgstr ""
+msgstr "Città"
 
 #. module: delivery_carrier_city
 #: model:ir.model.fields,field_description:delivery_carrier_city.field_delivery_carrier__display_name
@@ -39,4 +39,4 @@ msgstr "Ultima Modifica il"
 #. module: delivery_carrier_city
 #: model:ir.model,name:delivery_carrier_city.model_delivery_carrier
 msgid "Shipping Methods"
-msgstr ""
+msgstr "Metodi di spedizione"
