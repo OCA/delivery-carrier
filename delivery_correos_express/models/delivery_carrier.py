@@ -66,7 +66,7 @@ class DeliveryCarrier(models.Model):
             "codDest": "",
             "nomDest": partner.name[:40] if partner.name else "",  # mandatory
             "nifDest": partner.vat or "",
-            "dirDest": "".join(streets)[:300] if streets else "",  # mandatory
+            "dirDest": " ".join(streets)[:300] if streets else "",  # mandatory
             "pobDest": partner.city[:40] if partner.city else "",  # mandatory
             "codPosNacDest": partner.zip if national else "",  # mandatory
             "paisISODest": partner.country_id.code or "",
@@ -83,7 +83,7 @@ class DeliveryCarrier(models.Model):
             "codRte": self.correos_express_customer_code,
             "nomRte": partner.name or "",
             "nifRte": partner.vat or "",
-            "dirRte": "".join(streets)[:300],  # mandatory
+            "dirRte": " ".join(streets)[:300],  # mandatory
             "pobRte": partner.city,  # mandatory
             "codPosNacRte": partner.zip,  # mandatory
             "paisISORte": partner.country_id.code or "",
