@@ -77,7 +77,7 @@ License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
                                 required="delivery_type == 'ups' and ups_cash_on_delivery"
                             />
                         </group>
-                        <group string="Paperless Invoice">
+                        <group string="Paperless Documents">
                             <field
                                 name="ups_paperless_country_group_ids"
                                 widget="many2many_tags"

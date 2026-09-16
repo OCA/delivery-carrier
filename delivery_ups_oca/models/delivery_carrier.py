@@ -114,9 +114,9 @@ class DeliveryCarrier(models.Model):
     )
     ups_paperless_country_group_ids = fields.Many2many(
         "res.country.group",
-        string="Country group to auto-send paperless invoice",
+        string="Country group to auto-send paperless documents",
         help="If the destination country is in one of these country groups, "
-        "the paperless invoice option will be automatically enabled.",
+        "the paperless documents option will be automatically enabled.",
     )
 
     def _ups_get_response_price(self, total_charges, currency, company):
@@ -278,7 +278,7 @@ class DeliveryCarrier(models.Model):
         ups_request = UpsRequest(self)
         ups_request._get_new_token()
 
-    def prepare_ups_paperless_invoice(self, picking):
+    def prepare_ups_paperless_documents(self, picking):
         """prepare the paperless document dictionary for up request"""
         paperless_document_data = []
         for file_data in picking.ups_paperless_document_ids:
@@ -350,13 +350,13 @@ class DeliveryCarrier(models.Model):
             )
         return paperless_document_data
 
-    def send_ups_paperless_invoice(self, picking):
-        """Send paperless invoice documents to UPS"""
+    def send_ups_paperless_documents(self, picking):
+        """Send paperless documents to UPS"""
         self.ensure_one()
         if picking.ups_document_identifier:
             raise UserError(_("Document ID already created."))
 
-        paperless_document_data = self.prepare_ups_paperless_invoice(picking)
+        paperless_document_data = self.prepare_ups_paperless_documents(picking)
 
         if not paperless_document_data:
             return {
@@ -368,7 +368,7 @@ class DeliveryCarrier(models.Model):
             }
 
         ups_request = UpsRequest(self)
-        ups_request.send_paperless_invoice(picking, paperless_document_data)
+        ups_request.send_paperless_documents(picking, paperless_document_data)
 
         return {
             "effect": {

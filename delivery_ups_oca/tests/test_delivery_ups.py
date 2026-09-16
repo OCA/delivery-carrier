@@ -1228,7 +1228,7 @@ class TestUpsNegotiatedRates(TestDeliveryUpsBase):
             self.assertEqual(self.picking.carrier_tracking_ref, "1ZXXXXXXXXXXXXXXXX")
 
 
-class TestSendPaperlessInvoice(TestDeliveryUpsBase):
+class TestSendPaperlessDocuments(TestDeliveryUpsBase):
     def setUp(self):
         super().setUp()
         self.picking = self.sale.picking_ids[0]
@@ -1241,31 +1241,31 @@ class TestSendPaperlessInvoice(TestDeliveryUpsBase):
         self.invoice = self.sale._create_invoices()
         self.invoice.action_post()
 
-    def test_prepare_ups_paperless_invoice_adds_missing_docs(self):
-        result = self.carrier.prepare_ups_paperless_invoice(self.picking)
+    def test_prepare_ups_paperless_documents_adds_missing_docs(self):
+        result = self.carrier.prepare_ups_paperless_documents(self.picking)
         doc_types = [doc["UserCreatedFormDocumentType"] for doc in result]
         self.assertIn("002", doc_types, "Invoice should be added if missing")
         self.assertIn("010", doc_types, "Packing list should be added if missing")
 
-    def test_ups_paperless_invoice_raises_if_document_id_exists(self):
+    def test_ups_paperless_documents_raises_if_document_id_exists(self):
         """Should raise UserError when a document ID already exists"""
         self.picking.ups_document_identifier = "DUMMY_ID"
         with self.assertRaises(UserError):
-            self.carrier.send_ups_paperless_invoice(self.picking)
+            self.carrier.send_ups_paperless_documents(self.picking)
 
-    def test_prepare_paperless_invoice_raises_if_invoice_missing(self):
+    def test_prepare_paperless_documents_raises_if_invoice_missing(self):
         self.picking.sale_id.invoice_ids = False
         with self.assertRaises(UserError):
-            self.carrier.send_ups_paperless_invoice(self.picking)
+            self.carrier.send_ups_paperless_documents(self.picking)
 
-    def test_send_paperless_invoice_data(self):
+    def test_send_paperless_documents_data(self):
         self.picking.ups_paperless_auto_send = True
         self.picking.ups_paperless_document_ids = [
             (
                 0,
                 0,
                 {
-                    "file_name": "Paperless Invoice - 001",
+                    "file_name": "Paperless Document - 001",
                     "ups_document_type": "003",
                     "ups_paperless_file": self.dummy_pdf,
                 },
@@ -1274,19 +1274,19 @@ class TestSendPaperlessInvoice(TestDeliveryUpsBase):
                 0,
                 0,
                 {
-                    "file_name": "Paperless Invoice - 002",
+                    "file_name": "Paperless Document - 002",
                     "ups_document_type": "013",
                     "ups_paperless_file": self.dummy_pdf,
                 },
             ),
         ]
         with mock.patch(
-            _provider_class + ".send_paperless_invoice", return_value="DOC123456789"
+            _provider_class + ".send_paperless_documents", return_value="DOC123456789"
         ):
-            result = self.carrier.send_ups_paperless_invoice(self.picking)
+            result = self.carrier.send_ups_paperless_documents(self.picking)
             self.assertIsNotNone(result)
 
-    def test_send_paperless_invoice_success(self):
+    def test_send_paperless_documents_success(self):
         """A successful upload stores the returned document ID on the picking."""
         ups_request = UpsRequest(self.carrier)
         documents = [
@@ -1305,12 +1305,12 @@ class TestSendPaperlessInvoice(TestDeliveryUpsBase):
         with mock.patch.object(
             ups_request, "_send_request", return_value=mock_response
         ) as mock_send:
-            result = ups_request.send_paperless_invoice(self.picking, documents)
+            result = ups_request.send_paperless_documents(self.picking, documents)
         self.assertEqual(result, ["DOC123"])
         self.assertEqual(self.picking.ups_document_identifier, "DOC123")
         self.assertIn("/api/paperlessdocuments/v2/upload", mock_send.call_args[0][0])
 
-    def test_send_paperless_invoice_multiple_documents(self):
+    def test_send_paperless_documents_multiple_documents(self):
         """v2 always returns an array; every document ID is kept."""
         ups_request = UpsRequest(self.carrier)
         documents = [
@@ -1337,7 +1337,7 @@ class TestSendPaperlessInvoice(TestDeliveryUpsBase):
         with mock.patch.object(
             ups_request, "_send_request", return_value=mock_response
         ):
-            result = ups_request.send_paperless_invoice(self.picking, documents)
+            result = ups_request.send_paperless_documents(self.picking, documents)
         self.assertEqual(result, ["DOC1", "DOC2"])
         self.assertEqual(self.picking.ups_document_identifier, "DOC1,DOC2")
         self.assertEqual(self.picking._get_ups_document_ids(), ["DOC1", "DOC2"])
@@ -1351,7 +1351,7 @@ class TestSendPaperlessInvoice(TestDeliveryUpsBase):
         self.picking.ups_document_identifier = False
         self.assertEqual(self.picking._get_ups_document_ids(), [])
 
-    def test_send_paperless_invoice_refreshes_expired_token(self):
+    def test_send_paperless_documents_refreshes_expired_token(self):
         """An expired token is renewed before the upload is sent."""
         self.carrier.ups_token_expiration_date = datetime.now() - timedelta(hours=1)
         ups_request = UpsRequest(self.carrier)
@@ -1372,11 +1372,11 @@ class TestSendPaperlessInvoice(TestDeliveryUpsBase):
             mock.patch.object(ups_request, "_get_new_token") as mock_token,
             mock.patch.object(ups_request, "_send_request", return_value=mock_response),
         ):
-            result = ups_request.send_paperless_invoice(self.picking, documents)
+            result = ups_request.send_paperless_documents(self.picking, documents)
         mock_token.assert_called_once()
         self.assertEqual(result, ["DOC123"])
 
-    def test_send_paperless_invoice_retries_on_401(self):
+    def test_send_paperless_documents_retries_on_401(self):
         """A 401 triggers a new token and exactly one retry."""
         ups_request = UpsRequest(self.carrier)
         documents = [
@@ -1400,12 +1400,12 @@ class TestSendPaperlessInvoice(TestDeliveryUpsBase):
                 ups_request, "_send_request", side_effect=[unauthorized, success]
             ) as mock_send,
         ):
-            result = ups_request.send_paperless_invoice(self.picking, documents)
+            result = ups_request.send_paperless_documents(self.picking, documents)
         mock_token.assert_called_once()
         self.assertEqual(mock_send.call_count, 2)
         self.assertEqual(result, ["DOC123"])
 
-    def test_send_paperless_invoice_api_error(self):
+    def test_send_paperless_documents_api_error(self):
         """An error response is raised as a UserError with the UPS message."""
         ups_request = UpsRequest(self.carrier)
         documents = [
@@ -1425,10 +1425,10 @@ class TestSendPaperlessInvoice(TestDeliveryUpsBase):
             ups_request, "_send_request", return_value=mock_response
         ):
             with self.assertRaises(UserError) as cm:
-                ups_request.send_paperless_invoice(self.picking, documents)
+                ups_request.send_paperless_documents(self.picking, documents)
         self.assertIn("Invalid shipper number", str(cm.exception))
 
-    def test_send_paperless_invoice_non_json_error(self):
+    def test_send_paperless_documents_non_json_error(self):
         """A non-JSON (e.g. HTML 503 from the edge/CDN) response raises a clear
         UserError instead of a confusing JSON decode error."""
         ups_request = UpsRequest(self.carrier)
@@ -1450,7 +1450,7 @@ class TestSendPaperlessInvoice(TestDeliveryUpsBase):
             ups_request, "_send_request", return_value=mock_response
         ):
             with self.assertRaises(UserError) as cm:
-                ups_request.send_paperless_invoice(self.picking, documents)
+                ups_request.send_paperless_documents(self.picking, documents)
         self.assertIn("HTTP 503", str(cm.exception))
         self.assertIn("non-JSON", str(cm.exception))
         self.assertFalse(self.picking.ups_document_identifier)
@@ -1469,7 +1469,7 @@ class TestSendPaperlessInvoice(TestDeliveryUpsBase):
         )
 
     def test_prepare_create_shipping_with_cod_and_international_forms(self):
-        """COD and paperless invoices can be combined on the same shipment."""
+        """COD and paperless documents can be combined on the same shipment."""
         self.carrier.write({"ups_cash_on_delivery": True, "ups_cod_funds_code": "1"})
         self.picking.ups_document_identifier = "DOC1,DOC2"
         self.picking.shipping_weight = 10.0
@@ -1483,8 +1483,8 @@ class TestSendPaperlessInvoice(TestDeliveryUpsBase):
             ["DOC1", "DOC2"],
         )
 
-    def test_send_shipping_triggers_paperless_invoice(self):
-        """_send_shipping sends the paperless invoice before shipping."""
+    def test_send_shipping_triggers_paperless_documents(self):
+        """_send_shipping sends the paperless documents before shipping."""
         self.picking.ups_paperless_auto_send = True
         self.picking.shipping_weight = 10.0
         self.picking.number_of_packages = 1
@@ -1510,7 +1510,7 @@ class TestSendPaperlessInvoice(TestDeliveryUpsBase):
             }
         }
         with mock.patch.object(
-            type(self.carrier), "send_ups_paperless_invoice"
+            type(self.carrier), "send_ups_paperless_documents"
         ) as mock_provider:
             with mock.patch.object(
                 ups_request, "_process_reply", return_value=shipment_response
@@ -1519,15 +1519,15 @@ class TestSendPaperlessInvoice(TestDeliveryUpsBase):
                     ups_request._send_shipping(self.picking)
         mock_provider.assert_called_once_with(self.picking)
 
-    def test_button_validate_triggers_paperless_invoice(self):
-        """Validating an auto-send picking triggers the paperless invoice."""
+    def test_button_validate_triggers_paperless_documents(self):
+        """Validating an auto-send picking triggers the paperless documents upload."""
         self.picking.ups_paperless_auto_send = True
         self.picking.ups_paperless_document_ids = [
             (
                 0,
                 0,
                 {
-                    "file_name": "Paperless Invoice - 001",
+                    "file_name": "Paperless Document - 001",
                     "ups_document_type": "003",
                     "ups_paperless_file": self.dummy_pdf,
                 },
@@ -1548,7 +1548,7 @@ class TestSendPaperlessInvoice(TestDeliveryUpsBase):
             },
         ):
             with mock.patch.object(
-                type(self.carrier), "send_ups_paperless_invoice"
+                type(self.carrier), "send_ups_paperless_documents"
             ) as mock_provider:
                 self.picking.button_validate()
         mock_provider.assert_called_once_with(self.picking)
@@ -1585,8 +1585,8 @@ class TestSendPaperlessInvoice(TestDeliveryUpsBase):
         self.picking._onchange_ups_paperless_auto_send()
         self.assertFalse(self.picking.ups_paperless_auto_send)
 
-    def test_send_paperless_invoice_no_documents(self):
+    def test_send_paperless_documents_no_documents(self):
         """Sending without any document raises a UserError."""
         ups_request = UpsRequest(self.carrier)
         with self.assertRaises(UserError):
-            ups_request.send_paperless_invoice(self.picking, [])
+            ups_request.send_paperless_documents(self.picking, [])

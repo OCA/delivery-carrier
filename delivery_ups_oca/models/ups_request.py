@@ -327,7 +327,7 @@ class UpsRequest:
                     },
                 }
             }
-        # Add paperless invoice if a document id has been retrieved
+        # Add paperless documents if a document id has been retrieved
         document_ids = picking._get_ups_document_ids()
         if document_ids:
             shipment = vals["ShipmentRequest"]["Shipment"]
@@ -338,13 +338,13 @@ class UpsRequest:
         return vals
 
     def _send_shipping(self, picking):
-        # Send the paperless invoice first so its document ID is included
+        # Send the paperless documents first so their document IDs are included
         # in the shipment request.
         if picking.ups_paperless_auto_send and not picking.ups_document_identifier:
             try:
-                self.carrier.send_ups_paperless_invoice(picking)
+                self.carrier.send_ups_paperless_documents(picking)
             except Exception as e:
-                error_msg = _("Failed to send paperless invoice: %s") % str(e)
+                error_msg = _("Failed to send paperless documents: %s") % str(e)
                 _logger.error(error_msg)
                 raise UserError(error_msg) from e
         status = self._process_reply(
@@ -571,13 +571,13 @@ class UpsRequest:
             alerts = [alerts]
         for alert in alerts:
             _logger.info(
-                "UPS Paperless Invoice alert: %s %s",
+                "UPS Paperless Documents alert: %s %s",
                 alert.get("Code"),
                 alert.get("Description"),
             )
 
-    def send_paperless_invoice(self, picking, paperless_document_data):
-        """Send paperless invoice documents to UPS"""
+    def send_paperless_documents(self, picking, paperless_document_data):
+        """Send paperless documents to UPS"""
         if not paperless_document_data:
             raise UserError(picking.env._("No documents to send!"))
 
@@ -602,7 +602,7 @@ class UpsRequest:
             if "UserCreatedFormFile" in doc:
                 doc["UserCreatedFormFile"] = "***MASKED***"
         _logger.debug(
-            "UPS Paperless Invoice Request: URL=%s, Headers=%s, Data=%s",
+            "UPS Paperless Documents Request: URL=%s, Headers=%s, Data=%s",
             url,
             headers,
             debug_request,
@@ -616,14 +616,14 @@ class UpsRequest:
                 timeout=10,
             )
             _logger.debug(
-                "UPS Paperless Invoice Response: Status=%s, Content=%s",
+                "UPS Paperless Documents Response: Status=%s, Content=%s",
                 response.status_code,
                 response.text,
             )
             self.carrier.log_xml(response.text or "", "ups_last_response")
             if response.status_code in [200, 201]:
-                invoice_response = response.json()
-                upload_response = invoice_response.get("UploadResponse") or {}
+                response_payload = response.json()
+                upload_response = response_payload.get("UploadResponse") or {}
                 self._log_paperless_alerts(upload_response)
                 forms_history = upload_response.get("FormsHistoryDocumentID") or {}
                 document_ids = self._normalize_document_ids(
@@ -638,7 +638,7 @@ class UpsRequest:
             if error_payload is None:
                 raise UserError(
                     picking.env._(
-                        "UPS Paperless Invoice upload failed (HTTP %s). "
+                        "UPS Paperless Documents upload failed (HTTP %s). "
                         "UPS returned a non-JSON response, which usually means "
                         "a temporary UPS or network (edge/CDN) outage. "
                         "Please retry in a few minutes; if the problem "
@@ -649,7 +649,7 @@ class UpsRequest:
             errors = (error_payload.get("response") or {}).get("errors")
             error_message = errors[0].get("message") if errors else response.text
             raise UserError(
-                picking.env._("Paperless Invoice: %s") % error_message
+                picking.env._("Paperless Documents: %s") % error_message
             ) from None
         except UserError:
             raise

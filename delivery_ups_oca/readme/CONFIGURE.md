@@ -15,9 +15,9 @@ To configure this module, you need to:
 5.  The "Negotiated Rates" checkbox is disabled by default. When checked
     and your account has negotiated rates, UPS will use your
     account's negotiated rates for shipping cost calculations.
-6.  For paperless invoice functionality, configure the "Country group to
-    auto-send paperless invoice" field by selecting the country groups for
-    which you want to automatically enable paperless invoices. When a
+6.  For paperless documents functionality, configure the "Country group to
+    auto-send paperless documents" field by selecting the country groups for
+    which you want to automatically enable paperless documents. When a
     delivery is created with a destination country in one of these groups,
     the system will automatically prepare and send the required
     documentation to UPS.

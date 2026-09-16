@@ -23,7 +23,7 @@ class StockPicking(models.Model):
     )
     ups_paperless_auto_send = fields.Boolean(
         string="Automatically Send",
-        help="True if you need to send a UPS Paperless Invoice",
+        help="True if you need to send UPS Paperless Documents",
     )
 
     def ups_get_label(self):
@@ -33,8 +33,8 @@ class StockPicking(models.Model):
             return
         return self.carrier_id.ups_get_label(tracking_ref)
 
-    def generate_paperless_invoice(self):
-        return self.carrier_id.send_ups_paperless_invoice(self)
+    def generate_paperless_documents(self):
+        return self.carrier_id.send_ups_paperless_documents(self)
 
     def _get_ups_document_ids(self):
         self.ensure_one()
@@ -74,7 +74,7 @@ class StockPicking(models.Model):
         return pickings
 
     def button_validate(self):
-        """Override to trigger paperless invoice upload when validating a picking"""
+        """Override to trigger paperless documents upload when validating a picking"""
         res = super().button_validate()
         for picking in self:
             if (
@@ -85,12 +85,12 @@ class StockPicking(models.Model):
                 and picking.ups_paperless_document_ids
             ):
                 try:
-                    picking.carrier_id.send_ups_paperless_invoice(picking)
+                    picking.carrier_id.send_ups_paperless_documents(picking)
                 except Exception as e:
                     # Log the error but don't block the validation
                     self.env.user.notify_warning(
-                        message=f"Failed to send paperless invoice: {str(e)}",
-                        title="UPS Paperless Invoice",
+                        message=f"Failed to send paperless documents: {str(e)}",
+                        title="UPS Paperless Documents",
                         sticky=True,
                     )
         return res
