@@ -18,7 +18,7 @@ class UpsPaperlessDocument(models.Model):
             ("004", "Export Accompanying Document"),
             ("005", "Export License"),
             ("006", "Import Permit"),
-            ("007", "One Time NAFTA"),
+            ("007", "One Time USMCA"),
             ("008", "Other Document"),
             ("009", "Power of Attorney"),
             ("010", "Packing List"),

@@ -3,10 +3,10 @@
 # Copyright 2024 Sygel - Manuel Regidor
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-import ast
 import datetime
 import json
 import logging
+import uuid
 from urllib.parse import urlencode
 
 import requests
@@ -16,6 +16,7 @@ from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
 UPS_TAX_IDENTIFICATION_NUMBER_MAX_LENGTH = 15
+UPS_PAPERLESS_API_VERSION = "v2"
 
 
 class UpsRequest:
@@ -87,6 +88,37 @@ class UpsRequest:
             + datetime.timedelta(seconds=int(status.get("expires_in")))
         )
 
+    def _send_authenticated_request(
+        self,
+        url,
+        json=None,
+        data=None,
+        method="post",
+        headers_extra=None,
+        timeout=10,
+    ):
+        """Send a request with a valid bearer token, retrying once on a 401"""
+        if (
+            not self.token
+            or not self.token_expiration_date
+            or (self.token_expiration_date <= datetime.datetime.now())
+        ):
+            self._get_new_token()
+        headers = {
+            "Authorization": f"Bearer {self.token}",
+        }
+        if headers_extra:
+            headers = {**headers, **headers_extra}
+        response = self._send_request(url, json, data, headers, method, timeout=timeout)
+        # Generate a new token
+        if response.status_code == 401:
+            self._get_new_token()
+            headers["Authorization"] = f"Bearer {self.token}"
+            response = self._send_request(
+                url, json, data, headers, method, timeout=timeout
+            )
+        return response
+
     def _process_reply(
         self,
         url,
@@ -96,26 +128,10 @@ class UpsRequest:
         headers_extra=None,
         timeout=10,
     ):
-        if (
-            not self.token
-            or not self.token_expiration_date
-            or (self.token_expiration_date <= datetime.datetime.now())
-        ):
-            self._get_new_token()
         data = data or {}
-        headers = {
-            "Authorization": f"Bearer {self.token}",
-        }
-        if headers_extra:
-            headers = {**headers, **headers_extra}
-        status = self._send_request(url, json, data, headers, method, timeout=timeout)
-        # Generate a new token
-        if status.status_code == 401:
-            self._get_new_token()
-            headers["Authorization"] = f"Bearer {self.token}"
-            status = self._send_request(
-                url, json, data, headers, method, timeout=timeout
-            )
+        status = self._send_authenticated_request(
+            url, json, data, method, headers_extra, timeout
+        )
         status = status.json()
         ups_last_request = f"URL: {self.url}\nData: {data}\nJSON: {json}"
         self.carrier.log_xml(ups_last_request, "ups_last_request")
@@ -302,31 +318,22 @@ class UpsRequest:
                 "NegotiatedRatesIndicator": "Y"
             }
         if picking.carrier_id.ups_cash_on_delivery and picking.sale_id:
-            vals["ShipmentRequest"]["Shipment"]["ShipmentServiceOptions"] = (
-                {
-                    "COD": {
-                        "CODFundsCode": picking.carrier_id.ups_cod_funds_code,
-                        "CODAmount": {
-                            "CurrencyCode": picking.sale_id.currency_id.name,
-                            "MonetaryValue": str(picking.sale_id.amount_total),
-                        },
-                    }
-                },
-            )
+            vals["ShipmentRequest"]["Shipment"]["ShipmentServiceOptions"] = {
+                "COD": {
+                    "CODFundsCode": picking.carrier_id.ups_cod_funds_code,
+                    "CODAmount": {
+                        "CurrencyCode": picking.sale_id.currency_id.name,
+                        "MonetaryValue": str(picking.sale_id.amount_total),
+                    },
+                }
+            }
         # Add paperless invoice if a document id has been retrieved
-        if picking.ups_document_identifier and picking.ups_document_identifier.strip():
-            try:
-                document_id = (
-                    ast.literal_eval(picking.ups_document_identifier)
-                    if len(picking.ups_document_identifier) > 30
-                    else picking.ups_document_identifier
-                )
-            except (ValueError, SyntaxError):
-                document_id = picking.ups_document_identifier
+        document_ids = picking._get_ups_document_ids()
+        if document_ids:
             shipment = vals["ShipmentRequest"]["Shipment"]
             shipment.setdefault("ShipmentServiceOptions", {})["InternationalForms"] = {
                 "FormType": "07",
-                "UserCreatedForm": {"DocumentID": document_id},
+                "UserCreatedForm": {"DocumentID": document_ids},
             }
         return vals
 
@@ -551,6 +558,24 @@ class UpsRequest:
             "pod": pod,
         }
 
+    def _normalize_document_ids(self, document_id):
+        if not document_id:
+            return []
+        if isinstance(document_id, str):
+            document_id = [document_id]
+        return [doc_id.strip() for doc_id in document_id if doc_id and doc_id.strip()]
+
+    def _log_paperless_alerts(self, upload_response):
+        alerts = (upload_response.get("Response") or {}).get("Alert") or []
+        if isinstance(alerts, dict):
+            alerts = [alerts]
+        for alert in alerts:
+            _logger.info(
+                "UPS Paperless Invoice alert: %s %s",
+                alert.get("Code"),
+                alert.get("Description"),
+            )
+
     def send_paperless_invoice(self, picking, paperless_document_data):
         """Send paperless invoice documents to UPS"""
         if not paperless_document_data:
@@ -567,9 +592,10 @@ class UpsRequest:
             "ShipperNumber": self.shipper_number,
             "Content-Type": "application/json",
             "Accept": "application/json",
-            "Authorization": f"Bearer {self.token}",
+            "transId": uuid.uuid4().hex,
+            "transactionSrc": self.transaction_src,
         }
-        url = f"{self.url}/api/paperlessdocuments/v1/upload"
+        url = f"{self.url}/api/paperlessdocuments/{UPS_PAPERLESS_API_VERSION}/upload"
         # Mask the document files before logging the request
         debug_request = json.loads(json.dumps(request_data))
         for doc in debug_request.get("UploadRequest", {}).get("UserCreatedForm", []):
@@ -581,11 +607,12 @@ class UpsRequest:
             headers,
             debug_request,
         )
+        self.carrier.log_xml(f"URL: {url}\nJSON: {debug_request}", "ups_last_request")
         try:
-            response = self._send_request(
+            response = self._send_authenticated_request(
                 url,
                 data=json.dumps(request_data),
-                headers=headers,
+                headers_extra=headers,
                 timeout=10,
             )
             _logger.debug(
@@ -593,13 +620,17 @@ class UpsRequest:
                 response.status_code,
                 response.text,
             )
+            self.carrier.log_xml(response.text or "", "ups_last_response")
             if response.status_code in [200, 201]:
                 invoice_response = response.json()
                 upload_response = invoice_response.get("UploadResponse") or {}
+                self._log_paperless_alerts(upload_response)
                 forms_history = upload_response.get("FormsHistoryDocumentID") or {}
-                document_id = forms_history.get("DocumentID")
-                picking.ups_document_identifier = document_id
-                return document_id
+                document_ids = self._normalize_document_ids(
+                    forms_history.get("DocumentID")
+                )
+                picking.ups_document_identifier = ",".join(document_ids)
+                return document_ids
             try:
                 error_payload = json.loads(response.text)
             except (ValueError, TypeError):
