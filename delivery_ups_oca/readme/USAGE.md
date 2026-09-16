@@ -10,3 +10,8 @@ ship:
   in UPS.
 - If you have "Tracking state update sync" checked in the shipping
   method, a periodical state check will be done querying UPS services.
+- Each delivery order shows a *Declared Value*,
+  pre-filled from the taxed price of the shipped products and the
+  carrier's declared value percentage. You can adjust it manually before
+  creating the label; when greater than zero it is sent to UPS as the
+  package's declared value for insurance.
