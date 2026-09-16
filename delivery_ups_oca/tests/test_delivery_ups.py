@@ -127,15 +127,18 @@ class TestDeliveryUps(TestDeliveryUpsBase):
 
         # Mock _process_reply to return a successful response
         with mock.patch.object(ups_request, "_process_reply") as mock_process_reply:
-            # Mock the response structure
+            # Mock the response structure. From v2409 on, RatedShipment is
+            # always returned as an array.
             mock_process_reply.return_value = {
                 "RateResponse": {
-                    "RatedShipment": {
-                        "TotalCharges": {
-                            "MonetaryValue": "150.00",
-                            "CurrencyCode": "USD",
+                    "RatedShipment": [
+                        {
+                            "TotalCharges": {
+                                "MonetaryValue": "150.00",
+                                "CurrencyCode": "USD",
+                            }
                         }
-                    }
+                    ]
                 }
             }
 
@@ -148,17 +151,20 @@ class TestDeliveryUps(TestDeliveryUpsBase):
                 mock_process_reply.assert_called_once()
                 call_args = mock_process_reply.call_args
 
-                # # Check URL
-                # self.assertIn("/api/rating/v1/Rate", call_args[0][0])
+                # Check URL
+                self.assertIn("/api/rating/v2409/Rate", call_args[1]["url"])
 
                 # Check JSON data structure
                 json_data = call_args[1]["json"]
                 self.assertIn("RateRequest", json_data)
                 self.assertIn("Shipment", json_data["RateRequest"])
+                self.assertEqual(
+                    json_data["RateRequest"]["Request"]["SubVersion"], "2409"
+                )
 
                 # Verify result
                 self.assertEqual(
-                    result["RateResponse"]["RatedShipment"]["TotalCharges"][
+                    result["RateResponse"]["RatedShipment"][0]["TotalCharges"][
                         "MonetaryValue"
                     ],
                     "150.00",
@@ -174,15 +180,42 @@ class TestDeliveryUps(TestDeliveryUpsBase):
             _provider_class + "._rate_shipment",
             return_value={
                 "RateResponse": {
-                    "RatedShipment": {
-                        "TotalCharges": {"MonetaryValue": 1, "CurrencyCode": "USD"}
-                    }
+                    "RatedShipment": [
+                        {"TotalCharges": {"MonetaryValue": 1, "CurrencyCode": "USD"}}
+                    ]
                 }
             },
         ):
             res = self.carrier.ups_rate_shipment(self.sale)
             self.assertGreater(res["price"], 0)
             self.assertTrue(res["success"])
+
+    def test_order_ups_rate_shipment_single_object(self):
+        """Pre-v2409 responses with a bare RatedShipment object still work."""
+        with mock.patch(
+            _provider_class + "._rate_shipment",
+            return_value={
+                "RateResponse": {
+                    "RatedShipment": {
+                        "TotalCharges": {"MonetaryValue": 12, "CurrencyCode": "USD"}
+                    }
+                }
+            },
+        ):
+            res = self.carrier.ups_rate_shipment(self.sale)
+            self.assertTrue(res["success"])
+            self.assertGreater(res["price"], 0)
+
+    def test_order_ups_rate_shipment_no_rate(self):
+        """An empty RatedShipment container is reported as a failure."""
+        with mock.patch(
+            _provider_class + "._rate_shipment",
+            return_value={"RateResponse": {}},
+        ):
+            res = self.carrier.ups_rate_shipment(self.sale)
+        self.assertFalse(res["success"])
+        self.assertEqual(res["price"], 0.0)
+        self.assertIn("no rate", res["error_message"])
 
     def test_ups_rate_shipment_unavailable_service(self):
         """A UserError during rating is swallowed so the method can be hidden."""
@@ -298,10 +331,17 @@ class TestDeliveryUps(TestDeliveryUpsBase):
         with (
             mock.patch.object(
                 ups_request, "_process_reply", return_value=mock_response
-            ),
+            ) as mock_process_reply,
             mock.patch.object(ups_request, "_raise_for_status"),
         ):
             result = ups_request._send_shipping(self.picking)
+            self.assertIn(
+                "/api/shipments/v2409/ship", mock_process_reply.call_args[1]["url"]
+            )
+            request_json = mock_process_reply.call_args[1]["json"]
+            self.assertEqual(
+                request_json["ShipmentRequest"]["Request"]["SubVersion"], "2205"
+            )
             self.assertEqual(result["price"], "45.99")
             self.assertEqual(result["ShipmentIdentificationNumber"], "SHIP123456789")
             self.assertEqual(len(result["labels"]), 1)
@@ -404,7 +444,7 @@ class TestDeliveryUps(TestDeliveryUpsBase):
         }
         with mock.patch.object(
             ups_request, "_process_reply", return_value=mock_response
-        ):
+        ) as mock_process_reply:
             with mock.patch.object(
                 ups_request,
                 "_prepare_shipping_label",
@@ -413,6 +453,9 @@ class TestDeliveryUps(TestDeliveryUpsBase):
                 # Call the method
                 labels = ups_request.shipping_label(carrier_tracking_ref)
                 # Verify the result
+                self.assertIn(
+                    "/api/labels/v1/recovery", mock_process_reply.call_args[1]["url"]
+                )
                 self.assertEqual(len(labels), 1)
                 self.assertEqual(labels[0]["tracking_ref"], "1Z12345E0291980793")
                 self.assertEqual(labels[0]["format_code"], "PDF")
@@ -420,6 +463,18 @@ class TestDeliveryUps(TestDeliveryUpsBase):
                     labels[0]["datas"],
                     base64.b64encode(mock_label_data).decode("ascii"),
                 )
+
+    def test_ups_prepare_shipping_label_request_container(self):
+        """The label recovery request carries the documented Request container."""
+        ups_request = UpsRequest(self.carrier)
+        request = ups_request._prepare_shipping_label("1Z12345E0291980793")
+        recovery_request = request["LabelRecoveryRequest"]
+        self.assertEqual(recovery_request["Request"]["SubVersion"], "1903")
+        self.assertEqual(
+            recovery_request["Request"]["TransactionReference"]["CustomerContext"],
+            "1Z12345E0291980793",
+        )
+        self.assertEqual(recovery_request["TrackingNumber"], "1Z12345E0291980793")
 
     def test_ups_get_label_pdf(self):
         self.carrier.ups_file_format = "PDF"
@@ -536,10 +591,14 @@ class TestDeliveryUps(TestDeliveryUpsBase):
         }
         with mock.patch.object(
             ups_request, "_process_reply", return_value=mock_response
-        ):
+        ) as mock_process_reply:
             with mock.patch.object(ups_request, "_raise_for_status", return_value=True):
                 result = ups_request.cancel_shipment(self.picking)
                 self.assertTrue(result)
+                self.assertIn(
+                    "/api/shipments/v2409/void/cancel/123456",
+                    mock_process_reply.call_args[1]["url"],
+                )
 
     def test_ups_tracking_state_update(self):
         self.picking.carrier_tracking_ref = "123456"
@@ -573,21 +632,14 @@ class TestDeliveryUps(TestDeliveryUpsBase):
         self.carrier.ups_client_secret = False
         # Create UpsRequest instance
         ups_request = UpsRequest(self.carrier)
-        # Mock the _() translation function in the ups_request module
-        # This prevents translation context issues
-        with mock.patch(
-            "odoo.addons.delivery_ups_oca.models.ups_request._"
-        ) as mock_translate:
-            # Make the translation function return the string unchanged
-            mock_translate.side_effect = lambda x: x
-            # The _get_new_token method should raise UserError when no credentials
-            with self.assertRaises(UserError) as context:
-                ups_request._get_new_token()
-            # Get the exception message
-            error_msg = str(context.exception)
-            self.assertIn("Client ID", error_msg)
-            self.assertIn("Client Secret", error_msg)
-            self.assertIn("must be set", error_msg)
+        # The _get_new_token method should raise UserError when no credentials
+        with self.assertRaises(UserError) as context:
+            ups_request._get_new_token()
+        # Get the exception message
+        error_msg = str(context.exception)
+        self.assertIn("Client ID", error_msg)
+        self.assertIn("Client Secret", error_msg)
+        self.assertIn("must be set", error_msg)
 
     def test_ups_update_token(self):
         # Test the actual token update with proper mock
@@ -642,9 +694,9 @@ class TestDeliveryUps(TestDeliveryUpsBase):
             _provider_class + "._rate_shipment",
             return_value={
                 "RateResponse": {
-                    "RatedShipment": {
-                        "TotalCharges": {"MonetaryValue": 1, "CurrencyCode": "USD"}
-                    }
+                    "RatedShipment": [
+                        {"TotalCharges": {"MonetaryValue": 1, "CurrencyCode": "USD"}}
+                    ]
                 }
             },
         ):
@@ -732,6 +784,17 @@ class TestDeliveryUps(TestDeliveryUpsBase):
         self.assertEqual(result, mock_response)
         mock_requests.post.assert_called_once()
         self.assertEqual(mock_requests.post.call_args.kwargs["timeout"], 10)
+
+    def test_ups_transaction_headers(self):
+        """UPS identifies callers through the transId/transactionSrc headers."""
+        ups_request = UpsRequest(self.carrier)
+        headers = ups_request._transaction_headers()
+        # UPS limits transId to 32 characters
+        self.assertEqual(len(headers["transId"]), 32)
+        self.assertNotEqual(
+            headers["transId"], ups_request._transaction_headers()["transId"]
+        )
+        self.assertEqual(headers["transactionSrc"], f"Odoo ({self.carrier.name})")
 
     def test_ups_prepare_create_shipping_with_packages(self):
         """Test _prepare_create_shipping with packages from picking"""
@@ -846,6 +909,12 @@ class TestDeliveryUps(TestDeliveryUpsBase):
         # Prepare shipping data
         result = ups_request._prepare_create_shipping(self.picking)
 
+        # Verify the Request container required by the Ship API
+        request = result["ShipmentRequest"]["Request"]
+        self.assertEqual(request["RequestOption"], "nonvalidate")
+        self.assertEqual(request["SubVersion"], "2205")
+        self.assertEqual(request["TransactionReference"]["CustomerContext"], "TEST0002")
+
         # Verify structure
         packages = result["ShipmentRequest"]["Shipment"]["Package"]
         self.assertEqual(len(packages), 3)  # Should create 3 packages
@@ -891,7 +960,7 @@ class TestDeliveryUps(TestDeliveryUpsBase):
         # Verify cash on delivery data is included
         shipment = result["ShipmentRequest"]["Shipment"]
         self.assertIn("ShipmentServiceOptions", shipment)
-        cod_data = shipment["ShipmentServiceOptions"][0]["COD"]
+        cod_data = shipment["ShipmentServiceOptions"]["COD"]
         self.assertEqual(cod_data["CODFundsCode"], "1")
         self.assertEqual(cod_data["CODAmount"]["CurrencyCode"], "USD")
         self.assertEqual(cod_data["CODAmount"]["MonetaryValue"], "11.5")
@@ -1056,30 +1125,33 @@ class TestUpsNegotiatedRates(TestDeliveryUpsBase):
                     "Alert": alert_110971,
                     "TransactionReference": "",
                 },
-                "RatedShipment": {
-                    "Service": {"Code": "11", "Description": ""},
-                    "RatedShipmentAlert": alert_110971,
-                    "BillingWeight": {
-                        "UnitOfMeasurement": {
-                            "Code": "KGS",
-                            "Description": "Kilograms",
+                "RatedShipment": [
+                    {
+                        "Service": {"Code": "11", "Description": ""},
+                        "RatedShipmentAlert": alert_110971,
+                        "BillingWeight": {
+                            "UnitOfMeasurement": {
+                                "Code": "KGS",
+                                "Description": "Kilograms",
+                            },
+                            "Weight": "0.5",
                         },
-                        "Weight": "0.5",
-                    },
-                    "TransportationCharges": {
-                        "CurrencyCode": "EUR",
-                        "MonetaryValue": charges,
-                    },
-                    "ServiceOptionsCharges": {
-                        "CurrencyCode": "EUR",
-                        "MonetaryValue": "0.00",
-                    },
-                    "TotalCharges": {
-                        "CurrencyCode": "EUR",
-                        "MonetaryValue": charges,
-                    },
-                    "RatedPackage": {"Weight": "0.1"},
-                },
+                        "TransportationCharges": {
+                            "CurrencyCode": "EUR",
+                            "MonetaryValue": charges,
+                        },
+                        "ServiceOptionsCharges": {
+                            "CurrencyCode": "EUR",
+                            "MonetaryValue": "0.00",
+                        },
+                        "TotalCharges": {
+                            "CurrencyCode": "EUR",
+                            "MonetaryValue": charges,
+                        },
+                        "RatedPackage": [{"Weight": "0.1"}],
+                        "Zone": "000",
+                    }
+                ],
             }
         }
         if multi_alert:
@@ -1094,12 +1166,12 @@ class TestUpsNegotiatedRates(TestDeliveryUpsBase):
                 alert_110971,
                 alert_120900,
             ]
-            response_value["RateResponse"]["RatedShipment"]["RatedShipmentAlert"] = [
+            response_value["RateResponse"]["RatedShipment"][0]["RatedShipmentAlert"] = [
                 alert_110971,
                 alert_120900,
             ]
         if negotiated_charges:
-            response_value["RateResponse"]["RatedShipment"].update(
+            response_value["RateResponse"]["RatedShipment"][0].update(
                 {
                     "NegotiatedRateCharges": {
                         "TotalCharge": {
@@ -1141,18 +1213,20 @@ class TestUpsNegotiatedRates(TestDeliveryUpsBase):
                         "Weight": "0.5",
                     },
                     "ShipmentIdentificationNumber": "1ZXXXXXXXXXXXXXXXX",
-                    "PackageResults": {
-                        "TrackingNumber": "1ZXXXXXXXXXXXXXXXX",
-                        "ServiceOptionsCharges": {
-                            "CurrencyCode": "EUR",
-                            "MonetaryValue": "0.00",
-                        },
-                        "ShippingLabel": {
-                            "ImageFormat": {"Code": "GIF", "Description": "GIF"},
-                            "GraphicImage": "R0lGODlhAQABAIAAAP///"
-                            "wAAACwAAAAAAQABAAACAkQBADs=",
-                        },
-                    },
+                    "PackageResults": [
+                        {
+                            "TrackingNumber": "1ZXXXXXXXXXXXXXXXX",
+                            "ServiceOptionsCharges": {
+                                "CurrencyCode": "EUR",
+                                "MonetaryValue": "0.00",
+                            },
+                            "ShippingLabel": {
+                                "ImageFormat": {"Code": "GIF", "Description": "GIF"},
+                                "GraphicImage": "R0lGODlhAQABAIAAAP///"
+                                "wAAACwAAAAAAQABAAACAkQBADs=",
+                            },
+                        }
+                    ],
                 },
             }
         }

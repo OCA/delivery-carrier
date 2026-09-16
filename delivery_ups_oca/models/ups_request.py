@@ -5,15 +5,22 @@
 
 import datetime
 import logging
+import uuid
 from urllib.parse import urlencode
 
 import requests
 
-from odoo import _
 from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
 UPS_TAX_IDENTIFICATION_NUMBER_MAX_LENGTH = 15
+UPS_RATE_API_VERSION = "v2409"
+UPS_SHIP_API_VERSION = "v2409"
+UPS_LABEL_RECOVERY_API_VERSION = "v1"
+UPS_TRACK_API_VERSION = "v1"
+UPS_RATE_SUBVERSION = "2409"
+UPS_SHIP_SUBVERSION = "2205"
+UPS_LABEL_RECOVERY_SUBVERSION = "1903"
 
 
 class UpsRequest:
@@ -39,13 +46,24 @@ class UpsRequest:
     def _raise_for_status(self, status, skip_errors=True):
         errors = status.get("response", {}).get("errors")
         if errors:
-            msg = _("Sending to UPS: {}").format(
+            msg = self.carrier.env._("Sending to UPS: {}").format(
                 "\n".join("{code} {message}".format(**error) for error in errors),
             )
             if skip_errors:
                 _logger.info(msg)
             else:
                 raise UserError(msg)
+
+    def _transaction_headers(self):
+        return {
+            "transId": uuid.uuid4().hex,
+            "transactionSrc": self.transaction_src,
+        }
+
+    def _as_list(self, value):
+        if not value:
+            return []
+        return value if isinstance(value, list) else [value]
 
     def _send_request(
         self,
@@ -64,7 +82,7 @@ class UpsRequest:
     def _get_new_token(self):
         if not (self.client_id and self.client_secret):
             raise UserError(
-                _(
+                self.carrier.env._(
                     "Both Client ID and Client Secret"
                     " must be set in UPS delivery carriers."
                 )
@@ -115,7 +133,7 @@ class UpsRequest:
                 url, json, data, headers, method, timeout=timeout
             )
         status = status.json()
-        ups_last_request = f"URL: {self.url}\nData: {data}\nJSON: {json}"
+        ups_last_request = f"URL: {url}\nData: {data}\nJSON: {json}"
         self.carrier.log_xml(ups_last_request, "ups_last_request")
         self.carrier.log_xml(status or "", "ups_last_response")
         return status
@@ -271,6 +289,11 @@ class UpsRequest:
 
         vals = {
             "ShipmentRequest": {
+                "Request": {
+                    "RequestOption": "nonvalidate",
+                    "SubVersion": UPS_SHIP_SUBVERSION,
+                    "TransactionReference": {"CustomerContext": picking.name},
+                },
                 "Shipment": {
                     "Description": picking.name,
                     "Shipper": self._partner_to_shipping_data(
@@ -300,47 +323,33 @@ class UpsRequest:
                 "NegotiatedRatesIndicator": "Y"
             }
         if picking.carrier_id.ups_cash_on_delivery and picking.sale_id:
-            vals["ShipmentRequest"]["Shipment"]["ShipmentServiceOptions"] = (
-                {
-                    "COD": {
-                        "CODFundsCode": picking.carrier_id.ups_cod_funds_code,
-                        "CODAmount": {
-                            "CurrencyCode": picking.sale_id.currency_id.name,
-                            "MonetaryValue": str(picking.sale_id.amount_total),
-                        },
-                    }
-                },
-            )
+            vals["ShipmentRequest"]["Shipment"]["ShipmentServiceOptions"] = {
+                "COD": {
+                    "CODFundsCode": picking.carrier_id.ups_cod_funds_code,
+                    "CODAmount": {
+                        "CurrencyCode": picking.sale_id.currency_id.name,
+                        "MonetaryValue": str(picking.sale_id.amount_total),
+                    },
+                }
+            }
         return vals
 
     def _send_shipping(self, picking):
         status = self._process_reply(
-            url=f"{self.url}/api/shipments/v1/ship",
+            url=f"{self.url}/api/shipments/{UPS_SHIP_API_VERSION}/ship",
             json=self._prepare_create_shipping(picking),
+            headers_extra=self._transaction_headers(),
         )
         self._raise_for_status(status, False)
         res = status["ShipmentResponse"]["ShipmentResults"]
-        PackageResults = res["PackageResults"]
-        labels = []
-        if isinstance(PackageResults, dict):
-            labels.append(
-                {
-                    "tracking_ref": PackageResults["TrackingNumber"],
-                    "format_code": PackageResults["ShippingLabel"]["ImageFormat"][
-                        "Code"
-                    ],
-                    "datas": PackageResults["ShippingLabel"]["GraphicImage"],
-                }
-            )
-        if isinstance(PackageResults, list):
-            for label in PackageResults:
-                labels.append(
-                    {
-                        "tracking_ref": label["TrackingNumber"],
-                        "format_code": label["ShippingLabel"]["ImageFormat"]["Code"],
-                        "datas": label["ShippingLabel"]["GraphicImage"],
-                    }
-                )
+        labels = [
+            {
+                "tracking_ref": package["TrackingNumber"],
+                "format_code": package["ShippingLabel"]["ImageFormat"]["Code"],
+                "datas": package["ShippingLabel"]["GraphicImage"],
+            }
+            for package in self._as_list(res.get("PackageResults"))
+        ]
         if self.negotiated_rates and "NegotiatedRateCharges" in res:
             price = res["NegotiatedRateCharges"]["TotalCharge"]
         else:
@@ -375,6 +384,10 @@ class UpsRequest:
         packages = [self._quant_package_data_from_order(order)]
         vals = {
             "RateRequest": {
+                "Request": {
+                    "SubVersion": UPS_RATE_SUBVERSION,
+                    "TransactionReference": {"CustomerContext": order.name},
+                },
                 "Shipment": {
                     "Shipper": self._partner_to_shipping_data(
                         partner=order.company_id.partner_id,
@@ -386,7 +399,7 @@ class UpsRequest:
                     ),
                     "Service": {"Code": self.service_code},
                     "Package": packages,
-                }
+                },
             }
         }
         if self.negotiated_rates:
@@ -397,15 +410,21 @@ class UpsRequest:
 
     def _rate_shipment(self, order, skip_errors=False):
         status = self._process_reply(
-            url=f"{self.url}/api/rating/v1/Rate",
+            url=f"{self.url}/api/rating/{UPS_RATE_API_VERSION}/Rate",
             json=self._prepare_rate_shipment(order),
+            headers_extra=self._transaction_headers(),
         )
         self._raise_for_status(status, skip_errors)
         return status
 
     def rate_shipment(self, order):
         status = self._rate_shipment(order)
-        rated_shipment = status["RateResponse"]["RatedShipment"]
+        rated_shipments = self._as_list(status["RateResponse"].get("RatedShipment"))
+        if not rated_shipments:
+            raise UserError(
+                self.carrier.env._("UPS returned no rate for this shipment.")
+            )
+        rated_shipment = rated_shipments[0]
         if self.negotiated_rates and "NegotiatedRateCharges" in rated_shipment:
             return rated_shipment["NegotiatedRateCharges"]["TotalCharge"]
         return rated_shipment["TotalCharges"]
@@ -413,6 +432,10 @@ class UpsRequest:
     def _prepare_shipping_label(self, carrier_tracking_ref):
         return {
             "LabelRecoveryRequest": {
+                "Request": {
+                    "SubVersion": UPS_LABEL_RECOVERY_SUBVERSION,
+                    "TransactionReference": {"CustomerContext": carrier_tracking_ref},
+                },
                 "LabelSpecification": self._label_data(),
                 "TrackingNumber": carrier_tracking_ref,
             }
@@ -420,38 +443,27 @@ class UpsRequest:
 
     def shipping_label(self, carrier_tracking_ref):
         status = self._process_reply(
-            url=f"{self.url}/api/labels/v1/recovery",
+            url=f"{self.url}/api/labels/{UPS_LABEL_RECOVERY_API_VERSION}/recovery",
             json=self._prepare_shipping_label(carrier_tracking_ref),
+            headers_extra=self._transaction_headers(),
         )
         self._raise_for_status(status, False)
-        labels = []
-        labels_data = status["LabelRecoveryResponse"]["LabelResults"]
-        if isinstance(labels_data, dict):
-            labels.append(
-                {
-                    "tracking_ref": labels_data["TrackingNumber"],
-                    "format_code": labels_data["LabelImage"]["LabelImageFormat"][
-                        "Code"
-                    ],
-                    "datas": labels_data["LabelImage"]["GraphicImage"],
-                }
-            )
-        elif isinstance(labels_data, list):
-            for label in labels_data:
-                labels.append(
-                    {
-                        "tracking_ref": label["TrackingNumber"],
-                        "format_code": label["LabelImage"]["LabelImageFormat"]["Code"],
-                        "datas": label["LabelImage"]["GraphicImage"],
-                    }
-                )
-
-        return labels
+        labels_data = status["LabelRecoveryResponse"].get("LabelResults")
+        return [
+            {
+                "tracking_ref": label["TrackingNumber"],
+                "format_code": label["LabelImage"]["LabelImageFormat"]["Code"],
+                "datas": label["LabelImage"]["GraphicImage"],
+            }
+            for label in self._as_list(labels_data)
+        ]
 
     def cancel_shipment(self, picking):
-        url = f"{self.url}/api/shipments/v1/void/cancel"
+        url = f"{self.url}/api/shipments/{UPS_SHIP_API_VERSION}/void/cancel"
         url = f"{url}/{picking.carrier_tracking_ref}"
-        status = self._process_reply(url=url, method="delete")
+        status = self._process_reply(
+            url=url, method="delete", headers_extra=self._transaction_headers()
+        )
         self._raise_for_status(status, False)
         return True
 
@@ -465,13 +477,14 @@ class UpsRequest:
         }
         params = {"returnSignature": "true", "returnPOD": "true"}
         query_string = urlencode(params)
+        url = (
+            f"{self.url}/api/track/{UPS_TRACK_API_VERSION}/details"
+            f"/{picking.carrier_tracking_ref}?{query_string}"
+        )
         status = self._process_reply(
-            url=f"{self.url}/api/track/v1/details/{picking.carrier_tracking_ref}?{query_string}",
+            url=url,
             method="get",
-            headers_extra={
-                "transId": f"{datetime.datetime.now().timestamp()}",
-                "transactionSrc": f"{picking.company_id.name} - Odoo",
-            },
+            headers_extra=self._transaction_headers(),
         )
         self._raise_for_status(status, False)
         shipment = status["trackResponse"]["shipment"][0]
@@ -505,7 +518,7 @@ class UpsRequest:
             else:
                 for warning in shipment.get("warnings"):
                     states_list.append(
-                        _("{date} - Warning: {warn}").format(
+                        self.carrier.env._("{date} - Warning: {warn}").format(
                             date=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                             warn=warning.get("message"),
                         )
@@ -514,7 +527,9 @@ class UpsRequest:
         except Exception as ex:
             picking.write({"pod_error": str(ex)})
             states_list.append(
-                _("{} - Error retrieving the tracking information.").format(
+                self.carrier.env._(
+                    "{} - Error retrieving the tracking information."
+                ).format(
                     datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                 )
             )
