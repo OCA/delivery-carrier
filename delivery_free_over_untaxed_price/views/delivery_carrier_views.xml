@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 Manuel Regidor <manuel.regidor@sygel.es>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_delivery_carrier_form_free_delivery_untaxed" model="ir.ui.view">
+        <field name="name">view.delivery.carrier.form.free.over.untaxed</field>
+        <field name="model">delivery.carrier</field>
+        <field name="inherit_id" ref="delivery.view_delivery_carrier_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='amount']" position="after">
+                <label for='use_amount_untaxed' invisible="not free_over" />
+                <field
+                    name="use_amount_untaxed"
+                    invisible="not free_over"
+                    class="oe_inline"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
