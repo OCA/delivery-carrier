@@ -29,9 +29,16 @@ class DeliveryCarrier(models.Model):
         ):
             previous_method = self.delivery_type
             self.sudo().delivery_type = self.price_method
-        res = super().rate_shipment(order)
-        if previous_method:
-            self.sudo().delivery_type = previous_method
+        try:
+            res = super().rate_shipment(order)
+        finally:
+            # Restore delivery_type even if super() raises. The swap above is a
+            # real ORM write (self.sudo().delivery_type = ...), so without this
+            # an exception (carrier API down, no matching rule, timeout...)
+            # would leave the carrier permanently written with its price_method
+            # value, silently detaching it from its real delivery family.
+            if previous_method:
+                self.sudo().delivery_type = previous_method
         return res
 
     def send_shipping(self, pickings):

@@ -2,6 +2,8 @@
 # Copyright 2020 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+from unittest.mock import patch
+
 from odoo.tools import float_compare
 
 from .common import TestDeliveryPriceMethodCommon
@@ -99,3 +101,35 @@ class TestDeliveryPriceMethod(TestDeliveryPriceMethodCommon):
         self.assertEqual(prices["price"], 11.11)
         self.assertEqual(prices["carrier_price"], 11.11)
         self.assertEqual(base_price, 11.11)
+
+    def test_rate_shipment_restores_delivery_type_on_error(self):
+        """An exception in super().rate_shipment must not corrupt delivery_type.
+
+        The module swaps delivery_type for price_method (a real ORM write) to
+        reuse the core price computation. If super() raises and the swap is not
+        restored, the carrier is left permanently written as its price_method,
+        silently detaching it from its real delivery family (and a committing
+        request persists it to the database).
+        """
+        carrier = self.carrier
+        carrier.write({"price_method": "base_on_rule"})
+        self.assertEqual(carrier.delivery_type, "fixed")
+        # A plain try/except on purpose, not self.assertRaises: Odoo's
+        # assertRaises wraps the block in a savepoint and rolls it back on the
+        # exception, which would undo the very ORM write this test checks.
+        raised = False
+        with patch(
+            "odoo.addons.delivery.models.delivery_carrier."
+            "DeliveryCarrier.base_on_rule_rate_shipment",
+            side_effect=ValueError("carrier quote failed"),
+        ):
+            try:
+                carrier.rate_shipment(self.sale)
+            except ValueError:
+                raised = True
+        self.assertTrue(raised, "the exception must still propagate")
+        self.assertEqual(
+            carrier.delivery_type,
+            "fixed",
+            "delivery_type must be restored after an exception in rate_shipment",
+        )
