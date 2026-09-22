@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+<!-- FORM-->
+<record id="view_wiz_create_deposit" model="ir.ui.view">
+    <field name="name">wizard create.deposit slip form view</field>
+    <field name="model">delivery.deposit.wizard</field>
+    <field name="arch" type="xml">
+        <form string="Create Deposit Slip">
+            <group name="main">
+                <field name="delivery_type" colspan="2" />
+            </group>
+            <footer>
+                <button
+                        name="create_deposit_slip"
+                        string="Create"
+                        type="object"
+                        class="oe_highlight"
+                    />
+                <button special="cancel" string="Cancel" class="oe_link" />
+            </footer>
+       </form>
+    </field>
+</record>
+
+
+<!-- ACTION -->
+<record id="action_wiz_create_deposit" model="ir.actions.act_window">
+    <field name="name">Create Deposit Slip</field>
+    <field name="res_model">delivery.deposit.wizard</field>
+    <field name="view_mode">form</field>
+   <field name="target">new</field>
+</record>
+
+<!-- MENU -->
+<menuitem
+        id="menu_wiz_delivery_deposit"
+        action="action_wiz_create_deposit"
+        parent="menu_delivery_deposit_slip"
+        groups="stock.group_stock_user"
+        sequence="10"
+    />
+
+</odoo>

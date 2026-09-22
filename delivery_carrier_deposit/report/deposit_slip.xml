@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+<template id="report_generic_deposit_slip">
+
+<t t-call="web.html_container">
+<t t-call="web.internal_layout">
+
+
+<t t-foreach="docs" t-as="o">
+
+<div class="page">
+
+<h1>Deposit Slip n°<span t-field="o.name" /></h1>
+
+    <div>Delivery Method Type: <span t-field="o.delivery_type" /></div>
+    <div>Account Name: <span t-field="o.env.company.name" /></div>
+    <div>Date: <span t-field="o.create_date" /></div>
+
+    <table class="table table-condensed">
+    <thead>
+        <tr>
+            <th>Sender Ref</th>
+            <th>Name and address<br />recipient</th>
+            <th>Parcel numbers</th>
+            <th class="small">ZIP</th>
+            <th class="small">Country</th>
+            <th class="small">Weight<br />(kg)</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr t-foreach="o.picking_ids" t-as="p">
+            <td><span t-field="p.name" /></td>
+            <td><span t-field="p.partner_id.name" /></td>
+            <td><span t-field="p.carrier_tracking_ref" /></td>
+            <td><span t-field="p.partner_id.zip" /></td>
+            <td><span t-field="p.partner_id.country_id.code" /></td>
+            <td><span t-field="p.weight" /></td>
+        </tr>
+
+    </tbody>
+    </table>
+    <div>Total Weight: <span t-field="o.weight" /> kg</div>
+</div>
+</t>
+
+</t>
+</t>
+
+</template>
+
+<template id="report_generic_deposit_slip_trans">
+  <t t-call="web.html_container">
+    <t t-foreach="doc_ids" t-as="doc_id">
+      <t
+                    t-raw="translate_doc(doc_id, doc_model, 'partner_id.lang', 'delivery_carrier_deposit.report_generic_deposit_slip')"
+                />
+    </t>
+  </t>
+</template>
+
+</odoo>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <!-- Multi - Company Rules -->
+
+    <record model="ir.rule" id="deposit_slip_comp_rule">
+        <field name="name">Deposit Slip multi-company</field>
+        <field name="model_id" ref="model_deposit_slip" />
+        <field name="global" eval="True" />
+        <field
+            name="domain_force"
+        >['|', ('company_id', 'in', company_ids), ('company_id', '=', False)]</field>
+    </record>
+</odoo>
