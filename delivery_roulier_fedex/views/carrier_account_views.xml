@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="view_fedex_rest_carrier_account_form" model="ir.ui.view">
+        <field name="model">carrier.account</field>
+        <field
+            name="inherit_id"
+            ref="delivery_carrier_account.carrier_account_view_form"
+        />
+        <field name="arch" type="xml">
+            <field name="password" position="after">
+                <field
+                    name="fedex_rest_account_number"
+                    attrs="{'invisible': [('delivery_type', '!=', 'fedex_rest')], 'required': [('delivery_type', '=', 'fedex_rest')]}"
+                />
+                <field
+                    name="fedex_rest_file_format"
+                    attrs="{'invisible': [('delivery_type', '!=', 'fedex_rest')], 'required': [('delivery_type', '=', 'fedex_rest')]}"
+                />
+                <field
+                    name="fedex_rest_label_stock_type"
+                    attrs="{'invisible': [('delivery_type', '!=', 'fedex_rest')], 'required': [('delivery_type', '=', 'fedex_rest')]}"
+                />
+                <field
+                    name="fedex_rest_pickup_type"
+                    attrs="{'invisible': [('delivery_type', '!=', 'fedex_rest')], 'required': [('delivery_type', '=', 'fedex_rest')]}"
+                />
+                <field
+                    name="fedex_rest_duties_payment_type"
+                    attrs="{'invisible': [('delivery_type', '!=', 'fedex_rest')], 'required': [('delivery_type', '=', 'fedex_rest')]}"
+                />
+                <field
+                    name="fedex_rest_use_etd"
+                    attrs="{'invisible': [('delivery_type', '!=', 'fedex_rest')]}"
+                />
+            </field>
+        </field>
+    </record>
+
+</odoo>
