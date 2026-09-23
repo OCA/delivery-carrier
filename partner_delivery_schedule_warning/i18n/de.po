@@ -1,0 +1,153 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* partner_delivery_schedule_warning
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-15 13:21+0000\n"
+"PO-Revision-Date: 2026-02-15 13:21+0000\n"
+"Last-Translator: Nils Coenen\n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: partner_delivery_schedule_warning
+#. odoo-python
+#: code:addons/partner_delivery_schedule_warning/models/stock_picking.py:0
+msgid " **%(schedule)s: %(display_name)s**"
+msgstr ""
+
+#. module: partner_delivery_schedule_warning
+#. odoo-python
+#: code:addons/partner_delivery_schedule_warning/models/stock_picking.py:0
+msgid "- Delay from %(prev_step)s: %(days)s day(s)"
+msgstr "- Verzögerung von %(prev_step)s: %(days)s Tag(e)"
+
+#. module: partner_delivery_schedule_warning
+#. odoo-python
+#: code:addons/partner_delivery_schedule_warning/models/stock_picking.py:0
+msgid ""
+"ALERT: The planned final delivery date %(date)s does NOT match the partner schedule:\n"
+"%(schedule_str)s\n"
+"\n"
+"%(planned_info)s"
+msgstr ""
+"ACHTUNG: Der geplante endgültige Liefertermin %(date)s stimmt NICHT mit dem Partnerplan überein:\n"
+"%(schedule_str)s\n"
+"\n"
+"%(planned_info)s"
+
+#. module: partner_delivery_schedule_warning
+#: model:ir.model,name:partner_delivery_schedule_warning.model_res_partner
+msgid "Contact"
+msgstr "Kontakt"
+
+#. module: partner_delivery_schedule_warning
+#. odoo-python
+#: code:addons/partner_delivery_schedule_warning/models/stock_picking.py:0
+msgid "Delivery"
+msgstr "Lieferung"
+
+#. module: partner_delivery_schedule_warning
+#: model:ir.model,name:partner_delivery_schedule_warning.model_delivery_schedule
+msgid "Delivery Schedule"
+msgstr "Lieferplan"
+
+#. module: partner_delivery_schedule_warning
+#: model:ir.model.fields,field_description:partner_delivery_schedule_warning.field_stock_picking__partner_delivery_schedule_warning
+msgid "Delivery Schedule Warning / Info"
+msgstr "Warnung / Info Lieferplan"
+
+#. module: partner_delivery_schedule_warning
+#: model:ir.model.fields,field_description:partner_delivery_schedule_warning.field_delivery_schedule__display_name
+#: model:ir.model.fields,field_description:partner_delivery_schedule_warning.field_res_partner__display_name
+#: model:ir.model.fields,field_description:partner_delivery_schedule_warning.field_stock_picking__display_name
+msgid "Display Name"
+msgstr "Anzeigename"
+
+#. module: partner_delivery_schedule_warning
+#: model:ir.model.fields,field_description:partner_delivery_schedule_warning.field_delivery_schedule__id
+#: model:ir.model.fields,field_description:partner_delivery_schedule_warning.field_res_partner__id
+#: model:ir.model.fields,field_description:partner_delivery_schedule_warning.field_stock_picking__id
+msgid "ID"
+msgstr ""
+
+#. module: partner_delivery_schedule_warning
+#. odoo-python
+#: code:addons/partner_delivery_schedule_warning/models/stock_picking.py:0
+msgid ""
+"INFO: No delivery schedule defined for partner.\n"
+"\n"
+"%(planned_info)s"
+msgstr ""
+"Hinweis: Für den Partner ist kein Lieferplan festgelegt.\n"
+"\n"
+"%(planned_info)s"
+
+#. module: partner_delivery_schedule_warning
+#. odoo-python
+#: code:addons/partner_delivery_schedule_warning/models/stock_picking.py:0
+msgid "No delivery schedule defined"
+msgstr "Kein Lieferplan definiert"
+
+#. module: partner_delivery_schedule_warning
+#. odoo-python
+#: code:addons/partner_delivery_schedule_warning/models/stock_picking.py:0
+msgid "No final step datetime available."
+msgstr "Kein Datum/Uhrzeit für den letzten Schritt verfügbar."
+
+#. module: partner_delivery_schedule_warning
+#. odoo-python
+#: code:addons/partner_delivery_schedule_warning/models/stock_picking.py:0
+msgid "Pack"
+msgstr "Verpackung"
+
+#. module: partner_delivery_schedule_warning
+#. odoo-python
+#: code:addons/partner_delivery_schedule_warning/models/stock_picking.py:0
+msgid "Pick"
+msgstr "Kommissionierung"
+
+#. module: partner_delivery_schedule_warning
+#: model:ir.model.fields,field_description:partner_delivery_schedule_warning.field_stock_picking__picking_steps
+msgid "Picking Steps"
+msgstr "Lagerschritte"
+
+#. module: partner_delivery_schedule_warning
+#: model:ir.model.fields,field_description:partner_delivery_schedule_warning.field_stock_picking__partner_pickings_schedule_info
+msgid "Pickings Schedule Info"
+msgstr "Lagervorgänge Planungsinfo"
+
+#. module: partner_delivery_schedule_warning
+#. odoo-python
+#: code:addons/partner_delivery_schedule_warning/models/stock_picking.py:0
+msgid "Planned date:"
+msgstr "Geplantes Datum:"
+
+#. module: partner_delivery_schedule_warning
+#. odoo-python
+#: code:addons/partner_delivery_schedule_warning/models/stock_picking.py:0
+msgid "Planned dates based on route delay(s):"
+msgstr "Geplante Termine basierend auf Route-Verzögerungen:"
+
+#. module: partner_delivery_schedule_warning
+#: model:ir.model,name:partner_delivery_schedule_warning.model_stock_picking
+msgid "Transfer"
+msgstr ""
+
+#. module: partner_delivery_schedule_warning
+#. odoo-python
+#: code:addons/partner_delivery_schedule_warning/models/stock_picking.py:0
+msgid "delay_from_eng"
+msgstr ""
+
+#. module: partner_delivery_schedule_warning
+#. odoo-python
+#: code:addons/partner_delivery_schedule_warning/models/stock_picking.py:0
+msgid "step_name"
+msgstr ""

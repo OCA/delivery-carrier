@@ -1,0 +1,4 @@
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+from . import partner_delivery_schedule
+from . import res_partner
+from . import stock_picking
