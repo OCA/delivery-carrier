@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+
+    <record id="dpd_product" model="product.product">
+        <field name="default_code">SHIP_DPD</field>
+        <field name="type">service</field>
+        <field name="name">Coûts de livraison - DPD</field>
+    </record>
+
+</odoo>
