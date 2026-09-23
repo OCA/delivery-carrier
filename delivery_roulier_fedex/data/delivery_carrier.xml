@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+
+    <record id="delivery_carrier_fedex_international_priority" model="delivery.carrier">
+        <field name="name">FedEx International Priority</field>
+        <field name="delivery_type">fedex_rest</field>
+        <field name="code">FEDEX_INTERNATIONAL_PRIORITY</field>
+        <field name="product_id" ref="fedex_product" />
+    </record>
+
+    <record id="delivery_carrier_fedex_international_economy" model="delivery.carrier">
+        <field name="name">FedEx International Economy</field>
+        <field name="delivery_type">fedex_rest</field>
+        <field name="code">INTERNATIONAL_ECONOMY</field>
+        <field name="product_id" ref="fedex_product" />
+    </record>
+
+    <record id="delivery_carrier_fedex_regional_economy" model="delivery.carrier">
+        <field name="name">FedEx Regional Economy</field>
+        <field name="delivery_type">fedex_rest</field>
+        <field name="code">FEDEX_REGIONAL_ECONOMY</field>
+        <field name="product_id" ref="fedex_product" />
+    </record>
+
+    <record id="delivery_carrier_fedex_ground" model="delivery.carrier">
+        <field name="name">FedEx Ground</field>
+        <field name="delivery_type">fedex_rest</field>
+        <field name="code">FEDEX_GROUND</field>
+        <field name="product_id" ref="fedex_product" />
+    </record>
+
+</odoo>
