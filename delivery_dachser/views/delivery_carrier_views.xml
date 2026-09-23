@@ -65,6 +65,16 @@
                     </group>
                 </page>
             </xpath>
+            <xpath expr="//button[@name='toggle_prod_environment']" position="before">
+                <button
+                    name="action_get_manifest"
+                    string="Manifest"
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-file-text-o"
+                    invisible="delivery_type != 'dachser'"
+                />
+            </xpath>
         </field>
     </record>
 </odoo>

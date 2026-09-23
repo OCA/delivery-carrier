@@ -1,4 +1,4 @@
-# Copyright 2025 Tecnativa - Víctor Martínez
+# Copyright 2025-2026 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 import json
 
@@ -28,6 +28,7 @@ class DachserRequest:
             "shipment": f"{path}/rest/v2/transportorders/sent",
             "tracking": f"{path}/rest/v2/shipmentstatus",
             "cancel": f"{path}/rest/v2/transportorders",
+            "list": f"{path}/rest/v2/transportorders",
         }
 
     def _send_api_request(self, request_type, url, data=None):
@@ -214,3 +215,46 @@ class DachserRequest:
             # Need to reverse the list so that it is in proper order (oldest first).
             res["tracking_events"] = res["tracking_events"][::-1]
         return res
+
+    def list_shippings(self, date_from, date_to):
+        list_url = self.urls["list"]
+        response = self._send_api_request(
+            request_type="GET",
+            url=f"{list_url}",
+            data={"date-from": date_from, "date-to": date_to},
+        )
+        # Example response
+        # {
+        #     'id': xx,
+        #     'state': 'sent',
+        #     'transportDate': '2025-12-01',
+        #     'weight': {'weight': 630, 'unit': 'kg'},
+        #     'consignor': {
+        #         'id': 'xx',
+        #         'names': ['Test'],
+        #         'addressInformation': {
+        #             'streets': ['Street'],
+        #             'city': 'City',
+        #             'postalCode': '500010',
+        #             'countryCode': 'ES'
+        #         }
+        #     },
+        #     'consignee': {
+        #         'names': ['Test name'],
+        #         'addressInformation': {
+        #             'streets': ['Street'],
+        #             'city': 'City',
+        #             'postalCode': '500010',
+        #             'countryCode': 'ES'
+        #         }
+        #     },
+        #     'references': [{'code': 'X', 'value': 'X'}],
+        #     'labelQuantity': 1,
+        #     'links': [
+        #         {
+        #             'rel': 'labels',
+        #             'href': 'https://api-gateway.dachser.com/rest/v2/transportorders/ID/labels?label-format=P'
+        #         }
+        #     ]
+        # }
+        return response.json()
