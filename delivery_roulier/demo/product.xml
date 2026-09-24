@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- product.product -->
+    <record id="product_big" model="product.product">
+        <field name="name">carrier 3.7 kg</field>
+        <field name="type">consu</field>
+        <field name="is_storable" eval="True" />
+        <field name="weight">3.7</field>
+    </record>
+    <record id="product_small" model="product.product">
+        <field name="name">carrier 1.3 kg</field>
+        <field name="type">consu</field>
+        <field name="is_storable" eval="True" />
+        <field name="weight">1.3</field>
+    </record>
+</odoo>
