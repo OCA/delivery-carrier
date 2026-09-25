@@ -3,11 +3,12 @@
 {
     "name": "Partner Delivery Schedule",
     "summary": "Set on partners a schedule for delivery goods",
-    "version": "18.0.1.0.1",
+    "version": "18.0.1.1.0",
     "development_status": "Production/Stable",
     "category": "Delivery",
     "website": "https://github.com/OCA/delivery-carrier",
     "author": "Tecnativa, Odoo Community Association (OCA)",
+    "maintainers": ["StephaneMangin"],
     "license": "AGPL-3",
     "application": False,
     "installable": True,
@@ -16,6 +17,7 @@
         "security/ir.model.access.csv",
         "views/partner_delivery_schedule_view.xml",
         "views/res_partner_view.xml",
+        "views/res_config_settings_views.xml",
         "views/report_shipping.xml",
     ],
 }

@@ -28,8 +28,13 @@ Partner Delivery Schedule
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-This module extends the functionality of delivery module to allow set
-delivery hours and days for partners.
+This module extends the functionality of the delivery module to allow
+setting delivery hours and days for partners.
+
+It also provides a ``get_next_schedule()`` helper on
+``delivery.schedule`` recordsets and on ``res.partner`` to compute the
+next reachable departure, respecting weekday flags, timezone conversions
+and a configurable search horizon set per company.
 
 **Table of contents**
 
@@ -48,6 +53,28 @@ To use this module you need to:
 
 You can set deliveries schedule directly in *Sales > Configuration >
 Delivery Schedule*
+
+To configure the search horizon for the next reachable departure:
+
+1. Go to *Settings > General Settings*.
+2. In the *Delivery Schedule* section, set **Delivery Departure
+   Horizon** to the number of days ahead to look for an available slot
+   (default: 8 days). This setting is per company.
+
+To find the next departure for a partner:
+
+.. code:: python
+
+   schedule, departure = partner.get_next_schedule()
+
+Or on a ``delivery.schedule`` recordset:
+
+.. code:: python
+
+   schedule, departure = schedules.get_next_schedule(
+       from_date=fields.Datetime.now(),
+       tz="Europe/Paris",
+   )
 
 Bug Tracker
 ===========
@@ -75,6 +102,10 @@ Contributors
   - Sergio Teruel
   - Juan Carlos Oñate
 
+- `ACSONE SA/NV <https://www.acsone.eu>`__:
+
+  - Stéphane Mangin stephane.mangin@acsone.eu
+
 Maintainers
 -----------
 
@@ -87,6 +118,14 @@ This module is maintained by the OCA.
 OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
+
+.. |maintainer-StephaneMangin| image:: https://github.com/StephaneMangin.png?size=40px
+    :target: https://github.com/StephaneMangin
+    :alt: StephaneMangin
+
+Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
+
+|maintainer-StephaneMangin| 
 
 This module is part of the `OCA/delivery-carrier <https://github.com/OCA/delivery-carrier/tree/18.0/partner_delivery_schedule>`_ project on GitHub.
 
