@@ -658,7 +658,8 @@ class StockPicking(models.Model):
                 to_sync = self.filtered(
                     lambda p: p.sale_id and p.carrier_id.sendcloud_integration_id
                 )
-                to_sync._sync_picking_to_sendcloud()
+                if to_sync:
+                    to_sync._sync_picking_to_sendcloud()
         return res
 
     def action_cancel(self):
