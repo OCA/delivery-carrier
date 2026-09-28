@@ -646,14 +646,18 @@ class StockPicking(models.Model):
     @api.model_create_multi
     def create(self, vals):
         res = super().create(vals)
-        res._sync_picking_to_sendcloud()
+        sale_pickings = res.filtered("sale_id")
+        if sale_pickings:
+            sale_pickings._sync_picking_to_sendcloud()
         return res
 
     def write(self, vals):
         res = super().write(vals)
         if not self.env.context.get("skip_sync_picking_to_sendcloud"):
             if any(item in self._sendcloud_vals_triggering_sync() for item in vals):
-                to_sync = self.filtered(lambda p: p.carrier_id.sendcloud_integration_id)
+                to_sync = self.filtered(
+                    lambda p: p.sale_id and p.carrier_id.sendcloud_integration_id
+                )
                 to_sync._sync_picking_to_sendcloud()
         return res
 

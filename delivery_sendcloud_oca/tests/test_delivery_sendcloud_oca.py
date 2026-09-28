@@ -583,15 +583,20 @@ class TestDeliverySendCloud(TransactionCase):
             }
         )
         picking_type = self.env["stock.warehouse"].search([], limit=1).out_type_id
-        picking = self.env["stock.picking"].create(
-            {
-                "partner_id": partner.id,
-                "picking_type_id": picking_type.id,
-                "location_id": picking_type.default_location_src_id.id,
-                "location_dest_id": picking_type.default_location_dest_id.id,
-            }
-        )
-        picking.with_context(skip_sync_picking_to_sendcloud=True).carrier_id = carrier
+        with patch.object(
+            type(self.env["stock.picking"]), "_sync_picking_to_sendcloud"
+        ) as sync:
+            picking = self.env["stock.picking"].create(
+                {
+                    "partner_id": partner.id,
+                    "picking_type_id": picking_type.id,
+                    "location_id": picking_type.default_location_src_id.id,
+                    "location_dest_id": picking_type.default_location_dest_id.id,
+                    "carrier_id": carrier.id,
+                }
+            )
+            picking.partner_id = partner
+        sync.assert_not_called()
         move = self.env["stock.move"].create(
             {
                 "name": product.name,
