@@ -15,15 +15,23 @@ class StockPicking(models.Model):
         compute="_compute_delivery_zone_id",
     )
 
-    @api.depends("partner_id")
+    @api.depends("partner_id", "company_id.restrict_zone_to_delivery_addresses")
     def _compute_delivery_zone_id(self):
         for picking in self:
-            partner = (
-                picking.partner_id
-                if picking.partner_id.type == "delivery"
-                else picking.partner_id.commercial_partner_id
-            )
-            picking.delivery_zone_id = partner.delivery_zone_id
+            if picking.company_id.restrict_zone_to_delivery_addresses:
+                # Strict: zone only from delivery-type addresses
+                if picking.partner_id.type == "delivery":
+                    picking.delivery_zone_id = picking.partner_id.delivery_zone_id
+                else:
+                    picking.delivery_zone_id = False
+            else:
+                # Permissive: delivery address first, fallback to commercial partner
+                partner = (
+                    picking.partner_id
+                    if picking.partner_id.type == "delivery"
+                    else picking.partner_id.commercial_partner_id
+                )
+                picking.delivery_zone_id = partner.delivery_zone_id
 
     def write(self, vals):
         # Update sale order delivery zone if user update it a picking linked

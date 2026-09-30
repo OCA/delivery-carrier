@@ -3,33 +3,20 @@
 from lxml import etree
 
 from odoo import Command
-from odoo.tests import tagged
 
-from odoo.addons.base.tests.common import BaseCommon
+from .common import DeliveryZoneCommon
 
 
-@tagged("post_install", "-at_install")
-class TestPartnerDeliveryZone(BaseCommon):
-    at_install = False
-    post_install = True
-
+class TestPartnerDeliveryZone(DeliveryZoneCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        # Extra fixtures needed for sale/picking tests
         cls.warehouse = cls.env.ref("stock.warehouse0")
-        cls.delivery_zone_a = cls.env["partner.delivery.zone"].create(
-            {"name": "Delivery Zone A", "code": "10"}
-        )
-        cls.delivery_zone_b = cls.env["partner.delivery.zone"].create(
-            {"name": "Delivery Zone A", "code": "10"}
-        )
-        cls.partner = cls.env["res.partner"].create(
-            {"name": "test", "delivery_zone_id": cls.delivery_zone_a.id}
-        )
         cls.product = cls.env["product.product"].create({"name": "test"})
         so = cls.env["sale.order"].new(
             {
-                "partner_id": cls.partner.id,
+                "partner_id": cls.partner_a.id,
                 "order_line": [
                     Command.create(
                         {
@@ -45,6 +32,8 @@ class TestPartnerDeliveryZone(BaseCommon):
         )
         cls.order = cls.env["sale.order"].create(so._convert_to_write(so._cache))
         cls.View = cls.env["ir.ui.view"]
+        # Keep backward-compatible alias used throughout the tests
+        cls.partner = cls.partner_a
 
     def test_partner_child_propagate(self):
         other_partner = self.env["res.partner"].create(

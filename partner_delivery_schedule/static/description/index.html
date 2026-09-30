@@ -370,8 +370,12 @@ ul.auto-toc {
 !! source digest: sha256:ceb07d2721421b23b565628586b1951b29235fe1b586bb5945f426fed001babf
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 <p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Production/Stable" src="https://img.shields.io/badge/maturity-Production%2FStable-green.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html"><img alt="License: AGPL-3" src="https://img.shields.io/badge/licence-AGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/OCA/delivery-carrier/tree/18.0/partner_delivery_schedule"><img alt="OCA/delivery-carrier" src="https://img.shields.io/badge/github-OCA%2Fdelivery--carrier-lightgray.png?logo=github" /></a> <a class="reference external image-reference" href="https://translation.odoo-community.org/projects/delivery-carrier-18-0/delivery-carrier-18-0-partner_delivery_schedule"><img alt="Translate me on Weblate" src="https://img.shields.io/badge/weblate-Translate%20me-F47D42.png" /></a> <a class="reference external image-reference" href="https://runboat.odoo-community.org/builds?repo=OCA/delivery-carrier&amp;target_branch=18.0"><img alt="Try me on Runboat" src="https://img.shields.io/badge/runboat-Try%20me-875A7B.png" /></a></p>
-<p>This module extends the functionality of delivery module to allow set
-delivery hours and days for partners.</p>
+<p>This module extends the functionality of the delivery module to allow
+setting delivery hours and days for partners.</p>
+<p>It also provides a <tt class="docutils literal">get_next_schedule()</tt> helper on
+<tt class="docutils literal">delivery.schedule</tt> recordsets and on <tt class="docutils literal">res.partner</tt> to compute the
+next reachable departure, respecting weekday flags, timezone conversions
+and a configurable search horizon set per company.</p>
 <p><strong>Table of contents</strong></p>
 <div class="contents local topic" id="contents">
 <ul class="simple">
@@ -396,6 +400,24 @@ field.</li>
 </ol>
 <p>You can set deliveries schedule directly in <em>Sales &gt; Configuration &gt;
 Delivery Schedule</em></p>
+<p>To configure the search horizon for the next reachable departure:</p>
+<ol class="arabic simple">
+<li>Go to <em>Settings &gt; General Settings</em>.</li>
+<li>In the <em>Delivery Schedule</em> section, set <strong>Delivery Departure
+Horizon</strong> to the number of days ahead to look for an available slot
+(default: 8 days). This setting is per company.</li>
+</ol>
+<p>To find the next departure for a partner:</p>
+<pre class="code python literal-block">
+<span class="n">schedule</span><span class="p">,</span> <span class="n">departure</span> <span class="o">=</span> <span class="n">partner</span><span class="o">.</span><span class="n">get_next_schedule</span><span class="p">()</span>
+</pre>
+<p>Or on a <tt class="docutils literal">delivery.schedule</tt> recordset:</p>
+<pre class="code python literal-block">
+<span class="n">schedule</span><span class="p">,</span> <span class="n">departure</span> <span class="o">=</span> <span class="n">schedules</span><span class="o">.</span><span class="n">get_next_schedule</span><span class="p">(</span><span class="w">
+</span>    <span class="n">from_date</span><span class="o">=</span><span class="n">fields</span><span class="o">.</span><span class="n">Datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(),</span><span class="w">
+</span>    <span class="n">tz</span><span class="o">=</span><span class="s2">&quot;Europe/Paris&quot;</span><span class="p">,</span><span class="w">
+</span><span class="p">)</span>
+</pre>
 </div>
 <div class="section" id="bug-tracker">
 <h1><a class="toc-backref" href="#toc-entry-2">Bug Tracker</a></h1>
@@ -421,6 +443,10 @@ If you spotted it first, help us to smash it by providing a detailed and welcome
 <li>Juan Carlos Oñate</li>
 </ul>
 </li>
+<li><a class="reference external" href="https://www.acsone.eu">ACSONE SA/NV</a>:<ul>
+<li>Stéphane Mangin <a class="reference external" href="mailto:stephane.mangin&#64;acsone.eu">stephane.mangin&#64;acsone.eu</a></li>
+</ul>
+</li>
 </ul>
 </div>
 <div class="section" id="maintainers">
@@ -432,6 +458,8 @@ If you spotted it first, help us to smash it by providing a detailed and welcome
 <p>OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.</p>
+<p>Current <a class="reference external" href="https://odoo-community.org/page/maintainer-role">maintainer</a>:</p>
+<p><a class="reference external image-reference" href="https://github.com/StephaneMangin"><img alt="StephaneMangin" src="https://github.com/StephaneMangin.png?size=40px" /></a></p>
 <p>This module is part of the <a class="reference external" href="https://github.com/OCA/delivery-carrier/tree/18.0/partner_delivery_schedule">OCA/delivery-carrier</a> project on GitHub.</p>
 <p>You are welcome to contribute. To learn how please visit <a class="reference external" href="https://odoo-community.org/page/Contribute">https://odoo-community.org/page/Contribute</a>.</p>
 </div>
