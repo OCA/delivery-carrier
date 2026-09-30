@@ -1,0 +1,5 @@
+- Jordi Masvidal \<<jordi.masvidal@forgeflow.com>\>
+- Marina Alapont \<<marina.alapont@forgeflow.com>\>
+- Lois Rilo \<<lois.rilo@forgeflow.com>\>
+- [Heliconia Solutions Pvt. Ltd.](https://www.heliconia.io)
+  - Bhavesh Heliconia
