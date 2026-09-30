@@ -1,0 +1,97 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* delivery_carrier_multi_zip
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2025-03-27 15:06+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.10.2\n"
+
+#. module: delivery_carrier_multi_zip
+#: model:ir.model.fields,field_description:delivery_carrier_multi_zip.field_delivery_carrier_zip__carrier_id
+msgid "Carrier"
+msgstr "Trasportatore"
+
+#. module: delivery_carrier_multi_zip
+#: model:ir.model.fields,field_description:delivery_carrier_multi_zip.field_delivery_carrier_zip__create_uid
+msgid "Created by"
+msgstr "Creato da"
+
+#. module: delivery_carrier_multi_zip
+#: model:ir.model.fields,field_description:delivery_carrier_multi_zip.field_delivery_carrier_zip__create_date
+msgid "Created on"
+msgstr "Creato il"
+
+#. module: delivery_carrier_multi_zip
+#: model:ir.model,name:delivery_carrier_multi_zip.model_delivery_carrier_zip
+msgid "Delivery destination availability ZIP interval line"
+msgstr "Riga intervallo CAP disponibilità destinazione consegna"
+
+#. module: delivery_carrier_multi_zip
+#: model:ir.model.fields,field_description:delivery_carrier_multi_zip.field_delivery_carrier_zip__display_name
+msgid "Display Name"
+msgstr "Nome visualizzato"
+
+#. module: delivery_carrier_multi_zip
+#: model:ir.model.fields,field_description:delivery_carrier_multi_zip.field_delivery_carrier_zip__id
+msgid "ID"
+msgstr "ID"
+
+#. module: delivery_carrier_multi_zip
+#: model:ir.model.fields,field_description:delivery_carrier_multi_zip.field_delivery_carrier_zip__write_uid
+msgid "Last Updated by"
+msgstr "Ultimo aggiornamento di"
+
+#. module: delivery_carrier_multi_zip
+#: model:ir.model.fields,field_description:delivery_carrier_multi_zip.field_delivery_carrier_zip__write_date
+msgid "Last Updated on"
+msgstr "Ultimo aggiornamento il"
+
+#. module: delivery_carrier_multi_zip
+#: model:ir.model.fields,field_description:delivery_carrier_multi_zip.field_delivery_carrier_zip__name
+msgid "Name"
+msgstr "Nome"
+
+#. module: delivery_carrier_multi_zip
+#: model:ir.model.fields.selection,name:delivery_carrier_multi_zip.selection__delivery_carrier__zip_option__prefix
+msgid "Prefixes"
+msgstr "Prefissi"
+
+#. module: delivery_carrier_multi_zip
+#: model:ir.model.fields.selection,name:delivery_carrier_multi_zip.selection__delivery_carrier__zip_option__range
+msgid "Ranges"
+msgstr "Intervalli"
+
+#. module: delivery_carrier_multi_zip
+#: model:ir.model,name:delivery_carrier_multi_zip.model_delivery_carrier
+msgid "Shipping Methods"
+msgstr "Metodi di spedizione"
+
+#. module: delivery_carrier_multi_zip
+#: model:ir.model.fields,field_description:delivery_carrier_multi_zip.field_delivery_carrier__zip_range_ids
+msgid "ZIP codes"
+msgstr "Codici CAP"
+
+#. module: delivery_carrier_multi_zip
+#: model:ir.model.fields,field_description:delivery_carrier_multi_zip.field_delivery_carrier_zip__zip_from
+msgid "Zip From"
+msgstr "Da CAP"
+
+#. module: delivery_carrier_multi_zip
+#: model:ir.model.fields,field_description:delivery_carrier_multi_zip.field_delivery_carrier__zip_option
+msgid "Zip Option"
+msgstr "Opzione CAP"
+
+#. module: delivery_carrier_multi_zip
+#: model:ir.model.fields,field_description:delivery_carrier_multi_zip.field_delivery_carrier_zip__zip_to
+msgid "Zip To"
+msgstr "A CAP"
