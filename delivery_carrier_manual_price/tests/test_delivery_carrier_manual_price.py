@@ -48,7 +48,7 @@ class TestDeliveryCarrierManualPrice(TransactionCase):
     def test_delivery_carrier_manual_price(self):
         delivery_wizard = Form(
             self.env["choose.delivery.carrier"].with_context(
-                **{"default_order_id": self.sale.id, "default_carrier_id": self.carrier}
+                default_order_id=self.sale.id, default_carrier_id=self.carrier
             )
         )
         choose_delivery_carrier = delivery_wizard.save()
@@ -64,8 +64,6 @@ class TestDeliveryCarrierManualPrice(TransactionCase):
         self.assertEqual(delivery_price, 70)
         self.assertEqual(len(delivery_lines), 1)
         # Modify sale line and check recompute_delivery_price
-        line = self.sale.order_line.filtered(
-            lambda line: line.product_id == self.product
-        )
-        line.price_unit = 20
+        with Form(self.sale) as form, form.order_line.edit(0) as line:
+            line.price_unit = 20
         self.assertFalse(self.sale.recompute_delivery_price)
