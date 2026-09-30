@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_order_form" model="ir.ui.view">
+        <field name="name">sale.order.delivery.zone.form.view</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="partner_delivery_zone.view_order_form" />
+        <field name="arch" type="xml">
+            <field name="partner_shipping_id" position="after">
+                <field name="delivery_zone_id" position="move" />
+            </field>
+            <field name="delivery_zone_id" position="after">
+                <field name="available_delivery_schedule_ids" invisible="1" />
+                <field
+                    name="delivery_schedule_id"
+                    domain="[('id', 'in', available_delivery_schedule_ids)]"
+                    readonly="state in ('done', 'cancel')"
+                />
+                <field name="scheduled_date" invisible="1" />
+                <field name="cutoff_time" invisible="1" />
+            </field>
+            <field name="delivery_zone_id" position="attributes">
+                <attribute name="readonly">
+                    state in ('done', 'cancel')
+                </attribute>
+            </field>
+        </field>
+    </record>
+    <record id="view_quotation_tree" model="ir.ui.view">
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="partner_delivery_zone.view_quotation_tree" />
+        <field name="arch" type="xml">
+            <field name="delivery_zone_id" position="after">
+                <field name="delivery_schedule_id" optional="show" />
+                <field name="scheduled_date" optional="hide" />
+            </field>
+        </field>
+    </record>
+</odoo>

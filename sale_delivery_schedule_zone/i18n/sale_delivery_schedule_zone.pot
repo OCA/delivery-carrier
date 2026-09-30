@@ -1,0 +1,55 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* sale_delivery_schedule_zone_schedule
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: sale_delivery_schedule_zone_schedule
+#: model:ir.model.fields,help:sale_delivery_schedule_zone_schedule.field_sale_order__scheduled_date
+msgid "Concrete departure date/time of the assigned schedule."
+msgstr ""
+
+#. module: sale_delivery_schedule_zone_schedule
+#: model:ir.model.fields,field_description:sale_delivery_schedule_zone_schedule.field_sale_order__cutoff_time
+msgid "Cutoff Time"
+msgstr ""
+
+#. module: sale_delivery_schedule_zone_schedule
+#: model:ir.model.fields,field_description:sale_delivery_schedule_zone_schedule.field_sale_order__delivery_schedule_id
+msgid "Delivery Schedule"
+msgstr ""
+
+#. module: sale_delivery_schedule_zone_schedule
+#: model:ir.model.fields,help:sale_delivery_schedule_zone_schedule.field_sale_order__cutoff_time
+msgid "Last moment to confirm so the order makes its scheduled departure."
+msgstr ""
+
+#. module: sale_delivery_schedule_zone_schedule
+#: model:ir.model,name:sale_delivery_schedule_zone_schedule.model_sale_order
+msgid "Sales Order"
+msgstr ""
+
+#. module: sale_delivery_schedule_zone_schedule
+#. odoo-python
+#: code:addons/sale_delivery_schedule_zone_schedule/models/sale_order.py:0
+msgid "Schedule '%(schedule)s' does not belong to zone '%(zone)s'."
+msgstr ""
+
+#. module: sale_delivery_schedule_zone_schedule
+#: model:ir.model.fields,field_description:sale_delivery_schedule_zone_schedule.field_sale_order__scheduled_date
+msgid "Schedule Date"
+msgstr ""
+
+#. module: sale_delivery_schedule_zone_schedule
+#: model:ir.model.fields,help:sale_delivery_schedule_zone_schedule.field_sale_order__delivery_schedule_id
+msgid "Schedule time slot assigned to this order at confirmation."
+msgstr ""
