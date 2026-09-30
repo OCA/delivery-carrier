@@ -2,13 +2,14 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 
-from odoo.addons.base.tests.common import BaseCommon
+from odoo.tests.common import TransactionCase
 
 
-class TestDeliveryCarrierMultiZip(BaseCommon):
+class TestDeliveryCarrierMultiZip(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         cls.partner_1 = cls.env["res.partner"].create(
             {"name": "Test partner 1", "zip": "0001"}
         )
