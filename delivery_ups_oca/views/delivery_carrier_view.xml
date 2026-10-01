@@ -77,6 +77,9 @@ License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
                                 required="delivery_type == 'ups' and ups_cash_on_delivery"
                             />
                         </group>
+                        <group string="Declared Value">
+                            <field name="declared_value_percentage" />
+                        </group>
                     </group>
                 </page>
             </xpath>

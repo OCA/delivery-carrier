@@ -228,20 +228,33 @@ class UpsRequest:
             return False
         return ship_from.country_id.id == ship_to.country_id.id
 
+    @staticmethod
+    def _add_declared_value_to_package(package_item, picking):
+        if picking.declared_value <= 0:
+            return package_item
+        package_item.setdefault("PackageServiceOptions", {})["DeclaredValue"] = {
+            "CurrencyCode": picking.declared_value_currency_id.name,
+            "MonetaryValue": str(round(picking.declared_value, 2)),
+        }
+        return package_item
+
     def _prepare_create_shipping(self, picking):
         """Return a dict that can be passed to the shipping endpoint of the UPS API"""
-        packages_ids = (
-            picking.move_ids.move_line_ids
-            and picking.move_ids.move_line_ids.mapped("result_package_id")
-        )
-        if self.use_packages_from_picking and packages_ids:
-            # modelo: stock.quant.package
-            packages = [
-                self._quant_package_data_from_picking(package, picking, True)
-                for package in packages_ids
-            ]
+        if self.use_packages_from_picking and picking.move_line_ids.mapped(
+            "result_package_id"
+        ):
+            # model: stock.quant.package
+            packages = []
+            for package in picking.move_line_ids.mapped("result_package_id"):
+                package_item = self._quant_package_data_from_picking(
+                    package, picking, True
+                )
+                package_item = self._add_declared_value_to_package(
+                    package_item, picking
+                )
+                packages.append(package_item)
         else:
-            # modelo: stock.package.type
+            # model: stock.package.type
             packages = []
             package_info = self._quant_package_data_from_picking(
                 self.default_packaging_id, picking, False
@@ -256,6 +269,9 @@ class UpsRequest:
                 package_item["NumOfPieces"] = "1"
                 package_item["Packaging"]["Description"] = package_name
                 package_item["PackageWeight"]["Weight"] = str(package_weight)
+                package_item = self._add_declared_value_to_package(
+                    package_item, picking
+                )
                 packages.append(package_item)
 
         partner_from = (
