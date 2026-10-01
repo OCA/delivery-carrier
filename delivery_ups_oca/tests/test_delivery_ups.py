@@ -683,6 +683,20 @@ class TestDeliveryUps(TestDeliveryUpsBase):
         self.assertEqual(attachments[0].name, "123456-GIF.gif")
         self.assertEqual(attachments[1].name, "789012-ZPL.zpl")
 
+    def test_ups_create_label_gif_to_pdf(self):
+        # Test creating PDF attachment from GIF label
+        labels = [
+            {
+                "tracking_ref": "123456",
+                "format_code": "GIF",
+                "datas": base64.b64encode(self.label),
+            },
+        ]
+        self.carrier.ups_file_format = "PDF"
+        attachments = self.carrier._create_ups_label(self.picking, labels)
+        self.assertEqual(len(attachments), 1)
+        self.assertEqual(attachments[0].name, "123456-PDF.pdf")
+
     def _patch_carrier_log_xml(self):
         """Helper to patch the log_xml method on carrier class"""
         return mock.patch.object(type(self.carrier), "log_xml")
