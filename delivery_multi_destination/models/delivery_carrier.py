@@ -34,13 +34,36 @@ class DeliveryCarrier(models.Model):
 
     @api.model
     @api.readonly
-    def _search(self, domain, *args, **kwargs):
-        """Don't show by default children carriers."""
+    def search_fetch(self, domain, field_names=None, offset=0, limit=None, order=None):
+        """Don't show by default children carriers.
+
+        Only the public search API is filtered: ``_search`` is also used by the
+        ORM to read records (``fetch``), so filtering it would make children
+        carriers unreadable outside of the ``show_children_carriers`` context.
+        """
         if not self.env.context.get("show_children_carriers"):
-            if domain is None:
-                domain = []
-            domain = fields.Domain.AND([domain, [("parent_id", "=", False)]])
-        return super()._search(domain, *args, **kwargs)
+            domain = fields.Domain.AND([domain or [], [("parent_id", "=", False)]])
+        return super().search_fetch(
+            domain, field_names, offset=offset, limit=limit, order=order
+        )
+
+    def _get_matching_child(self, partner):
+        """Return the first child carrier matching the given address."""
+        self.ensure_one()
+        carrier = self.with_context(show_children_carriers=True)
+        for subcarrier in carrier.child_ids:
+            if subcarrier._match_address(partner):
+                return subcarrier
+        return self.browse()
+
+    def _is_available_for_order(self, order):
+        """A multi carrier is available if any of its children is available."""
+        if self.destination_type == "one":
+            return super()._is_available_for_order(order)
+        if not self._match(order.partner_shipping_id, order):
+            return False
+        subcarrier = self._get_matching_child(order.partner_shipping_id)
+        return bool(subcarrier) and subcarrier._is_available_for_order(order)
 
     def available_carriers(self, partner, order):
         """If the carrier is multi, we test the availability on children."""
@@ -61,14 +84,17 @@ class DeliveryCarrier(models.Model):
         """
         if self.destination_type == "one":
             return super().rate_shipment(order)
-        else:
-            carrier = self.with_context(show_children_carriers=True)
-            for subcarrier in carrier.child_ids:
-                if subcarrier._match_address(order.partner_shipping_id):
-                    return super(
-                        DeliveryCarrier,
-                        subcarrier,
-                    ).rate_shipment(order)
+        subcarrier = self._get_matching_child(order.partner_shipping_id)
+        if not subcarrier:
+            return {
+                "success": False,
+                "price": 0.0,
+                "error_message": self.env._(
+                    "There is no destination available for this address."
+                ),
+                "warning_message": False,
+            }
+        return super(DeliveryCarrier, subcarrier).rate_shipment(order)
 
     def send_shipping(self, pickings):
         """We have to override this method for redirecting the result to the
@@ -84,15 +110,15 @@ class DeliveryCarrier(models.Model):
                 for subcarrier in carrier.child_ids.filtered(
                     lambda x, p=p: not x.company_id or x.company_id == p.company_id
                 ):
+                    if not subcarrier._match_address(p.partner_id):
+                        continue
                     if subcarrier.delivery_type == "fixed":
-                        if subcarrier._match_address(p.partner_id):
-                            picking_res = [
-                                {
-                                    "exact_price": subcarrier.fixed_price,
-                                    "tracking_number": False,
-                                }
-                            ]
-                            break
+                        picking_res = [
+                            {
+                                "exact_price": subcarrier.fixed_price,
+                                "tracking_number": False,
+                            }
+                        ]
                     else:
                         try:
                             # on base_on_rule_send_shipping, the method
@@ -103,11 +129,9 @@ class DeliveryCarrier(models.Model):
                             picking_res = super(
                                 DeliveryCarrier, subcarrier
                             ).send_shipping(p)
-                            break
-                        except Exception:  # pylint: disable=except-pass
-                            pass
                         finally:
                             p.carrier_id = carrier
+                    break
                 if not picking_res:
                     raise ValidationError(
                         p.env._("There is no matching delivery rule.")
