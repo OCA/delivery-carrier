@@ -13,7 +13,7 @@
     "license": "AGPL-3",
     "installable": True,
     "uninstall_hook": "uninstall_hook",
-    "depends": ["delivery"],
+    "depends": ["stock_delivery"],
     "demo": ["demo/delivery_carrier_demo.xml"],
     "data": ["views/delivery_carrier_view.xml"],
 }
