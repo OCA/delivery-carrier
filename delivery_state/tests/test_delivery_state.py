@@ -147,6 +147,29 @@ class TestDeliveryState(TransactionCase):
         last_mail = fields.first(mails)
         self.assertTrue("XX-0000" in last_mail.body)
 
+    def test_pod_error_cleared_after_successful_update(self):
+        self.picking.carrier_id = self.carrier.id
+        carrier_cls = type(self.carrier)
+        picking = self.picking.with_context(cron_id=1)
+        with patch.object(
+            carrier_cls,
+            "fixed_tracking_state_update",
+            create=True,
+            side_effect=Exception("Carrier unreachable"),
+        ):
+            picking.tracking_state_update()
+        self.assertEqual(self.picking.pod_error, "Carrier unreachable")
+        with (
+            patch.object(
+                carrier_cls, "fixed_tracking_state_update", create=True
+            ) as mock_update,
+            patch.object(type(self.picking), "_send_message_pod_error") as mock_message,
+        ):
+            picking.tracking_state_update()
+        mock_update.assert_called_once()
+        mock_message.assert_not_called()
+        self.assertFalse(self.picking.pod_error)
+
     def test_update_delivery_state(self):
         self.picking.carrier_id = self.carrier.id
         self.picking.state = "done"

@@ -79,6 +79,10 @@ class StockPicking(models.Model):
                     if not self.env.context.get("cron_id"):
                         raise
                     picking.pod_error = str(e)
+                else:
+                    # A stale error would otherwise be reported on every run
+                    if picking.pod_error:
+                        picking.pod_error = False
         # Filter pickings with errors and notify
         pickings_with_errors = self.filtered("pod_error")
         if pickings_with_errors:
