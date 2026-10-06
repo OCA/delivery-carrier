@@ -1,5 +1,7 @@
 from unittest.mock import Mock, patch
 
+from easypost.address import Address
+
 from odoo.exceptions import UserError
 
 from odoo.addons.delivery_easypost_oca.models.easypost_request import EasypostRequest
@@ -136,6 +138,38 @@ class TestEasypostRequest(EasypostTestBaseCase):
         expected_address = address.copy()
         expected_address["street2"] = address["street1"]
         mock_end_shipper.create.assert_called_once_with(**expected_address)
+
+    @patch("easypost.EndShipper")
+    def test_create_end_shipper_from_address_object(self, mock_end_shipper):
+        """``shipment.from_address`` is an EasyPost Address, not a dict."""
+        mock_response = Mock()
+        mock_response.id = "es_123"
+        mock_end_shipper.create.return_value = mock_response
+
+        address = Address()
+        address.id = "adr_123"
+        address.name = "EasyPost"
+        address.street1 = "118 2nd Street"
+        address.city = "San Francisco"
+        address.state = "CA"
+        address.zip = "94105"
+        address.country = "US"
+        address.phone = "415-456-7890"
+
+        result = self.easypost_request.create_end_shipper(address)
+
+        self.assertEqual(result.id, "es_123")
+        # Only address fields are sent: no id, no empty values.
+        mock_end_shipper.create.assert_called_once_with(
+            name="EasyPost",
+            street1="118 2nd Street",
+            street2="118 2nd Street",
+            city="San Francisco",
+            state="CA",
+            zip="94105",
+            country="US",
+            phone="415-456-7890",
+        )
 
     # @patch("easypost.EndShipper")
     # def test_create_end_shipper_error(self, mock_end_shipper):
