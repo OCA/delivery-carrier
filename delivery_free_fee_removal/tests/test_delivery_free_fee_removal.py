@@ -10,6 +10,11 @@ from odoo.addons.base.tests.common import BaseCommon
 
 
 class TestDeliveryFreeFeeRemoval(BaseCommon):
+    _test_user_groups = (
+        "sales_team.group_sale_manager",
+        "product.group_product_manager",
+    )
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
