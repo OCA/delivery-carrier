@@ -19,6 +19,7 @@
                                 required="delivery_type == 'easypost_oca'"
                             />
                             <field name="easypost_oca_label_file_type" />
+                            <field name="easypost_oca_label_size" />
                         </group>
                         <group>
                             <field

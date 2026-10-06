@@ -40,6 +40,12 @@ class DeliveryCarrier(models.Model):
         string="Label Format",
         default="PDF",
     )
+    easypost_oca_label_size = fields.Char(
+        string="Label Size",
+        help="Label size sent to EasyPost, e.g. 4x6 or 8.5x11. Leave empty to use "
+        "the default size of the label format. Valid sizes depend on the "
+        "carrier and the label format: see the EasyPost carrier guides.",
+    )
 
     easypost_oca_delivery_multiple_packages = fields.Selection(
         selection=[("shipments", "Shipments"), ("batch", "Batch")],
@@ -308,11 +314,14 @@ class DeliveryCarrier(models.Model):
         easypost_oca_label_file_type: str = "PDF",
         is_saturday_delivery: bool = False,
     ):
-        return {
+        options = {
             "label_date": datetime.now().isoformat(),
             "label_format": easypost_oca_label_file_type,
             "saturday_delivery": is_saturday_delivery,
         }
+        if self.easypost_oca_label_size:
+            options["label_size"] = self.easypost_oca_label_size.strip()
+        return options
 
     def _prepare_carrier_account(self, picking) -> list:
         return []
