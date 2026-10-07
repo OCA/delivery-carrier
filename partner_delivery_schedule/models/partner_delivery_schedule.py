@@ -71,7 +71,7 @@ class DeliverySchedule(models.Model):
         "sunday",
     )
     def _check_day_selected(self):
-        if not any([self[x[0]] for x in self._days_of_week()]):
+        if not any(self[x[0]] for x in self._days_of_week()):
             raise ValidationError(
                 self.env._("Error ! You must set one day to delivery.")
             )

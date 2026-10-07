@@ -10,7 +10,7 @@ class ResPartner(models.Model):
         comodel_name="delivery.schedule",
         column1="partner_id",
         column2="delivery_schedule_id",
-        string="Delivery Schedule",
+        string="Delivery Schedule ",
     )
 
     def allow_delivery_date(self, date_str):
