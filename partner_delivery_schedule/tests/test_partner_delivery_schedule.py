@@ -7,6 +7,8 @@ from odoo.addons.base.tests.common import BaseCommon
 
 
 class TestStockPikingReturnRefundOption(BaseCommon):
+    _test_user_groups = ("sales_team.group_sale_manager",)
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()

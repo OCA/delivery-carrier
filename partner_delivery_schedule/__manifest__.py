@@ -3,7 +3,7 @@
 {
     "name": "Partner Delivery Schedule",
     "summary": "Set on partners a schedule for delivery goods",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "development_status": "Production/Stable",
     "category": "Delivery",
     "website": "https://github.com/OCA/delivery-carrier",
@@ -13,7 +13,7 @@
     "installable": True,
     "depends": ["stock_delivery"],
     "data": [
-        "security/ir.model.access.csv",
+        "security/ir.access.csv",
         "views/partner_delivery_schedule_view.xml",
         "views/res_partner_view.xml",
         "views/report_shipping.xml",
