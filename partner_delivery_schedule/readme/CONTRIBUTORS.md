@@ -1,0 +1,7 @@
+- [Tecnativa](https://www.tecnativa.com):
+  - Sergio Teruel
+  - Juan Carlos Oñate
+- [NICO SOLUTIONS - ENGINEERING & IT](https://nico-solutions.de):
+  - Nils Coenen
+- Sudhir Arya\<<sudhir@erpharbor.com>\>
+  
