@@ -216,3 +216,8 @@ class TestDeliveryDropoffSite(BaseCommon):
         order_line = sale_order.order_line[0]
         values = order_line._prepare_procurement_values(None)
         self.assertEqual(values.get("final_shipping_partner_id"), self.customer.id)
+
+    def test_10_name_search_customer(self):
+        """Customer name search must still work on res.partner."""
+        results = self.env["res.partner"].name_search("Test Customer")
+        self.assertIn((self.customer.id, self.customer.display_name), results)
