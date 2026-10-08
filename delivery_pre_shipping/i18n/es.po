@@ -6,18 +6,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-10-08 12:46+0000\n"
+"Last-Translator: Carlos Dauden <carlos.dauden@tecnativa.com>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: delivery_pre_shipping
 #: model_terms:ir.ui.view,arch_db:delivery_pre_shipping.view_stock_picking_form
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #. module: delivery_pre_shipping
 #: model_terms:ir.ui.view,arch_db:delivery_pre_shipping.view_stock_picking_form
@@ -25,13 +27,14 @@ msgid ""
 "Cancelling a delivery may not be undoable. Are you sure you want to "
 "continue?"
 msgstr ""
+"Cancelar un envío puede no tener vuelta atrás. ¿Seguro que quiere continuar?"
 
 #. module: delivery_pre_shipping
 #: model_terms:ir.ui.view,arch_db:delivery_pre_shipping.view_stock_picking_form
 msgid "Send to shipper manually"
-msgstr ""
+msgstr "Enviar al transportista manualmente"
 
 #. module: delivery_pre_shipping
 #: model:ir.model,name:delivery_pre_shipping.model_stock_picking
 msgid "Transfer"
-msgstr ""
+msgstr "Traslado"
