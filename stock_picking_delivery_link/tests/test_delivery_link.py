@@ -36,7 +36,10 @@ class TestStockPickingDeliveryLink(StockPickingDeliveryLinkCommonCase):
     * several pickings computed at once, with different results;
     * multi-company: destination moves of companies not allowed for the
       user are ignored, as with the ORM record rules;
-    * pending (not flushed) changes are taken into account.
+    * pending (not flushed) changes are taken into account;
+    * chain looping on itself: the resolution stops without result;
+    * the number of queries depends neither on the number of pickings nor
+      on the depth of the chains.
     """
 
     @classmethod
@@ -347,3 +350,42 @@ class TestStockPickingDeliveryLink(StockPickingDeliveryLinkCommonCase):
         move1.state = "cancel"
         pick.invalidate_recordset(["ship_picking_id", "ship_carrier_id"])
         self._assert_ship(pick, ship2)
+
+    def test_ship_data_cycle(self):
+        pick = self._create_picking(self.pick_type)
+        move = self._create_chain_move(pick)
+        move2 = self._create_chain_move(self._create_picking(self.pack_type))
+        move3 = self._create_chain_move(self._create_picking(self.pack_type))
+        move.move_dest_ids = move2
+        move2.move_dest_ids = move3
+        move3.move_dest_ids = move2
+        self._assert_ship(pick, self.env["stock.picking"])
+
+    def _create_chains(self, count, depth):
+        """Create ``count`` pickings chained to a delivery in ``depth`` steps."""
+        pickings = self.env["stock.picking"]
+        for __ in range(count):
+            pick = self._create_picking(self.pick_type)
+            move = self._create_chain_move(pick)
+            for __ in range(depth - 1):
+                next_move = self._create_chain_move(
+                    self._create_picking(self.pack_type)
+                )
+                move.move_dest_ids = next_move
+                move = next_move
+            ship = self._create_picking(self.out_type)
+            move.move_dest_ids = self._create_chain_move(ship)
+            pickings |= pick
+        self.env.flush_all()
+        return pickings
+
+    def test_ship_data_query_count(self):
+        one = self._create_chains(1, 1)
+        many_deep = self._create_chains(10, 5)
+        self._reload()
+        with self.assertQueryCount(1):
+            ships = one._get_ships_from_chain()
+        self.assertEqual(len(ships), 1)
+        with self.assertQueryCount(1):
+            ships = many_deep._get_ships_from_chain()
+        self.assertEqual(len(ships), 10)
