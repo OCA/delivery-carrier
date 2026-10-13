@@ -1,5 +1,6 @@
 # generated from manifests external_dependencies
 easypost==7.15.0
+odoo_test_helper
 roulier
 unidecode
 zeep
