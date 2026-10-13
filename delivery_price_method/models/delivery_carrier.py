@@ -18,9 +18,11 @@ class DeliveryCarrier(models.Model):
     )
 
     def rate_shipment(self, order):
-        # Trick the method for using all the upstream code for the
-        # price computation in case of using fixed or base_on_rule.
-        previous_method = False
+        # OVERRIDE: rate using ``price_method`` when it's fixed or rule based.
+        # Odoo picks the rating method from ``delivery_type``, hence set it to
+        # ``price_method`` during the call, in cache only. Writing the stored
+        # field on every rating turns the carrier row into a hot spot leading to
+        # concurrent update errors.
         if self.price_method in ("fixed", "base_on_rule") and (
             not self.free_over
             or not self.amount
@@ -29,14 +31,18 @@ class DeliveryCarrier(models.Model):
             )
             < self.amount
         ):
-            previous_method = self.delivery_type
-            self.sudo().delivery_type = self.price_method
+            field = self._fields["delivery_type"]
+            # Cached value must not be dirty, otherwise ``cache.set`` would drop it
+            self.flush_recordset(["delivery_type"])
+            delivery_type = self.delivery_type
+            self.env.cache.set(self, field, self.price_method)
             # The free over threshold is already evaluated against the order
             self = self.with_context(delivery_price_method_skip_free_over=True)
-        res = super().rate_shipment(order)
-        if previous_method:
-            self.sudo().delivery_type = previous_method
-        return res
+            try:
+                return super().rate_shipment(order)
+            finally:
+                self.env.cache.set(self, field, delivery_type)
+        return super().rate_shipment(order)
 
     def send_shipping(self, pickings):
         res = super().send_shipping(pickings)
