@@ -1,6 +1,8 @@
 # Copyright 2020 Camptocamp
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+from unittest import mock
+
 from lxml import etree
 
 from odoo.tests.common import new_test_user, users
@@ -104,6 +106,22 @@ class TestCarrierPricelist(BaseCommon):
         wiz_form.carrier_id = self.carrier_pricelist
         self.assertEqual(wiz_form.display_price, pl_item.fixed_price)
         self.assertEqual(self.carrier_pricelist.delivery_type, "fixed")
+
+    @users("test-carrier-pricelist-sale-user")
+    def test_rate_shipment_config_mismatch_no_write(self):
+        """Rating from the pricelist must not write on the carrier"""
+        self.carrier_pricelist.write(
+            {"delivery_type": "fixed", "invoice_policy": "pricelist"}
+        )
+        pl_item = self.create_price_list_item()
+        carrier = self.carrier_pricelist.with_user(self.env.user)
+        with mock.patch.object(
+            type(carrier), "write", autospec=True, side_effect=AssertionError
+        ):
+            result = carrier.rate_shipment(self.sale_normal_delivery_charges)
+        self.assertTrue(result["success"])
+        self.assertEqual(result["price"], pl_item.fixed_price)
+        self.assertEqual(carrier.delivery_type, "fixed")
 
     @users("test-carrier-pricelist-sale-user")
     def test_wizard_invoice_policy(self):

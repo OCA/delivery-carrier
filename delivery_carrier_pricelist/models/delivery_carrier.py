@@ -25,30 +25,24 @@ class DeliveryCarrier(models.Model):
     )
 
     def rate_shipment(self, order):
-        # OVERRIDE: in case ``invoice_policy`` is set as "pricelist", we want to use
-        # method ``pricelist_rate_shipment`` to retrieve the proper prices. However,
-        # Odoo uses ``getattr(self, '%s_rate_shipment' % self.delivery_type)`` in its
-        # base method ``rate_shipment()`` to lookup which function to use, so we
-        # temporarily change the ``delivery_type`` if needed.
-
-        # TODO: I would propose the addition of _rate_shipment_get_handler
-        # instead of using getattr directly.
-        # This way, in v19 or 20 we can get rid of this hack.
-        # Also note that some specific carrier implementation
-        # rely on computed fields depending on delivery_type
-        # so we might trigger unnecessary changes w/ this patchy approach.
-
-        # Quick check: if the invoice policy is not "pricelist", or the delivery type is
-        # already set to "pricelist", we don't have to do anything
+        # OVERRIDE: rate from the pricelist when ``invoice_policy`` says so.
+        # Odoo picks the rating method from ``delivery_type`` via
+        # ``getattr(self, f"{self.delivery_type}_rate_shipment")``, hence set it
+        # to "pricelist" during the call, in cache only. Writing the stored field
+        # on every rating turns the carrier row into a hot spot leading to
+        # concurrent update errors, and triggers recomputation of fields
+        # depending on ``delivery_type``.
         if self.invoice_policy != "pricelist" or self.delivery_type == "pricelist":
             return super().rate_shipment(order)
-
-        # Use ``sudo()`` to prevent ``AccessError`` when updating the delivery type
+        field = self._fields["delivery_type"]
+        # Cached value must not be dirty, otherwise ``cache.set`` would drop it
+        self.flush_recordset(["delivery_type"])
         delivery_type = self.delivery_type
-        self.sudo().delivery_type = "pricelist"
-        result = super().rate_shipment(order)
-        self.sudo().delivery_type = delivery_type
-        return result
+        self.env.cache.set(self, field, "pricelist")
+        try:
+            return super().rate_shipment(order)
+        finally:
+            self.env.cache.set(self, field, delivery_type)
 
     def send_shipping(self, pickings):
         result = super().send_shipping(pickings)
