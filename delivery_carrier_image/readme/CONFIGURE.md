@@ -1,0 +1,2 @@
+- Go to Inventory > Configuration > Delivery > Delivery Carriers
+- Fill in the image
