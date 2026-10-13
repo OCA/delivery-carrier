@@ -1,0 +1,2 @@
+- Sébastien Alix \<<sebastien.alix@camptocamp.com>\>
+- Jacques-Etienne Baudoux (BCIM) \<<je@bcim.be>\>
