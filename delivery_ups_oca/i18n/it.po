@@ -65,6 +65,11 @@ msgid "Check/Cashier Check/Money Order"
 msgstr "Assegno/Assegno circolare/Vaglia"
 
 #. module: delivery_ups_oca
+#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_address_validation__validate
+msgid "City / state / postal code"
+msgstr ""
+
+#. module: delivery_ups_oca
 #: model:ir.model,name:delivery_ups_oca.model_res_partner
 msgid "Contact"
 msgstr "Contatto"
@@ -177,6 +182,11 @@ msgid "LBS"
 msgstr "LB"
 
 #. module: delivery_ups_oca
+#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__t1
+msgid "LTL"
+msgstr ""
+
+#. module: delivery_ups_oca
 #: model_terms:ir.ui.view,arch_db:delivery_ups_oca.view_delivery_carrier_form
 msgid "Label"
 msgstr "Etichetta"
@@ -185,6 +195,11 @@ msgstr "Etichetta"
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__m7
 msgid "Mail Innovations (MI) Returns"
 msgstr "Rientri Mail Innovations (MI)"
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__t0
+msgid "Master"
+msgstr ""
 
 #. module: delivery_ups_oca
 #: model_terms:ir.ui.view,arch_db:delivery_ups_oca.view_delivery_carrier_form
@@ -227,6 +242,11 @@ msgid "Package Weight code"
 msgstr "Codice peso collo"
 
 #. module: delivery_ups_oca
+#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_address_validation__nonvalidate
+msgid "Postal code / state"
+msgstr ""
+
+#. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__m3
 msgid "Priority Mail"
 msgstr "Posta prioritaria"
@@ -240,6 +260,21 @@ msgstr "Posta prioritaria Innovations"
 #: model:ir.model.fields,field_description:delivery_ups_oca.field_delivery_carrier__delivery_type
 msgid "Provider"
 msgstr "Fornitore"
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__c8
+msgid "Roadie XD (Anytime delivery)"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__c6
+msgid "Roadie XD AM (Morning delivery)"
+msgstr ""
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__c7
+msgid "Roadie XD PM (Afternoon delivery)"
+msgstr ""
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_file_format__spl
@@ -300,6 +335,11 @@ msgid "UPS Access PointTM Economy"
 msgstr "UPS Access PointTM Economy"
 
 #. module: delivery_ups_oca
+#: model:ir.model.fields,field_description:delivery_ups_oca.field_delivery_carrier__ups_address_validation
+msgid "UPS Address Validation"
+msgstr ""
+
+#. module: delivery_ups_oca
 #: model:ir.model.fields,field_description:delivery_ups_oca.field_delivery_carrier__ups_cash_on_delivery
 msgid "UPS Cash On Delivery"
 msgstr "UPS contanti alla consegna"
@@ -313,6 +353,11 @@ msgstr "Codice UPS Cod Funds"
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__74
 msgid "UPS Express®12:00"
 msgstr "UPS Express®12:00"
+
+#. module: delivery_ups_oca
+#: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__75
+msgid "UPS Heavy Goods"
+msgstr ""
 
 #. module: delivery_ups_oca
 #: model_terms:ir.ui.view,arch_db:delivery_ups_oca.view_picking_withcarrier_out_form
@@ -361,8 +406,8 @@ msgstr "UPS Today Standard"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__72
-msgid "UPS Worldwide Economy"
-msgstr "UPS Worldwide Economy"
+msgid "UPS Worldwide Economy DDP"
+msgstr ""
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__17
@@ -378,6 +423,12 @@ msgstr "UPS Worldwide Express Freight"
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__71
 msgid "UPS Worldwide Express Freight Midday"
 msgstr "UPS Worldwide Express Freight Midday"
+
+#. module: delivery_ups_oca
+#. odoo-python
+#: code:addons/delivery_ups_oca/models/ups_request.py:0
+msgid "UPS returned no rate for this shipment."
+msgstr ""
 
 #. module: delivery_ups_oca
 #: model_terms:ir.ui.view,arch_db:delivery_ups_oca.view_delivery_carrier_form
@@ -410,6 +461,11 @@ msgid "Use packages from picking"
 msgstr "Usa colli dal prelievo"
 
 #. module: delivery_ups_oca
+#: model:ir.model.fields,help:delivery_ups_oca.field_delivery_carrier__ups_address_validation
+msgid "Whether UPS also checks the city. The street is never validated."
+msgstr ""
+
+#. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_file_format__zpl
 msgid "ZPL"
 msgstr "ZPL"
@@ -425,6 +481,9 @@ msgstr "{date} - Attenzione: {warn}"
 #: code:addons/delivery_ups_oca/models/ups_request.py:0
 msgid "{} - Error retrieving the tracking information."
 msgstr "{} - Errore nel recuperare informazioni del tracciamento."
+
+#~ msgid "UPS Worldwide Economy"
+#~ msgstr "UPS Worldwide Economy"
 
 #~ msgid "Default Packaging Type"
 #~ msgstr "Tipo imballo predefinito"
