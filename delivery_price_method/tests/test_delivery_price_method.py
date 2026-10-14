@@ -2,6 +2,8 @@
 # Copyright 2020 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+from unittest import mock
+
 from odoo.tools import float_compare
 
 from .common import TestDeliveryPriceMethodCommon
@@ -64,6 +66,19 @@ class TestDeliveryPriceMethod(TestDeliveryPriceMethodCommon):
         delivery_lines = sale.order_line.filtered(lambda r: r.is_delivery)
         delivery_price = sum(delivery_lines.mapped("price_unit"))
         self.assertEqual(delivery_price, 11.11)
+
+    def test_02_delivery_price_method_no_write(self):
+        """Rating through ``price_method`` must not write on the carrier"""
+        self.carrier.write(
+            {"delivery_type": "base_on_rule", "price_method": "fixed", "fixed_price": 5}
+        )
+        with mock.patch.object(
+            type(self.carrier), "write", autospec=True, side_effect=AssertionError
+        ):
+            res = self.carrier.rate_shipment(self.sale)
+        self.assertTrue(res["success"])
+        self.assertEqual(res["price"], 5)
+        self.assertEqual(self.carrier.delivery_type, "base_on_rule")
 
     def test_03_delivery_price_method_free_over(self):
         free_price = self.carrier_free._get_price_from_picking(
