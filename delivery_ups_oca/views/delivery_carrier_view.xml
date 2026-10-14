@@ -43,6 +43,10 @@ License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
                             />
                             <field name="ups_tracking_state_update_sync" />
                             <field name="ups_negotiated_rates" />
+                            <field
+                                name="ups_address_validation"
+                                required="delivery_type == 'ups'"
+                            />
                         </group>
                         <group string="Credentials">
                             <field
