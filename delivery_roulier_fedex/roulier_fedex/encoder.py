@@ -28,10 +28,7 @@ class FedexEncoder(Encoder):
             "shipper": self._transform_party(data["from_address"]),
             "recipients": [self._transform_party(data["to_address"])],
             "shippingChargesPayment": self._transform_payment(service),
-            "labelSpecification": {
-                "imageType": service["labelFormat"],
-                "labelStockType": service["labelStockType"],
-            },
+            "labelSpecification": self._transform_label_specification(service),
             "totalPackageCount": len(parcels),
             "requestedPackageLineItems": [
                 self._transform_parcel(parcel, sequence, service)
@@ -50,6 +47,19 @@ class FedexEncoder(Encoder):
             "requestedShipment": requested_shipment,
         }
         return {"body": body, "auth": data["auth"]}
+
+    def _transform_label_specification(self, service):
+        label_specification = {
+            "imageType": service["labelFormat"],
+            "labelStockType": service["labelStockType"],
+        }
+        if service["docTabContentType"]:
+            label_specification["customerSpecifiedDetail"] = {
+                "docTabContent": {
+                    "docTabContentType": service["docTabContentType"],
+                }
+            }
+        return label_specification
 
     def _transform_party(self, address):
         contact = {

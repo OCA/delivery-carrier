@@ -166,6 +166,34 @@ class TestDeliveryRoulierFedex(TransactionCase):
         self.assertEqual(picking.carrier_tracking_ref, "794615064919")
         self.assertEqual(picking.package_ids.parcel_tracking, "794615064919")
 
+    def _send_and_get_label_specification(self):
+        picking = self._create_picking()
+        with mock.patch(TRANSPORT_REQUESTS) as requests_mock:
+            requests_mock.post.return_value = _response(
+                200, {"access_token": "token", "expires_in": 3599}
+            )
+            requests_mock.request.return_value = _response(200, self._ship_response())
+            picking.send_to_shipper()
+        body = json.loads(requests_mock.request.call_args.kwargs["data"])
+        return body["requestedShipment"]["labelSpecification"]
+
+    def test_no_doc_tab_on_paper_stock(self):
+        label_specification = self._send_and_get_label_specification()
+        self.assertNotIn("customerSpecifiedDetail", label_specification)
+
+    def test_doc_tab_content_on_doc_tab_stock(self):
+        self.account.write(
+            {
+                "fedex_rest_file_format": "ZPLII",
+                "fedex_rest_label_stock_type": "STOCK_4X675_LEADING_DOC_TAB",
+            }
+        )
+        label_specification = self._send_and_get_label_specification()
+        self.assertEqual(
+            label_specification["customerSpecifiedDetail"],
+            {"docTabContent": {"docTabContentType": "STANDARD"}},
+        )
+
     def test_token_is_cached(self):
         picking = self._create_picking()
         with mock.patch(TRANSPORT_REQUESTS) as requests_mock:

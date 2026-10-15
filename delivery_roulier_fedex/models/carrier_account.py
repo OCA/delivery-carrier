@@ -17,6 +17,10 @@ THERMAL_LABEL_STOCK_TYPES = [
     ("STOCK_4X675_LEADING_DOC_TAB", "Thermal 4x6.75 leading doc tab"),
     ("STOCK_4X675_TRAILING_DOC_TAB", "Thermal 4x6.75 trailing doc tab"),
 ]
+DOC_TAB_LABEL_STOCK_TYPES = (
+    "STOCK_4X675_LEADING_DOC_TAB",
+    "STOCK_4X675_TRAILING_DOC_TAB",
+)
 
 
 class CarrierAccount(models.Model):
@@ -39,6 +43,13 @@ class CarrierAccount(models.Model):
         default="PAPER_4X6",
         help="Only these stock types are eligible to the FedEx "
         "Simple Label Certification.",
+    )
+    fedex_rest_doc_tab_content_type = fields.Selection(
+        [("STANDARD", "Standard"), ("MINIMUM", "Minimum")],
+        string="FedEx Doc Tab Content",
+        default="STANDARD",
+        help="Content printed on the detachable doc tab of thermal "
+        "doc tab label stocks.",
     )
     fedex_rest_pickup_type = fields.Selection(
         [

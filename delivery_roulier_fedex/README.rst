@@ -62,6 +62,9 @@ Configuration
 * Set the delivery method *Environment* to test to use the FedEx sandbox.
 * The delivery method *Code* is the FedEx ``serviceType``
   (e.g. ``FEDEX_INTERNATIONAL_PRIORITY``).
+* With a thermal doc tab label stock (leading or trailing), choose the
+  *FedEx Doc Tab Content* printed on the detachable part of the label:
+  *Standard* (references, date, weight, charges) or *Minimum*.
 * Package types should have their dimensions filled in, and products their
   weight, H.S. code and country of origin for international shipments.
 * Before going live, the FedEx label certification must be completed with

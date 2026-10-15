@@ -8,6 +8,8 @@ from datetime import timedelta
 from odoo import _, fields, models
 from odoo.exceptions import UserError
 
+from .carrier_account import DOC_TAB_LABEL_STOCK_TYPES
+
 _logger = logging.getLogger(__name__)
 try:
     from roulier import roulier
@@ -31,6 +33,7 @@ class StockPicking(models.Model):
             {
                 "accountNumber": account.fedex_rest_account_number or "",
                 "labelStockType": account.fedex_rest_label_stock_type,
+                "docTabContentType": self._fedex_rest_get_doc_tab_content_type(account),
                 "pickupType": account.fedex_rest_pickup_type,
                 "etd": account.fedex_rest_use_etd,
                 "reference1": self.sale_id.name or self.origin or self.name,
@@ -38,6 +41,11 @@ class StockPicking(models.Model):
             }
         )
         return service
+
+    def _fedex_rest_get_doc_tab_content_type(self, account):
+        if account.fedex_rest_label_stock_type not in DOC_TAB_LABEL_STOCK_TYPES:
+            return ""
+        return account.fedex_rest_doc_tab_content_type or ""
 
     def _fedex_rest_convert_address(self, partner):
         address = self._roulier_convert_address(partner)

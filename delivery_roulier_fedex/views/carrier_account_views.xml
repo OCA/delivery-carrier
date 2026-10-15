@@ -22,6 +22,10 @@
                     attrs="{'invisible': [('delivery_type', '!=', 'fedex_rest')], 'required': [('delivery_type', '=', 'fedex_rest')]}"
                 />
                 <field
+                    name="fedex_rest_doc_tab_content_type"
+                    attrs="{'invisible': ['|', ('delivery_type', '!=', 'fedex_rest'), ('fedex_rest_label_stock_type', 'not in', ['STOCK_4X675_LEADING_DOC_TAB', 'STOCK_4X675_TRAILING_DOC_TAB'])]}"
+                />
+                <field
                     name="fedex_rest_pickup_type"
                     attrs="{'invisible': [('delivery_type', '!=', 'fedex_rest')], 'required': [('delivery_type', '=', 'fedex_rest')]}"
                 />

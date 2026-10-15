@@ -4,7 +4,13 @@
 
 from roulier.api import ApiParcel, BaseApi
 
-from .constants import LABEL_FORMATS, LENGTH_UNITS, PAYMENT_TYPES, WEIGHT_UNITS
+from .constants import (
+    DOC_TAB_CONTENT_TYPES,
+    LABEL_FORMATS,
+    LENGTH_UNITS,
+    PAYMENT_TYPES,
+    WEIGHT_UNITS,
+)
 
 REQUIRED_STRING = {"type": "string", "required": True, "empty": False}
 
@@ -47,6 +53,11 @@ class FedexApiParcel(ApiParcel):
             {
                 "accountNumber": dict(REQUIRED_STRING),
                 "labelStockType": {"type": "string", "default": "PAPER_4X6"},
+                "docTabContentType": {
+                    "type": "string",
+                    "default": "",
+                    "allowed": DOC_TAB_CONTENT_TYPES,
+                },
                 "pickupType": {"type": "string", "default": "USE_SCHEDULED_PICKUP"},
                 "packagingType": {"type": "string", "default": "YOUR_PACKAGING"},
                 "paymentType": {
