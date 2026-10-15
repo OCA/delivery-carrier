@@ -1,4 +1,4 @@
-# Copyright 2025 Tecnativa - Víctor Martínez
+# Copyright 2025-2026 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 import base64
 
@@ -123,3 +123,26 @@ class DeliveryCarrier(models.Model):
                         "it has already been sent."
                     )
                 )
+
+    def dachser_list_shippings(self, date_from, date_to):
+        self.ensure_one()
+        return DachserRequest(self).list_shippings(date_from, date_to)
+
+    def action_get_manifest(self):
+        """Action to launch the manifest wizard"""
+        self.ensure_one()
+        wizard = self.env["dachser.manifest.wizard"].create({"carrier_id": self.id})
+        view_id = self.env.ref(
+            "delivery_dachser.delivery_dachser_manifest_wizard_form"
+        ).id
+        return {
+            "name": self.env._("Dachser Manifest"),
+            "type": "ir.actions.act_window",
+            "view_mode": "form",
+            "res_model": "dachser.manifest.wizard",
+            "view_id": view_id,
+            "views": [(view_id, "form")],
+            "target": "new",
+            "res_id": wizard.id,
+            "context": self.env.context,
+        }
