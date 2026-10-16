@@ -246,8 +246,47 @@ class DeliveryCarrier(models.Model):
             sendcloud_carriers = without_service_point + enabled_service_point
 
         return (sendcloud_carriers + other_carriers).sorted(
-            key=lambda carrier: carrier.name
+            key=lambda avl_carrier: (avl_carrier.sequence, avl_carrier.id)
         )
+
+    def _is_available_for_order(self, order):
+        res = super()._is_available_for_order(order)
+        if self.delivery_type == "sendcloud":
+            if self.sendcloud_is_return:
+                return False
+            weight = order.sendcloud_order_weight
+            if not (self.sendcloud_min_weight <= weight <= self.sendcloud_max_weight):
+                return False
+            if (
+                self.sendcloud_service_point_input == "required"
+                and self.sendcloud_integration_id.service_point_enabled
+            ):
+                carrier_names = self.sendcloud_integration_id.service_point_carriers
+                current_carrier = self.sendcloud_carrier
+                if not (
+                    current_carrier
+                    and current_carrier in safe_eval(carrier_names)
+                    or False
+                ):
+                    return False
+            warehouse = order.warehouse_id
+            if not warehouse.sencloud_sender_address_id:
+                # use standard server address
+                sender_address = self._get_default_sender_address_per_company(
+                    warehouse.company_id.id
+                )
+            else:
+                sender_address = warehouse.sencloud_sender_address_id
+            countries = self.env["sendcloud.shipping.method.country"].search(
+                [
+                    ("company_id", "=", order.company_id.id),
+                    ("from_iso_2", "=", sender_address.country),
+                    ("iso_2", "=", order.partner_shipping_id.country_id.code),
+                ]
+            )
+            if self.sendcloud_code not in countries.mapped("method_code"):
+                return False
+        return res
 
     # ----------------- #
     # Sendcloud methods #
@@ -272,9 +311,12 @@ class DeliveryCarrier(models.Model):
 
     def _sendcloud_get_price_per_country(self, country_code):
         self.ensure_one()
+        sendcloud_shipping_method_country_obj = self.env[
+            "sendcloud.shipping.method.country"
+        ]
         if self.sendcloud_price:
-            return self.sendcloud_price
-        shipping_method_country = self.env["sendcloud.shipping.method.country"].search(
+            return self.sendcloud_price, sendcloud_shipping_method_country_obj
+        shipping_method_country = sendcloud_shipping_method_country_obj.search(
             [
                 ("iso_2", "=", country_code),
                 ("company_id", "=", self.company_id.id),
