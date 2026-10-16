@@ -1,0 +1,2 @@
+- [ACSONE SA/NV](https://www.acsone.eu):
+  - Stéphane Mangin \<stephane.mangin@acsone.eu\>
