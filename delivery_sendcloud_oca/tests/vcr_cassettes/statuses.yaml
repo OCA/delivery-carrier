@@ -1,0 +1,61 @@
+interactions:
+  - request:
+      body: null
+      headers:
+        Accept: ["*/*"]
+        Accept-Encoding: ["gzip, deflate"]
+        Connection: [keep-alive]
+        User-Agent: [python-requests/2.28.1]
+      method: GET
+      uri: https://panel.sendcloud.sc/api/v2/parcels/statuses
+    response:
+      body:
+        {
+          string:
+            '[{"id":6,"message":"Not sorted"},{"id":15,"message":"Error
+            collecting"},{"id":62989,"message":"At
+            Customs"},{"id":62993,"message":"Delivery method
+            changed"},{"id":62990,"message":"At sorting
+            centre"},{"id":1002,"message":"Announcement
+            failed"},{"id":62991,"message":"Refused by
+            recipient"},{"id":62992,"message":"Returned to
+            sender"},{"id":62995,"message":"Delivery address
+            changed"},{"id":1999,"message":"Cancellation
+            requested"},{"id":62996,"message":"Exception"},{"id":62994,"message":"Delivery
+            date changed"},{"id":1998,"message":"Cancelled
+            upstream"},{"id":1000,"message":"Ready to
+            send"},{"id":62997,"message":"Address invalid"},{"id":12,"message":"Awaiting
+            customer
+            pickup"},{"id":11,"message":"Delivered"},{"id":93,"message":"Shipment
+            collected by customer"},{"id":91,"message":"Parcel en
+            route"},{"id":80,"message":"Unable to deliver"},{"id":22,"message":"Shipment
+            picked up by driver"},{"id":13,"message":"Announced: not
+            collected"},{"id":8,"message":"Delivery attempt
+            failed"},{"id":7,"message":"Being
+            sorted"},{"id":5,"message":"Sorted"},{"id":4,"message":"Delivery
+            delayed"},{"id":3,"message":"En route to sorting
+            center"},{"id":1,"message":"Announced"},{"id":1337,"message":"Unknown status
+            - check carrier track & trace page for more
+            insights"},{"id":999,"message":"No label"},{"id":1001,"message":"Being
+            announced"},{"id":2000,"message":"Cancelled"},{"id":2001,"message":"Submitting
+            cancellation request"},{"id":92,"message":"Driver en route"}]',
+        }
+      headers:
+        Allow: ["GET, HEAD, OPTIONS"]
+        Connection: [keep-alive]
+        Content-Type: [application/json]
+        Date: ["Tue, 05 Jul 2022 08:35:25 GMT"]
+        Referrer-Policy: [same-origin]
+        Server: [nginx]
+        Strict-Transport-Security: [max-age=15552000; includeSubDomains; preload]
+        Transfer-Encoding: [chunked]
+        Vary: [Accept-Encoding, "Origin, Cookie"]
+        X-Content-Type-Options: [nosniff]
+        X-Frame-Options: [DENY]
+        X-SendCloud-Client-Latest-Version-Linux: [1.0.2]
+        X-SendCloud-Client-Latest-Version-Windows: [1.0.4]
+        X-SendCloud-Client-Latest-Version-macOS: [1.0.5]
+        X-XSS-Protection: [1; mode=block]
+        content-length: ["1459"]
+      status: {code: 200, message: OK}
+version: 1

@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!-- Copyright 2024 Onestein (<https://www.onestein.nl>)
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl) -->
+<odoo noupdate="1">
+    <record id="sendcloud_product_delivery" model="product.product">
+        <field name="name">Sendcloud delivery charges</field>
+        <field name="default_code">sendcloud_delivery</field>
+        <field name="type">service</field>
+        <field name="categ_id" ref="delivery.product_category_deliveries" />
+        <field name="sale_ok" eval="False" />
+        <field name="purchase_ok" eval="False" />
+        <field name="list_price">0.0</field>
+        <field name="description_sale">Delivery Cost</field>
+    </record>
+</odoo>
