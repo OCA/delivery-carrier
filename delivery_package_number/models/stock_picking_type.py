@@ -6,7 +6,12 @@ from odoo import fields, models
 class StockPickingType(models.Model):
     _inherit = "stock.picking.type"
 
-    force_set_number_of_packages = fields.Boolean()
+    force_set_number_of_packages = fields.Selection(
+        [
+            ("always", "Always"),
+            ("partner", "Partner condition"),
+        ]
+    )
     report_number_of_packages = fields.Many2one(
         "ir.actions.report",
         default=lambda self: self.env.ref(
