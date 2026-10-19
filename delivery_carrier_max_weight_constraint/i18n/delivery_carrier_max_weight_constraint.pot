@@ -1,0 +1,79 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* delivery_carrier_max_weight_constraint
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: delivery_carrier_max_weight_constraint
+#: model:ir.model,name:delivery_carrier_max_weight_constraint.model_res_company
+msgid "Companies"
+msgstr ""
+
+#. module: delivery_carrier_max_weight_constraint
+#: model:ir.model,name:delivery_carrier_max_weight_constraint.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: delivery_carrier_max_weight_constraint
+#: model_terms:ir.ui.view,arch_db:delivery_carrier_max_weight_constraint.res_config_settings_view_form
+msgid "Constrain the maximum weight of packages to be respected"
+msgstr ""
+
+#. module: delivery_carrier_max_weight_constraint
+#: model:ir.model,name:delivery_carrier_max_weight_constraint.model_choose_delivery_package
+msgid "Delivery Package Selection Wizard"
+msgstr ""
+
+#. module: delivery_carrier_max_weight_constraint
+#: model:ir.model.fields,field_description:delivery_carrier_max_weight_constraint.field_stock_package_type__is_strict_weight
+msgid "Overweight forbidden"
+msgstr ""
+
+#. module: delivery_carrier_max_weight_constraint
+#: model:ir.model.fields,field_description:delivery_carrier_max_weight_constraint.field_delivery_carrier__is_strict_weight_package
+msgid "Overweight package forbidden"
+msgstr ""
+
+#. module: delivery_carrier_max_weight_constraint
+#: model:ir.model.fields,field_description:delivery_carrier_max_weight_constraint.field_res_company__delivery_carrier_strict_weight_package
+#: model:ir.model.fields,field_description:delivery_carrier_max_weight_constraint.field_res_config_settings__delivery_carrier_strict_weight_package
+msgid "Overweight packages forbidden"
+msgstr ""
+
+#. module: delivery_carrier_max_weight_constraint
+#: model:ir.model,name:delivery_carrier_max_weight_constraint.model_delivery_carrier
+msgid "Shipping Methods"
+msgstr ""
+
+#. module: delivery_carrier_max_weight_constraint
+#: model:ir.model,name:delivery_carrier_max_weight_constraint.model_stock_package_type
+msgid "Stock package type"
+msgstr ""
+
+#. module: delivery_carrier_max_weight_constraint
+#: model:ir.model.fields,help:delivery_carrier_max_weight_constraint.field_delivery_carrier__is_strict_weight_package
+msgid "The maximum weight of packages can't be exceeded."
+msgstr ""
+
+#. module: delivery_carrier_max_weight_constraint
+#: model:ir.model.fields,help:delivery_carrier_max_weight_constraint.field_stock_package_type__is_strict_weight
+msgid "The maximum weight of the package can't be exceeded."
+msgstr ""
+
+#. module: delivery_carrier_max_weight_constraint
+#. odoo-python
+#: code:addons/delivery_carrier_max_weight_constraint/wizards/choose_delivery_package.py:0
+#, python-format
+msgid ""
+"The weight of your package is higher than the maximum weight authorized for "
+"this package type. Please choose another package type."
+msgstr ""
