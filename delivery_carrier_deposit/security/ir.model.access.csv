@@ -1,0 +1,4 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_deposit_slip_user","access_deposit_slip","model_deposit_slip","base.group_user",1,0,0,0
+"access_deposit_slip_stock_user","access_deposit_slip_stock_user","model_deposit_slip","stock.group_stock_user",1,1,1,1
+"access_deposit_slip_wizard_stock_user","access_deposit_slip_wizard_stock_user","model_delivery_deposit_wizard","stock.group_stock_user",1,1,1,1
