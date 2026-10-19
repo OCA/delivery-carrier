@@ -2,6 +2,7 @@
 # Copyright 2020 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+from odoo import Command
 from odoo.tools import float_compare
 
 from .common import TestDeliveryPriceMethodCommon
@@ -99,3 +100,25 @@ class TestDeliveryPriceMethod(TestDeliveryPriceMethodCommon):
         self.assertEqual(prices["price"], 11.11)
         self.assertEqual(prices["carrier_price"], 11.11)
         self.assertEqual(base_price, 11.11)
+
+    def test_04_delivery_price_method_free_over_without_delivery(self):
+        self.carrier_free.write(
+            {
+                "amount": 100,
+                "price_rule_ids": [
+                    Command.create(
+                        {
+                            "variable": "quantity",
+                            "operator": "==",
+                            "max_value": 1,
+                            "list_base_price": 11.11,
+                        }
+                    )
+                ],
+            }
+        )
+        self.sale_2.order_line.write({"price_unit": 95, "tax_id": False})
+        self._add_delivery()
+        self.assertGreaterEqual(self.sale_2.amount_total, 100)
+        prices = self.carrier_free.rate_shipment(self.sale_2)
+        self.assertEqual(prices["price"], 11.11)
