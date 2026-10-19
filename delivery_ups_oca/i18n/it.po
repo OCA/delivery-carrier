@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2026-09-15 06:19+0000\n"
+"PO-Revision-Date: 2026-10-19 11:46+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -67,7 +67,7 @@ msgstr "Assegno/Assegno circolare/Vaglia"
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_address_validation__validate
 msgid "City / state / postal code"
-msgstr ""
+msgstr "Città / nazione / codice postale"
 
 #. module: delivery_ups_oca
 #: model:ir.model,name:delivery_ups_oca.model_res_partner
@@ -184,7 +184,7 @@ msgstr "LB"
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__t1
 msgid "LTL"
-msgstr ""
+msgstr "LTL"
 
 #. module: delivery_ups_oca
 #: model_terms:ir.ui.view,arch_db:delivery_ups_oca.view_delivery_carrier_form
@@ -199,7 +199,7 @@ msgstr "Rientri Mail Innovations (MI)"
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__t0
 msgid "Master"
-msgstr ""
+msgstr "Master"
 
 #. module: delivery_ups_oca
 #: model_terms:ir.ui.view,arch_db:delivery_ups_oca.view_delivery_carrier_form
@@ -244,7 +244,7 @@ msgstr "Codice peso collo"
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_address_validation__nonvalidate
 msgid "Postal code / state"
-msgstr ""
+msgstr "Codice postale / nazione"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__m3
@@ -264,17 +264,17 @@ msgstr "Fornitore"
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__c8
 msgid "Roadie XD (Anytime delivery)"
-msgstr ""
+msgstr "Roadie XD (consegna sempre)"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__c6
 msgid "Roadie XD AM (Morning delivery)"
-msgstr ""
+msgstr "Roadie XD AM (consegna in mattinata)"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__c7
 msgid "Roadie XD PM (Afternoon delivery)"
-msgstr ""
+msgstr "Roadie XD PM (consegna pomeridiana)"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_file_format__spl
@@ -337,7 +337,7 @@ msgstr "UPS Access PointTM Economy"
 #. module: delivery_ups_oca
 #: model:ir.model.fields,field_description:delivery_ups_oca.field_delivery_carrier__ups_address_validation
 msgid "UPS Address Validation"
-msgstr ""
+msgstr "Validazione indirizzo UPS"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields,field_description:delivery_ups_oca.field_delivery_carrier__ups_cash_on_delivery
@@ -357,7 +357,7 @@ msgstr "UPS Express®12:00"
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__75
 msgid "UPS Heavy Goods"
-msgstr ""
+msgstr "Beni pesanti UPS"
 
 #. module: delivery_ups_oca
 #: model_terms:ir.ui.view,arch_db:delivery_ups_oca.view_picking_withcarrier_out_form
@@ -407,7 +407,7 @@ msgstr "UPS Today Standard"
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__72
 msgid "UPS Worldwide Economy DDP"
-msgstr ""
+msgstr "UPS Worldwide Economy DDP"
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_service_code__17
@@ -428,7 +428,7 @@ msgstr "UPS Worldwide Express Freight Midday"
 #. odoo-python
 #: code:addons/delivery_ups_oca/models/ups_request.py:0
 msgid "UPS returned no rate for this shipment."
-msgstr ""
+msgstr "UPS non ha restituito alcuna tariffa per questa spedizione."
 
 #. module: delivery_ups_oca
 #: model_terms:ir.ui.view,arch_db:delivery_ups_oca.view_delivery_carrier_form
@@ -463,7 +463,7 @@ msgstr "Usa colli dal prelievo"
 #. module: delivery_ups_oca
 #: model:ir.model.fields,help:delivery_ups_oca.field_delivery_carrier__ups_address_validation
 msgid "Whether UPS also checks the city. The street is never validated."
-msgstr ""
+msgstr "Se UPS verificha anche la città. L'indirizzo non viene mai convalidato."
 
 #. module: delivery_ups_oca
 #: model:ir.model.fields.selection,name:delivery_ups_oca.selection__delivery_carrier__ups_file_format__zpl
