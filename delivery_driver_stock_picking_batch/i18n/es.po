@@ -1,0 +1,29 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* delivery_driver_stock_picking_batch
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-01-08 08:48+0000\n"
+"PO-Revision-Date: 2024-01-08 09:53+0100\n"
+"Last-Translator: Emilio Pascual <emilio@moduom.team>\n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4\n"
+
+#. module: delivery_driver_stock_picking_batch
+#: model:ir.model,name:delivery_driver_stock_picking_batch.model_stock_picking_batch
+msgid "Batch Transfer"
+msgstr "Transferir agrupación"
+
+#. module: delivery_driver_stock_picking_batch
+#: model:ir.model.fields,field_description:delivery_driver_stock_picking_batch.field_stock_picking_batch__driver_ids
+#: model_terms:ir.ui.view,arch_db:delivery_driver_stock_picking_batch.stock_picking_batch_filter_inherit_delivery_driver
+msgid "Drivers"
+msgstr "Conductores"
