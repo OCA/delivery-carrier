@@ -24,11 +24,15 @@ class DeliveryCarrier(models.Model):
         if self.price_method in ("fixed", "base_on_rule") and (
             not self.free_over
             or not self.amount
-            or self._compute_currency(order, order.amount_total, "pricelist_to_company")
+            or self._compute_currency(
+                order, self._get_free_over_amount(order), "pricelist_to_company"
+            )
             < self.amount
         ):
             previous_method = self.delivery_type
             self.sudo().delivery_type = self.price_method
+            # The free over threshold is already evaluated against the order
+            self = self.with_context(delivery_price_method_skip_free_over=True)
         res = super().rate_shipment(order)
         if previous_method:
             self.sudo().delivery_type = previous_method
@@ -43,10 +47,15 @@ class DeliveryCarrier(models.Model):
                 res[index].update(rate)
         return res
 
+    def _get_free_over_amount(self, order):
+        """Order amount compared against the free over threshold"""
+        return order._compute_amount_total_without_delivery()
+
     def _get_price_from_picking(self, total, weight, volume, quantity, wv=0.0):
         if (
             self.price_method == "base_on_rule"
             and self.free_over
+            and not self.env.context.get("delivery_price_method_skip_free_over")
             and total >= self.amount
         ):
             return 0.0
