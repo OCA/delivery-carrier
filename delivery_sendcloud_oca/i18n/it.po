@@ -6,13 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-10-22 15:59+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: delivery_sendcloud_oca
 #. odoo-python
@@ -23,42 +25,45 @@ msgid ""
 "%(errors)s\n"
 "\n"
 msgstr ""
+"%(parcel)s:\n"
+"%(errors)s\n"
+"\n"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_sendcloud_brand_form
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_sendcloud_parcel_form
 msgid "-> Create Return Parcel"
-msgstr ""
+msgstr "-> Crea collo di reso"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_sendcloud_parcel_form
 msgid "-> Get Document"
-msgstr ""
+msgstr "-> Recupera documento"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_sendcloud_parcel_form
 msgid "-> Get Documents"
-msgstr ""
+msgstr "-> Recupera documenti"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_sendcloud_parcel_form
 msgid "-> Get Label"
-msgstr ""
+msgstr "-> Recupera etichetta"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_sendcloud_parcel_form
 msgid "-> Get Return Portal Url"
-msgstr ""
+msgstr "-> Recupera URL del portale resi"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_sendcloud_invoice_form
 msgid "-> Update Items"
-msgstr ""
+msgstr "-> Aggiorna articoli"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,help:delivery_sendcloud_oca.field_sendcloud_parcel__external_reference
 msgid "A field to use as a reference for your order."
-msgstr ""
+msgstr "Un campo da utilizzare come riferimento per l'ordine."
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,help:delivery_sendcloud_oca.field_sendcloud_parcel__collo_nr
@@ -67,6 +72,9 @@ msgid ""
 "collo shipment, this value will always be 0. In a multi-collo shipment with "
 "3 collos, this number will range from 0 to 2."
 msgstr ""
+"Un numero che indica il numero del collo all'interno di una spedizione. Per "
+"una spedizione senza colli multipli, questo valore è sempre 0. In una "
+"spedizione con 3 colli, questo numero va da 0 a 2."
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,help:delivery_sendcloud_oca.field_sendcloud_parcel__collo_count
@@ -74,26 +82,28 @@ msgid ""
 "A number indicating the number of collos within a shipment. For non-multi-"
 "collo shipments, this value will always be 1."
 msgstr ""
+"Un numero che indica il numero di colli all'interno di una spedizione. Per "
+"le spedizioni con un solo collo, questo valore è sempre 1."
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard__access_token
 msgid "Access Token"
-msgstr ""
+msgstr "Token di accesso"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_action__action
 msgid "Action"
-msgstr ""
+msgstr "Azione"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__message_needaction
 msgid "Action Needed"
-msgstr ""
+msgstr "Azione richiesta"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.ui.menu,name:delivery_sendcloud_oca.menu_sendcloud_sendcloud_action
 msgid "Actions"
-msgstr ""
+msgstr "Azioni"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_brand__active
@@ -102,51 +112,51 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return__active
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_sender_address__active
 msgid "Active"
-msgstr ""
+msgstr "Attivo"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__activity_ids
 msgid "Activities"
-msgstr ""
+msgstr "Attività"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__activity_exception_decoration
 msgid "Activity Exception Decoration"
-msgstr ""
+msgstr "Decorazione eccezione attività"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__activity_state
 msgid "Activity State"
-msgstr ""
+msgstr "Stato attività"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__activity_type_icon
 msgid "Activity Type Icon"
-msgstr ""
+msgstr "Icona tipo attività"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__address
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_sendcloud_parcel_form
 msgid "Address"
-msgstr ""
+msgstr "Indirizzo"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard_return_location__address_1
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return_location__address_1
 msgid "Address 1"
-msgstr ""
+msgstr "Indirizzo 1"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard_return_location__address_2
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__address_2
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return_location__address_2
 msgid "Address 2"
-msgstr ""
+msgstr "Indirizzo 2"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,help:delivery_sendcloud_oca.field_sendcloud_parcel__address_2
 msgid "An apartment or floor number."
-msgstr ""
+msgstr "Numero dell'appartamento o del piano."
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,help:delivery_sendcloud_oca.field_sendcloud_parcel__documents
@@ -155,61 +165,64 @@ msgid ""
 " labels and a customs form. This field returns an array of all the available"
 " documents for this parcel."
 msgstr ""
+"Un array di documenti. Un collo può contenere più documenti, ad esempio "
+"etichette e un modulo doganale. Questo campo restituisce un array di tutti i "
+"documenti disponibili per il collo."
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_picking_withcarrier_out_form
 msgid "Announce"
-msgstr ""
+msgstr "Annuncia"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_picking_withcarrier_out_form
 msgid "Apply Shipping Rules"
-msgstr ""
+msgstr "Applica regole di spedizione"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__attachment_id
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel_document__attachment_id
 msgid "Attachment"
-msgstr ""
+msgstr "Allegato"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__message_attachment_count
 msgid "Attachment Count"
-msgstr ""
+msgstr "Numero allegati"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.res_config_settings_view_form_sale
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.res_config_settings_view_form_stock
 msgid "Auto create invoice"
-msgstr ""
+msgstr "Crea fattura automaticamente"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_integration_wizard__base_url
 msgid "Base Url"
-msgstr ""
+msgstr "URL di base"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard__brand_id
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__brand_id
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return_location__brand_id
 msgid "Brand"
-msgstr ""
+msgstr "Marchio"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_sendcloud_return_form
 msgid "Brand Name"
-msgstr ""
+msgstr "Nome del marchio"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_sync_wizard__brands
 #: model:ir.ui.menu,name:delivery_sendcloud_oca.menu_sendcloud_sendcloud_brands
 msgid "Brands"
-msgstr ""
+msgstr "Marchi"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__shipment
 msgid "Cached Shipment"
-msgstr ""
+msgstr "Spedizione memorizzata nella cache"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.sendcloud_cancel_shipment_confirm_wizard_form
@@ -220,19 +233,19 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.sendcloud_onboarding_warehouse_configuration_form
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.sendcloud_sync_order_form
 msgid "Cancel"
-msgstr ""
+msgstr "Annulla"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__carrier
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_delivery_carrier_form
 msgid "Carrier"
-msgstr ""
+msgstr "Vettore"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_integration__service_point_carrier_ids
 #: model:ir.ui.menu,name:delivery_sendcloud_oca.menu_sendcloud_sendcloud_carriers
 msgid "Carriers"
-msgstr ""
+msgstr "Vettori"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard_return_location__city
@@ -240,52 +253,52 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return_location__city
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_sender_address__city
 msgid "City"
-msgstr ""
+msgstr "Città"
 
 #. module: delivery_sendcloud_oca
 #. odoo-javascript
 #: code:addons/delivery_sendcloud_oca/static/src/xml/backend_service_point.xml:0
 #, python-format
 msgid "Clear"
-msgstr ""
+msgstr "Cancella"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard_delivery_option__code
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard_reason__code
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard_return_location__code
 msgid "Code"
-msgstr ""
+msgstr "Codice"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__colli_tracking_number
 msgid "Colli Tracking Number"
-msgstr ""
+msgstr "Numero di tracciamento del collo"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__colli_uuid
 msgid "Colli Uuid"
-msgstr ""
+msgstr "UUID del collo"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard__collo_count
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__collo_count
 msgid "Collo Count"
-msgstr ""
+msgstr "Numero colli"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__collo_nr
 msgid "Collo Nr"
-msgstr ""
+msgstr "N. collo"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_brand__color
 msgid "Color"
-msgstr ""
+msgstr "Colore"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model,name:delivery_sendcloud_oca.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Aziende"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_action__company_id
@@ -299,7 +312,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_shipping_method_country__company_id
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_shipping_method_country_custom__company_id
 msgid "Company"
-msgstr ""
+msgstr "Azienda"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard_return_location__company_name
@@ -307,93 +320,93 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return_location__company_name
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_sender_address__company_name
 msgid "Company Name"
-msgstr ""
+msgstr "Nome azienda"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.res_config_settings_view_form_sale
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.res_config_settings_view_form_stock
 msgid "Compute shipping costs and ship with Sendcloud"
-msgstr ""
+msgstr "Calcola i costi di spedizione e spedisci con Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model,name:delivery_sendcloud_oca.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Impostazioni di configurazione"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.ui.menu,name:delivery_sendcloud_oca.menu_sendcloud_sendcloud_config
 msgid "Configuration"
-msgstr ""
+msgstr "Configurazione"
 
 #. module: delivery_sendcloud_oca
 #: model:onboarding.onboarding.step,button_text:delivery_sendcloud_oca.onboarding_warehouse_address_step
 msgid "Configure"
-msgstr ""
+msgstr "Configura"
 
 #. module: delivery_sendcloud_oca
 #: model:onboarding.onboarding.step,title:delivery_sendcloud_oca.onboarding_warehouse_address_step
 msgid "Configure Warehouse Addresses"
-msgstr ""
+msgstr "Configura indirizzi del magazzino"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.sendcloud_cancel_shipment_confirm_wizard_form
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.sendcloud_onboarding_sync_configuration_form
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.sendcloud_sync_order_form
 msgid "Confirm"
-msgstr ""
+msgstr "Conferma"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.actions.act_window,name:delivery_sendcloud_oca.sendcloud_cancel_shipment_confirm_wizard
 msgid "Confirm cancel of shipment"
-msgstr ""
+msgstr "Conferma annullamento della spedizione"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.sendcloud_create_return_parcel_wizard_form
 msgid "Confirm step 1/2"
-msgstr ""
+msgstr "Conferma passaggio 1/2"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.sendcloud_create_return_parcel_wizard_form
 msgid "Confirm step 2/2"
-msgstr ""
+msgstr "Conferma passaggio 2/2"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model,name:delivery_sendcloud_oca.model_res_partner
 msgid "Contact"
-msgstr ""
+msgstr "Contatto"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_sender_address__contact_name
 msgid "Contact Name"
-msgstr ""
+msgstr "Nome contatto"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_change_warehouse_address_wizard__sencloud_sender_address_country_code
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_sender_address__country
 msgid "Country"
-msgstr ""
+msgstr "Nazione"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_change_warehouse_address_wizard__warehouse_country_code
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.sendcloud_onboarding_warehouse_configuration_form
 msgid "Country Code"
-msgstr ""
+msgstr "Codice nazione"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__country_iso_2
 msgid "Country Iso 2"
-msgstr ""
+msgstr "Codice ISO 2 della nazione"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard_return_location__country_name
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return_location__country_name
 msgid "Country Name"
-msgstr ""
+msgstr "Nome nazione"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.vpicktree
 msgid "Create Labels"
-msgstr ""
+msgstr "Crea etichette"
 
 #. module: delivery_sendcloud_oca
 #. odoo-python
@@ -401,17 +414,17 @@ msgstr ""
 #: model:ir.actions.act_window,name:delivery_sendcloud_oca.action_sendcloud_create_return_parcel_wizard
 #, python-format
 msgid "Create Return Parcel"
-msgstr ""
+msgstr "Crea collo di reso"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.vpicktree
 msgid "Create and Download Labels"
-msgstr ""
+msgstr "Crea e scarica etichette"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return__created_at
 msgid "Created At"
-msgstr ""
+msgstr "Creato alle"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_action__create_uid
@@ -442,7 +455,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_sync_wizard__create_uid
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_warehouse_address_wizard__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Creato da"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_action__create_date
@@ -473,29 +486,29 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_sync_wizard__create_date
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_warehouse_address_wizard__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Creato il"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields.selection,name:delivery_sendcloud_oca.selection__sendcloud_create_return_parcel_wizard_refund_option__code__credit
 msgid "Credit"
-msgstr ""
+msgstr "Credito"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields.selection,name:delivery_sendcloud_oca.selection__sendcloud_shipping_method_country__price_check__custom
 msgid "Custom"
-msgstr ""
+msgstr "Personalizzato"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_custom_price_details_wizard__price_custom
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_shipping_method_country__price_custom
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_shipping_method_country_custom__custom_price
 msgid "Custom Price"
-msgstr ""
+msgstr "Prezzo personalizzato"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_sendcloud_shipping_method_country_form
 msgid "Custom Price (Euro)"
-msgstr ""
+msgstr "Prezzo personalizzato (euro)"
 
 #. module: delivery_sendcloud_oca
 #. odoo-python
@@ -503,89 +516,89 @@ msgstr ""
 #: model:ir.actions.act_window,name:delivery_sendcloud_oca.action_sendcloud_custom_price_details_wizard
 #, python-format
 msgid "Custom Price Details"
-msgstr ""
+msgstr "Dettagli prezzo personalizzato"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__customs_invoice_nr
 msgid "Customs Invoice Nr"
-msgstr ""
+msgstr "N. fattura doganale"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_order_form
 msgid "Customs Shipment Type"
-msgstr ""
+msgstr "Tipo di spedizione doganale"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_integration__database
 msgid "Database"
-msgstr ""
+msgstr "Database"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_action__date_last_success
 msgid "Date Last Success"
-msgstr ""
+msgstr "Data ultimo esito positivo"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_order_form
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_picking_withcarrier_out_form
 msgid "Delete From Sendcloud"
-msgstr ""
+msgstr "Elimina da Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_sendcloud_return_form
 msgid "Deleted"
-msgstr ""
+msgstr "Eliminato"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return__delivered_at
 msgid "Delivered At"
-msgstr ""
+msgstr "Consegnato il"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.ui.menu,name:delivery_sendcloud_oca.menu_sendcloud_delivery
 msgid "Delivery"
-msgstr ""
+msgstr "Consegna"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model,name:delivery_sendcloud_oca.model_choose_delivery_carrier
 msgid "Delivery Carrier Selection Wizard"
-msgstr ""
+msgstr "Procedura guidata di selezione del vettore di consegna"
 
 #. module: delivery_sendcloud_oca
 #: model:product.template,description_sale:delivery_sendcloud_oca.sendcloud_product_delivery_product_template
 msgid "Delivery Cost"
-msgstr ""
+msgstr "Costo di consegna"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard__delivery_option_id
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return__delivery_option
 msgid "Delivery Option"
-msgstr ""
+msgstr "Opzione di consegna"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard__delivery_option_ids
 msgid "Delivery Options"
-msgstr ""
+msgstr "Opzioni di consegna"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard__delivery_options
 msgid "Delivery Options Cached"
-msgstr ""
+msgstr "Opzioni di consegna memorizzate nella cache"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel_item__description
 msgid "Description"
-msgstr ""
+msgstr "Descrizione"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_sendcloud_return_form
 msgid "Details"
-msgstr ""
+msgstr "Dettagli"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,help:delivery_sendcloud_oca.field_sendcloud_integration__sequence
 msgid "Determine the display order"
-msgstr ""
+msgstr "Determina l'ordine di visualizzazione"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_action__display_name
@@ -617,40 +630,40 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_sync_wizard__display_name
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_warehouse_address_wizard__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome visualizzato"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.sendcloud_cancel_shipment_confirm_wizard_form
 msgid "Do you confirm?"
-msgstr ""
+msgstr "Confermi?"
 
 #. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/models/sendcloud_parcel.py:0
 #, python-format
 msgid "Document not available: no link provided."
-msgstr ""
+msgstr "Documento non disponibile: nessun collegamento fornito."
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__document_ids
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_sendcloud_parcel_form
 msgid "Documents"
-msgstr ""
+msgstr "Documenti"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__documents
 msgid "Documents Data"
-msgstr ""
+msgstr "Dati dei documenti"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_brand__domain
 msgid "Domain"
-msgstr ""
+msgstr "Dominio"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields.selection,name:delivery_sendcloud_oca.selection__sendcloud_return__delivery_option__drop_off_point
 msgid "Drop Off Point"
-msgstr ""
+msgstr "Punto di consegna"
 
 #. module: delivery_sendcloud_oca
 #. odoo-python
@@ -658,63 +671,63 @@ msgstr ""
 #: model:ir.model.fields.selection,name:delivery_sendcloud_oca.selection__sendcloud_create_return_parcel_wizard_delivery_option__code__drop_off_point
 #, python-format
 msgid "Drop-off Point"
-msgstr ""
+msgstr "Punto di ritiro"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__email
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return__email
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_sender_address__email
 msgid "Email"
-msgstr ""
+msgstr "E-mail"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_shipping_method_country__enable_price_custom
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_shipping_method_country_custom__enable_price_custom
 msgid "Enable Price Custom"
-msgstr ""
+msgstr "Abilita prezzo personalizzato"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard__enable_refunds
 msgid "Enable Refunds"
-msgstr ""
+msgstr "Abilita rimborsi"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.res_config_settings_view_form_sale
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.res_config_settings_view_form_stock
 msgid "Enable Test Mode"
-msgstr ""
+msgstr "Abilita modalità test"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_custom_price_details_wizard__enable_price_custom
 msgid "Enable custom price?"
-msgstr ""
+msgstr "Abilitare il prezzo personalizzato?"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_sendcloud_integration_form
 msgid "Enabled"
-msgstr ""
+msgstr "Abilitato"
 
 #. module: delivery_sendcloud_oca
 #: model:onboarding.onboarding.step,done_text:delivery_sendcloud_oca.onboarding_warehouse_address_step
 msgid "Enjoy!"
-msgstr ""
+msgstr "Buon lavoro!"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_sender_address__eori_number
 msgid "Eori Number"
-msgstr ""
+msgstr "Numero EORI"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_action__error_message
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard__error_message
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_integration_wizard__error_message
 msgid "Error Message"
-msgstr ""
+msgstr "Messaggio di errore"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_action__error_on_parsing
 msgid "Error On Parsing"
-msgstr ""
+msgstr "Errore durante l'analisi"
 
 #. module: delivery_sendcloud_oca
 #. odoo-python
@@ -722,96 +735,96 @@ msgstr ""
 #: code:addons/delivery_sendcloud_oca/wizards/sendcloud_integration_wizard.py:0
 #, python-format
 msgid "Error while checking the webhook connection.\n"
-msgstr ""
+msgstr "Errore durante il controllo della connessione webhook.\n"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields.selection,name:delivery_sendcloud_oca.selection__sendcloud_create_return_parcel_wizard_refund_option__code__exchange
 msgid "Exchange"
-msgstr ""
+msgstr "Cambio"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_action__exitcode
 msgid "Exitcode"
-msgstr ""
+msgstr "Codice di uscita"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__external_order_id
 msgid "External Order"
-msgstr ""
+msgstr "Ordine esterno"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__external_reference
 msgid "External Reference"
-msgstr ""
+msgstr "Riferimento esterno"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__external_shipment_id
 msgid "External Shipment"
-msgstr ""
+msgstr "Spedizione esterna"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.sendcloud_create_return_parcel_wizard_form
 msgid "Extra data"
-msgstr ""
+msgstr "Dati aggiuntivi"
 
 #. module: delivery_sendcloud_oca
 #. odoo-javascript
 #: code:addons/delivery_sendcloud_oca/static/src/js/backend.esm.js:0
 #, python-format
 msgid "Failure in opening Service Point Selector"
-msgstr ""
+msgstr "Errore durante l'apertura del selettore dei punti di servizio"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__label
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel_document__attachment
 msgid "File Content"
-msgstr ""
+msgstr "Contenuto del file"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__message_follower_ids
 msgid "Followers"
-msgstr ""
+msgstr "Follower"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__message_partner_ids
 msgid "Followers (Partners)"
-msgstr ""
+msgstr "Follower (contatti)"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,help:delivery_sendcloud_oca.field_sendcloud_parcel__activity_type_icon
 msgid "Font awesome icon e.g. fa-tasks"
-msgstr ""
+msgstr "Icona Font Awesome, ad es. fa-tasks"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_shipping_method_country__from_country_id
 msgid "From Country"
-msgstr ""
+msgstr "Dal paese"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_sendcloud_return_form
 msgid "From Email"
-msgstr ""
+msgstr "E-mail mittente"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_shipping_method_country__from_iso_2
 msgid "From Iso 2"
-msgstr ""
+msgstr "ISO 2 mittente"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_shipping_method_country__from_iso_3
 msgid "From Iso 3"
-msgstr ""
+msgstr "ISO 3 mittente"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_shipping_method_country__from_name
 msgid "From Name"
-msgstr ""
+msgstr "Nome mittente"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields.selection,name:delivery_sendcloud_oca.selection__sendcloud_parcel__label_print_status__generated
 #: model:ir.model.fields.selection,name:delivery_sendcloud_oca.selection__stock_picking__label_print_status__generated
 msgid "Generated"
-msgstr ""
+msgstr "Generato"
 
 #. module: delivery_sendcloud_oca
 #. odoo-python
@@ -821,16 +834,19 @@ msgid ""
 "Harmonized System Code is mandatory when shipping outside of EU and to some states.\n"
 "You should set the HS Code for product %s"
 msgstr ""
+"Il codice del sistema armonizzato è obbligatorio per le spedizioni al di "
+"fuori dell'UE e verso alcuni stati.\n"
+"È necessario impostare il codice HS per il prodotto %s"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__has_message
 msgid "Has Message"
-msgstr ""
+msgstr "Ha messaggi"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_brand__hide_powered_by
 msgid "Hide Powered By"
-msgstr ""
+msgstr "Nascondi Powered By"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard_return_location__house_number
@@ -838,12 +854,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return_location__house_number
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_sender_address__house_number
 msgid "House Number"
-msgstr ""
+msgstr "Numero civico"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel_item__hs_code
 msgid "Hs Code"
-msgstr ""
+msgstr "Codice HS"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_action__id
@@ -875,32 +891,32 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_sync_wizard__id
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_warehouse_address_wizard__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__activity_exception_icon
 msgid "Icon"
-msgstr ""
+msgstr "Icona"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,help:delivery_sendcloud_oca.field_sendcloud_parcel__activity_exception_icon
 msgid "Icon to indicate an exception activity."
-msgstr ""
+msgstr "Icona per indicare un'eccezione dell'attività."
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard__identifier
 msgid "Identifier"
-msgstr ""
+msgstr "Identificativo"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,help:delivery_sendcloud_oca.field_sendcloud_parcel__message_needaction
 msgid "If checked, new messages require your attention."
-msgstr ""
+msgstr "Se selezionato, i nuovi messaggi richiedono la tua attenzione."
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,help:delivery_sendcloud_oca.field_sendcloud_parcel__message_has_error
 msgid "If checked, some messages have a delivery error."
-msgstr ""
+msgstr "Se selezionato, alcuni messaggi presentano un errore di consegna."
 
 #. module: delivery_sendcloud_oca
 #. odoo-python
@@ -909,112 +925,112 @@ msgstr ""
 #: model:ir.model.fields.selection,name:delivery_sendcloud_oca.selection__sendcloud_return__delivery_option__in_store
 #, python-format
 msgid "In Store"
-msgstr ""
+msgstr "In negozio"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return__incoming_parcel_id
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_sendcloud_return_form
 msgid "Incoming Parcel"
-msgstr ""
+msgstr "Collo in entrata"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return__incoming_parcel_brand_name
 msgid "Incoming Parcel Brand Name"
-msgstr ""
+msgstr "Nome marchio del collo in entrata"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return__incoming_parcel_code
 msgid "Incoming Parcel Code"
-msgstr ""
+msgstr "Codice del collo in entrata"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return__incoming_parcel_deleted
 msgid "Incoming Parcel Deleted"
-msgstr ""
+msgstr "Collo in entrata eliminato"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return__incoming_parcel_from_email
 msgid "Incoming Parcel From Email"
-msgstr ""
+msgstr "E-mail mittente del collo in entrata"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return__incoming_parcel_global_status_slug
 msgid "Incoming Parcel Global Status Slug"
-msgstr ""
+msgstr "Identificativo stato globale del collo in entrata"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return__incoming_parcel_order_number
 msgid "Incoming Parcel Order Number"
-msgstr ""
+msgstr "Numero ordine del collo in entrata"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return__incoming_parcel_parcel_status
 msgid "Incoming Parcel Parcel Status"
-msgstr ""
+msgstr "Stato del collo in entrata"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return__incoming_parcel_status_code
 msgid "Incoming Parcel Status Code"
-msgstr ""
+msgstr "Codice stato del collo in entrata"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return__incoming_parcel_status_global_status_slug
 msgid "Incoming Parcel Status Global Status Slug"
-msgstr ""
+msgstr "Identificativo stato globale dello stato del collo in entrata"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return__incoming_parcel_status_message
 msgid "Incoming Parcel Status Message"
-msgstr ""
+msgstr "Messaggio di stato del collo in entrata"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return__incoming_parcel_tracking_number
 msgid "Incoming Parcel Tracking Number"
-msgstr ""
+msgstr "Numero di tracciamento del collo in entrata"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return__incoming_parcel_tracking_url
 msgid "Incoming Parcel Tracking Url"
-msgstr ""
+msgstr "URL di tracciamento del collo in entrata"
 
 #. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/wizards/sendcloud_warehouse_address_wizard.py:0
 #, python-format
 msgid "Inconsistent countries:"
-msgstr ""
+msgstr "Paesi non coerenti:"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard__info_message
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_integration_wizard__info_message
 msgid "Info Message"
-msgstr ""
+msgstr "Messaggio informativo"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__insured_value
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_picking_withcarrier_out_form
 msgid "Insured Value"
-msgstr ""
+msgstr "Valore assicurato"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,help:delivery_sendcloud_oca.field_sendcloud_parcel__insured_value
 msgid "Insured Value is in Euro currency."
-msgstr ""
+msgstr "Il valore assicurato è espresso in euro."
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,help:delivery_sendcloud_oca.field_stock_picking__sendcloud_insured_value
 msgid "Insured Value must be in Euro currency."
-msgstr ""
+msgstr "Il valore assicurato deve essere espresso in euro."
 
 #. module: delivery_sendcloud_oca
 #: model:ir.ui.menu,name:delivery_sendcloud_oca.menu_sendcloud_sendcloud_integration
 msgid "Integration"
-msgstr ""
+msgstr "Integrazione"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_integration_wizard__integration_request_url
 msgid "Integration Request Url"
-msgstr ""
+msgstr "URL della richiesta di integrazione"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_sendcloud_brand_form
@@ -1027,61 +1043,61 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_sendcloud_return_tree
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_sendcloud_shipping_method_country_form
 msgid "Internal Code"
-msgstr ""
+msgstr "Codice interno"
 
 #. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/models/abstract_sendcloud_request.py:0
 #, python-format
 msgid "Internal server error."
-msgstr ""
+msgstr "Errore interno del server."
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_invoice__invoice_date
 msgid "Invoice Date"
-msgstr ""
+msgstr "Data fattura"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_invoice__invoice_type
 msgid "Invoice Type"
-msgstr ""
+msgstr "Tipo fattura"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_sync_wizard__invoices
 #: model:ir.ui.menu,name:delivery_sendcloud_oca.menu_sendcloud_sendcloud_invoices
 msgid "Invoices"
-msgstr ""
+msgstr "Fatture"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return__is_cancellable
 msgid "Is Cancellable"
-msgstr ""
+msgstr "Annullabile"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__message_is_follower
 msgid "Is Follower"
-msgstr ""
+msgstr "È follower"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_invoice__is_paid
 msgid "Is Paid"
-msgstr ""
+msgstr "Pagato"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_action__is_processed
 msgid "Is Processed"
-msgstr ""
+msgstr "Elaborato"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__is_return
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_delivery_carrier_form
 msgid "Is Return"
-msgstr ""
+msgstr "È un reso"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sale_order__is_sendcloud_delivery_type
 msgid "Is Sendcloud Delivery Type"
-msgstr ""
+msgstr "È un tipo di consegna Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_delivery_carrier__is_sendcloud_test_mode
@@ -1094,62 +1110,62 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__is_sendcloud_test_mode
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_stock_picking__is_sendcloud_test_mode
 msgid "Is Sendcloud Test Mode"
-msgstr ""
+msgstr "È in modalità test Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_res_partner__sendcloud_is_in_eu
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_res_users__sendcloud_is_in_eu
 msgid "Is in EU"
-msgstr ""
+msgstr "È nell'UE"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_shipping_method_country__iso_2
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_shipping_method_country_custom__iso_2
 msgid "Iso 2"
-msgstr ""
+msgstr "ISO 2"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_shipping_method_country__iso_3
 msgid "Iso 3"
-msgstr ""
+msgstr "ISO 3"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_invoice__item_ids
 msgid "Item"
-msgstr ""
+msgstr "Articolo"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_sendcloud_invoice_form
 msgid "Items"
-msgstr ""
+msgstr "Articoli"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return__items_cost
 msgid "Items Cost"
-msgstr ""
+msgstr "Costo articoli"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return__label_cost
 msgid "Label Cost"
-msgstr ""
+msgstr "Costo etichetta"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__label_print_status
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_stock_picking__label_print_status
 msgid "Label Print Status"
-msgstr ""
+msgstr "Stato stampa etichetta"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__label_printer_url
 msgid "Label Printer Url"
-msgstr ""
+msgstr "URL stampante etichette"
 
 #. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/models/sendcloud_parcel.py:0
 #, python-format
 msgid "Label not available: no label printer url provided."
-msgstr ""
+msgstr "Etichetta non disponibile: URL della stampante non fornito."
 
 #. module: delivery_sendcloud_oca
 #. odoo-python
@@ -1158,12 +1174,12 @@ msgstr ""
 #: model:ir.model.fields.selection,name:delivery_sendcloud_oca.selection__sendcloud_return__delivery_option__drop_off_labelless
 #, python-format
 msgid "Labelless Drop Off"
-msgstr ""
+msgstr "Punto di ritiro senza etichetta"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard__language
 msgid "Language"
-msgstr ""
+msgstr "Lingua"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_action__write_uid
@@ -1194,7 +1210,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_sync_wizard__write_uid
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_warehouse_address_wizard__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Ultimo aggiornamento di"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_action__write_date
@@ -1225,75 +1241,75 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_sync_wizard__write_date
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_warehouse_address_wizard__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Ultimo aggiornamento il"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard__line_ids
 msgid "Lines"
-msgstr ""
+msgstr "Righe"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel_document__link
 msgid "Link"
-msgstr ""
+msgstr "Collegamento"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.ui.menu,name:delivery_sendcloud_oca.menu_sendcloud_sendcloud_log
 msgid "Logging"
-msgstr ""
+msgstr "Registrazione log"
 
 #. module: delivery_sendcloud_oca
 #: model:onboarding.onboarding.step,done_text:delivery_sendcloud_oca.onboarding_sync_step
 msgid "Looks great!"
-msgstr ""
+msgstr "Perfetto!"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_delivery_carrier_form
 msgid "Max Weight"
-msgstr ""
+msgstr "Peso massimo"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel_status__message
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return__message
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_sendcloud_return_form
 msgid "Message"
-msgstr ""
+msgstr "Messaggio"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__message_has_error
 msgid "Message Delivery error"
-msgstr ""
+msgstr "Errore di consegna del messaggio"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_action__message_type
 msgid "Message Type"
-msgstr ""
+msgstr "Tipo di messaggio"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__message_ids
 msgid "Messages"
-msgstr ""
+msgstr "Messaggi"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_shipping_method_country__method_code
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_shipping_method_country_custom__method_code
 msgid "Method Code"
-msgstr ""
+msgstr "Codice metodo"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_delivery_carrier_form
 msgid "Min Weight"
-msgstr ""
+msgstr "Peso minimo"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_action__model
 msgid "Model"
-msgstr ""
+msgstr "Modello"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields.selection,name:delivery_sendcloud_oca.selection__sendcloud_create_return_parcel_wizard_refund_option__code__money
 msgid "Money"
-msgstr ""
+msgstr "Denaro"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,help:delivery_sendcloud_oca.field_sendcloud_parcel__colli_tracking_number
@@ -1301,11 +1317,13 @@ msgid ""
 "Multi-collo only. This is a tracking number assigned by the carrier to "
 "identify the entire multi-collo shipment."
 msgstr ""
+"Solo per spedizioni con più colli. È il numero di tracciamento assegnato dal "
+"vettore per identificare l'intera spedizione multi-collo."
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__my_activity_date_deadline
 msgid "My Activity Deadline"
-msgstr ""
+msgstr "Scadenza della mia attività"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_brand__name
@@ -1321,27 +1339,27 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return_location__name
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_shipping_method_country__name
 msgid "Name"
-msgstr ""
+msgstr "Nome"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard__national_carrier_contact
 msgid "National Carrier Contact"
-msgstr ""
+msgstr "Contatto del vettore nazionale"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__activity_date_deadline
 msgid "Next Activity Deadline"
-msgstr ""
+msgstr "Scadenza prossima attività"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__activity_summary
 msgid "Next Activity Summary"
-msgstr ""
+msgstr "Riepilogo prossima attività"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__activity_type_id
 msgid "Next Activity Type"
-msgstr ""
+msgstr "Tipo prossima attività"
 
 #. module: delivery_sendcloud_oca
 #. odoo-python
@@ -1350,63 +1368,64 @@ msgstr ""
 #, python-format
 msgid "No Sendcloud integrations found. Setup an integration first."
 msgstr ""
+"Nessuna integrazione Sendcloud trovata. Configura prima un'integrazione."
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields.selection,name:delivery_sendcloud_oca.selection__delivery_carrier__sendcloud_service_point_input__none
 msgid "None"
-msgstr ""
+msgstr "Nessuno"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__note
 msgid "Note"
-msgstr ""
+msgstr "Nota"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_brand__notify_bcc_email
 msgid "Notify Bcc Email"
-msgstr ""
+msgstr "E-mail BCC per notifiche"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_brand__notify_reply_to_email
 msgid "Notify Reply To Email"
-msgstr ""
+msgstr "E-mail di risposta per notifiche"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__message_needaction_counter
 msgid "Number of Actions"
-msgstr ""
+msgstr "Numero di azioni"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__message_has_error_counter
 msgid "Number of errors"
-msgstr ""
+msgstr "Numero di errori"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,help:delivery_sendcloud_oca.field_sendcloud_parcel__message_needaction_counter
 msgid "Number of messages requiring action"
-msgstr ""
+msgstr "Numero di messaggi che richiedono un'azione"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,help:delivery_sendcloud_oca.field_sendcloud_parcel__message_has_error_counter
 msgid "Number of messages with delivery error"
-msgstr ""
+msgstr "Numero di messaggi con errore di consegna"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model,name:delivery_sendcloud_oca.model_onboarding_onboarding
 msgid "Onboarding"
-msgstr ""
+msgstr "Configurazione iniziale"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model,name:delivery_sendcloud_oca.model_onboarding_onboarding_step
 msgid "Onboarding Step"
-msgstr ""
+msgstr "Passaggio della configurazione iniziale"
 
 #. module: delivery_sendcloud_oca
 #: model:onboarding.onboarding.step,step_image_alt:delivery_sendcloud_oca.onboarding_integration_step
 #: model:onboarding.onboarding.step,step_image_alt:delivery_sendcloud_oca.onboarding_sync_step
 #: model:onboarding.onboarding.step,step_image_alt:delivery_sendcloud_oca.onboarding_warehouse_address_step
 msgid "Onboarding Step Image"
-msgstr ""
+msgstr "Immagine del passaggio della configurazione iniziale"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_delivery_carrier_form
@@ -1414,12 +1433,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_picking_withcarrier_out_form
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_sendcloud_brand_form
 msgid "Only for Testing"
-msgstr ""
+msgstr "Solo per test"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.sendcloud_onboarding_sync_configuration_form
 msgid "Options"
-msgstr ""
+msgstr "Opzioni"
 
 #. module: delivery_sendcloud_oca
 #. odoo-python
@@ -1429,22 +1448,24 @@ msgid ""
 "Order %(external_order_id)s (shipment %(external_shipment_id)s) returned an "
 "error:\n"
 msgstr ""
+"L'ordine %(external_order_id)s (spedizione %(external_shipment_id)s) ha "
+"restituito un errore:\n"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__order_number
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_sendcloud_return_form
 msgid "Order Number"
-msgstr ""
+msgstr "Numero ordine"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.ui.menu,name:delivery_sendcloud_oca.menu_sendcloud_order
 msgid "Orders"
-msgstr ""
+msgstr "Ordini"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel_item__origin_country
 msgid "Origin Country"
-msgstr ""
+msgstr "Paese di origine"
 
 #. module: delivery_sendcloud_oca
 #. odoo-python
@@ -1453,99 +1474,101 @@ msgstr ""
 msgid ""
 "Origin Country is mandatory when shipping outside of EU and to some states."
 msgstr ""
+"Il paese di origine è obbligatorio per le spedizioni al di fuori dell'UE e "
+"verso alcuni stati."
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return__outgoing_parcel_id
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_sendcloud_return_form
 msgid "Outgoing Parcel"
-msgstr ""
+msgstr "Collo in uscita"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return__outgoing_parcel_brand_name
 msgid "Outgoing Parcel Brand Name"
-msgstr ""
+msgstr "Nome marchio del collo in uscita"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return__outgoing_parcel_code
 msgid "Outgoing Parcel Code"
-msgstr ""
+msgstr "Codice del collo in uscita"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return__outgoing_parcel_deleted
 msgid "Outgoing Parcel Deleted"
-msgstr ""
+msgstr "Collo in uscita eliminato"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return__outgoing_parcel_from_email
 msgid "Outgoing Parcel From Email"
-msgstr ""
+msgstr "E-mail mittente del collo in uscita"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return__outgoing_parcel_global_status_slug
 msgid "Outgoing Parcel Global Status Slug"
-msgstr ""
+msgstr "Identificativo stato globale del collo in uscita"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return__outgoing_parcel_order_number
 msgid "Outgoing Parcel Order Number"
-msgstr ""
+msgstr "Numero ordine del collo in uscita"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return__outgoing_parcel_parcel_status
 msgid "Outgoing Parcel Parcel Status"
-msgstr ""
+msgstr "Stato del collo in uscita"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return__outgoing_parcel_tracking_number
 msgid "Outgoing Parcel Tracking Number"
-msgstr ""
+msgstr "Numero di tracciamento del collo in uscita"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return__outgoing_parcel_tracking_url
 msgid "Outgoing Parcel Tracking Url"
-msgstr ""
+msgstr "URL di tracciamento del collo in uscita"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__package_id
 msgid "Package"
-msgstr ""
+msgstr "Pacco"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard__parcel_id
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel_document__parcel_id
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel_item__parcel_id
 msgid "Parcel"
-msgstr ""
+msgstr "Collo"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_sendcloud_parcel_form
 msgid "Parcel Details"
-msgstr ""
+msgstr "Dettagli collo"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__parcel_item_ids
 msgid "Parcel Item"
-msgstr ""
+msgstr "Articolo del collo"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_sendcloud_parcel_form
 msgid "Parcel Items"
-msgstr ""
+msgstr "Articoli del collo"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_sendcloud_parcel_form
 msgid "Parcel Label"
-msgstr ""
+msgstr "Etichetta del collo"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.ui.menu,name:delivery_sendcloud_oca.menu_sendcloud_sendcloud_parcel_status
 msgid "Parcel Status"
-msgstr ""
+msgstr "Stato del collo"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_sync_wizard__parcel_statuses
 msgid "Parcel Statuses"
-msgstr ""
+msgstr "Stati del collo"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_sync_wizard__parcels
@@ -1553,44 +1576,44 @@ msgstr ""
 #: model:ir.ui.menu,name:delivery_sendcloud_oca.menu_sendcloud_sendcloud_parcels
 #: model:ir.ui.menu,name:delivery_sendcloud_oca.menu_sendcloud_sendcloud_return_parcels
 msgid "Parcels"
-msgstr ""
+msgstr "Colli"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields.selection,name:delivery_sendcloud_oca.selection__stock_picking__label_print_status__partial
 msgid "Partially Printed"
-msgstr ""
+msgstr "Stampato parzialmente"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_sendcloud_parcel_form
 msgid "Partner Details"
-msgstr ""
+msgstr "Dettagli contatto"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__partner_name
 msgid "Partner Name"
-msgstr ""
+msgstr "Nome contatto"
 
 #. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/models/delivery_carrier.py:0
 #, python-format
 msgid "Partner does not have any country."
-msgstr ""
+msgstr "Il contatto non ha alcun paese impostato."
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__picking_id
 msgid "Picking"
-msgstr ""
+msgstr "Prelievo"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard__poller_url
 msgid "Poller Url"
-msgstr ""
+msgstr "URL del servizio di polling"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_sender_address__postal_box
 msgid "Postal Box"
-msgstr ""
+msgstr "Casella postale"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard__postal_code
@@ -1599,7 +1622,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return_location__postal_code
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_sender_address__postal_code
 msgid "Postal Code"
-msgstr ""
+msgstr "Codice postale"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard_line__price
@@ -1607,297 +1630,297 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_shipping_method_country_custom__price
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_delivery_carrier_form
 msgid "Price"
-msgstr ""
+msgstr "Prezzo"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_sendcloud_shipping_method_country_form
 msgid "Price (Euro)"
-msgstr ""
+msgstr "Prezzo (euro)"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_custom_price_details_wizard__price_check
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_shipping_method_country__price_check
 msgid "Price Check"
-msgstr ""
+msgstr "Controllo prezzo"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_invoice__price_excl
 msgid "Price Excl"
-msgstr ""
+msgstr "Prezzo al netto"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_invoice__price_incl
 msgid "Price Incl"
-msgstr ""
+msgstr "Prezzo IVA inclusa"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_delivery_carrier__sendcloud_country_ids
 msgid "Price per Country"
-msgstr ""
+msgstr "Prezzo per paese"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.vpicktree
 msgid "Print Labels"
-msgstr ""
+msgstr "Stampa etichette"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_brand__print_thumb
 msgid "Print Thumb"
-msgstr ""
+msgstr "Miniatura di stampa"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields.selection,name:delivery_sendcloud_oca.selection__sendcloud_parcel__label_print_status__printed
 #: model:ir.model.fields.selection,name:delivery_sendcloud_oca.selection__stock_picking__label_print_status__printed
 msgid "Printed"
-msgstr ""
+msgstr "Stampato"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel_item__product_id
 msgid "Product"
-msgstr ""
+msgstr "Prodotto"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel_item__properties
 msgid "Properties"
-msgstr ""
+msgstr "Proprietà"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_delivery_carrier__delivery_type
 msgid "Provider"
-msgstr ""
+msgstr "Fornitore"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_integration__public_key
 msgid "Public Key"
-msgstr ""
+msgstr "Chiave pubblica"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard_line__quantity
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel_item__quantity
 msgid "Quantity"
-msgstr ""
+msgstr "Quantità"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.sendcloud_create_return_parcel_wizard_form
 msgid "Query Parameters"
-msgstr ""
+msgstr "Parametri della query"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.actions.act_window,name:delivery_sendcloud_oca.action_quotations_sendcloud
 #: model:ir.ui.menu,name:delivery_sendcloud_oca.menu_sendcloud_quotations
 msgid "Quotations"
-msgstr ""
+msgstr "Preventivi"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.sendcloud_action_form
 msgid "Re-parse message"
-msgstr ""
+msgstr "Analizza nuovamente il messaggio"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard__reason_id
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return__reason
 msgid "Reason"
-msgstr ""
+msgstr "Motivo"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard__reason_message
 msgid "Reason Message"
-msgstr ""
+msgstr "Messaggio del motivo"
 
 #. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/wizards/sendcloud_create_return_parcel_wizard.py:0
 #, python-format
 msgid "Reason is required"
-msgstr ""
+msgstr "Il motivo è obbligatorio"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard__reason_ids
 msgid "Reasons"
-msgstr ""
+msgstr "Motivi"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard__reasons
 msgid "Reasons Cached"
-msgstr ""
+msgstr "Motivi memorizzati nella cache"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields.selection,name:delivery_sendcloud_oca.selection__sendcloud_action__message_type__received
 msgid "Received"
-msgstr ""
+msgstr "Ricevuto"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_action__message
 msgid "Received Message"
-msgstr ""
+msgstr "Messaggio ricevuto"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_action__record_id
 msgid "Record"
-msgstr ""
+msgstr "Record"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_invoice__ref
 msgid "Ref"
-msgstr ""
+msgstr "Rif."
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__reference
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_sendcloud_parcel_form
 msgid "Reference"
-msgstr ""
+msgstr "Riferimento"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard__refund_message
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return__refund_message
 msgid "Refund Message"
-msgstr ""
+msgstr "Messaggio di rimborso"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard__refund_option_id
 msgid "Refund Option"
-msgstr ""
+msgstr "Opzione di rimborso"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard__refund_option_ids
 msgid "Refund Options"
-msgstr ""
+msgstr "Opzioni di rimborso"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard__refund_options
 msgid "Refund Options Cached"
-msgstr ""
+msgstr "Opzioni di rimborso memorizzate nella cache"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard_refund_option__code
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return__refund_type
 msgid "Refund Type"
-msgstr ""
+msgstr "Tipo di rimborso"
 
 #. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/wizards/sendcloud_create_return_parcel_wizard.py:0
 #, python-format
 msgid "Refund message is required"
-msgstr ""
+msgstr "Il messaggio di rimborso è obbligatorio"
 
 #. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/wizards/sendcloud_create_return_parcel_wizard.py:0
 #, python-format
 msgid "Refund option is required"
-msgstr ""
+msgstr "L'opzione di rimborso è obbligatoria"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return__refunded_at
 msgid "Refunded At"
-msgstr ""
+msgstr "Rimborsato il"
 
 #. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/models/abstract_sendcloud_request.py:0
 #, python-format
 msgid "Request: %s"
-msgstr ""
+msgstr "Richiesta: %s"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard__refund_option_require_message
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard_refund_option__require_message
 msgid "Require Message"
-msgstr ""
+msgstr "Richiedi messaggio"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields.selection,name:delivery_sendcloud_oca.selection__delivery_carrier__sendcloud_service_point_input__required
 msgid "Required"
-msgstr ""
+msgstr "Obbligatorio"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_action__resid
 msgid "Resid"
-msgstr ""
+msgstr "Residuo"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_action__response_time
 msgid "Response Time (sec)"
-msgstr ""
+msgstr "Tempo di risposta (sec)"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__activity_user_id
 msgid "Responsible User"
-msgstr ""
+msgstr "Utente responsabile"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.sendcloud_custom_price_details_wizard_form
 msgid "Restore"
-msgstr ""
+msgstr "Ripristina"
 
 #. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/wizards/sendcloud_create_return_parcel_wizard.py:0
 #, python-format
 msgid "Return Details"
-msgstr ""
+msgstr "Dettagli reso"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard__return_fee
 msgid "Return Fee"
-msgstr ""
+msgstr "Costo del reso"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard__return_location_id
 msgid "Return Location"
-msgstr ""
+msgstr "Luogo di reso"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard__return_location_ids
 msgid "Return Locations"
-msgstr ""
+msgstr "Luoghi di reso"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard__return_locations
 msgid "Return Locations Cached"
-msgstr ""
+msgstr "Luoghi di reso memorizzati nella cache"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard_line__return_message
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel_item__return_message
 msgid "Return Message"
-msgstr ""
+msgstr "Messaggio di reso"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard__return_policy_url
 msgid "Return Policy Url"
-msgstr ""
+msgstr "URL della politica di reso"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_sendcloud_parcel_form
 msgid "Return Portal"
-msgstr ""
+msgstr "Portale resi"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_brand__return_portal_url
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard__return_portal_url
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__return_portal_url
 msgid "Return Portal Url"
-msgstr ""
+msgstr "URL del portale resi"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard_line__return_reason
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel_item__return_reason
 msgid "Return Reason"
-msgstr ""
+msgstr "Motivo del reso"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return__return_response_cache
 msgid "Return Response Cache"
-msgstr ""
+msgstr "Cache della risposta al reso"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_sync_wizard__returns
 #: model:ir.ui.menu,name:delivery_sendcloud_oca.menu_sendcloud_returns
 #: model:ir.ui.menu,name:delivery_sendcloud_oca.menu_sendcloud_sendcloud_returns
 msgid "Returns"
-msgstr ""
+msgstr "Resi"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,help:delivery_sendcloud_oca.field_sendcloud_parcel__type
@@ -1905,48 +1928,50 @@ msgid ""
 "Returns either ‘parcel’ or ‘letter’ by which you can determine the type of "
 "your shipment."
 msgstr ""
+"Restituisce 'parcel' oppure 'letter', consentendo di determinare il tipo di "
+"spedizione."
 
 #. module: delivery_sendcloud_oca
 #: model:ir.ui.menu,name:delivery_sendcloud_oca.menu_sendcloud_sale
 msgid "Sales"
-msgstr ""
+msgstr "Vendite"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model,name:delivery_sendcloud_oca.model_sale_order
 msgid "Sales Order"
-msgstr ""
+msgstr "Ordine di vendita"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.actions.act_window,name:delivery_sendcloud_oca.action_orders_sendcloud
 msgid "Sales Orders"
-msgstr ""
+msgstr "Ordini di vendita"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_brand__screen_thumb
 msgid "Screen Thumb"
-msgstr ""
+msgstr "Miniatura schermata"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_brand__secondary_color
 msgid "Secondary Color"
-msgstr ""
+msgstr "Colore secondario"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_integration__secret_key
 msgid "Secret Key"
-msgstr ""
+msgstr "Chiave segreta"
 
 #. module: delivery_sendcloud_oca
 #. odoo-javascript
 #: code:addons/delivery_sendcloud_oca/static/src/xml/backend_service_point.xml:0
 #, python-format
 msgid "Select"
-msgstr ""
+msgstr "Seleziona"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_change_warehouse_address_wizard__sencloud_sender_address_id
 msgid "Sencloud Sender Address"
-msgstr ""
+msgstr "Indirizzo mittente Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields.selection,name:delivery_sendcloud_oca.selection__delivery_carrier__delivery_type__sendcloud
@@ -1957,67 +1982,67 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.sale_order_view_search_inherit_sale
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_order_form
 msgid "Sendcloud"
-msgstr ""
+msgstr "Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model,name:delivery_sendcloud_oca.model_sendcloud_action
 msgid "Sendcloud Action"
-msgstr ""
+msgstr "Azione Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.actions.act_window,name:delivery_sendcloud_oca.action_sendcloud_action
 msgid "Sendcloud Actions"
-msgstr ""
+msgstr "Azioni Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_stock_picking__sendcloud_announce
 msgid "Sendcloud Announce"
-msgstr ""
+msgstr "Annuncio Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_stock_picking__sendcloud_apply_shipping_rules
 msgid "Sendcloud Apply Shipping Rules"
-msgstr ""
+msgstr "Applica regole di spedizione Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_res_company__sendcloud_auto_create_invoice
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_res_config_settings__sendcloud_auto_create_invoice
 msgid "Sendcloud Auto Create Invoice"
-msgstr ""
+msgstr "Crea fattura automaticamente con Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model,name:delivery_sendcloud_oca.model_sendcloud_brand
 msgid "Sendcloud Brand"
-msgstr ""
+msgstr "Marchio Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.actions.act_window,name:delivery_sendcloud_oca.action_sendcloud_brands
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_res_company__sendcloud_brand_ids
 msgid "Sendcloud Brands"
-msgstr ""
+msgstr "Marchi Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model,name:delivery_sendcloud_oca.model_sendcloud_cancel_shipment_confirm_wizard
 msgid "Sendcloud Cancel Shipment Confirm Wizard"
-msgstr ""
+msgstr "Procedura guidata di conferma annullamento spedizione Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model,name:delivery_sendcloud_oca.model_sendcloud_carrier
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_delivery_carrier__sendcloud_carrier
 msgid "Sendcloud Carrier"
-msgstr ""
+msgstr "Vettore Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/models/stock_picking.py:0
 #, python-format
 msgid "Sendcloud Carrier not enabled for this integration."
-msgstr ""
+msgstr "Vettore Sendcloud non abilitato per questa integrazione."
 
 #. module: delivery_sendcloud_oca
 #: model:ir.actions.act_window,name:delivery_sendcloud_oca.action_sendcloud_carriers
 msgid "Sendcloud Carriers"
-msgstr ""
+msgstr "Vettori Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_delivery_carrier__sendcloud_code
@@ -2034,168 +2059,173 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_sender_address__sendcloud_code
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_shipping_method_country__sendcloud_code
 msgid "Sendcloud Code"
-msgstr ""
+msgstr "Codice Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_delivery_carrier_form
 msgid "Sendcloud Configuration"
-msgstr ""
+msgstr "Configurazione Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model,name:delivery_sendcloud_oca.model_sendcloud_create_return_parcel_wizard
 msgid "Sendcloud Create Return Parcel Wizard"
-msgstr ""
+msgstr "Procedura guidata per creare un collo di reso Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model,name:delivery_sendcloud_oca.model_sendcloud_create_return_parcel_wizard_delivery_option
 msgid "Sendcloud Create Return Parcel Wizard Delivery Option"
 msgstr ""
+"Opzione di consegna della procedura guidata per creare un collo di reso "
+"Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model,name:delivery_sendcloud_oca.model_sendcloud_create_return_parcel_wizard_line
 msgid "Sendcloud Create Return Parcel Wizard Line"
-msgstr ""
+msgstr "Riga della procedura guidata per creare un collo di reso Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model,name:delivery_sendcloud_oca.model_sendcloud_create_return_parcel_wizard_reason
 msgid "Sendcloud Create Return Parcel Wizard Reason"
-msgstr ""
+msgstr "Motivo della procedura guidata per creare un collo di reso Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model,name:delivery_sendcloud_oca.model_sendcloud_create_return_parcel_wizard_refund_option
 msgid "Sendcloud Create Return Parcel Wizard Refund Option"
 msgstr ""
+"Opzione di rimborso della procedura guidata per creare un collo di reso "
+"Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model,name:delivery_sendcloud_oca.model_sendcloud_create_return_parcel_wizard_return_location
 msgid "Sendcloud Create Return Parcel Wizard Return Location"
 msgstr ""
+"Luogo di reso della procedura guidata per creare un collo di reso Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model,name:delivery_sendcloud_oca.model_sendcloud_custom_price_details_wizard
 msgid "Sendcloud Custom Price Details Wizard"
-msgstr ""
+msgstr "Procedura guidata dettagli prezzo personalizzato Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sale_order__sendcloud_customs_shipment_type
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__sendcloud_customs_shipment_type
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_stock_picking__sendcloud_customs_shipment_type
 msgid "Sendcloud Customs Shipment Type"
-msgstr ""
+msgstr "Tipo di spedizione doganale Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_res_company__sendcloud_default_integration_id
 msgid "Sendcloud Default Integration"
-msgstr ""
+msgstr "Integrazione predefinita Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_stock_picking__sendcloud_insured_value
 msgid "Sendcloud Insured Value"
-msgstr ""
+msgstr "Valore assicurato Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_delivery_carrier__sendcloud_integration_id
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_action__sendcloud_integration_id
 msgid "Sendcloud Integration"
-msgstr ""
+msgstr "Integrazione Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model,name:delivery_sendcloud_oca.model_sendcloud_integration_wizard
 msgid "Sendcloud Integration Wizard"
-msgstr ""
+msgstr "Procedura guidata integrazione Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.actions.act_window,name:delivery_sendcloud_oca.action_sendcloud_integration
 #: model:ir.model,name:delivery_sendcloud_oca.model_sendcloud_integration
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_res_company__sendcloud_integration_ids
 msgid "Sendcloud Integrations"
-msgstr ""
+msgstr "Integrazioni Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model,name:delivery_sendcloud_oca.model_sendcloud_invoice
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_invoice_item__sendcloud_invoice_id
 msgid "Sendcloud Invoice"
-msgstr ""
+msgstr "Fattura Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model,name:delivery_sendcloud_oca.model_sendcloud_invoice_item
 msgid "Sendcloud Invoice Items"
-msgstr ""
+msgstr "Articoli fattura Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.actions.act_window,name:delivery_sendcloud_oca.action_sendcloud_invoices
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_res_company__sendcloud_invoice_ids
 msgid "Sendcloud Invoices"
-msgstr ""
+msgstr "Fatture Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_delivery_carrier__sendcloud_is_return
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_shipping_method_country__sendcloud_is_return
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_stock_picking__sendcloud_is_return
 msgid "Sendcloud Is Return"
-msgstr ""
+msgstr "È un reso Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_picking_withcarrier_out_form
 msgid "Sendcloud Labels"
-msgstr ""
+msgstr "Etichette Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_stock_picking__sendcloud_last_cached
 msgid "Sendcloud Last Cached"
-msgstr ""
+msgstr "Ultima memorizzazione nella cache Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_delivery_carrier__sendcloud_max_weight
 msgid "Sendcloud Max Weight"
-msgstr ""
+msgstr "Peso massimo Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_delivery_carrier__sendcloud_min_weight
 msgid "Sendcloud Min Weight"
-msgstr ""
+msgstr "Peso minimo Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model,name:delivery_sendcloud_oca.model_sendcloud_mixin
 msgid "Sendcloud Mixin Abstract"
-msgstr ""
+msgstr "Mixin astratto Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:onboarding.onboarding,name:delivery_sendcloud_oca.onboarding_onboarding_sendcloud
 msgid "Sendcloud Onboarding"
-msgstr ""
+msgstr "Configurazione iniziale Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sale_order__sendcloud_order_code
 msgid "Sendcloud Order Code"
-msgstr ""
+msgstr "Codice ordine Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sale_order__sendcloud_order_weight
 msgid "Sendcloud Order Weight"
-msgstr ""
+msgstr "Peso ordine Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model,name:delivery_sendcloud_oca.model_sendcloud_parcel
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_stock_picking__sendcloud_parcel_ids
 msgid "Sendcloud Parcel"
-msgstr ""
+msgstr "Collo Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model,name:delivery_sendcloud_oca.model_sendcloud_parcel_document
 msgid "Sendcloud Parcel Document"
-msgstr ""
+msgstr "Documento collo Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model,name:delivery_sendcloud_oca.model_sendcloud_parcel_item
 msgid "Sendcloud Parcel Items"
-msgstr ""
+msgstr "Articoli collo Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.actions.act_window,name:delivery_sendcloud_oca.action_sendcloud_parcel_statuses
 #: model:ir.model,name:delivery_sendcloud_oca.model_sendcloud_parcel_status
 msgid "Sendcloud Parcel Statuses"
-msgstr ""
+msgstr "Stati collo Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #. odoo-python
@@ -2203,38 +2233,38 @@ msgstr ""
 #: model:ir.actions.act_window,name:delivery_sendcloud_oca.action_sendcloud_parcels
 #, python-format
 msgid "Sendcloud Parcels"
-msgstr ""
+msgstr "Colli Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_delivery_carrier__sendcloud_price
 msgid "Sendcloud Price"
-msgstr ""
+msgstr "Prezzo Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model,name:delivery_sendcloud_oca.model_sendcloud_request
 msgid "Sendcloud Request Abstract"
-msgstr ""
+msgstr "Richiesta astratta Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model,name:delivery_sendcloud_oca.model_sendcloud_return
 msgid "Sendcloud Return"
-msgstr ""
+msgstr "Reso Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model,name:delivery_sendcloud_oca.model_sendcloud_return_location
 msgid "Sendcloud Return Location"
-msgstr ""
+msgstr "Luogo di reso Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.actions.act_window,name:delivery_sendcloud_oca.action_sendcloud_return_parcels
 msgid "Sendcloud Return Parcels"
-msgstr ""
+msgstr "Colli di reso Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.actions.act_window,name:delivery_sendcloud_oca.action_sendcloud_returns
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_res_company__sendcloud_return_ids
 msgid "Sendcloud Returns"
-msgstr ""
+msgstr "Resi Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model,name:delivery_sendcloud_oca.model_sendcloud_sender_address
@@ -2243,130 +2273,130 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_res_users__sencloud_sender_address_id
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_stock_warehouse__sencloud_sender_address_id
 msgid "Sendcloud Sender Address"
-msgstr ""
+msgstr "Indirizzo mittente Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.actions.act_window,name:delivery_sendcloud_oca.action_sendcloud_sender_address
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_res_company__sendcloud_sender_address_ids
 msgid "Sendcloud Sender Addresses"
-msgstr ""
+msgstr "Indirizzi mittente Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sale_order__sendcloud_service_point_address
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_stock_picking__sendcloud_service_point_address
 msgid "Sendcloud Service Point Address"
-msgstr ""
+msgstr "Indirizzo punto di servizio Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_delivery_carrier__sendcloud_service_point_input
 msgid "Sendcloud Service Point Input"
-msgstr ""
+msgstr "Input punto di servizio Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_delivery_carrier__sendcloud_service_point_required
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sale_order__sendcloud_service_point_required
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_stock_picking__sendcloud_service_point_required
 msgid "Sendcloud Service Point Required"
-msgstr ""
+msgstr "Punto di servizio Sendcloud obbligatorio"
 
 #. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/models/stock_picking.py:0
 #, python-format
 msgid "Sendcloud Service Point is Required!"
-msgstr ""
+msgstr "Il punto di servizio Sendcloud è obbligatorio!"
 
 #. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/models/stock_picking.py:0
 #, python-format
 msgid "Sendcloud Service Point is required."
-msgstr ""
+msgstr "Il punto di servizio Sendcloud è obbligatorio."
 
 #. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/models/stock_picking.py:0
 #, python-format
 msgid "Sendcloud Service Point not enabled for this integration."
-msgstr ""
+msgstr "Punto di servizio Sendcloud non abilitato per questa integrazione."
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_stock_picking__sendcloud_shipment_code
 msgid "Sendcloud Shipment Code"
-msgstr ""
+msgstr "Codice spedizione Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_stock_picking__sendcloud_shipment_uuid
 msgid "Sendcloud Shipment Uuid"
-msgstr ""
+msgstr "UUID spedizione Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.actions.act_window,name:delivery_sendcloud_oca.action_sendcloud_shipments
 msgid "Sendcloud Shipments"
-msgstr ""
+msgstr "Spedizioni Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_picking_withcarrier_out_form
 msgid "Sendcloud Shipping"
-msgstr ""
+msgstr "Spedizione Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_stock_picking__sendcloud_shipping_method_checkout_name
 msgid "Sendcloud Shipping Method Checkout Name"
-msgstr ""
+msgstr "Nome del metodo di spedizione Sendcloud al checkout"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model,name:delivery_sendcloud_oca.model_sendcloud_shipping_method_country
 msgid "Sendcloud Shipping Method Country"
-msgstr ""
+msgstr "Paese del metodo di spedizione Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model,name:delivery_sendcloud_oca.model_sendcloud_shipping_method_country_custom
 msgid "Sendcloud Shipping Method Country Custom"
-msgstr ""
+msgstr "Paese personalizzato del metodo di spedizione Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.actions.act_window,name:delivery_sendcloud_oca.action_sendcloud_shipping_methods
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.res_config_settings_view_form_sale
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.res_config_settings_view_form_stock
 msgid "Sendcloud Shipping Methods"
-msgstr ""
+msgstr "Metodi di spedizione Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.actions.act_window,name:delivery_sendcloud_oca.action_sendcloud_shipping_methods_returns
 msgid "Sendcloud Shipping Methods for Returns"
-msgstr ""
+msgstr "Metodi di spedizione Sendcloud per i resi"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sale_order__sendcloud_sp_details
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_stock_picking__sendcloud_sp_details
 msgid "Sendcloud Sp Details"
-msgstr ""
+msgstr "Dettagli punto di servizio Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__sendcloud_status
 msgid "Sendcloud Status"
-msgstr ""
+msgstr "Stato Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model,name:delivery_sendcloud_oca.model_sendcloud_sync_order_wizard
 msgid "Sendcloud Sync Order Wizard"
-msgstr ""
+msgstr "Procedura guidata di sincronizzazione ordine Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model,name:delivery_sendcloud_oca.model_sendcloud_sync_wizard
 msgid "Sendcloud Sync Wizard"
-msgstr ""
+msgstr "Procedura guidata di sincronizzazione Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model,name:delivery_sendcloud_oca.model_sendcloud_warehouse_address_wizard
 msgid "Sendcloud Warehouse Address Wizard"
-msgstr ""
+msgstr "Procedura guidata indirizzo magazzino Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:product.template,name:delivery_sendcloud_oca.sendcloud_product_delivery_product_template
 msgid "Sendcloud delivery charges"
-msgstr ""
+msgstr "Costi di spedizione Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #. odoo-python
@@ -2376,34 +2406,38 @@ msgid ""
 "Sendcloud shipping method not compatible with selected packaging.\n"
 "Please select a shipping method such that the collis' weights are between Min Weight and Max Weight."
 msgstr ""
+"Il metodo di spedizione Sendcloud non è compatibile con l'imballaggio "
+"selezionato.\n"
+"Seleziona un metodo di spedizione per cui il peso dei colli sia compreso tra "
+"il peso minimo e quello massimo."
 
 #. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/models/abstract_sendcloud_request.py:0
 #, python-format
 msgid "Sendcloud timeout: the server didn't reply within 30s"
-msgstr ""
+msgstr "Timeout Sendcloud: il server non ha risposto entro 30 secondi"
 
 #. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/models/delivery_carrier.py:0
 #, python-format
 msgid "Sendcloud: %(error_message)s"
-msgstr ""
+msgstr "Sendcloud: %(error_message)s"
 
 #. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/wizards/sendcloud_create_return_parcel_wizard.py:0
 #, python-format
 msgid "Sendcloud: %(message)s (error code: '%(code)s')"
-msgstr ""
+msgstr "Sendcloud: %(message)s (codice errore: '%(code)s')"
 
 #. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/models/abstract_sendcloud_request.py:0
 #, python-format
 msgid "Sendcloud: %(reason)s (error code %(status_code)s)"
-msgstr ""
+msgstr "Sendcloud: %(reason)s (codice errore %(status_code)s)"
 
 #. module: delivery_sendcloud_oca
 #. odoo-python
@@ -2414,12 +2448,12 @@ msgstr ""
 #: code:addons/delivery_sendcloud_oca/models/stock_picking.py:0
 #, python-format
 msgid "Sendcloud: %s"
-msgstr ""
+msgstr "Sendcloud: %s"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.actions.server,name:delivery_sendcloud_oca.ir_cron_delivery_sendcloud_delete_old_actions_from_log_ir_actions_server
 msgid "Sendcloud: delete old records from actions log"
-msgstr ""
+msgstr "Sendcloud: elimina i vecchi record dal registro delle azioni"
 
 #. module: delivery_sendcloud_oca
 #. odoo-python
@@ -2429,71 +2463,73 @@ msgid ""
 "Sendcloud: error %(error_code)s\n"
 "%(error_msg)s"
 msgstr ""
+"Sendcloud: errore %(error_code)s\n"
+"%(error_msg)s"
 
 #. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/models/sendcloud_integration.py:0
 #, python-format
 msgid "Sendcloud: select at least one service point carrier"
-msgstr ""
+msgstr "Sendcloud: seleziona almeno un vettore per i punti di servizio"
 
 #. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/models/abstract_sendcloud_request.py:0
 #, python-format
 msgid "Sendcloud: server not reachable, try again later"
-msgstr ""
+msgstr "Sendcloud: server non raggiungibile, riprova più tardi"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.actions.server,name:delivery_sendcloud_oca.ir_cron_delivery_sendcloud_invoices_ir_actions_server
 msgid "Sendcloud: sync Invoices"
-msgstr ""
+msgstr "Sendcloud: sincronizza le fatture"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.actions.server,name:delivery_sendcloud_oca.ir_cron_delivery_sendcloud_parcel_statuses_ir_actions_server
 msgid "Sendcloud: sync Parcel Statuses"
-msgstr ""
+msgstr "Sendcloud: sincronizza gli stati dei colli"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.actions.server,name:delivery_sendcloud_oca.ir_cron_delivery_sendcloud_sender_address_ir_actions_server
 msgid "Sendcloud: sync Sender Addresses"
-msgstr ""
+msgstr "Sendcloud: sincronizza gli indirizzi mittente"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.actions.server,name:delivery_sendcloud_oca.ir_cron_delivery_sendcloud_shipping_method_ir_actions_server
 msgid "Sendcloud: sync Shipping Methods"
-msgstr ""
+msgstr "Sendcloud: sincronizza i metodi di spedizione"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.ui.menu,name:delivery_sendcloud_oca.menu_sendcloud_sendcloud_sender_address
 msgid "Sender Address"
-msgstr ""
+msgstr "Indirizzo mittente"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_sync_wizard__sender_addresses
 msgid "Sender Addresses"
-msgstr ""
+msgstr "Indirizzi mittente"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard_return_location__senderaddress_labels
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return_location__senderaddress_labels
 msgid "Senderaddress Labels"
-msgstr ""
+msgstr "Etichette indirizzo mittente"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields.selection,name:delivery_sendcloud_oca.selection__sendcloud_action__message_type__sent
 msgid "Sent"
-msgstr ""
+msgstr "Inviato"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_action__sent_payload
 msgid "Sent Payload"
-msgstr ""
+msgstr "Payload inviato"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_integration__sequence
 msgid "Sequence"
-msgstr ""
+msgstr "Sequenza"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard__service_point
@@ -2501,116 +2537,116 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_order_form
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_picking_withcarrier_out_form
 msgid "Service Point"
-msgstr ""
+msgstr "Punto di servizio"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_integration__service_point_carriers
 msgid "Service Point Carriers"
-msgstr ""
+msgstr "Vettori dei punti di servizio"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_integration__service_point_enabled
 msgid "Service Point Enabled"
-msgstr ""
+msgstr "Punto di servizio abilitato"
 
 #. module: delivery_sendcloud_oca
 #. odoo-javascript
 #: code:addons/delivery_sendcloud_oca/static/src/js/backend.esm.js:0
 #, python-format
 msgid "Service Point Selector"
-msgstr ""
+msgstr "Selettore del punto di servizio"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_sendcloud_integration_form
 msgid "Service Points"
-msgstr ""
+msgstr "Punti di servizio"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard__service_points_token
 msgid "Service Points Token"
-msgstr ""
+msgstr "Token dei punti di servizio"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_delivery_carrier_form
 msgid "Set Custom Price"
-msgstr ""
+msgstr "Imposta prezzo personalizzato"
 
 #. module: delivery_sendcloud_oca
 #: model:onboarding.onboarding.step,description:delivery_sendcloud_oca.onboarding_warehouse_address_step
 msgid "Set Sendcloud Warehouse Addresses."
-msgstr ""
+msgstr "Imposta gli indirizzi dei magazzini Sendcloud."
 
 #. module: delivery_sendcloud_oca
 #: model:onboarding.onboarding.step,button_text:delivery_sendcloud_oca.onboarding_integration_step
 msgid "Setup"
-msgstr ""
+msgstr "Configurazione"
 
 #. module: delivery_sendcloud_oca
 #: model:onboarding.onboarding.step,title:delivery_sendcloud_oca.onboarding_integration_step
 msgid "Setup Integration"
-msgstr ""
+msgstr "Configura integrazione"
 
 #. module: delivery_sendcloud_oca
 #: model:onboarding.onboarding.step,description:delivery_sendcloud_oca.onboarding_integration_step
 msgid "Setup Sendcloud Integration."
-msgstr ""
+msgstr "Configura l'integrazione Sendcloud."
 
 #. module: delivery_sendcloud_oca
 #: model:ir.actions.act_window,name:delivery_sendcloud_oca.action_sendcloud_onboarding_integration_wizard
 #: model:ir.ui.menu,name:delivery_sendcloud_oca.menu_configuration_sendcloud_integration
 msgid "Setup the Sendcloud Integration"
-msgstr ""
+msgstr "Configura l'integrazione Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.actions.act_window,name:delivery_sendcloud_oca.action_sendcloud_onboarding_warehouse_wizard
 #: model:ir.ui.menu,name:delivery_sendcloud_oca.menu_configuration_sendcloud_warehouse
 msgid "Setup the sender addresses of the warehouses"
-msgstr ""
+msgstr "Configura gli indirizzi mittente dei magazzini"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__shipment_id
 msgid "Shipment"
-msgstr ""
+msgstr "Spedizione"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_sendcloud_parcel_form
 msgid "Shipment Details"
-msgstr ""
+msgstr "Dettagli spedizione"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_picking_withcarrier_out_form
 msgid "Shipment Type"
-msgstr ""
+msgstr "Tipo di spedizione"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_picking_withcarrier_out_form
 msgid "Shipment UUID"
-msgstr ""
+msgstr "UUID spedizione"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__shipment_uuid
 msgid "Shipment Uuid"
-msgstr ""
+msgstr "UUID spedizione"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.ui.menu,name:delivery_sendcloud_oca.menu_sendcloud_sendcloud_shipments
 msgid "Shipments"
-msgstr ""
+msgstr "Spedizioni"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_sendcloud_parcel_form
 msgid "Shipping"
-msgstr ""
+msgstr "Spedizione"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__shipping_method
 msgid "Shipping Method"
-msgstr ""
+msgstr "Metodo di spedizione"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_picking_withcarrier_out_form
 msgid "Shipping Method Checkout Name"
-msgstr ""
+msgstr "Nome del metodo di spedizione al checkout"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model,name:delivery_sendcloud_oca.model_delivery_carrier
@@ -2618,80 +2654,80 @@ msgstr ""
 #: model:ir.ui.menu,name:delivery_sendcloud_oca.menu_sendcloud_sendcloud_shipping_methods
 #: model:ir.ui.menu,name:delivery_sendcloud_oca.menu_sendcloud_sendcloud_shipping_methods_returns
 msgid "Shipping Methods"
-msgstr ""
+msgstr "Metodi di spedizione"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_custom_price_details_wizard__shipping_method_country_id
 msgid "Shipping to Country"
-msgstr ""
+msgstr "Spedizione verso il paese"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard__shop_distances
 msgid "Shop Distances"
-msgstr ""
+msgstr "Distanze dai negozi"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_integration__shop_name
 msgid "Shop Name"
-msgstr ""
+msgstr "Nome negozio"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_integration__shop_url
 msgid "Shop Url"
-msgstr ""
+msgstr "URL negozio"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,help:delivery_sendcloud_oca.field_stock_picking__sendcloud_announce
 msgid "Should the parcel request a label."
-msgstr ""
+msgstr "Indica se la richiesta del collo deve includere un'etichetta."
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel_document__size
 msgid "Size"
-msgstr ""
+msgstr "Dimensione"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel_item__sku
 msgid "Sku"
-msgstr ""
+msgstr "SKU"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_custom_price_details_wizard__product_id
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_shipping_method_country__product_id
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_shipping_method_country_custom__product_id
 msgid "Specific Delivery Product"
-msgstr ""
+msgstr "Prodotto specifico per la consegna"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields.selection,name:delivery_sendcloud_oca.selection__sendcloud_shipping_method_country__price_check__standard
 msgid "Standard"
-msgstr ""
+msgstr "Standard"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_custom_price_details_wizard__price
 msgid "Standard Price"
-msgstr ""
+msgstr "Prezzo standard"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.sendcloud_onboarding_integration_configuration_form
 msgid "Start Setup"
-msgstr ""
+msgstr "Avvia configurazione"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return__status
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_sendcloud_return_form
 msgid "Status"
-msgstr ""
+msgstr "Stato"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_sendcloud_return_form
 msgid "Status Code"
-msgstr ""
+msgstr "Codice stato"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return__status_display
 msgid "Status Display"
-msgstr ""
+msgstr "Visualizzazione stato"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,help:delivery_sendcloud_oca.field_sendcloud_parcel__activity_state
@@ -2701,77 +2737,81 @@ msgid ""
 "Today: Activity date is today\n"
 "Planned: Future activities."
 msgstr ""
+"Stato basato sulle attività\n"
+"In ritardo: la data di scadenza è già passata\n"
+"Oggi: la data dell'attività è oggi\n"
+"Pianificata: attività futura."
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.sendcloud_custom_price_details_wizard_form
 msgid "Store"
-msgstr ""
+msgstr "Negozio"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__street
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_sender_address__street
 msgid "Street"
-msgstr ""
+msgstr "Via"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard__support_url
 msgid "Support Url"
-msgstr ""
+msgstr "URL assistenza"
 
 #. module: delivery_sendcloud_oca
 #: model:onboarding.onboarding.step,button_text:delivery_sendcloud_oca.onboarding_sync_step
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_sendcloud_parcel_form
 msgid "Sync"
-msgstr ""
+msgstr "Sincronizza"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_sync_order_wizard__sync_from_date
 msgid "Sync From Date"
-msgstr ""
+msgstr "Sincronizza dalla data"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_delivery_carrier_form
 msgid "Sync From Sendcloud"
-msgstr ""
+msgstr "Sincronizza da Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:onboarding.onboarding.step,title:delivery_sendcloud_oca.onboarding_sync_step
 msgid "Sync Sendcloud objects"
-msgstr ""
+msgstr "Sincronizza oggetti Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_order_form
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_picking_withcarrier_out_form
 msgid "Sync To Sendcloud"
-msgstr ""
+msgstr "Sincronizza con Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.actions.act_window,name:delivery_sendcloud_oca.action_sendcloud_sync_order_wizard
 #: model:ir.ui.menu,name:delivery_sendcloud_oca.menu_configuration_sendcloud_sync_order
 msgid "Sync past orders to Sendcloud"
-msgstr ""
+msgstr "Sincronizza gli ordini passati con Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.actions.act_window,name:delivery_sendcloud_oca.action_sendcloud_onboarding_sync_wizard
 #: model:ir.ui.menu,name:delivery_sendcloud_oca.menu_configuration_sendcloud_sync
 msgid "Sync the Sendcloud Objects"
-msgstr ""
+msgstr "Sincronizza gli oggetti Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:onboarding.onboarding.step,description:delivery_sendcloud_oca.onboarding_sync_step
 msgid "Synchronize Sendcloud objects."
-msgstr ""
+msgstr "Sincronizza gli oggetti Sendcloud."
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_delivery_carrier__sendcloud_sync_countries
 msgid "Synchronize countries with Sendcloud"
-msgstr ""
+msgstr "Sincronizza i paesi con Sendcloud"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__telephone
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_sender_address__telephone
 msgid "Telephone"
-msgstr ""
+msgstr "Telefono"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,help:delivery_sendcloud_oca.field_sendcloud_change_warehouse_address_wizard__warehouse_country_code
@@ -2779,25 +2819,27 @@ msgid ""
 "The ISO country code in two chars. \n"
 "You can use this field for quick search."
 msgstr ""
+"Il codice ISO del paese composto da due caratteri.\n"
+"Puoi utilizzare questo campo per una ricerca rapida."
 
 #. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/models/delivery_carrier.py:0
 #, python-format
 msgid "The company is mandatory when delivery carrier is Sendcloud."
-msgstr ""
+msgstr "L'azienda è obbligatoria quando il vettore di consegna è Sendcloud."
 
 #. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/models/delivery_carrier.py:0
 #, python-format
 msgid "The company is not consistent with the integration company."
-msgstr ""
+msgstr "L'azienda non corrisponde all'azienda dell'integrazione."
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,help:delivery_sendcloud_oca.field_sendcloud_parcel__to_service_point
 msgid "The id of service point to which the shipment is going to be shipped."
-msgstr ""
+msgstr "L'ID del punto di servizio a cui verrà spedita la spedizione."
 
 #. module: delivery_sendcloud_oca
 #. odoo-python
@@ -2805,6 +2847,8 @@ msgstr ""
 #, python-format
 msgid "There are no outgoing shipments set with Sendcloud shipping method."
 msgstr ""
+"Non sono presenti spedizioni in uscita configurate con il metodo di "
+"spedizione Sendcloud."
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,help:delivery_sendcloud_oca.field_sendcloud_custom_price_details_wizard__price_custom
@@ -2813,50 +2857,52 @@ msgid ""
 "This price will override the standard price and will be applied to the "
 "shipping price."
 msgstr ""
+"Questo prezzo sostituirà il prezzo standard e verrà applicato al costo di "
+"spedizione."
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,help:delivery_sendcloud_oca.field_sendcloud_custom_price_details_wizard__product_id
 #: model:ir.model.fields,help:delivery_sendcloud_oca.field_sendcloud_shipping_method_country__product_id
 #: model:ir.model.fields,help:delivery_sendcloud_oca.field_sendcloud_shipping_method_country_custom__product_id
 msgid "This product will be used on the sale order line"
-msgstr ""
+msgstr "Questo prodotto verrà utilizzato nella riga dell'ordine di vendita"
 
 #. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/models/delivery_carrier.py:0
 #, python-format
 msgid "This shipping method requires a Service Point."
-msgstr ""
+msgstr "Questo metodo di spedizione richiede un punto di servizio."
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.sendcloud_cancel_shipment_confirm_wizard_form
 msgid "This will delete all the parcels of this picking."
-msgstr ""
+msgstr "Questa operazione eliminerà tutti i colli di questo prelievo."
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_action__timestamp
 msgid "Timestamp"
-msgstr ""
+msgstr "Marca temporale"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_shipping_method_country__country_id
 msgid "To Country"
-msgstr ""
+msgstr "Verso il paese"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__to_post_number
 msgid "To Post Number"
-msgstr ""
+msgstr "Numero postale di destinazione"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__to_service_point
 msgid "To Service Point"
-msgstr ""
+msgstr "Al punto di servizio"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__to_state
 msgid "To State"
-msgstr ""
+msgstr "Verso la provincia"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.sendcloud_onboarding_integration_configuration_form
@@ -2864,158 +2910,160 @@ msgid ""
 "To make the connection between Odoo and Sendcloud, Odoo needs authorization "
 "to access the data on your Sendcloud Account."
 msgstr ""
+"Per collegare Odoo a Sendcloud, Odoo necessita dell'autorizzazione ad "
+"accedere ai dati del tuo account Sendcloud."
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.sendcloud_create_return_parcel_wizard_form
 msgid "Tokens"
-msgstr ""
+msgstr "Token"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__total_insured_value
 msgid "Total Insured Value"
-msgstr ""
+msgstr "Valore assicurato totale"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,help:delivery_sendcloud_oca.field_sendcloud_parcel__total_insured_value
 msgid "Total Insured Value is in Euro currency."
-msgstr ""
+msgstr "Il valore assicurato totale è espresso in euro."
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_return__total_refund
 msgid "Total Refund"
-msgstr ""
+msgstr "Rimborso totale"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__tracking_number
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_sendcloud_return_form
 msgid "Tracking Number"
-msgstr ""
+msgstr "Numero di tracciamento"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_sendcloud_return_form
 msgid "Tracking URL"
-msgstr ""
+msgstr "URL di tracciamento"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__tracking_url
 msgid "Tracking Url"
-msgstr ""
+msgstr "URL di tracciamento"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model,name:delivery_sendcloud_oca.model_stock_picking
 msgid "Transfer"
-msgstr ""
+msgstr "Trasferimento"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__type
 msgid "Type"
-msgstr ""
+msgstr "Tipo"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,help:delivery_sendcloud_oca.field_sendcloud_parcel__activity_exception_decoration
 msgid "Type of the exception activity on record."
-msgstr ""
+msgstr "Tipo di attività di eccezione sul record."
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields.selection,name:delivery_sendcloud_oca.selection__sendcloud_shipping_method_country__price_check__unavailable
 msgid "Unavailable"
-msgstr ""
+msgstr "Non disponibile"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.sendcloud_custom_price_details_wizard_form
 msgid "Update"
-msgstr ""
+msgstr "Aggiorna"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.sendcloud_onboarding_warehouse_configuration_form
 msgid "Update Addresses"
-msgstr ""
+msgstr "Aggiorna indirizzi"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel_item__value
 msgid "Value"
-msgstr ""
+msgstr "Valore"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_sender_address__vat_number
 msgid "Vat Number"
-msgstr ""
+msgstr "Partita IVA"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model,name:delivery_sendcloud_oca.model_stock_warehouse
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_change_warehouse_address_wizard__warehouse_id
 msgid "Warehouse"
-msgstr ""
+msgstr "Magazzino"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model,name:delivery_sendcloud_oca.model_sendcloud_change_warehouse_address_wizard
 msgid "Warehouse, Change Address Wizard"
-msgstr ""
+msgstr "Procedura guidata per modificare l'indirizzo del magazzino"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_warehouse_address_wizard__warehouse_ids
 msgid "Warehouses"
-msgstr ""
+msgstr "Magazzini"
 
 #. module: delivery_sendcloud_oca
 #: model_terms:ir.ui.view,arch_db:delivery_sendcloud_oca.view_sendcloud_integration_form
 msgid "Webhook"
-msgstr ""
+msgstr "Webhook"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_integration__webhook_active
 msgid "Webhook Active"
-msgstr ""
+msgstr "Webhook attivo"
 
 #. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/wizards/sendcloud_integration_wizard.py:0
 #, python-format
 msgid "Webhook URL: %(reason)s (error code %(status_code)s)"
-msgstr ""
+msgstr "URL webhook: %(reason)s (codice errore %(status_code)s)"
 
 #. module: delivery_sendcloud_oca
 #. odoo-python
 #: code:addons/delivery_sendcloud_oca/wizards/sendcloud_integration_wizard.py:0
 #, python-format
 msgid "Webhook URL: %(url)s\n"
-msgstr ""
+msgstr "URL webhook: %(url)s\n"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_integration__webhook_url
 msgid "Webhook Url"
-msgstr ""
+msgstr "URL webhook"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_brand__website
 msgid "Website"
-msgstr ""
+msgstr "Sito web"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__website_message_ids
 msgid "Website Messages"
-msgstr ""
+msgstr "Messaggi del sito web"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,help:delivery_sendcloud_oca.field_sendcloud_parcel__website_message_ids
 msgid "Website communication history"
-msgstr ""
+msgstr "Cronologia delle comunicazioni del sito web"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__weight
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel_item__weight
 msgid "Weight"
-msgstr ""
+msgstr "Peso"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,help:delivery_sendcloud_oca.field_sendcloud_parcel__weight
 msgid "Weight unit of measure is KG."
-msgstr ""
+msgstr "L'unità di misura del peso è il kg."
 
 #. module: delivery_sendcloud_oca
 #: model:onboarding.onboarding.step,done_text:delivery_sendcloud_oca.onboarding_integration_step
 msgid "Well done!"
-msgstr ""
+msgstr "Ben fatto!"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,help:delivery_sendcloud_oca.field_stock_picking__sendcloud_apply_shipping_rules
@@ -3023,6 +3071,8 @@ msgid ""
 "When set to True configured shipping rules will be applied before creating "
 "the label and announcing the Parcel"
 msgstr ""
+"Se impostato su True, le regole di spedizione configurate verranno applicate "
+"prima di creare l'etichetta e annunciare il collo"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,help:delivery_sendcloud_oca.field_delivery_carrier__sendcloud_price
@@ -3030,6 +3080,8 @@ msgid ""
 "When this value is null, the price is calculated based on the pricelist by "
 "countries"
 msgstr ""
+"Quando questo valore è nullo, il prezzo viene calcolato in base al listino "
+"prezzi per paese"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_change_warehouse_address_wizard__wizard_id
@@ -3039,9 +3091,9 @@ msgstr ""
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard_refund_option__wizard_id
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard_return_location__wizard_id
 msgid "Wizard"
-msgstr ""
+msgstr "Procedura guidata"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.ui.menu,name:delivery_sendcloud_oca.menu_sendcloud_sendcloud_config_wizards
 msgid "Wizards"
-msgstr ""
+msgstr "Procedure guidate"
