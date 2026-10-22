@@ -6,13 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-10-22 15:59+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: delivery_fee
 #: model:ir.model.fields,help:delivery_fee.field_delivery_carrier__fee_return_percentage
@@ -20,101 +22,105 @@ msgid ""
 "% of the fee to be returned to the customer in case of full return. E.g.: 0%"
 " for no return, 100% for full return"
 msgstr ""
+"% della tariffa da rimborsare al cliente in caso di reso totale. Ad es.: 0% "
+"per nessun rimborso, 100% per il rimborso totale"
 
 #. module: delivery_fee
 #: model_terms:ir.ui.view,arch_db:delivery_fee.report_invoice_document
 msgid "/ delivery"
-msgstr ""
+msgstr "/ consegna"
 
 #. module: delivery_fee
 #: model:ir.model.fields,field_description:delivery_fee.field_sale_order__all_fee_pickings_returned
 msgid "All Fee Pickings Returned"
-msgstr ""
+msgstr "Rese tutte le tariffe dei prelievi"
 
 #. module: delivery_fee
 #: model_terms:ir.ui.view,arch_db:delivery_fee.res_config_settings_view_form_sale
 msgid "Apply the delivery fee only once per commercial partner and day."
 msgstr ""
+"Applica la tariffa di consegna una sola volta al giorno per partner "
+"commerciale."
 
 #. module: delivery_fee
 #: model_terms:ir.ui.view,arch_db:delivery_fee.res_config_settings_view_form_sale
 msgid "Apply the delivery fee only once per sales order."
-msgstr ""
+msgstr "Applica la tariffa di consegna una sola volta per ordine di vendita."
 
 #. module: delivery_fee
 #: model:ir.model,name:delivery_fee.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Aziende"
 
 #. module: delivery_fee
 #: model:ir.model,name:delivery_fee.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Impostazioni di configurazione"
 
 #. module: delivery_fee
 #: model:ir.model,name:delivery_fee.model_res_partner
 msgid "Contact"
-msgstr ""
+msgstr "Contatto"
 
 #. module: delivery_fee
 #: model:ir.model.fields,field_description:delivery_fee.field_dropoff_site__delivery_fee_exemption
 #: model:ir.model.fields,field_description:delivery_fee.field_res_partner__delivery_fee_exemption
 #: model:ir.model.fields,field_description:delivery_fee.field_res_users__delivery_fee_exemption
 msgid "Delivery Fee Exemption"
-msgstr ""
+msgstr "Esenzione dalla tariffa di consegna"
 
 #. module: delivery_fee
 #: model:ir.model.fields,field_description:delivery_fee.field_sale_order_line__delivery_fee_picking_id
 msgid "Delivery Fee Picking"
-msgstr ""
+msgstr "Trasferimento della tariffa di consegna"
 
 #. module: delivery_fee
 #: model:ir.model.fields,field_description:delivery_fee.field_delivery_carrier__fee_product_id
 msgid "Fee Product"
-msgstr ""
+msgstr "Prodotto per la tariffa"
 
 #. module: delivery_fee
 #: model_terms:ir.ui.view,arch_db:delivery_fee.report_delivery_document2
 #: model_terms:ir.ui.view,arch_db:delivery_fee.report_invoice_document
 msgid "Fee info"
-msgstr ""
+msgstr "Informazioni sulla tariffa"
 
 #. module: delivery_fee
 #: model:ir.model.fields,field_description:delivery_fee.field_delivery_carrier__fee_return_percentage
 msgid "Fee return %"
-msgstr ""
+msgstr "% di rimborso della tariffa"
 
 #. module: delivery_fee
 #: model:ir.model.fields,field_description:delivery_fee.field_sale_order_line__is_delivery_fee
 msgid "Is a Delivery Fee"
-msgstr ""
+msgstr "È una tariffa di consegna"
 
 #. module: delivery_fee
 #: model:ir.model.fields,field_description:delivery_fee.field_res_company__one_delivery_fee_by_commercial_partner_day
 #: model:ir.model.fields,field_description:delivery_fee.field_res_config_settings__one_delivery_fee_by_commercial_partner_day
 msgid "One Delivery Fee By Commercial Partner Day"
-msgstr ""
+msgstr "Una tariffa di consegna al giorno per partner commerciale"
 
 #. module: delivery_fee
 #: model:ir.model.fields,field_description:delivery_fee.field_res_company__one_delivery_fee_by_sale_order
 #: model:ir.model.fields,field_description:delivery_fee.field_res_config_settings__one_delivery_fee_by_sale_order
 msgid "One Delivery Fee By Sale Order"
-msgstr ""
+msgstr "Una tariffa di consegna per ordine di vendita"
 
 #. module: delivery_fee
 #: model:ir.model,name:delivery_fee.model_sale_order
 msgid "Sales Order"
-msgstr ""
+msgstr "Ordine di vendita"
 
 #. module: delivery_fee
 #: model:ir.model,name:delivery_fee.model_sale_order_line
 msgid "Sales Order Line"
-msgstr ""
+msgstr "Riga ordine di vendita"
 
 #. module: delivery_fee
 #: model:ir.model,name:delivery_fee.model_delivery_carrier
 msgid "Shipping Methods"
-msgstr ""
+msgstr "Metodi di spedizione"
 
 #. module: delivery_fee
 #: model:ir.model.fields,help:delivery_fee.field_res_company__one_delivery_fee_by_commercial_partner_day
@@ -122,14 +128,16 @@ msgstr ""
 msgid ""
 "The delivery fee will be applied just once per commercial partner and day"
 msgstr ""
+"La tariffa di consegna verrà applicata una sola volta al giorno per partner "
+"commerciale"
 
 #. module: delivery_fee
 #: model:ir.model.fields,help:delivery_fee.field_res_company__one_delivery_fee_by_sale_order
 #: model:ir.model.fields,help:delivery_fee.field_res_config_settings__one_delivery_fee_by_sale_order
 msgid "The delivery fee will be applied just once to the order"
-msgstr ""
+msgstr "La tariffa di consegna verrà applicata una sola volta all'ordine"
 
 #. module: delivery_fee
 #: model:ir.model,name:delivery_fee.model_stock_picking
 msgid "Transfer"
-msgstr ""
+msgstr "Trasferimento"
