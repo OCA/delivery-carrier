@@ -77,3 +77,31 @@ class TestDeliveryPackageNumber(TransactionCase):
         new_picking = order.picking_ids - done_picking
         self.assertEqual(done_picking.number_of_packages, 2)
         self.assertEqual(new_picking.number_of_packages, 0)
+
+    def create_settings(self, extra_information=True, page_height=50):
+        settings = self.env["res.config.settings"].create({})
+        settings.extra_information_package_label = extra_information
+        settings.report_package_label_page_height = page_height
+        settings.execute()
+        return settings
+
+    def test_settings(self):
+        paperformat = self.env.ref(
+            "delivery_package_number.paperformat_number_of_packages_label"
+        )
+        settings = self.create_settings(page_height=59)
+        settings._onchange_report_package_label_page_height()
+        self.assertEqual(paperformat.page_height, 59)
+
+        settings = self.create_settings(extra_information=False)
+        settings._onchange_report_package_label_page_height()
+        self.assertEqual(paperformat.page_height, 50)
+
+    def test_report_delivery_package_number(self):
+        self.create_settings()
+        ReportModel = self.env[
+            "report.delivery_package_number.delivery_package_number_report"
+        ]
+        result = ReportModel._get_report_values([self.picking.id])
+        self.assertTrue(result["extra_information"])
+        self.assertEqual(result["docs"], self.picking)
