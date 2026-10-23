@@ -48,6 +48,7 @@ class StockPicking(models.Model):
     sendcloud_service_point_address = fields.Text(
         compute="_compute_sendcloud_service_point_address", readonly=False, store=True
     )
+    sendcloud_order_code = fields.Char(index=True, copy=False)
     sendcloud_shipment_code = fields.Char(index=True, copy=False)
     sendcloud_sp_details = fields.Char(compute="_compute_sendcloud_sp_details")
     label_print_status = fields.Selection(
@@ -175,7 +176,9 @@ class StockPicking(models.Model):
             vals["house_number"] = number_door
 
         # If sendcloud_auto_create_invoice, create invoice
-        out_invoices = order._sendcloud_order_invoice()
+        out_invoices = (
+            order._sendcloud_order_invoice() if order else self.env["account.move"]
+        )
 
         # Recipient address details (mandatory when shipping outside of EU)
         vals.update(
@@ -198,12 +201,7 @@ class StockPicking(models.Model):
                 "address_2": sender.street2 or "",
             }
         )
-        if order:
-            vals.update(
-                {
-                    "currency": order.currency_id.name,
-                }
-            )
+        vals["currency"] = (order.currency_id or self.company_id.currency_id).name
         if sender.mobile or sender.phone:
             vals.update({"telephone": sender.mobile or sender.phone})
         if sender.email:
@@ -270,8 +268,7 @@ class StockPicking(models.Model):
         vals["parcel_items"] = parcel_items
 
         # Parcel properties (optional)
-        if order.name:
-            vals.update({"order_number": order.name})
+        vals["order_number"] = order.name or self.name
         if total_weight:
             vals.update({"weight": total_weight})
         vals.update({"is_return": is_return})
@@ -294,7 +291,7 @@ class StockPicking(models.Model):
 
     def generate_sendcloud_ref_uuid_vals(self):
         self.ensure_one()
-        order = self.sale_id
+        order = self.sale_id or self
         if not order.sendcloud_order_code:
             force_order_code = self.env.context.get("force_sendcloud_order_code")
             order.sendcloud_order_code = force_order_code or uuid.uuid4()
@@ -314,9 +311,12 @@ class StockPicking(models.Model):
     def _prepare_sendcloud_item_vals_from_moves(self, move, package=False):
         self.ensure_one()
 
-        weight = self._sendcloud_convert_weight_to_kg(move.weight)
         if not package:
-            quantity = int(move.product_uom_qty)  # TODO should be quantity_done ?
+            quantity = int(
+                move.product_uom_qty
+                if self.sale_id
+                else move.quantity or move.product_uom_qty
+            )
         else:
             move_lines = move.move_line_ids.filtered(
                 lambda ml: ml.result_package_id == package
@@ -326,6 +326,14 @@ class StockPicking(models.Model):
             else:
                 quantity = sum(package.mapped("quant_ids.quantity"))
 
+        weight = move.weight if self.sale_id else 0.0
+        if quantity and not weight:
+            product_qty = move.product_uom._compute_quantity(
+                quantity, move.product_id.uom_id
+            )
+            weight = product_qty * move.product_id.weight
+        weight = self._sendcloud_convert_weight_to_kg(weight)
+
         partner_country = self.partner_id.country_id.code
         is_outside_eu = not self.partner_id.sendcloud_is_in_eu
 
@@ -334,10 +342,16 @@ class StockPicking(models.Model):
             partner_country, partner_state
         )
 
-        price = move.sale_line_id.price_unit
-        precision_digits = move.sale_line_id.currency_id.decimal_places
+        price = (
+            move.sale_line_id.price_unit
+            if move.sale_line_id
+            else move.product_id.lst_price
+        )
+        currency = move.sale_line_id.currency_id or self.company_id.currency_id
+        precision_digits = currency.decimal_places
         if (
-            hasattr(move, "bom_line_id")
+            move.sale_line_id
+            and hasattr(move, "bom_line_id")
             and move.bom_line_id
             and move.bom_line_id.bom_id.type == "phantom"
         ):
@@ -585,7 +599,11 @@ class StockPicking(models.Model):
             }
 
     def action_multi_create_sendcloud_labels(self):
-        for picking in self:
+        pickings = self.filtered(
+            lambda p: p.picking_type_code == "outgoing"
+            and p.delivery_type == "sendcloud"
+        )
+        for picking in pickings:
             picking.button_create_sendcloud_labels()
 
     def action_multi_create_sendcloud_labels_download(self):
@@ -594,20 +612,21 @@ class StockPicking(models.Model):
 
     def button_create_sendcloud_labels(self):
         self.ensure_one()
-        if (
-            self.picking_type_code == "outgoing"
-            and self.delivery_type == "sendcloud"
-            and self.sale_id
-        ):
-            integration = self.carrier_id.sendcloud_integration_id
-            vals = self._prepare_sendcloud_parcels_from_picking()
-            parcels_data = self._sendcloud_sync_multiple_parcels(integration, vals)
-            self._sendcloud_create_update_received_parcels(
-                parcels_data, integration.company_id.id
+        if self.picking_type_code != "outgoing" or self.delivery_type != "sendcloud":
+            raise UserError(
+                _("Sendcloud labels require an outgoing Sendcloud delivery.")
             )
-            parcels = self.mapped("sendcloud_parcel_ids")
-            parcels._generate_parcel_labels()
-            return self.action_open_sendcloud_parcels()
+        integration = self.carrier_id.sendcloud_integration_id
+        if not integration:
+            raise UserError(_("The Sendcloud delivery method has no integration."))
+        vals = self._prepare_sendcloud_parcels_from_picking()
+        parcels_data = self._sendcloud_sync_multiple_parcels(integration, vals)
+        self._sendcloud_create_update_received_parcels(
+            parcels_data, integration.company_id.id
+        )
+        parcels = self.mapped("sendcloud_parcel_ids")
+        parcels._generate_parcel_labels()
+        return self.action_open_sendcloud_parcels()
 
     @api.model
     def _sendcloud_vals_triggering_sync(self):
@@ -627,15 +646,20 @@ class StockPicking(models.Model):
     @api.model_create_multi
     def create(self, vals):
         res = super().create(vals)
-        res._sync_picking_to_sendcloud()
+        sale_pickings = res.filtered("sale_id")
+        if sale_pickings:
+            sale_pickings._sync_picking_to_sendcloud()
         return res
 
     def write(self, vals):
         res = super().write(vals)
         if not self.env.context.get("skip_sync_picking_to_sendcloud"):
             if any(item in self._sendcloud_vals_triggering_sync() for item in vals):
-                to_sync = self.filtered(lambda p: p.carrier_id.sendcloud_integration_id)
-                to_sync._sync_picking_to_sendcloud()
+                to_sync = self.filtered(
+                    lambda p: p.sale_id and p.carrier_id.sendcloud_integration_id
+                )
+                if to_sync:
+                    to_sync._sync_picking_to_sendcloud()
         return res
 
     def action_cancel(self):
@@ -675,8 +699,7 @@ class StockPicking(models.Model):
             lambda p: p.delivery_type == "sendcloud"
             and p.picking_type_code == "outgoing"
             and p.state != "cancel"
-            and p.sale_id
-        )  # TODo add "or uuid has a value"
+        )
         integration_map = defaultdict(list)
         for picking in pickings:
             integration = picking.carrier_id.sendcloud_integration_id
@@ -693,7 +716,7 @@ class StockPicking(models.Model):
     def _sendcloud_send_shipping(self):
         self.ensure_one()
         res = []
-        if self.picking_type_code == "outgoing" and self.sale_id:
+        if self.picking_type_code == "outgoing":
             integration = self.carrier_id.sendcloud_integration_id
             vals = self._prepare_sendcloud_parcels_from_picking()
             parcels_data = self._sendcloud_sync_multiple_parcels(integration, vals)
@@ -780,7 +803,7 @@ class StockPicking(models.Model):
         pick, _ = parcel["external_reference"].rsplit(",", 1)
         picking = self.filtered(lambda p: p.name == pick)
         country = picking.partner_id.country_id
-        carrier = picking.sale_id.carrier_id
+        carrier = picking.carrier_id
         if carrier and country:
             price, _ = carrier._sendcloud_get_price_per_country(country.code)
             return price
