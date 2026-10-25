@@ -38,9 +38,29 @@ class StockPicking(models.Model):
                 "etd": account.fedex_rest_use_etd,
                 "reference1": self.sale_id.name or self.origin or self.name,
                 "reference2": self.sale_id.client_order_ref or "",
+                "notifications": self._fedex_rest_get_email_notifications(account),
+                "notificationMessage": account.fedex_rest_notification_message or "",
             }
         )
         return service
+
+    def _fedex_rest_get_email_notifications(self, account):
+        self.ensure_one()
+        if not account.fedex_rest_notify_recipient:
+            return []
+        receiver = self._get_receiver()
+        address = self._convert_address(receiver)
+        if not address.get("email"):
+            return []
+        return [
+            {
+                "name": address.get("name") or "",
+                "email": address["email"],
+                "recipientType": "RECIPIENT",
+                "locale": receiver.lang or "",
+                "events": account._fedex_rest_get_notification_events(),
+            }
+        ]
 
     def _fedex_rest_get_doc_tab_content_type(self, account):
         if account.fedex_rest_label_stock_type not in DOC_TAB_LABEL_STOCK_TYPES:

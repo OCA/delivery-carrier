@@ -8,6 +8,8 @@ from .constants import (
     DOC_TAB_CONTENT_TYPES,
     LABEL_FORMATS,
     LENGTH_UNITS,
+    NOTIFICATION_EVENT_TYPES,
+    NOTIFICATION_RECIPIENT_TYPES,
     PAYMENT_TYPES,
     WEIGHT_UNITS,
 )
@@ -66,9 +68,33 @@ class FedexApiParcel(ApiParcel):
                     "allowed": PAYMENT_TYPES,
                 },
                 "etd": {"type": "boolean", "default": False},
+                "notifications": {
+                    "type": "list",
+                    "default": [],
+                    "schema": {"type": "dict", "schema": self._notification()},
+                },
+                "notificationMessage": {"type": "string", "default": ""},
             }
         )
         return schema
+
+    def _notification(self):
+        return {
+            "name": {"type": "string", "default": ""},
+            "email": dict(REQUIRED_STRING),
+            "recipientType": {
+                "type": "string",
+                "default": "RECIPIENT",
+                "allowed": NOTIFICATION_RECIPIENT_TYPES,
+            },
+            "locale": {"type": "string", "default": ""},
+            "events": {
+                "type": "list",
+                "required": True,
+                "empty": False,
+                "allowed": NOTIFICATION_EVENT_TYPES,
+            },
+        }
 
     def _parcel(self):
         schema = super()._parcel()

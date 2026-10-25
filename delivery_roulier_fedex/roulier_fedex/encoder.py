@@ -35,6 +35,10 @@ class FedexEncoder(Encoder):
                 for sequence, parcel in enumerate(parcels, start=1)
             ],
         }
+        if service["notifications"]:
+            requested_shipment[
+                "emailNotificationDetail"
+            ] = self._transform_email_notification_detail(service)
         if data.get("customs"):
             requested_shipment["customsClearanceDetail"] = self._transform_customs(
                 data["customs"]
@@ -86,6 +90,29 @@ class FedexEncoder(Encoder):
         if address.get("residential"):
             fedex_address["residential"] = True
         return {"contact": contact, "address": fedex_address}
+
+    def _transform_email_notification_detail(self, service):
+        recipients = []
+        for notification in service["notifications"]:
+            recipient = {
+                "emailNotificationRecipientType": notification["recipientType"],
+                "emailAddress": notification["email"],
+                "notificationFormatType": "HTML",
+                "notificationType": "EMAIL",
+                "notificationEventType": notification["events"],
+            }
+            if notification.get("name"):
+                recipient["name"] = notification["name"][:PERSON_NAME_SIZE]
+            if notification.get("locale"):
+                recipient["locale"] = notification["locale"]
+            recipients.append(recipient)
+        detail = {
+            "aggregationType": "PER_SHIPMENT",
+            "emailNotificationRecipients": recipients,
+        }
+        if service.get("notificationMessage"):
+            detail["personalMessage"] = service["notificationMessage"]
+        return detail
 
     def _transform_payment(self, service):
         payment = {"paymentType": service["paymentType"]}

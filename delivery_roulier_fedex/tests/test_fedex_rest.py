@@ -5,6 +5,7 @@
 import json
 from unittest import mock
 
+from odoo.exceptions import ValidationError
 from odoo.tests.common import TransactionCase
 
 from ..roulier_fedex import transport
@@ -177,6 +178,17 @@ class TestDeliveryRoulierFedex(TransactionCase):
         body = json.loads(requests_mock.request.call_args.kwargs["data"])
         return body["requestedShipment"]["labelSpecification"]
 
+    def _send_and_get_requested_shipment(self, picking=None):
+        picking = picking or self._create_picking()
+        with mock.patch(TRANSPORT_REQUESTS) as requests_mock:
+            requests_mock.post.return_value = _response(
+                200, {"access_token": "token", "expires_in": 3599}
+            )
+            requests_mock.request.return_value = _response(200, self._ship_response())
+            picking.send_to_shipper()
+        body = json.loads(requests_mock.request.call_args.kwargs["data"])
+        return body["requestedShipment"]
+
     def test_no_doc_tab_on_paper_stock(self):
         label_specification = self._send_and_get_label_specification()
         self.assertNotIn("customerSpecifiedDetail", label_specification)
@@ -222,3 +234,84 @@ class TestDeliveryRoulierFedex(TransactionCase):
         self.assertEqual(method, "put")
         self.assertTrue(url.endswith("/ship/v1/shipments/cancel"))
         self.assertFalse(picking.carrier_tracking_ref)
+
+    def test_no_email_notification_by_default(self):
+        self.partner.email = "john.doe@example.com"
+        shipment = self._send_and_get_requested_shipment()
+        self.assertNotIn("emailNotificationDetail", shipment)
+
+    def test_email_notification_to_recipient(self):
+        self.partner.write({"email": "john.doe@example.com", "lang": "en_US"})
+        self.account.write(
+            {
+                "fedex_rest_notify_recipient": True,
+                "fedex_rest_notify_on_tender": True,
+                "fedex_rest_notify_on_exception": False,
+                "fedex_rest_notification_message": "Thank you for your order",
+            }
+        )
+        shipment = self._send_and_get_requested_shipment()
+        self.assertEqual(
+            shipment["emailNotificationDetail"],
+            {
+                "aggregationType": "PER_SHIPMENT",
+                "emailNotificationRecipients": [
+                    {
+                        "emailNotificationRecipientType": "RECIPIENT",
+                        "emailAddress": "john.doe@example.com",
+                        "notificationFormatType": "HTML",
+                        "notificationType": "EMAIL",
+                        "notificationEventType": [
+                            "ON_SHIPMENT",
+                            "ON_TENDER",
+                            "ON_DELIVERY",
+                        ],
+                        "name": "John Doe",
+                        "locale": "en_US",
+                    }
+                ],
+                "personalMessage": "Thank you for your order",
+            },
+        )
+
+    def test_email_notification_uses_parent_email(self):
+        self.partner.email = "john.doe@example.com"
+        delivery = self.env["res.partner"].create(
+            {
+                "name": "John Doe - Barn",
+                "type": "delivery",
+                "parent_id": self.partner.id,
+                "street": "1 Farm Rd",
+                "zip": "10001",
+                "city": "New York",
+                "state_id": self.partner.state_id.id,
+                "country_id": self.partner.country_id.id,
+                "phone": "+1 877 339 2774",
+            }
+        )
+        self.account.fedex_rest_notify_recipient = True
+        picking = self._create_picking()
+        picking.partner_id = delivery
+        shipment = self._send_and_get_requested_shipment(picking)
+        recipient = shipment["emailNotificationDetail"]["emailNotificationRecipients"][
+            0
+        ]
+        self.assertEqual(recipient["emailAddress"], "john.doe@example.com")
+        self.assertEqual(recipient["name"], "John Doe - Barn")
+
+    def test_no_email_notification_without_email(self):
+        self.partner.email = False
+        self.account.fedex_rest_notify_recipient = True
+        shipment = self._send_and_get_requested_shipment()
+        self.assertNotIn("emailNotificationDetail", shipment)
+
+    def test_email_notification_requires_an_event(self):
+        with self.assertRaises(ValidationError):
+            self.account.write(
+                {
+                    "fedex_rest_notify_recipient": True,
+                    "fedex_rest_notify_on_shipment": False,
+                    "fedex_rest_notify_on_exception": False,
+                    "fedex_rest_notify_on_delivery": False,
+                }
+            )

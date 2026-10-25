@@ -71,6 +71,75 @@ class CarrierAccount(models.Model):
         "electronically for shipments requiring customs clearance.",
     )
 
+    fedex_rest_notify_recipient = fields.Boolean(
+        string="FedEx Email Notifications",
+        help="Let FedEx email the tracking number and the shipment progress "
+        "to the recipient of the shipment.",
+    )
+    fedex_rest_notify_on_shipment = fields.Boolean(
+        string="Notify on Shipment",
+        default=True,
+        help="Email sent when the shipment is created.",
+    )
+    fedex_rest_notify_on_tender = fields.Boolean(
+        string="Notify on Tender",
+        help="Email sent when the shipment is tendered to FedEx.",
+    )
+    fedex_rest_notify_on_estimated_delivery = fields.Boolean(
+        string="Notify on Estimated Delivery",
+    )
+    fedex_rest_notify_on_exception = fields.Boolean(
+        string="Notify on Exception",
+        default=True,
+    )
+    fedex_rest_notify_on_delivery = fields.Boolean(
+        string="Notify on Delivery",
+        default=True,
+    )
+    fedex_rest_notification_message = fields.Char(
+        string="FedEx Notification Message",
+        help="Personal message added to the FedEx notification emails.",
+    )
+
+    def _fedex_rest_get_notification_events(self):
+        self.ensure_one()
+        return [
+            event
+            for event, enabled in (
+                ("ON_SHIPMENT", self.fedex_rest_notify_on_shipment),
+                ("ON_TENDER", self.fedex_rest_notify_on_tender),
+                (
+                    "ON_ESTIMATED_DELIVERY",
+                    self.fedex_rest_notify_on_estimated_delivery,
+                ),
+                ("ON_EXCEPTION", self.fedex_rest_notify_on_exception),
+                ("ON_DELIVERY", self.fedex_rest_notify_on_delivery),
+            )
+            if enabled
+        ]
+
+    @api.constrains(
+        "delivery_type",
+        "fedex_rest_notify_recipient",
+        "fedex_rest_notify_on_shipment",
+        "fedex_rest_notify_on_tender",
+        "fedex_rest_notify_on_estimated_delivery",
+        "fedex_rest_notify_on_exception",
+        "fedex_rest_notify_on_delivery",
+    )
+    def _check_fedex_rest_notification_events(self):
+        for account in self.filtered(
+            lambda a: a.delivery_type == "fedex_rest" and a.fedex_rest_notify_recipient
+        ):
+            if not account._fedex_rest_get_notification_events():
+                raise ValidationError(
+                    _(
+                        "Select at least one event for the FedEx email "
+                        "notifications of the carrier account %s.",
+                        account.name,
+                    )
+                )
+
     @api.constrains(
         "delivery_type", "fedex_rest_file_format", "fedex_rest_label_stock_type"
     )

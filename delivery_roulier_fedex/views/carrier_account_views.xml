@@ -37,6 +37,34 @@
                     name="fedex_rest_use_etd"
                     attrs="{'invisible': [('delivery_type', '!=', 'fedex_rest')]}"
                 />
+                <field
+                    name="fedex_rest_notify_recipient"
+                    attrs="{'invisible': [('delivery_type', '!=', 'fedex_rest')]}"
+                />
+                <field
+                    name="fedex_rest_notify_on_shipment"
+                    attrs="{'invisible': ['|', ('delivery_type', '!=', 'fedex_rest'), ('fedex_rest_notify_recipient', '=', False)]}"
+                />
+                <field
+                    name="fedex_rest_notify_on_tender"
+                    attrs="{'invisible': ['|', ('delivery_type', '!=', 'fedex_rest'), ('fedex_rest_notify_recipient', '=', False)]}"
+                />
+                <field
+                    name="fedex_rest_notify_on_estimated_delivery"
+                    attrs="{'invisible': ['|', ('delivery_type', '!=', 'fedex_rest'), ('fedex_rest_notify_recipient', '=', False)]}"
+                />
+                <field
+                    name="fedex_rest_notify_on_exception"
+                    attrs="{'invisible': ['|', ('delivery_type', '!=', 'fedex_rest'), ('fedex_rest_notify_recipient', '=', False)]}"
+                />
+                <field
+                    name="fedex_rest_notify_on_delivery"
+                    attrs="{'invisible': ['|', ('delivery_type', '!=', 'fedex_rest'), ('fedex_rest_notify_recipient', '=', False)]}"
+                />
+                <field
+                    name="fedex_rest_notification_message"
+                    attrs="{'invisible': ['|', ('delivery_type', '!=', 'fedex_rest'), ('fedex_rest_notify_recipient', '=', False)]}"
+                />
             </field>
         </field>
     </record>
