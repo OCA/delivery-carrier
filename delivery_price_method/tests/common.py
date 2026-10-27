@@ -9,6 +9,13 @@ from odoo.addons.base.tests.common import BaseCommon
 
 
 class TestDeliveryPriceMethodCommon(BaseCommon):
+    _test_user_groups = (
+        "stock.group_stock_manager",
+        "base.group_partner_manager",
+        "sales_team.group_sale_manager",
+        "product.group_product_manager",
+    )
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -47,7 +54,7 @@ class TestDeliveryPriceMethodCommon(BaseCommon):
                         0,
                         {
                             "applied_on": "3_global",
-                            "compute_price": "formula",
+                            "compute_price": "discount",
                             "base": "list_price",
                         },
                     )
