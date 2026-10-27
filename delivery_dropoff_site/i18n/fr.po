@@ -321,6 +321,11 @@ msgid "Currency"
 msgstr ""
 
 #. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__customer_deposit_count
+msgid "Customer Deposit Count"
+msgstr ""
+
+#. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__property_stock_customer
 msgid "Customer Location"
 msgstr ""
