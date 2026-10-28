@@ -77,9 +77,7 @@ class PurchaseOrderLine(models.Model):
     def _compute_qty_invoiced(self):
         # Overwrite and set qty_to_invoice to 0 for delivery lines if all lines
         # have nothing to invoice
-        precision = self.env["decimal.precision"].precision_get(
-            "Product Unit of Measure"
-        )
+        precision = self.env["decimal.precision"].precision_get("Product Unit")
         res = super()._compute_qty_invoiced()
         for item in self.filtered(lambda x: x.is_delivery):
             order_lines = item.order_id.order_line.filtered(
