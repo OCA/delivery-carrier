@@ -1,0 +1,253 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* delivery_sending
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: delivery_sending
+#: code:addons/delivery_sending/models/delivery_carrier.py:0
+#, python-format
+msgid ""
+"\n"
+"            SENDING API doesn't provide methods to compute delivery rates, so\n"
+"            you should relay on another price method instead or override this\n"
+"            one in your custom code.\n"
+"        "
+msgstr ""
+
+#. module: delivery_sending
+#: model:ir.model.fields,field_description:delivery_sending.field_delivery_carrier__sending_access_key
+msgid "Access Key"
+msgstr ""
+
+#. module: delivery_sending
+#: model:ir.model.fields,field_description:delivery_sending.field_product_packaging__package_carrier_type
+msgid "Carrier"
+msgstr ""
+
+#. module: delivery_sending
+#: model_terms:ir.ui.view,arch_db:delivery_sending.view_delivery_carrier_form
+msgid "Connection"
+msgstr ""
+
+#. module: delivery_sending
+#: code:addons/delivery_sending/models/delivery_carrier.py:0
+#, python-format
+msgid "Delivery country not implemented with this carrier!"
+msgstr ""
+
+#. module: delivery_sending
+#: model:ir.model.fields,field_description:delivery_sending.field_delivery_carrier__sending_file_format
+msgid "File format"
+msgstr ""
+
+#. module: delivery_sending
+#: model:ir.model.fields.selection,name:delivery_sending.selection__delivery_carrier__sending_service__04
+msgid "MEDIDODIA SECTOR"
+msgstr ""
+
+#. module: delivery_sending
+#: model:ir.model.fields.selection,name:delivery_sending.selection__delivery_carrier__sending_service__06
+msgid "MEDIODIA"
+msgstr ""
+
+#. module: delivery_sending
+#: model:ir.model.fields.selection,name:delivery_sending.selection__delivery_carrier__sending_service__09
+msgid "MEDIODIA ECOMMERCE"
+msgstr ""
+
+#. module: delivery_sending
+#: model_terms:ir.ui.view,arch_db:delivery_sending.view_delivery_carrier_form
+msgid "Misc"
+msgstr ""
+
+#. module: delivery_sending
+#: model:ir.model.fields.selection,name:delivery_sending.selection__delivery_carrier__sending_file_format__pdf
+msgid "PDF"
+msgstr ""
+
+#. module: delivery_sending
+#: model:ir.model,name:delivery_sending.model_product_packaging
+msgid "Product Packaging"
+msgstr ""
+
+#. module: delivery_sending
+#: model:ir.model.fields,field_description:delivery_sending.field_delivery_carrier__delivery_type
+msgid "Provider"
+msgstr ""
+
+#. module: delivery_sending
+#: model:ir.model.fields.selection,name:delivery_sending.selection__delivery_carrier__sending_service__22
+msgid "SEND 8:30"
+msgstr ""
+
+#. module: delivery_sending
+#: model:ir.model.fields.selection,name:delivery_sending.selection__delivery_carrier__sending_service__12
+msgid "SEND ADICIONAL VALIJA"
+msgstr ""
+
+#. module: delivery_sending
+#: model:ir.model.fields.selection,name:delivery_sending.selection__delivery_carrier__sending_service__15
+msgid "SEND ARRASTRE CONSOLIDADO MARITIMO"
+msgstr ""
+
+#. module: delivery_sending
+#: model:ir.model.fields.selection,name:delivery_sending.selection__delivery_carrier__sending_service__19
+msgid "SEND CARGA AEREA CANARIAS"
+msgstr ""
+
+#. module: delivery_sending
+#: model:ir.model.fields.selection,name:delivery_sending.selection__delivery_carrier__sending_service__21
+msgid "SEND CARGA ANDORRA"
+msgstr ""
+
+#. module: delivery_sending
+#: model:ir.model.fields.selection,name:delivery_sending.selection__delivery_carrier__sending_service__20
+msgid "SEND DELEGACION"
+msgstr ""
+
+#. module: delivery_sending
+#: model:ir.model.fields.selection,name:delivery_sending.selection__delivery_carrier__sending_service__13
+msgid "SEND DIRECTO"
+msgstr ""
+
+#. module: delivery_sending
+#: model:ir.model.fields.selection,name:delivery_sending.selection__delivery_carrier__sending_service__16
+msgid "SEND DISTRIBUCION CONSOLIDADO MARITIMO"
+msgstr ""
+
+#. module: delivery_sending
+#: model:ir.model.fields.selection,name:delivery_sending.selection__delivery_carrier__sending_service__08
+msgid "SEND ECOMM"
+msgstr ""
+
+#. module: delivery_sending
+#: model:ir.model.fields.selection,name:delivery_sending.selection__delivery_carrier__sending_service__01
+msgid "SEND EXPRES"
+msgstr ""
+
+#. module: delivery_sending
+#: model:ir.model.fields.selection,name:delivery_sending.selection__delivery_carrier__sending_service__07
+msgid "SEND ID"
+msgstr ""
+
+#. module: delivery_sending
+#: model:ir.model.fields.selection,name:delivery_sending.selection__delivery_carrier__sending_service__17
+msgid "SEND INTER. CARGA"
+msgstr ""
+
+#. module: delivery_sending
+#: model:ir.model.fields.selection,name:delivery_sending.selection__delivery_carrier__sending_service__14
+msgid "SEND INTER. COURIER"
+msgstr ""
+
+#. module: delivery_sending
+#: model:ir.model.fields.selection,name:delivery_sending.selection__delivery_carrier__sending_service__05
+msgid "SEND LOCAL"
+msgstr ""
+
+#. module: delivery_sending
+#: model:ir.model.fields.selection,name:delivery_sending.selection__delivery_carrier__sending_service__18
+msgid "SEND MARITIMO"
+msgstr ""
+
+#. module: delivery_sending
+#: model:ir.model.fields.selection,name:delivery_sending.selection__delivery_carrier__sending_service__10
+msgid "SEND MASIVO"
+msgstr ""
+
+#. module: delivery_sending
+#: model:ir.model.fields.selection,name:delivery_sending.selection__delivery_carrier__sending_service__03
+msgid "SEND SECTORIAL"
+msgstr ""
+
+#. module: delivery_sending
+#: model:ir.model.fields.selection,name:delivery_sending.selection__delivery_carrier__sending_service__02
+msgid "SEND TOP 10H"
+msgstr ""
+
+#. module: delivery_sending
+#: model:ir.model.fields.selection,name:delivery_sending.selection__delivery_carrier__sending_service__11
+msgid "SEND VALIJA"
+msgstr ""
+
+#. module: delivery_sending
+#: model:ir.model.fields.selection,name:delivery_sending.selection__delivery_carrier__delivery_type__sending
+#: model:ir.model.fields.selection,name:delivery_sending.selection__product_packaging__package_carrier_type__sending
+msgid "Sending"
+msgstr ""
+
+#. module: delivery_sending
+#: model_terms:ir.ui.view,arch_db:delivery_sending.view_delivery_carrier_form
+msgid "Sending Configuration"
+msgstr ""
+
+#. module: delivery_sending
+#: code:addons/delivery_sending/models/delivery_carrier.py:0
+#, python-format
+msgid "Sending Expedition with reference %s cancelled"
+msgstr ""
+
+#. module: delivery_sending
+#: model:ir.model.fields,field_description:delivery_sending.field_delivery_carrier__sending_service
+msgid "Sending Service"
+msgstr ""
+
+#. module: delivery_sending
+#: code:addons/delivery_sending/models/stock_picking.py:0
+#, python-format
+msgid "Sending label for %s"
+msgstr ""
+
+#. module: delivery_sending
+#: code:addons/delivery_sending/models/delivery_carrier.py:0
+#, python-format
+msgid ""
+"Sending returned an error.\n"
+"Error:\n"
+"{}"
+msgstr ""
+
+#. module: delivery_sending
+#: model:ir.model.fields,help:delivery_sending.field_delivery_carrier__sending_service
+msgid "Set the contracted Sending Service"
+msgstr ""
+
+#. module: delivery_sending
+#: model:ir.model,name:delivery_sending.model_delivery_carrier
+msgid "Shipping Methods"
+msgstr ""
+
+#. module: delivery_sending
+#: model:ir.model,name:delivery_sending.model_stock_picking
+msgid "Transfer"
+msgstr ""
+
+#. module: delivery_sending
+#: model:ir.model.fields,field_description:delivery_sending.field_delivery_carrier__sending_user
+msgid "User"
+msgstr ""
+
+#. module: delivery_sending
+#: model:ir.model.fields.selection,name:delivery_sending.selection__delivery_carrier__sending_file_format__zpl
+msgid "ZPL"
+msgstr ""
+
+#. module: delivery_sending
+#: model:ir.model.fields,help:delivery_sending.field_delivery_carrier__sending_access_key
+msgid "sending Access Key"
+msgstr ""
+
+#. module: delivery_sending
+#: model_terms:ir.ui.view,arch_db:delivery_sending.view_picking_withcarrier_out_form
+msgid "sending Label"
+msgstr ""
