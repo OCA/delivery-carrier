@@ -1,6 +1,7 @@
 # Copyright 2018-2023 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+from odoo.fields import Command
 from odoo.tests import Form, tagged
 from odoo.tools import mute_logger
 
@@ -311,3 +312,18 @@ class TestDeliveryAutoRefresh(BaseCommon):
         sale_form.order_line.remove(1)
         sale_form.save()
         self.assertFalse(delivery_line.exists())
+
+    def test_auto_refresh_so_write_after_create(self):
+        """The order returned by create() refreshes the delivery on write"""
+        self.settings.sale_auto_add_delivery_line = True
+        self.settings.execute()
+        order = self.env["sale.order"].create({"partner_id": self.partner.id})
+        self.assertFalse(order.order_line.filtered("is_delivery"))
+        order.write(
+            {
+                "order_line": [
+                    Command.create({"product_id": self.product.id}),
+                ],
+            }
+        )
+        self.assertTrue(order.order_line.filtered("is_delivery"))
