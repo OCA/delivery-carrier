@@ -14,6 +14,13 @@
       - **PDF** (default): Standard format, works with all printers
       - **ZPL**: For Zebra thermal printers (direct thermal printing)
       - **EPL2**: For legacy Eltron/Zebra thermal printers
+    - **Label Size** (optional): Size of the label, e.g. `4x6` for a
+      thermal label printer or `8.5x11`. Leave empty to use the default
+      size of the label format. Valid sizes depend on the carrier and
+      the label format (see the EasyPost carrier guides). A delivery
+      method buys the lowest EasyPost rate across all the carriers of
+      the account, so choose a size that every carrier you use
+      supports (`4x6` is supported by USPS and FedEx, for example).
     - **Delivery Multiple Packages**: Select the shipping strategy for
       orders with multiple packages:
       - **Shipments** (default): Create individual shipment for each
