@@ -25,6 +25,15 @@ roulier_ret = {
 
 
 class DeliveryRoulierCase(DeliveryRoulierCommonCase):
+    def test_roulier_rate_shipment(self):
+        # roulier carriers have no rate: the delivery method is still available
+        roulier.get_carriers_action_available = MagicMock(
+            return_value={"test": ["get_label"]}
+        )
+        res = self.test_carrier.rate_shipment(self.order)
+        self.assertTrue(res["success"])
+        self.assertEqual(res["price"], 0.0)
+
     def test_roulier_no_pack(self):
         # having a pack is mandatory for roulier
         # it should fail if no pack provided.
