@@ -2,8 +2,11 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl).
 from datetime import datetime, timedelta
 
+from lxml import etree
+
 from odoo import Command, fields
 from odoo.tests import Form
+from odoo.tools.safe_eval import safe_eval
 
 from odoo.addons.base.tests.common import BaseCommon
 
@@ -296,6 +299,26 @@ class DeliveryFeeTestCase(BaseCommon):
             r"Delivery fee charged per shipment.+2",
         )
         self._common_fee_added_on_picking_validation_refund()
+
+    def test_fee_product_created_from_carrier(self):
+        """A fee product created from the carrier form is a service, so the
+        fee doesn't need to be delivered"""
+        arch = self.env["delivery.carrier"].get_views([(False, "form")])["views"][
+            "form"
+        ]["arch"]
+        [field] = etree.fromstring(arch).xpath("//field[@name='fee_product_id']")
+        # The web client creates the product with the context of the field
+        Product = self.env["product.product"].with_context(
+            **safe_eval(field.get("context"))
+        )
+        product = Product.browse(Product.name_create("Shipment fee")[0])
+        self.carrier_with_fee.fee_product_id = product
+        self.sale_order.carrier_id = self.carrier_with_fee
+        self.sale_order.action_confirm()
+        self._validate_picking(self.sale_order.picking_ids)
+        self.assertTrue(self.sale_order.order_line.filtered("is_delivery_fee"))
+        self.assertEqual(len(self.sale_order.picking_ids), 1)
+        self.assertEqual(product.type, "service")
 
     def test_delivery_fee_added_on_batch_picking_validation(self):
         """Test that delivery fees are added when pickings are validated in batch"""
