@@ -837,3 +837,40 @@ class TestDeliverySendCloud(TransactionCase):
                 sale_order
             )
         )
+
+    def test_20_sendcloud_carrier_available_for_order(self):
+        """A sendcloud method matching the order is available (website checkout)"""
+        carrier = self.env["delivery.carrier"].create(
+            {
+                "name": "Sendcloud PostNL",
+                "delivery_type": "sendcloud",
+                "company_id": self.env.company.id,
+                "product_id": self.env["product.product"]
+                .create({"name": "Sendcloud delivery", "type": "service"})
+                .id,
+                "sendcloud_code": 8,
+                "sendcloud_min_weight": 0.001,
+                "sendcloud_max_weight": 23.0,
+            }
+        )
+        self.env["sendcloud.shipping.method.country"].create(
+            {
+                "company_id": self.env.company.id,
+                "sendcloud_code": 8,
+                "method_code": 8,
+                "iso_2": "NL",
+            }
+        )
+        partner = self.env["res.partner"].create(
+            {"name": "Dutch customer", "country_id": self.env.ref("base.nl").id}
+        )
+        product = self.env["product.product"].create(
+            {"name": "Parcel", "type": "consu", "weight": 1.0}
+        )
+        order = self.env["sale.order"].create(
+            {
+                "partner_id": partner.id,
+                "order_line": [(0, 0, {"product_id": product.id})],
+            }
+        )
+        self.assertTrue(carrier._is_available_for_order(order))

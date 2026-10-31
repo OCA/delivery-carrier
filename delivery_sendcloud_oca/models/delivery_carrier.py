@@ -271,8 +271,7 @@ class DeliveryCarrier(models.Model):
             )
             if self.sendcloud_code not in countries.mapped("method_code"):
                 return False
-        else:
-            return super()._is_available_for_order(order)
+        return super()._is_available_for_order(order)
 
     # ----------------- #
     # Sendcloud methods #
