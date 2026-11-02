@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2026-10-22 15:59+0000\n"
+"PO-Revision-Date: 2026-11-02 18:46+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -783,12 +783,12 @@ msgstr "Contenuto del file"
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__message_follower_ids
 msgid "Followers"
-msgstr "Follower"
+msgstr "Seguito da"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__message_partner_ids
 msgid "Followers (Partners)"
-msgstr "Follower (contatti)"
+msgstr "Seguito da (partner)"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,help:delivery_sendcloud_oca.field_sendcloud_parcel__activity_type_icon
