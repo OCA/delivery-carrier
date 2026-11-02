@@ -1,7 +1,41 @@
 # Copyright 2020 Camptocamp
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+from contextlib import contextmanager
+
 from odoo import api, fields, models
+
+
+@contextmanager
+def cache_values(record, **values):
+    """Temporarily replace field values of ``record`` in the cache, without
+    writing them"""
+    cache = record.env.cache
+    fields_ = [record._fields[name] for name in values]
+    originals = {
+        field: field.convert_to_cache(record[field.name], record) for field in fields_
+    }
+    temporaries = {
+        field: field.convert_to_cache(values[field.name], record) for field in fields_
+    }
+    # ``protecting`` marks the fields as being computed: Odoo does not schedule
+    # their recomputation, which would replace the cached value of a computed
+    # field when one of its dependencies changes during the block
+    with record.env.protecting(fields_, record):
+        for field, value in temporaries.items():
+            cache.set(record, field, value)
+        try:
+            yield
+        finally:
+            for field, value in originals.items():
+                # A write on the field during the block is kept: only restore
+                # the value we put. Caveat: a write of that same value, already
+                # flushed, cannot be told apart and is reverted in the cache.
+                if cache.has_dirty_fields(record, [field]):
+                    continue
+                if cache.get(record, field, None) != temporaries[field]:
+                    continue
+                cache.set(record, field, value)
 
 
 class DeliveryCarrier(models.Model):
@@ -31,24 +65,18 @@ class DeliveryCarrier(models.Model):
         # base method ``rate_shipment()`` to lookup which function to use, so we
         # temporarily change the ``delivery_type`` if needed.
 
-        # TODO: I would propose the addition of _rate_shipment_get_handler
-        # instead of using getattr directly.
-        # This way, in v19 or 20 we can get rid of this hack.
-        # Also note that some specific carrier implementation
-        # rely on computed fields depending on delivery_type
-        # so we might trigger unnecessary changes w/ this patchy approach.
+        # TODO: use ``_rate_shipment_get_handler`` instead of this hack once
+        # available: https://github.com/odoo/odoo/pull/297175
 
         # Quick check: if the invoice policy is not "pricelist", or the delivery type is
         # already set to "pricelist", we don't have to do anything
         if self.invoice_policy != "pricelist" or self.delivery_type == "pricelist":
             return super().rate_shipment(order)
 
-        # Use ``sudo()`` to prevent ``AccessError`` when updating the delivery type
-        delivery_type = self.delivery_type
-        self.sudo().delivery_type = "pricelist"
-        result = super().rate_shipment(order)
-        self.sudo().delivery_type = delivery_type
-        return result
+        # Only change the value in the cache: writing it makes concurrent
+        # transactions on the carrier fail with a serialization error
+        with cache_values(self, delivery_type="pricelist"):
+            return super().rate_shipment(order)
 
     def send_shipping(self, pickings):
         result = super().send_shipping(pickings)
