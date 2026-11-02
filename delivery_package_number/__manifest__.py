@@ -3,7 +3,7 @@
 {
     "name": "Delivery Package Number",
     "summary": "Set or compute number of packages for a picking",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "category": "Delivery",
     "website": "https://github.com/OCA/delivery-carrier",
     "author": "Tecnativa, Odoo Community Association (OCA)",
@@ -12,7 +12,7 @@
     "application": False,
     "depends": ["stock_delivery"],
     "data": [
-        "security/ir.model.access.csv",
+        "security/ir.access.csv",
         "data/paperformat_data.xml",
         "reports/report_package_number.xml",
         "views/stock_picking_type_views.xml",

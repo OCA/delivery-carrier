@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo noupdate="1">
     <record id="paperformat_number_of_packages_label" model="report.paperformat">
         <field name="name">Number of package label</field>
