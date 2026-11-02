@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <!-- Schenker Product Packagings. It'd be nice to have proper measures -->
+    <record id="schenker_package_type_01" model="stock.package.type">
+        <field name="shipper_package_code">CI</field>
+        <field name="name">(Schenker) Canister</field>
+        <field name="package_carrier_type">schenker</field>
+    </record>
+    <record id="schenker_package_type_02" model="stock.package.type">
+        <field name="shipper_package_code">CT</field>
+        <field name="name">(Schenker) Carton</field>
+        <field name="package_carrier_type">schenker</field>
+    </record>
+    <record id="schenker_package_type_03" model="stock.package.type">
+        <field name="shipper_package_code">CS</field>
+        <field name="name">(Schenker) Case</field>
+        <field name="package_carrier_type">schenker</field>
+    </record>
+    <record id="schenker_package_type_04" model="stock.package.type">
+        <field name="shipper_package_code">CO</field>
+        <field name="name">(Schenker) Colli</field>
+        <field name="package_carrier_type">schenker</field>
+    </record>
+    <record id="schenker_package_type_05" model="stock.package.type">
+        <field name="shipper_package_code">CH</field>
+        <field name="name">(Schenker) Crate</field>
+        <field name="package_carrier_type">schenker</field>
+    </record>
+    <record id="schenker_package_type_06" model="stock.package.type">
+        <field name="shipper_package_code">GP</field>
+        <field name="name">(Schenker) Skeleton box pallet</field>
+        <field name="package_carrier_type">schenker</field>
+    </record>
+    <record id="schenker_package_type_07" model="stock.package.type">
+        <field name="shipper_package_code">NE</field>
+        <field name="name">(Schenker) Unpacked Skid</field>
+        <field name="package_carrier_type">schenker</field>
+    </record>
+    <record id="schenker_package_type_08" model="stock.package.type">
+        <field name="shipper_package_code">BG</field>
+        <field name="name">(Schenker) Bag</field>
+        <field name="package_carrier_type">schenker</field>
+    </record>
+    <record id="schenker_package_type_09" model="stock.package.type">
+        <field name="shipper_package_code">BL</field>
+        <field name="name">(Schenker) Bale</field>
+        <field name="package_carrier_type">schenker</field>
+    </record>
+    <record id="schenker_package_type_10" model="stock.package.type">
+        <field name="shipper_package_code">DR</field>
+        <field name="name">(Schenker) Barrel</field>
+        <field name="package_carrier_type">schenker</field>
+    </record>
+    <record id="schenker_package_type_11" model="stock.package.type">
+        <field name="shipper_package_code">BX</field>
+        <field name="name">(Schenker) Box</field>
+        <field name="package_carrier_type">schenker</field>
+    </record>
+    <record id="schenker_package_type_12" model="stock.package.type">
+        <field name="shipper_package_code">BY</field>
+        <field name="name">(Schenker) Bundle</field>
+        <field name="package_carrier_type">schenker</field>
+    </record>
+    <record id="schenker_package_type_13" model="stock.package.type">
+        <field name="shipper_package_code">TR</field>
+        <field name="name">(Schenker) Drum</field>
+        <field name="package_carrier_type">schenker</field>
+    </record>
+    <record id="schenker_package_type_14" model="stock.package.type">
+        <field name="shipper_package_code">EP</field>
+        <field name="name">(Schenker) Europallet</field>
+        <field name="package_carrier_type">schenker</field>
+    </record>
+    <record id="schenker_package_type_15" model="stock.package.type">
+        <field name="shipper_package_code">FR</field>
+        <field name="name">(Schenker) Frame</field>
+        <field name="package_carrier_type">schenker</field>
+    </record>
+    <record id="schenker_package_type_16" model="stock.package.type">
+        <field name="shipper_package_code">HO</field>
+        <field name="name">(Schenker) Hobbock</field>
+        <field name="package_carrier_type">schenker</field>
+    </record>
+    <record id="schenker_package_type_17" model="stock.package.type">
+        <field name="shipper_package_code">OP</field>
+        <field name="name">(Schenker) One-way pallet</field>
+        <field name="package_carrier_type">schenker</field>
+    </record>
+    <record id="schenker_package_type_18" model="stock.package.type">
+        <field name="shipper_package_code">PK</field>
+        <field name="name">(Schenker) Package</field>
+        <field name="package_carrier_type">schenker</field>
+    </record>
+    <record id="schenker_package_type_19" model="stock.package.type">
+        <field name="shipper_package_code">XP</field>
+        <field name="name">(Schenker) Pallet</field>
+        <field name="package_carrier_type">schenker</field>
+    </record>
+    <record id="schenker_package_type_20" model="stock.package.type">
+        <field name="shipper_package_code">PZ</field>
+        <field name="name">(Schenker) Pipe</field>
+        <field name="package_carrier_type">schenker</field>
+    </record>
+    <record id="schenker_package_type_21" model="stock.package.type">
+        <field name="shipper_package_code">RO</field>
+        <field name="name">(Schenker) Roll</field>
+        <field name="package_carrier_type">schenker</field>
+    </record>
+    <record id="schenker_package_type_22" model="stock.package.type">
+        <field name="shipper_package_code">SK</field>
+        <field name="name">(Schenker) Sack</field>
+        <field name="package_carrier_type">schenker</field>
+    </record>
+    <record id="schenker_package_type_23" model="stock.package.type">
+        <field name="shipper_package_code">ZZ</field>
+        <field name="name">(Schenker) Other</field>
+        <field name="package_carrier_type">schenker</field>
+    </record>
+</odoo>
