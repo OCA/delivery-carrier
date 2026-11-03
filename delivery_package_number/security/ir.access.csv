@@ -1,0 +1,3 @@
+id,name,model_id,group_id:id,operation,domain
+access_stock_number_package_validate_wizard,access.stock.number.package.validate.wizard,stock.number.package.validate.wizard,stock.group_stock_user,cru,
+access_stock_number_package_validate_line_wizard,access.stock.number.package.validate.line.wizard,stock.number.package.validate.line.wizard,stock.group_stock_user,cru,
