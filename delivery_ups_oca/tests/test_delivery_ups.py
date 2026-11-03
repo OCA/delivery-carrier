@@ -858,17 +858,16 @@ class TestDeliveryUps(TestDeliveryUpsBase):
             self.assertEqual(package["Packaging"]["Code"], "02")
 
     def test_ups_prepare_create_shipping_zero_packages(self):
-        """Guard against ZeroDivisionError when number_of_packages is 0."""
+        """Send a single package when number_of_packages is 0."""
         self.carrier.ups_use_packages_from_picking = False
         ups_request = UpsRequest(self.carrier)
         self.picking.name = "TEST0007"
         self.picking.shipping_weight = 12.0
         self.picking.number_of_packages = 0
-        # Must not raise ZeroDivisionError and must still build the request
         result = ups_request._prepare_create_shipping(self.picking)
         shipment = result["ShipmentRequest"]["Shipment"]
-        # range(0, 0) yields no packages, but the request is built successfully
-        self.assertEqual(shipment["Package"], [])
+        self.assertEqual(len(shipment["Package"]), 1)
+        self.assertEqual(shipment["Package"][0]["PackageWeight"]["Weight"], "12.0")
         self.assertEqual(shipment["Service"]["Code"], "11")
 
     def test_ups_prepare_create_shipping_with_cash_on_delivery(self):
