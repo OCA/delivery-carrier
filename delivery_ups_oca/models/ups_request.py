@@ -264,10 +264,9 @@ class UpsRequest:
             package_info = self._quant_package_data_from_picking(
                 self.default_packaging_id, picking, False
             )
-            package_weight = round(
-                (picking.shipping_weight / (picking.number_of_packages or 1)), 2
-            )
-            for i in range(0, picking.number_of_packages):
+            number_of_packages = picking.number_of_packages or 1
+            package_weight = round((picking.shipping_weight / number_of_packages), 2)
+            for i in range(0, number_of_packages):
                 package_item = package_info.copy()
                 package_name = f"{picking.name} ({i+1})"
                 package_item["Description"] = package_name
