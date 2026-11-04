@@ -19,6 +19,14 @@ License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
                     invisible="not carrier_tracking_ref or delivery_type != 'ups' or state != 'done'"
                 />
             </xpath>
+            <field name="carrier_id" position="after">
+                <field name="declared_value_currency_id" invisible="1" />
+                <field
+                    name="declared_value"
+                    invisible="delivery_type != 'ups'"
+                    readonly="state in ('done', 'cancel')"
+                />
+            </field>
         </field>
     </record>
 </odoo>

@@ -4,7 +4,7 @@
 {
     "name": "Delivery UPS OCA",
     "summary": "Integrate UPS webservice",
-    "version": "18.0.1.6.0",
+    "version": "18.0.1.7.0",
     "category": "Delivery",
     "website": "https://github.com/OCA/delivery-carrier",
     "author": """Hunki Enterprises BV, Tecnativa, ForgeFlow,
@@ -22,4 +22,5 @@
         "views/delivery_carrier_view.xml",
         "views/stock_picking_view.xml",
     ],
+    "pre_init_hook": "pre_init_hook",
 }
