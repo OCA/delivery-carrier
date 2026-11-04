@@ -6,6 +6,7 @@ from io import BytesIO
 from operator import attrgetter
 
 import lxml.html
+from lxml import etree
 from PIL import Image
 
 from odoo import api, fields, models
@@ -212,7 +213,14 @@ Please use _get_quant_packages_from_picking instead."
     @api.model
     def _cleanup_error_message(self, error_message):
         """Cleanup HTML error message to be readable by users."""
-        texts_no_html = lxml.html.fromstring(error_message).text_content()
+        error_message = (error_message or "").strip()
+        if not error_message:
+            return error_message
+        try:
+            texts_no_html = lxml.html.fromstring(error_message).text_content()
+        except etree.LxmlError:
+            # The API may return an empty body or JSON error
+            return error_message
         texts = [text for text in texts_no_html.split("\n") if text]
         return "\n".join(texts)
 
