@@ -1,0 +1,115 @@
+interactions:
+- request:
+    body: grant_type=client_credentials&scope=DCAPI_BARCODE_READ
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '144'
+      User-Agent:
+      - python-requests/2.32.5
+      content-type:
+      - application/x-www-form-urlencoded
+    method: POST
+    uri: https://api.post.ch/OAuth/token
+  response:
+    body:
+      string: '{"access_token": "XXX", "token_type": "Bearer", "expires_in": 300}'
+    headers:
+      Cache-Control:
+      - no-cache, no-store
+      Connection:
+      - Keep-Alive
+      Content-Length:
+      - '1397'
+      Content-Security-Policy:
+      - 'object-src ''none''; frame-ancestors ''none''; script-src ''unsafe-inline'' ''unsafe-eval'' ''self'' *.post.ch; style-src ''self'' ''unsafe-inline'' *.post.ch; img-src ''self'' data: *.post.ch; font-src ''self'' data: *.post.ch; base-uri ''self''; connect-src ''self'' wss://*.post.ch *.post.ch;'
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Thu, 05 Nov 2026 09:13:59 GMT
+      Keep-Alive:
+      - timeout=5, max=100
+      Permissions-Policy:
+      - accelerometer=(),ambient-light-sensor=(),attribution-reporting=(),battery=(),bluetooth=(),browsing-topics=(),autoplay=(),camera=(),display-capture=(),document-domain=(),encrypted-media=(),execution-while-not-rendered=(),execution-while-out-of-viewport=(),fullscreen=(),gamepad=(),geolocation=(),gyroscope=(),hid=(),identity-credentials-get=(),idle-detection=(),local-fonts=(),magnetometer=(),microphone=(),midi=(),otp-credentials=(),payment=(),picture-in-picture=(),publickey-credentials-create=(),publickey-credentials-get=(),screen-wake-lock=(),serial=(),speaker-selection=(),storage-access=(),usb=(),web-share=(),window-management=(),xr-spatial-tracking=()
+      Pragma:
+      - no-cache
+      Referrer-Policy:
+      - strict-origin
+      Server:
+      - Apache
+      Set-Cookie:
+      - NavajoApi=<redacted>; Path=/; Secure; HttpOnly; samesite=None
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - DENY
+      X-XSS-Protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"language": "EN", "frankingLicense": "XXXXXXXXXX", "ppFranking": false, "customer": {"name1": "My Company (San Francisco", "street": "Rue de Lausanne 1", "zip": "1030", "city": "Bussigny", "country": "CH", "domicilePostOffice": null}, "customerSystem": null, "labelDefinition": {"labelLayout": "A6", "printAddresses": "RECIPIENT_AND_CUSTOMER", "imageFileType": "PDF", "imageResolution": "600", "printPreview": true}, "sendingID": null, "item": {"itemID": "WHOUT00031+PACK0000017", "recipient": {"name1": "Camptocamp SA", "street": "EPFL Innovation Park, B\u00e2t A", "zip": "1015", "city": "Lausanne"}, "attributes": {"weight": 169620, "proClima": false, "przl": ["ECO"]}}}'
+    headers:
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '672'
+      User-Agent:
+      - python-requests/2.32.5
+      accept:
+      - application/json
+      content-type:
+      - application/json
+    method: POST
+    uri: https://dcapi.apis.post.ch/barcode/v1/generateAddressLabel
+  response:
+    body:
+      string: ''
+    headers:
+      Cache-Control:
+      - no-cache, no-store, max-age=0, must-revalidate
+      Connection:
+      - close
+      Content-Length:
+      - '0'
+      Date:
+      - Thu, 05 Nov 2026 09:13:59 GMT
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Referrer-Policy:
+      - strict-origin
+      Server:
+      - Apache (proxied)
+      Strict-Transport-Security:
+      - max-age=63072000
+      X-Apim-Request-Id:
+      - d67fadc8-2605-4123-bfad-c82605312359
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Gravitee-Client-Identifier:
+      - b2879268-4ee5-4cc2-8792-684ee5dcc297
+      X-RP-UNIQUE_ID:
+      - auxI104rN5AzCunhcRWpXgAAAC0
+      X-Xss-Protection:
+      - '0'
+      traceparent:
+      - 00-8563613316a7aecc62a2f3a53d9c6d1a-8661a884d0a377f1-00
+      - 00-8563613316a7aecc62a2f3a53d9c6d1a-8661a884d0a377f1-00
+    status:
+      code: 400
+      message: ''
+version: 1
