@@ -516,7 +516,7 @@ class StockPicking(models.Model):
             "name": _("Sendcloud Parcels"),
             "res_model": "sendcloud.parcel",
             "domain": [("id", "in", self.sendcloud_parcel_ids.ids)],
-            "view_mode": "tree,form",
+            "view_mode": "list,form",
             "context": self.env.context,
         }
 
