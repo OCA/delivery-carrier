@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_delivery_carrier_form" model="ir.ui.view">
+        <field name="model">delivery.carrier</field>
+        <field name="inherit_id" ref="delivery.view_delivery_carrier_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook/page[1]" position="before">
+                <page
+                    string="CTT Express Portugal"
+                    invisible="delivery_type != 'cttexpress_pt'"
+                >
+                    <group>
+                        <group string="Connection">
+                            <field
+                                name="cttexpress_pt_authentication_id"
+                                required="delivery_type == 'cttexpress_pt'"
+                            />
+                            <field
+                                name="cttexpress_pt_client_id"
+                                required="delivery_type == 'cttexpress_pt'"
+                            />
+                            <field
+                                name="cttexpress_pt_contract_id"
+                                required="delivery_type == 'cttexpress_pt'"
+                            />
+                            <field
+                                name="cttexpress_pt_distribution_channel_id"
+                                required="delivery_type == 'cttexpress_pt'"
+                            />
+                            <field
+                                name="cttexpress_pt_user_id"
+                                required="delivery_type == 'cttexpress_pt'"
+                            />
+                            <button
+                                name="action_cttexpress_pt_test_connection"
+                                type="object"
+                                string="Test connection"
+                                class="oe_link"
+                                icon="fa-plug"
+                            />
+                        </group>
+                        <group
+                            string="Test environment"
+                            help="Optional credentials for the QA endpoint. Empty fields fall back to the production values."
+                        >
+                            <field name="cttexpress_pt_test_authentication_id" />
+                            <field name="cttexpress_pt_test_client_id" />
+                            <field name="cttexpress_pt_test_contract_id" />
+                            <field name="cttexpress_pt_test_distribution_channel_id" />
+                            <field name="cttexpress_pt_test_user_id" />
+                        </group>
+                        <group string="Shipping">
+                            <field
+                                name="cttexpress_pt_sub_product"
+                                required="delivery_type == 'cttexpress_pt'"
+                            />
+                            <field
+                                name="cttexpress_pt_label_type"
+                                required="delivery_type == 'cttexpress_pt'"
+                            />
+                            <field name="cttexpress_pt_has_sender_information" />
+                            <field
+                                name="cttexpress_pt_export_type"
+                                required="delivery_type == 'cttexpress_pt'"
+                            />
+                            <field
+                                name="cttexpress_pt_upc_code"
+                                required="delivery_type == 'cttexpress_pt'"
+                            />
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
