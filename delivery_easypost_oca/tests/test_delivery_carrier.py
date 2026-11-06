@@ -375,3 +375,54 @@ class TestDeliveryCarrier(EasypostTestBaseCase):
 
         # Verify mock was called
         mock_create_shipment.assert_called()
+
+    def test_easypost_oca_contact_files_text_formats(self):
+        """ZPL and EPL2 labels are merged into a single bytes payload."""
+        labels = [b"label-1", b"label-2"]
+        for file_type in ("ZPL", "EPL2"):
+            merged = self.carrier._contact_files(file_type, labels)
+            self.assertEqual(merged, b"label-1\nlabel-2", file_type)
+
+    @patch("requests.get")
+    @patch.object(EasypostRequest, "calculate_shipping_rate")
+    @patch.object(EasypostRequest, "create_shipment")
+    @patch.object(EasypostRequest, "buy_shipment")
+    def test_easypost_oca_epl2_label_is_attached(
+        self, mock_buy, mock_create, mock_calculate_rate, mock_requests_get
+    ):
+        """An EPL2 label is attached to the picking (it used to crash)."""
+        self.carrier.easypost_oca_label_file_type = "EPL2"
+        mock_requests_get.return_value = mock_requests_get_label(b"EPL2_LABEL")
+        mock_calculate_rate.return_value = create_mock_rate(
+            rate="10.00", carrier="USPS", service="Priority"
+        )
+        sale = self._create_sale_order(1)
+        picking = sale.picking_ids[0]
+        picking.action_assign()
+        picking.move_line_ids.write({"quantity": 1})
+        mock_create.return_value = create_mock_shipment(
+            shipment_id="shp_epl2_test", tracking_code="TRACK_EPL2_123", rate="12.50"
+        )
+        mock_buy.return_value = EasyPostShipment(
+            shipment_id="shp_epl2_test",
+            tracking_code="TRACK_EPL2_123",
+            label_url="https://easypost-files.s3.amazonaws.com/label.epl2",
+            public_url="https://track.easypost.com/epl2",
+            rate=12.50,
+            currency="USD",
+            carrier_id="ca_test123",
+            carrier_name="USPS",
+            carrier_service="Priority",
+        )
+
+        picking._action_done()
+
+        attachment = self.env["ir.attachment"].search(
+            [
+                ("res_model", "=", "stock.picking"),
+                ("res_id", "=", picking.id),
+                ("name", "=", f"Label-{picking.name}.epl2"),
+            ]
+        )
+        self.assertEqual(len(attachment), 1)
+        self.assertEqual(attachment.raw, b"EPL2_LABEL")
