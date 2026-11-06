@@ -317,3 +317,57 @@ class TestStockPickingDeliveryLink(StockPickingDeliveryLinkCommonCase):
         res = ship_move.picking_id.action_put_in_pack()
         carrier_type = res["context"].get("current_package_carrier_type")
         self.assertEqual("none", carrier_type)
+
+    def _create_chain(self, picking_types, **values):
+        """Create one move per picking type, each chained to the next one.
+
+        Each chain has its own procurement group, so that its moves are not
+        merged in the pickings of another chain.
+        """
+        group = self.env["procurement.group"].create({"name": "chain"})
+        moves = self.env["stock.move"]
+        for picking_type in picking_types:
+            moves |= self._create_move(
+                self.product,
+                self.stock_loc,
+                self.shelf1_loc,
+                picking_type_id=picking_type.id,
+                group_id=group.id,
+                **values,
+            )
+        moves._assign_picking()
+        for move, next_move in zip(moves, moves[1:]):
+            move.move_dest_ids = next_move
+        return moves
+
+    def test_ship_data_several_pickings(self):
+        wh = self.wh
+        chain1 = self._create_chain(
+            [wh.pick_type_id, wh.pack_type_id, wh.out_type_id]
+        )
+        chain2 = self._create_chain([wh.pack_type_id, wh.out_type_id])
+        chain3 = self._create_chain([wh.pick_type_id, wh.pack_type_id])
+        pickings = chain1[0].picking_id | chain2[0].picking_id | chain3[0].picking_id
+        self.env.invalidate_all()
+        ships = pickings._get_ship_by_picking_id()
+        self.assertEqual(ships[chain1[0].picking_id.id], chain1[-1].picking_id)
+        self.assertEqual(ships[chain2[0].picking_id.id], chain2[-1].picking_id)
+        self.assertNotIn(chain3[0].picking_id.id, ships)
+
+    def test_ship_data_skip_cancelled_move(self):
+        wh = self.wh
+        chain = self._create_chain([wh.pick_type_id, wh.out_type_id])
+        # first destination move by sequence, but cancelled
+        cancelled = self._create_chain([wh.out_type_id], sequence=0)
+        cancelled.state = "cancel"
+        chain[0].move_dest_ids |= cancelled
+        self.assertEqual(chain[0].picking_id.ship_picking_id, chain[1].picking_id)
+        self.assertEqual(
+            chain[0].picking_id._get_ship_from_chain(done=True), cancelled.picking_id
+        )
+
+    def test_ship_data_looping_chain(self):
+        wh = self.wh
+        chain = self._create_chain([wh.pick_type_id, wh.pack_type_id])
+        chain[1].move_dest_ids = chain[0]
+        self.assertFalse(chain[0].picking_id.ship_picking_id)

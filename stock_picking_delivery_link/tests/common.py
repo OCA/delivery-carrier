@@ -13,8 +13,16 @@ class StockPickingDeliveryLinkCommonCase(TransactionCase):
         cls.wh = cls.env.ref("stock.warehouse0")
 
         cls.stock_loc = cls.wh.lot_stock_id
-        cls.shelf1_loc = cls.env.ref("stock.stock_location_components")
-        cls.shelf2_loc = cls.env.ref("stock.stock_location_14")
+        # own locations: no demo data needed, and no real picking of the
+        # database can be reused when the test moves are assigned
+        cls.shelf1_loc = cls._create_location("Test shelf 1")
+        cls.shelf2_loc = cls._create_location("Test shelf 2")
+
+    @classmethod
+    def _create_location(cls, name):
+        return cls.env["stock.location"].create(
+            {"name": name, "location_id": cls.stock_loc.id}
+        )
 
     def _create_move(self, product, src_location, dst_location, **values):
         Move = self.env["stock.move"]
