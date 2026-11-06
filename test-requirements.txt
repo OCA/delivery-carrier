@@ -1,0 +1,1 @@
+odoo-addon-delivery_sendcloud_oca @ git+https://github.com/OCA/delivery-carrier.git@refs/pull/1243/head#subdirectory=delivery_sendcloud_oca

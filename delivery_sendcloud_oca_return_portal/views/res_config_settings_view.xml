@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.form.sendcloud.return.portal</field>
+        <field name="model">res.config.settings</field>
+        <field
+            name="inherit_id"
+            ref="delivery_sendcloud_oca.res_config_settings_view_form_stock"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='sendcloud_auto_create_invoice']" position="after">
+                <div class="row mt16" id="sendcloud_return_picking_start_date">
+                    <div class="col-12">
+                        <label
+                            for="sendcloud_return_picking_start_date"
+                            class="p-0 col-4 o_light_label"
+                        />
+                        <field
+                            name="sendcloud_return_picking_start_date"
+                            class="w-auto"
+                        />
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
