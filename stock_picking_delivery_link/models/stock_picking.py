@@ -3,7 +3,7 @@
 
 from collections import defaultdict
 
-from odoo import fields, models
+from odoo import api, fields, models
 
 
 def get_first_move_dest(moves, done=False):
@@ -46,45 +46,15 @@ class StockPicking(models.Model):
     def _get_ship_by_picking_id(self, done=False):
         """Return the shipments related to the operations, by picking id.
 
-        From the moves of each picking, follow the first destination move
-        (by move order) not done nor cancelled (only done or cancelled ones
-        when ``done`` is set) until a move of an outgoing picking is reached.
-
-        The chains of all the pickings are walked together, one level at a
-        time, reading only the fields needed: the number of queries depends
-        on the depth of the chains, not on the number of pickings.
+        See ``stock.move._get_ship_id_by_chain``: each picking is a chain
+        starting from its own moves.
 
         :return: dict {picking id: shipment}, pickings without shipment are
             not in the dict
         """
-        # picking id -> ids of the moves to follow, in order
-        to_follow = self._get_move_ids_by_picking_id()
-        visited = defaultdict(set)
-        ship_ids = {}
-        while to_follow:
-            origin_ids = {mid for mids in to_follow.values() for mid in mids}
-            dest_by_origin = self._get_first_dest_by_origin_id(origin_ids, done=done)
-            reached = {}
-            for picking_id, move_ids in to_follow.items():
-                dest = next(
-                    (dest_by_origin[mid] for mid in move_ids if mid in dest_by_origin),
-                    None,
-                )
-                # a chain looping on itself stops without result
-                if dest is None or dest.id in visited[picking_id]:
-                    continue
-                visited[picking_id].add(dest.id)
-                reached[picking_id] = dest
-            outgoing_ids = self._get_outgoing_picking_ids(
-                {dest.picking_id.id for dest in reached.values()}
-            )
-            to_follow = {}
-            for picking_id, dest in reached.items():
-                if dest.picking_id.id in outgoing_ids:
-                    ship_ids[picking_id] = dest.picking_id.id
-                else:
-                    # a move without picking does not end the chain
-                    to_follow[picking_id] = [dest.id]
+        ship_ids = self.env["stock.move"]._get_ship_id_by_chain(
+            self._get_move_ids_by_picking_id(), done=done
+        )
         prefetch_ids = list(ship_ids.values())
         return {
             picking_id: self.browse(ship_id).with_prefetch(prefetch_ids)
@@ -102,30 +72,7 @@ class StockPicking(models.Model):
             move_ids_by_picking_id[move.picking_id.id].append(move.id)
         return move_ids_by_picking_id
 
-    def _get_first_dest_by_origin_id(self, origin_ids, done=False):
-        """Return the first destination move of each origin move.
-
-        Only destination moves not done nor cancelled are considered (only
-        done or cancelled ones when ``done`` is set), in move order.
-
-        :return: dict {origin move id: destination move}
-        """
-        Move = self.env["stock.move"]
-        state_operator = "in" if done else "not in"
-        dests = Move.search_fetch(
-            [
-                ("move_orig_ids", "in", list(origin_ids)),
-                ("state", state_operator, ("cancel", "done")),
-            ],
-            ["move_orig_ids", "picking_id"],
-            order=Move._order,
-        )
-        dest_by_origin_id = {}
-        for dest in dests:
-            for origin_id in dest.move_orig_ids.ids:
-                dest_by_origin_id.setdefault(origin_id, dest)
-        return dest_by_origin_id
-
+    @api.model
     def _get_outgoing_picking_ids(self, picking_ids):
         """Return the ids of the outgoing pickings among ``picking_ids``."""
         outgoing = self.search(
