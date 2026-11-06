@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2026-11-02 18:46+0000\n"
+"PO-Revision-Date: 2026-11-06 14:46+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -1531,7 +1531,7 @@ msgstr "URL di tracciamento del collo in uscita"
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_parcel__package_id
 msgid "Package"
-msgstr "Pacco"
+msgstr "Collo"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_create_return_parcel_wizard__parcel_id
@@ -1832,7 +1832,7 @@ msgstr "Richiedi messaggio"
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields.selection,name:delivery_sendcloud_oca.selection__delivery_carrier__sendcloud_service_point_input__required
 msgid "Required"
-msgstr "Obbligatorio"
+msgstr "Richiesto"
 
 #. module: delivery_sendcloud_oca
 #: model:ir.model.fields,field_description:delivery_sendcloud_oca.field_sendcloud_action__resid
