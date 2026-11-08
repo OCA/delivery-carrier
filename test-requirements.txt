@@ -1,0 +1,2 @@
+roulier
+odoo-addon-delivery_carrier_shipping_label  @ git+https://github.com/OCA/delivery-carrier.git@refs/pull/1090/head#subdirectory=delivery_carrier_shipping_label
