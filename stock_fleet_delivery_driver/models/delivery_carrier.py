@@ -7,7 +7,7 @@ from odoo import api, fields, models
 class DeliveryCarrier(models.Model):
     _inherit = "delivery.carrier"
 
-    vehicle_id = fields.Many2one("fleet.vehicle", string="Vehicle")
+    vehicle_id = fields.Many2one("fleet.vehicle")
     driver_id = fields.Many2one(
         compute="_compute_driver_id", store=True, readonly=False
     )

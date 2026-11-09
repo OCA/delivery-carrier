@@ -10,7 +10,6 @@ class StockPicking(models.Model):
 
     driver_id = fields.Many2one(
         "res.partner",
-        string="Driver",
         domain="[('is_driver', '=', True)]",
         compute="_compute_driver_id",
         recursive=True,

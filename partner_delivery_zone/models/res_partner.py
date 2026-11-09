@@ -10,7 +10,6 @@ class ResPartner(models.Model):
 
     delivery_zone_id = fields.Many2one(
         comodel_name="partner.delivery.zone",
-        string="Delivery Zone",
         ondelete="restrict",
         index=True,
     )
