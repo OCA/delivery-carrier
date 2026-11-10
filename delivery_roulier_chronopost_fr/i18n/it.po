@@ -6,160 +6,163 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-11-10 13:46+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: delivery_roulier_chronopost_fr
 #: model:ir.model,name:delivery_roulier_chronopost_fr.model_carrier_account
 msgid "Base account datas"
-msgstr ""
+msgstr "Dati base account"
 
 #. module: delivery_roulier_chronopost_fr
 #: model:delivery.carrier,name:delivery_roulier_chronopost_fr.chrono_10
 msgid "Chrono 10"
-msgstr ""
+msgstr "Chrono 10"
 
 #. module: delivery_roulier_chronopost_fr
 #: model:delivery.carrier,name:delivery_roulier_chronopost_fr.chrono_13
 msgid "Chrono 13"
-msgstr ""
+msgstr "Chrono 13"
 
 #. module: delivery_roulier_chronopost_fr
 #: model:delivery.carrier,name:delivery_roulier_chronopost_fr.chrono_18
 msgid "Chrono 18"
-msgstr ""
+msgstr "Chrono 18"
 
 #. module: delivery_roulier_chronopost_fr
 #: model:delivery.carrier,name:delivery_roulier_chronopost_fr.chrono_8
 msgid "Chrono 8"
-msgstr ""
+msgstr "Chrono 8"
 
 #. module: delivery_roulier_chronopost_fr
 #: model:delivery.carrier,name:delivery_roulier_chronopost_fr.chrono_9
 msgid "Chrono 9"
-msgstr ""
+msgstr "Chrono 9"
 
 #. module: delivery_roulier_chronopost_fr
 #: model:delivery.carrier,name:delivery_roulier_chronopost_fr.chrono_classic
 msgid "Chrono Classic"
-msgstr ""
+msgstr "Chrono Classic"
 
 #. module: delivery_roulier_chronopost_fr
 #: model:delivery.carrier,name:delivery_roulier_chronopost_fr.chrono_express
 msgid "Chrono Express"
-msgstr ""
+msgstr "Chrono Express"
 
 #. module: delivery_roulier_chronopost_fr
 #: model:ir.model.fields.selection,name:delivery_roulier_chronopost_fr.selection__delivery_carrier__delivery_type__chronopost_fr
 msgid "Chronopost"
-msgstr ""
+msgstr "Chronopost"
 
 #. module: delivery_roulier_chronopost_fr
 #: model:ir.model.fields,field_description:delivery_roulier_chronopost_fr.field_carrier_account__chronopost_fr_file_format
 msgid "Chronopost File Format"
-msgstr ""
+msgstr "Formato file Chronopost"
 
 #. module: delivery_roulier_chronopost_fr
 #: model:ir.model.fields,field_description:delivery_roulier_chronopost_fr.field_carrier_account__chronopost_fr_subaccount
 msgid "Chronopost Sub Account"
-msgstr ""
+msgstr "Sotto-account Chronopost"
 
 #. module: delivery_roulier_chronopost_fr
 #: model:product.template,name:delivery_roulier_chronopost_fr.chronopost_product_product_template
 msgid "Coûts de livraison - Chronopost"
-msgstr ""
+msgstr "Costi di consegna - Chronopost"
 
 #. module: delivery_roulier_chronopost_fr
 #: model:ir.model.fields,help:delivery_roulier_chronopost_fr.field_carrier_account__chronopost_fr_file_format
 msgid "Default format of the carrier's label you want to print"
 msgstr ""
+"Formato predefinito dell'etichetta del corriere che si desidera stampare"
 
 #. module: delivery_roulier_chronopost_fr
 #: model:delivery.carrier.template.option,name:delivery_roulier_chronopost_fr.chronopost_service_monday
 msgid "Delivery on Monday"
-msgstr ""
+msgstr "Consegna di lunedì"
 
 #. module: delivery_roulier_chronopost_fr
 #: model:delivery.carrier.template.option,name:delivery_roulier_chronopost_fr.chronopost_service_saturday
 msgid "Delivery on Saturday"
-msgstr ""
+msgstr "Consegna di sabato"
 
 #. module: delivery_roulier_chronopost_fr
 #: model:ir.model.fields.selection,name:delivery_roulier_chronopost_fr.selection__carrier_account__chronopost_fr_file_format__pdf
 msgid "PDF"
-msgstr ""
+msgstr "PDF"
 
 #. module: delivery_roulier_chronopost_fr
 #: model:ir.model.fields.selection,name:delivery_roulier_chronopost_fr.selection__carrier_account__chronopost_fr_file_format__ppr
 msgid "PPR"
-msgstr ""
+msgstr "PPR"
 
 #. module: delivery_roulier_chronopost_fr
 #: model:ir.model,name:delivery_roulier_chronopost_fr.model_stock_quant_package
 msgid "Packages"
-msgstr ""
+msgstr "Colli"
 
 #. module: delivery_roulier_chronopost_fr
 #: model:ir.model.fields,field_description:delivery_roulier_chronopost_fr.field_delivery_carrier__delivery_type
 msgid "Provider"
-msgstr ""
+msgstr "Fornitore"
 
 #. module: delivery_roulier_chronopost_fr
 #: model:delivery.carrier.template.option,name:delivery_roulier_chronopost_fr.chronopost_recipient_alert
 msgid "Recipient Pre-alert"
-msgstr ""
+msgstr "Preavviso destinatario"
 
 #. module: delivery_roulier_chronopost_fr
 #: model:ir.model.fields.selection,name:delivery_roulier_chronopost_fr.selection__carrier_account__chronopost_fr_file_format__ser
 msgid "SER"
-msgstr ""
+msgstr "SER"
 
 #. module: delivery_roulier_chronopost_fr
 #: model:ir.model.fields.selection,name:delivery_roulier_chronopost_fr.selection__carrier_account__chronopost_fr_file_format__spd
 msgid "SPD"
-msgstr ""
+msgstr "SPD"
 
 #. module: delivery_roulier_chronopost_fr
 #: model:delivery.carrier.template.option,name:delivery_roulier_chronopost_fr.chronopost_shipper_alert
 msgid "Shipper Pre-alert"
-msgstr ""
+msgstr "Preavviso mittente"
 
 #. module: delivery_roulier_chronopost_fr
 #: model:ir.model,name:delivery_roulier_chronopost_fr.model_delivery_carrier
 msgid "Shipping Methods"
-msgstr ""
+msgstr "Metodi di spedizione"
 
 #. module: delivery_roulier_chronopost_fr
 #: model:ir.model.fields.selection,name:delivery_roulier_chronopost_fr.selection__carrier_account__chronopost_fr_file_format__the
 msgid "THE"
-msgstr ""
+msgstr "THE"
 
 #. module: delivery_roulier_chronopost_fr
 #: model:ir.model.fields.selection,name:delivery_roulier_chronopost_fr.selection__carrier_account__chronopost_fr_file_format__thepsg
 msgid "THEPSG"
-msgstr ""
+msgstr "THEPSG"
 
 #. module: delivery_roulier_chronopost_fr
 #: model:ir.model,name:delivery_roulier_chronopost_fr.model_stock_picking
 msgid "Transfer"
-msgstr ""
+msgstr "Trasferimento"
 
 #. module: delivery_roulier_chronopost_fr
 #: model:ir.model.fields.selection,name:delivery_roulier_chronopost_fr.selection__carrier_account__chronopost_fr_file_format__xml
 msgid "XML"
-msgstr ""
+msgstr "XML"
 
 #. module: delivery_roulier_chronopost_fr
 #: model:ir.model.fields.selection,name:delivery_roulier_chronopost_fr.selection__carrier_account__chronopost_fr_file_format__z2d
 msgid "Z2D"
-msgstr ""
+msgstr "Z2D"
 
 #. module: delivery_roulier_chronopost_fr
 #: model:ir.model.fields.selection,name:delivery_roulier_chronopost_fr.selection__carrier_account__chronopost_fr_file_format__z2dpsg
 msgid "Z2DPSG"
-msgstr ""
+msgstr "Z2DPSG"
