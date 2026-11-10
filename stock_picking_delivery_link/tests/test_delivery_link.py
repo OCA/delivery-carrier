@@ -2,8 +2,11 @@
 # @author Simone Orsi <simone.orsi@camptocamp.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
+from datetime import timedelta
+
 from odoo_test_helper import FakeModelLoader
 
+from odoo import fields
 from odoo.tests import new_test_user
 
 from .common import StockPickingDeliveryLinkCommonCase
@@ -12,9 +15,11 @@ from .common import StockPickingDeliveryLinkCommonCase
 class TestStockPickingDeliveryLink(StockPickingDeliveryLinkCommonCase):
     """Resolution of the delivery (``ship_picking_id``) through the move chain.
 
-    The delivery is found by following, from the moves of the picking, the
-    first destination move (by ``sequence, id``) that is not done or
-    cancelled, until a move in an outgoing picking is reached.
+    The deliveries are found by following, from the moves of the picking,
+    all the destination moves not done nor cancelled, until moves in
+    outgoing pickings are reached. When several deliveries are reached, the
+    most urgent one wins (``stock.picking`` order: priority, then scheduled
+    date, then id).
 
     Covered use cases:
 
@@ -25,12 +30,10 @@ class TestStockPickingDeliveryLink(StockPickingDeliveryLinkCommonCase):
     * done and cancelled destination moves are skipped;
     * ``done=True`` variant: only done or cancelled destination moves are
       followed;
-    * fork: a move with several destination moves follows the first one by
-      ``sequence``, then by ``id`` when sequences are equal;
-    * several moves in the source picking: the first move by ``sequence``
-      decides which branch is followed;
-    * no backtracking: when the first branch never reaches a delivery, the
-      other branches are not explored;
+    * fork: a move with several destination moves reaching deliveries, the
+      most urgent delivery wins, then the earliest scheduled one;
+    * several moves in the source picking: the most urgent delivery wins;
+    * dead end branch: the deliveries of the other branches are found;
     * merge: several moves of the picking leading to the same destination
       move;
     * destination move without picking in the middle of the chain;
@@ -113,11 +116,7 @@ class TestStockPickingDeliveryLink(StockPickingDeliveryLinkCommonCase):
         )
 
     def _reload(self):
-        """Flush and drop the cache to read the chain as stored.
-
-        Values assigned to x2many fields keep the assignment order in cache,
-        the ``sequence, id`` order only applies once read from the database.
-        """
+        """Drop the cache to read the chain as stored."""
         self.env.invalidate_all()
 
     def _assert_ship(self, picking, expected, done=False):
@@ -257,47 +256,47 @@ class TestStockPickingDeliveryLink(StockPickingDeliveryLinkCommonCase):
         self._assert_ship(pick, ship_cancel, done=True)
         self._assert_ship(pick, ship_open)
 
-    def test_ship_data_fork_by_sequence(self):
-        """Fork: the destination move with the lowest sequence wins."""
+    def test_ship_data_fork_by_priority(self):
+        """Fork: the most urgent delivery wins."""
         pick = self._create_picking(self.pick_type)
         move = self._create_chain_move(pick)
-        # created first (lower id) but with a higher sequence
+        # first destination move by sequence, but not urgent
+        ship_normal = self._create_picking(self.out_type)
+        move_normal = self._create_chain_move(ship_normal, sequence=10)
+        ship_urgent = self._create_picking(self.out_type, priority="1")
+        move_urgent = self._create_chain_move(ship_urgent, sequence=20)
+        move.move_dest_ids = move_normal | move_urgent
+        self._assert_ship(pick, ship_urgent)
+
+    def test_ship_data_fork_same_priority_by_date(self):
+        """Fork with equal priorities: the earliest scheduled delivery wins."""
+        pick = self._create_picking(self.pick_type)
+        move = self._create_chain_move(pick)
+        ship_early = self._create_picking(self.out_type)
+        move_early = self._create_chain_move(ship_early)
         ship_late = self._create_picking(self.out_type)
-        move_late = self._create_chain_move(ship_late, sequence=20)
-        ship_first = self._create_picking(self.out_type)
-        move_first = self._create_chain_move(ship_first, sequence=10)
-        move.move_dest_ids = move_late | move_first
-        self._reload()
-        self._assert_ship(pick, ship_first)
+        move_late = self._create_chain_move(ship_late)
+        now = fields.Datetime.now()
+        ship_early.scheduled_date = now
+        # created last (highest id) but scheduled later
+        ship_late.scheduled_date = now + timedelta(days=1)
+        move.move_dest_ids = move_late | move_early
+        self._assert_ship(pick, ship_early)
 
-    def test_ship_data_fork_same_sequence_by_id(self):
-        """Fork with equal sequences: the lowest id wins."""
+    def test_ship_data_several_moves_by_priority(self):
+        """Several source moves: the most urgent delivery wins."""
         pick = self._create_picking(self.pick_type)
-        move = self._create_chain_move(pick)
-        ship_first = self._create_picking(self.out_type)
-        move_first = self._create_chain_move(ship_first, sequence=10)
-        ship_second = self._create_picking(self.out_type)
-        move_second = self._create_chain_move(ship_second, sequence=10)
-        move.move_dest_ids = move_second | move_first
-        self._reload()
-        self._assert_ship(pick, ship_first)
-
-    def test_ship_data_several_moves_first_by_sequence(self):
-        """Several source moves: the first one by sequence decides."""
-        pick = self._create_picking(self.pick_type)
-        # created first (lower id) but with a higher sequence
-        move_late = self._create_chain_move(pick, sequence=20)
+        # first source move by sequence, leading to the normal delivery
         move_first = self._create_chain_move(pick, sequence=10)
-        ship_late = self._create_picking(self.out_type)
-        ship_first = self._create_picking(self.out_type)
-        # dest move of the first source move has the highest sequence
-        move_late.move_dest_ids = self._create_chain_move(ship_late, sequence=1)
-        move_first.move_dest_ids = self._create_chain_move(ship_first, sequence=50)
-        self._reload()
-        self._assert_ship(pick, ship_first)
+        move_second = self._create_chain_move(pick, sequence=20)
+        ship_normal = self._create_picking(self.out_type)
+        ship_urgent = self._create_picking(self.out_type, priority="1")
+        move_first.move_dest_ids = self._create_chain_move(ship_normal)
+        move_second.move_dest_ids = self._create_chain_move(ship_urgent)
+        self._assert_ship(pick, ship_urgent)
 
-    def test_ship_data_no_backtracking(self):
-        """First branch is a dead end: no delivery, others not explored."""
+    def test_ship_data_dead_end_branch(self):
+        """First branch is a dead end: the other branch's delivery is found."""
         pick = self._create_picking(self.pick_type)
         move = self._create_chain_move(pick)
         # first branch: dead end in an internal picking
@@ -307,7 +306,7 @@ class TestStockPickingDeliveryLink(StockPickingDeliveryLinkCommonCase):
         # second branch: leads to a delivery
         ship = self._create_picking(self.out_type)
         move.move_dest_ids = dead_end | self._create_chain_move(ship, sequence=2)
-        self._assert_ship(pick, self.env["stock.picking"])
+        self._assert_ship(pick, ship)
 
     def test_ship_data_merge(self):
         """Several moves leading to the same delivery move: delivery found."""
@@ -378,6 +377,8 @@ class TestStockPickingDeliveryLink(StockPickingDeliveryLinkCommonCase):
                 "location_id": wh_b.lot_stock_id.id,
                 "location_dest_id": self.env.ref("stock.stock_location_customers").id,
                 "company_id": company_b.id,
+                # most urgent: wins when its company is visible
+                "priority": "1",
             }
         )
         move_b = self._create_move(

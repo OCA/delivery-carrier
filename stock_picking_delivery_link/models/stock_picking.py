@@ -1,7 +1,7 @@
 # Copyright 2021 Camptocamp SA (http://www.camptocamp.com)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from collections import defaultdict
+from datetime import datetime
 
 from odoo import api, fields, models
 
@@ -52,36 +52,48 @@ class StockPicking(models.Model):
         :return: dict {picking id: shipment}, pickings without shipment are
             not in the dict
         """
-        ship_ids, __ = self.env["stock.move"]._get_ship_ids_by_chain(
-            self._get_move_ids_by_picking_id(), done=done
+        # only the field needed: reading move_ids would load all stored fields
+        moves = self.env["stock.move"].search_fetch(
+            [("picking_id", "in", self._origin.ids)], ["picking_id"]
         )
+        ship_ids_by_chain = moves._get_ship_ids_by_chain(
+            chain_key=lambda move: move.picking_id.id, done=done
+        )
+        # several shipments: the most urgent one
+        ship_ids = {key: ids[0] for key, ids in ship_ids_by_chain.items()}
         prefetch_ids = list(ship_ids.values())
         return {
             picking_id: self.browse(ship_id).with_prefetch(prefetch_ids)
             for picking_id, ship_id in ship_ids.items()
         }
 
-    def _get_move_ids_by_picking_id(self):
-        """Return the ids of the moves of the pickings, in move order."""
-        Move = self.env["stock.move"]
-        moves = Move.search_fetch(
-            [("picking_id", "in", self._origin.ids)], ["picking_id"], order=Move._order
-        )
-        move_ids_by_picking_id = defaultdict(list)
-        for move in moves:
-            move_ids_by_picking_id[move.picking_id.id].append(move.id)
-        return move_ids_by_picking_id
-
     @api.model
     def _get_outgoing_picking_ids(self, picking_ids):
-        """Return the ids of the outgoing pickings among ``picking_ids``."""
-        outgoing = self.search(
+        """Return the ids of the outgoing pickings among ``picking_ids``.
+
+        The fields of ``_get_ship_sort_key`` are fetched by the same query.
+        """
+        outgoing = self.search_fetch(
             [
                 ("id", "in", list(picking_ids - {False})),
                 ("picking_type_id.code", "=", "outgoing"),
-            ]
+            ],
+            ["priority", "scheduled_date"],
         )
         return set(outgoing.ids)
+
+    def _get_ship_sort_key(self):
+        """Sort key of a shipment, as ``_order``: most urgent first.
+
+        Sorted in Python, as shipments are found at different levels of the
+        chains: sorting them with a query would cost one more query.
+        """
+        self.ensure_one()
+        return (
+            -int(self.priority or 0),
+            self.scheduled_date or datetime.max,
+            -self.id,
+        )
 
     def _pre_put_in_pack_hook(self, move_line_ids):
         res = super()._pre_put_in_pack_hook(move_line_ids)
