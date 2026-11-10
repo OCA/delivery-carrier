@@ -1,4 +1,5 @@
 # Copyright 2025 Camptocamp SA
+# Copyright 2025 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
 from odoo import models
@@ -21,6 +22,9 @@ class DeliveryCarrier(models.Model):
         picking.ensure_one()
         if not self.max_volume:
             return True
+        # Force recompute as the value is stored but the processible quantity
+        # may have changed
+        picking.move_ids._compute_volume()
         return self.max_volume >= picking.volume
 
     def _match_picking_weight(self, picking):
