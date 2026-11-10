@@ -647,6 +647,11 @@ msgid "Is Follower"
 msgstr "Segue"
 
 #. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__is_france_country
+msgid "Is France Country"
+msgstr ""
+
+#. module: delivery_dropoff_site
 #: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__is_public
 msgid "Is Public"
 msgstr "È pubblico"
