@@ -12,7 +12,7 @@
             />
             <t t-foreach="doc.number_of_packages" t-as="pack_num">
                 <div class="page">
-                    <div class="row">
+                    <div class="row" style="padding-top: 5px;">
                         <div class="col-5" name="logo">
                             <img
                                 t-if="doc.company_id.logo"
@@ -32,25 +32,65 @@
                             </h4>
                         </div>
                     </div>
+
+
+                    <div
+                        class="row mt-3"
+                        t-if="(doc.company_id.name or doc.carrier_id.name) and extra_information"
+                    >
+                        <div class="col-5 border border-dark rounded" name="remitter">
+                            <h6 class="fw-bold">Remitter:</h6>
+                            <div class="text-center" style="padding: 60px 0;">
+                                <span
+                                    t-field="doc.company_id.partner_id"
+                                    t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'
+                                />
+                            </div>
+                        </div>
+                        <div class="col-2" />
+                        <div class="col-5 border border-dark rounded" name="carrier">
+                            <h6 class="fw-bold">Carrier:</h6>
+                            <div class="text-center" style="padding: 60px 0;">
+                                <span
+                                    t-if="doc.carrier_id"
+                                    t-out="doc.carrier_id.name"
+                                />
+                                <span t-else="">No assigned</span>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="row mt-3">
-                        <div
-                            class="col-5 border border-dark rounded text-center"
-                            style="padding: 60px 0;"
-                            name="client"
-                        >
-                            <span t-field="dest_picking.partner_id" />
+                        <div class="col-5 border border-dark rounded" name="client">
+                            <h6 class="fw-bold">Addressee:</h6>
+                            <div class="text-center" style="padding: 60px 0;">
+                                <span
+                                    t-field="dest_picking.partner_id"
+                                    t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'
+                                />
+                            </div>
                         </div>
                         <div class="col-2" />
                         <div
                             class="col-5 border border-dark rounded"
                             name="package_number"
                         >
-                            <h6>Number of packages:</h6>
-                            <div style="font-size: 4em" class="text-center">
+                            <h6 class="fw-bold">Number of packages:</h6>
+                            <div style="font-size: 4em;" class="text-center">
                                 <span t-out="pack_num + 1" />/<span
                                     t-field="doc.number_of_packages"
                                 />
                             </div>
+                        </div>
+                    </div>
+
+                    <div t-if="doc.note and extra_information" class="row mt-3">
+                        <div
+                            class="col-12 text-center"
+                            style="padding-top: 10px;"
+                            name="note"
+                        >
+                            <span style="text-align: justify;" t-field="doc.note" />
                         </div>
                     </div>
 
