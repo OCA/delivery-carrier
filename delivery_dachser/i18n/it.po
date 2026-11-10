@@ -6,601 +6,604 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-11-10 22:23+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_term__011
 msgid "(011) Ex works"
-msgstr ""
+msgstr "(011) Franco fabbrica"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_term__031
 msgid "(031) Free delivered"
-msgstr ""
+msgstr "(031) Reso franco"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_term__035
 msgid "(035) Ex works including delivery against invoice "
-msgstr ""
+msgstr "(035) Franco fabbrica con consegna contro fattura "
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_term__041
 msgid "(041) Free border; uncleared excluding duty & tax"
-msgstr ""
+msgstr "(041) Franco frontiera; non sdoganato escluso dazio e imposte"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_term__081
 msgid "(081) Free delivered; uncleared excluding duty & tax"
-msgstr ""
+msgstr "(081) Reso franco; non sdoganato escluso dazio e imposte"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_term__082
 msgid "(082) Free delivered; cleared excluding duty & tax"
-msgstr ""
+msgstr "(082) Reso franco; sdoganato escluso dazio e imposte"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_term__083
 msgid "(083) Free delivered; cleared including duty, excluding tax"
-msgstr ""
+msgstr "(083) Reso franco; sdoganato incluso dazio, escluse imposte"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_term__084
 msgid "(084) Free delivered; cleared including duty & tax"
-msgstr ""
+msgstr "(084) Reso franco; sdoganato incluso dazio e imposte"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_term__085
 msgid "(085) Free delivered; insured, uncleared, excluding duty & tax"
-msgstr ""
+msgstr "(085) Reso franco; assicurato, non sdoganato, escluso dazio e imposte"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_term__995
 msgid ""
 "(995) Service goods, insured; only by arrangement with the consolidator"
 msgstr ""
+"(995) Merci di servizio, assicurate; solo previo accordo con il groupage"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_product_t__a
 msgid "(A) targo on-site *"
-msgstr ""
+msgstr "(A) targo on-site *"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_t__ar
 msgid "(AR) Frame"
-msgstr ""
+msgstr "(AR) Telaio"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_t__b
 msgid "(B) Bundle"
-msgstr ""
+msgstr "(B) Fascio"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_product_t__b
 msgid "(B) targo on-site plus *"
-msgstr ""
+msgstr "(B) targo on-site plus *"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_f__b1
 msgid "(B1) E-performance case 1"
-msgstr ""
+msgstr "(B1) E-performance caso 1"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_f__b2
 msgid "(B2) E-performance case 2"
-msgstr ""
+msgstr "(B2) E-performance caso 2"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_f__b3
 msgid "(B3) E-performance case 3"
-msgstr ""
+msgstr "(B3) E-performance caso 3"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_f__bb
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_t__bb
 msgid "(BB) Big Bag"
-msgstr ""
+msgstr "(BB) Big bag"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_f__bl
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_t__bl
 msgid "(BL) Bale"
-msgstr ""
+msgstr "(BL) Balla"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_t__br
 msgid "(BR) Barrel"
-msgstr ""
+msgstr "(BR) Barile"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_f__bx
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_t__bx
 msgid "(BX) Box"
-msgstr ""
+msgstr "(BX) Scatola"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_t__c0
 msgid "(C0) Chep-Industrial Pallet 1,2x1m"
-msgstr ""
+msgstr "(C0) Pallet industriale Chep 1,2x1m"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_f__c1
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_t__c1
 msgid "(C1) Chep-Standard-Pallet"
-msgstr ""
+msgstr "(C1) Pallet standard Chep"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_f__c2
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_t__c2
 msgid "(C2) Chep-Half-Pallet"
-msgstr ""
+msgstr "(C2) Mezzo pallet Chep"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_f__c4
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_t__c4
 msgid "(C4) Chep-Quarter-Pallet"
-msgstr ""
+msgstr "(C4) Quarto di pallet Chep"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_f__cc
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_t__cc
 msgid "(CC) Collapsable Stillage"
-msgstr ""
+msgstr "(CC) Cassone pieghevole"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_t__cr
 msgid "(CR) Crate"
-msgstr ""
+msgstr "(CR) Cassa"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_f__ct
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_t__ct
 msgid "(CT) Container"
-msgstr ""
+msgstr "(CT) Container"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_t__di
 msgid "(D) Display"
-msgstr ""
+msgstr "(D) Display"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_f__dd
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_t__dd
 msgid "(DD) Düsseldorfer pallet"
-msgstr ""
+msgstr "(DD) Pallet Düsseldorf"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_t__dg
 msgid "(DG) pressure receptacle"
-msgstr ""
+msgstr "(DG) Recipiente a pressione"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_f__di
 msgid "(DI) Display"
-msgstr ""
+msgstr "(DI) Display"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_f__e
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_t__e
 msgid "(E) Bucket"
-msgstr ""
+msgstr "(E) Secchio"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_product_t__e
 msgid "(E) targospeed 12"
-msgstr ""
+msgstr "(E) targospeed 12"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_product_f__e
 msgid "(E) vengospeed"
-msgstr ""
+msgstr "(E) vengospeed"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_f__e1
 msgid "(E1) Euro-Meat-Tray 1"
-msgstr ""
+msgstr "(E1) Vassoio carne Euro 1"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_f__e2
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_t__e2
 msgid "(E2) Euro-Meat-Tray 2"
-msgstr ""
+msgstr "(E2) Vassoio carne Euro 2"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_f__e4
 msgid "(E4) Euro-Meat-Tray 4"
-msgstr ""
+msgstr "(E4) Vassoio carne Euro 4"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_f__eu
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_t__eu
 msgid "(EU) Euro Pallet"
-msgstr ""
+msgstr "(EU) Europallet"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_f__ew
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_t__ew
 msgid "(EW) Disposable Pallet"
-msgstr ""
+msgstr "(EW) Pallet monouso"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_f__f
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_t__f
 msgid "(F) Drum"
-msgstr ""
+msgstr "(F) Fusto"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_division__f
 msgid "(F) Food Logistics"
-msgstr ""
+msgstr "(F) Food Logistics"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_t__fb
 msgid "(FB) Light gauge metal packaging"
-msgstr ""
+msgstr "(FB) Imballaggio in lamiera sottile"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_f__fl
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_t__fl
 msgid "(FL) Bottle"
-msgstr ""
+msgstr "(FL) Bottiglia"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_t__g
 msgid "(G) Rack"
-msgstr ""
+msgstr "(G) Scaffale"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_f__gb
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_t__gb
 msgid "(GB) Skeleton box pallet"
-msgstr ""
+msgstr "(GB) Pallet a gabbia"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_t__ge
 msgid "(GE) receptacle"
-msgstr ""
+msgstr "(GE) Recipiente"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_product_t__h
 msgid "(H) targo on-site premium"
-msgstr ""
+msgstr "(H) targo on-site premium"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_f__h1
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_t__h1
 msgid "(H1) Sterile Pallet 1"
-msgstr ""
+msgstr "(H1) Pallet sterile 1"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_t__he
 msgid "(HE) Half EU pallet"
-msgstr ""
+msgstr "(HE) Mezzo europallet"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_product_f__i
 msgid "(I) weekend service"
-msgstr ""
+msgstr "(I) servizio weekend"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_f__i1
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_t__i1
 msgid "(I1) IPP Euro pallet"
-msgstr ""
+msgstr "(I1) Europallet IPP"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_f__i2
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_t__i2
 msgid "(I2) I2 IPP half pallet"
-msgstr ""
+msgstr "(I2) Mezzo pallet IPP I2"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_f__i4
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_t__i4
 msgid "(I4) I4 IPP quarter pallet"
-msgstr ""
+msgstr "(I4) Quarto di pallet IPP I4"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_f__ib
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_t__ib
 msgid "(IB) Intermediate bulk container"
-msgstr ""
+msgstr "(IB) Contenitore intermedio per rinfuse"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_f__ip
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_t__ip
 msgid "(IP) Industrial Pallet"
-msgstr ""
+msgstr "(IP) Pallet industriale"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_product_f__k
 msgid "(K) vengoflex"
-msgstr ""
+msgstr "(K) vengoflex"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_f__kd
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_t__kd
 msgid "(KD) Plastic DD pal (customer own)"
-msgstr ""
+msgstr "(KD) Pallet DD in plastica (di proprietà del cliente)"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_f__ke
 msgid "(KE) Customer Euro- Meat Tray 2"
-msgstr ""
+msgstr "(KE) Vassoio carne Euro 2 del cliente"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_f__kh
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_t__kh
 msgid "(KH) Customer Sterile Pallet"
-msgstr ""
+msgstr "(KH) Pallet sterile del cliente"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_f__kk
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_t__kk
 msgid "(KK) Plastic jerrican"
-msgstr ""
+msgstr "(KK) Tanica in plastica"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_t__kn
 msgid "(KN) Jerrican"
-msgstr ""
+msgstr "(KN) Tanica"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_f__kt
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_t__kt
 msgid "(KT) Carton"
-msgstr ""
+msgstr "(KT) Cartone"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_product_f__l
 msgid "(L) weekend service 11"
-msgstr ""
+msgstr "(L) servizio weekend 11"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_t__lp
 msgid "(LP) large packaging"
-msgstr ""
+msgstr "(LP) imballaggio grande"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_f__m1
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_t__m1
 msgid "(M1) Euro container 150mm"
-msgstr ""
+msgstr "(M1) Contenitore Euro 150mm"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_f__m2
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_t__m2
 msgid "(M2) Euro container 220mm"
-msgstr ""
+msgstr "(M2) Contenitore Euro 220mm"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_f__m3
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_t__m3
 msgid "(M3) Euro container 300mm"
-msgstr ""
+msgstr "(M3) Contenitore Euro 300mm"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_product_t__n
 msgid "(N) classicline"
-msgstr ""
+msgstr "(N) classicline"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_product_f__n
 msgid "(N) vengoflex"
-msgstr ""
+msgstr "(N) vengoflex"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_f__p4
 msgid "(P4) Paki 1.4"
-msgstr ""
+msgstr "(P4) Paki 1.4"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_f__pa
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_t__pa
 msgid "(PA) Parcel/Packet"
-msgstr ""
+msgstr "(PA) Pacco/Plico"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_f__ph
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_t__ph
 msgid "(PH) Privately-owned Container"
-msgstr ""
+msgstr "(PH) Contenitore di proprietà privata"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_f__pt
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_t__pt
 msgid "(PT) Batch"
-msgstr ""
+msgstr "(PT) Lotto"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_product_f__q
 msgid "(Q) vengofix"
-msgstr ""
+msgstr "(Q) vengofix"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_product_t__r
 msgid "(R) targofix 10"
-msgstr ""
+msgstr "(R) targofix 10"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_f__rc
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_t__rc
 msgid "(RC) Roll&GOH"
-msgstr ""
+msgstr "(RC) Rotolo&GOH"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_t__rl
 msgid "(RL) Roll"
-msgstr ""
+msgstr "(RL) Rotolo"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_f__ro
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_t__ro
 msgid "(RO) Castor"
-msgstr ""
+msgstr "(RO) Rotella"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_t__s
 msgid "(S) Bag"
-msgstr ""
+msgstr "(S) Sacco"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_product_t__s
 msgid "(S) targospeed 10"
-msgstr ""
+msgstr "(S) targospeed 10"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_product_f__s
 msgid "(S) vengospeed 11"
-msgstr ""
+msgstr "(S) vengospeed 11"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_t__sd
 msgid "(SD) Protection lid"
-msgstr ""
+msgstr "(SD) Coperchio di protezione"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_f__st
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_t__st
 msgid "(ST) Piece"
-msgstr ""
+msgstr "(ST) Pezzo"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_division__t
 msgid "(T) European Logistics"
-msgstr ""
+msgstr "(T) European Logistics"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_t__tr
 msgid "(TR) Spool"
-msgstr ""
+msgstr "(TR) Bobina"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_product_t__u
 msgid "(U) targo on-site fix **"
-msgstr ""
+msgstr "(U) targo on-site fix **"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_product_t__v
 msgid "(V) targofix"
-msgstr ""
+msgstr "(V) targofix"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_t__ve
 msgid "(VE) Quarter EU-pallet"
-msgstr ""
+msgstr "(VE) Quarto di europallet"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_f__vg
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_t__vg
 msgid "(VG) Security cage"
-msgstr ""
+msgstr "(VG) Gabbia di sicurezza"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_product_t__w
 msgid "(W) targofix 12"
-msgstr ""
+msgstr "(W) targofix 12"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_product_t__x
 msgid "(X) targospeed plus"
-msgstr ""
+msgstr "(X) targospeed plus"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_product_f__x
 msgid "(X) vengospeed plus"
-msgstr ""
+msgstr "(X) vengospeed plus"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_product_t__y
 msgid "(Y) targoflex"
-msgstr ""
+msgstr "(Y) targoflex"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_product_t__z
 msgid "(Z) targospeed"
-msgstr ""
+msgstr "(Z) targospeed"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_packaging_t__zk
 msgid "(ZK) Customs envelope"
-msgstr ""
+msgstr "(ZK) Busta doganale"
 
 #. module: delivery_dachser
 #: model:ir.model.fields,field_description:delivery_dachser.field_stock_package_type__package_carrier_type
 msgid "Carrier"
-msgstr ""
+msgstr "Corriere"
 
 #. module: delivery_dachser
 #: model_terms:ir.ui.view,arch_db:delivery_dachser.view_delivery_carrier_form
 msgid "Connection"
-msgstr ""
+msgstr "Connessione"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__delivery_type__dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__stock_package_type__package_carrier_type__dachser
 msgid "Dachser"
-msgstr ""
+msgstr "Dachser"
 
 #. module: delivery_dachser
 #: model:ir.model.fields,field_description:delivery_dachser.field_delivery_carrier__dachser_api_key
 msgid "Dachser Api Key"
-msgstr ""
+msgstr "Chiave API Dachser"
 
 #. module: delivery_dachser
 #: model_terms:ir.ui.view,arch_db:delivery_dachser.view_delivery_carrier_form
 msgid "Dachser Configuration"
-msgstr ""
+msgstr "Configurazione Dachser"
 
 #. module: delivery_dachser
 #: model:ir.model.fields,field_description:delivery_dachser.field_delivery_carrier__dachser_division
 msgid "Dachser Division"
-msgstr ""
+msgstr "Divisione Dachser"
 
 #. module: delivery_dachser
 #: model:ir.model.fields,field_description:delivery_dachser.field_delivery_carrier__dachser_packaging_f
 msgid "Dachser Packaging (F)"
-msgstr ""
+msgstr "Imballaggio Dachser (F)"
 
 #. module: delivery_dachser
 #: model:ir.model.fields,field_description:delivery_dachser.field_delivery_carrier__dachser_packaging_t
 msgid "Dachser Packaging (T)"
-msgstr ""
+msgstr "Imballaggio Dachser (T)"
 
 #. module: delivery_dachser
 #: model:ir.model.fields,field_description:delivery_dachser.field_delivery_carrier__dachser_product_f
 msgid "Dachser Product (F)"
-msgstr ""
+msgstr "Prodotto Dachser (F)"
 
 #. module: delivery_dachser
 #: model:ir.model.fields,field_description:delivery_dachser.field_delivery_carrier__dachser_product_t
 msgid "Dachser Product (T)"
-msgstr ""
+msgstr "Prodotto Dachser (T)"
 
 #. module: delivery_dachser
 #: model:ir.model.fields,field_description:delivery_dachser.field_delivery_carrier__dachser_term
 msgid "Dachser Term"
-msgstr ""
+msgstr "Termine Dachser"
 
 #. module: delivery_dachser
 #: model:ir.model.fields,field_description:delivery_dachser.field_delivery_carrier__dachser_default_packaging_id
 msgid "Default Packaging Type"
-msgstr ""
+msgstr "Tipo di imballaggio predefinito"
 
 #. module: delivery_dachser
 #: model:ir.model.fields,help:delivery_dachser.field_delivery_carrier__dachser_default_packaging_id
 msgid "Default weight, height, width and length for packages"
-msgstr ""
+msgstr "Peso, altezza, larghezza e lunghezza predefiniti per i colli"
 
 #. module: delivery_dachser
 #: model_terms:ir.ui.view,arch_db:delivery_dachser.view_delivery_carrier_form
 msgid "Division Code"
-msgstr ""
+msgstr "Codice divisione"
 
 #. module: delivery_dachser
 #. odoo-python
@@ -608,61 +611,61 @@ msgstr ""
 #, python-format
 msgid ""
 "It is not possible to cancel a shipment because it has already been sent."
-msgstr ""
+msgstr "Non è possibile annullare una spedizione perché è già stata inviata."
 
 #. module: delivery_dachser
 #: model_terms:ir.ui.view,arch_db:delivery_dachser.view_delivery_carrier_form
 msgid "Packaging Code"
-msgstr ""
+msgstr "Codice imballaggio"
 
 #. module: delivery_dachser
 #: model_terms:ir.ui.view,arch_db:delivery_dachser.view_delivery_carrier_form
 msgid "Packaging Type"
-msgstr ""
+msgstr "Tipo di imballaggio"
 
 #. module: delivery_dachser
 #: model_terms:ir.ui.view,arch_db:delivery_dachser.view_delivery_carrier_form
 msgid "Product Code"
-msgstr ""
+msgstr "Codice prodotto"
 
 #. module: delivery_dachser
 #: model:ir.model.fields,field_description:delivery_dachser.field_delivery_carrier__delivery_type
 msgid "Provider"
-msgstr ""
+msgstr "Fornitore"
 
 #. module: delivery_dachser
 #: model_terms:ir.ui.view,arch_db:delivery_dachser.view_delivery_carrier_form
 msgid "Shipping"
-msgstr ""
+msgstr "Spedizione"
 
 #. module: delivery_dachser
 #: model:ir.model,name:delivery_dachser.model_delivery_carrier
 msgid "Shipping Methods"
-msgstr ""
+msgstr "Metodi di spedizione"
 
 #. module: delivery_dachser
 #: model:ir.model,name:delivery_dachser.model_stock_package_type
 msgid "Stock package type"
-msgstr ""
+msgstr "Tipo collo di magazzino"
 
 #. module: delivery_dachser
 #: model_terms:ir.ui.view,arch_db:delivery_dachser.view_delivery_carrier_form
 msgid "Term Code"
-msgstr ""
+msgstr "Codice termine"
 
 #. module: delivery_dachser
 #. odoo-python
 #: code:addons/delivery_dachser/models/dachser_request.py:0
 #, python-format
 msgid "Timeout: the server did not reply within 60s"
-msgstr ""
+msgstr "Timeout: il server non ha risposto entro 60 s"
 
 #. module: delivery_dachser
 #. odoo-python
 #: code:addons/delivery_dachser/models/dachser_request.py:0
 #, python-format
 msgid "Unsupported request type, please only use 'GET', 'POST' or 'DELETE'"
-msgstr ""
+msgstr "Tipo di richiesta non supportato, usare solo 'GET', 'POST' o 'DELETE'"
 
 #. module: delivery_dachser
 #. odoo-python
@@ -672,3 +675,5 @@ msgid ""
 "{error}\n"
 "{result}"
 msgstr ""
+"{error}\n"
+"{result}"
