@@ -46,13 +46,13 @@ class StockPicking(models.Model):
     def _get_ship_by_picking_id(self, done=False):
         """Return the shipments related to the operations, by picking id.
 
-        See ``stock.move._get_ship_id_by_chain``: each picking is a chain
+        See ``stock.move._get_ship_ids_by_chain``: each picking is a chain
         starting from its own moves.
 
         :return: dict {picking id: shipment}, pickings without shipment are
             not in the dict
         """
-        ship_ids = self.env["stock.move"]._get_ship_id_by_chain(
+        ship_ids, __ = self.env["stock.move"]._get_ship_ids_by_chain(
             self._get_move_ids_by_picking_id(), done=done
         )
         prefetch_ids = list(ship_ids.values())
