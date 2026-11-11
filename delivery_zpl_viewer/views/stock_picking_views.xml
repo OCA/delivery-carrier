@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) 2026 Groupe Voltaire
+     @author Emilie SOUTIRAS <emilie.soutiras@groupevoltaire.com>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_picking_form" model="ir.ui.view">
+        <field name="name">stock.picking.form.zpl.label.viewer</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button
+                    name="action_open_zpl_label_viewer"
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-barcode"
+                    groups="stock.group_stock_user"
+                    attrs="{'invisible': [('zpl_label_count', '=', 0)]}"
+                >
+                    <field
+                        name="zpl_label_count"
+                        widget="statinfo"
+                        string="ZPL Labels"
+                    />
+                </button>
+            </div>
+        </field>
+    </record>
+</odoo>
