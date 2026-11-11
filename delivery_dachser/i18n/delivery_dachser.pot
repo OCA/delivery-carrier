@@ -531,13 +531,108 @@ msgid "(ZK) Customs envelope"
 msgstr ""
 
 #. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.dachser_manifest_report_view
+msgid "<br/>(Kg.)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.dachser_manifest_report_view
+msgid "<br/>(Packages)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.dachser_manifest_report_view
+msgid ""
+"<span>\n"
+"                                        <strong>Carrier Signature / Stamp</strong>\n"
+"                                    </span>"
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.dachser_manifest_report_view
+msgid "<span>TOTAL EXPEDITIONS: </span>"
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.dachser_manifest_report_view
+msgid "<strong>Company:</strong>"
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.dachser_manifest_report_view
+msgid "<strong>DACHSER MANIFEST</strong>"
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.dachser_manifest_report_view
+msgid "<strong>Date of printing</strong>"
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.dachser_manifest_report_view
+msgid "<strong>Manifest Date:</strong>"
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.dachser_manifest_report_view
+msgid "<strong>Printed by</strong>"
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.dachser_manifest_report_view
+msgid "<strong>TOTAL</strong>"
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.dachser_manifest_report_view
+msgid "Address"
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.delivery_dachser_manifest_wizard_form
+msgid "Cancel"
+msgstr ""
+
+#. module: delivery_dachser
 #: model:ir.model.fields,field_description:delivery_dachser.field_stock_package_type__package_carrier_type
 msgid "Carrier"
 msgstr ""
 
 #. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.dachser_manifest_report_view
+msgid "City"
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.dachser_manifest_report_view
+msgid "Comments"
+msgstr ""
+
+#. module: delivery_dachser
 #: model_terms:ir.ui.view,arch_db:delivery_dachser.view_delivery_carrier_form
 msgid "Connection"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_dachser_manifest_wizard__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_dachser_manifest_wizard__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.dachser_manifest_report_view
+msgid "Customer"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.actions.act_window,name:delivery_dachser.action_delivery_dachser_manifest_wizard
+#: model:ir.actions.report,name:delivery_dachser.dachser_manifest_report
+#: model:ir.ui.menu,name:delivery_dachser.menu_dachser_manifest
+msgid "DACHSER Manifest"
 msgstr ""
 
 #. module: delivery_dachser
@@ -562,6 +657,13 @@ msgid "Dachser Division"
 msgstr ""
 
 #. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/models/delivery_carrier.py:0
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.delivery_dachser_manifest_wizard_form
+msgid "Dachser Manifest"
+msgstr ""
+
+#. module: delivery_dachser
 #: model:ir.model.fields,field_description:delivery_dachser.field_delivery_carrier__dachser_packaging_f
 msgid "Dachser Packaging (F)"
 msgstr ""
@@ -582,8 +684,28 @@ msgid "Dachser Product (T)"
 msgstr ""
 
 #. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_dachser_manifest_wizard__carrier_id
+msgid "Dachser Service"
+msgstr ""
+
+#. module: delivery_dachser
 #: model:ir.model.fields,field_description:delivery_dachser.field_delivery_carrier__dachser_term
 msgid "Dachser Term"
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.dachser_manifest_report_view
+msgid "Date"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_dachser_manifest_wizard__date_from
+msgid "Date From"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_dachser_manifest_wizard__date_to
+msgid "Date To"
 msgstr ""
 
 #. module: delivery_dachser
@@ -597,8 +719,28 @@ msgid "Default weight, height, width and length for packages"
 msgstr ""
 
 #. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_dachser_manifest_wizard__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: delivery_dachser
 #: model_terms:ir.ui.view,arch_db:delivery_dachser.view_delivery_carrier_form
 msgid "Division Code"
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.delivery_dachser_manifest_wizard_form
+msgid "Get Manifest"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model,name:delivery_dachser.model_dachser_manifest_wizard
+msgid "Get the Dachser Manifest for the given dates"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_dachser_manifest_wizard__id
+msgid "ID"
 msgstr ""
 
 #. module: delivery_dachser
@@ -606,6 +748,40 @@ msgstr ""
 #: code:addons/delivery_dachser/models/delivery_carrier.py:0
 msgid ""
 "It is not possible to cancel a shipment because it has already been sent."
+msgstr ""
+
+#. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/wizard/dachser_manifest_wizard.py:0
+msgid ""
+"It wasn't possible to get the manifest. Maybe there aren't pickings for the "
+"selected date(s)."
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_dachser_manifest_wizard__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_dachser_manifest_wizard__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.view_delivery_carrier_form
+msgid "Manifest"
+msgstr ""
+
+#. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/wizard/dachser_manifest_wizard.py:0
+msgid "No picking has been found with the reference %s"
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.dachser_manifest_report_view
+msgid "Packages"
 msgstr ""
 
 #. module: delivery_dachser
@@ -629,6 +805,11 @@ msgid "Provider"
 msgstr ""
 
 #. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.dachser_manifest_report_view
+msgid "Ref."
+msgstr ""
+
+#. module: delivery_dachser
 #: model_terms:ir.ui.view,arch_db:delivery_dachser.view_delivery_carrier_form
 msgid "Shipping"
 msgstr ""
@@ -636,6 +817,16 @@ msgstr ""
 #. module: delivery_dachser
 #: model:ir.model,name:delivery_dachser.model_delivery_carrier
 msgid "Shipping Methods"
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.dachser_manifest_report_view
+msgid "Shipping Num."
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.dachser_manifest_report_view
+msgid "State"
 msgstr ""
 
 #. module: delivery_dachser
@@ -658,6 +849,16 @@ msgstr ""
 #. odoo-python
 #: code:addons/delivery_dachser/models/dachser_request.py:0
 msgid "Unsupported request type, please only use 'GET', 'POST' or 'DELETE'"
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.dachser_manifest_report_view
+msgid "Weight"
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.dachser_manifest_report_view
+msgid "ZIP Code"
 msgstr ""
 
 #. module: delivery_dachser

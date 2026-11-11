@@ -1,5 +1,7 @@
-# Copyright 2025 Tecnativa - Víctor Martínez
+# Copyright 2025-2026 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+import requests
+
 from odoo.exceptions import UserError
 from odoo.tests import Form
 
@@ -9,6 +11,7 @@ from odoo.addons.base.tests.common import BaseCommon
 class TestDeliveryDachser(BaseCommon):
     @classmethod
     def setUpClass(cls):
+        cls._super_send = requests.Session.send
         super().setUpClass()
         cls.shipping_product = cls.env["product.product"].create(
             {"type": "service", "name": "Test Shipping costs", "list_price": 0.0}
@@ -57,6 +60,11 @@ class TestDeliveryDachser(BaseCommon):
         cls.picking = cls.sale_order.picking_ids
         cls.picking.move_ids.quantity = 20
 
+    @classmethod
+    def _request_handler(cls, s, r, /, **kw):
+        """Don't block external requests."""
+        return cls._super_send(s, r, **kw)
+
     def test_01_dachser_order_rate_shipment(self):
         if not self.carrier_dachser.dachser_api_key:
             self.skipTest("Without Dachser Api Key")
@@ -93,3 +101,17 @@ class TestDeliveryDachser(BaseCommon):
         )
         with self.assertRaisesRegex(UserError, error_msg):
             self.picking.cancel_shipment()
+
+    def test_05_dachser_carrier_manifest(self):
+        if not self.carrier_dachser.dachser_api_key:
+            self.skipTest("Without Dachser Api Key")
+        res = self.carrier_dachser.action_get_manifest()
+        wizard_form = Form(self.env[res["res_model"]].browse(res["res_id"]))
+        wizard_form.date_from = "2026-01-01"
+        wizard = wizard_form.save()
+        error_msg = (
+            "It wasn't possible to get the manifest. Maybe there aren't "
+            "pickings for the selected date(s)."
+        )
+        with self.assertRaisesRegex(UserError, error_msg):
+            wizard.get_manifest()
