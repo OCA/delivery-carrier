@@ -89,11 +89,12 @@ class SaleOrder(models.Model):
     @api.model_create_multi
     def create(self, vals_list):
         # Prevent to refresh delivery in the call to super
-        self = self.with_context(auto_refresh_delivery=True)
-        orders = super().create(vals_list)
+        _self = self.with_context(auto_refresh_delivery=True)
+        orders = super(SaleOrder, _self).create(vals_list)
         for order in orders.with_context(auto_refresh_delivery=False):
             order._auto_refresh_delivery()
-        return orders
+        # Don't leak the skip key to the caller, or its next write won't refresh
+        return orders.with_env(self.env)
 
     def write(self, vals):
         # Prevent to refresh delivery in the call to super
@@ -154,11 +155,11 @@ class SaleOrderLine(models.Model):
 
     @api.model_create_multi
     def create(self, vals_list):
-        self = self.with_context(auto_refresh_delivery=True)
-        lines = super().create(vals_list)
+        _self = self.with_context(auto_refresh_delivery=True)
+        lines = super(SaleOrderLine, _self).create(vals_list)
         for order in lines.order_id:
             order._auto_refresh_delivery()
-        return lines
+        return lines.with_env(self.env)
 
     def write(self, vals):
         self = self.with_context(auto_refresh_delivery=True)
