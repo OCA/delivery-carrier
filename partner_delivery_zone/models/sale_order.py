@@ -8,7 +8,6 @@ class SaleOrder(models.Model):
 
     delivery_zone_id = fields.Many2one(
         comodel_name="partner.delivery.zone",
-        string="Delivery Zone",
         ondelete="restrict",
         compute="_compute_delivery_zone_id",
         store=True,

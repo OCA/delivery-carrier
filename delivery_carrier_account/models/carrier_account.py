@@ -24,4 +24,4 @@ class CarrierAccount(models.Model):
     )
     account = fields.Char(string="Account Number", required=True)
     password = fields.Char(string="Account Password", required=True)
-    company_id = fields.Many2one(comodel_name="res.company", string="Company")
+    company_id = fields.Many2one(comodel_name="res.company")
