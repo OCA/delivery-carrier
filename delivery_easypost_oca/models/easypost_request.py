@@ -8,6 +8,19 @@ from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
 
+END_SHIPPER_ADDRESS_FIELDS = (
+    "name",
+    "company",
+    "street1",
+    "street2",
+    "city",
+    "state",
+    "zip",
+    "country",
+    "phone",
+    "email",
+)
+
 try:
     import easypost
 except ImportError as err:
@@ -61,8 +74,18 @@ class EasypostRequest:
         return self.carrier.easypost_oca_test_api_key
 
     def create_end_shipper(self, address):
-        """Create an end shipper using the provided address."""
+        """Create an end shipper using the provided address.
+
+        ``address`` is either a dict or an EasyPost ``Address`` object, such as
+        ``shipment.from_address``, which is not a mapping.
+        """
         try:
+            if not isinstance(address, dict):
+                address = {
+                    key: value
+                    for key, value in address.to_dict().items()
+                    if key in END_SHIPPER_ADDRESS_FIELDS and value
+                }
             address.setdefault("street2", address["street1"])
             return self.client.EndShipper.create(**address)
         except Exception as e:
