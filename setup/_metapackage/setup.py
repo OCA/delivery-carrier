@@ -30,6 +30,7 @@ setuptools.setup(
         'odoo-addon-delivery_driver_stock_picking_batch>=16.0dev,<16.1dev',
         'odoo-addon-delivery_dropoff_site>=16.0dev,<16.1dev',
         'odoo-addon-delivery_estimated_package_quantity_by_weight>=16.0dev,<16.1dev',
+        'odoo-addon-delivery_fee>=16.0dev,<16.1dev',
         'odoo-addon-delivery_multi_destination>=16.0dev,<16.1dev',
         'odoo-addon-delivery_package_fee>=16.0dev,<16.1dev',
         'odoo-addon-delivery_package_number>=16.0dev,<16.1dev',

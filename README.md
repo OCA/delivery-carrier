@@ -44,6 +44,7 @@ addon | version | maintainers | summary
 [delivery_driver_stock_picking_batch](delivery_driver_stock_picking_batch/) | 16.0.1.1.0 | <a href='https://github.com/EmilioPascual'><img src='https://github.com/EmilioPascual.png' width='32' height='32' style='border-radius:50%;' alt='EmilioPascual'/></a> | Add drivers from delivery in stock picking batch
 [delivery_dropoff_site](delivery_dropoff_site/) | 16.0.1.0.1 |  | Send goods to sites in which customers come pick up package
 [delivery_estimated_package_quantity_by_weight](delivery_estimated_package_quantity_by_weight/) | 16.0.1.0.0 |  | Compute the amount of packages a picking out should have depending on the weight of the products and the limit fixed by the carrier
+[delivery_fee](delivery_fee/) | 16.0.1.0.0 | <a href='https://github.com/chienandalu'><img src='https://github.com/chienandalu.png' width='32' height='32' style='border-radius:50%;' alt='chienandalu'/></a> <a href='https://github.com/rafaelbn'><img src='https://github.com/rafaelbn.png' width='32' height='32' style='border-radius:50%;' alt='rafaelbn'/></a> | Charge extra fees on deliveries
 [delivery_multi_destination](delivery_multi_destination/) | 16.0.2.0.0 |  | Multiple destinations for the same delivery method
 [delivery_package_fee](delivery_package_fee/) | 16.0.1.2.0 |  | Add fees on delivered packages on shipping methods
 [delivery_package_number](delivery_package_number/) | 16.0.3.0.0 |  | Set or compute number of packages for a picking
