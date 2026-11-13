@@ -1,11 +1,51 @@
 <?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 Tecnativa - Víctor Martínez
+     Copyright 2026 Acysos S.L.
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo noupdate="1">
     <record id="stock_package_dachser_default" model="stock.package.type">
         <field name="shipper_package_code">default</field>
+        <field name="dachser_packaging_code">EU</field>
         <field name="name">Dachser Default Package</field>
         <field name="package_carrier_type">dachser</field>
         <field name="height">15</field>
         <field name="width">10</field>
         <field name="packaging_length">20</field>
+    </record>
+
+    <record id="stock_package_type_dachser_eu" model="stock.package.type">
+        <field name="name">Dachser Euro Pallet (EU 120x80)</field>
+        <field name="package_carrier_type">dachser</field>
+        <field name="dachser_packaging_code">EU</field>
+        <field name="shipper_package_code">EU</field>
+        <field name="packaging_length">120</field>
+        <field name="width">80</field>
+        <field name="height">120</field>
+        <field name="base_weight">25.0</field>
+        <field name="max_weight">1000.0</field>
+    </record>
+
+    <record id="stock_package_type_dachser_ep" model="stock.package.type">
+        <field name="name">Dachser Dusseldorf Half Pallet (EP 80x60)</field>
+        <field name="package_carrier_type">dachser</field>
+        <field name="dachser_packaging_code">EP</field>
+        <field name="shipper_package_code">EP</field>
+        <field name="packaging_length">80</field>
+        <field name="width">60</field>
+        <field name="height">100</field>
+        <field name="base_weight">12.0</field>
+        <field name="max_weight">500.0</field>
+    </record>
+
+    <record id="stock_package_type_dachser_kt" model="stock.package.type">
+        <field name="name">Dachser Cardboard Box (KT 60x40x40)</field>
+        <field name="package_carrier_type">dachser</field>
+        <field name="dachser_packaging_code">KT</field>
+        <field name="shipper_package_code">KT</field>
+        <field name="packaging_length">60</field>
+        <field name="width">40</field>
+        <field name="height">40</field>
+        <field name="base_weight">0.8</field>
+        <field name="max_weight">35.0</field>
     </record>
 </odoo>

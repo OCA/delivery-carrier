@@ -1,66 +1,118 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright 2025 Tecnativa - Víctor Martínez
+     Copyright 2026 Acysos S.L.
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
     <record id="view_delivery_carrier_form" model="ir.ui.view">
         <field name="model">delivery.carrier</field>
         <field name="inherit_id" ref="delivery.view_delivery_carrier_form" />
         <field name="arch" type="xml">
-            <xpath expr="//notebook/page[1]" position='before'>
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button
+                    name="action_open_transfer_list_wizard"
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-file-pdf-o"
+                    invisible="delivery_type != 'dachser'"
+                >
+                    <div class="o_stat_info">
+                        <span class="o_stat_text">Daily</span>
+                        <span class="o_stat_text">Manifest</span>
+                    </div>
+                </button>
+            </xpath>
+            <xpath expr="//notebook/page[1]" position="before">
                 <page
                     string="Dachser Configuration"
-                    invisible="delivery_type!='dachser'"
+                    name="dachser_configuration"
+                    invisible="delivery_type != 'dachser'"
                 >
                     <group>
                         <group string="Connection">
                             <field
                                 name="dachser_api_key"
                                 password="True"
-                                required="delivery_type=='dachser'"
+                                required="delivery_type == 'dachser'"
                             />
+                            <field name="dachser_client_id" password="True" />
+                            <field
+                                name="dachser_forwarder_id"
+                                required="delivery_type == 'dachser'"
+                            />
+                            <field name="dachser_consignor_id" />
+                            <field name="dachser_consignor_gln" />
                         </group>
                         <group string="Shipping">
                             <field
                                 name="dachser_division"
-                                required="delivery_type=='dachser'"
+                                required="delivery_type == 'dachser'"
                                 widget="radio"
                                 string="Division Code"
                             />
                             <field
                                 name="dachser_product_t"
-                                required="delivery_type=='dachser' and dachser_division=='T'"
-                                invisible="dachser_division!='T'"
+                                required="delivery_type == 'dachser' and dachser_division == 'T'"
+                                invisible="dachser_division != 'T'"
                                 string="Product Code"
                             />
                             <field
                                 name="dachser_product_f"
-                                required="delivery_type=='dachser' and dachser_division=='F'"
-                                invisible="dachser_division!='F'"
+                                required="delivery_type == 'dachser' and dachser_division == 'F'"
+                                invisible="dachser_division != 'F'"
                                 string="Product Code"
                             />
                             <field
                                 name="dachser_term"
-                                required="delivery_type=='dachser'"
+                                required="delivery_type == 'dachser'"
                                 string="Term Code"
                             />
+                            <field name="dachser_use_order_incoterm" />
                             <field
                                 name="dachser_packaging_t"
-                                required="delivery_type=='dachser' and dachser_division=='T'"
-                                invisible="dachser_division!='T'"
+                                required="delivery_type == 'dachser' and dachser_division == 'T'"
+                                invisible="dachser_division != 'T'"
                                 string="Packaging Code"
                             />
                             <field
                                 name="dachser_packaging_f"
-                                required="delivery_type=='dachser' and dachser_division=='F'"
-                                invisible="dachser_division!='F'"
+                                required="delivery_type == 'dachser' and dachser_division == 'F'"
+                                invisible="dachser_division != 'F'"
                                 string="Packaging Code"
                             />
                             <field
                                 name="dachser_default_packaging_id"
-                                required="delivery_type=='dachser'"
+                                required="delivery_type == 'dachser'"
                                 context="{'default_package_carrier_type': 'dachser'}"
                                 string="Packaging Type"
                             />
+                            <field name="dachser_default_content" />
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Workflow &amp; Labels">
+                            <field name="dachser_operation_mode" />
+                            <field
+                                name="dachser_basket"
+                                invisible="dachser_operation_mode != 'transportorder'"
+                            />
+                            <field name="dachser_label_format" string="Label Format" />
+                            <field name="dachser_label_types" />
+                            <field
+                                name="dachser_font_file_name"
+                                invisible="dachser_label_format != 'Z'"
+                            />
+                            <field name="dachser_order_group" />
+                            <field name="dachser_logistics_type" />
+                            <field name="dachser_save_quotation" />
+                        </group>
+                        <group string="Transport Options">
+                            <field name="dachser_collection_option" />
+                            <field name="dachser_collection_time_from" />
+                            <field name="dachser_collection_time_to" />
+                            <field name="dachser_delivery_tail_lift" />
+                            <field name="dachser_delivery_notice_type" />
+                            <field name="dachser_self_collector" />
+                            <field name="dachser_frost_protected" />
                         </group>
                     </group>
                 </page>
