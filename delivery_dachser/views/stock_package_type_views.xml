@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 Tecnativa - Víctor Martínez
+     Copyright 2026 Acysos S.L.
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="stock_package_type_form_inherit_dachser" model="ir.ui.view">
+        <field name="name">stock.package.type.form.inherit.dachser</field>
+        <field name="model">stock.package.type</field>
+        <field
+            name="inherit_id"
+            ref="stock_delivery.stock_package_type_form_delivery"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='shipper_package_code']" position="before">
+                <field
+                    name="dachser_packaging_code"
+                    invisible="package_carrier_type != 'dachser'"
+                    required="package_carrier_type == 'dachser'"
+                />
+                <field
+                    name="dachser_stackable"
+                    invisible="package_carrier_type != 'dachser'"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_quant_package_form_inherit_dachser" model="ir.ui.view">
+        <field name="name">stock.quant.package.form.inherit.dachser</field>
+        <field name="model">stock.quant.package</field>
+        <field name="inherit_id" ref="stock.view_quant_package_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='package_type_id']" position="after">
+                <field name="dachser_sscc" readonly="1" invisible="not dachser_sscc" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

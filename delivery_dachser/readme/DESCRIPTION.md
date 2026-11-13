@@ -1,1 +1,22 @@
-Dachser integration with Odoo.
+This module integrates Odoo's `delivery` framework (along with `delivery_package_number`, `delivery_state`, and `stock_picking_volume`) with **Dachser REST API v2** (`https://api-gateway.dachser.com/rest/v2`), providing end-to-end European Logistics and Food Logistics automation:
+
+- **Shipment & Picking Submission (`stock.picking`)**:
+  - Automatic or manual submission of transport orders (`POST /rest/v2/transportorders/{basket}`) in `imported`, `labelled`, or `sent` baskets, plus standalone label generation (`POST /rest/v2/labels`) with automatic test-environment fallback.
+  - Seamless synchronization with `delivery_package_number` (`number_of_packages`), `delivery_state` (`delivery_state`, `tracking_state`, `tracking_state_history`, `pod_file`), and `stock_picking_volume` (`volume`).
+  - Automatic assignment of 18-digit **GS1 SSCC** codes to physical Odoo packages (`stock.quant.package`).
+  - Automatic address splitting (`name1/name2`, `street1/street2`, house number extraction) complying with Dachser REST API v2 field length limits.
+- **Label Generation (PDF & Thermal ZPL)**:
+  - Instant attachment of **PDF** or **ZPL** shipping labels in the picking chatter, supporting standard GS1 **EAN** 1D barcodes and **2D DataMatrix (DMC)** labels.
+  - One-click label reprinting (`GET /rest/v2/transportorders/{id}/labels`) and return label generation (`dachser_get_return_label`).
+- **Live Tracking, Event History & POD**:
+  - Direct link to **Dachser eLogistics ShipmentPointer**.
+  - Live shipment status (`GET /rest/v2/shipmentstatus`) and full timeline history (`GET /rest/v2/shipmenthistory`).
+  - Signed **Proof of Delivery (POD PDF)** download (`GET /rest/v2/pods`) attached automatically to the picking and stored in `delivery_state`'s `pod_file`.
+  - Scheduled cron job (`ir.cron`) running every 2 hours to synchronize tracking states, download PODs, and audit invoiced freight costs.
+- **Daily Loading Manifest (Transfer List)**:
+  - Interactive wizard to download the daily **Transfer List PDF** (`GET /rest/v2/transferlists`) for the Dachser driver.
+- **Hybrid Freight Tariff Engine & Invoice Cost Auditing**:
+  - **Live Quotation API** (`POST /rest/v2/quotations`) + **Local Zone/Weight/Pallet Tariff Rules** (`dachser.tariff.rule`) with automatic fallback.
+  - **Chargeable Weight Calculation** comparing Gross Weight vs. Volumetric Weight (`m³ × 333 kg/m³`) vs. Loading Meters (`LDM × 1850 kg/LDM`).
+  - **Internal Cost Tracking** on `sale.order` and `stock.picking` even when shipping is free for the customer.
+  - **Actual Invoiced Cost Auditing** (`GET /rest/v2/freightcosts`) comparing estimated vs. invoiced freight costs (`dachser_cost_difference`).

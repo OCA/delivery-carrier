@@ -1,11 +1,144 @@
 <?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 Tecnativa - Víctor Martínez
+     Copyright 2026 Acysos S.L.
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo noupdate="1">
+    <!-- Default OCA Dachser Package Type (preserved for backward compatibility) -->
     <record id="stock_package_dachser_default" model="stock.package.type">
         <field name="shipper_package_code">default</field>
+        <field name="dachser_packaging_code">EU</field>
         <field name="name">Dachser Default Package</field>
         <field name="package_carrier_type">dachser</field>
         <field name="height">15</field>
         <field name="width">10</field>
         <field name="packaging_length">20</field>
+    </record>
+
+    <!-- Standard Dachser Package & Pallet Types -->
+    <record id="stock_package_type_dachser_eu" model="stock.package.type">
+        <field name="name">Dachser Euro Pallet (EU 120x80)</field>
+        <field name="package_carrier_type">dachser</field>
+        <field name="dachser_packaging_code">EU</field>
+        <field name="shipper_package_code">EU</field>
+        <field name="packaging_length">120</field>
+        <field name="width">80</field>
+        <field name="height">120</field>
+        <field name="base_weight">25.0</field>
+        <field name="max_weight">1000.0</field>
+    </record>
+
+    <record id="stock_package_type_dachser_ep" model="stock.package.type">
+        <field name="name">Dachser Dusseldorf Half Pallet (EP 80x60)</field>
+        <field name="package_carrier_type">dachser</field>
+        <field name="dachser_packaging_code">EP</field>
+        <field name="shipper_package_code">EP</field>
+        <field name="packaging_length">80</field>
+        <field name="width">60</field>
+        <field name="height">100</field>
+        <field name="base_weight">12.0</field>
+        <field name="max_weight">500.0</field>
+    </record>
+
+    <record id="stock_package_type_dachser_kt" model="stock.package.type">
+        <field name="name">Dachser Cardboard Box (KT 60x40x40)</field>
+        <field name="package_carrier_type">dachser</field>
+        <field name="dachser_packaging_code">KT</field>
+        <field name="shipper_package_code">KT</field>
+        <field name="packaging_length">60</field>
+        <field name="width">40</field>
+        <field name="height">40</field>
+        <field name="base_weight">0.8</field>
+        <field name="max_weight">35.0</field>
+    </record>
+
+    <!-- Service Product for Dachser Delivery Method -->
+    <record id="product_product_delivery_dachser" model="product.product">
+        <field name="name">Dachser Freight (targoflex)</field>
+        <field name="default_code">DELIVERY_DACHSER</field>
+        <field name="type">service</field>
+        <field name="categ_id" ref="delivery.product_category_deliveries" />
+        <field name="sale_ok" eval="False" />
+        <field name="purchase_ok" eval="True" />
+        <field name="list_price">0.0</field>
+    </record>
+
+    <!-- Preconfigured Dachser Delivery Method -->
+    <record id="delivery_carrier_dachser_main" model="delivery.carrier">
+        <field name="name">Dachser European Logistics (targoflex)</field>
+        <field name="delivery_type">dachser</field>
+        <field name="integration_level">rate_and_ship</field>
+        <field name="product_id" ref="product_product_delivery_dachser" />
+        <field name="prod_environment" eval="False" />
+        <field name="dachser_api_url">https://api-gateway.dachser.com/rest/v2</field>
+        <field name="dachser_forwarder_id">193</field>
+        <field name="dachser_division">T</field>
+        <field name="dachser_product_t">Y</field>
+        <field name="dachser_product">Y</field>
+        <field name="dachser_term">031</field>
+        <field name="dachser_basket">labelled</field>
+        <field name="dachser_packaging_t">EU</field>
+        <field
+            name="dachser_default_packaging_id"
+            ref="stock_package_type_dachser_eu"
+        />
+        <field
+            name="dachser_default_package_type_id"
+            ref="stock_package_type_dachser_eu"
+        />
+        <field name="dachser_default_packaging_code">EU</field>
+        <field name="dachser_rate_mode">api_with_fallback</field>
+    </record>
+
+    <!-- Sample Tariff Rules (Mainland Spain, Heavy Pallet, Europe) -->
+    <record id="dachser_tariff_rule_es_peninsula_light" model="dachser.tariff.rule">
+        <field name="name">Mainland Spain (Up to 100 kg)</field>
+        <field name="sequence">10</field>
+        <field name="carrier_id" ref="delivery_carrier_dachser_main" />
+        <field name="country_ids" eval="[(4, ref('base.es'))]" />
+        <field name="max_weight">100.0</field>
+        <field name="rate_type">per_excess_kg</field>
+        <field name="base_price">18.50</field>
+        <field name="included_weight">20.0</field>
+        <field name="price_per_kg">0.28</field>
+        <field name="min_charge">18.50</field>
+        <field name="fuel_surcharge_pct">4.5</field>
+    </record>
+
+    <record id="dachser_tariff_rule_es_peninsula_heavy" model="dachser.tariff.rule">
+        <field name="name">Mainland Spain Pallet Freight (&gt; 100 kg)</field>
+        <field name="sequence">20</field>
+        <field name="carrier_id" ref="delivery_carrier_dachser_main" />
+        <field name="country_ids" eval="[(4, ref('base.es'))]" />
+        <field name="min_weight">100.01</field>
+        <field name="rate_type">per_100kg</field>
+        <field name="base_price">25.00</field>
+        <field name="price_per_kg">14.50</field>
+        <field name="min_charge">42.00</field>
+        <field name="fuel_surcharge_pct">4.5</field>
+    </record>
+
+    <record id="dachser_tariff_rule_international_fallback" model="dachser.tariff.rule">
+        <field name="name">Europe / International General</field>
+        <field name="sequence">90</field>
+        <field name="carrier_id" ref="delivery_carrier_dachser_main" />
+        <field name="rate_type">per_excess_kg</field>
+        <field name="base_price">65.00</field>
+        <field name="included_weight">50.0</field>
+        <field name="price_per_kg">0.65</field>
+        <field name="min_charge">65.00</field>
+        <field name="fuel_surcharge_pct">5.0</field>
+    </record>
+
+    <!-- Scheduled Cron for Automatic Dachser Tracking, POD, and Invoiced Freight Costs -->
+    <record id="ir_cron_dachser_update_shipments" model="ir.cron">
+        <field
+            name="name"
+        >Dachser: Update Tracking, POD, and Invoiced Freight Costs</field>
+        <field name="model_id" ref="stock.model_stock_picking" />
+        <field name="state">code</field>
+        <field name="code">model._cron_dachser_update_shipments()</field>
+        <field name="interval_number">2</field>
+        <field name="interval_type">hours</field>
+        <field name="active" eval="True" />
     </record>
 </odoo>
