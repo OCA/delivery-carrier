@@ -4,14 +4,19 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0\n"
+"Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-28 08:39+0000\n"
+"PO-Revision-Date: 2025-10-28 09:40+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: 
+"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: \n"
+"X-Generator: Poedit 3.0.1\n"
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_term__011
@@ -60,8 +65,7 @@ msgstr ""
 
 #. module: delivery_dachser
 #: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_term__995
-msgid ""
-"(995) Service goods, insured; only by arrangement with the consolidator"
+msgid "(995) Service goods, insured; only by arrangement with the consolidator"
 msgstr ""
 
 #. module: delivery_dachser
@@ -582,11 +586,6 @@ msgid "Dachser Product (T)"
 msgstr ""
 
 #. module: delivery_dachser
-#: model:ir.model.fields,field_description:delivery_dachser.field_delivery_carrier__dachser_term
-msgid "Dachser Term"
-msgstr ""
-
-#. module: delivery_dachser
 #: model:ir.model.fields,field_description:delivery_dachser.field_delivery_carrier__dachser_default_packaging_id
 msgid "Default Packaging Type"
 msgstr ""
@@ -604,8 +603,8 @@ msgstr ""
 #. module: delivery_dachser
 #. odoo-python
 #: code:addons/delivery_dachser/models/delivery_carrier.py:0
-msgid ""
-"It is not possible to cancel a shipment because it has already been sent."
+#, python-format
+msgid "It is not possible to cancel a shipment because it has already been sent."
 msgstr ""
 
 #. module: delivery_dachser
@@ -651,19 +650,1887 @@ msgstr ""
 #. module: delivery_dachser
 #. odoo-python
 #: code:addons/delivery_dachser/models/dachser_request.py:0
+#, python-format
 msgid "Timeout: the server did not reply within 60s"
 msgstr ""
 
 #. module: delivery_dachser
 #. odoo-python
 #: code:addons/delivery_dachser/models/dachser_request.py:0
+#, python-format
 msgid "Unsupported request type, please only use 'GET', 'POST' or 'DELETE'"
 msgstr ""
 
 #. module: delivery_dachser
 #. odoo-python
 #: code:addons/delivery_dachser/models/dachser_request.py:0
+#, python-format
 msgid ""
 "{error}\n"
 "{result}"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_delivery_carrier__dachser_rate_mode
+msgid ""
+"- API Quotation with Local Tariff Table Fallback: Queries Dachser's /rest/v2/quotations endpoint in real time and, if no online rate is available for that destination or token, computes the rate using the local zone/weight/pallet tariff table.\n"
+"- Online API Quotation Only: Retrieves the quotation exclusively from Dachser's server.\n"
+"- Local Tariff Table Only: Computes immediately using the rules configured in Odoo without network requests."
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_delivery_carrier__dachser_operation_mode
+msgid ""
+"- Full Transport Order (/rest/v2/transportorders): Creates the shipment in eLogistics/TMS and returns labels and SSCCs.\n"
+"- SSCC Labels + LDR Routing Only (/rest/v2/labels): Generates PDF/ZPL labels, SSCC license plates, and LDR routing code without recording a TMS order (compatible with immediate 10-day self-service test tokens)."
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_delivery_carrier__dachser_basket
+msgid ""
+"- imported: Creates an editable draft in eLogistics without label.\n"
+"- labelled: Creates the order in eLogistics and returns PDF/ZPL labels and SSCC codes (recommended).\n"
+"- sent: Creates the order, returns labels, and transmits it directly to Dachser TMS (not editable or cancellable via API)."
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_term__021
+msgid "021 - Ex Works / Freight Collect (EXW)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_term__023
+msgid "023 - Free Carrier (FCA)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_term__026
+msgid "026 - Freight Paid to Border"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_delivery_carrier__dachser_term
+msgid "031 = Free domicile (Freight Prepaid), 021 = Ex Works (Freight Collect), etc."
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_term__036
+msgid "036 - Carriage and Insurance Paid (CPT / CIP)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_term__051
+msgid "051 - Free Border / DDU"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_term__091
+msgid "091 - DDP (Delivered Duty Paid)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_delivery_carrier__dachser_consignor_gln
+msgid "13-digit Global Location Number of your company if used in Dachser."
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_stock_quant_package__dachser_sscc
+msgid "18-digit SSCC (NVE) license plate code assigned by Dachser to this package/pallet."
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_delivery_carrier__dachser_forwarder_id
+msgid "3-digit code of the receiving Dachser branch (e.g. '193', '005', '250')."
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_delivery_carrier__dachser_consignor_id
+msgid "8-digit customer number assigned by Dachser to your company."
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_res_partner__dachser_partner_id
+msgid "8-digit customer/consignee identifier assigned by Dachser (optional)."
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_product__a
+msgid "A - targo on-site / classicline (Point-of-Use Delivery)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_delivery_notice_type__ai
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__res_partner__dachser_delivery_notice_type__ai
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__stock_picking__dachser_delivery_notice_type__ai
+msgid "AI - Electronic Delivery Notice"
+msgstr ""
+
+#. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/models/delivery_carrier.py:1137
+msgid "API Notices"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_rate_mode__api_with_fallback
+msgid "API Quotation with Local Tariff Table Fallback (Recommended)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.view_delivery_carrier_form_inherit_dachser
+msgid "API v2 Credentials & Connection"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_delivery_notice_type__as
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__res_partner__dachser_delivery_notice_type__as
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__stock_picking__dachser_delivery_notice_type__as
+msgid "AS - Shipper Notice by Phone / SMS / Email"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_delivery_notice_type__av
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__res_partner__dachser_delivery_notice_type__av
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__stock_picking__dachser_delivery_notice_type__av
+msgid "AV - Scheduled Delivery Appointment"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_dachser_tariff_rule__active
+msgid "Active"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_stock_picking__dachser_invoiced_cost
+msgid "Actual net freight cost invoiced by Dachser retrieved via /rest/v2/freightcosts."
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_delivery_carrier__dachser_client_id
+msgid "Additional Client ID (Optional)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_default_packaging_code__bd
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__stock_package_type__dachser_packaging_code__bd
+msgid "BD - Bundle"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__dachser_tariff_rule__rate_type__per_100kg
+msgid "Base + Price per 100 Kg Fraction"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__dachser_tariff_rule__rate_type__per_excess_kg
+msgid "Base + Price per Excess Kg (above Included Kg)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__dachser_tariff_rule__rate_type__per_pallet
+msgid "Base + Price per Pallet / Package"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__dachser_tariff_rule__rate_type__per_kg
+msgid "Base + Price per Total Kg"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_dachser_tariff_rule__base_price
+msgid "Base Price (€)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_product__c
+msgid "C - targo on-site fix"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_collection_option__cb
+msgid "CB - Collection Booking"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_collection_option__cn
+msgid "CN - Collection Notification"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_default_packaging_code__co
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__stock_package_type__dachser_packaging_code__co
+msgid "CO - Container"
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.view_picking_form_inherit_dachser
+msgid "Calculate / Update Estimated Rate"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_dachser_tariff_rule__rate_type
+msgid "Calculation Mode"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__stock_picking__dachser_order_state__cancelled
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__stock_picking__dachser_shipment_state__cancelled
+msgid "Cancelled"
+msgstr ""
+
+#. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/models/delivery_carrier.py:1562
+msgid "Chargeable Weight"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_choose_delivery_carrier__dachser_chargeable_weight
+msgid "Chargeable Weight (kg)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.view_picking_form_inherit_dachser
+msgid "Check LDR Route"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_res_partner__dachser_tail_lift
+msgid "Check if the consignee requires a truck with tail-lift for Dachser deliveries."
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.view_dachser_transfer_list_wizard_form
+msgid "Close"
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.view_delivery_carrier_form_inherit_dachser
+msgid "Collection & Delivery Options"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_delivery_carrier__dachser_collection_option
+msgid "Collection Option"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_delivery_carrier__dachser_collection_time_from
+msgid "Collection Time From (HH:MM)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_delivery_carrier__dachser_collection_time_to
+msgid "Collection Time To (HH:MM)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_dachser_tariff_rule__zip_prefixes
+msgid "Comma-separated postal code prefixes (e.g. '07, 35, 38'). Leave empty for all."
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_stock_picking__dachser_fixed_delivery_date
+msgid "Committed delivery date (applicable to targofix / fixed-date services)."
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.view_picking_form_inherit_dachser
+msgid "Confirm Order to Dachser TMS"
+msgstr ""
+
+#. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/models/dachser_request.py:132
+#, python-format
+msgid "Connection error with Dachser API (%(url)s): %(error)s"
+msgstr ""
+
+#. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/models/delivery_carrier.py:960
+#, python-format
+msgid "Consignee %s must have Street, City, Postal Code, and Country configured."
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_delivery_carrier__dachser_self_collector
+msgid "Consignee Self-Collector at Branch"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_delivery_carrier__dachser_consignor_gln
+msgid "Consignor GLN (Optional)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_stock_picking__dachser_cost_difference
+msgid "Cost Deviation (€)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_dachser_tariff_rule__country_ids
+msgid "Countries"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_dachser_tariff_rule__currency_id
+msgid "Currency"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_delivery_carrier__dachser_term_custom
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_term__custom
+msgid "Custom Delivery Term Code"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_delivery_carrier__dachser_product_custom
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_product__custom
+msgid "Custom Product Code"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_logistics_type__d
+msgid "D - Distribution (Outbound)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_label_types__dmc
+msgid "DMC (2D DataMatrix Code)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_delivery_carrier__dachser_api_url
+msgid "Dachser API Base URL"
+msgstr ""
+
+#. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/models/dachser_request.py:165
+#, python-format
+msgid ""
+"Dachser API Error:\n"
+"%s"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_delivery_carrier__dachser_api_url
+msgid "Dachser API Gateway v2 base URL (default: https://api-gateway.dachser.com/rest/v2)."
+msgstr ""
+
+#. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/models/delivery_carrier.py:764
+#, python-format
+msgid "Dachser API Quotation #%(qid)s: %(amt).2f %(curr)s"
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.view_delivery_carrier_form_inherit_dachser
+msgid "Dachser API v2 Configuration"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_delivery_carrier__dachser_forwarder_id
+msgid "Dachser Branch ID (Forwarder ID)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:stock.package.type,name:delivery_dachser.stock_package_type_dachser_kt
+msgid "Dachser Cardboard Box (KT 60x40x40)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_sale_order__dachser_chargeable_weight
+#: model:ir.model.fields,field_description:delivery_dachser.field_stock_picking__dachser_chargeable_weight
+msgid "Dachser Chargeable Weight (kg)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_stock_picking__dachser_consignment_id
+msgid "Dachser Consignment Number"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_delivery_carrier__dachser_consignor_id
+msgid "Dachser Consignor Customer ID"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model,name:delivery_dachser.model_dachser_transfer_list_wizard
+msgid "Dachser Daily Transfer List Download Wizard"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_dachser_transfer_list_wizard__carrier_id
+msgid "Dachser Delivery Method"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_res_partner__dachser_delivery_notice_type
+msgid "Dachser Delivery Notice"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:stock.package.type,name:delivery_dachser.stock_package_type_dachser_ep
+msgid "Dachser Dusseldorfer Half Pallet (EP 80x60)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:stock.package.type,name:delivery_dachser.stock_package_type_dachser_eu
+msgid "Dachser Europallet (EU 120x80)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:delivery.carrier,name:delivery_dachser.delivery_carrier_dachser_main
+msgid "Dachser European Logistics (targoflex)"
+msgstr ""
+
+#. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/models/delivery_carrier.py:1515
+#, python-format
+msgid "Dachser Invoice #%(inv)s (%(dt)s): %(amt).2f %(curr)s | Chargeable weight: %(chg).2f kg"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_stock_picking__dachser_invoice_date
+msgid "Dachser Invoice Date"
+msgstr ""
+
+#. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/models/delivery_carrier.py:1559
+#: model:ir.model.fields,field_description:delivery_dachser.field_stock_picking__dachser_invoice_number
+msgid "Dachser Invoice Number"
+msgstr ""
+
+#. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/models/delivery_carrier.py:1552
+msgid "Dachser Invoiced Freight Costs updated:"
+msgstr ""
+
+#. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/models/delivery_carrier.py:1133
+msgid "Dachser LDR Route"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_stock_picking__dachser_ldr_routing
+msgid "Dachser LDR Route Code"
+msgstr ""
+
+#. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/models/delivery_carrier.py:1601
+#, python-format
+msgid "Dachser LDR routing verified: %s"
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.view_picking_form_inherit_dachser
+msgid "Dachser Label"
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.view_partner_form_inherit_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.view_picking_form_inherit_dachser
+msgid "Dachser Logistics"
+msgstr ""
+
+#. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/models/delivery_carrier.py:1131
+#: model:ir.model.fields,field_description:delivery_dachser.field_stock_picking__dachser_transport_order_id
+msgid "Dachser Order ID"
+msgstr ""
+
+#. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/models/delivery_carrier.py:1124
+#: model:ir.model.fields,field_description:delivery_dachser.field_stock_picking__dachser_order_state
+msgid "Dachser Order State"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_stock_picking__dachser_packages_qty
+msgid "Dachser Packages / Pallets Qty"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_stock_package_type__dachser_packaging_code
+#: model:ir.model.fields,field_description:delivery_dachser.field_stock_picking__dachser_package_type_id
+msgid "Dachser Packaging Type"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_res_partner__dachser_partner_id
+msgid "Dachser Partner ID"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_delivery_carrier__dachser_product
+msgid "Dachser Product / Service"
+msgstr ""
+
+#. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/models/delivery_carrier.py:833
+msgid "Dachser Quotation API did not return an immediate price for this shipment (HTTP 202 / no automatic price)."
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.choose_delivery_carrier_view_form_inherit_dachser
+msgid "Dachser Quotation Breakdown"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_sale_order__dachser_quotation_id
+msgid "Dachser Quotation ID"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_stock_quant_package__dachser_sscc
+msgid "Dachser SSCC Code"
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.view_picking_form_inherit_dachser
+msgid "Dachser Shipment & Tracking"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_stock_picking__dachser_cost_breakdown
+msgid "Dachser Tariff / Cost Breakdown"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_choose_delivery_carrier__dachser_rate_breakdown
+#: model:ir.model.fields,field_description:delivery_dachser.field_sale_order__dachser_rate_breakdown
+msgid "Dachser Tariff Breakdown"
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.view_delivery_carrier_form_inherit_dachser
+msgid "Dachser Tariff Rules"
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.view_delivery_carrier_form_inherit_dachser
+msgid "Dachser Tariffs & Costs"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_stock_picking__dachser_tracking_history
+msgid "Dachser Tracking History"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_stock_picking__dachser_tracking_url
+msgid "Dachser Tracking Link"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_stock_picking__dachser_shipment_state
+msgid "Dachser Tracking State"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:product.template,name:delivery_dachser.product_product_delivery_dachser_product_template
+msgid "Dachser Transport (targoflex)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model,name:delivery_dachser.model_dachser_tariff_rule
+msgid "Dachser Transport Tariff Rule by Zone / Weight / Pallet"
+msgstr ""
+
+#. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/wizard/dachser_transfer_list_wizard.py:48
+#, python-format
+msgid "Dachser did not return any PDF transfer list for date %s."
+msgstr ""
+
+#. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/models/delivery_carrier.py:1493
+#, python-format
+msgid "Dachser does not have invoiced freight costs yet for reference '%s'."
+msgstr ""
+
+#. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/models/delivery_carrier.py:1367
+#, python-format
+msgid "Dachser has not returned any tracking events yet for reference '%s'."
+msgstr ""
+
+#. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/models/delivery_carrier.py:1333
+msgid "Dachser label downloaded and attached to picking."
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_delivery_carrier__dachser_product
+msgid "Dachser product code according to division (Y=targoflex, Z=targospeed, V=targospeed 10, E=targospeed 12, X=targofix, A=classicline, N=targonets, etc.)."
+msgstr ""
+
+#. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/models/delivery_carrier.py:1238
+#, python-format
+msgid "Dachser return label generated (SSCC: %s)."
+msgstr ""
+
+#. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/models/delivery_carrier.py:1449
+msgid "Dachser returned the POD record without an attached PDF document."
+msgstr ""
+
+#. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/models/delivery_carrier.py:1194
+msgid "Dachser shipment cancelled and unlinked from picking."
+msgstr ""
+
+#. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/models/delivery_carrier.py:1176
+#, python-format
+msgid "Dachser transport order #%s has already been transmitted to the TMS (state 'sent') and cannot be deleted via API. Please contact your Dachser branch."
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.actions.server,name:delivery_dachser.ir_cron_dachser_update_shipments_ir_actions_server
+#: model:ir.cron,cron_name:delivery_dachser.ir_cron_dachser_update_shipments
+msgid "Dachser: Update Tracking, POD, and Invoiced Freight Costs"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_delivery_carrier__dachser_default_packaging_code
+msgid "Default Dachser Packaging Code"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_delivery_carrier__dachser_default_packaging_code
+msgid "Default Dachser packaging code (EU = Euro Pallet, EP = Half Pallet, KT = Cardboard Box, PA = Pallet)."
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_delivery_carrier__dachser_delivery_notice_type
+msgid "Default Delivery Notice"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_delivery_carrier__dachser_notice_surcharge
+msgid "Default Delivery Notice Surcharge (€)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_delivery_carrier__dachser_fuel_surcharge_pct
+#, python-format
+msgid "Default Fuel Surcharge (%)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_delivery_carrier__dachser_default_content
+msgid "Default Goods Description"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_delivery_carrier__dachser_default_package_type_id
+msgid "Default Package / Pallet Type"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_delivery_carrier__dachser_delivery_tail_lift
+msgid "Default Tail-Lift Delivery"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_delivery_carrier__dachser_tail_lift_surcharge
+msgid "Default Tail-Lift Surcharge (€)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_delivery_carrier__dachser_delivery_notice_type
+msgid "Default delivery pre-notice if the consignee partner has none configured."
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_res_partner__dachser_delivery_notice_type
+msgid "Default delivery pre-notice preference for this consignee (by phone or electronic)."
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_delivery_carrier__dachser_notice_surcharge
+msgid "Default fixed surcharge when the shipment includes phone/electronic pre-notice and the local rule does not define another amount."
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_delivery_carrier__dachser_tail_lift_surcharge
+msgid "Default fixed surcharge when the shipment requires a tail-lift and the local rule does not define another amount."
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.view_picking_form_inherit_dachser
+msgid "Default from shipping method"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_delivery_carrier__dachser_fuel_surcharge_pct
+msgid "Default fuel surcharge percentage (BAF/Diesel) applied in the local tariff table when a rule does not specify its own."
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_delivery_carrier__dachser_default_package_type_id
+msgid "Default package/pallet type when the picking or sale order has no detailed packages."
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__stock_picking__dachser_shipment_state__delivered
+msgid "Delivered"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_stock_picking__dachser_driver_notes
+msgid "Delivery / Driver Instructions"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__stock_picking__dachser_shipment_state__incidence
+msgid "Delivery Exception"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_dachser_tariff_rule__carrier_id
+msgid "Delivery Method"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_stock_picking__dachser_delivery_notice_type
+msgid "Delivery Notice"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_dachser_tariff_rule__notice_surcharge
+msgid "Delivery Notice Surcharge (€)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_delivery_carrier__dachser_term
+msgid "Delivery Term (Frankatur)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_stock_picking__dachser_cost_difference
+msgid "Difference between the actual amount invoiced by Dachser and the initial estimated cost."
+msgstr ""
+
+#. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/models/delivery_carrier.py:1609
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.view_dachser_transfer_list_wizard_form
+msgid "Download Daily Dachser Manifest (Transfer List)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.view_picking_form_inherit_dachser
+msgid "Download POD"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__stock_picking__dachser_order_state__imported
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__stock_picking__dachser_shipment_state__imported
+msgid "Draft in eLogistics (Imported)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_product__e
+msgid "E - targospeed plus / 12 (Guaranteed Express)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_label_types__ean
+msgid "EAN (Standard GS1-128 Barcode)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_label_types__ean,dmc
+msgid "EAN + DMC (Merged)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_delivery_carrier__dachser_label_types
+msgid "EAN = Standard GS1-128 barcode; DMC = 2D DataMatrix; EAN,DMC = Both merged."
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_delivery_notice_type__em
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__res_partner__dachser_delivery_notice_type__em
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__stock_picking__dachser_delivery_notice_type__em
+msgid "EM - Email Delivery Notice"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_default_packaging_code__ep
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__stock_package_type__dachser_packaging_code__ep
+msgid "EP - Dusseldorf Half Pallet (80 x 60 cm)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_default_packaging_code__eu
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__stock_package_type__dachser_packaging_code__eu
+msgid "EU - Euro Pallet (120 x 80 cm)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_stock_picking__dachser_estimated_cost
+msgid "Estimated Dachser Cost (€)"
+msgstr ""
+
+#. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/models/delivery_carrier.py:1135
+msgid "Estimated Freight Cost"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_sale_order__dachser_estimated_cost
+msgid "Estimated Internal Dachser Cost (€)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_stock_picking__dachser_estimated_cost
+msgid "Estimated shipping cost calculated via Dachser Quotation API or Local Tariff Table."
+msgstr ""
+
+#. module: delivery_dachser
+#: model:dachser.tariff.rule,name:delivery_dachser.dachser_tariff_rule_international_fallback
+msgid "Europe / International General"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_default_packaging_code__fa
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__stock_package_type__dachser_packaging_code__fa
+msgid "FA - Barrel / Drum"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_delivery_carrier__dachser_test_fallback_label_only
+msgid "Fallback to /labels in Test Mode"
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.view_picking_form_inherit_dachser
+msgid "Fetch Actual Invoiced Costs"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_dachser_transfer_list_wizard__pdf_filename
+msgid "File Name"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_dachser_transfer_list_wizard__order_group
+msgid "Filter the daily manifest by a specific order group in eLogistics."
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__dachser_tariff_rule__rate_type__fixed
+msgid "Fixed Bracket Price"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_stock_picking__dachser_fixed_delivery_date
+msgid "Fixed Delivery Date (targofix)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_delivery_carrier__dachser_font_file_name
+msgid "Font file installed on the Zebra printer (default ARIALR.FNT). Only applicable to ZPL format."
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_delivery_carrier__dachser_free_for_customer
+msgid "Free Shipping for Customer (Keep Internal Cost)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_stock_picking__dachser_driver_notes
+msgid "Free text instruction sent to Dachser with qualifier code ZU."
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.view_picking_form_inherit_dachser
+msgid "Freight Rate Control & Billing Audit"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_delivery_carrier__dachser_frost_protected
+msgid "Frost Protected / Temperature Controlled"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_dachser_tariff_rule__fuel_surcharge_pct
+#, python-format
+msgid "Fuel Surcharge (%)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_operation_mode__transportorder
+msgid "Full Transport Order (/rest/v2/transportorders)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_default_packaging_code__gb
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__stock_package_type__dachser_packaging_code__gb
+msgid "GB - Mesh Box Pallet (Gitterbox)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_res_partner__dachser_gln
+msgid "GLN Code (Dachser)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_delivery_carrier__dachser_default_content
+msgid "General content description sent to Dachser (max. 20 characters per API specification)."
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_res_partner__dachser_gln
+msgid "Global Location Number (13 digits) for EDI/API identification in Dachser."
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_stock_picking__dachser_content_override
+msgid "Goods Description (Dachser)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_stock_picking__dachser_content_override
+msgid "Goods description (max. 20 characters). If left empty, uses the delivery method default."
+msgstr ""
+
+#. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/models/delivery_carrier.py:1128
+msgid "Gross / Chargeable Weight"
+msgstr ""
+
+#. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/models/delivery_carrier.py:805
+#: code:addons/delivery_dachser/models/stock_picking.py:346
+#, python-format
+msgid "Gross weight: %(gross).2f kg | Vol: %(vol).3f m³ | Chargeable weight: %(chg).2f kg | Packages: %(pkgs)d"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_default_packaging_code__hp
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__stock_package_type__dachser_packaging_code__hp
+msgid "HP - Half Pallet"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_default_packaging_code__ip
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__stock_package_type__dachser_packaging_code__ip
+msgid "IP - Industrial Pallet (120 x 100 cm)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_dachser_tariff_rule__notice_surcharge
+msgid "If 0, uses the default delivery notice surcharge configured on the delivery method."
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_dachser_tariff_rule__fuel_surcharge_pct
+msgid "If 0, uses the default fuel surcharge percentage configured on the delivery method."
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_dachser_tariff_rule__tail_lift_surcharge
+msgid "If 0, uses the default tail-lift surcharge configured on the delivery method."
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_delivery_carrier__dachser_save_quotation
+msgid "If checked, rate inquiries (/rest/v2/quotations) are persisted in Dachser's eLogistics portal."
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_delivery_carrier__dachser_test_fallback_label_only
+msgid "If enabled in Test Environment and the 10-day self-service token is not yet activated for /transportorders, automatically falls back to /rest/v2/labels to generate real labels and SSCCs."
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_delivery_carrier__dachser_free_for_customer
+msgid "If enabled, the customer is charged 0.00 € on the sale order line, while Odoo still computes and stores the real Dachser cost on the sale order and picking for profitability analysis and carrier invoice auditing."
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_dachser_tariff_rule__country_ids
+msgid "If left empty, applies to any country allowed by the carrier."
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_dachser_tariff_rule__state_ids
+msgid "If left empty, applies to any state/province in the country."
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_delivery_carrier__dachser_use_order_incoterm
+msgid "If the sale order or picking has an Incoterm (EXW, FCA, CPT, DAP, DDP...), automatically maps it to the corresponding Dachser Delivery Term code."
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_basket__imported
+msgid "Imported (Draft in eLogistics without label)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_dachser_tariff_rule__included_weight
+msgid "In 'Excess Kg' mode, kilograms already included in the base price."
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__stock_picking__dachser_shipment_state__in_transit
+msgid "In Transit"
+msgstr ""
+
+#. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/models/dachser_tariff_rule.py:135
+#, python-format
+msgid "In rule '%s', Minimum Pallets/Packages cannot be greater than Maximum."
+msgstr ""
+
+#. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/models/dachser_tariff_rule.py:130
+#, python-format
+msgid "In rule '%s', Minimum Weight cannot be greater than Maximum Weight."
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_dachser_tariff_rule__included_weight
+msgid "Included Kg in Base"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_stock_package_type__dachser_stackable
+msgid "Indicates whether this packaging type allows stacking goods on top."
+msgstr ""
+
+#. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/models/delivery_carrier.py:1556
+msgid "Initial Estimated Cost"
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.view_picking_form_inherit_dachser
+msgid "Instructions for driver (code ZU)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_choose_delivery_carrier__dachser_estimated_cost
+msgid "Internal Dachser Cost (€)"
+msgstr ""
+
+#. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/models/delivery_carrier.py:1553
+msgid "Invoiced Amount"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_stock_picking__dachser_invoiced_cost
+msgid "Invoiced Dachser Cost (€)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_choose_delivery_carrier__is_dachser_carrier
+msgid "Is Dachser"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_stock_picking__is_dachser_carrier
+msgid "Is Dachser Carrier"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_product__k
+msgid "K - targo on-site plus"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_default_packaging_code__ki
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__stock_package_type__dachser_packaging_code__ki
+msgid "KI - Wooden Crate (Case)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_default_packaging_code__kt
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__stock_package_type__dachser_packaging_code__kt
+msgid "KT - Cardboard Box (Carton)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_stock_picking__dachser_ldr_routing
+msgid "LDR routing code between Dachser branches."
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_delivery_carrier__dachser_label_types
+msgid "Label Barcode Types"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_delivery_carrier__dachser_label_format
+msgid "Dachser Label Format"
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.view_delivery_carrier_form
+msgid "Label Format"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_basket__labelled
+msgid "Labelled (Generate SSCC labels; confirm shipment later)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__stock_picking__dachser_order_state__labelled
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__stock_picking__dachser_shipment_state__labelled
+msgid "Labelled in eLogistics (Labelled)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_stock_picking__dachser_status_description
+msgid "Latest Dachser Event"
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.view_picking_form_inherit_dachser
+msgid "Latest Event & Proof of Delivery (POD)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_stock_picking__dachser_status_code
+msgid "Latest Event Code"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_stock_picking__dachser_status_date
+msgid "Latest Event Date/Time"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_stock_picking__dachser_sscc_refs
+msgid "List of 18-digit SSCC codes generated for the packages/pallets of this picking."
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_delivery_carrier__dachser_ldm_factor
+msgid "Loading Metre Factor (kg / LDM)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_delivery_carrier__dachser_ldm_factor
+msgid "Loading metre (LDM) to chargeable weight conversion factor (standard: 1 LDM = 1850 kg; 1 Euro Pallet = 0.4 LDM)."
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_rate_mode__tariff_table
+msgid "Local Tariff Table Only (By Zones / Weights / Pallets)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.view_delivery_carrier_form_inherit_dachser
+msgid "Manifest"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_dachser_transfer_list_wizard__pdf_file
+msgid "Manifest PDF"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_delivery_carrier__dachser_use_order_incoterm
+msgid "Map from Sale Order / Picking Incoterm"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_dachser_tariff_rule__max_pallets
+msgid "Max. Packages / Pallets"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_dachser_tariff_rule__max_weight
+msgid "Max. Weight (kg)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_dachser_tariff_rule__max_weight
+msgid "Maximum chargeable weight (inclusive) in kilograms. 0 = No upper limit."
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_dachser_tariff_rule__max_pallets
+msgid "Maximum number of packages or pallets (0 = no limit)."
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_dachser_tariff_rule__min_pallets
+msgid "Min. Packages / Pallets"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_dachser_tariff_rule__min_weight
+msgid "Min. Weight (kg)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_dachser_tariff_rule__min_charge
+msgid "Minimum Charge (€)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_dachser_tariff_rule__min_weight
+msgid "Minimum chargeable weight (inclusive) in kilograms."
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_dachser_tariff_rule__min_charge
+msgid "Minimum guaranteed freight charge before surcharges."
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_dachser_tariff_rule__min_pallets
+msgid "Minimum number of packages or pallets (0 = no minimum)."
+msgstr ""
+
+#. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/models/dachser_request.py:50
+#, python-format
+msgid "Missing Dachser API Key (X-API-Key) for %(env)s environment on delivery method '%(carrier)s'."
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_product__n
+msgid "N - classicline / targonets (Classic Line)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_delivery_notice_type__none
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__res_partner__dachser_delivery_notice_type__none
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__stock_picking__dachser_delivery_notice_type__none
+msgid "No Delivery Notice"
+msgstr ""
+
+#. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/models/delivery_carrier.py:1443
+#, python-format
+msgid "No Proof of Delivery (POD) is available yet for reference '%s'."
+msgstr ""
+
+#. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/models/stock_picking.py:333
+#, python-format
+msgid "No applicable Dachser tariff found for %(partner)s (ZIP %(zip)s, %(weight).2f chargeable kg, %(pkgs)d packages)."
+msgstr ""
+
+#. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/models/delivery_carrier.py:863
+#, python-format
+msgid "No matching rule found in Dachser Tariff Table for %(partner)s (ZIP %(zip)s, %(country)s, %(weight).2f chargeable kg, %(pkgs)s packages)."
+msgstr ""
+
+#. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/models/delivery_carrier.py:1350
+#, python-format
+msgid "No tracking reference found on picking %s."
+msgstr ""
+
+#. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/models/delivery_carrier.py:846
+#, python-format
+msgid "Notice: Could not retrieve online quotation from Dachser API (%s). Local tariff table has been applied."
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_stock_picking__dachser_packages_qty
+msgid "Number of packages or pallets to declare in Dachser when detailed packages are not used in operations."
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_stock_picking__dachser_consignment_id
+msgid "Official consignment number assigned by Dachser TMS."
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_stock_package_type__dachser_packaging_code
+msgid "Official package/pallet type code in Dachser API (e.g. EU = Euro Pallet, EP = Dusseldorf Half Pallet, KT = Cardboard Box, PA = Pallet)."
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_rate_mode__api_quotation
+msgid "Online API Quotation Only (/rest/v2/quotations)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.view_picking_form_inherit_dachser
+msgid "Open Tracking in eLogistics"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_delivery_carrier__dachser_operation_mode
+msgid "Operation Mode"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_delivery_carrier__dachser_client_id
+msgid "Optional X-IBM-Client-Id header if required by your Dachser branch."
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_delivery_carrier__dachser_order_group
+msgid "Optional order grouping key in eLogistics (max. 30 characters)."
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_dachser_transfer_list_wizard__order_date
+msgid "Order Date (Transfer List)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_delivery_carrier__dachser_order_group
+msgid "Order Group"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_dachser_transfer_list_wizard__order_group
+msgid "Order Group (Optional)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__stock_picking__dachser_shipment_state__out_for_delivery
+msgid "Out for Delivery"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_stock_picking__dachser_package_type_id
+msgid "Override the pallet/package type (Euro Pallet, Half Pallet, Carton...) for this specific picking."
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_logistics_type__p
+msgid "P - Procurement (Inbound / Return)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_delivery_carrier__dachser_label_format
+msgid "P = Ready-to-print PDF; Z = ZPL for Zebra thermal printers."
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_default_packaging_code__pa
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__stock_package_type__dachser_packaging_code__pa
+msgid "PA - General Pallet"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_label_format__p
+msgid "PDF (P)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_stock_picking__dachser_pod_received
+msgid "POD Downloaded"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_stock_picking__dachser_pod_signor
+msgid "POD Recipient / Signatory"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_default_packaging_code__px
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__stock_package_type__dachser_packaging_code__px
+msgid "PX - Disposable / One-Way Pallet"
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.view_delivery_carrier_form_inherit_dachser
+msgid "Packaging & Labels (PDF / ZPL)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__stock_picking__dachser_shipment_state__draft
+msgid "Pending Shipment"
+msgstr ""
+
+#. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/models/delivery_carrier.py:1249
+#, python-format
+msgid "Picking %s does not have a Dachser Transport Order ID."
+msgstr ""
+
+#. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/models/stock_picking.py:238
+#, python-format
+msgid "Picking %s does not have a Dachser delivery method assigned."
+msgstr ""
+
+#. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/models/delivery_carrier.py:957
+#, python-format
+msgid "Picking %s does not have a delivery address assigned."
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_dachser_tariff_rule__price_per_kg
+msgid "Price / Kg or Fraction (€)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_dachser_tariff_rule__price_per_pallet
+msgid "Price / Pallet or Package (€)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_dachser_tariff_rule__price_per_kg
+msgid "Price per kg (or per 100 kg fraction when calculation mode is '100 Kg Fraction')."
+msgstr ""
+
+#. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/models/dachser_request.py:48
+msgid "Production"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_delivery_carrier__dachser_api_key_prod
+msgid "Production API Key (X-API-Key)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_delivery_carrier__dachser_api_key_prod
+msgid "Production X-API-Key token provided by your Dachser branch."
+msgstr ""
+
+#. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/models/delivery_carrier.py:1470
+#, python-format
+msgid "Proof of Delivery (POD) downloaded from Dachser (Consignment: %(cid)s, Archive date: %(dt)s)."
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.view_dachser_transfer_list_wizard_form
+msgid "Query and Download PDF Manifest"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_delivery_carrier__dachser_logistics_type
+msgid "Quotation Logistics Type"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_default_packaging_code__ro
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__stock_package_type__dachser_packaging_code__ro
+msgid "RO - Roll Container"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_sale_order__dachser_estimated_cost
+msgid "Real estimated shipping cost with Dachser (preserved internally even when shipping is free for the customer)."
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__stock_picking__dachser_shipment_state__registered
+msgid "Registered at Dachser Branch"
+msgstr ""
+
+#. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/models/delivery_carrier.py:762
+#, python-format
+msgid "Remarks: %s"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_stock_picking__dachser_tail_lift
+msgid "Requires Tail-Lift"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_res_partner__dachser_tail_lift
+msgid "Requires Tail-Lift (Dachser)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_product__s
+msgid "S - targospeed 12 (Delivery before 12:00)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_default_packaging_code__sa
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__stock_package_type__dachser_packaging_code__sa
+msgid "SA - Bag / Sack"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_delivery_notice_type__sm
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__res_partner__dachser_delivery_notice_type__sm
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__stock_picking__dachser_delivery_notice_type__sm
+msgid "SM - SMS Delivery Notice"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_operation_mode__label_only
+msgid "SSCC Labels + LDR Routing Only (/rest/v2/labels)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_stock_picking__dachser_sscc_refs
+msgid "SSCC License Plates (NVE)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_default_packaging_code__st
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__stock_package_type__dachser_packaging_code__st
+msgid "ST - Single Piece / Unit"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_delivery_carrier__dachser_save_quotation
+msgid "Save Quotation in eLogistics"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_basket__sent
+msgid "Sent (Generate SSCC labels and transmit to TMS immediately)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_dachser_tariff_rule__sequence
+msgid "Sequence"
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.view_delivery_carrier_form_inherit_dachser
+msgid "Service, Division & Product"
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.view_picking_form_inherit_dachser
+msgid "Shipment Operational Parameters"
+msgstr ""
+
+#. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/models/delivery_carrier.py:1140
+msgid "Shipment successfully sent to Dachser:"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:dachser.tariff.rule,name:delivery_dachser.dachser_tariff_rule_es_peninsula_light
+msgid "Spain Mainland (Up to 100 kg)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:dachser.tariff.rule,name:delivery_dachser.dachser_tariff_rule_es_peninsula_heavy
+msgid "Spain Mainland Pallets (> 100 kg)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_delivery_carrier__dachser_product_custom
+msgid "Specific product code agreed with your Dachser branch."
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_stock_package_type__dachser_stackable
+msgid "Stackable (Dachser)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_dachser_tariff_rule__state_ids
+msgid "States / Provinces"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_product__t
+msgid "T - targofix 12 (Fixed Date before 12:00)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_delivery_carrier__dachser_division
+msgid "T = European Logistics (Industrial), F = Food Logistics."
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_delivery_notice_type__te
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__res_partner__dachser_delivery_notice_type__te
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__stock_picking__dachser_delivery_notice_type__te
+msgid "TE - Telephone Delivery Notice"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_dachser_tariff_rule__tail_lift_surcharge
+msgid "Tail-Lift Surcharge (€)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.view_delivery_carrier_form_inherit_dachser
+msgid "Tariff Calculation Engine"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_delivery_carrier__dachser_rate_mode
+msgid "Tariff Calculation Mode"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_delivery_carrier__dachser_tariff_rule_ids
+msgid "Tariff Table by Zones / Weights / Pallets"
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.view_delivery_carrier_form_inherit_dachser
+msgid "Tariff Table by Zones, States, Postal Codes, Weights, and Pallets"
+msgstr ""
+
+#. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/models/dachser_request.py:48
+msgid "Test"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_delivery_carrier__dachser_api_key_test
+msgid "Test API Key (X-API-Key)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_delivery_carrier__dachser_api_key_test
+msgid "Test X-API-Key token (10-day self-service token from api-portal.dachser.com or QA token)."
+msgstr ""
+
+#. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/models/delivery_carrier.py:781
+#, python-format
+msgid "The consignee (%s) must have a Postal Code and Country to calculate the Dachser rate."
+msgstr ""
+
+#. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/models/stock_picking.py:290
+msgid "The picking consignee must have a Postal Code and Country to calculate the Dachser rate."
+msgstr ""
+
+#. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/models/stock_picking.py:367
+msgid "This picking does not have a Dachser tracking link yet."
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.view_picking_tree_inherit_dachser
+msgid "Total Dachser Estimated"
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.view_picking_tree_inherit_dachser
+msgid "Total Dachser Invoiced"
+msgstr ""
+
+#. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/models/dachser_tariff_rule.py:232
+#, python-format
+msgid "Total Local Dachser Tariff: %.2f €"
+msgstr ""
+
+#. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/models/delivery_carrier.py:1126
+msgid "Tracking / SSCC"
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.view_delivery_carrier_form_inherit_dachser
+msgid "Transfer List"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__stock_picking__dachser_order_state__sent
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__stock_picking__dachser_shipment_state__sent
+msgid "Transmitted to Dachser TMS (Sent)"
+msgstr ""
+
+#. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/models/delivery_carrier.py:1269
+#, python-format
+msgid "Transport order #%(id)s transmitted to Dachser TMS (state: %(state)s)."
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_stock_picking__dachser_transport_order_id
+msgid "Unique order identifier returned by POST /rest/v2/transportorders."
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.view_picking_form_inherit_dachser
+msgid "Update Dachser Tracking"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_product__v
+msgid "V - targofix / targospeed 10 (Fixed Delivery Date/Time)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,help:delivery_dachser.field_delivery_carrier__dachser_volumetric_factor
+msgid "Volume-to-chargeable-weight conversion factor for road freight (Dachser standard: 1 m³ = 333 kg). Set 0 to use gross weight only."
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.view_delivery_carrier_form_inherit_dachser
+msgid "Volumetric Conversion & Surcharges"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_delivery_carrier__dachser_volumetric_factor
+msgid "Volumetric Factor (kg / m³)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_product__w
+msgid "W - targofix 10 (Fixed Date before 10:00)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_product__x
+msgid "X - targospeed 10 / targofix (Priority / Fixed Date)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_product__y
+msgid "Y - targoflex / vivengoflex (Standard Flexible)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_product__z
+msgid "Z - targospeed / vivengospeed (Priority Express)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_dachser_tariff_rule__zip_prefixes
+msgid "ZIP / Postal Code Prefixes"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields.selection,name:delivery_dachser.selection__delivery_carrier__dachser_label_format__z
+msgid "ZPL - Zebra Printer Language (Z)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_delivery_carrier__dachser_font_file_name
+msgid "ZPL Font File Name"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_dachser_tariff_rule__name
+msgid "Zone / Rule Description"
+msgstr ""
+
+#. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/models/dachser_request.py:91
+msgid "[HTTP 401 Unauthorized] The provided X-API-Key token is invalid or not subscribed to this Dachser web service."
+msgstr ""
+
+#. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/models/dachser_request.py:96
+msgid "[HTTP 429 Too Many Requests] The rate or burst limit per second/day has been exceeded for this Dachser API token."
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.view_delivery_carrier_form_inherit_dachser
+msgid "e.g. 07, 35, 38"
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.view_delivery_carrier_form_inherit_dachser
+msgid "e.g. 12345678"
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.view_delivery_carrier_form_inherit_dachser
+msgid "e.g. 193"
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.view_dachser_transfer_list_wizard_form
+msgid "e.g. GB (optional)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model_terms:ir.ui.view,arch_db:delivery_dachser.view_delivery_carrier_form_inherit_dachser
+msgid "e.g. Zone 1 - Mainland (Up to 100 kg)"
+msgstr ""
+
+#. module: delivery_dachser
+#: model:ir.model.fields,field_description:delivery_dachser.field_delivery_carrier__dachser_basket
+msgid "eLogistics Basket"
+msgstr ""
+
+#. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/models/dachser_tariff_rule.py:194
+#, python-format
+msgid "• Applied rule: %(rule)s — Base freight: %(freight).2f €"
+msgstr ""
+
+#. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/models/dachser_tariff_rule.py:230
+#, python-format
+msgid "• Delivery notice surcharge: %.2f €"
+msgstr ""
+
+#. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/models/dachser_tariff_rule.py:208
+#, python-format
+msgid "• Fuel surcharge (%(pct).2f%%): %(amt).2f €"
+msgstr ""
+
+#. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/models/dachser_tariff_rule.py:220
+#, python-format
+msgid "• Tail-lift surcharge: %.2f €"
 msgstr ""

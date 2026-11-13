@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_dachser_tariff_rule_user,dachser.tariff.rule.user,model_dachser_tariff_rule,base.group_user,1,0,0,0
+access_dachser_tariff_rule_manager,dachser.tariff.rule.manager,model_dachser_tariff_rule,stock.group_stock_manager,1,1,1,1
+access_dachser_tariff_rule_sales_manager,dachser.tariff.rule.sales.manager,model_dachser_tariff_rule,sales_team.group_sale_manager,1,1,1,1
+access_dachser_transfer_list_wizard_user,dachser.transfer.list.wizard.user,model_dachser_transfer_list_wizard,stock.group_stock_user,1,1,1,1

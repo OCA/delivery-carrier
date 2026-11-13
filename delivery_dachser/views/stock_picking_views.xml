@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 Tecnativa - Víctor Martínez
+     Copyright 2026 Acysos S.L.
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_picking_form_inherit_dachser" model="ir.ui.view">
+        <field name="name">stock.picking.form.inherit.dachser</field>
+        <field name="model">stock.picking</field>
+        <field
+            name="inherit_id"
+            ref="stock_delivery.view_picking_withcarrier_out_form"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="/form/header" position="inside">
+                <field name="is_dachser_carrier" invisible="1" />
+                <button
+                    name="action_dachser_send_to_tms"
+                    string="Confirm Order to Dachser TMS"
+                    type="object"
+                    class="btn-primary"
+                    invisible="not is_dachser_carrier or not dachser_transport_order_id or dachser_order_state not in ('imported', 'labelled')"
+                />
+                <button
+                    name="action_dachser_get_label"
+                    string="Dachser Label"
+                    type="object"
+                    icon="fa-barcode"
+                    invisible="not is_dachser_carrier or state != 'done'"
+                />
+                <button
+                    name="action_dachser_update_status"
+                    string="Update Dachser Tracking"
+                    type="object"
+                    icon="fa-refresh"
+                    invisible="not is_dachser_carrier or not carrier_tracking_ref"
+                />
+                <button
+                    name="action_dachser_get_pod"
+                    string="Download POD"
+                    type="object"
+                    icon="fa-file-pdf-o"
+                    invisible="not is_dachser_carrier or not carrier_tracking_ref"
+                />
+            </xpath>
+
+            <xpath expr="//notebook" position="inside">
+                <page
+                    string="Dachser Logistics"
+                    name="dachser_logistics"
+                    invisible="not is_dachser_carrier"
+                >
+                    <div class="mb-3 d-flex flex-wrap gap-2">
+                        <button
+                            name="action_dachser_calculate_rate"
+                            string="Calculate / Update Estimated Rate"
+                            type="object"
+                            class="btn btn-secondary"
+                            icon="fa-calculator"
+                        />
+                        <button
+                            name="action_dachser_check_routing"
+                            string="Check LDR Route"
+                            type="object"
+                            class="btn btn-secondary"
+                            icon="fa-map-signs"
+                        />
+                        <button
+                            name="action_dachser_fetch_freight_costs"
+                            string="Fetch Actual Invoiced Costs"
+                            type="object"
+                            class="btn btn-secondary"
+                            icon="fa-euro"
+                            invisible="not carrier_tracking_ref"
+                        />
+                        <button
+                            name="action_open_dachser_tracking_url"
+                            string="Open Tracking in eLogistics"
+                            type="object"
+                            class="btn btn-info"
+                            icon="fa-external-link"
+                            invisible="not dachser_tracking_url"
+                        />
+                    </div>
+
+                    <group>
+                        <group
+                            string="Dachser Shipment &amp; Tracking"
+                            name="dachser_shipment_info"
+                        >
+                            <field name="dachser_transport_order_id" readonly="1" />
+                            <field
+                                name="dachser_order_state"
+                                widget="badge"
+                                decoration-info="dachser_order_state == 'imported'"
+                                decoration-primary="dachser_order_state == 'labelled'"
+                                decoration-success="dachser_order_state == 'sent'"
+                                decoration-danger="dachser_order_state == 'cancelled'"
+                            />
+                            <field
+                                name="dachser_shipment_state"
+                                widget="badge"
+                                decoration-info="dachser_shipment_state in ('registered', 'in_transit')"
+                                decoration-warning="dachser_shipment_state == 'out_for_delivery'"
+                                decoration-success="dachser_shipment_state == 'delivered'"
+                                decoration-danger="dachser_shipment_state in ('incidence', 'cancelled')"
+                            />
+                            <field name="dachser_consignment_id" />
+                            <field name="dachser_sscc_refs" />
+                            <field name="dachser_ldr_routing" />
+                            <field name="dachser_tracking_url" widget="url" />
+                        </group>
+                        <group
+                            string="Shipment Operational Parameters"
+                            name="dachser_operational_params"
+                        >
+                            <field
+                                name="dachser_packages_qty"
+                                readonly="state == 'done' and bool(carrier_tracking_ref)"
+                            />
+                            <field
+                                name="dachser_package_type_id"
+                                readonly="state == 'done' and bool(carrier_tracking_ref)"
+                            />
+                            <field
+                                name="dachser_content_override"
+                                placeholder="Default from shipping method"
+                            />
+                            <field name="dachser_tail_lift" />
+                            <field name="dachser_delivery_notice_type" />
+                            <field name="dachser_fixed_delivery_date" />
+                            <field
+                                name="dachser_driver_notes"
+                                placeholder="Instructions for driver (code ZU)"
+                            />
+                        </group>
+                    </group>
+
+                    <group>
+                        <group
+                            string="Freight Rate Control &amp; Billing Audit"
+                            name="dachser_costs_audit"
+                        >
+                            <field name="dachser_chargeable_weight" />
+                            <field name="dachser_estimated_cost" />
+                            <field name="dachser_invoiced_cost" />
+                            <field
+                                name="dachser_cost_difference"
+                                decoration-danger="dachser_cost_difference &gt; 0.01"
+                                decoration-success="dachser_cost_difference &lt;= 0.01 and dachser_invoiced_cost &gt; 0"
+                            />
+                            <field name="dachser_invoice_number" />
+                            <field name="dachser_invoice_date" />
+                            <field name="dachser_cost_breakdown" colspan="2" />
+                        </group>
+                        <group
+                            string="Latest Event &amp; Proof of Delivery (POD)"
+                            name="dachser_status_pod"
+                        >
+                            <field name="dachser_status_code" readonly="1" />
+                            <field name="dachser_status_description" readonly="1" />
+                            <field name="dachser_status_date" readonly="1" />
+                            <field name="dachser_pod_signor" readonly="1" />
+                            <field name="dachser_pod_received" readonly="1" />
+                            <field
+                                name="dachser_tracking_history"
+                                colspan="2"
+                                readonly="1"
+                            />
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_picking_tree_inherit_dachser" model="ir.ui.view">
+        <field name="name">stock.picking.list.inherit.dachser</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock_delivery.vpicktree_view_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='carrier_tracking_ref']" position="after">
+                <field
+                    name="dachser_shipment_state"
+                    optional="hide"
+                    widget="badge"
+                    decoration-info="dachser_shipment_state in ('registered', 'in_transit')"
+                    decoration-warning="dachser_shipment_state == 'out_for_delivery'"
+                    decoration-success="dachser_shipment_state == 'delivered'"
+                    decoration-danger="dachser_shipment_state in ('incidence', 'cancelled')"
+                />
+                <field
+                    name="dachser_estimated_cost"
+                    optional="hide"
+                    sum="Total Dachser Estimated"
+                />
+                <field
+                    name="dachser_invoiced_cost"
+                    optional="hide"
+                    sum="Total Dachser Invoiced"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>

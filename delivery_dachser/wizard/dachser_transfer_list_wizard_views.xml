@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Acysos S.L.
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_dachser_transfer_list_wizard_form" model="ir.ui.view">
+        <field name="name">dachser.transfer.list.wizard.form</field>
+        <field name="model">dachser.transfer.list.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Download Dachser Daily Manifest (Transfer List)">
+                <group>
+                    <group>
+                        <field name="carrier_id" />
+                        <field name="order_date" />
+                        <field name="order_group" placeholder="e.g. GB (optional)" />
+                    </group>
+                    <group invisible="not pdf_file">
+                        <field name="pdf_filename" invisible="1" />
+                        <field
+                            name="pdf_file"
+                            filename="pdf_filename"
+                            widget="binary"
+                        />
+                    </group>
+                </group>
+                <footer>
+                    <button
+                        name="action_download_transfer_list"
+                        string="Query and Download PDF Manifest"
+                        type="object"
+                        class="btn-primary"
+                        data-hotkey="q"
+                    />
+                    <button
+                        string="Close"
+                        class="btn-secondary"
+                        special="cancel"
+                        data-hotkey="x"
+                    />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>
