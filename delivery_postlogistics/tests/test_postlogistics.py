@@ -106,3 +106,27 @@ class TestPostlogistics(TestPostlogisticsCommon):
             with self.assertRaisesRegex(UserError, err_msg):
                 self.service_class._request_access_token(self.carrier)
                 self.assertEqual(len(cassette.requests), 1)
+
+    def test_decode_zpl2_label_utf8(self):
+        data = "^XA^CI28^FDUnterägeri^FS".encode()
+        self.assertEqual(
+            self.env["stock.picking"]._decode_zpl2_label(data),
+            "^XA^CI28^FDUnterägeri^FS",
+        )
+
+    def test_decode_zpl2_label_cp437(self):
+        # 0x84 is "ä" in CP437
+        data = b"^XA^CI13^FD\x84^FS"
+        self.assertEqual(
+            self.env["stock.picking"]._decode_zpl2_label(data),
+            "^XA^CI13^FDä^FS",
+        )
+
+    def test_decode_zpl2_label_no_ci_instruction(self):
+        # labels generated before the API update of 2026-10-24 contain no
+        # ^CI instruction and were always CP437 encoded
+        data = b"^XA^FD\x84^FS"
+        self.assertEqual(
+            self.env["stock.picking"]._decode_zpl2_label(data),
+            "^XA^FDä^FS",
+        )
