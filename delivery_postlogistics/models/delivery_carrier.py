@@ -63,6 +63,13 @@ class DeliveryCarrier(models.Model):
         string="Resolution",
         domain=[("type", "=", "resolution")],
     )
+    postlogistics_zpl2_encoding = fields.Selection(
+        [("ZPL2_CP437", "CP437"), ("ZPL2_UTF_8", "UTF-8")],
+        string="ZPL2 encoding",
+        default="ZPL2_CP437",
+        help="Encoding of the generated ZPL2 labels. Only relevant when "
+        "the output format is ZPL2.",
+    )
     postlogistics_tracking_format = fields.Selection(
         [
             ("postlogistics", "Use default postlogistics tracking numbers"),
