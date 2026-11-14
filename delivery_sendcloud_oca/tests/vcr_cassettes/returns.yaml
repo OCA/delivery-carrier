@@ -1,0 +1,50 @@
+interactions:
+  - request:
+      body: null
+      headers:
+        Accept: ["*/*"]
+        Accept-Encoding: ["gzip, deflate"]
+        Connection: [keep-alive]
+        User-Agent: [python-requests/2.28.1]
+      method: GET
+      uri: https://panel.sendcloud.sc/api/v2/returns
+    response:
+      body:
+        {
+          string:
+            '{"next":null,"previous":null,"returns":[{"id":1910013,"created_at":"2022-05-19T15:20:11.457479+02:00","reason":null,"outgoing_parcel":null,"incoming_parcel":182588401,"message":"","refund":null,"is_cancellable":false,"return_fee":0.0,"return_fee_currency":"EUR","label_cost":4.68,"label_currency":"EUR","items_cost":0.0,"delivered_at":null,"delivery_option":"drop_off_point","store_location":null,"payment_details":null,"incoming_parcel_data":{"tracking_url":"https://andrea1.shipping-portal.com/tracking/?country=nl&tracking_number=jvgl06097547001969761800&postal_code=4814+dc","tracking_number":"JVGL06097547001969761800","parcel_status":4879,"global_status_slug":"announced","brand_name":"Onestein","order_number":"","from_email":"pt@test.com","deleted":false,"collo_count":1,"from_country":"NL","from_name":"Test
+            label
+            1","shipping_method":1602,"extra_data":{"measured_weight":5,"has_tracking_page":true},"rules":[]},"incoming_parcel_status":{"id":1,"message":"Announced","global_status_slug":"announced"}},{"id":1909984,"created_at":"2022-05-19T15:13:55.658691+02:00","reason":null,"outgoing_parcel":null,"incoming_parcel":182586236,"message":"","refund":null,"is_cancellable":false,"return_fee":0.0,"return_fee_currency":"EUR","label_cost":4.68,"label_currency":"EUR","items_cost":0.71,"delivered_at":null,"delivery_option":"drop_off_point","store_location":null,"payment_details":null,"incoming_parcel_data":{"tracking_url":"https://andrea1.shipping-portal.com/tracking/?country=nl&tracking_number=jvgl06097547000722819416&postal_code=4814+dc","tracking_number":"JVGL06097547000722819416","parcel_status":4879,"global_status_slug":"announced","brand_name":"Onestein","order_number":"S00225","from_email":"p.mallee@onestein.nl","deleted":false,"collo_count":1,"from_country":"NL","from_name":"ONESTEiN","shipping_method":1602,"extra_data":{"measured_weight":0.5,"has_tracking_page":true},"rules":[]},"incoming_parcel_status":{"id":1,"message":"Announced","global_status_slug":"announced"}},{"id":1659044,"created_at":"2022-03-09T13:35:50.931674+01:00","reason":null,"outgoing_parcel":null,"incoming_parcel":168480922,"message":"","refund":null,"is_cancellable":false,"return_fee":0.0,"return_fee_currency":"EUR","label_cost":4.68,"label_currency":"EUR","items_cost":0.0,"delivered_at":null,"delivery_option":"drop_off_point","store_location":null,"payment_details":null,"incoming_parcel_data":{"tracking_url":"https://andrea1.shipping-portal.com/tracking/?country=nl&tracking_number=jvgl05931316002099928731&postal_code=4814+dc","tracking_number":"JVGL05931316002099928731","parcel_status":4879,"global_status_slug":"announced","brand_name":"Onestein","order_number":"S090373","from_email":"","deleted":false,"collo_count":1,"from_country":"NL","from_name":"Charleston","shipping_method":1602,"extra_data":{"measured_weight":1,"has_tracking_page":true},"rules":[]},"incoming_parcel_status":{"id":1,"message":"Announced","global_status_slug":"announced"}},{"id":1538983,"created_at":"2022-02-01T11:05:12.915608+01:00","reason":null,"outgoing_parcel":159623728,"incoming_parcel":159647982,"message":"","refund":{"refund_type":{"code":"money","label":"Money
+            back","require_message":false},"total_refund":"320.00","refunded_at":null,"message":""},"is_cancellable":false,"return_fee":"1","return_fee_currency":"EUR","label_cost":5.4,"label_currency":"EUR","items_cost":320.0,"delivered_at":null,"delivery_option":"drop_off_labelless","store_location":null,"payment_details":null,"outgoing_parcel_data":{"tracking_url":"https://andrea1.shipping-portal.com/tracking/?country=nl&tracking_number=3syzxg108974718&postal_code=4814+dc","tracking_number":"3SYZXG108974718","parcel_status":2000,"global_status_slug":"cancelled","brand_name":"Onestein","order_number":"S00026","from_email":"p.mallee@onestein.nl","deleted":false,"collo_count":1,"from_country":"NL","from_name":"Patrick","shipping_method":1,"extra_data":{"geocoding":{"to_coordinates":{"latitude":"51.591139","longitude":"4.762593"}},"has_tracking_page":false,"delivery_timeframe":["2022-02-02T07:30:00+00:00","2022-02-02T20:30:00+00:00"],"checkout_shipping_method":""},"rules":[]},"incoming_parcel_data":{"tracking_url":"https://andrea1.shipping-portal.com/tracking/?country=nl&tracking_number=3syzxg162680360&postal_code=4814+dc","tracking_number":"3SYZXG162680360","parcel_status":2569,"global_status_slug":"announced-uncollected","brand_name":"Onestein","order_number":"S00026","from_email":"d.sluijk@onestein.nl","deleted":false,"collo_count":1,"from_country":"NL","from_name":"Azure
+            Interior","shipping_method":1529,"extra_data":{"labelless":true,"has_tracking_page":false,"delivery_timeframe":["2022-02-02T07:30:00+00:00","2022-02-02T20:30:00+00:00"],"rule_modifications":[{"name":"Test","modifications":[{"field":"return_fee","value":"1","action":"change_return_fee","friendly_name":"Return
+            fee"}]}]},"rules":[{"name":"Test","modifications":[{"field":"return_fee","value":"1","action":"change_return_fee","friendly_name":"Return
+            fee"}]}]},"incoming_parcel_status":{"id":13,"message":"Announced: not
+            collected","global_status_slug":"announced-uncollected"}},{"id":1538832,"created_at":"2022-02-01T10:38:23.133864+01:00","reason":null,"outgoing_parcel":159623728,"incoming_parcel":159635004,"message":"","refund":{"refund_type":{"code":"money","label":"Money
+            back","require_message":false},"total_refund":"320.00","refunded_at":null,"message":""},"is_cancellable":false,"return_fee":"1","return_fee_currency":"EUR","label_cost":5.4,"label_currency":"EUR","items_cost":320.0,"delivered_at":null,"delivery_option":"drop_off_point","store_location":null,"payment_details":null,"outgoing_parcel_data":{"tracking_url":"https://andrea1.shipping-portal.com/tracking/?country=nl&tracking_number=3syzxg108974718&postal_code=4814+dc","tracking_number":"3SYZXG108974718","parcel_status":2000,"global_status_slug":"cancelled","brand_name":"Onestein","order_number":"S00026","from_email":"p.mallee@onestein.nl","deleted":false,"collo_count":1,"from_country":"NL","from_name":"Patrick","shipping_method":1,"extra_data":{"geocoding":{"to_coordinates":{"latitude":"51.591139","longitude":"4.762593"}},"has_tracking_page":false,"delivery_timeframe":["2022-02-02T07:30:00+00:00","2022-02-02T20:30:00+00:00"],"checkout_shipping_method":""},"rules":[]},"incoming_parcel_data":{"tracking_url":"https://andrea1.shipping-portal.com/tracking/?country=nl&tracking_number=3syzxg162260383&postal_code=4814+dc","tracking_number":"3SYZXG162260383","parcel_status":2569,"global_status_slug":"announced-uncollected","brand_name":"Onestein","order_number":"S00026","from_email":"d.sluijk@onestein.nl","deleted":false,"collo_count":1,"from_country":"NL","from_name":"Azure
+            Interior","shipping_method":1529,"extra_data":{"has_tracking_page":false,"delivery_timeframe":["2022-02-02T07:30:00+00:00","2022-02-02T20:30:00+00:00"],"rule_modifications":[{"name":"Test","modifications":[{"field":"return_fee","value":"1","action":"change_return_fee","friendly_name":"Return
+            fee"}]}]},"rules":[{"name":"Test","modifications":[{"field":"return_fee","value":"1","action":"change_return_fee","friendly_name":"Return
+            fee"}]}]},"incoming_parcel_status":{"id":13,"message":"Announced: not
+            collected","global_status_slug":"announced-uncollected"}},{"id":1473260,"created_at":"2022-01-13T11:21:49.453368+01:00","reason":null,"outgoing_parcel":null,"incoming_parcel":155827530,"message":"","refund":{"refund_type":{"code":"money","label":"Money
+            back","require_message":false},"total_refund":"5.86","refunded_at":1642069322871,"message":""},"is_cancellable":false,"return_fee":0.0,"return_fee_currency":"EUR","label_cost":4.68,"label_currency":"EUR","items_cost":0.71,"delivered_at":null,"delivery_option":"drop_off_point","store_location":null,"payment_details":null,"incoming_parcel_data":{"tracking_url":"https://andrea1.shipping-portal.com/tracking/?country=nl&tracking_number=jvgl0609754700645726&postal_code=4814+dc","tracking_number":"JVGL0609754700645726","parcel_status":2000,"global_status_slug":"cancelled","brand_name":"Onestein","order_number":"S00225","from_email":"pt@test.com","deleted":false,"collo_count":1,"from_country":"NL","from_name":"Test
+            label
+            1","shipping_method":1602,"extra_data":{"has_tracking_page":false},"rules":[]},"incoming_parcel_status":{"id":2000,"message":"Cancelled","global_status_slug":"cancelled"}}]}',
+        }
+      headers:
+        Allow: ["GET, HEAD, OPTIONS"]
+        Connection: [keep-alive]
+        Content-Type: [application/json]
+        Date: ["Tue, 05 Jul 2022 08:35:14 GMT"]
+        Referrer-Policy: [same-origin]
+        Server: [nginx]
+        Strict-Transport-Security: [max-age=15552000; includeSubDomains; preload]
+        Transfer-Encoding: [chunked]
+        Vary: [Accept-Encoding, "Origin, Cookie"]
+        X-Content-Type-Options: [nosniff]
+        X-Frame-Options: [DENY]
+        X-SendCloud-Client-Latest-Version-Linux: [1.0.2]
+        X-SendCloud-Client-Latest-Version-Windows: [1.0.4]
+        X-SendCloud-Client-Latest-Version-macOS: [1.0.5]
+        X-XSS-Protection: [1; mode=block]
+        content-length: ["8353"]
+      status: {code: 200, message: OK}
+version: 1

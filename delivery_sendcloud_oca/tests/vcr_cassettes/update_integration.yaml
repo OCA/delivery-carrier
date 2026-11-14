@@ -1,0 +1,37 @@
+interactions:
+  - request:
+      body:
+        "{\n  \"shop_name\": \"Sendcloud API Integration\",\n  \"shop_url\":
+        \"https://f482-185-247-144-87.eu.ngrok.io\",\n  \"service_point_enabled\":
+        false,\n  \"service_point_carriers\": [\n   \n  ],\n  \"webhook_active\":
+        true,\n  \"webhook_url\":
+        \"https://f482-185-247-144-87.eu.ngrok.io/shop/sendcloud_integration_webhook/delivery_sendcloud_official_test_15_1/1\"\n}"
+      headers:
+        Accept: ["*/*"]
+        Accept-Encoding: ["gzip, deflate"]
+        Connection: [keep-alive]
+        Content-Type: [application/json]
+        User-Agent: [python-requests/2.28.1]
+      method: PUT
+      uri: https://panel.sendcloud.sc/api/v2/integrations/241526
+    response:
+      body:
+        {
+          string:
+            '{ "shop_name": "Sendcloud API Integration", "shop_url":
+            "https://f482-185-247-144-87.eu.ngrok.io", "last_updated_at":
+            "2019-08-24T14:15:22Z", "service_point_enabled": false,
+            "service_point_carriers": [], "webhook_active": true, "webhook_url":
+            "https://f482-185-247-144-87.eu.ngrok.io/shop/sendcloud_integration_webhook/delivery_sendcloud_official_test_15_1/1"
+            }',
+        }
+      headers:
+        Connection: [close]
+        Content-Length: ["909"]
+        Content-Type: [text/html]
+        Date: ["Mon, 22 Aug 2022 07:50:09 GMT"]
+        Ngrok-Error-Code: [ERR_NGROK_3200]
+        Ngrok-Trace-Id: [5305e6107e40b11f768ab5ffffbb5c59]
+        Referrer-Policy: [no-referrer]
+      status: {code: 200, message: OK}
+version: 1

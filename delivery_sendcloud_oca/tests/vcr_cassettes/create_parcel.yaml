@@ -1,0 +1,89 @@
+interactions:
+  - request:
+      body:
+        '{"external_order_id": "58e6e33e-a952-4b8e-afdd-4cddeaf4f665",
+        "external_shipment_id": "bfdebf74-853d-4c32-9484-e0201426f888", "shipment_uuid":
+        "ac37f648-18af-4a37-92ee-0fce58998d2c","name": "Deco Addict", "address": "77
+        Santa Barbara Rd", "house_number": "", "city": "Pleasant Hill", "postal_code":
+        "94523", "country": "US","company_name": "Deco Addict","currency": "USD",
+        "telephone": "(603)-996-3829", "email":
+        "deco_addict@yourcompany.example.com","shipping_method_checkout_name": "DHL
+        Express Worldwide 0-1kg - incoterm DAP","order_number": "S00207", "weight": 0.1,
+        "is_return": False,"customs_invoice_nr": "INV/2024/00005" "request_label":
+        False, "shipment": {"id": 117}, "apply_shipping_rules": False}'
+      headers:
+        Accept: ["*/*"]
+        Accept-Encoding: ["gzip, deflate"]
+        Connection: [keep-alive]
+        User-Agent: [python-requests/2.28.1]
+      method: POST
+      uri: https://panel.sendcloud.sc/api/v2/parcels
+    response:
+      body:
+        {
+          string:
+            '{ "parcels": [{ "id": 3, "external_order_id":
+            "58e6e33e-a952-4b8e-afdd-4cddeaf4f665", "external_shipment_id":
+            "bfdebf74-853d-4c32-9484-e0201426f888", "shipment_uuid":
+            "ac37f648-18af-4a37-92ee-0fce58998d2c", "name": "Deco Addict",
+            "company_name": "Deco Addict", "address": "77 Santa Barbara Rd", "city":
+            "Pleasant Hill", "postal_code": "94523", "telephone": "(603)-996-3829",
+            "email": "deco_addict@yourcompany.example.com", "date_created": "01-01-2018
+            21:45:30", "date_updated": "01-01-2018 21:47:12", "date_announced":
+            "01-01-2018 21:47:13", "weight": "0.1", "status": { "id": 0, "message":
+            "Ready to send" }, "data": { }, "country": { "iso_3": "USA", "iso_2": "US",
+            "name": "United States" }, "shipment": { "id": 8, "name": "DHL Express
+            Worldwide 0-1kg - incoterm DAP" }, "carrier": { "code": "dhl" },
+            "is_return": false, "total_order_value_currency": "USD",
+            "total_order_value": "505", "colli_uuid":
+            "88296eff-595c-4c62-9b6f-075112bf54f6", "collo_nr": 0, "collo_count": 1,
+            "awb_tracking_number": null, "box_number": null, "length": null, "width":
+            null, "height": null, "shipping_method_checkout_name": "DHL Express
+            Worldwide 0-1kg - incoterm DAP", "external_reference": "WH/OUT/00524,0" }] }',
+        }
+      headers:
+        Allow: ["GET, POST, PUT, HEAD, OPTIONS"]
+        Connection: [keep-alive]
+        Content-Type: [application/json]
+        Date: ["Tue, 05 Jul 2022 09:00:25 GMT"]
+        Referrer-Policy: [same-origin]
+        Server: [nginx]
+        Strict-Transport-Security: [max-age=15552000; includeSubDomains; preload]
+        Transfer-Encoding: [chunked]
+        Vary: [Accept-Encoding, "Origin, Cookie"]
+        X-Content-Type-Options: [nosniff]
+        X-Frame-Options: [DENY]
+        X-SendCloud-Client-Latest-Version-Linux: [1.0.2]
+        X-SendCloud-Client-Latest-Version-Windows: [1.0.4]
+        X-SendCloud-Client-Latest-Version-macOS: [1.0.5]
+        X-XSS-Protection: [1; mode=block]
+      status: {code: 200, message: OK}
+  - request:
+      body: null
+      headers:
+        Accept: ["*/*"]
+        Accept-Encoding: ["gzip, deflate"]
+        Connection: [keep-alive]
+        User-Agent: [python-requests/2.28.1]
+      method: GET
+      uri: https://panel.sendcloud.sc/api/v2/parcels/3/return_portal_url
+    response:
+      body: {string: '{"url":""}'}
+      headers:
+        Allow: ["GET, POST, PUT, HEAD, OPTIONS"]
+        Connection: [keep-alive]
+        Content-Type: [application/json]
+        Date: ["Tue, 05 Jul 2022 09:00:25 GMT"]
+        Referrer-Policy: [same-origin]
+        Server: [nginx]
+        Strict-Transport-Security: [max-age=15552000; includeSubDomains; preload]
+        Transfer-Encoding: [chunked]
+        Vary: [Accept-Encoding, "Origin, Cookie"]
+        X-Content-Type-Options: [nosniff]
+        X-Frame-Options: [DENY]
+        X-SendCloud-Client-Latest-Version-Linux: [1.0.2]
+        X-SendCloud-Client-Latest-Version-Windows: [1.0.4]
+        X-SendCloud-Client-Latest-Version-macOS: [1.0.5]
+        X-XSS-Protection: [1; mode=block]
+      status: {code: 200, message: OK}
+version: 1
