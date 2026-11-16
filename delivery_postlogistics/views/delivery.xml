@@ -43,6 +43,7 @@
                                 name="postlogistics_resolution"
                                 required="delivery_type == 'postlogistics'"
                             />
+                            <field name="postlogistics_zpl2_encoding" />
                         </group>
                         <group string="Misc.">
                             <field

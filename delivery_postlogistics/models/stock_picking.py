@@ -108,6 +108,19 @@ Please use _get_quant_packages_from_picking instead."
             )
         return order.amount_total
 
+    @staticmethod
+    def _decode_zpl2_label(data):
+        """Decode a ZPL2 label with the codec declared by its ``^CI`` instruction.
+
+        Since the API update of 2026-10-24, the label always contains a ``^CI``
+        instruction: ``^CI13`` for CP437, ``^CI28`` for UTF-8. Labels generated
+        before that update have no ``^CI`` instruction and are CP437.
+        """
+        for instruction, encoding in ((b"^CI28", "utf-8"), (b"^CI13", "cp437")):
+            if instruction in data:
+                return data.decode(encoding)
+        return data.decode("cp437")
+
     def info_from_label(self, label, zpl_patch_string=False, package_id=False):
         tracking_number = label["tracking_number"]
         data = base64.b64decode(label["binary"])
@@ -115,8 +128,7 @@ Please use _get_quant_packages_from_picking instead."
         # Apply patch for zpl file
         if label["file_type"] == "zpl2" and zpl_patch_string:
             data = base64.b64encode(
-                base64.b64decode(data)
-                .decode("cp437")
+                self._decode_zpl2_label(base64.b64decode(data))
                 .replace("^XA", zpl_patch_string)
                 .encode("utf-8")
             )
