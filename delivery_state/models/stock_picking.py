@@ -110,7 +110,7 @@ class StockPicking(models.Model):
         if not channel_admin:
             return
         pickings_by_carrier = self.grouped("carrier_id")
-        for _carrier, pickings in pickings_by_carrier.items():
+        for pickings in pickings_by_carrier.values():
             message = pickings._build_message_pod_error()
             channel_admin.with_user(SUPERUSER_ID).message_post(body=Markup(message))
 
@@ -130,9 +130,11 @@ class StockPicking(models.Model):
 
     def _send_delivery_state_delivered_email(self):
         for item in self.filtered(
-            lambda p: p.company_id.delivery_state_delivered_email_validation
-            and p.picking_type_id.code == "outgoing"
-            and p.delivery_state == "customer_delivered"
+            lambda p: (
+                p.company_id.delivery_state_delivered_email_validation
+                and p.picking_type_id.code == "outgoing"
+                and p.delivery_state == "customer_delivered"
+            )
         ):
             source_ref = item.company_id.delivery_state_delivered_mail_template_id
             item.with_context(force_send=True).message_post_with_source(

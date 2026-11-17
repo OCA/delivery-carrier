@@ -8,6 +8,7 @@ from odoo import fields
 from odoo.tests import Form
 from odoo.tests.common import TransactionCase
 from odoo.tools import float_compare
+from odoo.tools.binary import BinaryBytes
 
 
 class TestDeliveryState(TransactionCase):
@@ -46,7 +47,7 @@ class TestDeliveryState(TransactionCase):
                         0,
                         {
                             "applied_on": "3_global",
-                            "compute_price": "formula",
+                            "compute_price": "discount",
                             "base": "list_price",
                         },
                     )
@@ -80,7 +81,7 @@ class TestDeliveryState(TransactionCase):
                         {
                             "product_id": cls.product.id,
                             "product_uom_qty": 1,
-                            "product_uom": cls.product.uom_id.id,
+                            "uom_id": cls.product.uom_id.id,
                             "location_id": cls.env["stock.location"]
                             .search([("usage", "=", "internal")], limit=1)
                             .id,
@@ -96,7 +97,7 @@ class TestDeliveryState(TransactionCase):
     def test_delivery_state(self):
         delivery_wizard = Form(
             self.env["choose.delivery.carrier"].with_context(
-                **{"default_order_id": self.sale.id, "default_carrier_id": self.carrier}
+                default_order_id=self.sale.id, default_carrier_id=self.carrier
             )
         )
         choose_delivery_carrier = delivery_wizard.save()
@@ -119,15 +120,17 @@ class TestDeliveryState(TransactionCase):
         picking.date_delivered = fields.Datetime.now()
         with self.assertRaises(NotImplementedError):
             picking.cancel_shipment()
-            self.assertEqual(picking.delivery_state, "canceled_shipment")
+        self.assertEqual(picking.delivery_state, "shipping_recorded_in_carrier")
         with patch.object(
             self.env["delivery.carrier"].__class__,
             "fixed_cancel_shipment",
             return_value=True,
-        ):
-            result = self.env["delivery.carrier"].fixed_cancel_shipment()
-            self.assertTrue(result)
-            self.env["delivery.carrier"].fixed_cancel_shipment.assert_called_once()
+        ) as cancel:
+            picking.cancel_shipment()
+            cancel.assert_called_once_with(picking)
+        self.assertEqual(picking.delivery_state, "canceled_shipment")
+        self.assertFalse(picking.date_shipped)
+        self.assertFalse(picking.date_delivered)
 
     def test_delivery_confirmation_send(self):
         template = self.env.ref("delivery_state.delivery_state_delivered_notification")
@@ -147,12 +150,69 @@ class TestDeliveryState(TransactionCase):
         self.assertTrue("XX-0000" in last_mail.body)
 
     def test_update_delivery_state(self):
-        self.picking.carrier_id = self.carrier.id
-        self.picking.state = "done"
+        carrier = self.carrier.copy({"delivery_type": "base_on_rule"})
+        self.picking.write({"carrier_id": carrier.id, "state": "done"})
+        terminal = self.env["stock.picking"]
+        for state in ("customer_delivered", "canceled_shipment", "no_update"):
+            picking = self.picking.copy({"carrier_id": carrier.id})
+            picking.write({"state": "done", "delivery_state": state})
+            terminal |= picking
+        pending = self.picking.copy({"carrier_id": carrier.id})
         self.picking.delivery_state = "shipping_recorded_in_carrier"
-        with patch.object(type(self.picking), "tracking_state_update") as mock_update:
+        with patch.object(
+            type(self.picking), "tracking_state_update", autospec=True
+        ) as update:
             self.env["stock.picking"]._update_delivery_state()
-            mock_update.assert_called()
-            self.assertEqual(
-                self.picking.delivery_state, "shipping_recorded_in_carrier"
-            )
+            selected = update.call_args.args[0]
+            self.assertIn(self.picking, selected)
+            self.assertFalse(terminal & selected)
+            self.assertNotIn(pending, selected)
+
+    def test_tracking_adapter_error_and_cron(self):
+        self.picking.carrier_id = self.carrier
+        other = self.picking.copy({"carrier_id": self.carrier.id})
+
+        def update(carrier, picking):
+            picking.tracking_state = "changed"
+            if picking == self.picking:
+                raise ValueError("carrier error")
+            picking.delivery_state = "in_transit"
+
+        with patch.object(
+            type(self.carrier), "fixed_tracking_state_update", update, create=True
+        ):
+            with self.assertRaisesRegex(ValueError, "carrier error"):
+                self.picking.tracking_state_update()
+            self.assertFalse(self.picking.tracking_state)
+            (self.picking | other).with_context(cron_id=1).tracking_state_update()
+        self.assertFalse(self.picking.tracking_state)
+        self.assertEqual(self.picking.pod_error, "carrier error")
+        self.assertEqual(other.delivery_state, "in_transit")
+
+    def test_copy_does_not_copy_tracking(self):
+        self.picking.write(
+            {
+                "date_shipped": fields.Date.today(),
+                "date_delivered": fields.Datetime.now(),
+                "tracking_json": {"status": "delivered"},
+                "tracking_state": "delivered",
+                "tracking_state_history": "history",
+                "delivery_state": "customer_delivered",
+                "pod_file": BinaryBytes(b"test"),
+                "pod_filename": "pod.pdf",
+                "pod_error": "error",
+            }
+        )
+        copy = self.picking.copy()
+        for name in (
+            "date_shipped",
+            "date_delivered",
+            "tracking_json",
+            "tracking_state",
+            "tracking_state_history",
+            "delivery_state",
+            "pod_file",
+            "pod_filename",
+            "pod_error",
+        ):
+            self.assertFalse(copy[name], name)

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <record id="res_config_settings_view_form" model="ir.ui.view">
         <field name="name">res.config.settings.view.form.inherit.stock</field>
@@ -7,18 +7,14 @@
         <field name="arch" type="xml">
             <xpath expr="//setting[@id='stock_move_email']" position="after">
                 <setting
-                    class="col-12 col-lg-6 o_setting_box"
                     id="delivery:state_email"
+                    class="col-12 col-lg-6 o_setting_box"
+                    company_dependent="1"
                 >
                     <field name="delivery_state_delivered_email_validation" />
                     <label
                         for="delivery_state_delivered_email_validation"
                         string="Email Confirmation (customer delivered)"
-                    />
-                    <span
-                        class="fa fa-lg fa-building-o"
-                        title="Values set here are company-specific."
-                        groups="base.group_multi_company"
                     />
                     <div class="text-muted">
                         Send an automatic confirmation email when Delivery Orders are delivered
