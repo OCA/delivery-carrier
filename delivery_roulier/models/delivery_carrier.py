@@ -55,11 +55,20 @@ class DeliveryCarrier(models.Model):
         if self._is_roulier() and not hasattr(
             self, f"{self.delivery_type}_rate_shipment"
         ):
-            res = {
-                "success": True,
-                "price": 0.0,
-                "carrier_price": 0,
-                "error_message": False,
-                "warning_message": False,
-            }
+            if (
+                self.price_method in ("fixed", "base_on_rule")
+                and res["success"]
+            ):
+                # usage of module like delivery_price_method
+                # at this point, we may have success
+                # bypass
+                pass
+            else:
+                res = {
+                    "success": True,
+                    "price": 0.0,
+                    "carrier_price": 0,
+                    "error_message": False,
+                    "warning_message": False,
+                }
         return res
