@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) 2026 Groupe Voltaire
+     @author Emilie SOUTIRAS <emilie.soutiras@groupevoltaire.com>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+    <record id="config_parameter_labelary_url" model="ir.config_parameter">
+        <field name="key">delivery_zpl_viewer.labelary_url</field>
+        <field name="value">https://api.labelary.com</field>
+    </record>
+    <record id="config_parameter_dpmm" model="ir.config_parameter">
+        <field name="key">delivery_zpl_viewer.dpmm</field>
+        <field name="value">8</field>
+    </record>
+    <record id="config_parameter_default_size" model="ir.config_parameter">
+        <field name="key">delivery_zpl_viewer.default_size</field>
+        <field name="value">4x6</field>
+    </record>
+</odoo>
