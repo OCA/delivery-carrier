@@ -1,0 +1,6 @@
+- Akim Juillerat \<<akim.juillerat@camptocamp.com>\>
+- Phuc Tran Thanh \<<phuc@trobz.com>\>
+- Fernando La Chica - GreenIce \<<fernandolachica@gmail.com>\>
+- Chau Le \<<chaulb@trobz.com>\>
+- [CIT-Services](cit-services.eu)
+  - Prayag \<<prayag.k@cit-services.eu>\>
