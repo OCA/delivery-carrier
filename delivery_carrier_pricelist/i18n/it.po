@@ -1,0 +1,76 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* delivery_carrier_pricelist
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2025-01-02 18:06+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.6.2\n"
+
+#. module: delivery_carrier_pricelist
+#: model:ir.model.fields.selection,name:delivery_carrier_pricelist.selection__delivery_carrier__delivery_type__pricelist
+msgid "Based on Product Pricelist"
+msgstr "In base al listino prodotti"
+
+#. module: delivery_carrier_pricelist
+#: model:ir.model,name:delivery_carrier_pricelist.model_choose_delivery_carrier
+msgid "Delivery Carrier Selection Wizard"
+msgstr "Procedura guidata selezione corriere"
+
+#. module: delivery_carrier_pricelist
+#: model:ir.model.fields.selection,name:delivery_carrier_pricelist.selection__delivery_carrier__invoice_policy__pricelist
+msgid "Delivery Product Price"
+msgstr "Prezzo prodotto consegna"
+
+#. module: delivery_carrier_pricelist
+#. odoo-python
+#: code:addons/delivery_carrier_pricelist/models/delivery_carrier.py:0
+msgid "Error: this delivery method is not available for this address."
+msgstr ""
+"Errore: questo metodo di consegna non è disponibile per questo indirizzo."
+
+#. module: delivery_carrier_pricelist
+#: model:ir.model.fields,help:delivery_carrier_pricelist.field_choose_delivery_carrier__invoice_policy
+#: model:ir.model.fields,help:delivery_carrier_pricelist.field_delivery_carrier__invoice_policy
+msgid ""
+"Estimated Cost: the customer will be invoiced the estimated cost of the shipping.\n"
+"Real Cost: the customer will be invoiced the real cost of the shipping, the cost of the shipping will be updated on the SO after the delivery.\n"
+"Delivery Product Price: the customer will be invoiced the price of the related delivery product based on the pricelist of the sales order. The provider's cost is ignored."
+msgstr ""
+"Costo stimato: al cliente verrà fatturato il costo stimato della spedizione."
+"\n"
+"Costo reale: al cliente verrà fatturato il costo reale della spedizione, il "
+"costo della spedizione verrà aggiornato sul OV dopo la consegna.\n"
+"Prezzo prodotto consegna: al cliente verrà fatturato il prezzo del prodotto "
+"consegna correlato in base al listino dell'ordine di vendita. Il costo del "
+"fornitore viene ignorato."
+
+#. module: delivery_carrier_pricelist
+#: model:ir.model.fields,field_description:delivery_carrier_pricelist.field_choose_delivery_carrier__invoice_policy
+#: model:ir.model.fields,field_description:delivery_carrier_pricelist.field_delivery_carrier__invoice_policy
+msgid "Invoicing Policy"
+msgstr "Politica fatturazione"
+
+#. module: delivery_carrier_pricelist
+#: model:ir.model.fields,field_description:delivery_carrier_pricelist.field_delivery_carrier__delivery_type
+msgid "Provider"
+msgstr "Fornitore"
+
+#. module: delivery_carrier_pricelist
+#: model:ir.model,name:delivery_carrier_pricelist.model_delivery_carrier
+msgid "Shipping Methods"
+msgstr "Metodi di spedizione"
+
+#. module: delivery_carrier_pricelist
+#: model:ir.model,name:delivery_carrier_pricelist.model_stock_picking
+msgid "Transfer"
+msgstr "Trasferimento"
