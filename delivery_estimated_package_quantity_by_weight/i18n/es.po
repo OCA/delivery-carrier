@@ -1,0 +1,67 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* delivery_estimated_package_quantity_by_weight
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2023-08-03 15:09+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
+"Language-Team: none\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: delivery_estimated_package_quantity_by_weight
+#: model:ir.model.fields,field_description:delivery_estimated_package_quantity_by_weight.field_delivery_carrier__maximum_weight_per_package
+msgid "Maximum weight per package"
+msgstr "Peso máximo por paquete"
+
+#. module: delivery_estimated_package_quantity_by_weight
+#: model_terms:ir.ui.view,arch_db:delivery_estimated_package_quantity_by_weight.stock_picking_form_view
+msgid "Number of packages"
+msgstr "Número de paquetes"
+
+#. module: delivery_estimated_package_quantity_by_weight
+#: model:ir.model.fields,field_description:delivery_estimated_package_quantity_by_weight.field_stock_picking__number_of_packages_done
+msgid "Number of packages in a picking out"
+msgstr "Número de paquetes en una recogida"
+
+#. module: delivery_estimated_package_quantity_by_weight
+#: model:ir.model.fields,field_description:delivery_estimated_package_quantity_by_weight.field_stock_picking__is_number_of_packages_visible
+msgid "Number of packages visible"
+msgstr "Número de paquetes visibles"
+
+#. module: delivery_estimated_package_quantity_by_weight
+#: model:ir.model,name:delivery_estimated_package_quantity_by_weight.model_delivery_carrier
+msgid "Shipping Methods"
+msgstr "Métodos de envío"
+
+#. module: delivery_estimated_package_quantity_by_weight
+#: model_terms:ir.ui.view,arch_db:delivery_estimated_package_quantity_by_weight.stock_picking_form_view
+msgid "The number of packages outranged the adviced number of packages"
+msgstr "El número de paquetes superó el aconsejado"
+
+#. module: delivery_estimated_package_quantity_by_weight
+#: model:ir.model.fields,field_description:delivery_estimated_package_quantity_by_weight.field_stock_picking__theoretical_number_of_packages
+msgid "Theoretical number of packages in a picking out"
+msgstr "Número teórico de paquetes en una recogida"
+
+#. module: delivery_estimated_package_quantity_by_weight
+#: model:ir.model.fields,field_description:delivery_estimated_package_quantity_by_weight.field_stock_picking__is_number_of_packages_outranged
+msgid "Too many packages compared to the theoretical number"
+msgstr "Demasiados paquetes en comparación con el número teórico"
+
+#. module: delivery_estimated_package_quantity_by_weight
+#: model:ir.model,name:delivery_estimated_package_quantity_by_weight.model_stock_picking
+msgid "Transfer"
+msgstr "Transferencia"
+
+#. module: delivery_estimated_package_quantity_by_weight
+#: model:ir.model.fields,field_description:delivery_estimated_package_quantity_by_weight.field_delivery_carrier__weight_uom_name
+msgid "Weight unit of measure label"
+msgstr "Etiqueta de unidad de medida de peso"
