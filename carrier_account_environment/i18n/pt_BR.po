@@ -1,0 +1,28 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* carrier_account_environment
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2024-07-05 19:47+0000\n"
+"Last-Translator: rodrigosottomaiormacedo "
+"<sottomaiormacedotec@sottomaiormacedo.tech>\n"
+"Language-Team: none\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: carrier_account_environment
+#: model:ir.model,name:carrier_account_environment.model_carrier_account
+msgid "Base account datas"
+msgstr "Dados da conta base"
+
+#. module: carrier_account_environment
+#: model:ir.model.fields,field_description:carrier_account_environment.field_carrier_account__server_env_defaults
+msgid "Server Env Defaults"
+msgstr "Padrões de ambiente do servidor"
