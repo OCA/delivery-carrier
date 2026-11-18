@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="res_config_settings_view_form_cutoff" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.cutoff.minutes</field>
+        <field name="model">res.config.settings</field>
+        <field
+            name="inherit_id"
+            ref="partner_delivery_zone.res_config_settings_view_form"
+        />
+        <field name="arch" type="xml">
+            <setting id="restrict_zone_to_delivery_addresses" position="after">
+                <setting
+                    id="cutoff_minutes"
+                    string="Departure Cutoff"
+                    help="Minimum lead time before a scheduled departure within which
+a slot is considered unreachable. Orders confirmed within this window
+are rolled to the next available slot."
+                    groups="base.group_system"
+                >
+                    <field name="delivery_cutoff_minutes" />
+                    <span>minutes</span>
+                </setting>
+            </setting>
+        </field>
+    </record>
+</odoo>
