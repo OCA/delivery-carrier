@@ -2,6 +2,7 @@
 # Copyright 2019-2020 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+from odoo.fields import Command
 from odoo.tests import Form, common
 
 
@@ -186,3 +187,60 @@ class TestDeliveryMultiDestination(common.TransactionCase):
             child_form.product_id = self.product_child_1
         carrier = carrier_form.save()
         self.assertEqual(carrier.product_id, self.product_child_1)
+
+    def test_read_children_without_context(self):
+        """Children carriers must stay readable outside of the
+        ``show_children_carriers`` context (e.g. from an order)."""
+        child = self.carrier_multi.with_context(
+            show_children_carriers=True,
+        ).child_ids[0]
+        child.invalidate_recordset()
+        self.assertEqual(
+            self.env["delivery.carrier"].browse(child.id).name, "Test child 1"
+        )
+        self.sale_order.carrier_id = child
+        self.sale_order.invalidate_recordset()
+        self.assertEqual(self.sale_order.carrier_id.display_name, "Test child 1")
+        # Recomputing fields on children must not raise an access error
+        child.product_id.list_price = 75
+        self.env.flush_all()
+
+    def test_rate_shipment_no_destination(self):
+        self.sale_order.partner_shipping_id = self.partner_1
+        res = self.carrier_multi.rate_shipment(self.sale_order)
+        self.assertFalse(res["success"])
+        self.assertTrue(res["error_message"])
+
+    def test_is_available_for_order(self):
+        self.sale_order.partner_shipping_id = self.partner_2
+        self.assertTrue(self.carrier_multi._is_available_for_order(self.sale_order))
+        self.sale_order.partner_shipping_id = self.partner_1
+        self.assertFalse(self.carrier_multi._is_available_for_order(self.sale_order))
+
+    def test_picking_validation_base_on_rule(self):
+        """Children based on rules get the price of the matching child."""
+        child_2 = self.carrier_multi.with_context(
+            show_children_carriers=True,
+        ).child_ids[1]
+        child_2.write(
+            {
+                "delivery_type": "base_on_rule",
+                "price_rule_ids": [
+                    Command.create(
+                        {
+                            "variable": "weight",
+                            "operator": "<=",
+                            "max_value": 1000,
+                            "list_base_price": 70,
+                        }
+                    )
+                ],
+            }
+        )
+        self.sale_order.carrier_id = self.carrier_multi.id
+        self.sale_order.partner_shipping_id = self.partner_3.id
+        self.sale_order.action_confirm()
+        picking = self.sale_order.picking_ids
+        picking.move_ids.quantity = 1
+        picking._action_done()
+        self.assertAlmostEqual(picking.carrier_price, 70)
