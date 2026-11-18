@@ -5,6 +5,7 @@ import base64
 from unidecode import unidecode
 
 from odoo import _, fields, models
+from odoo.exceptions import UserError
 
 from .correos_express_request import (
     CORREOS_EXPRESS_LABEL_TYPE,
@@ -205,9 +206,16 @@ class DeliveryCarrier(models.Model):
         if not picking.carrier_tracking_ref:
             return
         correos_express_request = CorreosExpressRequest(self)
-        result = correos_express_request.track_shipment(
-            self._prepare_correos_express_tracking(picking)
-        )
+        try:
+            result = correos_express_request.track_shipment(
+                self._prepare_correos_express_tracking(picking)
+            )
+        except UserError as e:
+            if "NO ENCONTRADO" in str(e):
+                picking.delivery_state = "no_update"
+                picking.tracking_state = "Shipment not found"
+                return
+            raise
         if not result:
             return
         tracking_events = result.get("estadoEnvios", [])

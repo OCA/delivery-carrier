@@ -3,6 +3,7 @@
 import time
 from unittest import mock
 
+from odoo.exceptions import UserError
 from odoo.tests import Form, common
 
 request_model = (
@@ -110,3 +111,22 @@ class TestCorreosExpressParcel(common.SingleTransactionCase):
             order=self.env["sale.order"]
         )
         self.assertIsInstance(msg, dict)
+
+    @mock.patch(
+        "%s.track_shipment" % request_model,
+        side_effect=UserError("Correos Express Error: 1 NO ENCONTRADO"),
+    )
+    def test_06_correos_express_picking_update_not_found(self, redirect_mock, *args):
+        self.carrier_correos_express.correos_express_tracking_state_update(self.picking)
+        self.assertEqual(self.picking.delivery_state, "no_update")
+        self.assertEqual(self.picking.tracking_state, "Shipment not found")
+
+    @mock.patch(
+        "%s.track_shipment" % request_model,
+        side_effect=UserError("Correos Express Error: 1 Other error"),
+    )
+    def test_07_correos_express_picking_update_error(self, redirect_mock, *args):
+        with self.assertRaises(UserError):
+            self.carrier_correos_express.correos_express_tracking_state_update(
+                self.picking
+            )
