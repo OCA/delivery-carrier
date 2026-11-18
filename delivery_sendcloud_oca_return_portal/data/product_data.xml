@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="product_sendcloud_unidentified_return" model="product.product">
+        <field name="name">Unidentified Returned Item</field>
+        <field name="default_code">SC-RETURN-UNKNOWN</field>
+        <field name="type">consu</field>
+        <field name="is_storable" eval="True" />
+        <field name="sale_ok" eval="False" />
+        <field name="purchase_ok" eval="False" />
+        <field name="list_price">0.0</field>
+    </record>
+</odoo>
