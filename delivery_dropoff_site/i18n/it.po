@@ -1,0 +1,1341 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* delivery_dropoff_site
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2025-01-31 15:06+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.6.2\n"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__supplier_invoice_count
+msgid "# Vendor Bills"
+msgstr "N. fatture fornitore"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__type
+msgid ""
+"- Contact: Use this to organize the contact details of employees of a given "
+"company (e.g. CEO, CFO, ...).\n"
+"- Invoice Address : Preferred address for all invoices. Selected by default "
+"when you invoice an order that belongs to this company.\n"
+"- Delivery Address : Preferred address for all deliveries. Selected by "
+"default when you deliver an order that belongs to this company.\n"
+"- Private: Private addresses are only visible by authorized users and "
+"contain sensitive data (employee home addresses, ...).\n"
+"- Other: Other address for the company (e.g. subsidiary, ...)"
+msgstr ""
+"- Contatto: usarlo per organizzare i dettagli del contatto del dipendente di "
+"un'azienda (e.g. CEO, CFO, ...).\n"
+"- Indirizzo fatturazione: indirizzo predefinito per le fatture. Selezionato "
+"automaticamente quando si fattura un ordine che appartiene all'azienda.\n"
+"- Indirizzo di consegna: indirizzo predefinito per le consegne. Selezionato "
+"automaticamente quando si consegna un ordine che appartiene all'azienda.\n"
+"- Privato: indirizzo privato visibile solo a persone autorizzate e contiene "
+"dati sensibili (indirizzo di casa del dipendente, ...).\n"
+"- Altro: altri indirizzi per l'azienda (es. controllate, ...)"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__property_account_payable_id
+msgid "Account Payable"
+msgstr "Conto di debito"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__property_account_receivable_id
+msgid "Account Receivable"
+msgstr "Conto di credito"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__message_needaction
+msgid "Action Needed"
+msgstr "Azione richiesta"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__active
+msgid "Active"
+msgstr "Attivo"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__active_lang_count
+msgid "Active Lang Count"
+msgstr "Numero lingue attive"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__activity_ids
+msgid "Activities"
+msgstr "Attività"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr "Decorazione eccezione attività"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__activity_state
+msgid "Activity State"
+msgstr "Stato attività"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__activity_type_icon
+msgid "Activity Type Icon"
+msgstr "Icona tipo attività"
+
+#. module: delivery_dropoff_site
+#: model_terms:ir.ui.view,arch_db:delivery_dropoff_site.view_partner_dropoff_site_form
+msgid "Address"
+msgstr "Indirizzo"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__type
+msgid "Address Type"
+msgstr "Tipo indirizzo"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__lang
+msgid ""
+"All the emails and documents sent to this contact will be translated in this "
+"language."
+msgstr ""
+"Tutte le email e i documenti inviati a questo contatto verranno tradotti in "
+"questa lingua."
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__message_attachment_count
+msgid "Attachment Count"
+msgstr "Conteggio allegati"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__receipt_reminder_email
+msgid ""
+"Automatically send a confirmation email to the vendor X days before the "
+"expected receipt date, asking him to confirm the exact date."
+msgstr ""
+"Invia automaticamente una email al fornitore X giorni prima della data "
+"fattura prevista, chiedendo la conferma della data."
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__avatar_1920
+msgid "Avatar"
+msgstr "Avatar"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__avatar_1024
+msgid "Avatar 1024"
+msgstr "Avatar 1024"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__avatar_128
+msgid "Avatar 128"
+msgstr "Avatar 128"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__avatar_256
+msgid "Avatar 256"
+msgstr "Avatar 256"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__avatar_512
+msgid "Avatar 512"
+msgstr "Avatar 512"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__bank_account_count
+msgid "Bank"
+msgstr "Banca"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__bank_ids
+msgid "Banks"
+msgstr "Banche"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__barcode
+msgid "Barcode"
+msgstr "Codice a barre"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__is_blacklisted
+msgid "Blacklist"
+msgstr "Blacklist"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__message_bounce
+msgid "Bounce"
+msgstr "Respingi"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__calendar_id
+#: model_terms:ir.ui.view,arch_db:delivery_dropoff_site.view_partner_dropoff_site_form
+msgid "Calendar"
+msgstr "Calendario"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__dropoff_site_carrier_id
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_res_partner__dropoff_site_carrier_id
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_res_users__dropoff_site_carrier_id
+msgid "Carrier of the Drop-off Site"
+msgstr "Vettore del punto di scarico"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__channel_ids
+msgid "Channels"
+msgstr "Canali"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__is_company
+msgid "Check if the contact is a company, otherwise it is a person"
+msgstr "Controlla se il contatto è un'azienda, altrimenti è una persona"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__employee
+msgid "Check this box if this contact is an Employee."
+msgstr "Seleziona questa casella se questo contatto è un dipendente."
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__city
+#: model_terms:ir.ui.view,arch_db:delivery_dropoff_site.view_partner_dropoff_site_form
+msgid "City"
+msgstr "Città"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__code
+msgid "Code"
+msgstr "Codice"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__color
+msgid "Color Index"
+msgstr "Indice colore"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__commercial_partner_id
+msgid "Commercial Entity"
+msgstr "Entità commerciale"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__ref_company_ids
+msgid "Companies that refers to partner"
+msgstr "Aziende che si riferiscono al fornitore"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__company_id
+#: model_terms:ir.ui.view,arch_db:delivery_dropoff_site.view_partner_dropoff_site_search
+msgid "Company"
+msgstr "Azienda"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__company_registry
+msgid "Company ID"
+msgstr "ID azienda"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__company_name
+msgid "Company Name"
+msgstr "Nome azienda"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__commercial_company_name
+msgid "Company Name Entity"
+msgstr "Entità nome azienda"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__company_type
+msgid "Company Type"
+msgstr "Tipo azienda"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__contact_address
+msgid "Complete Address"
+msgstr "Indirizzo completo"
+
+#. module: delivery_dropoff_site
+#: model:ir.model,name:delivery_dropoff_site.model_res_partner
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__child_ids
+msgid "Contact"
+msgstr "Contatto"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__message_bounce
+msgid "Counter of the number of bounced emails for this contact"
+msgstr "Contatore del numero di e-mail respinte per questo contatto"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__country_id
+#: model_terms:ir.ui.view,arch_db:delivery_dropoff_site.view_partner_dropoff_site_form
+#: model_terms:ir.ui.view,arch_db:delivery_dropoff_site.view_partner_dropoff_site_search
+msgid "Country"
+msgstr "Nazione"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__country_code
+msgid "Country Code"
+msgstr "Codice nazione"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__create_uid
+msgid "Created by"
+msgstr "Creato da"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__create_date
+msgid "Created on"
+msgstr "Creato il"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__credit_limit
+msgid "Credit Limit"
+msgstr "Fido"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__credit_limit
+msgid "Credit limit specific to this partner."
+msgstr "Fido specifico di questo partner."
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__currency_id
+msgid "Currency"
+msgstr "Valuta"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__property_stock_customer
+msgid "Customer Location"
+msgstr "Località cliente"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__property_payment_term_id
+msgid "Customer Payment Terms"
+msgstr "Termini pagamento cliente"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__customer_rank
+msgid "Customer Rank"
+msgstr "Classe cliente"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__date
+msgid "Date"
+msgstr "Data"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__reminder_date_before_receipt
+msgid "Days Before Receipt"
+msgstr "Giorni antecedenti la fattura"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__property_delivery_carrier_id
+msgid "Default delivery method used in sales orders."
+msgstr "Metodo di consegna predefinito utilizzato negli ordini di vendita."
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__trust
+msgid "Degree of trust you have in this debtor"
+msgstr "Grado di affidabilità che ha questo debitore"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__carrier_id
+msgid "Delivery Carrier"
+msgstr "Vettore consegna"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__property_delivery_carrier_id
+#: model_terms:ir.ui.view,arch_db:delivery_dropoff_site.view_partner_dropoff_site_search
+msgid "Delivery Method"
+msgstr "Metodo di consegna"
+
+#. module: delivery_dropoff_site
+#: model:delivery.carrier,name:delivery_dropoff_site.delivery_carrier
+msgid "Delivery With Drop-off Sites"
+msgstr "Consegna con punto di scarico"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__delivery_zone_id
+msgid "Delivery Zone"
+msgstr "Zona di consegna"
+
+#. module: delivery_dropoff_site
+#: model_terms:ir.ui.view,arch_db:delivery_dropoff_site.view_partner_dropoff_site_form
+msgid "Disable Calendar"
+msgstr "Disabilita calendario"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__display_name
+msgid "Display Name"
+msgstr "Nome visualizzato"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__is_driver
+msgid "Driver"
+msgstr "Autista"
+
+#. module: delivery_dropoff_site
+#: model:product.template,name:delivery_dropoff_site.product_product_delivery_drop_off_product_template
+msgid "Drop off method"
+msgstr "Metodo di scarico"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__dropoff_site_id
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_res_partner__dropoff_site_id
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_res_users__dropoff_site_id
+msgid "Drop-off Site"
+msgstr "Punto di scarico"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_sale_order__dropoff_site_required
+msgid "Drop-off Site Required"
+msgstr "Punto di scarico richiesto"
+
+#. module: delivery_dropoff_site
+#: model:ir.actions.act_window,name:delivery_dropoff_site.action_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_delivery_carrier__dropoff_site_ids
+#: model:ir.ui.menu,name:delivery_dropoff_site.menu_dropoff_site_sale
+#: model:ir.ui.menu,name:delivery_dropoff_site.menu_dropoff_site_stock
+#: model_terms:ir.ui.view,arch_db:delivery_dropoff_site.view_delivery_carrier_form
+msgid "Drop-off Sites"
+msgstr "Punti di scarico"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__dropoff_site_ids
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_res_partner__dropoff_site_ids
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_res_users__dropoff_site_ids
+msgid "Dropoff Site"
+msgstr "Sito di scarico"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.constraint,message:delivery_dropoff_site.constraint_res_partner_dropoff_site_id_uniq
+msgid "Dropoff Site with the same id already exists : must be unique"
+msgstr "Esiste già un punto di scarico con lo stesso ID: deve essere univoco"
+
+#. module: delivery_dropoff_site
+#: model:ir.model,name:delivery_dropoff_site.model_dropoff_site
+msgid "Dropoff site"
+msgstr "Punto di scarico"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__duplicated_bank_account_partners_count
+msgid "Duplicated Bank Account Partners Count"
+msgstr "Conteggio conti banca partner duplicati"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__partner_share
+msgid ""
+"Either customer (not a user), either shared user. Indicated the current "
+"partner is a customer without access or with a limited access created for "
+"sharing data."
+msgstr ""
+"O cliente (non un utente) o utente condiviso. Indicato che l'attuale partner "
+"è un cliente senza accesso o con un accesso limitato creato per la "
+"condivisione dei dati."
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__email
+msgid "Email"
+msgstr "E-mail"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__employee
+msgid "Employee"
+msgstr "Dipendente"
+
+#. module: delivery_dropoff_site
+#: model_terms:ir.ui.view,arch_db:delivery_dropoff_site.view_partner_dropoff_site_form
+msgid "Enable Calendar"
+msgstr "Abilita calendario"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_sale_order__final_shipping_partner_id
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_stock_move__final_shipping_partner_id
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_stock_picking__final_shipping_partner_id
+#: model_terms:ir.ui.view,arch_db:delivery_dropoff_site.view_stock_picking_search
+msgid "Final Recipient"
+msgstr "Contenitore finale"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__property_account_position_id
+msgid "Fiscal Position"
+msgstr "Posizione fiscale"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__message_follower_ids
+msgid "Followers"
+msgstr "Seguito da"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Seguito da (partner)"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr "Icona Font Awesome es. fa-tasks"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__email_formatted
+msgid "Format email address \"Name <email@domain>\""
+msgstr "Formattazione indirizzo email \"Nome <email@domain>\""
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__email_formatted
+msgid "Formatted Email"
+msgstr "Email formattata"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__partner_latitude
+msgid "Geo Latitude"
+msgstr "Latitudine geografica"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__partner_longitude
+msgid "Geo Longitude"
+msgstr "Longitudine geografica"
+
+#. module: delivery_dropoff_site
+#: model_terms:ir.ui.view,arch_db:delivery_dropoff_site.view_partner_dropoff_site_form
+msgid "Geolocate"
+msgstr "Geolocalizza"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__date_localization
+msgid "Geolocation Date"
+msgstr "Data geolocalizzazione"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__has_message
+msgid "Has Message"
+msgstr "Ha un messaggio"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__has_unreconciled_entries
+msgid "Has Unreconciled Entries"
+msgstr "Ha entrate non riconciliate"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__id
+msgid "ID"
+msgstr "ID"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__im_status
+msgid "IM Status"
+msgstr "Stato IM"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__activity_exception_icon
+msgid "Icon"
+msgstr "Icona"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr "Icona per indicare un'attività eccezione."
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "Se selezionata, nuovi messaggi richiedono attenzione."
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Se selezionata, alcuni messaggi hanno un errore di consegna."
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__team_id
+msgid ""
+"If set, this Sales Team will be used for sales and assignments related to "
+"this partner"
+msgstr ""
+"Se impostato, il team di vendita viene utilizzato per vendite e assegnazioni "
+"correlate al partner"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__is_blacklisted
+msgid ""
+"If the email address is on the blacklist, the contact won't receive mass "
+"mailing anymore, from any list"
+msgstr ""
+"Se l'indirizzo e-mail è sulla lista nera, il contatto non riceverà più la "
+"posta di massa, da qualsiasi lista"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__image_1920
+msgid "Image"
+msgstr "Immagine"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__image_1024
+msgid "Image 1024"
+msgstr "Immagine 1024"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__image_128
+msgid "Image 128"
+msgstr "Immagine 128"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__image_256
+msgid "Image 256"
+msgstr "Immagine 256"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__image_512
+msgid "Image 512"
+msgstr "Immagine 512"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__industry_id
+msgid "Industry"
+msgstr "Settore"
+
+#. module: delivery_dropoff_site
+#: model_terms:ir.ui.view,arch_db:delivery_dropoff_site.view_partner_dropoff_site_form
+msgid "Internal Notes"
+msgstr "Note interne"
+
+#. module: delivery_dropoff_site
+#: model_terms:ir.ui.view,arch_db:delivery_dropoff_site.view_partner_dropoff_site_form
+msgid "Internal note..."
+msgstr "Nota interna..."
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__invoice_warn
+msgid "Invoice"
+msgstr "Fattura"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__invoice_ids
+msgid "Invoices"
+msgstr "Fatture"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__is_coa_installed
+msgid "Is Coa Installed"
+msgstr "Coa è installato"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__is_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_res_partner__is_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_res_users__is_dropoff_site
+msgid "Is Drop-off Site"
+msgstr "È un punto di scarico"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__message_is_follower
+msgid "Is Follower"
+msgstr "Segue"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__is_public
+msgid "Is Public"
+msgstr "È pubblico"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__is_company
+msgid "Is a Company"
+msgstr "È un'azienda"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,help:delivery_dropoff_site.field_sale_order__final_shipping_partner_id
+#: model:ir.model.fields,help:delivery_dropoff_site.field_stock_move__final_shipping_partner_id
+#: model:ir.model.fields,help:delivery_dropoff_site.field_stock_picking__final_shipping_partner_id
+msgid "It is the partner that will pick up the parcel in the dropoff site."
+msgstr "È il partner che preleverà il pacco al punto di scarico."
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__function
+msgid "Job Position"
+msgstr "Posizione lavorativa"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__journal_item_count
+msgid "Journal Items"
+msgstr "Movimenti contabili"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__lang
+msgid "Language"
+msgstr "Lingua"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site____last_update
+msgid "Last Modified on"
+msgstr "Ultima modifica il"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__write_uid
+msgid "Last Updated by"
+msgstr "Ultimo aggiornamento di"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__write_date
+msgid "Last Updated on"
+msgstr "Ultimo aggiornamento il"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__last_time_entries_checked
+msgid ""
+"Last time the invoices & payments matching was performed for this partner. "
+"It is set either if there's not at least an unreconciled debit and an "
+"unreconciled credit or if you click the \"Done\" button."
+msgstr ""
+"Ultima volta in cui l'associazione fatture e pagamenti è stata eseguita per "
+"questo fornitore. Viene impostata se non c'è almeno un debito e un credito "
+"non riconciliati o se si clicca il pulsante \"Fatto\"."
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__last_time_entries_checked
+msgid "Latest Invoices & Payments Matching Date"
+msgstr "Data ultima associazione fatture e pagamenti"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__message_main_attachment_id
+msgid "Main Attachment"
+msgstr "Allegato principale"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__message_has_error
+msgid "Message Delivery error"
+msgstr "Errore di consegna messaggio"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__invoice_warn_msg
+msgid "Message for Invoice"
+msgstr "Messaggio per fattura"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__purchase_warn_msg
+msgid "Message for Purchase Order"
+msgstr "Messaggio per ordine di acquisto"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__sale_warn_msg
+msgid "Message for Sales Order"
+msgstr "Messaggio per ordine di vendita"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__picking_warn_msg
+msgid "Message for Stock Picking"
+msgstr "Messaggio per prelievo di magazzino"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__message_ids
+msgid "Messages"
+msgstr "Messaggi"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__mobile
+msgid "Mobile"
+msgstr "Cellulare"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr "Scadenza mia attività"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__name
+#: model_terms:ir.ui.view,arch_db:delivery_dropoff_site.view_partner_dropoff_site_form
+msgid "Name"
+msgstr "Nome"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "Scadenza prossima attività"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__activity_summary
+msgid "Next Activity Summary"
+msgstr "Riepilogo prossima attività"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__activity_type_id
+msgid "Next Activity Type"
+msgstr "Tipo prossima attività"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__email_normalized
+msgid "Normalized Email"
+msgstr "E-mail normalizzata"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__comment
+msgid "Notes"
+msgstr "Note"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Numero di azioni"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__reminder_date_before_receipt
+msgid "Number of days to send reminder email before the promised receipt date"
+msgstr ""
+"Numero di giorni per invio email promemoria prima della data fattura attesa"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__message_has_error_counter
+msgid "Number of errors"
+msgstr "Numero di errori"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr "Numero di messaggi che richiedono un'azione"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Numero di messaggi con errore di consegna"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__on_time_rate
+msgid "On-Time Delivery Rate"
+msgstr "Tasso puntualità consegna"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__on_time_rate
+msgid ""
+"Over the past x days; the number of products received on time divided by the "
+"number of ordered products.x is either the System Parameter purchase_stock."
+"on_time_delivery_days or the default 365"
+msgstr ""
+"Negli ultimi X giorni; il numero di prodotti ricevuti puntualmente diviso "
+"per il numero di prodotti ordinati. X è il parametro di sistema "
+"purchase_stock.on_time_delivery_days o il predefinito 365"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__parent_name
+msgid "Parent name"
+msgstr "Nome padre"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__partner_id
+msgid "Partner"
+msgstr "Partner"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__contract_ids
+msgid "Partner Contracts"
+msgstr "Contratti fornitori"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__use_partner_credit_limit
+msgid "Partner Limit"
+msgstr "Limite partner"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_sale_order__partner_shipping_id_domain
+msgid "Partner Shipping Id Domain"
+msgstr "Dominio ID spedizione partner"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__same_company_registry_partner_id
+msgid "Partner with same Company Registry"
+msgstr "Partner con lo stesso registro azienda"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__same_vat_partner_id
+msgid "Partner with same Tax ID"
+msgstr "Fornitore con la stessa partita IVA"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__debit_limit
+msgid "Payable Limit"
+msgstr "Limite pagabile"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__payment_token_count
+msgid "Payment Token Count"
+msgstr "Conteggio token pagamento"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__payment_token_ids
+msgid "Payment Tokens"
+msgstr "Token pagamenti"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__phone
+msgid "Phone"
+msgstr "Telefono"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__property_product_pricelist
+msgid "Pricelist"
+msgstr "Listino prezzi"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__purchase_line_ids
+msgid "Purchase Lines"
+msgstr "Righe acquisti"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__purchase_order_count
+msgid "Purchase Order Count"
+msgstr "Conteggio ordine di acquisto"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__purchase_warn
+msgid "Purchase Order Warning"
+msgstr "Avviso ordine acquisto"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__receipt_reminder_email
+msgid "Receipt Reminder"
+msgstr "Promemoria ricevuta"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__ref
+msgid "Reference"
+msgstr "Riferimento"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__parent_id
+msgid "Related Company"
+msgstr "Azienda collegata"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__activity_user_id
+msgid "Responsible User"
+msgstr "Utente responsabile"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__sale_order_count
+msgid "Sale Order Count"
+msgstr "Conteggio ordini di vendita"
+
+#. module: delivery_dropoff_site
+#: model:ir.model,name:delivery_dropoff_site.model_sale_order
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__sale_order_ids
+msgid "Sales Order"
+msgstr "Ordine di vendita"
+
+#. module: delivery_dropoff_site
+#: model:ir.model,name:delivery_dropoff_site.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Riga ordine di vendita"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__team_id
+msgid "Sales Team"
+msgstr "Team di vendita"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__sale_warn
+msgid "Sales Warnings"
+msgstr "Allerte vendite"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__user_id
+msgid "Salesperson"
+msgstr "Addetto vendite"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__invoice_warn
+#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__picking_warn
+#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__purchase_warn
+#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__sale_warn
+msgid ""
+"Selecting the \"Warning\" option will notify user with the message, "
+"Selecting \"Blocking Message\" will throw an exception with the message and "
+"block the flow. The Message has to be written in the next field."
+msgstr ""
+"Selezionando l'opzione \"Attenzione\" l'utente verrà avvisato con il "
+"messaggio. Selezionando \"Ferma messaggi\" genererà un'eccezione con il "
+"messaggio e fermerà il flusso. Il messaggio deve essere scritto nel campo "
+"successivo."
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__self
+msgid "Self"
+msgstr "Se stesso"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__partner_share
+msgid "Share Partner"
+msgstr "Condividi partner"
+
+#. module: delivery_dropoff_site
+#: model:ir.model,name:delivery_dropoff_site.model_delivery_carrier
+msgid "Shipping Methods"
+msgstr "Metodi di spedizione"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__show_credit_limit
+msgid "Show Credit Limit"
+msgstr "Visualizza fido"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__signup_expiration
+msgid "Signup Expiration"
+msgstr "Scadenza iscrizione"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__signup_token
+msgid "Signup Token"
+msgstr "Token iscrizione"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__signup_type
+msgid "Signup Token Type"
+msgstr "Tipo token iscrizione"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__signup_valid
+msgid "Signup Token is Valid"
+msgstr "Token iscrizione valido"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__signup_url
+msgid "Signup URL"
+msgstr "URL iscrizione"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__state_id
+#: model_terms:ir.ui.view,arch_db:delivery_dropoff_site.view_partner_dropoff_site_form
+msgid "State"
+msgstr "Stato"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"Stato in base alle attività\n"
+"Scaduto: la data richiesta è trascorsa\n"
+"Oggi: la data attività è oggi\n"
+"Pianificato: attività future."
+
+#. module: delivery_dropoff_site
+#: model:ir.model,name:delivery_dropoff_site.model_stock_move
+msgid "Stock Move"
+msgstr "Movimento di magazzino"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__picking_warn
+msgid "Stock Picking"
+msgstr "Prelievo di magazzino"
+
+#. module: delivery_dropoff_site
+#: model:ir.model,name:delivery_dropoff_site.model_stock_rule
+msgid "Stock Rule"
+msgstr "Regola di giacenza"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__street
+msgid "Street"
+msgstr "Indirizzo"
+
+#. module: delivery_dropoff_site
+#: model_terms:ir.ui.view,arch_db:delivery_dropoff_site.view_partner_dropoff_site_form
+msgid "Street 2..."
+msgstr "Indirizzo 2..."
+
+#. module: delivery_dropoff_site
+#: model_terms:ir.ui.view,arch_db:delivery_dropoff_site.view_partner_dropoff_site_form
+msgid "Street..."
+msgstr "Indirizzo..."
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__street2
+msgid "Street2"
+msgstr "Indirizzo2"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__property_purchase_currency_id
+msgid "Supplier Currency"
+msgstr "Valuta fornitore"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__supplier_rank
+msgid "Supplier Rank"
+msgstr "Classe fornitore"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__category_id
+msgid "Tags"
+msgstr "Etichette"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__vat
+msgid "Tax ID"
+msgstr "Partita IVA"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__vies_failed_message
+msgid "Technical field display a message to the user if the VIES check fails."
+msgstr ""
+"Campo tecnico visualizza un messaggio per l'utente se il controllo VIES "
+"fallisce."
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__country_code
+msgid ""
+"The ISO country code in two chars. \n"
+"You can use this field for quick search."
+msgstr ""
+"Il codice ISO nazione in due caratteri. \n"
+"Si può utilizzare per ricerche rapide."
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__vat
+msgid ""
+"The Tax Identification Number. Values here will be validated based on the "
+"country format. You can use '/' to indicate that the partner is not subject "
+"to tax."
+msgstr ""
+"Il numero identificazione imposta. I valori verranno validati nel formato "
+"della nazione. Si può utilizzare '/' per indicare che il partner non è "
+"soggetto all'imposta."
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__property_account_position_id
+msgid ""
+"The fiscal position determines the taxes/accounts used for this contact."
+msgstr ""
+"La posizione fiscale determina le tasse/conti utilizzati per questo contatto."
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__user_id
+msgid "The internal user in charge of this contact."
+msgstr "L'utente interno responsabile di questo contatto."
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__has_unreconciled_entries
+msgid ""
+"The partner has at least one unreconciled debit and credit since last time "
+"the invoices & payments matching was performed."
+msgstr ""
+"Il fornitore ha almeno un debito e un credito non riconciliati dall'ultima "
+"volta che il controllo fatture e pagamenti è stato eseguito."
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__company_registry
+msgid ""
+"The registry number of the company. Use it if it is different from the Tax "
+"ID. It must be unique across all partners of a same country"
+msgstr ""
+"Il numero registro dell'azienda. Utilizzare se è diverso dalla partita IVA. "
+"Deve essere univoco tra tutti i partner della stessa nazione"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__property_stock_customer
+msgid ""
+"The stock location used as destination when sending goods to this contact."
+msgstr ""
+"L'ubicazione di magazzino utilizzata come destinazione quando si spedisce "
+"merce a questo contatto."
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__property_stock_supplier
+msgid ""
+"The stock location used as source when receiving goods from this contact."
+msgstr ""
+"L'ubicazione di magazzino utilizzata quando si riceve merce da questo "
+"contatto."
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__property_account_payable_id
+msgid ""
+"This account will be used instead of the default one as the payable account "
+"for the current partner"
+msgstr ""
+"Questo conto verrà utilizzato al posto del predefinito come conto di "
+"pagamento per il fornitore corrente"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__property_account_receivable_id
+msgid ""
+"This account will be used instead of the default one as the receivable "
+"account for the current partner"
+msgstr ""
+"Questo conto verrà utilizzato al posto del predefinito come conto crediti "
+"per il cliente corrente"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__property_purchase_currency_id
+msgid ""
+"This currency will be used, instead of the default one, for purchases from "
+"the current partner"
+msgstr ""
+"Questa valuta verrà utilizzata, al posto della predefinita, per gli acquisti "
+"dal fornitore corrente"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__email_normalized
+msgid ""
+"This field is used to search on email address as the primary email field can "
+"contain more than strictly an email address."
+msgstr ""
+"Questo campo viene utilizzato per la ricerca degli indirizzi e-mail, come "
+"campo principale dell'e-mail può contenere più indirizzi."
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__property_supplier_payment_term_id
+msgid ""
+"This payment term will be used instead of the default one for purchase "
+"orders and vendor bills"
+msgstr ""
+"Questi termini di pagamento verranno utilizzati come predefiniti per gli "
+"ordini di acquisto e le fatture dei fornitori"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__property_payment_term_id
+msgid ""
+"This payment term will be used instead of the default one for sales orders "
+"and customer invoices"
+msgstr ""
+"Questi termini di pagamento verranno utilizzati come predefiniti per gli "
+"ordini di vendita e le fatture clienti"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__property_product_pricelist
+msgid ""
+"This pricelist will be used, instead of the default one, for sales to the "
+"current partner"
+msgstr ""
+"Questo listino verrà utilizzato, al posto di quello predefinito, per le "
+"vendite al partner corrente"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__tz
+msgid "Timezone"
+msgstr "Fuso orario"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__tz_offset
+msgid "Timezone offset"
+msgstr "Offset fuso orario"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__title
+msgid "Title"
+msgstr "Titolo"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__total_invoiced
+msgid "Total Invoiced"
+msgstr "Totale fatturato"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__debit
+msgid "Total Payable"
+msgstr "Debito totale"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__credit
+msgid "Total Receivable"
+msgstr "Totale credito"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__credit
+msgid "Total amount this customer owes you."
+msgstr "Ammontare totale dovuto da questo cliente."
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__debit
+msgid "Total amount you have to pay to this vendor."
+msgstr "Ammontare totale dovuto a questo fornitore."
+
+#. module: delivery_dropoff_site
+#: model:ir.model,name:delivery_dropoff_site.model_stock_picking
+msgid "Transfer"
+msgstr "Trasferimento"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__translated_display_name
+msgid "Translated Display Name"
+msgstr "Nome visualizzato tradotto"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr "Tipo di attività eccezione sul record."
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__barcode
+msgid "Use a barcode to identify this contact."
+msgstr "Utilizza un codice a barre per identificare questo contatto."
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__user_ids
+msgid "Users"
+msgstr "Utenti"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__property_stock_supplier
+msgid "Vendor Location"
+msgstr "Località fornitore"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__property_supplier_payment_term_id
+msgid "Vendor Payment Terms"
+msgstr "Termini pagamento fornitore"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__website
+msgid "Website Link"
+msgstr "Link al sito web"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__website_message_ids
+msgid "Website Messages"
+msgstr "Messaggi sito web"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__website_message_ids
+msgid "Website communication history"
+msgstr "Cronologia comunicazioni sito web"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,help:delivery_dropoff_site.field_dropoff_site__tz
+msgid ""
+"When printing documents and exporting/importing data, time values are "
+"computed according to this timezone.\n"
+"If the timezone is not set, UTC (Coordinated Universal Time) is used.\n"
+"Anywhere else, time values are computed according to the time offset of your "
+"web client."
+msgstr ""
+"Quando si stampano i documenti e si esportano/importano dati, gli orari sono "
+"calcolati in base a questo fuso orario.\n"
+"Se questo non è impostato, viene usato l'UTC (Coordinated Universal Time).\n"
+"In qualunque altra parte, l'orario è calcolato in base regolazione dell'ora "
+"del client web."
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_delivery_carrier__with_dropoff_site
+msgid "With Drop-off Sites"
+msgstr "Con punti di scarico"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__attendance_ids
+msgid "Working Time"
+msgstr "Orario lavoro"
+
+#. module: delivery_dropoff_site
+#: model_terms:ir.ui.view,arch_db:delivery_dropoff_site.view_partner_dropoff_site_form
+msgid "ZIP"
+msgstr "CAP"
+
+#. module: delivery_dropoff_site
+#: model:ir.model.fields,field_description:delivery_dropoff_site.field_dropoff_site__zip
+msgid "Zip"
+msgstr "CAP"
+
+#. module: delivery_dropoff_site
+#: model_terms:ir.ui.view,arch_db:delivery_dropoff_site.view_partner_dropoff_site_form
+msgid "e.g. www.odoo.com"
+msgstr "es. www.odoo.com"

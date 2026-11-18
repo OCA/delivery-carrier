@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="dropoff_cordonnerie_multiservice" model="dropoff.site">
+        <field name="name">Cordonnerie Multi Service</field>
+        <field name="code">CORD MS</field>
+        <field name="street">28 rue Monge</field>
+        <field name="zip">75005</field>
+        <field name="city">Paris</field>
+        <field name="country_id" ref="base.fr" />
+        <field name="carrier_id" ref="delivery_carrier" />
+        <field name="calendar_id" ref="calendar" />
+    </record>
+    <record id="dropoff_exoshoes" model="dropoff.site">
+        <field name="name">Exoshoes</field>
+        <field name="code">EXO</field>
+        <field name="street">6 rue des Capucins</field>
+        <field name="zip">69001</field>
+        <field name="city">Lyon</field>
+        <field name="country_id" ref="base.fr" />
+        <field name="carrier_id" ref="delivery_carrier" />
+    </record>
+</odoo>
