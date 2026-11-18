@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="calendar" model="resource.calendar">
+        <field name="name">40 Hours/Week</field>
+    </record>
+    <record model="resource.calendar.attendance" id="calendar_attendance_mon1">
+        <field name="name">Monday morning</field>
+        <field name="dayofweek">0</field>
+        <field name="hour_from">08</field>
+        <field name="hour_to">12</field>
+        <field name="calendar_id" ref="calendar" />
+    </record>
+    <record model="resource.calendar.attendance" id="calendar_attendance_mon2">
+        <field name="name">Monday evening</field>
+        <field name="dayofweek">0</field>
+        <field name="hour_from">13</field>
+        <field name="hour_to">17</field>
+        <field name="calendar_id" ref="calendar" />
+    </record>
+    <record model="resource.calendar.attendance" id="calendar_attendance_tue1">
+        <field name="name">Tuesday morning</field>
+        <field name="dayofweek">1</field>
+        <field name="hour_from">08</field>
+        <field name="hour_to">12</field>
+        <field name="calendar_id" ref="calendar" />
+    </record>
+    <record model="resource.calendar.attendance" id="calendar_attendance_tue2">
+        <field name="name">Tuesday evening</field>
+        <field name="dayofweek">1</field>
+        <field name="hour_from">13</field>
+        <field name="hour_to">17</field>
+        <field name="calendar_id" ref="calendar" />
+    </record>
+    <record model="resource.calendar.attendance" id="calendar_attendance_wed1">
+        <field name="name">Wednesday morning</field>
+        <field name="dayofweek">2</field>
+        <field name="hour_from">08</field>
+        <field name="hour_to">12</field>
+        <field name="calendar_id" ref="calendar" />
+    </record>
+    <record model="resource.calendar.attendance" id="calendar_attendance_wed2">
+        <field name="name">Wednesday evening</field>
+        <field name="dayofweek">2</field>
+        <field name="hour_from">13</field>
+        <field name="hour_to">17</field>
+        <field name="calendar_id" ref="calendar" />
+    </record>
+    <record model="resource.calendar.attendance" id="calendar_attendance_thu1">
+        <field name="name">Thursday morning</field>
+        <field name="dayofweek">3</field>
+        <field name="hour_from">08</field>
+        <field name="hour_to">12</field>
+        <field name="calendar_id" ref="calendar" />
+    </record>
+    <record model="resource.calendar.attendance" id="calendar_attendance_thu2">
+        <field name="name">Thursday evening</field>
+        <field name="hour_from">13</field>
+        <field name="hour_to">17</field>
+        <field name="dayofweek">3</field>
+        <field name="calendar_id" ref="calendar" />
+    </record>
+    <record model="resource.calendar.attendance" id="calendar_attendance_fri1">
+        <field name="name">Friday morning</field>
+        <field name="dayofweek">4</field>
+        <field name="hour_from">08</field>
+        <field name="hour_to">12</field>
+        <field name="calendar_id" ref="calendar" />
+    </record>
+    <record model="resource.calendar.attendance" id="calendar_attendance_fri2">
+        <field name="name">Friday evening</field>
+        <field name="dayofweek">4</field>
+        <field name="hour_from">13</field>
+        <field name="hour_to">17</field>
+        <field name="calendar_id" ref="calendar" />
+    </record>
+    <record id="resource_analyst" model="resource.resource">
+        <field eval="100" name="time_efficiency" />
+        <field name="user_id" ref="base.user_root" />
+        <field name="name">Analyst</field>
+        <field eval="1" name="active" />
+        <field name="calendar_id" ref="calendar" />
+        <field name="resource_type">user</field>
+    </record>
+    <record id="resource_designer" model="resource.resource">
+        <field eval="100" name="time_efficiency" />
+        <field name="user_id" ref="base.user_demo" />
+        <field name="name">Designer</field>
+        <field eval="1" name="active" />
+        <field name="calendar_id" ref="calendar" />
+        <field name="resource_type">user</field>
+    </record>
+    <record id="resource_developer" model="resource.resource">
+        <field eval="100" name="time_efficiency" />
+        <field name="user_id" ref="base.user_demo" />
+        <field name="name">Developer</field>
+        <field eval="1" name="active" />
+        <field name="calendar_id" ref="calendar" />
+        <field name="resource_type">user</field>
+    </record>
+</odoo>
