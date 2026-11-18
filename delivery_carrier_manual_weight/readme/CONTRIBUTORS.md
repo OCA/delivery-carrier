@@ -1,0 +1,7 @@
+- Jordi Masvidal \<<jordi.masvidal@forgeflow.com>\>
+- Marina Alapont \<<marina.alapont@forgeflow.com>\>
+- Manuel Regidor \<<manuel.regidor@sygel.es>\>
+- [Heliconia Solutions Pvt. Ltd.](https://www.heliconia.io)
+  - Bhavesh Heliconia
+- [CIT-Services](cit-services.eu)
+  - Prayag \<<prayag.k@cit-services.eu>\>

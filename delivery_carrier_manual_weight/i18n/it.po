@@ -1,0 +1,43 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* delivery_carrier_manual_weight
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2024-10-03 11:06+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.6.2\n"
+
+#. module: delivery_carrier_manual_weight
+#: model:ir.model.fields,field_description:delivery_carrier_manual_weight.field_delivery_carrier__is_manual_weight
+#: model:ir.model.fields,field_description:delivery_carrier_manual_weight.field_stock_picking__is_manual_weight
+msgid "Manual Weights"
+msgstr "Pesi manuali"
+
+#. module: delivery_carrier_manual_weight
+#: model:ir.model,name:delivery_carrier_manual_weight.model_delivery_carrier
+msgid "Shipping Methods"
+msgstr "Metodi di spedizione"
+
+#. module: delivery_carrier_manual_weight
+#: model:ir.model,name:delivery_carrier_manual_weight.model_stock_picking
+msgid "Transfer"
+msgstr "Trasferimento"
+
+#. module: delivery_carrier_manual_weight
+#: model:ir.model.fields,field_description:delivery_carrier_manual_weight.field_stock_picking__weight_manual
+msgid "Weight (Manual)"
+msgstr "Peso (manuale)"
+
+#. module: delivery_carrier_manual_weight
+#: model:ir.model.fields,field_description:delivery_carrier_manual_weight.field_stock_picking__shipping_weight_manual
+msgid "Weight for Shipping (Manual)"
+msgstr "Peso per spedizione (manuale)"
