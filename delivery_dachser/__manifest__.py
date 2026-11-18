@@ -1,4 +1,4 @@
-# Copyright 2025 Tecnativa - Víctor Martínez
+# Copyright 2025-2026 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 {
     "name": "Delivery Dachser",
@@ -13,6 +13,9 @@
     "data": [
         "data/product_packaging_data.xml",
         "views/delivery_carrier_views.xml",
+        "views/dachser_manifest_template.xml",
+        "security/ir.model.access.csv",
+        "wizard/dachser_manifest_wizard_views.xml",
     ],
     "maintainers": ["victoralmau"],
 }
