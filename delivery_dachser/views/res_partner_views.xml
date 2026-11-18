@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 Tecnativa - Víctor Martínez
+     Copyright 2026 Acysos S.L.
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_partner_form_inherit_dachser" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit.dachser</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//page[@name='sales_purchases']//group[@name='container_row_2']"
+                position="inside"
+            >
+                <group string="Dachser Logistics" name="dachser_partner_settings">
+                    <field name="dachser_partner_id" />
+                    <field name="dachser_gln" />
+                    <field name="dachser_tail_lift" />
+                    <field name="dachser_delivery_notice_type" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 Tecnativa - Víctor Martínez
+     Copyright 2026 Acysos S.L.
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_picking_form_inherit_dachser" model="ir.ui.view">
+        <field name="model">stock.picking</field>
+        <field
+            name="inherit_id"
+            ref="stock_delivery.view_picking_withcarrier_out_form"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='print_return_label']/.." position="inside">
+                <button
+                    name="dachser_get_label"
+                    string="Dachser Label"
+                    type="object"
+                    invisible="not carrier_tracking_ref or delivery_type != 'dachser'"
+                />
+                <button
+                    name="dachser_send_to_tms"
+                    string="Send to Dachser TMS"
+                    type="object"
+                    invisible="not carrier_tracking_ref or delivery_type != 'dachser' or tracking_state_history not in ('imported', 'labelled')"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>

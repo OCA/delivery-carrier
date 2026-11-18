@@ -1,19 +1,9 @@
-To configure your Dachser services, go to:
+To configure this module:
 
-1.  *Inventory/Sales \> Configuration \> Delivery methods* and create a
-    new one.
-2.  Choose *Dachser* as provider.
-3.  Configure your Ddachser data: API key, Division Code, Product Code,
-    Term Code, Packaging Code and Packaging Type
-
-The API key is a piece of information that you will obtain when you
-register at <https://api-portal.dachser.com/bi.b2b.portal/api/library>
-and request access to the following APIs: - transportorder: To create
-and cancel shipments. - shipmentstatus: To obtain the status of
-shipments. - quotations: To obtain a quote for a shipment.
-
-It is not possible to test transportorder with an API in test mode.
-
-There is no such thing as a test and production environment at Dachser,
-so changing the environment in the carrier's corresponding smart button
-will have no implications.
+1. Go to **Inventory > Configuration > Delivery > Shipping Methods** (or **Sales > Configuration > Shipping Methods**).
+2. Create a new shipping method (or open an existing one) with **Provider** = `Dachser`.
+3. In the **Dachser Configuration** tab:
+   - Enter your **Dachser Api Key** (`X-API-Key` token from the [Dachser API Portal](https://api-portal.dachser.com/bi.b2b.portal/api?2)) and toggle **Production Environment** as appropriate.
+   - Set your **Dachser Branch ID** (e.g. `193`), **Dachser Customer ID**, **Division Code** (`T` for European Logistics, `F` for Food Logistics), **Product Code** (`Y` targoflex, `Z` targospeed, `N` classicline/vengoflex, etc.), and **Term Code** (`031` Free delivered, `021` EXW, etc.).
+   - Choose your **Packaging Code**, **Packaging Type** (`stock.package.type`), **Label Format** (`PDF` or `ZPL`), and target eLogistics **Basket** (`sent`, `labelled`, or `imported`).
+4. *(Optional)* Install `delivery_price_method` if you wish to define fixed or rule-based local shipping prices instead of querying `POST /rest/v2/quotations`.
