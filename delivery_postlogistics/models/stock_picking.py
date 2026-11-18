@@ -245,12 +245,7 @@ Please use _get_quant_packages_from_picking instead."
             )
         return self.partner_id
 
-    def postlogistics_label_prepare_attributes(
-        self, pack=None, pack_num=None, pack_total=None, pack_weight=None
-    ):
-        """This method aims to prepare a dictionary of attributes to be sent
-        to the PostLogistics API"""
-        self.ensure_one()
+    def postlogistics_get_base_package_codes_hook(self, pack=None):
         package_type = (
             pack
             and pack.package_type_id
@@ -265,12 +260,6 @@ Please use _get_quant_packages_from_picking instead."
             )
         package_codes = package_type._get_shipper_package_code_list()
 
-        if pack_weight:
-            total_weight = pack_weight
-        else:
-            total_weight = pack.shipping_weight if pack else self.shipping_weight
-        total_weight *= 1000
-
         if not package_codes:
             raise UserError(
                 self.env._(
@@ -278,6 +267,22 @@ Please use _get_quant_packages_from_picking instead."
                     "in package type {package_type_name}, for picking {picking_name}."
                 ).format(package_type_name=package_type.name, picking_name=self.name)
             )
+        return package_codes
+
+    def postlogistics_label_prepare_attributes(
+        self, pack=None, pack_num=None, pack_total=None, pack_weight=None
+    ):
+        """This method aims to prepare a dictionary of attributes to be sent
+        to the PostLogistics API"""
+        self.ensure_one()
+
+        package_codes = self.postlogistics_get_base_package_codes_hook(pack=pack)
+
+        if pack_weight:
+            total_weight = pack_weight
+        else:
+            total_weight = pack.shipping_weight if pack else self.shipping_weight
+        total_weight *= 1000
 
         # Activate phone notification ZAW3213
         # if phone call notification is set on partner
