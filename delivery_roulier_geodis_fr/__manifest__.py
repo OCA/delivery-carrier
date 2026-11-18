@@ -2,7 +2,7 @@
 
 {
     "name": "Delivery Carrier Geodis (fr)",
-    "version": "16.0.1.1.1",
+    "version": "16.0.1.2.0",
     "author": "Akretion, Odoo Community Association (OCA)",
     "summary": "Generate Label for Geodis logistic",
     "maintainers": ["florian-dacosta"],
