@@ -7,7 +7,7 @@
         "Delivery Carrier implementation for Dachser REST API v2: "
         "quotations, transport orders, PDF/ZPL labels, tracking and POD"
     ),
-    "version": "18.0.1.0.0",
+    "version": "18.0.2.0.0",
     "category": "Delivery",
     "website": "https://github.com/OCA/delivery-carrier",
     "author": "Tecnativa, Acysos S.L., Odoo Community Association (OCA)",
