@@ -14,7 +14,7 @@
     <record id="default_geodis_calberson_agency_partner" model="res.partner">
         <field name="parent_id" ref="partner_geodis" />
         <field name="name">Geodis Lille Europe</field>
-        <field name="is_company" eval="True" />
+        <field name="is_company" eval="False" />
         <field name="street">7 Avenue de la Rotonde</field>
         <field name="zip">59160</field>
         <field name="phone">+33320085555</field>
@@ -27,7 +27,7 @@
     <record id="default_geodis_france_exress_agency_partner" model="res.partner">
         <field name="parent_id" ref="partner_geodis" />
         <field name="name">France Express Lille</field>
-        <field name="is_company" eval="True" />
+        <field name="is_company" eval="False" />
         <field name="street">2 RUE DES SAPINS</field>
         <field name="zip">59810</field>
         <field name="phone">+336320161718</field>
