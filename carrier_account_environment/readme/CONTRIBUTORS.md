@@ -1,0 +1,4 @@
+- David Béal \<<david.beal@akretion.com>\>
+- Guewen Baconnier \<<guewen.baconnier@camptocamp.com>\>
+- [Heliconia Solutions Pvt. Ltd.](https://www.heliconia.io)
+  - Bhavesh Heliconia
