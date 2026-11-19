@@ -152,7 +152,7 @@ class SchenkerRequest:
         reference_list = reference_list or []
         vals = dict(
             **self._shipping_api_credentials(),
-            **{"barcodeRequest": {"format": label_format}},
+            barcodeRequest={"format": label_format},
         )
         vals["barcodeRequest"].update({"bookingId": reference_list})
         label = self._process_reply(

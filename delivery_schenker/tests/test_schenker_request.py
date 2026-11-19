@@ -1,5 +1,3 @@
-# ruff: noqa: E501
-
 from types import SimpleNamespace
 from unittest.mock import MagicMock, patch
 

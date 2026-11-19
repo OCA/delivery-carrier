@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo noupdate="1">
     <!-- Schenker Product Packagings. It'd be nice to have proper measures -->
     <record id="schenker_package_type_01" model="stock.package.type">
