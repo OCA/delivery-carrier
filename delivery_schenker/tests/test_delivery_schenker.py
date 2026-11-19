@@ -1,9 +1,10 @@
-from datetime import datetime
+from datetime import time
 from types import SimpleNamespace
 from unittest.mock import MagicMock, patch
 
 from lxml import etree
 
+from odoo import fields
 from odoo.exceptions import UserError
 from odoo.tests.common import TransactionCase
 
@@ -42,7 +43,7 @@ class TestDeliverySchenker(TransactionCase):
         picking.shipping_weight = 4.0
         picking.weight = 5.0
         picking.number_of_packages = 1
-        picking.date_done = datetime(2026, 1, 2, 12, 0, 0)
+        picking.date_done = fields.Datetime.to_datetime("2026-01-02 12:00:00")
         picking.partner_id = SimpleNamespace(display_name="Customer", name="Customer")
         picking.sale_id = SimpleNamespace(incoterm=SimpleNamespace(code=False))
         picking.move_line_ids = []
@@ -348,7 +349,7 @@ class TestDeliverySchenker(TransactionCase):
         self.assertIsNone(self.carrier.schenker_tracking_state_update(picking))
         event = SimpleNamespace(
             Date="2026-01-02 00:00:00",
-            Time=datetime(2026, 1, 2, 10, 30, 0).time(),
+            Time=time(10, 30),
             OccurredAt=SimpleNamespace(LocationName="Madrid"),
             Status="DLV",
             StatusDescription=SimpleNamespace(_value_1="Delivered"),

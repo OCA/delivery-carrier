@@ -196,7 +196,7 @@ class DeliveryCarrier(models.Model):
                 pretty_print=True,
             )
         # Don't fail hard on this. Sometimes zeep could not be able to keep history
-        except Exception:
+        except (AttributeError, KeyError, TypeError, ValueError):
             return
         # Debug must be active in the carrier
         self.log_xml(schenker_last_request, "schenker_request")
@@ -455,8 +455,6 @@ class DeliveryCarrier(models.Model):
                 response = schenker_request._send_shipping(
                     vals, self.schenker_booking_type
                 )
-            except Exception as e:
-                raise (e)
             finally:
                 self._schenker_log_request(schenker_request, picking)
             if not response:
@@ -489,8 +487,6 @@ class DeliveryCarrier(models.Model):
                 continue
             try:
                 schenker_request._cancel_shipment(picking.carrier_tracking_ref)
-            except Exception as e:
-                raise (e)
             finally:
                 self._schenker_log_request(schenker_request, picking)
         return True
