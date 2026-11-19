@@ -487,11 +487,17 @@ class UpsRequest:
         )
         self._raise_for_status(status, False)
         shipment = status["trackResponse"]["shipment"][0]
-        package = shipment["package"][0]
+        # UPS omits the package (only returns warnings) when the tracking
+        # information is not found yet
+        package = (shipment.get("package") or [{}])[0]
         current_status = package.get("currentStatus") or {}
         states_list = []
-        delivery_state = "incident"
-        tracking_state = f"[{current_status['code']}] {current_status['description']}"
+        delivery_state = picking.delivery_state or "incident"
+        tracking_state = picking.tracking_state or False
+        if current_status:
+            tracking_state = (
+                f"[{current_status.get('code')}] {current_status.get('description')}"
+            )
         pod = (
             package.get("deliveryInformation", {}).get("pod", {}).get("content", False)
         )
