@@ -144,11 +144,13 @@ class TestDeliverySchenker(TransactionCase):
         ):
             self.carrier.schenker_booking_type = booking_type
             self.assertEqual(self.carrier._schenker_shipping_product(), expected)
-        self.env["ir.config_parameter"].set_param("product.weight_in_lbs", "0")
+        self.env["ir.config_parameter"].set_str("product.weight_in_lbs", "0")
         self.assertEqual(self.carrier._schenker_metric_system(), "METRIC")
-        self.env["ir.config_parameter"].set_param("product.weight_in_lbs", "1")
+        self.env["ir.config_parameter"].set_str("product.weight_in_lbs", "1")
         self.assertEqual(self.carrier._schenker_metric_system(), "IMPERIAL")
-        dates = self.carrier._schenker_pickup_dates(self._picking())
+        dates = self.carrier.with_context(tz="UTC")._schenker_pickup_dates(
+            self._picking()
+        )
         self.assertIn("T00:00:00", dates["pickUpDateFrom"])
         self.assertIn("T23:59:59", dates["pickUpDateTo"])
 
@@ -202,7 +204,7 @@ class TestDeliverySchenker(TransactionCase):
             SimpleNamespace(
                 quantity=2,
                 result_package_id=False,
-                product_uom_id=SimpleNamespace(
+                uom_id=SimpleNamespace(
                     _compute_quantity=lambda quantity, uom: quantity
                 ),
                 product_id=SimpleNamespace(uom_id=object(), volume=0.5),

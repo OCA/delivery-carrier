@@ -1,0 +1,2 @@
+odoo-addon-delivery_package_number @ git+https://github.com/OCA/delivery-carrier.git@refs/pull/1296/head#subdirectory=delivery_package_number
+odoo-addon-delivery_state @ git+https://github.com/OCA/delivery-carrier.git@refs/pull/1308/head#subdirectory=delivery_state

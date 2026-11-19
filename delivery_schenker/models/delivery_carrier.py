@@ -291,8 +291,9 @@ class DeliveryCarrier(models.Model):
         """
         :returns string with schenker metric system (METRIC or IMPERIAL)
         """
-        get_param = self.env["ir.config_parameter"].sudo().get_param
-        product_weight_in_lbs_param = get_param("product.weight_in_lbs", "0")
+        product_weight_in_lbs_param = (
+            self.env["ir.config_parameter"].sudo().get_str("product.weight_in_lbs")
+        )
         return "IMPERIAL" if product_weight_in_lbs_param == "1" else "METRIC"
 
     def _schenker_pickup_dates(self, picking):
@@ -355,7 +356,7 @@ class DeliveryCarrier(models.Model):
         # Obviously products should be well configured. This parameter is mandatory.
         volume = 0.0
         for move_line in picking.move_line_ids:
-            quantity = move_line.product_uom_id._compute_quantity(
+            quantity = move_line.uom_id._compute_quantity(
                 move_line.quantity, move_line.product_id.uom_id
             )
             volume += quantity * move_line.product_id.volume
