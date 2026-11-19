@@ -72,6 +72,18 @@ class TestDeliverySchenker(TransactionCase):
         request.history.last_sent = None
         self.carrier._schenker_log_request(request, self._picking())
 
+        envelope = etree.fromstring(
+            b'<Envelope xmlns:ns0="urn:test"><ns0:accessKey>secret</ns0:accessKey>'
+            b"<AccessKey>secret</AccessKey></Envelope>"
+        )
+        request.history.last_sent = {"envelope": envelope}
+        with patch.object(type(self.carrier), "log_xml") as log_xml:
+            self.carrier._schenker_log_request(request, self._picking())
+        logged_request = log_xml.call_args_list[0].args[0]
+        self.assertNotIn(b"secret", logged_request)
+        self.assertIn(b"********", logged_request)
+        self.assertEqual(etree.tostring(envelope).count(b"secret"), 2)
+
         self.carrier.schenker_barcode_mail = False
         self.carrier.schenker_barcode_format = "A6"
         self.assertEqual(

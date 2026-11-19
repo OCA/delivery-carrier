@@ -1,5 +1,7 @@
 # Copyright 2021 Tecnativa - David Vidal
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+import copy
+
 from lxml import etree
 
 from odoo import api, fields, models
@@ -186,7 +188,9 @@ class DeliveryCarrier(models.Model):
         schenker_last_request = schenker_last_response = False
         try:
             schenker_last_request = etree.tostring(
-                schenker_request.history.last_sent["envelope"],
+                self._schenker_mask_credentials(
+                    schenker_request.history.last_sent["envelope"]
+                ),
                 encoding="UTF-8",
                 pretty_print=True,
             )
@@ -201,6 +205,15 @@ class DeliveryCarrier(models.Model):
         # Debug must be active in the carrier
         self.log_xml(schenker_last_request, "schenker_request")
         self.log_xml(schenker_last_response, "schenker_response")
+
+    @api.model
+    def _schenker_mask_credentials(self, envelope):
+        """Return a copy of the SOAP envelope with the access key masked, so it
+        is never written in ir.logging"""
+        envelope = copy.deepcopy(envelope)
+        for node in envelope.iter("{*}accessKey", "{*}AccessKey"):
+            node.text = "********"
+        return envelope
 
     def _prepare_schenker_barcode(self):
         """Always request the barcode label when generating the booking. We can choose
