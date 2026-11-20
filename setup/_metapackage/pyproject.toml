@@ -1,7 +1,8 @@
 [project]
 name = "odoo-addons-oca-delivery-carrier"
-version = "20.0.20261120.0"
+version = "20.0.20261120.1"
 dependencies = [
+    "odoo-addon-delivery_package_number==20.0.*",
     "odoo-addon-delivery_state==20.0.*",
 ]
 classifiers=[
