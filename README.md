@@ -18,7 +18,11 @@ delivery-carrier
 
 [//]: # (addons)
 
-This part will be replaced when running the oca-gen-addons-table script from OCA/maintainer-tools.
+Available addons
+----------------
+addon | version | maintainers | summary
+--- | --- | --- | ---
+[delivery_state](delivery_state/) | 20.0.1.0.0 |  | Provides fields to be able to contemplate the tracking statesand also adds a global fields
 
 [//]: # (end addons)
 
