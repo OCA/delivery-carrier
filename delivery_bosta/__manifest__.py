@@ -1,5 +1,5 @@
 # Copyright 2026 Yahia Sherif
-# License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl).
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 {
     "name": "Delivery Bosta",
     "summary": "Delivery Carrier implementation for the Bosta API (Egypt)",
@@ -9,7 +9,7 @@
     "website": "https://github.com/OCA/delivery-carrier",
     "author": "Yahia Sherif, Odoo Community Association (OCA)",
     "maintainers": ["Yahiasherif002"],
-    "license": "LGPL-3",
+    "license": "AGPL-3",
     "installable": True,
     "depends": ["delivery_state"],
     "data": ["views/delivery_carrier_views.xml"],

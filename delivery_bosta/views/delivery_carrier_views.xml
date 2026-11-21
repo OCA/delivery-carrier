@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright 2026 Yahia Sherif
-     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl). -->
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
     <record id="view_delivery_carrier_form" model="ir.ui.view">
         <field name="model">delivery.carrier</field>
