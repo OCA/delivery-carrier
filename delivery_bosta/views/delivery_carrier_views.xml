@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Yahia Sherif
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_delivery_carrier_form" model="ir.ui.view">
+        <field name="model">delivery.carrier</field>
+        <field name="inherit_id" ref="delivery.view_delivery_carrier_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='destination']" position="before">
+                <page
+                    string="Bosta Configuration"
+                    name="bosta_configuration"
+                    invisible="delivery_type != 'bosta'"
+                >
+                    <group>
+                        <field
+                            name="bosta_api_key"
+                            password="True"
+                            required="delivery_type == 'bosta'"
+                        />
+                        <field name="bosta_webhook_secret" password="True" />
+                        <field name="fixed_price" string="Price Charged to Customers" />
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
