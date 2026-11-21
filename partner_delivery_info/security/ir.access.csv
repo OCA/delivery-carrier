@@ -1,0 +1,4 @@
+id,name,model_id,group_id/id,operation,domain
+access_res_partner_delivery_info_user,res.partner.delivery.info.user,res.partner.delivery.info,stock.group_stock_user,r,
+access_res_partner_delivery_info_manager,res.partner.delivery.info.manager,res.partner.delivery.info,stock.group_stock_manager,crud,
+access_res_partner_delivery_info_salesman,res.partner.delivery.info.salesman,res.partner.delivery.info,sales_team.group_sale_salesman,cru,

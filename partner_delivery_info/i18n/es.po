@@ -1,0 +1,97 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* delivery_carrier_customer_info
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2023-12-20 22:33+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
+"Language-Team: none\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: partner_delivery_info
+#: model:ir.model.fields,field_description:partner_delivery_info.field_res_partner_delivery_info__active
+msgid "Active"
+msgstr "Activo"
+
+#. module: partner_delivery_info
+#: model_terms:ir.ui.view,arch_db:partner_delivery_info.res_partner_delivery_info_form_view
+#: model_terms:ir.ui.view,arch_db:partner_delivery_info.res_partner_delivery_info_search_view
+msgid "Archived"
+msgstr "Archivado"
+
+#. module: partner_delivery_info
+#: model:ir.model,name:partner_delivery_info.model_res_partner
+msgid "Contact"
+msgstr "Contacto"
+
+#. module: partner_delivery_info
+#: model_terms:ir.actions.act_window,help:partner_delivery_info.action_res_partner_delivery_info
+msgid ""
+"Create a delivery indication to the carriers, to be used by the customers."
+msgstr ""
+"Crear una indicación de entrega a los transportistas, para que la utilicen "
+"los clientes."
+
+#. module: partner_delivery_info
+#: model:ir.model.fields,field_description:partner_delivery_info.field_res_partner_delivery_info__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: partner_delivery_info
+#: model:ir.model.fields,field_description:partner_delivery_info.field_res_partner_delivery_info__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: partner_delivery_info
+#: model:ir.actions.act_window,name:partner_delivery_info.action_res_partner_delivery_info
+#: model:ir.model,name:partner_delivery_info.model_res_partner_delivery_info
+#: model:ir.ui.menu,name:partner_delivery_info.menu_action_res_partner_delivery_info
+msgid "Delivery Indications by Customer to Carrier"
+msgstr "Indicaciones de Entrega del Cliente al Transportista"
+
+#. module: partner_delivery_info
+#: model:ir.model.fields,field_description:partner_delivery_info.field_res_partner_delivery_info__display_name
+msgid "Display Name"
+msgstr "Mostrar Nombre"
+
+#. module: partner_delivery_info
+#: model:ir.model.fields,field_description:partner_delivery_info.field_res_partner_delivery_info__id
+msgid "ID"
+msgstr "ID"
+
+#. module: partner_delivery_info
+#: model:ir.model.fields,field_description:partner_delivery_info.field_res_partner__delivery_info_id
+#: model:ir.model.fields,field_description:partner_delivery_info.field_res_users__delivery_info_id
+msgid "Info for Delivery Carrier"
+msgstr "Información para el Repartidor"
+
+#. module: partner_delivery_info
+#: model:ir.model.fields,field_description:partner_delivery_info.field_res_partner_delivery_info__write_uid
+msgid "Last Updated by"
+msgstr "Última Actualización por"
+
+#. module: partner_delivery_info
+#: model:ir.model.fields,field_description:partner_delivery_info.field_res_partner_delivery_info__write_date
+msgid "Last Updated on"
+msgstr "Última Actualización el"
+
+#. module: partner_delivery_info
+#: model:ir.model.fields,field_description:partner_delivery_info.field_res_partner_delivery_info__name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: partner_delivery_info
+#: model:ir.model.fields,field_description:partner_delivery_info.field_res_partner_delivery_info__text
+msgid "Text"
+msgstr "Texto"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Última Modificación el"
