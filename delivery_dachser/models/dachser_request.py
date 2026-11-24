@@ -1128,3 +1128,37 @@ class DachserRequest:
             params=params or None,
             lang=lang,
         )
+        # Example response
+        # {
+        #     'id': xx,
+        #     'state': 'sent',
+        #     'transportDate': '2025-12-01',
+        #     'weight': {'weight': 630, 'unit': 'kg'},
+        #     'consignor': {
+        #         'id': 'xx',
+        #         'names': ['Test'],
+        #         'addressInformation': {
+        #             'streets': ['Street'],
+        #             'city': 'City',
+        #             'postalCode': '500010',
+        #             'countryCode': 'ES'
+        #         }
+        #     },
+        #     'consignee': {
+        #         'names': ['Test name'],
+        #         'addressInformation': {
+        #             'streets': ['Street'],
+        #             'city': 'City',
+        #             'postalCode': '500010',
+        #             'countryCode': 'ES'
+        #         }
+        #     },
+        #     'references': [{'code': 'X', 'value': 'X'}],
+        #     'labelQuantity': 1,
+        #     'links': [
+        #         {
+        #             'rel': 'labels',
+        #             'href': 'https://api-gateway.dachser.com/rest/v2/transportorders/ID/labels?label-format=P'
+        #         }
+        #     ]
+        # }

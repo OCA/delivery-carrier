@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-28 08:39+0000\n"
 "PO-Revision-Date: 2025-10-28 09:40+0100\n"
@@ -1149,6 +1149,12 @@ msgstr ""
 msgid ""
 "It is not possible to cancel a shipment because it has already been sent."
 msgstr "No es posible cancelar un envío porque ya ha sido enviado."
+
+#. module: delivery_dachser
+#. odoo-python
+#: code:addons/delivery_dachser/wizard/dachser_manifest_wizard.py:0
+msgid "No picking has been found with the reference %s"
+msgstr "No se ha encontrado albarán con la referencia %s"
 
 #. module: delivery_dachser
 #: model_terms:ir.ui.view,arch_db:delivery_dachser.view_delivery_carrier_form

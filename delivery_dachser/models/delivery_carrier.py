@@ -1,4 +1,4 @@
-# Copyright 2025 Tecnativa - Víctor Martínez
+# Copyright 2025-2026 Tecnativa - Víctor Martínez
 # Copyright 2026 Acysos S.L.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 import base64
@@ -158,6 +158,13 @@ class DeliveryCarrier(models.Model):
     )
     dachser_self_collector = fields.Boolean(default=False)
     dachser_frost_protected = fields.Boolean(default=False)
+    dachser_manifest_report_type = fields.Selection(
+        selection=[
+            ("dachser", "Dachser"),
+            ("custom", "Custom"),
+        ],
+        default="dachser",
+    )
 
     # -------------------------------------------------------------------------
     # Internal Helpers

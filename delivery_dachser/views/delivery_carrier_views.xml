@@ -104,6 +104,7 @@
                             <field name="dachser_order_group" />
                             <field name="dachser_logistics_type" />
                             <field name="dachser_save_quotation" />
+                            <field name="dachser_manifest_report_type" />
                         </group>
                         <group string="Transport Options">
                             <field name="dachser_collection_option" />
