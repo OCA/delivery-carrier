@@ -50,12 +50,25 @@ class DeliveryCarrier(models.Model):
     def rate_shipment(self, order):
         res = super().rate_shipment(order)
         # for roulier carrier, usually getting the price by carrier webservice
-        # is usually not available for now. Avoid failure in that case.
-        if not res and self._is_roulier():
-            res = {
-                "success": True,
-                "price": 0.0,
-                "error_message": False,
-                "warning_message": False,
-            }
+        # is usually not available for now. Avoid failure in that case:
+        # without a <delivery_type>_rate_shipment method, Odoo returns an error
+        if self._is_roulier() and not hasattr(
+            self, f"{self.delivery_type}_rate_shipment"
+        ):
+            if (
+                self.price_method in ("fixed", "base_on_rule")
+                and res["success"]
+            ):
+                # usage of module like delivery_price_method
+                # at this point, we may have success
+                # bypass
+                pass
+            else:
+                res = {
+                    "success": True,
+                    "price": 0.0,
+                    "carrier_price": 0,
+                    "error_message": False,
+                    "warning_message": False,
+                }
         return res
