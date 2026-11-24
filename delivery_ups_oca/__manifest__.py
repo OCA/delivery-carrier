@@ -19,9 +19,11 @@
     ],
     "data": [
         "data/stock_package_type_data.xml",
+        "data/res_country_group_data.xml",
         "security/ir.model.access.csv",
         "views/delivery_carrier_view.xml",
         "views/stock_picking_view.xml",
+        "wizards/choose_delivery_carrier_views.xml",
     ],
     "pre_init_hook": "pre_init_hook",
 }

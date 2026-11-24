@@ -12,17 +12,32 @@ from urllib.parse import urlencode
 import requests
 
 from odoo.exceptions import UserError
+from odoo.tools import float_compare
 
 _logger = logging.getLogger(__name__)
 UPS_TAX_IDENTIFICATION_NUMBER_MAX_LENGTH = 15
 UPS_SHIP_API_VERSION = "v2409"
 UPS_LABEL_API_VERSION = "v2603"
 UPS_PAPERLESS_API_VERSION = "v2"
+GC_DIM_UNIT = {"IN": "INCH", "CM": "CENTIMETER"}
+GC_WEIGHT_UNIT = {"LBS": "POUND", "KGS": "KILOGRAM", "OZS": "OUNCE"}
+GC_SERVICE_LEVEL = {
+    "07": "ups.worldwide_express",
+    "08": "ups.worldwide_expedited",
+    "11": "ups.standard",
+    "17": "ups.worldwide_economy_ddp",
+    "54": "ups.worldwide_express_plus",
+    "65": "ups.worldwide_saver",
+    "71": "ups.worldwide_express_freight_midday",
+    "72": "ups.worldwide_economy_ddp",
+    "96": "ups.worldwide_express_freight",
+}
 
 
 class UpsRequest:
     def __init__(self, carrier):
         self.carrier = carrier
+        self.env = carrier.env
         self.default_packaging_id = self.carrier.ups_default_packaging_id
         self.use_packages_from_picking = self.carrier.ups_use_packages_from_picking
         self.shipper_number = self.carrier.ups_shipper_number
@@ -391,10 +406,160 @@ class UpsRequest:
         if document_ids:
             shipment = vals["ShipmentRequest"]["Shipment"]
             shipment.setdefault("ShipmentServiceOptions", {})["InternationalForms"] = {
-                "FormType": "07",
+                "FormType": ["07"],
                 "UserCreatedForm": {"DocumentID": document_ids},
+                "Product": self._get_ups_paperless_products(picking),
             }
+        self._add_global_checkout_to_shipment(vals, picking)
         return vals
+
+    def _get_ups_paperless_products(self, picking):
+        """Product descriptions for the InternationalForms container. UPS requires
+        the Product element, but with only Description mandatory, as the invoice
+        data itself comes from the uploaded user created forms (FormType 07)."""
+        products = []
+        for move in picking.move_ids.filtered(
+            lambda m: m.product_id and m.product_id.type != "service"
+        ):
+            product = move.product_id.with_context(lang="en_US")
+            products.append({"Description": [(product.name or move.name or "")[:35]]})
+        return products or [{"Description": [(picking.name or "")[:35]]}]
+
+    def _add_global_checkout_to_shipment(self, vals, picking):
+        """Attach the UPS Global Checkout Quote ID and DDP billing to a shipment.
+
+        When the picking carries a Global Checkout Quote ID, the Quote ID is sent
+        in the dedicated ``Shipment.QuoteID`` field (linking the guaranteed
+        duties/taxes) and a second shipment charge of type ``02`` (Duties and
+        Taxes) is billed to the shipper so UPS clears customs as Delivered Duty
+        Paid (DDP).
+        """
+        order = picking.sale_id
+        quote_id = picking.ups_landed_cost_quote_identifier or (
+            order.ups_landed_cost_quote_identifier if order else False
+        )
+        # If the order no longer has a landed cost line, the customer is not being
+        # charged duties, so do not apply Global Checkout DDP to the shipment.
+        if order and quote_id and not order.order_line.filtered("is_ups_landed_cost"):
+            picking.message_post(
+                body=self.carrier.env._(
+                    "UPS Global Checkout DDP was not applied: the duties, taxes & "
+                    "fees line was removed from the order, so the shipment is sent "
+                    "without a Quote ID."
+                )
+            )
+            picking.ups_landed_cost_quote_identifier = False
+            quote_id = False
+        if not quote_id:
+            return vals
+        # Persist onto the picking when it was quoted after the picking existed.
+        if picking.ups_landed_cost_quote_identifier != quote_id:
+            picking.ups_landed_cost_quote_identifier = quote_id
+        shipment = vals["ShipmentRequest"]["Shipment"]
+        shipment["QuoteID"] = quote_id
+        # Bill duties and taxes to the shipper (DDP) in addition to transportation.
+        shipment_charge = shipment["PaymentInformation"]["ShipmentCharge"]
+        if isinstance(shipment_charge, dict):
+            shipment_charge = [shipment_charge]
+        shipment_charge.append(
+            {
+                "Type": "02",
+                "BillShipper": {"AccountNumber": self.shipper_number},
+            }
+        )
+        shipment["PaymentInformation"]["ShipmentCharge"] = shipment_charge
+        self._add_global_checkout_international_forms(shipment, picking)
+        return vals
+
+    def _add_global_checkout_international_forms(self, shipment, picking):
+        """Add the UPS-generated customs invoice (InternationalForms) with the
+        commodity data that must match the Global Checkout quote (quantity,
+        value, origin country, currency and part number).
+
+        Also guard the destination country/state to match the quote, since UPS
+        requires ShipTo Country/State to be identical to the quote parties.
+        """
+        order = picking.sale_id
+        if not order:
+            return
+        self._check_global_checkout_destination(order, picking)
+        service_options = shipment.setdefault("ShipmentServiceOptions", {})
+        existing = service_options.get("InternationalForms", {})
+        # An uploaded commercial invoice replaces the UPS-generated one, also for
+        # Global Checkout, to avoid two commercial invoices at customs.
+        use_uploaded_invoice = bool(
+            existing
+            and "002" in picking.ups_paperless_document_ids.mapped("ups_document_type")
+        )
+        commodities = self._gc_commodities(order)
+        if not commodities:
+            return
+        currency = order.currency_id.name
+        products = []
+        for commodity in commodities:
+            product = {
+                "Description": [commodity["description"][:35]],
+                "Unit": {
+                    "Number": str(commodity["quantity"]),
+                    "Value": str(commodity["amount"]),
+                    "UnitOfMeasurement": {"Code": "EA"},
+                },
+            }
+            if commodity["product_id"]:
+                product["PartNumber"] = commodity["product_id"]
+            if commodity["origin_country"]:
+                product["OriginCountryCode"] = commodity["origin_country"]
+            if commodity["hs_code"]:
+                product["CommodityCode"] = commodity["hs_code"]
+            products.append(product)
+        if use_uploaded_invoice:
+            # Keep FormType 07 only, but still pass the commodity data, which
+            # UPS needs to calculate duties and taxes for DDP.
+            service_options["InternationalForms"] = {
+                **existing,
+                "ReasonForExport": (
+                    picking.ups_global_checkout_reason_for_export or "SALE"
+                ),
+                "CurrencyCode": currency,
+                "Product": products,
+            }
+            return
+        sold_to = self._partner_to_shipping_data(picking.partner_id)
+        sold_to.get("Address", {}).pop("ResidentialAddressIndicator", None)
+        # Merge into any InternationalForms already set (e.g. the paperless
+        # UserCreatedForm, FormType 07) instead of overwriting it.
+        form_types = ["01"] + [
+            form_type for form_type in existing.get("FormType", []) if form_type != "01"
+        ]
+        service_options["InternationalForms"] = {
+            **existing,
+            "FormType": form_types,
+            "InvoiceDate": datetime.date.today().strftime("%Y%m%d"),
+            "InvoiceNumber": (order.name or picking.name)[:35],
+            "ReasonForExport": (
+                picking.ups_global_checkout_reason_for_export or "SALE"
+            ),
+            "CurrencyCode": currency,
+            "Contacts": {"SoldTo": sold_to},
+            "Product": products,
+        }
+
+    def _check_global_checkout_destination(self, order, picking):
+        """Ensure the shipment destination matches the quote destination, as UPS
+        requires ShipTo Country/State to be identical to the Global Checkout
+        quote."""
+        quote_partner = order.partner_shipping_id
+        ship_partner = picking.partner_id
+        if self._get_country_code(quote_partner) != self._get_country_code(
+            ship_partner
+        ) or (quote_partner.state_id.code != ship_partner.state_id.code):
+            raise UserError(
+                self.carrier.env._(
+                    "The delivery address does not match the address used for the "
+                    "UPS Global Checkout quote. Re-calculate the shipping rate "
+                    "before shipping."
+                )
+            )
 
     def _send_shipping(self, picking):
         # Send the paperless documents first so their document IDs are included
@@ -502,6 +667,234 @@ class UpsRequest:
         if self.negotiated_rates and "NegotiatedRateCharges" in rated_shipment:
             return rated_shipment["NegotiatedRateCharges"]["TotalCharge"]
         return rated_shipment["TotalCharges"]
+
+    # -------------------------------------------------------------------------
+    # UPS Global Checkout (landed cost) - GraphQL API
+    # -------------------------------------------------------------------------
+    def _gc_url(self):
+        return f"{self.url}/api/globalcheckout/v1/graphql"
+
+    def _raise_for_graphql_errors(self, status_json, skip_errors=True):
+        errors = (status_json or {}).get("errors")
+        if errors:
+            msg = self.carrier.env._("UPS Global Checkout error: {}").format(
+                "\n".join(error.get("message", "") for error in errors)
+            )
+            if skip_errors:
+                _logger.info(msg)
+            else:
+                raise UserError(msg)
+
+    def _send_graphql(self, query, variables=None, skip_errors=False):
+        """Send a GraphQL request to the UPS Global Checkout endpoint.
+
+        Reuses the standard OAuth token handling from ``_process_reply`` and adds
+        the required ``shipperNumber`` header.
+        """
+        payload = {"query": query}
+        if variables is not None:
+            payload["variables"] = variables
+        _logger.debug(
+            "UPS Global Checkout GraphQL Request: URL=%s, ShipperNumber=%s, Body=%s",
+            self._gc_url(),
+            self.shipper_number,
+            payload,
+        )
+        status_json = self._process_reply(
+            url=self._gc_url(),
+            json=payload,
+            headers_extra={
+                "shipperNumber": self.shipper_number,
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+            },
+        )
+        self._raise_for_graphql_errors(status_json, skip_errors)
+        return (status_json or {}).get("data") or {}
+
+    def _gc_party_inputs(self, order):
+        """Build the ORIGIN and DESTINATION party inputs for the workflow."""
+        partner_from = order.warehouse_id.partner_id or order.company_id.partner_id
+        partner_to = order.partner_shipping_id
+
+        def _location(partner):
+            location = {"countryCode": self._get_country_code(partner)}
+            if partner.zip:
+                location["postalCode"] = partner.zip
+            if partner.state_id.code:
+                location["administrativeAreaCode"] = partner.state_id.code
+            if partner.city:
+                location["locality"] = partner.city
+            return location
+
+        return [
+            {"type": "ORIGIN", "location": _location(partner_from)},
+            {"type": "DESTINATION", "location": _location(partner_to)},
+        ]
+
+    def _gc_product_hs_code(self, product):
+        """Return the HS code to send to UPS Global Checkout for a product.
+
+        When the OCA ``product_harmonized_system`` module is installed, the full
+        national code (``hs.code.local_code``, including extension digits beyond
+        the 6-digit HS heading) is used, resolved recursively so a code set on
+        the product category is also taken into account. If no such code can be
+        resolved, it falls back to the core ``hs_code`` field provided by the
+        ``stock_delivery`` module.
+        """
+        if hasattr(product, "get_hs_code_recursively"):
+            hs_record = product.get_hs_code_recursively()
+            if hs_record:
+                return hs_record.local_code or hs_record.hs_code
+        return getattr(product, "hs_code", False)
+
+    def _gc_product_origin_country(self, product):
+        country = False
+        if "origin_country_id" in product._fields:
+            country = product.origin_country_id
+        if not country and "country_of_origin" in product._fields:
+            country = product.country_of_origin
+        return country.code if country else False
+
+    def _gc_commodities(self, order):
+        """Normalized commodity data shared by the Global Checkout quote and the
+        customs invoice on the shipment, so the values UPS requires to match
+        (quantity, value, origin country, currency, part number) are identical by
+        construction."""
+        currency = order.currency_id.name
+        commodities = []
+        for line in order.order_line.filtered(
+            lambda x: x.product_id
+            and not x.display_type
+            and not x.is_delivery
+            and not x.is_ups_landed_cost
+            and x.product_id.type != "service"
+            and float_compare(
+                x.product_uom_qty, 0.0, precision_rounding=x.product_uom.rounding
+            )
+            > 0
+        ):
+            product = line.product_id
+            product_en = product.with_context(lang="en_US")
+            commodities.append(
+                {
+                    "description": (product_en.name or line.name or "")[:255],
+                    "quantity": int(line.product_uom_qty) or 1,
+                    "amount": order.currency_id.round(line.price_unit),
+                    "currency": currency,
+                    "origin_country": self._gc_product_origin_country(product),
+                    "hs_code": self._gc_product_hs_code(product),
+                    "product_id": product.default_code or product.barcode or False,
+                }
+            )
+        return commodities
+
+    def _gc_item_inputs(self, order):
+        """Build the item inputs (one per sale order line with a product and a
+        positive quantity)."""
+        items = []
+        for commodity in self._gc_commodities(order):
+            item = {
+                "amount": commodity["amount"],
+                "quantity": commodity["quantity"],
+                "currencyCode": commodity["currency"],
+                "description": commodity["description"],
+            }
+            if commodity["origin_country"]:
+                item["countryOfOrigin"] = commodity["origin_country"]
+            if commodity["hs_code"]:
+                item["hsCode"] = commodity["hs_code"]
+            if commodity["product_id"]:
+                item["productId"] = commodity["product_id"]
+            items.append(item)
+        return items
+
+    def _gc_carton_inputs(self, order):
+        carton = {
+            "dimensionalUnit": GC_DIM_UNIT.get(
+                self.package_dimension_code, "CENTIMETER"
+            ),
+            "weightUnit": GC_WEIGHT_UNIT.get(self.package_weight_code, "KILOGRAM"),
+            "weight": order._get_estimated_weight() or 0.1,
+            "type": "PACKAGE",
+        }
+        pkg = self.default_packaging_id
+        if pkg and pkg.packaging_length and pkg.width and pkg.height:
+            carton["length"] = pkg.packaging_length
+            carton["width"] = pkg.width
+            carton["height"] = pkg.height
+        return [carton]
+
+    def landed_cost_quote(self, order, transportation_cost):
+        """Run the UPS Global Checkout landed cost workflow for an order.
+
+        The quote is a multi-step workflow bound to a Root resource created via
+        ``rootCreate``; the subsequent workflow mutations attach to that root
+        within the same session. Returns a dict with ``quote_id``, ``amount``,
+        ``currency`` and ``guarantee_code``.
+        """
+        currency = order.currency_id.name
+        service_level_code = GC_SERVICE_LEVEL.get(self.service_code)
+        if not service_level_code:
+            raise UserError(
+                self.carrier.env._(
+                    "UPS Global Checkout does not support the configured UPS "
+                    "service (%s). Select an international UPS service on the "
+                    "delivery method."
+                )
+                % self.service_code
+            )
+        variables = {
+            "parties": self._gc_party_inputs(order),
+            "items": self._gc_item_inputs(order),
+            "cartons": self._gc_carton_inputs(order),
+            "rating": {
+                "amount": transportation_cost,
+                "currencyCode": currency,
+                "serviceLevelCode": service_level_code,
+            },
+            "landedCost": {
+                "currencyCode": currency,
+                "calculationMethod": "DDP_PREFERRED",
+            },
+        }
+        query = """
+mutation OdooLandedCost(
+    $parties: [PartyCreateWorkflowInput!]!
+    $items: [ItemCreateWorkflowInput!]!
+    $cartons: [CartonCreateWorkflowInput!]!
+    $rating: ShipmentRatingCreateWorkflowInput!
+    $landedCost: LandedCostWorkFlowInput!
+) {
+    rootCreate { id }
+    partyCreateWorkflow(input: $parties) { id }
+    itemCreateWorkflow(input: $items) { id }
+    cartonsCreateWorkflow(input: $cartons) { id }
+    shipmentRatingCreateWorkflow(input: $rating) { id }
+    landedCostCalculateWorkflow(input: $landedCost) {
+        id
+        currencyCode
+        landedCostGuaranteeCode
+        amountSubtotals { landedCostTotal duties taxes fees }
+    }
+}
+"""
+        data = self._send_graphql(query, variables, skip_errors=False)
+        results = data.get("landedCostCalculateWorkflow") or []
+        if not results:
+            raise UserError(
+                self.carrier.env._(
+                    "UPS Global Checkout returned no landed cost for this order."
+                )
+            )
+        landed_cost = results[0]
+        subtotals = landed_cost.get("amountSubtotals") or {}
+        return {
+            "quote_id": landed_cost["id"],
+            "amount": subtotals.get("landedCostTotal") or 0.0,
+            "currency": landed_cost.get("currencyCode") or currency,
+            "guarantee_code": landed_cost.get("landedCostGuaranteeCode"),
+        }
 
     def _prepare_shipping_label(self, carrier_tracking_ref):
         return {
