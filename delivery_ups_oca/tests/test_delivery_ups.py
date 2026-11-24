@@ -2,6 +2,7 @@
 
 import base64
 import io
+import json
 from datetime import datetime, timedelta
 from unittest import mock
 
@@ -9,6 +10,7 @@ from PIL import Image
 
 from odoo.exceptions import UserError, ValidationError
 from odoo.tests import Form, common
+from odoo.tools import mute_logger
 
 from ..models.ups_request import UpsRequest
 
@@ -801,6 +803,62 @@ class TestDeliveryUps(TestDeliveryUpsBase):
         )
         self.assertEqual(headers["transactionSrc"], f"Odoo ({self.carrier.name})")
 
+    def test_ups_get_new_token_success(self):
+        self.carrier.ups_client_id = "test_id"
+        self.carrier.ups_client_secret = "test_secret"
+
+        ups_request = UpsRequest(self.carrier)
+
+        mock_response = mock.Mock()
+        mock_response.status_code = 200
+        mock_response.json.return_value = {
+            "access_token": "abc123",
+            "expires_in": 3600,
+        }
+
+        with mock.patch.object(
+            ups_request, "_send_request", return_value=mock_response
+        ):
+            before = datetime.now()
+            ups_request._get_new_token()
+
+        self.assertEqual(ups_request.token, "abc123")
+        self.assertEqual(self.carrier.ups_token, "abc123")
+        self.assertGreater(self.carrier.ups_token_expiration_date, before)
+
+    def test_ups_process_reply_401_retry(self):
+        future_date = datetime.now() + timedelta(hours=1)
+        self.carrier.ups_token = "valid_token_123"
+        self.carrier.ups_token_expiration_date = future_date
+
+        ups_request = UpsRequest(self.carrier)
+
+        unauthorized_response = mock.Mock()
+        unauthorized_response.status_code = 401
+
+        success_response = mock.Mock()
+        success_response.status_code = 200
+        success_response.json.return_value = {"success": True, "data": "test_data"}
+
+        with (
+            mock.patch.object(
+                ups_request,
+                "_send_request",
+                side_effect=[unauthorized_response, success_response],
+            ) as mock_send_request,
+            mock.patch.object(ups_request, "_get_new_token") as mock_get_new_token,
+            self._patch_carrier_log_xml(),
+        ):
+            result = ups_request._process_reply(
+                url="https://api.test.com/endpoint",
+                json={"key": "value"},
+                method="post",
+            )
+
+        self.assertEqual(result, {"success": True, "data": "test_data"})
+        self.assertEqual(mock_send_request.call_count, 2)
+        mock_get_new_token.assert_called_once()
+
     def test_ups_prepare_create_shipping_with_packages(self):
         """Test _prepare_create_shipping with packages from picking"""
         # Enable use packages from picking
@@ -1428,3 +1486,437 @@ class TestUpsNegotiatedRates(TestDeliveryUpsBase):
                 ],
             )
             self.assertEqual(self.picking.carrier_tracking_ref, "1ZXXXXXXXXXXXXXXXX")
+
+
+class TestSendPaperlessDocuments(TestDeliveryUpsBase):
+    def setUp(self):
+        super().setUp()
+        self.picking = self.sale.picking_ids[0]
+        self.picking.move_ids.quantity = 10
+        self.picking.action_assign()
+        self.carrier.ups_token = "test_token"
+        self.carrier.ups_token_expiration_date = datetime.now() + timedelta(hours=1)
+        # Create a dummy invoice PDF
+        self.dummy_pdf = base64.b64encode(b"%PDF-1.4\n%Fake PDF Content\n%%EOF")
+        self.invoice = self.sale._create_invoices()
+        self.invoice.action_post()
+        self.ship_response = {
+            "price": {"CurrencyCode": "USD", "MonetaryValue": "10.0"},
+            "ShipmentIdentificationNumber": "123456",
+            "labels": [
+                {
+                    "tracking_ref": "123456",
+                    "format_code": "GIF",
+                    "datas": base64.b64encode(self.label),
+                }
+            ],
+        }
+
+    def test_prepare_ups_paperless_documents_adds_missing_docs(self):
+        result = self.carrier.prepare_ups_paperless_documents(self.picking)
+        doc_types = [doc["UserCreatedFormDocumentType"] for doc in result]
+        self.assertIn("002", doc_types, "Invoice should be added if missing")
+        self.assertIn("010", doc_types, "Packing list should be added if missing")
+
+    def test_ups_paperless_documents_raises_if_document_id_exists(self):
+        """Should raise UserError when a document ID already exists"""
+        self.picking.ups_document_identifier = "DUMMY_ID"
+        with self.assertRaises(UserError):
+            self.carrier.send_ups_paperless_documents(self.picking)
+
+    def test_prepare_paperless_documents_raises_if_invoice_missing(self):
+        self.picking.sale_id.invoice_ids = False
+        with self.assertRaises(UserError):
+            self.carrier.send_ups_paperless_documents(self.picking)
+
+    def test_send_paperless_documents_data(self):
+        self.picking.ups_paperless_auto_send = True
+        self.picking.ups_paperless_document_ids = [
+            (
+                0,
+                0,
+                {
+                    "file_name": "Paperless Document - 001",
+                    "ups_document_type": "003",
+                    "ups_paperless_file": self.dummy_pdf,
+                },
+            ),
+            (
+                0,
+                0,
+                {
+                    "file_name": "Paperless Document - 002",
+                    "ups_document_type": "013",
+                    "ups_paperless_file": self.dummy_pdf,
+                },
+            ),
+        ]
+        with mock.patch(
+            _provider_class + ".send_paperless_documents", return_value="DOC123456789"
+        ):
+            result = self.carrier.send_ups_paperless_documents(self.picking)
+            self.assertIsNotNone(result)
+
+    def test_send_paperless_documents_success(self):
+        """A successful upload stores the returned document ID on the picking."""
+        ups_request = UpsRequest(self.carrier)
+        documents = [
+            {
+                "UserCreatedFormFileName": "commercial_invoice.pdf",
+                "UserCreatedFormFileFormat": "pdf",
+                "UserCreatedFormDocumentType": "002",
+                "UserCreatedFormFile": self.dummy_pdf.decode("utf-8"),
+            }
+        ]
+        mock_response = mock.Mock()
+        mock_response.status_code = 200
+        mock_response.text = json.dumps(
+            {"UploadResponse": {"FormsHistoryDocumentID": {"DocumentID": ["DOC123"]}}}
+        )
+        with mock.patch.object(
+            ups_request, "_send_request", return_value=mock_response
+        ) as mock_send:
+            result = ups_request.send_paperless_documents(self.picking, documents)
+        self.assertEqual(result, ["DOC123"])
+        self.assertEqual(self.picking.ups_document_identifier, "DOC123")
+        self.assertIn("/api/paperlessdocuments/v2/upload", mock_send.call_args[0][0])
+        upload_request = json.loads(mock_send.call_args[0][2])["UploadRequest"]
+        self.assertEqual(
+            upload_request["Request"]["TransactionReference"]["CustomerContext"],
+            self.picking.name,
+        )
+
+    def test_send_paperless_documents_multiple_documents(self):
+        """v2 always returns an array; every document ID is kept."""
+        ups_request = UpsRequest(self.carrier)
+        documents = [
+            {
+                "UserCreatedFormFileName": "commercial_invoice.pdf",
+                "UserCreatedFormFileFormat": "pdf",
+                "UserCreatedFormDocumentType": "002",
+                "UserCreatedFormFile": self.dummy_pdf.decode("utf-8"),
+            },
+            {
+                "UserCreatedFormFileName": "packing_list.pdf",
+                "UserCreatedFormFileFormat": "pdf",
+                "UserCreatedFormDocumentType": "010",
+                "UserCreatedFormFile": self.dummy_pdf.decode("utf-8"),
+            },
+        ]
+        mock_response = mock.Mock()
+        mock_response.status_code = 200
+        mock_response.text = json.dumps(
+            {
+                "UploadResponse": {
+                    "FormsHistoryDocumentID": {"DocumentID": ["DOC1", "DOC2"]}
+                }
+            }
+        )
+        with mock.patch.object(
+            ups_request, "_send_request", return_value=mock_response
+        ):
+            result = ups_request.send_paperless_documents(self.picking, documents)
+        self.assertEqual(result, ["DOC1", "DOC2"])
+        self.assertEqual(self.picking.ups_document_identifier, "DOC1,DOC2")
+        self.assertEqual(self.picking._get_ups_document_ids(), ["DOC1", "DOC2"])
+
+    def test_get_ups_document_ids_legacy_format(self):
+        """Document IDs stored by the v1 implementation are still readable."""
+        self.picking.ups_document_identifier = "['DOC1', 'DOC2']"
+        self.assertEqual(self.picking._get_ups_document_ids(), ["DOC1", "DOC2"])
+        self.picking.ups_document_identifier = "DOC123"
+        self.assertEqual(self.picking._get_ups_document_ids(), ["DOC123"])
+        self.picking.ups_document_identifier = False
+        self.assertEqual(self.picking._get_ups_document_ids(), [])
+
+    def test_send_paperless_documents_refreshes_expired_token(self):
+        """An expired token is renewed before the upload is sent."""
+        self.carrier.ups_token_expiration_date = datetime.now() - timedelta(hours=1)
+        ups_request = UpsRequest(self.carrier)
+        documents = [
+            {
+                "UserCreatedFormFileName": "commercial_invoice.pdf",
+                "UserCreatedFormFileFormat": "pdf",
+                "UserCreatedFormDocumentType": "002",
+                "UserCreatedFormFile": self.dummy_pdf.decode("utf-8"),
+            }
+        ]
+        mock_response = mock.Mock()
+        mock_response.status_code = 200
+        mock_response.text = json.dumps(
+            {"UploadResponse": {"FormsHistoryDocumentID": {"DocumentID": ["DOC123"]}}}
+        )
+        with (
+            mock.patch.object(ups_request, "_get_new_token") as mock_token,
+            mock.patch.object(ups_request, "_send_request", return_value=mock_response),
+        ):
+            result = ups_request.send_paperless_documents(self.picking, documents)
+        mock_token.assert_called_once()
+        self.assertEqual(result, ["DOC123"])
+
+    def test_send_paperless_documents_retries_on_401(self):
+        """A 401 triggers a new token and exactly one retry."""
+        ups_request = UpsRequest(self.carrier)
+        documents = [
+            {
+                "UserCreatedFormFileName": "commercial_invoice.pdf",
+                "UserCreatedFormFileFormat": "pdf",
+                "UserCreatedFormDocumentType": "002",
+                "UserCreatedFormFile": self.dummy_pdf.decode("utf-8"),
+            }
+        ]
+        unauthorized = mock.Mock()
+        unauthorized.status_code = 401
+        success = mock.Mock()
+        success.status_code = 200
+        success.text = json.dumps(
+            {"UploadResponse": {"FormsHistoryDocumentID": {"DocumentID": ["DOC123"]}}}
+        )
+        with (
+            mock.patch.object(ups_request, "_get_new_token") as mock_token,
+            mock.patch.object(
+                ups_request, "_send_request", side_effect=[unauthorized, success]
+            ) as mock_send,
+        ):
+            result = ups_request.send_paperless_documents(self.picking, documents)
+        mock_token.assert_called_once()
+        self.assertEqual(mock_send.call_count, 2)
+        self.assertEqual(result, ["DOC123"])
+
+    @mute_logger("odoo.addons.delivery_ups_oca.models.ups_request")
+    def test_send_paperless_documents_api_error(self):
+        """An error response is raised as a UserError with the UPS message."""
+        ups_request = UpsRequest(self.carrier)
+        documents = [
+            {
+                "UserCreatedFormFileName": "commercial_invoice.pdf",
+                "UserCreatedFormFileFormat": "pdf",
+                "UserCreatedFormDocumentType": "002",
+                "UserCreatedFormFile": self.dummy_pdf.decode("utf-8"),
+            }
+        ]
+        mock_response = mock.Mock()
+        mock_response.status_code = 400
+        mock_response.text = json.dumps(
+            {"response": {"errors": [{"message": "Invalid shipper number"}]}}
+        )
+        with mock.patch.object(
+            ups_request, "_send_request", return_value=mock_response
+        ):
+            with self.assertRaises(UserError) as cm:
+                ups_request.send_paperless_documents(self.picking, documents)
+        self.assertIn("Invalid shipper number", str(cm.exception))
+
+    @mute_logger("odoo.addons.delivery_ups_oca.models.ups_request")
+    def test_send_paperless_documents_non_json_error(self):
+        """A non-JSON (e.g. HTML 503 from the edge/CDN) response raises a clear
+        UserError instead of a confusing JSON decode error."""
+        ups_request = UpsRequest(self.carrier)
+        documents = [
+            {
+                "UserCreatedFormFileName": "commercial_invoice.pdf",
+                "UserCreatedFormFileFormat": "pdf",
+                "UserCreatedFormDocumentType": "002",
+                "UserCreatedFormFile": self.dummy_pdf.decode("utf-8"),
+            }
+        ]
+        mock_response = mock.Mock()
+        mock_response.status_code = 503
+        mock_response.text = (
+            "<HTML><HEAD><TITLE>Internal Server Error</TITLE></HEAD>"
+            "<BODY><H1>Internal Server Error - Write</H1></BODY></HTML>"
+        )
+        with mock.patch.object(
+            ups_request, "_send_request", return_value=mock_response
+        ):
+            with self.assertRaises(UserError) as cm:
+                ups_request.send_paperless_documents(self.picking, documents)
+        self.assertIn("HTTP 503", str(cm.exception))
+        self.assertIn("non-JSON", str(cm.exception))
+        self.assertFalse(self.picking.ups_document_identifier)
+
+    @mute_logger("odoo.addons.delivery_ups_oca.models.ups_request")
+    def test_send_paperless_documents_without_document_id(self):
+        """A response without any DocumentID is an error, not a success."""
+        ups_request = UpsRequest(self.carrier)
+        documents = [
+            {
+                "UserCreatedFormFileName": "commercial_invoice.pdf",
+                "UserCreatedFormFileFormat": "pdf",
+                "UserCreatedFormDocumentType": "002",
+                "UserCreatedFormFile": self.dummy_pdf.decode("utf-8"),
+            }
+        ]
+        mock_response = mock.Mock()
+        mock_response.status_code = 200
+        mock_response.text = json.dumps(
+            {
+                "UploadResponse": {
+                    "Response": {
+                        "Alert": {"Code": "120900", "Description": "User Id Missing"}
+                    }
+                }
+            }
+        )
+        with mock.patch.object(
+            ups_request, "_send_request", return_value=mock_response
+        ):
+            with self.assertRaises(UserError) as cm:
+                ups_request.send_paperless_documents(self.picking, documents)
+        self.assertIn("did not return any Document ID", str(cm.exception))
+        self.assertIn("User Id Missing", str(cm.exception))
+        self.assertFalse(self.picking.ups_document_identifier)
+
+    def test_prepare_create_shipping_adds_international_forms(self):
+        """A retrieved document ID is added as InternationalForms to the request."""
+        self.picking.ups_document_identifier = "DOC123"
+        self.picking.shipping_weight = 10.0
+        self.picking.number_of_packages = 1
+        ups_request = UpsRequest(self.carrier)
+        vals = ups_request._prepare_create_shipping(self.picking)
+        service_options = vals["ShipmentRequest"]["Shipment"]["ShipmentServiceOptions"]
+        self.assertEqual(
+            service_options["InternationalForms"]["UserCreatedForm"]["DocumentID"],
+            ["DOC123"],
+        )
+
+    def test_prepare_create_shipping_with_cod_and_international_forms(self):
+        """COD and paperless documents can be combined on the same shipment."""
+        self.carrier.write({"ups_cash_on_delivery": True, "ups_cod_funds_code": "1"})
+        self.picking.ups_document_identifier = "DOC1,DOC2"
+        self.picking.shipping_weight = 10.0
+        self.picking.number_of_packages = 1
+        ups_request = UpsRequest(self.carrier)
+        vals = ups_request._prepare_create_shipping(self.picking)
+        service_options = vals["ShipmentRequest"]["Shipment"]["ShipmentServiceOptions"]
+        self.assertIn("COD", service_options)
+        self.assertEqual(
+            service_options["InternationalForms"]["UserCreatedForm"]["DocumentID"],
+            ["DOC1", "DOC2"],
+        )
+
+    def test_send_shipping_triggers_paperless_documents(self):
+        """_send_shipping sends the paperless documents before shipping."""
+        self.picking.ups_paperless_auto_send = True
+        self.picking.shipping_weight = 10.0
+        self.picking.number_of_packages = 1
+        ups_request = UpsRequest(self.carrier)
+        shipment_response = {
+            "ShipmentResponse": {
+                "ShipmentResults": {
+                    "ShipmentCharges": {
+                        "TotalCharges": {
+                            "CurrencyCode": "USD",
+                            "MonetaryValue": "10.0",
+                        }
+                    },
+                    "ShipmentIdentificationNumber": "123456",
+                    "PackageResults": {
+                        "TrackingNumber": "123456",
+                        "ShippingLabel": {
+                            "ImageFormat": {"Code": "GIF"},
+                            "GraphicImage": base64.b64encode(self.label),
+                        },
+                    },
+                }
+            }
+        }
+        with mock.patch.object(
+            type(self.carrier), "send_ups_paperless_documents"
+        ) as mock_provider:
+            with mock.patch.object(
+                ups_request, "_process_reply", return_value=shipment_response
+            ):
+                with mock.patch.object(ups_request, "_raise_for_status"):
+                    ups_request._send_shipping(self.picking)
+        mock_provider.assert_called_once_with(self.picking)
+
+    def test_button_validate_triggers_paperless_documents(self):
+        """Validating an auto-send picking triggers the paperless documents upload."""
+        self._prepare_paperless_picking(self.picking)
+        with mock.patch(
+            _provider_class + "._send_shipping", return_value=self.ship_response
+        ):
+            with mock.patch.object(
+                type(self.carrier), "send_ups_paperless_documents"
+            ) as mock_provider:
+                self.picking.button_validate()
+        mock_provider.assert_called_once_with(self.picking)
+
+    def _prepare_paperless_picking(self, picking):
+        picking.move_ids.quantity = 10
+        picking.action_assign()
+        picking.ups_paperless_auto_send = True
+        picking.ups_paperless_document_ids = [
+            (
+                0,
+                0,
+                {
+                    "file_name": "Paperless Document - 001",
+                    "ups_document_type": "003",
+                    "ups_paperless_file": self.dummy_pdf,
+                },
+            )
+        ]
+        return picking
+
+    @mute_logger("odoo.addons.delivery_ups_oca.models.stock_picking")
+    def test_button_validate_blocked_by_paperless_error(self):
+        """A failed upload blocks the validation instead of being swallowed."""
+        self._prepare_paperless_picking(self.picking)
+        # The savepoint stands in for the rollback Odoo does on a UserError
+        with self.assertRaises(UserError) as cm:
+            with self.env.cr.savepoint():
+                with mock.patch(
+                    _provider_class + "._send_shipping",
+                    return_value=self.ship_response,
+                ):
+                    with mock.patch.object(
+                        type(self.carrier),
+                        "send_ups_paperless_documents",
+                        side_effect=UserError(
+                            "UPS Paperless Documents upload failed (HTTP 503)."
+                        ),
+                    ):
+                        self.picking.button_validate()
+        self.assertIn("HTTP 503", str(cm.exception))
+        self.assertNotEqual(self.picking.state, "done")
+        self.assertFalse(self.picking.carrier_tracking_ref)
+
+    def test_download_ups_paperless_file(self):
+        """The download action returns a URL pointing to the stored file."""
+        document = self.env["ups.paperless.document"].create(
+            {
+                "file_name": "invoice.pdf",
+                "ups_document_type": "002",
+                "ups_paperless_file": self.dummy_pdf,
+                "ups_stock_picking_id": self.picking.id,
+            }
+        )
+        action = document.download_ups_paperless_file()
+        self.assertEqual(action["type"], "ir.actions.act_url")
+        self.assertIn(str(document.id), action["url"])
+        self.assertIn("invoice.pdf", action["url"])
+
+    def test_onchange_sets_auto_send(self):
+        """Auto-send is toggled based on the carrier's country groups."""
+        country_group = self.env["res.country.group"].create(
+            {
+                "name": "UPS Paperless Test Group",
+                "country_ids": [(6, 0, [self.picking.partner_id.country_id.id])],
+            }
+        )
+        # Country in the carrier's groups -> auto-send enabled
+        self.carrier.ups_paperless_country_group_ids = [(6, 0, [country_group.id])]
+        self.picking._onchange_ups_paperless_auto_send()
+        self.assertTrue(self.picking.ups_paperless_auto_send)
+        # No matching country group -> auto-send disabled
+        self.carrier.ups_paperless_country_group_ids = [(5, 0, 0)]
+        self.picking._onchange_ups_paperless_auto_send()
+        self.assertFalse(self.picking.ups_paperless_auto_send)
+
+    def test_send_paperless_documents_no_documents(self):
+        """Sending without any document raises a UserError."""
+        ups_request = UpsRequest(self.carrier)
+        with self.assertRaises(UserError):
+            ups_request.send_paperless_documents(self.picking, [])

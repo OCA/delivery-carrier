@@ -84,6 +84,12 @@ License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
                         <group string="Declared Value">
                             <field name="declared_value_percentage" />
                         </group>
+                        <group string="Paperless Documents">
+                            <field
+                                name="ups_paperless_country_group_ids"
+                                widget="many2many_tags"
+                            />
+                        </group>
                     </group>
                 </page>
             </xpath>

@@ -4,6 +4,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 import datetime
+import json
 import logging
 import uuid
 from urllib.parse import urlencode
@@ -16,6 +17,7 @@ _logger = logging.getLogger(__name__)
 UPS_TAX_IDENTIFICATION_NUMBER_MAX_LENGTH = 15
 UPS_SHIP_API_VERSION = "v2409"
 UPS_LABEL_API_VERSION = "v2603"
+UPS_PAPERLESS_API_VERSION = "v2"
 
 
 class UpsRequest:
@@ -86,10 +88,22 @@ class UpsRequest:
         url = f"{self.url}/security/v1/oauth/token"
         headers = {"x-merchant-id": self.client_id}
         data = {"grant_type": "client_credentials"}
+        _logger.debug(
+            "UPS Token Request: URL=%s, Headers=%s, Data=%s", url, headers, data
+        )
         status = self._send_request(
             url, data=data, headers=headers, auth=(self.client_id, self.client_secret)
         )
+        status_code = status.status_code
         status = status.json()
+        debug_response = status.copy() if isinstance(status, dict) else status
+        if isinstance(debug_response, dict) and "access_token" in debug_response:
+            debug_response["access_token"] = "***MASKED***"
+        _logger.debug(
+            "UPS Token Response: Status=%s, Content=%s",
+            status_code,
+            debug_response,
+        )
         self._raise_for_status(status, False)
         token = status.get("access_token")
         self.token = token
@@ -98,6 +112,46 @@ class UpsRequest:
             datetime.datetime.now()
             + datetime.timedelta(seconds=int(status.get("expires_in")))
         )
+
+    def _send_authenticated_request(
+        self,
+        url,
+        json=None,
+        data=None,
+        method="post",
+        headers_extra=None,
+        timeout=10,
+    ):
+        """Send a request with a valid bearer token, retrying once on a 401"""
+        if (
+            not self.token
+            or not self.token_expiration_date
+            or (self.token_expiration_date <= datetime.datetime.now())
+        ):
+            self._get_new_token()
+        headers = {
+            "Authorization": f"Bearer {self.token}",
+        }
+        if headers_extra:
+            headers = {**headers, **headers_extra}
+        debug_headers = {**headers, "Authorization": "***MASKED***"}
+        _logger.debug(
+            "UPS Request: URL=%s, Method=%s, Headers=%s, Body=%s",
+            url,
+            method,
+            debug_headers,
+            json or data,
+        )
+        response = self._send_request(url, json, data, headers, method, timeout=timeout)
+        # Generate a new token
+        if response.status_code == 401:
+            self._get_new_token()
+            headers["Authorization"] = f"Bearer {self.token}"
+            _logger.debug("UPS request returned 401; retrying with a refreshed token")
+            response = self._send_request(
+                url, json, data, headers, method, timeout=timeout
+            )
+        return response
 
     def _process_reply(
         self,
@@ -108,27 +162,13 @@ class UpsRequest:
         headers_extra=None,
         timeout=10,
     ):
-        if (
-            not self.token
-            or not self.token_expiration_date
-            or (self.token_expiration_date <= datetime.datetime.now())
-        ):
-            self._get_new_token()
         data = data or {}
-        headers = {
-            "Authorization": f"Bearer {self.token}",
-        }
-        if headers_extra:
-            headers = {**headers, **headers_extra}
-        status = self._send_request(url, json, data, headers, method, timeout=timeout)
-        # Generate a new token
-        if status.status_code == 401:
-            self._get_new_token()
-            headers["Authorization"] = f"Bearer {self.token}"
-            status = self._send_request(
-                url, json, data, headers, method, timeout=timeout
-            )
+        status = self._send_authenticated_request(
+            url, json, data, method, headers_extra, timeout
+        )
+        status_code = status.status_code
         status = status.json()
+        _logger.debug("UPS Response: Status=%s, Content=%s", status_code, status)
         ups_last_request = f"URL: {url}\nData: {data}\nJSON: {json}"
         self.carrier.log_xml(ups_last_request, "ups_last_request")
         self.carrier.log_xml(status or "", "ups_last_response")
@@ -346,9 +386,28 @@ class UpsRequest:
                     },
                 }
             }
+        # Add paperless documents if a document id has been retrieved
+        document_ids = picking._get_ups_document_ids()
+        if document_ids:
+            shipment = vals["ShipmentRequest"]["Shipment"]
+            shipment.setdefault("ShipmentServiceOptions", {})["InternationalForms"] = {
+                "FormType": "07",
+                "UserCreatedForm": {"DocumentID": document_ids},
+            }
         return vals
 
     def _send_shipping(self, picking):
+        # Send the paperless documents first so their document IDs are included
+        # in the shipment request.
+        if picking.ups_paperless_auto_send and not picking.ups_document_identifier:
+            try:
+                self.carrier.send_ups_paperless_documents(picking)
+            except Exception as e:
+                error_msg = self.carrier.env._(
+                    "Failed to send paperless documents: %s"
+                ) % str(e)
+                _logger.error(error_msg)
+                raise UserError(error_msg) from e
         status = self._process_reply(
             url=f"{self.url}/api/shipments/{UPS_SHIP_API_VERSION}/ship",
             json=self._prepare_create_shipping(picking),
@@ -559,3 +618,131 @@ class UpsRequest:
             "tracking_state": tracking_state,
             "pod": pod,
         }
+
+    def _normalize_document_ids(self, document_id):
+        if not document_id:
+            return []
+        if isinstance(document_id, str):
+            document_id = [document_id]
+        return [doc_id.strip() for doc_id in document_id if doc_id and doc_id.strip()]
+
+    def _log_paperless_alerts(self, upload_response):
+        """Log the alerts of an upload response and return them as a text block"""
+        alerts = (upload_response.get("Response") or {}).get("Alert") or []
+        if isinstance(alerts, dict):
+            alerts = [alerts]
+        messages = []
+        for alert in alerts:
+            _logger.info(
+                "UPS Paperless Documents alert: %s %s",
+                alert.get("Code"),
+                alert.get("Description"),
+            )
+            messages.append(f"{alert.get('Code')} {alert.get('Description')}")
+        return "\n".join(messages)
+
+    def send_paperless_documents(self, picking, paperless_document_data):
+        """Send paperless documents to UPS"""
+        if not paperless_document_data:
+            raise UserError(picking.env._("No documents to send!"))
+
+        request_data = {
+            "UploadRequest": {
+                "Request": {"TransactionReference": {"CustomerContext": picking.name}},
+                "ShipperNumber": self.shipper_number,
+                "UserCreatedForm": paperless_document_data,
+            }
+        }
+        headers = {
+            "ShipperNumber": self.shipper_number,
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "transId": uuid.uuid4().hex,
+            "transactionSrc": self.transaction_src,
+        }
+        url = f"{self.url}/api/paperlessdocuments/{UPS_PAPERLESS_API_VERSION}/upload"
+        # Mask the document files before logging the request
+        debug_request = json.loads(json.dumps(request_data))
+        for doc in debug_request.get("UploadRequest", {}).get("UserCreatedForm", []):
+            if "UserCreatedFormFile" in doc:
+                doc["UserCreatedFormFile"] = "***MASKED***"
+        _logger.debug(
+            "UPS Paperless Documents Request: URL=%s, Headers=%s, Data=%s",
+            url,
+            headers,
+            debug_request,
+        )
+        self.carrier.log_xml(f"URL: {url}\nJSON: {debug_request}", "ups_last_request")
+        try:
+            response = self._send_authenticated_request(
+                url,
+                data=json.dumps(request_data),
+                headers_extra=headers,
+                timeout=10,
+            )
+            _logger.debug(
+                "UPS Paperless Documents Response: Status=%s, Content=%s",
+                response.status_code,
+                response.text,
+            )
+            self.carrier.log_xml(response.text or "", "ups_last_response")
+            # UPS answers server errors with an HTML page instead of JSON, so the
+            # payload is parsed defensively before looking at the status code.
+            try:
+                payload = json.loads(response.text)
+            except (ValueError, TypeError):
+                payload = None
+            if response.status_code in [200, 201] and payload is not None:
+                upload_response = payload.get("UploadResponse") or {}
+                alerts = self._log_paperless_alerts(upload_response)
+                forms_history = upload_response.get("FormsHistoryDocumentID") or {}
+                document_ids = self._normalize_document_ids(
+                    forms_history.get("DocumentID")
+                )
+                if not document_ids:
+                    _logger.error(
+                        "UPS Paperless Documents upload returned HTTP %s without any "
+                        "DocumentID: %s",
+                        response.status_code,
+                        response.text,
+                    )
+                    raise UserError(
+                        picking.env._(
+                            "UPS accepted the Paperless Documents upload but did "
+                            "not return any Document ID.%s"
+                        )
+                        % (f"\n{alerts}" if alerts else "")
+                    ) from None
+                picking.ups_document_identifier = ",".join(document_ids)
+                return document_ids
+            _logger.error(
+                "UPS Paperless Documents upload failed: Status=%s, Content=%s",
+                response.status_code,
+                response.text,
+            )
+            if payload is None:
+                raise UserError(
+                    picking.env._(
+                        "UPS Paperless Documents upload failed (HTTP %s). "
+                        "UPS returned a non-JSON response, which usually means "
+                        "a temporary UPS or network (edge/CDN) outage. "
+                        "Please retry in a few minutes; if the problem "
+                        "persists, contact UPS support."
+                    )
+                    % response.status_code
+                ) from None
+            errors = (payload.get("response") or {}).get("errors")
+            error_message = errors[0].get("message") if errors else response.text
+            raise UserError(
+                picking.env._("Paperless Documents: %s") % error_message
+            ) from None
+        except UserError:
+            raise
+        except Exception as e:
+            # Connection errors and timeouts otherwise surface as an empty or
+            # cryptic message, so log the traceback and keep the exception type.
+            _logger.exception("UPS Paperless Documents upload failed")
+            raise UserError(
+                picking.env._("UPS Paperless Documents upload failed: %s")
+                % (str(e) or type(e).__name__)
+            ) from e
