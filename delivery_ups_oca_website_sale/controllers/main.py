@@ -9,7 +9,9 @@ class UpsGlobalCheckoutDelivery(Delivery):
     def _order_summary_values(self, order, **kwargs):
         res = super()._order_summary_values(order, **kwargs)
         landed_cost = sum(
-            order.order_line.filtered("is_ups_landed_cost").mapped("price_total")
+            order.order_line.filtered(
+                lambda x: x.is_ups_landed_cost or x.is_ups_landed_cost_estimate
+            ).mapped("price_total")
         )
         monetary = request.env["ir.qweb.field.monetary"]
         res["ups_landed_cost"] = (

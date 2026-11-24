@@ -12,8 +12,17 @@ class SaleOrderLine(models.Model):
         "Global Checkout landed cost (duties and taxes).",
     )
 
+    is_ups_landed_cost_estimate = fields.Boolean(
+        string="Is UPS Landed Cost Estimate",
+        help="Technical flag identifying the sale order line that carries the UPS "
+        "Landed Cost estimate (duties and taxes).",
+    )
+
     def _check_line_unlink(self):
         """Allow deletion of the UPS landed cost line from a confirmed order,
         mirroring the behaviour of the delivery line."""
         undeletable_lines = super()._check_line_unlink()
-        return undeletable_lines.filtered(lambda line: not line.is_ups_landed_cost)
+        return undeletable_lines.filtered(
+            lambda line: not line.is_ups_landed_cost
+            and not line.is_ups_landed_cost_estimate
+        )

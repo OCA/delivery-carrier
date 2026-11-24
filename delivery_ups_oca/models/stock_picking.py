@@ -138,6 +138,20 @@ class StockPicking(models.Model):
                     currency=order.currency_id.name,
                 )
             )
+        elif (
+            self.carrier_id.delivery_type == "ups"
+            and self.carrier_id.ups_landed_cost_estimate_ddp
+            and order.ups_landed_cost_estimate_amount
+            and order.order_line.filtered("is_ups_landed_cost_estimate")
+        ):
+            self.message_post(
+                body=_(
+                    "UPS Landed Cost Duties, Taxes & Fees (DDP): "
+                    "%(amount).2f %(currency)s",
+                    amount=order.ups_landed_cost_estimate_amount,
+                    currency=order.currency_id.name,
+                )
+            )
         return res
 
     def ups_get_label(self):

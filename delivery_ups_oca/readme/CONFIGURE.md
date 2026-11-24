@@ -37,6 +37,28 @@ To configure this module, you need to:
       landed cost line is added to the order (the quote is still
       generated and stored).
 
+9.  To enable the UPS Landed Cost estimate, under the "UPS" tab in the
+    "Landed Cost Estimate" group:
+    - Set "UPS Landed Cost Estimate Countries" with the destination
+      country groups for which a non-binding duties and taxes estimate
+      should be requested. Leaving it empty disables the feature.
+    - Set "UPS Estimated Tariffs/Duties Product": the product used for
+      the separate estimated duties and taxes order line. If left empty,
+      no estimate line is added to the order (the estimate is still
+      generated and stored).
+    - Set "Margin (%)": an optional percentage added on top of the landed
+      cost estimate returned by UPS.
+    - Enable "Ship DDP for Landed Cost" to send shipments quoted with the
+      estimate Delivered Duty Paid (duties billed to the shipper and a UPS
+      customs invoice attached). The estimate is not guaranteed, so any
+      difference with the amount UPS assesses at customs is absorbed by the
+      shipper. If disabled, the estimate is only charged to the customer in
+      Odoo and the shipment is sent without DDP.
+
+    The estimate is only requested when UPS Global Checkout (guaranteed
+    landed cost) is not available for the destination, so a single landed
+    cost line is produced per order.
+
 **NOTE** You need to add an app from <https://developer.ups.com/> for
 using the webservice.
 

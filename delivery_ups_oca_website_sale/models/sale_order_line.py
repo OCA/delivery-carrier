@@ -8,4 +8,8 @@ class SaleOrderLine(models.Model):
 
     def _show_in_cart(self):
         self.ensure_one()
-        return super()._show_in_cart() and not self.is_ups_landed_cost
+        return (
+            super()._show_in_cart()
+            and not self.is_ups_landed_cost
+            and not self.is_ups_landed_cost_estimate
+        )

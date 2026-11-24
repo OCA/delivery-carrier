@@ -12,3 +12,9 @@ class ChooseDeliveryCarrier(models.TransientModel):
         currency_field="currency_id",
         readonly=True,
     )
+    ups_landed_cost_estimate_amount = fields.Monetary(
+        string="Estimated Duties, Taxes & Fees",
+        related="order_id.ups_landed_cost_estimate_amount",
+        currency_field="currency_id",
+        readonly=True,
+    )

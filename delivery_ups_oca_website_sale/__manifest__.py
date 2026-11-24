@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 {
     "name": "Delivery UPS OCA - Website Sale",
-    "summary": "Show UPS Global Checkout duties, taxes & fees at checkout",
+    "summary": "Show UPS duties, taxes & fees at checkout",
     "version": "18.0.1.0.0",
     "category": "Delivery",
     "website": "https://github.com/OCA/delivery-carrier",

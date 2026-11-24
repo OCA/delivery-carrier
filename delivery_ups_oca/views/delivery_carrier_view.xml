@@ -105,6 +105,30 @@ License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
                                 invisible="not ups_global_checkout_country_group_ids"
                             />
                         </group>
+                        <group
+                            string="Estimated Landed Cost"
+                            help="Configure destination countries to enable the UPS Landed Cost Quote (a non-binding estimate). Only used when Global Checkout is not available for the destination. Leave empty to disable."
+                        >
+                            <field
+                                name="ups_landed_cost_estimate_country_group_ids"
+                                string="Countries"
+                                widget="many2many_tags"
+                            />
+                            <field
+                                name="ups_landed_cost_estimate_product_id"
+                                string="Product"
+                                invisible="not ups_landed_cost_estimate_country_group_ids"
+                            />
+                            <field
+                                name="ups_landed_cost_estimate_margin"
+                                invisible="not ups_landed_cost_estimate_country_group_ids"
+                            />
+                            <field
+                                name="ups_landed_cost_estimate_ddp"
+                                string="Ship as DDP"
+                                invisible="not ups_landed_cost_estimate_country_group_ids"
+                            />
+                        </group>
                     </group>
                 </page>
             </xpath>

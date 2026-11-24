@@ -12,7 +12,7 @@ License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
         <xpath expr="//tr[@id='order_delivery']" position="after">
             <t
                 t-set="ups_landed_cost"
-                t-value="sum(website_sale_order.order_line.filtered('is_ups_landed_cost').mapped('price_total'))"
+                t-value="sum(website_sale_order.order_line.filtered(lambda x: x.is_ups_landed_cost or x.is_ups_landed_cost_estimate).mapped('price_total'))"
             />
             <tr
                 id="order_ups_landed_cost"

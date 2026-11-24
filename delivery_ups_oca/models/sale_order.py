@@ -22,13 +22,67 @@ class SaleOrder(models.Model):
         copy=False,
     )
 
+    ups_landed_cost_estimate_amount = fields.Monetary(
+        string="UPS Landed Cost Estimate",
+        help="Non-binding estimate of duties, taxes and fees quoted by the UPS "
+        "Landed Cost Quote API. Only used when Global Checkout is not available.",
+        currency_field="currency_id",
+        readonly=True,
+        copy=False,
+    )
+    ups_landed_cost_estimate_identifier = fields.Char(
+        string="UPS Landed Cost Estimate ID",
+        help="Transaction ID returned by the UPS Landed Cost Quote API, kept for "
+        "traceability.",
+        readonly=True,
+        copy=False,
+    )
+
     def _create_delivery_line(self, carrier, price_unit):
         """Create the standard delivery line and, for UPS Global Checkout, an
         additional line below it carrying the landed cost (duties and taxes)."""
         sol = super()._create_delivery_line(carrier, price_unit)
         if carrier.delivery_type == "ups":
             self._ups_sync_landed_cost_line(carrier, sol)
+            self._ups_sync_landed_cost_estimate_line(carrier, sol)
         return sol
+
+    def _ups_sync_landed_cost_estimate_line(self, carrier, delivery_sol):
+        """Create/refresh the UPS landed cost estimate order line just below the
+        delivery line.
+
+        The line is only created when an estimate product is configured on the
+        carrier and an estimate amount has been quoted for the order. Any existing
+        estimate line is removed first to avoid duplicates on refresh.
+        """
+        self.ensure_one()
+        self._ups_remove_landed_cost_estimate_line()
+        product = carrier.ups_landed_cost_estimate_product_id
+        if not (product and self.ups_landed_cost_estimate_amount):
+            return self.env["sale.order.line"]
+        taxes = product.taxes_id._filter_taxes_by_company(self.company_id)
+        if self.fiscal_position_id:
+            taxes = self.fiscal_position_id.map_tax(taxes)
+        values = {
+            "order_id": self.id,
+            "name": _("Estimated Duties, Taxes & Fees"),
+            "product_id": product.id,
+            "product_uom_qty": 1,
+            "product_uom": product.uom_id.id,
+            "price_unit": self.ups_landed_cost_estimate_amount,
+            "tax_id": [(6, 0, taxes.ids)],
+            "is_ups_landed_cost_estimate": True,
+            "sequence": delivery_sol.sequence + 1 if delivery_sol else 999,
+        }
+        return self.env["sale.order.line"].sudo().create(values)
+
+    def _ups_remove_landed_cost_estimate_line(self):
+        """Remove the UPS landed cost estimate lines not yet invoiced."""
+        lines = self.order_line.filtered(
+            lambda x: x.is_ups_landed_cost_estimate and x.qty_invoiced == 0
+        )
+        if lines:
+            lines.unlink()
 
     def _ups_sync_landed_cost_line(self, carrier, delivery_sol):
         """Create/refresh the UPS landed cost order line just below the delivery
@@ -76,10 +130,14 @@ class SaleOrder(models.Model):
         removed (e.g. carrier change/removal)."""
         res = super()._remove_delivery_line()
         self._ups_remove_landed_cost_line()
+        self._ups_remove_landed_cost_estimate_line()
         return res
 
     def _get_update_prices_lines(self):
         """Exclude the UPS landed cost line from pricelist recomputation so its
         quoted amount is not overwritten by the tariff product's list price."""
         lines = super()._get_update_prices_lines()
-        return lines.filtered(lambda line: not line.is_ups_landed_cost)
+        return lines.filtered(
+            lambda line: not line.is_ups_landed_cost
+            and not line.is_ups_landed_cost_estimate
+        )

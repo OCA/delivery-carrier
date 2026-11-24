@@ -23,6 +23,20 @@ License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
                         options="{'currency_field': 'currency_id'}"
                     />
                 </div>
+                <label
+                    for="ups_landed_cost_estimate_amount"
+                    invisible="delivery_type != 'ups' or not ups_landed_cost_estimate_amount"
+                />
+                <div
+                    class="o_row"
+                    invisible="delivery_type != 'ups' or not ups_landed_cost_estimate_amount"
+                >
+                    <field
+                        name="ups_landed_cost_estimate_amount"
+                        widget="monetary"
+                        options="{'currency_field': 'currency_id'}"
+                    />
+                </div>
             </xpath>
         </field>
     </record>

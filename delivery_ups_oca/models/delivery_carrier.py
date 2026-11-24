@@ -170,6 +170,62 @@ class DeliveryCarrier(models.Model):
         "Configure this product with the appropriate taxes for imported duties.",
     )
 
+    ups_landed_cost_estimate_country_group_ids = fields.Many2many(
+        comodel_name="res.country.group",
+        relation="delivery_carrier_ups_lc_country_group_rel",
+        column1="carrier_id",
+        column2="country_group_id",
+        string="UPS Landed Cost Estimate Countries",
+        help="Destination country groups eligible for the UPS Landed Cost Quote "
+        "(a non-binding estimate of duties and taxes). If left empty, the estimate "
+        "is disabled for this carrier. The estimate is only used when Global "
+        "Checkout (guaranteed landed cost) is not available for the destination.",
+    )
+    ups_landed_cost_estimate_product_id = fields.Many2one(
+        comodel_name="product.product",
+        string="UPS Estimated Tariffs/Duties Product",
+        help="Product used for the separate sale order line that carries the UPS "
+        "Landed Cost estimate (duties and taxes). If left empty, no estimate line "
+        "is added to the order (the estimate is still generated and stored). "
+        "Configure this product with the appropriate taxes for imported duties.",
+    )
+    ups_landed_cost_estimate_margin = fields.Float(
+        string="Margin (%)",
+        default=0.0,
+        help="Percentage added to the landed cost estimate returned by UPS. For "
+        "example, 10 means the estimate shown everywhere (order line, wizard and "
+        "checkout) is 10%% higher than the value returned by UPS. Leave at 0 to "
+        "use the UPS value as-is.",
+    )
+
+    ups_landed_cost_estimate_ddp = fields.Boolean(
+        string="Ship DDP for Landed Cost",
+        default=False,
+        help="If enabled, shipments quoted with the UPS Landed Cost estimate are "
+        "sent Delivered Duty Paid (DDP): the duties and taxes are billed to the "
+        "shipper and a UPS customs invoice is attached. The estimate is not a "
+        "guaranteed quote, so any difference with the amount UPS actually assesses "
+        "at customs is absorbed by the shipper. If disabled, the estimate is only "
+        "charged to the customer in Odoo and the shipment is sent without DDP.",
+    )
+
+    @api.constrains("ups_landed_cost_estimate_margin")
+    def _check_ups_landed_cost_estimate_margin(self):
+        for carrier in self:
+            if carrier.ups_landed_cost_estimate_margin < 0.0:
+                raise ValidationError(
+                    self.env._("The UPS Landed Cost Margin cannot be negative.")
+                )
+
+    def _ups_is_landed_cost_estimate_eligible(self, partner):
+        self.ensure_one()
+        if self._ups_is_global_checkout_eligible(partner):
+            return False
+        groups = self.ups_landed_cost_estimate_country_group_ids
+        if not groups:
+            return False
+        return partner.country_id in groups.mapped("country_ids")
+
     def _ups_is_global_checkout_eligible(self, partner):
         """Return True if UPS Global Checkout landed cost should be requested for
         the given destination partner.
@@ -207,6 +263,7 @@ class DeliveryCarrier(models.Model):
             # It is quoted and stored on the order so it can be shown as a
             # separate order line (see sale.order._create_delivery_line).
             self._ups_refresh_landed_cost_quote(ups_request, order, price)
+            self._ups_refresh_landed_cost_estimate(ups_request, order, price)
             return {
                 "success": True,
                 "price": price,
@@ -264,6 +321,50 @@ class DeliveryCarrier(models.Model):
                 amount=quote["amount"],
                 currency=quote["currency"],
                 guarantee=quote.get("guarantee_code") or "-",
+            )
+        )
+
+    def _ups_refresh_landed_cost_estimate(
+        self, ups_request, order, transportation_cost
+    ):
+        if not self._ups_is_landed_cost_estimate_eligible(order.partner_shipping_id):
+            if (
+                order.ups_landed_cost_estimate_amount
+                or order.ups_landed_cost_estimate_identifier
+            ):
+                order.write(
+                    {
+                        "ups_landed_cost_estimate_amount": 0.0,
+                        "ups_landed_cost_estimate_identifier": False,
+                    }
+                )
+            return
+        estimate = ups_request.landed_cost_quote_estimate(order, transportation_cost)
+        amount = self._ups_get_response_price(
+            {
+                "MonetaryValue": estimate["amount"],
+                "CurrencyCode": estimate["currency"],
+            },
+            order.currency_id,
+            order.company_id,
+        )
+        amount *= 1.0 + (self.ups_landed_cost_estimate_margin / 100.0)
+        order.write(
+            {
+                "ups_landed_cost_estimate_amount": amount,
+                "ups_landed_cost_estimate_identifier": estimate.get("identifier")
+                or False,
+            }
+        )
+        order.message_post(
+            body=_(
+                "UPS Landed Cost estimate created: %(amount)s %(currency)s "
+                "(duties: %(duties)s, VAT: %(vat)s, brokerage: %(brokerage)s).",
+                amount=estimate["amount"],
+                currency=estimate["currency"],
+                duties=estimate["duties"],
+                vat=estimate["vat"],
+                brokerage=estimate["brokerage"],
             )
         )
 
