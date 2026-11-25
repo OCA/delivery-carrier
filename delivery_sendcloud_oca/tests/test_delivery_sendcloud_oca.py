@@ -837,3 +837,24 @@ class TestDeliverySendCloud(TransactionCase):
                 sale_order
             )
         )
+        # A Sendcloud method that passes all the Sendcloud checks is available
+        shipping_method3.write(
+            {
+                "sendcloud_min_weight": 0.0,
+                "sendcloud_max_weight": 10000.0,
+                "sendcloud_service_point_input": "none",
+            }
+        )
+        sender_address = shipping_method3._get_default_sender_address_per_company(
+            sale_order.company_id.id
+        )
+        self.env["sendcloud.shipping.method.country"].create(
+            {
+                "company_id": sale_order.company_id.id,
+                "sendcloud_code": shipping_method3.sendcloud_code,
+                "method_code": shipping_method3.sendcloud_code,
+                "from_iso_2": sender_address.country,
+                "iso_2": sale_order.partner_shipping_id.country_id.code,
+            }
+        )
+        self.assertTrue(shipping_method3._is_available_for_order(sale_order))
