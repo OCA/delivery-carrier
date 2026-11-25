@@ -231,13 +231,18 @@ class PostlogisticsWebService:
                 + error_missing % picking.env._("resolution")
             )
 
-        return {
+        label_definition = {
             "labelLayout": label_layout,
             "printAddresses": "RECIPIENT_AND_CUSTOMER",
             "imageFileType": output_format,
             "imageResolution": image_resolution,
             "printPreview": not picking.carrier_id.prod_environment,
         }
+        if output_format == "ZPL2" and picking.carrier_id.postlogistics_zpl2_encoding:
+            label_definition["options"] = {
+                "option": picking.carrier_id.postlogistics_zpl2_encoding
+            }
+        return label_definition
 
     @classmethod
     def _request_access_token(cls, delivery_carrier):
