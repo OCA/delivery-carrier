@@ -360,7 +360,11 @@ class PostlogisticsWebService:
 
             if response.status_code != 200:
                 res["success"] = False
-                res["errors"] = response.content.decode("utf-8")
+                error = response.content.decode("utf-8")
+                res["errors"] = "HTTP {status}: {details}".format(
+                    status=response.status_code,
+                    details=error or picking.env._("no details from the API"),
+                )
                 _logger.warning(
                     "Shipping label could not be generated.\n"
                     "Request: {datas}\n"
