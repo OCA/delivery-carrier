@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 sobware
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0) -->
+<odoo>
+    <template
+        id="report_delivery_slip_license_plate"
+        inherit_id="stock.report_delivery_document"
+    >
+        <xpath expr="//div[@id='informations']" position="after">
+            <div
+                t-if="o.picking_type_id.print_delivery_fleet_details and o.vehicle_id.license_plate"
+                class="mb-2"
+            >
+                <strong>Vehicle license plate:</strong>
+                <span t-field="o.vehicle_id.license_plate" />
+            </div>
+            <div
+                t-if="o.picking_type_id.print_delivery_fleet_details and o.driver_id"
+                class="mb-2"
+            >
+                <strong>Delivery driver:</strong>
+                <span t-field="o.driver_id" />
+            </div>
+        </xpath>
+    </template>
+</odoo>

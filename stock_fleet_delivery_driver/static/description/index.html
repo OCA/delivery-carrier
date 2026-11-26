@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="Docutils: https://docutils.sourceforge.io/" />
-<title>README.rst</title>
+<title>Stock Fleet Delivery Driver</title>
 <style type="text/css">
 
 /*
@@ -379,6 +379,9 @@ ul.auto-toc {
 allow you to assign default vehicle in delivery Carriers and Transfers
 and propagate them to the Batch. Also allow propagate drivers to the
 Batch and lets auto-batch by vehicle and/or driver.</p>
+<p>Optionally, delivery slips can show the vehicle license plate and
+delivery driver when they are available. This option is configured per
+operation type and is disabled by default.</p>
 <div class="admonition important">
 <p class="first admonition-title">Important</p>
 <p class="last">This is an alpha version, the data model and design can change at any time without warning.
@@ -422,6 +425,13 @@ from the Sale to the Batch and change it when you want.</p>
 <ol class="arabic simple">
 <li>Go to Inventory &gt; Configuration &gt; Settings.</li>
 <li>Activate Batch, Wave &amp; Cluster Transfers</li>
+</ol>
+<p>To show the vehicle license plate and driver on delivery slips:</p>
+<ol class="arabic simple">
+<li>Go to Inventory &gt; Configuration &gt; Operation Types.</li>
+<li>Open the operation type you want to configure.</li>
+<li>On the General tab, enable <strong>Print Vehicle and Driver on Delivery
+Slip</strong>.</li>
 </ol>
 </div>
 <div class="section" id="usage">

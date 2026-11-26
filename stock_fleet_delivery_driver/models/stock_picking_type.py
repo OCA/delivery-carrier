@@ -13,6 +13,10 @@ class StockPickingType(models.Model):
     batch_group_by_driver = fields.Boolean(
         "Driver", help="Automatically group batches by driver"
     )
+    print_delivery_fleet_details = fields.Boolean(
+        string="Print Vehicle and Driver on Delivery Slip",
+        help="Print the vehicle license plate and delivery driver when available.",
+    )
 
     @api.model
     def _get_batch_group_by_keys(self):

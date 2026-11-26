@@ -25,5 +25,6 @@
         "views/stock_picking_batch_views.xml",
         "views/stock_picking_type_views.xml",
         "reports/report_picking_batch.xml",
+        "reports/report_delivery_slip.xml",
     ],
 }

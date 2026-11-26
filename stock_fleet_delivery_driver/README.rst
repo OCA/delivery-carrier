@@ -37,6 +37,10 @@ allow you to assign default vehicle in delivery Carriers and Transfers
 and propagate them to the Batch. Also allow propagate drivers to the
 Batch and lets auto-batch by vehicle and/or driver.
 
+Optionally, delivery slips can show the vehicle license plate and
+delivery driver when they are available. This option is configured per
+operation type and is disabled by default.
+
 .. IMPORTANT::
    This is an alpha version, the data model and design can change at any time without warning.
    Only for development or testing purpose, do not use in production.
@@ -64,6 +68,13 @@ To configure this module, you need to:
 
 1. Go to Inventory > Configuration > Settings.
 2. Activate Batch, Wave & Cluster Transfers
+
+To show the vehicle license plate and driver on delivery slips:
+
+1. Go to Inventory > Configuration > Operation Types.
+2. Open the operation type you want to configure.
+3. On the General tab, enable **Print Vehicle and Driver on Delivery
+   Slip**.
 
 Usage
 =====
