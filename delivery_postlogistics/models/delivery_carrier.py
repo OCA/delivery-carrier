@@ -1,10 +1,14 @@
 # Copyright 2013 Camptocamp SA
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+import logging
+
 from odoo import api, fields, models
 from odoo.exceptions import UserError
 
 from ..postlogistics.web_service import PostlogisticsWebService
+
+_logger = logging.getLogger(__name__)
 
 
 class DeliveryCarrier(models.Model):
@@ -23,6 +27,16 @@ class DeliveryCarrier(models.Model):
     postlogistics_endpoint_url = fields.Char(
         string="Endpoint URL",
         required=False,
+    )
+    postlogistics_tracking_url = fields.Char(
+        string="Tracking URL",
+        default=(
+            "https://www.swisspost.ch/swisspost-tracking"
+            "?formattedParcelCodes={tracking_number}"
+        ),
+        help="URL template used to build the parcel tracking link shared with "
+        "customers. Use {tracking_number} as placeholder, it is replaced "
+        "by the tracking reference of the shipment.",
     )
     postlogistics_client_id = fields.Char(
         string="Client ID", groups="base.group_system"
@@ -110,10 +124,20 @@ class DeliveryCarrier(models.Model):
         return "ECO"
 
     def postlogistics_get_tracking_link(self, picking):
-        return (
-            "https://service.post.ch/EasyTrack/"
-            f"submitParcelData.do?formattedParcelCodes={picking.carrier_tracking_ref}"
-        )
+        if not self.postlogistics_tracking_url:
+            return False
+        try:
+            return self.postlogistics_tracking_url.format(
+                tracking_number=picking.carrier_tracking_ref
+            )
+        except (KeyError, IndexError, ValueError):
+            _logger.warning(
+                "Carrier %s (id=%s): invalid tracking URL template,"
+                " no tracking link returned.",
+                self.display_name,
+                self.id,
+            )
+            return False
 
     def postlogistics_cancel_shipment(self, pickings):
         raise UserError(self.env._("This feature is under development"))

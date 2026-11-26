@@ -1,6 +1,7 @@
 # Copyright 2015 Camptocamp
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo.exceptions import UserError
+from odoo.tools import mute_logger
 
 from .common import TestPostlogisticsCommon, recorder
 
@@ -11,6 +12,31 @@ class TestPostlogistics(TestPostlogisticsCommon):
     def setUp(self):
         super().setUp()
         self.picking = self.create_picking()
+
+    def test_tracking_link_custom_url(self):
+        self.carrier.postlogistics_tracking_url = (
+            "https://example.com/track?code={tracking_number}&lang=fr"
+        )
+        self.picking.carrier_tracking_ref = "99600123456789012"
+        self.assertEqual(
+            self.carrier.get_tracking_link(self.picking),
+            "https://example.com/track?code=99600123456789012&lang=fr",
+        )
+
+    @mute_logger("odoo.addons.delivery_postlogistics.models.delivery_carrier")
+    def test_tracking_link_invalid_url(self):
+        # unknown placeholder
+        self.carrier.postlogistics_tracking_url = (
+            "https://example.com/track?code={unknown}"
+        )
+        self.assertFalse(self.carrier.get_tracking_link(self.picking))
+        # malformed template
+        self.carrier.postlogistics_tracking_url = "https://example.com/{"
+        self.assertFalse(self.carrier.get_tracking_link(self.picking))
+
+    def test_tracking_link_empty(self):
+        self.carrier.postlogistics_tracking_url = False
+        self.assertFalse(self.carrier.get_tracking_link(self.picking))
 
     def test_prepare_recipient(self):
         partner_id = self.picking.partner_id

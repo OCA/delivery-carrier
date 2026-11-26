@@ -30,6 +30,9 @@
                                 class="btn-primary"
                             />
                         </group>
+                        <group string="Tracking">
+                            <field name="postlogistics_tracking_url" />
+                        </group>
                         <group string="Template">
                             <field
                                 name="postlogistics_label_layout"
