@@ -1,0 +1,16 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_fleet_delivery_driver
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. module: stock_fleet_delivery_driver
+#: model_terms:ir.ui.view,arch_db:stock_fleet_delivery_driver.report_delivery_slip_license_plate
+msgid "Vehicle license plate:"
+msgstr "Immatriculation du véhicule :"

@@ -88,6 +88,11 @@ msgid "Transfer"
 msgstr ""
 
 #. module: stock_fleet_delivery_driver
+#: model_terms:ir.ui.view,arch_db:stock_fleet_delivery_driver.report_delivery_slip_license_plate
+msgid "Vehicle license plate:"
+msgstr ""
+
+#. module: stock_fleet_delivery_driver
 #: model:ir.model.fields,field_description:stock_fleet_delivery_driver.field_delivery_carrier__vehicle_id
 #: model:ir.model.fields,field_description:stock_fleet_delivery_driver.field_stock_move_line__vehicle_id
 #: model:ir.model.fields,field_description:stock_fleet_delivery_driver.field_stock_picking__vehicle_id
