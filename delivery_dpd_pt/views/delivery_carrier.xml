@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- DPD Portugal Carrier Configuration -->
+    <record id="view_delivery_carrier_form_dpd_pt" model="ir.ui.view">
+        <field name="name">delivery.carrier.form.dpd_pt</field>
+        <field name="model">delivery.carrier</field>
+        <field name="inherit_id" ref="delivery.view_delivery_carrier_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='destination']" position="before">
+                <page
+                    string="DPD Portugal Configuration"
+                    name="dpd_pt_configuration"
+                    invisible="delivery_type != 'dpd_pt'"
+                >
+                    <group>
+                        <group string="Account">
+                            <field name="dpd_pt_subaccount" />
+                            <field name="dpd_pt_sender_id" />
+                        </group>
+                        <group string="Service Configuration">
+                            <field name="dpd_pt_price" />
+                            <field name="dpd_pt_label_format" />
+                            <field name="dpd_pt_predict_enabled" />
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Address &amp; Contact Options">
+                            <field name="dpd_pt_hide_recipient_phone" />
+                            <field name="dpd_pt_hide_recipient_email" />
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="carrier_account_view_form_dpd_pt" model="ir.ui.view">
+        <field name="name">carrier.account.form.dpd_pt</field>
+        <field name="model">carrier.account</field>
+        <field
+            name="inherit_id"
+            ref="delivery_carrier_account.carrier_account_view_form"
+        />
+        <field name="arch" type="xml">
+            <field name="password" position="after">
+                <field name="dpd_pt_client_id" invisible="delivery_type != 'dpd_pt'" />
+                <field
+                    name="dpd_pt_client_secret"
+                    password="True"
+                    invisible="delivery_type != 'dpd_pt'"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>
