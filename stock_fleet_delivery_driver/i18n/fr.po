@@ -12,5 +12,10 @@ msgstr ""
 
 #. module: stock_fleet_delivery_driver
 #: model_terms:ir.ui.view,arch_db:stock_fleet_delivery_driver.report_delivery_slip_license_plate
-msgid "Vehicle license plate:"
-msgstr "Immatriculation du véhicule :"
+msgid "<strong>Vehicle license plate:</strong>"
+msgstr "<strong>Immatriculation du véhicule :</strong>"
+
+#. module: stock_fleet_delivery_driver
+#: model_terms:ir.ui.view,arch_db:stock_fleet_delivery_driver.report_delivery_slip_license_plate
+msgid "<strong>Delivery driver:</strong>"
+msgstr "<strong>Chauffeur-livreur :</strong>"
