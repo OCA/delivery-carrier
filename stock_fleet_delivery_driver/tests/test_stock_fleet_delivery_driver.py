@@ -115,6 +115,47 @@ class TestDeliverFleet(TransactionCase):
         sale.picking_ids.carrier_id = self.carrier_b.id
         self.assertEqual(sale.picking_ids.vehicle_id, self.carrier_b.vehicle_id)
 
+    def test_delivery_slip_fleet_details_option(self):
+        sale = self._create_sale(self.carrier_a)
+        sale.action_confirm()
+        picking = sale.picking_ids
+        picking_type = picking.picking_type_id
+        report = self.env["ir.actions.report"]
+
+        def render():
+            return str(
+                report._render_qweb_html("stock.report_deliveryslip", picking.ids)[0]
+            )
+
+        self.assertFalse(picking_type.print_delivery_fleet_details)
+        html = render()
+        self.assertNotIn("Vehicle license plate:", html)
+        self.assertNotIn("Delivery driver:", html)
+
+        picking_type.print_delivery_fleet_details = True
+        html = render()
+        self.assertIn("Vehicle license plate:", html)
+        self.assertIn("A123", html)
+        self.assertIn("Delivery driver:", html)
+        self.assertIn("Driver A", html)
+
+        self.vehicle_a.license_plate = False
+        html = render()
+        self.assertNotIn("Vehicle license plate:", html)
+        self.assertIn("Delivery driver:", html)
+
+        self.vehicle_a.license_plate = "A123"
+        picking.driver_id = False
+        html = render()
+        self.assertIn("Vehicle license plate:", html)
+        self.assertNotIn("Delivery driver:", html)
+
+        picking.driver_id = self.driver_a
+        picking_type.print_delivery_fleet_details = False
+        html = render()
+        self.assertNotIn("Vehicle license plate:", html)
+        self.assertNotIn("Delivery driver:", html)
+
     def test_sale_stock_batch_flow(self):
         """Test the sale flow with delivery carriers and vehicles."""
         # Create multiple sales and pickings with different carriers

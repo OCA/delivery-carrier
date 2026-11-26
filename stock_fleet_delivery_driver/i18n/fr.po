@@ -11,6 +11,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #. module: stock_fleet_delivery_driver
+#: model:ir.model.fields,field_description:stock_fleet_delivery_driver.field_stock_picking_type__print_delivery_fleet_details
+msgid "Print Vehicle and Driver on Delivery Slip"
+msgstr "Imprimer le véhicule et le chauffeur sur le bon de livraison"
+
+#. module: stock_fleet_delivery_driver
+#: model:ir.model.fields,help:stock_fleet_delivery_driver.field_stock_picking_type__print_delivery_fleet_details
+msgid "Print the vehicle license plate and delivery driver when available."
+msgstr "Imprimer l'immatriculation du véhicule et le chauffeur-livreur lorsqu'ils sont renseignés."
+
+#. module: stock_fleet_delivery_driver
 #: model_terms:ir.ui.view,arch_db:stock_fleet_delivery_driver.report_delivery_slip_license_plate
 msgid "<strong>Vehicle license plate:</strong>"
 msgstr "<strong>Immatriculation du véhicule :</strong>"

@@ -14,6 +14,16 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: stock_fleet_delivery_driver
+#: model:ir.model.fields,field_description:stock_fleet_delivery_driver.field_stock_picking_type__print_delivery_fleet_details
+msgid "Print Vehicle and Driver on Delivery Slip"
+msgstr ""
+
+#. module: stock_fleet_delivery_driver
+#: model:ir.model.fields,help:stock_fleet_delivery_driver.field_stock_picking_type__print_delivery_fleet_details
+msgid "Print the vehicle license plate and delivery driver when available."
+msgstr ""
+
+#. module: stock_fleet_delivery_driver
 #: model:ir.model.fields,help:stock_fleet_delivery_driver.field_stock_picking_type__batch_group_by_driver
 msgid "Automatically group batches by driver"
 msgstr ""
