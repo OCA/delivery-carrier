@@ -7,7 +7,7 @@
         inherit_id="stock.report_delivery_document"
     >
         <xpath expr="//div[@id='informations']" position="after">
-            <div t-if="o.vehicle_id" class="mb-2">
+            <div t-if="o.vehicle_id.license_plate" class="mb-2">
                 <strong>Vehicle license plate:</strong>
                 <span t-field="o.vehicle_id.license_plate" />
             </div>
