@@ -375,3 +375,9 @@ class TestDeliveryCarrier(EasypostTestBaseCase):
 
         # Verify mock was called
         mock_create_shipment.assert_called()
+
+    def test_easypost_oca_label_size_option(self):
+        """label_size is only sent to EasyPost when it is configured."""
+        self.assertNotIn("label_size", self.carrier._prepare_options())
+        self.carrier.easypost_oca_label_size = "4x6"
+        self.assertEqual(self.carrier._prepare_options()["label_size"], "4x6")
