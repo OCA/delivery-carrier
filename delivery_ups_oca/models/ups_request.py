@@ -484,7 +484,8 @@ class UpsRequest:
         order = picking.sale_id
         if not order:
             return
-        self._check_ups_ddp_destination(order, picking)
+        if picking.ups_landed_cost_quote_identifier:
+            self._check_ups_ddp_destination(order, picking)
         service_options = shipment.setdefault("ShipmentServiceOptions", {})
         existing = service_options.get("InternationalForms", {})
         # An uploaded commercial invoice replaces the UPS-generated one, also for

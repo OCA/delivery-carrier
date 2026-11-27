@@ -2850,7 +2850,7 @@ class TestUpsLandedCostEstimate(TestDeliveryUpsBase):
             charges = [charges]
         self.assertFalse(any(c.get("Type") == "02" for c in charges))
 
-    def test_ddp_on_destination_mismatch_raises(self):
+    def test_ddp_on_destination_mismatch_still_applies_ddp(self):
         self.carrier.ups_landed_cost_estimate_ddp = True
         self.sale.partner_shipping_id = self.be_partner
         self.sale.ups_landed_cost_estimate_amount = 42.0
@@ -2862,5 +2862,8 @@ class TestUpsLandedCostEstimate(TestDeliveryUpsBase):
             {"name": "Other Country", "country_id": self.env.ref("base.fr").id}
         )
         ups_request = UpsRequest(self.carrier)
-        with self.assertRaises(UserError):
-            ups_request._prepare_create_shipping(picking)
+        vals = ups_request._prepare_create_shipping(picking)
+        shipment = vals["ShipmentRequest"]["Shipment"]
+        self.assertNotIn("QuoteID", shipment)
+        charges = shipment["PaymentInformation"]["ShipmentCharge"]
+        self.assertTrue(any(c.get("Type") == "02" for c in charges))
