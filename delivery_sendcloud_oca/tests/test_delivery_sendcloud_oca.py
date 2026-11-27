@@ -4,6 +4,7 @@
 import logging
 from contextlib import contextmanager
 from os.path import dirname, join
+from unittest.mock import patch
 
 import requests
 import responses
@@ -555,6 +556,94 @@ class TestDeliverySendCloud(TransactionCase):
         shipping_method0.sendcloud_get_return_label(sale_order.picking_ids)
         sale_order.with_context(disable_cancel_warning=True).action_cancel()
         sale_order.unlink()
+
+    def test_10a_create_label_for_picking_without_sale(self):
+        partner = self.env["res.partner"].create(
+            {
+                "name": "Standalone recipient",
+                "street_name": "Main street",
+                "street_number": "1",
+                "city": "Amsterdam",
+                "zip": "1000 AA",
+                "country_id": self.env.ref("base.nl").id,
+            }
+        )
+        product = self.env["product.product"].create(
+            {"name": "Standalone product", "weight": 0.5, "list_price": 12.5}
+        )
+        carrier = self.env["delivery.carrier"].create(
+            {
+                "name": "Standalone Sendcloud method",
+                "delivery_type": "sendcloud",
+                "product_id": self.env.ref(
+                    "delivery_sendcloud_oca.sendcloud_product_delivery"
+                ).id,
+                "company_id": self.env.company.id,
+                "sendcloud_code": 8,
+            }
+        )
+        picking_type = self.env["stock.warehouse"].search([], limit=1).out_type_id
+        with patch.object(
+            type(self.env["stock.picking"]), "_sync_picking_to_sendcloud"
+        ) as sync:
+            picking = self.env["stock.picking"].create(
+                {
+                    "partner_id": partner.id,
+                    "picking_type_id": picking_type.id,
+                    "location_id": picking_type.default_location_src_id.id,
+                    "location_dest_id": picking_type.default_location_dest_id.id,
+                    "carrier_id": carrier.id,
+                }
+            )
+            picking.partner_id = partner
+        sync.assert_not_called()
+        move = self.env["stock.move"].create(
+            {
+                "name": product.name,
+                "picking_id": picking.id,
+                "product_id": product.id,
+                "product_uom": product.uom_id.id,
+                "product_uom_qty": 0,
+                "location_id": picking.location_id.id,
+                "location_dest_id": picking.location_dest_id.id,
+            }
+        )
+        self.env["stock.move.line"].create(
+            {
+                "move_id": move.id,
+                "picking_id": picking.id,
+                "product_id": product.id,
+                "product_uom_id": product.uom_id.id,
+                "quantity": 1,
+                "location_id": picking.location_id.id,
+                "location_dest_id": picking.location_dest_id.id,
+            }
+        )
+
+        picking = picking.with_context(
+            force_sendcloud_order_code="d96c92c5-9cc8-47ed-9ea3-894f41eabe3d",
+            force_sendcloud_shipment_code="bfdebf74-853d-4c32-9484-e0201426f888",
+        )
+        vals = picking._prepare_sendcloud_vals_from_picking()
+        self.assertEqual(vals["external_order_id"], picking.sendcloud_order_code)
+        self.assertEqual(vals["order_number"], picking.name)
+        self.assertEqual(vals["currency"], self.env.company.currency_id.name)
+        self.assertEqual(vals["weight"], 0.5)
+        self.assertEqual(vals["parcel_items"][0]["quantity"], 1)
+        self.assertEqual(vals["parcel_items"][0]["weight"], 0.5)
+        self.assertEqual(vals["parcel_items"][0]["value"], "12.50")
+
+        with (
+            patch.object(
+                type(picking), "_sendcloud_sync_multiple_parcels", return_value=[]
+            ) as sync,
+            patch.object(
+                type(self.env["sendcloud.parcel"]), "_generate_parcel_labels"
+            ) as generate_labels,
+        ):
+            picking.button_create_sendcloud_labels()
+        sync.assert_called_once()
+        generate_labels.assert_called_once()
 
     @mute_logger("py.warnings")
     def test_11_set_custom_price_wizard(self):
