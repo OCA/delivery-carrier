@@ -437,7 +437,8 @@ class DeliveryCarrier(models.Model):
     def _contact_files(f_type, files):
         if f_type == "PDF":
             return assemble_pdf(files)
-        elif f_type == "ZPL":
+        elif f_type in ("ZPL", "EPL2"):
+            # Both are plain-text printer languages: labels are concatenated.
             return assemble_zpl(files)
 
         return files
