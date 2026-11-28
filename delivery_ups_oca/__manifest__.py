@@ -4,10 +4,10 @@
 {
     "name": "Delivery UPS OCA",
     "summary": "Integrate UPS webservice",
-    "version": "18.0.1.6.2",
+    "version": "18.0.1.7.0",
     "category": "Delivery",
     "website": "https://github.com/OCA/delivery-carrier",
-    "author": """Hunki Enterprises BV, Tecnativa, ForgeFlow,
+    "author": """Hunki Enterprises BV, Tecnativa, ForgeFlow, Nitrokey GmbH,
              Odoo Community Association (OCA)""",
     "license": "AGPL-3",
     "excludes": ["delivery_ups"],
@@ -19,7 +19,11 @@
     ],
     "data": [
         "data/stock_package_type_data.xml",
+        "data/res_country_group_data.xml",
+        "security/ir.model.access.csv",
         "views/delivery_carrier_view.xml",
         "views/stock_picking_view.xml",
+        "wizards/choose_delivery_carrier_views.xml",
     ],
+    "pre_init_hook": "pre_init_hook",
 }

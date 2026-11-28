@@ -10,8 +10,8 @@ from io import BytesIO
 
 from PIL import Image
 
-from odoo import fields, models
-from odoo.exceptions import UserError
+from odoo import _, api, fields, models
+from odoo.exceptions import UserError, ValidationError
 
 from .ups_request import UpsRequest
 
@@ -127,6 +127,118 @@ class DeliveryCarrier(models.Model):
         default="nonvalidate",
         help="Whether UPS also checks the city. The street is never validated.",
     )
+    declared_value_percentage = fields.Float(
+        string="Declared Value (%)",
+        default=0.0,
+        help="Percentage of the sale price to be used as the declared value "
+        "for shipping. 100% means the full sale price will be used.",
+    )
+    ups_paperless_country_group_ids = fields.Many2many(
+        "res.country.group",
+        string="Country group to auto-send paperless documents",
+        help="If the destination country is in one of these country groups, "
+        "the paperless documents option will be automatically enabled.",
+    )
+
+    @api.constrains("declared_value_percentage")
+    def _check_declared_value_percentage(self):
+        for carrier in self:
+            if not 0.0 <= carrier.declared_value_percentage <= 100.0:
+                raise ValidationError(
+                    self.env._(
+                        "The declared value percentage must be between 0 and 100."
+                    )
+                )
+
+    ups_global_checkout_country_group_ids = fields.Many2many(
+        comodel_name="res.country.group",
+        relation="delivery_carrier_ups_gc_country_group_rel",
+        column1="carrier_id",
+        column2="country_group_id",
+        string="UPS Global Checkout Countries",
+        help="Destination country groups eligible for UPS Global Checkout landed "
+        "cost (duties and taxes). If left empty, Global Checkout is disabled for "
+        "this carrier. Only configure countries that UPS has enabled for your "
+        "account during onboarding.",
+    )
+    ups_landed_cost_product_id = fields.Many2one(
+        comodel_name="product.product",
+        string="UPS Tariffs/Duties Product",
+        help="Product used for the separate sale order line that carries the UPS "
+        "Global Checkout landed cost (duties and taxes). If left empty, no landed "
+        "cost line is added to the order (the quote is still generated and stored). "
+        "Configure this product with the appropriate taxes for imported duties.",
+    )
+
+    ups_landed_cost_estimate_country_group_ids = fields.Many2many(
+        comodel_name="res.country.group",
+        relation="delivery_carrier_ups_lc_country_group_rel",
+        column1="carrier_id",
+        column2="country_group_id",
+        string="UPS Landed Cost Estimate Countries",
+        help="Destination country groups eligible for the UPS Landed Cost Quote "
+        "(a non-binding estimate of duties and taxes). If left empty, the estimate "
+        "is disabled for this carrier. The estimate is only used when Global "
+        "Checkout (guaranteed landed cost) is not available for the destination.",
+    )
+    ups_landed_cost_estimate_product_id = fields.Many2one(
+        comodel_name="product.product",
+        string="UPS Estimated Tariffs/Duties Product",
+        help="Product used for the separate sale order line that carries the UPS "
+        "Landed Cost estimate (duties and taxes). If left empty, no estimate line "
+        "is added to the order (the estimate is still generated and stored). "
+        "Configure this product with the appropriate taxes for imported duties.",
+    )
+    ups_landed_cost_estimate_margin = fields.Float(
+        string="Margin (%)",
+        default=0.0,
+        help="Percentage added to the landed cost estimate returned by UPS. For "
+        "example, 10 means the estimate shown everywhere (order line, wizard and "
+        "checkout) is 10%% higher than the value returned by UPS. Leave at 0 to "
+        "use the UPS value as-is.",
+    )
+
+    ups_landed_cost_estimate_ddp = fields.Boolean(
+        string="Ship DDP for Landed Cost",
+        default=False,
+        help="If enabled, shipments quoted with the UPS Landed Cost estimate are "
+        "sent Delivered Duty Paid (DDP): the duties and taxes are billed to the "
+        "shipper and a UPS customs invoice is attached. The estimate is not a "
+        "guaranteed quote, so any difference with the amount UPS actually assesses "
+        "at customs is absorbed by the shipper. If disabled, the estimate is only "
+        "charged to the customer in Odoo and the shipment is sent without DDP.",
+    )
+
+    @api.constrains("ups_landed_cost_estimate_margin")
+    def _check_ups_landed_cost_estimate_margin(self):
+        for carrier in self:
+            if carrier.ups_landed_cost_estimate_margin < 0.0:
+                raise ValidationError(
+                    self.env._("The UPS Landed Cost Margin cannot be negative.")
+                )
+
+    def _ups_is_landed_cost_estimate_eligible(self, partner):
+        self.ensure_one()
+        if self._ups_is_global_checkout_eligible(partner):
+            return False
+        groups = self.ups_landed_cost_estimate_country_group_ids
+        if not groups:
+            return False
+        return partner.country_id in groups.mapped("country_ids")
+
+    def _ups_is_global_checkout_eligible(self, partner):
+        """Return True if UPS Global Checkout landed cost should be requested for
+        the given destination partner.
+
+        The feature is gated purely on a configured destination country group:
+        if no group is set, Global Checkout is disabled; otherwise the partner
+        destination country must belong to one of the configured groups.
+        """
+        self.ensure_one()
+        groups = self.ups_global_checkout_country_group_ids
+        if not groups:
+            return False
+        return partner.country_id in groups.mapped("country_ids")
 
     def _ups_get_response_price(self, total_charges, currency, company):
         """We need to convert the price if the currency is different."""
@@ -147,6 +259,11 @@ class DeliveryCarrier(models.Model):
             price = self._ups_get_response_price(
                 response, order.currency_id, order.company_id
             )
+            # The landed cost (duties/taxes) is NOT added to the shipping price.
+            # It is quoted and stored on the order so it can be shown as a
+            # separate order line (see sale.order._create_delivery_line).
+            self._ups_refresh_landed_cost_quote(ups_request, order, price)
+            self._ups_refresh_landed_cost_estimate(ups_request, order, price)
             return {
                 "success": True,
                 "price": price,
@@ -163,6 +280,93 @@ class DeliveryCarrier(models.Model):
                 "error_message": str(e),
                 "warning_message": False,
             }
+
+    def _ups_refresh_landed_cost_quote(self, ups_request, order, transportation_cost):
+        """Request a UPS Global Checkout landed cost quote and persist it on the
+        order.
+
+        The landed cost (duties/taxes/fees) and the Quote ID are stored on the
+        order so a separate order line can be created for them; this method does
+        not change the shipping price. Failures are handled like the Rate API:
+        business errors are raised as ``UserError`` and surfaced to the user,
+        while network errors propagate.
+        """
+        if not self._ups_is_global_checkout_eligible(order.partner_shipping_id):
+            # Feature disabled for this destination: clear any stale quote.
+            if order.ups_landed_cost_quote_identifier or order.ups_landed_cost_amount:
+                order.write(
+                    {
+                        "ups_landed_cost_quote_identifier": False,
+                        "ups_landed_cost_amount": 0.0,
+                    }
+                )
+            return
+        quote = ups_request.landed_cost_quote(order, transportation_cost)
+        amount = self._ups_get_response_price(
+            {"MonetaryValue": quote["amount"], "CurrencyCode": quote["currency"]},
+            order.currency_id,
+            order.company_id,
+        )
+        order.write(
+            {
+                "ups_landed_cost_quote_identifier": quote["quote_id"],
+                "ups_landed_cost_amount": amount,
+            }
+        )
+        order.message_post(
+            body=_(
+                "UPS Global Checkout quote %(quote)s created: landed cost "
+                "%(amount)s %(currency)s (guarantee code: %(guarantee)s).",
+                quote=quote["quote_id"],
+                amount=quote["amount"],
+                currency=quote["currency"],
+                guarantee=quote.get("guarantee_code") or "-",
+            )
+        )
+
+    def _ups_refresh_landed_cost_estimate(
+        self, ups_request, order, transportation_cost
+    ):
+        if not self._ups_is_landed_cost_estimate_eligible(order.partner_shipping_id):
+            if (
+                order.ups_landed_cost_estimate_amount
+                or order.ups_landed_cost_estimate_identifier
+            ):
+                order.write(
+                    {
+                        "ups_landed_cost_estimate_amount": 0.0,
+                        "ups_landed_cost_estimate_identifier": False,
+                    }
+                )
+            return
+        estimate = ups_request.landed_cost_quote_estimate(order, transportation_cost)
+        amount = self._ups_get_response_price(
+            {
+                "MonetaryValue": estimate["amount"],
+                "CurrencyCode": estimate["currency"],
+            },
+            order.currency_id,
+            order.company_id,
+        )
+        amount *= 1.0 + (self.ups_landed_cost_estimate_margin / 100.0)
+        order.write(
+            {
+                "ups_landed_cost_estimate_amount": amount,
+                "ups_landed_cost_estimate_identifier": estimate.get("identifier")
+                or False,
+            }
+        )
+        order.message_post(
+            body=_(
+                "UPS Landed Cost estimate created: %(amount)s %(currency)s "
+                "(duties: %(duties)s, VAT: %(vat)s, brokerage: %(brokerage)s).",
+                amount=estimate["amount"],
+                currency=estimate["currency"],
+                duties=estimate["duties"],
+                vat=estimate["vat"],
+                brokerage=estimate["brokerage"],
+            )
+        )
 
     def ups_create_shipping(self, picking):
         """Send packages of the picking to UPS
@@ -284,3 +488,104 @@ class DeliveryCarrier(models.Model):
         self.ensure_one()
         ups_request = UpsRequest(self)
         ups_request._get_new_token()
+
+    def prepare_ups_paperless_documents(self, picking):
+        """prepare the paperless document dictionary for up request"""
+        paperless_document_data = []
+        for file_data in picking.ups_paperless_document_ids:
+            document_data = {
+                "UserCreatedFormFileName": file_data.file_name,
+                "UserCreatedFormFileFormat": file_data.file_name.split(".")[1]
+                if len(file_data.file_name.split(".")) >= 2
+                else "txt",
+                "UserCreatedFormDocumentType": file_data.ups_document_type,
+                "UserCreatedFormFile": file_data.ups_paperless_file.decode("utf-8"),
+            }
+            paperless_document_data.append(document_data)
+
+        # Add invoice if not already attached
+        if "002" not in picking.ups_paperless_document_ids.mapped("ups_document_type"):
+            if not picking.sale_id.invoice_ids:
+                raise UserError(_("Please attach the missing invoice."))
+
+            invoice_pdf_file = (
+                self.env["ir.actions.report"]
+                .sudo()
+                .with_context(must_skip_send_to_printer=True)
+                ._render_qweb_pdf(
+                    "account.account_invoices", picking.sale_id.invoice_ids.ids
+                )
+            )
+            pdf_file = bytes(invoice_pdf_file[0])
+            pdf_file = base64.b64encode(pdf_file).decode("utf-8")
+            document_data = {
+                "UserCreatedFormFileName": "commercial_invoice.pdf",
+                "UserCreatedFormFileFormat": "pdf",
+                "UserCreatedFormDocumentType": "002",
+                "UserCreatedFormFile": pdf_file,
+            }
+            paperless_document_data.append(document_data)
+            self.env["ups.paperless.document"].create(
+                {
+                    "ups_paperless_file": pdf_file,
+                    "file_name": "commercial_invoice.pdf",
+                    "ups_document_type": "002",
+                    "ups_stock_picking_id": picking.id,
+                }
+            )
+
+        # Add packing list if not already attached
+        if "010" not in picking.ups_paperless_document_ids.mapped("ups_document_type"):
+            packing_list_pdf_file = (
+                self.env["ir.actions.report"]
+                .sudo()
+                .with_context(must_skip_send_to_printer=True)
+                ._render_qweb_pdf("stock.action_report_delivery", picking.ids)
+            )
+            pdf_file = bytes(packing_list_pdf_file[0])
+            pdf_file = base64.b64encode(pdf_file).decode("utf-8")
+            document_data = {
+                "UserCreatedFormFileName": "packing_list.pdf",
+                "UserCreatedFormFileFormat": "pdf",
+                "UserCreatedFormDocumentType": "010",
+                "UserCreatedFormFile": pdf_file,
+            }
+            paperless_document_data.append(document_data)
+            self.env["ups.paperless.document"].create(
+                {
+                    "ups_paperless_file": pdf_file,
+                    "file_name": "packing_list.pdf",
+                    "ups_document_type": "010",
+                    "ups_stock_picking_id": picking.id,
+                }
+            )
+        return paperless_document_data
+
+    def send_ups_paperless_documents(self, picking):
+        """Send paperless documents to UPS"""
+        self.ensure_one()
+        if picking.ups_document_identifier:
+            raise UserError(_("Document ID already created."))
+
+        paperless_document_data = self.prepare_ups_paperless_documents(picking)
+
+        if not paperless_document_data:
+            return {
+                "effect": {
+                    "fadeout": "slow",
+                    "message": "No documents to send!",
+                    "type": "warning",
+                }
+            }
+
+        ups_request = UpsRequest(self)
+        ups_request.send_paperless_documents(picking, paperless_document_data)
+
+        return {
+            "effect": {
+                "fadeout": "slow",
+                "message": "UPS Document ID Retrieved successfully!",
+                "img_url": "/web/static/img/smile.svg",
+                "type": "rainbow_man",
+            }
+        }
