@@ -1,0 +1,5 @@
+- Create a sales order with at least one line item
+- Use the "Add shipping" button to select a shipping method
+- Confirm the order
+- Create the invoice for the order
+- Use the "Update shipping cost" button to change the shipping method.
